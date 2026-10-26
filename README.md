@@ -2,8 +2,8 @@
 
 给一个名字（或包装上的一行字），定位到它是哪个药、什么规格，再给出其他国家的对应产品。
 
-**范围**：公开上线 · 美国 / 英国 / 西班牙 / 墨西哥 / 中国 / 澳洲 · 只用可公开许可（或官方明确允许再发布）的数据源。
-**当前状态**：六个市场全部入库，站点静态生成。美国、英国、中国是全量；西班牙、墨西哥、澳洲各有各的缺口，页面上如实标注。
+**范围**：公开上线 · 美国 / 英国 / 西班牙 / 墨西哥 / 中国 / 澳洲 / 加拿大 · 只用可公开许可（或官方明确允许再发布）的数据源。
+**当前状态**：七个市场全部入库，站点静态生成。美国、英国、中国、加拿大是全量；西班牙、墨西哥、澳洲各有各的缺口，页面上如实标注。
 
 ![检索示例](docs/img/search-tainuo.png)
 
@@ -16,7 +16,8 @@
 | 中国 135,351 个产品入库（医保药品分类与代码库，化学药；中成药未收） | ✅ |
 | 西班牙 25,293 个产品入库（CIMA / AEMPS 全量） | ✅ |
 | 墨西哥 10,878 条注册入库（COFEPRIS 26 个按年 PDF + 3 份续期清单；1,040 条是 2001 年前的老注册号） | ✅ |
-| 澳洲 5,452 个产品入库（PBS 官方 API v3，15,073 条 item × 品牌行） | ✅ |
+| 澳洲 10,332 个产品入库（PBS 5,452 + TGA CMI 4,730 + ARTG 补全 145 + 人工核对 5） | ✅ |
+| 加拿大 43,847 个产品入库（Health Canada DPD 全量，一行 = 一个 DIN；顺势疗法/兽药/消毒剂已排除） | ✅ |
 | 中文 / 全角 / 西里尔 / 带剂量的输入归一化 | ✅ |
 | 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 57 条人工表 |
 | 美国街头 / 民间 / 类别叫法（molly、lean、bars、water pill…） | ✅ 331 条 `drug_term` |
@@ -25,8 +26,8 @@
 | 同名碰撞自动推导（不同成分 → 严重，缓释差异 → 警告） | ✅ |
 | 跨语言品牌家族（Tylenol ↔ 泰诺 ↔ 泰诺林） | ✅ 4 组 |
 | BAN↔USAN 同义词（paracetamol ↔ acetaminophen、salbutamol ↔ albuterol 等 34 组） | ✅ |
-| 成分身份卡（各国商品名对照） | ✅ 10,843 页 |
-| 名字碰撞页 | ✅ 13,632 页 |
+| 成分身份卡（各国商品名对照） | ✅ 12,339 页 |
+| 名字碰撞页 | ✅ 17,848 页 |
 
 ## 跑起来
 
@@ -52,11 +53,16 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 & $py etl/ingest_mx.py                 # 墨西哥入库
 & $py etl/fetch_pbs.py                  # 澳洲：PBS 官方 API（3 次请求，20 秒/次限速）
 & $py etl/ingest_pbs.py                 # 澳洲入库（读 data/raw/pbs/api 缓存）
+& $py etl/fetch_ca_dpd.py               # 加拿大：Health Canada DPD Open API（9 个端点，一次全量）
+& $py etl/ingest_ca_dpd.py              # 加拿大入库（读 data/raw/ca/dpd 缓存）
+& $py etl/ingest_artg_index.py          # 澳洲 ARTG 名称层入库（artg_entry 表）
+& $py etl/ingest_artg_enrich.py         # 用 ARTG 名字给已认识品牌补规格/剂型
 & $py data/seed_manual.py               # 英/中人工种子
 & $py data/seed_families.py             # 品牌家族
 & $py data/seed_nicknames.py            # 俗称 / 网络别名 / 旧名
 & $py etl/ingest_us_terms.py            # 美国街头/民间/类别叫法（NIDA + DEA 补充）
 & $py etl/ingest_fda_confusable.py     # FDA tall-man 易混淆药对
+& $py db/source_dates.py                # 覆盖表的「数据截止」：从各源自己的发布/生效/快照日期推
 & $py site/build.py                     # 生成静态站到 site/dist
 & $py cli.py "泰诺"                      # 命令行查一条
 & $py db/check_data.py                  # 数据体检
@@ -67,7 +73,7 @@ TRUD 的 key 放在 `.env` 的 `TRUD_API_KEY=`，不要提交。
 测试：
 
 ```powershell
-& $py -m unittest discover -s etl -t etl   # 归一化 9 项
+& $py -m unittest discover -s etl -t etl   # 归一化 9 项 + 加拿大 9 项
 & $py -m unittest discover -s lib -t lib   # 检索/碰撞 11 项
 ```
 
@@ -78,6 +84,7 @@ docs/    方案、数据模型、数据源授权结论、截图
 db/      schema.sql（单一真相源） + init_db.py + check_data.py + q.py
 etl/     normalize_name.py（归一化） + ingest_openfda_ndc.py（美国入库）
          ingest_us_terms.py（NIDA/DEA/MedlinePlus 俗称） + ingest_fda_confusable.py（FDA 药对）
+         ingest_ca_dpd.py（加拿大 DPD 入库，fetch_ca_dpd.py 抓）/ ingest_ca_dpd 的测试
 lib/     search.py（检索/打分/碰撞/别名） + 测试
 data/    seed_*.py + sources/（NIDA/DEA/FDA 小快照，进仓库）+ drugs.db（可重建，不入库）
 site/    build.py（静态生成，含 /confused.html） + dist/（产物）
@@ -152,7 +159,8 @@ site/    build.py（静态生成，含 /confused.html） + dist/（产物）
 | 西班牙 | CIMA / AEMPS 全量 | 有 | 可以（须署名） | ✅ 已接入 25,293 条 |
 | 墨西哥 | COFEPRIS 按年 PDF + 续期清单 | 有 | 未标注开放许可（用则署名） | ✅ 已接入 10,878 条，**无浓度列** |
 | 中国 | 医保药品分类与代码库 | 有列，多数为空 | 未找到许可 | ✅ 135,351 条化学药 |
-| 澳洲 | PBS 官方 API v3（**不是** ARTG） | 有 | **可以**，须保留版权声明 | ✅ 已接入 5,452 条，只覆盖 PBS 列名药品 |
+| 澳洲 | PBS API v3 + TGA CMI 目录 + ARTG 名称层 + 人工种子 | 有 | PBS API 可再发布（保留版权声明）；CMI/ARTG 只取事实字段 | ✅ 10,332 条＝PBS 5,452 + CMI 4,730 + ARTG 145 + Gaviscon 5；ARTG 名称层 34,594 条只做检索兜底 |
+| 加拿大 | DPD 数据提取包（无授权下载路径则走同主机 DPD Open API） | 有 | 非商业再使用，须注明来源 | ✅ 已接入 43,847 条（Human，2026-10-23 DPD） |
 
 英国这 61,051 条是从 167,533 条 AMP 里过滤出来的：dm+d 那个条目同时收录**器械/耗材**
 （造口袋、弹力袜、敷料、支具），用「名字里有没有剂量」这一条滤掉约 10 万条。
@@ -164,6 +172,49 @@ site/    build.py（静态生成，含 /confused.html） + dist/（产物）
 中国部分以「通用名 + 厂家 + 规格 + 批准文号」为产品身份：135,351 条化学药已全量入库，
 中成药（98,703 行、42 个真实商品名）按设计排除。商品名只在少数行有值，所以中国产品主要靠
 通用名检索；页面显式标注覆盖边界：**查不到 ≠ 不存在**。
+
+### 加拿大：一份官方全量，但下载路径要绕
+
+加拿大没有「处方 + OTC 合在一起」的第二份名录，健康加拿大（Health Canada）的
+**DPD（Drug Product Database）**就是全部——一行 = 一个 **DIN**（Drug Identification Number）：
+
+| 字段 | 内容 |
+|---|---|
+| brand_name | 商品名。很多老产品把剂型/规格写进名字（`APO-AMOXI CAP 500MG`），入索引前剥掉 |
+| activeingredient | 成分 + **强度**。双括号写法 `ATORVASTATIN (ATORVASTATIN CALCIUM)`，括号里是盐 |
+| pharmaceutical_form | 剂型；`status` 给 Marketed / Approved / Dormant / Cancelled |
+| therapeuticclass | ATC（4 位）；`schedule` 给处方 / 非处方 |
+
+**为什么不用官方的 allfiles.zip**：它挂在 `www.canada.ca/content/dam/…`，程序化下载在这台机器上
+HEAD/GET 都 30 秒超时（浏览器 UA 也一样），2026-10 实测。**为什么不用 DPD 网页查询**：结果是服务端
+DataTables，只回首页，翻页接口 `getNextPage` 需要绑定搜索会话，直接请求恒定 500。所以改用**同一台
+主机**上的公开 **DPD Open API**（`/api/drug/<endpoint>/?lang=en&type=json`，9 个端点、全量 JSON、
+无需 key，字段与数据提取包一致），落在 `data/raw/ca/dpd/`。
+
+入库时做了四件事：
+
+1. **成分名统一**：加拿大用老式英文名——`ACETYLSALICYLIC ACID` → aspirin、`ADRENALINE` →
+   epinephrine、`GLYCERYL TRINITRATE` → nitroglycerin；括号里的盐记成 variant。
+   这样加拿大和美国/中国/澳洲落在同一张成分卡上（acetylsalicylic acid 与 aspirin 不再分家）。
+2. **复方剂量按「每 N 片 / 每 N mL」折算**：DPD 给的范围量（`1 g / 4 TAB`、`355 mg / 30 ML`）
+   换算成每片 / 每 mL，否则一盒「每 4 片 1 g」的配方会显示成 1 g/片。
+3. **排除三类**：顺势疗法（`SCHEDULE=HOMEOPATHIC`，强度是 CH/DH/X 稀释度，不是剂量）、
+   兽药/放射药/消毒剂（非 Human）、以及 DPD 里被登记成「有效成分」的辅料
+   （HYPROMELLOSE、BENZYL ALCOHOL…——不排的话一种角膜保存液会把 4 万个产品挂到 hypromellose 名下）。
+4. **名字键与显示名分开**：DPD 里很多条目的名字本身就是一个产品描述（`15 SPF FPS PREMIUM
+   SUNSCREEN`），显示原样、键里再剥一层剂型词，否则「Sunscreen」这类词永远搜不到。
+
+| 项 | 数值 |
+|---|---|
+| DPD 产品行 | 58,379 |
+| 入库（Human、非顺势、成分 ≤8、剔除辅料后） | **43,847**（active 14,519 / discontinued 29,323 / withdrawn 5） |
+| 有强度 | 43,775 / 43,847 ≈ 99.8% |
+| 排除 | 兽药/放射/消毒剂 7,340 · 顺势疗法 5,571 · 复合维生素类（成分 >8）1,169 |
+| 名字（索引键）带 CA | 25,223；只在加拿大出现的名字 22,172 |
+
+**已知缺口**：DPD 没有包装数量和价格；很多 OTC 消费装（Tylenol / Advil / Motrin 的老包装）是
+电子化之前批的，DPD 里只有部分 DIN，货架上有的 OTC 可能查不到。
+
 
 ### 墨西哥：有货号，没有剂量
 

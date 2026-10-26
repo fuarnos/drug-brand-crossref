@@ -1,7 +1,99 @@
 # Changelog
 
 每次数据更新或功能变更都打一个 tag，tag 名就是站点对外宣称的版本号。
-站点页脚、About 页、GitHub Release 三处保持同一个版本号。
+站点页脚、About 页、GitHub Release 三处保持同一个版本号；`/whats-new.html` 直接从这里生成。
+上线前先把本节写好，再建站、发布。
+
+## v0.3.2 — 2026-10-26
+
+- **修**：搜索「扑热息痛」时，acetaminophen 的通用名条目把复方产品（含 6 个成分的
+  夜用感冒药）并进了同一条目，页面显示成「一个六成分产品 + 10/80/160/325 mg」，
+  却只标「释放机制不同」。现在复方的成分名行不再并进单方通用名条目；通用名条目
+  直接链到成分页，不再生成误导性的同名页。
+- **加**：复方产品在检索结果里单独标「复方 / Combination」，不再只靠碰撞等级判断。
+
+## v0.3.1 — 2026-10-26
+
+- **加拿大入库：第七个市场**。Health Canada 的 DPD（Drug Product Database）全量，
+  一行 = 一个 DIN，**43,847 个 Human 产品**（active 14,519 / discontinued 29,323 /
+  withdrawn 5），有强度的 99.8%（43,775）。CPIC 意义上的 OTC 与处方药都在里面。
+- **取数路径**：官方 `allfiles.zip` 挂在 `www.canada.ca/content/dam/…`，程序化下载恒超时
+  （HEAD/GET、浏览器 UA 都一样），DPD 网页查询又是服务端分页、`getNextPage` 要绑定会话
+  （直接请求 500）。改用同一台主机上的公开 **DPD Open API**（9 个端点、全量 JSON、无需 key），
+  `etl/fetch_ca_dpd.py` 抓、`etl/ingest_ca_dpd.py` 入库，缓存落 `data/raw/ca/dpd/`。
+- **加拿大成分名映射**：`ACETYLSALICYLIC ACID` → aspirin、`ADRENALINE` → epinephrine、
+  `GLYCERYL TRINITRATE` → nitroglycerin；括号里的盐记成 variant。acetylsalicylic acid
+  与 aspirin 在成分卡上合并，加拿大不再自成一套。
+- **复方剂量折算**：DPD 的「每 4 片 1 g」「每 30 mL 355 mg」换算成每片 / 每 mL。
+- **排除**：顺势疗法（强度是 CH/DH/X 稀释度）5,571、兽药/放射药/消毒剂 7,340、
+  复合维生素类（成分 >8）1,169；另外剔除 DPD 误登记成有效成分的辅料（HYPROMELLOSE 等），
+  否则一种角膜保存液会把 4 万个产品挂到 hypromellose 名下。
+- **名字键与显示名分开**：DPD 里大量条目名字本身就是产品描述（`15 SPF FPS PREMIUM
+  SUNSCREEN`），页面显示原样、检索键再剥一层剂型词；以数字/符号开头、或带残缺前缀的名字
+  （`222 AF EXTRA STRENGTH`、`+ SINUS COLD FORMULA`）在检索结果和成分页里降权。
+- **碰撞视图修正**：`severe` 只留给「两边都是单方/简单复方」的情形。两类不再算 severe：
+  (1) 名字本身写着配方（`0.9% SODIUM CHLORIDE IRRIGATION`、电解质输液的百分比配方名）；
+  (2) 一方是复方（≥3 个成分，如 `Pain Relief Patch`、肠外营养液 `Olimel`、顺势疗法复方）。
+  顺手把成分表 join 到 `collision` 里，去掉了 `COUNT(DISTINCT)` 的临时 B 树排序
+  （视图像数从 95,775 涨到 12.2 万，再慢下去建站会明显变慢）。severe 名字 36,579 → 15,312。
+- **检索**：用户没写释放机制时，速释排在缓释之前（Tylenol 里 8 HR / 12 HOUR 会落到后面）。
+- 建站 12,339 张成分页 / 19,220 张名字页；索引 125,667 个键，其中 25,223 个带 CA、
+  22,172 个只在加拿大出现。
+- 许可：DPD 条款允许非商业再使用，须注明来源（About 页已写 © His Majesty the King in
+  Right of Canada）。
+
+## v0.3.0 — 2026-10-26
+
+- **澳洲补 OTC：从 1 层变 3 层**。PBS 只补贴处方药，Panadol / Nurofen / Gaviscon 这类
+  在澳洲站查不到；ARTG 又没有批量文件。这次把能合法拿的两块补上：
+  - **TGA CMI 目录**（`www.ebs.tga.gov.au`，不是被墙的 www.tga.gov.au）：4,734 个
+    「商品名 + 有效成分」，`fetch_tga_cmi.py` 30 个请求拉完，`ingest_tga_cmi.py` 入库
+    4,730 个 AU 产品（Panadol 5 个、Nurofen 6 个变体都在）。目录没有规格/剂型，强度留空，
+    状态写 `unknown`（有 CMI ≠ 当前在售）。
+  - **listed OTC 人工种子**：Gaviscon 是 AUST L，PBS 和 CMI 都盖不到，按厂家澳洲官网
+    核对了 5 个包装（每 10 mL / 每片含量 + 来源 URL）。
+- 澳洲合计 **10,500+ 个产品**（PBS 5,452 + CMI 4,730 + ARTG 明细 300+ + Gaviscon 5），
+  索引里 8,000+ 个名字带 AU。
+- **ARTG 名称层**：eBS 的 Current Medicines 目录 30 条/页，全量抓到 **34,594 条**
+  （商品名 + 申办方 + ARTG ID），进 `artg_entry` 表；站点出 `data/artg.json`，
+  产品未命中或选了澳洲但澳洲为空时，列出「ARTG 有登记、成分未收录」的条目
+  （Mylanta、Ural 这类 listed OTC 现在至少能查到 ARTG 号）。
+- **授权边界**：CMI 文档本身有许可门（再发布需 sponsor 许可），只取目录页的事实字段；
+  PBS API 保留 Commonwealth 版权声明。ARTG 全量仍无批量——eBS 的 Current Medicines 目录
+  可 30 条/页翻（品牌 + 申办方 + ARTG ID），但详情只有 PDF，成分级全量只能 FOI。
+- 建站 11,300+ 张成分页 / 14,400+ 张名字页。
+- **覆盖表改为数据源日期**：`/about.html` 第三列不再显示我们的抓取时间，而是数据源自己的
+  发布 / 生效 / 快照日期——openFDA `meta.last_updated`（2026-10-23）、dm+d 10.2.0
+  发布日（2026-10-19）、NHSA 2025-04-04 快照、PBS schedule 4751 生效日（2026-10-01）；
+  CIMA 实时库标 `live`，COFEPRIS 年度 PDF 标 `—`。`source.data_as_of` 由
+  `db/source_dates.py` 在建站前自动推导。
+
+## v0.2.4 — 2026-10-26
+
+- **静态资源版本化**：所有 CSS/JS 引用加 `?v=<构建时间戳>`，更新后浏览器不用硬刷新。
+- 25,747 个文件全量重建。
+
+## v0.2.3 — 2026-10-26
+
+- **修**：国家选择器解析崩溃（tuple / entry 不匹配）。
+- **加**：`?country=AU` 这类深链，可直接定位到某个市场。
+- `data/index.json` 加构建时间戳，新名字不用等缓存过期。
+
+## v0.2.2 — 2026-10-26
+
+- **国家选择器改语义**：不再过滤结果，而是回答「这个药在该市场叫什么」——
+  同一种成分在不同国家的商品名并列展示。
+
+## v0.2.1 — 2026-10-26
+
+- **2 字中文子串匹配**：输入「泰诺」「立普妥」这类不完整的名字也能命中（此前要 ≥3 字）。
+- **加**：substance 重复项自动检查，工作区与建站结果同步。
+
+## v0.2.0 — 2026-10-26
+
+- **修**：中国复方产品丢失第二个成分（3,049 行）——二甲双胍格列本脲、缬沙坦氨氯地平、
+  厄贝沙坦氢氯噻嗪、阿莫西林克拉维酸等复方现在完整入库。
+- 227 个文件重建。
 
 ## v0.1.4 — 2026-10-26
 
