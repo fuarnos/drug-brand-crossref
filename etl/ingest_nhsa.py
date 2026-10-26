@@ -1665,8 +1665,7 @@ def ensure_source(db: sqlite3.Connection, now: str) -> None:
         " retrieved_at, notes) VALUES (?,?,?,?,?,?,?)",
         (SOURCE_ID, "国家医保局 医保药品分类与代码数据库", SOURCE_URL,
          "国家医保局公开数据（未标注开放许可，按公开数据引用）", None, SNAPSHOT,
-         f"2024-01-05 快照（CSV 234,370 行，UTF-8）；同一批数据的 PDF 版共 19,531 页。"
-         f"解析入库于 {now}；一行 = 一个厂家的一个包装。"),
+         f"{SNAPSHOT} 快照（CSV，UTF-8）；解析入库于 {now}；一行 = 一个厂家的一个包装。"),
     )
 
 
@@ -1705,7 +1704,23 @@ def main() -> None:
                     help="同时吃 Z 开头的中成药：98,703 行里只有 42 行有真实商品名，"
                          "会新增约 8,300 个只有中文名的伪成分（默认关闭）")
     ap.add_argument("--limit", type=int, default=0, help="只处理前 N 行（验证用）")
+    ap.add_argument("--snapshot", default="",
+                    help="快照日期 YYYY-MM-DD；默认从文件名里的 8 位数字推断")
+    ap.add_argument("--replace", action="store_true",
+                    help="先删除库里已有的中国 nhsa 数据再导入（换快照时用，"
+                         "避免旧快照的产品残留成幽灵记录）")
     args = ap.parse_args()
+
+    global SNAPSHOT
+    if args.snapshot:
+        SNAPSHOT = args.snapshot
+    else:
+        import re as _re
+        m = _re.search(r"(\d{8})", Path(args.csv).name)
+        if m:
+            d = m.group(1)
+            SNAPSHOT = f"{d[:4]}-{d[4:6]}-{d[6:]}"
+    print(f"快照日期 = {SNAPSHOT}")
 
     csv_path = Path(args.csv)
     if not csv_path.exists():
@@ -1718,6 +1733,24 @@ def main() -> None:
                           (t,)).fetchone():
             raise SystemExit(f"库里缺少表 {t}；先建库（本脚本不负责建表，避免动 schema）")
     ensure_source(db, now)
+
+    if args.replace:
+        old = db.execute(
+            "SELECT COUNT(*) FROM product WHERE country='CN' AND source_id='nhsa'"
+        ).fetchone()[0]
+        print(f"--replace：先删掉旧快照的 {old} 条中国产品（及它们的成分/名称）")
+        db.execute("DELETE FROM product WHERE country='CN' AND source_id='nhsa'")
+        # 清掉没有任何产品挂靠的变体/成分/名字键，避免换快照后留下幽灵数据
+        db.execute("DELETE FROM variant WHERE variant_id NOT IN"
+                   " (SELECT variant_id FROM product_component)")
+        db.execute("DELETE FROM substance WHERE substance_id NOT IN"
+                   " (SELECT substance_id FROM variant)")
+        db.execute("DELETE FROM name_key WHERE key_id NOT IN"
+                   " (SELECT key_id FROM product_name)")
+        db.execute("DELETE FROM name_variant WHERE key_id NOT IN"
+                   " (SELECT key_id FROM name_key)")
+        db.commit()
+
     db.commit()
 
     mapper = Mapper(db)
