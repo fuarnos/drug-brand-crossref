@@ -27,6 +27,9 @@ def main() -> None:
         ("nickname", "SELECT COUNT(*) FROM nickname"),
         ("drug_term", "SELECT COUNT(*) FROM drug_term"),
         ("aliases(total)", "SELECT COUNT(*) FROM alias_all"),
+        ("aliases(documented)", "SELECT COUNT(*) FROM alias_all WHERE confidence='documented'"),
+        ("aliases(community)", "SELECT COUNT(*) FROM alias_all WHERE confidence='community'"),
+        ("aliases(user)", "SELECT COUNT(*) FROM alias_all WHERE confidence='user'"),
         ("confusable_pairs", "SELECT COUNT(*) FROM confusable_pair"),
     ):
         print(f"   {label:20} {db.execute(sql).fetchone()[0]}")
@@ -51,6 +54,13 @@ def main() -> None:
            LEFT JOIN product_name pn ON pn.product_id = p.product_id AND pn.is_primary = 1
            LEFT JOIN name_variant nv ON nv.key_id = pn.key_id
            WHERE v.substance_id = 'atorvastatin' LIMIT 6"""
+    ):
+        print("  ", row)
+
+    print("== aliases without a verifiable source ==")
+    for row in db.execute(
+        """SELECT alias, confidence, source FROM alias_all
+           WHERE confidence != 'documented' ORDER BY confidence, alias LIMIT 30"""
     ):
         print("  ", row)
 

@@ -1,8 +1,14 @@
-# 美国俗称 / 易混淆药对快照
+# 俗称 / 社区叫法 / 易混淆药对快照
 
 这三个文件是 `etl/ingest_us_terms.py` 与 `etl/ingest_fda_confusable.py` 的离线输入。
 放 `data/sources/` 而不是 `data/raw/`，因为 `data/raw/` 被 `.gitignore` 排除（那里是
 几百 MB 的原始缓存），而这三个文件是小型、可复现的策展快照，应该跟代码一起进仓库。
+
+社区叫法（CN/GB/AU/ES）不存全文快照，只存在 `etl/ingest_community_terms.py` 的人工列表里，
+每条带 `source_url`：CN 用小红书/知乎/丁香园/科普中国等公开页，GB 用
+[Talk to FRANK](https://www.talktofrank.com/)，AU 用
+[ADF Drug Facts](https://adf.org.au/drug-facts/)，ES 用
+[PNSD 手册](https://pnsd.sanidad.gob.es/)。只存叫法这一事实，不转载正文。
 
 | 文件 | 来源 | 抓取/整理 | 许可 |
 |---|---|---|---|
@@ -22,6 +28,7 @@
 
 ```powershell
 & $py etl/ingest_us_terms.py
+& $py etl/ingest_community_terms.py
 & $py etl/ingest_fda_confusable.py
 & $py site/build.py
 ```

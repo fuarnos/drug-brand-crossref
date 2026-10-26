@@ -80,12 +80,40 @@ def main() -> None:
             run("etl/ingest_pbs.py")
         else:
             print("提示：没有 PBS 缓存，跳过澳洲（python etl/fetch_pbs.py 可抓）", flush=True)
+        # 澳洲 OTC：TGA CMI 目录（注册类 OTC 的品牌→成分，无规格）
+        if (ROOT / "data/raw/tga_cmi/cmi.json").exists():
+            run("etl/ingest_tga_cmi.py")
+        else:
+            print("提示：没有 TGA CMI 缓存，跳过（python etl/fetch_tga_cmi.py 可抓）",
+                  flush=True)
+        # ARTG 名称层（eBS 目录，34k 条名称 + 申办方 + ARTG ID；无成分）
+        if (ROOT / "data/raw/artg/medicine_index.jsonl").exists():
+            run("etl/ingest_artg_index.py")
+        else:
+            print("提示：没有 ARTG 目录缓存，跳过（python etl/fetch_artg_index.py 可抓）",
+                  flush=True)
+        # 加拿大：Health Canada DPD Open API（9 个端点，一次全量；python etl/fetch_ca_dpd.py）
+        if (ROOT / "data/raw/ca/dpd/drugproduct.json").exists():
+            run("etl/ingest_ca_dpd.py")
+        else:
+            print("提示：没有加拿大 DPD 缓存，跳过（python etl/fetch_ca_dpd.py 可抓）",
+                  flush=True)
     run("data/seed_manual.py")
+    # 品牌种子就位后，才能用 ARTG 名字给「已认识的品牌」补规格/剂型
+    if (ROOT / "data/raw/artg/medicine_index.jsonl").exists():
+        run("etl/ingest_artg_enrich.py")
+    # ARTG Public Summary 详情：成分 + 规格（1,728 条消费品牌；抓取很慢，单独跑）
+    if (ROOT / "data/raw/artg/details.jsonl").exists():
+        run("etl/ingest_artg_details.py")
     run("data/seed_families.py")
     run("data/seed_nicknames.py")
     # 美国街头叫法（NIDA + DEA 补充）与 FDA 易混淆药对；都读 data/raw 快照，可离线重跑。
     run("etl/ingest_us_terms.py")
+    # 社区叫法 / 各国街头叫法（CN/GB/AU/ES），人工策展 + 逐条 URL。
+    run("etl/ingest_community_terms.py")
     run("etl/ingest_fda_confusable.py")
+    # 覆盖表要显示「数据源自己的日期」，不是我们的抓取时间
+    run("db/source_dates.py")
     run("site/build.py")
     print("\n全部完成。预览：python serve.py 8000")
 

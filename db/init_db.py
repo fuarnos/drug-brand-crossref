@@ -43,6 +43,16 @@ def statuses(sql: str) -> set[str]:
     return _enum(STATUS_RE.search(sql or ""))
 
 
+def _ensure_source_columns(db: sqlite3.Connection) -> None:
+    """给已有库补 source.data_as_of / source.data_as_of_note（SQLite 只能 ALTER ADD）。"""
+    have = {r[1] for r in db.execute("PRAGMA table_info(source)")}
+    for name, ddl in (("data_as_of", "TEXT"), ("data_as_of_note", "TEXT")):
+        if name not in have:
+            db.execute(f"ALTER TABLE source ADD COLUMN {name} {ddl}")
+            print(f"迁移 source 表：新增列 {name}")
+    db.commit()
+
+
 def build(db_path: Path) -> sqlite3.Connection:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(db_path, timeout=60)
@@ -51,6 +61,7 @@ def build(db_path: Path) -> sqlite3.Connection:
 
     db.executescript(schema_text)
     db.commit()
+    _ensure_source_columns(db)
 
     row = db.execute(
         "SELECT sql FROM sqlite_master WHERE type='table' AND name='product'").fetchone()

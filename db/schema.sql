@@ -3,7 +3,7 @@
 -- v0.2 改动：强度下沉到 product_component，支持复方（Augmentin 这类多成分产品）；
 --            新增 corroboration（多源佐证）。
 -- 市场：US（openFDA NDC）、GB（dm+d）、CN（医保代码库）、ES（CIMA / AEMPS）、
---       MX（COFEPRIS）、AU（PBS Schedule）。
+--       MX（COFEPRIS）、AU（PBS Schedule）、CA（Health Canada DPD）。
 --       country 是「上市国家」，不是语言；西语名走 name_variant，不新建表。
 
 PRAGMA foreign_keys = ON;
@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS source (
     license       TEXT,
     license_url   TEXT,
     retrieved_at  TEXT,
+    data_as_of    TEXT,           -- 数据源自己发布/生效/快照的日期（不是我们抓取的日期）
+    data_as_of_note TEXT,         -- live（实时目录）/ annual（年度 PDF）/ 其他说明
     notes         TEXT
 );
 
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS variant (
 -- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装）
 CREATE TABLE IF NOT EXISTS product (
     product_id     TEXT PRIMARY KEY,
-    country        TEXT NOT NULL CHECK (country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU')),
+    country        TEXT NOT NULL CHECK (country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA')),
     dosage_form    TEXT NOT NULL,
     form_base      TEXT,                      -- 归一化剂型：tablet / capsule / liquid / ...
     route          TEXT,
@@ -284,6 +286,12 @@ CREATE TABLE IF NOT EXISTS name_family (
 -- severe  = 同一个名字下出现不同活性成分（泰诺这类）
 -- warning = 成分相同但释放机制不同（IR vs ER，真的不能互换）
 -- info    = 只是剂型/规格/包装不同（正常情况，卡片上已显示剂型）
+--
+-- 注意：名字里本身写着配方（"0.9% SODIUM CHLORIDE IRRIGATION"、电解质输液的
+-- 百分比配方名）时，成分差异不是「同名不同药」，那是名字就描述了配方——这类
+-- 只在同一成分集合下比释放机制，不出 severe。同理，一方是复方（≥3 个成分，如
+-- "Pain Relief Patch"、肠外营养液 Olimel）时，它和单方同名不算同名不同药：
+-- 撞的是「用了同名」，看组成就知道了；severe 只留给「两边都是单方/简单复方」的情形。
 DROP VIEW IF EXISTS collision;
 CREATE VIEW IF NOT EXISTS collision AS
 SELECT
@@ -291,6 +299,12 @@ SELECT
     COUNT(DISTINCT v.substance_id)  AS n_substances,
     COUNT(DISTINCT p.product_id)    AS n_products,
     CASE
+        WHEN COUNT(DISTINCT v.substance_id) > 1
+             AND (COUNT(DISTINCT v.substance_id) FILTER (
+                      WHERE pn.name_type = 'trade'
+                  ) = 0
+                  OR MAX(per_product.n_ing) >= 3)
+            THEN CASE WHEN COUNT(DISTINCT p.release) > 1 THEN 'warning' ELSE 'info' END
         WHEN COUNT(DISTINCT v.substance_id) > 1 THEN 'severe'
         WHEN COUNT(DISTINCT p.release) > 1 THEN 'warning'
         ELSE 'info'
@@ -299,7 +313,24 @@ FROM product_name pn
 JOIN product p            ON p.product_id = pn.product_id
 JOIN product_component pc ON pc.product_id = p.product_id
 JOIN variant v            ON v.variant_id = pc.variant_id
+JOIN (SELECT product_id, COUNT(*) AS n_ing
+      FROM product_component GROUP BY product_id) per_product
+     ON per_product.product_id = p.product_id
 GROUP BY pn.key_id;
+
+-- ARTG 名称层：eBS 公开目录能翻到的全量「现行药品」条目（商品名 + 申办方 + ARTG ID）。
+-- 只有名字，没有成分——用来回答「这个牌子在澳洲注册过吗、ARTG 号多少」，
+-- 不参与 product 身份，也不进 collision（同名不同药的判定只认真实产品）。
+CREATE TABLE IF NOT EXISTS artg_entry (
+    artg_id      TEXT PRIMARY KEY,
+    name         TEXT NOT NULL,
+    name_norm    TEXT NOT NULL,
+    sponsor      TEXT,
+    retrieved_at TEXT NOT NULL,
+    source_id    TEXT REFERENCES source (source_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_artg_norm ON artg_entry (name_norm);
 
 -- 覆盖度：公开站必须如实展示的数字
 DROP VIEW IF EXISTS coverage;
