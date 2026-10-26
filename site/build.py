@@ -38,7 +38,7 @@ DISEASE_NOTE = (
 # 页面加载后 i18n.js 按 ?lang= / localStorage / 浏览器语言替换带 data-i18n 的元素。
 I18N = {
     "en": {
-        "nav.search": "Search", "nav.about": "About",
+        "nav.search": "Search", "nav.confused": "Confused names", "nav.about": "About",
         "home.h1": "Find out what a medicine really is",
         "home.sub": ("Type a brand name, a generic name, a nickname (try 两只青蛙), or a line "
                      "from the pack. Chinese, full-width and Cyrillic input all work, and you can "
@@ -72,6 +72,10 @@ I18N = {
                         "different countries, and the same name can point to a different "
                         "ingredient. Listed by country — not interchangeable."),
         "drug.empty": "No products recorded yet.",
+        "drug.confused": "Easily confused with",
+        "drug.confused_note": ("FDA recommends tall-man lettering for this pair; check the "
+                               "ingredient, not the name."),
+        "drug.confused_all": "All pairs",
         "name.countries": "Countries", "name.form": "Form",
         "name.strength": "Strength", "name.release": "Release",
         "name.also": "Also written as", "name.found": "Found in",
@@ -84,6 +88,12 @@ I18N = {
         "nick.slang": "internet nickname", "nick.legacy": "older name",
         "nick.translit": "transliterated old name", "nick.abbrev": "abbreviation",
         "nick.misnomer": "common misnomer",
+        "nick.street": "US street name", "nick.folk": "folk name",
+        "nick.class": "class term",
+        "nick.class_caveat": ("This is a class term, not a specific medicine — it can cover "
+                              "several ingredients. Check the ingredient."),
+        "nick.nomap_caveat": ("This term points to a substance with no marketed product in "
+                              "this database, so no product list is shown."),
         "nick.ambiguous": ("This nickname may point to more than one ingredient — "
                            "check the composition."),
         "nick.caveat": ("Nicknames point to an ingredient, not to a specific pack: the same "
@@ -93,9 +103,15 @@ I18N = {
         "report.all": "Known issues",
         "report.note": "Wrong ingredient, wrong dose, or a drug we do not have? Tell us:",
         "report.cta": "Report this result",
+        "conf.title": "Easily confused drug names",
+        "conf.intro": ("Look-alike / sound-alike pairs from the FDA Name Differentiation Project. "
+                       "This is the official tall-man list, not the full ISMP LASA list."),
+        "conf.note": ("A pair here means the names can be mistaken for each other; it does not "
+                      "mean the drugs are interchangeable. FDA recommends tall-man lettering."),
+        "conf.pair": "Pair", "conf.tml": "Tall-man spelling",
     },
     "es": {
-        "nav.search": "Buscar", "nav.about": "Acerca de",
+        "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
         "home.h1": "Descubre qué es realmente un medicamento",
         "home.sub": ("Escribe un nombre comercial, un nombre genérico, un apodo (prueba 两只青蛙) "
                      "o una línea del envase. También funciona en chino, en ancho completo y en "
@@ -129,6 +145,10 @@ I18N = {
                         "distintos según el país, y un mismo nombre puede corresponder a otro "
                         "principio activo. Listado por país — no son intercambiables."),
         "drug.empty": "Todavía no hay productos registrados.",
+        "drug.confused": "Fácil de confundir con",
+        "drug.confused_note": ("La FDA recomienda tall-man lettering para este par; "
+                               "comprueba el principio activo, no el nombre."),
+        "drug.confused_all": "Todos los pares",
         "name.countries": "Países", "name.form": "Forma",
         "name.strength": "Concentración", "name.release": "Liberación",
         "name.also": "También escrito como", "name.found": "Presente en",
@@ -142,6 +162,12 @@ I18N = {
         "nick.slang": "apodo de internet", "nick.legacy": "nombre antiguo",
         "nick.translit": "nombre antiguo transliterado", "nick.abbrev": "abreviatura",
         "nick.misnomer": "denominación errónea habitual",
+        "nick.street": "nombre callejero en EE. UU.", "nick.folk": "nombre popular",
+        "nick.class": "término de clase",
+        "nick.class_caveat": ("Es un término de clase, no un medicamento concreto: puede "
+                              "abarcar varios principios activos. Comprueba el principio activo."),
+        "nick.nomap_caveat": ("Este término apunta a una sustancia sin producto comercializado "
+                              "en esta base de datos; no se muestra lista de productos."),
         "nick.ambiguous": ("Este apodo puede corresponder a más de un principio activo — "
                            "comprueba la composición."),
         "nick.caveat": ("Los apodos señalan un principio activo, no un envase concreto: el mismo "
@@ -151,9 +177,16 @@ I18N = {
         "report.all": "Problemas conocidos",
         "report.note": "¿Principio activo equivocado, dosis equivocada o falta un medicamento? Escríbenos:",
         "report.cta": "Informar de este resultado",
+        "conf.title": "Nombres de medicamentos fáciles de confundir",
+        "conf.intro": ("Pares de nombres parecidos o que suenan igual, del proyecto de "
+                       "diferenciación de nombres de la FDA. Es la lista oficial tall-man, "
+                       "no la lista LASA completa de ISMP."),
+        "conf.note": ("Un par significa que los nombres pueden confundirse; no significa que "
+                      "los medicamentos sean intercambiables. La FDA recomienda tall-man lettering."),
+        "conf.pair": "Par", "conf.tml": "Grafía tall-man",
     },
     "zh": {
-        "nav.search": "检索", "nav.about": "关于",
+        "nav.search": "检索", "nav.confused": "易混淆药名", "nav.about": "关于",
         "home.h1": "查一个药名，看它在各国是什么",
         "home.sub": ("商品名、通用名、俗称都能搜（比如「两只青蛙」）；支持中英文、全角、"
                      "西里尔字母，也可以连剂量一起输入，例如 Lipitor 20mg、泰诺、СОРТИС。"),
@@ -184,6 +217,9 @@ I18N = {
         "drug.notice": ("同一成分在不同国家可能用完全不同的商品名；同名也可能指向不同成分。"
                         "下方按国家列出，不代表可以互换。"),
         "drug.empty": "暂无已收录产品。",
+        "drug.confused": "易混淆",
+        "drug.confused_note": "FDA 建议这一对使用 tall-man 大小写；请核对成分，不要按名字等同。",
+        "drug.confused_all": "查看全部药对",
         "name.countries": "国家", "name.form": "剂型",
         "name.strength": "规格", "name.release": "释放",
         "name.also": "写法", "name.found": "覆盖",
@@ -195,6 +231,10 @@ I18N = {
         "nick.slang": "网络俗称", "nick.legacy": "旧名",
         "nick.translit": "音译旧名", "nick.abbrev": "简称",
         "nick.misnomer": "常见误称",
+        "nick.street": "美国街头叫法", "nick.folk": "民间叫法",
+        "nick.class": "类别俗称",
+        "nick.class_caveat": "这是类别叫法，不是具体药名，可能对应多种成分；请按成分核对。",
+        "nick.nomap_caveat": "这个词指向的成分在本库没有上市产品记录，因此不列商品名。",
         "nick.ambiguous": "这个叫法可能对应不止一个成分，请按成分核对。",
         "nick.caveat": "俗称指向成分，不指向某个包装；同一成分在各国的商品名不同。",
         "footer": "本站只做标识对应，不构成用药建议，不能替代医师或药师。",
@@ -202,6 +242,12 @@ I18N = {
         "report.all": "已知问题",
         "report.note": "成分错了、剂量错了、或者库里没有这个药？告诉我们：",
         "report.cta": "报告这个结果",
+        "conf.title": "容易混淆的药物",
+        "conf.intro": ("来自 FDA Name Differentiation Project 的形似/音似药对。"
+                       "这是官方 tall-man 名单，不是 ISMP 全量 LASA 清单。"),
+        "conf.note": ("列在这里只说明两个名字可能被看错/听错，不表示两种药可以互换。"
+                      "FDA 建议这一对使用 tall-man 大小写。"),
+        "conf.pair": "药对", "conf.tml": "建议 tall-man 写法",
     },
 }
 
@@ -255,6 +301,7 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 .notice.nick .nick-head b{font-size:17px}
 .notice.nick .sub{margin:6px 0 0}
 .notice.nick .sub a{white-space:nowrap}
+.notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
 table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:13px}
@@ -355,7 +402,7 @@ function render(){
   const nq = norm(nameQ);
   const c = ctry.value;
   const nicks = aliasHits(nq);
-  const nickSids = new Set(nicks.map(a=>a.v));
+  const nickSids = new Set(nicks.map(a=>a.v).filter(Boolean));
   let hits=[];
   const seen = new Set();
   const addHit = (e, t) => {
@@ -372,7 +419,8 @@ function render(){
     // 复方产品：e.x 是这条名字下成分的中文/英文展示串（最多 6 个），
     // 直接按成分名 tokens 比对，比在每个索引条目里再存一份 vs 数组省 4 MB。
     const subs = (e.x || '').split(' + ');
-    const byNick = nickSids.has(e.v) || nicks.some(a => subs.includes(a.i));
+    const byNick = (e.v && nickSids.has(e.v)) ||
+      nicks.some(a => a.i && subs.includes(a.i));
     const t = byNick ? ['nickname', 1.0] : tier(nq, e.k);
     if(!t || t[0]==='fuzzy') continue;
     if(c && !e.c.includes(c)) continue;
@@ -402,14 +450,18 @@ function render(){
   let nickHTML = '';
   if(nicks.length){
     nickHTML = nicks.slice(0,3).map(a=>{
-      const href = `${BASE}drug/${encodeURIComponent(a.v)}.html`;
-      const hint = (window.LANG === 'zh' && a.hint)
-        ? `<div class="sub">${esc(a.hint)}</div>` : '';
+      const target = a.v
+        ? `<a href="${BASE}drug/${encodeURIComponent(a.v)}.html">${esc(a.x)}</a>`
+        : `<b>${esc(a.x)}</b>`;
+      const detail = window.LANG === 'zh' ? (a.hint || a.m) : (a.me || '');
+      const hint = detail ? `<div class="sub">${esc(detail)}</div>` : '';
       const packs = a.np ? ` · ${a.np} ${T('card.packs')}` : '';
+      const caveat = a.k === 'class' ? T('nick.class_caveat')
+        : (a.v ? T('nick.caveat') : T('nick.nomap_caveat'));
       return `<div class="notice nick"><div class="nick-head">${T('nick.hit')}：
-        <b>${esc(a.a)}</b> → <a href="${href}">${esc(a.x)}</a>
+        <b>${esc(a.a)}</b> → ${target}
         <span class="tag">${esc(T('nick.'+a.k))}</span></div>
-        <div class="sub">${T('nick.caveat')}${packs}</div>${hint}</div>`;
+        <div class="sub">${caveat}${packs}</div>${hint}</div>`;
     }).join('');
     if(nicks.length > 1) nickHTML += `<div class="notice">${T('nick.ambiguous')}</div>`;
   }
@@ -554,6 +606,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
   <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
     <span class="logo-zh">药品商品名跨国定位</span></a>
   <nav><a href="{prefix}index.html" data-i18n="nav.search">Search</a>
+    <a href="{prefix}confused.html" data-i18n="nav.confused">Confused names</a>
     <a href="{prefix}about.html" data-i18n="nav.about">About</a>
     <span class="langs">{sw}</span></nav>
 </div></header>
@@ -672,22 +725,30 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
     ):
         counts[sid] = (n, set((countries or "").split(",")))
     out = []
-    for alias, norm, sid, zh, kind, note, source, inn_en in db.execute(
-        """SELECT n.alias, n.alias_norm, n.substance_id, n.label_zh, n.kind,
-                  n.note, n.source, s.inn_en
-           FROM nickname n JOIN substance s ON s.substance_id = n.substance_id
-           ORDER BY n.nickname_id"""
+    for (alias, norm, sid, zh, label_en, kind, note, source, inn_en,
+         inn_zh, meaning_zh, meaning_en, country, source_url) in db.execute(
+        """SELECT a.alias, a.alias_norm, a.substance_id, a.label_zh, a.label_en,
+                  a.kind, a.note, a.source, s.inn_en, s.inn_zh,
+                  a.meaning_zh, a.meaning_en, a.country, a.source_url
+           FROM alias_all a
+           LEFT JOIN substance s ON s.substance_id = a.substance_id
+           ORDER BY a.alias_id"""
     ):
         n_prod, countries = counts.get(sid, (0, set()))
+        display = zh or inn_zh or label_en or inn_en or alias
         out.append({
             "a": alias,
             "n": norm,
             "v": sid,
-            "i": inn_en,
-            "x": inn_en + (f" · {zh}" if zh else ""),
+            "i": inn_en or label_en or alias,
+            "x": display,
             "k": kind,
             "hint": note or "",
             "src": source or "",
+            "m": meaning_zh or meaning_en or "",
+            "me": meaning_en or "",
+            "ct": country or "",
+            "su": source_url or "",
             "c": sorted(countries),
             "np": n_prod,
         })
@@ -718,9 +779,30 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
             bucket.append(raw)
 
     subs = db.execute("SELECT substance_id, inn_en, inn_zh, atc FROM substance").fetchall()
+    # 易混淆药对：成分页顶部给一条警告，链到对方成分页和 /confused.html。
+    conflicts: dict[str, list[dict]] = defaultdict(list)
+    for r in db.execute(
+        """SELECT cp.name_a, cp.name_b, cp.tml_a, cp.tml_b,
+                  cp.a_substance_id, cp.b_substance_id,
+                  sa.inn_en AS a_inn, sa.inn_zh AS a_zh,
+                  sb.inn_en AS b_inn, sb.inn_zh AS b_zh
+           FROM confusable_pair cp
+           LEFT JOIN substance sa ON sa.substance_id = cp.a_substance_id
+           LEFT JOIN substance sb ON sb.substance_id = cp.b_substance_id"""
+    ):
+        a = {"sid": r["a_substance_id"], "name": r["a_zh"] or r["a_inn"] or r["name_a"],
+             "en": r["a_inn"] or r["name_a"], "tml": r["tml_a"]}
+        b = {"sid": r["b_substance_id"], "name": r["b_zh"] or r["b_inn"] or r["name_b"],
+             "en": r["b_inn"] or r["name_b"], "tml": r["tml_b"]}
+        if a["sid"]:
+            conflicts[a["sid"]].append(b)
+        if b["sid"]:
+            conflicts[b["sid"]].append(a)
+
     nicknames: dict[str, list[str]] = {}
     for sid, alias in db.execute(
-        "SELECT substance_id, alias FROM nickname ORDER BY nickname_id"
+        """SELECT substance_id, alias FROM alias_all
+           WHERE substance_id IS NOT NULL ORDER BY alias_id"""
     ):
         nicknames.setdefault(sid, []).append(alias)
     made = 0
@@ -781,10 +863,27 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
             also = "、".join(esc(x) for x in nicknames[sid])
             nick_line = (f'<p class="sub">Also called 也叫：{also} '
                          f'<span class="tag">nickname 俗称</span></p>')
+        conf_line = ""
+        if conflicts.get(sid):
+            items = []
+            for other in conflicts[sid][:6]:
+                label = esc(other["name"])
+                if other["sid"]:
+                    label = f'<a href="{other["sid"]}.html">{label}</a>'
+                tml = (f' <code>{esc(other["tml"])}</code>' if other["tml"] else "")
+                items.append(f"{label}（{esc(other['en'])}{tml}）")
+            conf_line = (
+                '<div class="notice warnbox"><b>'
+                '<span data-i18n="drug.confused">Easily confused with</span>：</b>'
+                + "、".join(items)
+                + ' <span data-i18n="drug.confused_note">FDA recommends tall-man '
+                  'lettering for this pair; check the ingredient, not the name.</span> '
+                  f'<a href="../confused.html" data-i18n="drug.confused_all">All pairs</a></div>')
         body = f"""<h1>{esc(inn_zh) or esc(inn_en)} <span class="meta">{esc(inn_en)}</span></h1>
 <p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
 <code>{esc(sid)}</code></p>
 {nick_line}
+{conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
 brand names in different countries, and the same name can point to a different ingredient.
 Listed by country — not interchangeable.</div>

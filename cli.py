@@ -42,7 +42,9 @@ def main() -> None:
     if res.note:
         print(f"note  = {res.note}")
     for a in res.aliases:
-        print(f"alias = {a['alias']} -> {a['inn_en']} "
+        target = (a.get("label_zh") or a.get("inn_zh") or a.get("label_en")
+                  or a.get("inn_en") or "—")
+        print(f"alias = {a['alias']} -> {target} "
               f"({a['kind']}, {a['confidence']}; {a['source']})")
     if not res.cards:
         print("(no results)")

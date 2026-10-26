@@ -35,6 +35,9 @@ KIND_ZH = {
     "translit": "音译旧名",
     "abbrev": "简称",
     "misnomer": "常见误称",
+    "street": "美国街头叫法",
+    "folk": "民间叫法",
+    "class": "类别俗称",
 }
 
 
@@ -111,16 +114,18 @@ class SearchIndex:
             (r["key_id"], r["norm"], r["compact"])
             for r in self.db.execute("SELECT key_id, norm, compact FROM name_key")
         ]
-        # 俗称表可能还不存在（老库没跑过 init_db），这时静默降级为「没有俗称」。
+        # 别名表可能还不存在（老库没跑过 init_db），这时静默降级为「没有别名」。
+        # alias_all = nickname（人工中文旧名/俗称）+ drug_term（美国街头/类别）。
         try:
             self._nicknames = [
                 dict(r) for r in self.db.execute(
-                    """SELECT n.alias, n.alias_norm, n.substance_id, n.label_zh,
-                              n.kind, n.confidence, n.source, n.note,
-                              s.inn_en, s.inn_zh
-                       FROM nickname n
-                       JOIN substance s ON s.substance_id = n.substance_id
-                       ORDER BY n.nickname_id""")
+                    """SELECT a.alias, a.alias_norm, a.substance_id, a.label_zh,
+                              a.label_en, a.kind, a.confidence, a.source, a.note,
+                              a.meaning_zh, a.meaning_en, a.country, a.source_url,
+                              a.origin, s.inn_en, s.inn_zh
+                       FROM alias_all a
+                       LEFT JOIN substance s ON s.substance_id = a.substance_id
+                       ORDER BY a.alias_id""")
             ]
         except sqlite3.OperationalError:
             self._nicknames = []
@@ -182,9 +187,15 @@ class SearchIndex:
             "inn_en": a["inn_en"],
             "inn_zh": a["inn_zh"],
             "label_zh": a["label_zh"],
+            "label_en": a["label_en"],
             "kind": a["kind"],
             "confidence": a["confidence"],
             "source": a["source"],
+            "source_url": a["source_url"],
+            "country": a["country"],
+            "meaning_zh": a["meaning_zh"],
+            "meaning_en": a["meaning_en"],
+            "origin": a["origin"],
             "note": a["note"],
         }
 
@@ -202,6 +213,8 @@ class SearchIndex:
 
         cards: list[Card] = []
         for a in hits[:3]:
+            if not a["substance_id"]:
+                continue
             cards.extend(self._substance_cards(a["substance_id"], include_status))
         for c in cards:
             self._score_card(c, n, country)
@@ -210,15 +223,28 @@ class SearchIndex:
         cards.sort(key=lambda c: (-c.score, -c.n_products, c.brand.lower()))
         res.cards = cards[:limit]
 
-        label = res.alias["label_zh"] or res.alias["inn_zh"] or res.alias["inn_en"]
+        def _label(x: dict) -> str:
+            return (x["label_zh"] or x["inn_zh"] or x["label_en"]
+                    or x["inn_en"] or x["alias"])
+
+        label = _label(res.alias)
         kind = KIND_ZH.get(res.alias["kind"], "别名")
         if len(hits) == 1:
-            res.note = (f"「{res.alias['alias']}」是 {label} 的{kind}；"
-                        "下面按成分列出商品名")
+            a = res.alias
+            if a["kind"] == "class":
+                res.note = (f"「{a['alias']}」是「{label}」的类别叫法，不是具体药名；"
+                            "可能对应多种成分。")
+            elif not a["substance_id"]:
+                detail = a["meaning_zh"] or a["meaning_en"]
+                res.note = (f"「{a['alias']}」指 {label}；"
+                            + (detail or "本库没有该成分的上市产品记录。"))
+            else:
+                res.note = (f"「{a['alias']}」是 {label} 的{kind}；"
+                            "下面按成分列出商品名")
         else:
-            names = "、".join(x["label_zh"] or x["inn_en"] for x in res.aliases[:4])
+            names = "、".join(_label(x) for x in res.aliases[:4])
             res.note = f"「{res.alias['alias']}」可能指：{names}；请按成分核对"
-        if country and not res.cards:
+        if country and not res.cards and res.alias["substance_id"]:
             res.note = (f"「{res.alias['alias']}」对应的 {label} 在 {country} 没有收录 —— "
                         "查不到不代表该药不存在")
         return res

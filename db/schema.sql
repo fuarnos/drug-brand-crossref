@@ -163,6 +163,108 @@ CREATE TABLE IF NOT EXISTS nickname (
 
 CREATE INDEX IF NOT EXISTS idx_nickname_norm ON nickname (alias_norm);
 
+-- 美国街头叫法 / 常见民间叫法 / 类别俗称（v0.3）
+-- 与 nickname 分开的原因：这里有些词指向「类别」（downers = 镇静剂）或指向
+-- 本库没有上市产品的管制物质（molly = MDMA）。nickname 要求 substance_id 非空，
+-- 而这一类叫法恰恰不能硬塞给某一个成分。两者由 alias_all 视图统一给检索层。
+CREATE TABLE IF NOT EXISTS drug_term (
+    term_id      INTEGER PRIMARY KEY,
+    term         TEXT NOT NULL,
+    term_norm    TEXT NOT NULL,
+    term_type    TEXT NOT NULL DEFAULT 'street'
+                 CHECK (term_type IN ('street', 'folk', 'class', 'brand_generic')),
+    country      TEXT NOT NULL DEFAULT 'US',
+    label_zh     TEXT,                       -- 指向物的中文名（成分/类别/管制物质）
+    label_en     TEXT,
+    meaning_en   TEXT,                       -- 这个词是什么意思（命中时给人看）
+    meaning_zh   TEXT,
+    substance_id TEXT REFERENCES substance (substance_id),  -- 可为空：类别词或无上市产品
+    examples     TEXT,                       -- JSON 数组：类别词的举例成分 id
+    confidence   TEXT NOT NULL DEFAULT 'documented'
+                 CHECK (confidence IN ('user', 'community', 'documented')),
+    source_id    TEXT REFERENCES source (source_id),
+    source_url   TEXT,
+    note         TEXT,
+    created_at   TEXT NOT NULL,
+    UNIQUE (term_norm, term_type, substance_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_drug_term_norm ON drug_term (term_norm);
+CREATE INDEX IF NOT EXISTS idx_drug_term_substance ON drug_term (substance_id);
+
+-- 统一别名视图：nickname（人工中文旧名/俗称）+ drug_term（美国街头/民间/类别）。
+-- 检索层和建站都只读这个视图，避免两套查询各写一遍、口径漂移。
+DROP VIEW IF EXISTS alias_all;
+CREATE VIEW alias_all AS
+SELECT n.nickname_id       AS alias_id,
+       'nickname'          AS origin,
+       n.substance_id,
+       n.alias,
+       n.alias_norm,
+       n.label_zh,
+       NULL                AS label_en,
+       n.kind,
+       n.confidence,
+       n.source,
+       NULL                AS source_url,
+       NULL                AS country,
+       NULL                AS meaning_en,
+       NULL                AS meaning_zh,
+       NULL                AS examples,
+       n.note,
+       n.created_at
+FROM nickname n
+UNION ALL
+SELECT d.term_id,
+       'drug_term',
+       d.substance_id,
+       d.term,
+       d.term_norm,
+       d.label_zh,
+       d.label_en,
+       CASE d.term_type WHEN 'street' THEN 'street'
+                        WHEN 'folk'   THEN 'folk'
+                        WHEN 'class'  THEN 'class'
+                        ELSE 'slang' END,
+       d.confidence,
+       s.name,
+       d.source_url,
+       d.country,
+       d.meaning_en,
+       d.meaning_zh,
+       d.examples,
+       d.note,
+       d.created_at
+FROM drug_term d
+LEFT JOIN source s ON s.source_id = d.source_id;
+
+-- 易混淆药物（LASA / look-alike, sound-alike）
+-- 只收「有官方出处」的配对；算法候选不直接入库，先出 CSV 人工复核。
+-- a/b 的 substance_id 可为空：官方名单里有些药本库没有产品（如 acetohexamide）。
+CREATE TABLE IF NOT EXISTS confusable_pair (
+    pair_id       INTEGER PRIMARY KEY,
+    name_a        TEXT NOT NULL,
+    name_b        TEXT NOT NULL,
+    norm_a        TEXT NOT NULL,
+    norm_b        TEXT NOT NULL,
+    a_substance_id TEXT REFERENCES substance (substance_id),
+    b_substance_id TEXT REFERENCES substance (substance_id),
+    tml_a         TEXT,                      -- FDA 建议的 tall-man 写法
+    tml_b         TEXT,
+    reason        TEXT NOT NULL DEFAULT 'both'
+                  CHECK (reason IN ('look_alike', 'sound_alike', 'both')),
+    severity      TEXT NOT NULL DEFAULT 'high'
+                  CHECK (severity IN ('high', 'medium')),
+    source_id     TEXT REFERENCES source (source_id),
+    source_url    TEXT,
+    note          TEXT,
+    created_at    TEXT NOT NULL,
+    UNIQUE (norm_a, norm_b)
+);
+
+CREATE INDEX IF NOT EXISTS idx_confusable_a ON confusable_pair (a_substance_id);
+CREATE INDEX IF NOT EXISTS idx_confusable_b ON confusable_pair (b_substance_id);
+
 -- 品牌家族：同一个商标在不同国家/不同文字的写法（Tylenol ↔ 泰诺 ↔ 泰诺林）。
 -- 这是唯一一处必须人工维护的映射——因为"它们是同一个品牌"不写在任何数据里。
 CREATE TABLE IF NOT EXISTS brand_family (
