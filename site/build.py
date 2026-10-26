@@ -22,6 +22,7 @@ import json
 import re
 import shutil
 import sqlite3
+import time
 from collections import defaultdict
 from pathlib import Path
 
@@ -1339,7 +1340,9 @@ def main() -> None:
     )
     (OUT / "assets" / "i18n.js").write_text(i18n_js, encoding="utf-8")
     (OUT / "assets" / "app.js").write_text(
-        APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO), encoding="utf-8")
+        APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
+        .replace("data/index.json", f"data/index.json?v={int(time.time())}"),
+        encoding="utf-8")
 
     db = sqlite3.connect(DB)
     db.row_factory = sqlite3.Row
