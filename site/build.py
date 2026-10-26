@@ -26,6 +26,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "drugs.db"
 OUT = ROOT / "site" / "dist"
+# 报错入口：静态站没有后端，用 GitHub Issue 收集纠错，附上查询词和页面 URL。
+REPORT_REPO = "https://github.com/fuarnos/drug-brand-crossref"
 
 DISEASE_NOTE = (
     "本站只做「名字 → 成分」的标识对应，不提供用药建议、"
@@ -87,6 +89,10 @@ I18N = {
         "nick.caveat": ("Nicknames point to an ingredient, not to a specific pack: the same "
                         "ingredient is sold under different brand names in each country."),
         "footer": ("Information only — not medical advice, and no substitute for a pharmacist."),
+        "report.link": "Report a data error",
+        "report.all": "Known issues",
+        "report.note": "Wrong ingredient, wrong dose, or a drug we do not have? Tell us:",
+        "report.cta": "Report this result",
     },
     "es": {
         "nav.search": "Buscar", "nav.about": "Acerca de",
@@ -141,6 +147,10 @@ I18N = {
         "nick.caveat": ("Los apodos señalan un principio activo, no un envase concreto: el mismo "
                         "principio se vende con marcas distintas en cada país."),
         "footer": ("Solo información — no es consejo médico ni sustituye a un farmacéutico."),
+        "report.link": "Informar de un error",
+        "report.all": "Problemas conocidos",
+        "report.note": "¿Principio activo equivocado, dosis equivocada o falta un medicamento? Escríbenos:",
+        "report.cta": "Informar de este resultado",
     },
     "zh": {
         "nav.search": "检索", "nav.about": "关于",
@@ -188,6 +198,10 @@ I18N = {
         "nick.ambiguous": "这个叫法可能对应不止一个成分，请按成分核对。",
         "nick.caveat": "俗称指向成分，不指向某个包装；同一成分在各国的商品名不同。",
         "footer": "本站只做标识对应，不构成用药建议，不能替代医师或药师。",
+        "report.link": "报错 / 纠错",
+        "report.all": "已知问题",
+        "report.note": "成分错了、剂量错了、或者库里没有这个药？告诉我们：",
+        "report.cta": "报告这个结果",
     },
 }
 
@@ -255,6 +269,10 @@ table.res tbody tr:hover{background:#fcfcfa}
 .c-mah{width:22%;color:var(--muted);font-size:13px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
 padding:18px 0 40px;background:#fff}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline}
+.foot-links{margin-left:auto;display:flex;gap:14px;white-space:nowrap}
+.foot-links a{color:var(--accent)}
+.report-line{margin-top:14px}
 kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
 .empty{color:var(--muted);padding:20px 0}
 """
@@ -331,7 +349,8 @@ function rowHTML(r){
 }
 function render(){
   const q = box.value.trim();
-  if(!q){ out.innerHTML=''; meta.textContent=''; return; }
+  if(!q){ out.innerHTML=''; meta.textContent='';
+    const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
   const [nameQ, st] = splitDose(q);
   const nq = norm(nameQ);
   const c = ctry.value;
@@ -451,10 +470,29 @@ function render(){
     }
   }
 
-  out.innerHTML = nickHTML + warnHTML + `<table class="res"><thead><tr>
+  out.innerHTML = nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
-    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + sameHTML + extraHTML;
+    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` : '') + sameHTML + extraHTML;
+  const rep = document.getElementById('report');
+  if(rep){
+    rep.style.display = 'block';
+    const a = document.getElementById('reportLink');
+    if(a) a.href = reportURL(q);
+  }
+}
+function reportURL(q){
+  const body = [
+    '**查询词 / query**: ' + (q || ''),
+    '**页面 / page**: ' + location.href,
+    '**期望结果 / expected**: ',
+    '**实际结果 / actual**: ',
+    '**包装或批号 / pack or lot**: ',
+    ''
+  ].join('\n');
+  return 'REPORT_REPO_PLACEHOLDER' + '/issues/new?labels=data-error&template=data-error.yml'
+    + '&title=' + encodeURIComponent('数据错误: ' + (q || ''))
+    + '&body=' + encodeURIComponent(body);
 }
 box.addEventListener('input', render);
 ctry.addEventListener('change', render);
@@ -522,6 +560,12 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <main><div class="wrap">{body}</div></main>
 <footer><div class="wrap">
   <span data-i18n="footer">{esc(I18N['en']['footer'])}</span>
+  <span class="foot-links">
+    <a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
+       target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
+    <a href="{REPORT_REPO}/issues" target="_blank" rel="noopener"
+       data-i18n="report.all">Known issues</a>
+  </span>
 </div></footer>
 <script src="{prefix}assets/i18n.js"></script>
 </body></html>"""
@@ -872,6 +916,11 @@ def build_index_page(entries, stats, coverage) -> None:
 </div>
 <p class="sub" id="meta" style="margin-top:14px"></p>
 <div id="out"></div>
+<p class="sub report-line" id="report" style="display:none">
+  <span data-i18n="report.note">Wrong ingredient, wrong dose, or a drug we do not have? Tell us:</span>
+  <a id="reportLink" href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
+     target="_blank" rel="noopener" data-i18n="report.cta">Report this result</a>
+</p>
 <div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
 does not exist. Coverage:</span> {covline}.</div>
 <script src="{{prefix}}assets/app.js"></script>"""
@@ -1037,7 +1086,8 @@ def main() -> None:
 """
     )
     (OUT / "assets" / "i18n.js").write_text(i18n_js, encoding="utf-8")
-    (OUT / "assets" / "app.js").write_text(APP_JS, encoding="utf-8")
+    (OUT / "assets" / "app.js").write_text(
+        APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO), encoding="utf-8")
 
     db = sqlite3.connect(DB)
     db.row_factory = sqlite3.Row

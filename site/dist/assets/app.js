@@ -70,7 +70,8 @@ function rowHTML(r){
 }
 function render(){
   const q = box.value.trim();
-  if(!q){ out.innerHTML=''; meta.textContent=''; return; }
+  if(!q){ out.innerHTML=''; meta.textContent='';
+    const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
   const [nameQ, st] = splitDose(q);
   const nq = norm(nameQ);
   const c = ctry.value;
@@ -190,10 +191,29 @@ function render(){
     }
   }
 
-  out.innerHTML = nickHTML + warnHTML + `<table class="res"><thead><tr>
+  out.innerHTML = nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
-    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + sameHTML + extraHTML;
+    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` : '') + sameHTML + extraHTML;
+  const rep = document.getElementById('report');
+  if(rep){
+    rep.style.display = 'block';
+    const a = document.getElementById('reportLink');
+    if(a) a.href = reportURL(q);
+  }
+}
+function reportURL(q){
+  const body = [
+    '**查询词 / query**: ' + (q || ''),
+    '**页面 / page**: ' + location.href,
+    '**期望结果 / expected**: ',
+    '**实际结果 / actual**: ',
+    '**包装或批号 / pack or lot**: ',
+    ''
+  ].join('\n');
+  return 'https://github.com/fuarnos/drug-brand-crossref' + '/issues/new?labels=data-error&template=data-error.yml'
+    + '&title=' + encodeURIComponent('数据错误: ' + (q || ''))
+    + '&body=' + encodeURIComponent(body);
 }
 box.addEventListener('input', render);
 ctry.addEventListener('change', render);

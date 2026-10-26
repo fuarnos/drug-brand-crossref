@@ -60,5 +60,9 @@ table.res tbody tr:hover{background:#fcfcfa}
 .c-mah{width:22%;color:var(--muted);font-size:13px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
 padding:18px 0 40px;background:#fff}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline}
+.foot-links{margin-left:auto;display:flex;gap:14px;white-space:nowrap}
+.foot-links a{color:var(--accent)}
+.report-line{margin-top:14px}
 kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
 .empty{color:var(--muted);padding:20px 0}
