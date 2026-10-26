@@ -5,6 +5,12 @@ data/backups/
 site/dist.zip
 .env
 
+# 站点构建产物：发布走 gh-pages 分支，main 只放源码。
+# 需要预览时本地跑 python site/build.py 生成。
+site/dist/
+site/dist-partial-*/
+site/dist-v*/
+
 # 工具与产物
 tools/git/
 tools/
@@ -12,4 +18,3 @@ __pycache__/
 *.pyc
 .tmp/
 .pylibs/
-
