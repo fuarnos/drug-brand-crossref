@@ -274,7 +274,7 @@ const ctry0 = new URLSearchParams(location.search).get('country');
 if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
 out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
 Promise.all([
-  fetch(BASE + 'data/index.json?v=1793044897').then(r=>r.json()),
+  fetch(BASE + 'data/index.json?v=1793045356').then(r=>r.json()),
   fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
   fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
 ]).then(([d,a,c])=>{IDX=d||[]; NICKS=a||[]; CONF=c||[]; render();})

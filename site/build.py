@@ -31,6 +31,8 @@ DB = ROOT / "data" / "drugs.db"
 OUT = ROOT / "site" / "dist"
 # 报错入口：静态站没有后端，用 GitHub Issue 收集纠错，附上查询词和页面 URL。
 REPORT_REPO = "https://github.com/fuarnos/drug-brand-crossref"
+# 每次构建换一个版本号，给 css/js/json 都带上，避免用户拿到缓存里的旧代码。
+BUILD_V = str(int(time.time()))
 
 DISEASE_NOTE = (
     "本站只做「名字 → 成分」的标识对应，不提供用药建议、"
@@ -664,8 +666,8 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · Medicine Brand Cross-Reference</title>{alt}
-<link rel="stylesheet" href="{prefix}assets/style.css">
-<script src="{prefix}assets/i18n.js"></script></head>
+<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
+<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script></head>
 <body>
 <header><div class="wrap">
   <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
@@ -685,7 +687,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
        data-i18n="report.all">Known issues</a>
   </span>
 </div></footer>
-<script src="{prefix}assets/i18n.js"></script>
+<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>
 </body></html>"""
 
 
@@ -1115,7 +1117,7 @@ def build_index_page(entries, stats, coverage) -> None:
 </p>
 <div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
 does not exist. Coverage:</span> {covline}.</div>
-<script src="{{prefix}}assets/app.js"></script>"""
+<script src="{{prefix}}assets/app.js?v={BUILD_V}"></script>"""
     for code, _label, path in LANGS:
         prefix = "../" if path else ""
         html = page("Medicine Brand Cross-Reference", body.replace("{prefix}", prefix),
