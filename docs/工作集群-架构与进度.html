@@ -179,7 +179,7 @@
   <div class="snap">
     <div class="live static"><i></i>静态快照 · 手动重拍</div>
     <div class="time">
-      快照 <b>2026-10-26 15:39</b><br>
+      快照 <b>2026-10-26 16:13</b><br>
       共享工作区 <b>D:\同种药物商品名剂量对应网站</b><br>
       代码 40+ 模块 · 测试 44 项
     </div>
@@ -215,7 +215,7 @@
       <div class="role"><span class="name">可视化</span><span class="pill run"><i></i>本次生成</span></div>
       <div class="sid mono">session-eedb9d20 · 本图</div>
       <div class="task">把多个会话、七条市场线、真实计数和剩余风险压成一张快照；数字来自只读查询与站点统计。</div>
-      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">15:39</span></div>
+      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">16:13</span></div>
     </div>
   </div>
 
@@ -265,7 +265,7 @@
     <div class="step">
       <div class="idx">05 / BUILD</div><h3>静态站</h3>
       <div class="metric">30,755<small>文件</small></div>
-      <p>134.2 MB；12,870 成分页 + 17,868 名字页；索引 34.8 MB。15:31 重建。</p>
+      <p>134.2 MB；12,870 成分页 + 17,868 名字页；索引 34.8 MB。16:07 重建。</p>
       <span class="st hot">三语 + 404 / robots / sitemap</span>
     </div>
     <div class="step">
@@ -407,7 +407,7 @@
     </div>
     <div class="risk y">
       <h4>剂量对应只做到 D1 <span class="sev lo">中</span></h4>
-      <p>13,288 个成分里只有 5,751 个有 ATC；D2 盐基折算（base_fraction 仍是默认 1.0）与 D3 不可互换判定未实现，/warn 页也没做。</p>
+      <p>13,288 个成分里只有 6,345 个有 ATC；D2 盐基折算（base_fraction 仍是默认 1.0）与 D3 不可互换判定未实现，/warn 页也没做。</p>
     </div>
     <div class="risk y">
       <h4>部分许可没落纸 <span class="sev lo">中</span></h4>
@@ -432,13 +432,14 @@
     <div class="ev"><div class="t mono">15:13</div><div class="x">v0.3.2 上线：复方结果修复 + 加拿大页</div></div>
     <div class="ev"><div class="t mono">15:30</div><div class="x">源码提交 <b>main</b>、补 tag/Release <b>v0.3.0–v0.3.2</b>；site/dist 移出版本库</div></div>
     <div class="ev"><div class="t mono">15:45</div><div class="x">v0.3.3 上线：<b>404 / robots / sitemap</b> + README/方案口径统一</div></div>
-    <div class="ev"><div class="t mono">本次</div><div class="x">快照 15:39；站点 30,755 文件 / 134.2 MB / 索引 34.8 MB</div></div>
-    <div class="ev"><div class="t mono">下一步</div><div class="x">索引分片 → 数据深挖（MX 浓度 / CN 商品名 / ATC）→ D2/D3 与 /warn 页</div></div>
+    <div class="ev"><div class="t mono">16:15</div><div class="x">v0.3.4 上线：首屏 <b>6.08 MB → 17 KB</b>（索引懒加载）；ATC <b>43.3% → 47.7%</b>（Wikidata CC0）</div></div>
+    <div class="ev"><div class="t mono">本次</div><div class="x">快照 16:13；站点 30,755 文件 / 134.2 MB / 索引 34.8 MB</div></div>
+    <div class="ev"><div class="t mono">下一步</div><div class="x">MX 浓度 50 条抽核后 apply → 索引 P1/P2 拆片 → D2/D3 与 /warn 页</div></div>
   </div>
 </section>
 
 <footer>
-  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-26 15:39；重拍命令 <b>python render_dashboard.py</b>。</div>
+  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-26 16:13；重拍命令 <b>python render_dashboard.py</b>。</div>
   <div style="text-align:right"><b>这是静态快照，不是实时监控。</b><br>集群由多个互不可见上下文的会话组成，靠共享工作区协作。</div>
 </footer>
 
