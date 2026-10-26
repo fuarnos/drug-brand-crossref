@@ -1,0 +1,13 @@
+2024-01-05 rows 234370 approvals 108980 names 15951
+2025-04-04 rows 252097 approvals 111019 names 16113
+row delta +17727 (7.6%)
+approval delta +2039 (1.9%)
+name delta +162 (1.0%)
+new approvals 6104, removed 4065
+new names 435, gone 273
+H rows 2024 131325 -> 2025 142494
+Z rows 2024 96467 -> 2025 103131
+S rows 2024 2215 -> 2025 2419
+H names 2024 6124 -> 2025 6310
+
+sample new approvals: H20190043, S20191000, 国家准字Z41021396, 国药准字B20020027, 国药准字B20020038, 国药准字B20020050, 国药准字B20020054, 国药准字B20020082

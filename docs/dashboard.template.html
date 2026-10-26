@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>工作集群 · 架构与进度快照</title>
+<style>
+  :root{
+    --bg:#070c16; --panel:#0e1829; --panel2:#0b1422;
+    --line:#1b2c46; --line2:#243c5c;
+    --text:#e8effc; --muted:#8ea4c4; --dim:#5f7695;
+    --green:#3ddc97; --amber:#f6b73c; --red:#ff6f6f; --blue:#5aa9ff; --violet:#b493ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg)}
+  body{
+    font-family:"Segoe UI","Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;
+    color:var(--text); width:1500px; padding:34px 36px 28px;
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(90,169,255,.14), transparent 60%),
+      radial-gradient(760px 380px at 92% -4%, rgba(180,147,255,.12), transparent 62%),
+      linear-gradient(180deg,#070c16 0%,#080f1b 55%,#060a12 100%);
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:"Bahnschrift","Consolas","SFMono-Regular",monospace;font-variant-numeric:tabular-nums}
+  .num{font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:12.5px;letter-spacing:2.2px;color:var(--blue);text-transform:uppercase;font-weight:600}
+  h1{font-size:34px;line-height:1.18;margin-top:10px;font-weight:700;letter-spacing:.2px}
+  h1 span{color:var(--muted);font-weight:400;font-size:22px;margin-left:12px}
+  .lede{margin-top:10px;color:var(--muted);font-size:15px}
+  .snap{min-width:250px;max-width:340px;text-align:right}
+  .live{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid rgba(61,220,151,.35);
+        background:rgba(61,220,151,.08);border-radius:999px;color:var(--green);font-size:13.5px;font-weight:600}
+  .live i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(61,220,151,.14)}
+  .live.static{color:var(--blue);border-color:rgba(90,169,255,.35);background:rgba(90,169,255,.08)}
+  .live.static i{background:var(--blue);box-shadow:0 0 0 4px rgba(90,169,255,.12)}
+  .snap .time{margin-top:12px;font-size:11.5px;color:var(--muted);line-height:1.8;word-break:break-all}
+
+  section{margin-top:26px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .sec-head .no{font-size:13px;color:var(--blue);letter-spacing:2px;font-weight:700}
+  .sec-head h2{font-size:19px;font-weight:650;letter-spacing:.3px}
+  .sec-head .hint{margin-left:auto;font-size:12.5px;color:var(--muted)}
+
+  .card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);border:1px solid var(--line);
+        border-radius:14px;padding:16px 17px;position:relative;overflow:hidden}
+  .card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line2)}
+  .card.g:before{background:var(--green)} .card.a:before{background:var(--amber)}
+  .card.r:before{background:var(--red)} .card.b:before{background:var(--blue)}
+  .card.v:before{background:var(--violet)}
+
+  .role{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .role .name{font-size:16px;font-weight:650}
+  .role .sid{font-size:11px;color:var(--muted);letter-spacing:.4px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:650;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .pill i{width:6px;height:6px;border-radius:50%}
+  .pill.run{color:var(--green);background:rgba(61,220,151,.1);border:1px solid rgba(61,220,151,.3)}
+  .pill.run i{background:var(--green)}
+  .pill.done{color:var(--blue);background:rgba(90,169,255,.1);border:1px solid rgba(90,169,255,.3)}
+  .pill.done i{background:var(--blue)}
+
+  .human{display:flex;align-items:center;gap:14px;padding:12px 16px;border:1px dashed var(--line2);border-radius:12px;
+         background:rgba(90,169,255,.045);margin-bottom:14px}
+  .human .tag{font-size:11px;letter-spacing:1.6px;color:var(--blue);font-weight:700;white-space:nowrap}
+  .human .txt{font-size:13.5px;color:var(--muted)}
+  .human .txt b{color:var(--text);font-weight:600}
+
+  .cluster{display:grid;grid-template-columns:1.22fr 1fr 1fr .98fr;gap:14px}
+  .cluster .card{min-height:196px;display:flex;flex-direction:column;gap:9px}
+  .task{font-size:14px;line-height:1.6;color:#c7d6ec;flex:1}
+  .task b{color:#fff;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 7px;background:rgba(255,255,255,.02)}
+  .flow{margin-top:12px;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .flow b{color:var(--text);font-weight:600}
+
+  .markets{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.012)}
+  .mk-title{padding:9px 14px;font-size:11.5px;letter-spacing:.6px;color:var(--muted);background:rgba(255,255,255,.025);border-bottom:1px solid var(--line)}
+  .mk-table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .mk-table th{font-size:10.5px;letter-spacing:1px;color:var(--dim);text-align:left;font-weight:600;padding:8px 14px;border-bottom:1px solid var(--line)}
+  .mk-table td{padding:9px 14px;border-bottom:1px solid rgba(27,44,70,.55)}
+  .mk-table tr:last-child td{border-bottom:none}
+  .mk-table td.r,.mk-table th.r{text-align:right}
+  .mk-table .who{color:var(--muted);font-size:11.5px}
+  .mk-table b{color:#fff;font-weight:600}
+  .st-done,.st-hot,.st-off{font-size:11px;font-weight:650;white-space:nowrap}
+  .st-done{color:var(--green)} .st-hot{color:var(--amber)} .st-off{color:var(--red)}
+  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .dot.g{background:var(--green)} .dot.a{background:var(--amber)} .dot.r{background:var(--red)}
+
+  .pipe{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .step{background:linear-gradient(180deg,#0e192b,#0a1321);border:1px solid var(--line);border-radius:12px;padding:13px 13px 12px;min-height:176px}
+  .step .idx{font-size:11px;color:var(--dim);letter-spacing:1.6px;font-weight:700}
+  .step h3{font-size:15px;margin-top:6px;font-weight:650}
+  .step .metric{font-size:26px;font-weight:700;margin-top:10px;letter-spacing:-.4px}
+  .step .metric small{font-size:12px;color:var(--muted);font-weight:500;margin-left:3px}
+  .step p{font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:6px}
+  .step .st{margin-top:10px;font-size:11px;display:inline-flex;align-items:center;gap:5px;padding:2px 7px;border-radius:999px;border:1px solid var(--line2);color:var(--muted)}
+  .step .st.ok{color:var(--green);border-color:rgba(61,220,151,.35);background:rgba(61,220,151,.07)}
+  .step .st.hot{color:var(--amber);border-color:rgba(246,183,60,.35);background:rgba(246,183,60,.07)}
+  .step .st.off{color:var(--red);border-color:rgba(255,111,111,.32);background:rgba(255,111,111,.06)}
+
+  .cov{display:grid;grid-template-columns:1.12fr 1fr;gap:14px}
+  .cov-card{padding:17px 18px}
+  .cov-row{display:grid;grid-template-columns:78px 1fr 152px;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(27,44,70,.6)}
+  .cov-row:last-of-type{border-bottom:none}
+  .cov-row .c{font-size:14.5px;font-weight:650}
+  .cov-row .c em{font-style:normal;color:var(--muted);font-size:11.5px;margin-left:5px}
+  .bar{height:8px;border-radius:6px;background:#0a1421;border:1px solid #17263c;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:6px}
+  .cov-row .n{text-align:right;font-size:14.5px;font-weight:650}
+  .cov-row .n small{display:block;color:var(--muted);font-size:10.5px;font-weight:400;margin-top:2px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  .kpi{padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.018)}
+  .kpi .k{font-size:11px;color:var(--muted);letter-spacing:.6px}
+  .kpi .v{font-size:26px;font-weight:700;margin-top:5px;letter-spacing:-.4px}
+  .kpi .d{font-size:10.5px;color:var(--dim);margin-top:3px}
+
+  .comp-title{font-size:15px;font-weight:650;margin-bottom:4px}
+  .comp-sub{font-size:12.5px;color:var(--muted);line-height:1.55}
+  .stack{display:flex;height:36px;border-radius:8px;overflow:hidden;margin-top:16px;border:1px solid #17263c}
+  .stack div{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;overflow:hidden;white-space:nowrap}
+  .seg-us{background:linear-gradient(90deg,#3b82f6,#5aa9ff);color:#04101f}
+  .seg-gb{background:linear-gradient(90deg,#2bb673,#3ddc97);color:#062018}
+  .seg-es{background:linear-gradient(90deg,#d9a02b,#f6c45c);color:#241a05}
+  .seg-mx{background:linear-gradient(90deg,#7d5bd0,#b493ff);color:#140a28}
+  .seg-cn{background:#a83d3d;color:#fff}
+  .legend{display:flex;gap:14px;margin-top:10px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:8px;height:8px;border-radius:2px}
+  .callout{margin-top:12px;padding:10px 12px;border-radius:9px;background:rgba(246,183,60,.07);border:1px solid rgba(246,183,60,.28);font-size:12px;color:#f3ddb0;line-height:1.6}
+  .callout b{color:#fff}
+
+  .phases{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .ph{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:linear-gradient(180deg,#0e192b,#0a1321)}
+  .ph .top{display:flex;justify-content:space-between;align-items:baseline}
+  .ph .p{font-size:12px;color:var(--muted);letter-spacing:1.2px;font-weight:700}
+  .ph .pct{font-size:12px;font-weight:700}
+  .ph h4{font-size:14.5px;margin-top:7px;font-weight:650}
+  .ph .bar{height:6px;margin-top:10px}
+  .ph .note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:9px;min-height:36px}
+  .extra{margin-top:12px;padding:11px 14px;border-radius:10px;border:1px solid rgba(246,183,60,.28);background:rgba(246,183,60,.06);font-size:12.5px;color:#f3ddb0}
+  .extra b{color:#fff}
+
+  .risks{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .risk{padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#0e192b,#0a1321);position:relative}
+  .risk:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+  .risk.r:before{background:var(--red)} .risk.a:before{background:var(--amber)} .risk.y:before{background:#d9c34a}
+  .risk h4{font-size:14px;display:flex;align-items:center;gap:8px;font-weight:650}
+  .risk .sev{font-size:10px;padding:2px 7px;border-radius:999px;letter-spacing:.6px}
+  .sev.hi{background:rgba(255,111,111,.12);color:var(--red);border:1px solid rgba(255,111,111,.35)}
+  .sev.mid{background:rgba(246,183,60,.12);color:var(--amber);border:1px solid rgba(246,183,60,.35)}
+  .sev.lo{background:rgba(217,195,74,.1);color:#e3d27a;border:1px solid rgba(217,195,74,.3)}
+  .risk p{font-size:12.5px;color:#b9c9e2;line-height:1.6;margin-top:6px}
+  .risk p b{color:#fff;font-weight:600}
+
+  .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px}
+  .tl .ev{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(27,44,70,.8)}
+  .tl .t{font-size:12px;color:var(--blue);font-weight:700;padding-top:1px}
+  .tl .x{font-size:12.5px;color:#c2d2e9;line-height:1.5}
+  .tl .x b{color:#fff;font-weight:600}
+
+  footer{margin-top:24px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;
+         font-size:11.5px;color:var(--dim);line-height:1.65}
+  footer b{color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">DSH WORK CLUSTER · 快照 / SNAPSHOT</div>
+    <h1>药品商品名跨国定位站<span>工作集群 · 架构与进度</span></h1>
+    <div class="lede">一个项目、六个会话；五个市场并进入库，一条线在收尾。</div>
+  </div>
+  <div class="snap">
+    <div class="live static"><i></i>静态快照 · 手动重拍</div>
+    <div class="time">
+      快照 <b>{{SNAP_TIME}}</b><br>
+      共享工作区 <b>D:\同种药物商品名剂量对应网站</b><br>
+      代码 20+ 模块 · 测试 20 项
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="no">01</span><h2>集群拓扑</h2><span class="hint">会话之间不共享上下文，协作靠工作区文件 + SQLite + 人的转述</span></div>
+  <div class="human">
+    <span class="tag">人类决策层</span>
+    <span class="txt">订阅 TRUD 并接受 OGL · 提供 key · 决定要不要接西语/中国市场 · 拍板上线方式（<b>唯一授权节点</b>）</span>
+  </div>
+  <div class="cluster">
+    <div class="card g">
+      <div class="role"><span class="name">主线编排</span><span class="pill run"><i></i>{{MAIN_STATUS}}</span></div>
+      <div class="sid mono">session-757e1865 · 统筹 + 入库 + 建站</div>
+      <div class="task">今天把市场从 <b>3 个扩到 5 个</b>：英 6.1 万、西 2.5 万、墨 9.8 千；下一步把 4.3 万文件压到 1.5 万以内。</div>
+      <div class="chips"><span class="chip">{{TOTAL}} 产品</span><span class="chip">{{SUBST}} 成分</span><span class="chip">20 项测试</span></div>
+    </div>
+    <div class="card b">
+      <div class="role"><span class="name">数据侦察</span><span class="pill done"><i></i>上午已完成 12:05</span></div>
+      <div class="sid mono">dd38b943 · 主线子会话</div>
+      <div class="task">三市场定论：美国公有领域、英国 dm+d 是 OGL；<b>中国没有含商品名的批量文件</b>，只能策展。</div>
+      <div class="chips"><span class="chip">方案 §6</span><span class="chip">3 市场结论</span></div>
+    </div>
+    <div class="card b">
+      <div class="role"><span class="name">上线部署</span><span class="pill done"><i></i>已完成 19:23</span></div>
+      <div class="sid mono">session-02f4fffd</div>
+      <div class="task">纯静态站<b>不用买服务器</b>；但 Cloudflare Pages 免费档只收 2 万文件，站点现在 {{FILES}} 个，是上限的 {{FILES_RATIO}} 倍。</div>
+      <div class="chips"><span class="chip">不用 VPS</span><span class="chip">2 万文件上限</span></div>
+    </div>
+    <div class="card v">
+      <div class="role"><span class="name">可视化</span><span class="pill run"><i></i>本次生成</span></div>
+      <div class="sid mono">session-eedb9d20 · 本图</div>
+      <div class="task">把六个会话、五条市场线、真实计数和阻塞压成一张快照；数字来自只读查询与站点统计。</div>
+      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">{{SNAP_HHMM}}</span></div>
+    </div>
+  </div>
+
+  <div class="markets">
+    <div class="mk-title">市场接入 · 五条并行工作流（条数取自 products 表）</div>
+    <table class="mk-table">
+      <tr><th>市场</th><th>数据源</th><th class="r">条数</th><th>谁在做</th><th>状态</th></tr>
+      <tr><td><b>美国</b> · US</td><td>openFDA NDC</td><td class="r num">{{US}}</td><td class="who">主线编排</td><td><span class="st-done"><i class="dot g"></i>全量</span></td></tr>
+      <tr><td><b>英国</b> · GB</td><td>NHS dm+d（OGL）</td><td class="r num">{{GB}}</td><td class="who">主线编排</td><td><span class="st-done"><i class="dot g"></i>全量 · 已滤器械</span></td></tr>
+      <tr><td><b>西班牙</b> · ES</td><td>CIMA / AEMPS</td><td class="r num">{{ES}}</td><td class="who">西班牙子会话 146cc7e0</td><td><span class="st-hot"><i class="dot a"></i>刚接入 · 许可待确认</span></td></tr>
+      <tr><td><b>墨西哥</b> · MX</td><td>COFEPRIS 目录</td><td class="r num">{{MX}}</td><td class="who">主线编排</td><td><span class="st-hot"><i class="dot a"></i>目录采样 · 许可待确认</span></td></tr>
+      <tr><td><b>中国</b> · CN</td><td>省级医保表（策展）</td><td class="r num">{{CN}}</td><td class="who">中国子会话 981d0055</td><td><span class="st-off"><i class="dot r"></i>进行中 · 目标 +2,000</span></td></tr>
+    </table>
+  </div>
+  <div class="flow"><b>协作总线</b>　同一 DSH 运行时 · 同一工作区 · 同一 SQLite（单一真相源）· docs/ 承载结论　→　会话是并行工位，不是共享大脑</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">02</span><h2>数据管线</h2><span class="hint">采集 → 归一化 → 入库 → 检索/碰撞 → 建站 → 上线</span></div>
+  <div class="pipe">
+    <div class="step">
+      <div class="idx">01 / INGEST</div><h3>原始数据</h3>
+      <div class="metric">5<small>个源</small></div>
+      <p>openFDA 138,032；dm+d 16.9 MB；CIMA REST；COFEPRIS 目录；中国 0 个批量文件。</p>
+      <span class="st ok">五源已接</span>
+    </div>
+    <div class="step">
+      <div class="idx">02 / NORMALIZE</div><h3>归一化</h3>
+      <div class="metric">9<small>项测试</small></div>
+      <p>NFKC、全角、西里尔、繁简、配比与尾部剂量切分；中英西墨同一套。</p>
+      <span class="st ok">通过</span>
+    </div>
+    <div class="step">
+      <div class="idx">03 / SQLITE</div><h3>单一真相源</h3>
+      <div class="metric">{{TOTAL}}<small>产品</small></div>
+      <p>{{SUBST}} 成分 / {{KEYS}} 名字键；五个市场同库，可重建。</p>
+      <span class="st hot">刚扩到 5 市场</span>
+    </div>
+    <div class="step">
+      <div class="idx">04 / SEARCH</div><h3>检索与碰撞</h3>
+      <div class="metric">{{SEV}}<small>严重碰撞</small></div>
+      <p>0.55/0.20/0.15/0.10 打分；同名不同药自动推导，警告 {{WARN}}。</p>
+      <span class="st ok">11 项测试通过</span>
+    </div>
+    <div class="step">
+      <div class="idx">05 / BUILD</div><h3>静态站</h3>
+      <div class="metric">{{FILES}}<small>文件</small></div>
+      <p>{{SIZE_MB}} MB；{{DRUG}} 成分页 + {{NAME}} 名字页；索引 {{INDEX_MB}} MB。{{BUILD_TIME}} 重建。</p>
+      <span class="st hot">三语界面</span>
+    </div>
+    <div class="step">
+      <div class="idx">06 / DEPLOY</div><h3>上线</h3>
+      <div class="metric">0<small>次部署</small></div>
+      <p>{{DEPLOY_NOTE}}</p>
+      <span class="st off">未部署</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">03</span><h2>覆盖与规模</h2><span class="hint">条形长度＝条数相对美国，不代表覆盖率</span></div>
+  <div class="cov">
+    <div class="card cov-card b">
+      <div class="cov-row">
+        <div class="c">美国 <em>US</em></div>
+        <div class="bar"><i style="width:100%;background:linear-gradient(90deg,#3b82f6,#5aa9ff)"></i></div>
+        <div class="n">{{US}}<small>openFDA 全量</small></div>
+      </div>
+      <div class="cov-row">
+        <div class="c">英国 <em>GB</em></div>
+        <div class="bar"><i style="width:{{GB_BAR}}%;background:linear-gradient(90deg,#2bb673,#3ddc97)"></i></div>
+        <div class="n">{{GB}}<small>dm+d 过滤器械后</small></div>
+      </div>
+      <div class="cov-row">
+        <div class="c">西班牙 <em>ES</em></div>
+        <div class="bar"><i style="width:{{ES_BAR}}%;background:linear-gradient(90deg,#d9a02b,#f6c45c)"></i></div>
+        <div class="n">{{ES}}<small>CIMA 逐条抓取</small></div>
+      </div>
+      <div class="cov-row">
+        <div class="c">墨西哥 <em>MX</em></div>
+        <div class="bar"><i style="width:{{MX_BAR}}%;background:linear-gradient(90deg,#7d5bd0,#b493ff)"></i></div>
+        <div class="n">{{MX}}<small>COFEPRIS 目录</small></div>
+      </div>
+      <div class="cov-row">
+        <div class="c">中国 <em>CN</em></div>
+        <div class="bar"><i style="width:1%;background:linear-gradient(90deg,#c0392b,#ff6f6f)"></i></div>
+        <div class="n">{{CN}}<small>人工种子 / 目标 2,000</small></div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="k">产品总数</div><div class="v num">{{TOTAL}}</div><div class="d">US {{US_SHARE}}% · GB {{GB_SHARE}}% · ES {{ES_SHARE}}% · MX {{MX_SHARE}}%</div></div>
+        <div class="kpi"><div class="k">活性成分</div><div class="v num">{{SUBST}}</div><div class="d">五市场归并后</div></div>
+        <div class="kpi"><div class="k">名字键</div><div class="v num">{{KEYS}}</div><div class="d">挂 {{NAMED}} 条命名</div></div>
+        <div class="kpi"><div class="k">严重碰撞</div><div class="v num">{{SEV}}</div><div class="d">警告 {{WARN}} · 提示 {{INFO}}</div></div>
+      </div>
+    </div>
+    <div class="card cov-card a">
+      <div class="comp-title">五个市场，三种许可确定性</div>
+      <div class="comp-sub">美国和英国可以公开再发布；西班牙、墨西哥是查询接口/目录采样，许可没落纸；中国仍是墙。</div>
+      <div class="stack">
+        <div class="seg-us" style="width:{{US_SHARE}}%">US {{US_SHARE}}%</div>
+        <div class="seg-gb" style="width:{{GB_SHARE}}%">GB {{GB_SHARE}}%</div>
+        <div class="seg-es" style="width:{{ES_SHARE}}%">ES {{ES_SHARE}}%</div>
+        <div class="seg-mx" style="width:{{MX_SHARE}}%"></div>
+        <div class="seg-cn" style="width:0.6%"></div>
+      </div>
+      <div class="legend">
+        <span><i style="background:#5aa9ff"></i>US 公有领域</span>
+        <span><i style="background:#3ddc97"></i>GB OGL</span>
+        <span><i style="background:#f6c45c"></i>ES 待确认</span>
+        <span><i style="background:#b493ff"></i>MX 待确认</span>
+        <span><i style="background:#ff6f6f"></i>CN 未解决</span>
+      </div>
+      <div class="callout"><b>新风险：</b>CIMA 与 COFEPRIS 都没有写明“可批量再发布”。现在只存事实字段 + 链回原文还能解释，一旦公开上线被追问，<b>需要许可依据或退成“只展示派生结论”</b>。</div>
+      <div class="legend" style="margin-top:10px">
+        <span>英国另有 10.6 万器械/耗材被过滤</span><span>ES 品牌 {{ES_BRANDED}}</span><span>MX 品牌 {{MX_BRANDED}}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">04</span><h2>阶段进度</h2><span class="hint">P2 已收口；P5 差文件数、索引与上线件</span></div>
+  <div class="phases">
+    <div class="ph">
+      <div class="top"><span class="p">P0</span><span class="pct" style="color:var(--green)">100%</span></div>
+      <h4>契约与模型</h4><div class="bar"><i style="width:100%;background:var(--green)"></i></div>
+      <div class="note">schema v0.2；归一化 9 项测试全过</div>
+    </div>
+    <div class="ph">
+      <div class="top"><span class="p">P1</span><span class="pct" style="color:var(--green)">100%</span></div>
+      <h4>美国全量</h4><div class="bar"><i style="width:100%;background:var(--green)"></i></div>
+      <div class="note">{{US}} 条；品牌/规格/剂型齐全</div>
+    </div>
+    <div class="ph">
+      <div class="top"><span class="p">P2</span><span class="pct" style="color:var(--green)">95%</span></div>
+      <h4>英国 dm+d</h4><div class="bar"><i style="width:95%;background:var(--green)"></i></div>
+      <div class="note">{{GB}} 条；器械过滤 + VTM 抽成分；ATC 未接</div>
+    </div>
+    <div class="ph">
+      <div class="top"><span class="p">P3</span><span class="pct" style="color:var(--red)">8%</span></div>
+      <h4>中国策展</h4><div class="bar"><i style="width:8%;background:var(--red)"></i></div>
+      <div class="note">{{CN}} / 2,000 条；中国子会话进行中</div>
+    </div>
+    <div class="ph">
+      <div class="top"><span class="p">P4</span><span class="pct" style="color:var(--amber)">90%</span></div>
+      <h4>检索与碰撞</h4><div class="bar"><i style="width:90%;background:var(--amber)"></i></div>
+      <div class="note">11 项测试过；新增 ES/MX 后阈值待复测</div>
+    </div>
+    <div class="ph">
+      <div class="top"><span class="p">P5</span><span class="pct" style="color:var(--amber)">55%</span></div>
+      <h4>公开上线</h4><div class="bar"><i style="width:55%;background:var(--amber)"></i></div>
+      <div class="note">{{P5_NOTE}}</div>
+    </div>
+  </div>
+  <div class="extra"><b>计划外加餐：</b>西班牙 CIMA {{ES}} 条、墨西哥 COFEPRIS {{MX}} 条，20:24–20:25 入库；许可与质量都还没验，属于“先接上再说”。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">05</span><h2>阻塞与风险</h2><span class="hint">按「会不会挡住上线」排序</span></div>
+  <div class="risks">
+    <div class="risk r">
+      <h4>{{RISK_FILES_TITLE}} <span class="sev hi">高</span></h4>
+      <p>{{RISK_FILES_BODY}}</p>
+    </div>
+    <div class="risk a">
+      <h4>首屏索引 {{INDEX_MB}} MB <span class="sev mid">中高</span></h4>
+      <p>检索索引一次拉全量，{{NAME}} 个名字页、手机 4G 首搜会明显等。需要按首字母拆片、压缩，或改成服务端查询。</p>
+    </div>
+    <div class="risk a">
+      <h4>西语源许可没落纸 <span class="sev mid">中高</span></h4>
+      <p>CIMA 是逐条 REST，COFEPRIS 是目录采样，两家都没写“可批量再发布”。公开前要么拿到书面依据，要么只展示派生结论并链回原文。</p>
+    </div>
+    <div class="risk a">
+      <h4>中国还是 {{CN}} 条 <span class="sev mid">中</span></h4>
+      <p>没有任何含中文商品名的官方批量文件；靠省级医保表策展，中国子会话正在跑，目标 +2,000 条，页面必须标“部分覆盖”。</p>
+    </div>
+    <div class="risk y">
+      <h4>ES/MX 是机器映射 <span class="sev lo">中低</span></h4>
+      <p>西班牙 23,508 条靠别名表映射到成分，墨西哥 6,321 条靠人工 INN 表；都需要抽样复核，否则碰撞页会出现假阳性。</p>
+    </div>
+    <div class="risk y">
+      <h4>上线件还没做 <span class="sev lo">中低</span></h4>
+      <p>404、robots、sitemap、OGL 署名、免责页都还没做；托管方案定了 Cloudflare Pages，但没传过。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">06</span><h2>今晚的时间线</h2><span class="hint">英国 12 分钟打通；西语两市场 25 分钟接上；中国还在跑</span></div>
+  <div class="tl">
+    <div class="ev"><div class="t mono">19:19</div><div class="x">TRUD 订阅生效，dm+d supplementary 出现 <b>27 个可下载版本</b></div></div>
+    <div class="ev"><div class="t mono">19:31</div><div class="x">英国全量入库 + 站点重建：21,635 文件 / 索引 10.1 MB</div></div>
+    <div class="ev"><div class="t mono">19:59</div><div class="x">西班牙子会话启动，开始探 CIMA 的批量入口</div></div>
+    <div class="ev"><div class="t mono">20:01</div><div class="x">CIMA REST 探通：<b>25,501 条</b>，只能逐条取详情</div></div>
+    <div class="ev"><div class="t mono">20:24</div><div class="x">西班牙入库 <b>{{ES}} 条</b>（CIMA，别名映射 23,508）</div></div>
+    <div class="ev"><div class="t mono">20:25</div><div class="x">墨西哥入库 <b>{{MX}} 条</b>（COFEPRIS 目录采样）</div></div>
+    <div class="ev"><div class="t mono">20:27</div><div class="x">中国子会话启动，目标 +2,000 条省级医保表</div></div>
+    <div class="ev"><div class="t mono">20:32</div><div class="x">站点重建：<b>{{FILES}} 文件 / {{SIZE_MB}} MB / 索引 {{INDEX_MB}} MB</b></div></div>
+    <div class="ev"><div class="t mono">20:38</div><div class="x">本次快照；主线下一步：文件数压到 1.5 万以下</div></div>
+  </div>
+</section>
+
+<footer>
+  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 {{SNAP_TIME}}；重拍命令 <b>python render_dashboard.py</b>。</div>
+  <div style="text-align:right"><b>这是静态快照，不是实时监控。</b><br>集群由 6 个互不可见上下文的会话组成，靠共享工作区协作。</div>
+</footer>
+
+</body>
+</html>

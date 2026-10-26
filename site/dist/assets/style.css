@@ -1,0 +1,50 @@
+
+:root{--bg:#fbfbf9;--fg:#1f2328;--muted:#646b73;--line:#e3e1da;--card:#fff;
+--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
+display:flex;flex-direction:column;
+font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#fff}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font-weight:700;font-size:16px;color:var(--fg)}
+.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+.langs{margin-left:6px;font-size:13px}
+.langs a{color:var(--muted);padding:1px 5px;border-radius:5px}
+.langs a.on{background:var(--accent);color:#fff}
+nav{display:flex;gap:14px;font-size:14px}
+main{padding:28px 0 60px;flex:1}
+h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:28px 0 10px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+#q{width:100%;padding:14px 16px;font-size:17px;border:1px solid var(--line);
+border-radius:10px;background:#fff}
+.row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+select,button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+background:#fff;font-size:14px}
+button{cursor:pointer;background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:16px}
+.card .meta{color:var(--muted);font-size:13px}
+.tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;
+border:1px solid var(--line);margin-left:6px;color:var(--muted)}
+.tag.cn{color:#8a4b00;border-color:#e8c9a6}
+.tag.gb{color:#1f4f8a;border-color:#b9cde6}
+.tag.us{color:#0b6b53;border-color:#a9d3c5}
+.tag.es{color:#8a2c1f;border-color:#e6bdb4}
+.tag.au{color:#6b3b0b;border-color:#e0c9a6}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
+margin-left:8px}
+.badge.sev{background:var(--sevbg);color:var(--sev);border:1px solid #f0c4c4}
+.badge.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4}
+.notice{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;
+padding:12px 14px;font-size:14px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:13px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
+padding:18px 0 40px;background:#fff}
+kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
+.empty{color:var(--muted);padding:20px 0}

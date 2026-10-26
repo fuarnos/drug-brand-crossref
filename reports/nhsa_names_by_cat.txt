@@ -1,0 +1,9 @@
+H rows 131325 names 6124 brand_names 2408
+Z rows 96467 names 8308 brand_names 5
+S rows 2215 names 518 brand_names 318
+B rows 2155 names 809 brand_names 1
+? rows 1479 names 624 brand_names 485
+J rows 713 names 281 brand_names 252
+C rows 14 names 6 brand_names 0
+X rows 2 names 1 brand_names 0
+total names 15951

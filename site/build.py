@@ -1,0 +1,835 @@
+"""静态站生成：SQLite → site/dist/
+
+产物：
+    index.html          搜索（客户端匹配，返回候选集与碰撞提示）
+    drug/<id>.html      成分身份卡（各国商品名对照）
+    name/<id>.html      名字页（这个名字下挂了哪些药——碰撞页）
+    about.html          数据来源、覆盖率、免责
+    data/index.json     检索索引
+    assets/             css + js
+
+用法：python site/build.py
+"""
+
+from __future__ import annotations
+
+import hashlib
+import html
+import json
+import re
+import shutil
+import sqlite3
+from collections import defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DB = ROOT / "data" / "drugs.db"
+OUT = ROOT / "site" / "dist"
+
+DISEASE_NOTE = (
+    "本站只做「名字 → 成分」的标识对应，不提供用药建议、"
+    "不换算服药剂量、不建议替换药品。"
+)
+
+# 三语界面文案。英文是默认、也是 HTML 里的兜底文本；
+# 页面加载后 i18n.js 按 ?lang= / localStorage / 浏览器语言替换带 data-i18n 的元素。
+I18N = {
+    "en": {
+        "nav.search": "Search", "nav.about": "About",
+        "home.h1": "Find out what a medicine really is",
+        "home.sub": ("Type a brand name, a generic name, or a line from the pack. Chinese, "
+                     "full-width and Cyrillic input all work, and you can include the dose — "
+                     "e.g. Lipitor 20mg, 泰诺, СОРТИС."),
+        "home.ph": "Brand name / generic name / a line from the pack",
+        "home.all": "All countries", "home.us": "United States",
+        "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
+        "home.mx": "Mexico", "home.au": "Australia",
+        "home.coverage": ("An empty result does not mean the medicine does not exist. "
+                          "Coverage:"),
+        "home.loading": "Loading index…",
+        "res.matched": "names matched", "res.none": "No match",
+        "res.notin": "Not covered in this country",
+        "res.caveat": "an empty result does not mean the drug does not exist",
+        "card.packs": "packs",
+        "badge.severe": "Same name, different drug",
+        "badge.warning": "Different release",
+        "fam.title": "The same brand in other markets",
+        "fam.warn": "Same brand, different drug",
+        "drug.brand": "Brand", "drug.strength": "Strength", "drug.nostrength": "not disclosed",
+        "drug.release": "Release", "drug.status": "Status",
+        "drug.records": "records", "drug.showing": "showing first 40 of",
+        "drug.sid": "Substance ID",
+        "drug.notice": ("The same ingredient can carry completely different brand names in "
+                        "different countries, and the same name can point to a different "
+                        "ingredient. Listed by country — not interchangeable."),
+        "drug.empty": "No products recorded yet.",
+        "name.countries": "Countries", "name.form": "Form",
+        "name.strength": "Strength", "name.release": "Release",
+        "name.also": "Also written as", "name.found": "Found in",
+        "name.empty": "No records",
+        "name.severe": ("This brand name points to different active ingredients in different "
+                        "countries or variants. Check the composition, never treat the names "
+                        "as equivalent."),
+        "name.warning": ("Same name, but immediate vs modified release — not interchangeable."),
+        "footer": ("Information only — not medical advice, and no substitute for a pharmacist."),
+    },
+    "es": {
+        "nav.search": "Buscar", "nav.about": "Acerca de",
+        "home.h1": "Descubre qué es realmente un medicamento",
+        "home.sub": ("Escribe un nombre comercial, un nombre genérico o una línea del envase. "
+                     "También funciona en chino, en ancho completo y en cirílico; puedes incluir "
+                     "la dosis — p. ej. Lipitor 20mg, 泰诺, СОРТИС."),
+        "home.ph": "Nombre comercial / genérico / una línea del envase",
+        "home.all": "Todos los países", "home.us": "Estados Unidos",
+        "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
+        "home.mx": "México", "home.au": "Australia",
+        "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
+                          "Cobertura:"),
+        "home.loading": "Cargando el índice…",
+        "res.matched": "nombres encontrados", "res.none": "Sin resultados",
+        "res.notin": "No incluido en este país",
+        "res.caveat": "un resultado vacío no significa que el medicamento no exista",
+        "card.packs": "envases",
+        "badge.severe": "Mismo nombre, otro medicamento",
+        "badge.warning": "Liberación diferente",
+        "fam.title": "La misma marca en otros mercados",
+        "fam.warn": "Misma marca, otro medicamento",
+        "drug.brand": "Marca", "drug.strength": "Concentración", "drug.nostrength": "no publicado",
+        "drug.release": "Liberación", "drug.status": "Estado",
+        "drug.records": "registros", "drug.showing": "mostrando 40 de",
+        "drug.sid": "ID de sustancia",
+        "drug.notice": ("Un mismo principio activo puede tener nombres comerciales totalmente "
+                        "distintos según el país, y un mismo nombre puede corresponder a otro "
+                        "principio activo. Listado por país — no son intercambiables."),
+        "drug.empty": "Todavía no hay productos registrados.",
+        "name.countries": "Países", "name.form": "Forma",
+        "name.strength": "Concentración", "name.release": "Liberación",
+        "name.also": "También escrito como", "name.found": "Presente en",
+        "name.empty": "Sin registros",
+        "name.severe": ("Este nombre comercial corresponde a principios activos distintos "
+                        "según el país o la variante. Comprueba la composición; nunca trates "
+                        "los nombres como equivalentes."),
+        "name.warning": ("Mismo nombre, pero liberación inmediata frente a modificada — "
+                         "no son intercambiables."),
+        "footer": ("Solo información — no es consejo médico ni sustituye a un farmacéutico."),
+    },
+    "zh": {
+        "nav.search": "检索", "nav.about": "关于",
+        "home.h1": "查一个药名，看它在各国是什么",
+        "home.sub": ("支持中英文、全角、西里尔字母；可以连剂量一起输入，"
+                     "例如 Lipitor 20mg、泰诺、СОРТИС。"),
+        "home.ph": "商品名 / 通用名 / 包装上的一行字",
+        "home.all": "全部国家", "home.us": "美国",
+        "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
+        "home.mx": "墨西哥", "home.au": "澳大利亚",
+        "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
+        "home.loading": "正在加载索引…",
+        "res.matched": "个名字命中", "res.none": "没有匹配的名字",
+        "res.notin": "所选国家没有收录这个名字",
+        "res.caveat": "查不到不代表这个药不存在",
+        "card.packs": "个包装",
+        "badge.severe": "同名不同药",
+        "badge.warning": "释放机制不同",
+        "fam.title": "同一品牌在其他市场的写法",
+        "fam.warn": "同名不同药",
+        "drug.brand": "商品名", "drug.strength": "规格", "drug.nostrength": "未公开",
+        "drug.release": "释放", "drug.status": "状态",
+        "drug.records": "条记录", "drug.showing": "仅显示前 40 条，共",
+        "drug.sid": "规范成分",
+        "drug.notice": ("同一成分在不同国家可能用完全不同的商品名；同名也可能指向不同成分。"
+                        "下方按国家列出，不代表可以互换。"),
+        "drug.empty": "暂无已收录产品。",
+        "name.countries": "国家", "name.form": "剂型",
+        "name.strength": "规格", "name.release": "释放",
+        "name.also": "写法", "name.found": "覆盖",
+        "name.empty": "无记录",
+        "name.severe": ("这个商品名在不同国家或不同变体下指向不同活性成分，"
+                        "选药前必须核对成分，不能按名字等同。"),
+        "name.warning": "同名产品存在缓释/速释差异，不能直接互换。",
+        "footer": "本站只做标识对应，不构成用药建议，不能替代医师或药师。",
+    },
+}
+
+LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/")]
+
+CSS = """
+:root{--bg:#fbfbf9;--fg:#1f2328;--muted:#646b73;--line:#e3e1da;--card:#fff;
+--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
+display:flex;flex-direction:column;
+font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#fff}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font-weight:700;font-size:16px;color:var(--fg)}
+.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+.langs{margin-left:6px;font-size:13px}
+.langs a{color:var(--muted);padding:1px 5px;border-radius:5px}
+.langs a.on{background:var(--accent);color:#fff}
+nav{display:flex;gap:14px;font-size:14px}
+main{padding:28px 0 60px;flex:1}
+h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:28px 0 10px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+#q{width:100%;padding:14px 16px;font-size:17px;border:1px solid var(--line);
+border-radius:10px;background:#fff}
+.row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+select,button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+background:#fff;font-size:14px}
+button{cursor:pointer;background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:16px}
+.card .meta{color:var(--muted);font-size:13px}
+.tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;
+border:1px solid var(--line);margin-left:6px;color:var(--muted)}
+.tag.cn{color:#8a4b00;border-color:#e8c9a6}
+.tag.gb{color:#1f4f8a;border-color:#b9cde6}
+.tag.us{color:#0b6b53;border-color:#a9d3c5}
+.tag.es{color:#8a2c1f;border-color:#e6bdb4}
+.tag.au{color:#6b3b0b;border-color:#e0c9a6}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
+margin-left:8px}
+.badge.sev{background:var(--sevbg);color:var(--sev);border:1px solid #f0c4c4}
+.badge.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4}
+.notice{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;
+padding:12px 14px;font-size:14px;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:13px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
+padding:18px 0 40px;background:#fff}
+kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
+.empty{color:var(--muted);padding:20px 0}
+"""
+
+APP_JS = r"""
+const box = document.getElementById('q');
+const out = document.getElementById('out');
+const ctry = document.getElementById('country');
+const meta = document.getElementById('meta');
+// 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
+const BASE = ((document.currentScript && document.currentScript.src) || location.href)
+  .replace(/assets\/app\.js.*$/, '');
+let IDX = [];
+
+function norm(s){
+  return (s||'').normalize('NFKC').toLowerCase()
+    .replace(/[®™©]/g,' ')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').trim();
+}
+function strengthOf(q){
+  const m = q.match(/([\d.]+)\s*(mg|mcg|g|ml|iu|%|万单位)/i);
+  return m ? [m[1], m[2].toLowerCase()] : null;
+}
+function lev(a,b){
+  if(Math.abs(a.length-b.length)>2) return 99;
+  const d=Array.from({length:b.length+1},(_,i)=>i);
+  for(let i=1;i<=a.length;i++){
+    let prev=d[0]; d[0]=i;
+    for(let j=1;j<=b.length;j++){
+      const t=d[j];
+      d[j]=Math.min(d[j]+1,d[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));
+      prev=t;
+    }
+  }
+  return d[b.length];
+}
+function tier(nq,k){
+  if(k===nq) return ['exact',1.0];
+  if(k.replace(/ /g,'')===nq.replace(/ /g,'')) return ['compact',0.95];
+  if(k.startsWith(nq)) return ['prefix',0.80];
+  if(nq.length>=4 && k.includes(nq)) return ['contains',0.70];
+  if(nq.length>=4 && lev(nq,k)<=2) return ['fuzzy',0.55];
+  return null;
+}
+function cardHTML(e){
+  const T = window.T || (k=>k);
+  const badge = e.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
+                e.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
+  const tags = e.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
+  const link = e.u ? `${BASE}name/${e.u}` : `${BASE}drug/${e.v}.html`;
+  return `<div class="card">
+    <h3><a href="${link}">${e.d}</a>${tags}${badge}</h3>
+    <div class="meta">${e.x} · ${e.s.join(' / ')||'—'} · ${e.f}
+    ${e.n>1?` · ${e.n} ${T('card.packs')}`:''}</div></div>`;
+}
+function render(){
+  const q = box.value.trim();
+  if(!q){ out.innerHTML=''; meta.textContent=''; return; }
+  const nq = norm(q);
+  const st = strengthOf(q);
+  const c = ctry.value;
+  let hits=[];
+  for(const e of IDX){
+    const t = tier(nq, e.k);
+    if(!t) continue;
+    if(c && !e.c.includes(c)) continue;
+    let score = 0.55*t[1] + 0.20*(c && e.c.includes(c) ? 1 : 0.5);
+    score += 0.15*(st && e.s.some(x=>x.toLowerCase().startsWith(st[0]+' ')) ? 1 : 0.5);
+    score += 0.05;
+    hits.push([score, t[0], e]);
+  }
+  hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
+  const shown = hits.slice(0,40);
+  const T = window.T || (k=>k);
+  meta.textContent = hits.length ? `${hits.length} ${T('res.matched')}` :
+    (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
+       : `${T('res.none')} — ${T('res.caveat')}.`);
+  const shownKeys = new Set(shown.map(x=>x[2].k));
+  const byFam = new Map();
+  for(const [, , e] of shown){
+    if(!e.g) continue;
+    if(!byFam.has(e.g)) byFam.set(e.g, {note:e.gn||'', comps:new Set()});
+    byFam.get(e.g).comps.add(e.x);
+  }
+  let warnHTML = '';
+  const T2 = window.T || (k=>k);
+  for(const [label, f] of byFam){
+    if(f.comps.size > 1){
+      warnHTML += `<div class="notice"><b>${T2('fam.warn')}：${label}。</b>${f.note||''}</div>`;
+    }
+  }
+  let extraHTML = '';
+  for(const [label, f] of byFam){
+    const members = IDX.filter(x=>x.g===label && !shownKeys.has(x.k));
+    if(!members.length) continue;
+    extraHTML += `<h2>${T2('fam.title')}</h2>` + members.map(cardHTML).join('');
+  }
+  out.innerHTML = warnHTML + shown.map(([score, t, e])=>cardHTML(e)).join('') + extraHTML;
+}
+box.addEventListener('input', render);
+ctry.addEventListener('change', render);
+document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
+  box.value=b.dataset.q; render(); box.focus();
+}));
+const initial = new URLSearchParams(location.search).get('q');
+if(initial){ box.value = initial; }
+out.innerHTML = '<div class="sub">Loading index… 正在加载索引（约 10 MB，第一次会慢一点）</div>';
+fetch(BASE + 'data/index.json').then(r=>r.json()).then(d=>{IDX=d; render();})
+  .catch(()=>{ out.innerHTML='<div class="notice">索引没加载成功：'
+    +'如果是在本地双击打开，浏览器会拦截本地文件读取。<br>'
+    +'请用 <kbd>python -m http.server</kbd> 起一个本地服务，再访问 '
+    +'<kbd>http://localhost:8000/</kbd>。</div>'; });
+"""
+
+
+def esc(v) -> str:
+    return html.escape("" if v is None else str(v))
+
+
+def key_file(key: str) -> str:
+    """文件名尽量保留可读性（含中文），只替换路径非法字符。"""
+    s = re.sub(r'[\\/:*?"<>|\s]+', "-", (key or "").strip()).strip("-.")
+    if len(s) > 80:
+        s = s[:60] + "-" + hashlib.md5(key.encode("utf-8")).hexdigest()[:8]
+    if not s:
+        s = "k-" + hashlib.md5(key.encode("utf-8")).hexdigest()[:10]
+    return s + ".html"
+
+
+def page(title: str, body: str, prefix: str = "", lang: str = "en",
+         alternates: bool = False) -> str:
+    sw = "".join(
+        f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
+    )
+    alt = ""
+    if alternates:
+        alt = ("\n".join(
+            f'<link rel="alternate" hreflang="{code}" href="/{path}">'
+            for code, _l, path in LANGS
+        ) + '\n<link rel="alternate" hreflang="x-default" href="/">')
+    return f"""<!doctype html>
+<html lang="{lang}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(title)} · Medicine Brand Cross-Reference</title>{alt}
+<link rel="stylesheet" href="{prefix}assets/style.css">
+<script src="{prefix}assets/i18n.js"></script></head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
+    <span class="logo-zh">药品商品名跨国定位</span></a>
+  <nav><a href="{prefix}index.html" data-i18n="nav.search">Search</a>
+    <a href="{prefix}about.html" data-i18n="nav.about">About</a>
+    <span class="langs">{sw}</span></nav>
+</div></header>
+<main><div class="wrap">{body}</div></main>
+<footer><div class="wrap">
+  <span data-i18n="footer">{esc(I18N['en']['footer'])}</span>
+</div></footer>
+<script src="{prefix}assets/i18n.js"></script>
+</body></html>"""
+
+
+def load_index(db: sqlite3.Connection):
+    """构建检索索引：只收有品牌名的 key。全量一次查询，避免 N+1。"""
+    coll = {r[0]: r[1] for r in db.execute("SELECT key_id, level FROM collision")}
+    displays: dict[str, str] = {}
+    for key_id, raw in db.execute(
+        "SELECT key_id, raw FROM name_variant ORDER BY key_id, v_id"
+    ):
+        displays.setdefault(key_id, raw)
+
+    agg: dict[str, dict] = {}
+    for (key_id, pid, country, form_base, dosage_form, sv, su,
+         inn_en, sid) in db.execute(
+        """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
+                  pc.strength_value, pc.strength_unit, s.inn_en, s.substance_id
+           FROM product_name pn
+           JOIN product p ON p.product_id = pn.product_id
+           JOIN product_component pc ON pc.product_id = p.product_id
+           JOIN variant v ON v.variant_id = pc.variant_id
+           JOIN substance s ON s.substance_id = v.substance_id
+           WHERE pn.name_type = 'trade' AND p.is_branded = 1"""
+    ):
+        a = agg.get(key_id)
+        if a is None:
+            a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "s": [],
+                               "f": [], "v": sid}
+        a["pids"].add(pid)
+        a["c"].add(country)
+        if inn_en not in a["subs"]:
+            a["subs"].append(inn_en)
+        if sv is not None:
+            st = f"{sv:g} {su or ''}".strip()
+            if st not in a["s"]:
+                a["s"].append(st)
+        f = form_base or dosage_form
+        if f and f not in a["f"]:
+            a["f"].append(f)
+
+    entries = []
+    fam = {}
+    for key_id, label, note in db.execute(
+        "SELECT nf.key_id, bf.label, bf.note FROM name_family nf"
+        " JOIN brand_family bf ON bf.family_id = nf.family_id"
+    ):
+        fam[key_id] = (label, note)
+    for key_id, a in agg.items():
+        n = len(a["pids"])
+        level = coll.get(key_id, "info")
+        # 只有这些名字值得单独成页：有碰撞的、或包装数够多的。
+        # 其余名字仍能被搜到，卡片直接链到成分页——不为只有一个包装的冷门名字生成几万张页。
+        worth_page = level == "warning" or (level == "severe" and n >= 2) or n >= 3
+        entries.append({
+            "k": key_id,
+            "d": displays.get(key_id, key_id),
+            "c": sorted(a["c"]),
+            "x": " + ".join(a["subs"][:6]),
+            "s": a["s"][:6],
+            "f": a["f"][0] if a["f"] else "",
+            "l": level,
+            "n": n,
+            "v": a["v"],
+            "u": key_file(key_id) if worth_page else "",
+            "g": fam[key_id][0] if key_id in fam else "",
+            "gn": fam[key_id][1] if key_id in fam else "",
+        })
+    entries.sort(key=lambda e: -e["n"])
+    return entries
+
+
+def build_drug_pages(db: sqlite3.Connection) -> int:
+    # 一次性取全量，按成分分组；逐个成分查询会退化成正表全扫 × 4445 次
+    products: dict[str, list] = {}
+    for row in db.execute(
+        """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
+                  p.status, pc.strength_value, pc.strength_unit,
+                  pc.per_volume_value, pc.per_volume_unit, p.product_id
+           FROM product p
+           JOIN product_component pc ON pc.product_id = p.product_id
+           JOIN variant v ON v.variant_id = pc.variant_id"""
+    ):
+        products.setdefault(row[0], []).append(row[1:])
+
+    names: dict[str, list[str]] = {}
+    for pid, raw in db.execute(
+        """SELECT pn.product_id, nv.raw FROM product_name pn
+           JOIN name_variant nv ON nv.key_id = pn.key_id
+           WHERE pn.name_type = 'trade'"""
+    ):
+        bucket = names.setdefault(pid, [])
+        if raw not in bucket:
+            bucket.append(raw)
+
+    subs = db.execute("SELECT substance_id, inn_en, inn_zh, atc FROM substance").fetchall()
+    made = 0
+    (OUT / "drug").mkdir(parents=True, exist_ok=True)
+    for sid, inn_en, inn_zh, atc in subs:
+        rows = products.get(sid)
+        if not rows:
+            continue
+
+        brands = defaultdict(lambda: defaultdict(int))
+        by_country = defaultdict(list)
+        for (country, fb, df, rel, status, sv, su, pv, pu, pid) in rows:
+            b = names.get(pid, [])
+            for x in b:
+                brands[country][x] += 1
+            st = f"{sv:g} {su}" if sv is not None else ""
+            if pv:
+                st += f"/{pv:g} {pu}"
+            by_country[country].append((st.strip(), rel, status, b[0] if b else ""))
+
+        blocks = []
+        for country in ("US", "GB", "CN", "ES", "MX", "AU"):
+            if country not in by_country:
+                continue
+            uniq = {}
+            for st, rel, status, brand in by_country[country]:
+                k = (brand, st, rel)
+                if k not in uniq:
+                    uniq[k] = (brand, st, rel, status)
+            ordered = sorted(uniq.values(),
+                             key=lambda t: (t[0] == "", t[0].lower(), _sort_strength(t[1])))
+            lis = []
+            for brand, st, rel, status in ordered[:40]:
+                name = esc(brand) if brand else '<span class="meta">（无商品名）</span>'
+                st_html = esc(st) if st else (
+                    '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
+                flag = {
+                    "withdrawn": " <em>(withdrawn 已撤市)</em>",
+                    "discontinued": " <em>(expired 有效期已过)</em>",
+                    "unknown": " <em>(validity unknown 有效期待确认)</em>",
+                }.get(status, "")
+                lis.append(f"<tr><td>{name}</td><td>{st_html}</td>"
+                           f"<td>{esc(rel) if rel != 'none' else '—'}</td>"
+                           f"<td>{esc(status)}{flag}</td></tr>")
+            more = (f'<p class="sub"><span data-i18n="drug.showing">showing first 40 of</span> '
+                    f'{len(ordered)}</p>' if len(ordered) > 40 else "")
+            blocks.append(
+                f"<h2>{country} <span class='meta'>({len(ordered)} "
+                f"<span data-i18n='drug.records'>records</span>)</span></h2>"
+                f"<table><tr><th data-i18n='drug.brand'>Brand</th>"
+                f"<th data-i18n='drug.strength'>Strength</th>"
+                f"<th data-i18n='drug.release'>Release</th>"
+                f"<th data-i18n='drug.status'>Status</th></tr>"
+                + "".join(lis) + "</table>" + more
+            )
+        body = f"""<h1>{esc(inn_zh) or esc(inn_en)} <span class="meta">{esc(inn_en)}</span></h1>
+<p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
+<code>{esc(sid)}</code></p>
+<div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
+brand names in different countries, and the same name can point to a different ingredient.
+Listed by country — not interchangeable.</div>
+{''.join(blocks) if blocks else '<p class="empty" data-i18n="drug.empty">No products recorded yet.</p>'}"""
+        (OUT / "drug").mkdir(parents=True, exist_ok=True)
+        (OUT / "drug" / f"{sid}.html").write_text(page(f"{inn_en}", body, "../"), encoding="utf-8")
+        made += 1
+    return made
+
+
+def collect_name_data(db: sqlite3.Connection) -> dict:
+    """一次性把名字页需要的全部数据取到内存，避免上万次逐条查询。"""
+    data: dict[str, dict] = {}
+    for (key_id, inn_en, sid, country, form_base, dosage_form, rel,
+         sv, su) in db.execute(
+        """SELECT pn.key_id, s.inn_en, s.substance_id, p.country, p.form_base,
+                  p.dosage_form, p.release, pc.strength_value, pc.strength_unit
+           FROM product_name pn
+           JOIN product p ON p.product_id = pn.product_id
+           JOIN product_component pc ON pc.product_id = p.product_id
+           JOIN variant v ON v.variant_id = pc.variant_id
+           JOIN substance s ON s.substance_id = v.substance_id"""
+    ):
+        d = data.setdefault(key_id, {"subs": {}, "countries": set()})
+        d["countries"].add(country)
+        s = d["subs"].setdefault(
+            sid, {"inn": inn_en, "country": set(), "s": set(), "f": set(), "rel": set()})
+        s["country"].add(country)
+        st = f"{sv:g} {su or ''}".strip() if sv is not None else ""
+        if st:
+            s["s"].add(st)
+        s["f"].add(form_base or dosage_form)
+        s["rel"].add(rel)
+    return data
+
+
+def build_name_pages(db: sqlite3.Connection, entries, data: dict,
+                     families: dict | None = None, displays: dict | None = None) -> int:
+    families = families or {}
+    displays = displays or {e["k"]: e["d"] for e in entries}
+    made = 0
+    (OUT / "name").mkdir(parents=True, exist_ok=True)
+    variants: dict[str, list[str]] = {}
+    for key_id, raw in db.execute("SELECT key_id, raw FROM name_variant ORDER BY v_id"):
+        variants.setdefault(key_id, []).append(raw)
+
+    for e in entries:
+        if not e["u"]:
+            continue
+        d = data.get(e["k"])
+        if not d:
+            continue
+        level = e["l"]
+        banner = {
+            "severe": '<div class="notice"><b data-i18n="badge.severe">Same name, different drug</b>'
+                      '<span data-i18n="name.severe"> — this brand name points to different '
+                      'active ingredients. Check the composition.</span></div>',
+            "warning": '<div class="notice"><b data-i18n="badge.warning">Different release</b>'
+                       '<span data-i18n="name.warning"> — not interchangeable.</span></div>',
+        }.get(level, "")
+
+        cards = []
+        for sid, g in d["subs"].items():
+            rel = g["rel"] - {"none"}
+            cards.append(
+                f"""<div class="card"><h3><a href="../drug/{sid}.html">{esc(g['inn'])}</a></h3>
+<div class="meta"><span data-i18n="name.countries">Countries</span>:
+{esc('、'.join(sorted(g['country'])))} ·
+<span data-i18n="name.form">Form</span>: {esc('、'.join(sorted(g['f'])))} ·
+<span data-i18n="name.strength">Strength</span>:
+{esc('、'.join(sorted(g['s'], key=_sort_strength)) or '—')}
+{f" · <span data-i18n='name.release'>Release</span>: {esc('、'.join(sorted(rel)))}" if rel else ''}</div></div>"""
+            )
+        body = f"""<h1>{esc(e['d'])}</h1>
+<p class="sub"><span data-i18n="name.also">Also written as</span>:
+{esc('、'.join(variants.get(e['k'], [])[:6]))} ·
+<span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
+{banner}{''.join(cards) if cards else '<p class="empty" data-i18n="name.empty">No records</p>'}{_family_block(e, families, displays, variants)}"""
+        (OUT / "name" / e["u"]).write_text(page(e["d"], body, "../"), encoding="utf-8")
+        made += 1
+    return made
+
+
+def _family_block(e, families, displays, variants) -> str:
+    """同一品牌在其他市场的写法——这是跨语言碰撞唯一能落地的地方。"""
+    fam = families.get(e["k"])
+    if not fam:
+        return ""
+    fam_id, label, note = fam["id"], fam["label"], fam["note"]
+    siblings = [k for k in fam["members"] if k != e["k"]]
+    if not siblings:
+        return ""
+    items = []
+    for k in siblings:
+        siblings_names = "、".join(variants.get(k, [])[:2])
+        fname = key_file(k)
+        items.append(
+            f'<li><a href="{fname}">{esc(displays.get(k, siblings_names))}</a>'
+            f'<span class="tag">{esc(k)}</span></li>')
+    return (f'<h2 data-i18n="fam.title">The same brand in other markets</h2>'
+            f'<div class="notice">{esc(note or "")}</div>'
+            f'<ul class="sub">{"".join(items)}</ul>')
+
+
+def _sort_strength(text: str) -> float:
+    m = re.match(r"([\d.]+)", text)
+    return float(m.group(1)) if m else 0.0
+
+
+def build_index_page(entries, stats, coverage) -> None:
+    """三份落地页：/ 、/es/ 、/zh/。内容相同，语言由脚本按路径/参数决定。"""
+    covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
+    body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
+<p class="sub" data-i18n="home.sub">Type a brand name, a generic name, or a line from the pack.</p>
+<input id="q" data-ph="home.ph" placeholder="Brand name / generic name / a line from the pack" autocomplete="off">
+<div class="row">
+  <select id="country"><option value="" data-i18n="home.all">All countries</option>
+    <option value="US" data-i18n="home.us">United States</option>
+    <option value="GB" data-i18n="home.gb">United Kingdom</option>
+    <option value="CN" data-i18n="home.cn">China</option>
+    <option value="ES" data-i18n="home.es">Spain</option>
+    <option value="MX" data-i18n="home.mx">Mexico</option>
+    <option value="AU" data-i18n="home.au">Australia</option></select>
+  <button data-q="泰诺">泰诺</button>
+  <button data-q="Lipitor 20mg">Lipitor 20mg</button>
+  <button data-q="Benadryl">Benadryl</button>
+  <button data-q="Gaviscon">Gaviscon</button>
+</div>
+<p class="sub" id="meta" style="margin-top:14px"></p>
+<div id="out"></div>
+<div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
+does not exist. Coverage:</span> {covline}.</div>
+<script src="{{prefix}}assets/app.js"></script>"""
+    for code, _label, path in LANGS:
+        prefix = "../" if path else ""
+        html = page("Medicine Brand Cross-Reference", body.replace("{prefix}", prefix),
+                    prefix=prefix, lang=code, alternates=True)
+        target = OUT / (path + "index.html")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(html, encoding="utf-8")
+
+
+def build_about(stats, coverage) -> None:
+    cov = "".join(
+        f"<tr><td>{esc(r['country'])}</td><td>{r['n_products']:,}</td>"
+        f"<td>{esc(r['last_synced'])}</td></tr>" for r in coverage)
+    body = f"""<h1>About 关于本站</h1>
+<p class="sub"><b>One job:</b> turn a brand name into the actual substance, and say how sure
+we are. 这里只有一件事：把商品名定位到成分，并说明它到底有多可信。</p>
+
+<h2>Three rules 三条底线</h2>
+<ol>
+<li><b>A brand name is not a primary key. 商品名不是主键。</b>
+Every query returns a set of candidates; identity is pinned by country × form × strength ×
+active ingredient. 唯一性由「国家 × 剂型 × 规格 × 活性成分」锁定。</li>
+<li><b>Collisions are derived, not annotated. 碰撞自动推导。</b>
+When one name hangs off different ingredients, the site flags
+“same name, different drug” automatically.</li>
+<li><b>No dosing advice. 不给用药建议。</b>
+Identification and “not interchangeable” warnings only — no dose conversion, no substitution
+recommendations.</li>
+</ol>
+
+<h2>Sources and coverage 数据来源与覆盖</h2>
+<table><tr><th>Market 市场</th><th>Products 已收录</th><th>Synced 同步</th></tr>{cov}</table>
+<p class="sub"><b>US 美国</b>: openFDA NDC Directory (US Government public data;
+<code>brand_name</code> + <code>active_ingredients</code>).<br>
+<b>UK 英国</b>: NHSBSA dm+d, Release 10.2.0, under the Open Government Licence v3.0 —
+attribution: <i>Contains public sector information licensed under the Open Government Licence
+v3.0.</i> Appliance/device entries were filtered out.<br>
+<b>Spain 西班牙</b>: AEMPS CIMA (Centro de Información online de Medicamentos),
+<code>nregistro</code> + <code>vtm</code> + <code>dosis</code> + <code>atcs</code>; Spanish
+generic names carry the manufacturer (e.g. “Omeprazol Cinfa”), which is how the pack is
+labelled. 西班牙按 VTM 归成分，西语名与英文 INN 共用同一 substance_id。<br>
+<b>Mexico 墨西哥</b>: COFEPRIS «Registros Sanitarios de Medicamentos Alopáticos Expedidos»,
+26 annual PDFs 2001–2026, plus the <i>prórrogas</i> (renewal) lists that carry 1,040 older
+registrations granted before 2001 — 10,878 records in total. Status is derived, not given:
+<i>revocados / cancelados</i> → withdrawn; an expiry date in the past → discontinued; no expiry
+column at all (the 2001–2010 files) → <b>unknown</b>, we do not pretend either way. The lists
+carry <b>no strength column</b>: strengths are back-filled from the ISSSTE procurement catalogue
+and the PROFECO price survey (both CC BY 4.0), only where the value is unambiguous — so a blank
+strength in Mexico is expected, not a bug.<br>
+<b>Australia 澳洲</b>: PBS Schedule API v3 (Department of Health), schedule 4751 effective
+1 October 2026 — 15,073 item × brand rows, 5,452 products after collapsing the same
+brand/strength/pack that appears under several restriction codes. The API's copyright
+notice explicitly permits use and redistribution as long as the statement is retained:
+<i>Copyright (c) 2024 Department of Health, Commonwealth of Australia.</i> PBS lists only
+<b>subsidised</b> medicines, so OTC brands (Panadol, Nurofen, Gaviscon) are absent by
+design; the full register (TGA ARTG) publishes no bulk extract and blocks automated access.
+Stoma/incontinence appliances (program R1) are filtered out.
+<br>澳洲走 PBS 官方 API，不是抓网页：PBS 网页的版权只允许个人参考，API 才明确允许再发布。
+覆盖面只到「享受补贴的药品」，所以 OTC 品牌查不到；TGA 的 ARTG 才是全量在册，但没有批量文件。
+R1 造口/失禁用品（敷料、绷带）已按 dm+d 滤器械的同一逻辑排除。<br>
+<b>China 中国</b>: 国家医保局「医保药品分类与代码数据库」, 2024-01-05 snapshot — 234,370
+catalogue rows (the same batch is a 19,531-page PDF), of which the 135,667 chemical-drug rows
+load as 135,348 products. Chinese generic names are mapped onto the same English
+<code>substance_id</code>s the other markets use, through a hand-built 中文→INN table (~1,080
+entries) plus an ATC-4 lookup that only fires when that ATC class is unambiguous; the residue
+sits on China-only substances that a later pass can map. 中成药 (98,703 rows, 42 real brand
+names) is excluded on purpose. 商品名 exists for only 13% of rows, so most Chinese products are
+reachable by generic name rather than by brand.</p>
+
+<h2>Why “same name, different drug” happens 为什么会有同名不同药</h2>
+<p class="sub">The same trademark is held by different companies in different markets, and the
+formula can differ completely. Verified examples: US <b>Tylenol</b> is single-ingredient
+acetaminophen 500 mg, while China <b>泰诺</b> is a four-ingredient cold medicine and the
+single-ingredient product is <b>泰诺林</b>; US <b>Benadryl</b> is diphenhydramine, UK
+<b>Benadryl</b> is acrivastine; US <b>Gaviscon</b> is an aluminium/magnesium antacid, UK
+Gaviscon is an alginate raft.</p>
+
+<h2>Known gaps 已知缺口</h2>
+<ul class="sub">
+<li>China now carries 135,348 chemical-drug registrations, but ~9% of them resolve only to a
+China-only substance (no English INN yet), and China's ATC is stored at level 4 — these
+products carry ATC-4, not ATC-5. 中成药 is not loaded.<br>
+中国已入库 13.5 万条化学药，但约 9% 只能落到 CN 专属成分（暂无英文 INN），
+ATC 只到第 4 级；中成药未收录。</li>
+<li>Strength equivalence stops at level D1 (same salt form). Salt-base conversion (D2) and
+bioavailability judgement (D3) are not implemented.<br>
+剂量只做到同型对应，盐基折算与生物利用度判定未做。</li>
+<li>Mexico has no strength in the regulator's bulk lists; only 29% of products could be
+back-filled from public catalogues, and no brand-level bulk source exists.
+<br>墨西哥官方清单没有浓度列，只有 29% 的产品能从公开目录回填。</li>
+<li>The Mexican files only list registrations issued from 2001 onward; the renewal lists recover
+1,040 older ones, but anything never renewed is still missing.
+<br>墨西哥清单只含 2001 年起新批的注册，续期清单补回 1,040 条老药，其余仍缺。</li>
+<li>ATC codes are mostly missing.<br>ATC 编码大部分缺失。</li>
+</ul>
+<p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
+{stats['keys']:,} name keys · {stats['severe']:,} names flagged “same name, different drug”.</p>"""
+    (OUT / "about.html").write_text(page("About", body), encoding="utf-8")
+
+
+def main() -> None:
+    if OUT.exists():
+        shutil.rmtree(OUT)
+    (OUT / "assets").mkdir(parents=True, exist_ok=True)
+    (OUT / "data").mkdir(parents=True, exist_ok=True)
+    (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
+    i18n_js = (
+        "window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n" + r"""
+(function(){
+  var D = window.I18N, seg = location.pathname.split('/').filter(Boolean);
+  function pick(){
+    var q = new URLSearchParams(location.search).get('lang');
+    if(q && D[q]){ try{localStorage.setItem('lang',q);}catch(e){} return q; }
+    var first = seg[0] || '';
+    if(D[first]) return first;
+    try{ var s = localStorage.getItem('lang'); if(s && D[s]) return s; }catch(e){}
+    var n = (navigator.language || 'en').slice(0,2);
+    return D[n] ? n : 'en';
+  }
+  window.LANG = pick();
+  window.T = function(k){ return (D[window.LANG] && D[window.LANG][k]) || D.en[k] || k; };
+  function apply(){
+    document.documentElement.lang = window.LANG;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
+    document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = window.T(el.dataset.ph); });
+    document.querySelectorAll('.langs a').forEach(function(a){
+      a.classList.toggle('on', a.dataset.lang === window.LANG);
+    });
+  }
+  window.setLang = function(l){ try{localStorage.setItem('lang',l);}catch(e){}
+    location.search = '?lang=' + encodeURIComponent(l); };
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', apply); }
+  else { apply(); }
+  window.addEventListener('load', apply);
+})();
+"""
+    )
+    (OUT / "assets" / "i18n.js").write_text(i18n_js, encoding="utf-8")
+    (OUT / "assets" / "app.js").write_text(APP_JS, encoding="utf-8")
+
+    db = sqlite3.connect(DB)
+    db.row_factory = sqlite3.Row
+    coverage = [dict(r) for r in db.execute("SELECT * FROM coverage ORDER BY country")]
+    stats = {
+        "products": db.execute("SELECT COUNT(*) FROM product").fetchone()[0],
+        "substances": db.execute("SELECT COUNT(*) FROM substance").fetchone()[0],
+        "keys": db.execute("SELECT COUNT(*) FROM name_key").fetchone()[0],
+        "severe": db.execute(
+            "SELECT COUNT(*) FROM collision WHERE level='severe'").fetchone()[0],
+    }
+
+    print("building index ...", flush=True)
+    entries = load_index(db)
+    (OUT / "data" / "index.json").write_text(
+        json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"  {len(entries)} keys", flush=True)
+
+    print("building drug pages ...", flush=True)
+    n_drug = build_drug_pages(db)
+    print("collecting name data ...", flush=True)
+    data = collect_name_data(db)
+    families: dict[str, dict] = {}
+    members: dict[str, list[str]] = defaultdict(list)
+    for key_id, fam_id, label, note in db.execute(
+        "SELECT nf.key_id, bf.family_id, bf.label, bf.note FROM name_family nf"
+        " JOIN brand_family bf ON bf.family_id = nf.family_id"
+    ):
+        families[key_id] = {"id": fam_id, "label": label, "note": note, "members": []}
+        members[fam_id].append(key_id)
+    for key_id, fam in families.items():
+        fam["members"] = members[fam["id"]]
+    displays = {e["k"]: e["d"] for e in entries}
+    print("building name pages ...", flush=True)
+    n_name = build_name_pages(db, entries, data, families, displays)
+    build_index_page(entries, stats, coverage)
+    build_about(stats, coverage)
+
+    size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
+    print(f"\n== done ==")
+    print(f"  drug pages : {n_drug}")
+    print(f"  name pages : {n_name}")
+    print(f"  index.json : {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB")
+    print(f"  total size : {size / 1e6:.1f} MB")
+    print(f"  open       : {OUT / 'index.html'}")
+    db.close()
+
+
+if __name__ == "__main__":
+    main()

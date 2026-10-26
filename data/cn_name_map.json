@@ -1,0 +1,1004 @@
+{
+ "meta": {
+  "note": "中文注册名 → 英文成分（人工初判，未逐条核对说明书）",
+  "created_at": "2026-10-25"
+ },
+ "map": {
+  "铝碳酸镁咀嚼片": [
+   "hydrotalcite"
+  ],
+  "铝碳酸镁颗粒": [
+   "hydrotalcite"
+  ],
+  "复方铝酸铋片": null,
+  "法莫替丁注射液": [
+   "famotidine"
+  ],
+  "法莫替丁颗粒": [
+   "famotidine"
+  ],
+  "盐酸雷尼替丁注射液": [
+   "ranitidine"
+  ],
+  "盐酸雷尼替丁胶囊": [
+   "ranitidine"
+  ],
+  "西咪替丁片": [
+   "cimetidine"
+  ],
+  "西咪替丁注射液": [
+   "cimetidine"
+  ],
+  "注射用艾司奥美拉唑钠": [
+   "esomeprazole"
+  ],
+  "注射用奥美拉唑钠": [
+   "omeprazole"
+  ],
+  "奥美拉唑肠溶胶囊": [
+   "omeprazole"
+  ],
+  "胃膜素胶囊": null,
+  "间苯三酚注射液": [
+   "phloroglucinol"
+  ],
+  "硫酸阿托品注射液": [
+   "atropine"
+  ],
+  "盐酸消旋山莨菪碱注射液": [
+   "anisodamine",
+   "raceanisodamine"
+  ],
+  "多潘立酮片": [
+   "domperidone"
+  ],
+  "盐酸格拉司琼口腔崩解片": [
+   "granisetron"
+  ],
+  "盐酸帕洛诺司琼注射液": [
+   "palonosetron"
+  ],
+  "盐酸托烷司琼注射液": [
+   "tropisetron"
+  ],
+  "谷胱甘肽片": [
+   "glutathione"
+  ],
+  "肌苷口服溶液": [
+   "inosine"
+  ],
+  "联苯双酯片": [
+   "bifendate"
+  ],
+  "门冬氨酸鸟氨酸注射液": [
+   "ornithine aspartate",
+   "ornithine"
+  ],
+  "葡醛内酯片": [
+   "glucurolactone",
+   "glucuronolactone"
+  ],
+  "水飞蓟素胶囊": [
+   "silymarin"
+  ],
+  "聚卡波非钙片": [
+   "calcium polycarbophil"
+  ],
+  "磷酸钠盐散": [
+   "sodium phosphate"
+  ],
+  "甘油栓": [
+   "glycerol",
+   "glycerin"
+  ],
+  "开塞露": [
+   "glycerol",
+   "glycerin"
+  ],
+  "开塞露(含甘油)": [
+   "glycerol",
+   "glycerin"
+  ],
+  "琥珀酸普芦卡必利片": [
+   "prucalopride"
+  ],
+  "盐酸小檗碱片": [
+   "berberine"
+  ],
+  "蒙脱石散": [
+   "diosmectite"
+  ],
+  "复方嗜酸乳杆菌片": null,
+  "奥利司他胶囊": [
+   "orlistat"
+  ],
+  "复方胃蛋白酶颗粒": null,
+  "盐酸二甲双胍片": [
+   "metformin"
+  ],
+  "盐酸二甲双胍缓释片": [
+   "metformin"
+  ],
+  "格列齐特片(Ⅱ)": [
+   "gliclazide"
+  ],
+  "二甲双胍格列吡嗪片": null,
+  "二甲双胍格列本脲片(Ⅱ)": null,
+  "二甲双胍维格列汀片(Ⅱ)": null,
+  "维格列汀片": [
+   "vildagliptin"
+  ],
+  "多维元素片(21)": null,
+  "阿法骨化醇软胶囊": [
+   "alfacalcidol"
+  ],
+  "维生素D滴剂": [
+   "colecalciferol",
+   "cholecalciferol"
+  ],
+  "维生素B1注射液": [
+   "thiamine"
+  ],
+  "复合维生素B片": null,
+  "五维葡钙口服溶液": null,
+  "维生素C片": [
+   "ascorbic acid"
+  ],
+  "维生素C注射液": [
+   "ascorbic acid"
+  ],
+  "维生素B2片": [
+   "riboflavin"
+  ],
+  "维生素B6注射液": [
+   "pyridoxine"
+  ],
+  "维生素E软胶囊(天然型)": [
+   "tocopherol"
+  ],
+  "维生素E软胶囊": [
+   "tocopherol"
+  ],
+  "烟酰胺注射液": [
+   "nicotinamide"
+  ],
+  "牡蛎碳酸钙片": [
+   "calcium carbonate"
+  ],
+  "牡蛎碳酸钙颗粒": [
+   "calcium carbonate"
+  ],
+  "葡萄糖酸钙片": [
+   "calcium gluconate"
+  ],
+  "葡萄糖酸钙口服溶液": [
+   "calcium gluconate"
+  ],
+  "三合钙咀嚼片": null,
+  "赖氨酸磷酸氢钙颗粒": null,
+  "三维葡磷钙咀嚼片": null,
+  "碳酸钙D3片": [
+   "calcium carbonate",
+   "colecalciferol"
+  ],
+  "碳酸钙D3咀嚼片": [
+   "calcium carbonate",
+   "colecalciferol"
+  ],
+  "碳酸钙维D3元素片(4)": [
+   "calcium carbonate",
+   "colecalciferol"
+  ],
+  "小儿碳酸钙D3颗粒": [
+   "calcium carbonate",
+   "colecalciferol"
+  ],
+  "复合磷酸氢钾注射液": null,
+  "枸橼酸钾颗粒": [
+   "potassium citrate"
+  ],
+  "硫酸锌口服溶液": [
+   "zinc sulfate"
+  ],
+  "葡萄糖酸锌片": [
+   "zinc gluconate"
+  ],
+  "葡萄糖酸锌口服溶液": [
+   "zinc gluconate"
+  ],
+  "注射用硫酸镁": [
+   "magnesium sulfate"
+  ],
+  "硫酸镁注射液": [
+   "magnesium sulfate"
+  ],
+  "苯丙酸诺龙注射液": [
+   "nandrolone phenylpropionate"
+  ],
+  "复方谷氨酰胺肠溶胶囊": null,
+  "复方颠茄氢氧化铝散": null,
+  "尼替西农胶囊": [
+   "nitisinone"
+  ],
+  "维U颠茄铝胶囊Ⅲ": null,
+  "维U颠茄铝镁片": null,
+  "盐酸沙格雷酯片": [
+   "sarpogrelate"
+  ],
+  "双嘧达莫片": [
+   "dipyridamole"
+  ],
+  "替格瑞洛片": [
+   "ticagrelor"
+  ],
+  "蚓激酶肠溶胶囊": [
+   "lumbrokinase"
+  ],
+  "达比加群酯胶囊": [
+   "dabigatran"
+  ],
+  "利伐沙班片": [
+   "rivaroxaban"
+  ],
+  "藻酸双酯钠片": null,
+  "氨甲环酸注射液": [
+   "tranexamic acid"
+  ],
+  "凝血酶冻干粉": [
+   "thrombin"
+  ],
+  "注射用卡络磺钠": [
+   "carbazochrome"
+  ],
+  "卡络磺钠注射液": [
+   "carbazochrome"
+  ],
+  "葡萄糖酸亚铁糖浆": [
+   "ferrous gluconate"
+  ],
+  "维生素B12注射液": [
+   "cyanocobalamin"
+  ],
+  "灭菌注射用水": null,
+  "葡萄糖注射液": [
+   "glucose",
+   "dextrose"
+  ],
+  "葡萄糖氯化钠注射液": null,
+  "甘油果糖氯化钠注射液": null,
+  "输血用枸橼酸钠注射液": [
+   "sodium citrate"
+  ],
+  "血液保存液(Ⅰ)": null,
+  "艾考糊精腹膜透析液": [
+   "icodextrin"
+  ],
+  "氯化钾注射液": [
+   "potassium chloride"
+  ],
+  "氯化钠注射液": [
+   "sodium chloride"
+  ],
+  "浓氯化钠注射液": [
+   "sodium chloride"
+  ],
+  "碳酸氢钠注射液": [
+   "sodium bicarbonate"
+  ],
+  "小儿电解质补给注射液": null,
+  "注射用盐酸精氨酸": [
+   "arginine"
+  ],
+  "菠萝蛋白酶肠溶胶囊": [
+   "bromelain"
+  ],
+  "盐酸利多卡因注射液": [
+   "lidocaine"
+  ],
+  "盐酸利多卡因注射液(溶剂用)": [
+   "lidocaine"
+  ],
+  "盐酸美西律片": [
+   "mexiletine"
+  ],
+  "硝酸异山梨酯葡萄糖注射液": [
+   "isosorbide dinitrate"
+  ],
+  "硝酸异山梨酯氯化钠注射液": [
+   "isosorbide dinitrate"
+  ],
+  "尼可地尔片": [
+   "nicorandil"
+  ],
+  "注射用前列地尔乳剂": [
+   "alprostadil"
+  ],
+  "盐酸曲美他嗪缓释片": [
+   "trimetazidine"
+  ],
+  "盐酸伊伐布雷定片": [
+   "ivabradine"
+  ],
+  "氢氯噻嗪片": [
+   "hydrochlorothiazide"
+  ],
+  "呋塞米注射液": [
+   "furosemide"
+  ],
+  "螺内酯片": [
+   "spironolactone"
+  ],
+  "烟酸注射液": [
+   "nicotinic acid"
+  ],
+  "胰激肽原酶肠溶片": [
+   "kallidinogenase"
+  ],
+  "曲克芦丁片": [
+   "troxerutin"
+  ],
+  "曲克芦丁注射液": [
+   "troxerutin"
+  ],
+  "阿替洛尔片": [
+   "atenolol"
+  ],
+  "盐酸艾司洛尔注射液": [
+   "esmolol"
+  ],
+  "琥珀酸美托洛尔缓释片": [
+   "metoprolol"
+  ],
+  "酒石酸美托洛尔注射液": [
+   "metoprolol"
+  ],
+  "盐酸拉贝洛尔片": [
+   "labetalol"
+  ],
+  "苯磺酸氨氯地平片": [
+   "amlodipine"
+  ],
+  "氨氯地平叶酸片(Ⅱ)": null,
+  "拉西地平分散片": [
+   "lacidipine"
+  ],
+  "尼群地平片": [
+   "nitrendipine"
+  ],
+  "西尼地平片": [
+   "cilnidipine"
+  ],
+  "硝苯地平缓释片(Ⅱ)": [
+   "nifedipine"
+  ],
+  "硝苯地平控释片": [
+   "nifedipine"
+  ],
+  "盐酸贝那普利片": [
+   "benazepril"
+  ],
+  "卡托普利片": [
+   "captopril"
+  ],
+  "马来酸依那普利片": [
+   "enalapril"
+  ],
+  "厄贝沙坦片": [
+   "irbesartan"
+  ],
+  "氯沙坦钾片": [
+   "losartan"
+  ],
+  "替米沙坦片": [
+   "telmisartan"
+  ],
+  "替米沙坦胶囊": [
+   "telmisartan"
+  ],
+  "厄贝沙坦氢氯噻嗪片": null,
+  "厄贝沙坦氢 噻嗪片": null,
+  "厄贝沙坦氢*********片": null,
+  "缬沙坦氢氯噻嗪分散片": null,
+  "阿托伐他汀钙片": [
+   "atorvastatin"
+  ],
+  "洛伐他汀胶囊": [
+   "lovastatin"
+  ],
+  "匹伐他汀钙片": [
+   "pitavastatin"
+  ],
+  "瑞舒伐他汀钙片": [
+   "rosuvastatin"
+  ],
+  "辛伐他汀片": [
+   "simvastatin"
+  ],
+  "依折麦布片": [
+   "ezetimibe"
+  ],
+  "复方酮康唑发用洗剂": null,
+  "联苯苄唑乳膏": [
+   "bifonazole"
+  ],
+  "硝酸咪康唑乳膏": [
+   "miconazole"
+  ],
+  "曲咪新乳膏": null,
+  "硝酸益康唑乳膏": [
+   "econazole"
+  ],
+  "水杨酸软膏": [
+   "salicylic acid"
+  ],
+  "水杨酸苯甲酸松油搽剂": null,
+  "莫匹罗星软膏": [
+   "mupirocin"
+  ],
+  "阿昔洛韦乳膏": [
+   "aciclovir",
+   "acyclovir"
+  ],
+  "新霉素氟轻松乳膏": null,
+  "曲安奈德氯霉素溶液": null,
+  "冻疮膏": null,
+  "聚维酮碘溶液": [
+   "povidone-iodine"
+  ],
+  "利凡诺创伤膏": [
+   "ethacridine"
+  ],
+  "阿达帕林凝胶": [
+   "adapalene"
+  ],
+  "维A酸乳膏": [
+   "tretinoin"
+  ],
+  "维胺酯维E乳膏": null,
+  "红霉素软膏": [
+   "erythromycin"
+  ],
+  "克林霉素磷酸酯凝胶": [
+   "clindamycin"
+  ],
+  "甲硝唑凝胶": [
+   "metronidazole"
+  ],
+  "盐酸左旋咪唑搽剂": [
+   "levamisole"
+  ],
+  "克霉唑阴道片": [
+   "clotrimazole"
+  ],
+  "克霉唑阴道膨胀栓": [
+   "clotrimazole"
+  ],
+  "复方庚酸炔诺酮注射液": null,
+  "雌三醇乳膏": [
+   "estriol"
+  ],
+  "地诺孕素片": [
+   "dienogest"
+  ],
+  "盐酸达泊西汀片": [
+   "dapoxetine"
+  ],
+  "他达拉非片": [
+   "tadalafil"
+  ],
+  "枸橼酸西地那非片": [
+   "sildenafil"
+  ],
+  "左卡尼汀注射液": [
+   "levocarnitine"
+  ],
+  "非那雄胺胶囊": [
+   "finasteride"
+  ],
+  "地塞米松磷酸钠注射液": [
+   "dexamethasone"
+  ],
+  "甲泼尼龙片": [
+   "methylprednisolone"
+  ],
+  "醋酸氢化可的松片": [
+   "hydrocortisone"
+  ],
+  "鲑降钙素鼻喷雾剂": [
+   "calcitonin"
+  ],
+  "注射用甲苯磺酸奥马环素": [
+   "omadacycline"
+  ],
+  "盐酸多西环素片": [
+   "doxycycline"
+  ],
+  "注射用替加环素": [
+   "tigecycline"
+  ],
+  "注射用阿洛西林钠": [
+   "azlocillin"
+  ],
+  "阿莫西林分散片": [
+   "amoxicillin"
+  ],
+  "阿莫西林胶囊": [
+   "amoxicillin"
+  ],
+  "阿莫西林颗粒": [
+   "amoxicillin"
+  ],
+  "注射用青霉素钠": [
+   "benzylpenicillin",
+   "penicillin g"
+  ],
+  "注射用青霉素钾": [
+   "benzylpenicillin",
+   "penicillin g"
+  ],
+  "注射用氨苄西林钠氯唑西林钠": null,
+  "注射用哌拉西林钠他唑巴坦钠": null,
+  "头孢氨苄甲氧苄啶胶囊": null,
+  "头孢拉定颗粒": [
+   "cefradine",
+   "cephradine"
+  ],
+  "头孢地尼颗粒": [
+   "cefdinir"
+  ],
+  "头孢克肟胶囊": [
+   "cefixime"
+  ],
+  "注射用头孢噻肟钠": [
+   "cefotaxime"
+  ],
+  "注射用头孢他啶": [
+   "ceftazidime"
+  ],
+  "注射用盐酸头孢吡肟": [
+   "cefepime"
+  ],
+  "复方磺胺甲噁唑片": null,
+  "复方磺胺甲噁唑分散片": null,
+  "阿奇霉素分散片": [
+   "azithromycin"
+  ],
+  "注射用阿奇霉素": [
+   "azithromycin"
+  ],
+  "红霉素肠溶片": [
+   "erythromycin"
+  ],
+  "克拉霉素缓释片": [
+   "clarithromycin"
+  ],
+  "克拉霉素胶囊": [
+   "clarithromycin"
+  ],
+  "罗红霉素胶囊": [
+   "roxithromycin"
+  ],
+  "乙酰螺旋霉素片": [
+   "acetylspiramycin"
+  ],
+  "注射用克林霉素磷酸酯": [
+   "clindamycin"
+  ],
+  "盐酸林可霉素注射液": [
+   "lincomycin"
+  ],
+  "硫酸阿米卡星注射液": [
+   "amikacin"
+  ],
+  "硫酸奈替米星注射液": [
+   "netilmicin"
+  ],
+  "硫酸庆大霉素碳酸铋胶囊": null,
+  "硫酸妥布霉素注射液": [
+   "tobramycin"
+  ],
+  "盐酸莫西沙星片": [
+   "moxifloxacin"
+  ],
+  "盐酸莫西沙星氯化钠注射液": [
+   "moxifloxacin"
+  ],
+  "诺氟沙星胶囊": [
+   "norfloxacin"
+  ],
+  "左氧氟沙星片": [
+   "levofloxacin"
+  ],
+  "盐酸左氧氟沙星片": [
+   "levofloxacin"
+  ],
+  "盐酸左氧氟沙星胶囊": [
+   "levofloxacin"
+  ],
+  "甲硝唑注射液": [
+   "metronidazole"
+  ],
+  "甲硝唑氯己定洗剂": null,
+  "人工牛黄甲硝唑胶囊": null,
+  "替硝唑片": [
+   "tinidazole"
+  ],
+  "呋喃妥因肠溶片": [
+   "nitrofurantoin"
+  ],
+  "呋喃唑酮片": [
+   "furazolidone"
+  ],
+  "磷霉素钙片": [
+   "fosfomycin"
+  ],
+  "氯法齐明软胶囊": [
+   "clofazimine"
+  ],
+  "注射用更昔洛韦": [
+   "ganciclovir"
+  ],
+  "恩替卡韦颗粒": [
+   "entecavir"
+  ],
+  "磷酸奥司他韦胶囊": [
+   "oseltamivir"
+  ],
+  "利巴韦林注射液": [
+   "ribavirin"
+  ],
+  "盐酸吗啉胍片": [
+   "moroxydine"
+  ],
+  "氟尿嘧啶口服乳": [
+   "fluorouracil"
+  ],
+  "盐酸托泊替康胶囊": [
+   "topotecan"
+  ],
+  "注射用紫杉醇聚合物胶束": [
+   "paclitaxel"
+  ],
+  "注射用顺铂": [
+   "cisplatin"
+  ],
+  "奥雷巴替尼片": [
+   "olverembatinib"
+  ],
+  "甲磺酸仑伐替尼胶囊": [
+   "lenvatinib"
+  ],
+  "枸橼酸他莫昔芬片": [
+   "tamoxifen"
+  ],
+  "来曲唑片": [
+   "letrozole"
+  ],
+  "胸腺肽注射液": [
+   "thymopentin",
+   "thymosin"
+  ],
+  "枸橼酸托法替布片": [
+   "tofacitinib"
+  ],
+  "来那度胺胶囊": [
+   "lenalidomide"
+  ],
+  "双氯芬酸钾片": [
+   "diclofenac"
+  ],
+  "双氯芬酸钠肠溶片": [
+   "diclofenac"
+  ],
+  "双氯芬酸钠栓": [
+   "diclofenac"
+  ],
+  "布洛芬缓释胶囊": [
+   "ibuprofen"
+  ],
+  "布洛芬颗粒": [
+   "ibuprofen"
+  ],
+  "萘普生钠片": [
+   "naproxen"
+  ],
+  "依托考昔片": [
+   "etoricoxib"
+  ],
+  "硫酸氨基葡萄糖片": [
+   "glucosamine"
+  ],
+  "青霉胺片": [
+   "penicillamine"
+  ],
+  "樟脑醑": [
+   "camphor"
+  ],
+  "美索巴莫注射液": [
+   "methocarbamol"
+  ],
+  "非布司他片": [
+   "febuxostat"
+  ],
+  "盐酸阿芬太尼注射液": [
+   "alfentanil"
+  ],
+  "盐酸普鲁卡因注射液": [
+   "procaine"
+  ],
+  "盐酸甲哌卡因注射液": [
+   "mepivacaine"
+  ],
+  "盐酸左布比卡因注射液": [
+   "levobupivacaine"
+  ],
+  "硫酸吗啡片": [
+   "morphine"
+  ],
+  "盐酸吗啡片": [
+   "morphine"
+  ],
+  "盐酸羟考酮注射液": [
+   "oxycodone"
+  ],
+  "盐酸哌替啶片": [
+   "pethidine"
+  ],
+  "安乃近片": [
+   "metamizole",
+   "dipyrone"
+  ],
+  "氨基比林咖啡因片": null,
+  "复方氨林巴比妥注射液": null,
+  "复方金刚烷胺氨基比林片": null,
+  "去痛片": null,
+  "氨酚羟考酮片": null,
+  "氨酚伪麻片(Ⅰ)": null,
+  "对乙酰氨基酚片": [
+   "acetaminophen",
+   "paracetamol"
+  ],
+  "复方氨酚苯海拉明片": null,
+  "复方氨酚穿心莲片": null,
+  "复方对乙酰氨基酚片": null,
+  "小儿氨酚黄那敏颗粒": null,
+  "小儿对乙酰氨基酚灌肠液": [
+   "acetaminophen",
+   "paracetamol"
+  ],
+  "普瑞巴林缓释片": [
+   "pregabalin"
+  ],
+  "佐米曲普坦口腔崩解片": [
+   "zolmitriptan"
+  ],
+  "苯妥英钠片": [
+   "phenytoin"
+  ],
+  "卡马西平片": [
+   "carbamazepine"
+  ],
+  "丙戊酸钠缓释片(II)": [
+   "valproate",
+   "valproic acid"
+  ],
+  "盐酸氯丙嗪注射液": [
+   "chlorpromazine"
+  ],
+  "盐酸氯普噻吨注射液": [
+   "chlorprothixene"
+  ],
+  "阿立哌唑口崩片": [
+   "aripiprazole"
+  ],
+  "地西泮注射液": [
+   "diazepam"
+  ],
+  "咪达唑仑口颊粘膜溶液": [
+   "midazolam"
+  ],
+  "酒石酸唑吡坦口腔崩解片": [
+   "zolpidem"
+  ],
+  "盐酸多塞平注射液": [
+   "doxepin",
+   "dothiepin"
+  ],
+  "枸橼酸咖啡因注射液": [
+   "caffeine"
+  ],
+  "吡拉西坦颗粒": [
+   "piracetam"
+  ],
+  "胞磷胆碱钠氯化钠注射液": [
+   "citicoline"
+  ],
+  "石杉碱甲胶囊": [
+   "huperzine a"
+  ],
+  "盐酸美金刚片": [
+   "memantine"
+  ],
+  "盐酸美金刚口服溶液": [
+   "memantine"
+  ],
+  "盐酸倍他司汀注射液": [
+   "betahistine"
+  ],
+  "盐酸倍他司汀氯化钠注射液": [
+   "betahistine"
+  ],
+  "盐酸氟桂利嗪胶囊": [
+   "flunarizine"
+  ],
+  "吡拉西坦注射液": [
+   "piracetam"
+  ],
+  "胞磷胆碱钠注射液": [
+   "citicoline"
+  ],
+  "吡拉西坦片": [
+   "piracetam"
+  ],
+  "谷维素片": [
+   "oryzanol"
+  ],
+  "甲硝唑片": [
+   "metronidazole"
+  ],
+  "薄荷喉片": null,
+  "硫酸沙丁胺醇吸入气雾剂": [
+   "salbutamol",
+   "albuterol"
+  ],
+  "吸入用布地奈德混悬液": [
+   "budesonide"
+  ],
+  "复方二氧丙嗪茶碱片": null,
+  "氨茶碱片": [
+   "aminophylline"
+  ],
+  "氨茶碱注射液": [
+   "aminophylline"
+  ],
+  "茶碱缓释片": [
+   "theophylline"
+  ],
+  "多索茶碱注射液": [
+   "doxofylline"
+  ],
+  "孟鲁司特钠咀嚼片": [
+   "montelukast"
+  ],
+  "盐酸氨溴索注射液": [
+   "ambroxol"
+  ],
+  "盐酸氨溴索口服溶液": [
+   "ambroxol"
+  ],
+  "羧甲司坦片": [
+   "carbocisteine"
+  ],
+  "羧甲司坦颗粒": [
+   "carbocisteine"
+  ],
+  "磷酸可待因片": [
+   "codeine"
+  ],
+  "氢溴酸右美沙芬口服溶液": [
+   "dextromethorphan"
+  ],
+  "枸橼酸喷托维林片": [
+   "pentoxyverine"
+  ],
+  "左羟丙哌嗪胶囊": [
+   "levodropropizine"
+  ],
+  "阿桔片": null,
+  "复方甘草口服溶液": null,
+  "氨咖黄敏胶囊": null,
+  "氨咖黄敏口服溶液": null,
+  "复方氨酚烷胺片": null,
+  "复方氨酚烷胺胶囊": null,
+  "愈创维林那敏片": null,
+  "愈美分散片": null,
+  "盐酸苯海拉明片": [
+   "diphenhydramine"
+  ],
+  "马来酸氯苯那敏片": [
+   "chlorphenamine",
+   "chlorpheniramine"
+  ],
+  "马来酸氯苯那敏注射液": [
+   "chlorphenamine",
+   "chlorpheniramine"
+  ],
+  "盐酸左西替利嗪片": [
+   "levocetirizine"
+  ],
+  "地氯雷他定糖浆": [
+   "desloratadine"
+  ],
+  "盐酸氮䓬斯汀片": [
+   "azelastine"
+  ],
+  "氯雷他定泡腾片": [
+   "loratadine"
+  ],
+  "氯雷他定糖浆": [
+   "loratadine"
+  ],
+  "依巴斯汀片": [
+   "ebastine"
+  ],
+  "尼可刹米注射液": [
+   "nikethamide"
+  ],
+  "红霉素眼膏": [
+   "erythromycin"
+  ],
+  "盐酸金霉素眼膏": [
+   "chlortetracycline"
+  ],
+  "氯霉素滴眼液": [
+   "chloramphenicol"
+  ],
+  "玻璃酸钠滴眼液": [
+   "sodium hyaluronate"
+  ],
+  "氯化钠滴眼液": [
+   "sodium chloride"
+  ],
+  "盐酸林可霉素滴耳液": [
+   "lincomycin"
+  ],
+  "赖氨肌醇维B12口服溶液": null,
+  "葡萄糖粉剂": [
+   "glucose",
+   "dextrose"
+  ],
+  "维D2磷酸氢钙片": null,
+  "口服五维赖氨酸葡萄糖": null,
+  "亚叶酸钙片": [
+   "folinic acid",
+   "calcium folinate"
+  ],
+  "注射用右雷佐生": [
+   "dexrazoxane"
+  ],
+  "钆喷酸葡胺注射液": [
+   "gadopentetate"
+  ],
+  "钆塞酸二钠注射液": [
+   "gadoxetate"
+  ],
+  "锝[99mTc]亚甲基二膦酸盐注射液": [
+   "medronic acid"
+  ],
+  "锝[99mTc]二巯丁二酸盐注射液": [
+   "succimer"
+  ],
+  "锝[99mTc]喷替酸盐注射液": [
+   "pentetate"
+  ],
+  "锝[99mTc]双半胱乙酯注射液": [
+   "bicisate"
+  ],
+  "碘[131I]化钠口服溶液": [
+   "sodium iodide"
+  ],
+  "高锝[99mTc]酸钠注射液": [
+   "pertechnetate"
+  ],
+  "锝[99mTc]甲氧异腈注射液": [
+   "sestamibi"
+  ],
+  "氟[18F]脱氧葡糖注射液": [
+   "fludeoxyglucose"
+  ],
+  "远志酊": null,
+  "秋水仙碱片": [
+   "colchicine"
+  ]
+ }
+}

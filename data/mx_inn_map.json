@@ -1,0 +1,9092 @@
+{
+ "terms": {
+  "paracetamol": {
+   "es": "Paracetamol",
+   "inn": "Acetaminophen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "loratadina": {
+   "es": "LORATADINA",
+   "inn": "Loratadine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "amoxicilina": {
+   "es": "AMOXICILINA",
+   "inn": "Amoxicillin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ambroxol": {
+   "es": "AMBROXOL",
+   "inn": "Ambroxol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pseudoefedrina": {
+   "es": "PSEUDOEFEDRINA",
+   "inn": "Pseudoephedrine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tramadol": {
+   "es": "Tramadol",
+   "inn": "Tramadol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metformina": {
+   "es": "METFORMINA",
+   "inn": "Metformin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "hidroclorotiazida": {
+   "es": "Hidroclorotiazida",
+   "inn": "Hydrochlorothiazide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fenilefrina": {
+   "es": "Fenilefrina",
+   "inn": "Phenylephrine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ketorolaco": {
+   "es": "Ketorolaco",
+   "inn": "Ketorolac",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorfenamina": {
+   "es": "Clorfenamina",
+   "inn": "Chlorpheniramine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clindamicina": {
+   "es": "Clindamicina",
+   "inn": "Clindamycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "diclofenaco": {
+   "es": "Diclofenaco",
+   "inn": "Diclofenac",
+   "via": "manual",
+   "score": 1.0
+  },
+  "betametasona": {
+   "es": "Betametasona",
+   "inn": "Betamethasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ibuprofeno": {
+   "es": "Ibuprofeno",
+   "inn": "Ibuprofen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "montelukast": {
+   "es": "Montelukast",
+   "inn": "Montelukast",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cianocobalamina": {
+   "es": "Cianocobalamina",
+   "inn": "Cyanocobalamin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dextrometorfano": {
+   "es": "DEXTROMETORFANO",
+   "inn": "Dextromethorphan",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ciprofloxacino": {
+   "es": "CIPROFLOXACINO",
+   "inn": "Ciprofloxacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levetiracetam": {
+   "es": "Levetiracetam",
+   "inn": "Levetiracetam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dexametasona": {
+   "es": "Dexametasona",
+   "inn": "Dexamethasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sitagliptina": {
+   "es": "Sitagliptina",
+   "inn": "Sitagliptin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "naproxeno": {
+   "es": "NAPROXENO",
+   "inn": "Naproxen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "azitromicina": {
+   "es": "AZITROMICINA",
+   "inn": "Azithromycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido clavulanico": {
+   "es": "ACIDO CLAVULANICO",
+   "inn": "Clavulanic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "salbutamol": {
+   "es": "SALBUTAMOL",
+   "inn": "Albuterol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lamivudina": {
+   "es": "Lamivudina",
+   "inn": "Lamivudine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lidocaina": {
+   "es": "Lidocaína",
+   "inn": "Lidocaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "omeprazol": {
+   "es": "Omeprazol",
+   "inn": "Omeprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "amlodipino": {
+   "es": "AMLODIPINO",
+   "inn": "Amlodipine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nimesulida": {
+   "es": "NIMESULIDA",
+   "inn": "Nimesulide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dimeticona": {
+   "es": "Dimeticona",
+   "inn": "Dimeticona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hioscina": {
+   "es": "Hioscina",
+   "inn": "Hyoscine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sildenafil": {
+   "es": "Sildenafil",
+   "inn": "Sildenafil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "telmisartan": {
+   "es": "Telmisartán",
+   "inn": "Telmisartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "glibenclamida": {
+   "es": "GLIBENCLAMIDA",
+   "inn": "Glyburide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clopidogrel": {
+   "es": "Clopidogrel",
+   "inn": "Clopidogrel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "aciclovir": {
+   "es": "ACICLOVIR",
+   "inn": "Aciclovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cafeina": {
+   "es": "Cafeína",
+   "inn": "Caffeine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "amantadina": {
+   "es": "Amantadina",
+   "inn": "Amantadine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "albendazol": {
+   "es": "Albendazol",
+   "inn": "Albendazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ceftriaxona": {
+   "es": "Ceftriaxona",
+   "inn": "Ceftriaxone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "claritromicina": {
+   "es": "CLARITROMICINA",
+   "inn": "Clarithromycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "meloxicam": {
+   "es": "MELOXICAM",
+   "inn": "Meloxicam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "prednisolona": {
+   "es": "Prednisolona",
+   "inn": "Prednisolone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tiamina": {
+   "es": "Tiamina",
+   "inn": "Thiamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tadalafil": {
+   "es": "Tadalafil",
+   "inn": "Tadalafil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ezetimiba": {
+   "es": "Ezetimiba",
+   "inn": "Ezetimibe",
+   "via": "manual",
+   "score": 1.0
+  },
+  "etinilestradiol": {
+   "es": "Etinilestradiol",
+   "inn": "Ethinyl Estradiol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nitazoxanida": {
+   "es": "NITAZOXANIDA",
+   "inn": "Nitazoxanide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "diosmina": {
+   "es": "Diosmina",
+   "inn": "Diosmin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "etoricoxib": {
+   "es": "Etoricoxib",
+   "inn": "Etoricoxib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fluconazol": {
+   "es": "FLUCONAZOL",
+   "inn": "Fluconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ketoconazol": {
+   "es": "Ketoconazol",
+   "inn": "Ketoconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "pantoprazol": {
+   "es": "PANTOPRAZOL",
+   "inn": "Pantoprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "quinfamida": {
+   "es": "Quinfamida",
+   "inn": "Quinfamide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clotrimazol": {
+   "es": "Clotrimazol",
+   "inn": "Clotrimazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ranitidina": {
+   "es": "Ranitidina",
+   "inn": "Ranitidine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "quetiapina": {
+   "es": "Quetiapina",
+   "inn": "Quetiapine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "timolol": {
+   "es": "Timolol",
+   "inn": "Timolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hidrocortisona": {
+   "es": "HIDROCORTISONA",
+   "inn": "Hydrocortisone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "terbinafina": {
+   "es": "TERBINAFINA",
+   "inn": "Terbinafine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "valsartan": {
+   "es": "Valsartán",
+   "inn": "Valsartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromhexina": {
+   "es": "BROMHEXINA",
+   "inn": "Bromhexine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "metronidazol": {
+   "es": "Metronidazol",
+   "inn": "Metronidazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ampicilina": {
+   "es": "Ampicilina",
+   "inn": "Ampicillin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "desloratadina": {
+   "es": "Desloratadina",
+   "inn": "Desloratadine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido acetilsalicilico": {
+   "es": "Ácido acetilsalicílico",
+   "inn": "Aspirin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cloranfenicol": {
+   "es": "Cloranfenicol",
+   "inn": "Cloranfenicol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fluoxetina": {
+   "es": "FLUOXETINA",
+   "inn": "Fluoxetine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levofloxacino": {
+   "es": "Levofloxacino",
+   "inn": "Levofloxacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "atorvastatina": {
+   "es": "Atorvastatina",
+   "inn": "Atorvastatin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "rosuvastatina": {
+   "es": "Rosuvastatina",
+   "inn": "Rosuvastatin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sibutramina": {
+   "es": "SIBUTRAMINA",
+   "inn": "Sibutramine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tamsulosina": {
+   "es": "Tamsulosina",
+   "inn": "Tamsulosin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "piridoxina": {
+   "es": "Piridoxina",
+   "inn": "Pyridoxine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "hesperidina": {
+   "es": "Hesperidina",
+   "inn": "Hesperidin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "diclofenaco sodico": {
+   "es": "DICLOFENACO SODICO",
+   "inn": "Diclofenac",
+   "via": "manual",
+   "score": 1.0
+  },
+  "losartan": {
+   "es": "LOSARTAN",
+   "inn": "Losartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ondansetron": {
+   "es": "ONDANSETRON",
+   "inn": "Ondansetron",
+   "via": "exact",
+   "score": 1.0
+  },
+  "simvastatina": {
+   "es": "SIMVASTATINA",
+   "inn": "Simvastatin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clonixinato de lisina": {
+   "es": "Clonixinato de lisina",
+   "inn": "Lysine Clonixinate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "gemcitabina": {
+   "es": "Gemcitabina",
+   "inn": "Gemcitabine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pregabalina": {
+   "es": "Pregabalina",
+   "inn": "Pregabalin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bromuro de pinaverio": {
+   "es": "Bromuro de pinaverio",
+   "inn": "Pinaverium Bromide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "neomicina": {
+   "es": "Neomicina",
+   "inn": "Neomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "metamizol sodico": {
+   "es": "Metamizol sódico",
+   "inn": "Metamizole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "mometasona": {
+   "es": "Mometasona",
+   "inn": "Mometasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "duloxetina": {
+   "es": "Duloxetina",
+   "inn": "Duloxetine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "olanzapina": {
+   "es": "Olanzapina",
+   "inn": "Olanzapine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sertralina": {
+   "es": "SERTRALINA",
+   "inn": "Sertraline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "gentamicina": {
+   "es": "Gentamicina",
+   "inn": "Gentamicin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lansoprazol": {
+   "es": "LANSOPRAZOL",
+   "inn": "Lansoprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cetirizina": {
+   "es": "CETIRIZINA",
+   "inn": "Cetirizine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "moxifloxacino": {
+   "es": "Moxifloxacino",
+   "inn": "Moxifloxacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "irbesartan": {
+   "es": "Irbesartán",
+   "inn": "Irbesartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gabapentina": {
+   "es": "GABAPENTINA",
+   "inn": "Gabapentin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "glimepirida": {
+   "es": "GLIMEPIRIDA",
+   "inn": "Glimepiride",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ketoprofeno": {
+   "es": "Ketoprofeno",
+   "inn": "Ketoprofen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fluticasona": {
+   "es": "Fluticasona",
+   "inn": "Fluticasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "propofol": {
+   "es": "Propofol",
+   "inn": "Propofol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "docetaxel": {
+   "es": "Docetaxel",
+   "inn": "Docetaxel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ciclosporina": {
+   "es": "CICLOSPORINA",
+   "inn": "Cyclosporine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "finasterida": {
+   "es": "FINASTERIDA",
+   "inn": "Finasteride",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dorzolamida": {
+   "es": "Dorzolamida",
+   "inn": "Dorzolamide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "simeticona": {
+   "es": "Simeticona",
+   "inn": "Simethicone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "escitalopram": {
+   "es": "Escitalopram",
+   "inn": "Escitalopram",
+   "via": "exact",
+   "score": 1.0
+  },
+  "memantina": {
+   "es": "Memantina",
+   "inn": "Memantine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "estradiol": {
+   "es": "Estradiol",
+   "inn": "Estradiol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cefalexina": {
+   "es": "CEFALEXINA",
+   "inn": "Cephalexin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dicloxacilina": {
+   "es": "Dicloxacilina",
+   "inn": "Dicloxacillin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levocetirizina": {
+   "es": "Levocetirizina",
+   "inn": "Levocetirizine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "metilprednisolona": {
+   "es": "Metilprednisolona",
+   "inn": "Methylprednisolone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "carbamazepina": {
+   "es": "Carbamazepina",
+   "inn": "Carbamazepine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "guaifenesina": {
+   "es": "Guaifenesina",
+   "inn": "Guaifenesin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nafazolina": {
+   "es": "NAFAZOLINA",
+   "inn": "Nafazolina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pravastatina": {
+   "es": "PRAVASTATINA",
+   "inn": "Pravastatin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "budesonida": {
+   "es": "Budesonida",
+   "inn": "Budesonide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "magaldrato": {
+   "es": "Magaldrato",
+   "inn": "Magaldrato",
+   "via": "exact",
+   "score": 1.0
+  },
+  "esomeprazol": {
+   "es": "Esomeprazol",
+   "inn": "Esomeprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "metotrexato": {
+   "es": "Metotrexato",
+   "inn": "Methotrexate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "anastrozol": {
+   "es": "Anastrozol",
+   "inn": "Anastrozole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "norepinefrina": {
+   "es": "Norepinefrina",
+   "inn": "Norepinephrine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "dapagliflozina": {
+   "es": "Dapagliflozina",
+   "inn": "Dapagliflozin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tenofovir": {
+   "es": "Tenofovir",
+   "inn": "Tenofovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "paroxetina": {
+   "es": "PAROXETINA",
+   "inn": "Paroxetine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cinarizina": {
+   "es": "CINARIZINA",
+   "inn": "Cinarizina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "risperidona": {
+   "es": "RISPERIDONA",
+   "inn": "Risperidone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tobramicina": {
+   "es": "TOBRAMICINA",
+   "inn": "Tobramycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "zidovudina": {
+   "es": "Zidovudina",
+   "inn": "Zidovudine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cefaclor": {
+   "es": "CEFACLOR",
+   "inn": "Cefaclor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oxaliplatino": {
+   "es": "Oxaliplatino",
+   "inn": "Oxaliplatin",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "sugammadex": {
+   "es": "Sugammadex",
+   "inn": "Sugammadex",
+   "via": "exact",
+   "score": 1.0
+  },
+  "abacavir": {
+   "es": "Abacavir",
+   "inn": "Abacavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "linezolid": {
+   "es": "Linezolid",
+   "inn": "Linezolid",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido ascorbico": {
+   "es": "Ácido ascórbico",
+   "inn": "Ascorbic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "alprazolam": {
+   "es": "ALPRAZOLAM",
+   "inn": "Alprazolam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cefotaxima": {
+   "es": "Cefotaxima",
+   "inn": "Cefotaxime",
+   "via": "manual",
+   "score": 1.0
+  },
+  "difenhidramina": {
+   "es": "Difenhidramina",
+   "inn": "Diphenhydramine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lamotrigina": {
+   "es": "LAMOTRIGINA",
+   "inn": "Lamotrigine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levonorgestrel": {
+   "es": "LEVONORGESTREL",
+   "inn": "Levonorgestrel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metoclopramida": {
+   "es": "METOCLOPRAMIDA",
+   "inn": "Metoclopramide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "midazolam": {
+   "es": "Midazolam",
+   "inn": "Midazolam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "celecoxib": {
+   "es": "Celecoxib",
+   "inn": "Celecoxib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cefuroxima": {
+   "es": "CEFUROXIMA",
+   "inn": "Cefuroxime",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cloruro de sodio": {
+   "es": "Cloruro de sodio",
+   "inn": "Sodium Chloride",
+   "via": "manual",
+   "score": 1.0
+  },
+  "orlistat": {
+   "es": "Orlistat",
+   "inn": "Orlistat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tacrolimus": {
+   "es": "TACROLIMUS",
+   "inn": "Tacrolimus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rivaroxaban": {
+   "es": "Rivaroxabán",
+   "inn": "Rivaroxaban",
+   "via": "exact",
+   "score": 1.0
+  },
+  "itraconazol": {
+   "es": "ITRACONAZOL",
+   "inn": "Itraconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nifedipino": {
+   "es": "NIFEDIPINO",
+   "inn": "Nifedipine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clonazepam": {
+   "es": "Clonazepam",
+   "inn": "Clonazepam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pioglitazona": {
+   "es": "Pioglitazona",
+   "inn": "Pioglitazone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "venlafaxina": {
+   "es": "Venlafaxina",
+   "inn": "Venlafaxine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "pemetrexed": {
+   "es": "Pemetrexed",
+   "inn": "Pemetrexed",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfametoxazol": {
+   "es": "Sulfametoxazol",
+   "inn": "Sulfamethoxazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cisaprida": {
+   "es": "CISAPRIDA",
+   "inn": "Cisapride",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido alendronico": {
+   "es": "ACIDO ALENDRONICO",
+   "inn": "Alendronic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "citalopram": {
+   "es": "CITALOPRAM",
+   "inn": "Citalopram",
+   "via": "exact",
+   "score": 1.0
+  },
+  "felodipino": {
+   "es": "FELODIPINO",
+   "inn": "Felodipine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "glucosa": {
+   "es": "Glucosa",
+   "inn": "Dextrose",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ifosfamida": {
+   "es": "Ifosfamida",
+   "inn": "Ifosfamide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "nistatina": {
+   "es": "Nistatina",
+   "inn": "Nistatina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "travoprost": {
+   "es": "Travoprost",
+   "inn": "Travoprost",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cinitaprida": {
+   "es": "Cinitaprida",
+   "inn": "Cinitapride",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bortezomib": {
+   "es": "Bortezomib",
+   "inn": "Bortezomib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trimetoprima": {
+   "es": "TRIMETOPRIMA",
+   "inn": "Trimethoprim",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fosfomicina": {
+   "es": "Fosfomicina",
+   "inn": "Fosfomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "calcitriol": {
+   "es": "CALCITRIOL",
+   "inn": "Calcitriol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromuro de ipratropio": {
+   "es": "Bromuro de ipratropio",
+   "inn": "Ipratropium Bromide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "brimonidina": {
+   "es": "Brimonidina",
+   "inn": "Brimonidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "insulina humana": {
+   "es": "INSULINA HUMANA",
+   "inn": "Insulin Human",
+   "via": "fuzzy",
+   "score": 0.929
+  },
+  "captopril": {
+   "es": "CAPTOPRIL",
+   "inn": "Captopril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "meropenem": {
+   "es": "Meropenem",
+   "inn": "Meropenem",
+   "via": "exact",
+   "score": 1.0
+  },
+  "desvenlafaxina": {
+   "es": "Desvenlafaxina",
+   "inn": "Desvenlafaxine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "pramipexol": {
+   "es": "Pramipexol",
+   "inn": "Pramipexole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "subsalicilato de bismuto": {
+   "es": "SUBSALICILATO DE BISMUTO",
+   "inn": "Bismuth Subsalicylate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "pectina": {
+   "es": "Pectina",
+   "inn": "Pectin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "dutasterida": {
+   "es": "Dutasterida",
+   "inn": "Dutasteride",
+   "via": "manual",
+   "score": 1.0
+  },
+  "mesalazina": {
+   "es": "Mesalazina",
+   "inn": "Mesalamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "valproato semisodico": {
+   "es": "Valproato semisódico",
+   "inn": "Valproate Semisodium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "voriconazol": {
+   "es": "Voriconazol",
+   "inn": "Voriconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "emtricitabina": {
+   "es": "Emtricitabina",
+   "inn": "Emtricitabine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nitroprusiato de sodio": {
+   "es": "Nitroprusiato de sodio",
+   "inn": "Sodium Nitroprusside",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dexketoprofeno": {
+   "es": "Dexketoprofeno",
+   "inn": "Dexketoprofen",
+   "via": "fuzzy",
+   "score": 0.963
+  },
+  "acetonido de fluocinolona": {
+   "es": "Acetónido de fluocinolona",
+   "inn": "Fluocinolone Acetonide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tinidazol": {
+   "es": "Tinidazol",
+   "inn": "Tinidazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bencidamina": {
+   "es": "Bencidamina",
+   "inn": "Benzydamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "enalapril": {
+   "es": "Enalapril",
+   "inn": "Enalapril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "progesterona": {
+   "es": "Progesterona",
+   "inn": "Progesterone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "hipromelosa": {
+   "es": "HIPROMELOSA",
+   "inn": "Hipromelosa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "latanoprost": {
+   "es": "Latanoprost",
+   "inn": "Latanoprost",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oseltamivir": {
+   "es": "Oseltamivir",
+   "inn": "Oseltamivir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "topiramato": {
+   "es": "Topiramato",
+   "inn": "Topiramate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "trimebutina": {
+   "es": "Trimebutina",
+   "inn": "Trimebutine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levocarnitina": {
+   "es": "Levocarnitina",
+   "inn": "Levocarnitine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "paclitaxel": {
+   "es": "PACLITAXEL",
+   "inn": "Paclitaxel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "desmopresina": {
+   "es": "Desmopresina",
+   "inn": "Desmopressin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "minoxidil": {
+   "es": "Minoxidil",
+   "inn": "Minoxidil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dropropizina": {
+   "es": "Dropropizina",
+   "inn": "Dropropizine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dexmedetomidina": {
+   "es": "Dexmedetomidina",
+   "inn": "Dexmedetomidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "imatinib": {
+   "es": "Imatinib",
+   "inn": "Imatinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hidroxido de aluminio": {
+   "es": "Hidróxido de aluminio",
+   "inn": "Aluminum Hydroxide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cefixima": {
+   "es": "Cefixima",
+   "inn": "Cefixime",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bevacizumab": {
+   "es": "Bevacizumab",
+   "inn": "Bevacizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "indometacina": {
+   "es": "Indometacina",
+   "inn": "Indomethacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "complejo b": {
+   "es": "Complejo B",
+   "inn": "Vitamin B Complex",
+   "via": "manual",
+   "score": 1.0
+  },
+  "irinotecan": {
+   "es": "IRINOTECAN",
+   "inn": "Irinotecan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mebendazol": {
+   "es": "Mebendazol",
+   "inn": "Mebendazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "vancomicina": {
+   "es": "Vancomicina",
+   "inn": "Vancomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido zoledronico": {
+   "es": "Ácido zoledrónico",
+   "inn": "Zoledronic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "atenolol": {
+   "es": "ATENOLOL",
+   "inn": "Atenolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "deflazacort": {
+   "es": "Deflazacort",
+   "inn": "Deflazacort",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lisinopril": {
+   "es": "LISINOPRIL",
+   "inn": "Lisinopril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "miconazol": {
+   "es": "Miconazol",
+   "inn": "Miconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "buprenorfina": {
+   "es": "Buprenorfina",
+   "inn": "Buprenorphine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bicarbonato de sodio": {
+   "es": "Bicarbonato de sodio",
+   "inn": "Sodium Bicarbonate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dienogest": {
+   "es": "Dienogest",
+   "inn": "Dienogest",
+   "via": "exact",
+   "score": 1.0
+  },
+  "estrogenos conjugados": {
+   "es": "ESTROGENOS CONJUGADOS",
+   "inn": "Estrogenos Conjugados",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bisoprolol": {
+   "es": "Bisoprolol",
+   "inn": "Bisoprolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metilfenidato": {
+   "es": "Metilfenidato",
+   "inn": "Methylphenidate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "epinefrina": {
+   "es": "EPINEFRINA",
+   "inn": "Epinephrine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nitrofurantoina": {
+   "es": "Nitrofurantoína",
+   "inn": "Nitrofurantoin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "caspofungina": {
+   "es": "Caspofungina",
+   "inn": "Caspofungin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "abiraterona": {
+   "es": "Abiraterona",
+   "inn": "Abiraterone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "cefadroxilo": {
+   "es": "CEFADROXILO",
+   "inn": "Cefadroxil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "carbidopa": {
+   "es": "Carbidopa",
+   "inn": "Carbidopa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "levodopa": {
+   "es": "Levodopa",
+   "inn": "Levodopa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "electrolitos orales": {
+   "es": "Electrolitos orales",
+   "inn": "Oral Rehydration Salts",
+   "via": "manual",
+   "score": 1.0
+  },
+  "polimixina b": {
+   "es": "POLIMIXINA B",
+   "inn": "Polimixina B",
+   "via": "exact",
+   "score": 1.0
+  },
+  "octreotida": {
+   "es": "OCTREOTIDA",
+   "inn": "Octreotide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "olmesartan medoxomilo": {
+   "es": "Olmesartán medoxomilo",
+   "inn": "Olmesartan Medoxomil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pentoxifilina": {
+   "es": "Pentoxifilina",
+   "inn": "Pentoxifilina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vildagliptina": {
+   "es": "Vildagliptina",
+   "inn": "Vildagliptin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "bicalutamida": {
+   "es": "Bicalutamida",
+   "inn": "Bicalutamide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cabergolina": {
+   "es": "Cabergolina",
+   "inn": "Cabergoline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fluorouracilo": {
+   "es": "Fluorouracilo",
+   "inn": "Fluorouracil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fenofibrato": {
+   "es": "Fenofibrato",
+   "inn": "Fenofibrate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "temozolomida": {
+   "es": "Temozolomida",
+   "inn": "Temozolomide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "verapamilo": {
+   "es": "Verapamilo",
+   "inn": "Verapamil",
+   "via": "manual",
+   "score": 1.0
+  },
+  "doxorubicina": {
+   "es": "Doxorubicina",
+   "inn": "Doxorubicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "betahistina": {
+   "es": "Betahistina",
+   "inn": "Betahistine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "piracetam": {
+   "es": "Piracetam",
+   "inn": "Piracetam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "alendronato": {
+   "es": "ALENDRONATO",
+   "inn": "Alendronate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "amiodarona": {
+   "es": "Amiodarona",
+   "inn": "Amiodarone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "beclometasona": {
+   "es": "BECLOMETASONA",
+   "inn": "Beclomethasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "benzonatato": {
+   "es": "BENZONATATO",
+   "inn": "Benzonatate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ceftazidima": {
+   "es": "Ceftazidima",
+   "inn": "Ceftazidime",
+   "via": "manual",
+   "score": 1.0
+  },
+  "citarabina": {
+   "es": "Citarabina",
+   "inn": "Citarabina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clobetasol": {
+   "es": "Clobetasol",
+   "inn": "Clobetasol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diazepam": {
+   "es": "Diazepam",
+   "inn": "Diazepam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "epirubicina": {
+   "es": "Epirubicina",
+   "inn": "Epirubicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "furosemida": {
+   "es": "FUROSEMIDA",
+   "inn": "Furosemide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "insulina glargina": {
+   "es": "Insulina glargina",
+   "inn": "Insulin Glargine",
+   "via": "fuzzy",
+   "score": 0.97
+  },
+  "ketorolaco trometamina": {
+   "es": "KETOROLACO TROMETAMINA",
+   "inn": "Ketorolac Tromethamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "medroxiprogesterona": {
+   "es": "MEDROXIPROGESTERONA",
+   "inn": "Medroxiprogesterona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metoprolol": {
+   "es": "Metoprolol",
+   "inn": "Metoprolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "norfloxacino": {
+   "es": "NORFLOXACINO",
+   "inn": "Norfloxacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ofloxacino": {
+   "es": "OFLOXACINO",
+   "inn": "Ofloxacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tazobactam": {
+   "es": "Tazobactam",
+   "inn": "Tazobactam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ropivacaina": {
+   "es": "Ropivacaína",
+   "inn": "Ropivacaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sucralfato": {
+   "es": "Sucralfato",
+   "inn": "Sucralfate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tibolona": {
+   "es": "TIBOLONA",
+   "inn": "Tibolona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "imipenem": {
+   "es": "IMIPENEM",
+   "inn": "Imipenem",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lincomicina": {
+   "es": "LINCOMICINA",
+   "inn": "Lincomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "piroxicam": {
+   "es": "Piroxicam",
+   "inn": "Piroxicam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "eritromicina": {
+   "es": "ERITROMICINA",
+   "inn": "Erythromycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido tranexamico": {
+   "es": "Ácido tranexámico",
+   "inn": "Tranexamic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "azacitidina": {
+   "es": "Azacitidina",
+   "inn": "Azacitidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "teriflunomida": {
+   "es": "Teriflunomida",
+   "inn": "Teriflunomide",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "hidralazina": {
+   "es": "Hidralazina",
+   "inn": "Hidralazina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hidroxido de magnesio": {
+   "es": "Hidróxido de magnesio",
+   "inn": "Magnesium Hydroxide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido folico": {
+   "es": "Ácido fólico",
+   "inn": "Folic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "atomoxetina": {
+   "es": "Atomoxetina",
+   "inn": "Atomoxetine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "exemestano": {
+   "es": "Exemestano",
+   "inn": "Exemestane",
+   "via": "manual",
+   "score": 1.0
+  },
+  "efavirenz": {
+   "es": "Efavirenz",
+   "inn": "Efavirenz",
+   "via": "exact",
+   "score": 1.0
+  },
+  "senosidos a b": {
+   "es": "Senósidos A-B",
+   "inn": "Senósidos A B",
+   "via": "exact",
+   "score": 1.0
+  },
+  "estavudina": {
+   "es": "ESTAVUDINA",
+   "inn": "Stavudine",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "crataegus oxyacantha": {
+   "es": "Crataegus oxyacantha",
+   "inn": "Crataegus Oxyacantha",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metocarbamol": {
+   "es": "Metocarbamol",
+   "inn": "Metocarbamol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "formoterol": {
+   "es": "Formoterol",
+   "inn": "Formoterol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ganciclovir": {
+   "es": "GANCICLOVIR",
+   "inn": "Ganciclovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "piperacilina": {
+   "es": "Piperacilina",
+   "inn": "Piperacillin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "carboplatino": {
+   "es": "Carboplatino",
+   "inn": "Carboplatino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clortalidona": {
+   "es": "Clortalidona",
+   "inn": "Clortalidona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cromoglicato de sodio": {
+   "es": "CROMOGLICATO DE SODIO",
+   "inn": "Sodium Cromoglicate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "floroglucinol": {
+   "es": "FLOROGLUCINOL",
+   "inn": "Phloroglucinol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "morfina": {
+   "es": "Morfina",
+   "inn": "Morphine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "salmeterol": {
+   "es": "Salmeterol",
+   "inn": "Salmeterol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tolterodina": {
+   "es": "Tolterodina",
+   "inn": "Tolterodine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "vinorelbina": {
+   "es": "VINORELBINA",
+   "inn": "Vinorelbine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "oxido de zinc": {
+   "es": "OXIDO DE ZINC",
+   "inn": "Zinc Oxide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nebivolol": {
+   "es": "Nebivolol",
+   "inn": "Nebivolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "condroitina": {
+   "es": "Condroitina",
+   "inn": "Condroitín",
+   "via": "rule",
+   "score": 1.0
+  },
+  "cilostazol": {
+   "es": "Cilostazol",
+   "inn": "Cilostazol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ciclofosfamida": {
+   "es": "Ciclofosfamida",
+   "inn": "Cyclophosphamide",
+   "via": "fuzzy",
+   "score": 0.938
+  },
+  "tigeciclina": {
+   "es": "Tigeciclina",
+   "inn": "Tigecycline",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "hierro": {
+   "es": "Hierro",
+   "inn": "Hierro",
+   "via": "exact",
+   "score": 1.0
+  },
+  "leflunomida": {
+   "es": "Leflunomida",
+   "inn": "Leflunomide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "milrinona": {
+   "es": "Milrinona",
+   "inn": "Milrinona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "drospirenona": {
+   "es": "Drospirenona",
+   "inn": "Drospirenone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "famotidina": {
+   "es": "FAMOTIDINA",
+   "inn": "Famotidine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fenazopiridina": {
+   "es": "FENAZOPIRIDINA",
+   "inn": "Fenazopiridina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bencilpenicilina": {
+   "es": "BENCILPENICILINA",
+   "inn": "Penicillin G",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bimatoprost": {
+   "es": "Bimatoprost",
+   "inn": "Bimatoprost",
+   "via": "exact",
+   "score": 1.0
+  },
+  "desonida": {
+   "es": "Desonida",
+   "inn": "Desonide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "citicolina": {
+   "es": "Citicolina",
+   "inn": "Citicoline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dimenhidrinato": {
+   "es": "DIMENHIDRINATO",
+   "inn": "Dimenhydrinate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fexofenadina": {
+   "es": "FEXOFENADINA",
+   "inn": "Fexofenadine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levodropropizina": {
+   "es": "Levodropropizina",
+   "inn": "Levodropropizina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "olopatadina": {
+   "es": "Olopatadina",
+   "inn": "Olopatadine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sevoflurano": {
+   "es": "Sevoflurano",
+   "inn": "Sevoflurane",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sirolimus": {
+   "es": "SIROLIMUS",
+   "inn": "Sirolimus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "colecalciferol": {
+   "es": "Colecalciferol",
+   "inn": "Cholecalciferol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cefepima": {
+   "es": "Cefepima",
+   "inn": "Cefepime",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ciclopirox": {
+   "es": "Ciclopirox",
+   "inn": "Ciclopirox",
+   "via": "exact",
+   "score": 1.0
+  },
+  "epinastina": {
+   "es": "Epinastina",
+   "inn": "Epinastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "glucosamina": {
+   "es": "GLUCOSAMINA",
+   "inn": "Glucosamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "isotretinoina": {
+   "es": "ISOTRETINOINA",
+   "inn": "Isotretinoin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "misoprostol": {
+   "es": "Misoprostol",
+   "inn": "Misoprostol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oximetazolina": {
+   "es": "OXIMETAZOLINA",
+   "inn": "Oxymetazoline",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "raloxifeno": {
+   "es": "Raloxifeno",
+   "inn": "Raloxifene",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bezafibrato": {
+   "es": "BEZAFIBRATO",
+   "inn": "Bezafibrate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "oxcarbazepina": {
+   "es": "Oxcarbazepina",
+   "inn": "Oxcarbazepine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "caolin": {
+   "es": "Caolin",
+   "inn": "Kaolin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fosaprepitant": {
+   "es": "Fosaprepitant",
+   "inn": "Fosaprepitant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lacosamida": {
+   "es": "Lacosamida",
+   "inn": "Lacosamide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "denosumab": {
+   "es": "Denosumab",
+   "inn": "Denosumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "melatonina": {
+   "es": "Melatonina",
+   "inn": "Melatonin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "aripiprazol": {
+   "es": "Aripiprazol",
+   "inn": "Aripiprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ritonavir": {
+   "es": "Ritonavir",
+   "inn": "Ritonavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "macrogol": {
+   "es": "Macrogol",
+   "inn": "Macrogol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido ibandronico": {
+   "es": "Ácido ibandrónico",
+   "inn": "Ibandronic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "valganciclovir": {
+   "es": "Valganciclovir",
+   "inn": "Valganciclovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lercanidipino": {
+   "es": "Lercanidipino",
+   "inn": "Lercanidipine",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "trastuzumab": {
+   "es": "Trastuzumab",
+   "inn": "Trastuzumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ribavirina": {
+   "es": "RIBAVIRINA",
+   "inn": "Ribavirin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "solifenacina": {
+   "es": "Solifenacina",
+   "inn": "Solifenacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "erlotinib": {
+   "es": "Erlotinib",
+   "inn": "Erlotinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bupivacaina": {
+   "es": "Bupivacaína",
+   "inn": "Bupivacaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "itoprida": {
+   "es": "Itoprida",
+   "inn": "Itoprida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulindaco": {
+   "es": "Sulindaco",
+   "inn": "Sulindac",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "atazanavir": {
+   "es": "Atazanavir",
+   "inn": "Atazanavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sunitinib": {
+   "es": "Sunitinib",
+   "inn": "Sunitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nimodipino": {
+   "es": "NIMODIPINO",
+   "inn": "Nimodipino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "alfuzosina": {
+   "es": "Alfuzosina",
+   "inn": "Alfuzosin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ciproterona": {
+   "es": "CIPROTERONA",
+   "inn": "Ciproterona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "calcio": {
+   "es": "Calcio",
+   "inn": "Calcio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gramicidina": {
+   "es": "GRAMICIDINA",
+   "inn": "Gramicidin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ramipril": {
+   "es": "RAMIPRIL",
+   "inn": "Ramipril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mupirocina": {
+   "es": "MUPIROCINA",
+   "inn": "Mupirocin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulfacetamida": {
+   "es": "sulfacetamida",
+   "inn": "Sulfacetamide",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "acido fusidico": {
+   "es": "Ácido fusídico",
+   "inn": "Fusidic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "adapaleno": {
+   "es": "Adapaleno",
+   "inn": "Adapalene",
+   "via": "manual",
+   "score": 1.0
+  },
+  "secnidazol": {
+   "es": "SECNIDAZOL",
+   "inn": "Secnidazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bosentan": {
+   "es": "Bosentan",
+   "inn": "Bosentan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cilastatina": {
+   "es": "CILASTATINA",
+   "inn": "Cilastatin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "letrozol": {
+   "es": "Letrozol",
+   "inn": "Letrozole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nitrato de miconazol": {
+   "es": "NITRATO DE MICONAZOL",
+   "inn": "Miconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "oxicodona": {
+   "es": "Oxicodona",
+   "inn": "Oxycodone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tretinoina": {
+   "es": "Tretinoina",
+   "inn": "Tretinoin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "zolpidem": {
+   "es": "Zolpidem",
+   "inn": "Zolpidem",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido salicilico": {
+   "es": "Ácido salicílico",
+   "inn": "Salicylic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "agua inyectable": {
+   "es": "AGUA INYECTABLE",
+   "inn": "Water For Injection",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bromuro de rocuronio": {
+   "es": "Bromuro de rocuronio",
+   "inn": "Rocuronium Bromide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clormadinona": {
+   "es": "Clormadinona",
+   "inn": "Clormadinona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "valproato de magnesio": {
+   "es": "VALPROATO DE MAGNESIO",
+   "inn": "Valproate Magnesium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "gestodeno": {
+   "es": "GESTODENO",
+   "inn": "Gestodene",
+   "via": "manual",
+   "score": 1.0
+  },
+  "etofenamato": {
+   "es": "Etofenamato",
+   "inn": "Etofenamato",
+   "via": "exact",
+   "score": 1.0
+  },
+  "etoposido": {
+   "es": "Etopósido",
+   "inn": "Etoposido",
+   "via": "exact",
+   "score": 1.0
+  },
+  "candesartan": {
+   "es": "Candesartán",
+   "inn": "Candesartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acetilcisteina": {
+   "es": "Acetilcisteína",
+   "inn": "Acetylcysteine",
+   "via": "fuzzy",
+   "score": 0.966
+  },
+  "nitrofural": {
+   "es": "Nitrofural",
+   "inn": "Nitrofural",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hidroxocobalamina": {
+   "es": "Hidroxocobalamina",
+   "inn": "Hidroxocobalamina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "capecitabina": {
+   "es": "Capecitabina",
+   "inn": "Capecitabine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "enoxaparina sodica": {
+   "es": "Enoxaparina sódica",
+   "inn": "Enoxaparin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levotiroxina sodica": {
+   "es": "Levotiroxina sódica",
+   "inn": "Levothyroxine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "oxigeno": {
+   "es": "Oxígeno",
+   "inn": "Oxygen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "enzalutamida": {
+   "es": "Enzalutamida",
+   "inn": "Enzalutamide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "micofenolato de mofetilo": {
+   "es": "Micofenolato de mofetilo",
+   "inn": "Mycophenolate Mofetil",
+   "via": "manual",
+   "score": 1.0
+  },
+  "zolmitriptano": {
+   "es": "Zolmitriptano",
+   "inn": "Zolmitriptan",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "benzocaina": {
+   "es": "Benzocaína",
+   "inn": "Benzocaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "diltiazem": {
+   "es": "DILTIAZEM",
+   "inn": "Diltiazem",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lopinavir": {
+   "es": "Lopinavir",
+   "inn": "Lopinavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "prednisona": {
+   "es": "Prednisona",
+   "inn": "Prednisone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "donepezilo": {
+   "es": "Donepezilo",
+   "inn": "Donepezil",
+   "via": "manual",
+   "score": 1.0
+  },
+  "azatioprina": {
+   "es": "Azatioprina",
+   "inn": "Azathioprine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fulvestrant": {
+   "es": "Fulvestrant",
+   "inn": "Fulvestrant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "palbociclib": {
+   "es": "Palbociclib",
+   "inn": "Palbociclib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sorafenib": {
+   "es": "Sorafenib",
+   "inn": "Sorafenib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "parecoxib": {
+   "es": "Parecoxib",
+   "inn": "Parecoxib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dobutamina": {
+   "es": "Dobutamina",
+   "inn": "Dobutamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "flutamida": {
+   "es": "FLUTAMIDA",
+   "inn": "Flutamide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "alcanfor": {
+   "es": "Alcanfor",
+   "inn": "Alcanfor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cisplatino": {
+   "es": "Cisplatino",
+   "inn": "Cisplatino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "darunavir": {
+   "es": "Darunavir",
+   "inn": "Darunavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "doxiciclina": {
+   "es": "DOXICICLINA",
+   "inn": "Doxycycline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "filgrastim": {
+   "es": "FILGRASTIM",
+   "inn": "Filgrastim",
+   "via": "exact",
+   "score": 1.0
+  },
+  "magnesio": {
+   "es": "MAGNESIO",
+   "inn": "Magnesio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "imiquimod": {
+   "es": "Imiquimod",
+   "inn": "Imiquimod",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lorazepam": {
+   "es": "Lorazepam",
+   "inn": "Lorazepam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "noretisterona": {
+   "es": "NORETISTERONA",
+   "inn": "Noretisterona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "paricalcitol": {
+   "es": "Paricalcitol",
+   "inn": "Paricalcitol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sevelamero": {
+   "es": "Sevelámero",
+   "inn": "Sevelamer",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "valaciclovir": {
+   "es": "Valaciclovir",
+   "inn": "Valaciclovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vincristina": {
+   "es": "Vincristina",
+   "inn": "Vincristine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "triamcinolona": {
+   "es": "TRIAMCINOLONA",
+   "inn": "Triamcinolona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "feniramina": {
+   "es": "Feniramina",
+   "inn": "Pheniramine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fentermina": {
+   "es": "FENTERMINA",
+   "inn": "Phentermine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "metadona": {
+   "es": "METADONA",
+   "inn": "Methadone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "risedronato": {
+   "es": "RISEDRONATO",
+   "inn": "Risedronate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "somatropina": {
+   "es": "SOMATROPINA",
+   "inn": "Somatropin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "teicoplanina": {
+   "es": "TEICOPLANINA",
+   "inn": "Teicoplanin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tizanidina": {
+   "es": "Tizanidina",
+   "inn": "Tizanidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ofloxacina": {
+   "es": "OFLOXACINA",
+   "inn": "Ofloxacin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "azelastina": {
+   "es": "Azelastina",
+   "inn": "Azelastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fluocinolona": {
+   "es": "FLUOCINOLONA",
+   "inn": "Fluocinolone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fenitoina sodica": {
+   "es": "FENITOINA SODICA",
+   "inn": "Phenytoin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "rituximab": {
+   "es": "Rituximab",
+   "inn": "Rituximab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cinacalcet": {
+   "es": "Cinacalcet",
+   "inn": "Cinacalcet",
+   "via": "exact",
+   "score": 1.0
+  },
+  "olmesartan": {
+   "es": "Olmesartán",
+   "inn": "Olmesartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "terlipresina": {
+   "es": "Terlipresina",
+   "inn": "Terlipresina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "esmolol": {
+   "es": "Esmolol",
+   "inn": "Esmolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "heparina sodica": {
+   "es": "Heparina sódica",
+   "inn": "Heparin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tofacitinib": {
+   "es": "Tofacitinib",
+   "inn": "Tofacitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "palonosetron": {
+   "es": "Palonosetrón",
+   "inn": "Palonosetron",
+   "via": "exact",
+   "score": 1.0
+  },
+  "carbonato de calcio": {
+   "es": "Carbonato de calcio",
+   "inn": "Calcium Carbonate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "glicopirronio": {
+   "es": "Glicopirronio",
+   "inn": "Glycopyrronium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "atosiban": {
+   "es": "Atosibán",
+   "inn": "Atosiban",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mirtazapina": {
+   "es": "Mirtazapina",
+   "inn": "Mirtazapine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "febuxostat": {
+   "es": "Febuxostat",
+   "inn": "Febuxostat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nicotinamida": {
+   "es": "Nicotinamida",
+   "inn": "Nicotinamide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "leuprorelina": {
+   "es": "LEUPRORELINA",
+   "inn": "Leuprolide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "naproxeno sodico": {
+   "es": "NAPROXENO SODICO",
+   "inn": "Naproxen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ciprofibrato": {
+   "es": "Ciprofibrato",
+   "inn": "Ciprofibrate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "teofilina": {
+   "es": "Teofilina",
+   "inn": "Theophylline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ceftibuteno": {
+   "es": "Ceftibuteno",
+   "inn": "Ceftibuten",
+   "via": "manual",
+   "score": 1.0
+  },
+  "deferasirox": {
+   "es": "Deferasirox",
+   "inn": "Deferasirox",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acarbosa": {
+   "es": "ACARBOSA",
+   "inn": "Acarbose",
+   "via": "rule",
+   "score": 1.0
+  },
+  "hidroxicloroquina": {
+   "es": "Hidroxicloroquina",
+   "inn": "Hydroxychloroquine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "labetalol": {
+   "es": "Labetalol",
+   "inn": "Labetalol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pegfilgrastim": {
+   "es": "Pegfilgrastim",
+   "inn": "Pegfilgrastim",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rifampicina": {
+   "es": "RIFAMPICINA",
+   "inn": "Rifampin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "aluminio": {
+   "es": "ALUMINIO",
+   "inn": "Aluminio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "amikacina": {
+   "es": "Amikacina",
+   "inn": "Amikacin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fosfato de clindamicina": {
+   "es": "FOSFATO DE CLINDAMICINA",
+   "inn": "Clindamycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulfadiazina": {
+   "es": "Sulfadiazina",
+   "inn": "Sulfadiazine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clavulanato": {
+   "es": "CLAVULANATO",
+   "inn": "Clavulanate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fumarato ferroso": {
+   "es": "Fumarato Ferroso",
+   "inn": "Ferrous Fumarate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "nicotina": {
+   "es": "Nicotina",
+   "inn": "Nicotine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "alopurinol": {
+   "es": "ALOPURINOL",
+   "inn": "Allopurinol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bicarbonato de potasio": {
+   "es": "BICARBONATO DE POTASIO",
+   "inn": "Potassium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "calcipotriol": {
+   "es": "CALCIPOTRIOL",
+   "inn": "Calcipotriol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "carvedilol": {
+   "es": "CARVEDILOL",
+   "inn": "Carvedilol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "doxofilina": {
+   "es": "DOXOFILINA",
+   "inn": "Doxofylline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fenitoina": {
+   "es": "FENITOINA",
+   "inn": "Phenytoin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "oxitetraciclina": {
+   "es": "OXITETRACICLINA",
+   "inn": "Oxitetraciclina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromuro de otilonio": {
+   "es": "Bromuro de otilonio",
+   "inn": "Otilonium Bromide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cefalotina": {
+   "es": "CEFALOTINA",
+   "inn": "Cephalothin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "granisetron": {
+   "es": "Granisetrón",
+   "inn": "Granisetron",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ketotifeno": {
+   "es": "KETOTIFENO",
+   "inn": "Ketotifen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lactulosa": {
+   "es": "Lactulosa",
+   "inn": "Lactulose",
+   "via": "manual",
+   "score": 1.0
+  },
+  "picosulfato sodico": {
+   "es": "Picosulfato sódico",
+   "inn": "Picosulfato",
+   "via": "rule",
+   "score": 1.0
+  },
+  "propranolol": {
+   "es": "PROPRANOLOL",
+   "inn": "Propranolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sumatriptan": {
+   "es": "SUMATRIPTAN",
+   "inn": "Sumatriptan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "zalcitabina": {
+   "es": "ZALCITABINA",
+   "inn": "Zalcitabine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "acido micofenolico": {
+   "es": "Ácido micofenólico",
+   "inn": "Ácido Micofenólico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dexrazoxano": {
+   "es": "Dexrazoxano",
+   "inn": "Dexrazoxane",
+   "via": "rule",
+   "score": 1.0
+  },
+  "hidroquinona": {
+   "es": "HIDROQUINONA",
+   "inn": "Hidroquinona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "inmunoglobulina humana": {
+   "es": "Inmunoglobulina humana",
+   "inn": "Inmunoglobulina G Humana",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "ergocalciferol": {
+   "es": "Ergocalciferol",
+   "inn": "Ergocalciferol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "haloperidol": {
+   "es": "HALOPERIDOL",
+   "inn": "Haloperidol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lenalidomida": {
+   "es": "Lenalidomida",
+   "inn": "Lenalidomide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "amfotericina b": {
+   "es": "Amfotericina B",
+   "inn": "Amfotericina B",
+   "via": "exact",
+   "score": 1.0
+  },
+  "factor ix": {
+   "es": "Factor IX",
+   "inn": "Factor X",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "flumazenil": {
+   "es": "Flumazenil",
+   "inn": "Flumazenil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bilastina": {
+   "es": "Bilastina",
+   "inn": "Bilastine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cefdinir": {
+   "es": "Cefdinir",
+   "inn": "Cefdinir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido valproico": {
+   "es": "Ácido valpróico",
+   "inn": "Valproic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "vinblastina": {
+   "es": "Vinblastina",
+   "inn": "Vinblastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "riboflavina": {
+   "es": "Riboflavina",
+   "inn": "Riboflavin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "orfenadrina": {
+   "es": "Orfenadrina",
+   "inn": "Orphenadrine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "mazindol": {
+   "es": "Mazindol",
+   "inn": "Mazindol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfato de magnesio": {
+   "es": "Sulfato de magnesio",
+   "inn": "Magnesium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "rifaximina": {
+   "es": "Rifaximina",
+   "inn": "Rifaximin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "brivaracetam": {
+   "es": "Brivaracetam",
+   "inn": "Brivaracetam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "etamsilato": {
+   "es": "Etamsilato",
+   "inn": "Etamsylate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "levosimendan": {
+   "es": "Levosimendan",
+   "inn": "Levosimendan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rasagilina": {
+   "es": "Rasagilina",
+   "inn": "Rasagiline",
+   "via": "rule",
+   "score": 1.0
+  },
+  "estriol": {
+   "es": "Estriol",
+   "inn": "Estriol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "repaglinida": {
+   "es": "Repaglinida",
+   "inn": "Repaglinide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "gefitinib": {
+   "es": "Gefitinib",
+   "inn": "Gefitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "modafinilo": {
+   "es": "Modafinilo",
+   "inn": "Modafinil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "eletriptan": {
+   "es": "Eletriptán",
+   "inn": "Eletriptan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ertapenem": {
+   "es": "Ertapenem",
+   "inn": "Ertapenem",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metamizol": {
+   "es": "Metamizol",
+   "inn": "Metamizole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "carisoprodol": {
+   "es": "Carisoprodol",
+   "inn": "Carisoprodol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "loperamida": {
+   "es": "Loperamida",
+   "inn": "Loperamide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "adalimumab": {
+   "es": "Adalimumab",
+   "inn": "Adalimumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "citrato de cafeina": {
+   "es": "Citrato de Cafeína",
+   "inn": "Caffeine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fingolimod": {
+   "es": "Fingolimod",
+   "inn": "Fingolimod",
+   "via": "exact",
+   "score": 1.0
+  },
+  "isoniazida": {
+   "es": "ISONIAZIDA",
+   "inn": "Isoniazid",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "estreptomicina": {
+   "es": "Estreptomicina",
+   "inn": "Estreptomicina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "digoxina": {
+   "es": "DIGOXINA",
+   "inn": "Digoxin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tetraciclina": {
+   "es": "Tetraciclina",
+   "inn": "Tetracycline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "permetrina": {
+   "es": "Permetrina",
+   "inn": "Permethrin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "colistina": {
+   "es": "Colistina",
+   "inn": "Colistin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fucus vesiculosus": {
+   "es": "Fucus vesiculosus",
+   "inn": "Fucus Vesiculosus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "foeniculum vulgare": {
+   "es": "Foeniculum vulgare",
+   "inn": "Foeniculum Vulgare",
+   "via": "exact",
+   "score": 1.0
+  },
+  "panax ginseng": {
+   "es": "Panax ginseng",
+   "inn": "Panax Ginseng",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ginkgo biloba": {
+   "es": "Ginkgo biloba",
+   "inn": "Ginkgo Biloba",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido risedronico": {
+   "es": "ACIDO RISEDRONICO",
+   "inn": "Risedronic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "alprostadil": {
+   "es": "Alprostadil",
+   "inn": "Alprostadil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bitartrato de potasio": {
+   "es": "BITARTRATO DE POTASIO",
+   "inn": "Potassium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "butilhioscina": {
+   "es": "BUTILHIOSCINA",
+   "inn": "Hyoscine Butylbromide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dacarbazina": {
+   "es": "Dacarbazina",
+   "inn": "Dacarbazine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "dasatinib": {
+   "es": "Dasatinib",
+   "inn": "Dasatinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "domperidona": {
+   "es": "Domperidona",
+   "inn": "Domperidone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulfato de zinc": {
+   "es": "SULFATO DE ZINC",
+   "inn": "Zinc",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ivabradina": {
+   "es": "Ivabradina",
+   "inn": "Ivabradine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "trometamol": {
+   "es": "TROMETAMOL",
+   "inn": "Trometamol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nalbufina": {
+   "es": "Nalbufina",
+   "inn": "Nalbuphine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vitamina a": {
+   "es": "VITAMINA A",
+   "inn": "Retinol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "hialuronato": {
+   "es": "HIALURONATO",
+   "inn": "Hyaluronate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ergotamina": {
+   "es": "ERGOTAMINA",
+   "inn": "Ergotamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "aminoacidos": {
+   "es": "AMINOACIDOS",
+   "inn": "Amino Acids",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "bencilpenicilina procaina": {
+   "es": "BENCILPENICILINA PROCAINA",
+   "inn": "Bencilpenicilina Procaína",
+   "via": "exact",
+   "score": 1.0
+  },
+  "colistimetato": {
+   "es": "Colistimetato",
+   "inn": "Colistimethate",
+   "via": "fuzzy",
+   "score": 0.963
+  },
+  "daptomicina": {
+   "es": "Daptomicina",
+   "inn": "Daptomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tropicamida": {
+   "es": "TROPICAMIDA",
+   "inn": "Tropicamide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "flurbiprofeno": {
+   "es": "Flurbiprofeno",
+   "inn": "Flurbiprofen",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "indapamida": {
+   "es": "Indapamida",
+   "inn": "Indapamide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "indinavir": {
+   "es": "INDINAVIR",
+   "inn": "Indinavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mesna": {
+   "es": "MESNA",
+   "inn": "Mesna",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mitoxantrona": {
+   "es": "Mitoxantrona",
+   "inn": "Mitoxantrona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vasopresina": {
+   "es": "Vasopresina",
+   "inn": "Vasopressin",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "bifonazol": {
+   "es": "Bifonazol",
+   "inn": "Bifonazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "electrolitos": {
+   "es": "Electrolitos",
+   "inn": "Electrolitos",
+   "via": "exact",
+   "score": 1.0
+  },
+  "polietilenglicol": {
+   "es": "polietilenglicol",
+   "inn": "Polyethylene Glycol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "retinol": {
+   "es": "retinol",
+   "inn": "Retinol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "indacaterol": {
+   "es": "Indacaterol",
+   "inn": "Indacaterol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido citrico": {
+   "es": "Ácido cítrico",
+   "inn": "Ácido Cítrico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diacereina": {
+   "es": "DIACEREINA",
+   "inn": "Diacereína",
+   "via": "exact",
+   "score": 1.0
+  },
+  "zofenopril": {
+   "es": "Zofenopril",
+   "inn": "Zofenopril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ticagrelor": {
+   "es": "Ticagrelor",
+   "inn": "Ticagrelor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "idarubicina": {
+   "es": "Idarubicina",
+   "inn": "Idarubicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "folitropina alfa": {
+   "es": "Folitropina alfa",
+   "inn": "Follitropin Alfa",
+   "via": "fuzzy",
+   "score": 0.938
+  },
+  "perindopril": {
+   "es": "Perindopril",
+   "inn": "Perindopril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "axitinib": {
+   "es": "Axitinib",
+   "inn": "Axitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "naloxona": {
+   "es": "Naloxona",
+   "inn": "Naloxone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "apixaban": {
+   "es": "Apixabán",
+   "inn": "Apixaban",
+   "via": "exact",
+   "score": 1.0
+  },
+  "aflibercept": {
+   "es": "Aflibercept",
+   "inn": "Aflibercept",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acemetacina": {
+   "es": "Acemetacina",
+   "inn": "Acemetacin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "centella asiatica": {
+   "es": "Centella asiatica",
+   "inn": "Centella Asiatica",
+   "via": "exact",
+   "score": 1.0
+  },
+  "macitentan": {
+   "es": "Macitentán",
+   "inn": "Macitentan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dolutegravir": {
+   "es": "Dolutegravir",
+   "inn": "Dolutegravir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfasalazina": {
+   "es": "Sulfasalazina",
+   "inn": "Sulfasalazine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acetato de glatiramer": {
+   "es": "Acetato de Glatiramer",
+   "inn": "Glatiramer",
+   "via": "rule",
+   "score": 1.0
+  },
+  "carbetocina": {
+   "es": "Carbetocina",
+   "inn": "Carbetocin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ebastina": {
+   "es": "Ebastina",
+   "inn": "Ebastine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulbactam": {
+   "es": "SULBACTAM",
+   "inn": "Sulbactam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cobicistat": {
+   "es": "Cobicistat",
+   "inn": "Cobicistat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "adenosina": {
+   "es": "Adenosina",
+   "inn": "Adenosine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clozapina": {
+   "es": "Clozapina",
+   "inn": "Clozapine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "piridostigmina": {
+   "es": "Piridostigmina",
+   "inn": "Piridostigmina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "flunarizina": {
+   "es": "FLUNARIZINA",
+   "inn": "Flunarizine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sulfato ferroso": {
+   "es": "Sulfato Ferroso",
+   "inn": "Ferrous Sulfate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "semaglutida": {
+   "es": "Semaglutida",
+   "inn": "Semaglutide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "ivermectina": {
+   "es": "Ivermectina",
+   "inn": "Ivermectin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "aminofilina": {
+   "es": "Aminofilina",
+   "inn": "Aminophylline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "carbocisteina": {
+   "es": "CARBOCISTEINA",
+   "inn": "Carbocisteine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ciclobenzaprina": {
+   "es": "Ciclobenzaprina",
+   "inn": "Ciclobenzaprina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oxitocina": {
+   "es": "Oxitocina",
+   "inn": "Oxytocin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorhidrato de piridoxina": {
+   "es": "Clorhidrato de piridoxina",
+   "inn": "Pyridoxine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "articaina": {
+   "es": "ARTICAINA",
+   "inn": "Articaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "mepivacaina": {
+   "es": "MEPIVACAINA",
+   "inn": "Mepivacaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cabotegravir": {
+   "es": "Cabotegravir",
+   "inn": "Cabotegravir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "teriparatida": {
+   "es": "Teriparatida",
+   "inn": "Teriparatide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "plerixafor": {
+   "es": "Plerixafor",
+   "inn": "Plerixafor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ketamina": {
+   "es": "Ketamina",
+   "inn": "Ketamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "cleboprida": {
+   "es": "CLEBOPRIDA",
+   "inn": "Cleboprida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorpropamida": {
+   "es": "CLORPROPAMIDA",
+   "inn": "Chlorpropamide",
+   "via": "fuzzy",
+   "score": 0.929
+  },
+  "didanosina": {
+   "es": "DIDANOSINA",
+   "inn": "Didanosine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "doxazosina": {
+   "es": "DOXAZOSINA",
+   "inn": "Doxazosin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cloperastina": {
+   "es": "CLOPERASTINA",
+   "inn": "Cloperastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "cloramfenicol": {
+   "es": "CLORAMFENICOL",
+   "inn": "Cloranfenicol",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "lovastatina": {
+   "es": "LOVASTATINA",
+   "inn": "Lovastatin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tiamazol": {
+   "es": "Tiamazol",
+   "inn": "Tiamazol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "benzatina bencilpenicilina": {
+   "es": "BENZATINA BENCILPENICILINA",
+   "inn": "Benzathine Benzylpenicillin",
+   "via": "fuzzy",
+   "score": 0.943
+  },
+  "moclobemida": {
+   "es": "MOCLOBEMIDA",
+   "inn": "Moclobemida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "promestrieno": {
+   "es": "Promestrieno",
+   "inn": "Promestrieno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diclofenaco dietilamonio": {
+   "es": "DICLOFENACO DIETILAMONIO",
+   "inn": "Diclofenac Diethylammonium",
+   "via": "fuzzy",
+   "score": 0.902
+  },
+  "acido pamidronico": {
+   "es": "ACIDO PAMIDRONICO",
+   "inn": "Ácido Pamidrónico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mentol": {
+   "es": "mentol",
+   "inn": "Mentol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "liotironina": {
+   "es": "Liotironina",
+   "inn": "Liotironina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "terazosina": {
+   "es": "TERAZOSINA",
+   "inn": "Terazosin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "gentamic ina": {
+   "es": "GENTAMIC INA",
+   "inn": "Gentamicin",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "cincocaina": {
+   "es": "Cincocaina",
+   "inn": "Cincocaína",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mestranol": {
+   "es": "Mestranol",
+   "inn": "Mestranol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acetato de calcio": {
+   "es": "Acetato de calcio",
+   "inn": "Calcium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulfato de aluminio": {
+   "es": "sulfato de aluminio",
+   "inn": "Aluminio",
+   "via": "rule",
+   "score": 1.0
+  },
+  "griseofulvina": {
+   "es": "Griseofulvina",
+   "inn": "Griseofulvin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "passiflora incarnata": {
+   "es": "passiflora incarnata",
+   "inn": "Passiflora Incarnata",
+   "via": "exact",
+   "score": 1.0
+  },
+  "valeriana": {
+   "es": "valeriana",
+   "inn": "Valerian",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "melissa officinalis": {
+   "es": "Melissa officinalis",
+   "inn": "Melissa Officinalis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rosmarinus officinalis": {
+   "es": "Rosmarinus officinalis",
+   "inn": "Rosmarinus Officinalis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "harpagophytum procumbens": {
+   "es": "Harpagophytum procumbens",
+   "inn": "Harpagophytum Procumbens",
+   "via": "exact",
+   "score": 1.0
+  },
+  "taraxacum officinale": {
+   "es": "Taraxacum officinale",
+   "inn": "Taraxacum Officinale",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rhamnus fragula": {
+   "es": "Rhamnus fragula",
+   "inn": "Rhamnus Frangula",
+   "via": "fuzzy",
+   "score": 0.968
+  },
+  "cefpodoxima": {
+   "es": "Cefpodoxima",
+   "inn": "Cefpodoxime",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "levocarmitina": {
+   "es": "Levocarmitina",
+   "inn": "Levocarnitine",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "besafibrato": {
+   "es": "Besafibrato",
+   "inn": "Bezafibrate",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "selenio": {
+   "es": "Selenio",
+   "inn": "Selenio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "valeriana officinalis": {
+   "es": "Valeriana officinalis",
+   "inn": "Valeriana Officinalis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tocofersolan": {
+   "es": "Tocofersolán",
+   "inn": "Tocofersolan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "aceclofenaco": {
+   "es": "ACECLOFENACO",
+   "inn": "Aceclofenac",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "albumina humana": {
+   "es": "Albúmina humana",
+   "inn": "Albumin Human",
+   "via": "fuzzy",
+   "score": 0.929
+  },
+  "clorhidrato de butenafina": {
+   "es": "CLORHIDRATO DE BUTENAFINA",
+   "inn": "Butenafine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clorhidrato de terbinafina": {
+   "es": "CLORHIDRATO DE TERBINAFINA",
+   "inn": "Terbinafine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "desogestrel": {
+   "es": "DESOGESTREL",
+   "inn": "Desogestrel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "eprosartan": {
+   "es": "EPROSARTÁN",
+   "inn": "Eprosartan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fentanilo": {
+   "es": "FENTANILO",
+   "inn": "Fentanyl",
+   "via": "manual",
+   "score": 1.0
+  },
+  "gatifloxacina": {
+   "es": "GATIFLOXACINA",
+   "inn": "Gatifloxacin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "lactato de sodio": {
+   "es": "LACTATO DE SODIO",
+   "inn": "Sodium",
+   "via": "morph",
+   "score": 1.0
+  },
+  "valerato de estradiol": {
+   "es": "VALERATO DE ESTRADIOL",
+   "inn": "Estradiol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorfeniramina": {
+   "es": "CLORFENIRAMINA",
+   "inn": "Chlorpheniramine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "piketoprofeno": {
+   "es": "PIKETOPROFENO",
+   "inn": "Piketoprofeno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "prednicarbato": {
+   "es": "PREDNICARBATO",
+   "inn": "Prednicarbate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "rivastigmina": {
+   "es": "Rivastigmina",
+   "inn": "Rivastigmine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "peroxido de benzoilo": {
+   "es": "PEROXIDO DE BENZOILO",
+   "inn": "Benzoyl Peroxide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bambuterol": {
+   "es": "Bambuterol",
+   "inn": "Bambuterol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromazepam": {
+   "es": "Bromazepam",
+   "inn": "Bromazepam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "etilefrina": {
+   "es": "ETILEFRINA",
+   "inn": "Etilefrine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "gemfibrozilo": {
+   "es": "GEMFIBROZILO",
+   "inn": "Gemfibrozil",
+   "via": "manual",
+   "score": 1.0
+  },
+  "carbinoxamina": {
+   "es": "CARBINOXAMINA",
+   "inn": "Carbinoxamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "posaconazol": {
+   "es": "Posaconazol",
+   "inn": "Posaconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tazaroteno": {
+   "es": "TAZAROTENO",
+   "inn": "Tazaroteno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mebeverina": {
+   "es": "MEBEVERINA",
+   "inn": "Mebeverine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ustekinumab": {
+   "es": "Ustekinumab",
+   "inn": "Ustekinumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "everolimus": {
+   "es": "EVEROLIMUS",
+   "inn": "Everolimus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "l carnitina": {
+   "es": "L-Carnitina",
+   "inn": "Carnitina",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "mifepristona": {
+   "es": "Mifepristona",
+   "inn": "Mifepristona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dexlansoprazol": {
+   "es": "Dexlansoprazol",
+   "inn": "Dexlansoprazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "bupropion": {
+   "es": "Bupropión",
+   "inn": "Bupropion",
+   "via": "exact",
+   "score": 1.0
+  },
+  "glatiramer": {
+   "es": "Glatiramer",
+   "inn": "Glatiramer",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cabazitaxel": {
+   "es": "Cabazitaxel",
+   "inn": "Cabazitaxel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fluocortolona": {
+   "es": "Fluocortolona",
+   "inn": "Fluocortolone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "alogliptina": {
+   "es": "Alogliptina",
+   "inn": "Alogliptin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "etanercept": {
+   "es": "Etanercept",
+   "inn": "Etanercept",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hidroxietil almidon": {
+   "es": "Hidroxietil almidón",
+   "inn": "Hidroxietilalmidón",
+   "via": "compact",
+   "score": 1.0
+  },
+  "bisacodilo": {
+   "es": "Bisacodilo",
+   "inn": "Bisacodyl",
+   "via": "manual",
+   "score": 1.0
+  },
+  "saquinavir": {
+   "es": "Saquinavir",
+   "inn": "Saquinavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lisdexanfetamina": {
+   "es": "Lisdexanfetamina",
+   "inn": "Lisdexamfetamine",
+   "via": "fuzzy",
+   "score": 0.938
+  },
+  "infliximab": {
+   "es": "Infliximab",
+   "inn": "Infliximab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "levotiroxina": {
+   "es": "Levotiroxina",
+   "inn": "Levothyroxine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "pirilamina": {
+   "es": "Pirilamina",
+   "inn": "Pyrilamine",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "pamabrom": {
+   "es": "Pamabrom",
+   "inn": "Pamabrom",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sofosbuvir": {
+   "es": "Sofosbuvir",
+   "inn": "Sofosbuvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nepafenaco": {
+   "es": "Nepafenaco",
+   "inn": "Nepafenaco",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pinaverio": {
+   "es": "Pinaverio",
+   "inn": "Pinaverio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pomalidomida": {
+   "es": "Pomalidomida",
+   "inn": "Pomalidomide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "bendamustina": {
+   "es": "Bendamustina",
+   "inn": "Bendamustine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nifuroxazida": {
+   "es": "Nifuroxazida",
+   "inn": "Nifuroxazide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fluvoxamina": {
+   "es": "Fluvoxamina",
+   "inn": "Fluvoxamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "eplerenona": {
+   "es": "Eplerenona",
+   "inn": "Eplerenone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nitrogeno": {
+   "es": "Nitrógeno",
+   "inn": "Nitrogen",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "hoscina": {
+   "es": "Hoscina",
+   "inn": "Hyoscine",
+   "via": "fuzzy",
+   "score": 0.933
+  },
+  "galantamina": {
+   "es": "GALANTAMINA",
+   "inn": "Galantamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tenofovir alafenamida": {
+   "es": "Tenofovir alafenamida",
+   "inn": "Tenofovir Alafenamide",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "carbon activado": {
+   "es": "Carbón activado",
+   "inn": "Carbón Activado",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tirofiban": {
+   "es": "Tirofibán",
+   "inn": "Tirofiban",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ertugliflozina": {
+   "es": "Ertugliflozina",
+   "inn": "Ertugliflozin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "atropina": {
+   "es": "Atropina",
+   "inn": "Atropine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "lisina": {
+   "es": "Lisina",
+   "inn": "Lisina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "doxorrubicina": {
+   "es": "DOXORRUBICINA",
+   "inn": "Doxorubicin",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "acetazolamida": {
+   "es": "Acetazolamida",
+   "inn": "Acetazolamide",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "glucagon": {
+   "es": "Glucagón",
+   "inn": "Glucagon",
+   "via": "exact",
+   "score": 1.0
+  },
+  "didrogesterona": {
+   "es": "Didrogesterona",
+   "inn": "Dydrogesterone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "natalizumab": {
+   "es": "Natalizumab",
+   "inn": "Natalizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ziprasidona": {
+   "es": "Ziprasidona",
+   "inn": "Ziprasidone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "colchicina": {
+   "es": "Colchicina",
+   "inn": "Colchicine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tamoxifeno": {
+   "es": "TAMOXIFENO",
+   "inn": "Tamoxifen",
+   "via": "manual",
+   "score": 1.0
+  },
+  "racecadotrilo": {
+   "es": "Racecadotrilo",
+   "inn": "Racecadotril",
+   "via": "rule",
+   "score": 1.0
+  },
+  "etomidato": {
+   "es": "Etomidato",
+   "inn": "Etomidate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "omalizumab": {
+   "es": "Omalizumab",
+   "inn": "Omalizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "levomepromazina": {
+   "es": "LEVOMEPROMAZINA",
+   "inn": "Levomepromazine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vacuna antihepatitis b": {
+   "es": "VACUNA ANTIHEPATITIS B",
+   "inn": "Vacuna Anti Hepatitis B",
+   "via": "compact",
+   "score": 1.0
+  },
+  "antitrombina iii": {
+   "es": "ANTITROMBINA III",
+   "inn": "Antitrombina Iii",
+   "via": "exact",
+   "score": 1.0
+  },
+  "glipizida": {
+   "es": "GLIPIZIDA",
+   "inn": "Glipizida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acenocumarol": {
+   "es": "ACENOCUMAROL",
+   "inn": "Acenocoumarol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "danazol": {
+   "es": "DANAZOL",
+   "inn": "Danazol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "policosanol": {
+   "es": "POLICOSANOL",
+   "inn": "Policosanol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clioquinol": {
+   "es": "CLIOQUINOL",
+   "inn": "Clioquinol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acetato de zinc": {
+   "es": "ACETATO DE ZINC",
+   "inn": "Zinc",
+   "via": "manual",
+   "score": 1.0
+  },
+  "penicilina v": {
+   "es": "PENICILINA V",
+   "inn": "Penicillin V",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ketanserina": {
+   "es": "KETANSERINA",
+   "inn": "Ketanserin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "etambutol": {
+   "es": "ETAMBUTOL",
+   "inn": "Ethambutol",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "glicerol": {
+   "es": "Glicerol",
+   "inn": "Glycerol",
+   "via": "rule",
+   "score": 1.0
+  },
+  "oxibutinina": {
+   "es": "OXIBUTININA",
+   "inn": "Oxybutynin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tolnaftato": {
+   "es": "TOLNAFTATO",
+   "inn": "Tolnaftate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clonidina": {
+   "es": "Clonidina",
+   "inn": "Clonidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "thymus vulgaris": {
+   "es": "Thymus vulgaris",
+   "inn": "Thymus Vulgaris",
+   "via": "exact",
+   "score": 1.0
+  },
+  "echinacea angustifolia": {
+   "es": "Echinacea angustifolia",
+   "inn": "Echinacea Angustifolia",
+   "via": "exact",
+   "score": 1.0
+  },
+  "aesculus hippocastanum": {
+   "es": "Aesculus hippocastanum",
+   "inn": "Aesculus Hippocastanum",
+   "via": "exact",
+   "score": 1.0
+  },
+  "equisetum arvense": {
+   "es": "Equisetum arvense",
+   "inn": "Equisetum Arvense",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cynara scolymus": {
+   "es": "Cynara scolymus",
+   "inn": "Cynara Scolymus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "de zinc": {
+   "es": "de zinc",
+   "inn": "Zinc",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levobupivacaina": {
+   "es": "LEVOBUPIVACAINA",
+   "inn": "Levobupivacaine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "estreptoquinasa": {
+   "es": "ESTREPTOQUINASA",
+   "inn": "Estreptoquinasa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gatifloxacino": {
+   "es": "GATIFLOXACINO",
+   "inn": "Gatifloxacin",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "idarrubicina": {
+   "es": "IDARRUBICINA",
+   "inn": "Idarubicin",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "losartan potasico": {
+   "es": "LOSARTAN POTASICO",
+   "inn": "Losartan",
+   "via": "manual",
+   "score": 1.0
+  },
+  "naltrexona": {
+   "es": "Naltrexona",
+   "inn": "Naltrexone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "raltegravir": {
+   "es": "Raltegravir",
+   "inn": "Raltegravir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rosiglitazona": {
+   "es": "ROSIGLITAZONA",
+   "inn": "Rosiglitazone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sulfato de condroitin": {
+   "es": "SULFATO DE CONDROITIN",
+   "inn": "Condroitín",
+   "via": "rule",
+   "score": 1.0
+  },
+  "amorolfina": {
+   "es": "AMOROLFINA",
+   "inn": "Amorolfine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "espironolactona": {
+   "es": "Espironolactona",
+   "inn": "Spironolactone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "heparina": {
+   "es": "HEPARINA",
+   "inn": "Heparin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "imipramina": {
+   "es": "IMIPRAMINA",
+   "inn": "Imipramine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ipratropio": {
+   "es": "IPRATROPIO",
+   "inn": "Ipratropium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "loteprednol": {
+   "es": "LOTEPREDNOL",
+   "inn": "Loteprednol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "manitol": {
+   "es": "Manitol",
+   "inn": "Manitol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ropinirol": {
+   "es": "ROPINIROL",
+   "inn": "Ropinirole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "triptorelina": {
+   "es": "Triptorelina",
+   "inn": "Triptorelin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tropisetron": {
+   "es": "TROPISETRON",
+   "inn": "Tropisetron",
+   "via": "exact",
+   "score": 1.0
+  },
+  "aliskireno": {
+   "es": "ALISKIRENO",
+   "inn": "Aliskireno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "brinzolamida": {
+   "es": "BRINZOLAMIDA",
+   "inn": "Brinzolamide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "bromfeniramina": {
+   "es": "BROMFENIRAMINA",
+   "inn": "Bromfeniramina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ciclesonida": {
+   "es": "CICLESONIDA",
+   "inn": "Ciclesonide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dapoxetina": {
+   "es": "Dapoxetina",
+   "inn": "Dapoxetine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "dexibuprofeno": {
+   "es": "DEXIBUPROFENO",
+   "inn": "Dexibuprofeno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "factor de von willebrand": {
+   "es": "FACTOR DE VON WILLEBRAND",
+   "inn": "Factor Von Willebrand",
+   "via": "morph",
+   "score": 1.0
+  },
+  "gliclazida": {
+   "es": "GLICLAZIDA",
+   "inn": "Gliclazide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "isoflurano": {
+   "es": "ISOFLURANO",
+   "inn": "Isoflurane",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vitamina e": {
+   "es": "Vitamina E",
+   "inn": "Tocopherol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "topotecan": {
+   "es": "TOPOTECAN",
+   "inn": "Topotecan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "terconazol": {
+   "es": "Terconazol",
+   "inn": "Terconazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "moexipril": {
+   "es": "MOEXIPRIL",
+   "inn": "Moexipril",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tapentadol": {
+   "es": "TAPENTADOL",
+   "inn": "Tapentadol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vacuna antihepatitis a": {
+   "es": "VACUNA ANTIHEPATITIS A",
+   "inn": "Vacuna Anti Hepatitis A",
+   "via": "compact",
+   "score": 1.0
+  },
+  "de sodio": {
+   "es": "de sodio",
+   "inn": "Sodium",
+   "via": "morph",
+   "score": 1.0
+  },
+  "rupatadina": {
+   "es": "Rupatadina",
+   "inn": "Rupatadine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fludarabina": {
+   "es": "Fludarabina",
+   "inn": "Fludarabine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "adapalene": {
+   "es": "Adapalene",
+   "inn": "Adapalene",
+   "via": "exact",
+   "score": 1.0
+  },
+  "carnitina": {
+   "es": "Carnitina",
+   "inn": "Carnitina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "linagliptina": {
+   "es": "Linagliptina",
+   "inn": "Linagliptin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "colestiramina": {
+   "es": "Colestiramina",
+   "inn": "Colestiramina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pertuzumab": {
+   "es": "Pertuzumab",
+   "inn": "Pertuzumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "insulina": {
+   "es": "Insulina",
+   "inn": "Insulin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lixisenatida": {
+   "es": "Lixisenatida",
+   "inn": "Lixisenatida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "haemophilus influenzae": {
+   "es": "HAEMOPHILUS INFLUENZAE",
+   "inn": "Haemophilus Influenzae",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clavulanico": {
+   "es": "Clavulánico",
+   "inn": "Clavulanic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "pirfenidona": {
+   "es": "Pirfenidona",
+   "inn": "Pirfenidone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clomifeno": {
+   "es": "Clomifeno",
+   "inn": "Clomifeno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "testosterona": {
+   "es": "Testosterona",
+   "inn": "Testosterone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "golimumab": {
+   "es": "Golimumab",
+   "inn": "Golimumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rilpivirina": {
+   "es": "Rilpivirina",
+   "inn": "Rilpivirine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "deslorataina": {
+   "es": "Deslorataina",
+   "inn": "Desloratadine",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "ulipristal": {
+   "es": "Ulipristal",
+   "inn": "Ulipristal",
+   "via": "exact",
+   "score": 1.0
+  },
+  "linaclotida": {
+   "es": "Linaclotida",
+   "inn": "Linaclotida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mesilato de eribulina": {
+   "es": "Mesilato de eribulina",
+   "inn": "Eribulin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "minociclina": {
+   "es": "Minociclina",
+   "inn": "Minocycline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "baclofeno": {
+   "es": "Baclofeno",
+   "inn": "Baclofen",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "sameterol": {
+   "es": "Sameterol",
+   "inn": "Salmeterol",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "olodaterol": {
+   "es": "Olodaterol",
+   "inn": "Olodaterol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ibrutinib": {
+   "es": "Ibrutinib",
+   "inn": "Ibrutinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "citrato de potasio": {
+   "es": "Citrato de potasio",
+   "inn": "Citrato De Potasio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromuro de umeclidinio": {
+   "es": "Bromuro de umeclidinio",
+   "inn": "Bromuro Umeclidinio",
+   "via": "morph",
+   "score": 1.0
+  },
+  "fibrinogeno humano": {
+   "es": "Fibrinógeno humano",
+   "inn": "Fibrinógeno Humano",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de tiamina": {
+   "es": "Clorhidrato de tiamina",
+   "inn": "Thiamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "liraglutida": {
+   "es": "Liraglutida",
+   "inn": "Liraglutide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "empagliflozina": {
+   "es": "Empagliflozina",
+   "inn": "Empagliflozin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tiotropio": {
+   "es": "Tiotropio",
+   "inn": "Tiotropium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fosfato de tedizolid": {
+   "es": "Fosfato de tedizolid",
+   "inn": "Tedizolid",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nivolumab": {
+   "es": "Nivolumab",
+   "inn": "Nivolumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fosfato de potasio": {
+   "es": "Fosfato de Potasio",
+   "inn": "Potassium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "difluprednato": {
+   "es": "Difluprednato",
+   "inn": "Difluprednate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "enfuvirtida": {
+   "es": "Enfuvirtida",
+   "inn": "Enfuvirtida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "senosidos ab": {
+   "es": "Senósidos AB",
+   "inn": "Senósidos A B",
+   "via": "compact",
+   "score": 1.0
+  },
+  "nitrato de eberconazol": {
+   "es": "Nitrato de eberconazol",
+   "inn": "Eberconazol",
+   "via": "rule",
+   "score": 1.0
+  },
+  "remifentanilo": {
+   "es": "Remifentanilo",
+   "inn": "Remifentanil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ceftolozano": {
+   "es": "Ceftolozano",
+   "inn": "Ceftolozane",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nevirapina": {
+   "es": "Nevirapina",
+   "inn": "Nevirapine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorhidrato de apomorfina": {
+   "es": "CLORHIDRATO DE APOMORFINA",
+   "inn": "Apomorphine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "perindopril arginina": {
+   "es": "Perindopril arginina",
+   "inn": "Perindopril Arginine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "zonisamida": {
+   "es": "Zonisamida",
+   "inn": "Zonisamide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "elvitegravir": {
+   "es": "Elvitegravir",
+   "inn": "Elvitegravir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pilocarpina": {
+   "es": "PILOCARPINA",
+   "inn": "Pilocarpine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "hidroxizina": {
+   "es": "Hidroxizina",
+   "inn": "Hydroxyzine",
+   "via": "morph",
+   "score": 1.0
+  },
+  "lenvatinib": {
+   "es": "Lenvatinib",
+   "inn": "Lenvatinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "neostigmina": {
+   "es": "Neostigmina",
+   "inn": "Neostigmine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "selexipag": {
+   "es": "Selexipag",
+   "inn": "Selexipag",
+   "via": "exact",
+   "score": 1.0
+  },
+  "promestireno": {
+   "es": "Promestireno",
+   "inn": "Promestrieno",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "ocrelizumab": {
+   "es": "Ocrelizumab",
+   "inn": "Ocrelizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "atezolizumab": {
+   "es": "Atezolizumab",
+   "inn": "Atezolizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "docusato sodico": {
+   "es": "Docusato sódico",
+   "inn": "Docusate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "guselkumab": {
+   "es": "Guselkumab",
+   "inn": "Guselkumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vedolizumab": {
+   "es": "Vedolizumab",
+   "inn": "Vedolizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trimetazidina": {
+   "es": "Trimetazidina",
+   "inn": "Trimetazidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vigabatrina": {
+   "es": "Vigabatrina",
+   "inn": "Vigabatrin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tenofovir disoproxil fumarato": {
+   "es": "Tenofovir disoproxil fumarato",
+   "inn": "Tenofovir Disoproxil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "talidomida": {
+   "es": "TALIDOMIDA",
+   "inn": "Talidomida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "polidocanol": {
+   "es": "Polidocanol",
+   "inn": "Polidocanol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "levosulpirida": {
+   "es": "LEVOSULPIRIDA",
+   "inn": "Levosulpirida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "doravirina": {
+   "es": "Doravirina",
+   "inn": "Doravirine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "prazosina": {
+   "es": "Prazosina",
+   "inn": "Prazosin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "aprepitant": {
+   "es": "Aprepitant",
+   "inn": "Aprepitant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "daunorubicina": {
+   "es": "Daunorubicina",
+   "inn": "Daunorubicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clorzoxazona": {
+   "es": "Clorzoxazona",
+   "inn": "Chlorzoxazone",
+   "via": "morph",
+   "score": 1.0
+  },
+  "insulina lispro": {
+   "es": "Insulina lispro",
+   "inn": "Insulin Lispro",
+   "via": "fuzzy",
+   "score": 0.966
+  },
+  "entecavir": {
+   "es": "Entecavir",
+   "inn": "Entecavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "delafloxacino": {
+   "es": "Delafloxacino",
+   "inn": "Delafloxacino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "amivantamab": {
+   "es": "Amivantamab",
+   "inn": "Amivantamab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "anifrolumab": {
+   "es": "Anifrolumab",
+   "inn": "Anifrolumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bumetanida": {
+   "es": "Bumetanida",
+   "inn": "Bumetanide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "letermovir": {
+   "es": "Letermovir",
+   "inn": "Letermovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "norgestimato": {
+   "es": "Norgestimato",
+   "inn": "Norgestimate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "treprostinil": {
+   "es": "Treprostinil",
+   "inn": "Treprostinil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "amitriptilina": {
+   "es": "Amitriptilina",
+   "inn": "Amitriptyline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "bosutinib": {
+   "es": "Bosutinib",
+   "inn": "Bosutinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sacubitrilo": {
+   "es": "Sacubitrilo",
+   "inn": "Sacubitril",
+   "via": "rule",
+   "score": 1.0
+  },
+  "almagato": {
+   "es": "Almagato",
+   "inn": "Almagate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "furazolidona": {
+   "es": "Furazolidona",
+   "inn": "Furazolidone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "perfenazina": {
+   "es": "perfenazina",
+   "inn": "Perfenazina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cobamamida": {
+   "es": "Cobamamida",
+   "inn": "Cobanamida",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "tiocolchicosido": {
+   "es": "Tiocolchicósido",
+   "inn": "Tiocolchicósido",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ganirelix": {
+   "es": "Ganirelix",
+   "inn": "Ganirelix",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tetrizolina": {
+   "es": "tetrizolina",
+   "inn": "Tetryzoline",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "acido tioctico": {
+   "es": "Ácido tióctico",
+   "inn": "Ácido Tióctico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "prilocaina": {
+   "es": "PRILOCAINA",
+   "inn": "Prilocaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lenacapavir": {
+   "es": "Lenacapavir",
+   "inn": "Lenacapavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ciclopiroxolamina": {
+   "es": "CICLOPIROXOLAMINA",
+   "inn": "Ciclopirox Olamine",
+   "via": "fuzzy",
+   "score": 0.971
+  },
+  "propionato de clobetasol": {
+   "es": "PROPIONATO DE CLOBETASOL",
+   "inn": "Clobetasol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "miltefosina": {
+   "es": "Miltefosina",
+   "inn": "Miltefosine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "bacitracina": {
+   "es": "bacitracina",
+   "inn": "Bacitracin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "iloprost": {
+   "es": "Iloprost",
+   "inn": "Iloprost",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vareniclina": {
+   "es": "Vareniclina",
+   "inn": "Varenicline",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sulpirida": {
+   "es": "Sulpirida",
+   "inn": "Sulpirida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "paromomicina": {
+   "es": "PAROMOMICINA",
+   "inn": "Paromomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "esomeprazole": {
+   "es": "ESOMEPRAZOLE",
+   "inn": "Esomeprazole",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nomegestrol": {
+   "es": "Nomegestrol",
+   "inn": "Nomegestrol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dexbromfeniramina": {
+   "es": "DEXBROMFENIRAMINA",
+   "inn": "Dexbrompheniramine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "citrato de sodio": {
+   "es": "CITRATO DE SODIO",
+   "inn": "Citrato De Sodio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diflorasona": {
+   "es": "DIFLORASONA",
+   "inn": "Diflorasona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "flutrimazol": {
+   "es": "FLUTRIMAZOL",
+   "inn": "Flutrimazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "candesartan cilexetilo": {
+   "es": "CANDESARTAN CILEXETILO",
+   "inn": "Candesartan Cilexetil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "inmunoglobulina g humana": {
+   "es": "INMUNOGLOBULINA G HUMANA",
+   "inn": "Inmunoglobulina G Humana",
+   "via": "exact",
+   "score": 1.0
+  },
+  "valdecoxib": {
+   "es": "VALDECOXIB",
+   "inn": "Valdecoxib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lactato gluconato de calcio": {
+   "es": "LACTATO GLUCONATO DE CALCIO",
+   "inn": "Calcium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lornoxicam": {
+   "es": "LORNOXICAM",
+   "inn": "Lornoxicam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tegafur": {
+   "es": "TEGAFUR",
+   "inn": "Tegafur",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dopamina": {
+   "es": "DOPAMINA",
+   "inn": "Dopamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fondaparinux sodico": {
+   "es": "FONDAPARINUX SODICO",
+   "inn": "Fondaparinux",
+   "via": "rule",
+   "score": 1.0
+  },
+  "codeina": {
+   "es": "CODEINA",
+   "inn": "Codeine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "rofecoxib": {
+   "es": "ROFECOXIB",
+   "inn": "Rofecoxib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vacuna antirrabica": {
+   "es": "VACUNA ANTIRRABICA",
+   "inn": "Vacuna Anti Rabia",
+   "via": "fuzzy",
+   "score": 0.914
+  },
+  "efedrina": {
+   "es": "EFEDRINA",
+   "inn": "Ephedrine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "metionina": {
+   "es": "METIONINA",
+   "inn": "Metionina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "omeprazol sodico": {
+   "es": "OMEPRAZOL SODICO",
+   "inn": "Omeprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "doxilamina": {
+   "es": "DOXILAMINA",
+   "inn": "Doxylamine",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "megestrol": {
+   "es": "MEGESTROL",
+   "inn": "Megestrol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gonadotrofina corionica": {
+   "es": "GONADOTROFINA CORIONICA",
+   "inn": "Gonadotropina Coriónica",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "norgestrel": {
+   "es": "Norgéstrel",
+   "inn": "Norgestrel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfato de gentamicina": {
+   "es": "SULFATO DE GENTAMICINA",
+   "inn": "Gentamicin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "interferon alfa": {
+   "es": "INTERFERON ALFA",
+   "inn": "Interferon Alfa-2B",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "zinc": {
+   "es": "ZINC",
+   "inn": "Zinc",
+   "via": "exact",
+   "score": 1.0
+  },
+  "xilometazolina": {
+   "es": "XILOMETAZOLINA",
+   "inn": "Xylometazoline",
+   "via": "fuzzy",
+   "score": 0.963
+  },
+  "ticarcilina": {
+   "es": "Ticarcilina",
+   "inn": "Ticarcillin",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "clobazam": {
+   "es": "Clobazam",
+   "inn": "Clobazam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "procaina": {
+   "es": "PROCAINA",
+   "inn": "Procaine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clorhidrato de bromhexina": {
+   "es": "CLORHIDRATO DE BROMHEXINA",
+   "inn": "Bromhexine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "benzoato de estradiol": {
+   "es": "BENZOATO DE ESTRADIOL",
+   "inn": "Estradiol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acido azelaico": {
+   "es": "ACIDO AZELAICO",
+   "inn": "Ácido Azelaico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "meclozina": {
+   "es": "MECLOZINA",
+   "inn": "Meclozine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pamidronato sodico": {
+   "es": "PAMIDRONATO SODICO",
+   "inn": "Pamidronate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "factor viii": {
+   "es": "FACTOR VIII",
+   "inn": "Factor Viii",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fluvastatina": {
+   "es": "FLUVASTATINA",
+   "inn": "Fluvastatin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "levamisol": {
+   "es": "Levamisol",
+   "inn": "Levamisole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tipranavir": {
+   "es": "TIPRANAVIR",
+   "inn": "Tipranavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fosamprenavir": {
+   "es": "Fosamprenavir",
+   "inn": "Fosamprenavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oxerutinas": {
+   "es": "Oxerutinas",
+   "inn": "Oxerutins",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "ergometrina": {
+   "es": "Ergometrina",
+   "inn": "Ergometrine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "darifenacina": {
+   "es": "Darifenacina",
+   "inn": "Darifenacin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clorhidrato de protamina": {
+   "es": "Clorhidrato de Protamina",
+   "inn": "Protamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "hidroxiprogesterona": {
+   "es": "hidroxiprogesterona",
+   "inn": "Hydroxyprogesterone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "espiramicina": {
+   "es": "Espiramicina",
+   "inn": "Espiramicina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metamizol magnesico": {
+   "es": "Metamizol Magnésico",
+   "inn": "Metamizole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorambucilo": {
+   "es": "Clorambucilo",
+   "inn": "Clorambucilo",
+   "via": "exact",
+   "score": 1.0
+  },
+  "prasterona": {
+   "es": "Prasterona",
+   "inn": "Prasterona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "salicilato de metilo": {
+   "es": "salicilato de metilo",
+   "inn": "Salicilato De Metilo",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metildopa": {
+   "es": "Metildopa",
+   "inn": "Metildopa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromhidrato de dextrometorfano": {
+   "es": "Bromhidrato de dextrometorfano",
+   "inn": "Dextromethorphan",
+   "via": "manual",
+   "score": 1.0
+  },
+  "crateagus oxyacantha": {
+   "es": "Crateagus oxyacantha",
+   "inn": "Crataegus Oxyacantha",
+   "via": "fuzzy",
+   "score": 0.95
+  },
+  "policresuleno": {
+   "es": "Policresuleno",
+   "inn": "Policresulen",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "idocaina": {
+   "es": "Idocaina",
+   "inn": "Lidocaine",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "mesterolona": {
+   "es": "Mesterolona",
+   "inn": "Mesterolona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gestorona": {
+   "es": "Gestorona",
+   "inn": "Gestonorone",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "inosina": {
+   "es": "Inosina",
+   "inn": "Inosine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pirantel": {
+   "es": "Pirantel",
+   "inn": "Pirantel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nonoxinol": {
+   "es": "nonoxinol",
+   "inn": "Nonoxinol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fluorometolona": {
+   "es": "Fluorometolona",
+   "inn": "Fluorometolona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pipotiazina": {
+   "es": "Pipotiazina",
+   "inn": "Pipotiazine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "disulfiram": {
+   "es": "Disulfiram",
+   "inn": "Disulfiram",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vitaminas a": {
+   "es": "Vitaminas A",
+   "inn": "Vitamin A",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "sotalol": {
+   "es": "Sotalol",
+   "inn": "Sotalol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "meglumina": {
+   "es": "Meglumina",
+   "inn": "Meglumina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "equisetumm arvense l": {
+   "es": "Equisetumm arvense L",
+   "inn": "Equisetum Arvense",
+   "via": "fuzzy",
+   "score": 0.919
+  },
+  "salvia officinalis": {
+   "es": "salvia officinalis",
+   "inn": "Salvia Officinalis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "eleutheroccus senticosus": {
+   "es": "Eleutheroccus senticosus",
+   "inn": "Eleutherococcus Senticosus",
+   "via": "fuzzy",
+   "score": 0.958
+  },
+  "urtica dioica": {
+   "es": "Urtica dioica",
+   "inn": "Urtica Dioica",
+   "via": "exact",
+   "score": 1.0
+  },
+  "aescukus hippocastanum": {
+   "es": "Aescukus hippocastanum",
+   "inn": "Aesculus Hippocastanum",
+   "via": "fuzzy",
+   "score": 0.955
+  },
+  "achillea millefolium": {
+   "es": "Achillea millefolium",
+   "inn": "Achillea Millefolium",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lepidium latifolium": {
+   "es": "Lepidium latifolium",
+   "inn": "Lepidium Latifolium",
+   "via": "exact",
+   "score": 1.0
+  },
+  "achilea millefolium l": {
+   "es": "Achilea millefolium L",
+   "inn": "Achillea Millefolium",
+   "via": "fuzzy",
+   "score": 0.927
+  },
+  "drosera rotundifolia": {
+   "es": "Drosera rotundifolia",
+   "inn": "Drosera Rotundifolia",
+   "via": "exact",
+   "score": 1.0
+  },
+  "glycine max": {
+   "es": "Glycine max",
+   "inn": "Glycine Max",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gentiana lutea": {
+   "es": "Gentiana lutea",
+   "inn": "Gentiana Lutea",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hamamelis virginiana": {
+   "es": "Hamamelis virginiana",
+   "inn": "Hamamelis Virginiana",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oxiconazol": {
+   "es": "Oxiconazol",
+   "inn": "Oxiconazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tartrato de zolpidem": {
+   "es": "Tartrato de zolpidem",
+   "inn": "Zolpidem",
+   "via": "manual",
+   "score": 1.0
+  },
+  "zolpiderm": {
+   "es": "Zolpiderm",
+   "inn": "Zolpidem",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "arcotostaphylus uva ursi": {
+   "es": "Arcotostaphylus uva ursi",
+   "inn": "Arctostaphylos Uva Ursi",
+   "via": "fuzzy",
+   "score": 0.936
+  },
+  "acetilsalicilato de lisina": {
+   "es": "Acetilsalicilato de lisina",
+   "inn": "Acetilsalicilato De Lisina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "melissa officinalia": {
+   "es": "Melissa officinalia",
+   "inn": "Melissa Officinalis",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "mupirocaina": {
+   "es": "Mupirocaina",
+   "inn": "Mupirocin",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "tetanos": {
+   "es": "tétanos",
+   "inn": "Tétanos",
+   "via": "exact",
+   "score": 1.0
+  },
+  "carbmazepina": {
+   "es": "Carbmazepina",
+   "inn": "Carbamazepine",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "alfacalcidol": {
+   "es": "Alfacalcidol",
+   "inn": "Alfacalcidol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "zopiclona": {
+   "es": "Zopiclona",
+   "inn": "Zopiclone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "vitamina c": {
+   "es": "Vitamina C",
+   "inn": "Vitamina C",
+   "via": "exact",
+   "score": 1.0
+  },
+  "beractant": {
+   "es": "Beractant",
+   "inn": "Beractant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "riluzol": {
+   "es": "Riluzol",
+   "inn": "Riluzole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "prazicuantel": {
+   "es": "Prazicuantel",
+   "inn": "Praziquantel",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "lodoxamida": {
+   "es": "Lodoxamida",
+   "inn": "Lodoxamide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "hidrotalcita": {
+   "es": "Hidrotalcita",
+   "inn": "Hydrotalcite",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "norestisterona": {
+   "es": "Norestisterona",
+   "inn": "Noretisterona",
+   "via": "fuzzy",
+   "score": 0.963
+  },
+  "saccharomyces boulardii": {
+   "es": "Saccharomyces Boulardii",
+   "inn": "Saccharomyces Boulardii",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rifamicina": {
+   "es": "Rifamicina",
+   "inn": "Rifamicina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "phosphorus": {
+   "es": "Phosphorus",
+   "inn": "Phosphorus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dimetideno": {
+   "es": "Dimetideno",
+   "inn": "Dimetindene",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "aceite de ricino": {
+   "es": "Aceite de ricino",
+   "inn": "Aceite De Ricino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cimetidina": {
+   "es": "Cimetidina",
+   "inn": "Cimetidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fondeparinux sodico": {
+   "es": "Fondeparinux Sódico",
+   "inn": "Fondaparinux",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "lactato milrinona": {
+   "es": "Lactato milrinona",
+   "inn": "Milrinona",
+   "via": "rule",
+   "score": 1.0
+  },
+  "alanina": {
+   "es": "Alanina",
+   "inn": "Alanina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "glucosmina": {
+   "es": "Glucosmina",
+   "inn": "Glucosamine",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "condrotin": {
+   "es": "Condrotin",
+   "inn": "Condroitín",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "fosfato de sodio": {
+   "es": "fosfato de sodio",
+   "inn": "Sodium",
+   "via": "morph",
+   "score": 1.0
+  },
+  "dolasetron": {
+   "es": "Dolasetrón",
+   "inn": "Dolasetron",
+   "via": "exact",
+   "score": 1.0
+  },
+  "litraconazol": {
+   "es": "Litraconazol",
+   "inn": "Itraconazole",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "calcitrol": {
+   "es": "Calcitrol",
+   "inn": "Calcitriol",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "quinagolida": {
+   "es": "Quinagolida",
+   "inn": "Quinagolida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "maleato de timolol": {
+   "es": "Maleato de timolol",
+   "inn": "Timolol",
+   "via": "rule",
+   "score": 1.0
+  },
+  "basiliximab": {
+   "es": "Basiliximab",
+   "inn": "Basiliximab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fumarato feroso": {
+   "es": "Fumarato feroso",
+   "inn": "Ferrous",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "triflusal": {
+   "es": "Triflusal",
+   "inn": "Triflusal",
+   "via": "exact",
+   "score": 1.0
+  },
+  "zanamivir": {
+   "es": "Zanamivir",
+   "inn": "Zanamivir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nilutamida": {
+   "es": "Nilutamida",
+   "inn": "Nilutamide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "famciclovir": {
+   "es": "Famciclovir",
+   "inn": "Famciclovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "atropa belladonna": {
+   "es": "Atropa belladonna",
+   "inn": "Atropa Belladonna",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hyoscyamus niger": {
+   "es": "Hyoscyamus niger",
+   "inn": "Hyoscyamus Niger",
+   "via": "exact",
+   "score": 1.0
+  },
+  "buserelina": {
+   "es": "Buserelina",
+   "inn": "Buserelin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "erdosteina": {
+   "es": "Erdosteina",
+   "inn": "Erdosteine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nateglinida": {
+   "es": "Nateglinida",
+   "inn": "Nateglinide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "desflurano": {
+   "es": "Desflurano",
+   "inn": "Desflurane",
+   "via": "rule",
+   "score": 1.0
+  },
+  "acido mefenamico": {
+   "es": "Acido mefenámico",
+   "inn": "Ácido Mefenámico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ceftazidina": {
+   "es": "Ceftazidina",
+   "inn": "Ceftazidime",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "tacalcitol": {
+   "es": "Tacalcitol",
+   "inn": "Tacalcitol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acetato de sodio": {
+   "es": "Acetato de sodio",
+   "inn": "Acetato De Sodio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "gluconato de sodio": {
+   "es": "Gluconato de sodio",
+   "inn": "Sodium",
+   "via": "morph",
+   "score": 1.0
+  },
+  "sodiol": {
+   "es": "sodiol",
+   "inn": "Sodium",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "chimaphila umbellata": {
+   "es": "Chimaphila umbellata",
+   "inn": "Chimaphila Umbellata",
+   "via": "exact",
+   "score": 1.0
+  },
+  "atropa belladona": {
+   "es": "Atropa belladona",
+   "inn": "Atropa Belladona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "equisetum hyemale": {
+   "es": "Equisetum hyemale",
+   "inn": "Equisetum Hyemale",
+   "via": "exact",
+   "score": 1.0
+  },
+  "silybum marianum": {
+   "es": "Silybum marianum",
+   "inn": "Silybum Marianum",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trometamina": {
+   "es": "Trometamina",
+   "inn": "Tromethamine",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "vinca minor": {
+   "es": "Vinca minor",
+   "inn": "Vinca Minor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "estrogenos congujados": {
+   "es": "Estrógenos congujados",
+   "inn": "Estrogenos Conjugados",
+   "via": "fuzzy",
+   "score": 0.905
+  },
+  "somatostatina": {
+   "es": "Somatostatina",
+   "inn": "Somatostatina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "matricaria recutita": {
+   "es": "Matricaria recutita",
+   "inn": "Matricaria Recutita",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido aminolevulinico": {
+   "es": "ACIDO AMINOLEVULINICO",
+   "inn": "Ácido 5 Aminolevulínico",
+   "via": "fuzzy",
+   "score": 0.933
+  },
+  "aliskiren": {
+   "es": "ALISKIREN",
+   "inn": "Aliskiren",
+   "via": "exact",
+   "score": 1.0
+  },
+  "amilorida": {
+   "es": "AMILORIDA",
+   "inn": "Amilorida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de lidocaina": {
+   "es": "CLORHIDRATO DE LIDOCAINA",
+   "inn": "Lidocaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "diclorhidrato de cetirizina": {
+   "es": "DICLORHIDRATO DE CETIRIZINA",
+   "inn": "Cetirizine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "dihidroergocristina": {
+   "es": "DIHIDROERGOCRISTINA",
+   "inn": "Dihidroergocristina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fosfato sodico de betametasona": {
+   "es": "FOSFATO SÓDICO DE BETAMETASONA",
+   "inn": "Betamethasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "etosuximida": {
+   "es": "ETOSUXIMIDA",
+   "inn": "Etosuximida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "poliestireno sulfonato calcico": {
+   "es": "POLIESTIRENO SULFONATO CALCICO",
+   "inn": "Poliestireno Sulfonato",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ranibizumab": {
+   "es": "RANIBIZUMAB",
+   "inn": "Ranibizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "risedronato sodico": {
+   "es": "RISEDRONATO SÓDICO",
+   "inn": "Risedronate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sertindol": {
+   "es": "SERTINDOL",
+   "inn": "Sertindole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "acetato de metilprednisolona": {
+   "es": "ACETATO DE METILPREDNISOLONA",
+   "inn": "Methylprednisolone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorhidrato de irinotecan": {
+   "es": "CLORHIDRATO DE IRINOTECAN",
+   "inn": "Irinotecan",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clorhidrato de metil aminolevulinato": {
+   "es": "CLORHIDRATO DE METIL AMINOLEVULINATO",
+   "inn": "Methyl Aminolevulinate",
+   "via": "fuzzy",
+   "score": 0.955
+  },
+  "colesevelam": {
+   "es": "COLESEVELAM",
+   "inn": "Colesevelam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dabigatran": {
+   "es": "DABIGATRÁN",
+   "inn": "Dabigatran",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dapsona": {
+   "es": "DAPSONA",
+   "inn": "Dapsona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diapsona": {
+   "es": "DIAPSONA",
+   "inn": "Dapsone",
+   "via": "fuzzy",
+   "score": 0.933
+  },
+  "etravirina": {
+   "es": "ETRAVIRINA",
+   "inn": "Etravirine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pramoxina": {
+   "es": "PRAMOXINA",
+   "inn": "Pramoxine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "benzo caina": {
+   "es": "BENZO CAINA",
+   "inn": "Benzocaine",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "hidromorfona": {
+   "es": "HIDROMORFONA",
+   "inn": "Hydromorphone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "isosorbida": {
+   "es": "ISOSORBIDA",
+   "inn": "Isosorbide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lapatinib": {
+   "es": "LAPATINIB",
+   "inn": "Lapatinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "maleato de feniramina": {
+   "es": "MALEATO DE FENIRAMINA",
+   "inn": "Pheniramine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "maleato de trimebutina": {
+   "es": "MALEATO DE TRIMEBUTINA",
+   "inn": "Trimebutine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "maraviroc": {
+   "es": "MARAVIROC",
+   "inn": "Maraviroc",
+   "via": "exact",
+   "score": 1.0
+  },
+  "metilnaltrexona": {
+   "es": "METILNALTREXONA",
+   "inn": "Metilnaltrexona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "niacina": {
+   "es": "NIACINA",
+   "inn": "Niacin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "laropiprant": {
+   "es": "LAROPIPRANT",
+   "inn": "Laropiprant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nilotinib": {
+   "es": "NILOTINIB",
+   "inn": "Nilotinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "paliperdona": {
+   "es": "PALIPERDONA",
+   "inn": "Paliperidone",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "sulfato de abacavir": {
+   "es": "SULFATO DE ABACAVIR",
+   "inn": "Abacavir",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tiopental sodico": {
+   "es": "TIOPENTAL SODICO",
+   "inn": "Tiopental",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vinpocetina": {
+   "es": "VINPOCETINA",
+   "inn": "Vinpocetina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "abatacept": {
+   "es": "ABATACEPT",
+   "inn": "Abatacept",
+   "via": "exact",
+   "score": 1.0
+  },
+  "anidulafungina": {
+   "es": "ANIDULAFUNGINA",
+   "inn": "Anidulafungin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "besilato de amlodipino": {
+   "es": "BESILATO DE AMLODIPINO",
+   "inn": "Amlodipine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ciclopentolato": {
+   "es": "CICLOPENTOLATO",
+   "inn": "Ciclopentolato",
+   "via": "exact",
+   "score": 1.0
+  },
+  "degarelix": {
+   "es": "DEGARELIX",
+   "inn": "Degarelix",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pridinol": {
+   "es": "PRIDINOL",
+   "inn": "Pridinol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "doripenem": {
+   "es": "DORIPENEM",
+   "inn": "Doripenem",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dronedarona": {
+   "es": "DRONEDARONA",
+   "inn": "Dronedarona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fluorometalona": {
+   "es": "FLUOROMETALONA",
+   "inn": "Fluorometolona",
+   "via": "fuzzy",
+   "score": 0.929
+  },
+  "gelatina": {
+   "es": "GELATINA",
+   "inn": "Gelatin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "hidroxietl almidon": {
+   "es": "HIDROXIETL ALMIDON",
+   "inn": "Hidroxietilalmidón",
+   "via": "fuzzy",
+   "score": 0.919
+  },
+  "vidagliptina": {
+   "es": "VIDAGLIPTINA",
+   "inn": "Vildagliptin",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "retapamulina": {
+   "es": "RETAPAMULINA",
+   "inn": "Retapamulin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "rotigotina": {
+   "es": "ROTIGOTINA",
+   "inn": "Rotigotine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "saxagliptina": {
+   "es": "SAXAGLIPTINA",
+   "inn": "Saxagliptin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sulfato de morfina": {
+   "es": "SULFATO DE MORFINA",
+   "inn": "Morphine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tocilizumab": {
+   "es": "TOCILIZUMAB",
+   "inn": "Tocilizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trabectedina": {
+   "es": "TRABECTEDINA",
+   "inn": "Trabectedin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "agomelatina": {
+   "es": "AGOMELATINA",
+   "inn": "Agomelatine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nitrendipino": {
+   "es": "NITRENDIPINO",
+   "inn": "Nitrendipino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "halobetasol": {
+   "es": "HALOBETASOL",
+   "inn": "Halobetasol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "interferon beta 1a": {
+   "es": "INTERFERON BETA 1a",
+   "inn": "Interferon Beta 1A",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lactato de magnesio": {
+   "es": "LACTATO DE MAGNESIO",
+   "inn": "Magnesium",
+   "via": "manual",
+   "score": 1.0
+  },
+  "prasugrel": {
+   "es": "PRASUGREL",
+   "inn": "Prasugrel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tanato de gelatina": {
+   "es": "TANATO DE GELATINA",
+   "inn": "Tanato De Gelatina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "temsirolimus": {
+   "es": "TEMSIROLIMUS",
+   "inn": "Temsirolimus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tetracaina": {
+   "es": "TETRACAINA",
+   "inn": "Tetracaine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "vorinostat": {
+   "es": "VORINOSTAT",
+   "inn": "Vorinostat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "panitumumab": {
+   "es": "Panitumumab",
+   "inn": "Panitumumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "darbopoetina alfa": {
+   "es": "Darbopoetina alfa",
+   "inn": "Darbepoetin Alfa",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "azilsartan medoxomilo": {
+   "es": "Azilsartán medoxomilo",
+   "inn": "Azilsartán Medoxomilo",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pitavastatina": {
+   "es": "Pitavastatina",
+   "inn": "Pitavastatin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "doxercalciferol": {
+   "es": "Doxercalciferol",
+   "inn": "Doxercalciferol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "epinestina": {
+   "es": "Epinestina",
+   "inn": "Epinastine",
+   "via": "morph",
+   "score": 1.0
+  },
+  "etrogenos conjugados": {
+   "es": "Etrógenos conjugados",
+   "inn": "Estrogenos Conjugados",
+   "via": "fuzzy",
+   "score": 0.976
+  },
+  "boceprevir": {
+   "es": "Boceprevir",
+   "inn": "Boceprevir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bclometasona": {
+   "es": "Bclometasona",
+   "inn": "Beclometasone",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "adfapaleno": {
+   "es": "Adfapaleno",
+   "inn": "Adapalene",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "prucaloprida": {
+   "es": "Prucaloprida",
+   "inn": "Prucaloprida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dexpantenol": {
+   "es": "Dexpantenol",
+   "inn": "Dexpantenol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "netilmicina": {
+   "es": "netilmicina",
+   "inn": "Netilmicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "diacerina": {
+   "es": "Diacerina",
+   "inn": "Diacereína",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "moroctocog alfa": {
+   "es": "Moroctocog alfa",
+   "inn": "Moroctocog Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "certolizumab pegol": {
+   "es": "Certolizumab pegol",
+   "inn": "Certolizumab Pegol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hidroxietilalmidon": {
+   "es": "Hidroxietilalmidon",
+   "inn": "Hidroxietilalmidón",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lutropina alfa": {
+   "es": "Lutropina alfa",
+   "inn": "Lutropina Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "roflumilast": {
+   "es": "Roflumilast",
+   "inn": "Roflumilast",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lemotrigina": {
+   "es": "Lemotrigina",
+   "inn": "Lamotrigine",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "flumazaenil": {
+   "es": "Flumazaenil",
+   "inn": "Flumazenil",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "bectometasona": {
+   "es": "Bectometasona",
+   "inn": "Beclometasone",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "brimatoprost": {
+   "es": "Brimatoprost",
+   "inn": "Bimatoprost",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "monetasona": {
+   "es": "Monetasona",
+   "inn": "Mometasone",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "agiraterona": {
+   "es": "Agiraterona",
+   "inn": "Abiraterone",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "corifolitropina alfa": {
+   "es": "Corifolitropina alfa",
+   "inn": "Corifolitropina Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ulobetasol": {
+   "es": "Ulobetasol",
+   "inn": "Clobetasol",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "alantoina": {
+   "es": "Alantoína",
+   "inn": "Alantoína",
+   "via": "exact",
+   "score": 1.0
+  },
+  "belatacept": {
+   "es": "Belatacept",
+   "inn": "Belatacept",
+   "via": "exact",
+   "score": 1.0
+  },
+  "besifloxacina": {
+   "es": "Besifloxacina",
+   "inn": "Besifloxacin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ofatunumab": {
+   "es": "Ofatunumab",
+   "inn": "Ofatumumab",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "interferon beta 1 a": {
+   "es": "Interferon beta 1-a",
+   "inn": "Interferon Beta 1A",
+   "via": "compact",
+   "score": 1.0
+  },
+  "canakinumab": {
+   "es": "Canakinumab",
+   "inn": "Canakinumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "polimixina": {
+   "es": "Polimixina",
+   "inn": "Polimixina B",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "vinflunina": {
+   "es": "Vinflunina",
+   "inn": "Vinflunine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "ambrisentan": {
+   "es": "Ambrisentán",
+   "inn": "Ambrisentan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bazedoxiteno": {
+   "es": "Bazedoxiteno",
+   "inn": "Bazedoxifene",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "afatinib": {
+   "es": "Afatinib",
+   "inn": "Afatinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "alcaftadina": {
+   "es": "Alcaftadina",
+   "inn": "Alcaftadine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "trastuzumab emtansina": {
+   "es": "Trastuzumab emtansina",
+   "inn": "Trastuzumab Emtansine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "iloperidona": {
+   "es": "Iloperidona",
+   "inn": "Iloperidone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "salmaterol": {
+   "es": "Salmaterol",
+   "inn": "Salmeterol",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "lauromacrogol 400": {
+   "es": "Lauromacrogol 400",
+   "inn": "Lauromacrogol 400",
+   "via": "exact",
+   "score": 1.0
+  },
+  "asenapina": {
+   "es": "Asenapina",
+   "inn": "Asenapine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "zafirlukast": {
+   "es": "Zafirlukast",
+   "inn": "Zafirlukast",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ceftarolina fosamilo": {
+   "es": "Ceftarolina fosamilo",
+   "inn": "Ceftarolina Fosamilo",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromfenaco": {
+   "es": "Bromfenaco",
+   "inn": "Bromfenac",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "tafluprost": {
+   "es": "Tafluprost",
+   "inn": "Tafluprost",
+   "via": "exact",
+   "score": 1.0
+  },
+  "perampanel": {
+   "es": "Perampanel",
+   "inn": "Perampanel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "citrato de sildenafil": {
+   "es": "Citrato de sildenafil",
+   "inn": "Sildenafil",
+   "via": "manual",
+   "score": 1.0
+  },
+  "megaldrato": {
+   "es": "Megaldrato",
+   "inn": "Magaldrato",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "sulfato de vincristina": {
+   "es": "Sulfato de Vincristina",
+   "inn": "Vincristine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pridoxina": {
+   "es": "Pridoxina",
+   "inn": "Pyridoxine",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "clorhidrato de fenilefrina": {
+   "es": "Clorhidrato de Fenilefrina",
+   "inn": "Phenylephrine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "benzafibrato": {
+   "es": "Benzafibrato",
+   "inn": "Bezafibrate",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "interferon beta 1b": {
+   "es": "Interferón beta-1b",
+   "inn": "Interferon Beta-1B",
+   "via": "exact",
+   "score": 1.0
+  },
+  "biperideno": {
+   "es": "Biperideno",
+   "inn": "Biperideno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dicloverina": {
+   "es": "Dicloverina",
+   "inn": "Dicycloverine",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "dapaglifozina": {
+   "es": "Dapaglifozina",
+   "inn": "Dapagliflozin",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "vilazodona": {
+   "es": "Vilazodona",
+   "inn": "Vilazodone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "oxido nitroso": {
+   "es": "Óxido Nitroso",
+   "inn": "Óxido Nitroso",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diclofenaco potasico": {
+   "es": "Diclofenaco potásico",
+   "inn": "Diclofenac",
+   "via": "manual",
+   "score": 1.0
+  },
+  "diclorhidrato de levocetirizina": {
+   "es": "Diclorhidrato de Levocetirizina",
+   "inn": "Levocetirizine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ambitasvir": {
+   "es": "Ambitasvir",
+   "inn": "Ombitasvir",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "paritaprevir": {
+   "es": "Paritaprevir",
+   "inn": "Paritaprevir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dasabuvir": {
+   "es": "Dasabuvir",
+   "inn": "Dasabuvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dulaglutida": {
+   "es": "Dulaglutida",
+   "inn": "Dulaglutide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "ramucirumab": {
+   "es": "Ramucirumab",
+   "inn": "Ramucirumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfato de orciprenalina": {
+   "es": "Sulfato de Orciprenalina",
+   "inn": "Orciprenaline",
+   "via": "rule",
+   "score": 1.0
+  },
+  "daclatasvir": {
+   "es": "Daclatasvir",
+   "inn": "Daclatasvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "imipenenm": {
+   "es": "Imipenenm",
+   "inn": "Imipenem",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "fidaxomicina": {
+   "es": "Fidaxomicina",
+   "inn": "Fidaxomicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "secukinumab": {
+   "es": "Secukinumab",
+   "inn": "Secukinumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "amifostina": {
+   "es": "Amifostina",
+   "inn": "Amifostine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "armodafinilo": {
+   "es": "Armodafinilo",
+   "inn": "Armodafinil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vardenafil": {
+   "es": "Vardenafil",
+   "inn": "Vardenafil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "deametasona": {
+   "es": "Deametasona",
+   "inn": "Dexamethasone",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "turoctocog alfa": {
+   "es": "Turoctocog alfa",
+   "inn": "Turoctocog Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dioxido de carbono": {
+   "es": "Dióxido de carbono",
+   "inn": "Dióxido De Carbono",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ledipasvir": {
+   "es": "Ledipasvir",
+   "inn": "Ledipasvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "propionato de fluticasona": {
+   "es": "Propionato de Fluticasona",
+   "inn": "Fluticasone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "graniaetron": {
+   "es": "Graniaetrón",
+   "inn": "Granisetron",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "clorhidrato de epirubicina": {
+   "es": "Clorhidrato de epirubicina",
+   "inn": "Epirubicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "airocumab": {
+   "es": "Airocumab",
+   "inn": "Alirocumab",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "rilpivarina": {
+   "es": "Rilpivarina",
+   "inn": "Rilpivirine",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "lipegfilgastrim": {
+   "es": "Lipegfilgastrim",
+   "inn": "Lipegfilgrastim",
+   "via": "fuzzy",
+   "score": 0.933
+  },
+  "evolocumab": {
+   "es": "Evolocumab",
+   "inn": "Evolocumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pemobrolizumab": {
+   "es": "Pemobrolizumab",
+   "inn": "Pembrolizumab",
+   "via": "fuzzy",
+   "score": 0.963
+  },
+  "amfotericina b liposomal": {
+   "es": "Amfotericina b liposomal",
+   "inn": "Amphotericin B Liposomal",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "examestano": {
+   "es": "Examestano",
+   "inn": "Exemestane",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "grazoprevir": {
+   "es": "Grazoprevir",
+   "inn": "Grazoprevir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "elbasvir": {
+   "es": "Elbasvir",
+   "inn": "Elbasvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cspofungina": {
+   "es": "Cspofungina",
+   "inn": "Caspofungin",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "mesilato de dihidroergocristina": {
+   "es": "Mesilato de dihidroergocristina",
+   "inn": "Dihidroergocristina",
+   "via": "rule",
+   "score": 1.0
+  },
+  "idarucizumab": {
+   "es": "Idarucizumab",
+   "inn": "Idarucizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fenobarbital": {
+   "es": "Fenobarbital",
+   "inn": "Fenobarbital",
+   "via": "exact",
+   "score": 1.0
+  },
+  "necitumumab": {
+   "es": "Necitumumab",
+   "inn": "Necitumumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tartrato de brimonidina": {
+   "es": "Tartrato de Brimonidina",
+   "inn": "Brimonidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "bazedoxifeno": {
+   "es": "Bazedoxifeno",
+   "inn": "Bazedoxifeno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "benznidazol": {
+   "es": "Benznidazol",
+   "inn": "Benznidazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nonacog gamma": {
+   "es": "Nonacog gamma",
+   "inn": "Nonacog Gamma",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nefopam": {
+   "es": "Nefopam",
+   "inn": "Nefopam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mepolizumab": {
+   "es": "Mepolizumab",
+   "inn": "Mepolizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oxihidroxido sucroferrico": {
+   "es": "Oxihidróxido sucroférrico",
+   "inn": "Oxihidróxido Sucroférrico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hierro dextran": {
+   "es": "Hierro Dextrán",
+   "inn": "Hierro Dextran",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tenofovir disoproxil": {
+   "es": "Tenofovir disoproxil",
+   "inn": "Tenofovir Disoproxil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "baricitinib": {
+   "es": "Baricitinib",
+   "inn": "Baricitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "l ornitina l aspartato": {
+   "es": "L-Ornitina L-Aspartato",
+   "inn": "L-Ornithine-L-Aspartate",
+   "via": "fuzzy",
+   "score": 0.978
+  },
+  "apremilast": {
+   "es": "Apremilast",
+   "inn": "Apremilast",
+   "via": "exact",
+   "score": 1.0
+  },
+  "icodextrina": {
+   "es": "Icodextrina",
+   "inn": "Icodextrin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "levomilnacipran": {
+   "es": "Levomilnacipran",
+   "inn": "Levomilnacipran",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ribociclib": {
+   "es": "Ribociclib",
+   "inn": "Ribociclib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "umeclidinio": {
+   "es": "Umeclidinio",
+   "inn": "Umeclidinio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vilanterol": {
+   "es": "Vilanterol",
+   "inn": "Vilanterol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ixekizumab": {
+   "es": "Ixekizumab",
+   "inn": "Ixekizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tartrato de tolterodina": {
+   "es": "Tartrato de Tolterodina",
+   "inn": "Tolterodine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "helio": {
+   "es": "Helio",
+   "inn": "Helio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "netupitan": {
+   "es": "Netupitan",
+   "inn": "Netupitant",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "clorhidrato de lercanidipino": {
+   "es": "Clorhidrato de lercanidipino",
+   "inn": "Lercanidipine",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "insulina degludec": {
+   "es": "Insulina degludec",
+   "inn": "Insulin Degludec",
+   "via": "fuzzy",
+   "score": 0.97
+  },
+  "folitropina delta": {
+   "es": "Folitropina delta",
+   "inn": "Folitropina Delta",
+   "via": "exact",
+   "score": 1.0
+  },
+  "avibactam": {
+   "es": "Avibactam",
+   "inn": "Avibactam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "milirinona": {
+   "es": "Milirinona",
+   "inn": "Milrinone",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "lubiprostona": {
+   "es": "Lubiprostona",
+   "inn": "Lubiprostone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sulfato de glucosamina": {
+   "es": "Sulfato de glucosamina",
+   "inn": "Glucosamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vismodegib": {
+   "es": "Vismodegib",
+   "inn": "Vismodegib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido ursodesoxicolico": {
+   "es": "Ácido Ursodesoxicólico",
+   "inn": "Ursodeoxycholic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulbutiamina": {
+   "es": "Sulbutiamina",
+   "inn": "Sulbutiamina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dupilumab": {
+   "es": "Dupilumab",
+   "inn": "Dupilumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "paliperidona": {
+   "es": "Paliperidona",
+   "inn": "Paliperidone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "lansoproazol": {
+   "es": "Lansoproazol",
+   "inn": "Lansoprazole",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "brexpiprazol": {
+   "es": "Brexpiprazol",
+   "inn": "Brexpiprazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "peginterferon beta 1a": {
+   "es": "Peginterferón beta 1a",
+   "inn": "Peginterferon Beta 1A",
+   "via": "exact",
+   "score": 1.0
+  },
+  "alectinib": {
+   "es": "Alectinib",
+   "inn": "Alectinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido desoxicolico": {
+   "es": "Ácido desoxicólico",
+   "inn": "Ácido Desoxicólico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ctalopram": {
+   "es": "Ctalopram",
+   "inn": "Citalopram",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "pegfilgastrim": {
+   "es": "Pegfilgastrim",
+   "inn": "Pegfilgrastim",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "epinastrina": {
+   "es": "Epinastrina",
+   "inn": "Epinastine",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "bedaquinilina": {
+   "es": "Bedaquinilina",
+   "inn": "Bedaquiline",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "lifitegrast": {
+   "es": "Lifitegrast",
+   "inn": "Lifitegrast",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bictegravir": {
+   "es": "Bictegravir",
+   "inn": "Bictegravir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cladribina": {
+   "es": "Cladribina",
+   "inn": "Cladribine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "benralizumab": {
+   "es": "Benralizumab",
+   "inn": "Benralizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "olaparib": {
+   "es": "Olaparib",
+   "inn": "Olaparib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorenamina": {
+   "es": "Clorenamina",
+   "inn": "Chlorphenamine",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "sevofluorano": {
+   "es": "Sevofluorano",
+   "inn": "Sevoflurane",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "apalutamida": {
+   "es": "Apalutamida",
+   "inn": "Apalutamide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "erenumab": {
+   "es": "Erenumab",
+   "inn": "Erenumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "abemaciclib": {
+   "es": "Abemaciclib",
+   "inn": "Abemaciclib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "osimertinib": {
+   "es": "Osimertinib",
+   "inn": "Osimertinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cabozantinib": {
+   "es": "Cabozantinib",
+   "inn": "Cabozantinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "durvalumab": {
+   "es": "Durvalumab",
+   "inn": "Durvalumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "palonsetron": {
+   "es": "Palonsetron",
+   "inn": "Palonosetron",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "baloxavir marboxil": {
+   "es": "Baloxavir Marboxil",
+   "inn": "Baloxavir Marboxil",
+   "via": "exact",
+   "score": 1.0
+  },
+  "latanoprosteno bunod": {
+   "es": "Latanoprosteno bunod",
+   "inn": "Latanoprostene Bunod",
+   "via": "morph",
+   "score": 1.0
+  },
+  "edoxaban": {
+   "es": "Edoxabán",
+   "inn": "Edoxaban",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rurioctocog alfa pegol": {
+   "es": "Rurioctocog alfa pegol",
+   "inn": "Rurioctocog Alfa Pegol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pimecrolimus": {
+   "es": "Pimecrolimus",
+   "inn": "Pimecrolimus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "albutrepenonacog alfa": {
+   "es": "Albutrepenonacog alfa",
+   "inn": "Albutrepenonacog Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ciproheptadina": {
+   "es": "Ciproheptadina",
+   "inn": "Ciproheptadina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vonoprazan": {
+   "es": "Vonoprazan",
+   "inn": "Vonoprazan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "upadacitinib": {
+   "es": "Upadacitinib",
+   "inn": "Upadacitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lonoctocog alfa": {
+   "es": "Lonoctocog alfa",
+   "inn": "Lonoctocog Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "travaprost": {
+   "es": "Travaprost",
+   "inn": "Travoprost",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "fremanezumab": {
+   "es": "Fremanezumab",
+   "inn": "Fremanezumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "poligelina": {
+   "es": "Poligelina",
+   "inn": "Polygeline",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "risankizumab": {
+   "es": "Risankizumab",
+   "inn": "Risankizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tioconazol": {
+   "es": "Tioconazol",
+   "inn": "Tioconazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "lasmiditan": {
+   "es": "Lasmiditan",
+   "inn": "Lasmiditan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "avelumab": {
+   "es": "Avelumab",
+   "inn": "Avelumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "propiverina": {
+   "es": "Propiverina",
+   "inn": "Propiverine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "siponimod": {
+   "es": "Siponimod",
+   "inn": "Siponimod",
+   "via": "exact",
+   "score": 1.0
+  },
+  "esketamina": {
+   "es": "Esketamina",
+   "inn": "Esketamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "besilato de bepotastina": {
+   "es": "Besilato de bepotastina",
+   "inn": "Bepotastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "talazoparib": {
+   "es": "Talazoparib",
+   "inn": "Talazoparib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "neratinib": {
+   "es": "Neratinib",
+   "inn": "Neratinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trifaroteno": {
+   "es": "Trifaroteno",
+   "inn": "Trifaroteno",
+   "via": "exact",
+   "score": 1.0
+  },
+  "damoctocog alfa pegol": {
+   "es": "Damoctocog alfa pegol",
+   "inn": "Damoctocog Alfa Pegol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fumarato de formoterol": {
+   "es": "Fumarato de formoterol",
+   "inn": "Formoterol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ofatumumab": {
+   "es": "Ofatumumab",
+   "inn": "Ofatumumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "capsaicina": {
+   "es": "Capsaicina",
+   "inn": "Capsaicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "darolutamida": {
+   "es": "Darolutamida",
+   "inn": "Darolutamide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "calcifediol": {
+   "es": "Calcifediol",
+   "inn": "Calcifediol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "doxilamina succinato": {
+   "es": "Doxilamina succinato",
+   "inn": "Doxylamine",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "diroximel fumarato": {
+   "es": "Diroximel fumarato",
+   "inn": "Diroximel",
+   "via": "rule",
+   "score": 1.0
+  },
+  "erdafitinib": {
+   "es": "Erdafitinib",
+   "inn": "Erdafitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "roxadustat": {
+   "es": "Roxadustat",
+   "inn": "Roxadustat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nintedanib": {
+   "es": "Nintedanib",
+   "inn": "Nintedanib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "eptacog beta activado": {
+   "es": "Eptacog beta (activado)",
+   "inn": "Eptacog Beta (Activated)",
+   "via": "fuzzy",
+   "score": 0.93
+  },
+  "brolucizumab": {
+   "es": "Brolucizumab",
+   "inn": "Brolucizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "romosozumab": {
+   "es": "Romosozumab",
+   "inn": "Romosozumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de metilfenidato": {
+   "es": "Clorhidrato de metilfenidato",
+   "inn": "Methylphenidate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "ciclosilicato de sodio y zirconio": {
+   "es": "Ciclosilicato de sodio y zirconio",
+   "inn": "Ciclosilicato Sodio Y Zirconio",
+   "via": "morph",
+   "score": 1.0
+  },
+  "eptinezumab": {
+   "es": "Eptinezumab",
+   "inn": "Eptinezumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "belimumab": {
+   "es": "Belimumab",
+   "inn": "Belimumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "crisaborol": {
+   "es": "Crisaborol",
+   "inn": "Crisaborole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "gluconato de calcio": {
+   "es": "Gluconato de calcio",
+   "inn": "Gluconato De Calcio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "finerenona": {
+   "es": "Finerenona",
+   "inn": "Finerenona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de amitriptilina": {
+   "es": "Clorhidrato de amitriptilina",
+   "inn": "Amitriptyline",
+   "via": "manual",
+   "score": 1.0
+  },
+  "tezepelumab": {
+   "es": "Tezepelumab",
+   "inn": "Tezepelumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "atorvastaina": {
+   "es": "Atorvastaina",
+   "inn": "Atorvastatin",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "fostemsavir": {
+   "es": "Fostemsavir",
+   "inn": "Fostemsavir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromhidrato de citalopram": {
+   "es": "Bromhidrato de citalopram",
+   "inn": "Citalopram",
+   "via": "manual",
+   "score": 1.0
+  },
+  "enfortumab vedotina": {
+   "es": "Enfortumab vedotina",
+   "inn": "Enfortumab Vedotin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "desfesoterodina": {
+   "es": "Desfesoterodina",
+   "inn": "Desfesoterodina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vericiguat": {
+   "es": "Vericiguat",
+   "inn": "Vericiguat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "faricimab": {
+   "es": "Faricimab",
+   "inn": "Faricimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trastuzumab deruxtecan": {
+   "es": "Trastuzumab deruxtecan",
+   "inn": "Trastuzumab Deruxtecan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lemborexant": {
+   "es": "Lemborexant",
+   "inn": "Lemborexant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "encorafenib": {
+   "es": "Encorafenib",
+   "inn": "Encorafenib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bimekizumab": {
+   "es": "Bimekizumab",
+   "inn": "Bimekizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tremelimumab": {
+   "es": "Tremelimumab",
+   "inn": "Tremelimumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rimegepant": {
+   "es": "Rimegepant",
+   "inn": "Rimegepant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "trmebutina": {
+   "es": "Trmebutina",
+   "inn": "Trimebutine",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "r l asparaginasa": {
+   "es": "r-L-asparaginasa",
+   "inn": "L Asparaginasa",
+   "via": "fuzzy",
+   "score": 0.933
+  },
+  "dacomitinib": {
+   "es": "Dacomitinib",
+   "inn": "Dacomitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nifurtimox": {
+   "es": "Nifurtimox",
+   "inn": "Nifurtimox",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tucatinib": {
+   "es": "Tucatinib",
+   "inn": "Tucatinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "propafenona": {
+   "es": "Propafenona",
+   "inn": "Propafenona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "inclisiran": {
+   "es": "Inclisiran",
+   "inn": "Inclisiran",
+   "via": "exact",
+   "score": 1.0
+  },
+  "propanolol": {
+   "es": "Propanolol",
+   "inn": "Propranolol",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "alpelisib": {
+   "es": "Alpelisib",
+   "inn": "Alpelisib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clevidipino": {
+   "es": "Clevidipino",
+   "inn": "Clevidipino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "atogepant": {
+   "es": "Atogepant",
+   "inn": "Atogepant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cangrelor": {
+   "es": "Cangrelor",
+   "inn": "Cangrelor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "alemtuzumab": {
+   "es": "Alemtuzumab",
+   "inn": "Alemtuzumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "luspatercept": {
+   "es": "Luspatercept",
+   "inn": "Luspatercept",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de tamsulosina": {
+   "es": "Clorhidrato de tamsulosina",
+   "inn": "Tamsulosin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "abrocitinib": {
+   "es": "Abrocitinib",
+   "inn": "Abrocitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "triazolam": {
+   "es": "Triazolam",
+   "inn": "Triazolam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "inotuzumab ozogamicina": {
+   "es": "inotuzumab ozogamicina",
+   "inn": "Inotuzumab Ozogamicin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "andexanet alfa": {
+   "es": "Andexanet alfa",
+   "inn": "Andexanet Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fampridina": {
+   "es": "Fampridina",
+   "inn": "Fampridine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "cemiplimab": {
+   "es": "Cemiplimab",
+   "inn": "Cemiplimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nonacog beta pegol": {
+   "es": "Nonacog beta pegol",
+   "inn": "Nonacog Beta Pegol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ritlecitinib": {
+   "es": "Ritlecitinib",
+   "inn": "Ritlecitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "turoctocog alfa pegol": {
+   "es": "Turoctocog alfa pegol",
+   "inn": "Turoctocog Alfa Pegol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "rimantadina": {
+   "es": "Rimantadina",
+   "inn": "Rimantadine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "epcoritamab": {
+   "es": "Epcoritamab",
+   "inn": "Epcoritamab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dostarlimab": {
+   "es": "Dostarlimab",
+   "inn": "Dostarlimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "etonogestrel": {
+   "es": "Etonogestrel",
+   "inn": "Etonogestrel",
+   "via": "exact",
+   "score": 1.0
+  },
+  "deucravacitinib": {
+   "es": "Deucravacitinib",
+   "inn": "Deucravacitinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tildrakizumab": {
+   "es": "Tildrakizumab",
+   "inn": "Tildrakizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fezolinetant": {
+   "es": "Fezolinetant",
+   "inn": "Fezolinetant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nirmatrelvir": {
+   "es": "Nirmatrelvir",
+   "inn": "Nirmatrelvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "flecainida": {
+   "es": "Flecainida",
+   "inn": "Flecainide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "sacituzumab govitecan": {
+   "es": "Sacituzumab govitecán",
+   "inn": "Sacituzumab Govitecan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "capivasertib": {
+   "es": "Capivasertib",
+   "inn": "Capivasertib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "niraparib": {
+   "es": "Niraparib",
+   "inn": "Niraparib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "somapacitan": {
+   "es": "Somapacitán",
+   "inn": "Somapacitan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ipilimumab": {
+   "es": "Ipilimumab",
+   "inn": "Ipilimumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tirzepatida": {
+   "es": "Tirzepatida",
+   "inn": "Tirzepatide",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "lecanemab": {
+   "es": "Lecanemab",
+   "inn": "Lecanemab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mercaptopurina": {
+   "es": "Mercaptopurina",
+   "inn": "Mercaptopurine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "donanemab": {
+   "es": "Donanemab",
+   "inn": "Donanemab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "relugolix": {
+   "es": "Relugolix",
+   "inn": "Relugolix",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de ciclobenzaprina": {
+   "es": "Clorhidrato de ciclobenzaprina",
+   "inn": "Ciclobenzaprina",
+   "via": "rule",
+   "score": 1.0
+  },
+  "estetrol": {
+   "es": "Estetrol",
+   "inn": "Estetrol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lebrikizumab": {
+   "es": "Lebrikizumab",
+   "inn": "Lebrikizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clascoterona": {
+   "es": "Clascoterona",
+   "inn": "Clascoterona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nirsevimab": {
+   "es": "Nirsevimab",
+   "inn": "Nirsevimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lazertinib": {
+   "es": "Lazertinib",
+   "inn": "Lazertinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mavacamten": {
+   "es": "Mavacamten",
+   "inn": "Mavacamten",
+   "via": "exact",
+   "score": 1.0
+  },
+  "datopotamab deruxtecan": {
+   "es": "Datopotamab deruxtecan",
+   "inn": "Datopotamab Deruxtecan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "busulfan": {
+   "es": "Busulfan",
+   "inn": "Busulfan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fruquintinib": {
+   "es": "Fruquintinib",
+   "inn": "Fruquintinib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "mirikizumab": {
+   "es": "Mirikizumab",
+   "inn": "Mirikizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nemolizumab": {
+   "es": "Nemolizumab",
+   "inn": "Nemolizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "medroxiprogesteron a": {
+   "es": "Medroxiprogesteron a",
+   "inn": "Medroxiprogesterona",
+   "via": "compact",
+   "score": 1.0
+  },
+  "carmustina": {
+   "es": "Carmustina",
+   "inn": "Carmustine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fludrocortisona": {
+   "es": "Fludrocortisona",
+   "inn": "Fludrocortisona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "depemokimab": {
+   "es": "Depemokimab",
+   "inn": "Depemokimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "concizumab": {
+   "es": "Concizumab",
+   "inn": "Concizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "safinamida": {
+   "es": "Safinamida",
+   "inn": "Safinamide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "pembrolizumab": {
+   "es": "Pembrolizumab",
+   "inn": "Pembrolizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sugemalimab": {
+   "es": "Sugemalimab",
+   "inn": "Sugemalimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "insulina icodec": {
+   "es": "Insulina icodec",
+   "inn": "Insulina Icodec",
+   "via": "exact",
+   "score": 1.0
+  },
+  "pazopanib": {
+   "es": "Pazopanib",
+   "inn": "Pazopanib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "orforglipron": {
+   "es": "Orforglipron",
+   "inn": "Orforglipron",
+   "via": "exact",
+   "score": 1.0
+  },
+  "insulina efsitora alfa": {
+   "es": "Insulina efsitora alfa",
+   "inn": "Insulina Efsitora Alfa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "velpatasvir": {
+   "es": "Velpatasvir",
+   "inn": "Velpatasvir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "voxilaprevir": {
+   "es": "Voxilaprevir",
+   "inn": "Voxilaprevir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clesrovimab": {
+   "es": "Clesrovimab",
+   "inn": "Clesrovimab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "loteprednol etabonato": {
+   "es": "Loteprednol Etabonato",
+   "inn": "Loteprednol Etabonate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "elinzanetant": {
+   "es": "Elinzanetant",
+   "inn": "Elinzanetant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "opicapona": {
+   "es": "Opicapona",
+   "inn": "Opicapona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bepotastina": {
+   "es": "Bepotastina",
+   "inn": "Bepotastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clorhidrato de metformina": {
+   "es": "Clorhidrato de metformina",
+   "inn": "Metformin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "maleato de pirilamina": {
+   "es": "MALEATO DE PIRILAMINA",
+   "inn": "Pyrilamine",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "clorhidrato de difenhidramina": {
+   "es": "CLORHIDRATO DE DIFENHIDRAMINA",
+   "inn": "Diphenhydramine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "porfimero": {
+   "es": "PORFIMERO",
+   "inn": "Porfimer",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "terpina": {
+   "es": "TERPINA",
+   "inn": "Terpin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "parotiditis": {
+   "es": "PAROTIDITIS",
+   "inn": "Parotiditis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bencilpenicilina procainica": {
+   "es": "BENCILPENICILINA PROCAINICA",
+   "inn": "Bencilpenicilina Procaína",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "citrulina": {
+   "es": "CITRULINA",
+   "inn": "Citrulina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "menadiona": {
+   "es": "MENADIONA",
+   "inn": "Menadione",
+   "via": "rule",
+   "score": 1.0
+  },
+  "rimonabant": {
+   "es": "RIMONABANT",
+   "inn": "Rimonabant",
+   "via": "exact",
+   "score": 1.0
+  },
+  "treprostinil sodico": {
+   "es": "TREPROSTINIL SODICO",
+   "inn": "Treprostinil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nabilona": {
+   "es": "NABILONA",
+   "inn": "Nabilone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nadifloxacino": {
+   "es": "NADIFLOXACINO",
+   "inn": "Nadifloxacino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "eflornitina": {
+   "es": "EFLORNITINA",
+   "inn": "Eflornitina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bromuro de clidinio": {
+   "es": "BROMURO DE CLIDINIO",
+   "inn": "Bromuro Umeclidinio",
+   "via": "fuzzy",
+   "score": 0.914
+  },
+  "sulfato de salbutamol": {
+   "es": "SULFATO DE SALBUTAMOL",
+   "inn": "Albuterol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "podofilotoxina": {
+   "es": "PODOFILOTOXINA",
+   "inn": "Podofilotoxina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "penicilamina": {
+   "es": "PENICILAMINA",
+   "inn": "Penicilamina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cisteina": {
+   "es": "CISTEINA",
+   "inn": "Cysteine",
+   "via": "morph",
+   "score": 1.0
+  },
+  "hialuronato sodico": {
+   "es": "HIALURONATO SODICO",
+   "inn": "Hyaluronate",
+   "via": "rule",
+   "score": 1.0
+  },
+  "acetato de noretindrona": {
+   "es": "ACETATO DE NORETINDRONA",
+   "inn": "Norethindrone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "emedastina": {
+   "es": "EMEDASTINA",
+   "inn": "Emedastine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "halotano": {
+   "es": "HALOTANO",
+   "inn": "Halothane",
+   "via": "rule",
+   "score": 1.0
+  },
+  "guayacol": {
+   "es": "GUAYACOL",
+   "inn": "Guaiacol",
+   "via": "rule",
+   "score": 1.0
+  },
+  "amcinonida": {
+   "es": "AMCINONIDA",
+   "inn": "Amcinonide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "protamina": {
+   "es": "PROTAMINA",
+   "inn": "Protamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "tenecteplasa": {
+   "es": "TENECTEPLASA",
+   "inn": "Tenecteplasa",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nicergolina": {
+   "es": "NICERGOLINA",
+   "inn": "Nicergolina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diclofenaco epolamina": {
+   "es": "DICLOFENACO EPOLAMINA",
+   "inn": "Diclofenac Epolamine",
+   "via": "fuzzy",
+   "score": 0.976
+  },
+  "tenoxicam": {
+   "es": "TENOXICAM",
+   "inn": "Tenoxicam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "penicilina procaina": {
+   "es": "PENICILINA PROCAINA",
+   "inn": "Penicillin G Procaine",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "cetrorelix": {
+   "es": "CETRORELIX",
+   "inn": "Cetrorelix",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dipiridamol": {
+   "es": "DIPIRIDAMOL",
+   "inn": "Dipiridamol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "benzalconio": {
+   "es": "BENZALCONIO",
+   "inn": "Benzalconio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "poliomielitis": {
+   "es": "POLIOMIELITIS",
+   "inn": "Poliomyelitis",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "hepatitis b": {
+   "es": "HEPATITIS B",
+   "inn": "Hepatitis B",
+   "via": "exact",
+   "score": 1.0
+  },
+  "warfarina": {
+   "es": "WARFARINA",
+   "inn": "Warfarin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "hammamelis virginiana": {
+   "es": "HAMMAMELIS VIRGINIANA",
+   "inn": "Hamamelis Virginiana",
+   "via": "fuzzy",
+   "score": 0.976
+  },
+  "alverina": {
+   "es": "ALVERINA",
+   "inn": "Alverine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "acetil salicilato de lisina": {
+   "es": "ACETIL SALICILATO DE LISINA",
+   "inn": "Acetilsalicilato De Lisina",
+   "via": "compact",
+   "score": 1.0
+  },
+  "mononitrato de isosorbida": {
+   "es": "MONONITRATO DE ISOSORBIDA",
+   "inn": "Mononitrato De Isosorbida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "uracilo": {
+   "es": "URACILO",
+   "inn": "Uracil",
+   "via": "rule",
+   "score": 1.0
+  },
+  "flucitosina": {
+   "es": "FLUCITOSINA",
+   "inn": "Flucytosine",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "roxitromicina": {
+   "es": "ROXITROMICINA",
+   "inn": "Roxitromicina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfato de atropina": {
+   "es": "SULFATO DE ATROPINA",
+   "inn": "Atropine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "clormipramina": {
+   "es": "CLORMIPRAMINA",
+   "inn": "Clomipramine",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "guaife nesina": {
+   "es": "GUAIFE NESINA",
+   "inn": "Guaifenesin",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "coriogonadotropina alfa": {
+   "es": "CORIOGONADOTROPINA ALFA",
+   "inn": "Coriogonadotrofina Alfa",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "norelgestromina": {
+   "es": "NORELGESTROMINA",
+   "inn": "Norelgestromin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "nimesulide": {
+   "es": "NIMESULIDE",
+   "inn": "Nimesulide",
+   "via": "exact",
+   "score": 1.0
+  },
+  "tioridazina": {
+   "es": "TIORIDAZINA",
+   "inn": "Thioridazine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "d exametasona": {
+   "es": "D EXAMETASONA",
+   "inn": "Dexamethasone",
+   "via": "fuzzy",
+   "score": 0.923
+  },
+  "vacuna antifiebre amarilla": {
+   "es": "VACUNA ANTIFIEBRE AMARILLA",
+   "inn": "Vacuna Anti Fiebre Amarilla",
+   "via": "compact",
+   "score": 1.0
+  },
+  "nabumetona": {
+   "es": "NABUMETONA",
+   "inn": "Nabumetona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "diazoxido": {
+   "es": "DIAZOXIDO",
+   "inn": "Diazoxide",
+   "via": "morph",
+   "score": 1.0
+  },
+  "urea": {
+   "es": "UREA",
+   "inn": "Urea",
+   "via": "exact",
+   "score": 1.0
+  },
+  "betaina": {
+   "es": "BETAINA",
+   "inn": "Betaine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "dietilestilbestrol": {
+   "es": "DIETILESTILBESTROL",
+   "inn": "Diethylstilbestrol",
+   "via": "fuzzy",
+   "score": 0.973
+  },
+  "haemophilus influnzae": {
+   "es": "haemophilus influnzae",
+   "inn": "Haemophilus Influenzae",
+   "via": "fuzzy",
+   "score": 0.977
+  },
+  "lumiracoxib": {
+   "es": "LUMIRACOXIB",
+   "inn": "Lumiracoxib",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hierro dextrano": {
+   "es": "HIERRO DEXTRANO",
+   "inn": "Iron Dextran",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "carbomero": {
+   "es": "CARBOMERO",
+   "inn": "Carbomero",
+   "via": "exact",
+   "score": 1.0
+  },
+  "oxandrolona": {
+   "es": "OXANDROLONA",
+   "inn": "Oxandrolone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "barnidipino": {
+   "es": "BARNIDIPINO",
+   "inn": "Barnidipine",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "epirrubicina": {
+   "es": "EPIRRUBICINA",
+   "inn": "Epirubicin",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "almotriptan": {
+   "es": "ALMOTRIPTAN",
+   "inn": "Almotriptan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "valproato de sodio": {
+   "es": "VALPROATO DE SODIO",
+   "inn": "Valproate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "deferoxamina": {
+   "es": "DEFEROXAMINA",
+   "inn": "Deferoxamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "amisulprida": {
+   "es": "AMISULPRIDA",
+   "inn": "Amisulpride",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "haemophilus influenzae tipo b": {
+   "es": "Haemophilus influenzae tipo b",
+   "inn": "Haemophilus Influenzae Type B",
+   "via": "fuzzy",
+   "score": 0.931
+  },
+  "ri fampicina": {
+   "es": "RI FAMPICINA",
+   "inn": "Rifamicina",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "clorhidrato de bencidamina": {
+   "es": "Clorhidrato de bencidamina",
+   "inn": "Benzydamine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "clorhidrato de ambroxol": {
+   "es": "CLORHIDRATO DE AMBROXOL",
+   "inn": "Ambroxol",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cloxacilina": {
+   "es": "CLOXACILINA",
+   "inn": "Cloxacillin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "inmunoglobulina humana anti citomegalovirus": {
+   "es": "INMUNOGLOBULINA HUMANA ANTI- CITOMEGALOVIRUS",
+   "inn": "Inmunoglobulina Anti Citomegalovirus",
+   "via": "fuzzy",
+   "score": 0.911
+  },
+  "levobunolol": {
+   "es": "LEVOBUNOLOL",
+   "inn": "Levobunolol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "fenticonazol": {
+   "es": "FENTICONAZOL",
+   "inn": "Fenticonazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pinazepam": {
+   "es": "PINAZEPAM",
+   "inn": "Pinazepam",
+   "via": "exact",
+   "score": 1.0
+  },
+  "clorhidrato de verapamilo": {
+   "es": "CLORHIDRATO DE VERAPAMILO",
+   "inn": "Verapamil",
+   "via": "manual",
+   "score": 1.0
+  },
+  "cefazolina": {
+   "es": "CEFAZOLINA",
+   "inn": "Cefazolin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fenazona": {
+   "es": "FENAZONA",
+   "inn": "Fenazona",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido lactico": {
+   "es": "ÁCIDO LÁCTICO",
+   "inn": "Ácido Láctico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "isoleucina": {
+   "es": "ISOLEUCINA",
+   "inn": "Isoleucine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "leucina": {
+   "es": "LEUCINA",
+   "inn": "Leucine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "fenilalanina": {
+   "es": "FENILALANINA",
+   "inn": "Phenylalanine",
+   "via": "morph",
+   "score": 1.0
+  },
+  "valina": {
+   "es": "VALINA",
+   "inn": "Valine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "hidrocor tisona": {
+   "es": "HIDROCOR TISONA",
+   "inn": "Hydrocortisone",
+   "via": "fuzzy",
+   "score": 0.966
+  },
+  "trolamina": {
+   "es": "TROLAMINA",
+   "inn": "Trolamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "cetuximab": {
+   "es": "CETUXIMAB",
+   "inn": "Cetuximab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "molgramostim": {
+   "es": "MOLGRAMOSTIM",
+   "inn": "Molgramostim",
+   "via": "exact",
+   "score": 1.0
+  },
+  "moxonidina": {
+   "es": "MOXONIDINA",
+   "inn": "Moxonidine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "gua ifenesina": {
+   "es": "GUA IFENESINA",
+   "inn": "Guaifenesin",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "agalsidasa beta": {
+   "es": "AGALSIDASA BETA",
+   "inn": "Agalsidasa Beta",
+   "via": "exact",
+   "score": 1.0
+  },
+  "efalizumab": {
+   "es": "EFALIZUMAB",
+   "inn": "Efalizumab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acitretina": {
+   "es": "ACITRETINA",
+   "inn": "Acitretin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "sarampion": {
+   "es": "SARAMPION",
+   "inn": "Sarampión",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfato de neomicina": {
+   "es": "SULFATO DE NEOMICINA",
+   "inn": "Neomycin",
+   "via": "manual",
+   "score": 1.0
+  },
+  "acetato de lanreotido": {
+   "es": "ACETATO DE LANREOTIDO",
+   "inn": "Lanreotide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "pantoprazol magnesico": {
+   "es": "PANTOPRAZOL MAGNESICO",
+   "inn": "Pantoprazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "fenilbutirato sodico": {
+   "es": "FENILBUTIRATO SODICO",
+   "inn": "Fenilbutirato",
+   "via": "rule",
+   "score": 1.0
+  },
+  "meprednisona": {
+   "es": "MEPREDNISONA",
+   "inn": "Prednisone",
+   "via": "fuzzy",
+   "score": 0.909
+  },
+  "butoconazol": {
+   "es": "BUTOCONAZOL",
+   "inn": "Butoconazole",
+   "via": "rule",
+   "score": 1.0
+  },
+  "adefovir": {
+   "es": "ADEFOVIR",
+   "inn": "Adefovir",
+   "via": "exact",
+   "score": 1.0
+  },
+  "nitrato de econazol": {
+   "es": "NITRATO DE ECONAZOL",
+   "inn": "Econazole",
+   "via": "manual",
+   "score": 1.0
+  },
+  "trazodona": {
+   "es": "TRAZODONA",
+   "inn": "Trazodone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "alendronato sodico": {
+   "es": "ALENDRONATO SODICO",
+   "inn": "Alendronate",
+   "via": "manual",
+   "score": 1.0
+  },
+  "enalaprilat": {
+   "es": "ENALAPRILAT",
+   "inn": "Enalaprilat",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lactobacillus acidophilus": {
+   "es": "LACTOBACILLUS ACIDOPHILUS",
+   "inn": "Lactobacillus Acidophilus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "dicicloverina": {
+   "es": "DICICLOVERINA",
+   "inn": "Dicicloverina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "insulina glulisina": {
+   "es": "INSULINA GLULISINA",
+   "inn": "Insulina Glulisina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "maleato de dimetindeno": {
+   "es": "MALEATO DE DIMETINDENO",
+   "inn": "Dimetindene",
+   "via": "rule",
+   "score": 1.0
+  },
+  "etodolaco": {
+   "es": "ETODOLACO",
+   "inn": "Etodolac",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "lido caina": {
+   "es": "LIDO CAINA",
+   "inn": "Lidocaine",
+   "via": "fuzzy",
+   "score": 0.947
+  },
+  "clorhidrato de pseudoefedrina": {
+   "es": "CLORHIDRATO DE PSEUDOEFEDRINA",
+   "inn": "Pseudoephedrine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "insulina detemir": {
+   "es": "INSULINA DETEMIR",
+   "inn": "Insulin Detemir",
+   "via": "fuzzy",
+   "score": 0.968
+  },
+  "butalbital": {
+   "es": "BUTALBITAL",
+   "inn": "Butalbital",
+   "via": "exact",
+   "score": 1.0
+  },
+  "calamina": {
+   "es": "CALAMINA",
+   "inn": "Calamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "pramocaina": {
+   "es": "PRAMOCAINA",
+   "inn": "Pramocaine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "alefacept": {
+   "es": "ALEFACEPT",
+   "inn": "Alefacept",
+   "via": "exact",
+   "score": 1.0
+  },
+  "cefditoren": {
+   "es": "CEFDITOREN",
+   "inn": "Cefditoreno",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "maleato de enalapril": {
+   "es": "MALEATO DE ENALAPRIL",
+   "inn": "Enalapril",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulfato de condroitina": {
+   "es": "Sulfato de Condroitina",
+   "inn": "Condroitín",
+   "via": "rule",
+   "score": 1.0
+  },
+  "acetato de medroxiprogesterona": {
+   "es": "Acetato de Medroxiprogesterona",
+   "inn": "Medroxyprogesterone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "linzolid": {
+   "es": "Linzolid",
+   "inn": "Linezolid",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "rosigitazona": {
+   "es": "Rosigitazona",
+   "inn": "Rosiglitazone",
+   "via": "fuzzy",
+   "score": 0.96
+  },
+  "mercurius solubilis": {
+   "es": "Mercurius solubilis",
+   "inn": "Mercurius Solubilis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "abciximab": {
+   "es": "Abciximab",
+   "inn": "Abciximab",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ascorbato sodico": {
+   "es": "Ascorbato sódico",
+   "inn": "Ascorbato",
+   "via": "rule",
+   "score": 1.0
+  },
+  "niacinamida": {
+   "es": "niacinamida",
+   "inn": "Niacinamide",
+   "via": "manual",
+   "score": 1.0
+  },
+  "biotina": {
+   "es": "biotina",
+   "inn": "Biotin",
+   "via": "rule",
+   "score": 1.0
+  },
+  "eleutherococcus senticosus": {
+   "es": "Eleutherococcus senticosus",
+   "inn": "Eleutherococcus Senticosus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido nicotinico": {
+   "es": "Ácido nicotínico",
+   "inn": "Nicotinic Acid",
+   "via": "manual",
+   "score": 1.0
+  },
+  "aconitum napellus": {
+   "es": "Aconitum napellus",
+   "inn": "Aconitum Napellus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "althea officinalis": {
+   "es": "Althea officinalis",
+   "inn": "Althaea Officinalis",
+   "via": "fuzzy",
+   "score": 0.973
+  },
+  "glycyrrhiza glabra": {
+   "es": "Glycyrrhiza glabra",
+   "inn": "Glycyrrhiza Glabra",
+   "via": "exact",
+   "score": 1.0
+  },
+  "antazolina": {
+   "es": "Antazolina",
+   "inn": "Antazoline",
+   "via": "rule",
+   "score": 1.0
+  },
+  "lobelia inflata": {
+   "es": "Lobelia inflata",
+   "inn": "Lobelia Inflata",
+   "via": "exact",
+   "score": 1.0
+  },
+  "causticum": {
+   "es": "Causticum",
+   "inn": "Causticum",
+   "via": "exact",
+   "score": 1.0
+  },
+  "butenafina": {
+   "es": "Butenafina",
+   "inn": "Butenafine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "enterococcus faecium": {
+   "es": "Enterococcus faecium",
+   "inn": "Enterococcus Faecium",
+   "via": "exact",
+   "score": 1.0
+  },
+  "viola tricolor": {
+   "es": "Viola tricolor",
+   "inn": "Viola Tricolor",
+   "via": "exact",
+   "score": 1.0
+  },
+  "spigelia anthelmia": {
+   "es": "Spigelia anthelmia",
+   "inn": "Spigelia Anthelmia",
+   "via": "exact",
+   "score": 1.0
+  },
+  "harpagophyturn procumbens": {
+   "es": "Harpagophyturn procumbens",
+   "inn": "Harpagophytum Procumbens",
+   "via": "fuzzy",
+   "score": 0.939
+  },
+  "verbena officinalis": {
+   "es": "Verbena officinalis",
+   "inn": "Verbena Officinalis",
+   "via": "exact",
+   "score": 1.0
+  },
+  "hypericum perforatum": {
+   "es": "Hypericum perforatum",
+   "inn": "Hypericum Perforatum",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lacidipino": {
+   "es": "Lacidipino",
+   "inn": "Lacidipino",
+   "via": "exact",
+   "score": 1.0
+  },
+  "lanreotida": {
+   "es": "Lanreótida",
+   "inn": "Lanreotide",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "calluna vulgaris l": {
+   "es": "Calluna vulgaris L",
+   "inn": "Calluna Vulgaris Whole",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "passiflora incaamata": {
+   "es": "Passiflora incaamata",
+   "inn": "Passiflora Incarnata",
+   "via": "fuzzy",
+   "score": 0.9
+  },
+  "matricaria chamomilla": {
+   "es": "Matricaria chamomilla",
+   "inn": "Matricaria Chamomilla",
+   "via": "exact",
+   "score": 1.0
+  },
+  "peumus boldus": {
+   "es": "Peumus boldus",
+   "inn": "Peumus Boldus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ranitidinaa": {
+   "es": "Ranitidinaa",
+   "inn": "Ranitidine",
+   "via": "fuzzy",
+   "score": 0.952
+  },
+  "agrimonia eupatoria l": {
+   "es": "Agrimonia eupatoria L",
+   "inn": "Agrimonia Eupatoria",
+   "via": "fuzzy",
+   "score": 0.95
+  },
+  "sambucus nigra": {
+   "es": "Sambucus nigra",
+   "inn": "Sambucus Nigra",
+   "via": "exact",
+   "score": 1.0
+  },
+  "humulus lupulus": {
+   "es": "Humulus lupulus",
+   "inn": "Humulus Lupulus",
+   "via": "exact",
+   "score": 1.0
+  },
+  "vitamina": {
+   "es": "Vitamina",
+   "inn": "Vitamin A",
+   "via": "compact",
+   "score": 1.0
+  },
+  "liocaina": {
+   "es": "Liocaína",
+   "inn": "Lidocaine",
+   "via": "fuzzy",
+   "score": 0.941
+  },
+  "entacapona": {
+   "es": "Entacapona",
+   "inn": "Entacapone",
+   "via": "rule",
+   "score": 1.0
+  },
+  "triclosan": {
+   "es": "Triclosán",
+   "inn": "Triclosan",
+   "via": "exact",
+   "score": 1.0
+  },
+  "glicina": {
+   "es": "glicina",
+   "inn": "Glicina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "bicalutamina": {
+   "es": "Bicalutamina",
+   "inn": "Bicalutamide",
+   "via": "fuzzy",
+   "score": 0.917
+  },
+  "clorpromazina": {
+   "es": "Clorpromazina",
+   "inn": "Clorpromazina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "carbonato de litio": {
+   "es": "Carbonato de Litio",
+   "inn": "Litio",
+   "via": "rule",
+   "score": 1.0
+  },
+  "mepiramina": {
+   "es": "Mepiramina",
+   "inn": "Mepiramina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "urofolitropina": {
+   "es": "Urofolitropina",
+   "inn": "Urofolitropina",
+   "via": "exact",
+   "score": 1.0
+  },
+  "carisprodol": {
+   "es": "Carisprodol",
+   "inn": "Carisoprodol",
+   "via": "fuzzy",
+   "score": 0.957
+  },
+  "acetato de fluocinolona": {
+   "es": "Acetato de fluocinolona",
+   "inn": "Fluocinolone",
+   "via": "manual",
+   "score": 1.0
+  },
+  "alcohol": {
+   "es": "Alcohol",
+   "inn": "Alcohol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "amilmetacresol": {
+   "es": "Amilmetacresol",
+   "inn": "Amilmetacresol",
+   "via": "exact",
+   "score": 1.0
+  },
+  "acido tartarico": {
+   "es": "Ácido tartárico",
+   "inn": "Ácido Tartárico",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulodexida": {
+   "es": "Sulodexida",
+   "inn": "Sulodexida",
+   "via": "exact",
+   "score": 1.0
+  },
+  "de fenilefrina": {
+   "es": "de fenilefrina",
+   "inn": "Phenylephrine",
+   "via": "manual",
+   "score": 1.0
+  },
+  "sulfato sodico de condroitina": {
+   "es": "Sulfato sódico de condroitina",
+   "inn": "Condroitín",
+   "via": "rule",
+   "score": 1.0
+  },
+  "interferon beta 1 b": {
+   "es": "Interferón beta 1-b",
+   "inn": "Interferon Beta-1B",
+   "via": "compact",
+   "score": 1.0
+  },
+  "metenamina": {
+   "es": "Metenamina",
+   "inn": "Methenamine",
+   "via": "rule",
+   "score": 1.0
+  },
+  "vitis vinifera": {
+   "es": "Vitis vinifera",
+   "inn": "Vitis Vinifera",
+   "via": "exact",
+   "score": 1.0
+  },
+  "asarum europaeum": {
+   "es": "Asarum europaeum",
+   "inn": "Asarum Europaeum",
+   "via": "exact",
+   "score": 1.0
+  },
+  "ammonium": {
+   "es": "Ammonium",
+   "inn": "Ammonium",
+   "via": "exact",
+   "score": 1.0
+  },
+  "sulfato de zinc anhidro": {
+   "es": "Sulfato de zinc anhidro",
+   "inn": "Zinc",
+   "via": "manual",
+   "score": 1.0
+  },
+  "potasio": {
+   "es": "Potasio",
+   "inn": "Potasio",
+   "via": "exact",
+   "score": 1.0
+  },
+  "beta caroteno": {
+   "es": "Beta caroteno",
+   "inn": "Beta Carotene",
+   "via": "rule",
+   "score": 1.0
+  }
+ },
+ "stats": {
+  "manual": 377,
+  "exact": 637,
+  "unmatched": 1641,
+  "rule": 256,
+  "fuzzy": 219,
+  "morph": 14,
+  "compact": 10
+ },
+ "generated_by": "etl/build_mx_inn_map.py"
+}

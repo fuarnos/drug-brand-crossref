@@ -1,0 +1,15 @@
+# 数据与缓存（几百 MB，不进仓库）
+data/*.db
+data/raw/
+data/backups/
+site/dist.zip
+.env
+
+# 工具与产物
+tools/git/
+tools/
+__pycache__/
+*.pyc
+.tmp/
+.pylibs/
+

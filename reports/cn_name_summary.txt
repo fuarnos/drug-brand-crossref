@@ -1,0 +1,75 @@
+unique names 810, rows 1768
+? unmapped 5
+B unmapped 14
+H compound 68
+H matched 260
+H not_in_db 40
+H unmapped 2
+S biologic 18
+Z tcm 403
+
+unmapped (21):
+   ? | 贝米肝素钠注射液
+   H | 厄贝沙坦氢氯 噻嗪片
+   ? | 头孢克洛干混悬剂
+   ? | 美法仑片
+   H | 肌苷注射液
+   ? | 碘美普尔注射液
+   ? | 宣肺败毒颗粒
+   B | 巴仙苁蓉强肾胶囊
+   B | 妇洁舒洗液
+   B | 解郁丸
+   B | 金松止痒洗液
+   B | 抗衰老口服液
+   B | 龙首颗粒
+   B | 龙枣胶囊
+   B | 蚂蚁双参通痹丸
+   B | 祛瘀健脾茶
+   B | 茸芪益肾口服液
+   B | 通达滴鼻剂
+   B | 通脉强肾酒
+   B | 温经止痛膏
+   B | 止脱生发散
+not_in_db (40):
+   间苯三酚注射液 | phloroglucinol
+   盐酸消旋山莨菪碱注射液 | anisodamine/raceanisodamine
+   联苯双酯片 | bifendate
+   葡醛内酯片 | glucurolactone/glucuronolactone
+   水飞蓟素胶囊 | silymarin
+   盐酸小檗碱片 | berberine
+   蒙脱石散 | diosmectite
+   苯丙酸诺龙注射液 | nandrolone phenylpropionate
+   盐酸沙格雷酯片 | sarpogrelate
+   蚓激酶肠溶胶囊 | lumbrokinase
+   注射用卡络磺钠 | carbazochrome
+   卡络磺钠注射液 | carbazochrome
+   菠萝蛋白酶肠溶胶囊 | bromelain
+   胰激肽原酶肠溶片 | kallidinogenase
+   曲克芦丁片 | troxerutin
+   曲克芦丁注射液 | troxerutin
+   尼群地平片 | nitrendipine
+   西尼地平片 | cilnidipine
+   聚维酮碘溶液 | povidone-iodine
+   利凡诺创伤膏 | ethacridine
+   注射用阿洛西林钠 | azlocillin
+   乙酰螺旋霉素片 | acetylspiramycin
+   呋喃唑酮片 | furazolidone
+   盐酸吗啉胍片 | moroxydine
+   奥雷巴替尼片 | olverembatinib
+   胸腺肽注射液 | thymopentin/thymosin
+   安乃近片 | metamizole/dipyrone
+   胞磷胆碱钠氯化钠注射液 | citicoline
+   石杉碱甲胶囊 | huperzine a
+   胞磷胆碱钠注射液 | citicoline
+   谷维素片 | oryzanol
+   多索茶碱注射液 | doxofylline
+   左羟丙哌嗪胶囊 | levodropropizine
+   依巴斯汀片 | ebastine
+   尼可刹米注射液 | nikethamide
+   钆喷酸葡胺注射液 | gadopentetate
+   锝[99mTc]喷替酸盐注射液 | pentetate
+   锝[99mTc]双半胱乙酯注射液 | bicisate
+   高锝[99mTc]酸钠注射液 | pertechnetate
+   锝[99mTc]甲氧异腈注射液 | sestamibi
+
+compound (68)
