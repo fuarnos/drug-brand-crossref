@@ -26,7 +26,7 @@ function splitDose(q){
   return [rest, [m[1], (ratio ? m[3] : m[2]).toLowerCase()]];
 }
 function lev(a,b){
-  if(Math.abs(a.length-b.length)>2) return 99;
+  if(Math.abs(a.length-b.length)>3) return 99;
   const d=Array.from({length:b.length+1},(_,i)=>i);
   for(let i=1;i<=a.length;i++){
     let prev=d[0]; d[0]=i;
@@ -43,7 +43,7 @@ function tier(nq,k){
   if(k.replace(/ /g,'')===nq.replace(/ /g,'')) return ['compact',0.95];
   if(k.startsWith(nq)) return ['prefix',0.80];
   if(nq.length>=4 && k.includes(nq)) return ['contains',0.70];
-  if(nq.length>=4 && lev(nq,k)<=2) return ['fuzzy',0.55];
+  if(nq.length>=4 && lev(nq,k) <= (nq.length>=9 ? 3 : 2)) return ['fuzzy',0.55];
   return null;
 }
 function doseNum(s){ const m=(s||'').match(/[\d.]+/); return m?parseFloat(m[0]):0; }
@@ -98,19 +98,24 @@ function render(){
     if(c && !e.c.includes(c)) continue;
     addHit(e, t);
   }
+  let fuzzyUsed = false;
   if(hits.length === 0){
     for(const e of IDX){
       const t = tier(nq, e.k);
       if(!t || t[0]!=='fuzzy') continue;
       if(c && !e.c.includes(c)) continue;
+      const before = hits.length;
       addHit(e, t);
+      if(hits.length > before) fuzzyUsed = true;
     }
   }
   hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
   const shown = hits.slice(0,40);
   const T = window.T || (k=>k);
   meta.textContent = hits.length
-    ? `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
+    ? (fuzzyUsed
+        ? `${T('res.fuzzy')} · ${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
+        : `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`)
     : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
          : `${T('res.none')} — ${T('res.caveat')}.`);
   // 俗称命中：先说清「这不是商品名，是某个成分的叫法」，再列该成分的商品名。
