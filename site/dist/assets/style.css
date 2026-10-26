@@ -44,6 +44,15 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:13px}
+table.res{margin-top:12px;background:#fff;border:1px solid var(--line);
+border-radius:12px;overflow:hidden}
+table.res th{background:#faf9f6;font-size:12px;letter-spacing:.02em}
+table.res td{vertical-align:top}
+table.res tbody tr:hover{background:#fcfcfa}
+.c-ing{font-weight:600;width:26%}
+.c-dose{width:14%;white-space:nowrap;font-variant-numeric:tabular-nums}
+.c-brand{width:38%}
+.c-mah{width:22%;color:var(--muted);font-size:13px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
 padding:18px 0 40px;background:#fff}
 kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}

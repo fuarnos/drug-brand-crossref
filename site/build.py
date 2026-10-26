@@ -51,6 +51,8 @@ I18N = {
         "res.notin": "Not covered in this country",
         "res.caveat": "an empty result does not mean the drug does not exist",
         "card.packs": "packs",
+        "col.ing": "Ingredient", "col.dose": "Dose",
+        "col.brand": "Brand", "col.mah": "Manufacturer",
         "badge.severe": "Same name, different drug",
         "badge.warning": "Different release",
         "fam.title": "The same brand in other markets",
@@ -90,6 +92,8 @@ I18N = {
         "res.notin": "No incluido en este país",
         "res.caveat": "un resultado vacío no significa que el medicamento no exista",
         "card.packs": "envases",
+        "col.ing": "Principio activo", "col.dose": "Dosis",
+        "col.brand": "Marca", "col.mah": "Fabricante",
         "badge.severe": "Mismo nombre, otro medicamento",
         "badge.warning": "Liberación diferente",
         "fam.title": "La misma marca en otros mercados",
@@ -128,6 +132,8 @@ I18N = {
         "res.notin": "所选国家没有收录这个名字",
         "res.caveat": "查不到不代表这个药不存在",
         "card.packs": "个包装",
+        "col.ing": "成分", "col.dose": "剂量",
+        "col.brand": "品牌", "col.mah": "厂家",
         "badge.severe": "同名不同药",
         "badge.warning": "释放机制不同",
         "fam.title": "同一品牌在其他市场的写法",
@@ -198,6 +204,15 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:13px}
+table.res{margin-top:12px;background:#fff;border:1px solid var(--line);
+border-radius:12px;overflow:hidden}
+table.res th{background:#faf9f6;font-size:12px;letter-spacing:.02em}
+table.res td{vertical-align:top}
+table.res tbody tr:hover{background:#fcfcfa}
+.c-ing{font-weight:600;width:26%}
+.c-dose{width:14%;white-space:nowrap;font-variant-numeric:tabular-nums}
+.c-brand{width:38%}
+.c-mah{width:22%;color:var(--muted);font-size:13px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
 padding:18px 0 40px;background:#fff}
 kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
@@ -245,16 +260,19 @@ function tier(nq,k){
   if(nq.length>=4 && lev(nq,k)<=2) return ['fuzzy',0.55];
   return null;
 }
-function cardHTML(e){
+function doseNum(s){ const m=(s||'').match(/[\d.]+/); return m?parseFloat(m[0]):0; }
+function rowHTML(r){
   const T = window.T || (k=>k);
-  const badge = e.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
-                e.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
-  const tags = e.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
-  const link = e.u ? `${BASE}name/${e.u}` : `${BASE}drug/${e.v}.html`;
-  return `<div class="card">
-    <h3><a href="${link}">${e.d}</a>${tags}${badge}</h3>
-    <div class="meta">${e.x} · ${e.s.join(' / ')||'—'} · ${e.f}
-    ${e.n>1?` · ${e.n} ${T('card.packs')}`:''}</div></div>`;
+  const badge = r.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
+                r.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
+  const tags = r.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
+  const link = r.u ? `${BASE}name/${r.u}` : `${BASE}drug/${r.v}.html`;
+  const mah = r.m ? (r.mn > 1 ? `${r.m} <span class="more">+${r.mn-1}</span>` : r.m) : '';
+  return `<tr>
+    <td class="c-ing">${r.x || '—'}</td>
+    <td class="c-dose">${r.d || '—'}</td>
+    <td class="c-brand"><a href="${link}">${r.b}</a>${tags}${badge}</td>
+    <td class="c-mah">${mah || '—'}</td></tr>`;
 }
 function render(){
   const q = box.value.trim();
@@ -263,14 +281,27 @@ function render(){
   const st = strengthOf(q);
   const c = ctry.value;
   let hits=[];
-  for(const e of IDX){
-    const t = tier(nq, e.k);
-    if(!t) continue;
-    if(c && !e.c.includes(c)) continue;
+  const addHit = (e, t) => {
     let score = 0.55*t[1] + 0.20*(c && e.c.includes(c) ? 1 : 0.5);
     score += 0.15*(st && e.s.some(x=>x.toLowerCase().startsWith(st[0]+' ')) ? 1 : 0.5);
     score += 0.05;
     hits.push([score, t[0], e]);
+  };
+  // 第一遍只认确切的几种匹配；模糊匹配要等确定命中太少时才补，
+  // 否则搜 Lipitor 会把 Zifitor、Dipifor 这些隔壁牌子一起倒出来。
+  for(const e of IDX){
+    const t = tier(nq, e.k);
+    if(!t || t[0]==='fuzzy') continue;
+    if(c && !e.c.includes(c)) continue;
+    addHit(e, t);
+  }
+  if(hits.length === 0){
+    for(const e of IDX){
+      const t = tier(nq, e.k);
+      if(!t || t[0]!=='fuzzy') continue;
+      if(c && !e.c.includes(c)) continue;
+      addHit(e, t);
+    }
   }
   hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
   const shown = hits.slice(0,40);
@@ -296,9 +327,22 @@ function render(){
   for(const [label, f] of byFam){
     const members = IDX.filter(x=>x.g===label && !shownKeys.has(x.k));
     if(!members.length) continue;
-    extraHTML += `<h2>${T2('fam.title')}</h2>` + members.map(cardHTML).join('');
+    extraHTML += `<h2>${T2('fam.title')}</h2>` +
+      members.map(e=>`<div class="card"><h3><a href="${e.u?BASE+'name/'+e.u:BASE+'drug/'+e.v+'.html'}">${e.d}</a></h3>
+      <div class="meta">${e.x} · ${e.s.join(' / ')||'—'}</div></div>`).join('');
   }
-  out.innerHTML = warnHTML + shown.map(([score, t, e])=>cardHTML(e)).join('') + extraHTML;
+  // 主结果：保留相关度顺序（精确命中在前），每一行内部再按剂量数字排序。
+  // 这样"成分-剂量"始终是最左两列，但不会被无关的模糊命中顶到前面。
+  let rows=[];
+  for(const [, , e] of shown){
+    const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+    for(const d of ds) rows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
+  }
+  const capped = rows.slice(0, 80);
+  out.innerHTML = warnHTML + `<table class="res"><thead><tr>
+      <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
+      <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
+    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + extraHTML;
 }
 box.addEventListener('input', render);
 ctry.addEventListener('change', render);
@@ -374,9 +418,9 @@ def load_index(db: sqlite3.Connection):
 
     agg: dict[str, dict] = {}
     for (key_id, pid, country, form_base, dosage_form, sv, su,
-         inn_en, sid) in db.execute(
+         inn_en, sid, mah) in db.execute(
         """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
-                  pc.strength_value, pc.strength_unit, s.inn_en, s.substance_id
+                  pc.strength_value, pc.strength_unit, s.inn_en, s.substance_id, p.mah
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
            JOIN product_component pc ON pc.product_id = p.product_id
@@ -387,7 +431,7 @@ def load_index(db: sqlite3.Connection):
         a = agg.get(key_id)
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "s": [],
-                               "f": [], "v": sid}
+                               "f": [], "v": sid, "mah": {}}
         a["pids"].add(pid)
         a["c"].add(country)
         if inn_en not in a["subs"]:
@@ -399,6 +443,8 @@ def load_index(db: sqlite3.Connection):
         f = form_base or dosage_form
         if f and f not in a["f"]:
             a["f"].append(f)
+        if mah:
+            a["mah"][mah] = a["mah"].get(mah, 0) + 1
 
     entries = []
     fam = {}
@@ -426,6 +472,9 @@ def load_index(db: sqlite3.Connection):
             "u": key_file(key_id) if worth_page else "",
             "g": fam[key_id][0] if key_id in fam else "",
             "gn": fam[key_id][1] if key_id in fam else "",
+            "m": (max(a["mah"].items(), key=lambda kv: kv[1])[0]
+                  if a["mah"] else ""),
+            "mn": len(a["mah"]),
         })
     entries.sort(key=lambda e: -e["n"])
     return entries

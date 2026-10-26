@@ -8,7 +8,7 @@
     --bg:#070c16; --panel:#0e1829; --panel2:#0b1422;
     --line:#1b2c46; --line2:#243c5c;
     --text:#e8effc; --muted:#8ea4c4; --dim:#5f7695;
-    --green:#3ddc97; --amber:#f6b73c; --red:#ff6f6f; --blue:#5aa9ff; --violet:#b493ff;
+    --green:#3ddc97; --amber:#f6b73c; --red:#ff6f6f; --blue:#5aa9ff; --violet:#b493ff; --cyan:#4fd1d9; --orange:#e2703a;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg)}
@@ -79,7 +79,7 @@
   .mk-title{padding:9px 14px;font-size:11.5px;letter-spacing:.6px;color:var(--muted);background:rgba(255,255,255,.025);border-bottom:1px solid var(--line)}
   .mk-table{width:100%;border-collapse:collapse;font-size:12.5px}
   .mk-table th{font-size:10.5px;letter-spacing:1px;color:var(--dim);text-align:left;font-weight:600;padding:8px 14px;border-bottom:1px solid var(--line)}
-  .mk-table td{padding:9px 14px;border-bottom:1px solid rgba(27,44,70,.55)}
+  .mk-table td{padding:8px 14px;border-bottom:1px solid rgba(27,44,70,.55)}
   .mk-table tr:last-child td{border-bottom:none}
   .mk-table td.r,.mk-table th.r{text-align:right}
   .mk-table .who{color:var(--muted);font-size:11.5px}
@@ -103,13 +103,13 @@
 
   .cov{display:grid;grid-template-columns:1.12fr 1fr;gap:14px}
   .cov-card{padding:17px 18px}
-  .cov-row{display:grid;grid-template-columns:78px 1fr 152px;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(27,44,70,.6)}
+  .cov-row{display:grid;grid-template-columns:84px 1fr 156px;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid rgba(27,44,70,.6)}
   .cov-row:last-of-type{border-bottom:none}
-  .cov-row .c{font-size:14.5px;font-weight:650}
-  .cov-row .c em{font-style:normal;color:var(--muted);font-size:11.5px;margin-left:5px}
+  .cov-row .c{font-size:14px;font-weight:650}
+  .cov-row .c em{font-style:normal;color:var(--muted);font-size:11.5px;margin-left:4px}
   .bar{height:8px;border-radius:6px;background:#0a1421;border:1px solid #17263c;overflow:hidden}
   .bar i{display:block;height:100%;border-radius:6px}
-  .cov-row .n{text-align:right;font-size:14.5px;font-weight:650}
+  .cov-row .n{text-align:right;font-size:14px;font-weight:650}
   .cov-row .n small{display:block;color:var(--muted);font-size:10.5px;font-weight:400;margin-top:2px}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
   .kpi{padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.018)}
@@ -121,13 +121,14 @@
   .comp-sub{font-size:12.5px;color:var(--muted);line-height:1.55}
   .stack{display:flex;height:36px;border-radius:8px;overflow:hidden;margin-top:16px;border:1px solid #17263c}
   .stack div{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;overflow:hidden;white-space:nowrap}
+  .seg-cn{background:linear-gradient(90deg,#b8542c,#e2703a);color:#2a0d02}
   .seg-us{background:linear-gradient(90deg,#3b82f6,#5aa9ff);color:#04101f}
   .seg-gb{background:linear-gradient(90deg,#2bb673,#3ddc97);color:#062018}
   .seg-es{background:linear-gradient(90deg,#d9a02b,#f6c45c);color:#241a05}
   .seg-mx{background:linear-gradient(90deg,#7d5bd0,#b493ff);color:#140a28}
-  .seg-cn{background:#a83d3d;color:#fff}
-  .legend{display:flex;gap:14px;margin-top:10px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
-  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .seg-au{background:linear-gradient(90deg,#2a9aa3,#4fd1d9);color:#032024}
+  .legend{display:flex;gap:12px;margin-top:10px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
   .legend i{width:8px;height:8px;border-radius:2px}
   .callout{margin-top:12px;padding:10px 12px;border-radius:9px;background:rgba(246,183,60,.07);border:1px solid rgba(246,183,60,.28);font-size:12px;color:#f3ddb0;line-height:1.6}
   .callout b{color:#fff}
@@ -172,12 +173,12 @@
   <div>
     <div class="eyebrow">DSH WORK CLUSTER · 快照 / SNAPSHOT</div>
     <h1>药品商品名跨国定位站<span>工作集群 · 架构与进度</span></h1>
-    <div class="lede">一个项目、六个会话；五个市场并进入库，一条线在收尾。</div>
+    <div class="lede">一个项目、六个会话；六个市场全部入库，站点已推但没开 Pages。</div>
   </div>
   <div class="snap">
     <div class="live static"><i></i>静态快照 · 手动重拍</div>
     <div class="time">
-      快照 <b>2026-10-25 20:43</b><br>
+      快照 <b>2026-10-25 22:41</b><br>
       共享工作区 <b>D:\同种药物商品名剂量对应网站</b><br>
       代码 20+ 模块 · 测试 20 项
     </div>
@@ -188,44 +189,45 @@
   <div class="sec-head"><span class="no">01</span><h2>集群拓扑</h2><span class="hint">会话之间不共享上下文，协作靠工作区文件 + SQLite + 人的转述</span></div>
   <div class="human">
     <span class="tag">人类决策层</span>
-    <span class="txt">订阅 TRUD 并接受 OGL · 提供 key · 决定要不要接西语/中国市场 · 拍板上线方式（<b>唯一授权节点</b>）</span>
+    <span class="txt">订阅 TRUD 并接受 OGL · 提供 key / GitHub token · 决定接哪些市场 · 拍板上线方式（<b>唯一授权节点</b>）</span>
   </div>
   <div class="cluster">
     <div class="card g">
       <div class="role"><span class="name">主线编排</span><span class="pill run"><i></i>运行中 · 刚刚</span></div>
       <div class="sid mono">session-757e1865 · 统筹 + 入库 + 建站</div>
-      <div class="task">今天把市场从 <b>3 个扩到 5 个</b>：英 6.1 万、西 2.5 万、墨 9.8 千；下一步把 4.3 万文件压到 1.5 万以内。</div>
-      <div class="chips"><span class="chip">206,364 产品</span><span class="chip">8,256 成分</span><span class="chip">20 项测试</span></div>
+      <div class="task">今晚把市场从 3 个扩到 <b>6 个</b>：中 14.6 万、美 11 万、英 6.1 万、西 2.5 万、墨 1.1 万、澳 5.5 千；下一步把 2.39 万文件压到 2 万以内。</div>
+      <div class="chips"><span class="chip">359,200 产品</span><span class="chip">10,904 成分</span><span class="chip">20 项测试</span></div>
     </div>
     <div class="card b">
       <div class="role"><span class="name">数据侦察</span><span class="pill done"><i></i>上午已完成 12:05</span></div>
       <div class="sid mono">dd38b943 · 主线子会话</div>
-      <div class="task">三市场定论：美国公有领域、英国 dm+d 是 OGL；<b>中国没有含商品名的批量文件</b>，只能策展。</div>
+      <div class="task">三市场定论：美国公有领域、英国 dm+d 是 OGL；<b>中国没有含商品名的批量文件</b>，商品名列大多为空。</div>
       <div class="chips"><span class="chip">方案 §6</span><span class="chip">3 市场结论</span></div>
     </div>
     <div class="card b">
       <div class="role"><span class="name">上线部署</span><span class="pill done"><i></i>已完成 19:23</span></div>
       <div class="sid mono">session-02f4fffd</div>
-      <div class="task">纯静态站<b>不用买服务器</b>；但 Cloudflare Pages 免费档只收 2 万文件，站点现在 43,125 个，是上限的 2.2 倍。</div>
+      <div class="task">结论是<b>不用买服务器</b>；但 Cloudflare 免费档只收 2 万文件，站点现在 10,851 个，还差 0 个。</div>
       <div class="chips"><span class="chip">不用 VPS</span><span class="chip">2 万文件上限</span></div>
     </div>
     <div class="card v">
       <div class="role"><span class="name">可视化</span><span class="pill run"><i></i>本次生成</span></div>
       <div class="sid mono">session-eedb9d20 · 本图</div>
-      <div class="task">把六个会话、五条市场线、真实计数和阻塞压成一张快照；数字来自只读查询与站点统计。</div>
-      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">20:43</span></div>
+      <div class="task">把六个会话、六条市场线、真实计数和阻塞压成一张快照；数字来自只读查询与站点统计。</div>
+      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">22:41</span></div>
     </div>
   </div>
 
   <div class="markets">
-    <div class="mk-title">市场接入 · 五条并行工作流（条数取自 products 表）</div>
+    <div class="mk-title">市场接入 · 六条并行工作流（条数取自 products 表）</div>
     <table class="mk-table">
       <tr><th>市场</th><th>数据源</th><th class="r">条数</th><th>谁在做</th><th>状态</th></tr>
+      <tr><td><b>中国</b> · CN</td><td>医保药品分类与代码库</td><td class="r num">146,347</td><td class="who">中国子会话 981d0055</td><td><span class="st-hot"><i class="dot a"></i>2025-04 快照 · 商品名稀缺</span></td></tr>
       <tr><td><b>美国</b> · US</td><td>openFDA NDC</td><td class="r num">110,179</td><td class="who">主线编排</td><td><span class="st-done"><i class="dot g"></i>全量</span></td></tr>
       <tr><td><b>英国</b> · GB</td><td>NHS dm+d（OGL）</td><td class="r num">61,051</td><td class="who">主线编排</td><td><span class="st-done"><i class="dot g"></i>全量 · 已滤器械</span></td></tr>
-      <tr><td><b>西班牙</b> · ES</td><td>CIMA / AEMPS</td><td class="r num">25,293</td><td class="who">西班牙子会话 146cc7e0</td><td><span class="st-hot"><i class="dot a"></i>刚接入 · 许可待确认</span></td></tr>
-      <tr><td><b>墨西哥</b> · MX</td><td>COFEPRIS 目录</td><td class="r num">9,838</td><td class="who">主线编排</td><td><span class="st-hot"><i class="dot a"></i>目录采样 · 许可待确认</span></td></tr>
-      <tr><td><b>中国</b> · CN</td><td>省级医保表（策展）</td><td class="r num">3</td><td class="who">中国子会话 981d0055</td><td><span class="st-off"><i class="dot r"></i>进行中 · 目标 +2,000</span></td></tr>
+      <tr><td><b>西班牙</b> · ES</td><td>CIMA / AEMPS</td><td class="r num">25,293</td><td class="who">西班牙子会话 146cc7e0</td><td><span class="st-hot"><i class="dot a"></i>全量 · 许可待确认</span></td></tr>
+      <tr><td><b>墨西哥</b> · MX</td><td>COFEPRIS 26 个 PDF</td><td class="r num">10,878</td><td class="who">主线编排</td><td><span class="st-hot"><i class="dot a"></i>29% 有规格 · 许可待确认</span></td></tr>
+      <tr><td><b>澳洲</b> · AU</td><td>PBS API v3</td><td class="r num">5,452</td><td class="who">主线编排</td><td><span class="st-hot"><i class="dot a"></i>只覆盖 PBS · 无 OTC</span></td></tr>
     </table>
   </div>
   <div class="flow"><b>协作总线</b>　同一 DSH 运行时 · 同一工作区 · 同一 SQLite（单一真相源）· docs/ 承载结论　→　会话是并行工位，不是共享大脑</div>
@@ -236,106 +238,113 @@
   <div class="pipe">
     <div class="step">
       <div class="idx">01 / INGEST</div><h3>原始数据</h3>
-      <div class="metric">5<small>个源</small></div>
-      <p>openFDA 138,032；dm+d 16.9 MB；CIMA REST；COFEPRIS 目录；中国 0 个批量文件。</p>
-      <span class="st ok">五源已接</span>
+      <div class="metric">6<small>个源</small></div>
+      <p>openFDA、dm+d、CIMA、COFEPRIS PDF、PBS API、医保库；中国没有商品名批量。</p>
+      <span class="st ok">六源已接</span>
     </div>
     <div class="step">
       <div class="idx">02 / NORMALIZE</div><h3>归一化</h3>
       <div class="metric">9<small>项测试</small></div>
-      <p>NFKC、全角、西里尔、繁简、配比与尾部剂量切分；中英西墨同一套。</p>
+      <p>NFKC、全角、西里尔、繁简、配比与尾部剂量切分；六市场同一套。</p>
       <span class="st ok">通过</span>
     </div>
     <div class="step">
       <div class="idx">03 / SQLITE</div><h3>单一真相源</h3>
-      <div class="metric">206,364<small>产品</small></div>
-      <p>8,256 成分 / 87,386 名字键；五个市场同库，可重建。</p>
-      <span class="st hot">刚扩到 5 市场</span>
+      <div class="metric">359,200<small>产品</small></div>
+      <p>10,904 成分 / 102,053 名字键；六个市场同库，可重建。</p>
+      <span class="st hot">刚扩到 6 市场</span>
     </div>
     <div class="step">
       <div class="idx">04 / SEARCH</div><h3>检索与碰撞</h3>
-      <div class="metric">23,903<small>严重碰撞</small></div>
-      <p>0.55/0.20/0.15/0.10 打分；同名不同药自动推导，警告 490。</p>
+      <div class="metric">24,652<small>严重碰撞</small></div>
+      <p>0.55/0.20/0.15/0.10 打分；同名不同药自动推导，警告 564。</p>
       <span class="st ok">11 项测试通过</span>
     </div>
     <div class="step">
       <div class="idx">05 / BUILD</div><h3>静态站</h3>
-      <div class="metric">43,125<small>文件</small></div>
-      <p>94.0 MB；8,256 成分页 + 34,861 名字页；索引 13.8 MB。20:32 重建。</p>
+      <div class="metric">10,851<small>文件</small></div>
+      <p>48.0 MB；10,847 成分页 + 0 名字页；索引 17.2 MB。— 重建。</p>
       <span class="st hot">三语界面</span>
     </div>
     <div class="step">
       <div class="idx">06 / DEPLOY</div><h3>上线</h3>
-      <div class="metric">0<small>次部署</small></div>
-      <p>43,125 个文件已超 Pages 免费档 20,000 上限；方案定了，还没传。</p>
-      <span class="st off">未部署</span>
+      <div class="metric">0<small>个可用网址</small></div>
+      <p>10,851 个文件在 Pages 免费档 20,000 以内；站点已可部署。</p>
+      <span class="st off">未上线</span>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="sec-head"><span class="no">03</span><h2>覆盖与规模</h2><span class="hint">条形长度＝条数相对美国，不代表覆盖率</span></div>
+  <div class="sec-head"><span class="no">03</span><h2>覆盖与规模</h2><span class="hint">条形长度＝条数相对最大市场（中国），不代表覆盖率</span></div>
   <div class="cov">
     <div class="card cov-card b">
       <div class="cov-row">
+        <div class="c">中国 <em>CN</em></div>
+        <div class="bar"><i style="width:100%;background:linear-gradient(90deg,#b8542c,#e2703a)"></i></div>
+        <div class="n">146,347<small>省医保库 2025-04</small></div>
+      </div>
+      <div class="cov-row">
         <div class="c">美国 <em>US</em></div>
-        <div class="bar"><i style="width:100%;background:linear-gradient(90deg,#3b82f6,#5aa9ff)"></i></div>
+        <div class="bar"><i style="width:75.3%;background:linear-gradient(90deg,#3b82f6,#5aa9ff)"></i></div>
         <div class="n">110,179<small>openFDA 全量</small></div>
       </div>
       <div class="cov-row">
         <div class="c">英国 <em>GB</em></div>
-        <div class="bar"><i style="width:55.4%;background:linear-gradient(90deg,#2bb673,#3ddc97)"></i></div>
+        <div class="bar"><i style="width:41.7%;background:linear-gradient(90deg,#2bb673,#3ddc97)"></i></div>
         <div class="n">61,051<small>dm+d 过滤器械后</small></div>
       </div>
       <div class="cov-row">
         <div class="c">西班牙 <em>ES</em></div>
-        <div class="bar"><i style="width:23.0%;background:linear-gradient(90deg,#d9a02b,#f6c45c)"></i></div>
+        <div class="bar"><i style="width:17.3%;background:linear-gradient(90deg,#d9a02b,#f6c45c)"></i></div>
         <div class="n">25,293<small>CIMA 逐条抓取</small></div>
       </div>
       <div class="cov-row">
         <div class="c">墨西哥 <em>MX</em></div>
-        <div class="bar"><i style="width:8.9%;background:linear-gradient(90deg,#7d5bd0,#b493ff)"></i></div>
-        <div class="n">9,838<small>COFEPRIS 目录</small></div>
+        <div class="bar"><i style="width:7.4%;background:linear-gradient(90deg,#7d5bd0,#b493ff)"></i></div>
+        <div class="n">10,878<small>COFEPRIS 目录</small></div>
       </div>
       <div class="cov-row">
-        <div class="c">中国 <em>CN</em></div>
-        <div class="bar"><i style="width:1%;background:linear-gradient(90deg,#c0392b,#ff6f6f)"></i></div>
-        <div class="n">3<small>人工种子 / 目标 2,000</small></div>
+        <div class="c">澳洲 <em>AU</em></div>
+        <div class="bar"><i style="width:3.7%;background:linear-gradient(90deg,#2a9aa3,#4fd1d9)"></i></div>
+        <div class="n">5,452<small>PBS 补贴目录</small></div>
       </div>
       <div class="kpis">
-        <div class="kpi"><div class="k">产品总数</div><div class="v num">206,364</div><div class="d">US 53% · GB 30% · ES 12% · MX 5%</div></div>
-        <div class="kpi"><div class="k">活性成分</div><div class="v num">8,256</div><div class="d">五市场归并后</div></div>
-        <div class="kpi"><div class="k">名字键</div><div class="v num">87,386</div><div class="d">挂 336,231 条命名</div></div>
-        <div class="kpi"><div class="k">严重碰撞</div><div class="v num">23,903</div><div class="d">警告 490 · 提示 60,826</div></div>
+        <div class="kpi"><div class="k">产品总数</div><div class="v num">359,200</div><div class="d">CN 41% · US 31% · GB 17%</div></div>
+        <div class="kpi"><div class="k">活性成分</div><div class="v num">10,904</div><div class="d">六市场归并后</div></div>
+        <div class="kpi"><div class="k">名字键</div><div class="v num">102,053</div><div class="d">挂 666,522 条命名</div></div>
+        <div class="kpi"><div class="k">严重碰撞</div><div class="v num">24,652</div><div class="d">警告 564 · 提示 75,031</div></div>
       </div>
     </div>
     <div class="card cov-card a">
-      <div class="comp-title">五个市场，三种许可确定性</div>
-      <div class="comp-sub">美国和英国可以公开再发布；西班牙、墨西哥是查询接口/目录采样，许可没落纸；中国仍是墙。</div>
+      <div class="comp-title">六个市场，三种许可确定性</div>
+      <div class="comp-sub">美国、英国、澳洲明确可再发布；西班牙、墨西哥署名但没写批量再发布；中国没找到许可。</div>
       <div class="stack">
-        <div class="seg-us" style="width:53%">US 53%</div>
-        <div class="seg-gb" style="width:30%">GB 30%</div>
-        <div class="seg-es" style="width:12%">ES 12%</div>
-        <div class="seg-mx" style="width:5%"></div>
-        <div class="seg-cn" style="width:0.6%"></div>
+        <div class="seg-cn" style="width:40.7%">CN 41%</div>
+        <div class="seg-us" style="width:30.7%">US 31%</div>
+        <div class="seg-gb" style="width:17.0%">GB 17%</div>
+        <div class="seg-es" style="width:7.0%">ES 7%</div>
+        <div class="seg-mx" style="width:3.0%"></div>
+        <div class="seg-au" style="width:1.5%"></div>
       </div>
       <div class="legend">
+        <span><i style="background:#e2703a"></i>CN 未解决</span>
         <span><i style="background:#5aa9ff"></i>US 公有领域</span>
         <span><i style="background:#3ddc97"></i>GB OGL</span>
         <span><i style="background:#f6c45c"></i>ES 待确认</span>
         <span><i style="background:#b493ff"></i>MX 待确认</span>
-        <span><i style="background:#ff6f6f"></i>CN 未解决</span>
+        <span><i style="background:#4fd1d9"></i>AU PBS API</span>
       </div>
-      <div class="callout"><b>新风险：</b>CIMA 与 COFEPRIS 都没有写明“可批量再发布”。现在只存事实字段 + 链回原文还能解释，一旦公开上线被追问，<b>需要许可依据或退成“只展示派生结论”</b>。</div>
+      <div class="callout"><b>中国是最大单一市场（41%），但商品名有值只有 5.1%</b>；README 还写 135,351 / 2024 快照，about.html 也还是 2024——公开前先统一口径。</div>
       <div class="legend" style="margin-top:10px">
-        <span>英国另有 10.6 万器械/耗材被过滤</span><span>ES 品牌 25,285</span><span>MX 品牌 9,727</span>
+        <span>CN 商品名键 4,866</span><span>AU 3,077</span><span>ES 12,163</span><span>MX 9,829</span>
       </div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="sec-head"><span class="no">04</span><h2>阶段进度</h2><span class="hint">P2 已收口；P5 差文件数、索引与上线件</span></div>
+  <div class="sec-head"><span class="no">04</span><h2>阶段进度</h2><span class="hint">P3 数据到了但商品名没到；P5 差一个能打开的网址</span></div>
   <div class="phases">
     <div class="ph">
       <div class="top"><span class="p">P0</span><span class="pct" style="color:var(--green)">100%</span></div>
@@ -353,71 +362,74 @@
       <div class="note">61,051 条；器械过滤 + VTM 抽成分；ATC 未接</div>
     </div>
     <div class="ph">
-      <div class="top"><span class="p">P3</span><span class="pct" style="color:var(--red)">8%</span></div>
-      <h4>中国策展</h4><div class="bar"><i style="width:8%;background:var(--red)"></i></div>
-      <div class="note">3 / 2,000 条；中国子会话进行中</div>
+      <div class="top"><span class="p">P3</span><span class="pct" style="color:var(--amber)">75%</span></div>
+      <h4>中国策展</h4><div class="bar"><i style="width:75%;background:var(--amber)"></i></div>
+      <div class="note">146,347 条化学药；商品名键仅 4,866</div>
     </div>
     <div class="ph">
       <div class="top"><span class="p">P4</span><span class="pct" style="color:var(--amber)">90%</span></div>
       <h4>检索与碰撞</h4><div class="bar"><i style="width:90%;background:var(--amber)"></i></div>
-      <div class="note">11 项测试过；新增 ES/MX 后阈值待复测</div>
+      <div class="note">11 项测试过；六市场数据后阈值待复测</div>
     </div>
     <div class="ph">
-      <div class="top"><span class="p">P5</span><span class="pct" style="color:var(--amber)">55%</span></div>
-      <h4>公开上线</h4><div class="bar"><i style="width:55%;background:var(--amber)"></i></div>
-      <div class="note">文件数 43,125，目标压到 1.5 万以下；索引与上线件未收口</div>
+      <div class="top"><span class="p">P5</span><span class="pct" style="color:var(--amber)">40%</span></div>
+      <h4>公开上线</h4><div class="bar"><i style="width:40%;background:var(--amber)"></i></div>
+      <div class="note">文件数已达标；dist.zip 与上线件待补</div>
     </div>
   </div>
-  <div class="extra"><b>计划外加餐：</b>西班牙 CIMA 25,293 条、墨西哥 COFEPRIS 9,838 条，20:24–20:25 入库；许可与质量都还没验，属于“先接上再说”。</div>
+  <div class="extra"><b>计划外加餐：</b>西班牙 25,293、墨西哥 10,878、澳洲 5,452、中国 146,347 都是今天接的；许可与质量都还没验完，README / about 的数字已经落后于库。</div>
 </section>
 
 <section>
   <div class="sec-head"><span class="no">05</span><h2>阻塞与风险</h2><span class="hint">按「会不会挡住上线」排序</span></div>
   <div class="risks">
     <div class="risk r">
-      <h4>4.31 万文件 &gt; Pages 免费上限 <span class="sev hi">高</span></h4>
-      <p>站点 43,125 个文件，Cloudflare Pages 免费档<b>单次部署最多 20,000 个文件</b>，差 23,125 个。主线的目标是压到 1.5 万以下：要么裁页（合并名字页 / 只发布药品子集），要么上 Pro（10 万文件）。</p>
+      <h4>还没有可用网址 <span class="sev hi">高</span></h4>
+      <p>gh-pages 分支 22:29 已推整站，但 <b>fuarnos.github.io 仍是 404</b>；Pages 没启用，仓库还是私有的，CI 工作流也没接进 <b>.github/workflows</b>。dist.zip 停在 21:05，拿它上传会发布旧数据。</p>
     </div>
     <div class="risk a">
-      <h4>首屏索引 13.8 MB <span class="sev mid">中高</span></h4>
-      <p>检索索引一次拉全量，34,861 个名字页、手机 4G 首搜会明显等。需要按首字母拆片、压缩，或改成服务端查询。</p>
+      <h4>1.09 万文件 · 在 Pages 免费额度内 <span class="sev mid">中高</span></h4>
+      <p>站点 10,851 个文件，在 Cloudflare Pages 免费档 20,000 个文件以内；注意单文件 25 MiB 上限，部署前先确认 <b>index.json</b> 与图片体积。</p>
     </div>
     <div class="risk a">
-      <h4>西语源许可没落纸 <span class="sev mid">中高</span></h4>
-      <p>CIMA 是逐条 REST，COFEPRIS 是目录采样，两家都没写“可批量再发布”。公开前要么拿到书面依据，要么只展示派生结论并链回原文。</p>
+      <h4>首屏索引 17.2 MB <span class="sev mid">中高</span></h4>
+      <p>检索索引一次拉全量，0 个名字页、手机 4G 首搜会明显等。需要按首字母拆片、压缩，或改成服务端查询。</p>
     </div>
     <div class="risk a">
-      <h4>中国还是 3 条 <span class="sev mid">中</span></h4>
-      <p>没有任何含中文商品名的官方批量文件；靠省级医保表策展，中国子会话正在跑，目标 +2,000 条，页面必须标“部分覆盖”。</p>
+      <h4>中国口径对不上 <span class="sev mid">中高</span></h4>
+      <p>库里是 <b>2025-04 快照 146,347 条</b>，README 还写 135,351、about.html 还写 2024-01-05。商品名有值只有 5.1%，公开页面必须先统一这两个口径。</p>
     </div>
     <div class="risk y">
-      <h4>ES/MX 是机器映射 <span class="sev lo">中低</span></h4>
-      <p>西班牙 23,508 条靠别名表映射到成分，墨西哥 6,321 条靠人工 INN 表；都需要抽样复核，否则碰撞页会出现假阳性。</p>
+      <h4>西语源许可没落纸 <span class="sev lo">中</span></h4>
+      <p>CIMA 逐条 REST、COFEPRIS 目录采样，都没写“可批量再发布”。公开前要么拿书面依据，要么只展示派生结论并链回原文。</p>
     </div>
     <div class="risk y">
-      <h4>上线件还没做 <span class="sev lo">中低</span></h4>
-      <p>404、robots、sitemap、OGL 署名、免责页都还没做；托管方案定了 Cloudflare Pages，但没传过。</p>
+      <h4>澳洲只有 PBS <span class="sev lo">中低</span></h4>
+      <p>ARTG 才是注册总表，但没有批量、程序访问 403；PBS 只覆盖补贴处方药，<b>Panadol / Nurofen 查不到</b>——页面要写清楚，否则会被当成“澳洲没有”。</p>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="sec-head"><span class="no">06</span><h2>今晚的时间线</h2><span class="hint">英国 12 分钟打通；西语两市场 25 分钟接上；中国还在跑</span></div>
+  <div class="sec-head"><span class="no">06</span><h2>今晚的时间线</h2><span class="hint">从英国解锁到六市场 + 推仓库，3 小时 18 分</span></div>
   <div class="tl">
     <div class="ev"><div class="t mono">19:19</div><div class="x">TRUD 订阅生效，dm+d supplementary 出现 <b>27 个可下载版本</b></div></div>
     <div class="ev"><div class="t mono">19:31</div><div class="x">英国全量入库 + 站点重建：21,635 文件 / 索引 10.1 MB</div></div>
-    <div class="ev"><div class="t mono">19:59</div><div class="x">西班牙子会话启动，开始探 CIMA 的批量入口</div></div>
-    <div class="ev"><div class="t mono">20:01</div><div class="x">CIMA REST 探通：<b>25,501 条</b>，只能逐条取详情</div></div>
     <div class="ev"><div class="t mono">20:24</div><div class="x">西班牙入库 <b>25,293 条</b>（CIMA，别名映射 23,508）</div></div>
     <div class="ev"><div class="t mono">20:25</div><div class="x">墨西哥入库 <b>9,838 条</b>（COFEPRIS 目录采样）</div></div>
-    <div class="ev"><div class="t mono">20:27</div><div class="x">中国子会话启动，目标 +2,000 条省级医保表</div></div>
-    <div class="ev"><div class="t mono">20:32</div><div class="x">站点重建：<b>43,125 文件 / 94.0 MB / 索引 13.8 MB</b></div></div>
-    <div class="ev"><div class="t mono">20:38</div><div class="x">本次快照；主线下一步：文件数压到 1.5 万以下</div></div>
+    <div class="ev"><div class="t mono">20:27</div><div class="x">中国子会话启动；随后改走「通用名 + 厂家 + 批准文号」</div></div>
+    <div class="ev"><div class="t mono">21:05</div><div class="x">打部署包 dist.zip（23,016 文件 / 24.9 MB）</div></div>
+    <div class="ev"><div class="t mono">21:18</div><div class="x">git 初始化 + 首次提交；21:20 澳洲 PBS <b>5,452 条</b>入库</div></div>
+    <div class="ev"><div class="t mono">22:25</div><div class="x">中国切到 <b>2025-04 NHSA 快照</b>，146,347 条</div></div>
+    <div class="ev"><div class="t mono">22:27</div><div class="x">站点重建：<b>10,851 文件 / 48.0 MB / 索引 17.2 MB</b></div></div>
+    <div class="ev"><div class="t mono">22:29</div><div class="x">gh-pages 推送整站，但 <b>Pages 没开</b>，网址仍 404</div></div>
+    <div class="ev"><div class="t mono">22:37</div><div class="x">本次快照；README / about 的旧数字还没改</div></div>
+    <div class="ev"><div class="t mono">下一步</div><div class="x">开 Pages / 换 Netlify → 统一口径 → 重打 zip → 补 404/robots/sitemap</div></div>
   </div>
 </section>
 
 <footer>
-  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-25 20:43；重拍命令 <b>python render_dashboard.py</b>。</div>
+  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-25 22:41；重拍命令 <b>python render_dashboard.py</b>。</div>
   <div style="text-align:right"><b>这是静态快照，不是实时监控。</b><br>集群由 6 个互不可见上下文的会话组成，靠共享工作区协作。</div>
 </footer>
 

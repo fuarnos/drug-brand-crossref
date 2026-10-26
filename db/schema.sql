@@ -141,6 +141,28 @@ CREATE TABLE IF NOT EXISTS product_name (
 
 CREATE INDEX IF NOT EXISTS idx_product_name_key ON product_name (key_id);
 
+-- 俗称 / 网络别名 / 旧名：人嘴里说的名字，不一定是包装上的名字。
+-- 它指向**活性成分**，不指向某个产品：同一个昵称在不同国家会落到不同品牌上。
+-- 如果写进 product_name，会让 collision 把「两只青蛙」算成一个挂了几万个包装的
+-- 商品名，也会生成一张没有意义的同名页——所以单独一张表，只做检索入口。
+CREATE TABLE IF NOT EXISTS nickname (
+    nickname_id  INTEGER PRIMARY KEY,
+    substance_id TEXT NOT NULL REFERENCES substance (substance_id),
+    alias        TEXT NOT NULL,
+    alias_norm   TEXT NOT NULL,
+    label_zh     TEXT,                       -- 目标成分的中文显示名（人工填，仅用于命中提示）
+    kind         TEXT NOT NULL DEFAULT 'slang'
+                 CHECK (kind IN ('slang', 'legacy', 'translit', 'abbrev', 'misnomer')),
+    confidence   TEXT NOT NULL DEFAULT 'community'
+                 CHECK (confidence IN ('user', 'community', 'documented')),
+    source       TEXT,                       -- 「用户提供」「中文旧版药名」这类出处
+    note         TEXT,
+    created_at   TEXT NOT NULL,
+    UNIQUE (alias_norm, substance_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_nickname_norm ON nickname (alias_norm);
+
 -- 品牌家族：同一个商标在不同国家/不同文字的写法（Tylenol ↔ 泰诺 ↔ 泰诺林）。
 -- 这是唯一一处必须人工维护的映射——因为"它们是同一个品牌"不写在任何数据里。
 CREATE TABLE IF NOT EXISTS brand_family (

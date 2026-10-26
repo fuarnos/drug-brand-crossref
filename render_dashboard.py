@@ -51,7 +51,8 @@ def db_stats() -> dict[str, int]:
     out = dict(US=0, GB=0, ES=0, MX=0, CN=0, total=0, subst=0, keys=0, named=0,
                severe=0, warn=0, info=0, dmd_in=0, dmd_kept=0,
                gb_seed=0, gb_branded=0, es_branded=0, mx_branded=0,
-               gb_trade=0, us_trade=0)
+               gb_trade=0, us_trade=0, cn_trade=0, au_trade=0,
+               es_trade=0, mx_trade=0)
     if not DB.exists():
         print(f"！没找到 {DB}，库里相关数字按 0 处理")
         return out
@@ -86,6 +87,11 @@ def db_stats() -> dict[str, int]:
             "select count(distinct pn.key_id) from product_name pn "
             "join product p using(product_id) "
             "where pn.name_type='trade' and p.country='US'")
+        for c in ("CN", "AU", "ES", "MX"):
+            out[f"{c.lower()}_trade"] = one(
+                "select count(distinct pn.key_id) from product_name pn "
+                "join product p using(product_id) "
+                f"where pn.name_type='trade' and p.country='{c}'")
         try:
             row = con.execute(
                 "select rows_in, rows_kept from ingest_run "
@@ -153,7 +159,8 @@ def pct(part: int, whole: int, digits: int = 1) -> str:
 
 def build_tokens(db: dict, dist: dict) -> dict[str, str]:
     now = datetime.now().astimezone()
-    us, gb, es, mx, cn, total = db["US"], db["GB"], db["ES"], db["MX"], db["CN"], db["total"]
+    us, gb, es, mx, au, cn, total = (db["US"], db["GB"], db["ES"], db["MX"],
+                                      db["AU"], db["CN"], db["total"])
     dmd_in, dmd_kept = db["dmd_in"], db["dmd_kept"]
     dmd_drop = max(0, dmd_in - dmd_kept)
     files = int(dist["files"])
@@ -165,20 +172,21 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
     drop_int = 100 - keep_int
 
     if over:
-        deploy_note = f"{commas(files)} 个文件已超 Pages 免费档 20,000 上限；方案定了，还没传。"
-        risk_title = f"{files / 10000:.2f} 万文件 &gt; Pages 免费上限"
+        deploy_note = (f"{commas(files)} 个文件仍在 Pages 免费档 2 万之外（差 {commas(over)}）；"
+                       f"gh-pages 推了，但 Pages 没开。")
+        risk_title = f"{files / 10000:.2f} 万文件 · 超 Pages 免费上限"
         risk_body = (
             f"站点 {commas(files)} 个文件，Cloudflare Pages 免费档"
             f"<b>单次部署最多 20,000 个文件</b>，差 {commas(over)} 个。"
-            f"主线的目标是压到 1.5 万以下：要么裁页（合并名字页 / 只发布药品子集），要么上 Pro（10 万文件）。")
-        p5_note = f"文件数 {commas(files)}，目标压到 1.5 万以下；索引与上线件未收口"
+            f"主线目标是压到 2 万以内：裁页（合并名字页 / 只发布药品子集），或上 Pro（10 万文件）。")
+        p5_note = "gh-pages 已推，但 Pages 没开；dist.zip 旧、上线件缺"
     else:
-        deploy_note = f"{commas(files)} 个文件在 Pages 免费档 20,000 以内；方案定了，还没传。"
+        deploy_note = f"{commas(files)} 个文件在 Pages 免费档 20,000 以内；站点已可部署。"
         risk_title = f"{files / 10000:.2f} 万文件 · 在 Pages 免费额度内"
         risk_body = (
             f"站点 {commas(files)} 个文件，在 Cloudflare Pages 免费档 20,000 个文件以内；"
             f"注意单文件 25 MiB 上限，部署前先确认 <b>index.json</b> 与图片体积。")
-        p5_note = "站可生成；索引与上线件未收口"
+        p5_note = "文件数已达标；dist.zip 与上线件待补"
 
     return {
         "SNAP_TIME": f"{now:%Y-%m-%d %H:%M}",
@@ -190,6 +198,7 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "ES": commas(es),
         "MX": commas(mx),
         "CN": commas(cn),
+        "AU": commas(au),
         "SUBST": commas(db["subst"]),
         "KEYS": commas(db["keys"]),
         "NAMED": commas(db["named"]),
@@ -200,9 +209,20 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "GB_SHARE": pct(gb, total, 0),
         "ES_SHARE": pct(es, total, 0),
         "MX_SHARE": pct(mx, total, 0),
-        "GB_BAR": pct(gb, us),
-        "ES_BAR": pct(es, us),
-        "MX_BAR": pct(mx, us),
+        "CN_SHARE": pct(cn, total, 0),
+        "AU_SHARE": pct(au, total, 0),
+        "US_W": pct(us, total, 1),
+        "GB_W": pct(gb, total, 1),
+        "ES_W": pct(es, total, 1),
+        "MX_W": pct(mx, total, 1),
+        "CN_W": pct(cn, total, 1),
+        "AU_W": pct(au, total, 1),
+        "CN_BAR": "100",
+        "US_BAR": pct(us, cn),
+        "GB_BAR": pct(gb, cn),
+        "ES_BAR": pct(es, cn),
+        "MX_BAR": pct(mx, cn),
+        "AU_BAR": pct(au, cn),
         "GB_RAW": commas(dmd_in),
         "GB_RAW_WAN": f"{dmd_in / 10000:.1f}",
         "GB_DMD": commas(dmd_kept),
@@ -220,6 +240,10 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "MX_BRANDED": commas(db["mx_branded"]),
         "GB_TRADE": commas(db["gb_trade"]),
         "US_TRADE": commas(db["us_trade"]),
+        "CN_TRADE": commas(db["cn_trade"]),
+        "AU_TRADE": commas(db["au_trade"]),
+        "ES_TRADE": commas(db["es_trade"]),
+        "MX_TRADE": commas(db["mx_trade"]),
         "FILES": commas(files),
         "FILES_WAN": f"{files / 10000:.2f}",
         "FILES_RATIO": f"{files / PAGE_LIMIT:.1f}",
