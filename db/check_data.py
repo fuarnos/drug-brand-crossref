@@ -24,6 +24,10 @@ def main() -> None:
         ("names", "SELECT COUNT(*) FROM product_name"),
         ("collisions(severe)", "SELECT COUNT(*) FROM collision WHERE level='severe'"),
         ("collisions(warning)", "SELECT COUNT(*) FROM collision WHERE level='warning'"),
+        ("nickname", "SELECT COUNT(*) FROM nickname"),
+        ("drug_term", "SELECT COUNT(*) FROM drug_term"),
+        ("aliases(total)", "SELECT COUNT(*) FROM alias_all"),
+        ("confusable_pairs", "SELECT COUNT(*) FROM confusable_pair"),
     ):
         print(f"   {label:20} {db.execute(sql).fetchone()[0]}")
 
@@ -47,6 +51,20 @@ def main() -> None:
            LEFT JOIN product_name pn ON pn.product_id = p.product_id AND pn.is_primary = 1
            LEFT JOIN name_variant nv ON nv.key_id = pn.key_id
            WHERE v.substance_id = 'atorvastatin' LIMIT 6"""
+    ):
+        print("  ", row)
+
+    print("== US terms (sample) ==")
+    for row in db.execute(
+        """SELECT term, term_type, substance_id, label_zh
+           FROM drug_term ORDER BY term_id LIMIT 12"""
+    ):
+        print("  ", row)
+
+    print("== confusable pairs (sample) ==")
+    for row in db.execute(
+        """SELECT name_a, name_b, a_substance_id, b_substance_id
+           FROM confusable_pair ORDER BY pair_id LIMIT 12"""
     ):
         print("  ", row)
 

@@ -83,6 +83,9 @@ def main() -> None:
     run("data/seed_manual.py")
     run("data/seed_families.py")
     run("data/seed_nicknames.py")
+    # 美国街头叫法（NIDA + DEA 补充）与 FDA 易混淆药对；都读 data/raw 快照，可离线重跑。
+    run("etl/ingest_us_terms.py")
+    run("etl/ingest_fda_confusable.py")
     run("site/build.py")
     print("\n全部完成。预览：python serve.py 8000")
 

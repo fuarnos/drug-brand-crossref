@@ -89,6 +89,26 @@ def build_fixture(path: Path) -> None:
         " confidence, source, note, created_at)"
         " VALUES ('metformin','两只青蛙','两只青蛙','二甲双胍','slang','user',"
         " 'test','用户提供的网络俗称','2026-01-01')")
+    # 美国街头叫法 / 类别 / 本库无产品：三种情形各一条。
+    for term, norm, ttype, sid, zh, en, mzh, men in (
+        ("bars", "bars", "street", "metformin", "二甲双胍", "Metformin",
+         None, None),
+        ("water pill", "water pill", "class", None, "利尿剂", "Diuretics",
+         "利尿剂的类别叫法。", "Class term for diuretics."),
+        ("molly", "molly", "street", None, "MDMA", "MDMA",
+         "摇头丸；本库无上市产品。", "MDMA; no marketed product in this database."),
+    ):
+        db.execute(
+            "INSERT INTO drug_term (term, term_norm, term_type, country, label_zh,"
+            " label_en, meaning_zh, meaning_en, substance_id, confidence,"
+            " source_id, note, created_at)"
+            " VALUES (?,?,?, 'US', ?,?,?,?,?, 'documented', 'test', '', '2026-01-01')",
+            (term, norm, ttype, zh, en, mzh, men, sid))
+    db.execute(
+        "INSERT INTO confusable_pair (name_a, name_b, norm_a, norm_b,"
+        " a_substance_id, b_substance_id, reason, severity, source_id, note, created_at)"
+        " VALUES ('Metformin','Acetaminophen','metformin','acetaminophen',"
+        " 'metformin','acetaminophen','both','high','test','fixture','2026-01-01')")
     db.commit()
     db.close()
 
@@ -183,6 +203,35 @@ class SearchTests(unittest.TestCase):
     def test_nickname_is_not_a_product_name(self):
         # 俗称不能污染碰撞/同名页：它只指向成分，不冒充包装上的名字
         self.assertIsNone(self.idx.name_page("两只青蛙"))
+
+    # --- 美国街头叫法 / 类别词 / 无上市产品 -------------------------------
+    def test_drug_term_street_name_resolves(self):
+        res = self.idx.search("bars")
+        self.assertTrue(res.cards)
+        self.assertEqual(res.alias["substance_id"], "metformin")
+        self.assertEqual(res.alias["kind"], "street")
+        self.assertEqual(res.alias["origin"], "drug_term")
+        self.assertIn("街头叫法", res.note)
+
+    def test_drug_term_class_is_not_a_product(self):
+        res = self.idx.search("water pill")
+        self.assertTrue(res.empty)
+        self.assertEqual(res.alias["kind"], "class")
+        self.assertIn("类别叫法", res.note)
+        self.assertIsNone(res.alias["substance_id"])
+
+    def test_drug_term_unmapped_is_honest(self):
+        res = self.idx.search("molly")
+        self.assertTrue(res.empty)
+        self.assertEqual(res.alias["kind"], "street")
+        self.assertIn("本库", res.note)
+        self.assertIn("MDMA", res.note)
+
+    # --- 易混淆药对 ---
+    def test_confusable_pair_is_flagged(self):
+        res = self.idx.search("metformin")
+        self.assertTrue(res.confused)
+        self.assertEqual(res.confused[0]["name"], "Acetaminophen")
 
     # --- 碰撞 ---
     def test_severe_collision_detected(self):

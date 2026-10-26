@@ -46,6 +46,7 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 .notice.nick .nick-head b{font-size:17px}
 .notice.nick .sub{margin:6px 0 0}
 .notice.nick .sub a{white-space:nowrap}
+.notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
 table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:13px}

@@ -33,6 +33,7 @@ def main() -> None:
                 "query": res.query, "norm": res.norm,
                 "strengths": list(res.strengths), "note": res.note,
                 "alias": res.alias, "aliases": res.aliases,
+                "confused": res.confused,
                 "cards": [c.__dict__ for c in res.cards],
             }, ensure_ascii=False, indent=2))
         return
@@ -46,6 +47,8 @@ def main() -> None:
                   or a.get("inn_en") or "—")
         print(f"alias = {a['alias']} -> {target} "
               f"({a['kind']}, {a['confidence']}; {a['source']})")
+    for c in res.confused:
+        print(f"confused = {c['name']} ({c['tml'] or '—'})")
     if not res.cards:
         print("(no results)")
         return

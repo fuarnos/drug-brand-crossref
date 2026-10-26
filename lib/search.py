@@ -78,6 +78,8 @@ class SearchResult:
     # 俗称命中：aliases 是所有候选（同一个叫法可能对应多个成分），alias 是首条。
     alias: dict = field(default_factory=dict)
     aliases: list[dict] = field(default_factory=list)
+    # 易混淆药对：这个查询名和哪些名字可能被看错/听错。
+    confused: list[dict] = field(default_factory=list)
 
     @property
     def empty(self) -> bool:
@@ -129,6 +131,13 @@ class SearchIndex:
             ]
         except sqlite3.OperationalError:
             self._nicknames = []
+        try:
+            self._confusable = [dict(r) for r in self.db.execute(
+                """SELECT norm_a, norm_b, name_a, name_b, tml_a, tml_b,
+                          a_substance_id, b_substance_id
+                   FROM confusable_pair""")]
+        except sqlite3.OperationalError:
+            self._confusable = []
 
     def close(self) -> None:
         self.db.close()
@@ -178,6 +187,22 @@ class SearchIndex:
         return [a for a in self._nicknames
                 if a["alias_norm"] == n.norm
                 or a["alias_norm"].replace(" ", "") == compact]
+
+    def _confusable_hits(self, n) -> list[dict]:
+        """查询名正好是药对的一端时，返回另一端。
+
+        只做精确匹配：这是「名字长得像」的提示，不做模糊扩展，否则任何药都会
+        拖出一串隔壁名字。
+        """
+        out = []
+        for r in self._confusable:
+            if r["norm_a"] == n.norm:
+                out.append({"name": r["name_b"], "en": r["name_b"],
+                            "substance_id": r["b_substance_id"], "tml": r["tml_b"]})
+            elif r["norm_b"] == n.norm:
+                out.append({"name": r["name_a"], "en": r["name_a"],
+                            "substance_id": r["a_substance_id"], "tml": r["tml_a"]})
+        return out
 
     @staticmethod
     def _alias_info(a: dict) -> dict:
@@ -234,10 +259,16 @@ class SearchIndex:
             if a["kind"] == "class":
                 res.note = (f"「{a['alias']}」是「{label}」的类别叫法，不是具体药名；"
                             "可能对应多种成分。")
+            elif a["kind"] == "folk":
+                res.note = (f"「{a['alias']}」是「{label}」的民间叫法，不是具体药名；"
+                            "可能对应多种成分。")
             elif not a["substance_id"]:
                 detail = a["meaning_zh"] or a["meaning_en"]
-                res.note = (f"「{a['alias']}」指 {label}；"
-                            + (detail or "本库没有该成分的上市产品记录。"))
+                if detail and detail.startswith(label):
+                    res.note = f"「{a['alias']}」{detail}"
+                else:
+                    res.note = (f"「{a['alias']}」指 {label}；"
+                                + (detail or "本库没有该成分的上市产品记录。"))
             else:
                 res.note = (f"「{a['alias']}」是 {label} 的{kind}；"
                             "下面按成分列出商品名")
@@ -366,10 +397,13 @@ class SearchIndex:
             res.note = "只给了剂量，没有药名"
             return res
 
+        res.confused = self._confusable_hits(n)
         alias_hits = self._alias_hits(n)
         if alias_hits:
-            return self._search_alias(query, n, alias_hits, country, limit,
-                                      include_status)
+            alias_res = self._search_alias(query, n, alias_hits, country, limit,
+                                           include_status)
+            alias_res.confused = res.confused
+            return alias_res
 
         keys = self._resolve_keys(n)
         res.total_keys = len(keys)

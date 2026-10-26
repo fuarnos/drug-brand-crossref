@@ -1,0 +1,23 @@
+name_a,name_b,tml_a,tml_b,reason,note
+Acetohexamide,Acetazolamide,acetoHEXAMIDE,acetaZOLAMIDE,both,FDA tall-man list
+Bupropion,Buspirone,buPROPion,busPIRone,both,FDA tall-man list
+Chlorpromazine,Chlorpropamide,chlorproMAZINE,chlorproPAMIDE,both,FDA tall-man list
+Cisplatin,Carboplatin,CISplatin,CARBOplatin,both,FDA tall-man list
+Clomiphene,Clomipramine,clomiPHENE,clomiPRAMINE,both,FDA tall-man list
+Cyclosporine,Cycloserine,cycloSPORINE,cycloSERINE,both,FDA tall-man list
+Daunorubicin,Doxorubicin,DAUNOrubicin,DOXOrubicin,both,FDA tall-man list
+Dimenhydrinate,Diphenhydramine,dimenhyDRINATE,diphenhydrAMINE,both,FDA tall-man list
+Dobutamine,Dopamine,DOBUTamine,DOPamine,both,FDA tall-man list
+Glipizide,Glyburide,glipiZIDE,glyBURIDE,both,FDA tall-man list
+Hydralazine,Hydroxyzine,hydrALAZINE,hydrOXYzine,both,FDA tall-man list
+Medroxyprogesterone,Methylprednisolone,medroxyPROGESTERone,methylPREDNISolone,both,FDA tall-man list (triple)
+Medroxyprogesterone,Methyltestosterone,medroxyPROGESTERone,methylTESTOSTERone,both,FDA tall-man list (triple)
+Methylprednisolone,Methyltestosterone,methylPREDNISolone,methylTESTOSTERone,both,FDA tall-man list (triple)
+Migalastat,Miglustat,migALAstat,migLUstat,both,FDA tall-man list
+Nicardipine,Nifedipine,niCARdipine,NIFEdipine,both,FDA tall-man list
+Prednisone,Prednisolone,predniSONE,prednisoLONE,both,FDA tall-man list
+Risperidone,Ropinirole,risperiDONE,rOPINIRole,both,FDA tall-man list
+Sulfadiazine,Sulfisoxazole,sulfADIAZINE,sulfiSOXAZOLE,both,FDA tall-man list
+Tolazamide,Tolbutamide,TOLAZamide,TOLBUTamide,both,FDA tall-man list
+Trazodone,Tramadol,traZODone,traMADol,both,FDA tall-man list
+Vinblastine,Vincristine,vinBLAStine,vinCRIStine,both,FDA tall-man list

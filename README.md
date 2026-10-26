@@ -18,13 +18,15 @@
 | 墨西哥 10,878 条注册入库（COFEPRIS 26 个按年 PDF + 3 份续期清单；1,040 条是 2001 年前的老注册号） | ✅ |
 | 澳洲 5,452 个产品入库（PBS 官方 API v3，15,073 条 item × 品牌行） | ✅ |
 | 中文 / 全角 / 西里尔 / 带剂量的输入归一化 | ✅ |
-| 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 23 条人工表 |
+| 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 57 条人工表 |
+| 美国街头 / 民间 / 类别叫法（molly、lean、bars、water pill…） | ✅ 331 条 `drug_term` |
+| 易混淆药对（FDA tall-man，hydrALAZINE ↔ hydrOXYzine…） | ✅ 22 对 |
 | 候选集检索 + 打分 + 国家 / 剂量 / 剂型消歧 | ✅ |
 | 同名碰撞自动推导（不同成分 → 严重，缓释差异 → 警告） | ✅ |
 | 跨语言品牌家族（Tylenol ↔ 泰诺 ↔ 泰诺林） | ✅ 4 组 |
 | BAN↔USAN 同义词（paracetamol ↔ acetaminophen、salbutamol ↔ albuterol 等 34 组） | ✅ |
-| 成分身份卡（各国商品名对照） | ✅ 10,847 页 |
-| 名字碰撞页 | ✅ 12,996 页 |
+| 成分身份卡（各国商品名对照） | ✅ 10,843 页 |
+| 名字碰撞页 | ✅ 13,632 页 |
 
 ## 跑起来
 
@@ -53,6 +55,8 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 & $py data/seed_manual.py               # 英/中人工种子
 & $py data/seed_families.py             # 品牌家族
 & $py data/seed_nicknames.py            # 俗称 / 网络别名 / 旧名
+& $py etl/ingest_us_terms.py            # 美国街头/民间/类别叫法（NIDA + DEA 补充）
+& $py etl/ingest_fda_confusable.py     # FDA tall-man 易混淆药对
 & $py site/build.py                     # 生成静态站到 site/dist
 & $py cli.py "泰诺"                      # 命令行查一条
 & $py db/check_data.py                  # 数据体检
@@ -73,9 +77,10 @@ TRUD 的 key 放在 `.env` 的 `TRUD_API_KEY=`，不要提交。
 docs/    方案、数据模型、数据源授权结论、截图
 db/      schema.sql（单一真相源） + init_db.py + check_data.py + q.py
 etl/     normalize_name.py（归一化） + ingest_openfda_ndc.py（美国入库）
-lib/     search.py（检索/打分/碰撞查询） + 测试
-data/    seed_manual.py / seed_families.py / seed_nicknames.py / drugs.db（可重建，不入库）
-site/    build.py（静态生成） + dist/（产物）
+         ingest_us_terms.py（NIDA/DEA/MedlinePlus 俗称） + ingest_fda_confusable.py（FDA 药对）
+lib/     search.py（检索/打分/碰撞/别名） + 测试
+data/    seed_*.py + sources/（NIDA/DEA/FDA 小快照，进仓库）+ drugs.db（可重建，不入库）
+site/    build.py（静态生成，含 /confused.html） + dist/（产物）
 ```
 
 ## 三条设计底线
@@ -106,7 +111,37 @@ site/    build.py（静态生成） + dist/（产物）
 3. **只做精确匹配**：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话；每条都人工写出处。
 
 增补一条：改 `data/seed_nicknames.py`，再跑 `python data/seed_nicknames.py` 和
-`python site/build.py`。当前 23 条（3 条网络俗称 + 20 条旧名/曾用名），指向 22 个成分。
+`python site/build.py`。当前 57 条（网络俗称 / 旧名 / 原研商品名 / 西语名），指向 40+ 个成分。
+
+## 美国街头叫法不是「又一个昵称表」
+
+美国街头叫法有三类和中文昵称不一样，硬塞进 `nickname` 会撒谎：
+
+| 情形 | 例子 | 为什么不能塞 `nickname` |
+|---|---|---|
+| 类别词 | downers = 镇静剂、uppers = 兴奋剂 | 不是某一个成分 |
+| 本库没有上市产品的管制物质 | molly = MDMA、acid = LSD | `nickname.substance_id` 是 NOT NULL |
+| 复方 | lean = 可待因 + 异丙嗪 | 一个叫法对应两个成分 |
+
+所以单独建 `drug_term`，允许 `substance_id` 为空，并用 `alias_all` 视图把
+`nickname` + `drug_term` 合成检索层唯一入口。
+
+数据源只取可公开再发布的：
+
+| 来源 | 内容 | 许可 | 入库 |
+|---|---|---|---|
+| [NIDA Drugs A to Z](https://nida.nih.gov/research-topics/drugs-a-to-z) | 官方 “Also called” 列表 | US Government work | 247 行 |
+| [DEA Slang Terms and Code Words (2018)](https://archive.org/details/dea-drug-slang-terms-and-code-words-july2018) | 处方药/管制物质街头词，人工筛 | Public Domain Mark 1.0 | 64 行 |
+| [MedlinePlus](https://medlineplus.gov/) | 常见民间叫法（water pill / blood thinner / the pill…） | US Government work | 20 行 |
+| [FDA Name Differentiation Project](https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project) | tall-man 易混淆药对 | US Government work | 22 对 |
+
+**没有收 ISMP/ECRI 的《List of Confused Drug Names》**：那份清单有版权，不能整表复制。
+站上只写“这是 FDA 官方 tall-man 名单，不是完整 LASA 清单”；算法候选另出 CSV，不自动入库。
+逐项清单见 `reports/us-terms-summary.md`。
+
+查不到某个词时，页面会区分三种情况：类别词（不列商品）、本库无上市产品（只说明成分）、
+叫法歧义（列出多个成分让人核对）。这三个提示都在 `lib/search.py` 和
+`site/build.py` 的客户端检索里各实现一遍，口径一致。
 
 ## 数据现实（决定了难度排序）
 

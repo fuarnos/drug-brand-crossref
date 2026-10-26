@@ -3,6 +3,19 @@
 每次数据更新或功能变更都打一个 tag，tag 名就是站点对外宣称的版本号。
 站点页脚、About 页、GitHub Release 三处保持同一个版本号。
 
+## v0.1.4 — 2026-10-26
+
+- **美国街头 / 民间 / 类别叫法 331 条**：新建 `drug_term` 表，收录 NIDA「Also called」
+  247 条 + DEA 2018 报告人工筛出的 64 条 + MedlinePlus 民间叫法 20 条。支持三类中文昵称表装不下的情况：
+  类别词（downers = 镇静剂）、本库无上市产品的管制物质（molly = MDMA）、复方（lean = 可待因 + 异丙嗪）。
+- **统一别名视图 `alias_all`**：`nickname` + `drug_term` 合成检索层唯一入口；原有 57 条中文
+  昵称不受影响，搜 `molly` / `bars` / `speed` 都会先说明「这是什么叫法」再列商品。
+- **FDA 易混淆药对 22 对**：新建 `confusable_pair` 表，来源 FDA Name Differentiation Project
+  的 tall-man 名单；成分页顶部给警告，新增 `/confused.html` 列表页。
+- **授权边界**：ISMP/ECRI 的《List of Confused Drug Names》有版权，未整表复制；页面明确写
+  「这是 FDA 官方 tall-man 名单，不是完整 LASA 清单」。
+- 检索测试 15 → 19 项；建站 10,843 张成分页 / 13,632 张名字页。
+
 ## v0.1.3 — 2026-10-26
 
 - **模糊检索增强**：没有精确命中时自动退到近似匹配，并明确标出「没有精确命中，以下是最接近的名字」，

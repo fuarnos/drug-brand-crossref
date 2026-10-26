@@ -18,6 +18,8 @@
 运行：
     python etl/ingest_us_terms.py --dry-run   # 只看会写什么
     python etl/ingest_us_terms.py             # 写入 data/drugs.db
+
+快照放在 data/sources/（不进 data/raw 那条忽略规则），保证 clone 后能离线重跑。
 """
 
 from __future__ import annotations
@@ -35,7 +37,7 @@ sys.path.insert(0, str(ROOT / "etl"))
 from normalize_name import normalize  # noqa: E402
 
 DB = ROOT / "data" / "drugs.db"
-NIDA_SNAPSHOT = ROOT / "data" / "raw" / "nida" / "drugs-a-to-z.md"
+NIDA_SNAPSHOT = ROOT / "data" / "sources" / "nida-drugs-a-to-z.md"
 NIDA_URL = "https://nida.nih.gov/research-topics/drugs-a-to-z"
 DEA_URL = ("https://archive.org/details/"
            "dea-drug-slang-terms-and-code-words-july2018")
@@ -170,6 +172,7 @@ ALIAS_TARGETS = {
     ("Hydrocodone", "Fluff"): ["hydrocodone-bitartrate"],
     ("Methylphenidate", "Skittles"): ["methylphenidate", "dextromethorphan"],
     ("Methylphenidate", "Smarties"): ["methylphenidate", "amphetamine"],
+    ("GHB", "Sodium Oxybate"): ["sodium-oxybate"],
     ("Oxycodone", "30s"): ["oxycodone"],
     ("Oxycodone", "40s"): ["oxycodone"],
     ("Oxycodone", "Cotton"): ["oxycodone"],
@@ -331,6 +334,111 @@ DEA_SUPPLEMENT = [
 
 SINGLE_LETTER_OK = {"k", "h", "g", "d"}
 
+# 常见民间叫法（不是街头黑话，是普通人平时说的类别词）。
+# 这些词不指向某一个成分，所以 substance_id 为空，只给举例。
+FOLK_TERMS = [
+    ("water pill", "利尿剂", "Diuretics",
+     "利尿剂的民间叫法；吃了会增加排尿。常见如呋塞米、氢氯噻嗪、螺内酯。",
+     "Diuretics are often called water pills; they make you urinate more.",
+     ["furosemide", "hydrochlorothiazide", "spironolactone", "triamterene"],
+     "https://medlineplus.gov/diuretics.html"),
+    ("blood thinner", "抗凝药", "Anticoagulants",
+     "抗凝药的民间叫法；并不会真的把血「变稀」。常见如华法林、阿哌沙班、利伐沙班。",
+     "Anticoagulants are often called blood thinners; they do not actually thin the blood.",
+     ["warfarin", "apixaban", "rivaroxaban", "dabigatran", "edoxaban"],
+     "https://medlineplus.gov/bloodthinners.html"),
+    ("painkiller", "止痛药", "Pain relievers",
+     "止痛药的统称，可能指对乙酰氨基酚、布洛芬等非阿片类，也可能指阿片类。",
+     "Painkillers can mean acetaminophen/NSAIDs or opioids — check the ingredient.",
+     ["acetaminophen", "ibuprofen", "naproxen", "oxycodone", "tramadol"],
+     "https://medlineplus.gov/painrelievers.html"),
+    ("sleeping pill", "安眠药", "Sleeping pills",
+     "安眠药的统称，包括处方 Z 药、苯二氮䓬类和部分OTC抗组胺药。",
+     "Sleeping pills include prescription hypnotics, benzodiazepines and some OTC antihistamines.",
+     ["zolpidem", "eszopiclone", "zaleplon", "temazepam", "doxylamine"],
+     "https://medlineplus.gov/sleepdisorders.html"),
+    ("tranquilizer", "镇静/抗焦虑药", "Tranquilizers",
+     "镇静/抗焦虑药的民间叫法，通常指苯二氮䓬类。",
+     "Tranquilizers usually mean sedatives/anxiolytics such as benzodiazepines.",
+     ["diazepam", "lorazepam", "alprazolam", "chlordiazepoxide"],
+     "https://medlineplus.gov/anxiety.html"),
+    ("antibiotic", "抗生素", "Antibiotics",
+     "抗生素只对细菌感染有效，对病毒（普通感冒、流感）无效。",
+     "Antibiotics treat bacterial infections; they do not work on viruses.",
+     ["amoxicillin", "azithromycin", "ciprofloxacin", "doxycycline", "cephalexin"],
+     "https://medlineplus.gov/antibiotics.html"),
+    ("steroid", "糖皮质激素", "Corticosteroids",
+     "美国口语里的「steroids」常指糖皮质激素（可的松类）；合成代谢类固醇是另一类。",
+     "In everyday US speech, 'steroids' often means corticosteroids; anabolic steroids are different.",
+     ["prednisone", "methylprednisolone", "hydrocortisone", "dexamethasone"],
+     "https://medlineplus.gov/steroids.html"),
+    ("cortisone", "糖皮质激素", "Corticosteroids",
+     "可的松类药物的口语叫法，常泛指泼尼松、甲泼尼龙等。",
+     "Cortisone is used loosely for corticosteroids such as prednisone.",
+     ["prednisone", "methylprednisolone", "hydrocortisone", "dexamethasone"],
+     "https://medlineplus.gov/steroids.html"),
+    ("allergy pill", "抗组胺药", "Antihistamines",
+     "抗组胺药的民间叫法，用于过敏性鼻炎、荨麻疹等。",
+     "Antihistamines are often called allergy pills.",
+     ["cetirizine", "loratadine", "fexofenadine", "diphenhydramine"],
+     "https://medlineplus.gov/antihistamines.html"),
+    ("acid reducer", "抑酸药", "Acid reducers",
+     "抑酸药的统称，包括质子泵抑制剂（奥美拉唑等）和 H2 受体拮抗剂（法莫替丁等）。",
+     "Acid reducers include proton-pump inhibitors and H2 blockers.",
+     ["omeprazole", "esomeprazole", "famotidine"],
+     "https://medlineplus.gov/acidreflux.html"),
+    ("laxative", "泻药", "Laxatives",
+     "泻药的统称，包括渗透性、刺激性、容积性和粪便软化剂。",
+     "Laxatives are medicines that help you poop.",
+     ["polyethylene-glycol", "docusate", "senna", "bisacodyl"],
+     "https://medlineplus.gov/laxatives.html"),
+    ("decongestant", "减充血剂", "Decongestants",
+     "减充血剂用于缓解鼻塞，常见伪麻黄碱、去氧肾上腺素。",
+     "Decongestants relieve a stuffy nose.",
+     ["pseudoephedrine", "phenylephrine"],
+     "https://medlineplus.gov/decongestants.html"),
+    ("birth control", "避孕药", "Birth control pills",
+     "口服避孕药，通常含雌激素和/或孕激素。",
+     "Birth control pills contain estrogen and/or progestin.",
+     ["ethinylestradiol", "norethindrone", "levonorgestrel", "norgestimate"],
+     "https://medlineplus.gov/birthcontrol.html"),
+    ("the pill", "口服避孕药", "Birth control pills",
+     "「the pill」在英文口语里通常指口服避孕药，不是普通药片。",
+     "In English, 'the pill' usually means oral contraceptives, not a generic tablet.",
+     ["ethinylestradiol", "norethindrone", "levonorgestrel", "norgestimate"],
+     "https://medlineplus.gov/birthcontrol.html"),
+    ("morning-after pill", "紧急避孕药", "Emergency contraception",
+     "无保护性行为后使用的紧急避孕药，常见左炔诺孕酮、醋酸乌利司他。",
+     "Emergency contraception used after unprotected sex.",
+     ["levonorgestrel", "ulipristal"],
+     "https://medlineplus.gov/emergencycontraception.html"),
+    ("insulin", "胰岛素", "Insulin",
+     "胰岛素是激素类降糖药，不是口服药片。",
+     "Insulin is a hormone used to treat diabetes; it is injected, not a pill.",
+     ["insulin"],
+     "https://medlineplus.gov/diabetesmedicines.html"),
+    ("laughing gas", "笑气（一氧化二氮）", "Nitrous oxide",
+     "笑气即一氧化二氮，用作麻醉/镇痛，也被娱乐性吸入。",
+     "Laughing gas is nitrous oxide, used as an anesthetic and recreationally.",
+     ["nitrous-oxide"],
+     "https://medlineplus.gov/ency/article/002375.htm"),
+    ("whippets", "笑气（一氧化二氮）", "Nitrous oxide",
+     "whippets 通常指从奶油发泡器里吸一氧化二氮，不是奶油。",
+     "Whippets usually means nitrous oxide from whipped-cream chargers.",
+     ["nitrous-oxide"],
+     "https://medlineplus.gov/ency/article/002375.htm"),
+    ("poppers", "亚硝酸酯类", "Alkyl nitrites",
+     "poppers 是亚硝酸酯类，不是硝酸甘油等心血管药。",
+     "Poppers are alkyl nitrites, not nitroglycerin or other heart medicines.",
+     [],
+     "https://medlineplus.gov/ency/article/002375.htm"),
+    ("statin", "他汀类", "Statins",
+     "他汀类降胆固醇药，常见阿托伐他汀、瑞舒伐他汀、辛伐他汀。",
+     "Statins lower cholesterol; common examples are atorvastatin and rosuvastatin.",
+     ["atorvastatin", "rosuvastatin", "simvastatin", "pravastatin"],
+     "https://medlineplus.gov/cholesterolmedicines.html"),
+]
+
 # 个别词在 NIDA 挂在某个具体类别下，但语义更宽；改挂到更准确的类别条目。
 CLASS_OVERRIDE = {
     ("Benzodiazepines", "Downers"): "Depressants",
@@ -359,6 +467,18 @@ ZH_BY_SID = {
     "hydromorphone": ("氢吗啡酮", "Hydromorphone"),
     "ketamine": ("氯胺酮", "Ketamine"),
     "dextroamphetamine": ("右苯丙胺", "Dextroamphetamine"),
+    "sodium-oxybate": ("羟丁酸钠", "Sodium oxybate"),
+}
+
+# 这些词其实是通用名/商品名，不是街头叫法；让商品名检索优先，不写进别名表。
+SKIP_ALIASES = {
+    ("Barbiturates", "Phenobarbital"),
+}
+
+# 个别词需要单独交代，不要套「街头叫法」模板。
+ALIAS_NOTES = {
+    ("GHB", "Sodium Oxybate"):
+        "NIDA Drugs A to Z「GHB」条目；羟丁酸钠是 GHB 的处方盐型，不是街头叫法。",
 }
 
 # NIDA 的 Also called 里有两处把 "and" 当分隔符；不手工拆会把两个词粘成一个。
@@ -404,7 +524,8 @@ def parse_nida() -> list[dict]:
 def clean_term(term: str) -> str:
     t = term.strip().strip(".")
     t = re.sub(r"^and\s+", "", t, flags=re.I)
-    t = t.replace(" & ", " and ")
+    # 不要把手里的 & 改成 and：normalize() 会把 & 去掉，保留原写法才能让
+    # 用户输入 "Reds & Blues" 和表里的 alias_norm 对上。
     t = t.replace("25l", "25I")  # OCR：数字 1 被认成小写 l
     return t
 
@@ -467,6 +588,9 @@ def main() -> None:
             skipped.append(f"[{title}]（没有配置指向）")
             return
         for alias in aliases:
+            if (title, alias) in SKIP_ALIASES:
+                skipped.append(f"{alias}（是通用名/商品名，不是街头叫法）")
+                continue
             override = ALIAS_TARGETS.get((title, alias))
             if override == "class":
                 class_key = CLASS_OVERRIDE.get((title, alias), title)
@@ -480,10 +604,12 @@ def main() -> None:
                 # 类别条目里的个别词（Bennies / Phenobarbital）其实指向具体成分。
                 for sid in override:
                     zh, en = ZH_BY_SID.get(sid, (sid, sid))
-                    add(alias, "street", sid, zh, en, None, None,
+                    note = ALIAS_NOTES.get(
+                        (title, alias),
                         f"NIDA Drugs A to Z「{title}」条目；街头叫法，"
-                        f"不等于包装上的商品名。",
-                        "nida_slang", NIDA_URL)
+                        f"不等于包装上的商品名。")
+                    add(alias, "street", sid, zh, en, None, None,
+                        note, "nida_slang", NIDA_URL)
                 continue
 
             if spec:
@@ -528,6 +654,12 @@ def main() -> None:
                 f"DEA Slang Terms and Code Words (2018) 补充；{note}",
                 "dea_slang", DEA_URL)
 
+    # 常见民间叫法（water pill / blood thinner / the pill…）
+    for term, zh, en, mzh, men, examples, url in FOLK_TERMS:
+        add(term, "folk", None, zh, en, mzh, men,
+            "MedlinePlus 民间叫法；这是类别/通俗说法，不是具体药名。",
+            "medlineplus", url, examples)
+
     print(f"NIDA 条目 {len(entries)}；候选行 {len(rows)}；跳过 {len(skipped)}")
     if skipped:
         for s in skipped[:40]:
@@ -567,8 +699,20 @@ def main() -> None:
          DEA_URL, "Public Domain Mark 1.0",
          "https://creativecommons.org/publicdomain/mark/1.0/", today,
          "DEA-HOU-DIR-022-18；只取与处方药/管制物质对应的词，不取度量、武器等条目。"))
+    db.execute(
+        """INSERT INTO source (source_id, name, url, license, license_url,
+                               retrieved_at, notes)
+           VALUES (?,?,?,?,?,?,?)
+           ON CONFLICT (source_id) DO UPDATE SET
+               name=excluded.name, url=excluded.url, license=excluded.license,
+               license_url=excluded.license_url, retrieved_at=excluded.retrieved_at,
+               notes=excluded.notes""",
+        ("medlineplus", "MedlinePlus (NLM)", "https://medlineplus.gov/",
+         "US Government work (public domain)", None, today,
+         "常见民间叫法只取类别词，不转载正文。"))
 
-    db.execute("DELETE FROM drug_term WHERE source_id IN ('nida_slang','dea_slang')")
+    db.execute("DELETE FROM drug_term WHERE source_id IN "
+               "('nida_slang','dea_slang','medlineplus')")
     db.executemany(
         """INSERT INTO drug_term
            (term, term_norm, term_type, country, label_zh, label_en,

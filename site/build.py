@@ -4,9 +4,11 @@
     index.html          搜索（客户端匹配，返回候选集与碰撞提示）
     drug/<id>.html      成分身份卡（各国商品名对照）
     name/<id>.html      名字页（这个名字下挂了哪些药——碰撞页）
+    confused.html       FDA tall-man 易混淆药对
     about.html          数据来源、覆盖率、免责
     data/index.json     检索索引
-    data/aliases.json   俗称 / 网络别名索引
+    data/aliases.json   俗称 / 街头叫法 / 类别词索引
+    data/confused.json  易混淆药对索引
     assets/             css + js
 
 用法：python site/build.py
@@ -52,6 +54,8 @@ I18N = {
         "home.loading": "Loading index…",
         "res.matched": "names matched", "res.none": "No match",
         "res.brands": "brand names found",
+        "res.alias": "alias matched",
+        "res.alias_no_products": "not a single product — see the note above",
         "res.notin": "Not covered in this country",
         "res.caveat": "an empty result does not mean the drug does not exist",
         "res.fuzzy": "No exact match — closest names",
@@ -92,6 +96,9 @@ I18N = {
         "nick.class": "class term",
         "nick.class_caveat": ("This is a class term, not a specific medicine — it can cover "
                               "several ingredients. Check the ingredient."),
+        "nick.folk_caveat": ("This is a folk/category term, not a specific medicine — it can "
+                             "cover several ingredients. A product whose name contains the "
+                             "term is not necessarily in that class; check the ingredient."),
         "nick.nomap_caveat": ("This term points to a substance with no marketed product in "
                               "this database, so no product list is shown."),
         "nick.ambiguous": ("This nickname may point to more than one ingredient — "
@@ -109,6 +116,7 @@ I18N = {
         "conf.note": ("A pair here means the names can be mistaken for each other; it does not "
                       "mean the drugs are interchangeable. FDA recommends tall-man lettering."),
         "conf.pair": "Pair", "conf.tml": "Tall-man spelling",
+        "conf.search_hit": "This name is easily confused with",
     },
     "es": {
         "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
@@ -125,6 +133,8 @@ I18N = {
         "home.loading": "Cargando el índice…",
         "res.matched": "nombres encontrados", "res.none": "Sin resultados",
         "res.brands": "nombres comerciales encontrados",
+        "res.alias": "alias encontrado",
+        "res.alias_no_products": "no es un producto único — ver la nota",
         "res.notin": "No incluido en este país",
         "res.caveat": "un resultado vacío no significa que el medicamento no exista",
         "res.fuzzy": "Sin coincidencia exacta — nombres más parecidos",
@@ -166,6 +176,9 @@ I18N = {
         "nick.class": "término de clase",
         "nick.class_caveat": ("Es un término de clase, no un medicamento concreto: puede "
                               "abarcar varios principios activos. Comprueba el principio activo."),
+        "nick.folk_caveat": ("Es un término popular/de categoría, no un medicamento concreto: "
+                             "puede abarcar varios principios activos. Un producto cuyo nombre "
+                             "contiene el término no pertenece necesariamente a esa clase."),
         "nick.nomap_caveat": ("Este término apunta a una sustancia sin producto comercializado "
                               "en esta base de datos; no se muestra lista de productos."),
         "nick.ambiguous": ("Este apodo puede corresponder a más de un principio activo — "
@@ -184,6 +197,7 @@ I18N = {
         "conf.note": ("Un par significa que los nombres pueden confundirse; no significa que "
                       "los medicamentos sean intercambiables. La FDA recomienda tall-man lettering."),
         "conf.pair": "Par", "conf.tml": "Grafía tall-man",
+        "conf.search_hit": "Este nombre se confunde fácilmente con",
     },
     "zh": {
         "nav.search": "检索", "nav.confused": "易混淆药名", "nav.about": "关于",
@@ -198,6 +212,8 @@ I18N = {
         "home.loading": "正在加载索引…",
         "res.matched": "个名字命中", "res.none": "没有匹配的名字",
         "res.brands": "个商品名命中",
+        "res.alias": "个别名命中",
+        "res.alias_no_products": "不是单一商品，见上方说明",
         "res.notin": "所选国家没有收录这个名字",
         "res.caveat": "查不到不代表这个药不存在",
         "res.fuzzy": "没有精确命中，以下是最接近的名字",
@@ -234,6 +250,7 @@ I18N = {
         "nick.street": "美国街头叫法", "nick.folk": "民间叫法",
         "nick.class": "类别俗称",
         "nick.class_caveat": "这是类别叫法，不是具体药名，可能对应多种成分；请按成分核对。",
+        "nick.folk_caveat": "这是民间叫法，不是具体药名，可能对应多种成分；名字里含这个词的商品不一定属于该类别，请按成分核对。",
         "nick.nomap_caveat": "这个词指向的成分在本库没有上市产品记录，因此不列商品名。",
         "nick.ambiguous": "这个叫法可能对应不止一个成分，请按成分核对。",
         "nick.caveat": "俗称指向成分，不指向某个包装；同一成分在各国的商品名不同。",
@@ -248,6 +265,7 @@ I18N = {
         "conf.note": ("列在这里只说明两个名字可能被看错/听错，不表示两种药可以互换。"
                       "FDA 建议这一对使用 tall-man 大小写。"),
         "conf.pair": "药对", "conf.tml": "建议 tall-man 写法",
+        "conf.search_hit": "这个药名容易与以下名字混淆",
     },
 }
 
@@ -332,7 +350,7 @@ const meta = document.getElementById('meta');
 // 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
-let IDX = [], NICKS = [];
+let IDX = [], NICKS = [], CONF = [];
 
 function norm(s){
   return (s||'').normalize('NFKC').toLowerCase()
@@ -381,6 +399,10 @@ function aliasHits(nq){
   // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
   return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
 }
+function confHits(nq){
+  // 易混淆药对也只做精确命中：这是「名字像」的提示，不做模糊扩展。
+  return CONF.filter(p => p.n === nq);
+}
 function rowHTML(r){
   const T = window.T || (k=>k);
   const badge = r.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
@@ -402,6 +424,7 @@ function render(){
   const nq = norm(nameQ);
   const c = ctry.value;
   const nicks = aliasHits(nq);
+  const confs = confHits(nq);
   const nickSids = new Set(nicks.map(a=>a.v).filter(Boolean));
   let hits=[];
   const seen = new Set();
@@ -427,7 +450,7 @@ function render(){
     addHit(e, t);
   }
   let fuzzyUsed = false;
-  if(hits.length === 0){
+  if(hits.length === 0 && nicks.length === 0){
     for(const e of IDX){
       const t = tier(nq, e.k);
       if(!t || t[0]!=='fuzzy') continue;
@@ -440,12 +463,16 @@ function render(){
   hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
   const shown = hits.slice(0,40);
   const T = window.T || (k=>k);
-  meta.textContent = hits.length
-    ? (fuzzyUsed
-        ? `${T('res.fuzzy')} · ${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
-        : `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`)
-    : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
-         : `${T('res.none')} — ${T('res.caveat')}.`);
+  if(!hits.length && nicks.length){
+    meta.textContent = `${nicks.length} ${T('res.alias')} · ${T('res.alias_no_products')}`;
+  } else {
+    meta.textContent = hits.length
+      ? (fuzzyUsed
+          ? `${T('res.fuzzy')} · ${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
+          : `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`)
+      : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
+           : `${T('res.none')} — ${T('res.caveat')}.`);
+  }
   // 俗称命中：先说清「这不是商品名，是某个成分的叫法」，再列该成分的商品名。
   let nickHTML = '';
   if(nicks.length){
@@ -457,6 +484,7 @@ function render(){
       const hint = detail ? `<div class="sub">${esc(detail)}</div>` : '';
       const packs = a.np ? ` · ${a.np} ${T('card.packs')}` : '';
       const caveat = a.k === 'class' ? T('nick.class_caveat')
+        : a.k === 'folk' ? T('nick.folk_caveat')
         : (a.v ? T('nick.caveat') : T('nick.nomap_caveat'));
       return `<div class="notice nick"><div class="nick-head">${T('nick.hit')}：
         <b>${esc(a.a)}</b> → ${target}
@@ -464,6 +492,18 @@ function render(){
         <div class="sub">${caveat}${packs}</div>${hint}</div>`;
     }).join('');
     if(nicks.length > 1) nickHTML += `<div class="notice">${T('nick.ambiguous')}</div>`;
+  }
+  let confHTML = '';
+  if(confs.length){
+    const items = confs.slice(0,6).map(p=>{
+      const label = p.sid
+        ? `<a href="${BASE}drug/${encodeURIComponent(p.sid)}.html">${esc(p.x)}</a>`
+        : `<b>${esc(p.x)}</b>`;
+      const tml = p.tml ? ` <code>${esc(p.tml)}</code>` : '';
+      return label + tml;
+    }).join('、');
+    confHTML = `<div class="notice warnbox"><b>${T('conf.search_hit')}：</b>${items}.
+      <a href="${BASE}confused.html">${T('drug.confused_all')}</a></div>`;
   }
   const shownKeys = new Set(shown.map(x=>x[2].k));
   const byFam = new Map();
@@ -522,7 +562,7 @@ function render(){
     }
   }
 
-  out.innerHTML = nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
+  out.innerHTML = confHTML + nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
     </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` : '') + sameHTML + extraHTML;
@@ -556,8 +596,9 @@ if(initial){ box.value = initial; }
 out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
 Promise.all([
   fetch(BASE + 'data/index.json').then(r=>r.json()),
-  fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[])
-]).then(([d,a])=>{IDX=d||[]; NICKS=a||[]; render();})
+  fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
+  fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
+]).then(([d,a,c])=>{IDX=d||[]; NICKS=a||[]; CONF=c||[]; render();})
   .catch(()=>{ out.innerHTML='<div class="notice">索引没加载成功：'
     +'如果是在本地双击打开，浏览器会拦截本地文件读取。<br>'
     +'请用 <kbd>python -m http.server</kbd> 起一个本地服务，再访问 '
@@ -751,6 +792,34 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
             "su": source_url or "",
             "c": sorted(countries),
             "np": n_prod,
+        })
+    return out
+
+
+def load_confusable(db: sqlite3.Connection) -> list[dict]:
+    """易混淆药对的检索索引：一行 = 一个名字 → 它容易混的那个名字。"""
+    out: list[dict] = []
+    for r in db.execute(
+        """SELECT cp.norm_a, cp.norm_b, cp.name_a, cp.name_b,
+                  cp.tml_a, cp.tml_b, cp.a_substance_id, cp.b_substance_id,
+                  sa.inn_en AS a_inn, sa.inn_zh AS a_zh,
+                  sb.inn_en AS b_inn, sb.inn_zh AS b_zh
+           FROM confusable_pair cp
+           LEFT JOIN substance sa ON sa.substance_id = cp.a_substance_id
+           LEFT JOIN substance sb ON sb.substance_id = cp.b_substance_id"""
+    ):
+        # 搜 A 时提示 B，搜 B 时提示 A；x 是「对方」的显示名。
+        out.append({
+            "n": r["norm_a"],
+            "x": r["b_zh"] or r["b_inn"] or r["name_b"],
+            "sid": r["b_substance_id"],
+            "tml": r["tml_b"],
+        })
+        out.append({
+            "n": r["norm_b"],
+            "x": r["a_zh"] or r["a_inn"] or r["name_a"],
+            "sid": r["a_substance_id"],
+            "tml": r["tml_a"],
         })
     return out
 
@@ -1076,6 +1145,28 @@ kind of name back to the substance.<br>
 这一层最初来自一个笑话：二甲双胍的「胍」和青蛙的「呱」同音，于是被叫成「两只青蛙」。这个站想
 做的，就是把这类叫法接回它真正的成分。</p>
 
+<h2>US street names and confused names 美国街头叫法 / 易混淆药名</h2>
+<p class="sub">A separate table (<code>drug_term</code>) holds US street names, folk names and
+class terms. Unlike <code>nickname</code>, it may point to a class (“downers” = depressants)
+or to a controlled substance with no marketed product in this database (“molly” = MDMA), so
+<code>substance_id</code> is nullable. <code>alias_all</code> unions both tables for search.
+<br>美国街头叫法单独放在 <code>drug_term</code>：允许指向类别，或指向本库没有上市产品的管制物质
+（如 MDMA）。检索层只读 <code>alias_all</code> 这一个视图。</p>
+<ul class="sub">
+<li><b>NIDA “Drugs A to Z”</b>: official “Also called” lists — cannabis, cocaine, fentanyl,
+heroin, methamphetamine, prescription opioids, etc. US Government work.
+<br>NIDA 官方 Also called 列表，约 250 条。</li>
+<li><b>DEA “Slang Terms and Code Words” (2018)</b>: a curated subset for prescription-drug
+slang (bars, addy, vikes, dillies, oxy, lean…). Public Domain Mark 1.0.
+<br>DEA 2018 报告，只取与处方药/管制物质对应的词，不取度量、武器等条目。</li>
+<li><b>MedlinePlus (NLM)</b>: common folk/category terms — water pill, blood thinner,
+the pill, morning-after pill, statin… 20 entries.
+<br>MedlinePlus 民间叫法，只收类别词，不转载正文。</li>
+<li><b>FDA Name Differentiation Project</b>: {stats['confusable']} official tall-man pairs.
+US Government work. <a href="confused.html">See the list</a>.
+<br>FDA 官方 tall-man 药对；ISMP/ECRI 的完整 LASA 清单有版权，未整表复制。</li>
+</ul>
+
 <h2>Sources and coverage 数据来源与覆盖</h2>
 <table><tr><th>Market 市场</th><th>Products 已收录</th><th>Synced 同步</th></tr>{cov}</table>
 <p class="sub"><b>US 美国</b>: openFDA NDC Directory (US Government public data;
@@ -1142,9 +1233,56 @@ back-filled from public catalogues, and no brand-level bulk source exists.
 <li>ATC codes are mostly missing.<br>ATC 编码大部分缺失。</li>
 </ul>
 <p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
-{stats['keys']:,} name keys · {stats['nickname']:,} nicknames ·
+{stats['keys']:,} name keys · {stats['aliases']:,} aliases
+({stats['nickname']:,} hand-curated nicknames) · {stats['confusable']} FDA confused pairs ·
 {stats['severe']:,} names flagged “same name, different drug”.</p>"""
     (OUT / "about.html").write_text(page("About", body), encoding="utf-8")
+
+
+def build_confused(db: sqlite3.Connection) -> int:
+    """易混淆药对页：只列有官方出处的配对。"""
+    rows = db.execute(
+        """SELECT cp.*, sa.inn_en AS a_inn, sa.inn_zh AS a_zh,
+                  sb.inn_en AS b_inn, sb.inn_zh AS b_zh
+           FROM confusable_pair cp
+           LEFT JOIN substance sa ON sa.substance_id = cp.a_substance_id
+           LEFT JOIN substance sb ON sb.substance_id = cp.b_substance_id
+           ORDER BY cp.norm_a, cp.norm_b"""
+    ).fetchall()
+
+    def cell(sid, zh, inn, name):
+        label = esc(zh or inn or name)
+        en = f' <span class="meta">{esc(inn or name)}</span>' if (inn or name) else ""
+        if sid:
+            return f'<a href="drug/{esc(sid)}.html">{label}</a>{en}'
+        return f'{label}{en}'
+
+    body_rows = []
+    for r in rows:
+        body_rows.append(
+            "<tr>"
+            f"<td>{cell(r['a_substance_id'], r['a_zh'], r['a_inn'], r['name_a'])}</td>"
+            f"<td>{cell(r['b_substance_id'], r['b_zh'], r['b_inn'], r['name_b'])}</td>"
+            f"<td><code>{esc(r['tml_a'])}</code> / <code>{esc(r['tml_b'])}</code></td>"
+            "</tr>"
+        )
+    body = f"""<h1 data-i18n="conf.title">Easily confused drug names</h1>
+<p class="sub" data-i18n="conf.intro">Look-alike / sound-alike pairs from the FDA Name
+Differentiation Project. This is the official tall-man list, not the full ISMP LASA list.</p>
+<div class="notice" data-i18n="conf.note">A pair here means the names can be mistaken for each
+other; it does not mean the drugs are interchangeable.</div>
+<table><thead><tr>
+  <th data-i18n="conf.pair">Pair</th><th></th><th data-i18n="conf.tml">Tall-man spelling</th>
+</tr></thead><tbody>{''.join(body_rows)}</tbody></table>
+<p class="sub">Source: <a href="https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project"
+target="_blank" rel="noopener">FDA Name Differentiation Project</a>
+(content current as of 2026-06-12; US Government work).<br>
+只收 FDA 官方可再发布的 {len(rows)} 对；ISMP/ECRI 的《List of Confused Drug Names》
+有版权，未整表复制。FDA 表里的单名条目（hydromorphone、mitoxantrone）没有配对，未列入。<br>
+A pair is a warning about names, not a statement that the drugs are equivalent.</p>"""
+    (OUT / "confused.html").write_text(
+        page("Easily confused drug names", body), encoding="utf-8")
+    return len(rows)
 
 
 def main() -> None:
@@ -1196,6 +1334,8 @@ def main() -> None:
         "substances": db.execute("SELECT COUNT(*) FROM substance").fetchone()[0],
         "keys": db.execute("SELECT COUNT(*) FROM name_key").fetchone()[0],
         "nickname": db.execute("SELECT COUNT(*) FROM nickname").fetchone()[0],
+        "aliases": db.execute("SELECT COUNT(*) FROM alias_all").fetchone()[0],
+        "confusable": db.execute("SELECT COUNT(*) FROM confusable_pair").fetchone()[0],
         "severe": db.execute(
             "SELECT COUNT(*) FROM collision WHERE level='severe'").fetchone()[0],
     }
@@ -1211,6 +1351,12 @@ def main() -> None:
     (OUT / "data" / "aliases.json").write_text(
         json.dumps(aliases, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  {len(aliases)} nicknames", flush=True)
+
+    print("building confused index ...", flush=True)
+    confused = load_confusable(db)
+    (OUT / "data" / "confused.json").write_text(
+        json.dumps(confused, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"  {len(confused)} directions", flush=True)
 
     print("building drug pages ...", flush=True)
     n_drug = build_drug_pages(db)
@@ -1230,12 +1376,14 @@ def main() -> None:
     print("building name pages ...", flush=True)
     n_name = build_name_pages(db, entries, data, families, displays)
     build_index_page(entries, stats, coverage)
+    n_conf = build_confused(db)
     build_about(stats, coverage)
 
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
     print(f"\n== done ==")
     print(f"  drug pages : {n_drug}")
     print(f"  name pages : {n_name}")
+    print(f"  confused   : {n_conf} pairs")
     print(f"  index.json : {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB")
     print(f"  total size : {size / 1e6:.1f} MB")
     print(f"  open       : {OUT / 'index.html'}")

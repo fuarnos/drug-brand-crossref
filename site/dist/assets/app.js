@@ -6,7 +6,7 @@ const meta = document.getElementById('meta');
 // 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
-let IDX = [], NICKS = [];
+let IDX = [], NICKS = [], CONF = [];
 
 function norm(s){
   return (s||'').normalize('NFKC').toLowerCase()
@@ -55,6 +55,10 @@ function aliasHits(nq){
   // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
   return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
 }
+function confHits(nq){
+  // 易混淆药对也只做精确命中：这是「名字像」的提示，不做模糊扩展。
+  return CONF.filter(p => p.n === nq);
+}
 function rowHTML(r){
   const T = window.T || (k=>k);
   const badge = r.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
@@ -76,7 +80,8 @@ function render(){
   const nq = norm(nameQ);
   const c = ctry.value;
   const nicks = aliasHits(nq);
-  const nickSids = new Set(nicks.map(a=>a.v));
+  const confs = confHits(nq);
+  const nickSids = new Set(nicks.map(a=>a.v).filter(Boolean));
   let hits=[];
   const seen = new Set();
   const addHit = (e, t) => {
@@ -93,14 +98,15 @@ function render(){
     // 复方产品：e.x 是这条名字下成分的中文/英文展示串（最多 6 个），
     // 直接按成分名 tokens 比对，比在每个索引条目里再存一份 vs 数组省 4 MB。
     const subs = (e.x || '').split(' + ');
-    const byNick = nickSids.has(e.v) || nicks.some(a => subs.includes(a.i));
+    const byNick = (e.v && nickSids.has(e.v)) ||
+      nicks.some(a => a.i && subs.includes(a.i));
     const t = byNick ? ['nickname', 1.0] : tier(nq, e.k);
     if(!t || t[0]==='fuzzy') continue;
     if(c && !e.c.includes(c)) continue;
     addHit(e, t);
   }
   let fuzzyUsed = false;
-  if(hits.length === 0){
+  if(hits.length === 0 && nicks.length === 0){
     for(const e of IDX){
       const t = tier(nq, e.k);
       if(!t || t[0]!=='fuzzy') continue;
@@ -113,26 +119,47 @@ function render(){
   hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
   const shown = hits.slice(0,40);
   const T = window.T || (k=>k);
-  meta.textContent = hits.length
-    ? (fuzzyUsed
-        ? `${T('res.fuzzy')} · ${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
-        : `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`)
-    : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
-         : `${T('res.none')} — ${T('res.caveat')}.`);
+  if(!hits.length && nicks.length){
+    meta.textContent = `${nicks.length} ${T('res.alias')} · ${T('res.alias_no_products')}`;
+  } else {
+    meta.textContent = hits.length
+      ? (fuzzyUsed
+          ? `${T('res.fuzzy')} · ${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
+          : `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`)
+      : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
+           : `${T('res.none')} — ${T('res.caveat')}.`);
+  }
   // 俗称命中：先说清「这不是商品名，是某个成分的叫法」，再列该成分的商品名。
   let nickHTML = '';
   if(nicks.length){
     nickHTML = nicks.slice(0,3).map(a=>{
-      const href = `${BASE}drug/${encodeURIComponent(a.v)}.html`;
-      const hint = (window.LANG === 'zh' && a.hint)
-        ? `<div class="sub">${esc(a.hint)}</div>` : '';
+      const target = a.v
+        ? `<a href="${BASE}drug/${encodeURIComponent(a.v)}.html">${esc(a.x)}</a>`
+        : `<b>${esc(a.x)}</b>`;
+      const detail = window.LANG === 'zh' ? (a.hint || a.m) : (a.me || '');
+      const hint = detail ? `<div class="sub">${esc(detail)}</div>` : '';
       const packs = a.np ? ` · ${a.np} ${T('card.packs')}` : '';
+      const caveat = a.k === 'class' ? T('nick.class_caveat')
+        : a.k === 'folk' ? T('nick.folk_caveat')
+        : (a.v ? T('nick.caveat') : T('nick.nomap_caveat'));
       return `<div class="notice nick"><div class="nick-head">${T('nick.hit')}：
-        <b>${esc(a.a)}</b> → <a href="${href}">${esc(a.x)}</a>
+        <b>${esc(a.a)}</b> → ${target}
         <span class="tag">${esc(T('nick.'+a.k))}</span></div>
-        <div class="sub">${T('nick.caveat')}${packs}</div>${hint}</div>`;
+        <div class="sub">${caveat}${packs}</div>${hint}</div>`;
     }).join('');
     if(nicks.length > 1) nickHTML += `<div class="notice">${T('nick.ambiguous')}</div>`;
+  }
+  let confHTML = '';
+  if(confs.length){
+    const items = confs.slice(0,6).map(p=>{
+      const label = p.sid
+        ? `<a href="${BASE}drug/${encodeURIComponent(p.sid)}.html">${esc(p.x)}</a>`
+        : `<b>${esc(p.x)}</b>`;
+      const tml = p.tml ? ` <code>${esc(p.tml)}</code>` : '';
+      return label + tml;
+    }).join('、');
+    confHTML = `<div class="notice warnbox"><b>${T('conf.search_hit')}：</b>${items}.
+      <a href="${BASE}confused.html">${T('drug.confused_all')}</a></div>`;
   }
   const shownKeys = new Set(shown.map(x=>x[2].k));
   const byFam = new Map();
@@ -191,7 +218,7 @@ function render(){
     }
   }
 
-  out.innerHTML = nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
+  out.innerHTML = confHTML + nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
     </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` : '') + sameHTML + extraHTML;
@@ -225,8 +252,9 @@ if(initial){ box.value = initial; }
 out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
 Promise.all([
   fetch(BASE + 'data/index.json').then(r=>r.json()),
-  fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[])
-]).then(([d,a])=>{IDX=d||[]; NICKS=a||[]; render();})
+  fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
+  fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
+]).then(([d,a,c])=>{IDX=d||[]; NICKS=a||[]; CONF=c||[]; render();})
   .catch(()=>{ out.innerHTML='<div class="notice">索引没加载成功：'
     +'如果是在本地双击打开，浏览器会拦截本地文件读取。<br>'
     +'请用 <kbd>python -m http.server</kbd> 起一个本地服务，再访问 '

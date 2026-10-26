@@ -28,7 +28,7 @@ sys.path.insert(0, str(ROOT / "etl"))
 from normalize_name import normalize  # noqa: E402
 
 DB = ROOT / "data" / "drugs.db"
-CSV_PATH = ROOT / "data" / "raw" / "fda" / "tall-man-pairs.csv"
+CSV_PATH = ROOT / "data" / "sources" / "fda-tall-man-pairs.csv"
 URL = ("https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/"
        "fda-name-differentiation-project")
 
