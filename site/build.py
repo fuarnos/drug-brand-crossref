@@ -450,7 +450,6 @@ function render(){
       nicks.some(a => a.i && subs.includes(a.i));
     const t = byNick ? ['nickname', 1.0] : tier(nq, e.k);
     if(!t || t[0]==='fuzzy') continue;
-    if(c && !e.c.includes(c)) continue;
     addHit(e, t);
   }
   let fuzzyUsed = false;
@@ -458,7 +457,6 @@ function render(){
     for(const e of IDX){
       const t = tier(nq, e.k);
       if(!t || t[0]!=='fuzzy') continue;
-      if(c && !e.c.includes(c)) continue;
       const before = hits.length;
       addHit(e, t);
       if(hits.length > before) fuzzyUsed = true;
@@ -466,6 +464,19 @@ function render(){
   }
   hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
   const shown = hits.slice(0,40);
+  // 选了国家 = 「这个药在那个国家叫什么」，不是「只显示那个国家的搜索命中」。
+  // 先用查询词定位成分（不受国家限制），再把这个成分在目标国的商品名列出来。
+  let display = shown;
+  if(c && hits.length){
+    const sids = new Set();
+    for(const [, , e] of hits.slice(0,3)){
+      const list = (e.vs && e.vs.length) ? e.vs : [e.v];
+      list.forEach(s => sids.add(s));
+    }
+    const inCountry = IDX.filter(x => x.c.includes(c) &&
+      ((x.vs && x.vs.length) ? x.vs : [x.v]).some(s => sids.has(s)));
+    if(inCountry.length) display = inCountry.slice(0,40);
+  }
   const T = window.T || (k=>k);
   if(!hits.length && nicks.length){
     meta.textContent = `${nicks.length} ${T('res.alias')} · ${T('res.alias_no_products')}`;
@@ -534,7 +545,7 @@ function render(){
   // 主结果：保留相关度顺序（精确命中在前），每一行内部再按剂量数字排序。
   // 这样"成分-剂量"始终是最左两列，但不会被无关的模糊命中顶到前面。
   let rows=[];
-  for(const [, , e] of shown){
+  for(const [, , e] of display){
     const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
     for(const d of ds) rows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
   }
