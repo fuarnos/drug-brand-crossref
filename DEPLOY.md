@@ -1,8 +1,8 @@
 # 部署
 
-产物：`site/dist/`（23,016 个文件 / 62.6 MB），打包好的 `site/dist.zip`（23.8 MB，根目录就是 index.html）。
+产物：`site/dist/`（23,852 个文件 / 71.0 MB），打包好的 `site/dist.zip`（26.3 MB，根目录就是 index.html）。
 
-**为什么不用 Cloudflare Pages**：单次部署上限 2 万个文件，我们 23,016 个，超了。
+**为什么不用 Cloudflare Pages**：单次部署上限 2 万个文件，我们 23,852 个，超了。
 
 ## 方案 A：Netlify 拖拽（最快，零安装，推荐先用这个）
 

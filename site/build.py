@@ -266,9 +266,16 @@ function norm(s){
     .replace(/[\u0300-\u036f]/g,'')
     .replace(/\s+/g,' ').trim();
 }
-function strengthOf(q){
-  const m = q.match(/([\d.]+)\s*(mg|mcg|g|ml|iu|%|万单位)/i);
-  return m ? [m[1], m[2].toLowerCase()] : null;
+function splitDose(q){
+  // 把「Lipitor 20mg」「两只青蛙 500mg」「875/125 mg」里的剂量切出来，
+  // 名字部分才拿去和索引比对——不切的话带剂量的搜索会一个都命中不了。
+  const ratio = q.match(/([\d.]+)\s*\/\s*([\d.]+)\s*(mg|mcg|µg|ug|g)\b/i);
+  const single = q.match(/([\d.]+)\s*(mg|mcg|µg|ug|g|ml|iu|%|万单位)\b/i);
+  const m = ratio || single;
+  if(!m) return [q, null];
+  const rest = (q.slice(0, m.index) + ' ' + q.slice(m.index + m[0].length))
+    .replace(/\s+/g,' ').trim();
+  return [rest, [m[1], (ratio ? m[3] : m[2]).toLowerCase()]];
 }
 function lev(a,b){
   if(Math.abs(a.length-b.length)>2) return 99;
@@ -316,8 +323,8 @@ function rowHTML(r){
 function render(){
   const q = box.value.trim();
   if(!q){ out.innerHTML=''; meta.textContent=''; return; }
-  const nq = norm(q);
-  const st = strengthOf(q);
+  const [nameQ, st] = splitDose(q);
+  const nq = norm(nameQ);
   const c = ctry.value;
   const nicks = aliasHits(nq);
   const nickSids = new Set(nicks.map(a=>a.v));
@@ -432,8 +439,13 @@ def esc(v) -> str:
 
 
 def key_file(key: str) -> str:
-    """文件名尽量保留可读性（含中文），只替换路径非法字符。"""
-    s = re.sub(r'[\\/:*?"<>|\s]+', "-", (key or "").strip()).strip("-.")
+    """文件名尽量保留可读性（含中文），只替换路径非法字符。
+
+    NHSA 的 CSV 里混进了控制字符（例如「糠酸莫米松乳膏\\x02」），
+    不剥掉会让 Windows 直接抛 OSError，整个建站中断。
+    """
+    cleaned = re.sub(r"[\x00-\x1f\x7f]+", "", key or "")
+    s = re.sub(r'[\\/:*?"<>|\s]+', "-", cleaned.strip()).strip("-.")
     if len(s) > 80:
         s = s[:60] + "-" + hashlib.md5(key.encode("utf-8")).hexdigest()[:8]
     if not s:
@@ -485,20 +497,23 @@ def load_index(db: sqlite3.Connection):
 
     agg: dict[str, dict] = {}
     for (key_id, pid, country, form_base, dosage_form, sv, su,
-         inn_en, sid, mah) in db.execute(
+         inn_en, sid, mah, ntype) in db.execute(
         """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
-                  pc.strength_value, pc.strength_unit, s.inn_en, s.substance_id, p.mah
+                  pc.strength_value, pc.strength_unit, s.inn_en, s.substance_id, p.mah,
+                  pn.name_type
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
            JOIN product_component pc ON pc.product_id = p.product_id
            JOIN variant v ON v.variant_id = pc.variant_id
            JOIN substance s ON s.substance_id = v.substance_id
-           WHERE pn.name_type = 'trade' AND p.is_branded = 1"""
+           WHERE pn.name_type IN ('trade', 'inn')"""
     ):
         a = agg.get(key_id)
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "s": [],
-                               "f": [], "v": sid, "mah": {}}
+                               "f": [], "v": sid, "mah": {}, "trade": False}
+        if ntype == "trade":
+            a["trade"] = True
         a["pids"].add(pid)
         a["c"].add(country)
         if inn_en not in a["subs"]:
@@ -525,7 +540,10 @@ def load_index(db: sqlite3.Connection):
         level = coll.get(key_id, "info")
         # 只有这些名字值得单独成页：有碰撞的、或包装数够多的。
         # 其余名字仍能被搜到，卡片直接链到成分页——不为只有一个包装的冷门名字生成几万张页。
-        worth_page = level == "warning" or (level == "severe" and n >= 2) or n >= 3
+        # 通用名照样能搜到，但只有「有品牌名」或碰撞/多包装的名字才单独成页，
+        # 否则光中国就会多出上万张价值很低的页面。
+        worth_page = (a["trade"] or level == "warning") and (
+            level == "warning" or (level == "severe" and n >= 2) or n >= 3)
         entry = {
             "k": key_id,
             "d": displays.get(key_id, key_id),

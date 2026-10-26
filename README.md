@@ -106,7 +106,7 @@ site/    build.py（静态生成） + dist/（产物）
 3. **只做精确匹配**：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话；每条都人工写出处。
 
 增补一条：改 `data/seed_nicknames.py`，再跑 `python data/seed_nicknames.py` 和
-`python site/build.py`。当前 23 条（3 条网络俗称 + 20 条旧名/曾用名），指向 23 个成分。
+`python site/build.py`。当前 23 条（3 条网络俗称 + 20 条旧名/曾用名），指向 22 个成分。
 
 ## 数据现实（决定了难度排序）
 

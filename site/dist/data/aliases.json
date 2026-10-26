@@ -1,0 +1,399 @@
+[
+ {
+  "a": "两只青蛙",
+  "n": "两只青蛙",
+  "v": "metformin",
+  "i": "Metformin",
+  "x": "Metformin · 二甲双胍",
+  "k": "slang",
+  "hint": "「胍」与青蛙的「呱」同音，被叫成两只青蛙；指降糖药二甲双胍。",
+  "src": "用户提供（本站缘起）",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 2606
+ },
+ {
+  "a": "伟哥",
+  "n": "伟哥",
+  "v": "sildenafil",
+  "i": "Sildenafil",
+  "x": "Sildenafil · 西地那非",
+  "k": "slang",
+  "hint": "原指万艾可（Viagra），后来泛指西地那非；不是官方名称。",
+  "src": "中文网络通行叫法",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 1015
+ },
+ {
+  "a": "蓝色小药丸",
+  "n": "蓝色小药丸",
+  "v": "sildenafil",
+  "i": "Sildenafil",
+  "x": "Sildenafil · 西地那非",
+  "k": "slang",
+  "hint": "按外观得名，通常指西地那非；同类蓝色药片不止一种，需核对成分。",
+  "src": "中文网络通行叫法",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 1015
+ },
+ {
+  "a": "安定",
+  "n": "安定",
+  "v": "diazepam",
+  "i": "Diazepam",
+  "x": "Diazepam · 地西泮",
+  "k": "legacy",
+  "hint": "旧商品名/常用名，现通用名为地西泮。",
+  "src": "1980–2000 年代中文常用名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 447
+ },
+ {
+  "a": "心得安",
+  "n": "心得安",
+  "v": "propranolol",
+  "i": "Propranolol",
+  "x": "Propranolol · 普萘洛尔",
+  "k": "legacy",
+  "hint": "现通用名为普萘洛尔。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 549
+ },
+ {
+  "a": "心痛定",
+  "n": "心痛定",
+  "v": "nifedipine",
+  "i": "Nifedipine",
+  "x": "Nifedipine · 硝苯地平",
+  "k": "legacy",
+  "hint": "现通用名为硝苯地平。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 903
+ },
+ {
+  "a": "消心痛",
+  "n": "消心痛",
+  "v": "isosorbide-dinitrate",
+  "i": "Isosorbide Dinitrate",
+  "x": "Isosorbide Dinitrate · 硝酸异山梨酯",
+  "k": "legacy",
+  "hint": "现通用名为硝酸异山梨酯。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "GB",
+   "US"
+  ],
+  "np": 277
+ },
+ {
+  "a": "胃复安",
+  "n": "胃复安",
+  "v": "metoclopramide",
+  "i": "Metoclopramide",
+  "x": "Metoclopramide · 甲氧氯普胺",
+  "k": "legacy",
+  "hint": "现通用名为甲氧氯普胺。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 260
+ },
+ {
+  "a": "氟哌酸",
+  "n": "氟哌酸",
+  "v": "norfloxacin",
+  "i": "Norfloxacin",
+  "x": "Norfloxacin · 诺氟沙星",
+  "k": "legacy",
+  "hint": "现通用名为诺氟沙星。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX"
+  ],
+  "np": 1067
+ },
+ {
+  "a": "病毒灵",
+  "n": "病毒灵",
+  "v": "moroxydine",
+  "i": "Moroxydine",
+  "x": "Moroxydine · 吗啉胍",
+  "k": "legacy",
+  "hint": "现通用名为吗啉胍。",
+  "src": "中文旧版药名",
+  "c": [
+   "CN"
+  ],
+  "np": 186
+ },
+ {
+  "a": "病毒唑",
+  "n": "病毒唑",
+  "v": "ribavirin",
+  "i": "Ribavirin",
+  "x": "Ribavirin · 利巴韦林",
+  "k": "legacy",
+  "hint": "现通用名为利巴韦林。",
+  "src": "中文旧版药名",
+  "c": [
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 818
+ },
+ {
+  "a": "痢特灵",
+  "n": "痢特灵",
+  "v": "furazolidone",
+  "i": "Furazolidone",
+  "x": "Furazolidone · 呋喃唑酮",
+  "k": "legacy",
+  "hint": "现通用名为呋喃唑酮。",
+  "src": "中文旧版药名",
+  "c": [
+   "CN",
+   "MX"
+  ],
+  "np": 269
+ },
+ {
+  "a": "灭滴灵",
+  "n": "灭滴灵",
+  "v": "metronidazole",
+  "i": "Metronidazole",
+  "x": "Metronidazole · 甲硝唑",
+  "k": "legacy",
+  "hint": "现通用名为甲硝唑。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 2367
+ },
+ {
+  "a": "强的松",
+  "n": "强的松",
+  "v": "prednisone",
+  "i": "Prednisone",
+  "x": "Prednisone · 泼尼松",
+  "k": "legacy",
+  "hint": "现通用名为泼尼松。",
+  "src": "中文旧版药名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 499
+ },
+ {
+  "a": "杜冷丁",
+  "n": "杜冷丁",
+  "v": "pethidine",
+  "i": "Pethidine",
+  "x": "Pethidine · 哌替啶",
+  "k": "legacy",
+  "hint": "现通用名为哌替啶，英文 pethidine / meperidine。",
+  "src": "中文旧版药名（音译）",
+  "c": [
+   "CN",
+   "GB"
+  ],
+  "np": 52
+ },
+ {
+  "a": "鲁米那",
+  "n": "鲁米那",
+  "v": "phenobarbital",
+  "i": "Phenobarbital",
+  "x": "Phenobarbital · 苯巴比妥",
+  "k": "legacy",
+  "hint": "旧商品名，现通用名为苯巴比妥。",
+  "src": "Luminal 的音译旧名",
+  "c": [
+   "AU",
+   "CN",
+   "GB",
+   "US"
+  ],
+  "np": 440
+ },
+ {
+  "a": "甲氰咪胍",
+  "n": "甲氰咪胍",
+  "v": "cimetidine",
+  "i": "Cimetidine",
+  "x": "Cimetidine · 西咪替丁",
+  "k": "legacy",
+  "hint": "现通用名为西咪替丁。",
+  "src": "中文旧版药名",
+  "c": [
+   "CN",
+   "GB",
+   "US"
+  ],
+  "np": 563
+ },
+ {
+  "a": "舒乐安定",
+  "n": "舒乐安定",
+  "v": "estazolam",
+  "i": "Estazolam",
+  "x": "Estazolam · 艾司唑仑",
+  "k": "legacy",
+  "hint": "旧商品名，现通用名为艾司唑仑。",
+  "src": "旧商品名",
+  "c": [
+   "CN",
+   "US"
+  ],
+  "np": 110
+ },
+ {
+  "a": "扑热息痛",
+  "n": "扑热息痛",
+  "v": "acetaminophen",
+  "i": "Acetaminophen",
+  "x": "Acetaminophen · 对乙酰氨基酚",
+  "k": "legacy",
+  "hint": "英文 paracetamol，美国称 acetaminophen，中文通用名为对乙酰氨基酚。",
+  "src": "paracetamol 的中文旧称",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 8568
+ },
+ {
+  "a": "慢心律",
+  "n": "慢心律",
+  "v": "mexiletine",
+  "i": "Mexiletine",
+  "x": "Mexiletine · 美西律",
+  "k": "legacy",
+  "hint": "现通用名为美西律。",
+  "src": "中文旧版药名",
+  "c": [
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 113
+ },
+ {
+  "a": "心律平",
+  "n": "心律平",
+  "v": "propafenone",
+  "i": "Propafenone",
+  "x": "Propafenone · 普罗帕酮",
+  "k": "legacy",
+  "hint": "现通用名为普罗帕酮。",
+  "src": "中文旧版药名",
+  "c": [
+   "CN",
+   "GB",
+   "US"
+  ],
+  "np": 166
+ },
+ {
+  "a": "开搏通",
+  "n": "开搏通",
+  "v": "captopril",
+  "i": "Captopril",
+  "x": "Captopril · 卡托普利",
+  "k": "legacy",
+  "hint": "旧商品名，现通用名为卡托普利。",
+  "src": "Capoten 的旧商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 502
+ },
+ {
+  "a": "文迪雅",
+  "n": "文迪雅",
+  "v": "rosiglitazone",
+  "i": "Rosiglitazone",
+  "x": "Rosiglitazone · 罗格列酮",
+  "k": "legacy",
+  "hint": "旧商品名，现通用名为罗格列酮。",
+  "src": "Avandia 的旧商品名",
+  "c": [
+   "CN",
+   "GB"
+  ],
+  "np": 92
+ }
+]

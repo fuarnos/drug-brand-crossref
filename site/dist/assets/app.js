@@ -14,9 +14,16 @@ function norm(s){
     .replace(/[\u0300-\u036f]/g,'')
     .replace(/\s+/g,' ').trim();
 }
-function strengthOf(q){
-  const m = q.match(/([\d.]+)\s*(mg|mcg|g|ml|iu|%|万单位)/i);
-  return m ? [m[1], m[2].toLowerCase()] : null;
+function splitDose(q){
+  // 把「Lipitor 20mg」「两只青蛙 500mg」「875/125 mg」里的剂量切出来，
+  // 名字部分才拿去和索引比对——不切的话带剂量的搜索会一个都命中不了。
+  const ratio = q.match(/([\d.]+)\s*\/\s*([\d.]+)\s*(mg|mcg|µg|ug|g)\b/i);
+  const single = q.match(/([\d.]+)\s*(mg|mcg|µg|ug|g|ml|iu|%|万单位)\b/i);
+  const m = ratio || single;
+  if(!m) return [q, null];
+  const rest = (q.slice(0, m.index) + ' ' + q.slice(m.index + m[0].length))
+    .replace(/\s+/g,' ').trim();
+  return [rest, [m[1], (ratio ? m[3] : m[2]).toLowerCase()]];
 }
 function lev(a,b){
   if(Math.abs(a.length-b.length)>2) return 99;
@@ -64,8 +71,8 @@ function rowHTML(r){
 function render(){
   const q = box.value.trim();
   if(!q){ out.innerHTML=''; meta.textContent=''; return; }
-  const nq = norm(q);
-  const st = strengthOf(q);
+  const [nameQ, st] = splitDose(q);
+  const nq = norm(nameQ);
   const c = ctry.value;
   const nicks = aliasHits(nq);
   const nickSids = new Set(nicks.map(a=>a.v));
