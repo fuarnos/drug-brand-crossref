@@ -415,6 +415,9 @@ const meta = document.getElementById('meta');
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
 let IDX = [], NICKS = [], CONF = [];
+// P0 索引懒加载：页面加载时只下 app.js/css/i18n（约 16 KB），
+// 全量索引（34.8 MB，gzip 约 6 MB）等用户真的要用搜索时再下。
+let IDX_READY = false, IDX_P = null;
 // ARTG 名称层：只在产品没命中时懒加载，避免每次搜索都多下 3 MB
 let ARTG = null, artgLoading = false;
 function artgPaint(nq){
@@ -721,25 +724,77 @@ function reportURL(q){
     + '&title=' + encodeURIComponent('数据错误: ' + (q || ''))
     + '&body=' + encodeURIComponent(body);
 }
-box.addEventListener('input', render);
-ctry.addEventListener('change', render);
+// ── P0 索引懒加载 ──────────────────────────────────────────────────
+// 页面加载时不请求完整索引；首次输入 / 聚焦搜索框 / 点示例按钮，或带 ?q= 深链
+// 进来时才 loadIndex()。加载失败给出提示与「重试」按钮（不做静默失败）。
+// ?legacy=1 一键回滚成旧行为（页面加载即拉全量索引）。
+const LEGACY = new URLSearchParams(location.search).get('legacy') === '1';
+const hintEl = document.getElementById('loadhint');
+const HINT_IDLE = '首次搜索需要加载索引，约 6 MB（gzip）。'
+  + 'First search needs to load the index (~6 MB gzipped) — start typing or focus the box.';
+const HINT_LOADING = '正在加载索引… Loading the index…（首次约 6 MB / ~6 MB first time）';
+function setHint(html, show){
+  if(!hintEl) return;
+  hintEl.innerHTML = html || '';
+  hintEl.style.display = (show === false || !html) ? 'none' : '';
+}
+function loadIndex(){
+  if(IDX_READY) return Promise.resolve(true);
+  if(IDX_P) return IDX_P;
+  if(!LEGACY) setHint(HINT_LOADING);
+  IDX_P = Promise.all([
+    fetch(BASE + 'data/index.json').then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }),
+    fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
+    fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
+  ]).then(([d,a,c])=>{
+    IDX=d||[]; NICKS=a||[]; CONF=c||[]; IDX_READY=true;
+    setHint('');
+    return true;
+  }).catch(err=>{
+    // 失败后清掉缓存的 Promise，允许点「重试」重新发起。
+    IDX_P = null;
+    if(hintEl) hintEl.style.display = 'none';
+    out.innerHTML = '<div class="notice">索引没加载成功 / Index failed to load. '
+      + '如果是本地双击打开的页面，浏览器会拦截本地文件读取；'
+      + 'If you opened this file directly the browser blocks local file reads — run '
+      + '<kbd>python -m http.server</kbd> and visit <kbd>http://localhost:8000/</kbd>.'
+      + '<br>' + esc(String((err && err.message) || err || ''))
+      + '<br><button type="button" data-retry="1">重试 / Retry</button></div>';
+    return false;
+  });
+  return IDX_P;
+}
+function startSearch(){
+  if(IDX_READY){ render(); return; }
+  loadIndex().then(ok => { if(ok) render(); });
+}
+// 失败提示里的「重试」按钮（事件委托，重试后直接按当前输入出结果）。
+out.addEventListener('click', ev => {
+  const b = ev.target && ev.target.closest ? ev.target.closest('[data-retry]') : null;
+  if(!b) return;
+  out.innerHTML = '';
+  loadIndex().then(ok => { if(ok) render(); });
+});
+box.addEventListener('input', startSearch);
+ctry.addEventListener('change', startSearch);
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
-  box.value=b.dataset.q; render(); box.focus();
+  box.value=b.dataset.q; startSearch(); box.focus();
 }));
+// 聚焦搜索框就先预取索引：等用户敲键时 6 MB 已经在路上。
+box.addEventListener('focus', ()=>{ if(!IDX_READY) loadIndex(); });
 const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
 const ctry0 = new URLSearchParams(location.search).get('country');
 if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
-out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
-Promise.all([
-  fetch(BASE + 'data/index.json').then(r=>r.json()),
-  fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
-  fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
-]).then(([d,a,c])=>{IDX=d||[]; NICKS=a||[]; CONF=c||[]; render();})
-  .catch(()=>{ out.innerHTML='<div class="notice">索引没加载成功：'
-    +'如果是在本地双击打开，浏览器会拦截本地文件读取。<br>'
-    +'请用 <kbd>python -m http.server</kbd> 起一个本地服务，再访问 '
-    +'<kbd>http://localhost:8000/</kbd>。</div>'; });
+if(LEGACY){
+  // 回滚开关：?legacy=1 = 旧行为，页面一加载就拉全量索引。
+  setHint('');
+  out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
+  loadIndex().then(ok => { if(ok) render(); });
+} else if(initial){
+  // ?q= 深链：立即加载（加载完直接出结果）。
+  startSearch();
+}
 """
 
 
@@ -1411,6 +1466,9 @@ def build_index_page(entries, stats, coverage) -> None:
   <button data-q="Benadryl">Benadryl</button>
   <button data-q="Gaviscon">Gaviscon</button>
 </div>
+<p class="sub" id="loadhint">首次搜索需要加载索引，约 6 MB（gzip 压缩后，之后浏览器会缓存）。
+First search needs to load the index (~6 MB gzipped; cached after the first time) —
+start typing, focus the search box, or pick a sample.</p>
 <p class="sub" id="meta" style="margin-top:14px"></p>
 <div id="out"></div>
 <p class="sub report-line" id="report" style="display:none">
@@ -1664,7 +1722,11 @@ Motrin…) were authorised before the DPD's electronic era: only some of them ha
 so a Canadian OTC pack can be missing even though it is on every shelf.
 <br>加拿大 DPD 没有包装数量/价格；很多 OTC 消费装（Tylenol、Advil、Motrin…）是电子化之前
 就批的，DPD 里只有部分品牌有 DIN 行，所以货架上有的 OTC 可能查不到。</li>
-<li>ATC codes are mostly missing.<br>ATC 编码大部分缺失。</li>
+<li>ATC codes cover 47.7% of substances (6,345 / 13,288). Part of the coverage comes from
+Wikidata <code>P267</code> (CC0, attributed here); the rest is missing because dm+d carries no ATC
+field and WHOCC's ATC/DDD index needs a licence.
+<br>ATC 覆盖 47.7%（6,345 / 13,288），其中一部分由 Wikidata P267（CC0）补齐并在此署名；
+其余缺失：dm+d 没有 ATC 字段，WHOCC 的 ATC/DDD 需要授权。</li>
 </ul>
 <p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
 {stats['keys']:,} name keys · {stats['aliases']:,} aliases

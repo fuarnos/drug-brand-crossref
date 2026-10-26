@@ -4,6 +4,18 @@
 站点页脚、About 页、GitHub Release 三处保持同一个版本号；`/whats-new.html` 直接从这里生成。
 上线前先把本节写好，再建站、发布。
 
+## v0.3.4 — 2026-10-26
+
+- **首屏从约 6.08 MB 降到约 17 KB**：检索索引改为懒加载——页面打开只下 HTML/CSS/JS；
+  首次输入、聚焦搜索框、点示例或带 `?q=` 深链时才拉约 6 MB 索引，并显示中英提示。
+  加载后的结果与 v0.3.3 逐字节一致（18 个查询 + 3 个国家视图对拍）。`?legacy=1` 一键回到旧行为。
+- **ATC 覆盖 43.3% → 47.7%**：用 Wikidata P267（CC0，About 页已署名）给 594 个原来没有
+  ATC 的成分补上编码与名称；多码歧义 127 个跳过。
+- **新增调研/实现报告**：`reports/index-perf-plan.md`（拆片/压缩路线）、
+  `reports/lazyload-implementation.md`、`reports/data-depth-20261026.md`、
+  `reports/dose-mapping-plan.md`、`reports/mx-atc-implementation.md`。
+  MX 浓度回填 ETL 已就绪（dry-run +963 产品，28.7%→37.6%），等 50 条人工抽核后再启用。
+
 ## v0.3.3 — 2026-10-26
 
 - **上线收尾**：新增 `404.html`、`robots.txt`、`sitemap.xml`（全站约 3 万个页面）和 `.nojekyll`。
