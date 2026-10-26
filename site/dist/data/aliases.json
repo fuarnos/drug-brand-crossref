@@ -395,5 +395,610 @@
    "GB"
   ],
   "np": 92
+ },
+ {
+  "a": "扑尔敏",
+  "n": "扑尔敏",
+  "v": "chlorphenamine",
+  "i": "Chlorphenamine",
+  "x": "Chlorphenamine · 氯苯那敏",
+  "k": "legacy",
+  "hint": "抗组胺药，现通用名为氯苯那敏（美国写作 chlorpheniramine）。",
+  "src": "Chlor-Trimeton 的中文旧名",
+  "c": [
+   "CN"
+  ],
+  "np": 381
+ },
+ {
+  "a": "非那根",
+  "n": "非那根",
+  "v": "promethazine",
+  "i": "Promethazine",
+  "x": "Promethazine · 异丙嗪",
+  "k": "legacy",
+  "hint": "旧商品名，现通用名为异丙嗪。",
+  "src": "Phenergan 的中文旧名",
+  "c": [
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 289
+ },
+ {
+  "a": "654-2",
+  "n": "654 2",
+  "v": "anisodamine",
+  "i": "Anisodamine",
+  "x": "Anisodamine · 山莨菪碱",
+  "k": "abbrev",
+  "hint": "「654-2」是山莨菪碱的编号简称，不是商品名。",
+  "src": "国内临床沿用编号简称",
+  "c": [
+   "CN"
+  ],
+  "np": 150
+ },
+ {
+  "a": "速尿",
+  "n": "速尿",
+  "v": "furosemide",
+  "i": "Furosemide",
+  "x": "Furosemide · 呋塞米",
+  "k": "legacy",
+  "hint": "按药理作用得名，现通用名为呋塞米。",
+  "src": "Lasix 的中文俗称",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 606
+ },
+ {
+  "a": "双氢克尿噻",
+  "n": "双氢克尿噻",
+  "v": "hydrochlorothiazide",
+  "i": "Hydrochlorothiazide",
+  "x": "Hydrochlorothiazide · 氢氯噻嗪",
+  "k": "legacy",
+  "hint": "旧名，现通用名为氢氯噻嗪。",
+  "src": "中文旧名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 2104
+ },
+ {
+  "a": "安体舒通",
+  "n": "安体舒通",
+  "v": "spironolactone",
+  "i": "Spironolactone",
+  "x": "Spironolactone · 螺内酯",
+  "k": "legacy",
+  "hint": "旧名，现通用名为螺内酯。",
+  "src": "Aldactone 的中文旧名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "US"
+  ],
+  "np": 423
+ },
+ {
+  "a": "黄连素",
+  "n": "黄连素",
+  "v": "berberine",
+  "i": "Berberine",
+  "x": "Berberine · 小檗碱",
+  "k": "misnomer",
+  "hint": "黄连素是小檗碱的俗称，来自黄连等植物，现已可合成。",
+  "src": "民间按来源称呼",
+  "c": [
+   "CN"
+  ],
+  "np": 584
+ },
+ {
+  "a": "雷米封",
+  "n": "雷米封",
+  "v": "isoniazid",
+  "i": "Isoniazid",
+  "x": "Isoniazid · 异烟肼",
+  "k": "legacy",
+  "hint": "抗结核药，现通用名为异烟肼。",
+  "src": "Rimifon 的中文旧名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 386
+ },
+ {
+  "a": "安乃近",
+  "n": "安乃近",
+  "v": "metamizole",
+  "i": "Metamizole",
+  "x": "Metamizole · 安乃近",
+  "k": "legacy",
+  "hint": "即 metamizole（dipyrone），部分国家已撤市。",
+  "src": "Analgin 的中文旧名",
+  "c": [
+   "CN",
+   "ES",
+   "MX"
+  ],
+  "np": 1057
+ },
+ {
+  "a": "达菲",
+  "n": "达菲",
+  "v": "oseltamivir",
+  "i": "Oseltamivir",
+  "x": "Oseltamivir · 奥司他韦",
+  "k": "legacy",
+  "hint": "抗流感药，「达菲」是 Tamiflu 的通行叫法。",
+  "src": "Tamiflu 的中文商品名",
+  "c": [
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 414
+ },
+ {
+  "a": "芬必得",
+  "n": "芬必得",
+  "v": "ibuprofen",
+  "i": "Ibuprofen",
+  "x": "Ibuprofen · 布洛芬",
+  "k": "legacy",
+  "hint": "GSK 的布洛芬缓释胶囊商品名，常被当成药名本身。",
+  "src": "芬必得（Fenbid）商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 2917
+ },
+ {
+  "a": "必理通",
+  "n": "必理通",
+  "v": "acetaminophen",
+  "i": "Acetaminophen",
+  "x": "Acetaminophen · 对乙酰氨基酚",
+  "k": "legacy",
+  "hint": "GSK 的对乙酰氨基酚商品名。",
+  "src": "必理通（Panadol）中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 8568
+ },
+ {
+  "a": "吗丁啉",
+  "n": "吗丁啉",
+  "v": "domperidone",
+  "i": "Domperidone",
+  "x": "Domperidone · 多潘立酮",
+  "k": "legacy",
+  "hint": "西安杨森的多潘立酮商品名，常被当成药名。",
+  "src": "Motilium 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB"
+  ],
+  "np": 221
+ },
+ {
+  "a": "思密达",
+  "n": "思密达",
+  "v": "diosmectite",
+  "i": "Diosmectite",
+  "x": "Diosmectite · 蒙脱石",
+  "k": "legacy",
+  "hint": "止泻药，商品名比通用名更常被使用。",
+  "src": "Smecta 的中文商品名",
+  "c": [
+   "CN"
+  ],
+  "np": 230
+ },
+ {
+  "a": "达克宁",
+  "n": "达克宁",
+  "v": "miconazole",
+  "i": "Miconazole",
+  "x": "Miconazole · 咪康唑",
+  "k": "legacy",
+  "hint": "抗真菌药，常被当成药名本身。",
+  "src": "Daktarin 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 507
+ },
+ {
+  "a": "络活喜",
+  "n": "络活喜",
+  "v": "amlodipine",
+  "i": "Amlodipine",
+  "x": "Amlodipine · 氨氯地平",
+  "k": "legacy",
+  "hint": "辉瑞的氨氯地平商品名。",
+  "src": "Norvasc 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 2105
+ },
+ {
+  "a": "拜新同",
+  "n": "拜新同",
+  "v": "nifedipine",
+  "i": "Nifedipine",
+  "x": "Nifedipine · 硝苯地平",
+  "k": "legacy",
+  "hint": "拜耳的硝苯地平控释片商品名。",
+  "src": "Adalat GITS 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 903
+ },
+ {
+  "a": "波依定",
+  "n": "波依定",
+  "v": "felodipine",
+  "i": "Felodipine",
+  "x": "Felodipine · 非洛地平",
+  "k": "legacy",
+  "hint": "阿斯利康的非洛地平缓释片商品名。",
+  "src": "Plendil 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 264
+ },
+ {
+  "a": "代文",
+  "n": "代文",
+  "v": "valsartan",
+  "i": "Valsartan",
+  "x": "Valsartan · 缬沙坦",
+  "k": "legacy",
+  "hint": "诺华的缬沙坦商品名。",
+  "src": "Diovan 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 1602
+ },
+ {
+  "a": "科素亚",
+  "n": "科素亚",
+  "v": "losartan",
+  "i": "Losartan",
+  "x": "Losartan · 氯沙坦",
+  "k": "legacy",
+  "hint": "默沙东的氯沙坦商品名。",
+  "src": "Cozaar 的中文商品名",
+  "c": [
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 851
+ },
+ {
+  "a": "安博维",
+  "n": "安博维",
+  "v": "irbesartan",
+  "i": "Irbesartan",
+  "x": "Irbesartan · 厄贝沙坦",
+  "k": "legacy",
+  "hint": "赛诺菲的厄贝沙坦商品名。",
+  "src": "Aprovel 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 886
+ },
+ {
+  "a": "拜唐苹",
+  "n": "拜唐苹",
+  "v": "acarbose",
+  "i": "Acarbose",
+  "x": "Acarbose · 阿卡波糖",
+  "k": "legacy",
+  "hint": "拜耳的阿卡波糖商品名。",
+  "src": "Glucobay 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 277
+ },
+ {
+  "a": "达美康",
+  "n": "达美康",
+  "v": "gliclazide",
+  "i": "Gliclazide",
+  "x": "Gliclazide · 格列齐特",
+  "k": "legacy",
+  "hint": "施维雅的格列齐特商品名。",
+  "src": "Diamicron 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB"
+  ],
+  "np": 419
+ },
+ {
+  "a": "亚莫利",
+  "n": "亚莫利",
+  "v": "glimepiride",
+  "i": "Glimepiride",
+  "x": "Glimepiride · 格列美脲",
+  "k": "legacy",
+  "hint": "赛诺菲的格列美脲商品名。",
+  "src": "Amaryl 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 363
+ },
+ {
+  "a": "糖适平",
+  "n": "糖适平",
+  "v": "gliquidone",
+  "i": "Gliquidone",
+  "x": "Gliquidone · 格列喹酮",
+  "k": "legacy",
+  "hint": "格列喹酮商品名，肾病常用。",
+  "src": "Glurenorm 的中文商品名",
+  "c": [
+   "CN",
+   "GB"
+  ],
+  "np": 30
+ },
+ {
+  "a": "优甲乐",
+  "n": "优甲乐",
+  "v": "levothyroxine",
+  "i": "Levothyroxine",
+  "x": "Levothyroxine · 左甲状腺素",
+  "k": "legacy",
+  "hint": "默克的左甲状腺素钠商品名。",
+  "src": "Euthyrox 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 1045
+ },
+ {
+  "a": "赛治",
+  "n": "赛治",
+  "v": "methimazole",
+  "i": "Methimazole",
+  "x": "Methimazole · 甲巯咪唑",
+  "k": "legacy",
+  "hint": "默克的甲巯咪唑商品名。",
+  "src": "Thyrozol 的中文商品名",
+  "c": [
+   "CN",
+   "US"
+  ],
+  "np": 78
+ },
+ {
+  "a": "洛赛克",
+  "n": "洛赛克",
+  "v": "omeprazole",
+  "i": "Omeprazole",
+  "x": "Omeprazole · 奥美拉唑",
+  "k": "legacy",
+  "hint": "阿斯利康的奥美拉唑商品名。",
+  "src": "Losec 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 1857
+ },
+ {
+  "a": "波立维",
+  "n": "波立维",
+  "v": "clopidogrel",
+  "i": "Clopidogrel",
+  "x": "Clopidogrel · 氯吡格雷",
+  "k": "legacy",
+  "hint": "赛诺菲的氯吡格雷商品名。",
+  "src": "Plavix 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 298
+ },
+ {
+  "a": "舒降之",
+  "n": "舒降之",
+  "v": "simvastatin",
+  "i": "Simvastatin",
+  "x": "Simvastatin · 辛伐他汀",
+  "k": "legacy",
+  "hint": "默沙东的辛伐他汀商品名。",
+  "src": "Zocor 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 1116
+ },
+ {
+  "a": "力平之",
+  "n": "力平之",
+  "v": "fenofibrate",
+  "i": "Fenofibrate",
+  "x": "Fenofibrate · 非诺贝特",
+  "k": "legacy",
+  "hint": "雅培的非诺贝特商品名。",
+  "src": "Lipanthyl 的中文商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 403
+ },
+ {
+  "a": "拜阿司匹灵",
+  "n": "拜阿司匹灵",
+  "v": "aspirin",
+  "i": "Aspirin",
+  "x": "Aspirin · 阿司匹林",
+  "k": "legacy",
+  "hint": "拜耳的阿司匹林肠溶片商品名。",
+  "src": "Bayer 阿司匹林商品名",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 2032
+ },
+ {
+  "a": "Tempra",
+  "n": "tempra",
+  "v": "acetaminophen",
+  "i": "Acetaminophen",
+  "x": "Acetaminophen · 对乙酰氨基酚",
+  "k": "legacy",
+  "hint": "墨西哥最常用的对乙酰氨基酚商品名之一；注意 Tempra XT/MAX 是复方，不是单方。",
+  "src": "墨西哥常见商品名（Tempra）",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 8568
+ },
+ {
+  "a": "Mejoral",
+  "n": "mejoral",
+  "v": "acetaminophen",
+  "i": "Acetaminophen",
+  "x": "Acetaminophen · 对乙酰氨基酚",
+  "k": "legacy",
+  "hint": "墨西哥的对乙酰氨基酚商品名。",
+  "src": "墨西哥常见商品名（Mejoral）",
+  "c": [
+   "AU",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "US"
+  ],
+  "np": 8568
  }
 ]
