@@ -32,6 +32,7 @@ def main() -> None:
             {
                 "query": res.query, "norm": res.norm,
                 "strengths": list(res.strengths), "note": res.note,
+                "alias": res.alias, "aliases": res.aliases,
                 "cards": [c.__dict__ for c in res.cards],
             }, ensure_ascii=False, indent=2))
         return
@@ -40,6 +41,9 @@ def main() -> None:
           f'strengths={list(res.strengths)}  keys={res.total_keys}')
     if res.note:
         print(f"note  = {res.note}")
+    for a in res.aliases:
+        print(f"alias = {a['alias']} -> {a['inn_en']} "
+              f"({a['kind']}, {a['confidence']}; {a['source']})")
     if not res.cards:
         print("(no results)")
         return

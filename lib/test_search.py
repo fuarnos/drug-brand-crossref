@@ -5,9 +5,9 @@
 
 from __future__ import annotations
 
+import shutil
 import sqlite3
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
@@ -27,6 +27,7 @@ SUBS = [
     ("diphenhydramine", "Diphenhydramine", "苯海拉明"),
     ("acrivastine", "Acrivastine", "阿伐斯汀"),
     ("pseudoephedrine", "Pseudoephedrine", "伪麻黄碱"),
+    ("metformin", "Metformin", "二甲双胍"),
 ]
 
 # (pid, country, brand, form, base, release, [(sub, strength, unit)])
@@ -45,6 +46,8 @@ PRODUCTS = [
      [("diphenhydramine", 25.0, "mg")]),
     ("GB-benadryl", "GB", "Benadryl Allergy Relief", "capsule", "capsule", "none",
      [("acrivastine", 8.0, "mg")]),
+    ("CN-glucophage", "CN", "格华止", "tablet", "tablet", "none",
+     [("metformin", 500.0, "mg")]),
 ]
 
 
@@ -81,6 +84,11 @@ def build_fixture(path: Path) -> None:
                " VALUES ('tylenol','Tylenol / 泰诺','美国单方、中国复方')")
     for key in ("tylenol extra strength", "泰诺"):
         db.execute("INSERT INTO name_family (key_id, family_id) VALUES (?, 'tylenol')", (key,))
+    db.execute(
+        "INSERT INTO nickname (substance_id, alias, alias_norm, label_zh, kind,"
+        " confidence, source, note, created_at)"
+        " VALUES ('metformin','两只青蛙','两只青蛙','二甲双胍','slang','user',"
+        " 'test','用户提供的网络俗称','2026-01-01')")
     db.commit()
     db.close()
 
@@ -88,15 +96,20 @@ def build_fixture(path: Path) -> None:
 class SearchTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.tmp = tempfile.TemporaryDirectory()
-        cls.db_path = Path(cls.tmp.name) / "t.db"
+        # 临时库放仓库内 .tmp/（已 ignore）：有些受限环境会锁住 %TEMP%，
+        # 而工作区本身总是可写的。不用 tempfile：它会建 0o700 的目录，
+        # 在某些 Windows 沙箱里会变成「自己反而进不去」。
+        cls.tmpdir = ROOT / ".tmp" / "test-search"
+        shutil.rmtree(cls.tmpdir, ignore_errors=True)
+        cls.tmpdir.mkdir(parents=True, exist_ok=True)
+        cls.db_path = cls.tmpdir / "t.db"
         build_fixture(cls.db_path)
         cls.idx = SearchIndex(cls.db_path)
 
     @classmethod
     def tearDownClass(cls) -> None:
         cls.idx.close()
-        cls.tmp.cleanup()
+        shutil.rmtree(cls.tmpdir, ignore_errors=True)
 
     # --- 归一化到检索的链路 ---
     def test_case_variants_land_on_same_key(self):
@@ -143,6 +156,33 @@ class SearchTests(unittest.TestCase):
         res = self.idx.search("20 mg")
         self.assertTrue(res.empty)
         self.assertEqual(res.note, "只给了剂量，没有药名")
+
+    # --- 俗称 / 网络别名 -------------------------------------------------
+    def test_nickname_resolves_to_substance(self):
+        res = self.idx.search("两只青蛙")
+        self.assertTrue(res.cards)
+        self.assertEqual(res.alias["substance_id"], "metformin")
+        self.assertEqual(res.alias["label_zh"], "二甲双胍")
+        self.assertEqual(res.alias["kind"], "slang")
+        self.assertEqual(res.cards[0].brand, "格华止")
+        self.assertEqual(res.cards[0].composition, "Metformin")
+        self.assertEqual(res.cards[0].tier, "nickname")
+        self.assertIn("网络俗称", res.note)
+
+    def test_nickname_with_strength_and_country(self):
+        res = self.idx.search("两只青蛙 500mg", country="CN")
+        self.assertTrue(res.cards)
+        self.assertTrue(all(c.country == "CN" for c in res.cards))
+        self.assertEqual(res.cards[0].strength_text, "500 mg")
+
+    def test_nickname_country_empty_is_honest(self):
+        res = self.idx.search("两只青蛙", country="US")
+        self.assertTrue(res.empty)
+        self.assertIn("查不到不代表", res.note)
+
+    def test_nickname_is_not_a_product_name(self):
+        # 俗称不能污染碰撞/同名页：它只指向成分，不冒充包装上的名字
+        self.assertIsNone(self.idx.name_page("两只青蛙"))
 
     # --- 碰撞 ---
     def test_severe_collision_detected(self):

@@ -6,6 +6,7 @@
     name/<id>.html      名字页（这个名字下挂了哪些药——碰撞页）
     about.html          数据来源、覆盖率、免责
     data/index.json     检索索引
+    data/aliases.json   俗称 / 网络别名索引
     assets/             css + js
 
 用法：python site/build.py
@@ -37,10 +38,10 @@ I18N = {
     "en": {
         "nav.search": "Search", "nav.about": "About",
         "home.h1": "Find out what a medicine really is",
-        "home.sub": ("Type a brand name, a generic name, or a line from the pack. Chinese, "
-                     "full-width and Cyrillic input all work, and you can include the dose — "
-                     "e.g. Lipitor 20mg, 泰诺, СОРТИС."),
-        "home.ph": "Brand name / generic name / a line from the pack",
+        "home.sub": ("Type a brand name, a generic name, a nickname (try 两只青蛙), or a line "
+                     "from the pack. Chinese, full-width and Cyrillic input all work, and you can "
+                     "include the dose — e.g. Lipitor 20mg, 泰诺, СОРТИС."),
+        "home.ph": "Brand name / generic name / nickname / a line from the pack",
         "home.all": "All countries", "home.us": "United States",
         "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
         "home.mx": "Mexico", "home.au": "Australia",
@@ -48,6 +49,7 @@ I18N = {
                           "Coverage:"),
         "home.loading": "Loading index…",
         "res.matched": "names matched", "res.none": "No match",
+        "res.brands": "brand names found",
         "res.notin": "Not covered in this country",
         "res.caveat": "an empty result does not mean the drug does not exist",
         "card.packs": "packs",
@@ -73,15 +75,23 @@ I18N = {
                         "countries or variants. Check the composition, never treat the names "
                         "as equivalent."),
         "name.warning": ("Same name, but immediate vs modified release — not interchangeable."),
+        "nick.hit": "Nickname",
+        "nick.slang": "internet nickname", "nick.legacy": "older name",
+        "nick.translit": "transliterated old name", "nick.abbrev": "abbreviation",
+        "nick.misnomer": "common misnomer",
+        "nick.ambiguous": ("This nickname may point to more than one ingredient — "
+                           "check the composition."),
+        "nick.caveat": ("Nicknames point to an ingredient, not to a specific pack: the same "
+                        "ingredient is sold under different brand names in each country."),
         "footer": ("Information only — not medical advice, and no substitute for a pharmacist."),
     },
     "es": {
         "nav.search": "Buscar", "nav.about": "Acerca de",
         "home.h1": "Descubre qué es realmente un medicamento",
-        "home.sub": ("Escribe un nombre comercial, un nombre genérico o una línea del envase. "
-                     "También funciona en chino, en ancho completo y en cirílico; puedes incluir "
-                     "la dosis — p. ej. Lipitor 20mg, 泰诺, СОРТИС."),
-        "home.ph": "Nombre comercial / genérico / una línea del envase",
+        "home.sub": ("Escribe un nombre comercial, un nombre genérico, un apodo (prueba 两只青蛙) "
+                     "o una línea del envase. También funciona en chino, en ancho completo y en "
+                     "cirílico; puedes incluir la dosis — p. ej. Lipitor 20mg, 泰诺, СОРТИС."),
+        "home.ph": "Nombre comercial / genérico / apodo / una línea del envase",
         "home.all": "Todos los países", "home.us": "Estados Unidos",
         "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
         "home.mx": "México", "home.au": "Australia",
@@ -89,6 +99,7 @@ I18N = {
                           "Cobertura:"),
         "home.loading": "Cargando el índice…",
         "res.matched": "nombres encontrados", "res.none": "Sin resultados",
+        "res.brands": "nombres comerciales encontrados",
         "res.notin": "No incluido en este país",
         "res.caveat": "un resultado vacío no significa que el medicamento no exista",
         "card.packs": "envases",
@@ -115,20 +126,29 @@ I18N = {
                         "los nombres como equivalentes."),
         "name.warning": ("Mismo nombre, pero liberación inmediata frente a modificada — "
                          "no son intercambiables."),
+        "nick.hit": "Apodo",
+        "nick.slang": "apodo de internet", "nick.legacy": "nombre antiguo",
+        "nick.translit": "nombre antiguo transliterado", "nick.abbrev": "abreviatura",
+        "nick.misnomer": "denominación errónea habitual",
+        "nick.ambiguous": ("Este apodo puede corresponder a más de un principio activo — "
+                           "comprueba la composición."),
+        "nick.caveat": ("Los apodos señalan un principio activo, no un envase concreto: el mismo "
+                        "principio se vende con marcas distintas en cada país."),
         "footer": ("Solo información — no es consejo médico ni sustituye a un farmacéutico."),
     },
     "zh": {
         "nav.search": "检索", "nav.about": "关于",
         "home.h1": "查一个药名，看它在各国是什么",
-        "home.sub": ("支持中英文、全角、西里尔字母；可以连剂量一起输入，"
-                     "例如 Lipitor 20mg、泰诺、СОРТИС。"),
-        "home.ph": "商品名 / 通用名 / 包装上的一行字",
+        "home.sub": ("商品名、通用名、俗称都能搜（比如「两只青蛙」）；支持中英文、全角、"
+                     "西里尔字母，也可以连剂量一起输入，例如 Lipitor 20mg、泰诺、СОРТИС。"),
+        "home.ph": "商品名 / 通用名 / 俗称 / 包装上的一行字",
         "home.all": "全部国家", "home.us": "美国",
         "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
         "home.mx": "墨西哥", "home.au": "澳大利亚",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
         "home.loading": "正在加载索引…",
         "res.matched": "个名字命中", "res.none": "没有匹配的名字",
+        "res.brands": "个商品名命中",
         "res.notin": "所选国家没有收录这个名字",
         "res.caveat": "查不到不代表这个药不存在",
         "card.packs": "个包装",
@@ -152,6 +172,12 @@ I18N = {
         "name.severe": ("这个商品名在不同国家或不同变体下指向不同活性成分，"
                         "选药前必须核对成分，不能按名字等同。"),
         "name.warning": "同名产品存在缓释/速释差异，不能直接互换。",
+        "nick.hit": "俗称命中",
+        "nick.slang": "网络俗称", "nick.legacy": "旧名",
+        "nick.translit": "音译旧名", "nick.abbrev": "简称",
+        "nick.misnomer": "常见误称",
+        "nick.ambiguous": "这个叫法可能对应不止一个成分，请按成分核对。",
+        "nick.caveat": "俗称指向成分，不指向某个包装；同一成分在各国的商品名不同。",
         "footer": "本站只做标识对应，不构成用药建议，不能替代医师或药师。",
     },
 }
@@ -201,6 +227,11 @@ margin-left:8px}
 .badge.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4}
 .notice{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;
 padding:12px 14px;font-size:14px;margin:14px 0}
+.notice.nick{background:#f1f8f4;border-color:#cfe6da}
+.notice.nick .nick-head{font-size:15px}
+.notice.nick .nick-head b{font-size:17px}
+.notice.nick .sub{margin:6px 0 0}
+.notice.nick .sub a{white-space:nowrap}
 table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:13px}
@@ -227,7 +258,7 @@ const meta = document.getElementById('meta');
 // 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
-let IDX = [];
+let IDX = [], NICKS = [];
 
 function norm(s){
   return (s||'').normalize('NFKC').toLowerCase()
@@ -261,6 +292,14 @@ function tier(nq,k){
   return null;
 }
 function doseNum(s){ const m=(s||'').match(/[\d.]+/); return m?parseFloat(m[0]):0; }
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g,
+    c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function aliasHits(nq){
+  // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
+  return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
+}
 function rowHTML(r){
   const T = window.T || (k=>k);
   const badge = r.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
@@ -280,8 +319,13 @@ function render(){
   const nq = norm(q);
   const st = strengthOf(q);
   const c = ctry.value;
+  const nicks = aliasHits(nq);
+  const nickSids = new Set(nicks.map(a=>a.v));
   let hits=[];
+  const seen = new Set();
   const addHit = (e, t) => {
+    if(seen.has(e.k)) return;
+    seen.add(e.k);
     let score = 0.55*t[1] + 0.20*(c && e.c.includes(c) ? 1 : 0.5);
     score += 0.15*(st && e.s.some(x=>x.toLowerCase().startsWith(st[0]+' ')) ? 1 : 0.5);
     score += 0.05;
@@ -290,7 +334,11 @@ function render(){
   // 第一遍只认确切的几种匹配；模糊匹配要等确定命中太少时才补，
   // 否则搜 Lipitor 会把 Zifitor、Dipifor 这些隔壁牌子一起倒出来。
   for(const e of IDX){
-    const t = tier(nq, e.k);
+    // 复方产品：e.x 是这条名字下成分的中文/英文展示串（最多 6 个），
+    // 直接按成分名 tokens 比对，比在每个索引条目里再存一份 vs 数组省 4 MB。
+    const subs = (e.x || '').split(' + ');
+    const byNick = nickSids.has(e.v) || nicks.some(a => subs.includes(a.i));
+    const t = byNick ? ['nickname', 1.0] : tier(nq, e.k);
     if(!t || t[0]==='fuzzy') continue;
     if(c && !e.c.includes(c)) continue;
     addHit(e, t);
@@ -306,9 +354,25 @@ function render(){
   hits.sort((a,b)=> b[0]-a[0] || b[2].n-a[2].n || a[2].d.length-b[2].d.length);
   const shown = hits.slice(0,40);
   const T = window.T || (k=>k);
-  meta.textContent = hits.length ? `${hits.length} ${T('res.matched')}` :
-    (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
-       : `${T('res.none')} — ${T('res.caveat')}.`);
+  meta.textContent = hits.length
+    ? `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`
+    : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
+         : `${T('res.none')} — ${T('res.caveat')}.`);
+  // 俗称命中：先说清「这不是商品名，是某个成分的叫法」，再列该成分的商品名。
+  let nickHTML = '';
+  if(nicks.length){
+    nickHTML = nicks.slice(0,3).map(a=>{
+      const href = `${BASE}drug/${encodeURIComponent(a.v)}.html`;
+      const hint = (window.LANG === 'zh' && a.hint)
+        ? `<div class="sub">${esc(a.hint)}</div>` : '';
+      const packs = a.np ? ` · ${a.np} ${T('card.packs')}` : '';
+      return `<div class="notice nick"><div class="nick-head">${T('nick.hit')}：
+        <b>${esc(a.a)}</b> → <a href="${href}">${esc(a.x)}</a>
+        <span class="tag">${esc(T('nick.'+a.k))}</span></div>
+        <div class="sub">${T('nick.caveat')}${packs}</div>${hint}</div>`;
+    }).join('');
+    if(nicks.length > 1) nickHTML += `<div class="notice">${T('nick.ambiguous')}</div>`;
+  }
   const shownKeys = new Set(shown.map(x=>x[2].k));
   const byFam = new Map();
   for(const [, , e] of shown){
@@ -339,7 +403,7 @@ function render(){
     for(const d of ds) rows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
   }
   const capped = rows.slice(0, 80);
-  out.innerHTML = warnHTML + `<table class="res"><thead><tr>
+  out.innerHTML = nickHTML + warnHTML + `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
     </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + extraHTML;
@@ -351,8 +415,11 @@ document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>
 }));
 const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
-out.innerHTML = '<div class="sub">Loading index… 正在加载索引（约 10 MB，第一次会慢一点）</div>';
-fetch(BASE + 'data/index.json').then(r=>r.json()).then(d=>{IDX=d; render();})
+out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
+Promise.all([
+  fetch(BASE + 'data/index.json').then(r=>r.json()),
+  fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[])
+]).then(([d,a])=>{IDX=d||[]; NICKS=a||[]; render();})
   .catch(()=>{ out.innerHTML='<div class="notice">索引没加载成功：'
     +'如果是在本地双击打开，浏览器会拦截本地文件读取。<br>'
     +'请用 <kbd>python -m http.server</kbd> 起一个本地服务，再访问 '
@@ -459,7 +526,7 @@ def load_index(db: sqlite3.Connection):
         # 只有这些名字值得单独成页：有碰撞的、或包装数够多的。
         # 其余名字仍能被搜到，卡片直接链到成分页——不为只有一个包装的冷门名字生成几万张页。
         worth_page = level == "warning" or (level == "severe" and n >= 2) or n >= 3
-        entries.append({
+        entry = {
             "k": key_id,
             "d": displays.get(key_id, key_id),
             "c": sorted(a["c"]),
@@ -475,9 +542,50 @@ def load_index(db: sqlite3.Connection):
             "m": (max(a["mah"].items(), key=lambda kv: kv[1])[0]
                   if a["mah"] else ""),
             "mn": len(a["mah"]),
-        })
+        }
+        entries.append(entry)
     entries.sort(key=lambda e: -e["n"])
     return entries
+
+
+def load_aliases(db: sqlite3.Connection) -> list[dict]:
+    """俗称索引：单独一份 aliases.json。
+
+    不塞进商品名索引，因为昵称属于「成分」，不属于某个名字键——塞进去会让
+    「两只青蛙」变成一张挂着几千个包装的商品名。
+    """
+    counts: dict[str, tuple[int, set[str]]] = {}
+    for sid, n, countries in db.execute(
+        """SELECT v.substance_id, COUNT(DISTINCT p.product_id),
+                  GROUP_CONCAT(DISTINCT p.country)
+           FROM product p
+           JOIN product_component pc ON pc.product_id = p.product_id
+           JOIN variant v ON v.variant_id = pc.variant_id
+           WHERE p.status = 'active'
+           GROUP BY v.substance_id"""
+    ):
+        counts[sid] = (n, set((countries or "").split(",")))
+    out = []
+    for alias, norm, sid, zh, kind, note, source, inn_en in db.execute(
+        """SELECT n.alias, n.alias_norm, n.substance_id, n.label_zh, n.kind,
+                  n.note, n.source, s.inn_en
+           FROM nickname n JOIN substance s ON s.substance_id = n.substance_id
+           ORDER BY n.nickname_id"""
+    ):
+        n_prod, countries = counts.get(sid, (0, set()))
+        out.append({
+            "a": alias,
+            "n": norm,
+            "v": sid,
+            "i": inn_en,
+            "x": inn_en + (f" · {zh}" if zh else ""),
+            "k": kind,
+            "hint": note or "",
+            "src": source or "",
+            "c": sorted(countries),
+            "np": n_prod,
+        })
+    return out
 
 
 def build_drug_pages(db: sqlite3.Connection) -> int:
@@ -504,6 +612,11 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
             bucket.append(raw)
 
     subs = db.execute("SELECT substance_id, inn_en, inn_zh, atc FROM substance").fetchall()
+    nicknames: dict[str, list[str]] = {}
+    for sid, alias in db.execute(
+        "SELECT substance_id, alias FROM nickname ORDER BY nickname_id"
+    ):
+        nicknames.setdefault(sid, []).append(alias)
     made = 0
     (OUT / "drug").mkdir(parents=True, exist_ok=True)
     for sid, inn_en, inn_zh, atc in subs:
@@ -557,9 +670,15 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
                 f"<th data-i18n='drug.status'>Status</th></tr>"
                 + "".join(lis) + "</table>" + more
             )
+        nick_line = ""
+        if sid in nicknames:
+            also = "、".join(esc(x) for x in nicknames[sid])
+            nick_line = (f'<p class="sub">Also called 也叫：{also} '
+                         f'<span class="tag">nickname 俗称</span></p>')
         body = f"""<h1>{esc(inn_zh) or esc(inn_en)} <span class="meta">{esc(inn_en)}</span></h1>
 <p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
 <code>{esc(sid)}</code></p>
+{nick_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
 brand names in different countries, and the same name can point to a different ingredient.
 Listed by country — not interchangeable.</div>
@@ -673,8 +792,8 @@ def build_index_page(entries, stats, coverage) -> None:
     """三份落地页：/ 、/es/ 、/zh/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
-<p class="sub" data-i18n="home.sub">Type a brand name, a generic name, or a line from the pack.</p>
-<input id="q" data-ph="home.ph" placeholder="Brand name / generic name / a line from the pack" autocomplete="off">
+<p class="sub" data-i18n="home.sub">Type a brand name, a generic name, a nickname, or a line from the pack.</p>
+<input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off">
 <div class="row">
   <select id="country"><option value="" data-i18n="home.all">All countries</option>
     <option value="US" data-i18n="home.us">United States</option>
@@ -684,6 +803,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="MX" data-i18n="home.mx">Mexico</option>
     <option value="AU" data-i18n="home.au">Australia</option></select>
   <button data-q="泰诺">泰诺</button>
+  <button data-q="两只青蛙">两只青蛙</button>
   <button data-q="Lipitor 20mg">Lipitor 20mg</button>
   <button data-q="Benadryl">Benadryl</button>
   <button data-q="Gaviscon">Gaviscon</button>
@@ -722,6 +842,29 @@ When one name hangs off different ingredients, the site flags
 Identification and “not interchangeable” warnings only — no dose conversion, no substitution
 recommendations.</li>
 </ol>
+
+<h2>Nicknames, old names, internet slang 俗称、旧名与网络别名</h2>
+<p>“两只青蛙” is not a brand name and is never stored as one: it points to an ingredient,
+metformin (二甲双胍). Nicknames are a separate, hand-maintained table — searchable, but kept out
+of the brand-name tables on purpose.</p>
+<ul>
+<li>When a nickname matches, the page says so (<i>internet nickname / older name</i>) and then
+lists that ingredient’s brand names. It is never presented as a name printed on a pack.
+<br>命中时先标注「网络俗称 / 旧名」，再列该成分的商品名；不把它说成包装上的名字。</li>
+<li>Every entry carries a source (user-provided / common usage / older pharmacopoeial name).
+<br>每条都写出处；没有出处的叫法不收。</li>
+<li>Nicknames never enter collision detection and never get a “same name” page — a nickname is
+not an identity, the ingredient is.
+<br>不参与同名碰撞推导，也不生成同名页——昵称不是身份，成分才是。</li>
+<li>To add one, edit <code>data/seed_nicknames.py</code> and rebuild. It is curated by hand,
+not scraped.
+<br>要补一条：改 <code>data/seed_nicknames.py</code> 再重建；人工维护，不自动抓。</li>
+</ul>
+<p class="sub">This layer started as a joke: the <i>guā</i> in 二甲双胍 sounds like a frog’s
+<i>guā</i> (呱), so it got called “two frogs”. The point of the site is to connect exactly this
+kind of name back to the substance.<br>
+这一层最初来自一个笑话：二甲双胍的「胍」和青蛙的「呱」同音，于是被叫成「两只青蛙」。这个站想
+做的，就是把这类叫法接回它真正的成分。</p>
 
 <h2>Sources and coverage 数据来源与覆盖</h2>
 <table><tr><th>Market 市场</th><th>Products 已收录</th><th>Synced 同步</th></tr>{cov}</table>
@@ -789,7 +932,8 @@ back-filled from public catalogues, and no brand-level bulk source exists.
 <li>ATC codes are mostly missing.<br>ATC 编码大部分缺失。</li>
 </ul>
 <p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
-{stats['keys']:,} name keys · {stats['severe']:,} names flagged “same name, different drug”.</p>"""
+{stats['keys']:,} name keys · {stats['nickname']:,} nicknames ·
+{stats['severe']:,} names flagged “same name, different drug”.</p>"""
     (OUT / "about.html").write_text(page("About", body), encoding="utf-8")
 
 
@@ -840,6 +984,7 @@ def main() -> None:
         "products": db.execute("SELECT COUNT(*) FROM product").fetchone()[0],
         "substances": db.execute("SELECT COUNT(*) FROM substance").fetchone()[0],
         "keys": db.execute("SELECT COUNT(*) FROM name_key").fetchone()[0],
+        "nickname": db.execute("SELECT COUNT(*) FROM nickname").fetchone()[0],
         "severe": db.execute(
             "SELECT COUNT(*) FROM collision WHERE level='severe'").fetchone()[0],
     }
@@ -849,6 +994,12 @@ def main() -> None:
     (OUT / "data" / "index.json").write_text(
         json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"  {len(entries)} keys", flush=True)
+
+    print("building nickname index ...", flush=True)
+    aliases = load_aliases(db)
+    (OUT / "data" / "aliases.json").write_text(
+        json.dumps(aliases, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"  {len(aliases)} nicknames", flush=True)
 
     print("building drug pages ...", flush=True)
     n_drug = build_drug_pages(db)

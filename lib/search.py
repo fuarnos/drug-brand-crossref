@@ -12,6 +12,7 @@ from __future__ import annotations
 import difflib
 import sqlite3
 import sys
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -21,9 +22,20 @@ from normalize_name import normalize  # noqa: E402
 
 DB_DEFAULT = ROOT / "data" / "drugs.db"
 
-TIER = {"exact": 1.00, "compact": 0.95, "prefix": 0.80, "contains": 0.70, "fuzzy": 0.55}
+TIER = {"exact": 1.00, "compact": 0.95, "prefix": 0.80, "contains": 0.70,
+        "fuzzy": 0.55, "nickname": 1.00}
 FUZZY_MIN = 0.75
 MAX_KEYS = 60
+
+# 俗称的类型 → 给人看的标签。昵称命中的提示里会写明是「网络俗称」还是「旧名」，
+# 不让用户以为这是包装上的正式名字。
+KIND_ZH = {
+    "slang": "网络俗称",
+    "legacy": "旧名",
+    "translit": "音译旧名",
+    "abbrev": "简称",
+    "misnomer": "常见误称",
+}
 
 
 @dataclass
@@ -60,6 +72,9 @@ class SearchResult:
     cards: list[Card] = field(default_factory=list)
     total_keys: int = 0
     note: str = ""
+    # 俗称命中：aliases 是所有候选（同一个叫法可能对应多个成分），alias 是首条。
+    alias: dict = field(default_factory=dict)
+    aliases: list[dict] = field(default_factory=list)
 
     @property
     def empty(self) -> bool:
@@ -96,6 +111,19 @@ class SearchIndex:
             (r["key_id"], r["norm"], r["compact"])
             for r in self.db.execute("SELECT key_id, norm, compact FROM name_key")
         ]
+        # 俗称表可能还不存在（老库没跑过 init_db），这时静默降级为「没有俗称」。
+        try:
+            self._nicknames = [
+                dict(r) for r in self.db.execute(
+                    """SELECT n.alias, n.alias_norm, n.substance_id, n.label_zh,
+                              n.kind, n.confidence, n.source, n.note,
+                              s.inn_en, s.inn_zh
+                       FROM nickname n
+                       JOIN substance s ON s.substance_id = n.substance_id
+                       ORDER BY n.nickname_id""")
+            ]
+        except sqlite3.OperationalError:
+            self._nicknames = []
 
     def close(self) -> None:
         self.db.close()
@@ -138,6 +166,166 @@ class SearchIndex:
         keys = sorted(hits.items(), key=lambda kv: (order[kv[1]], kv[0]))
         return keys[:MAX_KEYS]
 
+    # --- 俗称解析 ------------------------------------------------------
+    def _alias_hits(self, n) -> list[dict]:
+        """精确命中俗称。不做模糊——昵称差一个字往往就是另一个梗。"""
+        compact = n.compact
+        return [a for a in self._nicknames
+                if a["alias_norm"] == n.norm
+                or a["alias_norm"].replace(" ", "") == compact]
+
+    @staticmethod
+    def _alias_info(a: dict) -> dict:
+        return {
+            "alias": a["alias"],
+            "substance_id": a["substance_id"],
+            "inn_en": a["inn_en"],
+            "inn_zh": a["inn_zh"],
+            "label_zh": a["label_zh"],
+            "kind": a["kind"],
+            "confidence": a["confidence"],
+            "source": a["source"],
+            "note": a["note"],
+        }
+
+    def _search_alias(self, query: str, n, hits: list[dict],
+                      country: str | None, limit: int,
+                      include_status: tuple[str, ...]) -> SearchResult:
+        """昵称 → 活性成分 → 这个成分在各国的商品名。
+
+        不返回「某个商品名」的候选集，因为俗称呼唤的是分子，不是某一个包装。
+        """
+        res = SearchResult(query=query, norm=n.norm, strengths=n.strengths)
+        res.aliases = [self._alias_info(a) for a in hits]
+        res.alias = res.aliases[0]
+        res.total_keys = len(hits)
+
+        cards: list[Card] = []
+        for a in hits[:3]:
+            cards.extend(self._substance_cards(a["substance_id"], include_status))
+        for c in cards:
+            self._score_card(c, n, country)
+        if country:
+            cards = [c for c in cards if c.country == country]
+        cards.sort(key=lambda c: (-c.score, -c.n_products, c.brand.lower()))
+        res.cards = cards[:limit]
+
+        label = res.alias["label_zh"] or res.alias["inn_zh"] or res.alias["inn_en"]
+        kind = KIND_ZH.get(res.alias["kind"], "别名")
+        if len(hits) == 1:
+            res.note = (f"「{res.alias['alias']}」是 {label} 的{kind}；"
+                        "下面按成分列出商品名")
+        else:
+            names = "、".join(x["label_zh"] or x["inn_en"] for x in res.aliases[:4])
+            res.note = f"「{res.alias['alias']}」可能指：{names}；请按成分核对"
+        if country and not res.cards:
+            res.note = (f"「{res.alias['alias']}」对应的 {label} 在 {country} 没有收录 —— "
+                        "查不到不代表该药不存在")
+        return res
+
+    def _substance_cards(self, substance_id: str,
+                         include_status: tuple[str, ...] = ("active",)) -> list[Card]:
+        """把一个成分的商品按「国家 × 剂型 × 释放 × 成分组合」折成结果卡。
+
+        和按名字检索不同：这里不经过 name_key，所以复方里含有该成分的产品也会出现
+        （组成会在成分列里写全），品牌名取该组里出现最多的商品名。
+        """
+        status_marks = ",".join("?" * len(include_status))
+        member_sql = """SELECT pc2.product_id FROM product_component pc2
+                        JOIN variant v2 ON v2.variant_id = pc2.variant_id
+                        WHERE v2.substance_id = ?"""
+        rows = self.db.execute(
+            f"""SELECT p.product_id, p.country, p.form_base, p.dosage_form, p.release,
+                       p.status, pc.ord, pc.strength_value, pc.strength_unit,
+                       pc.per_volume_value, pc.per_volume_unit,
+                       v.substance_id, s.inn_en
+                FROM product p
+                JOIN product_component pc ON pc.product_id = p.product_id
+                JOIN variant v ON v.variant_id = pc.variant_id
+                JOIN substance s ON s.substance_id = v.substance_id
+                WHERE p.status IN ({status_marks}) AND p.product_id IN ({member_sql})
+                ORDER BY p.product_id, pc.ord""",
+            (*include_status, substance_id),
+        ).fetchall()
+        if not rows:
+            return []
+
+        names: dict[str, list[str]] = {}
+        for r in self.db.execute(
+            f"""SELECT pn.product_id, nv.raw
+                FROM product_name pn
+                JOIN name_variant nv ON nv.key_id = pn.key_id
+                WHERE pn.name_type = 'trade' AND pn.product_id IN ({member_sql})""",
+            (substance_id,),
+        ):
+            names.setdefault(r["product_id"], []).append(r["raw"])
+
+        by_product: dict[str, list[sqlite3.Row]] = {}
+        for r in rows:
+            by_product.setdefault(r["product_id"], []).append(r)
+
+        cards: dict[tuple, Card] = {}
+        pools: dict[tuple, Counter] = {}
+        for pid, parts in by_product.items():
+            first = parts[0]
+            sig = (first["country"], first["form_base"], first["release"],
+                   tuple(sorted(p["substance_id"] for p in parts)))
+            names_here = names.get(pid) or []
+            inns = {p["inn_en"].casefold() for p in parts}
+            # 「Metformin」「Metformin Hydrochloride」这类是成分名不是品牌名，
+            # 能挑出真品牌（格华止 / Glucophage）就别把成分名当品牌显示。
+            real = [x for x in names_here
+                    if not any(x.casefold().startswith(i) for i in inns)]
+            pool = pools.setdefault(sig, Counter())
+            pool.update(real or names_here or [parts[0]["inn_en"]])
+            card = cards.get(sig)
+            if card is None:
+                card = Card(
+                    key_id="",
+                    brand=parts[0]["inn_en"],
+                    country=first["country"],
+                    substances=[p["inn_en"] for p in parts],
+                    dosage_form=first["form_base"] or first["dosage_form"],
+                    status=first["status"],
+                    collision="info",
+                    tier="nickname",
+                    product_id=pid,
+                )
+                cards[sig] = card
+            card.n_products += 1
+            if first["status"] == "active":
+                card.status = "active"
+            for p in parts:
+                s = _fmt_strength(p["strength_value"], p["strength_unit"],
+                                  p["per_volume_value"], p["per_volume_unit"])
+                if s and s not in card.strengths:
+                    card.strengths.append(s)
+        for sig, card in cards.items():
+            if pools.get(sig):
+                card.brand = pools[sig].most_common(1)[0][0]
+        out = list(cards.values())
+        for c in out:
+            c.strengths.sort(key=_strength_sort_key)
+        return out
+
+    def _score_card(self, c: Card, n, country: str | None) -> None:
+        name_score = TIER.get(c.tier, 0.4)
+        country_score = 1.0 if (country and c.country == country) else 0.5
+        strength_score = 0.5
+        if n.strengths:
+            qs = {(v, u) for v, u in n.strengths}
+            ps = set()
+            for s in c.strengths:
+                bits = s.split()
+                if len(bits) >= 2:
+                    ps.add((bits[0], bits[1]))
+            strength_score = 1.0 if qs & ps else 0.2
+        form_score = 0.5
+        if n.form_hint:
+            form_score = 1.0 if any(f in c.dosage_form for f in n.form_hint) else 0.3
+        c.score = round(0.55 * name_score + 0.20 * country_score
+                        + 0.15 * strength_score + 0.10 * form_score, 4)
+
     # --- 主查询 --------------------------------------------------------
     def search(
         self,
@@ -151,6 +339,11 @@ class SearchIndex:
         if n.is_empty:
             res.note = "只给了剂量，没有药名"
             return res
+
+        alias_hits = self._alias_hits(n)
+        if alias_hits:
+            return self._search_alias(query, n, alias_hits, country, limit,
+                                      include_status)
 
         keys = self._resolve_keys(n)
         res.total_keys = len(keys)
@@ -248,23 +441,7 @@ class SearchIndex:
         result = list(cards.values())
         for c in result:
             c.strengths.sort(key=_strength_sort_key)
-            name_score = TIER.get(c.tier, 0.4)
-            country_score = 1.0 if (country and c.country == country) else 0.5
-            strength_score = 0.5
-            if n.strengths:
-                qs = {(v, u) for v, u in n.strengths}
-                ps = set()
-                for s in c.strengths:
-                    bits = s.split()
-                    if len(bits) >= 2:
-                        ps.add((bits[0], bits[1]))
-                strength_score = 1.0 if qs & ps else 0.2
-            form_score = 0.5
-            if n.form_hint:
-                form_score = 1.0 if any(f in c.dosage_form for f in n.form_hint) else 0.3
-            c.score = round(
-                0.55 * name_score + 0.20 * country_score
-                + 0.15 * strength_score + 0.10 * form_score, 4)
+            self._score_card(c, n, country)
 
         if country:
             # 严格按国家过滤：给一个「该国没有」的明确答案，比回退到别国更诚实

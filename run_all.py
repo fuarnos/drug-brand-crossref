@@ -82,6 +82,7 @@ def main() -> None:
             print("提示：没有 PBS 缓存，跳过澳洲（python etl/fetch_pbs.py 可抓）", flush=True)
     run("data/seed_manual.py")
     run("data/seed_families.py")
+    run("data/seed_nicknames.py")
     run("site/build.py")
     print("\n全部完成。预览：python serve.py 8000")
 

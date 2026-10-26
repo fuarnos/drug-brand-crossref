@@ -178,7 +178,7 @@
   <div class="snap">
     <div class="live static"><i></i>静态快照 · 手动重拍</div>
     <div class="time">
-      快照 <b>2026-10-25 22:41</b><br>
+      快照 <b>2026-10-25 22:44</b><br>
       共享工作区 <b>D:\同种药物商品名剂量对应网站</b><br>
       代码 20+ 模块 · 测试 20 项
     </div>
@@ -207,14 +207,14 @@
     <div class="card b">
       <div class="role"><span class="name">上线部署</span><span class="pill done"><i></i>已完成 19:23</span></div>
       <div class="sid mono">session-02f4fffd</div>
-      <div class="task">结论是<b>不用买服务器</b>；但 Cloudflare 免费档只收 2 万文件，站点现在 10,851 个，还差 0 个。</div>
+      <div class="task">结论是<b>不用买服务器</b>；但 Cloudflare 免费档只收 2 万文件，站点现在 23,851 个，还差 3,851 个。</div>
       <div class="chips"><span class="chip">不用 VPS</span><span class="chip">2 万文件上限</span></div>
     </div>
     <div class="card v">
       <div class="role"><span class="name">可视化</span><span class="pill run"><i></i>本次生成</span></div>
       <div class="sid mono">session-eedb9d20 · 本图</div>
       <div class="task">把六个会话、六条市场线、真实计数和阻塞压成一张快照；数字来自只读查询与站点统计。</div>
-      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">22:41</span></div>
+      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">22:44</span></div>
     </div>
   </div>
 
@@ -262,14 +262,14 @@
     </div>
     <div class="step">
       <div class="idx">05 / BUILD</div><h3>静态站</h3>
-      <div class="metric">10,851<small>文件</small></div>
-      <p>48.0 MB；10,847 成分页 + 0 名字页；索引 17.2 MB。— 重建。</p>
+      <div class="metric">23,851<small>文件</small></div>
+      <p>71.0 MB；10,847 成分页 + 12,996 名字页；索引 17.2 MB。22:42 重建。</p>
       <span class="st hot">三语界面</span>
     </div>
     <div class="step">
       <div class="idx">06 / DEPLOY</div><h3>上线</h3>
       <div class="metric">0<small>个可用网址</small></div>
-      <p>10,851 个文件在 Pages 免费档 20,000 以内；站点已可部署。</p>
+      <p>23,851 个文件仍在 Pages 免费档 2 万之外（差 3,851）；gh-pages 推了，但 Pages 没开。</p>
       <span class="st off">未上线</span>
     </div>
   </div>
@@ -335,7 +335,7 @@
         <span><i style="background:#b493ff"></i>MX 待确认</span>
         <span><i style="background:#4fd1d9"></i>AU PBS API</span>
       </div>
-      <div class="callout"><b>中国是最大单一市场（41%），但商品名有值只有 5.1%</b>；README 还写 135,351 / 2024 快照，about.html 也还是 2024——公开前先统一口径。</div>
+      <div class="callout"><b>中国是最大单一市场（41%），但商品名有值只有 5.1%</b>；README 还写 135,351（旧快照），about.html 还写 2024-01-05——公开前先统一口径。</div>
       <div class="legend" style="margin-top:10px">
         <span>CN 商品名键 4,866</span><span>AU 3,077</span><span>ES 12,163</span><span>MX 9,829</span>
       </div>
@@ -374,7 +374,7 @@
     <div class="ph">
       <div class="top"><span class="p">P5</span><span class="pct" style="color:var(--amber)">40%</span></div>
       <h4>公开上线</h4><div class="bar"><i style="width:40%;background:var(--amber)"></i></div>
-      <div class="note">文件数已达标；dist.zip 与上线件待补</div>
+      <div class="note">gh-pages 已推，但 Pages 没开；dist.zip 旧、上线件缺</div>
     </div>
   </div>
   <div class="extra"><b>计划外加餐：</b>西班牙 25,293、墨西哥 10,878、澳洲 5,452、中国 146,347 都是今天接的；许可与质量都还没验完，README / about 的数字已经落后于库。</div>
@@ -388,12 +388,12 @@
       <p>gh-pages 分支 22:29 已推整站，但 <b>fuarnos.github.io 仍是 404</b>；Pages 没启用，仓库还是私有的，CI 工作流也没接进 <b>.github/workflows</b>。dist.zip 停在 21:05，拿它上传会发布旧数据。</p>
     </div>
     <div class="risk a">
-      <h4>1.09 万文件 · 在 Pages 免费额度内 <span class="sev mid">中高</span></h4>
-      <p>站点 10,851 个文件，在 Cloudflare Pages 免费档 20,000 个文件以内；注意单文件 25 MiB 上限，部署前先确认 <b>index.json</b> 与图片体积。</p>
+      <h4>2.39 万文件 · 超 Pages 免费上限 <span class="sev mid">中高</span></h4>
+      <p>站点 23,851 个文件，Cloudflare Pages 免费档<b>单次部署最多 20,000 个文件</b>，差 3,851 个。主线目标是压到 2 万以内：裁页（合并名字页 / 只发布药品子集），或上 Pro（10 万文件）。</p>
     </div>
     <div class="risk a">
       <h4>首屏索引 17.2 MB <span class="sev mid">中高</span></h4>
-      <p>检索索引一次拉全量，0 个名字页、手机 4G 首搜会明显等。需要按首字母拆片、压缩，或改成服务端查询。</p>
+      <p>检索索引一次拉全量，12,996 个名字页、手机 4G 首搜会明显等。需要按首字母拆片、压缩，或改成服务端查询。</p>
     </div>
     <div class="risk a">
       <h4>中国口径对不上 <span class="sev mid">中高</span></h4>
@@ -421,7 +421,7 @@
     <div class="ev"><div class="t mono">21:05</div><div class="x">打部署包 dist.zip（23,016 文件 / 24.9 MB）</div></div>
     <div class="ev"><div class="t mono">21:18</div><div class="x">git 初始化 + 首次提交；21:20 澳洲 PBS <b>5,452 条</b>入库</div></div>
     <div class="ev"><div class="t mono">22:25</div><div class="x">中国切到 <b>2025-04 NHSA 快照</b>，146,347 条</div></div>
-    <div class="ev"><div class="t mono">22:27</div><div class="x">站点重建：<b>10,851 文件 / 48.0 MB / 索引 17.2 MB</b></div></div>
+    <div class="ev"><div class="t mono">22:27</div><div class="x">站点重建：<b>23,851 文件 / 71.0 MB / 索引 17.2 MB</b></div></div>
     <div class="ev"><div class="t mono">22:29</div><div class="x">gh-pages 推送整站，但 <b>Pages 没开</b>，网址仍 404</div></div>
     <div class="ev"><div class="t mono">22:37</div><div class="x">本次快照；README / about 的旧数字还没改</div></div>
     <div class="ev"><div class="t mono">下一步</div><div class="x">开 Pages / 换 Netlify → 统一口径 → 重打 zip → 补 404/robots/sitemap</div></div>
@@ -429,7 +429,7 @@
 </section>
 
 <footer>
-  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-25 22:41；重拍命令 <b>python render_dashboard.py</b>。</div>
+  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-25 22:44；重拍命令 <b>python render_dashboard.py</b>。</div>
   <div style="text-align:right"><b>这是静态快照，不是实时监控。</b><br>集群由 6 个互不可见上下文的会话组成，靠共享工作区协作。</div>
 </footer>
 

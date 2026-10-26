@@ -18,12 +18,13 @@
 | 墨西哥 10,878 条注册入库（COFEPRIS 26 个按年 PDF + 3 份续期清单；1,040 条是 2001 年前的老注册号） | ✅ |
 | 澳洲 5,452 个产品入库（PBS 官方 API v3，15,073 条 item × 品牌行） | ✅ |
 | 中文 / 全角 / 西里尔 / 带剂量的输入归一化 | ✅ |
+| 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 23 条人工表 |
 | 候选集检索 + 打分 + 国家 / 剂量 / 剂型消歧 | ✅ |
 | 同名碰撞自动推导（不同成分 → 严重，缓释差异 → 警告） | ✅ |
 | 跨语言品牌家族（Tylenol ↔ 泰诺 ↔ 泰诺林） | ✅ 4 组 |
 | BAN↔USAN 同义词（paracetamol ↔ acetaminophen、salbutamol ↔ albuterol 等 34 组） | ✅ |
-| 成分身份卡（各国商品名对照） | ✅ 10,754 页 |
-| 名字碰撞页 | ✅ 12,947 页 |
+| 成分身份卡（各国商品名对照） | ✅ 10,847 页 |
+| 名字碰撞页 | ✅ 12,996 页 |
 
 ## 跑起来
 
@@ -51,6 +52,7 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 & $py etl/ingest_pbs.py                 # 澳洲入库（读 data/raw/pbs/api 缓存）
 & $py data/seed_manual.py               # 英/中人工种子
 & $py data/seed_families.py             # 品牌家族
+& $py data/seed_nicknames.py            # 俗称 / 网络别名 / 旧名
 & $py site/build.py                     # 生成静态站到 site/dist
 & $py cli.py "泰诺"                      # 命令行查一条
 & $py db/check_data.py                  # 数据体检
@@ -72,7 +74,7 @@ docs/    方案、数据模型、数据源授权结论、截图
 db/      schema.sql（单一真相源） + init_db.py + check_data.py + q.py
 etl/     normalize_name.py（归一化） + ingest_openfda_ndc.py（美国入库）
 lib/     search.py（检索/打分/碰撞查询） + 测试
-data/    seed_manual.py / seed_families.py / drugs.db（可重建，不入库）
+data/    seed_manual.py / seed_families.py / seed_nicknames.py / drugs.db（可重建，不入库）
 site/    build.py（静态生成） + dist/（产物）
 ```
 
@@ -82,6 +84,29 @@ site/    build.py（静态生成） + dist/（产物）
 2. **碰撞自动推导**——`collision` 视图按"不同成分数"和"释放机制"分级，不手工标注；
    只有「品牌家族」这一张表是人工的，因为没有任何数据源写着"泰诺和 Tylenol 是同一个牌子"。
 3. **不给用药建议**——只做标识对应与"不可互换"警示，不输出剂量换算后的服药方案。
+
+## 俗称不是商品名
+
+「两只青蛙」不是商品名，它是二甲双胍的网络俗称——`胍` 和青蛙的 `呱` 同音。这类叫法存在
+`nickname` 表里，指向**活性成分**，不指向某个产品：
+
+| 叫法 | 指向 | 类型 | 出处 |
+|---|---|---|---|
+| 两只青蛙 | 二甲双胍 metformin | 网络俗称 | 用户提供 |
+| 伟哥 | 西地那非 sildenafil | 网络俗称 | 中文网络通行叫法 |
+| 心得安 | 普萘洛尔 propranolol | 旧名 | 中文旧版药名 |
+| 扑热息痛 | 对乙酰氨基酚 acetaminophen | 旧名 | paracetamol 的中文旧称 |
+
+设计上做了三件事：
+
+1. **不写进 `product_name`**：否则 `collision` 会把「两只青蛙」算成一个挂着几千个包装的商品名，
+   还会生成一张没有意义的同名页。
+2. **命中先说明再列商品**：页面标「网络俗称 / 旧名」，然后列出该成分在各国的商品名，
+   不把俗称说成包装上的名字。
+3. **只做精确匹配**：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话；每条都人工写出处。
+
+增补一条：改 `data/seed_nicknames.py`，再跑 `python data/seed_nicknames.py` 和
+`python site/build.py`。当前 23 条（3 条网络俗称 + 20 条旧名/曾用名），指向 23 个成分。
 
 ## 数据现实（决定了难度排序）
 
