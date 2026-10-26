@@ -1,4 +1,4 @@
-"""人工核对种子：英国 / 中国。
+"""人工核对种子：英国 / 中国 / 澳洲。
 
 规则（写死在这里，避免以后图省事走捷径）：
 1. 只收有原始来源的条目；来源存 URL，抓取日期存库。
@@ -75,6 +75,53 @@ SEED = [
          form="tablet", release="none", mah="Pfizer Limited",
          approval_id="", salt="calcium",
          source_type="manual", url="", note="待复核"),
+    # ---------- 澳洲 listed OTC（厂家澳洲官网，2026-10-26 核对） ----------
+    # Gaviscon 是 AUST L（listed medicine）：不进 PBS，TGA 的 CMI 目录也不收，
+    # 所以只能按厂家官网逐条人工核对。成分写法是「每 10 mL」或「每片」。
+    dict(country="AU", brand="Gaviscon Dual Action Peppermint Liquid",
+         components=[("sodium alginate", "海藻酸钠", 500, "mg"),
+                     ("sodium bicarbonate", "碳酸氢钠", 213, "mg"),
+                     ("calcium carbonate", "碳酸钙", 325, "mg")],
+         form="oral suspension", release="none", mah="Reckitt Benckiser",
+         approval_id="", per_v=10, per_u="ml",
+         source_type="mah_pdf",
+         url="https://www.gaviscon.com.au/products/gaviscon-dual-action/gaviscon-dual-action-peppermint-liquid/",
+         note="listed medicine（AUST L）；PBS/CMI 都不覆盖，成分取自厂家澳洲官网"),
+    dict(country="AU", brand="Gaviscon Dual Action Mixed Berry Liquid",
+         components=[("sodium alginate", "海藻酸钠", 500, "mg"),
+                     ("sodium bicarbonate", "碳酸氢钠", 213, "mg"),
+                     ("calcium carbonate", "碳酸钙", 325, "mg")],
+         form="oral suspension", release="none", mah="Reckitt Benckiser",
+         approval_id="", per_v=10, per_u="ml",
+         source_type="mah_pdf",
+         url="https://www.gaviscon.com.au/products/gaviscon-dual-action/gaviscon-dual-action-mixed-berry-liquid/",
+         note="listed medicine（AUST L）；成分取自厂家澳洲官网"),
+    dict(country="AU", brand="Gaviscon Dual Action Peppermint Liquid Sachets",
+         components=[("sodium alginate", "海藻酸钠", 500, "mg"),
+                     ("sodium bicarbonate", "碳酸氢钠", 213, "mg"),
+                     ("calcium carbonate", "碳酸钙", 325, "mg")],
+         form="oral suspension", release="none", mah="Reckitt Benckiser",
+         approval_id="", per_v=10, per_u="ml",
+         source_type="mah_pdf",
+         url="https://www.gaviscon.com.au/products/gaviscon-dual-action/gaviscon-dual-action-peppermint-liquid-sachets/",
+         note="listed medicine（AUST L）；每条 10 mL，成分同 Dual Action 液剂"),
+    dict(country="AU", brand="Gaviscon Peppermint Liquid",
+         components=[("sodium alginate", "海藻酸钠", 500, "mg"),
+                     ("sodium bicarbonate", "碳酸氢钠", 267, "mg"),
+                     ("calcium carbonate", "碳酸钙", 160, "mg")],
+         form="oral suspension", release="none", mah="Reckitt Benckiser",
+         approval_id="", per_v=10, per_u="ml",
+         source_type="mah_pdf",
+         url="https://www.gaviscon.com.au/products/gaviscon-original/gaviscon-peppermint-liquid/",
+         note="listed medicine（AUST L）；original 配方，钠/钙含量与 Dual Action 不同"),
+    dict(country="AU", brand="Gaviscon Peppermint Tablets",
+         components=[("sodium alginate", "海藻酸钠", 250, "mg"),
+                     ("sodium bicarbonate", "碳酸氢钠", 133.5, "mg"),
+                     ("calcium carbonate", "碳酸钙", 80, "mg")],
+         form="tablet", release="none", mah="Reckitt Benckiser",
+         approval_id="", source_type="mah_pdf",
+         url="https://www.gaviscon.com.au/products/gaviscon-original/gaviscon-peppermint-flavour-tablets/",
+         note="listed medicine（AUST L）；每片含量，成分取自厂家澳洲官网"),
 ]
 
 

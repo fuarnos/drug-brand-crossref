@@ -52,6 +52,7 @@ class Card:
     strengths: list[str] = field(default_factory=list)
     dosage_form: str = ""
     status: str = "active"
+    release: str = "none"
     n_products: int = 0
     collision: str = "info"
     score: float = 0.0
@@ -380,8 +381,15 @@ class SearchIndex:
         form_score = 0.5
         if n.form_hint:
             form_score = 1.0 if any(f in c.dosage_form for f in n.form_hint) else 0.3
+        # 小权重（不改变排序主次）：用户没写释放机制时，速释排在缓释前面——
+        # 不加的话 Tylenol 里「8 HR」「12 HOUR」「ER」会和普通片并列，先冒出来的常是缓释款。
+        release_score = 0.0
+        if c.release not in ("none", "", None):
+            release_score = 1.0 if any(x in n.form_hint for x in ("er", "sr", "xr", "mr", "cr",
+                                                                  "dr", "od")) else -1.0
         c.score = round(0.55 * name_score + 0.20 * country_score
-                        + 0.15 * strength_score + 0.10 * form_score, 4)
+                        + 0.15 * strength_score + 0.10 * form_score
+                        + 0.01 * release_score, 4)
 
     # --- 主查询 --------------------------------------------------------
     def search(

@@ -23,6 +23,21 @@ from normalize_name import normalize  # noqa: E402
 DB = ROOT / "data" / "drugs.db"
 SCHEMA = ROOT / "db" / "schema.sql"
 
+# 这些 source 只是「来源类型」，没有可核对的链接/文献。按「没有出处不入库、
+# 审核只核实出处不能代替出处」的规则，它们不能算 documented，只能算 community。
+GENERIC_SOURCES = {
+    "中文旧版药名",
+    "中文旧版药名（音译）",
+    "中文旧名",
+    "旧商品名",
+    "1980–2000 年代中文常用名",
+    "中文网络通行叫法",
+    "民间按来源称呼",
+    "用户提供（本站缘起）",
+    "国内临床沿用编号简称",
+    "paracetamol 的中文旧称",
+}
+
 # kind: slang 网络俗称 · legacy 旧名/曾用名 · translit 音译 · abbrev 简称 · misnomer 常见误称
 # confidence: user 用户提供 · community 民间通行 · documented 有文献/药典依据的旧名
 ALIASES = [
@@ -237,6 +252,10 @@ def main() -> None:
             print(f"注意 {a['alias']}：同时是一个商品名键，别名会优先命中")
             shadowed += 1
 
+        confidence = a["confidence"]
+        if confidence == "documented" and a["source"] in GENERIC_SOURCES:
+            confidence = "community"
+
         db.execute(
             """INSERT INTO nickname (substance_id, alias, alias_norm, label_zh,
                                      kind, confidence, source, note, created_at)
@@ -249,7 +268,7 @@ def main() -> None:
                    source     = excluded.source,
                    note       = excluded.note""",
             (a["sid"], a["alias"], n.norm, a.get("zh"), a["kind"],
-             a["confidence"], a["source"], a["note"], today),
+             confidence, a["source"], a["note"], today),
         )
         kept += 1
 
