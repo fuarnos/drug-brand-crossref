@@ -469,14 +469,20 @@ function render(){
   // 先用查询词定位成分（不受国家限制），再把这个成分在目标国的商品名列出来。
   let display = shown;
   if(c && hits.length){
-    const sids = new Set();
-    for(const [, , e] of hits.slice(0,3)){
-      const list = (e.vs && e.vs.length) ? e.vs : [e.v];
-      list.forEach(s => sids.add(s));
+    try{
+      const sids = new Set();
+      for(const [, , e] of hits.slice(0,3)){
+        const list = (e.vs && e.vs.length) ? e.vs : [e.v];
+        list.filter(Boolean).forEach(s => sids.add(s));
+      }
+      const inCountry = IDX.filter(x => (x.c || []).includes(c) &&
+        ((x.vs && x.vs.length) ? x.vs : [x.v]).filter(Boolean).some(s => sids.has(s)));
+      // display 的每一项必须是 [score, tier, entry] 三元组，和 shown 同构，
+      // 否则下面 for(const [, , e] of display) 会解构出 undefined。
+      if(inCountry.length) display = inCountry.slice(0,40).map(e => [0, 'country', e]);
+    }catch(err){
+      console.error('country resolve failed', err);
     }
-    const inCountry = IDX.filter(x => x.c.includes(c) &&
-      ((x.vs && x.vs.length) ? x.vs : [x.v]).some(s => sids.has(s)));
-    if(inCountry.length) display = inCountry.slice(0,40);
   }
   const T = window.T || (k=>k);
   if(!hits.length && nicks.length){
@@ -609,6 +615,8 @@ document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>
 }));
 const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
+const ctry0 = new URLSearchParams(location.search).get('country');
+if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
 out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
 Promise.all([
   fetch(BASE + 'data/index.json').then(r=>r.json()),
