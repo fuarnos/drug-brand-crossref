@@ -14,7 +14,7 @@
 | 中文旧名 / 网络俗称 | `nickname` | 57 | 原有，不变 |
 | 美国街头 / 类别 / 民间叫法 | `drug_term` | 331 | 新增 |
 | 统一别名检索入口 | `alias_all`（视图） | 388 | 57 + 331 |
-| FDA tall-man 易混淆药对 | `confusable_pair` | 22 对 / 44 个方向 | 新增 |
+| FDA tall-man 易混淆药对 | `confusable_pair` | 22 对 / 44 个方向 | 新增；单名条目 hydromorphone / mitoxantrone 无配对不对，未列入 |
 
 ### `drug_term` 按来源
 

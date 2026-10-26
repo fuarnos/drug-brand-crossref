@@ -1,8 +1,8 @@
 # 部署
 
-产物：`site/dist/`（23,852 个文件 / 71.0 MB），打包好的 `site/dist.zip`（26.3 MB，根目录就是 index.html）。
+产物：`site/dist/`（24,486 个文件 / 89.5 MB），打包好的 `site/dist.zip`（根目录就是 index.html，含澳洲 PBS 数据）。
 
-**为什么不用 Cloudflare Pages**：单次部署上限 2 万个文件，我们 23,852 个，超了。
+**为什么不用 Cloudflare Pages**：单次部署上限 2 万个文件，我们 24,486 个，超了。
 
 ## 方案 A：Netlify 拖拽（最快，零安装，推荐先用这个）
 
@@ -59,6 +59,7 @@ jobs:
 ## 上线前检查
 
 - [ ] 域名要不要买（¥60–100/年）；不买就用 `*.netlify.app`
-- [ ] `about.html` 里的来源署名是否完整（US openFDA / GB dm+d OGL / ES CIMA / MX COFEPRIS / CN 医保局 2024-01-05 快照）
+- [ ] `about.html` 里的来源署名是否完整（US openFDA / GB dm+d OGL / ES CIMA / MX COFEPRIS / CN 医保局 2024-01-05 快照 / **AU PBS API，须保留 Commonwealth 版权声明**）
 - [ ] 中国数据要标明是 **2024-01-05 快照**，不是实时
+- [ ] 澳洲数据要标明 **只覆盖 PBS 列名药品**（OTC 品牌不在内）
 - [ ] 全站无广告、无购买链接、无联盟代码

@@ -42,7 +42,11 @@ function tier(nq,k){
   if(k===nq) return ['exact',1.0];
   if(k.replace(/ /g,'')===nq.replace(/ /g,'')) return ['compact',0.95];
   if(k.startsWith(nq)) return ['prefix',0.80];
-  if(nq.length>=4 && k.includes(nq)) return ['contains',0.70];
+  // 中文药名普遍很短：「利嗪」「头孢」「地平」这种两三个字就是有效线索，
+  // 用英文的四字下限会把只记得一部分的人挡在门外。
+  const cjk = /[\u4e00-\u9fff]/.test(nq);
+  const minSub = cjk ? 2 : 4;
+  if(nq.length>=minSub && k.includes(nq)) return ['contains',0.70];
   if(nq.length>=4 && lev(nq,k) <= (nq.length>=9 ? 3 : 2)) return ['fuzzy',0.55];
   return null;
 }
