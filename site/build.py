@@ -55,6 +55,8 @@ I18N = {
         "card.packs": "packs",
         "col.ing": "Ingredient", "col.dose": "Dose",
         "col.brand": "Brand", "col.mah": "Manufacturer",
+        "same.ing": "Other products with the same ingredient",
+        "same.note": "You searched a brand name — this is what else contains the same active ingredient.",
         "badge.severe": "Same name, different drug",
         "badge.warning": "Different release",
         "fam.title": "The same brand in other markets",
@@ -105,6 +107,8 @@ I18N = {
         "card.packs": "envases",
         "col.ing": "Principio activo", "col.dose": "Dosis",
         "col.brand": "Marca", "col.mah": "Fabricante",
+        "same.ing": "Mismo principio activo, otros productos",
+        "same.note": "Buscaste una marca: esto es lo demás que contiene el mismo principio activo.",
         "badge.severe": "Mismo nombre, otro medicamento",
         "badge.warning": "Liberación diferente",
         "fam.title": "La misma marca en otros mercados",
@@ -154,6 +158,8 @@ I18N = {
         "card.packs": "个包装",
         "col.ing": "成分", "col.dose": "剂量",
         "col.brand": "品牌", "col.mah": "厂家",
+        "same.ing": "同成分的其他商品",
+        "same.note": "你搜的是商品名 —— 下面是同一活性成分的其他商品。",
         "badge.severe": "同名不同药",
         "badge.warning": "释放机制不同",
         "fam.title": "同一品牌在其他市场的写法",
@@ -410,10 +416,37 @@ function render(){
     for(const d of ds) rows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
   }
   const capped = rows.slice(0, 80);
+
+  // 精确命中某个品牌之后，再把「同一成分的其他商品」单独列一段：
+  // 用户搜的是牌子，但真正想知道的往往是这个成分还有哪些选择。
+  let sameHTML = '';
+  const exactSubs = new Set();
+  for(const [, t, e] of shown){
+    if(t !== 'exact' && t !== 'compact') continue;
+    (e.vs && e.vs.length ? e.vs : [e.v]).forEach(s => exactSubs.add(s));
+  }
+  if(exactSubs.size && exactSubs.size <= 6){
+    const others = IDX.filter(x => !shownKeys.has(x.k) &&
+      (x.vs && x.vs.length ? x.vs : [x.v]).some(s => exactSubs.has(s)));
+    if(others.length){
+      const oRows = [];
+      for(const e of others.slice(0, 40)){
+        const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
+      }
+      sameHTML = `<h2>${T2('same.ing')}</h2>` +
+        `<p class="sub">${T2('same.note')}</p>` +
+        `<table class="res"><thead><tr>
+          <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
+          <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
+        </tr></thead><tbody>${oRows.slice(0,80).map(rowHTML).join('')}</tbody></table>`;
+    }
+  }
+
   out.innerHTML = nickHTML + warnHTML + `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
-    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + extraHTML;
+    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + sameHTML + extraHTML;
 }
 box.addEventListener('input', render);
 ctry.addEventListener('change', render);
@@ -511,9 +544,11 @@ def load_index(db: sqlite3.Connection):
         a = agg.get(key_id)
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "s": [],
-                               "f": [], "v": sid, "mah": {}, "trade": False}
+                               "f": [], "v": sid, "mah": {}, "trade": False,
+                               "sids": set()}
         if ntype == "trade":
             a["trade"] = True
+        a["sids"].add(sid)
         a["pids"].add(pid)
         a["c"].add(country)
         if inn_en not in a["subs"]:
@@ -554,6 +589,7 @@ def load_index(db: sqlite3.Connection):
             "l": level,
             "n": n,
             "v": a["v"],
+            "vs": sorted(a["sids"]) if len(a["sids"]) > 1 else None,
             "u": key_file(key_id) if worth_page else "",
             "g": fam[key_id][0] if key_id in fam else "",
             "gn": fam[key_id][1] if key_id in fam else "",

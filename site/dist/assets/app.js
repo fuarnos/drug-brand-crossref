@@ -158,10 +158,37 @@ function render(){
     for(const d of ds) rows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
   }
   const capped = rows.slice(0, 80);
+
+  // 精确命中某个品牌之后，再把「同一成分的其他商品」单独列一段：
+  // 用户搜的是牌子，但真正想知道的往往是这个成分还有哪些选择。
+  let sameHTML = '';
+  const exactSubs = new Set();
+  for(const [, t, e] of shown){
+    if(t !== 'exact' && t !== 'compact') continue;
+    (e.vs && e.vs.length ? e.vs : [e.v]).forEach(s => exactSubs.add(s));
+  }
+  if(exactSubs.size && exactSubs.size <= 6){
+    const others = IDX.filter(x => !shownKeys.has(x.k) &&
+      (x.vs && x.vs.length ? x.vs : [x.v]).some(s => exactSubs.has(s)));
+    if(others.length){
+      const oRows = [];
+      for(const e of others.slice(0, 40)){
+        const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
+      }
+      sameHTML = `<h2>${T2('same.ing')}</h2>` +
+        `<p class="sub">${T2('same.note')}</p>` +
+        `<table class="res"><thead><tr>
+          <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
+          <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
+        </tr></thead><tbody>${oRows.slice(0,80).map(rowHTML).join('')}</tbody></table>`;
+    }
+  }
+
   out.innerHTML = nickHTML + warnHTML + `<table class="res"><thead><tr>
       <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
       <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
-    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + extraHTML;
+    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` + sameHTML + extraHTML;
 }
 box.addEventListener('input', render);
 ctry.addEventListener('change', render);
