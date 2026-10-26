@@ -48,11 +48,11 @@ BROWSERS = [
 # ---------------------------------------------------------------- 数据
 
 def db_stats() -> dict[str, int]:
-    out = dict(US=0, GB=0, ES=0, MX=0, CN=0, total=0, subst=0, keys=0, named=0,
+    out = dict(US=0, GB=0, ES=0, MX=0, CN=0, AU=0, CA=0, total=0, subst=0, keys=0, named=0,
                severe=0, warn=0, info=0, dmd_in=0, dmd_kept=0,
                gb_seed=0, gb_branded=0, es_branded=0, mx_branded=0,
                gb_trade=0, us_trade=0, cn_trade=0, au_trade=0,
-               es_trade=0, mx_trade=0)
+               es_trade=0, mx_trade=0, atc=0)
     if not DB.exists():
         print(f"！没找到 {DB}，库里相关数字按 0 处理")
         return out
@@ -67,10 +67,11 @@ def db_stats() -> dict[str, int]:
                 print(f"！查询失败：{sql} -> {exc}")
                 return 0
 
-        for c in ("US", "GB", "ES", "MX", "AU", "CN"):
+        for c in ("US", "GB", "ES", "MX", "AU", "CN", "CA"):
             out[c] = one(f"select count(*) from product where country='{c}'")
         out["total"] = one("select count(*) from product")
         out["subst"] = one("select count(*) from substance")
+        out["atc"] = one("select count(*) from substance where atc is not null and atc <> ''")
         out["keys"] = one("select count(*) from name_key")
         out["named"] = one("select count(*) from product_name")
         for level, key in (("severe", "severe"), ("warning", "warn"), ("info", "info")):
@@ -159,34 +160,21 @@ def pct(part: int, whole: int, digits: int = 1) -> str:
 
 def build_tokens(db: dict, dist: dict) -> dict[str, str]:
     now = datetime.now().astimezone()
-    us, gb, es, mx, au, cn, total = (db["US"], db["GB"], db["ES"], db["MX"],
-                                      db["AU"], db["CN"], db["total"])
+    us, gb, es, mx, au, cn, ca, total = (db["US"], db["GB"], db["ES"], db["MX"],
+                                         db["AU"], db["CN"], db["CA"], db["total"])
     dmd_in, dmd_kept = db["dmd_in"], db["dmd_kept"]
     dmd_drop = max(0, dmd_in - dmd_kept)
     files = int(dist["files"])
-    over = max(0, files - PAGE_LIMIT)
+    size_mb = int(dist["size"]) / 1e6
 
     keep_pct = pct(dmd_kept, dmd_in)
     drop_pct = pct(dmd_drop, dmd_in)
     keep_int = round(float(keep_pct))
     drop_int = 100 - keep_int
 
-    if over:
-        deploy_note = (f"{commas(files)} 个文件仍在 Pages 免费档 2 万之外（差 {commas(over)}）；"
-                       f"gh-pages 推了，但 Pages 没开。")
-        risk_title = f"{files / 10000:.2f} 万文件 · 超 Pages 免费上限"
-        risk_body = (
-            f"站点 {commas(files)} 个文件，Cloudflare Pages 免费档"
-            f"<b>单次部署最多 20,000 个文件</b>，差 {commas(over)} 个。"
-            f"主线目标是压到 2 万以内：裁页（合并名字页 / 只发布药品子集），或上 Pro（10 万文件）。")
-        p5_note = "gh-pages 已推，但 Pages 没开；dist.zip 旧、上线件缺"
-    else:
-        deploy_note = f"{commas(files)} 个文件在 Pages 免费档 20,000 以内；站点已可部署。"
-        risk_title = f"{files / 10000:.2f} 万文件 · 在 Pages 免费额度内"
-        risk_body = (
-            f"站点 {commas(files)} 个文件，在 Cloudflare Pages 免费档 20,000 个文件以内；"
-            f"注意单文件 25 MiB 上限，部署前先确认 <b>index.json</b> 与图片体积。")
-        p5_note = "文件数已达标；dist.zip 与上线件待补"
+    deploy_note = (f"GitHub Pages（gh-pages 分支）已上线："
+                   f"fuarnos.github.io/drug-brand-crossref；{commas(files)} 个文件 / {size_mb:.1f} MB。")
+    p5_note = "已上线 GitHub Pages（v0.3.x）；404/robots/sitemap 已补，tag/Release 对齐"
 
     return {
         "SNAP_TIME": f"{now:%Y-%m-%d %H:%M}",
@@ -199,7 +187,9 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "MX": commas(mx),
         "CN": commas(cn),
         "AU": commas(au),
+        "CA": commas(ca),
         "SUBST": commas(db["subst"]),
+        "ATC": commas(db["atc"]),
         "KEYS": commas(db["keys"]),
         "NAMED": commas(db["named"]),
         "SEV": commas(db["severe"]),
@@ -211,18 +201,21 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "MX_SHARE": pct(mx, total, 0),
         "CN_SHARE": pct(cn, total, 0),
         "AU_SHARE": pct(au, total, 0),
+        "CA_SHARE": pct(ca, total, 0),
         "US_W": pct(us, total, 1),
         "GB_W": pct(gb, total, 1),
         "ES_W": pct(es, total, 1),
         "MX_W": pct(mx, total, 1),
         "CN_W": pct(cn, total, 1),
         "AU_W": pct(au, total, 1),
+        "CA_W": pct(ca, total, 1),
         "CN_BAR": "100",
         "US_BAR": pct(us, cn),
         "GB_BAR": pct(gb, cn),
         "ES_BAR": pct(es, cn),
         "MX_BAR": pct(mx, cn),
         "AU_BAR": pct(au, cn),
+        "CA_BAR": pct(ca, cn),
         "GB_RAW": commas(dmd_in),
         "GB_RAW_WAN": f"{dmd_in / 10000:.1f}",
         "GB_DMD": commas(dmd_kept),
@@ -246,16 +239,12 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "MX_TRADE": commas(db["mx_trade"]),
         "FILES": commas(files),
         "FILES_WAN": f"{files / 10000:.2f}",
-        "FILES_RATIO": f"{files / PAGE_LIMIT:.1f}",
-        "OVER_BY": commas(over),
         "SIZE_MB": f"{int(dist['size']) / 1e6:.1f}",
         "DRUG": commas(int(dist["drug"])),
         "NAME": commas(int(dist["name"])),
         "INDEX_MB": f"{int(dist['index']) / 1e6:.1f}",
         "BUILD_TIME": str(dist["build_time"]),
         "DEPLOY_NOTE": deploy_note,
-        "RISK_FILES_TITLE": risk_title,
-        "RISK_FILES_BODY": risk_body,
         "P5_NOTE": p5_note,
     }
 

@@ -7,6 +7,9 @@
     confused.html       FDA tall-man 易混淆药对
     about.html          数据来源、覆盖率、免责
     whats-new.html      更新日志（由 CHANGELOG.md 生成）
+    404.html            路径不存在时的兜底页
+    robots.txt          全站可抓 + sitemap 地址
+    sitemap.xml         全站 HTML 的 sitemap
     data/index.json     检索索引
     data/aliases.json   俗称 / 街头叫法 / 类别词索引
     data/confused.json  易混淆药对索引
@@ -34,6 +37,8 @@ DB = ROOT / "data" / "drugs.db"
 OUT = Path(os.environ.get("SITE_OUT") or (ROOT / "site" / "dist"))
 # 报错入口：静态站没有后端，用 GitHub Issue 收集纠错，附上查询词和页面 URL。
 REPORT_REPO = "https://github.com/fuarnos/drug-brand-crossref"
+# 公开站根地址：404 页、robots.txt、sitemap.xml 里要用绝对 URL。
+SITE_URL = "https://fuarnos.github.io/drug-brand-crossref/"
 # 每次构建换一个版本号，给 css/js/json 都带上，避免用户拿到缓存里的旧代码。
 BUILD_V = str(int(time.time()))
 
@@ -1714,6 +1719,81 @@ A pair is a warning about names, not a statement that the drugs are equivalent.<
     return len(rows)
 
 
+def build_404() -> None:
+    """404 页：GitHub Pages 在路径不存在时返回它。
+
+    404 会出现在任意子路径下，相对资源路径会解析错，所以这一页不引用
+    assets/、链接全用绝对地址。
+    """
+    html = f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found · Medicine Brand Cross-Reference</title>
+<style>
+:root{{color-scheme:light dark}}
+body{{margin:0;font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:#f6f7f5;color:#17201c}}
+main{{max-width:640px;margin:12vh auto;padding:0 24px}}
+h1{{font-size:22px;margin:0 0 10px}}
+p{{color:#3d4a43;margin:8px 0}}
+.links{{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap}}
+a{{color:#0b6b53}}
+</style></head><body><main>
+<h1>Page not found · 页面不存在</h1>
+<p>这个地址没有对应的页面。可能是链接过期、拼写有误，或页面已改名。</p>
+<p>This address has no page. It may be an old link, a typo, or a renamed entry.</p>
+<p>回到首页输入一个药名（商品名、通用名、俗称都可以）：</p>
+<p class="links"><a href="{SITE_URL}">Search · 检索</a>
+<a href="{SITE_URL}about.html">About · 关于</a>
+<a href="{SITE_URL}confused.html">Confused names · 易混淆</a>
+<a href="{SITE_URL}whats-new.html">What's new · 更新</a></p>
+<p style="margin-top:28px;font-size:13px;color:#7a857e">如果是站内链接坏了，欢迎到
+<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a> 报一声。</p>
+</main></body></html>"""
+    (OUT / "404.html").write_text(html, encoding="utf-8")
+
+
+def build_seo_files() -> None:
+    """生成 robots.txt + sitemap.xml + .nojekyll（404.html 另由 build_404 生成）。
+
+    sitemap 扫的是刚写出来的 HTML 文件，所以调用时机必须在所有页面之后。
+    中文文件名百分号编码后写进 <loc>。
+    """
+    from urllib.parse import quote
+
+    lastmod = LATEST_DATE or time.strftime("%Y-%m-%d")
+    urls: list[str] = []
+    for p in OUT.rglob("*.html"):
+        rel = p.relative_to(OUT).as_posix()
+        if rel == "404.html":
+            continue
+        if rel == "index.html":
+            urls.append(SITE_URL)
+        elif rel.endswith("/index.html"):
+            urls.append(SITE_URL + rel[: -len("index.html")])
+        else:
+            urls.append(SITE_URL + rel)
+    urls.sort()
+
+    with (OUT / "sitemap.xml").open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+        fh.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for url in urls:
+            loc = quote(url, safe=":/?&=%#")
+            fh.write(f"  <url><loc>{loc}</loc><lastmod>{lastmod}</lastmod></url>\n")
+        fh.write("</urlset>\n")
+
+    (OUT / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "sitemap.xml\n",
+        encoding="utf-8")
+    # GitHub Pages 默认会跑 Jekyll；.nojekyll 让它直接当静态文件发。
+    # 内容留一行说明：发布脚本会拒绝 0 字节文件（防止构建中断发布半成品）。
+    (OUT / ".nojekyll").write_text(
+        "# GitHub Pages: serve this directory as-is (skip Jekyll)\n", encoding="utf-8")
+    print(f"  seo files  : 404 + robots + sitemap ({len(urls)} urls)", flush=True)
+
+
 def main() -> None:
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -1826,6 +1906,8 @@ def main() -> None:
     n_conf = build_confused(db)
     build_about(stats, coverage, source_cover)
     build_whats_new()
+    build_404()
+    build_seo_files()
 
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
     print(f"\n== done ==")

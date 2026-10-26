@@ -65,7 +65,7 @@
    ```
 
 历史版本已补齐：v0.1.0（原有）、v0.1.1–v0.2.4（按 tag 补建，正文取自 CHANGELOG）。
-v0.3.0 等真正上线时再建 tag / Release。
+**v0.3.0–v0.3.3** 已于 2026-10-26 补 tag / Release（源码统一归档到同一提交）；此后每版按上面步骤建。
 
 ## 认证
 
@@ -81,7 +81,9 @@ Fine-grained token 需要这个仓库的 **Contents: Read and write**；脚本�
 - Source：**Deploy from a branch**
 - Branch：**gh-pages** / **/(root)**
 
-`main` 放源码，`gh-pages` 只放构建产物。不要切到 GitHub Actions，原因见下。
+`main` 放源码，`gh-pages` 只放构建产物。`site/dist` 自 v0.3.3 起已加入 `.gitignore`，
+不再进版本库（构建产物只走 `gh-pages`；本地预览时跑 `python site/build.py` 重新生成）。
+不要切到 GitHub Actions，原因见下。
 
 ## 回滚
 
@@ -103,7 +105,7 @@ git push --force origin <commit>:refs/heads/gh-pages
 
 ## 备选：Netlify 拖拽
 
-临时演示可以用，不作为主线。`site/dist` 现在约 25,770 个文件 / 100 MB。
+临时演示可以用，不作为主线。`site/dist` 现在约 30,750 个文件 / 124 MB。
 
 1. 打开 <https://app.netlify.com/drop>
 2. 把 `site/dist` 文件夹整个拖进去
@@ -115,6 +117,8 @@ git push --force origin <commit>:refs/heads/gh-pages
 
 - [ ] `about.html` 里的来源署名完整（US openFDA / GB dm+d OGL / ES CIMA / MX COFEPRIS /
       CN 医保局快照 / **AU PBS API，须保留 Commonwealth 版权声明** / ARTG）
-- [ ] 中国数据标明是 **2024-01-05 快照**，不是实时
+- [ ] 中国数据标明是 **2025-04-04 快照**，不是实时
 - [ ] 澳洲数据标明 **PBS 只覆盖列名药品**、CMI / ARTG 的授权边界
 - [ ] 全站无广告、无购买链接、无联盟代码
+- [ ] `404.html` / `robots.txt` / `sitemap.xml` 存在（`site/build.py` 自动生成）
+- [ ] 页脚版本号 = 最新 tag / GitHub Release（同一版本号）
