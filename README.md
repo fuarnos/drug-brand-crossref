@@ -2,7 +2,7 @@
 
 给一个名字（或包装上的一行字），定位到它是哪个药、什么规格，再给出其他国家的对应产品。
 
-**范围**：公开上线 · 美国 / 英国 / 西班牙 / 墨西哥 / 中国 / 澳洲 / 加拿大 · 只用可公开许可（或官方明确允许再发布）的数据源。
+**范围**：公开上线 · 美国 / 英国 / 西班牙 / 墨西哥 / 中国 / 澳洲 / 加拿大 · 只用可公开许可（或官方明确允许再发布）的数据源，逐源许可见 [docs/许可清单.md](docs/许可清单.md)。
 **当前状态**：七个市场全部入库，站点静态生成。美国、英国、中国、加拿大是全量；西班牙、墨西哥、澳洲各有各的缺口，页面上如实标注。
 
 ![检索示例](docs/img/search-tainuo.png)
@@ -19,8 +19,11 @@
 | 澳洲 11,890 个产品入库（PBS 5,452 + TGA CMI 4,730 + ARTG 明细 1,559 + ARTG 补全 144 + 人工核对 5） | ✅ |
 | 加拿大 43,847 个产品入库（Health Canada DPD 全量，一行 = 一个 DIN；顺势疗法/兽药/消毒剂已排除） | ✅ |
 | 中文 / 全角 / 西里尔 / 带剂量的输入归一化 | ✅ |
-| 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 57 条人工表 |
-| 美国街头 / 民间 / 类别叫法（molly、lean、bars、water pill…） | ✅ 365 条 `drug_term` |
+| 搜索增强：拼音 / 首字母、错拼容错、短中文片段、自动完成，结果按成分聚合 | ✅ 匹配 P50 ~1 ms |
+| 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 57 条 `nickname`（指向成分） |
+| 民间 / 类别 / 中文互联网叫法（water pill、blood thinner、必理痛、减肥针…；不含毒品/娱乐用药） | ✅ 1,062 条 `drug_term` / 1,119 条 `alias_all` |
+| /warn「同名不同药 / 不可互换」警示页 | ✅ 顶栏入口 + 成分页提示 |
+| 访问统计（GoatCounter，cookieless、只后台看、不公开计数） | ✅ 隐私说明见 About |
 | 易混淆药对（FDA tall-man，hydrALAZINE ↔ hydrOXYzine…） | ✅ 22 对 |
 | 候选集检索 + 打分 + 国家 / 剂量 / 剂型消歧 | ✅ |
 | 同名碰撞自动推导（不同成分 → 严重，缓释差异 → 警告） | ✅ |
@@ -60,8 +63,16 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 & $py data/seed_manual.py               # 英/中人工种子
 & $py data/seed_families.py             # 品牌家族
 & $py data/seed_nicknames.py            # 俗称 / 网络别名 / 旧名
-& $py etl/ingest_us_terms.py            # 美国街头/民间/类别叫法（NIDA + DEA 补充）
+& $py etl/ingest_us_terms.py            # 民间/类别叫法（NIDA/DEA/MedlinePlus 快照）
+& $py etl/ingest_community_terms.py     # 各国社区叫法（逐条 URL）
+& $py etl/clean_drug_terms.py --apply   # 清除毒品/娱乐性用药黑话（只留合法药品俗名）
+& $py etl/ingest_cn_slang.py --apply    # 中文互联网俗名（Tier B → drug_term，候选 CSV 在 data/）
 & $py etl/ingest_fda_confusable.py     # FDA tall-man 易混淆药对
+& $py etl/normalize_salts.py --apply --confirm-real-db   # 盐型规范化（D2 折算基础）
+& $py data/seed_warnings.py --apply --confirm-real-db    # /warn 警示种子（41 条）
+& $py etl/ingest_chembl_atc.py --apply --allow-real-db   # ChEMBL ATC 补空值（CC BY-SA）
+& $py etl/ingest_mx_pervolume.py --apply --allow-real     # MX「每 mL/每瓶」浓度
+& $py etl/fix_dmd_salts.py --apply --confirm-real-db     # 英国 dm+d 盐型恢复
 & $py db/source_dates.py                # 覆盖表的「数据截止」：从各源自己的发布/生效/快照日期推
 & $py site/build.py                     # 生成静态站到 site/dist
 & $py cli.py "泰诺"                      # 命令行查一条
@@ -73,8 +84,10 @@ TRUD 的 key 放在 `.env` 的 `TRUD_API_KEY=`，不要提交。
 测试：
 
 ```powershell
-& $py -m unittest discover -s etl -t etl   # 归一化 9 项 + 加拿大 9 项
-& $py -m unittest discover -s lib -t lib   # 检索/碰撞 11 项
+& $py -m unittest discover -s etl -t etl   # 归一化 + 各入库（25 项）
+& $py -m unittest discover -s lib -t lib   # 检索/碰撞（29 项）
+& $py tests/trilingual/run_tests.py        # 三语检索一致性（354 条查询）
+& $py -m unittest discover -s mobile -t .  # 手机指令队列
 ```
 
 ## 目录
@@ -83,7 +96,10 @@ TRUD 的 key 放在 `.env` 的 `TRUD_API_KEY=`，不要提交。
 docs/    方案、数据模型、数据源授权结论、截图
 db/      schema.sql（单一真相源） + init_db.py + check_data.py + q.py
 etl/     normalize_name.py（归一化） + ingest_openfda_ndc.py（美国入库）
-         ingest_us_terms.py（NIDA/DEA/MedlinePlus 俗称） + ingest_fda_confusable.py（FDA 药对）
+         ingest_us_terms.py（NIDA/DEA/MedlinePlus 快照） + clean_drug_terms.py（清除毒品黑话）
+         fetch_cn_slang.py / extract_cn_slang.py / ingest_cn_slang.py（中文互联网俗名）
+         classify_entity_type.py / fetch_chembl_atc.py / ingest_chembl_atc.py（ATC 补全）
+         normalize_salts.py / fix_dmd_salts.py（盐型） + seed_warnings / verify_warnings（/warn）
          ingest_ca_dpd.py（加拿大 DPD 入库，fetch_ca_dpd.py 抓）/ ingest_ca_dpd 的测试
 lib/     search.py（检索/打分/碰撞/别名） + 测试
 data/    seed_*.py + sources/（NIDA/DEA/FDA 小快照，进仓库）+ drugs.db（可重建，不入库）
@@ -120,31 +136,22 @@ site/    build.py（静态生成，含 /confused.html） + dist/（产物）
 增补一条：改 `data/seed_nicknames.py`，再跑 `python data/seed_nicknames.py` 和
 `python site/build.py`。当前 57 条（网络俗称 / 旧名 / 原研商品名 / 西语名），指向 40+ 个成分。
 
-## 美国街头叫法不是「又一个昵称表」
+## 民间叫法 / 类别词 / 中文互联网俗名不是「又一个昵称表」
 
-美国街头叫法有三类和中文昵称不一样，硬塞进 `nickname` 会撒谎：
+有些叫法不能只指向一个成分，硬塞进 `nickname` 会撒谎：
 
 | 情形 | 例子 | 为什么不能塞 `nickname` |
 |---|---|---|
-| 类别词 | downers = 镇静剂、uppers = 兴奋剂 | 不是某一个成分 |
-| 本库没有上市产品的管制物质 | molly = MDMA、acid = LSD | `nickname.substance_id` 是 NOT NULL |
-| 复方 | lean = 可待因 + 异丙嗪 | 一个叫法对应两个成分 |
+| 类别词 | water pill = 利尿剂、blood thinner = 抗凝药、睡前药 | 不是某一个成分 |
+| 中文互联网俗名 | 减肥针 / 瘦瘦针 → GLP-1 类（司美格鲁肽、替尔泊肽） | 一个叫法可能对应多个成分 |
+| 地区品牌名 | 必理痛（香港）/ 普拿疼（台湾）→ 对乙酰氨基酚 | 是商品名/品牌别名，不是成分名 |
 
-所以单独建 `drug_term`，允许 `substance_id` 为空，并用 `alias_all` 视图把
-`nickname` + `drug_term` 合成检索层唯一入口。
+所以单独建 `drug_term`：允许 `substance_id` 为空，用 `alias_all` 视图把
+`nickname` + `drug_term` 合成检索层唯一入口；单来源标 `community`，双来源标 `documented`。
 
-数据源只取可公开再发布的：
-
-| 来源 | 内容 | 许可 | 入库 |
-|---|---|---|---|
-| [NIDA Drugs A to Z](https://nida.nih.gov/research-topics/drugs-a-to-z) | 官方 “Also called” 列表 | US Government work | 247 行 |
-| [DEA Slang Terms and Code Words (2018)](https://archive.org/details/dea-drug-slang-terms-and-code-words-july2018) | 处方药/管制物质街头词，人工筛 | Public Domain Mark 1.0 | 64 行 |
-| [MedlinePlus](https://medlineplus.gov/) | 常见民间叫法（water pill / blood thinner / the pill…） | US Government work | 20 行 |
-| [FDA Name Differentiation Project](https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project) | tall-man 易混淆药对 | US Government work | 22 对 |
-
-**没有收 ISMP/ECRI 的《List of Confused Drug Names》**：那份清单有版权，不能整表复制。
-站上只写“这是 FDA 官方 tall-man 名单，不是完整 LASA 清单”；算法候选另出 CSV，不自动入库。
-逐项清单见 `reports/us-terms-summary.md`。
+**毒品 / 娱乐性用药不在收录范围**：NIDA / DEA / FRANK / ADF / PNSD 来的街头黑话已从库里清除
+（337 行），`drug_term` 只保留合法药品的民间/类别叫法。数据来源与许可见
+[docs/许可清单.md](docs/许可清单.md)。
 
 查不到某个词时，页面会区分三种情况：类别词（不列商品）、本库无上市产品（只说明成分）、
 叫法歧义（列出多个成分让人核对）。这三个提示都在 `lib/search.py` 和
@@ -164,6 +171,15 @@ site/    build.py（静态生成，含 /confused.html） + dist/（产物）
 
 英国这 61,051 条是从 167,533 条 AMP 里过滤出来的：dm+d 那个条目同时收录**器械/耗材**
 （造口袋、弹力袜、敷料、支具），用「名字里有没有剂量」这一条滤掉约 10 万条。
+
+**英国盐型恢复**：dm+d 的原料名里带盐型（besilate / fumarate / trihydrate…），早期入库只建了
+base variant、把盐丢了。`etl/fix_dmd_salts.py` 从 `f_ingredient2` 解析盐型，已恢复 **15,083 个 GB 组件**
+（盐型覆盖 2.0% → 25.0%，新建 127 个 variant），为 D2 碱基折算铺路；详见
+[reports/gb-salt-recovery.md](reports/gb-salt-recovery.md)。
+
+**ATC 覆盖率**：全部 substance **47.5%**（6,081 / 12,790）；只算药物实体
+（INN / 生物制品 / 营养剂）是 **67.0%**（5,757 / 8,592）。生药 / 顺势 / 材料等非 INN 实体不再追 ATC
+缺口——`data/entity_type.csv` 做实体分类，ChEMBL（CC BY-SA）只补空值。
 
 > 2026-10 复核：国家医保局「医保药品分类与代码数据库」有独立的商品名一列，
 > 但公开入口只给「公示批次」增量、不能整库导出；抽样 1,768 行里商品名有值 5.1%。
@@ -227,8 +243,10 @@ COFEPRIS 的《Registros Sanitarios de Medicamentos Alopáticos Expedidos》按�
 改走 CKAN `datastore_search` 取同一份数据。
 
 浓度只能回填，且只在唯一值时才写：2,837 条来自 ISSSTE 采购目录（通用名+剂型唯一的浓度），
-215 条是固体制剂放宽到「只看通用名」唯一值，72 条来自 PROFECO 零售价格调查。
-合计 3,123 / 10,878 ≈ 29%。剩下 71% 页面上规格是空的——**空是数据事实，不是 bug**。
+215 条是固体制剂放宽到「只看通用名」唯一值，72 条来自 PROFECO 零售价格调查，另有 CC-BY 采购目录
+与「每 mL / 每瓶」解析（`reports/mx-strength-audit.md`、`reports/mx-pervolume.md`）。
+合计 **3,832 / 10,878 ≈ 35.2%**（per_volume 字段 125 条）。剩下约 65% 页面上规格是空的——
+**空是数据事实，不是 bug**。
 
 试过但没用的：PROFECO 全量 150,876 行拉完，去重后仍然只有 378 个商品名（价格调查重复太多）；
 CBCISS / CNIS 只在 DOF 和网页应用里，没有批量文件。所以商品名级浓度基本到顶了。

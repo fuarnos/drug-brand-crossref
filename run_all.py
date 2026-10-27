@@ -99,6 +99,10 @@ def main() -> None:
             print("提示：没有加拿大 DPD 缓存，跳过（python etl/fetch_ca_dpd.py 可抓）",
                   flush=True)
     run("data/seed_manual.py")
+    # 英国 salt 恢复：dm+d 原料名里带盐型（besilate/fumarate/trihydrate…），
+    # ingest_dmd 只建 base variant，这里把组件改挂到盐 variant（幂等，需 --confirm-real-db）。
+    if (ROOT / "data/raw/dmd").exists():
+        run("etl/fix_dmd_salts.py", "--apply", "--confirm-real-db")
     # 品牌种子就位后，才能用 ARTG 名字给「已认识的品牌」补规格/剂型
     if (ROOT / "data/raw/artg/medicine_index.jsonl").exists():
         run("etl/ingest_artg_enrich.py")
@@ -111,6 +115,20 @@ def main() -> None:
     run("etl/ingest_us_terms.py")
     # 社区叫法 / 各国街头叫法（CN/GB/AU/ES），人工策展 + 逐条 URL。
     run("etl/ingest_community_terms.py")
+    # 清除毒品 / 娱乐性用药黑话（用户口径：只保留合法药品俗名；脚本幂等）。
+    run("etl/clean_drug_terms.py", "--apply")
+    # 中文互联网俗名（Tier B，全部进 drug_term；候选 CSV 在仓库里，可离线重跑）。
+    if (ROOT / "data/cn_slang_candidates.csv").exists():
+        run("etl/ingest_cn_slang.py", "--apply")
+    # 盐型规范化（为 D2 折算铺路）、/warn 种子。
+    run("etl/normalize_salts.py", "--apply", "--confirm-real-db")
+    run("data/seed_warnings.py", "--apply", "--confirm-real-db")
+    # ChEMBL ATC（CC BY-SA，只补空值；有缓存才跑）。
+    if (ROOT / "data/raw/chembl").exists():
+        run("etl/ingest_chembl_atc.py", "--apply", "--allow-real-db")
+    # MX「每 mL / 每瓶」浓度（候选 CSV 在仓库里，幂等）。
+    if (ROOT / "data/mx_pervolume_candidates.csv").exists():
+        run("etl/ingest_mx_pervolume.py", "--apply", "--allow-real")
     run("etl/ingest_fda_confusable.py")
     # 覆盖表要显示「数据源自己的日期」，不是我们的抓取时间
     run("db/source_dates.py")
