@@ -1,7 +1,10 @@
--- 药品商品名跨国定位站 · 数据契约 v0.2
+-- 药品商品名跨国定位站 · 数据契约 v0.4
 -- 单一真相源：SQLite。站点与检索索引都从这里构建，不反向写入。
 -- v0.2 改动：强度下沉到 product_component，支持复方（Augmentin 这类多成分产品）；
 --            新增 corroboration（多源佐证）。
+-- v0.3 改动：nickname / drug_term / alias_all 视图；collision 口径收敛。
+-- v0.4 改动：D2 盐基折算前置字段 variant.salt_code / variant.strength_basis；
+--            新增 dose_warning（D3 `/warn` 页人工策展警示）。老库由 db/init_db.py 幂等迁移。
 -- 市场：US（openFDA NDC）、GB（dm+d）、CN（医保代码库）、ES（CIMA / AEMPS）、
 --       MX（COFEPRIS）、AU（PBS Schedule）、CA（Health Canada DPD）。
 --       country 是「上市国家」，不是语言；西语名走 name_variant，不新建表。
@@ -47,18 +50,29 @@ CREATE TABLE IF NOT EXISTS substance (
 );
 
 -- L1b 盐型 / 水合物 / 酯：可替代性判定的最小单位
+-- v0.4 新增（D2 盐基折算）：
+--   salt_code      = 盐名规范化后的代码，与 data/salt_base_fraction.csv 的 salt_code 对齐；
+--                    salt 保留来源原文，不覆盖。非盐值分流为 'non_salt'，复盐/混合/未收录
+--                    盐分流为 'mixed'（都不可自动折算），空字符串 = 来源未给盐。
+--   strength_basis = 标签强度的基准。默认 'unknown'：宁可不出折算结论，也不猜。
 CREATE TABLE IF NOT EXISTS variant (
     variant_id     TEXT PRIMARY KEY,
     substance_id   TEXT NOT NULL REFERENCES substance (substance_id),
     salt           TEXT NOT NULL DEFAULT '',
     hydrate        TEXT NOT NULL DEFAULT '',
     ester          TEXT NOT NULL DEFAULT '',
+    salt_code      TEXT NOT NULL DEFAULT '',
+    strength_basis TEXT NOT NULL DEFAULT 'unknown'
+                   CHECK (strength_basis IN ('base', 'salt', 'salt_equivalent', 'unknown')),
     base_fraction  REAL NOT NULL DEFAULT 1.0
                    CHECK (base_fraction > 0 AND base_fraction <= 1),
     interchange    TEXT NOT NULL DEFAULT 'unknown'
                    CHECK (interchange IN ('yes', 'no', 'unknown')),
     interchange_note TEXT
 );
+
+CREATE INDEX IF NOT EXISTS idx_variant_salt_code ON variant (salt_code);
+CREATE INDEX IF NOT EXISTS idx_variant_basis ON variant (strength_basis);
 
 -- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装）
 CREATE TABLE IF NOT EXISTS product (
@@ -317,6 +331,40 @@ JOIN (SELECT product_id, COUNT(*) AS n_ing
       FROM product_component GROUP BY product_id) per_product
      ON per_product.product_id = p.product_id
 GROUP BY pn.key_id;
+
+-- 剂量/不可互换警示（D3 `/warn` 页与成分页警示块的数据源，v0.4）。
+-- 只收人工策展、且有监管来源的条目；算法候选不直接入库（先出 CSV 人工复核）。
+-- 与 confusable_pair 的分工：confusable_pair 是 FDA tall-man 官方 LASA 名单；
+-- 这里放「同名不同药 / 同成分不可互换 / 复方配比 / 剂型途径」等剂量相关警示。
+-- substance_id / country 可为空：R4 同名不同药的警示挂在商品名上，没有单一成分。
+CREATE TABLE IF NOT EXISTS dose_warning (
+    warning_id    TEXT PRIMARY KEY,          -- 稳定 slug，如 'metoprolol-tartrate-vs-succinate'
+    substance_id  TEXT REFERENCES substance (substance_id),   -- 可空（R4 商品名警示）
+    related_substance_id TEXT REFERENCES substance (substance_id),  -- pair 时的另一端，可空
+    country       TEXT,                      -- 可空；空 = 跨国通用警示
+    rule          TEXT NOT NULL DEFAULT 'R4'
+                  CHECK (rule IN ('R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7')),
+    severity      TEXT NOT NULL DEFAULT 'medium'
+                  CHECK (severity IN ('high', 'medium', 'info')),
+    title_zh      TEXT NOT NULL,
+    title_en      TEXT NOT NULL,
+    title_es      TEXT,
+    body_zh       TEXT NOT NULL,
+    body_en       TEXT NOT NULL,
+    body_es       TEXT,
+    source_url    TEXT NOT NULL,             -- 监管原始文件（label/说明书/SmPC/DPD）
+    evidence      TEXT NOT NULL,             -- 事实摘录 + 编辑说明（≤200 字，不转载全文）
+    status        TEXT NOT NULL DEFAULT 'draft'
+                  CHECK (status IN ('published', 'draft', 'retracted')),
+    reviewed_by   TEXT,
+    created_at    TEXT NOT NULL,
+    updated_at    TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_dose_warning_substance
+    ON dose_warning (substance_id, status);
+CREATE INDEX IF NOT EXISTS idx_dose_warning_country
+    ON dose_warning (country, status);
 
 -- ARTG 名称层：eBS 公开目录能翻到的全量「现行药品」条目（商品名 + 申办方 + ARTG ID）。
 -- 只有名字，没有成分——用来回答「这个牌子在澳洲注册过吗、ARTG 号多少」，

@@ -52,6 +52,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
 from ingest_openfda_ndc import form_base_of, slug, split_salt  # noqa: E402
+from normalize_salts import insert_variant  # noqa: E402
 from normalize_name import normalize  # noqa: E402
 
 CACHE = ROOT / "data" / "raw" / "ca" / "dpd"
@@ -475,9 +476,8 @@ def main() -> None:
                                      ((disp or rid.replace("-", " ").title()),)).fetchone()
                 if row and row[0] != rid:
                     rid = row[0]
-                db.execute(
-                    "INSERT OR IGNORE INTO variant (variant_id, substance_id, salt) VALUES (?,?,?)",
-                    (vid, rid, salt or ""))
+                # salt_code 由 normalize_salts 统一分类（老库未迁移时自动退回旧 SQL）
+                insert_variant(db, vid, rid, salt or "")
                 row = db.execute("SELECT substance_id FROM variant WHERE variant_id=?",
                                  (vid,)).fetchone()
                 if row:

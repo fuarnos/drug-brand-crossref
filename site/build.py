@@ -10,7 +10,8 @@
     404.html            路径不存在时的兜底页
     robots.txt          全站可抓 + sitemap 地址
     sitemap.xml         全站 HTML 的 sitemap
-    data/index.json     检索索引
+    data/index.json     检索索引（兼容回退：?legacy=1 或核心加载失败时用）
+    data/idx/core.json  检索索引的列式 + 字典编码核心（P1；客户端解码回 index.json 的结构）
     data/aliases.json   俗称 / 街头叫法 / 类别词索引
     data/confused.json  易混淆药对索引
     assets/             css + js
@@ -79,6 +80,15 @@ I18N = {
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
                           "Coverage:"),
         "home.loading": "Loading index…",
+        "home.hint_idle": ("First search needs to load the index (~6 MB gzipped; cached after "
+                           "the first time) — start typing, focus the search box, or pick a "
+                           "sample."),
+        "home.hint_loading": "Loading the index… (~6 MB the first time)",
+        "error.index_failed": "The index failed to load.",
+        "error.local_file": ("If you opened this page directly, the browser blocks local file "
+                             "reads — run python -m http.server and visit "
+                             "http://localhost:8000/."),
+        "error.retry": "Retry",
         "res.matched": "names matched", "res.none": "No match",
         "res.brands": "brand names found",
         "res.alias": "alias matched",
@@ -102,6 +112,12 @@ I18N = {
         "fam.warn": "Same brand, different drug",
         "drug.brand": "Brand", "drug.strength": "Strength", "drug.nostrength": "not disclosed",
         "drug.release": "Release", "drug.status": "Status",
+        "drug.status.active": "active", "drug.status.discontinued": "discontinued",
+        "drug.status.withdrawn": "withdrawn", "drug.status.unknown": "unknown",
+        "drug.status_note.discontinued": "expired",
+        "drug.status_note.withdrawn": "market authorisation withdrawn",
+        "drug.status_note.unknown": "validity unknown",
+        "drug.no_brand": "(no brand name)", "drug.also_called": "Also called:",
         "drug.records": "records", "drug.showing": "showing first 40 of",
         "drug.sid": "Substance ID",
         "drug.notice": ("The same ingredient can carry completely different brand names in "
@@ -127,6 +143,7 @@ I18N = {
         "nick.unverified": "user-provided (unverified)",
         "nick.community": "community name",
         "nick.source": "Source",
+        "nick.tag": "nickname",
         "nick.street": "US street name", "nick.folk": "folk name",
         "nick.class": "class term",
         "nick.class_caveat": ("This is a class term, not a specific medicine — it can cover "
@@ -145,6 +162,10 @@ I18N = {
         "report.all": "Known issues",
         "report.note": "Wrong ingredient, wrong dose, or a drug we do not have? Tell us:",
         "report.cta": "Report this result",
+        "report.issue_title": "Data error: ",
+        "report.field_query": "Query", "report.field_page": "Page",
+        "report.field_expected": "Expected result", "report.field_actual": "Actual result",
+        "report.field_pack": "Pack or lot",
         "conf.title": "Easily confused drug names",
         "conf.intro": ("Look-alike / sound-alike pairs from the FDA Name Differentiation Project. "
                        "This is the official tall-man list, not the full ISMP LASA list."),
@@ -167,6 +188,15 @@ I18N = {
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
                           "Cobertura:"),
         "home.loading": "Cargando el índice…",
+        "home.hint_idle": ("La primera búsqueda necesita cargar el índice (~6 MB comprimido; "
+                           "queda en caché) — empieza a escribir, enfoca el buscador o elige "
+                           "un ejemplo."),
+        "home.hint_loading": "Cargando el índice… (~6 MB la primera vez)",
+        "error.index_failed": "No se pudo cargar el índice.",
+        "error.local_file": ("Si abriste esta página directamente, el navegador bloquea la "
+                             "lectura de archivos locales — ejecuta python -m http.server y "
+                             "visita http://localhost:8000/."),
+        "error.retry": "Reintentar",
         "res.matched": "nombres encontrados", "res.none": "Sin resultados",
         "res.brands": "nombres comerciales encontrados",
         "res.alias": "alias encontrado",
@@ -190,6 +220,12 @@ I18N = {
         "fam.warn": "Misma marca, otro medicamento",
         "drug.brand": "Marca", "drug.strength": "Concentración", "drug.nostrength": "no publicado",
         "drug.release": "Liberación", "drug.status": "Estado",
+        "drug.status.active": "activo", "drug.status.discontinued": "descatalogado",
+        "drug.status.withdrawn": "retirado", "drug.status.unknown": "desconocido",
+        "drug.status_note.discontinued": "caducado",
+        "drug.status_note.withdrawn": "autorización retirada",
+        "drug.status_note.unknown": "validez desconocida",
+        "drug.no_brand": "(sin nombre comercial)", "drug.also_called": "También llamado:",
         "drug.records": "registros", "drug.showing": "mostrando 40 de",
         "drug.sid": "ID de sustancia",
         "drug.notice": ("Un mismo principio activo puede tener nombres comerciales totalmente "
@@ -216,6 +252,7 @@ I18N = {
         "nick.unverified": "aportado por el usuario (sin verificar)",
         "nick.community": "nombre de la comunidad",
         "nick.source": "Fuente",
+        "nick.tag": "apodo",
         "nick.street": "nombre callejero en EE. UU.", "nick.folk": "nombre popular",
         "nick.class": "término de clase",
         "nick.class_caveat": ("Es un término de clase, no un medicamento concreto: puede "
@@ -234,6 +271,10 @@ I18N = {
         "report.all": "Problemas conocidos",
         "report.note": "¿Principio activo equivocado, dosis equivocada o falta un medicamento? Escríbenos:",
         "report.cta": "Informar de este resultado",
+        "report.issue_title": "Error de datos: ",
+        "report.field_query": "Consulta", "report.field_page": "Página",
+        "report.field_expected": "Resultado esperado", "report.field_actual": "Resultado real",
+        "report.field_pack": "Envase o lote",
         "conf.title": "Nombres de medicamentos fáciles de confundir",
         "conf.intro": ("Pares de nombres parecidos o que suenan igual, del proyecto de "
                        "diferenciación de nombres de la FDA. Es la lista oficial tall-man, "
@@ -255,6 +296,13 @@ I18N = {
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
         "home.loading": "正在加载索引…",
+        "home.hint_idle": ("首次搜索需要加载索引，约 6 MB（gzip 压缩后，之后浏览器会缓存）"
+                           "——输入、聚焦搜索框或点一个示例即可开始。"),
+        "home.hint_loading": "正在加载索引…（首次约 6 MB）",
+        "error.index_failed": "索引没加载成功。",
+        "error.local_file": ("如果是本地双击打开的页面，浏览器会拦截本地文件读取——请用 "
+                             "python -m http.server 起服务后访问 http://localhost:8000/。"),
+        "error.retry": "重试",
         "res.matched": "个名字命中", "res.none": "没有匹配的名字",
         "res.brands": "个商品名命中",
         "res.alias": "个别名命中",
@@ -277,6 +325,12 @@ I18N = {
         "fam.warn": "同名不同药",
         "drug.brand": "商品名", "drug.strength": "规格", "drug.nostrength": "未公开",
         "drug.release": "释放", "drug.status": "状态",
+        "drug.status.active": "在售", "drug.status.discontinued": "已停售",
+        "drug.status.withdrawn": "已撤市", "drug.status.unknown": "状态未知",
+        "drug.status_note.discontinued": "有效期已过",
+        "drug.status_note.withdrawn": "批文已撤销",
+        "drug.status_note.unknown": "有效期待确认",
+        "drug.no_brand": "（无商品名）", "drug.also_called": "也叫：",
         "drug.records": "条记录", "drug.showing": "仅显示前 40 条，共",
         "drug.sid": "规范成分",
         "drug.notice": ("同一成分在不同国家可能用完全不同的商品名；同名也可能指向不同成分。"
@@ -299,6 +353,7 @@ I18N = {
         "nick.unverified": "用户提供（未证实）",
         "nick.community": "社区叫法",
         "nick.source": "出处",
+        "nick.tag": "俗称",
         "nick.street": "美国街头叫法", "nick.folk": "民间叫法",
         "nick.class": "类别俗称",
         "nick.class_caveat": "这是类别叫法，不是具体药名，可能对应多种成分；请按成分核对。",
@@ -311,6 +366,10 @@ I18N = {
         "report.all": "已知问题",
         "report.note": "成分错了、剂量错了、或者库里没有这个药？告诉我们：",
         "report.cta": "报告这个结果",
+        "report.issue_title": "数据错误：",
+        "report.field_query": "查询词", "report.field_page": "页面",
+        "report.field_expected": "期望结果", "report.field_actual": "实际结果",
+        "report.field_pack": "包装或批号",
         "conf.title": "容易混淆的药物",
         "conf.intro": ("来自 FDA Name Differentiation Project 的形似/音似药对。"
                        "这是官方 tall-man 名单，不是 ISMP 全量 LASA 清单。"),
@@ -712,16 +771,17 @@ function render(){
   }
 }
 function reportURL(q){
+  // issue 模板的字段名走 i18n，避免 es 用户在报告表单里看到中英混排。
   const body = [
-    '**查询词 / query**: ' + (q || ''),
-    '**页面 / page**: ' + location.href,
-    '**期望结果 / expected**: ',
-    '**实际结果 / actual**: ',
-    '**包装或批号 / pack or lot**: ',
+    '**' + Tr('report.field_query') + '**: ' + (q || ''),
+    '**' + Tr('report.field_page') + '**: ' + location.href,
+    '**' + Tr('report.field_expected') + '**: ',
+    '**' + Tr('report.field_actual') + '**: ',
+    '**' + Tr('report.field_pack') + '**: ',
     ''
   ].join('\n');
   return 'REPORT_REPO_PLACEHOLDER' + '/issues/new?labels=data-error&template=data-error.yml'
-    + '&title=' + encodeURIComponent('数据错误: ' + (q || ''))
+    + '&title=' + encodeURIComponent(Tr('report.issue_title') + (q || ''))
     + '&body=' + encodeURIComponent(body);
 }
 // ── P0 索引懒加载 ──────────────────────────────────────────────────
@@ -729,21 +789,76 @@ function reportURL(q){
 // 进来时才 loadIndex()。加载失败给出提示与「重试」按钮（不做静默失败）。
 // ?legacy=1 一键回滚成旧行为（页面加载即拉全量索引）。
 const LEGACY = new URLSearchParams(location.search).get('legacy') === '1';
+// i18n.js 先于本脚本执行（<head>），window.T 可用；保留降级到原键名。
+function Tr(k){ return (window.T || function(x){ return x; })(k); }
 const hintEl = document.getElementById('loadhint');
-const HINT_IDLE = '首次搜索需要加载索引，约 6 MB（gzip）。'
-  + 'First search needs to load the index (~6 MB gzipped) — start typing or focus the box.';
-const HINT_LOADING = '正在加载索引… Loading the index…（首次约 6 MB / ~6 MB first time）';
+const HINT_IDLE = Tr('home.hint_idle');
+const HINT_LOADING = Tr('home.hint_loading');
 function setHint(html, show){
   if(!hintEl) return;
+  // 一旦由脚本接管提示文案，就摘掉 data-i18n，避免 i18n.js 的 apply() 把
+  // 「正在加载…」又覆盖回静态 idle 文案。
+  if(hintEl.removeAttribute) hintEl.removeAttribute('data-i18n');
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
+}
+// ── P1 列式 + 字典编码核心（data/idx/core.json，见 reports/index-p1-impl.md）──
+// 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
+// index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
+//   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
+//   cols[f] = [值...]                                普通列
+//   d 与 k 只差 ASCII 大小写时 cols.d 存 ""，cols.dp 存大小写位置模式（'0-2,5'）；
+//   q=1 的条目单独用稀疏下标数组存。
+function applyCase(k, pat){
+  const out = k.split('');
+  for(const run of pat.split(',')){
+    const p = run.split('-'), lo = +p[0], hi = p.length > 1 ? +p[1] : lo;
+    for(let i = lo; i <= hi; i++) out[i] = out[i].toUpperCase();
+  }
+  return out.join('');
+}
+function decodeCore(c){
+  if(!c || !Array.isArray(c.cols && c.cols.k) || typeof c.n !== 'number') throw new Error('bad core');
+  const n = c.n, C = c.cols, out = new Array(n);
+  const kcol = C.k, dcol = C.d || [], dpcol = C.dp || [];
+  for(let i = 0; i < n; i++){
+    const k = kcol[i];
+    let d = dcol[i];
+    if(!d) d = dpcol[i] ? applyCase(k, dpcol[i]) : k;
+    out[i] = {k: k, d: d};
+  }
+  for(const f in C){
+    if(f === 'k' || f === 'd' || f === 'dp') continue;
+    const col = C[f];
+    if(!col) continue;
+    if(col.d && col.i){                       // 字典列
+      const dict = col.d, idx = col.i;
+      for(let i = 0; i < n; i++) out[i][f] = dict[idx[i]];
+    } else if(Array.isArray(col)){            // 普通列
+      for(let i = 0; i < n; i++) out[i][f] = col[i];
+    }
+  }
+  for(const i of (c.q || [])) out[i].q = 1;
+  return out;
+}
+function fetchJSON(url){
+  return fetch(url).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status+' '+url); return r.json(); });
+}
+function loadMainIndex(){
+  // ?legacy=1 一键回滚：只走旧的 data/index.json，不碰 data/idx/core.json。
+  if(LEGACY) return fetchJSON(BASE + 'data/index.json');
+  return fetchJSON(BASE + 'data/idx/core.json').then(decodeCore).catch(err=>{
+    // 核心文件 404 / 网络失败 / 解码异常（例如灰度期数据没跟上）→ 自动回退旧全量索引。
+    if(window.console && console.warn) console.warn('core index unavailable, fallback to index.json', err);
+    return fetchJSON(BASE + 'data/index.json');
+  });
 }
 function loadIndex(){
   if(IDX_READY) return Promise.resolve(true);
   if(IDX_P) return IDX_P;
   if(!LEGACY) setHint(HINT_LOADING);
   IDX_P = Promise.all([
-    fetch(BASE + 'data/index.json').then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }),
+    loadMainIndex(),
     fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
   ]).then(([d,a,c])=>{
@@ -753,13 +868,11 @@ function loadIndex(){
   }).catch(err=>{
     // 失败后清掉缓存的 Promise，允许点「重试」重新发起。
     IDX_P = null;
-    if(hintEl) hintEl.style.display = 'none';
-    out.innerHTML = '<div class="notice">索引没加载成功 / Index failed to load. '
-      + '如果是本地双击打开的页面，浏览器会拦截本地文件读取；'
-      + 'If you opened this file directly the browser blocks local file reads — run '
-      + '<kbd>python -m http.server</kbd> and visit <kbd>http://localhost:8000/</kbd>.'
+    setHint(HINT_IDLE);
+    out.innerHTML = '<div class="notice">' + esc(Tr('error.index_failed')) + ' '
+      + esc(Tr('error.local_file'))
       + '<br>' + esc(String((err && err.message) || err || ''))
-      + '<br><button type="button" data-retry="1">重试 / Retry</button></div>';
+      + '<br><button type="button" data-retry="1">' + esc(Tr('error.retry')) + '</button></div>';
     return false;
   });
   return IDX_P;
@@ -789,7 +902,7 @@ if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
 if(LEGACY){
   // 回滚开关：?legacy=1 = 旧行为，页面一加载就拉全量索引。
   setHint('');
-  out.innerHTML = '<div class="sub">Loading index… 正在加载索引（第一次会慢一点）</div>';
+  out.innerHTML = '<div class="sub">' + esc(Tr('home.loading')) + '</div>';
   loadIndex().then(ok => { if(ok) render(); });
 } else if(initial){
   // ?q= 深链：立即加载（加载完直接出结果）。
@@ -825,10 +938,12 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     )
     alt = ""
     if alternates:
+        # hreflang 必须带 GitHub Pages 的项目子路径（线上是 /drug-brand-crossref/），
+        # 写 "/es/" 会指到域名根（404）。SITE_URL 已含末尾斜杠。
         alt = ("\n".join(
-            f'<link rel="alternate" hreflang="{code}" href="/{path}">'
+            f'<link rel="alternate" hreflang="{code}" href="{SITE_URL}{path}">'
             for code, _l, path in LANGS
-        ) + '\n<link rel="alternate" hreflang="x-default" href="/">')
+        ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}">')
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -856,7 +971,6 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
        data-i18n="report.all">Known issues</a>
   </span>
 </div></footer>
-<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>
 </body></html>"""
 
 
@@ -1203,6 +1317,21 @@ def load_confusable(db: sqlite3.Connection) -> list[dict]:
     return out
 
 
+# 药品身份页「状态」列的受控词：状态词与说明都走 I18N（data-i18n），
+# HTML 里的英文默认文案供无 JS / 首帧使用，i18n.js 再按语言替换。
+STATUS_WORDS = ("active", "discontinued", "withdrawn", "unknown")
+STATUS_NOTES = {
+    "discontinued": "drug.status_note.discontinued",
+    "withdrawn": "drug.status_note.withdrawn",
+    "unknown": "drug.status_note.unknown",
+}
+STATUS_NOTES_EN = {
+    "discontinued": "expired",
+    "withdrawn": "market authorisation withdrawn",
+    "unknown": "validity unknown",
+}
+
+
 def build_drug_pages(db: sqlite3.Connection) -> int:
     # 一次性取全量，按成分分组；逐个成分查询会退化成正表全扫 × 4445 次
     products: dict[str, list] = {}
@@ -1288,17 +1417,22 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
                                                         or t[0][:1] in "+-/&"), 0))
             lis = []
             for brand, st, rel, status in ordered[:40]:
-                name = esc(brand) if brand else '<span class="meta">（无商品名）</span>'
+                # 受控词走 data-i18n：en 默认文案在 HTML 里，i18n.js 按所选语言替换。
+                name = esc(brand) if brand else (
+                    '<span class="meta" data-i18n="drug.no_brand">(no brand name)</span>')
                 st_html = esc(st) if st else (
                     '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
-                flag = {
-                    "withdrawn": " <em>(withdrawn 已撤市)</em>",
-                    "discontinued": " <em>(expired 有效期已过)</em>",
-                    "unknown": " <em>(validity unknown 有效期待确认)</em>",
-                }.get(status, "")
+                status_html = (
+                    f'<span data-i18n="drug.status.{status}">{esc(status)}</span>'
+                    if status in STATUS_WORDS else esc(status))
+                note = STATUS_NOTES.get(status)
+                if note:
+                    note_en = STATUS_NOTES_EN[status]
+                    status_html += (f' <em>(<span data-i18n="drug.status_note.{status}">'
+                                    f'{note_en}</span>)</em>')
                 lis.append(f"<tr><td>{name}</td><td>{st_html}</td>"
                            f"<td>{esc(rel) if rel != 'none' else '—'}</td>"
-                           f"<td>{esc(status)}{flag}</td></tr>")
+                           f"<td>{status_html}</td></tr>")
             more = (f'<p class="sub"><span data-i18n="drug.showing">showing first 40 of</span> '
                     f'{len(ordered)}</p>' if len(ordered) > 40 else "")
             blocks.append(
@@ -1313,8 +1447,8 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
         nick_line = ""
         if sid in nicknames:
             also = "、".join(esc(x) for x in nicknames[sid])
-            nick_line = (f'<p class="sub">Also called 也叫：{also} '
-                         f'<span class="tag">nickname 俗称</span></p>')
+            nick_line = (f'<p class="sub"><span data-i18n="drug.also_called">Also called:</span> '
+                         f'{also} <span class="tag" data-i18n="nick.tag">nickname</span></p>')
         conf_line = ""
         if conflicts.get(sid):
             items = []
@@ -1466,9 +1600,7 @@ def build_index_page(entries, stats, coverage) -> None:
   <button data-q="Benadryl">Benadryl</button>
   <button data-q="Gaviscon">Gaviscon</button>
 </div>
-<p class="sub" id="loadhint">首次搜索需要加载索引，约 6 MB（gzip 压缩后，之后浏览器会缓存）。
-First search needs to load the index (~6 MB gzipped; cached after the first time) —
-start typing, focus the search box, or pick a sample.</p>
+<p class="sub" id="loadhint" data-i18n="home.hint_idle">First search needs to load the index (~6 MB gzipped; cached after the first time) — start typing, focus the search box, or pick a sample.</p>
 <p class="sub" id="meta" style="margin-top:14px"></p>
 <div id="out"></div>
 <p class="sub report-line" id="report" style="display:none">
@@ -1857,6 +1989,95 @@ def build_seo_files() -> None:
     print(f"  seo files  : 404 + robots + sitemap ({len(urls)} urls)", flush=True)
 
 
+# ── P1 索引核心：列式 + 字典编码 ─────────────────────────────────────
+# 目标：把 34.8 MB 的 data/index.json 编成 data/idx/core.json，客户端
+#       decodeCore() 解码回与 index.json 完全同构（同字段、同顺序）的 IDX 数组，
+#       render() 以下逻辑一行不改。旧 index.json 继续双写：?legacy=1 或核心
+#       加载/解码失败时自动回退。设计与体积对比见 reports/index-p1-impl.md。
+#
+# 编码格式（v1）：
+#   {"v":1,"n":条数,
+#    "cols":{
+#      "k":[str...],                     检索键（原样，不排序——保持 IDX 原有顺序，
+#                                        下游 inCountry/同成分列表的顺序才不变）
+#      "d":[str...],  "dp":[str...],     d 与 k 只差 ASCII 大小写时 d 存 ""、
+#                                        dp 存大小写位置模式（"0-2,5" 表示把这些
+#                                        位 toUpperCase 后还原 d）；否则 d 存原文
+#      "c":{"d":[值...],"i":[下标...]}, 字典列：字符串字典 + 每行字典下标
+#      ...（x/s/l/v/vs/g/gn/m 同字典列；c/s/vs 的值是数组，先 JSON 化再字典化）
+#      "n":[int...], "mn":[int...], "u":[str...]   普通列
+#    },
+#    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
+#   f（剂型）客户端 0 处引用，直接丢弃（app.js 只用 k/d/c/x/s/l/n/v/vs/u/g/gn/m/mn/q）。
+CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "g", "gn", "m")
+CORE_ARRAY_COLS = ("c", "s", "vs")     # 值是数组：先 JSON 化再进字典
+
+
+def _d_case_pattern(d: str, k: str) -> str | None:
+    """d 与 k 只差 ASCII 大小写时返回大小写位置模式（'0' / '0-2,5'），否则 None。
+
+    模式里 'a-b' 是闭区间：把 k 的第 a..b 个字符 toUpperCase 后即得 d。
+    只处理 ASCII：非 ASCII 的大小写映射（ß→SS、İ→i̇ 等）Python 与 JS 行为
+    未必一致，这类条目一律让 d 存完整原文，解码端不做映射。
+    """
+    if len(d) != len(k):
+        return None
+    runs: list[str] = []
+    i = 0
+    while i < len(k):
+        if d[i] == k[i]:
+            i += 1
+            continue
+        if ord(k[i]) > 127 or d[i] != k[i].upper():
+            return None
+        j = i
+        while (j + 1 < len(k) and d[j + 1] != k[j + 1]
+               and ord(k[j + 1]) < 128 and d[j + 1] == k[j + 1].upper()):
+            j += 1
+        runs.append(f"{i}-{j}" if j > i else str(i))
+        i = j + 1
+    return ",".join(runs)
+
+
+def encode_core(entries) -> dict:
+    """entries（load_index 的结果）→ 列式 + 字典编码的 core 对象。"""
+    n = len(entries)
+    d_col: list[str] = []
+    dp_col: list[str] = []
+    for e in entries:
+        d, k = e["d"], e["k"]
+        if d == k:
+            d_col.append("")
+            dp_col.append("")
+            continue
+        pat = _d_case_pattern(d, k)
+        if pat is None:
+            d_col.append(d)          # 大小写差异超出 ASCII 规则：存完整 d
+            dp_col.append("")
+        else:
+            d_col.append("")         # 可由 k + 模式还原
+            dp_col.append(pat)
+    cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
+    for f in ("c", "x", "s", "l", "n", "v", "vs", "u", "g", "gn", "m", "mn"):
+        vals = [e.get(f) for e in entries]
+        if f in CORE_ARRAY_COLS:
+            # 数组先序列化再字典化：客户端解码时把字典值直接给出（数组引用共享，
+            # render 只读不写），不需要逐行 JSON.parse。
+            raw = [json.dumps(v, ensure_ascii=False, separators=(",", ":")) for v in vals]
+            uniq = list(dict.fromkeys(raw))
+            pos = {u: i for i, u in enumerate(uniq)}
+            cols[f] = {"d": [json.loads(u) for u in uniq],
+                       "i": [pos[u] for u in raw]}
+        elif f in CORE_DICT_COLS:
+            uniq = list(dict.fromkeys(vals))
+            pos = {u: i for i, u in enumerate(uniq)}
+            cols[f] = {"d": uniq, "i": [pos[v] for v in vals]}
+        else:
+            cols[f] = vals
+    return {"v": 1, "n": n, "cols": cols,
+            "q": [i for i, e in enumerate(entries) if e.get("q")]}
+
+
 def main() -> None:
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -1866,12 +2087,25 @@ def main() -> None:
     i18n_js = (
         "window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n" + r"""
 (function(){
-  var D = window.I18N, seg = location.pathname.split('/').filter(Boolean);
+  var D = window.I18N;
+  // 站点根路径：i18n.js 在 <head> 同步执行，currentScript 可用。
+  // GitHub Pages 是项目子路径（/drug-brand-crossref/），不能假设语言目录在域名根。
+  var scriptEl = document.currentScript;
+  var ROOT = ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n\.js.*$/, '');
+  var rootPath = '/';
+  try{ rootPath = new URL(ROOT).pathname || '/'; }catch(e){}
+  function relPath(){
+    // 相对站点根的路径，例如 /drug-brand-crossref/es/ → "es/"，子页 → "drug/x.html"。
+    var p = location.pathname;
+    return p.indexOf(rootPath) === 0 ? p.slice(rootPath.length) : p.replace(/^\//, '');
+  }
   function pick(){
     var q = new URLSearchParams(location.search).get('lang');
     if(q && D[q]){ try{localStorage.setItem('lang',q);}catch(e){} return q; }
-    var first = seg[0] || '';
-    if(D[first]) return first;
+    var first = relPath().split('/').filter(Boolean)[0] || '';
+    // 直接进 /es/、/zh/（hreflang 主入口）时把语言写进 localStorage，
+    // 这样点导航去 /about.html 等根路径页面不会掉回 en。
+    if(D[first]){ try{localStorage.setItem('lang',first);}catch(e){} return first; }
     try{ var s = localStorage.getItem('lang'); if(s && D[s]) return s; }catch(e){}
     var n = (navigator.language || 'en').slice(0,2);
     return D[n] ? n : 'en';
@@ -1886,8 +2120,29 @@ def main() -> None:
       a.classList.toggle('on', a.dataset.lang === window.LANG);
     });
   }
-  window.setLang = function(l){ try{localStorage.setItem('lang',l);}catch(e){}
-    location.search = '?lang=' + encodeURIComponent(l); };
+  function langTarget(code){
+    // 入口页（/、/es/、/zh/）切到对应语言入口，URL 与显示语言保持一致；
+    // 子页面（drug/、name/ 等）切语言时留在原页，只换 lang 参数。
+    var params = new URLSearchParams(location.search);
+    var landing = /(\/|index\.html)$/.test(location.pathname);
+    var path;
+    if(landing){ params.delete('lang'); path = ROOT + (code === 'en' ? '' : code + '/'); }
+    else { params.set('lang', code); path = location.pathname; }
+    var qs = params.toString();
+    return path + (qs ? '?' + qs : '') + (location.hash || '');
+  }
+  window.setLang = function(l){
+    try{ localStorage.setItem('lang', l); }catch(e){}
+    location.assign(langTarget(l));
+  };
+  // 语言切换链接：保留 ?q= / ?country= 等查询参数（原先 ?lang= 会把它们清掉）。
+  document.addEventListener('click', function(ev){
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[data-lang]') : null;
+    if(!a) return;
+    if(ev.defaultPrevented || ev.button || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+    ev.preventDefault();
+    window.setLang(a.getAttribute('data-lang'));
+  });
   if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', apply); }
   else { apply(); }
   window.addEventListener('load', apply);
@@ -1897,6 +2152,7 @@ def main() -> None:
     (OUT / "assets" / "i18n.js").write_text(i18n_js, encoding="utf-8")
     (OUT / "assets" / "app.js").write_text(
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
+        .replace("data/idx/core.json", f"data/idx/core.json?v={int(time.time())}")
         .replace("data/index.json", f"data/index.json?v={int(time.time())}"),
         encoding="utf-8")
 
@@ -1928,7 +2184,15 @@ def main() -> None:
     entries = load_index(db)
     (OUT / "data" / "index.json").write_text(
         json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    # P1：同一份 entries 再写一份列式 + 字典编码核心（客户端解码回 IDX）。
+    # index.json 双写保留：?legacy=1 与核心加载/解码失败时自动回退，发布体积可接受。
+    core = encode_core(entries)
+    (OUT / "data" / "idx").mkdir(parents=True, exist_ok=True)
+    (OUT / "data" / "idx" / "core.json").write_bytes(
+        json.dumps(core, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
     print(f"  {len(entries)} keys", flush=True)
+    print(f"  core.json  { (OUT / 'data' / 'idx' / 'core.json').stat().st_size / 1e6:.1f} MB"
+          f" (index.json {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB)", flush=True)
 
     print("building nickname index ...", flush=True)
     aliases = load_aliases(db)

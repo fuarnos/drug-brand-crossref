@@ -25,6 +25,7 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
 from normalize_name import normalize  # noqa: E402
+from normalize_salts import insert_variant  # noqa: E402
 
 CACHE = ROOT / "data" / "raw" / "openfda"
 DB = ROOT / "data" / "drugs.db"
@@ -245,11 +246,8 @@ def main() -> None:
                     )
                 if vid not in seen_variants:
                     seen_variants.add(vid)
-                    db.execute(
-                        "INSERT OR IGNORE INTO variant (variant_id, substance_id, salt)"
-                        " VALUES (?,?,?)",
-                        (vid, sid, salt),
-                    )
+                    # salt_code 由 normalize_salts 统一分类（老库未迁移时自动退回旧 SQL）
+                    insert_variant(db, vid, sid, salt)
                 v, u, pv, pu = parse_strength(ing.get("strength"))
                 db.execute(
                     "INSERT OR REPLACE INTO product_component (product_id, ord, variant_id,"

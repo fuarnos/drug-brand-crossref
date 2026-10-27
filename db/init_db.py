@@ -1,8 +1,12 @@
 """初始化数据库：把 db/schema.sql 应用到 data/drugs.db。可重复运行。
 
-除了建表，还负责一处**结构迁移**：product.country 的 CHECK 枚举。
-SQLite 改不了 CHECK，只能重建表。市场是逐步加的（US → GB → CN → ES → MX），
-所以每次 schema.sql 扩了枚举，这里就把老库里的 product 表换成新定义，数据原样搬过去。
+除了建表，还负责两处**结构迁移**（都幂等，老库可直接升级）：
+
+1. v0.4 `variant` 加列 `salt_code` / `strength_basis`（`_ensure_variant_columns`）；
+2. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
+   （US → GB → CN → ES → MX），所以每次 schema.sql 扩了枚举，这里就把老库里的 product
+   表换成新定义，数据原样搬过去。
+
 
     ALTER TABLE product RENAME TO product_old   （legacy_alter_table=ON，避免把子表外键
                                                  一起改成指向 product_old）
@@ -53,15 +57,43 @@ def _ensure_source_columns(db: sqlite3.Connection) -> None:
     db.commit()
 
 
+def _ensure_variant_columns(db: sqlite3.Connection) -> None:
+    """v0.4：给已有库补 variant.salt_code / variant.strength_basis。
+
+    SQLite 的 ALTER TABLE ADD COLUMN 是幂等的安全操作（先查 PRAGMA table_info）；
+    NOT NULL 列必须带非 NULL 默认值，这里正好用 '' / 'unknown'，存量行语义正确：
+    盐未规范化、强度基准未知。
+    """
+    have = {r[1] for r in db.execute("PRAGMA table_info(variant)")}
+    if not have:                       # 空库还没建 variant（正常不会发生）
+        return
+    for name, ddl in (
+        ("salt_code", "TEXT NOT NULL DEFAULT ''"),
+        ("strength_basis", "TEXT NOT NULL DEFAULT 'unknown' "
+                           "CHECK (strength_basis IN "
+                           "('base', 'salt', 'salt_equivalent', 'unknown'))"),
+    ):
+        if name not in have:
+            db.execute(f"ALTER TABLE variant ADD COLUMN {name} {ddl}")
+            print(f"迁移 variant 表：新增列 {name}")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_variant_salt_code ON variant (salt_code)")
+    db.execute("CREATE INDEX IF NOT EXISTS idx_variant_basis ON variant (strength_basis)")
+    db.commit()
+
+
 def build(db_path: Path) -> sqlite3.Connection:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(db_path, timeout=60)
     schema_text = SCHEMA.read_text(encoding="utf-8")
     target = markets(schema_text)
 
+    # v0.4：老库必须先补 variant 新列，否则 schema.sql 里建在 salt_code 上的索引
+    # 会直接报 "no such column"（CREATE TABLE IF NOT EXISTS 不会改已存在的表）。
+    _ensure_variant_columns(db)
     db.executescript(schema_text)
     db.commit()
     _ensure_source_columns(db)
+    _ensure_variant_columns(db)
 
     row = db.execute(
         "SELECT sql FROM sqlite_master WHERE type='table' AND name='product'").fetchone()

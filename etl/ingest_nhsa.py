@@ -1209,6 +1209,19 @@ CN2EN: dict[str, str] = {
     "平衡盐": "balanced salt solution",
 }
 
+# 2026-10 系统化映射：data/cn_inn_overrides.csv 里 status=mergeable 的中文名 → 英文 INN
+# 直接补进 CN2EN，保证「重跑中国入库」与「一次性合并 350 个 CN 专属成分」结果一致。
+# CSV 是带证据的人工/Wikidata 表；rename/删行只需改 CSV。
+_CN_OVERRIDES = ROOT / "data" / "cn_inn_overrides.csv"
+if _CN_OVERRIDES.exists():
+    import csv as _csv
+    with _CN_OVERRIDES.open(encoding="utf-8-sig", newline="") as _fh:
+        for _row in _csv.DictReader(_fh):
+            _zh = (_row.get("zh_name") or "").strip()
+            _en = (_row.get("en_inn") or "").strip()
+            if (_row.get("status") or "").strip() == "mergeable" and _zh and _en:
+                CN2EN.setdefault(_zh, _en)
+
 
 # ---------------------------------------------------------------------------
 # 中文名剥离：剂型 / 限定词 / 盐基

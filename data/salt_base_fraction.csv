@@ -1,0 +1,41 @@
+salt_code,salt_en,category,n_base,increment_formula,increment_mw,fraction_rule,example,example_fraction,source,status,note
+hydrochloride,hydrochloride,amine-acid,1,HCl,36.458,f = M(base) / (M(base) + 36.458),舍曲林（C17H17Cl2N 306.20）→ 盐酸舍曲林（C17H18Cl3N 342.70）,0.8935,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/sertraline%20hydrochloride/property/MolecularFormula,MolecularWeight/JSON（CID 63009，已核对）",verified,1 mol 碱 + 1 mol HCl
+hydrobromide,hydrobromide,amine-acid,1,HBr,80.912,f = M(base) / (M(base) + 80.912),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1 mol 碱 + 1 mol HBr
+sulfate,sulfate,amine-acid,2,H2SO4,98.072,f = 2·M(base) / (2·M(base) + 98.072),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,2 mol 碱 + 1 mol 硫酸（如硫酸吗啡）
+phosphate,phosphate,amine-acid,1,H3PO4,97.994,f = M(base) / (M(base) + 97.994),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,n=1（磷酸可待因 1:1；二氢磷酸盐需按实际价态核对）
+nitrate,nitrate,amine-acid,1,HNO3,63.012,f = M(base) / (M(base) + 63.012),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1 mol 碱 + 1 mol 硝酸
+acetate,acetate,amine-acid,1,C2H4O2,60.052,f = M(base) / (M(base) + 60.052),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1 mol 碱 + 1 mol 醋酸
+lactate,lactate,amine-acid,1,C3H6O3,90.078,f = M(base) / (M(base) + 90.078),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1 mol 碱 + 1 mol 乳酸
+citrate,citrate,amine-acid,1,C6H8O7,192.123,f = M(base) / (M(base) + 192.123),西地那非（C22H30N6O4S 474.60）→ 枸橼酸西地那非（C28H38N6O11S 666.70）,0.7119,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/sildenafil%20citrate/property/MolecularFormula,MolecularWeight/JSON（CID 135413523，已核对）",verified,1:1（西地那非枸橼酸）；2:1 需按实际核对
+maleate,maleate,amine-acid,2,C4H4O4,116.072,f = 2·M(base) / (2·M(base) + 116.072),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,2 mol 碱 + 1 mol 马来酸
+fumarate,fumarate,amine-acid,2,C4H4O4,116.072,f = 2·M(base) / (2·M(base) + 116.072),喹硫平（C21H25N3O2S 383.50）→ 富马酸喹硫平（C46H54N6O8S2 883.10）,0.8685,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/quetiapine%20fumarate/property/MolecularFormula,MolecularWeight/JSON（CID 5281025，已核对）",verified,2 mol 碱 + 1 mol 富马酸（与马来酸同分子量）
+succinate,succinate,amine-acid,2,C4H6O4,118.088,f = 2·M(base) / (2·M(base) + 118.088),美托洛尔（C15H25NO3 267.36）→ 琥珀酸美托洛尔（C34H56N2O10 652.80）,0.8191,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/metoprolol%20succinate/property/MolecularFormula,MolecularWeight/JSON（CID 62937，已核对）",verified,2 mol 碱 + 1 mol 琥珀酸
+tartrate,tartrate,amine-acid,2,C4H6O6,150.086,f = 2·M(base) / (2·M(base) + 150.086),美托洛尔（C15H25NO3 267.36）→ 酒石酸美托洛尔（C34H56N2O12 684.80）,0.7808,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/metoprolol%20tartrate/property/MolecularFormula,MolecularWeight/JSON（CID 441308，已核对）",verified,2 mol 碱 + 1 mol 酒石酸（酒石酸美托洛尔）
+besylate,besylate,amine-sulfonic,1,C6H6O3S,158.171,f = M(base) / (M(base) + 158.171),氨氯地平（C20H25ClN2O5 408.90）→ 苯磺酸氨氯地平（C26H31ClN2O8S 567.10）,0.721,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/amlodipine%20besylate/property/MolecularFormula,MolecularWeight/JSON（CID 60496，已核对）",verified,苯磺酸（besilate/besylate 同一物）
+mesylate,mesylate,amine-sulfonic,1,CH4O3S,96.1,f = M(base) / (M(base) + 96.100),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,甲磺酸（mesilate）
+tosylate,tosylate,amine-sulfonic,1,C7H8O3S,172.198,f = M(base) / (M(base) + 172.198),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,对甲苯磺酸
+gluconate,gluconate,amine-acid,1,C6H12O7,196.155,f = M(base) / (M(base) + 196.155),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1 mol 碱 + 1 mol 葡萄糖酸
+benzoate,benzoate,amine-acid,1,C7H6O2,122.123,f = M(base) / (M(base) + 122.123),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1 mol 碱 + 1 mol 苯甲酸
+aspartate,aspartate,amine-acid,1,C4H7NO4,133.103,f = M(base) / (M(base) + 133.103),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,1:1；苯丙胺天冬氨酸盐为 1:1
+pamoate,pamoate,amine-acid,2,C23H16O6,388.375,f = 2·M(base) / (2·M(base) + 388.375),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,双羟萘酸（pamoate/embonate），2:1
+tromethamine,tromethamine,amine-base,1,C4H11NO3,121.136,f = M(base) / (M(base) + 121.136),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,氨丁三醇（TRIS）成盐，1:1
+meglumine,meglumine,amine-base,1,C7H17NO5,195.215,f = M(base) / (M(base) + 195.215),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,葡甲胺成盐，1:1；需核对化学计量
+sodium,sodium,metal-sodium,1,Na-H,21.982,f = M(base) / (M(base) + 21.982),左甲状腺素（C15H11I4NO4 776.87）→ 左甲状腺素钠（C15H10I4NNaO4 798.85）,0.9725,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/levothyroxine%20sodium/property/MolecularFormula,MolecularWeight/JSON（CID 23666112，已核对）",verified,酸 + NaOH → 钠盐 + H2O
+potassium,potassium,metal-potassium,1,K-H,38.09,f = M(base) / (M(base) + 38.090),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,酸 + KOH → 钾盐 + H2O
+calcium,calcium,metal-calcium,2,Ca-2H,38.062,f = 2·M(base) / (2·M(base) + 38.062),阿托伐他汀（C33H35FN2O5 558.60）→ 阿托伐他汀钙（C66H68CaF2N4O10 1155.30）,0.967,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/atorvastatin%20calcium/property/MolecularFormula,MolecularWeight/JSON（CID 60822，已核对）",verified,2 酸 + Ca(OH)2 → 钙盐；阿托伐他汀钙、罗舒伐他汀钙
+magnesium,magnesium,metal-magnesium,2,Mg-2H,22.289,f = 2·M(base) / (2·M(base) + 22.289),奥美拉唑（C17H19N3O3S 345.40）→ 奥美拉唑镁（C34H36MgN6O6S2 713.10）,0.9687,"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/omeprazole%20magnesium/property/MolecularFormula,MolecularWeight/JSON（CID 130564，已核对）",verified,2 酸 + Mg(OH)2 → 镁盐；奥美拉唑镁、埃索美拉唑镁
+chloride,chloride,quaternary,1,Cl,35.45,f = M(base) / (M(base) + 35.450),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,季铵阳离子 + Cl（苯扎氯铵类）；与·盐酸盐·不同
+bromide,bromide,quaternary,1,Br,79.904,f = M(base) / (M(base) + 79.904),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,季铵阳离子 + Br
+iodide,iodide,quaternary,1,HI,127.912,f = M(base) / (M(base) + 127.912),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,胺·氢碘酸盐（碘化）；季铵碘盐为 +I
+anhydrous,anhydrous,form,1,0,0.0,f = M(base) / (M(base) + 0.000),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,无水物：折算系数 = 1（仅形态说明）
+xinafoate,xinafoate,amine-acid,1,C11H8O3,188.182,f = M(base) / (M(base) + 188.182),,,按 IUPAC 原子量自算 Δ；示例待 PubChem 核对,computed,昔萘酸（1-羟基-2-萘甲酸），沙美特罗昔萘酸盐 1:1
+hyclate,hyclate,complex,1,HCl + 0.5 C2H5OH + 0.5 H2O,,n/a（不可自动算）,,,复盐+溶剂化物，分子量必须按具体原料药核对,manual_review,多西环素 hyclate = 盐酸盐·½乙醇·½水，必须按说明书核对
+valerate,valerate,ester,1,C5H10O2 - H2O,84.118,f = M(base) / (M(base) + 84.118),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,戊酸酯，如倍他米松戊酸酯
+propionate,propionate,ester,1,C3H6O2 - H2O,56.064,f = M(base) / (M(base) + 56.064),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,丙酸酯，如丙酸氟替卡松
+dipropionate,dipropionate,ester,1,2×(C3H6O2 - H2O),112.128,f = M(base) / (M(base) + 112.128),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,二丙酸酯，如二丙酸倍他米松
+decanoate,decanoate,ester,1,C10H20O2 - H2O,154.253,f = M(base) / (M(base) + 154.253),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,癸酸酯，如癸酸氟哌啶醇
+enanthate,enanthate,ester,1,C7H14O2 - H2O,112.172,f = M(base) / (M(base) + 112.172),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,庚酸酯，如庚酸睾酮
+cypionate,cypionate,ester,1,C8H14O2 - H2O,124.183,f = M(base) / (M(base) + 124.183),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,环戊丙酸酯，如环戊丙酸睾酮
+palmitate,palmitate,ester,1,C16H32O2 - H2O,238.415,f = M(base) / (M(base) + 238.415),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,棕榈酸酯，如棕榈酸帕利哌酮
+furoate,furoate,ester,1,C5H4O3 - H2O,94.069,f = M(base) / (M(base) + 94.069),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,糠酸酯，如糠酸莫米松
+stearate,stearate,ester,1,C18H36O2 - H2O,266.469,f = M(base) / (M(base) + 266.469),,,按 IUPAC 原子量自算 Δ（酯酸分子量 − H2O）；未逐条核对,computed,硬脂酸酯
