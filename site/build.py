@@ -1722,10 +1722,11 @@ Motrin…) were authorised before the DPD's electronic era: only some of them ha
 so a Canadian OTC pack can be missing even though it is on every shelf.
 <br>加拿大 DPD 没有包装数量/价格；很多 OTC 消费装（Tylenol、Advil、Motrin…）是电子化之前
 就批的，DPD 里只有部分品牌有 DIN 行，所以货架上有的 OTC 可能查不到。</li>
-<li>ATC codes cover 47.7% of substances (6,345 / 13,288). Part of the coverage comes from
+<li>ATC codes cover {stats['atc_pct']}% of substances ({stats['atc']:,} / {stats['substances']:,}).
+Part of the coverage comes from
 Wikidata <code>P267</code> (CC0, attributed here); the rest is missing because dm+d carries no ATC
 field and WHOCC's ATC/DDD index needs a licence.
-<br>ATC 覆盖 47.7%（6,345 / 13,288），其中一部分由 Wikidata P267（CC0）补齐并在此署名；
+<br>ATC 覆盖 {stats['atc_pct']}%（{stats['atc']:,} / {stats['substances']:,}），其中一部分由 Wikidata P267（CC0）补齐并在此署名；
 其余缺失：dm+d 没有 ATC 字段，WHOCC 的 ATC/DDD 需要授权。</li>
 </ul>
 <p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
@@ -1912,6 +1913,8 @@ def main() -> None:
     stats = {
         "products": db.execute("SELECT COUNT(*) FROM product").fetchone()[0],
         "substances": db.execute("SELECT COUNT(*) FROM substance").fetchone()[0],
+        "atc": db.execute(
+            "SELECT COUNT(*) FROM substance WHERE atc IS NOT NULL AND atc <> ''").fetchone()[0],
         "keys": db.execute("SELECT COUNT(*) FROM name_key").fetchone()[0],
         "nickname": db.execute("SELECT COUNT(*) FROM nickname").fetchone()[0],
         "aliases": db.execute("SELECT COUNT(*) FROM alias_all").fetchone()[0],
@@ -1919,6 +1922,7 @@ def main() -> None:
         "severe": db.execute(
             "SELECT COUNT(*) FROM collision WHERE level='severe'").fetchone()[0],
     }
+    stats["atc_pct"] = round(stats["atc"] / stats["substances"] * 100, 1) if stats["substances"] else 0
 
     print("building index ...", flush=True)
     entries = load_index(db)

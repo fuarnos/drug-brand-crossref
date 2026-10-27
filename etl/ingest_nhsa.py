@@ -489,6 +489,14 @@ CN2EN: dict[str, str] = {
     "达格列净": "dapagliflozin",
     "恩格列净": "empagliflozin",
     "卡格列净": "canagliflozin",
+    # GLP-1 / GIP 受体激动剂（2026-10 补：CN 库里这些名字原先落成 CN 专属成分，
+    # 导致「替尔泊肽」搜不到美国的 Mounjaro/Zepbound；这里按 INN 归并）
+    "替尔泊肽": "tirzepatide",
+    "司美格鲁肽": "semaglutide",
+    "利拉鲁肽": "liraglutide",
+    "度拉糖肽": "dulaglutide",
+    "艾塞那肽": "exenatide",
+    "利司那肽": "lixisenatide",
     "胰岛素": "insulin",
     "人胰岛素": "insulin human",
     "门冬胰岛素": "insulin aspart",
