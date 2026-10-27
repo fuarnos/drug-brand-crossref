@@ -74,6 +74,17 @@
 Fine-grained token 需要这个仓库的 **Contents: Read and write**；脚本用 Pages API 等构建
 结果，还需要 **Pages: Read**（仓库元数据默认可读）。`.env` 已在 `.gitignore` 里。
 
+## 访问统计
+
+站点统计用 GoatCounter（cookieless，只后台看）。仓库根 `.env` 增加一行（不入库）：
+
+```
+GOATCOUNTER_CODE=drug-brand-crossref
+```
+
+`site/build.py` 构建时读取；没有该变量就不注入统计脚本。后台：
+<https://drug-brand-crossref.goatcounter.com>；细节见 [docs/访问统计.md](docs/访问统计.md)。
+
 ## Pages 设置
 
 仓库 Settings → Pages：

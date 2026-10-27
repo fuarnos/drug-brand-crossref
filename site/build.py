@@ -46,6 +46,33 @@ BUILD_V = str(int(time.time()))
 CHANGELOG = ROOT / "CHANGELOG.md"
 
 
+def _env_value(key: str, default: str = "") -> str:
+    """从环境变量或仓库根 .env 读配置（.env 不入库，供本机构建用）。"""
+    val = os.environ.get(key, "").strip()
+    if val:
+        return val
+    try:
+        for line in (ROOT / ".env").read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            if k.strip() == key:
+                return v.strip().strip('"').strip("'")
+    except OSError:
+        pass
+    return default
+
+
+# 访问统计：GoatCounter（cookieless，后台看 PV/UV/来源/国家/浏览器/屏幕尺寸）。
+# code 放 .env 的 GOATCOUNTER_CODE=...；不配置就不注入脚本，站点完全不受影响。
+GOATCOUNTER_CODE = re.sub(r"[^A-Za-z0-9_-]", "", _env_value("GOATCOUNTER_CODE"))
+GC_TAG = (
+    f'\n<script data-goatcounter="https://{GOATCOUNTER_CODE}.goatcounter.com/count"'
+    f' async src="https://gc.zgo.at/count.js"></script>'
+) if GOATCOUNTER_CODE else ""
+
+
 def _read_latest_release() -> tuple[str, str]:
     """页脚显示的版本：CHANGELOG 最上面的 ## vX — date。"""
     try:
@@ -473,6 +500,22 @@ const meta = document.getElementById('meta');
 // 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
+// 访问统计（GoatCounter，cookieless）。未配置 code 时页面不会注入脚本，这里静默无操作。
+// 事件命名：search-<归一化词> / click-result / click-report / click-whatsnew / country-<US|…>。
+function gcEvent(name){
+  try{
+    if(name && window.goatcounter && typeof window.goatcounter.count === 'function'){
+      window.goatcounter.count({path: String(name).slice(0,120), event: true});
+    }
+  }catch(e){}
+}
+let SEARCH_EV = null;
+function scheduleSearchEvent(q){
+  clearTimeout(SEARCH_EV);
+  const term = norm(splitDose(q)[0]);
+  if(!term || term.length < 2) return;
+  SEARCH_EV = setTimeout(()=>gcEvent('search-' + term.slice(0,40)), 900);
+}
 let IDX = [], NICKS = [], CONF = [];
 // P0 索引懒加载：页面加载时只下 app.js/css/i18n（约 16 KB），
 // 全量索引（34.8 MB，gzip 约 6 MB）等用户真的要用搜索时再下。
@@ -578,6 +621,7 @@ function render(){
     const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
   const [nameQ, st] = splitDose(q);
   const nq = norm(nameQ);
+  scheduleSearchEvent(q);
   const c = ctry.value;
   const nicks = aliasHits(nq);
   const confs = confHits(nq);
@@ -888,8 +932,17 @@ out.addEventListener('click', ev => {
   out.innerHTML = '';
   loadIndex().then(ok => { if(ok) render(); });
 });
+// 点击事件：结果里的品牌/成分链接、报告入口、更新日志（只记事件，不记用户）。
+document.addEventListener('click', ev => {
+  const a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
+  if(!a) return;
+  const href = a.getAttribute('href') || '';
+  if(href.indexOf('/issues/new') >= 0){ gcEvent('click-report'); return; }
+  if(href.indexOf('/name/') >= 0 || href.indexOf('/drug/') >= 0){ gcEvent('click-result'); return; }
+  if(href.indexOf('whats-new') >= 0){ gcEvent('click-whatsnew'); return; }
+});
 box.addEventListener('input', startSearch);
-ctry.addEventListener('change', startSearch);
+ctry.addEventListener('change', ()=>{ gcEvent('country-' + (ctry.value || 'ALL')); startSearch(); });
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
   box.value=b.dataset.q; startSearch(); box.focus();
 }));
@@ -949,7 +1002,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · Medicine Brand Cross-Reference</title>{alt}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
-<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script></head>
+<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>{GC_TAG}</head>
 <body>
 <header><div class="wrap">
   <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
@@ -1676,6 +1729,24 @@ def build_about(stats, coverage, source_cover=()) -> None:
     cov = "".join(
         f"<tr><td>{esc(r['country'])}</td><td>{r['n_products']:,}</td>"
         f"<td>{_as_of_cell(by_country.get(r['country'], []))}</td></tr>" for r in coverage)
+    analytics_html = ""
+    if GOATCOUNTER_CODE:
+        analytics_html = """<h2>Analytics 访问统计</h2>
+<p class="sub">This site uses <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
+for anonymous, cookie-free analytics. No personal data is stored and it is not used for advertising.
+We only see page views, referring sites, country/region, browser and screen size, plus on-site search
+terms and result clicks, to improve search quality. See the
+<a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter privacy policy</a>.
+<br>本站使用 <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
+做匿名访问统计：不使用 cookie、不记录个人数据、不用于广告；只统计页面浏览、来源网站、国家/地区、
+浏览器与屏幕尺寸，以及站内搜索词和结果点击，用于改进检索质量。详见
+<a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter 隐私政策</a>。
+<br>Este sitio usa <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
+para estadísticas anónimas sin cookies: no guarda datos personales y no se usa para publicidad.
+Solo se registran visitas, sitios de referencia, país/región, navegador y tamaño de pantalla,
+además de las búsquedas y clics en resultados, para mejorar la búsqueda. Ver la
+<a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">política de privacidad de GoatCounter</a>.</p>
+"""
     body = f"""<h1>About 关于本站</h1>
 <p class="sub"><b>One job:</b> turn a brand name into the actual substance, and say how sure
 we are. 这里只有一件事：把商品名定位到成分，并说明它到底有多可信。</p>
@@ -1861,6 +1932,7 @@ field and WHOCC's ATC/DDD index needs a licence.
 <br>ATC 覆盖 {stats['atc_pct']}%（{stats['atc']:,} / {stats['substances']:,}），其中一部分由 Wikidata P267（CC0）补齐并在此署名；
 其余缺失：dm+d 没有 ATC 字段，WHOCC 的 ATC/DDD 需要授权。</li>
 </ul>
+{analytics_html}
 <p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
 {stats['keys']:,} name keys · {stats['aliases']:,} aliases
 ({stats['nickname']:,} hand-curated nicknames) · {stats['confusable']} FDA confused pairs ·
