@@ -32,7 +32,7 @@
 - `etl` 25 项 OK；`lib` 29 项 OK；`mobile` OK；`db/check_data.py` 通过；integrity/FK 检查 ok
 - 发布后 smoke 33/33：首页/页脚 v0.5.0、whats-new、core.json（gzip 3.79 MB）、About、4 关键页、sitemap、404、GoatCounter
 - 线上额外验证：/warn 40 条、About 许可段 + 47.5%/67.0%、pinyin 1.23 MB、成分页警示链
-- 三语回归（354 查询）：见 .tmp/trilingual/results_v050.json（运行时较长，收尾时以最近结果为准）
+- 三语回归（354 查询）：**72 例通过 67；Top-5 97.5%、Top-1 95.8%、跨国可见 72/72**（与 v0.4.1 基线持平，无回归；明细 `.tmp/trilingual/results_v050.json`，用时 824.6s）
 
 ## 未完成 / 下一步
 
