@@ -117,6 +117,8 @@ class SearchIndex:
             (r["key_id"], r["norm"], r["compact"])
             for r in self.db.execute("SELECT key_id, norm, compact FROM name_key")
         ]
+        # exact 命中必须真实存在于 name_key，不能把查询本身当成 key（见 _resolve_keys）。
+        self._norm_set = {norm for _key_id, norm, _compact in self._norms}
         # 别名表可能还不存在（老库没跑过 init_db），这时静默降级为「没有别名」。
         # alias_all = nickname（人工中文旧名/俗称）+ drug_term（美国街头/类别）。
         try:
@@ -144,6 +146,16 @@ class SearchIndex:
         self.db.close()
 
     # --- 候选名解析 -----------------------------------------------------
+    @staticmethod
+    def _min_substring(n) -> int:
+        """子串匹配要求的最短查询长度。
+
+        中文沿用站点客户端 v0.2.1 `tier()` 的口径：`cjk ? 2 : 4`——中文药名
+        普遍很短（「地平」「利嗪」「头孢」两三个字就是有效线索）。拉丁文仍是
+        4 字，避免短英文串把噪声大规模带出。
+        """
+        return 2 if n.script == "han" else 4
+
     def _resolve_keys(self, n) -> list[tuple[str, str]]:
         """返回 [(key_id, tier)]，按 tier 优先级排序、去重。"""
         if n.is_empty:
@@ -154,7 +166,13 @@ class SearchIndex:
             if key_id not in hits:
                 hits[key_id] = tier
 
-        add(n.norm, "exact")
+        # P0 修复：exact 只认库里真实存在的 key。
+        # 旧实现无条件 `add(n.norm, "exact")`：3 字中文通用名（库里只有
+        # 「盐酸舍曲林片」这类带盐型/剂型前缀的长 key）会拿到一个不存在的
+        # key → 0 结果，却提示「名字对上了，但没有在售产品」；同时 2 字中文
+        # 因 contains 门槛 4 字被挡在门外。
+        if n.norm in self._norm_set:
+            add(n.norm, "exact")
         for key_id, norm, compact in self._norms:
             if key_id in hits:
                 continue
@@ -162,9 +180,11 @@ class SearchIndex:
                 add(key_id, "compact")
             elif norm.startswith(n.norm):
                 add(key_id, "prefix")
-            elif len(n.norm) >= 4 and n.norm in norm:
+            elif len(n.norm) >= self._min_substring(n) and n.norm in norm:
                 add(key_id, "contains")
 
+        # 模糊匹配保持与客户端一致：仅 4 字以上查询才做（中文也是 4 字），
+        # 短中文名走上面的 contains，不引入更激进的模糊扩展。
         if len(hits) < 5 and len(n.norm) >= 4:
             scored = []
             for key_id, norm, _compact in self._norms:
