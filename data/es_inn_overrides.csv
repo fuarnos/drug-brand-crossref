@@ -1,7 +1,7 @@
 ﻿es_name,en_inn,es_substance_id,en_substance_id,evidence,confidence,status,reason
 Cerebrolysin,,mx-es-cerebrolysin,,,,no_english,库内无对应英文成分候选；products=112; countries=CN+MX
 Levosalbutamol,,mx-es-levosalbutamol,,,,no_english,库内无对应英文成分候选；products=81; countries=CN+MX
-Difenidol,,mx-es-difenidol,,,,no_english,库内无对应英文成分候选；products=54; countries=CN+MX
+Difenidol,difenidol,mx-es-difenidol,,WHO INN list 43(high)→difenidol,high,no_english,WHO INN 官方列表 list 43：西语名 Difenidol ↔ INN difenidol；source: https://iris.who.int/handle/10665/57628；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 Nifuratel,,mx-es-nifuratel,,,,no_english,库内无对应英文成分候选；products=54; countries=CN+MX
 Dimeticona,,dimeticona,,fuzzy(low)→dimeticone; fuzzy(low)→dimethicone,low,uncertain,证据指向多个目标: dimethicone; dimeticone；products=51; countries=ES+MX；ES id 无 mx-es- 前缀
 Cloranfenicol,Chloramphenicol,cloranfenicol,chloramphenicol,wikidata_es_en(medium)→chloramphenicol,medium,mergeable,"Wikidata 同一实体: es=cloranfenicol→en=chloramphenicol; sim=0.79；安全预检: unprefixed_es_id,corroboration=15；products=37; countries=ES+MX；ES id 无 mx-es- 前缀"
@@ -242,7 +242,7 @@ Eritropoyetina Humana,,mx-es-eritropoyetina-humana,,,,no_english,库内无对应
 Espirinolactona,,mx-es-espirinolactona,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Factor Antihemofilico Humano,,mx-es-factor-antihemofilico-humano,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Factor Ix Liofilizado,,mx-es-factor-ix-liofilizado,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
-Fimasartán,,mx-es-fimasartan,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
+Fimasartán,fimasartan,mx-es-fimasartan,,WHO INN list 94(high)→fimasartan,high,no_english,WHO INN 官方列表 list 94：西语名 Fimasartán ↔ INN fimasartan；source: https://iris.who.int/handle/10665/73601；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 Folinato Cálcico,,mx-es-folinato-calcico-2,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Importadora Y Manufacturera Bruluart,,mx-es-importadora-y-manufacturera-bruluart,,,,combination,复方名（含 y/+//con），本轮不合并；products=3; countries=MX
 Interferon Alfa 2b Recombinate,,mx-es-interferon-alfa-2b-recombinate,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
@@ -335,7 +335,7 @@ Anfebutamona,,mx-es-anfebutamona,,,,no_english,库内无对应英文成分候选
 Animal,,mx-es-animal,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Antiparotiditis,,mx-es-antiparotiditis,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Antirubeola,,mx-es-antirubeola,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Asunaprevir,,mx-es-asunaprevir,,,,no_english,库内无对应英文成分候选；products=2; countries=CA+MX
+Asunaprevir,asunaprevir,mx-es-asunaprevir,,WHO INN list 105(high)→asunaprevir,high,no_english,WHO INN 官方列表 list 105：西语名 Asunaprevir ↔ INN asunaprevir；source: https://iris.who.int/handle/10665/74656；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 B,,mx-es-b,,,,no_english,名称过短/为空；products=2; countries=MX
 Bicarbonato Sódico,Sodium Bicarbonate,mx-es-bicarbonato-sodico,sodium-bicarbonate,cima_alias(high)→sodium-bicarbonate,high,mergeable,ingest_cima ALIASES: bicarbonato sodico→sodium-bicarbonate；products=2; countries=MX
 Bioflavonoides,Bioflavonoids,mx-es-bioflavonoides,bioflavonoids,fuzzy(low)→bioflavonoids,low,uncertain,低置信证据: 模糊 bioflavonoides ≈ Bioflavonoids (0.96)；products=2; countries=MX
@@ -442,7 +442,7 @@ Proteína C Humana,Protein C Human,proteina-c-humana,protein-c-human,fuzzy(low)�
 Salvia Officinalis,Salvia Officinalis Whole,salvia-officinalis,salvia-officinalis-whole,fuzzy(low)→salvia-officinalis-whole,low,uncertain,低置信证据: 模糊 salvia officinalis ≈ Salvia Officinalis Whole (0.86)；products=2; countries=ES；ES id 无 mx-es- 前缀
 Sugemalimab,,sugemalimab,,,,no_english,库内无对应英文成分候选；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Suplemento Parenteral De Oligoelementos,,suplemento-parenteral-de-oligoelementos,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
-Talimogén Laherparepvec,Talimogene Laherparepvec,talimogen-laherparepvec,talimogene-laherparepvec,fuzzy(low)→talimogene-laherparepvec,low,uncertain,低置信证据: 模糊 talimogen laherparepvec ≈ Talimogene Laherparepvec (0.98)；products=2; countries=ES；ES id 无 mx-es- 前缀
+Talimogén Laherparepvec,talimogene laherparepvec,talimogen-laherparepvec,talimogene-laherparepvec,WHO INN list 104(high)→talimogene-laherparepvec,high,mergeable,WHO INN 官方列表 list 104：西语名 Talimogén Laherparepvec ↔ INN talimogene laherparepvec；source: https://iris.who.int/handle/10665/74579；安全预检通过（安全校验由 merge 脚本 dry-run 复核）
 Tanato De Gelatina,,tanato-de-gelatina,,,,no_english,库内无对应英文成分候选；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Trifaroteno,Trifarotene,trifaroteno,trifarotene,wikidata_es_en(medium)→trifarotene; atc_unique(medium)→trifarotene,medium,mergeable,Wikidata 同一实体: es=trifaroteno→en=trifarotene; sim=0.91；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Vacuna Anti Covid 19 (Hipra) Meracovateína,,vacuna-anti-covid-19-hipra-meracovateina,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
@@ -716,7 +716,7 @@ Factor Viii De La Coagulación Sanguínea,,mx-es-factor-viii-de-la-coagulacion-s
 Felipresina,,mx-es-felipresina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Fenile Frina,,mx-es-fenile-frina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Fenilefedrina,,mx-es-fenilefedrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Fenofibrato De Colina,,mx-es-fenofibrato-de-colina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
+Fenofibrato De Colina,choline fenofibrate,mx-es-fenofibrato-de-colina,choline-fenofibrate,WHO INN list 59(high)→choline-fenofibrate,high,mergeable,WHO INN 官方列表 list 59：西语名 Fenofibrato De Colina ↔ INN choline fenofibrate；source: https://iris.who.int/handle/10665/74120；安全预检通过（安全校验由 merge 脚本 dry-run 复核）
 Fenoxietanol,,mx-es-fenoxietanol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Fermentum Y Lactobacillus,,mx-es-fermentum-y-lactobacillus,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Fexuprazán,,mx-es-fexuprazan,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -798,7 +798,7 @@ Lactobacillus Delbrueckii,,mx-es-lactobacillus-delbrueckii,,,,no_english,库内�
 Lactobacillus Reuteri Protectis,,mx-es-lactobacillus-reuteri-protectis,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lactobacilus Lb (lactobacillus,,mx-es-lactobacilus-lb-lactobacillus,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lactobasillos Casei,Lactobacillus Casei,mx-es-lactobasillos-casei,lactobacillus-casei,fuzzy(low)→lactobacillus-casei,low,uncertain,低置信证据: 模糊 lactobasillos casei ≈ Lactobacillus Casei (0.89)；products=1; countries=MX
-Lesinurad,,mx-es-lesinurad,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
+Lesinurad,lesinurad,mx-es-lesinurad,,WHO INN list 105(high)→lesinurad,high,no_english,WHO INN 官方列表 list 105：西语名 Lesinurad ↔ INN lesinurad；source: https://iris.who.int/handle/10665/74656；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 Leuproerlina,Leuprorelin,mx-es-leuproerlina,leuprorelin,fuzzy(low)→leuprorelin,low,uncertain,低置信证据: 模糊 leuproerlina ≈ Leuprorelin (0.87)；products=1; countries=MX
 Levoglutamida,,mx-es-levoglutamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Levoglutamina,,mx-es-levoglutamina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -819,7 +819,7 @@ Loratadina Micronizada,,mx-es-loratadina-micronizada,,,,no_english,库内无对�
 Lorcaserina,,mx-es-lorcaserina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Manganeso,Manganese,mx-es-manganeso,manganese,fuzzy(low)→manganese,low,uncertain,低置信证据: 模糊 manganeso ≈ Manganese (0.89)；products=1; countries=MX
 Matricaria,,mx-es-matricaria,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Mebutato De Ingenol,,mx-es-mebutato-de-ingenol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
+Mebutato De Ingenol,ingenol mebutate,mx-es-mebutato-de-ingenol,ingenol-mebutate,WHO INN list 62(high)→ingenol-mebutate,high,mergeable,WHO INN 官方列表 list 62：西语名 Mebutato De Ingenol ↔ INN ingenol mebutate；source: https://iris.who.int/handle/10665/74420；安全预检通过（安全校验由 merge 脚本 dry-run 复核）
 Melformina,Metformin,mx-es-melformina,metformin,fuzzy(low)→metformin,low,uncertain,低置信证据: 模糊 melformina ≈ Metformin (0.84)；products=1; countries=MX
 Meloxican,Meloxicam,mx-es-meloxican,meloxicam,fuzzy(low)→meloxicam,low,uncertain,低置信证据: 模糊 meloxican ≈ Meloxicam (0.89)；products=1; countries=MX
 Mesialto De Doxazosina,,mx-es-mesialto-de-doxazosina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -843,7 +843,7 @@ N (2)-l-alanil-l-glutamina,,mx-es-n-2-l-alanil-l-glutamina,,,,no_english,库内�
 Nadroparina Cálcica,Nadroparin,mx-es-nadroparina-calcica,nadroparin,exact_norm(high)→nadroparina; 人工改指→nadroparin,high,mergeable,同名归一: Nadroparina Cálcica == Nadroparina；products=1; countries=MX
 Nesiritida,Nesiritide,mx-es-nesiritida,nesiritide,wikidata_es_en(medium)→nesiritide; atc_unique(medium)→nesiritide,medium,mergeable,Wikidata 同一实体: es=nesiritida→en=nesiritide; sim=0.90；products=1; countries=MX
 Nilvadipina,,mx-es-nilvadipina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Nimotuzumab,,mx-es-nimotuzumab,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
+Nimotuzumab,nimotuzumab,mx-es-nimotuzumab,,WHO INN list 94(high)→nimotuzumab,high,no_english,WHO INN 官方列表 list 94：西语名 Nimotuzumab ↔ INN nimotuzumab；source: https://iris.who.int/handle/10665/73601；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 Nitrofurantontoína,Nitrofurantoin,mx-es-nitrofurantontoina,nitrofurantoin,fuzzy(low)→nitrofurantoin,low,uncertain,低置信证据: 模糊 nitrofurantontoina ≈ Nitrofurantoin (0.88)；products=1; countries=MX
 Noretisterona Estradiol,,mx-es-noretisterona-estradiol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Norfenefrina,,mx-es-norfenefrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -927,7 +927,7 @@ Rubeola Y Varicela,,mx-es-rubeola-y-varicela,,,,combination,复方名（含 y/+/
 S De R.l. De C.v.,,mx-es-s-de-r-l-de-c-v,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 S(-) Pantoprazol,Pantoprazole,mx-es-s-pantoprazol,pantoprazole,fuzzy(low)→pantoprazole,low,uncertain,低置信证据: 模糊 s(-) pantoprazol ≈ Pantoprazole (0.88)；products=1; countries=MX
 Salmerol,Salmeterol,mx-es-salmerol,salmeterol,fuzzy(low)→salmeterol,low,uncertain,低置信证据: 模糊 salmerol ≈ Salmeterol (0.89)；products=1; countries=MX
-Saroglitazar,,mx-es-saroglitazar,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
+Saroglitazar,saroglitazar,mx-es-saroglitazar,,WHO INN list 108(high)→saroglitazar,high,no_english,WHO INN 官方列表 list 108：西语名 Saroglitazar ↔ INN saroglitazar；source: https://iris.who.int/handle/10665/110390；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 Sellador De Fibrina (concentrado De Proteínas Humanas Coagulantes),,mx-es-sellador-de-fibrina-concentrado-de-proteinas-humanas-coagulantes,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Selladores De Fibrina,,mx-es-selladores-de-fibrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 (serogrupos A,,mx-es-serogrupos-a,,,,no_english,库内无对应英文成分候选；products=1; countries=MX

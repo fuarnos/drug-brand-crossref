@@ -1,0 +1,164 @@
+{
+ "schema": 1,
+ "date": "2026-10-27",
+ "generated_at": "2026-10-27T09:54:14-07:00",
+ "elapsed_s": 16.71,
+ "sources": {
+  "db": {
+   "path": "data\\drugs.db",
+   "bytes": 450396160,
+   "mtime": "2026-10-27T09:47:55"
+  },
+  "dist": {
+   "path": "site\\dist",
+   "files": 30259,
+   "newest_mtime": "2026-10-26T20:47:22"
+  }
+ },
+ "metrics": {
+  "totals": {
+   "products": 409485,
+   "components": 497513,
+   "substances": 12790,
+   "variants": 13742,
+   "name_keys": 135081,
+   "names": 568602,
+   "aliases": 422,
+   "nicknames": 57,
+   "drug_terms": 365,
+   "confusable_pairs": 22,
+   "artg_entries": 34594,
+   "dose_warnings_published": 0
+  },
+  "countries": {
+   "AU": {
+    "products": 11890,
+    "active_products": 7160,
+    "products_with_strength": 7022,
+    "strength_pct": 59.06,
+    "variants": 2779
+   },
+   "CA": {
+    "products": 43847,
+    "active_products": 14519,
+    "products_with_strength": 43776,
+    "strength_pct": 99.84,
+    "variants": 3536
+   },
+   "CN": {
+    "products": 146347,
+    "active_products": 146347,
+    "products_with_strength": 141117,
+    "strength_pct": 96.43,
+    "variants": 3091
+   },
+   "ES": {
+    "products": 25293,
+    "active_products": 15945,
+    "products_with_strength": 24797,
+    "strength_pct": 98.04,
+    "variants": 2105
+   },
+   "GB": {
+    "products": 61051,
+    "active_products": 61051,
+    "products_with_strength": 51307,
+    "strength_pct": 84.04,
+    "variants": 3769
+   },
+   "MX": {
+    "products": 10878,
+    "active_products": 1772,
+    "products_with_strength": 3707,
+    "strength_pct": 34.08,
+    "variants": 1997
+   },
+   "US": {
+    "products": 110179,
+    "active_products": 110179,
+    "products_with_strength": 96648,
+    "strength_pct": 87.72,
+    "variants": 4803
+   }
+  },
+  "atc": {
+   "substances": 12790,
+   "with_atc": 6081,
+   "coverage_pct": 47.54
+  },
+  "collisions": {
+   "info": 110609,
+   "warning": 810,
+   "severe": 15509,
+   "total": 126928
+  },
+  "alias_confidence": {
+   "community": 57,
+   "documented": 364,
+   "user": 1
+  },
+  "duplicates": {
+   "pairs": 27,
+   "ids": 51,
+   "atc4_groups": 11,
+   "definition": "同 ATC 前 5 位 + inn_en 归一化相同或 inn_zh 相同（同 etl/auto_merge_substances.py）"
+  },
+  "ingest": {
+   "running": 0,
+   "failed": 0
+  },
+  "pages": {
+   "total_files": 30259,
+   "html_total": 30248,
+   "drug_pages": 12380,
+   "name_pages": 17861,
+   "total_bytes": 158531699,
+   "sitemap_urls": 30247
+  },
+  "sizes": {
+   "index_html": {
+    "raw": 4155,
+    "gz": 1608
+   },
+   "app_js": {
+    "raw": 22834,
+    "gz": 9253
+   },
+   "i18n_js": {
+    "raw": 21400,
+    "gz": 8100
+   },
+   "style_css": {
+    "raw": 4513,
+    "gz": 1467
+   },
+   "aliases": {
+    "raw": 216114,
+    "gz": 17718
+   },
+   "confused": {
+    "raw": 3575,
+    "gz": 881
+   },
+   "first_screen_gz": 20428,
+   "first_search_gz": 3702607,
+   "core_gz": 3684008,
+   "index_gz": 5820610,
+   "core_raw": 15262378,
+   "index_raw": 34790223
+  }
+ },
+ "compare": {
+  "prev_file": null,
+  "prev_date": null,
+  "deltas": {}
+ },
+ "warnings": [
+  {
+   "metric": null,
+   "label": "无上一份指标",
+   "message": "未找到 2026-10-27 之前的指标文件；本次为基线快照"
+  }
+ ],
+ "ok": true
+}
