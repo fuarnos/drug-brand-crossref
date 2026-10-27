@@ -174,7 +174,7 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
 
     deploy_note = (f"GitHub Pages（gh-pages 分支）已上线："
                    f"fuarnos.github.io/drug-brand-crossref；{commas(files)} 个文件 / {size_mb:.1f} MB。")
-    p5_note = "已上线 GitHub Pages（v0.3.x）；404/robots/sitemap 已补，tag/Release 对齐"
+    p5_note = "已上线 GitHub Pages（v0.4.1）；404/robots/sitemap、懒加载索引、访问统计"
 
     return {
         "SNAP_TIME": f"{now:%Y-%m-%d %H:%M}",
