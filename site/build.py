@@ -200,6 +200,27 @@ I18N = {
                       "mean the drugs are interchangeable. FDA recommends tall-man lettering."),
         "conf.pair": "Pair", "conf.tml": "Tall-man spelling",
         "conf.search_hit": "This name is easily confused with",
+        "home.country_label": "See what this medicine is called in:",
+        "home.country_label_sel": "See what this medicine is called in {country}:",
+        "country.missing": "This market has no product listed under this name.",
+        "country.missing_note": ("The name matched an ingredient, not a product in this "
+                                 "country. Switch country or open the ingredient page."),
+        "country.open_card": "Ingredient page",
+        "country.change": "Change country",
+        "parse.label": "Parsed query",
+        "parse.name": "Name", "parse.dose": "Dose", "parse.form": "Form",
+        "parse.match": "Match",
+        "parse.match.exact": "exact", "parse.match.compact": "joined",
+        "parse.match.prefix": "prefix", "parse.match.contains": "substring",
+        "parse.match.fuzzy": "fuzzy", "parse.match.nickname": "alias",
+    "parse.match.pinyin": "pinyin",
+        "parse.match.country": "country view", "parse.match.none": "no match",
+        "ac.suggestions": "Suggestions",
+        "res.brands_noun": "brands",
+        "res.show_brands": "Show all brands",
+        "res.fold": "Show fewer",
+        "res.load_more": "Load more",
+        "res.loaded_all": "All results shown",
     },
     "es": {
         "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
@@ -310,6 +331,27 @@ I18N = {
                       "los medicamentos sean intercambiables. La FDA recomienda tall-man lettering."),
         "conf.pair": "Par", "conf.tml": "Grafía tall-man",
         "conf.search_hit": "Este nombre se confunde fácilmente con",
+        "home.country_label": "Mira cómo se llama este medicamento en:",
+        "home.country_label_sel": "Mira cómo se llama este medicamento en {country}:",
+        "country.missing": "Este mercado no tiene ningún producto registrado con este nombre.",
+        "country.missing_note": ("El nombre coincide con un principio activo, no con un producto "
+                                 "de este país. Cambia de país o abre la ficha del principio activo."),
+        "country.open_card": "Ficha del principio",
+        "country.change": "Cambiar país",
+        "parse.label": "Consulta interpretada",
+        "parse.name": "Nombre", "parse.dose": "Dosis", "parse.form": "Forma",
+        "parse.match": "Coincidencia",
+        "parse.match.exact": "exacta", "parse.match.compact": "unida",
+        "parse.match.prefix": "prefijo", "parse.match.contains": "subcadena",
+        "parse.match.fuzzy": "aproximada", "parse.match.nickname": "alias",
+    "parse.match.pinyin": "pinyin",
+        "parse.match.country": "vista por país", "parse.match.none": "sin coincidencias",
+        "ac.suggestions": "Sugerencias",
+        "res.brands_noun": "marcas",
+        "res.show_brands": "Mostrar todas las marcas",
+        "res.fold": "Mostrar menos",
+        "res.load_more": "Cargar más",
+        "res.loaded_all": "Todos los resultados mostrados",
     },
     "zh": {
         "nav.search": "检索", "nav.confused": "易混淆药名", "nav.about": "关于",
@@ -404,10 +446,779 @@ I18N = {
                       "FDA 建议这一对使用 tall-man 大小写。"),
         "conf.pair": "药对", "conf.tml": "建议 tall-man 写法",
         "conf.search_hit": "这个药名容易与以下名字混淆",
+        "home.country_label": "看这个药在哪个国家叫什么：",
+        "home.country_label_sel": "看这个药在{country}叫什么：",
+        "country.missing": "该市场没有以这个名字上架的产品。",
+        "country.missing_note": "这个名字命中的是成分卡，不是该国上架的产品。可以换一个国家，或直接看成分卡。",
+        "country.open_card": "看成分卡",
+        "country.change": "换国家",
+        "parse.label": "检索解析",
+        "parse.name": "名称", "parse.dose": "剂量", "parse.form": "剂型",
+        "parse.match": "匹配方式",
+        "parse.match.exact": "精确", "parse.match.compact": "连写",
+        "parse.match.prefix": "前缀", "parse.match.contains": "包含",
+        "parse.match.fuzzy": "模糊", "parse.match.nickname": "别名",
+    "parse.match.pinyin": "拼音",
+        "parse.match.country": "国家视图", "parse.match.none": "无匹配",
+        "ac.suggestions": "搜索建议",
+        "res.brands_noun": "个品牌",
+        "res.show_brands": "展开全部品牌",
+        "res.fold": "折叠",
+        "res.load_more": "加载更多",
+        "res.loaded_all": "已显示全部结果",
     },
 }
 
 LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/")]
+
+# ── i18n P1：About / What's new / Confused / 404 的三语正文 ────────────────
+# 用法：About 正文按块走 `data-i18n-html`（i18n.js 用 innerHTML 替换，块内可含链接/表格）；
+# 动态数字用 @@PLACEHOLDER@@（main() 里替换成当前库的统计值，不写死数字）。
+# 许可段落直接用 reports/license-audit.md §4 的三语并排版（同一段内 EN/中文/ES 并列，
+# 是「许可原文三语并列」，不是漏翻）。
+DOCS_LICENCE_URL = ("https://github.com/fuarnos/drug-brand-crossref/blob/main/"
+                    "docs/%E8%AE%B8%E5%8F%AF%E6%B8%85%E5%8D%95.md")
+
+ABOUT_I18N = {
+    "en": {
+        "about.title": "About",
+        "about.lead": (
+            '<p class="sub"><b>One job:</b> turn a brand name into the actual substance, and say '
+            'how sure we are. The site is public, ad-free and non-commercial. Every answer is a '
+            'candidate set, never a prescription.</p>'),
+        "about.rules": (
+            '<h2>Three rules</h2><ol>'
+            '<li><b>A brand name is not a primary key.</b> Every query returns a set of '
+            'candidates; identity is pinned by country × form × strength × active ingredient.</li>'
+            '<li><b>Collisions are derived, not annotated.</b> When one name hangs off different '
+            'ingredients, the site flags “same name, different drug” automatically.</li>'
+            '<li><b>No dosing advice.</b> Identification and “not interchangeable” warnings only — '
+            'no dose conversion, no substitution recommendations.</li></ol>'),
+        "about.nick": (
+            '<h2>Nicknames and old names</h2>'
+            '<p>“两只青蛙” is not a brand name and is never stored as one: it points to an '
+            'ingredient, metformin. Nicknames are a separate, hand-maintained table — searchable, '
+            'but deliberately kept out of the brand-name tables. When one matches, the page labels '
+            'it (<i>internet nickname / older name</i>) and then lists that ingredient’s brands; '
+            'it is never presented as a name printed on a pack. Every entry carries a source; '
+            '“user-provided” is shown as <i>unverified</i> and is not promoted to '
+            '<code>documented</code> until an independent source is attached. No source, no new '
+            'entry.</p>'
+            '<ul class="sub">'
+            '<li>@@NICKNAMES@@ nicknames are curated by hand in <code>data/seed_nicknames.py</code> '
+            'and rebuilt — not scraped.</li>'
+            '<li>Nicknames never enter collision detection and never get a “same name” page: a '
+            'nickname is not an identity, the ingredient is.</li></ul>'),
+        "about.terms": (
+            '<h2>Folk names and class terms</h2>'
+            '<p>A separate table (<code>drug_term</code>, @@DRUGTERMS@@ entries) holds folk names '
+            'and category terms for <b>legal medicines only</b>: water pill, blood thinner, '
+            '睡前药 (sleeping pill), the pill, morning-after pill, statin. Unlike '
+            '<code>nickname</code>, it may point to a class rather than one ingredient, so '
+            '<code>substance_id</code> is nullable; <code>alias_all</code> unions both tables for '
+            'search. <b>Drugs of abuse and recreational slang are explicitly out of scope</b> '
+            '(street / recreational drug slang); such entries were removed from the database and are not '
+            're-added.</p>'
+            '<ul class="sub">'
+            '<li><b>NIDA / DEA lists</b> are no longer used for recreational slang; only '
+            'prescription-drug category terms that are legal medicines are kept, each with a '
+            'source URL.</li>'
+            '<li><b>MedlinePlus (NLM)</b> contributes common folk/category terms (US Government '
+            'work); community sources (CN/GB/AU/ES) are labelled <i>community name</i> and stay '
+            'searchable. FDA tall-man pairs: @@CONFUSABLE@@ official pairs. '
+            '<a href="confused.html">See the list</a>.</li></ul>'),
+        "about.sources": (
+            '<h2>Sources and coverage</h2>'
+            '<div class="tablewrap"><table><tr><th>Market</th><th>Products</th>'
+            '<th>Data as of</th></tr>@@COV@@</table></div>'
+            '<p class="sub"><b>Data as of</b> = the date the source itself published / took effect '
+            '/ snapshotted, not our crawl date. <code>live</code> = a live directory with no '
+            'single source date; <b>—</b> = annual lists only.</p>'
+            '<p class="sub"><b>US</b>: openFDA NDC Directory (US Government public data). '
+            '<b>UK</b>: NHSBSA dm+d, Open Government Licence v3.0 — '
+            '<i>Contains public sector information licensed under the Open Government Licence '
+            'v3.0.</i> <b>Spain</b>: AEMPS CIMA — re-use allowed with express attribution and the '
+            'date of last update; not an open licence (see licences below). <b>Mexico</b>: '
+            'COFEPRIS registration lists (no stated open licence; factual fields with links) plus '
+            'strength back-fill from datos.gob.mx procurement/price datasets, CC BY 4.0. '
+            '<b>Australia</b>: PBS Schedule API (copyright notice retained) + TGA CMI directory '
+            '+ curated listed-OTC seeds — factual fields only, no full CMI/ARTG text. '
+            '<b>Canada</b>: Health Canada DPD — non-commercial re-use with source acknowledgement. '
+            '<b>China</b>: 国家医保局 医保药品分类与代码数据库 (2025-04-04 snapshot); no open '
+            'redistribution licence was found, so only factual fields with links are stored.</p>'),
+        "about.samename": (
+            '<h2>Why “same name, different drug” happens</h2>'
+            '<p class="sub">The same trademark is held by different companies in different '
+            'markets, and the formula can differ completely. Verified examples: US <b>Tylenol</b> '
+            'is single-ingredient acetaminophen 500 mg, while China <b>泰诺</b> is a four-ingredient '
+            'cold medicine and the single-ingredient product is <b>泰诺林</b>; US <b>Benadryl</b> '
+            'is diphenhydramine, UK <b>Benadryl</b> is acrivastine; US <b>Gaviscon</b> is an '
+            'aluminium/magnesium antacid, UK Gaviscon is an alginate raft.</p>'),
+        "about.gaps": (
+            '<h2>Known gaps</h2><ul class="sub">'
+            '<li>China has 146,344 chemical-drug registrations, but ~9% resolve only to a '
+            'China-only substance (no English INN yet), and China’s ATC is stored at level 4. '
+            '中成药 is not loaded.</li>'
+            '<li>Strength equivalence stops at level D1 (same salt form); salt–base conversion '
+            '(D2) and bioavailability judgement (D3) are not implemented.</li>'
+            '<li>Mexico has no strength column in the regulator’s lists; only 29% of products '
+            'could be back-filled from public catalogues.</li>'
+            '<li>Canada’s DPD has no pack size or price, and many OTC consumer packs were '
+            'authorised before the DPD’s electronic era, so a shelf product can be missing.</li>'
+            '<li><b>ATC coverage — two denominators:</b> @@ATC_ALL_PCT@@% of all substances '
+            '(@@ATC_ALL@@ / @@ATC_ALL_N@@) and @@ATC_DRUG_PCT@@% of drug entities (inn_drug, '
+            '@@ATC_DRUG@@ / @@ATC_DRUG_N@@). The gap is mostly non-drug entities (homeopathic, '
+            'herbal, food, material), not missing data. ATC data comes from Wikidata P267 (CC0) '
+            'and ChEMBL (CC BY-SA 4.0); WHOCC’s ATC/DDD index needs a licence and is not used.</li>'
+            '</ul>'),
+        "about.analytics": (
+            '<h2>Analytics</h2><p class="sub">This site uses '
+            '<a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> '
+            'for anonymous, cookie-free analytics. No personal data is stored and it is not used '
+            'for advertising. We only see page views, referring sites, country/region, browser and '
+            'screen size, plus on-site search terms and result clicks, to improve search quality. '
+            'See the <a href="https://www.goatcounter.com/privacy" target="_blank" '
+            'rel="noopener">GoatCounter privacy policy</a>.</p>'),
+        "about.stats": (
+            '<p class="sub">Stats: @@PRODUCTS@@ products · @@SUBSTANCES@@ substances · '
+            '@@KEYS@@ name keys · @@ALIASES@@ aliases (@@NICKNAMES@@ hand-curated nicknames, '
+            '@@DRUGTERMS@@ folk/class terms) · @@CONFUSABLE@@ FDA confused pairs · @@SEVERE@@ names '
+            'flagged “same name, different drug”.</p>'),
+    },
+    "es": {
+        "about.title": "Acerca de",
+        "about.lead": (
+            '<p class="sub"><b>Un solo trabajo:</b> convertir un nombre comercial en el principio '
+            'activo real y decir con qué seguridad lo sabemos. El sitio es público, sin anuncios y '
+            'sin ánimo de lucro. Toda respuesta es un conjunto de candidatos, nunca una receta.</p>'),
+        "about.rules": (
+            '<h2>Tres reglas</h2><ol>'
+            '<li><b>Un nombre comercial no es clave primaria.</b> Cada consulta devuelve un '
+            'conjunto de candidatos; la identidad se fija por país × forma × concentración × '
+            'principio activo.</li>'
+            '<li><b>Las colisiones se derivan, no se anotan.</b> Cuando un nombre corresponde a '
+            'principios activos distintos, el sitio marca automáticamente «mismo nombre, otro '
+            'medicamento».</li>'
+            '<li><b>Sin consejo de dosificación.</b> Solo identificación y avisos de «no '
+            'intercambiable»: sin conversión de dosis ni recomendaciones de sustitución.</li></ol>'),
+        "about.nick": (
+            '<h2>Apodos y nombres antiguos</h2>'
+            '<p>«两只青蛙» no es un nombre comercial y nunca se guarda como tal: apunta a un '
+            'principio activo, la metformina. Los apodos están en una tabla aparte mantenida a '
+            'mano: se pueden buscar, pero se mantienen fuera de las tablas de nombres comerciales. '
+            'Cuando uno coincide, la página lo etiqueta (<i>apodo de internet / nombre antiguo</i>) '
+            'y enumera las marcas de ese principio; nunca se presenta como un nombre impreso en el '
+            'envase. Cada entrada lleva fuente; «aportado por el usuario» se muestra como '
+            '<i>sin verificar</i> y no pasa a <code>documented</code> hasta adjuntar una fuente '
+            'independiente. Sin fuente no hay entrada nueva.</p>'
+            '<ul class="sub">'
+            '<li>@@NICKNAMES@@ apodos se mantienen a mano en '
+            '<code>data/seed_nicknames.py</code> y se reconstruyen; no se rastrean.</li>'
+            '<li>Los apodos no entran en la detección de colisiones ni generan página de «mismo '
+            'nombre»: un apodo no es una identidad, el principio activo sí.</li></ul>'),
+        "about.terms": (
+            '<h2>Nombres populares y términos de clase</h2>'
+            '<p>Una tabla aparte (<code>drug_term</code>, @@DRUGTERMS@@ entradas) recoge nombres '
+            'populares y términos de categoría de <b>medicamentos legales únicamente</b>: water '
+            'pill, blood thinner, 睡前药 (pastilla para dormir), «la píldora», «la píldora del día '
+            'después», estatina. A diferencia de <code>nickname</code>, puede apuntar a una clase '
+            'y no a un principio, así que <code>substance_id</code> puede ser nulo; '
+            '<code>alias_all</code> une ambas tablas para la búsqueda. <b>Las drogas de abuso y la '
+            'jerga recreativa quedan explícitamente fuera</b> (jerga de la calle / recreativa); esas '
+            'entradas se eliminaron de la base y no se vuelven a añadir.</p>'
+            '<ul class="sub">'
+            '<li>Las listas de <b>NIDA / DEA</b> ya no se usan para jerga recreativa; solo se '
+            'conservan términos de categoría de medicamentos legales, cada uno con su URL de '
+            'fuente.</li>'
+            '<li><b>MedlinePlus (NLM)</b> aporta términos populares/de categoría (obra del '
+            'Gobierno de EE. UU.); las fuentes comunitarias (CN/GB/AU/ES) se etiquetan '
+            '<i>nombre de la comunidad</i> y siguen siendo buscables. Pares tall-man de la FDA: '
+            '@@CONFUSABLE@@ pares oficiales. <a href="confused.html">Ver la lista</a>.</li></ul>'),
+        "about.sources": (
+            '<h2>Fuentes y cobertura</h2>'
+            '<div class="tablewrap"><table><tr><th>Mercado</th><th>Productos</th>'
+            '<th>Datos hasta</th></tr>@@COV@@</table></div>'
+            '<p class="sub"><b>Datos hasta</b> = la fecha en que la propia fuente publicó / entró '
+            'en vigor / tomó la instantánea, no la fecha de nuestro rastreo. <code>live</code> = '
+            'directorio en vivo sin fecha única; <b>—</b> = solo listas anuales.</p>'
+            '<p class="sub"><b>EE. UU.</b>: openFDA NDC Directory (datos públicos del Gobierno de '
+            'EE. UU.). <b>Reino Unido</b>: NHSBSA dm+d, Open Government Licence v3.0 — '
+            '<i>Contains public sector information licensed under the Open Government Licence '
+            'v3.0.</i> <b>España</b>: AEMPS CIMA — reutilización permitida citando expresamente '
+            'la fuente y la fecha de última actualización; no es licencia abierta (ver licencias). '
+            '<b>México</b>: listas de registro sanitario de COFEPRIS (sin licencia abierta '
+            'declarada; solo campos fácticos con enlaces) y concentraciones completadas con '
+            'conjuntos de datos de datos.gob.mx, CC BY 4.0. <b>Australia</b>: API PBS Schedule '
+            '(aviso de copyright conservado) + directorio TGA CMI + semillas OTC verificadas a '
+            'mano; solo campos fácticos, sin texto completo de CMI/ARTG. <b>Canadá</b>: Health '
+            'Canada DPD — reutilización no comercial con mención de la fuente. <b>China</b>: base '
+            'de datos de clasificación y códigos de medicamentos del NHSA (instantánea '
+            '2025-04-04); no se encontró licencia abierta de redistribución, así que solo se '
+            'guardan campos fácticos con enlaces.</p>'),
+        "about.samename": (
+            '<h2>Por qué ocurre «mismo nombre, otro medicamento»</h2>'
+            '<p class="sub">La misma marca pertenece a empresas distintas en cada mercado y la '
+            'fórmula puede ser totalmente diferente. Ejemplos verificados: <b>Tylenol</b> en EE. UU. '
+            'es paracetamol de un solo principio 500 mg, mientras que <b>泰诺</b> en China es un '
+            'antigripal de cuatro principios y el producto de un solo principio es <b>泰诺林</b>; '
+            '<b>Benadryl</b> en EE. UU. es difenhidramina y en el Reino Unido es acrivastina; '
+            '<b>Gaviscon</b> en EE. UU. es un antiácido de aluminio/magnesio y en el Reino Unido '
+            'es una barrera de alginato.</p>'),
+        "about.gaps": (
+            '<h2>Lagunas conocidas</h2><ul class="sub">'
+            '<li>China tiene 146.344 registros de medicamentos químicos, pero ~9% solo resuelven a '
+            'una sustancia exclusiva de China (sin INN en inglés); su ATC se guarda en nivel 4. '
+            'No se cargan los 中成药.</li>'
+            '<li>La equivalencia de concentración llega al nivel D1 (misma forma salina); la '
+            'conversión sal–base (D2) y la biodisponibilidad (D3) no están implementadas.</li>'
+            '<li>México no tiene columna de concentración en las listas del regulador; solo el 29% '
+            'de los productos pudo completarse desde catálogos públicos.</li>'
+            '<li>El DPD de Canadá no tiene tamaño de envase ni precio, y muchos envases OTC se '
+            'autorizaron antes de la era electrónica del DPD, así que un producto de estantería '
+            'puede faltar.</li>'
+            '<li><b>Cobertura ATC — dos denominadores:</b> @@ATC_ALL_PCT@@% de todas las '
+            'sustancias (@@ATC_ALL@@ / @@ATC_ALL_N@@) y @@ATC_DRUG_PCT@@% de las entidades '
+            'farmacéuticas (inn_drug, @@ATC_DRUG@@ / @@ATC_DRUG_N@@). La diferencia son sobre '
+            'todo entidades no farmacéuticas (homeopáticas, herbales, alimentos, materiales), no '
+            'datos ausentes. Los ATC vienen de Wikidata P267 (CC0) y ChEMBL (CC BY-SA 4.0); el '
+            'índice ATC/DDD de WHOCC requiere licencia y no se usa.</li></ul>'),
+        "about.analytics": (
+            '<h2>Estadísticas de visita</h2><p class="sub">Este sitio usa '
+            '<a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> '
+            'para estadísticas anónimas sin cookies: no guarda datos personales y no se usa para '
+            'publicidad. Solo se registran visitas, sitios de referencia, país/región, navegador y '
+            'tamaño de pantalla, además de las búsquedas y clics en resultados, para mejorar la '
+            'búsqueda. Ver la <a href="https://www.goatcounter.com/privacy" target="_blank" '
+            'rel="noopener">política de privacidad de GoatCounter</a>.</p>'),
+        "about.stats": (
+            '<p class="sub">Cifras: @@PRODUCTS@@ productos · @@SUBSTANCES@@ sustancias · '
+            '@@KEYS@@ claves de nombre · @@ALIASES@@ alias (@@NICKNAMES@@ apodos mantenidos a mano, '
+            '@@DRUGTERMS@@ términos populares/de clase) · @@CONFUSABLE@@ pares confundibles de la '
+            'FDA · @@SEVERE@@ nombres marcados «mismo nombre, otro medicamento».</p>'),
+    },
+    "zh": {
+        "about.title": "关于本站",
+        "about.lead": (
+            '<p class="sub"><b>这里只有一件事：</b>把商品名定位到真正的成分，并说明它到底有多'
+            '可信。本站公开、无广告、非商业；所有答案都是候选集，不是处方。</p>'),
+        "about.rules": (
+            '<h2>三条底线</h2><ol>'
+            '<li><b>商品名不是主键。</b>每次查询返回候选集，唯一性由「国家 × 剂型 × 规格 × '
+            '活性成分」锁定。</li>'
+            '<li><b>碰撞自动推导，不手工标注。</b>一个名字挂到不同成分时，站点自动标出'
+            '「同名不同药」。</li>'
+            '<li><b>不给用药建议。</b>只做身份对应与「不可互换」提示——不做剂量换算，'
+            '不给替代建议。</li></ol>'),
+        "about.nick": (
+            '<h2>俗称与旧名</h2>'
+            '<p>「两只青蛙」不是商品名，也永远不当作商品名存储：它指向成分二甲双胍。'
+            '俗称是单独的人工维护表，可检索，但刻意不进入商品名表。命中时先标注'
+            '「网络俗称 / 旧名」，再列该成分的商品名，绝不把它说成包装上的名字。每条都写出处；'
+            '「用户提供」只算线索，公开页标「未证实」，找到独立出处后才升级为 '
+            '<code>documented</code>。没有来源就不新增。</p>'
+            '<ul class="sub"><li>@@NICKNAMES@@ 条俗称在 <code>data/seed_nicknames.py</code> '
+            '里人工维护并重建，不自动抓取。</li>'
+            '<li>俗称不参与同名碰撞推导，也不生成同名页——昵称不是身份，成分才是。</li></ul>'),
+        "about.terms": (
+            '<h2>民间叫法与类别词</h2>'
+            '<p>另有一张表 <code>drug_term</code>（@@DRUGTERMS@@ 条）收录<b>合法药品</b>的民间'
+            '叫法与类别词：water pill（利尿剂）、blood thinner（抗凝药）、睡前药、the pill、'
+            'morning-after pill、statin 等。与 <code>nickname</code> 不同，它可以指向类别而不是'
+            '单一成分，因此 <code>substance_id</code> 可空；检索层读 <code>alias_all</code> '
+            '统一视图。<b>毒品与娱乐性用药黑话明确不在收录范围</b>（街头/娱乐性用药黑话），'
+            '此类条目已从库中移除，不再新增。</p>'
+            '<ul class="sub"><li><b>NIDA / DEA 清单</b>不再用于娱乐性黑话，只保留合法药品的'
+            '处方药类别词，并逐条带出处 URL。</li>'
+            '<li><b>MedlinePlus（NLM）</b>提供常见民间/类别词（美国政府作品）；社区来源'
+            '（CN/GB/AU/ES）标「社区叫法」并保留检索。FDA 官方 tall-man 药对：'
+            '@@CONFUSABLE@@ 对，<a href="confused.html">见列表</a>。</li></ul>'),
+        "about.sources": (
+            '<h2>数据来源与覆盖</h2>'
+            '<div class="tablewrap"><table><tr><th>市场</th><th>已收录产品</th>'
+            '<th>数据截止</th></tr>@@COV@@</table></div>'
+            '<p class="sub"><b>数据截止</b> = 数据源自己发布 / 生效 / 快照的日期，不是我们的抓取'
+            '日期。<code>live</code> = 实时目录，源头没有单独日期；<b>—</b> = 只有年度清单。</p>'
+            '<p class="sub"><b>美国</b>：openFDA NDC Directory（美国政府公开数据）。'
+            '<b>英国</b>：NHSBSA dm+d，Open Government Licence v3.0——'
+            '<i>Contains public sector information licensed under the Open Government Licence '
+            'v3.0.</i> <b>西班牙</b>：AEMPS CIMA——引用须注明来源与文件最后更新日期，非开放许可'
+            '（见下方许可段）。<b>墨西哥</b>：COFEPRIS 注册清单（未标注开放许可，只存事实字段并'
+            '链回原文）；规格回填来自 datos.gob.mx 的采购/价格数据集，CC BY 4.0。'
+            '<b>澳洲</b>：PBS Schedule API（保留版权声明）+ TGA CMI 目录 + 人工核对的 listed '
+            'OTC 种子，只存事实字段，不转载 CMI/ARTG 全文。<b>加拿大</b>：Health Canada DPD，'
+            '允许非商业再使用并须注明来源。<b>中国</b>：国家医保局「医保药品分类与代码数据库」'
+            '（2025-04-04 快照）；未找到开放的再发布许可，只存事实字段并链回原文。</p>'),
+        "about.samename": (
+            '<h2>为什么会有「同名不同药」</h2>'
+            '<p class="sub">同一个商标在不同市场属于不同公司，配方可能完全不同。已验证的例子：'
+            '美国 <b>Tylenol</b> 是单一成分对乙酰氨基酚 500 mg，中国 <b>泰诺</b> 是四成分感冒药，'
+            '单一成分产品叫 <b>泰诺林</b>；美国 <b>Benadryl</b> 是苯海拉明，英国 <b>Benadryl</b> '
+            '是阿伐斯汀；美国 <b>Gaviscon</b> 是铝/镁抗酸剂，英国 Gaviscon 是海藻酸盐筏剂。</p>'),
+        "about.gaps": (
+            '<h2>已知缺口</h2><ul class="sub">'
+            '<li>中国已入库 14.6 万条化学药注册，但约 9% 只能落到 CN 专属成分（暂无英文 INN），'
+            'ATC 只到第 4 级；中成药未收录。</li>'
+            '<li>剂量对应只做到同型对应（D1）；盐基折算（D2）与生物利用度判定（D3）未做。</li>'
+            '<li>墨西哥官方清单没有浓度列，只有 29% 的产品能从公开目录回填。</li>'
+            '<li>加拿大 DPD 没有包装数量/价格，很多 OTC 消费装在 DPD 电子化之前就获批，'
+            '货架上有的产品可能查不到。</li>'
+            '<li><b>ATC 覆盖——两个分母：</b>全部 substance 为 @@ATC_ALL_PCT@@%'
+            '（@@ATC_ALL@@ / @@ATC_ALL_N@@），药物实体（inn_drug）为 @@ATC_DRUG_PCT@@%'
+            '（@@ATC_DRUG@@ / @@ATC_DRUG_N@@）。缺口主要是非药物实体（顺势疗法、草药、食品、'
+            '材料），不是没抓到数据。ATC 来自 Wikidata P267（CC0）与 ChEMBL（CC BY-SA 4.0）；'
+            'WHOCC 的 ATC/DDD 索引需要授权，未使用。</li></ul>'),
+        "about.analytics": (
+            '<h2>访问统计</h2><p class="sub">本站使用 '
+            '<a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> '
+            '做匿名访问统计：不使用 cookie、不记录个人数据、不用于广告；只统计页面浏览、来源'
+            '网站、国家/地区、浏览器与屏幕尺寸，以及站内搜索词和结果点击，用于改进检索质量。'
+            '详见 <a href="https://www.goatcounter.com/privacy" target="_blank" '
+            'rel="noopener">GoatCounter 隐私政策</a>。</p>'),
+        "about.stats": (
+            '<p class="sub">统计：@@PRODUCTS@@ 个产品 · @@SUBSTANCES@@ 个成分 · '
+            '@@KEYS@@ 个检索名 · @@ALIASES@@ 条别名（其中 @@NICKNAMES@@ 条人工俗称、'
+            '@@DRUGTERMS@@ 条民间/类别词）· @@CONFUSABLE@@ 对 FDA 易混淆药对 · '
+            '@@SEVERE@@ 个名字被标「同名不同药」。</p>'),
+    },
+}
+
+# What's new / Confused / 404 的三语文案（同样走 data-i18n / data-i18n-html）。
+PAGE_I18N = {
+    "en": {
+        "whatsnew.title": "What's new",
+        "whatsnew.intro": ('Every release ships with a short summary. Old versions '
+                           'are backfilled from git tags; the full history lives in '
+                           f'<a href="{REPORT_REPO}/blob/main/CHANGELOG.md" target="_blank" '
+                           'rel="noopener">CHANGELOG.md</a>.'),
+        "whatsnew.lang_note": ('Release notes are written in Chinese (the project language); the '
+                               'site UI is available in English, Spanish and Chinese.'),
+        "conf.source_note": (
+            'Source: <a href="https://www.fda.gov/drugs/medication-errors-related-'
+            'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
+            'rel="noopener">FDA Name Differentiation Project</a> (content current as of '
+            '2026-06-12; US Government work). Only the @@CONF_PAIRS@@ officially re-publishable '
+            'pairs from the FDA list are included; the copyright ISMP/ECRI “List of Confused Drug '
+            'Names” is not copied. Single names in the FDA list without a pair (hydromorphone, '
+            'mitoxantrone) are not listed. A pair is a warning about names, not a statement that '
+            'the drugs are equivalent.'),
+        "notfound.title": "Page not found",
+        "notfound.p1": ("This address has no page. It may be an old link, a typo, or a renamed "
+                        "entry."),
+        "notfound.p2": ("Go back to the home page and type a medicine name (brand, generic or "
+                        "nickname)."),
+        "notfound.search": "Search", "notfound.about": "About",
+        "notfound.confused": "Confused names", "notfound.whatsnew": "What's new",
+        "notfound.report": ('If an internal link is broken, tell us on '
+                            f'<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;'
+                            'template=data-error.yml">GitHub</a>.'),
+    },
+    "es": {
+        "whatsnew.title": "Novedades",
+        "whatsnew.intro": ('Cada versión incluye un resumen breve. Las versiones '
+                           'antiguas se rellenan desde las etiquetas de git; el historial completo '
+                           f'está en <a href="{REPORT_REPO}/blob/main/CHANGELOG.md" '
+                           'target="_blank" rel="noopener">CHANGELOG.md</a>.'),
+        "whatsnew.lang_note": ('Las notas de versión están en chino (idioma del proyecto); la '
+                               'interfaz del sitio está en inglés, español y chino.'),
+        "conf.source_note": (
+            'Fuente: <a href="https://www.fda.gov/drugs/medication-errors-related-'
+            'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
+            'rel="noopener">FDA Name Differentiation Project</a> (contenido actualizado a '
+            '2026-06-12; obra del Gobierno de EE. UU.). Solo se incluyen los @@CONF_PAIRS@@ pares '
+            'oficiales reutilizables de la lista de la FDA; la lista con copyright de ISMP/ECRI no '
+            'se copia. Los nombres sueltos sin pareja (hidromorfona, mitoxantrona) no se listan. '
+            'Un par es un aviso sobre nombres, no una afirmación de equivalencia.'),
+        "notfound.title": "Página no encontrada",
+        "notfound.p1": ("Esta dirección no tiene página. Puede ser un enlace antiguo, una errata o "
+                        "una entrada renombrada."),
+        "notfound.p2": ("Vuelve al inicio y escribe el nombre de un medicamento (comercial, "
+                        "genérico o apodo)."),
+        "notfound.search": "Buscar", "notfound.about": "Acerca de",
+        "notfound.confused": "Nombres confundibles", "notfound.whatsnew": "Novedades",
+        "notfound.report": ('Si un enlace interno está roto, avísanos en '
+                            f'<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;'
+                            'template=data-error.yml">GitHub</a>.'),
+    },
+    "zh": {
+        "whatsnew.title": "更新日志",
+        "whatsnew.intro": ('每次上线都带一条更新摘要；旧版本已按 git tag 补到这里，'
+                           f'完整历史见 <a href="{REPORT_REPO}/blob/main/CHANGELOG.md" '
+                           'target="_blank" rel="noopener">CHANGELOG.md</a>。'),
+        "whatsnew.lang_note": "更新说明正文使用中文（项目语言）；站点界面提供英文、西班牙文与中文。",
+        "conf.source_note": (
+            '来源：<a href="https://www.fda.gov/drugs/medication-errors-related-'
+            'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
+            'rel="noopener">FDA Name Differentiation Project</a>（内容截至 2026-06-12，'
+            '美国政府作品）。只收 FDA 官方可再发布的 @@CONF_PAIRS@@ 对；ISMP/ECRI 的'
+            '《List of Confused Drug Names》有版权，未整表复制。FDA 表里的单名条目'
+            '（hydromorphone、mitoxantrone）没有配对，未列入。药对只说明名字可能混淆，'
+            '不表示两种药可以互换。'),
+        "notfound.title": "页面不存在",
+        "notfound.p1": "这个地址没有对应的页面。可能是链接过期、拼写有误，或页面已改名。",
+        "notfound.p2": "回到首页输入一个药名（商品名、通用名、俗称都可以）。",
+        "notfound.search": "检索", "notfound.about": "关于",
+        "notfound.confused": "易混淆药名", "notfound.whatsnew": "更新日志",
+        "notfound.report": ('如果是站内链接坏了，欢迎到 '
+                            f'<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;'
+                            'template=data-error.yml">GitHub</a> 报一声。'),
+    },
+}
+
+
+def _atc_coverage(db: sqlite3.Connection) -> dict:
+    """ATC 双口径（动态）：全部 substance vs 药物实体（entity_type.csv 里 inn_drug）。
+
+    药物实体分母 = entity_type.csv 中 entity_type=inn_drug、且当前库里存在的 substance。
+    这样 About 的数字随库/CSV 自动更新，不在模板里写死。
+    """
+    import csv as _csv
+
+    path = ROOT / "data" / "entity_type.csv"
+    drug_ids: set[str] = set()
+    if path.exists():
+        with path.open(encoding="utf-8-sig", newline="") as fh:
+            for row in _csv.DictReader(fh):
+                if (row.get("entity_type") or "").strip() == "inn_drug":
+                    sid = (row.get("substance_id") or "").strip()
+                    if sid:
+                        drug_ids.add(sid)
+    rows = db.execute("SELECT substance_id, atc FROM substance").fetchall()
+    all_n = len(rows)
+    all_atc = sum(1 for _sid, atc in rows if atc)
+    drug = [(sid, atc) for sid, atc in rows if sid in drug_ids]
+    drug_n = len(drug)
+    drug_atc = sum(1 for _sid, atc in drug if atc)
+
+    def pct(a: int, n: int) -> float:
+        return round(a / n * 100, 1) if n else 0.0
+
+    return {"all_atc": all_atc, "all_n": all_n, "all_pct": pct(all_atc, all_n),
+            "drug_atc": drug_atc, "drug_n": drug_n, "drug_pct": pct(drug_atc, drug_n)}
+
+
+def _i18n_placeholders(stats: dict, atc_cov: dict, coverage, source_cover) -> dict:
+    """把 About/Confused 里 @@XXX@@ 占位符替换成当前库的统计值（构建期算，不写死）。"""
+    by_country: dict[str, list] = {}
+    for r in source_cover:
+        by_country.setdefault(r["country"], []).append(r)
+    cov = "".join(
+        f"<tr><td>{esc(r['country'])}</td><td>{r['n_products']:,}</td>"
+        f"<td>{_as_of_cell(by_country.get(r['country'], []))}</td></tr>" for r in coverage)
+    return {
+        "COV": cov,
+        "PRODUCTS": f"{stats['products']:,}",
+        "SUBSTANCES": f"{stats['substances']:,}",
+        "KEYS": f"{stats['keys']:,}",
+        "ALIASES": f"{stats['aliases']:,}",
+        "NICKNAMES": f"{stats['nickname']:,}",
+        "DRUGTERMS": f"{stats['drug_term']:,}",
+        "CONFUSABLE": str(stats["confusable"]),
+        "CONF_PAIRS": str(stats["confusable"]),
+        "SEVERE": f"{stats['severe']:,}",
+        "ATC_ALL_PCT": f"{atc_cov['all_pct']:.1f}",
+        "ATC_ALL": f"{atc_cov['all_atc']:,}",
+        "ATC_ALL_N": f"{atc_cov['all_n']:,}",
+        "ATC_DRUG_PCT": f"{atc_cov['drug_pct']:.1f}",
+        "ATC_DRUG": f"{atc_cov['drug_atc']:,}",
+        "ATC_DRUG_N": f"{atc_cov['drug_n']:,}",
+        "WARN_TOTAL": str(stats.get("warn_total", 0)),
+        "WARN_HIGH": str(stats.get("warn_high", 0)),
+        "WARN_MEDIUM": str(stats.get("warn_medium", 0)),
+        "WARN_INFO": str(stats.get("warn_info", 0)),
+    }
+
+
+def _merge_static_i18n(values: dict) -> None:
+    """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
+    for lang in ("en", "es", "zh"):
+        for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang]):
+            for key, text in source.items():
+                merged = text
+                for ph, val in values.items():
+                    merged = merged.replace("@@" + ph + "@@", str(val))
+                I18N[lang][key] = merged
+
+
+# ── /warn 页 + 成分页警示：文案三语（页面 UI；警示正文来自 dose_warning 数据）──
+WARN_I18N = {
+    "en": {
+        "nav.warn": "Warnings",
+        "warn.title": "Warnings: same name, different drug",
+        "warn.intro": ('<p class="sub">Published warnings about names that are easily confused, '
+                       'or products that are <b>not interchangeable</b> — across countries, salt '
+                       'forms or release mechanisms. This page only flags identity and '
+                       'interchangeability; it contains <b>no dosing advice</b> and no substitution '
+                       'recommendations.</p>'),
+        "warn.count": ('<p class="sub">@@WARN_TOTAL@@ published warnings: @@WARN_HIGH@@ high '
+                       'severity, @@WARN_MEDIUM@@ medium, @@WARN_INFO@@ info. Draft warnings are '
+                       'not shown.</p>'),
+        "warn.no_advice": ('Not medical advice. Check the actual pack and the ingredient, and ask '
+                          'a pharmacist before changing products.'),
+        "warn.group.high": "High severity — do not assume interchangeability",
+        "warn.group.medium": "Medium severity — check before assuming equivalence",
+        "warn.group.info": "Also worth knowing",
+        "warn.sev.high": "High", "warn.sev.medium": "Medium", "warn.sev.info": "Info",
+        "warn.source": "Regulatory source",
+        "warn.related": "Related ingredient",
+        "warn.countries": "Markets",
+        "warn.reviewed": "Reviewed by",
+        "warn.drug_summary": "Safety warnings for this ingredient",
+        "warn.see_all": "See all warnings",
+        "warn.empty": "No published warnings yet.",
+        "warn.source_note": ('<b>Sources &amp; licences</b>: each warning links to the regulator’s '
+                             'original document (DailyMed/FDA, EMA/MHRA, Health Canada DPD, AEMPS '
+                             'CIMA, PBS/TGA, NMPA …). We publish factual excerpts only and keep the '
+                             'source link; labels, SmPC/CMI full texts are not reproduced. See the '
+                             'licence register in About for terms.'),
+    },
+    "es": {
+        "nav.warn": "Alertas",
+        "warn.title": "Alertas: mismo nombre, otro medicamento",
+        "warn.intro": ('<p class="sub">Alertas publicadas sobre nombres que se confunden '
+                       'fácilmente, o productos que <b>no son intercambiables</b> — entre países, '
+                       'formas salinas o mecanismos de liberación. Esta página solo señala '
+                       'identidad e intercambiabilidad; <b>no contiene consejos de dosificación</b> '
+                       'ni recomendaciones de sustitución.</p>'),
+        "warn.count": ('<p class="sub">@@WARN_TOTAL@@ alertas publicadas: @@WARN_HIGH@@ de '
+                       'severidad alta, @@WARN_MEDIUM@@ media, @@WARN_INFO@@ informativas. Las '
+                       'alertas en borrador no se muestran.</p>'),
+        "warn.no_advice": ('No es consejo médico. Comprueba el envase y el principio activo, y '
+                          'consulta a un farmacéutico antes de cambiar de producto.'),
+        "warn.group.high": "Severidad alta — no supongas que son intercambiables",
+        "warn.group.medium": "Severidad media — comprueba antes de asumir equivalencia",
+        "warn.group.info": "También conviene saberlo",
+        "warn.sev.high": "Alta", "warn.sev.medium": "Media", "warn.sev.info": "Info",
+        "warn.source": "Fuente regulatoria",
+        "warn.related": "Principio relacionado",
+        "warn.countries": "Mercados",
+        "warn.reviewed": "Revisado por",
+        "warn.drug_summary": "Alertas de seguridad de este principio activo",
+        "warn.see_all": "Ver todas las alertas",
+        "warn.empty": "Todavía no hay alertas publicadas.",
+        "warn.source_note": ('<b>Fuentes y licencias</b>: cada alerta enlaza al documento original '
+                             'del regulador (DailyMed/FDA, EMA/MHRA, Health Canada DPD, AEMPS CIMA, '
+                             'PBS/TGA, NMPA …). Solo publicamos extractos fácticos y conservamos el '
+                             'enlace; no reproducimos prospectos ni textos completos SmPC/CMI. Las '
+                             'condiciones están en el registro de licencias de «Acerca de».'),
+    },
+    "zh": {
+        "nav.warn": "警示",
+        "warn.title": "警示：同名不同药 / 不可互换",
+        "warn.intro": ('<p class="sub">已发布的警示：名字容易混淆、或产品<b>不可互换</b>——'
+                       '涉及不同国家、盐型或释放机制。本页只说明身份与不可互换性，'
+                       '<b>不提供任何用药建议</b>，也不给替代方案。</p>'),
+        "warn.count": ('<p class="sub">已发布 @@WARN_TOTAL@@ 条：高严重度 @@WARN_HIGH@@ 条、'
+                       '中 @@WARN_MEDIUM@@ 条、提示 @@WARN_INFO@@ 条。草稿状态不展示。</p>'),
+        "warn.no_advice": "这不是医疗建议。换药前请核对实际包装与成分，并咨询药师。",
+        "warn.group.high": "高严重度——不要假定可以互换",
+        "warn.group.medium": "中严重度——先核对再假定等效",
+        "warn.group.info": "也值得了解",
+        "warn.sev.high": "高", "warn.sev.medium": "中", "warn.sev.info": "提示",
+        "warn.source": "监管来源",
+        "warn.related": "相关成分",
+        "warn.countries": "涉及市场",
+        "warn.reviewed": "核验",
+        "warn.drug_summary": "该成分的安全警示",
+        "warn.see_all": "查看全部警示",
+        "warn.empty": "暂无已发布警示。",
+        "warn.source_note": ('<b>来源与许可</b>：每条警示都链接到监管机构原文（DailyMed/FDA、'
+                             'EMA/MHRA、Health Canada DPD、AEMPS CIMA、PBS/TGA、NMPA 等）。'
+                             '本站只发布事实摘录并保留来源链接，不转载说明书、SmPC/CMI 全文；'
+                             '具体条款见「关于」里的许可清单。'),
+    },
+}
+
+
+def _warn_badge(severity: str, lang: str) -> str:
+    cls = {"high": "badge sev", "medium": "badge warn"}.get(severity, "tag")
+    label = I18N[lang].get("warn.sev." + severity, severity)
+    return f'<span class="{cls}">{esc(label)}</span>'
+
+
+def _warn_meta_html(row: dict, lang: str, sub_names: dict[str, str],
+                    prefix: str = "") -> str:
+    """一条警示的来源/相关成分/市场（语言无关链接 + 本地化标签）。"""
+    T = I18N[lang]
+    parts = [f'<b>{esc(T["warn.source"])}</b>: '
+             f'<a href="{esc(row["source_url"])}" target="_blank" rel="noopener">'
+             f'{esc(row["source_url"].split("//")[-1].split("/")[0])}</a>']
+    rel = []
+    seen: set[str] = set()
+    for key in ("substance_id", "related_substance_id"):
+        sid = row.get(key)
+        if sid and sid not in seen:
+            seen.add(sid)
+            name = sub_names.get(sid) or sid
+            rel.append(f'<a href="{prefix}drug/{esc(sid)}.html">{esc(name)}</a>')
+    if rel:
+        parts.append(f'<b>{esc(T["warn.related"])}</b>: ' + " · ".join(rel))
+    if row.get("country"):
+        parts.append(f'<b>{esc(T["warn.countries"])}</b>: {esc(row["country"])}')
+    if row.get("reviewed_by"):
+        parts.append(f'<b>{esc(T["warn.reviewed"])}</b>: {esc(row["reviewed_by"])}')
+    return '<p class="warn-meta">' + " · ".join(parts) + "</p>"
+
+
+def _warn_lang_blocks(row: dict, sub_names: dict[str, str], *, prefix: str,
+                      link: bool = False) -> str:
+    """一条警示的 zh/en/es 三块正文（data-lang-block；数据缺 es 时回退英文并标注）。"""
+    out = []
+    for lang in ("en", "zh", "es"):
+        title = row.get("title_" + lang) or row.get("title_en") or ""
+        body = row.get("body_" + lang) or row.get("body_en") or ""
+        fallback = "" if row.get("body_" + lang) else (
+            ' <span class="meta">(EN)</span>' if lang != "en" else "")
+        head = f'<h3>{_warn_badge(row["severity"], lang)} {esc(title)}{fallback}</h3>'
+        if link:
+            head = (f'<h3><a href="{prefix}warn.html#w-{esc(row["warning_id"])}">'
+                    f'{esc(title)}{fallback}</a>{_warn_badge(row["severity"], lang)}</h3>')
+        out.append(
+            f'<div class="lang-block" data-lang-block="{lang}">'
+            f'{head}<p class="warn-body">{esc(body)}</p>'
+            f'{_warn_meta_html(row, lang, sub_names, prefix)}</div>')
+    return "".join(out)
+
+
+def _drug_warn_html(rows: list[dict]) -> str:
+    """成分页顶部警示摘要（最多 3 条 + 链 /warn），按当前语言只显示一块。"""
+    if not rows:
+        return ""
+    parts = ['<div class="notice warnbox drugwarn">']
+    for lang in ("en", "zh", "es"):
+        T = I18N[lang]
+        items = "".join(
+            f'<li><a href="../warn.html#w-{esc(r["warning_id"])}">{esc(r.get("title_" + lang) or r.get("title_en") or "")}</a></li>'
+            for r in rows[:3])
+        parts.append(
+            f'<div class="lang-block" data-lang-block="{lang}">'
+            f'<b>{esc(T["warn.drug_summary"])}</b><ul class="sub">{items}</ul>'
+            f'<a href="../warn.html">{esc(T["warn.see_all"])}</a></div>')
+    parts.append("</div>")
+    return "".join(parts)
+
+
+def build_warn(db: sqlite3.Connection) -> int:
+    """/warn 页：只展示 dose_warning.status='published'，按 severity 分组（high→medium→info）。
+
+    页面只做「同名不同药 / 不可互换」警示，不给用药建议；每条带监管来源链接。
+    警示正文是数据行（zh/en/es 各一份），用 data-lang-block 在客户端按语言切换。
+    """
+    rows = [dict(r) for r in db.execute(
+        """SELECT * FROM dose_warning WHERE status = 'published'
+           ORDER BY CASE severity WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+                    warning_id""")]
+    sub_names: dict[str, str] = {}
+    for sid, inn_zh, inn_en in db.execute(
+            "SELECT substance_id, inn_zh, inn_en FROM substance"):
+        sub_names[sid] = inn_zh or inn_en or sid
+    groups = {"high": [], "medium": [], "info": []}
+    for row in rows:
+        groups.setdefault(row["severity"], []).append(row)
+    grp_html = []
+    for sev in ("high", "medium", "info"):
+        if not groups.get(sev):
+            continue
+        grp_html.append(f'<h2 data-i18n="warn.group.{sev}">{esc(I18N["en"]["warn.group." + sev])}</h2>')
+        for row in groups[sev]:
+            grp_html.append(
+                f'<article class="warn-item" id="w-{esc(row["warning_id"])}">'
+                + _warn_lang_blocks(row, sub_names, prefix="")
+                + "</article>")
+    body = f"""<h1 data-i18n="warn.title">{esc(I18N["en"]["warn.title"])}</h1>
+<div data-i18n-html="warn.intro">{I18N["en"]["warn.intro"]}</div>
+<div class="notice" data-i18n="warn.no_advice">{esc(I18N["en"]["warn.no_advice"])}</div>
+<div data-i18n-html="warn.count">{I18N["en"]["warn.count"]}</div>
+{''.join(grp_html) if grp_html else '<p class="empty" data-i18n="warn.empty">No published warnings yet.</p>'}
+<div class="notice warnbox" data-i18n-html="warn.source_note">{I18N["en"]["warn.source_note"]}</div>"""
+    (OUT / "warn.html").write_text(page("Warnings", body), encoding="utf-8")
+    return len(rows)
+
+
+# 许可与署名：直接取自 reports/license-audit.md §4（三语并列的许可原文段落）。
+LICENCE_HTML = f"""
+<h2 id="licences">Data sources and licences 数据来源与许可 Fuentes y licencias</h2>
+<p class="sub"><b>EN</b>: This site is a non-commercial public reference. We store only factual
+fields (names, active ingredients, strengths, dosage forms, status) and link to the originals;
+we do not republish full labels, CMI/SmPC texts or data dumps. Source-specific terms and
+attribution are listed in the <a href="{DOCS_LICENCE_URL}">licence register</a>.
+<br><b>中文</b>：本站为非商业公开参考站，只存事实字段（名称、成分、规格、剂型、状态）并链回原文，
+不转载说明书 / CMI / SmPC 全文，也不提供原始数据批量下载。各来源许可与署名见
+<a href="{DOCS_LICENCE_URL}">许可清单</a>。
+<br><b>ES</b>: Este sitio es una referencia pública sin ánimo de lucro. Solo almacenamos campos
+fácticos (nombres, principios activos, concentraciones, formas farmacéuticas, estado) y enlazamos
+al original; no reproducimos prospectos, textos CMI/SmPC ni volcados de datos. Las condiciones y
+atribuciones por fuente están en el <a href="{DOCS_LICENCE_URL}">registro de licencias</a>.</p>
+<ul class="sub">
+<li><b>China 中国 / China</b>: 医保药品分类与代码数据库由<b>国家医保局</b>公开；我们<b>未找到开放的再发布许可</b>，
+只存事实字段并链回原文，不再发布原始数据表。EN: the NHSA catalogue is public but we found
+<b>no open licence for redistribution</b>; factual fields only, with links, no bulk republication.
+ES: el catálogo de la NHSA es público, pero <b>no hemos encontrado una licencia abierta de
+redistribución</b>; solo campos fácticos y enlaces. 来源 Source: <a href="https://code.nhsa.gov.cn/yp/toPublicGoodsData.html">code.nhsa.gov.cn</a></li>
+<li><b>Spain 西班牙 / España</b>: © <b>AEMPS</b> — CIMA (Centro de Información online de
+Medicamentos). Reproduction of AEMPS website contents is authorised provided the source is
+expressly cited and the <b>date of last update</b> is mentioned (Aviso legal). This is not an open
+licence; we treat it as "conditional / pending confirmation". 中文：© AEMPS，引用须注明来源与文件最后更新日期，
+非开放许可，按「待确认」处理。ES: © AEMPS — se autoriza la reproducción citando expresamente la
+fuente y la fecha de última actualización (Aviso legal); no es una licencia abierta.
+<a href="https://www.aemps.gob.es/aviso-legal/">Aviso legal</a> · <a href="https://cima.aemps.es/cima/publico/home.html">CIMA</a></li>
+<li><b>Mexico 墨西哥 / México</b>: COFEPRIS registration lists published on gob.mx carry
+<b>no stated open licence</b> (status: pending confirmation); we store factual fields only and
+link to the source. Strengths were back-filled from <b>ISSSTE, PROFECO, HGMGG, INER, INPRFM and
+SEMAR</b> procurement/price datasets published on <b>datos.gob.mx</b>, licensed <b>CC BY 4.0</b>
+(attribution: Gobierno de México — datos.gob.mx, each dataset attributed to its publishing
+institution). 中文：COFEPRIS 清单未标注开放许可，按「待确认」只存事实 + 链接；规格回填数据来自
+datos.gob.mx 的 ISSSTE/PROFECO/HGMGG/INER/INPRFM/SEMAR 数据集（CC BY 4.0，署名发布机构）。
+ES: las listas de COFEPRIS no declaran licencia abierta (pendiente de confirmación); solo campos
+fácticos y enlaces. Los datos de concentración proceden de ISSSTE, PROFECO, HGMGG, INER, INPRFM y
+SEMAR en datos.gob.mx, con licencia CC BY 4.0.
+<a href="https://www.gob.mx/cofepris/documentos/registros-sanitarios-medicamentos">COFEPRIS</a> ·
+<a href="https://datos.gob.mx/">datos.gob.mx</a> ·
+<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+<li><b>Australia 澳洲 / Australia</b>: PBS Schedule data — <i>Copyright (c) 2024 Department of
+Health, Commonwealth of Australia.</i> (copyright notice retained; content not modified).
+TGA CMI repository and ARTG Public Summary entries — <b>© Commonwealth of Australia</b>; the TGA
+copyright notice permits personal/internal non-commercial use of unaltered material and does not
+permit re-transmission or redistribution without written permission, so we store <b>factual
+fields only</b> (trade name, active ingredients, ARTG ID, status) with links and publish no
+full-text CMI/ARTG content. 中文：PBS 保留版权声明且不修改内容；TGA CMI 与 ARTG 明细只取事实字段
+（商品名/成分/ARTG ID/状态）并链回原文，不转载 CMI 全文、不再分发原始材料。
+ES: datos PBS con aviso de copyright intacto y sin modificaciones; de TGA CMI y ARTG solo
+almacenamos campos fácticos con enlaces, sin reproducir textos completos.
+<a href="https://www.health.gov.au/using-our-websites/copyright">PBS copyright</a> ·
+<a href="https://www.tga.gov.au/copyright">TGA copyright</a></li>
+<li><b>Canada 加拿大 / Canadá</b>: Health Canada <b>Drug Product Database (DPD)</b> — re-use for
+non-commercial purposes with source acknowledgement: <i>© His Majesty the King in Right of Canada,
+as represented by the Minister of Health.</i> 中文：仅非商业再使用，须注明来源（加拿大卫生部）。
+ES: reutilización no comercial con mención de la fuente. Terms: <a href="https://health-products.canada.ca/dpd-bdpp/">DPD</a></li>
+<li><b>WHO INN / OMS</b>: Contains International Nonproprietary Names (INN) data from the
+<b>World Health Organization</b>. WHO INN lists are licensed <b>CC BY-NC-SA 3.0 IGO</b>
+(attribution + non-commercial + share-alike); this site is non-commercial, and any mapping table
+derived from WHO INN lists is shared under the same licence. WHO does not endorse this site.
+中文：含世界卫生组织 INN 数据；WHO INN 清单为 CC BY-NC-SA 3.0 IGO（署名 + 非商业 + 相同方式共享），
+基于该清单的派生映射表以同许可共享；WHO 未背书本站。
+ES: contiene datos de INN de la Organización Mundial de la Salud; las listas INN tienen licencia
+CC BY-NC-SA 3.0 IGO (atribución + no comercial + compartir igual); los mapeos derivados se
+comparten con la misma licencia. <a href="https://www.who.int/teams/health-product-and-policy-standards/inn">WHO INN</a> ·
+<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/igo/">CC BY-NC-SA 3.0 IGO</a></li>
+<li><b>ChEMBL</b>: ATC mapping derived from <b>ChEMBL (EMBL-EBI)</b>, licensed <b>CC BY-SA 4.0</b>;
+the derived ATC mapping table is available under the same licence. 中文：基于 ChEMBL 的 ATC 映射
+须署名 EMBL-EBI 并按 CC BY-SA 4.0 相同方式共享。ES: mapeo ATC derivado de ChEMBL (EMBL-EBI),
+licencia CC BY-SA 4.0; la tabla derivada se comparte con la misma licencia.
+<a href="https://chembl.gitbook.io/chembl-interface-documentation/downloads">ChEMBL</a> ·
+<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+<li><b>Other sources 其他来源</b>: openFDA (public domain / CC0), FDA tall-man list (US Government
+work), NIDA (US Government work), DEA (Public Domain Mark 1.0), MedlinePlus/NLM (US Government
+work), NHSBSA dm+d (Open Government Licence v3.0 — <i>Contains public sector information licensed
+under the Open Government Licence v3.0.</i>), Wikidata P267 (CC0 1.0). ISMP/ECRI LASA lists and
+WHOCC ATC/DDD index are copyrighted and are <b>not</b> reproduced. 中文：其余来源见许可清单；
+ISMP/ECRI 与 WHOCC ATC/DDD 有版权，未使用。ES: el resto de fuentes figura en el registro de
+licencias; las listas ISMP/ECRI y el índice WHOCC ATC/DDD no se reproducen.</li>
+</ul>
+<p class="sub"><b>Non-commercial notice 非商业声明</b>: this site is public, ad-free and offers no
+paid data service; if that changes, the NC/conditional sources above must be re-evaluated.
+本站公开、无广告、不提供付费数据服务；如未来商业化，上述标非商业/待确认的来源须重新评估。</p>
+"""
+
 
 CSS = """
 :root{--bg:#fbfbf9;--fg:#1f2328;--muted:#646b73;--line:#e3e1da;--card:#fff;
@@ -490,6 +1301,85 @@ kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
 .release table{font-size:13px}
 .release ul{margin:6px 0 12px;padding-left:22px}
 .release li{margin:4px 0}
+/* ── UI P0：解析条 / 自动完成 / 分组折叠 / 加载更多 / 国家提示 ── */
+.sel-label{color:var(--muted);font-size:14px;margin-right:2px}
+.searchwrap{position:relative}
+#ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
+background:#fff;border:1px solid var(--line);border-radius:12px;
+box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
+#ac.open{display:block}
+.ac-item{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+padding:9px 12px;cursor:pointer;font-size:14px;border-bottom:1px solid #f1efe9}
+.ac-item:last-child{border-bottom:0}
+.ac-item.on{background:#f1f8f4}
+.ac-name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ac-meta{color:var(--muted);font-size:12px;white-space:nowrap;flex:none}
+.parsebar{display:flex;flex-wrap:wrap;gap:6px 16px;background:#f4f6f4;
+border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;margin:14px 0}
+.parsebar b{color:var(--muted);font-weight:600;margin-right:4px}
+.parsebar .pmatch{color:var(--accent)}
+.grp-name{font-weight:600}
+.grp-count{color:var(--muted);font-size:12px;font-weight:400;margin-left:6px}
+.grp-tags{text-align:right}
+.linkbtn{background:none;border:0;color:var(--accent);padding:2px 0;cursor:pointer;
+font-size:13px;text-decoration:underline}
+.fold-row td{padding:2px 8px 8px}
+.loadmore{text-align:center;margin:10px 0 0}
+.loadmore button{padding:8px 16px;font-size:14px}
+.countrymiss .cm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.countrymiss .cm-actions a,.countrymiss .cm-actions button{font-size:14px}
+@media (max-width:719px){
+  .wrap{padding:0 14px}
+  header .wrap{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px 12px}
+  .logo{font-size:15px}
+  .logo-zh{display:none}
+  nav{flex-wrap:wrap;gap:8px 12px;font-size:13px}
+  .langs{margin-left:auto}
+  #q{font-size:16px;padding:12px 14px}
+  .row{gap:8px}
+  .sel-label{display:block;width:100%;margin:2px 0 0}
+  .parsebar{gap:4px 12px;font-size:12px}
+  .card{padding:12px}
+  footer .wrap{display:block}
+  .foot-links{margin:8px 0 0;display:flex;flex-wrap:wrap;white-space:normal;gap:8px 14px}
+  /* 结果表 → 卡片（ARTG / 同成分表一并生效，靠 data-label 带出列名） */
+  table.res{display:block;border:0;border-radius:0;background:transparent;margin-top:8px}
+  table.res thead{display:none}
+  table.res tbody{display:block}
+  table.res tr{display:block;background:#fff;border:1px solid var(--line);
+    border-radius:12px;margin:8px 0;padding:8px 12px}
+  table.res td{display:block;border:0;padding:2px 0;width:auto}
+  table.res td.c-dose{white-space:normal}
+  table.res td.c-empty{display:none}
+  table.res td[data-label]:before{content:attr(data-label) " · ";color:var(--muted);font-size:12px}
+  table.res tr.grp{background:#f7f8f5;border-color:#e7e5dc;padding:8px 12px}
+  table.res tr.grp td{display:block;width:auto}
+  table.res tr.grp .grp-tags{text-align:left;margin-top:2px}
+  table.res tr.fold-row{background:transparent;border:0;padding:0;margin:0}
+  table.res tr.fold-row td{padding:0 0 4px}
+  table.res tbody tr:hover{background:#fff}
+  .loadmore button{width:100%}
+}
+/* i18n P1：静态页（About / What's new / Confused）移动端收尾 */
+@media (max-width:719px){
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  main table:not(.res){font-size:13px}
+  .release table{display:block;overflow-x:auto}
+  .release ul,.release li,p,li{overflow-wrap:anywhere}
+}
+/* /warn 页：数据行按语言只显示一块（无 JS 时默认英文） */
+.lang-block{display:none}
+.lang-block[data-lang-block="en"]{display:block}
+.warn-item{border:1px solid var(--line);border-radius:12px;background:#fff;
+  padding:12px 14px;margin:10px 0}
+.warn-item h3{margin:0 0 6px;font-size:16px;line-height:1.45}
+.warn-item .warn-body{margin:0 0 8px}
+.warn-item .warn-meta{color:var(--muted);font-size:13px;margin:0;overflow-wrap:anywhere}
+.warn-item .badge{vertical-align:2px}
+.drugwarn ul{margin:6px 0 4px;padding-left:20px}
+@media (max-width:719px){
+  .warn-item .warn-meta{font-size:12px}
+}
 """
 
 APP_JS = r"""
@@ -497,6 +1387,8 @@ const box = document.getElementById('q');
 const out = document.getElementById('out');
 const ctry = document.getElementById('country');
 const meta = document.getElementById('meta');
+const acEl = document.getElementById('ac');
+const ctryLabel = document.getElementById('ctrylabel');
 // 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
@@ -517,6 +1409,8 @@ function scheduleSearchEvent(q){
   SEARCH_EV = setTimeout(()=>gcEvent('search-' + term.slice(0,40)), 900);
 }
 let IDX = [], NICKS = [], CONF = [];
+// 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
+let SEARCH_LAYERS = null, PY_MAP = null, PY_P = null;
 // P0 索引懒加载：页面加载时只下 app.js/css/i18n（约 16 KB），
 // 全量索引（34.8 MB，gzip 约 6 MB）等用户真的要用搜索时再下。
 let IDX_READY = false, IDX_P = null;
@@ -529,8 +1423,9 @@ function artgPaint(nq){
   const rows = ARTG.filter(r => r[0] === nq || r[0].startsWith(nq + ' '))
     .sort((a,b) => a[1].length - b[1].length).slice(0, 20);
   if(!rows.length){ box.innerHTML = ''; return; }
-  const body = rows.map(r => `<tr><td>${esc(r[1])}</td><td>${esc(r[2]) || '—'}</td>
-    <td><code>${esc(r[3])}</code></td></tr>`).join('');
+  const body = rows.map(r => `<tr><td data-label="${esc(T('col.brand'))}">${esc(r[1])}</td>
+    <td data-label="${esc(T('artg.sponsor'))}">${esc(r[2]) || '—'}</td>
+    <td data-label="${esc(T('artg.id'))}"><code>${esc(r[3])}</code></td></tr>`).join('');
   box.innerHTML = `<h2>${T('artg.title')}</h2><p class="sub">${T('artg.note')}</p>
     <table class="res"><thead><tr><th>${T('col.brand')}</th><th>${T('artg.sponsor')}</th>
     <th>${T('artg.id')}</th></tr></thead><tbody>${body}</tbody></table>`;
@@ -611,26 +1506,420 @@ function rowHTML(r){
   const mah = r.m ? (r.mn > 1 ? `${r.m} <span class="more">+${r.mn-1}</span>` : r.m) : '';
   return `<tr>
     <td class="c-ing">${r.x || '—'}</td>
-    <td class="c-dose">${r.d || '—'}</td>
-    <td class="c-brand"><a href="${link}">${r.b}</a>${tags}${combo}${badge}</td>
-    <td class="c-mah">${mah || '—'}</td></tr>`;
+    <td class="c-dose" data-label="${esc(T('col.dose'))}">${r.d || '—'}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}"><a href="${link}">${r.b}</a>${tags}${combo}${badge}</td>
+    <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
-function render(){
-  const q = box.value.trim();
-  if(!q){ out.innerHTML=''; meta.textContent='';
-    const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
+// ── UI P0 ③④：自动完成 / 解析条 / 成分分组 + 品牌折叠 + 加载更多 ──────
+// 一条「品牌行」= 一个索引条目（同成分下的一个品牌/写法），剂量合并展示，
+// 不再按每个规格各占一行；分组头显示成分与品牌数。
+function brandRowHTML(e, T){
+  const badge = e.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
+                e.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
+  const tags = (e.c || []).map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
+  const combo = (e.x || '').indexOf(' + ') >= 0
+    ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
+  const link = e.u ? `${BASE}name/${e.u}` : `${BASE}drug/${e.v}.html`;
+  const mah = e.m ? (e.mn > 1 ? `${e.m} <span class="more">+${e.mn-1}</span>` : e.m) : '';
+  const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+  return `<tr class="br">
+    <td class="c-ing c-empty"></td>
+    <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}"><a href="${link}">${esc(e.d)}</a>${tags}${combo}${badge}</td>
+    <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
+}
+const RES_PAGE = 25;              // 每次「加载更多」新增的品牌行数
+let RES_LIMIT = RES_PAGE;
+let RES_EXPANDED = new Set();     // 已展开的分组下标
+let RES_GROUPS = null;            // [{ing, tags:Set, rows:[entry]}]
+function groupByIngredient(display){
+  const order=[], map=new Map();
+  for(const [, t, e] of display){
+    const key = e.x || e.d || e.k;
+    let g = map.get(key);
+    if(!g){ g = {ing: e.x || e.d, tags:new Set(), rows:[], tier:t}; map.set(key, g); order.push(g); }
+    (e.c || []).forEach(c => g.tags.add(c));
+    g.rows.push(e);
+  }
+  return order;
+}
+function resultsHTML(T){
+  if(!RES_GROUPS || !RES_GROUPS.length) return '';
+  // 可见行数 = 展开组用全部品牌、折叠组只算前 2 个；「加载更多」按可见行分页，
+  // 展开某个成分（品牌折叠）后才把该组的全部品牌计入分页。
+  const visibleTotal = RES_GROUPS.reduce((n, g, gi) =>
+    n + (RES_EXPANDED.has(gi) ? g.rows.length : Math.min(2, g.rows.length)), 0);
+  let html='', count=0, cut=false;
+  for(let gi=0; gi<RES_GROUPS.length; gi++){
+    const g = RES_GROUPS[gi];
+    if(count >= RES_LIMIT){ cut = true; break; }
+    const expanded = RES_EXPANDED.has(gi);
+    const vis = expanded ? g.rows : g.rows.slice(0, 2);
+    const tags = [...g.tags].sort().map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
+    html += `<tr class="grp"><td class="c-ing"><span class="grp-name">${esc(g.ing)}</span>`
+      + `<span class="grp-count">${g.rows.length} ${esc(T('res.brands_noun'))}</span></td>`
+      + `<td colspan="3" class="grp-tags">${tags}</td></tr>`;
+    for(let i=0; i<vis.length; i++){
+      if(count >= RES_LIMIT){ cut = true; break; }
+      html += brandRowHTML(vis[i], T); count++;
+    }
+    if(g.rows.length > vis.length){
+      html += `<tr class="fold-row"><td colspan="4"><button type="button" class="linkbtn"`
+        + ` data-gi="${gi}" data-fold="1">${esc(T('res.show_brands'))}`
+        + ` +${g.rows.length - vis.length}</button></td></tr>`;
+    } else if(expanded && g.rows.length > 2){
+      html += `<tr class="fold-row"><td colspan="4"><button type="button" class="linkbtn"`
+        + ` data-gi="${gi}" data-fold="0">${esc(T('res.fold'))}</button></td></tr>`;
+    }
+    if(cut) break;
+  }
+  if(count < visibleTotal){
+    html += `<tr class="fold-row"><td colspan="4"><button type="button" class="linkbtn"`
+      + ` data-loadmore="1">${esc(T('res.load_more'))}`
+      + ` (+${Math.min(RES_PAGE, visibleTotal-count)})</button></td></tr>`;
+  } else if(visibleTotal > RES_PAGE){
+    html += `<tr class="fold-row"><td colspan="4"><span class="sub">`
+      + `${esc(T('res.loaded_all'))}</span></td></tr>`;
+  }
+  return html;
+}
+function resultsTableHTML(T){
+  return `<table class="res grouped"><thead><tr>
+      <th>${T('col.ing')}</th><th>${T('col.dose')}</th>
+      <th>${T('col.brand')}</th><th>${T('col.mah')}</th>
+    </tr></thead><tbody>${resultsHTML(T)}</tbody></table>`;
+}
+function paintResultsOnly(){
+  const wrap = document.getElementById('reswrap');
+  if(!wrap || !RES_GROUPS) return;
+  const T = window.T || (k=>k);
+  wrap.innerHTML = resultsTableHTML(T);
+}
+// ── 解析条：名称 / 剂量 / 剂型 / 匹配方式 ─────────────────────────
+const FORM_TOKENS = ['片剂','片','胶囊','颗粒剂','颗粒','口服液','注射液','注射剂','软膏',
+  '乳膏','凝胶','滴眼液','滴鼻液','喷雾剂','喷雾','吸入剂','缓释','控释','肠溶','糖浆',
+  '混悬液','栓剂','贴剂','散剂','滴丸','丸','tablets','tablet','capsules','capsule',
+  'syrup','injection','injectable','cream','ointment','gel','spray','inhaler','drops',
+  'suspension','suppository','patch','powder','solution'];
+function parseQuery(q){
   const [nameQ, st] = splitDose(q);
-  const nq = norm(nameQ);
-  scheduleSearchEvent(q);
+  const lower = String(nameQ || '').toLowerCase();
+  let form = '';
+  for(const w of FORM_TOKENS){ if(lower.indexOf(w) >= 0){ form = w; break; } }
+  return {name: String(nameQ || '').trim(), dose: st ? (st[0] + ' ' + st[1]) : '', form};
+}
+function parseBarHTML(parsed, matchLabel){
+  const T = window.T || (k=>k);
+  const items = [];
+  if(parsed.name) items.push(`<span class="pitem"><b>${esc(T('parse.name'))}</b>${esc(parsed.name)}</span>`);
+  if(parsed.dose) items.push(`<span class="pitem"><b>${esc(T('parse.dose'))}</b>${esc(parsed.dose)}</span>`);
+  if(parsed.form) items.push(`<span class="pitem"><b>${esc(T('parse.form'))}</b>${esc(parsed.form)}</span>`);
+  items.push(`<span class="pitem"><b>${esc(T('parse.match'))}</b><span class="pmatch">${esc(matchLabel)}</span></span>`);
+  return `<div class="parsebar" role="status" aria-label="${esc(T('parse.label'))}">${items.join('')}</div>`;
+}
+// ── 自动完成（输入 ≥2 字，top 8；键盘 ↑↓/回车/Esc，点击可选）────────
+let AC_ITEMS = [], AC_I = -1, AC_T = null, AC_WANT = false;
+function acClose(){
+  if(!acEl) return;
+  acEl.classList.remove('open');
+  acEl.innerHTML = '';
+  AC_ITEMS = []; AC_I = -1;
+  if(box.setAttribute) box.setAttribute('aria-expanded', 'false');
+}
+function acPaint(){
+  const T = window.T || (k=>k);
+  if(!acEl || !AC_ITEMS.length){ acClose(); return; }
+  acEl.innerHTML = AC_ITEMS.map((it, i) => {
+    const e = it.e;
+    const tags = (e.c || []).slice(0, 3)
+      .map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
+    return `<div class="ac-item${i===AC_I?' on':''}" role="option" aria-selected="${i===AC_I}" data-i="${i}">`
+      + `<span class="ac-name">${esc(e.d || e.k)}</span>`
+      + `<span class="ac-meta">${esc(e.x || '')}${tags ? ' ' + tags : ''}</span></div>`;
+  }).join('');
+  acEl.classList.add('open');
+  if(box.setAttribute) box.setAttribute('aria-expanded', 'true');
+}
+function acCompute(nq){
+  if(!IDX_READY || !nq || nq.length < 2) return [];
+  const cjk = /[\u4e00-\u9fff]/.test(nq);
+  const minSub = cjk ? 2 : 4;
+  const pool = [];
+  const rankOf = (e) => {
+    const k = e.k;
+    if(k === nq) return 0;
+    if(k.replace(/ /g,'') === nq.replace(/ /g,'')) return 1;
+    if(k.indexOf(nq) === 0) return 2;
+    if(nq.length >= minSub && k.indexOf(nq) >= 0) return 3;
+    return -1;
+  };
+  const collect = (e) => {
+    const rank = rankOf(e);
+    if(rank < 0) return;
+    pool.push([rank, -(e.n || 0), e.k.length, e]);
+  };
+  // 派生层就绪时只遍历候选（语义与全表扫描的 rank 0-3 一致）；否则退回全表。
+  const cand = (!LEGACY && SEARCH_LAYERS && SEARCH_LAYERS.heavy) ? layerCandidates(nq) : null;
+  if(cand){
+    for(const pair of cand){
+      collect(IDX[pair[0]]);
+      if(pool.length >= 500) break;
+    }
+  }else{
+    for(const e of IDX){
+      collect(e);
+      if(pool.length >= 500) break;
+    }
+  }
+  pool.sort((a,b)=> a[0]-b[0] || a[1]-b[1] || a[2]-b[2]);
+  const seen = new Set(), out = [];
+  for(const item of pool){
+    const e = item[3];
+    if(seen.has(e.k)) continue;
+    seen.add(e.k); out.push({e});
+    if(out.length >= 8) break;
+  }
+  return out;
+}
+function acUpdate(){
+  clearTimeout(AC_T);
+  const raw = box.value.trim();
+  const nq = norm(splitDose(raw)[0]);
+  if(nq.length < 2){ AC_WANT = false; acClose(); return; }
+  if(!IDX_READY){ AC_WANT = true; acClose(); loadIndex(); return; }  // 加载完成后补算
+  AC_WANT = false;
+  AC_T = setTimeout(()=>{ AC_ITEMS = acCompute(nq); AC_I = -1; acPaint(); }, 90);
+}
+function acSelect(i){
+  const it = AC_ITEMS[i];
+  if(!it) return;
+  box.value = it.e.d || it.e.k;
+  acClose();
+  render();
+  try{ box.focus(); }catch(e){}
+}
+// ── 国家语义：标签随选择变化 / 该国无匹配时的显式提示 ────────────────
+function updateCtryLabel(){
+  if(!ctryLabel) return;
+  const T = window.T || (k=>k);
   const c = ctry.value;
-  const nicks = aliasHits(nq);
-  const confs = confHits(nq);
-  const nickSids = new Set(nicks.map(a=>a.v).filter(Boolean));
-  // 只有「没有对应成分」的叫法（如海洛因的 Hammer）时，不要再拿商品名做包含匹配：
-  // 否则会倒出一堆名字里刚好有 hammer 的保健品，和这个词没关系。
-  const onlyUnmapped = nicks.length > 0 && nicks.every(a => !a.v);
-  let hits=[];
-  const seen = new Set();
+  let name = '';
+  try{
+    for(const o of ctry.options){ if(o.value === c){ name = o.text; break; } }
+  }catch(e){}
+  ctryLabel.textContent = c
+    ? T('home.country_label_sel').replace('{country}', name)
+    : T('home.country_label');
+  if(ctryLabel.removeAttribute) ctryLabel.removeAttribute('data-i18n');
+}
+// ── URL 状态：q / country 可分享、可前进后退（history.replaceState，不新增历史项）──
+let URL_T = null;
+function syncURL(q){
+  clearTimeout(URL_T);
+  URL_T = setTimeout(()=>{
+    try{
+      if(!window.history || !window.history.replaceState) return;
+      const u = new URL(location.href);
+      if(q) u.searchParams.set('q', q); else u.searchParams.delete('q');
+      const c = ctry.value;
+      if(c) u.searchParams.set('country', c); else u.searchParams.delete('country');
+      window.history.replaceState(null, '', u.pathname + (u.search || '') + (u.hash || ''));
+    }catch(e){}
+  }, 300);
+}
+if(window.addEventListener){
+  window.addEventListener('popstate', ()=>{
+    try{
+      const p = new URLSearchParams(location.search);
+      box.value = p.get('q') || '';
+      ctry.value = (p.get('country') || '').toUpperCase();
+      updateCtryLabel();
+      if(box.value.trim()) startSearch(); else render();
+    }catch(e){}
+  });
+}
+/* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
+   在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json（懒加载）。?legacy=1 不启用。
+   collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
+   视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
+function searchLayersBuildLight(){
+  try{
+    const exact = new Map(), compact = new Map(), sorted = new Array(IDX.length);
+    for(let i=0;i<IDX.length;i++){
+      const k = IDX[i].k;
+      let a = exact.get(k); if(!a){ a = []; exact.set(k, a); } a.push(i);
+      const kc = k.replace(/ /g,'');
+      if(kc !== k){ let b = compact.get(kc); if(!b){ b = []; compact.set(kc, b); } b.push(i); }
+      sorted[i] = i;
+    }
+    sorted.sort((a,b)=> IDX[a].k < IDX[b].k ? -1 : IDX[a].k > IDX[b].k ? 1 : 0);
+    SEARCH_LAYERS = {light:{exact: exact, compact: compact, sorted: sorted}, heavy: null};
+  }catch(err){
+    SEARCH_LAYERS = null;
+    if(window.console && console.warn) console.warn('search layers (light) unavailable', err);
+  }
+}
+function searchLayersBuildHeavy(){
+  if(!SEARCH_LAYERS || SEARCH_LAYERS.heavy) return;
+  try{
+    const bigram = new Map(), trigram = new Map();
+    const addTo = (m,k,id) => { let a = m.get(k); if(!a){ a = []; m.set(k, a); } a.push(id); };
+    for(let i=0;i<IDX.length;i++){
+      const k = IDX[i].k;
+      // bigram：任何含汉字的键（CJK 查询的 contains 预筛）
+      if(/[\u3400-\u9fff]/.test(k)){
+        for(const run of k.match(/[\u3400-\u9fff]+/g) || []){
+          if(run.length === 1) addTo(bigram, run, i);
+          for(let j=0;j+1<run.length;j++) addTo(bigram, run.slice(j,j+2), i);
+        }
+      }
+      // trigram：任何含拉丁字母/数字的键（含「格华止 glucophage」这类中拉混合名，
+      // 旧 contains 用它做拉丁子串命中；只建纯拉丁会漏掉它们）
+      if(k.length >= 4 && /[a-z0-9]/.test(k)){
+        const t = ' ' + k.replace(/\s+/g,' ') + ' ';
+        for(let j=0;j+3<=t.length;j++) addTo(trigram, t.slice(j,j+3), i);
+      }
+    }
+    SEARCH_LAYERS.heavy = {bigram: bigram, trigram: trigram};
+  }catch(err){
+    if(window.console && console.warn) console.warn('search layers (heavy) unavailable', err);
+  }
+}
+function searchLayersScheduleHeavy(){
+  const run = () => searchLayersBuildHeavy();
+  try{ setTimeout(run, 0); }catch(e){ /* ignore */ }
+}
+function pinyinFetch(){
+  if(PY_MAP) return Promise.resolve(true);
+  if(PY_P) return PY_P;
+  PY_P = fetch(BASE + 'data/idx/pinyin.json').then(r=>{
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(d=>{
+    const m = new Map();
+    for(const pair of (d && d.tokens) || []) m.set(pair[0], pair[1]);
+    PY_MAP = m;
+    return true;
+  }).catch(err=>{
+    PY_P = null;
+    if(window.console && console.warn) console.warn('pinyin table unavailable', err);
+    return false;
+  });
+  return PY_P;
+}
+// 候选枚举：返回 Map(entryIndex -> 匹配档位)；未就绪/不需要派生时返回 null。
+function layerCandidates(nq){
+  const L = SEARCH_LAYERS;
+  if(!L || !L.light || !nq) return null;
+  const out = new Map();
+  const ex = L.light.exact.get(nq);
+  if(ex) for(const id of ex) out.set(id, 'exact');
+  const kc = nq.replace(/ /g,'');
+  const cp = L.light.compact.get(kc);
+  if(cp) for(const id of cp) if(!out.has(id)) out.set(id, 'compact');
+  const sorted = L.light.sorted;
+  let lo = 0, hi = sorted.length;
+  while(lo < hi){ const mid = (lo+hi) >> 1; if(IDX[sorted[mid]].k < nq) lo = mid+1; else hi = mid; }
+  let nPre = 0;
+  for(let i=lo;i<sorted.length && nPre<2000;i++){
+    const k = IDX[sorted[i]].k;
+    if(k.indexOf(nq) !== 0) break;
+    nPre++;
+    if(!out.has(sorted[i])) out.set(sorted[i], 'prefix');
+  }
+  const H = L.heavy;
+  if(!H) return out;
+  const cjk = /[\u4e00-\u9fff]/.test(nq);
+  const minSub = cjk ? 2 : 4;
+  if(nq.length >= minSub){
+    if(cjk){
+      const gramSet = new Set();
+      for(const run of nq.match(/[\u3400-\u9fff]+/g) || []){
+        if(run.length === 1) gramSet.add(run);
+        for(let j=0;j+1<run.length;j++) gramSet.add(run.slice(j,j+2));
+      }
+      const cnt = new Map();
+      for(const g of gramSet){
+        const ids = H.bigram.get(g);
+        if(!ids) continue;
+        for(const id of ids) cnt.set(id, (cnt.get(id) || 0) + 1);
+      }
+      const need = Math.max(1, Math.min(2, gramSet.size));
+      for(const pair of cnt){
+        if(pair[1] >= need && !out.has(pair[0]) && IDX[pair[0]].k.indexOf(nq) >= 0) out.set(pair[0], 'contains');
+      }
+    }else{
+      const t = ' ' + nq.replace(/\s+/g,' ') + ' ';
+      const grams = [];
+      for(let j=0;j+3<=t.length;j++) grams.push(t.slice(j,j+3));
+      const cnt = new Map();
+      for(const g of new Set(grams)){
+        const ids = H.trigram.get(g);
+        if(!ids) continue;
+        for(const id of ids) cnt.set(id, (cnt.get(id) || 0) + 1);
+      }
+      const need = Math.max(1, grams.length - 1);
+      for(const pair of cnt){
+        if(pair[1] >= need && !out.has(pair[0]) && IDX[pair[0]].k.indexOf(nq) >= 0) out.set(pair[0], 'contains');
+      }
+    }
+  }
+  // 已有确定命中（exact/连写/前缀/包含）时不再做模糊/拼音候选：与旧「两遍扫描」语义一致。
+  if(out.size) return out;
+  // CJK 模糊候选：bigram 交集里“重叠高但不是子串”的名字；第二遍仍用 tier() 的
+  // Levenshtein 阈值复核（旧实现第二遍扫全表，这里只缩小候选集）。
+  if(cjk && nq.length >= 4){
+    const gramSet2 = new Set();
+    for(const run of nq.match(/[\u3400-\u9fff]+/g) || []){
+      if(run.length === 1) gramSet2.add(run);
+      for(let j=0;j+1<run.length;j++) gramSet2.add(run.slice(j,j+2));
+    }
+    const cnt2 = new Map();
+    for(const g of gramSet2){
+      const ids = H.bigram.get(g);
+      if(!ids) continue;
+      for(const id of ids) cnt2.set(id, (cnt2.get(id) || 0) + 1);
+    }
+    const pool = [];
+    for(const pair of cnt2) if(!out.has(pair[0])) pool.push(pair);
+    pool.sort((a,b)=> b[1] - a[1]);
+    for(let r=0;r<pool.length && r<1000;r++) out.set(pool[r][0], 'fuzzy');
+    if(out.size) return out;
+  }
+  // 拼音/首字母：查询串本身即 token（tainuo -> j:tainuo，tn -> i:tn）
+  if(PY_MAP && /^[a-z0-9]+$/.test(nq)){
+    const pyIds = PY_MAP.get('j:' + nq) || PY_MAP.get('i:' + nq) || PY_MAP.get('s:' + nq);
+    if(pyIds) for(const id of pyIds) if(!out.has(id)) out.set(id, 'pinyin');
+  }
+  if(out.size) return out;
+  // 拉丁 typo：trigram 短名单 + 编辑距离（阈值与 tier() 的 fuzzy 一致）
+  if(/^[a-z0-9 .&+\/-]+$/.test(nq) && nq.length >= 4){
+    const t = ' ' + nq.replace(/\s+/g,' ') + ' ';
+    const grams = [];
+    for(let j=0;j+3<=t.length;j++) grams.push(t.slice(j,j+3));
+    const cnt = new Map();
+    for(const g of new Set(grams)){
+      const ids = H.trigram.get(g);
+      if(!ids) continue;
+      for(const id of ids) cnt.set(id, (cnt.get(id) || 0) + 1);
+    }
+    const shortlist = [];
+    for(const pair of cnt) shortlist.push(pair);
+    shortlist.sort((a,b)=> b[1] - a[1]);
+    const limit = nq.length >= 9 ? 3 : 2;
+    for(let r=0;r<shortlist.length && r<2000;r++){
+      const id = shortlist[r][0];
+      if(out.has(id)) continue;
+      const k = IDX[id].k;
+      if(Math.abs(k.length - nq.length) <= 3 && lev(nq, k) <= limit) out.set(id, 'fuzzy');
+    }
+  }
+  return out;
+}
+// 统一匹配：派生路径与旧线性扫描共用 addHit / tier / 两遍语义。
+function collectHits(nq, st, nicks, nickSids, onlyUnmapped, c){
+  const hits = [], seen = new Set();
   const addHit = (e, t) => {
     if(seen.has(e.k)) return;
     seen.add(e.k);
@@ -639,35 +1928,97 @@ function render(){
     score += 0.05;
     hits.push([score, t[0], e]);
   };
-  // 第一遍只认确切的几种匹配；模糊匹配要等确定命中太少时才补，
-  // 否则搜 Lipitor 会把 Zifitor、Dipifor 这些隔壁牌子一起倒出来。
-  for(const e of IDX){
-    if(onlyUnmapped) continue;
-    // 复方产品：e.x 是这条名字下成分的中文/英文展示串（最多 6 个），
-    // 直接按成分名 tokens 比对，比在每个索引条目里再存一份 vs 数组省 4 MB。
-    const subs = (e.x || '').split(' + ');
-    const byNick = (e.v && nickSids.has(e.v)) ||
-      nicks.some(a => a.i && subs.includes(a.i));
-    const t = byNick ? ['nickname', 1.0] : tier(nq, e.k);
-    if(!t || t[0]==='fuzzy') continue;
-    addHit(e, t);
-  }
   let fuzzyUsed = false;
-  if(hits.length === 0 && nicks.length === 0){
-    for(const e of IDX){
-      const t = tier(nq, e.k);
-      if(!t || t[0]!=='fuzzy') continue;
-      const before = hits.length;
+  const cand = (!LEGACY && !onlyUnmapped && nicks.length === 0
+    && SEARCH_LAYERS && SEARCH_LAYERS.heavy) ? layerCandidates(nq) : null;
+  if(cand){
+    // 候选按 IDX 下标升序处理：与旧全表扫描的插入顺序一致，保证同分命中的稳定排序不变。
+    const ids = [];
+    for(const pair of cand) ids.push(pair[0]);
+    ids.sort((a,b)=> a-b);
+    const fuzzyIds = [];
+    for(const id of ids){
+      const kind = cand.get(id);
+      if(kind === 'fuzzy'){ fuzzyIds.push(id); continue; }
+      const e = IDX[id];
+      const t = kind === 'pinyin' ? ['pinyin', 0.90]
+        : (tier(nq, e.k) || (kind === 'contains' ? ['contains', 0.70] : null));
+      if(!t || t[0] === 'fuzzy') continue;
       addHit(e, t);
-      if(hits.length > before) fuzzyUsed = true;
     }
+    if(hits.length === 0 && fuzzyIds.length){
+      for(const id of fuzzyIds){
+        const tt = tier(nq, IDX[id].k);
+        if(!tt || tt[0] !== 'fuzzy') continue;   // 与旧第二遍的 tier()==='fuzzy' 过滤一致
+        // 模糊档内按编辑距离细排：距离越近分越高，否则同分时会被高 n 的远邻顶到前面
+        const d = lev(nq, IDX[id].k);
+        const before = hits.length;
+        addHit(IDX[id], ['fuzzy', Math.max(0.1, 1 - 0.12 * d)]);
+        if(hits.length > before) fuzzyUsed = true;
+      }
+    }
+  }else{
+    // 回退路径：?legacy=1 / 派生层未就绪 / 昵称查询 —— 与旧实现逐行等价。
+    for(const e of IDX){
+      if(onlyUnmapped) continue;
+      const subs = (e.x || '').split(' + ');
+      const byNick = (e.v && nickSids.has(e.v)) ||
+        nicks.some(a => a.i && subs.includes(a.i));
+      const t = byNick ? ['nickname', 1.0] : tier(nq, e.k);
+      if(!t || t[0]==='fuzzy') continue;
+      addHit(e, t);
+    }
+    if(hits.length === 0 && nicks.length === 0){
+      for(const e of IDX){
+        const t = tier(nq, e.k);
+        if(!t || t[0]!=='fuzzy') continue;
+        const before = hits.length;
+        addHit(e, t);
+        if(hits.length > before) fuzzyUsed = true;
+      }
+    }
+  }
+  return {hits: hits, fuzzyUsed: fuzzyUsed};
+}
+/* ── 搜索增强 end ─────────────────────────────────────────────────────────── */
+function render(){
+  const q = box.value.trim();
+  if(!q){ out.innerHTML=''; meta.textContent=''; syncURL('');
+    const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
+  const [nameQ, st] = splitDose(q);
+  const nq = norm(nameQ);
+  const parsed = parseQuery(q);
+  // 新一轮查询：重置分组/折叠/分页状态（「加载更多」「折叠」只在点击时增量重绘）
+  RES_LIMIT = RES_PAGE;
+  RES_EXPANDED = new Set();
+  RES_GROUPS = null;
+  scheduleSearchEvent(q);
+  syncURL(q);
+  const c = ctry.value;
+  const nicks = aliasHits(nq);
+  const confs = confHits(nq);
+  const nickSids = new Set(nicks.map(a=>a.v).filter(Boolean));
+  // 只有「没有对应成分」的叫法（如海洛因的 Hammer）时，不要再拿商品名做包含匹配：
+  // 否则会倒出一堆名字里刚好有 hammer 的保健品，和这个词没关系。
+  const onlyUnmapped = nicks.length > 0 && nicks.every(a => !a.v);
+  const matched = collectHits(nq, st, nicks, nickSids, onlyUnmapped, c);
+  const hits = matched.hits;
+  const fuzzyUsed = matched.fuzzyUsed;
+  // 拼音兜底：拉丁查询零命中且拼音表未加载 → 懒加载 data/idx/pinyin.json 后重跑一次。
+  if(!hits.length && !nicks.length && !LEGACY && SEARCH_LAYERS
+     && /^[a-z0-9 ]{2,}$/.test(nq) && !PY_MAP){
+    pinyinFetch().then(ok => { if(ok && box.value.trim() === q) render(); });
   }
   hits.sort((a,b)=> b[0]-a[0] || (a[2].q?1:0)-(b[2].q?1:0) ||
                      b[2].n-a[2].n || a[2].d.length-b[2].d.length);
-  const shown = hits.slice(0,40);
+  // UI P0 ④：不再 40 行/80 行硬截断——保留至多 200 条候选交给前端
+  // 「成分聚合 + 品牌折叠 + 加载更多」分页展示（默认每页 25 行可见品牌）。
+  const shown = hits.slice(0, 200);
   // 选了国家 = 「这个药在那个国家叫什么」，不是「只显示那个国家的搜索命中」。
   // 先用查询词定位成分（不受国家限制），再把这个成分在目标国的商品名列出来。
   let display = shown;
+  let countryMiss = false;    // 选了国家但该国没有任何该成分产品（不再静默回退到各国列表）
+  let countryView = false;    // 当前展示的是「该国该成分的商品名」
   if(c && hits.length){
     try{
       const sids = new Set();
@@ -679,13 +2030,27 @@ function render(){
         ((x.vs && x.vs.length) ? x.vs : [x.v]).filter(Boolean).some(s => sids.has(s)));
       // display 的每一项必须是 [score, tier, entry] 三元组，和 shown 同构，
       // 否则下面 for(const [, , e] of display) 会解构出 undefined。
-      if(inCountry.length) display = inCountry.slice(0,40).map(e => [0, 'country', e]);
+      if(inCountry.length){
+        display = inCountry.slice(0,200).map(e => [0, 'country', e]);
+        countryView = true;
+      } else {
+        display = [];
+        countryMiss = true;
+      }
     }catch(err){
       console.error('country resolve failed', err);
     }
   }
   const T = window.T || (k=>k);
-  if(!hits.length && nicks.length){
+  // 解析条：匹配方式取首条命中/别名的档位（精确 / 连写 / 前缀 / 包含 / 模糊 / 别名）
+  let matchKey = 'none';
+  if(nicks.length) matchKey = 'nickname';
+  else if(hits.length) matchKey = fuzzyUsed ? 'fuzzy' : hits[0][1];
+  let matchLabel = T('parse.match.' + matchKey);
+  if(countryView) matchLabel += ' · ' + T('parse.match.country');
+  if(countryMiss){
+    meta.textContent = `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`;
+  } else if(!hits.length && nicks.length){
     meta.textContent = `${nicks.length} ${T('res.alias')} · ${T('res.alias_no_products')}`;
   } else {
     meta.textContent = hits.length
@@ -694,6 +2059,24 @@ function render(){
           : `${hits.length} ${T(nicks.length ? 'res.brands' : 'res.matched')}`)
       : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
            : `${T('res.none')} — ${T('res.caveat')}.`);
+  }
+  // 国家无匹配：显式提示 + 「看成分卡」/「换国家」，不再静默回退到各国列表。
+  let countryMissHTML = '';
+  if(countryMiss){
+    const sids = [];
+    for(const [, , e] of hits){
+      for(const s of ((e.vs && e.vs.length) ? e.vs : [e.v])){
+        if(s && sids.indexOf(s) < 0) sids.push(s);
+        if(sids.length >= 3) break;
+      }
+      if(sids.length >= 3) break;
+    }
+    const cards = sids.map(s =>
+      `<a href="${BASE}drug/${encodeURIComponent(s)}.html">${esc(T('country.open_card'))}</a>`).join('');
+    countryMissHTML = `<div class="notice warnbox countrymiss"><b>${esc(T('country.missing'))}</b>`
+      + ` ${esc(T('country.missing_note'))}`
+      + `<div class="cm-actions">${cards}`
+      + `<button type="button" data-clearcountry="1">${esc(T('country.change'))}</button></div></div>`;
   }
   // 俗称命中：先说清「这不是商品名，是某个成分的叫法」，再列该成分的商品名。
   let nickHTML = '';
@@ -761,14 +2144,13 @@ function render(){
       members.map(e=>`<div class="card"><h3><a href="${e.u?BASE+'name/'+e.u:BASE+'drug/'+e.v+'.html'}">${e.d}</a></h3>
       <div class="meta">${e.x} · ${e.s.join(' / ')||'—'}</div></div>`).join('');
   }
-  // 主结果：保留相关度顺序（精确命中在前），每一行内部再按剂量数字排序。
-  // 这样"成分-剂量"始终是最左两列，但不会被无关的模糊命中顶到前面。
-  let rows=[];
-  for(const [, , e] of display){
-    const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
-    for(const d of ds) rows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
+  // 主结果：按成分聚合；同成分多品牌折叠（默认显示前 2 个品牌），
+  // 超过 RES_PAGE 行时用「加载更多」分页，不再一刀切 40 行/80 行。
+  let resHTML = '';
+  if(!countryMiss && display.length){
+    RES_GROUPS = groupByIngredient(display);
+    resHTML = `<div id="reswrap">${resultsTableHTML(T2)}</div>`;
   }
-  const capped = rows.slice(0, 80);
 
   // 精确命中某个品牌之后，再把「同一成分的其他商品」单独列一段：
   // 用户搜的是牌子，但真正想知道的往往是这个成分还有哪些选择。
@@ -796,14 +2178,12 @@ function render(){
     }
   }
 
-  out.innerHTML = confHTML + nickHTML + warnHTML + (capped.length ? `<table class="res"><thead><tr>
-      <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
-      <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
-    </tr></thead><tbody>${capped.map(rowHTML).join('')}</tbody></table>` : '') + sameHTML + extraHTML;
+  out.innerHTML = parseBarHTML(parsed, matchLabel) + confHTML + nickHTML + warnHTML
+    + countryMissHTML + resHTML + sameHTML + extraHTML;
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
   // 选了澳洲但澳洲产品为空时同样触发（很多 listed OTC 只有 ARTG 名字）。
   const hasAU = display.some(x => ((x[2].c) || []).includes('AU'));
-  if(!capped.length || (c === 'AU' && !hasAU)){
+  if((!display.length && !countryMiss) || (c === 'AU' && !hasAU)){
     out.insertAdjacentHTML('beforeend', '<div id="artgbox"></div>');
     artgFallback(nq);
   }
@@ -908,6 +2288,15 @@ function loadIndex(){
   ]).then(([d,a,c])=>{
     IDX=d||[]; NICKS=a||[]; CONF=c||[]; IDX_READY=true;
     setHint('');
+    // 搜索增强（task-28）：索引到位后先派生轻量层（exact/前缀，~0.2s），
+    // 重层（bigram/trigram）放到下一轮事件循环，避免阻塞首个结果渲染。
+    if(!LEGACY){
+      searchLayersBuildLight();
+      searchLayersScheduleHeavy();
+    }
+    // 用户可能在索引加载期间已经输入了 ≥2 字：加载完成后补算自动完成。
+    // （?q= 深链不经过 input 事件，不会自动弹建议列表遮挡结果。）
+    if(AC_WANT) acUpdate();
     return true;
   }).catch(err=>{
     // 失败后清掉缓存的 Promise，允许点「重试」重新发起。
@@ -925,12 +2314,33 @@ function startSearch(){
   if(IDX_READY){ render(); return; }
   loadIndex().then(ok => { if(ok) render(); });
 }
-// 失败提示里的「重试」按钮（事件委托，重试后直接按当前输入出结果）。
+// 结果区事件委托：失败重试 / 加载更多 / 品牌折叠展开 / 换国家。
 out.addEventListener('click', ev => {
-  const b = ev.target && ev.target.closest ? ev.target.closest('[data-retry]') : null;
-  if(!b) return;
-  out.innerHTML = '';
-  loadIndex().then(ok => { if(ok) render(); });
+  const t = ev.target;
+  if(!t || !t.closest) return;
+  if(t.closest('[data-retry]')){
+    out.innerHTML = '';
+    loadIndex().then(ok => { if(ok) render(); });
+    return;
+  }
+  if(t.closest('[data-loadmore]')){
+    RES_LIMIT += RES_PAGE;
+    paintResultsOnly();
+    return;
+  }
+  const fold = t.closest('[data-gi]');
+  if(fold){
+    const gi = +fold.getAttribute('data-gi');
+    if(fold.getAttribute('data-fold') === '1') RES_EXPANDED.add(gi);
+    else RES_EXPANDED.delete(gi);
+    paintResultsOnly();
+    return;
+  }
+  if(t.closest('[data-clearcountry]')){
+    ctry.value = '';
+    updateCtryLabel();
+    render();
+  }
 });
 // 点击事件：结果里的品牌/成分链接、报告入口、更新日志（只记事件，不记用户）。
 document.addEventListener('click', ev => {
@@ -941,17 +2351,58 @@ document.addEventListener('click', ev => {
   if(href.indexOf('/name/') >= 0 || href.indexOf('/drug/') >= 0){ gcEvent('click-result'); return; }
   if(href.indexOf('whats-new') >= 0){ gcEvent('click-whatsnew'); return; }
 });
-box.addEventListener('input', startSearch);
-ctry.addEventListener('change', ()=>{ gcEvent('country-' + (ctry.value || 'ALL')); startSearch(); });
+box.addEventListener('input', ()=>{ startSearch(); acUpdate(); });
+ctry.addEventListener('change', ()=>{
+  gcEvent('country-' + (ctry.value || 'ALL'));
+  updateCtryLabel();
+  acClose();
+  startSearch();
+});
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
-  box.value=b.dataset.q; startSearch(); box.focus();
+  box.value=b.dataset.q; acClose(); startSearch(); box.focus();
 }));
+// 自动完成键盘操作：↑↓ 移动、回车选中、Esc 关闭；点击在 #ac 上委托。
+box.addEventListener('keydown', ev => {
+  const open = !!(acEl && acEl.classList.contains('open') && AC_ITEMS.length);
+  if(ev.key === 'ArrowDown'){
+    if(!open) return;
+    ev.preventDefault();
+    AC_I = (AC_I + 1) % AC_ITEMS.length;
+    acPaint();
+  } else if(ev.key === 'ArrowUp'){
+    if(!open) return;
+    ev.preventDefault();
+    AC_I = (AC_I - 1 + AC_ITEMS.length) % AC_ITEMS.length;
+    acPaint();
+  } else if(ev.key === 'Enter'){
+    if(open && AC_I >= 0){ ev.preventDefault(); acSelect(AC_I); }
+    else { acClose(); }
+  } else if(ev.key === 'Escape'){
+    acClose();
+  }
+});
+if(acEl){
+  // mousedown 阻止默认，避免输入框先失焦导致点击落空。
+  acEl.addEventListener('mousedown', ev => { ev.preventDefault(); });
+  acEl.addEventListener('click', ev => {
+    const t = ev.target && ev.target.closest ? ev.target.closest('[data-i]') : null;
+    if(!t) return;
+    acSelect(+t.getAttribute('data-i'));
+  });
+}
+document.addEventListener('click', ev => {
+  if(!acEl || !acEl.classList.contains('open')) return;
+  const t = ev.target;
+  if(t === box || (t.closest && t.closest('#ac'))) return;
+  acClose();
+});
 // 聚焦搜索框就先预取索引：等用户敲键时 6 MB 已经在路上。
 box.addEventListener('focus', ()=>{ if(!IDX_READY) loadIndex(); });
 const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
 const ctry0 = new URLSearchParams(location.search).get('country');
 if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
+updateCtryLabel();   // 「看这个药在哪个国家叫什么」标签随 URL/选择初始化
 if(LEGACY){
   // 回滚开关：?legacy=1 = 旧行为，页面一加载就拉全量索引。
   setHint('');
@@ -1009,6 +2460,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     <span class="logo-zh">药品商品名跨国定位</span></a>
   <nav><a href="{prefix}index.html" data-i18n="nav.search">Search</a>
     <a href="{prefix}confused.html" data-i18n="nav.confused">Confused names</a>
+    <a href="{prefix}warn.html" data-i18n="nav.warn">Warnings</a>
     <a href="{prefix}about.html" data-i18n="nav.about">About</a>
     <a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What's new</a>
     <span class="langs">{sw}</span></nav>
@@ -1166,9 +2618,10 @@ def build_whats_new() -> None:
         cards.append(
             f'<section class="release"><h2>{esc(r["version"])}'
             f'<span class="rel-date">{esc(r["date"])}</span></h2>{r["html"]}</section>')
-    body = f"""<h1>What's new 更新日志</h1>
-<p class="sub">每次上线都带一条更新摘要。旧版本已按 git tag 补到这里；完整历史见
-<a href="{REPORT_REPO}/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>。</p>
+    body = f"""<h1 data-i18n="whatsnew.title">What's new</h1>
+<p class="sub" data-i18n-html="whatsnew.intro">Every release ships with a short summary. Old versions are backfilled from git tags; the full history lives in
+<a href="{REPORT_REPO}/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</p>
+<div class="notice" data-i18n="whatsnew.lang_note">Release notes are written in Chinese (the project language); the site UI is available in English, Spanish and Chinese.</div>
 {''.join(cards)}"""
     (OUT / "whats-new.html").write_text(page("What's new", body), encoding="utf-8")
 
@@ -1429,6 +2882,20 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
         if b["sid"]:
             conflicts[b["sid"]].append(a)
 
+    # /warn：成分页顶部摘要只取已发布警示，按严重度排序（high→medium→info）。
+    warnings_by_sub: dict[str, list[dict]] = defaultdict(list)
+    for r in db.execute(
+        """SELECT * FROM dose_warning WHERE status = 'published'
+           ORDER BY CASE severity WHEN 'high' THEN 0 WHEN 'medium' THEN 1 ELSE 2 END,
+                    warning_id"""
+    ):
+        row = dict(r)
+        seen_sids = set()
+        for key in ("substance_id", "related_substance_id"):
+            sid2 = row.get(key)
+            if sid2 and sid2 not in seen_sids:
+                seen_sids.add(sid2)
+                warnings_by_sub[sid2].append(row)
     nicknames: dict[str, list[str]] = {}
     for sid, alias in db.execute(
         """SELECT substance_id, alias FROM alias_all
@@ -1518,9 +2985,11 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
                 + ' <span data-i18n="drug.confused_note">FDA recommends tall-man '
                   'lettering for this pair; check the ingredient, not the name.</span> '
                   f'<a href="../confused.html" data-i18n="drug.confused_all">All pairs</a></div>')
+        warn_line = _drug_warn_html(warnings_by_sub.get(sid, []))
         body = f"""<h1>{esc(inn_zh) or esc(inn_en)} <span class="meta">{esc(inn_en)}</span></h1>
 <p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
 <code>{esc(sid)}</code></p>
+{warn_line}
 {nick_line}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
@@ -1637,8 +3106,12 @@ def build_index_page(entries, stats, coverage) -> None:
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
 <p class="sub" data-i18n="home.sub">Type a brand name, a generic name, a nickname, or a line from the pack.</p>
-<input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off">
+<div class="searchwrap">
+<input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac" aria-expanded="false">
+<div id="ac" role="listbox" aria-label="Suggestions"></div>
+</div>
 <div class="row">
+  <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
   <select id="country"><option value="" data-i18n="home.all">All countries</option>
     <option value="US" data-i18n="home.us">United States</option>
     <option value="GB" data-i18n="home.gb">United Kingdom</option>
@@ -1723,222 +3196,23 @@ def _as_of_cell(rows) -> str:
 
 
 def build_about(stats, coverage, source_cover=()) -> None:
-    by_country: dict[str, list] = {}
-    for r in source_cover:
-        by_country.setdefault(r["country"], []).append(r)
-    cov = "".join(
-        f"<tr><td>{esc(r['country'])}</td><td>{r['n_products']:,}</td>"
-        f"<td>{_as_of_cell(by_country.get(r['country'], []))}</td></tr>" for r in coverage)
-    analytics_html = ""
+    """About：正文按块走 data-i18n-html（三语字典，占位符已在 main() 里替换成当前库统计）。
+
+    许可/署名段为 reports/license-audit.md §4 的三语并列原文（LICENCE_HTML），
+    ATC 覆盖用双口径（全部 substance / 药物实体 inn_drug），均为构建期动态计算。
+    """
+    T = I18N["en"]
+    parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
+    for key in ("about.lead", "about.rules", "about.nick", "about.terms", "about.sources"):
+        parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
+    parts.append(LICENCE_HTML)
+    for key in ("about.samename", "about.gaps"):
+        parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     if GOATCOUNTER_CODE:
-        analytics_html = """<h2>Analytics 访问统计</h2>
-<p class="sub">This site uses <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
-for anonymous, cookie-free analytics. No personal data is stored and it is not used for advertising.
-We only see page views, referring sites, country/region, browser and screen size, plus on-site search
-terms and result clicks, to improve search quality. See the
-<a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter privacy policy</a>.
-<br>本站使用 <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
-做匿名访问统计：不使用 cookie、不记录个人数据、不用于广告；只统计页面浏览、来源网站、国家/地区、
-浏览器与屏幕尺寸，以及站内搜索词和结果点击，用于改进检索质量。详见
-<a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter 隐私政策</a>。
-<br>Este sitio usa <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
-para estadísticas anónimas sin cookies: no guarda datos personales y no se usa para publicidad.
-Solo se registran visitas, sitios de referencia, país/región, navegador y tamaño de pantalla,
-además de las búsquedas y clics en resultados, para mejorar la búsqueda. Ver la
-<a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">política de privacidad de GoatCounter</a>.</p>
-"""
-    body = f"""<h1>About 关于本站</h1>
-<p class="sub"><b>One job:</b> turn a brand name into the actual substance, and say how sure
-we are. 这里只有一件事：把商品名定位到成分，并说明它到底有多可信。</p>
-
-<h2>Three rules 三条底线</h2>
-<ol>
-<li><b>A brand name is not a primary key. 商品名不是主键。</b>
-Every query returns a set of candidates; identity is pinned by country × form × strength ×
-active ingredient. 唯一性由「国家 × 剂型 × 规格 × 活性成分」锁定。</li>
-<li><b>Collisions are derived, not annotated. 碰撞自动推导。</b>
-When one name hangs off different ingredients, the site flags
-“same name, different drug” automatically.</li>
-<li><b>No dosing advice. 不给用药建议。</b>
-Identification and “not interchangeable” warnings only — no dose conversion, no substitution
-recommendations.</li>
-</ol>
-
-<h2>Nicknames, old names, internet slang 俗称、旧名与网络别名</h2>
-<p>“两只青蛙” is not a brand name and is never stored as one: it points to an ingredient,
-metformin (二甲双胍). Nicknames are a separate, hand-maintained table — searchable, but kept out
-of the brand-name tables on purpose.</p>
-<ul>
-<li>When a nickname matches, the page says so (<i>internet nickname / older name</i>) and then
-lists that ingredient’s brand names. It is never presented as a name printed on a pack.
-<br>命中时先标注「网络俗称 / 旧名」，再列该成分的商品名；不把它说成包装上的名字。</li>
-<li>Every published entry carries a source. “User-provided” is a lead, not evidence: it is
-shown as <i>user-provided (unverified)</i> and is not promoted to <code>documented</code> until an
-independent source is attached. <b>Community names stay searchable</b> and are labelled
-<i>community name</i>; they are not presented as documented. Review verifies a source; it cannot
-replace one. No source, no new entry.
-<br>每条都写出处。「用户提供」只算线索，公开页标「用户提供（未证实）」；<b>社区叫法保留检索</b>，
-标「社区叫法」，不冒充 documented；找到独立出处后才升级。审核只能核实出处，不能代替出处；
-没有来源线索的不新增。</li>
-<li>Nicknames never enter collision detection and never get a “same name” page — a nickname is
-not an identity, the ingredient is.
-<br>不参与同名碰撞推导，也不生成同名页——昵称不是身份，成分才是。</li>
-<li>To add one, edit <code>data/seed_nicknames.py</code> and rebuild. It is curated by hand,
-not scraped.
-<br>要补一条：改 <code>data/seed_nicknames.py</code> 再重建；人工维护，不自动抓。</li>
-</ul>
-<p class="sub">This layer started as a joke: the <i>guā</i> in 二甲双胍 sounds like a frog’s
-<i>guā</i> (呱), so it got called “two frogs”. The point of the site is to connect exactly this
-kind of name back to the substance.<br>
-这一层最初来自一个笑话：二甲双胍的「胍」和青蛙的「呱」同音，于是被叫成「两只青蛙」。这个站想
-做的，就是把这类叫法接回它真正的成分。</p>
-
-<h2>US street names and confused names 美国街头叫法 / 易混淆药名</h2>
-<p class="sub">A separate table (<code>drug_term</code>) holds US street names, folk names and
-class terms. Unlike <code>nickname</code>, it may point to a class (“downers” = depressants)
-or to a controlled substance with no marketed product in this database (“molly” = MDMA), so
-<code>substance_id</code> is nullable. <code>alias_all</code> unions both tables for search.
-<br>美国街头叫法单独放在 <code>drug_term</code>：允许指向类别，或指向本库没有上市产品的管制物质
-（如 MDMA）。检索层只读 <code>alias_all</code> 这一个视图。</p>
-<ul class="sub">
-<li><b>NIDA “Drugs A to Z”</b>: official “Also called” lists — cannabis, cocaine, fentanyl,
-heroin, methamphetamine, prescription opioids, etc. US Government work.
-<br>NIDA 官方 Also called 列表，约 250 条。</li>
-<li><b>DEA “Slang Terms and Code Words” (2018)</b>: a curated subset for prescription-drug
-slang (bars, addy, vikes, dillies, oxy, lean…). Public Domain Mark 1.0.
-<br>DEA 2018 报告，只取与处方药/管制物质对应的词，不取度量、武器等条目。</li>
-<li><b>MedlinePlus (NLM)</b>: common folk/category terms — water pill, blood thinner,
-the pill, morning-after pill, statin… 20 entries.
-<br>MedlinePlus 民间叫法，只收类别词，不转载正文。</li>
-<li><b>Community / country sources</b>: 34 entries — CN community/consumer pages,
-UK <a href="https://www.talktofrank.com/" target="_blank" rel="noopener">Talk to FRANK</a>,
-AU <a href="https://adf.org.au/drug-facts/" target="_blank" rel="noopener">ADF</a>,
-ES <a href="https://pnsd.sanidad.gob.es/" target="_blank" rel="noopener">PNSD</a>.
-Each row carries its own source URL; only the nickname fact is stored.
-<br>社区叫法（CN/GB/AU/ES）逐条带 URL，标「社区叫法」，保留检索。</li>
-<li><b>FDA Name Differentiation Project</b>: {stats['confusable']} official tall-man pairs.
-US Government work. <a href="confused.html">See the list</a>.
-<br>FDA 官方 tall-man 药对；ISMP/ECRI 的完整 LASA 清单有版权，未整表复制。</li>
-</ul>
-
-<h2>Sources and coverage 数据来源与覆盖</h2>
-<table><tr><th>Market 市场</th><th>Products 已收录</th><th>Data as of 数据截止</th></tr>{cov}</table>
-<p class="sub"><b>Data as of 数据截止</b> = 数据源自己发布 / 生效 / 快照的日期，不是我们的抓取日期。
-<code>live</code> = 实时目录或数据库，源头没有单独的日期；<b>—</b> = 源头只发布年度清单，没有单一日期。
-</p>
-<p class="sub"><b>US 美国</b>: openFDA NDC Directory (US Government public data;
-<code>brand_name</code> + <code>active_ingredients</code>).<br>
-<b>UK 英国</b>: NHSBSA dm+d, Release 10.2.0, under the Open Government Licence v3.0 —
-attribution: <i>Contains public sector information licensed under the Open Government Licence
-v3.0.</i> Appliance/device entries were filtered out.<br>
-<b>Spain 西班牙</b>: AEMPS CIMA (Centro de Información online de Medicamentos),
-<code>nregistro</code> + <code>vtm</code> + <code>dosis</code> + <code>atcs</code>; Spanish
-generic names carry the manufacturer (e.g. “Omeprazol Cinfa”), which is how the pack is
-labelled. 西班牙按 VTM 归成分，西语名与英文 INN 共用同一 substance_id。<br>
-<b>Mexico 墨西哥</b>: COFEPRIS «Registros Sanitarios de Medicamentos Alopáticos Expedidos»,
-26 annual PDFs 2001–2026, plus the <i>prórrogas</i> (renewal) lists that carry 1,040 older
-registrations granted before 2001 — 10,878 records in total. Status is derived, not given:
-<i>revocados / cancelados</i> → withdrawn; an expiry date in the past → discontinued; no expiry
-column at all (the 2001–2010 files) → <b>unknown</b>, we do not pretend either way. The lists
-carry <b>no strength column</b>: strengths are back-filled from the ISSSTE procurement catalogue
-and the PROFECO price survey (both CC BY 4.0), only where the value is unambiguous — so a blank
-strength in Mexico is expected, not a bug.<br>
-<b>Australia 澳洲</b>: three layers, because no single Australian source covers both
-prescription and OTC. <b>(1) PBS Schedule API v3</b> (Department of Health), schedule 4751
-effective 1 October 2026 — 15,073 item × brand rows, 5,452 products after collapsing the same
-brand/strength/pack that appears under several restriction codes; the API's copyright notice
-permits use and redistribution if the statement is retained: <i>Copyright (c) 2024 Department
-of Health, Commonwealth of Australia.</i> <b>(2) TGA CMI repository</b> — 4,730 products for
-registered medicines that have a Consumer Medicine Information document (most registered OTC,
-e.g. Panadol, Nurofen), with trade name + active ingredients only: the directory carries no
-strength or form, so those are blank. <b>(3) curated listed-OTC seeds</b> — Gaviscon is an
-AUST L medicine: not in PBS, and listed medicines are not required to have a CMI, so its
-five Australian packs were entered by hand from the sponsor's Australian product pages
-(ingredients and strength per 10 mL / per tablet, source URL kept on each product).
-The full register (TGA ARTG) still has no bulk extract — the eBS public register lists
-current medicines 30 per page but its detail pages are PDFs; complete ingredient-level ARTG
-data would need an FOI request. Stoma/incontinence appliances (PBS program R1) are filtered out.
-<br>澳洲分三层，因为没有单一数据源能同时覆盖处方药和 OTC：PBS 官方 API（补贴处方药）+
-TGA 的 CMI 目录（有消费者说明书的注册类药品，如 Panadol / Nurofen，只有商品名和成分、
-没有规格）+ 人工核对的 listed OTC 种子（Gaviscon 这类 AUST L 药品不进 PBS、也不要求 CMI）。
-ARTG 全量仍然没有批量文件：eBS 的现行药品目录可以按 30 条/页翻，但每条详情只有 PDF，
-要做成分级全量只能走 FOI。R1 造口/失禁用品已按 dm+d 滤器械的同一逻辑排除。<br>
-<b>Canada 加拿大</b>: Health Canada <b>Drug Product Database (DPD)</b> — one row per
-<b>DIN</b> (Drug Identification Number), human products, with brand name, active ingredients
-<b>and strength</b>, pharmaceutical form, route, schedule, ATC-4 and status
-(Marketed / Approved / Dormant / Cancelled). The regulator's bulk ZIP (
-<i>allfiles.zip</i>) is served from canada.ca in a way that blocks programmatic downloads,
-so the extract is taken from the same host's public <b>DPD Open API</b>
-(<code>/api/drug/&lt;endpoint&gt;</code>, nine endpoints, full JSON, no key). The DPD web query
-itself cannot be paged by script — it is a server-side table whose “next page” call needs a
-session bound to the search form — so it is not used as a bulk source. DPD terms allow
-re-use for non-commercial purposes with source acknowledgement: <i>© His Majesty the King in
-Right of Canada, as represented by the Minister of Health.</i>
-<br>加拿大用 Health Canada 的 DPD，一行 = 一个 DIN（加拿大的药品识别号）：商品名、成分、
-<strong>强度</strong>、剂型、途径、处方类别、ATC-4、状态都在。官方的 allfiles.zip 挂在
-canada.ca，程序化下载会被挡（HEAD/GET 都超时），所以改为同一台主机上的公开 DPD Open API
-（9 个端点、全量 JSON、无需 key）。DPD 网页查询是服务端分页表，翻页要绑定搜索会话，
-脚本翻不动，因此不当批量源用。许可只允许非商业再使用，须注明来源。
-Canadian names are mapped to the same <code>substance_id</code>s as the other markets —
-<i>ACETYLSALICYLIC ACID</i> → aspirin, <i>ADRENALINE</i> → epinephrine,
-<i>GLYCERYL TRINITRATE</i> → nitroglycerin; the salt inside the parentheses becomes the
-variant. Homeopathic entries (schedule <i>HOMEOPATHIC</i>, strengths given as CH/DH/X dilutions)
-are excluded, as are veterinary, radiopharmaceutical and disinfectant products.
-<br>加拿大的老式英文名（acetylsalicylic acid、adrenaline、glyceryl trinitrate）统一映射到
-其他市场用的 INN，括号里的盐记成 variant；顺势疗法（强度是 CH/DH/X 稀释度）以及兽药、
-放射性药品、消毒剂整条排除。
-<b>China 中国</b>: 国家医保局「医保药品分类与代码数据库」, 2025-04-04 snapshot — 252,097
-catalogue rows (the same batch is a PDF), of which the chemical-drug rows load as 146,344
-products. Chinese generic names are mapped onto the same English
-<code>substance_id</code>s the other markets use, through a hand-built 中文→INN table (~1,080
-entries) plus an ATC-4 lookup that only fires when that ATC class is unambiguous; the residue
-sits on China-only substances that a later pass can map. 中成药 is excluded on purpose.
-商品名 exists for only a minority of rows, so most Chinese products are
-reachable by generic name rather than by brand.</p>
-
-<h2>Why “same name, different drug” happens 为什么会有同名不同药</h2>
-<p class="sub">The same trademark is held by different companies in different markets, and the
-formula can differ completely. Verified examples: US <b>Tylenol</b> is single-ingredient
-acetaminophen 500 mg, while China <b>泰诺</b> is a four-ingredient cold medicine and the
-single-ingredient product is <b>泰诺林</b>; US <b>Benadryl</b> is diphenhydramine, UK
-<b>Benadryl</b> is acrivastine; US <b>Gaviscon</b> is an aluminium/magnesium antacid, UK
-Gaviscon is an alginate raft.</p>
-
-<h2>Known gaps 已知缺口</h2>
-<ul class="sub">
-<li>China now carries 146,344 chemical-drug registrations, but ~9% of them resolve only to a
-China-only substance (no English INN yet), and China's ATC is stored at level 4 — these
-products carry ATC-4, not ATC-5. 中成药 is not loaded.<br>
-中国已入库 14.6 万条化学药，但约 9% 只能落到 CN 专属成分（暂无英文 INN），
-ATC 只到第 4 级；中成药未收录。</li>
-<li>Strength equivalence stops at level D1 (same salt form). Salt-base conversion (D2) and
-bioavailability judgement (D3) are not implemented.<br>
-剂量只做到同型对应，盐基折算与生物利用度判定未做。</li>
-<li>Mexico has no strength in the regulator's bulk lists; only 29% of products could be
-back-filled from public catalogues, and no brand-level bulk source exists.
-<br>墨西哥官方清单没有浓度列，只有 29% 的产品能从公开目录回填。</li>
-<li>The Mexican files only list registrations issued from 2001 onward; the renewal lists recover
-1,040 older ones, but anything never renewed is still missing.
-<br>墨西哥清单只含 2001 年起新批的注册，续期清单补回 1,040 条老药，其余仍缺。</li>
-<li>Canada's DPD carries no pack size or price, and most OTC consumer packs (Tylenol, Advil,
-Motrin…) were authorised before the DPD's electronic era: only some of them have a DIN row,
-so a Canadian OTC pack can be missing even though it is on every shelf.
-<br>加拿大 DPD 没有包装数量/价格；很多 OTC 消费装（Tylenol、Advil、Motrin…）是电子化之前
-就批的，DPD 里只有部分品牌有 DIN 行，所以货架上有的 OTC 可能查不到。</li>
-<li>ATC codes cover {stats['atc_pct']}% of substances ({stats['atc']:,} / {stats['substances']:,}).
-Part of the coverage comes from
-Wikidata <code>P267</code> (CC0, attributed here); the rest is missing because dm+d carries no ATC
-field and WHOCC's ATC/DDD index needs a licence.
-<br>ATC 覆盖 {stats['atc_pct']}%（{stats['atc']:,} / {stats['substances']:,}），其中一部分由 Wikidata P267（CC0）补齐并在此署名；
-其余缺失：dm+d 没有 ATC 字段，WHOCC 的 ATC/DDD 需要授权。</li>
-</ul>
-{analytics_html}
-<p class="sub">Stats 统计：{stats['products']:,} products · {stats['substances']:,} substances ·
-{stats['keys']:,} name keys · {stats['aliases']:,} aliases
-({stats['nickname']:,} hand-curated nicknames) · {stats['confusable']} FDA confused pairs ·
-{stats['severe']:,} names flagged “same name, different drug”.</p>"""
+        parts.append(f'<div data-i18n-html="about.analytics">{T["about.analytics"]}</div>')
+    parts.append(f'<div data-i18n-html="about.stats">{T["about.stats"]}</div>')
+    body = "\n".join(parts)
     (OUT / "about.html").write_text(page("About", body), encoding="utf-8")
-
 
 def build_confused(db: sqlite3.Connection) -> int:
     """易混淆药对页：只列有官方出处的配对。"""
@@ -1972,15 +3246,10 @@ def build_confused(db: sqlite3.Connection) -> int:
 Differentiation Project. This is the official tall-man list, not the full ISMP LASA list.</p>
 <div class="notice" data-i18n="conf.note">A pair here means the names can be mistaken for each
 other; it does not mean the drugs are interchangeable.</div>
-<table><thead><tr>
+<div class="tablewrap"><table><thead><tr>
   <th data-i18n="conf.pair">Pair</th><th></th><th data-i18n="conf.tml">Tall-man spelling</th>
-</tr></thead><tbody>{''.join(body_rows)}</tbody></table>
-<p class="sub">Source: <a href="https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project"
-target="_blank" rel="noopener">FDA Name Differentiation Project</a>
-(content current as of 2026-06-12; US Government work).<br>
-只收 FDA 官方可再发布的 {len(rows)} 对；ISMP/ECRI 的《List of Confused Drug Names》
-有版权，未整表复制。FDA 表里的单名条目（hydromorphone、mitoxantrone）没有配对，未列入。<br>
-A pair is a warning about names, not a statement that the drugs are equivalent.</p>"""
+</tr></thead><tbody>{''.join(body_rows)}</tbody></table></div>
+<p class="sub" data-i18n-html="conf.source_note">{I18N['en']['conf.source_note']}</p>"""
     (OUT / "confused.html").write_text(
         page("Easily confused drug names", body), encoding="utf-8")
     return len(rows)
@@ -1997,6 +3266,7 @@ def build_404() -> None:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Page not found · Medicine Brand Cross-Reference</title>
+<script src="{SITE_URL}assets/i18n.js?v={BUILD_V}"></script>
 <style>
 :root{{color-scheme:light dark}}
 body{{margin:0;font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -2007,16 +3277,15 @@ p{{color:#3d4a43;margin:8px 0}}
 .links{{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap}}
 a{{color:#0b6b53}}
 </style></head><body><main>
-<h1>Page not found · 页面不存在</h1>
-<p>这个地址没有对应的页面。可能是链接过期、拼写有误，或页面已改名。</p>
-<p>This address has no page. It may be an old link, a typo, or a renamed entry.</p>
-<p>回到首页输入一个药名（商品名、通用名、俗称都可以）：</p>
-<p class="links"><a href="{SITE_URL}">Search · 检索</a>
-<a href="{SITE_URL}about.html">About · 关于</a>
-<a href="{SITE_URL}confused.html">Confused names · 易混淆</a>
-<a href="{SITE_URL}whats-new.html">What's new · 更新</a></p>
-<p style="margin-top:28px;font-size:13px;color:#7a857e">如果是站内链接坏了，欢迎到
-<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a> 报一声。</p>
+<h1 data-i18n="notfound.title">Page not found</h1>
+<p data-i18n="notfound.p1">This address has no page. It may be an old link, a typo, or a renamed entry.</p>
+<p data-i18n="notfound.p2">Go back to the home page and type a medicine name (brand, generic or nickname).</p>
+<p class="links"><a href="{SITE_URL}" data-i18n="notfound.search">Search</a>
+<a href="{SITE_URL}about.html" data-i18n="notfound.about">About</a>
+<a href="{SITE_URL}confused.html" data-i18n="notfound.confused">Confused names</a>
+<a href="{SITE_URL}whats-new.html" data-i18n="notfound.whatsnew">What's new</a></p>
+<p style="margin-top:28px;font-size:13px;color:#7a857e" data-i18n-html="notfound.report">If an internal link is broken, tell us on
+<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a>.</p>
 </main></body></html>"""
     (OUT / "404.html").write_text(html, encoding="utf-8")
 
@@ -2150,14 +3419,91 @@ def encode_core(entries) -> dict:
             "q": [i for i, e in enumerate(entries) if e.get("q")]}
 
 
+
+# ── 搜索增强（task-28）：拼音字符表 + 拼音/首字母 token 编码 ──────────────────
+# 1,582 个字 = 索引/别名里出现过的全部汉字（pinyin-pro 3.29.5，toneType=none，
+# 取默认读音；多音字用默认读音即可，拼音只是 exact/prefix 之外的增量兜底路径）。
+# 生成/校验方式见 reports/search-engine-v2.md；客户端不依赖拼音库：查询串本身就是
+# token（tainuo -> j:tainuo，tn -> i:tn），只需按 token 精确查表。
+_PINYIN_CHARS_TEXT = "䓬:zhuo 一:yi 丁:ding 七:qi 万:wan 三:san 上:shang 下:xia 不:bu 与:yu 专:zhuan 世:shi 丙:bing 业:ye 东:dong 丝:si 两:liang 严:yan 中:zhong 丰:feng 临:lin 丸:wan 丹:dan 为:wei 丽:li 乃:nai 久:jiu 之:zhi 乌:wu 乎:hu 乐:le 乙:yi 九:jiu 乱:luan 乳:ru 了:liao 予:yu 二:er 云:yun 五:wu 亚:ya 亢:kang 交:jiao 亦:yi 产:chan 京:jing 亭:ting 亮:liang 人:ren 亿:yi 仁:ren 今:jin 介:jie 仑:lun 仔:zai 仕:shi 他:ta 仙:xian 仟:qian 代:dai 令:ling 仪:yi 仲:zhong 价:jia 任:ren 伉:kang 伊:yi 伏:fu 伐:fa 休:xiu 众:zhong 优:you 伞:san 伟:wei 伤:shang 伦:lun 伪:wei 伯:bo 伲:ni 伴:ban 伶:ling 伸:shen 伽:jia 位:wei 低:di 佐:zuo 佑:you 体:ti 佛:fo 佩:pei 佰:bai 佳:jia 佶:ji 使:shi 侗:dong 供:gong 依:yi 侣:lü 侬:nong 便:bian 促:cu 俊:jun 保:bao 信:xin 俪:li 修:xiu 倍:bei 倡:chang 倩:qian 假:jia 停:ting 健:jian 催:cui 傲:ao 僖:xi 儒:ru 儿:er 允:yun 元:yuan 充:chong 兆:zhao 先:xian 光:guang 克:ke 免:mian 兔:tu 入:ru 全:quan 八:ba 公:gong 六:liu 兮:xi 兰:lan 关:guan 兴:xing 兵:bing 其:qi 典:dian 兹:zi 养:yang 内:nei 冉:ran 册:ce 再:zai 军:jun 农:nong 冠:guan 冬:dong 冰:bing 冲:chong 决:jue 冷:leng 冻:dong 净:jing 凌:ling 减:jian 凝:ning 凡:fan 凯:kai 出:chu 分:fen 切:qie 列:lie 则:ze 刚:gang 创:chuang 初:chu 利:li 别:bie 制:zhi 刹:cha 刺:ci 刻:ke 剂:ji 前:qian 剑:jian 力:li 功:gong 加:jia 动:dong 助:zhu 努:nu 劲:jin 劳:lao 勃:bo 勉:mian 勒:le 勤:qin 包:bao 化:hua 北:bei 匙:chi 匹:pi 区:qu 十:shi 千:qian 升:sheng 卉:hui 半:ban 华:hua 协:xie 卓:zhuo 单:dan 南:nan 博:bo 卜:bu 卟:bu 占:zhan 卡:ka 卢:lu 卤:lu 卫:wei 即:ji 卵:luan 卷:juan 厄:e 历:li 压:ya 原:yuan 去:qu 参:can 及:ji 友:you 双:shuang 反:fan 发:fa 叔:shu 取:qu 受:shou 变:bian 口:kou 古:gu 只:zhi 叮:ding 可:ke 台:tai 史:shi 右:you 叶:ye 号:hao 司:si 合:he 吉:ji 同:tong 名:ming 后:hou 吐:tu 吖:a 吗:ma 君:jun 吡:bi 吨:dun 吩:fen 含:han 启:qi 吲:yin 吸:xi 吻:wen 吾:wu 呋:fu 呗:bai 呤:ling 呫:tie 呱:gua 味:wei 呵:he 呼:hu 命:ming 咀:zui 和:he 咐:fu 咖:ka 咛:ning 咨:zi 咪:mi 咯:ge 咳:hai 品:pin 哈:ha 哌:pai 哒:da 哚:duo 哥:ge 哲:zhe 唐:tang 唑:zuo 唛:mai 唯:wei 唾:tuo 商:shang 啉:lin 啡:fei 啶:ding 喃:nan 善:shan 喉:hou 喏:nuo 喜:xi 喷:pen 喹:kui 嗉:su 嗜:shi 嗪:qin 嘉:jia 嘌:piao 嘧:mi 嘿:hei 噁:e 器:qi 噬:shi 噻:sai 嚼:jiao 囊:nang 囗:wei 四:si 因:yin 固:gu 国:guo 图:tu 土:tu 圣:sheng 在:zai 地:di 均:jun 坎:kan 坏:huai 坤:kun 坦:tan 垂:chui 型:xing 埃:ai 域:yu 培:pei 基:ji 堂:tang 塔:ta 塞:sai 增:zeng 墩:dun 壁:bi 士:shi 壬:ren 壮:zhuang 声:sheng 壹:yi 备:bei 复:fu 夏:xia 外:wai 多:duo 夜:ye 大:da 天:tian 太:tai 夫:fu 失:shi 头:tou 夷:yi 夸:kua 奇:qi 奈:nai 奉:feng 奋:fen 奎:kui 奕:yi 奥:ao 女:nü 奴:nu 好:hao 如:ru 妇:fu 妈:ma 妙:miao 妤:yu 妥:tuo 妮:ni 姆:mu 姜:jiang 威:wei 娜:na 婕:jie 婷:ting 媒:mei 子:zi 孕:yun 存:cun 孚:fu 孛:bei 孟:meng 孢:bao 学:xue 孩:hai 宁:ning 它:ta 宇:yu 安:an 宏:hong 宓:mi 宗:zong 定:ding 宜:yi 宝:bao 实:shi 宣:xuan 宫:gong 家:jia 容:rong 宾:bin 密:mi 富:fu 寒:han 对:dui 导:dao 封:feng 射:she 将:jiang 小:xiao 尓:er 尔:er 尖:jian 尘:chen 尚:shang 尤:you 尼:ni 尽:jin 尿:niao 层:ceng 屈:qu 屋:wu 屏:ping 屑:xie 山:shan 岁:sui 岚:lan 岛:dao 岩:yan 峰:feng 崩:beng 川:chuan 工:gong 左:zuo 巧:qiao 巨:ju 巯:qiu 己:ji 已:yi 巴:ba 布:bu 帅:shuai 帆:fan 希:xi 帕:pa 帝:di 带:dai 帮:bang 常:chang 幔:man 干:gan 平:ping 幸:xing 广:guang 庆:qing 库:ku 应:ying 庚:geng 度:du 康:kang 延:yan 廷:ting 廸:di 建:jian 廿:nian 开:kai 异:yi 式:shi 弗:fu 弘:hong 张:zhang 弥:mi 弹:tan 强:qiang 归:gui 当:dang 彤:tong 影:ying 彼:bi 征:zheng 待:dai 律:lü 得:de 御:yu 循:xun 微:wei 德:de 心:xin 必:bi 忆:yi 志:zhi 快:kuai 念:nian 忻:xin 忾:kai 思:si 怡:yi 性:xing 总:zong 恒:heng 恤:xu 恩:en 恪:ke 恬:tian 息:xi 恺:kai 悉:xi 悦:yue 悬:xuan 惟:wei 惠:hui 愈:yu 意:yi 感:gan 慢:man 慧:hui 慰:wei 慷:kang 戈:ge 戊:wu 成:cheng 戴:dai 扁:bian 手:shou 扎:zha 扑:pu 托:tuo 扬:yang 扰:rao 扶:fu 承:cheng 抑:yi 抒:shu 抗:kang 折:zhe 抚:fu 护:hu 拉:la 拓:tuo 拜:bai 择:ze 拿:na 挺:ting 换:huan 捷:jie 接:jie 控:kong 提:ti 握:wo 援:yuan 搏:bo 搽:cha 撒:sa 擎:qing 支:zhi 收:shou 攸:you 改:gai 放:fang 效:xiao 敌:di 敏:min 敖:ao 敢:gan 散:san 敦:dun 敬:jing 整:zheng 敷:fu 文:wen 斑:ban 断:duan 斯:si 新:xin 方:fang 施:shi 旁:pang 旋:xuan 无:wu 日:ri 旦:dan 旨:zhi 旭:xu 时:shi 旺:wang 昂:ang 昆:kun 昊:hao 昌:chang 明:ming 易:yi 昔:xi 昕:xin 昙:tan 星:xing 春:chun 显:xian 晋:jin 晓:xiao 晗:han 晟:sheng 晨:chen 普:pu 景:jing 晴:qing 晶:jing 智:zhi 暴:bao 曲:qu 更:geng 曼:man 曾:ceng 替:ti 月:yue 朋:peng 服:fu 朗:lang 望:wang 期:qi 朦:meng 木:mu 末:mo 本:ben 术:shu 朴:pu 朵:duo 机:ji 杆:gan 杉:shan 李:li 杏:xing 杖:zhang 杜:du 束:shu 来:lai 杨:yang 杭:hang 杰:jie 杷:pa 松:song 板:ban 极:ji 构:gou 枇:pi 析:xi 林:lin 果:guo 枝:zhi 枢:shu 枯:ku 架:jia 枸:gou 柏:bai 柑:gan 柔:rou 柠:ning 柯:ke 柳:liu 柴:chai 树:shu 栓:shuan 栢:bai 株:zhu 样:yang 核:he 根:gen 格:ge 桂:gui 桃:tao 桉:an 桑:sang 桔:ju 桦:hua 梅:mei 梗:geng 梨:li 梭:suo 检:jian 棉:mian 棒:bang 棓:bang 棕:zong 棘:ji 森:sen 植:zhi 椒:jiao 榄:lan 榈:lü 榔:lang 榕:rong 榭:xie 榴:liu 槐:huai 槟:bin 樟:zhang 橘:ju 橙:cheng 橼:yuan 檗:bo 檬:meng 次:ci 欢:huan 欣:xin 欧:ou 歌:ge 止:zhi 正:zheng 步:bu 武:wu 歧:qi 死:si 殊:shu 殷:yin 毅:yi 母:mu 每:mei 毒:du 毓:yu 比:bi 毕:bi 毛:mao 氏:shi 民:min 气:qi 氘:dao 氟:fu 氢:qing 氧:yang 氨:an 氮:dan 氯:lü 氰:qing 水:shui 永:yong 汀:ting 汁:zhi 汇:hui 汉:han 汕:shan 汝:ru 汞:gong 汰:tai 沁:qin 沂:yi 沃:wo 沐:mu 沙:sha 沛:pei 没:mei 沥:li 沫:mo 河:he 油:you 治:zhi 泉:quan 泊:bo 泌:mi 法:fa 泛:fan 泡:pao 波:bo 注:zhu 泪:lei 泮:pan 泯:min 泰:tai 泻:xie 泼:po 泽:ze 洁:jie 洋:yang 洗:xi 洛:luo 津:jin 洲:zhou 活:huo 派:pai 流:liu 浆:jiang 测:ce 济:ji 浓:nong 浙:zhe 浦:pu 浩:hao 浪:lang 海:hai 浸:jin 涂:tu 消:xiao 涓:juan 润:run 液:ye 涵:han 淀:dian 淑:shu 深:shen 淳:chun 混:hun 添:tian 清:qing 渗:shen 渠:qu 温:wen 渭:wei 港:gang 游:you 湖:hu 溉:gai 源:yuan 溢:yi 溴:xiu 溶:rong 滋:zi 滔:tao 滞:zhi 满:man 滤:lü 滨:bin 滴:di 漱:shu 潇:xiao 潘:pan 澜:lan 澳:ao 激:ji 瀚:han 灌:guan 火:huo 灭:mie 灰:hui 灵:ling 炉:lu 炎:yan 炔:que 炭:tan 点:dian 烃:ting 烟:yan 热:re 烯:xi 烷:wan 焦:jiao 然:ran 熊:xiong 熙:xi 熹:xi 爱:ai 爽:shuang 片:pian 牙:ya 牛:niu 牡:mu 物:wu 特:te 犀:xi 犬:quan 状:zhuang 狂:kuang 狄:di 狗:gou 独:du 猗:yi 猛:meng 猪:zhu 猫:mao 猴:hou 玄:xuan 玉:yu 王:wang 玖:jiu 玛:ma 玥:yue 玫:mei 环:huan 玻:bo 珀:po 珂:ke 珊:shan 珍:zhen 珐:fa 珑:long 珞:luo 珠:zhu 班:ban 珮:pei 球:qiu 琅:lang 理:li 琥:hu 琦:qi 琪:qi 琳:lin 琴:qin 琼:qiong 瑙:nao 瑚:hu 瑜:yu 瑞:rui 瑟:se 璃:li 璐:lu 璞:pu 瓜:gua 瓦:wa 甘:gan 甜:tian 生:sheng 用:yong 甫:fu 田:tian 由:you 甲:jia 申:shen 电:dian 甾:zai 畅:chang 留:liu 番:fan 疏:shu 疗:liao 疫:yi 疮:chuang 疱:pao 疹:zhen 病:bing 症:zheng 痔:zhi 痘:dou 痛:tong 痢:li 瘤:liu 癌:ai 癣:xuan 癸:gui 登:deng 白:bai 百:bai 皂:zao 的:de 皆:jie 皇:huang 皓:hao 皮:pi 皿:min 盈:ying 益:yi 盐:yan 盒:he 盖:gai 盘:pan 盛:sheng 盟:meng 目:mu 直:zhi 相:xiang 盼:pan 盾:dun 眉:mei 真:zhen 眩:xuan 眼:yan 睦:mu 睾:gao 睿:rui 矛:mao 知:zhi 短:duan 石:shi 矾:fan 砂:sha 研:yan 砜:feng 破:po 砷:shen 础:chu 硅:gui 硒:xi 硝:xiao 硫:liu 硬:ying 确:que 硼:peng 碇:ding 碘:dian 碧:bi 碱:jian 碳:tan 磊:lei 磷:lin 磺:huang 示:shi 社:she 祛:qu 祝:zhu 神:shen 祥:xiang 祺:qi 禄:lu 福:fu 离:li 禾:he 秀:xiu 秋:qiu 种:zhong 科:ke 秘:mi 秦:qin 积:ji 移:yi 稀:xi 稳:wen 穆:mu 穗:sui 穿:chuan 立:li 童:tong 端:duan 竹:zhu 笋:sun 笑:xiao 笔:bi 笛:di 符:fu 策:ce 简:jian 算:suan 管:guan 米:mi 类:lei 籽:zi 粉:fen 粒:li 粘:nian 粟:su 精:jing 糊:hu 糖:tang 糜:mi 糠:kang 系:xi 素:su 索:suo 紧:jin 紫:zi 累:lei 红:hong 纤:xian 纬:wei 纯:chun 纱:sha 纳:na 纷:fen 纽:niu 纾:shu 线:xian 组:zu 绅:shen 细:xi 织:zhi 绍:shao 经:jing 绒:rong 结:jie 给:gei 绛:jiang 络:luo 统:tong 绣:xiu 绥:sui 绪:xu 绮:qi 维:wei 绵:mian 综:zong 绿:lü 缇:ti 缌:si 缓:huan 缘:yuan 缩:suo 缬:xie 缺:que 罂:ying 罗:luo 置:zhi 羊:yang 美:mei 羔:gao 羚:ling 羟:qiang 群:qun 羧:suo 羽:yu 翁:weng 翔:xiang 翘:qiao 翰:han 考:kao 而:er 耐:nai 耳:er 联:lian 聚:ju 聪:cong 肉:rou 肌:ji 肖:xiao 肝:gan 肟:wo 肠:chang 肤:fu 肥:fei 肪:fang 肯:ken 育:yu 肺:fei 肼:jing 肽:tai 肾:shen 肿:zhong 胀:zhang 胂:shen 胃:wei 胆:dan 胍:gua 胎:tai 胚:pei 胜:sheng 胞:bao 胡:hu 胭:yan 胰:yi 胱:guang 胶:jiao 胸:xiong 胺:an 能:neng 脂:zhi 脉:mai 脊:ji 脑:nao 脒:mi 脯:pu 脱:tuo 脲:niao 脾:pi 腈:jing 腐:fu 腔:qiang 腙:zong 腥:xing 腮:sai 腹:fu 腺:xian 腾:teng 膏:gao 膜:mo 膦:lin 膨:peng 臣:chen 自:zi 至:zhi 致:zhi 臻:zhen 臼:jiu 舌:she 舍:she 舒:shu 良:liang 色:se 艾:ai 节:jie 芊:qian 芍:shao 芎:xiong 芙:fu 芝:zhi 芥:jie 芦:lu 芩:qin 芪:qi 芬:fen 芭:ba 芮:rui 芯:xin 花:hua 芳:fang 芷:zhi 芸:yun 芽:ya 苄:bian 苏:su 苓:ling 苗:miao 若:ruo 苦:ku 苧:zhu 苯:ben 英:ying 苷:gan 苹:ping 茁:zhuo 茄:qie 茉:mo 茚:yin 茛:gen 茜:qian 茴:hui 茵:yin 茶:cha 荃:quan 荆:jing 草:cao 荟:hui 荣:rong 荧:ying 药:yao 荷:he 荻:di 莎:sha 莨:lang 莪:e 莫:mo 莰:kan 莱:lai 莲:lian 获:huo 莹:ying 菁:jing 菇:gu 菊:ju 菌:jun 菏:he 菖:chang 菜:cai 菠:bo 菪:dang 菱:ling 菲:fei 萄:tao 萌:meng 萘:nai 萝:luo 营:ying 萨:sa 萩:qiu 落:luo 葆:bao 葎:lü 葛:ge 葡:pu 葵:kui 蒂:di 蒎:pai 蒙:meng 蒜:suan 蒲:pu 蒽:en 蒿:hao 蓉:rong 蓓:bei 蓝:lan 蓟:ji 蓣:yu 蔓:man 蔗:zhe 蔺:lin 蔻:kou 蕊:rui 蕲:qi 薁:yu 薄:bao 薇:wei 薯:shu 藤:teng 藻:zao 虎:hu 虑:lü 虫:chong 虹:hong 蚓:yin 蛇:she 蛋:dan 蛎:li 蛙:wa 蛹:yong 蜂:feng 蜚:fei 蜜:mi 蜡:la 蝎:xie 蝥:mao 蝮:fu 蝶:die 融:rong 螨:man 螺:luo 蠊:lian 血:xue 行:xing 衍:yan 衡:heng 衣:yi 补:bu 表:biao 袋:dai 裂:lie 装:zhuang 裕:yu 西:xi 见:jian 观:guan 视:shi 角:jiao 解:jie 言:yan 誉:yu 讯:xun 记:ji 设:she 诊:zhen 试:shi 诗:shi 诚:cheng 诺:nuo 谊:yi 谓:wei 谛:di 谱:pu 谷:gu 豆:dou 象:xiang 豪:hao 贝:bei 贞:zhen 质:zhi 贯:guan 贴:tie 贵:gui 费:fei 贺:he 贻:yi 赋:fu 赐:ci 赖:lai 赛:sai 赞:zan 赤:chi 赫:he 超:chao 越:yue 跃:yue 路:lu 踪:zong 蹄:ti 身:shen 车:che 轩:xuan 转:zhuan 轮:lun 软:ruan 轻:qing 载:zai 较:jiao 辅:fu 辉:hui 输:shu 辛:xin 辣:la 辰:chen 辽:liao 达:da 迁:qian 迅:xun 过:guo 迈:mai 运:yun 近:jin 返:fan 还:hai 远:yuan 连:lian 迦:jia 迪:di 迭:die 迷:mi 适:shi 选:xuan 逊:xun 透:tou 通:tong 速:su 造:zao 逸:yi 逻:luo 遇:yu 道:dao 那:na 邦:bang 邻:lin 郁:yu 郝:hao 都:dou 酊:ding 配:pei 酐:gan 酒:jiu 酚:fen 酞:tai 酪:lao 酮:tong 酯:zhi 酰:xian 酵:jiao 酶:mei 酸:suan 酿:niang 醇:chun 醋:cu 醌:kun 醑:xu 醚:mi 醛:quan 采:cai 释:shi 里:li 重:zhong 量:liang 金:jin 鑫:xin 钆:ga 钇:yi 钐:shan 钙:gai 钠:na 钡:bei 钦:qin 钩:gou 钰:yu 钴:gu 钾:jia 铁:tie 铂:bo 铃:ling 铊:ta 铋:bi 铜:tong 铝:lü 铭:ming 铵:an 银:yin 链:lian 铿:keng 锂:li 锆:gao 锋:feng 锌:xin 锐:rui 锑:ti 锝:de 锡:xi 锦:jin 锭:ding 锰:meng 锵:qiang 锶:si 镁:mei 镇:zhen 镜:jing 镧:lan 镭:lei 长:chang 门:men 闭:bi 闯:chuang 闲:xian 间:jian 阁:ge 阔:kuo 防:fang 阳:yang 阴:yin 阿:a 附:fu 陆:lu 降:jiang 陷:xian 隆:long 隐:yin 雄:xiong 雅:ya 集:ji 雌:ci 雨:yu 雪:xue 雷:lei 雾:wu 霁:ji 震:zhen 霉:mei 霍:huo 霖:lin 霜:shuang 霡:mai 露:lu 青:qing 靓:liang 靖:jing 静:jing 靛:dian 非:fei 面:mian 革:ge 鞘:qiao 鞣:rou 韦:wei 韬:tao 韵:yun 顶:ding 顺:shun 顿:dun 颂:song 预:yu 颅:lu 颇:po 颊:jia 颐:yi 颖:ying 颗:ke 颜:yan 颠:dian 风:feng 飒:sa 飞:fei 食:shi 饮:yin 馈:kui 首:shou 香:xiang 馨:xin 马:ma 骁:xiao 验:yan 骨:gu 髓:sui 高:gao 鬼:gui 魏:wei 鱼:yu 鲁:lu 鲑:gui 鲨:sha 鲸:jing 鸟:niao 鸡:ji 鸣:ming 鸿:hong 鹅:e 鹿:lu 麝:she 麟:lin 麦:mai 麸:fu 麻:ma 黄:huang 黏:nian 默:mo 黛:dai 鼎:ding 鼠:shu 鼻:bi 齐:qi 龄:ling 龙:long"
+_PINYIN_DICT: dict[str, str] | None = None
+
+
+def _pinyin_dict() -> dict[str, str]:
+    """把「字:拼音」空格串解析成 dict（进程内只解析一次）。"""
+    global _PINYIN_DICT
+    if _PINYIN_DICT is None:
+        out: dict[str, str] = {}
+        for part in _PINYIN_CHARS_TEXT.split():
+            ch, _, py = part.partition(":")
+            if ch and py:
+                out[ch] = py
+        _PINYIN_DICT = out
+    return _PINYIN_DICT
+
+
+def _pinyin_tokens(text: str) -> list[str]:
+    """汉字串 -> 拼音 token 集合：s:音节 / j:连写 / i:首字母；拉丁片段按词切。"""
+    table = _pinyin_dict()
+    syl: list[str] = []
+    toks: set[str] = set()
+    for ch in text or "":
+        if "\u3400" <= ch <= "\u9fff":
+            p = table.get(ch)
+            if p:
+                syl.append(p)
+                toks.add("s:" + p)
+        elif ch.isascii() and ch.isalnum():
+            syl.append(ch.lower())
+            toks.add("s:" + ch.lower())
+    if len(syl) > 1:
+        toks.add("j:" + "".join(syl))
+        toks.add("i:" + "".join(x[0] for x in syl))
+    return sorted(toks)
+
+
+def encode_pinyin(entries, aliases) -> dict:
+    """拼音/首字母别名表：token -> 条目下标数组（客户端懒加载，约 0.4 MB gzip）。
+
+    - 名字键里含汉字的条目：按 k 生成 token；
+    - 俗称/旧名：按显示名生成 token，指向该成分的条目（每个 token 最多 40 条，
+      按 n 降序截断，控制懒加载体积；拼音只是增量路径，完整品牌列表仍由 result 页/中文俗称路径给出）。
+    """
+    toks: dict[str, set[int]] = {}
+    for i, e in enumerate(entries):
+        k = e.get("k") or ""
+        if not re.search(r"[\u3400-\u9fff]", k):
+            continue
+        for tk in _pinyin_tokens(k):
+            toks.setdefault(tk, set()).add(i)
+    sid_ids: dict[str, list[int]] = {}
+    for i, e in enumerate(entries):
+        for sid in (e.get("vs") or [e.get("v")]):
+            if sid:
+                sid_ids.setdefault(sid, []).append(i)
+    for a in aliases:
+        sid = a.get("v")
+        label = a.get("a") or a.get("n") or ""
+        if not sid or not re.search(r"[\u3400-\u9fff]", label):
+            continue
+        ids = sid_ids.get(sid) or []
+        if not ids:
+            continue
+        if len(ids) > 10:
+            ids = sorted(ids, key=lambda i: -(entries[i].get("n") or 0))[:10]
+        for tk in _pinyin_tokens(label):
+            toks.setdefault(tk, set()).update(ids)
+    return {"v": 1, "tokens": [[k, sorted(v)] for k, v in sorted(toks.items())]}
+
+
 def main() -> None:
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     (OUT / "data").mkdir(parents=True, exist_ok=True)
     (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
-    i18n_js = (
-        "window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n" + r"""
+    def _render_i18n_js() -> str:
+        return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n" + r"""
 (function(){
   var D = window.I18N;
   // 站点根路径：i18n.js 在 <head> 同步执行，currentScript 可用。
@@ -2187,6 +3533,13 @@ def main() -> None:
   function apply(){
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
+    // i18n P1：About / What's new / Confused / 404 的正文块允许内嵌链接与表格，
+    // 用 data-i18n-html 走 innerHTML（内容全部来自构建期字典，非用户输入）。
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){ el.innerHTML = window.T(el.dataset.i18nHtml); });
+    // /warn 与成分页的警示正文是数据行（zh/en/es 各一份），按当前语言只显示对应块。
+    document.querySelectorAll('[data-lang-block]').forEach(function(el){
+      el.style.display = (el.dataset.langBlock === window.LANG) ? '' : 'none';
+    });
     document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = window.T(el.dataset.ph); });
     document.querySelectorAll('.langs a').forEach(function(a){
       a.classList.toggle('on', a.dataset.lang === window.LANG);
@@ -2220,11 +3573,12 @@ def main() -> None:
   window.addEventListener('load', apply);
 })();
 """
-    )
-    (OUT / "assets" / "i18n.js").write_text(i18n_js, encoding="utf-8")
+        )
+    (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
     (OUT / "assets" / "app.js").write_text(
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
         .replace("data/idx/core.json", f"data/idx/core.json?v={int(time.time())}")
+        .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={int(time.time())}")
         .replace("data/index.json", f"data/index.json?v={int(time.time())}"),
         encoding="utf-8")
 
@@ -2251,6 +3605,21 @@ def main() -> None:
             "SELECT COUNT(*) FROM collision WHERE level='severe'").fetchone()[0],
     }
     stats["atc_pct"] = round(stats["atc"] / stats["substances"] * 100, 1) if stats["substances"] else 0
+    # i18n P1：About 双口径 ATC（动态）+ drug_term 计数 + About/Confused 占位符替换。
+    # i18n.js 里内嵌三语字典，所以必须在这批动态值算完后重写一次 i18n.js（前面那次是初版）。
+    atc_cov = _atc_coverage(db)
+    stats["drug_term"] = db.execute("SELECT COUNT(*) FROM drug_term").fetchone()[0]
+    # /warn：只统计 published（draft/retracted 不展示，也不进页面计数）
+    warn_by_sev = {"high": 0, "medium": 0, "info": 0}
+    for sev, n in db.execute("SELECT severity, COUNT(*) FROM dose_warning "
+                             "WHERE status = 'published' GROUP BY severity"):
+        warn_by_sev[sev] = n
+    stats["warn_high"] = warn_by_sev["high"]
+    stats["warn_medium"] = warn_by_sev["medium"]
+    stats["warn_info"] = warn_by_sev["info"]
+    stats["warn_total"] = sum(warn_by_sev.values())
+    _merge_static_i18n(_i18n_placeholders(stats, atc_cov, coverage, source_cover))
+    (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
 
     print("building index ...", flush=True)
     entries = load_index(db)
@@ -2271,6 +3640,13 @@ def main() -> None:
     (OUT / "data" / "aliases.json").write_text(
         json.dumps(aliases, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  {len(aliases)} nicknames", flush=True)
+
+    # 搜索增强（task-28）：拼音/首字母 token 表（客户端按需懒加载，见 APP_JS 的 pinyinFetch）
+    piny = encode_pinyin(entries, aliases)
+    (OUT / "data" / "idx" / "pinyin.json").write_bytes(
+        json.dumps(piny, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    print(f"  pinyin.json { (OUT / 'data' / 'idx' / 'pinyin.json').stat().st_size / 1e6:.2f} MB",
+          flush=True)
 
     print("building confused index ...", flush=True)
     confused = load_confusable(db)
@@ -2306,6 +3682,7 @@ def main() -> None:
     n_name = build_name_pages(db, entries, data, families, displays)
     build_index_page(entries, stats, coverage)
     n_conf = build_confused(db)
+    n_warn = build_warn(db)
     build_about(stats, coverage, source_cover)
     build_whats_new()
     build_404()
@@ -2316,6 +3693,7 @@ def main() -> None:
     print(f"  drug pages : {n_drug}")
     print(f"  name pages : {n_name}")
     print(f"  confused   : {n_conf} pairs")
+    print(f"  warnings   : {n_warn} published")
     print(f"  index.json : {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB")
     print(f"  total size : {size / 1e6:.1f} MB")
     print(f"  open       : {OUT / 'index.html'}")
