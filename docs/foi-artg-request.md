@@ -3,18 +3,29 @@
 > 用途：向澳洲卫生部（TGA 所属部门）申请 ARTG 现行药品条目的机器可读导出。
 > 递交前把 `[你的姓名]`、`[邮箱]`、`[日期]` 填上；英文正文可直接用。
 
-## 递交信息
+## 递交信息（2026-10 核对）
 
-- 收件方：Department of Health, Disability and Ageing — FOI 团队（TGA 的 FOI 由该部门处理）
-- 入口：https://www.tga.gov.au/about-us/freedom-information-foi
+- 收件方：TGA FOI Coordinator（Therapeutic Goods Administration，Department of Health, Disability and Ageing）
+- 在线表单：https://www.tga.gov.au/resources/resources/forms/freedom-information-request-form
+- 邮箱：tga.foi@health.gov.au（电话 1800 020 653 / 02 6289 4630）
 - 法律依据：*Freedom of Information Act 1982* (Cth)
-- 申请费：约 A$30（可申请免除）
+- **费用：无申请费**；处理可能产生 processing charges（检索 $15/小时、决定前 5 小时免费、之后 $20/小时）。可在申请里以「非商业公共利益」申请减免，TGA 会给书面估价后再决定。
+- 时限：14 天内确认收到；30 个日历日内决定（复杂/量大可延期，也可能来信要求缩小范围）
+- 注意：TGA 网站对程序化访问返回 403（Akamai），请**用浏览器或邮箱人工提交**，不要用脚本刷。
+
+## 提交前只需填三处
+
+把正文里的 `[你的姓名]`、`[邮箱]`、`[日期]` 替换掉即可；其余英文可直接复制。
 
 ## 英文正文
 
 Dear FOI Officer,
 
-I make this request under the Freedom of Information Act 1982 (Cth).
+I make this request under the Freedom of Information Act 1982 (Cth). This is an
+application for the purposes of the FOI Act.
+
+**Contact.** Please reply by email to [邮箱]. My name is [你的姓名].
+[Optional postal address: 你的邮寄地址]
 
 **Scope.** I request access to documents containing, in machine-readable form, the
 current entries on the Australian Register of Therapeutic Goods (ARTG) for **medicines
