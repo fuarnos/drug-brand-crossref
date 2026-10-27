@@ -18,3 +18,7 @@ __pycache__/
 *.pyc
 .tmp/
 .pylibs/
+
+# 手机看板：运行时锁文件、隧道地址（指令与回帖的 jsonl 本身要进仓库）
+inbox/.lock
+inbox/.lock.*

@@ -37,12 +37,16 @@
 | 临时 SQL | `& $py db/q.py "SELECT ..."` |
 | 单条查询 | `& $py cli.py "泰诺"` |
 | 进度快照页 | `& $py render_dashboard.py` |
+| 手机看板（进度 + 指令队列） | `& $py mobile/server.py`（或双击 `手机看板.cmd`）→ http://127.0.0.1:8787/ |
+| 手机看板 · 外网 / 4G | `& $py mobile/server.py --tunnel`（cloudflared 快速隧道，见 `docs/手机通道.md`） |
+| 手机指令：看有没有待办 | `& $py mobile/inbox.py pending` |
 
-测试三套，改到哪层跑哪套，发布前全跑：
+测试四套，改到哪层跑哪套，发布前全跑：
 
 ```powershell
 & $py -m unittest discover -s etl -t etl      # 归一化 + 各入库
 & $py -m unittest discover -s lib -t lib      # 检索 / 碰撞
+& $py -m unittest tests.test_mobile_inbox -v  # 手机通道：队列 / CLI / 端点
 & $py tests/trilingual/run_tests.py           # 三语检索一致性（只读开库）
 ```
 
@@ -81,6 +85,21 @@
 - 一次提交一个主题；不顺手格式化无关文件；提交信息沿用现有风格（`v0.3.4: ...`、`MX strength: ...`、中文描述）。
 - 不碰别的会话正在改的文件；需要共享文件时先发消息协调。
 
+### 手机指令队列（每次开工先看）
+
+人不在电脑前时用手机看板留言，指令落在 `inbox/commands.jsonl`（append-only），agent 的回帖落在
+`inbox/replies.jsonl`；**状态由最后一条回帖推导，不手工改历史行**。开工第一件事：
+
+```powershell
+& $py mobile/inbox.py pending                                        # 有就照着做
+& $py mobile/inbox.py done <cmd_id> "做完的说明（带 reports/ 路径）"   # 做完回帖
+& $py mobile/inbox.py blocked <cmd_id> "卡在哪、需要人定什么"
+```
+
+- 手机指令是**人的原话**，不是已完成的任务；涉及删数据、发布、花钱、改公开口径，仍按 §6 / §11 先问人，不要照着队列直接执行。
+- `inbox/*.jsonl` 只通过 `mobile/inbox.py` 或手机页面追加；不手工编辑、不删历史行。
+- 手机看板对 `data/drugs.db` 只读，不建入库/写库路径。
+
 ## 8. 报告与截图
 
 - 报告放 `reports/`，命名跟随现有文件（`YYYY-MM-DD-主题.md` 或 `主题-YYYYMMDD.md`）；结论先行、数字可复核（写清 SQL / 命令）、失败和缺口也要写。
@@ -99,7 +118,7 @@
 
 - Python 3.12，`from __future__ import annotations`，带 type hints，用 pathlib，docstring / print 用中文。
 - 只读查询的数据库连接用 `mode=ro`（写法见 `tests/trilingual/run_tests.py`），避免误写库。
-- 新脚本放对应目录（`etl/`、`db/`、`data/`、`lib/`、`site/`）；若属于全量重建，接进 `run_all.py`。
+- 新脚本放对应目录（`etl/`、`db/`、`data/`、`lib/`、`site/`、`mobile/`）；若属于全量重建，接进 `run_all.py`。
 - 站点 HTML / CSS / JS 由 `site/build.py` 内联生成；改样式或文案先搜现有常量，别另起一套。
 
 ## 11. 收尾
