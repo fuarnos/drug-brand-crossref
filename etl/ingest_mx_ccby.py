@@ -25,6 +25,8 @@ COFEPRIS 注册清单没有浓度列；现有 MX 浓度来自 ISSSTE 目录 + PR
     python etl/ingest_mx_ccby.py                     # 默认 dry-run，只读库
     python etl/ingest_mx_ccby.py --dry-run --sample 30
     python etl/ingest_mx_ccby.py --apply             # 真正写库（事务）
+    python etl/ingest_mx_ccby.py --apply --vetted reports/mx_strength_vetted.csv
+                                                     # 只写人工审核清单里 apply=Y 的行
     python etl/ingest_mx_ccby.py --rollback          # 撤销本 ETL 写过的回填
 
 dry-run 报告同时写到 .tmp/mx-atc/（JSON + TXT），供报告与人工核对引用。
@@ -33,6 +35,7 @@ dry-run 报告同时写到 .tmp/mx-atc/（JSON + TXT），供报告与人工核�
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 import sqlite3
@@ -590,6 +593,8 @@ def main() -> int:
     ap.add_argument("--apply", action="store_true", help="写库（默认只 dry-run）")
     ap.add_argument("--dry-run", action="store_true", help="显式 dry-run（默认行为）")
     ap.add_argument("--rollback", action="store_true", help="撤销本 ETL 写过的回填")
+    ap.add_argument("--vetted", type=Path, default=None,
+                    help="人工审核清单 CSV；给了就只写 apply=Y 的产品（如 reports/mx_strength_vetted.csv）")
     ap.add_argument("--sample", type=int, default=20)
     args = ap.parse_args()
     if args.apply and args.dry_run:
@@ -614,6 +619,21 @@ def main() -> int:
 
     candidates, gap = load_mx_gaps(db)
     fills, mres = match_products(candidates, sd)
+    vetted = None
+    if args.vetted:
+        allowed: set[str] = set()
+        with args.vetted.open(encoding="utf-8-sig", newline="") as fh:
+            for row in csv.DictReader(fh):
+                if (row.get("apply") or "").strip().upper() == "Y":
+                    allowed.add((row.get("product_id") or "").strip())
+        before = len(fills)
+        fills = [f for f in fills if f["product_id"] in allowed]
+        vetted = {"path": str(args.vetted), "allowed_products": len(allowed),
+                  "fills_before": before, "fills_after": len(fills)}
+        print(f"审核清单：允许 {len(allowed):,} 个产品；过滤前 {before:,} → "
+              f"过滤后 {len(fills):,}")
+        mres = dict(mres)
+        mres["vetted"] = vetted
     cover = coverage_rows(db, len(fills))
     rules = Counter(f["rule"] for f in fills)
     ds_count = Counter(d for f in fills for d in f["datasets"])
@@ -625,7 +645,7 @@ def main() -> int:
         "gap": gap,
         "match": mres,
         "totals": {"fills": len(fills), "by_rule": dict(rules),
-                   "by_dataset": dict(ds_count)},
+                   "by_dataset": dict(ds_count), "vetted": vetted},
         "coverage": cover,
         "samples": [dict(f) for f in fills[: args.sample]],
         "all_fills": [dict(f) for f in fills],
