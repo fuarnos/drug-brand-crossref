@@ -135,10 +135,10 @@
       "extra_source_ids": [],
       "default_lang": "zh-Hant",
       "languages": ["zh-Hant"],
-      "enabled": false,
+      "enabled": true,
       "order": 80,
       "data_as_of": "2026-10-22",
-      "notes": "预留占位（enabled=false，不生成页面/不进国家选择器）。数据源：衛福部食藥署 TFDA「全部藥品許可證資料集」（data.gov.tw #9122，OGDL v1.0 可再发布、须按「顯名聲明」署名；每 7 日更新，data_as_of=2026-10-22）。source_id 与 etl/ingest_tw_tfda.py 已统一为 tfda_tw（task-71）。待办：① source 表登记 tfda_tw（SQL：db/source_tfda_tw.sql，待 Lead apply）；② ingest_tw_tfda.py 实现 --write-db（当前占位报错）；③ data/tw_ingredient_aliases.csv 别名表（task-67 未完成）；④ 台湾成藥/中藥/植物提取物边界待产品/法务拍板；⑤ zh-Hant 语言落地后启用；⑥ 启用前在真实库跑 lib/markets.py --check + tests.test_markets_registry 全绿（source 行登记后）。接入 runbook：reports/tw-ingest-runbook.md。"
+      "notes": "已启用（v0.7.0，2026-10-28）：TFDA「全部藥品許可證資料集」（data.gov.tw #9122，OGDL v1.0 可再发布、须按「顯名聲明」署名）。真实库已入库 16,457 个在册产品（成分 token 映射 87.8%，规格由品名解析、置信度有限，页面需明示「規格来自品名解析」）。source_id=tfda_tw，data_as_of=2026-10-22，每 7 日更新。已知口径：成藥/中藥/植物提取物边界仍按草案排除（324+281 行），待产品/法务复核；TW 规格非结构化字段，D1 剂量对应按「品名解析、置信度有限」展示。"
     },
     {
       "code": "EU",

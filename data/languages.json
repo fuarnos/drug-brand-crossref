@@ -69,9 +69,9 @@
       "i18n_key_prefix": "zh-Hant",
       "default_country": "TW",
       "region": null,
-      "enabled": false,
+      "enabled": true,
       "order": 40,
-      "notes": "预留：需①TW 市场注册/数据源许可 ②繁体文案（可机器转换后人工校对用词：普拿疼/必理痛/泰諾等）③I18N 增加 zh-Hant 段。接入步骤见 docs/市场扩展接口.md §6。"
+      "notes": "已启用（v0.7.0，2026-10-28）：繁体中文界面 /zh-hant/ 路由 + hreflang=zh-Hant；文案来自 data/i18n_zh_hant.json（台湾用语，机器转换 + 人工校对，专有名词/INN 保留）。TW 默认语言，zh-Hant 默认市场 TW（已启用）。"
     },
     {
       "code": "de",

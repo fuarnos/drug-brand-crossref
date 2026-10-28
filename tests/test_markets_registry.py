@@ -37,8 +37,9 @@ DOCS = ROOT / "docs" / "市场扩展接口.md"
 DB = ROOT / "data" / "drugs.db"
 
 # 现有站点（site/build.py 的 LANGS 与 i18n home.* key），注册表必须覆盖且不改其语义。
-SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/")}
-SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA"}
+# v0.7.0（task-87）：TW 市场 + zh-Hant 语言启用，故常量与断言同步扩到 8 国/4 语。
+SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/")}
+SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW"}
 
 
 def _db_countries() -> set[str] | None:
@@ -119,8 +120,9 @@ class TestMarkets(RegistryBase):
     def test_registered_market_set(self) -> None:
         codes = set(self.reg.markets)
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "EU"}, codes)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN"}, set(self.reg.country_order))
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW"},
+                         set(self.reg.country_order))
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -152,7 +154,7 @@ class TestMarkets(RegistryBase):
         self.assertEqual(len(keys), len(set(keys)))
         for m in self.reg.enabled_markets:
             self.assertEqual(f"home.{m.code.lower()}", m.i18n_key)
-        # 现有 7 国的 i18n key 与 site/build.py I18N 的 home.* 完全一致（只核对，不改 build）
+        # 现有 8 国（US/GB/CA/AU/ES/MX/CN/TW）的 i18n key 与 site/build.py I18N 的 home.* 完全一致
         self.assertEqual({f"home.{c.lower()}" for c in SITE_COUNTRY_I18N},
                          {m.i18n_key for m in self.reg.enabled_markets})
         # 占位市场的 key 已预留，便于后续直接启用
@@ -199,9 +201,8 @@ class TestMarkets(RegistryBase):
     def test_tw_is_planned_placeholder(self) -> None:
         tw = self.reg.require_market("TW")
         self.assertEqual(M.KIND_COUNTRY, tw.kind)
-        self.assertFalse(tw.enabled)
-        # task-71：TW 数据源已钉为 tfda_tw（source 行由 Lead 按 db/source_tfda_tw.sql 登记；
-        # 登记前 lib/markets 校验会报「不在 DB source 表」，属预期过渡态）。
+        # v0.7.0（task-87）：TW 已启用（数据源 tfda_tw / 16,457 产品已在真实库）
+        self.assertTrue(tw.enabled)
         self.assertEqual("tfda_tw", tw.source_id)
         self.assertEqual("zh-Hant", tw.default_lang)
         self.assertIn("zh-Hant", tw.languages)
@@ -218,7 +219,8 @@ class TestLanguages(RegistryBase):
         codes = set(self.reg.languages)
         self.assertEqual({"en", "es", "zh", "zh-Hant", "de", "fr", "it", "nl", "pl", "pt"},
                          codes)
-        self.assertEqual({"en", "es", "zh"}, {x.code for x in self.reg.enabled_languages})
+        self.assertEqual({"en", "es", "zh", "zh-Hant"},
+                         {x.code for x in self.reg.enabled_languages})
 
     def test_language_required_shape(self) -> None:
         for lang in self.reg.languages.values():
@@ -245,7 +247,8 @@ class TestLanguages(RegistryBase):
 
     def test_zh_hant_placeholder(self) -> None:
         zh_hant = self.reg.require_language("zh-Hant")
-        self.assertFalse(zh_hant.enabled)
+        # v0.7.0（task-87）：zh-Hant 已启用（TW 默认语言，/zh-hant/ 路由）
+        self.assertTrue(zh_hant.enabled)
         self.assertEqual("traditional", zh_hant.script)
         self.assertEqual("zh-Hant", zh_hant.hreflang)
         self.assertEqual("zh-Hant/", zh_hant.path)
@@ -253,8 +256,11 @@ class TestLanguages(RegistryBase):
         self.assertEqual("zh-Hant", zh_hant.i18n_key_prefix)
         self.assertEqual("繁中", zh_hant.ui_label)
         self.assertEqual("繁體中文", zh_hant.native_name)
-        # 繁体语言默认国家 TW 已在市场表登记（占位），只等数据源
-        self.assertIsNotNone(self.reg.market("TW"))
+        # 繁体语言默认国家 TW 已启用
+        tw = self.reg.market("TW")
+        self.assertIsNotNone(tw)
+        assert tw is not None
+        self.assertTrue(tw.enabled)
 
     def test_eu_language_placeholders(self) -> None:
         for code in ("de", "fr", "it", "nl", "pl", "pt"):
@@ -275,10 +281,11 @@ class TestLanguages(RegistryBase):
             self.assertEqual(lang.code, market.default_lang)
 
     def test_site_langs_compatibility(self) -> None:
-        """现有 site/build.py 的 LANGS 三入口必须能从注册表推导出来（不改 build，只核对）。"""
+        """现有 site/build.py 的 LANGS 入口必须能从注册表推导出来（v0.7.0 起四语含 zh-Hant）。"""
         self.assertEqual(SITE_LANGS, {(x.code, x.path) for x in self.reg.enabled_languages})
-        self.assertEqual({"en": "", "es": "es/", "zh": "zh/"}, self.reg.hreflang_map())
-        self.assertEqual({"en", "es", "zh"}, set(self.reg.i18n_prefixes()))
+        self.assertEqual({"en": "", "es": "es/", "zh": "zh/", "zh-Hant": "zh-Hant/"},
+                         self.reg.hreflang_map())
+        self.assertEqual({"en", "es", "zh", "zh-Hant"}, set(self.reg.i18n_prefixes()))
 
     def test_language_ui_labels_unique(self) -> None:
         labels = [x.ui_label for x in self.reg.languages.values()]
