@@ -567,6 +567,129 @@ LANG_META_JS = (
     + "var DEFAULT_LANG='en';"
 )
 
+# ── v0.6.3 U3：界面标签本地化（LABEL_I18N）+ U1/U2 文案（UI_I18N） ──────────
+# 单一数据源：服务端 label helper 与客户端 T() 共用同一批 key；zh-Hant 直接给值，
+# 不再依赖 data/i18n_zh_hant.json（新 key 无法及时进该 JSON 时也不会回落简体）。
+LABEL_I18N = {
+    "en": {
+        "form.tablet": "tablet", "form.capsule": "capsule", "form.liquid": "liquid",
+        "form.injection": "injection", "form.topical": "topical", "form.powder": "powder",
+        "form.suppository": "suppository", "form.inhalation": "inhalation",
+        "form.pellet": "pellet", "form.stick": "stick", "form.kit": "kit",
+        "form.gas": "gas", "form.unknown": "unknown",
+        "release.ER": "extended-release", "release.DR": "delayed-release",
+        "release.MR": "modified-release", "release.none": "—",
+        "unit.iu": "IU", "unit.unit": "unit", "unit.meq": "mEq", "unit.mci": "mCi",
+        "unit.ug": "mcg", "unit.microgram": "mcg", "unit.万iu": "10k IU",
+    },
+    "es": {
+        "form.tablet": "comprimido", "form.capsule": "cápsula", "form.liquid": "líquido",
+        "form.injection": "inyectable", "form.topical": "tópico", "form.powder": "polvo",
+        "form.suppository": "supositorio", "form.inhalation": "inhalado",
+        "form.pellet": "pellet", "form.stick": "stick", "form.kit": "kit",
+        "form.gas": "gas", "form.unknown": "desconocido",
+        "release.ER": "liberación prolongada", "release.DR": "liberación retardada",
+        "release.MR": "liberación modificada", "release.none": "—",
+        "unit.iu": "UI", "unit.unit": "unidad", "unit.meq": "meq", "unit.mci": "mCi",
+        "unit.ug": "mcg", "unit.microgram": "mcg", "unit.万iu": "10 000 UI",
+    },
+    "zh": {
+        "form.tablet": "片剂", "form.capsule": "胶囊", "form.liquid": "液体",
+        "form.injection": "注射剂", "form.topical": "外用", "form.powder": "粉末",
+        "form.suppository": "栓剂", "form.inhalation": "吸入剂",
+        "form.pellet": "微丸", "form.stick": "棒剂", "form.kit": "套装",
+        "form.gas": "气体", "form.unknown": "未知",
+        "release.ER": "缓释", "release.DR": "延迟释放",
+        "release.MR": "改良释放", "release.none": "—",
+        "unit.iu": "国际单位", "unit.unit": "单位", "unit.meq": "毫当量", "unit.mci": "mCi",
+        "unit.ug": "mcg", "unit.microgram": "mcg", "unit.万iu": "10 万 IU",
+    },
+    "zh-Hant": {
+        "form.tablet": "錠劑", "form.capsule": "膠囊", "form.liquid": "液體",
+        "form.injection": "注射劑", "form.topical": "外用", "form.powder": "粉末",
+        "form.suppository": "栓劑", "form.inhalation": "吸入劑",
+        "form.pellet": "微丸", "form.stick": "棒劑", "form.kit": "套組",
+        "form.gas": "氣體", "form.unknown": "未知",
+        "release.ER": "緩釋", "release.DR": "延遲釋放",
+        "release.MR": "修飾釋放", "release.none": "—",
+        "unit.iu": "國際單位", "unit.unit": "單位", "unit.meq": "毫當量", "unit.mci": "mCi",
+        "unit.ug": "mcg", "unit.microgram": "mcg", "unit.万iu": "10 萬 IU",
+    },
+}
+UI_I18N = {
+    "en": {
+        "u1.title": "How to use it in 3 steps",
+        "u1.step1": "Type the name from the pack",
+        "u1.step1_hint": ("Brand, generic name, nickname, or a line from the pack — "
+                          "dose included is fine."),
+        "u1.step2": "See the ingredient and strength",
+        "u1.step2_hint": "You always get a candidate set — never a single answer.",
+        "u1.step3": "Switch to a country",
+        "u1.step3_hint": ("Pick a market to see the names it is sold under there, "
+                          "or use the names-by-country row."),
+        "u1.try": "Try:", "u1.close": "Dismiss", "u1.aria": "Getting-started guide",
+        "u2.title": "Names by country",
+        "u2.hint": ("Same ingredient, local name — click a country to see its products. "
+                    "Not listed does not prove it is unavailable there."),
+        "u2.none": "Not listed",
+        "u2.none_hint": ("No product under this ingredient in this market's public data. "
+                         "This does not prove it is unavailable there."),
+        "u2.multi": "Several ingredients match — switch country to see the full list.",
+    },
+    "es": {
+        "u1.title": "Cómo funciona en 3 pasos",
+        "u1.step1": "Escribe el nombre del envase",
+        "u1.step1_hint": ("Marca, genérico, apodo o una línea del envase; la dosis puede "
+                          "ir incluida."),
+        "u1.step2": "Mira el principio activo y la concentración",
+        "u1.step2_hint": "Siempre obtienes un conjunto de candidatos, nunca una única respuesta.",
+        "u1.step3": "Cambia a un país",
+        "u1.step3_hint": ("Elige un mercado para ver los nombres con los que se vende "
+                          "allí, o usa la fila de nombres por país."),
+        "u1.try": "Prueba:", "u1.close": "Cerrar", "u1.aria": "Guía de inicio",
+        "u2.title": "Nombres por país",
+        "u2.hint": ("Mismo principio, nombre local: haz clic en un país para ver sus "
+                    "productos. «Sin datos» no prueba que no exista allí."),
+        "u2.none": "Sin datos",
+        "u2.none_hint": ("Sin datos públicos para este principio en ese mercado; no prueba "
+                         "que no exista allí."),
+        "u2.multi": "Varios principios coinciden — cambia de país para ver la lista completa.",
+    },
+    "zh": {
+        "u1.title": "三步看懂",
+        "u1.step1": "输入包装上的名字",
+        "u1.step1_hint": "商品名、通用名、俗称或包装上一行字；可连剂量一起输入。",
+        "u1.step2": "看成分和规格",
+        "u1.step2_hint": "结果永远是候选集，不保证唯一。",
+        "u1.step3": "切国家看叫法",
+        "u1.step3_hint": "选一个国家，看这个成分在当地叫什么；也可以用结果顶部的「各国叫法」横排。",
+        "u1.try": "试试：", "u1.close": "关闭", "u1.aria": "使用引导",
+        "u2.title": "各国叫法",
+        "u2.hint": "同一成分在当地叫什么；点国家看该国商品。未收录不等于该国没有这个药。",
+        "u2.none": "未收录",
+        "u2.none_hint": "公开数据里暂无该国该成分的产品；不等于该国没有这个药。",
+        "u2.multi": "多成分/多结果，切国家查看全部。",
+    },
+    "zh-Hant": {
+        "u1.title": "三步看懂",
+        "u1.step1": "輸入包裝上的名字",
+        "u1.step1_hint": "商品名、通用名、俗稱或包裝上一行字；可連劑量一起輸入。",
+        "u1.step2": "看成分和規格",
+        "u1.step2_hint": "結果永遠是候選集，不保證唯一。",
+        "u1.step3": "切國家看叫法",
+        "u1.step3_hint": "選一個國家，看這個成分在當地叫什麼；也可以用結果頂部的「各國叫法」橫排。",
+        "u1.try": "試試：", "u1.close": "關閉", "u1.aria": "使用引導",
+        "u2.title": "各國叫法",
+        "u2.hint": "同一成分在當地叫什麼；點國家看該國商品。未收錄不等於該國沒有這個藥。",
+        "u2.none": "未收錄",
+        "u2.none_hint": "公開資料裡暫無該國該成分的產品；不等於該國沒有這個藥。",
+        "u2.multi": "多成分/多結果，切國家查看全部。",
+    },
+}
+# U1 防闪烁：首页 head 里在 body 解析前先打标记（localStorage flag → html.u1-off）。
+U1_HEAD_JS = ("<script>try{if(localStorage.getItem('u1.dismiss.v1')==='1')"
+              "document.documentElement.className+=' u1-off';}catch(e){}</script>")
+
 # ── i18n P1：About / What's new / Confused / 404 的三语正文 ────────────────
 # 用法：About 正文按块走 `data-i18n-html`（i18n.js 用 innerHTML 替换，块内可含链接/表格）；
 # 动态数字用 @@PLACEHOLDER@@（main() 里替换成当前库的统计值，不写死数字）。
@@ -1096,7 +1219,8 @@ def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
-                       MAKER_I18N[lang], META_I18N[lang]):
+                       MAKER_I18N[lang], META_I18N[lang],
+                       LABEL_I18N[lang], UI_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1121,6 +1245,11 @@ def _install_zh_hant(values: dict) -> None:
         merged[key] = _subst_placeholders(value, values)
     for key, text in overrides.items():
         if key not in merged:
+            merged[key] = _subst_placeholders(text, values)
+    # v0.6.3：U1/U2/U3 新 key 的 zh-Hant 值直接来自 build.py（不依赖 JSON 是否已补齐），
+    # 避免新 key 回落到简体中文。
+    for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"]):
+        for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
     print(f"i18n zh-Hant: {len(merged)} keys "
@@ -1756,6 +1885,43 @@ table.det th{background:#f4f2ec;font-size:11px}
 table.det td{padding:5px 8px;vertical-align:top}
 tr.detrow>td.detcell{padding:4px 8px 10px;background:#faf9f6}
 tr.detrow table.det{margin:0}
+/* v0.6.3 U1：首屏 3 步引导（可关闭；head 内联脚本先置 html.u1-off 防 CLS） */
+.u1guide{border:1px solid var(--line);border-radius:12px;background:#fff;
+ padding:14px 16px;margin:14px 0 6px}
+.u1head{display:flex;align-items:baseline;gap:10px}
+.u1head h2{margin:0;font-size:16px}
+.u1close{margin-left:auto;background:none;border:0;color:var(--muted);font-size:20px;
+ line-height:1;padding:6px 8px;min-width:36px;min-height:36px;cursor:pointer}
+.u1close:hover{color:var(--fg)}
+.u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 0;
+ padding:0;list-style:none}
+.u1step{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#faf9f6}
+.u1step b{font-size:14px}
+.u1step .sub{margin:4px 0 0;font-size:13px}
+.u1try{margin-top:6px;font-size:12px;color:var(--muted)}
+.u1try button{padding:3px 8px;font-size:12px;margin:2px 4px 2px 0;border-radius:8px}
+html.u1-off #u1guide{display:none!important}
+/* v0.6.3 U2：结果顶部各国叫法横排（单成分唯一锚定时才渲染） */
+.u2bar{border:1px solid var(--line);border-radius:12px;background:#fff;
+ padding:10px 12px;margin:12px 0}
+.u2head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.u2head b{font-size:14px}
+.u2head .sub{margin:0;font-size:12px}
+.u2chips{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ margin-top:8px;padding-bottom:2px}
+.u2chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:1px;
+ background:#faf9f6;border:1px solid var(--line);color:var(--fg);border-radius:10px;
+ padding:6px 10px;font-size:12px;cursor:pointer;text-align:left;min-width:0;max-width:220px}
+.u2chip:hover{border-color:var(--accent)}
+.u2chip.on{border-color:var(--accent);background:#f1f8f4}
+.u2chip .u2c{font-weight:600;color:var(--muted);font-size:11px}
+.u2chip .u2n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.u2chip .u2n.empty{color:var(--muted);font-style:italic}
+@media (max-width:719px){
+  .u1steps{grid-template-columns:1fr}
+  .u1close{min-width:44px;min-height:44px}
+  .u2chip{max-width:70vw}
+}
 @media (max-width:719px){
   .wrap{padding:0 14px}
   header .wrap{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px 12px}
@@ -1837,6 +2003,15 @@ const ctry = document.getElementById('country');
 const meta = document.getElementById('meta');
 const acEl = document.getElementById('ac');
 const ctryLabel = document.getElementById('ctrylabel');
+// v0.6.3 U1：首屏引导关闭记忆（localStorage flag；隐私模式失败也不影响关闭）
+const u1El = document.getElementById('u1guide');
+const u1CloseEl = document.getElementById('u1close');
+if(u1El && u1CloseEl){
+  u1CloseEl.addEventListener('click', function(){
+    try{ localStorage.setItem('u1.dismiss.v1', '1'); }catch(e){}
+    u1El.hidden = true;
+  });
+}
 // v0.6.2：繁体输入归一（OpenCC 常用字子集，构建期从 data/zh_hant_t2s.json 注入）。
 // 只影响匹配前的归一化，不改变用户看到的输入/结果/页面文案。
 const T2S = __T2S_JSON__;
@@ -2062,6 +2237,13 @@ function findEntryByKey(k){
   for(const g of RES_GROUPS) for(const e of g.rows) if(e.k === k) return e;
   return null;
 }
+function labelOf(prefix, code, fallback){
+  // v0.6.3 U3：受控词走 i18n key，未注册的长尾值原样显示（返回 fallback/code）。
+  const c = (code == null ? '' : String(code));
+  const k = prefix + '.' + c;
+  const v = Tr(k);
+  return (v === k) ? (fallback != null ? fallback : c) : v;
+}
 function detPanelHTML(payload, key, e, T){
   const rows = (payload && payload.k && payload.k[key]) || [];
   if(!rows.length){
@@ -2077,7 +2259,7 @@ function detPanelHTML(payload, key, e, T){
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
     return `<tr><td>${esc(r[1])}</td><td>${esc(r[3]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
-      + `<td>${esc(status)}${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(rel) : ''}</td>`
+      + `<td>${esc(labelOf('drug.status', status, status))}${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td></tr>`;
   }).join('');
   return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('a1.pack'))}</th>`
@@ -2618,6 +2800,64 @@ function collectHits(nq, st, nicks, nickSids, onlyUnmapped, c){
   return {hits: hits, fuzzyUsed: fuzzyUsed};
 }
 /* ── 搜索增强 end ─────────────────────────────────────────────────────────── */
+// ── v0.6.3 U2：结果顶部「各国叫法」横排（仅在唯一单成分时显示）──────────────
+const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA'];
+function anchorSubstance(hits, nicks){
+  // 只认 exact/compact/prefix 的最佳命中；fuzzy/contains 或复方/多成分一律不锚定。
+  // （gaviscon / benadryl 这类多结果在这里返回 null → 不显示逐国叫法，避免误配。）
+  let best = null;
+  for(const h of hits){
+    if(h[1] === 'exact' || h[1] === 'compact' || h[1] === 'prefix'){ best = h; break; }
+  }
+  if(!best && hits.length === 1 && hits[0][1] !== 'fuzzy') best = hits[0];
+  if(best){
+    const e = best[2];
+    const sids = (e.vs && e.vs.length) ? e.vs : [e.v];
+    if(sids.length !== 1) return null;         // 复方/多成分 → 降级隐藏
+    const anchor = sids[0];
+    // 「结果唯一」校验：其它单成分命中也必须指向同一成分；出现第二个成分即隐藏
+    // （benadryl 跨国成分不同、tylenol vs tylenol pm 这类必须不显示逐国叫法）。
+    for(const h of hits.slice(0, 20)){
+      const s2 = (h[2].vs && h[2].vs.length) ? h[2].vs : [h[2].v];
+      if(s2.length === 1 && s2[0] && s2[0] !== anchor) return null;
+    }
+    return {sid: anchor};
+  }
+  if(!hits.length && nicks.length === 1 && nicks[0].v) return {sid: nicks[0].v};
+  return null;
+}
+function countryNamesHTML(anchor, selected, T){
+  if(!anchor) return '';
+  const best = {};
+  for(const e of IDX){
+    const sids = (e.vs && e.vs.length) ? e.vs : [e.v];
+    if(sids.length !== 1 || sids[0] !== anchor.sid) continue;   // 只要单成分条目
+    for(const code of (e.c || [])){
+      const cur = best[code];
+      const better = !cur || (!!e.u && !cur.u) ||
+                     ((!!e.u === !!cur.u) && (e.n || 0) > (cur.n || 0));
+      if(better) best[code] = e;
+    }
+  }
+  if(!U2_COUNTRIES.some(code => best[code])) return '';
+  const chips = U2_COUNTRIES.map(code => {
+    const hit = best[code];
+    const on = code === selected ? ' on' : '';
+    const head = `<button type="button" class="u2chip${on}" data-u2country="${code}"`
+      + ` aria-pressed="${code === selected ? 'true' : 'false'}">`
+      + `<span class="u2c">${esc(T('home.' + code.toLowerCase()))}</span>`;
+    if(!hit){
+      return head + `<span class="u2n empty" title="${esc(T('u2.none_hint'))}">`
+        + `${esc(T('u2.none'))}</span></button>`;
+    }
+    let name = hit.d || hit.k;
+    if(name.length > 28) name = name.slice(0, 28) + '…';
+    return head + `<span class="u2n">${esc(name)}</span></button>`;
+  }).join('');
+  return `<div class="u2bar"><div class="u2head"><b>${esc(T('u2.title'))}</b>`
+    + `<span class="sub">${esc(T('u2.hint'))}</span></div>`
+    + `<div class="u2chips">${chips}</div></div>`;
+}
 function render(){
   const q = box.value.trim();
   if(!q){ out.innerHTML=''; meta.textContent=''; syncURL('');
@@ -2719,6 +2959,13 @@ function render(){
       + `<button type="button" data-clearcountry="1">${esc(T('country.change'))}</button></div></div>`;
   }
   // 俗称命中：先说清「这不是商品名，是某个成分的叫法」，再列该成分的商品名。
+  // v0.6.3 U2：各国叫法横排——只在结果能唯一锚定单成分时显示；
+  // 多成分/多结果（gaviscon、benadryl）与 partial/模糊一律不渲染，避免误配。
+  let countryBarHTML = '';
+  if(!partial && !countryMiss && display.length){
+    const anchor = anchorSubstance(display, nicks);
+    if(anchor) countryBarHTML = countryNamesHTML(anchor, c, T);
+  }
   let nickHTML = '';
   if(nicks.length){
     nickHTML = nicks.slice(0,3).map(a=>{
@@ -2828,7 +3075,7 @@ function render(){
   }
 
   if(partial){ sameHTML = ''; extraHTML = ''; }   // 跨条目区块等 core 到位再补
-  out.innerHTML = parseBarHTML(parsed, matchLabel) + confHTML + nickHTML + warnHTML
+  out.innerHTML = parseBarHTML(parsed, matchLabel) + countryBarHTML + confHTML + nickHTML + warnHTML
     + countryMissHTML + resHTML + sameHTML + extraHTML;
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
   // 选了澳洲但澳洲产品为空时同样触发（很多 listed OTC 只有 ARTG 名字）。
@@ -3116,6 +3363,15 @@ out.addEventListener('click', ev => {
     });
     return;
   }
+  // v0.6.3 U2：点国家 chip = 切到该国国家视图（复用现有 ctry 状态 + URL + 统计）
+  const u2c = t.closest('[data-u2country]');
+  if(u2c){
+    ctry.value = u2c.getAttribute('data-u2country');
+    updateCtryLabel();
+    render();
+    gcEvent('country-' + ctry.value);
+    return;
+  }
   if(t.closest('[data-clearcountry]')){
     ctry.value = '';
     updateCtryLabel();
@@ -3223,7 +3479,7 @@ def _page_meta(lang: str, meta_key: str | None) -> tuple[str, str]:
 
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
-         canonical_rel: str = "", alt_rel: str = "") -> str:
+         canonical_rel: str = "", alt_rel: str = "", head_js: str = "") -> str:
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
@@ -3266,7 +3522,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
-<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>{GC_TAG}</head>
+<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>{GC_TAG}{head_js}</head>
 <body>
 <header><div class="wrap">
   <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
@@ -3869,8 +4125,36 @@ STATUS_NOTES_EN = {
 }
 
 
+# ── v0.6.3 U3：标签本地化 helper（服务端；与客户端 T() 共用 i18n key） ──────
+def _label_html(prefix: str, code: str, fallback: str | None = None) -> str:
+    """受控词 → data-i18n span；长尾/杂项值原样显示（不造数据、不空）。"""
+    code = (code or "").strip()
+    if not code:
+        return ""
+    key = f"{prefix}.{code}"
+    if key in I18N["en"]:
+        return f'<span data-i18n="{key}">{esc(I18N["en"][key])}</span>'
+    return esc(fallback if fallback is not None else code)
+
+
+def _label_join(prefix: str, codes) -> str:
+    return "、".join(_label_html(prefix, c) for c in codes if (c or "").strip())
+
+
+_RE_UNIT = re.compile(r"(?<![\w])(万iu|microgram|unit|meq|mci|iu|ug)(?![\w])")
+
+
+def _label_unit_html(text: str) -> str:
+    """强度串里的非国际通用单位包成 data-i18n span；mg/g/ml/%/mcg 等保持原样。"""
+    def repl(m):
+        key = f"unit.{m.group(1)}"
+        if key in I18N["en"]:
+            return f'<span data-i18n="{key}">{esc(I18N["en"][key])}</span>'
+        return m.group(1)
+    return _RE_UNIT.sub(repl, esc(text))
+
+
 def build_drug_pages(db: sqlite3.Connection) -> int:
-    # 一次性取全量，按成分分组；逐个成分查询会退化成正表全扫 × 4445 次
     products: dict[str, list] = {}
     for row in db.execute(
         """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
@@ -3971,7 +4255,7 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
                 # 受控词走 data-i18n：en 默认文案在 HTML 里，i18n.js 按所选语言替换。
                 name = esc(brand) if brand else (
                     '<span class="meta" data-i18n="drug.no_brand">(no brand name)</span>')
-                st_html = esc(st) if st else (
+                st_html = _label_unit_html(st) if st else (
                     '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
                 status_html = (
                     f'<span data-i18n="drug.status.{status}">{esc(status)}</span>'
@@ -3982,7 +4266,7 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
                     status_html += (f' <em>(<span data-i18n="drug.status_note.{status}">'
                                     f'{note_en}</span>)</em>')
                 lis.append(f"<tr><td>{name}</td><td>{st_html}</td>"
-                           f"<td>{esc(rel) if rel != 'none' else '—'}</td>"
+                           f"<td>{_label_html('release', rel, rel) if rel != 'none' else '—'}</td>"
                            f"<td>{status_html}</td></tr>")
             more = (f'<p class="sub"><span data-i18n="drug.showing">showing first 40 of</span> '
                     f'{len(ordered)}</p>' if len(ordered) > 40 else "")
@@ -4093,10 +4377,10 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                 f"""<div class="card"><h3><a href="../drug/{sid}.html">{esc(g['inn'])}</a></h3>
 <div class="meta"><span data-i18n="name.countries">Countries</span>:
 {esc('、'.join(sorted(g['country'])))} ·
-<span data-i18n="name.form">Form</span>: {esc('、'.join(sorted(g['f'])))} ·
+<span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))} ·
 <span data-i18n="name.strength">Strength</span>:
-{esc('、'.join(sorted(g['s'], key=_sort_strength)) or '—')}
-{f" · <span data-i18n='name.release'>Release</span>: {esc('、'.join(sorted(rel)))}" if rel else ''}</div></div>"""
+{_label_unit_html('、'.join(sorted(g['s'], key=_sort_strength))) or '—'}
+{f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div></div>"""
             )
         body = f"""<h1>{esc(e['d'])}</h1>
 <p class="sub"><span data-i18n="name.also">Also written as</span>:
@@ -4543,6 +4827,27 @@ def build_index_page(entries, stats, coverage) -> None:
   <button data-q="Benadryl">Benadryl</button>
   <button data-q="Gaviscon">Gaviscon</button>
 </div>
+<section id="u1guide" class="u1guide" aria-labelledby="u1title" data-i18n-aria="u1.aria">
+  <div class="u1head"><h2 id="u1title" data-i18n="u1.title">How to use it in 3 steps</h2>
+    <button type="button" id="u1close" class="u1close" data-i18n-aria="u1.close"
+      aria-label="Dismiss">×</button></div>
+  <ol class="u1steps">
+    <li class="u1step"><b data-i18n="u1.step1">Type the name from the pack</b>
+      <p class="sub" data-i18n="u1.step1_hint">Brand, generic name, nickname, or a line from the pack — dose included is fine.</p>
+      <div class="u1try"><span data-i18n="u1.try">Try:</span>
+        <button type="button" data-q="泰诺">泰诺</button>
+        <button type="button" data-q="Lipitor 20mg">Lipitor 20mg</button></div></li>
+    <li class="u1step"><b data-i18n="u1.step2">See the ingredient and strength</b>
+      <p class="sub" data-i18n="u1.step2_hint">You always get a candidate set — never a single answer.</p>
+      <div class="u1try"><span data-i18n="u1.try">Try:</span>
+        <button type="button" data-q="两只青蛙">两只青蛙</button></div></li>
+    <li class="u1step"><b data-i18n="u1.step3">Switch to a country</b>
+      <p class="sub" data-i18n="u1.step3_hint">Pick a market to see the names it is sold under there, or use the names-by-country row.</p>
+      <div class="u1try"><span data-i18n="u1.try">Try:</span>
+        <button type="button" data-q="Benadryl">Benadryl</button>
+        <button type="button" data-q="Gaviscon">Gaviscon</button></div></li>
+  </ol>
+</section>
 <p class="sub" id="loadhint" data-i18n="home.hint_idle">First search needs to load the index (~6 MB gzipped; cached after the first time) — start typing, focus the search box, or pick a sample.</p>
 <p class="sub" id="meta" style="margin-top:14px"></p>
 <div id="out"></div>
@@ -4558,7 +4863,7 @@ does not exist. Coverage:</span> {covline}.</div>
         prefix = "../" if path else ""
         html = page("Medicine Brand Cross-Reference", body.replace("{prefix}", prefix),
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
-                    canonical_rel=path, alt_rel="")
+                    canonical_rel=path, alt_rel="", head_js=U1_HEAD_JS)
         target = OUT / (path + "index.html")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(html, encoding="utf-8")
@@ -5039,6 +5344,7 @@ def main() -> None:
   function apply(){
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function(el){ el.setAttribute('aria-label', window.T(el.dataset.i18nAria)); });
     // v0.5.5：<title> / description / OG 本地化（根页 head 带 data-i18n-title/meta）
     document.querySelectorAll('[data-i18n-title]').forEach(function(el){
       var t = window.T(el.dataset.i18nTitle);
