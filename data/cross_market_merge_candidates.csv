@@ -1,0 +1,458 @@
+﻿candidate_type,source_id,source_name,source_markets,target_id,target_name,evidence_type,evidence,confidence,status,n_products,source_atc
+duplicate_merge,cn-1184c464cb,人凝血因子VIII,CN,cn-38d3b9ed4e,人凝血因子Ⅷ,duplicate_name,reports/substance_duplicates.csv：人凝血因子VIII 与 canonical 同名（products=12）,medium,mergeable,6,B02BD
+duplicate_merge,cn-3ce82187b3,血液保存液II,CN,cn-efbda0f8da,血液保存液Ⅱ,duplicate_name,reports/substance_duplicates.csv：血液保存液II 与 canonical 同名（products=3）,medium,mergeable,3,B05CB
+duplicate_merge,cn-97f2e26661,人II型肿瘤坏死因子受体-抗体融合蛋白,CN,cn-946fdc2bca,人Ⅱ型肿瘤坏死因子受体-抗体融合蛋白,duplicate_name,reports/substance_duplicates.csv：人II型肿瘤坏死因子受体-抗体融合蛋白 与 canonical 同名（products=1）,medium,mergeable,1,L04AB
+duplicate_merge,cn-8e0cc7dc56,人凝血因子IX,CN,cn-1874898036,人凝血因子Ⅸ,duplicate_name,reports/substance_duplicates.csv：人凝血因子IX 与 canonical 同名（products=2）,medium,mergeable,1,B02BD
+duplicate_merge,cn-6c6627ca08,抗A、抗B血型定型试剂,CN,cn-efefd00c0f,抗A抗B血型定型试剂,duplicate_name,reports/substance_duplicates.csv：抗A、抗B血型定型试剂 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-ee752e7204,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒1型核酸检测试剂盒,CN,cn-87502e499d,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒(1型)核酸检测试剂盒,duplicate_name,reports/substance_duplicates.csv：乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒1型核酸检测试剂盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-e02680c13f,马破伤风免疫球蛋白F(ab′)₂,CN,cn-6c3270fc04,马破伤风免疫球蛋白(F(ab')2),duplicate_name,reports/substance_duplicates.csv：马破伤风免疫球蛋白F(ab′)₂ 与 canonical 同名（products=2）,medium,mergeable,1,J06BB
+duplicate_merge,cn-4fb2338338,阿加糖酶α,CN,cn-b89f68fd48,阿加糖酶β,duplicate_name,reports/substance_duplicates.csv：阿加糖酶α 与 canonical 同名（products=2）,medium,mergeable,1,A16AB
+duplicate_merge,cn-b486eee49d,碘[125I]催乳素放射免疫分析药盒,CN,cn-52e4274bf9,碘[125I]-催乳素放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]催乳素放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-48dc3d01b0,碘[125I]甲状腺素放射免疫分析药盒,CN,cn-bb2757e740,碘[125I]-甲状腺素放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]甲状腺素放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-ed56c4fe90,碘[125I]人促黄体生成激素放射免疫分析药盒,CN,cn-2000d6df2c,碘[125I]-人促黄体生成激素放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]人促黄体生成激素放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-1c205958a6,碘[125I]人促甲状腺激素放射免疫分析药盒,CN,cn-96a1fb276f,碘[125I]-人促甲状腺激素放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]人促甲状腺激素放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-0bea99135a,碘[125I]人促卵泡生成激素放射免疫分析药盒,CN,cn-b4d0993809,碘[125I]-人促卵泡生成激素放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]人促卵泡生成激素放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-32a04145e2,碘[125I]-三碘甲腺原氨酸放射免疫分析药盒,CN,cn-4373c2b217,碘[125I]三碘甲腺原氨酸放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]-三碘甲腺原氨酸放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-c18247bc3c,碘[125I]孕酮放射免疫分析药盒,CN,cn-8e4caed20e,碘[125I]-孕酮放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]孕酮放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-73ce0656a2,碘[125I]睾酮放射免疫分析药盒,CN,cn-53d3903c26,碘[125I]-睾酮放射免疫分析药盒,duplicate_name,reports/substance_duplicates.csv：碘[125I]睾酮放射免疫分析药盒 与 canonical 同名（products=2）,medium,mergeable,1,V04CW
+duplicate_merge,cn-1e1d2aee4c,氨酚伪麻美芬片(Ⅲ)/ 氨麻美敏,,cn-7c7beef94a,氨酚伪麻美芬片(Ⅲ)/氨麻美敏,duplicate_name,reports/substance_duplicates.csv：氨酚伪麻美芬片(Ⅲ)/ 氨麻美敏 与 canonical 同名（products=2）,medium,mergeable,0,R05XX
+duplicate_merge,cn-02f08fea05,人凝血因子VⅢ,,cn-38d3b9ed4e,人凝血因子Ⅷ,duplicate_name,reports/substance_duplicates.csv：人凝血因子VⅢ 与 canonical 同名（products=2）,medium,mergeable,0,B02BD
+duplicate_merge,cn-bc823c69bd,锝[99MTC] 双半胱乙酯,,cn-26a26f6713,锝[99mTc]双半胱乙酯,duplicate_name,reports/substance_duplicates.csv：锝[99MTC] 双半胱乙酯 与 canonical 同名（products=1）,medium,mergeable,0,V09CA
+duplicate_merge,cn-b74588609c,中长链脂肪乳/氨基酸（16）/葡萄糖,,cn-42d08f21b7,中长链脂肪乳/氨基酸(16)/葡萄糖,duplicate_name,reports/substance_duplicates.csv：中长链脂肪乳/氨基酸（16）/葡萄糖 与 canonical 同名（products=9）,medium,mergeable,0,B05BA
+duplicate_merge,cn-984316b3cb,三维亚油酸胶丸 Ⅰ,,cn-e38aca6dac,三维亚油酸胶丸Ⅰ,duplicate_name,reports/substance_duplicates.csv：三维亚油酸胶丸 Ⅰ 与 canonical 同名（products=1）,medium,mergeable,0,A11JC
+duplicate_merge,cn-e414e3b684,ω-3 鱼油中/长链脂肪乳,,cn-2adea44598,ω-3鱼油中/长链脂肪乳,duplicate_name,reports/substance_duplicates.csv：ω-3 鱼油中/长链脂肪乳 与 canonical 同名（products=3）,medium,mergeable,0,B05BA
+duplicate_merge,cn-f6f546ab34,结构脂肪乳（20%）/氨基酸（16）/葡萄糖,,cn-aaed64f319,结构脂肪乳(20%)/氨基酸(16)/葡萄糖,duplicate_name,reports/substance_duplicates.csv：结构脂肪乳（20%）/氨基酸（16）/葡萄糖 与 canonical 同名（products=2）,medium,mergeable,0,B05BA
+duplicate_merge,cn-a6e340885d,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒（1型）核酸检测试剂,,cn-68a3fbd396,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒1型核酸检测试剂,duplicate_name,reports/substance_duplicates.csv：乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒（1型）核酸检测试剂 与 canonical 同名（products=1）,medium,mergeable,0,V04CW
+duplicate_merge,cn-a42bb50560,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒（1＋2型）核酸,,cn-ede1239590,乙型肝炎病毒、 丙型肝炎病毒 、人类免疫缺陷病毒(1＋2型)核酸,duplicate_name,reports/substance_duplicates.csv：乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒（1＋2型）核酸 与 canonical 同名（products=1）,medium,mergeable,0,V04CW
+substance_merge,cn-2db2538bfa,葡萄糖粉剂,CN,dextrose,,existing_override,"cn_inn_overrides：多个候选分数相同：Dextrose(dextrose), Dextrose, Unspecified Form(dextrose-unspecified-form), Glucose(glucose)；en_inn=Dextrose",medium,mergeable,46,V02DC
+substance_merge,condroitin,Condroitín,"ES,MX",chondroitin,,existing_override,es_inn_overrides：低置信证据: 模糊 condroitin ≈ Chondroitin (0.95)；products=29; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Chondroitin,low,mergeable,29,M01AX25
+substance_merge,cn-55bfea1cce,氟伐他汀钠,CN,fluvastatin,,existing_override,"cn_inn_overrides：多个候选分数相同：Fluvastatin(fluvastatin), Fluvastatin Sodium(fluvastatin-sodium)；en_inn=Fluvastatin",medium,mergeable,24,C10AA
+substance_merge,amilmetacresol,Amilmetacresol,"ES,MX",amylmetacresol,,existing_override,es_inn_overrides：低置信证据: 模糊 amilmetacresol ≈ Amylmetacresol (0.93)；products=23; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Amylmetacresol,low,mergeable,23,
+substance_merge,cn-f1b9d21d85,米卡芬净钠,CN,micafungin,,existing_override,"cn_inn_overrides：多个候选分数相同：Micafungin(micafungin), Micafungin Sodium(micafungin-sodium)；en_inn=Micafungin",medium,mergeable,21,J02AX
+substance_merge,fibrinogeno-humano,Fibrinógeno Humano,"ES,MX",fibrinogen-human,,existing_override,es_inn_overrides：低置信证据: 模糊 fibrinogeno humano ≈ Fibrinogen Human (0.94)；products=19; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Fibrinogen Human,low,mergeable,20,B02BB01
+substance_merge,cn-2f1c20e347,苯甲酸阿格列汀,CN,alogliptin,,cn2en,CN2EN 表 阿格列汀,medium,mergeable,19,A10BH
+substance_merge,cn-5bd9217c34,达肝素钠,CN,dalteparin,,existing_override,"cn_inn_overrides：多个候选分数相同：Dalteparin(dalteparin), Dalteparin Sodium(dalteparin-sodium)；en_inn=Dalteparin",medium,mergeable,19,B01AB
+substance_merge,tetanos,Tétanos,"ES,MX",tetanus,,existing_override,es_inn_overrides：低置信证据: 模糊 tetanos ≈ Tetanus (0.86)；products=19; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Tetanus,low,mergeable,19,
+substance_merge,nimodipino,Nimodipino,"ES,MX",nimodipine,,existing_override,es_inn_overrides：低置信证据: 模糊 nimodipino ≈ Nimodipine (0.90)；products=17; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Nimodipine,low,mergeable,17,C08CA06
+substance_merge,valeriana-officinalis,Valeriana Officinalis,ES,valerian,,existing_override,es_inn_overrides：弱证据且名字相似度 0.55<0.62（仅 atc_unique）；en_inn=Valerian,medium,mergeable,17,N05CM09
+substance_merge,cn-ac79bd5204,聚苯乙烯磺酸钙,CN,polystyrene-sulfonate-calcium,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Polystyrene Sulfonate - Calcium,medium,mergeable,14,G04BX
+substance_merge,mentol,Mentol,"ES,MX",menthol,,existing_override,es_inn_overrides：低置信证据: 模糊 mentol ≈ Menthol (0.92)；products=14; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Menthol,low,mergeable,14,D02AC
+substance_merge,umeclidinio,Umeclidinio,"ES,MX",umeclidinium,,existing_override,es_inn_overrides：低置信证据: 模糊 umeclidinio ≈ Umeclidinium (0.87)；products=12; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Umeclidinium,low,mergeable,12,
+substance_merge,cn-0d1c4f7573,樟脑醑,CN,camphor,,existing_override,"cn_inn_overrides：多个候选分数相同：Camphor, ( )(camphor), Camphor(camphor-94c02c), Camphor (Natural)(camphor-natural)；en_inn=Camphor, ( )",medium,mergeable,11,M02AX
+substance_merge,amfotericina-b,Amfotericina B,"ES,MX",amphotericin-b,,existing_override,es_inn_overrides：低置信证据: 模糊 amfotericina b ≈ Amphotericin B (0.86)；products=10; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Amphotericin B,low,mergeable,10,J02AA01
+substance_merge,carbomero,Carbomero,"ES,MX",carbomer,,existing_override,es_inn_overrides：低置信证据: 模糊 carbomero ≈ Carbomer (0.94)；products=10; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Carbomer,low,mergeable,10,S01XA20
+substance_merge,cn-cb8a75c2a6,尿囊素,CN,allantoin,,existing_override,"cn_inn_overrides：多个候选分数相同：Allantoin(allantoin), Allantoin, (R)(allantoin-r)；en_inn=Allantoin",medium,mergeable,9,A16AX
+substance_merge,itoprida,Itoprida,"ES,MX",itopride,,existing_override,es_inn_overrides：低置信证据: 模糊 itoprida ≈ Itopride (0.88)；products=9; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Itopride,low,mergeable,9,A03FA07
+substance_merge,thymus-vulgaris,Thymus Vulgaris,ES,thymus-vulgaris-leaf,,existing_override,es_inn_overrides：低置信证据: 模糊 thymus vulgaris ≈ Thymus Vulgaris Leaf (0.86)；products=9; countries=ES；ES id 无 mx-es- 前缀；en_inn=Thymus Vulgaris Leaf,low,mergeable,9,R05CA
+substance_merge,cn-b46751b5ce,玻璃酸酶,CN,hyaluronidase,,existing_override,"cn_inn_overrides：多个候选分数相同：Hyaluronidase(hyaluronidase), Hyaluronidase (Human Recombinant)(hyaluronidase-human-recombinant)；en_inn=Hyaluronidase",medium,mergeable,8,B06AA
+substance_merge,mx-es-isoconazol,Isoconazol,MX,tioconazole,,existing_override,es_inn_overrides：低置信证据: 模糊 isoconazol ≈ Tioconazole (0.86)；products=8; countries=MX；en_inn=Tioconazole,low,mergeable,8,
+substance_merge,sulpirida,Sulpirida,"ES,MX",sulpiride,,existing_override,es_inn_overrides：低置信证据: 模糊 sulpirida ≈ Sulpiride (0.89)；products=8; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Sulpiride,low,mergeable,8,N05AL01
+substance_merge,cn-6d278bd979,膦甲酸钠,CN,foscarnet,,existing_override,"cn_inn_overrides：多个候选分数相同：Foscarnet(foscarnet), Foscarnet Sodium(foscarnet-sodium)；en_inn=Foscarnet",medium,mergeable,7,D06BB
+substance_merge,cn-d3c12e92d6,输血用枸橼酸钠,CN,sodium-citrate,,existing_override,"cn_inn_overrides：多个候选分数相同：Sodium Citrate(sodium-citrate), Sodium Citrate, Unspecified Form(sodium-citrate-unspecified-form)；en_inn=Sodium Citrate",medium,mergeable,7,B05CB
+substance_merge,mx-es-donepecilo,Donepecilo,MX,donepezil,,existing_override,es_inn_overrides：低置信证据: 模糊 donepecilo ≈ Donepezil (0.84)；products=7; countries=MX；en_inn=Donepezil,low,mergeable,7,
+substance_merge,mx-es-vitaminas,Vitaminas,MX,vitamin-a,,existing_override,es_inn_overrides：低置信证据: 模糊 vitaminas ≈ Vitamin A (0.89)；products=7; countries=MX；en_inn=Vitamin A,low,mergeable,7,
+substance_merge,piketoprofeno,Piketoprofeno,"ES,MX",ketoprofen,,existing_override,es_inn_overrides：低置信证据: 模糊 piketoprofeno ≈ Ketoprofen (0.87)；products=6; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Ketoprofen,low,mergeable,6,M02AA28
+substance_merge,propafenona,Propafenona,"ES,MX",propafenone,,existing_override,es_inn_overrides：低置信证据: 模糊 propafenona ≈ Propafenone (0.91)；products=6; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Propafenone,low,mergeable,6,C01BC03
+substance_merge,tiamazol,Tiamazol,"ES,MX",thiamazole,,existing_override,es_inn_overrides：低置信证据: 模糊 tiamazol ≈ Thiamazole (0.89)；products=6; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Thiamazole,low,mergeable,6,H03BB02
+substance_merge,mx-es-bromuro-de-vecuronio,Bromuro De Vecuronio,MX,vecuronium,,existing_override,es_inn_overrides：弱证据且名字相似度 0.53<0.62（仅 wikidata_es_en）；en_inn=Vecuronium,medium,mergeable,5,
+substance_merge,cincocaina,Cincocaína,"ES,MX",cinchocaine,,existing_override,es_inn_overrides：低置信证据: 模糊 cincocaina ≈ Cinchocaine (0.86)；products=4; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Cinchocaine,low,mergeable,4,
+substance_merge,eflornitina,Eflornitina,"ES,MX",eflornithine,,existing_override,es_inn_overrides：低置信证据: 模糊 eflornitina ≈ Eflornithine (0.87)；products=4; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Eflornithine,low,mergeable,4,D11AX
+substance_merge,mx-es-multivitaminico,Multivitamínico,MX,multivitamin,,existing_override,es_inn_overrides：低置信证据: 模糊 multivitaminico ≈ Multivitamin (0.89)；products=4; countries=MX；en_inn=Multivitamin,low,mergeable,4,
+substance_merge,cn-9ab5b7f799,多替拉韦钠,CN,dolutegravir,,existing_override,"cn_inn_overrides：多个候选分数相同：Dolutegravir(dolutegravir), Dolutegravir Sodium(dolutegravir-sodium)；en_inn=Dolutegravir",medium,mergeable,3,J05AX
+substance_merge,cn-2b5dba4ce6,枸橼酸阿尔维林,CN,alverine,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Alverine,medium,mergeable,3,A03AD
+substance_merge,alantoina,Alantoína,"ES,MX",allantoin,,existing_override,es_inn_overrides：低置信证据: 模糊 alantoina ≈ Allantoin (0.89)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Allantoin,low,mergeable,3,
+substance_merge,hierro-dextran,Hierro Dextran,"ES,MX",iron-dextran,,existing_override,es_inn_overrides：低置信证据: 模糊 hierro dextran ≈ Iron Dextran (0.85)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Iron Dextran,low,mergeable,3,B03AC
+substance_merge,insulina-asparta-bifasica,Insulina Asparta Bifásica,ES,insulin-aspart-biphasic,,existing_override,es_inn_overrides：低置信证据: 模糊 insulina asparta bifasica ≈ Insulin Aspart Biphasic (0.88)；products=3; countries=ES；ES id 无 mx-es- 前缀；en_inn=Insulin Aspart Biphasic,low,mergeable,3,A10AD05
+substance_merge,insulina-efsitora-alfa,Insulina Efsitora Alfa,"ES,MX",insulin-efsitora-alfa,,existing_override,es_inn_overrides：低置信证据: 模糊 insulina efsitora alfa ≈ Insulin Efsitora Alfa (0.98)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Insulin Efsitora Alfa,low,mergeable,3,A10AE08
+substance_merge,metionina,Metionina,"ES,MX",methionine,,existing_override,es_inn_overrides：低置信证据: 模糊 metionina ≈ Methionine (0.84)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Methionine,low,mergeable,3,
+substance_merge,mx-es-bromuro-de-piridostigmina,Bromuro De Piridostigmina,MX,pyridostigmine,,existing_override,es_inn_overrides：弱证据且名字相似度 0.62<0.62（仅 wikidata_es_en）；en_inn=Pyridostigmine,medium,mergeable,3,
+substance_merge,mx-es-diosmectita,Diosmectita,MX,diosmectite,,existing_override,es_inn_overrides：低置信证据: 模糊 diosmectita ≈ Diosmectite (0.91)；products=3; countries=MX；en_inn=Diosmectite,low,mergeable,3,
+substance_merge,mx-es-penicilina-g-benzatinica,Penicilina G Benzatinica,MX,penicillin-g-benzathine,,existing_override,es_inn_overrides：低置信证据: 模糊 penicilina g benzatinica ≈ Penicillin G Benzathine (0.85)；products=3; countries=MX；en_inn=Penicillin G Benzathine,low,mergeable,3,
+substance_merge,patiromero,Patirómero,ES,patiromer,,existing_override,es_inn_overrides：低置信证据: 模糊 patiromero ≈ Patiromer (0.95)；products=3; countries=ES；ES id 无 mx-es- 前缀；en_inn=Patiromer,low,mergeable,3,V03AE09
+substance_merge,selenio,Selenio,"ES,MX",selenium-sulfide,,existing_override,es_inn_overrides：弱证据且名字相似度 0.52<0.62（仅 atc_unique）；en_inn=Selenium Sulfide,medium,mergeable,3,D11AC03
+substance_merge,proteina-c-humana,Proteína C Humana,ES,protein-c-human,,existing_override,es_inn_overrides：低置信证据: 模糊 proteina c humana ≈ Protein C Human (0.94)；products=2; countries=ES；ES id 无 mx-es- 前缀；en_inn=Protein C Human,low,mergeable,3,B01AD12
+substance_merge,cn-437270d2a0,人白介素－2,CN,aldesleukin,,cn2en,CN2EN 表 人白介素-2,medium,mergeable,2,L03AC
+substance_merge,acido-gadobenico,Ácido Gadobénico,ES,gadobenate-dimeglumine,,existing_override,es_inn_overrides：弱证据且名字相似度 0.47<0.62（仅 atc_unique）；en_inn=Gadobenate Dimeglumine,medium,mergeable,2,V08CA08
+substance_merge,balsamo-de-peru,Bálsamo De Perú,ES,balsam-peru,,existing_override,es_inn_overrides：低置信证据: 模糊 balsamo de peru ≈ Balsam Peru (0.85)；products=2; countries=ES；ES id 无 mx-es- 前缀；en_inn=Balsam Peru,low,mergeable,2,
+substance_merge,citrulina,Citrulina,"ES,MX",citrulline,,existing_override,es_inn_overrides：低置信证据: 模糊 citrulina ≈ Citrulline (0.84)；products=2; countries=ES+MX；ES id 无 mx-es- 前缀；en_inn=Citrulline,low,mergeable,2,A16AA
+substance_merge,colagenasa-de-clostridium-hystolyticum,Colagenasa De Clostridium Hystolyticum,ES,collagenase-clostridium-histolyticum,,existing_override,es_inn_overrides：低置信证据: 模糊 colagenasa de clostridium hystolyticum ≈ Collagenase Clostridium Histolyticum (0.92)；products=2; countries=ES；ES id 无 mx-es- 前缀；en_inn=Collagenase Clostridium Histolyticum,low,mergeable,2,
+substance_merge,esparsentan,Esparsentán,ES,sparsentan,,existing_override,es_inn_overrides：低置信证据: 模糊 esparsentan ≈ Sparsentan (0.95)；products=2; countries=ES；ES id 无 mx-es- 前缀；en_inn=Sparsentan,low,mergeable,2,C09XX01
+substance_merge,insulina-lispro-bifasica,Insulina Lispro Bifásica,ES,insulin-lispro-biphasic,,existing_override,es_inn_overrides：低置信证据: 模糊 insulina lispro bifasica ≈ Insulin Lispro Biphasic (0.89)；products=2; countries=ES；ES id 无 mx-es- 前缀；en_inn=Insulin Lispro Biphasic,low,mergeable,2,A10AD04
+substance_merge,mx-es-bioflavonoides,Bioflavonoides,MX,bioflavonoids,,existing_override,es_inn_overrides：低置信证据: 模糊 bioflavonoides ≈ Bioflavonoids (0.96)；products=2; countries=MX；en_inn=Bioflavonoids,low,mergeable,2,
+substance_merge,mx-es-clodronato-disodico,Clodronato Disódico,MX,clodronate-disodium,,existing_override,es_inn_overrides：低置信证据: 模糊 clodronato disodico ≈ Clodronate Disodium (0.84)；products=2; countries=MX；en_inn=Clodronate Disodium,low,mergeable,2,
+substance_merge,mx-es-cloropiramina,Cloropiramina,MX,cloroprocaina,,existing_override,es_inn_overrides：低置信证据: 模糊 cloropiramina ≈ Cloroprocaina (0.85)；products=2; countries=MX；en_inn=Cloroprocaina,low,mergeable,2,
+substance_merge,mx-es-dantron,Dantron,MX,danthron,,existing_override,es_inn_overrides：低置信证据: 模糊 dantron ≈ Danthron (0.93)；products=2; countries=MX；en_inn=Danthron,low,mergeable,2,A06AB03
+substance_merge,mx-es-dorzolaminda,Dorzolaminda,MX,dorzolamide,,existing_override,es_inn_overrides：低置信证据: 模糊 dorzolaminda ≈ Dorzolamide (0.87)；products=2; countries=MX；en_inn=Dorzolamide,low,mergeable,2,
+substance_merge,mx-es-eucalipto,Eucalipto,MX,eucalyptol,,existing_override,es_inn_overrides：低置信证据: 模糊 eucalipto ≈ Eucalyptol (0.84)；products=2; countries=MX；en_inn=Eucalyptol,low,mergeable,2,
+substance_merge,mx-es-fibrinolisina,Fibrinolisina,MX,fibrinolysin,,existing_override,es_inn_overrides：低置信证据: 模糊 fibrinolisina ≈ Fibrinolysin (0.88)；products=2; countries=MX；en_inn=Fibrinolysin,low,mergeable,2,
+substance_merge,mx-es-insulina-aspartica,Insulina Aspartica,MX,insulin-aspart,,existing_override,es_inn_overrides：低置信证据: 模糊 insulina aspartica ≈ Insulin Aspart (0.88)；products=2; countries=MX；en_inn=Insulin Aspart,low,mergeable,2,
+substance_merge,mx-es-lactobacillus-fermentum,Lactobacillus Fermentum,MX,limosilactobacillus-fermentum,,existing_override,es_inn_overrides：低置信证据: 模糊 lactobacillus fermentum ≈ Limosilactobacillus Fermentum (0.88)；products=2; countries=MX；en_inn=Limosilactobacillus Fermentum,low,mergeable,2,
+substance_merge,mx-es-lanzoprazol,Lanzoprazol,MX,lansoprazole,,existing_override,es_inn_overrides：低置信证据: 模糊 lanzoprazol ≈ Lansoprazole (0.87)；products=2; countries=MX；en_inn=Lansoprazole,low,mergeable,2,
+substance_merge,mx-es-loxoprofeno,Loxoprofeno,MX,loxoprofen,,existing_override,es_inn_overrides：低置信证据: 模糊 loxoprofeno ≈ Loxoprofen (0.95)；products=2; countries=MX；en_inn=Loxoprofen,low,mergeable,2,
+substance_merge,mx-es-mosaprida,Mosaprida,MX,mosapride,,existing_override,es_inn_overrides：低置信证据: 模糊 mosaprida ≈ Mosapride (0.89)；products=2; countries=MX；en_inn=Mosapride,low,mergeable,2,
+substance_merge,mx-es-quifamida,Quifamida,MX,quinfamide,,existing_override,es_inn_overrides：低置信证据: 模糊 quifamida ≈ Quinfamide (0.84)；products=2; countries=MX；en_inn=Quinfamide,low,mergeable,2,
+substance_merge,mx-es-sulfato-de-manganeso,Sulfato De Manganeso,MX,manganese,,existing_override,es_inn_overrides：低置信证据: 模糊 manganeso ≈ Manganese (0.89)；products=2; countries=MX；en_inn=Manganese,low,mergeable,2,
+substance_merge,mx-es-vacuna-antiinfluenza,Vacuna Antiinfluenza,MX,vacuna-anti-h-influenzae-b,,existing_override,es_inn_overrides：低置信证据: 模糊 vacuna antiinfluenza ≈ Vacuna Anti H.Influenzae B (0.87)；products=2; countries=MX；en_inn=Vacuna Anti H.Influenzae B,low,mergeable,2,
+substance_merge,salvia-officinalis,Salvia Officinalis,ES,salvia-officinalis-whole,,existing_override,es_inn_overrides：低置信证据: 模糊 salvia officinalis ≈ Salvia Officinalis Whole (0.86)；products=2; countries=ES；ES id 无 mx-es- 前缀；en_inn=Salvia Officinalis Whole,low,mergeable,2,V03AX
+substance_merge,cn-735816cdaa,拉替拉韦钾,CN,raltegravir,,existing_override,"cn_inn_overrides：多个候选分数相同：Raltegravir(raltegravir), Raltegravir Potassium(raltegravir-potassium)；en_inn=Raltegravir",medium,mergeable,1,J05AR
+substance_merge,acido-etidronico,Ácido Etidrónico,ES,etidronate,,existing_override,es_inn_overrides：弱证据且名字相似度 0.54<0.62（仅 atc_unique）；en_inn=Etidronate,medium,mergeable,1,M05BA01
+substance_merge,acido-quenodesoxicolico,Ácido Quenodesoxicólico,ES,chenodiol,,existing_override,es_inn_overrides：弱证据且名字相似度 0.50<0.62（仅 atc_unique）；en_inn=Chenodiol,medium,mergeable,1,A05AA01
+substance_merge,atropa-belladona,Atropa Belladona,ES,atropa-belladonna,,existing_override,es_inn_overrides：低置信证据: 模糊 atropa belladona ≈ Atropa Belladonna (0.97)；products=1; countries=ES；ES id 无 mx-es- 前缀；en_inn=Atropa Belladonna,low,mergeable,1,D04AX
+substance_merge,eladocagen-exuparvovec,Eladocagén Exuparvovec,ES,eladocagene-exuparvovec,,existing_override,es_inn_overrides：低置信证据: 模糊 eladocagen exuparvovec ≈ Eladocagene Exuparvovec (0.98)；products=1; countries=ES；ES id 无 mx-es- 前缀；en_inn=Eladocagene Exuparvovec,low,mergeable,1,A16AB26
+substance_merge,eleutherococcus-senticosus,Eleutherococcus Senticosus,ES,eleutherococcus-senticosus-stem,,existing_override,es_inn_overrides：低置信证据: 模糊 eleutherococcus senticosus ≈ Eleutherococcus Senticosus Stem (0.91)；products=1; countries=ES；ES id 无 mx-es- 前缀；en_inn=Eleutherococcus Senticosus Stem,low,mergeable,1,A13A
+substance_merge,foeniculum-vulgare,Foeniculum Vulgare,ES,foeniculum-vulgare-fruit,,existing_override,es_inn_overrides：低置信证据: 模糊 foeniculum vulgare ≈ Foeniculum Vulgare Fruit (0.86)；products=1; countries=ES；ES id 无 mx-es- 前缀；en_inn=Foeniculum Vulgare Fruit,low,mergeable,1,A03AX
+substance_merge,hexafluoruro-de-azufre,Hexafluoruro De Azufre,ES,sulfur-hexafluoride,,existing_override,es_inn_overrides：弱证据且名字相似度 0.54<0.62（仅 wikidata_es_en）；en_inn=Sulfur Hexafluoride,medium,mergeable,1,V08DA05
+substance_merge,mx-es-aire,Aire,MX,air,,existing_override,es_inn_overrides：低置信证据: 模糊 aire ≈ Air (0.86)；products=1; countries=MX；en_inn=Air,low,mergeable,1,
+substance_merge,mx-es-almlodipino,Almlodipino,MX,amlodipine,,existing_override,es_inn_overrides：低置信证据: 模糊 almlodipino ≈ Amlodipine (0.86)；products=1; countries=MX；en_inn=Amlodipine,low,mergeable,1,
+substance_merge,mx-es-amantadia,Amantadia,MX,amantadine,,existing_override,es_inn_overrides：低置信证据: 模糊 amantadia ≈ Amantadine (0.84)；products=1; countries=MX；en_inn=Amantadine,low,mergeable,1,
+substance_merge,mx-es-anastrazol,Anastrazol,MX,anastrozole,,existing_override,es_inn_overrides：低置信证据: 模糊 anastrazol ≈ Anastrozole (0.86)；products=1; countries=MX；en_inn=Anastrozole,low,mergeable,1,
+substance_merge,mx-es-bacampicilina,Bacampicilina,MX,bacampicillin,,existing_override,es_inn_overrides：低置信证据: 模糊 bacampicilina ≈ Bacampicillin (0.92)；products=1; countries=MX；en_inn=Bacampicillin,low,mergeable,1,
+substance_merge,mx-es-belimunab,Belimunab,MX,belimumab,,existing_override,es_inn_overrides：低置信证据: 模糊 belimunab ≈ Belimumab (0.89)；products=1; countries=MX；en_inn=Belimumab,low,mergeable,1,
+substance_merge,mx-es-bismuto,Bismuto,MX,bismuth,,existing_override,es_inn_overrides：低置信证据: 模糊 bismuto ≈ Bismuth (0.86)；products=1; countries=MX；en_inn=Bismuth,low,mergeable,1,
+substance_merge,mx-es-bosertan,Bosertan,MX,bosentan,,existing_override,es_inn_overrides：低置信证据: 模糊 bosertan ≈ Bosentan (0.88)；products=1; countries=MX；en_inn=Bosentan,low,mergeable,1,
+substance_merge,mx-es-bromhidrato-de-glutamato-de,Bromhidrato De Glutamato De,MX,glutamato,,existing_override,es_inn_overrides：低置信证据: 模糊 glutamato de ≈ Glutamato (0.86)；products=1; countries=MX；en_inn=Glutamato,low,mergeable,1,
+substance_merge,mx-es-bromuro-pinaverio,Bromuro Pinaverio,MX,pinaverium-bromide,,mx_inn_map,mx_inn_map bromuro pinaverio → Pinaverium Bromide,medium,mergeable,1,
+substance_merge,mx-es-carbazocromo,Carbazocromo,MX,carbazochrome,,existing_override,es_inn_overrides：低置信证据: 模糊 carbazocromo ≈ Carbazochrome (0.88)；products=1; countries=MX；en_inn=Carbazochrome,low,mergeable,1,
+substance_merge,mx-es-cefpiroma,Cefpiroma,MX,cefpirome,,existing_override,es_inn_overrides：低置信证据: 模糊 cefpiroma ≈ Cefpirome (0.89)；products=1; countries=MX；en_inn=Cefpirome,low,mergeable,1,
+substance_merge,mx-es-chamomilla,Chamomilla,MX,chamomile,,existing_override,es_inn_overrides：低置信证据: 模糊 chamomilla ≈ Chamomile (0.84)；products=1; countries=MX；en_inn=Chamomile,low,mergeable,1,
+substance_merge,mx-es-cianocobal-amina,Cianocobal Amina,MX,cyanocobalamin,,existing_override,es_inn_overrides：低置信证据: 模糊 cianocobal amina ≈ Cyanocobalamin (0.87)；products=1; countries=MX；en_inn=Cyanocobalamin,low,mergeable,1,
+substance_merge,mx-es-ciloquinol,Ciloquinol,MX,clioquinol,,existing_override,es_inn_overrides：低置信证据: 模糊 ciloquinol ≈ Clioquinol (0.90)；products=1; countries=MX；en_inn=Clioquinol,low,mergeable,1,
+substance_merge,mx-es-cirpofloxacino,Cirpofloxacino,MX,ciprofloxacin,,existing_override,es_inn_overrides：低置信证据: 模糊 cirpofloxacino ≈ Ciprofloxacin (0.89)；products=1; countries=MX；en_inn=Ciprofloxacin,low,mergeable,1,
+substance_merge,mx-es-clorotrimazol,Clorotrimazol,MX,clotrimazole,,existing_override,es_inn_overrides：低置信证据: 模糊 clorotrimazol ≈ Clotrimazole (0.88)；products=1; countries=MX；en_inn=Clotrimazole,low,mergeable,1,
+substance_merge,mx-es-cloruro-de-betanechol,Cloruro De Betanechol,MX,bethanechol,,existing_override,es_inn_overrides：低置信证据: 模糊 betanechol ≈ Bethanechol (0.95)；products=1; countries=MX；en_inn=Bethanechol,low,mergeable,1,
+substance_merge,mx-es-cloruro-de-cetilperidinio,Cloruro De Cetilperidinio,MX,cetilpiridinio,,existing_override,es_inn_overrides：低置信证据: 模糊 cetilperidinio ≈ Cetilpiridinio (0.93)；products=1; countries=MX；en_inn=Cetilpiridinio,low,mergeable,1,
+substance_merge,mx-es-dermatofagoides-farinae-50,Dermatofagoides Farinae 50%,MX,dermatophagoides-farinae,,existing_override,es_inn_overrides：低置信证据: 模糊 dermatofagoides farinae 50% ≈ Dermatophagoides Farinae (0.88)；products=1; countries=MX；en_inn=Dermatophagoides Farinae,low,mergeable,1,
+substance_merge,mx-es-dermatofagoides-pteronissinus-50,Dermatofagoides Pteronissinus 50%,MX,dermatophagoides-pteronyssinus,,existing_override,es_inn_overrides：低置信证据: 模糊 dermatofagoides pteronissinus 50% ≈ Dermatophagoides Pteronyssinus (0.87)；products=1; countries=MX；en_inn=Dermatophagoides Pteronyssinus,low,mergeable,1,
+substance_merge,mx-es-diclofenado,Diclofenado,MX,diclofenac,,existing_override,es_inn_overrides：低置信证据: 模糊 diclofenado ≈ Diclofenac (0.86)；products=1; countries=MX；en_inn=Diclofenac,low,mergeable,1,
+substance_merge,mx-es-dicofenaco,Dicofenaco,MX,diclofenac,,existing_override,es_inn_overrides：低置信证据: 模糊 dicofenaco ≈ Diclofenac (0.90)；products=1; countries=MX；en_inn=Diclofenac,low,mergeable,1,
+substance_merge,mx-es-doxororubicina,Doxororubicina,MX,doxorubicin,,existing_override,es_inn_overrides：低置信证据: 模糊 doxororubicina ≈ Doxorubicin (0.88)；products=1; countries=MX；en_inn=Doxorubicin,low,mergeable,1,
+substance_merge,mx-es-enterococcus-faecium-cepa,Enterococcus Faecium Cepa,MX,enterococcus-faecium,,existing_override,es_inn_overrides：低置信证据: 模糊 enterococcus faecium cepa ≈ Enterococcus Faecium (0.89)；products=1; countries=MX；en_inn=Enterococcus Faecium,low,mergeable,1,
+substance_merge,mx-es-estrogenos-esterificados,Estrogenos Esterificados,MX,estrogens-esterified,,existing_override,"es_inn_overrides：低置信证据: 模糊 estrogenos esterificados ≈ Estrogens, Esterified (0.86)；products=1; countries=MX；en_inn=Estrogens, Esterified",low,mergeable,1,
+substance_merge,mx-es-fluoruoracilo,Fluoruoracilo,MX,fluorouracil,,existing_override,es_inn_overrides：低置信证据: 模糊 fluoruoracilo ≈ Fluorouracil (0.88)；products=1; countries=MX；en_inn=Fluorouracil,low,mergeable,1,
+substance_merge,mx-es-gabepentina,Gabepentina,MX,gabapentin,,existing_override,es_inn_overrides：低置信证据: 模糊 gabepentina ≈ Gabapentin (0.86)；products=1; countries=MX；en_inn=Gabapentin,low,mergeable,1,
+substance_merge,mx-es-gauifenesina,Gauifenesina,MX,guaifenesin,,existing_override,es_inn_overrides：低置信证据: 模糊 gauifenesina ≈ Guaifenesin (0.87)；products=1; countries=MX；en_inn=Guaifenesin,low,mergeable,1,
+substance_merge,mx-es-gonadotropina-menopausica-humana,Gonadotropina Menopáusica Humana,MX,gonadotrophin-menopausal-human,,existing_override,es_inn_overrides：低置信证据: 模糊 gonadotropina menopausica humana ≈ Gonadotrophin - Menopausal Human (0.90)；products=1; countries=MX；en_inn=Gonadotrophin - Menopausal Human,low,mergeable,1,
+substance_merge,mx-es-guaiferesina,Guaiferesina,MX,guaifenesin,,existing_override,es_inn_overrides：低置信证据: 模糊 guaiferesina ≈ Guaifenesin (0.87)；products=1; countries=MX；en_inn=Guaifenesin,low,mergeable,1,
+substance_merge,mx-es-isotretionina,Isotretionina,MX,isotretinoin,,existing_override,es_inn_overrides：低置信证据: 模糊 isotretionina ≈ Isotretinoin (0.88)；products=1; countries=MX；en_inn=Isotretinoin,low,mergeable,1,
+substance_merge,mx-es-ketaconazol,Ketaconazol,MX,ketoconazole,,existing_override,es_inn_overrides：低置信证据: 模糊 ketaconazol ≈ Ketoconazole (0.87)；products=1; countries=MX；en_inn=Ketoconazole,low,mergeable,1,
+substance_merge,mx-es-lactobacillus-acidofill,Lactobacillus Acidofill,MX,lactobacillus-acidophilus,,existing_override,es_inn_overrides：低置信证据: 模糊 lactobacillus acidofill ≈ Lactobacillus Acidophilus (0.88)；products=1; countries=MX；en_inn=Lactobacillus Acidophilus,low,mergeable,1,
+substance_merge,mx-es-lactobasillos-casei,Lactobasillos Casei,MX,lactobacillus-casei,,existing_override,es_inn_overrides：低置信证据: 模糊 lactobasillos casei ≈ Lactobacillus Casei (0.89)；products=1; countries=MX；en_inn=Lactobacillus Casei,low,mergeable,1,
+substance_merge,mx-es-leuproerlina,Leuproerlina,MX,leuprorelin,,existing_override,es_inn_overrides：低置信证据: 模糊 leuproerlina ≈ Leuprorelin (0.87)；products=1; countries=MX；en_inn=Leuprorelin,low,mergeable,1,
+substance_merge,mx-es-levomefolato-de-calcio,Levomefolato De Calcio,MX,levomefolate,,existing_override,es_inn_overrides：低置信证据: 模糊 levomefolato ≈ Levomefolate (0.92)；products=1; countries=MX；en_inn=Levomefolate,low,mergeable,1,
+substance_merge,mx-es-liotironina-sodica,Liotironina Sódica,MX,liothyronine,,existing_override,es_inn_overrides：弱证据且名字相似度 0.60<0.62（仅 atc_unique）；en_inn=Liothyronine,medium,mergeable,1,H03AA02
+substance_merge,mx-es-lomefloxacino,Lomefloxacino,MX,lomefloxacin,,existing_override,es_inn_overrides：低置信证据: 模糊 lomefloxacino ≈ Lomefloxacin (0.96)；products=1; countries=MX；en_inn=Lomefloxacin,low,mergeable,1,
+substance_merge,mx-es-manganeso,Manganeso,MX,manganese,,existing_override,es_inn_overrides：低置信证据: 模糊 manganeso ≈ Manganese (0.89)；products=1; countries=MX；en_inn=Manganese,low,mergeable,1,
+substance_merge,mx-es-melformina,Melformina,MX,metformin,,existing_override,es_inn_overrides：低置信证据: 模糊 melformina ≈ Metformin (0.84)；products=1; countries=MX；en_inn=Metformin,low,mergeable,1,
+substance_merge,mx-es-meloxican,Meloxican,MX,meloxicam,,existing_override,es_inn_overrides：低置信证据: 模糊 meloxican ≈ Meloxicam (0.89)；products=1; countries=MX；en_inn=Meloxicam,low,mergeable,1,
+substance_merge,mx-es-metoclopramaida,Metoclopramaida,MX,metoclopramide,,existing_override,es_inn_overrides：低置信证据: 模糊 metoclopramaida ≈ Metoclopramide (0.90)；products=1; countries=MX；en_inn=Metoclopramide,low,mergeable,1,
+substance_merge,mx-es-metrotexate,Metrotexate,MX,methotrexate,,existing_override,es_inn_overrides：低置信证据: 模糊 metrotexate ≈ Methotrexate (0.87)；products=1; countries=MX；en_inn=Methotrexate,low,mergeable,1,
+substance_merge,mx-es-multivitaminas,Multivitaminas,MX,multivitamin,,existing_override,es_inn_overrides：低置信证据: 模糊 multivitaminas ≈ Multivitamin (0.92)；products=1; countries=MX；en_inn=Multivitamin,low,mergeable,1,
+substance_merge,mx-es-nitrofurantontoina,Nitrofurantontoína,MX,nitrofurantoin,,existing_override,es_inn_overrides：低置信证据: 模糊 nitrofurantontoina ≈ Nitrofurantoin (0.88)；products=1; countries=MX；en_inn=Nitrofurantoin,low,mergeable,1,
+substance_merge,mx-es-octocagalfa,Octocagalfa,MX,octocog-alfa,,existing_override,es_inn_overrides：低置信证据: 模糊 octocagalfa ≈ Octocog Alfa (0.87)；products=1; countries=MX；en_inn=Octocog Alfa,low,mergeable,1,
+substance_merge,mx-es-olea-europea,Olea Europea,MX,olea-europaea,,existing_override,es_inn_overrides：低置信证据: 模糊 olea europea ≈ Olea Europaea (0.96)；products=1; countries=MX；en_inn=Olea Europaea,low,mergeable,1,
+substance_merge,mx-es-parafina,Parafina,MX,paraffin,,existing_override,es_inn_overrides：低置信证据: 模糊 parafina ≈ Paraffin (0.88)；products=1; countries=MX；en_inn=Paraffin,low,mergeable,1,
+substance_merge,mx-es-penicilina-g-procainica,Penicilina G Procainica,MX,penicillin-g-procaine,,existing_override,es_inn_overrides：低置信证据: 模糊 penicilina g procainica ≈ Penicillin G Procaine (0.86)；products=1; countries=MX；en_inn=Penicillin G Procaine,low,mergeable,1,
+substance_merge,mx-es-pertussico,Pertússico,MX,pertussis,,existing_override,es_inn_overrides：低置信证据: 模糊 pertussico ≈ Pertussis (0.84)；products=1; countries=MX；en_inn=Pertussis,low,mergeable,1,
+substance_merge,mx-es-phelum-pratense-33,Phelum Pratense 33%,MX,phleum-pratense,,existing_override,es_inn_overrides：低置信证据: 模糊 phelum pratense 33% ≈ Phleum Pratense (0.85)；products=1; countries=MX；en_inn=Phleum Pratense,low,mergeable,1,
+substance_merge,mx-es-pivalato-de-fluocortol,Pivalato De Fluocortol,MX,fluocortolone,,existing_override,es_inn_overrides：低置信证据: 模糊 fluocortol ≈ Fluocortolone (0.87)；products=1; countries=MX；en_inn=Fluocortolone,low,mergeable,1,
+substance_merge,mx-es-poa-pratensis-33,Poa Pratensis 33%,MX,poa-pratensis,,existing_override,es_inn_overrides：低置信证据: 模糊 poa pratensis 33% ≈ Poa Pratensis (0.90)；products=1; countries=MX；en_inn=Poa Pratensis,low,mergeable,1,
+substance_merge,mx-es-polividona,Polividona,MX,povidona,,existing_override,es_inn_overrides：低置信证据: 模糊 polividona ≈ Povidona (0.89)；products=1; countries=MX；en_inn=Povidona,low,mergeable,1,
+substance_merge,mx-es-proteinas,Proteinas,MX,protein-s,,existing_override,es_inn_overrides：低置信证据: 模糊 proteinas ≈ Protein S (0.89)；products=1; countries=MX；en_inn=Protein S,low,mergeable,1,
+substance_merge,mx-es-rubeola,Rubeola,MX,rubella,,existing_override,es_inn_overrides：低置信证据: 模糊 rubeola ≈ Rubella (0.86)；products=1; countries=MX；en_inn=Rubella,low,mergeable,1,
+substance_merge,mx-es-s-pantoprazol,S(-) Pantoprazol,MX,pantoprazole,,existing_override,es_inn_overrides：低置信证据: 模糊 s(-) pantoprazol ≈ Pantoprazole (0.88)；products=1; countries=MX；en_inn=Pantoprazole,low,mergeable,1,
+substance_merge,mx-es-salmerol,Salmerol,MX,salmeterol,,existing_override,es_inn_overrides：低置信证据: 模糊 salmerol ≈ Salmeterol (0.89)；products=1; countries=MX；en_inn=Salmeterol,low,mergeable,1,
+substance_merge,mx-es-silicato-de-magnesio,Silicato De Magnesio,MX,silica,,existing_override,es_inn_overrides：低置信证据: 模糊 silicato ≈ Silica (0.86)；products=1; countries=MX；en_inn=Silica,low,mergeable,1,
+substance_merge,mx-es-succinicum-acidum,Succinicum Acidum,MX,succinic-acid,,existing_override,es_inn_overrides：低置信证据: 模糊 succinicum acidum ≈ Succinic Acid (0.87)；products=1; countries=MX；en_inn=Succinic Acid,low,mergeable,1,
+substance_merge,mx-es-sulfanetoxazol,Sulfanetoxazol,MX,sulfamethoxazole,,existing_override,es_inn_overrides：低置信证据: 模糊 sulfanetoxazol ≈ Sulfamethoxazole (0.87)；products=1; countries=MX；en_inn=Sulfamethoxazole,low,mergeable,1,
+substance_merge,mx-es-sulfoguayacol,Sulfoguayacol,MX,sulfoguayacolato,,existing_override,es_inn_overrides：低置信证据: 模糊 sulfoguayacol ≈ Sulfoguayacolato (0.90)；products=1; countries=MX；en_inn=Sulfoguayacolato,low,mergeable,1,
+substance_merge,mx-es-sultamicilina,Sultamicilina,MX,sultamicillin,,existing_override,es_inn_overrides：低置信证据: 模糊 sultamicilina ≈ Sultamicillin (0.92)；products=1; countries=MX；en_inn=Sultamicillin,low,mergeable,1,
+substance_merge,mx-es-tecoplanina,Tecoplanina,MX,teicoplanin,,existing_override,es_inn_overrides：低置信证据: 模糊 tecoplanina ≈ Teicoplanin (0.91)；products=1; countries=MX；en_inn=Teicoplanin,low,mergeable,1,
+substance_merge,mx-es-trimet-oprima,Trimet Oprima,MX,trimethoprim,,existing_override,es_inn_overrides：低置信证据: 模糊 trimet oprima ≈ Trimethoprim (0.88)；products=1; countries=MX；en_inn=Trimethoprim,low,mergeable,1,
+substance_merge,mx-es-vacuna-anti-dtp-polio,Vacuna Anti Dtp-polio,MX,vacuna-anti-polio,,existing_override,es_inn_overrides：低置信证据: 模糊 vacuna anti dtp-polio ≈ Vacuna Anti Polio (0.89)；products=1; countries=MX；en_inn=Vacuna Anti Polio,low,mergeable,1,
+substance_merge,mx-es-vacuna-anti-influenza,Vacuna Anti-influenza,MX,vacuna-anti-h-influenzae-b,,existing_override,es_inn_overrides：低置信证据: 模糊 vacuna anti-influenza ≈ Vacuna Anti H.Influenzae B (0.89)；products=1; countries=MX；en_inn=Vacuna Anti H.Influenzae B,low,mergeable,1,
+substance_merge,mx-es-vacuna-contra-difteria,Vacuna Contra Difteria,MX,vacuna-anti-difteria,,existing_override,es_inn_overrides：低置信证据: 模糊 vacuna contra difteria ≈ Vacuna Anti Difteria (0.86)；products=1; countries=MX；en_inn=Vacuna Anti Difteria,low,mergeable,1,
+substance_merge,mx-es-vorioconazol,Vorioconazol,MX,voriconazole,,existing_override,es_inn_overrides：低置信证据: 模糊 vorioconazol ≈ Voriconazole (0.92)；products=1; countries=MX；en_inn=Voriconazole,low,mergeable,1,
+substance_merge,peumus-boldus,Peumus Boldus,ES,peamus-boldus,,existing_override,es_inn_overrides：低置信证据: 模糊 peumus boldus ≈ Peamus Boldus (0.92)；products=1; countries=ES；ES id 无 mx-es- 前缀；en_inn=Peamus Boldus,low,mergeable,1,A16AX
+substance_merge,rutosido,Rutósido,ES,rutoside,,existing_override,es_inn_overrides：低置信证据: 模糊 rutosido ≈ Rutoside (0.88)；products=1; countries=ES；ES id 无 mx-es- 前缀；en_inn=Rutoside,low,mergeable,1,
+substance_merge,mx-es-tesamorelina,Tesamorelina,MX,tesamorelin,,who_inn,WHO INN inn_es=tesamorelina → tesamorelin,high,mergeable,1,
+substance_merge,mx-es-gemifloxacino,Gemifloxacino,MX,gemifloxacin,,who_inn,WHO INN inn_es=gemifloxacino → gemifloxacin,high,mergeable,1,J01MA15
+substance_merge,cn-4843d6cbec,蛋氨酸,,dl-methionine,,existing_override,"cn_inn_overrides：多个候选分数相同：Dl-Methionine(dl-methionine), L-Methionine(l-methionine), Methionine(methionine)；en_inn=Dl-Methionine",medium,mergeable,0,A05BA
+substance_merge,cn-c8e70a4bd8,瑞巴派特,CN,,rebamipide,existing_override,已有英文 INN rebamipide 但库内无对应 substance,medium,needs_target,93,A02BX
+substance_merge,mx-es-difenidol,Difenidol,"CN,MX",,difenidol,who_inn,WHO INN inn_es=difenidol（库内无英文 substance）,high,needs_target,54,N07CA
+substance_merge,cn-b77647d164,吲哚布芬,CN,,indobufen,existing_override,已有英文 INN indobufen 但库内无对应 substance,medium,needs_target,47,B01AC
+substance_merge,cn-970a437917,普卢利沙星,CN,,prulifloxacin,existing_override,已有英文 INN prulifloxacin 但库内无对应 substance,medium,needs_target,26,J01MA
+substance_merge,cn-bd2d3d49b2,西尼地平,CN,,cilnidipine,existing_override,已有英文 INN cilnidipine 但库内无对应 substance,medium,needs_target,24,C08CA
+substance_merge,cn-b6e78d9b17,羟甲烟胺,CN,,nicotinyl methylamide,existing_override,已有英文 INN nicotinyl methylamide 但库内无对应 substance,medium,needs_target,19,A05AB
+substance_merge,cn-eafc36d659,二硫化硒,CN,,selenium disulfide,existing_override,已有英文 INN selenium disulfide 但库内无对应 substance,medium,needs_target,14,D01AE
+substance_merge,cn-a604958fd0,呋喃西林,CN,,nitrofurazone,existing_override,已有英文 INN nitrofurazone 但库内无对应 substance,medium,needs_target,14,D01AE
+substance_merge,cn-a2508e4e0b,马来酸桂哌齐特,CN,,cinepazide,existing_override,已有英文 INN cinepazide 但库内无对应 substance,medium,needs_target,14,C04AX
+substance_merge,cn-ad8ef97013,硼酸,CN,,orthoboric acid,existing_override,已有英文 INN orthoboric acid 但库内无对应 substance,medium,needs_target,12,D08AD
+substance_merge,cn-843e46d77b,磺胺对甲氧嘧啶,CN,,sulphamethoxydiazine,existing_override,已有英文 INN sulphamethoxydiazine 但库内无对应 substance,medium,needs_target,12,J01ED
+substance_merge,cn-3c5b26497c,妥洛特罗,CN,,tulobuterol,existing_override,已有英文 INN tulobuterol 但库内无对应 substance,medium,needs_target,11,R03AC
+substance_merge,cn-a0a548096f,西他沙星,CN,,sitafloxacin,existing_override,已有英文 INN sitafloxacin 但库内无对应 substance,medium,needs_target,11,J01MA
+substance_merge,cn-baac1b376a,长春胺,CN,,vincamine,existing_override,已有英文 INN vincamine 但库内无对应 substance,medium,needs_target,11,C04AX
+substance_merge,cn-ac149aec0e,磷酸铝,CN,,aluminium phosphate,existing_override,已有英文 INN aluminium phosphate 但库内无对应 substance,medium,needs_target,10,A02AB
+substance_merge,cn-ca853b98ee,地佐辛,CN,,dezocine,existing_override,已有英文 INN dezocine 但库内无对应 substance,medium,needs_target,9,N02AX
+substance_merge,cn-6805b038c2,交沙霉素,CN,,josamycin,existing_override,已有英文 INN josamycin 但库内无对应 substance,medium,needs_target,8,J01FA
+substance_merge,cn-5b6808bd1c,丝裂霉素,CN,,mitomycins,existing_override,已有英文 INN mitomycins 但库内无对应 substance,medium,needs_target,7,L01DC
+substance_merge,cn-a9cb857f66,普罗雌烯,CN,,promestriene,existing_override,已有英文 INN promestriene 但库内无对应 substance,medium,needs_target,7,G03CA
+substance_merge,cn-9be0c6ea3c,甘羟铝,CN,,Aluminium glycinate,existing_override,已有英文 INN Aluminium glycinate 但库内无对应 substance,medium,needs_target,7,A02AB
+substance_merge,cn-e1fc7e4ce6,那氟沙星,CN,,nadifloxacin,existing_override,已有英文 INN nadifloxacin 但库内无对应 substance,medium,needs_target,7,D01AA
+substance_merge,cn-a81c6d1750,司莫司汀,CN,,semustine,existing_override,已有英文 INN semustine 但库内无对应 substance,medium,needs_target,6,L01AD
+substance_merge,cn-c78abb9d43,水飞蓟素,CN,,silibinin A,existing_override,已有英文 INN silibinin A 但库内无对应 substance,medium,needs_target,6,A05BA
+substance_merge,cn-13e86b28a2,舒洛地特,CN,,sulodexide,existing_override,已有英文 INN sulodexide 但库内无对应 substance,medium,needs_target,6,B01AF
+substance_merge,cn-b546c4dccf,贝美格,CN,,bemegride,existing_override,已有英文 INN bemegride 但库内无对应 substance,medium,needs_target,6,R07AB
+substance_merge,cn-c94867c0ad,间苯二酚,CN,,resorcin,existing_override,已有英文 INN resorcin 但库内无对应 substance,medium,needs_target,6,D10AX
+substance_merge,cn-e1ff116aa8,甲氧那明,CN,,(RS)-methoxyphenamine,existing_override,已有英文 INN (RS)-methoxyphenamine 但库内无对应 substance,medium,needs_target,5,R03CK
+substance_merge,cn-9d914cf7e9,胰蛋白酶,CN,,trypsin,existing_override,已有英文 INN trypsin 但库内无对应 substance,medium,needs_target,4,B06AA
+substance_merge,cn-e5373190c8,丙戊酰胺,CN,,Valpromide,existing_override,已有英文 INN Valpromide 但库内无对应 substance,medium,needs_target,3,N03AG
+substance_merge,cn-1b31a7a1f4,卡巴匹林钙,CN,,carbaspirin calcium,existing_override,已有英文 INN carbaspirin calcium 但库内无对应 substance,medium,needs_target,3,B01AC
+substance_merge,cn-ff2c099d7a,双氢青蒿素,CN,,dihydroartemisinin,existing_override,已有英文 INN dihydroartemisinin 但库内无对应 substance,medium,needs_target,3,P01BF
+substance_merge,cn-6324366133,放线菌素D,CN,,actinomycin,existing_override,已有英文 INN actinomycin 但库内无对应 substance,medium,needs_target,3,L01DA
+substance_merge,mx-es-fimasartan,Fimasartán,MX,,fimasartan,who_inn,WHO INN inn_es=fimasartan（库内无英文 substance）,high,needs_target,3,C09CA10
+substance_merge,cn-afaaa0ade5,依普黄酮,CN,,ipriflavone,existing_override,已有英文 INN ipriflavone 但库内无对应 substance,medium,needs_target,2,M05BX
+substance_merge,mx-es-asunaprevir,Asunaprevir,"CA,MX",,asunaprevir,who_inn,WHO INN inn_es=asunaprevir（库内无英文 substance）,high,needs_target,2,J05AP06
+substance_merge,mx-es-evogliptina,Evogliptina,MX,,evogliptin,who_inn,WHO INN inn_es=evogliptina（库内无英文 substance）,high,needs_target,2,
+substance_merge,mx-es-gemigliptina,Gemigliptina,MX,,gemigliptin,who_inn,WHO INN inn_es=gemigliptina（库内无英文 substance）,high,needs_target,2,
+substance_merge,mx-es-nimotuzumab,Nimotuzumab,"CN,MX",,nimotuzumab,who_inn,WHO INN inn_es=nimotuzumab（库内无英文 substance）,high,needs_target,2,
+substance_merge,cn-7884949cb9,卡莫氟,CN,,carmofur,existing_override,已有英文 INN carmofur 但库内无对应 substance,medium,needs_target,1,L01BC
+substance_merge,cn-44d979c469,吉法酯,CN,,gefarnate,existing_override,已有英文 INN gefarnate 但库内无对应 substance,medium,needs_target,1,A02BX
+substance_merge,cn-e7ad153484,炔诺酮,CN,,norethisterone,existing_override,已有英文 INN norethisterone 但库内无对应 substance,medium,needs_target,1,G03AA
+substance_merge,cn-824b3c6206,磺胺林,CN,,sulfalene,existing_override,已有英文 INN sulfalene 但库内无对应 substance,medium,needs_target,1,J01ED
+substance_merge,cn-9b556b8ffa,美沙拉嗪,CN,,mesalazine,existing_override,已有英文 INN mesalazine 但库内无对应 substance,medium,needs_target,1,A07EC
+substance_merge,cn-81406bceba,苯噻啶,CN,,pizotyline,existing_override,已有英文 INN pizotyline 但库内无对应 substance,medium,needs_target,1,N02CX
+substance_merge,cn-18802da46e,阿舒瑞韦,CN,,Asunaprevir,existing_override,已有英文 INN Asunaprevir 但库内无对应 substance,medium,needs_target,1,J05AP
+substance_merge,mx-es-acotiamida,Acotiamida,MX,,acotiamide,who_inn,WHO INN inn_es=acotiamida（库内无英文 substance）,high,needs_target,1,
+substance_merge,mx-es-carbonato-de-lodenafilo,Carbonato De Lodenafilo,MX,,lodenafil carbonate,who_inn,WHO INN inn_es=carbonato de lodenafilo（库内无英文 substance）,high,needs_target,1,
+substance_merge,mx-es-glicinato-de-metformina,Glicinato De Metformina,MX,,metformin glycinate,who_inn,WHO INN inn_es=glicinato de metformina（库内无英文 substance）,high,needs_target,1,
+substance_merge,mx-es-imidafenacina,Imidafenacina,MX,,imidafenacin,who_inn,WHO INN inn_es=imidafenacina（库内无英文 substance）,high,needs_target,1,
+substance_merge,mx-es-lesinurad,Lesinurad,MX,,lesinurad,who_inn,WHO INN inn_es=lesinurad（库内无英文 substance）,high,needs_target,1,M04AB05
+substance_merge,mx-es-lorcaserina,Lorcaserina,MX,,lorcaserin,who_inn,WHO INN inn_es=lorcaserina（库内无英文 substance）,high,needs_target,1,A08AA11
+substance_merge,mx-es-saroglitazar,Saroglitazar,MX,,saroglitazar,who_inn,WHO INN inn_es=saroglitazar（库内无英文 substance）,high,needs_target,1,
+substance_merge,cn-d907c531cc,腹膜透析,CN,icodextrin,,atc4,ATC level-4 B05DA 唯一命中 icodextrin（弱证据，需人工核）,low,uncertain,93,B05DA
+substance_merge,cn-c1a38cb5a3,低钙腹膜透析,CN,icodextrin,,atc4,ATC level-4 B05DA 唯一命中 icodextrin（弱证据，需人工核）,low,uncertain,68,B05DA
+substance_merge,dimeticona,Dimeticona,"ES,MX",dimeticona,,mx_inn_map,mx_inn_map dimeticona → Dimeticona；自匹配（目标与源同名，无需合并）,medium,uncertain,51,
+substance_merge,cn-d50d105925,愈酚喷托异丙嗪,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,43,R05XX
+substance_merge,electrolitos,Electrolitos,"ES,MX",electrolitos,,mx_inn_map,mx_inn_map electrolitos → Electrolitos；自匹配（目标与源同名，无需合并）,medium,uncertain,35,
+substance_merge,cn-261ad64dfb,愈美,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,33,R05XX
+substance_merge,cn-fcfe9737e7,锌布,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,32,R05XX
+substance_merge,cn-25288f4890,北豆根氨酚那敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,30,R05XX
+substance_merge,cn-d4e77ec48e,乳酸亚铁,CN,iron,,existing_override,cn_inn_overrides：目标 Iron 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Iron；目标 iron 不含盐型/立体标记 ferrous/lactate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,28,B03AA
+substance_merge,cn-a647fc8778,脂溶性维生素,CN,choline-bitartrate,,atc4,ATC level-4 A11JA 唯一命中 choline-bitartrate（弱证据，需人工核）,low,uncertain,28,A11JA
+substance_merge,cn-3c4fbace72,碳酸司维拉姆,CN,sevelamer,,cn2en,CN2EN 表 司维拉姆；目标 sevelamer 不含盐型/立体标记 carbonate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,26,V03AE
+substance_merge,hipromelosa,Hipromelosa,"ES,MX",hipromelosa,,mx_inn_map,mx_inn_map hipromelosa → Hipromelosa；自匹配（目标与源同名，无需合并）,medium,uncertain,25,S01XA20
+substance_merge,cn-c0da28d9c8,门冬氨酸钾,CN,aspartic-acid,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Aspartic Acid；目标 aspartic-acid 不含盐型/立体标记 aspartate/potassium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,23,A12BA
+substance_merge,cn-ebbe725835,银翘氨敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,22,R05XX
+substance_merge,clormadinona,Clormadinona,"ES,MX",clormadinona,,mx_inn_map,mx_inn_map clormadinona → Clormadinona；自匹配（目标与源同名，无需合并）,medium,uncertain,21,
+substance_merge,saccharomyces-boulardii,Saccharomyces Boulardii,"ES,MX",saccharomyces-boulardii,,mx_inn_map,mx_inn_map saccharomyces boulardii → Saccharomyces Boulardii；自匹配（目标与源同名，无需合并）,medium,uncertain,18,A07FA02
+substance_merge,senosidos-a-b,Senósidos A B,"ES,MX",senosidos-a-b,,mx_inn_map,mx_inn_map senosidos a b → Senósidos A B；自匹配（目标与源同名，无需合并）,medium,uncertain,18,A06AB06
+substance_merge,cn-95827495be,氨酚伪麻那敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,17,R05XX
+substance_merge,cn-4a7cd0534c,苯甲酸雌二醇,CN,estradiol,,existing_override,cn_inn_overrides：目标 Estradiol 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Estradiol；目标 estradiol 不含盐型/立体标记 benzoate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,16,G03CA
+substance_merge,cn-e1dd9041c5,氨咖愈敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,16,R05XX
+substance_merge,cn-a2e3bda741,愈酚维林,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,16,R05XX
+substance_merge,alcanfor,Alcanfor,"ES,MX",alcanfor,,mx_inn_map,mx_inn_map alcanfor → Alcanfor；自匹配（目标与源同名，无需合并）,medium,uncertain,16,M02AX10
+substance_merge,cn-7764ed6be6,地喹氯铵,CN,dequalinium,,existing_override,cn_inn_overrides：目标 Dequalinium 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Dequalinium；目标 dequalinium 不含盐型/立体标记 ammonium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,15,A01AB
+substance_merge,cn-47070f963c,五维B,CN,vitamin-b6,,atc4,ATC level-4 A11EC 唯一命中 vitamin-b6（弱证据，需人工核）,low,uncertain,15,A11EC
+substance_merge,cn-6133b3255d,氨金黄敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,15,R05XX
+substance_merge,terlipresina,Terlipresina,"ES,MX",terlipresina,,mx_inn_map,mx_inn_map terlipresina → Terlipresina；自匹配（目标与源同名，无需合并）,medium,uncertain,15,H01BA04
+substance_merge,cn-bff2ac2bd7,五维葡钙,CN,vitamin-b6,,atc4,ATC level-4 A11EC 唯一命中 vitamin-b6（弱证据，需人工核）,low,uncertain,14,A11EC
+substance_merge,cn-6232bd1fc1,氨酚双氢可待因,CN,co-codamol,,atc4,ATC level-4 N02AJ 唯一命中 co-codamol（弱证据，需人工核）,low,uncertain,14,N02AJ
+substance_merge,cn-33e3515ce9,美愈伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,14,R05XX
+substance_merge,hierro,Hierro,"ES,MX",hierro,,mx_inn_map,mx_inn_map hierro → Hierro；自匹配（目标与源同名，无需合并）,medium,uncertain,14,B03AA03
+substance_merge,magnesio,Magnesio,"ES,MX",magnesio,,mx_inn_map,mx_inn_map magnesio → Magnesio；自匹配（目标与源同名，无需合并）,medium,uncertain,14,A12CC09
+substance_merge,cn-c6abef976e,磷酸腺嘌呤,CN,adenine,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Adenine；目标 adenine 不含盐型/立体标记 phosphate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,13,L03AX
+substance_merge,cn-2f3eee659a,硒酵母,CN,sodium-selenite,,atc4,ATC level-4 A12CE 唯一命中 sodium-selenite（弱证据，需人工核）,low,uncertain,13,A12CE
+substance_merge,cn-fd442288d3,地蒽酚,CN,dithranol,,atc4,ATC level-4 D05AC 唯一命中 dithranol（弱证据，需人工核）,low,uncertain,13,D05AC
+substance_merge,cn-85f5314073,氨麻美敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,13,R05XX
+substance_merge,cn-7b0dc44273,盐酸阿芬太尼,CN,alfentanil,,existing_override,"cn_inn_overrides：多个候选分数相同：Alfentanil(alfentanil), Alfentanil Hydrochloride(alfentanil-hydrochloride)；en_inn=Alfentanil；目标 alfentanil 不含盐型/立体标记 hydrochloride（源名有，需对应 variant/母体名才能安全合并）",medium,uncertain,12,N01AH
+substance_merge,cn-4dad7eb128,氨酚伪麻美芬,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,12,R05XX
+substance_merge,carnitina,Carnitina,"ES,MX",carnitina,,mx_inn_map,mx_inn_map carnitina → Carnitina；自匹配（目标与源同名，无需合并）,medium,uncertain,12,A16AA01
+substance_merge,desfesoterodina,Desfesoterodina,"ES,MX",desfesoterodina,,mx_inn_map,mx_inn_map desfesoterodina → Desfesoterodina；自匹配（目标与源同名，无需合并）,medium,uncertain,12,G04BD13
+substance_merge,diacereina,Diacereína,"ES,MX",diacereina,,mx_inn_map,mx_inn_map diacereina → Diacereína；自匹配（目标与源同名，无需合并）,medium,uncertain,12,M01AX21
+substance_merge,etofenamato,Etofenamato,"ES,MX",etofenamato,,mx_inn_map,mx_inn_map etofenamato → Etofenamato；自匹配（目标与源同名，无需合并）,medium,uncertain,12,M02AA06
+substance_merge,nitrofural,Nitrofural,"ES,MX",nitrofural,,mx_inn_map,mx_inn_map nitrofural → Nitrofural；自匹配（目标与源同名，无需合并）,medium,uncertain,12,D08AF01
+substance_merge,cn-a5eaa46fb3,溴化钙,CN,calcium,,existing_override,cn_inn_overrides：目标 Calcium 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Calcium；目标 calcium 不含盐型/立体标记 bromide（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,11,N05CM
+substance_merge,cn-568e4e6fd8,美辛唑酮,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,11,C05AX
+substance_merge,cn-fbbc0b1017,氨酚咖黄烷胺,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,11,R05XX
+substance_merge,cn-9f13d9777c,氨酚伪麻美芬片Ⅱ/氨麻苯美,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,11,R05XX
+substance_merge,cn-72dd84d5f9,甘草浙贝氯化铵,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,11,R05XX
+substance_merge,cn-bb2d595ee9,碱式碳酸铋,CN,bismuth-subcarbonate,,existing_override,cn_inn_overrides：证据不足，不合并；en_inn=Bismuth Subcarbonate；目标 bismuth-subcarbonate 不含盐型/立体标记 carbonate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,10,A02BX
+substance_merge,cn-ae81e02849,盐酸屈他维林,CN,papaverine,,atc4,ATC level-4 A03AD 唯一命中 papaverine（弱证据，需人工核）,low,uncertain,10,A03AD
+substance_merge,cn-3c3dbf1aaf,甘油灌肠剂,CN,sodium-lauryl-sulfoacetate,,atc4,ATC level-4 A06AG 唯一命中 sodium-lauryl-sulfoacetate（弱证据，需人工核）,low,uncertain,10,A06AG
+substance_merge,cn-438cce9b55,棕榈氯霉素,CN,thiamphenicol,,atc4,ATC level-4 J01BA 唯一命中 thiamphenicol（弱证据，需人工核）,low,uncertain,10,J01BA
+substance_merge,cn-0be86f7db1,氨酚伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,10,R05XX
+substance_merge,cn-25449c214f,酚咖伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,10,R05XX
+substance_merge,cn-302a2f3276,氯雷伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,10,R05XX
+substance_merge,aluminio,Aluminio,"ES,MX",aluminio,,mx_inn_map,mx_inn_map aluminio → Aluminio；自匹配（目标与源同名，无需合并）,medium,uncertain,10,
+substance_merge,cleboprida,Cleboprida,"ES,MX",cleboprida,,mx_inn_map,mx_inn_map cleboprida → Cleboprida；自匹配（目标与源同名，无需合并）,medium,uncertain,10,A03FA06
+substance_merge,mononitrato-de-isosorbida,Mononitrato De Isosorbida,"ES,MX",mononitrato-de-isosorbida,,mx_inn_map,mx_inn_map mononitrato de isosorbida → Mononitrato De Isosorbida；自匹配（目标与源同名，无需合并）,medium,uncertain,10,C01DA14
+substance_merge,triflusal,Triflusal,ES,triflusal,,mx_inn_map,mx_inn_map triflusal → Triflusal；自匹配（目标与源同名，无需合并）,medium,uncertain,10,B01AC18
+substance_merge,cn-2319de8ea8,甘草酸铵,CN,glycyrrhizin,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Glycyrrhizin；目标 glycyrrhizin 不含盐型/立体标记 ammonium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,9,V03AB
+substance_merge,cn-95dad0b731,乙酰胺吡咯烷酮,CN,piracetam,,cn_old_name+cn2en,旧称→吡拉西坦→CN2EN piracetam；目标 piracetam 不含盐型/立体标记 acetyl（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,9,N07XX
+substance_merge,cn-15a1ad913b,氨酚葡锌,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,9,R05XX
+substance_merge,cn-92991dccd0,乙酰麦迪霉素,CN,midecamycin,,existing_override,cn_inn_overrides：目标 Midecamycin 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Midecamycin；目标 midecamycin 不含盐型/立体标记 acetyl（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,8,J01FA
+substance_merge,cn-89c8a2fa4c,亚硒酸钠,CN,selenious-acid,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Selenious Acid；目标 selenious-acid 不含盐型/立体标记 sodium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,8,A12CE
+substance_merge,cn-f8d07312a4,碘化铵,CN,ammonium,,existing_override,cn_inn_overrides：目标 Ammonium 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Ammonium；目标 ammonium 不含盐型/立体标记 iodide（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,8,A01AB
+substance_merge,cn-fe7f2a57be,罗布麻片Ⅰ,CN,reserpine,,atc4,ATC level-4 C02AA 唯一命中 reserpine（弱证据，需人工核）,low,uncertain,8,C02AA
+substance_merge,cn-8820e351dc,罗布麻,CN,reserpine,,atc4,ATC level-4 C02AA 唯一命中 reserpine（弱证据，需人工核）,low,uncertain,8,C02AA
+substance_merge,cn-36609773b6,美敏伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,8,R05XX
+substance_merge,benzalconio,Benzalconio,"ES,MX",benzalconio,,mx_inn_map,mx_inn_map benzalconio → Benzalconio；自匹配（目标与源同名，无需合并）,medium,uncertain,8,G01AD
+substance_merge,lisina,Lisina,"ES,MX",lisina,,mx_inn_map,mx_inn_map lisina → Lisina；自匹配（目标与源同名，无需合并）,medium,uncertain,8,
+substance_merge,parotiditis,Parotiditis,"ES,MX",parotiditis,,mx_inn_map,mx_inn_map parotiditis → Parotiditis；自匹配（目标与源同名，无需合并）,medium,uncertain,8,
+substance_merge,passiflora-incarnata,Passiflora Incarnata,"ES,MX",passiflora-incarnata,,mx_inn_map,mx_inn_map passiflora incarnata → Passiflora Incarnata；自匹配（目标与源同名，无需合并）,medium,uncertain,8,N05CM
+substance_merge,sarampion,Sarampión,"ES,MX",sarampion,,mx_inn_map,mx_inn_map sarampion → Sarampión；自匹配（目标与源同名，无需合并）,medium,uncertain,8,
+substance_merge,acido-pamidronico,Ácido Pamidrónico,"ES,MX",acido-pamidronico,,mx_inn_map,mx_inn_map acido pamidronico → Ácido Pamidrónico；自匹配（目标与源同名，无需合并）,medium,uncertain,7,M05BA03
+substance_merge,levosulpirida,Levosulpirida,"ES,MX",levosulpirida,,mx_inn_map,mx_inn_map levosulpirida → Levosulpirida；自匹配（目标与源同名，无需合并）,medium,uncertain,7,N05AL07
+substance_merge,salicilato-de-metilo,Salicilato De Metilo,"ES,MX",salicilato-de-metilo,,mx_inn_map,mx_inn_map salicilato de metilo → Salicilato De Metilo；自匹配（目标与源同名，无需合并）,medium,uncertain,7,
+substance_merge,calcio,Calcio,"ES,MX",calcio,,mx_inn_map,mx_inn_map calcio → Calcio；自匹配（目标与源同名，无需合并）,medium,uncertain,7,
+substance_merge,hidroxietilalmidon,Hidroxietilalmidón,"ES,MX",hidroxietilalmidon,,mx_inn_map,mx_inn_map hidroxietilalmidon → Hidroxietilalmidón；自匹配（目标与源同名，无需合并）,medium,uncertain,7,
+substance_merge,cn-421987e092,醋酸钠葡萄糖,CN,glucose,,cn2en,CN2EN 表 葡萄糖；目标 glucose 不含盐型/立体标记 acetate/sodium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,6,B05BB
+substance_merge,cn-e2e0f9f092,萝芙木,CN,reserpine,,atc4,ATC level-4 C02AA 唯一命中 reserpine（弱证据，需人工核）,low,uncertain,6,C02AA
+substance_merge,cn-9b76c616fe,呋麻,CN,l-ephedrine,,atc4,ATC level-4 R01AB 唯一命中 l-ephedrine（弱证据，需人工核）,low,uncertain,6,R01AB
+substance_merge,cn-26303c2760,愈创罂粟待因,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,6,R05FA
+substance_merge,cn-f857e034ef,氨酚伪麻美芬片(Ⅱ)/苯酚伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,6,R05XX
+substance_merge,cn-a3ad2c3932,贝母氯化铵,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,6,R05XX
+substance_merge,cn-723933afe2,柳酚咖敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,6,R05XX
+substance_merge,cn-7c671a6796,愈创维林那敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,6,R05XX
+substance_merge,meglumina,Meglumina,"ES,MX",meglumina,,mx_inn_map,mx_inn_map meglumina → Meglumina；自匹配（目标与源同名，无需合并）,medium,uncertain,6,
+substance_merge,promestrieno,Promestrieno,"ES,MX",promestrieno,,mx_inn_map,mx_inn_map promestrieno → Promestrieno；自匹配（目标与源同名，无需合并）,medium,uncertain,6,G03CA09
+substance_merge,potasio,Potasio,ES,potasio,,mx_inn_map,mx_inn_map potasio → Potasio；自匹配（目标与源同名，无需合并）,medium,uncertain,6,
+substance_merge,cn-62a8369eeb,右旋酮洛芬,CN,ketoprofen,,cn2en,CN2EN 表 酮洛芬；目标 ketoprofen 不含盐型/立体标记 dex（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,5,M01AE
+substance_merge,cn-4ad2475b3d,枸橼酸锌,CN,potassium-citrate,,existing_override,cn_inn_overrides：cn_name_map.json 该条人工初判有误：枸橼酸锌 ≠ 枸橼酸钾；en_inn=Potassium Citrate；目标 potassium-citrate 不含盐型/立体标记 zinc（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,5,A12CB
+substance_merge,cn-36fdbb4e74,硫酸氢黄连素,CN,berberine,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Berberine；目标 berberine 不含盐型/立体标记 sulfate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,5,D11AX
+substance_merge,cn-7071b6a5ca,碳酸钙二甲硅油,CN,dimeticone,,cn2en,CN2EN 表 二甲硅油；目标 dimeticone 不含盐型/立体标记 calcium/carbonate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,5,A02AC
+substance_merge,cn-c3d15aa987,角菜酸酯,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,5,C05AX
+substance_merge,cn-cad24f1963,硫酸铝钾鞣酸,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,5,C05AX
+substance_merge,cn-66d26d9d71,美辛唑酮红古豆醇酯,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,5,C05AX
+substance_merge,cn-3e4b876c6d,酚咖麻敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,5,R05XX
+substance_merge,cn-5cf4ff3faa,伪麻那敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,5,R05XX
+substance_merge,acido-tioctico,Ácido Tióctico,"ES,MX",acido-tioctico,,mx_inn_map,mx_inn_map acido tioctico → Ácido Tióctico；自匹配（目标与源同名，无需合并）,medium,uncertain,5,A16AX01
+substance_merge,dihidroergocristina,Dihidroergocristina,"ES,MX",dihidroergocristina,,mx_inn_map,mx_inn_map dihidroergocristina → Dihidroergocristina；自匹配（目标与源同名，无需合并）,medium,uncertain,5,C04AE04
+substance_merge,mepiramina,Mepiramina,"ES,MX",mepiramina,,mx_inn_map,mx_inn_map mepiramina → Mepiramina；自匹配（目标与源同名，无需合并）,medium,uncertain,5,R03DA12
+substance_merge,sulodexida,Sulodexida,"ES,MX",sulodexida,,mx_inn_map,mx_inn_map sulodexida → Sulodexida；自匹配（目标与源同名，无需合并）,medium,uncertain,5,B01AB11
+substance_merge,acido-lactico,Ácido Láctico,"ES,MX",acido-lactico,,mx_inn_map,mx_inn_map acido lactico → Ácido Láctico；自匹配（目标与源同名，无需合并）,medium,uncertain,5,
+substance_merge,cn-0d7f60d1a2,乳酸,CN,l-lactic-acid,,existing_override,"cn_inn_overrides：多个候选分数相同：L-Lactic Acid(l-lactic-acid), Lactic Acid(lactic-acid)；en_inn=L-Lactic Acid；目标 l-lactic-acid 不含盐型/立体标记 lactate（源名有，需对应 variant/母体名才能安全合并）",medium,uncertain,4,D02AX
+substance_merge,cn-ab44723e51,右旋布洛芬,CN,ibuprofen,,cn2en,CN2EN 表 布洛芬；目标 ibuprofen 不含盐型/立体标记 dex（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,M01AE
+substance_merge,cn-b42f2f3940,富马酸依美斯汀,CN,emedastine,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Emedastine；目标 emedastine 不含盐型/立体标记 fumarate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,R06AX
+substance_merge,cn-d2cc84a2ac,水杨酸苯甲酸,CN,benzoic-acid,,cn2en,CN2EN 表 苯甲酸；目标 benzoic-acid 不含盐型/立体标记 benzoate/salicylate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,D02AF
+substance_merge,cn-393cee0345,苯丙酸诺龙,CN,nandrolone,,existing_override,cn_inn_overrides：目标 Nandrolone 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Nandrolone；目标 nandrolone 不含盐型/立体标记 propionate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,A14AB
+substance_merge,cn-1267bbdd5d,钠钾葡萄糖,CN,glucose,,cn2en,CN2EN 表 葡萄糖；目标 glucose 不含盐型/立体标记 potassium/sodium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,B05BB
+substance_merge,cn-fbcab04036,门冬氨酸钙,CN,aspartic-acid,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Aspartic Acid；目标 aspartic-acid 不含盐型/立体标记 aspartate/calcium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,A12AA
+substance_merge,cn-e8b9951a00,丁香罗勒口服,CN,calcium-silicate,,atc4,ATC level-4 A02AC 唯一命中 calcium-silicate（弱证据，需人工核）,low,uncertain,4,A02AC
+substance_merge,cn-6fd5b4bcc1,口服四维葡萄糖,CN,choline-bitartrate,,atc4,ATC level-4 A11JA 唯一命中 choline-bitartrate（弱证据，需人工核）,low,uncertain,4,A11JA
+substance_merge,cn-446df7da56,乳酸菌,CN,houttuynin,,atc4,ATC level-4 G02CC 唯一命中 houttuynin（弱证据，需人工核）,low,uncertain,4,G02CC
+substance_merge,cn-55090077ff,普适泰,CN,serenoa-repens,,atc4,ATC level-4 G04CX 唯一命中 serenoa-repens（弱证据，需人工核）,low,uncertain,4,G04CX
+substance_merge,cn-795711e591,盐酸左卡巴斯汀,CN,sodium-cromoglicate,,atc4,ATC level-4 R01AC 唯一命中 sodium-cromoglicate（弱证据，需人工核）,low,uncertain,4,R01AC
+substance_merge,cn-cb9a24a356,待因麻黄铵氯敏,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,4,R05FA
+substance_merge,cn-7c7beef94a,氨酚伪麻美芬片(Ⅲ)/氨麻美敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,4,R05XX
+substance_merge,cn-2968e1263e,氯丙那林鱼腥草素钠,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,4,R05XX
+substance_merge,cn-d38029e559,氨酚肾素,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,4,R05XX
+substance_merge,cn-e5e60f1097,金龙胆草浸,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,4,R05XX
+substance_merge,cn-84ff5d0b36,咖酚伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,4,R05XX
+substance_merge,cn-d249d44ff7,美酚伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,4,R05XX
+substance_merge,aceite-de-ricino,Aceite De Ricino,"ES,MX",aceite-de-ricino,,mx_inn_map,mx_inn_map aceite de ricino → Aceite De Ricino；自匹配（目标与源同名，无需合并）,medium,uncertain,4,A06AB05
+substance_merge,citrato-de-potasio,Citrato De Potasio,"ES,MX",potassium,,existing_override,es_inn_overrides：弱证据且名字相似度 0.44<0.62（仅 wikidata_es_en）；en_inn=Potassium；目标 potassium 不含盐型/立体标记 citrate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,4,
+substance_merge,colestiramina,Colestiramina,"ES,MX",colestiramina,,mx_inn_map,mx_inn_map colestiramina → Colestiramina；自匹配（目标与源同名，无需合并）,medium,uncertain,4,C10AC01
+substance_merge,pinazepam,Pinazepam,"ES,MX",pinazepam,,mx_inn_map,mx_inn_map pinazepam → Pinazepam；自匹配（目标与源同名，无需合并）,medium,uncertain,4,N05BA14
+substance_merge,gluconato-de-calcio,Gluconato De Calcio,"ES,MX",gluconato-de-calcio,,mx_inn_map,mx_inn_map gluconato de calcio → Gluconato De Calcio；自匹配（目标与源同名，无需合并）,medium,uncertain,4,
+substance_merge,cn-a66df51425,氯化亚铊,CN,thallium,,existing_override,cn_inn_overrides：目标 Thallium 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Thallium；目标 thallium 不含盐型/立体标记 chloride（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,3,V09GX
+substance_merge,cn-840a8cd424,水杨酸氧化锌,CN,zinc-oxide,,cn2en,CN2EN 表 氧化锌；目标 zinc-oxide 不含盐型/立体标记 salicylate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,3,D02AF
+substance_merge,cn-8d01611109,碳酸钙甘氨酸,CN,calcium-silicate,,atc4,ATC level-4 A02AC 唯一命中 calcium-silicate（弱证据，需人工核）,low,uncertain,3,A02AC
+substance_merge,cn-fd9b213eed,山梨醇甘露醇冲,CN,glycine,,atc4,ATC level-4 B05CX 唯一命中 glycine（弱证据，需人工核）,low,uncertain,3,B05CX
+substance_merge,cn-fe61a6525e,雌二醇屈螺酮,CN,ethisterone,,atc4,ATC level-4 G03FA 唯一命中 ethisterone（弱证据，需人工核）,low,uncertain,3,G03FA
+substance_merge,cn-1c132a6064,磺胺间甲氧嘧啶,CN,sulfamethoxypyridazine,,atc4,ATC level-4 J01ED 唯一命中 sulfamethoxypyridazine（弱证据，需人工核）,low,uncertain,3,J01ED
+substance_merge,cn-67f271692f,腮腺炎减毒活疫苗,CN,mumps-virus-vaccine-live-attenuated,,atc4,ATC level-4 J07BE 唯一命中 mumps-virus-vaccine-live-attenuated（弱证据，需人工核）,low,uncertain,3,J07BE
+substance_merge,cn-23d2fad492,麻腮风联合减毒活疫苗,CN,rubella-virus-vaccine-live-attenuated,,atc4,ATC level-4 J07BJ 唯一命中 rubella-virus-vaccine-live-attenuated（弱证据，需人工核）,low,uncertain,3,J07BJ
+substance_merge,cn-8beb5736bb,新福菌素,CN,dactinomycin,,atc4,ATC level-4 L01DA 唯一命中 dactinomycin（弱证据，需人工核）,low,uncertain,3,L01DA
+substance_merge,cn-e1645d268e,氯唑氨酚,CN,chlorzoxazone,,atc4,ATC level-4 M03BB 唯一命中 chlorzoxazone（弱证据，需人工核）,low,uncertain,3,M03BB
+substance_merge,cn-cee5ae5693,谷固醇达克罗宁,CN,capsaicin,,atc4,ATC level-4 N01BX 唯一命中 capsaicin（弱证据，需人工核）,low,uncertain,3,N01BX
+substance_merge,cn-ff75aa3700,色甘萘甲那敏,CN,sodium-cromoglicate,,atc4,ATC level-4 R01AC 唯一命中 sodium-cromoglicate（弱证据，需人工核）,low,uncertain,3,R01AC
+substance_merge,cn-897dde55b0,氟替美维吸入,CN,indacaterol-acetate,,atc4,ATC level-4 R03AK 唯一命中 indacaterol-acetate（弱证据，需人工核）,low,uncertain,3,R03AK
+substance_merge,cn-6815ec7b1a,愈酚伪麻待因,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,3,R05FA
+substance_merge,cn-164f216be0,氨咖麻敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,3,R05XX
+substance_merge,cn-0de5ead8ff,贝敏伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,3,R05XX
+substance_merge,cn-1e5930ef78,愈酚喷托那敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,3,R05XX
+substance_merge,cn-185937239e,洛芬葡锌那敏,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,3,R05XX
+substance_merge,acido-tartarico,Ácido Tartárico,"ES,MX",acido-tartarico,,mx_inn_map,mx_inn_map acido tartarico → Ácido Tartárico；自匹配（目标与源同名，无需合并）,medium,uncertain,3,
+substance_merge,crataegus-oxyacantha,Crataegus Oxyacantha,"ES,MX",crataegus-oxyacantha,,mx_inn_map,mx_inn_map crataegus oxyacantha → Crataegus Oxyacantha；自匹配（目标与源同名，无需合并）,medium,uncertain,3,C01EB
+substance_merge,glycine-max,Glycine Max,ES,glycine-max,,mx_inn_map,mx_inn_map glycine max → Glycine Max；自匹配（目标与源同名，无需合并）,medium,uncertain,3,G02C
+substance_merge,panax-ginseng,Panax Ginseng,ES,panax-ginseng,,mx_inn_map,mx_inn_map panax ginseng → Panax Ginseng；自匹配（目标与源同名，无需合并）,medium,uncertain,3,A13A
+substance_merge,podofilotoxina,Podofilotoxina,"ES,MX",podofilotoxina,,mx_inn_map,mx_inn_map podofilotoxina → Podofilotoxina；自匹配（目标与源同名，无需合并）,medium,uncertain,3,D06BB04
+substance_merge,rosmarinus-officinalis,Rosmarinus Officinalis,ES,rosmarinus-officinalis,,mx_inn_map,mx_inn_map rosmarinus officinalis → Rosmarinus Officinalis；自匹配（目标与源同名，无需合并）,medium,uncertain,3,M02AX
+substance_merge,sulbutiamina,Sulbutiamina,"ES,MX",sulbutiamina,,mx_inn_map,mx_inn_map sulbutiamina → Sulbutiamina；自匹配（目标与源同名，无需合并）,medium,uncertain,3,A11DA02
+substance_merge,tiocolchicosido,Tiocolchicósido,"ES,MX",tiocolchicosido,,mx_inn_map,mx_inn_map tiocolchicosido → Tiocolchicósido；自匹配（目标与源同名，无需合并）,medium,uncertain,3,
+substance_merge,cn-e349dd5b8e,硫酸镁葡萄糖,CN,glucose,,cn2en,CN2EN 表 葡萄糖；目标 glucose 不含盐型/立体标记 magnesium/sulfate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,2,A12CC
+substance_merge,cn-887b0f1b3e,磷酸雌莫司汀,CN,estramustine,,existing_override,cn_inn_overrides：目标 Estramustine 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Estramustine；目标 estramustine 不含盐型/立体标记 phosphate（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,2,L01XX
+substance_merge,cn-914fe40eb1,酒石酸双氢可待因,CN,dihydrocodeine,,existing_override,"cn_inn_overrides：多个候选分数相同：Dihydrocodeine(dihydrocodeine), Dihydrocodeine Tartrate(dihydrocodeine-tartrate)；en_inn=Dihydrocodeine；目标 dihydrocodeine 不含盐型/立体标记 tartrate（源名有，需对应 variant/母体名才能安全合并）",medium,uncertain,2,N02AA
+substance_merge,cn-4a89111921,阿嗪米特,CN,dried-yeast,,atc4,ATC level-4 A09AX 唯一命中 dried-yeast（弱证据，需人工核）,low,uncertain,2,A09AX
+substance_merge,cn-dd2a5a896a,脂溶性维生素(Ⅱ)/注射用水溶性维生素组合包装,CN,choline-bitartrate,,atc4,ATC level-4 A11JA 唯一命中 choline-bitartrate（弱证据，需人工核）,low,uncertain,2,A11JA
+substance_merge,cn-e056597953,无水乙醇,CN,glycine,,atc4,ATC level-4 B05CX 唯一命中 glycine（弱证据，需人工核）,low,uncertain,2,B05CX
+substance_merge,cn-27b92b7358,盐酸布酚宁,CN,nylidrin,,atc4,ATC level-4 C04AA 唯一命中 nylidrin（弱证据，需人工核）,low,uncertain,2,C04AA
+substance_merge,cn-46deef7774,次没食子酸铋,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,2,C05AX
+substance_merge,cn-52e666c509,次没食子酸铋栓Ⅱ,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,2,C05AX
+substance_merge,cn-47cb72a375,鱼石脂颠茄,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,2,C05AX
+substance_merge,cn-a81d3cbcab,甲基硫氧嘧啶,CN,propylthiouracil,,atc4,ATC level-4 H03BA 唯一命中 propylthiouracil（弱证据，需人工核）,low,uncertain,2,H03BA
+substance_merge,cn-f37470ea07,盐酸达克罗宁胶浆,CN,capsaicin,,atc4,ATC level-4 N01BX 唯一命中 capsaicin（弱证据，需人工核）,low,uncertain,2,N01BX
+substance_merge,cn-edc0016429,氢溴酸依他佐辛,CN,pentazocine,,atc4,ATC level-4 N02AD 唯一命中 pentazocine（弱证据，需人工核）,low,uncertain,2,N02AD
+substance_merge,cn-9ccfb91dc3,萘林那敏溴铵,CN,l-ephedrine,,atc4,ATC level-4 R01AB 唯一命中 l-ephedrine（弱证据，需人工核）,low,uncertain,2,R01AB
+substance_merge,cn-f9615b5b01,苯环喹溴铵,CN,sodium-cromoglicate,,atc4,ATC level-4 R01AC 唯一命中 sodium-cromoglicate（弱证据，需人工核）,low,uncertain,2,R01AC
+substance_merge,cn-0c3c8ee88b,氮䓬斯汀氟替卡松,CN,sodium-cromoglicate,,atc4,ATC level-4 R01AC 唯一命中 sodium-cromoglicate（弱证据，需人工核）,low,uncertain,2,R01AC
+substance_merge,cn-df4d21f7e2,茶碱沙丁胺醇,CN,indacaterol-acetate,,atc4,ATC level-4 R03AK 唯一命中 indacaterol-acetate（弱证据，需人工核）,low,uncertain,2,R03AK
+substance_merge,cn-fa18c953a2,阿桔,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,2,R05FA
+substance_merge,cn-69831109c5,可待因桔梗,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,2,R05FA
+substance_merge,cn-9b6dceed0f,可愈,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,2,R05FA
+substance_merge,cn-bcc391f340,愈酚待因,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,2,R05FA
+substance_merge,cn-5b1ba7abff,氨麻美敏片Ⅱ,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,2,R05XX
+substance_merge,cn-533b4afe5d,酚麻美,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,2,R05XX
+substance_merge,cn-5a0390c107,氨酚美沙,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,2,R05XX
+substance_merge,cn-ae4e49a6a5,扑尔伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,2,R05XX
+substance_merge,cn-d6a0dbce7c,盐酸曲吡那敏,CN,tripelennamine,,atc4,ATC level-4 R06AC 唯一命中 tripelennamine（弱证据，需人工核）,low,uncertain,2,R06AC
+substance_merge,acetato-de-sodio,Acetato De Sodio,"ES,MX",acetato-de-sodio,,mx_inn_map,mx_inn_map acetato de sodio → Acetato De Sodio；自匹配（目标与源同名，无需合并）,medium,uncertain,2,B05XA08
+substance_merge,acetilsalicilato-de-lisina,Acetilsalicilato De Lisina,"ES,MX",acetilsalicilato-de-lisina,,mx_inn_map,mx_inn_map acetilsalicilato de lisina → Acetilsalicilato De Lisina；自匹配（目标与源同名，无需合并）,medium,uncertain,2,N02BA01
+substance_merge,fenazona,Fenazona,"ES,MX",fenazona,,mx_inn_map,mx_inn_map fenazona → Fenazona；自匹配（目标与源同名，无需合并）,medium,uncertain,2,
+substance_merge,humulus-lupulus,Humulus Lupulus,ES,humulus-lupulus,,mx_inn_map,mx_inn_map humulus lupulus → Humulus Lupulus；自匹配（目标与源同名，无需合并）,medium,uncertain,2,
+substance_merge,nadifloxacino,Nadifloxacino,"ES,MX",nadifloxacino,,mx_inn_map,mx_inn_map nadifloxacino → Nadifloxacino；自匹配（目标与源同名，无需合并）,medium,uncertain,2,D10AF05
+substance_merge,sugemalimab,Sugemalimab,"ES,MX",sugemalimab,,mx_inn_map,mx_inn_map sugemalimab → Sugemalimab；自匹配（目标与源同名，无需合并）,medium,uncertain,2,L01FF11
+substance_merge,tanato-de-gelatina,Tanato De Gelatina,"ES,MX",tanato-de-gelatina,,mx_inn_map,mx_inn_map tanato de gelatina → Tanato De Gelatina；自匹配（目标与源同名，无需合并）,medium,uncertain,2,A07XA01
+substance_merge,vitamina-c,Vitamina C,ES,vitamina-c,,mx_inn_map,mx_inn_map vitamina c → Vitamina C；自匹配（目标与源同名，无需合并）,medium,uncertain,2,
+substance_merge,cn-3e4cf26729,亚油酸钙,CN,linoleic-acid,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Linoleic Acid；目标 linoleic-acid 不含盐型/立体标记 calcium（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,1,C10AX
+substance_merge,cn-67b1c1c745,山梨醇铁,CN,sorbitol,,existing_override,cn_inn_overrides：仅有剥盐后 Wikidata 命中，证据不足，不合并；en_inn=Sorbitol；目标 sorbitol 不含盐型/立体标记 iron（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,1,B03AC
+substance_merge,cn-5edb4144c1,氯化镭,CN,radium,,existing_override,cn_inn_overrides：目标 Radium 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并；en_inn=Radium；目标 radium 不含盐型/立体标记 chloride（源名有，需对应 variant/母体名才能安全合并）,medium,uncertain,1,V10XX
+substance_merge,cn-6e26161874,酒石酸艾格司他,CN,eliglustat,,existing_override,"cn_inn_overrides：多个候选分数相同：Eliglustat(eliglustat), Eliglustat Tartrate(eliglustat-tartrate)；en_inn=Eliglustat；目标 eliglustat 不含盐型/立体标记 tartrate（源名有，需对应 variant/母体名才能安全合并）",medium,uncertain,1,A16AX
+substance_merge,cn-5c1521e97e,磺胺咪,CN,sulfaguanidine,,atc4,ATC level-4 A07AB 唯一命中 sulfaguanidine（弱证据，需人工核）,low,uncertain,1,A07AB
+substance_merge,cn-74245f6f8d,多维,CN,vitamin-b6,,atc4,ATC level-4 A11EC 唯一命中 vitamin-b6（弱证据，需人工核）,low,uncertain,1,A11EC
+substance_merge,cn-8c081fb94d,四维他,CN,choline-bitartrate,,atc4,ATC level-4 A11JA 唯一命中 choline-bitartrate（弱证据，需人工核）,low,uncertain,1,A11JA
+substance_merge,cn-e439c92e69,艾考糊精腹膜透析,CN,icodextrin,,atc4,ATC level-4 B05DA 唯一命中 icodextrin（弱证据，需人工核）,low,uncertain,1,B05DA
+substance_merge,cn-8deffd3bb8,低钙腹膜透,CN,icodextrin,,atc4,ATC level-4 B05DA 唯一命中 icodextrin（弱证据，需人工核）,low,uncertain,1,B05DA
+substance_merge,cn-52da9dc65c,罗布麻片Ⅱ,CN,reserpine,,atc4,ATC level-4 C02AA 唯一命中 reserpine（弱证据，需人工核）,low,uncertain,1,C02AA
+substance_merge,cn-1601480a1b,草木犀流浸,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,1,C05AX
+substance_merge,cn-829a2ce6a1,红古豆醇酯,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,1,C05AX
+substance_merge,cn-38b4dc4b47,硫化钠薄荷脑,CN,cocoa-butter,,atc4,ATC level-4 C05AX 唯一命中 cocoa-butter（弱证据，需人工核）,low,uncertain,1,C05AX
+substance_merge,cn-98ce2085d0,氯碘羟喹,CN,clioquinol,,atc4,ATC level-4 D08AH 唯一命中 clioquinol（弱证据，需人工核）,low,uncertain,1,D08AH
+substance_merge,cn-6b22d83c53,特康唑,CN,terconazole,,atc4,ATC level-4 G01AG 唯一命中 terconazole（弱证据，需人工核）,low,uncertain,1,G01AG
+substance_merge,cn-7d9a573c1b,蓝棕果,CN,serenoa-repens,,atc4,ATC level-4 G04CX 唯一命中 serenoa-repens（弱证据，需人工核）,low,uncertain,1,G04CX
+substance_merge,cn-10c614dac8,风疹减毒活疫苗,CN,rubella-virus-vaccine-live-attenuated,,atc4,ATC level-4 J07BJ 唯一命中 rubella-virus-vaccine-live-attenuated（弱证据，需人工核）,low,uncertain,1,J07BJ
+substance_merge,cn-2c563259da,磷酸萘酚喹,CN,halofantrine,,atc4,ATC level-4 P01BX 唯一命中 halofantrine（弱证据，需人工核）,low,uncertain,1,P01BX
+substance_merge,cn-6fd65e262a,磷酸咯萘啶,CN,halofantrine,,atc4,ATC level-4 P01BX 唯一命中 halofantrine（弱证据，需人工核）,low,uncertain,1,P01BX
+substance_merge,cn-8d1b3d6351,倍氯福格吸入,CN,indacaterol-acetate,,atc4,ATC level-4 R03AK 唯一命中 indacaterol-acetate（弱证据，需人工核）,low,uncertain,1,R03AK
+substance_merge,cn-a0463c1cbe,可待因异丙嗪,CN,terpin,,atc4,ATC level-4 R05FA 唯一命中 terpin（弱证据，需人工核）,low,uncertain,1,R05FA
+substance_merge,cn-40312c0989,氨酚伪麻美芬片/氨麻美敏片Ⅱ,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,1,R05XX
+substance_merge,cn-65a72b2da6,氨酚伪麻美芬片(日片)/氨麻美敏片Ⅱ,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,1,R05XX
+substance_merge,cn-058df405c8,解热止痛,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,1,R05XX
+substance_merge,cn-dbefab34e0,麻敏维C,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,1,R05XX
+substance_merge,cn-759a10ed11,美扑伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,1,R05XX
+substance_merge,cn-c582e88748,伪麻,CN,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,1,R05XX
+substance_merge,cn-11a0e59f80,葡萄糖/电解质颅脑手术,CN,glycine,,atc4,ATC level-4 B05CX 唯一命中 glycine（弱证据，需人工核）,low,uncertain,1,B05CX
+substance_merge,cn-61cbf190a1,二氮嗪口服,CN,diazoxide,,atc4,ATC level-4 C02DA 唯一命中 diazoxide（弱证据，需人工核）,low,uncertain,1,C02DA
+substance_merge,cn-97cdb50b7c,雌二醇地屈孕酮,CN,ethisterone,,atc4,ATC level-4 G03FA 唯一命中 ethisterone（弱证据，需人工核）,low,uncertain,1,G03FA
+substance_merge,cn-b2f9aa7aa8,人促甲状腺素,CN,thyrotropin-alfa,,atc4,ATC level-4 H01AB 唯一命中 thyrotropin-alfa（弱证据，需人工核）,low,uncertain,1,H01AB
+substance_merge,lepidium-latifolium,Lepidium Latifolium,ES,lepidium-latifolium,,mx_inn_map,mx_inn_map lepidium latifolium → Lepidium Latifolium；自匹配（目标与源同名，无需合并）,medium,uncertain,1,
+substance_merge,mx-es-glicerolfosfato-de-sodio,Glicerolfosfato De Sodio,MX,glicerofosfato,,existing_override,es_inn_overrides：低置信证据: 模糊 glicerolfosfato ≈ Glicerofosfato (0.97)；products=1; countries=MX；en_inn=Glicerofosfato；目标 glicerofosfato 不含盐型/立体标记 sodium（源名有，需对应 variant/母体名才能安全合并）,low,uncertain,1,
+substance_merge,cn-f1833651fe,碳酸钙D₃,,calcium-carbonate,,cn2en,CN2EN 表 碳酸钙D3；源名含维生素/复方标记，目标非对应成分,medium,uncertain,0,A12AX
+substance_merge,cn-cd1971d171,氨基酸（15）腹膜透析,,icodextrin,,atc4,ATC level-4 B05DA 唯一命中 icodextrin（弱证据，需人工核）,low,uncertain,0,B05DA
+substance_merge,cn-a3179e9d32,林旦,,lindane,,atc4,ATC level-4 P03AB 唯一命中 lindane（弱证据，需人工核）,low,uncertain,0,P03AB
+substance_merge,cn-0b0a080afb,酚麻美敏,,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,0,R05XX
+substance_merge,cn-4c78908645,忍冬藤阿司匹林,,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,0,R05XX
+substance_merge,cn-b8b4cbe2e3,氯雷氨酚伪麻,,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,0,R05XX
+substance_merge,cn-4c9ffa497d,美息伪麻,,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,0,R05XX
+substance_merge,cn-8583b11c56,特洛伪麻,,guaiacol,,atc4,ATC level-4 R05XX 唯一命中 guaiacol（弱证据，需人工核）,low,uncertain,0,R05XX
