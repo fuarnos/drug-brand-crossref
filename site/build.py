@@ -139,6 +139,7 @@ I18N = {
         "home.all": "All countries", "home.us": "United States",
         "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
         "home.mx": "Mexico", "home.au": "Australia", "home.ca": "Canada",
+        "home.sg": "Singapore",
         "home.tw": "Taiwan",
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
                           "Coverage:"),
@@ -294,6 +295,7 @@ I18N = {
         "home.all": "Todos los países", "home.us": "Estados Unidos",
         "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
         "home.mx": "México", "home.au": "Australia", "home.ca": "Canadá",
+        "home.sg": "Singapur",
         "home.tw": "Taiwán",
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
                           "Cobertura:"),
@@ -450,6 +452,7 @@ I18N = {
         "home.all": "全部国家", "home.us": "美国",
         "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
+        "home.sg": "新加坡",
         "home.tw": "台湾",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
         "home.loading": "正在加载索引…",
@@ -792,6 +795,14 @@ UI_I18N = {
             '資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、'
             '許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>'
             '授權：<a href="https://data.gov.tw/license">data.gov.tw/license</a>。</p>'),
+        # v0.7.x：SG 市場（英文市場；zh-Hant 直接給值）
+        "home.sg": "新加坡",
+        "about.sg_source": (
+            '<p class="sub"><b>新加坡</b>：HSA「Listing of Registered Therapeutic Products」'
+            '（data.gov.sg 資料集 d_767279312753558cbf19d48344577084）依<b>新加坡開放資料授權條款'
+            '第 1 版（SODL v1.0）</b>釋出，須署名並鏈回授權頁，不得暗示政府背書；資料截止 '
+            '<b>2026-08-07</b>（每 6 個月更新）。<b>在冊名單不代表在售。</b>商品名保留英文原文、'
+            '不翻譯；中文僅成分名（inn_zh）可顯示。</p>'),
     },
 }
 
@@ -1048,6 +1059,17 @@ ABOUT_I18N = {
             'sync). Facts only (product name, ingredients, dosage form, manufacturer, licence '
             'number, status). <b>Strengths are parsed from product names, so confidence is '
             'limited.</b> Licence: <a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>'),
+        "about.sg_source": (
+            '<p class="sub"><b>Singapore 新加坡</b>: HSA <b>Listing of Registered Therapeutic '
+            'Products</b> (data.gov.sg dataset d_767279312753558cbf19d48344577084) under the '
+            '<b>Singapore Open Data Licence v1.0 (SODL)</b>; attribution and licence link '
+            'required, no government endorsement implied. Data as of <b>2026-08-07</b> '
+            '(updated every 6 months). <b>Being on the register does not mean the product is '
+            'currently marketed.</b> Brand names stay in English and are never translated; only '
+            'Chinese ingredient names (inn_zh) may be shown. Attribution: Contains information '
+            'from Listing of Registered Therapeutic Products accessed on 2026-10-28 from Health '
+            'Sciences Authority (HSA), and made available under the Singapore Open Data Licence '
+            'v1.0 (<a href="https://data.gov.sg/open-data-licence">licence</a>).</p>'),
         "about.samename": (
             '<h2>Why “same name, different drug” happens</h2>'
             '<p class="sub">The same trademark is held by different companies in different '
@@ -1166,6 +1188,18 @@ ABOUT_I18N = {
             'fabricante, nº de licencia, estado). <b>Las concentraciones proceden del análisis '
             'de los nombres de producto, con confianza limitada.</b> Licencia: '
             '<a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>'),
+        "about.sg_source": (
+            '<p class="sub"><b>Singapur 新加坡</b>: HSA <b>Listing of Registered Therapeutic '
+            'Products</b> (data.gov.sg, conjunto d_767279312753558cbf19d48344577084) bajo la '
+            '<b>Licencia de Datos Abiertos de Singapur v1.0 (SODL)</b>; se exige atribución y '
+            'enlace a la licencia; no implica respaldo gubernamental. Datos hasta '
+            '<b>2026-08-07</b> (actualización cada 6 meses). <b>Estar en el registro no significa '
+            'que el producto esté actualmente comercializado.</b> Los nombres comerciales se '
+            'conservan en inglés y no se traducen; solo los nombres chinos de principios activos '
+            '(inn_zh) pueden mostrarse. Atribución: Contains information from Listing of '
+            'Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences '
+            'Authority (HSA), and made available under the Singapore Open Data Licence v1.0 '
+            '(<a href="https://data.gov.sg/open-data-licence">licencia</a>).</p>'),
         "about.samename": (
             '<h2>Por qué ocurre «mismo nombre, otro medicamento»</h2>'
             '<p class="sub">La misma marca pertenece a empresas distintas en cada mercado y la '
@@ -1266,6 +1300,15 @@ ABOUT_I18N = {
             '資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、'
             '許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>'
             '授權：<a href="https://data.gov.tw/license">data.gov.tw/license</a>。</p>'),
+        "about.sg_source": (
+            '<p class="sub"><b>新加坡</b>：HSA「Listing of Registered Therapeutic Products」'
+            '（data.gov.sg 数据集 d_767279312753558cbf19d48344577084）依<b>新加坡开放数据许可'
+            '第 1 版（SODL v1.0）</b>释出，须署名并链回许可页，不得暗示政府背书；数据截止 '
+            '<b>2026-08-07</b>（每 6 个月更新）。<b>在册名单不代表在售。</b>商品名保留英文原文、'
+            '不翻译；中文仅成分名（inn_zh）可显示。署名：Contains information from Listing of '
+            'Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences '
+            'Authority (HSA), and made available under the Singapore Open Data Licence v1.0'
+            '（<a href="https://data.gov.sg/open-data-licence">许可</a>）。</p>'),
         "about.samename": (
             '<h2>为什么会有「同名不同药」</h2>'
             '<p class="sub">同一个商标在不同市场属于不同公司，配方可能完全不同。已验证的例子：'
@@ -2077,6 +2120,16 @@ ES: reutilización no comercial con mención de la fuente. Terms: <a href="https
 資料集」；只存事實欄位；規格由品名解析、置信度有限。ES: licencia OGDL v1.0 con atribución a la
 TFDA; datos hasta 2026-10-22; concentraciones derivadas de los nombres de producto, con confianza
 limitada.</li>
+<li><b>Singapore 新加坡 / Singapur</b>: <b>Health Sciences Authority (HSA)</b> —
+<b>Listing of Registered Therapeutic Products</b> (data.gov.sg dataset
+d_767279312753558cbf19d48344577084) under the <b>Singapore Open Data Licence v1.0 (SODL)</b>;
+attribution: Contains information from Listing of Registered Therapeutic Products accessed on
+2026-10-28 from Health Sciences Authority (HSA), and made available under the Singapore Open Data
+Licence v1.0 (<a href="https://data.gov.sg/open-data-licence">licence</a>); no government
+endorsement implied. 中文：依新加坡開放資料授權條款第 1 版（SODL v1.0）釋出，須署名並鏈回授權頁；
+資料截止 2026-08-07（每 6 個月更新）；在冊名單不代表在售；品牌名保留英文原文、不翻譯，中文僅
+成分名可譯。ES: contiene información del registro de HSA bajo la SODL v1.0 con atribución;
+datos hasta 2026-08-07; estar en el registro no implica comercialización.</li>
 <li><b>WHO ATC/DDD Index</b>: ATC codes and hierarchy reference the <b>WHO Collaborating Centre
 for Drug Statistics Methodology</b> ATC/DDD Index; the Index itself is copyrighted and is not
 reproduced. Class/category names shown on ATC pages are editorial or AI-assisted translations,
@@ -2160,6 +2213,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
+.tag.sg{color:#7a1f3d;border-color:#e3b7c5}
 /* v0.7.x：ATC 类别 / 大类浏览 */
 .atcgrid,.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:8px;margin:10px 0}
@@ -2295,14 +2349,14 @@ html.u1-off #u1guide{display:none!important}
 .u2chip .u2n.empty{color:var(--muted);font-style:italic}
 /* v0.6.6：成分页多国并排矩阵（行=规格/剂型/释放，列=国家；服务端默认 en 序，客户端按语言重排） */
 .matwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
-table.matrix{width:100%;border-collapse:collapse;min-width:620px}
+table.matrix{width:100%;border-collapse:collapse;min-width:860px}
 table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
   text-align:left;vertical-align:top;font-size:14px}
 table.matrix thead th{white-space:nowrap;font-weight:650}
 table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
 table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
 @media (max-width:719px){
-  table.matrix{min-width:560px}
+  table.matrix{min-width:840px}
   .matwrap{margin:8px 0}
 }
 @media (max-width:719px){
@@ -3242,7 +3296,7 @@ function collectHits(nq, st, nicks, nickSids, onlyUnmapped, c){
 }
 /* ── 搜索增强 end ─────────────────────────────────────────────────────────── */
 // ── v0.6.3 U2：结果顶部「各国叫法」横排（仅在唯一单成分时显示）──────────────
-const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW'];
+const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW', 'SG'];
 function u2Order(){
   // v0.7.0：国家 chips 按界面语言顺序（i18n.js 在 apply() 里暴露 window.COUNTRY_ORDER）
   const order = (typeof window !== 'undefined' && window.COUNTRY_ORDER) || [];
@@ -4742,7 +4796,7 @@ def _label_unit_html(text: str) -> str:
 
 
 # v0.6.6：成分页多国矩阵（行=规格/剂型/释放；列=国家；服务端默认 en 顺序，客户端按界面语言重排）
-COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "CN", "ES", "MX", "TW")
+COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW")
 MATRIX_ROW_CAP = 120
 
 
@@ -4840,6 +4894,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
             for c in by_c:
                 if c not in countries:
                     countries.append(c)
+        # v0.8.0：不再静默截断到 8 列——全部市场列都显示（US/GB/CA/AU/SG/CN/ES/MX/TW），
+        # 移动端由 .matwrap 横向滚动；界面语言只决定列顺序（i18n.js MORDER）。
         spec_rows = sorted(
             spec_countries.items(),
             key=lambda kv: (_sort_strength(kv[0][0]), kv[0][1],
@@ -5463,7 +5519,8 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="MX" data-i18n="home.mx">Mexico</option>
     <option value="AU" data-i18n="home.au">Australia</option>
     <option value="CA" data-i18n="home.ca">Canada</option>
-    <option value="TW" data-i18n="home.tw">Taiwan</option></select>
+    <option value="TW" data-i18n="home.tw">Taiwan</option>
+    <option value="SG" data-i18n="home.sg">Singapore</option></select>
   {{hero_examples}}
 </div>
 <section class="catquick"><h2 data-i18n="cat.quick_title">Browse by category</h2>
@@ -5573,7 +5630,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
     T = I18N["en"]
     parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
     for key in ("about.lead", "about.rules", "about.nick", "about.terms",
-                "about.sources", "about.tw_source"):
+                "about.sources", "about.tw_source", "about.sg_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append(LICENCE_HTML)
     for key in ("about.samename", "about.gaps"):
@@ -6548,11 +6605,11 @@ def main() -> None:
       el.style.display = on ? (inline ? 'inline' : 'block') : 'none';
     });
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
-    // v0.6.6/v0.7.0：语言列序（含 TW：zh → CN,TW；zh-Hant → TW,CN,HK；es → ES,MX…）
-    var MORDER = {en: ['US','GB','CA','AU','CN','ES','MX','TW'],
-                  es: ['ES','MX','US','GB','CA','AU','CN','TW'],
-                  zh: ['CN','TW','US','GB','CA','AU','ES','MX'],
-                  'zh-Hant': ['TW','CN','HK','US','GB','CA','AU','ES','MX']};
+    // v0.6.6/v0.7.0/v0.7.x：语言列序（含 TW/SG：zh → CN,TW,SG；zh-Hant → TW,CN,HK,SG；es → ES,MX…）
+    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW'],
+                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW'],
+                  zh: ['CN','TW','SG','US','GB','CA','AU','ES','MX'],
+                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX']};
     var morder = MORDER[window.LANG] || MORDER.en;
     window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
     document.querySelectorAll('table.matrix').forEach(function(tb){
