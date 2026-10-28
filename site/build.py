@@ -139,6 +139,7 @@ I18N = {
         "home.all": "All countries", "home.us": "United States",
         "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
         "home.mx": "Mexico", "home.au": "Australia", "home.ca": "Canada",
+        "home.tw": "Taiwan",
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
                           "Coverage:"),
         "home.loading": "Loading index…",
@@ -146,6 +147,16 @@ I18N = {
                            "full index fills in the background — start typing, focus the search "
                            "box, or pick a sample."),
         "home.hint_loading": "Loading a small index shard (~0.2 MB)…",
+        # v0.6.6：成分页多国并排矩阵
+        "matrix.spec": "Strength / form / release",
+        "matrix.none": "not recorded",
+        "matrix.hidden_note": ("Discontinued, withdrawn or unverified-status products are hidden "
+                               "by default."),
+        "matrix.capped": "Showing the first {shown} of {total} strength/form rows.",
+        # v0.6.7：/warn 分页
+        "warn.page_prev": "Previous", "warn.page_next": "Next",
+        "warn.pagination": "Warning pages",
+        "warn.page_status": "Page {n} of {total} · {count} warnings",
         "error.index_failed": "The index failed to load.",
         "error.local_file": ("If you opened this page directly, the browser blocks local file "
                              "reads — run python -m http.server and visit "
@@ -283,6 +294,7 @@ I18N = {
         "home.all": "Todos los países", "home.us": "Estados Unidos",
         "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
         "home.mx": "México", "home.au": "Australia", "home.ca": "Canadá",
+        "home.tw": "Taiwán",
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
                           "Cobertura:"),
         "home.loading": "Cargando el índice…",
@@ -290,6 +302,16 @@ I18N = {
                            "(~0,2 MB); el índice completo se completa en segundo plano — empieza "
                            "a escribir, enfoca el buscador o elige un ejemplo."),
         "home.hint_loading": "Cargando un fragmento del índice (~0,2 MB)…",
+        # v0.6.6：成分页多国并排矩阵
+        "matrix.spec": "Concentración / forma / liberación",
+        "matrix.none": "no consta",
+        "matrix.hidden_note": ("Los productos retirados, suspendidos o con estado no verificado "
+                               "se ocultan por defecto."),
+        "matrix.capped": "Mostrando las primeras {shown} de {total} filas de concentración/forma.",
+        # v0.6.7：/warn 分页
+        "warn.page_prev": "Anterior", "warn.page_next": "Siguiente",
+        "warn.pagination": "Páginas de avisos",
+        "warn.page_status": "Página {n} de {total} · {count} avisos",
         "error.index_failed": "No se pudo cargar el índice.",
         "error.local_file": ("Si abriste esta página directamente, el navegador bloquea la "
                              "lectura de archivos locales — ejecuta python -m http.server y "
@@ -428,11 +450,21 @@ I18N = {
         "home.all": "全部国家", "home.us": "美国",
         "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
+        "home.tw": "台湾",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
         "home.loading": "正在加载索引…",
         "home.hint_idle": ("首次搜索只加载当前首字符的一小片索引（约 0.2 MB），完整索引会在后台补全"
                            "——直接输入、点搜索框或选一个示例。"),
         "home.hint_loading": "正在加载索引分片（约 0.2 MB）…",
+        # v0.6.6：成分页多国并排矩阵
+        "matrix.spec": "规格 / 剂型 / 释放",
+        "matrix.none": "未收录",
+        "matrix.hidden_note": "已停售、撤市或状态未确认的产品默认隐藏。",
+        "matrix.capped": "仅显示前 {shown} / {total} 个规格行。",
+        # v0.6.7：/warn 分页
+        "warn.page_prev": "上一页", "warn.page_next": "下一页",
+        "warn.pagination": "警示分页",
+        "warn.page_status": "第 {n} / {total} 页 · 共 {count} 条",
         "error.index_failed": "索引没加载成功。",
         "error.local_file": ("如果是本地双击打开的页面，浏览器会拦截本地文件读取——请用 "
                              "python -m http.server 起服务后访问 http://localhost:8000/。"),
@@ -743,6 +775,23 @@ UI_I18N = {
         "home.hint_idle": ("首次搜尋只載入目前首字元的一小片索引（約 0.2 MB），完整索引會在背景"
                            "補齊——直接輸入、點搜尋框或選一個範例。"),
         "home.hint_loading": "正在載入索引分片（約 0.2 MB）…",
+        # v0.6.6：成分頁多國並排矩陣
+        "matrix.spec": "規格 / 劑型 / 釋放",
+        "matrix.none": "未收錄",
+        "matrix.hidden_note": "已停售、撤市或狀態未確認的產品預設隱藏。",
+        "matrix.capped": "僅顯示前 {shown} / {total} 個規格列。",
+        # v0.6.7：/warn 分頁
+        "warn.page_prev": "上一頁", "warn.page_next": "下一頁",
+        "warn.pagination": "警示分頁",
+        "warn.page_status": "第 {n} / {total} 頁 · 共 {count} 條",
+        # v0.7.0：TW 市場（zh-Hant 直接給值，避免 JSON 未含時回落簡體）
+        "home.tw": "台灣",
+        "about.tw_source": (
+            '<p class="sub"><b>台灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
+            '依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；'
+            '資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、'
+            '許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>'
+            '授權：<a href="https://data.gov.tw/license">data.gov.tw/license</a>。</p>'),
     },
 }
 
@@ -992,6 +1041,13 @@ ABOUT_I18N = {
             '<b>Canada</b>: Health Canada DPD — non-commercial re-use with source acknowledgement. '
             '<b>China</b>: 国家医保局 医保药品分类与代码数据库 (2025-04-04 snapshot); no open '
             'redistribution licence was found, so only factual fields with links are stored.</p>'),
+        "about.tw_source": (
+            '<p class="sub"><b>Taiwan 台灣</b>: TFDA 「全部藥品許可證資料集」 (data.gov.tw '
+            'dataset 9122) under <b>Open Government Data Licence v1.0 (OGDL v1.0)</b>; '
+            'attribution required: 衛福部食藥署 TFDA. Data as of <b>2026-10-22</b> (weekly '
+            'sync). Facts only (product name, ingredients, dosage form, manufacturer, licence '
+            'number, status). <b>Strengths are parsed from product names, so confidence is '
+            'limited.</b> Licence: <a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>'),
         "about.samename": (
             '<h2>Why “same name, different drug” happens</h2>'
             '<p class="sub">The same trademark is held by different companies in different '
@@ -1102,13 +1158,22 @@ ABOUT_I18N = {
             'de datos de clasificación y códigos de medicamentos del NHSA (instantánea '
             '2025-04-04); no se encontró licencia abierta de redistribución, así que solo se '
             'guardan campos fácticos con enlaces.</p>'),
+        "about.tw_source": (
+            '<p class="sub"><b>Taiwán 台灣</b>: TFDA «全部藥品許可證資料集» (data.gov.tw, '
+            'conjunto 9122) bajo la <b>Licencia de Datos Gubernamentales Abiertos v1.0 '
+            '(OGDL v1.0)</b>; atribución: 衛福部食藥署 TFDA. Datos hasta <b>2026-10-22</b> '
+            '(sincronización semanal). Solo campos fácticos (nombre, principios, forma, '
+            'fabricante, nº de licencia, estado). <b>Las concentraciones proceden del análisis '
+            'de los nombres de producto, con confianza limitada.</b> Licencia: '
+            '<a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>'),
         "about.samename": (
             '<h2>Por qué ocurre «mismo nombre, otro medicamento»</h2>'
             '<p class="sub">La misma marca pertenece a empresas distintas en cada mercado y la '
             'fórmula puede ser totalmente diferente. Ejemplos verificados: <b>Tylenol</b> en EE. UU. '
             'es paracetamol de un solo principio 500 mg, mientras que <b>泰诺</b> en China es un '
             'antigripal de cuatro principios y el producto de un solo principio es <b>泰诺林</b>; '
-            '<b>Benadryl</b> en EE. UU. es difenhidramina y en el Reino Unido es acrivastina; '
+            '<b>Benadryl</b> en EE. UU. es difenhidramina y en el Reino Unido <b>Benadryl</b> '
+            'es acrivastina; '
             '<b>Gaviscon</b> en EE. UU. es un antiácido de aluminio/magnesio y en el Reino Unido '
             'es una barrera de alginato.</p>'),
         "about.gaps": (
@@ -1160,8 +1225,8 @@ ABOUT_I18N = {
             '<h2>俗称与旧名</h2>'
             '<p>「两只青蛙」不是商品名，也永远不当作商品名存储：它指向成分二甲双胍。'
             '俗称是单独的人工维护表，可检索，但刻意不进入商品名表。命中时先标注'
-            '「网络俗称 / 旧名」，再列该成分的商品名，绝不把它说成包装上的名字。每条都写出处；'
-            '「用户提供」只算线索，公开页标「未证实」，找到独立出处后才升级为 '
+            '<i>「网络俗称 / 旧名」</i>，再列该成分的商品名，绝不把它说成包装上的名字。每条都写出处；'
+            '「用户提供」只算线索，公开页标<i>「未证实」</i>，找到独立出处后才升级为 '
             '<code>documented</code>。没有来源就不新增。</p>'
             '<ul class="sub"><li>@@NICKNAMES@@ 条俗称在 <code>data/seed_nicknames.py</code> '
             '里人工维护并重建，不自动抓取。</li>'
@@ -1177,7 +1242,7 @@ ABOUT_I18N = {
             '<ul class="sub"><li><b>NIDA / DEA 清单</b>不再用于娱乐性黑话，只保留合法药品的'
             '处方药类别词，并逐条带出处 URL。</li>'
             '<li><b>MedlinePlus（NLM）</b>提供常见民间/类别词（美国政府作品）；社区来源'
-            '（CN/GB/AU/ES）标「社区叫法」并保留检索。FDA 官方 tall-man 药对：'
+            '（CN/GB/AU/ES）标<i>「社区叫法」</i>并保留检索。FDA 官方 tall-man 药对：'
             '@@CONFUSABLE@@ 对，<a href="confused.html">见列表</a>。</li></ul>'),
         "about.sources": (
             '<h2>数据来源与覆盖</h2>'
@@ -1195,6 +1260,12 @@ ABOUT_I18N = {
             'OTC 种子，只存事实字段，不转载 CMI/ARTG 全文。<b>加拿大</b>：Health Canada DPD，'
             '允许非商业再使用并须注明来源。<b>中国</b>：国家医保局「医保药品分类与代码数据库」'
             '（2025-04-04 快照）；未找到开放的再发布许可，只存事实字段并链回原文。</p>'),
+        "about.tw_source": (
+            '<p class="sub"><b>台湾</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
+            '依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；'
+            '資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、'
+            '許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>'
+            '授權：<a href="https://data.gov.tw/license">data.gov.tw/license</a>。</p>'),
         "about.samename": (
             '<h2>为什么会有「同名不同药」</h2>'
             '<p class="sub">同一个商标在不同市场属于不同公司，配方可能完全不同。已验证的例子：'
@@ -1640,7 +1711,7 @@ COMBO_I18N = {
         "combo.cross_products": "productos",
         "combo.cross_record": "registro",
         "combo.cross_overlap": ('La combinación más cercana en otros mercados es similar pero '
-                                'NO idéntica — no es intercambiable.'),
+                                'NO idéntica: no son intercambiables.'),
         "combo.cross_none": ('Todavía no hay productos con esta combinación en los otros '
                              'mercados cubiertos.'),
         "combo.cross_primary": ('Solo coincide el principio principal — NO es la misma '
@@ -1879,22 +1950,63 @@ def build_warn(db: sqlite3.Connection) -> int:
     groups = {"high": [], "medium": [], "info": []}
     for row in rows:
         groups.setdefault(row["severity"], []).append(row)
-    grp_html = []
-    for sev in ("high", "medium", "info"):
-        if not groups.get(sev):
-            continue
-        grp_html.append(f'<h2 data-i18n="warn.group.{sev}">{esc(I18N["en"]["warn.group." + sev])}</h2>')
-        for row in groups[sev]:
-            grp_html.append(
-                f'<article class="warn-item" id="w-{esc(row["warning_id"])}">'
-                + _warn_lang_blocks(row, sub_names, prefix="")
-                + "</article>")
+    items_html = []
+    for row in rows:
+        items_html.append(
+            f'<article class="warn-item" id="w-{esc(row["warning_id"])}">'
+            + _warn_lang_blocks(row, sub_names, prefix="") + "</article>")
+    # v0.6.7：客户端分页（10 条/页）。无 JS 时全部可见（优雅降级）；?page=N 刷新/分享保持。
+    pager_js = """
+(function(){
+  var PAGE = 10;
+  var list = document.getElementById('warnlist');
+  var pager = document.getElementById('warnpager');
+  if(!list || !pager) return;
+  var items = Array.prototype.slice.call(list.querySelectorAll('article.warn-item'));
+  var total = Math.ceil(items.length / PAGE);
+  if(total <= 1) return;
+  var T = window.T || function(k){ return k; };
+  var params = new URLSearchParams(location.search);
+  var cur = parseInt(params.get('page') || '1', 10);
+  if(!cur || cur < 1) cur = 1;
+  if(cur > total) cur = total;
+  if(params.get('page') && String(cur) !== params.get('page')){
+    try{ params.set('page', String(cur)); history.replaceState(null, '', '?' + params.toString()); }catch(e){}
+  }
+  function pageHref(n){
+    var p = new URLSearchParams(location.search);
+    p.set('page', String(n));
+    p.delete('lang');
+    var q = p.toString();
+    return '?' + q;
+  }
+  items.forEach(function(el, i){
+    el.style.display = (i >= (cur - 1) * PAGE && i < cur * PAGE) ? '' : 'none';
+  });
+  function link(n, label, cls, rel, disabled){
+    if(disabled) return '<span class="' + cls + ' disabled" aria-disabled="true">' + label + '</span>';
+    return '<a class="' + cls + '" href="' + pageHref(n) + '"' + (rel ? ' rel="' + rel + '"' : '') + '>' + label + '</a>';
+  }
+  var html = '<span class="pg-status" aria-live="polite">' +
+    T('warn.page_status').replace('{n}', cur).replace('{total}', total).replace('{count}', items.length) +
+    '</span>';
+  html += link(cur - 1, '‹ ' + T('warn.page_prev'), 'pg-prev', 'prev', cur <= 1);
+  for(var n = 1; n <= total; n++){
+    if(n === cur) html += '<span class="pg-num on" aria-current="page">' + n + '</span>';
+    else html += link(n, String(n), 'pg-num', '', false);
+  }
+  html += link(cur + 1, T('warn.page_next') + ' ›', 'pg-next', 'next', cur >= total);
+  pager.innerHTML = html;
+})();
+"""
     body = f"""<h1 data-i18n="warn.title">{esc(I18N["en"]["warn.title"])}</h1>
 <div data-i18n-html="warn.intro">{I18N["en"]["warn.intro"]}</div>
 <div class="notice" data-i18n="warn.no_advice">{esc(I18N["en"]["warn.no_advice"])}</div>
 <div data-i18n-html="warn.count">{I18N["en"]["warn.count"]}</div>
-{''.join(grp_html) if grp_html else '<p class="empty" data-i18n="warn.empty">No published warnings yet.</p>'}
-<div class="notice warnbox" data-i18n-html="warn.source_note">{I18N["en"]["warn.source_note"]}</div>"""
+<div id="warnlist">{''.join(items_html) if items_html else '<p class="empty" data-i18n="warn.empty">No published warnings yet.</p>'}</div>
+<nav id="warnpager" class="warnpager" aria-label="Warning pages" data-i18n-aria="warn.pagination"></nav>
+<div class="notice warnbox" data-i18n-html="warn.source_note">{I18N["en"]["warn.source_note"]}</div>
+<script>{pager_js}</script>"""
     html = page("Warnings", body, meta_key="warn", alternates=True,
                 canonical_rel="warn.html", alt_rel="warn.html")
     _write_with_copies("warn.html", html, "warn")
@@ -1957,6 +2069,13 @@ almacenamos campos fácticos con enlaces, sin reproducir textos completos.
 non-commercial purposes with source acknowledgement: <i>© His Majesty the King in Right of Canada,
 as represented by the Minister of Health.</i> 中文：仅非商业再使用，须注明来源（加拿大卫生部）。
 ES: reutilización no comercial con mención de la fuente. Terms: <a href="https://health-products.canada.ca/dpd-bdpp/">DPD</a></li>
+<li><b>Taiwan 台灣 / Taiwán</b>: TFDA 「全部藥品許可證資料集」 (data.gov.tw dataset 9122) —
+<b>Open Government Data Licence v1.0 (OGDL v1.0)</b>; attribution: 衛福部食藥署 TFDA
+(<a href="https://data.gov.tw/license">data.gov.tw/license</a>); data as of <b>2026-10-22</b>
+(weekly sync). 中文：依政府資料開放授權條款第1版釋出，須署名「衛福部食藥署 TFDA 全部藥品許可證
+資料集」；只存事實欄位；規格由品名解析、置信度有限。ES: licencia OGDL v1.0 con atribución a la
+TFDA; datos hasta 2026-10-22; concentraciones derivadas de los nombres de producto, con confianza
+limitada.</li>
 <li><b>WHO INN / OMS</b>: Contains International Nonproprietary Names (INN) data from the
 <b>World Health Organization</b>. WHO INN lists are licensed <b>CC BY-NC-SA 3.0 IGO</b>
 (attribution + non-commercial + share-alike); this site is non-commercial, and any mapping table
@@ -2029,6 +2148,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.combo{color:#7a3b1f;border-color:#e6c3b3}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
+.tag.tw{color:#1f5c7a;border-color:#b7d5e3}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
 margin-left:8px}
@@ -2147,6 +2267,18 @@ html.u1-off #u1guide{display:none!important}
 .u2chip .u2c{font-weight:600;color:var(--muted);font-size:11px}
 .u2chip .u2n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
 .u2chip .u2n.empty{color:var(--muted);font-style:italic}
+/* v0.6.6：成分页多国并排矩阵（行=规格/剂型/释放，列=国家；服务端默认 en 序，客户端按语言重排） */
+.matwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+table.matrix{width:100%;border-collapse:collapse;min-width:620px}
+table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
+  text-align:left;vertical-align:top;font-size:14px}
+table.matrix thead th{white-space:nowrap;font-weight:650}
+table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
+table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
+@media (max-width:719px){
+  table.matrix{min-width:560px}
+  .matwrap{margin:8px 0}
+}
 @media (max-width:719px){
   .u1steps{grid-template-columns:1fr}
   .u1close{min-width:44px;min-height:44px}
@@ -2225,9 +2357,20 @@ a.grp-name{color:var(--accent)}
 .warn-item .warn-body{margin:0 0 8px}
 .warn-item .warn-meta{color:var(--muted);font-size:13px;margin:0;overflow-wrap:anywhere}
 .warn-item .badge{vertical-align:2px}
+/* v0.6.7：/warn 分页（10 条/页；移动端 ≥40px 可点） */
+.warnpager{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:16px 0 4px;font-size:14px}
+.warnpager .pg-status{color:var(--muted);font-size:13px;margin-right:6px}
+.warnpager a,.warnpager span{min-width:36px;min-height:36px;display:inline-flex;
+  align-items:center;justify-content:center;padding:4px 9px;border:1px solid var(--line);
+  border-radius:8px;color:var(--fg);background:#fff}
+.warnpager a:hover{border-color:var(--accent)}
+.warnpager .pg-num.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.warnpager .disabled{color:var(--muted);opacity:.5;cursor:not-allowed}
 .drugwarn ul{margin:6px 0 4px;padding-left:20px}
 @media (max-width:719px){
   .warn-item .warn-meta{font-size:12px}
+  .warnpager{gap:6px}
+  .warnpager a,.warnpager span{min-width:40px;min-height:40px;font-size:15px}
 }
 """
 
@@ -3071,7 +3214,13 @@ function collectHits(nq, st, nicks, nickSids, onlyUnmapped, c){
 }
 /* ── 搜索增强 end ─────────────────────────────────────────────────────────── */
 // ── v0.6.3 U2：结果顶部「各国叫法」横排（仅在唯一单成分时显示）──────────────
-const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA'];
+const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW'];
+function u2Order(){
+  // v0.7.0：国家 chips 按界面语言顺序（i18n.js 在 apply() 里暴露 window.COUNTRY_ORDER）
+  const order = (typeof window !== 'undefined' && window.COUNTRY_ORDER) || [];
+  const rank = (c) => { const i = order.indexOf(c); return i < 0 ? 99 : i; };
+  return U2_COUNTRIES.slice().sort((a, b) => rank(a) - rank(b));
+}
 function anchorSubstance(hits, nicks){
   // 只认 exact/compact/prefix 的最佳命中；fuzzy/contains 或复方/多成分一律不锚定。
   // （gaviscon / benadryl 这类多结果在这里返回 null → 不显示逐国叫法，避免误配。）
@@ -3110,7 +3259,7 @@ function countryNamesHTML(anchor, selected, T){
     }
   }
   if(!U2_COUNTRIES.some(code => best[code])) return '';
-  const chips = U2_COUNTRIES.map(code => {
+  const chips = u2Order().map(code => {
     const hit = best[code];
     const on = code === selected ? ' on' : '';
     const head = `<button type="button" class="u2chip${on}" data-u2country="${code}"`
@@ -3821,7 +3970,10 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
             f'<link rel="alternate" hreflang="{LANG_HREFLANG[code]}" '
             f'href="{SITE_URL}{LANG_PATH[code]}{alt_rel}">'
             for code, _l, _path in LANGS
-        ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{alt_rel}">')
+        ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{alt_rel}">'
+          # v0.7.0：TW 市場的語言區別名（zh-TW → zh-hant 副本）
+          + f'\n<link rel="alternate" hreflang="zh-TW" '
+            f'href="{SITE_URL}{LANG_PATH["zh-Hant"]}{alt_rel}">')
     if meta_key:
         # v0.5.5：title / description / OG 本地化（根页用 data-i18n-*，副本构建期写死）
         loc_title, loc_desc = _page_meta(lang, meta_key)
@@ -4489,7 +4641,14 @@ def _label_unit_html(text: str) -> str:
     return _RE_UNIT.sub(repl, esc(text))
 
 
-def build_drug_pages(db: sqlite3.Connection) -> int:
+# v0.6.6：成分页多国矩阵（行=规格/剂型/释放；列=国家；服务端默认 en 顺序，客户端按界面语言重排）
+COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "CN", "ES", "MX", "TW")
+MATRIX_ROW_CAP = 120
+
+
+def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
+    T = I18N["en"]
+    entry_by_k = {e["k"]: e for e in (entries or [])}
     products: dict[str, list] = {}
     for row in db.execute(
         """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
@@ -4501,15 +4660,16 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
     ):
         products.setdefault(row[0], []).append(row[1:])
 
-    names: dict[str, list[str]] = {}
-    for pid, raw in db.execute(
-        """SELECT pn.product_id, nv.raw FROM product_name pn
+    names: dict[str, list[tuple[str, str]]] = {}
+    for pid, key_id, raw in db.execute(
+        """SELECT pn.product_id, pn.key_id, nv.raw FROM product_name pn
            JOIN name_variant nv ON nv.key_id = pn.key_id
            WHERE pn.name_type = 'trade'"""
     ):
         bucket = names.setdefault(pid, [])
-        if raw not in bucket:
-            bucket.append(raw)
+        item = (key_id, raw)
+        if item not in bucket:
+            bucket.append(item)
 
     subs = db.execute("SELECT substance_id, inn_en, inn_zh, atc FROM substance").fetchall()
     # 易混淆药对：成分页顶部给一条警告，链到对方成分页和 /confused.html。
@@ -4559,61 +4719,81 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
         if not rows:
             continue
 
-        brands = defaultdict(lambda: defaultdict(int))
-        by_country = defaultdict(list)
+        # v0.6.6：按「规格 + 剂型 + 释放机制」聚合，国家并排；默认只显示 active。
+        spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
         for (country, fb, df, rel, status, sv, su, pv, pu, pid) in rows:
-            b = names.get(pid, [])
-            for x in b:
-                brands[country][x] += 1
+            if status != "active":
+                continue
             st = f"{sv:g} {su}" if sv is not None else ""
             if pv:
                 st += f"/{pv:g} {pu}"
-            by_country[country].append((st.strip(), rel, status, b[0] if b else ""))
-
-        blocks = []
-        for country in ("US", "GB", "CA", "CN", "ES", "MX", "AU"):
-            if country not in by_country:
-                continue
-            uniq = {}
-            for st, rel, status, brand in by_country[country]:
-                k = (brand, st, rel)
-                if k not in uniq:
-                    uniq[k] = (brand, st, rel, status)
-            ordered = sorted(uniq.values(),
-                             key=lambda t: (t[0] == "", t[0].lower(), _sort_strength(t[1])))
-            # 名字以数字/符号开头的（DPD 的「222 AF EXTRA STRENGTH」、
-            # 「+ SINUS COLD FORMULA」）排在真正的品牌后面，否则一上来全是这种名字。
-            ordered.sort(key=lambda t: (bool(t[0]) and (t[0][:1].isdigit()
-                                                        or t[0][:1] in "+-/&"), 0))
-            lis = []
-            for brand, st, rel, status in ordered[:40]:
-                # 受控词走 data-i18n：en 默认文案在 HTML 里，i18n.js 按所选语言替换。
-                name = esc(brand) if brand else (
-                    '<span class="meta" data-i18n="drug.no_brand">(no brand name)</span>')
-                st_html = _label_unit_html(st) if st else (
-                    '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
-                status_html = (
-                    f'<span data-i18n="drug.status.{status}">{esc(status)}</span>'
-                    if status in STATUS_WORDS else esc(status))
-                note = STATUS_NOTES.get(status)
-                if note:
-                    note_en = STATUS_NOTES_EN[status]
-                    status_html += (f' <em>(<span data-i18n="drug.status_note.{status}">'
-                                    f'{note_en}</span>)</em>')
-                lis.append(f"<tr><td>{name}</td><td>{st_html}</td>"
-                           f"<td>{_label_html('release', rel, rel) if rel != 'none' else '—'}</td>"
-                           f"<td>{status_html}</td></tr>")
-            more = (f'<p class="sub"><span data-i18n="drug.showing">showing first 40 of</span> '
-                    f'{len(ordered)}</p>' if len(ordered) > 40 else "")
-            blocks.append(
-                f"<h2>{country} <span class='meta'>({len(ordered)} "
-                f"<span data-i18n='drug.records'>records</span>)</span></h2>"
-                f"<table><tr><th data-i18n='drug.brand'>Brand</th>"
-                f"<th data-i18n='drug.strength'>Strength</th>"
-                f"<th data-i18n='drug.release'>Release</th>"
-                f"<th data-i18n='drug.status'>Status</th></tr>"
-                + "".join(lis) + "</table>" + more
-            )
+            spec = (st.strip(), fb or df or "", rel)
+            bucket = spec_countries.setdefault(spec, {}).setdefault(country, {})
+            for key_id, raw in names.get(pid, []):
+                e = entry_by_k.get(key_id)
+                label = (e or {}).get("d") or raw
+                if label and label not in bucket:
+                    bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "")
+        countries = [c for c in COUNTRY_PRIORITY
+                     if any(c in by_c for by_c in spec_countries.values())]
+        for by_c in spec_countries.values():
+            for c in by_c:
+                if c not in countries:
+                    countries.append(c)
+        spec_rows = sorted(
+            spec_countries.items(),
+            key=lambda kv: (_sort_strength(kv[0][0]), kv[0][1],
+                            kv[0][2] != "none", kv[0][2]))
+        shown = spec_rows[:MATRIX_ROW_CAP]
+        head = (f'<th data-i18n="matrix.spec">{esc(T["matrix.spec"])}</th>'
+                + "".join(f'<th data-country="{esc(c)}">{esc(c)}</th>'
+                          for c in countries))
+        tbody = []
+        for spec, by_c in shown:
+            st, form, rel = spec
+            st_html = _label_unit_html(st) if st else (
+                '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
+            form_html = (_label_html("form", form, form) if form
+                         else '<span class="meta">—</span>')
+            rel_html = (f' · {_label_html("release", rel, rel)}'
+                        if rel not in ("", "none") else "")
+            cells = [f'<td class="m-spec"><b>{st_html}</b><br>{form_html}{rel_html}</td>']
+            for c in countries:
+                cell_brands = by_c.get(c) or {}
+                if not cell_brands:
+                    cells.append('<td><span class="meta" data-i18n="matrix.none">'
+                                 'not recorded</span></td>')
+                    continue
+                ordered = sorted(cell_brands.items(), key=lambda kv: kv[0].lower())
+                bits = []
+                for label, url in ordered[:3]:
+                    if url:
+                        bits.append(f'<a class="m-brand" href="{esc(url)}">'
+                                    f'{esc(label)}</a>')
+                    else:
+                        bits.append(f'<span class="m-brand">{esc(label)}</span>')
+                more = (f' <span class="meta">+{len(ordered) - 3}</span>'
+                        if len(ordered) > 3 else "")
+                cells.append(f'<td>{" ".join(bits)}{more}</td>')
+            tbody.append("<tr>" + "".join(cells) + "</tr>")
+        capped_blocks = ""
+        if len(spec_rows) > MATRIX_ROW_CAP:
+            for lang in ("en", "es", "zh", "zh-Hant"):
+                note = (I18N[lang].get("matrix.capped") or "")
+                note = (note.replace("{shown}", str(len(shown)))
+                            .replace("{total}", str(len(spec_rows))))
+                capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
+                                  f'<p class="sub">{esc(note)}</p></div>')
+        if tbody:
+            matrix_html = ('<div class="matwrap"><table class="matrix"><thead><tr>'
+                           + head + "</tr></thead><tbody>" + "".join(tbody)
+                           + "</tbody></table></div>" + capped_blocks)
+        else:
+            matrix_html = ('<p class="empty" data-i18n="drug.empty">'
+                           'No products recorded yet.</p>')
+        hidden_note = ('<p class="sub" data-i18n="matrix.hidden_note">'
+                       'Discontinued, withdrawn or unverified-status products are hidden by '
+                       'default.</p>')
         nick_line = ""
         if sid in nicknames:
             also = "、".join(esc(x) for x in nicknames[sid])
@@ -4645,7 +4825,8 @@ def build_drug_pages(db: sqlite3.Connection) -> int:
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
 brand names in different countries, and the same name can point to a different ingredient.
 Listed by country — not interchangeable.</div>
-{''.join(blocks) if blocks else '<p class="empty" data-i18n="drug.empty">No products recorded yet.</p>'}"""
+{matrix_html}
+{hidden_note}"""
         (OUT / "drug").mkdir(parents=True, exist_ok=True)
         (OUT / "drug" / f"{sid}.html").write_text(page(f"{inn_en}", body, "../"), encoding="utf-8")
         made += 1
@@ -4695,7 +4876,9 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
             continue
         d = data.get(e["k"])
         if not d:
-            continue
+            # v0.6.6：守住「u 有值 ⇒ name/<u> 页存在」的站内不变量；数据侧缺行时用索引
+            # 条目自身信息生成最小页，避免品牌矩阵/索引出现 ../name/ 404。
+            d = {"subs": {}, "countries": set(e.get("c") or [])}
         level = e["l"]
         banner = {
             "severe": '<div class="notice"><b data-i18n="badge.severe">Same name, different drug</b>'
@@ -5059,7 +5242,8 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
         info = page_makers[mkey]
         rows.sort(key=lambda p: (p["country"], (entry_by_k.get(p["keys"][0]) or {}).get("d", "")
                                  if p["keys"] else "~"))
-        countries = sorted({p["country"] for p in rows})
+        countries = [c for c in COUNTRY_PRIORITY if c in {p["country"] for p in rows}]
+        countries += sorted({p["country"] for p in rows} - set(countries))
         brands = {(entry_by_k.get(p["keys"][0]) or {}).get("k", p["keys"][0])
                   for p in rows if p["keys"]}
         n_products = len(rows)
@@ -5178,7 +5362,8 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="ES" data-i18n="home.es">Spain</option>
     <option value="MX" data-i18n="home.mx">Mexico</option>
     <option value="AU" data-i18n="home.au">Australia</option>
-    <option value="CA" data-i18n="home.ca">Canada</option></select>
+    <option value="CA" data-i18n="home.ca">Canada</option>
+    <option value="TW" data-i18n="home.tw">Taiwan</option></select>
   {{hero_examples}}
 </div>
 <section id="u1guide" class="u1guide" aria-labelledby="u1title" data-i18n-aria="u1.aria">
@@ -5284,7 +5469,8 @@ def build_about(stats, coverage, source_cover=()) -> None:
     """
     T = I18N["en"]
     parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
-    for key in ("about.lead", "about.rules", "about.nick", "about.terms", "about.sources"):
+    for key in ("about.lead", "about.rules", "about.nick", "about.terms",
+                "about.sources", "about.tw_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append(LICENCE_HTML)
     for key in ("about.samename", "about.gaps"):
@@ -5748,6 +5934,45 @@ def main() -> None:
     document.querySelectorAll('[data-lang-block]').forEach(function(el){
       el.style.display = (el.dataset.langBlock === window.LANG) ? 'block' : 'none';
     });
+    // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
+    // v0.6.6/v0.7.0：语言列序（含 TW：zh → CN,TW；zh-Hant → TW,CN,HK；es → ES,MX…）
+    var MORDER = {en: ['US','GB','CA','AU','CN','ES','MX','TW'],
+                  es: ['ES','MX','US','GB','CA','AU','CN','TW'],
+                  zh: ['CN','TW','US','GB','CA','AU','ES','MX'],
+                  'zh-Hant': ['TW','CN','HK','US','GB','CA','AU','ES','MX']};
+    var morder = MORDER[window.LANG] || MORDER.en;
+    window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
+    document.querySelectorAll('table.matrix').forEach(function(tb){
+      var rank = {};
+      for(var i = 0; i < morder.length; i++) rank[morder[i]] = i;
+      Array.prototype.forEach.call(tb.querySelectorAll('tr'), function(tr){
+        var cells = Array.prototype.slice.call(tr.children);
+        cells.sort(function(a, b){
+          var ca = a.getAttribute('data-country'), cb = b.getAttribute('data-country');
+          if(!ca && !cb) return 0;
+          if(!ca) return -1;
+          if(!cb) return 1;
+          var ra = (rank[ca] === undefined) ? 99 : rank[ca];
+          var rb = (rank[cb] === undefined) ? 99 : rank[cb];
+          return ra - rb;
+        });
+        for(var c = 0; c < cells.length; c++) tr.appendChild(cells[c]);
+      });
+    });
+    // v0.7.0：国家下拉按界面语言排序（TW 已接入；「All countries」保持第一项）
+    var selC = document.getElementById('country');
+    if(selC){
+      var rankC = {};
+      for(var ci = 0; ci < morder.length; ci++) rankC[morder[ci]] = ci;
+      var opts = Array.prototype.slice.call(selC.querySelectorAll('option[value]'))
+        .filter(function(o){ return !!o.getAttribute('value'); });
+      opts.sort(function(a, b){
+        var ra = (rankC[a.value] === undefined) ? 99 : rankC[a.value];
+        var rb = (rankC[b.value] === undefined) ? 99 : rankC[b.value];
+        return ra - rb;
+      });
+      opts.forEach(function(o){ selC.appendChild(o); });
+    }
     document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = window.T(el.dataset.ph); });
     document.querySelectorAll('.langs a').forEach(function(a){
       a.classList.toggle('on', a.dataset.lang === window.LANG);
@@ -5929,7 +6154,7 @@ def main() -> None:
     print(f"  {len(artg)} ARTG names", flush=True)
 
     print("building drug pages ...", flush=True)
-    n_drug = build_drug_pages(db)
+    n_drug = build_drug_pages(db, entries)
     print("collecting name data ...", flush=True)
     data = collect_name_data(db)
     families: dict[str, dict] = {}
