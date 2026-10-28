@@ -223,6 +223,20 @@ I18N = {
         "res.fold": "Show fewer",
         "res.load_more": "Load more",
         "res.loaded_all": "All results shown",
+        "res.copy": "Copy table", "res.csv": "Download CSV",
+        "res.copied": "Copied", "res.copy_fail": "Copy failed — select the table manually",
+        "res.col_country": "Countries", "res.col_form": "Form",
+        "res.col_match": "Match", "res.col_link": "Page",
+        "a3.salt": "Salt forms:", "a3.release": "Release:",
+        "a3.incompat": "Not interchangeable — see warning",
+        "row.report": "Report this row",
+        "report.field_row": "Row",
+        "a1.expand": "Details", "a1.loading": "Loading details…",
+        "a1.none": "No product records for this name.",
+        "a1.goto": "Open substance page",
+        "a1.market": "Market", "a1.pack": "Pack", "a1.approval": "Approval / NDC / DIN",
+        "a1.status": "Status", "a1.source": "Source", "a1.raw": "Original record",
+        "a1.more": "Showing the first 12 records; see the substance page for all.",
     },
     "es": {
         "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
@@ -355,6 +369,20 @@ I18N = {
         "res.fold": "Mostrar menos",
         "res.load_more": "Cargar más",
         "res.loaded_all": "Todos los resultados mostrados",
+        "res.copy": "Copiar tabla", "res.csv": "Descargar CSV",
+        "res.copied": "Copiado", "res.copy_fail": "No se pudo copiar — selecciona la tabla",
+        "res.col_country": "Países", "res.col_form": "Forma",
+        "res.col_match": "Coincidencia", "res.col_link": "Página",
+        "a3.salt": "Formas salinas:", "a3.release": "Liberación:",
+        "a3.incompat": "No intercambiables — ver aviso",
+        "row.report": "Informar de esta fila",
+        "report.field_row": "Fila",
+        "a1.expand": "Detalles", "a1.loading": "Cargando detalles…",
+        "a1.none": "No hay registros de producto para este nombre.",
+        "a1.goto": "Abrir página del principio activo",
+        "a1.market": "Mercado", "a1.pack": "Envase", "a1.approval": "Registro / NDC / DIN",
+        "a1.status": "Estado", "a1.source": "Fuente", "a1.raw": "Registro original",
+        "a1.more": "Se muestran los primeros 12 registros; la página del principio activo tiene todos.",
     },
     "zh": {
         "nav.search": "检索", "nav.confused": "易混淆药名", "nav.about": "关于",
@@ -470,6 +498,20 @@ I18N = {
         "res.fold": "折叠",
         "res.load_more": "加载更多",
         "res.loaded_all": "已显示全部结果",
+        "res.copy": "复制表格", "res.csv": "下载 CSV",
+        "res.copied": "已复制", "res.copy_fail": "复制失败，请手动选择表格",
+        "res.col_country": "国家", "res.col_form": "剂型",
+        "res.col_match": "匹配方式", "res.col_link": "页面",
+        "a3.salt": "盐型：", "a3.release": "释放：",
+        "a3.incompat": "不可互换 — 见警示",
+        "row.report": "报告这一行",
+        "report.field_row": "行",
+        "a1.expand": "详情", "a1.loading": "正在加载明细…",
+        "a1.none": "这个名字下没有产品记录。",
+        "a1.goto": "打开成分页",
+        "a1.market": "市场", "a1.pack": "包装", "a1.approval": "批准号 / NDC / DIN",
+        "a1.status": "状态", "a1.source": "来源", "a1.raw": "原始记录",
+        "a1.more": "仅显示前 12 条记录，全部见成分页。",
     },
 }
 
@@ -796,6 +838,7 @@ PAGE_I18N = {
                            'rel="noopener">CHANGELOG.md</a>.'),
         "whatsnew.lang_note": ('Release notes are machine-translated (AI); the Chinese original in '
                                'CHANGELOG.md is authoritative.'),
+        "whatsnew.pending": ('Chinese original only — English/Spanish translation pending.'),
         "conf.source_note": (
             'Source: <a href="https://www.fda.gov/drugs/medication-errors-related-'
             'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
@@ -824,6 +867,7 @@ PAGE_I18N = {
                            'target="_blank" rel="noopener">CHANGELOG.md</a>.'),
         "whatsnew.lang_note": ('Las notas de versión están traducidas automáticamente (IA); el '
                                'original chino en CHANGELOG.md es la referencia.'),
+        "whatsnew.pending": ('Solo original en chino — traducción al inglés/español pendiente.'),
         "conf.source_note": (
             'Fuente: <a href="https://www.fda.gov/drugs/medication-errors-related-'
             'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
@@ -849,6 +893,7 @@ PAGE_I18N = {
                            f'完整历史见 <a href="{REPORT_REPO}/blob/main/CHANGELOG.md" '
                            'target="_blank" rel="noopener">CHANGELOG.md</a>。'),
         "whatsnew.lang_note": "英文/西语更新说明为 AI 机器翻译；中文原文（CHANGELOG.md）为准。",
+        "whatsnew.pending": "中文原文；英/西语译文待补。",
         "conf.source_note": (
             '来源：<a href="https://www.fda.gov/drugs/medication-errors-related-'
             'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
@@ -1551,6 +1596,7 @@ kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
 .release table{font-size:13px}
 .release ul{margin:6px 0 12px;padding-left:22px}
 .release li{margin:4px 0}
+.release-pending{color:var(--warn);font-size:13px;margin:6px 0 0}
 /* ── UI P0：解析条 / 自动完成 / 分组折叠 / 加载更多 / 国家提示 ── */
 .sel-label{color:var(--muted);font-size:14px;margin-right:2px}
 .searchwrap{position:relative}
@@ -1578,6 +1624,23 @@ font-size:13px;text-decoration:underline}
 .loadmore button{padding:8px 16px;font-size:14px}
 .countrymiss .cm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .countrymiss .cm-actions a,.countrymiss .cm-actions button{font-size:14px}
+/* v0.5.6：A1 详情 / A3 盐型释放上下文 / B6 行级报告 / B7 导出工具条 */
+.ctxwrap{margin-left:4px}
+.ctx{display:inline-block;font-size:12px;line-height:1.5;padding:1px 7px;border-radius:999px;
+ border:1px solid var(--line);color:var(--muted);margin:1px 4px 1px 0;white-space:nowrap}
+.ctx.warn{color:var(--warn);border-color:#f0d3c4;background:#fff6e8}
+a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
+.rowreport{display:inline-block;margin-left:6px;font-size:13px;color:var(--muted);text-decoration:none}
+.rowreport:hover{color:var(--warn);text-decoration:none}
+.detbtn{margin-left:6px;font-size:12px}
+.restools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
+.restools .exportnote{color:var(--muted);font-size:12px}
+table.det{margin:4px 0 8px;font-size:13px;background:#faf9f6;border:1px solid var(--line);
+ border-radius:8px;overflow:hidden}
+table.det th{background:#f4f2ec;font-size:11px}
+table.det td{padding:5px 8px;vertical-align:top}
+tr.detrow>td.detcell{padding:4px 8px 10px;background:#faf9f6}
+tr.detrow table.det{margin:0}
 @media (max-width:719px){
   .wrap{padding:0 14px}
   header .wrap{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px 12px}
@@ -1607,6 +1670,10 @@ font-size:13px;text-decoration:underline}
   table.res tr.grp .grp-tags{text-align:left;margin-top:2px}
   table.res tr.fold-row{background:transparent;border:0;padding:0;margin:0}
   table.res tr.fold-row td{padding:0 0 4px}
+  table.res tr.detrow{background:#faf9f6;border-color:#e7e5dc;padding:4px 8px}
+  table.res tr.detrow>td.detcell{display:block;padding:0}
+  table.det{display:block;overflow-x:auto;white-space:nowrap}
+  .restools{margin-top:8px}
   table.res tbody tr:hover{background:#fff}
   .loadmore button{width:100%}
 }
@@ -1825,6 +1892,129 @@ function rowHTML(r){
 // ── UI P0 ③④：自动完成 / 解析条 / 成分分组 + 品牌折叠 + 加载更多 ──────
 // 一条「品牌行」= 一个索引条目（同成分下的一个品牌/写法），剂量合并展示，
 // 不再按每个规格各占一行；分组头显示成分与品牌数。
+// ── v0.5.6：A3 盐型/释放上下文 + B6 行级报告 + A1 明细桶 + B7 导出 ─────────
+function a3HintHTML(e, T){
+  // 不可互换只来自已发布 dose_warning（R1/R2）；多盐型只做中性提示，不写结论。
+  const bits = [];
+  if(e.wi) bits.push(`<a class="ctx warn" href="${BASE}warn.html#w-${esc(e.wi)}">${esc(T('a3.incompat'))}</a>`);
+  if(e.sl) bits.push(`<span class="ctx" title="${esc(e.sl)}">${esc(T('a3.salt'))} ${esc(e.sl)}</span>`);
+  if(e.rl) bits.push(`<span class="ctx">${esc(T('a3.release'))} ${esc(e.rl)}</span>`);
+  return bits.length ? ` <span class="ctxwrap">${bits.join(' ')}</span>` : '';
+}
+function rowReportURL(e){
+  // 行级报告：不带 template=（GitHub issue form 会忽略 URL 的 body 预填），
+  // 用空白 issue + body 按表单字段顺序；只带查询词/当前页面/行信息，无隐私数据。
+  const q = (box && box.value ? box.value : '').trim();
+  const page = location.href.split('#')[0];
+  const body = [
+    '**' + Tr('report.field_query') + '**: ' + q,
+    '**' + Tr('report.field_page') + '**: ' + page,
+    '**' + Tr('report.field_row') + '**: ' + (e.d || '') + ' · ' + (e.x || '') +
+      ' · ' + ((e.c || []).join(', ')),
+    '**' + Tr('report.field_expected') + '**: ',
+    '**' + Tr('report.field_actual') + '**: ',
+    '**' + Tr('report.field_pack') + '**: ',
+  ].join('\n');
+  return 'REPORT_REPO_PLACEHOLDER' + '/issues/new?labels=data-error'
+    + '&title=' + encodeURIComponent(Tr('report.issue_title') + (q || e.d || ''))
+    + '&body=' + encodeURIComponent(body);
+}
+function detBucketOf(e){ return (e && e.db) ? e.db : 'other'; }
+function loadDetailBucket(bucket){
+  // 懒加载：只在用户点「详情」时拉一个桶（最大 ~4 MB raw / ~0.9 MB gzip），并缓存。
+  if(DET_CACHE.has(bucket)) return Promise.resolve(DET_CACHE.get(bucket));
+  return fetchManifest().catch(()=>null).then(m => {
+    const ver = (m && m.v) ? '?v=' + m.v : '';
+    return fetchJSON(BASE + 'data/idx/detail-' + bucket + '.json' + ver);
+  }).then(d => { DET_CACHE.set(bucket, d || {}); return d || {}; })
+    .catch(() => { DET_CACHE.set(bucket, {}); return {}; });
+}
+function findEntryByKey(k){
+  if(!RES_GROUPS) return null;
+  for(const g of RES_GROUPS) for(const e of g.rows) if(e.k === k) return e;
+  return null;
+}
+function detPanelHTML(payload, key, e, T){
+  const rows = (payload && payload.k && payload.k[key]) || [];
+  if(!rows.length){
+    return `<span class="sub">${esc(T('a1.none'))}</span> `
+      + (e && e.v ? `<a href="${BASE}drug/${encodeURIComponent(e.v)}.html">${esc(T('a1.goto'))}</a>` : '');
+  }
+  const body = rows.map(r => {
+    const raw = (payload.p && payload.p[r[11]] != null) ? String(payload.p[r[11]]) : '';
+    const url = raw + (r[10] || '');
+    const status = (payload.t && payload.t[r[5]]) || r[5];
+    const rel = (payload.r && payload.r[r[7]]) || '';
+    const src = (payload.s && payload.s[r[11]]) || '';
+    const strength = r[8] ? ' · ' + esc(r[8]) : '';
+    return `<tr><td>${esc(r[1])}</td><td>${esc(r[3]) || '—'}${strength}</td>`
+      + `<td><code>${esc(r[4]) || '—'}</code></td>`
+      + `<td>${esc(status)}${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(rel) : ''}</td>`
+      + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td></tr>`;
+  }).join('');
+  return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('a1.pack'))}</th>`
+    + `<th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
+    + `<th>${esc(T('a1.source'))}</th></tr></thead><tbody>${body}</tbody></table>`
+    + (rows.length >= 12 ? `<p class="sub">${esc(T('a1.more'))}</p>` : '');
+}
+// B7：导出当前视图全部结果（含折叠/未加载更多的行），纯前端。
+function exportRows(){
+  const src = (LAST_DISPLAY && LAST_DISPLAY.length) ? LAST_DISPLAY : [];
+  const out = [];
+  for(const [, tier, e] of src){
+    const link = e.u ? (BASE + 'name/' + e.u)
+      : (e.v ? (BASE + 'drug/' + encodeURIComponent(e.v) + '.html') : '');
+    out.push([e.x || e.d || '', e.d || '', (e.s || []).join(' / '),
+              (e.c || []).join(', '), e.f || '', e.m || '', tier || '', link]);
+  }
+  return out;
+}
+function csvCell(v){
+  const s = String(v == null ? '' : v);
+  return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function toCSV(rows){ return '\ufeff' + rows.map(r => r.map(csvCell).join(',')).join('\r\n'); }
+function toTSV(rows){ return rows.map(r => r.map(v => String(v == null ? '' : v)
+  .replace(/[\t\r\n]/g, ' ')).join('\t')).join('\n'); }
+function exportHeader(T){
+  return [T('col.ing'), T('col.brand'), T('col.dose'), T('res.col_country'),
+          T('res.col_form'), T('col.mah'), T('res.col_match'), T('res.col_link')];
+}
+function exportNote(msg){
+  const el = document.getElementById('exportnote');
+  if(!el) return;
+  el.textContent = msg || '';
+  if(msg) setTimeout(() => { if(el.textContent === msg) el.textContent = ''; }, 2500);
+}
+function downloadCSV(rows, T){
+  const text = toCSV([exportHeader(T)].concat(rows));
+  const blob = new Blob([text], {type: 'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  const d = new Date().toISOString().slice(0, 10);
+  a.href = URL.createObjectURL(blob);
+  a.download = 'drug-crossref-' + d + '.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function fallbackCopy(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.setAttribute('readonly', '');
+  ta.style.position = 'fixed'; ta.style.left = '-9999px'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+  ta.remove();
+  return ok;
+}
+function copyTSV(rows, T){
+  const text = toTSV([exportHeader(T)].concat(rows));
+  const done = ok => exportNote(ok ? T('res.copied') : T('res.copy_fail'));
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => done(true)).catch(() => done(fallbackCopy(text)));
+  } else {
+    done(fallbackCopy(text));
+  }
+}
 function brandRowHTML(e, T){
   const badge = e.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
                 e.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
@@ -1833,16 +2023,24 @@ function brandRowHTML(e, T){
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
   const mah = makerHTML(e, T);
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
-  return `<tr class="br">
+  // v0.5.6：A3 上下文徽章、B6 行级报告、A1 明细展开按钮（e.n 条产品记录）
+  const ctx = a3HintHTML(e, T);
+  const det = (e.n ? `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}" `
+    + `aria-expanded="false">${esc(T('a1.expand'))}</button>` : '');
+  const rep = `<a class="rowreport" href="${esc(rowReportURL(e))}" target="_blank"`
+    + ` rel="noopener" title="${esc(T('row.report'))}" aria-label="${esc(T('row.report'))}">⚑</a>`;
+  return `<tr class="br" data-k="${esc(e.k)}">
     <td class="c-ing c-empty"></td>
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${badge}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${badge}${ctx}${det}${rep}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
 const RES_PAGE = 25;              // 每次「加载更多」新增的品牌行数
 let RES_LIMIT = RES_PAGE;
 let RES_EXPANDED = new Set();     // 已展开的分组下标
 let RES_GROUPS = null;            // [{ing, tags:Set, rows:[entry]}]
+let LAST_DISPLAY = [];            // v0.5.6 B7：当前视图全部命中（[score,tier,entry]）
+const DET_CACHE = new Map();      // v0.5.6 A1：明细桶缓存（bucket → payload）
 function groupByIngredient(display){
   const order=[], map=new Map();
   for(const [, t, e] of display){
@@ -2463,7 +2661,15 @@ function render(){
   let resHTML = '';
   if(!countryMiss && display.length){
     RES_GROUPS = groupByIngredient(display);
-    resHTML = `<div id="reswrap">${resultsTableHTML(T2)}</div>`;
+    LAST_DISPLAY = display;      // v0.5.6 B7：导出「当前视图全部行」，不受折叠/分页影响
+    resHTML = `<div class="restools">`
+      + `<button type="button" class="linkbtn" data-export="copy">${esc(T2('res.copy'))}</button>`
+      + `<button type="button" class="linkbtn" data-export="csv">${esc(T2('res.csv'))}</button>`
+      + `<span class="exportnote" id="exportnote" role="status" aria-live="polite"></span>`
+      + `</div>`
+      + `<div id="reswrap">${resultsTableHTML(T2)}</div>`;
+  } else {
+    LAST_DISPLAY = [];
   }
 
   // 精确命中某个品牌之后，再把「同一成分的其他商品」单独列一段：
@@ -2746,6 +2952,39 @@ out.addEventListener('click', ev => {
       else list.setAttribute('hidden', '');
       mt.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
     }
+    return;
+  }
+  // v0.5.6 B7：复制表格 / 下载 CSV（当前视图全部结果，含折叠与未加载行）
+  const ex = t.closest('[data-export]');
+  if(ex){
+    const rows = exportRows();
+    if(ex.getAttribute('data-export') === 'csv') downloadCSV(rows, Tr);
+    else copyTSV(rows, Tr);
+    gcEvent('export-' + ex.getAttribute('data-export'));
+    return;
+  }
+  // v0.5.6 A1：行下展开产品级明细（懒加载 detail-<bucket>.json，再次点击折叠）
+  const detBtn = t.closest('[data-det]');
+  if(detBtn){
+    const k = detBtn.getAttribute('data-det');
+    const tr = detBtn.closest('tr');
+    const next = tr && tr.nextElementSibling;
+    if(next && next.classList && next.classList.contains('detrow')){
+      const willOpen = next.style.display === 'none';
+      next.style.display = willOpen ? '' : 'none';
+      detBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      return;
+    }
+    const e = findEntryByKey(k) || {k: k, v: ''};
+    const row = document.createElement('tr');
+    row.className = 'detrow';
+    row.innerHTML = `<td colspan="4" class="detcell">${esc(Tr('a1.loading'))}</td>`;
+    tr.parentNode.insertBefore(row, tr.nextSibling);
+    detBtn.setAttribute('aria-expanded', 'true');
+    loadDetailBucket(detBucketOf(e)).then(payload => {
+      const cell = row.querySelector('.detcell');
+      if(cell) cell.innerHTML = detPanelHTML(payload, k, e, Tr);
+    });
     return;
   }
   if(t.closest('[data-clearcountry]')){
@@ -3100,9 +3339,14 @@ def load_releases() -> list[dict]:
 
 
 def build_whats_new() -> None:
-    """v0.5.5：What's new 正文按语言渲染 data/release_notes_i18n.json（AI 译文，中文为准）。
+    """v0.5.6：What's new **以 CHANGELOG.md 的全量版本为主列表**。
 
-    数据缺失时回退到 CHANGELOG.md 的中文渲染（保持旧行为）。
+    data/release_notes_i18n.json 只覆盖到 v0.5.2，旧实现只遍历 JSON 导致
+    v0.5.3/v0.5.4/v0.5.5 从正文消失（线上 smoke whats-new-version 失败）。
+    现在的规则：
+      1) 版本顺序永远以 CHANGELOG.md 为准（最新在上，含全部版本）；
+      2) 有 JSON 译文的版本 → 渲染 zh/en/es 三个语言块（按界面语言只显示一块）；
+      3) 没有译文的版本 → 显示 CHANGELOG 中文原文 + 「译文待补」提示。
     """
     parts = [f'<h1 data-i18n="whatsnew.title">{esc(I18N["en"]["whatsnew.title"])}</h1>',
              f'<div data-i18n-html="whatsnew.intro">{I18N["en"]["whatsnew.intro"]}</div>',
@@ -3114,25 +3358,29 @@ def build_whats_new() -> None:
                           .read_text(encoding="utf-8"))
     except (OSError, ValueError):
         data = None
-    if data:
-        for ver, item in data.items():
-            if ver == "_meta" or not isinstance(item, dict):
-                continue
-            date = item.get("date", "")
+    translations = {}
+    if isinstance(data, dict):
+        translations = {k: v for k, v in data.items()
+                        if k != "_meta" and isinstance(v, dict)}
+    pending_html = (f'<p class="sub release-pending" data-i18n="whatsnew.pending">'
+                    f'{esc(I18N["en"]["whatsnew.pending"])}</p>')
+    for r in load_releases():
+        ver = r["version"]
+        item = translations.get(ver)
+        if item:
             blocks = []
             for lang in ("zh", "en", "es"):
                 items = item.get(lang) or item.get("zh") or []
                 lis = "".join(f"<li>{_md_inline(str(x))}</li>" for x in items)
                 blocks.append(f'<div class="lang-block" data-lang-block="{lang}">'
                               f'<ul>{lis}</ul></div>')
-            parts.append(
-                f'<section class="release"><h2>{esc(ver)}'
-                f'<span class="rel-date">{esc(date)}</span></h2>{"".join(blocks)}</section>')
-    else:
-        for r in load_releases():
-            parts.append(
-                f'<section class="release"><h2>{esc(r["version"])}'
-                f'<span class="rel-date">{esc(r["date"])}</span></h2>{r["html"]}</section>')
+            body_html = "".join(blocks)
+        else:
+            # 无 AI 译文的版本：中文原文 + 三语可见的「译文待补」提示
+            body_html = r["html"] + pending_html
+        parts.append(
+            f'<section class="release"><h2>{esc(ver)}'
+            f'<span class="rel-date">{esc(r["date"])}</span></h2>{body_html}</section>')
     html = page("What's new", "\n".join(parts), meta_key="whatsnew", alternates=True,
                 canonical_rel="whats-new.html", alt_rel="whats-new.html")
     _write_with_copies("whats-new.html", html, "whatsnew")
@@ -3171,9 +3419,10 @@ def load_index(db: sqlite3.Connection):
     ):
         comp_keys.setdefault(pid, set()).add(_norm_name(inn))
     for (key_id, pid, country, form_base, dosage_form, sv, su,
-         inn_en, inn_zh, sid, mah, ntype, n_ing) in db.execute(
+         inn_en, inn_zh, sid, mah, rel, ntype, n_ing) in db.execute(
         """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
-                  pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.substance_id, p.mah,
+                  pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.substance_id,
+                  p.mah, p.release,
                   pn.name_type,
                   (SELECT COUNT(*) FROM product_component pc2
                    WHERE pc2.product_id = p.product_id) AS n_ing
@@ -3195,10 +3444,13 @@ def load_index(db: sqlite3.Connection):
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "subs_zh": [], "s": [],
                                "f": [], "v": sid, "mah": {}, "trade": False,
-                               "sids": set()}
+                               "sids": set(), "rels": set()}
         if ntype == "trade":
             a["trade"] = True
         a["sids"].add(sid)
+        if rel and rel != "none":
+            # v0.5.6 A3：该名字下产品的释放机制集合（IR/ER/SR/DR/MR/GITS），空 = 全是常释
+            a["rels"].add(rel)
         a["pids"].add(pid)
         a["c"].add(country)
         if inn_en not in a["subs"]:
@@ -3214,6 +3466,33 @@ def load_index(db: sqlite3.Connection):
             a["f"].append(f)
         if mah:
             a["mah"][mah] = a["mah"].get(mah, 0) + 1
+
+    # v0.5.6（A3/A1）：盐型上下文 + 已发布 R1/R2 警示 id + 明细桶名。
+    # 只做「结果行提示」，不参与 collision 判定；多盐型仅提示，不写「不可互换」
+    # （不可互换只来自 dose_warning 的已发布条目）。
+    forms_by_sub: dict[str, list[str]] = {}
+    has_salt_code = "salt_code" in {r[1] for r in db.execute("PRAGMA table_info(variant)")}
+    variant_sql = ("SELECT substance_id, salt, hydrate, ester, salt_code FROM variant"
+                   if has_salt_code else
+                   "SELECT substance_id, salt, hydrate, ester, '' FROM variant")
+    for sid, salt, hyd, est, code in db.execute(variant_sql):
+        forms = forms_by_sub.setdefault(sid, [])
+        label = (code or "").strip()
+        if not label or label in ("mixed", "non_salt"):
+            label = (salt or "").strip() or "base"
+        if (hyd or "").strip():
+            label += " " + hyd.strip()
+        if (est or "").strip():
+            label += " " + est.strip()
+        if label not in forms:
+            forms.append(label)
+    warn_by_sub: dict[str, list[str]] = {}
+    for sid, wid in db.execute(
+            """SELECT substance_id, warning_id FROM dose_warning
+               WHERE status='published' AND rule IN ('R1','R2')
+                 AND substance_id IS NOT NULL
+               ORDER BY CASE rule WHEN 'R2' THEN 0 ELSE 1 END, warning_id"""):
+        warn_by_sub.setdefault(sid, []).append(wid)
 
     entries = []
     fam = {}
@@ -3250,6 +3529,12 @@ def load_index(db: sqlite3.Connection):
             info = MAKERS.get(norm_maker(mname))
             if info and info["has"]:
                 ml.append([mname, info["slug"]])
+        # v0.5.6：单成分条目才有盐型/警示上下文；复方条目 sl/rl/wi 留空
+        sid1 = next(iter(a["sids"])) if len(a["sids"]) == 1 else ""
+        forms = forms_by_sub.get(sid1, []) if sid1 else []
+        sl_hint = "/".join(forms[:3]) if len(forms) > 1 else ""
+        rl_hint = ",".join(sorted(a.get("rels") or [])) if a.get("rels") else ""
+        wi_id = (warn_by_sub.get(sid1) or [""])[0] if sid1 else ""
         entry = {
             "k": key_id,
             "d": displays.get(key_id, key_id),
@@ -3277,7 +3562,17 @@ def load_index(db: sqlite3.Connection):
             # v0.5.4：「+N」展开列表：[[name, slug], ...]（仅含可点的其它厂家）
             "ml": ml if ml else None,
             "mn": len(a["mah"]),
+            # v0.5.6（A1/A3）：明细桶名（懒加载 data/idx/detail-<db>.json）+
+            # 盐型提示（多盐型才写）+ 释放机制 + 已发布 R1/R2 警示 id。
+            # sl/rl/wi 空值不写，避免 12.7 万条索引每行多背 3 个空串（约 +3 MB）。
+            "db": _shard_bucket(key_id),
         }
+        if sl_hint:
+            entry["sl"] = sl_hint
+        if rl_hint:
+            entry["rl"] = rl_hint
+        if wi_id:
+            entry["wi"] = wi_id
         # 加拿大 DPD 的商品名里混着「222 AF EXTRA STRENGTH」这类以数字开头的名字
         # 和「+ SINUS COLD FORMULA」这种被削掉前缀的残名。它们在索引里查得到，
         # 但排到最前面会顶掉真正的品牌，所以打个标记降权（不影响纯字母开头的名字）。
@@ -4148,7 +4443,8 @@ def build_seo_files() -> None:
 #    },
 #    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
 #   f（剂型）客户端 0 处引用，直接丢弃（app.js 只用 k/d/c/x/s/l/n/v/vs/u/g/gn/m/mn/q）。
-CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m")
+CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m",
+                  "db", "sl", "rl", "wi")
 CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz")     # 值是数组：先 JSON 化再进字典
 
 
@@ -4197,7 +4493,8 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "xz", "s", "l", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn", "m", "mn"):
+    for f in ("c", "x", "xz", "s", "l", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn",
+              "m", "mn", "db", "sl", "rl", "wi"):
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
             # 数组先序列化再字典化：客户端解码时把字典值直接给出（数组引用共享，
@@ -4531,6 +4828,22 @@ def main() -> None:
     print(f"  manifest.json ({shards['shardCount']} shards, "
           f"{shards['shardBytes'] / 1e6:.1f} MB) "
           f"{(OUT / 'data' / 'idx' / 'manifest.json').stat().st_size / 1e3:.1f} KB", flush=True)
+
+    # A1（v0.5.6）：产品明细桶由 etl/build_detail_buckets.py（index-perf task-58）
+    # 预生成到 data/idx/；构建时原样复制到 OUT（懒加载，不进主索引/首屏）。
+    # 桶内 key 集合 = 上一版 index.json 的 k 列表；DB/索引变更后需先重跑该脚本。
+    detail_src = ROOT / "data" / "idx"
+    detail_files = sorted(detail_src.glob("detail-*.json")) if detail_src.exists() else []
+    detail_bytes = 0
+    for p in detail_files:
+        (OUT / "data" / "idx" / p.name).write_bytes(p.read_bytes())
+        detail_bytes += p.stat().st_size
+    if detail_files:
+        print(f"  detail buckets {len(detail_files)} ({detail_bytes / 1e6:.1f} MB, "
+              f"lazy-load on expand)", flush=True)
+    else:
+        print("  detail buckets 0 (A1 details disabled: data/idx/detail-*.json missing)",
+              flush=True)
 
     print("building nickname index ...", flush=True)
     aliases = load_aliases(db)
