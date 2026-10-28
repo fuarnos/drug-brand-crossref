@@ -666,6 +666,10 @@ def _print_summary(reg: MarketsRegistry) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # 管道输出统一 UTF-8，避免 Windows 控制台代码页让调用方按 UTF-8 解码失败
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="市场/语言注册表：读取、校验、导出 JSON")
     ap.add_argument("--json", action="store_true", help="输出合并后的注册表 JSON")
     ap.add_argument("--check", action="store_true", help="只校验；有错退出码 1")

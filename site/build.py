@@ -47,6 +47,39 @@ BUILD_V = str(int(time.time()))
 
 CHANGELOG = ROOT / "CHANGELOG.md"
 
+# v0.6.2：繁体中文（zh-Hant）UI。字典来自 data/i18n_zh_hant.json（由简体 I18N 经
+# OpenCC + 台湾用语表转换，247 键）；缺键回退简体 zh。搜索输入繁体→简体归一用
+# data/zh_hant_t2s.json（OpenCC TSCharacters 常用字子集，构建期注入 app.js）。
+ZH_HANT_I18N_FILE = ROOT / "data" / "i18n_zh_hant.json"
+ZH_HANT_T2S_FILE = ROOT / "data" / "zh_hant_t2s.json"
+
+
+def _load_json_file(path: Path) -> dict:
+    """读 JSON 对象；文件缺失/损坏返回 {}（构建不因此失败）。"""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def _load_zh_hant_dict() -> dict[str, str]:
+    payload = _load_json_file(ZH_HANT_I18N_FILE)
+    mapping = payload.get("zh-Hant") or {}
+    return {str(k): str(v) for k, v in mapping.items()} if isinstance(mapping, dict) else {}
+
+
+def _load_zh_hant_t2s() -> dict[str, str]:
+    payload = _load_json_file(ZH_HANT_T2S_FILE)
+    mapping = payload.get("map") or {}
+    return {str(k): str(v) for k, v in mapping.items()} if isinstance(mapping, dict) else {}
+
+
+def _subst_placeholders(text: str, values: dict) -> str:
+    for key, val in values.items():
+        text = text.replace("@@" + str(key) + "@@", str(val))
+    return text
+
 
 def _env_value(key: str, default: str = "") -> str:
     """从环境变量或仓库根 .env 读配置（.env 不入库，供本机构建用）。"""
@@ -516,7 +549,23 @@ I18N = {
     },
 }
 
-LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/")]
+# v0.6.2：四语言。zh-Hant 的 URL 目录用全小写 zh-hant/（hreflang 仍是 BCP47 zh-Hant）。
+LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/"),
+         ("zh-Hant", "繁", "zh-hant/")]
+LANG_PATH = {code: path for code, _label, path in LANGS}
+LANG_HREFLANG = {code: ("zh-Hant" if code == "zh-Hant" else code)
+                 for code, _label, _path in LANGS}
+# i18n.js 运行时用：?lang=zh-hant、/zh-hant/、navigator.language=zh-TW 等 → zh-Hant
+LANG_ALIASES = {
+    "zh-hant": "zh-Hant", "zh_hant": "zh-Hant", "zh-tw": "zh-Hant",
+    "zh-hk": "zh-Hant", "zh-mo": "zh-Hant",
+    "zh-hans": "zh", "zh-cn": "zh", "zh-sg": "zh",
+}
+LANG_META_JS = (
+    "var LANG_PATH=" + json.dumps(LANG_PATH, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    + "var LANG_ALIAS=" + json.dumps(LANG_ALIASES, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    + "var DEFAULT_LANG='en';"
+)
 
 # ── i18n P1：About / What's new / Confused / 404 的三语正文 ────────────────
 # 用法：About 正文按块走 `data-i18n-html`（i18n.js 用 innerHTML 替换，块内可含链接/表格）；
@@ -1053,6 +1102,29 @@ def _merge_static_i18n(values: dict) -> None:
                 for ph, val in values.items():
                     merged = merged.replace("@@" + ph + "@@", str(val))
                 I18N[lang][key] = merged
+
+
+def _install_zh_hant(values: dict) -> None:
+    """装载 zh-Hant 字典：简体 zh 兜底 + data/i18n_zh_hant.json 覆盖，并替换 @@占位符@@。
+
+    必须在 _merge_static_i18n 之后调用（此时 zh 已含全部静态字典与动态占位符）。
+    """
+    base = dict(I18N.get("zh") or I18N["en"])
+    overrides = _load_zh_hant_dict()
+    merged: dict[str, str] = {}
+    fallback = 0
+    for key, text in base.items():
+        value = overrides.get(key)
+        if value is None:
+            fallback += 1
+            value = text
+        merged[key] = _subst_placeholders(value, values)
+    for key, text in overrides.items():
+        if key not in merged:
+            merged[key] = _subst_placeholders(text, values)
+    I18N["zh-Hant"] = merged
+    print(f"i18n zh-Hant: {len(merged)} keys "
+          f"({len(overrides)} from json, {fallback} fallback zh)", flush=True)
 
 
 # ── /warn 页 + 成分页警示：文案三语（页面 UI；警示正文来自 dose_warning 数据）──
@@ -1765,6 +1837,15 @@ const ctry = document.getElementById('country');
 const meta = document.getElementById('meta');
 const acEl = document.getElementById('ac');
 const ctryLabel = document.getElementById('ctrylabel');
+// v0.6.2：繁体输入归一（OpenCC 常用字子集，构建期从 data/zh_hant_t2s.json 注入）。
+// 只影响匹配前的归一化，不改变用户看到的输入/结果/页面文案。
+const T2S = __T2S_JSON__;
+function toSimp(s){
+  if(!s || !T2S || !/[\u4e00-\u9fff]/.test(s)) return s;
+  var out = '';
+  for(var i=0;i<s.length;i++){ var c = s.charAt(i); out += (T2S[c] || c); }
+  return out;
+}
 // 页面在 / 或 /es/ 或 /zh/ 下，资源与内容页都在站点根目录，按 app.js 的位置推根路径
 const BASE = ((document.currentScript && document.currentScript.src) || location.href)
   .replace(/assets\/app\.js.*$/, '');
@@ -1820,7 +1901,7 @@ function artgFallback(nq){
 }
 
 function norm(s){
-  return (s||'').normalize('NFKC').toLowerCase()
+  return toSimp(s||'').normalize('NFKC').toLowerCase()
     .replace(/[®™©]/g,' ')
     .replace(/[\u0300-\u036f]/g,'')
     .replace(/\s+/g,' ').trim();
@@ -3152,14 +3233,16 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
         # hreflang 必须带 GitHub Pages 的项目子路径（线上是 /drug-brand-crossref/），
         # 写 "/es/" 会指到域名根（404）。SITE_URL 已含末尾斜杠。
         alt = ("\n".join(
-            f'<link rel="alternate" hreflang="{code}" href="{SITE_URL}{path}{alt_rel}">'
-            for code, _l, path in LANGS
+            f'<link rel="alternate" hreflang="{LANG_HREFLANG[code]}" '
+            f'href="{SITE_URL}{LANG_PATH[code]}{alt_rel}">'
+            for code, _l, _path in LANGS
         ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{alt_rel}">')
     if meta_key:
         # v0.5.5：title / description / OG 本地化（根页用 data-i18n-*，副本构建期写死）
         loc_title, loc_desc = _page_meta(lang, meta_key)
         loc_title = loc_title or title
-        locale = {"en": "en_US", "es": "es_ES", "zh": "zh_CN"}.get(lang, "en_US")
+        locale = {"en": "en_US", "es": "es_ES", "zh": "zh_CN",
+                  "zh-Hant": "zh_Hant"}.get(lang, "en_US")
         head_title = (f'<title data-i18n-title="meta.{meta_key}.title">'
                       f'{esc(loc_title)}</title>')
         head_extra = (
@@ -3210,9 +3293,9 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 
 
 def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
-    """把根页面 HTML 变成 /es/、/zh/ 静态副本：本地化 head + 相对链接加 ../ 前缀。"""
+    """把根页面 HTML 变成 /es/、/zh/、/zh-hant/ 静态副本：本地化 head + 相对链接加 ../ 前缀。"""
     loc_title, loc_desc = _page_meta(lang, meta_key)
-    html = re.sub(r'<html lang="[a-z-]+">', f'<html lang="{lang}">', html, count=1)
+    html = re.sub(r'<html lang="[A-Za-z-]+">', f'<html lang="{lang}">', html, count=1)
     if loc_title:
         html = re.sub(r'<title[^>]*>.*?</title>',
                       f'<title data-i18n-title="meta.{meta_key}.title">'
@@ -3225,7 +3308,7 @@ def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
     if loc_title:
         html = re.sub(r'(<meta property="og:title"[^>]*content=")[^"]*(")',
                       lambda m: m.group(1) + esc(loc_title) + m.group(2), html, count=1)
-    copy_url = SITE_URL + lang + "/" + rel
+    copy_url = SITE_URL + LANG_PATH.get(lang, lang + "/") + rel
     html = re.sub(r'(<link rel="canonical" href=")[^"]*(")',
                   lambda m: m.group(1) + copy_url + m.group(2), html, count=1)
     html = re.sub(r'(<meta property="og:url" content=")[^"]*(")',
@@ -3237,12 +3320,14 @@ def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
 
 
 def _write_with_copies(rel: str, html: str, meta_key: str) -> None:
-    """写根页面 + /es/<rel>、/zh/<rel> 两份静态本地化副本（供 SEO/直接访问）。"""
+    """写根页面 + /es/<rel>、/zh/<rel>、/zh-hant/<rel> 静态本地化副本（供 SEO/直接访问）。"""
     (OUT / rel).write_text(html, encoding="utf-8")
-    for lang in ("es", "zh"):
-        target = OUT / lang / rel
+    for code, _label, path in LANGS:
+        if not path:
+            continue
+        target = OUT / path / rel
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(_localize_copy(html, lang, meta_key, rel), encoding="utf-8")
+        target.write_text(_localize_copy(html, code, meta_key, rel), encoding="utf-8")
 
 
 # ------------------------------------------------------------ release notes
@@ -4434,7 +4519,7 @@ def _sort_strength(text: str) -> float:
 
 
 def build_index_page(entries, stats, coverage) -> None:
-    """三份落地页：/ 、/es/ 、/zh/。内容相同，语言由脚本按路径/参数决定。"""
+    """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
 <p class="sub" data-i18n="home.sub">Type a brand name, a generic name, a nickname, or a line from the pack.</p>
@@ -4905,7 +4990,8 @@ def main() -> None:
     (OUT / "data").mkdir(parents=True, exist_ok=True)
     (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
     def _render_i18n_js() -> str:
-        return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n" + r"""
+        return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n"
+                + LANG_META_JS + "\n" + r"""
 (function(){
   var D = window.I18N;
   // 站点根路径：i18n.js 在 <head> 同步执行，currentScript 可用。
@@ -4919,19 +5005,37 @@ def main() -> None:
     var p = location.pathname;
     return p.indexOf(rootPath) === 0 ? p.slice(rootPath.length) : p.replace(/^\//, '');
   }
+  function canon(x){
+    if(!x) return '';
+    var c = String(x).trim();
+    if(D[c]) return c;
+    var l = c.toLowerCase();
+    if(LANG_ALIAS[l] && D[LANG_ALIAS[l]]) return LANG_ALIAS[l];
+    var base = l.split('-')[0];
+    if(base && D[base]) return base;
+    return '';
+  }
   function pick(){
-    var q = new URLSearchParams(location.search).get('lang');
-    if(q && D[q]){ try{localStorage.setItem('lang',q);}catch(e){} return q; }
+    var q = canon(new URLSearchParams(location.search).get('lang'));
+    if(q){ try{localStorage.setItem('lang',q);}catch(e){} return q; }
     var first = relPath().split('/').filter(Boolean)[0] || '';
-    // 直接进 /es/、/zh/（hreflang 主入口）时把语言写进 localStorage，
+    // 直接进 /es/、/zh/、/zh-hant/（hreflang 主入口）时把语言写进 localStorage，
     // 这样点导航去 /about.html 等根路径页面不会掉回 en。
-    if(D[first]){ try{localStorage.setItem('lang',first);}catch(e){} return first; }
-    try{ var s = localStorage.getItem('lang'); if(s && D[s]) return s; }catch(e){}
-    var n = (navigator.language || 'en').slice(0,2);
-    return D[n] ? n : 'en';
+    var seg = canon(first);
+    if(seg){ try{localStorage.setItem('lang',seg);}catch(e){} return seg; }
+    try{ var s = canon(localStorage.getItem('lang')); if(s) return s; }catch(e){}
+    var n = canon(navigator.language);
+    return n || DEFAULT_LANG;
   }
   window.LANG = pick();
-  window.T = function(k){ return (D[window.LANG] && D[window.LANG][k]) || D.en[k] || k; };
+  window.T = function(k){
+    var L = D[window.LANG];
+    var v = L ? L[k] : undefined;
+    // v0.6.2：繁体字典缺键时回退简体（再回退英文），避免出现空文本
+    if(v === undefined && window.LANG === 'zh-Hant' && D.zh) v = D.zh[k];
+    if(v === undefined) v = D.en[k];
+    return v === undefined ? k : v;
+  };
   function apply(){
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
@@ -4961,19 +5065,20 @@ def main() -> None:
     });
   }
   function langTarget(code){
-    // v0.5.5：有 /es/、/zh/ 静态副本的页面（首页/about/confused/warn/whats-new）
-    // 切到对应语言副本，URL 与显示语言一致；其它子页面留在原页只换 lang 参数。
+    // v0.5.5/v0.6.2：有 /es/、/zh/、/zh-hant/ 静态副本的页面（首页/about/confused/
+    // warn/whats-new）切到对应语言副本；其它子页面留在原页只换 lang 参数。
+    code = canon(code) || DEFAULT_LANG;
     var params = new URLSearchParams(location.search);
     params.delete('lang');
     var m = relPath().match(/(?:^|\/)(index\.html|about\.html|confused\.html|whats-new\.html|warn\.html)$/);
     var qs = params.toString();
     if(m){
-      return ROOT + (code === 'en' ? '' : code + '/') + m[1]
+      return ROOT + (LANG_PATH[code] || '') + m[1]
         + (qs ? '?' + qs : '') + (location.hash || '');
     }
     var landing = /(\/|index\.html)$/.test(location.pathname);
     var path;
-    if(landing){ path = ROOT + (code === 'en' ? '' : code + '/'); }
+    if(landing){ path = ROOT + (LANG_PATH[code] || ''); }
     else { params.set('lang', code); path = location.pathname; qs = params.toString(); }
     return path + (qs ? '?' + qs : '') + (location.hash || '');
   }
@@ -4996,8 +5101,11 @@ def main() -> None:
 """
         )
     (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
+    t2s = _load_zh_hant_t2s()
+    print(f"i18n t2s    : {len(t2s):,} chars (zh-Hant input normalization)", flush=True)
     (OUT / "assets" / "app.js").write_text(
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
+        .replace("__T2S_JSON__", json.dumps(t2s, ensure_ascii=False, separators=(",", ":")))
         .replace("data/idx/core.json", f"data/idx/core.json?v={int(time.time())}")
         .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={int(time.time())}")
         .replace("data/idx/manifest.json", f"data/idx/manifest.json?v={int(time.time())}"),
@@ -5039,7 +5147,9 @@ def main() -> None:
     stats["warn_medium"] = warn_by_sev["medium"]
     stats["warn_info"] = warn_by_sev["info"]
     stats["warn_total"] = sum(warn_by_sev.values())
-    _merge_static_i18n(_i18n_placeholders(stats, atc_cov, coverage, source_cover))
+    _values = _i18n_placeholders(stats, atc_cov, coverage, source_cover)
+    _merge_static_i18n(_values)
+    _install_zh_hant(_values)
     (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
 
     # v0.5.4：厂家页清单（必须在 load_index 之前载入，索引要用 mu/ml 字段）

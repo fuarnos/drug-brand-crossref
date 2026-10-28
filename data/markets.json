@@ -131,13 +131,14 @@
       "name": { "en": "Taiwan", "es": "Taiwán", "zh": "台湾" },
       "i18n_key": "home.tw",
       "flag": "🇹🇼",
-      "source_id": null,
+      "source_id": "tfda_tw",
       "extra_source_ids": [],
       "default_lang": "zh-Hant",
       "languages": ["zh-Hant"],
       "enabled": false,
       "order": 80,
-      "notes": "预留占位：繁体中文区域，数据源与许可待评估（食药署 TFDA 公开资料）；接入步骤见 docs/市场扩展接口.md §6。"
+      "data_as_of": "2026-10-22",
+      "notes": "预留占位（enabled=false，不生成页面/不进国家选择器）。数据源：衛福部食藥署 TFDA「全部藥品許可證資料集」（data.gov.tw #9122，OGDL v1.0 可再发布、须按「顯名聲明」署名；每 7 日更新，data_as_of=2026-10-22）。source_id 与 etl/ingest_tw_tfda.py 已统一为 tfda_tw（task-71）。待办：① source 表登记 tfda_tw（SQL：db/source_tfda_tw.sql，待 Lead apply）；② ingest_tw_tfda.py 实现 --write-db（当前占位报错）；③ data/tw_ingredient_aliases.csv 别名表（task-67 未完成）；④ 台湾成藥/中藥/植物提取物边界待产品/法务拍板；⑤ zh-Hant 语言落地后启用；⑥ 启用前在真实库跑 lib/markets.py --check + tests.test_markets_registry 全绿（source 行登记后）。接入 runbook：reports/tw-ingest-runbook.md。"
     },
     {
       "code": "EU",

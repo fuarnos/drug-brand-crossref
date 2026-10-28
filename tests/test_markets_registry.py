@@ -200,7 +200,9 @@ class TestMarkets(RegistryBase):
         tw = self.reg.require_market("TW")
         self.assertEqual(M.KIND_COUNTRY, tw.kind)
         self.assertFalse(tw.enabled)
-        self.assertIsNone(tw.source_id)
+        # task-71：TW 数据源已钉为 tfda_tw（source 行由 Lead 按 db/source_tfda_tw.sql 登记；
+        # 登记前 lib/markets 校验会报「不在 DB source 表」，属预期过渡态）。
+        self.assertEqual("tfda_tw", tw.source_id)
         self.assertEqual("zh-Hant", tw.default_lang)
         self.assertIn("zh-Hant", tw.languages)
 

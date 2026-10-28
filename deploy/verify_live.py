@@ -287,13 +287,18 @@ def main() -> int:
     idx = get("data/index.json", method="HEAD")
     iclen = int(idx["headers"].get("content-length") or 0)
     icenc = idx["headers"].get("content-encoding", "")
-    idx_ok = idx["status"] == 200 and "json" in idx["headers"].get("content-type", "").lower()
-    checks.add("legacy-index-http", idx_ok,
-               f"HTTP {idx['status']}（?legacy=1 / 解码失败回退）", idx["ms"])
-    if idx_ok and iclen:
-        lo, hi = INDEX_GZ_RANGE if icenc == "gzip" else INDEX_RAW_RANGE
-        checks.add("legacy-index-size", lo <= iclen <= hi,
-                   f"{'gzip ' if icenc == 'gzip' else '明文 '}{fmt_bytes(iclen)}")
+    if idx["status"] == 404:
+        # v0.6.1+ 默认停写 index.json：legacy 走 core+decodeCore，404 属预期
+        checks.add("legacy-index-http", True,
+                   "HTTP 404（预期：core-only 构建，legacy 走 core 解码）", idx["ms"])
+    else:
+        idx_ok = idx["status"] == 200 and "json" in idx["headers"].get("content-type", "").lower()
+        checks.add("legacy-index-http", idx_ok,
+                   f"HTTP {idx['status']}（?legacy=1 / 解码失败回退）", idx["ms"])
+        if idx_ok and iclen:
+            lo, hi = INDEX_GZ_RANGE if icenc == "gzip" else INDEX_RAW_RANGE
+            checks.add("legacy-index-size", lo <= iclen <= hi,
+                       f"{'gzip ' if icenc == 'gzip' else '明文 '}{fmt_bytes(iclen)}")
 
     # ── 6. 关键页面 ─────────────────────────────────────────────────
     key_pages = [
