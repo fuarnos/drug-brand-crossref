@@ -41,6 +41,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
+.tag.sg{color:#7a1f3d;border-color:#e3b7c5}
 /* v0.7.x：ATC 类别 / 大类浏览 */
 .atcgrid,.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:8px;margin:10px 0}
@@ -176,14 +177,14 @@ html.u1-off #u1guide{display:none!important}
 .u2chip .u2n.empty{color:var(--muted);font-style:italic}
 /* v0.6.6：成分页多国并排矩阵（行=规格/剂型/释放，列=国家；服务端默认 en 序，客户端按语言重排） */
 .matwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
-table.matrix{width:100%;border-collapse:collapse;min-width:620px}
+table.matrix{width:100%;border-collapse:collapse;min-width:860px}
 table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
   text-align:left;vertical-align:top;font-size:14px}
 table.matrix thead th{white-space:nowrap;font-weight:650}
 table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
 table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
 @media (max-width:719px){
-  table.matrix{min-width:560px}
+  table.matrix{min-width:840px}
   .matwrap{margin:8px 0}
 }
 @media (max-width:719px){
