@@ -10,8 +10,9 @@
     404.html            路径不存在时的兜底页
     robots.txt          全站可抓 + sitemap 地址
     sitemap.xml         全站 HTML 的 sitemap
-    data/index.json     检索索引（兼容回退：?legacy=1 或核心加载失败时用）
-    data/idx/core.json  检索索引的列式 + 字典编码核心（P1；客户端解码回 index.json 的结构）
+    data/index.json     旧检索索引（v0.6.1 起默认不再生成；仅 WRITE_LEGACY_INDEX=1 过渡写）
+    data/idx/core.json  检索索引唯一真相源（列式 + 字典编码；客户端 decodeCore 解码）
+    data/idx/legacy-mini.json  可选二级兜底（WRITE_LEGACY_MINI=1 时生成；core 损坏时用）
     data/aliases.json   俗称 / 街头叫法 / 类别词索引
     data/confused.json  易混淆药对索引
     assets/             css + js
@@ -2837,12 +2838,13 @@ function fetchJSON(url){
   return fetch(url).then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status+' '+url); return r.json(); });
 }
 function loadMainIndex(){
-  // ?legacy=1 一键回滚：只走旧的 data/index.json，不碰 data/idx/core.json。
-  if(LEGACY) return fetchJSON(BASE + 'data/index.json');
+  // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json + decodeCore；
+  // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
+  // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
   return fetchJSON(BASE + 'data/idx/core.json').then(decodeCore).catch(err=>{
-    // 核心文件 404 / 网络失败 / 解码异常（例如灰度期数据没跟上）→ 自动回退旧全量索引。
-    if(window.console && console.warn) console.warn('core index unavailable, fallback to index.json', err);
-    return fetchJSON(BASE + 'data/index.json');
+    if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
+    return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
 }
 
@@ -4683,8 +4685,9 @@ def build_seo_files() -> None:
 #      "n":[int...], "mn":[int...], "u":[str...]   普通列
 #    },
 #    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
-#   f（剂型）客户端 0 处引用，直接丢弃（app.js 只用 k/d/c/x/s/l/n/v/vs/u/g/gn/m/mn/q）。
-CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m",
+#   f（剂型）v0.6.1 加入核心：B7 CSV 导出用 e.f，且 ?legacy=1 走 core 解码后需与旧
+#   index.json 完全同构（除 f 外 19 字段已验证 0 差异；f 只有 ~9 种字典值，core +0.2–0.3 MB）。
+CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m", "f",
                   "db", "sl", "rl", "wi")
 CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz")     # 值是数组：先 JSON 化再进字典
 
@@ -4734,7 +4737,7 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "xz", "s", "l", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn",
+    for f in ("c", "x", "xz", "s", "l", "f", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn",
               "m", "mn", "db", "sl", "rl", "wi"):
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
@@ -4997,8 +5000,7 @@ def main() -> None:
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
         .replace("data/idx/core.json", f"data/idx/core.json?v={int(time.time())}")
         .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={int(time.time())}")
-        .replace("data/idx/manifest.json", f"data/idx/manifest.json?v={int(time.time())}")
-        .replace("data/index.json", f"data/index.json?v={int(time.time())}"),
+        .replace("data/idx/manifest.json", f"data/idx/manifest.json?v={int(time.time())}"),
         encoding="utf-8")
 
     db = sqlite3.connect(DB)
@@ -5049,17 +5051,30 @@ def main() -> None:
 
     print("building index ...", flush=True)
     entries = load_index(db)
-    (OUT / "data" / "index.json").write_text(
-        json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    # P1：同一份 entries 再写一份列式 + 字典编码核心（客户端解码回 IDX）。
-    # index.json 双写保留：?legacy=1 与核心加载/解码失败时自动回退，发布体积可接受。
+    write_legacy_index = os.environ.get("WRITE_LEGACY_INDEX") == "1"
+    if write_legacy_index:
+        # v0.6.1 过渡开关：默认不再双写 data/index.json（dist -53 MB）。
+        # 需要临时回滚线上旧客户端时：$env:WRITE_LEGACY_INDEX='1'; python site/build.py
+        (OUT / "data" / "index.json").write_text(
+            json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    # P1：entries 写一份列式 + 字典编码核心（客户端 decodeCore 解码回 IDX，唯一真相源）。
     core = encode_core(entries)
     (OUT / "data" / "idx").mkdir(parents=True, exist_ok=True)
     (OUT / "data" / "idx" / "core.json").write_bytes(
         json.dumps(core, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    if os.environ.get("WRITE_LEGACY_MINI") == "1":
+        # 可选二级兜底（默认关）：核心损坏时客户端尝试 legacy-mini（<13.1 MB raw）。
+        mini_cols = {k: v for k, v in core["cols"].items()
+                     if k in {"k", "d", "dp", "c", "x", "s", "l", "n", "v", "u"}}
+        mini = {"v": 1, "n": core["n"], "cols": mini_cols, "q": core["q"]}
+        (OUT / "data" / "idx" / "legacy-mini.json").write_bytes(
+            json.dumps(mini, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
     print(f"  {len(entries)} keys", flush=True)
+    legacy_txt = (f" (index.json legacy "
+                  f"{(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB)"
+                  if write_legacy_index else " (legacy index.json: off)")
     print(f"  core.json  { (OUT / 'data' / 'idx' / 'core.json').stat().st_size / 1e6:.1f} MB"
-          f" (index.json {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB)", flush=True)
+          f"{legacy_txt}", flush=True)
 
     # P2 分片（task-36）：manifest + shard-*.json；客户端先拉 manifest，再按查询
     # 首字符/拼音首字母取 1-3 片；core.json 保留为完整回退。
@@ -5151,7 +5166,8 @@ def main() -> None:
     print(f"  maker pages: {n_maker} (threshold >= {MAKER_MIN_PRODUCTS} products)")
     print(f"  confused   : {n_conf} pairs")
     print(f"  warnings   : {n_warn} published")
-    print(f"  index.json : {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB")
+    print(f"  core.json  : {(OUT / 'data' / 'idx' / 'core.json').stat().st_size / 1e6:.1f} MB"
+          f" (legacy index.json: {'on' if os.environ.get('WRITE_LEGACY_INDEX') == '1' else 'off'})")
     print(f"  total size : {size / 1e6:.1f} MB")
     print(f"  open       : {OUT / 'index.html'}")
     db.close()

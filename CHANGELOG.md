@@ -4,6 +4,15 @@
 站点页脚、About 页、GitHub Release 三处保持同一个版本号；`/whats-new.html` 直接从这里生成。
 上线前先把本节写好，再建站、发布。
 
+## v0.6.1 — 2026-10-29
+
+- **发布体积 −54.9 MB**：停写冗余的 `data/index.json`（55.1 MB），`core.json` 成为唯一索引；
+  `?legacy=1` 与解码失败回退统一走 core + decodeCore，结果与旧 index 逐字段对拍一致；
+  GitHub Pages 单文件 50 MB 警告消失，发布更快。
+- **core 增加剂型字段**：B7 导出的剂型列不再为空；core raw 27.1 MB / gzip 6.4 MB。
+- 旧缓存客户端（≤v0.5.0）刷新前可能请求已删除的 index.json，刷新即恢复；
+  可用 `WRITE_LEGACY_INDEX=1` 临时恢复双写。
+
 ## v0.6.0 — 2026-10-29
 
 - **复方页跨市场对应**：9,291 个组合页全部新增「其他国家同组合」区块——同成分集合

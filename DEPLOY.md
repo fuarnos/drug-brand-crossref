@@ -28,8 +28,8 @@
 
 脚本按顺序做这些事：
 
-- 检查 `site/dist` 是否完整：`index.html`、`data/index.json`（≥ 5 MB）、
-  文件数 ≥ 24,000、没有 0 字节文件
+- 检查 `site/dist` 是否完整：`index.html`、`data/idx/core.json`（唯一搜索索引，≥ 10 MB raw；
+  过渡期若存在旧的 `data/index.json` 则仍要求 ≥ 5 MB）、文件数 ≥ 24,000、没有 0 字节文件
 - 拒绝在“最新文件写入不足 15 秒”或 `build.py` / `run_all.py` 还在运行时发布
 - 复制到系统临时目录，在干净目录里提交（不碰工作区、不碰 `main`）
 - 复制完再核对一次源目录，如果复制期间有构建启动就中止

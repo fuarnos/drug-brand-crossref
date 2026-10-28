@@ -8,7 +8,8 @@
     assets/ - no index.html - and the whole site returned 404.
 
     The script refuses to publish unless the local build looks complete:
-      * index.html and data/index.json exist
+      * index.html exists and the search index is present
+        (data/idx/core.json, or legacy data/index.json during the transition)
       * the file count is at least -MinFiles
       * no file was written in the last -StableSeconds seconds
       * no build.py / run_all.py process is running
@@ -111,9 +112,18 @@ Step 'Checking local build'
 if (-not (Test-Path (Join-Path $Dist 'index.html'))) {
     Fail 'site/dist/index.html is missing - the build is incomplete or still running'
 }
-$indexJson = Join-Path $Dist 'data\index.json'
-if (-not (Test-Path $indexJson)) { Fail 'site/dist/data/index.json is missing' }
-if ((Get-Item $indexJson).Length -lt 5MB) { Fail 'site/dist/data/index.json is too small - build is incomplete' }
+$coreJson = Join-Path $Dist 'data\idx\core.json'
+$legacyIndex = Join-Path $Dist 'data\index.json'
+if (Test-Path $legacyIndex) {
+    # Transition period ($env:WRITE_LEGACY_INDEX=1): legacy index.json is still written.
+    if ((Get-Item $legacyIndex).Length -lt 5MB) { Fail 'site/dist/data/index.json is too small - build is incomplete' }
+} else {
+    # v0.6.1: core.json is the only search index (~27 MB raw / ~6 MB gzip; <10 MB raw = incomplete).
+    if (-not (Test-Path $coreJson)) {
+        Fail 'site/dist/data/idx/core.json is missing - the search index was not written (build incomplete)'
+    }
+    if ((Get-Item $coreJson).Length -lt 10MB) { Fail 'site/dist/data/idx/core.json is too small - build is incomplete' }
+}
 
 $files = @(Get-ChildItem $Dist -Recurse -File -Force)
 $totalBytes = ($files | Measure-Object Length -Sum).Sum

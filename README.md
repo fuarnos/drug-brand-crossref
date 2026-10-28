@@ -76,6 +76,9 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 & $py etl/fix_dmd_salts.py --apply --confirm-real-db     # 英国 dm+d 盐型恢复
 & $py db/source_dates.py                # 覆盖表的「数据截止」：从各源自己的发布/生效/快照日期推
 & $py site/build.py                     # 生成静态站到 site/dist
+`site/build.py` 默认只写列式索引 `data/idx/core.json`（客户端 `decodeCore()` 解码，默认路径与
+`?legacy=1` 共用同一份数据）；旧 `data/index.json` 已停写，过渡期可用
+`$env:WRITE_LEGACY_INDEX='1'; & $py site/build.py` 临时恢复双写。
 & $py cli.py "泰诺"                      # 命令行查一条
 & $py db/check_data.py                  # 数据体检
 ```

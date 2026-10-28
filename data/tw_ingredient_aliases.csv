@@ -1,0 +1,894 @@
+﻿tw_token,status,inn_en,substance_id,salt,confidence,evidence,occ_full,occ_sample
+DL-METHYLEPHEDRINE HCL,suggested_inn_not_in_db,METHYLEPHEDRINE,,,medium,人工同义表识别为 METHYLEPHEDRINE，但库内无该成分,527,3
+GUAIACOL GLYCERYL ETHER,mapped,Guaifenesin,guaifenesin,,medium,人工同义表：GUAIACOL GLYCERYL ETHER,257,3
+ETHENZAMIDE,suggested_inn_not_in_db,ETHENZAMIDE,,,medium,人工同义表识别为 ETHENZAMIDE，但库内无该成分,210,3
+POTASSIUM GUAIACOLSULFONATE,suggested_inn_not_in_db,POTASSIUM GUAIACOLSULFONATE,,,medium,人工同义表识别为 POTASSIUM GUAIACOLSULFONATE，但库内无该成分,203,0
+NOSCAPINE,suggested_inn_not_in_db,NOSCAPINE,,,medium,人工同义表识别为 NOSCAPINE，但库内无该成分,115,2
+PANTOTHENATE CALCIUM,mapped,Calcium Pantothenate,calcium-pantothenate,,medium,人工同义表：PANTOTHENATE CALCIUM,94,2
+BROMISOVALUM,suggested_inn_not_in_db,BROMISOVAL,,,medium,人工同义表识别为 BROMISOVAL，但库内无该成分,88,0
+GLYCYRRHIZINIC ACID,mapped,Glycyrrhizin,glycyrrhizin,,medium,人工同义表：GLYCYRRHIZINIC ACID,86,0
+GUAIACOL GLYCOLATE,mapped,Guaifenesin,guaifenesin,,medium,人工同义表：GUAIACOL GLYCOLATE,78,2
+SILYMARIN,suggested_inn_not_in_db,SILYMARIN,,,medium,人工同义表识别为 SILYMARIN，但库内无该成分,66,3
+IODOCHLORHYDROXYQUIN,mapped,Clioquinol,clioquinol,,medium,人工同义表：IODOCHLORHYDROXYQUIN,63,0
+OROTIC ACID,suggested_inn_not_in_db,OROTIC ACID,,,medium,人工同义表识别为 OROTIC ACID，但库内无该成分,62,1
+THIAMINE DISULFIDE,suggested_inn_not_in_db,THIAMINE DISULFIDE,,,medium,人工同义表识别为 THIAMINE DISULFIDE，但库内无该成分,58,2
+METHIONINE DL-,mapped,Methionine,methionine,,medium,人工同义表：METHIONINE DL-,56,0
+OXETHAZAINE,suggested_inn_not_in_db,OXETHAZAINE,,,medium,人工同义表识别为 OXETHAZAINE，但库内无该成分,52,3
+ISOCONAZOLE NITRATE,suggested_inn_not_in_db,ISOCONAZOLE,,,medium,人工同义表识别为 ISOCONAZOLE，但库内无该成分,51,7
+POTASSIUM CRESOLSULFONATE,suggested_inn_not_in_db,POTASSIUMCRESOLSULFONATE,,,medium,人工同义表识别为 POTASSIUMCRESOLSULFONATE，但库内无该成分,51,0
+METAPROTERENOL SULFATE,mapped,Orciprenaline,orciprenaline,,medium,人工同义表：METAPROTERENOL SULFATE,46,2
+SCOPOLIA EXTRACT,suggested_inn_not_in_db,SCOPOLIA,,,medium,人工同义表识别为 SCOPOLIA，但库内无该成分,45,0
+CEPHRADINE,suggested_inn_not_in_db,CEPHALORIDINE,,,medium,人工同义表识别为 CEPHALORIDINE，但库内无该成分,43,0
+CHLORMEZANONE,suggested_inn_not_in_db,CHLORMEZANONE,,,medium,人工同义表识别为 CHLORMEZANONE，但库内无该成分,38,5
+LYSINE L- HCL,mapped,Lysine,lysine,,medium,名称相似度 0.92（LYSINEL ≈ Lysine）,36,0
+RETINOIC ACID,mapped,Tretinoin,tretinoin,,medium,人工同义表：RETINOIC ACID,36,2
+ALUMINUM SILICATE,suggested_inn_not_in_db,ALUMINUM SILICATE,,,medium,人工同义表识别为 ALUMINUM SILICATE，但库内无该成分,35,0
+CLOBETASOL-17-PROPIONATE,mapped,Clobetasol Propionate,clobetasol-propionate,,medium,人工同义表：CLOBETASOL-17-PROPIONATE,35,2
+DIPHENIDOL HYDROCHLORIDE,suggested_inn_not_in_db,DIPHENIDOL,,,medium,人工同义表识别为 DIPHENIDOL，但库内无该成分,35,1
+TRIGLYCERIDES MEDIUM CHAIN,mapped,Medium Chain Triglycerides,medium-chain-triglycerides,,medium,人工同义表：TRIGLYCERIDES MEDIUM CHAIN,33,1
+CARBOCYSTEINE,mapped,Carbocisteine,carbocisteine,,medium,人工同义表：CARBOCYSTEINE,32,3
+RFIXFC,unresolved,,,,uncertain,无匹配候选,32,0
+FISH-OIL RICH IN OMEGA-3 ACIDS,mapped,Fish Oil - Rich In Omega-3 Acids,fish-oil-rich-in-omega-3-acids,,high,与 substance.inn_en 精确匹配（归一后）,31,0
+ACETAMIDOCAPROIC ACID -EPSILON,mapped,Aminocaproic Acid,aminocaproic-acid,,medium,人工同义表：ACETAMIDOCAPROIC ACID -EPSILON,30,2
+BUTYLSCOPOLAMINE BROMIDE,mapped,Scopolamine Butylbromide,scopolamine-butylbromide,,medium,人工同义表：BUTYLSCOPOLAMINE BROMIDE,30,3
+MEPHENOXALONE,suggested_inn_not_in_db,MEPHENOXALONE,,,medium,人工同义表识别为 MEPHENOXALONE，但库内无该成分,30,1
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 7F,unresolved,,,,uncertain,无匹配候选,29,0
+CHLOROPHYLL SODIUM COPPER,mapped,Chlorophyllins,chlorophyllins,,medium,人工同义表：CHLOROPHYLL SODIUM COPPER,28,0
+ESTRADIOL ETHINYL,mapped,Ethinylestradiol,ethinylestradiol,,medium,人工同义表：ESTRADIOL ETHINYL,28,2
+NITROFURAZONE,suggested_inn_not_in_db,NITROFURAZONE,,,medium,人工同义表识别为 NITROFURAZONE，但库内无该成分,28,1
+EPRAZINONE HCL,suggested_inn_not_in_db,EPRAZINONE,,,medium,人工同义表识别为 EPRAZINONE，但库内无该成分,26,1
+GLYCYRRHIZINATE DIPOTASSIUM,mapped,Glycyrrhizin,glycyrrhizin,,medium,人工同义表：GLYCYRRHIZINATE DIPOTASSIUM,26,1
+CETIRIZINE DIHYDROCHLORIDE,mapped,Cetirizine,cetirizine,hydrochloride,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['HYDROCHLORIDE'],25,2
+ORYZANOL GAMMA-,mapped,Oryzanol,oryzanol,,medium,人工同义表：ORYZANOL GAMMA-,25,0
+PROSULTIAMINE,suggested_inn_not_in_db,PROSULTIAMINE,,,medium,人工同义表识别为 PROSULTIAMINE，但库内无该成分,25,0
+SENNOSIDE,mapped,Sennosides,sennosides,,medium,人工同义表：SENNOSIDE,25,3
+DIASTASE BIO-,mapped,Diastase,diastase,,medium,人工同义表：DIASTASE BIO-,24,0
+MEQUITAZINE,suggested_inn_not_in_db,MEQUITAZINA,,,medium,名称相似度 0.91（MEQUITAZINE ≈ Mequitazina）；库内仅有西语/中文重复成分 mx-es-mequitazina，无英文 INN,24,1
+VITAMIN U,suggested_inn_not_in_db,VITAMIN U,,,medium,人工同义表识别为 VITAMIN U，但库内无该成分,24,0
+CRM197 CARRIER PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,23,0
+CRYSTALLINE GLUCOSAMINE SULFATE,suggested_inn_not_in_db,GLUCOSAMINE SULFATE,,,medium,人工同义表识别为 GLUCOSAMINE SULFATE，但库内无该成分,23,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 1,unresolved,,,,uncertain,无匹配候选,23,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 19A,unresolved,,,,uncertain,无匹配候选,23,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 3,unresolved,,,,uncertain,无匹配候选,23,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 5,unresolved,,,,uncertain,无匹配候选,23,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 6A,unresolved,,,,uncertain,无匹配候选,23,0
+ETOFENAMATE,suggested_inn_not_in_db,ETOFENAMATE,,,medium,人工同义表识别为 ETOFENAMATE，但库内无该成分,21,2
+INACTIVATED POLIO VIRUS - TYPE 2,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,21,0
+INACTIVATED POLIO VIRUS -TYPE 1,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,21,0
+INACTIVATED POLIO VIRUS -TYPE 3,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,21,0
+NEWLASE,unresolved,,,,uncertain,无匹配候选,21,0
+OXAZOLAM,unresolved,,,,uncertain,无匹配候选,21,3
+ASPARTATE POTASSIUM L-,unresolved,,,,uncertain,无匹配候选,20,0
+RECOMBINANT FUSION PROTEIN LINKING COAGULATION FACTOR IX WITH ALBUMIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,20,0
+NOSCAPINE HCL,suggested_inn_not_in_db,NOSCAPINE,,,medium,人工同义表识别为 NOSCAPINE，但库内无该成分,19,0
+RIBOFLAVIN BUTYRATE,unresolved,,,,uncertain,无匹配候选,19,0
+UNDECYLENATE ZINC,uncertain,Undecilenato De Zinc,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 UNDECILENATODEZINC）,19,1
+CARRIER PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,18,0
+PANTHENOL D-,mapped,Panthenol,panthenol,,medium,名称相似度 0.95（PANTHENOLD ≈ Panthenol）,18,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 22F,unresolved,,,,uncertain,无匹配候选,18,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 33F,unresolved,,,,uncertain,无匹配候选,18,0
+POLYCRESOLSULFONATE,mapped,Policresulen,policresulen,,medium,人工同义表：POLYCRESOLSULFONATE,18,2
+TIPEPIDINE HIBENZATE,suggested_inn_not_in_db,TIPEPIDINE,,,medium,人工同义表识别为 TIPEPIDINE，但库内无该成分,18,3
+HUMAN ALBUMIN,unresolved,,,,uncertain,无匹配候选,17,2
+INACTIVATED POLIOVIRUS VACCINE TYPE I,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,17,0
+INACTIVATED POLIOVIRUS VACCINE TYPE II,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,17,0
+INACTIVATED POLIOVIRUS VACCINE TYPE III,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,17,0
+LYSINE L-,mapped,Lysine,lysine,,medium,名称相似度 0.92（LYSINEL ≈ Lysine）,17,0
+SCOPOLAMINE BROMOBUTYLATE,unresolved,,,,uncertain,无匹配候选,17,1
+NICAMETATE CITRATE,unresolved,,,,uncertain,无匹配候选,16,2
+ZOLPIDEM HEMITARTRATE,unresolved,,,,uncertain,无匹配候选,16,0
+A/DARWIN/1454/2025 -LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,15,2
+BASIC ALUMINUM SUCROSE SULFATE,unresolved,,,,uncertain,无匹配候选,15,3
+DEXTROSE HYDROUS,mapped,Dextrose Anhydrous,dextrose-anhydrous,,medium,名称相似度 0.94（DEXTROSEHYDROUS ≈ Dextrose Anhydrous）,15,0
+GLYCYRRHETIC ACID,unresolved,,,,uncertain,无匹配候选,15,0
+HISTIDINE L- HCL,mapped,Histidine,histidine,,medium,名称相似度 0.95（HISTIDINEL ≈ Histidine）,15,1
+PERTACTINE,mapped,Pertactin,pertactin,,medium,名称相似度 0.95（PERTACTINE ≈ Pertactin）,15,0
+PLATYCODON EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,15,0
+RFIX,unresolved,,,,uncertain,无匹配候选,15,0
+SYNTHETIC ALUMINUM SILICATE,unresolved,,,,uncertain,无匹配候选,15,1
+B/TOKYO/EIS13-175/2025-LIKE STRAIN,unresolved,,,,uncertain,无匹配候选,14,2
+BERBERINE TANNATE,unresolved,,,,uncertain,无匹配候选,14,0
+ESCIN,mapped,Escina,escina,,medium,名称相似度 0.91（ESCIN ≈ Escina）,14,1
+FURSULTIAMINE HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,14,0
+POTASSIUM L-ASPARTATE,suggested_inn_not_in_db,LASPARTATO,,,medium,名称相似度 0.90（LASPARTATE ≈ L-aspartato）；库内仅有西语/中文重复成分 mx-es-l-aspartato，无英文 INN,14,0
+REFINE SOYA,unresolved,,,,uncertain,无匹配候选,14,0
+A/MISSOURI/11/2025 PDM09-LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,13,0
+ETHAVERINE HCL,unresolved,,,,uncertain,无匹配候选,13,0
+PLATYCODON FLUID EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,13,0
+ALGINATE SODIUM,unresolved,,,,uncertain,无匹配候选,12,0
+BUTAMIRATE CITRATE,suggested_inn_not_in_db,BUTAMIRATE,,,medium,人工同义表识别为 BUTAMIRATE，但库内无该成分,12,3
+CABOZANTINIB -MALATE,mapped,Cabozantinib-Malate,cabozantinib-malate,,high,与 substance.inn_en 精确匹配（归一后）,12,0
+CONJUGATED OF HAEMOPHILUS INFLUENZAE TYPE B CAPSULAR POLYSACCHARIDE AND TETANUS TOXOID ADSORBED,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,12,0
+DIPOTASSIUM GLYCYRRHIZINATE,mapped,Dipotassium Glycyrrhizate,dipotassium-glycyrrhizate,,medium,名称相似度 0.96（DIPOTASSIUMGLYCYRRHIZINATE ≈ Dipotassium Glycyrrhizate）,12,0
+IMMUNOGLOBULIN HUMAN,uncertain,Inmunoglobulina G Humana,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 INMUNOGLOBULINAGHUMANA）,12,2
+MAGNESIUM ALUMINUM HYDROXIDE CO-DRIED GEL,mapped,Aluminum Hydroxide-Sucrose Dried Gel,aluminum-hydroxide-sucrose-dried-gel,,medium,名称相似度 0.92（ALUMINUMHYDROXIDECODRIEDGEL ≈ Aluminum Hydroxide-Sucrose Dried Gel）,12,0
+MAGNESIUM ALUMINUM METASILICATE,unresolved,,,,uncertain,无匹配候选,12,0
+METHOXYPHENAMINE HCL,unresolved,,,,uncertain,无匹配候选,12,0
+PERTUSSIS BORDETELLA,unresolved,,,,uncertain,无匹配候选,12,0
+PIPRINHYDRINATE,unresolved,,,,uncertain,无匹配候选,12,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 10A,unresolved,,,,uncertain,无匹配候选,12,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 11A,unresolved,,,,uncertain,无匹配候选,12,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 12F,unresolved,,,,uncertain,无匹配候选,12,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 8,unresolved,,,,uncertain,无匹配候选,12,0
+SORBIC ACID,mapped,Ascorbic Acid,ascorbic-acid,,medium,名称相似度 0.91（SORBICACID ≈ Ascorbic Acid）,12,2
+A/VICTORIA/4897/2022 PDM09-LIKE STRAIN,unresolved,,,,uncertain,无匹配候选,11,0
+ALUMINUM BIS ALUMINUM ACETYLSALICYLA,unresolved,,,,uncertain,无匹配候选,11,0
+APRONALIDE,unresolved,,,,uncertain,无匹配候选,11,0
+CALCIUM BROMIDE,unresolved,,,,uncertain,无匹配候选,11,0
+D-ALPHA-TOCOPHEROL ACETATE,mapped,D-Alpha-Tocopherol,d-alpha-tocopherol,,medium,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['ACETATE']（库内无对应盐 variant，按 base 记录）,11,0
+DIFLUCORTOLONE 21-VALERATE,unresolved,,,,uncertain,无匹配候选,11,1
+METHYLEPHEDRINE HCL,suggested_inn_not_in_db,METHYLEPHEDRINE,,,medium,人工同义表识别为 METHYLEPHEDRINE，但库内无该成分,11,0
+OLIGOSACCHARIDE SEROTYPE 18C,unresolved,,,,uncertain,无匹配候选,11,0
+ALBUMIN TANNATE,unresolved,,,,uncertain,无匹配候选,10,0
+ASPARTATE MAGNESIUM L-,unresolved,,,,uncertain,无匹配候选,10,0
+ASPARTATE POTASSIUM MAGNESIUM L-,unresolved,,,,uncertain,无匹配候选,10,0
+B/AUSTRIA/1359417/2021 - LIKE STRAIN,unresolved,,,,uncertain,无匹配候选,10,0
+DIHYDROERGOTOXINE METHANESULFONATE,unresolved,,,,uncertain,无匹配候选,10,0
+DIHYDROXYALUMINIUM ALLANTOINATE,unresolved,,,,uncertain,无匹配候选,10,0
+HISTIDINE L- HCL MONOHYDRATE,mapped,Histidine,histidine,,medium,名称相似度 0.95（HISTIDINEL ≈ Histidine）,10,0
+L-ORNITHINE HCL,mapped,Ornithine,ornithine,,medium,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['HYDROCHLORIDE']（库内无对应盐 variant，按 base 记录）,10,0
+MENTHOL OIL,unresolved,,,,uncertain,无匹配候选,10,0
+NICOTINE RESINATE,unresolved,,,,uncertain,无匹配候选,10,0
+NIFLUMIC ACID,unresolved,,,,uncertain,无匹配候选,10,1
+OXOLAMINE CITRATE,suggested_inn_not_in_db,OXOLAMINE,,,medium,人工同义表识别为 OXOLAMINE，但库内无该成分,10,2
+RECOMBINANT SOMATROPIN,unresolved,,,,uncertain,无匹配候选,10,0
+SCOPOLIA EXTRACT POWDER,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,10,0
+SODIUM RABEPRAZOLE,mapped,Rabeprazole,rabeprazole,sodium,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['SODIUM'],10,1
+TOLPERISONE HCL,unresolved,,,,uncertain,无匹配候选,10,0
+ALUMINUM DIHYDROXYALLANTOINATE,unresolved,,,,uncertain,无匹配候选,9,0
+AMINO ACID,mapped,Amino Acids,amino-acids,,medium,名称相似度 0.95（AMINOACID ≈ Amino Acids）,9,0
+BETAMETHASONE 17-VALERATE,unresolved,,,,uncertain,无匹配候选,9,0
+BIODIASTASE,unresolved,,,,uncertain,无匹配候选,9,0
+DIHYDROXYPROPYL THEOPHYLLINE,unresolved,,,,uncertain,无匹配候选,9,0
+ESTROGEN CONJUGATED,mapped,"Estrogens, Conjugated",estrogens-conjugated,,medium,"名称相似度 0.97（ESTROGENCONJUGATED ≈ Estrogens, Conjugated）",9,0
+GENTAMYCIN,mapped,Gentamicin,gentamicin,,medium,名称相似度 0.90（GENTAMYCIN ≈ Gentamicin）,9,0
+HYDROXYPROPYLMETHYLCELLULOSE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,9,1
+METHSCOPOLAMINE METHYLSULFATE,unresolved,,,,uncertain,无匹配候选,9,0
+SACUBITRIL/VALSARTAN AS SACUBITRIL VALSARTAN SODIUM SALT COMPLEX,unresolved,,,,uncertain,无匹配候选,9,0
+TOCOPHEROL ALPHA D-,unresolved,,,,uncertain,无匹配候选,9,0
+TOLTERODINE L-TARTRATE,mapped,Tolterodine,tolterodine,,medium,名称相似度 0.96（TOLTERODINEL ≈ Tolterodine）,9,0
+A/THAILAND/8/2022 - LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,8,0
+AMINOETHYLSULFONIC ACID,unresolved,,,,uncertain,无匹配候选,8,0
+B/PHUKET/3073/2013 - LIKE STRAIN,unresolved,,,,uncertain,无匹配候选,8,0
+BENZARONE,unresolved,,,,uncertain,无匹配候选,8,0
+BISBENTIAMINE,unresolved,,,,uncertain,无匹配候选,8,0
+BUCLIZINE 2HCL,unresolved,,,,uncertain,无匹配候选,8,2
+CALCIUM SENNOSIDES,mapped,Sennosides,sennosides,,medium,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['CALCIUM']（库内无对应盐 variant，按 base 记录）,8,0
+CEPHALORIDINE,unresolved,,,,uncertain,无匹配候选,8,1
+CONJUGATED TO THE TETANUS PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,8,0
+DIOCTAHEDRAL SMECTITE,unresolved,,,,uncertain,无匹配候选,8,0
+EPRAZINONE 2HCL,unresolved,,,,uncertain,无匹配候选,8,2
+LACTOMIN,unresolved,,,,uncertain,无匹配候选,8,1
+LIVE ATTENUATED RECOMBINANT JAPANESE ENCEPHALITIS VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,8,0
+MALIC ACID L-,unresolved,,,,uncertain,无匹配候选,8,0
+MEASLES VACCINE LIVE ATTENUATED,mapped,Measles Virus Vaccine Live Attenuated,measles-virus-vaccine-live-attenuated,,medium,名称相似度 0.92（MEASLESVACCINELIVEATTENUATED ≈ Measles Virus Vaccine Live Attenuated）,8,0
+METHYLEPHEDRINE DL-,unresolved,,,,uncertain,无匹配候选,8,0
+MUMPS VACCINE LIVE ATTENUATED,mapped,Mumps Virus Vaccine Live Attenuated,mumps-virus-vaccine-live-attenuated,,medium,名称相似度 0.91（MUMPSVACCINELIVEATTENUATED ≈ Mumps Virus Vaccine Live Attenuated）,8,0
+NINTEDANIB ETHANESULFONATE,unresolved,,,,uncertain,无匹配候选,8,0
+POLYSACCHARIDE OF HAEMOPHILUS INFLUENZAE TYPE B,unresolved,,,,uncertain,无匹配候选,8,0
+RECOMBINANT HUMAN TISSUE-TYPE PLASMINOGEN ACTIVATOR,unresolved,,,,uncertain,无匹配候选,8,0
+SODIUM COPPER CHLOROPHYLLIN,unresolved,,,,uncertain,无匹配候选,8,0
+SYNTHETIC HYDROTALCITE,unresolved,,,,uncertain,无匹配候选,8,0
+THIOGLYCOLATE CALCIUM TRIHYDRATE,unresolved,,,,uncertain,无匹配候选,8,1
+4-HYDROXY-3-METHOXYBENZYL NONYLIC ACID AMIDE,unresolved,,,,uncertain,无匹配候选,7,0
+AZULENE WATER SOLUBLE,unresolved,,,,uncertain,无匹配候选,7,0
+CHARCOAL,unresolved,,,,uncertain,无匹配候选,7,0
+CITRATE,uncertain,Citrato De,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 CITRATODE）,7,0
+DIMEMORFAN PHOSPHATE,unresolved,,,,uncertain,无匹配候选,7,0
+GLYCYRRHIZINATE MONOAMMONIUM,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,7,0
+LACTOBACILLI ACIDOPHILUS,mapped,Lactobacillus Acidophilus,lactobacillus-acidophilus,,medium,名称相似度 0.94（LACTOBACILLIACIDOPHILUS ≈ Lactobacillus Acidophilus）,7,2
+MELITRACEN HCL,mapped,Melitraceno,melitraceno,,medium,名称相似度 0.95（MELITRACEN ≈ Melitraceno）,7,0
+METAMAGNESIUM ALUMINO SILICATE,unresolved,,,,uncertain,无匹配候选,7,0
+N -L-ALANYL-L-GLUTAMINE,mapped,L-Alanyl-L-Glutamine,l-alanyl-l-glutamine,,medium,名称相似度 0.97（NLALANYLLGLUTAMINE ≈ L-Alanyl-L-Glutamine）,7,0
+NITROXOLINE,unresolved,,,,uncertain,无匹配候选,7,1
+SIMETHICONE EMULSION 30%,unresolved,,,,uncertain,无匹配候选,7,1
+SODIUM MYCOPHENOLATE,mapped,Mycophenolate,mycophenolate,sodium,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['SODIUM'],7,0
+SORBITOL D-,mapped,Sorbitol,sorbitol,,medium,名称相似度 0.94（SORBITOLD ≈ Sorbitol）,7,0
+TOCOPHEROL ALPHA-,unresolved,,,,uncertain,无匹配候选,7,0
+TYPE 11 L1 PROTEIN,mapped,Hpv Type 11 L1 Protein,hpv-type-11-l1-protein,,medium,名称相似度 0.91（TYPE11L1PROTEIN ≈ Hpv Type 11 L1 Protein）,7,0
+TYPE 16 L1 PROTEIN,mapped,Hpv Type 16 L1 Protein,hpv-type-16-l1-protein,,medium,名称相似度 0.91（TYPE16L1PROTEIN ≈ Hpv Type 16 L1 Protein）,7,0
+TYPE 18 L1 PROTEIN,mapped,Hpv Type 18 L1 Protein,hpv-type-18-l1-protein,,medium,名称相似度 0.91（TYPE18L1PROTEIN ≈ Hpv Type 18 L1 Protein）,7,0
+TYPE 31 L1 PROTEIN,mapped,Hpv Type 31 L1 Protein,hpv-type-31-l1-protein,,medium,名称相似度 0.91（TYPE31L1PROTEIN ≈ Hpv Type 31 L1 Protein）,7,0
+TYPE 33 L1 PROTEIN,mapped,Hpv Type 33 L1 Protein,hpv-type-33-l1-protein,,medium,名称相似度 0.91（TYPE33L1PROTEIN ≈ Hpv Type 33 L1 Protein）,7,0
+TYPE 45 L1 PROTEIN,mapped,Hpv Type 45 L1 Protein,hpv-type-45-l1-protein,,medium,名称相似度 0.91（TYPE45L1PROTEIN ≈ Hpv Type 45 L1 Protein）,7,0
+TYPE 52 L1 PROTEIN,mapped,Hpv Type 52 L1 Protein,hpv-type-52-l1-protein,,medium,名称相似度 0.91（TYPE52L1PROTEIN ≈ Hpv Type 52 L1 Protein）,7,0
+TYPE 58 L1 PROTEIN,mapped,Hpv Type 58 L1 Protein,hpv-type-58-l1-protein,,medium,名称相似度 0.91（TYPE58L1PROTEIN ≈ Hpv Type 58 L1 Protein）,7,0
+TYPE 6 L1 PROTEIN,mapped,Hpv Type 6 L1 Protein,hpv-type-6-l1-protein,,medium,名称相似度 0.90（TYPE6L1PROTEIN ≈ Hpv Type 6 L1 Protein）,7,0
+VITAMIN K ACTIVITY,unresolved,,,,uncertain,无匹配候选,7,0
+ACETYLSALICYLIC ACID,unresolved,,,,uncertain,无匹配候选,6,0
+BACILLUS COAGULANS,unresolved,,,,uncertain,无匹配候选,6,0
+BELLADONNA ALKALOID,unresolved,,,,uncertain,无匹配候选,6,0
+CALCIUM POLYSTYRENE SULFONATE EQUIVALENT TO CALCIUM,unresolved,,,,uncertain,无匹配候选,6,1
+CAPMATINIB DIHYDROCHLORIDE MONOHYDRATE,mapped,Capmatinib,capmatinib,hydrochloride,high,"去盐/立体前缀后匹配 substance.inn_en；识别盐: ['MONOHYDRATE', 'HYDROCHLORIDE']",6,0
+CASSIA LIQUID EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,6,0
+CLOPIDOGREL HYDROGEN SULPHATE,unresolved,,,,uncertain,无匹配候选,6,1
+CLOSTRIDIUM BOTULINUM TOXIN TYPE A COMPLEX,unresolved,,,,uncertain,无匹配候选,6,0
+CRYSTALLINE D-GLUCOSAMINE SULFATE,unresolved,,,,uncertain,无匹配候选,6,1
+EDOXABAN TOSILATE,unresolved,,,,uncertain,无匹配候选,6,0
+ESTRADIOL-17-CYCLOPENTYL PROPIONATE,unresolved,,,,uncertain,无匹配候选,6,0
+GENTIAN,unresolved,,,,uncertain,无匹配候选,6,0
+GLYCYRRHIZINE EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,6,0
+ISOSORBIDE 5-MONONITRATE,mapped,Isosorbide-5-Mononitrate,isosorbide-5-mononitrate,,high,与 substance.inn_en 精确匹配（归一后）,6,1
+ISOXSUPRINE HCL,unresolved,,,,uncertain,无匹配候选,6,0
+L-CARNITINE INNER SALT,unresolved,,,,uncertain,无匹配候选,6,0
+LIVE ATTENUATED MEASLES VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,0
+LIVE ATTENUATED MUMPS VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,0
+LIVE ATTENUATED RUBELLA VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,0
+LIVE ATTENUATED VARICELLA VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,0
+LIVE ATTENUATED VARICELLA VIRUS VACCINE OKA STRAIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,0
+LYSINE ACETYLSALICYLATE,unresolved,,,,uncertain,无匹配候选,6,1
+LYSINE L- HCL 2H2O,unresolved,,,,uncertain,无匹配候选,6,0
+MAGNESIUM SULPHATE HEPTAHYDRATE,unresolved,,,,uncertain,无匹配候选,6,0
+MEBHYDROLIN,unresolved,,,,uncertain,无匹配候选,6,0
+MICRONIZED PURIFIED FLAVONOID FRACTION,unresolved,,,,uncertain,无匹配候选,6,0
+N-ACETYL TYROSINE L-,unresolved,,,,uncertain,无匹配候选,6,0
+OXELADIN CITRATE,suggested_inn_not_in_db,OXELADINA,,,medium,名称相似度 0.94（OXELADIN ≈ Oxeladina）；库内仅有西语/中文重复成分 mx-es-oxeladina，无英文 INN,6,2
+PICOSULFATE SODIUM,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 15A,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 15B,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 16F,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 17F,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 20A,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 23A,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 23B,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 24F,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 31,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 35B,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE 9N,unresolved,,,,uncertain,无匹配候选,6,0
+PNEUMOCOCCAL POLYSACCHARIDE SEROTYPE DEOAC15B,unresolved,,,,uncertain,无匹配候选,6,0
+POVIDONE LODINE,mapped,Povidone Iodine,povidone-iodine,,medium,名称相似度 0.93（POVIDONELODINE ≈ Povidone Iodine）,6,2
+R-DNA HEPATITIS B SURFACE ANTIGEN ADSORBED,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,0
+SIROLIMUS NANOSYSTEMS DISPERSION,unresolved,,,,uncertain,无匹配候选,6,0
+SODIUM DIBUNATE,mapped,Dibunate,dibunate,,medium,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['SODIUM']（库内无对应盐 variant，按 base 记录）,6,0
+SODIUM S-LACTATE,mapped,Sodium,sodium,,medium,名称相似度 0.92（SODIUMS ≈ Sodium）,6,0
+TIMEPIDIUM BROMIDE,unresolved,,,,uncertain,无匹配候选,6,0
+VARICELLA ZOSTER VIRUS GLYCOPROTEIN E,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,6,6
+VITAMIN C,mapped,Vitamina C,vitamina-c,,medium,名称相似度 0.94（VITAMINC ≈ Vitamina C）,6,0
+WATER DISTILLED,unresolved,,,,uncertain,无匹配候选,6,0
+BELLADONNA TOTAL ALKALOIDS,unresolved,,,,uncertain,无匹配候选,5,0
+BENACTYZINE METHOBROMIDE,unresolved,,,,uncertain,无匹配候选,5,0
+BENFOTIAMIN,mapped,Benfotiamina,benfotiamina,,medium,名称相似度 0.96（BENFOTIAMIN ≈ Benfotiamina）,5,0
+BIODIASTASE 1000,unresolved,,,,uncertain,无匹配候选,5,0
+BUTINOLIN PHOSPHATE,unresolved,,,,uncertain,无匹配候选,5,0
+CAFFEINE DEHYDRATE,unresolved,,,,uncertain,无匹配候选,5,0
+CAPSICUM TINCTURE,unresolved,,,,uncertain,无匹配候选,5,0
+CINNAMON BARK POWDER,unresolved,,,,uncertain,无匹配候选,5,0
+COCARBOXYLASE,unresolved,,,,uncertain,无匹配候选,5,0
+DIHYDROXYALUMINUM AMINOACETATE,unresolved,,,,uncertain,无匹配候选,5,0
+DIOCTYL SODIUM SULFOSUCCINATE,unresolved,,,,uncertain,无匹配候选,5,0
+DYBENAL,unresolved,,,,uncertain,无匹配候选,5,0
+FLUDIAZEPAM,unresolved,,,,uncertain,无匹配候选,5,0
+FRADIOMYCIN SULFATE,unresolved,,,,uncertain,无匹配候选,5,0
+HIGHLY REFINED FISH OIL,unresolved,,,,uncertain,无匹配候选,5,0
+HYDROXYBUTYRIC ACID BETA- P-PHENETIDIDE,unresolved,,,,uncertain,无匹配候选,5,0
+ISOPROPYLMETHYLPHENOL,unresolved,,,,uncertain,无匹配候选,5,0
+LIPASE AP6,unresolved,,,,uncertain,无匹配候选,5,0
+MALIC ACID DL-,unresolved,,,,uncertain,无匹配候选,5,0
+METHISOPRINOL,suggested_inn_not_in_db,METISOPRINOL,,,medium,名称相似度 0.96（METHISOPRINOL ≈ Metisoprinol）；库内仅有西语/中文重复成分 mx-es-metisoprinol，无英文 INN,5,0
+MRNA-1273.262 LNP,unresolved,,,,uncertain,无匹配候选,5,0
+N-ACETYL-L-CYSTEINE,mapped,Acetylcysteine,acetylcysteine,,medium,名称相似度 0.93（NACETYLLCYSTEINE ≈ Acetylcysteine）,5,0
+N-METHYLSCOPOLAMINE METHYLSULFATE,unresolved,,,,uncertain,无匹配候选,5,0
+POLYGALA FLUIDEXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,5,0
+RECOMBINANT HUMAN LUTENISING HORMONE,unresolved,,,,uncertain,无匹配候选,5,0
+SCOPOLAMINE-N-BUTYLBROMIDE,mapped,Scopolamine Butylbromide,scopolamine-butylbromide,,medium,名称相似度 0.98（SCOPOLAMINENBUTYLBROMIDE ≈ Scopolamine Butylbromide）,5,1
+SEAPROSE S,unresolved,,,,uncertain,无匹配候选,5,1
+SODIUM BISULFITE,unresolved,,,,uncertain,无匹配候选,5,0
+SPHERICAL ABSORPTIVE CARBON,unresolved,,,,uncertain,无匹配候选,5,0
+STERILE SODIUM COLISTIN METHANESULFONATE,unresolved,,,,uncertain,无匹配候选,5,0
+STREPTOCOCCUS FAECALIS,unresolved,,,,uncertain,无匹配候选,5,0
+THIAMINE TETRAHYDROFURFURYL DISULFIDE,unresolved,,,,uncertain,无匹配候选,5,0
+TIPEPIDINE CITRATE,unresolved,,,,uncertain,无匹配候选,5,0
+TOCOPHEROL ALPHA DL-,unresolved,,,,uncertain,无匹配候选,5,0
+TOCOPHEROL NICOTINATE,unresolved,,,,uncertain,无匹配候选,5,0
+VALETHAMATE BROMIDE,unresolved,,,,uncertain,无匹配候选,5,0
+VARICELLA VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,5,0
+-2 3-BIS PROPANE-1-SULPHONIC ACIDS SODIUM SALT-MONOHYDRATE,unresolved,,,,uncertain,无匹配候选,4,0
+A/MISSOURI/11/2025 IVR-279 PDM09-LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,4,2
+A/THAILAND/8/2022 -LIKE STRAIN,unresolved,,,,uncertain,无匹配候选,4,0
+ACETYLSALICYLATE,mapped,Ethyl Salicylate,ethyl-salicylate,,medium,名称相似度 0.90（ACETYLSALICYLATE ≈ Ethyl Salicylate）,4,0
+ALUMINUM CHLORHYDROXYALLANTOINATE,unresolved,,,,uncertain,无匹配候选,4,0
+AVERAGE MOLECULAR WEIGHT 130000,unresolved,,,,uncertain,无匹配候选,4,0
+B/PHUKET/3073/2013,unresolved,,,,uncertain,无匹配候选,4,0
+BISOPROLOL HEMIFUMARATE,mapped,Bisoprolol,bisoprolol,fumarate,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['FUMARATE'],4,0
+BUCLIZINE HCL,unresolved,,,,uncertain,无匹配候选,4,0
+CARBON ACTIVATED,unresolved,,,,uncertain,无匹配候选,4,1
+CEPHRADINE MONOHYDRATE,suggested_inn_not_in_db,CEPHALORIDINE,,,medium,人工同义表识别为 CEPHALORIDINE，但库内无该成分,4,2
+CEPHRADINE STERILE BUFFERED,unresolved,,,,uncertain,无匹配候选,4,0
+CHLOROPHYLLIN,mapped,Chlorophyllins,chlorophyllins,,medium,名称相似度 0.96（CHLOROPHYLLIN ≈ Chlorophyllins）,4,0
+CHLORPHENESIN CARBAMATE,unresolved,,,,uncertain,无匹配候选,4,0
+CREOSOTE,unresolved,,,,uncertain,无匹配候选,4,0
+CYANOCOBALAMINE,mapped,Cyanocobalamin,cyanocobalamin,,medium,名称相似度 0.97（CYANOCOBALAMINE ≈ Cyanocobalamin）,4,0
+CYSTEINE L- HCL,mapped,Cysteine,cysteine,,medium,名称相似度 0.94（CYSTEINEL ≈ Cysteine）,4,0
+CYSTINE L-,mapped,Cystine,cystine,,medium,名称相似度 0.93（CYSTINEL ≈ Cystine）,4,0
+DER FAR EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,4,0
+DER PTE EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,4,0
+DIASTASE ASPERGILLUS ORYZAE,unresolved,,,,uncertain,无匹配候选,4,1
+DIPHENHYDRAMINE TANNATE,unresolved,,,,uncertain,无匹配候选,4,0
+FLAVINEADENINE DINUCLEOTIDE SODIUM,unresolved,,,,uncertain,无匹配候选,4,1
+FLOMOXEF,unresolved,,,,uncertain,无匹配候选,4,0
+FLOPROPIONE,unresolved,,,,uncertain,无匹配候选,4,1
+FLUDEOXYGLUCOSE,mapped,Fludeoxyglucose F 18,fludeoxyglucose-f-18,,medium,名称相似度 0.91（FLUDEOXYGLUCOSE ≈ Fludeoxyglucose F 18）,4,1
+FLUFENAMIC ACID,unresolved,,,,uncertain,无匹配候选,4,0
+FOLINATE CALCIUM,unresolved,,,,uncertain,无匹配候选,4,0
+GENTIAN POWDER,unresolved,,,,uncertain,无匹配候选,4,0
+IRON CARBOXYMALTOSE,unresolved,,,,uncertain,无匹配候选,4,0
+IXABEPILONE,suggested_inn_not_in_db,IXABEPILONA,,,medium,名称相似度 0.91（IXABEPILONE ≈ Ixabepilona）；库内仅有西语/中文重复成分 mx-es-ixabepilona，无英文 INN,4,0
+L-HISTIDINE HYDROCHLORIDE MONOHYDRATE,mapped,Histidine,histidine,,medium,"去盐/立体前缀后匹配 substance.inn_en；识别盐: ['MONOHYDRATE', 'HYDROCHLORIDE']（库内无对应盐 variant，按 base 记录）",4,0
+MALTOSE,unresolved,,,,uncertain,无匹配候选,4,0
+MEASLES VACCINE LIVE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,4,0
+MESULPHEN,unresolved,,,,uncertain,无匹配候选,4,0
+METHYLPREDNISOLONE 21- HEMISUCCINATE,unresolved,,,,uncertain,无匹配候选,4,0
+METHYLPREDNISONE,mapped,Methylprednisolone,methylprednisolone,,medium,名称相似度 0.94（METHYLPREDNISONE ≈ Methylprednisolone）,4,0
+MIROGABALIN BESILATE,unresolved,,,,uncertain,无匹配候选,4,0
+MIXTURE OF REFINE OLIVE OIL AND REFINE SOYA BEAN OIL,unresolved,,,,uncertain,无匹配候选,4,0
+MONOSODIUM IBANDRONATE MONOHYDRATE,unresolved,,,,uncertain,无匹配候选,4,0
+MRNA-1283.262 LNP,unresolved,,,,uncertain,无匹配候选,4,0
+MRNA-1345 LNP,unresolved,,,,uncertain,无匹配候选,4,0
+MUMPS VACCINE LIVE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,4,0
+NADIFLOXACIN,mapped,Nadifloxacino,nadifloxacino,,medium,名称相似度 0.96（NADIFLOXACIN ≈ Nadifloxacino）,4,3
+OKA/MERCK VARICELLA VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,4,0
+PERINDOPRIL TERT-BUTYLAMINE,unresolved,,,,uncertain,无匹配候选,4,1
+PIPERILATE HCL,unresolved,,,,uncertain,无匹配候选,4,0
+POLY STARCH MOLAR SUBS 0.38-0.45,unresolved,,,,uncertain,无匹配候选,4,0
+POLYMAGAL,unresolved,,,,uncertain,无匹配候选,4,0
+POLYMIGEL,unresolved,,,,uncertain,无匹配候选,4,0
+PONATINIB FREE BASE,unresolved,,,,uncertain,无匹配候选,4,0
+PRIDINOL METHANESULFONATE,unresolved,,,,uncertain,无匹配候选,4,2
+PURIFIED FILAMENTOUS HAEMAGGLUTININ,unresolved,,,,uncertain,无匹配候选,4,0
+PURIFIED PERTUSSIS TOXOID,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,4,0
+RHASB,unresolved,,,,uncertain,无匹配候选,4,0
+RHGALNS,unresolved,,,,uncertain,无匹配候选,4,0
+RSVPREF3 ANTIGEN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,4,0
+RUBELLA LIVE,unresolved,,,,uncertain,无匹配候选,4,0
+SARS-COV-2,uncertain,Sars-Cov-2 Rs,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 SARSCOV2RS）,4,0
+SELUMETINIB HYD-SULFATE,uncertain,Selumetinib,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 SELUMETINIB）,4,0
+SENNOSIDE A+B,mapped,Sennosides,sennosides,,medium,名称相似度 0.90（SENNOSIDEA ≈ Sennosides）,4,0
+SIPONIMOD FUMARIC ACID,mapped,Siponimod,siponimod,,medium,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['FUMARATE']（库内无对应盐 variant，按 base 记录）,4,4
+SODIUM CARBOXYMETHYL CELLULOSE,mapped,Carboxymethylcellulose,carboxymethylcellulose,sodium,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['SODIUM'],4,0
+TAK-491,unresolved,,,,uncertain,无匹配候选,4,2
+TC-99M SODIUM PERTECHNETATE,unresolved,,,,uncertain,无匹配候选,4,0
+TRICHLORMETHIAZIDE,unresolved,,,,uncertain,无匹配候选,4,1
+TRIMETOQUINOL HCL,unresolved,,,,uncertain,无匹配候选,4,0
+VWF RCO ACTIVITY,unresolved,,,,uncertain,无匹配候选,4,0
+WATER PURIFIED,unresolved,,,,uncertain,无匹配候选,4,0
+2-DEOXY-2- 18F FLUORO-D-GLUCOSE,unresolved,,,,uncertain,无匹配候选,3,0
+A/MASSACHUSETTS/18/2022 -LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+A/TASMANIA/318/2025 CVR-351 PDM09-LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+A/TASMANIA/787/2025 CVR-388 -LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+A/WISCONSIN/67/2022 PDM09 - LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+ACETAMINOPHEN 90%,unresolved,,,,uncertain,无匹配候选,3,0
+ADRENALINE TARTRATE,unresolved,,,,uncertain,无匹配候选,3,0
+AGGLUTINOGENS FIMBRIAE 2+3,suggested_inn_not_in_db,3,,,medium,与 substance.inn_en 精确匹配（归一后）；库内仅有西语/中文重复成分 cn-198c89bb86，无英文 INN,3,0
+AMIDOTRIZOIC ACID,unresolved,,,,uncertain,无匹配候选,3,0
+ARMENIACA WATER,unresolved,,,,uncertain,无匹配候选,3,0
+AZULENE SODIUM SULFONATE,unresolved,,,,uncertain,无匹配候选,3,0
+B/ARIZONA/21/2025,unresolved,,,,uncertain,无匹配候选,3,0
+B/AUSTRIA/1359417/2021 - LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+B/PHUKET/3073/2013-LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+B/SINGAPORE/INFTT-16-0610/2016,unresolved,,,,uncertain,无匹配候选,3,0
+BIFIDOBACTERIUM INFANTIS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+BIOSYNTHETIC HUMAN INSULIN,unresolved,,,,uncertain,无匹配候选,3,0
+BROMOPRIDE,unresolved,,,,uncertain,无匹配候选,3,0
+CADEXOMER IODINE,mapped,Cadexomer-Iodine,cadexomer-iodine,,high,与 substance.inn_en 精确匹配（归一后）,3,0
+CETRAXATE HCL,unresolved,,,,uncertain,无匹配候选,3,0
+CETUXIMAB CHIMERIC ANTIBODY,mapped,Cetuximab,cetuximab,,medium,人工同义表：CETUXIMAB CHIMERIC ANTIBODY,3,2
+CHOLINE OROTATE,unresolved,,,,uncertain,无匹配候选,3,0
+CITRULLINE MALATE,unresolved,,,,uncertain,无匹配候选,3,0
+CLOSTRIDIUM BOTULINUM TOXIN TYPE A,unresolved,,,,uncertain,无匹配候选,3,0
+COPTIS POWDER,unresolved,,,,uncertain,无匹配候选,3,0
+CYANOCOBALAMIN 0.1%,unresolved,,,,uncertain,无匹配候选,3,0
+DEXKETOPROFEN TROMETAMOL,mapped,Dexketoprofen,dexketoprofen,trometamol,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['TROMETAMOL'],3,2
+DIHYDROERGOTAMINE METHANESULPHONATE,unresolved,,,,uncertain,无匹配候选,3,1
+DIHYDROERGOTOXINE MESYLATE,uncertain,Dihydroergotamine,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 DIHYDROERGOTAMINE）,3,0
+DIHYDROXYALUMINUM ALLANTOINATE,unresolved,,,,uncertain,无匹配候选,3,0
+DIISOPROPYLAMINE DICHLOROACETATE,unresolved,,,,uncertain,无匹配候选,3,1
+DIPHENIDOL,suggested_inn_not_in_db,DIPHENIDOL,,,medium,人工同义表识别为 DIPHENIDOL，但库内无该成分,3,0
+DOTINURAD,unresolved,,,,uncertain,无匹配候选,3,0
+ERYTHROMYCIN BASE,unresolved,,,,uncertain,无匹配候选,3,1
+ESOMEPRAZOLE PELLET 22%,unresolved,,,,uncertain,无匹配候选,3,0
+ETHYLPAPAVERINE HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,3,0
+ETOFIBRATE,unresolved,,,,uncertain,无匹配候选,3,0
+FERRIC-HYDROXIDE-SUCROSE COMPLEX,unresolved,,,,uncertain,无匹配候选,3,0
+FLUFENAMATE ALUMINUM,unresolved,,,,uncertain,无匹配候选,3,1
+FOLINATE CALCIUM 5H2O,unresolved,,,,uncertain,无匹配候选,3,0
+GAMMA ORYZANOL,unresolved,,,,uncertain,无匹配候选,3,0
+GEFARNATE,unresolved,,,,uncertain,无匹配候选,3,0
+HOMOCHLORCYCLIZINE HCL,uncertain,Chlorcyclizine,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 CHLORCYCLIZINE）,3,0
+HUMAN HEMIN,unresolved,,,,uncertain,无匹配候选,3,0
+HUMAN MONOCOMPONENT ISOPHANE INSULIN,unresolved,,,,uncertain,无匹配候选,3,0
+HUMAN ROTAVIRUS LIVE ATTENUATED RIX4414 STRAIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+HYDROPROPIZINE,suggested_inn_not_in_db,HYDROPROPIZINE,,,medium,人工同义表识别为 HYDROPROPIZINE，但库内无该成分,3,2
+INACTIVATED ENTEROVIRUS 71 VIRUS PARTICLES,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,3
+LACTOBACILLI CASEI,mapped,Lactobacillus Casei,lactobacillus-casei,,medium,名称相似度 0.91（LACTOBACILLICASEI ≈ Lactobacillus Casei）,3,0
+LACTOBACTERIACEAE POWDER CULTURE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+LACTULOSE 50%,unresolved,,,,uncertain,无匹配候选,3,0
+MAGNESIUM ALUMINOMETASILICATE,unresolved,,,,uncertain,无匹配候选,3,0
+MAGNESIUM ALUMINOSILICATE,unresolved,,,,uncertain,无匹配候选,3,0
+MAGNESIUM ALUMINUM BISMUTH SILICATE,unresolved,,,,uncertain,无匹配候选,3,0
+MAGNESIUM ALUMINUM HYDROXIDE MONOHYDRATE,mapped,Aluminum,aluminum,,medium,"去盐/立体前缀后匹配 substance.inn_en；识别盐: ['MONOHYDRATE', 'HYDROXIDE', 'MAGNESIUM']（库内无对应盐 variant，按 base 记录）",3,0
+MEBHYDROLINE NAPHTHALENEDISULFONATE,unresolved,,,,uncertain,无匹配候选,3,0
+MECLOFENAMIC ACID,uncertain,Mefenamic Acid,,,uncertain,名称相似度 0.90，低于自动映射门槛（候选 MEFENAMICACID）,3,0
+MENINGOCOCCAL GROUP A OLIGOSACCHARIDE CONJUGATED TO CORYNEBACTERIUM DIPHTHERIAE CRM197 PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+MENINGOCOCCAL GROUP C OLIGOSACCHARIDE CONJUGATED TO CORYNEBACTERIUM DIPHTHERIAE CRM197 PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+MENINGOCOCCAL GROUP W-135 OLIGOSACCHARIDE CONJUGATED TO CORYNEBACTERIUM DIPHTHERIAE CRM197 PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+MENINGOCOCCAL GROUP Y OLIGOSACCHARIDE CONJUGATED TO CORYNEBACTERIUM DIPHTHERIAE CRM197 PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+MENTHA OIL,uncertain,Menthol,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 MENTHOL）,3,0
+MEPIRIZOLE,unresolved,,,,uncertain,无匹配候选,3,1
+META-CRESOLSULFONIC ACID,unresolved,,,,uncertain,无匹配候选,3,0
+NIMETAZEPAM,unresolved,,,,uncertain,无匹配候选,3,0
+NORGESTREL L-,mapped,Norgestrel,norgestrel,,medium,名称相似度 0.95（NORGESTRELL ≈ Norgestrel）,3,0
+OUTER MEMBRANE VESICLES FROM NEISSERIA MENINGITIDIS GROUP B STRAIN NZ98/254 MEASURED AS AMOUNT OF TOTAL PROTEIN CONTAINING THE PORA P1.4,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+PARA-AMINOBENZOIC ACID,uncertain,Aminobenzoic Acid,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 AMINOBENZOICACID）,3,0
+PERFLUOROBUTANE MICROBUBBLES,unresolved,,,,uncertain,无匹配候选,3,0
+PHENPROBAMATE,unresolved,,,,uncertain,无匹配候选,3,0
+PIPERIDOLATE HCL,suggested_inn_not_in_db,PIPERIDOLATO,,,medium,名称相似度 0.92（PIPERIDOLATE ≈ Piperidolato）；库内仅有西语/中文重复成分 mx-es-piperidolato-2，无英文 INN,3,0
+PIPETHANATE ETHOBROMIDE,unresolved,,,,uncertain,无匹配候选,3,0
+POWDERED PICRASMA WOOD,unresolved,,,,uncertain,无匹配候选,3,0
+PROZYME 6,unresolved,,,,uncertain,无匹配候选,3,0
+PURIFIED UROKINASE SOLUTION,unresolved,,,,uncertain,无匹配候选,3,0
+PURIFIED WATER ADDED TO,unresolved,,,,uncertain,无匹配候选,3,0
+RSV SUBGROUP A STABILISED PREFUSION F ANTIGEN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+RSV SUBGROUP B STABILISED PREFUSION F ANTIGEN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,3,0
+SCOPOLAMINE METHOBROMIDE,uncertain,Scopolamine Hydrobromide,,,uncertain,名称相似度 0.87，低于自动映射门槛（候选 SCOPOLAMINEHYDROBROMIDE）,3,0
+SCOPOLIAE EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,3,0
+SODIUM GLUTAMATE L-,unresolved,,,,uncertain,无匹配候选,3,0
+SODIUM MOLYBDATE,unresolved,,,,uncertain,无匹配候选,3,0
+SODIUM S-LACTATE SOLUTION 50%,unresolved,,,,uncertain,无匹配候选,3,0
+SODIUM-2 3-DIMERCAPTO-1-PROPANE SULFONATE MONOHYDRATE,unresolved,,,,uncertain,无匹配候选,3,0
+STERILE CEPHALORIDINE,unresolved,,,,uncertain,无匹配候选,3,0
+SWERTIA POWDER,unresolved,,,,uncertain,无匹配候选,3,0
+TIARAMIDE HCL,unresolved,,,,uncertain,无匹配候选,3,0
+TOCOPHEROL NICOTINATE ALPHA DL-,unresolved,,,,uncertain,无匹配候选,3,0
+TRIPOTASSIUM DICITRATE BISMUTHATE,mapped,Tripotassium Dicitratobismuthate,tripotassium-dicitratobismuthate,,medium,名称相似度 0.97（TRIPOTASSIUMDICITRATEBISMUTHATE ≈ Tripotassium Dicitratobismuthate）,3,0
+TRISODIUM GLYCYRRHIZINATE,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,3,0
+VWF RCO,unresolved,,,,uncertain,无匹配候选,3,0
+ZEDOARY,unresolved,,,,uncertain,无匹配候选,3,0
+177LU-DOTA0-TYR3-OCTREOTATE,unresolved,,,,uncertain,无匹配候选,2,0
+177LU-VIPIVOTIDE TETRAXETAN,unresolved,,,,uncertain,无匹配候选,2,0
+A/DARWIN/1369/2025,unresolved,,,,uncertain,无匹配候选,2,0
+A/MICHIGAN/105/2025 IVR-285 -LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+A/NORWAY/16606/2021,unresolved,,,,uncertain,无匹配候选,2,0
+A/NORWAY/31694/2022,unresolved,,,,uncertain,无匹配候选,2,0
+A/SWITZERLAND/6849/2025,unresolved,,,,uncertain,无匹配候选,2,0
+A/VICTORIA/2570/2019,unresolved,,,,uncertain,无匹配候选,2,0
+ACETAMINOPHEN FINE,uncertain,Acetaminophen,,,uncertain,名称相似度 0.87，低于自动映射门槛（候选 ACETAMINOPHEN）,2,0
+ALLYLESTRENOL,unresolved,,,,uncertain,无匹配候选,2,1
+ALPROSTADIL ALPHA-CYCLODEXTRIN CLATHRATE,unresolved,,,,uncertain,无匹配候选,2,0
+ALUMINUM SUCROSE SULFATE,unresolved,,,,uncertain,无匹配候选,2,0
+AMINOSALICYLATE CALCIUM PARA-,unresolved,,,,uncertain,无匹配候选,2,0
+AMMONIA WATER,unresolved,,,,uncertain,无匹配候选,2,0
+ANTIBIOTICS-RESISTANT LACTIC ACID BACTERIAE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+APROTININ FROM BOVINE LUNG,unresolved,,,,uncertain,无匹配候选,2,0
+ARGININE L-,mapped,Arginine,arginine,,medium,名称相似度 0.94（ARGININEL ≈ Arginine）,2,0
+ASCORBATE,uncertain,Ascorbato,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASCORBATO）,2,1
+ASCORBATE CALCIUM,uncertain,Ascorbato,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASCORBATO）,2,0
+ASPARTATE POTASSIUM MAGNESIUM,uncertain,Aspartame,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASPARTAME）,2,0
+ASPARTATE SODIUM L-,unresolved,,,,uncertain,无匹配候选,2,0
+ASPERGILLUS ORYZAE-NK CULTURE POWDER,unresolved,,,,uncertain,无匹配候选,2,0
+ASPIRIN ALUMINUM,unresolved,,,,uncertain,无匹配候选,2,0
+ATTENUATED LIVE VARICELLA ZOSTER VIRUS OKA STRAIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+AZULENE,unresolved,,,,uncertain,无匹配候选,2,0
+B/AUSTRIA/1359417/2021 -LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+B/PERTH/115/2025,unresolved,,,,uncertain,无匹配候选,2,0
+B/TOKYO/EIS13-175/2025 -LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+B/WASHINGTON/02/2019,unresolved,,,,uncertain,无匹配候选,2,0
+BENIDIPINE HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,2,1
+BENZHEXOL HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,2,0
+BENZYLHYDROCHLOROTHIAZIDE,unresolved,,,,uncertain,无匹配候选,2,0
+BILE EXTRACT OX,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,2,0
+BIODIASTASE 2000,unresolved,,,,uncertain,无匹配候选,2,0
+BROCINE,unresolved,,,,uncertain,无匹配候选,2,0
+BUTETHAMATE CITRATE,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIFEROL IN OIL,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIUM GLUCEPTATE CAL. GLUCOHEPTONATECAL. HEPT,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIUM-2-OXO-3-PHENYL-PROPIONATE,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIUM-3-METHYL-2-OXO-BUTYRATE,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIUM-3-METHYL-2-OXO-VALERATE,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIUM-4-METHYL-2-OXO-VALERATE,unresolved,,,,uncertain,无匹配候选,2,0
+CALCIUM-DL-2-HYDROXY-4- -BUTYRATE,unresolved,,,,uncertain,无匹配候选,2,0
+CAMYLOFINE 2HCL,unresolved,,,,uncertain,无匹配候选,2,0
+CAPSULAR POLYSACCHARIDE PURIFIED,unresolved,,,,uncertain,无匹配候选,2,0
+CAPSULE SHELL,unresolved,,,,uncertain,无匹配候选,2,0
+CARNITINE CHLORIDE,unresolved,,,,uncertain,无匹配候选,2,0
+CASCARA DRY EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,2,0
+CEFMENOXIME HEMIHYDROCHLORIDE STERILE,unresolved,,,,uncertain,无匹配候选,2,0
+CEPHRADINE FOR INJECTION,unresolved,,,,uncertain,无匹配候选,2,0
+CERIUM OXALATE,unresolved,,,,uncertain,无匹配候选,2,0
+CERNITIN T60,unresolved,,,,uncertain,无匹配候选,2,0
+CERNITIN-GBX,unresolved,,,,uncertain,无匹配候选,2,0
+CHLORHEXIDINE DL-GLUCONATE,mapped,Chlorhexidine,chlorhexidine,,medium,名称相似度 0.93（CHLORHEXIDINEDL ≈ Chlorhexidine）,2,0
+CINNAMON BARK,uncertain,Cinnamon Bark Oil,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 CINNAMONBARKOIL）,2,0
+CITRUS UNSHIU PEEL,unresolved,,,,uncertain,无匹配候选,2,0
+CLEMIZOLE HCL,unresolved,,,,uncertain,无匹配候选,2,0
+COATED ASCORBIC ACID,unresolved,,,,uncertain,无匹配候选,2,0
+COBIMETINIB HEMIFUMARATE,mapped,Cobimetinib,cobimetinib,fumarate,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['FUMARATE'],2,0
+CONJUGATED ESTROGEN CONCENTRATE,unresolved,,,,uncertain,无匹配候选,2,0
+CYCLOBUTYROL CALCIUM,unresolved,,,,uncertain,无匹配候选,2,1
+DEHYDROEPIANDROSTERONE SODIUM,unresolved,,,,uncertain,无匹配候选,2,0
+DISODIUM PAMIDRONATE,unresolved,,,,uncertain,无匹配候选,2,0
+DOTA,unresolved,,,,uncertain,无匹配候选,2,0
+DRY VITAMIN D3 TYPE 100 CWS,unresolved,,,,uncertain,无匹配候选,2,0
+ESTRADIOL 17-VALERINATE,unresolved,,,,uncertain,无匹配候选,2,0
+ETHAMSYLATE,mapped,Etamsylate,etamsylate,,medium,名称相似度 0.95（ETHAMSYLATE ≈ Etamsylate）,2,0
+ETHANOL 96%,unresolved,,,,uncertain,无匹配候选,2,0
+EVOCALCET,unresolved,,,,uncertain,无匹配候选,2,0
+EXTRACTUM PLATYCODI LIQUIDUM,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,2,0
+F18-FLORBETABEN,unresolved,,,,uncertain,无匹配候选,2,0
+FERRIC HYDROXIDE POLYMALTOSE,unresolved,,,,uncertain,无匹配候选,2,0
+FRADIOMYCIN,unresolved,,,,uncertain,无匹配候选,2,0
+FURSULTIAMINE,unresolved,,,,uncertain,无匹配候选,2,0
+GABEXATE MESILATE,unresolved,,,,uncertain,无匹配候选,2,0
+GADOLINIUM OXIDE,mapped,Gadolinium,gadolinium,,medium,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['OXIDE']（库内无对应盐 variant，按 base 记录）,2,0
+GADOXETIC ACID DISODIUM SALT,unresolved,,,,uncertain,无匹配候选,2,0
+GAMMA GLOBULIN ANTI-RHO,unresolved,,,,uncertain,无匹配候选,2,0
+HALCINONIDE MICRO,unresolved,,,,uncertain,无匹配候选,2,0
+HEXOPRENALINE SULFATE,unresolved,,,,uncertain,无匹配候选,2,0
+HISTIDINE L-,mapped,Histidine,histidine,,medium,名称相似度 0.95（HISTIDINEL ≈ Histidine）,2,0
+HUMAN COAGULATION FACTOR XIII,uncertain,"Human Coagulation Factors Ii, Ix And X",,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 HUMANCOAGULATIONFACTORSIIIXANDX）,2,0
+HUMAN IMMUNOGLOBULIN PROTEINS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+HUMAN IMMUNOGLOBULIN PROTEINS WITH TETANUS POTENCY,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+HUMAN MONOCOMPONENT INSULIN BIOSYNTHETIC,unresolved,,,,uncertain,无匹配候选,2,0
+IDURSULFASE BETA,unresolved,,,,uncertain,无匹配候选,2,0
+IMMUNOGLOBULIN RABBIT ANTI-HUMAN THYMOCYTE,mapped,Immunoglobulin - Rabbit Antithymocyte,immunoglobulin-rabbit-antithymocyte,,medium,名称相似度 0.93（IMMUNOGLOBULINRABBITANTIHUMANTHYMOCYTE ≈ Immunoglobulin - Rabbit Antithymocyte）,2,0
+INOSITOL NIACINATE,mapped,Inositol Nicotinate,inositol-nicotinate,,medium,名称相似度 0.91（INOSITOLNIACINATE ≈ Inositol Nicotinate）,2,0
+IODINE LECITHIN,uncertain,Iodized Lecithin,,,uncertain,名称相似度 0.90，低于自动映射门槛（候选 IODIZEDLECITHIN）,2,0
+IPECAC FLUIDEXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,2,0
+KAINIC ACID,unresolved,,,,uncertain,无匹配候选,2,0
+KAOLIN COLLOIDAL,unresolved,,,,uncertain,无匹配候选,2,0
+L-LYSINE MONOHYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,2,0
+LEUCOMYCIN,unresolved,,,,uncertain,无匹配候选,2,0
+LEUCOMYCIN TARTRATE,unresolved,,,,uncertain,无匹配候选,2,1
+LYSINE ACETYLSALICYLATE WITH 0.1G EXCIPIENT GLYCINE,unresolved,,,,uncertain,无匹配候选,2,0
+MALIC ACID,unresolved,,,,uncertain,无匹配候选,2,0
+MEBHYDROLINE NADYPSYLATE,unresolved,,,,uncertain,无匹配候选,2,1
+MEBHYDROLINE NAPADISYLATE,unresolved,,,,uncertain,无匹配候选,2,0
+METHANDROSTENOLONE,unresolved,,,,uncertain,无匹配候选,2,0
+METHYLMETHIONINE SULFONIUM BROMIDE,unresolved,,,,uncertain,无匹配候选,2,0
+METHYLMETHIONINE SULFONIUM CHLORIDE DL-,unresolved,,,,uncertain,无匹配候选,2,0
+METHYLPREDISOLONE,mapped,Methylprednisolone,methylprednisolone,,medium,名称相似度 0.97（METHYLPREDISOLONE ≈ Methylprednisolone）,2,0
+NANDROLONE PHENYLPROPIONATE,unresolved,,,,uncertain,无匹配候选,2,0
+NEMONOXACIN MALATE HEMIHYDRATE,unresolved,,,,uncertain,无匹配候选,2,1
+OPIUM TINCTURE,unresolved,,,,uncertain,无匹配候选,2,0
+OXATOMIDE,unresolved,,,,uncertain,无匹配候选,2,0
+OXELADIN,suggested_inn_not_in_db,OXELADINA,,,medium,名称相似度 0.94（OXELADIN ≈ Oxeladina）；库内仅有西语/中文重复成分 mx-es-oxeladina，无英文 INN,2,0
+PANTETHINE,unresolved,,,,uncertain,无匹配候选,2,1
+PANTOPRAZOLE HEMIMAGNESIUM MONOHYDRATE,unresolved,,,,uncertain,无匹配候选,2,2
+PANTOTHENATE,unresolved,,,,uncertain,无匹配候选,2,0
+PANTOTHENATE D- CALCIUM,unresolved,,,,uncertain,无匹配候选,2,0
+PEFICITINIB HYDROBROMIDE,unresolved,,,,uncertain,无匹配候选,2,0
+PEFLOXACINE MESYLATE DIHYDRATE,mapped,Pefloxacin,pefloxacin,,medium,名称相似度 0.95（PEFLOXACINE ≈ Pefloxacin）,2,0
+PHOSPHOLIPID ESSENTIAL,unresolved,,,,uncertain,无匹配候选,2,0
+PIPOXOLAN HCL,unresolved,,,,uncertain,无匹配候选,2,1
+PIRFENOXONE,unresolved,,,,uncertain,无匹配候选,2,0
+PLANTAGO,unresolved,,,,uncertain,无匹配候选,2,0
+PLASMA PROTEIN,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,2,0
+PLATYCODON,unresolved,,,,uncertain,无匹配候选,2,0
+POTASSIUM GUAIACOLSULFONATE 1/2 H2O,unresolved,,,,uncertain,无匹配候选,2,0
+POWDERED FENNEL,unresolved,,,,uncertain,无匹配候选,2,0
+POWDERED GENTIAN,unresolved,,,,uncertain,无匹配候选,2,0
+PRIMACLONE,unresolved,,,,uncertain,无匹配候选,2,0
+PRUNUS YEDOEUSIS EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,2,0
+PURIFIED SOYBEAN OIL,unresolved,,,,uncertain,无匹配候选,2,1
+RADIUM-223 CHLORIDE,uncertain,Radium Ra 223 Dichloride,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 RADIUMRA223DICHLORIDE）,2,0
+RHEUM POWDER,unresolved,,,,uncertain,无匹配候选,2,0
+RIBOFLAVIN TETRABUTYRATE,unresolved,,,,uncertain,无匹配候选,2,0
+SCOPOLAMINE METHYL BROMIDE,uncertain,Scopolamine Butylbromide,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 SCOPOLAMINEBUTYLBROMIDE）,2,0
+SENNOSIDE B,mapped,Sennosides,sennosides,,medium,名称相似度 0.90（SENNOSIDEB ≈ Sennosides）,2,0
+SENNOSIDES 80%,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,2,0
+SODIUM ACYCLOVIR,mapped,Acyclovir,acyclovir,sodium,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['SODIUM'],2,1
+SODIUM DEOXYCHOLATE,unresolved,,,,uncertain,无匹配候选,2,0
+SODIUM L-ASCORBATE,unresolved,,,,uncertain,无匹配候选,2,0
+SODIUM L-LACTATE SOLUTION,unresolved,,,,uncertain,无匹配候选,2,0
+SODIUM OLEATE,unresolved,,,,uncertain,无匹配候选,2,1
+SODIUM PENTOSAN POLYSULPHATE,unresolved,,,,uncertain,无匹配候选,2,0
+STERILE WATER FOR INJECTION,unresolved,,,,uncertain,无匹配候选,2,0
+SULCAINE,unresolved,,,,uncertain,无匹配候选,2,0
+SULTAMICILLIN TOSILATE DIHYDRATE,unresolved,,,,uncertain,无匹配候选,2,0
+TESTOSTERONE 17-BETA- CYPIONATE,unresolved,,,,uncertain,无匹配候选,2,0
+THALLIUM TL-201,unresolved,,,,uncertain,无匹配候选,2,1
+THIAMINE TETRAHYDROFURFURYL DISULFIDE HCL,unresolved,,,,uncertain,无匹配候选,2,0
+THIAMYLAL SODIUM,unresolved,,,,uncertain,无匹配候选,2,0
+TRICALCIUM PHOSPHATE,unresolved,,,,uncertain,无匹配候选,2,0
+TRYPSIN,unresolved,,,,uncertain,无匹配候选,2,0
+TUBERCULIN,uncertain,Old Tuberculin,,,uncertain,名称相似度 0.87，低于自动映射门槛（候选 OLDTUBERCULIN）,2,0
+WATER FOR INJECTION ADD TO,uncertain,Water For Injection,,,uncertain,名称相似度 0.87，低于自动映射门槛（候选 WATERFORINJECTION）,2,0
+1-PROPANOL,unresolved,,,,uncertain,无匹配候选,1,0
+2 4 6-TRIHYDROXYPROPIOPHENONE,unresolved,,,,uncertain,无匹配候选,1,0
+2 6-DITERTIARYBUTYL NAPHTHALENE MONOSULFONATE,unresolved,,,,uncertain,无匹配候选,1,0
+2 6-DITERTIARYBUTYL NAPHTHALENE SULFONATE SODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+5-OXYANTHRANILIC ACID HCL,unresolved,,,,uncertain,无匹配候选,1,0
+A. ACUTUS ANTIVENIN,unresolved,,,,uncertain,无匹配候选,1,0
+A/THAILAND/8/2022 -LIKE VIRUS A/CALIFORNIA/122/2022,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+ACETAMINOPHEN COATED WITH HPMC 2910 AND STEARIC ACID,unresolved,,,,uncertain,无匹配候选,1,0
+ACETAMINOPHEN CRYSTAL,unresolved,,,,uncertain,无匹配候选,1,0
+ACETAMINOPHEN T/M,mapped,Acetaminophen,acetaminophen,,medium,名称相似度 0.93（ACETAMINOPHENTM ≈ Acetaminophen）,1,0
+AESCULUC HIPPOCASTANUM,mapped,Aesculus Hippocastanum,aesculus-hippocastanum,,medium,名称相似度 0.95（AESCULUCHIPPOCASTANUM ≈ Aesculus Hippocastanum）,1,0
+ALBUMIN SERUM,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+ALCLOFENAC,unresolved,,,,uncertain,无匹配候选,1,1
+ALCOHOL ABSOLUTE,unresolved,,,,uncertain,无匹配候选,1,0
+ALGIN,unresolved,,,,uncertain,无匹配候选,1,1
+ALPHA-HYDROXYMETHIONINE CALCIUM SALT,unresolved,,,,uncertain,无匹配候选,1,0
+ALPHA-KETOISOLEUCINE CALCIUM SALT,unresolved,,,,uncertain,无匹配候选,1,0
+ALPHA-KETOLEUCINE CALCIUM SALT,unresolved,,,,uncertain,无匹配候选,1,0
+ALPHA-KETOPHENYLALANINE CALCIUM SALT,unresolved,,,,uncertain,无匹配候选,1,0
+ALPHA-KETOVALINE CALCIUM SALT,unresolved,,,,uncertain,无匹配候选,1,0
+ALUMINUM 3-HYDROXY-2-NAPHTHOATE,unresolved,,,,uncertain,无匹配候选,1,0
+ALUMINUM HYDROXYALLANTOINATE,unresolved,,,,uncertain,无匹配候选,1,0
+ALUMINUM HYDROXYCHLORIDE,unresolved,,,,uncertain,无匹配候选,1,0
+AMEZINIUM METILSULFATE,unresolved,,,,uncertain,无匹配候选,1,0
+AMINITROZOLE,unresolved,,,,uncertain,无匹配候选,1,0
+AMYLASE ALPHA-,unresolved,,,,uncertain,无匹配候选,1,0
+ANIMAL HEART EXTRACT WATER INSOLUBLE,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+ANTHRALIN,unresolved,,,,uncertain,无匹配候选,1,0
+ANTHRAQUINONE GLYCOSIDES,unresolved,,,,uncertain,无匹配候选,1,0
+ANTIVENIN OF D.RUSSELLII,unresolved,,,,uncertain,无匹配候选,1,0
+AQUOCOBALAMIN,unresolved,,,,uncertain,无匹配候选,1,0
+ARGININE L- HCL MONOHYDRATE,mapped,Arginine,arginine,,medium,名称相似度 0.94（ARGININEL ≈ Arginine）,1,0
+ARGININE MONO- OXOGLURATE,unresolved,,,,uncertain,无匹配候选,1,0
+ARGININE VASOPRESSIN,unresolved,,,,uncertain,无匹配候选,1,0
+ASCORBATE CALCIUM DIHYDRATE,uncertain,Ascorbato,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASCORBATO）,1,0
+ASPARTATE,uncertain,Aspartame,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASPARTAME）,1,0
+ASPARTATE CALCIUM,uncertain,Aspartame,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASPARTAME）,1,0
+ASPARTATE MAGNESIUM,uncertain,Aspartame,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASPARTAME）,1,0
+ASPARTATE MONOSODIUM MONOHYDRATE L-,unresolved,,,,uncertain,无匹配候选,1,0
+ASPARTATE POTASSIUM,uncertain,Aspartame,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 ASPARTAME）,1,0
+ASPIRIN CRYSTAL ENTERIC COATED,unresolved,,,,uncertain,无匹配候选,1,0
+ATROPINE METHYL BROMIDE,mapped,Homatropine Methylbromide,homatropine-methylbromide,,medium,名称相似度 0.93（ATROPINEMETHYLBROMIDE ≈ Homatropine Methylbromide）,1,0
+AUMOLERTINIB MESILATE,unresolved,,,,uncertain,无匹配候选,1,0
+AVERAGE MOLECULAR WEIGHT 130000 DA,unresolved,,,,uncertain,无匹配候选,1,0
+B. MULTICINCTUS ANTIVENIN BIVALENT,unresolved,,,,uncertain,无匹配候选,1,0
+B.C.G. VACCINE FREEZE-DRIED,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+B/AUSTRIA/1359417/2021-LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+B/TOKYO/EIS13-175/2025-LIKE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+BACILLUS MESENTERICUS,unresolved,,,,uncertain,无匹配候选,1,0
+BENACTYZINE,unresolved,,,,uncertain,无匹配候选,1,0
+BENACTYZINE HCL,unresolved,,,,uncertain,无匹配候选,1,0
+BENCYCLANE HYDROGEN FUMARATE,unresolved,,,,uncertain,无匹配候选,1,0
+BEZOAR BOVIS,unresolved,,,,uncertain,无匹配候选,1,0
+BEZOAR ORIENTALE,unresolved,,,,uncertain,无匹配候选,1,0
+BIFIDOBACTERIUM INFANIS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+BIODIASMINE,unresolved,,,,uncertain,无匹配候选,1,0
+BIODIASMINE F-100,unresolved,,,,uncertain,无匹配候选,1,0
+BIOTAMYLASE,unresolved,,,,uncertain,无匹配候选,1,0
+BISMUTH OXYCHLORIDE,unresolved,,,,uncertain,无匹配候选,1,0
+BRILLIANT BLUE FCF,uncertain,Brilliant Blue G,,,uncertain,名称相似度 0.87，低于自动映射门槛（候选 BRILLIANTBLUEG）,1,0
+BUFONIS VENENUM,unresolved,,,,uncertain,无匹配候选,1,0
+BUFORMIN HCL,unresolved,,,,uncertain,无匹配候选,1,0
+BUNAZOSIN HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,1,0
+BUTROPIUM BROMIDE,unresolved,,,,uncertain,无匹配候选,1,0
+BUTYLSCOPOLAMINE HBR,unresolved,,,,uncertain,无匹配候选,1,0
+CALCIUM PANTOTHANATE TYPE S,unresolved,,,,uncertain,无匹配候选,1,0
+CALCIUM SACCHARATE,unresolved,,,,uncertain,无匹配候选,1,0
+CAMOMILE FLOWER EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+CAMPHENE D-,mapped,Camphene,camphene,,medium,名称相似度 0.94（CAMPHENED ≈ Camphene）,1,0
+CAMPHOR SPIRIT,unresolved,,,,uncertain,无匹配候选,1,0
+CAPSICUM ANNUUM L,uncertain,Capsicum Annuum Whole,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 CAPSICUMANNUUMWHOLE）,1,0
+CARBARSONE,unresolved,,,,uncertain,无匹配候选,1,0
+CARBENICILLIN,unresolved,,,,uncertain,无匹配候选,1,0
+CARBOMER 940,unresolved,,,,uncertain,无匹配候选,1,0
+CARDAMON,uncertain,Cardamom,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 CARDAMOM）,1,0
+CAROTENE BETA-,unresolved,,,,uncertain,无匹配候选,1,0
+CARYOPHILLIN POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+CEFATRIZINE,unresolved,,,,uncertain,无匹配候选,1,0
+CELLULOSE,uncertain,Cellulase,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 CELLULASE）,1,0
+CETRIMIDE SOLUTION 40%,unresolved,,,,uncertain,无匹配候选,1,0
+CHLOROPHYLL,uncertain,Chlorophyllins,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 CHLOROPHYLLINS）,1,0
+CHOLINE THEOPHYLLINATE,unresolved,,,,uncertain,无匹配候选,1,0
+CHONDROITIN SULFURIC ACID,unresolved,,,,uncertain,无匹配候选,1,0
+CINCHONA EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+CINOXACIN,unresolved,,,,uncertain,无匹配候选,1,0
+CITRUS SINENSIS POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+CLOFIBRATE ALUMINIUM,unresolved,,,,uncertain,无匹配候选,1,1
+CLOPIDOGREL HYDROGENSULFATE,mapped,Clopidogrel Hydrogen Sulfate,clopidogrel-hydrogen-sulfate,,high,与 substance.inn_en 精确匹配（归一后）,1,1
+COBALAMIN,mapped,Mecobalamin,mecobalamin,,medium,名称相似度 0.90（COBALAMIN ≈ Mecobalamin）,1,0
+CONC. BIFIDOBACTERIUM BIFIDUM POWDER,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+CONC. LACTOBACILLUS ACIDOPHILUS POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+CONC. STREPTOCOCCUS FAECALIS POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+CORYDALIS TUBER,unresolved,,,,uncertain,无匹配候选,1,0
+CYCLOBUTYROL,unresolved,,,,uncertain,无匹配候选,1,0
+DEXTROSE ANHYDRATE,unresolved,,,,uncertain,无匹配候选,1,0
+DIASMEN SS,unresolved,,,,uncertain,无匹配候选,1,0
+DIASTASE BIO- ANHYDROUS,mapped,Diastase,diastase,,medium,人工同义表：DIASTASE BIO- ANHYDROUS,1,0
+DICETHIAMINE HCL,unresolved,,,,uncertain,无匹配候选,1,1
+DIETHYLAMINOETHYL PHENYLETHYL ACETATE CITRATE,unresolved,,,,uncertain,无匹配候选,1,0
+DIGESTIVE ENZYME,unresolved,,,,uncertain,无匹配候选,1,0
+DIHYDROXYALUMINUM SODIUM CARBONATE,unresolved,,,,uncertain,无匹配候选,1,0
+DILUTED MISOPROSTOL 1%,unresolved,,,,uncertain,无匹配候选,1,0
+DIMERCAPTOSUCCINIC ACID,unresolved,,,,uncertain,无匹配候选,1,0
+DIMETHOTHIAZINE MESYLATE,unresolved,,,,uncertain,无匹配候选,1,0
+DIMETHYL 1 4- 7-ISOPROPYL-AZULENE-3-SULFONATE SODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+DINALBUPHINE SEBACATE,unresolved,,,,uncertain,无匹配候选,1,1
+DIPHENHYDRAMINE LAURYL SULFATE,unresolved,,,,uncertain,无匹配候选,1,0
+DIPHENHYDRAMINE SALICYLATE,unresolved,,,,uncertain,无匹配候选,1,0
+DIQUAFOSOL SODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+DISODIUM CLODRONATE,mapped,Sodium Clodronate,sodium-clodronate,,medium,名称相似度 0.94（DISODIUMCLODRONATE ≈ Sodium Clodronate）,1,0
+DL-ALPHA-TOCOPHEROL ACETATE,mapped,.Alpha. Tocopherol,alpha-tocopherol,acetate,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['ACETATE'],1,0
+DL-ARGININE OXOGLURATE,unresolved,,,,uncertain,无匹配候选,1,0
+DOTHIEPIN HCL,unresolved,,,,uncertain,无匹配候选,1,0
+DOXYLAMINE HYDROGEN SUCCINATE,unresolved,,,,uncertain,无匹配候选,1,0
+EACH SOLVENT CONTAINS,unresolved,,,,uncertain,无匹配候选,1,0
+ELOBIXIBAT HYDRATE,unresolved,,,,uncertain,无匹配候选,1,0
+ENOXOLONE,suggested_inn_not_in_db,ENOXOLONE,,,medium,人工同义表识别为 ENOXOLONE，但库内无该成分,1,1
+EPRAZINONE,suggested_inn_not_in_db,EPRAZINONE,,,medium,人工同义表识别为 EPRAZINONE，但库内无该成分,1,0
+EQUIVALENT TO TECHNETIUM 99M TC,unresolved,,,,uncertain,无匹配候选,1,0
+ERYTHROMYCIN ESTOLATE,unresolved,,,,uncertain,无匹配候选,1,0
+ESTRADIOL 17BETA,unresolved,,,,uncertain,无匹配候选,1,0
+ETHAVERINE,unresolved,,,,uncertain,无匹配候选,1,0
+ETILEFRIN HCL,mapped,Etilefrine,etilefrine,,medium,名称相似度 0.95（ETILEFRIN ≈ Etilefrine）,1,0
+FEDRATINIB DIHYDROCHLORIDE MONOHYDRATE,mapped,Fedratinib,fedratinib,hydrochloride,high,"去盐/立体前缀后匹配 substance.inn_en；识别盐: ['MONOHYDRATE', 'HYDROCHLORIDE']",1,0
+FERRIC HYDROXIDE POLYMALTOSE COMPLEX,unresolved,,,,uncertain,无匹配候选,1,0
+FLAVINEADENINE DINUCLEOTIDE,unresolved,,,,uncertain,无匹配候选,1,0
+FLOTUFOLASTAT GALLIUM,unresolved,,,,uncertain,无匹配候选,1,0
+FLUCICLOVINE,mapped,Fluciclovina (18F),fluciclovina-18f,,medium,名称相似度 0.92（FLUCICLOVINE ≈ Fluciclovina (18F)）,1,0
+FLUCLORONIDE,unresolved,,,,uncertain,无匹配候选,1,0
+FLUOROURACIL 5-,unresolved,,,,uncertain,无匹配候选,1,0
+FONAZINE,unresolved,,,,uncertain,无匹配候选,1,0
+FRAMYCETIN SOFRAMYCIN,unresolved,,,,uncertain,无匹配候选,1,0
+G1 REASSORTANT,unresolved,,,,uncertain,无匹配候选,1,0
+G2 REASSORTANT,unresolved,,,,uncertain,无匹配候选,1,0
+G3 REASSORTANT,unresolved,,,,uncertain,无匹配候选,1,0
+G4 REASSORTANT,unresolved,,,,uncertain,无匹配候选,1,0
+GENTIAN EXT,unresolved,,,,uncertain,无匹配候选,1,0
+GLOBULIN,unresolved,,,,uncertain,无匹配候选,1,0
+GLUCONATE COBALT,mapped,Cobalt,cobalt,gluconate,high,去盐/立体前缀后匹配 substance.inn_en；识别盐: ['GLUCONATE'],1,0
+GLUCURONOLACTONE,mapped,Gluconolactone,gluconolactone,,medium,名称相似度 0.93（GLUCURONOLACTONE ≈ Gluconolactone）,1,0
+GLUTAMATE,uncertain,Glutamato,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 GLUTAMATO）,1,0
+GLYCLOPYRAMIDE,unresolved,,,,uncertain,无匹配候选,1,0
+GLYCOBACTERIA,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+GLYCYRRHETATE AMMONIUM,unresolved,,,,uncertain,无匹配候选,1,0
+GLYCYRRHETATE DIPOTASSIUM,unresolved,,,,uncertain,无匹配候选,1,0
+GLYCYRRHETATE SODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+GLYCYRRHIZIN AMMONIUM,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+GMP,unresolved,,,,uncertain,乱码/缩写，无法判断,1,0
+GONADOTROPIN CHORIONIC,mapped,Gonadotropina Coriónica,gonadotropina-corionica,,medium,名称相似度 0.90（GONADOTROPINCHORIONIC ≈ Gonadotropina Coriónica）,1,0
+GUAIACOL GLYCERIN ETHER,unresolved,,,,uncertain,无匹配候选,1,0
+GUAIPHENESIN,uncertain,Guaifenesin,,,uncertain,名称相似度 0.87，低于自动映射门槛（候选 GUAIFENESIN）,1,0
+HISTIDINE L- HCL 2H2O,unresolved,,,,uncertain,无匹配候选,1,0
+HISTIDINE MONOHYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,1,0
+HOMOSULFAMINE,unresolved,,,,uncertain,无匹配候选,1,0
+HYDROCORTISONE 17-BUTYRATE,unresolved,,,,uncertain,无匹配候选,1,0
+HYDROXYPROPYL METHYLCELLULOSE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,1
+I-123 MIBG,unresolved,,,,uncertain,无匹配候选,1,0
+INACTIVATED EV71 WHOLE VIRUS,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,1
+JECORIS PISCIS FORTE OIL,unresolved,,,,uncertain,无匹配候选,1,0
+KETOTIFEN HYDROGEN FUMARATE,unresolved,,,,uncertain,无匹配候选,1,0
+LACTIC BACILLUS POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+LACTOBACILLI,uncertain,Lactobacillus,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 LACTOBACILLUS）,1,0
+LACTOBACTERIA,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+LICOREX P,unresolved,,,,uncertain,无匹配候选,1,0
+LINZAGOLIX CHOLINE,unresolved,,,,uncertain,无匹配候选,1,0
+LIVER CONC.,unresolved,,,,uncertain,无匹配候选,1,0
+LIVER HYDROLYSATE,unresolved,,,,uncertain,无匹配候选,1,0
+LYCORIS RADIATE EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+LYPASE,unresolved,,,,uncertain,无匹配候选,1,0
+LYSINE L- HCL H2O,unresolved,,,,uncertain,无匹配候选,1,0
+MAGNESIUM ALUMINUM HYDROXIDE,mapped,Aluminum,aluminum,,medium,"去盐/立体前缀后匹配 substance.inn_en；识别盐: ['HYDROXIDE', 'MAGNESIUM']（库内无对应盐 variant，按 base 记录）",1,0
+MALTOSE H2O,unresolved,,,,uncertain,无匹配候选,1,0
+MEBHYDROLINE,unresolved,,,,uncertain,无匹配候选,1,0
+MELILOT EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+MEPREDNISONE 21- ACETATE,unresolved,,,,uncertain,无匹配候选,1,0
+METERGOLINE,unresolved,,,,uncertain,无匹配候选,1,0
+METHAMINODIAZEPOXIDE,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLDOPA 1.5H2O,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLDOPA ALPHA-,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLENE DIPHOSPHONATE,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLENE DIPHOSPHORIC ACID,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLENETHYMOLTANNIN,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLERGOMETRINE HYDROGEN MALEATE,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLHESPERINE,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLMETHIONINE SULFONIUM CYCLAMATE,unresolved,,,,uncertain,无匹配候选,1,0
+METHYLPREDNISONE SODIUM SUCCINATE,mapped,Methylprednisolone,methylprednisolone,,medium,名称相似度 0.94（METHYLPREDNISONE ≈ Methylprednisolone）,1,0
+MITIGLINIDE CALCIUM HYDRATE,unresolved,,,,uncertain,无匹配候选,1,0
+MITOMYCIN C,mapped,Mitomycin,mitomycin,,medium,名称相似度 0.95（MITOMYCINC ≈ Mitomycin）,1,0
+MONO AMMONIUM GLYCYRRHIZINATE,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+MONOSODIUM L-ASPARTATE,mapped,Monosodium Aspartate,monosodium-aspartate,,medium,名称相似度 0.97（MONOSODIUMLASPARTATE ≈ Monosodium Aspartate）,1,0
+MONOSODIUM L-GLUTAMATE,mapped,Monosodium Glutamate,monosodium-glutamate,,medium,名称相似度 0.97（MONOSODIUMLGLUTAMATE ≈ Monosodium Glutamate）,1,0
+MUCIN GASTRIC,unresolved,,,,uncertain,无匹配候选,1,0
+MUCOPOLYSACCHARIDE,unresolved,,,,uncertain,无匹配候选,1,0
+MUSK,unresolved,,,,uncertain,无匹配候选,1,0
+N N-DIETHYL-META-TOLUAMIDE,unresolved,,,,uncertain,无匹配候选,1,0
+N. NAJA ATRA ANTIVENIN,unresolved,,,,uncertain,无匹配候选,1,0
+N1- -5-FLUOROURACIL,unresolved,,,,uncertain,无匹配候选,1,0
+NALORPHINE HCL,unresolved,,,,uncertain,无匹配候选,1,0
+NATIVE BLACK COHOSH DRY EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,1
+NEUSILIN,unresolved,,,,uncertain,无匹配候选,1,0
+NEW COCCINE,unresolved,,,,uncertain,无匹配候选,1,0
+NICOMOL,unresolved,,,,uncertain,无匹配候选,1,0
+NONYLIC-VANILLYLAMIDE,unresolved,,,,uncertain,无匹配候选,1,0
+NORDAZEPAM,unresolved,,,,uncertain,无匹配候选,1,0
+OESTROGEN,unresolved,,,,uncertain,无匹配候选,1,0
+OMEGA-3- ACID ETHYL ESTERS 90,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+OPADRY 85F58789 WHITE,unresolved,,,,uncertain,无匹配候选,1,0
+OPADRY BROWN,unresolved,,,,uncertain,无匹配候选,1,0
+OPADRY II 85F19250 CLEAR,unresolved,,,,uncertain,无匹配候选,1,0
+OPADRY PINK,unresolved,,,,uncertain,无匹配候选,1,0
+ORANGE OIL,uncertain,Borage Oil,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 BORAGEOIL）,1,0
+ORANGE PEEL,unresolved,,,,uncertain,无匹配候选,1,0
+ORNITHINE L- ASPARTATE L-,mapped,L-Ornithine-L-Aspartate,l-ornithine-l-aspartate,,medium,名称相似度 0.95（ORNITHINELASPARTATEL ≈ L-Ornithine-L-Aspartate）,1,0
+OUABAIN,unresolved,,,,uncertain,无匹配候选,1,0
+P1 REASSORTANT,unresolved,,,,uncertain,无匹配候选,1,0
+PANAZON,unresolved,,,,uncertain,无匹配候选,1,0
+PANCREATIC AT,mapped,Pancreatic,pancreatic,,medium,名称相似度 0.91（PANCREATICAT ≈ Pancreatic）,1,0
+PANTOTHENOL,mapped,Panthenol,panthenol,,medium,名称相似度 0.90（PANTOTHENOL ≈ Panthenol）,1,0
+PANTOTHENYL ALCOHOL D-,unresolved,,,,uncertain,无匹配候选,1,0
+PARACETAMOL DC,suggested_inn_not_in_db,PARACETAMOL,,,medium,名称相似度 0.92（PARACETAMOLDC ≈ Pa Racetamol）；库内仅有西语/中文重复成分 mx-es-pa-racetamol，无英文 INN,1,0
+PASINIAZIDE,unresolved,,,,uncertain,无匹配候选,1,0
+PEG 3350 POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+PEMIROLAST POTASSIUM,unresolved,,,,uncertain,无匹配候选,1,1
+PENICILLAMINE D-,mapped,Penicillamine,penicillamine,,medium,名称相似度 0.96（PENICILLAMINED ≈ Penicillamine）,1,0
+PEPSIN SACCHARATED,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+PERINDOPRIL SALIFIED WITH TERT-BUTYLAMINE,unresolved,,,,uncertain,无匹配候选,1,0
+PERMASEAL11900-31 TUTTI FRUTTI,unresolved,,,,uncertain,无匹配候选,1,0
+PHARBITIS,unresolved,,,,uncertain,无匹配候选,1,0
+PHARBITIS SEED POWDERED,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+PHLOROPROPIOPHENONE,unresolved,,,,uncertain,无匹配候选,1,0
+PHOSPHOLIPIDIC FRACTION FROM PIG LUNG,unresolved,,,,uncertain,无匹配候选,1,0
+PINE RESINA,unresolved,,,,uncertain,无匹配候选,1,0
+PIPERILATE ETHOBROMIDE,unresolved,,,,uncertain,无匹配候选,1,0
+PIPOXOLAN HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,1,1
+PLATYCODN FLUID EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+PLECTRANTHUS AMBOINICUS EXTRACT - F4,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+POLY STARCH MOLAR SUBS 0.42,unresolved,,,,uncertain,无匹配候选,1,0
+POLYDIMETHYL SILOXANE,unresolved,,,,uncertain,无匹配候选,1,0
+POLYPHENON E,unresolved,,,,uncertain,无匹配候选,1,0
+POTASSIUM ION,unresolved,,,,uncertain,无匹配候选,1,0
+POWDERED MAGNOLIA BARK,unresolved,,,,uncertain,无匹配候选,1,0
+POWDERED SCUTELLARIA ROOT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+PREDNISOLONE-21-DISODIUM PHOSPHATE,unresolved,,,,uncertain,无匹配候选,1,0
+PROCHLORPERAZINE DIMALEATE,mapped,Prochlorperazine,prochlorperazine,,medium,名称相似度 0.94（PROCHLORPERAZINEDI ≈ Prochlorperazine）,1,0
+PROMETHAZINE METHYLENDISALICYLATE,unresolved,,,,uncertain,无匹配候选,1,0
+PROTEIN CLOTTABLE,unresolved,,,,uncertain,生物制品/疫苗（保留 unmapped，不硬造）,1,0
+PROTHIONAMIDE,mapped,Protionamide,protionamide,,medium,名称相似度 0.96（PROTHIONAMIDE ≈ Protionamide）,1,1
+PROTOPORPHYRIN DISODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+PSYLLIUM HYDROPHILIC MUCILLOID,unresolved,,,,uncertain,无匹配候选,1,0
+PULVERIZED SCOPOLIA EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+PYRIDINOL CARBAMATE,unresolved,,,,uncertain,无匹配候选,1,0
+PYRIDOXINE DIPALMITATE,mapped,Pyridoxine,pyridoxine,,medium,名称相似度 0.91（PYRIDOXINEDI ≈ Pyridoxine）,1,0
+QUININE ETHYLCARBONATE,unresolved,,,,uncertain,无匹配候选,1,0
+RADIOACTIVE SODIUM MOLYBDATE SOLUTION,unresolved,,,,uncertain,无匹配候选,1,0
+REFINED OLIVE OIL,unresolved,,,,uncertain,无匹配候选,1,0
+SALINE SOLUTION,unresolved,,,,uncertain,无匹配候选,1,0
+SCUTELLARIAE EXTRACT,unresolved,,,,uncertain,植物/中药提取物（需与中藥边界一起定标）,1,0
+SCUTELLARIAE POWDER,unresolved,,,,uncertain,无匹配候选,1,0
+SIMETHICON,mapped,Simethicone,simethicone,,medium,名称相似度 0.95（SIMETHICON ≈ Simethicone）,1,0
+SODIUM 1 4-DIMETHYL-7-ISOPROPYLAZULENE-3-SULFONATE,unresolved,,,,uncertain,无匹配候选,1,0
+SODIUM 2 6-DITERTIARY BUTYLNAPHTHALENE MONOSULFONATE,unresolved,,,,uncertain,无匹配候选,1,0
+SODIUM 2 6-DITERTIARYBUTYL NAPHTHALENE SULFONATE,unresolved,,,,uncertain,无匹配候选,1,0
+SODIUM COPPER CHLORPHYLLIN,unresolved,,,,uncertain,无匹配候选,1,0
+SODIUM FERROUS CITRATE,mapped,Ferrous,ferrous,,medium,"去盐/立体前缀后匹配 substance.inn_en；识别盐: ['CITRATE', 'SODIUM']（库内无对应盐 variant，按 base 记录）",1,1
+SODIUM GLYCYRRHIZINATE,uncertain,Glycyrrhizin,,,uncertain,名称相似度 0.89，低于自动映射门槛（候选 GLYCYRRHIZIN）,1,0
+SODIUM SULFITE ANHYDROUS,unresolved,,,,uncertain,无匹配候选,1,0
+STEARYL ALCOHOL,uncertain,Cetostearyl Alcohol,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 CETOSTEARYLALCOHOL）,1,0
+STRAWBERRY ESSENCE,unresolved,,,,uncertain,无匹配候选,1,0
+SUCCINYL GELATIN,uncertain,Succinylated Gelatin,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 SUCCINYLATEDGELATIN）,1,0
+SULFAMINE,unresolved,,,,uncertain,无匹配候选,1,0
+SULFANILYLUREA,unresolved,,,,uncertain,无匹配候选,1,0
+SULFISOMIDINE,unresolved,,,,uncertain,无匹配候选,1,0
+SULFISOMIDINE SODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+SULPHUR HEXAFLUORIDE MICROBUBBLES,unresolved,,,,uncertain,无匹配候选,1,0
+SWERTINOGEN,unresolved,,,,uncertain,无匹配候选,1,0
+TAR BLEND,unresolved,,,,uncertain,无匹配候选,1,0
+TARTRAZINE ALUMINUM LAKE,unresolved,,,,uncertain,无匹配候选,1,0
+THEOPHYLLINE ETHYLENEDIAMINE,unresolved,,,,uncertain,无匹配候选,1,0
+THESIT DESTIN,unresolved,,,,uncertain,无匹配候选,1,0
+THIOCTATE SODIUM,unresolved,,,,uncertain,无匹配候选,1,0
+THYMOXAMINE,unresolved,,,,uncertain,无匹配候选,1,0
+TIRABRUTINIB HYDROCHLORIDE,unresolved,,,,uncertain,无匹配候选,1,0
+TOCOPHEROL NICOTINATE ALPHA-,unresolved,,,,uncertain,无匹配候选,1,0
+TOCOPHEROL-ALPHA-D ACID SUCCINATE,unresolved,,,,uncertain,无匹配候选,1,0
+TR. GRAMINEUS ANTIVENIN,unresolved,,,,uncertain,无匹配候选,1,0
+TR. MUCROSQUAMATUS ANTIVENIN,unresolved,,,,uncertain,无匹配候选,1,0
+TRIACETIN,unresolved,,,,uncertain,无匹配候选,1,0
+TRIACETYL,unresolved,,,,uncertain,无匹配候选,1,1
+TRIACETYL LEUCOMYCIN,unresolved,,,,uncertain,无匹配候选,1,0
+TRICHLORO ACETIC ACID,mapped,Trichloroacetic Acid,trichloroacetic-acid,,high,与 substance.inn_en 精确匹配（归一后）,1,0
+TRIMETOQUINOL,unresolved,,,,uncertain,无匹配候选,1,1
+TRODAT-1 3HCL,unresolved,,,,uncertain,无匹配候选,1,1
+TUCIDINOSTAT,unresolved,,,,uncertain,无匹配候选,1,0
+TYROSINE L-,mapped,Tyrosine,tyrosine,,medium,名称相似度 0.94（TYROSINEL ≈ Tyrosine）,1,0
+VALBENAZINE TOSILATE,unresolved,,,,uncertain,无匹配候选,1,0
+VITAMIN F,uncertain,Vitamin A,,,uncertain,名称相似度 0.88，低于自动映射门槛（候选 VITAMINA）,1,0
+VITAMINE E ACETATE,mapped,Vitamin E,vitamin-e,,medium,名称相似度 0.94（VITAMINEE ≈ Vitamin E）,1,0
+WATER DISTILLED FOR INJECTION,unresolved,,,,uncertain,无匹配候选,1,0
+"四物浸膏(當歸,川芎,白芍,熟地黃,矯味的桂圓,紅棗,枸杞的比例為3:3:1:1:2:1:1)(composite of Angelicae Radix,Ligustici Rhizoma,Paeoniae Radix,Rehmanniae Radix,Arillus Longan,Jujubae Fructus,Lycii Fructus is 3311211)",unresolved,,,,uncertain,无匹配候选（库内无此成分/生物制品/植物提取物/乱码）,1,0
+甘胺酸亞鐵(Ferrous bisglycinate chelate),unresolved,,,,uncertain,无匹配候选（库内无此成分/生物制品/植物提取物/乱码）,1,0
