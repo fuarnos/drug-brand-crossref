@@ -471,12 +471,17 @@ if ($Mode -eq 'full') {
 }
 
 # ---------------------------------------------------------------- verify
-function Test-Homepage([string]$Url) {
-    for ($i = 0; $i -lt 12; $i++) {
+function Test-Homepage([string]$Url, [string]$ExpectVersion = '') {
+    # Cache-busted request(s); when ExpectVersion is given, wait until the served
+    # footer actually shows that version (GitHub Pages CDN propagation can lag the
+    # build by 1-2 minutes, which otherwise makes a fresh deploy look like the old one).
+    for ($i = 0; $i -lt 18; $i++) {
         try {
             $u = '{0}?v={1}' -f $Url.TrimEnd('/'), [DateTimeOffset]::Now.ToUnixTimeSeconds()
             $r = Invoke-WebRequest -UseBasicParsing -Uri $u -TimeoutSec 30
-            if ($r.StatusCode -eq 200 -and $r.Content -match 'Medicine Brand Cross-Reference') { return $true }
+            if ($r.StatusCode -eq 200 -and $r.Content -match 'Medicine Brand Cross-Reference') {
+                if (-not $ExpectVersion -or $r.Content -match [regex]::Escape($ExpectVersion)) { return $true }
+            }
         } catch { }
         Start-Sleep -Seconds 5
     }
@@ -545,8 +550,8 @@ if ($SkipVerify) {
 
     if (-not $VerifyError) {
         Step 'Checking the homepage'
-        $ok = Test-Homepage $PagesUrl
-        if ($ok) { Say "homepage: 200 OK" }
+        $ok = Test-Homepage $PagesUrl $Version
+        if ($ok) { Say ("homepage: 200 OK (version {0})" -f $Version) }
         else { $VerifyError = "homepage did not return 200 with expected content: $PagesUrl" }
     }
 
