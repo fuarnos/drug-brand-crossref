@@ -73,7 +73,14 @@
     document.querySelectorAll('[data-sub-ingredient]').forEach(applyOne);
     var note = T('bilingual.brand_note');
     document.querySelectorAll('[data-brand]').forEach(function(el){
-      if(note && note.indexOf('bilingual.') !== 0) el.setAttribute('title', note);
+      if(!note || note.indexOf('bilingual.') === 0) return;
+      // v0.8.4：保留全名 title，把「非翻译」说明附加在后面（不覆盖）
+      var full = el.getAttribute('data-title-full');
+      if(full === null){
+        full = el.getAttribute('title') || '';
+        el.setAttribute('data-title-full', full);
+      }
+      el.setAttribute('title', full ? (full + ' — ' + note) : note);
     });
     var cb = document.getElementById('bilOrig');
     if(cb) cb.checked = SHOW;

@@ -179,8 +179,14 @@ function ingredientLabel(e){
 //   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
 function brandHTML(e){
-  if(e && e.u) return `<a data-brand="1" href="${BASE}name/${e.u}">${e.d}</a>`;
-  return `<span data-brand="1" class="brand-plain">${e && e.d != null ? e.d : ''}</span>`;
+  let d = e && e.d != null ? String(e.d) : '';
+  if(e && e.f){
+    const f = labelOf('form', e.f, '');
+    if(f && d.length > f.length && d.slice(-f.length) === f) d = d.slice(0, -f.length).trim();
+  }
+  const title = e && e.d != null ? e.d : '';
+  if(e && e.u) return `<a data-brand="1" title="${esc(title)}" href="${BASE}name/${e.u}">${esc(d)}</a>`;
+  return `<span data-brand="1" title="${esc(title)}" class="brand-plain">${esc(d)}</span>`;
 }
 function ingredientHTML(e, cls){
   const label = ingredientLabel(e);
@@ -299,7 +305,7 @@ function detPanelHTML(payload, key, e, T){
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
     return `<tr><td>${esc(r[1])}</td><td>${esc(r[3]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
-      + `<td>${esc(labelOf('drug.status', status, status))}${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
+      + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td></tr>`;
   }).join('');
   return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('a1.pack'))}</th>`
@@ -629,7 +635,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793227175（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793228090（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -682,7 +688,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793227175').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793228090').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1316,7 +1322,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793227175，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793228090，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1360,10 +1366,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793227175 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793228090 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1793227175').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1793228090').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1373,7 +1379,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793227175').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793228090').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }

@@ -216,8 +216,19 @@ table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
   text-align:left;vertical-align:top;font-size:14px}
 table.matrix thead th{white-space:nowrap;font-weight:650}
 table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
-table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
+table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
+  -webkit-line-clamp:2;overflow:hidden;max-width:220px;margin:0 6px 2px 0;
+  vertical-align:top;line-height:1.35}
 .m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
+.m-zh{display:inline-block;margin:0 0 2px 0;font-size:11px;color:var(--muted)}
+/* v0.8.4 task-128：状态彩色角标（A1 明细等） */
+.st-badge{display:inline-block;font-size:11px;padding:1px 6px;border-radius:999px;
+  border:1px solid var(--line);margin-right:4px;white-space:nowrap}
+.st-active{color:#0b6b53;border-color:#a9d3c5;background:#eef7f3}
+.st-discontinued{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
+.st-withdrawn{color:#8a2c1f;border-color:#e6bdb4;background:#fdf0ee}
+.st-unknown{color:var(--muted);background:#f6f5f2}
+.c-brand{overflow-wrap:anywhere}
 .matrix-brand-note{margin:6px 0 0;font-size:12px}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
