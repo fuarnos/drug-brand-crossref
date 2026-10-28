@@ -35,6 +35,7 @@ TEMPLATE = ROOT / "docs" / "dashboard.template.html"
 OUT_HTML = ROOT / "docs" / "工作集群-架构与进度.html"
 OUT_PNG = ROOT / "docs" / "img" / "cluster-progress.png"
 QUEUE = ROOT / "docs" / "谷段需求队列.md"
+CHANGELOG = ROOT / "CHANGELOG.md"
 PAGE_LIMIT = 20_000
 
 BROWSERS = [
@@ -53,7 +54,7 @@ def db_stats() -> dict[str, int]:
                severe=0, warn=0, info=0, dmd_in=0, dmd_kept=0,
                gb_seed=0, gb_branded=0, es_branded=0, mx_branded=0,
                gb_trade=0, us_trade=0, cn_trade=0, au_trade=0,
-               es_trade=0, mx_trade=0, atc=0)
+               es_trade=0, mx_trade=0, atc=0, tw=0)
     if not DB.exists():
         print(f"！没找到 {DB}，库里相关数字按 0 处理")
         return out
@@ -70,6 +71,7 @@ def db_stats() -> dict[str, int]:
 
         for c in ("US", "GB", "ES", "MX", "AU", "CN", "CA"):
             out[c] = one(f"select count(*) from product where country='{c}'")
+        out["tw"] = one("select count(*) from product where country='TW'")
         out["total"] = one("select count(*) from product")
         out["subst"] = one("select count(*) from substance")
         out["atc"] = one("select count(*) from substance where atc is not null and atc <> ''")
@@ -122,6 +124,8 @@ def dist_stats() -> dict[str, int | str]:
         if d.exists():
             out[key] = sum(1 for _ in d.glob("*.html"))
     idx = DIST / "data" / "index.json"
+    if not idx.exists():
+        idx = DIST / "data" / "idx" / "core.json"  # v0.6.1 起 core 为唯一索引
     if idx.exists():
         out["index"] = idx.stat().st_size
     entry = DIST / "index.html"
@@ -150,6 +154,17 @@ def main_status() -> str:
 
 
 # ---------------------------------------------------------------- 组装
+
+def latest_version() -> str:
+    """CHANGELOG 最新版本（第一行 `## vX.Y.Z`）；找不到就写占位。"""
+    try:
+        for line in CHANGELOG.read_text(encoding="utf-8").splitlines():
+            if line.startswith("## v"):
+                return line[3:].split()[0]
+    except OSError:
+        pass
+    return "v0.x"
+
 
 def commas(n: int) -> str:
     return f"{n:,}"
@@ -184,12 +199,16 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
 
     deploy_note = (f"GitHub Pages（gh-pages 分支）已上线："
                    f"fuarnos.github.io/drug-brand-crossref；{commas(files)} 个文件 / {size_mb:.1f} MB。")
-    p5_note = "已上线 GitHub Pages（v0.5.1）；搜索分片、UI P0、三语 P1、/warn、访问统计"
+    ver = latest_version()
+    p5_note = (f"已上线 GitHub Pages（{ver}）；多版本谷段：zh-Hant、品牌/组合/厂家页、"
+               "A1 详情展开、ATC 搜索 + 术语表")
 
     return {
+        "LATEST_VER": ver,
         "SNAP_TIME": f"{now:%Y-%m-%d %H:%M}",
         "SNAP_HHMM": f"{now:%H:%M}",
         "MAIN_STATUS": main_status(),
+        "TW": commas(db["tw"]),
         "TOTAL": commas(total),
         "US": commas(us),
         "GB": commas(gb),

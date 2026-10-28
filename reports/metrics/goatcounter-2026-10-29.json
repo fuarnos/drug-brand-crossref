@@ -1,0 +1,1110 @@
+{
+ "_meta": {
+  "schema": 1,
+  "source": "GoatCounter API v0 (stats/*)",
+  "site_code": "drug-brand-crossref",
+  "token_masked": "qsea…6oyc",
+  "date": "2026-10-29",
+  "range": {
+   "start": "2026-10-25T00:00:00Z",
+   "end": "2026-10-30T00:00:00Z"
+  },
+  "generated_at": "2026-10-28T20:02:03+00:00",
+  "site_path_prefix": "/drug-brand-crossref"
+ },
+ "totals": {
+  "hits": 47,
+  "events": 16,
+  "pageviews": 31,
+  "days": [
+   {
+    "day": "2026-10-27",
+    "hits": 14
+   },
+   {
+    "day": "2026-10-28",
+    "hits": 23
+   },
+   {
+    "day": "2026-10-29",
+    "hits": 10
+   }
+  ],
+  "active_days": 3
+ },
+ "top_pages": [
+  {
+   "path_id": 115962266,
+   "path": "/drug-brand-crossref",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-10-28": 1,
+    "2026-10-29": 2
+   }
+  },
+  {
+   "path_id": 115962447,
+   "path": "/drug-brand-crossref/drug/acetaminophen.html",
+   "event": false,
+   "title": "Acetaminophen · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-10-28": 1,
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115621230,
+   "path": "/drug-brand-crossref/es",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-10-27": 1,
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115620209,
+   "path": "/drug-brand-crossref/index.html?lang=zh",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-10-27": 2
+   }
+  },
+  {
+   "path_id": 115966681,
+   "path": "/drug-brand-crossref/whats-new.html",
+   "event": false,
+   "title": "What's new · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-10-28": 1,
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115962399,
+   "path": "/drug-brand-crossref/?q=Excedrin+Extra+Strength",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967008,
+   "path": "/drug-brand-crossref/about.html",
+   "event": false,
+   "title": "About · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967014,
+   "path": "/drug-brand-crossref/about.html?lang=en",
+   "event": false,
+   "title": "About · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967021,
+   "path": "/drug-brand-crossref/about.html?lang=es",
+   "event": false,
+   "title": "About · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967052,
+   "path": "/drug-brand-crossref/about.html?lang=zh",
+   "event": false,
+   "title": "About · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 116206557,
+   "path": "/drug-brand-crossref/combo/acetaminophen+chlorphenamine+dextromethorphan+pseudoephedrine.html",
+   "event": false,
+   "title": "Acetaminophen + Chlorphenamine + Dextromethorphan + Pseudoephedrine · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115967499,
+   "path": "/drug-brand-crossref/confused.html",
+   "event": false,
+   "title": "Easily confused drug names · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115623506,
+   "path": "/drug-brand-crossref/drug/cetirizine.html",
+   "event": false,
+   "title": "Cetirizine · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115964307,
+   "path": "/drug-brand-crossref/es/?q=Excedrin+Extra+Strength",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967670,
+   "path": "/drug-brand-crossref/index.html",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115962455,
+   "path": "/drug-brand-crossref/name/excedrin-extra-strength-pain-reliever.html",
+   "event": false,
+   "title": "Excedrin Extra Strength Pain Reliever · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115966867,
+   "path": "/drug-brand-crossref/warn.html",
+   "event": false,
+   "title": "Warnings · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967383,
+   "path": "/drug-brand-crossref/warn.html?lang=en",
+   "event": false,
+   "title": "Warnings · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967481,
+   "path": "/drug-brand-crossref/warn.html?lang=es",
+   "event": false,
+   "title": "Warnings · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115967380,
+   "path": "/drug-brand-crossref/warn.html?lang=zh",
+   "event": false,
+   "title": "Warnings · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115966696,
+   "path": "/drug-brand-crossref/whats-new.html?lang=en",
+   "event": false,
+   "title": "What's new · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115966704,
+   "path": "/drug-brand-crossref/whats-new.html?lang=es",
+   "event": false,
+   "title": "What's new · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115966707,
+   "path": "/drug-brand-crossref/whats-new.html?lang=zh",
+   "event": false,
+   "title": "What's new · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 116205401,
+   "path": "/drug-brand-crossref/zh",
+   "event": false,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 1,
+   "days": {
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115962416,
+   "path": "/drug-brand-crossref/zh/?q=Excedrin+Extra+Strength",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  }
+ ],
+ "search_events": [
+  {
+   "path_id": 115623555,
+   "path": "search-cetirizine",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115623531,
+   "path": "search-cetirizine cetirizine",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115962302,
+   "path": "search-excedrin extra strength",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-28": 1
+   }
+  },
+  {
+   "path_id": 115623457,
+   "path": "search-左旋盐酸",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115624630,
+   "path": "search-左西替利嗪",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 116205832,
+   "path": "search-泰诺",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 1,
+   "days": {
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115623477,
+   "path": "search-盐酸xi'ti'li'q",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115624703,
+   "path": "search-盐酸左旋",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115624715,
+   "path": "search-盐酸左旋西",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  },
+  {
+   "path_id": 115623492,
+   "path": "search-盐酸西",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  }
+ ],
+ "other_events": [
+  {
+   "path_id": 115623504,
+   "path": "click-result",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-10-27": 1,
+    "2026-10-28": 1,
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115966679,
+   "path": "click-whatsnew",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-10-28": 1,
+    "2026-10-29": 1
+   }
+  },
+  {
+   "path_id": 115623571,
+   "path": "country-CN",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-10-27": 1
+   }
+  }
+ ],
+ "zero_result_events": [],
+ "zero_result_event_implemented": false,
+ "countries": [
+  {
+   "id": "US",
+   "name": "United States",
+   "count": 46
+  },
+  {
+   "id": "RU",
+   "name": "Russia",
+   "count": 1
+  }
+ ],
+ "browsers": [
+  {
+   "id": "Chrome",
+   "name": "Chrome",
+   "count": 47
+  }
+ ],
+ "systems": [
+  {
+   "id": "Windows",
+   "name": "Windows",
+   "count": 46
+  },
+  {
+   "id": "Linux",
+   "name": "Linux",
+   "count": 1
+  }
+ ],
+ "languages": [
+  {
+   "id": "(unknown)",
+   "name": "(unknown)",
+   "count": 47
+  }
+ ],
+ "sizes": [
+  {
+   "id": "phone",
+   "name": "",
+   "count": 0
+  },
+  {
+   "id": "tablet",
+   "name": "",
+   "count": 1
+  },
+  {
+   "id": "desktop",
+   "name": "",
+   "count": 46
+  },
+  {
+   "id": "desktophd",
+   "name": "",
+   "count": 0
+  },
+  {
+   "id": "unknown",
+   "name": "",
+   "count": 0
+  }
+ ],
+ "campaigns": [],
+ "refs": [
+  {
+   "name": "",
+   "count": 13,
+   "ref_scheme": "o"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/index.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/index.html",
+   "count": 7,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/warn.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/warn.html",
+   "count": 5,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/zh",
+   "name": "fuarnos.github.io/drug-brand-crossref/zh",
+   "count": 4,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/whats-new.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/whats-new.html",
+   "count": 4,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref",
+   "name": "fuarnos.github.io/drug-brand-crossref",
+   "count": 3,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/about.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/about.html",
+   "count": 3,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/zh/index.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/zh/index.html",
+   "count": 3,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+   "name": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "weixin110.qq.com",
+   "name": "weixin110.qq.com",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/es",
+   "name": "fuarnos.github.io/drug-brand-crossref/es",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/confused.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/confused.html",
+   "count": 1,
+   "ref_scheme": "h"
+  }
+ ],
+ "path_cross_tab": [
+  {
+   "path_id": 115962266,
+   "path": "/drug-brand-crossref",
+   "count": 3,
+   "event": false,
+   "systems": {
+    "Windows": 2,
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 3
+   },
+   "sizes": {
+    "tablet": 1,
+    "desktop": 2
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    },
+    {
+     "name": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 115623504,
+   "path": "click-result",
+   "count": 3,
+   "event": true,
+   "systems": {
+    "Windows": 3
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115962447,
+   "path": "/drug-brand-crossref/drug/acetaminophen.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115621230,
+   "path": "/drug-brand-crossref/es",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115620209,
+   "path": "/drug-brand-crossref/index.html?lang=zh",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966681,
+   "path": "/drug-brand-crossref/whats-new.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966679,
+   "path": "click-whatsnew",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115962399,
+   "path": "/drug-brand-crossref/?q=Excedrin+Extra+Strength",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967008,
+   "path": "/drug-brand-crossref/about.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967014,
+   "path": "/drug-brand-crossref/about.html?lang=en",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967021,
+   "path": "/drug-brand-crossref/about.html?lang=es",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967052,
+   "path": "/drug-brand-crossref/about.html?lang=zh",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116206557,
+   "path": "/drug-brand-crossref/combo/acetaminophen+chlorphenamine+dextromethorphan+pseudoephedrine.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967499,
+   "path": "/drug-brand-crossref/confused.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623506,
+   "path": "/drug-brand-crossref/drug/cetirizine.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115964307,
+   "path": "/drug-brand-crossref/es/?q=Excedrin+Extra+Strength",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967670,
+   "path": "/drug-brand-crossref/index.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115962455,
+   "path": "/drug-brand-crossref/name/excedrin-extra-strength-pain-reliever.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966867,
+   "path": "/drug-brand-crossref/warn.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967383,
+   "path": "/drug-brand-crossref/warn.html?lang=en",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967481,
+   "path": "/drug-brand-crossref/warn.html?lang=es",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967380,
+   "path": "/drug-brand-crossref/warn.html?lang=zh",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966696,
+   "path": "/drug-brand-crossref/whats-new.html?lang=en",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966704,
+   "path": "/drug-brand-crossref/whats-new.html?lang=es",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966707,
+   "path": "/drug-brand-crossref/whats-new.html?lang=zh",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116205401,
+   "path": "/drug-brand-crossref/zh",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115962416,
+   "path": "/drug-brand-crossref/zh/?q=Excedrin+Extra+Strength",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623571,
+   "path": "country-CN",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623555,
+   "path": "search-cetirizine",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623531,
+   "path": "search-cetirizine cetirizine",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115962302,
+   "path": "search-excedrin extra strength",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623457,
+   "path": "search-左旋盐酸",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115624630,
+   "path": "search-左西替利嗪",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116205832,
+   "path": "search-泰诺",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623477,
+   "path": "search-盐酸xi'ti'li'q",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115624703,
+   "path": "search-盐酸左旋",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115624715,
+   "path": "search-盐酸左旋西",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115623492,
+   "path": "search-盐酸西",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  }
+ ],
+ "russia": {
+  "conclusion": "单次/低频访问、路径是正常站点路由（非扫描路径）、Linux + Chrome + 小视口（tablet 档，常见无头浏览器 800×600）且无后续浏览——更像**爬虫/预览机器人或 VPN/代理单次访问**，不是可识别的真实用户使用行为；小视口进一步支持无头浏览器特征",
+  "confidence": "中高",
+  "evidence": {
+   "ru_hits": 1,
+   "ru_share_of_hits": 2.1,
+   "non_windows_paths": [
+    {
+     "path": "/drug-brand-crossref",
+     "count": 3,
+     "systems": {
+      "Windows": 2,
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 3
+     },
+     "sizes": {
+      "tablet": 1,
+      "desktop": 2
+     }
+    }
+   ],
+   "suspicious_paths": [],
+   "candidate": {
+    "path": "/drug-brand-crossref",
+    "path_id": 115962266,
+    "path_hits": 3,
+    "systems": {
+     "Windows": 2,
+     "Linux": 1
+    },
+    "browsers": {
+     "Chrome": 3
+    },
+    "sizes": {
+     "tablet": 1,
+     "desktop": 2
+    },
+    "refs": [
+     {
+      "name": "",
+      "count": 2,
+      "scheme": "o"
+     },
+     {
+      "name": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+      "count": 1,
+      "scheme": "h"
+     }
+    ],
+    "is_event": false
+   }
+  },
+  "limitations": [
+   "GoatCounter API 不提供 UA/IP/ASN；CSV export 需 export 权限（本 token 403），无法做原始 hit 级交叉表",
+   "国家/浏览器/系统等维度按 GoatCounter 统计口径（含事件、按访问者计），与 PV 不完全等价",
+   "站点挂在 GitHub Pages，无服务端日志；如需 100% 确证需 Cloudflare/服务端访问日志或 GoatCounter 后台查看 UA"
+  ],
+  "advice": [
+   "按机器人/噪音流量忽略即可，不需要封禁（本站无登录/写接口，无风险面）",
+   "自测流量建议在 GoatCounter 后台设置 skip-dev（按 UA/IP 排除），避免污染统计",
+   "如后续要监控异常，可给站点加 Cloudflare（免费版）看 ASN/UA，或在 GoatCounter 后台加 Bot 过滤",
+   "搜索零结果事件目前未埋点（代码只有 search-<term> / click-*），建议补 search0-<term> 事件后纳入本报告"
+  ]
+ }
+}

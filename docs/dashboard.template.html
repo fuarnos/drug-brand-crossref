@@ -189,7 +189,7 @@
   <div>
     <div class="eyebrow">DSH WORK CLUSTER · 快照 / SNAPSHOT</div>
     <h1>药品商品名跨国定位站<span>工作集群 · 架构与进度</span></h1>
-    <div class="lede">一个项目、多会话协作；七个市场全部入库，站点已上线 GitHub Pages（v0.5.1）。</div>
+    <div class="lede">一个项目、多会话协作；八个市场全部入库（含台湾 TW），站点已上线 GitHub Pages（{{LATEST_VER}}）。</div>
   </div>
   <div class="snap">
     <div class="live static"><i></i>静态快照 · 手动重拍</div>
@@ -211,7 +211,7 @@
     <div class="card g">
       <div class="role"><span class="name">主线编排</span><span class="pill run"><i></i>{{MAIN_STATUS}}</span></div>
       <div class="sid mono">session-757e1865 · 统筹 + 入库 + 建站</div>
-      <div class="task">今天把市场从 3 个扩到 <b>7 个</b>：中 14.6 万、美 11 万、英 6.1 万、加 4.4 万、西 2.5 万、澳 1.2 万、墨 1.1 万；站点已上线，源码与文档口径收尾完成。</div>
+      <div class="task">市场从 3 个扩到 <b>8 个</b>：中 14.6 万、美 11 万、英 6.1 万、加 4.4 万、西 2.5 万、澳 1.2 万、墨 1.1 万、台 <b>1.6 万</b>（v0.7.0）；站点已上线，源码与文档口径收尾完成。</div>
       <div class="chips"><span class="chip">{{TOTAL}} 产品</span><span class="chip">{{SUBST}} 成分</span><span class="chip">80+ 项测试</span></div>
     </div>
     <div class="card b">
@@ -245,6 +245,7 @@
       <tr><td><b>墨西哥</b> · MX</td><td>COFEPRIS 26 个 PDF</td><td class="r num">{{MX}}</td><td class="who">主线编排</td><td><span class="st-hot"><i class="dot a"></i>29% 有规格 · 许可待确认</span></td></tr>
       <tr><td><b>澳洲</b> · AU</td><td>PBS API + TGA CMI + ARTG 名称层</td><td class="r num">{{AU}}</td><td class="who">主线编排</td><td><span class="st-hot"><i class="dot a"></i>PBS + CMI + ARTG 兜底</span></td></tr>
       <tr><td><b>加拿大</b> · CA</td><td>Health Canada DPD</td><td class="r num">{{CA}}</td><td class="who">主线编排</td><td><span class="st-done"><i class="dot g"></i>全量 · 2026-10-23 DPD</span></td></tr>
+<tr><td><b>台湾</b> · TW</td><td>TFDA 全部藥品許可證</td><td class="r num">{{TW}}</td><td class="who">data-depth</td><td><span class="st-done"><i class="dot"></i>已上线 v0.7.0</span></td></tr>
     </table>
   </div>
   <div class="flow"><b>协作总线</b>　同一 DSH 运行时 · 同一工作区 · 同一 SQLite（单一真相源）· docs/ 承载结论　→　会话是并行工位，不是共享大脑</div>
@@ -403,7 +404,7 @@
     <div class="ph">
       <div class="top"><span class="p">P6</span><span class="pct" style="color:var(--amber)">95%</span></div>
       <h4>发布治理</h4><div class="bar"><i style="width:95%;background:var(--amber)"></i></div>
-      <div class="note">v0.4.1 已上线；tag 只到 v0.4.0，工作树有未提交改动</div>
+      <div class="note">{{LATEST_VER}} 已上线；发布/回滚由发布经理按 deploy/publish.ps1 执行</div>
     </div>
   </div>
   <div class="extra"><b>计划外加餐：</b>西班牙 {{ES}}、墨西哥 {{MX}}、澳洲 {{AU}}、加拿大 {{CA}}、中国 {{CN}} 都入库了；许可边界写在 about，README / about / CHANGELOG 与库里的数字一致。</div>
@@ -446,17 +447,19 @@
       <h3>最高优先级 <span>下一谷段先做</span></h3>
       <div class="qitem"><span class="qtag hi">P0</span><b>药物互相对应</b><span class="meta">复方优先匹配复方；无同组合才降级到主成分，并标注「仅主成分相同」</span></div>
       <div class="qitem"><span class="qtag hi">P0</span><b>数据库优化</b><span class="meta">PRAGMA / 索引 / 去重；integrity + FK 清零，reports/db-optimization.md</span></div>
-      <div class="qitem"><span class="qtag mid">待确认</span><b>稳定期观察</b><span class="meta">v0.5.1 已发布，等用户确认后再继续加功能</span></div>
-      <div class="qitem"><span class="qtag lo">已完成</span><b>v0.5.1 一批</b><span class="meta">索引分片 3.78 MB → 254 KB；ES 复方 +102；评测集 320 例</span></div>
+      <div class="qitem"><span class="qtag mid">待确认</span><b>稳定期观察</b><span class="meta">{{LATEST_VER}} 谷段连续发布中；功能队列清完后评估一轮</span></div>
+      <div class="qitem"><span class="qtag lo">已完成</span><b>v0.5.2–v0.7.0 十三版</b><span class="meta">/warn 热修、品牌/组合/厂家页、A1 详情展开、矩阵+/warn 分页、增量发布、zh-Hant + TW 16,457 上线</span></div>
     </div>
     <div class="qbox">
-      <h3>下一谷段 <span>6 项</span></h3>
-      <div class="qitem"><span class="qtag mid">P1</span><b>品牌 / 成分点击目标错位</b><span class="meta">Excedrin 点品牌不得落到 acetaminophen 页；复方进组合页</span></div>
-      <div class="qitem"><span class="qtag mid">P1</span><b>厂家页</b><span class="meta">/maker/&lt;slug&gt;.html；≥2 产品的厂家约 12.4k 个，占位名不建页</span></div>
-      <div class="qitem"><span class="qtag mid">P1</span><b>成分名本地化</b><span class="meta">中文界面成分显示中文；inn_zh 目前只有 16% 有值</span></div>
-      <div class="qitem"><span class="qtag mid">P1</span><b>西语 UI 完整性</b><span class="meta">title / meta / warn / About 英文残留；导航后语言不丢</span></div>
-      <div class="qitem"><span class="qtag mid">P1</span><b>使用向 UI 改进</b><span class="meta">国家 chips、覆盖徽章、复制/打印、最近搜索、空结果行动</span></div>
-      <div class="qitem"><span class="qtag mid">P1</span><b>同品牌不同规格合并</b><span class="meta">一行 + 规格 chips；不改产品身份与碰撞语义</span></div>
+      <h3>下一谷段 <span>8 项</span></h3>
+      <div class="qitem"><span class="qtag hi">P0</span><b>task-82 ATC 类别浏览</b><span class="meta">按 ATC 分类树建类别页 + 首页常见大类入口；排 TW 后（v0.7.x）</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>SG 提前 / HK 上线</b><span class="meta">SG HSA 免费可再发布审计；HK 下一谷段名称/成分层（task-88）</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>task-83 术语基准 + AI 译文校验</b><span class="meta">WHO INN/ATC/药典基准，自动校验 i18n 译文</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>task-84 评测集 500+ / RxNorm oracle</b><span class="meta">接 CI 门槛；zero-result 事件</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>task-85 CN 商品名扩充（不花钱）</b><span class="meta">接受 98.4%；缺口 60,984 批文/128,060 产品；低优先 CC0/CC-BY</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>MO 链接层 + 申请信</b><span class="meta">task-89 起草；获批前不入库；PT 备选/暂缓</span></div>
+      <div class="qitem"><span class="qtag lo">P2</span><b>市场注册表 + 矩阵 / A4 覆盖页</b><span class="meta">lib/markets.py + data/*.json；覆盖与新鲜度页</span></div>
+      <div class="qitem"><span class="qtag lo">P2</span><b>UI P1 余项 / U4–U7 / 索引细化</b><span class="meta">身份卡、筛选排序、骨架屏；复制标准名、分享卡；分片 254→~150 KB</span></div>
     </div>
     <div class="qbox">
       <h3>排期中 <span>5 项 + 备注</span></h3>
@@ -472,7 +475,7 @@
 </section>
 
 <section>
-  <div class="sec-head"><span class="no">07</span><h2>关键节点 · 10-25 晚 → 10-27</h2><span class="hint">从七市场入库到 v0.5.1：搜索、UI、三语、/warn、索引分片</span></div>
+  <div class="sec-head"><span class="no">07</span><h2>关键节点 · 10-25 晚 → 10-29</h2><span class="hint">从七市场入库到 v0.6.x 谷段：搜索、UI、三语/繁中、/warn、索引分片、ATC/术语表</span></div>
   <div class="tl">
     <div class="ev"><div class="t mono">19:19</div><div class="x">TRUD 订阅生效，dm+d supplementary 出现 <b>27 个可下载版本</b></div></div>
     <div class="ev"><div class="t mono">20:24</div><div class="x">西班牙入库 <b>25,293 条</b>（CIMA，别名映射 23,508）</div></div>
@@ -489,8 +492,13 @@
     <div class="ev"><div class="t mono">20:47</div><div class="x">站点重建：<b>{{FILES}} 文件 / {{SIZE_MB}} MB / 索引 {{INDEX_MB}} MB</b>，发布到 GitHub Pages</div></div>
     <div class="ev"><div class="t mono">01:53</div><div class="x">v0.5.0 上线：搜索 P50 <b>94 ms → 1 ms</b>（难例 28/28）、UI P0、三语 P1、<b>/warn 40 条</b>、ATC 双口径 <b>47.5% / 67.0%</b>、GB 盐型 <b>25%</b>、MX <b>35.2%</b></div></div>
     <div class="ev"><div class="t mono">03:40</div><div class="x">v0.5.1 上线：首搜 <b>3.78 MB → 254 KB</b>（manifest+分片）、ES 复方 <b>+102 产品</b>、/warn 西语、评测集 <b>320 例</b></div></div>
+    <div class="ev"><div class="t mono">10-29</div><div class="x">v0.5.2–v0.5.6 上线：/warn 热修、品牌/组合/厂家页、A1 详情展开、A3 盐型徽章、B6/B7 行级报告与复制/CSV</div></div>
+    <div class="ev"><div class="t mono">10-29</div><div class="x">v0.6.0–v0.6.2 上线：跨市场同组合区块、停 index.json 双写（core 唯一索引）、<b>繁体中文 UI</b>（/zh-hant/ 5 页 + 繁→简检索）</div></div>
+    <div class="ev"><div class="t mono">10-29</div><div class="x">v0.6.3–v0.6.4 上线：首屏三步引导、各国叫法横排、标签本地化、<b>ATC 码搜索</b> + <b>/glossary 四语术语表</b></div></div>
     <div class="ev"><div class="t mono">本次</div><div class="x">快照 {{SNAP_HHMM}}；站点 {{FILES}} 文件 / {{SIZE_MB}} MB / 索引 {{INDEX_MB}} MB</div></div>
-    <div class="ev"><div class="t mono">下一步</div><div class="x">停 index.json 双写（省 35MB）→ 拼音层进 lib/search → UI P1 身份卡/筛选 → 长尾数据</div></div>
+    <div class="ev"><div class="t mono">10-29</div><div class="x">v0.6.5–v0.6.7 上线：EN/ES 去中文残留、成分页多国矩阵、/warn 分页、<b>增量发布 −93.4%</b>（602s）</div></div>
+    <div class="ev"><div class="t mono">10-29</div><div class="x">v0.7.0 上线：<b>台湾 TFDA 16,457 产品 + zh-Hant 全站</b>、8 市场矩阵 TW 列、TFDA OGDL 署名；smoke 0 failures</div></div>
+    <div class="ev"><div class="t mono">下一步</div><div class="x">task-82 ATC 类别浏览 → SG/HK → 术语基准/评测集 500+ → CN 商品名/申请台账跟踪 → 市场注册表/覆盖页</div></div>
   </div>
 </section>
 

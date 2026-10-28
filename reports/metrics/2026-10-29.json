@@ -1,0 +1,775 @@
+{
+ "schema": 1,
+ "date": "2026-10-29",
+ "generated_at": "2026-10-28T13:17:54-07:00",
+ "elapsed_s": 25.62,
+ "sources": {
+  "db": {
+   "path": "data\\drugs.db",
+   "bytes": 351391744,
+   "mtime": "2026-10-28T12:08:31"
+  },
+  "dist": {
+   "path": "site\\dist",
+   "files": 60375,
+   "newest_mtime": "2026-10-28T13:03:56"
+  }
+ },
+ "metrics": {
+  "totals": {
+   "products": 426044,
+   "components": 527166,
+   "substances": 12649,
+   "variants": 13772,
+   "name_keys": 165619,
+   "names": 601806,
+   "aliases": 1119,
+   "nicknames": 57,
+   "drug_terms": 1062,
+   "confusable_pairs": 22,
+   "artg_entries": 34594,
+   "dose_warnings_published": 40
+  },
+  "countries": {
+   "AU": {
+    "products": 11890,
+    "active_products": 7160,
+    "products_with_strength": 7022,
+    "strength_pct": 59.06,
+    "variants": 2779
+   },
+   "CA": {
+    "products": 43847,
+    "active_products": 14519,
+    "products_with_strength": 43776,
+    "strength_pct": 99.84,
+    "variants": 3536
+   },
+   "CN": {
+    "products": 146347,
+    "active_products": 146347,
+    "products_with_strength": 141117,
+    "strength_pct": 96.43,
+    "variants": 3088
+   },
+   "ES": {
+    "products": 25395,
+    "active_products": 16030,
+    "products_with_strength": 24889,
+    "strength_pct": 98.01,
+    "variants": 2157
+   },
+   "GB": {
+    "products": 61051,
+    "active_products": 61051,
+    "products_with_strength": 51307,
+    "strength_pct": 84.04,
+    "variants": 3941
+   },
+   "MX": {
+    "products": 10878,
+    "active_products": 1772,
+    "products_with_strength": 3832,
+    "strength_pct": 35.23,
+    "variants": 1970
+   },
+   "TW": {
+    "products": 16457,
+    "active_products": 16457,
+    "products_with_strength": 7786,
+    "strength_pct": 47.31,
+    "variants": 2010
+   },
+   "US": {
+    "products": 110179,
+    "active_products": 110179,
+    "products_with_strength": 96648,
+    "strength_pct": 87.72,
+    "variants": 4803
+   }
+  },
+  "atc": {
+   "substances": 12649,
+   "with_atc": 6021,
+   "coverage_pct": 47.6
+  },
+  "collisions": {
+   "info": 137739,
+   "warning": 819,
+   "severe": 18917,
+   "total": 157475
+  },
+  "alias_confidence": {
+   "community": 642,
+   "documented": 476,
+   "user": 1
+  },
+  "duplicates": {
+   "pairs": 1,
+   "ids": 2,
+   "atc4_groups": 1,
+   "definition": "同 ATC 前 5 位 + inn_en 归一化相同或 inn_zh 相同（同 etl/auto_merge_substances.py）"
+  },
+  "ingest": {
+   "running": 0,
+   "failed": 0
+  },
+  "pages": {
+   "total_files": 60375,
+   "html_total": 60220,
+   "drug_pages": 12246,
+   "name_pages": 30383,
+   "total_bytes": 436297181,
+   "sitemap_urls": 60219
+  },
+  "sizes": {
+   "index_html": {
+    "raw": 7745,
+    "gz": 2544
+   },
+   "app_js": {
+    "raw": 109723,
+    "gz": 41766
+   },
+   "i18n_js": {
+    "raw": 118909,
+    "gz": 35635
+   },
+   "style_css": {
+    "raw": 14935,
+    "gz": 4554
+   },
+   "aliases": {
+    "raw": 878087,
+    "gz": 91306
+   },
+   "confused": {
+    "raw": 3660,
+    "gz": 1147
+   },
+   "first_screen_gz": 84499,
+   "first_search_gz": 251369,
+   "manifest_gz": 8793,
+   "shard_median_gz": 150123,
+   "shard_count": 92,
+   "core_gz": 7557132,
+   "index_gz": 0,
+   "core_raw": 32220611,
+   "index_raw": 0
+  }
+ },
+ "compare": {
+  "prev_file": "reports\\metrics\\2026-10-27.json",
+  "prev_date": "2026-10-27",
+  "deltas": {
+   "totals.products": {
+    "prev": 409587,
+    "cur": 426044,
+    "delta": 16457,
+    "pct": 4.02
+   },
+   "totals.components": {
+    "prev": 498445,
+    "cur": 527166,
+    "delta": 28721,
+    "pct": 5.76
+   },
+   "totals.substances": {
+    "prev": 12790,
+    "cur": 12649,
+    "delta": -141,
+    "pct": -1.1
+   },
+   "totals.variants": {
+    "prev": 13886,
+    "cur": 13772,
+    "delta": -114,
+    "pct": -0.82
+   },
+   "totals.name_keys": {
+    "prev": 135251,
+    "cur": 165619,
+    "delta": 30368,
+    "pct": 22.45
+   },
+   "totals.names": {
+    "prev": 568907,
+    "cur": 601806,
+    "delta": 32899,
+    "pct": 5.78
+   },
+   "totals.aliases": {
+    "prev": 1119,
+    "cur": 1119,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "totals.nicknames": {
+    "prev": 57,
+    "cur": 57,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "totals.drug_terms": {
+    "prev": 1062,
+    "cur": 1062,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "totals.confusable_pairs": {
+    "prev": 22,
+    "cur": 22,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "totals.artg_entries": {
+    "prev": 34594,
+    "cur": 34594,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "totals.dose_warnings_published": {
+    "prev": 40,
+    "cur": 40,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.AU.products": {
+    "prev": 11890,
+    "cur": 11890,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.AU.active_products": {
+    "prev": 7160,
+    "cur": 7160,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.AU.products_with_strength": {
+    "prev": 7022,
+    "cur": 7022,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.AU.strength_pct": {
+    "prev": 59.06,
+    "cur": 59.06,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.AU.variants": {
+    "prev": 2779,
+    "cur": 2779,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CA.products": {
+    "prev": 43847,
+    "cur": 43847,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CA.active_products": {
+    "prev": 14519,
+    "cur": 14519,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CA.products_with_strength": {
+    "prev": 43776,
+    "cur": 43776,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CA.strength_pct": {
+    "prev": 99.84,
+    "cur": 99.84,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.CA.variants": {
+    "prev": 3536,
+    "cur": 3536,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CN.products": {
+    "prev": 146347,
+    "cur": 146347,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CN.active_products": {
+    "prev": 146347,
+    "cur": 146347,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CN.products_with_strength": {
+    "prev": 141117,
+    "cur": 141117,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.CN.strength_pct": {
+    "prev": 96.43,
+    "cur": 96.43,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.CN.variants": {
+    "prev": 3091,
+    "cur": 3088,
+    "delta": -3,
+    "pct": -0.1
+   },
+   "countries.ES.products": {
+    "prev": 25395,
+    "cur": 25395,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.ES.active_products": {
+    "prev": 16030,
+    "cur": 16030,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.ES.products_with_strength": {
+    "prev": 24889,
+    "cur": 24889,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.ES.strength_pct": {
+    "prev": 98.01,
+    "cur": 98.01,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.ES.variants": {
+    "prev": 2159,
+    "cur": 2157,
+    "delta": -2,
+    "pct": -0.09
+   },
+   "countries.GB.products": {
+    "prev": 61051,
+    "cur": 61051,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.GB.active_products": {
+    "prev": 61051,
+    "cur": 61051,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.GB.products_with_strength": {
+    "prev": 51307,
+    "cur": 51307,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.GB.strength_pct": {
+    "prev": 84.04,
+    "cur": 84.04,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.GB.variants": {
+    "prev": 3941,
+    "cur": 3941,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.MX.products": {
+    "prev": 10878,
+    "cur": 10878,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.MX.active_products": {
+    "prev": 1772,
+    "cur": 1772,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.MX.products_with_strength": {
+    "prev": 3832,
+    "cur": 3832,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.MX.strength_pct": {
+    "prev": 35.23,
+    "cur": 35.23,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.MX.variants": {
+    "prev": 1997,
+    "cur": 1970,
+    "delta": -27,
+    "pct": -1.35
+   },
+   "countries.US.products": {
+    "prev": 110179,
+    "cur": 110179,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.US.active_products": {
+    "prev": 110179,
+    "cur": 110179,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.US.products_with_strength": {
+    "prev": 96648,
+    "cur": 96648,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "countries.US.strength_pct": {
+    "prev": 87.72,
+    "cur": 87.72,
+    "delta": 0.0,
+    "pct": 0.0
+   },
+   "countries.US.variants": {
+    "prev": 4803,
+    "cur": 4803,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "atc.substances": {
+    "prev": 12790,
+    "cur": 12649,
+    "delta": -141,
+    "pct": -1.1
+   },
+   "atc.with_atc": {
+    "prev": 6081,
+    "cur": 6021,
+    "delta": -60,
+    "pct": -0.99
+   },
+   "atc.coverage_pct": {
+    "prev": 47.54,
+    "cur": 47.6,
+    "delta": 0.06,
+    "pct": 0.13
+   },
+   "collisions.info": {
+    "prev": 110779,
+    "cur": 137739,
+    "delta": 26960,
+    "pct": 24.34
+   },
+   "collisions.warning": {
+    "prev": 810,
+    "cur": 819,
+    "delta": 9,
+    "pct": 1.11
+   },
+   "collisions.severe": {
+    "prev": 15509,
+    "cur": 18917,
+    "delta": 3408,
+    "pct": 21.97
+   },
+   "collisions.total": {
+    "prev": 127098,
+    "cur": 157475,
+    "delta": 30377,
+    "pct": 23.9
+   },
+   "alias_confidence.community": {
+    "prev": 642,
+    "cur": 642,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "alias_confidence.documented": {
+    "prev": 476,
+    "cur": 476,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "alias_confidence.user": {
+    "prev": 1,
+    "cur": 1,
+    "delta": 0,
+    "pct": 0.0
+   },
+   "duplicates.pairs": {
+    "prev": 27,
+    "cur": 1,
+    "delta": -26,
+    "pct": -96.3
+   },
+   "duplicates.ids": {
+    "prev": 51,
+    "cur": 2,
+    "delta": -49,
+    "pct": -96.08
+   },
+   "duplicates.atc4_groups": {
+    "prev": 11,
+    "cur": 1,
+    "delta": -10,
+    "pct": -90.91
+   },
+   "ingest.running": {
+    "prev": 0,
+    "cur": 0,
+    "delta": 0,
+    "pct": null
+   },
+   "ingest.failed": {
+    "prev": 0,
+    "cur": 0,
+    "delta": 0,
+    "pct": null
+   },
+   "pages.total_files": {
+    "prev": 30336,
+    "cur": 60375,
+    "delta": 30039,
+    "pct": 99.02
+   },
+   "pages.html_total": {
+    "prev": 30255,
+    "cur": 60220,
+    "delta": 29965,
+    "pct": 99.04
+   },
+   "pages.drug_pages": {
+    "prev": 12377,
+    "cur": 12246,
+    "delta": -131,
+    "pct": -1.06
+   },
+   "pages.name_pages": {
+    "prev": 17870,
+    "cur": 30383,
+    "delta": 12513,
+    "pct": 70.02
+   },
+   "pages.total_bytes": {
+    "prev": 197807300,
+    "cur": 436297181,
+    "delta": 238489881,
+    "pct": 120.57
+   },
+   "pages.sitemap_urls": {
+    "prev": 30254,
+    "cur": 60219,
+    "delta": 29965,
+    "pct": 99.04
+   },
+   "sizes.index_html.raw": {
+    "prev": 4508,
+    "cur": 7745,
+    "delta": 3237,
+    "pct": 71.81
+   },
+   "sizes.index_html.gz": {
+    "prev": 1735,
+    "cur": 2544,
+    "delta": 809,
+    "pct": 46.63
+   },
+   "sizes.app_js.raw": {
+    "prev": 52195,
+    "cur": 109723,
+    "delta": 57528,
+    "pct": 110.22
+   },
+   "sizes.app_js.gz": {
+    "prev": 17926,
+    "cur": 41766,
+    "delta": 23840,
+    "pct": 132.99
+   },
+   "sizes.i18n_js.raw": {
+    "prev": 56119,
+    "cur": 118909,
+    "delta": 62790,
+    "pct": 111.89
+   },
+   "sizes.i18n_js.gz": {
+    "prev": 19968,
+    "cur": 35635,
+    "delta": 15667,
+    "pct": 78.46
+   },
+   "sizes.style_css.raw": {
+    "prev": 8698,
+    "cur": 14935,
+    "delta": 6237,
+    "pct": 71.71
+   },
+   "sizes.style_css.gz": {
+    "prev": 2795,
+    "cur": 4554,
+    "delta": 1759,
+    "pct": 62.93
+   },
+   "sizes.aliases.raw": {
+    "prev": 869321,
+    "cur": 878087,
+    "delta": 8766,
+    "pct": 1.01
+   },
+   "sizes.aliases.gz": {
+    "prev": 90883,
+    "cur": 91306,
+    "delta": 423,
+    "pct": 0.47
+   },
+   "sizes.confused.raw": {
+    "prev": 3575,
+    "cur": 3660,
+    "delta": 85,
+    "pct": 2.38
+   },
+   "sizes.confused.gz": {
+    "prev": 881,
+    "cur": 1147,
+    "delta": 266,
+    "pct": 30.19
+   },
+   "sizes.first_screen_gz": {
+    "prev": 42424,
+    "cur": 84499,
+    "delta": 42075,
+    "pct": 99.18
+   },
+   "sizes.first_search_gz": {
+    "prev": 146417,
+    "cur": 251369,
+    "delta": 104952,
+    "pct": 71.68
+   },
+   "sizes.manifest_gz": {
+    "prev": 6112,
+    "cur": 8793,
+    "delta": 2681,
+    "pct": 43.86
+   },
+   "sizes.shard_median_gz": {
+    "prev": 48541,
+    "cur": 150123,
+    "delta": 101582,
+    "pct": 209.27
+   },
+   "sizes.shard_count": {
+    "prev": 68,
+    "cur": 92,
+    "delta": 24,
+    "pct": 35.29
+   },
+   "sizes.core_gz": {
+    "prev": 3693220,
+    "cur": 7557132,
+    "delta": 3863912,
+    "pct": 104.62
+   },
+   "sizes.index_gz": {
+    "prev": 5833687,
+    "cur": 0,
+    "delta": -5833687,
+    "pct": -100.0
+   },
+   "sizes.core_raw": {
+    "prev": 15326396,
+    "cur": 32220611,
+    "delta": 16894215,
+    "pct": 110.23
+   },
+   "sizes.index_raw": {
+    "prev": 34906944,
+    "cur": 0,
+    "delta": -34906944,
+    "pct": -100.0
+   }
+  }
+ },
+ "warnings": [
+  {
+   "metric": "sizes.index_gz",
+   "label": "data/index.json 缺失",
+   "message": "data/index.json 缺失或为 0 字节（站点构建不完整？）"
+  },
+  {
+   "metric": "totals.substances",
+   "label": "成分数下降",
+   "kind": "drop_pct",
+   "threshold": 1.0,
+   "prev": 12790,
+   "cur": 12649,
+   "delta": -141,
+   "pct": -1.1,
+   "message": "成分数下降: 12790 → 12649（-1.10%，阈值 1.0%）"
+  },
+  {
+   "metric": "collisions.severe",
+   "label": "severe 碰撞数变化",
+   "kind": "change_pct",
+   "threshold": 5.0,
+   "prev": 15509,
+   "cur": 18917,
+   "delta": 3408,
+   "pct": 21.97,
+   "message": "severe 碰撞数变化: 15509 → 18917（+21.97%，阈值 5.0%）"
+  },
+  {
+   "metric": "pages.drug_pages",
+   "label": "成分页数下降",
+   "kind": "drop_pct",
+   "threshold": 1.0,
+   "prev": 12377,
+   "cur": 12246,
+   "delta": -131,
+   "pct": -1.06,
+   "message": "成分页数下降: 12377 → 12246（-1.06%，阈值 1.0%）"
+  },
+  {
+   "metric": "sizes.first_search_gz",
+   "label": "首搜体积（gzip）增加",
+   "kind": "rise_pct",
+   "threshold": 5.0,
+   "prev": 146417,
+   "cur": 251369,
+   "delta": 104952,
+   "pct": 71.68,
+   "message": "首搜体积（gzip）增加: 146417 → 251369（+71.68%，阈值 5.0%）"
+  },
+  {
+   "metric": "sizes.first_screen_gz",
+   "label": "首屏体积（gzip）增加",
+   "kind": "rise_pct",
+   "threshold": 10.0,
+   "prev": 42424,
+   "cur": 84499,
+   "delta": 42075,
+   "pct": 99.18,
+   "message": "首屏体积（gzip）增加: 42424 → 84499（+99.18%，阈值 10.0%）"
+  },
+  {
+   "metric": "sizes.core_gz",
+   "label": "索引核心 core.json 体积增加",
+   "kind": "rise_pct",
+   "threshold": 5.0,
+   "prev": 3693220,
+   "cur": 7557132,
+   "delta": 3863912,
+   "pct": 104.62,
+   "message": "索引核心 core.json 体积增加: 3693220 → 7557132（+104.62%，阈值 5.0%）"
+  }
+ ],
+ "ok": true
+}
