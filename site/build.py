@@ -635,6 +635,21 @@ UI_I18N = {
         "u2.none_hint": ("No product under this ingredient in this market's public data. "
                          "This does not prove it is unavailable there."),
         "u2.multi": "Several ingredients match — switch country to see the full list.",
+        # v0.6.4 A2：ATC 码搜索 + B10 术语表
+        "nav.glossary": "Glossary",
+        "meta.glossary.title": "Glossary · Medicine Brand Cross-Reference",
+        "meta.glossary.desc": ("Short definitions of the codes and terms used on this site: "
+                               "INN, BAN, USAN, ATC, MAH, DIN, NDC, ARTG, FDC, LASA, OTC, Rx, "
+                               "strength."),
+        "parse.atc": "ATC code", "parse.match.atc": "ATC code",
+        "atc.label": "ATC",
+        "atc.hint": ("ATC prefix match — results are products whose active ingredient carries "
+                     "this ATC code, not brand-name matches."),
+        "atc.hit": ("ATC {code}: {n} product names matched by active-ingredient ATC code. "
+                    "Identity only — not a recommendation."),
+        "atc.none": "No recorded active ingredient carries this ATC code or prefix.",
+        "atc.none_meta": "No ATC match for {code}",
+        "atc.loading": "Loading the index for ATC search…",
     },
     "es": {
         "u1.title": "Cómo funciona en 3 pasos",
@@ -654,6 +669,21 @@ UI_I18N = {
         "u2.none_hint": ("Sin datos públicos para este principio en ese mercado; no prueba "
                          "que no exista allí."),
         "u2.multi": "Varios principios coinciden — cambia de país para ver la lista completa.",
+        # v0.6.4 A2：ATC 码搜索 + B10 术语表
+        "nav.glossary": "Glosario",
+        "meta.glossary.title": "Glosario · Medicine Brand Cross-Reference",
+        "meta.glossary.desc": ("Definiciones breves de los códigos y términos usados en el sitio: "
+                               "INN, BAN, USAN, ATC, MAH, DIN, NDC, ARTG, FDC, LASA, OTC, Rx, "
+                               "concentración."),
+        "parse.atc": "Código ATC", "parse.match.atc": "Código ATC",
+        "atc.label": "ATC",
+        "atc.hint": ("Coincidencia por prefijo ATC: los resultados son productos cuyo principio "
+                     "activo lleva este código ATC, no nombres comerciales."),
+        "atc.hit": ("ATC {code}: {n} nombres de producto coinciden por el código ATC del "
+                    "principio activo. Solo identidad, no una recomendación."),
+        "atc.none": "Ningún principio activo registrado lleva este código o prefijo ATC.",
+        "atc.none_meta": "Sin coincidencias ATC para {code}",
+        "atc.loading": "Cargando el índice para la búsqueda ATC…",
     },
     "zh": {
         "u1.title": "三步看懂",
@@ -669,6 +699,18 @@ UI_I18N = {
         "u2.none": "未收录",
         "u2.none_hint": "公开数据里暂无该国该成分的产品；不等于该国没有这个药。",
         "u2.multi": "多成分/多结果，切国家查看全部。",
+        # v0.6.4 A2：ATC 码搜索 + B10 术语表
+        "nav.glossary": "术语表",
+        "meta.glossary.title": "术语表 · 药品商品名跨国定位",
+        "meta.glossary.desc": ("本站常用代码与术语的简短解释：INN、BAN、USAN、ATC、MAH、DIN、NDC、"
+                               "ARTG、FDC、LASA、OTC、Rx、规格。"),
+        "parse.atc": "ATC 码", "parse.match.atc": "ATC 码",
+        "atc.label": "ATC",
+        "atc.hint": "按 ATC 码前缀匹配：结果是「活性成分带有该 ATC 码」的产品，不是商品名匹配。",
+        "atc.hit": "ATC {code}：{n} 个商品名按活性成分 ATC 码命中。只做身份对应，不构成推荐。",
+        "atc.none": "已收录的活性成分中没有这个 ATC 码或前缀。",
+        "atc.none_meta": "{code} 没有 ATC 命中",
+        "atc.loading": "正在加载索引以进行 ATC 搜索…",
     },
     "zh-Hant": {
         "u1.title": "三步看懂",
@@ -684,6 +726,186 @@ UI_I18N = {
         "u2.none": "未收錄",
         "u2.none_hint": "公開資料裡暫無該國該成分的產品；不等於該國沒有這個藥。",
         "u2.multi": "多成分/多結果，切國家查看全部。",
+        # v0.6.4 A2：ATC 码搜索 + B10 術語表
+        "nav.glossary": "術語表",
+        "meta.glossary.title": "術語表 · 藥品商品名跨國定位",
+        "meta.glossary.desc": ("本站常用代碼與術語的簡短解釋：INN、BAN、USAN、ATC、MAH、DIN、NDC、"
+                               "ARTG、FDC、LASA、OTC、Rx、規格。"),
+        "parse.atc": "ATC 碼", "parse.match.atc": "ATC 碼",
+        "atc.label": "ATC",
+        "atc.hint": "依 ATC 碼前綴比對：結果是「有效成分帶有此 ATC 碼」的產品，不是商品名比對。",
+        "atc.hit": "ATC {code}：{n} 個商品名依有效成分 ATC 碼命中。只做身分對應，不構成推薦。",
+        "atc.none": "已收錄的有效成分中沒有這個 ATC 碼或前綴。",
+        "atc.none_meta": "{code} 沒有 ATC 命中",
+        "atc.loading": "正在載入索引以進行 ATC 搜尋…",
+    },
+}
+
+# ── v0.6.4 B10：术语表 /glossary.html（四语，INN/BAN/USAN/ATC/MAH/DIN/NDC/ARTG/FDC/LASA…）──
+GLOSSARY_I18N = {
+    "en": {
+        "glossary.title": "Glossary",
+        "glossary.intro": ("Short definitions for the codes and terms you see on product labels, "
+                           "regulator records and on this site. It is a decoding aid, not medical "
+                           "advice."),
+        "glossary.term": "Term", "glossary.def": "Meaning",
+        "glossary.note": ("Same acronym can differ by country (e.g. a DIN is Canadian, an ARTG "
+                          "number is Australian). Always read the code with its source."),
+        "glossary.t.inn": "INN",
+        "glossary.d.inn": ("International Nonproprietary Name: the WHO generic name for an active "
+                           "ingredient (e.g. acetaminophen/paracetamol, metoprolol)."),
+        "glossary.t.ban": "BAN",
+        "glossary.d.ban": ("British Approved Name: the UK generic name, usually identical to INN; "
+                           "a few older names differ (e.g. adrenaline for epinephrine)."),
+        "glossary.t.usan": "USAN",
+        "glossary.d.usan": ("United States Adopted Name: the US generic name; mostly INN, but "
+                            "sometimes different (e.g. albuterol for salbutamol)."),
+        "glossary.t.atc": "ATC code",
+        "glossary.d.atc": ("Anatomical Therapeutic Chemical classification (WHO): a code such as "
+                           "C07AB02. The first letters/numbers group by organ/system, class and "
+                           "substance — useful for finding the same kind of drug across markets."),
+        "glossary.t.mah": "MAH",
+        "glossary.d.mah": ("Marketing Authorisation Holder: the company that holds the licence "
+                           "for a product in a market; not necessarily the factory."),
+        "glossary.t.din": "DIN",
+        "glossary.d.din": ("Drug Identification Number: the Canadian product identifier; "
+                           "DIN-HM is used for homeopathic products."),
+        "glossary.t.ndc": "NDC",
+        "glossary.d.ndc": ("National Drug Code: the US product identifier (labeler + product + "
+                           "package segments)."),
+        "glossary.t.artg": "ARTG",
+        "glossary.d.artg": ("Australian Register of Therapeutic Goods number: identifies a "
+                            "therapeutic good listed/registered for Australia."),
+        "glossary.t.fdc": "FDC",
+        "glossary.d.fdc": ("Fixed-Dose Combination: two or more active ingredients in one product "
+                           "(e.g. metformin + glibenclamide). A combination page on this site."),
+        "glossary.t.lasa": "LASA / tall-man",
+        "glossary.d.lasa": ("Look-Alike, Sound-Alike drug names. FDA 'tall-man' lettering and the "
+                            "confused-names list help avoid mix-ups between similar names."),
+        "glossary.t.otc": "OTC",
+        "glossary.d.otc": ("Over-the-counter: sold without a prescription in that market; the "
+                           "same medicine may be prescription-only elsewhere."),
+        "glossary.t.rx": "Rx",
+        "glossary.d.rx": "Prescription-only medicine in that market.",
+        "glossary.t.strength": "Strength",
+        "glossary.d.strength": ("The amount of active ingredient per unit (e.g. 500 mg per "
+                                "tablet); strengths and release forms can vary between markets."),
+    },
+    "es": {
+        "glossary.title": "Glosario",
+        "glossary.intro": ("Definiciones breves de los códigos y términos que aparecen en envases, "
+                           "registros de reguladores y en este sitio. Ayuda para descifrar, no es "
+                           "consejo médico."),
+        "glossary.term": "Término", "glossary.def": "Significado",
+        "glossary.note": ("El mismo acrónimo puede variar según el país (un DIN es canadiense, un "
+                          "número ARTG es australiano). Lee siempre el código con su fuente."),
+        "glossary.t.inn": "INN",
+        "glossary.d.inn": ("Nombre genérico internacional (OMS) del principio activo; p. ej. "
+                           "acetaminofeno/paracetamol, metoprolol."),
+        "glossary.t.ban": "BAN",
+        "glossary.d.ban": ("Nombre genérico británico; casi siempre igual al INN, con algunas "
+                           "excepciones (adrenalina por epinefrina)."),
+        "glossary.t.usan": "USAN",
+        "glossary.d.usan": ("Nombre genérico adoptado en EE. UU.; normalmente INN, a veces "
+                            "distinto (albuterol por salbutamol)."),
+        "glossary.t.atc": "Código ATC",
+        "glossary.d.atc": ("Clasificación Anatómica Terapéutica Química (OMS): código tipo "
+                           "C07AB02; agrupa por órgano, clase y sustancia y ayuda a encontrar "
+                           "fármacos equivalentes entre mercados."),
+        "glossary.t.mah": "MAH",
+        "glossary.d.mah": ("Titular de la autorización de comercialización: empresa que posee la "
+                           "licencia del producto en un mercado; no siempre es la fábrica."),
+        "glossary.t.din": "DIN",
+        "glossary.d.din": ("Drug Identification Number: identificador de producto canadiense; "
+                           "DIN-HM se usa para homeopáticos."),
+        "glossary.t.ndc": "NDC",
+        "glossary.d.ndc": ("National Drug Code: identificador de producto estadounidense "
+                           "(etiquetador + producto + envase)."),
+        "glossary.t.artg": "ARTG",
+        "glossary.d.artg": ("Australian Register of Therapeutic Goods: número de registro "
+                            "australiano del producto terapéutico."),
+        "glossary.t.fdc": "FDC",
+        "glossary.d.fdc": ("Combinación en dosis fija: dos o más principios activos en un mismo "
+                           "producto (p. ej. metformina + glibenclamida)."),
+        "glossary.t.lasa": "LASA / tall-man",
+        "glossary.d.lasa": ("Nombres parecidos o que suenan igual. La tipografía tall-man de la "
+                            "FDA y las listas de nombres confundibles ayudan a evitar errores."),
+        "glossary.t.otc": "OTC",
+        "glossary.d.otc": ("Venta libre: sin receta en ese mercado; el mismo medicamento puede "
+                           "ser de prescripción en otro país."),
+        "glossary.t.rx": "Rx",
+        "glossary.d.rx": "Medicamento con receta en ese mercado.",
+        "glossary.t.strength": "Concentración",
+        "glossary.d.strength": ("Cantidad de principio activo por unidad (p. ej. 500 mg por "
+                                "comprimido); concentraciones y formas pueden variar entre países."),
+    },
+    "zh": {
+        "glossary.title": "术语表",
+        "glossary.intro": ("包装、监管记录和本站里常见代码/术语的简短解释。只帮助读代码，不是医疗建议。"),
+        "glossary.term": "术语", "glossary.def": "含义",
+        "glossary.note": ("同一个缩写在不同国家含义可能不同（DIN 是加拿大、ARTG 是澳大利亚）；"
+                          "看代码时务必连同来源一起看。"),
+        "glossary.t.inn": "INN",
+        "glossary.d.inn": "国际非专利名（WHO）：活性成分的全球通用名，如对乙酰氨基酚、美托洛尔。",
+        "glossary.t.ban": "BAN",
+        "glossary.d.ban": "英国批准名：通常与 INN 相同，少数旧名不同（如 adrenaline 对应 epinephrine）。",
+        "glossary.t.usan": "USAN",
+        "glossary.d.usan": "美国采用名：多数同 INN，个别不同（如 albuterol 对应 salbutamol）。",
+        "glossary.t.atc": "ATC 码",
+        "glossary.d.atc": ("ATC 解剖治疗化学分类（WHO），如 C07AB02：按器官系统、类别、成分分组，"
+                           "便于跨市场找同类药。"),
+        "glossary.t.mah": "MAH",
+        "glossary.d.mah": "上市许可持有人：在某市场持有该产品许可的公司，不一定是生产工厂。",
+        "glossary.t.din": "DIN",
+        "glossary.d.din": "加拿大药品识别号；DIN-HM 用于顺势疗法产品。",
+        "glossary.t.ndc": "NDC",
+        "glossary.d.ndc": "美国国家药品代码（企业 + 产品 + 包装三段）。",
+        "glossary.t.artg": "ARTG",
+        "glossary.d.artg": "澳大利亚治疗用品登记号：标识在澳登记的治疗用品。",
+        "glossary.t.fdc": "FDC",
+        "glossary.d.fdc": "固定剂量复方：一个产品含两种或以上活性成分（如二甲双胍 + 格列本脲）。",
+        "glossary.t.lasa": "LASA / tall-man",
+        "glossary.d.lasa": "形似/音似药名。FDA 的 tall-man 大小写写法和易混淆药名表用于减少拿错药。",
+        "glossary.t.otc": "OTC",
+        "glossary.d.otc": "非处方药：在该市场无需处方；同一药在别国可能只作处方药。",
+        "glossary.t.rx": "Rx",
+        "glossary.d.rx": "该市场的处方药。",
+        "glossary.t.strength": "规格/强度",
+        "glossary.d.strength": "每单位活性成分含量（如每片 500 mg）；不同国家规格和释放剂型可能不同。",
+    },
+    "zh-Hant": {
+        "glossary.title": "術語表",
+        "glossary.intro": ("包裝、監管紀錄和本站裡常見代碼/術語的簡短解釋。只幫助讀代碼，不是醫療建議。"),
+        "glossary.term": "術語", "glossary.def": "含義",
+        "glossary.note": ("同一個縮寫在不同國家含義可能不同（DIN 是加拿大、ARTG 是澳大利亞）；"
+                          "看代碼時務必連同來源一起看。"),
+        "glossary.t.inn": "INN",
+        "glossary.d.inn": "國際非專利名（WHO）：有效成分的全球通用名，如對乙醯氨基酚、美托洛爾。",
+        "glossary.t.ban": "BAN",
+        "glossary.d.ban": "英國批准名：通常與 INN 相同，少數舊名不同（如 adrenaline 對應 epinephrine）。",
+        "glossary.t.usan": "USAN",
+        "glossary.d.usan": "美國採用名：多數同 INN，個別不同（如 albuterol 對應 salbutamol）。",
+        "glossary.t.atc": "ATC 碼",
+        "glossary.d.atc": ("ATC 解剖治療化學分類（WHO），如 C07AB02：依器官系統、類別、成分分組，"
+                           "便於跨市場找同類藥。"),
+        "glossary.t.mah": "MAH",
+        "glossary.d.mah": "上市許可持有人：在某市場持有該產品許可的公司，不一定是生產工廠。",
+        "glossary.t.din": "DIN",
+        "glossary.d.din": "加拿大藥品識別號；DIN-HM 用於順勢療法產品。",
+        "glossary.t.ndc": "NDC",
+        "glossary.d.ndc": "美國國家藥品代碼（企業 + 產品 + 包裝三段）。",
+        "glossary.t.artg": "ARTG",
+        "glossary.d.artg": "澳大利亞治療用品登記號：標識在澳登記的治療用品。",
+        "glossary.t.fdc": "FDC",
+        "glossary.d.fdc": "固定劑量複方：一個產品含兩種或以上有效成分（如二甲雙胍 + 格列本脲）。",
+        "glossary.t.lasa": "LASA / tall-man",
+        "glossary.d.lasa": "形似/音似藥名。FDA 的 tall-man 大小寫寫法和易混淆藥名表用於減少拿錯藥。",
+        "glossary.t.otc": "OTC",
+        "glossary.d.otc": "非處方藥：在該市場無需處方；同一藥在別國可能只作處方藥。",
+        "glossary.t.rx": "Rx",
+        "glossary.d.rx": "該市場的處方藥。",
+        "glossary.t.strength": "規格/強度",
+        "glossary.d.strength": "每單位有效成分含量（如每片 500 mg）；不同國家規格和釋放劑型可能不同。",
     },
 }
 # U1 防闪烁：首页 head 里在 body 解析前先打标记（localStorage flag → html.u1-off）。
@@ -1219,7 +1441,7 @@ def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
-                       MAKER_I18N[lang], META_I18N[lang],
+                       MAKER_I18N[lang], META_I18N[lang], GLOSSARY_I18N[lang],
                        LABEL_I18N[lang], UI_I18N[lang]):
             for key, text in source.items():
                 merged = text
@@ -1248,7 +1470,7 @@ def _install_zh_hant(values: dict) -> None:
             merged[key] = _subst_placeholders(text, values)
     # v0.6.3：U1/U2/U3 新 key 的 zh-Hant 值直接来自 build.py（不依赖 JSON 是否已补齐），
     # 避免新 key 回落到简体中文。
-    for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"]):
+    for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
@@ -1974,6 +2196,11 @@ html.u1-off #u1guide{display:none!important}
 .xlist{margin:6px 0 0;padding-left:18px;font-size:14px}
 .xlist li{margin:3px 0}
 .xlist .x-mkt{font-weight:600;color:var(--fg)}
+/* v0.6.4 B10：术语表 */
+dl.glossary{margin:10px 0;border-top:1px solid var(--line)}
+dl.glossary dt{font-weight:650;margin:10px 0 2px}
+dl.glossary dd{margin:0 0 4px;color:var(--muted)}
+.atcbar code{font-size:13px}
 /* v0.5.4：厂家列（可点厂家 + 「+N」展开列表） */
 .maker-link{color:var(--accent)}
 .maker-plain{color:var(--fg)}
@@ -2118,6 +2345,13 @@ function tier(nq,k){
   return null;
 }
 function doseNum(s){ const m=(s||'').match(/[\d.]+/); return m?parseFloat(m[0]):0; }
+// v0.6.4 A2：ATC 码/类前缀识别（C07 / C07A / C07AB02）。只接受字母开头+两位数字的形态，
+// 不会把普通药名误判成 ATC；Dose 等后缀由 splitDose 先剥掉。
+function atcQuery(raw){
+  const s = String(raw || '').trim().toUpperCase();
+  if(!/^[A-Z]\d{2}(?:[A-Z]{0,2}\d{0,2})?$/.test(s)) return '';
+  return s.length >= 3 ? s : '';
+}
 function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g,
     c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2430,6 +2664,9 @@ function parseQuery(q){
 function parseBarHTML(parsed, matchLabel){
   const T = window.T || (k=>k);
   const items = [];
+  // v0.6.4 A2：ATC 码查询在解析条里明确说明「按 ATC 前缀匹配」，避免误读成药名匹配。
+  if(parsed.atc) items.push(`<span class="pitem atcbar"><b>${esc(T('parse.atc'))}</b>`
+    + `<code>${esc(parsed.atc)}</code> <span class="sub">${esc(T('atc.hint'))}</span></span>`);
   if(parsed.name) items.push(`<span class="pitem"><b>${esc(T('parse.name'))}</b>${esc(parsed.name)}</span>`);
   if(parsed.dose) items.push(`<span class="pitem"><b>${esc(T('parse.dose'))}</b>${esc(parsed.dose)}</span>`);
   if(parsed.form) items.push(`<span class="pitem"><b>${esc(T('parse.form'))}</b>${esc(parsed.form)}</span>`);
@@ -2449,6 +2686,12 @@ function acPaint(){
   const T = window.T || (k=>k);
   if(!acEl || !AC_ITEMS.length){ acClose(); return; }
   acEl.innerHTML = AC_ITEMS.map((it, i) => {
+    if(it.atc){
+      // v0.6.4 A2：ATC 码补全建议
+      return `<div class="ac-item${i===AC_I?' on':''}" role="option" aria-selected="${i===AC_I}" data-i="${i}">`
+        + `<span class="ac-name">${esc(it.atc)}</span>`
+        + `<span class="ac-meta">${esc(T('atc.label'))} · ${it.count} ${esc(T('res.matched'))}</span></div>`;
+    }
     const e = it.e;
     const tags = (e.c || []).slice(0, 3)
       .map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
@@ -2459,8 +2702,26 @@ function acPaint(){
   acEl.classList.add('open');
   if(box.setAttribute) box.setAttribute('aria-expanded', 'true');
 }
-function acCompute(nq){
+function acCompute(nq, rawName){
   if((!IDX_READY && !POOL_READY) || !nq || nq.length < 2) return [];
+  // v0.6.4 A2：ATC 码/前缀补全（按 distinct 码聚合命中条目数）
+  const atcQ = atcQuery(rawName || '');
+  if(atcQ){
+    const map = new Map();
+    for(const e of IDX){
+      const codes = e.atc;
+      if(!codes) continue;
+      for(const c of codes){
+        if(c.indexOf(atcQ) !== 0) continue;
+        const cur = map.get(c);
+        if(cur) cur.count++;
+        else map.set(c, {atc: c, count: 1});
+      }
+    }
+    return Array.from(map.values())
+      .sort((a,b)=> a.atc.length - b.atc.length || b.count - a.count)
+      .slice(0, 8);
+  }
   const cjk = /[\u4e00-\u9fff]/.test(nq);
   const minSub = cjk ? 2 : 4;
   const pool = [];
@@ -2503,16 +2764,17 @@ function acCompute(nq){
 function acUpdate(){
   clearTimeout(AC_T);
   const raw = box.value.trim();
-  const nq = norm(splitDose(raw)[0]);
-  if(nq.length < 2){ AC_WANT = false; acClose(); return; }
+  const rawName = splitDose(raw)[0];
+  const nq = norm(rawName);
+  if(nq.length < 2 && atcQuery(rawName) === ''){ AC_WANT = false; acClose(); return; }
   if(!IDX_READY && !POOL_READY){ AC_WANT = true; acClose(); if(!SHARD_P) loadIndex(); return; }  // 加载完成后补算（分片加载中不抢跑 core）
   AC_WANT = false;
-  AC_T = setTimeout(()=>{ AC_ITEMS = acCompute(nq); AC_I = -1; acPaint(); }, 90);
+  AC_T = setTimeout(()=>{ AC_ITEMS = acCompute(nq, rawName); AC_I = -1; acPaint(); }, 90);
 }
 function acSelect(i){
   const it = AC_ITEMS[i];
   if(!it) return;
-  box.value = it.e.d || it.e.k;
+  box.value = it.atc || it.e.d || it.e.k;
   acClose();
   render();
   try{ box.focus(); }catch(e){}
@@ -2858,10 +3120,50 @@ function countryNamesHTML(anchor, selected, T){
     + `<span class="sub">${esc(T('u2.hint'))}</span></div>`
     + `<div class="u2chips">${chips}</div></div>`;
 }
+// v0.6.4 A2：ATC 码查询独立渲染（不参与名称/别名/模糊匹配，避免误当药名）
+function renderATC(atcCode, q){
+  const T = window.T || (k=>k);
+  syncURL(q);
+  scheduleSearchEvent(q);
+  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
+  const bar = parseBarHTML({atc: atcCode}, T('parse.match.atc'));
+  const repEl = document.getElementById('report');
+  if(!IDX_READY){
+    // ATC 聚合字段只在完整 core 里；分片阶段先显示加载提示，core 到位后重跑。
+    out.innerHTML = bar + `<div class="notice">${esc(T('atc.loading'))}</div>`;
+    loadIndex().then(ok => { if(ok && box.value.trim() === q) render(); });
+    return;
+  }
+  const hits = [];
+  for(const e of IDX){
+    const codes = e.atc;
+    if(codes && codes.some(c => c.indexOf(atcCode) === 0)) hits.push(e);
+  }
+  hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  const shown = hits.slice(0, 200);
+  if(!shown.length){
+    RES_GROUPS = null; LAST_DISPLAY = [];
+    out.innerHTML = bar + `<div class="notice warnbox"><b>${esc(T('atc.none_meta').replace('{code}', atcCode))}</b> ${esc(T('atc.none'))}</div>`;
+    meta.textContent = T('atc.none_meta').replace('{code}', atcCode);
+    if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
+    return;
+  }
+  const display = shown.map(e => [1, 'atc', e]);
+  RES_GROUPS = groupByIngredient(display);
+  LAST_DISPLAY = display;
+  out.innerHTML = bar
+    + `<div class="notice atcbar">${esc(T('atc.hit').replace('{code}', atcCode).replace('{n}', String(hits.length)))}</div>`
+    + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
+  meta.textContent = `${hits.length} ${T('res.matched')} · ${T('atc.label')} ${atcCode}`;
+  if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
+}
 function render(){
   const q = box.value.trim();
   if(!q){ out.innerHTML=''; meta.textContent=''; syncURL('');
     const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
+  // v0.6.4 A2：ATC 码/类前缀优先走独立路径（C07 / C07A / C07AB02 …）
+  const atcCode = atcQuery(splitDose(q)[0]);
+  if(atcCode){ renderATC(atcCode, q); return; }
   const [nameQ, st] = splitDose(q);
   const nq = norm(nameQ);
   const parsed = parseQuery(q);
@@ -3280,6 +3582,8 @@ function startSearch(){
   if(LEGACY){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const q = box.value.trim();
   if(!q){ render(); return; }
+  // v0.6.4 A2：ATC 码查询需要完整索引（分片里的条目不一定带 atc 聚合），先确保 core 到位。
+  if(atcQuery(splitDose(q)[0])){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const nq = norm(splitDose(q)[0]);
   if(POOL_READY){
     const files = shardsForQuery(nq);
@@ -3417,6 +3721,23 @@ box.addEventListener('keydown', ev => {
     acClose();
   }
 });
+// v0.6.4 B9：`/` 聚焦搜索框、`Esc` 关闭建议/清空查询。
+// 不拦截输入法 composition（isComposing / keyCode 229），也不在其它输入控件里抢键。
+document.addEventListener('keydown', ev => {
+  if(ev.defaultPrevented || ev.isComposing || ev.keyCode === 229) return;
+  const t = ev.target || {};
+  const tag = String(t.tagName || '').toLowerCase();
+  const typing = tag === 'input' || tag === 'textarea' || tag === 'select' || t.isContentEditable;
+  if(ev.key === '/' && !typing && !ev.ctrlKey && !ev.metaKey && !ev.altKey){
+    ev.preventDefault();
+    try{ box.focus(); box.select(); }catch(e){}
+    return;
+  }
+  if(ev.key === 'Escape'){
+    if(acEl && acEl.classList.contains('open')){ acClose(); ev.preventDefault(); return; }
+    if(box.value){ box.value = ''; acClose(); render(); ev.preventDefault(); }
+  }
+});
 if(acEl){
   // mousedown 阻止默认，避免输入框先失焦导致点击落空。
   acEl.addEventListener('mousedown', ev => { ev.preventDefault(); });
@@ -3532,6 +3853,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     <a href="{prefix}warn.html" data-i18n="nav.warn">Warnings</a>
     <a href="{prefix}about.html" data-i18n="nav.about">About</a>
     <a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What's new</a>
+    <a href="{prefix}glossary.html" data-i18n="nav.glossary">Glossary</a>
     <span class="langs">{sw}</span></nav>
 </div></header>
 <main><div class="wrap">{body}</div></main>
@@ -3869,9 +4191,9 @@ def load_index(db: sqlite3.Connection):
     ):
         comp_keys.setdefault(pid, set()).add(_norm_name(inn))
     for (key_id, pid, country, form_base, dosage_form, sv, su,
-         inn_en, inn_zh, sid, mah, rel, ntype, n_ing) in db.execute(
+         inn_en, inn_zh, atc, sid, mah, rel, ntype, n_ing) in db.execute(
         """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
-                  pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.substance_id,
+                  pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.atc, s.substance_id,
                   p.mah, p.release,
                   pn.name_type,
                   (SELECT COUNT(*) FROM product_component pc2
@@ -3894,10 +4216,13 @@ def load_index(db: sqlite3.Connection):
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "subs_zh": [], "s": [],
                                "f": [], "v": sid, "mah": {}, "trade": False,
-                               "sids": set(), "rels": set()}
+                               "sids": set(), "rels": set(), "atc": set()}
         if ntype == "trade":
             a["trade"] = True
         a["sids"].add(sid)
+        if atc:
+            # v0.6.4 A2：条目涉及的 ATC 码（多成分=数组；客户端按前缀过滤 ATC 搜索）
+            a["atc"].add(atc.strip())
         if rel and rel != "none":
             # v0.5.6 A3：该名字下产品的释放机制集合（IR/ER/SR/DR/MR/GITS），空 = 全是常释
             a["rels"].add(rel)
@@ -3993,6 +4318,8 @@ def load_index(db: sqlite3.Connection):
             # v0.5.5：中文成分名数组，与 x 的 " + " 分段平行；全空则不写（回退英文）
             "xz": ([zh for zh in a["subs_zh"][:6]]
                    if any(zh for zh in a["subs_zh"][:6]) else None),
+            # v0.6.4 A2：ATC 码数组（最多 8 个；无 ATC 的条目为 None）
+            "atc": sorted(a["atc"])[:8] or None,
             "s": a["s"][:6],
             "f": a["f"][0] if a["f"] else "",
             "l": level,
@@ -4981,6 +5308,31 @@ other; it does not mean the drugs are interchangeable.</div>
     return len(rows)
 
 
+GLOSSARY_TERMS = ("inn", "ban", "usan", "atc", "mah", "din", "ndc", "artg",
+                  "fdc", "lasa", "otc", "rx", "strength")
+
+
+def build_glossary() -> None:
+    """v0.6.4 B10：/glossary.html 术语表（四语，客户端按语言切块 + /es//zh//zh-hant/ 静态副本）。"""
+    blocks = []
+    for lang in ("en", "es", "zh", "zh-Hant"):
+        D = I18N.get(lang) or I18N["en"]
+        rows = "".join(
+            f'<dt>{esc(D.get("glossary.t." + term, term))}</dt>'
+            f'<dd>{esc(D.get("glossary.d." + term, ""))}</dd>'
+            for term in GLOSSARY_TERMS)
+        blocks.append(f'<div class="lang-block" data-lang-block="{lang}">'
+                      f'<dl class="glossary">{rows}</dl></div>')
+    body = (f'<h1 data-i18n="glossary.title">{esc(I18N["en"]["glossary.title"])}</h1>'
+            f'<div data-i18n-html="glossary.intro">{I18N["en"]["glossary.intro"]}</div>'
+            + "".join(blocks)
+            + f'<div class="notice" data-i18n="glossary.note">'
+              f'{esc(I18N["en"]["glossary.note"])}</div>')
+    html = page("Glossary", body, meta_key="glossary", alternates=True,
+                canonical_rel="glossary.html", alt_rel="glossary.html")
+    _write_with_copies("glossary.html", html, "glossary")
+
+
 def build_404() -> None:
     """404 页：GitHub Pages 在路径不存在时返回它。
 
@@ -5079,7 +5431,7 @@ def build_seo_files() -> None:
 #   index.json 完全同构（除 f 外 19 字段已验证 0 差异；f 只有 ~9 种字典值，core +0.2–0.3 MB）。
 CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m", "f",
                   "db", "sl", "rl", "wi")
-CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz")     # 值是数组：先 JSON 化再进字典
+CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz", "atc")     # 值是数组：先 JSON 化再进字典
 
 
 def _d_case_pattern(d: str, k: str) -> str | None:
@@ -5127,7 +5479,7 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "xz", "s", "l", "f", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn",
+    for f in ("c", "x", "xz", "atc", "s", "l", "f", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn",
               "m", "mn", "db", "sl", "rl", "wi"):
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
@@ -5571,6 +5923,7 @@ def main() -> None:
     n_warn = build_warn(db)
     build_about(stats, coverage, source_cover)
     build_whats_new()
+    build_glossary()
     build_404()
     build_seo_files()
 
