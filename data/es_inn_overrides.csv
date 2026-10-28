@@ -8,12 +8,12 @@ Cloranfenicol,Chloramphenicol,cloranfenicol,chloramphenicol,wikidata_es_en(mediu
 Electrolitos,,electrolitos,,,,no_english,库内无对应英文成分候选；products=35; countries=ES+MX；ES id 无 mx-es- 前缀
 Nafazolina,Naphazoline,nafazolina,naphazoline,wikidata_es_en(medium)→naphazoline,medium,mergeable,"Wikidata 同一实体: es=nafazolina→en=naphazoline; sim=0.76；安全预检: unprefixed_es_id,corroboration=15；products=34; countries=ES+MX；ES id 无 mx-es- 前缀"
 Polimixina B,Polymyxin B,polimixina-b,polymyxin-b,wikidata_es_en(medium)→polymyxin-b,medium,mergeable,Wikidata 同一实体: es=polimixina b→en=polymyxin B; sim=0.78；安全预检: unprefixed_es_id；products=31; countries=ES+MX；ES id 无 mx-es- 前缀
-Condroitín,Chondroitin,condroitin,chondroitin,fuzzy(low)→chondroitin,low,uncertain,低置信证据: 模糊 condroitin ≈ Chondroitin (0.95)；products=29; countries=ES+MX；ES id 无 mx-es- 前缀
+Condroitín,Chondroitin,condroitin,chondroitin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.95（≥0.85）｜原名 Condroitín
 Magaldrato,Magaldrate,magaldrato,magaldrate,wikidata_es_en(medium)→magaldrate; es_suffix(medium)→magaldrate,medium,mergeable,Wikidata 同一实体: es=magaldrato→en=magaldrate; sim=0.90；安全预检: unprefixed_es_id；products=28; countries=ES+MX；ES id 无 mx-es- 前缀
 Hipromelosa,,hipromelosa,,,,no_english,库内无对应英文成分候选；products=25; countries=ES+MX；ES id 无 mx-es- 前缀
 Nistatina,Nystatin,nistatina,nystatin,wikidata_es_en(medium)→nystatin,medium,mergeable,"Wikidata 同一实体: es=nistatina→en=nystatin; sim=0.82；安全预检: unprefixed_es_id,corroboration=1；products=25; countries=ES+MX；ES id 无 mx-es- 前缀"
 Ácido Cítrico,Citric Acid,acido-citrico,citric-acid,wikidata_es_en(medium)→citric-acid,medium,mergeable,Wikidata 同一实体: es=acido citrico→en=citric acid; sim=0.71；安全预检: unprefixed_es_id；products=23; countries=ES+MX；ES id 无 mx-es- 前缀
-Amilmetacresol,Amylmetacresol,amilmetacresol,amylmetacresol,fuzzy(low)→amylmetacresol,low,uncertain,低置信证据: 模糊 amilmetacresol ≈ Amylmetacresol (0.93)；products=23; countries=ES+MX；ES id 无 mx-es- 前缀
+Amilmetacresol,Amylmetacresol,amilmetacresol,amylmetacresol,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.93（≥0.85）｜原名 Amilmetacresol
 Cinarizina,Cinnarizine,cinarizina,cinnarizine,wikidata_es_en(medium)→cinnarizine,medium,mergeable,"Wikidata 同一实体: es=cinarizina→en=cinnarizine; sim=0.86；安全预检: unprefixed_es_id,corroboration=18；products=23; countries=ES+MX；ES id 无 mx-es- 前缀"
 Alcohol Diclorobencílico,,alcohol-diclorobencilico,,,,no_english,库内无对应英文成分候选；products=22; countries=ES；ES id 无 mx-es- 前缀
 Clormadinona,,clormadinona,,,,no_english,库内无对应英文成分候选；products=21; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -21,15 +21,15 @@ Alcohol Isopropílico,Isopropyl Alcohol,alcohol-isopropilico,isopropyl-alcohol,w
 Clortalidona,Chlorthalidone,clortalidona,chlorthalidone,wikidata_es_en(medium)→chlorthalidone; atc_unique(medium)→chlorthalidone,medium,mergeable,"Wikidata 同一实体: es=clortalidona→en=chlorthalidone; sim=0.85；安全预检: unprefixed_es_id,corroboration=7；products=20; countries=ES+MX；ES id 无 mx-es- 前缀"
 Estrogenos Conjugados,Conjugated Estrogens,estrogenos-conjugados,conjugated-estrogens,atc_unique(medium)→conjugated-estrogens,medium,mergeable,"ATC G03CA57 全库唯一命中; sim=0.88；安全预检: unprefixed_es_id,corroboration=14；products=20; countries=ES+MX；ES id 无 mx-es- 前缀"
 Triamcinolona,Triamcinolone,triamcinolona,triamcinolone,wikidata_es_en(medium)→triamcinolone,medium,mergeable,Wikidata 同一实体: es=triamcinolona→en=triamcinolone; sim=0.92；安全预检: unprefixed_es_id；products=20; countries=ES+MX；ES id 无 mx-es- 前缀
-Fibrinógeno Humano,Fibrinogen Human,fibrinogeno-humano,fibrinogen-human,fuzzy(low)→fibrinogen-human,low,uncertain,低置信证据: 模糊 fibrinogeno humano ≈ Fibrinogen Human (0.94)；products=19; countries=ES+MX；ES id 无 mx-es- 前缀
+Fibrinógeno Humano,Fibrinogen Human,fibrinogeno-humano,fibrinogen-human,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.94（≥0.85）｜原名 Fibrinógeno Humano
 Medroxiprogesterona,Medroxyprogesterone,medroxiprogesterona,medroxyprogesterone,wikidata_es_en(medium)→medroxyprogesterone,medium,mergeable,"Wikidata 同一实体: es=medroxiprogesterona→en=medroxyprogesterone; sim=0.89；安全预检: unprefixed_es_id,corroboration=4；products=19; countries=ES+MX；ES id 无 mx-es- 前缀"
 Iv,,mx-es-iv-2,,,,no_english,名称过短/为空；products=19; countries=MX
-Tétanos,Tetanus,tetanos,tetanus,fuzzy(low)→tetanus,low,uncertain,低置信证据: 模糊 tetanos ≈ Tetanus (0.86)；products=19; countries=ES+MX；ES id 无 mx-es- 前缀
+Tétanos,Tetanus,tetanos,tetanus,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Tétanos
 Saccharomyces Boulardii,,saccharomyces-boulardii,,,,no_english,库内无对应英文成分候选；products=18; countries=ES+MX；ES id 无 mx-es- 前缀
 Senósidos A B,,senosidos-a-b,,,,no_english,库内无对应英文成分候选；products=18; countries=ES+MX；ES id 无 mx-es- 前缀
 Carboplatino,Carboplatin,carboplatino,carboplatin,wikidata_es_en(medium)→carboplatin,medium,mergeable,"Wikidata 同一实体: es=carboplatino→en=carboplatin; sim=0.96；安全预检: unprefixed_es_id,corroboration=4；products=17; countries=ES+MX；ES id 无 mx-es- 前缀"
-Nimodipino,Nimodipine,nimodipino,nimodipine,fuzzy(low)→nimodipine,low,uncertain,低置信证据: 模糊 nimodipino ≈ Nimodipine (0.90)；products=17; countries=ES+MX；ES id 无 mx-es- 前缀
-Valeriana Officinalis,Valerian,valeriana-officinalis,valerian,atc_unique(medium)→valerian,medium,uncertain,弱证据且名字相似度 0.55<0.62（仅 atc_unique）
+Nimodipino,Nimodipine,nimodipino,nimodipine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.90（≥0.85）｜原名 Nimodipino
+Valeriana Officinalis,Valerian,valeriana-officinalis,valerian,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（valeriana officinalis ⊂/⊃ valerian）｜原名 Valeriana Officinalis
 Ácido Micofenólico,Mycophenolic Acid,acido-micofenolico,mycophenolic-acid,wikidata_es_en(medium)→mycophenolic-acid,medium,mergeable,Wikidata 同一实体: es=acido micofenolico→en=mycophenolic acid; sim=0.64；安全预检: unprefixed_es_id；products=16; countries=ES+MX；ES id 无 mx-es- 前缀
 Alcanfor,,alcanfor,,,,no_english,库内无对应英文成分候选；products=16; countries=ES+MX；ES id 无 mx-es- 前缀
 Fenazopiridina,Phenazopyridine,fenazopiridina,phenazopyridine,wikidata_es_en(medium)→phenazopyridine,medium,mergeable,"Wikidata 同一实体: es=fenazopiridina→en=phenazopyridine; sim=0.76；安全预检: unprefixed_es_id,corroboration=7；products=16; countries=ES+MX；ES id 无 mx-es- 前缀"
@@ -43,7 +43,7 @@ Cisplatino,Cisplatin,cisplatino,cisplatin,wikidata_es_en(medium)→cisplatin,med
 Hidroquinona,Hydroquinone,hidroquinona,hydroquinone,wikidata_es_en(medium)→hydroquinone; atc_unique(medium)→hydroquinone,medium,mergeable,Wikidata 同一实体: es=hidroquinona→en=hydroquinone; sim=0.83；安全预检: unprefixed_es_id；products=14; countries=ES+MX；ES id 无 mx-es- 前缀
 Hierro,,hierro,,,,no_english,库内无对应英文成分候选；products=14; countries=ES+MX；ES id 无 mx-es- 前缀
 Magnesio,,magnesio,magnesium-orotate,atc_unique(medium)→magnesium-orotate,medium,uncertain,人工复核: 元素镁 ≠ magnesium orotate（盐），不可合并
-Mentol,Menthol,mentol,menthol,fuzzy(low)→menthol,low,uncertain,低置信证据: 模糊 mentol ≈ Menthol (0.92)；products=14; countries=ES+MX；ES id 无 mx-es- 前缀
+Mentol,Menthol,mentol,menthol,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.92（≥0.85）｜原名 Mentol
 Solución Con Albúmina,,solucion-con-albumina,,atc_unique(medium)→albumin,medium,combination,复方名（含 y/+//con），本轮不合并；products=14; countries=ES；ES id 无 mx-es- 前缀
 Solución De Ringer,,solucion-de-ringer,,,,no_english,库内无对应英文成分候选；products=14; countries=ES；ES id 无 mx-es- 前缀
 Oxitetraciclina,Oxytetracycline,oxitetraciclina,oxytetracycline,wikidata_es_en(medium)→oxytetracycline,medium,mergeable,Wikidata 同一实体: es=oxitetraciclina→en=oxytetracycline; sim=0.80；安全预检: unprefixed_es_id；products=13; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -54,14 +54,14 @@ Etofenamato,,etofenamato,,,,no_english,库内无对应英文成分候选；produ
 Clobenzorex,,mx-es-clobenzorex,,,,no_english,库内无对应英文成分候选；products=12; countries=MX
 Nitrofural,,nitrofural,,,,no_english,库内无对应英文成分候选；products=12; countries=ES+MX；ES id 无 mx-es- 前缀
 Proteína Plasma Humano,,proteina-plasma-humano,,,,no_english,库内无对应英文成分候选；products=12; countries=ES；ES id 无 mx-es- 前缀
-Umeclidinio,Umeclidinium,umeclidinio,umeclidinium,fuzzy(low)→umeclidinium,low,uncertain,低置信证据: 模糊 umeclidinio ≈ Umeclidinium (0.87)；products=12; countries=ES+MX；ES id 无 mx-es- 前缀
+Umeclidinio,Umeclidinium,umeclidinio,umeclidinium,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Umeclidinio
 Ferrimanitol Ovoalbúmina,,ferrimanitol-ovoalbumina,,,,no_english,库内无对应英文成分候选；products=11; countries=ES；ES id 无 mx-es- 前缀
 Levodropropizina,Levodropropizine,levodropropizina,levodropropizine,wikidata_es_en(medium)→levodropropizine; es_suffix(medium)→levodropropizine,medium,mergeable,Wikidata 同一实体: es=levodropropizina→en=levodropropizine; sim=0.94；安全预检: unprefixed_es_id；products=11; countries=ES+MX；ES id 无 mx-es- 前缀
 Inmunoglobulina Humana Normal,,mx-es-inmunoglobulina-humana-normal,,,,no_english,库内无对应英文成分候选；products=11; countries=MX
 Sulfadiazina De Plata,Silver Sulfadiazine,mx-es-sulfadiazina-de-plata,silver-sulfadiazine,wikidata_es_en(medium)→silver-sulfadiazine; atc_unique(medium)→silver-sulfadiazine,medium,mergeable,Wikidata 同一实体: es=sulfadiazina de plata→en=silver sulfadiazine; sim=0.70；安全预检: corroboration=10；products=11; countries=MX
 Aluminio,,aluminio,,,,no_english,库内无对应英文成分候选；products=10; countries=ES+MX；ES id 无 mx-es- 前缀
-Amfotericina B,Amphotericin B,amfotericina-b,amphotericin-b,fuzzy(low)→amphotericin-b,low,uncertain,低置信证据: 模糊 amfotericina b ≈ Amphotericin B (0.86)；products=10; countries=ES+MX；ES id 无 mx-es- 前缀
-Carbomero,Carbomer,carbomero,carbomer,fuzzy(low)→carbomer,low,uncertain,低置信证据: 模糊 carbomero ≈ Carbomer (0.94)；products=10; countries=ES+MX；ES id 无 mx-es- 前缀
+Amfotericina B,Amphotericin B,amfotericina-b,amphotericin-b,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Amfotericina B
+Carbomero,Carbomer,carbomero,carbomer,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（carbomero ⊂/⊃ carbomer）｜原名 Carbomero
 Cleboprida,,cleboprida,,,,no_english,库内无对应英文成分候选；products=10; countries=ES+MX；ES id 无 mx-es- 前缀
 Helio,Helium,helio,helium,wikidata_es_en(medium)→helium,medium,mergeable,Wikidata 同一实体: es=helio→en=helium; sim=0.73；安全预检: unprefixed_es_id；products=10; countries=ES+MX；ES id 无 mx-es- 前缀
 Mononitrato De Isosorbida,,mononitrato-de-isosorbida,,wikidata_es_en(medium)→isosorbide-mononitrate; atc_unique(medium)→isosorbide-5-mononitrate,medium,uncertain,证据指向多个目标: isosorbide-5-mononitrate; isosorbide-mononitrate；products=10; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -76,25 +76,25 @@ Alcohol Etílico,,alcohol-etilico,,,,no_english,库内无对应英文成分候�
 Antitrombina Iii,Antithrombin Iii,antitrombina-iii,antithrombin-iii,atc_unique(medium)→antithrombin-iii,medium,mergeable,ATC B01AB02 全库唯一命中; sim=0.94；安全预检: unprefixed_es_id；products=9; countries=ES+MX；ES id 无 mx-es- 前缀
 Dexibuprofeno,Dexibuprofen,dexibuprofeno,dexibuprofen,atc_unique(medium)→dexibuprofen,medium,mergeable,ATC M01AE14 全库唯一命中; sim=0.96；安全预检: unprefixed_es_id；products=9; countries=ES+MX；ES id 无 mx-es- 前缀
 Dronedarona,Dronedarone,dronedarona,dronedarone,wikidata_es_en(medium)→dronedarone; atc_unique(medium)→dronedarone,medium,mergeable,Wikidata 同一实体: es=dronedarona→en=dronedarone; sim=0.91；安全预检: unprefixed_es_id；products=9; countries=ES+MX；ES id 无 mx-es- 前缀
-Itoprida,Itopride,itoprida,itopride,fuzzy(low)→itopride,low,uncertain,低置信证据: 模糊 itoprida ≈ Itopride (0.88)；products=9; countries=ES+MX；ES id 无 mx-es- 前缀
+Itoprida,Itopride,itoprida,itopride,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Itoprida
 Lutropina Alfa,Lutropin Alfa,lutropina-alfa,lutropin-alfa,wikidata_es_en(medium)→lutropin-alfa; atc_unique(medium)→lutropin-alfa,medium,mergeable,Wikidata 同一实体: es=lutropina alfa→en=lutropin alfa; sim=0.96；安全预检: unprefixed_es_id；products=9; countries=ES+MX；ES id 无 mx-es- 前缀
 Vitaminas Y Minerales,,mx-es-vitaminas-y-minerales,,,,combination,复方名（含 y/+//con），本轮不合并；products=9; countries=MX
 Somatostatina,Somatostatin,somatostatina,somatostatin,es_suffix(medium)→somatostatin,medium,mergeable,西语后缀规则 -statina→-statin; sim=0.96；安全预检: unprefixed_es_id；products=9; countries=ES+MX；ES id 无 mx-es- 前缀
-Thymus Vulgaris,Thymus Vulgaris Leaf,thymus-vulgaris,thymus-vulgaris-leaf,fuzzy(low)→thymus-vulgaris-leaf,low,uncertain,低置信证据: 模糊 thymus vulgaris ≈ Thymus Vulgaris Leaf (0.86)；products=9; countries=ES；ES id 无 mx-es- 前缀
+Thymus Vulgaris,Thymus Vulgaris Leaf,thymus-vulgaris,thymus-vulgaris-leaf,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（thymus vulgaris ⊂/⊃ thymus vulgaris leaf）｜原名 Thymus Vulgaris
 Bencilpenicilina Procaína,Penicillin G Procaine,bencilpenicilina-procaina,penicillin-g-procaine,atc_unique(medium)→penicillin-g-procaine,medium,mergeable,ATC J01CE09 全库唯一命中; sim=0.74；安全预检: unprefixed_es_id；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
 Benzalconio,,benzalconio,,,,no_english,库内无对应英文成分候选；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
 Ciclobenzaprina,Cyclobenzaprine,ciclobenzaprina,cyclobenzaprine,wikidata_es_en(medium)→cyclobenzaprine; atc_unique(medium)→cyclobenzaprine,medium,mergeable,"Wikidata 同一实体: es=ciclobenzaprina→en=cyclobenzaprine; sim=0.87；安全预检: unprefixed_es_id,corroboration=1；products=8; countries=ES+MX；ES id 无 mx-es- 前缀"
 Dihidrógenofosfato,,dihidrogenofosfato,,,,no_english,库内无对应英文成分候选；products=8; countries=ES；ES id 无 mx-es- 前缀
 Lisina,,lisina,,,,no_english,库内无对应英文成分候选；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
 Fitomenadiona,Phytonadione,mx-es-fitomenadiona,phytonadione,cima_alias(high)→phytonadione,high,mergeable,ingest_cima ALIASES: fitomenadiona→phytonadione；安全预检: corroboration=3；products=8; countries=MX
-Isoconazol,Tioconazole,mx-es-isoconazol,tioconazole,fuzzy(low)→tioconazole,low,uncertain,低置信证据: 模糊 isoconazol ≈ Tioconazole (0.86)；products=8; countries=MX
+Isoconazol,Tioconazole,mx-es-isoconazol,tioconazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Isoconazol
 Pse Udoefedrina,,mx-es-pse-udoefedrina,,,,no_english,库内无对应英文成分候选；products=8; countries=MX
 Solución,,mx-es-solucion,,,,no_english,库内无对应英文成分候选；products=8; countries=MX
 Opicapona,Opicapone,opicapona,opicapone,wikidata_es_en(medium)→opicapone; atc_unique(medium)→opicapone,medium,mergeable,Wikidata 同一实体: es=opicapona→en=opicapone; sim=0.89；安全预检: unprefixed_es_id；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
 Parotiditis,,parotiditis,,,,no_english,库内无对应英文成分候选；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
 Passiflora Incarnata,,passiflora-incarnata,,fuzzy(low)→passiflora-incarnata-top; fuzzy(low)→passiflora-incarnata-flower,low,uncertain,证据指向多个目标: passiflora-incarnata-flower; passiflora-incarnata-top；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
 Sarampión,,sarampion,,,,no_english,库内无对应英文成分候选；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
-Sulpirida,Sulpiride,sulpirida,sulpiride,fuzzy(low)→sulpiride,low,uncertain,低置信证据: 模糊 sulpirida ≈ Sulpiride (0.89)；products=8; countries=ES+MX；ES id 无 mx-es- 前缀
+Sulpirida,Sulpiride,sulpirida,sulpiride,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Sulpirida
 Ácido Pamidrónico,,acido-pamidronico,,wikidata_es_en(medium)→pamidronic-acid; atc_unique(medium)→pamidronate,medium,uncertain,证据指向多个目标: pamidronate; pamidronic-acid；products=7; countries=ES+MX；ES id 无 mx-es- 前缀
 Ciproheptadina,Cyproheptadine,ciproheptadina,cyproheptadine,wikidata_es_en(medium)→cyproheptadine,medium,mergeable,Wikidata 同一实体: es=ciproheptadina→en=cyproheptadine; sim=0.86；安全预检: unprefixed_es_id；products=7; countries=ES+MX；ES id 无 mx-es- 前缀
 Factor Con Willebrand,,factor-con-willebrand,,fuzzy(low)→factor-von-willebrand,low,combination,复方名（含 y/+//con），本轮不合并；products=7; countries=ES；ES id 无 mx-es- 前缀
@@ -104,13 +104,13 @@ Levosulpirida,,levosulpirida,,,,no_english,库内无对应英文成分候选；p
 Lixisenatida,Lixisenatide,lixisenatida,lixisenatide,wikidata_es_en(medium)→lixisenatide; atc_unique(medium)→lixisenatide,medium,mergeable,Wikidata 同一实体: es=lixisenatida→en=lixisenatide; sim=0.92；安全预检: unprefixed_es_id；products=7; countries=ES+MX；ES id 无 mx-es- 前缀
 Mitoxantrona,Mitoxantrone,mitoxantrona,mitoxantrone,wikidata_es_en(medium)→mitoxantrone,medium,mergeable,"Wikidata 同一实体: es=mitoxantrona→en=mitoxantrone; sim=0.92；安全预检: unprefixed_es_id,corroboration=1；products=7; countries=ES+MX；ES id 无 mx-es- 前缀"
 Ácido Ursodeoxicólico,Ursodeoxycholic Acid,mx-es-acido-ursodeoxicolico,ursodeoxycholic-acid,cima_alias(high)→ursodeoxycholic-acid,high,mergeable,ingest_cima ALIASES: acido ursodeoxicolico→ursodeoxycholic-acid；安全预检: corroboration=7；products=7; countries=MX
-Donepecilo,Donepezil,mx-es-donepecilo,donepezil,fuzzy(low)→donepezil,low,uncertain,低置信证据: 模糊 donepecilo ≈ Donepezil (0.84)；products=7; countries=MX
+Donepecilo,Donepezil,mx-es-donepecilo,donepezil,fuzzy(low)→donepezil,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Donepecilo
 Inmunoglobulina Humana Anti-d,,mx-es-inmunoglobulina-humana-anti-d,,,,no_english,库内无对应英文成分候选；products=7; countries=MX
 Inmunoglobulina Humana Normal Endovenosa,,mx-es-inmunoglobulina-humana-normal-endovenosa,,,,no_english,库内无对应英文成分候选；products=7; countries=MX
 Pirido Xina,,mx-es-pirido-xina,,,,no_english,库内无对应英文成分候选；products=7; countries=MX
 S.a.,,mx-es-s-a,,,,no_english,库内无对应英文成分候选；products=7; countries=MX
 Vi,,mx-es-vi-2,,,,no_english,名称过短/为空；products=7; countries=MX
-Vitaminas,Vitamin A,mx-es-vitaminas,vitamin-a,fuzzy(low)→vitamin-a,low,uncertain,低置信证据: 模糊 vitaminas ≈ Vitamin A (0.89)；products=7; countries=MX
+Vitaminas,Vitamin A,mx-es-vitaminas,vitamin-a,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（vitaminas ⊂/⊃ vitamin a）｜原名 Vitaminas
 Protóxido Nitroso,Nitrous Oxide,protoxido-nitroso,nitrous-oxide,atc_unique(medium)→nitrous-oxide,medium,mergeable,ATC N01AX13 全库唯一命中; sim=0.73；安全预检: unprefixed_es_id；products=7; countries=ES；ES id 无 mx-es- 前缀
 Salicilato De Metilo,,salicilato-de-metilo,,,,no_english,库内无对应英文成分候选；products=7; countries=ES+MX；ES id 无 mx-es- 前缀
 Tazaroteno,Tazarotene,tazaroteno,tazarotene,wikidata_es_en(medium)→tazarotene; atc_unique(medium)→tazarotene,medium,mergeable,Wikidata 同一实体: es=tazaroteno→en=tazarotene; sim=0.90；安全预检: unprefixed_es_id；products=7; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -132,10 +132,10 @@ Oxeladina,,mx-es-oxeladina,,,,no_english,库内无对应英文成分候选；pro
 Plantago Psyllium,,mx-es-plantago-psyllium,,,,no_english,库内无对应英文成分候选；products=6; countries=MX
 Trimetilfloroglucinol,,mx-es-trimetilfloroglucinol,,,,no_english,库内无对应英文成分候选；products=6; countries=MX
 Varios,,mx-es-varios,,,,no_english,库内无对应英文成分候选；products=6; countries=MX
-Piketoprofeno,Ketoprofen,piketoprofeno,ketoprofen,fuzzy(low)→ketoprofen,low,uncertain,低置信证据: 模糊 piketoprofeno ≈ Ketoprofen (0.87)；products=6; countries=ES+MX；ES id 无 mx-es- 前缀
+Piketoprofeno,Ketoprofen,piketoprofeno,ketoprofen,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（piketoprofeno ⊂/⊃ ketoprofen）｜原名 Piketoprofeno
 Promestrieno,,promestrieno,,,,no_english,库内无对应英文成分候选；products=6; countries=ES+MX；ES id 无 mx-es- 前缀
-Propafenona,Propafenone,propafenona,propafenone,fuzzy(low)→propafenone,low,uncertain,低置信证据: 模糊 propafenona ≈ Propafenone (0.91)；products=6; countries=ES+MX；ES id 无 mx-es- 前缀
-Tiamazol,Thiamazole,tiamazol,thiamazole,fuzzy(low)→thiamazole,low,uncertain,低置信证据: 模糊 tiamazol ≈ Thiamazole (0.89)；products=6; countries=ES+MX；ES id 无 mx-es- 前缀
+Propafenona,Propafenone,propafenona,propafenone,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.91（≥0.85）｜原名 Propafenona
+Tiamazol,Thiamazole,tiamazol,thiamazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Tiamazol
 Urofolitropina,Urofollitropin,urofolitropina,urofollitropin,atc_unique(medium)→urofollitropin,medium,mergeable,ATC G03GA04 全库唯一命中; sim=0.93；安全预检: unprefixed_es_id；products=6; countries=ES；ES id 无 mx-es- 前缀
 Aceite De Soja Purificado,,aceite-de-soja-purificado,,,,no_english,库内无对应英文成分候选；products=5; countries=ES；ES id 无 mx-es- 前缀
 Ácido Tióctico,,acido-tioctico,,,,no_english,库内无对应英文成分候选；products=5; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -151,7 +151,7 @@ Fluorometolona,Fluorometholone,fluorometolona,fluorometholone,wikidata_es_en(med
 Liotironina,Liothyronine,liotironina,liothyronine,atc_unique(medium)→liothyronine,medium,mergeable,ATC H03AA02 全库唯一命中; sim=0.78；安全预检: unprefixed_es_id；products=5; countries=ES+MX；ES id 无 mx-es- 前缀
 Mepiramina,,mepiramina,,,,no_english,库内无对应英文成分候选；products=5; countries=ES+MX；ES id 无 mx-es- 前缀
 Algestona,,mx-es-algestona,,,,no_english,库内无对应英文成分候选；products=5; countries=MX
-Bromuro De Vecuronio,Vecuronium,mx-es-bromuro-de-vecuronio,vecuronium,wikidata_es_en(medium)→vecuronium,medium,uncertain,弱证据且名字相似度 0.53<0.62（仅 wikidata_es_en）
+Bromuro De Vecuronio,Vecuronium,mx-es-bromuro-de-vecuronio,vecuronium,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（bromide）｜原名 Bromuro De Vecuronio
 Diyodohidroxiquinoleina,,mx-es-diyodohidroxiquinoleina,,,,no_english,库内无对应英文成分候选；products=5; countries=MX
 L-ornitina,,mx-es-l-ornitina,,,,no_english,库内无对应英文成分候选；products=5; countries=MX
 Par Acetamol,,mx-es-par-acetamol,,,,no_english,库内无对应英文成分候选；products=5; countries=MX
@@ -168,12 +168,12 @@ Aceite De Ricino,,aceite-de-ricino,,,,no_english,库内无对应英文成分候�
 Ácido Azelaico,Azelaic Acid,acido-azelaico,azelaic-acid,wikidata_es_en(medium)→azelaic-acid; atc_unique(medium)→azelaic-acid,medium,mergeable,Wikidata 同一实体: es=acido azelaico→en=azelaic acid; sim=0.74；安全预检: unprefixed_es_id；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
 Albúmina Macroagregados Para Tecnecio (99Mtc),,albumina-macroagregados-para-tecnecio-99mtc,,,,no_english,库内无对应英文成分候选；products=4; countries=ES；ES id 无 mx-es- 前缀
 Biperideno,Biperiden,biperideno,biperiden,wikidata_es_en(medium)→biperiden; atc_unique(medium)→biperiden,medium,mergeable,Wikidata 同一实体: es=biperideno→en=biperiden; sim=0.95；安全预检: unprefixed_es_id；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
-Cincocaína,Cinchocaine,cincocaina,cinchocaine,fuzzy(low)→cinchocaine,low,uncertain,低置信证据: 模糊 cincocaina ≈ Cinchocaine (0.86)；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
+Cincocaína,Cinchocaine,cincocaina,cinchocaine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Cincocaína
 Citrato De Potasio,Potassium,citrato-de-potasio,potassium,wikidata_es_en(medium)→potassium,medium,uncertain,弱证据且名字相似度 0.44<0.62（仅 wikidata_es_en）
 Colestiramina,,colestiramina,,wikidata_es_en(medium)→colestyramine; atc_unique(medium)→cholestyramine-resin,medium,uncertain,证据指向多个目标: cholestyramine-resin; colestyramine；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
 Corifolitropina Alfa,Corifollitropin Alfa,corifolitropina-alfa,corifollitropin-alfa,atc_unique(medium)→corifollitropin-alfa,medium,mergeable,ATC G03GA09 全库唯一命中; sim=0.95；安全预检: unprefixed_es_id；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
 Delafloxacino,Delafloxacin,delafloxacino,delafloxacin,atc_unique(medium)→delafloxacin,medium,mergeable,ATC J01MA23 全库唯一命中; sim=0.96；安全预检: unprefixed_es_id；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
-Eflornitina,Eflornithine,eflornitina,eflornithine,fuzzy(low)→eflornithine,low,uncertain,低置信证据: 模糊 eflornitina ≈ Eflornithine (0.87)；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
+Eflornitina,Eflornithine,eflornitina,eflornithine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Eflornitina
 Enfuvirtida,Enfuvirtide,enfuvirtida,enfuvirtide,wikidata_es_en(medium)→enfuvirtide; atc_unique(medium)→enfuvirtide,medium,mergeable,"Wikidata 同一实体: es=enfuvirtida→en=enfuvirtide; sim=0.91；安全预检: unprefixed_es_id,corroboration=1；products=4; countries=ES+MX；ES id 无 mx-es- 前缀"
 Espiramicina,Spiramycin,espiramicina,spiramycin,wikidata_es_en(medium)→spiramycin,medium,mergeable,Wikidata 同一实体: es=espiramicina→en=spiramycin; sim=0.82；安全预检: unprefixed_es_id；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
 Finerenona,Finerenone,finerenona,finerenone,atc_unique(medium)→finerenone,medium,mergeable,"ATC C03DA05 全库唯一命中; sim=0.90；安全预检: unprefixed_es_id,corroboration=1；products=4; countries=ES+MX；ES id 无 mx-es- 前缀"
@@ -192,7 +192,7 @@ Eritropoyetina Humana Recombinante,,mx-es-eritropoyetina-humana-recombinante,,,,
 Hialuronato De Sodio,Hyaluronate,mx-es-hialuronato-de-sodio,hyaluronate,mx_inn_map(high)→hyaluronate,high,mergeable,mx_inn_map via=rule score=1.0: hialuronato→Hyaluronate；安全预检: corroboration=4；products=4; countries=MX
 Interferon Beta 1a Recombinante Humano,,mx-es-interferon-beta-1a-recombinante-humano,,,,no_english,库内无对应英文成分候选；products=4; countries=MX
 Lípidos,,mx-es-lipidos,,,,no_english,库内无对应英文成分候选；products=4; countries=MX
-Multivitamínico,Multivitamin,mx-es-multivitaminico,multivitamin,fuzzy(low)→multivitamin,low,uncertain,低置信证据: 模糊 multivitaminico ≈ Multivitamin (0.89)；products=4; countries=MX
+Multivitamínico,Multivitamin,mx-es-multivitaminico,multivitamin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（multivitaminico ⊂/⊃ multivitamin）｜原名 Multivitamínico
 Pancreatina,Pancreatin,mx-es-pancreatina,pancreatin,wikidata_es_en(medium)→pancreatin; es_suffix(medium)→pancreatin,medium,mergeable,Wikidata 同一实体: es=pancreatina→en=pancreatin; sim=0.95；安全预检: corroboration=4；products=4; countries=MX
 Pargeverina,,mx-es-pargeverina,,,,no_english,库内无对应英文成分候选；products=4; countries=MX
 Nitrendipino,Nitrendipine,nitrendipino,nitrendipine,wikidata_es_en(medium)→nitrendipine,medium,mergeable,Wikidata 同一实体: es=nitrendipino→en=nitrendipine; sim=0.92；安全预检: unprefixed_es_id；products=4; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -206,7 +206,7 @@ Vacuna Anti Herpes Zóster,,vacuna-anti-herpes-zoster,,,,no_english,库内无对
 Ácido Láctico,,acido-lactico,,,,no_english,库内无对应英文成分候选；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Ácido Tartárico,,acido-tartarico,,,,no_english,库内无对应英文成分候选；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Agalsidasa Beta,Agalsidase Beta,agalsidasa-beta,agalsidase-beta,atc_unique(medium)→agalsidase-beta,medium,mergeable,ATC A16AB04 全库唯一命中; sim=0.93；安全预检: unprefixed_es_id；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
-Alantoína,Allantoin,alantoina,allantoin,fuzzy(low)→allantoin,low,uncertain,低置信证据: 模糊 alantoina ≈ Allantoin (0.89)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
+Alantoína,Allantoin,alantoina,allantoin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Alantoína
 Albúmina Nanocoloides Para Tecnecio (99Mtc),,albumina-nanocoloides-para-tecnecio-99mtc,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
 Aluminio Hidróxido,,aluminio-hidroxido,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
 Bcg Cultivo Vivo Desecado Preparado Irrigación Vesical,,bcg-cultivo-vivo-desecado-preparado-irrigacion-vesical,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
@@ -220,23 +220,23 @@ Glicina,Glycine,glicina,glycine,wikidata_es_en(medium)→glycine,medium,mergeabl
 Gluconato De Calcio,,gluconato-de-calcio,,,,no_english,库内无对应英文成分候选；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Glycine Max,,glycine-max,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
 Gonadotropina Coriónica,Chorionic Gonadotropin,gonadotropina-corionica,chorionic-gonadotropin,atc_unique(medium)→chorionic-gonadotropin,medium,mergeable,"ATC G03GA01 全库唯一命中; sim=0.93；安全预检: unprefixed_es_id,corroboration=2；products=3; countries=ES+MX；ES id 无 mx-es- 前缀"
-Hierro Dextran,Iron Dextran,hierro-dextran,iron-dextran,fuzzy(low)→iron-dextran,low,uncertain,低置信证据: 模糊 hierro dextran ≈ Iron Dextran (0.85)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
-Insulina Asparta Bifásica,Insulin Aspart Biphasic,insulina-asparta-bifasica,insulin-aspart-biphasic,fuzzy(low)→insulin-aspart-biphasic,low,uncertain,低置信证据: 模糊 insulina asparta bifasica ≈ Insulin Aspart Biphasic (0.88)；products=3; countries=ES；ES id 无 mx-es- 前缀
-Insulina Efsitora Alfa,Insulin Efsitora Alfa,insulina-efsitora-alfa,insulin-efsitora-alfa,fuzzy(low)→insulin-efsitora-alfa,low,uncertain,低置信证据: 模糊 insulina efsitora alfa ≈ Insulin Efsitora Alfa (0.98)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
+Hierro Dextran,Iron Dextran,hierro-dextran,iron-dextran,fuzzy(low)→iron-dextran,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Hierro Dextran
+Insulina Asparta Bifásica,Insulin Aspart Biphasic,insulina-asparta-bifasica,insulin-aspart-biphasic,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Insulina Asparta Bifásica
+Insulina Efsitora Alfa,Insulin Efsitora Alfa,insulina-efsitora-alfa,insulin-efsitora-alfa,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.98（≥0.85）｜原名 Insulina Efsitora Alfa
 Linaclotida,Linaclotide,linaclotida,linaclotide,wikidata_es_en(medium)→linaclotide; atc_unique(medium)→linaclotide,medium,mergeable,Wikidata 同一实体: es=linaclotida→en=linaclotide; sim=0.91；安全预检: unprefixed_es_id；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Metilnaltrexona,Methylnaltrexone,metilnaltrexona,methylnaltrexone,atc_unique(medium)→methylnaltrexone,medium,mergeable,ATC A06AH01 全库唯一命中; sim=0.84；安全预检: unprefixed_es_id；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
-Metionina,Methionine,metionina,methionine,fuzzy(low)→methionine,low,uncertain,低置信证据: 模糊 metionina ≈ Methionine (0.84)；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
+Metionina,Methionine,metionina,methionine,fuzzy(low)→methionine,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Metionina
 Acebrofilina,,mx-es-acebrofilina,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Agua Esteril Para Uso Inyectable,,mx-es-agua-esteril-para-uso-inyectable,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Alginato De Magnesio,,mx-es-alginato-de-magnesio,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Anfepramona,,mx-es-anfepramona,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
-Bromuro De Piridostigmina,Pyridostigmine,mx-es-bromuro-de-piridostigmina,pyridostigmine,wikidata_es_en(medium)→pyridostigmine,medium,uncertain,弱证据且名字相似度 0.62<0.62（仅 wikidata_es_en）
+Bromuro De Piridostigmina,Pyridostigmine,mx-es-bromuro-de-piridostigmina,pyridostigmine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（bromide）｜原名 Bromuro De Piridostigmina
 Bromuro De Tiotropio,Tiotropium,mx-es-bromuro-de-tiotropio,tiotropium,mx_inn_map(high)→tiotropium; cima_alias(high)→tiotropium; wikidata_es_en(medium)→tiotropium,high,mergeable,mx_inn_map via=manual score=1.0: tiotropio→Tiotropium；安全预检: corroboration=1；products=3; countries=MX
 Calcitonina,Calcitonin,mx-es-calcitonina,calcitonin,es_suffix(medium)→calcitonin,medium,mergeable,西语后缀规则 -ina→-in; sim=0.95；products=3; countries=MX
 Clenbuterol,,mx-es-clenbuterol,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Dextropropoxifeno,Dextropropoxyphene,mx-es-dextropropoxifeno,dextropropoxyphene,wikidata_es_en(medium)→dextropropoxyphene,medium,mergeable,Wikidata 同一实体: es=dextropropoxifeno→en=dextropropoxyphene; sim=0.80；products=3; countries=MX
 Dimetilfumarato,,mx-es-dimetilfumarato,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
-Diosmectita,Diosmectite,mx-es-diosmectita,diosmectite,fuzzy(low)→diosmectite,low,uncertain,低置信证据: 模糊 diosmectita ≈ Diosmectite (0.91)；products=3; countries=MX
+Diosmectita,Diosmectite,mx-es-diosmectita,diosmectite,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.91（≥0.85）｜原名 Diosmectita
 Dipropionato De Betametasona,Betamethasone,mx-es-dipropionato-de-betametasona,betamethasone,mx_inn_map(high)→betamethasone; cima_alias(high)→betamethasone; wikidata_es_en(medium)→betamethasone,high,mergeable,mx_inn_map via=manual score=1.0: betametasona→Betamethasone；products=3; countries=MX
 Eritropoyetina Humana,,mx-es-eritropoyetina-humana,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Espirinolactona,,mx-es-espirinolactona,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
@@ -251,7 +251,7 @@ L- Aspartato,,mx-es-l-aspartato-2,,,,no_english,库内无对应英文成分候�
 Lipidos Intravenosos,,mx-es-lipidos-intravenosos,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Mitomicina,Mitomycin,mx-es-mitomicina,mitomycin,atc_unique(medium)→mitomycin; es_suffix(medium)→mitomycin,medium,mergeable,ATC L01DC03 全库唯一命中; sim=0.84；安全预检: corroboration=1；products=3; countries=MX
 Oligometales Endovenosos,,mx-es-oligometales-endovenosos,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
-Penicilina G Benzatinica,Penicillin G Benzathine,mx-es-penicilina-g-benzatinica,penicillin-g-benzathine,fuzzy(low)→penicillin-g-benzathine,low,uncertain,低置信证据: 模糊 penicilina g benzatinica ≈ Penicillin G Benzathine (0.85)；products=3; countries=MX
+Penicilina G Benzatinica,Penicillin G Benzathine,mx-es-penicilina-g-benzatinica,penicillin-g-benzathine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.85（≥0.85）｜原名 Penicilina G Benzatinica
 Piperidolato,,mx-es-piperidolato-2,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Pseudoe Fedrina,,mx-es-pseudoe-fedrina,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Seroalbúmina Humana,,mx-es-seroalbumina-humana-2,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
@@ -268,7 +268,7 @@ Vacuna Antihepatitis B Recombinante,,mx-es-vacuna-antihepatitis-b-recombinante,,
 Vacuna Influenza Pandémica,,mx-es-vacuna-influenza-pandemica,,,,no_english,库内无对应英文成分候选；products=3; countries=MX
 Oxihidróxido Sucroférrico,Sucroferric Oxyhydroxide,oxihidroxido-sucroferrico,sucroferric-oxyhydroxide,atc_unique(medium)→sucroferric-oxyhydroxide,medium,mergeable,ATC V03AE05 全库唯一命中; sim=0.86；安全预检: unprefixed_es_id；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Panax Ginseng,,panax-ginseng,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
-Patirómero,Patiromer,patiromero,patiromer,fuzzy(low)→patiromer,low,uncertain,低置信证据: 模糊 patiromero ≈ Patiromer (0.95)；products=3; countries=ES；ES id 无 mx-es- 前缀
+Patirómero,Patiromer,patiromero,patiromer,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（patiromero ⊂/⊃ patiromer）｜原名 Patirómero
 Peróxido De Hidrógeno,Hydrogen Peroxide,peroxido-de-hidrogeno,hydrogen-peroxide,wikidata_es_en(medium)→hydrogen-peroxide,medium,mergeable,Wikidata 同一实体: es=peroxido de hidrogeno→en=hydrogen peroxide; sim=0.86；安全预检: unprefixed_es_id；products=3; countries=ES；ES id 无 mx-es- 前缀
 Podofilotoxina,,podofilotoxina,,,,no_english,库内无对应英文成分候选；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Quinagolida,Quinagolide,quinagolida,quinagolide,atc_unique(medium)→quinagolide,medium,mergeable,ATC G02CB04 全库唯一命中; sim=0.91；安全预检: unprefixed_es_id；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
@@ -276,7 +276,7 @@ Rifamicina,Rifamycin,rifamicina,rifamycin,wikidata_es_en(medium)→rifamycin; es
 Rosmarinus Officinalis,,rosmarinus-officinalis,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
 Roxitromicina,Roxithromycin,roxitromicina,roxithromycin,wikidata_es_en(medium)→roxithromycin,medium,mergeable,Wikidata 同一实体: es=roxitromicina→en=roxithromycin; sim=0.85；安全预检: unprefixed_es_id；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Salicilato De Dietilamina,,salicilato-de-dietilamina,,fuzzy(low)→salicilato-dietilamina; fuzzy(low)→salicilato-de-trolamina,low,uncertain,证据指向多个目标: salicilato-de-trolamina; salicilato-dietilamina；products=3; countries=ES；ES id 无 mx-es- 前缀
-Selenio,Selenium Sulfide,selenio,selenium-sulfide,atc_unique(medium)→selenium-sulfide,medium,uncertain,弱证据且名字相似度 0.52<0.62（仅 atc_unique）
+Selenio,Selenium Sulfide,selenio,selenium-sulfide,atc_unique(medium)→selenium-sulfide,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Selenio
 Sulbutiamina,,sulbutiamina,,,,no_english,库内无对应英文成分候选；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Tiocolchicósido,,tiocolchicosido,,,,no_english,库内无对应英文成分候选；products=3; countries=ES+MX；ES id 无 mx-es- 前缀
 Toxina Botulínica B,,toxina-botulinica-b,,,,no_english,库内无对应英文成分候选；products=3; countries=ES；ES id 无 mx-es- 前缀
@@ -293,22 +293,22 @@ Acetilsalicilato De Lisina,,acetilsalicilato-de-lisina,,,,no_english,库内无�
 Ácido Cólico,Cholic Acid,acido-colico,cholic-acid,wikidata_es_en(medium)→cholic-acid; atc_unique(medium)→cholic-acid,medium,mergeable,Wikidata 同一实体: es=acido colico→en=cholic acid; sim=0.62；安全预检: unprefixed_es_id；products=2; countries=ES；ES id 无 mx-es- 前缀
 Ácido Desoxicólico,Deoxycholic Acid,acido-desoxicolico,deoxycholic-acid,wikidata_es_en(medium)→deoxycholic-acid,medium,mergeable,Wikidata 同一实体: es=acido desoxicolico→en=deoxycholic acid; sim=0.67；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Ácido Dimercaptosuccinico (Dmsa),,acido-dimercaptosuccinico-dmsa,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
-Ácido Gadobénico,Gadobenate Dimeglumine,acido-gadobenico,gadobenate-dimeglumine,atc_unique(medium)→gadobenate-dimeglumine,medium,uncertain,弱证据且名字相似度 0.47<0.62（仅 atc_unique）
+Ácido Gadobénico,Gadobenate Dimeglumine,acido-gadobenico,gadobenate-dimeglumine,atc_unique(medium)→gadobenate-dimeglumine,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Ácido Gadobénico
 Ácido Obeticólico,Obeticholic Acid,acido-obeticolico,obeticholic-acid,wikidata_es_en(medium)→obeticholic-acid; atc_unique(medium)→obeticholic-acid,medium,mergeable,Wikidata 同一实体: es=acido obeticolico→en=obeticholic acid; sim=0.77；安全预检: unprefixed_es_id；products=2; countries=ES；ES id 无 mx-es- 前缀
 Alanina,Alanine,alanina,alanine,es_suffix(medium)→alanine,medium,mergeable,西语后缀规则 -ina→-ine; sim=0.86；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
-Bálsamo De Perú,Balsam Peru,balsamo-de-peru,balsam-peru,fuzzy(low)→balsam-peru,low,uncertain,低置信证据: 模糊 balsamo de peru ≈ Balsam Peru (0.85)；products=2; countries=ES；ES id 无 mx-es- 前缀
+Bálsamo De Perú,Balsam Peru,balsamo-de-peru,balsam-peru,fuzzy(low)→balsam-peru,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Bálsamo De Perú
 Betaína Anhidra,,betaina-anhidra,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
 Ciclopentolato,Cyclopentolate,ciclopentolato,cyclopentolate,atc_unique(medium)→cyclopentolate,medium,mergeable,ATC S01FA04 全库唯一命中; sim=0.86；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
-Citrulina,Citrulline,citrulina,citrulline,fuzzy(low)→citrulline,low,uncertain,低置信证据: 模糊 citrulina ≈ Citrulline (0.84)；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
+Citrulina,Citrulline,citrulina,citrulline,fuzzy(low)→citrulline,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Citrulina
 Clascoterona,Clascoterone,clascoterona,clascoterone,atc_unique(medium)→clascoterone,medium,mergeable,ATC D10AX06 全库唯一命中; sim=0.92；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Clevidipino,Clevidipine,clevidipino,clevidipine,atc_unique(medium)→clevidipine,medium,mergeable,ATC C08CA16 全库唯一命中; sim=0.91；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
-Colagenasa De Clostridium Hystolyticum,Collagenase Clostridium Histolyticum,colagenasa-de-clostridium-hystolyticum,collagenase-clostridium-histolyticum,fuzzy(low)→collagenase-clostridium-histolyticum,low,uncertain,低置信证据: 模糊 colagenasa de clostridium hystolyticum ≈ Collagenase Clostridium Histolyticum (0.92)；products=2; countries=ES；ES id 无 mx-es- 前缀
+Colagenasa De Clostridium Hystolyticum,Collagenase Clostridium Histolyticum,colagenasa-de-clostridium-hystolyticum,collagenase-clostridium-histolyticum,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.92（≥0.85）｜原名 Colagenasa De Clostridium Hystolyticum
 Dapsona,Dapsone,dapsona,dapsone,wikidata_es_en(medium)→dapsone,medium,mergeable,Wikidata 同一实体: es=dapsona→en=dapsone; sim=0.86；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Dicicloverina,Dicyclomine,dicicloverina,dicyclomine,wikidata_es_en(medium)→dicyclomine,medium,mergeable,Wikidata 同一实体: es=dicicloverina→en=dicyclomine; sim=0.67；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Dióxido De Carbono,Carbon Dioxide,dioxido-de-carbono,carbon-dioxide,wikidata_es_en(medium)→carbon-dioxide,medium,mergeable,Wikidata 同一实体: es=dioxido de carbono→en=carbon dioxide; sim=0.90；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Dipiridamol,Dipyridamole,dipiridamol,dipyridamole,wikidata_es_en(medium)→dipyridamole,medium,mergeable,Wikidata 同一实体: es=dipiridamol→en=dipyridamole; sim=0.87；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Esencia De Lavanda,,esencia-de-lavanda,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
-Esparsentán,Sparsentan,esparsentan,sparsentan,fuzzy(low)→sparsentan,low,uncertain,低置信证据: 模糊 esparsentan ≈ Sparsentan (0.95)；products=2; countries=ES；ES id 无 mx-es- 前缀
+Esparsentán,Sparsentan,esparsentan,sparsentan,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（esparsentan ⊂/⊃ sparsentan）｜原名 Esparsentán
 Fenazona,,fenazona,,,,no_english,库内无对应英文成分候选；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Fumarato De Tegomil,,fumarato-de-tegomil,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
 Herpes Zóster,,herpes-zoster,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
@@ -317,7 +317,7 @@ Inmunoglobulina Antirrábica Humana,,inmunoglobulina-antirrabica-humana,,,,no_en
 Inmunoglobulina Antitetánica Humana,,inmunoglobulina-antitetanica-humana,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
 Inmunoglobulina Antitimocítica De Conejo,,inmunoglobulina-antitimocitica-de-conejo,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
 Insulina Icodec,Insulin Icodec,insulina-icodec,insulin-icodec,atc_unique(medium)→insulin-icodec,medium,mergeable,ATC A10AE07 全库唯一命中; sim=0.97；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
-Insulina Lispro Bifásica,Insulin Lispro Biphasic,insulina-lispro-bifasica,insulin-lispro-biphasic,fuzzy(low)→insulin-lispro-biphasic,low,uncertain,低置信证据: 模糊 insulina lispro bifasica ≈ Insulin Lispro Biphasic (0.89)；products=2; countries=ES；ES id 无 mx-es- 前缀
+Insulina Lispro Bifásica,Insulin Lispro Biphasic,insulina-lispro-bifasica,insulin-lispro-biphasic,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Insulina Lispro Bifásica
 Mesterolona,Mesterolone,mesterolona,mesterolone,atc_unique(medium)→mesterolone,medium,mergeable,ATC G03BB01 全库唯一命中; sim=0.91；安全预检: unprefixed_es_id；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Mirtecaína,,mirtecaina,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
 Aceite De Eucalipto,,mx-es-aceite-de-eucalipto,eucalyptol,wikidata_es_en(medium)→eucalyptol,medium,uncertain,人工复核: 精油（eucalyptus oil）≠ 单体 eucalyptol；成分级不等价
@@ -338,7 +338,7 @@ Antirubeola,,mx-es-antirubeola,,,,no_english,库内无对应英文成分候选�
 Asunaprevir,asunaprevir,mx-es-asunaprevir,,WHO INN list 105(high)→asunaprevir,high,no_english,WHO INN 官方列表 list 105：西语名 Asunaprevir ↔ INN asunaprevir；source: https://iris.who.int/handle/10665/74656；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 B,,mx-es-b,,,,no_english,名称过短/为空；products=2; countries=MX
 Bicarbonato Sódico,Sodium Bicarbonate,mx-es-bicarbonato-sodico,sodium-bicarbonate,cima_alias(high)→sodium-bicarbonate,high,mergeable,ingest_cima ALIASES: bicarbonato sodico→sodium-bicarbonate；products=2; countries=MX
-Bioflavonoides,Bioflavonoids,mx-es-bioflavonoides,bioflavonoids,fuzzy(low)→bioflavonoids,low,uncertain,低置信证据: 模糊 bioflavonoides ≈ Bioflavonoids (0.96)；products=2; countries=MX
+Bioflavonoides,Bioflavonoids,mx-es-bioflavonoides,bioflavonoids,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.96（≥0.85）｜原名 Bioflavonoides
 Bromuro De Aclidinio,,mx-es-bromuro-de-aclidinio,aclidinio,exact_norm(high)→aclidinio,high,uncertain,人工改指目标 aclidinium-bromide 不在库/无产品
 Bromuro De Butilhioscina,Hyoscine Butylbromide,mx-es-bromuro-de-butilhioscina,hyoscine-butylbromide,mx_inn_map(high)→hyoscine-butylbromide,high,mergeable,mx_inn_map via=manual score=1.0: butilhioscina→Hyoscine Butylbromide；products=2; countries=MX
 Butilbromuro De Hioscina,,mx-es-butilbromuro-de-hioscina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
@@ -348,19 +348,19 @@ Cipionato,,mx-es-cipionato,,,,no_english,库内无对应英文成分候选；pro
 Cisatracurio,Cisatracurium,mx-es-cisatracurio,cisatracurium,cima_alias(high)→cisatracurium,high,mergeable,ingest_cima ALIASES: cisatracurio→cisatracurium；products=2; countries=MX
 Citocolina,,mx-es-citocolina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Clodronato,Clodronate,mx-es-clodronato,clodronate,es_suffix(medium)→clodronate,medium,mergeable,西语后缀规则 -ato→-ate; sim=0.90；products=2; countries=MX
-Clodronato Disódico,Clodronate Disodium,mx-es-clodronato-disodico,clodronate-disodium,fuzzy(low)→clodronate-disodium,low,uncertain,低置信证据: 模糊 clodronato disodico ≈ Clodronate Disodium (0.84)；products=2; countries=MX
-Cloropiramina,Cloroprocaina,mx-es-cloropiramina,cloroprocaina,fuzzy(low)→cloroprocaina,low,uncertain,低置信证据: 模糊 cloropiramina ≈ Cloroprocaina (0.85)；products=2; countries=MX
+Clodronato Disódico,Clodronate Disodium,mx-es-clodronato-disodico,clodronate-disodium,fuzzy(low)→clodronate-disodium,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Clodronato Disódico
+Cloropiramina,Cloroprocaina,mx-es-cloropiramina,cloroprocaina,fuzzy(low)→cloroprocaina,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Cloropiramina
 Cultivo Liofilizado De Lactobacilos Casei Variedad Rhamnosus,,mx-es-cultivo-liofilizado-de-lactobacilos-casei-variedad-rhamnosus,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Dantron,Danthron,mx-es-dantron,danthron,fuzzy(low)→danthron,low,uncertain,低置信证据: 模糊 dantron ≈ Danthron (0.93)；products=2; countries=MX
+Dantron,Danthron,mx-es-dantron,danthron,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.93（≥0.85）｜原名 Dantron
 Desoxirribonucleasa,,mx-es-desoxirribonucleasa,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Dieta Elemental,,mx-es-dieta-elemental,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Dipropionato De Beclometasona,Beclomethasone,mx-es-dipropionato-de-beclometasona,beclomethasone,mx_inn_map(high)→beclomethasone; cima_alias(high)→beclomethasone,high,mergeable,mx_inn_map via=manual score=1.0: beclometasona→Beclomethasone；安全预检: corroboration=2；products=2; countries=MX
 Dobesilato De Calcio,,mx-es-dobesilato-de-calcio,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Dorzolaminda,Dorzolamide,mx-es-dorzolaminda,dorzolamide,fuzzy(low)→dorzolamide,low,uncertain,低置信证据: 模糊 dorzolaminda ≈ Dorzolamide (0.87)；products=2; countries=MX
+Dorzolaminda,Dorzolamide,mx-es-dorzolaminda,dorzolamide,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Dorzolaminda
 Drotaverina,,mx-es-drotaverina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Endovenosa,,mx-es-endovenosa,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Esporas De Bacillus Clausii,,mx-es-esporas-de-bacillus-clausii,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Eucalipto,Eucalyptol,mx-es-eucalipto,eucalyptol,fuzzy(low)→eucalyptol,low,uncertain,低置信证据: 模糊 eucalipto ≈ Eucalyptol (0.84)；products=2; countries=MX
+Eucalipto,Eucalyptol,mx-es-eucalipto,eucalyptol,fuzzy(low)→eucalyptol,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Eucalipto
 Evogliptina,,mx-es-evogliptina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Exenatida,Exenatide,mx-es-exenatida,exenatide,cima_alias(high)→exenatide; wikidata_es_en(medium)→exenatide,high,mergeable,ingest_cima ALIASES: exenatida→exenatide；products=2; countries=MX
 Factor De Crecimiento Epidérmico Humano Recombinante,,mx-es-factor-de-crecimiento-epidermico-humano-recombinante,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
@@ -369,7 +369,7 @@ Factor Viii De La Coagulación Sanguínea Humana,,mx-es-factor-viii-de-la-coagul
 Feni Lefrina,,mx-es-feni-lefrina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Fenotrina,Phenothrin,mx-es-fenotrina,phenothrin,wikidata_es_en(medium)→phenothrin; atc_unique(medium)→phenothrin,medium,mergeable,Wikidata 同一实体: es=fenotrina→en=phenothrin; sim=0.74；products=2; countries=MX
 Fepradinol,,mx-es-fepradinol,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Fibrinolisina,Fibrinolysin,mx-es-fibrinolisina,fibrinolysin,fuzzy(low)→fibrinolysin,low,uncertain,低置信证据: 模糊 fibrinolisina ≈ Fibrinolysin (0.88)；products=2; countries=MX
+Fibrinolisina,Fibrinolysin,mx-es-fibrinolisina,fibrinolysin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Fibrinolisina
 Fosfato Monobasico De Sodio,,mx-es-fosfato-monobasico-de-sodio,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Gemigliptina,,mx-es-gemigliptina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Guaiazulene,,mx-es-guaiazulene,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
@@ -377,20 +377,20 @@ Hierro Elemental,,mx-es-hierro-elemental,,,,no_english,库内无对应英文成�
 Hormona Foliculo Estimulante,,mx-es-hormona-foliculo-estimulante,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Inactivados),,mx-es-inactivados,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Inmunoglobulina Antilinfocitos T De Origen,,mx-es-inmunoglobulina-antilinfocitos-t-de-origen,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Insulina Aspartica,Insulin Aspart,mx-es-insulina-aspartica,insulin-aspart,fuzzy(low)→insulin-aspart,low,uncertain,低置信证据: 模糊 insulina aspartica ≈ Insulin Aspart (0.88)；products=2; countries=MX
+Insulina Aspartica,Insulin Aspart,mx-es-insulina-aspartica,insulin-aspart,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Insulina Aspartica
 Insulina Isofána,,mx-es-insulina-isofana,,cima_alias(high)→insulin-isophane-human; cima_alias(high)→insulin-isophane,high,uncertain,证据指向多个目标: insulin-isophane; insulin-isophane-human；products=2; countries=MX
 Interferon Alfa 2a (recombinante),,mx-es-interferon-alfa-2a-recombinante,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Ív,,mx-es-iv,,,,no_english,名称过短/为空；products=2; countries=MX
 L-aspartato,,mx-es-l-aspartato,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Lactobacillus Fermentum,Limosilactobacillus Fermentum,mx-es-lactobacillus-fermentum,limosilactobacillus-fermentum,fuzzy(low)→limosilactobacillus-fermentum,low,uncertain,低置信证据: 模糊 lactobacillus fermentum ≈ Limosilactobacillus Fermentum (0.88)；products=2; countries=MX
-Lanzoprazol,Lansoprazole,mx-es-lanzoprazol,lansoprazole,fuzzy(low)→lansoprazole,low,uncertain,低置信证据: 模糊 lanzoprazol ≈ Lansoprazole (0.87)；products=2; countries=MX
+Lactobacillus Fermentum,Limosilactobacillus Fermentum,mx-es-lactobacillus-fermentum,limosilactobacillus-fermentum,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（lactobacillus fermentum ⊂/⊃ limosilactobacillus fermentum）｜原名 Lactobacillus Fermentum
+Lanzoprazol,Lansoprazole,mx-es-lanzoprazol,lansoprazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Lanzoprazol
 Limeciclina,Lymecycline,mx-es-limeciclina,lymecycline,wikidata_es_en(medium)→lymecycline; atc_unique(medium)→lymecycline,medium,mergeable,Wikidata 同一实体: es=limeciclina→en=lymecycline; sim=0.73；products=2; countries=MX
 Lipidos,,mx-es-lipidos-2,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Loxoprofeno,Loxoprofen,mx-es-loxoprofeno,loxoprofen,fuzzy(low)→loxoprofen,low,uncertain,低置信证据: 模糊 loxoprofeno ≈ Loxoprofen (0.95)；products=2; countries=MX
+Loxoprofeno,Loxoprofen,mx-es-loxoprofeno,loxoprofen,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（loxoprofeno ⊂/⊃ loxoprofen）｜原名 Loxoprofeno
 Mequitazina,,mx-es-mequitazina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Metadoxina,,mx-es-metadoxina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Mofetilo,,mx-es-mofetilo,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Mosaprida,Mosapride,mx-es-mosaprida,mosapride,fuzzy(low)→mosapride,low,uncertain,低置信证据: 模糊 mosaprida ≈ Mosapride (0.89)；products=2; countries=MX
+Mosaprida,Mosapride,mx-es-mosaprida,mosapride,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Mosaprida
 Oxibutina,,mx-es-oxibutina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Paclitaxel Unido A Albúmina,,mx-es-paclitaxel-unido-a-albumina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Pantotenato De Calcio,,mx-es-pantotenato-de-calcio,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
@@ -401,13 +401,13 @@ Pirazinamida,Pyrazinamide,mx-es-pirazinamida,pyrazinamide,cima_alias(high)→pyr
 Piritinol,Pyritinol,mx-es-piritinol,pyritinol,wikidata_es_en(medium)→pyritinol,medium,mergeable,Wikidata 同一实体: es=piritinol→en=pyritinol; sim=0.89；products=2; countries=MX
 Potasio Y Sodio,,mx-es-potasio-y-sodio,,,,combination,复方名（含 y/+//con），本轮不合并；products=2; countries=MX
 Pranlukast,,mx-es-pranlukast,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Quifamida,Quinfamide,mx-es-quifamida,quinfamide,fuzzy(low)→quinfamide,low,uncertain,低置信证据: 模糊 quifamida ≈ Quinfamide (0.84)；products=2; countries=MX
+Quifamida,Quinfamide,mx-es-quifamida,quinfamide,fuzzy(low)→quinfamide,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Quifamida
 Resina De Podofilina,,mx-es-resina-de-podofilina,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Sacarato Férrico,,mx-es-sacarato-ferrico,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Sacubitrilo Valsartán,,mx-es-sacubitrilo-valsartan,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Solución Hartmann,,mx-es-solucion-hartmann-2,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Subacetato De Alum,,mx-es-subacetato-de-alum,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Sulfato De Manganeso,Manganese,mx-es-sulfato-de-manganeso,manganese,fuzzy(low)→manganese,low,uncertain,低置信证据: 模糊 manganeso ≈ Manganese (0.89)；products=2; countries=MX
+Sulfato De Manganeso,Manganese,mx-es-sulfato-de-manganeso,manganese,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sulfate）｜原名 Sulfato De Manganeso
 Suspensión,,mx-es-suspension,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Temozolamida,,mx-es-temozolamida,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Tiamin A,,mx-es-tiamin-a,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
@@ -416,7 +416,7 @@ Trinitrato De Glicerilo,,mx-es-trinitrato-de-glicerilo,,,,no_english,库内无�
 Trioxido De Arsenico,,mx-es-trioxido-de-arsenico,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Triticum Vulgare,,mx-es-triticum-vulgare,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Vacuna Antihepatitis A Inactivada,,mx-es-vacuna-antihepatitis-a-inactivada,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
-Vacuna Antiinfluenza,Vacuna Anti H.Influenzae B,mx-es-vacuna-antiinfluenza,vacuna-anti-h-influenzae-b,fuzzy(low)→vacuna-anti-h-influenzae-b,low,uncertain,低置信证据: 模糊 vacuna antiinfluenza ≈ Vacuna Anti H.Influenzae B (0.87)；products=2; countries=MX
+Vacuna Antiinfluenza,Vacuna Anti H.Influenzae B,mx-es-vacuna-antiinfluenza,vacuna-anti-h-influenzae-b,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Vacuna Antiinfluenza
 Vacuna Antiinfluenza Tipo B,,mx-es-vacuna-antiinfluenza-tipo-b,,,,no_english,库内无对应英文成分候选；products=2; countries=MX
 Vacuna Antiinfluenza Trivalente Tipo A Y B,,mx-es-vacuna-antiinfluenza-trivalente-tipo-a-y-b,,,,combination,复方名（含 y/+//con），本轮不合并；products=2; countries=MX
 Vacuna Antiinfluenza Trivalente Tipo A Y B (virus Fraccionados,,mx-es-vacuna-antiinfluenza-trivalente-tipo-a-y-b-virus-fraccionados,,,,combination,复方名（含 y/+//con），本轮不合并；products=2; countries=MX
@@ -438,8 +438,8 @@ Prasterona,Prasterone,prasterona,prasterone,wikidata_es_en(medium)→prasterone;
 Producto Con Darifenacina,,producto-con-darifenacina,,,,combination,复方名（含 y/+//con），本轮不合并；products=2; countries=ES；ES id 无 mx-es- 前缀
 Producto Con Factor Xiii,,producto-con-factor-xiii,,atc_unique(medium)→factor-xiii,medium,combination,复方名（含 y/+//con），本轮不合并；products=2; countries=ES；ES id 无 mx-es- 前缀
 Producto Con Solriamfetol,,producto-con-solriamfetol,,atc_unique(medium)→solriamfetol,medium,combination,复方名（含 y/+//con），本轮不合并；products=2; countries=ES；ES id 无 mx-es- 前缀
-Proteína C Humana,Protein C Human,proteina-c-humana,protein-c-human,fuzzy(low)→protein-c-human,low,uncertain,低置信证据: 模糊 proteina c humana ≈ Protein C Human (0.94)；products=2; countries=ES；ES id 无 mx-es- 前缀
-Salvia Officinalis,Salvia Officinalis Whole,salvia-officinalis,salvia-officinalis-whole,fuzzy(low)→salvia-officinalis-whole,low,uncertain,低置信证据: 模糊 salvia officinalis ≈ Salvia Officinalis Whole (0.86)；products=2; countries=ES；ES id 无 mx-es- 前缀
+Proteína C Humana,Protein C Human,proteina-c-humana,protein-c-human,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.94（≥0.85）｜原名 Proteína C Humana
+Salvia Officinalis,Salvia Officinalis Whole,salvia-officinalis,salvia-officinalis-whole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（salvia officinalis ⊂/⊃ salvia officinalis whole）｜原名 Salvia Officinalis
 Sugemalimab,,sugemalimab,,,,no_english,库内无对应英文成分候选；products=2; countries=ES+MX；ES id 无 mx-es- 前缀
 Suplemento Parenteral De Oligoelementos,,suplemento-parenteral-de-oligoelementos,,,,no_english,库内无对应英文成分候选；products=2; countries=ES；ES id 无 mx-es- 前缀
 Talimogén Laherparepvec,talimogene laherparepvec,talimogen-laherparepvec,talimogene-laherparepvec,WHO INN list 104(high)→talimogene-laherparepvec,high,mergeable,WHO INN 官方列表 list 104：西语名 Talimogén Laherparepvec ↔ INN talimogene laherparepvec；source: https://iris.who.int/handle/10665/74579；安全预检通过（安全校验由 merge 脚本 dry-run 复核）
@@ -461,11 +461,11 @@ Acetato De Magnesio,,acetato-de-magnesio,,,,no_english,库内无对应英文成�
 Acetato De Rezafungina,Rezafungin,acetato-de-rezafungina,rezafungin,es_suffix(medium)→rezafungin,medium,mergeable,西语后缀规则 -ina→-in; sim=0.95；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Ácido Aspártico,,acido-aspartico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Ácido Espaglúmico,,acido-espaglumico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Ácido Etidrónico,Etidronate,acido-etidronico,etidronate,atc_unique(medium)→etidronate,medium,uncertain,弱证据且名字相似度 0.54<0.62（仅 atc_unique）
+Ácido Etidrónico,Etidronate,acido-etidronico,etidronate,atc_unique(medium)→etidronate,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Ácido Etidrónico
 Ácido Flufenámico,,acido-flufenamico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Ácido Glutámico,,acido-glutamico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Ácido Niflúmico,,acido-niflumico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Ácido Quenodesoxicólico,Chenodiol,acido-quenodesoxicolico,chenodiol,atc_unique(medium)→chenodiol,medium,uncertain,弱证据且名字相似度 0.50<0.62（仅 atc_unique）
+Ácido Quenodesoxicólico,Chenodiol,acido-quenodesoxicolico,chenodiol,atc_unique(medium)→chenodiol,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Ácido Quenodesoxicólico
 Ácido Tánico,,acido-tanico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Ácido Tauroselcólico (75Se),,acido-tauroselcolico-75se,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Almidón Maíz,,almidon-maiz,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
@@ -473,7 +473,7 @@ Aluminio Hidróxido Magnesio Carbonato,,aluminio-hidroxido-magnesio-carbonato,,,
 Aminolevulinato De Metilo,Methyl Aminolevulinate,aminolevulinato-de-metilo,methyl-aminolevulinate,atc_unique(medium)→methyl-aminolevulinate,medium,mergeable,ATC L01XD03 全库唯一命中; sim=0.86；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Arteméter,Artemether,artemeter,artemether,wikidata_es_en(medium)→artemether,medium,mergeable,Wikidata 同一实体: es=artemeter→en=artemether; sim=0.95；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Atidarsagén Autotemcel,,atidarsagen-autotemcel,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Atropa Belladona,Atropa Belladonna,atropa-belladona,atropa-belladonna,fuzzy(low)→atropa-belladonna,low,uncertain,低置信证据: 模糊 atropa belladona ≈ Atropa Belladonna (0.97)；products=1; countries=ES；ES id 无 mx-es- 前缀
+Atropa Belladona,Atropa Belladonna,atropa-belladona,atropa-belladonna,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.97（≥0.85）｜原名 Atropa Belladona
 Beremagén Geperpavec,,beremagen-geperpavec,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Brexucabtagén Autoleucel,Brexucabtagene Autoleucel,brexucabtagen-autoleucel,brexucabtagene-autoleucel,atc_unique(medium)→brexucabtagene-autoleucel,medium,mergeable,ATC L01XL06 全库唯一命中; sim=0.98；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Células Epiteliales Corneales Autólogas,,celulas-epiteliales-corneales-autologas,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
@@ -484,16 +484,16 @@ Complejo Fitoesterol Prunus Arbórea,,complejo-fitoesterol-prunus-arborea,,,,no_
 Cúrcuma Longa,,curcuma-longa,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Dimetilsulfóxido,Dimethyl Sulfoxide,dimetilsulfoxido,dimethyl-sulfoxide,wikidata_es_en(medium)→dimethyl-sulfoxide,medium,mergeable,Wikidata 同一实体: es=dimetilsulfoxido→en=dimethyl sulfoxide; sim=0.85；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Dióxido Titanio,,dioxido-titanio,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Eladocagén Exuparvovec,Eladocagene Exuparvovec,eladocagen-exuparvovec,eladocagene-exuparvovec,fuzzy(low)→eladocagene-exuparvovec,low,uncertain,低置信证据: 模糊 eladocagen exuparvovec ≈ Eladocagene Exuparvovec (0.98)；products=1; countries=ES；ES id 无 mx-es- 前缀
+Eladocagén Exuparvovec,Eladocagene Exuparvovec,eladocagen-exuparvovec,eladocagene-exuparvovec,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.98（≥0.85）｜原名 Eladocagén Exuparvovec
 Electrolitos (Laxante Osmótico),,electrolitos-laxante-osmotico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Eleutherococcus Senticosus,Eleutherococcus Senticosus Stem,eleutherococcus-senticosus,eleutherococcus-senticosus-stem,fuzzy(low)→eleutherococcus-senticosus-stem,low,uncertain,低置信证据: 模糊 eleutherococcus senticosus ≈ Eleutherococcus Senticosus Stem (0.91)；products=1; countries=ES；ES id 无 mx-es- 前缀
+Eleutherococcus Senticosus,Eleutherococcus Senticosus Stem,eleutherococcus-senticosus,eleutherococcus-senticosus-stem,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（eleutherococcus senticosus ⊂/⊃ eleutherococcus senticosus stem）｜原名 Eleutherococcus Senticosus
 Estaño,,estano,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Etranacogén Dezaparvovec,Etranacogene Dezaparvovec,etranacogen-dezaparvovec,etranacogene-dezaparvovec,atc_unique(medium)→etranacogene-dezaparvovec,medium,mergeable,ATC B02BD16 全库唯一命中; sim=0.98；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Exagamglogén Autotemcel,Exagamglogene Autotemcel,exagamglogen-autotemcel,exagamglogene-autotemcel,wikidata_es_en(medium)→exagamglogene-autotemcel; atc_unique(medium)→exagamglogene-autotemcel,medium,mergeable,Wikidata 同一实体: es=exagamglogen autotemcel→en=exagamglogene autotemcel; sim=0.98；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Fenilbutirato De Glicerilo,,fenilbutirato-de-glicerilo,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Foeniculum Vulgare,Foeniculum Vulgare Fruit,foeniculum-vulgare,foeniculum-vulgare-fruit,fuzzy(low)→foeniculum-vulgare-fruit,low,uncertain,低置信证据: 模糊 foeniculum vulgare ≈ Foeniculum Vulgare Fruit (0.86)；products=1; countries=ES；ES id 无 mx-es- 前缀
+Foeniculum Vulgare,Foeniculum Vulgare Fruit,foeniculum-vulgare,foeniculum-vulgare-fruit,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（foeniculum vulgare ⊂/⊃ foeniculum vulgare fruit）｜原名 Foeniculum Vulgare
 Fumarato De Diroximel,Diroximel,fumarato-de-diroximel,diroximel,exact_norm(high)→diroximel,high,mergeable,同名归一: Fumarato De Diroximel == Diroximel；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
-Hexafluoruro De Azufre,Sulfur Hexafluoride,hexafluoruro-de-azufre,sulfur-hexafluoride,wikidata_es_en(medium)→sulfur-hexafluoride,medium,uncertain,弱证据且名字相似度 0.54<0.62（仅 wikidata_es_en）
+Hexafluoruro De Azufre,Sulfur Hexafluoride,hexafluoruro-de-azufre,sulfur-hexafluoride,wikidata_es_en(medium)→sulfur-hexafluoride,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Hexafluoruro De Azufre
 Idecabtagén Vicleucel,Idecabtagene Vicleucel,idecabtagen-vicleucel,idecabtagene-vicleucel,atc_unique(medium)→idecabtagene-vicleucel,medium,mergeable,ATC L01XL07 全库唯一命中; sim=0.98；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
 Lepidium Latifolium,,lepidium-latifolium,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Lisocabtagén Maraleucel,Lisocabtagene Maraleucel,lisocabtagen-maraleucel,lisocabtagene-maraleucel,atc_unique(medium)→lisocabtagene-maraleucel,medium,mergeable,ATC L01XL08 全库唯一命中; sim=0.98；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
@@ -533,7 +533,7 @@ Acido Tiofosfor,,mx-es-acido-tiofosfor,,,,no_english,库内无对应英文成分
 Acotiamida,,mx-es-acotiamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Adsorbida),,mx-es-adsorbida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Adulto Td,,mx-es-adulto-td,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Aire,Air,mx-es-aire,air,fuzzy(low)→air,low,uncertain,低置信证据: 模糊 aire ≈ Air (0.86)；products=1; countries=MX
+Aire,Air,mx-es-aire,air,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（aire ⊂/⊃ air）｜原名 Aire
 Alcohol Bencilico,Benzyl Alcohol,mx-es-alcohol-bencilico,benzyl-alcohol,wikidata_es_en(medium)→benzyl-alcohol,medium,mergeable,Wikidata 同一实体: es=alcohol bencilico→en=benzyl alcohol; sim=0.77；products=1; countries=MX
 Alcohol Polivinílico,,mx-es-alcohol-polivinilico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Alcohól Polivinílico,,mx-es-alcohol-polivinilico-3,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -542,10 +542,10 @@ Alfatradiol,,mx-es-alfatradiol,,,,no_english,库内无对应英文成分候选�
 Alginato De Sodio,,mx-es-alginato-de-sodio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Alibour,,mx-es-alibour,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Allium Cepa,,mx-es-allium-cepa,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Almlodipino,Amlodipine,mx-es-almlodipino,amlodipine,fuzzy(low)→amlodipine,low,uncertain,低置信证据: 模糊 almlodipino ≈ Amlodipine (0.86)；products=1; countries=MX
+Almlodipino,Amlodipine,mx-es-almlodipino,amlodipine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Almlodipino
 Aluminio Y Magnesio,,mx-es-aluminio-y-magnesio,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Aluminio Zirconio Glicina,,mx-es-aluminio-zirconio-glicina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Amantadia,Amantadine,mx-es-amantadia,amantadine,fuzzy(low)→amantadine,low,uncertain,低置信证据: 模糊 amantadia ≈ Amantadine (0.84)；products=1; countries=MX
+Amantadia,Amantadine,mx-es-amantadia,amantadine,fuzzy(low)→amantadine,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Amantadia
 Amfepramona,,mx-es-amfepramona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Aminoacidos Al 8% Con 42% De Aa De Cadena Ramificada,,mx-es-aminoacidos-al-8-con-42-de-aa-de-cadena-ramificada,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Aminoacidos Con Electrolitos,,mx-es-aminoacidos-con-electrolitos,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
@@ -556,7 +556,7 @@ Aminofenazona,,mx-es-aminofenazona,,,,no_english,库内无对应英文成分候�
 Amoxicilinana,,mx-es-amoxicilinana,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Ampicilina Trihidratada,,mx-es-ampicilina-trihidratada,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Amtriptilina,,mx-es-amtriptilina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Anastrazol,Anastrozole,mx-es-anastrazol,anastrozole,fuzzy(low)→anastrozole,low,uncertain,低置信证据: 模糊 anastrazol ≈ Anastrozole (0.86)；products=1; countries=MX
+Anastrazol,Anastrozole,mx-es-anastrazol,anastrozole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Anastrazol
 Anfebutamona (bupropión),,mx-es-anfebutamona-bupropion,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Anti-,,mx-es-anti,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Anti-parotiditid,,mx-es-anti-parotiditid,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -578,22 +578,22 @@ Atenuada,,mx-es-atenuada,,,,no_english,库内无对应英文成分候选；produ
 Atenuados Tipo A Y B,,mx-es-atenuados-tipo-a-y-b,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Ay B,,mx-es-ay-b,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Azufre,,mx-es-azufre,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Bacampicilina,Bacampicillin,mx-es-bacampicilina,bacampicillin,fuzzy(low)→bacampicillin,low,uncertain,低置信证据: 模糊 bacampicilina ≈ Bacampicillin (0.92)；products=1; countries=MX
+Bacampicilina,Bacampicillin,mx-es-bacampicilina,bacampicillin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.92（≥0.85）｜原名 Bacampicilina
 Bacilos Lácticos,,mx-es-bacilos-lacticos,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Bcg Inmunoterapeutico,,mx-es-bcg-inmunoterapeutico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Belimunab,Belimumab,mx-es-belimunab,belimumab,fuzzy(low)→belimumab,low,uncertain,低置信证据: 模糊 belimunab ≈ Belimumab (0.89)；products=1; countries=MX
+Belimunab,Belimumab,mx-es-belimunab,belimumab,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Belimunab
 Bemiparina De Sodio,Bemiparin,mx-es-bemiparina-de-sodio,bemiparin,cima_alias(high)→bemiparin; wikidata_es_en(medium)→bemiparin,high,mergeable,ingest_cima ALIASES: bemiparina→bemiparin；products=1; countries=MX
 Bencilpenicilina Sodica,Penicillin G,mx-es-bencilpenicilina-sodica,penicillin-g,mx_inn_map(high)→penicillin-g; cima_alias(high)→penicillin-g,high,mergeable,mx_inn_map via=manual score=1.0: bencilpenicilina→Penicillin G；products=1; countries=MX
 Benzoilo,,mx-es-benzoilo,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Bicarbonato,,mx-es-bicarbonato,bicarbonate,es_suffix(medium)→bicarbonate,medium,uncertain,人工复核: 泛指 bicarbonate，缺阳离子（钠/钾），不可当同一成分
 Bicatulamida,,mx-es-bicatulamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Bioazufre Fluido Peroxido De Benzoilo,,mx-es-bioazufre-fluido-peroxido-de-benzoilo,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Bismuto,Bismuth,mx-es-bismuto,bismuth,fuzzy(low)→bismuth,low,uncertain,低置信证据: 模糊 bismuto ≈ Bismuth (0.86)；products=1; countries=MX
+Bismuto,Bismuth,mx-es-bismuto,bismuth,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Bismuto
 Bisulfito Sódico De Menadiona,,mx-es-bisulfito-sodico-de-menadiona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Bordetella Pertussis,,mx-es-bordetella-pertussis,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Bosertan,Bosentan,mx-es-bosertan,bosentan,fuzzy(low)→bosentan,low,uncertain,低置信证据: 模糊 bosertan ≈ Bosentan (0.88)；products=1; countries=MX
+Bosertan,Bosentan,mx-es-bosertan,bosentan,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Bosertan
 Bristol Myers Squibb De México,,mx-es-bristol-myers-squibb-de-mexico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Bromhidrato De Glutamato De,Glutamato,mx-es-bromhidrato-de-glutamato-de,glutamato,fuzzy(low)→glutamato,low,uncertain,低置信证据: 模糊 glutamato de ≈ Glutamato (0.86)；products=1; countries=MX
+Bromhidrato De Glutamato De,Glutamato,mx-es-bromhidrato-de-glutamato-de,glutamato,fuzzy(low)→glutamato,low,uncertain,batch B（task-56）丢弃：盐型不匹配：源 ['hydrobromide']→['hydrobromide']，目标 variant/inn 无对应；原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Bromhidrato De Glutamato De
 Bromuro De Glicopirranio,,mx-es-bromuro-de-glicopirranio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Bromuro Pinaverio,pinaverium-bromide,mx-es-bromuro-pinaverio,pinaverium-bromide,data/mx_inn_map.json（COFEPRIS 西→英 INN 表）,medium,mergeable,batch A（task-48）｜data/mx_inn_map.json（COFEPRIS 西→英 INN 表）｜官方名映射
 Bufenina,,mx-es-bufenina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -601,23 +601,23 @@ Butirato De Hidrocortisona,,mx-es-butirato-de-hidrocortisona,,,,no_english,库�
 Butrew Sbk,,mx-es-butrew-sbk,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Caproato De Fluocortolona,,mx-es-caproato-de-fluocortolona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Carbamida,,mx-es-carbamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Carbazocromo,Carbazochrome,mx-es-carbazocromo,carbazochrome,fuzzy(low)→carbazochrome,low,uncertain,低置信证据: 模糊 carbazocromo ≈ Carbazochrome (0.88)；products=1; countries=MX
+Carbazocromo,Carbazochrome,mx-es-carbazocromo,carbazochrome,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Carbazocromo
 Carbonato De Lodenafilo,,mx-es-carbonato-de-lodenafilo,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Carboximaltosa Férrica,,mx-es-carboximaltosa-ferrica,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cefepina,,mx-es-cefepina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cefoperazona,Cefoperazone,mx-es-cefoperazona,cefoperazone,wikidata_es_en(medium)→cefoperazone,medium,mergeable,Wikidata 同一实体: es=cefoperazona→en=cefoperazone; sim=0.92；products=1; countries=MX
-Cefpiroma,Cefpirome,mx-es-cefpiroma,cefpirome,fuzzy(low)→cefpirome,low,uncertain,低置信证据: 模糊 cefpiroma ≈ Cefpirome (0.89)；products=1; countries=MX
+Cefpiroma,Cefpirome,mx-es-cefpiroma,cefpirome,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Cefpiroma
 Celecobix,,mx-es-celecobix,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cepa Lacteol Lb,,mx-es-cepa-lacteol-lb,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cepa Rix4414,,mx-es-cepa-rix4414,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cernelle 68 (sf 68),,mx-es-cernelle-68-sf-68,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Chamomilla,Chamomile,mx-es-chamomilla,chamomile,fuzzy(low)→chamomile,low,uncertain,低置信证据: 模糊 chamomilla ≈ Chamomile (0.84)；products=1; countries=MX
+Chamomilla,Chamomile,mx-es-chamomilla,chamomile,fuzzy(low)→chamomile,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Chamomilla
 Chloromycetin,,mx-es-chloromycetin,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cialocobalamina,,mx-es-cialocobalamina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Cianocobal Amina,Cyanocobalamin,mx-es-cianocobal-amina,cyanocobalamin,fuzzy(low)→cyanocobalamin,low,uncertain,低置信证据: 模糊 cianocobal amina ≈ Cyanocobalamin (0.87)；products=1; countries=MX
-Ciloquinol,Clioquinol,mx-es-ciloquinol,clioquinol,fuzzy(low)→clioquinol,low,uncertain,低置信证据: 模糊 ciloquinol ≈ Clioquinol (0.90)；products=1; countries=MX
+Cianocobal Amina,Cyanocobalamin,mx-es-cianocobal-amina,cyanocobalamin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Cianocobal Amina
+Ciloquinol,Clioquinol,mx-es-ciloquinol,clioquinol,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.90（≥0.85）｜原名 Ciloquinol
 Cilosporina A,,mx-es-cilosporina-a,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Cirpofloxacino,Ciprofloxacin,mx-es-cirpofloxacino,ciprofloxacin,fuzzy(low)→ciprofloxacin,low,uncertain,低置信证据: 模糊 cirpofloxacino ≈ Ciprofloxacin (0.89)；products=1; countries=MX
+Cirpofloxacino,Ciprofloxacin,mx-es-cirpofloxacino,ciprofloxacin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Cirpofloxacino
 Citabarina,,mx-es-citabarina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Citrato De,,mx-es-citrato-de,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Citrato De Colina,,mx-es-citrato-de-colina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -627,11 +627,11 @@ Clonixilato De Lisina,,mx-es-clonixilato-de-lisina,,,,no_english,库内无对应
 Clonixinato De Lisina Butilhioscina,,mx-es-clonixinato-de-lisina-butilhioscina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cloratadona,,mx-es-cloratadona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Clorfenamina Acido Acetilsalicilico,,mx-es-clorfenamina-acido-acetilsalicilico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Clorotrimazol,Clotrimazole,mx-es-clorotrimazol,clotrimazole,fuzzy(low)→clotrimazole,low,uncertain,低置信证据: 模糊 clorotrimazol ≈ Clotrimazole (0.88)；products=1; countries=MX
+Clorotrimazol,Clotrimazole,mx-es-clorotrimazol,clotrimazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Clorotrimazol
 Cloruro De,,mx-es-cloruro-de,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cloruro De Benzalconio,,mx-es-cloruro-de-benzalconio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Cloruro De Betanechol,Bethanechol,mx-es-cloruro-de-betanechol,bethanechol,fuzzy(low)→bethanechol,low,uncertain,低置信证据: 模糊 betanechol ≈ Bethanechol (0.95)；products=1; countries=MX
-Cloruro De Cetilperidinio,Cetilpiridinio,mx-es-cloruro-de-cetilperidinio,cetilpiridinio,fuzzy(low)→cetilpiridinio,low,uncertain,低置信证据: 模糊 cetilperidinio ≈ Cetilpiridinio (0.93)；products=1; countries=MX
+Cloruro De Betanechol,Bethanechol,mx-es-cloruro-de-betanechol,bethanechol,fuzzy(low)→bethanechol,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Cloruro De Betanechol
+Cloruro De Cetilperidinio,Cetilpiridinio,mx-es-cloruro-de-cetilperidinio,cetilpiridinio,fuzzy(low)→cetilpiridinio,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Cloruro De Cetilperidinio
 Cloruro De Decualinio,,mx-es-cloruro-de-decualinio,decualinio,exact_norm(high)→decualinio,high,uncertain,人工改指目标 decamethonium 不在库/无产品
 Cloruro De Etilo,,mx-es-cloruro-de-etilo,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Cloruro De Magnesio,Magnesium Chloride,mx-es-cloruro-de-magnesio,magnesium-chloride,wikidata_es_en(medium)→magnesium-chloride,medium,mergeable,Wikidata 同一实体: es=cloruro de magnesio→en=magnesium chloride; sim=0.64；products=1; countries=MX
@@ -656,17 +656,17 @@ D.r.,,mx-es-d-r,,,,no_english,库内无对应英文成分候选；products=1; co
 D2 Y C,,mx-es-d2-y-c,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Delbrueckii),,mx-es-delbrueckii,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Delbrueckli,,mx-es-delbrueckli,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Dermatofagoides Farinae 50%,Dermatophagoides Farinae,mx-es-dermatofagoides-farinae-50,dermatophagoides-farinae,fuzzy(low)→dermatophagoides-farinae,low,uncertain,低置信证据: 模糊 dermatofagoides farinae 50% ≈ Dermatophagoides Farinae (0.88)；products=1; countries=MX
-Dermatofagoides Pteronissinus 50%,Dermatophagoides Pteronyssinus,mx-es-dermatofagoides-pteronissinus-50,dermatophagoides-pteronyssinus,fuzzy(low)→dermatophagoides-pteronyssinus,low,uncertain,低置信证据: 模糊 dermatofagoides pteronissinus 50% ≈ Dermatophagoides Pteronyssinus (0.87)；products=1; countries=MX
+Dermatofagoides Farinae 50%,Dermatophagoides Farinae,mx-es-dermatofagoides-farinae-50,dermatophagoides-farinae,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Dermatofagoides Farinae 50%
+Dermatofagoides Pteronissinus 50%,Dermatophagoides Pteronyssinus,mx-es-dermatofagoides-pteronissinus-50,dermatophagoides-pteronyssinus,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Dermatofagoides Pteronissinus 50%
 Desoxirribonycleasa,,mx-es-desoxirribonycleasa,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Dexrabeprazol,,mx-es-dexrabeprazol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Dextrametorfano,,mx-es-dextrametorfano,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Dextrán,Dextran,mx-es-dextran,dextran,exact_norm(high)→dextran,high,mergeable,同名归一: Dextrán == Dextran；products=1; countries=MX
 Dextrometrofano,,mx-es-dextrometrofano,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Diclofenaco Colestiramina,,mx-es-diclofenaco-colestiramina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Diclofenado,Diclofenac,mx-es-diclofenado,diclofenac,fuzzy(low)→diclofenac,low,uncertain,低置信证据: 模糊 diclofenado ≈ Diclofenac (0.86)；products=1; countries=MX
+Diclofenado,Diclofenac,mx-es-diclofenado,diclofenac,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Diclofenado
 Diclorobencílico,,mx-es-diclorobencilico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Dicofenaco,Diclofenac,mx-es-dicofenaco,diclofenac,fuzzy(low)→diclofenac,low,uncertain,低置信证据: 模糊 dicofenaco ≈ Diclofenac (0.90)；products=1; countries=MX
+Dicofenaco,Diclofenac,mx-es-dicofenaco,diclofenac,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.90（≥0.85）｜原名 Dicofenaco
 Diemticona,,mx-es-diemticona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Difemhidramina,,mx-es-difemhidramina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Difenilpiralina,,mx-es-difenilpiralina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -683,20 +683,20 @@ Diyodohidroxiquinolei Na,,mx-es-diyodohidroxiquinolei-na,,,,no_english,库内无
 Dobesilato Cálcico,,mx-es-dobesilato-calcico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Doxaciclina,,mx-es-doxaciclina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Doxiamina,,mx-es-doxiamina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Doxororubicina,Doxorubicin,mx-es-doxororubicina,doxorubicin,fuzzy(low)→doxorubicin,low,uncertain,低置信证据: 模糊 doxororubicina ≈ Doxorubicin (0.88)；products=1; countries=MX
+Doxororubicina,Doxorubicin,mx-es-doxororubicina,doxorubicin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Doxororubicina
 Dretrecogin Alfa (activada),,mx-es-dretrecogin-alfa-activada,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Dropi,,mx-es-dropi,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Duocover,,mx-es-duocover,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Edetato Disodico,,mx-es-edetato-disodico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Emtriertabina,,mx-es-emtriertabina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Enavogliflozina,,mx-es-enavogliflozina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Enterococcus Faecium Cepa,Enterococcus Faecium,mx-es-enterococcus-faecium-cepa,enterococcus-faecium,fuzzy(low)→enterococcus-faecium,low,uncertain,低置信证据: 模糊 enterococcus faecium cepa ≈ Enterococcus Faecium (0.89)；products=1; countries=MX
+Enterococcus Faecium Cepa,Enterococcus Faecium,mx-es-enterococcus-faecium-cepa,enterococcus-faecium,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（enterococcus faecium cepa ⊂/⊃ enterococcus faecium）｜原名 Enterococcus Faecium Cepa
 Eritropoyectina Humana Recombinante Alfa,,mx-es-eritropoyectina-humana-recombinante-alfa,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Eritropoyetina,Epoetin,mx-es-eritropoyetina,epoetin,cima_alias(high)→epoetin,high,mergeable,ingest_cima ALIASES: eritropoyetina→epoetin；安全预检: corroboration=1；products=1; countries=MX
 Eritropoyetina Theta,,mx-es-eritropoyetina-theta,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Estearato De Eritromicina,,mx-es-estearato-de-eritromicina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Ester Poliácido Sulfúrico De Polisacárido,,mx-es-ester-poliacido-sulfurico-de-polisacarido,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Estrogenos Esterificados,"Estrogens, Esterified",mx-es-estrogenos-esterificados,estrogens-esterified,fuzzy(low)→estrogens-esterified,low,uncertain,"低置信证据: 模糊 estrogenos esterificados ≈ Estrogens, Esterified (0.86)；products=1; countries=MX"
+Estrogenos Esterificados,"Estrogens, Esterified",mx-es-estrogenos-esterificados,estrogens-esterified,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Estrogenos Esterificados
 Etinilestradiol- Etinilestradiol,,mx-es-etinilestradiol-etinilestradiol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Etofamida,,mx-es-etofamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Extracto Acuoso De Triticum Vulgare,,mx-es-extracto-acuoso-de-triticum-vulgare,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -722,7 +722,7 @@ Fermentum Y Lactobacillus,,mx-es-fermentum-y-lactobacillus,,,,combination,复方
 Fexuprazán,,mx-es-fexuprazan,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Filmasartán,,mx-es-filmasartan,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Finastenida,,mx-es-finastenida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Fluoruoracilo,Fluorouracil,mx-es-fluoruoracilo,fluorouracil,fuzzy(low)→fluorouracil,low,uncertain,低置信证据: 模糊 fluoruoracilo ≈ Fluorouracil (0.88)；products=1; countries=MX
+Fluoruoracilo,Fluorouracil,mx-es-fluoruoracilo,fluorouracil,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Fluoruoracilo
 Folinato Calcico,,mx-es-folinato-calcico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Formula Enteral Para Diabeticos,,mx-es-formula-enteral-para-diabeticos,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Formula Polimerica Para Pacientes Nefropatas,,mx-es-formula-polimerica-para-pacientes-nefropatas,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -732,8 +732,8 @@ Fosfolipidos De Pulmon Porcino,,mx-es-fosfolipidos-de-pulmon-porcino,,,,no_engli
 Furoato De Mometasona,,mx-es-furoato-de-mometasona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Furuato De Fluticasona,,mx-es-furuato-de-fluticasona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Furuato De Mometasona,,mx-es-furuato-de-mometasona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Gabepentina,Gabapentin,mx-es-gabepentina,gabapentin,fuzzy(low)→gabapentin,low,uncertain,低置信证据: 模糊 gabepentina ≈ Gabapentin (0.86)；products=1; countries=MX
-Gauifenesina,Guaifenesin,mx-es-gauifenesina,guaifenesin,fuzzy(low)→guaifenesin,low,uncertain,低置信证据: 模糊 gauifenesina ≈ Guaifenesin (0.87)；products=1; countries=MX
+Gabepentina,Gabapentin,mx-es-gabepentina,gabapentin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Gabepentina
+Gauifenesina,Guaifenesin,mx-es-gauifenesina,guaifenesin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Gauifenesina
 Gel,,mx-es-gel,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Gemifloxacino,gemifloxacin,mx-es-gemifloxacino,gemifloxacin,data/who_inn_names.csv（WHO INN 官方多语名）,high,mergeable,batch A（task-48）｜data/who_inn_names.csv（WHO INN 官方多语名）｜官方名映射
 Gentuzumab,,mx-es-gentuzumab,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -745,9 +745,9 @@ Glucosa Monohidratada,,mx-es-glucosa-monohidratada,,,,no_english,库内无对应
 Glucosa Y Cloruro De Potasio,,mx-es-glucosa-y-cloruro-de-potasio,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Glucosamida,,mx-es-glucosamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Gonadotrofina Potsmenopausica Humana,,mx-es-gonadotrofina-potsmenopausica-humana,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Gonadotropina Menopáusica Humana,Gonadotrophin - Menopausal Human,mx-es-gonadotropina-menopausica-humana,gonadotrophin-menopausal-human,fuzzy(low)→gonadotrophin-menopausal-human,low,uncertain,低置信证据: 模糊 gonadotropina menopausica humana ≈ Gonadotrophin - Menopausal Human (0.90)；products=1; countries=MX
+Gonadotropina Menopáusica Humana,Gonadotrophin - Menopausal Human,mx-es-gonadotropina-menopausica-humana,gonadotrophin-menopausal-human,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.90（≥0.85）｜原名 Gonadotropina Menopáusica Humana
 Gotas,,mx-es-gotas,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Guaiferesina,Guaifenesin,mx-es-guaiferesina,guaifenesin,fuzzy(low)→guaifenesin,low,uncertain,低置信证据: 模糊 guaiferesina ≈ Guaifenesin (0.87)；products=1; countries=MX
+Guaiferesina,Guaifenesin,mx-es-guaiferesina,guaifenesin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Guaiferesina
 H3n2 Y B,,mx-es-h3n2-y-b,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Hemaglutinina Filamentosa,,mx-es-hemaglutinina-filamentosa,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Hemaglutininas Recombinantes Para La Cepa Viral De Influenza H1n1,,mx-es-hemaglutininas-recombinantes-para-la-cepa-viral-de-influenza-h1n1,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -783,29 +783,29 @@ Insulina Humana Isofana,,mx-es-insulina-humana-isofana,,,,no_english,库内无�
 Intereferon Beta,,mx-es-intereferon-beta,,fuzzy(low)→interferon-beta-1b; fuzzy(low)→interferon-beta-1a,low,uncertain,证据指向多个目标: interferon-beta-1a; interferon-beta-1b；products=1; countries=MX
 Interferon Alfa Leucocitario Humano,,mx-es-interferon-alfa-leucocitario-humano,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Interferon Gamma-1b (recombinante),,mx-es-interferon-gamma-1b-recombinante,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Isotretionina,Isotretinoin,mx-es-isotretionina,isotretinoin,fuzzy(low)→isotretinoin,low,uncertain,低置信证据: 模糊 isotretionina ≈ Isotretinoin (0.88)；products=1; countries=MX
+Isotretionina,Isotretinoin,mx-es-isotretionina,isotretinoin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Isotretionina
 Italmex,,mx-es-italmex,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Ixabepilona,,mx-es-ixabepilona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Ketaconazol,Ketoconazole,mx-es-ketaconazol,ketoconazole,fuzzy(low)→ketoconazole,low,uncertain,低置信证据: 模糊 ketaconazol ≈ Ketoconazole (0.87)；products=1; countries=MX
+Ketaconazol,Ketoconazole,mx-es-ketaconazol,ketoconazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Ketaconazol
 Klebsiella P,,mx-es-klebsiella-p,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 L-lisina Glicina,,mx-es-l-lisina-glicina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 L-tiro,,mx-es-l-tiro,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Laboratorios Grossman,,mx-es-laboratorios-grossman,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Laboratorios Kendrick,,mx-es-laboratorios-kendrick,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lactobacillus,,mx-es-lactobacillus,lactobacillus-plantarum,atc_unique(medium)→lactobacillus-plantarum,medium,uncertain,人工复核: 属名 Lactobacillus 不等于种 L. plantarum，不可当同一成分
-Lactobacillus Acidofill,Lactobacillus Acidophilus,mx-es-lactobacillus-acidofill,lactobacillus-acidophilus,fuzzy(low)→lactobacillus-acidophilus,low,uncertain,低置信证据: 模糊 lactobacillus acidofill ≈ Lactobacillus Acidophilus (0.88)；products=1; countries=MX
+Lactobacillus Acidofill,Lactobacillus Acidophilus,mx-es-lactobacillus-acidofill,lactobacillus-acidophilus,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Lactobacillus Acidofill
 Lactobacillus Delbrueckii,,mx-es-lactobacillus-delbrueckii,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lactobacillus Reuteri Protectis,,mx-es-lactobacillus-reuteri-protectis,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lactobacilus Lb (lactobacillus,,mx-es-lactobacilus-lb-lactobacillus,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Lactobasillos Casei,Lactobacillus Casei,mx-es-lactobasillos-casei,lactobacillus-casei,fuzzy(low)→lactobacillus-casei,low,uncertain,低置信证据: 模糊 lactobasillos casei ≈ Lactobacillus Casei (0.89)；products=1; countries=MX
+Lactobasillos Casei,Lactobacillus Casei,mx-es-lactobasillos-casei,lactobacillus-casei,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Lactobasillos Casei
 Lesinurad,lesinurad,mx-es-lesinurad,,WHO INN list 105(high)→lesinurad,high,no_english,WHO INN 官方列表 list 105：西语名 Lesinurad ↔ INN lesinurad；source: https://iris.who.int/handle/10665/74656；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
-Leuproerlina,Leuprorelin,mx-es-leuproerlina,leuprorelin,fuzzy(low)→leuprorelin,low,uncertain,低置信证据: 模糊 leuproerlina ≈ Leuprorelin (0.87)；products=1; countries=MX
+Leuproerlina,Leuprorelin,mx-es-leuproerlina,leuprorelin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Leuproerlina
 Levoglutamida,,mx-es-levoglutamida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Levoglutamina,,mx-es-levoglutamina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Levomefolato De Calcio,Levomefolate,mx-es-levomefolato-de-calcio,levomefolate,fuzzy(low)→levomefolate,low,uncertain,低置信证据: 模糊 levomefolato ≈ Levomefolate (0.92)；products=1; countries=MX
+Levomefolato De Calcio,Levomefolate,mx-es-levomefolato-de-calcio,levomefolate,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（calcium）｜原名 Levomefolato De Calcio
 Lidocaina. Bupivacaina,,mx-es-lidocaina-bupivacaina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Liotironina De Sodio,,mx-es-liotironina-de-sodio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Liotironina Sódica,Liothyronine,mx-es-liotironina-sodica,liothyronine,atc_unique(medium)→liothyronine,medium,uncertain,弱证据且名字相似度 0.60<0.62（仅 atc_unique）
+Liotironina Sódica,Liothyronine,mx-es-liotironina-sodica,liothyronine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 Liotironina Sódica
 Lípidos Intravenosos,,mx-es-lipidos-intravenosos-2,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lípidos Intravenosos De Cadena Larga,,mx-es-lipidos-intravenosos-de-cadena-larga,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lípidos Intravenosos De Cadena Media Y Larga,,mx-es-lipidos-intravenosos-de-cadena-media-y-larga,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
@@ -813,23 +813,23 @@ Lisado Bacteriano,,mx-es-lisado-bacteriano,,,,no_english,库内无对应英文�
 Lisiados Bacterianos,,mx-es-lisiados-bacterianos,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lisurida,Lisuride,mx-es-lisurida,lisuride,wikidata_es_en(medium)→lisuride,medium,mergeable,Wikidata 同一实体: es=lisurida→en=lisuride; sim=0.88；products=1; countries=MX
 Loflazepato De Etilo,,mx-es-loflazepato-de-etilo,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Lomefloxacino,Lomefloxacin,mx-es-lomefloxacino,lomefloxacin,fuzzy(low)→lomefloxacin,low,uncertain,低置信证据: 模糊 lomefloxacino ≈ Lomefloxacin (0.96)；products=1; countries=MX
+Lomefloxacino,Lomefloxacin,mx-es-lomefloxacino,lomefloxacin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（lomefloxacino ⊂/⊃ lomefloxacin）｜原名 Lomefloxacino
 Lomifilina,,mx-es-lomifilina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Loratadina Micronizada,,mx-es-loratadina-micronizada,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Lorcaserina,,mx-es-lorcaserina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Manganeso,Manganese,mx-es-manganeso,manganese,fuzzy(low)→manganese,low,uncertain,低置信证据: 模糊 manganeso ≈ Manganese (0.89)；products=1; countries=MX
+Manganeso,Manganese,mx-es-manganeso,manganese,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Manganeso
 Matricaria,,mx-es-matricaria,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Mebutato De Ingenol,ingenol mebutate,mx-es-mebutato-de-ingenol,ingenol-mebutate,WHO INN list 62(high)→ingenol-mebutate,high,mergeable,WHO INN 官方列表 list 62：西语名 Mebutato De Ingenol ↔ INN ingenol mebutate；source: https://iris.who.int/handle/10665/74420；安全预检通过（安全校验由 merge 脚本 dry-run 复核）
-Melformina,Metformin,mx-es-melformina,metformin,fuzzy(low)→metformin,low,uncertain,低置信证据: 模糊 melformina ≈ Metformin (0.84)；products=1; countries=MX
-Meloxican,Meloxicam,mx-es-meloxican,meloxicam,fuzzy(low)→meloxicam,low,uncertain,低置信证据: 模糊 meloxican ≈ Meloxicam (0.89)；products=1; countries=MX
+Melformina,Metformin,mx-es-melformina,metformin,fuzzy(low)→metformin,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Melformina
+Meloxican,Meloxicam,mx-es-meloxican,meloxicam,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Meloxican
 Mesialto De Doxazosina,,mx-es-mesialto-de-doxazosina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Metilbromuro De Homatropina,,mx-es-metilbromuro-de-homatropina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Metisoprinol,,mx-es-metisoprinol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Metmorfina,,mx-es-metmorfina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Metoclopramaida,Metoclopramide,mx-es-metoclopramaida,metoclopramide,fuzzy(low)→metoclopramide,low,uncertain,低置信证据: 模糊 metoclopramaida ≈ Metoclopramide (0.90)；products=1; countries=MX
+Metoclopramaida,Metoclopramide,mx-es-metoclopramaida,metoclopramide,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.90（≥0.85）｜原名 Metoclopramaida
 Metodina,,mx-es-metodina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Metoxi Polietilen Glicol- Eritropoyetina Beta,,mx-es-metoxi-polietilen-glicol-eritropoyetina-beta,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Metrotexate,Methotrexate,mx-es-metrotexate,methotrexate,fuzzy(low)→methotrexate,low,uncertain,低置信证据: 模糊 metrotexate ≈ Methotrexate (0.87)；products=1; countries=MX
+Metrotexate,Methotrexate,mx-es-metrotexate,methotrexate,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Metrotexate
 Mezcla Ceftazidima Pentahidratada,,mx-es-mezcla-ceftazidima-pentahidratada,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Mezcla Para Nutrición Parenteral,,mx-es-mezcla-para-nutricion-parenteral,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Mineraales,,mx-es-mineraales,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -837,20 +837,20 @@ Mitazoxanida,,mx-es-mitazoxanida,,,,no_english,库内无对应英文成分候选
 Mononitrato De Tiamina,,mx-es-mononitrato-de-tiamina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Movtrex,,mx-es-movtrex,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Mucopolisacárido,,mx-es-mucopolisacarido,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Multivitaminas,Multivitamin,mx-es-multivitaminas,multivitamin,fuzzy(low)→multivitamin,low,uncertain,低置信证据: 模糊 multivitaminas ≈ Multivitamin (0.92)；products=1; countries=MX
+Multivitaminas,Multivitamin,mx-es-multivitaminas,multivitamin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（multivitaminas ⊂/⊃ multivitamin）｜原名 Multivitaminas
 Multivitamínico Con Minerales,,mx-es-multivitaminico-con-minerales,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 N (2)-l-alanil-l-glutamina,,mx-es-n-2-l-alanil-l-glutamina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Nadroparina Cálcica,Nadroparin,mx-es-nadroparina-calcica,nadroparin,exact_norm(high)→nadroparina; 人工改指→nadroparin,high,mergeable,同名归一: Nadroparina Cálcica == Nadroparina；products=1; countries=MX
 Nesiritida,Nesiritide,mx-es-nesiritida,nesiritide,wikidata_es_en(medium)→nesiritide; atc_unique(medium)→nesiritide,medium,mergeable,Wikidata 同一实体: es=nesiritida→en=nesiritide; sim=0.90；products=1; countries=MX
 Nilvadipina,,mx-es-nilvadipina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Nimotuzumab,nimotuzumab,mx-es-nimotuzumab,,WHO INN list 94(high)→nimotuzumab,high,no_english,WHO INN 官方列表 list 94：西语名 Nimotuzumab ↔ INN nimotuzumab；source: https://iris.who.int/handle/10665/73601；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
-Nitrofurantontoína,Nitrofurantoin,mx-es-nitrofurantontoina,nitrofurantoin,fuzzy(low)→nitrofurantoin,low,uncertain,低置信证据: 模糊 nitrofurantontoina ≈ Nitrofurantoin (0.88)；products=1; countries=MX
+Nitrofurantontoína,Nitrofurantoin,mx-es-nitrofurantontoina,nitrofurantoin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Nitrofurantontoína
 Noretisterona Estradiol,,mx-es-noretisterona-estradiol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Norfenefrina,,mx-es-norfenefrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Norfenilefrina,,mx-es-norfenilefrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Octocagalfa,Octocog Alfa,mx-es-octocagalfa,octocog-alfa,fuzzy(low)→octocog-alfa,low,uncertain,低置信证据: 模糊 octocagalfa ≈ Octocog Alfa (0.87)；products=1; countries=MX
+Octocagalfa,Octocog Alfa,mx-es-octocagalfa,octocog-alfa,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Octocagalfa
 Olarasadina,,mx-es-olarasadina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Olea Europea,Olea Europaea,mx-es-olea-europea,olea-europaea,fuzzy(low)→olea-europaea,low,uncertain,低置信证据: 模糊 olea europea ≈ Olea Europaea (0.96)；products=1; countries=MX
+Olea Europea,Olea Europaea,mx-es-olea-europea,olea-europaea,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.96（≥0.85）｜原名 Olea Europea
 Oral,,mx-es-oral,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Oxalab,,mx-es-oxalab,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Oxido,,mx-es-oxido,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -867,23 +867,23 @@ Paracetam Ol,,mx-es-paracetam-ol,,,,no_english,库内无对应英文成分候选
 Paracetamo L,,mx-es-paracetamo-l,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Paracetamol Cafeina,,mx-es-paracetamol-cafeina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Paracetamol.pseudoefedrin A,,mx-es-paracetamol-pseudoefedrin-a,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Parafina,Paraffin,mx-es-parafina,paraffin,fuzzy(low)→paraffin,low,uncertain,低置信证据: 模糊 parafina ≈ Paraffin (0.88)；products=1; countries=MX
+Parafina,Paraffin,mx-es-parafina,paraffin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Parafina
 Parametasona,,mx-es-parametasona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Penicilina G Potasica,Penicillin G,mx-es-penicilina-g-potasica,penicillin-g,cima_alias(high)→penicillin-g,high,mergeable,ingest_cima ALIASES: penicilina g→penicillin-g；products=1; countries=MX
 Penicilina G Pro,,mx-es-penicilina-g-pro,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Penicilina G Procainica,Penicillin G Procaine,mx-es-penicilina-g-procainica,penicillin-g-procaine,fuzzy(low)→penicillin-g-procaine,low,uncertain,低置信证据: 模糊 penicilina g procainica ≈ Penicillin G Procaine (0.86)；products=1; countries=MX
+Penicilina G Procainica,Penicillin G Procaine,mx-es-penicilina-g-procainica,penicillin-g-procaine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Penicilina G Procainica
 Peroxido De Bencilo,,mx-es-peroxido-de-bencilo,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Pertússico,Pertussis,mx-es-pertussico,pertussis,fuzzy(low)→pertussis,low,uncertain,低置信证据: 模糊 pertussico ≈ Pertussis (0.84)；products=1; countries=MX
-Phelum Pratense 33%,Phleum Pratense,mx-es-phelum-pratense-33,phleum-pratense,fuzzy(low)→phleum-pratense,low,uncertain,低置信证据: 模糊 phelum pratense 33% ≈ Phleum Pratense (0.85)；products=1; countries=MX
+Pertússico,Pertussis,mx-es-pertussico,pertussis,fuzzy(low)→pertussis,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Pertússico
+Phelum Pratense 33%,Phleum Pratense,mx-es-phelum-pratense-33,phleum-pratense,fuzzy(low)→phleum-pratense,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Phelum Pratense 33%
 Pipasetato,,mx-es-pipasetato,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Piperídolato,,mx-es-piperidolato,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pirid Oxina,,mx-es-pirid-oxina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pirodoxina,,mx-es-pirodoxina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Pivalato De Fluocortol,Fluocortolone,mx-es-pivalato-de-fluocortol,fluocortolone,fuzzy(low)→fluocortolone,low,uncertain,低置信证据: 模糊 fluocortol ≈ Fluocortolone (0.87)；products=1; countries=MX
+Pivalato De Fluocortol,Fluocortolone,mx-es-pivalato-de-fluocortol,fluocortolone,fuzzy(low)→fluocortolone,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 Pivalato De Fluocortol
 Placenta Humana,,mx-es-placenta-humana,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Plavance,,mx-es-plavance,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pllantago Psyllium,,mx-es-pllantago-psyllium,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Poa Pratensis 33%,Poa Pratensis,mx-es-poa-pratensis-33,poa-pratensis,fuzzy(low)→poa-pratensis,low,uncertain,低置信证据: 模糊 poa pratensis 33% ≈ Poa Pratensis (0.90)；products=1; countries=MX
+Poa Pratensis 33%,Poa Pratensis,mx-es-poa-pratensis-33,poa-pratensis,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（poa pratensis 33 ⊂/⊃ poa pratensis）｜原名 Poa Pratensis 33%
 Polifenon E,,mx-es-polifenon-e,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Polimixina B Dexametasona,,mx-es-polimixina-b-dexametasona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Polimixina B Y Gramicidina,,mx-es-polimixina-b-y-gramicidina,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
@@ -893,7 +893,7 @@ Polisacárido Vi De Salmonella Typhi,,mx-es-polisacarido-vi-de-salmonella-typhi,
 Polisacáridos Del Grupo C,,mx-es-polisacaridos-del-grupo-c,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Polisulfato De,,mx-es-polisulfato-de,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Polisulfato De Pentosano Sodico,,mx-es-polisulfato-de-pentosano-sodico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Polividona,Povidona,mx-es-polividona,povidona,fuzzy(low)→povidona,low,uncertain,低置信证据: 模糊 polividona ≈ Povidona (0.89)；products=1; countries=MX
+Polividona,Povidona,mx-es-polividona,povidona,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Polividona
 Polytar 510,,mx-es-polytar-510,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pramiverina,,mx-es-pramiverina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pranoprofeno,,mx-es-pranoprofeno,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -901,7 +901,7 @@ Pravastatina Sodica,Pravastatin,mx-es-pravastatina-sodica,pravastatin,mx_inn_map
 Preparada En Células Vero,,mx-es-preparada-en-celulas-vero,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Proteína De Plasma Humano (inmunoglobulina G Con Anticuerpos Para Hepatitis B),,mx-es-proteina-de-plasma-humano-inmunoglobulina-g-con-anticuerpos-para-hepatitis-b,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Proteína Tetánica),,mx-es-proteina-tetanica,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Proteinas,Protein S,mx-es-proteinas,protein-s,fuzzy(low)→protein-s,low,uncertain,低置信证据: 模糊 proteinas ≈ Protein S (0.89)；products=1; countries=MX
+Proteinas,Protein S,mx-es-proteinas,protein-s,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Proteinas
 Proteinas Humanas,,mx-es-proteinas-humanas,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pseu Doefedrina,,mx-es-pseu-doefedrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Pseudo Efedrina,,mx-es-pseudo-efedrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -922,16 +922,16 @@ Rokitamicina,,mx-es-rokitamicina,,,,no_english,库内无对应英文成分候选
 Rolaxifeno,,mx-es-rolaxifeno,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Rotavirus Vivo Atenuado Humano,,mx-es-rotavirus-vivo-atenuado-humano,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Rotavirus Vivo Recombinante (humano-bovino) Pentavalente,,mx-es-rotavirus-vivo-recombinante-humano-bovino-pentavalente,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Rubeola,Rubella,mx-es-rubeola,rubella,fuzzy(low)→rubella,low,uncertain,低置信证据: 模糊 rubeola ≈ Rubella (0.86)；products=1; countries=MX
+Rubeola,Rubella,mx-es-rubeola,rubella,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Rubeola
 Rubeola Y Varicela,,mx-es-rubeola-y-varicela,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 S De R.l. De C.v.,,mx-es-s-de-r-l-de-c-v,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-S(-) Pantoprazol,Pantoprazole,mx-es-s-pantoprazol,pantoprazole,fuzzy(low)→pantoprazole,low,uncertain,低置信证据: 模糊 s(-) pantoprazol ≈ Pantoprazole (0.88)；products=1; countries=MX
-Salmerol,Salmeterol,mx-es-salmerol,salmeterol,fuzzy(low)→salmeterol,low,uncertain,低置信证据: 模糊 salmerol ≈ Salmeterol (0.89)；products=1; countries=MX
+S(-) Pantoprazol,Pantoprazole,mx-es-s-pantoprazol,pantoprazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 S(-) Pantoprazol
+Salmerol,Salmeterol,mx-es-salmerol,salmeterol,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Salmerol
 Saroglitazar,saroglitazar,mx-es-saroglitazar,,WHO INN list 108(high)→saroglitazar,high,no_english,WHO INN 官方列表 list 108：西语名 Saroglitazar ↔ INN saroglitazar；source: https://iris.who.int/handle/10665/110390；⚠ en_substance_id 与 es_substance_id 相同（compare.py 自匹配）：库内无独立英文 substance，须先补英文成分后才能合并（compare.py 的 db_en 索引应排除 mx-es-*/cn-*）
 Sellador De Fibrina (concentrado De Proteínas Humanas Coagulantes),,mx-es-sellador-de-fibrina-concentrado-de-proteinas-humanas-coagulantes,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Selladores De Fibrina,,mx-es-selladores-de-fibrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 (serogrupos A,,mx-es-serogrupos-a,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Silicato De Magnesio,Silica,mx-es-silicato-de-magnesio,silica,fuzzy(low)→silica,low,uncertain,低置信证据: 模糊 silicato ≈ Silica (0.86)；products=1; countries=MX
+Silicato De Magnesio,Silica,mx-es-silicato-de-magnesio,silica,fuzzy(low)→silica,low,uncertain,batch B（task-56）丢弃：盐型不匹配：源 ['magnesium']→['magnesium']，目标 variant/inn 无对应｜原名 Silicato De Magnesio
 Sodio Baxter,,mx-es-sodio-baxter,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Solución De Electrolitos,,mx-es-solucion-de-electrolitos,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Solución De Hartmann,,mx-es-solucion-de-hartmann,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -946,17 +946,17 @@ Sp,,mx-es-sp,,,,no_english,名称过短/为空；products=1; countries=MX
 Streotococcus Lactis,,mx-es-streotococcus-lactis,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Subacetato De Aluminio,,mx-es-subacetato-de-aluminio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Subvirión,,mx-es-subvirion,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Succinicum Acidum,Succinic Acid,mx-es-succinicum-acidum,succinic-acid,fuzzy(low)→succinic-acid,low,uncertain,低置信证据: 模糊 succinicum acidum ≈ Succinic Acid (0.87)；products=1; countries=MX
+Succinicum Acidum,Succinic Acid,mx-es-succinicum-acidum,succinic-acid,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Succinicum Acidum
 Suero Antiviperino,,mx-es-suero-antiviperino,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Sulfanetoxazol,Sulfamethoxazole,mx-es-sulfanetoxazol,sulfamethoxazole,fuzzy(low)→sulfamethoxazole,low,uncertain,低置信证据: 模糊 sulfanetoxazol ≈ Sulfamethoxazole (0.87)；products=1; countries=MX
+Sulfanetoxazol,Sulfamethoxazole,mx-es-sulfanetoxazol,sulfamethoxazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.87（≥0.85）｜原名 Sulfanetoxazol
 Sulfatiazol,Sulfathiazole,mx-es-sulfatiazol,sulfathiazole,wikidata_es_en(medium)→sulfathiazole,medium,mergeable,Wikidata 同一实体: es=sulfatiazol→en=sulfathiazole; sim=0.92；products=1; countries=MX
 Sulfato De Cobre 5h2o,,mx-es-sulfato-de-cobre-5h2o,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Sulfato De Zinc H2o,,mx-es-sulfato-de-zinc-h2o,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Sulfoguayacol,Sulfoguayacolato,mx-es-sulfoguayacol,sulfoguayacolato,fuzzy(low)→sulfoguayacolato,low,uncertain,低置信证据: 模糊 sulfoguayacol ≈ Sulfoguayacolato (0.90)；products=1; countries=MX
+Sulfoguayacol,Sulfoguayacolato,mx-es-sulfoguayacol,sulfoguayacolato,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称包含（sulfoguayacol ⊂/⊃ sulfoguayacolato）｜原名 Sulfoguayacol
 Sulodoxina,,mx-es-sulodoxina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Sultamicilina,Sultamicillin,mx-es-sultamicilina,sultamicillin,fuzzy(low)→sultamicillin,low,uncertain,低置信证据: 模糊 sultamicilina ≈ Sultamicillin (0.92)；products=1; countries=MX
+Sultamicilina,Sultamicillin,mx-es-sultamicilina,sultamicillin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.92（≥0.85）｜原名 Sultamicilina
 Tamsolusina,,mx-es-tamsolusina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Tecoplanina,Teicoplanin,mx-es-tecoplanina,teicoplanin,fuzzy(low)→teicoplanin,low,uncertain,低置信证据: 模糊 tecoplanina ≈ Teicoplanin (0.91)；products=1; countries=MX
+Tecoplanina,Teicoplanin,mx-es-tecoplanina,teicoplanin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.91（≥0.85）｜原名 Tecoplanina
 Tegaserod,,mx-es-tegaserod,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Tegoprazan,,mx-es-tegoprazan,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Telitromicina,Telithromycin,mx-es-telitromicina,telithromycin,wikidata_es_en(medium)→telithromycin; atc_unique(medium)→telithromycin,medium,mergeable,Wikidata 同一实体: es=telitromicina→en=telithromycin; sim=0.85；products=1; countries=MX
@@ -977,7 +977,7 @@ Tranidol,,mx-es-tranidol,,,,no_english,库内无对应英文成分候选；produ
 Tribenósido,,mx-es-tribenosido,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Trifenatato De Vilanterol,,mx-es-trifenatato-de-vilanterol,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Trimegestona,,mx-es-trimegestona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Trimet Oprima,Trimethoprim,mx-es-trimet-oprima,trimethoprim,fuzzy(low)→trimethoprim,low,uncertain,低置信证据: 模糊 trimet oprima ≈ Trimethoprim (0.88)；products=1; countries=MX
+Trimet Oprima,Trimethoprim,mx-es-trimet-oprima,trimethoprim,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Trimet Oprima
 Tripsina,,mx-es-tripsina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Trivalente Oral,,mx-es-trivalente-oral,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Trivalente Tipo A Y B,,mx-es-trivalente-tipo-a-y-b,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
@@ -987,8 +987,8 @@ Undecilenato,,mx-es-undecilenato,,,,no_english,库内无对应英文成分候选
 Undecilenato De Zinc,,mx-es-undecilenato-de-zinc,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vacuna,,mx-es-vacuna,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vacuna Acelular Dpt-polio,,mx-es-vacuna-acelular-dpt-polio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Vacuna Anti Dtp-polio,Vacuna Anti Polio,mx-es-vacuna-anti-dtp-polio,vacuna-anti-polio,fuzzy(low)→vacuna-anti-polio,low,uncertain,低置信证据: 模糊 vacuna anti dtp-polio ≈ Vacuna Anti Polio (0.89)；products=1; countries=MX
-Vacuna Anti-influenza,Vacuna Anti H.Influenzae B,mx-es-vacuna-anti-influenza,vacuna-anti-h-influenzae-b,fuzzy(low)→vacuna-anti-h-influenzae-b,low,uncertain,低置信证据: 模糊 vacuna anti-influenza ≈ Vacuna Anti H.Influenzae B (0.89)；products=1; countries=MX
+Vacuna Anti Dtp-polio,Vacuna Anti Polio,mx-es-vacuna-anti-dtp-polio,vacuna-anti-polio,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Vacuna Anti Dtp-polio
+Vacuna Anti-influenza,Vacuna Anti H.Influenzae B,mx-es-vacuna-anti-influenza,vacuna-anti-h-influenzae-b,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.89（≥0.85）｜原名 Vacuna Anti-influenza
 Vacuna Anti-sarampión,,mx-es-vacuna-anti-sarampion,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vacuna Anti-sarampion Y Anti-rubeola,,mx-es-vacuna-anti-sarampion-y-anti-rubeola,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Vacuna Antihepatitis A Inactivada Y,,mx-es-vacuna-antihepatitis-a-inactivada-y,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
@@ -1022,7 +1022,7 @@ Vacuna Combinada Difteria,,mx-es-vacuna-combinada-difteria,,,,no_english,库内�
 Vacuna Congujada De Haemophilus,,mx-es-vacuna-congujada-de-haemophilus,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vacuna Conjugada Contra Meningococo Del Grupo C,,mx-es-vacuna-conjugada-contra-meningococo-del-grupo-c,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vacuna Conjugada Neumocóccica 13-valente (conjugado Proteina Diftérica Crm 197),,mx-es-vacuna-conjugada-neumococcica-13-valente-conjugado-proteina-difterica-crm-197,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Vacuna Contra Difteria,Vacuna Anti Difteria,mx-es-vacuna-contra-difteria,vacuna-anti-difteria,fuzzy(low)→vacuna-anti-difteria,low,uncertain,低置信证据: 模糊 vacuna contra difteria ≈ Vacuna Anti Difteria (0.86)；products=1; countries=MX
+Vacuna Contra Difteria,Vacuna Anti Difteria,mx-es-vacuna-contra-difteria,vacuna-anti-difteria,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.86（≥0.85）｜原名 Vacuna Contra Difteria
 Vacuna Contra El Herpes Zóster Recombinante No Vivo Con Adyuvante,,mx-es-vacuna-contra-el-herpes-zoster-recombinante-no-vivo-con-adyuvante,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Vacuna Contra El Virus Respiratorio Sincitial (bivalente,,mx-es-vacuna-contra-el-virus-respiratorio-sincitial-bivalente,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vacuna Contra El Virus Sincicial Respiratorio Recombinante,,mx-es-vacuna-contra-el-virus-sincicial-respiratorio-recombinante,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -1050,13 +1050,13 @@ Virus Vivo Vaccinia Ankara Modificado,,mx-es-virus-vivo-vaccinia-ankara-modifica
 Vitaminas Hidrosolubles,,mx-es-vitaminas-hidrosolubles,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vitaminas Hierro,,mx-es-vitaminas-hierro,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Vitaminas Liposolubles,,mx-es-vitaminas-liposolubles,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Vorioconazol,Voriconazole,mx-es-vorioconazol,voriconazole,fuzzy(low)→voriconazole,low,uncertain,低置信证据: 模糊 vorioconazol ≈ Voriconazole (0.92)；products=1; countries=MX
+Vorioconazol,Voriconazole,mx-es-vorioconazol,voriconazole,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.92（≥0.85）｜原名 Vorioconazol
 W-135 E Y,,mx-es-w-135-e-y,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Y Y W-135) Conjugada,,mx-es-y-y-w-135-conjugada,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=MX
 Zaltoprofeno,,mx-es-zaltoprofeno,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Zolpidem Hemitartrato,,mx-es-zolpidem-hemitartrato,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Onasemnogén Abeparvovec,Onasemnogene Abeparvovec,onasemnogen-abeparvovec,onasemnogene-abeparvovec,atc_unique(medium)→onasemnogene-abeparvovec,medium,mergeable,ATC M09AX09 全库唯一命中; sim=0.98；安全预检: unprefixed_es_id；products=1; countries=ES；ES id 无 mx-es- 前缀
-Peumus Boldus,Peamus Boldus,peumus-boldus,peamus-boldus,fuzzy(low)→peamus-boldus,low,uncertain,低置信证据: 模糊 peumus boldus ≈ Peamus Boldus (0.92)；products=1; countries=ES；ES id 无 mx-es- 前缀
+Peumus Boldus,Peamus Boldus,peumus-boldus,peamus-boldus,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.92（≥0.85）｜原名 Peumus Boldus
 Piritiona Zíncica,,piritiona-zincica,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Potasio,,potasio,potassium,wikidata_es_en(medium)→potassium,medium,uncertain,人工复核: 元素钾身份未核实（可能应为具体钾盐），不合并
 Potasio Fosfato Dibásico,,potasio-fosfato-dibasico,potassium-phosphate-monobasic,atc_unique(medium)→potassium-phosphate-monobasic,medium,uncertain,"人工复核: 目标 potassium phosphate, monobasic 是不同盐型（dibasic vs monobasic），不合并"
@@ -1065,7 +1065,7 @@ Preparado De Raíz De Arctium Lappa,,preparado-de-raiz-de-arctium-lappa,,,,no_en
 Producto Con Insulina Asparta E Insulina Degludec,,producto-con-insulina-asparta-e-insulina-degludec,,,,combination,复方名（含 y/+//con），本轮不合并；products=1; countries=ES；ES id 无 mx-es- 前缀
 Propanocaína,,propanocaina,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Quelato De Bismuto,,quelato-de-bismuto,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
-Rutósido,Rutoside,rutosido,rutoside,fuzzy(low)→rutoside,low,uncertain,低置信证据: 模糊 rutosido ≈ Rutoside (0.88)；products=1; countries=ES；ES id 无 mx-es- 前缀
+Rutósido,Rutoside,rutosido,rutoside,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：名称相似度 0.88（≥0.85）｜原名 Rutósido
 Sacarato De Calcio,,sacarato-de-calcio,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 "Sal Tetrasódica Del Ácido 3,3 Difosfono 1,2 Propanodicarboxílico",,sal-tetrasodica-del-acido-3-3-difosfono-1-2-propanodicarboxilico,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀
 Sulfato De Níquel,,sulfato-de-niquel,,,,no_english,库内无对应英文成分候选；products=1; countries=ES；ES id 无 mx-es- 前缀

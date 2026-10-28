@@ -167,4 +167,100 @@ Copy-Item data/drugs.db .tmp/cross-market/drugs-test.db -Force
 
 ---
 
+## 8. §batchA-runbook（task-52：可落地的参数化工具 + base variant 迁移 + 一键 runbook）
+
+> 2026-10-28 追加。目标：把 batch A 的 29 条合并从「临时脚本」变成**可复用、可回滚、可评审**的流程。
+> 新增/改动：`etl/auto_merge_substances.py`（参数化）、`.tmp/cross-market/base_variant_migration.py`（base variant 迁移草案）、`.tmp/cross-market/apply_batchA.py`（按序执行器）。
+> 全部验证在 `.tmp/cross-market/drugs-test.db` 副本（从 `data/drugs.db` 新复制）上完成；**真实库未写**。
+
+### 8.1 `etl/auto_merge_substances.py` 新增参数（向后兼容）
+
+原用法 `python etl/auto_merge_substances.py [--apply]` **保持不变**（全库扫描 + 报告到 `reports/substance_duplicates.csv`，`--apply` 才写库）。新增：
+
+| 参数 | 说明 |
+|---|---|
+| `--db PATH` | 数据库（默认 `data/drugs.db`）；**只在副本上验证时必须传** |
+| `--pairs CSV` | pair 列表（兼容 `batch_a_30.csv` 的 `route=auto_merge` 行，或候选 CSV 的 `source_id/target_id/status`） |
+| `--dry-run` | 默认行为；只列计划不写库 |
+| `--apply` | 事务写库 + 撤销清单（含 substance 原始行 + variant ids） |
+| `--rollback [MANIFEST]` | 按撤销清单逆序恢复（默认取 `--manifest`） |
+| `--manifest PATH` | 撤销清单路径 |
+| `--report PATH` | dry-run 报告写哪里（避免误改跟踪文件 `reports/substance_duplicates.csv`） |
+| `--allow-non-cn` | `--pairs` 模式默认只允许 cn-→cn-；需要时放开 |
+
+安全约束：`--pairs` 模式只删 `cn-*` 成分；dup/canonical 必须存在；`--apply` 单事务，任何一行失败整体回滚。实测：
+
+```text
+python etl/auto_merge_substances.py --report .tmp/cross-market/legacy_report.csv   # 全库兼容：27 疑似对/25 组，只读
+python etl/auto_merge_substances.py --db .tmp/cross-market/drugs-test.db \
+  --pairs .tmp/cross-market/batch_a_30.csv --dry-run                              # 25 对可合并
+```
+
+### 8.2 base variant 迁移草案（`gemifloxacin` / `tesamorelin`）
+
+**为什么需要**：`merge_es_substances.py` 要求「英文目标有 base variant 可挂」；但 `gemifloxacin` 只有 `gemifloxacin-mesylate`、`tesamorelin` 只有 `tesamorelin-acetate`（WHO INN 建 substance 时没有建空盐 base variant），而 ES 源名 `Gemifloxacino/Tesamorelina` 不含盐名，只能挂 base → 不补就永远被 skip。
+
+**迁移草案**：`.tmp/cross-market/base_variant_migration.py`，等价 SQL：
+
+```sql
+INSERT INTO variant (variant_id, substance_id, salt, hydrate, ester, base_fraction,
+                     interchange, salt_code, strength_basis)
+VALUES ('gemifloxacin','gemifloxacin','','','',1.0,'unknown','','unknown');
+INSERT INTO variant (variant_id, substance_id, salt, hydrate, ester, base_fraction,
+                     interchange, salt_code, strength_basis)
+VALUES ('tesamorelin','tesamorelin','','','',1.0,'unknown','','unknown');
+```
+
+```powershell
+& $py .tmp/cross-market/base_variant_migration.py --db <DB>                        # dry-run
+& $py .tmp/cross-market/base_variant_migration.py --db <DB> --apply --manifest <M> # 创建
+& $py .tmp/cross-market/base_variant_migration.py --db <DB> --rollback --manifest <M> # 回滚（有组件引用则保留）
+```
+
+**影响**：只新增 2 行 `variant`；不新增 substance/product；合并后 ES 产品挂到 base variant（ES 源名未标盐，属「按名对齐」的已知限制，站点显示规格取自产品行，不受影响）。
+
+### 8.3 一键 runbook（`.tmp/cross-market/apply_batchA.py`）
+
+顺序（与 task 要求一致）：**base variant（2）→ merge_cn（2）→ merge_es（2，bromuro 跳过）→ auto_merge（25）**，随后打印 before/after 计数；`--rollback` 逆序回滚并核对真实库。
+
+```powershell
+$py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
+& $py .tmp/cross-market/apply_batchA.py --db .tmp/cross-market/drugs-test.db --fresh --apply
+& $py .tmp/cross-market/apply_batchA.py --db .tmp/cross-market/drugs-test.db --rollback
+```
+
+**副本实测（2026-10-28）：**
+
+| 阶段 | substance | variant | product | components | ≥2 市场成分 |
+|---|---:|---:|---:|---:|---:|
+| before（= 真实库） | 12,790 | 13,886 | 409,587 | 498,445 | 2,953 |
+| batch A apply 后 | **12,761（−29）** | **13,884（−2）** | 409,587 | 498,445 | **2,954（+1）** |
+| rollback 后 | 12,790 | 13,886 | 409,587 | 498,445 | 2,953 |
+| delta vs 真实库 | **0** | **0** | 0 | 0 | 0 |
+
+- 29 = CN 官方 2（阿格列汀、阿地白介素）+ ES 2（吉米沙星、替莫瑞林）+ 25 对 cn-* 重复；
+- 1 条未并：`Bromuro Pinaverio → pinaverium-bromide`（受影响产品有 corroboration，merge_es 安全规则）；
+- variant −2：CN 合并删 2 个 cn variant、ES 合并删 2 个 es variant，同时前置新建 2 个 base variant，净 −2；
+- ≥2 市场 +1：`tesamorelin` 由 CA → CA+MX（其余 3 个目标合并前已是多市场）。
+
+### 8.4 真实库 apply 步骤（Lead 执行；本轮未执行）
+
+1. **备份**：`Copy-Item data/drugs.db data/backups/drugs-<日期>.db`（或按 run_all 备份机制）。
+2. **base variant 迁移**：`base_variant_migration.py` 对真实 DB `--apply`（先干跑看 2 条）。
+3. **CN 2 条**：`etl/merge_cn_substances.py --csv .tmp/cross-market/cn_batch_a_official.csv --apply`。
+4. **ES 2 条**：`etl/merge_es_substances.py --csv .tmp/cross-market/es_batch_a.csv --apply`（bromuro 会 skip，属预期）。
+5. **auto_merge 25 条**：`etl/auto_merge_substances.py --pairs .tmp/cross-market/batch_a_30.csv --apply --manifest .tmp/cross-market/real_auto_manifest.json`（默认 DB）。
+6. **核数**：期望 substance 12,790→12,761、variant 13,886→13,884、product/components 不变、≥2 市场 2,953→2,954；跑 `db/check_data.py`；抽 5 个成分页（阿格列汀/阿地白介素/吉米沙星/替莫瑞林/人凝血因子VIII）确认跨市场产品可见。
+7. **回滚预案**：4 份清单（base/cn/es/auto）齐备，逆序回滚可恢复（副本已验证 delta=0）。
+8. **发布口径**：合并会改 substance 总数 → 需同步 README/About/CHANGELOG（属发布轮）。
+
+### 8.5 已知事项 / 风险
+
+1. `bromuro pinaverio` 仍待定：若要并，需给 merge_es 加「corroboration 随产品迁移」能力（否则丢 MX per_volume 来源）；不建议本轮做。
+2. 25 对重复在 `cn_inn_overrides.csv` 里 `status=mergeable` 但 `en_substance_id` 是 cn- canonical；`merge_cn_substances.py` 会 reject 这 25 行。若以后不再用 auto-merge 路径，建议改成 `status=needs_rename`。
+3. 批量 apply 前后务必核对 `reports/substance_duplicates.csv` 是否被全库模式覆盖（本轮用 `--report .tmp/...` 避免）。
+4. `auto_merge_substances.py` 的 legacy 全库模式默认仍写 `reports/substance_duplicates.csv`（保持旧行为）；脚本/CI 里跑请显式 `--report` 到 `.tmp/`。
+
+---
+
 _本报告由并行子智能体 data-depth 生成；`data/drugs.db` 只读未写，未跑 git / 发布 / `site/build.py`。_

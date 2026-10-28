@@ -22,7 +22,7 @@
 吲哚布芬,indobufen,cn-b77647d164,,https://www.wikidata.org/wiki/Q3798322,,no_english,Wikidata 中文标签对应英文 INN，但 DB 无该 substance（可作下一批英文补录目标）
 熊胆薄荷,,cn-8218a4aa2b,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 薄荷喉,,cn-519d7d3e8a,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-葡萄糖粉剂,Dextrose,cn-2db2538bfa,,,,uncertain,"多个候选分数相同：Dextrose(dextrose), Dextrose, Unspecified Form(dextrose-unspecified-form), Glucose(glucose)"
+葡萄糖粉剂,Dextrose,cn-2db2538bfa,,,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据；ATC-4 不一致（V02DC vs B05BA03，仅备注）｜原名 葡萄糖粉剂
 蛋白琥珀酸铁,,cn-1640a41c3a,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 苯甲醇,Benzyl Alcohol,cn-062d00c803,benzyl-alcohol,https://www.wikidata.org/wiki/Q52353,medium,mergeable,证据=wikidata_label；匹配=exact
 愈酚喷托异丙嗪,,cn-d50d105925,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -113,7 +113,7 @@
 异福,,cn-ab542c2d79,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 扎来普隆,Zaleplon,cn-01277ac887,zaleplon,https://www.wikidata.org/wiki/Q145052,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
 拉呋替丁,,cn-2a57036245,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：替丁 → -tidine（H2 受体拮抗剂）
-氟伐他汀钠,Fluvastatin,cn-55bfea1cce,,,,uncertain,"多个候选分数相同：Fluvastatin(fluvastatin), Fluvastatin Sodium(fluvastatin-sodium)"
+氟伐他汀钠,Fluvastatin,cn-55bfea1cce,fluvastatin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 氟伐他汀钠
 甲磺酸双氢麦角毒碱,,cn-084a2dcbd6,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 盐酸纳美芬,,cn-9b3e5923c6,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 硫酸卷曲霉素,Capreomycin,cn-cb43b18475,capreomycin,https://www.wikidata.org/wiki/Q415909,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；盐/酯 variant 对应
@@ -154,7 +154,7 @@
 新鱼腥草素钠,,cn-ddf8469cfb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 盐酸金刚乙胺,Rimantadine,cn-3318df8f49,rimantadine,https://www.wikidata.org/wiki/Q42171,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；盐/酯 variant 对应
 磺达肝癸钠,,cn-461c1751e3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-米卡芬净钠,Micafungin,cn-f1b9d21d85,,,,uncertain,"多个候选分数相同：Micafungin(micafungin), Micafungin Sodium(micafungin-sodium)"
+米卡芬净钠,Micafungin,cn-f1b9d21d85,micafungin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 米卡芬净钠
 肝水解肽,,cn-86dc9560eb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：肽 → -peptide（肽类）
 贝前列素钠,,cn-7820891df3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 醋酸阿比特龙,Abiraterone,cn-c82808ed01,abiraterone,https://www.wikidata.org/wiki/Q27888393,medium,mergeable,英文名 Abiraterone Acetate 在 DB 以 base 成分 Abiraterone + 盐/酯 variant 建模，改挂 base 成分；证据=wikidata_label；匹配=exact；盐/酯 variant 对应
@@ -180,7 +180,7 @@
 硫代硫酸钠,Sodium Thiosulfate,cn-cd54069235,sodium-thiosulfate,https://www.wikidata.org/wiki/Q339866,medium,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致；目标无对应盐/酯 variant，按 base variant 合并
 羟甲烟胺,nicotinyl methylamide,cn-b6e78d9b17,,https://www.wikidata.org/wiki/Q744041,,no_english,Wikidata 中文标签对应英文 INN，但 DB 无该 substance（可作下一批英文补录目标）
 苯甲酸阿格列汀,alogliptin,cn-2f1c20e347,alogliptin,etl/ingest_nhsa.py CN2EN 表（中文通用名→英文 INN）,medium,mergeable,batch A（task-48）｜etl/ingest_nhsa.py CN2EN 表（中文通用名→英文 INN）｜官方名映射
-达肝素钠,Dalteparin,cn-5bd9217c34,,,,uncertain,"多个候选分数相同：Dalteparin(dalteparin), Dalteparin Sodium(dalteparin-sodium)"
+达肝素钠,Dalteparin,cn-5bd9217c34,dalteparin,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 达肝素钠
 酞丁安,,cn-90cc82ab9a,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 醋酸甲地孕酮,Megestrol,cn-6ad15ef165,megestrol,https://www.wikidata.org/wiki/Q6808975,high,mergeable,证据=wikidata_label；匹配=base；ATC-4 一致；盐/酯 variant 对应
 阿达木单抗,,cn-dc88358770,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：单抗 → -mab（单克隆抗体）
@@ -292,7 +292,7 @@
 硫酸镁钠钾口服用浓,,cn-22eaf4fead,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 维磷,,cn-c3484441f3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 美愈伪麻,,cn-33e3515ce9,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-聚苯乙烯磺酸钙,Polystyrene Sulfonate - Calcium,cn-ac79bd5204,,,,uncertain,仅有剥盐后 Wikidata 命中，证据不足，不合并
+聚苯乙烯磺酸钙,Polystyrene Sulfonate - Calcium,cn-ac79bd5204,polystyrene-sulfonate-calcium,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（calcium）｜原名 聚苯乙烯磺酸钙
 醋酸可的松,Cortisone,cn-806fd8ea8b,cortisone,https://www.wikidata.org/wiki/Q423185,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；盐/酯 variant 对应
 鞣酸小檗碱,,cn-ad989f6d58,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 鞣酸苦参碱,,cn-623e163a7b,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -391,7 +391,7 @@
 愈酚溴新,,cn-f9fea2dc8b,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 抗肿瘤免疫核糖核酸,,cn-bc7e118a2d,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 曲妥珠单抗,Trastuzumab,cn-95cc9e491c,trastuzumab,https://www.wikidata.org/wiki/Q412616,medium,mergeable,证据=wikidata_label；匹配=exact
-樟脑醑,"Camphor, ( )",cn-0d1c4f7573,,,,uncertain,"多个候选分数相同：Camphor, ( )(camphor), Camphor(camphor-94c02c), Camphor (Natural)(camphor-natural)"
+樟脑醑,"Camphor, ( )",cn-0d1c4f7573,,,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据；ATC-4 不一致（M02AX vs A07DA52，仅备注）｜原名 樟脑醑
 氨酚伪麻美芬片Ⅱ/氨麻苯美,,cn-9f13d9777c,,,,combination,多成分（含「/」）
 氨酚咖黄烷胺,,cn-fbbc0b1017,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 溴化钙,Calcium,cn-a5eaa46fb3,,,,uncertain,目标 Calcium 的盐/酯后缀与中文名不完全对应，盐型风险未排除，不合并
@@ -471,7 +471,7 @@
 奥氮平氟西汀,,cn-e7b3cd7ab0,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 富马酸奥赛利定,,cn-26591a1b5b,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 小牛血清去蛋白,,cn-379608543c,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-尿囊素,Allantoin,cn-cb8a75c2a6,,,,uncertain,"多个候选分数相同：Allantoin(allantoin), Allantoin, (R)(allantoin-r)"
+尿囊素,Allantoin,cn-cb8a75c2a6,,,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据；ATC-4 不一致（A16AX vs D02AX，仅备注）｜原名 尿囊素
 巯嘌呤,Mercaptopurine,cn-ef8f087597,mercaptopurine,https://www.wikidata.org/wiki/Q418529,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
 巴瑞替尼,Baricitinib,cn-11c40df9f5,baricitinib,https://www.wikidata.org/wiki/Q4860707,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
 布南色林,,cn-4439bb4a06,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -547,7 +547,7 @@ L-赖氨酸盐酸盐,,cn-bd42947c7b,,,,uncertain,无外部证据（现有表/Wik
 洛芬待因,,cn-8771365c90,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 牛胎肝提取物,,cn-5e0b64a62c,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 特立帕肽,Teriparatide,cn-bf89f25d35,teriparatide,https://www.wikidata.org/wiki/Q411781,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
-玻璃酸酶,Hyaluronidase,cn-b46751b5ce,,,,uncertain,"多个候选分数相同：Hyaluronidase(hyaluronidase), Hyaluronidase (Human Recombinant)(hyaluronidase-human-recombinant)"
+玻璃酸酶,Hyaluronidase,cn-b46751b5ce,,,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据｜原名 玻璃酸酶
 甲硝唑胶浆,,cn-38ee3c6ba5,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 甲磺酸瑞波西汀,Reboxetine,cn-15b9ceb557,reboxetine,https://www.wikidata.org/wiki/Q418970,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；目标无对应盐/酯 variant，按 base variant 合并
 益多酯,,cn-7cc0b156ce,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -629,11 +629,11 @@ A群C群脑膜炎球菌多糖结合疫苗,,cn-e0a61cc72d,,,,uncertain,无外部�
 罗替高汀,,cn-80a94e50d4,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 羧甲基纤维素钠,,cn-4e0d410d65,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 胆汁槟榔维B1,,cn-794b91ea8b,,,,combination,复方/营养类（含维生素+矿物质等）
-膦甲酸钠,Foscarnet,cn-6d278bd979,,,,uncertain,"多个候选分数相同：Foscarnet(foscarnet), Foscarnet Sodium(foscarnet-sodium)"
+膦甲酸钠,Foscarnet,cn-6d278bd979,foscarnet,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 膦甲酸钠
 芦比前列酮,,cn-5f556d94f1,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 苦参水杨酸,,cn-5db93d56fb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 苹果酸氯波必利,,cn-e1f42b33a7,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-输血用枸橼酸钠,Sodium Citrate,cn-d3c12e92d6,,,,uncertain,"多个候选分数相同：Sodium Citrate(sodium-citrate), Sodium Citrate, Unspecified Form(sodium-citrate-unspecified-form)"
+输血用枸橼酸钠,Sodium Citrate,cn-d3c12e92d6,sodium-citrate,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 输血用枸橼酸钠
 那氟沙星,nadifloxacin,cn-e1fc7e4ce6,,https://www.wikidata.org/wiki/Q426605,,no_english,Wikidata 中文标签对应英文 INN，但 DB 无该 substance（可作下一批英文补录目标）
 醋羟胺酸,Acetohydroxamic Acid,cn-bff57dfeaf,acetohydroxamic-acid,https://www.wikidata.org/wiki/Q481822,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
 钠钾镁钙,,cn-ae9bb00d5f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1061,7 +1061,7 @@ A群链球菌,,cn-f81bdd537d,,,,uncertain,无外部证据（现有表/Wikidata �
 复合乳酸菌,,cn-31f801a8e8,,,,combination,含复方/营养类字样「复合」
 外用人表皮生长因子,,cn-71ca03cc67,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 多司马酯,,cn-4f6dc1da67,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-多替拉韦钠,Dolutegravir,cn-9ab5b7f799,,,,uncertain,"多个候选分数相同：Dolutegravir(dolutegravir), Dolutegravir Sodium(dolutegravir-sodium)"
+多替拉韦钠,Dolutegravir,cn-9ab5b7f799,dolutegravir,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（sodium）｜原名 多替拉韦钠
 大蒜,Garlic,cn-545f97148d,garlic,https://www.wikidata.org/wiki/Q21546392,medium,mergeable,证据=wikidata_label；匹配=exact
 大豆磷脂,,cn-bc3c49c637,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 大黄叶绿素铜钠,,cn-6e61dde69e,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1098,7 +1098,7 @@ A群链球菌,,cn-f81bdd537d,,,,uncertain,无外部证据（现有表/Wikidata �
 枇杷喷托维林,,cn-3c91dae7bd,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 枸橼酸伊沙佐米,Ixazomib,cn-db9d0bd296,ixazomib,https://www.wikidata.org/wiki/Q20948663,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；盐/酯 variant 对应
 枸橼酸依奉阿克,,cn-f3d8b6625c,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-枸橼酸阿尔维林,Alverine,cn-2b5dba4ce6,,,,uncertain,仅有剥盐后 Wikidata 命中，证据不足，不合并
+枸橼酸阿尔维林,Alverine,cn-2b5dba4ce6,alverine,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（citrate）｜原名 枸橼酸阿尔维林
 桔梗远志麻黄碱片Ⅰ,,cn-fa320a996f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 母牛分枝杆菌,,cn-8afd8a9710,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 氘丁苯那嗪,,cn-f0552b8c72,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1764,7 +1764,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 抗眼镜蛇毒血清,,cn-c74388d5b2,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 抗蝮蛇毒血清,,cn-845175a00f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 抗银环蛇毒血清,,cn-08854a47df,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-拉替拉韦钾,Raltegravir,cn-735816cdaa,,,,uncertain,"多个候选分数相同：Raltegravir(raltegravir), Raltegravir Potassium(raltegravir-potassium)"
+拉替拉韦钾,Raltegravir,cn-735816cdaa,raltegravir,batch B（task-56）二次核验,medium,mergeable,batch B（task-56）｜二次核验通过：盐型/水合物/立体匹配｜第二证据：盐型精确匹配（potassium）｜原名 拉替拉韦钾
 拉罗尼酶浓,,cn-7a797fbcf3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 拉那利尤单抗,,cn-c68016cdd8,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：单抗 → -mab（单克隆抗体）
 整蛋白型肠内营养剂,,cn-cc47340d6c,,,,uncertain,营养制剂（非单一成分）
@@ -2169,7 +2169,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 羟布宗,Oxyphenbutazone,cn-6230b1d3d8,oxyphenbutazone,https://www.wikidata.org/wiki/Q4116192,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
 脂肪乳(20%)/氨基酸(15)/葡萄糖,,cn-71935a3a3a,,,,combination,多成分（含「/」）
 茶酮,,cn-d1e1c5af39,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-蛋氨酸,Dl-Methionine,cn-4843d6cbec,,,,uncertain,"多个候选分数相同：Dl-Methionine(dl-methionine), L-Methionine(l-methionine), Methionine(methionine)"
+蛋氨酸,Dl-Methionine,cn-4843d6cbec,,,low,uncertain,batch B（task-56）降级：原证据弱（模糊/低置信/多候选）且无第二证据；ATC-4 不一致（A05BA vs A16AX，仅备注）｜原名 蛋氨酸
 达克罗宁薄荷,,cn-a8c6843f57,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 酚麻美敏,,cn-0b0a080afb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 锝[99MTC] 双半胱乙酯,锝[99mTc]双半胱乙酯,cn-bc823c69bd,cn-26a26f6713,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
