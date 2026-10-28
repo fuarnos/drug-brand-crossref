@@ -7,8 +7,12 @@
    来自 DB 优化审计 `reports/db-optimization.md`）；
 3. `source` 表补 `data_as_of` / `data_as_of_note`（`_ensure_source_columns`）；
 4. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
-   （US → GB → CN → ES → MX → AU → CA → **TW**），所以每次 schema.sql 扩了枚举，这里就把
+   （US → GB → CN → ES → MX → AU → CA → **TW** → **HK**），所以每次 schema.sql 扩了枚举，这里就把
    老库里的 product 表换成新定义，数据原样搬过去。
+5. **区域层（region）**：EU = 欧盟集中审批（EMA），不是国家市场。schema 的 `product.country`
+   改为可空并新增 `product.region`（country 与 region 二选一，CHECK 约束）；老库缺 region 列
+   或 country 仍是 NOT NULL 时，用同一套 `_rebuild_product()` 重建（列拷贝、region 默认 NULL），
+   同时 `coverage` 视图改为 `COALESCE(country, region)` 分组（EU 单独一行）。
 
 重建流程（v0.4.3 修复：旧表占着 `idx_product_country` 的名字，`CREATE INDEX IF NOT EXISTS`
 会在旧表还在时被跳过、删旧表后索引就丢了；现在改为「先建新表 → 搬数据 → 删旧表 →
@@ -23,7 +27,8 @@
     校验：行数 / 索引集合 / 视图可查 / foreign_key_check / quick_check
 
 迁移**只对副本**（`--db .tmp/...`）验证时也安全；真实库建议先由 run_all 备份。
-`python db/migrate_country_tw.py` 是同一套逻辑的独立可回滚版本（task-62）。
+`python db/migrate_country_tw.py` / `db/migrate_country_hk.py` 是同一套逻辑的独立可回滚版本
+（task-62 / task-88；init_db 路径没有撤销清单，回滚走 DB 备份恢复）。
 """
 
 from __future__ import annotations
@@ -38,8 +43,9 @@ ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = ROOT / "db" / "schema.sql"
 DEFAULT_DB = ROOT / "data" / "drugs.db"
 
-CHECK_RE = re.compile(r"country\s+TEXT\s+NOT\s+NULL\s+CHECK\s*\(country\s+IN\s*\(([^)]*)\)\)",
-                      re.I)
+CHECK_RE = re.compile(
+    r"country\s+TEXT\s+(?:NOT\s+NULL\s+|NULL\s+)?CHECK\s*\(\s*"
+    r"(?:country\s+IS\s+NULL\s+OR\s+)?country\s+IN\s*\(([^)]*)\)\)", re.I)
 STATUS_RE = re.compile(
     r"status\s+TEXT\s+NOT\s+NULL\s+DEFAULT\s+'active'\s*CHECK\s*\(status\s+IN\s*\(([^)]*)\)\)",
     re.I)
@@ -193,33 +199,55 @@ def _rebuild_product(db: sqlite3.Connection, schema_text: str) -> None:
     print(f"  重建 product 表耗时 {time.perf_counter() - t0:.2f}s")
 
 
+def _product_region_needed(db: sqlite3.Connection) -> bool:
+    """老库是否需要为「区域层（region）」重建 product 表。
+
+    需要重建的两种情况：
+    1. product 表没有 `region` 列（schema 已加，老库未迁移）；
+    2. `country` 仍是 NOT NULL（区域层要写 country=NULL，必须放宽为可空）。
+    """
+    row = db.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='product'").fetchone()
+    if not row:
+        return False
+    info = {r[1]: r for r in db.execute("PRAGMA table_info(product)")}
+    if "region" not in info:
+        return True
+    return bool(info["country"][3])     # notnull=1 → 需重建放宽
+
+
 def build(db_path: Path) -> sqlite3.Connection:
     t0 = time.perf_counter()
     db_path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(db_path, timeout=60)
     schema_text = SCHEMA.read_text(encoding="utf-8")
     target = markets(schema_text)
+    target_status = statuses(schema_text)
 
     # v0.4：老库必须先补 variant 新列，否则 schema.sql 里建在 salt_code 上的索引
     # 会直接报 "no such column"（CREATE TABLE IF NOT EXISTS 不会改已存在的表）。
     _ensure_variant_columns(db)
+
+    # 迁移要在 executescript(schema_text) 之前做：新版 coverage 视图引用 p.region，
+    # 老库还没有 region 列时先重建 product，再执行 schema 建/刷视图。
+    row = db.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='product'").fetchone()
+    have = markets(row[0]) if row else set()
+    have_status = statuses(row[0]) if row else set()
+    region_need = _product_region_needed(db)
+    if row and ((target and have != target) or (target_status and have_status != target_status)
+                or region_need):
+        missing = ", ".join(sorted(target - have)) or "(none)"
+        missing_st = ", ".join(sorted(target_status - have_status)) or "(none)"
+        print(f"迁移 product 表：country {sorted(have)} → {sorted(target)}（新增 {missing}）；"
+              f"status 新增 {missing_st}；region 列/country 可空: {'需要' if region_need else '已就绪'}")
+        _rebuild_product(db, schema_text)
+
     db.executescript(schema_text)
     db.commit()
     _ensure_source_columns(db)
     _ensure_variant_columns(db)
     _ensure_indexes(db)
-
-    row = db.execute(
-        "SELECT sql FROM sqlite_master WHERE type='table' AND name='product'").fetchone()
-    have = markets(row[0]) if row else set()
-    have_status = statuses(row[0]) if row else set()
-    target_status = statuses(schema_text)
-    if row and ((target and have != target) or (target_status and have_status != target_status)):
-        missing = ", ".join(sorted(target - have)) or "(none)"
-        missing_st = ", ".join(sorted(target_status - have_status)) or "(none)"
-        print(f"迁移 product 表：country {sorted(have)} → {sorted(target)}（新增 {missing}）；"
-              f"status 新增 {missing_st}")
-        _rebuild_product(db, schema_text)
     print(f"init_db 完成：{db_path}（{time.perf_counter() - t0:.2f}s）")
     return db
 

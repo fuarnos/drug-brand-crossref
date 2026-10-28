@@ -6,8 +6,12 @@
 -- v0.4 改动：D2 盐基折算前置字段 variant.salt_code / variant.strength_basis；
 --            新增 dose_warning（D3 `/warn` 页人工策展警示）。老库由 db/init_db.py 幂等迁移。
 -- 市场：US（openFDA NDC）、GB（dm+d）、CN（医保代码库）、ES（CIMA / AEMPS）、
---       MX（COFEPRIS）、AU（PBS Schedule）、CA（Health Canada DPD）、TW（台湾，预留）。
+--       MX（COFEPRIS）、AU（PBS Schedule）、CA（Health Canada DPD）、TW（台湾，预留）、
+--       HK（香港衞生署藥物辦公室 DrugList，名称/成分层，无规格/剂型/状态）。
 --       country 是「上市国家」，不是语言；西语名走 name_variant，不新建表。
+-- 区域层（region，非国别）：EU = 欧盟集中审批（EMA）——不是国家市场，不塞 country='EU'；
+--       `product.country` 为 NULL 时 `product.region='EU'`（二选一，CHECK 约束保证）。
+--       EU 层只有品牌名/成分/ATC/MAH/授权状态，无规格/剂型/包装，页面必须明示。
 
 PRAGMA foreign_keys = ON;
 
@@ -77,12 +81,15 @@ CREATE INDEX IF NOT EXISTS idx_variant_basis ON variant (strength_basis);
 -- （reports/db-optimization.md §3.2；仅 13.9k 行的小索引，无查询计划副作用）
 CREATE INDEX IF NOT EXISTS idx_variant_substance ON variant (substance_id);
 
--- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装）
+-- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装；区域层用 region 代替 country）
 CREATE TABLE IF NOT EXISTS product (
     product_id     TEXT PRIMARY KEY,
-    country        TEXT NOT NULL CHECK (country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW')),
-    -- 新增市场 = 往上面 CHECK 里加一个 ISO 代码 + data/markets.json 注册（enabled 先 false），
-    -- 老库由 db/init_db.py / db/migrate_country_tw.py 幂等重建 product 表；未来 HK/MO 同理。
+    country        TEXT NULL CHECK (country IS NULL OR country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW', 'HK', 'SG')),
+    region         TEXT NULL CHECK (region IS NULL OR region IN ('EU')),
+    -- country 与 region 二选一：国别产品 country 非空 / 区域层（EU=EMA 集中审批）region 非空、country NULL。
+    -- 新增国家市场 = country CHECK 加 ISO 代码 + markets.json 注册；新增区域 = region CHECK 加代码。
+    -- 老库由 db/init_db.py 幂等重建 product 表（country 可空 + region 列需要一次重建）。
+    -- 不要用 country='EU' 表示欧盟层（EU 不是国家市场）。
     dosage_form    TEXT NOT NULL,
     form_base      TEXT,                      -- 归一化剂型：tablet / capsule / liquid / ...
     route          TEXT,
@@ -99,10 +106,14 @@ CREATE TABLE IF NOT EXISTS product (
     source_id      TEXT NOT NULL REFERENCES source (source_id),
     source_url     TEXT,
     retrieved_at   TEXT NOT NULL,
-    note           TEXT
+    note           TEXT,
+    -- 区域层约束：国别产品（country 非空）与 region 产品（region 非空）互斥且必居其一。
+    CHECK ((country IS NOT NULL AND region IS NULL) OR (country IS NULL AND region IS NOT NULL))
 );
 
 CREATE INDEX IF NOT EXISTS idx_product_country ON product (country, status);
+-- 区域层（EU/EMA）查询：region 非空时用这个索引（country 为 NULL）
+CREATE INDEX IF NOT EXISTS idx_product_region ON product (region, status);
 
 -- 成分：复方在这里是多行。强度跟着成分走，因为 Augmentin 500/125 的强度是分别归属的。
 CREATE TABLE IF NOT EXISTS product_component (
@@ -389,13 +400,14 @@ CREATE INDEX IF NOT EXISTS idx_artg_norm ON artg_entry (name_norm);
 CREATE INDEX IF NOT EXISTS idx_artg_name ON artg_entry (name);
 
 -- 覆盖度：公开站必须如实展示的数字
+-- 区域层（EU=EMA）单独一行：market = COALESCE(country, region)；现有国别行不变。
 DROP VIEW IF EXISTS coverage;
 CREATE VIEW IF NOT EXISTS coverage AS
-SELECT p.country,
+SELECT COALESCE(p.country, p.region)                                   AS country,
        COUNT(DISTINCT p.product_id)                                      AS n_products,
        COUNT(DISTINCT pc.variant_id)                                     AS n_variants,
        COUNT(DISTINCT CASE WHEN p.status = 'active' THEN p.product_id END) AS n_active,
        MAX(p.retrieved_at)                                               AS last_synced
 FROM product p
 LEFT JOIN product_component pc ON pc.product_id = p.product_id
-GROUP BY country;
+GROUP BY COALESCE(p.country, p.region);

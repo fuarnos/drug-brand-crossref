@@ -4,7 +4,18 @@
     score = 0.55*name_tier + 0.20*country + 0.15*strength + 0.10*form
 
 匹配层级：
-    exact 1.00 · compact 0.95 · prefix 0.80 · contains 0.70 · fuzzy 0.55
+    exact 1.00 · compact 0.95 · prefix 0.80 · contains 0.70 · atc 0.92 · category 0.88
+    · pinyin 0.62 · fuzzy 0.55
+
+ATC/大类层（task-139）：与客户端 v0.6.4（`atcQuery`）和 v0.7.1（`catHit`）一致——
+ATC 码（C07 / C07AB02）按 `substance.atc` 前缀匹配；大类词按 `categories.json` 的
+16 大类四语 label/alias + lib 侧口语别名（退烧药等）匹配；结果标记 `match_source`
+（atc / category）。客户端行为不变（只改 lib/CLI/CI）。
+
+拼音层（task-111）：`lib/pinyin.py` 移植客户端 `_pinyin_tokens` 口径（s:/j:/i: token），
+并补多音字候选；仅当拉丁查询在 name_key 上没有任何命中时才走拼音候选（= 客户端
+「精确/前缀 → 拼音 → 拼写容错」的顺序），因此既有英文/中英文查询行为不变。
+客户端仍使用构建产物 `data/idx/pinyin.json`，本层不改变站点 payload。
 """
 
 from __future__ import annotations
@@ -18,14 +29,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from normalize_name import normalize  # noqa: E402
+from pinyin import compact_query, is_cjk_text, pinyin_tokens, query_tokens  # noqa: E402
+from categories import (  # noqa: E402
+    atc_query, category_by_id, cat_norm, match_category,
+)
 
 DB_DEFAULT = ROOT / "data" / "drugs.db"
 
 TIER = {"exact": 1.00, "compact": 0.95, "prefix": 0.80, "contains": 0.70,
-        "fuzzy": 0.55, "nickname": 1.00}
+        "atc": 0.92, "category": 0.88, "pinyin": 0.62, "fuzzy": 0.55,
+        "nickname": 1.00}
 FUZZY_MIN = 0.75
 MAX_KEYS = 60
+# 拼音 token 可能一对多（首字母 token 尤其多），限制单次候选 key 数，避免大 IN 查询。
+PINYIN_MAX_KEYS = 300
 
 # 俗称的类型 → 给人看的标签。昵称命中的提示里会写明是「网络俗称」还是「旧名」，
 # 不让用户以为这是包装上的正式名字。
@@ -81,6 +100,9 @@ class SearchResult:
     aliases: list[dict] = field(default_factory=list)
     # 易混淆药对：这个查询名和哪些名字可能被看错/听错。
     confused: list[dict] = field(default_factory=list)
+    # 匹配来源（task-139）：""=普通名字检索 / "atc" / "category"
+    match_source: str = ""
+    match_detail: dict = field(default_factory=dict)
 
     @property
     def empty(self) -> bool:
@@ -141,9 +163,66 @@ class SearchIndex:
                    FROM confusable_pair""")]
         except sqlite3.OperationalError:
             self._confusable = []
+        # 拼音层（task-111）：懒构建 token → key_id 索引；仅拉丁查询无命中时启用。
+        # 客户端用 data/idx/pinyin.json（默认读音）；这里用 lib/pinyin.py 同口径 + 多音字候选。
+        self._pinyin_index: dict[str, list[str]] | None = None
+        self.pinyin_build_ms: float | None = None
+        # ATC/大类层（task-139）：懒构建 atc 码 → key 集合（仅 active；客户端用索引 atc 数组）。
+        self._atc_index: dict[str, set[str]] | None = None
+        self._atc_key_n: dict[str, int] = {}
+        self.atc_build_ms: float | None = None
 
     def close(self) -> None:
         self.db.close()
+
+    # --- 拼音候选（task-111） -------------------------------------------
+    def _get_pinyin_index(self) -> dict[str, list[str]]:
+        """懒构建：汉字 name_key → pinyin token（s:/j:/i:）→ [key_id]。
+
+        只在第一次拼音查询时构建（本机约 0.3–0.6 s / 2.6 万汉字 key），
+        不增加 SearchIndex 冷启动成本；不含别名标签（客户端 pinyin.json 含俗称，
+        lib 暂只覆盖 name_key，见 reports/pinyin-lib.md 的剩余缺口）。
+        """
+        if self._pinyin_index is None:
+            import time
+            t0 = time.perf_counter()
+            idx: dict[str, list[str]] = {}
+            for key_id, _norm, _compact in self._norms:
+                if not is_cjk_text(key_id):
+                    continue
+                for tok in pinyin_tokens(key_id, polyphone=True):
+                    idx.setdefault(tok, []).append(key_id)
+            self._pinyin_index = idx
+            self.pinyin_build_ms = round((time.perf_counter() - t0) * 1000, 1)
+        return self._pinyin_index
+
+    def _pinyin_keys(self, query: str) -> list[str]:
+        """拼音查询 → 候选 key_id 列表（token 优先级与客户端一致：j > i > s）。
+
+        客户端只做精确 token 查找（app.js:3123）；lib 在其后补一个「全拼前缀」
+        兜底：用户常只输入名字的一部分（buluofen → 布洛芬片），客户端仍保持
+        原行为不变，lib/CLI/评测获得超集能力。
+        """
+        q = compact_query(query)
+        if len(q) < 2:
+            return []
+        idx = self._get_pinyin_index()
+        for tok in query_tokens(q):
+            ids = idx.get(tok)
+            if ids:
+                return ids[:PINYIN_MAX_KEYS]
+        # 全拼前缀兜底（仅 j: 连写 token；至少 3 个字母，避免过泛）
+        if len(q) >= 3:
+            prefix = "j:" + q
+            out: list[str] = []
+            for tok, ids in idx.items():
+                if tok.startswith(prefix):
+                    out.extend(ids)
+                    if len(out) >= PINYIN_MAX_KEYS:
+                        break
+            if out:
+                return out[:PINYIN_MAX_KEYS]
+        return []
 
     # --- 候选名解析 -----------------------------------------------------
     @staticmethod
@@ -183,9 +262,19 @@ class SearchIndex:
             elif len(n.norm) >= self._min_substring(n) and n.norm in norm:
                 add(key_id, "contains")
 
+        # 拼音分支：仅当拉丁查询在 name_key 上零命中时尝试（客户端顺序：
+        # 精确/前缀 → bigram → 拼音 → 拼写容错；这里没有 bigram，因此拼音放在 fuzzy 前）。
+        pinyin_used = False
+        if not hits and n.script == "latin":
+            py_keys = self._pinyin_keys(n.compact)
+            if py_keys:
+                for key_id in py_keys:
+                    add(key_id, "pinyin")
+                pinyin_used = True
+
         # 模糊匹配保持与客户端一致：仅 4 字以上查询才做（中文也是 4 字），
         # 短中文名走上面的 contains，不引入更激进的模糊扩展。
-        if len(hits) < 5 and len(n.norm) >= 4:
+        if not pinyin_used and len(hits) < 5 and len(n.norm) >= 4:
             scored = []
             for key_id, norm, _compact in self._norms:
                 if key_id in hits:
@@ -197,7 +286,8 @@ class SearchIndex:
             for _r, key_id in scored[:20]:
                 add(key_id, "fuzzy")
 
-        order = {"exact": 0, "compact": 1, "prefix": 2, "contains": 3, "fuzzy": 4}
+        order = {"exact": 0, "compact": 1, "prefix": 2, "contains": 3,
+                 "pinyin": 4, "fuzzy": 5}
         keys = sorted(hits.items(), key=lambda kv: (order[kv[1]], kv[0]))
         return keys[:MAX_KEYS]
 
@@ -411,39 +501,15 @@ class SearchIndex:
                         + 0.15 * strength_score + 0.10 * form_score
                         + 0.01 * release_score, 4)
 
-    # --- 主查询 --------------------------------------------------------
-    def search(
-        self,
-        query: str,
-        country: str | None = None,
-        limit: int = 25,
-        include_status: tuple[str, ...] = ("active",),
-    ) -> SearchResult:
-        n = normalize(query)
-        res = SearchResult(query=query, norm=n.norm, strengths=n.strengths)
-        if n.is_empty:
-            res.note = "只给了剂量，没有药名"
-            return res
-
-        res.confused = self._confusable_hits(n)
-        alias_hits = self._alias_hits(n)
-        if alias_hits:
-            alias_res = self._search_alias(query, n, alias_hits, country, limit,
-                                           include_status)
-            alias_res.confused = res.confused
-            return alias_res
-
-        keys = self._resolve_keys(n)
-        res.total_keys = len(keys)
-        if not keys:
-            res.note = "没有匹配的名字"
-            return res
-
-        key_ids = [k for k, _ in keys]
-        tier_of = dict(keys)
+    # --- ATC / 大类检索（task-139，与客户端 v0.6.4 / v0.7.1 对齐） ----------
+    def _cards_for_keys(self, key_ids: list[str], tier_of: dict[str, str], n,
+                        country: str | None, include_status: tuple[str, ...],
+                        limit: int) -> tuple[list[Card], str]:
+        """按 key_ids 构建结果卡（抽自名字检索的同一套卡片逻辑）。"""
+        if not key_ids:
+            return [], "没有匹配的名字"
         marks = ",".join("?" * len(key_ids))
         status_marks = ",".join("?" * len(include_status))
-
         rows = self.db.execute(
             f"""SELECT pn.key_id, p.product_id, p.country, p.dosage_form, p.form_base,
                        p.release, p.status
@@ -453,13 +519,10 @@ class SearchIndex:
             (*key_ids, *include_status),
         ).fetchall()
         if not rows:
-            res.note = "名字对上了，但没有在售产品"
-            return res
-
+            return [], "名字对上了，但没有在售产品"
         by_product: dict[str, list[sqlite3.Row]] = {}
         for r in rows:
             by_product.setdefault(r["product_id"], []).append(r)
-
         comp: dict[str, list[sqlite3.Row]] = {}
         pmarks = ",".join("?" * len(by_product))
         for r in self.db.execute(
@@ -474,14 +537,13 @@ class SearchIndex:
             tuple(by_product),
         ):
             comp.setdefault(r["product_id"], []).append(r)
-
         coll = {
             r["key_id"]: r["level"]
             for r in self.db.execute(
                 f"SELECT key_id, level FROM collision WHERE key_id IN ({marks})", tuple(key_ids)
             )
         }
-        raw_names = {}
+        raw_names: dict[str, str] = {}
         for r in self.db.execute(
             f"""SELECT nv.key_id, nv.raw, COUNT(*) c FROM name_variant nv
                 WHERE nv.key_id IN ({marks}) GROUP BY nv.key_id, nv.raw
@@ -489,14 +551,12 @@ class SearchIndex:
             tuple(key_ids),
         ):
             raw_names.setdefault(r["key_id"], r["raw"])
-
         cards: dict[tuple, Card] = {}
         for product_id, group in by_product.items():
             first = group[0]
             parts = comp.get(product_id, [])
             if not parts:
                 continue
-            substances = [p["inn_en"] for p in parts]
             strengths = [
                 _fmt_strength(p["strength_value"], p["strength_unit"],
                               p["per_volume_value"], p["per_volume_unit"])
@@ -507,17 +567,16 @@ class SearchIndex:
                    first["form_base"], first["release"])
             card = cards.get(sig)
             if card is None:
-                form_base = first["form_base"] or first["dosage_form"]
                 card = Card(
                     key_id=first["key_id"],
                     brand=raw_names.get(first["key_id"], first["key_id"]),
                     country=first["country"],
-                    substances=substances,
+                    substances=[p["inn_en"] for p in parts],
                     strengths=[],
-                    dosage_form=form_base,
+                    dosage_form=first["form_base"] or first["dosage_form"],
                     status=first["status"],
                     collision=coll.get(first["key_id"], "info"),
-                    tier=tier_of[first["key_id"]],
+                    tier=tier_of.get(first["key_id"], ""),
                     product_id=product_id,
                 )
                 cards[sig] = card
@@ -525,22 +584,178 @@ class SearchIndex:
                 if s and s not in card.strengths:
                     card.strengths.append(s)
             card.n_products += 1
-
         result = list(cards.values())
         for c in result:
             c.strengths.sort(key=_strength_sort_key)
             self._score_card(c, n, country)
-
         if country:
-            # 严格按国家过滤：给一个「该国没有」的明确答案，比回退到别国更诚实
             result = [c for c in result if c.country == country]
             if not result:
-                res.note = f"在 {country} 没有收录到这个名字 —— 查不到不代表该药不存在"
-                res.cards = []
-                return res
-        # 同层级里：产品多的品牌在前（"Tylenol Extra Strength" 比冷门变体更可能是用户要找的）
+                return [], (f"在 {country} 没有收录到这个名字 —— 查不到不代表该药不存在")
         result.sort(key=lambda c: (-c.score, -c.n_products, len(c.key_id), c.brand.lower()))
-        res.cards = result[:limit]
+        return result[:limit], ""
+
+    def _get_atc_index(self) -> tuple[dict[str, set[str]], dict[str, int]]:
+        """懒构建：ATC 码 → {key_id}；key_id → active 产品数。
+
+        客户端用索引条目里的 `atc` 数组；lib 直接从 DB 聚合（一次全表 join，约 1–2 s，
+        只在首次 ATC/大类查询触发，不增加 SearchIndex 冷启动）。
+        """
+        if self._atc_index is None:
+            import time as _t
+            t0 = _t.perf_counter()
+            code_keys: dict[str, set[str]] = {}
+            for r in self.db.execute(
+                """SELECT DISTINCT pn.key_id AS key_id, s.atc AS atc
+                   FROM product_name pn
+                   JOIN product p ON p.product_id = pn.product_id AND p.status = 'active'
+                   JOIN product_component pc ON pc.product_id = p.product_id
+                   JOIN variant v ON v.variant_id = pc.variant_id
+                   JOIN substance s ON s.substance_id = v.substance_id
+                   WHERE s.atc IS NOT NULL AND s.atc != ''"""
+            ):
+                code_keys.setdefault(r["atc"], set()).add(r["key_id"])
+            n_by = {r[0]: r[1] for r in self.db.execute(
+                """SELECT pn.key_id, COUNT(DISTINCT p.product_id)
+                   FROM product_name pn
+                   JOIN product p ON p.product_id = pn.product_id AND p.status = 'active'
+                   GROUP BY pn.key_id""")}
+            self._atc_index = code_keys
+            self._atc_key_n = n_by
+            self.atc_build_ms = round((_t.perf_counter() - t0) * 1000, 1)
+        return self._atc_index, self._atc_key_n
+
+    def _keys_by_atc_prefixes(self, prefixes: list[str],
+                              include_status: tuple[str, ...]) -> list[tuple[str, int]]:
+        """按 ATC 前缀（客户端口径：substance.atc startswith 任一 prefix）取 key。
+
+        返回 [(key_id, 产品数)]，按产品数降序（客户端 renderATC 的排序口径）。
+        默认 active 走懒索引；include_status 非 active 时回退 SQL（少见）。
+        """
+        prefixes = [p for p in prefixes if p]
+        if not prefixes:
+            return []
+        if include_status != ("active",):
+            return self._keys_by_atc_prefixes_sql(prefixes, include_status)
+        code_keys, n_by = self._get_atc_index()
+        hit: set[str] = set()
+        for code, keys in code_keys.items():
+            if any(code.startswith(p) for p in prefixes):
+                hit |= keys
+        ordered = sorted(hit, key=lambda k: (-n_by.get(k, 0), k))[:200]
+        return [(k, n_by.get(k, 0)) for k in ordered]
+
+    def _keys_by_atc_prefixes_sql(self, prefixes: list[str],
+                                  include_status: tuple[str, ...]) -> list[tuple[str, int]]:
+        status_marks = ",".join("?" * len(include_status))
+        cond = " OR ".join("s.atc LIKE ?" for _ in prefixes)
+        rows = self.db.execute(
+            f"""SELECT pn.key_id, COUNT(DISTINCT p.product_id) AS n
+                FROM product_name pn
+                JOIN product p ON p.product_id = pn.product_id
+                     AND p.status IN ({status_marks})
+                JOIN product_component pc ON pc.product_id = p.product_id
+                JOIN variant v ON v.variant_id = pc.variant_id
+                JOIN substance s ON s.substance_id = v.substance_id
+                WHERE s.atc IS NOT NULL AND ({cond})
+                GROUP BY pn.key_id
+                ORDER BY n DESC
+                LIMIT 200""",
+            (*include_status, *(p + "%" for p in prefixes)),
+        ).fetchall()
+        return [(r["key_id"], r["n"]) for r in rows]
+
+    def _search_atc(self, code: str, query: str, country: str | None,
+                    limit: int, include_status: tuple[str, ...]) -> SearchResult:
+        n = normalize(query)
+        res = SearchResult(query=query, norm=n.norm)
+        res.match_source = "atc"
+        res.match_detail = {"atc": code}
+        keys = self._keys_by_atc_prefixes([code], include_status)
+        res.total_keys = len(keys)
+        if not keys:
+            res.note = f"ATC {code}: 没有匹配的活性成分"
+            return res
+        cards, note = self._cards_for_keys([k for k, _ in keys],
+                                           {k: "atc" for k, _ in keys},
+                                           n, country, include_status, limit)
+        if note:
+            res.note = note
+        res.cards = cards
+        if cards and not note:
+            res.note = f"ATC {code}: {len(keys)} 个名称按成分 ATC 前缀匹配"
+        return res
+
+    def _search_category(self, match: dict, query: str, country: str | None,
+                         limit: int, include_status: tuple[str, ...]) -> SearchResult:
+        n = normalize(query)
+        res = SearchResult(query=query, norm=n.norm)
+        cat = match["cat"]
+        labels = cat.get("labels") or {}
+        label = labels.get("en") or cat.get("id", "")
+        res.match_source = "category"
+        res.match_detail = {
+            "category_id": cat.get("id"), "url": cat.get("url"),
+            "labels": labels, "prefixes": cat.get("prefixes") or [],
+            "matched": match.get("matched"), "source": match.get("source"),
+        }
+        prefixes = list(cat.get("prefixes") or [])
+        keys = self._keys_by_atc_prefixes(prefixes, include_status)
+        res.total_keys = len(keys)
+        if not keys:
+            res.note = f"Category {label}: 没有匹配的活性成分"
+            return res
+        cards, note = self._cards_for_keys([k for k, _ in keys],
+                                           {k: "category" for k, _ in keys},
+                                           n, country, include_status, limit)
+        if note:
+            res.note = note
+        res.cards = cards
+        if cards and not note:
+            res.note = (f"Category {label}: {len(keys)} 个名称按 ATC 前缀 "
+                        f"{'/'.join(prefixes)} 匹配（{match.get('source')}）")
+        return res
+
+    # --- 主查询 --------------------------------------------------------
+    def search(
+        self,
+        query: str,
+        country: str | None = None,
+        limit: int = 25,
+        include_status: tuple[str, ...] = ("active",),
+    ) -> SearchResult:
+        n = normalize(query)
+        res = SearchResult(query=query, norm=n.norm, strengths=n.strengths)
+        if n.is_empty:
+            res.note = "只给了剂量，没有药名"
+            return res
+
+        # task-139：与客户端一致先判 ATC 码，再判大类词（不进入名字/别名/模糊匹配）。
+        atc = atc_query(query)
+        if atc:
+            return self._search_atc(atc, query, country, limit, include_status)
+        cat_hit = match_category(query)
+        if cat_hit:
+            return self._search_category(cat_hit, query, country, limit, include_status)
+
+        res.confused = self._confusable_hits(n)
+        alias_hits = self._alias_hits(n)
+        if alias_hits:
+            alias_res = self._search_alias(query, n, alias_hits, country, limit,
+                                           include_status)
+            alias_res.confused = res.confused
+            return alias_res
+
+        keys = self._resolve_keys(n)
+        res.total_keys = len(keys)
+        if not keys:
+            res.note = "没有匹配的名字"
+            return res
+        cards, note = self._cards_for_keys([k for k, _ in keys], dict(keys), n,
+                                           country, include_status, limit)
+        if note:
+            res.note = note
+        res.cards = cards
         return res
 
     # --- 单页数据 ------------------------------------------------------

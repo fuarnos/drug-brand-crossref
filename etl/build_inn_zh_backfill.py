@@ -337,11 +337,237 @@ def confidence_of(x: dict) -> str:
     return "low"
 
 
+
+
+# ---------------------------------------------------------------------------
+# task-127：v2 —— 236 个缺 inn_zh 成分补齐 + 旧回填可疑行修正（只读 DB，产出 CSV/SQL）
+# ---------------------------------------------------------------------------
+V2_OUT = ROOT / "data" / "inn_zh_backfill_v2.csv"
+V2_TMP = ROOT / ".tmp" / "inn-zh2"
+NHSA_URL = "https://code.nhsa.gov.cn/yp/toPublicGoodsData.html"
+# 官方/药典中文名（人工核对；优先中国药典/INN 中文名，其次 NMPA/NHSA 注册名）
+V2_OVERRIDES = {
+    "glucose": "葡萄糖", "sodium-chloride": "氯化钠", "levofloxacin": "左氧氟沙星",
+    "ascorbic-acid": "维生素C", "erythromycin": "红霉素", "aspirin": "阿司匹林",
+    "diclofenac": "双氯芬酸", "cefuroxime": "头孢呋辛", "pyridoxine": "维生素B6",
+    "thiamine": "维生素B1", "telmisartan": "替米沙坦", "ampicillin": "氨苄西林",
+    "amino-acids": "氨基酸", "cyanocobalamin": "维生素B12", "potassium-chloride": "氯化钾",
+    "riboflavin": "维生素B2", "ciprofloxacin": "环丙沙星", "zinc": "锌",
+    "tocopherol": "维生素E", "retinol": "维生素A", "manitol": "甘露醇",
+    "glucosamine": "氨基葡萄糖", "clavulanate": "克拉维酸", "triamcinolone": "曲安西龙",
+    "vitamin-b-complex": "复合维生素B", "pentoxifilina": "己酮可可碱", "olmesartan": "奥美沙坦",
+    "dextran-40": "右旋糖酐40", "ropivacaine": "罗哌卡因", "epoetin-alfa": "促红素",
+    "theophylline": "茶碱", "gatifloxacin": "加替沙星", "valacyclovir": "伐昔洛韦",
+    "calcium-phosphate": "磷酸钙", "methionine": "甲硫氨酸", "chlorhexidine": "氯己定",
+    "heparin": "肝素", "sodium-iodide-i-131": "碘[131I]化钠", "penicillin-v": "青霉素V",
+    "filgrastim": "非格司亭", "tramadol": "曲马多", "mx-es-cerebrolysin": "脑蛋白水解物",
+    "ferrous": "亚铁", "macrogol": "聚乙二醇", "oral-rehydration-salts": "口服补液盐",
+    "glimepiride": "格列美脲", "meloxicam": "美洛昔康", "cefpodoxime": "头孢泊肟",
+    "phytonadione": "维生素K1", "tegafur": "替加氟", "iohexol": "碘海醇",
+    "mx-es-levosalbutamol": "左沙丁胺醇", "cholecalciferol": "维生素D3",
+    "inositol-nicotinate": "肌醇烟酸酯", "perindopril": "培哚普利",
+    "ergocalciferol": "维生素D2", "interferon-alfa-2b": "干扰素α2b",
+    "ticarcillin": "替卡西林", "calcium-chloride": "氯化钙", "sertraline": "舍曲林",
+    "beclometasone": "倍氯米松", "aldesleukin": "阿地白介素",
+    "technetium-tc-99m-sodium-pertechnetate": "高锝[99mTc]酸钠",
+    "ferrous-gluconate": "葡萄糖酸亚铁", "trimebutine": "曲美布汀", "levodopa": "左旋多巴",
+    "aminocaproic-acid": "氨基己酸", "phenobarbital": "苯巴比妥",
+    "rosiglitazone": "罗格列酮", "mx-es-nifuratel": "硝呋太尔", "buprenorphine": "丁丙诺啡",
+    "technetium-tc-99m-medronate": "锝[99mTc]亚甲基二膦酸盐",
+    "technetium-tc-99m-sestamibi": "锝[99mTc]甲氧异腈", "morphine": "吗啡",
+    "chlortetracycline": "金霉素", "tenofovir": "替诺福韦", "tiotropium": "噻托溴铵",
+    "zoledronic-acid": "唑来膦酸", "hepatitis-b-immunoglobulin": "乙型肝炎人免疫球蛋白",
+    "fructose": "果糖", "mx-es-difenidol": "地芬尼多", "sulfur": "硫",
+    "dinoprostona": "地诺前列酮", "aceclofenac": "醋氯芬酸", "phenoxybenzamine": "酚苄明",
+    "paliperidone": "帕利哌酮", "iomeprol": "碘美普尔", "calcitonina-salmon-sintetica": "鲑降钙素",
+    "testosterone": "睾酮", "etoposido": "依托泊苷", "isotretinoin": "异维A酸",
+    "glutamine": "谷氨酰胺", "insulina-isofana-nph": "精蛋白人胰岛素",
+    "vardenafil": "伐地那非", "minocycline": "米诺环素", "carbenoxolona": "甘珀酸",
+    "otilonio": "奥替溴铵", "mifepristone": "米非司酮", "mebrofenin": "依替菲宁",
+    "fusidic-acid": "夫西地酸", "mx-es-pidotimod": "匹多莫德", "danazol": "达那唑",
+    "sargramostim": "沙格司亭", "vacuna-anti-rabia": "狂犬病疫苗", "tetracaine": "丁卡因",
+    "mycophenolate": "麦考酚", "levothyroxine": "左甲状腺素", "imipenem": "亚胺培南",
+    "azelastine": "氮䓬斯汀", "cilastatin": "西司他丁", "aminosalicylic-acid": "对氨基水杨酸",
+    "triptorelin": "曲普瑞林", "tolterodine": "托特罗定", "fluvastatin": "氟伐他汀",
+    "sufentanil": "舒芬太尼", "micafungin": "米卡芬净", "foscarnet": "膦甲酸",
+    "etomidate": "依托咪酯", "dalteparin": "达肝素", "clobetasona": "氯倍他松",
+    "benzbromarone": "苯溴马隆", "alogliptin": "阿格列汀", "ziprasidone": "齐拉西酮",
+    "vacuna-anti-virus-papiloma-humano": "人乳头瘤病毒疫苗", "clomifeno": "氯米芬",
+    "sotalol": "索他洛尔", "magnesio-hidroxido": "氢氧化镁", "fentanyl": "芬太尼",
+    "bario": "钡", "tuberculina-ppd": "结核菌素纯蛋白衍生物", "remifentanil": "瑞芬太尼",
+    "polystyrene-sulfonate-calcium": "聚苯乙烯磺酸钙", "ginkgo-biloba": "银杏叶提取物",
+    "amphotericin-b": "两性霉素B", "salmeterol": "沙美特罗", "indacaterol": "茚达特罗",
+    "fluorescein": "荧光素", "decualinio": "地喹氯铵", "xylometazoline": "赛洛唑啉",
+    "tirzepatide": "替尔泊肽", "salicilato-de-trolamina": "水杨酸三乙醇胺",
+    "oxibuprocaina": "奥布卡因", "estradiol": "雌二醇",
+    "vacuna-anti-h-influenzae-b": "b型流感嗜血杆菌疫苗", "carbon-activado": "药用炭",
+    "vacuna-anti-polio": "脊髓灰质炎疫苗", "semaglutide": "司美格鲁肽", "ketamine": "氯胺酮",
+    "ivermectin": "伊维菌素", "fludeoxyglucose-f-18": "氟[18F]脱氧葡糖",
+    "entacapone": "恩他卡朋", "drospirenone": "屈螺酮", "vacuna-anti-bcg": "卡介苗",
+    "suxametonio": "琥珀胆碱", "strontium-chloride": "氯化锶[89Sr]", "ropinirole": "罗匹尼罗",
+    "osimertinib": "奥希替尼", "desogestrel": "去氧孕烯", "clomifene": "氯米芬",
+    "zinc-oxido": "氧化锌", "spiramycin": "螺旋霉素", "pentosano-polisulfato": "多磺酸粘多糖",
+    "oxybutynin": "奥昔布宁", "noretisterona": "炔诺酮", "bromelaina": "菠萝蛋白酶",
+    "aliskireno": "阿利吉仑", "vacuna-anti-encefalitis-japonesa": "乙型脑炎疫苗",
+    "potasio-ioduro": "碘化钾", "mizolastine": "咪唑斯汀", "liraglutide": "利拉鲁肽",
+    "leuprorelin": "亮丙瑞林", "gadodiamide": "钆双胺", "dulaglutide": "度拉糖肽",
+    "ammonium": "铵", "acido-mefenamico": "甲芬那酸", "tensioactivo-pulmonar-porcino": "猪肺磷脂",
+    "ramipril": "雷米普利", "polymyxin-b": "多黏菌素B", "plata": "银",
+    "nicotinamide-adenine-dinucleotide": "辅酶I", "mannitol": "甘露醇",
+    "daunorubicin": "柔红霉素", "cyproterone": "环丙孕酮", "colistimethate": "多黏菌素E甲磺酸钠",
+    "vacuna-anti-rotavirus": "轮状病毒疫苗", "periciazina": "哌泊塞嗪",
+    "parafina-liquida": "液状石蜡", "lixisenatide": "利司那肽", "dolasetron": "多拉司琼",
+    "crizotinib": "克唑替尼", "ciclesonide": "环索奈德", "benzbromarona": "苯溴马隆",
+    "glucagon": "高血糖素", "dolutegravir": "多替拉韦", "brinzolamide": "布林佐胺",
+    "alverine": "阿尔维林", "acitretin": "阿维A", "vacuna-anti-tifoidea": "伤寒疫苗",
+    "vacuna-anti-colera": "霍乱疫苗", "panobinostat": "帕比司他", "metildopa": "甲基多巴",
+    "lopinavir": "洛匹那韦", "insulin-glulisine": "谷赖胰岛素", "ibrutinib": "伊布替尼",
+    "flutamide": "氟他胺", "fludrocortisona": "氟氢可的松", "colestyramine": "考来烯胺",
+    "ciproterona": "环丙孕酮", "chlordiazepoxide": "氯氮䓬", "carmin-de-indigo": "靛胭脂",
+    "carbidopa": "卡比多巴", "amitriptyline": "阿米替林", "alteplase": "阿替普酶",
+    "alglucosidase-alfa": "阿糖苷酶α",
+    "agua-esteril-para-preparaciones-inyectables": "灭菌注射用水",
+    "acido-para-aminosalicilico": "对氨基水杨酸", "zonisamide": "唑尼沙胺",
+    "zanamivir": "扎那米韦", "ytrio-citrato-90y": "枸橼酸钇[90Y]", "vernakalant": "维纳卡兰",
+    "vacuna-anti-fiebre-amarilla": "黄热病疫苗", "telbivudine": "替比夫定",
+    "sulfur-hexafluoride": "六氟化硫", "setmelanotida": "司美诺肽", "raltegravir": "拉替拉韦",
+    "procarbazine": "丙卡巴肼", "osilodrostat": "奥唑司他", "mx-es-nimotuzumab": "尼妥珠单抗",
+    "magnesium-gluconate": "葡萄糖酸镁", "inotuzumab-ozogamicin": "奥加伊妥珠单抗",
+    "hyaluronic-acid": "透明质酸", "folinic-acid": "亚叶酸", "florbetaben-f-18": "氟[18F]贝他苯",
+    "butilescopolamina": "丁溴东莨菪碱", "bezlotoxumab": "贝洛托舒单抗",
+    "antimoniato": "葡萄糖酸锑钠",
+}
+# 旧 CSV 已应用/未应用的可疑“品牌名当通用名”修正（旧值 → 新值）
+V2_CORRECTIONS = {
+    "dextran-70": ("润齐", "右旋糖酐70"),
+    "dopamine": ("阿斯克丁", "多巴胺"),
+    "goserelin": ("诺雷得", "戈舍瑞林"),
+    "methylphenidate": ("专注达", "哌甲酯"),
+    "calcium-gluconate": ("弘泰", "葡萄糖酸钙"),
+    "fluoxetine": ("百优解", "氟西汀"),
+    "paroxetine": ("乐友", "帕罗西汀"),
+    "tretinoin": ("艾力可", "维A酸"),
+    "vacuna-anti-neumococo": ("纽莫法", "肺炎球菌疫苗"),
+    "alglucosidase-alfa": ("美而赞", "阿糖苷酶α"),
+    "aminocaproic-acid": ("凯乃银", "氨基己酸"),
+    "amphotericin-b": ("锋克松", "两性霉素B"),
+    "clomifene": ("法地兰", "氯米芬"),
+    "dextran-40": ("福他乐", "右旋糖酐40"),
+    "fludeoxyglucose-f-18": ("弗唐派特", "氟[18F]脱氧葡糖"),
+    "leuprorelin": ("抑那通", "亮丙瑞林"),
+    "magnesium-gluconate": ("包乐", "葡萄糖酸镁"),
+    "sodium-chloride": ("乐敦清", "氯化钠"),
+    "strontium-chloride": ("思通宁", "氯化锶[89Sr]"),
+    "sufentanil": ("舒芬尼", "舒芬太尼"),
+    "tocopherol": ("清之维", "维生素E"),
+    "vitamin-b-complex": ("水乐维他", "复合维生素B"),
+}
+# 产品映射本身可疑（官方名与库内产品名不一致）——仅提示，不阻断
+V2_MAPPING_WARN = {"dinoprostona", "carbenoxolona", "clomifeno", "otilonio",
+                   "periciazina", "parafina-liquida", "setmelanotida", "vernakalant",
+                   "panobinostat", "acido-mefenamico", "butilescopolamina",
+                   "benzbromarona", "bromelaina", "colistimethate"}
+
+
+def build_v2() -> int:
+    import csv
+    V2_TMP.mkdir(parents=True, exist_ok=True)
+    con = sqlite3.connect("file:" + str(DB) + "?mode=ro", uri=True)
+    con.row_factory = sqlite3.Row
+    # 236 目标
+    missing = [dict(r) for r in con.execute("""
+        SELECT s.substance_id, s.inn_en, COUNT(DISTINCT p.product_id) n_products
+        FROM product p JOIN product_component pc ON pc.product_id=p.product_id
+        JOIN variant v ON v.variant_id=pc.variant_id JOIN substance s ON s.substance_id=v.substance_id
+        WHERE p.country='CN' AND (s.inn_zh IS NULL OR trim(s.inn_zh)='')
+        GROUP BY s.substance_id ORDER BY n_products DESC""")]
+    db_zh = {r["substance_id"]: (r["inn_zh"] or "") for r in
+             con.execute("SELECT substance_id, inn_zh FROM substance")}
+    rows = []
+    filled_products = 0
+    total_products = sum(m["n_products"] for m in missing)
+    for m in missing:
+        sid = m["substance_id"]
+        names = con.execute("""
+          SELECT nv.raw, COUNT(DISTINCT p.product_id) c FROM product p
+          JOIN product_component pc ON pc.product_id=p.product_id
+          JOIN variant v ON v.variant_id=pc.variant_id
+          JOIN product_name pn ON pn.product_id=p.product_id AND pn.name_type='inn'
+          JOIN name_key nk ON nk.key_id=pn.key_id
+          LEFT JOIN name_variant nv ON nv.key_id=nk.key_id
+          WHERE p.country='CN' AND v.substance_id=?
+            AND (SELECT COUNT(*) FROM product_component x WHERE x.product_id=p.product_id)=1
+          GROUP BY nk.key_id ORDER BY c DESC LIMIT 3""", (sid,)).fetchall()
+        top_names = [[(r["raw"] or ""), r["c"]] for r in names if r["raw"]]
+        zh = V2_OVERRIDES.get(sid, "")
+        evidence = "；".join(f"{n}({c})" for n, c in top_names[:3]) or "（无单成分 CN 品名，组合/生物制品）"
+        # 置信度：产品名命中 → high；官方名但产品名不含 → medium（映射可疑单独标记）
+        hit = bool(zh) and any(zh in n or n.replace(" ", "").startswith(zh) for n, _ in top_names)
+        conf = "high" if hit else ("medium" if zh else "")
+        note = ""
+        if sid in V2_MAPPING_WARN:
+            note = "官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核"
+        row = dict(row_type="fill", substance_id=sid, inn_en=m["inn_en"],
+                   zh_name=zh, confidence=conf, evidence=f"NHSA 注册名: {evidence}",
+                   source_url=NHSA_URL, affected_products=m["n_products"],
+                   old_zh="", db_current_zh=db_zh.get(sid, ""), status=("fill" if zh else "keep_empty"),
+                   note=note or ("官方/药典名（人工核对）" if zh else "判不了，留空不盲写"))
+        rows.append(row)
+        if zh:
+            filled_products += m["n_products"]
+    # 修正行（旧 CSV 可疑；其中部分可能已应用 DB）
+    for sid, (old, new) in V2_CORRECTIONS.items():
+        rows.append(dict(row_type="correction", substance_id=sid,
+                         inn_en=(db_zh and ""), zh_name=new, confidence="high",
+                         evidence="旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）",
+                         source_url=NHSA_URL, affected_products=0, old_zh=old,
+                         db_current_zh=db_zh.get(sid, ""),
+                         status=("db_update" if db_zh.get(sid, "") == old else "csv_only"),
+                         note="DB 若已写入旧值需 UPDATE（见 corrections.sql）"))
+    cols = ["row_type", "substance_id", "inn_en", "zh_name", "confidence", "evidence",
+            "source_url", "affected_products", "old_zh", "db_current_zh", "status", "note"]
+    with open(V2_OUT, "w", encoding="utf-8-sig", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(rows)
+    # UPDATE 草案
+    sql = ["-- task-127 旧回填可疑值修正草案（只在窗口 apply；先备份）"]
+    for r in rows:
+        if r["row_type"] != "correction":
+            continue
+        if r["db_current_zh"] == r["old_zh"]:
+            sql.append(f"UPDATE substance SET inn_zh='{r['zh_name']}' "
+                       f"WHERE substance_id='{r['substance_id']}' AND inn_zh='{r['old_zh']}';")
+    (V2_TMP / "corrections.sql").write_text("\n".join(sql) + "\n", encoding="utf-8")
+    # 统计
+    after_products = total_products - filled_products
+    stats = dict(generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                 missing_substances=len(missing), affected_products_before=total_products,
+                 filled_substances=sum(1 for r in rows if r["row_type"] == "fill" and r["zh_name"]),
+                 kept_empty=sum(1 for r in rows if r["row_type"] == "fill" and not r["zh_name"]),
+                 filled_products=filled_products,
+                 affected_products_after=after_products,
+                 text_coverage_after=round(1 - after_products / total_products, 4),
+                 corrections=sum(1 for r in rows if r["row_type"] == "correction"),
+                 corrections_applied=sum(1 for r in rows if r["row_type"] == "correction"
+                                         and r["db_current_zh"] == r["old_zh"]),
+                 rows=len(rows))
+    (V2_TMP / "v2_stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=1),
+                                          encoding="utf-8")
+    print(json.dumps(stats, ensure_ascii=False, indent=1))
+    print("写入", V2_OUT, "；修正 SQL", V2_TMP / "corrections.sql")
+    con.close()
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="构建 inn_zh 回填 CSV（只读 DB）")
     ap.add_argument("--db", default=str(DB))
     ap.add_argument("--dry-run", action="store_true", help="只打印统计")
+    ap.add_argument("--v2", action="store_true", help="task-127：236 缺中文补齐 + 旧回填修正")
     args = ap.parse_args()
+    if args.v2:
+        return build_v2()
     db_path = Path(args.db)
     if not db_path.exists():
         print(f"FATAL: DB 不存在: {db_path}", file=sys.stderr)
