@@ -1,0 +1,899 @@
+substance_id,inn_en,zh_candidate,confidence,method,count,share,variants,evidence
+abatacept,Abatacept,阿巴西普,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿巴西普；cn_substance_id=cn-5eec345b55；evidence_url=https://www.wikidata.org/wiki/Q2697833
+acarbose,Acarbose,阿卡波糖,high,product_majority,212,0.906,5,"CN 单成分产品中文名（212/234 个产品，share=0.906，候选变体 5 个）；示例 product_id=CN-XA10BFA025A00-e18d00c6,CN-XA10BFA025A00-eac1f980,CN-XA10BFA025A00-53d037e6"
+acetazolamide,Acetazolamide,乙酰唑胺,high,override,20,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=乙酰唑胺；cn_substance_id=cn-728fcec406；evidence_url=https://www.wikidata.org/wiki/Q413690
+acetohydroxamic-acid,Acetohydroxamic Acid,醋羟胺酸,high,override,7,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=醋羟胺酸；cn_substance_id=cn-bff57dfeaf；evidence_url=https://www.wikidata.org/wiki/Q481822
+acetylcysteine,Acetylcysteine,乙酰半胱氨酸,high,product_majority,269,0.941,4,"CN 单成分产品中文名（269/286 个产品，share=0.941，候选变体 4 个）；示例 product_id=CN-XR05CBY116A00-87632b14,CN-XR05CBY116A00-2dcf8cd8,CN-XR05CBY116A00-a7cda295"
+acyclovir,Acyclovir,阿昔洛韦,high,product_majority,364,0.897,17,"CN 单成分产品中文名（364/406 个产品，share=0.897，候选变体 17 个）；示例 product_id=CN-XD06BBA075F00-eb866b35,CN-XD06BBA075F00-b0672392,CN-XD06BBA075F00-e6b0bc74"
+adapalene,Adapalene,阿达帕林,high,product_majority,47,0.959,2,"CN 单成分产品中文名（47/49 个产品，share=0.959，候选变体 2 个）；示例 product_id=CN-XD10ADA013U00-2ca273d8,CN-XD10ADA013U00-52ae9854,CN-XD10ADA013U00-93d74708"
+adenosine,Adenosine,腺苷,high,product_majority,12,1.0,1,"CN 单成分产品中文名（12/12 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC01EBX049B00-99a26241,CN-XC01EBX049B00-a46f718c,CN-XC01EBX049B00-839bccf8"
+adenosine-triphosphate,Adenosine Triphosphate,三磷酸腺苷二钠,high,product_majority,150,0.955,3,"CN 单成分产品中文名（150/157 个产品，share=0.955，候选变体 3 个）；示例 product_id=CN-XV02DXS025A00-77d9f8b8,CN-XV02DXS025A00-5c1da67d,CN-XV02DXS025A00-e6dff377"
+afatinib,Afatinib,马来酸阿法替尼,high,product_majority,61,0.813,2,"CN 单成分产品中文名（61/75 个产品，share=0.813，候选变体 2 个）；示例 product_id=CN-XL01EBA297A00-358cc5b4,CN-XL01EBA297A00-62d40a27,CN-XL01EBA297A00-cf57e10e"
+agomelatine,Agomelatine,阿戈美拉汀,high,override,40,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿戈美拉汀；cn_substance_id=cn-5e61436010；evidence_url=https://www.wikidata.org/wiki/Q395229
+albendazole,Albendazole,阿苯达唑,high,product_majority,150,0.949,4,"CN 单成分产品中文名（150/158 个产品，share=0.949，候选变体 4 个）；示例 product_id=CN-XP02CAA010A00-469840eb,CN-XP02CAA010A00-c8ed4725,CN-XP02CAA010A00-91155012"
+albumin-human,Albumin Human,人血白蛋白,high,product_majority,121,0.953,6,"CN 单成分产品中文名（121/127 个产品，share=0.953，候选变体 6 个）；示例 product_id=CN-XB05AAR021B00-c385a9dd,CN-XB05AAR021B00-2682cd1c,CN-XB05AAR021B00-6909cd0d"
+allicin,Allicin,大蒜素,high,product_majority,37,0.902,2,"CN 单成分产品中文名（37/41 个产品，share=0.902，候选变体 2 个）；示例 product_id=CN-XJ01XXD013B00-25c1c008,CN-XJ01XXD013B00-2a2f68a2,CN-XJ01XXD013B00-9c12c272"
+allopurinol,Allopurinol,别嘌醇,high,product_majority,66,0.857,3,"CN 单成分产品中文名（66/77 个产品，share=0.857，候选变体 3 个）；示例 product_id=CN-XM04AAB117A00-52a6b9e4,CN-XM04AAB117A00-86719554,CN-XM04AAB117A00-08af9ee7"
+alprazolam,Alprazolam,阿普唑仑,high,product_majority,63,1.0,1,"CN 单成分产品中文名（63/63 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05BAA050A00-4af27965,CN-XN05BAA050A00-bb6342a5,CN-XN05BAA050A00-7c6d5c3b"
+alprostadil,Alprostadil,前列地尔,high,product_majority,60,0.811,5,"CN 单成分产品中文名（60/74 个产品，share=0.811，候选变体 5 个）；示例 product_id=CN-XC01EAQ015B00-a60e0503,CN-XC01EAQ015B00-a20f97cf,CN-XC01EAQ015B00-79db1ae5"
+altretamine,Altretamine,六甲蜜胺,high,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=六甲蜜胺；cn_substance_id=cn-c401d2c830；evidence_url=https://www.wikidata.org/wiki/Q415242
+aluminum-hydroxide,Aluminum Hydroxide,氢氧化铝,high,product_majority,104,0.981,2,"CN 单成分产品中文名（104/106 个产品，share=0.981，候选变体 2 个）；示例 product_id=CN-XA02ABF438A00-4bc3b721,CN-XA02ABF438A00-2319ca40,CN-XA02ABF438A00-f6819c73"
+amantadine,Amantadine,盐酸金刚烷胺,high,product_majority,45,1.0,1,"CN 单成分产品中文名（45/45 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN04BBJ119A00-c0687a94,CN-XN04BBJ119A00-8132c8b4,CN-XN04BBJ119A00-82320325"
+ambroxol,Ambroxol,盐酸氨溴索,high,product_majority,826,0.81,27,"CN 单成分产品中文名（826/1020 个产品，share=0.81，候选变体 27 个）；示例 product_id=CN-XR05CBA198A00-f245dacb,CN-XR05CBA198A00-491486a9,CN-XR05CBA198A00-e02fc117"
+amidotrizoato,Amidotrizoato,泛影葡胺,high,product_majority,28,1.0,1,"CN 单成分产品中文名（28/28 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV08AAF011B00-a5917959,CN-XV08AAF011B00-c4e032bc,CN-XV08AAF011B00-51dab4db"
+amifostine,Amifostine,氨磷汀,high,override,11,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=氨磷汀；cn_substance_id=cn-90c9f39873；evidence_url=https://www.wikidata.org/wiki/Q251698
+amikacin,Amikacin,硫酸阿米卡星,high,product_majority,248,0.883,7,"CN 单成分产品中文名（248/281 个产品，share=0.883，候选变体 7 个）；示例 product_id=CN-XJ01GBA034B00-43a62ae7,CN-XJ01GBA034B00-ff127efa,CN-XJ01GBA034B00-9c4eb6f0"
+aminophylline,Aminophylline,氨茶碱,high,product_majority,298,0.98,2,"CN 单成分产品中文名（298/304 个产品，share=0.98，候选变体 2 个）；示例 product_id=CN-XR03DAA113A00-e516b1b4,CN-XR03DAA113A00-e74c3ded,CN-XR03DAA113A00-d3de61c5"
+amiodarone,Amiodarone,盐酸胺碘酮,high,product_majority,67,0.918,2,"CN 单成分产品中文名（67/73 个产品，share=0.918，候选变体 2 个）；示例 product_id=CN-XC01BDA201A00-99f69f2c,CN-XC01BDA201A00-ae3b2b00,CN-XC01BDA201A00-537174d4"
+amisulpride,Amisulpride,氨磺必利,high,product_majority,27,0.871,2,"CN 单成分产品中文名（27/31 个产品，share=0.871，候选变体 2 个）；示例 product_id=CN-XN05ALA161A00-e43c37e9,CN-XN05ALA161A00-55e542bb,CN-XN05ALA161A00-4a7fbd89"
+amlodipine,Amlodipine,苯磺酸氨氯地平,high,product_majority,729,0.877,15,"CN 单成分产品中文名（729/831 个产品，share=0.877，候选变体 15 个）；示例 product_id=CN-XC08CAA187A00-44281128,CN-XC08CAA187A00-1ff8d6f5,CN-XC08CAA187A00-03570a36"
+apixaban,Apixaban,阿哌沙班,high,product_majority,114,0.983,2,"CN 单成分产品中文名（114/116 个产品，share=0.983，候选变体 2 个）；示例 product_id=CN-XB01AFA281A00-45979f02,CN-XB01AFA281A00-b7ced15f,CN-XB01AFA281A00-b24da089"
+apremilast,Apremilast,阿普米司特,high,product_majority,73,0.973,2,"CN 单成分产品中文名（73/75 个产品，share=0.973，候选变体 2 个）；示例 product_id=CN-XL04AAA362A00-e89d371b,CN-XL04AAA362A00-8cf7707b,CN-XL04AAA362A00-7988ae0d"
+aprepitant,Aprepitant,阿瑞匹坦,high,override,32,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿瑞匹坦；cn_substance_id=cn-0c83bafe73；evidence_url=https://www.wikidata.org/wiki/Q621834
+argatroban,Argatroban,阿加曲班,high,product_majority,80,0.941,3,"CN 单成分产品中文名（80/85 个产品，share=0.941，候选变体 3 个）；示例 product_id=CN-XB01AEA021B00-642b7c9a,CN-XB01AEA021B00-e0b8d7e1,CN-XB01AEA021B00-8d7ecf71"
+aripiprazole,Aripiprazole,阿立哌唑,high,product_majority,115,0.871,5,"CN 单成分产品中文名（115/132 个产品，share=0.871，候选变体 5 个）；示例 product_id=CN-XN05AXA028A00-08d5a557,CN-XN05AXA028A00-41dc073b,CN-XN05AXA028A00-aa7b69a5"
+arsenic-trioxide,Arsenic Trioxide,三氧化二砷,high,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=三氧化二砷；cn_substance_id=cn-ed5c60ef06；evidence_url=https://www.wikidata.org/wiki/Q7739
+asparaginase,Asparaginase,门冬酰胺酶,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=门冬酰胺酶；cn_substance_id=cn-2fea31d267；evidence_url=https://www.wikidata.org/wiki/Q105296036
+atenolol,Atenolol,阿替洛尔,high,product_majority,106,1.0,1,"CN 单成分产品中文名（106/106 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC07ABA065A00-6375abe4,CN-XC07ABA065A00-cd8c21aa,CN-XC07ABA065A00-6cf53a6e"
+atezolizumab,Atezolizumab,阿替利珠单抗,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿替利珠单抗；cn_substance_id=cn-c9a512cb7c；evidence_url=https://www.wikidata.org/wiki/Q20707748
+atracurium,Atracurium,苯磺酸阿曲库铵,high,product_majority,4,1.0,1,"CN 单成分产品中文名（4/4 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM03ACA052B00-46cf9c54,CN-XM03ACA052B00-68449856,CN-XM03ACA052B00-1b90b7a8"
+atropine,Atropine,硫酸阿托品,high,product_majority,239,0.988,2,"CN 单成分产品中文名（239/242 个产品，share=0.988，候选变体 2 个）；示例 product_id=CN-XA03BAA068A00-38f7f714,CN-XA03BAA068A00-f369c9b5,CN-XA03BAA068A00-ab19e893"
+avanafil,Avanafil,阿伐那非,high,override,28,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=阿伐那非；cn_substance_id=cn-54d5b17739；evidence_url=https://www.wikidata.org/wiki/Q2873270
+axitinib,Axitinib,阿昔替尼,high,override,13,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿昔替尼；cn_substance_id=cn-7b076ac27d；evidence_url=https://www.wikidata.org/wiki/Q4830631
+azacitidine,Azacitidine,阿扎胞苷,high,override,13,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿扎胞苷；cn_substance_id=cn-7a6d10a97e；evidence_url=https://www.wikidata.org/wiki/Q416451
+azathioprine,Azathioprine,硫唑嘌呤,high,product_majority,12,0.923,2,"CN 单成分产品中文名（12/13 个产品，share=0.923，候选变体 2 个）；示例 product_id=CN-XL04AXL155A00-ad87f79b,CN-XL04AXL155A00-91b7309b,CN-XL04AXL155A00-c587ae96"
+azithromycin,Azithromycin,阿奇霉素,high,product_majority,1304,0.805,57,"CN 单成分产品中文名（1304/1619 个产品，share=0.805，候选变体 57 个）；示例 product_id=CN-XJ01FAA051A00-65d597eb,CN-XJ01FAA051A00-c0fd57c5,CN-XJ01FAA051A00-bd2bd507"
+aztreonam,Aztreonam,氨曲南,high,product_majority,136,1.0,1,"CN 单成分产品中文名（136/136 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01DFA194B00-5a40aa3f,CN-XJ01DFA194B00-9eb04870,CN-XJ01DFA194B00-17861487"
+baclofen,Baclofen,巴氯芬,high,override,18,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=巴氯芬；cn_substance_id=cn-a5cb3d7969；evidence_url=https://www.wikidata.org/wiki/Q413717
+baricitinib,Baricitinib,巴瑞替尼,high,override,17,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=巴瑞替尼；cn_substance_id=cn-11c40df9f5；evidence_url=https://www.wikidata.org/wiki/Q4860707
+basiliximab,Basiliximab,巴利昔单抗,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=巴利昔单抗；cn_substance_id=cn-a62ac087c2；evidence_url=https://www.wikidata.org/wiki/Q418702
+belimumab,Belimumab,贝利尤单抗,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=贝利尤单抗；cn_substance_id=cn-11a0da3585；evidence_url=https://www.wikidata.org/wiki/Q1996249
+benazepril,Benazepril,盐酸贝那普利,high,product_majority,32,0.865,2,"CN 单成分产品中文名（32/37 个产品，share=0.865，候选变体 2 个）；示例 product_id=CN-XC09AAB034A00-03d06ecd,CN-XC09AAB034A00-7a624ee2,CN-XC09AAB034A00-9251644c"
+benorilate,Benorilate,贝诺酯,high,product_majority,135,0.985,2,"CN 单成分产品中文名（135/137 个产品，share=0.985，候选变体 2 个）；示例 product_id=CN-XN02BAB038A00-4ae4c44a,CN-XN02BAB038A00-5c579136,CN-XN02BAB038A00-5395fbe1"
+benzocaine,Benzocaine,苯佐卡因,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=苯佐卡因；cn_substance_id=cn-bd8f7e3412；evidence_url=https://www.wikidata.org/wiki/Q422745
+benzoic-acid,Benzoic Acid,苯甲酸,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD01AEF188C00-5d518f51,CN-XD01AEF188C00-f831fef3,CN-XD01AEF188C00-98dccc01"
+benzoyl-peroxide,Benzoyl Peroxide,过氧苯甲酰,high,product_majority,13,0.867,2,"CN 单成分产品中文名（13/15 个产品，share=0.867，候选变体 2 个）；示例 product_id=CN-XD10AEG132F00-bfd5aba9,CN-XD10AEG132F00-689cb38a,CN-XD10AEG132F00-753dc83f"
+betahistine,Betahistine,盐酸倍他司汀,high,product_majority,145,0.873,4,"CN 单成分产品中文名（145/166 个产品，share=0.873，候选变体 4 个）；示例 product_id=CN-XN07CAB046A00-fec8f19c,CN-XN07CAB046A00-873f5f93,CN-XN07CAB046A00-3b5f7c95"
+bezafibrate,Bezafibrate,苯扎贝特,high,product_majority,18,0.9,3,"CN 单成分产品中文名（18/20 个产品，share=0.9，候选变体 3 个）；示例 product_id=CN-XC10ABB079A00-073fc9e5,CN-XC10ABB079A00-11e503d7,CN-XC10ABB079A00-50ac4b75"
+bifonazole,Bifonazole,联苯苄唑,high,product_majority,96,0.881,9,"CN 单成分产品中文名（96/109 个产品，share=0.881，候选变体 9 个）；示例 product_id=CN-XD01ACF355S00-635899e5,CN-XD01ACF355S00-d4c010ab,CN-XD01ACL079F00-b1728f73"
+bisacodyl,Bisacodyl,比沙可啶,high,product_majority,32,0.8,3,"CN 单成分产品中文名（32/40 个产品，share=0.8，候选变体 3 个）；示例 product_id=CN-XA06ABB086A01-78966877,CN-XA06ABB086A01-4dcac160,CN-XA06ABB086A01-c4cd3e44"
+bismuth,Bismuth,胶体果胶铋,high,product_majority,254,0.92,4,"CN 单成分产品中文名（254/276 个产品，share=0.92，候选变体 4 个）；示例 product_id=CN-XA02AXJ106E00-b4eabf09,CN-XA02AXJ106E00-2b697c9e,CN-XA02AXJ106E00-aa884206"
+bismuth-subcitrate,Bismuth Subcitrate,枸橼酸铋钾,high,product_majority,164,0.921,4,"CN 单成分产品中文名（164/178 个产品，share=0.921，候选变体 4 个）；示例 product_id=CN-XA02AXJ224A00-49a040ab,CN-XA02AXJ224A00-7708a2b6,CN-XA02AXJ224A00-edbe566c"
+bortezomib,Bortezomib,硼替佐米,high,product_majority,30,0.909,2,"CN 单成分产品中文名（30/33 个产品，share=0.909，候选变体 2 个）；示例 product_id=CN-XL01XEP043B00-efdcf341,CN-XL01XEP043B00-0ddc3934,CN-XL01XEP043B00-6619e538"
+bosentan,Bosentan,波生坦,high,override,7,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=波生坦；cn_substance_id=cn-9669e5ee2d；evidence_url=https://www.wikidata.org/wiki/Q419769
+brexpiprazole,Brexpiprazole,布瑞哌唑,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=布瑞哌唑；cn_substance_id=cn-95a2e6a57f；evidence_url=https://www.wikidata.org/wiki/Q2924764
+bromhexine,Bromhexine,盐酸溴己新,high,product_majority,126,0.962,4,"CN 单成分产品中文名（126/131 个产品，share=0.962，候选变体 4 个）；示例 product_id=CN-XR05CBX169A00-75767976,CN-XR05CBX169A00-6570013c,CN-XR05CBX169A00-e772998a"
+bumetanide,Bumetanide,布美他尼,high,product_majority,68,0.81,6,"CN 单成分产品中文名（68/84 个产品，share=0.81，候选变体 6 个）；示例 product_id=CN-XC03CAB176A00-990cf8ef,CN-XC03CAB176A00-f3bf4085,CN-XC03CAB176A00-604271c8"
+bupivacaine,Bupivacaine,盐酸布比卡因,high,product_majority,43,1.0,1,"CN 单成分产品中文名（43/43 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN01BBB164B00-b22310f3,CN-XN01BBB164B00-8a3f8d04,CN-XN01BBB164B00-a92d9d26"
+busulfan,Busulfan,白消安,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=白消安；cn_substance_id=cn-740e1c569e；evidence_url=https://www.wikidata.org/wiki/Q348922
+calamine,Calamine,炉甘石,high,product_majority,39,1.0,1,"CN 单成分产品中文名（39/39 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD11AXL173S00-9e3d9952,CN-XD11AXL173S00-3a658a59,CN-XD11AXL173S00-424ec3c2"
+calcium-acetate,Calcium Acetate,醋酸钙,high,product_majority,47,0.959,2,"CN 单成分产品中文名（47/49 个产品，share=0.959，候选变体 2 个）；示例 product_id=CN-XA12AAC067A00-179c0bfe,CN-XA12AAC067A00-495fb301,CN-XA12AAC067A00-dd7db233"
+calcium-lactate,Calcium Lactate,乳酸钙,high,product_majority,31,1.0,1,"CN 单成分产品中文名（31/31 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA12AAR052A00-f7fccb38,CN-XA12AAR052A00-43f8d938,CN-XA12AAR052A00-f1c5b068"
+canagliflozin,Canagliflozin,卡格列净,high,product_majority,27,0.931,2,"CN 单成分产品中文名（27/29 个产品，share=0.931，候选变体 2 个）；示例 product_id=CN-XA10BKK130A00-a7148f6a,CN-XA10BKK130A00-7f08a87e,CN-XA10BKK130A00-e8ce189e"
+capecitabine,Capecitabine,卡培他滨,high,product_majority,21,0.875,2,"CN 单成分产品中文名（21/24 个产品，share=0.875，候选变体 2 个）；示例 product_id=CN-XL01BCK023A00-ed84b3e2,CN-XL01BCK023A00-f705539d,CN-XL01BCK023A00-1ac37a28"
+captopril,Captopril,卡托普利,high,product_majority,263,0.953,5,"CN 单成分产品中文名（263/276 个产品，share=0.953，候选变体 5 个）；示例 product_id=CN-XC09AAK028A00-ee0ba426,CN-XC09AAK028A00-30cff0d4,CN-XC09AAK028A00-80be0142"
+carbachol,Carbachol,卡巴胆碱,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=卡巴胆碱；cn_substance_id=cn-1e7b3585f9；evidence_url=https://www.wikidata.org/wiki/Q419401
+carbamazepine,Carbamazepine,卡马西平,high,product_majority,87,0.946,3,"CN 单成分产品中文名（87/92 个产品，share=0.946，候选变体 3 个）；示例 product_id=CN-XN03AFK019A00-db5d896d,CN-XN03AFK019A00-f4119081,CN-XN03AFK019A00-37cd6f3f"
+carbimazole,Carbimazole,卡比马唑,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=卡比马唑；cn_substance_id=cn-0fd3a8a9ef；evidence_url=https://www.wikidata.org/wiki/Q414013
+carbocisteine,Carbocisteine,羧甲司坦,high,product_majority,201,0.985,2,"CN 单成分产品中文名（201/204 个产品，share=0.985，候选变体 2 个）；示例 product_id=CN-XR05CBS192A00-aceebfc1,CN-XR05CBS192A00-7da7af15,CN-XR05CBS192A00-77f69bcd"
+carbono-marcado-con-tecnecio-99mtc,Carbono Marcado Con Tecnecio (99Mtc),亚锡聚合白蛋白,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV09EAY010B00-92f2a680,CN-XV09EAY010B01-1eed6933,CN-XV09EAY010B01-8f6d51a5"
+carboplatin,Carboplatin,卡铂,high,product_majority,24,0.8,3,"CN 单成分产品中文名（24/30 个产品，share=0.8，候选变体 3 个）；示例 product_id=CN-XL01XAK014B00-a4b58f05,CN-XL01XAK014B00-dd256432,CN-XL01XAK014B00-cc1f0203"
+carmustine,Carmustine,卡莫司汀,high,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=卡莫司汀；cn_substance_id=cn-4d70c7c25f；evidence_url=https://www.wikidata.org/wiki/Q415869
+cefadroxil,Cefadroxil,头孢羟氨苄,high,product_majority,209,0.843,6,"CN 单成分产品中文名（209/248 个产品，share=0.843，候选变体 6 个）；示例 product_id=CN-XJ01DBT085A00-23b7b166,CN-XJ01DBT085A00-351a64d9,CN-XJ01DBT085A00-ec53eb6c"
+cefalexin,Cefalexin,头孢氨苄,high,product_majority,572,0.823,6,"CN 单成分产品中文名（572/695 个产品，share=0.823，候选变体 6 个）；示例 product_id=CN-XJ01DBT063A00-d694d1da,CN-XJ01DBT063A00-b7d55c1a,CN-XJ01DBT063A00-45564184"
+cefamandole,Cefamandole,头孢孟多酯钠,high,product_majority,112,0.974,2,"CN 单成分产品中文名（112/115 个产品，share=0.974，候选变体 2 个）；示例 product_id=CN-XJ01DCT077B00-786fe34e,CN-XJ01DCT077B00-c2a26e2a,CN-XJ01DCT077B00-f41f8307"
+cefazolin,Cefazolin,头孢唑林钠,high,product_majority,240,0.992,2,"CN 单成分产品中文名（240/242 个产品，share=0.992，候选变体 2 个）；示例 product_id=CN-XJ01DBT103B00-c7440ccf,CN-XJ01DBT103B00-8f3fc586,CN-XJ01DBT103B00-e4ea148b"
+cefdinir,Cefdinir,头孢地尼,high,product_majority,260,0.903,4,"CN 单成分产品中文名（260/288 个产品，share=0.903，候选变体 4 个）；示例 product_id=CN-XJ01DDT068A00-3d434359,CN-XJ01DDT068A00-62324b2f,CN-XJ01DDT068A00-9b33324e"
+cefminox,Cefminox,头孢米诺钠,high,product_majority,299,0.993,2,"CN 单成分产品中文名（299/301 个产品，share=0.993，候选变体 2 个）；示例 product_id=CN-XJ01DCT078B00-5581f22e,CN-XJ01DCT078B00-90316511,CN-XJ01DCT078B00-571ba552"
+cefonicid,Cefonicid,头孢尼西钠,high,product_majority,137,1.0,1,"CN 单成分产品中文名（137/137 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01DCT079B00-2cc8cb52,CN-XJ01DCT079B00-93d9845d,CN-XJ01DCT079B00-10d1118c"
+cefotaxime,Cefotaxime,头孢噻肟钠,high,product_majority,424,0.957,4,"CN 单成分产品中文名（424/443 个产品，share=0.957，候选变体 4 个）；示例 product_id=CN-XJ01DDT092B00-6ceadc51,CN-XJ01DDT092B00-a2947577,CN-XJ01DDT092B00-42154530"
+cefoxitin,Cefoxitin,头孢西丁钠,high,product_majority,186,1.0,1,"CN 单成分产品中文名（186/186 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01DCT102B00-230a407d,CN-XJ01DCT102B00-3f790995,CN-XJ01DCT102B00-779fce90"
+cefpirome,Cefpirome,硫酸头孢匹罗,high,product_majority,121,1.0,1,"CN 单成分产品中文名（121/121 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01DET084B00-a3b27710,CN-XJ01DET084B00-9868fd86,CN-XJ01DET084B00-af4d9a42"
+cefprozil,Cefprozil,头孢丙烯,high,product_majority,164,0.877,5,"CN 单成分产品中文名（164/187 个产品，share=0.877，候选变体 5 个）；示例 product_id=CN-XJ01DCT066A00-69bff9ae,CN-XJ01DCT066A00-71ab5ee3,CN-XJ01DCT066A00-87283cf5"
+cefradine,Cefradine,头孢拉定,high,product_majority,683,0.981,5,"CN 单成分产品中文名（683/696 个产品，share=0.981，候选变体 5 个）；示例 product_id=CN-XJ01DBT074A00-71f88af7,CN-XJ01DBT074A00-dbd3a2c0,CN-XJ01DBT074A00-443257f8"
+ceftazidime,Ceftazidime,头孢他啶,high,product_majority,526,0.929,8,"CN 单成分产品中文名（526/566 个产品，share=0.929，候选变体 8 个）；示例 product_id=CN-XJ01DDT094B00-986c927c,CN-XJ01DDT094B00-937daa0f,CN-XJ01DDT094B00-9a34cbaf"
+ceftriaxone,Ceftriaxone,头孢曲松钠,high,product_majority,501,0.958,7,"CN 单成分产品中文名（501/523 个产品，share=0.958，候选变体 7 个）；示例 product_id=CN-XJ01DDT088B00-8eb98f65,CN-XJ01DDT088B00-339ce75a,CN-XJ01DDT088B00-158a3219"
+celecoxib,Celecoxib,塞来昔布,high,product_majority,133,0.917,3,"CN 单成分产品中文名（133/145 个产品，share=0.917，候选变体 3 个）；示例 product_id=CN-XM01AHS002E00-e3d7bb6b,CN-XM01AHS002E00-f67940a0,CN-XM01AHS002E00-8dd28410"
+cetuximab,Cetuximab,西妥昔单抗,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=西妥昔单抗；cn_substance_id=cn-c6a074ee7c；evidence_url=https://www.wikidata.org/wiki/Q420296
+chenodiol,Chenodiol,鹅去氧胆酸,high,override,8,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=鹅去氧胆酸；cn_substance_id=cn-82dcefe84e；evidence_url=https://www.wikidata.org/wiki/Q419028
+chloral-hydrate,Chloral Hydrate,水合氯醛,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=水合氯醛；cn_substance_id=cn-44f70bfb12；evidence_url=https://www.wikidata.org/wiki/Q412340
+chloramphenicol,Chloramphenicol,氯霉素,high,product_majority,377,0.987,3,"CN 单成分产品中文名（377/382 个产品，share=0.987，候选变体 3 个）；示例 product_id=CN-XD06AXL232T00-e4d60693,CN-XD06AXL232T00-89b0f1a6,CN-XG01AAF397A00-57dc77e6"
+chlorpromazine,Chlorpromazine,盐酸氯丙嗪,high,product_majority,118,1.0,1,"CN 单成分产品中文名（118/118 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05AAL192A00-1bada865,CN-XN05AAL192A00-0d62d5d2,CN-XN05AAL192A00-2f1ccbaa"
+chlorpropamide,Chlorpropamide,氯磺丙脲,high,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=氯磺丙脲；cn_substance_id=cn-738d15fd02；evidence_url=https://www.wikidata.org/wiki/Q1075324
+chlorzoxazone,Chlorzoxazone,氯唑沙宗,high,product_majority,52,0.981,2,"CN 单成分产品中文名（52/53 个产品，share=0.981，候选变体 2 个）；示例 product_id=CN-XM03BBF399A00-076df368,CN-XM03BBF399A00-5e5d8a69,CN-XM03BBF399A00-351981b0"
+chorionic-gonadotrophin,Chorionic Gonadotrophin,绒促性素,high,product_majority,68,1.0,1,"CN 单成分产品中文名（68/68 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG03GAR036B00-e9677f40,CN-XG03GAR036B00-f122e862,CN-XG03GAR036B00-42aa4f39"
+ciclopirox,Ciclopirox,环吡酮胺,high,product_majority,45,0.9,3,"CN 单成分产品中文名（45/50 个产品，share=0.9，候选变体 3 个）；示例 product_id=CN-XD01AEH035F00-395ed3cc,CN-XD01AEH035F00-cec2e299,CN-XD01AEH035F00-2fbadbbc"
+cilostazol,Cilostazol,西洛他唑,high,product_majority,50,0.862,4,"CN 单成分产品中文名（50/58 个产品，share=0.862，候选变体 4 个）；示例 product_id=CN-XB01ACX010A00-c81276c8,CN-XB01ACX010A00-c6de6dd1,CN-XB01ACX010A00-29c350c1"
+cimetidine,Cimetidine,西咪替丁,high,product_majority,420,0.968,8,"CN 单成分产品中文名（420/434 个产品，share=0.968，候选变体 8 个）；示例 product_id=CN-XA02BAF533E00-0c452962,CN-XA02BAF533E00-babb5fd5,CN-XA02BAF533E00-15aace3e"
+cinacalcet,Cinacalcet,盐酸西那卡塞,high,product_majority,39,0.907,2,"CN 单成分产品中文名（39/43 个产品，share=0.907，候选变体 2 个）；示例 product_id=CN-XH05BXX224A00-eace3a9f,CN-XH05BXX224A00-b1c481e1,CN-XH05BXX224A00-c9430882"
+cinnarizine,Cinnarizine,桂利嗪,high,product_majority,55,0.982,2,"CN 单成分产品中文名（55/56 个产品，share=0.982，候选变体 2 个）；示例 product_id=CN-XN07CAG125A00-c80a4497,CN-XN07CAG125A00-fb6a7f47,CN-XN07CAG125A00-a893d5d4"
+cisatracurium,Cisatracurium,苯磺顺阿曲库铵,high,product_majority,76,0.974,2,"CN 单成分产品中文名（76/78 个产品，share=0.974，候选变体 2 个）；示例 product_id=CN-XM03ACB211B00-1cfa7aa3,CN-XM03ACB211B00-10d67591,CN-XM03ACB211B00-ded75d42"
+cisplatin,Cisplatin,顺铂,high,product_majority,31,0.861,3,"CN 单成分产品中文名（31/36 个产品，share=0.861，候选变体 3 个）；示例 product_id=CN-XL01XAS166B00-b545d994,CN-XL01XAS166B00-f08b82de,CN-XL01XAS166B00-27bc14e2"
+citicoline,Citicoline,胞磷胆碱钠,high,product_majority,281,0.831,20,"CN 单成分产品中文名（281/338 个产品，share=0.831，候选变体 20 个）；示例 product_id=CN-XN07XXB025A00-1a44b527,CN-XN07XXB025A00-3c554d88,CN-XN07XXB025A00-0257b915"
+cladribine,Cladribine,克拉屈滨,high,override,3,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=克拉屈滨；cn_substance_id=cn-a923a29259；evidence_url=https://www.wikidata.org/wiki/Q414030
+clobazam,Clobazam,氯巴占,high,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=氯巴占；cn_substance_id=cn-e62975d45e；evidence_url=https://www.wikidata.org/wiki/Q412164
+clofarabine,Clofarabine,氯法拉滨,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=氯法拉滨；cn_substance_id=cn-b6d0f50916；evidence_url=https://www.wikidata.org/wiki/Q5134875
+clofazimine,Clofazimine,氯法齐明,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=氯法齐明；cn_substance_id=cn-c30ec98ef0；evidence_url=https://www.wikidata.org/wiki/Q418611
+clomipramine,Clomipramine,盐酸氯米帕明,high,product_majority,12,1.0,1,"CN 单成分产品中文名（12/12 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN06AAL237A00-b3273d9d,CN-XN06AAL237A00-7f959bf0,CN-XN06AAL237A00-2239ab1d"
+clonazepam,Clonazepam,氯硝西泮,high,product_majority,29,0.853,2,"CN 单成分产品中文名（29/34 个产品，share=0.853，候选变体 2 个）；示例 product_id=CN-XN03AEL250A00-30f0ead1,CN-XN03AEL250A00-4e5449aa,CN-XN03AEL250A00-bbaac48d"
+clopidogrel,Clopidogrel,硫酸氢氯吡格雷,high,product_majority,168,0.862,4,"CN 单成分产品中文名（168/195 个产品，share=0.862，候选变体 4 个）；示例 product_id=CN-XB01ACL190A00-0043647f,CN-XB01ACL190A00-54f72b8b,CN-XB01ACL190A00-b0037732"
+cloxacillin,Cloxacillin,氯唑西林钠,high,product_majority,105,0.981,2,"CN 单成分产品中文名（105/107 个产品，share=0.981，候选变体 2 个）；示例 product_id=CN-XJ01CFL253B00-8f9f9bd1,CN-XJ01CFL253B00-a7290227,CN-XJ01CFL253B00-6ba5e32f"
+clozapine,Clozapine,氯氮平,high,product_majority,65,1.0,1,"CN 单成分产品中文名（65/65 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05AHL195A00-d68540e6,CN-XN05AHL195A00-96ca3989,CN-XN05AHL195A00-63ecb7d8"
+colchicine,Colchicine,秋水仙碱,high,product_majority,41,1.0,1,"CN 单成分产品中文名（41/41 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM04ACQ079A00-a4fd1c92,CN-XM04ACQ079A00-2d1e797a,CN-XM04ACQ079A00-5dd44536"
+crisaborole,Crisaborole,克立硼罗,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=克立硼罗；cn_substance_id=cn-196f3b69d9；evidence_url=https://www.wikidata.org/wiki/Q21098894
+cyclandelate,Cyclandelate,环扁桃酯,high,override,11,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=环扁桃酯；cn_substance_id=cn-64e2dd7aa5；evidence_url=https://www.wikidata.org/wiki/Q1147309
+cyclophosphamide,Cyclophosphamide,环磷酰胺,high,product_majority,30,0.909,2,"CN 单成分产品中文名（30/33 个产品，share=0.909，候选变体 2 个）；示例 product_id=CN-XL01AAF306A00-25d801f0,CN-XL01AAF306A00-f9d648c5,CN-XL01AAF306A00-42ad2de0"
+cyproheptadine,Cyproheptadine,盐酸赛庚啶,high,product_majority,34,0.944,2,"CN 单成分产品中文名（34/36 个产品，share=0.944，候选变体 2 个）；示例 product_id=CN-XD04AAS011F00-30d312de,CN-XD04AAS011F00-723b9956,CN-XD04AAS011F00-b51ee1a3"
+dabigatran,Dabigatran,达比加群酯,high,product_majority,144,0.917,2,"CN 单成分产品中文名（144/157 个产品，share=0.917，候选变体 2 个）；示例 product_id=CN-XB01AED251E00-406e8f92,CN-XB01AED251E00-0074223b,CN-XB01AED251E00-07a1255a"
+dacarbazine,Dacarbazine,达卡巴嗪,high,override,13,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=达卡巴嗪；cn_substance_id=cn-3dfef654e6；evidence_url=https://www.wikidata.org/wiki/Q416975
+dantroleno,Dantroleno,丹曲林钠,high,product_majority,4,1.0,1,"CN 单成分产品中文名（4/4 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM03CAD017B00-6d413ae3,CN-XM03CAD017B00-f15ad735,CN-XM03CAD017E00-31ab9b97"
+dapagliflozin,Dapagliflozin,达格列净,high,product_majority,93,0.912,2,"CN 单成分产品中文名（93/102 个产品，share=0.912，候选变体 2 个）；示例 product_id=CN-XA10BKD256A00-1a431b9e,CN-XA10BKD256A00-2615f0f4,CN-XA10BKD256A00-7284dcc8"
+dapoxetine,Dapoxetine,盐酸达泊西汀,high,product_majority,270,0.985,2,"CN 单成分产品中文名（270/274 个产品，share=0.985，候选变体 2 个）；示例 product_id=CN-XG04BED214A00-30d4631c,CN-XG04BED214A00-6b2f1a9b,CN-XG04BED214A00-a8895e41"
+dapsone,Dapsone,氨苯砜,high,product_majority,6,1.0,1,"CN 单成分产品中文名（6/6 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ04BAA105A00-722e1ad8,CN-XJ04BAA105A00-986ecbd2,CN-XJ04BAA105A00-267882f4"
+daptomycin,Daptomycin,达托霉素,high,override,20,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=达托霉素；cn_substance_id=cn-12c97b6dab；evidence_url=https://www.wikidata.org/wiki/Q418747
+dasatinib,Dasatinib,达沙替尼,high,product_majority,53,0.93,2,"CN 单成分产品中文名（53/57 个产品，share=0.93，候选变体 2 个）；示例 product_id=CN-XL01EAD246A00-bd60b4dd,CN-XL01EAD246A00-e013b5bd,CN-XL01EAD246A00-be17c3de"
+decitabine,Decitabine,地西他滨,high,override,27,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=地西他滨；cn_substance_id=cn-dcc89cd477；evidence_url=https://www.wikidata.org/wiki/Q1181878
+deferasirox,Deferasirox,地拉罗司,high,override,21,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=地拉罗司；cn_substance_id=cn-24a7f71876；evidence_url=https://www.wikidata.org/wiki/Q5251502
+deferiprone,Deferiprone,去铁酮,high,override,3,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=去铁酮；cn_substance_id=cn-dfad5dd77f；evidence_url=https://www.wikidata.org/wiki/Q749664
+deferoxamine,Deferoxamine,甲磺酸去铁胺,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲磺酸去铁胺；cn_substance_id=cn-7fdc215411；evidence_url=https://www.wikidata.org/wiki/Q419618
+desloratadine,Desloratadine,地氯雷他定,high,product_majority,191,0.845,5,"CN 单成分产品中文名（191/226 个产品，share=0.845，候选变体 5 个）；示例 product_id=CN-XR06AXD078A00-616d82fd,CN-XR06AXD078A00-9e2c4c17,CN-XR06AXD078A00-7c36c259"
+dexmedetomidine,Dexmedetomidine,盐酸右美托咪定,high,product_majority,121,0.984,2,"CN 单成分产品中文名（121/123 个产品，share=0.984，候选变体 2 个）；示例 product_id=CN-XN05CMY189B00-983ef4df,CN-XN05CMY189B00-02a4af18,CN-XN05CMY189B00-51aa7eee"
+dexmethylphenidate,Dexmethylphenidate,盐酸右哌甲酯,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸右哌甲酯；cn_substance_id=cn-615180d8de；evidence_url=https://www.wikidata.org/wiki/Q1207210
+dexrazoxane,Dexrazoxane,右雷佐生,high,override,14,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=右雷佐生；cn_substance_id=cn-0a44e170e9；evidence_url=https://www.wikidata.org/wiki/Q524995
+dextran-70,Dextran 70,润齐,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XS01XAY196G01-9c2dda75,CN-XS01XAY196G01-0fcff7cd,CN-XS01XAY196G01-0be1018e"
+diazepam,Diazepam,地西泮,high,product_majority,139,1.0,1,"CN 单成分产品中文名（139/139 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05BAD088A00-11fd0d98,CN-XN05BAD088A00-cba9638a,CN-XN05BAD088A00-6008ba0e"
+didanosine,Didanosine,去羟肌苷,high,override,5,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=去羟肌苷；cn_substance_id=cn-fd1b96a06e；evidence_url=https://www.wikidata.org/wiki/Q422606
+dienogest,Dienogest,地诺孕素,high,override,24,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=地诺孕素；cn_substance_id=cn-b72c0e088f；evidence_url=https://www.wikidata.org/wiki/Q139160
+diethylstilbestrol,Diethylstilbestrol,己烯雌酚,high,product_majority,16,1.0,1,"CN 单成分产品中文名（16/16 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG03CBJ015A00-7576b89c,CN-XG03CBJ015A00-d7284c95,CN-XG03CBJ015A00-cf2a306d"
+digitoxin,Digitoxin,洋地黄毒苷,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=洋地黄毒苷；cn_substance_id=cn-c3a4c7cb62；evidence_url=https://www.wikidata.org/wiki/Q423890
+digoxin,Digoxin,地高辛,high,product_majority,62,0.984,2,"CN 单成分产品中文名（62/63 个产品，share=0.984，候选变体 2 个）；示例 product_id=CN-XC01AAD072A00-5168d2e6,CN-XC01AAD072A00-a1f7e261,CN-XC01AAD072A00-3ae22ba1"
+dimenhydrinate,Dimenhydrinate,茶苯海明,high,product_majority,43,0.915,2,"CN 单成分产品中文名（43/47 个产品，share=0.915，候选变体 2 个）；示例 product_id=CN-XR06AAC010A00-032e4d0d,CN-XR06AAC010A00-48ba16e3,CN-XR06AAC010A00-19650b4f"
+dimeticone,Dimeticone,二甲硅油,high,product_majority,23,1.0,1,"CN 单成分产品中文名（23/23 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA03AXE020A00-d7d952c3,CN-XA03AXE020A00-a8d9385a,CN-XA03AXE020A00-f3c02c7c"
+diosmin,Diosmin,地奥司明,high,override,10,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=地奥司明；cn_substance_id=cn-1dbd255f24；evidence_url=https://www.wikidata.org/wiki/Q2607865
+diphenhydramine,Diphenhydramine,盐酸苯海拉明,high,product_majority,78,0.918,4,"CN 单成分产品中文名（78/85 个产品，share=0.918，候选变体 4 个）；示例 product_id=CN-XR06AAB058A00-9edf1669,CN-XR06AAB058A00-6ad4e8b9,CN-XR06AAB058A00-a27c0164"
+diphenoxylate,Diphenoxylate,地芬诺酯,high,product_majority,26,1.0,1,"CN 单成分产品中文名（26/26 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA07DAF230A00-a427eb63,CN-XA07DAF230A00-bd7169e8,CN-XA07DAF230A00-f675710b"
+dipyridamole,Dipyridamole,双嘧达莫,high,product_majority,124,0.954,3,"CN 单成分产品中文名（124/130 个产品，share=0.954，候选变体 3 个）；示例 product_id=CN-XB01ACS124A00-1bf045e3,CN-XB01ACS124A00-1f8dbf4b,CN-XB01ACS124A00-721baa1f"
+dobutamine,Dobutamine,盐酸多巴酚丁胺,high,product_majority,94,0.949,3,"CN 单成分产品中文名（94/99 个产品，share=0.949，候选变体 3 个）；示例 product_id=CN-XC01CAD163B00-21a66a73,CN-XC01CAD163B00-f146060e,CN-XC01CAD163B00-542c2fb0"
+domiphen,Domiphen,度米芬,high,product_majority,45,1.0,1,"CN 单成分产品中文名（45/45 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA01ABD152A00-0624ad78,CN-XA01ABD152A00-2b340f08,CN-XA01ABD152A00-cf486c8b"
+domperidone,Domperidone,多潘立酮,high,product_majority,155,0.917,7,"CN 单成分产品中文名（155/169 个产品，share=0.917，候选变体 7 个）；示例 product_id=CN-XA03FAD173A00-c310b736,CN-XA03FAD173A00-82915a94,CN-XA03FAD173A00-57b8b9f7"
+dopamine,Dopamine,阿斯克丁,high,product_majority,6,1.0,1,"CN 单成分产品中文名（6/6 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC01CAD162B00-cae21bd0,CN-XC01CAD162B00-256c29a6,CN-XC01CAD162B01-eb1379bb"
+doravirine,Doravirine,多拉韦林,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=多拉韦林；cn_substance_id=cn-c7c59a5ee5；evidence_url=https://www.wikidata.org/wiki/Q6885419
+doxepin,Doxepin,盐酸多塞平,high,product_majority,17,0.81,3,"CN 单成分产品中文名（17/21 个产品，share=0.81，候选变体 3 个）；示例 product_id=CN-XD11AXD175F00-4414b67d,CN-XD11AXD175F00-21318ccc,CN-XD11AXD175F00-f3624afc"
+doxorubicin,Doxorubicin,盐酸多柔比星,high,product_majority,9,1.0,1,"CN 单成分产品中文名（9/9 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL01DBD174B00-737e0042,CN-XL01DBD174B00-1e7bed8b,CN-XL01DBD174B00-639ff343"
+doxycycline,Doxycycline,盐酸多西环素,high,product_majority,112,0.926,5,"CN 单成分产品中文名（112/121 个产品，share=0.926，候选变体 5 个）；示例 product_id=CN-XJ01AAD193A00-b1043e36,CN-XJ01AAD193A00-60479935,CN-XJ01AAD193A00-0f8435c3"
+droperidol,Droperidol,氟哌利多,high,override,13,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=氟哌利多；cn_substance_id=cn-cf11f73b9f；evidence_url=https://www.wikidata.org/wiki/Q174259
+duloxetine,Duloxetine,盐酸度洛西汀,high,product_majority,97,0.874,3,"CN 单成分产品中文名（97/111 个产品，share=0.874，候选变体 3 个）；示例 product_id=CN-XN06AXD151A01-dde66cf3,CN-XN06AXD151A01-2b1e3a46,CN-XN06AXD151E00-e2bde85e"
+dutasteride,Dutasteride,度他雄胺,high,product_majority,20,0.909,2,"CN 单成分产品中文名（20/22 个产品，share=0.909，候选变体 2 个）；示例 product_id=CN-XG04CBD247E00-213407ef,CN-XG04CBD247E00-291bf4b2,CN-XG04CBD247E00-5cc670cd"
+dydrogesterone,Dydrogesterone,地屈孕酮,high,product_majority,8,0.889,2,"CN 单成分产品中文名（8/9 个产品，share=0.889，候选变体 2 个）；示例 product_id=CN-XG03DBD084A00-3ead0195,CN-XG03DBD084A00-0ac3d881,CN-XG03DBD084A00-53fabc4d"
+econazole,Econazole,硝酸益康唑,high,product_majority,126,1.0,1,"CN 单成分产品中文名（126/126 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD01ACY162F00-70dec2dd,CN-XD01ACY162F00-3283e434,CN-XD01ACY162F00-ab60d541"
+eculizumab,Eculizumab,依库珠单抗,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=依库珠单抗；cn_substance_id=cn-24c4e7262c；evidence_url=https://www.wikidata.org/wiki/Q421617
+edaravone,Edaravone,依达拉奉,high,product_majority,88,0.822,4,"CN 单成分产品中文名（88/107 个产品，share=0.822，候选变体 4 个）；示例 product_id=CN-XN07XXY066A00-8c95c25b,CN-XN07XXY066B00-6a0e16fe,CN-XN07XXY066B00-9e311544"
+efavirenz,Efavirenz,依非韦伦,high,product_majority,10,1.0,1,"CN 单成分产品中文名（10/10 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ05AGY068A00-afc9b48b,CN-XJ05AGY068A00-456ce261,CN-XJ05AGY068A00-0b3b9bed"
+empagliflozin,Empagliflozin,恩格列净,high,product_majority,174,0.961,2,"CN 单成分产品中文名（174/181 个产品，share=0.961，候选变体 2 个）；示例 product_id=CN-XA10BKE079A00-4f87a536,CN-XA10BKE079A00-6285e20b,CN-XA10BKE079A00-01dbbd98"
+enoxaparin,Enoxaparin,依诺肝素钠,high,product_majority,96,0.889,3,"CN 单成分产品中文名（96/108 个产品，share=0.889，候选变体 3 个）；示例 product_id=CN-XB01ABY273B00-918145e2,CN-XB01ABY273B00-6bb49e04,CN-XB01ABY273B00-cd853c8b"
+entecavir,Entecavir,恩替卡韦,high,product_majority,195,0.956,4,"CN 单成分产品中文名（195/204 个产品，share=0.956，候选变体 4 个）；示例 product_id=CN-XJ05AFE013A00-80350cba,CN-XJ05AFE013A00-2aef06c6,CN-XJ05AFE013A00-a9983d6e"
+enzalutamide,Enzalutamide,恩扎卢胺,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=恩扎卢胺；cn_substance_id=cn-203174c7e2；evidence_url=https://www.wikidata.org/wiki/Q1996756
+ephedrine,Ephedrine,盐酸麻黄碱,high,product_majority,92,0.929,2,"CN 单成分产品中文名（92/99 个产品，share=0.929，候选变体 2 个）；示例 product_id=CN-XC01CAM001B00-ab648537,CN-XC01CAM001B00-fe3b6e38,CN-XC01CAM001B00-260fb5e1"
+epinephrine,Epinephrine,盐酸肾上腺素,high,product_majority,39,1.0,1,"CN 单成分产品中文名（39/39 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC01CAS071B00-3520bc60,CN-XC01CAS071B00-5bfa3134,CN-XC01CAS071B00-64365f73"
+epirubicin,Epirubicin,盐酸表柔比星,high,product_majority,24,0.857,3,"CN 单成分产品中文名（24/28 个产品，share=0.857，候选变体 3 个）；示例 product_id=CN-XL01DBB116B00-a6277627,CN-XL01DBB116B00-f67f2828,CN-XL01DBB116B00-f7f3b64a"
+eprosartan,Eprosartan,依普沙坦,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=依普沙坦；cn_substance_id=cn-5439e5570c；evidence_url=https://www.wikidata.org/wiki/Q784717
+erdosteine,Erdosteine,厄多司坦,high,override,27,1.0,5,cn_inn_overrides.csv 显式映射：zh_name=厄多司坦；cn_substance_id=cn-0c9516b138；evidence_url=https://www.wikidata.org/wiki/Q3731252
+erlotinib,Erlotinib,盐酸厄洛替尼,high,product_majority,29,0.806,2,"CN 单成分产品中文名（29/36 个产品，share=0.806，候选变体 2 个）；示例 product_id=CN-XL01EBE006A00-f43ba064,CN-XL01EBE006A00-8137c14e,CN-XL01EBE006A00-c56fef25"
+escitalopram,Escitalopram,草酸艾司西酞普兰,high,product_majority,107,0.964,2,"CN 单成分产品中文名（107/111 个产品，share=0.964，候选变体 2 个）；示例 product_id=CN-XN06ABA225A00-29dbc087,CN-XN06ABA225A00-2a638a26,CN-XN06ABA225A00-91529cc1"
+esmolol,Esmolol,盐酸艾司洛尔,high,product_majority,63,0.863,4,"CN 单成分产品中文名（63/73 个产品，share=0.863，候选变体 4 个）；示例 product_id=CN-XC07ABA086B00-fae38afa,CN-XC07ABA086B00-8a93825a,CN-XC07ABA086B00-55d9c510"
+estazolam,Estazolam,艾司唑仑,high,product_majority,104,1.0,1,"CN 单成分产品中文名（104/104 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05CDA087A00-b03f5a04,CN-XN05CDA087A00-7d514a8e,CN-XN05CDA087A00-ac45e2ec"
+estriol,Estriol,雌三醇,high,override,3,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=雌三醇；cn_substance_id=cn-1219708347；evidence_url=https://www.wikidata.org/wiki/Q409721
+eszopiclone,Eszopiclone,右佐匹克隆,high,product_majority,20,0.87,2,"CN 单成分产品中文名（20/23 个产品，share=0.87，候选变体 2 个）；示例 product_id=CN-XN05CFY202A00-8fba0ebd,CN-XN05CFY202A00-76408958,CN-XN05CFY202A00-44c5f40c"
+etamsylate,Etamsylate,酚磺乙胺,high,product_majority,139,0.914,6,"CN 单成分产品中文名（139/152 个产品，share=0.914，候选变体 6 个）；示例 product_id=CN-XB02BXF031B00-287a3980,CN-XB02BXF031B00-96e5e5cf,CN-XB02BXF031B00-d15992e9"
+ethacrynic-acid,Ethacrynic Acid,依他尼酸,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=依他尼酸；cn_substance_id=cn-6b071cf7cf；evidence_url=https://www.wikidata.org/wiki/Q418571
+ethambutol,Ethambutol,盐酸乙胺丁醇,high,product_majority,115,1.0,1,"CN 单成分产品中文名（115/115 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ04AKY105A00-11796c47,CN-XJ04AKY105A00-b96ae2e0,CN-XJ04AKY105A00-13390dda"
+etodolac,Etodolac,依托度酸,high,override,23,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=依托度酸；cn_substance_id=cn-ade4569115；evidence_url=https://www.wikidata.org/wiki/Q2465218
+etoricoxib,Etoricoxib,依托考昔,high,product_majority,50,0.862,2,"CN 单成分产品中文名（50/58 个产品，share=0.862，候选变体 2 个）；示例 product_id=CN-XM01AHY094A00-903bc16b,CN-XM01AHY094A00-b8ea56fd,CN-XM01AHY094A00-8b83396f"
+everolimus,Everolimus,依维莫司,high,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=依维莫司；cn_substance_id=cn-ce8ad821d2；evidence_url=https://www.wikidata.org/wiki/Q421052
+exenatide,Exenatide,艾塞那肽,high,product_majority,8,0.8,2,"CN 单成分产品中文名（8/10 个产品，share=0.8，候选变体 2 个）；示例 product_id=CN-XA10BJA085B00-02f1b020,CN-XA10BJA085B00-e5de5432,CN-XA10BJA085B00-29fa0990"
+ezetimibe,Ezetimibe,依折麦布,high,product_majority,83,0.883,3,"CN 单成分产品中文名（83/94 个产品，share=0.883，候选变体 3 个）；示例 product_id=CN-XC10AXY097A00-843c09af,CN-XC10AXY097A00-322e859d,CN-XC10AXY097A00-0b3f52fd"
+favipiravir,Favipiravir,法维拉韦,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=法维拉韦；cn_substance_id=cn-fe7746c223；evidence_url=https://www.wikidata.org/wiki/Q16934561
+febuxostat,Febuxostat,非布司他,high,product_majority,297,1.0,1,"CN 单成分产品中文名（297/297 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM04AAF670A00-30237913,CN-XM04AAF670A00-03b8fc6d,CN-XM04AAF670A00-e7cdc2ff"
+felodipine,Felodipine,非洛地平,high,product_majority,98,0.803,6,"CN 单成分产品中文名（98/122 个产品，share=0.803，候选变体 6 个）；示例 product_id=CN-XC08CAF017A00-d914ef91,CN-XC08CAF017A00-3c4b3ca5,CN-XC08CAF017A00-68a71f57"
+fenbufen,Fenbufen,芬布芬,high,product_majority,84,1.0,1,"CN 单成分产品中文名（84/84 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM01AEF026A00-1b23cdd3,CN-XM01AEF026A00-45139781,CN-XM01AEF026A00-c6ca54d8"
+fenofibrate,Fenofibrate,非诺贝特,high,product_majority,111,0.822,4,"CN 单成分产品中文名（111/135 个产品，share=0.822，候选变体 4 个）；示例 product_id=CN-XC10ABF021A00-60d83197,CN-XC10ABF021A00-1ff71d35,CN-XC10ABF021A00-fe4ff514"
+ferric-ammonium-citrate,Ferric Ammonium Citrate,枸橼酸铁铵,high,product_majority,19,0.905,2,"CN 单成分产品中文名（19/21 个产品，share=0.905，候选变体 2 个）；示例 product_id=CN-XB03AEF297K00-a595f691,CN-XB03AEF297K00-0fc90cf6,CN-XB03AEF297K00-249dcb8d"
+flucloxacillin,Flucloxacillin,氟氯西林钠,high,product_majority,69,0.831,6,"CN 单成分产品中文名（69/83 个产品，share=0.831，候选变体 6 个）；示例 product_id=CN-XJ01CFF076B00-ae5e5ee6,CN-XJ01CFF076B00-185df120,CN-XJ01CFF076B00-fe9e7268"
+flucytosine,Flucytosine,氟胞嘧啶,high,product_majority,9,1.0,1,"CN 单成分产品中文名（9/9 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ02AXF062A00-5ed3221c,CN-XJ02AXF062A00-36234b2b,CN-XJ02AXF062A00-85a691f5"
+flumazenil,Flumazenil,氟马西尼,high,product_majority,70,0.921,2,"CN 单成分产品中文名（70/76 个产品，share=0.921，候选变体 2 个）；示例 product_id=CN-XV03ABF079B00-fa24a292,CN-XV03ABF079B00-cf37596d,CN-XV03ABF079B00-434ae1b4"
+flunarizine,Flunarizine,盐酸氟桂利嗪,high,product_majority,293,0.948,6,"CN 单成分产品中文名（293/309 个产品，share=0.948，候选变体 6 个）；示例 product_id=CN-XN07CAF072A00-10675b64,CN-XN07CAF072A00-7c761773,CN-XN07CAF072A00-5bb3790f"
+fluocinolone-acetonide,Fluocinolone Acetonide,醋酸氟轻松,high,product_majority,77,0.906,2,"CN 单成分产品中文名（77/85 个产品，share=0.906，候选变体 2 个）；示例 product_id=CN-XD07ACF091F00-0be46149,CN-XD07ACF091F00-7642860b,CN-XD07ACF091F00-6c0f8f45"
+fluorouracil,Fluorouracil,氟尿嘧啶,high,product_majority,75,0.815,9,"CN 单成分产品中文名（75/92 个产品，share=0.815，候选变体 9 个）；示例 product_id=CN-XD06BAF082F00-b7774e7f,CN-XD06BAF082F00-bb32a0d4,CN-XL01BCF082A00-eea97a4c"
+flutrimazole,Flutrimazole,氟曲马唑,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=氟曲马唑；cn_substance_id=cn-73c18b002d；evidence_url=https://www.wikidata.org/wiki/Q5462984
+fluvoxamine,Fluvoxamine,马来酸氟伏沙明,high,product_majority,46,0.958,2,"CN 单成分产品中文名（46/48 个产品，share=0.958，候选变体 2 个）；示例 product_id=CN-XN06ABF071A00-a0f460e0,CN-XN06ABF071A00-48f64872,CN-XN06ABF071A00-2ef91a2a"
+folic-acid,Folic Acid,叶酸,high,product_majority,131,0.923,2,"CN 单成分产品中文名（131/142 个产品，share=0.923，候选变体 2 个）；示例 product_id=CN-XB03BBF571B00-60ed813b,CN-XB03BBF571B00-c7f5a674,CN-XB03BBF571B00-eef7d4ac"
+formoterol,Formoterol,富马酸福莫特罗,high,product_majority,36,0.818,5,"CN 单成分产品中文名（36/44 个产品，share=0.818，候选变体 5 个）；示例 product_id=CN-XR03ACF104A00-1358c9f9,CN-XR03ACF104L02-4f69ef18,CN-XR03ACF104L02-542cce3e"
+fosinopril,Fosinopril,福辛普利钠,high,product_majority,10,0.833,2,"CN 单成分产品中文名（10/12 个产品，share=0.833，候选变体 2 个）；示例 product_id=CN-XC09AAF106A00-259b47f6,CN-XC09AAF106A00-c5f86b09,CN-XC09AAF106A00-65b84993"
+fulvestrant,Fulvestrant,氟维司群,high,override,20,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=氟维司群；cn_substance_id=cn-9ce9118a93；evidence_url=https://www.wikidata.org/wiki/Q5508491
+furazolidone,Furazolidone,呋喃唑酮,high,product_majority,268,1.0,1,"CN 单成分产品中文名（268/268 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01XEF053A00-298c7b36,CN-XJ01XEF053A00-f7459417,CN-XJ01XEF053A00-cf6acbf0"
+furosemide,Furosemide,呋塞米,high,product_majority,150,0.987,2,"CN 单成分产品中文名（150/152 个产品，share=0.987，候选变体 2 个）；示例 product_id=CN-XC03CAF056A00-61b1b5de,CN-XC03CAF056A00-ed3445f5,CN-XC03CAF056A00-dbeccd6b"
+gabapentin,Gabapentin,加巴喷丁,high,product_majority,53,0.898,3,"CN 单成分产品中文名（53/59 个产品，share=0.898，候选变体 3 个）；示例 product_id=CN-XN03AXJ019A00-cf150dc5,CN-XN03AXJ019A00-dd8ed0f1,CN-XN03AXJ019E00-a9fa5d97"
+gadobutrol,Gadobutrol,钆布醇,high,override,35,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=钆布醇；cn_substance_id=cn-638370e650；evidence_url=https://www.wikidata.org/wiki/Q2570844
+gadoteric-acid,Gadoteric Acid,钆特酸葡胺,high,product_majority,38,0.905,2,"CN 单成分产品中文名（38/42 个产品，share=0.905，候选变体 2 个）；示例 product_id=CN-XV08CAG004B00-f01e7c82,CN-XV08CAG004B00-e8cab28e,CN-XV08CAG004B00-b0005275"
+galantamine,Galantamine,氢溴酸加兰他敏,high,product_majority,39,0.929,4,"CN 单成分产品中文名（39/42 个产品，share=0.929，候选变体 4 个）；示例 product_id=CN-XN06DAJ021A00-7580d60b,CN-XN06DAJ021A00-483290f9,CN-XN06DAJ021A00-5475ef7a"
+gefitinib,Gefitinib,吉非替尼,high,product_majority,28,0.875,2,"CN 单成分产品中文名（28/32 个产品，share=0.875，候选变体 2 个）；示例 product_id=CN-XL01EBJ008A00-f9e6b2d9,CN-XL01EBJ008A00-ebb2e938,CN-XL01EBJ008A00-b27a77bd"
+gemcitabine,Gemcitabine,盐酸吉西他滨,high,product_majority,67,0.893,4,"CN 单成分产品中文名（67/75 个产品，share=0.893，候选变体 4 个）；示例 product_id=CN-XL01BCJ011B00-4d2f838e,CN-XL01BCJ011B00-cd5b6e60,CN-XL01BCJ011B00-97842b69"
+gemfibrozil,Gemfibrozil,吉非罗齐,high,product_majority,32,1.0,1,"CN 单成分产品中文名（32/32 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC10ABJ007E00-7300e00b,CN-XC10ABJ007E00-2736bb73,CN-XC10ABJ007E00-1a3d6ede"
+gentamicin,Gentamicin,硫酸庆大霉素,high,product_majority,541,0.884,11,"CN 单成分产品中文名（541/612 个产品，share=0.884，候选变体 11 个）；示例 product_id=CN-XJ01GBQ072A00-82fed22a,CN-XJ01GBQ072A00-591bf9c9,CN-XJ01GBQ072A00-912cc1eb"
+glatiramer,Glatiramer,醋酸格拉替雷,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=醋酸格拉替雷；cn_substance_id=cn-c04acbe088；evidence_url=https://www.wikidata.org/wiki/Q418274
+glibenclamide,Glibenclamide,格列本脲,high,product_majority,45,1.0,1,"CN 单成分产品中文名（45/45 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA10BBG065A00-8928a09a,CN-XA10BBG065A00-63b8d6ae,CN-XA10BBG065A00-2151bcd9"
+gliclazide,Gliclazide,格列齐特,high,product_majority,202,0.922,4,"CN 单成分产品中文名（202/219 个产品，share=0.922，候选变体 4 个）；示例 product_id=CN-XA10BBG070A00-ee1e8436,CN-XA10BBG070A00-a362c379,CN-XA10BBG070A00-2c337226"
+glipizide,Glipizide,格列吡嗪,high,product_majority,169,0.88,11,"CN 单成分产品中文名（169/192 个产品，share=0.88，候选变体 11 个）；示例 product_id=CN-XA10BBG067A00-7f337881,CN-XA10BBG067A00-803d501e,CN-XA10BBG067A00-95bdea92"
+gliquidone,Gliquidone,格列喹酮,high,product_majority,29,0.806,3,"CN 单成分产品中文名（29/36 个产品，share=0.806，候选变体 3 个）；示例 product_id=CN-XA10BBG068A00-0796ea7e,CN-XA10BBG068A00-9e7298d4,CN-XA10BBG068A00-7a4f7f07"
+glycerol,Glycerol,开塞露,high,product_majority,122,0.819,4,"CN 单成分产品中文名（122/149 个产品，share=0.819，候选变体 4 个）；示例 product_id=CN-XA06AGK031S00-c2383a1d,CN-XA06AGK031S00-c5db493b,CN-XA06AGK031S00-2b41d7d0"
+glycine,Glycine,甘氨酸,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=甘氨酸；cn_substance_id=cn-01dfd5f2d1；evidence_url=https://www.wikidata.org/wiki/Q620730
+golimumab,Golimumab,戈利木单抗,high,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=戈利木单抗；cn_substance_id=cn-af49c8265a；evidence_url=https://www.wikidata.org/wiki/Q413879
+goserelin,Goserelin,诺雷得,high,product_majority,4,1.0,1,"CN 单成分产品中文名（4/4 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL02AEG063J00-97311c2f,CN-XL02AEG063J00-f1a17c2f,CN-XL02AEG063J00-885af1c5"
+griseofulvin,Griseofulvin,灰黄霉素,high,product_majority,44,1.0,1,"CN 单成分产品中文名（44/44 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD01BAH079A00-18a8c5bf,CN-XD01BAH079A00-463703e1,CN-XD01BAH079A00-96acd74b"
+guaiacol,Guaiacol,愈创木酚磺酸钾,high,product_majority,72,1.0,1,"CN 单成分产品中文名（72/72 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XR05XXF656X00-758cb927,CN-XR05XXF656X00-2b321b97,CN-XR05XXF656X00-fc2d153d"
+guaifenesin,Guaifenesin,愈创甘油醚,high,override,18,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=愈创甘油醚；cn_substance_id=cn-131bc81dbd；evidence_url=https://www.wikidata.org/wiki/Q420682
+halcinonide,Halcinonide,哈西奈德,high,product_majority,71,0.986,2,"CN 单成分产品中文名（71/72 个产品，share=0.986，候选变体 2 个）；示例 product_id=CN-XD07ADH102F00-2cd73caf,CN-XD07ADH102F00-ce3b9460,CN-XD07ADH102F00-c1c486f9"
+haloperidol,Haloperidol,氟哌啶醇,high,product_majority,21,1.0,1,"CN 单成分产品中文名（21/21 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05ADF085A00-c42185a2,CN-XN05ADF085A00-881c8ba7,CN-XN05ADF085A00-505560bb"
+hemin,Hemin,红细胞保存,high,product_majority,18,1.0,1,"CN 单成分产品中文名（18/18 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB06ABH019B00-907a6604,CN-XB06ABH019B00-9198a103,CN-XB06ABH019B00-109085de"
+hepatitis-b-vaccine,Hepatitis B Vaccine,乙型肝炎疫苗,high,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=乙型肝炎疫苗；cn_substance_id=cn-72eed8e3e2；evidence_url=https://www.wikidata.org/wiki/Q117749
+hidralazina,Hidralazina,盐酸肼屈嗪,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC02DBJ145A00-3e58a60c,CN-XC02DBJ145A00-8531db96,CN-XC02DBJ145A00-f4fb8777"
+hydrochlorothiazide,Hydrochlorothiazide,氢氯噻嗪,high,product_majority,61,1.0,1,"CN 单成分产品中文名（61/61 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC03AAQ066A00-2b174b8e,CN-XC03AAQ066A00-dda1d560,CN-XC03AAQ066A00-4b8d4eb4"
+hydrocortisone-butyrate,Hydrocortisone Butyrate,丁酸氢化可的松,high,product_majority,40,0.889,2,"CN 单成分产品中文名（40/45 个产品，share=0.889，候选变体 2 个）；示例 product_id=CN-XD07ABD139F00-88ce3f43,CN-XD07ABD139F00-05eb2ec7,CN-XD07ABD139F00-64cbbd78"
+hydrogen-peroxide,Hydrogen Peroxide,过氧化氢,high,product_majority,40,1.0,1,"CN 单成分产品中文名（40/40 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD08AXG133S00-02e0e447,CN-XD08AXG133S00-1985c27b,CN-XD08AXG133S00-caca7764"
+hydroquinone,Hydroquinone,氢醌,high,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=氢醌；cn_substance_id=cn-3f2295970c；evidence_url=https://www.wikidata.org/wiki/Q419164
+hydrotalcite,Hydrotalcite,铝碳酸镁,high,product_majority,288,0.873,6,"CN 单成分产品中文名（288/330 个产品，share=0.873，候选变体 6 个）；示例 product_id=CN-XA02ADL183A00-3d52edb6,CN-XA02ADL183A00-2d12c59d,CN-XA02ADL183A00-1e11d316"
+hydroxycarbamide,Hydroxycarbamide,羟基脲,high,product_majority,5,1.0,1,"CN 单成分产品中文名（5/5 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL01XXQ027A00-c6492cd4,CN-XL01XXQ027A00-1353a483,CN-XL01XXQ027A00-dc248d2f"
+hydroxychloroquine,Hydroxychloroquine,硫酸羟氯喹,high,product_majority,24,0.923,2,"CN 单成分产品中文名（24/26 个产品，share=0.923，候选变体 2 个）；示例 product_id=CN-XP01BAQ034A00-4060b82a,CN-XP01BAQ034A00-2f5890d5,CN-XP01BAQ034A00-6488e41f"
+hypromellose,Hypromellose,羟丙甲纤维素,high,override,22,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=羟丙甲纤维素；cn_substance_id=cn-2b5040f175；evidence_url=https://www.wikidata.org/wiki/Q423846
+ibuprofen,Ibuprofen,布洛芬,high,product_majority,975,0.849,34,"CN 单成分产品中文名（975/1148 个产品，share=0.849，候选变体 34 个）；示例 product_id=CN-XM01AEB173A00-b18a9016,CN-XM01AEB173A00-366a7a21,CN-XM01AEB173A00-f4516a54"
+idebenone,Idebenone,艾地苯醌,high,override,12,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=艾地苯醌；cn_substance_id=cn-53e69130e3；evidence_url=https://www.wikidata.org/wiki/Q4197874
+idoxuridine,Idoxuridine,碘苷,high,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=碘苷；cn_substance_id=cn-8dc6b69f1c；evidence_url=https://www.wikidata.org/wiki/Q409765
+ifosfamide,Ifosfamide,异环磷酰胺,high,product_majority,23,0.885,3,"CN 单成分产品中文名（23/26 个产品，share=0.885，候选变体 3 个）；示例 product_id=CN-XL01AAY145B00-0f2f859d,CN-XL01AAY145B00-425de385,CN-XL01AAY145B00-da2bff10"
+imatinib,Imatinib,甲磺酸伊马替尼,high,product_majority,28,0.903,2,"CN 单成分产品中文名（28/31 个产品，share=0.903，候选变体 2 个）；示例 product_id=CN-XL01EAY059A00-969a8cc6,CN-XL01EAY059A00-02873d35,CN-XL01EAY059A00-6cd41bd5"
+imiglucerase,Imiglucerase,伊米苷酶,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=伊米苷酶；cn_substance_id=cn-57dec8547e；evidence_url=https://www.wikidata.org/wiki/Q2620206
+imiquimod,Imiquimod,咪喹莫特,high,override,52,1.0,7,cn_inn_overrides.csv 显式映射：zh_name=咪喹莫特；cn_substance_id=cn-ca09088c65；evidence_url=https://www.wikidata.org/wiki/Q423417
+indapamide,Indapamide,吲达帕胺,high,product_majority,214,0.856,10,"CN 单成分产品中文名（214/250 个产品，share=0.856，候选变体 10 个）；示例 product_id=CN-XC03BAY169A00-f4507888,CN-XC03BAY169A00-80d86c22,CN-XC03BAY169A00-1262c68c"
+inosine,Inosine,肌苷,high,product_majority,584,0.926,18,"CN 单成分产品中文名（584/631 个产品，share=0.926，候选变体 18 个）；示例 product_id=CN-XA05BAJ004A00-62ec6b7b,CN-XA05BAJ004A00-2fa436ea,CN-XA05BAJ004A00-2f374bc7"
+insulin,Insulin,胰岛素,high,product_majority,17,1.0,1,"CN 单成分产品中文名（17/17 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA10ABY100B00-abb1a003,CN-XA10ABY100B00-ae264996,CN-XA10ABY100B00-5b706644"
+insulin-aspart,Insulin Aspart,门冬胰岛素,high,product_majority,14,0.875,3,"CN 单成分产品中文名（14/16 个产品，share=0.875，候选变体 3 个）；示例 product_id=CN-XA10ABM079B00-7ac80de5,CN-XA10ABM079B00-c143885c,CN-XA10ABM079B00-30ca307b"
+iodine,Iodine,碘酊,high,product_majority,62,0.861,2,"CN 单成分产品中文名（62/72 个产品，share=0.861，候选变体 2 个）；示例 product_id=CN-XD08AGD102C00-39ab5e65,CN-XD08AGD102C00-07efcced,CN-XD08AGD102C00-86261f84"
+iodixanol,Iodixanol,碘克沙醇,high,product_majority,45,0.918,2,"CN 单成分产品中文名（45/49 个产品，share=0.918，候选变体 2 个）；示例 product_id=CN-XV08ABD113B00-18dafc2c,CN-XV08ABD113B00-971f7e9e,CN-XV08ABD113B00-2a6124c6"
+iopanoic-acid,Iopanoic Acid,碘番酸,high,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=碘番酸；cn_substance_id=cn-be893e9e2c；evidence_url=https://www.wikidata.org/wiki/Q1672108
+ipratropium,Ipratropium,异丙托溴铵,high,product_majority,122,0.917,4,"CN 单成分产品中文名（122/133 个产品，share=0.917，候选变体 4 个）；示例 product_id=CN-XR03BBF576L01-d333d516,CN-XR03BBF576L01-96e5a5e9,CN-XR03BBF576L01-ce91dd57"
+iron-dextran,Iron Dextran,右旋糖酐铁,high,product_majority,52,0.963,2,"CN 单成分产品中文名（52/54 个产品，share=0.963，候选变体 2 个）；示例 product_id=CN-XB03ABY199A00-514d7ab9,CN-XB03ABY199A00-83e17e38,CN-XB03ABY199A00-a52a1133"
+iron-sucrose,Iron Sucrose,蔗糖铁,high,product_majority,12,0.857,2,"CN 单成分产品中文名（12/14 个产品，share=0.857，候选变体 2 个）；示例 product_id=CN-XB03ACZ012B00-1cfc2ca6,CN-XB03ACZ012B00-b9d8f0c0,CN-XB03ACZ012B00-b2a0599b"
+isoniazid,Isoniazid,异烟肼,high,product_majority,266,0.96,3,"CN 单成分产品中文名（266/277 个产品，share=0.96，候选变体 3 个）；示例 product_id=CN-XJ04ACY155A00-91da82fa,CN-XJ04ACY155A00-407f3849,CN-XJ04ACY155A00-c0e860b1"
+ivabradine,Ivabradine,盐酸伊伐布雷定,high,product_majority,40,0.851,2,"CN 单成分产品中文名（40/47 个产品，share=0.851，候选变体 2 个）；示例 product_id=CN-XC01EBY277A00-6a8a6500,CN-XC01EBY277A00-5f3f9e55,CN-XC01EBY277A00-ba22cb89"
+ketoconazole,Ketoconazole,酮康唑,high,product_majority,283,0.963,4,"CN 单成分产品中文名（283/294 个产品，share=0.963，候选变体 4 个）；示例 product_id=CN-XD01ACF505F00-250c7cf5,CN-XD01ACF505F00-d7272a07,CN-XD01ACF505F00-6de6a0f2"
+ketoprofen,Ketoprofen,酮洛芬,high,product_majority,113,0.813,8,"CN 单成分产品中文名（113/139 个产品，share=0.813，候选变体 8 个）；示例 product_id=CN-XM01AET056A00-1646834c,CN-XM01AET056A00-e1b56aff,CN-XM01AET056A00-41322d2e"
+ketorolac,Ketorolac,酮咯酸氨丁三醇,high,product_majority,67,0.838,2,"CN 单成分产品中文名（67/80 个产品，share=0.838，候选变体 2 个）；示例 product_id=CN-XM01ABT149A00-64b42944,CN-XM01ABT149A00-45547fed,CN-XM01ABT149A00-c4914b3a"
+ketotifen,Ketotifen,富马酸酮替芬,high,product_majority,64,0.941,4,"CN 单成分产品中文名（64/68 个产品，share=0.941，候选变体 4 个）；示例 product_id=CN-XR06AXT061A00-6c7b52bd,CN-XR06AXT061A00-41e613b0,CN-XR06AXT061A00-1c07953f"
+labetalol,Labetalol,盐酸拉贝洛尔,high,product_majority,26,0.867,2,"CN 单成分产品中文名（26/30 个产品，share=0.867，候选变体 2 个）；示例 product_id=CN-XC07AGL005A00-a826fdab,CN-XC07AGL005A00-efee7c06,CN-XC07AGL005A00-cceae257"
+lacidipine,Lacidipine,拉西地平,high,override,50,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=拉西地平；cn_substance_id=cn-bffbf5cb88；evidence_url=https://www.wikidata.org/wiki/Q1163827
+lacosamide,Lacosamide,拉考沙胺,high,product_majority,104,0.937,2,"CN 单成分产品中文名（104/111 个产品，share=0.937，候选变体 2 个）；示例 product_id=CN-XN03AXL371A00-f541c846,CN-XN03AXL371A00-1723f8ad,CN-XN03AXL371A00-c3aa93a9"
+lactulose,Lactulose,乳果糖,high,product_majority,113,0.919,3,"CN 单成分产品中文名（113/123 个产品，share=0.919，候选变体 3 个）；示例 product_id=CN-XA06ADR050X00-0b24a616,CN-XA06ADR050X00-e1a09dbe,CN-XA06ADR050X00-014db8e0"
+lamivudine,Lamivudine,拉米夫定,high,product_majority,56,0.918,4,"CN 单成分产品中文名（56/61 个产品，share=0.918，候选变体 4 个）；示例 product_id=CN-XJ05AFL008A00-983d646f,CN-XJ05AFL008A00-92728c75,CN-XJ05AFL008A00-1f29d023"
+lamotrigine,Lamotrigine,拉莫三嗪,high,product_majority,34,0.895,3,"CN 单成分产品中文名（34/38 个产品，share=0.895，候选变体 3 个）；示例 product_id=CN-XN03AXL009A00-fba7e3dc,CN-XN03AXL009A00-d10c69bd,CN-XN03AXL009A00-257c55f4"
+lansoprazole,Lansoprazole,兰索拉唑,high,product_majority,333,0.951,7,"CN 单成分产品中文名（333/350 个产品，share=0.951，候选变体 7 个）；示例 product_id=CN-XA02BCL033A00-2536c70e,CN-XA02BCL033A00-ec34596a,CN-XA02BCL033A00-9f4b169f"
+lanthanum-carbonate,Lanthanum Carbonate,碳酸镧,high,product_majority,30,0.938,2,"CN 单成分产品中文名（30/32 个产品，share=0.938，候选变体 2 个）；示例 product_id=CN-XV03AET152A00-955ce1ce,CN-XV03AET152A00-2e75a1c7,CN-XV03AET152A00-81e4b500"
+latanoprost,Latanoprost,拉坦前列素,high,product_majority,7,0.875,2,"CN 单成分产品中文名（7/8 个产品，share=0.875，候选变体 2 个）；示例 product_id=CN-XS01EEL010G01-56bcde2c,CN-XS01EEL010G01-146adb82,CN-XS01EEL010G01-8ffe1d08"
+lenalidomide,Lenalidomide,来那度胺,high,product_majority,55,0.917,2,"CN 单成分产品中文名（55/60 个产品，share=0.917，候选变体 2 个）；示例 product_id=CN-XL04AXL344E00-e287c1d6,CN-XL04AXL344E00-4e24e863,CN-XL04AXL344E00-c71400d0"
+lenvatinib,Lenvatinib,甲磺酸仑伐替尼,high,product_majority,40,0.93,2,"CN 单成分产品中文名（40/43 个产品，share=0.93，候选变体 2 个）；示例 product_id=CN-XL01EXL369E00-b96dec09,CN-XL01EXL369E00-4e291295,CN-XL01EXL369E00-0c22a7f2"
+letrozole,Letrozole,来曲唑,high,product_majority,45,0.882,3,"CN 单成分产品中文名（45/51 个产品，share=0.882，候选变体 3 个）；示例 product_id=CN-XL02BGL020A00-f580fce5,CN-XL02BGL020A00-08097448,CN-XL02BGL020A00-78ae15c0"
+levamisole,Levamisole,盐酸左旋咪唑,high,product_majority,110,0.982,2,"CN 单成分产品中文名（110/112 个产品，share=0.982，候选变体 2 个）；示例 product_id=CN-XD11AXZ072T00-b3681d0a,CN-XD11AXZ072T00-9e915056,CN-XD11AXZ072T00-73a5acd0"
+levamlodipine,Levamlodipine,苯磺酸左氨氯地平,high,product_majority,199,0.9,4,"CN 单成分产品中文名（199/221 个产品，share=0.9，候选变体 4 个）；示例 product_id=CN-XC08CAZ067A00-49ed07d5,CN-XC08CAZ067A00-b8a467f3,CN-XC08CAZ067A00-50e46dc1"
+levetiracetam,Levetiracetam,左乙拉西坦,high,product_majority,177,0.927,2,"CN 单成分产品中文名（177/191 个产品，share=0.927，候选变体 2 个）；示例 product_id=CN-XN03AXZ075A00-7ac50eb3,CN-XN03AXZ075A00-fbe03033,CN-XN03AXZ075A00-28326c5b"
+levosimendan,Levosimendan,左西孟旦,high,override,16,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=左西孟旦；cn_substance_id=cn-93204b5c31；evidence_url=https://www.wikidata.org/wiki/Q162541
+lidocaine,Lidocaine,盐酸利多卡因,high,product_majority,263,0.84,6,"CN 单成分产品中文名（263/313 个产品，share=0.84，候选变体 6 个）；示例 product_id=CN-XC01BBL054B00-44674ae0,CN-XC01BBL054B00-d220e0d0,CN-XC01BBL054B00-37ad53a1"
+linagliptin,Linagliptin,利格列汀,high,product_majority,56,0.824,3,"CN 单成分产品中文名（56/68 个产品，share=0.824，候选变体 3 个）；示例 product_id=CN-XA10BHL343A00-95f4fc48,CN-XA10BHL343A00-931ffea1,CN-XA10BHL343A00-ef4c0bc0"
+lincomycin,Lincomycin,盐酸林可霉素,high,product_majority,477,0.99,4,"CN 单成分产品中文名（477/482 个产品，share=0.99，候选变体 4 个）；示例 product_id=CN-XD10AXL092F00-96a1db3b,CN-XD10AXL092F00-2388b2b1,CN-XD10AXL092F00-8d1377d3"
+lisinopril,Lisinopril,赖诺普利,high,product_majority,40,0.851,4,"CN 单成分产品中文名（40/47 个产品，share=0.851，候选变体 4 个）；示例 product_id=CN-XC09AAL030A00-8bd4333f,CN-XC09AAL030A00-2932b04b,CN-XC09AAL030A00-f5db0090"
+lomustine,Lomustine,洛莫司汀,high,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=洛莫司汀；cn_substance_id=cn-94b7130703；evidence_url=https://www.wikidata.org/wiki/Q415378
+lornoxicam,Lornoxicam,氯诺昔康,high,product_majority,52,0.963,2,"CN 单成分产品中文名（52/54 个产品，share=0.963，候选变体 2 个）；示例 product_id=CN-XM01ACL238A00-2bed86e4,CN-XM01ACL238A00-21a8cede,CN-XM01ACL238A00-9a4226e5"
+losartan,Losartan,氯沙坦钾,high,product_majority,96,0.941,2,"CN 单成分产品中文名（96/102 个产品，share=0.941，候选变体 2 个）；示例 product_id=CN-XC09CAL245A00-23524470,CN-XC09CAL245A00-0da6f7d5,CN-XC09CAL245A00-7fbf5533"
+luliconazole,Luliconazole,卢立康唑,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=卢立康唑；cn_substance_id=cn-9e7fa70025；evidence_url=https://www.wikidata.org/wiki/Q15624030
+lysozyme,Lysozyme,溶菌酶,high,product_majority,40,1.0,1,"CN 单成分产品中文名（40/40 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ05AXR038A00-0d8e09e0,CN-XJ05AXR038A00-994bef4c,CN-XJ05AXR038A00-a467cd62"
+magnesium-sulfate,Magnesium Sulfate,硫酸镁,high,product_majority,126,1.0,1,"CN 单成分产品中文名（126/126 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA06ADL146P00-d0017243,CN-XA06ADL146P00-81dd872d,CN-XA06ADL146P00-6acc700e"
+mebendazole,Mebendazole,甲苯咪唑,high,override,24,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲苯咪唑；cn_substance_id=cn-6ddff08c73；evidence_url=https://www.wikidata.org/wiki/Q422194
+medroxyprogesterone,Medroxyprogesterone,醋酸甲羟孕酮,high,product_majority,24,0.889,3,"CN 单成分产品中文名（24/27 个产品，share=0.889，候选变体 3 个）；示例 product_id=CN-XG03DAF662E00-f3070dac,CN-XG03DAF662E00-f23f4449,CN-XG03DAF662E00-c56ad2c1"
+mefenamic-acid,Mefenamic Acid,甲芬那酸,high,product_majority,52,1.0,1,"CN 单成分产品中文名（52/52 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM01AGJ033A00-2b253474,CN-XM01AGJ033A00-4bc198a0,CN-XM01AGJ033A00-ce3e6f8d"
+megestrol,Megestrol,醋酸甲地孕酮,high,override,31,1.0,6,cn_inn_overrides.csv 显式映射：zh_name=醋酸甲地孕酮；cn_substance_id=cn-6ad15ef165；evidence_url=https://www.wikidata.org/wiki/Q6808975
+memantine,Memantine,盐酸美金刚,high,product_majority,147,0.987,2,"CN 单成分产品中文名（147/149 个产品，share=0.987，候选变体 2 个）；示例 product_id=CN-XN06DXM045A00-0f386d42,CN-XN06DXM045A00-6a04c1dd,CN-XN06DXM045A00-235f3857"
+menotrophin,Menotrophin,尿促性素,high,product_majority,19,1.0,1,"CN 单成分产品中文名（19/19 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG03GAN052B00-528acf3f,CN-XG03GAN052B00-6d9181b3,CN-XG03GAN052B00-ed8d282c"
+menthol,Menthol,薄荷脑,high,product_majority,18,0.857,2,"CN 单成分产品中文名（18/21 个产品，share=0.857，候选变体 2 个）；示例 product_id=CN-XD11AXF177F00-76043630,CN-XD11AXF177F00-106924e3,CN-XD11AXF177F00-f96e2d02"
+merbromina,Merbromina,汞溴红,high,product_majority,10,1.0,1,"CN 单成分产品中文名（10/10 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD08AKG077S00-ff04e03c,CN-XD08AKG077S00-046b3da3,CN-XD08AKG077S00-0ef6fa1c"
+mercaptopurine,Mercaptopurine,巯嘌呤,high,override,8,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=巯嘌呤；cn_substance_id=cn-ef8f087597；evidence_url=https://www.wikidata.org/wiki/Q418529
+meropenem,Meropenem,美罗培南,high,product_majority,56,0.848,4,"CN 单成分产品中文名（56/66 个产品，share=0.848，候选变体 4 个）；示例 product_id=CN-XJ01DHM046B00-fb6b8aef,CN-XJ01DHM046B00-3e5e1b7f,CN-XJ01DHM046B00-b0e1f60d"
+mesna,Mesna,美司钠,high,override,15,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=美司钠；cn_substance_id=cn-78e701dbf4；evidence_url=https://www.wikidata.org/wiki/Q424997
+metenolona,Metenolona,司坦唑醇,high,product_majority,7,1.0,1,"CN 单成分产品中文名（7/7 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA14AAS175A00-81f5e867,CN-XA14AAS175A00-954f98f0,CN-XA14AAS175A00-26390ba1"
+metformin,Metformin,盐酸二甲双胍,high,product_majority,891,0.805,31,"CN 单成分产品中文名（891/1107 个产品，share=0.805，候选变体 31 个）；示例 product_id=CN-XA10BAE021A00-27932500,CN-XA10BAE021A00-f53a7c2e,CN-XA10BAE021A00-c891f717"
+methazolamide,Methazolamide,醋甲唑胺,high,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=醋甲唑胺；cn_substance_id=cn-f9db83c68c；evidence_url=https://www.wikidata.org/wiki/Q1149099
+methocarbamol,Methocarbamol,美索巴莫,high,product_majority,45,1.0,1,"CN 单成分产品中文名（45/45 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM03BAM059A00-ba4cd3a6,CN-XM03BAM059A00-2704419c,CN-XM03BAM059A00-527755eb"
+methotrexate,Methotrexate,甲氨蝶呤,high,product_majority,59,1.0,1,"CN 单成分产品中文名（59/59 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL01BAJ025B00-7d58bf6e,CN-XL01BAJ025B00-085fb328,CN-XL01BAJ025B00-8d85167e"
+methoxsalen,Methoxsalen,甲氧沙林,high,override,11,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲氧沙林；cn_substance_id=cn-20d5267b2b；evidence_url=https://www.wikidata.org/wiki/Q408570
+methylene-blue,Methylene Blue,亚甲蓝,high,override,10,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=亚甲蓝；cn_substance_id=cn-2d286d9663；evidence_url=https://www.wikidata.org/wiki/Q422134
+methylphenidate,Methylphenidate,专注达,high,product_majority,6,1.0,1,"CN 单成分产品中文名（6/6 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN06BAP010A01-98695c4c,CN-XN06BAP010A01-0fc0df02,CN-XN06BAP010A01-8b09a7d0"
+methylrosanilinium-chloride,Methylrosanilinium Chloride,甲紫,high,product_majority,36,1.0,1,"CN 单成分产品中文名（36/36 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD01AEJ093C00-4151fa10,CN-XD01AEJ093C00-5287cee9,CN-XD01AEJ093C00-3d803d20"
+metilergometrina,Metilergometrina,马来酸麦角新碱,high,product_majority,6,1.0,1,"CN 单成分产品中文名（6/6 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG02ABM030B00-ea8dae87,CN-XG02ABM030B00-8d9374bf,CN-XG02ABM030B00-30da5e21"
+metocarbamol,Metocarbamol,苯丙氨酯,high,product_majority,18,1.0,1,"CN 单成分产品中文名（18/18 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM03BAB051A00-9257a93f,CN-XM03BAB051A00-b1044cfb,CN-XM03BAB051A00-2d9e4b56"
+metoclopramide,Metoclopramide,甲氧氯普胺,high,product_majority,69,1.0,1,"CN 单成分产品中文名（69/69 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA03FAJ085A00-ade35950,CN-XA03FAJ085A00-5a71a98b,CN-XA03FAJ085A00-d5c28249"
+miconazole,Miconazole,硝酸咪康唑,high,product_majority,204,0.944,4,"CN 单成分产品中文名（204/216 个产品，share=0.944，候选变体 4 个）；示例 product_id=CN-XA07ACM085E00-9651e627,CN-XA07ACM085E00-37615ee3,CN-XA07ACM085E00-8cf63563"
+miglitol,Miglitol,米格列醇,high,product_majority,22,1.0,1,"CN 单成分产品中文名（22/22 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA10BFM097A00-24e0be43,CN-XA10BFM097A00-5a9f4814,CN-XA10BFM097A00-47e441e4"
+minoxidil,Minoxidil,米诺地尔,high,product_majority,76,0.835,4,"CN 单成分产品中文名（76/91 个产品，share=0.835，候选变体 4 个）；示例 product_id=CN-XD11AXM104C00-d233fe7d,CN-XD11AXM104C00-6cc0631d,CN-XD11AXM104C00-3aa8d9ca"
+mirabegron,Mirabegron,米拉贝隆,high,override,38,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=米拉贝隆；cn_substance_id=cn-8883d1bd71；evidence_url=https://www.wikidata.org/wiki/Q3702534
+mitotane,Mitotane,米托坦,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=米托坦；cn_substance_id=cn-ad180c93df；evidence_url=https://www.wikidata.org/wiki/Q417465
+modafinil,Modafinil,莫达非尼,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=莫达非尼；cn_substance_id=cn-e1ba4d0a7f；evidence_url=https://www.wikidata.org/wiki/Q410441
+mometasone,Mometasone,糠酸莫米松,high,product_majority,64,0.842,4,"CN 单成分产品中文名（64/76 个产品，share=0.842，候选变体 4 个）；示例 product_id=CN-XD07ACK037F00-eae1a7e8,CN-XD07ACK037F00-039de2df,CN-XD07ACK037F00-32529850"
+montelukast,Montelukast,孟鲁司特钠,high,product_majority,253,0.819,16,"CN 单成分产品中文名（253/309 个产品，share=0.819，候选变体 16 个）；示例 product_id=CN-XR03DCM082A00-12512000,CN-XR03DCM082A00-4a96a913,CN-XR03DCM082A00-59538108"
+moxifloxacin,Moxifloxacin,盐酸莫西沙星,high,product_majority,159,0.952,3,"CN 单成分产品中文名（159/167 个产品，share=0.952，候选变体 3 个）；示例 product_id=CN-XJ01MAM122A00-24659d66,CN-XJ01MAM122A00-470f5b41,CN-XJ01MAM122A00-079aea14"
+mupirocin,Mupirocin,莫匹罗星,high,product_majority,57,1.0,1,"CN 单成分产品中文名（57/57 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD06AXM119F00-9a0893bf,CN-XD06AXM119F00-b9f5aaaa,CN-XD06AXM119F00-fe10fdec"
+mycophenolate-mofetil,Mycophenolate Mofetil,吗替麦考酚酯,high,product_majority,66,0.892,5,"CN 单成分产品中文名（66/74 个产品，share=0.892，候选变体 5 个）；示例 product_id=CN-XL04AAM026A00-10cc6fd4,CN-XL04AAM026A00-75e5a030,CN-XL04AAM026A00-cc70d00b"
+nabumetone,Nabumetone,萘丁美酮,high,override,36,1.0,6,cn_inn_overrides.csv 显式映射：zh_name=萘丁美酮；cn_substance_id=cn-ad08fe088d；evidence_url=https://www.wikidata.org/wiki/Q425207
+naloxone,Naloxone,盐酸纳洛酮,high,product_majority,223,0.896,7,"CN 单成分产品中文名（223/249 个产品，share=0.896，候选变体 7 个）；示例 product_id=CN-XV03ABN007A00-2693eaa5,CN-XV03ABN007A00-7e4dc3a8,CN-XV03ABN007B00-831483eb"
+naphazoline,Naphazoline,盐酸萘甲唑啉,high,product_majority,48,0.96,3,"CN 单成分产品中文名（48/50 个产品，share=0.96，候选变体 3 个）；示例 product_id=CN-XR01AAN022R01-e61a13f3,CN-XR01AAN022R01-cf225205,CN-XR01AAN022R01-268d7727"
+naproxen,Naproxen,萘普生,high,product_majority,268,0.845,11,"CN 单成分产品中文名（268/317 个产品，share=0.845，候选变体 11 个）；示例 product_id=CN-XG02CCN028D00-00d97704,CN-XG02CCN028D00-714584cc,CN-XG02CCN028D00-67037745"
+nefopam,Nefopam,盐酸奈福泮,high,product_majority,101,0.944,4,"CN 单成分产品中文名（101/107 个产品，share=0.944，候选变体 4 个）；示例 product_id=CN-XN02BGN015A00-cbf81e34,CN-XN02BGN015A00-e890f133,CN-XN02BGN015A00-b8321db8"
+neomycin,Neomycin,硫酸新霉素,high,product_majority,26,0.963,2,"CN 单成分产品中文名（26/27 个产品，share=0.963，候选变体 2 个）；示例 product_id=CN-XA07AAX151A00-20e69651,CN-XA07AAX151A00-046473ec,CN-XA07AAX151A00-bb840316"
+neostigmine,Neostigmine,甲硫酸新斯的明,high,product_majority,50,0.943,2,"CN 单成分产品中文名（50/53 个产品，share=0.943，候选变体 2 个）；示例 product_id=CN-XN07AAX155B00-8819d687,CN-XN07AAX155B00-e03c1caa,CN-XN07AAX155B00-5760bb3e"
+nicorandil,Nicorandil,尼可地尔,high,product_majority,201,0.966,2,"CN 单成分产品中文名（201/208 个产品，share=0.966，候选变体 2 个）；示例 product_id=CN-XC01DXN039A00-6f53a89a,CN-XC01DXN039A00-abdc39b6,CN-XC01DXN039A00-4ed852b0"
+nicotinamide,Nicotinamide,烟酰胺,high,product_majority,76,0.927,2,"CN 单成分产品中文名（76/82 个产品，share=0.927，候选变体 2 个）；示例 product_id=CN-XA11HAY031A00-f0078009,CN-XA11HAY031A00-01fdf9c5,CN-XA11HAY031A00-7cdc0a6f"
+nicotine,Nicotine,尼古丁,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=尼古丁；cn_substance_id=cn-9d60305a27；evidence_url=https://www.wikidata.org/wiki/Q12144
+nicotinic-acid,Nicotinic Acid,烟酸,high,product_majority,63,0.875,3,"CN 单成分产品中文名（63/72 个产品，share=0.875，候选变体 3 个）；示例 product_id=CN-XC04ACY028A00-50508d83,CN-XC04ACY028A00-38254fd7,CN-XC04ACY028A00-a5567c5c"
+nifedipine,Nifedipine,硝苯地平,high,product_majority,348,0.899,7,"CN 单成分产品中文名（348/387 个产品，share=0.899，候选变体 7 个）；示例 product_id=CN-XC08CAX066A00-8c13fac4,CN-XC08CAX066A00-24e0b30b,CN-XC08CAX066A00-93ec9741"
+nimodipine,Nimodipine,尼莫地平,high,product_majority,209,0.839,16,"CN 单成分产品中文名（209/249 个产品，share=0.839，候选变体 16 个）；示例 product_id=CN-XC08CAN043A00-5a270943,CN-XC08CAN043A00-a7bbeda8,CN-XC08CAN043A00-4c1e1a0e"
+nitrazepam,Nitrazepam,硝西泮,high,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硝西泮；cn_substance_id=cn-5cae031fdd；evidence_url=https://www.wikidata.org/wiki/Q410078
+nitric-oxide,Nitric Oxide,一氧化氮,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=一氧化氮；cn_substance_id=cn-d043ebc6db；evidence_url=https://www.wikidata.org/wiki/Q207843
+nitrofurantoin,Nitrofurantoin,呋喃妥因,high,product_majority,79,1.0,1,"CN 单成分产品中文名（79/79 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG01AXF051D00-87f86f79,CN-XG01AXF051D00-1202e87a,CN-XJ01XEF051A00-3c331722"
+nitroglycerin,Nitroglycerin,硝酸甘油,high,product_majority,68,0.932,4,"CN 单成分产品中文名（68/73 个产品，share=0.932，候选变体 4 个）；示例 product_id=CN-XC01DAX072A00-aac5148b,CN-XC01DAX072A00-2f91deae,CN-XC01DAX072A00-26554da7"
+nitroprusiato,Nitroprusiato,硝普钠,high,product_majority,26,1.0,1,"CN 单成分产品中文名（26/26 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC02DDX070B00-3e9bee42,CN-XC02DDX070B00-129f8489,CN-XC02DDX070B00-56e32804"
+nivolumab,Nivolumab,纳武利尤单抗,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=纳武利尤单抗；cn_substance_id=cn-b0e2bb4b9d；evidence_url=https://www.wikidata.org/wiki/Q7041828
+nizatidine,Nizatidine,尼扎替丁,high,override,19,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=尼扎替丁；cn_substance_id=cn-c96a91422d；evidence_url=https://www.wikidata.org/wiki/Q1188290
+nonoxinol,Nonoxinol,壬苯醇醚,high,product_majority,34,0.872,3,"CN 单成分产品中文名（34/39 个产品，share=0.872，候选变体 3 个）；示例 product_id=CN-XG02BBR034D00-e36a8182,CN-XG02BBR034D00-afe3da55,CN-XG02BBR034D00-a9b28d0c"
+norfloxacin,Norfloxacin,诺氟沙星,high,product_majority,989,0.999,2,"CN 单成分产品中文名（989/990 个产品，share=0.999，候选变体 2 个）；示例 product_id=CN-XD08AXN076F00-9222efd1,CN-XD08AXN076F00-9b574576,CN-XD08AXN076F00-3fa78d2e"
+nystatin,Nystatin,制霉菌素,high,product_majority,8,1.0,1,"CN 单成分产品中文名（8/8 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG01AAZ098A00-b8967deb,CN-XJ02AXZ098A00-88b4c059,CN-XJ02AXZ098A00-83d13154"
+obinutuzumab,Obinutuzumab,奥妥珠单抗,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=奥妥珠单抗；cn_substance_id=cn-6a0c0c38ec；evidence_url=https://www.wikidata.org/wiki/Q389496
+ofatumumab,Ofatumumab,奥法妥木单抗,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=奥法妥木单抗；cn_substance_id=cn-1d23427edb；evidence_url=https://www.wikidata.org/wiki/Q410656
+ofloxacin,Ofloxacin,氧氟沙星,high,product_majority,315,0.892,15,"CN 单成分产品中文名（315/353 个产品，share=0.892，候选变体 15 个）；示例 product_id=CN-XD06AXY040F00-3b3c3733,CN-XD06AXY040F00-521f8482,CN-XD06AXY040F00-bd7ced54"
+olanzapine,Olanzapine,奥氮平,high,product_majority,142,0.861,5,"CN 单成分产品中文名（142/165 个产品，share=0.861，候选变体 5 个）；示例 product_id=CN-XN05AHA204A00-b7f7ec93,CN-XN05AHA204A00-a649fac8,CN-XN05AHA204A00-76db78fc"
+olopatadine,Olopatadine,盐酸奥洛他定,high,product_majority,143,0.979,3,"CN 单成分产品中文名（143/146 个产品，share=0.979，候选变体 3 个）；示例 product_id=CN-XR01ACA210A00-2e0626f5,CN-XR01ACA210A00-404a224c,CN-XR01ACA210A00-2ae76c31"
+omalizumab,Omalizumab,奥马珠单抗,high,override,10,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=奥马珠单抗；cn_substance_id=cn-4add85ea34；evidence_url=https://www.wikidata.org/wiki/Q415392
+orlistat,Orlistat,奥利司他,high,product_majority,166,0.994,2,"CN 单成分产品中文名（166/167 个产品，share=0.994，候选变体 2 个）；示例 product_id=CN-XA08ABA209A00-9b4539d5,CN-XA08ABA209A00-e26bd37d,CN-XA08ABA209A00-254ddced"
+oseltamivir,Oseltamivir,磷酸奥司他韦,high,product_majority,254,0.958,4,"CN 单成分产品中文名（254/265 个产品，share=0.958，候选变体 4 个）；示例 product_id=CN-XJ05AHA218E00-c3005093,CN-XJ05AHA218E00-e59601e2,CN-XJ05AHA218E00-fd40e4df"
+oxacillin,Oxacillin,苯唑西林钠,high,product_majority,83,1.0,1,"CN 单成分产品中文名（83/83 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01CFB083A00-692f4dac,CN-XJ01CFB083A00-b478fc79,CN-XJ01CFB083A00-6f2d0713"
+oxaprozin,Oxaprozin,奥沙普秦,high,override,44,1.0,7,cn_inn_overrides.csv 显式映射：zh_name=奥沙普秦；cn_substance_id=cn-ca87954b96；evidence_url=https://www.wikidata.org/wiki/Q1749609
+oxazepam,Oxazepam,奥沙西泮,high,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=奥沙西泮；cn_substance_id=cn-527b50fb50；evidence_url=https://www.wikidata.org/wiki/Q412299
+oxyphenbutazone,Oxyphenbutazone,羟布宗,high,override,0,1.0,0,cn_inn_overrides.csv 显式映射：zh_name=羟布宗；cn_substance_id=cn-6230b1d3d8；evidence_url=https://www.wikidata.org/wiki/Q4116192
+oxytetracycline,Oxytetracycline,土霉素,high,product_majority,430,1.0,1,"CN 单成分产品中文名（430/430 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD06AAT106F00-5b802df1,CN-XD06AAT106F00-94da7a14,CN-XD06AAT106F00-bda0fceb"
+oxytocin,Oxytocin,缩宫素,high,product_majority,96,0.98,2,"CN 单成分产品中文名（96/98 个产品，share=0.98，候选变体 2 个）；示例 product_id=CN-XH01BBS194B00-1260b939,CN-XH01BBS194B00-36e109fa,CN-XH01BBS194B00-04fb8cef"
+palonosetron,Palonosetron,盐酸帕洛诺司琼,high,product_majority,93,0.886,3,"CN 单成分产品中文名（93/105 个产品，share=0.886，候选变体 3 个）；示例 product_id=CN-XA04AAP003B00-afb116a9,CN-XA04AAP003B00-468c2561,CN-XA04AAP003B00-ee8611bc"
+pantoprazole,Pantoprazole,泮托拉唑钠,high,product_majority,477,0.909,11,"CN 单成分产品中文名（477/525 个产品，share=0.909，候选变体 11 个）；示例 product_id=CN-XA02BCP025A01-b0245abc,CN-XA02BCP025A01-e68e225c,CN-XA02BCP025A01-23d39076"
+parecoxib,Parecoxib,帕瑞昔布钠,high,product_majority,158,0.963,2,"CN 单成分产品中文名（158/164 个产品，share=0.963，候选变体 2 个）；示例 product_id=CN-XM01AHP006B00-7637f0cb,CN-XM01AHP006B00-4f0b53b0,CN-XM01AHP006B00-20045072"
+paricalcitol,Paricalcitol,帕立骨化醇,high,override,27,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=帕立骨化醇；cn_substance_id=cn-31dae7923c；evidence_url=https://www.wikidata.org/wiki/Q155746
+pefloxacin,Pefloxacin,甲磺酸培氟沙星,high,product_majority,181,0.948,4,"CN 单成分产品中文名（181/191 个产品，share=0.948，候选变体 4 个）；示例 product_id=CN-XD01AAP029F00-5de62cfa,CN-XD01AAP029F00-45c86c88,CN-XD01AAP029F00-ab8356a2"
+pembrolizumab,Pembrolizumab,帕博利珠单抗,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=帕博利珠单抗；cn_substance_id=cn-703c285f03；evidence_url=https://www.wikidata.org/wiki/Q13896859
+pemetrexed,Pemetrexed,培美曲塞二钠,high,product_majority,58,0.892,5,"CN 单成分产品中文名（58/65 个产品，share=0.892，候选变体 5 个）；示例 product_id=CN-XL01BAP030B00-a61da9bd,CN-XL01BAP030B00-769b2ed9,CN-XL01BAP030B00-25553414"
+penicilamina,Penicilamina,青霉胺,high,product_majority,6,1.0,1,"CN 单成分产品中文名（6/6 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM01CCQ053A00-064fed24,CN-XM01CCQ053A00-50420dc6,CN-XM01CCQ053A00-316f4a2b"
+pentagastrin,Pentagastrin,五肽胃泌素,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=五肽胃泌素；cn_substance_id=cn-1c7ae5eccb；evidence_url=https://www.wikidata.org/wiki/Q423586
+pentazocine,Pentazocine,喷他佐辛,high,override,8,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=喷他佐辛；cn_substance_id=cn-5a99db8e88；evidence_url=https://www.wikidata.org/wiki/Q415793
+pentoxyverine,Pentoxyverine,枸橼酸喷托维林,high,product_majority,191,1.0,1,"CN 单成分产品中文名（191/191 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XR05DBP035A00-c615901d,CN-XR05DBP035A00-449416a5,CN-XR05DBP035A00-b5555c3d"
+pepsin,Pepsin,胃蛋白酶,high,product_majority,86,1.0,1,"CN 单成分产品中文名（86/86 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA09AAF526N00-704ec7f6,CN-XA09AAF526N00-be46f5bb,CN-XA09AAF526N00-849b3b0d"
+perampanel,Perampanel,吡仑帕奈,high,override,44,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=吡仑帕奈；cn_substance_id=cn-e243996e38；evidence_url=https://www.wikidata.org/wiki/Q868658
+perfenazina,Perfenazina,癸氟奋乃静,high,product_majority,5,0.833,2,"CN 单成分产品中文名（5/6 个产品，share=0.833，候选变体 2 个）；示例 product_id=CN-XN05ABG122B00-30d4c7d8,CN-XN05ABG122B00-f32de535,CN-XN05ABG122B00-fc8de7da"
+perphenazine,Perphenazine,奋乃静,high,product_majority,24,1.0,1,"CN 单成分产品中文名（24/24 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05ABF041A00-47a3462f,CN-XN05ABF041A00-00ff23e0,CN-XN05ABF041A00-3d6106ef"
+pertuzumab,Pertuzumab,帕妥珠单抗,high,override,8,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=帕妥珠单抗；cn_substance_id=cn-93b25da5ba；evidence_url=https://www.wikidata.org/wiki/Q1998021
+pethidine,Pethidine,盐酸哌替啶,high,product_majority,13,1.0,1,"CN 单成分产品中文名（13/13 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN02ABP022A00-d2601ea6,CN-XN02ABP022A00-690ed4aa,CN-XN02ABP022B00-9956f889"
+phenolphthalein,Phenolphthalein,酚酞,high,product_majority,34,1.0,1,"CN 单成分产品中文名（34/34 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA06ABF038A00-4585523c,CN-XA06ABF038A00-9b25f36e,CN-XA06ABF038A00-c782b470"
+phenylbutazone,Phenylbutazone,保泰松,high,product_majority,37,1.0,1,"CN 单成分产品中文名（37/37 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XM01AAB028A00-8c34c2be,CN-XM01AAB028A00-4aca20af,CN-XM01AAB028A00-5738ae89"
+phenytoin,Phenytoin,苯妥英钠,high,product_majority,48,0.857,4,"CN 单成分产品中文名（48/56 个产品，share=0.857，候选变体 4 个）；示例 product_id=CN-XN03ABB074A00-9090f617,CN-XN03ABB074A00-70ed3f16,CN-XN03ABB074A00-9a7f6363"
+phloroglucinol,Phloroglucinol,间苯三酚,high,product_majority,96,1.0,1,"CN 单成分产品中文名（96/96 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA03AXJ096A02-af93d406,CN-XA03AXJ096A02-aaf04548,CN-XA03AXJ096A02-42461dea"
+pholcodine,Pholcodine,福尔可定,high,override,37,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=福尔可定；cn_substance_id=cn-021128f0a4；evidence_url=https://www.wikidata.org/wiki/Q3124290
+pilocarpine,Pilocarpine,硝酸毛果芸香碱,high,product_majority,18,0.818,3,"CN 单成分产品中文名（18/22 个产品，share=0.818，候选变体 3 个）；示例 product_id=CN-XS01EBM035A00-77d3f720,CN-XS01EBM035A00-87483dfc,CN-XS01EBM035B00-6e437bf9"
+pimozida,Pimozida,五氟利多,high,product_majority,10,1.0,1,"CN 单成分产品中文名（10/10 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05AGW076A00-506e636c,CN-XN05AGW076A00-6df00fe2,CN-XN05AGW076A00-697c938f"
+piperazine,Piperazine,磷酸哌嗪,high,product_majority,28,1.0,1,"CN 单成分产品中文名（28/28 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XP02CBP021A00-71eb26a2,CN-XP02CBP021A00-a5ffc0cf,CN-XP02CBP021A00-7776eb8a"
+piracetam,Piracetam,吡拉西坦,high,product_majority,466,0.961,9,"CN 单成分产品中文名（466/485 个产品，share=0.961，候选变体 9 个）；示例 product_id=CN-XN06BXB093N00-fc4a3d6e,CN-XN06BXB093N00-d47ced99,CN-XN06BXB093N00-c01e775a"
+pirantel,Pirantel,双羟萘酸噻嘧啶,high,product_majority,12,1.0,1,"CN 单成分产品中文名（12/12 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XP02CCS134A00-05024045,CN-XP02CCS134A00-427e32a7,CN-XP02CCS134A00-719ba75e"
+pirfenidone,Pirfenidone,吡非尼酮,high,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=吡非尼酮；cn_substance_id=cn-a2d4a5e475；evidence_url=https://www.wikidata.org/wiki/Q2060696
+pirimetamina,Pirimetamina,乙胺嘧啶,high,product_majority,5,1.0,1,"CN 单成分产品中文名（5/5 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XP01BDY108A00-df82ea38,CN-XP01BDY108A00-6457e199,CN-XP01BDY108A00-8ffc28a7"
+piroxicam,Piroxicam,吡罗昔康,high,product_majority,109,0.948,4,"CN 单成分产品中文名（109/115 个产品，share=0.948，候选变体 4 个）；示例 product_id=CN-XM01ACB098A00-1e34b6c1,CN-XM01ACB098A00-ea9acade,CN-XM01ACB098A00-2f8bb608"
+pitavastatin,Pitavastatin,匹伐他汀钙,high,product_majority,116,0.935,2,"CN 单成分产品中文名（116/124 个产品，share=0.935，候选变体 2 个）；示例 product_id=CN-XC10AAP051A00-8f711a28,CN-XC10AAP051A00-ddebf081,CN-XC10AAP051A00-d0bbc5bf"
+podofilox,Podofilox,鬼臼毒素,high,override,13,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=鬼臼毒素；cn_substance_id=cn-57726c9358；evidence_url=https://www.wikidata.org/wiki/Q421193
+policosanol,Policosanol,多廿烷醇,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=多廿烷醇；cn_substance_id=cn-609111723e；evidence_url=https://www.wikidata.org/wiki/Q419772
+policresulen,Policresulen,聚甲酚磺醛,high,product_majority,70,0.972,2,"CN 单成分产品中文名（70/72 个产品，share=0.972，候选变体 2 个）；示例 product_id=CN-XG01AXJ156D00-6f761350,CN-XG01AXJ156D00-e39568d6,CN-XG01AXJ156D00-75999c2c"
+polygeline,Polygeline,聚明胶肽,high,product_majority,13,1.0,1,"CN 单成分产品中文名（13/13 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB05AAJ157B00-45d97d29,CN-XB05AAJ157B00-a7786a3d,CN-XB05AAJ157B00-59ca9fff"
+pomalidomide,Pomalidomide,泊马度胺,high,override,10,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=泊马度胺；cn_substance_id=cn-db30b07e71；evidence_url=https://www.wikidata.org/wiki/Q7227206
+posaconazole,Posaconazole,泊沙康唑,high,override,29,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=泊沙康唑；cn_substance_id=cn-a6832453b1；evidence_url=https://www.wikidata.org/wiki/Q906453
+potassium-citrate,Potassium Citrate,枸橼酸钾,high,product_majority,37,0.974,2,"CN 单成分产品中文名（37/38 个产品，share=0.974，候选变体 2 个）；示例 product_id=CN-XA12BAJ226A01-f720247e,CN-XA12BAJ226A01-9603904d,CN-XA12BAJ226A01-e45f0eeb"
+potassium-iodide,Potassium Iodide,碘化钾,high,product_majority,4,1.0,1,"CN 单成分产品中文名（4/4 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XR05CAD109A00-f1916b2d,CN-XR05CAD109A00-80c8b38e,CN-XR05CAD109A00-07c7c9bf"
+pralatrexate,Pralatrexate,普拉曲沙,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=普拉曲沙；cn_substance_id=cn-672187fd26；evidence_url=https://www.wikidata.org/wiki/Q637059
+praziquantel,Praziquantel,吡喹酮,high,override,13,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=吡喹酮；cn_substance_id=cn-b779273134；evidence_url=https://www.wikidata.org/wiki/Q424145
+prednisone,Prednisone,醋酸泼尼松,high,product_majority,147,0.974,2,"CN 单成分产品中文名（147/151 个产品，share=0.974，候选变体 2 个）；示例 product_id=CN-XD07ACP059F00-317bcd34,CN-XD07ACP059F00-90c028af,CN-XD07ACP059F00-0e9fe819"
+pregabalin,Pregabalin,普瑞巴林,high,product_majority,187,0.969,2,"CN 单成分产品中文名（187/193 个产品，share=0.969，候选变体 2 个）；示例 product_id=CN-XN02BGP112A01-66d91288,CN-XN02BGP112A01-b6e59eea,CN-XN02BGP112A01-8816baec"
+primidone,Primidone,扑米酮,high,override,15,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=扑米酮；cn_substance_id=cn-738ee1909d；evidence_url=https://www.wikidata.org/wiki/Q420383
+promethazine,Promethazine,盐酸异丙嗪,high,product_majority,96,1.0,1,"CN 单成分产品中文名（96/96 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XR06ADX134A00-b750dfd4,CN-XR06ADX134A00-4eaffa4d,CN-XR06ADX134A00-01e59a3f"
+propafenone,Propafenone,盐酸普罗帕酮,high,product_majority,93,0.979,2,"CN 单成分产品中文名（93/95 个产品，share=0.979，候选变体 2 个）；示例 product_id=CN-XC01BCP099A00-e0d0f8d8,CN-XC01BCP099A00-8311d744,CN-XC01BCP099A00-fc4455ce"
+propranolol,Propranolol,盐酸普萘洛尔,high,product_majority,57,0.864,5,"CN 单成分产品中文名（57/66 个产品，share=0.864，候选变体 5 个）；示例 product_id=CN-XC07AAP101A00-c36df394,CN-XC07AAP101A00-47affb2b,CN-XC07AAP101A00-7ac8ec33"
+propylthiouracil,Propylthiouracil,丙硫氧嘧啶,high,product_majority,20,0.909,2,"CN 单成分产品中文名（20/22 个产品，share=0.909，候选变体 2 个）；示例 product_id=CN-XH03BAB129A00-aa6ee21d,CN-XH03BAB129A00-d8b8f9fb,CN-XH03BAB129A00-67616186"
+pyrazinamide,Pyrazinamide,吡嗪酰胺,high,product_majority,64,1.0,1,"CN 单成分产品中文名（64/64 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ04AKB103A00-f2bc2aed,CN-XJ04AKB103A00-568089c2,CN-XJ04AKB103A00-8a964769"
+pyridostigmine,Pyridostigmine,溴吡斯的明,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN07AAX164A00-7bcfc579,CN-XN07AAX164A01-db057b6c,CN-XN07AAX164A01-97c33b26"
+quetiapine,Quetiapine,富马酸喹硫平,high,product_majority,97,0.858,4,"CN 单成分产品中文名（97/113 个产品，share=0.858，候选变体 4 个）；示例 product_id=CN-XN05AHK094A00-14cda126,CN-XN05AHK094A00-3e26eae5,CN-XN05AHK094A00-92168b1c"
+quinine,Quinine,奎宁,high,override,16,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=奎宁；cn_substance_id=cn-b4857dbfea；evidence_url=https://www.wikidata.org/wiki/Q189522
+rabeprazole,Rabeprazole,雷贝拉唑钠,high,product_majority,185,0.801,7,"CN 单成分产品中文名（185/231 个产品，share=0.801，候选变体 7 个）；示例 product_id=CN-XA02BCL043A01-bbd97585,CN-XA02BCL043A01-f1a4a9de,CN-XA02BCL043A01-2e867bf6"
+rabies-immunoglobulin,Rabies Immunoglobulin,狂犬病人免疫球蛋白,high,product_majority,28,1.0,1,"CN 单成分产品中文名（28/28 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ06BBR006B00-88bf5a76,CN-XJ06BBR006B00-7c970ce1,CN-XJ06BBR006B00-76b7ec56"
+raltitrexed,Raltitrexed,雷替曲塞,high,override,8,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=雷替曲塞；cn_substance_id=cn-4e5e040a59；evidence_url=https://www.wikidata.org/wiki/Q15304877
+ranitidine,Ranitidine,盐酸雷尼替丁,high,product_majority,379,0.909,14,"CN 单成分产品中文名（379/417 个产品，share=0.909，候选变体 14 个）；示例 product_id=CN-XA02BAL050A00-113e43d6,CN-XA02BAL050A00-152f6280,CN-XA02BAL050A00-02ea5537"
+rasburicase,Rasburicase,拉布立海,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=拉布立海；cn_substance_id=cn-02773547ab；evidence_url=https://www.wikidata.org/wiki/Q3088229
+reteplase,Reteplase,瑞替普酶,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=瑞替普酶；cn_substance_id=cn-33f1afb382；evidence_url=https://www.wikidata.org/wiki/Q3933703
+ribavirin,Ribavirin,利巴韦林,high,product_majority,737,0.894,19,"CN 单成分产品中文名（737/824 个产品，share=0.894，候选变体 19 个）；示例 product_id=CN-XJ05APL052A00-61390982,CN-XJ05APL052A00-e01c7510,CN-XJ05APL052A00-c31e11b2"
+rifabutin,Rifabutin,利福布汀,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=利福布汀；cn_substance_id=cn-f3282e7814；evidence_url=https://www.wikidata.org/wiki/Q1135705
+rifampin,Rifampin,利福平,high,product_majority,316,0.981,3,"CN 单成分产品中文名（316/322 个产品，share=0.981，候选变体 3 个）；示例 product_id=CN-XD01AAL062F00-30b644b0,CN-XJ04ABL062A00-bf80643f,CN-XJ04ABL062A00-8b980c81"
+rifapentine,Rifapentine,利福喷丁,high,product_majority,18,1.0,1,"CN 单成分产品中文名（18/18 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ04ABL061A00-1748b29b,CN-XJ04ABL061A00-1120d550,CN-XJ04ABL061A00-9e3383d6"
+riluzole,Riluzole,利鲁唑,high,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=利鲁唑；cn_substance_id=cn-cca78ac39f；evidence_url=https://www.wikidata.org/wiki/Q415744
+risedronic-acid,Risedronic Acid,利塞膦酸钠,high,product_majority,18,0.857,2,"CN 单成分产品中文名（18/21 个产品，share=0.857，候选变体 2 个）；示例 product_id=CN-XM05BAL072A00-4be479a4,CN-XM05BAL072A00-d5ee37c6,CN-XM05BAL072A00-07556a0c"
+ritodrine,Ritodrine,盐酸利托君,high,product_majority,20,0.833,2,"CN 单成分产品中文名（20/24 个产品，share=0.833，候选变体 2 个）；示例 product_id=CN-XG02CAL073A00-42952ab6,CN-XG02CAL073A00-779fbdec,CN-XG02CAL073A00-84687956"
+ritonavir,Ritonavir,利托那韦,high,product_majority,5,1.0,1,"CN 单成分产品中文名（5/5 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ05AEL074A00-c78ff338,CN-XJ05AEL074A00-9b03b03e,CN-XJ05AEL074A00-0d17eb77"
+rivaroxaban,Rivaroxaban,利伐沙班,high,product_majority,394,0.923,2,"CN 单成分产品中文名（394/427 个产品，share=0.923，候选变体 2 个）；示例 product_id=CN-XB01AFL056A00-cb657dc6,CN-XB01AFL056A00-16416478,CN-XB01AFL056A00-697af4a7"
+rocuronium,Rocuronium,罗库溴铵,high,product_majority,65,0.97,2,"CN 单成分产品中文名（65/67 个产品，share=0.97，候选变体 2 个）；示例 product_id=CN-XM03ACL264B00-7bdf2ba8,CN-XM03ACL264B00-a917269b,CN-XM03ACL264B00-5714252d"
+rosuvastatin,Rosuvastatin,瑞舒伐他汀钙,high,product_majority,414,0.972,2,"CN 单成分产品中文名（414/426 个产品，share=0.972，候选变体 2 个）；示例 product_id=CN-XC10AAR069A00-45a87127,CN-XC10AAR069A00-870f93f2,CN-XC10AAR069A00-99f4a9a3"
+roxadustat,Roxadustat,罗沙司他,high,override,64,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=罗沙司他；cn_substance_id=cn-0abba83d25；evidence_url=https://www.wikidata.org/wiki/Q27088611
+roxithromycin,Roxithromycin,罗红霉素,high,product_majority,866,0.868,25,"CN 单成分产品中文名（866/998 个产品，share=0.868，候选变体 25 个）；示例 product_id=CN-XJ01FAL262A00-dd028864,CN-XJ01FAL262A00-fa5527ad,CN-XJ01FAL262A00-54568e2b"
+rutin,Rutin,芦丁,high,product_majority,63,1.0,1,"CN 单成分产品中文名（63/63 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC05CAF380A00-43365c06,CN-XC05CAF380A00-51c110be,CN-XC05CAF380A00-1ca425e5"
+salsalate,Salsalate,双水杨酯,high,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=双水杨酯；cn_substance_id=cn-7da800bdb5；evidence_url=https://www.wikidata.org/wiki/Q1320691
+scopolamine,Scopolamine,氢溴酸东莨菪碱,high,product_majority,20,0.952,2,"CN 单成分产品中文名（20/21 个产品，share=0.952，候选变体 2 个）；示例 product_id=CN-XA03BBD142A00-42928456,CN-XA03BBD142A00-73fb75bc,CN-XA03BBD142A00-9ff91a9b"
+scopolamine-butylbromide,Scopolamine Butylbromide,丁溴东莨菪碱,high,product_majority,24,0.923,2,"CN 单成分产品中文名（24/26 个产品，share=0.923，候选变体 2 个）；示例 product_id=CN-XA03BBD141B00-6418b8ec,CN-XA03BBD141B00-6e8d4e41,CN-XA03BBD141B00-1f00d139"
+secukinumab,Secukinumab,司库奇尤单抗,high,override,16,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=司库奇尤单抗；cn_substance_id=cn-3826de7dce；evidence_url=https://www.wikidata.org/wiki/Q7444755
+sildenafil,Sildenafil,枸橼酸西地那非,high,product_majority,497,0.927,3,"CN 单成分产品中文名（497/536 个产品，share=0.927，候选变体 3 个）；示例 product_id=CN-XG04BEX006A00-cb447b9c,CN-XG04BEX006A00-7218a6e7,CN-XG04BEX006A00-9d455ed2"
+silodosin,Silodosin,赛洛多辛,high,product_majority,16,0.889,2,"CN 单成分产品中文名（16/18 个产品，share=0.889，候选变体 2 个）；示例 product_id=CN-XG04CAS235E00-e8db16a6,CN-XG04CAS235E00-2fa6de78,CN-XG04CAS235E00-d9e388af"
+siltuximab,Siltuximab,司妥昔单抗,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=司妥昔单抗；cn_substance_id=cn-7b528d0b6a；evidence_url=https://www.wikidata.org/wiki/Q3960572
+simeticone,Simeticone,西甲硅油,high,product_majority,16,0.889,2,"CN 单成分产品中文名（16/18 个产品，share=0.889，候选变体 2 个）；示例 product_id=CN-XA03AXX007X00-4ce3a8b5,CN-XA03AXX007X00-d3ee4443,CN-XA03AXX007X00-480c2dd0"
+simvastatin,Simvastatin,辛伐他汀,high,product_majority,552,0.805,19,"CN 单成分产品中文名（552/686 个产品，share=0.805，候选变体 19 个）；示例 product_id=CN-XC10AAX147A00-b8ebc8a2,CN-XC10AAX147A00-0f5a811a,CN-XC10AAX147A00-4f96b56c"
+sitagliptin,Sitagliptin,磷酸西格列汀,high,product_majority,249,0.95,3,"CN 单成分产品中文名（249/262 个产品，share=0.95，候选变体 3 个）；示例 product_id=CN-XA10BHX202A00-530066e3,CN-XA10BHX202A00-0245c699,CN-XA10BHX202A00-dbf7bca3"
+sodium-citrate,Sodium Citrate,枸橼酸钠血滤置换,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB05ZBJ252B00-33eae864,CN-XB05ZBJ252B00-6d291e0d,CN-XB05ZBJ252B00-73d48e52"
+sodium-cromoglicate,Sodium Cromoglicate,色甘酸钠,high,product_majority,47,1.0,1,"CN 单成分产品中文名（47/47 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XR01ACS207R01-0ffc8ee5,CN-XR01ACS207R01-8ff9be9b,CN-XR01ACS207R01-927611f1"
+sodium-hyaluronate,Sodium Hyaluronate,玻璃酸钠,high,product_majority,210,0.968,4,"CN 单成分产品中文名（210/217 个产品，share=0.968，候选变体 4 个）；示例 product_id=CN-XM09AXB146B00-cf6ee92a,CN-XM09AXB146B00-efa22591,CN-XM09AXB146B00-d35884cc"
+sodium-lactate,Sodium Lactate,乳酸钠林格,high,product_majority,148,0.892,2,"CN 单成分产品中文名（148/166 个产品，share=0.892，候选变体 2 个）；示例 product_id=CN-XB05BBR057B00-f82c251a,CN-XB05BBR057B00-adfdb5a3,CN-XB05BBR057B00-83ae988e"
+sodium-zirconium-cyclosilicate,Sodium Zirconium Cyclosilicate,环硅酸锆钠,high,override,12,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=环硅酸锆钠；cn_substance_id=cn-83aaa2b9f0；evidence_url=https://www.wikidata.org/wiki/Q17091153
+sofosbuvir,Sofosbuvir,索磷布韦,high,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=索磷布韦；cn_substance_id=cn-f5c58aed9a；evidence_url=https://www.wikidata.org/wiki/Q2502747
+solifenacin,Solifenacin,琥珀酸索利那新,high,product_majority,20,0.952,2,"CN 单成分产品中文名（20/21 个产品，share=0.952，候选变体 2 个）；示例 product_id=CN-XG04BDS224A00-493fcc23,CN-XG04BDS224A00-67cb2aeb,CN-XG04BDS224A00-c5c5051d"
+sorafenib,Sorafenib,甲苯磺酸索拉非尼,high,product_majority,14,0.875,2,"CN 单成分产品中文名（14/16 个产品，share=0.875，候选变体 2 个）；示例 product_id=CN-XL01EXS225A00-0cb3dded,CN-XL01EXS225A00-5ff8e5c8,CN-XL01EXS225A00-7230c4ab"
+sorbitol,Sorbitol,山梨醇,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=山梨醇；cn_substance_id=cn-788aeec000；evidence_url=https://www.wikidata.org/wiki/Q245280
+spironolactone,Spironolactone,螺内酯,high,product_majority,51,0.944,2,"CN 单成分产品中文名（51/54 个产品，share=0.944，候选变体 2 个）；示例 product_id=CN-XC03DAL269A00-111a020d,CN-XC03DAL269A00-758749c3,CN-XC03DAL269A00-cab8625a"
+stavudine,Stavudine,司他夫定,high,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=司他夫定；cn_substance_id=cn-f169b91cfb；evidence_url=https://www.wikidata.org/wiki/Q423984
+stiripentol,Stiripentol,司替戊醇,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=司替戊醇；cn_substance_id=cn-b2b767fef3；evidence_url=https://www.wikidata.org/wiki/Q412182
+streptokinase,Streptokinase,链激酶,high,override,14,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=链激酶；cn_substance_id=cn-062ba3732e；evidence_url=https://www.wikidata.org/wiki/Q416485
+streptomycin,Streptomycin,硫酸链霉素,high,product_majority,31,1.0,1,"CN 单成分产品中文名（31/31 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01GAL084A00-b278bee4,CN-XJ01GAL084A00-674b5bad,CN-XJ01GAL084B00-63929bc3"
+sucralfate,Sucralfate,硫糖铝,high,product_majority,68,0.944,3,"CN 单成分产品中文名（68/72 个产品，share=0.944，候选变体 3 个）；示例 product_id=CN-XA02BXL152A00-e4032f29,CN-XA02BXL152A00-f7f44a35,CN-XA02BXL152A00-59a84c46"
+sugammadex,Sugammadex,舒更葡糖钠,high,product_majority,69,0.972,2,"CN 单成分产品中文名（69/71 个产品，share=0.972，候选变体 2 个）；示例 product_id=CN-XV03ABS250B00-c74814bd,CN-XV03ABS250B00-6793917a,CN-XV03ABS250B00-be19c45e"
+sulbactam,Sulbactam,舒巴坦钠,high,product_majority,72,1.0,1,"CN 单成分产品中文名（72/72 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01CGS089B00-be03ecf2,CN-XJ01CGS089B00-fa13773d,CN-XJ01CGS089B00-df661a5d"
+sulfaguanidine,Sulfaguanidine,磺胺脒,high,product_majority,33,1.0,1,"CN 单成分产品中文名（33/33 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA07ABF312A00-f9e9aa47,CN-XA07ABF312A00-15a6fb26,CN-XA07ABF312A00-1fab18a2"
+sulfamethoxazole,Sulfamethoxazole,磺胺甲噁唑,high,product_majority,691,0.813,8,"CN 单成分产品中文名（691/850 个产品，share=0.813，候选变体 8 个）；示例 product_id=CN-XJ01ECH064A00-cf061cea,CN-XJ01ECH064A00-c1e65503,CN-XJ01ECH064A00-d5432430"
+sulindac,Sulindac,舒林酸,high,override,15,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=舒林酸；cn_substance_id=cn-342d250f91；evidence_url=https://www.wikidata.org/wiki/Q963093
+sulpiride,Sulpiride,舒必利,high,product_majority,77,1.0,1,"CN 单成分产品中文名（77/77 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN05ALS090A00-816a7fe7,CN-XN05ALS090A00-9ccf02a0,CN-XN05ALS090A00-39fa7550"
+tacalcitol,Tacalcitol,他卡西醇,high,override,7,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=他卡西醇；cn_substance_id=cn-7b4ce87cdd；evidence_url=https://www.wikidata.org/wiki/Q155682
+tacrolimus,Tacrolimus,他克莫司,high,product_majority,91,0.875,3,"CN 单成分产品中文名（91/104 个产品，share=0.875，候选变体 3 个）；示例 product_id=CN-XD11AXT002F00-46f1903b,CN-XD11AXT002F00-2d016723,CN-XD11AXT002F00-138f2efb"
+tadalafil,Tadalafil,他达拉非,high,product_majority,921,0.981,3,"CN 单成分产品中文名（921/939 个产品，share=0.981，候选变体 3 个）；示例 product_id=CN-XG04BET001A00-ed6e4458,CN-XG04BET001A00-e96a7925,CN-XG04BET001A00-daba0eb4"
+tafamidis,Tafamidis,氯苯唑酸,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=氯苯唑酸；cn_substance_id=cn-b306ed8443；evidence_url=https://www.wikidata.org/wiki/Q519447
+tafluprost,Tafluprost,他氟前列素,high,override,17,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=他氟前列素；cn_substance_id=cn-26b924b985；evidence_url=https://www.wikidata.org/wiki/Q2139543
+tamoxifen,Tamoxifen,枸橼酸他莫昔芬,high,product_majority,9,0.9,2,"CN 单成分产品中文名（9/10 个产品，share=0.9，候选变体 2 个）；示例 product_id=CN-XL02BAT003A00-bca760c4,CN-XL02BAT003A00-c03aa1b5,CN-XL02BAT003A00-071ad005"
+taurine,Taurine,牛磺酸,high,product_majority,134,0.971,3,"CN 单成分产品中文名（134/138 个产品，share=0.971，候选变体 3 个）；示例 product_id=CN-XN02BGF418E00-7b696c23,CN-XN02BGN067A00-f2edf547,CN-XN02BGN067A00-6e4b02ed"
+tazarotene,Tazarotene,他扎罗汀,high,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=他扎罗汀；cn_substance_id=cn-41f1b13fa9；evidence_url=https://www.wikidata.org/wiki/Q3981685
+teicoplanin,Teicoplanin,替考拉宁,high,product_majority,13,0.812,3,"CN 单成分产品中文名（13/16 个产品，share=0.812，候选变体 3 个）；示例 product_id=CN-XJ01XAT037B00-e12d2daf,CN-XJ01XAT037B00-00a81deb,CN-XJ01XAT037B00-dd20bf1d"
+temozolomide,Temozolomide,替莫唑胺,high,product_majority,39,0.886,2,"CN 单成分产品中文名（39/44 个产品，share=0.886，候选变体 2 个）；示例 product_id=CN-XL01AXT041B00-40249811,CN-XL01AXT041B00-84aff4f3,CN-XL01AXT041B00-6ae0b32e"
+tenofovir-alafenamide,Tenofovir Alafenamide,富马酸丙酚替诺福韦,high,product_majority,59,0.952,2,"CN 单成分产品中文名（59/62 个产品，share=0.952，候选变体 2 个）；示例 product_id=CN-XJ05AFB229A00-be644e27,CN-XJ05AFB229A00-18cb156d,CN-XJ05AFB229A00-b059d318"
+terbinafine,Terbinafine,盐酸特比萘芬,high,product_majority,235,0.864,7,"CN 单成分产品中文名（235/272 个产品，share=0.864，候选变体 7 个）；示例 product_id=CN-XD01AET021F00-f445b679,CN-XD01AET021F00-0fe7854d,CN-XD01AET021F00-30559889"
+terbutaline,Terbutaline,硫酸特布他林,high,product_majority,119,0.869,8,"CN 单成分产品中文名（119/137 个产品，share=0.869，候选变体 8 个）；示例 product_id=CN-XR03ACT022L00-91fb78f8,CN-XR03ACT022L00-32ff600a,CN-XR03ACT022L00-6e83db6f"
+terfenadine,Terfenadine,特非那定,high,override,15,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=特非那定；cn_substance_id=cn-ea0fe6b5f6；evidence_url=https://www.wikidata.org/wiki/Q417909
+teriflunomide,Teriflunomide,特立氟胺,high,override,5,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=特立氟胺；cn_substance_id=cn-c94644bedc；evidence_url=https://www.wikidata.org/wiki/Q3077133
+teriparatide,Teriparatide,特立帕肽,high,override,12,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=特立帕肽；cn_substance_id=cn-bf89f25d35；evidence_url=https://www.wikidata.org/wiki/Q411781
+terlipressin,Terlipressin,特利加压素,high,product_majority,30,0.968,2,"CN 单成分产品中文名（30/31 个产品，share=0.968，候选变体 2 个）；示例 product_id=CN-XH01BAT027B00-3b5291ff,CN-XH01BAT027B00-9b61d208,CN-XH01BAT027B00-9603e100"
+tetrabenazine,Tetrabenazine,丁苯那嗪,high,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=丁苯那嗪；cn_substance_id=cn-801310e5b3；evidence_url=https://www.wikidata.org/wiki/Q413050
+tetryzoline,Tetryzoline,萘敏维,high,product_majority,76,0.905,4,"CN 单成分产品中文名（76/84 个产品，share=0.905，候选变体 4 个）；示例 product_id=CN-XS01GAN024G01-11ad5435,CN-XS01GAN024G01-63cba6d3,CN-XS01GAN024G01-ee3a7e22"
+thalidomide,Thalidomide,沙利度胺,high,product_majority,9,1.0,1,"CN 单成分产品中文名（9/9 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL04AXS052A00-837d8506,CN-XL04AXS052A00-8b1ebf40,CN-XL04AXS052A00-fea48cf2"
+thioguanine,Thioguanine,硫鸟嘌呤,high,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硫鸟嘌呤；cn_substance_id=cn-09c0759532；evidence_url=https://www.wikidata.org/wiki/Q385347
+thrombin,Thrombin,凝血酶,high,product_majority,111,1.0,1,"CN 单成分产品中文名（111/111 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB02BCN063P00-7b80d56f,CN-XB02BCN063P00-5ae09870,CN-XB02BCN063P00-483ac155"
+thyroid,Thyroid,甲状腺,high,product_majority,28,1.0,1,"CN 单成分产品中文名（28/28 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XH03AAJ091A00-570dea58,CN-XH03AAJ091A00-561350a2,CN-XH03AAJ091A00-fc4a75d0"
+ticagrelor,Ticagrelor,替格瑞洛,high,product_majority,228,0.938,2,"CN 单成分产品中文名（228/243 个产品，share=0.938，候选变体 2 个）；示例 product_id=CN-XB01ACT157A00-71bf3db3,CN-XB01ACT157A00-9139b13a,CN-XB01ACT157A00-8a95e9e7"
+tigecycline,Tigecycline,替加环素,high,product_majority,35,0.875,2,"CN 单成分产品中文名（35/40 个产品，share=0.875，候选变体 2 个）；示例 product_id=CN-XJ01AAT140B00-65613648,CN-XJ01AAT140B00-3a06529f,CN-XJ01AAT140B00-07fe8d83"
+timolol,Timolol,马来酸噻吗洛尔,high,product_majority,44,0.917,2,"CN 单成分产品中文名（44/48 个产品，share=0.917，候选变体 2 个）；示例 product_id=CN-XC07AAS008A00-2fcefb62,CN-XC07AAS008A00-7ee0baea,CN-XC07AAS008A00-835e5c40"
+tinidazole,Tinidazole,替硝唑,high,product_majority,119,0.85,10,"CN 单成分产品中文名（119/140 个产品，share=0.85，候选变体 10 个）；示例 product_id=CN-XG01AFT045A00-6845066e,CN-XG01AFT045A00-4a9e5fc7,CN-XG01AFT045A00-d7a8ce72"
+tiopronin,Tiopronin,硫普罗宁,high,product_majority,134,0.838,10,"CN 单成分产品中文名（134/160 个产品，share=0.838，候选变体 10 个）；示例 product_id=CN-XA05BAL139A00-a59a7519,CN-XA05BAL139A00-74958981,CN-XA05BAL139A00-a69611f1"
+tirofiban,Tirofiban,盐酸替罗非班,high,product_majority,20,0.909,3,"CN 单成分产品中文名（20/22 个产品，share=0.909，候选变体 3 个）；示例 product_id=CN-XB01ACT038B00-2ecb9fe7,CN-XB01ACT038B00-820c1060,CN-XB01ACT038B00-dd8e2e1f"
+tirotrofina-alfa,Tirotrofina Alfa,普罗瑞林,high,product_majority,3,1.0,1,"CN 单成分产品中文名（3/3 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV04CJP100B00-312aa506,CN-XV04CJP100B01-91b266b4,CN-XV04CJP100B01-90ff606a"
+tofacitinib,Tofacitinib,枸橼酸托法替布,high,product_majority,88,0.978,2,"CN 单成分产品中文名（88/90 个产品，share=0.978，候选变体 2 个）；示例 product_id=CN-XL04AAT163A00-ff7b9959,CN-XL04AAT163A00-b07208b1,CN-XL04AAT163A00-ec04a727"
+tolbutamide,Tolbutamide,甲苯磺丁脲,high,product_majority,29,1.0,1,"CN 单成分产品中文名（29/29 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA10BBJ026A00-63ab057d,CN-XA10BBJ026A00-a087a23d,CN-XA10BBJ026A00-23df4ace"
+tolcapone,Tolcapone,托卡朋,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=托卡朋；cn_substance_id=cn-a9c7d87b53；evidence_url=https://www.wikidata.org/wiki/Q413840
+tolvaptan,Tolvaptan,托伐普坦,high,product_majority,14,0.875,2,"CN 单成分产品中文名（14/16 个产品，share=0.875，候选变体 2 个）；示例 product_id=CN-XC03XAT151A00-2fcccfdb,CN-XC03XAT151A00-04c5de87,CN-XC03XAT151A00-a45488fc"
+topiramate,Topiramate,托吡酯,high,product_majority,14,0.824,2,"CN 单成分产品中文名（14/17 个产品，share=0.824，候选变体 2 个）；示例 product_id=CN-XN03AXT110A00-962cb861,CN-XN03AXT110A00-40a565dc,CN-XN03AXT110A00-4a0dc94b"
+torasemide,Torasemide,托拉塞米,high,product_majority,106,0.815,8,"CN 单成分产品中文名（106/130 个产品，share=0.815，候选变体 8 个）；示例 product_id=CN-XC03CAT115A00-c74ab0bd,CN-XC03CAT115A00-cab269a4,CN-XC03CAT115A00-0565b30d"
+trametinib,Trametinib,曲美替尼,high,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=曲美替尼；cn_substance_id=cn-fd7d283038；evidence_url=https://www.wikidata.org/wiki/Q7833138
+tranexamic-acid,Tranexamic Acid,氨甲环酸,high,product_majority,240,0.93,6,"CN 单成分产品中文名（240/258 个产品，share=0.93，候选变体 6 个）；示例 product_id=CN-XB02AAA172A00-b2977470,CN-XB02AAA172A00-6164c041,CN-XB02AAA172A00-ef3f64e2"
+travoprost,Travoprost,曲伏前列素,high,product_majority,6,0.857,2,"CN 单成分产品中文名（6/7 个产品，share=0.857，候选变体 2 个）；示例 product_id=CN-XS01EEQ092G01-d8161391,CN-XS01EEQ092G01-7bfc65d3,CN-XS01EEQ092G01-5c590907"
+triamterene,Triamterene,氨苯蝶啶,high,product_majority,21,0.84,3,"CN 单成分产品中文名（21/25 个产品，share=0.84，候选变体 3 个）；示例 product_id=CN-XC03DBA103A00-2ac98b3a,CN-XC03DBA103A00-8e073e21,CN-XC03DBA103A00-ab363019"
+triazolam,Triazolam,三唑仑,high,override,7,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=三唑仑；cn_substance_id=cn-e2f6ec8a8d；evidence_url=https://www.wikidata.org/wiki/Q412143
+trihexyphenidyl,Trihexyphenidyl,盐酸苯海索,high,product_majority,15,1.0,1,"CN 单成分产品中文名（15/15 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN04AAB061A00-11a2f448,CN-XN04AAB061A00-cc399354,CN-XN04AAB061A00-d048d288"
+trimetazidine,Trimetazidine,盐酸曲美他嗪,high,product_majority,114,0.958,2,"CN 单成分产品中文名（114/119 个产品，share=0.958，候选变体 2 个）；示例 product_id=CN-XC01EBQ102A00-c3f3101b,CN-XC01EBQ102A00-c853f12d,CN-XC01EBQ102A00-8bde337b"
+trimethoprim,Trimethoprim,甲氧苄啶,high,product_majority,82,1.0,1,"CN 单成分产品中文名（82/82 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ01EAJ083A00-eddbb1a2,CN-XJ01EAJ083A00-233f6bec,CN-XJ01EAJ083A00-5a10b560"
+tropicamide,Tropicamide,托吡卡胺,high,product_majority,38,0.95,2,"CN 单成分产品中文名（38/40 个产品，share=0.95，候选变体 2 个）；示例 product_id=CN-XS01FAF508G01-777f196f,CN-XS01FAF508G01-0779fa93,CN-XS01FAF508G01-738b1647"
+urea,Urea,尿素,high,product_majority,50,1.0,1,"CN 单成分产品中文名（50/50 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD02AEN058F00-9cebc112,CN-XD02AEN058F00-ba8db647,CN-XD02AEN058F00-4cce937d"
+urokinase,Urokinase,尿激酶,high,product_majority,131,0.97,2,"CN 单成分产品中文名（131/135 个产品，share=0.97，候选变体 2 个）；示例 product_id=CN-XB01ADN054B00-962a2b85,CN-XB01ADN054B00-f36d16c7,CN-XB01ADN054B00-51e5a080"
+ursodeoxycholic-acid,Ursodeoxycholic Acid,熊去氧胆酸,high,product_majority,77,0.963,3,"CN 单成分产品中文名（77/80 个产品，share=0.963，候选变体 3 个）；示例 product_id=CN-XA05AAX163A00-e0b27a36,CN-XA05AAX163A00-d6f22670,CN-XA05AAX163A00-df9c4da0"
+valproic-acid,Valproic Acid,丙戊酸钠,high,product_majority,101,0.91,4,"CN 单成分产品中文名（101/111 个产品，share=0.91，候选变体 4 个）；示例 product_id=CN-XN03AGB140A00-b5eebc33,CN-XN03AGB140A00-a7ba946d,CN-XN03AGB140A00-6c7fd826"
+vancomycin,Vancomycin,盐酸万古霉素,high,product_majority,19,0.905,3,"CN 单成分产品中文名（19/21 个产品，share=0.905，候选变体 3 个）；示例 product_id=CN-XA07AAW001E00-04f5e96d,CN-XA07AAW001E00-a057d5ea,CN-XJ01XAW001B00-9a2c099e"
+vecuronium,Vecuronium,维库溴铵,high,product_majority,32,0.941,2,"CN 单成分产品中文名（32/34 个产品，share=0.941，候选变体 2 个）；示例 product_id=CN-XM03ACW026B00-60e2cbd7,CN-XM03ACW026B00-3d560115,CN-XM03ACW026B00-d90942c4"
+vemurafenib,Vemurafenib,维莫非尼,high,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=维莫非尼；cn_substance_id=cn-d951bf65d8；evidence_url=https://www.wikidata.org/wiki/Q423111
+venlafaxine,Venlafaxine,盐酸文拉法辛,high,product_majority,108,0.939,3,"CN 单成分产品中文名（108/115 个产品，share=0.939，候选变体 3 个）；示例 product_id=CN-XN06AXW067A00-12ef9683,CN-XN06AXW067A00-5a986a39,CN-XN06AXW067A00-b0a4b117"
+verapamil,Verapamil,盐酸维拉帕米,high,product_majority,48,0.814,5,"CN 单成分产品中文名（48/59 个产品，share=0.814，候选变体 5 个）；示例 product_id=CN-XC08DAW027A00-ed5b776f,CN-XC08DAW027A00-ce8c3376,CN-XC08DAW027A00-87e4217c"
+vildagliptin,Vildagliptin,维格列汀,high,product_majority,100,0.909,2,"CN 单成分产品中文名（100/110 个产品，share=0.909，候选变体 2 个）；示例 product_id=CN-XA10BHW104A00-cae6e20d,CN-XA10BHW104A00-92425e41,CN-XA10BHW104A00-24ab4ebb"
+vincristine,Vincristine,硫酸长春新碱,high,product_majority,16,1.0,1,"CN 单成分产品中文名（16/16 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL01CAC022B00-954dcd73,CN-XL01CAC022B00-292b5934,CN-XL01CAC022B00-d31fa51a"
+vindesine,Vindesine,硫酸长春地辛,high,product_majority,12,0.857,2,"CN 单成分产品中文名（12/14 个产品，share=0.857，候选变体 2 个）；示例 product_id=CN-XL01CAC018B00-b5b78d43,CN-XL01CAC018B00-45607be5,CN-XL01CAC018B00-36946c64"
+voriconazole,Voriconazole,伏立康唑,high,product_majority,81,0.953,2,"CN 单成分产品中文名（81/85 个产品，share=0.953，候选变体 2 个）；示例 product_id=CN-XJ02ACF059A00-704b3e5f,CN-XJ02ACF059A00-55b6ec0d,CN-XJ02ACF059A00-667ee01f"
+vortioxetine,Vortioxetine,氢溴酸伏硫西汀,high,product_majority,54,0.871,2,"CN 单成分产品中文名（54/62 个产品，share=0.871，候选变体 2 个）；示例 product_id=CN-XN06AXF704A00-eb721797,CN-XN06AXF704A00-f94a6ae1,CN-XN06AXF704A00-a0364d10"
+warfarin,Warfarin,华法林钠,high,product_majority,17,1.0,1,"CN 单成分产品中文名（17/17 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB01AAH029A00-27b7a8cf,CN-XB01AAH029A00-4b5d6e69,CN-XB01AAH029A00-5dab7330"
+water-for-injection,Water For Injection,灭菌注射用水,high,product_majority,547,1.0,1,"CN 单成分产品中文名（547/547 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB05BBM115B00-deac67b8,CN-XB05BBM115B00-45bae36f,CN-XB05BBM115B00-dc0e3b74"
+xylitol,Xylitol,木糖醇,high,product_majority,108,0.973,4,"CN 单成分产品中文名（108/111 个产品，share=0.973，候选变体 4 个）；示例 product_id=CN-XV02DCM128A00-ad465809,CN-XV02DCM128A00-55af9367,CN-XV02DCM128B00-2859e554"
+zaleplon,Zaleplon,扎来普隆,high,override,39,1.0,9,cn_inn_overrides.csv 显式映射：zh_name=扎来普隆；cn_substance_id=cn-01277ac887；evidence_url=https://www.wikidata.org/wiki/Q145052
+zinc-oxide,Zinc Oxide,氧化锌,high,product_majority,20,1.0,1,"CN 单成分产品中文名（20/20 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XD02ABF570F00-27b7a641,CN-XD02ABY043F00-53efe787,CN-XD02ABY043F00-738cfbfd"
+zolmitriptan,Zolmitriptan,佐米曲普坦,high,override,56,1.0,9,cn_inn_overrides.csv 显式映射：zh_name=佐米曲普坦；cn_substance_id=cn-7b123933d9；evidence_url=https://www.wikidata.org/wiki/Q218820
+zolpidem,Zolpidem,酒石酸唑吡坦,high,product_majority,21,0.808,3,"CN 单成分产品中文名（21/26 个产品，share=0.808，候选变体 3 个）；示例 product_id=CN-XN05CFZ078A00-1c9d4d09,CN-XN05CFZ078A00-cb03b9c8,CN-XN05CFZ078A00-7ee0ffea"
+zuclopentixol,Zuclopentixol,氯普噻吨,high,product_majority,19,0.905,2,"CN 单成分产品中文名（19/21 个产品，share=0.905，候选变体 2 个）；示例 product_id=CN-XN05AFL242A00-eca13cb9,CN-XN05AFL242A00-3b3521fb,CN-XN05AFL242A00-93e4a50f"
+abiraterone,Abiraterone,醋酸阿比特龙,medium,override,21,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=醋酸阿比特龙；cn_substance_id=cn-c82808ed01；evidence_url=https://www.wikidata.org/wiki/Q27888393
+abrocitinib,Abrocitinib,阿布昔替尼,medium,override,12,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿布昔替尼；cn_substance_id=cn-1d2d53dda9；evidence_url=https://www.wikidata.org/wiki/Q76656815
+aceite-etiodado,Aceite Etiodado,碘化油,medium,product_majority,3,0.6,2,"CN 单成分产品中文名（3/5 个产品，share=0.6，候选变体 2 个）；示例 product_id=CN-XV08ADD110B00-75cf5bc3,CN-XV08ADD110B00-8a6994bf,CN-XV08ADD110B00-266b6c01"
+acipimox,Acipimox,阿昔莫司,medium,product_majority,22,0.71,4,"CN 单成分产品中文名（22/31 个产品，share=0.71，候选变体 4 个）；示例 product_id=CN-XC10AXA076A00-ba885f97,CN-XC10AXA076A00-6addbeb7,CN-XC10AXA076A00-82112547"
+adefovir,Adefovir,阿德福韦酯,medium,product_majority,69,0.611,12,"CN 单成分产品中文名（69/113 个产品，share=0.611，候选变体 12 个）；示例 product_id=CN-XJ05AFA014A00-e1c489b0,CN-XJ05AFA014A00-69631465,CN-XJ05AFA014A00-2a6d70aa"
+albuterol,Albuterol,硫酸沙丁胺醇,medium,product_majority,173,0.712,15,"CN 单成分产品中文名（173/243 个产品，share=0.712，候选变体 15 个）；示例 product_id=CN-XR03ACS048L00-1a19f7e0,CN-XR03ACS048L01-838b1837,CN-XR03ACS048L01-3ac3896a"
+alectinib,Alectinib,盐酸阿来替尼,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸阿来替尼；cn_substance_id=cn-bea315dd10；evidence_url=https://www.wikidata.org/wiki/Q21099132
+alendronic-acid,Alendronic Acid,阿仑膦酸钠,medium,product_majority,66,0.786,5,"CN 单成分产品中文名（66/84 个产品，share=0.786，候选变体 5 个）；示例 product_id=CN-XM05BAA029A00-00b408ee,CN-XM05BAA029A00-4a54041b,CN-XM05BAA029A00-474cb310"
+alfa-1-antitripsina,Alfa 1 Antitripsina,抑肽酶,medium,product_majority,17,0.739,2,"CN 单成分产品中文名（17/23 个产品，share=0.739，候选变体 2 个）；示例 product_id=CN-XB02ABY159B00-130e6509,CN-XB02ABY159B00-32ed2e99,CN-XB02ABY159B00-3c5e3a30"
+alfacalcidol,Alfacalcidol,阿法骨化醇,medium,product_majority,60,0.632,9,"CN 单成分产品中文名（60/95 个产品，share=0.632，候选变体 9 个）；示例 product_id=CN-XA11CCA017A00-5628e8ef,CN-XA11CCA017A00-0139f5ee,CN-XA11CCA017A00-1be4470a"
+alfuzosin,Alfuzosin,盐酸阿夫唑嗪,medium,product_majority,8,0.667,3,"CN 单成分产品中文名（8/12 个产品，share=0.667，候选变体 3 个）；示例 product_id=CN-XG04CAA020A00-16844d0c,CN-XG04CAA020A00-a7aa2e57,CN-XG04CAA020A01-76dca483"
+alimemazine,Alimemazine,异丙嗪胆汁,medium,product_majority,4,0.667,2,"CN 单成分产品中文名（4/6 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XR06ADY137A00-a9752888,CN-XR06ADY137A00-95792b00,CN-XR06ADY137A00-93f99196"
+amiloride,Amiloride,盐酸阿米洛利,medium,override,14,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸阿米洛利；cn_substance_id=cn-63bd0a18c1；evidence_url=https://www.wikidata.org/wiki/Q419995
+amivantamab,Amivantamab,埃万妥单抗,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=埃万妥单抗；cn_substance_id=cn-0dff88a3ad；evidence_url=https://www.wikidata.org/wiki/Q106957199
+amobarbital,Amobarbital,异戊巴比妥钠,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=异戊巴比妥钠；cn_substance_id=cn-819472010e；evidence_url=https://www.wikidata.org/wiki/Q415850
+amorolfine,Amorolfine,盐酸阿莫罗芬,medium,override,22,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸阿莫罗芬；cn_substance_id=cn-4487eea7e6；evidence_url=https://www.wikidata.org/wiki/Q123195
+amoxicillin,Amoxicillin,阿莫西林,medium,product_majority,1225,0.792,21,"CN 单成分产品中文名（1225/1546 个产品，share=0.792，候选变体 21 个）；示例 product_id=CN-XJ01CAA040A00-1b85d01e,CN-XJ01CAA040A00-be1f9fb6,CN-XJ01CAA040A00-d6d1fbc8"
+amylase,Amylase,淀粉酶,medium,override,7,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=淀粉酶；cn_substance_id=cn-7c07c77624；evidence_url=https://www.wikidata.org/wiki/Q17153
+anastrozole,Anastrozole,阿那曲唑,medium,product_majority,14,0.667,4,"CN 单成分产品中文名（14/21 个产品，share=0.667，候选变体 4 个）；示例 product_id=CN-XL02BGA045A00-3c91e2ac,CN-XL02BGA045A00-679e0a3d,CN-XL02BGA045A00-2f527eac"
+apomorphine,Apomorphine,盐酸阿扑吗啡,medium,override,18,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸阿扑吗啡；cn_substance_id=cn-7422eae675；evidence_url=https://www.wikidata.org/wiki/Q269111
+arginine,Arginine,盐酸精氨酸,medium,product_majority,28,0.737,3,"CN 单成分产品中文名（28/38 个产品，share=0.737，候选变体 3 个）；示例 product_id=CN-XB05XBJ128B00-c35482db,CN-XB05XBJ128B00-bd0d8a30,CN-XB05XBJ128B00-f30b90ec"
+artemether,Artemether,蒿甲醚,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=蒿甲醚；cn_substance_id=cn-f6bdf00c3b；evidence_url=https://www.wikidata.org/wiki/Q416199
+artesunate,Artesunate,青蒿琥酯,medium,product_majority,6,0.667,2,"CN 单成分产品中文名（6/9 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XP01BEQ050A00-4ca136dc,CN-XP01BEQ050A00-b4055f6c,CN-XP01BEQ050A00-12e0c627"
+articaine,Articaine,盐酸阿替卡因,medium,override,6,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸阿替卡因；cn_substance_id=cn-94c5f9a62f；evidence_url=https://www.wikidata.org/wiki/Q421297
+atomoxetine,Atomoxetine,盐酸托莫西汀,medium,product_majority,125,0.772,2,"CN 单成分产品中文名（125/162 个产品，share=0.772，候选变体 2 个）；示例 product_id=CN-XN06BAT117E00-9fa76dcb,CN-XN06BAT117E00-071f7978,CN-XN06BAT117E00-4a24b4d4"
+avacopan,Avacopan,阿伐可泮,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿伐可泮；cn_substance_id=cn-b9360f2d77；evidence_url=https://www.wikidata.org/wiki/Q27285470
+axicabtagene-ciloleucel,Axicabtagene Ciloleucel,阿基仑赛,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=阿基仑赛；cn_substance_id=cn-3d5a7cfa06；evidence_url=https://www.wikidata.org/wiki/Q30314851
+azilsartan,Azilsartan,阿齐沙坦,medium,override,9,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=阿齐沙坦；cn_substance_id=cn-4cabe168c8；evidence_url=https://www.wikidata.org/wiki/Q27074832
+bacillus-cereus,Bacillus Cereus,蜡样芽孢杆菌,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=蜡样芽孢杆菌；cn_substance_id=cn-9f552414d3；evidence_url=https://www.wikidata.org/wiki/Q131307
+bacillus-subtilis,Bacillus Subtilis,枯草芽孢杆菌,medium,override,17,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=枯草芽孢杆菌；cn_substance_id=cn-739ec507da；evidence_url=https://www.wikidata.org/wiki/Q131238
+baicalin,Baicalin,黄芩苷,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=黄芩苷；cn_substance_id=cn-79cfad918a；evidence_url=https://www.wikidata.org/wiki/Q2879368
+baloxavir-marboxil,Baloxavir Marboxil,玛巴洛沙韦,medium,override,5,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=玛巴洛沙韦；cn_substance_id=cn-bded6a0cec；evidence_url=https://www.wikidata.org/wiki/Q48333728
+bambuterol,Bambuterol,盐酸班布特罗,medium,product_majority,54,0.692,9,"CN 单成分产品中文名（54/78 个产品，share=0.692，候选变体 9 个）；示例 product_id=CN-XR03CCB016A00-2a6448b9,CN-XR03CCB016A00-db76f8b9,CN-XR03CCB016A00-a52fb701"
+barnidipine,Barnidipine,盐酸巴尼地平,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸巴尼地平；cn_substance_id=cn-85bf043aae；evidence_url=https://www.wikidata.org/wiki/Q925327
+bemiparin,Bemiparin,贝米肝素钠,medium,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=贝米肝素钠；cn_substance_id=cn-bdff6c6b6f；evidence_url=https://www.wikidata.org/wiki/Q971360
+benzalkonium,Benzalkonium,苯扎氯铵,medium,override,36,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=苯扎氯铵；cn_substance_id=cn-4610a18150；evidence_url=https://www.wikidata.org/wiki/Q55261298
+benzyl-alcohol,Benzyl Alcohol,苯甲醇,medium,override,44,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=苯甲醇；cn_substance_id=cn-062d00c803；evidence_url=https://www.wikidata.org/wiki/Q52353
+benzyl-benzoate,Benzyl Benzoate,苯甲酸苄酯,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=苯甲酸苄酯；cn_substance_id=cn-d33b77eb0f；evidence_url=https://www.wikidata.org/wiki/Q413755
+betamethasone,Betamethasone,倍他米松,medium,product_base_aggregate,53,0.841,8,CN 单成分产品中文名（53/63 个产品，share=0.841，候选变体 8 个）；示例 product_id=
+betaxolol,Betaxolol,盐酸倍他洛尔,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸倍他洛尔；cn_substance_id=cn-16cef0acd8；evidence_url=https://www.wikidata.org/wiki/Q794162
+bevacizumab,Bevacizumab,贝伐珠单抗,medium,override,30,1.0,14,cn_inn_overrides.csv 显式映射：zh_name=贝伐珠单抗；cn_substance_id=cn-d70d0fcd92；evidence_url=https://www.wikidata.org/wiki/Q413299
+bicalutamide,Bicalutamide,比卡鲁胺,medium,product_majority,17,0.773,3,"CN 单成分产品中文名（17/22 个产品，share=0.773，候选变体 3 个）；示例 product_id=CN-XL02BBB085A00-b971c2a2,CN-XL02BBB085A00-fbe3517a,CN-XL02BBB085A00-cb6d6957"
+bisoprolol,Bisoprolol,富马酸比索洛尔,medium,product_majority,76,0.784,5,"CN 单成分产品中文名（76/97 个产品，share=0.784，候选变体 5 个）；示例 product_id=CN-XC07ABB087A00-b33c66d3,CN-XC07ABB087A00-6c05401d,CN-XC07ABB087A00-d21ec078"
+bleomycin,Bleomycin,盐酸博来霉素,medium,override,3,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸博来霉素；cn_substance_id=cn-2c116636a3；evidence_url=https://www.wikidata.org/wiki/Q415571
+borax,Borax,硼砂,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硼砂；cn_substance_id=cn-1221dfd034；evidence_url=https://www.wikidata.org/wiki/Q5319
+brigatinib,Brigatinib,布格替尼,medium,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=布格替尼；cn_substance_id=cn-24991b01c9；evidence_url=https://www.wikidata.org/wiki/Q27456393
+brimonidine,Brimonidine,酒石酸溴莫尼定,medium,product_majority,12,0.6,4,"CN 单成分产品中文名（12/20 个产品，share=0.6，候选变体 4 个）；示例 product_id=CN-XS01EAX174G01-ef0da143,CN-XS01EAX174G01-393ecce0,CN-XS01EAX174G01-d16dd18b"
+bromelain,Bromelain,菠萝蛋白酶,medium,override,38,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=菠萝蛋白酶；cn_substance_id=cn-2c3c5511e9；evidence_url=https://www.wikidata.org/wiki/Q415756
+bromocriptine,Bromocriptine,甲磺酸溴隐亭,medium,override,5,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲磺酸溴隐亭；cn_substance_id=cn-fb6b39f3e3；evidence_url=https://www.wikidata.org/wiki/Q413581
+budesonide,Budesonide,布地奈德,medium,product_majority,55,0.705,6,"CN 单成分产品中文名（55/78 个产品，share=0.705，候选变体 6 个）；示例 product_id=CN-XH02ABB165E00-77c790d4,CN-XR01ADB165L02-38aeb0a6,CN-XR01ADB165L02-fac6a8a1"
+bupropion,Bupropion,盐酸安非他酮,medium,product_majority,21,0.75,3,"CN 单成分产品中文名（21/28 个产品，share=0.75，候选变体 3 个）；示例 product_id=CN-XN06AXA090A00-34e40fa5,CN-XN06AXA090A00-bc6807d0,CN-XN06AXA090A01-8537cebe"
+buspirone,Buspirone,盐酸丁螺环酮,medium,override,28,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=盐酸丁螺环酮；cn_substance_id=cn-c3ab056653；evidence_url=https://www.wikidata.org/wiki/Q412194
+butenafine,Butenafine,盐酸布替萘芬,medium,override,29,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=盐酸布替萘芬；cn_substance_id=cn-1cf6628a2f；evidence_url=https://www.wikidata.org/wiki/Q850729
+butorphanol,Butorphanol,酒石酸布托啡诺,medium,override,30,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=酒石酸布托啡诺；cn_substance_id=cn-46db6a74c7；evidence_url=https://www.wikidata.org/wiki/Q1185089
+caffeine,Caffeine,枸橼酸咖啡因,medium,product_majority,24,0.706,5,"CN 单成分产品中文名（24/34 个产品，share=0.706，候选变体 5 个）；示例 product_id=CN-XN06BCK115B00-46c1a30a,CN-XN06BCK115B00-55322589,CN-XN06BCK115B00-6a16b62e"
+calcitriol,Calcitriol,骨化三醇,medium,product_majority,74,0.747,5,"CN 单成分产品中文名（74/99 个产品，share=0.747，候选变体 5 个）；示例 product_id=CN-XA11CCG111B00-641d6577,CN-XA11CCG111B00-d6faec80,CN-XA11CCG111B00-37607579"
+calcium-citrate,Calcium Citrate,枸橼酸钙,medium,product_majority,17,0.708,2,"CN 单成分产品中文名（17/24 个产品，share=0.708，候选变体 2 个）；示例 product_id=CN-XA12AAJ225A00-fb444a98,CN-XA12AAJ225A00-14b76988,CN-XA12AAJ225A00-4949556f"
+calcium-gluconate,Calcium Gluconate,弘泰,medium,product_majority,11,0.611,2,"CN 单成分产品中文名（11/18 个产品，share=0.611，候选变体 2 个）；示例 product_id=CN-XA12AAP077N00-65570382,CN-XA12AAP077N00-41cf0441,CN-XA12AAP077N00-6f6a12c5"
+calcium-polycarbophil,Calcium Polycarbophil,聚卡波非钙,medium,override,23,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=聚卡波非钙；cn_substance_id=cn-c0f4671194；evidence_url=repo:data/cn_name_map.json
+candesartan,Candesartan,坎地沙坦酯,medium,product_majority,72,0.621,10,"CN 单成分产品中文名（72/116 个产品，share=0.621，候选变体 10 个）；示例 product_id=CN-XC09CAK033A00-45dd370c,CN-XC09CAK033A00-7104a84a,CN-XC09CAK033A00-a93ea0c1"
+capreomycin,Capreomycin,硫酸卷曲霉素,medium,override,28,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=硫酸卷曲霉素；cn_substance_id=cn-cb43b18475；evidence_url=https://www.wikidata.org/wiki/Q415909
+capsaicin,Capsaicin,辣椒碱,medium,override,15,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=辣椒碱；cn_substance_id=cn-59614e1643；evidence_url=https://www.wikidata.org/wiki/Q273169
+carbenoxolone,Carbenoxolone,甘珀酸钠,medium,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=甘珀酸钠；cn_substance_id=cn-70fde5b79a；evidence_url=https://www.wikidata.org/wiki/Q752861
+carbomer,Carbomer,卡波姆,medium,override,8,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=卡波姆；cn_substance_id=cn-3f3237d977；evidence_url=https://www.wikidata.org/wiki/Q2443122
+carfilzomib,Carfilzomib,卡非佐米,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=卡非佐米；cn_substance_id=cn-1c8d261a13；evidence_url=https://www.wikidata.org/wiki/Q15366934
+carteolol,Carteolol,盐酸卡替洛尔,medium,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸卡替洛尔；cn_substance_id=cn-7f62fc7c90；evidence_url=https://www.wikidata.org/wiki/Q546434
+carvedilol,Carvedilol,卡维地洛,medium,product_majority,41,0.672,9,"CN 单成分产品中文名（41/61 个产品，share=0.672，候选变体 9 个）；示例 product_id=CN-XC07AGK029A00-383ec186,CN-XC07AGK029A00-1b5793a4,CN-XC07AGK029A00-34683f35"
+caspofungin,Caspofungin,醋酸卡泊芬净,medium,override,26,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=醋酸卡泊芬净；cn_substance_id=cn-c78db634c2；evidence_url=https://www.wikidata.org/wiki/Q420875
+cefaclor,Cefaclor,头孢克洛,medium,product_majority,476,0.791,25,"CN 单成分产品中文名（476/602 个产品，share=0.791，候选变体 25 个）；示例 product_id=CN-XJ01DCF506A00-8bf88fab,CN-XJ01DCF506A00-c51fc5ac,CN-XJ01DCF506A00-a56d31cd"
+cefepime,Cefepime,盐酸头孢吡肟,medium,product_majority,109,0.686,18,"CN 单成分产品中文名（109/159 个产品，share=0.686，候选变体 18 个）；示例 product_id=CN-XJ01DET065B00-1418026c,CN-XJ01DET065B00-0f38f5b9,CN-XJ01DET065B00-0ae6d744"
+cefixime,Cefixime,头孢克肟,medium,product_majority,743,0.746,23,"CN 单成分产品中文名（743/996 个产品，share=0.746，候选变体 23 个）；示例 product_id=CN-XJ01DDT073A00-61a85342,CN-XJ01DDT073A00-0342a564,CN-XJ01DDT073A00-8adbacdd"
+celiprolol,Celiprolol,盐酸塞利洛尔,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸塞利洛尔；cn_substance_id=cn-54af2fc9bd；evidence_url=https://www.wikidata.org/wiki/Q420586
+cetirizine,Cetirizine,盐酸西替利嗪,medium,product_majority,173,0.671,21,"CN 单成分产品中文名（173/258 个产品，share=0.671，候选变体 21 个）；示例 product_id=CN-XR06AEX017A00-d5ec7405,CN-XR06AEX017A00-0de2ba13,CN-XR06AEX017A00-5f3049c8"
+cetylpyridinium,Cetylpyridinium,西吡氯铵,medium,override,40,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=西吡氯铵；cn_substance_id=cn-a694e0c973；evidence_url=https://www.wikidata.org/wiki/Q418318
+chlorambucil,Chlorambucil,苯丁酸氮芥,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=苯丁酸氮芥；cn_substance_id=cn-e6b29cd2fe；evidence_url=https://www.wikidata.org/wiki/Q415939
+cinitapride,Cinitapride,酒石酸西尼必利,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=酒石酸西尼必利；cn_substance_id=cn-a18aaa622d；evidence_url=https://www.wikidata.org/wiki/Q5121012
+citalopram,Citalopram,氢溴酸西酞普兰,medium,product_majority,18,0.692,6,"CN 单成分产品中文名（18/26 个产品，share=0.692，候选变体 6 个）；示例 product_id=CN-XN06ABX016A00-4dd0f590,CN-XN06ABX016A00-24dffa92,CN-XN06ABX016A00-69128661"
+citrato-de-sodio,Citrato De Sodio,血液滤过置换,medium,product_majority,6,0.667,2,"CN 单成分产品中文名（6/9 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XB05ZBX188B00-dc6b9589,CN-XB05ZBX188B00-93b8d316,CN-XB05ZBX188B00-404a3a5e"
+clarithromycin,Clarithromycin,克拉霉素,medium,product_majority,440,0.7,47,"CN 单成分产品中文名（440/629 个产品，share=0.7，候选变体 47 个）；示例 product_id=CN-XJ01FAK067A00-e6e1c0e7,CN-XJ01FAK067A00-b0300ed0,CN-XJ01FAK067A00-5f3fa4f4"
+clemastine,Clemastine,富马酸氯马斯汀,medium,override,16,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=富马酸氯马斯汀；cn_substance_id=cn-4e3ed0ada1；evidence_url=https://www.wikidata.org/wiki/Q418145
+clindamycin,Clindamycin,克林霉素磷酸酯,medium,product_majority,479,0.725,34,"CN 单成分产品中文名（479/661 个产品，share=0.725，候选变体 34 个）；示例 product_id=CN-XD10AFK073U00-720c2452,CN-XD10AFK073U00-f5a0ff3b,CN-XD10AFK073U00-38b65533"
+clobetasol,Clobetasol,丙酸氯倍他索,medium,override,36,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=丙酸氯倍他索；cn_substance_id=cn-33651e0bea；evidence_url=https://www.wikidata.org/wiki/Q421637
+cloperastine,Cloperastine,盐酸氯哌丁,medium,override,15,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸氯哌丁；cn_substance_id=cn-4daa8ee4f0；evidence_url=https://www.wikidata.org/wiki/Q2055825
+clotrimazole,Clotrimazole,克霉唑,medium,override,236,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=克霉唑；cn_substance_id=cn-78406dd8ea；evidence_url=repo:data/cn_name_map.json
+cod-liver-oil,Cod Liver Oil,鱼肝油,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=鱼肝油；cn_substance_id=cn-898a369f2d；evidence_url=https://www.wikidata.org/wiki/Q748786
+codeine,Codeine,磷酸可待因,medium,product_majority,23,0.622,7,"CN 单成分产品中文名（23/37 个产品，share=0.622，候选变体 7 个）；示例 product_id=CN-XN02AAK058B00-5f4c7a2b,CN-XN02AAK058B00-cfbc5e24,CN-XR05DAK058A00-68117a1f"
+cortisone,Cortisone,醋酸可的松,medium,override,14,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=醋酸可的松；cn_substance_id=cn-806fd8ea8b；evidence_url=https://www.wikidata.org/wiki/Q423185
+cystine,Cystine,胱氨酸,medium,override,15,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=胱氨酸；cn_substance_id=cn-02804940ea；evidence_url=https://www.wikidata.org/wiki/Q408626
+cytarabine,Cytarabine,阿糖胞苷,medium,product_majority,12,0.75,2,"CN 单成分产品中文名（12/16 个产品，share=0.75，候选变体 2 个）；示例 product_id=CN-XL01BCA062B00-703c24c5,CN-XL01BCA062B00-c613efc4,CN-XL01BCA062B00-1a7cbbfa"
+dabrafenib,Dabrafenib,甲磺酸达拉非尼,medium,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲磺酸达拉非尼；cn_substance_id=cn-c19a3b2e58；evidence_url=https://www.wikidata.org/wiki/Q3011604
+daclatasvir,Daclatasvir,盐酸达拉他韦,medium,override,3,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸达拉他韦；cn_substance_id=cn-77104035fd；evidence_url=https://www.wikidata.org/wiki/Q5207712
+dasabuvir,Dasabuvir,达塞布韦钠,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=达塞布韦钠；cn_substance_id=cn-37e5c53c20；evidence_url=https://www.wikidata.org/wiki/Q19462214
+dehydrocholic-acid,Dehydrocholic Acid,去氢胆酸,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=去氢胆酸；cn_substance_id=cn-4f6dfff330；evidence_url=https://www.wikidata.org/wiki/Q903387
+dermatophagoides-farinae,Dermatophagoides Farinae,粉尘螨,medium,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=粉尘螨；cn_substance_id=cn-2d6c38c86b；evidence_url=https://www.wikidata.org/wiki/Q2916791
+desmopressin,Desmopressin,去氨加压素,medium,product_majority,28,0.651,3,"CN 单成分产品中文名（28/43 个产品，share=0.651，候选变体 3 个）；示例 product_id=CN-XH01BAQ117A00-dbdec027,CN-XH01BAQ117A00-be0d30dd,CN-XH01BAQ117A00-a2c3801c"
+dexamethasone,Dexamethasone,地塞米松,medium,product_base_aggregate,537,0.959,11,CN 单成分产品中文名（537/560 个产品，share=0.959，候选变体 11 个）；示例 product_id=
+diltiazem,Diltiazem,盐酸地尔硫卓,medium,product_majority,59,0.72,10,"CN 单成分产品中文名（59/82 个产品，share=0.72，候选变体 10 个）；示例 product_id=CN-XC08DBD069A00-880b0743,CN-XC08DBD069A00-9bac1b31,CN-XC08DBD069A00-51403b9c"
+dipivefrin,Dipivefrin,盐酸地匹福林,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸地匹福林；cn_substance_id=cn-e2f8127d63；evidence_url=https://www.wikidata.org/wiki/Q905952
+disopyramide,Disopyramide,磷酸丙吡胺,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=磷酸丙吡胺；cn_substance_id=cn-f9e2bd8db3；evidence_url=https://www.wikidata.org/wiki/Q425120
+docetaxel,Docetaxel,多西他赛,medium,product_majority,64,0.79,7,"CN 单成分产品中文名（64/81 个产品，share=0.79，候选变体 7 个）；示例 product_id=CN-XL01CDD194B00-aed24540,CN-XL01CDD194B00-9f27bc14,CN-XL01CDD194B00-cdc7874b"
+donanemab,Donanemab,多奈单抗,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=多奈单抗；cn_substance_id=cn-db0cae0d2c；evidence_url=https://www.wikidata.org/wiki/Q105091132
+donepezil,Donepezil,盐酸多奈哌齐,medium,product_majority,55,0.753,9,"CN 单成分产品中文名（55/73 个产品，share=0.753，候选变体 9 个）；示例 product_id=CN-XN06DAD171A00-aae787b1,CN-XN06DAD171A00-fc2d2f25,CN-XN06DAD171A00-1d9a4dc0"
+doxapram,Doxapram,盐酸多沙普仑,medium,override,19,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸多沙普仑；cn_substance_id=cn-f8a20a982a；evidence_url=https://www.wikidata.org/wiki/Q737743
+doxazosin,Doxazosin,甲磺酸多沙唑嗪,medium,product_majority,31,0.738,7,"CN 单成分产品中文名（31/42 个产品，share=0.738，候选变体 7 个）；示例 product_id=CN-XC02CAD177A00-aaed245c,CN-XC02CAD177A00-ed9000fd,CN-XC02CAD177A00-4138cbf4"
+doxofylline,Doxofylline,多索茶碱,medium,product_majority,167,0.777,13,"CN 单成分产品中文名（167/215 个产品，share=0.777，候选变体 13 个）；示例 product_id=CN-XR03DAD179A00-3250e8cd,CN-XR03DAD179A00-3bed1174,CN-XR03DAD179A00-ebc7823b"
+ebastine,Ebastine,依巴斯汀,medium,product_majority,37,0.725,4,"CN 单成分产品中文名（37/51 个产品，share=0.725，候选变体 4 个）；示例 product_id=CN-XR06AXY065A00-8f20c353,CN-XR06AXY065A00-a8e18da0,CN-XR06AXY065A00-5396b269"
+edetic-acid,Edetic Acid,依地酸钙钠,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=依地酸钙钠；cn_substance_id=cn-b0e13777bc；evidence_url=https://www.wikidata.org/wiki/Q408032
+edoxaban,Edoxaban,甲苯磺酸艾多沙班,medium,override,135,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲苯磺酸艾多沙班；cn_substance_id=cn-c764af0bda；evidence_url=https://www.wikidata.org/wiki/Q21011234
+enalapril,Enalapril,马来酸依那普利,medium,product_majority,126,0.733,10,"CN 单成分产品中文名（126/172 个产品，share=0.733，候选变体 10 个）；示例 product_id=CN-XC09AAY074A00-7b0c52a3,CN-XC09AAY074A00-e3fad5aa,CN-XC09AAY074A00-5ee18436"
+entrectinib,Entrectinib,恩曲替尼,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=恩曲替尼；cn_substance_id=cn-d3f72c9f38；evidence_url=https://www.wikidata.org/wiki/Q25323953
+epinastine,Epinastine,盐酸依匹斯汀,medium,override,37,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸依匹斯汀；cn_substance_id=cn-b59f8cac68；evidence_url=https://www.wikidata.org/wiki/Q632405
+ertapenem,Ertapenem,厄他培南钠,medium,product_majority,7,0.778,3,"CN 单成分产品中文名（7/9 个产品，share=0.778，候选变体 3 个）；示例 product_id=CN-XJ01DHE007B00-4fd1fe1d,CN-XJ01DHE007B00-bd41ba48,CN-XJ01DHE007B00-6715c2e5"
+esomeprazole,Esomeprazole,艾司奥美拉唑镁,medium,product_majority,217,0.625,7,"CN 单成分产品中文名（217/347 个产品，share=0.625，候选变体 7 个）；示例 product_id=CN-XA02BCA081A01-c5d991f9,CN-XA02BCA081A01-afa15711,CN-XA02BCA081A01-dacfd315"
+exemestane,Exemestane,依西美坦,medium,product_majority,22,0.647,7,"CN 单成分产品中文名（22/34 个产品，share=0.647，候选变体 7 个）；示例 product_id=CN-XL02BGY096A00-90d452cc,CN-XL02BGY096A00-65a72d41,CN-XL02BGY096A00-1e0a3298"
+famciclovir,Famciclovir,泛昔洛韦,medium,product_majority,67,0.698,10,"CN 单成分产品中文名（67/96 个产品，share=0.698，候选变体 10 个）；示例 product_id=CN-XJ05ABF010A00-d599183c,CN-XJ05ABF010A00-2b56785f,CN-XJ05ABF010A00-726fe705"
+famotidine,Famotidine,法莫替丁,medium,product_majority,206,0.783,13,"CN 单成分产品中文名（206/263 个产品，share=0.783，候选变体 13 个）；示例 product_id=CN-XA02BAF006A00-c8a04636,CN-XA02BAF006A00-ac159dcc,CN-XA02BAF006A00-10ad2880"
+faricimab,Faricimab,法瑞西单抗,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=法瑞西单抗；cn_substance_id=cn-48cac66a7d；evidence_url=https://www.wikidata.org/wiki/Q60785557
+fexofenadine,Fexofenadine,盐酸非索非那定,medium,product_majority,51,0.662,6,"CN 单成分产品中文名（51/77 个产品，share=0.662，候选变体 6 个）；示例 product_id=CN-XR06AXF024A00-567d7472,CN-XR06AXF024A00-d8b8a290,CN-XR06AXF024A00-2ec45fbd"
+finasteride,Finasteride,非那雄胺,medium,product_majority,172,0.647,22,"CN 单成分产品中文名（172/266 个产品，share=0.647，候选变体 22 个）；示例 product_id=CN-XG04CBF019A00-fcee414a,CN-XG04CBF019A00-5343bbe9,CN-XG04CBF019A00-ba786b8c"
+finerenone,Finerenone,非奈利酮,medium,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=非奈利酮；cn_substance_id=cn-9b6061cb76；evidence_url=https://www.wikidata.org/wiki/Q21099046
+fingolimod,Fingolimod,盐酸芬戈莫德,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸芬戈莫德；cn_substance_id=cn-9d07313abf；evidence_url=https://www.wikidata.org/wiki/Q425137
+flavoxate,Flavoxate,盐酸黄酮哌酯,medium,product_majority,18,0.643,4,"CN 单成分产品中文名（18/28 个产品，share=0.643，候选变体 4 个）；示例 product_id=CN-XG04BDH057A00-de1af029,CN-XG04BDH057A00-05996fe0,CN-XG04BDH057A00-2cfbecbb"
+fluconazole,Fluconazole,氟康唑,medium,product_majority,259,0.766,23,"CN 单成分产品中文名（259/338 个产品，share=0.766，候选变体 23 个）；示例 product_id=CN-XJ02ACF075A00-571b0eda,CN-XJ02ACF075A00-c4c57676,CN-XJ02ACF075A00-ad0233b6"
+fludarabine,Fludarabine,磷酸氟达拉滨,medium,override,18,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=磷酸氟达拉滨；cn_substance_id=cn-6e7ed6fbab；evidence_url=https://www.wikidata.org/wiki/Q185916
+fluoxetine,Fluoxetine,百优解,medium,product_majority,14,0.7,4,"CN 单成分产品中文名（14/20 个产品，share=0.7，候选变体 4 个）；示例 product_id=CN-XN06ABF098A00-1f5bd8ac,CN-XN06ABF098A00-39798f58,CN-XN06ABF098A00-c3e293ec"
+flurbiprofen,Flurbiprofen,氟比洛芬,medium,product_base_aggregate,16,0.889,4,CN 单成分产品中文名（16/18 个产品，share=0.889，候选变体 4 个）；示例 product_id=
+fluticasone,Fluticasone,丙酸氟替卡松,medium,product_majority,31,0.646,7,"CN 单成分产品中文名（31/48 个产品，share=0.646，候选变体 7 个）；示例 product_id=CN-XD07ACF095F00-41c31538,CN-XD07ACF095F00-6b286ba8,CN-XD07ACF095F00-ccccf520"
+fosfomycin,Fosfomycin,磷霉素,medium,product_base_aggregate,143,0.973,5,CN 单成分产品中文名（143/147 个产品，share=0.973，候选变体 5 个）；示例 product_id=
+fruquintinib,Fruquintinib,呋喹替尼,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=呋喹替尼；cn_substance_id=cn-c3e003a284；evidence_url=https://www.wikidata.org/wiki/Q27259271
+gadoxetate,Gadoxetate,钆塞酸二钠,medium,override,13,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=钆塞酸二钠；cn_substance_id=cn-65a636f281；evidence_url=repo:data/cn_name_map.json
+ganciclovir,Ganciclovir,更昔洛韦,medium,product_majority,306,0.775,27,"CN 单成分产品中文名（306/395 个产品，share=0.775，候选变体 27 个）；示例 product_id=CN-XJ05ABG075A00-f8c9da24,CN-XJ05ABG075A00-6c8b29c8,CN-XJ05ABG075A00-5b1babe8"
+garlic,Garlic,大蒜,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=大蒜；cn_substance_id=cn-545f97148d；evidence_url=https://www.wikidata.org/wiki/Q21546392
+gemifloxacin,Gemifloxacin,甲磺酸吉米沙星,medium,override,3,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲磺酸吉米沙星；cn_substance_id=cn-6d6a3742ba；evidence_url=https://www.wikidata.org/wiki/Q1639595
+gilteritinib,Gilteritinib,富马酸吉瑞替尼,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=富马酸吉瑞替尼；cn_substance_id=cn-e37963cec9；evidence_url=https://www.wikidata.org/wiki/Q27077802
+glutathione,Glutathione,谷胱甘肽,medium,product_majority,75,0.63,6,"CN 单成分产品中文名（75/119 个产品，share=0.63，候选变体 6 个）；示例 product_id=CN-XA05BAG105A00-afd55733,CN-XA05BAG105A00-78a3b3aa,CN-XA05BAG105A00-e38508c1"
+granisetron,Granisetron,盐酸格拉司琼,medium,product_majority,111,0.703,25,"CN 单成分产品中文名（111/158 个产品，share=0.703，候选变体 25 个）；示例 product_id=CN-XA04AAG064A00-3dbac61b,CN-XA04AAG064A00-08e99cac,CN-XA04AAG064A00-4490cddf"
+guanfacine,Guanfacine,盐酸胍法辛,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸胍法辛；cn_substance_id=cn-de18197c4b；evidence_url=https://www.wikidata.org/wiki/Q5613599
+hydrocortisone,Hydrocortisone,氢化可的松,medium,product_majority,118,0.694,4,"CN 单成分产品中文名（118/170 个产品，share=0.694，候选变体 4 个）；示例 product_id=CN-XD07AAQ060F00-95bb3795,CN-XD07AAQ060F00-b0c9ba90,CN-XD07AAQ060F00-7fced8d9"
+hydromorphone,Hydromorphone,盐酸氢吗啡酮,medium,override,32,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸氢吗啡酮；cn_substance_id=cn-9231bac437；evidence_url=https://www.wikidata.org/wiki/Q303646
+hydroxyprogesterone-caproate,Hydroxyprogesterone Caproate,己酸羟孕酮,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=己酸羟孕酮；cn_substance_id=cn-837967d9eb；evidence_url=https://www.wikidata.org/wiki/Q3792032
+ibandronic-acid,Ibandronic Acid,伊班膦酸钠,medium,product_majority,31,0.756,4,"CN 单成分产品中文名（31/41 个产品，share=0.756，候选变体 4 个）；示例 product_id=CN-XM05BAY053B00-5e36885e,CN-XM05BAY053B00-08a664b9,CN-XM05BAY053B00-1e20e6b0"
+ibutilide,Ibutilide,富马酸伊布利特,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=富马酸伊布利特；cn_substance_id=cn-f05a48560b；evidence_url=https://www.wikidata.org/wiki/Q3791612
+icatibant,Icatibant,醋酸艾替班特,medium,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=醋酸艾替班特；cn_substance_id=cn-a617294783；evidence_url=https://www.wikidata.org/wiki/Q902379
+ichthammol,Ichthammol,鱼石脂,medium,override,26,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=鱼石脂；cn_substance_id=cn-224c052b6b；evidence_url=https://www.wikidata.org/wiki/Q473459
+iloprost,Iloprost,伊洛前列素,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=伊洛前列素；cn_substance_id=cn-e052cf930e；evidence_url=https://www.wikidata.org/wiki/Q20817139
+imidapril,Imidapril,盐酸咪达普利,medium,product_majority,5,0.714,2,"CN 单成分产品中文名（5/7 个产品，share=0.714，候选变体 2 个）；示例 product_id=CN-XC09AAM083A00-1c34889c,CN-XC09AAM083A00-73d0455c,CN-XC09AAM083A00-8819920f"
+indinavir,Indinavir,硫酸茚地那韦,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硫酸茚地那韦；cn_substance_id=cn-d260a0182f；evidence_url=https://www.wikidata.org/wiki/Q425490
+indomethacin,Indomethacin,吲哚美辛,medium,product_majority,233,0.747,11,"CN 单成分产品中文名（233/312 个产品，share=0.747，候选变体 11 个）；示例 product_id=CN-XD11AXF583C00-7f8766e7,CN-XD11AXF583C00-e9cad791,CN-XD11AXF583C00-1fd761d0"
+inmunoglobulina-g-humana,Inmunoglobulina G Humana,人免疫球蛋白,medium,product_majority,36,0.735,5,"CN 单成分产品中文名（36/49 个产品，share=0.735，候选变体 5 个）；示例 product_id=CN-XJ06BAR008B00-227ca6c9,CN-XJ06BAR008B00-ce20e556,CN-XJ06BAR008B00-19a1011c"
+inositol,Inositol,肌醇,medium,override,9,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=肌醇；cn_substance_id=cn-8b4a64a5b5；evidence_url=https://www.wikidata.org/wiki/Q407997
+insulin-detemir,Insulin Detemir,地特胰岛素,medium,product_majority,4,0.667,2,"CN 单成分产品中文名（4/6 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XA10AED087B00-c05f44cb,CN-XA10AED087B00-876e59eb,CN-XA10AED087B00-f3eb3a89"
+insulin-glargine,Insulin Glargine,甘精胰岛素,medium,product_majority,28,0.718,5,"CN 单成分产品中文名（28/39 个产品，share=0.718，候选变体 5 个）；示例 product_id=CN-XA10AEC074B00-07d02607,CN-XA10AEG025B00-32644570,CN-XA10AEG025B00-3356312f"
+insulin-human,Insulin Human,人胰岛素,medium,product_majority,38,0.76,3,"CN 单成分产品中文名（38/50 个产品，share=0.76，候选变体 3 个）；示例 product_id=CN-XA10ABC118B00-8a28c103,CN-XA10ABC118B00-29e92b60,CN-XA10ABC118B00-bf5781e5"
+insulin-lispro,Insulin Lispro,赖脯胰岛素,medium,product_majority,12,0.6,2,"CN 单成分产品中文名（12/20 个产品，share=0.6，候选变体 2 个）；示例 product_id=CN-XA10ABC161B00-de1399b2,CN-XA10ABL029B00-0c06e02f,CN-XA10ABL029B00-34a77ee0"
+iopamidol,Iopamidol,碘帕醇,medium,product_majority,74,0.692,2,"CN 单成分产品中文名（74/107 个产品，share=0.692，候选变体 2 个）；示例 product_id=CN-XV08ABD115B00-5b2fbdff,CN-XV08ABD115B00-5849ecbc,CN-XV08ABD115B00-2c8946f2"
+iopromide,Iopromide,碘普罗胺,medium,product_majority,57,0.6,2,"CN 单成分产品中文名（57/95 个产品，share=0.6，候选变体 2 个）；示例 product_id=CN-XV08ABD117B00-887d9281,CN-XV08ABD117B00-289f150a,CN-XV08ABD117B00-870ea953"
+ioversol,Ioversol,碘佛醇,medium,product_majority,23,0.622,2,"CN 单成分产品中文名（23/37 个产品，share=0.622，候选变体 2 个）；示例 product_id=CN-XV08ABD104B00-f4de9f7f,CN-XV08ABD104B00-e590e176,CN-XV08ABD104B00-1aafc838"
+irbesartan,Irbesartan,厄贝沙坦,medium,product_majority,193,0.717,14,"CN 单成分产品中文名（193/269 个产品，share=0.717，候选变体 14 个）；示例 product_id=CN-XC09CAE003A00-8116ced2,CN-XC09CAE003A00-0edecef2,CN-XC09CAE003A00-3aa7e3e4"
+irinotecan,Irinotecan,盐酸伊立替康,medium,override,22,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸伊立替康；cn_substance_id=cn-6c6c762b5b；evidence_url=https://www.wikidata.org/wiki/Q412197
+isavuconazole,Isavuconazole,硫酸艾沙康唑,medium,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=硫酸艾沙康唑；cn_substance_id=cn-96c316b6a5；evidence_url=https://www.wikidata.org/wiki/Q6079042
+isosorbide-dinitrate,Isosorbide Dinitrate,硝酸异山梨酯,medium,product_majority,132,0.79,13,"CN 单成分产品中文名（132/167 个产品，share=0.79，候选变体 13 个）；示例 product_id=CN-XC01DAX078A00-895ba7b4,CN-XC01DAX078A00-23da61d0,CN-XC01DAX078A00-c2a84b3b"
+isosorbide-mononitrate,Isosorbide Mononitrate,单硝酸异山梨酯,medium,product_majority,307,0.707,40,"CN 单成分产品中文名（307/434 个产品，share=0.707，候选变体 40 个）；示例 product_id=CN-XC01DAD024A00-b52821f6,CN-XC01DAD024A00-10b12417,CN-XC01DAD024A00-114eedda"
+itraconazole,Itraconazole,伊曲康唑,medium,product_majority,30,0.667,5,"CN 单成分产品中文名（30/45 个产品，share=0.667，候选变体 5 个）；示例 product_id=CN-XJ02ACY061A00-3805b6fb,CN-XJ02ACY061A00-273997ff,CN-XJ02ACY061A00-19712b49"
+ixazomib,Ixazomib,枸橼酸伊沙佐米,medium,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=枸橼酸伊沙佐米；cn_substance_id=cn-db9d0bd296；evidence_url=https://www.wikidata.org/wiki/Q20948663
+lanreotide,Lanreotide,醋酸兰瑞肽,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=醋酸兰瑞肽；cn_substance_id=cn-5eb4eee8a5；evidence_url=https://www.wikidata.org/wiki/Q1707877
+lapatinib,Lapatinib,甲苯磺酸拉帕替尼,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲苯磺酸拉帕替尼；cn_substance_id=cn-01fcbe15da；evidence_url=https://www.wikidata.org/wiki/Q420323
+lecanemab,Lecanemab,仑卡奈单抗,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=仑卡奈单抗；cn_substance_id=cn-5533a568bb；evidence_url=https://www.wikidata.org/wiki/Q56274769
+lecithin,Lecithin,卵磷脂,medium,override,9,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=卵磷脂；cn_substance_id=cn-d708ad8ca0；evidence_url=https://www.wikidata.org/wiki/Q241595
+leflunomide,Leflunomide,来氟米特,medium,product_majority,28,0.622,6,"CN 单成分产品中文名（28/45 个产品，share=0.622，候选变体 6 个）；示例 product_id=CN-XL04AAL019A00-6c2d8f9e,CN-XL04AAL019A00-91caf9ab,CN-XL04AAL019A00-b1535703"
+leucine,Leucine,亮氨酸,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=亮氨酸；cn_substance_id=cn-2c09fb7d17；evidence_url=https://www.wikidata.org/wiki/Q483745
+levobupivacaine,Levobupivacaine,盐酸左布比卡因,medium,override,37,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸左布比卡因；cn_substance_id=cn-063a8d7697；evidence_url=repo:data/cn_name_map.json
+levocarnitine,Levocarnitine,左卡尼汀,medium,product_majority,158,0.76,17,"CN 单成分产品中文名（158/208 个产品，share=0.76，候选变体 17 个）；示例 product_id=CN-XG04BXZ059B00-ab331825,CN-XG04BXZ059B00-0a479071,CN-XG04BXZ059B00-395e78af"
+levocetirizine,Levocetirizine,盐酸左西替利嗪,medium,product_majority,149,0.788,9,"CN 单成分产品中文名（149/189 个产品，share=0.788，候选变体 9 个）；示例 product_id=CN-XR06AEZ066A00-d6b7721f,CN-XR06AEZ066A00-f4838ce9,CN-XR06AEZ066A00-ef85b256"
+levonorgestrel,Levonorgestrel,左炔诺孕酮,medium,product_majority,40,0.714,5,"CN 单成分产品中文名（40/56 个产品，share=0.714，候选变体 5 个）；示例 product_id=CN-XG03AAF598A00-73676dcd,CN-XG03AAF598A01-4bd30092,CN-XG03ADZ061A00-7ec5dd9c"
+linezolid,Linezolid,利奈唑胺,medium,product_majority,15,0.714,2,"CN 单成分产品中文名（15/21 个产品，share=0.714，候选变体 2 个）；示例 product_id=CN-XJ01XXL070A00-eb100cad,CN-XJ01XXL070A00-dcb3eafd,CN-XJ01XXL070A00-ad40fca5"
+linoleic-acid,Linoleic Acid,亚油酸,medium,override,0,1.0,0,cn_inn_overrides.csv 显式映射：zh_name=亚油酸；cn_substance_id=cn-e3b75c1bd3；evidence_url=https://www.wikidata.org/wiki/Q407426
+lithium-carbonate,Lithium Carbonate,碳酸锂,medium,override,13,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=碳酸锂；cn_substance_id=cn-6f93c9cdfc；evidence_url=https://www.wikidata.org/wiki/Q410174
+loperamide,Loperamide,盐酸洛哌丁胺,medium,product_majority,25,0.658,5,"CN 单成分产品中文名（25/38 个产品，share=0.658，候选变体 5 个）；示例 product_id=CN-XA07DAL281E00-7d28023c,CN-XA07DAL281E00-5006c477,CN-XA07DAL281E00-635994f2"
+loratadine,Loratadine,氯雷他定,medium,product_majority,373,0.608,38,"CN 单成分产品中文名（373/613 个产品，share=0.608，候选变体 38 个）；示例 product_id=CN-XR06AXL226A00-ea701e06,CN-XR06AXL226A00-ab9b76b5,CN-XR06AXL226A00-3fa46a30"
+lorazepam,Lorazepam,劳拉西泮,medium,product_majority,16,0.615,4,"CN 单成分产品中文名（16/26 个产品，share=0.615，候选变体 4 个）；示例 product_id=CN-XN05BAL037A00-90507f00,CN-XN05BAL037A00-7c9a0f1a,CN-XN05BAL037A00-6f7d6f80"
+lovastatin,Lovastatin,洛伐他汀,medium,product_majority,61,0.753,11,"CN 单成分产品中文名（61/81 个产品，share=0.753，候选变体 11 个）；示例 product_id=CN-XC10AAL275A00-1c7d9d51,CN-XC10AAL275A00-bbe69941,CN-XC10AAL275A00-25c44b95"
+lurasidone,Lurasidone,盐酸鲁拉西酮,medium,override,40,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸鲁拉西酮；cn_substance_id=cn-a15b13f233；evidence_url=https://www.wikidata.org/wiki/Q416992
+lysine,Lysine,赖氨酸磷酸氢钙,medium,product_majority,154,0.778,20,"CN 单成分产品中文名（154/198 个产品，share=0.778，候选变体 20 个）；示例 product_id=CN-XA12AXL346A00-ad7b669d,CN-XA12AXL346A00-d995fb5e,CN-XA12AXL346A00-48b23f38"
+magnesium-trisilicate,Magnesium Trisilicate,三硅酸镁,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=三硅酸镁；cn_substance_id=cn-37f2916dd9；evidence_url=https://www.wikidata.org/wiki/Q836952
+manidipine,Manidipine,盐酸马尼地平,medium,override,20,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸马尼地平；cn_substance_id=cn-98b75b11e6；evidence_url=https://www.wikidata.org/wiki/Q921133
+maprotiline,Maprotiline,盐酸马普替林,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸马普替林；cn_substance_id=cn-e872cda8c8；evidence_url=https://www.wikidata.org/wiki/Q418361
+mavacamten,Mavacamten,玛伐凯泰,medium,override,8,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=玛伐凯泰；cn_substance_id=cn-213b62db94；evidence_url=https://www.wikidata.org/wiki/Q105337531
+mecobalamin,Mecobalamin,甲钴胺,medium,product_majority,316,0.693,24,"CN 单成分产品中文名（316/456 个产品，share=0.693，候选变体 24 个）；示例 product_id=CN-XB03BAJ038A00-40a2cb22,CN-XB03BAJ038A00-2c0da527,CN-XB03BAJ038A00-d3b6c953"
+melphalan,Melphalan,盐酸美法仑,medium,override,5,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸美法仑；cn_substance_id=cn-82fabedf18；evidence_url=https://www.wikidata.org/wiki/Q2298283
+mepivacaine,Mepivacaine,盐酸甲哌卡因,medium,product_majority,14,0.778,2,"CN 单成分产品中文名（14/18 个产品，share=0.778，候选变体 2 个）；示例 product_id=CN-XN01BBJ059B00-9a03ffb3,CN-XN01BBJ059B00-4310884a,CN-XN01BBJ059B00-096f2a91"
+metamizole,Metamizole,安乃近,medium,product_majority,625,0.609,6,"CN 单成分产品中文名（625/1026 个产品，share=0.609，候选变体 6 个）；示例 product_id=CN-XN02BBA095A00-4e6ec401,CN-XN02BBA095A00-e9baf571,CN-XN02BBA095A00-05a1a2ea"
+methadone,Methadone,盐酸美沙酮,medium,override,9,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸美沙酮；cn_substance_id=cn-aeda3c2064；evidence_url=https://www.wikidata.org/wiki/Q179996
+methenamine,Methenamine,乌洛托品,medium,override,27,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=乌洛托品；cn_substance_id=cn-92ae1a53df；evidence_url=https://www.wikidata.org/wiki/Q71969
+methimazole,Methimazole,甲巯咪唑,medium,product_majority,24,0.686,3,"CN 单成分产品中文名（24/35 个产品，share=0.686，候选变体 3 个）；示例 product_id=CN-XH03BBJ066A00-7a221c7f,CN-XH03BBJ066A00-d0ed1171,CN-XH03BBJ066A00-5871e2a2"
+methoxamine,Methoxamine,盐酸甲氧明,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸甲氧明；cn_substance_id=cn-1dba69afb4；evidence_url=https://www.wikidata.org/wiki/Q685119
+methyl-salicylate,Methyl Salicylate,水杨酸甲酯,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=水杨酸甲酯；cn_substance_id=cn-36f8e5e882；evidence_url=https://www.wikidata.org/wiki/Q407669
+methylprednisolone,Methylprednisolone,甲泼尼龙琥珀酸钠,medium,product_majority,63,0.606,6,"CN 单成分产品中文名（63/104 个产品，share=0.606，候选变体 6 个）；示例 product_id=CN-XH02ABJ061B00-e407d7eb,CN-XH02ABJ061B00-1ff90624,CN-XH02ABJ061B00-8af79daf"
+metoprolol,Metoprolol,美托洛尔,medium,product_base_aggregate,382,0.925,4,CN 单成分产品中文名（382/413 个产品，share=0.925，候选变体 4 个）；示例 product_id=
+metronidazole,Metronidazole,甲硝唑,medium,product_majority,636,0.66,20,"CN 单成分产品中文名（636/964 个产品，share=0.66，候选变体 20 个）；示例 product_id=CN-XA01ABJ070A00-fa334dfd,CN-XA01ABJ070A00-8144c698,CN-XA01ABJ070A00-20f7e152"
+mexiletine,Mexiletine,盐酸美西律,medium,product_majority,25,0.781,3,"CN 单成分产品中文名（25/32 个产品，share=0.781，候选变体 3 个）；示例 product_id=CN-XC01BBM063A00-75de28f6,CN-XC01BBM063A00-324100df,CN-XC01BBM063A00-82225e6c"
+midazolam,Midazolam,咪达唑仑,medium,product_majority,42,0.618,6,"CN 单成分产品中文名（42/68 个产品，share=0.618，候选变体 6 个）；示例 product_id=CN-XN05CDM084B00-d6f0e454,CN-XN05CDM084B00-3e3cd671,CN-XN05CDM084B00-a435a475"
+milnacipran,Milnacipran,盐酸米那普仑,medium,override,13,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸米那普仑；cn_substance_id=cn-4e91c5a2f5；evidence_url=https://www.wikidata.org/wiki/Q421058
+milrinona,Milrinona,米力农,medium,product_majority,102,0.708,5,"CN 单成分产品中文名（102/144 个产品，share=0.708，候选变体 5 个）；示例 product_id=CN-XC01CEM102B00-2bf0baa6,CN-XC01CEM102B00-83f5b5d5,CN-XC01CEM102B00-b5ba28dc"
+mirtazapine,Mirtazapine,米氮平,medium,product_majority,15,0.625,4,"CN 单成分产品中文名（15/24 个产品，share=0.625，候选变体 4 个）；示例 product_id=CN-XN06AXM093A00-55c4534b,CN-XN06AXM093A00-113542f0,CN-XN06AXM093A00-4790f268"
+mitoxantrone,Mitoxantrone,盐酸米托蒽醌,medium,product_majority,17,0.68,3,"CN 单成分产品中文名（17/25 个产品，share=0.68，候选变体 3 个）；示例 product_id=CN-XL01DBM109B00-509919c1,CN-XL01DBM109B00-85507522,CN-XL01DBM109B00-9125688a"
+moclobemide,Moclobemide,吗氯贝胺,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=吗氯贝胺；cn_substance_id=cn-02d23f857a；evidence_url=https://www.wikidata.org/wiki/Q421934
+molnupiravir,Molnupiravir,莫诺拉韦,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=莫诺拉韦；cn_substance_id=cn-9ae5d03ab4；evidence_url=https://www.wikidata.org/wiki/Q96376832
+moxonidine,Moxonidine,盐酸莫索尼定,medium,override,8,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸莫索尼定；cn_substance_id=cn-a1d364e3dd；evidence_url=https://www.wikidata.org/wiki/Q419944
+naftifine,Naftifine,盐酸萘替芬,medium,override,30,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸萘替芬；cn_substance_id=cn-da98efd387；evidence_url=https://www.wikidata.org/wiki/Q413586
+nalbuphine,Nalbuphine,盐酸纳布啡,medium,override,27,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸纳布啡；cn_substance_id=cn-38f9bb2ace；evidence_url=https://www.wikidata.org/wiki/Q277979
+naltrexone,Naltrexone,盐酸纳曲酮,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸纳曲酮；cn_substance_id=cn-7868b5fdc5；evidence_url=https://www.wikidata.org/wiki/Q409587
+nateglinide,Nateglinide,那格列奈,medium,product_majority,59,0.621,14,"CN 单成分产品中文名（59/95 个产品，share=0.621，候选变体 14 个）；示例 product_id=CN-XA10BXN003A00-5bb83c79,CN-XA10BXN003A00-4e5e919e,CN-XA10BXN003A00-5a15a369"
+netilmicin,Netilmicin,硫酸奈替米星,medium,product_majority,124,0.761,17,"CN 单成分产品中文名（124/163 个产品，share=0.761，候选变体 17 个）；示例 product_id=CN-XJ01GBN016B00-0afc979c,CN-XJ01GBN016B00-ddffc127,CN-XJ01GBN016B00-711a9182"
+nevirapine,Nevirapine,奈韦拉平,medium,product_majority,12,0.632,6,"CN 单成分产品中文名（12/19 个产品，share=0.632，候选变体 6 个）；示例 product_id=CN-XJ05AGN017A00-76bd40fe,CN-XJ05AGN017A00-e8a51370,CN-XJ05AGN017A00-eb9c7ab1"
+nicardipine,Nicardipine,盐酸尼卡地平,medium,product_majority,58,0.763,8,"CN 单成分产品中文名（58/76 个产品，share=0.763，候选变体 8 个）；示例 product_id=CN-XC08CAN038A00-2ce499cd,CN-XC08CAN038A00-1775da4f,CN-XC08CAN038A00-32f95744"
+nilotinib,Nilotinib,尼洛替尼,medium,product_majority,15,0.625,2,"CN 单成分产品中文名（15/24 个产品，share=0.625，候选变体 2 个）；示例 product_id=CN-XL01EAN092E00-e4f8ad9f,CN-XL01EAN092E00-8a4ccc3f,CN-XL01EAN092E00-1ba21f99"
+nimesulide,Nimesulide,尼美舒利,medium,product_majority,137,0.609,21,"CN 单成分产品中文名（137/225 个产品，share=0.609，候选变体 21 个）；示例 product_id=CN-XM01AXN042A00-cfed16c7,CN-XM01AXN042A00-546ba948,CN-XM01AXN042A00-2cbcf656"
+nirsevimab,Nirsevimab,尼塞韦单抗,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=尼塞韦单抗；cn_substance_id=cn-5aad5d83a1；evidence_url=https://www.wikidata.org/wiki/Q111535760
+nitisinone,Nitisinone,尼替西农,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=尼替西农；cn_substance_id=cn-e5df068777；evidence_url=repo:data/cn_name_map.json
+norgestrel,Norgestrel,炔诺孕酮,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=炔诺孕酮；cn_substance_id=cn-1b119138fe；evidence_url=https://www.wikidata.org/wiki/Q7051185
+nusinersen,Nusinersen,诺西那生钠,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=诺西那生钠；cn_substance_id=cn-4cd1a0ddba；evidence_url=https://www.wikidata.org/wiki/Q25105466
+octreotide,Octreotide,醋酸奥曲肽,medium,product_majority,88,0.721,11,"CN 单成分产品中文名（88/122 个产品，share=0.721，候选变体 11 个）；示例 product_id=CN-XH01CBA213B00-5c916b66,CN-XH01CBA213B00-ad3bda90,CN-XH01CBA213B00-0a5390c3"
+omadacycline,Omadacycline,甲苯磺酸奥马环素,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲苯磺酸奥马环素；cn_substance_id=cn-836177de76；evidence_url=repo:data/cn_name_map.json
+omeprazole,Omeprazole,奥美拉唑,medium,product_majority,704,0.652,16,"CN 单成分产品中文名（704/1079 个产品，share=0.652，候选变体 16 个）；示例 product_id=CN-XA02BCA211A01-453d9e9a,CN-XA02BCA211A01-9e4e22fe,CN-XA02BCA211A01-6852573d"
+ondansetron,Ondansetron,盐酸昂丹司琼,medium,product_majority,124,0.78,11,"CN 单成分产品中文名（124/159 个产品，share=0.78，候选变体 11 个）；示例 product_id=CN-XA04AAA202A00-f0ef2c78,CN-XA04AAA202A00-9cc45c6f,CN-XA04AAA202A00-086edc61"
+ornithine,Ornithine,门冬氨酸鸟氨酸,medium,product_majority,30,0.732,3,"CN 单成分产品中文名（30/41 个产品，share=0.732，候选变体 3 个）；示例 product_id=CN-XA05BAM076B00-f59dd5d5,CN-XA05BAM076B00-5fa1db19,CN-XA05BAM076B00-aaf2ad61"
+oxaliplatin,Oxaliplatin,奥沙利铂,medium,product_majority,51,0.785,8,"CN 单成分产品中文名（51/65 个产品，share=0.785，候选变体 8 个）；示例 product_id=CN-XL01XAA215B00-88ed330b,CN-XL01XAA215B00-8ddc95f3,CN-XL01XAA215B00-2dd25c0b"
+oxcarbazepine,Oxcarbazepine,奥卡西平,medium,product_majority,42,0.712,5,"CN 单成分产品中文名（42/59 个产品，share=0.712，候选变体 5 个）；示例 product_id=CN-XN03AFA206A00-4707ab03,CN-XN03AFA206A00-d99bf398,CN-XN03AFA206A00-e11399d4"
+oxiconazole,Oxiconazole,硝酸奥昔康唑,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硝酸奥昔康唑；cn_substance_id=cn-8937966d1d；evidence_url=https://www.wikidata.org/wiki/Q3359058
+oxycodone,Oxycodone,盐酸羟考酮,medium,product_majority,76,0.655,2,"CN 单成分产品中文名（76/116 个产品，share=0.655，候选变体 2 个）；示例 product_id=CN-XN02AAQ033A00-fece77eb,CN-XN02AAQ033A01-e3f91911,CN-XN02AAQ033A01-28394905"
+oxymetazoline,Oxymetazoline,盐酸羟甲唑啉,medium,product_majority,47,0.712,5,"CN 单成分产品中文名（47/66 个产品，share=0.712，候选变体 5 个）；示例 product_id=CN-XR01AAQ032L00-3d8f8021,CN-XR01AAQ032L00-6b18be1c,CN-XR01AAQ032L00-cee136a4"
+paclitaxel,Paclitaxel,紫杉醇,medium,override,94,1.0,6,cn_inn_overrides.csv 显式映射：zh_name=紫杉醇；cn_substance_id=cn-9686a25f1b；evidence_url=repo:data/cn_name_map.json
+papain,Papain,木瓜酶,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=木瓜酶；cn_substance_id=cn-65a073d684；evidence_url=https://www.wikidata.org/wiki/Q410420
+papaverine,Papaverine,盐酸罂粟碱,medium,override,34,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=盐酸罂粟碱；cn_substance_id=cn-05d87f8460；evidence_url=https://www.wikidata.org/wiki/Q410374
+paromomycin,Paromomycin,硫酸巴龙霉素,medium,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硫酸巴龙霉素；cn_substance_id=cn-866274ca27；evidence_url=https://www.wikidata.org/wiki/Q415625
+paroxetine,Paroxetine,乐友,medium,product_majority,6,0.75,2,"CN 单成分产品中文名（6/8 个产品，share=0.75，候选变体 2 个）；示例 product_id=CN-XN06ABP002A00-0c72d822,CN-XN06ABP002A00-b7b21474,CN-XN06ABP002A00-face959b"
+penciclovir,Penciclovir,喷昔洛韦,medium,product_majority,27,0.711,6,"CN 单成分产品中文名（27/38 个产品，share=0.711，候选变体 6 个）；示例 product_id=CN-XD06BBP038B00-4b85041e,CN-XD06BBP038B00-532ceef3,CN-XD06BBP038B00-c3459632"
+penicillin-g,Penicillin G,青霉素钠,medium,product_majority,207,0.666,3,"CN 单成分产品中文名（207/311 个产品，share=0.666，候选变体 3 个）；示例 product_id=CN-XJ01CEQ054B00-366d3b66,CN-XJ01CEQ054B00-1a264829,CN-XJ01CEQ054B00-69715666"
+phenazopyridine,Phenazopyridine,盐酸非那吡啶,medium,override,10,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸非那吡啶；cn_substance_id=cn-f6e50248c1；evidence_url=https://www.wikidata.org/wiki/Q3114549
+phentolamine,Phentolamine,甲磺酸酚妥拉明,medium,product_majority,44,0.733,8,"CN 单成分产品中文名（44/60 个产品，share=0.733，候选变体 8 个）；示例 product_id=CN-XC04ABF039A00-5b0bdfad,CN-XC04ABF039A00-5463ddef,CN-XC04ABF039A00-35582d9c"
+pioglitazone,Pioglitazone,盐酸吡格列酮,medium,product_majority,105,0.625,15,"CN 单成分产品中文名（105/168 个产品，share=0.625，候选变体 15 个）；示例 product_id=CN-XA10BGB091A00-84886c3f,CN-XA10BGB091A00-012e7ae8,CN-XA10BGB091A00-838f7a19"
+piperacillin,Piperacillin,哌拉西林钠,medium,product_majority,156,0.732,11,"CN 单成分产品中文名（156/213 个产品，share=0.732，候选变体 11 个）；示例 product_id=CN-XJ01CAP014B00-074bea44,CN-XJ01CAP014B00-ff6fe920,CN-XJ01CAP014B00-342f1e9c"
+pirenzepine,Pirenzepine,盐酸哌仑西平,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸哌仑西平；cn_substance_id=cn-41b7ca25c4；evidence_url=https://www.wikidata.org/wiki/Q419550
+pitolisant,Pitolisant,盐酸替洛利生,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸替洛利生；cn_substance_id=cn-2e04a891b0；evidence_url=https://www.wikidata.org/wiki/Q426044
+polystyrene-sulfonate-sodium,Polystyrene Sulfonate - Sodium,聚苯乙烯磺酸钠,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=聚苯乙烯磺酸钠；cn_substance_id=cn-1f4e33195b；evidence_url=https://www.wikidata.org/wiki/Q3395465
+polyvinyl-alcohol,Polyvinyl Alcohol,聚乙烯醇,medium,override,40,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=聚乙烯醇；cn_substance_id=cn-1eb9e663a9；evidence_url=https://www.wikidata.org/wiki/Q146339
+ponatinib,Ponatinib,泊那替尼,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=泊那替尼；cn_substance_id=cn-812b8fb3cb；evidence_url=https://www.wikidata.org/wiki/Q198728
+potassium-permanganate,Potassium Permanganate,高锰酸钾外用,medium,product_majority,4,0.667,2,"CN 单成分产品中文名（4/6 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XD08AXG053A02-59f9a34a,CN-XD08AXG053A02-48c919a0,CN-XD08AXG053A02-b1c1ab89"
+pramipexole,Pramipexole,盐酸普拉克索,medium,product_majority,89,0.767,2,"CN 单成分产品中文名（89/116 个产品，share=0.767，候选变体 2 个）；示例 product_id=CN-XN04BCP088A00-3bc4d78b,CN-XN04BCP088A00-0ea1299d,CN-XN04BCP088A00-47b22766"
+pravastatin,Pravastatin,普伐他汀钠,medium,product_majority,65,0.73,6,"CN 单成分产品中文名（65/89 个产品，share=0.73，候选变体 6 个）；示例 product_id=CN-XC10AAP086A00-95174b21,CN-XC10AAP086A00-8c989782,CN-XC10AAP086A00-094a431a"
+prazosin,Prazosin,盐酸哌唑嗪,medium,override,12,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸哌唑嗪；cn_substance_id=cn-575244b447；evidence_url=https://www.wikidata.org/wiki/Q425296
+prednisolone,Prednisolone,醋酸泼尼松龙,medium,product_majority,13,0.765,3,"CN 单成分产品中文名（13/17 个产品，share=0.765，候选变体 3 个）；示例 product_id=CN-XD07AAP060F00-e91582c4,CN-XD07AAP060F00-c522b8bc,CN-XD07AAP060F00-5d543477"
+primaquine,Primaquine,磷酸伯氨喹,medium,override,2,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=磷酸伯氨喹；cn_substance_id=cn-ac4c3dde3c；evidence_url=https://www.wikidata.org/wiki/Q419834
+procaine,Procaine,盐酸普鲁卡因,medium,product_majority,150,0.769,4,"CN 单成分产品中文名（150/195 个产品，share=0.769，候选变体 4 个）；示例 product_id=CN-XN01BAF427A00-f4f008fb,CN-XN01BAF427A00-9cf88924,CN-XN01BAF427A00-6d8fa0e7"
+progesterone,Progesterone,黄体酮,medium,product_majority,59,0.766,5,"CN 单成分产品中文名（59/77 个产品，share=0.766，候选变体 5 个）；示例 product_id=CN-XG03DAH056B00-4a45eeb5,CN-XG03DAH056B00-91e15992,CN-XG03DAH056B00-fc70c631"
+propofol,Propofol,丙泊酚,medium,product_majority,60,0.612,6,"CN 单成分产品中文名（60/98 个产品，share=0.612，候选变体 6 个）；示例 product_id=CN-XN01AXB122B00-745064b8,CN-XN01AXB122B00-ac31d9b4,CN-XN01AXB122B00-c2695e6b"
+propolis,Propolis,蜂胶,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=蜂胶；cn_substance_id=cn-1de4252778；evidence_url=https://www.wikidata.org/wiki/Q184398
+protamine,Protamine,硫酸鱼精蛋白,medium,override,6,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硫酸鱼精蛋白；cn_substance_id=cn-65f686cace；evidence_url=https://www.wikidata.org/wiki/Q22075855
+prucalopride,Prucalopride,琥珀酸普芦卡必利,medium,override,54,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=琥珀酸普芦卡必利；cn_substance_id=cn-93e4afe0ce；evidence_url=https://www.wikidata.org/wiki/Q68484
+pseudomonas-aeruginosa,Pseudomonas Aeruginosa,铜绿假单胞菌,medium,override,4,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=铜绿假单胞菌；cn_substance_id=cn-bb671cefc8；evidence_url=https://www.wikidata.org/wiki/Q31856
+puerarin,Puerarin,葛根素,medium,product_majority,160,0.755,15,"CN 单成分产品中文名（160/212 个产品，share=0.755，候选变体 15 个）；示例 product_id=CN-XC01EBG072B00-f70598b6,CN-XC01EBG072B00-92bd465b,CN-XC01EBG072B00-6944324e"
+quinapril,Quinapril,盐酸喹那普利,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸喹那普利；cn_substance_id=cn-c684101744；evidence_url=https://www.wikidata.org/wiki/Q596022
+racecadotril,Racecadotril,消旋卡多曲,medium,product_majority,28,0.7,3,"CN 单成分产品中文名（28/40 个产品，share=0.7，候选变体 3 个）；示例 product_id=CN-XA07XAX061A00-c2d155ee,CN-XA07XAX061A00-f8cb0608,CN-XA07XAX061A00-ba9118af"
+raloxifene,Raloxifene,盐酸雷洛昔芬,medium,override,14,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸雷洛昔芬；cn_substance_id=cn-30d340be03；evidence_url=https://www.wikidata.org/wiki/Q425223
+ramucirumab,Ramucirumab,雷莫西尤单抗,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=雷莫西尤单抗；cn_substance_id=cn-de4ce0c803；evidence_url=https://www.wikidata.org/wiki/Q7290345
+rasagiline,Rasagiline,甲磺酸雷沙吉兰,medium,override,24,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲磺酸雷沙吉兰；cn_substance_id=cn-825d91a142；evidence_url=https://www.wikidata.org/wiki/Q420685
+reboxetine,Reboxetine,甲磺酸瑞波西汀,medium,override,13,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=甲磺酸瑞波西汀；cn_substance_id=cn-15b9ceb557；evidence_url=https://www.wikidata.org/wiki/Q418970
+regorafenib,Regorafenib,瑞戈非尼,medium,override,12,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=瑞戈非尼；cn_substance_id=cn-fa0737008d；evidence_url=https://www.wikidata.org/wiki/Q3891664
+repaglinide,Repaglinide,瑞格列奈,medium,product_majority,37,0.755,3,"CN 单成分产品中文名（37/49 个产品，share=0.755，候选变体 3 个）；示例 product_id=CN-XA10BXR068A00-9d7bb2c2,CN-XA10BXR068A00-da0908b6,CN-XA10BXR068A00-95571cdf"
+ribonucleic-acid,Ribonucleic Acid,核糖核酸,medium,override,5,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=核糖核酸；cn_substance_id=cn-e87b9a6f76；evidence_url=https://www.wikidata.org/wiki/Q11053
+rifaximin,Rifaximin,利福昔明,medium,product_majority,52,0.743,8,"CN 单成分产品中文名（52/70 个产品，share=0.743，候选变体 8 个）；示例 product_id=CN-XA07AAL065A00-9f707a8b,CN-XA07AAL065A00-e66b7d45,CN-XA07AAL065A00-603a1552"
+rimantadine,Rimantadine,盐酸金刚乙胺,medium,override,36,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=盐酸金刚乙胺；cn_substance_id=cn-3318df8f49；evidence_url=https://www.wikidata.org/wiki/Q42171
+ripretinib,Ripretinib,瑞普替尼,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=瑞普替尼；cn_substance_id=cn-a55757be54；evidence_url=https://www.wikidata.org/wiki/Q27076996
+risperidone,Risperidone,利培酮,medium,product_majority,64,0.653,9,"CN 单成分产品中文名（64/98 个产品，share=0.653，候选变体 9 个）；示例 product_id=CN-XN05AXL071A00-383d058c,CN-XN05AXL071A00-db695870,CN-XN05AXL071A00-476bf510"
+ritlecitinib,Ritlecitinib,甲苯磺酸利特昔替尼,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=甲苯磺酸利特昔替尼；cn_substance_id=cn-b519332102；evidence_url=https://www.wikidata.org/wiki/Q120487896
+rituximab,Rituximab,利妥昔单抗,medium,override,32,1.0,6,cn_inn_overrides.csv 显式映射：zh_name=利妥昔单抗；cn_substance_id=cn-7d68c24313；evidence_url=https://www.wikidata.org/wiki/Q412323
+rivastigmine,Rivastigmine,利斯的明透皮,medium,product_majority,10,0.714,2,"CN 单成分产品中文名（10/14 个产品，share=0.714，候选变体 2 个）；示例 product_id=CN-XN06DAL359V00-482faa6a,CN-XN06DAL359V00-5ef5e756,CN-XN06DAL359V00-4161f73d"
+salicylic-acid,Salicylic Acid,水杨酸,medium,product_majority,30,0.682,7,"CN 单成分产品中文名（30/44 个产品，share=0.682，候选变体 7 个）；示例 product_id=CN-XD01AES154F00-3c908e7c,CN-XD01AES154F00-836c9842,CN-XD01AES154F00-c6e74ab0"
+saxagliptin,Saxagliptin,沙格列汀,medium,product_majority,54,0.628,3,"CN 单成分产品中文名（54/86 个产品，share=0.628，候选变体 3 个）；示例 product_id=CN-XA10BHS231A00-4aabfa2a,CN-XA10BHS231A00-b9fd4f34,CN-XA10BHS231A00-723453f3"
+secnidazole,Secnidazole,塞克硝唑,medium,product_majority,20,0.769,3,"CN 单成分产品中文名（20/26 个产品，share=0.769，候选变体 3 个）；示例 product_id=CN-XP01ABS001A00-1f70aeaa,CN-XP01ABS001A00-4a6c6313,CN-XP01ABS001A00-f563a111"
+secobarbital,Secobarbital,司可巴比妥钠,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=司可巴比妥钠；cn_substance_id=cn-8da26ecbdc；evidence_url=https://www.wikidata.org/wiki/Q414788
+selegiline,Selegiline,盐酸司来吉兰,medium,product_majority,7,0.636,2,"CN 单成分产品中文名（7/11 个产品，share=0.636，候选变体 2 个）；示例 product_id=CN-XN04BDS170A00-79321daa,CN-XN04BDS170A00-91fdeb64,CN-XN04BDS170A00-1f516e1d"
+sertaconazole,Sertaconazole,硝酸舍他康唑,medium,override,16,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=硝酸舍他康唑；cn_substance_id=cn-c8d44754e5；evidence_url=https://www.wikidata.org/wiki/Q27252298
+sirolimus,Sirolimus,西罗莫司,medium,override,12,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=西罗莫司；cn_substance_id=cn-092298b9ae；evidence_url=https://www.wikidata.org/wiki/Q32089
+sodium-acetate,Sodium Acetate,醋酸钠,medium,override,49,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=醋酸钠；cn_substance_id=cn-39cc62e7a9；evidence_url=https://www.wikidata.org/wiki/Q339940
+sodium-nitrite,Sodium Nitrite,亚硝酸钠,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=亚硝酸钠；cn_substance_id=cn-532d339194；evidence_url=https://www.wikidata.org/wiki/Q339975
+sodium-phosphate,Sodium Phosphate,磷酸钠盐,medium,override,17,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=磷酸钠盐；cn_substance_id=cn-eef2adabd4；evidence_url=repo:data/cn_name_map.json
+sodium-thiosulfate,Sodium Thiosulfate,硫代硫酸钠,medium,override,19,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=硫代硫酸钠；cn_substance_id=cn-cd54069235；evidence_url=https://www.wikidata.org/wiki/Q339866
+somatropin,Somatropin,人生长激素,medium,product_majority,50,0.61,6,"CN 单成分产品中文名（50/82 个产品，share=0.61，候选变体 6 个）；示例 product_id=CN-XH01ACC113B00-735a6acf,CN-XH01ACC113B00-a867b191,CN-XH01ACC113B00-a016495e"
+spectinomycin,Spectinomycin,盐酸大观霉素,medium,override,16,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸大观霉素；cn_substance_id=cn-524c64c28d；evidence_url=https://www.wikidata.org/wiki/Q416154
+succimer,Succimer,二巯丁二酸,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=二巯丁二酸；cn_substance_id=cn-18b5e3c2ee；evidence_url=https://www.wikidata.org/wiki/Q423814
+sulconazole,Sulconazole,硝酸硫康唑,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=硝酸硫康唑；cn_substance_id=cn-92dc9b069c；evidence_url=https://www.wikidata.org/wiki/Q2392530
+sulfacetamide,Sulfacetamide,磺胺醋酰钠,medium,override,17,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=磺胺醋酰钠；cn_substance_id=cn-e79c038fb9；evidence_url=https://www.wikidata.org/wiki/Q2022983
+sulfadiazine,Sulfadiazine,磺胺嘧啶,medium,product_majority,127,0.645,4,"CN 单成分产品中文名（127/197 个产品，share=0.645，候选变体 4 个）；示例 product_id=CN-XD06BAH068F00-52ea3bd0,CN-XD06BAH068F00-1572629b,CN-XJ01ECF313A00-4344e452"
+sulfadoxine,Sulfadoxine,磺胺多辛,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=磺胺多辛；cn_substance_id=cn-55967c1795；evidence_url=https://www.wikidata.org/wiki/Q411557
+tamsulosin,Tamsulosin,盐酸坦洛新,medium,override,42,1.0,7,cn_inn_overrides.csv 显式映射：zh_name=盐酸坦洛新；cn_substance_id=cn-02b8b27935；evidence_url=https://www.wikidata.org/wiki/Q418480
+tapentadol,Tapentadol,盐酸他喷他多,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=盐酸他喷他多；cn_substance_id=cn-8219919ed8；evidence_url=https://www.wikidata.org/wiki/Q414463
+terazosin,Terazosin,盐酸特拉唑嗪,medium,product_majority,56,0.709,11,"CN 单成分产品中文名（56/79 个产品，share=0.709，候选变体 11 个）；示例 product_id=CN-XG04CAT026A00-aa3a4aa1,CN-XG04CAT026A00-4da1c257,CN-XG04CAT026A00-968146a7"
+tetracycline,Tetracycline,四环素,medium,product_majority,278,0.764,2,"CN 单成分产品中文名（278/364 个产品，share=0.764，候选变体 2 个）；示例 product_id=CN-XD06AAS176F00-95241832,CN-XD06AAS176F00-3fb22bc7,CN-XD06AAS176F00-14aa48ca"
+thiotepa,Thiotepa,塞替派,medium,override,7,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=塞替派；cn_substance_id=cn-afec68ae9b；evidence_url=https://www.wikidata.org/wiki/Q416507
+ticlopidine,Ticlopidine,盐酸噻氯匹定,medium,override,25,1.0,8,cn_inn_overrides.csv 显式映射：zh_name=盐酸噻氯匹定；cn_substance_id=cn-252eb13ec5；evidence_url=https://www.wikidata.org/wiki/Q420571
+tislelizumab,Tislelizumab,替雷利珠单抗,medium,override,2,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=替雷利珠单抗；cn_substance_id=cn-2be847ec1b；evidence_url=https://www.wikidata.org/wiki/Q28209583
+tizanidine,Tizanidine,盐酸替扎尼定,medium,override,12,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=盐酸替扎尼定；cn_substance_id=cn-2653016bda；evidence_url=https://www.wikidata.org/wiki/Q423538
+tobramycin,Tobramycin,妥布霉素,medium,product_base_aggregate,140,0.886,10,CN 单成分产品中文名（140/158 个产品，share=0.886，候选变体 10 个）；示例 product_id=
+topotecan,Topotecan,盐酸托泊替康,medium,override,6,1.0,4,cn_inn_overrides.csv 显式映射：zh_name=盐酸托泊替康；cn_substance_id=cn-99e0dac9f4；evidence_url=repo:data/cn_name_map.json
+toremifene,Toremifene,枸橼酸托瑞米芬,medium,override,13,1.0,3,cn_inn_overrides.csv 显式映射：zh_name=枸橼酸托瑞米芬；cn_substance_id=cn-d4aa0434d1；evidence_url=https://www.wikidata.org/wiki/Q3993743
+toripalimab,Toripalimab,特瑞普利单抗,medium,override,6,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=特瑞普利单抗；cn_substance_id=cn-c614722edd；evidence_url=https://www.wikidata.org/wiki/Q123397307
+trastuzumab,Trastuzumab,曲妥珠单抗,medium,override,20,1.0,7,cn_inn_overrides.csv 显式映射：zh_name=曲妥珠单抗；cn_substance_id=cn-95cc9e491c；evidence_url=https://www.wikidata.org/wiki/Q412616
+trazodone,Trazodone,盐酸曲唑酮,medium,product_majority,21,0.618,4,"CN 单成分产品中文名（21/34 个产品，share=0.618，候选变体 4 个）；示例 product_id=CN-XN06AXQ113A00-297008ba,CN-XN06AXQ113A00-e781b85c,CN-XN06AXQ113A00-746bd0c3"
+tretinoin,Tretinoin,艾力可,medium,product_majority,6,0.6,4,"CN 单成分产品中文名（6/10 个产品，share=0.6，候选变体 4 个）；示例 product_id=CN-XL01XFW004A00-aeb56e76,CN-XL01XFW004A00-df78c682,CN-XL01XFW004A00-6dd3059a"
+trolamine,Trolamine,三乙醇胺,medium,override,4,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=三乙醇胺；cn_substance_id=cn-0c2da4bb8b；evidence_url=https://www.wikidata.org/wiki/Q424314
+tropisetron,Tropisetron,盐酸托烷司琼,medium,product_majority,100,0.637,18,"CN 单成分产品中文名（100/157 个产品，share=0.637，候选变体 18 个）；示例 product_id=CN-XA04AAT122A00-d08ed92d,CN-XA04AAT122A00-8cdd7108,CN-XA04AAT122A00-4fded18f"
+trospium,Trospium,曲司氯铵,medium,override,11,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=曲司氯铵；cn_substance_id=cn-36d5d01254；evidence_url=https://www.wikidata.org/wiki/Q27252312
+turpentine,Turpentine,松节油,medium,override,3,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=松节油；cn_substance_id=cn-73b52cd34e；evidence_url=https://www.wikidata.org/wiki/Q201382
+undecylenic-acid,Undecylenic Acid,十一烯酸锌,medium,override,9,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=十一烯酸锌；cn_substance_id=cn-40109c8e3b；evidence_url=https://www.wikidata.org/wiki/Q420346
+urapidil,Urapidil,盐酸乌拉地尔,medium,product_majority,94,0.671,10,"CN 单成分产品中文名（94/140 个产品，share=0.671，候选变体 10 个）；示例 product_id=CN-XC02CAW069B00-a5884301,CN-XC02CAW069B00-f9c0f248,CN-XC02CAW069B00-2d2e17cf"
+vacuna-anti-neumococo,Vacuna Anti Neumococo,纽莫法,medium,product_majority,6,0.75,2,"CN 单成分产品中文名（6/8 个产品，share=0.75，候选变体 2 个）；示例 product_id=CN-XJ07ALF025B00-6e41d860,CN-XJ07ALF025B00-058dda23,CN-XJ07ALF025B00-c5623c17"
+valganciclovir,Valganciclovir,盐酸缬更昔洛韦,medium,override,5,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=盐酸缬更昔洛韦；cn_substance_id=cn-af6fe6fb37；evidence_url=https://www.wikidata.org/wiki/Q423384
+valsartan,Valsartan,缬沙坦,medium,product_majority,244,0.651,12,"CN 单成分产品中文名（244/375 个产品，share=0.651，候选变体 12 个）；示例 product_id=CN-XC09CAX143A00-7de0d588,CN-XC09CAX143A00-d2267cc6,CN-XC09CAX143A00-e87e360e"
+varenicline,Varenicline,酒石酸伐尼克兰,medium,override,35,1.0,2,cn_inn_overrides.csv 显式映射：zh_name=酒石酸伐尼克兰；cn_substance_id=cn-06492bed53；evidence_url=https://www.wikidata.org/wiki/Q411330
+vinorelbine,Vinorelbine,酒石酸长春瑞滨,medium,product_majority,40,0.69,9,"CN 单成分产品中文名（40/58 个产品，share=0.69，候选变体 9 个）；示例 product_id=CN-XL01CAC020B00-f56a48e2,CN-XL01CAC020B00-f692797d,CN-XL01CAC020B00-9cdb63d9"
+zanubrutinib,Zanubrutinib,泽布替尼,medium,override,1,1.0,1,cn_inn_overrides.csv 显式映射：zh_name=泽布替尼；cn_substance_id=cn-2b4408bd66；evidence_url=https://www.wikidata.org/wiki/Q75192022
+zidovudine,Zidovudine,齐多夫定,medium,product_majority,20,0.606,8,"CN 单成分产品中文名（20/33 个产品，share=0.606，候选变体 8 个）；示例 product_id=CN-XJ05AFQ008A00-88db2843,CN-XJ05AFQ008A00-8cf1d61e,CN-XJ05AFQ008A00-1560002e"
+zopiclone,Zopiclone,佐匹克隆,medium,product_majority,36,0.632,5,"CN 单成分产品中文名（36/57 个产品，share=0.632，候选变体 5 个）；示例 product_id=CN-XN05CFZ077A00-6a9c3bfc,CN-XN05CFZ077A00-ac40947f,CN-XN05CFZ077A00-8d1aadf8"
+alglucosidase-alfa,Alglucosidase Alfa,美而赞,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA16ABA293B00-0b83f2f2,CN-XA16ABA293B00-cc84f1c7"
+aminocaproic-acid,Aminocaproic Acid,凯乃银,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB02AAA227B00-c50fda72
+amitriptyline,Amitriptyline,盐酸阿米替林,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN06AAA037A00-354cc007,CN-XN06AAA037A01-4e63bbf7"
+amphotericin-b,Amphotericin B,锋克松,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ02AAL085B01-c2b6c6d7,CN-XJ02AAL085B01-10cf5caa"
+butilescopolamina,Butilescopolamina,甲溴阿托品,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA03BBJ080A00-6ed8b5ff
+cefuroxime,Cefuroxime,头孢呋辛,low,product_base_aggregate,740,0.737,24,CN 单成分产品中文名（740/1004 个产品，share=0.737，候选变体 24 个）；示例 product_id=
+chlorhexidine,Chlorhexidine,氯己定,low,product_base_aggregate,77,0.606,10,CN 单成分产品中文名（77/127 个产品，share=0.606，候选变体 10 个）；示例 product_id=
+ciproterona,Ciproterona,醋酸环丙孕酮,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG03HAH039A00-d27f4045,CN-XG03HAH039A00-9da0f8d0"
+clomifene,Clomifene,法地兰,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XG03GBL236A00-e7ad4e43
+colestyramine,Colestyramine,考来烯胺,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC10ACK056P00-e64335df,CN-XC10ACK056P00-adf89c30"
+dextran-40,Dextran 40,福他乐,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XB05AAF586B00-214824cf,CN-XB05AAF586B00-aa38fe03"
+diclofenac,Diclofenac,双氯芬酸,low,product_base_aggregate,674,0.619,48,CN 单成分产品中文名（674/1088 个产品，share=0.619，候选变体 48 个）；示例 product_id=
+fludeoxyglucose-f-18,Fludeoxyglucose F 18,弗唐派特,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV09IXF061B00-6223929c
+fludrocortisona,Fludrocortisona,醋酸氟氢可的松,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XH02AAF090A00-d1d49982,CN-XH02AAF090A00-e88c7e20"
+flutamide,Flutamide,氟他胺,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL02BBF094A00-1149f33b,CN-XL02BBF094A00-1b8623df"
+folinic-acid,Folinic Acid,亚叶酸钠,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV03AFY024B00-c53b4852
+fusidic-acid,Fusidic Acid,夫西地酸,low,product_base_aggregate,28,0.757,6,CN 单成分产品中文名（28/37 个产品，share=0.757，候选变体 6 个）；示例 product_id=
+leuprorelin,Leuprorelin,抑那通,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL02AEL086B01-e48b4ee6,CN-XL02AEL086B01-38a25432"
+levofloxacin,Levofloxacin,左氧氟沙星,low,product_base_aggregate,1338,0.773,63,CN 单成分产品中文名（1338/1730 个产品，share=0.773，候选变体 63 个）；示例 product_id=
+lopinavir,Lopinavir,洛匹那韦利托那韦,low,product_majority,2,0.667,2,"CN 单成分产品中文名（2/3 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XJ05ARL282A00-1d677f31,CN-XJ05ARL282A00-54128372"
+magnesium-gluconate,Magnesium Gluconate,包乐,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA12CCP082N00-d6139ac9
+mebrofenin,Mebrofenin,亚锡依替菲宁,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV09DAY018B00-467f11cc
+metildopa,Metildopa,甲基多巴,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC02ABJ046A00-4bce0a5c,CN-XC02ABJ046A00-8283e270"
+paliperidone,Paliperidone,帕利哌酮,low,product_base_aggregate,39,0.765,4,CN 单成分产品中文名（39/51 个产品，share=0.765，候选变体 4 个）；示例 product_id=
+phenobarbital,Phenobarbital,苯巴比妥,low,product_base_aggregate,44,0.786,4,CN 单成分产品中文名（44/56 个产品，share=0.786，候选变体 4 个）；示例 product_id=
+procarbazine,Procarbazine,盐酸丙卡巴肼,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XL01XBB126E00-93fed9e2
+ropivacaine,Ropivacaine,罗哌卡因,low,product_base_aggregate,175,0.723,13,CN 单成分产品中文名（175/242 个产品，share=0.723，候选变体 13 个）；示例 product_id=
+sodium-chloride,Sodium Chloride,乐敦清,low,product_majority,2,0.667,2,"CN 单成分产品中文名（2/3 个产品，share=0.667，候选变体 2 个）；示例 product_id=CN-XS01XAF669G01-4ca5f686,CN-XS01XAF669G01-34144756"
+strontium-chloride,Strontium Chloride,思通宁,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XV10BXL213B00-b0331a32
+sufentanil,Sufentanil,舒芬尼,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN01AHS091B00-7be36ad1,CN-XN01AHS091B00-b0526819"
+tocopherol,Tocopherol,清之维,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC10ADW054E00-69496f02
+triptorelin,Triptorelin,曲普瑞林,low,product_base_aggregate,23,0.719,5,CN 单成分产品中文名（23/32 个产品，share=0.719，候选变体 5 个）；示例 product_id=
+vacuna-anti-fiebre-amarilla,Vacuna Anti Fiebre Amarilla,黄热减毒活疫苗,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ07BLH054B01-46b2b02b
+vernakalant,Vernakalant,盐酸莫雷西嗪,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XC01BGM118A00-4ba4e82e
+vitamin-b-complex,Vitamin B Complex,水乐维他,low,product_majority,2,1.0,1,"CN 单成分产品中文名（2/2 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XA11EBS153B00-d62abd50,CN-XA11EBS153B00-3455771d"
+zanamivir,Zanamivir,扎那米韦吸入,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XJ05AHZ005L03-74a18dbe
+ziprasidone,Ziprasidone,齐拉西酮,low,product_base_aggregate,16,0.64,5,CN 单成分产品中文名（16/25 个产品，share=0.64，候选变体 5 个）；示例 product_id=
+zonisamide,Zonisamide,唑尼沙胺,low,product_majority,1,1.0,1,CN 单成分产品中文名（1/1 个产品，share=1.0，候选变体 1 个）；示例 product_id=CN-XN03AXZ080A00-a478f9bd
