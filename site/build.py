@@ -22,6 +22,7 @@
 
 from __future__ import annotations
 
+import csv
 import hashlib
 import html
 import json
@@ -1562,7 +1563,7 @@ def _merge_static_i18n(values: dict) -> None:
     for lang in ("en", "es", "zh"):
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
                        MAKER_I18N[lang], META_I18N[lang], GLOSSARY_I18N[lang],
-                       ATC_I18N[lang], LABEL_I18N[lang], UI_I18N[lang]):
+                       ATC_I18N[lang], BILINGUAL_I18N[lang], LABEL_I18N[lang], UI_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1591,7 +1592,7 @@ def _install_zh_hant(values: dict) -> None:
     # v0.6.3：U1/U2/U3 新 key 的 zh-Hant 值直接来自 build.py（不依赖 JSON 是否已补齐），
     # 避免新 key 回落到简体中文。
     for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"],
-                  ATC_I18N["zh-Hant"]):
+                  ATC_I18N["zh-Hant"], BILINGUAL_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
@@ -2214,6 +2215,14 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
 .tag.sg{color:#7a1f3d;border-color:#e3b7c5}
+/* v0.8.1：双语对照开关/来源徽章/版本/原文 */
+.bil-toggle{display:inline-flex;align-items:center;gap:4px;font-size:12px;
+  color:var(--muted);margin:0 8px;cursor:pointer}
+.bil-toggle input{width:14px;height:14px}
+.tr-badge{display:inline-block;margin-left:6px;font-size:11px;padding:0 5px;
+  border:1px solid var(--line);border-radius:6px;color:var(--muted);vertical-align:1px}
+.tr-ver{font-size:11px;color:var(--muted);margin-left:4px}
+.tr-orig{color:var(--muted);font-weight:400}
 /* v0.7.x：ATC 类别 / 大类浏览 */
 .atcgrid,.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:8px;margin:10px 0}
@@ -2605,13 +2614,14 @@ function ingredientLabel(e){
 //   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
 function brandHTML(e){
-  if(e && e.u) return `<a href="${BASE}name/${e.u}">${e.d}</a>`;
-  return `<span class="brand-plain">${e && e.d != null ? e.d : ''}</span>`;
+  if(e && e.u) return `<a data-brand="1" href="${BASE}name/${e.u}">${e.d}</a>`;
+  return `<span data-brand="1" class="brand-plain">${e && e.d != null ? e.d : ''}</span>`;
 }
 function ingredientHTML(e, cls){
   const label = ingredientLabel(e);
+  const orig = (e && (e.x || e.d)) || '';
   if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>`;
-  if(e.v) return `<a class="${cls || ''}" href="${BASE}drug/${e.v}.html">${label}</a>`;
+  if(e.v) return `<a class="${cls || ''}" data-sub-ingredient="${esc(e.v)}" data-sub-orig="${esc(orig)}" href="${BASE}drug/${e.v}.html">${label}</a>`;
   return `<span class="${cls || ''}">${label}</span>`;
 }
 // v0.5.4 厂家列：第一个厂家可点（索引 mu），「+N」展开其它带页厂家（索引 ml）；
@@ -4108,6 +4118,161 @@ def _page_meta(lang: str, meta_key: str | None) -> tuple[str, str]:
     return (D.get(f"meta.{meta_key}.title", ""), D.get(f"meta.{meta_key}.desc", ""))
 
 
+TERMS_SUB_IDS: set[str] = set()
+
+# v0.8.1：双语对照显示（独立脚本，避免改动 i18n.js 模板；所有页面 defer 加载）
+BILINGUAL_JS = r"""
+(function(){
+  var T = window.T || function(k){ return k; };
+  var TERMS = null, SHOW = true, OBS = null, OUT = null;
+  try {
+    var saved = localStorage.getItem('dsh.showOrig');
+    SHOW = (saved === '0') ? false : (saved === '1') ? true : (window.LANG !== 'en');
+  } catch(e) { SHOW = (window.LANG !== 'en'); }
+  function url(){
+    var pre = (typeof window.DSH_PREFIX === 'string') ? window.DSH_PREFIX : '';
+    return pre + 'data/terms.json';
+  }
+  function load(){
+    if(TERMS) return Promise.resolve(TERMS);
+    return fetch(url()).then(function(r){ return r.json(); }).then(function(d){
+      TERMS = d; return d;
+    }).catch(function(){ return null; });
+  }
+  function srcLabel(s){
+    if(!s) return '';
+    var k = 'bilingual.source.' + s;
+    var v = T(k);
+    return (v === k) ? s : v;
+  }
+  function applyOne(el){
+    var sid = el.getAttribute('data-sub-ingredient');
+    var orig = el.getAttribute('data-sub-orig');
+    if(orig === null || orig === undefined){
+      orig = el.textContent || '';
+      el.setAttribute('data-sub-orig', orig);
+    }
+    el.querySelectorAll('.tr-badge,.tr-ver,.tr-orig').forEach(function(n){ n.remove(); });
+    var ent = (TERMS && TERMS.sub && TERMS.sub[sid]) || null;
+    var tr = ent && ent[window.LANG];
+    if(!tr || !tr.n){ el.textContent = orig; return; }
+    el.textContent = tr.n;
+    var badge = document.createElement('span');
+    badge.className = 'tr-badge';
+    badge.textContent = srcLabel(tr.s);
+    if(tr.u) badge.title = tr.u;
+    el.appendChild(badge);
+    if(tr.v){
+      var ver = document.createElement('span');
+      ver.className = 'tr-ver';
+      ver.textContent = 'v' + tr.v;
+      el.appendChild(ver);
+    }
+    if(SHOW && orig && orig !== tr.n){
+      var o = document.createElement('span');
+      o.className = 'tr-orig';
+      o.textContent = ' (' + orig + ')';
+      el.appendChild(o);
+    }
+  }
+  function render(){
+    if(!TERMS) return;
+    if(OBS) OBS.disconnect();
+    document.querySelectorAll('[data-sub-ingredient]').forEach(applyOne);
+    var note = T('bilingual.brand_note');
+    document.querySelectorAll('[data-brand]').forEach(function(el){
+      if(note && note.indexOf('bilingual.') !== 0) el.setAttribute('title', note);
+    });
+    var cb = document.getElementById('bilOrig');
+    if(cb) cb.checked = SHOW;
+    if(OBS && OUT) OBS.observe(OUT, {childList: true, subtree: true});
+  }
+  function injectToggle(){
+    if(document.getElementById('bilToggle')) return;
+    var nav = document.querySelector('header nav');
+    if(!nav) return;
+    var lab = document.createElement('label');
+    lab.id = 'bilToggle';
+    lab.className = 'bil-toggle';
+    lab.innerHTML = '<input type="checkbox" id="bilOrig"> <span></span>';
+    lab.querySelector('span').textContent = T('bilingual.toggle');
+    var langs = nav.querySelector('.langs');
+    nav.insertBefore(lab, langs || null);
+    var cb = lab.querySelector('input');
+    cb.checked = SHOW;
+    cb.addEventListener('change', function(){
+      SHOW = cb.checked;
+      try { localStorage.setItem('dsh.showOrig', SHOW ? '1' : '0'); } catch(e) {}
+      render();
+    });
+  }
+  function start(){
+    injectToggle();
+    load().then(render);
+    OUT = document.getElementById('out');
+    if(OUT && window.MutationObserver){
+      OBS = new MutationObserver(function(){ if(TERMS) render(); });
+      OBS.observe(OUT, {childList: true, subtree: true});
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+  window.addEventListener('load', render);
+  window.applyBilingualTerms = render;
+})();
+"""
+
+
+def build_terms_json(db: sqlite3.Connection) -> dict[str, int]:
+    """v0.8.1：从 ingredient_names_i18n.csv 生成客户端/页面用 data/terms.json。
+
+    规则：只收 display_default_<lang>=1 且 machine_translated=0 的译名；无译名不写。
+    """
+    terms: dict = {"sub": {}, "meta": {"version": "", "counts": {}}}
+    global TERMS_SUB_IDS
+    path = ROOT / "data" / "ingredient_names_i18n.csv"
+    counts: dict[str, int] = {}
+    version = ""
+    if path.exists():
+        with path.open(encoding="utf-8-sig", newline="") as f:
+            for row in csv.DictReader(f):
+                sid = (row.get("substance_id") or "").strip()
+                if not sid:
+                    continue
+                ent: dict = {"en": (row.get("inn_en") or "").strip()}
+                for lang, nk, sk, uk, ck, dk in (
+                        ("zh", "name_zh", "source_zh", "source_url_zh", "confidence_zh",
+                         "display_default_zh"),
+                        ("es", "name_es", "source_es", "source_url_es", "confidence_es",
+                         "display_default_es"),
+                        ("zh-Hant", "name_zh_hant", "source_zh_hant", "source_url_zh_hant",
+                         "confidence_zh_hant", "display_default_zh_hant"),
+                        ("pt", "name_pt", "source_pt", "source_url_pt", "confidence_pt",
+                         "display_default_pt")):
+                    if (row.get(dk) or "0").strip() != "1":
+                        continue
+                    if (row.get("machine_translated") or "0").strip() == "1":
+                        continue
+                    name = (row.get(nk) or "").strip()
+                    if not name:
+                        continue
+                    ent[lang] = {"n": name, "s": (row.get(sk) or "").strip(),
+                                 "u": (row.get(uk) or "").strip(),
+                                 "c": (row.get(ck) or "").strip(),
+                                 "v": (row.get("version") or "").strip()}
+                    counts[lang] = counts.get(lang, 0) + 1
+                if len(ent) > 1:
+                    terms["sub"][sid] = ent
+                    version = version or (ent.get("zh") or ent.get("es") or {}).get("v", "")
+    terms["meta"]["version"] = version
+    terms["meta"]["counts"] = counts
+    TERMS_SUB_IDS = set(terms["sub"])
+    (OUT / "data").mkdir(parents=True, exist_ok=True)
+    (OUT / "data" / "terms.json").write_text(
+        json.dumps(terms, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    return counts
+
+
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
          canonical_rel: str = "", alt_rel: str = "", head_js: str = "") -> str:
@@ -4156,7 +4321,9 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
-<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>{GC_TAG}{head_js}</head>
+<script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>
+<script>window.DSH_PREFIX={prefix!r};</script>
+<script defer src="{prefix}assets/bilingual.js?v={BUILD_V}"></script>{GC_TAG}{head_js}</head>
 <body>
 <header><div class="wrap">
   <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
@@ -4924,10 +5091,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                 bits = []
                 for label, url in ordered[:3]:
                     if url:
-                        bits.append(f'<a class="m-brand" href="{esc(url)}">'
+                        bits.append(f'<a class="m-brand" data-brand="1" href="{esc(url)}">'
                                     f'{esc(label)}</a>')
                     else:
-                        bits.append(f'<span class="m-brand">{esc(label)}</span>')
+                        bits.append(f'<span class="m-brand" data-brand="1">{esc(label)}</span>')
                 more = (f' <span class="meta">+{len(ordered) - 3}</span>'
                         if len(ordered) > 3 else "")
                 cells.append(f'<td>{" ".join(bits)}{more}</td>')
@@ -4972,7 +5139,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                   'lettering for this pair; check the ingredient, not the name.</span> '
                   f'<a href="../confused.html" data-i18n="drug.confused_all">All pairs</a></div>')
         warn_line = _drug_warn_html(warnings_by_sub.get(sid, []))
-        body = f"""<h1>{esc(inn_zh) or esc(inn_en)} <span class="meta">{esc(inn_en)}</span></h1>
+        h1_inner = (f'<span data-sub-ingredient="{esc(sid)}" '
+                    f'data-sub-orig="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>'
+                    if sid in TERMS_SUB_IDS else esc(inn_en or sid))
+        body = f"""<h1>{h1_inner}</h1>
 <p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
 <code>{esc(sid)}</code></p>
 {warn_line}
@@ -5689,6 +5859,43 @@ GLOSSARY_TERMS = ("inn", "ban", "usan", "atc", "mah", "din", "ndc", "artg",
                   "fdc", "lasa", "otc", "rx", "strength")
 
 
+# ── v0.8.1 双语对照（成分原名 + 当前语言译名 + 来源/版本；品牌永不翻译）────────
+BILINGUAL_I18N = {
+    "en": {
+        "bilingual.toggle": "Show original",
+        "bilingual.brand_note": "Name as registered in that market — not a translation.",
+        "bilingual.source.official": "official",
+        "bilingual.source.regulator": "regulator",
+        "bilingual.source.pharmacopoeia": "pharmacopoeia",
+        "bilingual.source.manual": "editorial",
+    },
+    "es": {
+        "bilingual.toggle": "Mostrar original",
+        "bilingual.brand_note": "Nombre registrado en ese mercado — no es una traducción.",
+        "bilingual.source.official": "oficial",
+        "bilingual.source.regulator": "regulador",
+        "bilingual.source.pharmacopoeia": "farmacopea",
+        "bilingual.source.manual": "editorial",
+    },
+    "zh": {
+        "bilingual.toggle": "显示原文对照",
+        "bilingual.brand_note": "该市场注册名，不是翻译。",
+        "bilingual.source.official": "官方",
+        "bilingual.source.regulator": "监管机构",
+        "bilingual.source.pharmacopoeia": "药典",
+        "bilingual.source.manual": "编辑整理",
+    },
+    "zh-Hant": {
+        "bilingual.toggle": "顯示原文對照",
+        "bilingual.brand_note": "該市場註冊名，不是翻譯。",
+        "bilingual.source.official": "官方",
+        "bilingual.source.regulator": "監管機構",
+        "bilingual.source.pharmacopoeia": "藥典",
+        "bilingual.source.manual": "編輯整理",
+    },
+}
+
+
 # ── v0.7.x ATC 类别浏览 + 常见大类 ─────────────────────────────────────────
 # ATC 码/层级是权威数据（WHO ATC/DDD Index 引用，不转载）；类别名是编辑/AI 译名，
 # 页面明确标注「ATC 码为准」。DB 的 atc_name 是西语药名，不含类别名，故类别名内置。
@@ -6051,13 +6258,16 @@ def _atc_members_html(subs: list[dict], cap: int = ATC_MEMBER_CAP,
         zh = r.get("inn_zh") or r.get("inn_en") or r.get("substance_id") or ""
         en = r.get("inn_en") or ""
         sid = r["substance_id"]
+        disp = esc(en or zh)
+        # 只有存在默认译名的成分才挂双语标记；其余直接显示原名（避免页面体积膨胀）
+        attrs = (f' data-sub-ingredient="{esc(sid)}" data-sub-orig="{esc(en or zh)}"'
+                 if sid in TERMS_SUB_IDS else "")
         if drug_sids is None or sid in drug_sids:
-            label = f'<a href="../drug/{esc(sid)}.html">{esc(zh)}</a>'
+            label = f'<a href="../drug/{esc(sid)}.html"{attrs}>{disp}</a>'
         else:
             # 有 ATC 但没有 product 的成分没有 drug 页 → 纯文本，避免 ../drug/ 404
-            label = f'<span class="brand-plain">{esc(zh)}</span>'
-        extra = f' <span class="meta">{esc(en)}</span>' if en and en != zh else ""
-        items.append(f'<li>{label}{extra} <code>{esc(r["atc"])}</code></li>')
+            label = f'<span class="brand-plain"{attrs}>{disp}</span>'
+        items.append(f'<li>{label} <code>{esc(r["atc"])}</code></li>')
     more = ""
     if len(ordered) > cap:
         more = (f'<p class="sub" data-i18n="atc.more">and {len(ordered) - cap} more</p>')
@@ -6685,6 +6895,7 @@ def main() -> None:
 """
         )
     (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
+    (OUT / "assets" / "bilingual.js").write_text(BILINGUAL_JS, encoding="utf-8")
     t2s = _load_zh_hant_t2s()
     print(f"i18n t2s    : {len(t2s):,} chars (zh-Hant input normalization)", flush=True)
     (OUT / "assets" / "app.js").write_text(
@@ -6697,6 +6908,9 @@ def main() -> None:
 
     db = sqlite3.connect(DB)
     db.row_factory = sqlite3.Row
+    tr_counts = build_terms_json(db)
+    print(f"bilingual   : {tr_counts.get('zh', 0)} zh / {tr_counts.get('es', 0)} es "
+          f"display-default ingredient translations", flush=True)
     coverage = [dict(r) for r in db.execute("SELECT * FROM coverage ORDER BY country")]
     source_cover = [dict(r) for r in db.execute(
         """SELECT p.country, p.source_id,
