@@ -13,9 +13,10 @@
   function load(){
     if(TERMS) return Promise.resolve(TERMS);
     return fetch(url()).then(function(r){ return r.json(); }).then(function(d){
-      TERMS = d; return d;
+      TERMS = d; expose(); return d;
     }).catch(function(){ return null; });
   }
+  function expose(){ try { window.BILINGUAL_TERMS = TERMS; } catch(e) {} }
   function srcLabel(s){
     if(!s) return '';
     var k = 'bilingual.source.' + s;
@@ -52,9 +53,23 @@
       el.appendChild(o);
     }
   }
+  function renderNames(){
+    document.querySelectorAll('.nm[data-n-en]').forEach(function(el){      var en = el.getAttribute('data-n-en') || '';
+      var zh = el.getAttribute('data-n-zh') || '';
+      var zhh = el.getAttribute('data-n-zhh') || '';
+      var es = el.getAttribute('data-n-es') || '';
+      var lang = window.LANG || 'en';
+      if(lang === 'zh') el.textContent = zh || (en + ' 暂无中文名');
+      else if(lang === 'zh-Hant') el.textContent = zhh || (en + ' 暫無中文名');
+      else if(lang === 'es') el.textContent = es || en;
+      else el.textContent = en;
+    });
+  }
+  window.renderBilingualNames = renderNames;
   function render(){
-    if(!TERMS) return;
+    if(!TERMS) { renderNames(); return; }
     if(OBS) OBS.disconnect();
+    renderNames();
     document.querySelectorAll('[data-sub-ingredient]').forEach(applyOne);
     var note = T('bilingual.brand_note');
     document.querySelectorAll('[data-brand]').forEach(function(el){
@@ -62,6 +77,10 @@
     });
     var cb = document.getElementById('bilOrig');
     if(cb) cb.checked = SHOW;
+    // task-114：英文副标题在英文界面隐藏（避免重复）
+    document.querySelectorAll('.cat-en').forEach(function(el){
+      el.style.display = (window.LANG === 'en') ? 'none' : '';
+    });
     if(OBS && OUT) OBS.observe(OUT, {childList: true, subtree: true});
   }
   function injectToggle(){
@@ -83,8 +102,29 @@
       render();
     });
   }
+  function initNavToggle(){
+    if(document.getElementById('navToggle')) return;
+    var header = document.querySelector('header');
+    var nav = header ? header.querySelector('nav') : null;
+    if(!header || !nav) return;
+    var b = document.createElement('button');
+    b.id = 'navToggle';
+    b.type = 'button';
+    b.className = 'nav-toggle';
+    b.setAttribute('aria-label', T('nav.menu'));
+    b.setAttribute('aria-expanded', 'false');
+    b.textContent = '\u2630';
+    var wrap = header.querySelector('.wrap') || header;
+    wrap.insertBefore(b, nav);
+    b.addEventListener('click', function(){
+      var open = header.classList.toggle('nav-open');
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
   function start(){
+    initNavToggle();
     injectToggle();
+    renderNames();
     load().then(render);
     OUT = document.getElementById('out');
     if(OUT && window.MutationObserver){

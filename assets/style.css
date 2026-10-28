@@ -8,15 +8,39 @@ font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-seri
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 header{border-bottom:1px solid var(--line);background:#fff}
 .wrap{max-width:920px;margin:0 auto;padding:0 20px}
-header .wrap{display:flex;align-items:center;gap:16px;height:60px}
-.logo{font-weight:700;font-size:16px;color:var(--fg)}
-.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
+.logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
+.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px;white-space:nowrap}
 /* v0.6.5：logo 中文副标题只在简体中文界面显示（en/es/zh-Hant 隐藏，移动端仍隐藏） */
 html:not([lang="zh"]) .logo-zh{display:none}
-.langs{margin-left:6px;font-size:13px}
-.langs a{color:var(--muted);padding:1px 5px;border-radius:5px}
+.langs{margin-left:6px;font-size:13px;display:flex;align-items:center;gap:6px;
+  white-space:nowrap;flex-wrap:nowrap}
+.langs a{color:var(--muted);padding:1px 5px;border-radius:5px;white-space:nowrap;
+  display:inline-flex;align-items:center}
 .langs a.on{background:var(--accent);color:#fff}
-nav{display:flex;gap:14px;font-size:14px}
+nav{display:flex;gap:14px;font-size:14px;flex-wrap:nowrap;white-space:nowrap;align-items:center}
+nav a{white-space:nowrap}
+/* v0.8.2 task-118：宽屏一行；768–1023 允许换行（禁止单字竖排）；<768 汉堡菜单 */
+@media (max-width:1099px) and (min-width:768px){
+  header .wrap{height:auto;flex-wrap:wrap;gap:6px 12px;padding-top:8px;padding-bottom:8px}
+  nav{order:3;flex-basis:100%;flex-wrap:wrap;gap:8px 12px;font-size:13px}
+  .langs{margin-left:auto;order:2;gap:4px}
+}
+.nav-toggle{display:none;align-items:center;justify-content:center;min-width:40px;min-height:40px;
+  font-size:18px;background:#fff;color:var(--fg);border:1px solid var(--line);border-radius:8px;
+  cursor:pointer}
+@media (max-width:767px){
+  header .wrap{height:auto;flex-wrap:wrap;gap:8px 12px}
+  .nav-toggle{display:inline-flex;margin-left:auto}
+  header nav{display:none;order:3;width:100%;flex-wrap:wrap;gap:6px 14px;padding:4px 0 2px;
+    font-size:14px}
+  header.nav-open nav{display:flex}
+  header nav a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap}
+  .langs{margin-left:0;gap:6px}
+  .langs a{min-height:40px;padding:4px 6px}
+  .logo{font-size:15px}
+  .logo-zh{display:none}
+}
 main{padding:28px 0 60px;flex:1}
 h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:28px 0 10px}
 .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
@@ -151,22 +175,24 @@ table.det th{background:#f4f2ec;font-size:11px}
 table.det td{padding:5px 8px;vertical-align:top}
 tr.detrow>td.detcell{padding:4px 8px 10px;background:#faf9f6}
 tr.detrow table.det{margin:0}
-/* v0.6.3 U1：首屏 3 步引导（可关闭；head 内联脚本先置 html.u1-off 防 CLS） */
+/* v0.6.3 U1：首屏 3 步引导（v0.8.2 task-115：移到搜索框正下方、国家行之前；层级增强） */
 .u1guide{border:1px solid var(--line);border-radius:12px;background:#fff;
- padding:14px 16px;margin:14px 0 6px}
+ padding:16px 18px;margin:12px 0 2px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .u1head{display:flex;align-items:baseline;gap:10px}
-.u1head h2{margin:0;font-size:16px}
+.u1head h2{margin:0;font-size:18px;font-weight:700;letter-spacing:.01em}
 .u1close{margin-left:auto;background:none;border:0;color:var(--muted);font-size:20px;
  line-height:1;padding:6px 8px;min-width:36px;min-height:36px;cursor:pointer}
 .u1close:hover{color:var(--fg)}
-.u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 0;
+.u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 0;
  padding:0;list-style:none}
-.u1step{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#faf9f6}
-.u1step b{font-size:14px}
+.u1step{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#faf9f6}
+.u1step b{display:block;font-size:15px;margin:0 0 3px}
 .u1step .sub{margin:4px 0 0;font-size:13px}
 .u1try{margin-top:6px;font-size:12px;color:var(--muted)}
 .u1try button{padding:3px 8px;font-size:12px;margin:2px 4px 2px 0;border-radius:8px}
 html.u1-off #u1guide{display:none!important}
+/* v0.8.2 task-116：搜索后收起「按大类浏览」 */
+.catquick.cat-hidden{display:none!important}
 /* v0.6.3 U2：结果顶部各国叫法横排（单成分唯一锚定时才渲染） */
 .u2bar{border:1px solid var(--line);border-radius:12px;background:#fff;
  padding:10px 12px;margin:12px 0}
@@ -191,6 +217,8 @@ table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
 table.matrix thead th{white-space:nowrap;font-weight:650}
 table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
 table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
+.m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
+.matrix-brand-note{margin:6px 0 0;font-size:12px}
 @media (max-width:719px){
   table.matrix{min-width:840px}
   .matwrap{margin:8px 0}
