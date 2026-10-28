@@ -64,6 +64,16 @@
    git push origin vX.Y.Z
    ```
 
+   **Release 标题/正文统一用 Python 脚本创建**（避免 Windows PowerShell 5.1 把无 BOM 的
+   UTF-8 `.ps1` 按本地 ANSI 读取，导致中文标题乱码）：
+
+   ```powershell
+   & $py deploy/github_release.py --tag vX.Y.Z --name "vX.Y.Z - 一句话"
+   ```
+
+   脚本从 `.env` 读 token、正文取 CHANGELOG 对应那一节；Release 已存在则更新，不存在则创建。
+   不要在 `powershell.exe` 里用内联中文字面量直接调 GitHub API。
+
 历史版本已补齐：v0.1.0（原有）、v0.1.1–v0.2.4（按 tag 补建，正文取自 CHANGELOG）。
 **v0.3.0–v0.3.3** 已于 2026-10-26 补 tag / Release（源码统一归档到同一提交）；此后每版按上面步骤建。
 
