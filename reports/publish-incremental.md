@@ -112,6 +112,20 @@ v0.7.0 收尾记录（2026-10-29）：
 - gh-pages 3ce2b0353（上一版 650b30fb 的 fast-forward 增量提交）；线上 smoke **32/32 通过**（0 failed / 0 warnings）
 - 下一版起继续用默认增量流程；本地 cache 已自动刷新到 3ce2b0353，无需重新 bootstrap。
 
+### 3.6 v0.7.1 发布实测（ATC 类目浏览）
+
+| 阶段 | 耗时 |
+|---|---:|
+| 检查 + release notes + cache fetch | 4 s |
+| 镜像 site/dist → cache（61,547 文件 / 446.2 MB） | 87 s |
+| git add -A + commit（61,397 文件变更） | 311 s |
+| thin pack 估算 | 44 s |
+| push（压缩 + 上传） | 62 s（实际 **13.85 MiB**） |
+| 等 Pages build + 首页 200 | 12 s |
+| **合计** | **511 s（8.5 min）** |
+
+结果：gh-pages 29fab5ecd，线上 v0.7.1，smoke 32/32；全量树 446.2 MB → 上传 **-96.9%**。三版增量实测：v0.6.7 27.55 MiB/602 s、v0.7.0 11.60 MiB/557 s、v0.7.1 13.85 MiB/511 s。
+
 ---
 
 ## 4. 迁移注意 / 风险
