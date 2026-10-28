@@ -1,0 +1,484 @@
+{
+ "_meta": {
+  "schema": 1,
+  "source": "CHANGELOG.md",
+  "authoritative_language": "zh",
+  "translations": {
+   "en": "machine (AI) translation of the zh text; zh is authoritative",
+   "es": "machine (AI) translation of the zh text; zh is authoritative"
+  },
+  "machine_translated": true,
+  "generated_at": "2026-10-28T16:38:23+00:00",
+  "versions": 21,
+  "items": 86,
+  "note": "Generated from CHANGELOG.md. Chinese text is the single source of truth; en/es are AI machine translations and should be reviewed before being presented as official copy. Keep this file out of site/build.py until the review is done."
+ },
+ "v0.5.2": {
+  "date": "2026-10-29",
+  "zh": [
+   "**修复 /warn 与成分页警示在中文/西语下空白**：语言块显隐把匹配项设为 `display:''`，\n  回落到 CSS 的 `display:none`，导致三块全隐藏；改为显式 `display:block`。\n  中文/西语现在能正常看到 40 条警示与成分页摘要，英文界面不变。"
+  ],
+  "en": [
+   "**Fix: /warn and ingredient-page warnings were blank in Chinese/Spanish** — the language block set matched items to `display:''`, which fell back to CSS `display:none` and hid all three blocks; it is now set explicitly to `display:block`. Chinese/Spanish show the 40 warnings and ingredient-page summaries again; the English UI is unchanged."
+  ],
+  "es": [
+   "**Corrección: los avisos de /warn y de la página de principio activo aparecían en blanco en chino/español** — el bloque de idioma asignaba `display:''`, que recaía en el CSS `display:none` y ocultaba los tres bloques; ahora se usa `display:block` explícito. Chino/español vuelven a mostrar los 40 avisos y los resúmenes de la página de principio activo; la interfaz en inglés no cambia."
+  ],
+  "machine_translated": true
+ },
+ "v0.5.1": {
+  "date": "2026-10-27",
+  "zh": [
+   "**首搜体积 3.78 MB → 约 254 KB（gz）**：检索索引改为「manifest + 分片」，输入后只拉\n  当前首字符所在的 1 个分片（`data/idx/shard-*.json`）；完整 core 只在后台补全/兜底时加载。\n  `?legacy=1` 仍可回退到整包索引；最终结果与 v0.5.0 一致。",
+   "**西班牙复方补全**：CIMA 里 208 条 `multicomponente` 注册原先被整条跳过，本轮解析\n  `principiosActivos` 后恢复 **102 个产品 / 932 个成分行**（西语产品 25,293 → 25,395；\n  严格模式，只映射到库内已有成分）。",
+   "**/warn 西语正文**：41 条警示补上 `title_es/body_es`，西语页面不再回退英文。",
+   "**搜索评测集扩容**：三语测试从 72 例扩到 300+ 例（错拼 / 拼音 / 简繁 / 复方 / 盐型 / 零结果），\n  作为后续搜索改造的固定门槛。"
+  ],
+  "en": [
+   "**First-search payload 3.78 MB → about 254 KB (gz)**: the search index is now a manifest plus shards, so only the shard for the first character is fetched on input; the full core loads in the background as a fallback. `?legacy=1` still falls back to the single package; results match v0.5.0.",
+   "**Spanish combination products completed**: 208 CIMA `multicomponente` registrations used to be skipped entirely; parsing `principiosActivos` recovered **102 products / 932 ingredient rows** (Spanish products 25,293 → 25,395; strict mode, existing ingredients only).",
+   "**/warn Spanish body text**: `title_es/body_es` added to 41 warnings; the Spanish page no longer falls back to English.",
+   "**Search evaluation set expanded**: trilingual tests grew from 72 to 300+ cases (typos, pinyin, simplified/traditional, combinations, salt forms, zero-result), as a fixed gate for future search changes."
+  ],
+  "es": [
+   "**Carga de la primera búsqueda: 3,78 MB → unos 254 KB (gz)**: el índice ahora es un manifest con fragmentos, así que al escribir solo se baja el fragmento del primer carácter; el core completo se carga en segundo plano como respaldo. `?legacy=1` vuelve al paquete único; los resultados coinciden con v0.5.0.",
+   "**Combinaciones españolas completadas**: 208 registros `multicomponente` de CIMA se omitían por completo; al parsear `principiosActivos` se recuperaron **102 productos / 932 filas de componentes** (productos en español 25.293 → 25.395; modo estricto, solo principios ya existentes).",
+   "**Texto en español de /warn**: se añadieron `title_es/body_es` a 41 avisos; la página en español ya no recurre al inglés.",
+   "**Set de evaluación de búsqueda ampliado**: las pruebas trilingües pasan de 72 a más de 300 casos (erratas, pinyin, simplificado/tradicional, combinaciones, sales, resultado vacío), como umbral fijo para futuras mejoras de búsqueda."
+  ],
+  "machine_translated": true
+ },
+ "v0.5.0": {
+  "date": "2026-10-27",
+  "zh": [
+   "**搜索增强**：在原有索引上派生匹配层（精确 / 前缀 / 中文 bigram / 拉丁 trigram + 编辑距离），\n  新增中文拼音与首字母、错拼容错、2 字短片段；难例 24/28 → 28/28，匹配 P50 94 ms → 1 ms，\n  首搜体积不变，`?legacy=1` 仍可回退旧逻辑。",
+   "**界面 P0**：国家选择器改成「看这个药在 X 叫什么」，该国没有时明确提示而不是静默回退；\n  结果顶部有解析条（名称/剂量/剂型/匹配方式）、输入自动完成、结果按成分聚合/品牌折叠/加载更多；\n  手机端表格转卡片、导航与页脚折行。",
+   "**三语 P1**：About / What's new / Confused / 404 全页中英西三语；About 接入逐源许可与署名\n  （WHO INN CC BY-NC-SA、ChEMBL CC BY-SA、datos.gob.mx CC BY 4.0、TGA © Commonwealth，\n  CN 明确「未找到再发布许可」），并链 [docs/许可清单.md](docs/许可清单.md)。",
+   "**/warn 警示页**：新增「同名不同药 / 不可互换」页面与成分页提示，只展示经 AI 核验来源的\n  `dose_warning`（不给用药建议）。",
+   "**数据补全**：ATC 覆盖改为双口径（全部 47.5%，药物实体 67.0%，ChEMBL 补 192 个）；\n  英国 dm+d 恢复盐型 15,083 个组件（2.0% → 25.0%）；墨西哥浓度 34.1% → 35.2%（per_volume +125）；\n  WHO INN 西语合并 +3；中文互联网俗名 1,034 条入 `drug_term`，同时清除毒品/娱乐性用药黑话 337 行。",
+   "**数据层 v0.4 上页面**：`salt_code` / `strength_basis` / `dose_warning` 迁移到真实库，\n  盐型规范化 1,555 个 variant。"
+  ],
+  "en": [
+   "**Search upgrade**: a matching layer on top of the index (exact / prefix / Chinese bigram / Latin trigram + edit distance), plus pinyin and initials, typo tolerance and 2-character short fragments; hard cases 24/28 → 28/28, match P50 94 ms → 1 ms, same first-search size, `?legacy=1` still available.",
+   "**UI P0**: the country selector now answers \"what is this drug called in X?\" and says so explicitly when a market has no record instead of silently falling back; results gain a parse bar (name/dose/form/match type), autocomplete, grouping by ingredient, brand folding and load-more; mobile tables become cards and nav/footer wrap.",
+   "**Trilingual P1**: About / What's new / Confused / 404 pages are fully en/zh/es; About lists per-source licences and attribution (WHO INN CC BY-NC-SA, ChEMBL CC BY-SA, datos.gob.mx CC BY 4.0, TGA © Commonwealth; China explicitly \"no re-publication licence found\") and links [docs/许可清单.md](docs/许可清单.md).",
+   "**/warn page**: new \"same name, different drug / not interchangeable\" page plus ingredient-page notices, showing only AI-verified `dose_warning` sources (no medical advice).",
+   "**Data completion**: ATC coverage reported two ways (47.5% overall, 67.0% of drug entities, ChEMBL added 192); UK dm+d salt forms recovered for 15,083 components (2.0% → 25.0%); Mexico strength 34.1% → 35.2% (per_volume +125); WHO INN Spanish merges +3; 1,034 Chinese internet slang names added to `drug_term` and 337 drug/recreational slang rows removed.",
+   "**Data layer v0.4 on pages**: `salt_code` / `strength_basis` / `dose_warning` migrated to the production DB; salt forms normalized for 1,555 variants."
+  ],
+  "es": [
+   "**Mejora de búsqueda**: capa de coincidencia sobre el índice (exacta / prefijo / bigrama chino / trigrama latino + distancia de edición), más pinyin e iniciales, tolerancia a erratas y fragmentos de 2 caracteres; casos difíciles 24/28 → 28/28, coincidencia P50 94 ms → 1 ms, mismo tamaño de primera búsqueda, `?legacy=1` disponible.",
+   "**Interfaz P0**: el selector de país ahora responde \"¿cómo se llama este medicamento en X?\" y lo dice si un mercado no tiene registro, sin volver en silencio; los resultados tienen barra de análisis (nombre/dosis/forma/tipo de coincidencia), autocompletado, agrupación por principio, plegado de marcas y cargar más; en móvil las tablas pasan a tarjetas y la navegación/pie se ajustan.",
+   "**Trilingüe P1**: About / What's new / Confused / 404 totalmente en en/zh/es; About incluye licencias y atribución por fuente (WHO INN CC BY-NC-SA, ChEMBL CC BY-SA, datos.gob.mx CC BY 4.0, TGA © Commonwealth; China indica explícitamente \"no se encontró licencia de republicación\") y enlaza [docs/许可清单.md](docs/许可清单.md).",
+   "**Página /warn**: nueva página \"mismo nombre, otro medicamento / no intercambiables\" y avisos en la página de principio, mostrando solo `dose_warning` con fuente verificada por IA (sin consejo médico).",
+   "**Datos completados**: cobertura ATC con dos medidas (47,5% total, 67,0% de entidades, ChEMBL +192); dm+d del Reino Unido recuperó sales en 15.083 componentes (2,0% → 25,0%); concentración en México 34,1% → 35,2% (per_volume +125); WHO INN fusiones en español +3; 1.034 nombres coloquiales chinos añadidos a `drug_term` y 337 filas de jerga de drogas/ recreativa eliminadas.",
+   "**Capa de datos v0.4 en páginas**: `salt_code` / `strength_basis` / `dose_warning` migrados a la base de producción; formas de sal normalizadas en 1.555 variantes."
+  ],
+  "machine_translated": true
+ },
+ "v0.4.1": {
+  "date": "2026-10-26",
+  "zh": [
+   "**访问统计上线（只后台看，不公开）**：接入 GoatCounter（cookieless、不记录个人数据、\n  不用于广告）。后台可看 PV / 独立访客趋势、来源网站、国家/地区、浏览器与屏幕尺寸；\n  页面不显示任何计数。",
+   "**站内行为事件（匿名）**：记录搜索词（`search-<词>`）、结果点击（`click-result`）、\n  报告入口（`click-report`）、更新日志（`click-whatsnew`）、国家切换（`country-XX`），\n  用来改进检索。",
+   "**隐私说明**：About 页新增中/英/西三语「访问统计」段落并链 GoatCounter 隐私政策；\n  未配置 `GOATCOUNTER_CODE` 时不注入统计脚本，站点行为不变（配置见 `docs/访问统计.md`）。"
+  ],
+  "en": [
+   "**Visit analytics live (admin-only, not public)**: GoatCounter integrated (cookieless, no personal data, not used for ads). Admins see PV / unique visitors, referrers, countries, browsers and screen sizes; no counters are shown on pages.",
+   "**Anonymous on-site events**: records search terms (`search-<term>`), result clicks (`click-result`), report link (`click-report`), what's-new (`click-whatsnew`) and country switches (`country-XX`) to improve search.",
+   "**Privacy note**: About page gains a trilingual \"visit analytics\" section linking GoatCounter's privacy policy; without `GOATCOUNTER_CODE` no script is injected and the site behaves as before (see `docs/访问统计.md`)."
+  ],
+  "es": [
+   "**Analítica de visitas activa (solo administración, no pública)**: integración con GoatCounter (sin cookies, sin datos personales, no para publicidad). La administración ve PV/visitantes únicos, referentes, países, navegadores y tamaños de pantalla; las páginas no muestran contadores.",
+   "**Eventos anónimos en el sitio**: registra términos de búsqueda (`search-<término>`), clics en resultados (`click-result`), enlace de reporte (`click-report`), novedades (`click-whatsnew`) y cambios de país (`country-XX`) para mejorar la búsqueda.",
+   "**Nota de privacidad**: About añade una sección trilingüe de \"analítica de visitas\" con enlace a la política de privacidad de GoatCounter; sin `GOATCOUNTER_CODE` no se inyecta script y el sitio no cambia (ver `docs/访问统计.md`)."
+  ],
+  "machine_translated": true
+ },
+ "v0.4.0": {
+  "date": "2026-10-26",
+  "zh": [
+   "**中文 / 西语名称身份合并**：350 个「只有中文名」的 CN 专属成分并入英文 INN\n  （3,355 个 CN 产品，占 CN 产品 23.1%）；139 个 ES/MX 西语成分并入英文 INN\n  （621 个产品，其中 131 条让西语产品连上英/加/澳/美市场的同一成分）。\n  中 / 英 / 西三种语言的同一成分现在落到同一身份卡与国家视图。",
+   "**墨西哥浓度 28.7% → 34.1%**：人工审核 963 条回填候选后，只写严格规则 PASS 的\n  584 条（3,707 / 10,878 有浓度）；每条都带 CC-BY-4.0 数据集的出处。",
+   "**首搜体积 6.06 MB → 约 3.86 MB**：索引改为列式 + 字典编码（34.8 MB → 15.3 MB raw，\n  gzip −36.6%），解码后的检索结果与旧版逐字节一致，`?legacy=1` 可一键回退。",
+   "**三语界面 P0 修复**：APP / 药品页受控词、加载与错误提示、语言切换持久化、hreflang\n  全部三语化；修了从 `/es/`、`/zh/` 直入后点导航丢语言的问题。",
+   "**数据层 v0.4 就绪（未上页面）**：schema 增加 `salt_code` / `strength_basis` /\n  `dose_warning` 表，盐名规范化与 41 条人工策展预警种子已备好；页面接线下一版做。",
+   "**新增报告**：三语检索测试（72 例 / 354 条查询）、MX 审核、CN/ES 映射、\n  索引 P1、D2/D3 数据层、i18n 审计与 P0 修复，均在 `reports/`。"
+  ],
+  "en": [
+   "**Chinese / Spanish name identity merged**: 350 CN-only substances that had only a Chinese name merged into English INNs (3,355 CN products, 23.1% of CN products); 139 ES/MX Spanish substances merged into English INNs (621 products, 131 of them now link Spanish products to the same ingredient in UK/CA/AU/US markets). The same ingredient now lands on one identity card and country view across zh/en/es.",
+   "**Mexico strength 28.7% → 34.1%**: after reviewing 963 backfill candidates, only 584 strict-rule PASS rows were written (3,707 / 10,878 with strength), each citing the CC-BY-4.0 dataset source.",
+   "**First-search payload 6.06 MB → about 3.86 MB**: index moved to columnar + dictionary encoding (34.8 MB → 15.3 MB raw, gzip −36.6%); decoded results are byte-identical to the old version, `?legacy=1` is a one-click fallback.",
+   "**Trilingual UI P0 fixes**: app/drug-page controlled terms, loading and error messages, language-switch persistence and hreflang all trilingual; fixed losing the language after entering directly via `/es/` or `/zh/` and then using navigation.",
+   "**Data layer v0.4 ready (not yet on pages)**: schema adds `salt_code` / `strength_basis` / `dose_warning`; salt-name normalization and 41 curated warning seeds ready; page wiring comes next version.",
+   "**New reports**: trilingual search tests (72 cases / 354 queries), MX review, CN/ES mapping, index P1, D2/D3 data layer, i18n audit and P0 fixes — all under `reports/`."
+  ],
+  "es": [
+   "**Identidad de nombres chino/español fusionada**: 350 principios exclusivos de CN con solo nombre chino se fusionaron en INN ingleses (3.355 productos CN, 23,1% de los productos CN); 139 principios españoles ES/MX se fusionaron en INN ingleses (621 productos; 131 enlazan productos en español con el mismo principio en mercados GB/CA/AU/US). El mismo principio ahora cae en una sola ficha y vista de país en zh/en/es.",
+   "**Concentración en México 28,7% → 34,1%**: tras revisar 963 candidatos de relleno, solo se escribieron 584 filas con regla estricta PASS (3.707 / 10.878 con concentración), cada una citando la fuente del conjunto CC-BY-4.0.",
+   "**Carga de la primera búsqueda 6,06 MB → unos 3,86 MB**: índice columnar + codificación de diccionario (34,8 MB → 15,3 MB en bruto, gzip −36,6%); los resultados decodificados son idénticos byte a byte a la versión anterior, `?legacy=1` permite volver con un clic.",
+   "**Correcciones P0 de interfaz trilingüe**: términos controlados de la app y la página de medicamento, mensajes de carga y error, persistencia del idioma y hreflang en los tres idiomas; corregido perder el idioma al entrar directamente por `/es/` o `/zh/` y luego navegar.",
+   "**Capa de datos v0.4 lista (aún no en páginas)**: el esquema añade `salt_code` / `strength_basis` / `dose_warning`; normalización de nombres de sal y 41 semillas de avisos curadas listas; la conexión con las páginas llega en la próxima versión.",
+   "**Nuevos informes**: pruebas trilingües de búsqueda (72 casos / 354 consultas), revisión MX, mapeo CN/ES, índice P1, capa de datos D2/D3, auditoría i18n y correcciones P0, todos en `reports/`."
+  ],
+  "machine_translated": true
+ },
+ "v0.3.5": {
+  "date": "2026-10-26",
+  "zh": [
+   "**修：中文 GLP-1 名字搜不到海外产品**。中文通用名「替尔泊肽 / 司美格鲁肽 / 利拉鲁肽 /\n  度拉糖肽 / 艾塞那肽 / 利司那肽」原先各自落成 CN 专属成分（如 `cn-ef1fa3539d`），\n  搜「替尔泊肽」只出中国的注射液；现在并入英文 INN（tirzepatide / semaglutide …），\n  CN 产品出现在成分身份卡与「美国」等国家视图里——搜「替尔泊肽」选美国会给出\n  Mounjaro / Zepbound。这 6 个中文名也加进了 CN→EN 映射表，重跑中国入库不会再拆开。",
+   "**数据**：合并 6 个重复成分（13,288 → 13,282 个成分；46 个组件改挂），\n  ATC 覆盖 47.7%（6,339 / 13,282）。"
+  ],
+  "en": [
+   "**Fix: Chinese GLP-1 names could not find overseas products**. The Chinese generic names 替尔泊肽 / 司美格鲁肽 / 利拉鲁肽 / 度拉糖肽 / 艾塞那肽 / 利司那肽 each used to become CN-only substances (e.g. `cn-ef1fa3539d`), so searching 替尔泊肽 returned only Chinese injections; they now map to English INNs (tirzepatide / semaglutide …), and CN products appear on the ingredient identity card and country views such as the US — searching 替尔泊肽 and choosing the US now returns Mounjaro / Zepbound. These 6 names were added to the CN→EN map so a China re-ingest will not split them again.",
+   "**Data**: 6 duplicate substances merged (13,288 → 13,282 substances; 46 components re-pointed); ATC coverage 47.7% (6,339 / 13,282)."
+  ],
+  "es": [
+   "**Corrección: los nombres chinos de GLP-1 no encontraban productos en el extranjero**. Los nombres genéricos chinos 替尔泊肽 / 司美格鲁肽 / 利拉鲁肽 / 度拉糖肽 / 艾塞那肽 / 利司那肽 creaban principios exclusivos de CN (p. ej. `cn-ef1fa3539d`), así que buscar 替尔泊肽 solo devolvía inyectables chinos; ahora se mapean a INN ingleses (tirzepatide / semaglutide …) y los productos CN aparecen en la ficha del principio y en vistas de país como EE. UU. — buscar 替尔泊肽 y elegir EE. UU. devuelve Mounjaro / Zepbound. Los 6 nombres se añadieron al mapa CN→EN para que una recarga de China no los vuelva a separar.",
+   "**Datos**: 6 principios duplicados fusionados (13.288 → 13.282 principios; 46 componentes reasignados); cobertura ATC 47,7% (6.339 / 13.282)."
+  ],
+  "machine_translated": true
+ },
+ "v0.3.4": {
+  "date": "2026-10-26",
+  "zh": [
+   "**首屏从约 6.08 MB 降到约 17 KB**：检索索引改为懒加载——页面打开只下 HTML/CSS/JS；\n  首次输入、聚焦搜索框、点示例或带 `?q=` 深链时才拉约 6 MB 索引，并显示中英提示。\n  加载后的结果与 v0.3.3 逐字节一致（18 个查询 + 3 个国家视图对拍）。`?legacy=1` 一键回到旧行为。",
+   "**ATC 覆盖 43.3% → 47.7%**：用 Wikidata P267（CC0，About 页已署名）给 594 个原来没有\n  ATC 的成分补上编码与名称；多码歧义 127 个跳过。",
+   "**新增调研/实现报告**：`reports/index-perf-plan.md`（拆片/压缩路线）、\n  `reports/lazyload-implementation.md`、`reports/data-depth-20261026.md`、\n  `reports/dose-mapping-plan.md`、`reports/mx-atc-implementation.md`。\n  MX 浓度回填 ETL 已就绪（dry-run +963 产品，28.7%→37.6%），等 50 条人工抽核后再启用。"
+  ],
+  "en": [
+   "**First screen from about 6.08 MB down to about 17 KB**: the index now lazy-loads — opening the page fetches only HTML/CSS/JS; the ~6 MB index is fetched on first input, search-box focus, example click or a `?q=` deep link, with a bilingual hint. Results after loading are byte-identical to v0.3.3 (18 queries + 3 country views compared); `?legacy=1` restores the old behaviour.",
+   "**ATC coverage 43.3% → 47.7%**: using Wikidata P267 (CC0, credited on About) to add codes and names to 594 ingredients that had none; 127 multi-code ambiguities skipped.",
+   "**New research/implementation reports**: `reports/index-perf-plan.md` (sharding and compression), `reports/lazyload-implementation.md`, `reports/data-depth-20261026.md`, `reports/dose-mapping-plan.md`, `reports/mx-atc-implementation.md`. The MX strength backfill ETL is ready (dry-run +963 products, 28.7% → 37.6%) pending 50 manual spot checks."
+  ],
+  "es": [
+   "**Primera pantalla de unos 6,08 MB a unos 17 KB**: el índice ahora es de carga perezosa — abrir la página solo descarga HTML/CSS/JS; el índice de ~6 MB se descarga al primer texto, al enfocar el buscador, al pulsar un ejemplo o con un enlace profundo `?q=`, con aviso bilingüe. Los resultados tras cargar son idénticos byte a byte a v0.3.3 (18 consultas + 3 vistas de país comparadas); `?legacy=1` restaura el comportamiento antiguo.",
+   "**Cobertura ATC 43,3% → 47,7%**: con Wikidata P267 (CC0, acreditado en About) se añadieron códigos y nombres a 594 principios que no tenían; 127 ambigüedades de múltiples códigos omitidas.",
+   "**Nuevos informes de investigación/implementación**: `reports/index-perf-plan.md` (fragmentación y compresión), `reports/lazyload-implementation.md`, `reports/data-depth-20261026.md`, `reports/dose-mapping-plan.md`, `reports/mx-atc-implementation.md`. El ETL de relleno de concentración MX está listo (dry-run +963 productos, 28,7% → 37,6%) pendiente de 50 comprobaciones manuales."
+  ],
+  "machine_translated": true
+ },
+ "v0.3.3": {
+  "date": "2026-10-26",
+  "zh": [
+   "**上线收尾**：新增 `404.html`、`robots.txt`、`sitemap.xml`（全站约 3 万个页面）和 `.nojekyll`。\n  404 页在任意子路径下都按绝对地址回站内；sitemap 给搜索引擎全量入口。",
+   "**仓库结构**：`main` 只放源码，`site/dist` 不再进版本库（构建产物只走 `gh-pages`）；\n  v0.3.0–v0.3.2 已补 tag / GitHub Release，线上页脚、About 与仓库版本号对齐。",
+   "**口径统一**：README / 方案文档 / DEPLOY 的计数改成当前库——CN 146,347、AU 11,890\n  （PBS 5,452 + TGA CMI 4,730 + ARTG 明细 1,559 + 补全 144 + 人工核对 5）、\n  `drug_term` 365、成分页 12,870 / 名字页 17,868、索引 34.8 MB。"
+  ],
+  "en": [
+   "**Launch wrap-up**: added `404.html`, `robots.txt`, `sitemap.xml` (about 30k pages site-wide) and `.nojekyll`. The 404 page returns to the site by absolute URL from any sub-path; the sitemap gives search engines a full entry point.",
+   "**Repository layout**: `main` holds source only; `site/dist` is no longer committed (build artifacts go only to `gh-pages`); v0.3.0–v0.3.2 got tags / GitHub Releases, with footer, About and repo version aligned.",
+   "**Counts unified**: README / design docs / DEPLOY updated to the current DB — CN 146,347; AU 11,890 (PBS 5,452 + TGA CMI 4,730 + ARTG details 1,559 + enrichment 144 + manual 5); `drug_term` 365; 12,870 ingredient pages / 17,868 name pages; index 34.8 MB."
+  ],
+  "es": [
+   "**Cierre del lanzamiento**: se añadieron `404.html`, `robots.txt`, `sitemap.xml` (unas 30.000 páginas en total) y `.nojekyll`. La página 404 vuelve al sitio por URL absoluta desde cualquier subruta; el sitemap da a los buscadores una entrada completa.",
+   "**Estructura del repositorio**: `main` solo contiene código; `site/dist` ya no se versiona (los artefactos van solo a `gh-pages`); v0.3.0–v0.3.2 tienen tag / GitHub Release, con pie, About y versión del repositorio alineados.",
+   "**Cifras unificadas**: README / documentos de diseño / DEPLOY actualizados a la base actual — CN 146.347; AU 11.890 (PBS 5.452 + TGA CMI 4.730 + detalles ARTG 1.559 + enriquecimiento 144 + manual 5); `drug_term` 365; 12.870 páginas de principio / 17.868 páginas de nombre; índice 34,8 MB."
+  ],
+  "machine_translated": true
+ },
+ "v0.3.2": {
+  "date": "2026-10-26",
+  "zh": [
+   "**修**：搜索「扑热息痛」时，acetaminophen 的通用名条目把复方产品（含 6 个成分的\n  夜用感冒药）并进了同一条目，页面显示成「一个六成分产品 + 10/80/160/325 mg」，\n  却只标「释放机制不同」。现在复方的成分名行不再并进单方通用名条目；通用名条目\n  直接链到成分页，不再生成误导性的同名页。",
+   "**加**：复方产品在检索结果里单独标「复方 / Combination」，不再只靠碰撞等级判断。"
+  ],
+  "en": [
+   "**Fix**: searching 扑热息痛 merged combination products (a six-ingredient nighttime cold medicine) into the acetaminophen generic entry, showing \"one six-ingredient product + 10/80/160/325 mg\" while only flagging \"different release\". Combination ingredient rows no longer merge into single-ingredient generic entries; generic entries now link straight to the ingredient page and no longer create misleading same-name pages.",
+   "**Added**: combination products are labelled \"复方 / Combination\" in search results rather than relying only on collision level."
+  ],
+  "es": [
+   "**Corrección**: al buscar 扑热息痛, las combinaciones (un antigripal nocturno de seis principios) se fusionaban en la entrada genérica de paracetamol y se mostraba \"un producto de seis principios + 10/80/160/325 mg\" marcando solo \"liberación diferente\". Las filas de principios combinados ya no se fusionan en entradas genéricas de un solo principio; las entradas genéricas enlazan directamente a la página del principio y dejan de crear páginas homónimas engañosas.",
+   "**Añadido**: los productos combinados se etiquetan \"复方 / Combination\" en los resultados de búsqueda, no solo por nivel de colisión."
+  ],
+  "machine_translated": true
+ },
+ "v0.3.1": {
+  "date": "2026-10-26",
+  "zh": [
+   "**加拿大入库：第七个市场**。Health Canada 的 DPD（Drug Product Database）全量，\n  一行 = 一个 DIN，**43,847 个 Human 产品**（active 14,519 / discontinued 29,323 /\n  withdrawn 5），有强度的 99.8%（43,775）。CPIC 意义上的 OTC 与处方药都在里面。",
+   "**取数路径**：官方 `allfiles.zip` 挂在 `www.canada.ca/content/dam/…`，程序化下载恒超时\n  （HEAD/GET、浏览器 UA 都一样），DPD 网页查询又是服务端分页、`getNextPage` 要绑定会话\n  （直接请求 500）。改用同一台主机上的公开 **DPD Open API**（9 个端点、全量 JSON、无需 key），\n  `etl/fetch_ca_dpd.py` 抓、`etl/ingest_ca_dpd.py` 入库，缓存落 `data/raw/ca/dpd/`。",
+   "**加拿大成分名映射**：`ACETYLSALICYLIC ACID` → aspirin、`ADRENALINE` → epinephrine、\n  `GLYCERYL TRINITRATE` → nitroglycerin；括号里的盐记成 variant。acetylsalicylic acid\n  与 aspirin 在成分卡上合并，加拿大不再自成一套。",
+   "**复方剂量折算**：DPD 的「每 4 片 1 g」「每 30 mL 355 mg」换算成每片 / 每 mL。",
+   "**排除**：顺势疗法（强度是 CH/DH/X 稀释度）5,571、兽药/放射药/消毒剂 7,340、\n  复合维生素类（成分 >8）1,169；另外剔除 DPD 误登记成有效成分的辅料（HYPROMELLOSE 等），\n  否则一种角膜保存液会把 4 万个产品挂到 hypromellose 名下。",
+   "**名字键与显示名分开**：DPD 里大量条目名字本身就是产品描述（`15 SPF FPS PREMIUM\n  SUNSCREEN`），页面显示原样、检索键再剥一层剂型词；以数字/符号开头、或带残缺前缀的名字\n  （`222 AF EXTRA STRENGTH`、`+ SINUS COLD FORMULA`）在检索结果和成分页里降权。",
+   "**碰撞视图修正**：`severe` 只留给「两边都是单方/简单复方」的情形。两类不再算 severe：\n  (1) 名字本身写着配方（`0.9% SODIUM CHLORIDE IRRIGATION`、电解质输液的百分比配方名）；\n  (2) 一方是复方（≥3 个成分，如 `Pain Relief Patch`、肠外营养液 `Olimel`、顺势疗法复方）。\n  顺手把成分表 join 到 `collision` 里，去掉了 `COUNT(DISTINCT)` 的临时 B 树排序\n  （视图像数从 95,775 涨到 12.2 万，再慢下去建站会明显变慢）。severe 名字 36,579 → 15,312。",
+   "**检索**：用户没写释放机制时，速释排在缓释之前（Tylenol 里 8 HR / 12 HOUR 会落到后面）。",
+   "建站 12,339 张成分页 / 19,220 张名字页；索引 125,667 个键，其中 25,223 个带 CA、\n  22,172 个只在加拿大出现。",
+   "许可：DPD 条款允许非商业再使用，须注明来源（About 页已写 © His Majesty the King in\n  Right of Canada）。"
+  ],
+  "en": [
+   "**Canada added: the seventh market**. Full Health Canada DPD (Drug Product Database): one row = one DIN, **43,847 human products** (active 14,519 / discontinued 29,323 / withdrawn 5), 99.8% with strength (43,775); includes OTC and prescription drugs.",
+   "**Ingestion path**: the official `allfiles.zip` on `www.canada.ca/content/dam/…` always times out programmatically (HEAD/GET, browser UA alike), and the DPD web query is server-paged with session-bound `getNextPage` (500 on direct requests). Switched to the public **DPD Open API** on the same host (9 endpoints, full JSON, no key); `etl/fetch_ca_dpd.py` fetches, `etl/ingest_ca_dpd.py` ingests, cache under `data/raw/ca/dpd/`.",
+   "**Canadian ingredient name mapping**: `ACETYLSALICYLIC ACID` → aspirin, `ADRENALINE` → epinephrine, `GLYCERYL TRINITRATE` → nitroglycerin; salts in parentheses become variants. acetylsalicylic acid and aspirin merge on the ingredient card; Canada no longer stands apart.",
+   "**Combination dose conversion**: DPD's \"1 g per 4 tablets\" / \"355 mg per 30 mL\" converted to per-tablet / per-mL.",
+   "**Excluded**: homeopathy (CH/DH/X dilutions) 5,571; veterinary/radiopharma/disinfectant 7,340; multivitamins (>8 ingredients) 1,169; also DPD excipients wrongly registered as actives (HYPROMELLOSE etc.), otherwise one corneal preservative solution would attach 40k products to hypromellose.",
+   "**Name keys separated from display names**: many DPD names are product descriptions (`15 SPF FPS PREMIUM SUNSCREEN`); pages show them as-is while search keys strip another layer of form words; names starting with digits/symbols or with broken prefixes (`222 AF EXTRA STRENGTH`, `+ SINUS COLD FORMULA`) are down-ranked in results and ingredient pages.",
+   "**Collision view fix**: `severe` is kept only when both sides are single-ingredient or simple combinations. Two cases no longer count as severe: (1) names that state the formula (`0.9% SODIUM CHLORIDE IRRIGATION`, percentage electrolyte formulas); (2) one side is a combination (≥3 ingredients, e.g. `Pain Relief Patch`, parenteral nutrition `Olimel`, homeopathic combos). The ingredient table was joined into `collision` and the temporary B-tree sort for `COUNT(DISTINCT)` removed (views 95,775 → 122k; further slowdown would hurt build time). Severe names 36,579 → 15,312.",
+   "**Search**: immediate-release now ranks before modified-release when the user did not specify release (8 HR / 12 HOUR Tylenol variants move down).",
+   "Built 12,339 ingredient pages / 19,220 name pages; index 125,667 keys, 25,223 with CA and 22,172 Canada-only.",
+   "Licence: DPD terms allow non-commercial re-use with source attribution (About now shows © His Majesty the King in Right of Canada)."
+  ],
+  "es": [
+   "**Canadá añadido: séptimo mercado**. DPD completo de Health Canada (Drug Product Database): una fila = un DIN, **43.847 productos humanos** (activos 14.519 / descontinuados 29.323 / retirados 5), 99,8% con concentración (43.775); incluye OTC y receta.",
+   "**Ruta de obtención**: el `allfiles.zip` oficial en `www.canada.ca/content/dam/…` siempre agota el tiempo programáticamente (HEAD/GET, UA de navegador igual), y la consulta web del DPD es paginada en servidor con `getNextPage` ligado a sesión (500 en peticiones directas). Se pasó a la **DPD Open API** pública del mismo host (9 endpoints, JSON completo, sin clave); `etl/fetch_ca_dpd.py` descarga, `etl/ingest_ca_dpd.py` carga, caché en `data/raw/ca/dpd/`.",
+   "**Mapeo de nombres de principios canadienses**: `ACETYLSALICYLIC ACID` → aspirin, `ADRENALINE` → epinephrine, `GLYCERYL TRINITRATE` → nitroglycerin; las sales entre paréntesis se registran como variantes. acetylsalicylic acid y aspirin se fusionan en la ficha del principio; Canadá deja de ser un conjunto aparte.",
+   "**Conversión de dosis en combinaciones**: \"1 g por 4 comprimidos\" / \"355 mg por 30 mL\" del DPD se convierten a por comprimido / por mL.",
+   "**Excluidos**: homeopatía (diluciones CH/DH/X) 5.571; veterinaria/radiofármacos/desinfectantes 7.340; multivitamínicos (>8 principios) 1.169; también excipientes del DPD registrados por error como activos (HYPROMELLOSE, etc.), pues una solución conservante corneal colgaría 40.000 productos de hypromellose.",
+   "**Claves de nombre separadas del nombre visible**: muchos nombres del DPD son descripciones de producto (`15 SPF FPS PREMIUM SUNSCREEN`); la página los muestra tal cual mientras la clave de búsqueda quita otra capa de palabras de forma; nombres que empiezan por dígito/símbolo o con prefijos rotos (`222 AF EXTRA STRENGTH`, `+ SINUS COLD FORMULA`) se penalizan en resultados y páginas de principio.",
+   "**Corrección de la vista de colisiones**: `severe` solo se mantiene cuando ambos lados son monofármaco o combinación simple. Dos casos dejan de ser severe: (1) nombres que indican la fórmula (`0.9% SODIUM CHLORIDE IRRIGATION`, fórmulas porcentuales de electrolitos); (2) un lado es combinación (≥3 principios, p. ej. `Pain Relief Patch`, nutrición parenteral `Olimel`, combinaciones homeopáticas). Se unió la tabla de principios a `collision` y se eliminó la ordenación temporal B-tree de `COUNT(DISTINCT)` (vistas 95.775 → 122 mil; más lentitud afectaría al build). Nombres severe 36.579 → 15.312.",
+   "**Búsqueda**: la liberación inmediata se ordena antes de la modificada cuando el usuario no especifica liberación (variantes Tylenol 8 HR / 12 HOUR bajan).",
+   "Se construyeron 12.339 páginas de principio / 19.220 de nombre; índice con 125.667 claves, 25.223 con CA y 22.172 solo de Canadá.",
+   "Licencia: los términos del DPD permiten reutilización no comercial con atribución (About muestra © His Majesty the King in Right of Canada)."
+  ],
+  "machine_translated": true
+ },
+ "v0.3.0": {
+  "date": "2026-10-26",
+  "zh": [
+   "**澳洲补 OTC：从 1 层变 3 层**。PBS 只补贴处方药，Panadol / Nurofen / Gaviscon 这类\n  在澳洲站查不到；ARTG 又没有批量文件。这次把能合法拿的两块补上：\n  - **TGA CMI 目录**（`www.ebs.tga.gov.au`，不是被墙的 www.tga.gov.au）：4,734 个\n    「商品名 + 有效成分」，`fetch_tga_cmi.py` 30 个请求拉完，`ingest_tga_cmi.py` 入库\n    4,730 个 AU 产品（Panadol 5 个、Nurofen 6 个变体都在）。目录没有规格/剂型，强度留空，\n    状态写 `unknown`（有 CMI ≠ 当前在售）。\n  - **listed OTC 人工种子**：Gaviscon 是 AUST L，PBS 和 CMI 都盖不到，按厂家澳洲官网\n    核对了 5 个包装（每 10 mL / 每片含量 + 来源 URL）。",
+   "澳洲合计 **10,500+ 个产品**（PBS 5,452 + CMI 4,730 + ARTG 明细 300+ + Gaviscon 5），\n  索引里 8,000+ 个名字带 AU。",
+   "**ARTG 名称层**：eBS 的 Current Medicines 目录 30 条/页，全量抓到 **34,594 条**\n  （商品名 + 申办方 + ARTG ID），进 `artg_entry` 表；站点出 `data/artg.json`，\n  产品未命中或选了澳洲但澳洲为空时，列出「ARTG 有登记、成分未收录」的条目\n  （Mylanta、Ural 这类 listed OTC 现在至少能查到 ARTG 号）。",
+   "**授权边界**：CMI 文档本身有许可门（再发布需 sponsor 许可），只取目录页的事实字段；\n  PBS API 保留 Commonwealth 版权声明。ARTG 全量仍无批量——eBS 的 Current Medicines 目录\n  可 30 条/页翻（品牌 + 申办方 + ARTG ID），但详情只有 PDF，成分级全量只能 FOI。",
+   "建站 11,300+ 张成分页 / 14,400+ 张名字页。",
+   "**覆盖表改为数据源日期**：`/about.html` 第三列不再显示我们的抓取时间，而是数据源自己的\n  发布 / 生效 / 快照日期——openFDA `meta.last_updated`（2026-10-23）、dm+d 10.2.0\n  发布日（2026-10-19）、NHSA 2025-04-04 快照、PBS schedule 4751 生效日（2026-10-01）；\n  CIMA 实时库标 `live`，COFEPRIS 年度 PDF 标 `—`。`source.data_as_of` 由\n  `db/source_dates.py` 在建站前自动推导。"
+  ],
+  "en": [
+   "**Australia OTC expanded from 1 layer to 3**. PBS covers prescription drugs only, so Panadol / Nurofen / Gaviscon were missing on the AU side, and ARTG has no bulk file. Two legally available layers were added: **TGA CMI catalogue** (`www.ebs.tga.gov.au`, not the blocked www.tga.gov.au) — 4,734 \"brand + active ingredient\" entries, fetched in 30 requests by `fetch_tga_cmi.py` and ingested as 4,730 AU products by `ingest_tga_cmi.py` (including 5 Panadol and 6 Nurofen variants); the catalogue has no strength/form, so strength stays empty and status is `unknown` (CMI ≠ currently marketed). **listed OTC manual seeds** — Gaviscon is AUST L, covered by neither PBS nor CMI, so 5 packs were verified against the manufacturer's Australian site (per 10 mL / per tablet + source URL).",
+   "Australia totals **10,500+ products** (PBS 5,452 + CMI 4,730 + ARTG details 300+ + Gaviscon 5); 8,000+ names in the index carry AU.",
+   "**ARTG name layer**: the eBS Current Medicines catalogue (30/page) fully crawled to **34,594 entries** (brand + sponsor + ARTG ID) into `artg_entry`; the site emits `data/artg.json` and, when a product does not match or a selected market is empty, lists \"on the ARTG, ingredient not captured yet\" entries (listed OTC such as Mylanta/Ural can now at least be found by ARTG number).",
+   "**Licensing boundaries**: CMI documents themselves are gated (re-publication needs sponsor permission), so only factual fields from the catalogue pages are taken; the PBS API keeps the Commonwealth copyright notice. ARTG still has no bulk data — eBS Current Medicines can be paged at 30/page (brand + sponsor + ARTG ID), but details are PDF only and full ingredient data is FOI-only.",
+   "Built 11,300+ ingredient pages / 14,400+ name pages.",
+   "**Coverage table switched to source dates**: the third column of `/about.html` no longer shows our fetch time but the source's own publication/effective/snapshot date — openFDA `meta.last_updated` (2026-10-23), dm+d 10.2.0 release (2026-10-19), NHSA 2025-04-04 snapshot, PBS schedule 4751 effective date (2026-10-01); CIMA live DB is marked `live` and COFEPRIS annual PDFs as `—`. `source.data_as_of` is derived before the build by `db/source_dates.py`."
+  ],
+  "es": [
+   "**OTC de Australia ampliado de 1 capa a 3**. PBS solo cubre medicamentos de receta, así que Panadol / Nurofen / Gaviscon no aparecían en el lado AU, y ARTG no tiene fichero masivo. Se añadieron dos capas legalmente disponibles: **catálogo TGA CMI** (`www.ebs.tga.gov.au`, no el bloqueado www.tga.gov.au) — 4.734 entradas de \"marca + principio activo\", descargadas en 30 peticiones por `fetch_tga_cmi.py` e ingresadas como 4.730 productos AU por `ingest_tga_cmi.py` (incluye 5 Panadol y 6 variantes Nurofen); el catálogo no tiene concentración/forma, así que la concentración queda vacía y el estado `unknown` (CMI ≠ comercializado actualmente). **semillas manuales de OTC listed** — Gaviscon es AUST L, no cubierto por PBS ni CMI, así que se verificaron 5 envases contra la web australiana del fabricante (por 10 mL / por comprimido + URL de origen).",
+   "Australia suma **más de 10.500 productos** (PBS 5.452 + CMI 4.730 + detalles ARTG 300+ + Gaviscon 5); más de 8.000 nombres del índice llevan AU.",
+   "**Capa de nombres ARTG**: el catálogo eBS Current Medicines (30/página) se rastreó completo hasta **34.594 entradas** (marca + promotor + ARTG ID) en `artg_entry`; el sitio emite `data/artg.json` y, cuando un producto no coincide o el mercado seleccionado está vacío, lista entradas \"en ARTG, principio no capturado\" (OTC listed como Mylanta/Ural ya se pueden al menos encontrar por número ARTG).",
+   "**Límites de licencia**: los documentos CMI están restringidos (republicar requiere permiso del promotor), así que solo se toman campos factuales de las páginas del catálogo; la API PBS mantiene el aviso de copyright de la Commonwealth. ARTG sigue sin datos masivos — eBS Current Medicines se pagina a 30/página (marca + promotor + ARTG ID), pero los detalles son solo PDF y los datos completos de principios solo por FOI.",
+   "Se construyeron más de 11.300 páginas de principio / 14.400 de nombre.",
+   "**Tabla de cobertura cambiada a fechas de la fuente**: la tercera columna de `/about.html` ya no muestra nuestra fecha de captura sino la fecha de publicación/vigencia/snapshot de la propia fuente — openFDA `meta.last_updated` (2026-10-23), dm+d 10.2.0 (2026-10-19), snapshot NHSA 2025-04-04, fecha de vigencia del schedule PBS 4751 (2026-10-01); CIMA (base en vivo) se marca `live` y los PDF anuales de COFEPRIS como `—`. `source.data_as_of` se deriva antes del build con `db/source_dates.py`."
+  ],
+  "machine_translated": true
+ },
+ "v0.2.4": {
+  "date": "2026-10-26",
+  "zh": [
+   "**静态资源版本化**：所有 CSS/JS 引用加 `?v=<构建时间戳>`，更新后浏览器不用硬刷新。",
+   "25,747 个文件全量重建。"
+  ],
+  "en": [
+   "**Static asset versioning**: every CSS/JS reference now carries `?v=<build timestamp>`, so browsers do not need a hard refresh after updates.",
+   "Full rebuild of 25,747 files."
+  ],
+  "es": [
+   "**Versionado de recursos estáticos**: cada referencia CSS/JS lleva ahora `?v=<marca de tiempo del build>`, así el navegador no necesita recarga forzada tras las actualizaciones.",
+   "Reconstrucción completa de 25.747 archivos."
+  ],
+  "machine_translated": true
+ },
+ "v0.2.3": {
+  "date": "2026-10-26",
+  "zh": [
+   "**修**：国家选择器解析崩溃（tuple / entry 不匹配）。",
+   "**加**：`?country=AU` 这类深链，可直接定位到某个市场。",
+   "`data/index.json` 加构建时间戳，新名字不用等缓存过期。"
+  ],
+  "en": [
+   "**Fix**: country-selector parsing crash (tuple / entry mismatch).",
+   "**Added**: deep links such as `?country=AU` jump straight to a market.",
+   "`data/index.json` gains a build timestamp so new names do not wait for cache expiry."
+  ],
+  "es": [
+   "**Corrección**: fallo de parseo del selector de país (desajuste tuple / entry).",
+   "**Añadido**: enlaces profundos como `?country=AU` llevan directamente a un mercado.",
+   "`data/index.json` incluye marca de tiempo de build para que los nombres nuevos no esperen a que caduque la caché."
+  ],
+  "machine_translated": true
+ },
+ "v0.2.2": {
+  "date": "2026-10-26",
+  "zh": [
+   "**国家选择器改语义**：不再过滤结果，而是回答「这个药在该市场叫什么」——\n  同一种成分在不同国家的商品名并列展示。"
+  ],
+  "en": [
+   "**Country selector semantics changed**: it no longer filters results but answers \"what is this drug called in that market?\" — the same ingredient's brand names across countries are shown side by side."
+  ],
+  "es": [
+   "**Cambio de semántica del selector de país**: ya no filtra resultados sino que responde \"¿cómo se llama este medicamento en ese mercado?\" — las marcas del mismo principio en distintos países se muestran una al lado de otra."
+  ],
+  "machine_translated": true
+ },
+ "v0.2.1": {
+  "date": "2026-10-26",
+  "zh": [
+   "**2 字中文子串匹配**：输入「泰诺」「立普妥」这类不完整的名字也能命中（此前要 ≥3 字）。",
+   "**加**：substance 重复项自动检查，工作区与建站结果同步。"
+  ],
+  "en": [
+   "**2-character Chinese substring matching**: incomplete names such as 泰诺 or 立普妥 now match (previously ≥3 characters were required).",
+   "**Added**: automatic duplicate-substance checks, synced between the workspace and the build output."
+  ],
+  "es": [
+   "**Coincidencia por subcadena china de 2 caracteres**: nombres incompletos como 泰诺 o 立普妥 ya coinciden (antes se exigían ≥3 caracteres).",
+   "**Añadido**: comprobación automática de principios duplicados, sincronizada entre el espacio de trabajo y el resultado del build."
+  ],
+  "machine_translated": true
+ },
+ "v0.2.0": {
+  "date": "2026-10-26",
+  "zh": [
+   "**修**：中国复方产品丢失第二个成分（3,049 行）——二甲双胍格列本脲、缬沙坦氨氯地平、\n  厄贝沙坦氢氯噻嗪、阿莫西林克拉维酸等复方现在完整入库。",
+   "227 个文件重建。"
+  ],
+  "en": [
+   "**Fix**: Chinese combination products lost their second ingredient (3,049 rows) — metformin/glyburide, valsartan/amlodipine, irbesartan/hydrochlorothiazide, amoxicillin/clavulanate and similar combinations are now ingested completely.",
+   "227 files rebuilt."
+  ],
+  "es": [
+   "**Corrección**: las combinaciones chinas perdían el segundo principio (3.049 filas) — metformina/glibenclamida, valsartán/amlodipino, irbesartán/hidroclorotiazida, amoxicilina/clavulánico y similares ahora se cargan completas.",
+   "227 archivos reconstruidos."
+  ],
+  "machine_translated": true
+ },
+ "v0.1.4": {
+  "date": "2026-10-26",
+  "zh": [
+   "**美国街头 / 民间 / 类别叫法 331 条**：新建 `drug_term` 表，收录 NIDA「Also called」\n  247 条 + DEA 2018 报告人工筛出的 64 条 + MedlinePlus 民间叫法 20 条。支持三类中文昵称表装不下的情况：\n  类别词（downers = 镇静剂）、本库无上市产品的管制物质（molly = MDMA）、复方（lean = 可待因 + 异丙嗪）。",
+   "**统一别名视图 `alias_all`**：`nickname` + `drug_term` 合成检索层唯一入口；原有 57 条中文\n  昵称不受影响，搜 `molly` / `bars` / `speed` 都会先说明「这是什么叫法」再列商品。",
+   "**FDA 易混淆药对 22 对**：新建 `confusable_pair` 表，来源 FDA Name Differentiation Project\n  的 tall-man 名单；成分页顶部给警告，新增 `/confused.html` 列表页。",
+   "**授权边界**：ISMP/ECRI 的《List of Confused Drug Names》有版权，未整表复制；页面明确写\n  「这是 FDA 官方 tall-man 名单，不是完整 LASA 清单」。",
+   "检索测试 15 → 19 项；建站 10,843 张成分页 / 13,632 张名字页。"
+  ],
+  "en": [
+   "**331 US street / folk / class names**: new `drug_term` table with 247 NIDA \"Also called\" names, 64 manually selected from the 2018 DEA report and 20 MedlinePlus folk names. Covers three cases the Chinese nickname table cannot: class words (downers = sedatives), controlled substances with no marketed product here (molly = MDMA) and combinations (lean = codeine + promethazine).",
+   "**Unified alias view `alias_all`**: `nickname` + `drug_term` combined into one search entry point; the original 57 Chinese nicknames are unaffected, and searching `molly` / `bars` / `speed` first explains what the name refers to, then lists products.",
+   "**22 FDA confusable pairs**: new `confusable_pair` table sourced from the FDA Name Differentiation Project tall-man list; a warning appears at the top of ingredient pages and a new `/confused.html` list page was added.",
+   "**Licensing boundaries**: ISMP/ECRI's List of Confused Drug Names is copyrighted and was not copied wholesale; the page states explicitly \"this is the FDA tall-man list, not the complete LASA list\".",
+   "Search tests 15 → 19; built 10,843 ingredient pages / 13,632 name pages."
+  ],
+  "es": [
+   "**331 nombres callejeros / populares / de clase de EE. UU.**: nueva tabla `drug_term` con 247 nombres \"Also called\" de NIDA, 64 seleccionados manualmente del informe DEA 2018 y 20 nombres populares de MedlinePlus. Cubre tres casos que la tabla de apodos chinos no puede: palabras de clase (downers = sedantes), sustancias controladas sin producto comercializado aquí (molly = MDMA) y combinaciones (lean = codeína + prometazina).",
+   "**Vista unificada de alias `alias_all`**: `nickname` + `drug_term` en un único punto de entrada de búsqueda; los 57 apodos chinos originales no cambian, y buscar `molly` / `bars` / `speed` primero explica a qué se refiere el nombre y luego lista productos.",
+   "**22 pares confundibles de la FDA**: nueva tabla `confusable_pair` con la lista tall-man del FDA Name Differentiation Project; aviso en la parte superior de las páginas de principio y nueva página de lista `/confused.html`.",
+   "**Límites de licencia**: la List of Confused Drug Names de ISMP/ECRI tiene derechos de autor y no se copió completa; la página indica explícitamente \"esta es la lista tall-man de la FDA, no la lista LASA completa\".",
+   "Pruebas de búsqueda 15 → 19; construidas 10.843 páginas de principio / 13.632 de nombre."
+  ],
+  "machine_translated": true
+ },
+ "v0.1.3": {
+  "date": "2026-10-26",
+  "zh": [
+   "**模糊检索增强**：没有精确命中时自动退到近似匹配，并明确标出「没有精确命中，以下是最接近的名字」，\n  不让用户误以为这是精确结果。例如 `盐酸西利嗪` → `盐酸西替利嗪片`（CETIRIZINE）。",
+   "编辑距离阈值按长度分档：短词 ≤2，9 字以上放宽到 ≤3；只有完全无直接命中时才启用，\n  避免 `Lipitor` 带出 `Zifitor` 这类噪音。"
+  ],
+  "en": [
+   "**Fuzzy search upgrade**: when there is no exact hit, search falls back to approximate matching and clearly states \"no exact match; closest names below\" so users do not mistake it for an exact result. Example: `盐酸西利嗪` → `盐酸西替利嗪片` (CETIRIZINE).",
+   "Edit-distance threshold varies by length: ≤2 for short words, up to ≤3 for 9+ characters; only enabled when there is no direct hit at all, avoiding noise such as `Lipitor` returning `Zifitor`."
+  ],
+  "es": [
+   "**Mejora de búsqueda difusa**: sin coincidencia exacta, la búsqueda recurre a coincidencia aproximada y lo indica claramente (\"sin coincidencia exacta; los nombres más cercanos abajo\") para que no se confunda con un resultado exacto. Ejemplo: `盐酸西利嗪` → `盐酸西替利嗪片` (CETIRIZINE).",
+   "El umbral de distancia de edición varía por longitud: ≤2 en palabras cortas y hasta ≤3 en 9+ caracteres; solo se activa cuando no hay ninguna coincidencia directa, evitando ruido como que `Lipitor` devuelva `Zifitor`."
+  ],
+  "machine_translated": true
+ },
+ "v0.1.2": {
+  "date": "2026-10-26",
+  "zh": [
+   "**俗称表 23 → 57 条**：补中文旧名（扑尔敏、非那根、654-2、速尿、安体舒通、雷米封、安乃近）、\n  原研商品名（络活喜、拜新同、代文、科素亚、安博维、拜唐苹、达美康、亚莫利、优甲乐、赛治、\n  洛赛克、波立维、舒降之、力平之、拜阿司匹灵、吗丁啉、思密达、达克宁、芬必得、必理通、达菲）、\n  西语区通用名（Tempra、Mejoral 指向对乙酰氨基酚）。",
+   "每条都带 `kind`（旧名 / 网络俗称 / 简称 / 误称）和 `source`，命中后在结果页顶部单独说明。",
+   "俗称存放在 `nickname` 表，由 `data/seed_nicknames.py` 播种并已串进 `run_all.py`，可复现。"
+  ],
+  "en": [
+   "**Nickname table 23 → 57 entries**: added Chinese legacy names (扑尔敏, 非那根, 654-2, 速尿, 安体舒通, 雷米封, 安乃近), originator brand names (络活喜, 拜新同, 代文, 科素亚, 安博维, 拜唐苹, 达美康, 亚莫利, 优甲乐, 赛治, 洛赛克, 波立维, 舒降之, 力平之, 拜阿司匹灵, 吗丁啉, 思密达, 达克宁, 芬必得, 必理通, 达菲) and Spanish-region generic names (Tempra, Mejoral → acetaminophen).",
+   "Each entry carries `kind` (legacy / internet slang / abbreviation / misnomer) and `source`; when matched, the result page shows a separate note at the top.",
+   "Nicknames live in the `nickname` table, seeded by `data/seed_nicknames.py` and wired into `run_all.py`, so they are reproducible."
+  ],
+  "es": [
+   "**Tabla de apodos 23 → 57 entradas**: se añadieron nombres chinos antiguos (扑尔敏, 非那根, 654-2, 速尿, 安体舒通, 雷米封, 安乃近), marcas originales (络活喜, 拜新同, 代文, 科素亚, 安博维, 拜唐苹, 达美康, 亚莫利, 优甲乐, 赛治, 洛赛克, 波立维, 舒降之, 力平之, 拜阿司匹灵, 吗丁啉, 思密达, 达克宁, 芬必得, 必理通, 达菲) y nombres genéricos de la región hispana (Tempra, Mejoral → paracetamol).",
+   "Cada entrada lleva `kind` (antiguo / jerga de internet / abreviatura / nombre erróneo) y `source`; al coincidir, la página de resultados muestra una nota aparte arriba.",
+   "Los apodos están en la tabla `nickname`, sembrada por `data/seed_nicknames.py` e integrada en `run_all.py`, por lo que son reproducibles."
+  ],
+  "machine_translated": true
+ },
+ "v0.1.1": {
+  "date": "2026-10-25",
+  "zh": [
+   "**修**：索引只收品牌名，导致中国绝大多数仿制药（只有通用名）搜不到。\n  `盐酸左西替利嗪` 库里有 280 个产品，却零命中。现在通用名全部进索引。",
+   "**加**：精确命中品牌后，单独列出「同成分的其他商品」——用户搜的是牌子，\n  想知道的是这个成分还有哪些选择。",
+   "**修**：NHSA 数据里混入控制字符（`糠酸莫米松乳膏\\x02`）导致建站崩溃，\n  文件名生成前先剥离。",
+   "索引 17.2 MB → 27.1 MB；页面 24,471 个。通用名只在「有品牌名或有碰撞」时单独成页。"
+  ],
+  "en": [
+   "**Fix**: the index only contained brand names, so most Chinese generics (generic-name only) could not be found. `盐酸左西替利嗪` had 280 products but zero hits. Generic names are now fully indexed.",
+   "**Added**: after an exact brand hit, other products with the same ingredient are listed separately — the user searched a brand and wants to know the alternatives.",
+   "**Fix**: control characters in NHSA data (e.g. `糠酸莫米松乳膏\\x02`) crashed the build; they are stripped before file-name generation.",
+   "Index 17.2 MB → 27.1 MB; 24,471 pages. Generic names get their own page only when they have a brand name or a collision."
+  ],
+  "es": [
+   "**Corrección**: el índice solo contenía marcas, así que la mayoría de los genéricos chinos (solo nombre genérico) no se encontraban. `盐酸左西替利嗪` tenía 280 productos y cero coincidencias. Ahora todos los nombres genéricos están indexados.",
+   "**Añadido**: tras una coincidencia exacta de marca, se listan aparte otros productos con el mismo principio — el usuario buscó una marca y quiere saber las alternativas.",
+   "**Corrección**: caracteres de control en datos de NHSA (p. ej. `糠酸莫米松乳膏\\x02`) rompían el build; se eliminan antes de generar nombres de archivo.",
+   "Índice 17,2 MB → 27,1 MB; 24.471 páginas. Los nombres genéricos tienen página propia solo si tienen marca o colisión."
+  ],
+  "machine_translated": true
+ },
+ "v0.1.0": {
+  "date": "2026-10-25",
+  "zh": [
+   "首次上线。六个市场，**359,200** 条产品记录。\n| 市场 | 条数 | 来源 | 快照 / 同步日期 |\n|---|---:|---|---|\n| 中国 | 146,347 | 国家医保局 医保药品分类与代码数据库 | 2025-04-04 快照 |\n| 美国 | 110,179 | openFDA NDC Directory | 2026-10-23 |\n| 英国 | 61,051 | NHSBSA dm+d 10.2.0（OGL v3.0） | 2026-10-19 release |\n| 西班牙 | 25,293 | AEMPS CIMA | 2026-10 |\n| 墨西哥 | 10,878 | COFEPRIS Registro Sanitario | 2026-10 |\n| 澳大利亚 | 5,452 | PBS | 2026-10 |",
+   "功能",
+   "检索结果按 **成分 → 剂量 → 品牌 → 厂家** 表格呈现；成分与剂量是第一优先级。",
+   "六种文字归一化：拉丁、中文、西里尔、全角、配比 `875/125`、浓度 `5 mg/5 ml`。",
+   "同名碰撞自动推导：不同活性成分 = 严重，释放机制不同 = 警告。",
+   "跨语言品牌家族：Tylenol ↔ 泰诺 ↔ 泰诺林、Benadryl、Gaviscon、Lipitor ↔ 立普妥。",
+   "BAN↔USAN 同义词 24 组：paracetamol ↔ acetaminophen 等。",
+   "三语界面（EN / ES / 中文）。",
+   "模糊匹配只在完全没有直接命中时启用，避免 `Lipitor` 带出 `Zifitor`。",
+   "已知缺口",
+   "**中国复方塌陷**：4,411 行复方（二甲双胍格列本脲、缬沙坦氨氯地平、\n  厄贝沙坦氢氯噻嗪、阿莫西林克拉维酸…）只入库了第一个成分，第二个被吞掉。\n  待修，优先级最高。",
+   "中国中成药（98,703 行）默认未入库：只有 42 行带真实商品名。",
+   "西班牙 208 条四成分以上复方未入库（列表接口 `vtm` 为占位符 `multicomponente`）。",
+   "英国 `Co-Amoxiclav` 等组合名未拆成两个成分。",
+   "剂量只做到同型对应（D1）；盐基折算（D2）与不可互换判定（D3）未实现。",
+   "ATC 覆盖不全：西班牙补了 1,809 个成分，其余市场多为空。"
+  ],
+  "en": [
+   "First release. Six markets, **359,200** product records: China 146,347 (National Healthcare Security Administration drug classification and code database, 2025-04-04 snapshot); US 110,179 (openFDA NDC Directory, 2026-10-23); UK 61,051 (NHSBSA dm+d 10.2.0, OGL v3.0, 2026-10-19 release); Spain 25,293 (AEMPS CIMA, 2026-10); Mexico 10,878 (COFEPRIS Registro Sanitario, 2026-10); Australia 5,452 (PBS, 2026-10).",
+   "Features",
+   "Results are shown as an **ingredient → strength → brand → manufacturer** table; ingredient and strength come first.",
+   "Six-script normalization: Latin, Chinese, Cyrillic, full-width, ratios `875/125`, concentrations `5 mg/5 ml`.",
+   "Same-name collisions derived automatically: different active ingredient = severe, different release mechanism = warning.",
+   "Cross-language brand families: Tylenol ↔ 泰诺 ↔ 泰诺林, Benadryl, Gaviscon, Lipitor ↔ 立普妥.",
+   "24 BAN↔USAN synonym pairs: paracetamol ↔ acetaminophen etc.",
+   "Trilingual interface (EN / ES / Chinese).",
+   "Fuzzy matching is enabled only when there is no direct hit, avoiding `Lipitor` returning `Zifitor`.",
+   "Known gaps",
+   "**Chinese combination collapse**: 4,411 combination rows (metformin/glyburide, valsartan/amlodipine, irbesartan/hydrochlorothiazide, amoxicillin/clavulanate…) ingested only the first ingredient, the second was dropped. To fix, highest priority.",
+   "Chinese traditional patent medicines (98,703 rows) not ingested by default: only 42 rows carry a real brand name.",
+   "208 Spanish combinations with four or more ingredients not ingested (list API `vtm` is the placeholder `multicomponente`).",
+   "UK combination names such as `Co-Amoxiclav` are not split into two ingredients.",
+   "Dose mapping only reaches same-form equivalence (D1); salt-base conversion (D2) and non-interchangeability judgement (D3) are not implemented.",
+   "ATC coverage is incomplete: Spain had 1,809 ingredients added; other markets are mostly empty."
+  ],
+  "es": [
+   "Primera versión. Seis mercados, **359.200** registros de producto: China 146.347 (base de clasificación y códigos de medicamentos de la Administración Nacional de Seguridad Sanitaria, snapshot 2025-04-04); EE. UU. 110.179 (openFDA NDC Directory, 2026-10-23); Reino Unido 61.051 (NHSBSA dm+d 10.2.0, OGL v3.0, release 2026-10-19); España 25.293 (AEMPS CIMA, 2026-10); México 10.878 (COFEPRIS Registro Sanitario, 2026-10); Australia 5.452 (PBS, 2026-10).",
+   "Funciones",
+   "Los resultados se muestran como tabla **principio → dosis → marca → fabricante**; principio y dosis son la primera prioridad.",
+   "Normalización de seis escrituras: latina, china, cirílica, ancho completo, proporciones `875/125`, concentraciones `5 mg/5 ml`.",
+   "Colisiones de mismo nombre derivadas automáticamente: principio activo distinto = severa, mecanismo de liberación distinto = aviso.",
+   "Familias de marcas entre idiomas: Tylenol ↔ 泰诺 ↔ 泰诺林, Benadryl, Gaviscon, Lipitor ↔ 立普妥.",
+   "24 pares de sinónimos BAN↔USAN: paracetamol ↔ acetaminophen, etc.",
+   "Interfaz trilingüe (EN / ES / chino).",
+   "La coincidencia difusa solo se activa cuando no hay coincidencia directa, evitando que `Lipitor` devuelva `Zifitor`.",
+   "Limitaciones conocidas",
+   "**Colapso de combinaciones chinas**: 4.411 filas de combinaciones (metformina/glibenclamida, valsartán/amlodipino, irbesartán/hidroclorotiazida, amoxicilina/clavulánico…) ingresaron solo el primer principio y el segundo se perdió. Pendiente, máxima prioridad.",
+   "Medicamentos patentados tradicionales chinos (98.703 filas) no ingresados por defecto: solo 42 filas llevan marca real.",
+   "208 combinaciones españolas de cuatro o más principios no ingresadas (la API de lista `vtm` es el marcador `multicomponente`).",
+   "Los nombres combinados del Reino Unido como `Co-Amoxiclav` no se dividen en dos principios.",
+   "La correspondencia de dosis solo llega a equivalencia de la misma forma (D1); la conversión sal-base (D2) y el juicio de no intercambiabilidad (D3) no están implementados.",
+   "La cobertura ATC es incompleta: España añadió 1.809 principios; los demás mercados están casi vacíos."
+  ],
+  "machine_translated": true
+ }
+}
