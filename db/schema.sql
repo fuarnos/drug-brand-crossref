@@ -6,7 +6,7 @@
 -- v0.4 改动：D2 盐基折算前置字段 variant.salt_code / variant.strength_basis；
 --            新增 dose_warning（D3 `/warn` 页人工策展警示）。老库由 db/init_db.py 幂等迁移。
 -- 市场：US（openFDA NDC）、GB（dm+d）、CN（医保代码库）、ES（CIMA / AEMPS）、
---       MX（COFEPRIS）、AU（PBS Schedule）、CA（Health Canada DPD）。
+--       MX（COFEPRIS）、AU（PBS Schedule）、CA（Health Canada DPD）、TW（台湾，预留）。
 --       country 是「上市国家」，不是语言；西语名走 name_variant，不新建表。
 
 PRAGMA foreign_keys = ON;
@@ -80,7 +80,9 @@ CREATE INDEX IF NOT EXISTS idx_variant_substance ON variant (substance_id);
 -- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装）
 CREATE TABLE IF NOT EXISTS product (
     product_id     TEXT PRIMARY KEY,
-    country        TEXT NOT NULL CHECK (country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA')),
+    country        TEXT NOT NULL CHECK (country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW')),
+    -- 新增市场 = 往上面 CHECK 里加一个 ISO 代码 + data/markets.json 注册（enabled 先 false），
+    -- 老库由 db/init_db.py / db/migrate_country_tw.py 幂等重建 product 表；未来 HK/MO 同理。
     dosage_form    TEXT NOT NULL,
     form_base      TEXT,                      -- 归一化剂型：tablet / capsule / liquid / ...
     route          TEXT,
