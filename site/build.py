@@ -29,6 +29,7 @@ import re
 import shutil
 import sqlite3
 import time
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -934,7 +935,8 @@ def _i18n_placeholders(stats: dict, atc_cov: dict, coverage, source_cover) -> di
 def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
-        for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang]):
+        for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
+                       MAKER_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1045,7 +1047,7 @@ COMBO_I18N = {
         "combo.no_advice": ('Not medical advice. Check the pack and the exact composition before '
                             'comparing products; ask a pharmacist if unsure.'),
         "combo.empty": "No brand names recorded for this combination yet.",
-        "combo.capped": "Showing the first @@COMBO_CAP@@ of @@COMBO_TOTAL@@ names.",
+        "combo.capped": "Showing the first {cap} of {total} names.",
         "combo.source_note": ('<b>Source &amp; licence</b>: built from the same regulator data as '
                               'the ingredient pages (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, '
                               'Health Canada DPD, NHSA). Facts only; see the '
@@ -1066,7 +1068,7 @@ COMBO_I18N = {
         "combo.no_advice": ('No es consejo médico. Comprueba el envase y la composición exacta '
                             'antes de comparar productos; consulta a un farmacéutico si dudas.'),
         "combo.empty": "Todavía no hay nombres comerciales para esta combinación.",
-        "combo.capped": "Mostrando los primeros @@COMBO_CAP@@ de @@COMBO_TOTAL@@ nombres.",
+        "combo.capped": "Mostrando los primeros {cap} de {total} nombres.",
         "combo.source_note": ('<b>Fuente y licencia</b>: mismos datos regulatorios que las páginas '
                               'de principios activos (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, '
                               'Health Canada DPD, NHSA). Solo hechos; ver el '
@@ -1084,13 +1086,128 @@ COMBO_I18N = {
         "combo.products": "属于该组合的商品名",
         "combo.no_advice": "这不是医疗建议。比较产品前请核对实际包装与完整成分；不确定时咨询药师。",
         "combo.empty": "该组合暂无已收录商品名。",
-        "combo.capped": "仅显示前 @@COMBO_CAP@@ / @@COMBO_TOTAL@@ 条。",
+        "combo.capped": "仅显示前 {cap} / {total} 条。",
         "combo.source_note": ('<b>来源与许可</b>：与成分页使用同一批监管数据（openFDA、dm+d、'
                               'CIMA、COFEPRIS、PBS/TGA、Health Canada DPD、国家医保局）。'
                               '只做事实字段；见 <a href="../about.html#licences">许可清单</a>。'),
         "combo.see_warnings": "查看这些成分的警示",
         "combo.no_page": "这个名字没有独立品牌页",
         "combo.compact": "复方",
+    },
+}
+
+# ── v0.5.4：厂家页（/maker/<slug>.html）与结果行厂家链接 ─────────────
+# 页数守卫：≥2 产品阈值会有 10,975 页；按 v0.5.3 基线（50,953 文件 / 279 MB）
+# 预估会超过 400 MB，所以按任务约定降到 ≥5 产品（6,997 页），并在报告里记录。
+MAKER_MIN_PRODUCTS = 5
+MAKERS: dict[str, dict] = {}
+
+
+# v0.5.4：厂家名规范化必须与 etl/build_maker_candidates.py 的 norm_key 完全一致，
+# 否则 CSV 里的 maker_key 匹配不到 DB 的 product.mah（会漏建厂家页 / 链接失效）。
+PUNCT_RE = re.compile(r"[.,;:'\"()\[\]{}&/\\|]+")
+DASH_RE = re.compile(r"[-\u2010-\u2015\uff0d]+")
+
+
+def norm_maker(s: str) -> str:
+    """厂家名规范化：NFKC → 空白折叠 → casefold → 去标点 → 破折号→'-'（与 data 任务一致）。"""
+    s = unicodedata.normalize("NFKC", s or "")
+    s = s.replace("\u00a0", " ").strip()
+    s = re.sub(r"\s+", " ", s)
+    s = s.casefold()
+    s = PUNCT_RE.sub(" ", s)
+    s = DASH_RE.sub("-", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def load_makers(threshold: int = MAKER_MIN_PRODUCTS) -> dict[str, dict]:
+    """data/maker_candidates.csv → {norm_key: {name, slug, n, has}}。
+
+    只把 n_products >= threshold 且非占位（Special Order 等）的厂家标记 has=True。
+    """
+    import csv as _csv
+
+    path = ROOT / "data" / "maker_candidates.csv"
+    out: dict[str, dict] = {}
+    if not path.exists():
+        return out
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        for row in _csv.DictReader(fh):
+            if (row.get("is_placeholder") or "") == "1":
+                continue
+            key = (row.get("maker_key") or "").strip()
+            slug = (row.get("slug") or "").strip()
+            if not key or not slug:
+                continue
+            try:
+                n = int(row.get("n_products") or 0)
+            except ValueError:
+                n = 0
+            out[key] = {"name": row.get("maker_name") or key, "slug": slug, "n": n,
+                        "has": n >= threshold}
+    return out
+
+
+MAKER_I18N = {
+    "en": {
+        "maker.title": "Manufacturer / marketing-authorisation holder",
+        "maker.intro": ('<p class="sub">{name} — {products} products across {markets} markets, '
+                        '{brands} brand names. Products are grouped by country; brand names link '
+                        'to their brand page and ingredients to the ingredient or combination '
+                        'page. It is the marketing-authorisation holder recorded by the regulator, '
+                        'not necessarily the factory.</p>'),
+        "maker.stats": '<p class="sub">{products} products · {markets} markets · {brands} brand names</p>',
+        "maker.by_country": "Products by country",
+        "maker.brand": "Brand",
+        "maker.ingredient": "Active ingredient(s)",
+        "maker.source": "Source",
+        "maker.capped": "Showing the first {shown} of {total} products (ordered by country).",
+        "maker.no_page": "No separate brand page",
+        "maker.no_page_count": "{n} more manufacturer(s) without a page",
+        "maker.empty": "No products recorded for this manufacturer.",
+        "maker.source_note": ('<b>Source &amp; licence</b>: product rows link to the regulator '
+                              'record (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, '
+                              'NHSA); facts only — see the '
+                              '<a href="../about.html#licences">licence register</a>.'),
+    },
+    "es": {
+        "maker.title": "Fabricante / titular de la autorización de comercialización",
+        "maker.intro": ('<p class="sub">{name} — {products} productos en {markets} mercados, '
+                        '{brands} nombres comerciales. Los productos se agrupan por país; los '
+                        'nombres comerciales enlazan a su página de marca y los principios activos '
+                        'a la página del principio o de la combinación. Es el titular registrado '
+                        'por el regulador, no necesariamente la fábrica.</p>'),
+        "maker.stats": '<p class="sub">{products} productos · {markets} mercados · {brands} marcas</p>',
+        "maker.by_country": "Productos por país",
+        "maker.brand": "Marca",
+        "maker.ingredient": "Principio(s) activo(s)",
+        "maker.source": "Fuente",
+        "maker.capped": "Mostrando los primeros {shown} de {total} productos (orden por país).",
+        "maker.no_page": "Sin página de marca propia",
+        "maker.no_page_count": "{n} fabricante(s) más sin página",
+        "maker.empty": "No hay productos registrados para este fabricante.",
+        "maker.source_note": ('<b>Fuente y licencia</b>: cada fila enlaza al registro del '
+                              'regulador (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada '
+                              'DPD, NHSA); solo hechos — ver el '
+                              '<a href="../about.html#licences">registro de licencias</a>.'),
+    },
+    "zh": {
+        "maker.title": "厂家 / 上市许可持有人",
+        "maker.intro": ('<p class="sub">{name} —— 共 {products} 个产品，覆盖 {markets} 个市场、'
+                        '{brands} 个品牌名。产品按国家分组；品牌名链到品牌页，成分链到成分页/'
+                        '组合页。这里记录的是监管数据里的「上市许可持有人」，不一定是生产工厂。</p>'),
+        "maker.stats": '<p class="sub">{products} 个产品 · {markets} 个市场 · {brands} 个品牌名</p>',
+        "maker.by_country": "各国产品",
+        "maker.brand": "品牌",
+        "maker.ingredient": "活性成分",
+        "maker.source": "来源",
+        "maker.capped": "仅显示前 {shown} / {total} 个产品（按国家排序）。",
+        "maker.no_page": "没有独立品牌页",
+        "maker.no_page_count": "另有 {n} 个厂家暂无页面",
+        "maker.empty": "该厂家暂无已收录产品。",
+        "maker.source_note": ('<b>来源与许可</b>：产品行链到监管原始记录（openFDA、dm+d、CIMA、'
+                              'COFEPRIS、PBS/TGA、Health Canada DPD、国家医保局）；只发布事实字段，'
+                              '见 <a href="../about.html#licences">许可清单</a>。'),
     },
 }
 
@@ -1438,6 +1555,14 @@ font-size:13px;text-decoration:underline}
 .lang-block[data-lang-block="en"]{display:block}
 /* v0.5.3：品牌无页 → 不可点文本（不是链接，禁止回退 drug 页） */
 .brand-plain{font-weight:600;color:var(--fg)}
+/* v0.5.4：厂家列（可点厂家 + 「+N」展开列表） */
+.maker-link{color:var(--accent)}
+.maker-plain{color:var(--fg)}
+.mah-toggle{font-size:12px;margin-left:4px;padding:0;text-decoration:underline}
+.mah-list{margin:6px 0 0;padding-left:18px;font-size:13px}
+.mah-list[hidden]{display:none}
+.mah-list li{margin:2px 0}
+.maker-page table.res{margin-top:6px}
 .grp-name{font-weight:600}
 a.grp-name{color:var(--accent)}
 .warn-item{border:1px solid var(--line);border-radius:12px;background:#fff;
@@ -1573,6 +1698,27 @@ function ingredientHTML(e, cls){
   if(e.v) return `<a class="${cls || ''}" href="${BASE}drug/${e.v}.html">${label}</a>`;
   return `<span class="${cls || ''}">${label}</span>`;
 }
+// v0.5.4 厂家列：第一个厂家可点（索引 mu），「+N」展开其它带页厂家（索引 ml）；
+// 没页的厂家显示为纯文本 / 汇总成「另有 K 家暂无页面」，绝不产生 404。
+function makerHTML(e, T){
+  const name = e && e.m ? e.m : '';
+  if(!name) return '—';
+  const first = e.mu
+    ? `<a class="maker-link" href="${BASE}maker/${e.mu}.html">${esc(name)}</a>`
+    : `<span class="maker-plain">${esc(name)}</span>`;
+  const extraTotal = (e.mn || 1) - 1;
+  if(extraTotal <= 0) return first;
+  const extras = (e.ml && e.ml.length) ? e.ml : [];
+  const items = extras.map(([n, s]) =>
+    `<li><a class="maker-link" href="${BASE}maker/${s}.html">${esc(n)}</a></li>`).join('');
+  const unlinked = extraTotal - extras.length;
+  const tail = unlinked > 0
+    ? `<li class="sub">${esc(T('maker.no_page_count').replace('{n}', String(unlinked)))}</li>`
+    : '';
+  return `<span class="mah-wrap">${first}`
+    + `<button type="button" class="linkbtn mah-toggle" data-mah="1" aria-expanded="false">+${extraTotal}</button>`
+    + `<ul class="mah-list" hidden>${items}${tail}</ul></span>`;
+}
 function aliasHits(nq){
   // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
   return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
@@ -1588,7 +1734,7 @@ function rowHTML(r){
   const tags = r.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (r.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
-  const mah = r.m ? (r.mn > 1 ? `${r.m} <span class="more">+${r.mn-1}</span>` : r.m) : '';
+  const mah = makerHTML(r, T);
   return `<tr>
     <td class="c-ing">${ingredientHTML(r)}</td>
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${r.d || '—'}</td>
@@ -1604,7 +1750,7 @@ function brandRowHTML(e, T){
   const tags = (e.c || []).map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
-  const mah = e.m ? (e.mn > 1 ? `${e.m} <span class="more">+${e.mn-1}</span>` : e.m) : '';
+  const mah = makerHTML(e, T);
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
   return `<tr class="br">
     <td class="c-ing c-empty"></td>
@@ -2254,7 +2400,8 @@ function render(){
       const oRows = [];
       for(const e of others.slice(0, 40)){
         const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
-        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu});
+        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, mu:e.mu, ml:e.ml,
+                                   c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu});
       }
       sameHTML = `<h2>${T2('same.ing')}</h2>` +
         `<p class="sub">${T2('same.note')}</p>` +
@@ -2505,6 +2652,19 @@ out.addEventListener('click', ev => {
     if(fold.getAttribute('data-fold') === '1') RES_EXPANDED.add(gi);
     else RES_EXPANDED.delete(gi);
     paintResultsOnly();
+    return;
+  }
+  const mt = t.closest('[data-mah]');
+  if(mt){
+    // v0.5.4：厂家列「+N」展开/收起其它厂家（列表项都带厂家页链接）
+    const wrap = mt.parentNode;
+    const list = wrap && wrap.querySelector ? wrap.querySelector('.mah-list') : null;
+    if(list){
+      const willOpen = list.hasAttribute('hidden');
+      if(willOpen) list.removeAttribute('hidden');
+      else list.setAttribute('hidden', '');
+      mt.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    }
     return;
   }
   if(t.closest('[data-clearcountry]')){
@@ -2897,6 +3057,16 @@ def load_index(db: sqlite3.Connection):
         worth_page = (not pure_inn) and (a["trade"] or level == "warning") and (
             level == "warning" or (level == "severe" and n >= 2) or n >= 3
             or (a["trade"] and n >= 2))
+        ordered_mah = sorted(a["mah"].items(), key=lambda kv: (-kv[1], kv[0]))
+        first_maker = ordered_mah[0][0] if ordered_mah else ""
+        first_info = MAKERS.get(norm_maker(first_maker)) if first_maker else None
+        # v0.5.4：结果行「+N」展开用的其它厂家（只存有厂家页的，带 name+slug；
+        # 没页的厂家不进索引，前端用 mn 差额显示「另有 K 家暂无页面」）。
+        ml: list[list[str]] = []
+        for mname, _cnt in ordered_mah[1:]:
+            info = MAKERS.get(norm_maker(mname))
+            if info and info["has"]:
+                ml.append([mname, info["slug"]])
         entry = {
             "k": key_id,
             "d": displays.get(key_id, key_id),
@@ -2915,8 +3085,11 @@ def load_index(db: sqlite3.Connection):
                   if len(a["sids"]) > 1 else "",
             "g": fam[key_id][0] if key_id in fam else "",
             "gn": fam[key_id][1] if key_id in fam else "",
-            "m": (max(a["mah"].items(), key=lambda kv: kv[1])[0]
-                  if a["mah"] else ""),
+            "m": first_maker,
+            # v0.5.4：主厂家页 slug（无页为空 → 结果行显示纯文本）
+            "mu": first_info["slug"] if first_info and first_info["has"] else "",
+            # v0.5.4：「+N」展开列表：[[name, slug], ...]（仅含可点的其它厂家）
+            "ml": ml if ml else None,
             "mn": len(a["mah"]),
         }
         # 加拿大 DPD 的商品名里混着「222 AF EXTRA STRENGTH」这类以数字开头的名字
@@ -3342,8 +3515,9 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
                 f'<td data-label="{esc(T["col.mah"])}">{esc(mah)}</td></tr>')
         capped_html = ""
         if total > COMBO_ROW_CAP:
-            capped = T["combo.capped"].replace("@@COMBO_CAP@@", str(COMBO_ROW_CAP))
-            capped_html = f'<p class="sub">{capped.replace("@@COMBO_TOTAL@@", str(total))}</p>'
+            capped = (T["combo.capped"].replace("{cap}", str(COMBO_ROW_CAP))
+                      .replace("{total}", str(total)))
+            capped_html = f'<p class="sub">{capped}</p>'
         rows_html = (
             '<div class="tablewrap"><table class="res"><thead><tr>'
             f'<th>{T["col.brand"]}</th><th>{T["col.dose"]}</th><th>{T["col.mah"]}</th>'
@@ -3363,6 +3537,169 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
 <p class="sub"><a href="../warn.html">{esc(T["combo.see_warnings"])}</a></p>
 <div class="notice" data-i18n-html="combo.source_note">{T["combo.source_note"]}</div>"""
         (OUT / "combo" / slug).write_text(page(title, body, "../"), encoding="utf-8")
+        made += 1
+    return made
+
+
+MAKER_PRODUCT_CAP = 60   # 每页产品行上限（按国家均摊）；控制 dist 体积（守卫 400MB）
+
+
+def build_maker_pages(entries, db: sqlite3.Connection) -> int:
+    """v0.5.4：生成 /maker/<slug>.html（厂家 / 上市许可持有人页）。
+
+    - 数据：data/maker_candidates.csv（阈值 MAKER_MIN_PRODUCTS，占位厂家由 is_placeholder=1 排除）
+    - 内容：厂家名、产品数/市场数/品牌数、按国家分组的品牌行（品牌→品牌页、成分→成分/组合页）、
+      来源链接与许可说明；每页产品行最多 MAKER_PRODUCT_CAP（按国家均摊），多出的显示截断提示。
+    - 链接目标全部在构建期验证过（无 404）：combo 只在已经生成了组合页时使用，否则逐个成分链 drug。
+    """
+    if not MAKERS:
+        return 0
+    page_makers = {k: v for k, v in MAKERS.items() if v["has"]}
+    if not page_makers:
+        return 0
+    T = I18N["en"]
+    (OUT / "maker").mkdir(parents=True, exist_ok=True)
+    entry_by_k = {e["k"]: e for e in entries}
+    combo_files = {p.name for p in (OUT / "combo").glob("*.html")}
+    sub_names: dict[str, tuple[str, str]] = {}
+    for sid, inn_zh, inn_en in db.execute(
+            "SELECT substance_id, inn_zh, inn_en FROM substance"):
+        sub_names[sid] = (inn_zh or inn_en or sid, inn_en or sid)
+
+    # 一次性取产品（只保留有页厂家），再补品牌名与成分
+    prod: dict[str, dict] = {}
+    for (pid, country, mah, form, base, rel, pack, appr, src) in db.execute(
+        """SELECT product_id, country, mah, dosage_form, form_base, release, pack,
+                  approval_id, source_url
+           FROM product WHERE mah IS NOT NULL AND mah <> ''"""
+    ):
+        info = page_makers.get(norm_maker(mah))
+        if not info:
+            continue
+        prod[pid] = {"pid": pid, "country": country, "mah": mah, "mkey": norm_maker(mah),
+                     "form": base or form or "", "release": rel if rel != "none" else "",
+                     "pack": pack or "", "approval": appr or "", "src": src or "",
+                     "keys": [], "sids": set()}
+    for pid, key_id in db.execute(
+            "SELECT product_id, key_id FROM product_name WHERE name_type = 'trade'"):
+        p = prod.get(pid)
+        if p is not None:
+            p["keys"].append(key_id)
+    for pid, sid in db.execute(
+            """SELECT pc.product_id, v.substance_id
+               FROM product_component pc JOIN variant v ON v.variant_id = pc.variant_id"""):
+        p = prod.get(pid)
+        if p is not None:
+            p["sids"].add(sid)
+
+    by_maker: dict[str, list] = defaultdict(list)
+    for p in prod.values():
+        by_maker[p["mkey"]].append(p)
+
+    def brand_cell(p: dict, lang: str) -> str:
+        if not p["keys"]:
+            return '—'
+        key_id = p["keys"][0]
+        e = entry_by_k.get(key_id)
+        label = esc((e or {}).get("d") or key_id)
+        if e and e.get("u"):
+            return f'<a href="../name/{esc(e["u"])}">{label}</a>'
+        return (f'<span class="brand-plain" title="{esc(I18N[lang]["maker.no_page"])}">'
+                f'{label}</span>')
+
+    def ingredient_cell(p: dict, lang: str) -> str:
+        sids = sorted(p["sids"])
+        if not sids:
+            return '—'
+        labels = []
+        for sid in sids[:3]:
+            zh, en = sub_names.get(sid, (sid, sid))
+            labels.append(esc(zh) if zh else esc(en))
+        more = f' <span class="meta">+{len(sids) - 3}</span>' if len(sids) > 3 else ""
+        if len(sids) == 1:
+            return f'<a href="../drug/{esc(sids[0])}.html">{labels[0]}</a>' + more
+        slug = combo_slug(sids)
+        text = " + ".join(labels) + more
+        if slug in combo_files:
+            return f'<a href="../combo/{esc(slug)}">{text}</a>'
+        parts = [f'<a href="../drug/{esc(sid)}.html">{lab}</a>'
+                 for sid, lab in zip(sids[:3], labels)]
+        return " · ".join(parts) + more
+
+    made = 0
+    for mkey, rows in by_maker.items():
+        info = page_makers[mkey]
+        rows.sort(key=lambda p: (p["country"], (entry_by_k.get(p["keys"][0]) or {}).get("d", "")
+                                 if p["keys"] else "~"))
+        countries = sorted({p["country"] for p in rows})
+        brands = {(entry_by_k.get(p["keys"][0]) or {}).get("k", p["keys"][0])
+                  for p in rows if p["keys"]}
+        n_products = len(rows)
+        stats_vals = {"name": info["name"], "products": f"{n_products:,}",
+                      "markets": str(len(countries)), "brands": f"{len(brands):,}"}
+        intro_blocks = ""
+        stats_blocks = ""
+        for lang in ("en", "es", "zh"):
+            li = I18N[lang]["maker.intro"]
+            ls = I18N[lang]["maker.stats"]
+            for k, v in stats_vals.items():
+                li = li.replace("{" + k + "}", v)
+                ls = ls.replace("{" + k + "}", v)
+            intro_blocks += f'<div class="lang-block" data-lang-block="{lang}">{li}</div>'
+            stats_blocks += f'<div class="lang-block" data-lang-block="{lang}">{ls}</div>'
+
+        # 产品行：按国家均摊上限，保证每个国家都能露面
+        per_country = max(1, (MAKER_PRODUCT_CAP + len(countries) - 1) // max(1, len(countries)))
+        by_country: dict[str, list] = defaultdict(list)
+        for p in rows:
+            by_country[p["country"]].append(p)
+        shown = 0
+        sections = []
+        for country in countries:
+            items = by_country[country][:per_country]
+            if shown + len(items) > MAKER_PRODUCT_CAP:
+                items = items[:max(0, MAKER_PRODUCT_CAP - shown)]
+            if not items:
+                continue
+            shown += len(items)
+            body_rows = []
+            for p in items:
+                form = esc(p["form"]) if p["form"] else "—"
+                body_rows.append(
+                    f'<tr><td class="c-brand" data-i18n-label="maker.brand">'
+                    f'{brand_cell(p, "en")}</td>'
+                    f'<td data-i18n-label="maker.ingredient">{ingredient_cell(p, "en")}</td>'
+                    f'<td data-i18n-label="col.dose">{form}</td></tr>')
+            src = next((p["src"] for p in items if p["src"]), "")
+            src_html = (f'<p class="sub"><span data-i18n="maker.source">Source</span>: '
+                        f'<a href="{esc(src)}" target="_blank" rel="noopener">'
+                        f'{esc(src.split("//")[-1].split("/")[0])}</a></p>'
+                        if src else "")
+            sections.append(
+                f'<h2>{esc(country)} <span class="meta">({len(by_country[country])} '
+                f'<span data-i18n="drug.records">records</span>)</span></h2>{src_html}'
+                '<div class="tablewrap"><table class="res"><thead><tr>'
+                f'<th data-i18n="maker.brand">{esc(T["maker.brand"])}</th>'
+                f'<th data-i18n="maker.ingredient">{esc(T["maker.ingredient"])}</th>'
+                f'<th data-i18n="col.dose">{esc(T["col.dose"])}</th>'
+                f'</tr></thead><tbody>{"".join(body_rows)}</tbody></table></div>')
+        capped_blocks = ""
+        if n_products > shown:
+            for lang in ("en", "es", "zh"):
+                note = (I18N[lang]["maker.capped"]
+                        .replace("{shown}", f"{shown:,}").replace("{total}", f"{n_products:,}"))
+                capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
+                                  f'<p class="sub">{esc(note)}</p></div>')
+        body = f"""<h1>{esc(info["name"])}</h1>
+<p class="sub" data-i18n="maker.title">{esc(T["maker.title"])}</p>
+{intro_blocks}
+{stats_blocks}
+<h2 data-i18n="maker.by_country">{esc(T["maker.by_country"])}</h2>
+{''.join(sections) if sections else '<p class="empty" data-i18n="maker.empty">No products recorded.</p>'}
+{capped_blocks}
+<div class="notice" data-i18n-html="maker.source_note">{T["maker.source_note"]}</div>"""
+        (OUT / "maker" / f'{info["slug"]}.html').write_text(
+            page(info["name"], body, "../"), encoding="utf-8")
         made += 1
     return made
 
@@ -3621,8 +3958,8 @@ def build_seo_files() -> None:
 #    },
 #    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
 #   f（剂型）客户端 0 处引用，直接丢弃（app.js 只用 k/d/c/x/s/l/n/v/vs/u/g/gn/m/mn/q）。
-CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "g", "gn", "m")
-CORE_ARRAY_COLS = ("c", "s", "vs")     # 值是数组：先 JSON 化再进字典
+CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m")
+CORE_ARRAY_COLS = ("c", "s", "vs", "ml")     # 值是数组：先 JSON 化再进字典
 
 
 def _d_case_pattern(d: str, k: str) -> str | None:
@@ -3670,7 +4007,7 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "s", "l", "n", "v", "vs", "u", "cu", "g", "gn", "m", "mn"):
+    for f in ("c", "x", "s", "l", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn", "m", "mn"):
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
             # 数组先序列化再字典化：客户端解码时把字典值直接给出（数组引用共享，
@@ -3870,6 +4207,10 @@ def main() -> None:
     // i18n P1：About / What's new / Confused / 404 的正文块允许内嵌链接与表格，
     // 用 data-i18n-html 走 innerHTML（内容全部来自构建期字典，非用户输入）。
     document.querySelectorAll('[data-i18n-html]').forEach(function(el){ el.innerHTML = window.T(el.dataset.i18nHtml); });
+    // v0.5.4：移动端卡片列名（CSS content:attr(data-label)）也随语言切换（厂家页等）。
+    document.querySelectorAll('[data-i18n-label]').forEach(function(el){
+      el.setAttribute('data-label', window.T(el.dataset.i18nLabel));
+    });
     // /warn 与成分页的警示正文是数据行（zh/en/es 各一份），按当前语言只显示对应块。
     document.querySelectorAll('[data-lang-block]').forEach(function(el){
       el.style.display = (el.dataset.langBlock === window.LANG) ? 'block' : 'none';
@@ -3956,6 +4297,13 @@ def main() -> None:
     _merge_static_i18n(_i18n_placeholders(stats, atc_cov, coverage, source_cover))
     (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
 
+    # v0.5.4：厂家页清单（必须在 load_index 之前载入，索引要用 mu/ml 字段）
+    global MAKERS
+    MAKERS = load_makers()
+    print(f"maker list : {len(MAKERS):,} makers, "
+          f"{sum(1 for v in MAKERS.values() if v['has']):,} with page "
+          f"(>= {MAKER_MIN_PRODUCTS} products)", flush=True)
+
     print("building index ...", flush=True)
     entries = load_index(db)
     (OUT / "data" / "index.json").write_text(
@@ -4026,6 +4374,8 @@ def main() -> None:
     n_name = build_name_pages(db, entries, data, families, displays)
     print("building combo pages ...", flush=True)
     n_combo = build_combo_pages(entries, db)
+    print("building maker pages ...", flush=True)
+    n_maker = build_maker_pages(entries, db)
     build_index_page(entries, stats, coverage)
     n_conf = build_confused(db)
     n_warn = build_warn(db)
@@ -4039,6 +4389,7 @@ def main() -> None:
     print(f"  drug pages : {n_drug}")
     print(f"  name pages : {n_name}")
     print(f"  combo pages: {n_combo}")
+    print(f"  maker pages: {n_maker} (threshold >= {MAKER_MIN_PRODUCTS} products)")
     print(f"  confused   : {n_conf} pairs")
     print(f"  warnings   : {n_warn} published")
     print(f"  index.json : {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB")
