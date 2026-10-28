@@ -1102,6 +1102,9 @@ ABOUT_I18N = {
             'for anonymous, cookie-free analytics. No personal data is stored and it is not used '
             'for advertising. We only see page views, referring sites, country/region, browser and '
             'screen size, plus on-site search terms and result clicks, to improve search quality. '
+            'Search terms (including queries that returned no result) are sent only as aggregate '
+            'event names — the normalized query text, never linked to an account, IP address or '
+            'device identifier. '
             'See the <a href="https://www.goatcounter.com/privacy" target="_blank" '
             'rel="noopener">GoatCounter privacy policy</a>.</p>'),
         "about.stats": (
@@ -1235,7 +1238,10 @@ ABOUT_I18N = {
             'para estadísticas anónimas sin cookies: no guarda datos personales y no se usa para '
             'publicidad. Solo se registran visitas, sitios de referencia, país/región, navegador y '
             'tamaño de pantalla, además de las búsquedas y clics en resultados, para mejorar la '
-            'búsqueda. Ver la <a href="https://www.goatcounter.com/privacy" target="_blank" '
+            'búsqueda. Los términos de búsqueda (incluidas las búsquedas sin resultado) se envían '
+            'solo como nombres de evento agregados: el texto normalizado de la consulta, nunca '
+            'vinculado a una cuenta, dirección IP o identificador de dispositivo. '
+            'Ver la <a href="https://www.goatcounter.com/privacy" target="_blank" '
             'rel="noopener">política de privacidad de GoatCounter</a>.</p>'),
         "about.stats": (
             '<p class="sub">Cifras: @@PRODUCTS@@ productos · @@SUBSTANCES@@ sustancias · '
@@ -1334,6 +1340,8 @@ ABOUT_I18N = {
             '<a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> '
             '做匿名访问统计：不使用 cookie、不记录个人数据、不用于广告；只统计页面浏览、来源'
             '网站、国家/地区、浏览器与屏幕尺寸，以及站内搜索词和结果点击，用于改进检索质量。'
+            '搜索词（含无结果的查询）仅以聚合事件名发送——只含归一化查询文本，不与账号、IP 或'
+            '设备标识关联。'
             '详见 <a href="https://www.goatcounter.com/privacy" target="_blank" '
             'rel="noopener">GoatCounter 隐私政策</a>。</p>'),
         "about.stats": (
@@ -2181,15 +2189,39 @@ font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-seri
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 header{border-bottom:1px solid var(--line);background:#fff}
 .wrap{max-width:920px;margin:0 auto;padding:0 20px}
-header .wrap{display:flex;align-items:center;gap:16px;height:60px}
-.logo{font-weight:700;font-size:16px;color:var(--fg)}
-.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
+.logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
+.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px;white-space:nowrap}
 /* v0.6.5：logo 中文副标题只在简体中文界面显示（en/es/zh-Hant 隐藏，移动端仍隐藏） */
 html:not([lang="zh"]) .logo-zh{display:none}
-.langs{margin-left:6px;font-size:13px}
-.langs a{color:var(--muted);padding:1px 5px;border-radius:5px}
+.langs{margin-left:6px;font-size:13px;display:flex;align-items:center;gap:6px;
+  white-space:nowrap;flex-wrap:nowrap}
+.langs a{color:var(--muted);padding:1px 5px;border-radius:5px;white-space:nowrap;
+  display:inline-flex;align-items:center}
 .langs a.on{background:var(--accent);color:#fff}
-nav{display:flex;gap:14px;font-size:14px}
+nav{display:flex;gap:14px;font-size:14px;flex-wrap:nowrap;white-space:nowrap;align-items:center}
+nav a{white-space:nowrap}
+/* v0.8.2 task-118：宽屏一行；768–1023 允许换行（禁止单字竖排）；<768 汉堡菜单 */
+@media (max-width:1099px) and (min-width:768px){
+  header .wrap{height:auto;flex-wrap:wrap;gap:6px 12px;padding-top:8px;padding-bottom:8px}
+  nav{order:3;flex-basis:100%;flex-wrap:wrap;gap:8px 12px;font-size:13px}
+  .langs{margin-left:auto;order:2;gap:4px}
+}
+.nav-toggle{display:none;align-items:center;justify-content:center;min-width:40px;min-height:40px;
+  font-size:18px;background:#fff;color:var(--fg);border:1px solid var(--line);border-radius:8px;
+  cursor:pointer}
+@media (max-width:767px){
+  header .wrap{height:auto;flex-wrap:wrap;gap:8px 12px}
+  .nav-toggle{display:inline-flex;margin-left:auto}
+  header nav{display:none;order:3;width:100%;flex-wrap:wrap;gap:6px 14px;padding:4px 0 2px;
+    font-size:14px}
+  header.nav-open nav{display:flex}
+  header nav a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap}
+  .langs{margin-left:0;gap:6px}
+  .langs a{min-height:40px;padding:4px 6px}
+  .logo{font-size:15px}
+  .logo-zh{display:none}
+}
 main{padding:28px 0 60px;flex:1}
 h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:28px 0 10px}
 .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
@@ -2324,22 +2356,24 @@ table.det th{background:#f4f2ec;font-size:11px}
 table.det td{padding:5px 8px;vertical-align:top}
 tr.detrow>td.detcell{padding:4px 8px 10px;background:#faf9f6}
 tr.detrow table.det{margin:0}
-/* v0.6.3 U1：首屏 3 步引导（可关闭；head 内联脚本先置 html.u1-off 防 CLS） */
+/* v0.6.3 U1：首屏 3 步引导（v0.8.2 task-115：移到搜索框正下方、国家行之前；层级增强） */
 .u1guide{border:1px solid var(--line);border-radius:12px;background:#fff;
- padding:14px 16px;margin:14px 0 6px}
+ padding:16px 18px;margin:12px 0 2px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .u1head{display:flex;align-items:baseline;gap:10px}
-.u1head h2{margin:0;font-size:16px}
+.u1head h2{margin:0;font-size:18px;font-weight:700;letter-spacing:.01em}
 .u1close{margin-left:auto;background:none;border:0;color:var(--muted);font-size:20px;
  line-height:1;padding:6px 8px;min-width:36px;min-height:36px;cursor:pointer}
 .u1close:hover{color:var(--fg)}
-.u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 0;
+.u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 0;
  padding:0;list-style:none}
-.u1step{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#faf9f6}
-.u1step b{font-size:14px}
+.u1step{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#faf9f6}
+.u1step b{display:block;font-size:15px;margin:0 0 3px}
 .u1step .sub{margin:4px 0 0;font-size:13px}
 .u1try{margin-top:6px;font-size:12px;color:var(--muted)}
 .u1try button{padding:3px 8px;font-size:12px;margin:2px 4px 2px 0;border-radius:8px}
 html.u1-off #u1guide{display:none!important}
+/* v0.8.2 task-116：搜索后收起「按大类浏览」 */
+.catquick.cat-hidden{display:none!important}
 /* v0.6.3 U2：结果顶部各国叫法横排（单成分唯一锚定时才渲染） */
 .u2bar{border:1px solid var(--line);border-radius:12px;background:#fff;
  padding:10px 12px;margin:12px 0}
@@ -2364,6 +2398,8 @@ table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
 table.matrix thead th{white-space:nowrap;font-weight:650}
 table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
 table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
+.m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
+.matrix-brand-note{margin:6px 0 0;font-size:12px}
 @media (max-width:719px){
   table.matrix{min-width:840px}
   .matwrap{margin:8px 0}
@@ -2479,6 +2515,13 @@ if(u1El && u1CloseEl){
     u1El.hidden = true;
   });
 }
+// v0.8.2 task-116：搜索时收起首页「按大类浏览」（空查询/清空恢复）
+function setCatsHidden(hide){
+  const el = document.querySelector('.catquick');
+  if(!el) return;
+  el.classList.toggle('cat-hidden', !!hide);
+  el.setAttribute('aria-hidden', hide ? 'true' : 'false');
+}
 // v0.6.2：繁体输入归一（OpenCC 常用字子集，构建期从 data/zh_hant_t2s.json 注入）。
 // 只影响匹配前的归一化，不改变用户看到的输入/结果/页面文案。
 const T2S = __T2S_JSON__;
@@ -2506,6 +2549,22 @@ function scheduleSearchEvent(q){
   const term = norm(splitDose(q)[0]);
   if(!term || term.length < 2) return;
   SEARCH_EV = setTimeout(()=>gcEvent('search-' + term.slice(0,40)), 900);
+}
+// v0.8.2：零结果埋点 search0-<归一化查询>（去重/防抖/≤64 字符；空/单字符不发）
+let SEARCH0_EV = null, SEARCH0_SENT = new Set();
+function scheduleSearch0(q){
+  const term = norm(splitDose(q)[0]);
+  if(!term || term.length < 2 || SEARCH0_SENT.has(term)) return;
+  clearTimeout(SEARCH0_EV);
+  const box0 = document.getElementById('q');
+  const want = box0 ? box0.value.trim() : '';
+  SEARCH0_EV = setTimeout(()=>{
+    const cur = document.getElementById('q');
+    if(cur && cur.value.trim() !== want) return;
+    if(SEARCH0_SENT.has(term)) return;
+    SEARCH0_SENT.add(term);
+    gcEvent('search0-' + term.slice(0,64));
+  }, 900);
 }
 let IDX = [], NICKS = [], CONF = [], CATS = null;
 // 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
@@ -2600,6 +2659,13 @@ function esc(s){
 // 缺失/空串逐段回退英文；其它语言仍用英文 x）。
 function ingredientLabel(e){
   const x = (e && (e.x || e.d)) || '—';
+  // v0.8.2 task-120：优先当前语言译名（terms.json 由 bilingual.js 暴露；无则保留原名）
+  if(window.LANG && window.LANG !== 'en' && window.BILINGUAL_TERMS
+     && window.BILINGUAL_TERMS.sub && e && e.v){
+    const ent = window.BILINGUAL_TERMS.sub[e.v];
+    const tr = ent && ent[window.LANG];
+    if(tr && tr.n) return tr.n;
+  }
   if(window.LANG === 'zh' && e && e.xz && e.xz.length){
     const parts = String(x).split(' + ');
     if(e.xz.length === parts.length){
@@ -3404,6 +3470,7 @@ function renderATC(atcCode, q){
     RES_GROUPS = null; LAST_DISPLAY = [];
     out.innerHTML = bar + `<div class="notice warnbox"><b>${esc(T('atc.none_meta').replace('{code}', atcCode))}</b> ${esc(T('atc.none'))}</div>` + classLink;
     meta.textContent = T('atc.none_meta').replace('{code}', atcCode);
+    scheduleSearch0(q);
     if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
     return;
   }
@@ -3464,6 +3531,7 @@ function renderCategory(cat, q){
     RES_GROUPS = null; LAST_DISPLAY = [];
     out.innerHTML = bar + `<div class="notice warnbox">${esc(T('cat.no_data'))}</div>` + link;
     meta.textContent = T('res.none');
+    scheduleSearch0(q);
     return;
   }
   const display = shown.map(e => [1, 'category', e]);
@@ -3475,6 +3543,7 @@ function renderCategory(cat, q){
 }
 function render(){
   const q = box.value.trim();
+  setCatsHidden(!!q);   // v0.8.2 task-116：有查询（结果/零结果）即收起大类块；清空恢复
   if(!q){ out.innerHTML=''; meta.textContent=''; syncURL('');
     const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
   // v0.6.4 A2：ATC 码/类前缀优先走独立路径（C07 / C07A / C07AB02 …）
@@ -3696,6 +3765,10 @@ function render(){
   }
 
   if(partial){ sameHTML = ''; extraHTML = ''; }   // 跨条目区块等 core 到位再补
+  // v0.8.2：最终无结果 → search0-<q>（部分加载/国家缺失不提前发；去重防抖在 scheduleSearch0）
+  if(!partial && !countryMiss && !display.length && !nicks.length && !confs.length){
+    scheduleSearch0(q);
+  }
   out.innerHTML = parseBarHTML(parsed, matchLabel) + countryBarHTML + confHTML + nickHTML + warnHTML
     + countryMissHTML + resHTML + sameHTML + extraHTML;
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
@@ -4119,6 +4192,7 @@ def _page_meta(lang: str, meta_key: str | None) -> tuple[str, str]:
 
 
 TERMS_SUB_IDS: set[str] = set()
+BILINGUAL_TRANS: dict = {}
 
 # v0.8.1：双语对照显示（独立脚本，避免改动 i18n.js 模板；所有页面 defer 加载）
 BILINGUAL_JS = r"""
@@ -4136,9 +4210,10 @@ BILINGUAL_JS = r"""
   function load(){
     if(TERMS) return Promise.resolve(TERMS);
     return fetch(url()).then(function(r){ return r.json(); }).then(function(d){
-      TERMS = d; return d;
+      TERMS = d; expose(); return d;
     }).catch(function(){ return null; });
   }
+  function expose(){ try { window.BILINGUAL_TERMS = TERMS; } catch(e) {} }
   function srcLabel(s){
     if(!s) return '';
     var k = 'bilingual.source.' + s;
@@ -4175,9 +4250,23 @@ BILINGUAL_JS = r"""
       el.appendChild(o);
     }
   }
+  function renderNames(){
+    document.querySelectorAll('.nm[data-n-en]').forEach(function(el){      var en = el.getAttribute('data-n-en') || '';
+      var zh = el.getAttribute('data-n-zh') || '';
+      var zhh = el.getAttribute('data-n-zhh') || '';
+      var es = el.getAttribute('data-n-es') || '';
+      var lang = window.LANG || 'en';
+      if(lang === 'zh') el.textContent = zh || (en + ' 暂无中文名');
+      else if(lang === 'zh-Hant') el.textContent = zhh || (en + ' 暫無中文名');
+      else if(lang === 'es') el.textContent = es || en;
+      else el.textContent = en;
+    });
+  }
+  window.renderBilingualNames = renderNames;
   function render(){
-    if(!TERMS) return;
+    if(!TERMS) { renderNames(); return; }
     if(OBS) OBS.disconnect();
+    renderNames();
     document.querySelectorAll('[data-sub-ingredient]').forEach(applyOne);
     var note = T('bilingual.brand_note');
     document.querySelectorAll('[data-brand]').forEach(function(el){
@@ -4185,6 +4274,10 @@ BILINGUAL_JS = r"""
     });
     var cb = document.getElementById('bilOrig');
     if(cb) cb.checked = SHOW;
+    // task-114：英文副标题在英文界面隐藏（避免重复）
+    document.querySelectorAll('.cat-en').forEach(function(el){
+      el.style.display = (window.LANG === 'en') ? 'none' : '';
+    });
     if(OBS && OUT) OBS.observe(OUT, {childList: true, subtree: true});
   }
   function injectToggle(){
@@ -4206,8 +4299,29 @@ BILINGUAL_JS = r"""
       render();
     });
   }
+  function initNavToggle(){
+    if(document.getElementById('navToggle')) return;
+    var header = document.querySelector('header');
+    var nav = header ? header.querySelector('nav') : null;
+    if(!header || !nav) return;
+    var b = document.createElement('button');
+    b.id = 'navToggle';
+    b.type = 'button';
+    b.className = 'nav-toggle';
+    b.setAttribute('aria-label', T('nav.menu'));
+    b.setAttribute('aria-expanded', 'false');
+    b.textContent = '\u2630';
+    var wrap = header.querySelector('.wrap') || header;
+    wrap.insertBefore(b, nav);
+    b.addEventListener('click', function(){
+      var open = header.classList.toggle('nav-open');
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
   function start(){
+    initNavToggle();
     injectToggle();
+    renderNames();
     load().then(render);
     OUT = document.getElementById('out');
     if(OUT && window.MutationObserver){
@@ -4267,6 +4381,8 @@ def build_terms_json(db: sqlite3.Connection) -> dict[str, int]:
     terms["meta"]["version"] = version
     terms["meta"]["counts"] = counts
     TERMS_SUB_IDS = set(terms["sub"])
+    global BILINGUAL_TRANS
+    BILINGUAL_TRANS = terms
     (OUT / "data").mkdir(parents=True, exist_ok=True)
     (OUT / "data" / "terms.json").write_text(
         json.dumps(terms, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -4970,6 +5086,17 @@ MATRIX_ROW_CAP = 120
 def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
     T = I18N["en"]
     entry_by_k = {e["k"]: e for e in (entries or [])}
+    # task-136：CN 中文注册名可附的英文原名（同 key 的拉丁写法；无则不造）
+    cn_latin: dict[str, str] = {}
+    for kid, raw in db.execute(
+            """SELECT DISTINCT pn.key_id, nv.raw FROM product_name pn
+               JOIN name_variant nv ON nv.key_id = pn.key_id
+               JOIN product p ON p.product_id = pn.product_id
+               WHERE p.country = 'CN' AND pn.name_type = 'trade'"""):
+        txt = (raw or "").strip()
+        if txt and any("a" <= ch.lower() <= "z" for ch in txt) \
+                and not any("\u4e00" <= ch <= "\u9fff" for ch in txt):
+            cn_latin.setdefault(kid, txt)
     products: dict[str, list] = {}
     for row in db.execute(
         """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
@@ -5054,7 +5181,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                 e = entry_by_k.get(key_id)
                 label = (e or {}).get("d") or raw
                 if label and label not in bucket:
-                    bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "")
+                    en = cn_latin.get(key_id, "") if country == "CN" else ""
+                    bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en)
         countries = [c for c in COUNTRY_PRIORITY
                      if any(c in by_c for by_c in spec_countries.values())]
         for by_c in spec_countries.values():
@@ -5084,20 +5212,23 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
             for c in countries:
                 cell_brands = by_c.get(c) or {}
                 if not cell_brands:
-                    cells.append('<td><span class="meta" data-i18n="matrix.none">'
-                                 'not recorded</span></td>')
+                    # v0.8.2 task-136：无数据也输出固定 td（带 data-country），禁止整行错位
+                    cells.append(f'<td data-country="{esc(c)}"><span class="meta" '
+                                 f'data-i18n="matrix.none">not recorded</span></td>')
                     continue
                 ordered = sorted(cell_brands.items(), key=lambda kv: kv[0].lower())
                 bits = []
-                for label, url in ordered[:3]:
+                for label, (url, en) in ordered[:3]:
                     if url:
                         bits.append(f'<a class="m-brand" data-brand="1" href="{esc(url)}">'
                                     f'{esc(label)}</a>')
                     else:
                         bits.append(f'<span class="m-brand" data-brand="1">{esc(label)}</span>')
+                    if en and en != label:
+                        bits.append(f'<span class="m-en">{esc(en)}</span>')
                 more = (f' <span class="meta">+{len(ordered) - 3}</span>'
                         if len(ordered) > 3 else "")
-                cells.append(f'<td>{" ".join(bits)}{more}</td>')
+                cells.append(f'<td data-country="{esc(c)}">{" ".join(bits)}{more}</td>')
             tbody.append("<tr>" + "".join(cells) + "</tr>")
         capped_blocks = ""
         if len(spec_rows) > MATRIX_ROW_CAP:
@@ -5110,7 +5241,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
         if tbody:
             matrix_html = ('<div class="matwrap"><table class="matrix"><thead><tr>'
                            + head + "</tr></thead><tbody>" + "".join(tbody)
-                           + "</tbody></table></div>" + capped_blocks)
+                           + "</tbody></table></div>"
+                           + '<p class="sub matrix-brand-note" data-i18n="matrix.brand_note">'
+                             'Each country column shows the locally registered trade names — '
+                             'not translations.</p>' + capped_blocks)
         else:
             matrix_html = ('<p class="empty" data-i18n="drug.empty">'
                            'No products recorded yet.</p>')
@@ -5425,9 +5559,9 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         ing_items = []
         for sid in sids:
             zh, en = subs.get(sid, (sid, sid))
-            extra = f' <span class="meta">{esc(en)}</span>' if en and en != zh else ""
+            # v0.8.2 task-120：组合页成分名四语（中文优先，无中文名加提示）
             ing_items.append(
-                f'<li><a href="../drug/{esc(sid)}.html">{esc(zh)}</a>{extra} '
+                f'<li><a href="../drug/{esc(sid)}.html">{_sub_name_spans(en, zh, sid)}</a> '
                 f'<code>{esc(sid)}</code></li>')
         title = " + ".join(subs.get(s, (s, s))[1] for s in sids)
         rows = sorted(rows, key=lambda e: -e["n"])
@@ -5679,22 +5813,6 @@ def build_index_page(entries, stats, coverage) -> None:
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac" aria-expanded="false">
 <div id="ac" role="listbox" aria-label="Suggestions"></div>
 </div>
-<div class="row">
-  <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
-  <select id="country"><option value="" data-i18n="home.all">All countries</option>
-    <option value="US" data-i18n="home.us">United States</option>
-    <option value="GB" data-i18n="home.gb">United Kingdom</option>
-    <option value="CN" data-i18n="home.cn">China</option>
-    <option value="ES" data-i18n="home.es">Spain</option>
-    <option value="MX" data-i18n="home.mx">Mexico</option>
-    <option value="AU" data-i18n="home.au">Australia</option>
-    <option value="CA" data-i18n="home.ca">Canada</option>
-    <option value="TW" data-i18n="home.tw">Taiwan</option>
-    <option value="SG" data-i18n="home.sg">Singapore</option></select>
-  {{hero_examples}}
-</div>
-<section class="catquick"><h2 data-i18n="cat.quick_title">Browse by category</h2>
-<div class="catgrid">{{cat_chips}}</div></section>
 <section id="u1guide" class="u1guide" aria-labelledby="u1title" data-i18n-aria="u1.aria">
   <div class="u1head"><h2 id="u1title" data-i18n="u1.title">How to use it in 3 steps</h2>
     <button type="button" id="u1close" class="u1close" data-i18n-aria="u1.close"
@@ -5714,6 +5832,22 @@ def build_index_page(entries, stats, coverage) -> None:
         {{try3}}</div></li>
   </ol>
 </section>
+<div class="row">
+  <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
+  <select id="country"><option value="" data-i18n="home.all">All countries</option>
+    <option value="US" data-i18n="home.us">United States</option>
+    <option value="GB" data-i18n="home.gb">United Kingdom</option>
+    <option value="CN" data-i18n="home.cn">China</option>
+    <option value="ES" data-i18n="home.es">Spain</option>
+    <option value="MX" data-i18n="home.mx">Mexico</option>
+    <option value="AU" data-i18n="home.au">Australia</option>
+    <option value="CA" data-i18n="home.ca">Canada</option>
+    <option value="TW" data-i18n="home.tw">Taiwan</option>
+    <option value="SG" data-i18n="home.sg">Singapore</option></select>
+  {{hero_examples}}
+</div>
+<section class="catquick"><h2 data-i18n="cat.quick_title">Browse by category</h2>
+<div class="catgrid">{{cat_chips}}</div></section>
 <p class="sub" id="loadhint" data-i18n="home.hint_idle">First search loads only one small shard of the index (~0.2 MB); the full index fills in the background — start typing, focus the search box, or pick a sample.</p>
 <p class="sub" id="meta" style="margin-top:14px"></p>
 <div id="out"></div>
@@ -5868,6 +6002,9 @@ BILINGUAL_I18N = {
         "bilingual.source.regulator": "regulator",
         "bilingual.source.pharmacopoeia": "pharmacopoeia",
         "bilingual.source.manual": "editorial",
+        "nav.menu": "Menu",
+        "matrix.brand_note": ("Each country column shows the locally registered trade names — "
+                              "not translations."),
     },
     "es": {
         "bilingual.toggle": "Mostrar original",
@@ -5876,6 +6013,9 @@ BILINGUAL_I18N = {
         "bilingual.source.regulator": "regulador",
         "bilingual.source.pharmacopoeia": "farmacopea",
         "bilingual.source.manual": "editorial",
+        "nav.menu": "Menú",
+        "matrix.brand_note": ("Cada columna muestra los nombres comerciales registrados en ese "
+                              "mercado — no son traducciones."),
     },
     "zh": {
         "bilingual.toggle": "显示原文对照",
@@ -5884,6 +6024,8 @@ BILINGUAL_I18N = {
         "bilingual.source.regulator": "监管机构",
         "bilingual.source.pharmacopoeia": "药典",
         "bilingual.source.manual": "编辑整理",
+        "nav.menu": "菜单",
+        "matrix.brand_note": "各国列显示当地注册商品名，不是翻译；中英文名仅作对照。",
     },
     "zh-Hant": {
         "bilingual.toggle": "顯示原文對照",
@@ -5892,6 +6034,17 @@ BILINGUAL_I18N = {
         "bilingual.source.regulator": "監管機構",
         "bilingual.source.pharmacopoeia": "藥典",
         "bilingual.source.manual": "編輯整理",
+        "nav.menu": "選單",
+        "matrix.brand_note": "各國欄顯示當地註冊商品名，不是翻譯；中英文名僅作對照。",
+        "about.analytics": (
+            '<h2>訪問統計</h2><p class="sub">本站使用 '
+            '<a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> '
+            '做匿名訪問統計：不使用 cookie、不記錄個人資料、不用於廣告；只統計頁面瀏覽、來源'
+            '網站、國家/地區、瀏覽器與螢幕尺寸，以及站內搜尋詞和結果點擊，用於改進檢索品質。'
+            '搜尋詞（含無結果的查詢）僅以聚合事件名發送——只含正規化查詢文字，不與帳號、IP 或'
+            '裝置識別碼關聯。'
+            '詳見 <a href="https://www.goatcounter.com/privacy" target="_blank" '
+            'rel="noopener">GoatCounter 隱私政策</a>。</p>'),
     },
 }
 
@@ -6094,7 +6247,7 @@ ATC_CLASS_I18N = {
 CONSUMER_CATEGORIES = [
     {"id": "antihypertensives", "prefixes": ["C02", "C03", "C07", "C08", "C09"],
      "labels": {"en": "Blood-pressure medicines", "es": "Medicamentos para la presión arterial",
-                "zh": "降压药", "zh-Hant": "降壓藥"},
+                "zh": "降压药", "zh-Hant": "降血壓藥"},
      "desc": {"en": "ATC C02/C03/C07/C08/C09 — antihypertensives and related classes.",
               "es": "ATC C02/C03/C07/C08/C09 — antihipertensivos y clases relacionadas.",
               "zh": "ATC C02/C03/C07/C08/C09——降压及相关类别。",
@@ -6106,18 +6259,18 @@ CONSUMER_CATEGORIES = [
               "zh-Hant": "ATC J01——全身用抗菌藥。"}},
     {"id": "diabetes", "prefixes": ["A10"],
      "labels": {"en": "Diabetes medicines", "es": "Medicamentos para la diabetes",
-                "zh": "降糖药", "zh-Hant": "降糖藥"},
+                "zh": "降糖药", "zh-Hant": "降血糖藥"},
      "desc": {"en": "ATC A10 — drugs used in diabetes.",
               "es": "ATC A10 — fármacos para diabetes.", "zh": "ATC A10——糖尿病用药。",
               "zh-Hant": "ATC A10——糖尿病用藥。"}},
     {"id": "weight-loss", "prefixes": ["A08"],
      "labels": {"en": "Weight-loss medicines", "es": "Medicamentos para perder peso",
-                "zh": "减肥药", "zh-Hant": "減肥藥"},
+                "zh": "减肥药", "zh-Hant": "減重藥"},
      "desc": {"en": "ATC A08 — antiobesity preparations.", "es": "ATC A08 — antiobesidad.",
               "zh": "ATC A08——抗肥胖药。", "zh-Hant": "ATC A08——抗肥胖藥。"}},
     {"id": "cold-medicine", "prefixes": ["R05", "N02BE", "R06"],
      "labels": {"en": "Cold & cough medicines", "es": "Medicamentos para resfriado y tos",
-                "zh": "感冒药", "zh-Hant": "感冒藥"},
+                "zh": "感冒咳嗽药", "zh-Hant": "感冒咳嗽藥"},
      "desc": {"en": "ATC R05/N02BE/R06 — cough/cold preparations and antihistamines. Consumer "
                     "“cold medicine” is broader than one ATC class.",
               "es": "ATC R05/N02BE/R06 — tos/resfriado y antihistamínicos; el término popular es "
@@ -6145,8 +6298,8 @@ CONSUMER_CATEGORIES = [
               "zh-Hant": "ATC A02——抗酸、質子泵抑制劑、H2 受體拮抗劑等。"}},
     {"id": "anticoagulants", "prefixes": ["B01"],
      "labels": {"en": "Blood thinners / antithrombotics",
-                "es": "Anticoagulantes / antitrombóticos", "zh": "抗凝/抗血栓",
-                "zh-Hant": "抗凝/抗血栓"},
+                "es": "Anticoagulantes / antitrombóticos", "zh": "抗凝药",
+                "zh-Hant": "抗凝血藥"},
      "desc": {"en": "ATC B01 — antithrombotic agents. Not all are interchangeable.",
               "es": "ATC B01 — antitrombóticos; no todos son intercambiables.",
               "zh": "ATC B01——抗血栓药；彼此不都可互换。",
@@ -6159,23 +6312,23 @@ CONSUMER_CATEGORIES = [
               "zh-Hant": "ATC C10AA——HMG-CoA 還原酶抑制劑。"}},
     {"id": "beta-blockers", "prefixes": ["C07"],
      "labels": {"en": "Beta blockers", "es": "Betabloqueantes", "zh": "β受体阻滞剂",
-                "zh-Hant": "β受體阻滯劑"},
+                "zh-Hant": "β受體阻斷劑"},
      "desc": {"en": "ATC C07 — beta blocking agents.", "es": "ATC C07 — betabloqueantes.",
               "zh": "ATC C07——β受体阻滞剂。", "zh-Hant": "ATC C07——β受體阻滯劑。"}},
     {"id": "antidepressants", "prefixes": ["N06A"],
      "labels": {"en": "Antidepressants", "es": "Antidepresivos", "zh": "抗抑郁药",
-                "zh-Hant": "抗抑鬱藥"},
+                "zh-Hant": "抗憂鬱藥"},
      "desc": {"en": "ATC N06A — antidepressants.", "es": "ATC N06A — antidepresivos.",
               "zh": "ATC N06A——抗抑郁药。", "zh-Hant": "ATC N06A——抗抑鬱藥。"}},
     {"id": "asthma-copd", "prefixes": ["R03"],
      "labels": {"en": "Asthma / COPD inhalers", "es": "Inhaladores para asma / EPOC",
-                "zh": "哮喘/慢阻肺用药", "zh-Hant": "哮喘/慢阻肺用藥"},
+                "zh": "哮喘·慢阻肺吸入剂", "zh-Hant": "哮喘·慢阻肺吸入劑"},
      "desc": {"en": "ATC R03 — drugs for obstructive airway diseases.",
               "es": "ATC R03 — enfermedades obstructivas de las vías respiratorias.",
               "zh": "ATC R03——阻塞性气道疾病用药。", "zh-Hant": "ATC R03——阻塞性氣道疾病用藥。"}},
     {"id": "corticosteroids", "prefixes": ["H02"],
-     "labels": {"en": "Steroid hormones", "es": "Hormonas esteroideas", "zh": "激素/糖皮质激素",
-                "zh-Hant": "激素/糖皮質激素"},
+     "labels": {"en": "Steroid hormones", "es": "Hormonas esteroideas", "zh": "激素类",
+                "zh-Hant": "荷爾蒙類"},
      "desc": {"en": "ATC H02 — corticosteroids for systemic use.",
               "es": "ATC H02 — corticosteroides sistémicos.", "zh": "ATC H02——全身用糖皮质激素。",
               "zh-Hant": "ATC H02——全身用糖皮質激素。"}},
@@ -6249,29 +6402,39 @@ def _atc_groups(db: sqlite3.Connection) -> dict[int, dict[str, list[dict]]]:
     return groups
 
 
+def _sub_name_spans(en: str, zh: str, sid: str) -> str:
+    """v0.8.2 task-120：成分名紧凑多语标记（data-n-*；bilingual.js 按当前语言渲染，
+    中文优先；无中文名 → 英文 + 暂无中文名）。比四个 lang-block 更省体积。"""
+    entry = (BILINGUAL_TRANS.get("sub", {}) or {}).get(sid) or {}
+    es = ((entry.get("es") or {}).get("n") or "")
+    zhh = ((entry.get("zh-Hant") or {}).get("n") or "")
+    en_txt = en or sid or ""
+    return (f'<span class="nm" data-n-en="{esc(en_txt)}" data-n-zh="{esc(zh or "")}" '
+            f'data-n-zhh="{esc(zhh)}" data-n-es="{esc(es)}">{esc(en_txt)}</span>')
+
+
 def _atc_members_html(subs: list[dict], cap: int = ATC_MEMBER_CAP,
                       drug_sids: set[str] | None = None) -> str:
-    ordered = sorted(subs, key=lambda r: ((r.get("inn_zh") or r.get("inn_en") or "").lower(),
-                                          r.get("substance_id") or ""))
+    # 有中文名的排前（中文用户优先看到可读名），其余按 en；再按 sid 稳定
+    ordered = sorted(subs, key=lambda r: (
+        0 if (r.get("inn_zh") or "").strip() else 1,
+        (r.get("inn_zh") or r.get("inn_en") or "").lower(), r.get("substance_id") or ""))
     items = []
     for r in ordered[:cap]:
-        zh = r.get("inn_zh") or r.get("inn_en") or r.get("substance_id") or ""
+        zh = r.get("inn_zh") or ""
         en = r.get("inn_en") or ""
         sid = r["substance_id"]
-        disp = esc(en or zh)
-        # 只有存在默认译名的成分才挂双语标记；其余直接显示原名（避免页面体积膨胀）
-        attrs = (f' data-sub-ingredient="{esc(sid)}" data-sub-orig="{esc(en or zh)}"'
-                 if sid in TERMS_SUB_IDS else "")
+        name_html = _sub_name_spans(en, zh, sid)
         if drug_sids is None or sid in drug_sids:
-            label = f'<a href="../drug/{esc(sid)}.html"{attrs}>{disp}</a>'
+            label = f'<a href="../drug/{esc(sid)}.html">{name_html}</a>'
         else:
             # 有 ATC 但没有 product 的成分没有 drug 页 → 纯文本，避免 ../drug/ 404
-            label = f'<span class="brand-plain"{attrs}>{disp}</span>'
+            label = f'<span class="brand-plain">{name_html}</span>'
         items.append(f'<li>{label} <code>{esc(r["atc"])}</code></li>')
     more = ""
     if len(ordered) > cap:
         more = (f'<p class="sub" data-i18n="atc.more">and {len(ordered) - cap} more</p>')
-    return f'<ul class="sub atclist">{"".join(items)}</ul>{more}'
+    return f'<ul class="sub atclist atcmembers">{"".join(items)}</ul>{more}'
 
 
 def build_atc_pages(db: sqlite3.Connection) -> int:
@@ -6352,6 +6515,7 @@ def build_category_pages(db: sqlite3.Connection) -> int:
             for lang in ("en", "es", "zh", "zh-Hant"))
         body = f"""<p class="sub"><a href="../atc.html" data-i18n="cat.back">{esc(T["cat.back"])}</a></p>
 <h1>{display_title}</h1>
+<p class="sub cat-en">{esc(cat["labels"]["en"])}</p>
 {desc_blocks}
 <p class="sub" data-i18n="cat.disclaimer">{esc(T["cat.disclaimer"])}</p>
 <h2 data-i18n="cat.related_atc">{esc(T["cat.related_atc"])}</h2>
@@ -6382,7 +6546,8 @@ def build_atc_index() -> None:
         f'<span class="lang-block" data-lang-block="zh" data-lang-inline="1">'
         f'{esc(cat["labels"]["zh"])}</span>'
         f'<span class="lang-block" data-lang-block="zh-Hant" data-lang-inline="1">'
-        f'{esc(cat["labels"]["zh-Hant"])}</span></a>'
+        f'{esc(cat["labels"]["zh-Hant"])}</span>'
+        f'<span class="meta cat-en">{esc(cat["labels"]["en"])}</span></a>'
         for cat in CONSUMER_CATEGORIES)
     body = f"""<h1 data-i18n="atc.browse_title">{esc(T["atc.browse_title"])}</h1>
 <div data-i18n="atc.browse_intro">{esc(T["atc.browse_intro"])}</div>
@@ -6421,10 +6586,14 @@ def build_categories_json(db: sqlite3.Connection) -> None:
 
 
 def _home_cat_chips(lang: str, prefix: str) -> str:
+    """v0.8.2 task-114：chips 四语内联块（根页/副本都随 UI 语言切换，不再固定英文）。"""
+    langs = ("en", "es", "zh", "zh-Hant")
     parts = []
     for cat in CONSUMER_CATEGORIES:
-        label = cat["labels"].get(lang) or cat["labels"]["en"]
-        parts.append(f'<a class="catchip" href="{prefix}cat/{cat["id"]}.html">{esc(label)}</a>')
+        spans = "".join(
+            f'<span class="lang-block" data-lang-block="{l}" data-lang-inline="1">'
+            f'{esc(cat["labels"][l])}</span>' for l in langs)
+        parts.append(f'<a class="catchip" href="{prefix}cat/{cat["id"]}.html">{spans}</a>')
     return "".join(parts)
 
 
@@ -6857,6 +7026,8 @@ def main() -> None:
     document.querySelectorAll('.langs a').forEach(function(a){
       a.classList.toggle('on', a.dataset.lang === window.LANG);
     });
+    // v0.8.2 task-120：语言确定后再渲染 ATC/组合页成分名（避免 defer 早于 ?lang 解析）
+    if(window.renderBilingualNames) window.renderBilingualNames();
   }
   function langTarget(code){
     // v0.5.5/v0.6.2：有 /es/、/zh/、/zh-hant/ 静态副本的页面（首页/about/confused/
