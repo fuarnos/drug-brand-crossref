@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n-title="meta.about.title">關於 · 藥品商品名跨國定位</title><link rel="alternate" hreflang="en" href="https://fuarnos.github.io/drug-brand-crossref/about.html">
+<link rel="alternate" hreflang="es" href="https://fuarnos.github.io/drug-brand-crossref/es/about.html">
+<link rel="alternate" hreflang="zh" href="https://fuarnos.github.io/drug-brand-crossref/zh/about.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://fuarnos.github.io/drug-brand-crossref/zh-hant/about.html">
+<link rel="alternate" hreflang="x-default" href="https://fuarnos.github.io/drug-brand-crossref/about.html">
+<link rel="canonical" href="https://fuarnos.github.io/drug-brand-crossref/zh-hant/about.html">
+<meta name="description" content="本站如何工作：資料來源與覆蓋、許可與署名、已知缺口與編輯規則。僅供參考，不構成用藥建議。" data-i18n-meta="meta.about.desc">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Medicine Brand Cross-Reference">
+<meta property="og:title" content="關於 · 藥品商品名跨國定位" data-i18n-meta="meta.about.title">
+<meta property="og:description" content="本站如何工作：資料來源與覆蓋、許可與署名、已知缺口與編輯規則。僅供參考，不構成用藥建議。" data-i18n-meta="meta.about.desc">
+<meta property="og:url" content="https://fuarnos.github.io/drug-brand-crossref/zh-hant/about.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/style.css?v=1793214239">
+<script src="../assets/i18n.js?v=1793214239"></script>
+<script data-goatcounter="https://drug-brand-crossref.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="../index.html">Medicine Brand Cross-Reference
+    <span class="logo-zh">药品商品名跨国定位</span></a>
+  <nav><a href="../index.html" data-i18n="nav.search">Search</a>
+    <a href="../confused.html" data-i18n="nav.confused">Confused names</a>
+    <a href="../warn.html" data-i18n="nav.warn">Warnings</a>
+    <a href="../about.html" data-i18n="nav.about">About</a>
+    <a href="../whats-new.html" data-i18n="nav.whatsnew">What's new</a>
+    <a href="../glossary.html" data-i18n="nav.glossary">Glossary</a>
+    <span class="langs"><a data-lang="en" href="?lang=en">EN</a><a data-lang="es" href="?lang=es">ES</a><a data-lang="zh" href="?lang=zh">中文</a><a data-lang="zh-Hant" href="?lang=zh-Hant">繁</a></span></nav>
+</div></header>
+<main><div class="wrap"><h1 data-i18n="about.title">About</h1>
+<div data-i18n-html="about.lead"><p class="sub"><b>One job:</b> turn a brand name into the actual substance, and say how sure we are. The site is public, ad-free and non-commercial. Every answer is a candidate set, never a prescription.</p></div>
+<div data-i18n-html="about.rules"><h2>Three rules</h2><ol><li><b>A brand name is not a primary key.</b> Every query returns a set of candidates; identity is pinned by country × form × strength × active ingredient.</li><li><b>Collisions are derived, not annotated.</b> When one name hangs off different ingredients, the site flags “same name, different drug” automatically.</li><li><b>No dosing advice.</b> Identification and “not interchangeable” warnings only — no dose conversion, no substitution recommendations.</li></ol></div>
+<div data-i18n-html="about.nick"><h2>Nicknames and old names</h2><p>“Two frogs” (liǎng zhī qīngwā) is not a brand name and is never stored as one: it points to an ingredient, metformin. Nicknames are a separate, hand-maintained table — searchable, but deliberately kept out of the brand-name tables. When one matches, the page labels it (<i>internet nickname / older name</i>) and then lists that ingredient’s brands; it is never presented as a name printed on a pack. Every entry carries a source; “user-provided” is shown as <i>unverified</i> and is not promoted to <code>documented</code> until an independent source is attached. No source, no new entry.</p><ul class="sub"><li>57 nicknames are curated by hand in <code>data/seed_nicknames.py</code> and rebuilt — not scraped.</li><li>Nicknames never enter collision detection and never get a “same name” page: a nickname is not an identity, the ingredient is.</li></ul></div>
+<div data-i18n-html="about.terms"><h2>Folk names and class terms</h2><p>A separate table (<code>drug_term</code>, 1,062 entries) holds folk names and category terms for <b>legal medicines only</b>: water pill, blood thinner, sleeping pill (shuìqiányào), the pill, morning-after pill, statin. Unlike <code>nickname</code>, it may point to a class rather than one ingredient, so <code>substance_id</code> is nullable; <code>alias_all</code> unions both tables for search. <b>Drugs of abuse and recreational slang are explicitly out of scope</b> (street / recreational drug slang); such entries were removed from the database and are not re-added.</p><ul class="sub"><li><b>NIDA / DEA lists</b> are no longer used for recreational slang; only prescription-drug category terms that are legal medicines are kept, each with a source URL.</li><li><b>MedlinePlus (NLM)</b> contributes common folk/category terms (US Government work); community sources (CN/GB/AU/ES) are labelled <i>community name</i> and stay searchable. FDA tall-man pairs: 22 official pairs. <a href="../confused.html">See the list</a>.</li></ul></div>
+<div data-i18n-html="about.sources"><h2>Sources and coverage</h2><div class="tablewrap"><table><tr><th>Market</th><th>Products</th><th>Data as of</th></tr><tr><td>AU</td><td>11,890</td><td>2026-10-01 (PBS) + live (TGA CMI, ARTG)</td></tr><tr><td>CA</td><td>43,847</td><td>2026-10-23 (Health Canada DPD)</td></tr><tr><td>CN</td><td>146,347</td><td>2025-04-04 (NHSA)</td></tr><tr><td>ES</td><td>25,395</td><td>live (CIMA)</td></tr><tr><td>GB</td><td>61,051</td><td>2026-10-19 (dm+d)</td></tr><tr><td>MX</td><td>10,878</td><td>—</td></tr><tr><td>US</td><td>110,179</td><td>2026-10-23 (openFDA)</td></tr></table></div><p class="sub"><b>Data as of</b> = the date the source itself published / took effect / snapshotted, not our crawl date. <code>live</code> = a live directory with no single source date; <b>—</b> = annual lists only.</p><p class="sub"><b>US</b>: openFDA NDC Directory (US Government public data). <b>UK</b>: NHSBSA dm+d, Open Government Licence v3.0 — <i>Contains public sector information licensed under the Open Government Licence v3.0.</i> <b>Spain</b>: AEMPS CIMA — re-use allowed with express attribution and the date of last update; not an open licence (see licences below). <b>Mexico</b>: COFEPRIS registration lists (no stated open licence; factual fields with links) plus strength back-fill from datos.gob.mx procurement/price datasets, CC BY 4.0. <b>Australia</b>: PBS Schedule API (copyright notice retained) + TGA CMI directory + curated listed-OTC seeds — factual fields only, no full CMI/ARTG text. <b>Canada</b>: Health Canada DPD — non-commercial re-use with source acknowledgement. <b>China</b>: 国家医保局 医保药品分类与代码数据库 (2025-04-04 snapshot); no open redistribution licence was found, so only factual fields with links are stored.</p></div>
+
+<h2 id="licences">Data sources and licences 数据来源与许可 Fuentes y licencias</h2>
+<p class="sub"><b>EN</b>: This site is a non-commercial public reference. We store only factual
+fields (names, active ingredients, strengths, dosage forms, status) and link to the originals;
+we do not republish full labels, CMI/SmPC texts or data dumps. Source-specific terms and
+attribution are listed in the <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/%E8%AE%B8%E5%8F%AF%E6%B8%85%E5%8D%95.md">licence register</a>.
+<br><b>中文</b>：本站为非商业公开参考站，只存事实字段（名称、成分、规格、剂型、状态）并链回原文，
+不转载说明书 / CMI / SmPC 全文，也不提供原始数据批量下载。各来源许可与署名见
+<a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/%E8%AE%B8%E5%8F%AF%E6%B8%85%E5%8D%95.md">许可清单</a>。
+<br><b>ES</b>: Este sitio es una referencia pública sin ánimo de lucro. Solo almacenamos campos
+fácticos (nombres, principios activos, concentraciones, formas farmacéuticas, estado) y enlazamos
+al original; no reproducimos prospectos, textos CMI/SmPC ni volcados de datos. Las condiciones y
+atribuciones por fuente están en el <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/%E8%AE%B8%E5%8F%AF%E6%B8%85%E5%8D%95.md">registro de licencias</a>.</p>
+<ul class="sub">
+<li><b>China 中国 / China</b>: 医保药品分类与代码数据库由<b>国家医保局</b>公开；我们<b>未找到开放的再发布许可</b>，
+只存事实字段并链回原文，不再发布原始数据表。EN: the NHSA catalogue is public but we found
+<b>no open licence for redistribution</b>; factual fields only, with links, no bulk republication.
+ES: el catálogo de la NHSA es público, pero <b>no hemos encontrado una licencia abierta de
+redistribución</b>; solo campos fácticos y enlaces. 来源 Source: <a href="https://code.nhsa.gov.cn/yp/toPublicGoodsData.html">code.nhsa.gov.cn</a></li>
+<li><b>Spain 西班牙 / España</b>: © <b>AEMPS</b> — CIMA (Centro de Información online de
+Medicamentos). Reproduction of AEMPS website contents is authorised provided the source is
+expressly cited and the <b>date of last update</b> is mentioned (Aviso legal). This is not an open
+licence; we treat it as "conditional / pending confirmation". 中文：© AEMPS，引用须注明来源与文件最后更新日期，
+非开放许可，按「待确认」处理。ES: © AEMPS — se autoriza la reproducción citando expresamente la
+fuente y la fecha de última actualización (Aviso legal); no es una licencia abierta.
+<a href="https://www.aemps.gob.es/aviso-legal/">Aviso legal</a> · <a href="https://cima.aemps.es/cima/publico/home.html">CIMA</a></li>
+<li><b>Mexico 墨西哥 / México</b>: COFEPRIS registration lists published on gob.mx carry
+<b>no stated open licence</b> (status: pending confirmation); we store factual fields only and
+link to the source. Strengths were back-filled from <b>ISSSTE, PROFECO, HGMGG, INER, INPRFM and
+SEMAR</b> procurement/price datasets published on <b>datos.gob.mx</b>, licensed <b>CC BY 4.0</b>
+(attribution: Gobierno de México — datos.gob.mx, each dataset attributed to its publishing
+institution). 中文：COFEPRIS 清单未标注开放许可，按「待确认」只存事实 + 链接；规格回填数据来自
+datos.gob.mx 的 ISSSTE/PROFECO/HGMGG/INER/INPRFM/SEMAR 数据集（CC BY 4.0，署名发布机构）。
+ES: las listas de COFEPRIS no declaran licencia abierta (pendiente de confirmación); solo campos
+fácticos y enlaces. Los datos de concentración proceden de ISSSTE, PROFECO, HGMGG, INER, INPRFM y
+SEMAR en datos.gob.mx, con licencia CC BY 4.0.
+<a href="https://www.gob.mx/cofepris/documentos/registros-sanitarios-medicamentos">COFEPRIS</a> ·
+<a href="https://datos.gob.mx/">datos.gob.mx</a> ·
+<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+<li><b>Australia 澳洲 / Australia</b>: PBS Schedule data — <i>Copyright (c) 2024 Department of
+Health, Commonwealth of Australia.</i> (copyright notice retained; content not modified).
+TGA CMI repository and ARTG Public Summary entries — <b>© Commonwealth of Australia</b>; the TGA
+copyright notice permits personal/internal non-commercial use of unaltered material and does not
+permit re-transmission or redistribution without written permission, so we store <b>factual
+fields only</b> (trade name, active ingredients, ARTG ID, status) with links and publish no
+full-text CMI/ARTG content. 中文：PBS 保留版权声明且不修改内容；TGA CMI 与 ARTG 明细只取事实字段
+（商品名/成分/ARTG ID/状态）并链回原文，不转载 CMI 全文、不再分发原始材料。
+ES: datos PBS con aviso de copyright intacto y sin modificaciones; de TGA CMI y ARTG solo
+almacenamos campos fácticos con enlaces, sin reproducir textos completos.
+<a href="https://www.health.gov.au/using-our-websites/copyright">PBS copyright</a> ·
+<a href="https://www.tga.gov.au/copyright">TGA copyright</a></li>
+<li><b>Canada 加拿大 / Canadá</b>: Health Canada <b>Drug Product Database (DPD)</b> — re-use for
+non-commercial purposes with source acknowledgement: <i>© His Majesty the King in Right of Canada,
+as represented by the Minister of Health.</i> 中文：仅非商业再使用，须注明来源（加拿大卫生部）。
+ES: reutilización no comercial con mención de la fuente. Terms: <a href="https://health-products.canada.ca/dpd-bdpp/">DPD</a></li>
+<li><b>WHO INN / OMS</b>: Contains International Nonproprietary Names (INN) data from the
+<b>World Health Organization</b>. WHO INN lists are licensed <b>CC BY-NC-SA 3.0 IGO</b>
+(attribution + non-commercial + share-alike); this site is non-commercial, and any mapping table
+derived from WHO INN lists is shared under the same licence. WHO does not endorse this site.
+中文：含世界卫生组织 INN 数据；WHO INN 清单为 CC BY-NC-SA 3.0 IGO（署名 + 非商业 + 相同方式共享），
+基于该清单的派生映射表以同许可共享；WHO 未背书本站。
+ES: contiene datos de INN de la Organización Mundial de la Salud; las listas INN tienen licencia
+CC BY-NC-SA 3.0 IGO (atribución + no comercial + compartir igual); los mapeos derivados se
+comparten con la misma licencia. <a href="https://www.who.int/teams/health-product-and-policy-standards/inn">WHO INN</a> ·
+<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/igo/">CC BY-NC-SA 3.0 IGO</a></li>
+<li><b>ChEMBL</b>: ATC mapping derived from <b>ChEMBL (EMBL-EBI)</b>, licensed <b>CC BY-SA 4.0</b>;
+the derived ATC mapping table is available under the same licence. 中文：基于 ChEMBL 的 ATC 映射
+须署名 EMBL-EBI 并按 CC BY-SA 4.0 相同方式共享。ES: mapeo ATC derivado de ChEMBL (EMBL-EBI),
+licencia CC BY-SA 4.0; la tabla derivada se comparte con la misma licencia.
+<a href="https://chembl.gitbook.io/chembl-interface-documentation/downloads">ChEMBL</a> ·
+<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+<li><b>Other sources 其他来源</b>: openFDA (public domain / CC0), FDA tall-man list (US Government
+work), NIDA (US Government work), DEA (Public Domain Mark 1.0), MedlinePlus/NLM (US Government
+work), NHSBSA dm+d (Open Government Licence v3.0 — <i>Contains public sector information licensed
+under the Open Government Licence v3.0.</i>), Wikidata P267 (CC0 1.0). ISMP/ECRI LASA lists and
+WHOCC ATC/DDD index are copyrighted and are <b>not</b> reproduced. 中文：其余来源见许可清单；
+ISMP/ECRI 与 WHOCC ATC/DDD 有版权，未使用。ES: el resto de fuentes figura en el registro de
+licencias; las listas ISMP/ECRI y el índice WHOCC ATC/DDD no se reproducen.</li>
+</ul>
+<p class="sub"><b>Non-commercial notice 非商业声明</b>: this site is public, ad-free and offers no
+paid data service; if that changes, the NC/conditional sources above must be re-evaluated.
+本站公开、无广告、不提供付费数据服务；如未来商业化，上述标非商业/待确认的来源须重新评估。</p>
+
+<div data-i18n-html="about.samename"><h2>Why “same name, different drug” happens</h2><p class="sub">The same trademark is held by different companies in different markets, and the formula can differ completely. Verified examples: US <b>Tylenol</b> is single-ingredient acetaminophen 500 mg, while China <b>泰诺</b> is a four-ingredient cold medicine and the single-ingredient product is <b>泰诺林</b>; US <b>Benadryl</b> is diphenhydramine, UK <b>Benadryl</b> is acrivastine; US <b>Gaviscon</b> is an aluminium/magnesium antacid, UK Gaviscon is an alginate raft.</p></div>
+<div data-i18n-html="about.gaps"><h2>Known gaps</h2><ul class="sub"><li>China has 146,344 chemical-drug registrations, but ~9% resolve only to a China-only substance (no English INN yet), and China’s ATC is stored at level 4. Traditional Chinese medicines (TCM) are not loaded.</li><li>Strength equivalence stops at level D1 (same salt form); salt–base conversion (D2) and bioavailability judgement (D3) are not implemented.</li><li>Mexico has no strength column in the regulator’s lists; only 29% of products could be back-filled from public catalogues.</li><li>Canada’s DPD has no pack size or price, and many OTC consumer packs were authorised before the DPD’s electronic era, so a shelf product can be missing.</li><li><b>ATC coverage — two denominators:</b> 47.6% of all substances (6,021 / 12,649) and 67.4% of drug entities (inn_drug, 5,702 / 8,459). The gap is mostly non-drug entities (homeopathic, herbal, food, material), not missing data. ATC data comes from Wikidata P267 (CC0) and ChEMBL (CC BY-SA 4.0); WHOCC’s ATC/DDD index needs a licence and is not used.</li></ul></div>
+<div data-i18n-html="about.analytics"><h2>Analytics</h2><p class="sub">This site uses <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> for anonymous, cookie-free analytics. No personal data is stored and it is not used for advertising. We only see page views, referring sites, country/region, browser and screen size, plus on-site search terms and result clicks, to improve search quality. See the <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter privacy policy</a>.</p></div>
+<div data-i18n-html="about.stats"><p class="sub">Stats: 409,587 products · 12,649 substances · 135,251 name keys · 1,119 aliases (57 hand-curated nicknames, 1,062 folk/class terms) · 22 FDA confused pairs · 15,495 names flagged “same name, different drug”.</p></div></div></main>
+<footer><div class="wrap">
+  <span data-i18n="footer">Information only — not medical advice, and no substitute for a pharmacist.</span>
+  <span class="foot-links">
+    <a href="../whats-new.html">v0.6.5 · 2026-10-29</a>
+    <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml"
+       target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
+    <a href="https://github.com/fuarnos/drug-brand-crossref/issues" target="_blank" rel="noopener"
+       data-i18n="report.all">Known issues</a>
+  </span>
+</div></footer>
+</body></html>

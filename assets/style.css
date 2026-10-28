@@ -1,0 +1,242 @@
+
+:root{--bg:#fbfbf9;--fg:#1f2328;--muted:#646b73;--line:#e3e1da;--card:#fff;
+--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
+display:flex;flex-direction:column;
+font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#fff}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font-weight:700;font-size:16px;color:var(--fg)}
+.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+/* v0.6.5：logo 中文副标题只在简体中文界面显示（en/es/zh-Hant 隐藏，移动端仍隐藏） */
+html:not([lang="zh"]) .logo-zh{display:none}
+.langs{margin-left:6px;font-size:13px}
+.langs a{color:var(--muted);padding:1px 5px;border-radius:5px}
+.langs a.on{background:var(--accent);color:#fff}
+nav{display:flex;gap:14px;font-size:14px}
+main{padding:28px 0 60px;flex:1}
+h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:28px 0 10px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+#q{width:100%;padding:14px 16px;font-size:17px;border:1px solid var(--line);
+border-radius:10px;background:#fff}
+.row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+select,button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+background:#fff;font-size:14px}
+button{cursor:pointer;background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 4px;font-size:16px}
+.card .meta{color:var(--muted);font-size:13px}
+.tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;
+border:1px solid var(--line);margin-left:6px;color:var(--muted)}
+.tag.cn{color:#8a4b00;border-color:#e8c9a6}
+.tag.gb{color:#1f4f8a;border-color:#b9cde6}
+.tag.us{color:#0b6b53;border-color:#a9d3c5}
+.tag.es{color:#8a2c1f;border-color:#e6bdb4}
+.tag.au{color:#6b3b0b;border-color:#e0c9a6}
+.tag.combo{color:#7a3b1f;border-color:#e6c3b3}
+.tag.ca{color:#7a1420;border-color:#e7c3c7}
+.tag.mx{color:#4b5b0b;border-color:#cdd6a6}
+.tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
+margin-left:8px}
+.badge.sev{background:var(--sevbg);color:var(--sev);border:1px solid #f0c4c4}
+.badge.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4}
+.notice{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;
+padding:12px 14px;font-size:14px;margin:14px 0}
+.notice.nick{background:#f1f8f4;border-color:#cfe6da}
+.notice.nick .nick-head{font-size:15px}
+.notice.nick .nick-head b{font-size:17px}
+.notice.nick .sub{margin:6px 0 0}
+.notice.nick .sub a{white-space:nowrap}
+.notice.nick .sub.src{font-size:12px;margin-top:4px}
+.notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:13px}
+table.res{margin-top:12px;background:#fff;border:1px solid var(--line);
+border-radius:12px;overflow:hidden}
+table.res th{background:#faf9f6;font-size:12px;letter-spacing:.02em}
+table.res td{vertical-align:top}
+table.res tbody tr:hover{background:#fcfcfa}
+.c-ing{font-weight:600;width:26%}
+.c-dose{width:14%;white-space:nowrap;font-variant-numeric:tabular-nums}
+.c-brand{width:38%}
+.c-mah{width:22%;color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
+padding:18px 0 40px;background:#fff}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline}
+.foot-links{margin-left:auto;display:flex;gap:14px;white-space:nowrap}
+.foot-links a{color:var(--accent)}
+.report-line{margin-top:14px}
+kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
+.empty{color:var(--muted);padding:20px 0}
+.release{border-top:1px solid var(--line);padding:18px 0 6px;margin-top:18px}
+.release:first-of-type{border-top:0;margin-top:0;padding-top:4px}
+.release h2{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin:0 0 8px}
+.release .rel-date{font-size:13px;font-weight:400;color:var(--muted)}
+.release table{font-size:13px}
+.release ul{margin:6px 0 12px;padding-left:22px}
+.release li{margin:4px 0}
+.release-pending{color:var(--warn);font-size:13px;margin:6px 0 0}
+/* ── UI P0：解析条 / 自动完成 / 分组折叠 / 加载更多 / 国家提示 ── */
+.sel-label{color:var(--muted);font-size:14px;margin-right:2px}
+.searchwrap{position:relative}
+#ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
+background:#fff;border:1px solid var(--line);border-radius:12px;
+box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
+#ac.open{display:block}
+.ac-item{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+padding:9px 12px;cursor:pointer;font-size:14px;border-bottom:1px solid #f1efe9}
+.ac-item:last-child{border-bottom:0}
+.ac-item.on{background:#f1f8f4}
+.ac-name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ac-meta{color:var(--muted);font-size:12px;white-space:nowrap;flex:none}
+.parsebar{display:flex;flex-wrap:wrap;gap:6px 16px;background:#f4f6f4;
+border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;margin:14px 0}
+.parsebar b{color:var(--muted);font-weight:600;margin-right:4px}
+.parsebar .pmatch{color:var(--accent)}
+.grp-name{font-weight:600}
+.grp-count{color:var(--muted);font-size:12px;font-weight:400;margin-left:6px}
+.grp-tags{text-align:right}
+.linkbtn{background:none;border:0;color:var(--accent);padding:2px 0;cursor:pointer;
+font-size:13px;text-decoration:underline}
+.fold-row td{padding:2px 8px 8px}
+.loadmore{text-align:center;margin:10px 0 0}
+.loadmore button{padding:8px 16px;font-size:14px}
+.countrymiss .cm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.countrymiss .cm-actions a,.countrymiss .cm-actions button{font-size:14px}
+/* v0.5.6：A1 详情 / A3 盐型释放上下文 / B6 行级报告 / B7 导出工具条 */
+.ctxwrap{margin-left:4px}
+.ctx{display:inline-block;font-size:12px;line-height:1.5;padding:1px 7px;border-radius:999px;
+ border:1px solid var(--line);color:var(--muted);margin:1px 4px 1px 0;white-space:nowrap}
+.ctx.warn{color:var(--warn);border-color:#f0d3c4;background:#fff6e8}
+a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
+.rowreport{display:inline-block;margin-left:6px;font-size:13px;color:var(--muted);text-decoration:none}
+.rowreport:hover{color:var(--warn);text-decoration:none}
+.detbtn{margin-left:6px;font-size:12px}
+.restools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
+.restools .exportnote{color:var(--muted);font-size:12px}
+table.det{margin:4px 0 8px;font-size:13px;background:#faf9f6;border:1px solid var(--line);
+ border-radius:8px;overflow:hidden}
+table.det th{background:#f4f2ec;font-size:11px}
+table.det td{padding:5px 8px;vertical-align:top}
+tr.detrow>td.detcell{padding:4px 8px 10px;background:#faf9f6}
+tr.detrow table.det{margin:0}
+/* v0.6.3 U1：首屏 3 步引导（可关闭；head 内联脚本先置 html.u1-off 防 CLS） */
+.u1guide{border:1px solid var(--line);border-radius:12px;background:#fff;
+ padding:14px 16px;margin:14px 0 6px}
+.u1head{display:flex;align-items:baseline;gap:10px}
+.u1head h2{margin:0;font-size:16px}
+.u1close{margin-left:auto;background:none;border:0;color:var(--muted);font-size:20px;
+ line-height:1;padding:6px 8px;min-width:36px;min-height:36px;cursor:pointer}
+.u1close:hover{color:var(--fg)}
+.u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 0;
+ padding:0;list-style:none}
+.u1step{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#faf9f6}
+.u1step b{font-size:14px}
+.u1step .sub{margin:4px 0 0;font-size:13px}
+.u1try{margin-top:6px;font-size:12px;color:var(--muted)}
+.u1try button{padding:3px 8px;font-size:12px;margin:2px 4px 2px 0;border-radius:8px}
+html.u1-off #u1guide{display:none!important}
+/* v0.6.3 U2：结果顶部各国叫法横排（单成分唯一锚定时才渲染） */
+.u2bar{border:1px solid var(--line);border-radius:12px;background:#fff;
+ padding:10px 12px;margin:12px 0}
+.u2head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.u2head b{font-size:14px}
+.u2head .sub{margin:0;font-size:12px}
+.u2chips{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+ margin-top:8px;padding-bottom:2px}
+.u2chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:1px;
+ background:#faf9f6;border:1px solid var(--line);color:var(--fg);border-radius:10px;
+ padding:6px 10px;font-size:12px;cursor:pointer;text-align:left;min-width:0;max-width:220px}
+.u2chip:hover{border-color:var(--accent)}
+.u2chip.on{border-color:var(--accent);background:#f1f8f4}
+.u2chip .u2c{font-weight:600;color:var(--muted);font-size:11px}
+.u2chip .u2n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.u2chip .u2n.empty{color:var(--muted);font-style:italic}
+@media (max-width:719px){
+  .u1steps{grid-template-columns:1fr}
+  .u1close{min-width:44px;min-height:44px}
+  .u2chip{max-width:70vw}
+}
+@media (max-width:719px){
+  .wrap{padding:0 14px}
+  header .wrap{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px 12px}
+  .logo{font-size:15px}
+  .logo-zh{display:none}
+  nav{flex-wrap:wrap;gap:8px 12px;font-size:13px}
+  .langs{margin-left:auto}
+  #q{font-size:16px;padding:12px 14px}
+  .row{gap:8px}
+  .sel-label{display:block;width:100%;margin:2px 0 0}
+  .parsebar{gap:4px 12px;font-size:12px}
+  .card{padding:12px}
+  footer .wrap{display:block}
+  .foot-links{margin:8px 0 0;display:flex;flex-wrap:wrap;white-space:normal;gap:8px 14px}
+  /* 结果表 → 卡片（ARTG / 同成分表一并生效，靠 data-label 带出列名） */
+  table.res{display:block;border:0;border-radius:0;background:transparent;margin-top:8px}
+  table.res thead{display:none}
+  table.res tbody{display:block}
+  table.res tr{display:block;background:#fff;border:1px solid var(--line);
+    border-radius:12px;margin:8px 0;padding:8px 12px}
+  table.res td{display:block;border:0;padding:2px 0;width:auto}
+  table.res td.c-dose{white-space:normal}
+  table.res td.c-empty{display:none}
+  table.res td[data-label]:before{content:attr(data-label) " · ";color:var(--muted);font-size:12px}
+  table.res tr.grp{background:#f7f8f5;border-color:#e7e5dc;padding:8px 12px}
+  table.res tr.grp td{display:block;width:auto}
+  table.res tr.grp .grp-tags{text-align:left;margin-top:2px}
+  table.res tr.fold-row{background:transparent;border:0;padding:0;margin:0}
+  table.res tr.fold-row td{padding:0 0 4px}
+  table.res tr.detrow{background:#faf9f6;border-color:#e7e5dc;padding:4px 8px}
+  table.res tr.detrow>td.detcell{display:block;padding:0}
+  table.det{display:block;overflow-x:auto;white-space:nowrap}
+  .restools{margin-top:8px}
+  table.res tbody tr:hover{background:#fff}
+  .loadmore button{width:100%}
+}
+/* i18n P1：静态页（About / What's new / Confused）移动端收尾 */
+@media (max-width:719px){
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  main table:not(.res){font-size:13px}
+  .release table{display:block;overflow-x:auto}
+  .release ul,.release li,p,li{overflow-wrap:anywhere}
+}
+/* /warn 页：数据行按语言只显示一块（无 JS 时默认英文） */
+.lang-block{display:none}
+.lang-block[data-lang-block="en"]{display:block}
+/* v0.5.3：品牌无页 → 不可点文本（不是链接，禁止回退 drug 页） */
+.brand-plain{font-weight:600;color:var(--fg)}
+/* v0.6.0：组合页跨市场同组合区块 */
+.xlist{margin:6px 0 0;padding-left:18px;font-size:14px}
+.xlist li{margin:3px 0}
+.xlist .x-mkt{font-weight:600;color:var(--fg)}
+/* v0.6.4 B10：术语表 */
+dl.glossary{margin:10px 0;border-top:1px solid var(--line)}
+dl.glossary dt{font-weight:650;margin:10px 0 2px}
+dl.glossary dd{margin:0 0 4px;color:var(--muted)}
+.atcbar code{font-size:13px}
+/* v0.5.4：厂家列（可点厂家 + 「+N」展开列表） */
+.maker-link{color:var(--accent)}
+.maker-plain{color:var(--fg)}
+.mah-toggle{font-size:12px;margin-left:4px;padding:0;text-decoration:underline}
+.mah-list{margin:6px 0 0;padding-left:18px;font-size:13px}
+.mah-list[hidden]{display:none}
+.mah-list li{margin:2px 0}
+.maker-page table.res{margin-top:6px}
+.grp-name{font-weight:600}
+a.grp-name{color:var(--accent)}
+.warn-item{border:1px solid var(--line);border-radius:12px;background:#fff;
+  padding:12px 14px;margin:10px 0}
+.warn-item h3{margin:0 0 6px;font-size:16px;line-height:1.45}
+.warn-item .warn-body{margin:0 0 8px}
+.warn-item .warn-meta{color:var(--muted);font-size:13px;margin:0;overflow-wrap:anywhere}
+.warn-item .badge{vertical-align:2px}
+.drugwarn ul{margin:6px 0 4px;padding-left:20px}
+@media (max-width:719px){
+  .warn-item .warn-meta{font-size:12px}
+}
