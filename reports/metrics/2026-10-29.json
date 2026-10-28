@@ -1,28 +1,28 @@
 {
  "schema": 1,
  "date": "2026-10-29",
- "generated_at": "2026-10-28T13:17:54-07:00",
- "elapsed_s": 25.62,
+ "generated_at": "2026-10-28T16:07:30-07:00",
+ "elapsed_s": 24.22,
  "sources": {
   "db": {
    "path": "data\\drugs.db",
-   "bytes": 351391744,
-   "mtime": "2026-10-28T12:08:31"
+   "bytes": 364195840,
+   "mtime": "2026-10-28T13:35:13"
   },
   "dist": {
    "path": "site\\dist",
-   "files": 60375,
-   "newest_mtime": "2026-10-28T13:03:56"
+   "files": 62217,
+   "newest_mtime": "2026-10-28T15:56:14"
   }
  },
  "metrics": {
   "totals": {
-   "products": 426044,
-   "components": 527166,
+   "products": 431555,
+   "components": 534246,
    "substances": 12649,
-   "variants": 13772,
-   "name_keys": 165619,
-   "names": 601806,
+   "variants": 14249,
+   "name_keys": 168943,
+   "names": 607317,
    "aliases": 1119,
    "nicknames": 57,
    "drug_terms": 1062,
@@ -73,6 +73,13 @@
     "strength_pct": 35.23,
     "variants": 1970
    },
+   "SG": {
+    "products": 5511,
+    "active_products": 5511,
+    "products_with_strength": 5038,
+    "strength_pct": 91.42,
+    "variants": 1672
+   },
    "TW": {
     "products": 16457,
     "active_products": 16457,
@@ -94,10 +101,10 @@
    "coverage_pct": 47.6
   },
   "collisions": {
-   "info": 137739,
-   "warning": 819,
-   "severe": 18917,
-   "total": 157475
+   "info": 140557,
+   "warning": 820,
+   "severe": 19386,
+   "total": 160763
   },
   "alias_confidence": {
    "community": 642,
@@ -115,46 +122,46 @@
    "failed": 0
   },
   "pages": {
-   "total_files": 60375,
-   "html_total": 60220,
-   "drug_pages": 12246,
-   "name_pages": 30383,
-   "total_bytes": 436297181,
-   "sitemap_urls": 60219
+   "total_files": 62217,
+   "html_total": 62058,
+   "drug_pages": 12447,
+   "name_pages": 31134,
+   "total_bytes": 472530221,
+   "sitemap_urls": 62057
   },
   "sizes": {
    "index_html": {
-    "raw": 7745,
-    "gz": 2544
+    "raw": 14835,
+    "gz": 3594
    },
    "app_js": {
-    "raw": 109723,
-    "gz": 41766
+    "raw": 115329,
+    "gz": 43458
    },
    "i18n_js": {
-    "raw": 118909,
-    "gz": 35635
+    "raw": 134139,
+    "gz": 42607
    },
    "style_css": {
-    "raw": 14935,
-    "gz": 4554
+    "raw": 20142,
+    "gz": 5780
    },
    "aliases": {
-    "raw": 878087,
-    "gz": 91306
+    "raw": 884709,
+    "gz": 91648
    },
    "confused": {
     "raw": 3660,
     "gz": 1147
    },
-   "first_screen_gz": 84499,
-   "first_search_gz": 251369,
-   "manifest_gz": 8793,
-   "shard_median_gz": 150123,
-   "shard_count": 92,
-   "core_gz": 7557132,
+   "first_screen_gz": 95439,
+   "first_search_gz": 248531,
+   "manifest_gz": 8955,
+   "shard_median_gz": 146781,
+   "shard_count": 93,
+   "core_gz": 7602232,
    "index_gz": 0,
-   "core_raw": 32220611,
+   "core_raw": 32499063,
    "index_raw": 0
   }
  },
@@ -164,15 +171,15 @@
   "deltas": {
    "totals.products": {
     "prev": 409587,
-    "cur": 426044,
-    "delta": 16457,
-    "pct": 4.02
+    "cur": 431555,
+    "delta": 21968,
+    "pct": 5.36
    },
    "totals.components": {
     "prev": 498445,
-    "cur": 527166,
-    "delta": 28721,
-    "pct": 5.76
+    "cur": 534246,
+    "delta": 35801,
+    "pct": 7.18
    },
    "totals.substances": {
     "prev": 12790,
@@ -182,21 +189,21 @@
    },
    "totals.variants": {
     "prev": 13886,
-    "cur": 13772,
-    "delta": -114,
-    "pct": -0.82
+    "cur": 14249,
+    "delta": 363,
+    "pct": 2.61
    },
    "totals.name_keys": {
     "prev": 135251,
-    "cur": 165619,
-    "delta": 30368,
-    "pct": 22.45
+    "cur": 168943,
+    "delta": 33692,
+    "pct": 24.91
    },
    "totals.names": {
     "prev": 568907,
-    "cur": 601806,
-    "delta": 32899,
-    "pct": 5.78
+    "cur": 607317,
+    "delta": 38410,
+    "pct": 6.75
    },
    "totals.aliases": {
     "prev": 1119,
@@ -464,27 +471,27 @@
    },
    "collisions.info": {
     "prev": 110779,
-    "cur": 137739,
-    "delta": 26960,
-    "pct": 24.34
+    "cur": 140557,
+    "delta": 29778,
+    "pct": 26.88
    },
    "collisions.warning": {
     "prev": 810,
-    "cur": 819,
-    "delta": 9,
-    "pct": 1.11
+    "cur": 820,
+    "delta": 10,
+    "pct": 1.23
    },
    "collisions.severe": {
     "prev": 15509,
-    "cur": 18917,
-    "delta": 3408,
-    "pct": 21.97
+    "cur": 19386,
+    "delta": 3877,
+    "pct": 25.0
    },
    "collisions.total": {
     "prev": 127098,
-    "cur": 157475,
-    "delta": 30377,
-    "pct": 23.9
+    "cur": 160763,
+    "delta": 33665,
+    "pct": 26.49
    },
    "alias_confidence.community": {
     "prev": 642,
@@ -536,99 +543,99 @@
    },
    "pages.total_files": {
     "prev": 30336,
-    "cur": 60375,
-    "delta": 30039,
-    "pct": 99.02
+    "cur": 62217,
+    "delta": 31881,
+    "pct": 105.09
    },
    "pages.html_total": {
     "prev": 30255,
-    "cur": 60220,
-    "delta": 29965,
-    "pct": 99.04
+    "cur": 62058,
+    "delta": 31803,
+    "pct": 105.12
    },
    "pages.drug_pages": {
     "prev": 12377,
-    "cur": 12246,
-    "delta": -131,
-    "pct": -1.06
+    "cur": 12447,
+    "delta": 70,
+    "pct": 0.57
    },
    "pages.name_pages": {
     "prev": 17870,
-    "cur": 30383,
-    "delta": 12513,
-    "pct": 70.02
+    "cur": 31134,
+    "delta": 13264,
+    "pct": 74.22
    },
    "pages.total_bytes": {
     "prev": 197807300,
-    "cur": 436297181,
-    "delta": 238489881,
-    "pct": 120.57
+    "cur": 472530221,
+    "delta": 274722921,
+    "pct": 138.88
    },
    "pages.sitemap_urls": {
     "prev": 30254,
-    "cur": 60219,
-    "delta": 29965,
-    "pct": 99.04
+    "cur": 62057,
+    "delta": 31803,
+    "pct": 105.12
    },
    "sizes.index_html.raw": {
     "prev": 4508,
-    "cur": 7745,
-    "delta": 3237,
-    "pct": 71.81
+    "cur": 14835,
+    "delta": 10327,
+    "pct": 229.08
    },
    "sizes.index_html.gz": {
     "prev": 1735,
-    "cur": 2544,
-    "delta": 809,
-    "pct": 46.63
+    "cur": 3594,
+    "delta": 1859,
+    "pct": 107.15
    },
    "sizes.app_js.raw": {
     "prev": 52195,
-    "cur": 109723,
-    "delta": 57528,
-    "pct": 110.22
+    "cur": 115329,
+    "delta": 63134,
+    "pct": 120.96
    },
    "sizes.app_js.gz": {
     "prev": 17926,
-    "cur": 41766,
-    "delta": 23840,
-    "pct": 132.99
+    "cur": 43458,
+    "delta": 25532,
+    "pct": 142.43
    },
    "sizes.i18n_js.raw": {
     "prev": 56119,
-    "cur": 118909,
-    "delta": 62790,
-    "pct": 111.89
+    "cur": 134139,
+    "delta": 78020,
+    "pct": 139.03
    },
    "sizes.i18n_js.gz": {
     "prev": 19968,
-    "cur": 35635,
-    "delta": 15667,
-    "pct": 78.46
+    "cur": 42607,
+    "delta": 22639,
+    "pct": 113.38
    },
    "sizes.style_css.raw": {
     "prev": 8698,
-    "cur": 14935,
-    "delta": 6237,
-    "pct": 71.71
+    "cur": 20142,
+    "delta": 11444,
+    "pct": 131.57
    },
    "sizes.style_css.gz": {
     "prev": 2795,
-    "cur": 4554,
-    "delta": 1759,
-    "pct": 62.93
+    "cur": 5780,
+    "delta": 2985,
+    "pct": 106.8
    },
    "sizes.aliases.raw": {
     "prev": 869321,
-    "cur": 878087,
-    "delta": 8766,
-    "pct": 1.01
+    "cur": 884709,
+    "delta": 15388,
+    "pct": 1.77
    },
    "sizes.aliases.gz": {
     "prev": 90883,
-    "cur": 91306,
-    "delta": 423,
-    "pct": 0.47
+    "cur": 91648,
+    "delta": 765,
+    "pct": 0.84
    },
    "sizes.confused.raw": {
     "prev": 3575,
@@ -644,39 +651,39 @@
    },
    "sizes.first_screen_gz": {
     "prev": 42424,
-    "cur": 84499,
-    "delta": 42075,
-    "pct": 99.18
+    "cur": 95439,
+    "delta": 53015,
+    "pct": 124.96
    },
    "sizes.first_search_gz": {
     "prev": 146417,
-    "cur": 251369,
-    "delta": 104952,
-    "pct": 71.68
+    "cur": 248531,
+    "delta": 102114,
+    "pct": 69.74
    },
    "sizes.manifest_gz": {
     "prev": 6112,
-    "cur": 8793,
-    "delta": 2681,
-    "pct": 43.86
+    "cur": 8955,
+    "delta": 2843,
+    "pct": 46.52
    },
    "sizes.shard_median_gz": {
     "prev": 48541,
-    "cur": 150123,
-    "delta": 101582,
-    "pct": 209.27
+    "cur": 146781,
+    "delta": 98240,
+    "pct": 202.39
    },
    "sizes.shard_count": {
     "prev": 68,
-    "cur": 92,
-    "delta": 24,
-    "pct": 35.29
+    "cur": 93,
+    "delta": 25,
+    "pct": 36.76
    },
    "sizes.core_gz": {
     "prev": 3693220,
-    "cur": 7557132,
-    "delta": 3863912,
-    "pct": 104.62
+    "cur": 7602232,
+    "delta": 3909012,
+    "pct": 105.84
    },
    "sizes.index_gz": {
     "prev": 5833687,
@@ -686,9 +693,9 @@
    },
    "sizes.core_raw": {
     "prev": 15326396,
-    "cur": 32220611,
-    "delta": 16894215,
-    "pct": 110.23
+    "cur": 32499063,
+    "delta": 17172667,
+    "pct": 112.05
    },
    "sizes.index_raw": {
     "prev": 34906944,
@@ -721,21 +728,10 @@
    "kind": "change_pct",
    "threshold": 5.0,
    "prev": 15509,
-   "cur": 18917,
-   "delta": 3408,
-   "pct": 21.97,
-   "message": "severe 碰撞数变化: 15509 → 18917（+21.97%，阈值 5.0%）"
-  },
-  {
-   "metric": "pages.drug_pages",
-   "label": "成分页数下降",
-   "kind": "drop_pct",
-   "threshold": 1.0,
-   "prev": 12377,
-   "cur": 12246,
-   "delta": -131,
-   "pct": -1.06,
-   "message": "成分页数下降: 12377 → 12246（-1.06%，阈值 1.0%）"
+   "cur": 19386,
+   "delta": 3877,
+   "pct": 25.0,
+   "message": "severe 碰撞数变化: 15509 → 19386（+25.00%，阈值 5.0%）"
   },
   {
    "metric": "sizes.first_search_gz",
@@ -743,10 +739,10 @@
    "kind": "rise_pct",
    "threshold": 5.0,
    "prev": 146417,
-   "cur": 251369,
-   "delta": 104952,
-   "pct": 71.68,
-   "message": "首搜体积（gzip）增加: 146417 → 251369（+71.68%，阈值 5.0%）"
+   "cur": 248531,
+   "delta": 102114,
+   "pct": 69.74,
+   "message": "首搜体积（gzip）增加: 146417 → 248531（+69.74%，阈值 5.0%）"
   },
   {
    "metric": "sizes.first_screen_gz",
@@ -754,10 +750,10 @@
    "kind": "rise_pct",
    "threshold": 10.0,
    "prev": 42424,
-   "cur": 84499,
-   "delta": 42075,
-   "pct": 99.18,
-   "message": "首屏体积（gzip）增加: 42424 → 84499（+99.18%，阈值 10.0%）"
+   "cur": 95439,
+   "delta": 53015,
+   "pct": 124.96,
+   "message": "首屏体积（gzip）增加: 42424 → 95439（+124.96%，阈值 10.0%）"
   },
   {
    "metric": "sizes.core_gz",
@@ -765,10 +761,10 @@
    "kind": "rise_pct",
    "threshold": 5.0,
    "prev": 3693220,
-   "cur": 7557132,
-   "delta": 3863912,
-   "pct": 104.62,
-   "message": "索引核心 core.json 体积增加: 3693220 → 7557132（+104.62%，阈值 5.0%）"
+   "cur": 7602232,
+   "delta": 3909012,
+   "pct": 105.84,
+   "message": "索引核心 core.json 体积增加: 3693220 → 7602232（+105.84%，阈值 5.0%）"
   }
  ],
  "ok": true
