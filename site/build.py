@@ -1571,7 +1571,8 @@ def _merge_static_i18n(values: dict) -> None:
     for lang in ("en", "es", "zh"):
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
                        MAKER_I18N[lang], META_I18N[lang], GLOSSARY_I18N[lang],
-                       ATC_I18N[lang], BILINGUAL_I18N[lang], LABEL_I18N[lang], UI_I18N[lang]):
+                       ATC_I18N[lang], BILINGUAL_I18N[lang], FILTER_I18N[lang],
+                       LABEL_I18N[lang], UI_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1600,7 +1601,7 @@ def _install_zh_hant(values: dict) -> None:
     # v0.6.3：U1/U2/U3 新 key 的 zh-Hant 值直接来自 build.py（不依赖 JSON 是否已补齐），
     # 避免新 key 回落到简体中文。
     for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"],
-                  ATC_I18N["zh-Hant"], BILINGUAL_I18N["zh-Hant"]):
+                  ATC_I18N["zh-Hant"], BILINGUAL_I18N["zh-Hant"], FILTER_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
@@ -2400,6 +2401,30 @@ table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
 table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
 .m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
 .matrix-brand-note{margin:6px 0 0;font-size:12px}
+/* v0.8.3 task-119：矩阵筛选器 */
+.matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;padding:10px 12px}
+.mf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mf-title{font-weight:600;font-size:14px}
+.mf-count{color:var(--muted);font-size:13px}
+.mf-toggle{margin-left:auto}
+.mf-panel{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:8px 14px;margin-top:10px}
+.mf-field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+.mf-field select,.mf-field input[type=search]{padding:6px 8px;border:1px solid var(--line);
+  border-radius:8px;font-size:13px;background:#fff;color:var(--fg)}
+.mf-countries{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--fg)}
+.mf-countries label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.mf-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
+  padding:6px 12px;font-size:13px;cursor:pointer}
+.matrix-sort-note{margin:4px 0 0;font-size:12px}
+@media (max-width:767px){
+  .matrix-filters .mf-panel{display:none}
+  .matrix-filters.mf-open .mf-panel{display:grid}
+  .mf-toggle{display:inline-flex;min-height:40px;align-items:center}
+  .mf-field select,.mf-field input[type=search]{min-height:40px}
+  .mf-countries label{min-height:36px}
+}
 @media (max-width:719px){
   table.matrix{min-width:840px}
   .matwrap{margin:8px 0}
@@ -4318,9 +4343,151 @@ BILINGUAL_JS = r"""
       b.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
+  function initMatrixFilters(){
+    document.querySelectorAll('.matwrap table.matrix').forEach(function(table){
+      if(table.getAttribute('data-mf-init')) return;
+      table.setAttribute('data-mf-init', '1');
+      var wrap = table.closest('.matwrap');
+      if(!wrap) return;
+      var ths = Array.from(table.querySelectorAll('thead th[data-country]'));
+      var rows = Array.from(table.querySelectorAll('tbody tr'));
+      var countries = ths.map(function(th){ return th.getAttribute('data-country'); });
+      var forms = {}, releases = {};
+      rows.forEach(function(tr){
+        var f = tr.getAttribute('data-form') || '';
+        var r = tr.getAttribute('data-release') || '';
+        if(f) forms[f] = 1;
+        if(r && r !== 'none') releases[r] = 1;
+      });
+      var T = window.T || function(k){ return k; };
+      function opt(v, label){ var o = document.createElement('option'); o.value = v; o.textContent = label; return o; }
+      var box = document.createElement('section');
+      box.className = 'matrix-filters';
+      box.innerHTML = '<div class="mf-head"><span class="mf-title"></span>'
+        + '<span class="mf-count" aria-live="polite"></span>'
+        + '<button type="button" class="mf-toggle" aria-expanded="false"></button></div>'
+        + '<div class="mf-panel"></div>';
+      box.querySelector('.mf-title').textContent = T('matrix.filters');
+      box.querySelector('.mf-toggle').textContent = T('matrix.mobile_filters');
+      var panel = box.querySelector('.mf-panel');
+      // 国家多选
+      var cf = document.createElement('div'); cf.className = 'mf-field';
+      cf.innerHTML = '<span></span><div class="mf-countries"></div>';
+      cf.querySelector('span').textContent = T('matrix.country');
+      var cbox = cf.querySelector('.mf-countries');
+      countries.forEach(function(c){
+        var lab = document.createElement('label');
+        var cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = true;
+        cb.setAttribute('data-mf-country', c);
+        lab.appendChild(cb); lab.appendChild(document.createTextNode(' ' + c));
+        cbox.appendChild(lab);
+      });
+      panel.appendChild(cf);
+      // 剂型
+      var ff = document.createElement('label'); ff.className = 'mf-field';
+      ff.innerHTML = '<span></span><select data-mf-form></select>';
+      ff.querySelector('span').textContent = T('matrix.form');
+      var fsel = ff.querySelector('select');
+      fsel.appendChild(opt('', T('matrix.all')));
+      Object.keys(forms).sort().forEach(function(f){ fsel.appendChild(opt(f, f)); });
+      panel.appendChild(ff);
+      // 释放
+      var rf = document.createElement('label'); rf.className = 'mf-field';
+      rf.innerHTML = '<span></span><select data-mf-rel></select>';
+      rf.querySelector('span').textContent = T('matrix.release');
+      var rsel = rf.querySelector('select');
+      rsel.appendChild(opt('', T('matrix.all')));
+      Object.keys(releases).sort().forEach(function(r){ rsel.appendChild(opt(r, r)); });
+      panel.appendChild(rf);
+      // 规格搜索
+      var sf = document.createElement('label'); sf.className = 'mf-field';
+      sf.innerHTML = '<span></span><input type="search" data-mf-spec>';
+      sf.querySelector('span').textContent = T('matrix.spec_search');
+      var sinp = sf.querySelector('input');
+      panel.appendChild(sf);
+      // 重置
+      var resetWrap = document.createElement('div'); resetWrap.className = 'mf-field';
+      var reset = document.createElement('button'); reset.type = 'button'; reset.className = 'mf-reset';
+      reset.textContent = T('matrix.reset');
+      resetWrap.appendChild(reset); panel.appendChild(resetWrap);
+      wrap.parentNode.insertBefore(box, wrap);
+      var note = document.createElement('p'); note.className = 'sub matrix-sort-note';
+      note.textContent = T('matrix.sort_note');
+      box.parentNode.insertBefore(note, wrap);
+      function current(){
+        var cc = Array.from(cbox.querySelectorAll('input[type=checkbox]'));
+        var sel = cc.filter(function(cb){ return cb.checked; })
+                    .map(function(cb){ return cb.getAttribute('data-mf-country'); });
+        return {countries: sel, form: fsel.value, rel: rsel.value,
+                spec: sinp.value.trim().toLowerCase(), all: cc.map(function(cb){ return cb.getAttribute('data-mf-country'); })};
+      }
+      function apply(updateURL){
+        var s = current();
+        var visible = 0;
+        rows.forEach(function(tr){
+          var ok = true;
+          if(s.form && (tr.getAttribute('data-form') || '') !== s.form) ok = false;
+          if(s.rel && (tr.getAttribute('data-release') || '') !== s.rel) ok = false;
+          if(s.spec && (tr.getAttribute('data-spec') || '').toLowerCase().indexOf(s.spec) < 0) ok = false;
+          tr.style.display = ok ? '' : 'none';
+          if(ok) visible++;
+        });
+        ths.forEach(function(th){
+          var c = th.getAttribute('data-country');
+          var show = s.countries.indexOf(c) >= 0;
+          th.style.display = show ? '' : 'none';
+          rows.forEach(function(tr){
+            Array.from(tr.children).forEach(function(td){
+              if(td.getAttribute('data-country') === c) td.style.display = show ? '' : 'none';
+            });
+          });
+        });
+        var cnt = box.querySelector('.mf-count');
+        cnt.textContent = T('matrix.showing').replace('{n}', visible).replace('{total}', rows.length);
+        if(updateURL){
+          try{
+            var p = new URLSearchParams(location.search);
+            s.form ? p.set('mform', s.form) : p.delete('mform');
+            s.rel ? p.set('mrel', s.rel) : p.delete('mrel');
+            s.spec ? p.set('mspec', sinp.value.trim()) : p.delete('mspec');
+            (s.countries.length === s.all.length) ? p.delete('mcountry') : p.set('mcountry', s.countries.join(','));
+            history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p.toString() : '') + location.hash);
+          }catch(e){}
+        }
+      }
+      // URL 初值
+      try{
+        var q = new URLSearchParams(location.search);
+        var mc = (q.get('mcountry') || '').split(',').filter(Boolean);
+        if(mc.length){
+          cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+            cb.checked = mc.indexOf(cb.getAttribute('data-mf-country')) >= 0;
+          });
+        }
+        if(q.get('mform')) fsel.value = q.get('mform');
+        if(q.get('mrel')) rsel.value = q.get('mrel');
+        if(q.get('mspec')) sinp.value = q.get('mspec');
+      }catch(e){}
+      fsel.addEventListener('change', function(){ apply(true); });
+      rsel.addEventListener('change', function(){ apply(true); });
+      sinp.addEventListener('input', function(){ apply(true); });
+      cbox.addEventListener('change', function(){ apply(true); });
+      reset.addEventListener('click', function(){
+        cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = true; });
+        fsel.value = ''; rsel.value = ''; sinp.value = '';
+        apply(true);
+      });
+      box.querySelector('.mf-toggle').addEventListener('click', function(){
+        var open = box.classList.toggle('mf-open');
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      apply(false);
+    });
+  }
   function start(){
     initNavToggle();
     injectToggle();
+    initMatrixFilters();
     renderNames();
     load().then(render);
     OUT = document.getElementById('out');
@@ -4704,6 +4871,35 @@ def combo_slug(sids) -> str:
     return key_file("+".join(sorted(sids)))
 
 
+# ── v0.8.3 伪复方 build 层归并：base+salt 视为同一 base 成分（不写 DB）────────
+SALT_WORDS = {
+    "hydrochloride", "hydrobromide", "sodium", "potassium", "calcium", "magnesium",
+    "phosphate", "sulfate", "sulphate", "citrate", "tartrate", "maleate", "fumarate",
+    "succinate", "malate", "glutamate", "aspartate", "lactate", "acetate", "carbonate",
+    "bicarbonate", "chloride", "iodide", "bromide", "nitrate", "oxide", "hydroxide",
+    "hydrate", "dihydrate", "trihydrate", "monohydrate", "sesquihydrate", "anhydrous",
+    "mesilate", "mesylate", "besylate", "besilate", "benzoate", "trometamol",
+    "tromethamine", "disodium", "dipotassium", "dicalcium", "magnesium",
+    "monohydrochloride", "dihydrochloride", "lysine", "arginine", "gluconate",
+    "digluconate", "heptanoate", "enantate", "decanoate", "palmitate", "stearate",
+    "oleate", "laurate", "propionate", "butyrate", "valerate", "undecylenate",
+    "cypionate", "phenylpropionate", "nitrite", "sulfite", "bisulfate", "edetate",
+    "gluceptate", "glycinate", "asparto", "pamoate", "embonate", "hemihydrate",
+    "dihydrate", "monohydrate", "hyclate", "tetrahydrate", "edisylate", "estolate",
+    "taurate", "xinafoate", "furoate", "aceponate", "dipropionate", "diacetate",
+    "dibenzoate", "pivalate", "tebutate", "sodium", "potassium",
+}
+_SALT_ELEMENTS = {"sodium", "potassium", "calcium", "magnesium", "lithium", "iron",
+                  "zinc", "copper", "aluminium", "aluminum", "barium", "selenium"}
+
+
+def _salt_base_of(name: str) -> str:
+    toks = _norm_name(name).split()
+    while toks and toks[-1] in SALT_WORDS:
+        toks.pop()
+    return " ".join(toks)
+
+
 # ── v0.6.0：组合页跨市场同组合（输入 data/combo_match_candidates.csv，构建期只读）──
 # 归一化规则必须与 etl/build_combo_matches.py 保持一致，否则页面的原始 substance_id
 # 集合无法反查到 CSV 里的「归一名数签名」。
@@ -4776,6 +4972,38 @@ def load_index(db: sqlite3.Connection):
 
     agg: dict[str, dict] = {}
     mixed_inn: set[str] = set()
+    merged_keys: set[str] = set()
+    # v0.8.3：base+salt 归并映射（严格规则：长名 = 短名 + 全部 salt 词，且 base 存在）
+    sub_names: dict[str, tuple[str, str]] = {}
+    for sid0, en0, zh0 in db.execute("SELECT substance_id, inn_en, inn_zh FROM substance"):
+        sub_names[sid0] = (en0 or "", zh0 or "")
+    by_norm: dict[str, str] = {}
+    for sid0, (en0, _zh0) in sub_names.items():
+        if en0:
+            by_norm.setdefault(_norm_name(en0), sid0)
+    # 同名重复 substance（如 povidone-iodine / povidone-iodine-<hash>）→ 规范到同一 sid
+    canon: dict[str, str] = {}
+    for sid0, (en0, _zh0) in sub_names.items():
+        if en0:
+            canon[sid0] = by_norm.get(_norm_name(en0), sid0)
+    salt_to_base: dict[str, str] = {}
+    for sid0, (en0, _zh0) in sub_names.items():
+        if canon.get(sid0) != sid0:
+            continue
+        toks = _norm_name(en0).split()
+        if len(toks) < 2:
+            continue
+        # 从末尾逐个去掉 salt/hydrate 词，找到存在的 base 即止
+        # （不把 "Calcium Chloride" 剥成 "Calcium" 这类无机盐基；元素基跳过）
+        while len(toks) > 1 and toks[-1] in SALT_WORDS:
+            toks = toks[:-1]
+            base = " ".join(toks)
+            if base in SALT_WORDS or base in _SALT_ELEMENTS or len(base) < 4:
+                continue
+            b = by_norm.get(base)
+            if b and b != sid0:
+                salt_to_base[sid0] = b
+                break
     # 每个产品自己的成分名集合：复方产品在每个成分的通用名 key 下都有一行
     # name_type=inn，但当前这行不一定是那个成分（join 会展开所有成分），
     # 所以要用「产品级」的集合判断，而不是当前行的 inn_en。
@@ -4809,6 +5037,19 @@ def load_index(db: sqlite3.Connection):
                 and _norm_name(key_id) in comp_keys.get(pid, ())):
             mixed_inn.add(key_id)
             continue
+        # v0.8.3：base+salt/canonical 递归归并（如 Alendronate Sodium Trihydrate →
+        # Alendronate Sodium → Alendronate），直到不动点，避免只剥一层。
+        orig_sid = sid
+        seen_sids: set[str] = set()
+        while sid not in seen_sids:
+            seen_sids.add(sid)
+            nxt = salt_to_base.get(sid) or canon.get(sid, sid)
+            if nxt == sid:
+                break
+            sid = nxt
+        if sid != orig_sid:
+            inn_en, inn_zh = sub_names.get(sid, (inn_en, inn_zh))
+            merged_keys.add(key_id)
         a = agg.get(key_id)
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "subs_zh": [], "s": [],
@@ -4881,6 +5122,9 @@ def load_index(db: sqlite3.Connection):
         # 释放机制不同」这类误导性警告。
         pure_inn = key_id in mixed_inn and len(a["sids"]) == 1
         if pure_inn:
+            level = "info"
+        # v0.8.3：伪复方（base+salt 被并成单 base）不再算多成分碰撞
+        if key_id in merged_keys and len(a["sids"]) <= 1:
             level = "info"
         # 只有这些名字值得单独成页：有碰撞的、或包装数够多的。
         # 其余名字仍能被搜到，卡片直接链到成分页——不为只有一个包装的冷门名字生成几万张页。
@@ -5191,10 +5435,47 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                     countries.append(c)
         # v0.8.0：不再静默截断到 8 列——全部市场列都显示（US/GB/CA/AU/SG/CN/ES/MX/TW），
         # 移动端由 .matwrap 横向滚动；界面语言只决定列顺序（i18n.js MORDER）。
-        spec_rows = sorted(
-            spec_countries.items(),
-            key=lambda kv: (_sort_strength(kv[0][0]), kv[0][1],
-                            kv[0][2] != "none", kv[0][2]))
+        # v0.8.3 task-119：常用度排序（跨国家产品/品牌记录数），「未公开」最后，空行隐藏。
+        def _spec_num(st: str) -> float:
+            m2 = re.match(r"\s*([0-9]+(?:[.,][0-9]+)?)", st or "")
+            try:
+                return float(m2.group(1).replace(",", ".")) if m2 else -1.0
+            except ValueError:
+                return -1.0
+
+        def _form_rank(form: str) -> int:
+            f = (form or "").lower()
+            if "tablet" in f:
+                return 0
+            if "capsule" in f:
+                return 1
+            if any(w in f for w in ("solution", "liquid", "syrup", "suspension",
+                                    "elixir", "drops")):
+                return 2
+            if any(w in f for w in ("injection", "infusion", "injectable", "vial", "ampoule")):
+                return 3
+            if any(w in f for w in ("cream", "ointment", "gel", "lotion", "patch",
+                                    "suppositor")):
+                return 4
+            if any(w in f for w in ("spray", "inhaler", "aerosol", "nebuli")):
+                return 5
+            if any(w in f for w in ("powder", "granule", "sachet")):
+                return 6
+            return 9
+
+        freq_by_spec = {
+            spec: sum(len(bucket) for bucket in by_c.values())
+            for spec, by_c in spec_countries.items()
+        }
+        spec_rows = [kv for kv in spec_countries.items()
+                     if any(bucket for bucket in kv[1].values())]
+        spec_rows.sort(key=lambda kv: (
+            kv[0][0].strip() == "",          # 未公开规格排最后
+            -freq_by_spec.get(kv[0], 0),      # 常用度降序
+            _form_rank(kv[0][1]),             # 剂型标准顺序
+            -_spec_num(kv[0][0]),             # 同频按数值（大→小）
+            kv[0][2],
+        ))
         shown = spec_rows[:MATRIX_ROW_CAP]
         head = (f'<th data-i18n="matrix.spec">{esc(T["matrix.spec"])}</th>'
                 + "".join(f'<th data-country="{esc(c)}">{esc(c)}</th>'
@@ -5229,7 +5510,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                 more = (f' <span class="meta">+{len(ordered) - 3}</span>'
                         if len(ordered) > 3 else "")
                 cells.append(f'<td data-country="{esc(c)}">{" ".join(bits)}{more}</td>')
-            tbody.append("<tr>" + "".join(cells) + "</tr>")
+            tbody.append(f'<tr data-form="{esc(form or "")}" data-release="{esc(rel or "")}" '
+                         f'data-spec="{esc(st or "")}" '
+                         f'data-freq="{freq_by_spec.get(spec, 0)}">'
+                         + "".join(cells) + "</tr>")
         capped_blocks = ""
         if len(spec_rows) > MATRIX_ROW_CAP:
             for lang in ("en", "es", "zh", "zh-Hant"):
@@ -5994,6 +6278,37 @@ GLOSSARY_TERMS = ("inn", "ban", "usan", "atc", "mah", "din", "ndc", "artg",
 
 
 # ── v0.8.1 双语对照（成分原名 + 当前语言译名 + 来源/版本；品牌永不翻译）────────
+# ── v0.8.3 task-119：矩阵筛选器文案（四语）──────────────────────────────────
+FILTER_I18N = {
+    "en": {"matrix.filters": "Filters", "matrix.mobile_filters": "Filters",
+           "matrix.country": "Countries", "matrix.form": "Form",
+           "matrix.release": "Release", "matrix.spec_search": "Search strength",
+           "matrix.reset": "Reset", "matrix.all": "All",
+           "matrix.showing": "{n} / {total} rows",
+           "matrix.sort_note": "Common strengths first; undisclosed strength last.",
+           "matrix.close": "Close"},
+    "es": {"matrix.filters": "Filtros", "matrix.mobile_filters": "Filtros",
+           "matrix.country": "Países", "matrix.form": "Forma",
+           "matrix.release": "Liberación", "matrix.spec_search": "Buscar concentración",
+           "matrix.reset": "Restablecer", "matrix.all": "Todos",
+           "matrix.showing": "{n} / {total} filas",
+           "matrix.sort_note": "Concentraciones más comunes primero; sin datos al final.",
+           "matrix.close": "Cerrar"},
+    "zh": {"matrix.filters": "筛选", "matrix.mobile_filters": "筛选",
+           "matrix.country": "国家", "matrix.form": "剂型", "matrix.release": "释放",
+           "matrix.spec_search": "搜索规格", "matrix.reset": "重置",
+           "matrix.all": "全部", "matrix.showing": "{n} / {total} 行",
+           "matrix.sort_note": "常用规格在前；未公开规格排最后。",
+           "matrix.close": "关闭"},
+    "zh-Hant": {"matrix.filters": "篩選", "matrix.mobile_filters": "篩選",
+                "matrix.country": "國家", "matrix.form": "劑型", "matrix.release": "釋放",
+                "matrix.spec_search": "搜尋規格", "matrix.reset": "重設",
+                "matrix.all": "全部", "matrix.showing": "{n} / {total} 列",
+                "matrix.sort_note": "常用規格在前；未公開規格排最後。",
+                "matrix.close": "關閉"},
+}
+
+
 BILINGUAL_I18N = {
     "en": {
         "bilingual.toggle": "Show original",
