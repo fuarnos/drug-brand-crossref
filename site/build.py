@@ -2398,8 +2398,19 @@ table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
   text-align:left;vertical-align:top;font-size:14px}
 table.matrix thead th{white-space:nowrap;font-weight:650}
 table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
-table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
+table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
+  -webkit-line-clamp:2;overflow:hidden;max-width:220px;margin:0 6px 2px 0;
+  vertical-align:top;line-height:1.35}
 .m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
+.m-zh{display:inline-block;margin:0 0 2px 0;font-size:11px;color:var(--muted)}
+/* v0.8.4 task-128：状态彩色角标（A1 明细等） */
+.st-badge{display:inline-block;font-size:11px;padding:1px 6px;border-radius:999px;
+  border:1px solid var(--line);margin-right:4px;white-space:nowrap}
+.st-active{color:#0b6b53;border-color:#a9d3c5;background:#eef7f3}
+.st-discontinued{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
+.st-withdrawn{color:#8a2c1f;border-color:#e6bdb4;background:#fdf0ee}
+.st-unknown{color:var(--muted);background:#f6f5f2}
+.c-brand{overflow-wrap:anywhere}
 .matrix-brand-note{margin:6px 0 0;font-size:12px}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
@@ -2705,8 +2716,14 @@ function ingredientLabel(e){
 //   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
 function brandHTML(e){
-  if(e && e.u) return `<a data-brand="1" href="${BASE}name/${e.u}">${e.d}</a>`;
-  return `<span data-brand="1" class="brand-plain">${e && e.d != null ? e.d : ''}</span>`;
+  let d = e && e.d != null ? String(e.d) : '';
+  if(e && e.f){
+    const f = labelOf('form', e.f, '');
+    if(f && d.length > f.length && d.slice(-f.length) === f) d = d.slice(0, -f.length).trim();
+  }
+  const title = e && e.d != null ? e.d : '';
+  if(e && e.u) return `<a data-brand="1" title="${esc(title)}" href="${BASE}name/${e.u}">${esc(d)}</a>`;
+  return `<span data-brand="1" title="${esc(title)}" class="brand-plain">${esc(d)}</span>`;
 }
 function ingredientHTML(e, cls){
   const label = ingredientLabel(e);
@@ -2825,7 +2842,7 @@ function detPanelHTML(payload, key, e, T){
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
     return `<tr><td>${esc(r[1])}</td><td>${esc(r[3]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
-      + `<td>${esc(labelOf('drug.status', status, status))}${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
+      + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td></tr>`;
   }).join('');
   return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('a1.pack'))}</th>`
@@ -4295,7 +4312,14 @@ BILINGUAL_JS = r"""
     document.querySelectorAll('[data-sub-ingredient]').forEach(applyOne);
     var note = T('bilingual.brand_note');
     document.querySelectorAll('[data-brand]').forEach(function(el){
-      if(note && note.indexOf('bilingual.') !== 0) el.setAttribute('title', note);
+      if(!note || note.indexOf('bilingual.') === 0) return;
+      // v0.8.4：保留全名 title，把「非翻译」说明附加在后面（不覆盖）
+      var full = el.getAttribute('data-title-full');
+      if(full === null){
+        full = el.getAttribute('title') || '';
+        el.setAttribute('data-title-full', full);
+      }
+      el.setAttribute('title', full ? (full + ' — ' + note) : note);
     });
     var cb = document.getElementById('bilOrig');
     if(cb) cb.checked = SHOW;
@@ -5327,6 +5351,51 @@ COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW")
 MATRIX_ROW_CAP = 120
 
 
+def _strength_suspect(text: str) -> bool:
+    """v0.8.4：明显错误的规格（如 400064g）→ 标「规格待核」并排最后；只标记不删数据。"""
+    m = re.match(r"\s*([0-9][0-9,.]*)\s*([A-Za-z%μµ]*)", text or "")
+    if not m:
+        return False
+    try:
+        val = float(m.group(1).replace(",", ""))
+    except ValueError:
+        return False
+    unit = (m.group(2) or "").lower()
+    if val >= 1_000_000:
+        return True
+    if val > 10_000 and unit not in ("u", "iu", "unit", "units", "%", "ml"):
+        return True
+    return False
+
+
+_FORM_WORD_ZH = {
+    "tablet": ("片", "片剂"), "capsule": ("胶囊",), "injection": ("注射液", "注射剂"),
+    "solution": ("溶液", "口服液", "液"), "syrup": ("糖浆",), "suspension": ("混悬液",),
+    "cream": ("乳膏", "霜"), "ointment": ("软膏",), "gel": ("凝胶", "凝胶剂"),
+    "granule": ("颗粒",), "powder": ("散", "粉"), "spray": ("喷雾剂", "喷剂"),
+    "drops": ("滴剂", "滴眼液", "滴耳液", "滴鼻液"), "inhaler": ("吸入剂",),
+    "suppository": ("栓",), "patch": ("贴剂", "贴片"),
+}
+
+
+def _strip_form_from_label(label: str, form: str) -> str:
+    """v0.8.4：通用名已含剂型词时不在显示里重复剂型（如「阿莫西林胶囊」+「胶囊」）。"""
+    text = (label or "").strip()
+    f = (form or "").lower()
+    if not text or not f:
+        return text
+    en_word = f.split()[0] if f.split() else f
+    suffix = en_word
+    for key, words in _FORM_WORD_ZH.items():
+        if key in f:
+            suffix = words[0]
+            break
+    for cand in (suffix, en_word):
+        if cand and len(text) > len(cand) and text.lower().endswith(cand.lower()):
+            return text[: -len(cand)].strip()
+    return text
+
+
 def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
     T = I18N["en"]
     entry_by_k = {e["k"]: e for e in (entries or [])}
@@ -5345,10 +5414,11 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
     for row in db.execute(
         """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
                   p.status, pc.strength_value, pc.strength_unit,
-                  pc.per_volume_value, pc.per_volume_unit, p.product_id
+                  pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh
            FROM product p
            JOIN product_component pc ON pc.product_id = p.product_id
-           JOIN variant v ON v.variant_id = pc.variant_id"""
+           JOIN variant v ON v.variant_id = pc.variant_id
+           JOIN substance s ON s.substance_id = v.substance_id"""
     ):
         products.setdefault(row[0], []).append(row[1:])
 
@@ -5413,7 +5483,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
 
         # v0.6.6：按「规格 + 剂型 + 释放机制」聚合，国家并排；默认只显示 active。
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
-        for (country, fb, df, rel, status, sv, su, pv, pu, pid) in rows:
+        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub) in rows:
             if status != "active":
                 continue
             st = f"{sv:g} {su}" if sv is not None else ""
@@ -5426,7 +5496,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                 label = (e or {}).get("d") or raw
                 if label and label not in bucket:
                     en = cn_latin.get(key_id, "") if country == "CN" else ""
-                    bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en)
+                    bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en,
+                                     (zh_sub or "") if country == "CN" else "")
         countries = [c for c in COUNTRY_PRIORITY
                      if any(c in by_c for by_c in spec_countries.values())]
         for by_c in spec_countries.values():
@@ -5467,13 +5538,15 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
             spec: sum(len(bucket) for bucket in by_c.values())
             for spec, by_c in spec_countries.items()
         }
+        suspect_by_spec = {spec: _strength_suspect(spec[0]) for spec in spec_countries}
         spec_rows = [kv for kv in spec_countries.items()
                      if any(bucket for bucket in kv[1].values())]
         spec_rows.sort(key=lambda kv: (
-            kv[0][0].strip() == "",          # 未公开规格排最后
-            -freq_by_spec.get(kv[0], 0),      # 常用度降序
-            _form_rank(kv[0][1]),             # 剂型标准顺序
-            -_spec_num(kv[0][0]),             # 同频按数值（大→小）
+            kv[0][0].strip() == "",                  # 未公开规格排最后
+            suspect_by_spec.get(kv[0], False),        # 规格待核排最后
+            -freq_by_spec.get(kv[0], 0),              # 常用度降序
+            _form_rank(kv[0][1]),                     # 剂型标准顺序
+            -_spec_num(kv[0][0]),                     # 同频按数值（大→小）
             kv[0][2],
         ))
         shown = spec_rows[:MATRIX_ROW_CAP]
@@ -5483,8 +5556,12 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
         tbody = []
         for spec, by_c in shown:
             st, form, rel = spec
+            suspect = suspect_by_spec.get(spec, False)
             st_html = _label_unit_html(st) if st else (
                 '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
+            if suspect:
+                st_html += (' <span class="tag warn" data-i18n="matrix.spec_check">'
+                            'check strength</span>')
             form_html = (_label_html("form", form, form) if form
                          else '<span class="meta">—</span>')
             rel_html = (f' · {_label_html("release", rel, rel)}'
@@ -5499,19 +5576,23 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                     continue
                 ordered = sorted(cell_brands.items(), key=lambda kv: kv[0].lower())
                 bits = []
-                for label, (url, en) in ordered[:3]:
+                for label, (url, en, zh_sub) in ordered[:3]:
+                    display = _strip_form_from_label(label, form)
                     if url:
-                        bits.append(f'<a class="m-brand" data-brand="1" href="{esc(url)}">'
-                                    f'{esc(label)}</a>')
+                        bits.append(f'<a class="m-brand" data-brand="1" title="{esc(label)}" '
+                                    f'href="{esc(url)}">{esc(display)}</a>')
                     else:
-                        bits.append(f'<span class="m-brand" data-brand="1">{esc(label)}</span>')
+                        bits.append(f'<span class="m-brand" data-brand="1" '
+                                    f'title="{esc(label)}">{esc(display)}</span>')
                     if en and en != label:
                         bits.append(f'<span class="m-en">{esc(en)}</span>')
+                    if zh_sub and zh_sub != display:
+                        bits.append(f'<span class="m-zh">{esc(zh_sub)}</span>')
                 more = (f' <span class="meta">+{len(ordered) - 3}</span>'
                         if len(ordered) > 3 else "")
                 cells.append(f'<td data-country="{esc(c)}">{" ".join(bits)}{more}</td>')
             tbody.append(f'<tr data-form="{esc(form or "")}" data-release="{esc(rel or "")}" '
-                         f'data-spec="{esc(st or "")}" '
+                         f'data-spec="{esc(st or "")}" data-suspect="{1 if suspect else 0}" '
                          f'data-freq="{freq_by_spec.get(spec, 0)}">'
                          + "".join(cells) + "</tr>")
         capped_blocks = ""
@@ -6286,6 +6367,7 @@ FILTER_I18N = {
            "matrix.reset": "Reset", "matrix.all": "All",
            "matrix.showing": "{n} / {total} rows",
            "matrix.sort_note": "Common strengths first; undisclosed strength last.",
+           "matrix.spec_check": "check strength",
            "matrix.close": "Close"},
     "es": {"matrix.filters": "Filtros", "matrix.mobile_filters": "Filtros",
            "matrix.country": "Países", "matrix.form": "Forma",
@@ -6293,18 +6375,21 @@ FILTER_I18N = {
            "matrix.reset": "Restablecer", "matrix.all": "Todos",
            "matrix.showing": "{n} / {total} filas",
            "matrix.sort_note": "Concentraciones más comunes primero; sin datos al final.",
+           "matrix.spec_check": "verificar concentración",
            "matrix.close": "Cerrar"},
     "zh": {"matrix.filters": "筛选", "matrix.mobile_filters": "筛选",
            "matrix.country": "国家", "matrix.form": "剂型", "matrix.release": "释放",
            "matrix.spec_search": "搜索规格", "matrix.reset": "重置",
            "matrix.all": "全部", "matrix.showing": "{n} / {total} 行",
            "matrix.sort_note": "常用规格在前；未公开规格排最后。",
+           "matrix.spec_check": "规格待核",
            "matrix.close": "关闭"},
     "zh-Hant": {"matrix.filters": "篩選", "matrix.mobile_filters": "篩選",
                 "matrix.country": "國家", "matrix.form": "劑型", "matrix.release": "釋放",
                 "matrix.spec_search": "搜尋規格", "matrix.reset": "重設",
                 "matrix.all": "全部", "matrix.showing": "{n} / {total} 列",
                 "matrix.sort_note": "常用規格在前；未公開規格排最後。",
+                "matrix.spec_check": "規格待核",
                 "matrix.close": "關閉"},
 }
 
