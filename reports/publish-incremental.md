@@ -141,6 +141,21 @@ v0.7.0 收尾记录（2026-10-29）：
 - 影响：publish 的「首页 200」不能证明线上已是新版本；若「publish 后立刻 smoke」会被误判为旧版本。
 - 已修：deploy/publish.ps1 的 Test-Homepage 增加 ExpectVersion 参数，首页检查必须在响应中匹配 $Version（来自 CHANGELOG 顶部）才算通过（轮询 18×5 s）；回滚复验仍不校验版本（回滚目标版本号未知）。
 
+### 3.9 v0.8.2 发布实测 + 传播等待不足导致的 false negative
+
+| 项 | 值 |
+|---|---|
+| 变更文件 | 62,727（+274,533 / -274,290 行） |
+| 实际上传 | **15.01 MiB**（全量树 476 MB，-96.8%） |
+| 阶段耗时 | 镜像 100 s / commit 347 s / 估算 45 s / push 65 s（到 push 完成 564 s） |
+| Pages build | 105 s（created 22:20:38Z -> built 22:22:23Z） |
+| publish 结果 | **exit 1（false negative）**：首页版本等待 90 s 内未见到 v0.8.2 页脚 |
+
+- 事实：push 成功（gh-pages 75b81209f）、Pages build 成功；但 CDN 传播在 build 完成后再滞后约 1-2 分钟，脚本的 90 s 版本等待窗口不够，于是判为失败。
+- 处理：未回滚（内容正确）。稍后人工 erify_live --expect-version v0.8.2 **32/32 通过**（live v0.8.2），随后 tag/Release 正常发布（commit 67549e53、tag 0.8.2、gh-pages 75b81209f）。
+- 修复（本次已提交）：Test-Homepage 版本等待 **18x5 s -> 36x5 s（180 s）**；Wait-PagesBuild 的 API 数组做 pipeline 展平 + [string] 转换（消除日志里的 uild System.Object[] 异常输出）。
+- 流程结论：**published 以 verify_live 通过为准**；publish 返回非 0 时先查线上版本/Pages build 状态，再决定是否回滚；-AutoRollback 仅在 build errored / 首页 404 等确凿失败时使用。
+
 ---
 
 ## 4. 迁移注意 / 风险

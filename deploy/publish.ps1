@@ -475,7 +475,7 @@ function Test-Homepage([string]$Url, [string]$ExpectVersion = '') {
     # Cache-busted request(s); when ExpectVersion is given, wait until the served
     # footer actually shows that version (GitHub Pages CDN propagation can lag the
     # build by 1-2 minutes, which otherwise makes a fresh deploy look like the old one).
-    for ($i = 0; $i -lt 18; $i++) {
+    for ($i = 0; $i -lt 36; $i++) {
         try {
             $u = '{0}?v={1}' -f $Url.TrimEnd('/'), [DateTimeOffset]::Now.ToUnixTimeSeconds()
             $r = Invoke-WebRequest -UseBasicParsing -Uri $u -TimeoutSec 30
@@ -493,10 +493,10 @@ function Wait-PagesBuild([string]$CommitSha, $Headers, [string]$Url) {
     $deadline = (Get-Date).AddMinutes(8)
     while ((Get-Date) -lt $deadline) {
         try {
-            $builds = @(Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/pages/builds?per_page=5" -Headers $Headers -TimeoutSec 30)
+            $builds = @(Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/pages/builds?per_page=5" -Headers $Headers -TimeoutSec 30 | ForEach-Object { $_ })
             foreach ($b in $builds) {
                 if ($b.commit -eq $CommitSha) {
-                    Say ("build {0} {1}" -f $b.commit.Substring(0, 8), $b.status)
+                    Say ("build {0} {1}" -f ([string]$b.commit).Substring(0, 8), [string]$b.status)
                     if ($b.status -eq 'built') { return $true }
                     if ($b.status -eq 'errored') { return $false }
                     break
