@@ -1165,6 +1165,22 @@ COMBO_I18N = {
         "combo.see_warnings": "See warnings for these ingredients",
         "combo.no_page": "No separate brand page for this name",
         "combo.compact": "combination",
+        # v0.6.0：跨市场同组合区块
+        "combo.cross_title": "Same combination in other markets",
+        "combo.cross_exact": ('These markets record products with the same active-ingredient '
+                              'combination. Identity only — not a recommendation that products '
+                              'are interchangeable.'),
+        "combo.cross_products": "products",
+        "combo.cross_record": "record",
+        "combo.cross_overlap": ('The closest combination found in other markets is similar but '
+                                'NOT identical — it is not interchangeable.'),
+        "combo.cross_none": ('No product with this combination is recorded in the other covered '
+                             'markets yet.'),
+        "combo.cross_primary": ('Only the main ingredient is the same — this is NOT the same '
+                                'fixed-dose combination.'),
+        "combo.cross_primary_link": "View the main ingredient",
+        "combo.cross_unmatched": ('Cross-market comparison is not available for this grouped '
+                                  'name.'),
     },
     "es": {
         "combo.title": "Combinación en dosis fija",
@@ -1186,6 +1202,22 @@ COMBO_I18N = {
         "combo.see_warnings": "Ver alertas de estos principios",
         "combo.no_page": "Este nombre no tiene página de marca propia",
         "combo.compact": "combinación",
+        # v0.6.0：跨市场同组合区块
+        "combo.cross_title": "Misma combinación en otros mercados",
+        "combo.cross_exact": ('Estos mercados registran productos con la misma combinación de '
+                              'principios activos. Solo identidad — no es una recomendación de '
+                              'intercambiabilidad.'),
+        "combo.cross_products": "productos",
+        "combo.cross_record": "registro",
+        "combo.cross_overlap": ('La combinación más cercana en otros mercados es similar pero '
+                                'NO idéntica — no es intercambiable.'),
+        "combo.cross_none": ('Todavía no hay productos con esta combinación en los otros '
+                             'mercados cubiertos.'),
+        "combo.cross_primary": ('Solo coincide el principio principal — NO es la misma '
+                                'combinación en dosis fija.'),
+        "combo.cross_primary_link": "Ver el principio principal",
+        "combo.cross_unmatched": ('La comparación entre mercados no está disponible para este '
+                                  'nombre agrupado.'),
     },
     "zh": {
         "combo.title": "复方组合",
@@ -1203,6 +1235,16 @@ COMBO_I18N = {
         "combo.see_warnings": "查看这些成分的警示",
         "combo.no_page": "这个名字没有独立品牌页",
         "combo.compact": "复方",
+        # v0.6.0：跨市场同组合区块
+        "combo.cross_title": "其他国家/地区的同组合",
+        "combo.cross_exact": "这些市场收录了成分组合完全相同的产品。只做身份对应，不代表可以互换或替代。",
+        "combo.cross_products": "个产品",
+        "combo.cross_record": "记录",
+        "combo.cross_overlap": "其他市场最接近的组合相近但并不完全相同——不可互换。",
+        "combo.cross_none": "其他已收录市场暂无该成分组合的产品。",
+        "combo.cross_primary": "仅主成分相同，这不是同一个复方组合。",
+        "combo.cross_primary_link": "查看主成分",
+        "combo.cross_unmatched": "这个合并后的名称暂无法做跨市场对照。",
     },
 }
 
@@ -1689,6 +1731,10 @@ tr.detrow table.det{margin:0}
 .lang-block[data-lang-block="en"]{display:block}
 /* v0.5.3：品牌无页 → 不可点文本（不是链接，禁止回退 drug 页） */
 .brand-plain{font-weight:600;color:var(--fg)}
+/* v0.6.0：组合页跨市场同组合区块 */
+.xlist{margin:6px 0 0;padding-left:18px;font-size:14px}
+.xlist li{margin:3px 0}
+.xlist .x-mkt{font-weight:600;color:var(--fg)}
 /* v0.5.4：厂家列（可点厂家 + 「+N」展开列表） */
 .maker-link{color:var(--accent)}
 .maker-plain{color:var(--fg)}
@@ -3396,6 +3442,67 @@ def combo_slug(sids) -> str:
     return key_file("+".join(sorted(sids)))
 
 
+# ── v0.6.0：组合页跨市场同组合（输入 data/combo_match_candidates.csv，构建期只读）──
+# 归一化规则必须与 etl/build_combo_matches.py 保持一致，否则页面的原始 substance_id
+# 集合无法反查到 CSV 里的「归一名数签名」。
+_COMBO_SYNONYMS = {
+    "paracetamol": "acetaminophen", "glyburide": "glibenclamide",
+    "salbutamol": "salbutamol", "albuterol": "salbutamol",
+    "adrenaline": "epinephrine", "noradrenaline": "norepinephrine",
+    "frusemide": "furosemide", "lignocaine": "lidocaine",
+    "hyoscine": "scopolamine", "rifampicin": "rifampin",
+    "pethidine": "meperidine", "oestradiol": "estradiol",
+    "ethinyloestradiol": "ethinylestradiol", "levothyroxine": "levothyroxine",
+    "thyroxine": "levothyroxine",
+    "clavulanate": "clavulanic-acid", "clavulanic": "clavulanic-acid",
+    "amoxycillin": "amoxicillin", "cefalexin": "cephalexin",
+    "cefalotin": "cephalothin", "vitamin-c": "ascorbic-acid",
+}
+_COMBO_SALT_WORDS = {
+    "hydrochloride", "hydrobromide", "bromide", "chloride", "sodium", "potassium",
+    "calcium", "magnesium", "zinc", "iron", "ammonium", "sulfate", "sulphate",
+    "phosphate", "acetate", "citrate", "tartrate", "maleate", "fumarate",
+    "succinate", "malate", "lactate", "gluconate", "nitrate", "mesylate",
+    "besylate", "tosylate", "pamoate", "stearate", "palmitate", "propionate",
+    "dipropionate", "valerate", "butyrate", "benzoate", "carbonate", "bicarbonate",
+    "hydroxide", "oxide", "trihydrate", "dihydrate", "monohydrate", "hemihydrate",
+    "anhydrous", "hydrate", "dehydrate", "methyl", "ethyl", "ester", "acid",
+    "trometamol", "tromethamine", "meglumine", "lysine", "arginine", "choline",
+    "disodium", "dipotassium", "hemisuccinate", "furoate", "cipionate",
+    "phenylacetate", "hyclate", "pivoxil", "axetil", "proxetil", "medoxomil",
+}
+_RE_NONALNUM = re.compile(r"[^a-z0-9]+")
+
+
+def norm_ingredient(name: str) -> str:
+    """英文 INN → 归一成分 key（去括号/盐/酯/水合物 → 同义词；与 ETL 一致）。"""
+    s = unicodedata.normalize("NFKC", name or "").lower()
+    s = re.sub(r"\([^)]*\)", " ", s)
+    s = s.replace("/", " ")
+    toks = [t for t in _RE_NONALNUM.sub(" ", s).split() if t]
+    out = [t for t in toks if t not in _COMBO_SALT_WORDS]
+    if not out:
+        out = toks
+    key = "-".join(out) if out else (name or "").strip().lower()
+    return _COMBO_SYNONYMS.get(key, key)
+
+
+def load_combo_matches() -> dict[str, list[dict]]:
+    """data/combo_match_candidates.csv → {signature: [country row, ...]}。"""
+    import csv as _csv
+
+    path = ROOT / "data" / "combo_match_candidates.csv"
+    out: dict[str, list[dict]] = {}
+    if not path.exists():
+        return out
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        for row in _csv.DictReader(fh):
+            sig = (row.get("signature") or "").strip()
+            if sig:
+                out.setdefault(sig, []).append(row)
+    return out
+
+
 def load_index(db: sqlite3.Connection):
     """构建检索索引：只收有品牌名的 key。全量一次查询，避免 N+1。"""
     coll = {r[0]: r[1] for r in db.execute("SELECT key_id, level FROM collision")}
@@ -3962,6 +4069,139 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         if not vs or len(vs) < 2:
             continue
         groups.setdefault(tuple(sorted(vs)), []).append(e)
+    # v0.6.0：页面 sids 集合 → CSV 归一名数签名。
+    # 组合页的 vs 是「同一 name_key 下所有产品的成分并集」，不一定等于单个产品的成分集合；
+    # 先用「产品原始 sids 集合 == 页面集合」精确反查，再用页面归一并集兜底；
+    # 仍对不上的分组名（合并了多个不同产品的名称）显示中性提示，不臆断 exact/none。
+    combo_matches = load_combo_matches()
+    sub_key = {sid: norm_ingredient(en) for sid, (_zh, en) in subs.items()}
+    key_sid: dict[str, str] = {}
+    key_display: dict[str, str] = {}
+    for sid, key in sub_key.items():
+        key_sid.setdefault(key, sid)
+        key_display.setdefault(key, subs.get(sid, (sid, sid))[1])
+    tuple_sig: dict[tuple, str] = {}
+    if combo_matches:
+        prod_sids: dict[str, list] = defaultdict(list)
+        for pid, sid in db.execute(
+                "SELECT pc.product_id, v.substance_id FROM product_component pc "
+                "JOIN variant v ON v.variant_id = pc.variant_id"):
+            prod_sids[pid].append(sid)
+        seen_tuples: set[tuple] = set()
+        for _pid, psids in prod_sids.items():
+            if len(psids) < 2:
+                continue
+            t = tuple(sorted(psids))
+            if t in seen_tuples:
+                continue
+            seen_tuples.add(t)
+            sig = "|".join(sorted({sub_key.get(s, norm_ingredient(s)) for s in t}))
+            if sig in combo_matches:
+                tuple_sig[t] = sig
+    page_sig: dict[str, str] = {}
+    sig_pages: dict[str, list[str]] = defaultdict(list)
+    for sids in groups:
+        slug = combo_slug(sids)
+        sig = tuple_sig.get(tuple(sids))
+        if not sig:
+            ukeys = sorted({sub_key.get(s, norm_ingredient(s)) for s in sids})
+            cand = "|".join(ukeys)
+            if len(ukeys) >= 2 and cand in combo_matches:
+                sig = cand
+        if sig:
+            page_sig[slug] = sig
+            sig_pages[sig].append(slug)
+    entry_by_k = {e["k"]: e for e in entries}
+    sample_pids = {row.get("sample_product_id") or "" for sig in set(page_sig.values())
+                   for row in combo_matches.get(sig, [])}
+    sample_pids.discard("")
+    pid_key: dict[str, str] = {}
+    for pid, key_id in db.execute(
+            "SELECT product_id, key_id FROM product_name WHERE name_type = 'trade'"):
+        if pid in sample_pids and pid not in pid_key:
+            pid_key[pid] = key_id
+
+    def _record_link(pid: str, fallback_sid: str) -> str:
+        k = pid_key.get(pid or "")
+        u = (entry_by_k.get(k) or {}).get("u") if k else ""
+        if u:
+            return f'<a href="../name/{esc(u)}" data-i18n="combo.cross_record">record</a>'
+        if fallback_sid:
+            return (f'<a href="../drug/{esc(fallback_sid)}.html" '
+                    f'data-i18n="combo.cross_record">record</a>')
+        return '<span data-i18n="combo.cross_record">record</span>'
+
+    def cross_html(slug: str) -> str:
+        title_html = (f'<h2 data-i18n="combo.cross_title">'
+                      f'{esc(T["combo.cross_title"])}</h2>')
+        sig = page_sig.get(slug)
+        if not sig:
+            return (title_html + f'<p class="sub" data-i18n="combo.cross_unmatched">'
+                    f'{esc(T["combo.cross_unmatched"])}</p>')
+        mrows = combo_matches.get(sig) or []
+        strengths = {r.get("match_strength") for r in mrows}
+        if "exact" in strengths:
+            by_country = {r.get("country"): r for r in mrows if r.get("country")}
+            markets: list[str] = []
+            for r in mrows:
+                for mk in (r.get("match_markets") or "").split("|"):
+                    if mk and mk not in markets:
+                        markets.append(mk)
+            items = []
+            for mk in markets[:8]:
+                row = by_country.get(mk)
+                if not row:
+                    continue
+                brands = "; ".join((row.get("brands") or "").split("; ")[:3])
+                if not brands:
+                    # 部分市场（如美国仿制药）商品名挂在 name_type=inn 下，brands 为空：
+                    # 回退显示该市场的主成分/generic 名，而不是空白。
+                    brands = key_display.get(row.get("primary_ingredient") or "") or "—"
+                n = row.get("n_products") or "0"
+                fb = key_sid.get(row.get("primary_ingredient") or "")
+                items.append(
+                    f'<li><span class="x-mkt">{esc(mk)}</span> · {esc(brands)} · '
+                    f'<b>{esc(n)}</b> <span data-i18n="combo.cross_products">products</span> · '
+                    f'{_record_link(row.get("sample_product_id") or "", fb or "")}</li>')
+            return (title_html
+                    + f'<div class="notice" data-i18n="combo.cross_exact">'
+                      f'{esc(T["combo.cross_exact"])}</div>'
+                    + f'<ul class="xlist">{"".join(items)}</ul>')
+        if "overlap" in strengths:
+            links: list[str] = []
+            for r in mrows:
+                if r.get("match_strength") != "overlap":
+                    continue
+                for msig in (r.get("matched_signatures") or "").split("|"):
+                    if msig and msig not in links:
+                        links.append(msig)
+            items = []
+            for msig in links[:5]:
+                disp = " + ".join(key_display.get(k) or k for k in msig.split("|"))
+                target = (sig_pages.get(msig) or [""])[0]
+                if target and target != slug:
+                    items.append(f'<li><a href="./{esc(target)}">{esc(disp)}</a></li>')
+                else:
+                    items.append(f'<li>{esc(disp)}</li>')
+            return (title_html
+                    + f'<div class="notice warnbox" data-i18n="combo.cross_overlap">'
+                      f'{esc(T["combo.cross_overlap"])}</div>'
+                    + (f'<ul class="xlist">{"".join(items)}</ul>' if items else ""))
+        html = (title_html
+                + f'<p class="sub" data-i18n="combo.cross_none">'
+                  f'{esc(T["combo.cross_none"])}</p>')
+        prim_row = next((r for r in mrows if r.get("primary_cross_market") == "yes"
+                         and r.get("primary_ingredient")), None)
+        if prim_row:
+            psid = key_sid.get(prim_row.get("primary_ingredient") or "")
+            if psid:
+                html += (f'<p class="sub" data-i18n="combo.cross_primary">'
+                         f'{esc(T["combo.cross_primary"])} '
+                         f'<a href="../drug/{esc(psid)}.html" '
+                         f'data-i18n="combo.cross_primary_link">'
+                         f'{esc(T["combo.cross_primary_link"])}</a></p>')
+        return html
+
     (OUT / "combo").mkdir(parents=True, exist_ok=True)
     T = I18N["en"]
     made = 0
@@ -4015,6 +4255,7 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
 <h2 data-i18n="combo.products">{esc(T["combo.products"])}</h2>
 {rows_html}
 {capped_html}
+{cross_html(slug)}
 <p class="sub"><a href="../warn.html">{esc(T["combo.see_warnings"])}</a></p>
 <div class="notice" data-i18n-html="combo.source_note">{T["combo.source_note"]}</div>"""
         (OUT / "combo" / slug).write_text(page(title, body, "../"), encoding="utf-8")
