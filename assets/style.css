@@ -219,6 +219,30 @@ table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
 table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
 .m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
 .matrix-brand-note{margin:6px 0 0;font-size:12px}
+/* v0.8.3 task-119：矩阵筛选器 */
+.matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;padding:10px 12px}
+.mf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mf-title{font-weight:600;font-size:14px}
+.mf-count{color:var(--muted);font-size:13px}
+.mf-toggle{margin-left:auto}
+.mf-panel{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:8px 14px;margin-top:10px}
+.mf-field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+.mf-field select,.mf-field input[type=search]{padding:6px 8px;border:1px solid var(--line);
+  border-radius:8px;font-size:13px;background:#fff;color:var(--fg)}
+.mf-countries{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--fg)}
+.mf-countries label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.mf-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
+  padding:6px 12px;font-size:13px;cursor:pointer}
+.matrix-sort-note{margin:4px 0 0;font-size:12px}
+@media (max-width:767px){
+  .matrix-filters .mf-panel{display:none}
+  .matrix-filters.mf-open .mf-panel{display:grid}
+  .mf-toggle{display:inline-flex;min-height:40px;align-items:center}
+  .mf-field select,.mf-field input[type=search]{min-height:40px}
+  .mf-countries label{min-height:36px}
+}
 @media (max-width:719px){
   table.matrix{min-width:840px}
   .matwrap{margin:8px 0}
