@@ -34,6 +34,7 @@ DIST = ROOT / "site" / "dist"
 TEMPLATE = ROOT / "docs" / "dashboard.template.html"
 OUT_HTML = ROOT / "docs" / "工作集群-架构与进度.html"
 OUT_PNG = ROOT / "docs" / "img" / "cluster-progress.png"
+QUEUE = ROOT / "docs" / "谷段需求队列.md"
 PAGE_LIMIT = 20_000
 
 BROWSERS = [
@@ -158,6 +159,14 @@ def pct(part: int, whole: int, digits: int = 1) -> str:
     return f"{part / whole * 100:.{digits}f}" if whole else "0"
 
 
+def queue_stats() -> tuple[int, int]:
+    """谷段队列的待办 / 已完成条数，直接从队列文件数。"""
+    if not QUEUE.exists():
+        return (0, 0)
+    text = QUEUE.read_text(encoding="utf-8")
+    return text.count("- [ ]"), text.count("- [x]")
+
+
 def build_tokens(db: dict, dist: dict) -> dict[str, str]:
     now = datetime.now().astimezone()
     us, gb, es, mx, au, cn, ca, total = (db["US"], db["GB"], db["ES"], db["MX"],
@@ -166,6 +175,7 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
     dmd_drop = max(0, dmd_in - dmd_kept)
     files = int(dist["files"])
     size_mb = int(dist["size"]) / 1e6
+    q_todo, q_done = queue_stats()
 
     keep_pct = pct(dmd_kept, dmd_in)
     drop_pct = pct(dmd_drop, dmd_in)
@@ -246,6 +256,8 @@ def build_tokens(db: dict, dist: dict) -> dict[str, str]:
         "BUILD_TIME": str(dist["build_time"]),
         "DEPLOY_NOTE": deploy_note,
         "P5_NOTE": p5_note,
+        "QUEUE_TODO": str(q_todo),
+        "QUEUE_DONE": str(q_done),
     }
 
 
@@ -300,7 +312,7 @@ def shoot(html: Path, png: Path, height: int | None) -> bool:
 
     probe = png.parent / "_probe.png"
     if height is None:
-        if not run(probe, 3000):
+        if not run(probe, 3800):
             return False
         measured = measure(probe)
         if measured:

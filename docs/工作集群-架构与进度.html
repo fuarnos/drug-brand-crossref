@@ -157,6 +157,21 @@
   .risk p{font-size:12.5px;color:#b9c9e2;line-height:1.6;margin-top:6px}
   .risk p b{color:#fff;font-weight:600}
 
+  .queue{display:grid;grid-template-columns:1fr 1.3fr 1.12fr;gap:12px}
+  .qbox{border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#0e192b,#0a1321);padding:12px 15px;align-self:start}
+  .qbox h3{font-size:13px;font-weight:650;display:flex;justify-content:space-between;align-items:baseline}
+  .qbox h3 span{font-size:10.5px;color:var(--muted);font-weight:500}
+  .qitem{padding:6px 0;border-bottom:1px dashed rgba(27,44,70,.8);font-size:12px;line-height:1.45;color:#c2d2e9}
+  .qitem:last-child{border-bottom:none}
+  .qitem b{color:#fff;font-weight:600}
+  .qitem .meta{display:block;font-size:10.5px;color:var(--muted);margin-top:1px}
+  .qtag{display:inline-block;font-size:9.5px;padding:1px 6px;border-radius:999px;margin-right:5px;vertical-align:1px}
+  .qtag.hi{color:var(--red);border:1px solid rgba(255,111,111,.35);background:rgba(255,111,111,.08)}
+  .qtag.mid{color:var(--amber);border:1px solid rgba(246,183,60,.35);background:rgba(246,183,60,.08)}
+  .qtag.lo{color:var(--muted);border:1px solid var(--line2)}
+  .qpolicy{margin-top:11px;padding:9px 13px;border-radius:9px;border:1px solid rgba(90,169,255,.25);background:rgba(90,169,255,.06);font-size:11.5px;color:#cfe0f7}
+  .qpolicy b{color:#fff}
+
   .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px}
   .tl .ev{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(27,44,70,.8)}
   .tl .t{font-size:12px;color:var(--blue);font-weight:700;padding-top:1px}
@@ -179,7 +194,7 @@
   <div class="snap">
     <div class="live static"><i></i>静态快照 · 手动重拍</div>
     <div class="time">
-      快照 <b>2026-10-27 18:34</b><br>
+      快照 <b>2026-10-27 21:48</b><br>
       共享工作区 <b>D:\同种药物商品名剂量对应网站</b><br>
       代码 40+ 模块 · 测试 80+ 项
     </div>
@@ -215,7 +230,7 @@
       <div class="role"><span class="name">可视化</span><span class="pill run"><i></i>本次生成</span></div>
       <div class="sid mono">session-eedb9d20 · 本图</div>
       <div class="task">把多个会话、七条市场线、真实计数和剩余风险压成一张快照；数字来自只读查询与站点统计。</div>
-      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">18:34</span></div>
+      <div class="chips"><span class="chip">HTML + PNG</span><span class="chip">21:48</span></div>
     </div>
   </div>
 
@@ -425,7 +440,39 @@
 </section>
 
 <section>
-  <div class="sec-head"><span class="no">06</span><h2>关键节点 · 10-25 晚 → 10-27</h2><span class="hint">从七市场入库到 v0.5.0：搜索、UI、三语、/warn、数据补全</span></div>
+  <div class="sec-head"><span class="no">06</span><h2>已排期任务 · 谷段队列</h2><span class="hint">北京时间 00:30–08:30 自动跑 · 白天不执行 · 待办 17 / 已完成 19</span></div>
+  <div class="queue">
+    <div class="qbox">
+      <h3>最高优先级 <span>下一谷段先做</span></h3>
+      <div class="qitem"><span class="qtag hi">P0</span><b>药物互相对应</b><span class="meta">复方优先匹配复方；无同组合才降级到主成分，并标注「仅主成分相同」</span></div>
+      <div class="qitem"><span class="qtag hi">P0</span><b>数据库优化</b><span class="meta">PRAGMA / 索引 / 去重；integrity + FK 清零，reports/db-optimization.md</span></div>
+      <div class="qitem"><span class="qtag mid">待确认</span><b>稳定期观察</b><span class="meta">v0.5.1 已发布，等用户确认后再继续加功能</span></div>
+      <div class="qitem"><span class="qtag lo">已完成</span><b>v0.5.1 一批</b><span class="meta">索引分片 3.78 MB → 254 KB；ES 复方 +102；评测集 320 例</span></div>
+    </div>
+    <div class="qbox">
+      <h3>下一谷段 <span>6 项</span></h3>
+      <div class="qitem"><span class="qtag mid">P1</span><b>品牌 / 成分点击目标错位</b><span class="meta">Excedrin 点品牌不得落到 acetaminophen 页；复方进组合页</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>厂家页</b><span class="meta">/maker/&lt;slug&gt;.html；≥2 产品的厂家约 12.4k 个，占位名不建页</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>成分名本地化</b><span class="meta">中文界面成分显示中文；inn_zh 目前只有 16% 有值</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>西语 UI 完整性</b><span class="meta">title / meta / warn / About 英文残留；导航后语言不丢</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>使用向 UI 改进</b><span class="meta">国家 chips、覆盖徽章、复制/打印、最近搜索、空结果行动</span></div>
+      <div class="qitem"><span class="qtag mid">P1</span><b>同品牌不同规格合并</b><span class="meta">一行 + 规格 chips；不改产品身份与碰撞语义</span></div>
+    </div>
+    <div class="qbox">
+      <h3>排期中 <span>5 项 + 备注</span></h3>
+      <div class="qitem"><span class="qtag lo">P2</span><b>按注册号搜索</b><span class="meta">NDC / DIN / ARTG / 国药准字；覆盖差的市场不硬做</span></div>
+      <div class="qitem"><span class="qtag lo">P2</span><b>搜索评测集后续</b><span class="meta">拼音层进 lib/search，CI 门槛 ≥95%</span></div>
+      <div class="qitem"><span class="qtag lo">P2</span><b>索引 P2 收尾</b><span class="meta">停 index.json 双写（省 ~35 MB）；首搜 254 → 150 KB</span></div>
+      <div class="qitem"><span class="qtag lo">P2</span><b>UI P1 余项</b><span class="meta">身份卡重排、筛选/排序、首搜骨架屏</span></div>
+      <div class="qitem"><span class="qtag lo">P2</span><b>数据长尾</b><span class="meta">ES partial 96、CN 身份合并、AU FOI、warn 西语抽检</span></div>
+      <div class="qitem"><b>不做 / 暂缓</b><span class="meta">AU ARTG FOI 需自然人签名（不做）· 图片功能（暂缓）</span></div>
+    </div>
+  </div>
+  <div class="qpolicy"><b>执行约定：</b>新需求默认进谷段队列，紧急才白天做；纯 AI 项目，没有人工审核——判不了的数据不写库、直接丢弃并计数；发布/合并/删除由 agent 按验收标准自动执行（用户已授权）。来源 <b>docs/谷段需求队列.md</b>。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">07</span><h2>关键节点 · 10-25 晚 → 10-27</h2><span class="hint">从七市场入库到 v0.5.1：搜索、UI、三语、/warn、索引分片</span></div>
   <div class="tl">
     <div class="ev"><div class="t mono">19:19</div><div class="x">TRUD 订阅生效，dm+d supplementary 出现 <b>27 个可下载版本</b></div></div>
     <div class="ev"><div class="t mono">20:24</div><div class="x">西班牙入库 <b>25,293 条</b>（CIMA，别名映射 23,508）</div></div>
@@ -442,13 +489,13 @@
     <div class="ev"><div class="t mono">20:47</div><div class="x">站点重建：<b>30,336 文件 / 197.8 MB / 索引 34.9 MB</b>，发布到 GitHub Pages</div></div>
     <div class="ev"><div class="t mono">01:53</div><div class="x">v0.5.0 上线：搜索 P50 <b>94 ms → 1 ms</b>（难例 28/28）、UI P0、三语 P1、<b>/warn 40 条</b>、ATC 双口径 <b>47.5% / 67.0%</b>、GB 盐型 <b>25%</b>、MX <b>35.2%</b></div></div>
     <div class="ev"><div class="t mono">03:40</div><div class="x">v0.5.1 上线：首搜 <b>3.78 MB → 254 KB</b>（manifest+分片）、ES 复方 <b>+102 产品</b>、/warn 西语、评测集 <b>320 例</b></div></div>
-    <div class="ev"><div class="t mono">本次</div><div class="x">快照 18:34；站点 30,336 文件 / 197.8 MB / 索引 34.9 MB</div></div>
+    <div class="ev"><div class="t mono">本次</div><div class="x">快照 21:48；站点 30,336 文件 / 197.8 MB / 索引 34.9 MB</div></div>
     <div class="ev"><div class="t mono">下一步</div><div class="x">停 index.json 双写（省 35MB）→ 拼音层进 lib/search → UI P1 身份卡/筛选 → 长尾数据</div></div>
   </div>
 </section>
 
 <footer>
-  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-27 18:34；重拍命令 <b>python render_dashboard.py</b>。</div>
+  <div><b>口径：</b>SQLite 只读查询（product / substance / name_key / collision）+ site/dist 文件统计。快照时间 2026-10-27 21:48；重拍命令 <b>python render_dashboard.py</b>。</div>
   <div style="text-align:right"><b>这是静态快照，不是实时监控。</b><br>集群由多个互不可见上下文的会话组成，靠共享工作区协作。</div>
 </footer>
 

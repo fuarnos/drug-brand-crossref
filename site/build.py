@@ -3694,7 +3694,7 @@ def main() -> None:
     document.querySelectorAll('[data-i18n-html]').forEach(function(el){ el.innerHTML = window.T(el.dataset.i18nHtml); });
     // /warn 与成分页的警示正文是数据行（zh/en/es 各一份），按当前语言只显示对应块。
     document.querySelectorAll('[data-lang-block]').forEach(function(el){
-      el.style.display = (el.dataset.langBlock === window.LANG) ? '' : 'none';
+      el.style.display = (el.dataset.langBlock === window.LANG) ? 'block' : 'none';
     });
     document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = window.T(el.dataset.ph); });
     document.querySelectorAll('.langs a').forEach(function(a){
