@@ -1,4 +1,4 @@
-zh_name,en_inn,cn_substance_id,en_substance_id,evidence_url,confidence,status,reason
+﻿zh_name,en_inn,cn_substance_id,en_substance_id,evidence_url,confidence,status,reason
 甲苯磺酸艾多沙班,Edoxaban,cn-c764af0bda,edoxaban,https://www.wikidata.org/wiki/Q21011234,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；盐/酯 variant 对应
 二乙酰氨乙酸乙二胺,,cn-305cf960d7,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 治疗用碘[131I]化钠,Sodium Iodide I 131,cn-9bf9d70aee,sodium-iodide-i-131,https://isd.digital.nhs.uk/trud/users/guest/filters/0/categories/6,high,mergeable,放射药/核素药手动映射（Wikidata/药品说明书命名）：治疗用碘[131I]化钠 = Sodium Iodide I 131
@@ -179,7 +179,7 @@ zh_name,en_inn,cn_substance_id,en_substance_id,evidence_url,confidence,status,re
 盐酸纳布啡,Nalbuphine,cn-38f9bb2ace,nalbuphine,https://www.wikidata.org/wiki/Q277979,medium,mergeable,证据=wikidata_chain；匹配=exact；ATC-4 一致；盐/酯 variant 对应
 硫代硫酸钠,Sodium Thiosulfate,cn-cd54069235,sodium-thiosulfate,https://www.wikidata.org/wiki/Q339866,medium,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致；目标无对应盐/酯 variant，按 base variant 合并
 羟甲烟胺,nicotinyl methylamide,cn-b6e78d9b17,,https://www.wikidata.org/wiki/Q744041,,no_english,Wikidata 中文标签对应英文 INN，但 DB 无该 substance（可作下一批英文补录目标）
-苯甲酸阿格列汀,,cn-2f1c20e347,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：列汀 → -gliptin（DPP-4 抑制剂）
+苯甲酸阿格列汀,alogliptin,cn-2f1c20e347,alogliptin,etl/ingest_nhsa.py CN2EN 表（中文通用名→英文 INN）,medium,mergeable,batch A（task-48）｜etl/ingest_nhsa.py CN2EN 表（中文通用名→英文 INN）｜官方名映射
 达肝素钠,Dalteparin,cn-5bd9217c34,,,,uncertain,"多个候选分数相同：Dalteparin(dalteparin), Dalteparin Sodium(dalteparin-sodium)"
 酞丁安,,cn-90cc82ab9a,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 醋酸甲地孕酮,Megestrol,cn-6ad15ef165,megestrol,https://www.wikidata.org/wiki/Q6808975,high,mergeable,证据=wikidata_label；匹配=base；ATC-4 一致；盐/酯 variant 对应
@@ -652,7 +652,7 @@ A群C群脑膜炎球菌多糖结合疫苗,,cn-e0a61cc72d,,,,uncertain,无外部�
 乙胺吡嗪利福异烟,,cn-99eb97f932,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 二维葡磷钙,,cn-bd5a30b40c,,,,combination,含复方/营养类字样「二维」
 亚锡喷替酸,,cn-0b90d47af1,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-人凝血因子VIII,,cn-1184c464cb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+人凝血因子VIII,人凝血因子Ⅷ,cn-1184c464cb,cn-38d3b9ed4e,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 他卡西醇,Tacalcitol,cn-7b4ce87cdd,tacalcitol,https://www.wikidata.org/wiki/Q155682,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
 低分子肝素钙,,cn-2512853d5a,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 依卡倍特钠,,cn-47b5ae5b3b,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1176,7 +1176,7 @@ A群链球菌,,cn-f81bdd537d,,,,uncertain,无外部证据（现有表/Wikidata �
 葡甘聚糖,,cn-02c756089f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 虫草头孢菌,,cn-161ca8e9b5,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 蜡样芽孢杆菌,Bacillus Cereus,cn-9f552414d3,bacillus-cereus,https://www.wikidata.org/wiki/Q131307,medium,mergeable,证据=wikidata_label；匹配=exact
-血液保存液II,,cn-3ce82187b3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+血液保存液II,血液保存液Ⅱ,cn-3ce82187b3,cn-efbda0f8da,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 西尼莫德,,cn-738afee263,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 西替伪麻,,cn-37a9f6a477,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 西维来司他钠,,cn-ff6f1f1acf,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1239,7 +1239,7 @@ L-谷氨酰胺呱仑酸钠,,cn-4253ec76de,,,,uncertain,无外部证据（现有�
 人促黄体激素α,,cn-c92123976c,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人凝血酶,,cn-ad11a0f77f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人尿激酶原,,cn-8cfa7cd6d5,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-人白介素－2,,cn-437270d2a0,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+人白介素－2,aldesleukin,cn-437270d2a0,aldesleukin,etl/ingest_nhsa.py CN2EN 表（中文通用名→英文 INN）,medium,mergeable,batch A（task-48）｜etl/ingest_nhsa.py CN2EN 表（中文通用名→英文 INN）｜官方名映射
 人白细胞介素-2,,cn-d52bf094a3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人绒毛膜促性腺激素β亚单位放射免疫试剂盒,,cn-3ad33cd645,,,,uncertain,放射免疫分析药盒（诊断试剂盒，非单一药品）
 人胎盘脂多糖,,cn-13b7a341b0,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1582,7 +1582,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 乙型肝炎病毒e抗体诊断试剂盒,,cn-5155c7b3e0,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 乙型肝炎病毒e抗原诊断试剂盒,,cn-b42eed7392,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒(1型)核酸检,,cn-22f25544a6,,,,combination,多成分（含「、」）
-乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒1型核酸检测试剂盒,,cn-ee752e7204,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒1型核酸检测试剂盒,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒(1型)核酸检测试剂盒,cn-ee752e7204,cn-87502e499d,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 乙型肝炎病毒核心抗体诊断试剂盒,,cn-1ed9444975,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 乙型肝炎病毒表面抗体诊断试剂盒,,cn-bca806ae86,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 乙酰乌头碱,,cn-338b94654d,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1599,10 +1599,10 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 交联玻璃酸钠,,cn-ad6dd28750,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 亮菌甲素葡萄糖,,cn-3fc5aaaca6,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人5型腺病毒,,cn-7bf5d35f50,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-人II型肿瘤坏死因子受体-抗体融合蛋白,,cn-97f2e26661,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+人II型肿瘤坏死因子受体-抗体融合蛋白,人Ⅱ型肿瘤坏死因子受体-抗体融合蛋白,cn-97f2e26661,cn-946fdc2bca,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 人TNK组织型纤溶酶原激活剂,,cn-91195038b7,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人促甲状腺素,,cn-b2f9aa7aa8,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-人凝血因子IX,,cn-8e0cc7dc56,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+人凝血因子IX,人凝血因子Ⅸ,cn-8e0cc7dc56,cn-1874898036,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 人参间苯二酚,,cn-9e2f5cc0b0,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人干扰素α2а,,cn-6dfccefdee,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人碱性成纤维细胞生长因子,,cn-b47ccb3d21,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -1757,7 +1757,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 托夫生,,cn-f07f8c7278,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 托莱西单抗,,cn-3739e13919,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：单抗 → -mab（单克隆抗体）
 扶正女贞素,,cn-b5bdc30c5c,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-抗A、抗B血型定型试剂,,cn-6c6627ca08,,,,combination,多成分（含「、」）
+抗A、抗B血型定型试剂,抗A抗B血型定型试剂,cn-6c6627ca08,cn-efefd00c0f,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 抗乙型肝炎转移因子,,cn-ad0aaef802,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 抗五步蛇毒血清,,cn-690ce634cb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 抗人白介素-8鼠单抗,,cn-de60a9012d,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：单抗 → -mab（单克隆抗体）
@@ -1904,7 +1904,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 硫酸镁钠钾囗服用浓,,cn-31ad3764f7,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 硼砂甘油钾,,cn-e8e3a0b094,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 硼酸氧化锌,,cn-499d235977,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-碘[125I]-三碘甲腺原氨酸放射免疫分析药盒,,cn-32a04145e2,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]-三碘甲腺原氨酸放射免疫分析药盒,碘[125I]三碘甲腺原氨酸放射免疫分析药盒,cn-32a04145e2,cn-4373c2b217,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]-人促卵泡生成激素放射免疫分析药盒,,cn-b4d0993809,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]-人促甲状腺激素放射免疫分析药盒,,cn-96a1fb276f,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]-人促黄体生成激素放射免疫分析药盒,,cn-2000d6df2c,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
@@ -1917,17 +1917,17 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 碘[125I]β2-微球蛋白放射免疫分析药盒,,cn-414028a40c,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]三碘甲腺原氨酸放射免疫分析药盒,,cn-4373c2b217,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]人C肽放射免疫分析药盒,,cn-724e292964,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]人促卵泡生成激素放射免疫分析药盒,,cn-0bea99135a,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]人促卵泡生成激素放射免疫分析药盒,碘[125I]-人促卵泡生成激素放射免疫分析药盒,cn-0bea99135a,cn-b4d0993809,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]人促甲状腺激素免疫放射分析药盒,,cn-393ce66494,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]人促甲状腺激素放射免疫分析药盒,,cn-1c205958a6,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]人促黄体生成激素放射免疫分析药盒,,cn-ed56c4fe90,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]人促甲状腺激素放射免疫分析药盒,碘[125I]-人促甲状腺激素放射免疫分析药盒,cn-1c205958a6,cn-96a1fb276f,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
+碘[125I]人促黄体生成激素放射免疫分析药盒,碘[125I]-人促黄体生成激素放射免疫分析药盒,cn-ed56c4fe90,cn-2000d6df2c,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]人生长激素放射免疫分析药盒,,cn-26f628cf19,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]人绒毛膜促性腺激素-β亚单位放射免疫分析药盒,,cn-48c9aa08b4,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]人绒毛膜促性腺激素放射免疫分析药盒,,cn-346106be97,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]催乳素放射免疫分析药盒,,cn-b486eee49d,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]催乳素放射免疫分析药盒,碘[125I]-催乳素放射免疫分析药盒,cn-b486eee49d,cn-52e4274bf9,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]反三碘甲腺原氨酸放射免疫分析药盒,,cn-3c1c0300ed,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]地高辛放射免疫分析药盒,,cn-e62ff61e71,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]孕酮放射免疫分析药盒,,cn-c18247bc3c,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]孕酮放射免疫分析药盒,碘[125I]-孕酮放射免疫分析药盒,cn-c18247bc3c,cn-8e4caed20e,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]心钠素放射免疫分析药盒,,cn-04e7bfb04a,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]游离三碘甲状腺原氨酸放射免疫分析药盒,,cn-ba1b4f61a1,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]游离甲状腺素放射免疫分析药盒,,cn-ddad2f1cd0,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
@@ -1935,12 +1935,12 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 碘[125I]甲状腺微粒体抗体分析药盒,,cn-719f5d5da8,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]甲状腺球蛋白抗体分析药盒,,cn-b95c25f37b,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]甲状腺球蛋白放射免疫分析药盒,,cn-e0b94c2dbf,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]甲状腺素放射免疫分析药盒,,cn-48dc3d01b0,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]甲状腺素放射免疫分析药盒,碘[125I]-甲状腺素放射免疫分析药盒,cn-48dc3d01b0,cn-bb2757e740,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]甲胎蛋白放射免疫分析药盒,,cn-f015ba3317,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]癌胚抗原放射免疫分析药盒,,cn-410d11931d,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]白蛋白放射免疫分析药盒,,cn-7e866c8b53,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]皮质醇放射免疫分析药盒,,cn-5a64944e8e,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
-碘[125I]睾酮放射免疫分析药盒,,cn-73ce0656a2,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+碘[125I]睾酮放射免疫分析药盒,碘[125I]-睾酮放射免疫分析药盒,cn-73ce0656a2,cn-53d3903c26,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 碘[125I]胃泌素放射免疫分析药盒,,cn-fecd5a17d8,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]胰岛素抗体分析药盒,,cn-353b66887f,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 碘[125I]胰岛素放射免疫分析药盒,,cn-2203e42d91,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
@@ -2091,7 +2091,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 银耳鱼肝油乳,,cn-8b8d5f7269,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 锝[99Tc]亚甲基二膦酸盐,,cn-628fb5cebd,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 阿伐可泮,Avacopan,cn-b9360f2d77,avacopan,https://www.wikidata.org/wiki/Q27285470,medium,mergeable,证据=wikidata_label；匹配=exact
-阿加糖酶α,,cn-4fb2338338,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+阿加糖酶α,阿加糖酶β,cn-4fb2338338,cn-b89f68fd48,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 阿可替尼,,cn-fe1962d426,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：替尼 → -tinib（酪氨酸激酶抑制剂）
 阿基仑赛,Axicabtagene Ciloleucel,cn-3d5a7cfa06,axicabtagene-ciloleucel,https://www.wikidata.org/wiki/Q30314851,medium,mergeable,证据=wikidata_label；匹配=exact
 阿巴卡韦拉米夫定,,cn-cb24700bc1,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -2109,7 +2109,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 马勃水杨酸,,cn-3bc001ea10,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 马来酸右噻吗洛尔,,cn-50c9b7cdc4,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：洛尔 → -olol（β受体阻滞剂）
 马来酸阿可替尼,,cn-94c72f70f4,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：替尼 → -tinib（酪氨酸激酶抑制剂）
-马破伤风免疫球蛋白F(ab′)₂,,cn-e02680c13f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+马破伤风免疫球蛋白F(ab′)₂,马破伤风免疫球蛋白(F(ab')2),cn-e02680c13f,cn-6c3270fc04,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 高渗羟乙基淀粉200/0.5氯化钠,,cn-ee0c4bf3e5,,,,combination,多成分（含「/」）
 麦格司他,,cn-fbaa3d880d,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 麻敏维C,,cn-dbefab34e0,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -2118,15 +2118,15 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 麻黄碱色甘酸钠,,cn-e5dffbe966,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 黄氧化汞,,cn-d221cd581e,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 黄花蒿花粉变应原皮肤点刺,,cn-bc30859502,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-ω-3 鱼油中/长链脂肪乳,,cn-e414e3b684,,,,combination,多成分（含「/」）
-三维亚油酸胶丸 Ⅰ,,cn-984316b3cb,,,,combination,含复方/营养类字样「三维」
+ω-3 鱼油中/长链脂肪乳,ω-3鱼油中/长链脂肪乳,cn-e414e3b684,cn-2adea44598,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
+三维亚油酸胶丸 Ⅰ,三维亚油酸胶丸Ⅰ,cn-984316b3cb,cn-e38aca6dac,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 三维亚油酸胶丸Ⅱ,,cn-d320540fea,,,,combination,含复方/营养类字样「三维」
-中长链脂肪乳/氨基酸（16）/葡萄糖,,cn-b74588609c,,,,combination,多成分（含「/」）
+中长链脂肪乳/氨基酸（16）/葡萄糖,中长链脂肪乳/氨基酸(16)/葡萄糖,cn-b74588609c,cn-42d08f21b7,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 乙型肝炎病毒、 丙型肝炎病毒 、人类免疫缺陷病毒(1＋2型)核酸,,cn-ede1239590,,,,combination,多成分（含「、」）
-乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒（1＋2型）核酸,,cn-a42bb50560,,,,combination,多成分（含「、」）
-乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒（1型）核酸检测试剂,,cn-a6e340885d,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒（1＋2型）核酸,乙型肝炎病毒、 丙型肝炎病毒 、人类免疫缺陷病毒(1＋2型)核酸,cn-a42bb50560,cn-ede1239590,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
+乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒（1型）核酸检测试剂,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒1型核酸检测试剂,cn-a6e340885d,cn-68a3fbd396,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 亚油酸,Linoleic Acid,cn-e3b75c1bd3,linoleic-acid,https://www.wikidata.org/wiki/Q407426,medium,mergeable,证据=wikidata_label；匹配=exact
-人凝血因子VⅢ,,cn-02f08fea05,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
+人凝血因子VⅢ,人凝血因子Ⅷ,cn-02f08fea05,cn-38d3b9ed4e,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 人类免疫缺陷病毒抗原抗体检测试剂盒,,cn-0cd34da141,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 人表皮生长因子衍生物,,cn-87d16d51c9,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 冻干人凝血酶,,cn-c511e9ca4c,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -2145,7 +2145,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 氟[ ¹⁸F]脱氧葡糖,Fludeoxyglucose F 18,cn-9d8dbf87c3,fludeoxyglucose-f-18,"https://api.fda.gov/drug/ndc.json?search=product_ndc:""13267-234""",high,mergeable,放射药/核素药手动映射（Wikidata/药品说明书命名）：氟[ ¹⁸F]脱氧葡糖 = Fludeoxyglucose F 18
 氟哌啶,,cn-f72af8dd8f,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 氨基酸（15）腹膜透析,,cn-cd1971d171,,,,uncertain,腹膜透析液（非单一成分制剂）
-氨酚伪麻美芬片(Ⅲ)/ 氨麻美敏,,cn-1e1d2aee4c,,,,combination,多成分（含「/」）
+氨酚伪麻美芬片(Ⅲ)/ 氨麻美敏,氨酚伪麻美芬片(Ⅲ)/氨麻美敏,cn-1e1d2aee4c,cn-7c7beef94a,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 氯氮,,cn-5df35cd6ea,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 氯雷氨酚伪麻,,cn-b8b4cbe2e3,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 水杨酸咪唑,,cn-c02bb26c39,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
@@ -2163,7 +2163,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 石菖蒲碱式碳酸铋,,cn-7679ac27ba,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 碳酸钙D₃,,cn-f1833651fe,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 科洛曲,,cn-af6bd759ab,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-结构脂肪乳（20%）/氨基酸（16）/葡萄糖,,cn-f6f546ab34,,,,combination,多成分（含「/」）
+结构脂肪乳（20%）/氨基酸（16）/葡萄糖,结构脂肪乳(20%)/氨基酸(16)/葡萄糖,cn-f6f546ab34,cn-aaed64f319,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 维霉素,,cn-e3aa4ab7f1,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）；构词规律：霉素 → -mycin（大环内酯/氨基糖苷类）
 美息伪麻,,cn-4c9ffa497d,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 羟布宗,Oxyphenbutazone,cn-6230b1d3d8,oxyphenbutazone,https://www.wikidata.org/wiki/Q4116192,high,mergeable,证据=wikidata_label；匹配=exact；ATC-4 一致
@@ -2172,7 +2172,7 @@ C肽放射免疫诊断试剂,,cn-4c7862f4bf,,,,uncertain,放射免疫分析药�
 蛋氨酸,Dl-Methionine,cn-4843d6cbec,,,,uncertain,"多个候选分数相同：Dl-Methionine(dl-methionine), L-Methionine(l-methionine), Methionine(methionine)"
 达克罗宁薄荷,,cn-a8c6843f57,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
 酚麻美敏,,cn-0b0a080afb,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）
-锝[99MTC] 双半胱乙酯,,cn-bc823c69bd,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
+锝[99MTC] 双半胱乙酯,锝[99mTc]双半胱乙酯,cn-bc823c69bd,cn-26a26f6713,reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）,medium,mergeable,batch A（task-48）｜reports/substance_duplicates.csv（同名重复成分；需 auto-merge/rename 路径）｜重复成分同名：目标为 cn- canonical，merge_cn_substances.py 会拒绝 cn- 目标，实际走 auto_merge/rename 路径
 锝[99mTc]亚甲基二膦酸,,cn-749eadf347,,,,uncertain,放射性药物/药盒：需要核素-配体完整 INN 才能合并，本轮不合并
 高锝[ 99mTc]酸钠,Technetium Tc 99M Sodium Pertechnetate,cn-d44f1489d5,technetium-tc-99m-sodium-pertechnetate,"https://api.fda.gov/drug/ndc.json?search=product_ndc:""11994-090""",high,mergeable,放射药/核素药手动映射（Wikidata/药品说明书命名）：高锝[ 99mTc]酸钠 = Technetium Tc 99M Sodium Pertechnetate
 麦精鱼肝油,,cn-2922fe96cd,,,,uncertain,无外部证据（现有表/Wikidata 均未命中）

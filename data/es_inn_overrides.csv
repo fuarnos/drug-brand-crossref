@@ -595,7 +595,7 @@ Bosertan,Bosentan,mx-es-bosertan,bosentan,fuzzy(low)→bosentan,low,uncertain,�
 Bristol Myers Squibb De México,,mx-es-bristol-myers-squibb-de-mexico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Bromhidrato De Glutamato De,Glutamato,mx-es-bromhidrato-de-glutamato-de,glutamato,fuzzy(low)→glutamato,low,uncertain,低置信证据: 模糊 glutamato de ≈ Glutamato (0.86)；products=1; countries=MX
 Bromuro De Glicopirranio,,mx-es-bromuro-de-glicopirranio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Bromuro Pinaverio,,mx-es-bromuro-pinaverio,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
+Bromuro Pinaverio,pinaverium-bromide,mx-es-bromuro-pinaverio,pinaverium-bromide,data/mx_inn_map.json（COFEPRIS 西→英 INN 表）,medium,mergeable,batch A（task-48）｜data/mx_inn_map.json（COFEPRIS 西→英 INN 表）｜官方名映射
 Bufenina,,mx-es-bufenina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Butirato De Hidrocortisona,,mx-es-butirato-de-hidrocortisona,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Butrew Sbk,,mx-es-butrew-sbk,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
@@ -735,7 +735,7 @@ Furuato De Mometasona,,mx-es-furuato-de-mometasona,,,,no_english,库内无对应
 Gabepentina,Gabapentin,mx-es-gabepentina,gabapentin,fuzzy(low)→gabapentin,low,uncertain,低置信证据: 模糊 gabepentina ≈ Gabapentin (0.86)；products=1; countries=MX
 Gauifenesina,Guaifenesin,mx-es-gauifenesina,guaifenesin,fuzzy(low)→guaifenesin,low,uncertain,低置信证据: 模糊 gauifenesina ≈ Guaifenesin (0.87)；products=1; countries=MX
 Gel,,mx-es-gel,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Gemifloxacino,Gemifloxacin,mx-es-gemifloxacino,gemifloxacin,wikidata_es_en(medium)→gemifloxacin; atc_unique(medium)→gemifloxacin,medium,mergeable,Wikidata 同一实体: es=gemifloxacino→en=gemifloxacin; sim=0.96；products=1; countries=MX
+Gemifloxacino,gemifloxacin,mx-es-gemifloxacino,gemifloxacin,data/who_inn_names.csv（WHO INN 官方多语名）,high,mergeable,batch A（task-48）｜data/who_inn_names.csv（WHO INN 官方多语名）｜官方名映射
 Gentuzumab,,mx-es-gentuzumab,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Glepezida,,mx-es-glepezida,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Glicerolfosfato De Sodio,Glicerofosfato,mx-es-glicerolfosfato-de-sodio,glicerofosfato,fuzzy(low)→glicerofosfato,low,uncertain,低置信证据: 模糊 glicerolfosfato ≈ Glicerofosfato (0.97)；products=1; countries=MX
@@ -962,7 +962,7 @@ Tegoprazan,,mx-es-tegoprazan,,,,no_english,库内无对应英文成分候选；p
 Telitromicina,Telithromycin,mx-es-telitromicina,telithromycin,wikidata_es_en(medium)→telithromycin; atc_unique(medium)→telithromycin,medium,mergeable,Wikidata 同一实体: es=telitromicina→en=telithromycin; sim=0.85；products=1; countries=MX
 Teofilina Efedrina,,mx-es-teofilina-efedrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Terapia Infantil,,mx-es-terapia-infantil,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
-Tesamorelina,Tesamorelin,mx-es-tesamorelina,tesamorelin,es_suffix(medium)→tesamorelin,medium,mergeable,西语后缀规则 -ina→-in; sim=0.96；products=1; countries=MX
+Tesamorelina,tesamorelin,mx-es-tesamorelina,tesamorelin,data/who_inn_names.csv（WHO INN 官方多语名）,high,mergeable,batch A（task-48）｜data/who_inn_names.csv（WHO INN 官方多语名）｜官方名映射
 Tetánico,,mx-es-tetanico,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Tetrametrina,,mx-es-tetrametrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
 Tetrametrina - Fenotrina,,mx-es-tetrametrina-fenotrina,,,,no_english,库内无对应英文成分候选；products=1; countries=MX
