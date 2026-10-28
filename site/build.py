@@ -1519,7 +1519,7 @@ def _merge_static_i18n(values: dict) -> None:
     for lang in ("en", "es", "zh"):
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
                        MAKER_I18N[lang], META_I18N[lang], GLOSSARY_I18N[lang],
-                       LABEL_I18N[lang], UI_I18N[lang]):
+                       ATC_I18N[lang], LABEL_I18N[lang], UI_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1547,7 +1547,8 @@ def _install_zh_hant(values: dict) -> None:
             merged[key] = _subst_placeholders(text, values)
     # v0.6.3：U1/U2/U3 新 key 的 zh-Hant 值直接来自 build.py（不依赖 JSON 是否已补齐），
     # 避免新 key 回落到简体中文。
-    for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"]):
+    for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"],
+                  ATC_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
@@ -2076,6 +2077,16 @@ ES: reutilización no comercial con mención de la fuente. Terms: <a href="https
 資料集」；只存事實欄位；規格由品名解析、置信度有限。ES: licencia OGDL v1.0 con atribución a la
 TFDA; datos hasta 2026-10-22; concentraciones derivadas de los nombres de producto, con confianza
 limitada.</li>
+<li><b>WHO ATC/DDD Index</b>: ATC codes and hierarchy reference the <b>WHO Collaborating Centre
+for Drug Statistics Methodology</b> ATC/DDD Index; the Index itself is copyrighted and is not
+reproduced. Class/category names shown on ATC pages are editorial or AI-assisted translations,
+not official WHO labels — the ATC code and WHO hierarchy are authoritative.
+中文：ATC 码与层级引自 WHOCC ATC/DDD Index（版权归 WHOCC，不转载索引全文）；本站类别名是编辑/AI
+辅助译名，不是 WHO 官方译名，以 ATC 码与 WHO 层级为准。
+ES: los códigos y la jerarquía ATC remiten al ATC/DDD Index del WHOCC (con copyright, no se
+reproduce); los nombres de clase son traducciones editoriales/asistidas por IA, no etiquetas
+oficiales de la OMS.
+<a href="https://atcddd.fhi.no/atc_ddd_index/">ATC/DDD Index</a></li>
 <li><b>WHO INN / OMS</b>: Contains International Nonproprietary Names (INN) data from the
 <b>World Health Organization</b>. WHO INN lists are licensed <b>CC BY-NC-SA 3.0 IGO</b>
 (attribution + non-commercial + share-alike); this site is non-commercial, and any mapping table
@@ -2149,6 +2160,21 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
+/* v0.7.x：ATC 类别 / 大类浏览 */
+.atcgrid,.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:8px;margin:10px 0}
+.atccard{display:block;padding:8px 10px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;color:var(--fg);font-size:14px}
+.atccard:hover{border-color:var(--accent)}
+.atccard code{font-weight:700;margin-right:4px}
+.atclist{columns:2;column-gap:24px}
+.atclist li{break-inside:avoid;margin:2px 0}
+@media (max-width:719px){ .atclist{columns:1} }
+.catquick{margin:18px 0 6px}
+.catquick h2{font-size:16px;margin:0 0 8px}
+.catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
+  border-radius:999px;background:#faf9f6;color:var(--fg);font-size:13px}
+.catchip:hover{border-color:var(--accent)}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
 margin-left:8px}
@@ -2418,7 +2444,7 @@ function scheduleSearchEvent(q){
   if(!term || term.length < 2) return;
   SEARCH_EV = setTimeout(()=>gcEvent('search-' + term.slice(0,40)), 900);
 }
-let IDX = [], NICKS = [], CONF = [];
+let IDX = [], NICKS = [], CONF = [], CATS = null;
 // 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
 let SEARCH_LAYERS = null, PY_MAP = null, PY_P = null;
 // P2 分片（task-36）：manifest + 已加载分片池；分片先出结果，核心随后后台加载补全。
@@ -2818,6 +2844,8 @@ function parseBarHTML(parsed, matchLabel){
   // v0.6.4 A2：ATC 码查询在解析条里明确说明「按 ATC 前缀匹配」，避免误读成药名匹配。
   if(parsed.atc) items.push(`<span class="pitem atcbar"><b>${esc(T('parse.atc'))}</b>`
     + `<code>${esc(parsed.atc)}</code> <span class="sub">${esc(T('atc.hint'))}</span></span>`);
+  if(parsed.category) items.push(`<span class="pitem"><b>${esc(T('parse.category'))}</b>`
+    + `${esc(parsed.category)} <span class="sub">${esc(T('parse.category_note'))}</span></span>`);
   if(parsed.name) items.push(`<span class="pitem"><b>${esc(T('parse.name'))}</b>${esc(parsed.name)}</span>`);
   if(parsed.dose) items.push(`<span class="pitem"><b>${esc(T('parse.dose'))}</b>${esc(parsed.dose)}</span>`);
   if(parsed.form) items.push(`<span class="pitem"><b>${esc(T('parse.form'))}</b>${esc(parsed.form)}</span>`);
@@ -3284,6 +3312,16 @@ function renderATC(atcCode, q){
   scheduleSearchEvent(q);
   RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
   const bar = parseBarHTML({atc: atcCode}, T('parse.match.atc'));
+  // 有对应类别页才链接（L1–L4）；L5 成分码（如 C07AB02）回退到其 L4 类别 C07AB
+  let classCode = '';
+  if(CATS && CATS.atc_codes){
+    if(CATS.atc_codes.indexOf(atcCode) >= 0) classCode = atcCode;
+    else if(atcCode.length === 7 && CATS.atc_codes.indexOf(atcCode.slice(0, 5)) >= 0)
+      classCode = atcCode.slice(0, 5);
+  }
+  const classLink = classCode
+    ? `<p class="sub"><a href="${BASE}atc/${esc(classCode)}.html">${esc(T('atc.view_class'))} (${esc(classCode)})</a></p>`
+    : "";
   const repEl = document.getElementById('report');
   if(!IDX_READY){
     // ATC 聚合字段只在完整 core 里；分片阶段先显示加载提示，core 到位后重跑。
@@ -3300,7 +3338,7 @@ function renderATC(atcCode, q){
   const shown = hits.slice(0, 200);
   if(!shown.length){
     RES_GROUPS = null; LAST_DISPLAY = [];
-    out.innerHTML = bar + `<div class="notice warnbox"><b>${esc(T('atc.none_meta').replace('{code}', atcCode))}</b> ${esc(T('atc.none'))}</div>`;
+    out.innerHTML = bar + `<div class="notice warnbox"><b>${esc(T('atc.none_meta').replace('{code}', atcCode))}</b> ${esc(T('atc.none'))}</div>` + classLink;
     meta.textContent = T('atc.none_meta').replace('{code}', atcCode);
     if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
     return;
@@ -3310,9 +3348,66 @@ function renderATC(atcCode, q){
   LAST_DISPLAY = display;
   out.innerHTML = bar
     + `<div class="notice atcbar">${esc(T('atc.hit').replace('{code}', atcCode).replace('{n}', String(hits.length)))}</div>`
-    + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
+    + `<div id="reswrap">${resultsTableHTML(T)}</div>` + classLink;
   meta.textContent = `${hits.length} ${T('res.matched')} · ${T('atc.label')} ${atcCode}`;
   if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
+}
+// v0.7.x：大类词匹配（中英西+繁中，精确/别名；不匹配药名）
+// v0.7.x：大类词匹配（中英西+繁中，精确/别名；不匹配药名；忽略重音/空格）
+function _catNorm(s){
+  return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '').toLowerCase();
+}
+function catHit(nq){
+  if(!CATS || !CATS.categories || !nq) return null;
+  const q = _catNorm(nq);
+  if(q.length < 2) return null;
+  for(const c of CATS.categories){
+    const labels = [];
+    const L = c.labels || {};
+    for(const k in L){ if(L[k]) labels.push(L[k]); }
+    for(const a of (c.aliases || [])){ if(a) labels.push(a); }
+    for(const lb of labels){
+      if(_catNorm(lb) === q) return c;
+    }
+  }
+  return null;
+}
+function renderCategory(cat, q){
+  const T = window.T || (k=>k);
+  syncURL(q);
+  scheduleSearchEvent(q);
+  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
+  const label = (cat.labels && (cat.labels[window.LANG] || cat.labels.en)) || cat.id;
+  const bar = parseBarHTML({category: label}, T('parse.match.category'));
+  const catUrl = BASE + String(cat.url || '');
+  if(!IDX_READY){
+    out.innerHTML = bar + `<div class="notice">${esc(T('atc.loading'))}</div>`;
+    loadIndex().then(ok => { if(ok && box.value.trim() === q) render(); });
+    return;
+  }
+  const prefs = cat.prefixes || [];
+  const hits = [];
+  for(const e of IDX){
+    const codes = e.atc;
+    if(codes && codes.some(c => prefs.some(p => c.indexOf(p) === 0))) hits.push(e);
+  }
+  hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  const shown = hits.slice(0, 200);
+  const link = `<p class="sub"><a href="${esc(catUrl)}">${esc(T('atc.view_class'))}</a> · `
+    + `${esc(T('cat.disclaimer'))}</p>`;
+  if(!shown.length){
+    RES_GROUPS = null; LAST_DISPLAY = [];
+    out.innerHTML = bar + `<div class="notice warnbox">${esc(T('cat.no_data'))}</div>` + link;
+    meta.textContent = T('res.none');
+    return;
+  }
+  const display = shown.map(e => [1, 'category', e]);
+  RES_GROUPS = groupByIngredient(display);
+  LAST_DISPLAY = display;
+  out.innerHTML = bar + `<div class="notice">${esc(T('parse.category_note'))}</div>` + link
+    + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
+  meta.textContent = `${hits.length} ${T('res.matched')} · ${T('parse.category')} ${label}`;
 }
 function render(){
   const q = box.value.trim();
@@ -3323,6 +3418,9 @@ function render(){
   if(atcCode){ renderATC(atcCode, q); return; }
   const [nameQ, st] = splitDose(q);
   const nq = norm(nameQ);
+  // v0.7.x：大类词（降压药 / antibiotics / …）→ 主题合集过滤 + 解析条说明
+  const cat = catHit(nq);
+  if(cat){ renderCategory(cat, q); return; }
   const parsed = parseQuery(q);
   // 新一轮查询：重置分组/折叠/分页状态（「加载更多」「折叠」只在点击时增量重绘）
   RES_LIMIT = RES_PAGE;
@@ -3647,8 +3745,9 @@ function loadSupport(){
   if(SUPPORT_P) return SUPPORT_P;
   SUPPORT_P = Promise.all([
     fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
-    fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
-  ]).then(([a,c])=>{ NICKS = a || []; CONF = c || []; return true; })
+    fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[]),
+    fetch(BASE + 'data/categories.json').then(r=>r.json()).catch(()=>null)
+  ]).then(([a,c,cat])=>{ NICKS = a || []; CONF = c || []; CATS = cat || null; return true; })
     .catch(()=>{ SUPPORT_P = null; return false; });
   return SUPPORT_P;
 }
@@ -4014,6 +4113,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     <a href="{prefix}about.html" data-i18n="nav.about">About</a>
     <a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What's new</a>
     <a href="{prefix}glossary.html" data-i18n="nav.glossary">Glossary</a>
+    <a href="{prefix}atc.html" data-i18n="nav.atc">ATC &amp; categories</a>
     <span class="langs">{sw}</span></nav>
 </div></header>
 <main><div class="wrap">{body}</div></main>
@@ -5366,6 +5466,8 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option></select>
   {{hero_examples}}
 </div>
+<section class="catquick"><h2 data-i18n="cat.quick_title">Browse by category</h2>
+<div class="catgrid">{{cat_chips}}</div></section>
 <section id="u1guide" class="u1guide" aria-labelledby="u1title" data-i18n-aria="u1.aria">
   <div class="u1head"><h2 id="u1title" data-i18n="u1.title">How to use it in 3 steps</h2>
     <button type="button" id="u1close" class="u1close" data-i18n-aria="u1.close"
@@ -5403,7 +5505,8 @@ does not exist. Coverage:</span> {covline}.</div>
                      .replace("{hero_examples}", _sample_buttons(ex["hero"]))
                      .replace("{try1}", _sample_buttons(ex["try1"]))
                      .replace("{try2}", _sample_buttons(ex["try2"]))
-                     .replace("{try3}", _sample_buttons(ex["try3"])))
+                     .replace("{try3}", _sample_buttons(ex["try3"]))
+                     .replace("{cat_chips}", _home_cat_chips(code, prefix)))
         html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
                     canonical_rel=path, alt_rel="", head_js=U1_HEAD_JS)
@@ -5529,6 +5632,303 @@ GLOSSARY_TERMS = ("inn", "ban", "usan", "atc", "mah", "din", "ndc", "artg",
                   "fdc", "lasa", "otc", "rx", "strength")
 
 
+# ── v0.7.x ATC 类别浏览 + 常见大类 ─────────────────────────────────────────
+# ATC 码/层级是权威数据（WHO ATC/DDD Index 引用，不转载）；类别名是编辑/AI 译名，
+# 页面明确标注「ATC 码为准」。DB 的 atc_name 是西语药名，不含类别名，故类别名内置。
+ATC_I18N = {
+    "en": {
+        "nav.atc": "ATC & categories",
+        "atc.browse_title": "Browse by ATC class",
+        "atc.browse_intro": ("WHO ATC classes group medicines by organ/system and "
+                             "pharmacological class. Start from a top-level group or a consumer "
+                             "category; each page lists the active ingredients recorded here."),
+        "atc.level": "ATC level", "atc.parent": "Parent class", "atc.children": "Child classes",
+        "atc.ingredients": "Active ingredients in this class",
+        "atc.count": "{n} active ingredients", "atc.more": "and {n} more",
+        "atc.no_data": "No active ingredients recorded under this class yet.",
+        "atc.unnamed": "Class name not reviewed yet — the ATC code is authoritative.",
+        "atc.ai_note": ("Class and category names are editorial or AI-assisted translations; "
+                        "only the ATC code and the WHO hierarchy are authoritative."),
+        "atc.source_note": ("ATC codes and hierarchy reference the WHO Collaborating Centre for "
+                            "Drug Statistics Methodology ATC/DDD Index (copyright WHOCC; the "
+                            "index itself is not reproduced). Ingredient/strength facts come from "
+                            "the regulator records listed on About."),
+        "atc.all_classes": "All ATC classes", "atc.search_link": "Search this class",
+        "atc.view_class": "View this ATC class", "atc.categories_link": "Consumer categories",
+        "cat.quick_title": "Browse by category", "cat.browse_title": "Common consumer categories",
+        "cat.intro": ("Editorial topic collections: each category maps to ATC classes and active "
+                      "ingredients. It is a way to browse, not evidence that the medicines are "
+                      "equivalent."),
+        "cat.disclaimer": "Theme collection — not a claim of equivalence or interchangeability.",
+        "cat.count": "{n} active ingredients", "cat.related_atc": "Related ATC classes",
+        "cat.no_data": "No active ingredients recorded for this category yet.",
+        "cat.back": "All ATC classes & categories",
+        "parse.category": "Category",
+        "parse.category_note": ("Topic collection matched — not a name, and not a claim of "
+                                "equivalence."),
+        "parse.match.category": "Category / ATC class",
+    },
+    "es": {
+        "nav.atc": "ATC y categorías",
+        "atc.browse_title": "Explorar por clase ATC",
+        "atc.browse_intro": ("Las clases ATC de la OMS agrupan medicamentos por órgano/sistema y "
+                             "clase farmacológica. Empieza por un grupo superior o por una "
+                             "categoría de consumidor; cada página lista los principios activos "
+                             "registrados aquí."),
+        "atc.level": "Nivel ATC", "atc.parent": "Clase superior",
+        "atc.children": "Clases inferiores", "atc.ingredients": "Principios activos de esta clase",
+        "atc.count": "{n} principios activos", "atc.more": "y {n} más",
+        "atc.no_data": "Todavía no hay principios activos registrados en esta clase.",
+        "atc.unnamed": "Nombre de clase sin revisar — el código ATC es la referencia.",
+        "atc.ai_note": ("Los nombres de clase y categoría son traducciones editoriales o "
+                        "asistidas por IA; solo el código ATC y la jerarquía de la OMS son "
+                        "autoritativos."),
+        "atc.source_note": ("Los códigos y la jerarquía ATC remiten al ATC/DDD Index del WHO "
+                            "Collaborating Centre for Drug Statistics Methodology (copyright "
+                            "WHOCC; no se reproduce el índice). Los datos de principios activos "
+                            "proceden de los registros regulatorios listados en Acerca de."),
+        "atc.all_classes": "Todas las clases ATC", "atc.search_link": "Buscar en esta clase",
+        "atc.view_class": "Ver esta clase ATC", "atc.categories_link": "Categorías de consumidor",
+        "cat.quick_title": "Explorar por categoría",
+        "cat.browse_title": "Categorías comunes de consumidor",
+        "cat.intro": ("Colecciones temáticas editoriales: cada categoría se asigna a clases ATC "
+                      "y principios activos. Es una forma de explorar, no una prueba de que los "
+                      "medicamentos sean equivalentes."),
+        "cat.disclaimer": "Colección temática — no implica equivalencia ni intercambiabilidad.",
+        "cat.count": "{n} principios activos", "cat.related_atc": "Clases ATC relacionadas",
+        "cat.no_data": "Todavía no hay principios activos registrados en esta categoría.",
+        "cat.back": "Todas las clases y categorías", "parse.category": "Categoría",
+        "parse.category_note": ("Colección temática — no es un nombre ni una afirmación de "
+                                "equivalencia."),
+        "parse.match.category": "Categoría / clase ATC",
+    },
+    "zh": {
+        "nav.atc": "ATC / 大类", "atc.browse_title": "按 ATC 类别浏览",
+        "atc.browse_intro": ("WHO ATC 按器官系统与药理类别给药物分类。可从一级大类或消费者大类开始；"
+                             "每个页面列出本站收录的该类别活性成分。"),
+        "atc.level": "ATC 层级", "atc.parent": "上级类目", "atc.children": "下级类目",
+        "atc.ingredients": "该类别下的活性成分", "atc.count": "{n} 个活性成分",
+        "atc.more": "另有 {n} 个", "atc.no_data": "该类别暂未收录活性成分。",
+        "atc.unnamed": "类别名尚未校订——以 ATC 码为准。",
+        "atc.ai_note": "类别名称为编辑或 AI 辅助译名；只有 ATC 码与 WHO 层级是权威依据。",
+        "atc.source_note": ("ATC 码与层级引自 WHO Collaborating Centre for Drug Statistics "
+                            "Methodology 的 ATC/DDD Index（版权归 WHOCC，本站不转载索引全文）。"
+                            "成分/规格事实来自 About 页所列监管记录。"),
+        "atc.all_classes": "全部 ATC 类别", "atc.search_link": "搜索该类别",
+        "atc.view_class": "查看该 ATC 类别", "atc.categories_link": "消费者大类",
+        "cat.quick_title": "按大类浏览", "cat.browse_title": "常见消费者大类",
+        "cat.intro": ("编辑整理的主题合集：每个大类映射到 ATC 类别与活性成分。它只是浏览入口，"
+                      "不代表这些药可以互相替代或等同。"),
+        "cat.disclaimer": "主题合集——不代表同效或可互换。",
+        "cat.count": "{n} 个活性成分", "cat.related_atc": "相关 ATC 类别",
+        "cat.no_data": "该大类暂未收录活性成分。", "cat.back": "全部 ATC 类别与大类",
+        "parse.category": "大类",
+        "parse.category_note": "命中的是主题大类，不是药名；也不代表同效或可互换。",
+        "parse.match.category": "大类 / ATC 类别",
+    },
+    "zh-Hant": {
+        "nav.atc": "ATC / 大類", "atc.browse_title": "依 ATC 類別瀏覽",
+        "atc.browse_intro": ("WHO ATC 依器官系統與藥理類別為藥物分類。可從一級大類或消費者大類開始；"
+                             "每個頁面列出本站收錄的該類別有效成分。"),
+        "atc.level": "ATC 層級", "atc.parent": "上級類目", "atc.children": "下級類目",
+        "atc.ingredients": "該類別下的有效成分", "atc.count": "{n} 個有效成分",
+        "atc.more": "另有 {n} 個", "atc.no_data": "該類別暫未收錄有效成分。",
+        "atc.unnamed": "類別名尚未校訂——以 ATC 碼為準。",
+        "atc.ai_note": "類別名稱為編輯或 AI 輔助譯名；只有 ATC 碼與 WHO 層級是權威依據。",
+        "atc.source_note": ("ATC 碼與層級引自 WHO Collaborating Centre for Drug Statistics "
+                            "Methodology 的 ATC/DDD Index（版權歸 WHOCC，本站不轉載索引全文）。"
+                            "成分/規格事實來自 About 頁所列監管紀錄。"),
+        "atc.all_classes": "全部 ATC 類別", "atc.search_link": "搜尋該類別",
+        "atc.view_class": "查看該 ATC 類別", "atc.categories_link": "消費者大類",
+        "cat.quick_title": "依大類瀏覽", "cat.browse_title": "常見消費者大類",
+        "cat.intro": ("編輯整理的主題合集：每個大類對應 ATC 類別與有效成分。它只是瀏覽入口，"
+                      "不代表這些藥可以互相替代或等同。"),
+        "cat.disclaimer": "主題合集——不代表同效或可互換。",
+        "cat.count": "{n} 個有效成分", "cat.related_atc": "相關 ATC 類別",
+        "cat.no_data": "該大類暫未收錄有效成分。", "cat.back": "全部 ATC 類別與大類",
+        "parse.category": "大類",
+        "parse.category_note": "命中的是主題大類，不是藥名；也不代表同效或可互換。",
+        "parse.match.category": "大類 / ATC 類別",
+    },
+}
+
+# WHO ATC level-1 groups（四语编辑译名；代码权威）
+ATC_L1_I18N = {
+    "en": {"A": "Alimentary tract and metabolism", "B": "Blood and blood forming organs",
+           "C": "Cardiovascular system", "D": "Dermatologicals",
+           "G": "Genito-urinary system and sex hormones", "H": "Systemic hormonal preparations",
+           "J": "Antiinfectives for systemic use",
+           "L": "Antineoplastic and immunomodulating agents", "M": "Musculo-skeletal system",
+           "N": "Nervous system", "P": "Antiparasitic products", "R": "Respiratory system",
+           "S": "Sensory organs", "V": "Various"},
+    "es": {"A": "Tracto alimentario y metabolismo", "B": "Sangre y órganos hematopoyéticos",
+           "C": "Sistema cardiovascular", "D": "Dermatológicos",
+           "G": "Sistema genitourinario y hormonas sexuales",
+           "H": "Preparados hormonales sistémicos", "J": "Antiinfecciosos de uso sistémico",
+           "L": "Antineoplásicos e inmunomoduladores", "M": "Sistema musculoesquelético",
+           "N": "Sistema nervioso", "P": "Productos antiparasitarios", "R": "Sistema respiratorio",
+           "S": "Órganos de los sentidos", "V": "Varios"},
+    "zh": {"A": "消化系统及代谢", "B": "血液及造血器官", "C": "心血管系统", "D": "皮肤科用药",
+           "G": "泌尿生殖系统及性激素", "H": "全身用激素制剂", "J": "全身用抗感染药",
+           "L": "抗肿瘤及免疫调节药", "M": "肌肉骨骼系统", "N": "神经系统", "P": "抗寄生虫药",
+           "R": "呼吸系统", "S": "感觉器官", "V": "其他"},
+    "zh-Hant": {"A": "消化系統及代謝", "B": "血液及造血器官", "C": "心血管系統", "D": "皮膚科用藥",
+                "G": "泌尿生殖系統及性激素", "H": "全身用激素製劑", "J": "全身用抗感染藥",
+                "L": "抗腫瘤及免疫調節藥", "M": "肌肉骨骼系統", "N": "神經系統", "P": "抗寄生蟲藥",
+                "R": "呼吸系統", "S": "感覺器官", "V": "其他"},
+}
+
+# L2–L4 常见类别名（编辑/AI 译名；未收录的类目页以 ATC 码为标题并标注待校订）
+ATC_CLASS_I18N = {
+    "en": {"A02": "Drugs for acid related disorders", "A08": "Antiobesity preparations",
+           "A10": "Drugs used in diabetes", "A10BA": "Biguanides",
+           "B01": "Antithrombotic agents", "B01AA": "Vitamin K antagonists",
+           "C07": "Beta blocking agents", "C07A": "Beta blocking agents",
+           "C07AB": "Selective beta-1 blocking agents", "C08": "Calcium channel blockers",
+           "C09": "Agents acting on the renin-angiotensin system", "C10": "Lipid modifying agents",
+           "C10AA": "HMG-CoA reductase inhibitors (statins)", "D": "Dermatologicals",
+           "G04": "Urologicals", "H02": "Corticosteroids for systemic use",
+           "J01": "Antibacterials for systemic use", "J05": "Antivirals for systemic use",
+           "M01": "Antiinflammatory and antirheumatic products", "N02": "Analgesics",
+           "N02BE": "Anilides", "N06A": "Antidepressants",
+           "R03": "Drugs for obstructive airway diseases", "R05": "Cough and cold preparations",
+           "R06": "Antihistamines for systemic use"},
+    "es": {"A02": "Fármacos para trastornos ácido-relacionados",
+           "A08": "Preparados antiobesidad", "A10": "Fármacos usados en diabetes",
+           "A10BA": "Biguanidas", "B01": "Agentes antitrombóticos",
+           "B01AA": "Antagonistas de la vitamina K", "C07": "Betabloqueantes",
+           "C07A": "Betabloqueantes", "C07AB": "Betabloqueantes selectivos beta-1",
+           "C08": "Bloqueantes de los canales de calcio",
+           "C09": "Agentes del sistema renina-angiotensina",
+           "C10": "Fármacos modificadores de lípidos",
+           "C10AA": "Inhibidores de la HMG-CoA reductasa (estatinas)", "D": "Dermatológicos",
+           "G04": "Urológicos", "H02": "Corticosteroides de uso sistémico",
+           "J01": "Antibacterianos de uso sistémico", "J05": "Antivirales de uso sistémico",
+           "M01": "Antiinflamatorios y antirreumáticos", "N02": "Analgésicos",
+           "N02BE": "Anilidas", "N06A": "Antidepresivos",
+           "R03": "Fármacos para enfermedades obstructivas de las vías respiratorias",
+           "R05": "Preparados para la tos y el resfriado",
+           "R06": "Antihistamínicos de uso sistémico"},
+    "zh": {"A02": "酸相关疾病用药", "A08": "减肥/抗肥胖药", "A10": "糖尿病用药",
+           "A10BA": "双胍类", "B01": "抗血栓药", "B01AA": "维生素 K 拮抗剂",
+           "C07": "β受体阻滞剂", "C07A": "β受体阻滞剂", "C07AB": "选择性 β1 受体阻滞剂",
+           "C08": "钙通道阻滞剂", "C09": "肾素-血管紧张素系统药物", "C10": "调脂药",
+           "C10AA": "HMG-CoA 还原酶抑制剂（他汀类）", "D": "皮肤科用药", "G04": "泌尿系统用药",
+           "H02": "全身用糖皮质激素", "J01": "全身用抗菌药", "J05": "全身用抗病毒药",
+           "M01": "抗炎抗风湿药", "N02": "镇痛药", "N02BE": "苯胺类", "N06A": "抗抑郁药",
+           "R03": "阻塞性气道疾病用药", "R05": "咳嗽与感冒用药", "R06": "全身用抗组胺药"},
+    "zh-Hant": {"A02": "酸相關疾病用藥", "A08": "減肥/抗肥胖藥", "A10": "糖尿病用藥",
+                "A10BA": "雙胍類", "B01": "抗血栓藥", "B01AA": "維生素 K 拮抗劑",
+                "C07": "β受體阻滯劑", "C07A": "β受體阻滯劑", "C07AB": "選擇性 β1 受體阻滯劑",
+                "C08": "鈣通道阻滯劑", "C09": "腎素-血管緊張素系統藥物", "C10": "調脂藥",
+                "C10AA": "HMG-CoA 還原酶抑制劑（他汀類）", "D": "皮膚科用藥", "G04": "泌尿系統用藥",
+                "H02": "全身用糖皮質激素", "J01": "全身用抗菌藥", "J05": "全身用抗病毒藥",
+                "M01": "抗炎抗風濕藥", "N02": "鎮痛藥", "N02BE": "苯胺類", "N06A": "抗抑鬱藥",
+                "R03": "阻塞性氣道疾病用藥", "R05": "咳嗽與感冒用藥", "R06": "全身用抗組胺藥"},
+}
+
+CONSUMER_CATEGORIES = [
+    {"id": "antihypertensives", "prefixes": ["C02", "C03", "C07", "C08", "C09"],
+     "labels": {"en": "Blood-pressure medicines", "es": "Medicamentos para la presión arterial",
+                "zh": "降压药", "zh-Hant": "降壓藥"},
+     "desc": {"en": "ATC C02/C03/C07/C08/C09 — antihypertensives and related classes.",
+              "es": "ATC C02/C03/C07/C08/C09 — antihipertensivos y clases relacionadas.",
+              "zh": "ATC C02/C03/C07/C08/C09——降压及相关类别。",
+              "zh-Hant": "ATC C02/C03/C07/C08/C09——降壓及相關類別。"}},
+    {"id": "antibiotics", "prefixes": ["J01"],
+     "labels": {"en": "Antibiotics", "es": "Antibióticos", "zh": "抗生素", "zh-Hant": "抗生素"},
+     "desc": {"en": "ATC J01 — systemic antibacterials.",
+              "es": "ATC J01 — antibacterianos sistémicos.", "zh": "ATC J01——全身用抗菌药。",
+              "zh-Hant": "ATC J01——全身用抗菌藥。"}},
+    {"id": "diabetes", "prefixes": ["A10"],
+     "labels": {"en": "Diabetes medicines", "es": "Medicamentos para la diabetes",
+                "zh": "降糖药", "zh-Hant": "降糖藥"},
+     "desc": {"en": "ATC A10 — drugs used in diabetes.",
+              "es": "ATC A10 — fármacos para diabetes.", "zh": "ATC A10——糖尿病用药。",
+              "zh-Hant": "ATC A10——糖尿病用藥。"}},
+    {"id": "weight-loss", "prefixes": ["A08"],
+     "labels": {"en": "Weight-loss medicines", "es": "Medicamentos para perder peso",
+                "zh": "减肥药", "zh-Hant": "減肥藥"},
+     "desc": {"en": "ATC A08 — antiobesity preparations.", "es": "ATC A08 — antiobesidad.",
+              "zh": "ATC A08——抗肥胖药。", "zh-Hant": "ATC A08——抗肥胖藥。"}},
+    {"id": "cold-medicine", "prefixes": ["R05", "N02BE", "R06"],
+     "labels": {"en": "Cold & cough medicines", "es": "Medicamentos para resfriado y tos",
+                "zh": "感冒药", "zh-Hant": "感冒藥"},
+     "desc": {"en": "ATC R05/N02BE/R06 — cough/cold preparations and antihistamines. Consumer "
+                    "“cold medicine” is broader than one ATC class.",
+              "es": "ATC R05/N02BE/R06 — tos/resfriado y antihistamínicos; el término popular es "
+                    "más amplio que una clase ATC.",
+              "zh": "ATC R05/N02BE/R06——咳嗽/感冒与抗组胺类；消费者说的「感冒药」比单一 ATC 类别更宽。",
+              "zh-Hant": "ATC R05/N02BE/R06——咳嗽/感冒與抗組胺類；消費者說的「感冒藥」比單一 ATC 類別更寬。"}},
+    {"id": "analgesics", "prefixes": ["N02", "M01A"],
+     "labels": {"en": "Pain & fever relief", "es": "Analgésicos y antitérmicos",
+                "zh": "退烧止痛", "zh-Hant": "退燒止痛"},
+     "desc": {"en": "ATC N02/M01A — analgesics and antipyretics.",
+              "es": "ATC N02/M01A — analgésicos y antipiréticos.",
+              "zh": "ATC N02/M01A——镇痛与退热药。", "zh-Hant": "ATC N02/M01A——鎮痛與退熱藥。"}},
+    {"id": "allergy", "prefixes": ["R06"],
+     "labels": {"en": "Allergy medicines", "es": "Medicamentos para la alergia",
+                "zh": "抗过敏药", "zh-Hant": "抗過敏藥"},
+     "desc": {"en": "ATC R06 — systemic antihistamines.",
+              "es": "ATC R06 — antihistamínicos sistémicos.", "zh": "ATC R06——全身用抗组胺药。",
+              "zh-Hant": "ATC R06——全身用抗組胺藥。"}},
+    {"id": "acid-related", "prefixes": ["A02"],
+     "labels": {"en": "Stomach / acid medicines", "es": "Medicamentos gástricos / de acidez",
+                "zh": "胃药", "zh-Hant": "胃藥"},
+     "desc": {"en": "ATC A02 — acid-related disorder drugs (antacids, PPIs, H2 blockers).",
+              "es": "ATC A02 — antiácidos, IBP, antihistamínicos H2.",
+              "zh": "ATC A02——抗酸、质子泵抑制剂、H2 受体拮抗剂等。",
+              "zh-Hant": "ATC A02——抗酸、質子泵抑制劑、H2 受體拮抗劑等。"}},
+    {"id": "anticoagulants", "prefixes": ["B01"],
+     "labels": {"en": "Blood thinners / antithrombotics",
+                "es": "Anticoagulantes / antitrombóticos", "zh": "抗凝/抗血栓",
+                "zh-Hant": "抗凝/抗血栓"},
+     "desc": {"en": "ATC B01 — antithrombotic agents. Not all are interchangeable.",
+              "es": "ATC B01 — antitrombóticos; no todos son intercambiables.",
+              "zh": "ATC B01——抗血栓药；彼此不都可互换。",
+              "zh-Hant": "ATC B01——抗血栓藥；彼此不都可互換。"}},
+    {"id": "statins", "prefixes": ["C10AA"],
+     "labels": {"en": "Statins", "es": "Estatinas", "zh": "他汀类", "zh-Hant": "他汀類"},
+     "desc": {"en": "ATC C10AA — HMG-CoA reductase inhibitors.",
+              "es": "ATC C10AA — inhibidores de la HMG-CoA reductasa.",
+              "zh": "ATC C10AA——HMG-CoA 还原酶抑制剂。",
+              "zh-Hant": "ATC C10AA——HMG-CoA 還原酶抑制劑。"}},
+    {"id": "beta-blockers", "prefixes": ["C07"],
+     "labels": {"en": "Beta blockers", "es": "Betabloqueantes", "zh": "β受体阻滞剂",
+                "zh-Hant": "β受體阻滯劑"},
+     "desc": {"en": "ATC C07 — beta blocking agents.", "es": "ATC C07 — betabloqueantes.",
+              "zh": "ATC C07——β受体阻滞剂。", "zh-Hant": "ATC C07——β受體阻滯劑。"}},
+    {"id": "antidepressants", "prefixes": ["N06A"],
+     "labels": {"en": "Antidepressants", "es": "Antidepresivos", "zh": "抗抑郁药",
+                "zh-Hant": "抗抑鬱藥"},
+     "desc": {"en": "ATC N06A — antidepressants.", "es": "ATC N06A — antidepresivos.",
+              "zh": "ATC N06A——抗抑郁药。", "zh-Hant": "ATC N06A——抗抑鬱藥。"}},
+    {"id": "asthma-copd", "prefixes": ["R03"],
+     "labels": {"en": "Asthma / COPD inhalers", "es": "Inhaladores para asma / EPOC",
+                "zh": "哮喘/慢阻肺用药", "zh-Hant": "哮喘/慢阻肺用藥"},
+     "desc": {"en": "ATC R03 — drugs for obstructive airway diseases.",
+              "es": "ATC R03 — enfermedades obstructivas de las vías respiratorias.",
+              "zh": "ATC R03——阻塞性气道疾病用药。", "zh-Hant": "ATC R03——阻塞性氣道疾病用藥。"}},
+    {"id": "corticosteroids", "prefixes": ["H02"],
+     "labels": {"en": "Steroid hormones", "es": "Hormonas esteroideas", "zh": "激素/糖皮质激素",
+                "zh-Hant": "激素/糖皮質激素"},
+     "desc": {"en": "ATC H02 — corticosteroids for systemic use.",
+              "es": "ATC H02 — corticosteroides sistémicos.", "zh": "ATC H02——全身用糖皮质激素。",
+              "zh-Hant": "ATC H02——全身用糖皮質激素。"}},
+    {"id": "antivirals", "prefixes": ["J05"],
+     "labels": {"en": "Antivirals", "es": "Antivirales", "zh": "抗病毒药", "zh-Hant": "抗病毒藥"},
+     "desc": {"en": "ATC J05 — antivirals for systemic use.",
+              "es": "ATC J05 — antivirales sistémicos.", "zh": "ATC J05——全身用抗病毒药。",
+              "zh-Hant": "ATC J05——全身用抗病毒藥。"}},
+    {"id": "dermatologicals", "prefixes": ["D"],
+     "labels": {"en": "Skin medicines", "es": "Medicamentos dermatológicos", "zh": "皮肤外用药",
+                "zh-Hant": "皮膚外用藥"},
+     "desc": {"en": "ATC D — dermatologicals (broad class).",
+              "es": "ATC D — dermatológicos (clase amplia).", "zh": "ATC D——皮肤科用药（大类）。",
+              "zh-Hant": "ATC D——皮膚科用藥（大類）。"}},
+]
+
+
 def build_glossary() -> None:
     """v0.6.4 B10：/glossary.html 术语表（四语，客户端按语言切块 + /es//zh//zh-hant/ 静态副本）。"""
     blocks = []
@@ -5548,6 +5948,217 @@ def build_glossary() -> None:
     html = page("Glossary", body, meta_key="glossary", alternates=True,
                 canonical_rel="glossary.html", alt_rel="glossary.html")
     _write_with_copies("glossary.html", html, "glossary")
+
+
+# ── v0.7.x：ATC 类目页 / 大类页 / landing / 客户端 categories.json ──────────
+ATC_MEMBER_CAP = 60
+ATC_LEN_LEVEL = {1: 1, 3: 2, 4: 3, 5: 4}
+
+
+def _atc_display_name(lang: str, code: str) -> str:
+    if len(code) == 1:
+        return ATC_L1_I18N.get(lang, {}).get(code, "")
+    return ATC_CLASS_I18N.get(lang, {}).get(code, "")
+
+
+def _atc_names(code: str) -> dict[str, str]:
+    return {lang: _atc_display_name(lang, code) for lang in ("en", "es", "zh", "zh-Hant")}
+
+
+def _lang_inline(labels: dict[str, str]) -> str:
+    """行内语言块（i18n.js 对 data-lang-inline=1 用 inline 显示）。"""
+    return "".join(
+        f'<span class="lang-block" data-lang-block="{lang}" data-lang-inline="1">'
+        f'{esc(text)}</span>'
+        for lang, text in labels.items() if text)
+
+
+def _atc_groups(db: sqlite3.Connection) -> dict[int, dict[str, list[dict]]]:
+    rows = [dict(r) for r in db.execute(
+        "SELECT substance_id, inn_en, inn_zh, atc FROM substance "
+        "WHERE atc IS NOT NULL AND atc <> '' ORDER BY atc, inn_en")]
+    groups: dict[int, dict[str, list[dict]]] = {1: {}, 3: {}, 4: {}, 5: {}}
+    for r in rows:
+        for ln in (1, 3, 4, 5):
+            if len(r["atc"]) >= ln:
+                groups[ln].setdefault(r["atc"][:ln], []).append(r)
+    return groups
+
+
+def _atc_members_html(subs: list[dict], cap: int = ATC_MEMBER_CAP,
+                      drug_sids: set[str] | None = None) -> str:
+    ordered = sorted(subs, key=lambda r: ((r.get("inn_zh") or r.get("inn_en") or "").lower(),
+                                          r.get("substance_id") or ""))
+    items = []
+    for r in ordered[:cap]:
+        zh = r.get("inn_zh") or r.get("inn_en") or r.get("substance_id") or ""
+        en = r.get("inn_en") or ""
+        sid = r["substance_id"]
+        if drug_sids is None or sid in drug_sids:
+            label = f'<a href="../drug/{esc(sid)}.html">{esc(zh)}</a>'
+        else:
+            # 有 ATC 但没有 product 的成分没有 drug 页 → 纯文本，避免 ../drug/ 404
+            label = f'<span class="brand-plain">{esc(zh)}</span>'
+        extra = f' <span class="meta">{esc(en)}</span>' if en and en != zh else ""
+        items.append(f'<li>{label}{extra} <code>{esc(r["atc"])}</code></li>')
+    more = ""
+    if len(ordered) > cap:
+        more = (f'<p class="sub" data-i18n="atc.more">and {len(ordered) - cap} more</p>')
+    return f'<ul class="sub atclist">{"".join(items)}</ul>{more}'
+
+
+def build_atc_pages(db: sqlite3.Connection) -> int:
+    """L1–L4 ATC 类目页 /atc/<prefix>.html（父/子类目可逐级浏览）。"""
+    groups = _atc_groups(db)
+    drug_sids = {p.stem for p in (OUT / "drug").glob("*.html")}
+    (OUT / "atc").mkdir(parents=True, exist_ok=True)
+    T = I18N["en"]
+    made = 0
+    for ln in (1, 3, 4, 5):
+        child_ln = {1: 3, 3: 4, 4: 5}.get(ln)
+        for code, subs in sorted(groups[ln].items()):
+            level = ATC_LEN_LEVEL[len(code)]
+            parent = {3: code[:1], 4: code[:3], 5: code[:4]}.get(len(code), "")
+            names = _atc_names(code)
+            name_html = _lang_inline(names)
+            title_html = f'<code>{esc(code)}</code> {name_html}'
+            unnamed = "" if any(names.values()) else (
+                f'<p class="sub" data-i18n="atc.unnamed">{esc(T["atc.unnamed"])}</p>')
+            crumbs = (f'<a href="../atc.html" data-i18n="atc.all_classes">'
+                      f'{esc(T["atc.all_classes"])}</a>')
+            if parent:
+                crumbs += f' · <a href="../atc/{esc(parent)}.html"><code>{esc(parent)}</code></a>'
+            children = ""
+            if child_ln:
+                kids = sorted(groups[child_ln].items())
+                kids = [(c, s) for c, s in kids if c.startswith(code)]
+                if kids:
+                    lis = []
+                    for c, s in kids:
+                        lis.append(f'<li><a href="../atc/{esc(c)}.html"><code>{esc(c)}</code> '
+                                   f'{_lang_inline(_atc_names(c))}</a> '
+                                   f'<span class="meta">({len(s)})</span></li>')
+                    children = (f'<h2 data-i18n="atc.children">{esc(T["atc.children"])}</h2>'
+                                f'<ul class="sub atclist">{"".join(lis)}</ul>')
+            search_href = f'../index.html?q={esc(code)}'
+            body = f"""<p class="sub">{crumbs}</p>
+<h1>{title_html} <span class="tag">L{level}</span></h1>
+{unnamed}
+<p class="sub"><span data-i18n="atc.level">{esc(T["atc.level"])}</span> L{level} ·
+<a class="linkbtn" href="{search_href}" data-i18n="atc.search_link">{esc(T["atc.search_link"])}</a>
+· <a href="../atc.html" data-i18n="atc.categories_link">{esc(T["atc.categories_link"])}</a></p>
+{children}
+<h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
+{_atc_members_html(subs, drug_sids=drug_sids)}
+<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
+<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
+            (OUT / "atc" / f"{code}.html").write_text(
+                page(f"ATC {code}", body, "../"), encoding="utf-8")
+            made += 1
+    return made
+
+
+def build_category_pages(db: sqlite3.Connection) -> int:
+    """常见消费者大类 /cat/<id>.html（主题合集，非药效等同）。"""
+    rows = [dict(r) for r in db.execute(
+        "SELECT substance_id, inn_en, inn_zh, atc FROM substance "
+        "WHERE atc IS NOT NULL AND atc <> '' ORDER BY atc, inn_en")]
+    drug_sids = {p.stem for p in (OUT / "drug").glob("*.html")}
+    (OUT / "cat").mkdir(parents=True, exist_ok=True)
+    T = I18N["en"]
+    made = 0
+    for cat in CONSUMER_CATEGORIES:
+        seen = set()
+        subs = []
+        for r in rows:
+            if any(r["atc"].startswith(p) for p in cat["prefixes"]):
+                if r["substance_id"] not in seen:
+                    seen.add(r["substance_id"])
+                    subs.append(r)
+        related = "".join(
+            f'<li><a href="../atc/{esc(p)}.html"><code>{esc(p)}</code> '
+            f'{_lang_inline(_atc_names(p))}</a></li>' for p in cat["prefixes"])
+        title_labels = cat["labels"]
+        display_title = _lang_inline(title_labels)
+        desc_blocks = "".join(
+            f'<div class="lang-block" data-lang-block="{lang}">{esc(cat["desc"][lang])}</div>'
+            for lang in ("en", "es", "zh", "zh-Hant"))
+        body = f"""<p class="sub"><a href="../atc.html" data-i18n="cat.back">{esc(T["cat.back"])}</a></p>
+<h1>{display_title}</h1>
+{desc_blocks}
+<p class="sub" data-i18n="cat.disclaimer">{esc(T["cat.disclaimer"])}</p>
+<h2 data-i18n="cat.related_atc">{esc(T["cat.related_atc"])}</h2>
+<ul class="sub atclist">{related}</ul>
+<h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
+{_atc_members_html(subs, cap=80, drug_sids=drug_sids)}
+<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
+<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
+        (OUT / "cat" / f'{cat["id"]}.html').write_text(
+            page(cat["labels"]["en"], body, "../"), encoding="utf-8")
+        made += 1
+    return made
+
+
+def build_atc_index() -> None:
+    """���式 /atc.html：14 个 ATC L1 大类 + 16 个消费者大类入口。"""
+    T = I18N["en"]
+    l1_codes = ("A", "B", "C", "D", "G", "H", "J", "L", "M", "N", "P", "R", "S", "V")
+    l1_html = "".join(
+        f'<a class="atccard" href="atc/{code}.html"><code>{code}</code> '
+        f'{_lang_inline(_atc_names(code))}</a>' for code in l1_codes)
+    cat_html = "".join(
+        f'<a class="atccard" href="cat/{cat["id"]}.html">'
+        f'<span class="lang-block" data-lang-block="en" data-lang-inline="1">'
+        f'{esc(cat["labels"]["en"])}</span>'
+        f'<span class="lang-block" data-lang-block="es" data-lang-inline="1">'
+        f'{esc(cat["labels"]["es"])}</span>'
+        f'<span class="lang-block" data-lang-block="zh" data-lang-inline="1">'
+        f'{esc(cat["labels"]["zh"])}</span>'
+        f'<span class="lang-block" data-lang-block="zh-Hant" data-lang-inline="1">'
+        f'{esc(cat["labels"]["zh-Hant"])}</span></a>'
+        for cat in CONSUMER_CATEGORIES)
+    body = f"""<h1 data-i18n="atc.browse_title">{esc(T["atc.browse_title"])}</h1>
+<div data-i18n="atc.browse_intro">{esc(T["atc.browse_intro"])}</div>
+<h2 data-i18n="atc.browse_title">{esc(T["atc.browse_title"])}</h2>
+<div class="atcgrid">{l1_html}</div>
+<h2 data-i18n="cat.browse_title">{esc(T["cat.browse_title"])}</h2>
+<div data-i18n="cat.intro">{esc(T["cat.intro"])}</div>
+<div class="catgrid">{cat_html}</div>
+<p class="sub" data-i18n="cat.disclaimer">{esc(T["cat.disclaimer"])}</p>
+<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
+<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
+    (OUT / "atc.html").write_text(page("ATC classes & categories", body, ""), encoding="utf-8")
+
+
+def build_categories_json(db: sqlite3.Connection) -> None:
+    """客户端搜索用：大类/ATC 类别名 + 前缀 + 页面 URL + 已生成的 ATC 码集合。"""
+    items = []
+    for cat in CONSUMER_CATEGORIES:
+        labels = dict(cat["labels"])
+        aliases = [labels.get("en", ""), cat["id"]]
+        items.append({"kind": "cat", "id": cat["id"], "url": f'cat/{cat["id"]}.html',
+                      "prefixes": list(cat["prefixes"]), "labels": labels,
+                      "aliases": [a for a in aliases if a]})
+    codes = set(ATC_L1_I18N["en"]) | set(ATC_CLASS_I18N["en"])
+    for code in sorted(codes):
+        items.append({"kind": "atc", "id": code, "url": f"atc/{code}.html",
+                      "prefixes": [code], "labels": _atc_names(code), "aliases": [code.lower()]})
+    # atc_codes 用于客户端判断「该类目页是否存在」（全部 L1–L4 前缀，1,154 个）
+    groups = _atc_groups(db)
+    all_codes: set[str] = set()
+    for ln in (1, 3, 4, 5):
+        all_codes.update(groups[ln].keys())
+    (OUT / "data" / "categories.json").write_text(
+        json.dumps({"categories": items, "atc_codes": sorted(all_codes)},
+                   ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+
+def _home_cat_chips(lang: str, prefix: str) -> str:
+    parts = []
+    for cat in CONSUMER_CATEGORIES:
+        label = cat["labels"].get(lang) or cat["labels"]["en"]
+        parts.append(f'<a class="catchip" href="{prefix}cat/{cat["id"]}.html">{esc(label)}</a>')
+    return "".join(parts)
 
 
 def build_404() -> None:
@@ -5932,7 +6543,9 @@ def main() -> None:
     });
     // /warn 与成分页的警示正文是数据行（zh/en/es 各一份），按当前语言只显示对应块。
     document.querySelectorAll('[data-lang-block]').forEach(function(el){
-      el.style.display = (el.dataset.langBlock === window.LANG) ? 'block' : 'none';
+      var on = (el.dataset.langBlock === window.LANG);
+      var inline = el.getAttribute('data-lang-inline') === '1';
+      el.style.display = on ? (inline ? 'inline' : 'block') : 'none';
     });
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
     // v0.6.6/v0.7.0：语言列序（含 TW：zh → CN,TW；zh-Hant → TW,CN,HK；es → ES,MX…）
@@ -6180,6 +6793,12 @@ def main() -> None:
     build_about(stats, coverage, source_cover)
     build_whats_new()
     build_glossary()
+    print("building atc pages ...", flush=True)
+    n_atc = build_atc_pages(db)
+    n_cat = build_category_pages(db)
+    build_atc_index()
+    build_categories_json(db)
+    print("building 404 ...", flush=True)
     build_404()
     build_seo_files()
 
