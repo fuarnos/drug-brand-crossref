@@ -41,6 +41,21 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
+/* v0.7.x：ATC 类别 / 大类浏览 */
+.atcgrid,.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:8px;margin:10px 0}
+.atccard{display:block;padding:8px 10px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;color:var(--fg);font-size:14px}
+.atccard:hover{border-color:var(--accent)}
+.atccard code{font-weight:700;margin-right:4px}
+.atclist{columns:2;column-gap:24px}
+.atclist li{break-inside:avoid;margin:2px 0}
+@media (max-width:719px){ .atclist{columns:1} }
+.catquick{margin:18px 0 6px}
+.catquick h2{font-size:16px;margin:0 0 8px}
+.catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
+  border-radius:999px;background:#faf9f6;color:var(--fg);font-size:13px}
+.catchip:hover{border-color:var(--accent)}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
 margin-left:8px}

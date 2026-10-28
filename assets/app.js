@@ -42,7 +42,7 @@ function scheduleSearchEvent(q){
   if(!term || term.length < 2) return;
   SEARCH_EV = setTimeout(()=>gcEvent('search-' + term.slice(0,40)), 900);
 }
-let IDX = [], NICKS = [], CONF = [];
+let IDX = [], NICKS = [], CONF = [], CATS = null;
 // 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
 let SEARCH_LAYERS = null, PY_MAP = null, PY_P = null;
 // P2 分片（task-36）：manifest + 已加载分片池；分片先出结果，核心随后后台加载补全。
@@ -442,6 +442,8 @@ function parseBarHTML(parsed, matchLabel){
   // v0.6.4 A2：ATC 码查询在解析条里明确说明「按 ATC 前缀匹配」，避免误读成药名匹配。
   if(parsed.atc) items.push(`<span class="pitem atcbar"><b>${esc(T('parse.atc'))}</b>`
     + `<code>${esc(parsed.atc)}</code> <span class="sub">${esc(T('atc.hint'))}</span></span>`);
+  if(parsed.category) items.push(`<span class="pitem"><b>${esc(T('parse.category'))}</b>`
+    + `${esc(parsed.category)} <span class="sub">${esc(T('parse.category_note'))}</span></span>`);
   if(parsed.name) items.push(`<span class="pitem"><b>${esc(T('parse.name'))}</b>${esc(parsed.name)}</span>`);
   if(parsed.dose) items.push(`<span class="pitem"><b>${esc(T('parse.dose'))}</b>${esc(parsed.dose)}</span>`);
   if(parsed.form) items.push(`<span class="pitem"><b>${esc(T('parse.form'))}</b>${esc(parsed.form)}</span>`);
@@ -596,7 +598,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793217742（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793219455（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -649,7 +651,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793217742').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793219455').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -908,6 +910,16 @@ function renderATC(atcCode, q){
   scheduleSearchEvent(q);
   RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
   const bar = parseBarHTML({atc: atcCode}, T('parse.match.atc'));
+  // 有对应类别页才链接（L1–L4）；L5 成分码（如 C07AB02）回退到其 L4 类别 C07AB
+  let classCode = '';
+  if(CATS && CATS.atc_codes){
+    if(CATS.atc_codes.indexOf(atcCode) >= 0) classCode = atcCode;
+    else if(atcCode.length === 7 && CATS.atc_codes.indexOf(atcCode.slice(0, 5)) >= 0)
+      classCode = atcCode.slice(0, 5);
+  }
+  const classLink = classCode
+    ? `<p class="sub"><a href="${BASE}atc/${esc(classCode)}.html">${esc(T('atc.view_class'))} (${esc(classCode)})</a></p>`
+    : "";
   const repEl = document.getElementById('report');
   if(!IDX_READY){
     // ATC 聚合字段只在完整 core 里；分片阶段先显示加载提示，core 到位后重跑。
@@ -924,7 +936,7 @@ function renderATC(atcCode, q){
   const shown = hits.slice(0, 200);
   if(!shown.length){
     RES_GROUPS = null; LAST_DISPLAY = [];
-    out.innerHTML = bar + `<div class="notice warnbox"><b>${esc(T('atc.none_meta').replace('{code}', atcCode))}</b> ${esc(T('atc.none'))}</div>`;
+    out.innerHTML = bar + `<div class="notice warnbox"><b>${esc(T('atc.none_meta').replace('{code}', atcCode))}</b> ${esc(T('atc.none'))}</div>` + classLink;
     meta.textContent = T('atc.none_meta').replace('{code}', atcCode);
     if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
     return;
@@ -934,9 +946,66 @@ function renderATC(atcCode, q){
   LAST_DISPLAY = display;
   out.innerHTML = bar
     + `<div class="notice atcbar">${esc(T('atc.hit').replace('{code}', atcCode).replace('{n}', String(hits.length)))}</div>`
-    + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
+    + `<div id="reswrap">${resultsTableHTML(T)}</div>` + classLink;
   meta.textContent = `${hits.length} ${T('res.matched')} · ${T('atc.label')} ${atcCode}`;
   if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink'); if(a) a.href = reportURL(q); }
+}
+// v0.7.x：大类词匹配（中英西+繁中，精确/别名；不匹配药名）
+// v0.7.x：大类词匹配（中英西+繁中，精确/别名；不匹配药名；忽略重音/空格）
+function _catNorm(s){
+  return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '').toLowerCase();
+}
+function catHit(nq){
+  if(!CATS || !CATS.categories || !nq) return null;
+  const q = _catNorm(nq);
+  if(q.length < 2) return null;
+  for(const c of CATS.categories){
+    const labels = [];
+    const L = c.labels || {};
+    for(const k in L){ if(L[k]) labels.push(L[k]); }
+    for(const a of (c.aliases || [])){ if(a) labels.push(a); }
+    for(const lb of labels){
+      if(_catNorm(lb) === q) return c;
+    }
+  }
+  return null;
+}
+function renderCategory(cat, q){
+  const T = window.T || (k=>k);
+  syncURL(q);
+  scheduleSearchEvent(q);
+  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
+  const label = (cat.labels && (cat.labels[window.LANG] || cat.labels.en)) || cat.id;
+  const bar = parseBarHTML({category: label}, T('parse.match.category'));
+  const catUrl = BASE + String(cat.url || '');
+  if(!IDX_READY){
+    out.innerHTML = bar + `<div class="notice">${esc(T('atc.loading'))}</div>`;
+    loadIndex().then(ok => { if(ok && box.value.trim() === q) render(); });
+    return;
+  }
+  const prefs = cat.prefixes || [];
+  const hits = [];
+  for(const e of IDX){
+    const codes = e.atc;
+    if(codes && codes.some(c => prefs.some(p => c.indexOf(p) === 0))) hits.push(e);
+  }
+  hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  const shown = hits.slice(0, 200);
+  const link = `<p class="sub"><a href="${esc(catUrl)}">${esc(T('atc.view_class'))}</a> · `
+    + `${esc(T('cat.disclaimer'))}</p>`;
+  if(!shown.length){
+    RES_GROUPS = null; LAST_DISPLAY = [];
+    out.innerHTML = bar + `<div class="notice warnbox">${esc(T('cat.no_data'))}</div>` + link;
+    meta.textContent = T('res.none');
+    return;
+  }
+  const display = shown.map(e => [1, 'category', e]);
+  RES_GROUPS = groupByIngredient(display);
+  LAST_DISPLAY = display;
+  out.innerHTML = bar + `<div class="notice">${esc(T('parse.category_note'))}</div>` + link
+    + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
+  meta.textContent = `${hits.length} ${T('res.matched')} · ${T('parse.category')} ${label}`;
 }
 function render(){
   const q = box.value.trim();
@@ -947,6 +1016,9 @@ function render(){
   if(atcCode){ renderATC(atcCode, q); return; }
   const [nameQ, st] = splitDose(q);
   const nq = norm(nameQ);
+  // v0.7.x：大类词（降压药 / antibiotics / …）→ 主题合集过滤 + 解析条说明
+  const cat = catHit(nq);
+  if(cat){ renderCategory(cat, q); return; }
   const parsed = parseQuery(q);
   // 新一轮查询：重置分组/折叠/分页状态（「加载更多」「折叠」只在点击时增量重绘）
   RES_LIMIT = RES_PAGE;
@@ -1206,7 +1278,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793217742，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793219455，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1250,10 +1322,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793217742 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793219455 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1793217742').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1793219455').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1263,7 +1335,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793217742').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793219455').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
@@ -1271,8 +1343,9 @@ function loadSupport(){
   if(SUPPORT_P) return SUPPORT_P;
   SUPPORT_P = Promise.all([
     fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
-    fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
-  ]).then(([a,c])=>{ NICKS = a || []; CONF = c || []; return true; })
+    fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[]),
+    fetch(BASE + 'data/categories.json').then(r=>r.json()).catch(()=>null)
+  ]).then(([a,c,cat])=>{ NICKS = a || []; CONF = c || []; CATS = cat || null; return true; })
     .catch(()=>{ SUPPORT_P = null; return false; });
   return SUPPORT_P;
 }

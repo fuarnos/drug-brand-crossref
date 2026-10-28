@@ -16,8 +16,8 @@
 <meta property="og:url" content="https://fuarnos.github.io/drug-brand-crossref/zh-hant/whats-new.html">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="../assets/style.css?v=1793217717">
-<script src="../assets/i18n.js?v=1793217717"></script>
+<link rel="stylesheet" href="../assets/style.css?v=1793219432">
+<script src="../assets/i18n.js?v=1793219432"></script>
 <script data-goatcounter="https://drug-brand-crossref.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></head>
 <body>
 <header><div class="wrap">
@@ -29,11 +29,13 @@
     <a href="../about.html" data-i18n="nav.about">About</a>
     <a href="../whats-new.html" data-i18n="nav.whatsnew">What's new</a>
     <a href="../glossary.html" data-i18n="nav.glossary">Glossary</a>
+    <a href="../atc.html" data-i18n="nav.atc">ATC &amp; categories</a>
     <span class="langs"><a data-lang="en" href="?lang=en">EN</a><a data-lang="es" href="?lang=es">ES</a><a data-lang="zh" href="?lang=zh">中文</a><a data-lang="zh-Hant" href="?lang=zh-Hant">繁</a></span></nav>
 </div></header>
 <main><div class="wrap"><h1 data-i18n="whatsnew.title">What&#x27;s new</h1>
 <div data-i18n-html="whatsnew.intro">Every release ships with a short summary. Old versions are backfilled from git tags; the full history lives in <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</div>
 <div class="notice" data-i18n="whatsnew.lang_note">Release notes are machine-translated (AI); the Chinese original in CHANGELOG.md is authoritative.</div>
+<section class="release"><h2>v0.7.1<span class="rel-date">2026-10-29</span></h2><ul><li><strong>ATC 类别浏览</strong>：新增 <strong>1,154 个 ATC 类目页</strong>（L1–L4，含层级路径）与 <strong>16 个常见大类入口</strong>；ATC 码搜索结果可直接进入对应类目页，类目页列出该类别下的成分/商品名，并标注 <strong>WHO ATC / DDD</strong> 引用。</li><li><strong>四语类名与类名搜索</strong>：类目名称 en / es / zh / zh-Hant 四语；搜索框支持类名（如「他汀类」「antibiotics」）直接命中类目页。</li><li><strong>数据说明</strong>：L2–L4 多数类名为编辑/AI 译名，<strong>以 ATC 码为准</strong>，译名待专业校订；站点 61,547 文件 / 446.2 MB，sitemap 61,390 URL。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
 <section class="release"><h2>v0.7.0<span class="rel-date">2026-10-29</span></h2><ul><li><strong>台湾市场上线</strong>：接入衛福部食藥署 TFDA「全部藥品許可證資料集」（data.gov.tw #9122），真实库已入库 <strong>16,457 个在册产品</strong>；国家列表、结果国家 chips、成分页矩阵新增 <strong>TW 列</strong>（四语界面均可见）。</li><li><strong>繁体中文界面启用</strong>：新增 /zh-hant/ 站点与 hreflang=zh-Hant，首页/检索/成分页/About/警示页全站繁体中文； TW 默认语言为 zh-Hant；首页显示台湾产品数 16,457。</li><li><strong>来源署名</strong>：About 页新增 TFDA / 政府資料開放授權條款（OGDL v1.0）署名与数据截止日 2026-10-22（四语）。</li><li><strong>台湾规格提示</strong>：TW 规格来自药名解析（非结构化字段），成分页对 TW 列标注「規格来自品名解析、置信度有限」。</li><li>站点 60,375 文件 / 436.3 MB；sitemap 60,219 URL；四语 i18n 全部对齐。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
 <section class="release"><h2>v0.6.7<span class="rel-date">2026-10-29</span></h2><ul><li><strong>成分页多国并排矩阵</strong>：成分页改为「行 = 规格 / 剂型 / 释放机制，列 = 国家（≤8）」的矩阵，单元格显示该国品牌 （最多 3 个 + N）；无记录显示「未收录」；停售 / 撤市 / 状态未确认默认隐藏；表格加表线，移动端容器内横滚。</li><li><strong>语言优先列序</strong>：en / es / zh / zh-Hant 首列分别为 US / ES / CN / TW，切换语言时列序随之重排。</li><li><strong>/warn 警示页分页</strong>：40 条改为 10 条/页，支持上一页 / 下一页 / 页码，?page=N 可分享、刷新保持，越界自动收敛到末页。</li><li>四语 i18n 336 keys 完全一致（矩阵与分页文案各 4 语）；站点 60,375 文件 / 436.3 MB，sitemap 60,219 URL。</li><li>发布侧：deploy/publish.ps1 改为 gh-pages 增量提交（未变文件复用历史对象，只上传变化内容的 delta；-FullPush 可退回旧的全量流程）。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
 <section class="release"><h2>v0.6.5<span class="rel-date">2026-10-29</span></h2><ul><li><strong>英文/西语界面去中文残留</strong>：首页 logo 副标题、示例按钮、About 的昵称/类别词/已知缺口段落改为本语言文案（如 Two frogs (liǎng zhī qīngwā)、sleeping pill (shuìqiányào)/pastilla para dormir）；中文副标题只在 zh 界面显示。</li><li><strong>首页示例按钮按语言本地化</strong>：en = Lipitor 20mg / Tylenol / Benadryl / Gaviscon；es = Paracetamol 500mg / Ibuprofeno 600mg / Omeprazol 20mg / Loratadina 10mg；zh 泰诺/两只青蛙；zh-Hant 泰諾/兩隻青蛙。</li><li><strong>首搜提示更新</strong>：四语提示改为「首次只加载一小片索引（约 0.2 MB），完整索引后台补全」，不再出现旧「~6 MB」文案。</li><li>四语 i18n 328 keys 完全对齐；页面数与索引体积不变（57,848 文件 / 408.7 MB，sitemap 57,697 URL）。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
@@ -189,7 +191,7 @@
 <footer><div class="wrap">
   <span data-i18n="footer">Information only — not medical advice, and no substitute for a pharmacist.</span>
   <span class="foot-links">
-    <a href="../whats-new.html">v0.7.0 · 2026-10-29</a>
+    <a href="../whats-new.html">v0.7.1 · 2026-10-29</a>
     <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml"
        target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
     <a href="https://github.com/fuarnos/drug-brand-crossref/issues" target="_blank" rel="noopener"
