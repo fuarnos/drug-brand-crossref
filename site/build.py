@@ -122,6 +122,7 @@ I18N = {
         "res.alias_no_products": "not a single product — see the note above",
         "res.notin": "Not covered in this country",
         "res.caveat": "an empty result does not mean the drug does not exist",
+    "res.partial": "partial results — loading the full index…",
         "artg.title": "Also on the ARTG (ingredient not captured yet)",
         "artg.note": ("These entries are registered in Australia, but this site has not linked "
                       "them to an active ingredient yet — so they are not shown as products."),
@@ -251,6 +252,7 @@ I18N = {
         "res.alias_no_products": "no es un producto único — ver la nota",
         "res.notin": "No incluido en este país",
         "res.caveat": "un resultado vacío no significa que el medicamento no exista",
+    "res.partial": "resultados parciales — cargando el índice completo…",
         "artg.title": "También en el ARTG (principio activo no registrado)",
         "artg.note": ("Estos registros existen en Australia, pero el sitio todavía no los ha "
                       "vinculado a un principio activo, así que no se muestran como productos."),
@@ -378,6 +380,7 @@ I18N = {
         "res.alias_no_products": "不是单一商品，见上方说明",
         "res.notin": "所选国家没有收录这个名字",
         "res.caveat": "查不到不代表这个药不存在",
+    "res.partial": "部分结果 —— 正在加载完整索引…",
         "artg.title": "ARTG 也有登记（成分尚未收录）",
         "artg.note": "这些条目在澳洲 ARTG 有登记，但本站还没把成分对上，所以不作为产品展示。",
         "artg.sponsor": "申办方", "artg.id": "ARTG 编号",
@@ -1411,6 +1414,9 @@ function scheduleSearchEvent(q){
 let IDX = [], NICKS = [], CONF = [];
 // 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
 let SEARCH_LAYERS = null, PY_MAP = null, PY_P = null;
+// P2 分片（task-36）：manifest + 已加载分片池；分片先出结果，核心随后后台加载补全。
+let MANIFEST = null, MANIFEST_P = null, SHARD_CACHE = new Map();
+let POOL_READY = false, POOL_FILES = new Set(), SUPPORT_P = null, SHARD_P = null;
 // P0 索引懒加载：页面加载时只下 app.js/css/i18n（约 16 KB），
 // 全量索引（34.8 MB，gzip 约 6 MB）等用户真的要用搜索时再下。
 let IDX_READY = false, IDX_P = null;
@@ -1641,7 +1647,7 @@ function acPaint(){
   if(box.setAttribute) box.setAttribute('aria-expanded', 'true');
 }
 function acCompute(nq){
-  if(!IDX_READY || !nq || nq.length < 2) return [];
+  if((!IDX_READY && !POOL_READY) || !nq || nq.length < 2) return [];
   const cjk = /[\u4e00-\u9fff]/.test(nq);
   const minSub = cjk ? 2 : 4;
   const pool = [];
@@ -1686,7 +1692,7 @@ function acUpdate(){
   const raw = box.value.trim();
   const nq = norm(splitDose(raw)[0]);
   if(nq.length < 2){ AC_WANT = false; acClose(); return; }
-  if(!IDX_READY){ AC_WANT = true; acClose(); loadIndex(); return; }  // 加载完成后补算
+  if(!IDX_READY && !POOL_READY){ AC_WANT = true; acClose(); if(!SHARD_P) loadIndex(); return; }  // 加载完成后补算（分片加载中不抢跑 core）
   AC_WANT = false;
   AC_T = setTimeout(()=>{ AC_ITEMS = acCompute(nq); AC_I = -1; acPaint(); }, 90);
 }
@@ -2001,12 +2007,14 @@ function render(){
   // 只有「没有对应成分」的叫法（如海洛因的 Hammer）时，不要再拿商品名做包含匹配：
   // 否则会倒出一堆名字里刚好有 hammer 的保健品，和这个词没关系。
   const onlyUnmapped = nicks.length > 0 && nicks.every(a => !a.v);
+  // P2：分片阶段先出结果；core 未到位时标记 partial，跨条目的区块延后到补全后
+  const partial = !!(POOL_READY && !IDX_READY && !LEGACY);
   const matched = collectHits(nq, st, nicks, nickSids, onlyUnmapped, c);
   const hits = matched.hits;
   const fuzzyUsed = matched.fuzzyUsed;
-  // 拼音兜底：拉丁查询零命中且拼音表未加载 → 懒加载 data/idx/pinyin.json 后重跑一次。
-  if(!hits.length && !nicks.length && !LEGACY && SEARCH_LAYERS
-     && /^[a-z0-9 ]{2,}$/.test(nq) && !PY_MAP){
+  // 拼音兜底：拉丁查询零命中（或只有模糊命中）且拼音表未加载 → 懒加载 pinyin.json 后重跑一次。
+  if(!nicks.length && !LEGACY && SEARCH_LAYERS && /^[a-z0-9 ]{2,}$/.test(nq) && !PY_MAP
+     && (!hits.length || hits.every(h=>h[1]==='fuzzy'))){
     pinyinFetch().then(ok => { if(ok && box.value.trim() === q) render(); });
   }
   hits.sort((a,b)=> b[0]-a[0] || (a[2].q?1:0)-(b[2].q?1:0) ||
@@ -2019,7 +2027,7 @@ function render(){
   let display = shown;
   let countryMiss = false;    // 选了国家但该国没有任何该成分产品（不再静默回退到各国列表）
   let countryView = false;    // 当前展示的是「该国该成分的商品名」
-  if(c && hits.length){
+  if(c && hits.length && !partial){
     try{
       const sids = new Set();
       for(const [, , e] of hits.slice(0,3)){
@@ -2060,6 +2068,7 @@ function render(){
       : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
            : `${T('res.none')} — ${T('res.caveat')}.`);
   }
+  if(partial) meta.textContent += ' · ' + T('res.partial');
   // 国家无匹配：显式提示 + 「看成分卡」/「换国家」，不再静默回退到各国列表。
   let countryMissHTML = '';
   if(countryMiss){
@@ -2178,12 +2187,13 @@ function render(){
     }
   }
 
+  if(partial){ sameHTML = ''; extraHTML = ''; }   // 跨条目区块等 core 到位再补
   out.innerHTML = parseBarHTML(parsed, matchLabel) + confHTML + nickHTML + warnHTML
     + countryMissHTML + resHTML + sameHTML + extraHTML;
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
   // 选了澳洲但澳洲产品为空时同样触发（很多 listed OTC 只有 ARTG 名字）。
   const hasAU = display.some(x => ((x[2].c) || []).includes('AU'));
-  if((!display.length && !countryMiss) || (c === 'AU' && !hasAU)){
+  if(!partial && ((!display.length && !countryMiss) || (c === 'AU' && !hasAU))){
     out.insertAdjacentHTML('beforeend', '<div id="artgbox"></div>');
     artgFallback(nq);
   }
@@ -2277,16 +2287,78 @@ function loadMainIndex(){
     return fetchJSON(BASE + 'data/index.json');
   });
 }
-function loadIndex(){
-  if(IDX_READY) return Promise.resolve(true);
-  if(IDX_P) return IDX_P;
-  if(!LEGACY) setHint(HINT_LOADING);
-  IDX_P = Promise.all([
-    loadMainIndex(),
+
+// ── P2 分片加载（task-36）───────────────────────────────────────────────
+function fetchManifest(){
+  if(MANIFEST) return Promise.resolve(MANIFEST);
+  if(MANIFEST_P) return MANIFEST_P;
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json').then(m=>{ MANIFEST = m; return m; })
+    .catch(err=>{ MANIFEST_P = null; throw err; });
+  return MANIFEST_P;
+}
+function loadSupport(){
+  if(SUPPORT_P) return SUPPORT_P;
+  SUPPORT_P = Promise.all([
     fetch(BASE + 'data/aliases.json').then(r=>r.json()).catch(()=>[]),
     fetch(BASE + 'data/confused.json').then(r=>r.json()).catch(()=>[])
-  ]).then(([d,a,c])=>{
-    IDX=d||[]; NICKS=a||[]; CONF=c||[]; IDX_READY=true;
+  ]).then(([a,c])=>{ NICKS = a || []; CONF = c || []; return true; })
+    .catch(()=>{ SUPPORT_P = null; return false; });
+  return SUPPORT_P;
+}
+function shardKeyOf(nq){
+  const ch = nq && nq[0];
+  if(!ch) return null;
+  if(ch >= 'a' && ch <= 'z') return ch;
+  if(ch >= '0' && ch <= '9') return 'digit';
+  if(/[\u3400-\u9fff]/.test(ch)) return (MANIFEST && MANIFEST.cjkInitials && MANIFEST.cjkInitials[ch]) || null;
+  return 'other';
+}
+function shardsForQuery(nq){
+  const key = shardKeyOf(nq);
+  if(!key || !MANIFEST || !MANIFEST.buckets || !MANIFEST.buckets[key]) return null;
+  const files = MANIFEST.buckets[key];
+  if(key.indexOf('cjk-') === 0) return files.slice(0, 3);
+  const hi = nq + '\uffff';
+  const picked = files.filter(f=> f.first <= hi && f.last >= nq);
+  return picked.length ? picked.slice(0, 3) : null;
+}
+function loadShards(files){
+  const ver = (MANIFEST && MANIFEST.v) ? '?v=' + MANIFEST.v : '';
+  return Promise.all(files.map(f=>{
+    if(SHARD_CACHE.has(f.f)) return Promise.resolve(SHARD_CACHE.get(f.f));
+    return fetchJSON(BASE + f.f + ver).then(arr=>{ SHARD_CACHE.set(f.f, arr); return arr; });
+  })).then(parts=>{
+    // core 已先一步到达：丢弃分片追加，保持 IDX 为完整索引（避免 pool 覆盖 core 导致索引错位）
+    if(IDX_READY){
+      for(const f of files) POOL_FILES.add(f.f);
+      return IDX;
+    }
+    const pool = POOL_READY ? IDX.slice() : [];
+    for(const part of parts) for(const e of part) pool.push(e);
+    IDX = pool;
+    POOL_READY = true;
+    for(const f of files) POOL_FILES.add(f.f);
+    return pool;
+  });
+}
+function loadShardedIndex(q){
+  const nq = norm(splitDose(q)[0]);
+  return Promise.all([fetchManifest(), loadSupport()]).then(()=>{
+    const files = shardsForQuery(nq);
+    if(!files) throw new Error('no shard for query');
+    return loadShards(files);
+  });
+}
+function ensureCoreInBackground(){
+  if(IDX_READY || IDX_P || LEGACY) return;
+  try{ setTimeout(()=>{ loadIndex(true); }, 0); }catch(e){}
+}
+function loadIndex(quiet){
+  if(IDX_READY) return Promise.resolve(true);
+  if(IDX_P) return IDX_P;
+  if(!LEGACY && !quiet) setHint(HINT_LOADING);
+  IDX_P = Promise.all([loadMainIndex(), loadSupport()]).then(([d])=>{
+    IDX=d||[]; IDX_READY=true; POOL_READY=false;
     setHint('');
     // 搜索增强（task-28）：索引到位后先派生轻量层（exact/前缀，~0.2s），
     // 重层（bigram/trigram）放到下一轮事件循环，避免阻塞首个结果渲染。
@@ -2295,12 +2367,17 @@ function loadIndex(){
       searchLayersScheduleHeavy();
     }
     // 用户可能在索引加载期间已经输入了 ≥2 字：加载完成后补算自动完成。
-    // （?q= 深链不经过 input 事件，不会自动弹建议列表遮挡结果。）
     if(AC_WANT) acUpdate();
+    // P2：分片已先出结果时，核心到位后自动补全（国家视图/同成分/模糊/拼音等）。
+    if(quiet && box.value.trim()) render();
     return true;
   }).catch(err=>{
     // 失败后清掉缓存的 Promise，允许点「重试」重新发起。
     IDX_P = null;
+    if(quiet && POOL_READY){
+      if(window.console && console.warn) console.warn('core index unavailable (sharded view kept)', err);
+      return false;
+    }
     setHint(HINT_IDLE);
     out.innerHTML = '<div class="notice">' + esc(Tr('error.index_failed')) + ' '
       + esc(Tr('error.local_file'))
@@ -2312,7 +2389,23 @@ function loadIndex(){
 }
 function startSearch(){
   if(IDX_READY){ render(); return; }
-  loadIndex().then(ok => { if(ok) render(); });
+  if(LEGACY){ loadIndex().then(ok => { if(ok) render(); }); return; }
+  const q = box.value.trim();
+  if(!q){ render(); return; }
+  const nq = norm(splitDose(q)[0]);
+  if(POOL_READY){
+    const files = shardsForQuery(nq);
+    if(files && files.some(f=> !POOL_FILES.has(f.f))){
+      loadShards(files).then(()=>{ render(); ensureCoreInBackground(); })
+        .catch(()=>{ render(); ensureCoreInBackground(); });
+    }else{
+      render();
+      ensureCoreInBackground();
+    }
+    return;
+  }
+  SHARD_P = loadShardedIndex(q).then(()=>{ render(); ensureCoreInBackground(); })
+    .catch(()=> loadIndex().then(ok => { if(ok) render(); }));
 }
 // 结果区事件委托：失败重试 / 加载更多 / 品牌折叠展开 / 换国家。
 out.addEventListener('click', ev => {
@@ -2396,8 +2489,8 @@ document.addEventListener('click', ev => {
   if(t === box || (t.closest && t.closest('#ac'))) return;
   acClose();
 });
-// 聚焦搜索框就先预取索引：等用户敲键时 6 MB 已经在路上。
-box.addEventListener('focus', ()=>{ if(!IDX_READY) loadIndex(); });
+// 聚焦搜索框就先预取「分片支持文件」（manifest + 别名/易混淆），不预取 core。
+box.addEventListener('focus', ()=>{ if(!IDX_READY && !POOL_READY && !LEGACY){ fetchManifest().catch(()=>{}); loadSupport(); } });
 const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
 const ctry0 = new URLSearchParams(location.search).get('country');
@@ -3496,6 +3589,69 @@ def encode_pinyin(entries, aliases) -> dict:
     return {"v": 1, "tokens": [[k, sorted(v)] for k, v in sorted(toks.items())]}
 
 
+
+def _shard_bucket(key: str) -> str:
+    """分片桶：首字符 A-Z / 数字 / CJK 按拼音首字母 / 其他符号。"""
+    ch = (key or "")[:1]
+    if not ch:
+        return "other"
+    if "a" <= ch <= "z":
+        return ch
+    if ch.isdigit():
+        return "digit"
+    if "\u3400" <= ch <= "\u9fff":
+        py = _pinyin_dict().get(ch)
+        return "cjk-" + (py[0] if py else "x")
+    return "other"
+
+
+def encode_shards(entries) -> dict:
+    """P2：按首字母 A-Z/数字/CJK 拼音首字母分桶，再按原始字节切成 ~1.1 MB 的分片。
+
+    每个分片是 index.json 同构的条目数组（客户端可直接渲染）；manifest 记录每片
+    first/last 便于按查询前缀只取相交的 1-3 片；core.json 保留为一次加载的完整回退。
+    """
+    idx_dir = OUT / "data" / "idx"
+    core_path = idx_dir / "core.json"
+    buckets: dict[str, list] = {}
+    for e in entries:
+        buckets.setdefault(_shard_bucket(e["k"]), []).append(e)
+    manifest = {"v": int(time.time()), "n": len(entries), "buckets": {},
+                "cjkInitials": {},
+                "core": {"f": "data/idx/core.json", "bytes": core_path.stat().st_size}}
+    target = 1_100_000  # 原始字节/片（gzip 后约 150-220 KB）
+    total_bytes = total_shards = 0
+    for bucket in sorted(buckets):
+        rows = sorted(buckets[bucket], key=lambda e: e["k"])
+        sizes = [len(json.dumps(e, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+                 for e in rows]
+        groups, cur, acc = [], [], 0
+        for i, e in enumerate(rows):
+            cur.append(e)
+            acc += sizes[i] + 1
+            if acc >= target:
+                groups.append(cur)
+                cur, acc = [], 0
+        if cur:
+            groups.append(cur)
+        files = []
+        for si, grp in enumerate(groups):
+            fn = f"shard-{bucket}-{si}.json"
+            data = json.dumps(grp, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+            (idx_dir / fn).write_bytes(data)
+            files.append({"f": "data/idx/" + fn, "first": grp[0]["k"], "last": grp[-1]["k"],
+                          "n": len(grp), "bytes": len(data)})
+            total_bytes += len(data)
+            total_shards += 1
+        manifest["buckets"][bucket] = files
+        if bucket.startswith("cjk-"):
+            for e in rows:
+                manifest["cjkInitials"].setdefault(e["k"][0], bucket)
+    manifest["shardCount"] = total_shards
+    manifest["shardBytes"] = total_bytes
+    return manifest
+
+
 def main() -> None:
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -3579,6 +3735,7 @@ def main() -> None:
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
         .replace("data/idx/core.json", f"data/idx/core.json?v={int(time.time())}")
         .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={int(time.time())}")
+        .replace("data/idx/manifest.json", f"data/idx/manifest.json?v={int(time.time())}")
         .replace("data/index.json", f"data/index.json?v={int(time.time())}"),
         encoding="utf-8")
 
@@ -3634,6 +3791,15 @@ def main() -> None:
     print(f"  {len(entries)} keys", flush=True)
     print(f"  core.json  { (OUT / 'data' / 'idx' / 'core.json').stat().st_size / 1e6:.1f} MB"
           f" (index.json {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB)", flush=True)
+
+    # P2 分片（task-36）：manifest + shard-*.json；客户端先拉 manifest，再按查询
+    # 首字符/拼音首字母取 1-3 片；core.json 保留为完整回退。
+    shards = encode_shards(entries)
+    (OUT / "data" / "idx" / "manifest.json").write_bytes(
+        json.dumps(shards, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    print(f"  manifest.json ({shards['shardCount']} shards, "
+          f"{shards['shardBytes'] / 1e6:.1f} MB) "
+          f"{(OUT / 'data' / 'idx' / 'manifest.json').stat().st_size / 1e3:.1f} KB", flush=True)
 
     print("building nickname index ...", flush=True)
     aliases = load_aliases(db)

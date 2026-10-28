@@ -536,6 +536,306 @@ WARNINGS: list[dict] = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# 西语译文（task-39）：41 条 title_es / body_es，医学通用西语（ES/MX 通用）、
+# 保留数字与成分名、不添加新的医学断言、不含用药建议。逐条与英文段同义。
+# 术语口径见 reports/warn-es.md：liberación inmediata/prolongada、forma salina、
+# base、índice terapéutico estrecho、no intercambiables。
+# ---------------------------------------------------------------------------
+ES_TRANSLATIONS: dict[str, tuple[str, str]] = {
+    "tylenol-vs-tainuo": (
+        "Tylenol y 泰诺 (Tai Nuo) no son el mismo medicamento",
+        "En Estados Unidos, Tylenol suele ser paracetamol (acetaminofén) como único "
+        "principio activo. En China, 泰诺 es un antigripal combinado (paracetamol + "
+        "pseudoefedrina + dextrometorfano + clorfenamina). El mismo nombre no significa "
+        "los mismos principios activos.",
+    ),
+    "tainuo-vs-tainuolin": (
+        "泰诺 y 泰诺林 son productos distintos en China",
+        "泰诺林 contiene paracetamol como único principio activo; 泰诺 es un antigripal "
+        "combinado. Se diferencian en un solo carácter, pero los principios activos son "
+        "distintos.",
+    ),
+    "benadryl-us-vs-uk": (
+        "Benadryl tiene principios activos diferentes en EE. UU. y el Reino Unido",
+        "En EE. UU., Benadryl es principalmente difenhidramina; en el Reino Unido, "
+        "Benadryl Allergy Relief es acrivastina 8 mg. Antes de comprar el mismo nombre "
+        "en otro país, revise los principios activos.",
+    ),
+    "gaviscon-us-vs-uk": (
+        "Las formulaciones de Gaviscon difieren entre EE. UU., el Reino Unido y España",
+        "En EE. UU., Gaviscon suele ser hidróxido de aluminio + carbonato de magnesio; "
+        "las versiones del Reino Unido y España usan alginato de sodio + bicarbonato de "
+        "sodio + carbonato de calcio. Misma marca, formulación distinta: cambian el "
+        "mecanismo antiácido y la carga de sodio.",
+    ),
+    "augmentin-ratio-mismatch": (
+        "Las proporciones de amoxicilina/clavulanato de Augmentin no son intercambiables",
+        "Los productos Augmentin existen en varias proporciones amoxicilina:clavulanato "
+        "(2:1, 4:1, 7:1, 14:1). Igualar el número de comprimidos puede cambiar la "
+        "exposición al clavulanato; hay que verificar la proporción y la concentración "
+        "exactas.",
+    ),
+    "sudafed-vs-sudafed-pe": (
+        "Sudafed y Sudafed PE contienen principios activos diferentes",
+        "En EE. UU., Sudafed contiene pseudoefedrina, mientras que Sudafed PE contiene "
+        "fenilefrina. Son principios activos distintos aunque compartan la misma raíz "
+        "de marca.",
+    ),
+    "metoprolol-tartrate-vs-succinate": (
+        "El metoprolol tartrato y el metoprolol succinato no son intercambiables "
+        "miligramo por miligramo",
+        "Son formas salinas distintas y, con frecuencia, mecanismos de liberación "
+        "distintos (tartrato de liberación inmediata, succinato de liberación "
+        "prolongada). La base de la concentración declarada también difiere; no cambie "
+        "50 mg por 50 mg. Cualquier cambio debe ser evaluado por el médico.",
+    ),
+    "levothyroxine-sodium-vs-base": (
+        "La levotiroxina sódica no equivale a la base de levotiroxina",
+        "Índice terapéutico estrecho. Que la concentración declarada se exprese como "
+        "sal sódica o como base cambia la conversión (la sal sódica contiene ≈ 97,25 % "
+        "de base), y la base empleada varía entre productos. Cualquier ajuste de dosis "
+        "requiere control clínico, no una simple operación aritmética.",
+    ),
+    "aminophylline-vs-theophylline": (
+        "La aminofilina y la teofilina usan bases de concentración distintas",
+        "La aminofilina es un complejo de teofilina y etilendiamina (≈ 80 % de "
+        "teofilina en masa); la concentración declarada puede referirse a cualquiera de "
+        "las dos. Índice terapéutico estrecho: no hay sustitución miligramo por "
+        "miligramo.",
+    ),
+    "theophylline-ir-vs-er": (
+        "La teofilina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La teofilina tiene índice terapéutico estrecho; los productos de liberación "
+        "prolongada presentan un perfil de absorción distinto. La misma dosis diaria no "
+        "garantiza los mismos niveles séricos: hay que monitorizar y usar la "
+        "formulación prescrita.",
+    ),
+    "morphine-ir-vs-er": (
+        "La morfina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "Los opioides de liberación prolongada están diseñados para cobertura durante "
+        "todo el día; la liberación inmediata es para el dolor irruptivo. Los mismos "
+        "miligramos pueden causar sobredosis o infratratamiento; la rotación de "
+        "opioides requiere valoración clínica.",
+    ),
+    "oxycodone-ir-vs-er": (
+        "La oxicodona de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La oxicodona de liberación prolongada no debe partirse ni triturarse; la "
+        "liberación inmediata y la prolongada difieren en la exposición máxima y "
+        "mínima. Cambiar miligramo por miligramo conlleva riesgo de depresión "
+        "respiratoria.",
+    ),
+    "nifedipine-ir-vs-er": (
+        "El nifedipino de liberación inmediata y el de liberación prolongada no son "
+        "intercambiables",
+        "El nifedipino de liberación inmediata (especialmente las cápsulas de acción "
+        "corta) y los comprimidos de liberación prolongada o controlada tienen perfiles "
+        "muy distintos; cambiar miligramo por miligramo puede causar hipotensión brusca "
+        "o taquicardia refleja.",
+    ),
+    "diltiazem-ir-vs-er": (
+        "El diltiazem de liberación inmediata y el de liberación prolongada no son "
+        "intercambiables",
+        "El diltiazem de liberación prolongada tiene un perfil distinto; los mismos "
+        "miligramos no reproducen la misma exposición ni el mismo intervalo de "
+        "dosificación.",
+    ),
+    "verapamil-ir-vs-er": (
+        "El verapamilo de liberación inmediata y el de liberación prolongada no son "
+        "intercambiables",
+        "El verapamilo de liberación prolongada está diseñado para cobertura de 24 "
+        "horas, mientras que el de liberación inmediata se administra varias veces al "
+        "día; los mismos miligramos alteran el control de la presión arterial y de la "
+        "frecuencia cardíaca.",
+    ),
+    "carbamazepine-ir-vs-er": (
+        "La carbamazepina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La carbamazepina tiene índice terapéutico estrecho y autoinduce su metabolismo; "
+        "la liberación inmediata y la prolongada difieren en las concentraciones "
+        "máximas. Los mismos miligramos pueden causar toxicidad o pérdida del control de "
+        "las crisis; hay que monitorizar niveles.",
+    ),
+    "valproate-formulations": (
+        "El ácido valproico, el valproato sódico y el divalproato sódico no son "
+        "equivalentes",
+        "Las distintas formas de valproato usan bases de concentración diferentes "
+        "(ácido valproico frente a sal) y los perfiles de liberación inmediata y "
+        "prolongada difieren. Índice terapéutico estrecho: no hay conversión simple por "
+        "miligramos.",
+    ),
+    "methylphenidate-ir-vs-er": (
+        "El metilfenidato de liberación inmediata y el de liberación prolongada no son "
+        "intercambiables",
+        "El metilfenidato de liberación inmediata y el de liberación prolongada o de "
+        "acción larga difieren en la liberación y en la exposición diaria; los mismos "
+        "miligramos no reproducen la misma cobertura horaria.",
+    ),
+    "venlafaxine-ir-vs-er": (
+        "La venlafaxina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La venlafaxina de liberación prolongada (XR) y la de liberación inmediata "
+        "difieren en la exposición máxima y en el perfil de discontinuación; los mismos "
+        "miligramos no producen la misma curva.",
+    ),
+    "bupropion-ir-sr-xl": (
+        "El bupropión IR, SR y XL no son intercambiables",
+        "El bupropión IR, SR y XL difieren en el perfil de liberación y en la "
+        "frecuencia de administración; los mismos miligramos cambian la exposición "
+        "máxima relacionada con el riesgo de convulsiones.",
+    ),
+    "metformin-ir-vs-er": (
+        "La metformina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La metformina de liberación prolongada tiene un perfil distinto y mejor "
+        "tolerabilidad gastrointestinal; los mismos miligramos pueden cambiar el "
+        "control glucémico y los efectos adversos.",
+    ),
+    "clonidine-ir-vs-er": (
+        "La clonidina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La clonidina de liberación prolongada proporciona cobertura de 24 horas; "
+        "cambiar miligramo por miligramo entre liberación inmediata y prolongada puede "
+        "causar hipotensión o hipertensión de rebote.",
+    ),
+    "quetiapine-ir-vs-er": (
+        "La quetiapina de liberación inmediata y la de liberación prolongada no son "
+        "intercambiables",
+        "La quetiapina XR y la de liberación inmediata difieren en la exposición "
+        "máxima; los mismos miligramos cambian la sedación y la exposición metabólica. "
+        "Verifique en la ficha técnica la base de concentración de la sal fumarato.",
+    ),
+    "levodopa-carbidopa-ir-vs-er": (
+        "La levodopa/carbidopa de liberación inmediata y la de liberación prolongada no "
+        "son intercambiables",
+        "La levodopa/carbidopa de liberación prolongada tiene un perfil distinto; los "
+        "mismos miligramos cambian el control del fenómeno on-off y de las "
+        "complicaciones motoras.",
+    ),
+    "amlodipine-besylate-vs-base": (
+        "El besilato de amlodipino no equivale a la base de amlodipino",
+        "Algunas fichas técnicas expresan el amlodipino como base y otras como sal "
+        "besilato. Fracción de base ≈ 0,721: 100 mg de besilato de amlodipino ≈ 72,1 mg "
+        "de amlodipino base (cálculo por peso molecular; no es una recomendación de "
+        "dosificación).",
+    ),
+    "atorvastatin-calcium-vs-base": (
+        "La atorvastatina cálcica no equivale a la base de atorvastatina",
+        "La concentración declarada puede referirse a la base o a la sal cálcica; la "
+        "fracción de base de la sal cálcica anhidra es ≈ 0,967 y la del trihidrato "
+        "≈ 0,924. Verifique la base de la ficha técnica concreta antes de cualquier "
+        "cálculo.",
+    ),
+    "omeprazole-magnesium-vs-base": (
+        "El omeprazol magnésico no equivale a la base de omeprazol",
+        "El omeprazol magnésico (2:1) y la base de omeprazol usan bases de "
+        "concentración distintas; la fracción de base es ≈ 0,969. Verifique la base "
+        "indicada en la ficha técnica de cada producto.",
+    ),
+    "diphenhydramine-salts": (
+        "Las distintas sales de difenhidramina usan bases de concentración diferentes",
+        "El clorhidrato de difenhidramina es la forma habitual, pero también existen "
+        "citrato y otras sales; cambiar miligramo por miligramo modifica la exposición "
+        "a la base.",
+    ),
+    "phenytoin-sodium-vs-base": (
+        "La fenitoína sódica no equivale a la base de fenitoína",
+        "La concentración declarada de fenitoína sódica se refiere a la sal; la base "
+        "representa ≈ 92 % en masa. Índice terapéutico estrecho y cinética no lineal: "
+        "no hay conversión por miligramos sin monitorización de niveles.",
+    ),
+    "albuterol-sulfate-vs-base": (
+        "El sulfato de salbutamol no equivale a la base de salbutamol",
+        "Los inhaladores suelen declarar la concentración como base de salbutamol "
+        "(p. ej., 90 mcg por inhalación), mientras que algunos productos usan la sal "
+        "sulfato. La comparación entre países exige verificar la base; los mismos mcg "
+        "no implican la misma cantidad de base.",
+    ),
+    "clindamycin-hcl-vs-phosphate": (
+        "El clorhidrato de clindamicina (oral) y el fosfato de clindamicina "
+        "(intravenoso) son formas distintas",
+        "Los productos orales suelen ser clorhidrato de clindamicina; los intravenosos "
+        "son fosfato de clindamicina (profármaco que se hidroliza a clindamicina). Son "
+        "formas y vías distintas: no son directamente intercambiables.",
+    ),
+    "dexamethasone-sodium-phosphate": (
+        "La dexametasona y el fosfato sódico de dexametasona difieren en forma y vía",
+        "El fosfato sódico de dexametasona inyectable es un profármaco éster fosfato; "
+        "los productos orales y tópicos usan dexametasona base. Son formas, vías y "
+        "bases de concentración distintas: no hay sustitución por miligramos.",
+    ),
+    "hydrocortisone-sodium-succinate": (
+        "La hidrocortisona y el succinato sódico de hidrocortisona difieren en la vía",
+        "El succinato sódico de hidrocortisona es una sal éster intravenosa; los "
+        "productos orales y tópicos usan hidrocortisona u otro éster (p. ej., acetato). "
+        "Las bases de concentración son distintas: no hay sustitución por miligramos.",
+    ),
+    "erythromycin-esters": (
+        "Los ésteres y sales de eritromicina usan bases de concentración diferentes",
+        "La eritromicina base, el estearato, el etilsuccinato y el estolato usan bases "
+        "de concentración distintas y tienen perfiles hepáticos diferentes; no hay "
+        "sustitución por miligramos.",
+    ),
+    "warfarin-narrow-index": (
+        "Warfarina: índice terapéutico estrecho — sin conversión de sal ni intercambio "
+        "de dosis",
+        "La warfarina (sal sódica) tiene índice terapéutico estrecho y se ajusta según "
+        "el INR. Este sitio no ofrece ninguna conclusión de conversión o intercambio; la "
+        "proporción de enantiómeros también puede variar entre productos.",
+    ),
+    "digoxin-narrow-index": (
+        "Digoxina: índice terapéutico estrecho — sin conversión",
+        "La digoxina tiene índice terapéutico estrecho; la exposición depende de la "
+        "biodisponibilidad de la formulación. No cambie productos por miligramos; "
+        "monitorice los niveles.",
+    ),
+    "lithium-narrow-index": (
+        "Sales de litio: índice terapéutico estrecho — sin conversión",
+        "El carbonato de litio y el citrato de litio usan bases de concentración "
+        "distintas; el índice terapéutico estrecho exige monitorizar la litemia. No hay "
+        "intercambio por miligramos.",
+    ),
+    "tacrolimus-ir-vs-er": (
+        "Las formulaciones de tacrolimús de liberación inmediata y prolongada no son "
+        "intercambiables",
+        "El tacrolimús tiene índice terapéutico estrecho; la liberación inmediata (dos "
+        "veces al día) y la prolongada (una vez al día) no son intercambiables por "
+        "miligramos. La conversión requiere supervisión del equipo de trasplante y "
+        "monitorización de concentraciones valle.",
+    ),
+    "ciclosporin-ir-vs-er": (
+        "Las formulaciones de ciclosporina de liberación inmediata y prolongada no son "
+        "intercambiables",
+        "La ciclosporina tiene índice terapéutico estrecho y biodisponibilidad "
+        "dependiente de la formulación; la liberación inmediata y la prolongada no son "
+        "intercambiables por miligramos. La conversión requiere monitorización de "
+        "niveles.",
+    ),
+    "insulin-u100-vs-u500": (
+        "Las concentraciones de insulina U-100 y U-500 no son intercambiables",
+        "La insulina U-500 tiene cinco veces la concentración de la U-100; confundirlas "
+        "causa hipoglucemia grave. Este sitio no ofrece ninguna conversión de dosis de "
+        "insulina; use la pluma o jeringa prescritas y siga la indicación médica.",
+    ),
+    "heparin-unfractionated": (
+        "Heparinas: la heparina no fraccionada y las de bajo peso molecular no son "
+        "intercambiables",
+        "La heparina no fraccionada y las heparinas de bajo peso molecular "
+        "(enoxaparina, dalteparina, etc.) difieren en la relación de actividad "
+        "anti-Xa/anti-IIa; no son intercambiables por número de unidades. Este sitio no "
+        "ofrece conversión.",
+    ),
+}
+
+for _warning in WARNINGS:
+    _es = ES_TRANSLATIONS.get(_warning["warning_id"])
+    if _es:
+        _warning["title_es"], _warning["body_es"] = _es
+
+
 def validate(rows: list[dict]) -> list[str]:
     errors: list[str] = []
     seen: set[str] = set()
