@@ -794,8 +794,8 @@ PAGE_I18N = {
                            'are backfilled from git tags; the full history lives in '
                            f'<a href="{REPORT_REPO}/blob/main/CHANGELOG.md" target="_blank" '
                            'rel="noopener">CHANGELOG.md</a>.'),
-        "whatsnew.lang_note": ('Release notes are written in Chinese (the project language); the '
-                               'site UI is available in English, Spanish and Chinese.'),
+        "whatsnew.lang_note": ('Release notes are machine-translated (AI); the Chinese original in '
+                               'CHANGELOG.md is authoritative.'),
         "conf.source_note": (
             'Source: <a href="https://www.fda.gov/drugs/medication-errors-related-'
             'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
@@ -822,8 +822,8 @@ PAGE_I18N = {
                            'antiguas se rellenan desde las etiquetas de git; el historial completo '
                            f'está en <a href="{REPORT_REPO}/blob/main/CHANGELOG.md" '
                            'target="_blank" rel="noopener">CHANGELOG.md</a>.'),
-        "whatsnew.lang_note": ('Las notas de versión están en chino (idioma del proyecto); la '
-                               'interfaz del sitio está en inglés, español y chino.'),
+        "whatsnew.lang_note": ('Las notas de versión están traducidas automáticamente (IA); el '
+                               'original chino en CHANGELOG.md es la referencia.'),
         "conf.source_note": (
             'Fuente: <a href="https://www.fda.gov/drugs/medication-errors-related-'
             'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
@@ -848,7 +848,7 @@ PAGE_I18N = {
         "whatsnew.intro": ('每次上线都带一条更新摘要；旧版本已按 git tag 补到这里，'
                            f'完整历史见 <a href="{REPORT_REPO}/blob/main/CHANGELOG.md" '
                            'target="_blank" rel="noopener">CHANGELOG.md</a>。'),
-        "whatsnew.lang_note": "更新说明正文使用中文（项目语言）；站点界面提供英文、西班牙文与中文。",
+        "whatsnew.lang_note": "英文/西语更新说明为 AI 机器翻译；中文原文（CHANGELOG.md）为准。",
         "conf.source_note": (
             '来源：<a href="https://www.fda.gov/drugs/medication-errors-related-'
             'cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" '
@@ -865,6 +865,71 @@ PAGE_I18N = {
         "notfound.report": ('如果是站内链接坏了，欢迎到 '
                             f'<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;'
                             'template=data-error.yml">GitHub</a> 报一声。'),
+    },
+}
+
+# ── v0.5.5：页面 title / meta description / OG 本地化（en/es/zh）────────────
+# 根页面（about/confused/warn/whats-new/首页）用 data-i18n-title / data-i18n-meta
+# 让 i18n.js 在语言切换时同步 <title>、description、og:title/description；
+# /es/、/zh/ 静态副本在构建期直接写入对应语言。
+META_I18N = {
+    "en": {
+        "meta.index.title": "Medicine Brand Cross-Reference — drug names across countries",
+        "meta.index.desc": ("Search a brand name, generic name or nickname and see the active "
+                            "ingredient, strength, and the same product's names in other "
+                            "countries. Public, non-commercial reference."),
+        "meta.about.title": "About · Medicine Brand Cross-Reference",
+        "meta.about.desc": ("How this cross-reference works: sources and coverage, licences and "
+                            "attribution, known gaps and editorial rules. Reference only, not "
+                            "medical advice."),
+        "meta.confused.title": "Easily confused drug names · Medicine Brand Cross-Reference",
+        "meta.confused.desc": ("FDA tall-man look-alike / sound-alike pairs: a warning about names, "
+                               "not a statement that the drugs are interchangeable."),
+        "meta.warn.title": "Warnings: same name, different drug · Medicine Brand Cross-Reference",
+        "meta.warn.desc": ("Published warnings on same-name / different-drug products and "
+                           "combinations that are not interchangeable across countries, salt "
+                           "forms or release mechanisms. Information only."),
+        "meta.whatsnew.title": "What's new · Medicine Brand Cross-Reference",
+        "meta.whatsnew.desc": ("Release notes for the drug brand cross-reference: fixes and "
+                               "additions in each version."),
+    },
+    "es": {
+        "meta.index.title": ("Referencia cruzada de marcas de medicamentos: nombres en distintos "
+                             "países"),
+        "meta.index.desc": ("Busca un nombre comercial, genérico o un apodo y consulta el principio "
+                            "activo, la concentración y los nombres del mismo producto en otros "
+                            "países. Referencia pública y sin ánimo de lucro."),
+        "meta.about.title": "Acerca de · Medicine Brand Cross-Reference",
+        "meta.about.desc": ("Cómo funciona esta referencia cruzada: fuentes y cobertura, licencias "
+                            "y atribución, lagunas conocidas y reglas editoriales. Solo "
+                            "información, no consejo médico."),
+        "meta.confused.title": ("Nombres de medicamentos fáciles de confundir · Medicine Brand "
+                                "Cross-Reference"),
+        "meta.confused.desc": ("Pares tall-man de la FDA con nombres parecidos o que suenan igual; "
+                               "un aviso sobre nombres, no una afirmación de intercambiabilidad."),
+        "meta.warn.title": ("Alertas: mismo nombre, otro medicamento · Medicine Brand "
+                            "Cross-Reference"),
+        "meta.warn.desc": ("Avisos publicados sobre productos con el mismo nombre y distinto "
+                           "principio activo, y combinaciones no intercambiables entre países, "
+                           "formas salinas o mecanismos de liberación."),
+        "meta.whatsnew.title": "Novedades · Medicine Brand Cross-Reference",
+        "meta.whatsnew.desc": ("Notas de versión de la referencia cruzada: correcciones y novedades "
+                               "de cada versión."),
+    },
+    "zh": {
+        "meta.index.title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+        "meta.index.desc": ("输入商品名、通用名或俗称，查它的活性成分、剂量，以及其他国家的商品名。"
+                            "公开、非商业的参考站。"),
+        "meta.about.title": "关于 · 药品商品名跨国定位",
+        "meta.about.desc": ("本站如何工作：数据来源与覆盖、许可与署名、已知缺口与编辑规则。"
+                            "仅供参考，不构成用药建议。"),
+        "meta.confused.title": "易混淆药名 · 药品商品名跨国定位",
+        "meta.confused.desc": "FDA tall-man 形似/音似药对；这是对名字的警示，不代表两种药可以互换。",
+        "meta.warn.title": "警示：同名不同药 / 不可互换 · 药品商品名跨国定位",
+        "meta.warn.desc": ("已发布的警示：同名不同药，以及跨国、盐型或释放机制下不可互换的复方"
+                           "产品。"),
+        "meta.whatsnew.title": "更新日志 · 药品商品名跨国定位",
+        "meta.whatsnew.desc": "药品商品名跨国定位的版本更新说明。",
     },
 }
 
@@ -936,7 +1001,7 @@ def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
-                       MAKER_I18N[lang]):
+                       MAKER_I18N[lang], META_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1313,7 +1378,9 @@ def build_warn(db: sqlite3.Connection) -> int:
 <div data-i18n-html="warn.count">{I18N["en"]["warn.count"]}</div>
 {''.join(grp_html) if grp_html else '<p class="empty" data-i18n="warn.empty">No published warnings yet.</p>'}
 <div class="notice warnbox" data-i18n-html="warn.source_note">{I18N["en"]["warn.source_note"]}</div>"""
-    (OUT / "warn.html").write_text(page("Warnings", body), encoding="utf-8")
+    html = page("Warnings", body, meta_key="warn", alternates=True,
+                canonical_rel="warn.html", alt_rel="warn.html")
+    _write_with_copies("warn.html", html, "warn")
     return len(rows)
 
 
@@ -1685,6 +1752,20 @@ function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g,
     c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+// v0.5.5：中文界面优先用索引里的中文成分名（xz 与 x 的 " + " 分段平行，
+// 缺失/空串逐段回退英文；其它语言仍用英文 x）。
+function ingredientLabel(e){
+  const x = (e && (e.x || e.d)) || '—';
+  if(window.LANG === 'zh' && e && e.xz && e.xz.length){
+    const parts = String(x).split(' + ');
+    if(e.xz.length === parts.length){
+      return parts.map(function(p, i){
+        return (e.xz[i] && String(e.xz[i]).trim()) ? e.xz[i] : p;
+      }).join(' + ');
+    }
+  }
+  return x;
+}
 // v0.5.3 点击目标规则（用户报 Excedrin 点品牌跳到 acetaminophen 页）：
 //   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
@@ -1693,7 +1774,7 @@ function brandHTML(e){
   return `<span class="brand-plain">${e && e.d != null ? e.d : ''}</span>`;
 }
 function ingredientHTML(e, cls){
-  const label = e.x || e.d || '—';
+  const label = ingredientLabel(e);
   if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>`;
   if(e.v) return `<a class="${cls || ''}" href="${BASE}drug/${e.v}.html">${label}</a>`;
   return `<span class="${cls || ''}">${label}</span>`;
@@ -1865,7 +1946,7 @@ function acPaint(){
       .map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
     return `<div class="ac-item${i===AC_I?' on':''}" role="option" aria-selected="${i===AC_I}" data-i="${i}">`
       + `<span class="ac-name">${esc(e.d || e.k)}</span>`
-      + `<span class="ac-meta">${esc(e.x || '')}${tags ? ' ' + tags : ''}</span></div>`;
+      + `<span class="ac-meta">${esc(ingredientLabel(e))}${tags ? ' ' + tags : ''}</span></div>`;
   }).join('');
   acEl.classList.add('open');
   if(box.setAttribute) box.setAttribute('aria-expanded', 'true');
@@ -2400,7 +2481,7 @@ function render(){
       const oRows = [];
       for(const e of others.slice(0, 40)){
         const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
-        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, mu:e.mu, ml:e.ml,
+        for(const d of ds) oRows.push({x:e.x, xz:e.xz, d:d, b:e.d, m:e.m, mn:e.mn, mu:e.mu, ml:e.ml,
                                    c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu});
       }
       sameHTML = `<h2>${T2('same.ing')}</h2>` +
@@ -2765,8 +2846,16 @@ def key_file(key: str) -> str:
     return s + ".html"
 
 
+def _page_meta(lang: str, meta_key: str | None) -> tuple[str, str]:
+    if not meta_key:
+        return "", ""
+    D = I18N.get(lang, I18N["en"])
+    return (D.get(f"meta.{meta_key}.title", ""), D.get(f"meta.{meta_key}.desc", ""))
+
+
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
-         alternates: bool = False) -> str:
+         alternates: bool = False, meta_key: str | None = None,
+         canonical_rel: str = "", alt_rel: str = "") -> str:
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
@@ -2776,13 +2865,36 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
         # hreflang 必须带 GitHub Pages 的项目子路径（线上是 /drug-brand-crossref/），
         # 写 "/es/" 会指到域名根（404）。SITE_URL 已含末尾斜杠。
         alt = ("\n".join(
-            f'<link rel="alternate" hreflang="{code}" href="{SITE_URL}{path}">'
+            f'<link rel="alternate" hreflang="{code}" href="{SITE_URL}{path}{alt_rel}">'
             for code, _l, path in LANGS
-        ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}">')
+        ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{alt_rel}">')
+    if meta_key:
+        # v0.5.5：title / description / OG 本地化（根页用 data-i18n-*，副本构建期写死）
+        loc_title, loc_desc = _page_meta(lang, meta_key)
+        loc_title = loc_title or title
+        locale = {"en": "en_US", "es": "es_ES", "zh": "zh_CN"}.get(lang, "en_US")
+        head_title = (f'<title data-i18n-title="meta.{meta_key}.title">'
+                      f'{esc(loc_title)}</title>')
+        head_extra = (
+            f'\n<link rel="canonical" href="{SITE_URL}{canonical_rel}">'
+            f'\n<meta name="description" content="{esc(loc_desc)}" '
+            f'data-i18n-meta="meta.{meta_key}.desc">'
+            f'\n<meta property="og:type" content="website">'
+            f'\n<meta property="og:site_name" content="Medicine Brand Cross-Reference">'
+            f'\n<meta property="og:title" content="{esc(loc_title)}" '
+            f'data-i18n-meta="meta.{meta_key}.title">'
+            f'\n<meta property="og:description" content="{esc(loc_desc)}" '
+            f'data-i18n-meta="meta.{meta_key}.desc">'
+            f'\n<meta property="og:url" content="{SITE_URL}{canonical_rel}">'
+            f'\n<meta property="og:locale" content="{locale}">'
+            f'\n<meta name="twitter:card" content="summary">')
+    else:
+        head_title = f'<title>{esc(title)} · Medicine Brand Cross-Reference</title>'
+        head_extra = ""
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{esc(title)} · Medicine Brand Cross-Reference</title>{alt}
+{head_title}{alt}{head_extra}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
 <script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>{GC_TAG}</head>
 <body>
@@ -2810,13 +2922,58 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 </body></html>"""
 
 
+def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
+    """把根页面 HTML 变成 /es/、/zh/ 静态副本：本地化 head + 相对链接加 ../ 前缀。"""
+    loc_title, loc_desc = _page_meta(lang, meta_key)
+    html = re.sub(r'<html lang="[a-z-]+">', f'<html lang="{lang}">', html, count=1)
+    if loc_title:
+        html = re.sub(r'<title[^>]*>.*?</title>',
+                      f'<title data-i18n-title="meta.{meta_key}.title">'
+                      f'{esc(loc_title)}</title>', html, count=1, flags=re.S)
+    if loc_desc:
+        html = re.sub(r'(<meta name="description"[^>]*content=")[^"]*(")',
+                      lambda m: m.group(1) + esc(loc_desc) + m.group(2), html, count=1)
+        html = re.sub(r'(<meta property="og:description"[^>]*content=")[^"]*(")',
+                      lambda m: m.group(1) + esc(loc_desc) + m.group(2), html, count=1)
+    if loc_title:
+        html = re.sub(r'(<meta property="og:title"[^>]*content=")[^"]*(")',
+                      lambda m: m.group(1) + esc(loc_title) + m.group(2), html, count=1)
+    copy_url = SITE_URL + lang + "/" + rel
+    html = re.sub(r'(<link rel="canonical" href=")[^"]*(")',
+                  lambda m: m.group(1) + copy_url + m.group(2), html, count=1)
+    html = re.sub(r'(<meta property="og:url" content=")[^"]*(")',
+                  lambda m: m.group(1) + copy_url + m.group(2), html, count=1)
+    # 根页相对链接 → ../ 前缀（绝对 URL / #锚点 / ?参数 不改）
+    html = re.sub(r'(?P<attr>href|src)="(?P<url>(?![a-zA-Z]+:|#|/|\?)[^"]*)"',
+                  lambda m: f'{m.group("attr")}="../{m.group("url")}"', html)
+    return html
+
+
+def _write_with_copies(rel: str, html: str, meta_key: str) -> None:
+    """写根页面 + /es/<rel>、/zh/<rel> 两份静态本地化副本（供 SEO/直接访问）。"""
+    (OUT / rel).write_text(html, encoding="utf-8")
+    for lang in ("es", "zh"):
+        target = OUT / lang / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(_localize_copy(html, lang, meta_key, rel), encoding="utf-8")
+
+
 # ------------------------------------------------------------ release notes
 def _md_inline(text: str) -> str:
     s = esc(text)
     s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
     s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
-    s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)",
-               r'<a href="\2" target="_blank" rel="noopener">\1</a>', s)
+
+    def _link(m):
+        url = m.group(2)
+        # v0.5.5：CHANGELOG 里的相对 docs/ 链接在站点产物里没有对应文件（会 404），
+        # 统一改到仓库 blob；中文文件名 percent-encode（/es/、/zh/ 副本同样生效）。
+        if url.startswith(("docs/", "../docs/", "./docs/")):
+            from urllib.parse import quote
+            url = REPORT_REPO + "/blob/main/" + quote(url.lstrip("./"))
+        return f'<a href="{url}" target="_blank" rel="noopener">{m.group(1)}</a>'
+
+    s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _link, s)
     return s
 
 
@@ -2943,18 +3100,42 @@ def load_releases() -> list[dict]:
 
 
 def build_whats_new() -> None:
-    releases = load_releases()
-    cards = []
-    for r in releases:
-        cards.append(
-            f'<section class="release"><h2>{esc(r["version"])}'
-            f'<span class="rel-date">{esc(r["date"])}</span></h2>{r["html"]}</section>')
-    body = f"""<h1 data-i18n="whatsnew.title">What's new</h1>
-<p class="sub" data-i18n-html="whatsnew.intro">Every release ships with a short summary. Old versions are backfilled from git tags; the full history lives in
-<a href="{REPORT_REPO}/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</p>
-<div class="notice" data-i18n="whatsnew.lang_note">Release notes are written in Chinese (the project language); the site UI is available in English, Spanish and Chinese.</div>
-{''.join(cards)}"""
-    (OUT / "whats-new.html").write_text(page("What's new", body), encoding="utf-8")
+    """v0.5.5：What's new 正文按语言渲染 data/release_notes_i18n.json（AI 译文，中文为准）。
+
+    数据缺失时回退到 CHANGELOG.md 的中文渲染（保持旧行为）。
+    """
+    parts = [f'<h1 data-i18n="whatsnew.title">{esc(I18N["en"]["whatsnew.title"])}</h1>',
+             f'<div data-i18n-html="whatsnew.intro">{I18N["en"]["whatsnew.intro"]}</div>',
+             f'<div class="notice" data-i18n="whatsnew.lang_note">'
+             f'{esc(I18N["en"]["whatsnew.lang_note"])}</div>']
+    data = None
+    try:
+        data = json.loads((ROOT / "data" / "release_notes_i18n.json")
+                          .read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        data = None
+    if data:
+        for ver, item in data.items():
+            if ver == "_meta" or not isinstance(item, dict):
+                continue
+            date = item.get("date", "")
+            blocks = []
+            for lang in ("zh", "en", "es"):
+                items = item.get(lang) or item.get("zh") or []
+                lis = "".join(f"<li>{_md_inline(str(x))}</li>" for x in items)
+                blocks.append(f'<div class="lang-block" data-lang-block="{lang}">'
+                              f'<ul>{lis}</ul></div>')
+            parts.append(
+                f'<section class="release"><h2>{esc(ver)}'
+                f'<span class="rel-date">{esc(date)}</span></h2>{"".join(blocks)}</section>')
+    else:
+        for r in load_releases():
+            parts.append(
+                f'<section class="release"><h2>{esc(r["version"])}'
+                f'<span class="rel-date">{esc(r["date"])}</span></h2>{r["html"]}</section>')
+    html = page("What's new", "\n".join(parts), meta_key="whatsnew", alternates=True,
+                canonical_rel="whats-new.html", alt_rel="whats-new.html")
+    _write_with_copies("whats-new.html", html, "whatsnew")
 
 
 def _norm_name(s: str) -> str:
@@ -2990,9 +3171,9 @@ def load_index(db: sqlite3.Connection):
     ):
         comp_keys.setdefault(pid, set()).add(_norm_name(inn))
     for (key_id, pid, country, form_base, dosage_form, sv, su,
-         inn_en, sid, mah, ntype, n_ing) in db.execute(
+         inn_en, inn_zh, sid, mah, ntype, n_ing) in db.execute(
         """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
-                  pc.strength_value, pc.strength_unit, s.inn_en, s.substance_id, p.mah,
+                  pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.substance_id, p.mah,
                   pn.name_type,
                   (SELECT COUNT(*) FROM product_component pc2
                    WHERE pc2.product_id = p.product_id) AS n_ing
@@ -3012,7 +3193,7 @@ def load_index(db: sqlite3.Connection):
             continue
         a = agg.get(key_id)
         if a is None:
-            a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "s": [],
+            a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "subs_zh": [], "s": [],
                                "f": [], "v": sid, "mah": {}, "trade": False,
                                "sids": set()}
         if ntype == "trade":
@@ -3022,6 +3203,8 @@ def load_index(db: sqlite3.Connection):
         a["c"].add(country)
         if inn_en not in a["subs"]:
             a["subs"].append(inn_en)
+            # v0.5.5：与 x 的分段一一对应的中文名；没有中文名留 ""（客户端逐段回退英文）
+            a["subs_zh"].append(inn_zh or "")
         if sv is not None:
             st = f"{sv:g} {su or ''}".strip()
             if st not in a["s"]:
@@ -3072,6 +3255,9 @@ def load_index(db: sqlite3.Connection):
             "d": displays.get(key_id, key_id),
             "c": sorted(a["c"]),
             "x": " + ".join(a["subs"][:6]),
+            # v0.5.5：中文成分名数组，与 x 的 " + " 分段平行；全空则不写（回退英文）
+            "xz": ([zh for zh in a["subs_zh"][:6]]
+                   if any(zh for zh in a["subs_zh"][:6]) else None),
             "s": a["s"][:6],
             "f": a["f"][0] if a["f"] else "",
             "l": level,
@@ -3748,7 +3934,8 @@ does not exist. Coverage:</span> {covline}.</div>
     for code, _label, path in LANGS:
         prefix = "../" if path else ""
         html = page("Medicine Brand Cross-Reference", body.replace("{prefix}", prefix),
-                    prefix=prefix, lang=code, alternates=True)
+                    prefix=prefix, lang=code, alternates=True, meta_key="index",
+                    canonical_rel=path, alt_rel="")
         target = OUT / (path + "index.html")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(html, encoding="utf-8")
@@ -3820,7 +4007,9 @@ def build_about(stats, coverage, source_cover=()) -> None:
         parts.append(f'<div data-i18n-html="about.analytics">{T["about.analytics"]}</div>')
     parts.append(f'<div data-i18n-html="about.stats">{T["about.stats"]}</div>')
     body = "\n".join(parts)
-    (OUT / "about.html").write_text(page("About", body), encoding="utf-8")
+    html = page("About", body, meta_key="about", alternates=True,
+                canonical_rel="about.html", alt_rel="about.html")
+    _write_with_copies("about.html", html, "about")
 
 def build_confused(db: sqlite3.Connection) -> int:
     """易混淆药对页：只列有官方出处的配对。"""
@@ -3858,8 +4047,9 @@ other; it does not mean the drugs are interchangeable.</div>
   <th data-i18n="conf.pair">Pair</th><th></th><th data-i18n="conf.tml">Tall-man spelling</th>
 </tr></thead><tbody>{''.join(body_rows)}</tbody></table></div>
 <p class="sub" data-i18n-html="conf.source_note">{I18N['en']['conf.source_note']}</p>"""
-    (OUT / "confused.html").write_text(
-        page("Easily confused drug names", body), encoding="utf-8")
+    html = page("Easily confused drug names", body, meta_key="confused", alternates=True,
+                canonical_rel="confused.html", alt_rel="confused.html")
+    _write_with_copies("confused.html", html, "confused")
     return len(rows)
 
 
@@ -3959,7 +4149,7 @@ def build_seo_files() -> None:
 #    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
 #   f（剂型）客户端 0 处引用，直接丢弃（app.js 只用 k/d/c/x/s/l/n/v/vs/u/g/gn/m/mn/q）。
 CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m")
-CORE_ARRAY_COLS = ("c", "s", "vs", "ml")     # 值是数组：先 JSON 化再进字典
+CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz")     # 值是数组：先 JSON 化再进字典
 
 
 def _d_case_pattern(d: str, k: str) -> str | None:
@@ -4007,7 +4197,7 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "s", "l", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn", "m", "mn"):
+    for f in ("c", "x", "xz", "s", "l", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn", "m", "mn"):
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
             # 数组先序列化再字典化：客户端解码时把字典值直接给出（数组引用共享，
@@ -4204,6 +4394,15 @@ def main() -> None:
   function apply(){
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
+    // v0.5.5：<title> / description / OG 本地化（根页 head 带 data-i18n-title/meta）
+    document.querySelectorAll('[data-i18n-title]').forEach(function(el){
+      var t = window.T(el.dataset.i18nTitle);
+      el.textContent = t;
+      if(el.tagName === 'TITLE') document.title = t;
+    });
+    document.querySelectorAll('[data-i18n-meta]').forEach(function(el){
+      el.setAttribute('content', window.T(el.dataset.i18nMeta));
+    });
     // i18n P1：About / What's new / Confused / 404 的正文块允许内嵌链接与表格，
     // 用 data-i18n-html 走 innerHTML（内容全部来自构建期字典，非用户输入）。
     document.querySelectorAll('[data-i18n-html]').forEach(function(el){ el.innerHTML = window.T(el.dataset.i18nHtml); });
@@ -4221,14 +4420,20 @@ def main() -> None:
     });
   }
   function langTarget(code){
-    // 入口页（/、/es/、/zh/）切到对应语言入口，URL 与显示语言保持一致；
-    // 子页面（drug/、name/ 等）切语言时留在原页，只换 lang 参数。
+    // v0.5.5：有 /es/、/zh/ 静态副本的页面（首页/about/confused/warn/whats-new）
+    // 切到对应语言副本，URL 与显示语言一致；其它子页面留在原页只换 lang 参数。
     var params = new URLSearchParams(location.search);
+    params.delete('lang');
+    var m = relPath().match(/(?:^|\/)(index\.html|about\.html|confused\.html|whats-new\.html|warn\.html)$/);
+    var qs = params.toString();
+    if(m){
+      return ROOT + (code === 'en' ? '' : code + '/') + m[1]
+        + (qs ? '?' + qs : '') + (location.hash || '');
+    }
     var landing = /(\/|index\.html)$/.test(location.pathname);
     var path;
-    if(landing){ params.delete('lang'); path = ROOT + (code === 'en' ? '' : code + '/'); }
-    else { params.set('lang', code); path = location.pathname; }
-    var qs = params.toString();
+    if(landing){ path = ROOT + (code === 'en' ? '' : code + '/'); }
+    else { params.set('lang', code); path = location.pathname; qs = params.toString(); }
     return path + (qs ? '?' + qs : '') + (location.hash || '');
   }
   window.setLang = function(l){

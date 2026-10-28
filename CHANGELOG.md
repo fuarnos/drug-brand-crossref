@@ -4,6 +4,17 @@
 站点页脚、About 页、GitHub Release 三处保持同一个版本号；`/whats-new.html` 直接从这里生成。
 上线前先把本节写好，再建站、发布。
 
+## v0.5.5 — 2026-10-29
+
+- **中文界面显示中文成分名**：检索索引新增 `xz` 中文名数组（65,075 条，缺失逐段回退英文），
+  中文界面搜 Excedrin 会显示「对乙酰氨基酚 / 枸橼酸咖啡因」等中文名；自动完成同步。
+- **页面元信息三语**：首页/About/What's new/Confused/Warn 的 title、description、OG、
+  canonical、hreflang 按 en/es/zh 生成；新增 `/es/`、`/zh/` 静态副本（head 本地化、链接相对）。
+- **What's new 三语**：21 个版本要点按 `data/release_notes_i18n.json` 渲染 en/es 块，
+  标注「AI 翻译，中文原文为准」；CHANGELOG 里的相对链接改为 GitHub 链接，消除 404。
+- **跨市场身份合并落地**：batch A+B 共合并 141 个成分（12,790 → 12,649），多市场成分增加；
+  DB VACUUM 450 MB → 325 MB，补 2 个查询索引，外键检查清零。
+
 ## v0.5.4 — 2026-10-29
 
 - **新增厂家页**：按生产厂家（MAH）生成约 7,000 个厂家页（≥5 个产品的厂家；规范化去重、
