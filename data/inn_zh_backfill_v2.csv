@@ -1,0 +1,259 @@
+﻿row_type,substance_id,inn_en,zh_name,confidence,evidence,source_url,affected_products,old_zh,db_current_zh,status,note
+fill,glucose,Glucose,葡萄糖,high,NHSA 注册名: 葡萄糖注射液(4324)；葡萄糖氯化钠注射液(2123)；口服五维葡萄糖(65),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6559,,,fill,官方/药典名（人工核对）
+fill,sodium-chloride,Sodium Chloride,氯化钠,high,NHSA 注册名: 氯化鈉注射液(2293)；复方氯化钠注射液(309)；生理氯化钠溶液(123),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2819,,,fill,官方/药典名（人工核对）
+fill,levofloxacin,Levofloxacin,左氧氟沙星,high,NHSA 注册名: 盐酸左氧氟沙星片(300)；盐酸左氧氟沙星胶囊(294)；乳酸左氧氟沙星氯化钠注射液(246),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1871,,,fill,官方/药典名（人工核对）
+fill,ascorbic-acid,Ascorbic Acid,维生素C,high,NHSA 注册名: 维生素C片(632)；维生素C注射液(612)；维生素C咀嚼片(193),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1575,,,fill,官方/药典名（人工核对）
+fill,erythromycin,Erythromycin,红霉素,high,NHSA 注册名: 红霉素肠溶片(289)；琥乙红霉素片(162)；红霉素软膏(119),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1033,,,fill,官方/药典名（人工核对）
+fill,aspirin,Aspirin,阿司匹林,high,NHSA 注册名: 阿司匹林肠溶片(465)；复方乙酰水杨酸片(158)；注射用赖氨匹林(103),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1025,,,fill,官方/药典名（人工核对）
+fill,diclofenac,Diclofenac,双氯芬酸,high,NHSA 注册名: 双氯芬酸钠肠溶片(303)；氯芬黄敏片(225)；双氯芬酸钠缓释片(94),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,972,,,fill,官方/药典名（人工核对）
+fill,cefuroxime,Cefuroxime,头孢呋辛,high,NHSA 注册名: 注射用头孢呋辛钠(567)；头孢呋辛酯片(87)；头孢呋辛酯胶囊(38),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,750,,,fill,官方/药典名（人工核对）
+fill,pyridoxine,Pyridoxine,维生素B6,high,NHSA 注册名: 维生素B6注射液(352)；维生素B6片(345)；注射用维生素B6(25),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,729,,,fill,官方/药典名（人工核对）
+fill,thiamine,Thiamine,维生素B1,high,NHSA 注册名: 维生素B1片(482)；维生素B1注射液(174)；维生素B1丸(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,662,,,fill,官方/药典名（人工核对）
+fill,telmisartan,Telmisartan,替米沙坦,high,NHSA 注册名: 替米沙坦片(381)；替米沙坦胶囊(130)；替米沙坦氨氯地平片(II)(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,592,,,fill,官方/药典名（人工核对）
+fill,ampicillin,Ampicillin,氨苄西林,high,NHSA 注册名: 注射用氨苄西林钠舒巴坦钠(187)；注射用氨苄西林钠(156)；氨苄西林胶囊(116),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,583,,,fill,官方/药典名（人工核对）
+fill,amino-acids,Amino Acids,氨基酸,high,NHSA 注册名: 复方氨基酸注射液 (18AA)(108)；复方氨基酸注射液 (15AA)(38)；复方氨基酸注射液(18AA-V)(31),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,468,,,fill,官方/药典名（人工核对）
+fill,cyanocobalamin,Cyanocobalamin,维生素B12,high,NHSA 注册名: 維生素Ｂ１２注射液(393)；维生素B12片(29)；维生素B12滴眼液(13),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,443,,,fill,官方/药典名（人工核对）
+fill,potassium-chloride,Potassium Chloride,氯化钾,high,NHSA 注册名: 氯化鉀注射液(252)；氯化钾颗粒(116)；氯化钾缓释片(35),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,422,,,fill,官方/药典名（人工核对）
+fill,riboflavin,Riboflavin,维生素B2,high,NHSA 注册名: 维生素B2片(303)；维生素B2注射液(52)；注射用核黄素磷酸钠(32),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,408,,,fill,官方/药典名（人工核对）
+fill,ciprofloxacin,Ciprofloxacin,环丙沙星,high,NHSA 注册名: 乳酸环丙沙星氯化钠注射液(139)；盐酸环丙沙星片(94)；盐酸环丙沙星胶囊(30),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,377,,,fill,官方/药典名（人工核对）
+fill,zinc,Zinc,锌,high,NHSA 注册名: 葡萄糖酸锌口服溶液(90)；赖氨葡锌颗粒(72)；葡萄糖酸锌颗粒(50),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,352,,,fill,官方/药典名（人工核对）
+fill,tocopherol,Tocopherol,维生素E,high,NHSA 注册名: 维生素E软胶囊(242)；维生素E片(22)；维生素E烟酸酯胶囊(20),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,349,,,fill,官方/药典名（人工核对）
+fill,retinol,Retinol,维生素A,high,NHSA 注册名: 维生素AD滴剂(195)；维生素AD软胶囊(59)；维生素AD滴剂(胶囊型)(46),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,346,,,fill,官方/药典名（人工核对）
+fill,manitol,Manitol,甘露醇,high,NHSA 注册名: 甘露醇注射液(270)；复方甘露醇注射液(32)；山梨醇注射液(18),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,320,,,fill,官方/药典名（人工核对）
+fill,glucosamine,Glucosamine,氨基葡萄糖,high,NHSA 注册名: 硫酸氨基葡萄糖胶囊(167)；盐酸氨基葡萄糖胶囊(50)；盐酸氨基葡萄糖片(38),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,315,,,fill,官方/药典名（人工核对）
+fill,clavulanate,Clavulanate,克拉维酸,medium,NHSA 注册名: （无单成分 CN 品名，组合/生物制品）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,311,,,fill,官方/药典名（人工核对）
+fill,triamcinolone,Triamcinolone,曲安西龙,medium,NHSA 注册名: 曲咪新乳膏(83)；曲安奈德益康唑乳膏(67)；醋酸曲安奈德尿素乳膏(33),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,301,,,fill,官方/药典名（人工核对）
+fill,vitamin-b-complex,Vitamin B Complex,复合维生素B,high,NHSA 注册名: 复合维生素B片(138)；五维他口服溶液(69)；注射用水溶性维生素(50),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,292,,,fill,官方/药典名（人工核对）
+fill,pentoxifilina,Pentoxifilina,己酮可可碱,high,NHSA 注册名: 己酮可可碱注射液(75)；烟酸占替诺片(38)；烟酸占替诺注射液(24),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,225,,,fill,官方/药典名（人工核对）
+fill,olmesartan,Olmesartan,奥美沙坦,high,NHSA 注册名: 奥美沙坦酯片(72)；奥美沙坦酯氨氯地平片(68)；奥美沙坦酯胶囊(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,195,,,fill,官方/药典名（人工核对）
+fill,dextran-40,Dextran 40,右旋糖酐40,high,NHSA 注册名: 右旋糖酐40葡萄糖注射液(141)；右旋糖酐40氯化钠注射液(44)；复方右旋糖酐40注射液(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,191,,,fill,官方/药典名（人工核对）
+fill,ropivacaine,Ropivacaine,罗哌卡因,high,NHSA 注册名: 盐酸罗哌卡因注射液(100)；甲磺酸罗哌卡因注射液(39)；注射用甲磺酸罗哌卡因(34),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,179,,,fill,官方/药典名（人工核对）
+fill,epoetin-alfa,Epoetin Alfa,促红素,high,NHSA 注册名: 人促红素注射液(141)；注射用人促红素(14)；重组人促红素注射液(CHO细胞)(11),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,172,,,fill,官方/药典名（人工核对）
+fill,theophylline,Theophylline,茶碱,high,NHSA 注册名: 茶碱缓释片(72)；复方茶碱麻黄碱片(67)；茶碱缓释胶囊(16),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,170,,,fill,官方/药典名（人工核对）
+fill,gatifloxacin,Gatifloxacin,加替沙星,high,NHSA 注册名: 加替沙星片(31)；加替沙星胶囊(21)；加替沙星滴眼液(18),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,170,,,fill,官方/药典名（人工核对）
+fill,valacyclovir,Valacyclovir,伐昔洛韦,high,NHSA 注册名: 盐酸伐昔洛韦片(112)；盐酸伐昔洛韦胶囊(21)；盐酸伐昔洛韦分散片(17),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,157,,,fill,官方/药典名（人工核对）
+fill,calcium-phosphate,Calcium Phosphate,磷酸钙,medium,NHSA 注册名: 维D2磷酸氢钙片(152),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,152,,,fill,官方/药典名（人工核对）
+fill,methionine,Methionine,甲硫氨酸,high,NHSA 注册名: 注射用甲硫氨酸维B1(87)；甲硫氨酸维B1注射液(58)；甲硫氨酸片(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,150,,,fill,官方/药典名（人工核对）
+fill,chlorhexidine,Chlorhexidine,氯己定,high,NHSA 注册名: 复方氯己定含漱液(42)；醋酸氯己定痔疮栓(30)；醋酸氯己定溶液(18),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,150,,,fill,官方/药典名（人工核对）
+fill,heparin,Heparin,肝素,high,NHSA 注册名: 肝素钠注射液(63)；低分子量肝素钠注射液(22)；肝素钙注射液(20),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,145,,,fill,官方/药典名（人工核对）
+fill,sodium-iodide-i-131,Sodium Iodide I 131,碘[131I]化钠,high,NHSA 注册名: 治疗用碘[131I]化钠胶囊(100)；碘[131I]化钠口服溶液(41)；碘[131I]化钠胶囊(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,142,,,fill,官方/药典名（人工核对）
+fill,penicillin-v,Penicillin V,青霉素V,high,NHSA 注册名: 青霉素V钾片(107)；青霉素V钾胶囊(15)；青霉素V钾颗粒(11),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,141,,,fill,官方/药典名（人工核对）
+fill,filgrastim,Filgrastim,非格司亭,medium,NHSA 注册名: 人粒细胞刺激因子注射液(115)；重组人粒细胞刺激因子注射液(15)；注射用重组人粒细胞刺激因子(CHO细胞)(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,136,,,fill,官方/药典名（人工核对）
+fill,tramadol,Tramadol,曲马多,high,NHSA 注册名: 盐酸曲马多注射液(38)；注射用盐酸曲马多(27)；盐酸曲马多片(23),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,129,,,fill,官方/药典名（人工核对）
+fill,mx-es-cerebrolysin,Cerebrolysin,脑蛋白水解物,high,NHSA 注册名: 脑蛋白水解物注射液(44)；注射用脑蛋白水解物(III)(25)；复方脑蛋白水解物片(19),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,111,,,fill,官方/药典名（人工核对）
+fill,ferrous,Ferrous,亚铁,high,NHSA 注册名: 硫酸亚铁片(29)；富马酸亚铁颗粒(29)；小儿硫酸亚铁糖浆(13),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,110,,,fill,官方/药典名（人工核对）
+fill,macrogol,Macrogol,聚乙二醇,high,NHSA 注册名: 聚乙二醇4000散(26)；复方聚乙二醇电解质散(III)(22)；聚乙二醇钠钾散(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,96,,,fill,官方/药典名（人工核对）
+fill,oral-rehydration-salts,Oral Rehydration Salts,口服补液盐,high,NHSA 注册名: 口服补液盐散(III)(50)；口服补液盐散(Ⅰ)(20)；口服补液盐散(Ⅱ)(19),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,95,,,fill,官方/药典名（人工核对）
+fill,glimepiride,Glimepiride,格列美脲,high,NHSA 注册名: 格列美脲片(70)；格列美脲胶囊(11)；格列美脲分散片(7),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,95,,,fill,官方/药典名（人工核对）
+fill,meloxicam,Meloxicam,美洛昔康,high,NHSA 注册名: 美洛昔康片(65)；美洛昔康胶囊(15)；美洛昔康分散片(7),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,94,,,fill,官方/药典名（人工核对）
+fill,cefpodoxime,Cefpodoxime,头孢泊肟,high,NHSA 注册名: 头孢泊肟酯片(49)；头孢泊肟酯干混悬剂(20)；头孢泊肟酯胶囊(17),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,93,,,fill,官方/药典名（人工核对）
+fill,phytonadione,Phytonadione,维生素K1,high,NHSA 注册名: 亚硫酸氢钠甲萘醌注射液(33)；醋酸甲萘氢醌片(23)；维生素K1注射液(22),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,91,,,fill,官方/药典名（人工核对）
+fill,tegafur,Tegafur,替加氟,high,NHSA 注册名: 替吉奥胶囊(29)；替加氟注射液(25)；替加氟栓(10),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,85,,,fill,官方/药典名（人工核对）
+fill,iohexol,Iohexol,碘海醇,high,NHSA 注册名: 碘海醇注射液(83),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,83,,,fill,官方/药典名（人工核对）
+fill,mx-es-levosalbutamol,Levosalbutamol,左沙丁胺醇,high,NHSA 注册名: 盐酸左沙丁胺醇雾化吸入溶液(80),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,80,,,fill,官方/药典名（人工核对）
+fill,cholecalciferol,Cholecalciferol,维生素D3,high,NHSA 注册名: 维生素D滴剂(63)；维生素D3注射液(15),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,78,,,fill,官方/药典名（人工核对）
+fill,inositol-nicotinate,Inositol Nicotinate,肌醇烟酸酯,high,NHSA 注册名: 肌醇烟酸酯片(72)；肌醇烟酸酯软膏(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,76,,,fill,官方/药典名（人工核对）
+fill,perindopril,Perindopril,培哚普利,high,NHSA 注册名: 培哚普利叔丁胺片(38)；培哚普利吲达帕胺片(19)；培哚普利氨氯地平片(III)(18),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,75,,,fill,官方/药典名（人工核对）
+fill,ergocalciferol,Ergocalciferol,维生素D2,high,NHSA 注册名: 维生素D2软胶囊(56)；维生素D2注射液(7)；维生素D2丸(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,73,,,fill,官方/药典名（人工核对）
+fill,interferon-alfa-2b,Interferon Alfa-2B,干扰素α2b,high,NHSA 注册名: 人干扰素α2b注射液(17)；重组人干扰素α2b注射液(9)；注射用人干扰素α2b(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,72,,,fill,官方/药典名（人工核对）
+fill,ticarcillin,Ticarcillin,替卡西林,high,NHSA 注册名: 注射用替卡西林钠克拉维酸钾(71),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,71,,,fill,官方/药典名（人工核对）
+fill,calcium-chloride,Calcium Chloride,氯化钙,high,NHSA 注册名: 氯化钙注射液(71),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,71,,,fill,官方/药典名（人工核对）
+fill,sertraline,Sertraline,舍曲林,high,NHSA 注册名: 盐酸舍曲林片(47)；盐酸舍曲林胶囊(14)；盐酸舍曲林分散片(7),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,68,,,fill,官方/药典名（人工核对）
+fill,beclometasone,Beclometasone,倍氯米松,high,NHSA 注册名: 复方倍氯米松樟脑乳膏(26)；丙酸倍氯米松乳膏(24)；丙酸倍氯米松吸入气雾剂(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,64,,,fill,官方/药典名（人工核对）
+fill,aldesleukin,Aldesleukin,阿地白介素,medium,NHSA 注册名: 注射用重组人白介素-2(15)；注射用重组人白介素-2(125Ala)(11)；注射用人白介素-2(11),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,62,,,fill,官方/药典名（人工核对）
+fill,technetium-tc-99m-sodium-pertechnetate,Technetium Tc 99M Sodium Pertechnetate,高锝[99mTc]酸钠,high,NHSA 注册名: 高锝[ 99mTc]酸钠注射液(55)；高锝[99MTC]酸钠注射液(99MO—99MTC发生器)(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,58,,,fill,官方/药典名（人工核对）
+fill,ferrous-gluconate,Ferrous Gluconate,葡萄糖酸亚铁,high,NHSA 注册名: 葡萄糖酸亚铁糖浆(27)；葡萄糖酸亚铁片(22)；葡萄糖酸亚铁胶囊(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,58,,,fill,官方/药典名（人工核对）
+fill,trimebutine,Trimebutine,曲美布汀,high,NHSA 注册名: 马来酸曲美布汀片(40)；马来酸曲美布汀胶囊(5)；马来酸曲美布汀干混悬剂(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,57,,,fill,官方/药典名（人工核对）
+fill,levodopa,Levodopa,左旋多巴,high,NHSA 注册名: 多巴丝肼片(23)；左旋多巴片(18)；多巴丝肼胶囊(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,57,,,fill,官方/药典名（人工核对）
+fill,aminocaproic-acid,Aminocaproic Acid,氨基己酸,high,NHSA 注册名: 氨基己酸注射液(47)；氨基己酸片(9)；氨基己酸氯化钠注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,57,,,fill,官方/药典名（人工核对）
+fill,phenobarbital,Phenobarbital,苯巴比妥,high,NHSA 注册名: 苯巴比妥片(29)；复方苯巴比妥溴化钠片(10)；苯巴比妥钠注射液(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,56,,,fill,官方/药典名（人工核对）
+fill,rosiglitazone,Rosiglitazone,罗格列酮,high,NHSA 注册名: 盐酸罗格列酮片(35)；酒石酸罗格列酮胶囊(4)；酒石酸罗格列酮片(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,55,,,fill,官方/药典名（人工核对）
+fill,mx-es-nifuratel,Nifuratel,硝呋太尔,high,NHSA 注册名: 硝呋太尔阴道片(18)；硝呋太尔制霉素阴道软胶囊(11)；硝呋太尔胶囊(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,53,,,fill,官方/药典名（人工核对）
+fill,buprenorphine,Buprenorphine,丁丙诺啡,high,NHSA 注册名: 盐酸丁丙诺啡舌下片(22)；丁丙诺啡透皮贴剂(21)；盐酸丁丙诺啡注射液(10),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,53,,,fill,官方/药典名（人工核对）
+fill,technetium-tc-99m-medronate,Technetium Tc 99M Medronate,锝[99mTc]亚甲基二膦酸盐,medium,NHSA 注册名: 锝[99MTC]亚甲基二膦酸盐注射液(52),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,52,,,fill,官方/药典名（人工核对）
+fill,technetium-tc-99m-sestamibi,Technetium Tc 99M Sestamibi,锝[99mTc]甲氧异腈,medium,NHSA 注册名: 锝[99MTC]甲氧异腈注射液(51),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,51,,,fill,官方/药典名（人工核对）
+fill,morphine,Morphine,吗啡,high,NHSA 注册名: 硫酸吗啡缓释片(16)；盐酸吗啡片(10)；硫酸吗啡注射液(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,51,,,fill,官方/药典名（人工核对）
+fill,chlortetracycline,Chlortetracycline,金霉素,high,NHSA 注册名: 盐酸金霉素眼膏(35)；盐酸金霉素软膏(15),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,50,,,fill,官方/药典名（人工核对）
+fill,tenofovir,Tenofovir,替诺福韦,high,NHSA 注册名: 富马酸替诺福韦二吡呋酯片(42)；富马酸替诺福韦二吡呋酯胶囊(6)；富马酸替诺福韦二吡呋酯颗粒(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,49,,,fill,官方/药典名（人工核对）
+fill,tiotropium,Tiotropium,噻托溴铵,high,NHSA 注册名: 噻托溴铵粉雾剂(24)；噻托溴铵吸入粉雾剂(16)；噻托溴铵奥达特罗吸入喷雾剂(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,45,,,fill,官方/药典名（人工核对）
+fill,zoledronic-acid,Zoledronic Acid,唑来膦酸,high,NHSA 注册名: 注射用唑来膦酸浓溶液(21)；唑来膦酸注射液(14)；注射用唑来膦酸(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,44,,,fill,官方/药典名（人工核对）
+fill,hepatitis-b-immunoglobulin,Hepatitis B Immunoglobulin,乙型肝炎人免疫球蛋白,high,NHSA 注册名: 乙型肝炎人免疫球蛋白(43),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,43,,,fill,官方/药典名（人工核对）
+fill,fructose,Fructose,果糖,high,NHSA 注册名: 果糖注射液(27)；注射用果糖(8)；果糖氯化钠注射液(8),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,43,,,fill,官方/药典名（人工核对）
+fill,mx-es-difenidol,Difenidol,地芬尼多,high,NHSA 注册名: 盐酸地芬尼多片(42),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,42,,,fill,官方/药典名（人工核对）
+fill,sulfur,Sulfur,硫,high,NHSA 注册名: 硫软膏(41),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,41,,,fill,官方/药典名（人工核对）
+fill,dinoprostona,Dinoprostona,地诺前列酮,medium,NHSA 注册名: 卡前列素氨丁三醇注射液(22)；米索前列醇片(10)；米索前列醇阴道片(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,41,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,aceclofenac,Aceclofenac,醋氯芬酸,high,NHSA 注册名: 醋氯芬酸肠溶片(12)；醋氯芬酸片(10)；醋氯芬酸分散片(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,41,,,fill,官方/药典名（人工核对）
+fill,phenoxybenzamine,Phenoxybenzamine,酚苄明,high,NHSA 注册名: 盐酸酚苄明片(38)；盐酸酚苄明注射液(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,40,,,fill,官方/药典名（人工核对）
+fill,paliperidone,Paliperidone,帕利哌酮,high,NHSA 注册名: 帕利哌酮缓释片(30)；棕榈酸帕利哌酮注射液(9),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,39,,,fill,官方/药典名（人工核对）
+fill,iomeprol,Iomeprol,碘美普尔,high,NHSA 注册名: 碘美普尔注射液(38),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,38,,,fill,官方/药典名（人工核对）
+fill,calcitonina-salmon-sintetica,Calcitonina Salmón Sintética,鲑降钙素,high,NHSA 注册名: 鲑降钙素注射液(19)；鲑降钙素鼻喷雾剂(6)；注射用鲑降钙素(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,38,,,fill,官方/药典名（人工核对）
+fill,testosterone,Testosterone,睾酮,high,NHSA 注册名: 丙酸睾酮注射液(16)；睾丸片(8)；十一酸睾酮软胶囊(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,37,,,fill,官方/药典名（人工核对）
+fill,etoposido,Etoposido,依托泊苷,high,NHSA 注册名: 依托泊苷注射液(22)；盐酸托泊替康胶囊(4)；盐酸伊立替康注射液(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,37,,,fill,官方/药典名（人工核对）
+fill,isotretinoin,Isotretinoin,异维A酸,high,NHSA 注册名: 异维A酸软胶囊(20)；维胺酯胶囊(10)；异维A酸凝胶(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,35,,,fill,官方/药典名（人工核对）
+fill,glutamine,Glutamine,谷氨酰胺,high,NHSA 注册名: 谷氨酰胺薁磺酸钠颗粒(12)；谷氨酰胺胶囊(8)；复方谷氨酰胺肠溶胶囊(8),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,35,,,fill,官方/药典名（人工核对）
+fill,insulina-isofana-nph,Insulina Isófana (Nph),精蛋白人胰岛素,high,NHSA 注册名: 精蛋白人胰岛素注射液(23)；精蛋白重组人胰岛素注射液(7)；低精蛋白锌胰岛素注射液(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,34,,,fill,官方/药典名（人工核对）
+fill,vardenafil,Vardenafil,伐地那非,high,NHSA 注册名: 盐酸伐地那非片(32),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,32,,,fill,官方/药典名（人工核对）
+fill,minocycline,Minocycline,米诺环素,high,NHSA 注册名: 盐酸米诺环素胶囊(23)；盐酸米诺环素片(7)；盐酸米诺环素软膏(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,32,,,fill,官方/药典名（人工核对）
+fill,carbenoxolona,Carbenoxolona,甘珀酸,medium,NHSA 注册名: 糠甾醇片(15)；樟脑水合氯醛酊(7)；氨来呫诺糊剂(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,32,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,otilonio,Otilonio,奥替溴铵,medium,NHSA 注册名: 溴丙胺太林片(11)；格隆溴铵注射液(9)；复方溴丙胺太林片(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,31,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,mifepristone,Mifepristone,米非司酮,high,NHSA 注册名: 米非司酮片(19)；米非司酮胶囊(4)；米非司酮片/米索前列醇片(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,31,,,fill,官方/药典名（人工核对）
+fill,mebrofenin,Mebrofenin,依替菲宁,high,NHSA 注册名: 锝[99MTC]依替菲宁注射液(28)；注射用亚锡依替菲宁(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,29,,,fill,官方/药典名（人工核对）
+fill,fusidic-acid,Fusidic Acid,夫西地酸,high,NHSA 注册名: 夫西地酸乳膏(12)；注射用夫西地酸钠(9)；夫西地酸钠软膏(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,29,,,fill,官方/药典名（人工核对）
+fill,mx-es-pidotimod,Pidotimod,匹多莫德,high,NHSA 注册名: 匹多莫德颗粒(11)；匹多莫德口服溶液(5)；匹多莫德胶囊(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,28,,,fill,官方/药典名（人工核对）
+fill,danazol,Danazol,达那唑,high,NHSA 注册名: 富马酸异丙吡仑片(17)；达那唑胶囊(7)；达那唑栓(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,28,,,fill,官方/药典名（人工核对）
+fill,sargramostim,Sargramostim,沙格司亭,medium,NHSA 注册名: 注射用人粒细胞巨噬细胞刺激因子(20)；注射用重组人粒细胞巨噬细胞刺激因子(7),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,27,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-rabia,Vacuna Anti Rabia,狂犬病疫苗,high,NHSA 注册名: 冻干人用狂犬病疫苗(VERO细胞)(17)；人用狂犬病疫苗(地鼠肾细胞)(3)；人用狂犬病疫苗(VERO细胞)(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,26,,,fill,官方/药典名（人工核对）
+fill,tetracaine,Tetracaine,丁卡因,high,NHSA 注册名: 注射用盐酸丁卡因(20)；盐酸丁卡因凝胶(4)；盐酸丁卡因注射液(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,26,,,fill,官方/药典名（人工核对）
+fill,mycophenolate,Mycophenolate,麦考酚,high,NHSA 注册名: 麦考酚钠肠溶片(26),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,26,,,fill,官方/药典名（人工核对）
+fill,levothyroxine,Levothyroxine,左甲状腺素,high,NHSA 注册名: 左甲状腺素钠片(26),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,26,,,fill,官方/药典名（人工核对）
+fill,imipenem,Imipenem,亚胺培南,high,NHSA 注册名: 注射用亚胺培南-西司他丁钠(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,26,,,fill,官方/药典名（人工核对）
+fill,azelastine,Azelastine,氮䓬斯汀,high,NHSA 注册名: 盐酸氮䓬斯汀滴眼液(10)；盐酸氮䓬斯汀片(8)；盐酸氮䓬斯汀鼻喷雾剂(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,26,,,fill,官方/药典名（人工核对）
+fill,cilastatin,Cilastatin,西司他丁,medium,NHSA 注册名: （无单成分 CN 品名，组合/生物制品）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,25,,,fill,官方/药典名（人工核对）
+fill,aminosalicylic-acid,Aminosalicylic Acid,对氨基水杨酸,high,NHSA 注册名: 注射用对氨基水杨酸钠(10)；对氨基水杨酸钠肠溶片(8)；对氨基水杨酸钠片(7),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,25,,,fill,官方/药典名（人工核对）
+fill,triptorelin,Triptorelin,曲普瑞林,high,NHSA 注册名: 醋酸曲普瑞林注射液(16)；注射用醋酸曲普瑞林(3)；注射用曲普瑞林(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,24,,,fill,官方/药典名（人工核对）
+fill,tolterodine,Tolterodine,托特罗定,high,NHSA 注册名: 酒石酸托特罗定片(10)；酒石酸托特罗定分散片(4)；富马酸托特罗定片(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,24,,,fill,官方/药典名（人工核对）
+fill,fluvastatin,Fluvastatin,氟伐他汀,high,NHSA 注册名: 氟伐他汀钠胶囊(12)；氟伐他汀钠缓释片(12),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,24,,,fill,官方/药典名（人工核对）
+fill,sufentanil,Sufentanil,舒芬太尼,high,NHSA 注册名: 枸橼酸舒芬太尼注射液(22),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,22,,,fill,官方/药典名（人工核对）
+fill,micafungin,Micafungin,米卡芬净,high,NHSA 注册名: 注射用米卡芬净钠(21),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,21,,,fill,官方/药典名（人工核对）
+fill,foscarnet,Foscarnet,膦甲酸,high,NHSA 注册名: 膦甲酸钠氯化钠注射液(12)；膦甲酸钠乳膏(4)；膦甲酸钠滴眼液(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,21,,,fill,官方/药典名（人工核对）
+fill,etomidate,Etomidate,依托咪酯,high,NHSA 注册名: 依托咪酯中/长链脂肪乳注射液(13)；依托咪酯乳状注射液(4)；依托咪酯注射液(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,20,,,fill,官方/药典名（人工核对）
+fill,dalteparin,Dalteparin,达肝素,high,NHSA 注册名: 达肝素钠注射液(19),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,19,,,fill,官方/药典名（人工核对）
+fill,clobetasona,Clobetasona,氯倍他松,high,NHSA 注册名: 地奈德乳膏(11)；丁酸氯倍他松乳膏(6)；醋酸氟氢可的松乳膏(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,19,,,fill,官方/药典名（人工核对）
+fill,benzbromarone,Benzbromarone,苯溴马隆,high,NHSA 注册名: 苯溴马隆片(14)；苯溴马隆胶囊(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,19,,,fill,官方/药典名（人工核对）
+fill,alogliptin,Alogliptin,阿格列汀,high,NHSA 注册名: 苯甲酸阿格列汀片(19),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,19,,,fill,官方/药典名（人工核对）
+fill,ziprasidone,Ziprasidone,齐拉西酮,high,NHSA 注册名: 盐酸齐拉西酮胶囊(5)；盐酸齐拉西酮片(4)；注射用甲磺酸齐拉西酮(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,16,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-virus-papiloma-humano,Vacuna Anti Virus Papiloma Humano,人乳头瘤病毒疫苗,high,NHSA 注册名: 九价人乳头瘤病毒疫苗(酿酒酵母)(7)；四价人乳头瘤病毒疫苗(酿酒酵母)(4)；双价人乳头瘤病毒疫苗(毕赤酵母)(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,16,,,fill,官方/药典名（人工核对）
+fill,clomifeno,Clomifeno,氯米芬,medium,NHSA 注册名: 重组人促卵泡激素注射液(11)；注射用重组人促卵泡激素(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,16,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,sotalol,Sotalol,索他洛尔,high,NHSA 注册名: 盐酸索他洛尔片(9)；注射用盐酸索他洛尔(5)；盐酸索他洛尔注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,15,,,fill,官方/药典名（人工核对）
+fill,magnesio-hidroxido,Magnesio Hidróxido,氢氧化镁,medium,NHSA 注册名: 铋镁豆蔻片(11)；铋镁豆蔻胶囊(2)；铋镁碳酸氢钠片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,15,,,fill,官方/药典名（人工核对）
+fill,fentanyl,Fentanyl,芬太尼,high,NHSA 注册名: 枸橼酸芬太尼注射液(15),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,15,,,fill,官方/药典名（人工核对）
+fill,bario,Bario,钡,high,NHSA 注册名: 硫酸钡(Ⅱ型)干混悬剂(8)；硫酸钡混悬液(4)；硫酸钡(I型)干混悬剂(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,15,,,fill,官方/药典名（人工核对）
+fill,tuberculina-ppd,Tuberculina Ppd,结核菌素纯蛋白衍生物,high,NHSA 注册名: 结核菌素纯蛋白衍生物(5)；重组结核杆菌融合蛋白(EC)(4)；卡介菌纯蛋白衍生物(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,14,,,fill,官方/药典名（人工核对）
+fill,remifentanil,Remifentanil,瑞芬太尼,high,NHSA 注册名: 注射用盐酸瑞芬太尼(14),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,14,,,fill,官方/药典名（人工核对）
+fill,polystyrene-sulfonate-calcium,Polystyrene Sulfonate - Calcium,聚苯乙烯磺酸钙,high,NHSA 注册名: 聚苯乙烯磺酸钙散剂(12)；聚苯乙烯磺酸钙散(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,14,,,fill,官方/药典名（人工核对）
+fill,ginkgo-biloba,Ginkgo Biloba,银杏叶提取物,high,NHSA 注册名: 银杏叶提取物片(6)；银杏叶提取物注射液(6)；银杏叶提取物滴剂(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,14,,,fill,官方/药典名（人工核对）
+fill,amphotericin-b,Amphotericin B,两性霉素B,high,NHSA 注册名: 注射用两性霉素B(6)；注射用两性霉素B脂质体(5)；两性霉素B阴道泡腾片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,14,,,fill,官方/药典名（人工核对）
+fill,salmeterol,Salmeterol,沙美特罗,high,NHSA 注册名: 沙美特罗替卡松吸入粉雾剂(10)；沙美特罗替卡松吸入气雾剂(2)；昔萘酸沙美特罗气雾剂(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,13,,,fill,官方/药典名（人工核对）
+fill,indacaterol,Indacaterol,茚达特罗,high,NHSA 注册名: 马来酸茚达特罗吸入粉雾剂(5)；茚达特罗格隆溴铵吸入粉雾剂(4)；茚达特罗格隆溴铵吸入粉雾剂用胶囊(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,13,,,fill,官方/药典名（人工核对）
+fill,fluorescein,Fluorescein,荧光素,high,NHSA 注册名: 荧光素钠注射液(9)；注射用吲哚菁绿(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,13,,,fill,官方/药典名（人工核对）
+fill,decualinio,Decualinio,地喹氯铵,medium,NHSA 注册名: 氯喹那多-普罗雌烯阴道片(13),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,13,,,fill,官方/药典名（人工核对）
+fill,xylometazoline,Xylometazoline,赛洛唑啉,high,NHSA 注册名: 盐酸赛洛唑啉鼻用喷雾剂(6)；盐酸赛洛唑啉滴鼻液(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,12,,,fill,官方/药典名（人工核对）
+fill,tirzepatide,Tirzepatide,替尔泊肽,high,NHSA 注册名: 替尔泊肽注射液(12),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,12,,,fill,官方/药典名（人工核对）
+fill,salicilato-de-trolamina,Salicilato De Trolamina,水杨酸三乙醇胺,medium,NHSA 注册名: 复方水杨酸甲酯薄荷醇贴剂(4)；复方水杨酸甲酯薄荷脑油(4)；复方水杨酸甲酯巴布膏(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,12,,,fill,官方/药典名（人工核对）
+fill,oxibuprocaina,Oxibuprocaína,奥布卡因,high,NHSA 注册名: 盐酸丙美卡因滴眼液(7)；盐酸奥布卡因滴眼液(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,12,,,fill,官方/药典名（人工核对）
+fill,estradiol,Estradiol,雌二醇,high,NHSA 注册名: 雌二醇凝胶(4)；戊酸雌二醇片(3)；雌二醇缓释贴片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,12,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-h-influenzae-b,Vacuna Anti H.Influenzae B,b型流感嗜血杆菌疫苗,medium,NHSA 注册名: B型流感嗜血杆菌结合疫苗(10)；冻干b型流感嗜血杆菌结合疫苗(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,11,,,fill,官方/药典名（人工核对）
+fill,carbon-activado,Carbón Activado,药用炭,high,NHSA 注册名: 药用炭片(8)；药用炭颗粒(1)；药用炭胶囊(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,11,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-polio,Vacuna Anti Polio,脊髓灰质炎疫苗,medium,NHSA 注册名: SABIN株脊髓灰质炎灭活疫苗(VERO细胞)(6)；口服I型III型脊髓灰质炎减毒活疫苗(人二倍体细胞)(2)；脊髓灰质炎灭活疫苗(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,semaglutide,Semaglutide,司美格鲁肽,high,NHSA 注册名: 司美格鲁肽注射液(7)；司美格鲁肽片(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,ketamine,Ketamine,氯胺酮,high,NHSA 注册名: 盐酸氯胺酮注射液(10),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,ivermectin,Ivermectin,伊维菌素,high,NHSA 注册名: 伊维菌素片(4)；伊维菌素胶囊(3)；伊维菌素咀嚼片(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,fludeoxyglucose-f-18,Fludeoxyglucose F 18,氟[18F]脱氧葡糖,medium,NHSA 注册名: 氟[ ¹⁸F]脱氧葡糖注射液(10),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,entacapone,Entacapone,恩他卡朋,high,NHSA 注册名: 恩他卡朋片(5)；恩他卡朋双多巴片(Ⅱ)(2)；恩他卡朋双多巴片(Ⅳ)(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,drospirenone,Drospirenone,屈螺酮,medium,NHSA 注册名: （无单成分 CN 品名，组合/生物制品）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,10,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-bcg,Vacuna Anti Bcg,卡介苗,high,NHSA 注册名: 皮内注射用卡介苗(5)；治疗用卡介苗(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,9,,,fill,官方/药典名（人工核对）
+fill,suxametonio,Suxametonio,琥珀胆碱,high,NHSA 注册名: 氯化琥珀胆碱注射液(8),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,8,,,fill,官方/药典名（人工核对）
+fill,strontium-chloride,Strontium Chloride,氯化锶[89Sr],high,NHSA 注册名: 氯化锶[89Sr]注射液(8),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,8,,,fill,官方/药典名（人工核对）
+fill,ropinirole,Ropinirole,罗匹尼罗,high,NHSA 注册名: 盐酸罗匹尼罗缓释片(6)；盐酸罗匹尼罗片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,8,,,fill,官方/药典名（人工核对）
+fill,osimertinib,Osimertinib,奥希替尼,high,NHSA 注册名: 甲磺酸奥希替尼片(8),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,8,,,fill,官方/药典名（人工核对）
+fill,desogestrel,Desogestrel,去氧孕烯,medium,NHSA 注册名: （无单成分 CN 品名，组合/生物制品）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,8,,,fill,官方/药典名（人工核对）
+fill,clomifene,Clomifene,氯米芬,high,NHSA 注册名: 枸橼酸氯米芬胶囊(6)；枸橼酸氯米芬片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,8,,,fill,官方/药典名（人工核对）
+fill,zinc-oxido,Zinc Óxido,氧化锌,high,NHSA 注册名: 氧化锌升华硫软膏(3)；氧化锌硫软膏(2)；氧化锌油(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方/药典名（人工核对）
+fill,spiramycin,Spiramycin,螺旋霉素,high,NHSA 注册名: 螺旋霉素片(5)；螺旋霉素胶囊(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方/药典名（人工核对）
+fill,pentosano-polisulfato,Pentosano Polisulfato,多磺酸粘多糖,high,NHSA 注册名: 复方肝素钠尿囊素凝胶(5)；多磺酸粘多糖乳膏(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方/药典名（人工核对）
+fill,oxybutynin,Oxybutynin,奥昔布宁,high,NHSA 注册名: 盐酸奥昔布宁缓释片(2)；盐酸奥昔布宁片(2)；盐酸奥昔布宁胶囊(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方/药典名（人工核对）
+fill,noretisterona,Noretisterona,炔诺酮,high,NHSA 注册名: 烯丙雌醇片(3)；炔诺酮片(3)；炔诺酮滴丸(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方/药典名（人工核对）
+fill,bromelaina,Bromelaína,菠萝蛋白酶,medium,NHSA 注册名: 注射用胶原酶(5)；胶原酶软膏(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,aliskireno,Aliskireno,阿利吉仑,high,NHSA 注册名: 阿利吉仑片(7),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,7,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-encefalitis-japonesa,Vacuna Anti Encefalitis Japonesa,乙型脑炎疫苗,medium,NHSA 注册名: 乙型脑炎灭活疫苗(VERO细胞)(2)；乙型脑炎减毒活疫苗(2)；森林脑炎灭活疫苗(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,potasio-ioduro,Potasio Ioduro,碘化钾,medium,NHSA 注册名: 碘化油软胶囊(3)；碘酸钾片(2)；碘酸钾颗粒(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,mizolastine,Mizolastine,咪唑斯汀,high,NHSA 注册名: 咪唑斯汀缓释片(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,liraglutide,Liraglutide,利拉鲁肽,high,NHSA 注册名: 利拉鲁肽注射液(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,leuprorelin,Leuprorelin,亮丙瑞林,high,NHSA 注册名: 注射用醋酸亮丙瑞林微球(5)；注射用醋酸亮丙瑞林缓释微球(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,gadodiamide,Gadodiamide,钆双胺,high,NHSA 注册名: 钆双胺注射液(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,dulaglutide,Dulaglutide,度拉糖肽,high,NHSA 注册名: 度拉糖肽注射液(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,ammonium,Ammonium,铵,high,NHSA 注册名: 氯化铵片(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方/药典名（人工核对）
+fill,acido-mefenamico,Ácido Mefenámico,甲芬那酸,medium,NHSA 注册名: 单氯芬那酸片(6),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,6,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,tensioactivo-pulmonar-porcino,Tensioactivo Pulmonar Porcino,猪肺磷脂,high,NHSA 注册名: 猪肺磷脂注射液(4)；注射用牛肺表面活性剂(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,ramipril,Ramipril,雷米普利,high,NHSA 注册名: 雷米普利片(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,polymyxin-b,Polymyxin B,多黏菌素B,high,NHSA 注册名: 复方多粘菌素B软膏(4)；复方多黏菌素B软膏(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,plata,Plata,银,high,NHSA 注册名: 硝酸银软膏(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,nicotinamide-adenine-dinucleotide,Nicotinamide Adenine Dinucleotide,辅酶I,medium,NHSA 注册名: 注射用辅酶Ⅰ(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,mannitol,Mannitol,甘露醇,high,NHSA 注册名: 甘露醇冲洗液(4)；甘露醇注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,daunorubicin,Daunorubicin,柔红霉素,high,NHSA 注册名: 注射用盐酸柔红霉素(5),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,cyproterone,Cyproterone,环丙孕酮,medium,NHSA 注册名: （无单成分 CN 品名，组合/生物制品）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方/药典名（人工核对）
+fill,colistimethate,Colistimethate,多黏菌素E甲磺酸钠,high,NHSA 注册名: 注射用多黏菌素E甲磺酸钠(4)；注射用硫酸多黏菌素B(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,5,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,vacuna-anti-rotavirus,Vacuna Anti Rotavirus,轮状病毒疫苗,medium,NHSA 注册名: 口服五价重配轮状病毒减毒活疫苗(VERO细胞)(2)；口服轮状病毒活疫苗(1)；口服三价重配轮状病毒减毒活疫苗(Vero细胞)(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方/药典名（人工核对）
+fill,periciazina,Periciazina,哌泊塞嗪,high,NHSA 注册名: 棕榈哌泊塞嗪注射液(3)；盐酸硫利哒嗪片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,parafina-liquida,Parafina Líquida,液状石蜡,medium,NHSA 注册名: 多库酯钠片(2)；多库酯钠丹蒽醌胶囊(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,lixisenatide,Lixisenatide,利司那肽,high,NHSA 注册名: 利司那肽注射液(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方/药典名（人工核对）
+fill,dolasetron,Dolasetron,多拉司琼,high,NHSA 注册名: 甲磺酸多拉司琼注射液(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方/药典名（人工核对）
+fill,crizotinib,Crizotinib,克唑替尼,high,NHSA 注册名: 克唑替尼胶囊(4),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方/药典名（人工核对）
+fill,ciclesonide,Ciclesonide,环索奈德,high,NHSA 注册名: 环索奈德气雾剂(2)；环索奈德吸入气雾剂(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方/药典名（人工核对）
+fill,benzbromarona,Benzbromarona,苯溴马隆,medium,NHSA 注册名: 多替诺雷片(2)；丙磺舒片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,4,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,glucagon,Glucagon,高血糖素,high,NHSA 注册名: 注射用盐酸高血糖素(1)；注射用生物合成高血糖素(1)；注射用人高血糖素(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,3,,,fill,官方/药典名（人工核对）
+fill,dolutegravir,Dolutegravir,多替拉韦,high,NHSA 注册名: 多替拉韦钠片(2)；多替拉韦钠分散片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,3,,,fill,官方/药典名（人工核对）
+fill,brinzolamide,Brinzolamide,布林佐胺,high,NHSA 注册名: 布林佐胺滴眼液(1)；布林佐胺溴莫尼定滴眼液(1)；布林佐胺噻吗洛尔滴眼液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,3,,,fill,官方/药典名（人工核对）
+fill,alverine,Alverine,阿尔维林,high,NHSA 注册名: 枸橼酸阿尔维林胶囊(2)；复方枸橼酸阿尔维林软胶囊(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,3,,,fill,官方/药典名（人工核对）
+fill,acitretin,Acitretin,阿维A,high,NHSA 注册名: 阿维A胶囊(3),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,3,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-tifoidea,Vacuna Anti Tifoidea,伤寒疫苗,medium,NHSA 注册名: 伤寒Vi多糖疫苗(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,vacuna-anti-colera,Vacuna Anti Cólera,霍乱疫苗,high,NHSA 注册名: 重组B亚单位/菌体霍乱疫苗(肠溶胶囊)(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,panobinostat,Panobinostat,帕比司他,medium,NHSA 注册名: 恩替司他片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,metildopa,Metildopa,甲基多巴,high,NHSA 注册名: 甲基多巴片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,lopinavir,Lopinavir,洛匹那韦,high,NHSA 注册名: 洛匹那韦利托那韦片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,insulin-glulisine,Insulin Glulisine,谷赖胰岛素,high,NHSA 注册名: 谷赖胰岛素注射液(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,ibrutinib,Ibrutinib,伊布替尼,high,NHSA 注册名: 伊布替尼胶囊(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,flutamide,Flutamide,氟他胺,high,NHSA 注册名: 氟他胺片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,fludrocortisona,Fludrocortisona,氟氢可的松,high,NHSA 注册名: 醋酸氟氢可的松片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,colestyramine,Colestyramine,考来烯胺,high,NHSA 注册名: 考来烯胺散(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,ciproterona,Ciproterona,环丙孕酮,high,NHSA 注册名: 醋酸环丙孕酮片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,chlordiazepoxide,Chlordiazepoxide,氯氮䓬,high,NHSA 注册名: 氯氮䓬片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,carmin-de-indigo,Carmín De Índigo,靛胭脂,high,NHSA 注册名: 靛胭脂注射液(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,carbidopa,Carbidopa,卡比多巴,high,NHSA 注册名: 复方卡比多巴片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,amitriptyline,Amitriptyline,阿米替林,high,NHSA 注册名: 盐酸阿米替林片(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,alteplase,Alteplase,阿替普酶,high,NHSA 注册名: 注射用阿替普酶(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,alglucosidase-alfa,Alglucosidase Alfa,阿糖苷酶α,high,NHSA 注册名: 注射用阿糖苷酶α(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,agua-esteril-para-preparaciones-inyectables,Agua Estéril Para Preparaciones Inyectables,灭菌注射用水,medium,NHSA 注册名: 变应原(抗原)溶媒(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,acido-para-aminosalicilico,Ácido Para Aminosalicílico,对氨基水杨酸,high,NHSA 注册名: 对氨基水杨酸肠溶颗粒(2),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,2,,,fill,官方/药典名（人工核对）
+fill,zonisamide,Zonisamide,唑尼沙胺,high,NHSA 注册名: 唑尼沙胺片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,zanamivir,Zanamivir,扎那米韦,high,NHSA 注册名: 扎那米韦吸入粉雾剂(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,ytrio-citrato-90y,Ytrio Citrato (90Y),枸橼酸钇[90Y],medium,NHSA 注册名: 钇[90Y]微球注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,vernakalant,Vernakalant,维纳卡兰,medium,NHSA 注册名: 盐酸莫雷西嗪片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,vacuna-anti-fiebre-amarilla,Vacuna Anti Fiebre Amarilla,黄热病疫苗,medium,NHSA 注册名: 黄热减毒活疫苗(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,telbivudine,Telbivudine,替比夫定,high,NHSA 注册名: 替比夫定片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,sulfur-hexafluoride,Sulfur Hexafluoride,六氟化硫,high,NHSA 注册名: 注射用六氟化硫微泡(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,setmelanotida,Setmelanotida,司美诺肽,medium,NHSA 注册名: 马吲哚片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,raltegravir,Raltegravir,拉替拉韦,high,NHSA 注册名: 拉替拉韦钾片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,procarbazine,Procarbazine,丙卡巴肼,high,NHSA 注册名: 盐酸丙卡巴肼胶囊(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,osilodrostat,Osilodrostat,奥唑司他,high,NHSA 注册名: 磷酸奥唑司他片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,mx-es-nimotuzumab,Nimotuzumab,尼妥珠单抗,high,NHSA 注册名: 尼妥珠单抗注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,magnesium-gluconate,Magnesium Gluconate,葡萄糖酸镁,high,NHSA 注册名: 葡萄糖酸镁颗粒(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,inotuzumab-ozogamicin,Inotuzumab Ozogamicin,奥加伊妥珠单抗,high,NHSA 注册名: 注射用奥加伊妥珠单抗(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,hyaluronic-acid,Hyaluronic Acid,透明质酸,high,NHSA 注册名: 透明质酸放射免疫分析药盒(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,folinic-acid,Folinic Acid,亚叶酸,high,NHSA 注册名: 注射用亚叶酸钠(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,florbetaben-f-18,Florbetaben F 18,氟[18F]贝他苯,medium,NHSA 注册名: 氟[¹⁸F]贝他苯注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,butilescopolamina,Butilescopolamina,丁溴东莨菪碱,medium,NHSA 注册名: 甲溴阿托品片(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方中文名与库内 CN 产品名不一致（成分映射可疑），建议复核
+fill,bezlotoxumab,Bezlotoxumab,贝洛托舒单抗,medium,NHSA 注册名: 斯泰度塔单抗注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+fill,antimoniato,Antimoniato,葡萄糖酸锑钠,high,NHSA 注册名: 葡萄糖酸锑钠注射液(1),https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,1,,,fill,官方/药典名（人工核对）
+correction,dextran-70,,右旋糖酐70,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,润齐,润齐,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,dopamine,,多巴胺,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,阿斯克丁,阿斯克丁,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,goserelin,,戈舍瑞林,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,诺雷得,诺雷得,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,methylphenidate,,哌甲酯,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,专注达,专注达,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,calcium-gluconate,,葡萄糖酸钙,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,弘泰,弘泰,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,fluoxetine,,氟西汀,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,百优解,百优解,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,paroxetine,,帕罗西汀,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,乐友,乐友,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,tretinoin,,维A酸,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,艾力可,艾力可,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,vacuna-anti-neumococo,,肺炎球菌疫苗,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,纽莫法,纽莫法,db_update,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,alglucosidase-alfa,,阿糖苷酶α,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,美而赞,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,aminocaproic-acid,,氨基己酸,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,凯乃银,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,amphotericin-b,,两性霉素B,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,锋克松,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,clomifene,,氯米芬,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,法地兰,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,dextran-40,,右旋糖酐40,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,福他乐,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,fludeoxyglucose-f-18,,氟[18F]脱氧葡糖,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,弗唐派特,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,leuprorelin,,亮丙瑞林,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,抑那通,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,magnesium-gluconate,,葡萄糖酸镁,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,包乐,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,sodium-chloride,,氯化钠,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,乐敦清,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,strontium-chloride,,氯化锶[89Sr],high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,思通宁,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,sufentanil,,舒芬太尼,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,舒芬尼,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,tocopherol,,维生素E,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,清之维,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
+correction,vitamin-b-complex,,复合维生素B,high,旧回填 CSV 行被判定为品牌名误用（与 CN trade 名同形）,https://code.nhsa.gov.cn/yp/toPublicGoodsData.html,0,水乐维他,,csv_only,DB 若已写入旧值需 UPDATE（见 corrections.sql）
