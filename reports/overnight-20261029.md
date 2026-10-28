@@ -1,6 +1,6 @@
 # 谷段自动工作汇报 — 2026-10-29（v0.5.2 → v0.6.x）
 
-> 状态：**框架 v1**（2026-10-28 晚间起草；v0.8.3 发布后更新）。`v0.5.2–v0.8.3` **已发布 18 版**（v0.6.6 内部版本号未单独发布，已并入 v0.6.7）；`v0.8.3` **已上线**（smoke **32/32**、tag/Release、gh-pages `6e864fdaf`；dist **62,217 文件 / 468.4 MB**、sitemap **62,057**、combo **10,284**；增量 **16.52 MiB**（−96.5%）、594s；180s 传播等待生效，publish exit 0）。**v0.8.4（显示层修复 task-128）构建中**，发布后即第 19 版；后续 v0.8.5/HK build/HK 版本；**metrics/dashboard 等实际最后一版发布后跑（不提前）**。
+> 状态：**框架 v1（收尾版，2026-10-29 发布结束后定稿）**。`v0.5.2–v0.8.4` **已发布 19 版**（v0.6.6 内部版本号未单独发布，已并入 v0.6.7）；**v0.8.4 为今晚最后一版**：smoke **32/32**、tag/Release、commit `611a45afa`、gh-pages `b2123de77`；dist **62,217 文件 / 472.5 MB**、sitemap **62,057**；增量上传 **13.37 MiB**（−97.2%）、526s。**最终 metrics + dashboard 已按最终 dist 跑完**（`reports/metrics/2026-10-29.json`、`docs/工作集群-架构与进度.html` + `docs/img/cluster-progress.png`）；下一谷段：v0.8.5（task-131 大类 v2+ATC 去重）→ HK build（task-132）→ HK 版本；task-133 统一 DB 窗口。
 > **2026-10-29 更新**：TW 数据已由 data-depth 写入真实库（非发布，等 task-81 build 支持后 v0.7.0）；最终版本数、站点体积/页面数、线上 smoke、nightly metrics 与 dashboard 快照在最后一版发布完成后回填（发布经理确认 dist 稳定后再跑）。
 > 数据口径：`data/drugs.db` 只读现查（2026-10-29）；站点数字以最终 build 为准；不夸大未验证项。
 
@@ -8,7 +8,7 @@
 
 ## 1. 结论（截至 v0.8.1）
 
-- 本谷段**已连续发布 18 个版本（v0.5.2 → v0.8.3；v0.6.6 内部版本号未单独发布）**：**9 个市场**、四语（en/es/zh/zh-Hant）全站；
+- 本谷段**已连续发布 19 个版本（v0.5.2 → v0.8.4；v0.6.6 内部版本号未单独发布）**：**9 个市场**、四语（en/es/zh/zh-Hant）全站；v0.8.4 为今晚最后一版；
   - **页面体系**：品牌页 / 组合页 / 厂家页 / 术语表页，结果行可展开产品明细（A1）、可复制/导出（B7）；
   - **跨市场**：141 个成分身份合并（substances 12,790 → **12,649**），组合页跨市场同组合区块；
   - **体积**：DB VACUUM **450 MB → 325 MB**；站点停写冗余 `data/index.json`（发布体积 −54.9 MB）；
@@ -17,6 +17,7 @@
 - **v0.7.0 已上线**：台湾 TFDA **16,457 产品**、四语国家列表/chips、成分页矩阵 **TW 列**、zh-Hant 全站启用、TFDA OGDL v1.0 署名；live v0.7.0、smoke **0 failures**、tag v0.7.0、gh-pages `3ce2b035`（Release 待发布经理确认）。
 - **v0.7.1 已上线（ATC 类别浏览）**：1,154 个 ATC 类目页（L1–L4）+ 16 常见大类入口 + `/atc.html` + 四语类名/类名搜索 + WHO ATC/DDD 引用；smoke 32/32、tag/Release 已建、gh-pages `29fab5ecd`、dist 61,547 文件/446.2 MB、sitemap 61,390、增量上传 13.85 MiB（−96.9%）/511s。
 - **v0.8.0 已上线（SG）**：HSA 5,511 产品、全库 **431,555**；四语国家列表/chips/矩阵新增 SG 列，站点 **9 个市场**；矩阵 9 列全显不再截断；About HSA/SODL v1.0 署名与数据截止 2026-08-07，明确「在册名单不代表在售」、商品名保留英文；smoke 32/32、gh-pages `fc7986d1a`、dist 62,878 文件/455.7 MB、sitemap 62,720、增量 17.94 MiB（−96.1%）/515s。
+- **v0.8.4 已上线（今晚最后一版，第 19 版）**：显示层修复——剂型去重、异常规格「待核」、长品牌名截断、状态角标、空值语义、CN 拉丁品牌旁中文通用名；smoke 32/32、commit `611a45afa`、gh-pages `b2123de77`、62,217 文件/472.5 MB、sitemap 62,057、增量 13.37 MiB（−97.2%）/526s。
 - **v0.8.3 已上线（排序/筛选器 + 伪复方归并）**：矩阵常用剂量排序+空行隐藏+筛选器（国家/剂型/释放/规格/URL/移动抽屉）+ 伪复方 base 归并（combo 10,942→10,284、severe 19,381→18,862）；smoke 32/32、gh-pages `6e864fdaf`、dist 62,217 文件/468.4 MB、sitemap 62,057、增量 16.52 MiB（−96.5%）/594s。
 - **v0.8.2 已上线（七项修复）**：零结果埋点+搜索词周报、ATC 大类四语、ATC 成分名中文化、引导卡上移、搜索后收起大类、页头响应式、矩阵列错位修复+当地注册名标注；What's new 补 v0.6–v0.8 译文；smoke 32/32、gh-pages `75b81209f`、dist 62,880 文件/476.0 MB、增量 15.01 MiB（−96.8%）/564s。
 - **v0.8.1 已上线（双语对照）**：本市场原名 + 当前语言译名（默认 zh 536 / es 640）+ 来源徽章 + 数据版本 v2026-10-28.1；无译名回退原名、品牌永不翻译；「显示原文对照」默认开启（zh-Hant 暂回退原名）；smoke 32/32、gh-pages `46a6bfd37`、dist 62,880 文件/463.7 MB、sitemap 62,720、增量 14.92 MiB（−96.8%）/519s；体积 +8 MB。
@@ -49,7 +50,7 @@
 | v0.8.1 | 2026-10-29 | 双语对照显示：本市场原名 + 当前语言译名（zh 536/es 640）+ 来源徽章 + 数据版本 v2026-10-28.1；无译名回退原名、品牌永不翻译；显示原文对照默认开；smoke 32/32，gh-pages 46a6bfd37，62,880 文件/463.7 MB，sitemap 62,720 |
 | v0.8.2 | 2026-10-29 | 七项修复：零结果埋点+搜索词周报、ATC 大类四语、ATC 成分名中文化、引导卡上移、搜索后收起大类、页头响应式、矩阵列错位修复+当地注册名标注；What's new 补 v0.6–v0.8 译文；smoke 32/32，gh-pages 75b81209f，62,880 文件/476.0 MB |
 | v0.8.3 | 2026-10-29 | 排序/筛选器 + 伪复方 base 归并：常用剂量排序（跨国家记录数、未公开最后）、空行隐藏、筛选器（国家/剂型/释放/规格/URL/移动抽屉）、伪复方 base 归并（combo 10,942→10,284、severe 19,381→18,862）；smoke 32/32，gh-pages 6e864fdaf，62,217 文件/468.4 MB，sitemap 62,057 |
-| *v0.8.4* | *代码就绪/待发* | *显示层修复（task-128）：剂型去重、异常规格「待核」、长品牌名截断、状态角标、空值语义、CN 拉丁品牌旁中文通用名；v0.8.3 发布后构建，今晚不够则下一谷段* |
+| v0.8.4 | 2026-10-29 | 显示层修复：剂型去重、异常规格「待核」、长品牌名截断、状态角标、空值语义、CN 拉丁品牌旁中文通用名；smoke 32/32，commit 611a45afa，gh-pages b2123de77，62,217 文件/472.5 MB，sitemap 62,057 |
 | *v0.8.5* | *计划* | *大类映射 v2 + ATC 去重（task-131：减肥药补 GLP-1、感冒/过敏拆分、他汀去撤市、cap 截断、ATC 去重）；ATC 类名四语数据（task-130，Wikidata CC0）* |
 | *v0.8.6 / v0.9.0* | *计划* | *HK 市场版本（task-132 HK build 后；视发布进度定版本号）* |
 
@@ -87,9 +88,9 @@
 | ATC 覆盖 | 全部 **47.6%**（6,021 / 12,649）；药物实体 **67.4%**（5,702 / 8,459） | 以 `data/entity_type.csv` 分类；entity 文件待随库重建同步 |
 | GB 盐型组件 | 16,396（2.0% → 25.0%） | `reports/gb-salt-recovery.md` |
 | zh-Hant 字典 | **328 / 328 键** | 本轮补齐 81 键，`reports/zh-hant-i18n-refresh2.md` |
-| DB 体积 | **364.2 MB** | v0.5.5 VACUUM 450→325.4 MB；TW+SG 入库后 364.2 MB（最终以 metrics 为准） |
+| DB 体积 | **364.2 MB** | v0.5.5 VACUUM 450→325.4 MB；TW+SG 入库后 364.2 MB（最终快照） |
 | 各市场产品 | CN 146,347 · US 110,179 · GB 61,051 · CA 43,847 · ES 25,395 · AU 11,890 · MX 10,878 · **TW 16,457** · **SG 5,511**（v0.8.0 已上线） |
-| 站点文件/体积/页面数 | v0.8.3：**62,217 文件 / 468.4 MB**；sitemap **62,057**；combo 10,284；core gzip 7.82 MB（raw 32.2 MB） | 9 市场/四语；v0.8.4+ 发布后按最终 dist 回填 |
+| 站点文件/体积/页面数 | **v0.8.4（最终）：62,217 文件 / 472.5 MB / 62,058 HTML**；sitemap **62,057**；drug 12,447 · name 31,134；core gzip **7.60 MB**（raw 32.5 MB）；首搜 0.25 MB gz / 首屏 95,439 B gz | 最终 dist，metrics 已跑 |
 
 ---
 
@@ -99,9 +100,9 @@
 - 三语回归（`tests/trilingual/run_tests.py`，72 例 / 354 查询，2026-10-28 晚复跑）：**68/72 通过；Top-5 97.7%、Top-1 96.0%、跨国可见 72/72**，对比 v0.5.0 基线（67/72、97.5%/95.8%）**无回归**；失败 4 例：dup_inn 3（ciclosporin / beclometasone / chlorphenamine，西语查询 Top1 命中英文名但排名被同名重复条目挤出）+ combo 1 例；明细 `.tmp/trilingual/results_overnight_20261029.json`（用时 556.3s）。
 - **TW 入库后**：`quick_check` ok、FK 0；`tests.test_markets_registry::test_enabled_markets_match_db_countries` 1 项红为**预期过渡态**（DB 有 TW，markets.json 仍 disabled，等 task-81 启用后转绿）。
 - `db/check_data.py`、`integrity_check`、FK：**待最终版本后复跑**（发布/合并期间不抢写库）。
-- 发布 smoke：v0.8.3 **32/32**（gh-pages 6e864fdaf；增量 16.52 MiB/−96.5%/594s；180s 传播等待）；v0.8.2 **32/32**（gh-pages 75b81209f；增量 15.01 MiB/−96.8%/564s）；v0.6.7 **32/32**；v0.7.0 **0 failures**（Lead verify）；v0.7.1 **32/32**（gh-pages 29fab5ecd；增量 13.85 MiB/−96.9%/511s）；v0.8.0 **32/32**（gh-pages fc7986d1a；增量 17.94 MiB/−96.1%/515s）；v0.8.1 **32/32**（gh-pages 46a6bfd37；增量 14.92 MiB/−96.8%/519s）。
+- 发布 smoke：**v0.8.4 32/32**（gh-pages b2123de77；增量 13.37 MiB/−97.2%/526s；commit 611a45afa；今晚最后一版）；v0.8.3 **32/32**（gh-pages 6e864fdaf；增量 16.52 MiB/−96.5%/594s）；v0.8.2 **32/32**（gh-pages 75b81209f；增量 15.01 MiB/−96.8%/564s）；v0.6.7 **32/32**；v0.7.0 **0 failures**（Lead verify）；v0.7.1 **32/32**（gh-pages 29fab5ecd；增量 13.85 MiB/−96.9%/511s）；v0.8.0 **32/32**（gh-pages fc7986d1a；增量 17.94 MiB/−96.1%/515s）；v0.8.1 **32/32**（gh-pages 46a6bfd37；增量 14.92 MiB/−96.8%/519s）。
 - nightly metrics / dashboard：v0.7.0 中间态已跑一次（metrics 见下；dashboard 快照已更新）；**v0.8.2（最后一版）发布后按最终 dist 再跑一次**（最后一次）并回填本报告最终数字。
-- v0.7.0 metrics **7 warnings（中间态，预期+需跟踪）**：`data/index.json` 缺失（v0.6.1 起主动移除，guardrail 未更新）、成分数 12,790→12,649（-1.1%，batch A+B 合并预期）、severe 碰撞 15,509→18,917（+22%，TW/8 市场数据增加预期）、成分页 12,377→12,246（-1.06%，合并预期）、首搜 146 KB→251 KB gz（+72%，ATC 字段）、首屏 42 KB→84 KB gz（+99%，矩阵/四语/TW）、core gz 3.69→7.56 MB（+105%，ATC+TW）；**需在 v0.8.0 后复核性能预算**。
+- 最终 metrics **6 warnings（预期+需跟踪，非回退）**：`data/index.json` 缺失（v0.6.1 起主动移除，guardrail 未更新）、成分数 12,790→12,649（−1.1%，batch A+B 合并预期）、severe 15,509→19,386（+25%，TW/SG/双市场数据增加预期）、首搜 146 KB→249 KB gz（+70%，ATC 字段）、首屏 42 KB→95 KB gz（+125%，矩阵/四语/TW/SG/双语）、core gz 3.69→7.60 MB（+106%，ATC+TW/SG 索引）；**性能预算需下一谷段跟踪**。
 - 不夸大：未收到发布经理确认的线上 smoke 数字不写进本报告。
 
 ---
@@ -157,7 +158,7 @@
 
 ## 9. 报告索引（本谷段）
 
-`reports/warn-verify.md`、`link-target-fix.md`、`maker-pages.md`、`i18n-v055.md`、`ingredient-i18n.md`、`cross-market-apply-prep.md`、`ui-a1-b6-impl.md`、`combo-page-integration.md`、`index-legacy-impl.md`、`zh-hant-ui-impl.md`、`tw-country-migration.md`、`ui-u1-u3-impl.md`、`atc-glossary-impl.md`、`zh-hant-i18n-refresh2.md`、`release-notes-i18n-v055.md`、`tw-ingest-write.md`（TW 数据入库）、`matrix-layout-impl.md`、`warn-pagination-impl.md`、`publish-incremental.md`（v0.6.7）、`ui-lang-cleanup.md`（v0.6.5）、`atc-browse-impl.md`（v0.7.1）、`sg-market-enable.md` / `sg-market-build.md`（v0.8.0）、`metrics/2026-10-29.json`（v0.7.0 中间态）、`docs/工作集群-架构与进度.html` + `docs/img/cluster-progress.png`（v0.7.0 快照）；v0.8.0 后更新最终版。
+`reports/warn-verify.md`、`link-target-fix.md`、`maker-pages.md`、`i18n-v055.md`、`ingredient-i18n.md`、`cross-market-apply-prep.md`、`ui-a1-b6-impl.md`、`combo-page-integration.md`、`index-legacy-impl.md`、`zh-hant-ui-impl.md`、`tw-country-migration.md`、`ui-u1-u3-impl.md`、`atc-glossary-impl.md`、`zh-hant-i18n-refresh2.md`、`release-notes-i18n-refresh3.md`、`tw-ingest-write.md`（TW 数据入库）、`matrix-layout-impl.md`、`warn-pagination-impl.md`、`publish-incremental.md`（v0.6.7）、`ui-lang-cleanup.md`（v0.6.5）、`atc-browse-impl.md`（v0.7.1）、`sg-market-enable.md` / `sg-market-build.md`（v0.8.0）、`display-fixes-impl.md`（v0.8.4）、`pseudo-combo-build.md`、`search0-analytics-impl.md`、`cat-i18n-fix.md`、`header-ui-fix.md`、`matrix-alignment-fix.md`；`metrics/2026-10-29.json`（**最终**）、`docs/工作集群-架构与进度.html` + `docs/img/cluster-progress.png`（**v0.8.4 最终快照**）。
 
 ---
 
