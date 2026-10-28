@@ -92,6 +92,21 @@ powershell -File deploy\publish.ps1 -FullPush
 Copy-Item deploy\publish.ps1.bak deploy\publish.ps1 -Force
 ```
 
+### 3.5 v0.7.0 发布实测（第二次增量发布，TW/zh-Hant 上线）
+
+| 阶段（日志时间戳） | 耗时 | 说明 |
+|---|---:|---|
+| 检查 + release notes + cache fetch | 6 s | 缓存已存在 |
+| 镜像 site/dist → cache（60,375 文件） | 83 s | robocopy /MIR |
+| git add -A + commit（60,222 文件变更） | 299 s | 仍为最大瓶颈 |
+| thin pack 估算 | 44 s | 预估 12.16 MB |
+| push（压缩 + 上传） | 123 s | 实际 **11.60 MiB**（约 94 KB/s） |
+| 等 Pages build + 首页 200 | 2 s | — |
+| **合计** | **557 s（9.3 min）** | 全量树 436.3 MB → 上传 **-97.3%** |
+
+结果：gh-pages 3ce2b0353（在 650b30fb 之上 fast-forward），线上 v0.7.0，smoke 32/32 通过。
+与 v0.6.7 对比：v0.6.7 变更 60,319 文件 / 上传 27.55 MiB / 602 s；v0.7.0 主要变更来自 ?v= 与 TW/zh-Hant 文案，delta 更小（11.60 MiB）。
+
 ---
 
 ## 4. 迁移注意 / 风险
