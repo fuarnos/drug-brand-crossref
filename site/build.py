@@ -132,9 +132,9 @@ I18N = {
         "nav.search": "Search", "nav.confused": "Confused names", "nav.about": "About",
         "nav.whatsnew": "What's new",
         "home.h1": "Find out what a medicine really is",
-        "home.sub": ("Type a brand name, a generic name, a nickname (try 两只青蛙), or a line "
-                     "from the pack. Chinese, full-width and Cyrillic input all work, and you can "
-                     "include the dose — e.g. Lipitor 20mg, 泰诺, СОРТИС."),
+        "home.sub": ("Type a brand name, a generic name, a nickname, or a line from the pack. "
+                     "Chinese, full-width and Cyrillic input all work, and you can include the "
+                     "dose — e.g. Lipitor 20mg, Tylenol, or Paracetamol 500mg."),
         "home.ph": "Brand name / generic name / nickname / a line from the pack",
         "home.all": "All countries", "home.us": "United States",
         "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
@@ -142,10 +142,10 @@ I18N = {
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
                           "Coverage:"),
         "home.loading": "Loading index…",
-        "home.hint_idle": ("First search needs to load the index (~6 MB gzipped; cached after "
-                           "the first time) — start typing, focus the search box, or pick a "
-                           "sample."),
-        "home.hint_loading": "Loading the index… (~6 MB the first time)",
+        "home.hint_idle": ("First search loads only one small shard of the index (~0.2 MB); the "
+                           "full index fills in the background — start typing, focus the search "
+                           "box, or pick a sample."),
+        "home.hint_loading": "Loading a small index shard (~0.2 MB)…",
         "error.index_failed": "The index failed to load.",
         "error.local_file": ("If you opened this page directly, the browser blocks local file "
                              "reads — run python -m http.server and visit "
@@ -276,9 +276,9 @@ I18N = {
         "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
         "nav.whatsnew": "Novedades",
         "home.h1": "Descubre qué es realmente un medicamento",
-        "home.sub": ("Escribe un nombre comercial, un nombre genérico, un apodo (prueba 两只青蛙) "
-                     "o una línea del envase. También funciona en chino, en ancho completo y en "
-                     "cirílico; puedes incluir la dosis — p. ej. Lipitor 20mg, 泰诺, СОРТИС."),
+        "home.sub": ("Escribe un nombre comercial, un genérico, un apodo o una línea del envase. "
+                     "También funciona en chino, ancho completo y cirílico; puedes incluir la "
+                     "dosis — p. ej. Paracetamol 500mg, Ibuprofeno 600mg o Lipitor 20mg."),
         "home.ph": "Nombre comercial / genérico / apodo / una línea del envase",
         "home.all": "Todos los países", "home.us": "Estados Unidos",
         "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
@@ -286,10 +286,10 @@ I18N = {
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
                           "Cobertura:"),
         "home.loading": "Cargando el índice…",
-        "home.hint_idle": ("La primera búsqueda necesita cargar el índice (~6 MB comprimido; "
-                           "queda en caché) — empieza a escribir, enfoca el buscador o elige "
-                           "un ejemplo."),
-        "home.hint_loading": "Cargando el índice… (~6 MB la primera vez)",
+        "home.hint_idle": ("La primera búsqueda carga solo un fragmento pequeño del índice "
+                           "(~0,2 MB); el índice completo se completa en segundo plano — empieza "
+                           "a escribir, enfoca el buscador o elige un ejemplo."),
+        "home.hint_loading": "Cargando un fragmento del índice (~0,2 MB)…",
         "error.index_failed": "No se pudo cargar el índice.",
         "error.local_file": ("Si abriste esta página directamente, el navegador bloquea la "
                              "lectura de archivos locales — ejecuta python -m http.server y "
@@ -430,9 +430,9 @@ I18N = {
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
         "home.loading": "正在加载索引…",
-        "home.hint_idle": ("首次搜索需要加载索引，约 6 MB（gzip 压缩后，之后浏览器会缓存）"
-                           "——输入、聚焦搜索框或点一个示例即可开始。"),
-        "home.hint_loading": "正在加载索引…（首次约 6 MB）",
+        "home.hint_idle": ("首次搜索只加载当前首字符的一小片索引（约 0.2 MB），完整索引会在后台补全"
+                           "——直接输入、点搜索框或选一个示例。"),
+        "home.hint_loading": "正在加载索引分片（约 0.2 MB）…",
         "error.index_failed": "索引没加载成功。",
         "error.local_file": ("如果是本地双击打开的页面，浏览器会拦截本地文件读取——请用 "
                              "python -m http.server 起服务后访问 http://localhost:8000/。"),
@@ -738,6 +738,11 @@ UI_I18N = {
         "atc.none": "已收錄的有效成分中沒有這個 ATC 碼或前綴。",
         "atc.none_meta": "{code} 沒有 ATC 命中",
         "atc.loading": "正在載入索引以進行 ATC 搜尋…",
+        "home.sub": ("商品名、通用名、俗稱或包裝上一行字；支援中英文、全形、西里爾字母，"
+                     "也可連劑量一起輸入，例如 Lipitor 20mg、泰諾、СОРТИС。"),
+        "home.hint_idle": ("首次搜尋只載入目前首字元的一小片索引（約 0.2 MB），完整索引會在背景"
+                           "補齊——直接輸入、點搜尋框或選一個範例。"),
+        "home.hint_loading": "正在載入索引分片（約 0.2 MB）…",
     },
 }
 
@@ -937,12 +942,12 @@ ABOUT_I18N = {
             'no dose conversion, no substitution recommendations.</li></ol>'),
         "about.nick": (
             '<h2>Nicknames and old names</h2>'
-            '<p>“两只青蛙” is not a brand name and is never stored as one: it points to an '
-            'ingredient, metformin. Nicknames are a separate, hand-maintained table — searchable, '
-            'but deliberately kept out of the brand-name tables. When one matches, the page labels '
-            'it (<i>internet nickname / older name</i>) and then lists that ingredient’s brands; '
-            'it is never presented as a name printed on a pack. Every entry carries a source; '
-            '“user-provided” is shown as <i>unverified</i> and is not promoted to '
+            '<p>“Two frogs” (liǎng zhī qīngwā) is not a brand name and is never stored as one: it '
+            'points to an ingredient, metformin. Nicknames are a separate, hand-maintained table — '
+            'searchable, but deliberately kept out of the brand-name tables. When one matches, the '
+            'page labels it (<i>internet nickname / older name</i>) and then lists that ingredient’s '
+            'brands; it is never presented as a name printed on a pack. Every entry carries a '
+            'source; “user-provided” is shown as <i>unverified</i> and is not promoted to '
             '<code>documented</code> until an independent source is attached. No source, no new '
             'entry.</p>'
             '<ul class="sub">'
@@ -954,7 +959,7 @@ ABOUT_I18N = {
             '<h2>Folk names and class terms</h2>'
             '<p>A separate table (<code>drug_term</code>, @@DRUGTERMS@@ entries) holds folk names '
             'and category terms for <b>legal medicines only</b>: water pill, blood thinner, '
-            '睡前药 (sleeping pill), the pill, morning-after pill, statin. Unlike '
+            'sleeping pill (shuìqiányào), the pill, morning-after pill, statin. Unlike '
             '<code>nickname</code>, it may point to a class rather than one ingredient, so '
             '<code>substance_id</code> is nullable; <code>alias_all</code> unions both tables for '
             'search. <b>Drugs of abuse and recreational slang are explicitly out of scope</b> '
@@ -999,7 +1004,7 @@ ABOUT_I18N = {
             '<h2>Known gaps</h2><ul class="sub">'
             '<li>China has 146,344 chemical-drug registrations, but ~9% resolve only to a '
             'China-only substance (no English INN yet), and China’s ATC is stored at level 4. '
-            '中成药 is not loaded.</li>'
+            'Traditional Chinese medicines (TCM) are not loaded.</li>'
             '<li>Strength equivalence stops at level D1 (same salt form); salt–base conversion '
             '(D2) and bioavailability judgement (D3) are not implemented.</li>'
             '<li>Mexico has no strength column in the regulator’s lists; only 29% of products '
@@ -1044,9 +1049,10 @@ ABOUT_I18N = {
             'intercambiable»: sin conversión de dosis ni recomendaciones de sustitución.</li></ol>'),
         "about.nick": (
             '<h2>Apodos y nombres antiguos</h2>'
-            '<p>«两只青蛙» no es un nombre comercial y nunca se guarda como tal: apunta a un '
-            'principio activo, la metformina. Los apodos están en una tabla aparte mantenida a '
-            'mano: se pueden buscar, pero se mantienen fuera de las tablas de nombres comerciales. '
+            '<p>«Dos ranas» (liǎng zhī qīngwā) no es un nombre comercial y nunca se guarda como tal: '
+            'apunta a un principio activo, la metformina. Los apodos están en una tabla aparte '
+            'mantenida a mano: se pueden buscar, pero se mantienen fuera de las tablas de nombres '
+            'comerciales. '
             'Cuando uno coincide, la página lo etiqueta (<i>apodo de internet / nombre antiguo</i>) '
             'y enumera las marcas de ese principio; nunca se presenta como un nombre impreso en el '
             'envase. Cada entrada lleva fuente; «aportado por el usuario» se muestra como '
@@ -1061,7 +1067,7 @@ ABOUT_I18N = {
             '<h2>Nombres populares y términos de clase</h2>'
             '<p>Una tabla aparte (<code>drug_term</code>, @@DRUGTERMS@@ entradas) recoge nombres '
             'populares y términos de categoría de <b>medicamentos legales únicamente</b>: water '
-            'pill, blood thinner, 睡前药 (pastilla para dormir), «la píldora», «la píldora del día '
+            'pill, blood thinner, pastilla para dormir, «la píldora», «la píldora del día '
             'después», estatina. A diferencia de <code>nickname</code>, puede apuntar a una clase '
             'y no a un principio, así que <code>substance_id</code> puede ser nulo; '
             '<code>alias_all</code> une ambas tablas para la búsqueda. <b>Las drogas de abuso y la '
@@ -1109,7 +1115,7 @@ ABOUT_I18N = {
             '<h2>Lagunas conocidas</h2><ul class="sub">'
             '<li>China tiene 146.344 registros de medicamentos químicos, pero ~9% solo resuelven a '
             'una sustancia exclusiva de China (sin INN en inglés); su ATC se guarda en nivel 4. '
-            'No se cargan los 中成药.</li>'
+            'No se cargan los medicamentos chinos tradicionales (TCM).</li>'
             '<li>La equivalencia de concentración llega al nivel D1 (misma forma salina); la '
             'conversión sal–base (D2) y la biodisponibilidad (D3) no están implementadas.</li>'
             '<li>México no tiene columna de concentración en las listas del regulador; solo el 29% '
@@ -1994,6 +2000,8 @@ header{border-bottom:1px solid var(--line);background:#fff}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px}
 .logo{font-weight:700;font-size:16px;color:var(--fg)}
 .logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px}
+/* v0.6.5：logo 中文副标题只在简体中文界面显示（en/es/zh-Hant 隐藏，移动端仍隐藏） */
+html:not([lang="zh"]) .logo-zh{display:none}
 .langs{margin-left:6px;font-size:13px}
 .langs a{color:var(--muted);padding:1px 5px;border-radius:5px}
 .langs a.on{background:var(--accent);color:#fff}
@@ -5129,11 +5137,34 @@ def _sort_strength(text: str) -> float:
     return float(m.group(1)) if m else 0.0
 
 
+# v0.6.5：首页示例按钮按页面语言渲染（en/es/zh/zh-Hant；zh-Hant 用繁體示例）
+HOME_EXAMPLES = {
+    "en": {"hero": ["Lipitor 20mg", "Tylenol", "Benadryl", "Gaviscon"],
+           "try1": ["Lipitor 20mg", "Tylenol"], "try2": ["Paracetamol 500mg"],
+           "try3": ["Benadryl", "Gaviscon"]},
+    "es": {"hero": ["Paracetamol 500mg", "Ibuprofeno 600mg", "Omeprazol 20mg",
+                    "Loratadina 10mg"],
+           "try1": ["Paracetamol 500mg", "Omeprazol 20mg"],
+           "try2": ["Ibuprofeno 600mg"], "try3": ["Loratadina 10mg", "Omeprazol 20mg"]},
+    "zh": {"hero": ["泰诺", "两只青蛙", "Lipitor 20mg", "Benadryl", "Gaviscon"],
+           "try1": ["泰诺", "Lipitor 20mg"], "try2": ["两只青蛙"],
+           "try3": ["Benadryl", "Gaviscon"]},
+    "zh-Hant": {"hero": ["泰諾", "兩隻青蛙", "Lipitor 20mg", "Benadryl", "Gaviscon"],
+                "try1": ["泰諾", "Lipitor 20mg"], "try2": ["兩隻青蛙"],
+                "try3": ["Benadryl", "Gaviscon"]},
+}
+
+
+def _sample_buttons(queries) -> str:
+    return "".join(f'<button type="button" data-q="{esc(q)}">{esc(q)}</button>'
+                   for q in queries)
+
+
 def build_index_page(entries, stats, coverage) -> None:
     """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
-<p class="sub" data-i18n="home.sub">Type a brand name, a generic name, a nickname, or a line from the pack.</p>
+<p class="sub" data-i18n="home.sub">Type a brand name, a generic name, a nickname, or a line from the pack. Chinese, full-width and Cyrillic input all work, and you can include the dose — e.g. Lipitor 20mg, Tylenol, or Paracetamol 500mg.</p>
 <div class="searchwrap">
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac" aria-expanded="false">
 <div id="ac" role="listbox" aria-label="Suggestions"></div>
@@ -5148,11 +5179,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="MX" data-i18n="home.mx">Mexico</option>
     <option value="AU" data-i18n="home.au">Australia</option>
     <option value="CA" data-i18n="home.ca">Canada</option></select>
-  <button data-q="泰诺">泰诺</button>
-  <button data-q="两只青蛙">两只青蛙</button>
-  <button data-q="Lipitor 20mg">Lipitor 20mg</button>
-  <button data-q="Benadryl">Benadryl</button>
-  <button data-q="Gaviscon">Gaviscon</button>
+  {{hero_examples}}
 </div>
 <section id="u1guide" class="u1guide" aria-labelledby="u1title" data-i18n-aria="u1.aria">
   <div class="u1head"><h2 id="u1title" data-i18n="u1.title">How to use it in 3 steps</h2>
@@ -5162,20 +5189,18 @@ def build_index_page(entries, stats, coverage) -> None:
     <li class="u1step"><b data-i18n="u1.step1">Type the name from the pack</b>
       <p class="sub" data-i18n="u1.step1_hint">Brand, generic name, nickname, or a line from the pack — dose included is fine.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
-        <button type="button" data-q="泰诺">泰诺</button>
-        <button type="button" data-q="Lipitor 20mg">Lipitor 20mg</button></div></li>
+        {{try1}}</div></li>
     <li class="u1step"><b data-i18n="u1.step2">See the ingredient and strength</b>
       <p class="sub" data-i18n="u1.step2_hint">You always get a candidate set — never a single answer.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
-        <button type="button" data-q="两只青蛙">两只青蛙</button></div></li>
+        {{try2}}</div></li>
     <li class="u1step"><b data-i18n="u1.step3">Switch to a country</b>
       <p class="sub" data-i18n="u1.step3_hint">Pick a market to see the names it is sold under there, or use the names-by-country row.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
-        <button type="button" data-q="Benadryl">Benadryl</button>
-        <button type="button" data-q="Gaviscon">Gaviscon</button></div></li>
+        {{try3}}</div></li>
   </ol>
 </section>
-<p class="sub" id="loadhint" data-i18n="home.hint_idle">First search needs to load the index (~6 MB gzipped; cached after the first time) — start typing, focus the search box, or pick a sample.</p>
+<p class="sub" id="loadhint" data-i18n="home.hint_idle">First search loads only one small shard of the index (~0.2 MB); the full index fills in the background — start typing, focus the search box, or pick a sample.</p>
 <p class="sub" id="meta" style="margin-top:14px"></p>
 <div id="out"></div>
 <p class="sub report-line" id="report" style="display:none">
@@ -5188,7 +5213,13 @@ does not exist. Coverage:</span> {covline}.</div>
 <script src="{{prefix}}assets/app.js?v={BUILD_V}"></script>"""
     for code, _label, path in LANGS:
         prefix = "../" if path else ""
-        html = page("Medicine Brand Cross-Reference", body.replace("{prefix}", prefix),
+        ex = HOME_EXAMPLES.get(code) or HOME_EXAMPLES["en"]
+        page_body = (body.replace("{prefix}", prefix)
+                     .replace("{hero_examples}", _sample_buttons(ex["hero"]))
+                     .replace("{try1}", _sample_buttons(ex["try1"]))
+                     .replace("{try2}", _sample_buttons(ex["try2"]))
+                     .replace("{try3}", _sample_buttons(ex["try3"])))
+        html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
                     canonical_rel=path, alt_rel="", head_js=U1_HEAD_JS)
         target = OUT / (path + "index.html")

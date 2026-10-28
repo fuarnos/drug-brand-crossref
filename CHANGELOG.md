@@ -4,6 +4,15 @@
 站点页脚、About 页、GitHub Release 三处保持同一个版本号；`/whats-new.html` 直接从这里生成。
 上线前先把本节写好，再建站、发布。
 
+## v0.6.5 — 2026-10-29
+
+- **英文/西语界面去中文残留**：首页 logo 副标题、示例按钮、About 的昵称/类别词/已知缺口段落改为本语言
+  文案（如 Two frogs (liǎng zhī qīngwā)、sleeping pill (shuìqiányào)/pastilla para dormir）；中文副标题只在 zh 界面显示。
+- **首页示例按钮按语言本地化**：en = Lipitor 20mg / Tylenol / Benadryl / Gaviscon；es = Paracetamol 500mg /
+  Ibuprofeno 600mg / Omeprazol 20mg / Loratadina 10mg；zh 泰诺/两只青蛙；zh-Hant 泰諾/兩隻青蛙。
+- **首搜提示更新**：四语提示改为「首次只加载一小片索引（约 0.2 MB），完整索引后台补全」，不再出现旧「~6 MB」文案。
+- 四语 i18n 328 keys 完全对齐；页面数与索引体积不变（57,848 文件 / 408.7 MB，sitemap 57,697 URL）。
+
 ## v0.6.4 — 2026-10-29
 
 - **ATC 码搜索**：搜索框支持 `C07AB02`（成分级）与 `C07`/`C07A`（类目级）前缀，
