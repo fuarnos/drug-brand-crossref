@@ -233,6 +233,7 @@ def dist_metrics(dist: Path) -> tuple[dict, dict]:
         "index": dist / "data" / "index.json",
         "aliases": dist / "data" / "aliases.json",
         "confused": dist / "data" / "confused.json",
+        "manifest": dist / "data" / "idx" / "manifest.json",
     }
     sizes: dict = {}
     for key, p in paths.items():
@@ -242,13 +243,24 @@ def dist_metrics(dist: Path) -> tuple[dict, dict]:
             sizes[key] = {"raw": 0, "gz": 0, "missing": True}
     first_screen = sum(sizes[k]["gz"] for k in
                        ("index_html", "app_js", "i18n_js", "style_css"))
-    first_search = sum(sizes[k]["gz"] for k in ("core", "aliases", "confused"))
+    shard_files = sorted((dist / "data" / "idx").glob("shard-*.json"))
+    shard_gzs = sorted(file_sizes(p)["gz"] for p in shard_files) if shard_files else []
+    shard_median = shard_gzs[len(shard_gzs) // 2] if shard_gzs else 0
+    if shard_files and sizes["manifest"]["gz"]:
+        # P2 分片：首搜 = manifest + 1 个分片 + 别名/碰撞索引（core 后台兜底）
+        first_search = sizes["manifest"]["gz"] + shard_median + sizes["aliases"]["gz"] + sizes["confused"]["gz"]
+    else:
+        first_search = sum(sizes[k]["gz"] for k in ("core", "aliases", "confused"))
     sizes["first_screen_gz"] = first_screen
     sizes["first_search_gz"] = first_search
+    sizes["manifest_gz"] = sizes["manifest"]["gz"]
+    sizes["shard_median_gz"] = shard_median
+    sizes["shard_count"] = len(shard_files)
     sizes["core_gz"] = sizes["core"]["gz"]
     sizes["index_gz"] = sizes["index"]["gz"]
     sizes["core_raw"] = sizes["core"]["raw"]
     sizes["index_raw"] = sizes["index"]["raw"]
+    del sizes["manifest"]
     del sizes["core"]
     del sizes["index"]
     dist_meta = {

@@ -1,28 +1,28 @@
 {
  "schema": 1,
  "date": "2026-10-27",
- "generated_at": "2026-10-27T10:59:59-07:00",
- "elapsed_s": 15.09,
+ "generated_at": "2026-10-27T18:35:33-07:00",
+ "elapsed_s": 16.34,
  "sources": {
   "db": {
    "path": "data\\drugs.db",
    "bytes": 450396160,
-   "mtime": "2026-10-27T10:45:14"
+   "mtime": "2026-10-27T11:37:26"
   },
   "dist": {
    "path": "site\\dist",
-   "files": 30258,
-   "newest_mtime": "2026-10-27T10:53:05"
+   "files": 30336,
+   "newest_mtime": "2026-10-27T11:41:45"
   }
  },
  "metrics": {
   "totals": {
-   "products": 409485,
-   "components": 497513,
+   "products": 409587,
+   "components": 498445,
    "substances": 12790,
-   "variants": 13869,
-   "name_keys": 135081,
-   "names": 568602,
+   "variants": 13886,
+   "name_keys": 135251,
+   "names": 568907,
    "aliases": 1119,
    "nicknames": 57,
    "drug_terms": 1062,
@@ -53,11 +53,11 @@
     "variants": 3091
    },
    "ES": {
-    "products": 25293,
-    "active_products": 15945,
-    "products_with_strength": 24797,
-    "strength_pct": 98.04,
-    "variants": 2105
+    "products": 25395,
+    "active_products": 16030,
+    "products_with_strength": 24889,
+    "strength_pct": 98.01,
+    "variants": 2159
    },
    "GB": {
     "products": 61051,
@@ -87,10 +87,10 @@
    "coverage_pct": 47.54
   },
   "collisions": {
-   "info": 110609,
+   "info": 110779,
    "warning": 810,
    "severe": 15509,
-   "total": 126928
+   "total": 127098
   },
   "alias_confidence": {
    "community": 642,
@@ -108,12 +108,12 @@
    "failed": 0
   },
   "pages": {
-   "total_files": 30258,
-   "html_total": 30246,
+   "total_files": 30336,
+   "html_total": 30255,
    "drug_pages": 12377,
-   "name_pages": 17861,
-   "total_bytes": 162539539,
-   "sitemap_urls": 30245
+   "name_pages": 17870,
+   "total_bytes": 197807300,
+   "sitemap_urls": 30254
   },
   "sizes": {
    "index_html": {
@@ -121,31 +121,34 @@
     "gz": 1735
    },
    "app_js": {
-    "raw": 47912,
-    "gz": 16619
+    "raw": 52195,
+    "gz": 17926
    },
    "i18n_js": {
-    "raw": 55914,
-    "gz": 19910
+    "raw": 56119,
+    "gz": 19968
    },
    "style_css": {
     "raw": 8698,
     "gz": 2795
    },
    "aliases": {
-    "raw": 869136,
-    "gz": 90871
+    "raw": 869321,
+    "gz": 90883
    },
    "confused": {
     "raw": 3575,
     "gz": 881
    },
-   "first_screen_gz": 41059,
-   "first_search_gz": 3775851,
-   "core_gz": 3684099,
-   "index_gz": 5820953,
-   "core_raw": 15262516,
-   "index_raw": 34791273
+   "first_screen_gz": 42424,
+   "first_search_gz": 146417,
+   "manifest_gz": 6112,
+   "shard_median_gz": 48541,
+   "shard_count": 68,
+   "core_gz": 3693220,
+   "index_gz": 5833687,
+   "core_raw": 15326396,
+   "index_raw": 34906944
   }
  },
  "compare": {

@@ -174,7 +174,7 @@
   <div>
     <div class="eyebrow">DSH WORK CLUSTER · 快照 / SNAPSHOT</div>
     <h1>药品商品名跨国定位站<span>工作集群 · 架构与进度</span></h1>
-    <div class="lede">一个项目、多会话协作；七个市场全部入库，站点已上线 GitHub Pages（v0.5.0）。</div>
+    <div class="lede">一个项目、多会话协作；七个市场全部入库，站点已上线 GitHub Pages（v0.5.1）。</div>
   </div>
   <div class="snap">
     <div class="live static"><i></i>静态快照 · 手动重拍</div>
@@ -419,7 +419,7 @@
     </div>
     <div class="risk y">
       <h4>三语译文与许可段落未经母语抽检 <span class="sev lo">中低</span></h4>
-      <p>About / What's new 的西语、英语正文为 AI 翻译，许可段为三语并列。上线不受影响，但对外正式引用前建议母语抽检；数据层 <code>dose_warning</code> 的 es 正文仍为空，页面上回退英文。</p>
+      <p>About / What's new 与 /warn 的西语正文为 AI 翻译，许可段为三语并列。上线不受影响，但对外正式引用前建议母语抽检；ES/MX 用词差异只影响语感。</p>
     </div>
   </div>
 </section>
@@ -441,8 +441,9 @@
     <div class="ev"><div class="t mono">20:46</div><div class="x">v0.4.1 上线：<b>GoatCounter 访问统计</b>（cookieless，只后台看）+ 站内匿名事件</div></div>
     <div class="ev"><div class="t mono">20:47</div><div class="x">站点重建：<b>{{FILES}} 文件 / {{SIZE_MB}} MB / 索引 {{INDEX_MB}} MB</b>，发布到 GitHub Pages</div></div>
     <div class="ev"><div class="t mono">01:53</div><div class="x">v0.5.0 上线：搜索 P50 <b>94 ms → 1 ms</b>（难例 28/28）、UI P0、三语 P1、<b>/warn 40 条</b>、ATC 双口径 <b>47.5% / 67.0%</b>、GB 盐型 <b>25%</b>、MX <b>35.2%</b></div></div>
+    <div class="ev"><div class="t mono">03:40</div><div class="x">v0.5.1 上线：首搜 <b>3.78 MB → 254 KB</b>（manifest+分片）、ES 复方 <b>+102 产品</b>、/warn 西语、评测集 <b>320 例</b></div></div>
     <div class="ev"><div class="t mono">本次</div><div class="x">快照 {{SNAP_HHMM}}；站点 {{FILES}} 文件 / {{SIZE_MB}} MB / 索引 {{INDEX_MB}} MB</div></div>
-    <div class="ev"><div class="t mono">下一步</div><div class="x">三语评测集 72→300+ → 索引 P2 分片 → 身份卡重排/筛选 → 长尾数据（ARTG FOI 等）</div></div>
+    <div class="ev"><div class="t mono">下一步</div><div class="x">停 index.json 双写（省 35MB）→ 拼音层进 lib/search → UI P1 身份卡/筛选 → 长尾数据</div></div>
   </div>
 </section>
 
