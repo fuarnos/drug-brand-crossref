@@ -1,9 +1,11 @@
 """初始化数据库：把 db/schema.sql 应用到 data/drugs.db。可重复运行。
 
-除了建表，还负责两处**结构迁移**（都幂等，老库可直接升级）：
+除了建表，还负责三处**结构迁移**（都幂等，老库可直接升级）：
 
 1. v0.4 `variant` 加列 `salt_code` / `strength_basis`（`_ensure_variant_columns`）；
-2. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
+2. v0.4.2 补两个小索引 `idx_artg_name` / `idx_variant_substance`（`_ensure_indexes`，
+   来自 DB 优化审计 `reports/db-optimization.md`）；
+3. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
    （US → GB → CN → ES → MX），所以每次 schema.sql 扩了枚举，这里就把老库里的 product
    表换成新定义，数据原样搬过去。
 
@@ -81,6 +83,24 @@ def _ensure_variant_columns(db: sqlite3.Connection) -> None:
     db.commit()
 
 
+def _ensure_indexes(db: sqlite3.Connection) -> None:
+    """v0.4.2：给已有库补 DB 优化审计落地的两个小索引（幂等）。
+
+    空库会由 schema.sql 的 `CREATE INDEX IF NOT EXISTS` 建好；老库跑 init_db 时走这里。
+    真实库若已经手工建过同名索引，IF NOT EXISTS 不会重复建、也不会报错。
+
+    - idx_artg_name：site/build.py ARTG 列表 ORDER BY name（实测 50 → 32 ms）
+    - idx_variant_substance：成分 → variant 点查（0.6 → 0.1 ms）
+    审计依据 reports/db-optimization.md §3.2；**不要**顺手跑 ANALYZE（实测会让 build 查询变慢 2–3 倍）。
+    """
+    for ddl in (
+        "CREATE INDEX IF NOT EXISTS idx_variant_substance ON variant (substance_id)",
+        "CREATE INDEX IF NOT EXISTS idx_artg_name ON artg_entry (name)",
+    ):
+        db.execute(ddl)
+    db.commit()
+
+
 def build(db_path: Path) -> sqlite3.Connection:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(db_path, timeout=60)
@@ -94,6 +114,7 @@ def build(db_path: Path) -> sqlite3.Connection:
     db.commit()
     _ensure_source_columns(db)
     _ensure_variant_columns(db)
+    _ensure_indexes(db)
 
     row = db.execute(
         "SELECT sql FROM sqlite_master WHERE type='table' AND name='product'").fetchone()

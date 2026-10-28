@@ -73,6 +73,9 @@ CREATE TABLE IF NOT EXISTS variant (
 
 CREATE INDEX IF NOT EXISTS idx_variant_salt_code ON variant (salt_code);
 CREATE INDEX IF NOT EXISTS idx_variant_basis ON variant (strength_basis);
+-- v0.4.2：成分 → variant 点查（lib/search.py / 成分页），实测 0.6 ms → 0.1 ms
+-- （reports/db-optimization.md §3.2；仅 13.9k 行的小索引，无查询计划副作用）
+CREATE INDEX IF NOT EXISTS idx_variant_substance ON variant (substance_id);
 
 -- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装）
 CREATE TABLE IF NOT EXISTS product (
@@ -379,6 +382,9 @@ CREATE TABLE IF NOT EXISTS artg_entry (
 );
 
 CREATE INDEX IF NOT EXISTS idx_artg_norm ON artg_entry (name_norm);
+-- v0.4.2：site/build.py 的 ARTG 列表 SELECT ... FROM artg_entry ORDER BY name，
+-- 实测 50 → 32 ms（-39%，免 temp b-tree 排序；reports/db-optimization.md §3.2）
+CREATE INDEX IF NOT EXISTS idx_artg_name ON artg_entry (name);
 
 -- 覆盖度：公开站必须如实展示的数字
 DROP VIEW IF EXISTS coverage;
