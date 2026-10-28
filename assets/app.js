@@ -596,7 +596,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793214260（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793216686（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -649,7 +649,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793214260').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793216686').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -838,7 +838,13 @@ function collectHits(nq, st, nicks, nickSids, onlyUnmapped, c){
 }
 /* ── 搜索增强 end ─────────────────────────────────────────────────────────── */
 // ── v0.6.3 U2：结果顶部「各国叫法」横排（仅在唯一单成分时显示）──────────────
-const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA'];
+const U2_COUNTRIES = ['US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW'];
+function u2Order(){
+  // v0.7.0：国家 chips 按界面语言顺序（i18n.js 在 apply() 里暴露 window.COUNTRY_ORDER）
+  const order = (typeof window !== 'undefined' && window.COUNTRY_ORDER) || [];
+  const rank = (c) => { const i = order.indexOf(c); return i < 0 ? 99 : i; };
+  return U2_COUNTRIES.slice().sort((a, b) => rank(a) - rank(b));
+}
 function anchorSubstance(hits, nicks){
   // 只认 exact/compact/prefix 的最佳命中；fuzzy/contains 或复方/多成分一律不锚定。
   // （gaviscon / benadryl 这类多结果在这里返回 null → 不显示逐国叫法，避免误配。）
@@ -877,7 +883,7 @@ function countryNamesHTML(anchor, selected, T){
     }
   }
   if(!U2_COUNTRIES.some(code => best[code])) return '';
-  const chips = U2_COUNTRIES.map(code => {
+  const chips = u2Order().map(code => {
     const hit = best[code];
     const on = code === selected ? ' on' : '';
     const head = `<button type="button" class="u2chip${on}" data-u2country="${code}"`
@@ -1200,7 +1206,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793214260，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793216686，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1244,10 +1250,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793214260 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793216686 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1793214260').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1793216686').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1257,7 +1263,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793214260').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793216686').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }

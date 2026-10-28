@@ -40,6 +40,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.combo{color:#7a3b1f;border-color:#e6c3b3}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
+.tag.tw{color:#1f5c7a;border-color:#b7d5e3}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
 margin-left:8px}
@@ -158,6 +159,18 @@ html.u1-off #u1guide{display:none!important}
 .u2chip .u2c{font-weight:600;color:var(--muted);font-size:11px}
 .u2chip .u2n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
 .u2chip .u2n.empty{color:var(--muted);font-style:italic}
+/* v0.6.6：成分页多国并排矩阵（行=规格/剂型/释放，列=国家；服务端默认 en 序，客户端按语言重排） */
+.matwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+table.matrix{width:100%;border-collapse:collapse;min-width:620px}
+table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
+  text-align:left;vertical-align:top;font-size:14px}
+table.matrix thead th{white-space:nowrap;font-weight:650}
+table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
+table.matrix .m-brand{display:inline-block;margin:0 6px 2px 0}
+@media (max-width:719px){
+  table.matrix{min-width:560px}
+  .matwrap{margin:8px 0}
+}
 @media (max-width:719px){
   .u1steps{grid-template-columns:1fr}
   .u1close{min-width:44px;min-height:44px}
@@ -236,7 +249,18 @@ a.grp-name{color:var(--accent)}
 .warn-item .warn-body{margin:0 0 8px}
 .warn-item .warn-meta{color:var(--muted);font-size:13px;margin:0;overflow-wrap:anywhere}
 .warn-item .badge{vertical-align:2px}
+/* v0.6.7：/warn 分页（10 条/页；移动端 ≥40px 可点） */
+.warnpager{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:16px 0 4px;font-size:14px}
+.warnpager .pg-status{color:var(--muted);font-size:13px;margin-right:6px}
+.warnpager a,.warnpager span{min-width:36px;min-height:36px;display:inline-flex;
+  align-items:center;justify-content:center;padding:4px 9px;border:1px solid var(--line);
+  border-radius:8px;color:var(--fg);background:#fff}
+.warnpager a:hover{border-color:var(--accent)}
+.warnpager .pg-num.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.warnpager .disabled{color:var(--muted);opacity:.5;cursor:not-allowed}
 .drugwarn ul{margin:6px 0 4px;padding-left:20px}
 @media (max-width:719px){
   .warn-item .warn-meta{font-size:12px}
+  .warnpager{gap:6px}
+  .warnpager a,.warnpager span{min-width:40px;min-height:40px;font-size:15px}
 }
