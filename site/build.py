@@ -934,7 +934,7 @@ def _i18n_placeholders(stats: dict, atc_cov: dict, coverage, source_cover) -> di
 def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
-        for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang]):
+        for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1028,6 +1028,69 @@ WARN_I18N = {
                              'EMA/MHRA、Health Canada DPD、AEMPS CIMA、PBS/TGA、NMPA 等）。'
                              '本站只发布事实摘录并保留来源链接，不转载说明书、SmPC/CMI 全文；'
                              '具体条款见「关于」里的许可清单。'),
+    },
+}
+
+# ── 组合页（/combo/<成分集合slug>.html）三语文案 ─────────────────────
+COMBO_I18N = {
+    "en": {
+        "combo.title": "Fixed-dose combination",
+        "combo.intro": ('<p class="sub">This page lists brands whose active-ingredient set is '
+                        'exactly the combination below. It is identity information only — a '
+                        'fixed-dose combination is not the same product as its single '
+                        'ingredients, and the brand names are not interchangeable across '
+                        'markets.</p>'),
+        "combo.ingredients": "Active ingredients",
+        "combo.products": "Brands with this exact combination",
+        "combo.no_advice": ('Not medical advice. Check the pack and the exact composition before '
+                            'comparing products; ask a pharmacist if unsure.'),
+        "combo.empty": "No brand names recorded for this combination yet.",
+        "combo.capped": "Showing the first @@COMBO_CAP@@ of @@COMBO_TOTAL@@ names.",
+        "combo.source_note": ('<b>Source &amp; licence</b>: built from the same regulator data as '
+                              'the ingredient pages (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, '
+                              'Health Canada DPD, NHSA). Facts only; see the '
+                              '<a href="../about.html#licences">licence register</a>.'),
+        "combo.see_warnings": "See warnings for these ingredients",
+        "combo.no_page": "No separate brand page for this name",
+        "combo.compact": "combination",
+    },
+    "es": {
+        "combo.title": "Combinación en dosis fija",
+        "combo.intro": ('<p class="sub">Esta página enumera las marcas cuyo conjunto de principios '
+                        'activos es exactamente la combinación siguiente. Es solo información de '
+                        'identidad: una combinación en dosis fija no es el mismo producto que sus '
+                        'principios por separado, y los nombres comerciales no son intercambiables '
+                        'entre mercados.</p>'),
+        "combo.ingredients": "Principios activos",
+        "combo.products": "Marcas con esta combinación exacta",
+        "combo.no_advice": ('No es consejo médico. Comprueba el envase y la composición exacta '
+                            'antes de comparar productos; consulta a un farmacéutico si dudas.'),
+        "combo.empty": "Todavía no hay nombres comerciales para esta combinación.",
+        "combo.capped": "Mostrando los primeros @@COMBO_CAP@@ de @@COMBO_TOTAL@@ nombres.",
+        "combo.source_note": ('<b>Fuente y licencia</b>: mismos datos regulatorios que las páginas '
+                              'de principios activos (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, '
+                              'Health Canada DPD, NHSA). Solo hechos; ver el '
+                              '<a href="../about.html#licences">registro de licencias</a>.'),
+        "combo.see_warnings": "Ver alertas de estos principios",
+        "combo.no_page": "Este nombre no tiene página de marca propia",
+        "combo.compact": "combinación",
+    },
+    "zh": {
+        "combo.title": "复方组合",
+        "combo.intro": ('<p class="sub">本页列出「活性成分集合恰好等于下面这组」的商品名。'
+                        '这里只做身份对应：复方产品≠各单方成分的简单相加，同名商品在不同'
+                        '市场也不可互换。</p>'),
+        "combo.ingredients": "活性成分",
+        "combo.products": "属于该组合的商品名",
+        "combo.no_advice": "这不是医疗建议。比较产品前请核对实际包装与完整成分；不确定时咨询药师。",
+        "combo.empty": "该组合暂无已收录商品名。",
+        "combo.capped": "仅显示前 @@COMBO_CAP@@ / @@COMBO_TOTAL@@ 条。",
+        "combo.source_note": ('<b>来源与许可</b>：与成分页使用同一批监管数据（openFDA、dm+d、'
+                              'CIMA、COFEPRIS、PBS/TGA、Health Canada DPD、国家医保局）。'
+                              '只做事实字段；见 <a href="../about.html#licences">许可清单</a>。'),
+        "combo.see_warnings": "查看这些成分的警示",
+        "combo.no_page": "这个名字没有独立品牌页",
+        "combo.compact": "复方",
     },
 }
 
@@ -1373,6 +1436,10 @@ font-size:13px;text-decoration:underline}
 /* /warn 页：数据行按语言只显示一块（无 JS 时默认英文） */
 .lang-block{display:none}
 .lang-block[data-lang-block="en"]{display:block}
+/* v0.5.3：品牌无页 → 不可点文本（不是链接，禁止回退 drug 页） */
+.brand-plain{font-weight:600;color:var(--fg)}
+.grp-name{font-weight:600}
+a.grp-name{color:var(--accent)}
 .warn-item{border:1px solid var(--line);border-radius:12px;background:#fff;
   padding:12px 14px;margin:10px 0}
 .warn-item h3{margin:0 0 6px;font-size:16px;line-height:1.45}
@@ -1493,6 +1560,19 @@ function esc(s){
   return String(s == null ? '' : s).replace(/[&<>"']/g,
     c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+// v0.5.3 点击目标规则（用户报 Excedrin 点品牌跳到 acetaminophen 页）：
+//   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
+//   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
+function brandHTML(e){
+  if(e && e.u) return `<a href="${BASE}name/${e.u}">${e.d}</a>`;
+  return `<span class="brand-plain">${e && e.d != null ? e.d : ''}</span>`;
+}
+function ingredientHTML(e, cls){
+  const label = e.x || e.d || '—';
+  if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>`;
+  if(e.v) return `<a class="${cls || ''}" href="${BASE}drug/${e.v}.html">${label}</a>`;
+  return `<span class="${cls || ''}">${label}</span>`;
+}
 function aliasHits(nq){
   // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
   return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
@@ -1508,12 +1588,11 @@ function rowHTML(r){
   const tags = r.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (r.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
-  const link = r.u ? `${BASE}name/${r.u}` : `${BASE}drug/${r.v}.html`;
   const mah = r.m ? (r.mn > 1 ? `${r.m} <span class="more">+${r.mn-1}</span>` : r.m) : '';
   return `<tr>
-    <td class="c-ing">${r.x || '—'}</td>
+    <td class="c-ing">${ingredientHTML(r)}</td>
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${r.d || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}"><a href="${link}">${r.b}</a>${tags}${combo}${badge}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(r)}${tags}${combo}${badge}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
 // ── UI P0 ③④：自动完成 / 解析条 / 成分分组 + 品牌折叠 + 加载更多 ──────
@@ -1525,13 +1604,12 @@ function brandRowHTML(e, T){
   const tags = (e.c || []).map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
-  const link = e.u ? `${BASE}name/${e.u}` : `${BASE}drug/${e.v}.html`;
   const mah = e.m ? (e.mn > 1 ? `${e.m} <span class="more">+${e.mn-1}</span>` : e.m) : '';
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
   return `<tr class="br">
     <td class="c-ing c-empty"></td>
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}"><a href="${link}">${esc(e.d)}</a>${tags}${combo}${badge}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${badge}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
 const RES_PAGE = 25;              // 每次「加载更多」新增的品牌行数
@@ -1562,7 +1640,7 @@ function resultsHTML(T){
     const expanded = RES_EXPANDED.has(gi);
     const vis = expanded ? g.rows : g.rows.slice(0, 2);
     const tags = [...g.tags].sort().map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
-    html += `<tr class="grp"><td class="c-ing"><span class="grp-name">${esc(g.ing)}</span>`
+    html += `<tr class="grp"><td class="c-ing">${ingredientHTML(g.rows[0], 'grp-name')}`
       + `<span class="grp-count">${g.rows.length} ${esc(T('res.brands_noun'))}</span></td>`
       + `<td colspan="3" class="grp-tags">${tags}</td></tr>`;
     for(let i=0; i<vis.length; i++){
@@ -2150,8 +2228,8 @@ function render(){
     const members = IDX.filter(x=>x.g===label && !shownKeys.has(x.k));
     if(!members.length) continue;
     extraHTML += `<h2>${T2('fam.title')}</h2>` +
-      members.map(e=>`<div class="card"><h3><a href="${e.u?BASE+'name/'+e.u:BASE+'drug/'+e.v+'.html'}">${e.d}</a></h3>
-      <div class="meta">${e.x} · ${e.s.join(' / ')||'—'}</div></div>`).join('');
+      members.map(e=>`<div class="card"><h3>${e.u ? `<a href="${BASE}name/${e.u}">${esc(e.d)}</a>` : `<b>${esc(e.d)}</b>`}</h3>
+      <div class="meta">${esc(e.x)} · ${esc((e.s||[]).join(' / ')||'—')}</div></div>`).join('');
   }
   // 主结果：按成分聚合；同成分多品牌折叠（默认显示前 2 个品牌），
   // 超过 RES_PAGE 行时用「加载更多」分页，不再一刀切 40 行/80 行。
@@ -2176,7 +2254,7 @@ function render(){
       const oRows = [];
       for(const e of others.slice(0, 40)){
         const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
-        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v});
+        for(const d of ds) oRows.push({x:e.x, d:d, b:e.d, m:e.m, mn:e.mn, c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu});
       }
       sameHTML = `<h2>${T2('same.ing')}</h2>` +
         `<p class="sub">${T2('same.note')}</p>` +
@@ -2724,6 +2802,11 @@ def _norm_name(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
 
+def combo_slug(sids) -> str:
+    """成分集合 → 组合页文件名（稳定、可读、长度受控）。"""
+    return key_file("+".join(sorted(sids)))
+
+
 def load_index(db: sqlite3.Connection):
     """构建检索索引：只收有品牌名的 key。全量一次查询，避免 N+1。"""
     coll = {r[0]: r[1] for r in db.execute("SELECT key_id, level FROM collision")}
@@ -2809,8 +2892,11 @@ def load_index(db: sqlite3.Connection):
         # 其余名字仍能被搜到，卡片直接链到成分页——不为只有一个包装的冷门名字生成几万张页。
         # 通用名照样能搜到，但只有「有品牌名」或碰撞/多包装的名字才单独成页，
         # 否则光中国就会多出上万张价值很低的页面。
+        # v0.5.3：trade 品牌有 ≥2 个包装就生成轻量品牌页（仍不为 8 万个单包装
+        # 冷门名字建页；那些在结果里渲染成不可点文本，绝不回退成 drug 页）。
         worth_page = (not pure_inn) and (a["trade"] or level == "warning") and (
-            level == "warning" or (level == "severe" and n >= 2) or n >= 3)
+            level == "warning" or (level == "severe" and n >= 2) or n >= 3
+            or (a["trade"] and n >= 2))
         entry = {
             "k": key_id,
             "d": displays.get(key_id, key_id),
@@ -2823,6 +2909,10 @@ def load_index(db: sqlite3.Connection):
             "v": a["v"],
             "vs": sorted(a["sids"]) if len(a["sids"]) > 1 else None,
             "u": key_file(key_id) if worth_page else "",
+            # v0.5.3：复方 → 组合页 URL（成分列点击目标；单成分为空，走 drug 页）
+            # combo_slug() 由 key_file() 生成、已含 .html 后缀。
+            "cu": ("combo/" + combo_slug(a["sids"]))
+                  if len(a["sids"]) > 1 else "",
             "g": fam[key_id][0] if key_id in fam else "",
             "gn": fam[key_id][1] if key_id in fam else "",
             "m": (max(a["mah"].items(), key=lambda kv: kv[1])[0]
@@ -3125,6 +3215,8 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                      families: dict | None = None, displays: dict | None = None) -> int:
     families = families or {}
     displays = displays or {e["k"]: e["d"] for e in entries}
+    # v0.5.3：只有真实存在 name 页的 key 才允许在「同品牌其他市场」里做成链接。
+    page_keys = {e["k"] for e in entries if e.get("u")}
     made = 0
     (OUT / "name").mkdir(parents=True, exist_ok=True)
     variants: dict[str, list[str]] = {}
@@ -3162,14 +3254,18 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
 <p class="sub"><span data-i18n="name.also">Also written as</span>:
 {esc('、'.join(variants.get(e['k'], [])[:6]))} ·
 <span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
-{banner}{''.join(cards) if cards else '<p class="empty" data-i18n="name.empty">No records</p>'}{_family_block(e, families, displays, variants)}"""
+{banner}{''.join(cards) if cards else '<p class="empty" data-i18n="name.empty">No records</p>'}{_family_block(e, families, displays, variants, page_keys)}"""
         (OUT / "name" / e["u"]).write_text(page(e["d"], body, "../"), encoding="utf-8")
         made += 1
     return made
 
 
-def _family_block(e, families, displays, variants) -> str:
-    """同一品牌在其他市场的写法——这是跨语言碰撞唯一能落地的地方。"""
+def _family_block(e, families, displays, variants, page_keys=None) -> str:
+    """同一品牌在其他市场的写法——这是跨语言碰撞唯一能落地的地方。
+
+    page_keys：有 name 页的 key 集合；v0.5.3 起没有品牌页的成员渲染成不可点文本，
+    保证站内不出现指向不存在页面的链接（无 404）。
+    """
     fam = families.get(e["k"])
     if not fam:
         return ""
@@ -3180,13 +3276,95 @@ def _family_block(e, families, displays, variants) -> str:
     items = []
     for k in siblings:
         siblings_names = "、".join(variants.get(k, [])[:2])
-        fname = key_file(k)
-        items.append(
-            f'<li><a href="{fname}">{esc(displays.get(k, siblings_names))}</a>'
-            f'<span class="tag">{esc(k)}</span></li>')
+        label_html = esc(displays.get(k, siblings_names))
+        if page_keys is None or k in page_keys:
+            items.append(f'<li><a href="{key_file(k)}">{label_html}</a>'
+                         f'<span class="tag">{esc(k)}</span></li>')
+        else:
+            items.append(f'<li><b>{label_html}</b><span class="tag">{esc(k)}</span></li>')
     return (f'<h2 data-i18n="fam.title">The same brand in other markets</h2>'
             f'<div class="notice">{esc(note or "")}</div>'
             f'<ul class="sub">{"".join(items)}</ul>')
+
+
+COMBO_ROW_CAP = 200
+
+
+def build_combo_pages(entries, db: sqlite3.Connection) -> int:
+    """v0.5.3：按「活性成分集合」生成组合页 /combo/<slug>.html。
+
+    背景：结果页「成分」列对复方（x 含 ' + '）必须点进组合页，而不是第一个成分的
+    drug 页。组合页 slug 与索引里的 `cu` 字段共用 combo_slug()，保证一一对应。
+    页面最小字段：成分集合（每个成分链成分页）、同组合的商品名/国家/规格/MAH、
+    来源与许可；不写用药建议。
+    """
+    subs: dict[str, tuple[str, str]] = {}
+    for sid, inn_zh, inn_en in db.execute(
+            "SELECT substance_id, inn_zh, inn_en FROM substance"):
+        subs[sid] = (inn_zh or inn_en or sid, inn_en or sid)
+    groups: dict[tuple, list] = {}
+    for e in entries:
+        vs = e.get("vs")
+        if not vs or len(vs) < 2:
+            continue
+        groups.setdefault(tuple(sorted(vs)), []).append(e)
+    (OUT / "combo").mkdir(parents=True, exist_ok=True)
+    T = I18N["en"]
+    made = 0
+    for sids, rows in groups.items():
+        slug = combo_slug(sids)
+        ing_items = []
+        for sid in sids:
+            zh, en = subs.get(sid, (sid, sid))
+            extra = f' <span class="meta">{esc(en)}</span>' if en and en != zh else ""
+            ing_items.append(
+                f'<li><a href="../drug/{esc(sid)}.html">{esc(zh)}</a>{extra} '
+                f'<code>{esc(sid)}</code></li>')
+        title = " + ".join(subs.get(s, (s, s))[1] for s in sids)
+        rows = sorted(rows, key=lambda e: -e["n"])
+        total = len(rows)
+        body_rows = []
+        for e in rows[:COMBO_ROW_CAP]:
+            if e.get("u"):
+                brand = f'<a href="../name/{esc(e["u"])}">{esc(e["d"])}</a>'
+            else:
+                # 品牌列规则：没有品牌页 → 不可点文本；禁止回退 drug 页（无 404 / 不误导）
+                brand = (f'<span class="brand-plain" title="{esc(T["combo.no_page"])}">'
+                         f'{esc(e["d"])}</span>')
+            tags = "".join(
+                f'<span class="tag {c.lower()}">{esc(c)}</span>' for c in (e.get("c") or []))
+            doses = " / ".join(e.get("s") or []) or "—"
+            mah = e.get("m") or "—"
+            body_rows.append(
+                f'<tr><td class="c-brand" data-label="{esc(T["col.brand"])}">'
+                f'{brand}{tags}</td>'
+                f'<td data-label="{esc(T["col.dose"])}">{esc(doses)}</td>'
+                f'<td data-label="{esc(T["col.mah"])}">{esc(mah)}</td></tr>')
+        capped_html = ""
+        if total > COMBO_ROW_CAP:
+            capped = T["combo.capped"].replace("@@COMBO_CAP@@", str(COMBO_ROW_CAP))
+            capped_html = f'<p class="sub">{capped.replace("@@COMBO_TOTAL@@", str(total))}</p>'
+        rows_html = (
+            '<div class="tablewrap"><table class="res"><thead><tr>'
+            f'<th>{T["col.brand"]}</th><th>{T["col.dose"]}</th><th>{T["col.mah"]}</th>'
+            f'</tr></thead><tbody>{"".join(body_rows)}</tbody></table></div>'
+            if body_rows else
+            '<p class="empty" data-i18n="combo.empty">No brand names recorded for this '
+            'combination yet.</p>')
+        body = f"""<h1>{esc(title)}</h1>
+<p class="sub" data-i18n="combo.title">{esc(T["combo.title"])}</p>
+<div data-i18n-html="combo.intro">{T["combo.intro"]}</div>
+<div class="notice" data-i18n="combo.no_advice">{esc(T["combo.no_advice"])}</div>
+<h2 data-i18n="combo.ingredients">{esc(T["combo.ingredients"])}</h2>
+<ul class="sub">{''.join(ing_items)}</ul>
+<h2 data-i18n="combo.products">{esc(T["combo.products"])}</h2>
+{rows_html}
+{capped_html}
+<p class="sub"><a href="../warn.html">{esc(T["combo.see_warnings"])}</a></p>
+<div class="notice" data-i18n-html="combo.source_note">{T["combo.source_note"]}</div>"""
+        (OUT / "combo" / slug).write_text(page(title, body, "../"), encoding="utf-8")
+        made += 1
+    return made
 
 
 def _sort_strength(text: str) -> float:
@@ -3443,7 +3621,7 @@ def build_seo_files() -> None:
 #    },
 #    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
 #   f（剂型）客户端 0 处引用，直接丢弃（app.js 只用 k/d/c/x/s/l/n/v/vs/u/g/gn/m/mn/q）。
-CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "g", "gn", "m")
+CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "g", "gn", "m")
 CORE_ARRAY_COLS = ("c", "s", "vs")     # 值是数组：先 JSON 化再进字典
 
 
@@ -3492,7 +3670,7 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "s", "l", "n", "v", "vs", "u", "g", "gn", "m", "mn"):
+    for f in ("c", "x", "s", "l", "n", "v", "vs", "u", "cu", "g", "gn", "m", "mn"):
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
             # 数组先序列化再字典化：客户端解码时把字典值直接给出（数组引用共享，
@@ -3846,6 +4024,8 @@ def main() -> None:
     displays = {e["k"]: e["d"] for e in entries}
     print("building name pages ...", flush=True)
     n_name = build_name_pages(db, entries, data, families, displays)
+    print("building combo pages ...", flush=True)
+    n_combo = build_combo_pages(entries, db)
     build_index_page(entries, stats, coverage)
     n_conf = build_confused(db)
     n_warn = build_warn(db)
@@ -3858,6 +4038,7 @@ def main() -> None:
     print(f"\n== done ==")
     print(f"  drug pages : {n_drug}")
     print(f"  name pages : {n_name}")
+    print(f"  combo pages: {n_combo}")
     print(f"  confused   : {n_conf} pairs")
     print(f"  warnings   : {n_warn} published")
     print(f"  index.json : {(OUT / 'data' / 'index.json').stat().st_size / 1e6:.1f} MB")

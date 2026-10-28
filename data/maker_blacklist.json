@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-10-28",
+  "db": "D:\\同种药物商品名剂量对应网站\\data\\drugs.db",
+  "note": "占位/不可建页厂家黑名单。build.py 生成厂家页时应跳过 is_placeholder=1 的厂家；Special Order 家族 = 药品未备货时的代订占位，不是真实生产厂家。",
+  "min_products_for_page": 2,
+  "rules": {
+    "exact": [
+      "desconocido",
+      "drug tariff special order",
+      "generic",
+      "n/a",
+      "na",
+      "no declarado",
+      "no especificado",
+      "none",
+      "not specified",
+      "not stated",
+      "other",
+      "part viiid drug tariff special order",
+      "s+",
+      "s/m",
+      "sin marca",
+      "special order",
+      "unknown",
+      "various",
+      "x",
+      "xx",
+      "xxx",
+      "不详",
+      "无",
+      "无厂家",
+      "暂无",
+      "未提供",
+      "未知"
+    ],
+    "contains": [
+      "special order"
+    ],
+    "heuristics": [
+      "n_products<2 不建页（too_few）",
+      "空 mah 不建页",
+      "纯数字/纯符号/长度<=2 视为占位"
+    ]
+  },
+  "entries": [
+    {
+      "maker": "Special Order",
+      "maker_key": "special order",
+      "n_products": 7226,
+      "rule": "exact_special order",
+      "raw_forms": [
+        "Special Order"
+      ]
+    },
+    {
+      "maker": "Drug Tariff Special Order",
+      "maker_key": "drug tariff special order",
+      "n_products": 246,
+      "rule": "exact_drug tariff special order",
+      "raw_forms": [
+        "Drug Tariff Special Order"
+      ]
+    },
+    {
+      "maker": "Part VIIID Drug Tariff Special Order",
+      "maker_key": "part viiid drug tariff special order",
+      "n_products": 52,
+      "rule": "exact_part viiid drug tariff special order",
+      "raw_forms": [
+        "Part VIIID Drug Tariff Special Order"
+      ]
+    },
+    {
+      "maker": "S+",
+      "maker_key": "s+",
+      "n_products": 4,
+      "rule": "exact_s+",
+      "raw_forms": [
+        "S+"
+      ]
+    },
+    {
+      "maker": "70541",
+      "maker_key": "70541",
+      "n_products": 3,
+      "rule": "digits_only",
+      "raw_forms": [
+        "70541"
+      ]
+    },
+    {
+      "maker": "c",
+      "maker_key": "c",
+      "n_products": 2,
+      "rule": "too_short",
+      "raw_forms": [
+        "C",
+        "c"
+      ]
+    },
+    {
+      "maker": "116956644",
+      "maker_key": "116956644",
+      "n_products": 1,
+      "rule": "digits_only",
+      "raw_forms": [
+        "116956644"
+      ]
+    },
+    {
+      "maker": "73453-112",
+      "maker_key": "73453-112",
+      "n_products": 1,
+      "rule": "digits_only",
+      "raw_forms": [
+        "73453-112"
+      ]
+    },
+    {
+      "maker": "74005",
+      "maker_key": "74005",
+      "n_products": 1,
+      "rule": "digits_only",
+      "raw_forms": [
+        "74005"
+      ]
+    },
+    {
+      "maker": "76162",
+      "maker_key": "76162",
+      "n_products": 1,
+      "rule": "digits_only",
+      "raw_forms": [
+        "76162"
+      ]
+    },
+    {
+      "maker": "78271",
+      "maker_key": "78271",
+      "n_products": 1,
+      "rule": "digits_only",
+      "raw_forms": [
+        "78271"
+      ]
+    },
+    {
+      "maker": "801576526",
+      "maker_key": "801576526",
+      "n_products": 1,
+      "rule": "digits_only",
+      "raw_forms": [
+        "801576526"
+      ]
+    }
+  ]
+}
