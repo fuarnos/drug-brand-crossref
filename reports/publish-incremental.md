@@ -107,6 +107,11 @@ Copy-Item deploy\publish.ps1.bak deploy\publish.ps1 -Force
 结果：gh-pages 3ce2b0353（在 650b30fb 之上 fast-forward），线上 v0.7.0，smoke 32/32 通过。
 与 v0.6.7 对比：v0.6.7 变更 60,319 文件 / 上传 27.55 MiB / 602 s；v0.7.0 主要变更来自 ?v= 与 TW/zh-Hant 文案，delta 更小（11.60 MiB）。
 
+v0.7.0 收尾记录（2026-10-29）：
+- Release commit 88a047c10（main e578ee549 为其后的报告补记提交）；tag **v0.7.0** 已推送（annotated）；GitHub Release 已创建并 API 确认为 published / 非 draft：<https://github.com/fuarnos/drug-brand-crossref/releases/tag/v0.7.0>
+- gh-pages 3ce2b0353（上一版 650b30fb 的 fast-forward 增量提交）；线上 smoke **32/32 通过**（0 failed / 0 warnings）
+- 下一版起继续用默认增量流程；本地 cache 已自动刷新到 3ce2b0353，无需重新 bootstrap。
+
 ---
 
 ## 4. 迁移注意 / 风险
