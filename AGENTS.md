@@ -69,12 +69,14 @@
 | 页面文案 | zh / en / es 三语同步，别只改一种 |
 | `db/schema.sql`、`db/init_db.py` | 老库能直接升级（幂等）；重跑 init_db 验证 |
 
+> 站点 / 前端 / 文案改动的**完整优化流程与发布前 12 项 / 发布后 6 项清单**见 [docs/网站优化流程.md](docs/网站优化流程.md)（外部标准映射 + 命令 / 判定值）。
+
 ## 6. 发布纪律
 
 - 唯一入口是 `deploy/publish.ps1`（或双击 `发布网站.cmd`），**绝不手工往 `gh-pages` 推**。曾发生过 `site/build.py` 还在写页面就推送、整站 404 的事故，见 [DEPLOY.md](DEPLOY.md)。
 - 顺序：① `CHANGELOG.md` 最上面加一节 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）→ ② `& $py site/build.py` 等 `== done ==` → ③ `& .\deploy\publish.ps1` → ④ `git tag -a vX.Y.Z` + GitHub Release（正文用 CHANGELOG 那一节）。
 - 版本号唯一来源是 CHANGELOG 第一节；站点页脚、`whats-new.html`、GitHub Release 都从它生成。
-- `publish.ps1` 自带完整性检查（`index.html`、`data/index.json` ≥ 5 MB、文件数 ≥ 24,000、无 0 字节文件、构建未在跑）；失败会保留临时目录，别手动清理。
+- `publish.ps1` 自带完整性检查（`index.html`、`data/idx/core.json` ≥ 10 MB raw（v0.9.0 实测 35.8 MB raw / 8.68 MB gzip；`data/index.json` 自 v0.6.1 起不再生成）、文件数 ≥ 24,000、无 0 字节文件、构建未在跑）；失败会保留临时目录，别手动清理。
 - 回滚要人来拍板：先 `-DryRun` 检查，再考虑重新发布上一个 tag 的构建产物。
 
 ## 7. 并行工位纪律（多个会话 / 队友共享同一工作区）

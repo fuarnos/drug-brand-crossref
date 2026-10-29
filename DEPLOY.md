@@ -126,7 +126,7 @@ git push --force origin <commit>:refs/heads/gh-pages
 
 ## 备选：Netlify 拖拽
 
-临时演示可以用，不作为主线。`site/dist` 现在约 30,750 个文件 / 124 MB。
+临时演示可以用，不作为主线。`site/dist` 现在 116,883 个文件 / 770.8 MB（v0.9.0 实测）。
 
 1. 打开 <https://app.netlify.com/drop>
 2. 把 `site/dist` 文件夹整个拖进去

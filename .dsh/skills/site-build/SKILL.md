@@ -6,8 +6,10 @@ whenToUse: 任务涉及 site/build.py、页面文案 / 样式 / 前端、站点�
 
 # 建站与验收（site-build）
 
-`site/build.py` 从 `data/drugs.db` 生成整个静态站到 `site/dist/`（约 3 万个文件 / 130+ MB）。
+`site/build.py` 从 `data/drugs.db` 生成整个静态站到 `site/dist/`（v0.9.0 实测：116,883 个文件 / 770.8 MB）。
 它同时是页面模板、i18n 字典和版本号的来源，改动会放大到全站，必须按顺序验收。
+
+> 完整优化流程（外部标准映射）与发布前 12 项 / 发布后 6 项检查清单：`docs/网站优化流程.md`。
 
 ## 1. 构建
 
@@ -26,17 +28,17 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 ```powershell
 $dist = 'site/dist'
 'index.html','about.html','confused.html','whats-new.html','404.html',
-'robots.txt','sitemap.xml','.nojekyll','data/index.json','data/aliases.json',
+'robots.txt','sitemap.xml','.nojekyll','data/idx/core.json','data/aliases.json',
 'data/artg.json','data/confused.json','assets/style.css','assets/i18n.js' |
   ForEach-Object { "{0,-22} {1}" -f $_, (Test-Path (Join-Path $dist $_)) }
 
-(Get-ChildItem $dist -Recurse -File).Count                                        # 期望 ≥ 24,000（publish 门槛）
-[math]::Round((Get-ChildItem $dist -Recurse -File | Measure-Object Length -Sum).Sum/1MB)  # 站点体积
-[math]::Round((Get-Item "$dist/data/index.json").Length/1MB)                       # 期望 ≥ 5 MB
+(Get-ChildItem $dist -Recurse -File).Count                                        # 期望 ≥ 24,000（publish 门槛；v0.9.0 实测 116,883）
+[math]::Round((Get-ChildItem $dist -Recurse -File | Measure-Object Length -Sum).Sum/1MB)  # 站点体积（v0.9.0 实测 770.8 MB）
+[math]::Round((Get-Item "$dist/data/idx/core.json").Length/1MB)                   # 唯一搜索索引，期望 ≥ 10 MB raw（v0.9.0 实测 35.8 MB raw / 8.68 MB gzip）
 (Get-ChildItem $dist -Recurse -File | Where-Object Length -eq 0).Count            # 必须 0
 ```
 
-目录结构：`drug/` ≈ 1.2 万张成分页，`name/` ≈ 1.8 万张同名碰撞页，`es/`、`zh/` 是语言入口页；
+目录结构：`drug/` ≈ 1.24 万张成分页，`name/` ≈ 7.7 万张名称页（其中单包装轻量页 4.4 万，noindex），`es/`、`zh/`、`zh-hant/` 是语言入口页；
 其余页面是一份 HTML + 客户端 `?lang=en|es|zh` 切换（`assets/i18n.js`），`hreflang` 指向 `/es/`、`/zh/`。
 
 ## 3. 三语与检索抽查
@@ -57,8 +59,8 @@ $dist = 'site/dist'
 
 | 项 | 期望 |
 |---|---|
-| 首屏体积 | 只加载 HTML/CSS/JS（十几 KB）；`data/index.json` 是懒加载，首次输入 / 带 `?q=` 才拉 |
-| 索引 | `data/index.json` 大小和条目数变化要能解释；`?legacy=1` 仍可回退到旧行为 |
+| 首屏体积 | 首屏约 311 KB raw / 104 KB gz（HTML+CSS+i18n+app+bilingual，v0.9.0 实测）；搜索索引懒加载：首次输入 / 带 `?q=` 才拉 `data/idx/core.json`（8.68 MB gzip）+ 前缀分片（中位 1.04 MB raw） |
+| 索引 | `data/idx/core.json` 与分片大小变化要能解释（core ≥ 10 MB raw 是 publish 门槛）；`?legacy=1` 仍可回退到旧行为 |
 | 版本号 | 页脚 / `whats-new.html` / Release 都取 CHANGELOG 第一节 `## vX.Y.Z — YYYY-MM-DD` |
 | 链接与 SEO | `sitemap.xml` 覆盖全量页面；`404.html` 在任意子路径都能回站内；`robots.txt`、`.nojekyll` 在 |
 | 资产缓存 | `assets/*.js|css` 带 `?v=` 时间戳，改完确认 URL 变了（否则浏览器拿旧文件） |
