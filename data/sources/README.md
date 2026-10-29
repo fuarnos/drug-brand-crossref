@@ -15,6 +15,7 @@
 | `nida-drugs-a-to-z.md` | [NIDA — Drugs A to Z](https://nida.nih.gov/research-topics/drugs-a-to-z) | 2026-10-26，正文文本渲染 | US Government work（public domain） |
 | `dea-slang-2018.txt` | [DEA — Slang Terms and Code Words (2018)](https://archive.org/details/dea-drug-slang-terms-and-code-words-july2018) | 2026-10-26，Internet Archive DjVu 文本 | Public Domain Mark 1.0 |
 | `fda-tall-man-pairs.csv` | [FDA — Name Differentiation Project](https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project) | 2026-10-26，按官方表格逐行转录；页面标注 content current as of 2026-06-12 | US Government work（public domain） |
+| `unit_normalization_20261030.csv` | 本项目 task-16 单位归一审计（`.tmp/unit-norm-mass/audit_real.csv`） | 2026-10-30，仅含 109,161 行 changed 的 `product_id,ord,old_value,old_unit`（原始写法，3.4 MB）；供 task-17 矩阵「原记录」展示，构建时优先读取 | 项目自有审计数据（非外部转载） |
 
 ## 没有收进来的
 
