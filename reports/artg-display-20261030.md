@@ -51,6 +51,7 @@ i18n en/es/zh/zh-Hant：ingredient.unrecorded / badge.export_only / about.au_sou
 ## 4. 待办
 
 - 全量构建后抽查 AU 结果行 Export Only、无成分角标、名字页/厂家页、sitemap 不暴涨。
+- 正式构建（`site/dist`，2026-10-30）：**110,200 文件 / 882.6 MiB / sitemap 60,737**；0 空文件；页脚 v0.9.1。相对 v0.9.0（116,883 / 770.8 MiB / 68,430）体积仍在 900MiB 目标内。详见 `reports/v091-size-strategy.md`。
 - 3,911 名称层产品无成分是数据边界（ARTG 1,446 仅名称 + 49 成分无法解析 + 既有 2,416）；不补猜、不伪造成分。
 - HK/AU 的 status unknown 是数据源限制（HK 无状态列、ARTG 导出无状态列），页面已明示。
 - Lighthouse/WCAG/UX P0 与本次同批构建，见 `lighthouse-optimization.md` / `ux-fixes.md`。
