@@ -2429,6 +2429,9 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atc-src-line{margin:-8px 0 10px}
 .atc-count{margin:-6px 0 10px}
 .salt{color:var(--muted);font-size:12px;margin-left:6px}
+.drug-name-src{min-height:18px;margin:2px 0 0;font-size:12px}
+.drug-name-src [data-sub-src]:not(:empty){display:inline-block;padding:1px 7px;
+  border:1px solid var(--line);border-radius:999px;background:#faf9f6;color:var(--muted)}
 .salt .nm{color:var(--muted)}
 .atcmembers .st-badge{margin-left:4px}
 .atcdetails{margin:8px 0 0}
