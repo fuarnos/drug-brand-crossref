@@ -9,7 +9,7 @@
 - **v0.9.0（第 20 版）**：重量单位归一 + ATC/大类 v2 + 矩阵 3 列/横滑 + 无商品名与全量厂家页 + HK 上线（10 市场）；tag v0.9.0、gh-pages `cbc3f6aa`、main `989d9c38e`、smoke ok、增量 46.28 MiB/1,118.5s。
 - **数据（当前 DB，v0.9.1 发布时点）**：**477,098 产品 / 628,013 组件 / 652,909 名称 / 10 市场（AU 44,794、HK 13,935）**、DB **419.6 MB**；`quick_check=ok` / FK 0。AU 数据**已随 v0.9.1 上线**（About 四语署名 + 数据截止 2026-10-28、Export Only 徽章、无成分标注；许可口径=只写来源+署名）。
 - **站点（v0.9.1）**：构建 `== done ==` exit 0、**3.29 分钟**（含修复重发）；dist **112,822 文件 / 936.97 MB（893.6 MiB）**、sitemap **63,359**、0 空文件；name **77,058** / combo **6,736** / drug 12,442 / maker 15,213；单包装名字页仍 44,040；**全量 102,192 未做**（体积策略下视 v0.9.2 再评估）。
-- **测试**：{{TEST_LINE_V091}}
+- **测试**：发布后四套复跑——etl **25 OK** / lib **29 OK** / mobile **29 OK**；trilingual **72 例 68 通过**（354 查询 Top-5 **97.7%**、Top-1 96.3%，与 2026-10-28 基线一致，4 例为既有 dup_inn/combo 缺口，非回归）；v0.9.1 smoke **0 failures / 0 warnings**（live v0.9.1）。
 - **已知缺口**：v0.9.0 的 **6,065 个小组合页 URL 仍 404**（v0.9.2 task-33 stub）；**LCP 3.1–3.6s 未达 2.5s**（v0.9.2）；**core 41.4 MB raw 未瘦身**（v0.9.2 可选）；AU 数据带入的单位（microgram/mg/g 等）未归一。
 - **申请**：TGA 已答复且 AU 数据已上线（许可口径=只写来源+署名）；上海（11-12/11-26）、澳门（11-09/11-18）继续等；定时仍为 **2 条 cron**（00:35 开工 / 08:20 收尾）+ 申请跟进每日开工日检。
 
@@ -131,10 +131,10 @@
 
 | 套件 | v0.9.0 后（`.tmp/dose-mapping/tests-post-v090.log`） | v0.9.1 后（`.tmp/dose-mapping/tests-post-v091.log`） |
 |---|---|---|
-| `etl` | Ran 25 tests, **OK** | {{ETL_V091}} |
-| `lib` | Ran 29 tests, **OK** | {{LIB_V091}} |
-| `tests.test_mobile_inbox` | Ran 29 tests, **OK** | {{MOBILE_V091}} |
-| `tests/trilingual/run_tests.py` | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；728.3s | {{TRI_V091}} |
+| `etl` | Ran 25 tests, **OK** | Ran 25 tests, **OK** |
+| `lib` | Ran 29 tests, **OK** | Ran 29 tests, **OK** |
+| `tests.test_mobile_inbox` | Ran 29 tests, **OK** | Ran 29 tests, **OK** |
+| `tests/trilingual/run_tests.py` | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；728.3s | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；642.6s |
 
 - **与基线对比**（`.tmp/trilingual/results_overnight_20261029.json`，2026-10-28）：基线同为 **72 例 68 通过 / Top-5 97.7%**、Top-1 96.0%；失败例完全相同（metformin combo 的 zh「西格列汀二甲双胍片」Top-5、ciclosporin/beclometasone/chlorphenamine 三个 dup_inn 拼写别名，均属**既有缺口**）→ v0.9.0/v0.9.1 均**未引入检索回归**；耗时 556.3s → 728s 量级（库 +32,904 产品后正常变慢）。
 - 说明：三语套件在 PowerShell 管道下会把 unittest 进度点写到 stderr（`NativeCommandError` 噪音），结果以 `OK`/汇总行为准（`reports/2026-10-26-手机通道.md` §3 有同样说明）。
