@@ -109,3 +109,12 @@ Settings → Branches → **Add branch protection rule**：
    该检查逻辑已就位（有 dist + 有 node 就跑），等本地装 node 或 v0.9.2 拆出内联 JS 后可覆盖。
 3. **CHANGELOG**：本任务不单独占版本条目，随 v0.9.2 版本节写一句「新增最小 CI」。
 4. CI 不发布、不写库、不依赖任何 secret；`deploy/pages.yml` 仍未启用，发布仍走 `deploy/publish.ps1`。
+
+## 7. CI 首次运行（verification）
+
+- 触发：commit **`c5d20776d`** push 到 `main`（2026-10-30）。
+- Run：<https://github.com/fuarnos/drug-brand-crossref/actions/runs/40942725745> → **success**；
+  job `tests + integrity`，全部 step 绿：Checkout / Set up Python 3.12 / **Run checks (same entry as local)**。
+- 运行内容：py_compile + etl/lib/mobile 三套 unittest + workflow 自检；trilingual / `check_data` /
+  dist 完整性按设计 SKIP（GitHub 上没有 `data/drugs.db` 与 `site/dist`）。
+- 待人工：按 §5 在仓库 Settings 把 `tests + integrity` 设为 required status check（设好后 CI 不绿即挡合并）。
