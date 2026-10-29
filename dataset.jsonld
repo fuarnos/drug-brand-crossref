@@ -1,0 +1,52 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Medicine Brand Cross-Reference — derived data",
+  "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
+  "url": "https://fuarnos.github.io/drug-brand-crossref/datapackage.json",
+  "version": "v0.9.2",
+  "dateModified": "2026-10-29",
+  "license": "https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/数据溯源与许可.md",
+  "creator": {
+    "@type": "Organization",
+    "name": "Medicine Brand Cross-Reference",
+    "url": "https://fuarnos.github.io/drug-brand-crossref/"
+  },
+  "isAccessibleForFree": true,
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "coverage",
+      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/coverage.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": 383
+    },
+    {
+      "@type": "DataDownload",
+      "name": "market-summary",
+      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/market-summary.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": 249
+    },
+    {
+      "@type": "DataDownload",
+      "name": "name-summary",
+      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/name-summary.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": 265
+    },
+    {
+      "@type": "DataDownload",
+      "name": "substances",
+      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/substances.csv",
+      "encodingFormat": "text/csv",
+      "contentSize": 705343
+    },
+    {
+      "@type": "DataDownload",
+      "name": "datapackage.json",
+      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/datapackage.json",
+      "encodingFormat": "application/json"
+    }
+  ]
+}

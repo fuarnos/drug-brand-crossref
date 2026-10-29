@@ -8,7 +8,7 @@ var DEFAULT_LANG='en';
   // 站点根路径：i18n.js 在 <head> 同步执行，currentScript 可用。
   // GitHub Pages 是项目子路径（/drug-brand-crossref/），不能假设语言目录在域名根。
   var scriptEl = document.currentScript;
-  var ROOT = ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n\.js.*$/, '');
+  var ROOT = window.__DSH_I18N_ROOT || ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n\.js.*$/, '');
   var rootPath = '/';
   try{ rootPath = new URL(ROOT).pathname || '/'; }catch(e){}
   function relPath(){

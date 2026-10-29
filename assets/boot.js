@@ -1,0 +1,1 @@
+var s=document.currentScript;var r=((s&&s.src)||location.href).replace(/assets\/boot\.js.*$/,'');window.addEventListener('load',function(){var a=document.createElement('script');a.src=r+'assets/i18n.js';a.onload=function(){var b=document.createElement('script');b.src=r+'assets/bilingual.js';document.body.appendChild(b);};document.body.appendChild(a);});

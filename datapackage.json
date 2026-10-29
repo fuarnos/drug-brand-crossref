@@ -1,0 +1,611 @@
+{
+  "profile": "tabular-data-package",
+  "name": "drug-brand-crossref-derived",
+  "title": "Medicine Brand Cross-Reference — derived data package",
+  "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
+  "version": "v0.9.2",
+  "created": "2026-10-29T20:23:25Z",
+  "homepage": "https://fuarnos.github.io/drug-brand-crossref/",
+  "licenses": [
+    {
+      "name": "mixed-derived",
+      "title": "Derived data — source licences apply; see docs/数据溯源与许可.md",
+      "path": "https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/数据溯源与许可.md"
+    }
+  ],
+  "sources": [
+    {
+      "id": "adf_au",
+      "name": "Alcohol and Drug Foundation (Australia)",
+      "url": "https://adf.org.au/drug-facts/",
+      "license": "© Alcohol and Drug Foundation; short factual names with attribution",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "alihealth_cn",
+      "name": "公开健康平台页面整理（阿里健康等）",
+      "url": "https://www.alihealth.cn/",
+      "license": "待确认（公开健康平台页面；仅存短名+链接）",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "artg_detail",
+      "name": "ARTG Public Summary (TGA eBS)",
+      "url": "https://www.ebs.tga.gov.au/ebs/ANZTPAR/PublicWeb.nsf/Medicines?openview",
+      "license": "© Commonwealth of Australia（只取事实字段：成分/规格/剂型/状态）",
+      "license_url": "https://www.tga.gov.au/copyright",
+      "data_as_of": null,
+      "countries": [
+        "AU"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "artg_enrich",
+      "name": "ARTG index enrichment (TGA eBS current medicines)",
+      "url": "https://www.ebs.tga.gov.au/ebs/ANZTPAR/PublicWeb.nsf/Medicines?openview",
+      "license": "TGA public register（名称层事实字段）",
+      "license_url": "https://www.tga.gov.au/copyright",
+      "data_as_of": null,
+      "countries": [
+        "AU"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "artg_export",
+      "name": "TGA — Australian Register of Therapeutic Goods (ARTG Medicines export)",
+      "url": "https://compliance.health.gov.au/artg/",
+      "license": "TGA 授权非商业使用（署名 TGA / ARTG；本站免费非商业）",
+      "license_url": "https://www.tga.gov.au/copyright",
+      "data_as_of": "2026-10-28",
+      "countries": [
+        "AU"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "artg_index",
+      "name": "TGA eBS — Australian Register of Current Medicines (index)",
+      "url": "https://www.ebs.tga.gov.au/ebs/ANZTPAR/PublicWeb.nsf/Medicines?openview",
+      "license": "TGA public register（事实字段：名称/申办方/ARTG ID）",
+      "license_url": "https://www.tga.gov.au/copyright",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "beijing_ybj",
+      "name": "北京市医疗保障局 药品挂网/阳光采购目录（公开查询）",
+      "url": "data/raw/cn_provinces/beijing_yycg_202112.pdf",
+      "license": "政府公开信息；仅事实字段（商品名/批文/企业），非商业再发布需署名并可撤下",
+      "license_url": "data/raw/cn_provinces/beijing_yycg_202112.pdf",
+      "data_as_of": "2026-10-28 抓取（beijing_yycg_202112.pdf）",
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "chembl_atc",
+      "name": "ChEMBL — ATC classification (EMBL-EBI)",
+      "url": "https://www.ebi.ac.uk/chembl/api/data/atc_class.json",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "cima",
+      "name": "CIMA (AEMPS) — Centro de Información online de Medicamentos",
+      "url": "https://cima.aemps.es/cima/publico/home.html",
+      "license": "Datos públicos de la AEMPS (reutilización con atribución)",
+      "license_url": "https://www.aemps.gob.es/",
+      "data_as_of": null,
+      "countries": [
+        "ES"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "cima_combo_fix",
+      "name": "CIMA multi-component combo fix",
+      "url": null,
+      "license": null,
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "cofepris_mx",
+      "name": "COFEPRIS – Registros Sanitarios de Medicamentos Alopáticos",
+      "url": "https://www.gob.mx/cofepris/documentos/registros-sanitarios-medicamentos",
+      "license": "Gobierno de México · uso con atribución（未标注开放许可）",
+      "license_url": "https://www.gob.mx/terminos",
+      "data_as_of": null,
+      "countries": [
+        "MX"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "community_cn",
+      "name": "Community / consumer health pages (CN)",
+      "url": "https://www.xiaohongshu.com/",
+      "license": "User-generated / consumer content; short factual nicknames with link only",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "community_web_cn",
+      "name": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
+      "url": "data/raw/cn_slang/",
+      "license": "用户/社区公开内容（仅存叫法事实+原链接）",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "dea_slang",
+      "name": "DEA — Slang Terms and Code Words (2018)",
+      "url": "https://archive.org/details/dea-drug-slang-terms-and-code-words-july2018",
+      "license": "Public Domain Mark 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "dmd",
+      "name": "NHSBSA dm+d",
+      "url": "https://isd.digital.nhs.uk/trud/users/guest/filters/0/categories/6",
+      "license": "Open Government Licence v3.0",
+      "license_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      "data_as_of": "2026-10-19",
+      "countries": [
+        "GB"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "fda_tml",
+      "name": "FDA Name Differentiation Project (tall-man list)",
+      "url": "https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project",
+      "license": "US Government work (public domain)",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "frank_uk",
+      "name": "Talk to FRANK (UK)",
+      "url": "https://www.talktofrank.com/",
+      "license": "Crown copyright; short factual names with attribution",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "hc_dpd",
+      "name": "Health Canada Drug Product Database (DPD)",
+      "url": "https://health-products.canada.ca/api/drug/drugproduct/?lang=en&type=json",
+      "license": "© His Majesty the King in Right of Canada; DPD terms permit non-commercial re-use with source acknowledgement",
+      "license_url": "https://healthycanadians.gc.ca/important-eng.php#a6",
+      "data_as_of": "2026-10-23",
+      "countries": [
+        "CA"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "hgmgg_ccby",
+      "name": "Medicamentos y productos farmacéuticos adquiridos por el HGMGG",
+      "url": "https://datos.gob.mx/dataset/medicamentos_productos_farmaceuticos_adquiridos_hgmgg",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "hk_dh",
+      "name": "衞生署藥物辦公室（香港）註冊藥劑製品名單",
+      "url": "https://data.gov.hk/en-data/dataset/hk-dh-dh_do-hk-dh-do-pharmaceutical-product",
+      "license": "DATA.GOV.HK Terms and Conditions（free reuse, attribution required）",
+      "license_url": "https://data.gov.hk/en/terms-and-conditions",
+      "data_as_of": "2026-10-23",
+      "countries": [
+        "HK"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "hsa_sg",
+      "name": "Health Sciences Authority (HSA) — Listing of Registered Therapeutic Products",
+      "url": "https://data.gov.sg/datasets/d_767279312753558cbf19d48344577084/view",
+      "license": "Singapore Open Data Licence v1.0 (SODL): reuse permitted with attribution and link to licence; no government endorsement implied.",
+      "license_url": "https://data.gov.sg/open-data-licence",
+      "data_as_of": "2026-08-07",
+      "countries": [
+        "SG"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "iner_ccby",
+      "name": "Entrada de medicamentos",
+      "url": "https://datos.gob.mx/dataset/entrada_medicamentos",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "inprfm_ccby",
+      "name": "Adquisición de medicamentos demanda",
+      "url": "https://datos.gob.mx/dataset/adquisicion_medicamentos_demanda",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "issste_catalogo",
+      "name": "ISSSTE – Catálogo Institucional de Insumos",
+      "url": "https://datos.gob.mx/dataset/catalogo_institucional_insumos",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "manual_seed",
+      "name": "人工核对种子（说明书/药监页面）",
+      "url": "",
+      "license": "逐条标注来源",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [
+        "AU",
+        "CN",
+        "GB"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "medlineplus",
+      "name": "MedlinePlus (NLM)",
+      "url": "https://medlineplus.gov/",
+      "license": "US Government work (public domain)",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "mx_ccby_pervolume",
+      "name": "MX per_volume (CC-BY catalog backfill)",
+      "url": null,
+      "license": null,
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "nhsa",
+      "name": "国家医保局 医保药品分类与代码数据库",
+      "url": "https://code.nhsa.gov.cn/yp/toPublicGoodsData.html",
+      "license": "国家医保局公开数据（未标注开放许可，按公开数据引用）",
+      "license_url": null,
+      "data_as_of": "2025-04-04",
+      "countries": [
+        "CN"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "nida_slang",
+      "name": "NIDA — Drugs A to Z (street names)",
+      "url": "https://nida.nih.gov/research-topics/drugs-a-to-z",
+      "license": "US Government work (public domain)",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "openfda_ndc",
+      "name": "openFDA NDC Directory",
+      "url": "https://open.fda.gov/apis/drug/ndc/",
+      "license": "US Government work (public domain)",
+      "license_url": "https://open.fda.gov/license/",
+      "data_as_of": "2026-10-23",
+      "countries": [
+        "US"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "pbs",
+      "name": "PBS Schedule API v3 (Department of Health)",
+      "url": "https://data-api.health.gov.au/pbs/api/v3/",
+      "license": "Copyright (c) 2024 Department of Health, Commonwealth of Australia Permission is granted to use and redistribute this content, as long as all copyright statements are retained. Permission is not granted to modify this content. For further copyright information of this content, please refer to: https://www.health.gov.au/using-our-websites/copyright",
+      "license_url": "https://www.health.gov.au/using-our-websites/copyright",
+      "data_as_of": "2026-10-01",
+      "countries": [
+        "AU"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "pnsd_es",
+      "name": "PNSD — Plan Nacional sobre Drogas (Spain)",
+      "url": "https://pnsd.sanidad.gob.es/en/profesionales/publicaciones/catalogo/bibliotecaDigital/publicaciones/pdf/2017_FSG_Manual_Prevencion_de_drogas_para_familias.pdf",
+      "license": "Spanish government public document; short factual names with attribution",
+      "license_url": null,
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "profeco_precios",
+      "name": "PROFECO – Quién es quién en los precios (Medicamentos)",
+      "url": "https://datos.gob.mx/dataset/programa_quien_es_quien_precios_2026",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "semar_ccby",
+      "name": "Adquisición de insumos para la salud",
+      "url": "https://datos.gob.mx/dataset/adquisicion_insumos_salud",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "tfda_tw",
+      "name": "衛生福利部食品藥物管理署（TFDA）全部藥品許可證資料集",
+      "url": "https://data.gov.tw/dataset/9122",
+      "license": "政府資料開放授權條款－第1版 (OGDL v1.0)",
+      "license_url": "https://data.gov.tw/license",
+      "data_as_of": "2026-10-22",
+      "countries": [
+        "TW"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "tga_cmi",
+      "name": "TGA CMI repository (consumer medicine information index)",
+      "url": "https://www.ebs.tga.gov.au/ebs/picmi/picmirepository.nsf/PICMI?OpenForm",
+      "license": "TGA public register listing（仅事实字段；CMI 文档本身另有许可，未复制）",
+      "license_url": "https://www.tga.gov.au/copyright",
+      "data_as_of": null,
+      "countries": [
+        "AU"
+      ],
+      "redistributable": false,
+      "note": "non_redistributable: aggregate facts only; no raw-record export"
+    },
+    {
+      "id": "wikidata",
+      "name": "Wikidata (中文标签/别名)",
+      "url": "https://www.wikidata.org/",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "wikidata_atc_p267",
+      "name": "Wikidata — ATC code (P267) statements",
+      "url": "https://www.wikidata.org/wiki/Property:P267",
+      "license": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "wikipedia_zh",
+      "name": "Chinese Wikipedia (中文维基百科：重定向/别名)",
+      "url": "https://zh.wikipedia.org/",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "data_as_of": null,
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    }
+  ],
+  "resources": [
+    {
+      "name": "coverage",
+      "title": "Coverage by market",
+      "description": "Aggregated product/variant/active counts and last sync date per country.",
+      "path": "data/exports/coverage.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 383,
+      "hash": "sha256:342825ab9477202c7abb4251ac02d51b300b87c530932d744ba58b9f319d573c",
+      "count": 10,
+      "schema": {
+        "fields": [
+          {
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "name": "n_products",
+            "type": "integer"
+          },
+          {
+            "name": "n_variants",
+            "type": "integer"
+          },
+          {
+            "name": "n_active",
+            "type": "integer"
+          },
+          {
+            "name": "last_synced",
+            "type": "date"
+          }
+        ]
+      }
+    },
+    {
+      "name": "market-summary",
+      "title": "Market summary",
+      "description": "Aggregated products, substances and name keys per country.",
+      "path": "data/exports/market-summary.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 249,
+      "hash": "sha256:1a419bc48be1804b787fee8823aa110de75b9f41dccd34d8069018bf29b62801",
+      "count": 10,
+      "schema": {
+        "fields": [
+          {
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "name": "products",
+            "type": "integer"
+          },
+          {
+            "name": "substances",
+            "type": "integer"
+          },
+          {
+            "name": "name_keys",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "name-summary",
+      "title": "Name-layer summary",
+      "description": "Aggregated product-name counts by country and name_type (trade/inn); no per-record export.",
+      "path": "data/exports/name-summary.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 265,
+      "hash": "sha256:f74f88ead003406fc2072ca5b88bac883e8f14adbf85ab64bf4eb592c6bec20a",
+      "count": 16,
+      "schema": {
+        "fields": [
+          {
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "name": "name_type",
+            "type": "string"
+          },
+          {
+            "name": "n",
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "substances",
+      "title": "Substance list",
+      "description": "INN identifiers and names with ATC codes; no product-level source rows.",
+      "path": "data/exports/substances.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "bytes": 705343,
+      "hash": "sha256:538362dbfce8a96119a1d1794bfe589fb38c88842fdb4368853459ec37a23e8c",
+      "count": 12649,
+      "schema": {
+        "fields": [
+          {
+            "name": "substance_id",
+            "type": "string"
+          },
+          {
+            "name": "inn_en",
+            "type": "string"
+          },
+          {
+            "name": "inn_zh",
+            "type": "string"
+          },
+          {
+            "name": "atc",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "products": 477098,
+    "substances": 12649,
+    "name_keys": 202092,
+    "markets": 10
+  }
+}
