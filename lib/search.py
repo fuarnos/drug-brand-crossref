@@ -819,8 +819,11 @@ class SearchIndex:
 
     def drug_page(self, substance_id: str) -> dict | None:
         """身份卡：一个成分在所有国家的商品名与规格。"""
+        # 显式列（task-26）：不要 SELECT *，否则新增的 provenance 列会泄进 drug_page JSON。
         sub = self.db.execute(
-            "SELECT * FROM substance WHERE substance_id = ?", (substance_id,)
+            "SELECT substance_id, inn_en, inn_zh, atc, atc_name, drug_class,"
+            " ddd_value, ddd_unit, ddd_route FROM substance WHERE substance_id = ?",
+            (substance_id,)
         ).fetchone()
         if not sub:
             return None

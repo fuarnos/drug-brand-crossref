@@ -1,0 +1,1846 @@
+{
+ "generated_at": "2026-10-29T13:52:20-07:00",
+ "script_version": "2026-10-30",
+ "sources": {
+  "us_ndc": {
+   "label": "US openFDA NDC",
+   "parts": {
+    "ndc_json": {
+     "rows": 138032,
+     "fields": [
+      "limit",
+      "skip",
+      "total"
+     ],
+     "count_mode": "marker:\"product_ndc\"",
+     "files": [
+      "data/raw/openfda/ndc-01.json"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/openfda/download.json",
+     "bytes": 593767,
+     "mtime": "2026-10-25T12:11:18-07:00",
+     "sha256": "4f42156821cb06b86c9b7bf890289b802376ae6b0597583f526b1adde726208a"
+    },
+    {
+     "path": "data/raw/openfda/ndc-01.json",
+     "bytes": 243585205,
+     "mtime": "2026-10-23T14:45:54-07:00",
+     "sha256": "1513e4c16d807f3922ef0a49f60f8d1b4b910b5d83afc0455014188a96092ab7"
+    },
+    {
+     "path": "data/raw/openfda/ndc-01.zip",
+     "bytes": 27834424,
+     "mtime": "2026-10-25T12:12:01-07:00",
+     "sha256": "98be2c7319fa9c2f1d45b7ca835fb8f566cc6bf63ef509e620029f7a392cd12e"
+    }
+   ],
+   "fetched_at": "2026-10-25T12:12:01-07:00",
+   "data_as_of": "2026-10-23",
+   "note": "243 MB JSON 用 `\"product_ndc\"` 标记计数（rows 为记录数代理，非全量解析）；download.json/zip 只做文件哈希"
+  },
+  "gb_dmd": {
+   "label": "GB NHSBSA dm+d",
+   "parts": {
+    "amp": {
+     "rows": 167533,
+     "fields": [
+      "APID",
+      "AVAIL_RESTRICTCD",
+      "DESC",
+      "LIC_AUTHCD",
+      "NM",
+      "SUPPCD",
+      "VPID"
+     ],
+     "count_mode": "xml_tag:AMP",
+     "files": [
+      "data/raw/dmd/extracted/f_amp2_3151026.xml"
+     ]
+    },
+    "ampp": {
+     "rows": 187403,
+     "fields": [
+      "APID",
+      "APPID",
+      "LEGAL_CATCD",
+      "NM",
+      "SUBP",
+      "VPPID"
+     ],
+     "count_mode": "xml_tag:AMPP",
+     "files": [
+      "data/raw/dmd/extracted/f_ampp2_3151026.xml"
+     ]
+    },
+    "vmp": {
+     "rows": 24684,
+     "fields": [
+      "BASISCD",
+      "DF_INDCD",
+      "NM",
+      "PRES_STATCD",
+      "UDFS",
+      "UDFS_UOMCD",
+      "UNIT_DOSE_UOMCD",
+      "VPID",
+      "VTMID"
+     ],
+     "count_mode": "xml_tag:VMP",
+     "files": [
+      "data/raw/dmd/extracted/f_vmp2_3151026.xml"
+     ]
+    },
+    "vmpp": {
+     "rows": 37428,
+     "fields": [
+      "NM",
+      "QTYVAL",
+      "QTY_UOMCD",
+      "VPID",
+      "VPPID"
+     ],
+     "count_mode": "xml_tag:VMPP",
+     "files": [
+      "data/raw/dmd/extracted/f_vmpp2_3151026.xml"
+     ]
+    },
+    "vtm": {
+     "rows": 3257,
+     "fields": [
+      "NM",
+      "VTMID",
+      "VTMIDDT",
+      "VTMIDPREV"
+     ],
+     "count_mode": "xml_tag:VTM",
+     "files": [
+      "data/raw/dmd/extracted/f_vtm2_3151026.xml"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/dmd/extracted/f_amp2_3151026.xml",
+     "bytes": 76621900,
+     "mtime": "2026-10-25T19:22:26-07:00",
+     "sha256": "bfdc579ab63abeb1247a753568a70a83b59ad1602ebedb326ea9fa563b5c9180"
+    },
+    {
+     "path": "data/raw/dmd/extracted/f_ampp2_3151026.xml",
+     "bytes": 120766257,
+     "mtime": "2026-10-25T19:22:26-07:00",
+     "sha256": "491ce4a6bb9a4752bbe3eccb5e7ff2bf42862d948446217de0ad64f307e44185"
+    },
+    {
+     "path": "data/raw/dmd/extracted/f_vmp2_3151026.xml",
+     "bytes": 20493210,
+     "mtime": "2026-10-25T19:22:26-07:00",
+     "sha256": "357964ef5bcac90f5595a9950c394ed737868837d2e4710643f16ace1a7cded6"
+    },
+    {
+     "path": "data/raw/dmd/extracted/f_vmpp2_3151026.xml",
+     "bytes": 8190396,
+     "mtime": "2026-10-25T19:22:26-07:00",
+     "sha256": "a3df4c75e35805df5d166b01122298e0bb900ff5935e3b632e69bb2f9b69dcf6"
+    },
+    {
+     "path": "data/raw/dmd/extracted/f_vtm2_3151026.xml",
+     "bytes": 364158,
+     "mtime": "2026-10-25T19:22:26-07:00",
+     "sha256": "0a6c515ed89370ce4c077edd383ac9d897da2c182aa4c1750f3a744cf5a72295"
+    }
+   ],
+   "fetched_at": "2026-10-25T19:22:26-07:00"
+  },
+  "ca_dpd": {
+   "label": "CA Health Canada DPD",
+   "parts": {
+    "drugproduct": {
+     "rows": 58379,
+     "fields": [
+      "ai_group_no",
+      "brand_name",
+      "class_name",
+      "company_name",
+      "descriptor",
+      "drug_code",
+      "drug_identification_number",
+      "last_update_date",
+      "number_of_ais"
+     ],
+     "enums": {
+      "class_name": {
+       "Human": 51039,
+       "Disinfectant": 3817,
+       "Veterinary": 3360,
+       "Radiopharmaceutical": 163
+      }
+     },
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/ca/dpd/drugproduct.json"
+     ]
+    },
+    "status": {
+     "rows": 58379,
+     "fields": [
+      "drug_code",
+      "expiration_date",
+      "external_status_code",
+      "history_date",
+      "lot_number",
+      "original_market_date",
+      "status"
+     ],
+     "enums": {
+      "status": {
+       "Cancelled Post Market": 33298,
+       "Marketed": 13374,
+       "Cancelled Pre Market": 4113,
+       "Approved": 3706,
+       "Dormant": 2439,
+       "Cancelled (Unreturned Annual)": 1268,
+       "Cancelled (Transitioned To Biocides)": 165,
+       "Restricted Access": 10,
+       "Authorization By Interim Order Revoked": 4,
+       "Authorization By Interim Order Expired": 1,
+       "Cancelled (Safety Issue)": 1
+      }
+     },
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/ca/dpd/status.json"
+     ]
+    },
+    "activeingredient": {
+     "rows": 120931,
+     "enums": {},
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/ca/dpd/activeingredient.json"
+     ]
+    },
+    "packaging": {
+     "rows": 58379,
+     "enums": {},
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/ca/dpd/packaging.json"
+     ]
+    },
+    "route": {
+     "rows": 67170,
+     "enums": {},
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/ca/dpd/route.json"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/ca/dpd/activeingredient.json",
+     "bytes": 17563921,
+     "mtime": "2026-10-26T13:57:24-07:00",
+     "sha256": "ce6878d08eb347518ac7f01080cef96901d27ba258c1f61f0ef7587d8fdad677"
+    },
+    {
+     "path": "data/raw/ca/dpd/drugproduct.json",
+     "bytes": 16134208,
+     "mtime": "2026-10-26T13:57:22-07:00",
+     "sha256": "632c4b1fe45a838711113468c78d2e713b7d9218400fdf36bfeae9f2206e7bb3"
+    },
+    {
+     "path": "data/raw/ca/dpd/packaging.json",
+     "bytes": 7643103,
+     "mtime": "2026-10-26T13:57:29-07:00",
+     "sha256": "afa77f3e2550033a6af24ca5bd9ef28205472be066e71c3de0cfafd0f90ce439"
+    },
+    {
+     "path": "data/raw/ca/dpd/route.json",
+     "bytes": 6966644,
+     "mtime": "2026-10-26T13:57:26-07:00",
+     "sha256": "ddbbfa500f3784bd9a56032d6f4fba11a874a8370a5075db45301c1dd8070697"
+    },
+    {
+     "path": "data/raw/ca/dpd/status.json",
+     "bytes": 11156934,
+     "mtime": "2026-10-26T13:57:28-07:00",
+     "sha256": "7aa431418472152a9bacd93d111589e659048c923ed537bfcc2fd7ea11e017b5"
+    }
+   ],
+   "fetched_at": "2026-10-26T13:57:29-07:00"
+  },
+  "au_artg": {
+   "label": "AU TGA ARTG（导出 + 索引）",
+   "parts": {
+    "export_1991_2020": {
+     "rows": 21333,
+     "fields": [
+      "ARTG ID",
+      "Product Name",
+      "Sponsor Name",
+      "Active Ingredients",
+      "Excipient Ingredients",
+      "Indications",
+      "ARTG Category",
+      "Approval Area",
+      "Therapeutic Type",
+      "Start Date",
+      "Conditions",
+      "Black Triangle Scheme",
+      "Product Type",
+      "Effective Date",
+      "Indication Requirements",
+      "Warnings",
+      "Additional Product Information",
+      "Container Type",
+      "Container Material",
+      "Container Life Time",
+      "Container Temperature",
+      "Container Closure",
+      "Poison Schedule",
+      "Pack Size",
+      "Storage Conditions",
+      "Component Name",
+      "Dosage Form",
+      "Route of Administration",
+      "Visual Identification",
+      "Public Summary",
+      "Consumer/Patient Info",
+      "Product Info"
+     ],
+     "enums": {
+      "ARTG Category": {
+       "Registered": 15953,
+       "Listed": 4002,
+       "Listed (Export Only)": 1369,
+       "Registered (with Provisional Indication/s)": 6,
+       "Registered (Provisional)": 2,
+       "Assessed Listed": 1
+      },
+      "Product Type": {
+       "Single Medicine Product": 19949,
+       "Composite Pack": 1345,
+       "Medicine Kit": 39
+      },
+      "Therapeutic Type": {
+       "Medicine": 21333
+      }
+     },
+     "count_mode": "csv",
+     "files": [
+      "data/raw/artg_20261028/ARTG_Medicines_1991-2020.csv"
+     ]
+    },
+    "export_2021_2026": {
+     "rows": 15764,
+     "fields": [
+      "ARTG ID",
+      "Product Name",
+      "Sponsor Name",
+      "Active Ingredients",
+      "Excipient Ingredients",
+      "Indications",
+      "ARTG Category",
+      "Approval Area",
+      "Therapeutic Type",
+      "Start Date",
+      "Conditions",
+      "Black Triangle Scheme",
+      "Product Type",
+      "Effective Date",
+      "Indication Requirements",
+      "Warnings",
+      "Additional Product Information",
+      "Container Type",
+      "Container Material",
+      "Container Life Time",
+      "Container Temperature",
+      "Container Closure",
+      "Poison Schedule",
+      "Pack Size",
+      "Storage Conditions",
+      "Component Name",
+      "Dosage Form",
+      "Route of Administration",
+      "Visual Identification",
+      "Public Summary",
+      "Consumer/Patient Info",
+      "Product Info"
+     ],
+     "enums": {
+      "ARTG Category": {
+       "Listed": 8071,
+       "Registered": 6322,
+       "Listed (Export Only)": 1319,
+       "Registered (with Provisional Indication/s)": 28,
+       "Registered (Provisional)": 21,
+       "Assessed Listed": 3
+      },
+      "Product Type": {
+       "Single Medicine Product": 15070,
+       "Composite Pack": 500,
+       "Medicine Kit": 193,
+       "Single Device Product": 1
+      },
+      "Therapeutic Type": {
+       "Medicine": 15764
+      }
+     },
+     "count_mode": "csv",
+     "files": [
+      "data/raw/artg_20261028/ARTG_Medicines_2021-2026.csv"
+     ]
+    },
+    "index_medicine": {
+     "rows": 34594,
+     "fields": [
+      "artg_id",
+      "name",
+      "retrieved_at",
+      "sponsor"
+     ],
+     "count_mode": "jsonl",
+     "files": [
+      "data/raw/artg/medicine_index.jsonl"
+     ]
+    },
+    "index_entries": {
+     "rows": 34612,
+     "fields": [
+      "artg_id",
+      "name",
+      "sponsor",
+      "unid"
+     ],
+     "count_mode": "jsonl",
+     "files": [
+      "data/raw/artg/entries_with_unid.jsonl"
+     ]
+    },
+    "index_details": {
+     "rows": 1594,
+     "fields": [
+      "approval_area",
+      "artg_id",
+      "dosage_form",
+      "header",
+      "ingredients",
+      "name",
+      "raw_status",
+      "retrieved_at",
+      "route",
+      "sponsor",
+      "unid"
+     ],
+     "count_mode": "jsonl",
+     "files": [
+      "data/raw/artg/details.jsonl"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/artg/details.jsonl",
+     "bytes": 883698,
+     "mtime": "2026-10-26T14:53:03-07:00",
+     "sha256": "06668f11500a295b84f79715a6e8a92853d30987e4818695ff716364c2bb5533"
+    },
+    {
+     "path": "data/raw/artg/entries_with_unid.jsonl",
+     "bytes": 6026064,
+     "mtime": "2026-10-26T13:40:20-07:00",
+     "sha256": "9748ffd3925b0afbaa087f7a23768f1d621e58dc5be21692a61b0f8b0670fa82"
+    },
+    {
+     "path": "data/raw/artg/medicine_index.jsonl",
+     "bytes": 6056746,
+     "mtime": "2026-10-26T13:25:33-07:00",
+     "sha256": "04f52ccace46f9073d46b4abab8a79c659eb2ab43875c2bc5257d7052e79b05f"
+    },
+    {
+     "path": "data/raw/artg_20261028/ARTG_Medicines_1991-2020.csv",
+     "bytes": 53874146,
+     "mtime": "2026-10-28T18:26:24-07:00",
+     "sha256": "5197dc9dc720f2912542dd42e291c9386b4c2d3c5704f458e2c7a278ab108de5"
+    },
+    {
+     "path": "data/raw/artg_20261028/ARTG_Medicines_2021-2026.csv",
+     "bytes": 47038188,
+     "mtime": "2026-10-28T18:31:18-07:00",
+     "sha256": "03c03ca8ac0763a4fa1c8fa0b5ec6fb25421af9d52d84bfe94db1fb7fd315df6"
+    }
+   ],
+   "fetched_at": "2026-10-28T18:31:18-07:00",
+   "data_as_of": "2026-10-28 00:00:00"
+  },
+  "es_cima": {
+   "label": "ES AEMPS CIMA",
+   "parts": {
+    "pages": {
+     "rows": 25501,
+     "fields": [
+      "biosimilar",
+      "comerc",
+      "conduc",
+      "cpresc",
+      "docs",
+      "dosis",
+      "ema",
+      "estado",
+      "formaFarmaceutica",
+      "formaFarmaceuticaSimplificada",
+      "fotos",
+      "generico",
+      "huerfano",
+      "labcomercializador",
+      "labtitular",
+      "materialesInf",
+      "nombre",
+      "nosustituible",
+      "notas",
+      "nregistro",
+      "psum",
+      "receta",
+      "triangulo",
+      "viasAdministracion",
+      "vtm"
+     ],
+     "enums": {
+      "cpresc": {
+       "Medicamento Sujeto A Prescripción Médica": 14558,
+       "Uso Hospitalario": 4169,
+       "Diagnóstico Hospitalario": 2395,
+       "Medicamento Sujeto A Prescripción Médica. Tratamiento De Lar": 1886,
+       "Sin Receta": 1625,
+       "Medicamento Sujeto A Prescripción Médica. Psicótropos": 355,
+       "Medicamento Sujeto A Prescripción Médica. Estupefacientes": 323,
+       "Uso Hospitalario Y Centros De Diagnóstico Autorizados": 78,
+       "Uso Hospitalario. Estupefacientes": 40,
+       "Diagnóstico Hospitalario. Psicótropos": 38,
+       "Uso Hospitalario. Psicótropos": 30,
+       "Diagnóstico Hospitalario. Tratamiento De Larga Duración. ": 2,
+       "Diagnóstico Hospitalario. Estupefacientes": 1,
+       "Medicamento Sujeto A Prescripción Médica,Uso Hospitalario": 1
+      }
+     },
+     "count_mode": "json_dir:129files",
+     "meta": {
+      "totalFilas": 25501
+     },
+     "files": [
+      "data/raw/cima/page-001.json",
+      "data/raw/cima/page-002.json",
+      "data/raw/cima/page-003.json",
+      "data/raw/cima/page-004.json",
+      "data/raw/cima/page-005.json",
+      "data/raw/cima/page-006.json",
+      "data/raw/cima/page-007.json",
+      "data/raw/cima/page-008.json",
+      "data/raw/cima/page-009.json",
+      "data/raw/cima/page-010.json",
+      "data/raw/cima/page-011.json",
+      "data/raw/cima/page-012.json",
+      "data/raw/cima/page-013.json",
+      "data/raw/cima/page-014.json",
+      "data/raw/cima/page-015.json",
+      "data/raw/cima/page-016.json",
+      "data/raw/cima/page-017.json",
+      "data/raw/cima/page-018.json",
+      "data/raw/cima/page-019.json",
+      "data/raw/cima/page-020.json",
+      "data/raw/cima/page-021.json",
+      "data/raw/cima/page-022.json",
+      "data/raw/cima/page-023.json",
+      "data/raw/cima/page-024.json",
+      "data/raw/cima/page-025.json",
+      "data/raw/cima/page-026.json",
+      "data/raw/cima/page-027.json",
+      "data/raw/cima/page-028.json",
+      "data/raw/cima/page-029.json",
+      "data/raw/cima/page-030.json",
+      "data/raw/cima/page-031.json",
+      "data/raw/cima/page-032.json",
+      "data/raw/cima/page-033.json",
+      "data/raw/cima/page-034.json",
+      "data/raw/cima/page-035.json",
+      "data/raw/cima/page-036.json",
+      "data/raw/cima/page-037.json",
+      "data/raw/cima/page-038.json",
+      "data/raw/cima/page-039.json",
+      "data/raw/cima/page-040.json",
+      "data/raw/cima/page-041.json",
+      "data/raw/cima/page-042.json",
+      "data/raw/cima/page-043.json",
+      "data/raw/cima/page-044.json",
+      "data/raw/cima/page-045.json",
+      "data/raw/cima/page-046.json",
+      "data/raw/cima/page-047.json",
+      "data/raw/cima/page-048.json",
+      "data/raw/cima/page-049.json",
+      "data/raw/cima/page-050.json",
+      "data/raw/cima/page-051.json",
+      "data/raw/cima/page-052.json",
+      "data/raw/cima/page-053.json",
+      "data/raw/cima/page-054.json",
+      "data/raw/cima/page-055.json",
+      "data/raw/cima/page-056.json",
+      "data/raw/cima/page-057.json",
+      "data/raw/cima/page-058.json",
+      "data/raw/cima/page-059.json",
+      "data/raw/cima/page-060.json",
+      "data/raw/cima/page-061.json",
+      "data/raw/cima/page-062.json",
+      "data/raw/cima/page-063.json",
+      "data/raw/cima/page-064.json",
+      "data/raw/cima/page-065.json",
+      "data/raw/cima/page-066.json",
+      "data/raw/cima/page-067.json",
+      "data/raw/cima/page-068.json",
+      "data/raw/cima/page-069.json",
+      "data/raw/cima/page-070.json",
+      "data/raw/cima/page-071.json",
+      "data/raw/cima/page-072.json",
+      "data/raw/cima/page-073.json",
+      "data/raw/cima/page-074.json",
+      "data/raw/cima/page-075.json",
+      "data/raw/cima/page-076.json",
+      "data/raw/cima/page-077.json",
+      "data/raw/cima/page-078.json",
+      "data/raw/cima/page-079.json",
+      "data/raw/cima/page-080.json",
+      "data/raw/cima/page-081.json",
+      "data/raw/cima/page-082.json",
+      "data/raw/cima/page-083.json",
+      "data/raw/cima/page-084.json",
+      "data/raw/cima/page-085.json",
+      "data/raw/cima/page-086.json",
+      "data/raw/cima/page-087.json",
+      "data/raw/cima/page-088.json",
+      "data/raw/cima/page-089.json",
+      "data/raw/cima/page-090.json",
+      "data/raw/cima/page-091.json",
+      "data/raw/cima/page-092.json",
+      "data/raw/cima/page-093.json",
+      "data/raw/cima/page-094.json",
+      "data/raw/cima/page-095.json",
+      "data/raw/cima/page-096.json",
+      "data/raw/cima/page-097.json",
+      "data/raw/cima/page-098.json",
+      "data/raw/cima/page-099.json",
+      "data/raw/cima/page-100.json",
+      "data/raw/cima/page-101.json",
+      "data/raw/cima/page-102.json",
+      "data/raw/cima/page-103.json",
+      "data/raw/cima/page-104.json",
+      "data/raw/cima/page-105.json",
+      "data/raw/cima/page-106.json",
+      "data/raw/cima/page-107.json",
+      "data/raw/cima/page-108.json",
+      "data/raw/cima/page-109.json",
+      "data/raw/cima/page-110.json",
+      "data/raw/cima/page-111.json",
+      "data/raw/cima/page-112.json",
+      "data/raw/cima/page-113.json",
+      "data/raw/cima/page-114.json",
+      "data/raw/cima/page-115.json",
+      "data/raw/cima/page-116.json",
+      "data/raw/cima/page-117.json",
+      "data/raw/cima/page-118.json",
+      "data/raw/cima/page-119.json",
+      "data/raw/cima/page-120.json",
+      "data/raw/cima/page-121.json",
+      "data/raw/cima/page-122.json",
+      "data/raw/cima/page-123.json",
+      "data/raw/cima/page-124.json",
+      "data/raw/cima/page-125.json",
+      "data/raw/cima/page-126.json",
+      "data/raw/cima/page-127.json",
+      "data/raw/cima/page-128.json",
+      "data/raw/cima/page-129.json"
+     ]
+    },
+    "atc_files": {
+     "rows": 1808,
+     "fields": [],
+     "count_mode": "file_count"
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/cima/page-001.json",
+     "bytes": 282773,
+     "mtime": "2026-10-25T20:01:52-07:00",
+     "sha256": "c1eef5c4d33cf72bc4c365bb6ed972005d07b86d16ee93e3cce14de920fe1269"
+    },
+    {
+     "path": "data/raw/cima/page-002.json",
+     "bytes": 284684,
+     "mtime": "2026-10-25T20:01:54-07:00",
+     "sha256": "427f7fbd6d67131af416743d0d97e2a4c016ccc59af707628fb08f5994bd9e8c"
+    },
+    {
+     "path": "data/raw/cima/page-003.json",
+     "bytes": 282223,
+     "mtime": "2026-10-25T20:01:56-07:00",
+     "sha256": "6879d2b149dacaab0a06c1cdb11906940150d29b024760d103ad2bef6e39f7db"
+    },
+    {
+     "path": "data/raw/cima/page-004.json",
+     "bytes": 285303,
+     "mtime": "2026-10-25T20:01:58-07:00",
+     "sha256": "d1160046fd1c6ff2fd50a42f167b2f58f9d6dfbac86c2edf2b73023a6e3f4f40"
+    },
+    {
+     "path": "data/raw/cima/page-005.json",
+     "bytes": 282164,
+     "mtime": "2026-10-25T20:02:00-07:00",
+     "sha256": "a427e45fc745e1f41b398ad054dccd7cf93d5c0c795454c81d53910af2aba45e"
+    },
+    {
+     "path": "data/raw/cima/page-006.json",
+     "bytes": 280081,
+     "mtime": "2026-10-25T20:02:02-07:00",
+     "sha256": "b0c482903c5fc295449a6cc0647d6823b6bebce7beb97bf0f7c77d9506b96d68"
+    },
+    {
+     "path": "data/raw/cima/page-007.json",
+     "bytes": 280037,
+     "mtime": "2026-10-25T20:02:05-07:00",
+     "sha256": "09fb2992958f235245a97d5cd14631d9b5df485c2e8511378ea0f2efaf935c04"
+    },
+    {
+     "path": "data/raw/cima/page-008.json",
+     "bytes": 278849,
+     "mtime": "2026-10-25T20:02:07-07:00",
+     "sha256": "eadaadb97bb0ba8f0b7e42ce8aeb1ce1e883c58a78a0f726212338b6bd1244c7"
+    },
+    {
+     "path": "data/raw/cima/page-009.json",
+     "bytes": 285269,
+     "mtime": "2026-10-25T20:02:10-07:00",
+     "sha256": "f6ecc2f32918827e49ad7d6053e3abd77907b70d8c73e3a65d137088a3798dbe"
+    },
+    {
+     "path": "data/raw/cima/page-010.json",
+     "bytes": 285225,
+     "mtime": "2026-10-25T20:02:12-07:00",
+     "sha256": "111720dc5b2c6d088eb201938f01b76e8baf0bb3f998c47626c60eeadbc5501b"
+    },
+    {
+     "path": "data/raw/cima/page-011.json",
+     "bytes": 283009,
+     "mtime": "2026-10-25T20:02:14-07:00",
+     "sha256": "f62c860e86a9ceb383278432eb72d81c132b8e6c348d80b5a612a027f00503c2"
+    },
+    {
+     "path": "data/raw/cima/page-012.json",
+     "bytes": 281955,
+     "mtime": "2026-10-25T20:02:16-07:00",
+     "sha256": "c5aac2e22010f28b74043cc3cd47b82be7686c3d197bd07277619a74ea05597d"
+    },
+    {
+     "path": "data/raw/cima/page-013.json",
+     "bytes": 282931,
+     "mtime": "2026-10-25T20:02:18-07:00",
+     "sha256": "3c940b13f5f09d4d1874c1687f6b43fc637dd89e786fcdb4ad4890a08b349d84"
+    },
+    {
+     "path": "data/raw/cima/page-014.json",
+     "bytes": 288557,
+     "mtime": "2026-10-25T20:02:21-07:00",
+     "sha256": "ad566154e264951a53991c465ab9ff703e374fa140b3470cd4541530e52decd0"
+    },
+    {
+     "path": "data/raw/cima/page-015.json",
+     "bytes": 280712,
+     "mtime": "2026-10-25T20:02:23-07:00",
+     "sha256": "6d8d725c1cb0f2987f36708118535e5bf58a2884654f956cd4248253d773b054"
+    },
+    {
+     "path": "data/raw/cima/page-016.json",
+     "bytes": 281660,
+     "mtime": "2026-10-25T20:02:25-07:00",
+     "sha256": "36f1eef7341b5e4a2b8e28cf89215c066bc1bf1c611c30300d07cb54d9154410"
+    },
+    {
+     "path": "data/raw/cima/page-017.json",
+     "bytes": 284067,
+     "mtime": "2026-10-25T20:02:28-07:00",
+     "sha256": "cb7558cf189b22ddb49930bdf67a40d0a93e6b41a0d04fe0e56e5ef7e9e01144"
+    },
+    {
+     "path": "data/raw/cima/page-018.json",
+     "bytes": 277880,
+     "mtime": "2026-10-25T20:02:30-07:00",
+     "sha256": "dacee4195a435540d96281366433fed8f11861fc98459ed5cd30ab05d49370a5"
+    },
+    {
+     "path": "data/raw/cima/page-019.json",
+     "bytes": 286883,
+     "mtime": "2026-10-25T20:02:32-07:00",
+     "sha256": "8064f7fd68a4d842d22bfdac826971c0bf7831b82468e83c8bd65b636a2aa77f"
+    },
+    {
+     "path": "data/raw/cima/page-020.json",
+     "bytes": 282512,
+     "mtime": "2026-10-25T20:02:34-07:00",
+     "sha256": "25cf0ca4eaad2818b0084ee1603825a774c166eedcc1f5cb320e3419081b8d70"
+    },
+    {
+     "path": "data/raw/cima/page-021.json",
+     "bytes": 284982,
+     "mtime": "2026-10-25T20:02:36-07:00",
+     "sha256": "a9937dfe090d12f62af38aaa38bf61d5a4625941fe37d18f847b7f22f945a7cf"
+    },
+    {
+     "path": "data/raw/cima/page-022.json",
+     "bytes": 283214,
+     "mtime": "2026-10-25T20:02:38-07:00",
+     "sha256": "dd10af4c058b9ec88851c47e5018230dbfd7fcd118e96e18e2aa58bcce35cfc6"
+    },
+    {
+     "path": "data/raw/cima/page-023.json",
+     "bytes": 284900,
+     "mtime": "2026-10-25T20:02:41-07:00",
+     "sha256": "96b6a0b818dcad0d66ee81ae7e67cf48426562d8f0af08c3fa567d4c9aade595"
+    },
+    {
+     "path": "data/raw/cima/page-024.json",
+     "bytes": 285433,
+     "mtime": "2026-10-25T20:02:43-07:00",
+     "sha256": "27d53d085e8f3007b568d012b62f6b5ee19e111ac4cf882632eb7ce491113d19"
+    },
+    {
+     "path": "data/raw/cima/page-025.json",
+     "bytes": 286371,
+     "mtime": "2026-10-25T20:02:45-07:00",
+     "sha256": "40f0f817e1b8566a475dc2a352ba41ca7cf578b75d4afd1dfb9f7a82c81a84dc"
+    },
+    {
+     "path": "data/raw/cima/page-026.json",
+     "bytes": 282326,
+     "mtime": "2026-10-25T20:02:47-07:00",
+     "sha256": "491a947012ae76c6d73b80e0110344165cf699d3fc05a2dd4717b5d18bcd2177"
+    },
+    {
+     "path": "data/raw/cima/page-027.json",
+     "bytes": 285526,
+     "mtime": "2026-10-25T20:02:49-07:00",
+     "sha256": "cf12efd2b3703be90d9231714150e374f0bc1d771e8adc3f989c8f9c2c9b8150"
+    },
+    {
+     "path": "data/raw/cima/page-028.json",
+     "bytes": 286944,
+     "mtime": "2026-10-25T20:02:52-07:00",
+     "sha256": "682f72ccf95e3a99e79bcc667c109512e3963b217b22a067b002787c6cbbe1da"
+    },
+    {
+     "path": "data/raw/cima/page-029.json",
+     "bytes": 285293,
+     "mtime": "2026-10-25T20:02:54-07:00",
+     "sha256": "102b09ace20ce72feb40dff5bd21d25f0fc7a7773bf68cbedd3adb8f4c3d6ded"
+    },
+    {
+     "path": "data/raw/cima/page-030.json",
+     "bytes": 272420,
+     "mtime": "2026-10-25T20:02:56-07:00",
+     "sha256": "1619eaba3f5a21a3927baca2560f3ee501fb1dccf50fa98ef2376e7e7d68073a"
+    },
+    {
+     "path": "data/raw/cima/page-031.json",
+     "bytes": 226404,
+     "mtime": "2026-10-25T20:02:58-07:00",
+     "sha256": "8a0c7d050d5b32855faa24bf2375f242479f75232c965a2fd7db5fe4de881bf8"
+    },
+    {
+     "path": "data/raw/cima/page-032.json",
+     "bytes": 226294,
+     "mtime": "2026-10-25T20:03:00-07:00",
+     "sha256": "baa215062f2af17a0a6189c34d696c99a9dfebe4b32c165d6db1d86659570751"
+    },
+    {
+     "path": "data/raw/cima/page-033.json",
+     "bytes": 230496,
+     "mtime": "2026-10-25T20:03:02-07:00",
+     "sha256": "701d9d586f1653bde688df3a28787c958868bd29f996452601fc916c9e9e3aef"
+    },
+    {
+     "path": "data/raw/cima/page-034.json",
+     "bytes": 221581,
+     "mtime": "2026-10-25T20:03:04-07:00",
+     "sha256": "5b3c113e6920271e369c70304cdd260c37c7f287eeb709e368b53bf9130ed74b"
+    },
+    {
+     "path": "data/raw/cima/page-035.json",
+     "bytes": 226887,
+     "mtime": "2026-10-25T20:03:06-07:00",
+     "sha256": "1fe95d5e23487e8ef133a0ad30bde207cf444bf34b9d91e3861ebd312e5a7671"
+    },
+    {
+     "path": "data/raw/cima/page-036.json",
+     "bytes": 225572,
+     "mtime": "2026-10-25T20:03:09-07:00",
+     "sha256": "488aab158012f0fad0f45c9d1565029dca7d25afc60d6e6358b5b80edccaf6f8"
+    },
+    {
+     "path": "data/raw/cima/page-037.json",
+     "bytes": 226215,
+     "mtime": "2026-10-25T20:03:11-07:00",
+     "sha256": "4429ffb958dc7f4cd37d60865dfbf71170853d153e14665b8135130e3f10a039"
+    },
+    {
+     "path": "data/raw/cima/page-038.json",
+     "bytes": 224059,
+     "mtime": "2026-10-25T20:03:12-07:00",
+     "sha256": "7fe038f5bcc11cb452fda1f6fd16278a45253b8700aeaf327f6a5b4b57c5667b"
+    },
+    {
+     "path": "data/raw/cima/page-039.json",
+     "bytes": 224732,
+     "mtime": "2026-10-25T20:03:14-07:00",
+     "sha256": "7baf2997049b03f037fd7ce2056cfa6241aff80375f7e3b7dd79879d4794097d"
+    },
+    {
+     "path": "data/raw/cima/page-040.json",
+     "bytes": 227151,
+     "mtime": "2026-10-25T20:03:16-07:00",
+     "sha256": "2d96c95647701cc917fae2c6bbf09277ee6e0301de1da07c62a79004a038e76e"
+    },
+    {
+     "path": "data/raw/cima/page-041.json",
+     "bytes": 225511,
+     "mtime": "2026-10-25T20:03:18-07:00",
+     "sha256": "8cb053cc9f4c75d6fc6ab687682406b0f2b6c50280664aa28a185d0ad4ac15ff"
+    },
+    {
+     "path": "data/raw/cima/page-042.json",
+     "bytes": 226923,
+     "mtime": "2026-10-25T20:03:20-07:00",
+     "sha256": "07db7b4c3dedd457bcbc33c1ce4374def9094a8ef64ea471ba8e40bb0c710381"
+    },
+    {
+     "path": "data/raw/cima/page-043.json",
+     "bytes": 228800,
+     "mtime": "2026-10-25T20:03:22-07:00",
+     "sha256": "d1e34cecfc6464ed64674456f6e10c4f126532b4f644a590f5518f89454ab110"
+    },
+    {
+     "path": "data/raw/cima/page-044.json",
+     "bytes": 229676,
+     "mtime": "2026-10-25T20:03:24-07:00",
+     "sha256": "194dfb8076987ef7ef3181bc05b94ba343d86db931b1e2362675e8286466a29d"
+    },
+    {
+     "path": "data/raw/cima/page-045.json",
+     "bytes": 223711,
+     "mtime": "2026-10-25T20:03:26-07:00",
+     "sha256": "5a82183b07c8471a46be67b41fbcaef6332364212392589812b07b4df8f21dc6"
+    },
+    {
+     "path": "data/raw/cima/page-046.json",
+     "bytes": 227796,
+     "mtime": "2026-10-25T20:03:28-07:00",
+     "sha256": "f8f2ab43ca29706b92881ae18e892f105aa9df0debd09de2c0c76180a8b2f08e"
+    },
+    {
+     "path": "data/raw/cima/page-047.json",
+     "bytes": 225195,
+     "mtime": "2026-10-25T20:03:30-07:00",
+     "sha256": "821c27a1a77c2ba80bcf1f9546c424a5f5d6845821c4cc8f8e612676c73b0bc9"
+    },
+    {
+     "path": "data/raw/cima/page-048.json",
+     "bytes": 227503,
+     "mtime": "2026-10-25T20:03:32-07:00",
+     "sha256": "93384f228f6d208ae8f2d72e5cdec1a8211809e89fa05bc10de8914dd07f9099"
+    },
+    {
+     "path": "data/raw/cima/page-049.json",
+     "bytes": 231128,
+     "mtime": "2026-10-25T20:03:34-07:00",
+     "sha256": "aa5cafdb8fd70f57c60bbf5aa48ec91b0030e41c6a908417161ea62c37ef952a"
+    },
+    {
+     "path": "data/raw/cima/page-050.json",
+     "bytes": 224600,
+     "mtime": "2026-10-25T20:03:36-07:00",
+     "sha256": "618c8ccbcf28ed651b5695969e5b1e6a1950805de099b52e5e5fd36e619a9e86"
+    },
+    {
+     "path": "data/raw/cima/page-051.json",
+     "bytes": 225082,
+     "mtime": "2026-10-25T20:03:38-07:00",
+     "sha256": "86f0441c63c3eb0dcfeb4707128adad6eb2092876f29405cfcde1c8dc993329b"
+    },
+    {
+     "path": "data/raw/cima/page-052.json",
+     "bytes": 224320,
+     "mtime": "2026-10-25T20:03:40-07:00",
+     "sha256": "c0c19b720a8bb6b395017588ab659ac3df32a57cb4b5895767fd6bb7fd98339e"
+    },
+    {
+     "path": "data/raw/cima/page-053.json",
+     "bytes": 221356,
+     "mtime": "2026-10-25T20:03:42-07:00",
+     "sha256": "efc32c32d22420d6ebe88463cef7771954cc7f3698afeeba3dbdbcf9ce36acf0"
+    },
+    {
+     "path": "data/raw/cima/page-054.json",
+     "bytes": 223850,
+     "mtime": "2026-10-25T20:03:44-07:00",
+     "sha256": "c1474d12ee5e6c0e7dcb88cc30bb775405746fc83f6cd9fb735d4cd3d4ec57a3"
+    },
+    {
+     "path": "data/raw/cima/page-055.json",
+     "bytes": 226403,
+     "mtime": "2026-10-25T20:03:46-07:00",
+     "sha256": "f89ccd0ecde605e1b8bf1e84c6db8f25f7a99d3496beaa72f95d9714f9dc4982"
+    },
+    {
+     "path": "data/raw/cima/page-056.json",
+     "bytes": 225828,
+     "mtime": "2026-10-25T20:03:48-07:00",
+     "sha256": "624cf14d344af21ea141ec6cd80b3db157e468d320b1613de6230a0df850db39"
+    },
+    {
+     "path": "data/raw/cima/page-057.json",
+     "bytes": 227535,
+     "mtime": "2026-10-25T20:03:50-07:00",
+     "sha256": "cbae651c6ec0f5d49eab5144115a482a58c8ef7c50d471f57e21908d54f642c1"
+    },
+    {
+     "path": "data/raw/cima/page-058.json",
+     "bytes": 226772,
+     "mtime": "2026-10-25T20:03:52-07:00",
+     "sha256": "d5de832b39ae26b59bd597d767311b0784282e54428fe7a5ee7cd0d80d8dc166"
+    },
+    {
+     "path": "data/raw/cima/page-059.json",
+     "bytes": 224244,
+     "mtime": "2026-10-25T20:03:54-07:00",
+     "sha256": "228790e30d2b46ba2ec43e6cfaa7d65e3a14870949ac0e2a1517a3b820d5930e"
+    },
+    {
+     "path": "data/raw/cima/page-060.json",
+     "bytes": 229546,
+     "mtime": "2026-10-25T20:03:56-07:00",
+     "sha256": "860c66f4fa1b47231d363e9b2b3421bd106624e8eaa8fbcb9dd9845aa7ae48c2"
+    },
+    {
+     "path": "data/raw/cima/page-061.json",
+     "bytes": 226786,
+     "mtime": "2026-10-25T20:03:58-07:00",
+     "sha256": "1625416217deeff8756c96b3981b0576a8e6795a99b47c32191fae3b0b64eb46"
+    },
+    {
+     "path": "data/raw/cima/page-062.json",
+     "bytes": 220809,
+     "mtime": "2026-10-25T20:04:00-07:00",
+     "sha256": "bcd2a3a9df63022851a14e76211558caa1ee7088a784761b25ad723c85979bd5"
+    },
+    {
+     "path": "data/raw/cima/page-063.json",
+     "bytes": 226181,
+     "mtime": "2026-10-25T20:04:02-07:00",
+     "sha256": "bdf5fa78e05afd4c23725a992203191930a56f959fddcc32d7bbce5b2c4f848f"
+    },
+    {
+     "path": "data/raw/cima/page-064.json",
+     "bytes": 225583,
+     "mtime": "2026-10-25T20:04:04-07:00",
+     "sha256": "7bceb831e37300d8b8d0045e6331e02ef528dd4d911c1e52f1ad90201bd50960"
+    },
+    {
+     "path": "data/raw/cima/page-065.json",
+     "bytes": 224981,
+     "mtime": "2026-10-25T20:04:06-07:00",
+     "sha256": "76cee47259e3c93e4fdc6c2349de845cc624f8c05cc89ddf7c6a2a7477cd1af2"
+    },
+    {
+     "path": "data/raw/cima/page-066.json",
+     "bytes": 227754,
+     "mtime": "2026-10-25T20:04:08-07:00",
+     "sha256": "c48c1f510729002feb835915bd195d1dc91ecf7b15a277eebf7e4ba62adaa4e2"
+    },
+    {
+     "path": "data/raw/cima/page-067.json",
+     "bytes": 224555,
+     "mtime": "2026-10-25T20:04:11-07:00",
+     "sha256": "02cd6e89e81b06a3a402a95b60a2c95252f787b134545bab5c2a2a76e059e5e6"
+    },
+    {
+     "path": "data/raw/cima/page-068.json",
+     "bytes": 231307,
+     "mtime": "2026-10-25T20:04:13-07:00",
+     "sha256": "0836cf9f1dfbf33c2b07258eba67795690123374ec4bc9412138ac89712518a1"
+    },
+    {
+     "path": "data/raw/cima/page-069.json",
+     "bytes": 227042,
+     "mtime": "2026-10-25T20:04:15-07:00",
+     "sha256": "86c4b1bb29fdcf6951e85ac0771860fff4c3772d4f6d332f13c3f7fb656a1677"
+    },
+    {
+     "path": "data/raw/cima/page-070.json",
+     "bytes": 227218,
+     "mtime": "2026-10-25T20:04:17-07:00",
+     "sha256": "8754293fa556c09b73084165ea7ef6107219fe9237510dd7acc484e0613ccc49"
+    },
+    {
+     "path": "data/raw/cima/page-071.json",
+     "bytes": 227005,
+     "mtime": "2026-10-25T20:04:19-07:00",
+     "sha256": "7019599b064ae879c1315249488d2af9a531a9461308a6a382407043c9366b89"
+    },
+    {
+     "path": "data/raw/cima/page-072.json",
+     "bytes": 217877,
+     "mtime": "2026-10-25T20:04:21-07:00",
+     "sha256": "2a90a296caf6cc67b80fa930d3e567d200cedb85780494667651f7aceb2e6ef1"
+    },
+    {
+     "path": "data/raw/cima/page-073.json",
+     "bytes": 224392,
+     "mtime": "2026-10-25T20:04:23-07:00",
+     "sha256": "038b38a7f927c044147bd70f73d63c11713a2c42d95dc5e4393be7fb25796a7f"
+    },
+    {
+     "path": "data/raw/cima/page-074.json",
+     "bytes": 231239,
+     "mtime": "2026-10-25T20:04:25-07:00",
+     "sha256": "cb825cb902429b2d4eb4a6806f975c46c7d20bb24e9e984829fbec961e88d11c"
+    },
+    {
+     "path": "data/raw/cima/page-075.json",
+     "bytes": 223823,
+     "mtime": "2026-10-25T20:04:27-07:00",
+     "sha256": "47c552e3278349789e2699992e6bc0b3f2497d2c13d0d5b47c1fca528ebbdec7"
+    },
+    {
+     "path": "data/raw/cima/page-076.json",
+     "bytes": 229611,
+     "mtime": "2026-10-25T20:04:29-07:00",
+     "sha256": "4798661204ed95dc6ec8663029bb3093cfd987769fa5bc12cea9cd12111d49fe"
+    },
+    {
+     "path": "data/raw/cima/page-077.json",
+     "bytes": 224535,
+     "mtime": "2026-10-25T20:04:31-07:00",
+     "sha256": "462da148c19565d173fa622094605497d363530451a815f92734ad101c8f53d7"
+    },
+    {
+     "path": "data/raw/cima/page-078.json",
+     "bytes": 228144,
+     "mtime": "2026-10-25T20:04:33-07:00",
+     "sha256": "72369e99b71e84ca92424b50eaae69670c9e1c8d22f5a99624538eac01ee241c"
+    },
+    {
+     "path": "data/raw/cima/page-079.json",
+     "bytes": 227536,
+     "mtime": "2026-10-25T20:04:35-07:00",
+     "sha256": "39d87d43b46508698b217bdfae2f2c025e7c5b07fe1d77d3cc311b84d1f74309"
+    },
+    {
+     "path": "data/raw/cima/page-080.json",
+     "bytes": 227481,
+     "mtime": "2026-10-25T20:04:37-07:00",
+     "sha256": "02ffc5d87bcbbdee6bd5fd733cb97469309363d18bc5ba5251ef56832ada4bc0"
+    },
+    {
+     "path": "data/raw/cima/page-081.json",
+     "bytes": 227017,
+     "mtime": "2026-10-25T20:04:39-07:00",
+     "sha256": "a194ebe9f93dd08c0ea2000c91fe4d41998e5683f1d8a7f5332644a3e9091bbe"
+    },
+    {
+     "path": "data/raw/cima/page-082.json",
+     "bytes": 221594,
+     "mtime": "2026-10-25T20:04:41-07:00",
+     "sha256": "5dc0efd92c1600b0b63f538820a7de98e1ea4b79e070771742668378cc747908"
+    },
+    {
+     "path": "data/raw/cima/page-083.json",
+     "bytes": 226200,
+     "mtime": "2026-10-25T20:04:43-07:00",
+     "sha256": "b10b8d32fd36db41ece2b63d03ea43fb27c2dc86bae457d58daf0b5e15d40f9d"
+    },
+    {
+     "path": "data/raw/cima/page-084.json",
+     "bytes": 235305,
+     "mtime": "2026-10-25T20:04:45-07:00",
+     "sha256": "021fbf461477b0f50dcbd9f5ac80b2e419aa87fee9434e34d10edc3b6bb89b45"
+    },
+    {
+     "path": "data/raw/cima/page-085.json",
+     "bytes": 230106,
+     "mtime": "2026-10-25T20:04:47-07:00",
+     "sha256": "3b166a2d11a8c02bcd74143ba8149b37e24e9f609e2599e88e3679ff7a5da28d"
+    },
+    {
+     "path": "data/raw/cima/page-086.json",
+     "bytes": 229099,
+     "mtime": "2026-10-25T20:04:49-07:00",
+     "sha256": "a2eadc510df74c407db0a323d502667ec563ea6618612d7ae29d031574812c3b"
+    },
+    {
+     "path": "data/raw/cima/page-087.json",
+     "bytes": 225391,
+     "mtime": "2026-10-25T20:04:51-07:00",
+     "sha256": "d51c76c186c8f188c38a3eb31fa66c0d5808e0da4916909ebb1feb6adb4c8d9d"
+    },
+    {
+     "path": "data/raw/cima/page-088.json",
+     "bytes": 218894,
+     "mtime": "2026-10-25T20:04:53-07:00",
+     "sha256": "aa74b23cc99c5a8dfbc90f9acf9452c07eaa0ced661c054736939e0a8bba629a"
+    },
+    {
+     "path": "data/raw/cima/page-089.json",
+     "bytes": 228946,
+     "mtime": "2026-10-25T20:04:55-07:00",
+     "sha256": "815072b07bf82f9d51e478d5aa3d93fb2bedda8ed2a25d362bb29dcc8995a3e8"
+    },
+    {
+     "path": "data/raw/cima/page-090.json",
+     "bytes": 221881,
+     "mtime": "2026-10-25T20:04:57-07:00",
+     "sha256": "328724fecf3833bd6d4d72b1864fd991168d4bb5dd3d5c723bdafc09d9e366dc"
+    },
+    {
+     "path": "data/raw/cima/page-091.json",
+     "bytes": 226265,
+     "mtime": "2026-10-25T20:04:59-07:00",
+     "sha256": "db5dfd6863e05a8071b9406b32b5a3bccec1cc92034feb57382d68210466bd6e"
+    },
+    {
+     "path": "data/raw/cima/page-092.json",
+     "bytes": 223185,
+     "mtime": "2026-10-25T20:05:02-07:00",
+     "sha256": "2723abd5bc15ac11b9ea0e2c07c68840ba2ea77aa36662aba1b0898e45991213"
+    },
+    {
+     "path": "data/raw/cima/page-093.json",
+     "bytes": 227780,
+     "mtime": "2026-10-25T20:05:03-07:00",
+     "sha256": "4f175c0f49244766ca4ed82a26081f71d210dae15258284687c906ee605c6396"
+    },
+    {
+     "path": "data/raw/cima/page-094.json",
+     "bytes": 226611,
+     "mtime": "2026-10-25T20:05:05-07:00",
+     "sha256": "1c39217b822b7a61cb01c901ced0922e689fff21f071c6097d8ac65839b9e38d"
+    },
+    {
+     "path": "data/raw/cima/page-095.json",
+     "bytes": 227949,
+     "mtime": "2026-10-25T20:05:07-07:00",
+     "sha256": "3c5111eefe04d6cc298c7c0e5e088877b976d21cec89943ce4b5bb3e45c0c28b"
+    },
+    {
+     "path": "data/raw/cima/page-096.json",
+     "bytes": 224692,
+     "mtime": "2026-10-25T20:05:09-07:00",
+     "sha256": "73885a4cf0ee50fc15c381b48080cda32d4a804548f1134c29586609404c6abd"
+    },
+    {
+     "path": "data/raw/cima/page-097.json",
+     "bytes": 223435,
+     "mtime": "2026-10-25T20:05:12-07:00",
+     "sha256": "6302431d10ec608af66eff4f77673cf160900e4bd29aa42736f5e807096367fa"
+    },
+    {
+     "path": "data/raw/cima/page-098.json",
+     "bytes": 229990,
+     "mtime": "2026-10-25T20:05:14-07:00",
+     "sha256": "0b6c49c5b29e3e27c817b649929f3eab5532c157adef0632ce5a5cd2250ee788"
+    },
+    {
+     "path": "data/raw/cima/page-099.json",
+     "bytes": 228937,
+     "mtime": "2026-10-25T20:05:16-07:00",
+     "sha256": "c76e1f479b3a5f90783726709faefa05e2955576cc2db00d277103495cf0a4f7"
+    },
+    {
+     "path": "data/raw/cima/page-100.json",
+     "bytes": 222876,
+     "mtime": "2026-10-25T20:05:18-07:00",
+     "sha256": "1c7dc4f8a99e35fd893f9c907f8b3fc4b6f01186802b6c19f26e3411a0591fe8"
+    },
+    {
+     "path": "data/raw/cima/page-101.json",
+     "bytes": 225994,
+     "mtime": "2026-10-25T20:05:19-07:00",
+     "sha256": "846c30ab47f521bf1beda884205fda3a5e0aea178c4afd3eee11d4ff4d75e5d6"
+    },
+    {
+     "path": "data/raw/cima/page-102.json",
+     "bytes": 227770,
+     "mtime": "2026-10-25T20:05:21-07:00",
+     "sha256": "f47d7ca384cafae812a320b2272eb572eb5254cfe76c58809bf47f4bf33bb566"
+    },
+    {
+     "path": "data/raw/cima/page-103.json",
+     "bytes": 230423,
+     "mtime": "2026-10-25T20:05:23-07:00",
+     "sha256": "251af6d3eb34413fceae34da1d616a01f68f99ea7ada3389c6b4362f78b67ef8"
+    },
+    {
+     "path": "data/raw/cima/page-104.json",
+     "bytes": 221835,
+     "mtime": "2026-10-25T20:05:25-07:00",
+     "sha256": "2b61f1e0d36f1a736c32059720310ef47bf93225b65db5cae5c630ac3e559447"
+    },
+    {
+     "path": "data/raw/cima/page-105.json",
+     "bytes": 226742,
+     "mtime": "2026-10-25T20:05:27-07:00",
+     "sha256": "c4e33ba83b39eb5c754a050f8de91824f1b63a94b2b6fa5d2a231dcd85d83f17"
+    },
+    {
+     "path": "data/raw/cima/page-106.json",
+     "bytes": 226889,
+     "mtime": "2026-10-25T20:05:29-07:00",
+     "sha256": "7d64e2b005ff2b7fda8b161872bb3e8e3ad84fa5c6125372f51e72925e37c8d6"
+    },
+    {
+     "path": "data/raw/cima/page-107.json",
+     "bytes": 226105,
+     "mtime": "2026-10-25T20:05:31-07:00",
+     "sha256": "aa83f4c7fb11b98b02900dcb9a28d07ed5507527379f1894e2aa259eb2235242"
+    },
+    {
+     "path": "data/raw/cima/page-108.json",
+     "bytes": 222943,
+     "mtime": "2026-10-25T20:05:33-07:00",
+     "sha256": "989bece96de42032afa56c2e1a3ad2b37bc12a18f36248686cb9bf0dca3df0ba"
+    },
+    {
+     "path": "data/raw/cima/page-109.json",
+     "bytes": 228659,
+     "mtime": "2026-10-25T20:05:35-07:00",
+     "sha256": "f16cf0d7ca68f87eb3b287a69f5b7134e05009df5485ebb45c8adf1257af4121"
+    },
+    {
+     "path": "data/raw/cima/page-110.json",
+     "bytes": 227928,
+     "mtime": "2026-10-25T20:05:37-07:00",
+     "sha256": "16d54c48c3f042f524084c961837b2b5c33a3faebc87677239d85421bcdd084f"
+    },
+    {
+     "path": "data/raw/cima/page-111.json",
+     "bytes": 228260,
+     "mtime": "2026-10-25T20:05:39-07:00",
+     "sha256": "e8366eff7676f079f4d9b11f1a72c86cb707ccc803140bf46a02a539fb21089b"
+    },
+    {
+     "path": "data/raw/cima/page-112.json",
+     "bytes": 230156,
+     "mtime": "2026-10-25T20:05:41-07:00",
+     "sha256": "9f883ea9578c3b81a8064e36c850192cc05e1bc03259393be06ef84bfa14d5f5"
+    },
+    {
+     "path": "data/raw/cima/page-113.json",
+     "bytes": 227503,
+     "mtime": "2026-10-25T20:05:43-07:00",
+     "sha256": "7eab03f7adb88a26d1ae2819835ce92dbace052e93885ca5478aac17bea0aeb0"
+    },
+    {
+     "path": "data/raw/cima/page-114.json",
+     "bytes": 228529,
+     "mtime": "2026-10-25T20:05:45-07:00",
+     "sha256": "656020170f774084b28b66e1a3e3f23332710c1cca065029e2e9081160b7a722"
+    },
+    {
+     "path": "data/raw/cima/page-115.json",
+     "bytes": 226067,
+     "mtime": "2026-10-25T20:05:48-07:00",
+     "sha256": "a5005b9477d8d2d1a1ab764ada7f905615f0c2fc26da8610f6bfba2a6af07fdd"
+    },
+    {
+     "path": "data/raw/cima/page-116.json",
+     "bytes": 199815,
+     "mtime": "2026-10-25T20:05:50-07:00",
+     "sha256": "ad6b53389eb83c2af5447be791b834150ecbd433f94dfbbfbee8852717c45862"
+    },
+    {
+     "path": "data/raw/cima/page-117.json",
+     "bytes": 177711,
+     "mtime": "2026-10-25T20:05:52-07:00",
+     "sha256": "4651398384fb12ff1016415116caa0cd5387e106fcdfd3c3105f74ea1efc31b0"
+    },
+    {
+     "path": "data/raw/cima/page-118.json",
+     "bytes": 173734,
+     "mtime": "2026-10-25T20:05:53-07:00",
+     "sha256": "ed1a75613f5748dc2930fca4ba8018a2fcaddcd4b37dd5faa79c4fb779ea273b"
+    },
+    {
+     "path": "data/raw/cima/page-119.json",
+     "bytes": 174402,
+     "mtime": "2026-10-25T20:05:55-07:00",
+     "sha256": "dad595f349b5e46ac72423c3d8a4ef55b1cb2f3116563e8b45af42346761b2d8"
+    },
+    {
+     "path": "data/raw/cima/page-120.json",
+     "bytes": 175023,
+     "mtime": "2026-10-25T20:05:57-07:00",
+     "sha256": "15ef48cad8214fa1663f203de4fccc67506d732fb6925c832b7b19fabd5bc68e"
+    },
+    {
+     "path": "data/raw/cima/page-121.json",
+     "bytes": 186277,
+     "mtime": "2026-10-25T20:05:59-07:00",
+     "sha256": "b586e3c35403ec273f77d92c20162ce3649c319582f2a583b5e7d74791fc9cc1"
+    },
+    {
+     "path": "data/raw/cima/page-122.json",
+     "bytes": 192084,
+     "mtime": "2026-10-25T20:06:01-07:00",
+     "sha256": "32061b785fc1bfafe5e8494e380c453515f49c0754c98e6e5d8cfb0254ee612a"
+    },
+    {
+     "path": "data/raw/cima/page-123.json",
+     "bytes": 196762,
+     "mtime": "2026-10-25T20:06:03-07:00",
+     "sha256": "cba5b4297d654d090935f2795f0b5004a2515d8e5e49a1d6547d1eeb648f81a0"
+    },
+    {
+     "path": "data/raw/cima/page-124.json",
+     "bytes": 197651,
+     "mtime": "2026-10-25T20:06:05-07:00",
+     "sha256": "5210b09735f7fae1163a374216f629f313c036c2a03d65fb89c3b731e87c73c3"
+    },
+    {
+     "path": "data/raw/cima/page-125.json",
+     "bytes": 192230,
+     "mtime": "2026-10-25T20:06:07-07:00",
+     "sha256": "1592c169496f007d57089cb27e4be2c0b35e098e52b93ea0928cdcddefb151f4"
+    },
+    {
+     "path": "data/raw/cima/page-126.json",
+     "bytes": 196217,
+     "mtime": "2026-10-25T20:06:09-07:00",
+     "sha256": "a50fffbe6ce546e514ed9a0d3c8274902c3e9a84997443960d6e40f8d6f296da"
+    },
+    {
+     "path": "data/raw/cima/page-127.json",
+     "bytes": 194988,
+     "mtime": "2026-10-25T20:06:11-07:00",
+     "sha256": "11f2c8829b8e600aa740fa28a746031c77e06bf03444642682f8ddc99599fe39"
+    },
+    {
+     "path": "data/raw/cima/page-128.json",
+     "bytes": 99609,
+     "mtime": "2026-10-25T20:06:13-07:00",
+     "sha256": "18396db4ed2864156302f5ec20141d9e90b35ff67989016bf40db294e92b679b"
+    },
+    {
+     "path": "data/raw/cima/page-129.json",
+     "bytes": 65,
+     "mtime": "2026-10-25T20:06:14-07:00",
+     "sha256": "ed436fcca06e379303f00685bb6bf836f224e319d3f3d8b03868fab714c11b39"
+    }
+   ],
+   "fetched_at": "2026-10-25T20:06:14-07:00",
+   "note": "1,937 个分页 JSON；rows = 各页 resultados 之和；首页 totalFilas 记入 meta"
+  },
+  "mx_cofepris": {
+   "label": "MX COFEPRIS（CSV + PDF）",
+   "parts": {
+    "alopaticos": {
+     "rows": 9838,
+     "fields": [
+      "src_year",
+      "src_file",
+      "page",
+      "registro",
+      "brand",
+      "generic",
+      "form",
+      "holder",
+      "class226",
+      "vigencia",
+      "estado"
+     ],
+     "enums": {},
+     "count_mode": "csv",
+     "files": [
+      "data/raw/mx/cofepris_alopaticos.csv"
+     ]
+    },
+    "prorrogas": {
+     "rows": 2612,
+     "fields": [
+      "registro",
+      "brand",
+      "generic",
+      "form",
+      "class226",
+      "holder",
+      "vigencia",
+      "src_year",
+      "src_file"
+     ],
+     "enums": {},
+     "count_mode": "csv",
+     "files": [
+      "data/raw/mx/cofepris_prorrogas.csv"
+     ]
+    },
+    "status": {
+     "rows": 2033,
+     "fields": [
+      "src_year",
+      "src_file",
+      "kind",
+      "registro",
+      "brand",
+      "generic",
+      "form",
+      "holder",
+      "cause",
+      "estatus",
+      "page"
+     ],
+     "enums": {},
+     "count_mode": "csv",
+     "files": [
+      "data/raw/mx/cofepris_status.csv"
+     ]
+    },
+    "profeco": {
+     "rows": 150876,
+     "fields": [
+      "producto",
+      "presentacion",
+      "marca",
+      "precio",
+      "fecha_registro"
+     ],
+     "enums": {},
+     "count_mode": "csv",
+     "files": [
+      "data/raw/mx/profeco_medicamentos.csv"
+     ]
+    },
+    "profeco_all": {
+     "rows": 1007,
+     "fields": [
+      "producto",
+      "presentacion",
+      "marca",
+      "precio",
+      "fecha",
+      "year"
+     ],
+     "enums": {},
+     "count_mode": "csv",
+     "files": [
+      "data/raw/mx/profeco_all.csv"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/mx/cofepris_alopaticos.csv",
+     "bytes": 1147302,
+     "mtime": "2026-10-25T20:10:19-07:00",
+     "sha256": "26df861c5b15b9861cb251f6afaa050007c41666f3a28db7a06f9ef9dc995153"
+    },
+    {
+     "path": "data/raw/mx/cofepris_prorrogas.csv",
+     "bytes": 346816,
+     "mtime": "2026-10-25T20:42:46-07:00",
+     "sha256": "0214b1fede893ff02c4efe858071ee3126ee401bba3e1f57baceef924a1e6101"
+    },
+    {
+     "path": "data/raw/mx/cofepris_status.csv",
+     "bytes": 361100,
+     "mtime": "2026-10-25T20:10:56-07:00",
+     "sha256": "cbddcdaa623a31aaaa7d47e06dbb4b3fa8bbc4a7588b1559f94b24cb2b637ec5"
+    },
+    {
+     "path": "data/raw/mx/profeco_all.csv",
+     "bytes": 83453,
+     "mtime": "2026-10-25T20:57:26-07:00",
+     "sha256": "37c92f0c70a76f5bd1ec85fd2ec2bb018d167f9452702659bc377be2f70a4051"
+    },
+    {
+     "path": "data/raw/mx/profeco_medicamentos.csv",
+     "bytes": 11143305,
+     "mtime": "2026-10-25T20:45:06-07:00",
+     "sha256": "ec8ca422b3e1018cec94c3f6ccd0e2e642fa2e807f27d312a0ecae4b945a3b71"
+    }
+   ],
+   "fetched_at": "2026-10-25T20:57:26-07:00"
+  },
+  "cn_nhsa": {
+   "label": "CN 国家医保局 NHSA",
+   "parts": {
+    "codes_20250404": {
+     "rows": 252097,
+     "fields": [
+      "药品代码",
+      "编号",
+      "注册名称",
+      "注册剂型",
+      "注册规格",
+      "商品名称",
+      "剂型",
+      "规格",
+      "包装材质",
+      "最小包装数量",
+      "最小制剂单位",
+      "最小包装单位",
+      "药品企业",
+      "批准文号",
+      "药品本位码",
+      "甲乙类",
+      "医保编号",
+      "药品名称",
+      "医保剂型",
+      "备注"
+     ],
+     "enums": {
+      "甲乙类": {
+       "": 90483,
+       "乙": 84133,
+       "甲": 77481
+      }
+     },
+     "count_mode": "csv",
+     "files": [
+      "data/raw/nhsa/nhsa_codes_20250404.csv"
+     ]
+    },
+    "codes_20240105": {
+     "rows": 234370,
+     "fields": [
+      "药品代码",
+      "编号",
+      "注册名称",
+      "注册剂型",
+      "注册规格",
+      "商品名称",
+      "剂型",
+      "规格",
+      "包装材质",
+      "最小包装数量",
+      "最小制剂单位",
+      "最小包装单位",
+      "药品企业",
+      "批准文号",
+      "药品本位码",
+      "甲乙类",
+      "医保编号",
+      "药品名称",
+      "医保剂型",
+      "备注"
+     ],
+     "enums": {},
+     "count_mode": "csv",
+     "files": [
+      "data/raw/nhsa/nhsa_codes_20240105.csv"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/nhsa/nhsa_codes_20240105.csv",
+     "bytes": 56306138,
+     "mtime": "2026-10-25T19:59:35-07:00",
+     "sha256": "78f184d5a3ed9b8edbad500cba39f359d8d907ad10a128de041002f22a8d9a79"
+    },
+    {
+     "path": "data/raw/nhsa/nhsa_codes_20250404.csv",
+     "bytes": 61837126,
+     "mtime": "2026-10-25T20:14:45-07:00",
+     "sha256": "ad9b9c834e6562fc1214c212577c0b788cea9cee565e5a95e2b08ba8e1d9f538"
+    }
+   ],
+   "fetched_at": "2026-10-25T20:14:45-07:00",
+   "note": "rows 为医保代码行数；PDF 不进本监控（只做文件清单）"
+  },
+  "tw_tfda": {
+   "label": "TW TFDA 藥品許可證",
+   "parts": {
+    "tfda_36_csv": {
+     "rows": 72096,
+     "fields": [
+      "許可證字號",
+      "註銷狀態",
+      "註銷日期",
+      "註銷理由",
+      "有效日期",
+      "發證日期",
+      "許可證種類",
+      "舊證字號",
+      "通關簽審文件編號",
+      "中文品名",
+      "英文品名",
+      "適應症",
+      "劑型",
+      "包裝",
+      "藥品類別",
+      "管制藥品分類級別",
+      "主成分略述",
+      "申請商名稱",
+      "申請商地址",
+      "申請商統一編號",
+      "製造商名稱",
+      "製造廠廠址",
+      "製造廠公司地址",
+      "製造廠國別",
+      "製程",
+      "異動日期",
+      "用法用量",
+      "包裝與國際條碼"
+     ],
+     "enums": {
+      "註銷狀態": {
+       "已註銷": 45705,
+       "": 26230,
+       "已廢止": 161
+      },
+      "藥品類別": {
+       "須由醫師處方使用": 29764,
+       "限由醫師使用": 13273,
+       "製劑原料": 12183,
+       "醫師藥師藥劑生指示藥品": 8458,
+       "須經醫師指示使用": 5842,
+       "自用製劑原料": 982,
+       "成藥": 681,
+       "由醫師或檢驗師使用": 355,
+       "乙類成藥": 206,
+       "調劑專用": 184,
+       "原料藥": 71,
+       "限由牙醫師使用": 50,
+       "空膠囊": 16,
+       "本藥須由醫師處方使用(限由皮膚科專科醫師使用)": 8,
+       "限由婦產科醫師處方使用": 5,
+       "限由醫師及牙醫師使用": 4,
+       "本藥限神經專科醫師使用": 4,
+       "牙醫師指示使用": 3,
+       "限麻醉醫師使用": 2,
+       "限由中醫師處方使用": 1
+      }
+     },
+     "count_mode": "csv",
+     "files": [
+      "data/raw/tw/tfda_36.csv"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/tw/tfda_36.csv",
+     "bytes": 44518983,
+     "mtime": "2026-10-28T09:46:23-07:00",
+     "sha256": "1da4d3d2edb2b61805b4c169e0dc624e95a0adb30e5853a161d976544f9d9271"
+    }
+   ],
+   "fetched_at": "2026-10-28T09:46:23-07:00",
+   "note": "以 CSV 为计数口径（tfda_36.json 79 MB 只做文件哈希）"
+  },
+  "sg_hsa": {
+   "label": "SG HSA 注册治疗产品",
+   "parts": {
+    "registered": {
+     "rows": 5511,
+     "fields": [
+      "LicenceNo",
+      "Productname",
+      "Licenseholder",
+      "Approvaldate",
+      "Forensicclassification",
+      "ATCCode",
+      "Dosageform",
+      "RouteofAdministration",
+      "Manufacturer",
+      "Countryofmanufacturer",
+      "Activeingredients",
+      "Strength",
+      "_id"
+     ],
+     "enums": {
+      "Forensicclassification": {
+       "Prescription Only": 4717,
+       "General Sale List": 486,
+       "Pharmacy Only": 308
+      }
+     },
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/sg/hsa_registered_therapeutic_products.json"
+     ]
+    },
+    "cpm_products": {
+     "rows": 11977,
+     "fields": [
+      "BrandName",
+      "ProductName",
+      "DosageForm",
+      "CompanyName",
+      "Manufacturer",
+      "CountryofManufacturer",
+      "_id"
+     ],
+     "enums": {},
+     "count_mode": "json_list",
+     "files": [
+      "data/raw/sg/hsa_cpm_products.json"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/sg/hsa_cpm_products.json",
+     "bytes": 3304020,
+     "mtime": "2026-10-28T12:32:31-07:00",
+     "sha256": "b69ba3ed5d6247a7de6f384ee0f1b10afb134cda1dadf2eedc5214ccefe6c949"
+    },
+    {
+     "path": "data/raw/sg/hsa_registered_therapeutic_products.json",
+     "bytes": 2604023,
+     "mtime": "2026-10-28T12:32:12-07:00",
+     "sha256": "93cf95e644e70e2e53c1ae4443b463050183566093f37f4071a5486fe5cfd2c9"
+    }
+   ],
+   "fetched_at": "2026-10-28T12:32:31-07:00"
+  },
+  "hk_dh": {
+   "label": "HK 衞生署藥物辦公室 註冊藥劑製品",
+   "parts": {
+    "druglist": {
+     "rows": 14275,
+     "fields": [
+      "activeIngs",
+      "permitNo",
+      "productName",
+      "regCertHolderName"
+     ],
+     "count_mode": "xml_tag:drug",
+     "files": [
+      "data/raw/hk_mo/hk_rpp_resource.xml"
+     ]
+    }
+   },
+   "files": [
+    {
+     "path": "data/raw/hk_mo/hk_rpp_resource.xml",
+     "bytes": 4297930,
+     "mtime": "2026-10-28T12:10:58-07:00",
+     "sha256": "0dacdfc40f0d188ff3e96ce045b590ec8bb98e7b0e9ddf4acb7c497788af1ace"
+    }
+   ],
+   "fetched_at": "2026-10-28T12:10:58-07:00",
+   "data_as_of": "2026-10-23"
+  }
+ }
+}

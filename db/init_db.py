@@ -6,7 +6,10 @@
 2. v0.4.2 补两个小索引 `idx_artg_name` / `idx_variant_substance`（`_ensure_indexes`，
    来自 DB 优化审计 `reports/db-optimization.md`）；
 3. `source` 表补 `data_as_of` / `data_as_of_note`（`_ensure_source_columns`）；
-4. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
+4. task-26 `substance` / `brand_family` 补溯源列 `source_id` / `method` / `confidence` /
+   `decided_at`（`_ensure_substance_columns` / `_ensure_family_columns`；旧行保持 NULL，
+   写入由 `etl/provenance.py` 负责）；
+5. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
    （US → GB → CN → ES → MX → AU → CA → **TW** → **HK**），所以每次 schema.sql 扩了枚举，这里就把
    老库里的 product 表换成新定义，数据原样搬过去。
 5. **区域层（region）**：EU = 欧盟集中审批（EMA），不是国家市场。schema 的 `product.country`
@@ -154,6 +157,40 @@ def _ensure_variant_columns(db: sqlite3.Connection) -> None:
     db.commit()
 
 
+def _ensure_substance_columns(db: sqlite3.Connection) -> None:
+    """task-26：给已有库补 substance 溯源列（旧行保持 NULL，不伪造来源）。"""
+    have = {r[1] for r in db.execute("PRAGMA table_info(substance)")}
+    if not have:                       # 空库还没建 substance（schema 建表时会带全列）
+        return
+    for name, ddl in (
+        ("source_id", "TEXT"),
+        ("method", "TEXT CHECK (method IN ('rule', 'multi-source', 'editorial', 'imported'))"),
+        ("confidence", "TEXT CHECK (confidence IN ('high', 'medium', 'low', 'unknown'))"),
+        ("decided_at", "TEXT"),
+    ):
+        if name not in have:
+            db.execute(f"ALTER TABLE substance ADD COLUMN {name} {ddl}")
+            print(f"迁移 substance 表：新增列 {name}")
+    db.commit()
+
+
+def _ensure_family_columns(db: sqlite3.Connection) -> None:
+    """task-26：给已有库补 brand_family 溯源列（品牌家族是人工表，method 固定 editorial）。"""
+    have = {r[1] for r in db.execute("PRAGMA table_info(brand_family)")}
+    if not have:
+        return
+    for name, ddl in (
+        ("source_id", "TEXT"),
+        ("method", "TEXT CHECK (method IN ('rule', 'multi-source', 'editorial', 'imported'))"),
+        ("confidence", "TEXT CHECK (confidence IN ('high', 'medium', 'low', 'unknown'))"),
+        ("decided_at", "TEXT"),
+    ):
+        if name not in have:
+            db.execute(f"ALTER TABLE brand_family ADD COLUMN {name} {ddl}")
+            print(f"迁移 brand_family 表：新增列 {name}")
+    db.commit()
+
+
 def _ensure_indexes(db: sqlite3.Connection) -> None:
     """v0.4.2：给已有库补 DB 优化审计落地的两个小索引（幂等）。"""
     for ddl in (
@@ -247,6 +284,8 @@ def build(db_path: Path) -> sqlite3.Connection:
     db.commit()
     _ensure_source_columns(db)
     _ensure_variant_columns(db)
+    _ensure_substance_columns(db)
+    _ensure_family_columns(db)
     _ensure_indexes(db)
     print(f"init_db 完成：{db_path}（{time.perf_counter() - t0:.2f}s）")
     return db

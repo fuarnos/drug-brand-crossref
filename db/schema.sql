@@ -50,7 +50,13 @@ CREATE TABLE IF NOT EXISTS substance (
     drug_class    TEXT,
     ddd_value     REAL,
     ddd_unit      TEXT,
-    ddd_route     TEXT
+    ddd_route     TEXT,
+    -- task-26 溯源（主名决策）：规则自动定案 + 多源交叉，不等于人工复核。
+    -- 旧数据（迁移前）一律 NULL = 来源未记录，不伪造；写入由 etl/provenance.py 统一负责。
+    source_id     TEXT,
+    method        TEXT CHECK (method IN ('rule', 'multi-source', 'editorial', 'imported')),
+    confidence    TEXT CHECK (confidence IN ('high', 'medium', 'low', 'unknown')),
+    decided_at    TEXT
 );
 
 -- L1b 盐型 / 水合物 / 酯：可替代性判定的最小单位
@@ -302,7 +308,12 @@ CREATE INDEX IF NOT EXISTS idx_confusable_b ON confusable_pair (b_substance_id);
 CREATE TABLE IF NOT EXISTS brand_family (
     family_id  TEXT PRIMARY KEY,
     label      TEXT NOT NULL,
-    note       TEXT
+    note       TEXT,
+    -- task-26 溯源：品牌家族是唯一人工表（data/seed_families.py），method 固定 editorial。
+    source_id     TEXT,
+    method        TEXT CHECK (method IN ('rule', 'multi-source', 'editorial', 'imported')),
+    confidence    TEXT CHECK (confidence IN ('high', 'medium', 'low', 'unknown')),
+    decided_at    TEXT
 );
 
 CREATE TABLE IF NOT EXISTS name_family (
