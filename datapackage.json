@@ -3,8 +3,8 @@
   "name": "drug-brand-crossref-derived",
   "title": "Medicine Brand Cross-Reference — derived data package",
   "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
-  "version": "v0.9.3",
-  "created": "2026-10-29T21:05:49Z",
+  "version": "v0.9.4",
+  "created": "2026-10-29T22:06:33Z",
   "homepage": "https://fuarnos.github.io/drug-brand-crossref/",
   "licenses": [
     {
@@ -577,8 +577,8 @@
       "path": "data/exports/substances.csv",
       "format": "csv",
       "mediatype": "text/csv",
-      "bytes": 705343,
-      "hash": "sha256:538362dbfce8a96119a1d1794bfe589fb38c88842fdb4368853459ec37a23e8c",
+      "bytes": 743300,
+      "hash": "sha256:ce5e9e999ff712a1c25e90de6e08728d43d2e3c42d3e9453780351bcdae30485",
       "count": 12649,
       "schema": {
         "fields": [
@@ -596,6 +596,10 @@
           },
           {
             "name": "atc",
+            "type": "string"
+          },
+          {
+            "name": "name_lang",
             "type": "string"
           }
         ]

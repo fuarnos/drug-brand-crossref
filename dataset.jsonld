@@ -4,7 +4,7 @@
   "name": "Medicine Brand Cross-Reference — derived data",
   "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
   "url": "https://fuarnos.github.io/drug-brand-crossref/datapackage.json",
-  "version": "v0.9.3",
+  "version": "v0.9.4",
   "dateModified": "2026-10-29",
   "license": "https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/数据溯源与许可.md",
   "creator": {
@@ -40,7 +40,7 @@
       "name": "substances",
       "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/substances.csv",
       "encodingFormat": "text/csv",
-      "contentSize": 705343
+      "contentSize": 743300
     },
     {
       "@type": "DataDownload",
