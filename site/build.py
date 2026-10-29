@@ -735,6 +735,143 @@ LABEL_I18N = {
         "unit.ug": "mcg", "unit.microgram": "mcg", "unit.万iu": "10 萬 IU",
     },
 }
+# v0.9.4 A4：每市场覆盖与新鲜度页（只列事实，不做等价/用药判断）。
+COVERAGE_I18N = {
+    "en": {
+        "nav.coverage": "Coverage",
+        "meta.coverage.title": "Coverage & freshness · Medicine Brand Cross-Reference",
+        "meta.coverage.desc": ("Products, ingredient mapping, spec coverage, last sync and known gaps "
+                               "for each market; figures are computed from the current database."),
+        "coverage.title": "Coverage & freshness",
+        "coverage.intro": ("What each market contributes, how complete it is, and when it was last "
+                           "synced. Counts are records, not unique medicines; a blank/0% means the "
+                           "source does not publish that field."),
+        "coverage.notice": ("This page lists data facts only. It does not imply that products are "
+                            "interchangeable, on sale, or equivalent across markets."),
+        "coverage.col.market": "Market",
+        "coverage.col.products": "Products",
+        "coverage.col.mapping": "Ingredient mapped",
+        "coverage.col.spec": "Spec coverage",
+        "coverage.col.last": "Last sync",
+        "coverage.col.asof": "Data as of",
+        "coverage.col.notes": "Known gaps",
+        "coverage.no_brand": "no trade-name records",
+        "coverage.source_note": ("Sources and licences: see About and docs/许可清单.md. Restricted "
+                                  "sources are aggregated only in the data package."),
+        "coverage.gap.us": "Full openFDA source; public-domain US government work.",
+        "coverage.gap.gb": "Full dm+d source; Open Government Licence attribution.",
+        "coverage.gap.ca": "Full DPD source; non-commercial reuse with attribution.",
+        "coverage.gap.au": "ARTG export has no registration-status column; status is unknown, not 'on sale'. Some products have no ingredient records.",
+        "coverage.gap.sg": "Registered listing does not prove current supply.",
+        "coverage.gap.cn": "No public redistribution licence confirmed; some records have no trade name.",
+        "coverage.gap.es": "Source licence for redistribution is pending confirmation.",
+        "coverage.gap.mx": "Source licence is pending confirmation; older registrations are included.",
+        "coverage.gap.tw": "Strength is parsed from the product name; confidence is limited.",
+        "coverage.gap.hk": "Name/ingredient layer only: no strength, form or registration status; registered ≠ marketed.",
+    },
+    "es": {
+        "nav.coverage": "Cobertura",
+        "meta.coverage.title": "Cobertura y frescura · Medicine Brand Cross-Reference",
+        "meta.coverage.desc": ("Productos, mapeo de principios, cobertura de concentración, última "
+                               "sincronización y huecos por mercado; cifras calculadas desde la base actual."),
+        "coverage.title": "Cobertura y frescura",
+        "coverage.intro": ("Qué aporta cada mercado, su grado de completitud y la última sincronización. "
+                           "Los conteos son registros, no medicamentos únicos; 0% significa que la fuente "
+                           "no publica ese campo."),
+        "coverage.notice": ("Esta página solo describe datos. No implica que los productos sean "
+                            "intercambiables, estén a la venta o sean equivalentes entre mercados."),
+        "coverage.col.market": "Mercado",
+        "coverage.col.products": "Productos",
+        "coverage.col.mapping": "Principio mapeado",
+        "coverage.col.spec": "Cobertura de concentración",
+        "coverage.col.last": "Última sincronización",
+        "coverage.col.asof": "Datos hasta",
+        "coverage.col.notes": "Huecos conocidos",
+        "coverage.no_brand": "registros sin nombre comercial",
+        "coverage.source_note": ("Fuentes y licencias: ver About y docs/许可清单.md. Las fuentes "
+                                  "restringidas solo se agregan en el paquete de datos."),
+        "coverage.gap.us": "Fuente openFDA completa; obra del gobierno de EE. UU. de dominio público.",
+        "coverage.gap.gb": "Fuente dm+d completa; atribución de Open Government Licence.",
+        "coverage.gap.ca": "Fuente DPD completa; reutilización no comercial con atribución.",
+        "coverage.gap.au": "La exportación ARTG no trae estado de registro; el estado es desconocido, no «en venta». Algunos productos no tienen ingredientes.",
+        "coverage.gap.sg": "Estar en el listado no prueba que se comercialice actualmente.",
+        "coverage.gap.cn": "No hay licencia pública de redistribución confirmada; algunos registros no tienen nombre comercial.",
+        "coverage.gap.es": "La licencia de redistribución está pendiente de confirmación.",
+        "coverage.gap.mx": "La licencia está pendiente de confirmación; se incluyen registros antiguos.",
+        "coverage.gap.tw": "La concentración se extrae del nombre del producto; confianza limitada.",
+        "coverage.gap.hk": "Solo capa de nombre/ingrediente: sin concentración, forma ni estado de registro; en registro ≠ en venta.",
+    },
+    "zh": {
+        "nav.coverage": "覆盖与新鲜度",
+        "meta.coverage.title": "覆盖与新鲜度 · 药品商品名跨国定位",
+        "meta.coverage.desc": "各市场的产品数、成分映射率、规格覆盖、最后同步与已知缺口；数字按当前数据库构建期计算。",
+        "coverage.title": "覆盖与新鲜度",
+        "coverage.intro": "各市场贡献什么、完整度如何、最后同步时间。计数是记录数，不是去重药品数；空白或 0% 表示来源不提供该字段。",
+        "coverage.notice": "本页只列数据事实，不代表产品可互换、在售或跨市场等价。",
+        "coverage.col.market": "市场",
+        "coverage.col.products": "产品数",
+        "coverage.col.mapping": "成分已映射",
+        "coverage.col.spec": "规格覆盖",
+        "coverage.col.last": "最后同步",
+        "coverage.col.asof": "数据截止",
+        "coverage.col.notes": "已知缺口",
+        "coverage.no_brand": "条记录无商品名",
+        "coverage.source_note": "来源与许可见 About 与 docs/许可清单.md；受限来源在数据包中只以聚合形式出现。",
+        "coverage.gap.us": "openFDA 全量；美国政府公开领域作品。",
+        "coverage.gap.gb": "dm+d 全量；Open Government Licence 署名。",
+        "coverage.gap.ca": "DPD 全量；非商业再使用须署名。",
+        "coverage.gap.au": "ARTG 导出无注册状态列；状态未知，不等于在售。部分产品无成分记录。",
+        "coverage.gap.sg": "在册不等于当前在售。",
+        "coverage.gap.cn": "公开再发布许可未确认；部分记录无商品名。",
+        "coverage.gap.es": "再发布许可待确认。",
+        "coverage.gap.mx": "许可待确认；包含较早注册记录。",
+        "coverage.gap.tw": "规格由品名解析，置信度有限。",
+        "coverage.gap.hk": "仅名称/成分层：无规格、无剂型、无注册状态；在册≠在售。",
+    },
+    "zh-Hant": {
+        "nav.coverage": "覆蓋與新鮮度",
+        "meta.coverage.title": "覆蓋與新鮮度 · 藥品商品名跨國定位",
+        "meta.coverage.desc": "各市場的產品數、成分映射率、規格覆蓋、最後同步與已知缺口；數字按目前資料庫建置期計算。",
+        "coverage.title": "覆蓋與新鮮度",
+        "coverage.intro": "各市場貢獻什麼、完整度如何、最後同步時間。計數是紀錄數，不是去重藥品數；空白或 0% 表示來源不提供該欄位。",
+        "coverage.notice": "本頁只列資料事實，不代表產品可互換、在售或跨市場等價。",
+        "coverage.col.market": "市場",
+        "coverage.col.products": "產品數",
+        "coverage.col.mapping": "成分已映射",
+        "coverage.col.spec": "規格覆蓋",
+        "coverage.col.last": "最後同步",
+        "coverage.col.asof": "資料截止",
+        "coverage.col.notes": "已知缺口",
+        "coverage.no_brand": "筆紀錄無商品名",
+        "coverage.source_note": "來源與許可見 About 與 docs/許可清單.md；受限來源在資料包中只以聚合形式出現。",
+        "coverage.gap.us": "openFDA 全量；美國政府公開領域作品。",
+        "coverage.gap.gb": "dm+d 全量；Open Government Licence 署名。",
+        "coverage.gap.ca": "DPD 全量；非商業再使用須署名。",
+        "coverage.gap.au": "ARTG 匯出無註冊狀態欄；狀態未知，不等於在售。部分產品無成分紀錄。",
+        "coverage.gap.sg": "在冊不等於目前在售。",
+        "coverage.gap.cn": "公開再發布許可未確認；部分紀錄無商品名。",
+        "coverage.gap.es": "再發布許可待確認。",
+        "coverage.gap.mx": "許可待確認；包含較早註冊紀錄。",
+        "coverage.gap.tw": "規格由品名解析，置信度有限。",
+        "coverage.gap.hk": "僅名稱/成分層：無規格、無劑型、無註冊狀態；在冊≠在售。",
+    },
+}
+for _lang, _kv in COVERAGE_I18N.items():
+    I18N.setdefault(_lang, {}).update(_kv)
+# v0.9.4 name_lang：base 名语言与译名缺失角标（不翻译、不音译）
+NAME_LANG_I18N = {
+    "en": {"name.no_en": "No English name recorded", "name.no_es": "Sin nombre en español",
+           "name.no_zh": "无中文名", "name.no_zh_hant": "無中文名"},
+    "es": {"name.no_en": "No English name recorded", "name.no_es": "Sin nombre en español",
+           "name.no_zh": "无中文名", "name.no_zh_hant": "無中文名"},
+    "zh": {"name.no_en": "No English name recorded", "name.no_es": "Sin nombre en español",
+           "name.no_zh": "无中文名", "name.no_zh_hant": "無中文名"},
+    "zh-Hant": {"name.no_en": "No English name recorded",
+                "name.no_es": "Sin nombre en español",
+                "name.no_zh": "無中文名", "name.no_zh_hant": "無中文名"},
+}
+for _lang, _kv in NAME_LANG_I18N.items():
+    I18N.setdefault(_lang, {}).update(_kv)
 UI_I18N = {
     "en": {
         "u1.title": "How to use it in 3 steps",
@@ -1743,7 +1880,8 @@ def _install_zh_hant(values: dict) -> None:
     # v0.6.3：U1/U2/U3 新 key 的 zh-Hant 值直接来自 build.py（不依赖 JSON 是否已补齐），
     # 避免新 key 回落到简体中文。
     for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"],
-                  ATC_I18N["zh-Hant"], BILINGUAL_I18N["zh-Hant"], FILTER_I18N["zh-Hant"]):
+                  ATC_I18N["zh-Hant"], BILINGUAL_I18N["zh-Hant"], FILTER_I18N["zh-Hant"],
+                  COVERAGE_I18N["zh-Hant"], NAME_LANG_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
@@ -2995,9 +3133,16 @@ function ingredientHTML(e, cls){
   }
   const label = ingredientLabel(e);
   const orig = (e && (e.x || e.d)) || '';
-  if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>`;
-  if(e.v) return `<a class="${cls || ''}" data-sub-ingredient="${esc(e.v)}" data-sub-orig="${esc(orig)}" href="${BASE}drug/${e.v}.html">${label}</a>`;
-  return `<span class="${cls || ''}">${label}</span>`;
+  const cjk = /[\u3400-\u9fff]/.test(orig);
+  let badge = '';
+  if(cjk && (window.LANG === 'en' || window.LANG === 'es')){
+    badge = ` <span class="st-badge st-unknown nolang-badge">${esc(T(window.LANG === 'en' ? 'name.no_en' : 'name.no_es'))}</span>`;
+  }else if(!cjk && (window.LANG === 'zh' || window.LANG === 'zh-Hant')){
+    badge = ` <span class="st-badge st-unknown nolang-badge">${esc(T(window.LANG === 'zh' ? 'name.no_zh' : 'name.no_zh_hant'))}</span>`;
+  }
+  if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>${badge}`;
+  if(e.v) return `<a class="${cls || ''}" data-sub-ingredient="${esc(e.v)}" data-sub-orig="${esc(orig)}" href="${BASE}drug/${e.v}.html">${label}</a>${badge}`;
+  return `<span class="${cls || ''}">${label}</span>${badge}`;
 }
 // v0.5.4 厂家列：第一个厂家可点（索引 mu），「+N」展开其它带页厂家（索引 ml）；
 // 没页的厂家显示为纯文本 / 汇总成「另有 K 家暂无页面」，绝不产生 404。
@@ -4584,6 +4729,7 @@ def _page_meta(lang: str, meta_key: str | None) -> tuple[str, str]:
 
 
 TERMS_SUB_IDS: set[str] = set()
+SUB_NAME_LANG: dict[str, str] = {}   # v0.9.4 name_lang：base 名语言（仅展示，不改名）
 BILINGUAL_TRANS: dict = {}
 
 # v0.8.1：双语对照显示（独立脚本，避免改动 i18n.js 模板；所有页面 defer 加载）
@@ -5518,14 +5664,14 @@ def load_index(db: sqlite3.Connection):
     ):
         comp_keys.setdefault(pid, set()).add(_norm_name(inn))
     for (key_id, pid, country, form_base, dosage_form, sv, su,
-         inn_en, inn_zh, atc, sid, mah, rel, ntype, n_ing, pnote, pcat) in db.execute(
+         inn_en, inn_zh, atc, sid, mah, rel, ntype, n_ing, pnote, pcat, nl) in db.execute(
         """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
                   pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.atc, s.substance_id,
                   p.mah, p.release,
                   pn.name_type,
                   (SELECT COUNT(*) FROM product_component pc2
                    WHERE pc2.product_id = p.product_id) AS n_ing,
-                  p.note, p.category
+                  p.note, p.category, s.name_lang
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
            LEFT JOIN product_component pc ON pc.product_id = p.product_id
@@ -5551,13 +5697,16 @@ def load_index(db: sqlite3.Connection):
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "subs_zh": [], "s": [],
                                "f": [], "v": sid, "mah": {}, "trade": False,
-                               "sids": set(), "rels": set(), "atc": set(), "export": False}
+                               "sids": set(), "rels": set(), "atc": set(), "export": False,
+                               "nl": ""}
         if ntype == "trade":
             a["trade"] = True
         if sid:
             a["sids"].add(sid)
         if a["v"] is None and sid:
             a["v"] = sid
+        if not a.get("nl") and nl:
+            a["nl"] = nl
         if (pnote and ("出口" in pnote or "Export" in pnote)) or \
                 (pcat and "Export" in pcat):
             a["export"] = True
@@ -6291,9 +6440,13 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                   'lettering for this pair; check the ingredient, not the name.</span> '
                   f'<a href="../confused.html" data-i18n="drug.confused_all">All pairs</a></div>')
         warn_line = _drug_warn_html(warnings_by_sub.get(sid, []))
+        _nl = SUB_NAME_LANG.get(sid, "")
+        _nl_attr = f' data-nl="{esc(_nl)}"' if _nl else ""
+        _zh_attr = f' data-zh="{1 if inn_zh else 0}"'
         h1_inner = (f'<span data-sub-ingredient="{esc(sid)}" '
-                    f'data-sub-orig="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>'
-                    if sid in TERMS_SUB_IDS else esc(inn_en or sid))
+                    f'data-sub-orig="{esc(inn_en or sid)}"{_nl_attr}{_zh_attr}>{esc(inn_en or sid)}</span>'
+                    if sid in TERMS_SUB_IDS else
+                    f'<span{_nl_attr}{_zh_attr}>{esc(inn_en or sid)}</span>')
         body = f"""<h1>{h1_inner}</h1>
 <p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span></p>
 <p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
@@ -6326,9 +6479,9 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
     """一次性把名字页需要的全部数据取到内存，避免上万次逐条查询。"""
     data: dict[str, dict] = {}
     for (key_id, pid, inn_en, sid, country, form_base, dosage_form, rel,
-         sv, su) in db.execute(
+         sv, su, nl) in db.execute(
         """SELECT pn.key_id, p.product_id, s.inn_en, s.substance_id, p.country, p.form_base,
-                  p.dosage_form, p.release, pc.strength_value, pc.strength_unit
+                  p.dosage_form, p.release, pc.strength_value, pc.strength_unit, s.name_lang
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
            LEFT JOIN product_component pc ON pc.product_id = p.product_id
@@ -6342,7 +6495,8 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
             d["name_only"].add(pid)
             continue
         s = d["subs"].setdefault(
-            sid, {"inn": inn_en, "country": set(), "s": set(), "f": set(), "rel": set()})
+            sid, {"inn": inn_en, "nl": nl or "", "country": set(), "s": set(),
+                  "f": set(), "rel": set()})
         s["country"].add(country)
         st = f"{sv:g} {su or ''}".strip() if sv is not None else ""
         if st:
@@ -7010,6 +7164,16 @@ def _optimize_home_html(html: str, prefix: str) -> str:
         "apply(); window.addEventListener('load', apply);")
     boot = (
         f'<script>window.__DSH_I18N_ROOT=new URL({prefix!r} || "../", location.href).href;</script>'
+        f'<script>var _r=new URL({prefix!r} || "../", location.href).href;'
+        "(function(){var n=document.querySelector('header nav');"
+        "if(n&&!n.querySelector('[data-coverage]')){var a=document.createElement('a');"
+        "a.href=_r+'coverage.html';a.setAttribute('data-i18n','nav.coverage');"
+        "a.setAttribute('data-coverage','1');a.textContent='Coverage';"
+        "n.insertBefore(a,n.querySelector('.langs')||null);}"
+        "var f=document.querySelector('.foot-links');"
+        "if(f&&!f.querySelector('[data-coverage]')){var b=document.createElement('a');"
+        "b.href=_r+'coverage.html';b.setAttribute('data-i18n','nav.coverage');"
+        "b.setAttribute('data-coverage','1');b.textContent='Coverage';f.appendChild(b);}})();</script>"
         f"<script>{i18n_js}</script>"
         "<script>window.addEventListener('load',function(){"
         f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
@@ -7168,11 +7332,82 @@ def build_about(stats, coverage, source_cover=()) -> None:
                  '<a href="dataset.jsonld">Dataset metadata (schema.org)</a> · '
                  '<a href="checksums.txt">SHA-256 checksums</a> · '
                  '<a href="docs/data-dictionary.md">Data dictionary</a></p>')
+    parts.append('<p class="sub"><a href="coverage.html" data-i18n="nav.coverage">Coverage &amp; freshness</a></p>')
     body = "\n".join(parts)
     html = page("About", body, meta_key="about", alternates=True,
                 canonical_rel="about.html", alt_rel="about.html",
                 head_js='<link rel="alternate" type="application/ld+json" href="dataset.jsonld">')
     _write_with_copies("about.html", html, "about")
+
+def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> None:
+    """v0.9.4 A4：每市场覆盖/新鲜度页（只列事实，不写数据口径）。"""
+    stats = {}
+    for r in db.execute(
+            """SELECT p.country,
+                      COUNT(DISTINCT CASE WHEN pc.product_id IS NOT NULL
+                                          THEN p.product_id END) AS mapped,
+                      COUNT(DISTINCT CASE WHEN pc.strength_value IS NOT NULL
+                                          THEN p.product_id END) AS spec
+               FROM product p
+               LEFT JOIN product_component pc ON pc.product_id = p.product_id
+               GROUP BY p.country"""):
+        stats[r["country"]] = dict(r)
+    no_trade = {r[0]: r[1] for r in db.execute(
+        """SELECT p.country, COUNT(*) FROM product p
+           WHERE NOT EXISTS (SELECT 1 FROM product_name pn
+                             WHERE pn.product_id=p.product_id AND pn.name_type='trade')
+           GROUP BY p.country""")}
+    asof = {}
+    for r in source_cover:
+        c, d = r.get("country"), r.get("data_as_of")
+        if c and d:
+            asof[c] = max(asof.get(c, ""), d)
+    T = I18N["en"]
+    rows = []
+    for r in coverage:
+        c = r.get("country") or ""
+        n = int(r.get("n_products") or 0)
+        s = stats.get(c, {})
+        mapped = int(s.get("mapped") or 0)
+        spec = int(s.get("spec") or 0)
+        nt = int(no_trade.get(c) or 0)
+        mpct = (mapped / n * 100) if n else 0
+        spct = (spec / n * 100) if n else 0
+        gap_key = f"coverage.gap.{c.lower()}"
+        gap = T.get(gap_key, "")
+        note = f'<span data-i18n="{gap_key}">{esc(gap)}</span>'
+        if nt and c == "CN":
+            note += (f' <span class="meta">· {nt:,} ({nt / n * 100:.1f}%) '
+                     f'<span data-i18n="coverage.no_brand">no trade-name records</span></span>')
+        rows.append(
+            f'<tr><td data-label="{esc(T["coverage.col.market"])}">'
+            f'<span data-i18n="home.{c.lower()}">{esc(T.get("home." + c.lower(), c))}</span> '
+            f'<span class="meta">{esc(c)}</span></td>'
+            f'<td data-label="{esc(T["coverage.col.products"])}">{n:,}</td>'
+            f'<td data-label="{esc(T["coverage.col.mapping"])}">{mpct:.1f}%'
+            f' <span class="meta">({mapped:,}/{n:,})</span></td>'
+            f'<td data-label="{esc(T["coverage.col.spec"])}">{spct:.1f}%'
+            f' <span class="meta">({spec:,}/{n:,})</span></td>'
+            f'<td data-label="{esc(T["coverage.col.last"])}">{esc(r.get("last_synced") or "—")}</td>'
+            f'<td data-label="{esc(T["coverage.col.asof"])}">{esc(asof.get(c) or "—")}</td>'
+            f'<td data-label="{esc(T["coverage.col.notes"])}">{note}</td></tr>')
+    body = f"""<h1 data-i18n="coverage.title">{esc(T["coverage.title"])}</h1>
+<p class="sub" data-i18n="coverage.intro">{esc(T["coverage.intro"])}</p>
+<div class="notice" data-i18n="coverage.notice">{esc(T["coverage.notice"])}</div>
+<div class="tablewrap"><table class="res coverage-table"><thead><tr>
+<th data-i18n="coverage.col.market">{esc(T["coverage.col.market"])}</th>
+<th data-i18n="coverage.col.products">{esc(T["coverage.col.products"])}</th>
+<th data-i18n="coverage.col.mapping">{esc(T["coverage.col.mapping"])}</th>
+<th data-i18n="coverage.col.spec">{esc(T["coverage.col.spec"])}</th>
+<th data-i18n="coverage.col.last">{esc(T["coverage.col.last"])}</th>
+<th data-i18n="coverage.col.asof">{esc(T["coverage.col.asof"])}</th>
+<th data-i18n="coverage.col.notes">{esc(T["coverage.col.notes"])}</th>
+</tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+<p class="sub" data-i18n="coverage.source_note">{esc(T["coverage.source_note"])}</p>"""
+    html = page("Coverage & freshness", body, meta_key="coverage", alternates=True,
+                canonical_rel="coverage.html", alt_rel="coverage.html")
+    _write_with_copies("coverage.html", html, "coverage")
+
 
 def build_confused(db: sqlite3.Connection) -> int:
     """易混淆药对页：只列有官方出处的配对。"""
@@ -7892,6 +8127,7 @@ def _sub_name_spans(en: str, zh: str, sid: str) -> str:
     entry = (BILINGUAL_TRANS.get("sub", {}) or {}).get(sid) or {}
     es = ((entry.get("es") or {}).get("n") or "")
     zhh = ((entry.get("zh-Hant") or {}).get("n") or "")
+    # v0.9.4 name_lang：base 名语言（仅 H1/source 行使用；列表按原文 CJK 判断，省索引体积）
     en_txt = en or sid or ""
     return (f'<span class="nm" data-n-en="{esc(en_txt)}" data-n-zh="{esc(zh or "")}" '
             f'data-n-zhh="{esc(zhh)}" data-n-es="{esc(es)}">{esc(en_txt)}</span>')
@@ -8307,10 +8543,10 @@ def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cov
         [list(r) for r in name_rows])
 
     sub_rows = db.execute(
-        "SELECT substance_id, inn_en, inn_zh, atc FROM substance ORDER BY substance_id").fetchall()
+        "SELECT substance_id, inn_en, inn_zh, atc, name_lang FROM substance ORDER BY substance_id").fetchall()
     sub_res = write_csv("substances.csv", [
         ("substance_id", "string"), ("inn_en", "string"), ("inn_zh", "string"),
-        ("atc", "string")], [list(r) for r in sub_rows])
+        ("atc", "string"), ("name_lang", "string")], [list(r) for r in sub_rows])
 
     resources = []
     for res, name, title, desc in (
@@ -8704,6 +8940,15 @@ def main() -> None:
     (OUT / "assets" / "boot.js").write_text(
         "var s=document.currentScript;"
         "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
+        "(function(){var n=document.querySelector('header nav');"
+        "if(n&&!n.querySelector('[data-coverage]')){var a=document.createElement('a');"
+        "a.href=r+'coverage.html';a.setAttribute('data-i18n','nav.coverage');"
+        "a.setAttribute('data-coverage','1');a.textContent='Coverage';"
+        "n.insertBefore(a,n.querySelector('.langs')||null);}"
+        "var f=document.querySelector('.foot-links');"
+        "if(f&&!f.querySelector('[data-coverage]')){var b=document.createElement('a');"
+        "b.href=r+'coverage.html';b.setAttribute('data-i18n','nav.coverage');"
+        "b.setAttribute('data-coverage','1');b.textContent='Coverage';f.appendChild(b);}})();"
         "window.addEventListener('load',function(){"
         "var a=document.createElement('script');a.src=r+'assets/i18n.js';"
         "a.onload=function(){var b=document.createElement('script');"
@@ -8756,6 +9001,49 @@ def main() -> None:
     if(v === undefined) v = D.en[k];
     return v === undefined ? k : v;
   };
+  function nameLangBadge(nl, hasZh){
+    var L = window.LANG || 'en';
+    if(nl === 'zh' && (L === 'en' || L === 'es')){
+      return window.T(L === 'en' ? 'name.no_en' : 'name.no_es');
+    }
+    if(nl && nl !== 'zh' && (L === 'zh' || L === 'zh-Hant') && hasZh !== true){
+      return window.T(L === 'zh' ? 'name.no_zh' : 'name.no_zh_hant');
+    }
+    return '';
+  }
+  function applyNameLangBadges(){
+    document.querySelectorAll('.nolang-badge').forEach(function(n){ n.remove(); });
+    function badgeFor(text){
+      var cjk = /[\u3400-\u9fff]/.test(text || '');
+      if(cjk && (window.LANG === 'en' || window.LANG === 'es')){
+        return window.T(window.LANG === 'en' ? 'name.no_en' : 'name.no_es');
+      }
+      if(!cjk && (window.LANG === 'zh' || window.LANG === 'zh-Hant')){
+        return window.T(window.LANG === 'zh' ? 'name.no_zh' : 'name.no_zh_hant');
+      }
+      return '';
+    }
+    document.querySelectorAll('.nm, .card h2 a, [data-i18n-label="maker.ingredient"]').forEach(function(el){
+      var text = badgeFor(el.textContent || '');
+      if(!text) return;
+      var s = document.createElement('span');
+      s.className = 'st-badge st-unknown nolang-badge';
+      s.textContent = text;
+      el.appendChild(s);
+    });
+    document.querySelectorAll('[data-nl]').forEach(function(el){
+      var text = nameLangBadge(el.getAttribute('data-nl'),
+                               el.getAttribute('data-zh') === '1');
+      if(!text) return;
+      var host = el;
+      if(el.closest && el.closest('h1')) host = document.querySelector('.drug-name-src');
+      if(!host) return;
+      var s = document.createElement('span');
+      s.className = 'st-badge st-unknown nolang-badge';
+      s.textContent = text;
+      host.appendChild(s);
+    });
+  }
   function apply(){
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
@@ -8827,6 +9115,8 @@ def main() -> None:
     });
     // v0.8.2 task-120：语言确定后再渲染 ATC/组合页成分名（避免 defer 早于 ?lang 解析）
     if(window.renderBilingualNames) window.renderBilingualNames();
+    // v0.9.4：name_lang 无译名角标（不翻译；H1 角标放来源行）
+    applyNameLangBadges();
   }
   function langTarget(code){
     // v0.5.5/v0.6.2：有 /es/、/zh/、/zh-hant/ 静态副本的页面（首页/about/confused/
@@ -8878,6 +9168,9 @@ def main() -> None:
 
     db = sqlite3.connect(DB)
     db.row_factory = sqlite3.Row
+    SUB_NAME_LANG.clear()
+    for _sid, _nl in db.execute("SELECT substance_id, name_lang FROM substance"):
+        SUB_NAME_LANG[_sid] = _nl or ""
     tr_counts = build_terms_json(db)
     print(f"bilingual   : {tr_counts.get('zh', 0)} zh / {tr_counts.get('es', 0)} es "
           f"display-default ingredient translations", flush=True)
@@ -9032,6 +9325,7 @@ def main() -> None:
     n_conf = build_confused(db)
     n_warn = build_warn(db)
     build_about(stats, coverage, source_cover)
+    build_coverage_page(db, coverage, source_cover)
     build_whats_new()
     build_glossary()
     print("building atc pages ...", flush=True)
