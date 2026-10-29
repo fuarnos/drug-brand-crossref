@@ -1,17 +1,18 @@
-# 2026-10-30 谷段早报（v0.9.0 大版本 + v0.9.1 数据/修复 + v0.9.2 性能/数据产品）
+# 2026-10-30 谷段早报（v0.9.0 大版本 + v0.9.1 数据/修复 + v0.9.2 性能/数据产品 + v0.9.3 体验/治理）
 
-> 写作：2026-10-30 北京 04:0x（v0.9.2 发布后回填）｜作者：dose-mapping（文档/审计）｜数字以 `data/drugs.db`、`site/dist` 与发布记录实测为准。
-> 本报告对应 task-18（v0.9.0 发布）+ task-3（统一 DB 窗口）+ task-16/17（单位归一）+ task-1/6/9/19/20（v0.9.0 展示批次）+ task-22/28/29/32（v0.9.1）+ task-23/24/33/34（v0.9.2 数据包/CI/旧 URL/LCP）+ 三次发布。**本谷段共 3 版：v0.9.0（第 20 版）、v0.9.1（第 21 版）、v0.9.2（第 22 版）。**
+> 写作：2026-10-30 北京 07:0x（v0.9.3 发布后回填）｜作者：dose-mapping（文档/审计）｜数字以 `data/drugs.db`、`site/dist` 与发布记录实测为准。
+> 本报告对应 task-18（v0.9.0 发布）+ task-3/16/17 + task-1/6/9/19/20（v0.9.0）+ task-22/28/29/32（v0.9.1）+ task-23/24/33/34（v0.9.2）+ task-25/26 + UX P1（v0.9.3）+ 四次发布。**本谷段共 4 版：v0.9.0（第 20 版）、v0.9.1（第 21 版）、v0.9.2（第 22 版）、v0.9.3（第 23 版）。**
 
 ## 0. 结论
 
-- **v0.9.2 = 本谷段最后一版（第 22 版，性能 + 数据产品）**：Lighthouse 移动端四页 **99/99/100/100**、**LCP 0.9–1.7s**（v0.9.1 3.1–3.6s，全部达标）+ v0.9.0 旧 combo URL **8,455 个 noindex stub**（不再 404）+ **数据产品**（datapackage.json / dataset.jsonld / checksums.txt / 字段字典，只发派生层、8 个受限来源 `non_redistributable`）+ **最小 CI**（Actions success、本地 8/8）。发布：**tag v0.9.2（`fac855c`）+ Release、gh-pages `6c584f46`、main `3b8759fb6`、smoke 0 failures / 0 warnings（live v0.9.2）、增量 31.80 MiB（3.5%）/ 1,228.2s**。
-- **v0.9.1（第 21 版，数据 + 修复）**：AU 全量上线（+32,904 → 44,794）+ UX P0/WCAG/i18n 修复 + 搜索埋点修复 + Lighthouse 基线（LCP 未达标，v0.9.2 已修）+ AU 多国名字页修复 + 体积策略；tag v0.9.1（`3e03f2a`）、gh-pages `de26b591`、main `e0f64430`、smoke 0/0、增量 28.83 MiB/1,115.5s。
+- **v0.9.3 = 本谷段最后一版（第 23 版，体验 + 治理）**：中文名字页/单包装页表头四语 + 成分页 H1 只药名 + ATC 中英分隔 + 厂家页列名「剂型」+ 西语 1280 页头修复 + **数据溯源字段**（substance/brand_family 各 4 列，brand_family 回填 4 行、旧 substance 行 NULL）+ **漂移基线**（10/10 来源、模拟漂移自测 PASS）+ **LICENSE(MIT)/CONTRIBUTING/CITATION + 数据溯源与许可页**。发布：**tag v0.9.3（`a45722d`）+ Release、gh-pages `5f961d01`、main `26bd3b24`（本版 4 commit）、smoke 0 failures（live v0.9.3）、增量 25.56 MiB / 1,150s（19m10s）**。
+- **v0.9.2（第 22 版，性能 + 数据产品）**：Lighthouse 四页 **99/99/100/100**、LCP **0.9–1.7s**（全部达标）+ 旧 combo URL **8,455 个 stub**（不再 404）+ 数据产品（datapackage/dataset/checksums/字段字典）+ 最小 CI（本地 8/8、Actions success）；tag v0.9.2（`fac855c`）、gh-pages `6c584f46`、main `3b8759fb6`、smoke 0/0、增量 31.80 MiB/1,228.2s。
+- **v0.9.1（第 21 版，数据 + 修复）**：AU 全量上线（+32,904 → 44,794）+ UX P0/WCAG/i18n + 搜索埋点修复 + Lighthouse 基线（LCP 未达标，v0.9.2 已修）+ AU 名字页修复 + 体积策略；tag v0.9.1（`3e03f2a`）、gh-pages `de26b591`、main `e0f64430`、smoke 0/0、增量 28.83 MiB/1,115.5s。
 - **v0.9.0（第 20 版）**：重量单位归一 + ATC/大类 v2 + 矩阵 3 列/横滑 + 无商品名与全量厂家页 + HK 上线（10 市场）；tag v0.9.0、gh-pages `cbc3f6aa`、main `989d9c38e`、smoke ok、增量 46.28 MiB/1,118.5s。
-- **数据（当前 DB，v0.9.1/v0.9.2 同一库）**：**477,098 产品 / 10 市场（AU 44,794、HK 13,935）**、DB **419.6 MB**；`quick_check=ok` / FK 0。
-- **站点（v0.9.2）**：dist **121,286 文件 / 941.27 MB（897.7 MiB）**、sitemap **63,359**（stub 不进）、0 空文件；combo **15,191 = 6,736 正式 + 8,455 stub**；drug 12,442 / name 77,058 / maker 15,213；core 41.38 MB raw / 9.83 MB gzip（未瘦身）。
-- **测试**：v0.9.2 smoke **0 failures / 0 warnings**（live v0.9.2）；`deploy/ci_checks.py --fast` **6 PASS / 2 SKIP**（17.5s：py_compile 136 文件、etl 25、lib 29、mobile 29、dist 完整性 121,286/63,359/0 空、workflow）；全量 CI 见 §4。
-- **已知缺口（v0.9.3）**：**core 41.4 MB raw 未瘦身**（可选）、AU 数据带入单位未归一、全量单包装名字页 102,192 未做；旧 combo URL 与 LCP 已在 v0.9.2 关闭。
+- **数据（当前 DB，v0.9.2/v0.9.3 同一库）**：**477,098 产品 / 10 市场（AU 44,794、HK 13,935）**、**419,627,008 B（419.6 MB）**；`quick_check=ok` / FK 0；provenance：`brand_family` 4/4 已回填（editorial/high），`substance` 0/12,649（旧行 NULL，不伪造）。
+- **站点（v0.9.3）**：dist **121,286 文件 / 941,272,832 B（941.27 MB / 897.7 MiB）**、sitemap **63,359**、0 空文件；combo 15,191（6,736 正式 + 8,455 stub）；core 41.38 MB raw / 9.83 MB gzip（未瘦身）；正式 Lighthouse 首页 99/100/100/100（LCP 1.7s）、其余三页 100/100/100/100（0.9–1.1s）。
+- **测试**：v0.9.3 smoke **0 failures**（live v0.9.3）；`ci_checks.py --fast` **6 PASS / 2 SKIP**（17.4s：py_compile 138 文件、etl 25、lib 29、mobile 29、dist 完整性 121,286/63,359/0、workflow）；全量 CI 见 §4。
+- **已知缺口（v0.9.4）**：A4 覆盖/新鲜度页、B8 对比模式、task-5 成分名 INN 映射 + `name_lang` 语义、EMA、剩余 UX P1；数据包 provenance/逐条导出、core 瘦身、全量单包装名字页仍待体积/许可评估。
 - **申请**：TGA 已答复且 AU 数据已上线（许可口径=只写来源+署名）；上海（11-12/11-26）、澳门（11-09/11-18）继续等；定时仍为 **2 条 cron**（00:35 开工 / 08:20 收尾）+ 申请跟进每日开工日检。
 
 ---
@@ -84,6 +85,32 @@
 4. **工程质量**：最小 CI（`.github/workflows/ci.yml` → `deploy/ci_checks.py` 同一入口：py_compile + etl/lib/mobile unittest + workflow 自检，有 DB/dist 时再跑 trilingual/check_data/完整性）；本地全量 **8/8 PASS（708.3s）**、GitHub Actions 首次运行 **success**；发布仍只在本地（`reports/ci-setup.md`）。
 5. **站点数字**：121,286 文件 / 941.27 MB（897.7 MiB）；sitemap 63,359；四语 i18n 对齐。
 
+### 1.4 v0.9.3（第 23 版，体验 + 治理）
+
+| 项 | 实测 |
+|---|---|
+| 版本 / 日期 | **v0.9.3** / 2026-10-30（CHANGELOG 第一节；第 **23** 版） |
+| main commit | **`26bd3b24`（本版共 4 个 commit）** |
+| gh-pages commit | `5f961d01` |
+| tag / Release | **tag v0.9.3（`a45722d`）+ GitHub Release**（https://github.com/fuarnos/drug-brand-crossref/releases/tag/v0.9.3） |
+| smoke | **0 failures**（live 版本 v0.9.3） |
+| dist | **121,286 文件 / 941,272,832 B（941.27 MB / 897.7 MiB）**；0 字节 **0**（较 v0.9.2 仅 +5,803 B：HTML 文案变化） |
+| sitemap | **63,359** URL（不变） |
+| 页数 | drug 12,442 · name 77,058 · combo 15,191（6,736 正式 + 8,455 stub）· maker 15,213 |
+| core.json | **41,381,256 B raw / 9,831,307 B gzip**（不变） |
+| 增量发布 | **25.56 MiB / 1,150s（19m10s）** |
+| Lighthouse（正式构建） | 首页 99/100/100/100（LCP 1.7s / CLS 0.047）；orlistat 100/100/100/100（1.1s）；xyzal 100/100/100/100（0.9s）；ATC 100/100/100/100（1.1s） |
+
+**v0.9.3 内容（CHANGELOG 4 条 + 内部治理）**
+1. **中文界面的名字页 / 单包装页表头四语**：市场 / 剂量 / 剂型 / 状态 / 厂家 / 来源按当前语言显示，中文界面不再出现英文表头（`data-label` 同步）。
+2. **成分页标题与 ATC 类名更干净**：H1 只显示成分名，来源/版本移到下方 pill badge；ATC 类名中英分隔「降压药 · Blood-pressure medicines」，关闭「显示原文对照」时隐去英文。
+3. **厂家页与窄屏修复**：厂家页列名「剂量」更正为「剂型」（data-label 同步）；西语 1280px 页头不再溢出、语言切换完整可见。
+4. **数据溯源字段（schema）**：`substance`/`brand_family` 各加 `source_id/method/confidence/decided_at` 4 个 nullable 列；`db/init_db.py` 幂等迁移（0.19s、+0 字节）、`db/migrate_provenance.py` 可回滚、`etl/provenance.py` 唯一写入口；`brand_family` 4 行回填 editorial/high，substance 旧行保持 NULL；`lib/search.py` 改显式 9 列防泄漏（`reports/task26-provenance-impl.md`）。
+5. **数据源漂移基线（内部）**：`etl/drift_check.py` + `data/sources/drift-baseline.json`（55,875 B）；10/10 来源 29 part、行数 ±10% / 字段增删 / 枚举新增 / 文件缺失告警；模拟漂移 3 告警自测 PASS；只提示、不自动改数据（`reports/drift-baseline-20261030.md`）。
+6. **仓库治理（内部）**：`LICENSE`（MIT，不覆盖 data/）、`CONTRIBUTING.md`、`CITATION.cff`、`docs/数据溯源与许可.md`（来源/方法/置信度 + 派生层策略 + `non_redistributable` 清单）。
+
+> 证据：`reports/ux-p1-v093.md`、`task26-provenance-impl.md`、`task26-provenance-design.md`、`drift-baseline-20261030.md`、`.tmp/build-v093.log`、`.tmp/cat2/es-1280-v093.png`。
+
 ## 2. 数据变化（task-3 统一 DB 窗口 + task-16）
 
 | 项 | 窗口前 | 现在 | 变化 |
@@ -130,21 +157,21 @@
 
 **质量**：`db/check_data.py` 前后 114 → 115 行（+1 = HK coverage 行）；`quick_check=ok`；`foreign_key_check=0`；`inn_zh` 非空 3,115。
 
-## 3. 站点（v0.9.2 构建产物）
+## 3. 站点（v0.9.3 构建产物）
 
 | 项 | 值 |
 |---|---|
-| dist 文件 / 体积 | **121,286 / 941.27 MB（897.7 MiB）**（v0.9.1：112,822 / 936.97 MB；v0.9.0：116,883 / 770.8 MB） |
-| sitemap | **63,359**（v0.9.1 同；stub 不进；v0.9.0：68,430） |
+| dist 文件 / 体积 | **121,286 / 941,272,832 B（941.27 MB / 897.7 MiB）**（v0.9.2：941,267,029 B，仅 +5,803 B；v0.9.1：112,822 / 936.97 MB；v0.9.0：116,883 / 770.8 MB） |
+| sitemap | **63,359**（v0.9.2/v0.9.1 同；stub 不进；v0.9.0：68,430） |
 | drug / name / combo / maker | 12,442 / **77,058** / **15,191（6,736 正式 + 8,455 stub）** / 15,213 |
-| core.json | **41,381,256 B raw / 9,831,307 B gzip**（v0.9.1 同；未瘦身） |
-| 构建 / 发布 | 构建日志 `.tmp/build-v092.log`（`== done ==`；combo 6,736 正式页 + 8,455 stub；total 941.3 MB）；增量发布 **31.80 MiB（3.5%）/ 1,228.2s（20m28s）** |
+| core.json | **41,381,256 B raw / 9,831,307 B gzip**（v0.9.2 同；未瘦身） |
+| 构建 / 发布 | 构建日志 `.tmp/build-v093.log`（`== done ==`；combo 6,736 正式页 + 8,455 stub；total 941.3 MB）；增量发布 **25.56 MiB / 1,150s（19m10s）** |
 | 0 字节文件 | **0** |
-| 数据包 | `datapackage.json`（21,119 B / 4 资源）、`dataset.jsonld`（1,979 B）、`checksums.txt`（641 B）、`docs/data-dictionary.md`（3,097 B）；About 四语有链接 |
+| 数据包 | `datapackage.json`（21,119 B / 4 资源）、`dataset.jsonld`（1,979 B）、`checksums.txt`（641 B）、`docs/data-dictionary.md`（3,097 B）；About 四语有链接（v0.9.3 未改数据包内容） |
 
-> 体积策略延续 v0.9.1：combo 正式页 **6,736** + 旧 URL stub **8,455** = 15,191（全部旧组合 URL 200、noindex、不进 sitemap）；dist **897.7 MiB ≤ 900 MiB**、十进制 <1e9 B。v0.9.2 相比 v0.9.1 净增 **+8,464 文件 / +4.3 MB**（stub 约 9.5MB，首页/About 的 dataset 链接与体积优化抵消部分）。
+> 体积策略延续 v0.9.1：combo 正式页 **6,736** + 旧 URL stub **8,455** = 15,191（旧组合 URL 200、noindex、不进 sitemap）；dist **897.7 MiB ≤ 900 MiB**、十进制 <1e9 B。v0.9.2 相比 v0.9.1 净增 **+8,464 文件 / +4.3 MB**（stub 约 9.5MB，部分被首页/About 体积优化抵消）；v0.9.3 文件数不变，仅 HTML 内容变化（+5,803 B）。
 
-**抽查**：Lighthouse 四页 99–100 / LCP 0.9–1.7s；`combo/13c-urea+urea+urea-13c.html`（AU-only 旧组合）HTTP 200 + noindex；`datapackage.json` 可解析、`checksums.txt` 全部匹配、`dataset.jsonld @type=Dataset`；About 四语链接 Data package / Dataset metadata / SHA-256 / Data dictionary 正常；首页 `?q=泰诺` 正常（i18n 内联后首帧目标语言）。
+**抽查**：v0.9.3 中文名字页表头「市场/剂量/剂型/状态/厂家/来源」、`data-label` 同步；成分页 H1 仅药名（来源/版本在 `.drug-name-src` pill）；ATC「降压药 · Blood-pressure medicines」且关闭原文对照隐藏英文；厂家页「剂型」列；西语 1280 页头无溢出；Lighthouse 正式构建四页 99–100 / LCP 0.9–1.7s；`datapackage.json` 可解析、`checksums.txt` 全部匹配、`dataset.jsonld @type=Dataset`；首页 `?q=泰诺` 正常。
 
 ## 4. 测试
 
@@ -152,36 +179,40 @@
 - v0.9.0：`verify_live.py` smoke **ok**（`failures: []`、live v0.9.0）。
 - v0.9.1：`verify_live.py` smoke **0 failures / 0 warnings**（live v0.9.1）；发布前四套测试由发布经理执行。
 - v0.9.2：`verify_live.py` smoke **0 failures / 0 warnings**（live v0.9.2）；发布前本地全量 `ci_checks.py` 由发布经理执行。
+- v0.9.3：`verify_live.py` smoke **0 failures**（live v0.9.3）；发布前本地全量 `ci_checks.py` 由发布经理执行。
 
 **发布后复跑**（只读，`AU 入库后的当前库`）：
 
-| 套件 | v0.9.0 后（`.tmp/dose-mapping/tests-post-v090.log`） | v0.9.1 后（`.tmp/dose-mapping/tests-post-v091.log`） | v0.9.2 后（`deploy/ci_checks.py`） |
-|---|---|---|---|
-| `etl` | Ran 25 tests, **OK** | Ran 25 tests, **OK** | **PASS**（25 项） |
-| `lib` | Ran 29 tests, **OK** | Ran 29 tests, **OK** | **PASS**（29 项） |
-| `tests.test_mobile_inbox` | Ran 29 tests, **OK** | Ran 29 tests, **OK** | **PASS**（29 项） |
-| `tests/trilingual/run_tests.py` | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；728.3s | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；642.6s | 72 例 **68 通过**、跨国 72/72；**PASS**（680.9s；4 例 allowlist） |
+| 套件 | v0.9.0 后（`.tmp/dose-mapping/tests-post-v090.log`） | v0.9.1 后（`.tmp/dose-mapping/tests-post-v091.log`） | v0.9.2 后（`deploy/ci_checks.py`） | v0.9.3 后（`deploy/ci_checks.py`） |
+|---|---|---|---|---|
+| `etl` | Ran 25 tests, **OK** | Ran 25 tests, **OK** | **PASS**（25 项） | **PASS**（25 项） |
+| `lib` | Ran 29 tests, **OK** | Ran 29 tests, **OK** | **PASS**（29 项） | **PASS**（29 项） |
+| `tests.test_mobile_inbox` | Ran 29 tests, **OK** | Ran 29 tests, **OK** | **PASS**（29 项） | **PASS**（29 项） |
+| `tests/trilingual/run_tests.py` | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；728.3s | 72 例 **68 通过**；Top-5 **97.7%**、Top-1 96.3%、跨国 72/72；642.6s | 72 例 **68 通过**、跨国 72/72；**PASS**（680.9s；4 例 allowlist） | 72 例 **68 通过**、跨国 72/72；**PASS**（676.9s；4 例 allowlist） |
 
-- **v0.9.2 收尾复跑**：`deploy/ci_checks.py --fast` **6 PASS / 2 SKIP**（17.5s；py_compile 136 文件 0 错误、etl/lib/mobile 全 OK、dist 完整性 121,286 文件 / sitemap 63,359 / 0 空、workflow 自检）；全量（含 trilingual + check_data + dist + workflow）**8/8 PASS（721.8s）**：py_compile 136 文件、etl 25、lib 29、mobile 29、trilingual 68/72（4 例 allowlist）、check_data、dist 完整性、workflow。日志 `.tmp/dose-mapping/ci-post-v092.log`。
-- **与基线对比**（`.tmp/trilingual/results_overnight_20261029.json`，2026-10-28）：基线同为 **72 例 68 通过 / Top-5 97.7%**、Top-1 96.0%；失败例完全相同（metformin combo 的 zh「西格列汀二甲双胍片」Top-5、ciclosporin/beclometasone/chlorphenamine 三个 dup_inn 拼写别名，均属**既有缺口**，已登记 CI allowed-failures）→ v0.9.0/v0.9.1/v0.9.2 均**未引入检索回归**。
+- **v0.9.2 收尾复跑**：`deploy/ci_checks.py --fast` **6 PASS / 2 SKIP**（17.5s；py_compile 136 文件 0 错误、etl/lib/mobile 全 OK、dist 完整性 121,286 文件 / sitemap 63,359 / 0 空、workflow 自检）；全量（含 trilingual + check_data + dist + workflow）**8/8 PASS（721.8s）**。日志 `.tmp/dose-mapping/ci-post-v092.log`。
+- **v0.9.3 收尾复跑**：`deploy/ci_checks.py --fast` **6 PASS / 2 SKIP**（17.4s；py_compile **138 文件**（+2：`etl/drift_check.py`、`db/migrate_provenance.py` 等）、etl/lib/mobile 全 OK、dist 完整性 121,286/63,359/0、workflow）；全量 **8/8 PASS（715.1s）**：py_compile 138 文件、etl 25、lib 29、mobile 29、trilingual 68/72（4 例 allowlist）、check_data、dist 完整性、workflow。日志 `.tmp/dose-mapping/ci-post-v093.log`。
+- **与基线对比**（`.tmp/trilingual/results_overnight_20261029.json`，2026-10-28）：基线同为 **72 例 68 通过 / Top-5 97.7%**、Top-1 96.0%；失败例完全相同（metformin combo 的 zh「西格列汀二甲双胍片」Top-5、ciclosporin/beclometasone/chlorphenamine 三个 dup_inn 拼写别名，均属**既有缺口**，已登记 CI allowed-failures）→ v0.9.0–v0.9.3 均**未引入检索回归**。
 - 说明：三语套件在 PowerShell 管道下会把 unittest 进度点写到 stderr（`NativeCommandError` 噪音），结果以 `OK`/汇总行为准（`reports/2026-10-26-手机通道.md` §3 有同样说明）。
 
-## 5. 未完成 / 下一步（v0.9.3 清单）
+## 5. 未完成 / 下一步（v0.9.4 清单）
 
 | # | 项 | 说明 | 归属 |
 |---|---|---|---|
-| 1 | **数据源漂移告警** | `etl/drift_check.py` + `data/sources/drift-baseline.json`（行数 ±10% / 字段增删 / 枚举新增阈值），接夜间指标 | **task-25（v0.9.3）** |
-| 2 | **数据溯源字段 + 治理文件** | `brand_family`/映射 CSV/substance 主名加 source/method/confidence/decided_at；LICENSE（MIT，数据不适用）/CONTRIBUTING/CITATION + `docs/数据溯源与许可.md` | **task-26（v0.9.3）** |
-| 3 | **UX/审计 P1 余项** | 404 搜索框、零结果三项动作、结果页分页/折叠、触控目标全量 44px、移动表头真实屏幕阅读器验证 | v0.9.3（UX audit §5） |
-| 4 | **core.json 瘦身（可选）** | 41.38 MB raw / 9.83 MB gzip；≤30MB 目标未执行 | v0.9.3 可选：列式/字典编码再压、按需分片 |
-| 5 | **task-5 / task-14** | 1,791 个 inn_en 含中文 → EN/ES 混排；ATC/大类页「通用名（代表商品名）」 | task-14 依赖 task-5；数据批 |
-| 6 | **AU 单位归一** | `microgram` 6,102 / `mg/g` 9,771 / `mg/mL` 4,402 等（155 个取值） | v0.9.3 数据跟进 |
-| 7 | **EMA（EU region）** | 本轮未做 | 后续数据批 |
-| 8 | **全量单包装名字页 102,192** | 只做 44,040 子集；v0.9.2 已 897.7 MiB（≤900 MiB） | 视体积预算分批（CN/TW 优先） |
-| 9 | **数据包逐条导出（可选）** | 当前只有 4 个聚合资源；逐条 products/names 需按来源过滤 + 单独体积预算 | 待许可/体积评估 |
-| 10 | 展示待核 | `mL/IU/mEq/mCi` 大写后 build `_RE_UNIT` 只匹配小写；`≥10 万` flags 522 行 | build 修 |
-| 11 | 定时任务 | 只保留 **2 条 cron**（00:35 开工 / 08:20 收尾）；原 7 条 at 取消，申请跟进日检 | Lead `schedule_list` 核对 |
+| 1 | **A4 每市场覆盖与新鲜度页** | 每市场产品数/规格覆盖/最后更新/已知缺口，四语；供 build 与验收使用 | v0.9.4 体验批 |
+| 2 | **B8 对比模式** | 选 2–3 个产品并排看成分/规格/状态（只列事实，不做替代判断） | v0.9.4 体验批 |
+| 3 | **task-5 成分名四语 + `name_lang`** | 1,791 个 inn_en 含中文 → INN 映射（多源+规则，判不了丢弃并计数）；schema 加 name_lang/canonical 语义；无译名显式角标，不机器翻译。**与 provenance wiring（15 个 ETL 写入点）合并窗口** | v0.9.4（task-14 依赖它） |
+| 4 | **EMA（EU region）** | 本轮未做；EU 层与市场注册表接口已预留 | v0.9.4 评估 |
+| 5 | **剩余 UX P1** | 404 搜索框、零结果三项动作、结果页分页/折叠、触控目标全量 44px、移动表头真实屏幕阅读器验证、What's new 构建 TODO、Confused 表头/重复药对、名称页「不可互换」短提示 | v0.9.4 体验批 |
+| 6 | **provenance 展示/接线** | `datapackage`/数据页展示 4 列；15 个 ETL 写入点接 `mark_substance()`（与 task-5 同窗口） | v0.9.4 |
+| 7 | **core.json 瘦身（可选）** | 41.38 MB raw / 9.83 MB gzip；≤30MB 目标未执行 | 后续可选 |
+| 8 | **全量单包装名字页 102,192** | 只做 44,040 子集；dist 已 897.7 MiB（≤900 MiB） | 视体积预算分批（CN/TW 优先） |
+| 9 | **数据包逐条导出（可选）** | 当前只有 4 个聚合资源；逐条需按来源过滤 + 单独体积预算 | 待许可/体积评估 |
+| 10 | **AU 单位归一** | `microgram` 6,102 / `mg/g` 9,771 / `mg/mL` 4,402 等（155 个取值） | 后续数据批 |
+| 11 | 展示待核 | `mL/IU/mEq/mCi` 大写后 build `_RE_UNIT` 只匹配小写；`≥10 万` flags 522 行 | build 修 |
+| 12 | 定时任务 | 只保留 **2 条 cron**（00:35 开工 / 08:20 收尾）；原 7 条 at 取消，申请跟进日检 | Lead `schedule_list` 核对 |
 
+> 已在 v0.9.3 关闭：名字页/单包装页英文表头、H1 混入来源版本、ATC 中英拼接、厂家页「剂量」列名、西语 1280 页头、溯源字段 schema（task-26 第一阶段）、漂移基线（task-25）、治理文件。
 > 已在 v0.9.2 关闭：旧 combo URL 404（8,455 stub）、LCP 3.1–3.6s→0.9–1.7s、数据打包（task-23）、最小 CI（task-24）。
 
 ## 6. 申请台账（本谷段变化）
@@ -203,6 +234,8 @@
 | `reports/ux-fixes-20261030.md` / `search-analytics-fix.md` / `artg-display-20261030.md` | v0.9.1 UX P0/WCAG/i18n 修复、搜索埋点修复、AU 展示（署名/Export Only/无成分） |
 | `reports/v091-size-strategy.md` / `v091-aufix.md` | v0.9.1 体积策略（combo 裁剪、AU-only 不建页）与 AU 多国名字页误杀修复（+2,622） |
 | `reports/lighthouse-lcp-20261030.md` / `combo-url-compat.md` / `data-packaging.md` / `ci-setup.md` | v0.9.2 LCP 99–100（0.9–1.7s）、8,455 旧 combo stub、数据产品（datapackage/dataset/checksums/字段字典）、最小 CI（本地 8/8 + Actions success） |
+| `reports/ux-p1-v093.md` / `drift-baseline-20261030.md` / `task26-provenance-impl.md` / `task26-provenance-design.md` | v0.9.3 UX P1 复核与修复、漂移基线（10/10 来源 + 自测）、溯源字段迁移/回填/回滚、LICENSE/CONTRIBUTING/CITATION/数据溯源与许可 |
+| `.tmp/build-v092.log` / `.tmp/build-v093.log` | v0.9.2 / v0.9.3 构建输出（`== done ==`、total 941.3 MB、页数） |
 | `docs/data-dictionary.md`（+ dist 副本） | 数据产品字段字典（8 个受限来源 `non_redistributable`） |
 | `.tmp/build-v090.log` / `.tmp/build-v091.log` / `.tmp/build-v091-aufix.log` | 构建输出（`== done ==`、耗时、文件数；v0.9.1 修复重发在 `-aufix`） |
 | `reports/tga-artg-response-20261029.md` / `artg-20261028-audit.md` / `artg-20261030-ingest.md` | TGA 答复、许可结论与 AU 入库执行（+32,904 产品、DB 419.6 MB、回滚清单） |
