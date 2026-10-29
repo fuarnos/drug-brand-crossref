@@ -5015,7 +5015,7 @@ def build_terms_json(db: sqlite3.Connection) -> dict[str, int]:
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
          canonical_rel: str = "", alt_rel: str = "", head_js: str = "",
-         noindex: bool = False) -> str:
+         noindex: bool = False, defer_i18n: bool = True) -> str:
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
@@ -5071,15 +5071,19 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
                '{"@context":"https://schema.org","@type":"WebSite",'
                '"name":"Medicine Brand Cross-Reference",'
                '"alternateName":"药品商品名跨国定位","url":"' + SITE_URL + '"}</script>')
+    dataset_link = (f'<link rel="alternate" type="application/ld+json" '
+                    f'href="{prefix}dataset.jsonld">')
+    head_scripts = (f'<script defer src="{prefix}assets/boot.js?v={BUILD_V}"></script>'
+                    if defer_i18n else "")
+    boot_scripts = ""
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}{noindex_meta}
 {favicon}{site_ld}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
-<script defer src="{prefix}assets/i18n.js?v={BUILD_V}"></script>
-<script>window.DSH_PREFIX={prefix!r};</script>
-<script defer src="{prefix}assets/bilingual.js?v={BUILD_V}"></script>{GC_TAG}{head_js}</head>
+{head_scripts}
+<script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header><div class="wrap">
@@ -5105,6 +5109,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
        data-i18n="report.all">Known issues</a>
   </span>
 </div></footer>
+{boot_scripts}
 </body></html>"""
 
 
@@ -6675,9 +6680,31 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
     (OUT / "combo").mkdir(parents=True, exist_ok=True)
     T = I18N["en"]
     made = 0
+    stub_made = 0
     for sids, rows in groups.items():
         slug = combo_slug(sids)
         if slug not in COMBO_PAGE_SLUGS:
+            # v0.9.2 task-33：被体积策略裁剪的旧组合 URL 保留极简 stub（200/noindex），
+            # 避免 v0.9.0 旧链接 404；不加入 sitemap。
+            # 所有被裁剪的组合都补，覆盖 v0.9.0 可能存在的 AU-only 旧 URL。
+            names = " + ".join(subs.get(s, (s, s))[1] for s in sids)
+            stub_items = "".join(
+                f'<li>{_drug_ref(s, esc(subs.get(s, (s, s))[1]))}</li>' for s in sids)
+            stub = ("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+                    "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
+                    "<meta name=\"robots\" content=\"noindex,follow\">"
+                    f"<title>{esc(names)}</title>"
+                    "<style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:2rem auto;"
+                    "padding:0 1rem;color:#1f2328}a{color:#0b6b53}.meta{color:#5f6b64;font-size:.9rem}</style>"
+                    "</head><body><main><p class=\"meta\">Combination record · 组合记录</p>"
+                    f"<h1>{esc(names)}</h1>"
+                    "<p>该组合页暂未展开；请从成分页或搜索入口查看。 "
+                    "This combination page is not expanded; use the ingredient pages or search.</p>"
+                    f"<ul>{stub_items}</ul><p><a href=\"../index.html\">Search / 搜索</a></p>"
+                    "</main></body></html>")
+            (OUT / "combo" / slug).write_text(stub, encoding="utf-8")
+            NOINDEX_RELS.add(f"combo/{slug}")
+            stub_made += 1
             continue
         ing_items = []
         for sid in sids:
@@ -6733,6 +6760,7 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         (OUT / "combo" / slug).write_text(
             page(title, body, "../", canonical_rel=f"combo/{slug}"), encoding="utf-8")
         made += 1
+    print(f"  combo stubs: {stub_made} (noindex, old URL compatibility)")
     return made
 
 
@@ -6957,6 +6985,37 @@ def _app_boot(prefix: str) -> str:
             'document.body.appendChild(s);});</script>')
 
 
+def _optimize_home_html(html: str, prefix: str) -> str:
+    """v0.9.2 task-34：首页首屏优化（仅首页，避免全站 HTML 膨胀）。
+
+    - CSS 内联，去掉 24KB 阻塞样式请求；
+    - i18n 内联并在 body 末尾立即 apply()，避免 defer 脚本拖 LCP；
+    - app.js / bilingual.js 在 load 后注入，保证搜索可用但不挡首屏。
+    """
+    css_link = f'<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">'
+    html = html.replace(css_link, f"<style>{CSS}</style>")
+    for pat in (
+            rf'<script defer src="{re.escape(prefix)}assets/i18n\.js\?v={re.escape(BUILD_V)}"></script>',
+            rf'<script defer src="{re.escape(prefix)}assets/bilingual\.js\?v={re.escape(BUILD_V)}"></script>',
+            rf'<script defer src="{re.escape(prefix)}assets/app\.js\?v={re.escape(BUILD_V)}"></script>',
+    ):
+        html = re.sub(pat, "", html)
+    i18n_path = OUT / "assets" / "i18n.js"
+    i18n_js = (i18n_path.read_text(encoding="utf-8") if i18n_path.exists() else "")
+    i18n_js = i18n_js.replace(
+        "window.addEventListener('load', apply);",
+        "apply(); window.addEventListener('load', apply);")
+    boot = (
+        f'<script>window.__DSH_I18N_ROOT=new URL({prefix!r} || "../", location.href).href;</script>'
+        f"<script>{i18n_js}</script>"
+        "<script>window.addEventListener('load',function(){"
+        f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
+        "document.body.appendChild(s);"
+        f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js?v={BUILD_V}';"
+        "document.body.appendChild(b);});</script>")
+    return html.replace("</body>", boot + "</body>")
+
+
 def build_index_page(entries, stats, coverage) -> None:
     """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
@@ -7026,10 +7085,13 @@ does not exist. Coverage:</span> {covline}.</div>
                      .replace("{APP_BOOT}", _app_boot(prefix)))
         html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
-                    canonical_rel=path, alt_rel="", head_js=U1_HEAD_JS)
+                    canonical_rel=path, alt_rel="",
+                    head_js=U1_HEAD_JS + '<link rel="alternate" type="application/ld+json" href="../dataset.jsonld">' if path else
+                    U1_HEAD_JS + '<link rel="alternate" type="application/ld+json" href="dataset.jsonld">',
+                    defer_i18n=False)
         target = OUT / (path + "index.html")
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(html, encoding="utf-8")
+        target.write_text(_optimize_home_html(html, prefix), encoding="utf-8")
 
 
 SOURCE_SHORT = {
@@ -7099,9 +7161,14 @@ def build_about(stats, coverage, source_cover=()) -> None:
     if GOATCOUNTER_CODE:
         parts.append(f'<div data-i18n-html="about.analytics">{T["about.analytics"]}</div>')
     parts.append(f'<div data-i18n-html="about.stats">{T["about.stats"]}</div>')
+    parts.append('<p class="sub"><a href="datapackage.json">Data package</a> · '
+                 '<a href="dataset.jsonld">Dataset metadata (schema.org)</a> · '
+                 '<a href="checksums.txt">SHA-256 checksums</a> · '
+                 '<a href="docs/data-dictionary.md">Data dictionary</a></p>')
     body = "\n".join(parts)
     html = page("About", body, meta_key="about", alternates=True,
-                canonical_rel="about.html", alt_rel="about.html")
+                canonical_rel="about.html", alt_rel="about.html",
+                head_js='<link rel="alternate" type="application/ld+json" href="dataset.jsonld">')
     _write_with_copies("about.html", html, "about")
 
 def build_confused(db: sqlite3.Connection) -> int:
@@ -8192,6 +8259,152 @@ a{{color:#0b6b53}}
     (OUT / "404.html").write_text(html, encoding="utf-8")
 
 
+def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cover) -> None:
+    """v0.9.2 task-23：派生层数据包（聚合/覆盖/成分清单），不导出受限来源原始记录。"""
+    exports = OUT / "data" / "exports"
+    exports.mkdir(parents=True, exist_ok=True)
+
+    def write_csv(name: str, fields: list[tuple[str, str]], rows) -> dict:
+        path = exports / name
+        with path.open("w", encoding="utf-8", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow([f[0] for f in fields])
+            for row in rows:
+                w.writerow(row)
+        return {"path": f"data/exports/{name}", "bytes": path.stat().st_size,
+                "hash": "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest(),
+                "fields": fields, "count": sum(1 for _ in path.open(encoding="utf-8")) - 1}
+
+    coverage_fields = [
+        ("country", "string"), ("n_products", "integer"), ("n_variants", "integer"),
+        ("n_active", "integer"), ("last_synced", "date")]
+    cov_rows = [[r.get("country"), r.get("n_products"), r.get("n_variants"),
+                 r.get("n_active"), r.get("last_synced")] for r in coverage]
+    coverage_res = write_csv("coverage.csv", coverage_fields, cov_rows)
+
+    market_rows = db.execute(
+        """SELECT p.country, COUNT(DISTINCT p.product_id) AS products,
+                  COUNT(DISTINCT v.substance_id) AS substances,
+                  COUNT(DISTINCT pn.key_id) AS name_keys
+           FROM product p
+           LEFT JOIN product_component pc ON pc.product_id=p.product_id
+           LEFT JOIN variant v ON v.variant_id=pc.variant_id
+           LEFT JOIN product_name pn ON pn.product_id=p.product_id
+           GROUP BY p.country ORDER BY p.country""").fetchall()
+    market_res = write_csv("market-summary.csv", [
+        ("country", "string"), ("products", "integer"), ("substances", "integer"),
+        ("name_keys", "integer")], [list(r) for r in market_rows])
+
+    name_rows = db.execute(
+        """SELECT country, name_type, COUNT(*) AS n
+           FROM product_name pn JOIN product p USING(product_id)
+           GROUP BY country, name_type ORDER BY country, name_type""").fetchall()
+    name_res = write_csv("name-summary.csv", [
+        ("country", "string"), ("name_type", "string"), ("n", "integer")],
+        [list(r) for r in name_rows])
+
+    sub_rows = db.execute(
+        "SELECT substance_id, inn_en, inn_zh, atc FROM substance ORDER BY substance_id").fetchall()
+    sub_res = write_csv("substances.csv", [
+        ("substance_id", "string"), ("inn_en", "string"), ("inn_zh", "string"),
+        ("atc", "string")], [list(r) for r in sub_rows])
+
+    resources = []
+    for res, name, title, desc in (
+            (coverage_res, "coverage", "Coverage by market",
+             "Aggregated product/variant/active counts and last sync date per country."),
+            (market_res, "market-summary", "Market summary",
+             "Aggregated products, substances and name keys per country."),
+            (name_res, "name-summary", "Name-layer summary",
+             "Aggregated product-name counts by country and name_type (trade/inn); no per-record export."),
+            (sub_res, "substances", "Substance list",
+             "INN identifiers and names with ATC codes; no product-level source rows.")):
+        resources.append({
+            "name": name, "title": title, "description": desc,
+            "path": res["path"], "format": "csv", "mediatype": "text/csv",
+            "bytes": res["bytes"], "hash": res["hash"], "count": res["count"],
+            "schema": {"fields": [{"name": f, "type": t} for f, t in res["fields"]]},
+        })
+
+    # 来源分级：CN/AU/MX 等未确认或限制再发布的来源标 non_redistributable；
+    # 数据包只发布聚合/事实层，不发布受限来源的原始记录。
+    restricted = {"CN", "AU", "MX"}
+    source_countries: dict[str, set[str]] = defaultdict(set)
+    for r in source_cover:
+        source_countries[r.get("source_id") or ""].add(r.get("country") or "")
+    sources = []
+    for r in db.execute("SELECT source_id, name, url, license, license_url, data_as_of FROM source ORDER BY source_id"):
+        countries = sorted(c for c in source_countries.get(r["source_id"], set()) if c)
+        non_redist = bool(set(countries) & restricted)
+        sources.append({
+            "id": r["source_id"], "name": r["name"], "url": r["url"],
+            "license": r["license"], "license_url": r["license_url"],
+            "data_as_of": r["data_as_of"], "countries": countries,
+            "redistributable": not non_redist,
+            "note": "non_redistributable: aggregate facts only; no raw-record export" if non_redist else "",
+        })
+
+    version = LATEST_VERSION or "v0.9.2"
+    pkg = {
+        "profile": "tabular-data-package",
+        "name": "drug-brand-crossref-derived",
+        "title": "Medicine Brand Cross-Reference — derived data package",
+        "description": ("Derived, aggregate-first data package for the cross-market medicine brand "
+                        "reference. Product/name records are not redistributed from restricted sources; "
+                        "only aggregates and a substance list are included."),
+        "version": version,
+        "created": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "homepage": SITE_URL,
+        "licenses": [{
+            "name": "mixed-derived",
+            "title": "Derived data — source licences apply; see docs/数据溯源与许可.md",
+            "path": "https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/数据溯源与许可.md",
+        }],
+        "sources": sources,
+        "resources": resources,
+        "counts": {"products": stats.get("products"), "substances": stats.get("substances"),
+                   "name_keys": stats.get("keys"), "markets": len(coverage)},
+    }
+    pkg_path = OUT / "datapackage.json"
+    pkg_path.write_text(json.dumps(pkg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    dataset = {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Medicine Brand Cross-Reference — derived data",
+        "description": pkg["description"],
+        "url": SITE_URL + "datapackage.json",
+        "version": version,
+        "dateModified": time.strftime("%Y-%m-%d", time.gmtime()),
+        "license": pkg["licenses"][0]["path"],
+        "creator": {"@type": "Organization", "name": "Medicine Brand Cross-Reference",
+                    "url": SITE_URL},
+        "isAccessibleForFree": True,
+        "distribution": [
+            {"@type": "DataDownload", "name": r["name"], "contentUrl": SITE_URL + r["path"],
+             "encodingFormat": r["mediatype"], "contentSize": r["bytes"]} for r in resources
+        ] + [{"@type": "DataDownload", "name": "datapackage.json",
+              "contentUrl": SITE_URL + "datapackage.json",
+              "encodingFormat": "application/json"}],
+    }
+    (OUT / "dataset.jsonld").write_text(
+        json.dumps(dataset, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    files = [("datapackage.json", pkg_path), ("dataset.jsonld", OUT / "dataset.jsonld")]
+    docs_src = ROOT / "docs" / "data-dictionary.md"
+    if docs_src.exists():
+        docs_dir = OUT / "docs"
+        docs_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(docs_src, docs_dir / "data-dictionary.md")
+        files.append(("docs/data-dictionary.md", docs_dir / "data-dictionary.md"))
+    files += [(r["path"], OUT / r["path"]) for r in resources]
+    checks = []
+    for rel, path in files:
+        checks.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {rel}")
+    (OUT / "checksums.txt").write_text("\n".join(checks) + "\n", encoding="utf-8")
+    print(f"  data package: {len(resources)} resources, checksums.txt", flush=True)
+
+
 def build_export_only_json(db: sqlite3.Connection) -> None:
     """v0.9.1 task-28：Export Only 产品 ID 集合（明细面板懒加载）。"""
     ids = [r[0] for r in db.execute(
@@ -8485,6 +8698,14 @@ def main() -> None:
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     (OUT / "data").mkdir(parents=True, exist_ok=True)
     (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
+    (OUT / "assets" / "boot.js").write_text(
+        "var s=document.currentScript;"
+        "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
+        "window.addEventListener('load',function(){"
+        "var a=document.createElement('script');a.src=r+'assets/i18n.js';"
+        "a.onload=function(){var b=document.createElement('script');"
+        "b.src=r+'assets/bilingual.js';document.body.appendChild(b);};"
+        "document.body.appendChild(a);});\n", encoding="utf-8")
     def _render_i18n_js() -> str:
         return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n"
                 + LANG_META_JS + "\n" + r"""
@@ -8493,7 +8714,7 @@ def main() -> None:
   // 站点根路径：i18n.js 在 <head> 同步执行，currentScript 可用。
   // GitHub Pages 是项目子路径（/drug-brand-crossref/），不能假设语言目录在域名根。
   var scriptEl = document.currentScript;
-  var ROOT = ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n\.js.*$/, '');
+  var ROOT = window.__DSH_I18N_ROOT || ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n\.js.*$/, '');
   var rootPath = '/';
   try{ rootPath = new URL(ROOT).pathname || '/'; }catch(e){}
   function relPath(){
@@ -8816,6 +9037,7 @@ def main() -> None:
     build_atc_index()
     build_categories_json(db)
     build_export_only_json(db)
+    build_data_package(db, stats, coverage, source_cover)
     print("building 404 ...", flush=True)
     build_404()
     build_seo_files()

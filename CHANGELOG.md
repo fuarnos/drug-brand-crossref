@@ -4,6 +4,14 @@
 站点页脚、About 页、GitHub Release 三处保持同一个版本号；`/whats-new.html` 直接从这里生成。
 上线前先把本节写好，再建站、发布。
 
+## v0.9.2 — 2026-10-30
+
+- **性能大幅提升**：移动端 Lighthouse 四个页面 Performance **99/99/100/100**、LCP **0.9–1.7 s**（v0.9.1 为 3.1–3.6 s），无障碍 / 最佳实践 / SEO 全 **100**；首屏关键资源与 i18n 改为页面 load 后注入，首屏更轻。
+- **旧链接兼容**：v0.9.0 因体积策略被裁掉的组合页全部生成 `noindex` stub（**8,455** 个），v0.9.0 的旧 URL 不再 404（内部链接与搜索行为不变）。
+- **数据产品（只发派生层）**：新增 `datapackage.json`（coverage / market-summary / name-summary / substances 4 个聚合派生资源，含字段、行数、sha256、版本）+ `dataset.jsonld`（schema.org Dataset）+ `checksums.txt` + 字段字典；About 增加入口链接。对外只发聚合派生层，**8 个受限来源标 `non_redistributable`**、不重分发原始记录。
+- **工程质量**：新增最小 CI（GitHub Actions，push/PR 到 main 跑测试 + py_compile + 内容完整性检查），与本地发布门槛同一入口；发布仍只在本地。
+- 站点 121,286 文件 / 941.27 MB（897.7 MiB）；sitemap 63,359 URL；四语 i18n 对齐。
+
 ## v0.9.1 — 2026-10-30
 
 - **澳大利亚全量上线**：AU 产品由 **11,890 → 44,794**（新增 **32,904** 个 TGA ARTG 2026-10-28 产品），页面与 About 标注 TGA ARTG 来源与数据日期；源未提供注册状态，统一显示「状态未确认」；Export Only 产品单独标注；无成分的产品标注「成分未收录（名称层）」，不臆造成分。
