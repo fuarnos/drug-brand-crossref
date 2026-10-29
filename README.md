@@ -97,6 +97,20 @@ TRUD 的 key 放在 `.env` 的 `TRUD_API_KEY=`，不要提交。
 & $py -m unittest discover -s mobile -t .  # 手机指令队列
 ```
 
+### CI 与本地门槛一致
+
+GitHub Actions（`.github/workflows/ci.yml`）在 push / PR 到 `main` 时跑 `deploy/ci_checks.py`——与本地发布前跑的是**同一个入口**：
+
+```powershell
+& $py deploy/ci_checks.py            # 全量（含三语检索，约 10 分钟）
+& $py deploy/ci_checks.py --fast     # 跳过三语检索（改代码时用）
+```
+
+CI 里没有 `data/drugs.db` 与 `site/dist`（都在 `.gitignore`），所以依赖库/产物的检查
+（trilingual、`db/check_data.py`、dist 完整性）在 CI 里自动 SKIP，**发布前必须在本地跑全量**。
+三语检索已知 4 个词表缺口（metformin/combo、ciclosporin/beclometasone/chlorphenamine 的 dup_inn）
+在脚本里登记为 allowed-failures，出现其他失败或低于基线一律红；清零后从 allowlist 移除。
+
 ## 目录
 
 ```

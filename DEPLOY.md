@@ -118,15 +118,38 @@ git push --force origin <commit>:refs/heads/gh-pages
 
 推送后 Pages 会自动重建，约 1 分钟生效。
 
-## 为什么不用 GitHub Actions
+## 为什么发布不交给 GitHub Actions
 
-建站依赖本地 `data/drugs.db`（几百 MB，已 gitignore），CI 里没有这个库，跑不了
-`site/build.py`。`deploy/pages.yml` 只是备用工作流，**当前没有启用**；哪天把数据入库
-也搬进 CI，再切到 Actions。
+建站依赖本地 `data/drugs.db`（约 420 MB，已 gitignore）和约 900 MB 的 `site/dist`，
+CI 里既没有库也放不下产物，所以**发布仍然只在本地跑 `publish.ps1`**。
+`deploy/pages.yml` 只是备用工作流，**当前没有启用**；`.github/workflows/ci.yml`
+只跑测试与内容完整性（见下节），不发布、不写库、不需要任何 secret。
+
+## CI（测试 + 内容完整性）
+
+`.github/workflows/ci.yml` 在 push / PR 到 `main` 时跑 `deploy/ci_checks.py`——与本地发布前
+**同一入口、同一判定**：
+
+- py_compile 全仓 Python + etl / lib / mobile 三套 unittest；
+- trilingual（有 `data/drugs.db` 才跑；CI 无库自动 SKIP，本地发布前必跑）；
+- `db/check_data.py`（同上，只读）；
+- `site/dist` 完整性（dist 存在才跑）：根文件、`core.json`、sitemap URL 数、0 字节文件、`node --check app.js`；
+- 三语检索已知 4 个词表失败登记为 allowed-failures，其他失败 / 低于基线一律红。
+
+本地跑同一入口：
+
+```powershell
+& $py deploy/ci_checks.py          # 全量（约 10 分钟）
+& $py deploy/ci_checks.py --fast   # 跳过三语检索
+```
+
+**让 CI 挡合并**（仓库设置，需人工点一次）：Settings → Branches → Add branch protection rule →
+Branch name pattern `main` → 勾选 **Require status checks to pass before merging** → 选
+`tests + integrity`（workflow `ci`）→ Save。之后 PR 不绿不能合并。
 
 ## 备选：Netlify 拖拽
 
-临时演示可以用，不作为主线。`site/dist` 现在 116,883 个文件 / 770.8 MB（v0.9.0 实测）。
+临时演示可以用，不作为主线。`site/dist` 现在 112,822 个文件 / 936.97 MB（v0.9.1 实测）。
 
 1. 打开 <https://app.netlify.com/drop>
 2. 把 `site/dist` 文件夹整个拖进去
@@ -136,6 +159,7 @@ git push --force origin <commit>:refs/heads/gh-pages
 
 ## 上线前检查
 
+- [ ] `python deploy/ci_checks.py` 全过（与 CI 同一入口：测试 + py_compile + dist 完整性）
 - [ ] `about.html` 里的来源署名完整（US openFDA / GB dm+d OGL / ES CIMA / MX COFEPRIS /
       CN 医保局快照 / **AU PBS API，须保留 Commonwealth 版权声明** / ARTG）
 - [ ] 中国数据标明是 **2025-04-04 快照**，不是实时

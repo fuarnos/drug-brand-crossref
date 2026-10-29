@@ -1,0 +1,47 @@
+# 最小 CI：与本地发布门槛同一个入口（deploy/ci_checks.py）。
+# 只读：不发布、不写库、不访问网络；secrets 不落库（本文件不需要任何 secret）。
+#
+# 跑什么：
+#   - py_compile 全仓 Python（etl/lib/site/db/mobile/deploy/tests）
+#   - etl / lib / mobile 三套 unittest
+#   - trilingual + db/check_data.py：需要 data/drugs.db；CI 里 DB 不入库 → 自动 SKIP（本地发布前必跑）
+#   - site/dist 完整性：dist 是生成物、不入库 → CI 里 SKIP（本地发布前由同一脚本检查）
+#   - .github/workflows/ci.yml 自检
+#
+# 为什么 DB/产物在 CI 里跳过：data/*.db、site/dist 都在 .gitignore（AGENTS §9），
+# 仓库里没有它们；把大文件塞进 CI 不划算。需要这两类检查时，发布前在本地跑
+# `python deploy/ci_checks.py`（同一个脚本、同一套判定）。
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: tests + integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run checks (same entry as local)
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python deploy/ci_checks.py --verbose
