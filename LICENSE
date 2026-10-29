@@ -1,0 +1,33 @@
+MIT License
+
+Copyright (c) 2026 同种药物商品名跨国定位站 contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------------
+范围说明（Scope note，中文）
+
+1. 本许可（MIT）**只覆盖代码**：`etl/`、`db/`、`lib/`、`site/`、`mobile/`、
+   `tests/`、`deploy/`、`run_all.py`、`cli.py`、`serve.py` 等本仓库的脚本与生成逻辑。
+2. **不覆盖数据**：`data/`（含 `data/sources/`）、`docs/` 中的来源内容，以及由数据
+   生成的站点数据文件。数据的再发布条件按**来源逐个判定**，见
+   [docs/许可清单.md](docs/许可清单.md) 与 [docs/数据溯源与许可.md](docs/数据溯源与许可.md)。
+3. `data/raw/`、`data/drugs.db`、`data/backups/`、`site/dist/` 不入库（可重建/可再抓），
+   仓库里不包含受限来源的整包原始文件。
+4. 本站只做药品身份对应与「不可互换」提示，**不给用药建议、不做剂量换算**。

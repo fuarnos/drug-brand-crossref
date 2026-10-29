@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "如果引用本站（站点/数据/代码），请使用以下信息。"
+title: "同种药物商品名跨国定位站（Drug Brand Crossref）"
+abstract: >-
+  给一个药品名字（商品名 / 通用名 / 俗称 / 包装上一行字），定位它是哪个药、
+  什么规格，并给出其他国家的对应产品。只做身份对应与「不可互换」提示，
+  不给用药建议、不做剂量换算。覆盖 10 个市场（US/GB/CA/AU/ES/MX/CN/SG/TW/HK）。
+type: software
+authors:
+  - name: "Drug Brand Crossref contributors"
+repository-code: "https://github.com/fuarnos/drug-brand-crossref"
+url: "https://github.com/fuarnos/drug-brand-crossref"
+license: MIT
+license-url: "https://github.com/fuarnos/drug-brand-crossref/blob/main/LICENSE"
+version: "0.9.2"
+date-released: "2026-10-30"
+keywords:
+  - drug brand name
+  - cross-reference
+  - INN
+  - ATC
+  - generic name
+  - medicine identification
+notes: >-
+  代码为 MIT；数据不随代码许可，按来源分级（见 docs/许可清单.md 与
+  docs/数据溯源与许可.md）。对外只发布派生层，不整包分发受限来源数据。
