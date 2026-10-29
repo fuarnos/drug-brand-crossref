@@ -31,10 +31,23 @@
       el.setAttribute('data-sub-orig', orig);
     }
     el.querySelectorAll('.tr-badge,.tr-ver,.tr-orig').forEach(function(n){ n.remove(); });
+    var inH1 = el.closest && el.closest('h1');
+    var srcEl = inH1 ? document.querySelector('[data-sub-src="' + sid + '"]') : null;
     var ent = (TERMS && TERMS.sub && TERMS.sub[sid]) || null;
     var tr = ent && ent[window.LANG];
-    if(!tr || !tr.n){ el.textContent = orig; return; }
+    if(!tr || !tr.n){
+      el.textContent = orig;
+      if(srcEl) srcEl.textContent = '';
+      return;
+    }
     el.textContent = tr.n;
+    if(inH1){
+      // v0.9.1 P1：H1 只留药名；来源/版本移到 H1 下方的 .sub，避免可访问名被污染。
+      if(srcEl){
+        srcEl.textContent = (tr.s ? srcLabel(tr.s) : '') + (tr.v ? ' · v' + tr.v : '');
+      }
+      return;
+    }
     var badge = document.createElement('span');
     badge.className = 'tr-badge';
     badge.textContent = srcLabel(tr.s);
@@ -86,7 +99,7 @@
     if(cb) cb.checked = SHOW;
     // task-114：英文副标题在英文界面隐藏（避免重复）
     document.querySelectorAll('.cat-en').forEach(function(el){
-      el.style.display = (window.LANG === 'en') ? 'none' : '';
+      el.style.display = (window.LANG === 'en' || !SHOW) ? 'none' : '';
     });
     if(OBS && OUT) OBS.observe(OUT, {childList: true, subtree: true});
   }
@@ -150,6 +163,12 @@
         });
       });
       function defaultCols(){
+        // v0.9.1 task-22：优先用服务端已渲染的默认列，避免 JS 再改列造成 CLS。
+        var pre = Array.prototype.map.call(
+          document.querySelectorAll('th[data-defcol="1"]'),
+          function(th){ return th.getAttribute('data-country'); }
+        ).filter(function(c){ return c && countries.indexOf(c) >= 0; });
+        if(pre.length) return pre.slice(0, 3);
         var order = countries.slice().sort(function(a, b){
           return (colCount[b] || 0) - (colCount[a] || 0);
         });
@@ -223,10 +242,16 @@
       var reset = document.createElement('button'); reset.type = 'button'; reset.className = 'mf-reset';
       reset.textContent = T('matrix.reset');
       resetWrap.appendChild(reset); panel.appendChild(resetWrap);
-      wrap.parentNode.insertBefore(box, wrap);
       var note = document.createElement('p'); note.className = 'sub matrix-sort-note';
       note.textContent = T('matrix.sort_note');
-      box.parentNode.insertBefore(note, wrap);
+      var slot = wrap.previousElementSibling;
+      if(slot && slot.classList.contains('mf-slot')){
+        slot.appendChild(box);
+        slot.appendChild(note);
+      }else{
+        wrap.parentNode.insertBefore(box, wrap);
+        wrap.parentNode.insertBefore(note, wrap);
+      }
       function current(){
         var cc = Array.from(cbox.querySelectorAll('input[type=checkbox]'));
         var sel = cc.filter(function(cb){ return cb.checked; })
@@ -245,18 +270,30 @@
           tr.style.display = ok ? '' : 'none';
           if(ok) visible++;
         });
+        var mobile = window.matchMedia && window.matchMedia('(max-width:719px)').matches;
         ths.forEach(function(th){
           var c = th.getAttribute('data-country');
           var show = s.countries.indexOf(c) >= 0;
-          th.style.display = show ? '' : 'none';
+          th.style.display = show ? (mobile ? '' : 'table-cell') : 'none';
           rows.forEach(function(tr){
             Array.from(tr.children).forEach(function(td){
-              if(td.getAttribute('data-country') === c) td.style.display = show ? '' : 'none';
+              if(td.getAttribute('data-country') === c){
+                td.style.display = show ? (mobile ? '' : 'table-cell') : 'none';
+              }
             });
           });
         });
         var cnt = box.querySelector('.mf-count');
-        cnt.textContent = T('matrix.showing').replace('{n}', visible).replace('{total}', rows.length);
+        if(!s.countries.length){
+          cnt.textContent = T('matrix.empty_markets');
+          cnt.classList.add('mf-warn');
+          cnt.setAttribute('role', 'status');
+        }else{
+          cnt.classList.remove('mf-warn');
+          cnt.textContent = T('matrix.showing').replace('{n}', visible).replace('{total}', rows.length)
+            + ' · ' + T('matrix.market_count')
+              .replace('{shown}', s.countries.length).replace('{total}', s.all.length);
+        }
         if(updateURL){
           try{
             var p = new URLSearchParams(location.search);

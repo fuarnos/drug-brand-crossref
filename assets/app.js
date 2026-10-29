@@ -3,6 +3,12 @@ const box = document.getElementById('q');
 const out = document.getElementById('out');
 const ctry = document.getElementById('country');
 const meta = document.getElementById('meta');
+// v0.9.1 P0-3：结果计数/加载/零结果固定在搜索框下方（移动端不滚过引导卡）。
+const searchWrapEl = document.querySelector('.searchwrap');
+if(searchWrapEl && meta){
+  searchWrapEl.insertAdjacentElement('afterend', meta);
+  meta.classList.add('search-status');
+}
 const acEl = document.getElementById('ac');
 const ctryLabel = document.getElementById('ctrylabel');
 // v0.6.3 U1：首屏引导关闭记忆（localStorage flag；隐私模式失败也不影响关闭）
@@ -42,18 +48,30 @@ function gcEvent(name){
     }
   }catch(e){}
 }
-let SEARCH_EV = null;
-function scheduleSearchEvent(q){
-  clearTimeout(SEARCH_EV);
+let SEARCH_SENT = [];
+let SEARCH_SUBMIT_Q = '';
+// v0.9.1 task-32：只在提交时记录一次搜索；同会话前缀合并；带 lang / q_len。
+function trackSearchSubmit(q){
   const term = norm(splitDose(q)[0]);
   if(!term || term.length < 2) return;
-  SEARCH_EV = setTimeout(()=>gcEvent('search-' + term.slice(0,40)), 900);
+  SEARCH_SUBMIT_Q = q;
+  // 同会话内「盐酸」→「盐酸左旋西替利嗪」这类前缀中间态合并，避免逐字事件。
+  for(const t of SEARCH_SENT){
+    if(term.indexOf(t) === 0 || t.indexOf(term) === 0) return;
+  }
+  SEARCH_SENT.push(term);
+  const lang = window.LANG || 'en';
+  gcEvent('search-' + term.slice(0,40) + '?lang=' + encodeURIComponent(lang)
+    + '&q_len=' + term.length);
 }
-// v0.8.2：零结果埋点 search0-<归一化查询>（去重/防抖/≤64 字符；空/单字符不发）
+// 保留旧函数名：render 内部不再上报，只有显式提交才走 trackSearchSubmit。
+function scheduleSearchEvent(q){ return; }
+// v0.8.2：零结果埋点（仅在提交查询后、确实零结果时发送；去重/≤64 字符）
 let SEARCH0_EV = null, SEARCH0_SENT = new Set();
 function scheduleSearch0(q){
   const term = norm(splitDose(q)[0]);
   if(!term || term.length < 2 || SEARCH0_SENT.has(term)) return;
+  if(!SEARCH_SUBMIT_Q || norm(splitDose(SEARCH_SUBMIT_Q)[0]) !== term) return;
   clearTimeout(SEARCH0_EV);
   const box0 = document.getElementById('q');
   const want = box0 ? box0.value.trim() : '';
@@ -62,7 +80,9 @@ function scheduleSearch0(q){
     if(cur && cur.value.trim() !== want) return;
     if(SEARCH0_SENT.has(term)) return;
     SEARCH0_SENT.add(term);
-    gcEvent('search0-' + term.slice(0,64));
+    const lang = window.LANG || 'en';
+    gcEvent('search0-' + term.slice(0,64) + '?lang=' + encodeURIComponent(lang)
+      + '&q_len=' + term.length);
   }, 900);
 }
 let IDX = [], NICKS = [], CONF = [], CATS = null;
@@ -186,8 +206,10 @@ function brandHTML(e){
     // 不链接、不放厂家；通用名/剂型作小字说明。
     const hint = [e.x || '', e.f ? labelOf('form', e.f, '') : '']
       .filter(Boolean).join(' · ');
+    const matched = e.d ? ` <span class="match-name" title="${esc(T('res.matched_name'))}">`
+      + `${esc(T('res.matched_name'))}: ${esc(e.d)}</span>` : '';
     return `<span data-brand="0" class="st-badge st-unknown brand-none">${esc(T('brand.none'))}</span>`
-      + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
+      + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
   }
   if(e && e.f){
     const f = labelOf('form', e.f, '');
@@ -198,6 +220,10 @@ function brandHTML(e){
   return `<span data-brand="1" title="${esc(title)}" class="brand-plain">${esc(d)}</span>`;
 }
 function ingredientHTML(e, cls){
+  const T = window.T || (k=>k);
+  if(e && e.nc){
+    return `<span class="st-badge st-unknown" data-i18n="ingredient.unrecorded">${esc(T('ingredient.unrecorded'))}</span>`;
+  }
   const label = ingredientLabel(e);
   const orig = (e && (e.x || e.d)) || '';
   if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>`;
@@ -240,11 +266,12 @@ function rowHTML(r){
   const tags = r.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (r.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
+  const exp = r.eo ? `<span class="badge export">${T('badge.export_only')}</span>` : '';
   const mah = makerHTML(r, T);
   return `<tr>
     <td class="c-ing">${ingredientHTML(r)}</td>
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${r.d || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(r)}${tags}${combo}${badge}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(r)}${tags}${combo}${exp}${badge}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
 // ── UI P0 ③④：自动完成 / 解析条 / 成分分组 + 品牌折叠 + 加载更多 ──────
@@ -313,7 +340,9 @@ function detPanelHTML(payload, key, e, T){
     const src = (payload.s && payload.s[r[11]]) || '';
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
     const brandCell = r[3] ? esc(r[3]) : esc(T('brand.none'));
-    return `<tr><td>${esc(r[1])}</td><td>${brandCell}</td>`
+    const exp = (EXPORT_ONLY && EXPORT_ONLY.has(r[0]))
+      ? ` <span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
+    return `<tr><td>${esc(r[1])}</td><td>${brandCell}${exp}</td>`
       + `<td>${esc(r[3]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
       + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
@@ -389,6 +418,7 @@ function brandRowHTML(e, T){
   const tags = (e.c || []).map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
+  const exp = e.eo ? `<span class="badge export">${T('badge.export_only')}</span>` : '';
   const mah = makerHTML(e, T);
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
   // v0.5.6：A3 上下文徽章、B6 行级报告、A1 明细展开按钮（e.n 条产品记录）
@@ -400,7 +430,7 @@ function brandRowHTML(e, T){
   return `<tr class="br" data-k="${esc(e.k)}">
     <td class="c-ing c-empty"></td>
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${badge}${ctx}${det}${rep}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${exp}${badge}${ctx}${det}${rep}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
 const RES_PAGE = 25;              // 每次「加载更多」新增的品牌行数
@@ -423,6 +453,14 @@ function makerLinkHTML(name, T){
     return `<a class="maker-link" href="${BASE}maker/${esc(slug)}.html">${esc(name)}</a>`;
   }
   return `<span class="maker-plain">${esc(name)}</span>`;
+}
+// v0.9.1 task-28：Export Only 产品 ID 集合（明细用；结果行已带 eo 标记）
+let EXPORT_ONLY = null;
+function loadExportOnly(){
+  if(EXPORT_ONLY) return Promise.resolve(EXPORT_ONLY);
+  return fetchJSON(BASE + 'data/export-only.json').then(a => {
+    EXPORT_ONLY = new Set(a || []); return EXPORT_ONLY;
+  }).catch(() => { EXPORT_ONLY = new Set(); return EXPORT_ONLY; });
 }
 function groupByIngredient(display){
   const order=[], map=new Map();
@@ -449,7 +487,7 @@ function resultsHTML(T){
     const vis = expanded ? g.rows : g.rows.slice(0, 2);
     const tags = [...g.tags].sort().map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
     html += `<tr class="grp"><td class="c-ing">${ingredientHTML(g.rows[0], 'grp-name')}`
-      + `<span class="grp-count">${g.rows.length} ${esc(T('res.brands_noun'))}</span></td>`
+      + `<span class="grp-count">${g.rows.length} ${esc(T('res.records_noun'))}</span></td>`
       + `<td colspan="3" class="grp-tags">${tags}</td></tr>`;
     for(let i=0; i<vis.length; i++){
       if(count >= RES_LIMIT){ cut = true; break; }
@@ -617,6 +655,7 @@ function acSelect(i){
   if(!it) return;
   box.value = it.atc || it.e.d || it.e.k;
   acClose();
+  trackSearchSubmit(box.value);
   render();
   try{ box.focus(); }catch(e){}
 }
@@ -662,7 +701,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793291673（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793298140（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -715,7 +754,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793291673').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793298140').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1076,6 +1115,11 @@ function renderCategory(cat, q){
 function render(){
   const q = box.value.trim();
   setCatsHidden(!!q);   // v0.8.2 task-116：有查询（结果/零结果）即收起大类块；清空恢复
+  if(q && u1El){
+    // v0.9.1 P0-3：首次搜索后自动收起「三步看懂」，移动端首屏直接看到结果/零结果。
+    u1El.hidden = true;
+    try{ localStorage.setItem('u1.dismiss.v1', '1'); }catch(e){}
+  }
   if(!q){ out.innerHTML=''; meta.textContent=''; syncURL('');
     const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
   // v0.6.4 A2：ATC 码/类前缀优先走独立路径（C07 / C07A / C07AB02 …）
@@ -1265,34 +1309,71 @@ function render(){
       + `<span class="exportnote" id="exportnote" role="status" aria-live="polite"></span>`
       + `</div>`
       + `<div id="reswrap">${resultsTableHTML(T2)}</div>`;
+    const noBrand = shown.filter(x => x[2] && x[2].t !== 1).length;
+    if(noBrand){
+      resHTML += `<p class="sub res-nobrand">`
+        + esc(T2('res.no_brand_note').replace('{n}', String(noBrand))) + `</p>`;
+    }
   } else {
     LAST_DISPLAY = [];
   }
 
   // 精确命中某个品牌之后，再把「同一成分的其他商品」单独列一段：
-  // 用户搜的是牌子，但真正想知道的往往是这个成分还有哪些选择。
+  // v0.9.1 P0-1：只收成分集合**完全相同**的条目；成分集合不同但共享成分的另立
+  // 「含相同成分之一（不是同一复方）」区块，绝不混进「同成分其他商品」。
   let sameHTML = '';
   const exactSubs = new Set();
   for(const [, t, e] of shown){
     if(t !== 'exact' && t !== 'compact') continue;
-    (e.vs && e.vs.length ? e.vs : [e.v]).forEach(s => exactSubs.add(s));
+    (e.vs && e.vs.length ? e.vs : [e.v]).forEach(s => { if(s) exactSubs.add(s); });
   }
   if(exactSubs.size && exactSubs.size <= 6){
-    const others = IDX.filter(x => !shownKeys.has(x.k) &&
-      (x.vs && x.vs.length ? x.vs : [x.v]).some(s => exactSubs.has(s)));
-    if(others.length){
+    const anchorSet = exactSubs;
+    function sidSet(e){
+      return new Set((e.vs && e.vs.length ? e.vs : [e.v]).filter(Boolean));
+    }
+    function sameSet(e){
+      const s = sidSet(e);
+      if(s.size !== anchorSet.size) return false;
+      for(const x of s){ if(!anchorSet.has(x)) return false; }
+      return true;
+    }
+    const others = IDX.filter(x => !shownKeys.has(x.k));
+    const sameRows = [], relatedRows = [];
+    for(const e of others){
+      const s = sidSet(e);
+      if(!s.size) continue;
+      let hit = false;
+      for(const x of s){ if(anchorSet.has(x)){ hit = true; break; } }
+      if(!hit) continue;
+      if(sameSet(e)) sameRows.push(e);
+      else relatedRows.push(e);
+    }
+    function tableFor(rows2, limit){
       const oRows = [];
-      for(const e of others.slice(0, 40)){
+      for(const e of rows2.slice(0, limit || 40)){
         const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
         for(const d of ds) oRows.push({x:e.x, xz:e.xz, d:d, b:e.d, m:e.m, mn:e.mn, mu:e.mu, ml:e.ml,
-                                   c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu});
+                                   c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu, eo:e.eo, nc:e.nc});
       }
-      sameHTML = `<h2>${T2('same.ing')}</h2>` +
-        `<p class="sub">${T2('same.note')}</p>` +
-        `<table class="res"><thead><tr>
+      return `<table class="res"><thead><tr>
           <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
           <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
         </tr></thead><tbody>${oRows.slice(0,80).map(rowHTML).join('')}</tbody></table>`;
+    }
+    sameHTML = '';
+    const parts = [];
+    if(sameRows.length){
+      parts.push(`<h2>${T2('same.ing')}</h2>`
+        + `<p class="sub">${T2('same.note')}</p>` + tableFor(sameRows, 40));
+    }
+    if(relatedRows.length){
+      parts.push(`<h2>${T2('same.related')}</h2>`
+        + `<p class="sub">${T2('same.related_note')}</p>` + tableFor(relatedRows, 40));
+    }
+    if(parts.length){
+      sameHTML = `<div class="notice" data-i18n="same.warning">${esc(T2('same.warning'))}</div>`
+        + parts.join('');
     }
   }
 
@@ -1349,7 +1430,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793291673，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793298140，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1393,10 +1474,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793291673 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793298140 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1793291673').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1793298140').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1406,7 +1487,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793291673').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793298140').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
@@ -1507,6 +1588,15 @@ function startSearch(){
   if(LEGACY){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const q = box.value.trim();
   if(!q){ render(); return; }
+  if(u1El){
+    // v0.9.1 P0-3：输入即收起引导，加载态/结果计数在搜索框下方可见。
+    u1El.hidden = true;
+    try{ localStorage.setItem('u1.dismiss.v1', '1'); }catch(e){}
+  }
+  // v0.9.1 P0-3：加载态放在搜索框下方（同结果计数位置），移动端首屏可见。
+  if(meta && !POOL_READY){
+    meta.textContent = (window.T || function(k){ return k; })('home.loading');
+  }
   // v0.6.4 A2：ATC 码查询需要完整索引（分片里的条目不一定带 atc 聚合），先确保 core 到位。
   if(atcQuery(splitDose(q)[0])){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const nq = norm(splitDose(q)[0]);
@@ -1586,7 +1676,7 @@ out.addEventListener('click', ev => {
     row.innerHTML = `<td colspan="7" class="detcell">${esc(Tr('a1.loading'))}</td>`;
     tr.parentNode.insertBefore(row, tr.nextSibling);
     detBtn.setAttribute('aria-expanded', 'true');
-    loadDetailBucket(detBucketOf(e)).then(payload => loadMakerMap().then(() => {
+    loadDetailBucket(detBucketOf(e)).then(payload => Promise.all([loadMakerMap(), loadExportOnly()]).then(() => {
       const cell = row.querySelector('.detcell');
       if(cell) cell.innerHTML = detPanelHTML(payload, k, e, Tr);
     }));
@@ -1624,7 +1714,7 @@ ctry.addEventListener('change', ()=>{
   startSearch();
 });
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
-  box.value=b.dataset.q; acClose(); startSearch(); box.focus();
+  box.value=b.dataset.q; acClose(); trackSearchSubmit(box.value); startSearch(); box.focus();
 }));
 // 自动完成键盘操作：↑↓ 移动、回车选中、Esc 关闭；点击在 #ac 上委托。
 box.addEventListener('keydown', ev => {
@@ -1641,7 +1731,7 @@ box.addEventListener('keydown', ev => {
     acPaint();
   } else if(ev.key === 'Enter'){
     if(open && AC_I >= 0){ ev.preventDefault(); acSelect(AC_I); }
-    else { acClose(); }
+    else { acClose(); trackSearchSubmit(box.value); }
   } else if(ev.key === 'Escape'){
     acClose();
   }
@@ -1692,5 +1782,6 @@ if(LEGACY){
   loadIndex().then(ok => { if(ok) render(); });
 } else if(initial){
   // ?q= 深链：立即加载（加载完直接出结果）。
+  trackSearchSubmit(initial);
   startSearch();
 }
