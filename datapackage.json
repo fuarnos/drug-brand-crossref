@@ -3,8 +3,8 @@
   "name": "drug-brand-crossref-derived",
   "title": "Medicine Brand Cross-Reference — derived data package",
   "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
-  "version": "v0.9.2",
-  "created": "2026-10-29T20:23:25Z",
+  "version": "v0.9.3",
+  "created": "2026-10-29T21:05:49Z",
   "homepage": "https://fuarnos.github.io/drug-brand-crossref/",
   "licenses": [
     {
