@@ -43,6 +43,7 @@
 | `inn_en` | string | 主名（可能是英文 INN，也可能是来源主名；见 provenance 说明） |
 | `inn_zh` | string | 中文名（可空） |
 | `atc` | string | ATC 码（可空；不是所有成分都有） |
+| `name_lang` | string | base 名语言：`en` / `zh`；仅标记来源主名语言，不是译名 |
 
 ## 3. 口径与边界
 
