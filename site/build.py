@@ -7066,11 +7066,15 @@ def build_seo_files() -> None:
     (OUT / "robots.txt").write_text(
         "User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "sitemap.xml\n",
         encoding="utf-8")
+    # 第三方部署验证文件：固定公开随机串，每次构建都写到站点根目录（不属于页面，不进 sitemap）。
+    # 用二进制写入保证恰好是 40 字节哈希 + LF（Windows 文本模式会写成 CRLF）。
+    (OUT / "e2fea3dfe91d65e7c4dc23106afa53e2.txt").write_bytes(
+        b"50b080b3ad91dc61bc684f8cef65ce3bbb99e77c\n")
     # GitHub Pages 默认会跑 Jekyll；.nojekyll 让它直接当静态文件发。
     # 内容留一行说明：发布脚本会拒绝 0 字节文件（防止构建中断发布半成品）。
     (OUT / ".nojekyll").write_text(
         "# GitHub Pages: serve this directory as-is (skip Jekyll)\n", encoding="utf-8")
-    print(f"  seo files  : 404 + robots + sitemap ({len(urls)} urls)", flush=True)
+    print(f"  seo files  : 404 + robots + sitemap ({len(urls)} urls) + deploy verify", flush=True)
 
 
 # ── P1 索引核心：列式 + 字典编码 ─────────────────────────────────────

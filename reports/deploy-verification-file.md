@@ -1,0 +1,1 @@
+2026-10-29：根目录部署验证文件已部署（`e2fea3dfe91d65e7c4dc23106afa53e2.txt`，内容 `50b080b3ad91dc61bc684f8cef65ce3bbb99e77c` + LF，41 B）；由 `site/build.py` 的 `build_seo_files()` 每次全量构建输出，不进 sitemap；构建 `== done ==`，dist 62,218 文件 / 472.5 MB，页脚 v0.8.4。
