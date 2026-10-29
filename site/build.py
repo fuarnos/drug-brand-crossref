@@ -5642,9 +5642,9 @@ def load_index(db: sqlite3.Connection):
         # （v0.9.1 task-28：3,911 个名称层产品需要可点）。
         single_ok = (n >= 2 or not a["sids"] or SINGLE_NAME_PAGE_MARKETS is None
                      or bool(set(a["c"]) & SINGLE_NAME_PAGE_MARKETS))
-        # v0.9.1 体积策略：AU 的 name_key 不单独建页（AU 为名称/成分层）；
-        # 商品名仍可检索，成分列链成分页/组合页。
-        worth_page = ((not pure_inn) and "AU" not in a["c"]
+        # v0.9.1 P0 回归修复：只排除 AU-only 的 name_key；AU+其他国家的名字页保留
+        # （原逻辑 "AU" not in c 误杀 3,345 个多国名字，/name/lipitor.html 等旧 URL 404）。
+        worth_page = ((not pure_inn) and set(a["c"]) != {"AU"}
                       and ((a["trade"] and single_ok) or level == "warning"))
         ordered_mah = sorted(a["mah"].items(), key=lambda kv: (-kv[1], kv[0]))
         first_maker = ordered_mah[0][0] if ordered_mah else ""

@@ -76,7 +76,7 @@
 - 唯一入口是 `deploy/publish.ps1`（或双击 `发布网站.cmd`），**绝不手工往 `gh-pages` 推**。曾发生过 `site/build.py` 还在写页面就推送、整站 404 的事故，见 [DEPLOY.md](DEPLOY.md)。
 - 顺序：① `CHANGELOG.md` 最上面加一节 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）→ ② `& $py site/build.py` 等 `== done ==` → ③ `& .\deploy\publish.ps1` → ④ `git tag -a vX.Y.Z` + GitHub Release（正文用 CHANGELOG 那一节）。
 - 版本号唯一来源是 CHANGELOG 第一节；站点页脚、`whats-new.html`、GitHub Release 都从它生成。
-- `publish.ps1` 自带完整性检查（`index.html`、`data/idx/core.json` ≥ 10 MB raw（v0.9.0 实测 35.8 MB raw / 8.68 MB gzip；`data/index.json` 自 v0.6.1 起不再生成）、文件数 ≥ 24,000、无 0 字节文件、构建未在跑）；失败会保留临时目录，别手动清理。
+- `publish.ps1` 自带完整性检查（`index.html`、`data/idx/core.json` ≥ 10 MB raw（v0.9.0 实测 35.8 MB raw / 8.68 MB gzip；v0.9.1 AU 全量后 41.3 MB raw / 9.67 MB gzip，**2026-10-30 起 `verify_live.py` 护栏为 gzip 2.5–12 MB / raw 11–50 MB**；`data/index.json` 自 v0.6.1 起不再生成）、文件数 ≥ 24,000、无 0 字节文件、构建未在跑）；失败会保留临时目录，别手动清理。
 - 回滚要人来拍板：先 `-DryRun` 检查，再考虑重新发布上一个 tag 的构建产物。
 
 ## 7. 并行工位纪律（多个会话 / 队友共享同一工作区）

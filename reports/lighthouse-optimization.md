@@ -1,6 +1,6 @@
 # Lighthouse / CWV / WCAG 优化报告（v0.9.1 task-22）
 
-> 2026-10-30 ｜ `site/build.py` ｜ **正式 `site/dist` 已构建（v0.9.1，882.6 MiB / 110,200 文件 / sitemap 60,737）**，未发布。
+> 2026-10-30 ｜ `site/build.py` ｜ **正式 `site/dist` 已构建（v0.9.1，893.6 MiB / 112,822 文件 / sitemap 63,359；含 AU 多国名字页回归修复）**，未发布。
 > 最终首页/成分页 Lighthouse：90/100/100/100、93/100/100/100（`.tmp/lighthouse-home-final.json`、`-drug-final.json`）；其余页面取同代码隔离构建值。
 > 浏览器：Chrome 156 headless；Lighthouse 12（默认移动端）；本地 HTTP 8124。基线 JSON：`.tmp/lighthouse-*.json`。
 

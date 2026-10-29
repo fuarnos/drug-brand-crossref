@@ -48,8 +48,10 @@ VERSION_RE = re.compile(r"v\d+\.\d+\.\d+")
 
 # gzip 传输体积合理区间（2026-10-27 线上实测 core 3,808,417 B / index 6,059,167 B；
 # 本机 gzip -9 core 3.68 MB，Pages 动态压缩约 +3.4%）。
-CORE_GZ_RANGE = (2_500_000, 9_000_000)
-CORE_RAW_RANGE = (11_000_000, 30_000_000)
+# 2026-10-30 v0.9.1：AU 全量入库后 core.json 增至 41.3 MB raw / 9.67 MB gzip（本机 gzip -9），
+# 旧上限 9 MB 会误报，故 gzip 上限 9 MB → 12 MB、raw 上限 30 MB → 50 MB（内容增长属预期，非回归）。
+CORE_GZ_RANGE = (2_500_000, 12_000_000)
+CORE_RAW_RANGE = (11_000_000, 50_000_000)
 INDEX_GZ_RANGE = (4_500_000, 13_000_000)
 INDEX_RAW_RANGE = (28_000_000, 60_000_000)
 SITEMAP_MIN_URLS = 25_000
