@@ -137,8 +137,8 @@
     "home.ca": "加拿大",
     "home.coverage": "查不到不代表這個藥不存在。目前涵蓋（國家和地區）：",
     "home.loading": "正在載入索引…",
-    "home.hint_idle": "首次搜尋需要載入索引，約 6 MB（gzip 壓縮後，之後瀏覽器會快取）——輸入、聚焦搜尋框或點一個示例即可開始。",
-    "home.hint_loading": "正在載入索引…（首次約 6 MB）",
+    "home.hint_idle": "首次搜尋只載入一個檢索分片（中位約 1.0 MB，gzip 後約 0.16 MB）；完整索引（core 約 42 MB，gzip 後約 9–10 MB）會在背景補齊——直接輸入、點搜尋框或選一個範例。",
+    "home.hint_loading": "正在載入檢索分片（中位約 1.0 MB，gzip 後約 0.16 MB）…",
     "error.index_failed": "索引沒載入成功。",
     "error.local_file": "如果是本地雙擊開啟的頁面，瀏覽器會攔截本地檔案讀取——請用 python -m http.server 起服務後訪問 http://localhost:8000/。",
     "error.retry": "重試",
@@ -291,7 +291,7 @@
     "about.sources": "<h2>資料來源與覆蓋</h2><div class=\"tablewrap\"><table><tr><th>市場</th><th>已收錄產品</th><th>資料截止</th></tr>@@COV@@</table></div><p class=\"sub\"><b>資料截止</b> = 資料來源自己發布 / 生效 / 快照的日期，不是我們的抓取日期。<code>live</code> = 即時目錄，源頭沒有單獨日期；<b>—</b> = 只有年度清單。</p><p class=\"sub\"><b>美國</b>：openFDA NDC Directory（美國政府公開資料）。<b>英國</b>：NHSBSA dm+d，Open Government Licence v3.0——<i>Contains public sector information licensed under the Open Government Licence v3.0.</i> <b>西班牙</b>：AEMPS CIMA——引用須註明來源與檔案最後更新日期，非開放許可（見下方許可段）。<b>墨西哥</b>：COFEPRIS 註冊清單（未標註開放許可，只存事實欄位並鏈回原文）；規格回填來自 datos.gob.mx 的採購/價格資料集，CC BY 4.0。<b>澳洲</b>：PBS Schedule API（保留版權宣告）+ TGA CMI 目錄 + 人工核對的 listed OTC 種子，只存事實欄位，不轉載 CMI/ARTG 全文。<b>加拿大</b>：Health Canada DPD，允許非商業再使用並須註明來源。<b>中國</b>：國家醫保局「醫保藥品分類與代碼資料庫」（2025-04-04 快照）；未找到開放的再發布許可，只存事實欄位並鏈回原文。</p>",
     "about.samename": "<h2>為什麼會有「同名不同藥」</h2><p class=\"sub\">同一個商標在不同市場屬於不同公司，配方可能完全不同。已驗證的例子：美國 <b>Tylenol</b> 是單一成分對乙醯胺基酚 500 mg，中國 <b>泰諾</b> 是四成分感冒藥，單一成分產品叫 <b>泰諾林</b>；美國 <b>Benadryl</b> 是苯海拉明，英國 <b>Benadryl</b> 是阿伐斯汀；美國 <b>Gaviscon</b> 是鋁/鎂抗酸劑，英國 Gaviscon 是海藻酸鹽筏劑。</p>",
     "about.gaps": "<h2>已知缺口</h2><ul class=\"sub\"><li>中國已入庫 14.6 萬條化學藥註冊，但約 9% 只能落到 CN 專屬成分（暫無英文 INN），ATC 只到第 4 級；中成藥未收錄。</li><li>劑量對應只做到同型對應（D1）；鹽基折算（D2）與生物利用度判定（D3）未做。</li><li>墨西哥官方清單沒有濃度列，只有 29% 的產品能從公開目錄回填。</li><li>加拿大 DPD 沒有包裝數量/價格，很多 OTC 消費裝在 DPD 電子化之前就獲批，貨架上有的產品可能查不到。</li><li><b>ATC 覆蓋——兩個分母：</b>全部 substance 為 @@ATC_ALL_PCT@@%（@@ATC_ALL@@ / @@ATC_ALL_N@@），藥物實體（inn_drug）為 @@ATC_DRUG_PCT@@%（@@ATC_DRUG@@ / @@ATC_DRUG_N@@）。缺口主要是非藥物實體（順勢療法、草藥、食品、材料），不是沒抓到資料。ATC 來自 Wikidata P267（CC0）與 ChEMBL（CC BY-SA 4.0）；WHOCC 的 ATC/DDD 索引需要授權，未使用。</li></ul>",
-    "about.analytics": "<h2>訪問統計</h2><p class=\"sub\">本站使用 <a href=\"https://www.goatcounter.com/\" target=\"_blank\" rel=\"noopener\">GoatCounter</a> 做匿名訪問統計：不使用 cookie、不記錄個人資料、不用於廣告；只統計頁面瀏覽、來源網站、國家/地區、瀏覽器與螢幕尺寸，以及站內搜尋詞和結果點擊，用於改進檢索品質。詳見 <a href=\"https://www.goatcounter.com/privacy\" target=\"_blank\" rel=\"noopener\">GoatCounter 隱私政策</a>。</p>",
+    "about.analytics": "<h2>訪問統計</h2><p class=\"sub\">本站使用 <a href=\"https://www.goatcounter.com/\" target=\"_blank\" rel=\"noopener\">GoatCounter</a> 做匿名訪問統計：不使用 cookie、不記錄個人資料、不用於廣告；只統計頁面瀏覽、來源網站、國家/地區、瀏覽器與螢幕尺寸，以及站內搜尋詞和結果點擊，用於改進檢索品質。搜尋詞（含無結果的查詢）僅以聚合事件名發送——只含正規化查詢文字，不與帳號、IP 或裝置識別碼關聯。搜尋事件只在提交時送出（Enter、示例詞或自動完成選項），輸入過程中的中間態不會送出；僅附查詢長度與介面語言。詳見 <a href=\"https://www.goatcounter.com/privacy\" target=\"_blank\" rel=\"noopener\">GoatCounter 隱私政策</a>。</p>",
     "about.stats": "<p class=\"sub\">統計：@@PRODUCTS@@ 個產品 · @@SUBSTANCES@@ 個成分 · @@KEYS@@ 個檢索名 · @@ALIASES@@ 條別名（其中 @@NICKNAMES@@ 條人工俗稱、@@DRUGTERMS@@ 條民間/類別詞）· @@CONFUSABLE@@ 對 FDA 易混淆藥對 · @@SEVERE@@ 個名字被標「同名不同藥」。</p>",
     "whatsnew.title": "更新日誌",
     "whatsnew.intro": "每次上線都帶一條更新摘要；舊版本已按 git tag 補到這裡，完整歷史見 <a href=\"https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md\" target=\"_blank\" rel=\"noopener\">CHANGELOG.md</a>。",
@@ -455,6 +455,16 @@
     "ingredient.unrecorded": "成分未收錄（名稱層）",
     "badge.export_only": "僅供出口",
     "about.au_source": "<p class=\"sub\"><b>澳大利亞</b>：TGA <b>ARTG Medicines 2026-10-28</b>（Australian Register of Therapeutic Goods；署名 TGA/ARTG）；資料截止 <b>2026-10-28</b>。匯出<b>無註冊狀態欄</b>，狀態一律顯示「未確認」；<b>在冊不代表在售</b>。另有 3,911 個無成分紀錄的產品，僅按名稱層展示。</p>",
-    "matrix.au_note": "澳大利亞 ARTG 資料無註冊狀態欄，狀態一律顯示「未確認」；在冊不代表在售。"
+    "matrix.au_note": "澳大利亞 ARTG 資料無註冊狀態欄，狀態一律顯示「未確認」；在冊不代表在售。",
+    "a11y.skip": "跳至主要內容",
+    "same.warning": "同名或同成分，都不代表可以互換。",
+    "same.related": "含相同成分之一（不是同一複方）",
+    "same.related_note": "這些記錄與你搜的成分至少有一個相同，但完整成分集合不同；它們不是同一種產品。",
+    "res.records_noun": "筆紀錄",
+    "res.matched_name": "命中名",
+    "res.no_brand_note": "有 {n} 筆紀錄沒有商品名，按名稱層顯示。",
+    "matrix.market_count": "市場 {shown}/{total}",
+    "matrix.empty_markets": "至少選一個市場才會顯示欄。",
+    "matrix.scroll_hint": "左右滑動查看更多市場 →"
   }
 }
