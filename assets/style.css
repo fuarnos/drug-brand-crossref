@@ -84,6 +84,18 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atclist{columns:2;column-gap:24px}
 .atclist li{break-inside:avoid;margin:2px 0}
 @media (max-width:719px){ .atclist{columns:1} }
+/* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
+.atc-src{color:var(--muted);font-size:11px;margin-left:6px;white-space:nowrap}
+.atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
+.atc-src-line{margin:-8px 0 10px}
+.atc-count{margin:-6px 0 10px}
+.salt{color:var(--muted);font-size:12px;margin-left:6px}
+.salt .nm{color:var(--muted)}
+.atcmembers .st-badge{margin-left:4px}
+.atcdetails{margin:8px 0 0}
+.atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
+.atcdetails .atcmembers{margin-top:6px}
+.cat-note .lang-block{margin:2px 0}
 .catquick{margin:18px 0 6px}
 .catquick h2{font-size:16px;margin:0 0 8px}
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
@@ -221,6 +233,17 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   vertical-align:top;line-height:1.35}
 .m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
 .m-zh{display:inline-block;margin:0 0 2px 0;font-size:11px;color:var(--muted)}
+/* v0.9.0 task-19/6：无商品名占位 / 矩阵 +N 展开 */
+.brand-none{color:var(--muted);font-weight:600}
+.m-none-ing{display:inline-block;font-size:11px;color:var(--muted);margin-left:4px}
+.m-more{display:inline-block;margin-left:4px;font-size:12px}
+.m-more summary{cursor:pointer;color:var(--accent);list-style:none}
+.m-more summary::-webkit-details-marker{display:none}
+.m-more summary:before{content:"+";font-weight:600}
+.m-more[open] summary:before{content:"−"}
+.m-rest{display:block;margin-top:4px;font-size:12px}
+.m-orig{display:block;margin-top:2px;font-size:11px;color:var(--muted);font-weight:400;white-space:normal}
+.name-single-note,.maker-single-note{margin:18px 0 0;color:var(--muted);font-size:13px}
 /* v0.8.4 task-128：状态彩色角标（A1 明细等） */
 .st-badge{display:inline-block;font-size:11px;padding:1px 6px;border-radius:999px;
   border:1px solid var(--line);margin-right:4px;white-space:nowrap}
@@ -230,6 +253,7 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .st-unknown{color:var(--muted);background:#f6f5f2}
 .c-brand{overflow-wrap:anywhere}
 .matrix-brand-note{margin:6px 0 0;font-size:12px}
+.matrix-hk-note{margin:4px 0 0;font-size:12px;color:var(--warn)}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
   background:#fff;padding:10px 12px}
@@ -244,8 +268,15 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   border-radius:8px;font-size:13px;background:#fff;color:var(--fg)}
 .mf-countries{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--fg)}
 .mf-countries label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
-.mf-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
+.m-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
   padding:6px 12px;font-size:13px;cursor:pointer}
+.mf-country-actions{display:flex;gap:6px;margin-top:4px}
+.mf-country-actions .mf-reset{padding:2px 8px;font-size:12px}
+/* v0.9.0 task-6：横滑 + 规格列 sticky + 移动端卡片 */
+.matwrap{position:relative}
+table.matrix thead th:first-child,
+table.matrix td.m-spec{position:sticky;left:0;z-index:2}
+table.matrix thead th:first-child{background:#faf9f6}
 .matrix-sort-note{margin:4px 0 0;font-size:12px}
 @media (max-width:767px){
   .matrix-filters .mf-panel{display:none}
@@ -255,8 +286,18 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   .mf-countries label{min-height:36px}
 }
 @media (max-width:719px){
-  table.matrix{min-width:840px}
-  .matwrap{margin:8px 0}
+  /* 移动端：每规格一张卡，市场列纵向排列，不横向滚动 */
+  .matwrap{overflow-x:visible;margin:8px 0}
+  table.matrix{display:block;min-width:0;width:100%;border-collapse:separate;border-spacing:0}
+  table.matrix thead{display:none}
+  table.matrix tbody{display:block}
+  table.matrix tr{display:block;background:#fff;border:1px solid var(--line);
+    border-radius:10px;margin:8px 0;padding:6px 8px}
+  table.matrix td{display:block;border:0;padding:3px 2px;white-space:normal;font-size:13px}
+  table.matrix td.m-spec{position:static;background:transparent;border-bottom:1px solid var(--line);
+    margin-bottom:4px;padding-bottom:6px}
+  table.matrix td[data-country]:before{content:attr(data-country) " · ";color:var(--muted);
+    font-weight:600;font-size:12px}
 }
 @media (max-width:719px){
   .u1steps{grid-template-columns:1fr}

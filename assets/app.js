@@ -180,6 +180,15 @@ function ingredientLabel(e){
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
 function brandHTML(e){
   let d = e && e.d != null ? String(e.d) : '';
+  const T = window.T || (k=>k);
+  if(e && e.t !== 1){
+    // v0.9.0 task-19：没有 trade 名 → 商品名位置只显示「无商品名」纯文本，
+    // 不链接、不放厂家；通用名/剂型作小字说明。
+    const hint = [e.x || '', e.f ? labelOf('form', e.f, '') : '']
+      .filter(Boolean).join(' · ');
+    return `<span data-brand="0" class="st-badge st-unknown brand-none">${esc(T('brand.none'))}</span>`
+      + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
+  }
   if(e && e.f){
     const f = labelOf('form', e.f, '');
     if(f && d.length > f.length && d.slice(-f.length) === f) d = d.slice(0, -f.length).trim();
@@ -303,14 +312,17 @@ function detPanelHTML(payload, key, e, T){
     const rel = (payload.r && payload.r[r[7]]) || '';
     const src = (payload.s && payload.s[r[11]]) || '';
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
-    return `<tr><td>${esc(r[1])}</td><td>${esc(r[3]) || '—'}${strength}</td>`
+    const brandCell = r[3] ? esc(r[3]) : esc(T('brand.none'));
+    return `<tr><td>${esc(r[1])}</td><td>${brandCell}</td>`
+      + `<td>${esc(r[3]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
       + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
-      + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td></tr>`;
+      + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
+      + `<td>${makerLinkHTML(r[9], T)}</td></tr>`;
   }).join('');
-  return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('a1.pack'))}</th>`
-    + `<th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
-    + `<th>${esc(T('a1.source'))}</th></tr></thead><tbody>${body}</tbody></table>`
+  return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('col.brand'))}</th>`
+    + `<th>${esc(T('a1.pack'))}</th><th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
+    + `<th>${esc(T('a1.source'))}</th><th>${esc(T('col.mah'))}</th></tr></thead><tbody>${body}</tbody></table>`
     + (rows.length >= 12 ? `<p class="sub">${esc(T('a1.more'))}</p>` : '');
 }
 // B7：导出当前视图全部结果（含折叠/未加载更多的行），纯前端。
@@ -397,6 +409,21 @@ let RES_EXPANDED = new Set();     // 已展开的分组下标
 let RES_GROUPS = null;            // [{ing, tags:Set, rows:[entry]}]
 let LAST_DISPLAY = [];            // v0.5.6 B7：当前视图全部命中（[score,tier,entry]）
 const DET_CACHE = new Map();      // v0.5.6 A1：明细桶缓存（bucket → payload）
+// v0.9.0 task-20：明细面板的厂家名 → 厂家页 slug（懒加载一次；18k 条不进结果索引）
+let MAKER_MAP = null;
+function loadMakerMap(){
+  if(MAKER_MAP) return Promise.resolve(MAKER_MAP);
+  return fetchJSON(BASE + 'data/maker-map.json').then(m => { MAKER_MAP = m || {}; return MAKER_MAP; })
+    .catch(() => { MAKER_MAP = {}; return MAKER_MAP; });
+}
+function makerLinkHTML(name, T){
+  if(!name) return '—';
+  const slug = MAKER_MAP && MAKER_MAP[name];
+  if(slug){
+    return `<a class="maker-link" href="${BASE}maker/${esc(slug)}.html">${esc(name)}</a>`;
+  }
+  return `<span class="maker-plain">${esc(name)}</span>`;
+}
 function groupByIngredient(display){
   const order=[], map=new Map();
   for(const [, t, e] of display){
@@ -635,7 +662,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793255377（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793291673（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -688,7 +715,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793255377').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793291673').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1322,7 +1349,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793255377，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793291673，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1366,10 +1393,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793255377 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793291673 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1793255377').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1793291673').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1379,7 +1406,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793255377').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793291673').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
@@ -1556,13 +1583,13 @@ out.addEventListener('click', ev => {
     const e = findEntryByKey(k) || {k: k, v: ''};
     const row = document.createElement('tr');
     row.className = 'detrow';
-    row.innerHTML = `<td colspan="4" class="detcell">${esc(Tr('a1.loading'))}</td>`;
+    row.innerHTML = `<td colspan="7" class="detcell">${esc(Tr('a1.loading'))}</td>`;
     tr.parentNode.insertBefore(row, tr.nextSibling);
     detBtn.setAttribute('aria-expanded', 'true');
-    loadDetailBucket(detBucketOf(e)).then(payload => {
+    loadDetailBucket(detBucketOf(e)).then(payload => loadMakerMap().then(() => {
       const cell = row.querySelector('.detcell');
       if(cell) cell.innerHTML = detPanelHTML(payload, k, e, Tr);
-    });
+    }));
     return;
   }
   // v0.6.3 U2：点国家 chip = 切到该国国家视图（复用现有 ctry 状态 + URL + 统计）

@@ -137,6 +137,28 @@
       var ths = Array.from(table.querySelectorAll('thead th[data-country]'));
       var rows = Array.from(table.querySelectorAll('tbody tr'));
       var countries = ths.map(function(th){ return th.getAttribute('data-country'); });
+      // v0.9.0 task-6：默认只显示 3 个市场列（产品最多 + 当前语言市场 + 第二多）；
+      // 其余市场由筛选器国家多选加入；mk=CN,TW 可分享，localStorage 记忆。
+      var LANG_MARKET = {en: 'US', es: 'ES', zh: 'CN', 'zh-Hant': 'TW'};
+      var colCount = {};
+      rows.forEach(function(tr){
+        countries.forEach(function(c){
+          var td = tr.querySelector('td[data-country="' + c + '"]');
+          if(td && (td.querySelector('.m-brand') || td.querySelector('.brand-none'))){
+            colCount[c] = (colCount[c] || 0) + 1;
+          }
+        });
+      });
+      function defaultCols(){
+        var order = countries.slice().sort(function(a, b){
+          return (colCount[b] || 0) - (colCount[a] || 0);
+        });
+        var out = [];
+        [order[0], LANG_MARKET[window.LANG] || '', order[1]].forEach(function(c){
+          if(c && countries.indexOf(c) >= 0 && out.indexOf(c) < 0) out.push(c);
+        });
+        return out.slice(0, 3);
+      }
       var forms = {}, releases = {};
       rows.forEach(function(tr){
         var f = tr.getAttribute('data-form') || '';
@@ -167,6 +189,12 @@
         lab.appendChild(cb); lab.appendChild(document.createTextNode(' ' + c));
         cbox.appendChild(lab);
       });
+      var ctrl = document.createElement('div'); ctrl.className = 'mf-country-actions';
+      var allBtn = document.createElement('button'); allBtn.type = 'button'; allBtn.className = 'mf-reset';
+      allBtn.setAttribute('data-mf-all', '1'); allBtn.textContent = T('matrix.country_all');
+      var clearBtn = document.createElement('button'); clearBtn.type = 'button'; clearBtn.className = 'mf-reset';
+      clearBtn.setAttribute('data-mf-clear', '1'); clearBtn.textContent = T('matrix.country_clear');
+      ctrl.appendChild(allBtn); ctrl.appendChild(clearBtn); cbox.appendChild(ctrl);
       panel.appendChild(cf);
       // 剂型
       var ff = document.createElement('label'); ff.className = 'mf-field';
@@ -235,30 +263,50 @@
             s.form ? p.set('mform', s.form) : p.delete('mform');
             s.rel ? p.set('mrel', s.rel) : p.delete('mrel');
             s.spec ? p.set('mspec', sinp.value.trim()) : p.delete('mspec');
-            (s.countries.length === s.all.length) ? p.delete('mcountry') : p.set('mcountry', s.countries.join(','));
+            s.countries.length ? p.set('mk', s.countries.join(',')) : p.delete('mk');
+            p.delete('mcountry');
             history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p.toString() : '') + location.hash);
+            try{ localStorage.setItem('dsh.matrix.mk', s.countries.join(',')); }catch(e){}
           }catch(e){}
         }
       }
-      // URL 初值
+      // URL / localStorage / 默认 3 列初值
+      var selected = [];
       try{
         var q = new URLSearchParams(location.search);
-        var mc = (q.get('mcountry') || '').split(',').filter(Boolean);
-        if(mc.length){
-          cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
-            cb.checked = mc.indexOf(cb.getAttribute('data-mf-country')) >= 0;
-          });
-        }
+        var rawMk = q.get('mk') || q.get('mcountry') || '';
+        selected = rawMk.split(',').filter(function(c){ return countries.indexOf(c) >= 0; });
         if(q.get('mform')) fsel.value = q.get('mform');
         if(q.get('mrel')) rsel.value = q.get('mrel');
         if(q.get('mspec')) sinp.value = q.get('mspec');
       }catch(e){}
+      if(!selected.length){
+        try{
+          var stored = localStorage.getItem('dsh.matrix.mk') || '';
+          selected = stored.split(',').filter(function(c){ return countries.indexOf(c) >= 0; });
+        }catch(e){}
+      }
+      if(!selected.length) selected = defaultCols();
+      cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+        cb.checked = selected.indexOf(cb.getAttribute('data-mf-country')) >= 0;
+      });
       fsel.addEventListener('change', function(){ apply(true); });
       rsel.addEventListener('change', function(){ apply(true); });
       sinp.addEventListener('input', function(){ apply(true); });
       cbox.addEventListener('change', function(){ apply(true); });
-      reset.addEventListener('click', function(){
+      allBtn.addEventListener('click', function(){
         cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = true; });
+        apply(true);
+      });
+      clearBtn.addEventListener('click', function(){
+        cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
+        apply(true);
+      });
+      reset.addEventListener('click', function(){
+        var defs = defaultCols();
+        cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+          cb.checked = defs.indexOf(cb.getAttribute('data-mf-country')) >= 0;
+        });
         fsel.value = ''; rsel.value = ''; sinp.value = '';
         apply(true);
       });
