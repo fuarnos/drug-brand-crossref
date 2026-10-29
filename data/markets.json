@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-28",
+  "updated": "2026-10-30",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -156,6 +156,23 @@
       "order": 85,
       "data_as_of": "2026-08-07",
       "notes": "已启用（v0.8.0，2026-10-28）：data.gov.sg / HSA「Listing of Registered Therapeutic Products」（SODL v1.0，可再发布须署名+链许可页；每 6 个月更新，data_as_of=2026-08-07）。真实库已入库 5,511 个在册产品（成分映射 94.7%，规格 90.1% 由 Strength 列解析）。新加坡为英文市场（无新语言）；「在冊名冊 ≠ 在售」，页面需明示；品牌名保留英文、成分中文走 inn_zh。"
+    },
+    {
+      "code": "HK",
+      "kind": "country",
+      "parent": null,
+      "group": "ASIA",
+      "name": { "en": "Hong Kong", "es": "Hong Kong", "zh": "中国香港" },
+      "i18n_key": "home.hk",
+      "flag": "🇭🇰",
+      "source_id": "hk_dh",
+      "extra_source_ids": [],
+      "default_lang": "zh-Hant",
+      "languages": ["zh-Hant", "en"],
+      "enabled": true,
+      "order": 88,
+      "data_as_of": "2026-10-23",
+      "notes": "已启用（v0.9.0，2026-10-30）：香港衞生署藥物辦公室（Drug Office）註冊藥劑製品名單（data.gov.hk，dataset hk-dh-dh_do-hk-dh-do-pharmaceutical-product；DATA.GOV.HK 条款允许自由再使用、须署名）。仅名称/持有人/注册号/活性成分层：**无规格、无剂型、无注册状态**；在册≠在售，页面须明示覆盖边界。真实库 13,935 个在册产品（2026-10-29 窗口入库），source_id=hk_dh，data_as_of=2026-10-23。"
     },
     {
       "code": "EU",

@@ -39,8 +39,9 @@ DB = ROOT / "data" / "drugs.db"
 # 现有站点（site/build.py 的 LANGS 与 i18n home.* key），注册表必须覆盖且不改其语义。
 # v0.7.0（task-87）：TW 市场 + zh-Hant 语言启用 → 8 国/4 语；
 # v0.8.0（SG 启用窗口）：SG 市场启用 → 9 国；语言仍 4（SG 为英文市场）。
+# v0.9.0（HK 启用）：HK 接入 → 10 市场；语言仍 4（HK 为繁中/英文名称层）。
 SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/")}
-SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG"}
+SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK"}
 
 
 def _db_countries() -> set[str] | None:
@@ -120,10 +121,10 @@ class TestJsonStructure(RegistryBase):
 class TestMarkets(RegistryBase):
     def test_registered_market_set(self) -> None:
         codes = set(self.reg.markets)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "EU"}, codes)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU"}, codes)
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK"},
                          set(self.reg.country_order))
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -468,7 +469,7 @@ class TestCliAndDocs(RegistryBase):
                            capture_output=True, text=True, encoding="utf-8", cwd=str(ROOT))
         self.assertEqual(0, p.returncode, p.stderr[-500:])
         data = json.loads(p.stdout)
-        self.assertEqual(10, len(data["markets"]))
+        self.assertEqual(11, len(data["markets"]))
         self.assertEqual(10, len(data["languages"]))
         self.assertEqual("US", data["markets"][0]["code"])
 

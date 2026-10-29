@@ -23,6 +23,7 @@
 from __future__ import annotations
 
 import csv
+import gzip
 import hashlib
 import html
 import json
@@ -33,6 +34,7 @@ import sqlite3
 import time
 import unicodedata
 from collections import defaultdict
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -142,6 +144,7 @@ I18N = {
         "home.mx": "Mexico", "home.au": "Australia", "home.ca": "Canada",
         "home.sg": "Singapore",
         "home.tw": "Taiwan",
+        "home.hk": "Hong Kong",
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
                           "Coverage (countries and regions):"),
         "home.loading": "Loading index…",
@@ -151,10 +154,17 @@ I18N = {
         "home.hint_loading": "Loading a small index shard (~0.2 MB)…",
         # v0.6.6：成分页多国并排矩阵
         "matrix.spec": "Strength / form / release",
+        "matrix.original": "Recorded as",
         "matrix.none": "not recorded",
+        "matrix.country_all": "All",
+        "matrix.country_clear": "Clear",
         "matrix.hidden_note": ("Discontinued, withdrawn or unverified-status products are hidden "
-                               "by default."),
+                               "by default; Hong Kong name/ingredient-layer records are shown as "
+                               "an exception."),
         "matrix.capped": "Showing the first {shown} of {total} strength/form rows.",
+        "matrix.hk_note": ("Hong Kong records are name/ingredient-level only: no strength, "
+                           "dosage form or registration status; being on the register does not "
+                           "prove current supply."),
         # v0.6.7：/warn 分页
         "warn.page_prev": "Previous", "warn.page_next": "Next",
         "warn.pagination": "Warning pages",
@@ -194,6 +204,7 @@ I18N = {
         "drug.status_note.withdrawn": "market authorisation withdrawn",
         "drug.status_note.unknown": "validity unknown",
         "drug.no_brand": "(no brand name)", "drug.also_called": "Also called:",
+        "brand.none": "No trade name",
         "drug.records": "records", "drug.showing": "showing first 40 of",
         "drug.sid": "Substance ID",
         "drug.notice": ("The same ingredient can carry completely different brand names in "
@@ -208,6 +219,7 @@ I18N = {
         "name.strength": "Strength", "name.release": "Release",
         "name.also": "Also written as", "name.found": "Found in",
         "name.empty": "No records",
+        "name.single_note": "Only one product record for this name so far.",
         "name.severe": ("This brand name points to different active ingredients in different "
                         "countries or variants. Check the composition, never treat the names "
                         "as equivalent."),
@@ -298,6 +310,7 @@ I18N = {
         "home.mx": "México", "home.au": "Australia", "home.ca": "Canadá",
         "home.sg": "Singapur",
         "home.tw": "Taiwán",
+        "home.hk": "Hong Kong",
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
                           "Cobertura (países y regiones):"),
         "home.loading": "Cargando el índice…",
@@ -307,10 +320,17 @@ I18N = {
         "home.hint_loading": "Cargando un fragmento del índice (~0,2 MB)…",
         # v0.6.6：成分页多国并排矩阵
         "matrix.spec": "Concentración / forma / liberación",
+        "matrix.original": "Registrado como",
         "matrix.none": "no consta",
+        "matrix.country_all": "Todos",
+        "matrix.country_clear": "Ninguno",
         "matrix.hidden_note": ("Los productos retirados, suspendidos o con estado no verificado "
-                               "se ocultan por defecto."),
+                               "se ocultan por defecto; los registros de Hong Kong (capa de "
+                               "nombre/ingrediente) se muestran como excepción."),
         "matrix.capped": "Mostrando las primeras {shown} de {total} filas de concentración/forma.",
+        "matrix.hk_note": ("Los registros de Hong Kong solo tienen capa de nombre/ingrediente: "
+                           "sin concentración, forma farmacéutica ni estado de registro; estar en "
+                           "el registro no prueba que se comercialice actualmente."),
         # v0.6.7：/warn 分页
         "warn.page_prev": "Anterior", "warn.page_next": "Siguiente",
         "warn.pagination": "Páginas de avisos",
@@ -350,6 +370,7 @@ I18N = {
         "drug.status_note.withdrawn": "autorización retirada",
         "drug.status_note.unknown": "validez desconocida",
         "drug.no_brand": "(sin nombre comercial)", "drug.also_called": "También llamado:",
+        "brand.none": "Sin nombre comercial",
         "drug.records": "registros", "drug.showing": "mostrando 40 de",
         "drug.sid": "ID de sustancia",
         "drug.notice": ("Un mismo principio activo puede tener nombres comerciales totalmente "
@@ -364,6 +385,7 @@ I18N = {
         "name.strength": "Concentración", "name.release": "Liberación",
         "name.also": "También escrito como", "name.found": "Presente en",
         "name.empty": "Sin registros",
+        "name.single_note": "Solo un registro de producto con este nombre por ahora.",
         "name.severe": ("Este nombre comercial corresponde a principios activos distintos "
                         "según el país o la variante. Comprueba la composición; nunca trates "
                         "los nombres como equivalentes."),
@@ -456,6 +478,7 @@ I18N = {
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
         "home.sg": "新加坡",
         "home.tw": "台湾",
+        "home.hk": "中国香港",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖（国家和地区）：",
         "home.loading": "正在加载索引…",
         "home.hint_idle": ("首次搜索只加载当前首字符的一小片索引（约 0.2 MB），完整索引会在后台补全"
@@ -463,9 +486,14 @@ I18N = {
         "home.hint_loading": "正在加载索引分片（约 0.2 MB）…",
         # v0.6.6：成分页多国并排矩阵
         "matrix.spec": "规格 / 剂型 / 释放",
+        "matrix.original": "原记录",
         "matrix.none": "未收录",
-        "matrix.hidden_note": "已停售、撤市或状态未确认的产品默认隐藏。",
+        "matrix.country_all": "全选",
+        "matrix.country_clear": "清空",
+        "matrix.hidden_note": "已停售、撤市或状态未确认的产品默认隐藏；香港记录（仅名称/成分层）例外显示。",
         "matrix.capped": "仅显示前 {shown} / {total} 个规格行。",
+        "matrix.hk_note": ("香港记录仅名称/成分层：无规格、无剂型、无注册状态；"
+                           "在册不代表在售。"),
         # v0.6.7：/warn 分页
         "warn.page_prev": "上一页", "warn.page_next": "下一页",
         "warn.pagination": "警示分页",
@@ -503,6 +531,7 @@ I18N = {
         "drug.status_note.withdrawn": "批文已撤销",
         "drug.status_note.unknown": "有效期待确认",
         "drug.no_brand": "（无商品名）", "drug.also_called": "也叫：",
+        "brand.none": "无商品名",
         "drug.records": "条记录", "drug.showing": "仅显示前 40 条，共",
         "drug.sid": "规范成分",
         "drug.notice": ("同一成分在不同国家可能用完全不同的商品名；同名也可能指向不同成分。"
@@ -515,6 +544,7 @@ I18N = {
         "name.strength": "规格", "name.release": "释放",
         "name.also": "写法", "name.found": "覆盖",
         "name.empty": "无记录",
+        "name.single_note": "该名称目前仅收录 1 个产品记录。",
         "name.severe": ("这个商品名在不同国家或不同变体下指向不同活性成分，"
                         "选药前必须核对成分，不能按名字等同。"),
         "name.warning": "同名产品存在缓释/速释差异，不能直接互换。",
@@ -783,14 +813,21 @@ UI_I18N = {
         # v0.6.6：成分頁多國並排矩陣
         "matrix.spec": "規格 / 劑型 / 釋放",
         "matrix.none": "未收錄",
-        "matrix.hidden_note": "已停售、撤市或狀態未確認的產品預設隱藏。",
+        "matrix.hidden_note": "已停售、撤市或狀態未確認的產品預設隱藏；香港記錄（僅名稱/成分層）例外顯示。",
         "matrix.capped": "僅顯示前 {shown} / {total} 個規格列。",
+        "matrix.original": "原紀錄",
+        "matrix.country_all": "全選",
+        "matrix.country_clear": "清除",
+        "brand.none": "無商品名",
+        "maker.single_note": "目前未收錄該廠商的其他產品。",
+        "name.single_note": "此名稱目前僅收錄 1 筆產品紀錄。",
         # v0.6.7：/warn 分頁
         "warn.page_prev": "上一頁", "warn.page_next": "下一頁",
         "warn.pagination": "警示分頁",
         "warn.page_status": "第 {n} / {total} 頁 · 共 {count} 條",
         # v0.7.0：TW 市場（zh-Hant 直接給值，避免 JSON 未含時回落簡體）
         "home.tw": "台灣",
+        "home.hk": "中國香港",
         "about.tw_source": (
             '<p class="sub"><b>台灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
             '依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；'
@@ -1072,6 +1109,13 @@ ABOUT_I18N = {
             'from Listing of Registered Therapeutic Products accessed on 2026-10-28 from Health '
             'Sciences Authority (HSA), and made available under the Singapore Open Data Licence '
             'v1.0 (<a href="https://data.gov.sg/open-data-licence">licence</a>).</p>'),
+        "about.hk_source": (
+            '<p class="sub"><b>Hong Kong 中国香港</b>: Drug Office, Department of Health — '
+            '<b>Registered Pharmaceutical Products</b> list (data.gov.hk dataset '
+            'hk-dh-dh_do-hk-dh-do-pharmaceutical-product) under <b>DATA.GOV.HK Terms and '
+            'Conditions</b> (free reuse with attribution; no government endorsement implied). '
+            'Data as of <b>2026-10-23</b>. <b>Name/ingredient layer only — no strength, dosage '
+            'form or registration status; being on the register does not prove current supply.</b></p>'),
         "about.samename": (
             '<h2>Why “same name, different drug” happens</h2>'
             '<p class="sub">The same trademark is held by different companies in different '
@@ -1205,6 +1249,14 @@ ABOUT_I18N = {
             'Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences '
             'Authority (HSA), and made available under the Singapore Open Data Licence v1.0 '
             '(<a href="https://data.gov.sg/open-data-licence">licencia</a>).</p>'),
+        "about.hk_source": (
+            '<p class="sub"><b>Hong Kong 中国香港</b>: Drug Office, Department of Health — '
+            'lista de <b>Registered Pharmaceutical Products</b> (data.gov.hk, conjunto '
+            'hk-dh-dh_do-hk-dh-do-pharmaceutical-product) bajo las <b>condiciones de uso de '
+            'DATA.GOV.HK</b> (reutilización libre con atribución; sin respaldo gubernamental). '
+            'Datos hasta <b>2026-10-23</b>. <b>Solo capa de nombre/ingrediente: sin '
+            'concentración, forma farmacéutica ni estado de registro; estar en el registro no '
+            'prueba que se comercialice actualmente.</b></p>'),
         "about.samename": (
             '<h2>Por qué ocurre «mismo nombre, otro medicamento»</h2>'
             '<p class="sub">La misma marca pertenece a empresas distintas en cada mercado y la '
@@ -1317,6 +1369,12 @@ ABOUT_I18N = {
             'Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences '
             'Authority (HSA), and made available under the Singapore Open Data Licence v1.0'
             '（<a href="https://data.gov.sg/open-data-licence">许可</a>）。</p>'),
+        "about.hk_source": (
+            '<p class="sub"><b>中国香港</b>：香港衞生署藥物辦公室「<b>註冊藥劑製品名單</b>」'
+            '（data.gov.hk 数据集 hk-dh-dh_do-hk-dh-do-pharmaceutical-product），依 '
+            '<b>DATA.GOV.HK 使用条款</b>可自由再使用、须署名（不暗示政府背书）；数据截止 '
+            '<b>2026-10-23</b>。仅名称/持有人/注册号/活性成分层——<b>无规格、无剂型、无注册状态；'
+            '在册不代表在售。</b></p>'),
         "about.samename": (
             '<h2>为什么会有「同名不同药」</h2>'
             '<p class="sub">同一个商标在不同市场属于不同公司，配方可能完全不同。已验证的例子：'
@@ -1807,8 +1865,14 @@ COMBO_I18N = {
 # ── v0.5.4：厂家页（/maker/<slug>.html）与结果行厂家链接 ─────────────
 # 页数守卫：≥2 产品阈值会有 10,975 页；按 v0.5.3 基线（50,953 文件 / 279 MB）
 # 预估会超过 400 MB，所以按任务约定降到 ≥5 产品（6,997 页），并在报告里记录。
-MAKER_MIN_PRODUCTS = 5
+MAKER_MIN_PRODUCTS = 1
 MAKERS: dict[str, dict] = {}
+# v0.9.0 task-6：单包装名字页体积守卫。全量 10 万页预计 dist >800MB，
+# 默认只生成 CN/TW/ES/MX 子集（Lead 批准的降级口径）；设 SINGLE_NAME_ALL=1 可全量。
+SINGLE_NAME_PAGE_MARKETS: set[str] | None = (
+    None if os.environ.get("SINGLE_NAME_ALL") == "1" else {"CN", "TW", "ES", "MX"})
+# v0.9.0：单产品厂家页 / 单包装名字页 noindex，且不进 sitemap（build_seo_files 跳过）。
+NOINDEX_RELS: set[str] = set()
 
 
 # v0.5.4：厂家名规范化必须与 etl/build_maker_candidates.py 的 norm_key 完全一致，
@@ -1873,6 +1937,7 @@ MAKER_I18N = {
         "maker.no_page": "No separate brand page",
         "maker.no_page_count": "{n} more manufacturer(s) without a page",
         "maker.empty": "No products recorded for this manufacturer.",
+        "maker.single_note": "No other products from this manufacturer recorded yet.",
         "maker.source_note": ('<b>Source &amp; licence</b>: product rows link to the regulator '
                               'record (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, '
                               'NHSA); facts only — see the '
@@ -1894,6 +1959,7 @@ MAKER_I18N = {
         "maker.no_page": "Sin página de marca propia",
         "maker.no_page_count": "{n} fabricante(s) más sin página",
         "maker.empty": "No hay productos registrados para este fabricante.",
+        "maker.single_note": "Sin otros productos de este fabricante registrados todavía.",
         "maker.source_note": ('<b>Fuente y licencia</b>: cada fila enlaza al registro del '
                               'regulador (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada '
                               'DPD, NHSA); solo hechos — ver el '
@@ -1913,6 +1979,7 @@ MAKER_I18N = {
         "maker.no_page": "没有独立品牌页",
         "maker.no_page_count": "另有 {n} 个厂家暂无页面",
         "maker.empty": "该厂家暂无已收录产品。",
+        "maker.single_note": "目前未收录该厂家的其他产品。",
         "maker.source_note": ('<b>来源与许可</b>：产品行链到监管原始记录（openFDA、dm+d、CIMA、'
                               'COFEPRIS、PBS/TGA、Health Canada DPD、国家医保局）；只发布事实字段，'
                               '见 <a href="../about.html#licences">许可清单</a>。'),
@@ -2267,6 +2334,18 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atclist{columns:2;column-gap:24px}
 .atclist li{break-inside:avoid;margin:2px 0}
 @media (max-width:719px){ .atclist{columns:1} }
+/* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
+.atc-src{color:var(--muted);font-size:11px;margin-left:6px;white-space:nowrap}
+.atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
+.atc-src-line{margin:-8px 0 10px}
+.atc-count{margin:-6px 0 10px}
+.salt{color:var(--muted);font-size:12px;margin-left:6px}
+.salt .nm{color:var(--muted)}
+.atcmembers .st-badge{margin-left:4px}
+.atcdetails{margin:8px 0 0}
+.atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
+.atcdetails .atcmembers{margin-top:6px}
+.cat-note .lang-block{margin:2px 0}
 .catquick{margin:18px 0 6px}
 .catquick h2{font-size:16px;margin:0 0 8px}
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
@@ -2404,6 +2483,17 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   vertical-align:top;line-height:1.35}
 .m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
 .m-zh{display:inline-block;margin:0 0 2px 0;font-size:11px;color:var(--muted)}
+/* v0.9.0 task-19/6：无商品名占位 / 矩阵 +N 展开 */
+.brand-none{color:var(--muted);font-weight:600}
+.m-none-ing{display:inline-block;font-size:11px;color:var(--muted);margin-left:4px}
+.m-more{display:inline-block;margin-left:4px;font-size:12px}
+.m-more summary{cursor:pointer;color:var(--accent);list-style:none}
+.m-more summary::-webkit-details-marker{display:none}
+.m-more summary:before{content:"+";font-weight:600}
+.m-more[open] summary:before{content:"−"}
+.m-rest{display:block;margin-top:4px;font-size:12px}
+.m-orig{display:block;margin-top:2px;font-size:11px;color:var(--muted);font-weight:400;white-space:normal}
+.name-single-note,.maker-single-note{margin:18px 0 0;color:var(--muted);font-size:13px}
 /* v0.8.4 task-128：状态彩色角标（A1 明细等） */
 .st-badge{display:inline-block;font-size:11px;padding:1px 6px;border-radius:999px;
   border:1px solid var(--line);margin-right:4px;white-space:nowrap}
@@ -2413,6 +2503,7 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .st-unknown{color:var(--muted);background:#f6f5f2}
 .c-brand{overflow-wrap:anywhere}
 .matrix-brand-note{margin:6px 0 0;font-size:12px}
+.matrix-hk-note{margin:4px 0 0;font-size:12px;color:var(--warn)}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
   background:#fff;padding:10px 12px}
@@ -2427,8 +2518,15 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   border-radius:8px;font-size:13px;background:#fff;color:var(--fg)}
 .mf-countries{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--fg)}
 .mf-countries label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
-.mf-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
+.m-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
   padding:6px 12px;font-size:13px;cursor:pointer}
+.mf-country-actions{display:flex;gap:6px;margin-top:4px}
+.mf-country-actions .mf-reset{padding:2px 8px;font-size:12px}
+/* v0.9.0 task-6：横滑 + 规格列 sticky + 移动端卡片 */
+.matwrap{position:relative}
+table.matrix thead th:first-child,
+table.matrix td.m-spec{position:sticky;left:0;z-index:2}
+table.matrix thead th:first-child{background:#faf9f6}
 .matrix-sort-note{margin:4px 0 0;font-size:12px}
 @media (max-width:767px){
   .matrix-filters .mf-panel{display:none}
@@ -2438,8 +2536,18 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   .mf-countries label{min-height:36px}
 }
 @media (max-width:719px){
-  table.matrix{min-width:840px}
-  .matwrap{margin:8px 0}
+  /* 移动端：每规格一张卡，市场列纵向排列，不横向滚动 */
+  .matwrap{overflow-x:visible;margin:8px 0}
+  table.matrix{display:block;min-width:0;width:100%;border-collapse:separate;border-spacing:0}
+  table.matrix thead{display:none}
+  table.matrix tbody{display:block}
+  table.matrix tr{display:block;background:#fff;border:1px solid var(--line);
+    border-radius:10px;margin:8px 0;padding:6px 8px}
+  table.matrix td{display:block;border:0;padding:3px 2px;white-space:normal;font-size:13px}
+  table.matrix td.m-spec{position:static;background:transparent;border-bottom:1px solid var(--line);
+    margin-bottom:4px;padding-bottom:6px}
+  table.matrix td[data-country]:before{content:attr(data-country) " · ";color:var(--muted);
+    font-weight:600;font-size:12px}
 }
 @media (max-width:719px){
   .u1steps{grid-template-columns:1fr}
@@ -2718,6 +2826,15 @@ function ingredientLabel(e){
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
 function brandHTML(e){
   let d = e && e.d != null ? String(e.d) : '';
+  const T = window.T || (k=>k);
+  if(e && e.t !== 1){
+    // v0.9.0 task-19：没有 trade 名 → 商品名位置只显示「无商品名」纯文本，
+    // 不链接、不放厂家；通用名/剂型作小字说明。
+    const hint = [e.x || '', e.f ? labelOf('form', e.f, '') : '']
+      .filter(Boolean).join(' · ');
+    return `<span data-brand="0" class="st-badge st-unknown brand-none">${esc(T('brand.none'))}</span>`
+      + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
+  }
   if(e && e.f){
     const f = labelOf('form', e.f, '');
     if(f && d.length > f.length && d.slice(-f.length) === f) d = d.slice(0, -f.length).trim();
@@ -2841,14 +2958,17 @@ function detPanelHTML(payload, key, e, T){
     const rel = (payload.r && payload.r[r[7]]) || '';
     const src = (payload.s && payload.s[r[11]]) || '';
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
-    return `<tr><td>${esc(r[1])}</td><td>${esc(r[3]) || '—'}${strength}</td>`
+    const brandCell = r[3] ? esc(r[3]) : esc(T('brand.none'));
+    return `<tr><td>${esc(r[1])}</td><td>${brandCell}</td>`
+      + `<td>${esc(r[3]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
       + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
-      + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td></tr>`;
+      + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
+      + `<td>${makerLinkHTML(r[9], T)}</td></tr>`;
   }).join('');
-  return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('a1.pack'))}</th>`
-    + `<th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
-    + `<th>${esc(T('a1.source'))}</th></tr></thead><tbody>${body}</tbody></table>`
+  return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('col.brand'))}</th>`
+    + `<th>${esc(T('a1.pack'))}</th><th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
+    + `<th>${esc(T('a1.source'))}</th><th>${esc(T('col.mah'))}</th></tr></thead><tbody>${body}</tbody></table>`
     + (rows.length >= 12 ? `<p class="sub">${esc(T('a1.more'))}</p>` : '');
 }
 // B7：导出当前视图全部结果（含折叠/未加载更多的行），纯前端。
@@ -2935,6 +3055,21 @@ let RES_EXPANDED = new Set();     // 已展开的分组下标
 let RES_GROUPS = null;            // [{ing, tags:Set, rows:[entry]}]
 let LAST_DISPLAY = [];            // v0.5.6 B7：当前视图全部命中（[score,tier,entry]）
 const DET_CACHE = new Map();      // v0.5.6 A1：明细桶缓存（bucket → payload）
+// v0.9.0 task-20：明细面板的厂家名 → 厂家页 slug（懒加载一次；18k 条不进结果索引）
+let MAKER_MAP = null;
+function loadMakerMap(){
+  if(MAKER_MAP) return Promise.resolve(MAKER_MAP);
+  return fetchJSON(BASE + 'data/maker-map.json').then(m => { MAKER_MAP = m || {}; return MAKER_MAP; })
+    .catch(() => { MAKER_MAP = {}; return MAKER_MAP; });
+}
+function makerLinkHTML(name, T){
+  if(!name) return '—';
+  const slug = MAKER_MAP && MAKER_MAP[name];
+  if(slug){
+    return `<a class="maker-link" href="${BASE}maker/${esc(slug)}.html">${esc(name)}</a>`;
+  }
+  return `<span class="maker-plain">${esc(name)}</span>`;
+}
 function groupByIngredient(display){
   const order=[], map=new Map();
   for(const [, t, e] of display){
@@ -4094,13 +4229,13 @@ out.addEventListener('click', ev => {
     const e = findEntryByKey(k) || {k: k, v: ''};
     const row = document.createElement('tr');
     row.className = 'detrow';
-    row.innerHTML = `<td colspan="4" class="detcell">${esc(Tr('a1.loading'))}</td>`;
+    row.innerHTML = `<td colspan="7" class="detcell">${esc(Tr('a1.loading'))}</td>`;
     tr.parentNode.insertBefore(row, tr.nextSibling);
     detBtn.setAttribute('aria-expanded', 'true');
-    loadDetailBucket(detBucketOf(e)).then(payload => {
+    loadDetailBucket(detBucketOf(e)).then(payload => loadMakerMap().then(() => {
       const cell = row.querySelector('.detcell');
       if(cell) cell.innerHTML = detPanelHTML(payload, k, e, Tr);
-    });
+    }));
     return;
   }
   // v0.6.3 U2：点国家 chip = 切到该国国家视图（复用现有 ctry 状态 + URL + 统计）
@@ -4377,6 +4512,28 @@ BILINGUAL_JS = r"""
       var ths = Array.from(table.querySelectorAll('thead th[data-country]'));
       var rows = Array.from(table.querySelectorAll('tbody tr'));
       var countries = ths.map(function(th){ return th.getAttribute('data-country'); });
+      // v0.9.0 task-6：默认只显示 3 个市场列（产品最多 + 当前语言市场 + 第二多）；
+      // 其余市场由筛选器国家多选加入；mk=CN,TW 可分享，localStorage 记忆。
+      var LANG_MARKET = {en: 'US', es: 'ES', zh: 'CN', 'zh-Hant': 'TW'};
+      var colCount = {};
+      rows.forEach(function(tr){
+        countries.forEach(function(c){
+          var td = tr.querySelector('td[data-country="' + c + '"]');
+          if(td && (td.querySelector('.m-brand') || td.querySelector('.brand-none'))){
+            colCount[c] = (colCount[c] || 0) + 1;
+          }
+        });
+      });
+      function defaultCols(){
+        var order = countries.slice().sort(function(a, b){
+          return (colCount[b] || 0) - (colCount[a] || 0);
+        });
+        var out = [];
+        [order[0], LANG_MARKET[window.LANG] || '', order[1]].forEach(function(c){
+          if(c && countries.indexOf(c) >= 0 && out.indexOf(c) < 0) out.push(c);
+        });
+        return out.slice(0, 3);
+      }
       var forms = {}, releases = {};
       rows.forEach(function(tr){
         var f = tr.getAttribute('data-form') || '';
@@ -4407,6 +4564,12 @@ BILINGUAL_JS = r"""
         lab.appendChild(cb); lab.appendChild(document.createTextNode(' ' + c));
         cbox.appendChild(lab);
       });
+      var ctrl = document.createElement('div'); ctrl.className = 'mf-country-actions';
+      var allBtn = document.createElement('button'); allBtn.type = 'button'; allBtn.className = 'mf-reset';
+      allBtn.setAttribute('data-mf-all', '1'); allBtn.textContent = T('matrix.country_all');
+      var clearBtn = document.createElement('button'); clearBtn.type = 'button'; clearBtn.className = 'mf-reset';
+      clearBtn.setAttribute('data-mf-clear', '1'); clearBtn.textContent = T('matrix.country_clear');
+      ctrl.appendChild(allBtn); ctrl.appendChild(clearBtn); cbox.appendChild(ctrl);
       panel.appendChild(cf);
       // 剂型
       var ff = document.createElement('label'); ff.className = 'mf-field';
@@ -4475,30 +4638,50 @@ BILINGUAL_JS = r"""
             s.form ? p.set('mform', s.form) : p.delete('mform');
             s.rel ? p.set('mrel', s.rel) : p.delete('mrel');
             s.spec ? p.set('mspec', sinp.value.trim()) : p.delete('mspec');
-            (s.countries.length === s.all.length) ? p.delete('mcountry') : p.set('mcountry', s.countries.join(','));
+            s.countries.length ? p.set('mk', s.countries.join(',')) : p.delete('mk');
+            p.delete('mcountry');
             history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p.toString() : '') + location.hash);
+            try{ localStorage.setItem('dsh.matrix.mk', s.countries.join(',')); }catch(e){}
           }catch(e){}
         }
       }
-      // URL 初值
+      // URL / localStorage / 默认 3 列初值
+      var selected = [];
       try{
         var q = new URLSearchParams(location.search);
-        var mc = (q.get('mcountry') || '').split(',').filter(Boolean);
-        if(mc.length){
-          cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
-            cb.checked = mc.indexOf(cb.getAttribute('data-mf-country')) >= 0;
-          });
-        }
+        var rawMk = q.get('mk') || q.get('mcountry') || '';
+        selected = rawMk.split(',').filter(function(c){ return countries.indexOf(c) >= 0; });
         if(q.get('mform')) fsel.value = q.get('mform');
         if(q.get('mrel')) rsel.value = q.get('mrel');
         if(q.get('mspec')) sinp.value = q.get('mspec');
       }catch(e){}
+      if(!selected.length){
+        try{
+          var stored = localStorage.getItem('dsh.matrix.mk') || '';
+          selected = stored.split(',').filter(function(c){ return countries.indexOf(c) >= 0; });
+        }catch(e){}
+      }
+      if(!selected.length) selected = defaultCols();
+      cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+        cb.checked = selected.indexOf(cb.getAttribute('data-mf-country')) >= 0;
+      });
       fsel.addEventListener('change', function(){ apply(true); });
       rsel.addEventListener('change', function(){ apply(true); });
       sinp.addEventListener('input', function(){ apply(true); });
       cbox.addEventListener('change', function(){ apply(true); });
-      reset.addEventListener('click', function(){
+      allBtn.addEventListener('click', function(){
         cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = true; });
+        apply(true);
+      });
+      clearBtn.addEventListener('click', function(){
+        cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){ cb.checked = false; });
+        apply(true);
+      });
+      reset.addEventListener('click', function(){
+        var defs = defaultCols();
+        cbox.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+          cb.checked = defs.indexOf(cb.getAttribute('data-mf-country')) >= 0;
+        });
         fsel.value = ''; rsel.value = ''; sinp.value = '';
         apply(true);
       });
@@ -4583,7 +4766,8 @@ def build_terms_json(db: sqlite3.Connection) -> dict[str, int]:
 
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
-         canonical_rel: str = "", alt_rel: str = "", head_js: str = "") -> str:
+         canonical_rel: str = "", alt_rel: str = "", head_js: str = "",
+         noindex: bool = False) -> str:
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
@@ -4624,10 +4808,12 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     else:
         head_title = f'<title>{esc(title)} · Medicine Brand Cross-Reference</title>'
         head_extra = ""
+    noindex_meta = ('\n<meta name="robots" content="noindex,follow">'
+                    if noindex else "")
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-{head_title}{alt}{head_extra}
+{head_title}{alt}{head_extra}{noindex_meta}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
 <script src="{prefix}assets/i18n.js?v={BUILD_V}"></script>
 <script>window.DSH_PREFIX={prefix!r};</script>
@@ -4925,6 +5111,55 @@ def _salt_base_of(name: str) -> str:
     return " ".join(toks)
 
 
+def _sub_base_map(db: sqlite3.Connection) -> tuple[dict[str, str], dict[str, tuple[str, str]]]:
+    """v0.8.3 口径：substance_id → base substance_id（同名 canonical + 去盐/水合物，迭代到不动点）。
+
+    返回 (base_of, sub_names)。检索索引与 ATC/大类页共用同一套盐型归并口径，
+    避免两个页面把同一成分的盐型显示成多条。
+    """
+    sub_names: dict[str, tuple[str, str]] = {}
+    for sid0, en0, zh0 in db.execute("SELECT substance_id, inn_en, inn_zh FROM substance"):
+        sub_names[sid0] = (en0 or "", zh0 or "")
+    by_norm: dict[str, str] = {}
+    for sid0, (en0, _zh0) in sub_names.items():
+        if en0:
+            by_norm.setdefault(_norm_name(en0), sid0)
+    # 同名重复 substance（如 povidone-iodine / povidone-iodine-<hash>）→ 规范到同一 sid
+    canon: dict[str, str] = {}
+    for sid0, (en0, _zh0) in sub_names.items():
+        if en0:
+            canon[sid0] = by_norm.get(_norm_name(en0), sid0)
+    salt_to_base: dict[str, str] = {}
+    for sid0, (en0, _zh0) in sub_names.items():
+        if canon.get(sid0) != sid0:
+            continue
+        toks = _norm_name(en0).split()
+        if len(toks) < 2:
+            continue
+        # 从末尾逐个去掉 salt/hydrate 词，找到存在的 base 即止
+        # （不把 "Calcium Chloride" 剥成 "Calcium" 这类无机盐基；元素基跳过）
+        while len(toks) > 1 and toks[-1] in SALT_WORDS:
+            toks = toks[:-1]
+            base = " ".join(toks)
+            if base in SALT_WORDS or base in _SALT_ELEMENTS or len(base) < 4:
+                continue
+            b = by_norm.get(base)
+            if b and b != sid0:
+                salt_to_base[sid0] = b
+                break
+    base_of: dict[str, str] = {}
+    for sid0 in sub_names:
+        cur, seen = sid0, set()
+        while cur not in seen:
+            seen.add(cur)
+            nxt = salt_to_base.get(cur) or canon.get(cur, cur)
+            if nxt == cur:
+                break
+            cur = nxt
+        base_of[sid0] = cur
+    return base_of, sub_names
+
+
 # ── v0.6.0：组合页跨市场同组合（输入 data/combo_match_candidates.csv，构建期只读）──
 # 归一化规则必须与 etl/build_combo_matches.py 保持一致，否则页面的原始 substance_id
 # 集合无法反查到 CSV 里的「归一名数签名」。
@@ -4998,37 +5233,8 @@ def load_index(db: sqlite3.Connection):
     agg: dict[str, dict] = {}
     mixed_inn: set[str] = set()
     merged_keys: set[str] = set()
-    # v0.8.3：base+salt 归并映射（严格规则：长名 = 短名 + 全部 salt 词，且 base 存在）
-    sub_names: dict[str, tuple[str, str]] = {}
-    for sid0, en0, zh0 in db.execute("SELECT substance_id, inn_en, inn_zh FROM substance"):
-        sub_names[sid0] = (en0 or "", zh0 or "")
-    by_norm: dict[str, str] = {}
-    for sid0, (en0, _zh0) in sub_names.items():
-        if en0:
-            by_norm.setdefault(_norm_name(en0), sid0)
-    # 同名重复 substance（如 povidone-iodine / povidone-iodine-<hash>）→ 规范到同一 sid
-    canon: dict[str, str] = {}
-    for sid0, (en0, _zh0) in sub_names.items():
-        if en0:
-            canon[sid0] = by_norm.get(_norm_name(en0), sid0)
-    salt_to_base: dict[str, str] = {}
-    for sid0, (en0, _zh0) in sub_names.items():
-        if canon.get(sid0) != sid0:
-            continue
-        toks = _norm_name(en0).split()
-        if len(toks) < 2:
-            continue
-        # 从末尾逐个去掉 salt/hydrate 词，找到存在的 base 即止
-        # （不把 "Calcium Chloride" 剥成 "Calcium" 这类无机盐基；元素基跳过）
-        while len(toks) > 1 and toks[-1] in SALT_WORDS:
-            toks = toks[:-1]
-            base = " ".join(toks)
-            if base in SALT_WORDS or base in _SALT_ELEMENTS or len(base) < 4:
-                continue
-            b = by_norm.get(base)
-            if b and b != sid0:
-                salt_to_base[sid0] = b
-                break
+    # v0.8.3：base+salt 归并映射（与 ATC/大类页共用同一口径，见 _sub_base_map）
+    base_of, sub_names = _sub_base_map(db)
     # 每个产品自己的成分名集合：复方产品在每个成分的通用名 key 下都有一行
     # name_type=inn，但当前这行不一定是那个成分（join 会展开所有成分），
     # 所以要用「产品级」的集合判断，而不是当前行的 inn_en。
@@ -5065,13 +5271,7 @@ def load_index(db: sqlite3.Connection):
         # v0.8.3：base+salt/canonical 递归归并（如 Alendronate Sodium Trihydrate →
         # Alendronate Sodium → Alendronate），直到不动点，避免只剥一层。
         orig_sid = sid
-        seen_sids: set[str] = set()
-        while sid not in seen_sids:
-            seen_sids.add(sid)
-            nxt = salt_to_base.get(sid) or canon.get(sid, sid)
-            if nxt == sid:
-                break
-            sid = nxt
+        sid = base_of.get(sid, sid)
         if sid != orig_sid:
             inn_en, inn_zh = sub_names.get(sid, (inn_en, inn_zh))
             merged_keys.add(key_id)
@@ -5145,21 +5345,21 @@ def load_index(db: sqlite3.Connection):
         # 只由单方产品组成的通用名条目：碰撞视图仍把复方的成分算进来，
         # 这里改回 info，并且不单独成页（直接链到成分页），避免「同名不同药 /
         # 释放机制不同」这类误导性警告。
-        pure_inn = key_id in mixed_inn and len(a["sids"]) == 1
+        # v0.9.0 task-6：trade 名不再因「复方成分名」身份被排除出页面
+        # （单包装 trade 名也应可点进轻量页）；只有纯 inn 行才保持原规则。
+        pure_inn = ((not a["trade"]) and key_id in mixed_inn
+                    and len(a["sids"]) == 1)
         if pure_inn:
             level = "info"
         # v0.8.3：伪复方（base+salt 被并成单 base）不再算多成分碰撞
         if key_id in merged_keys and len(a["sids"]) <= 1:
             level = "info"
-        # 只有这些名字值得单独成页：有碰撞的、或包装数够多的。
-        # 其余名字仍能被搜到，卡片直接链到成分页——不为只有一个包装的冷门名字生成几万张页。
-        # 通用名照样能搜到，但只有「有品牌名」或碰撞/多包装的名字才单独成页，
-        # 否则光中国就会多出上万张价值很低的页面。
-        # v0.5.3：trade 品牌有 ≥2 个包装就生成轻量品牌页（仍不为 8 万个单包装
-        # 冷门名字建页；那些在结果里渲染成不可点文本，绝不回退成 drug 页）。
-        worth_page = (not pure_inn) and (a["trade"] or level == "warning") and (
-            level == "warning" or (level == "severe" and n >= 2) or n >= 3
-            or (a["trade"] and n >= 2))
+        # v0.9.0 task-6：所有 trade 名（含单包装）都建轻量名字页；单包装页 noindex。
+        # 体积守卫：默认单包装只收 CN/TW/ES/MX（约 2.1 万页），多包装/警示页照旧。
+        single_ok = (n >= 2 or SINGLE_NAME_PAGE_MARKETS is None
+                     or bool(set(a["c"]) & SINGLE_NAME_PAGE_MARKETS))
+        worth_page = ((not pure_inn)
+                      and ((a["trade"] and single_ok) or level == "warning"))
         ordered_mah = sorted(a["mah"].items(), key=lambda kv: (-kv[1], kv[0]))
         first_maker = ordered_mah[0][0] if ordered_mah else ""
         first_info = MAKERS.get(norm_maker(first_maker)) if first_maker else None
@@ -5190,6 +5390,8 @@ def load_index(db: sqlite3.Connection):
             "f": a["f"][0] if a["f"] else "",
             "l": level,
             "n": n,
+            # v0.9.0 task-19：1=该名字是 trade 名；0=只有通用名 → 商品名位置显示「无商品名」
+            "t": 1 if a["trade"] else 0,
             "v": a["v"],
             "vs": sorted(a["sids"]) if len(a["sids"]) > 1 else None,
             "u": key_file(key_id) if worth_page else "",
@@ -5348,7 +5550,7 @@ def _label_unit_html(text: str) -> str:
 
 
 # v0.6.6：成分页多国矩阵（行=规格/剂型/释放；列=国家；服务端默认 en 顺序，客户端按界面语言重排）
-COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW")
+COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK")
 MATRIX_ROW_CAP = 120
 
 
@@ -5367,6 +5569,94 @@ def _strength_suspect(text: str) -> bool:
     if val > 10_000 and unit not in ("u", "iu", "unit", "units", "%", "ml"):
         return True
     return False
+
+
+# ── v0.9.0 task-17：重量单位展示归一（DB 已由 task-16 归一，原文从审计 CSV 读）──
+# 0.12 g 与 120 mg 在矩阵合并成一行「120 mg」，小字保留「原记录：0.12 g」。
+_WEIGHT_TO_MG = {
+    "g": Decimal("1000"), "kg": Decimal("1000000"),
+    "mcg": Decimal("0.001"), "ug": Decimal("0.001"), "μg": Decimal("0.001"),
+    "µg": Decimal("0.001"), "microgram": Decimal("0.001"), "micrograms": Decimal("0.001"),
+    "ng": Decimal("0.000001"),
+}
+_STRENGTH_RAW_FILE = ROOT / "data" / "sources" / "unit_normalization_20261030.csv"
+_STRENGTH_RAW_GZ = ROOT / "data" / "sources" / "unit_normalization_20261030.csv.gz"
+_STRENGTH_RAW_FALLBACK = ROOT / ".tmp" / "unit-norm-mass" / "audit_real.csv"
+_STRENGTH_RAW: dict[str, str] | None = None
+
+
+def _fmt_decimal(d: Decimal) -> str:
+    s = format(d.normalize(), "f")
+    if "." in s:
+        s = s.rstrip("0").rstrip(".")
+    return s or "0"
+
+
+def _normalized_strength(value, unit) -> str:
+    """重量单位 → mg 显示串；>100,000 mg 的异常值保持原单位（task-16 未换算的不猜）。"""
+    if value is None:
+        return ""
+    unit = (unit or "").strip()
+    factor = _WEIGHT_TO_MG.get(unit.lower())
+    if factor is not None:
+        try:
+            num = Decimal(str(value)) * factor
+        except InvalidOperation:
+            return f"{value:g} {unit}".strip()
+        if num <= Decimal("100000"):
+            return f"{_fmt_decimal(num)} mg"
+    return f"{value:g} {unit}".strip()
+
+
+def _strength_raw_map() -> dict[str, str]:
+    """task-16 审计的 old_value/old_unit → (pid|ord → 原记录)。
+
+    优先读仓库内快照 `data/sources/unit_normalization_20261030.csv`
+    （`.csv.gz` 兼容旧快照）；`.tmp/unit-norm-mass/audit_real.csv` 只作兜底。
+    都缺时**抛错**，不允许静默丢掉 task-17 的「原记录」。
+    """
+    global _STRENGTH_RAW
+    if _STRENGTH_RAW is not None:
+        return _STRENGTH_RAW
+    path = next((p for p in (_STRENGTH_RAW_FILE, _STRENGTH_RAW_GZ,
+                             _STRENGTH_RAW_FALLBACK) if p.exists()), None)
+    if path is None:
+        raise RuntimeError(
+            "缺少 task-17 原记录快照：expected " + str(_STRENGTH_RAW_FILE)
+            + "（fallback " + str(_STRENGTH_RAW_FALLBACK) + "）")
+    out: dict[str, str] = {}
+    opener = gzip.open if path.suffix == ".gz" else open
+    with opener(path, "rt", encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            pid = (row.get("product_id") or "").strip()
+            ord_ = (row.get("ord") or "").strip()
+            old_v = (row.get("old_value") or "").strip()
+            old_u = (row.get("old_unit") or "").strip()
+            if pid and ord_ and old_v and old_u:
+                try:
+                    out[f"{pid}|{ord_}"] = f"{float(old_v):g} {old_u}"
+                except ValueError:
+                    out[f"{pid}|{ord_}"] = f"{old_v} {old_u}".strip()
+    _STRENGTH_RAW = out
+    return out
+
+
+def _raw_strength(pid, ord_, sv, su) -> str:
+    raw = _strength_raw_map().get(f"{pid}|{ord_}")
+    if raw:
+        return raw
+    return f"{sv:g} {su}".strip() if sv is not None else ""
+
+
+def _strength_origin_html(raws: set[str], display: str) -> str:
+    """原记录小字：去重、去掉与归一显示相同的写法，最多 3 个 + N。"""
+    others = sorted(r for r in raws if r and r != display)
+    if not others:
+        return ""
+    shown = others[:3]
+    more = f' +{len(others) - 3}' if len(others) > 3 else ""
+    return (f'<span class="m-orig"><span data-i18n="matrix.original">Recorded as</span>: '
+            f'{esc("、".join(shown))}{esc(more)}</span>')
 
 
 _FORM_WORD_ZH = {
@@ -5415,7 +5705,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
     for row in db.execute(
         """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
                   p.status, pc.strength_value, pc.strength_unit,
-                  pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh
+                  pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh, pc.ord
            FROM product p
            JOIN product_component pc ON pc.product_id = p.product_id
            JOIN variant v ON v.variant_id = pc.variant_id
@@ -5483,22 +5773,52 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
             continue
 
         # v0.6.6：按「规格 + 剂型 + 释放机制」聚合，国家并排；默认只显示 active。
+        NO_TRADE = "__no_trade__"
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
-        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub) in rows:
-            if status != "active":
+        spec_raws: dict[tuple, set[str]] = {}
+        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord_) in rows:
+            # v0.9.0 task-9：HK 数据只有名称/成分层，status='unknown' 不整批跳过；
+            # 其他市场的非 active 仍按原规则隐藏。
+            if status != "active" and not (
+                    country == "HK" and status in ("unknown", "", None)):
                 continue
-            st = f"{sv:g} {su}" if sv is not None else ""
+            # v0.9.0 task-17：显示按归一后 mg 聚合；原记录从 task-16 审计 CSV 取。
+            st = _normalized_strength(sv, su)
+            raw_st = _raw_strength(pid, ord_, sv, su)
             if pv:
                 st += f"/{pv:g} {pu}"
+                raw_st += f"/{pv:g} {pu}"
             spec = (st.strip(), fb or df or "", rel)
+            if raw_st.strip():
+                spec_raws.setdefault(spec, set()).add(raw_st.strip())
             bucket = spec_countries.setdefault(spec, {}).setdefault(country, {})
-            for key_id, raw in names.get(pid, []):
+            traded = names.get(pid, [])
+            if not traded:
+                # v0.9.0 task-19：无 trade 名的产品也在矩阵里占位，不静默消失
+                bucket.setdefault(NO_TRADE, ("", "", ""))
+            for key_id, raw in traded:
                 e = entry_by_k.get(key_id)
                 label = (e or {}).get("d") or raw
                 if label and label not in bucket:
                     en = cn_latin.get(key_id, "") if country == "CN" else ""
                     bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en,
                                      (zh_sub or "") if country == "CN" else "")
+        def _brand_bit(label, url, en, zh_sub, form):
+            if label == NO_TRADE:
+                return (f'<span class="m-brand st-badge st-unknown brand-none" data-brand="0" '
+                        f'data-i18n="brand.none">{esc(T["brand.none"])}</span>')
+            display = _strip_form_from_label(label, form)
+            if url:
+                bit = (f'<a class="m-brand" data-brand="1" title="{esc(label)}" '
+                       f'href="{esc(url)}">{esc(display)}</a>')
+            else:
+                bit = (f'<span class="m-brand" data-brand="1" '
+                       f'title="{esc(label)}">{esc(display)}</span>')
+            if en and en != label:
+                bit += f'<span class="m-en">{esc(en)}</span>'
+            if zh_sub and zh_sub != display:
+                bit += f'<span class="m-zh">{esc(zh_sub)}</span>'
+            return bit
         countries = [c for c in COUNTRY_PRIORITY
                      if any(c in by_c for by_c in spec_countries.values())]
         for by_c in spec_countries.values():
@@ -5560,6 +5880,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
             suspect = suspect_by_spec.get(spec, False)
             st_html = _label_unit_html(st) if st else (
                 '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
+            st_html += _strength_origin_html(spec_raws.get(spec, set()), st)
             if suspect:
                 st_html += (' <span class="tag warn" data-i18n="matrix.spec_check">'
                             'check strength</span>')
@@ -5572,28 +5893,25 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                 cell_brands = by_c.get(c) or {}
                 if not cell_brands:
                     # v0.8.2 task-136：无数据也输出固定 td（带 data-country），禁止整行错位
-                    cells.append(f'<td data-country="{esc(c)}"><span class="meta" '
-                                 f'data-i18n="matrix.none">not recorded</span></td>')
+                    cells.append(f'<td data-country="{esc(c)}" data-label="{esc(c)}">'
+                                 f'<span class="meta" data-i18n="matrix.none">not recorded</span></td>')
                     continue
                 ordered = sorted(cell_brands.items(), key=lambda kv: kv[0].lower())
-                bits = []
-                for label, (url, en, zh_sub) in ordered[:3]:
-                    display = _strip_form_from_label(label, form)
-                    if url:
-                        bits.append(f'<a class="m-brand" data-brand="1" title="{esc(label)}" '
-                                    f'href="{esc(url)}">{esc(display)}</a>')
-                    else:
-                        bits.append(f'<span class="m-brand" data-brand="1" '
-                                    f'title="{esc(label)}">{esc(display)}</span>')
-                    if en and en != label:
-                        bits.append(f'<span class="m-en">{esc(en)}</span>')
-                    if zh_sub and zh_sub != display:
-                        bits.append(f'<span class="m-zh">{esc(zh_sub)}</span>')
-                more = (f' <span class="meta">+{len(ordered) - 3}</span>'
-                        if len(ordered) > 3 else "")
-                cells.append(f'<td data-country="{esc(c)}">{" ".join(bits)}{more}</td>')
+                bits = [_brand_bit(label, url, en, zh_sub, form)
+                        for label, (url, en, zh_sub) in ordered[:3]]
+                rest_html = ""
+                if len(ordered) > 3:
+                    # v0.9.0 task-6：+N 用原生 <details> 展开，无 JS 也可点开阅读
+                    rest_bits = [_brand_bit(label, url, en, zh_sub, form)
+                                 for label, (url, en, zh_sub) in ordered[3:]]
+                    rest_html = (f'<details class="m-more"><summary>'
+                                 f'+{len(ordered) - 3}</summary>'
+                                 f'<span class="m-rest">{" ".join(rest_bits)}</span></details>')
+                cells.append(f'<td data-country="{esc(c)}" data-label="{esc(c)}">'
+                             f'{" ".join(bits)}{rest_html}</td>')
             tbody.append(f'<tr data-form="{esc(form or "")}" data-release="{esc(rel or "")}" '
-                         f'data-spec="{esc(st or "")}" data-suspect="{1 if suspect else 0}" '
+                         f'data-spec="{esc(st + " " + " ".join(sorted(spec_raws.get(spec, set()))))}" '
+                         f'data-suspect="{1 if suspect else 0}" '
                          f'data-freq="{freq_by_spec.get(spec, 0)}">'
                          + "".join(cells) + "</tr>")
         capped_blocks = ""
@@ -5605,12 +5923,18 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                 capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
                                   f'<p class="sub">{esc(note)}</p></div>')
         if tbody:
+            hk_note = ""
+            if "HK" in countries:
+                hk_note = ('<p class="sub matrix-hk-note" data-i18n="matrix.hk_note">'
+                           'Hong Kong records are name/ingredient-level only: no strength, '
+                           'dosage form or registration status; on the register does not prove '
+                           'current supply.</p>')
             matrix_html = ('<div class="matwrap"><table class="matrix"><thead><tr>'
                            + head + "</tr></thead><tbody>" + "".join(tbody)
                            + "</tbody></table></div>"
                            + '<p class="sub matrix-brand-note" data-i18n="matrix.brand_note">'
                              'Each country column shows the locally registered trade names — '
-                             'not translations.</p>' + capped_blocks)
+                             'not translations.</p>' + hk_note + capped_blocks)
         else:
             matrix_html = ('<p class="empty" data-i18n="drug.empty">'
                            'No products recorded yet.</p>')
@@ -5685,6 +6009,45 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
     return data
 
 
+def _name_product_table(rows: list, T: dict) -> str:
+    """v0.9.0 task-6：单包装名字页的产品明细（市场/规格/剂型/状态/厂家/来源）。"""
+    if not rows:
+        return ""
+    body = []
+    for (country, dosage, form_base, rel, status, mah, src, approval,
+         sv, su, zh, en) in rows:
+        st = f"{sv:g} {su}".strip() if sv is not None else "—"
+        form = form_base or dosage or "—"
+        if rel and rel != "none":
+            form += f" · {rel}"
+        maker = ""
+        if mah:
+            info = MAKERS.get(norm_maker(mah))
+            if info and info["has"]:
+                maker = (f'<a class="maker-link" href="../maker/{esc(info["slug"])}.html">'
+                         f'{esc(mah)}</a>')
+            else:
+                maker = f'<span class="maker-plain">{esc(mah)}</span>'
+        else:
+            maker = "—"
+        src_html = (f'<a href="{esc(src)}" target="_blank" rel="noopener">'
+                    f'{esc(src.split("//")[-1].split("/")[0])}</a>') if src else "—"
+        body.append(
+            f'<tr><td data-label="{esc(T["a1.market"])}">{esc(country)}</td>'
+            f'<td data-label="{esc(T["col.dose"])}">{_label_unit_html(st)}</td>'
+            f'<td data-label="{esc(T["name.form"])}">{esc(form)}</td>'
+            f'<td data-label="{esc(T["a1.status"])}">'
+            f'<span class="st-badge st-{esc(status)}" data-i18n="drug.status.{esc(status)}">'
+            f'{esc(T.get("drug.status." + str(status), status))}</span></td>'
+            f'<td data-label="{esc(T["col.mah"])}">{maker}</td>'
+            f'<td data-label="{esc(T["a1.source"])}">{src_html}</td></tr>')
+    return ('<div class="tablewrap"><table class="res"><thead><tr>'
+            f'<th>{esc(T["a1.market"])}</th><th>{esc(T["col.dose"])}</th>'
+            f'<th>{esc(T["name.form"])}</th><th>{esc(T["a1.status"])}</th>'
+            f'<th>{esc(T["col.mah"])}</th><th>{esc(T["a1.source"])}</th>'
+            f'</tr></thead><tbody>{"".join(body)}</tbody></table></div>')
+
+
 def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                      families: dict | None = None, displays: dict | None = None) -> int:
     families = families or {}
@@ -5696,6 +6059,22 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
     variants: dict[str, list[str]] = {}
     for key_id, raw in db.execute("SELECT key_id, raw FROM name_variant ORDER BY v_id"):
         variants.setdefault(key_id, []).append(raw)
+    # v0.9.0 task-6：单包装名字页的产品明细一次查完，避免 10 万次逐页查询。
+    single_rows: dict[str, list] = {}
+    for r in db.execute(
+            """SELECT pn.key_id, p.country, p.dosage_form, p.form_base, p.release,
+                      p.status, p.mah, p.source_url, p.approval_id,
+                      pc.strength_value, pc.strength_unit, s.inn_zh, s.inn_en
+               FROM product_name pn
+               JOIN product p ON p.product_id = pn.product_id
+               JOIN product_component pc ON pc.product_id = p.product_id
+               JOIN variant v ON v.variant_id = pc.variant_id
+               JOIN substance s ON s.substance_id = v.substance_id
+               WHERE pn.name_type = 'trade' AND pn.key_id IN (
+                   SELECT key_id FROM product_name WHERE name_type = 'trade'
+                   GROUP BY key_id HAVING COUNT(DISTINCT product_id) = 1)
+               ORDER BY pn.key_id, p.country, p.product_id, pc.ord"""):
+        single_rows.setdefault(r[0], []).append(tuple(r[1:]))
 
     for e in entries:
         if not e["u"]:
@@ -5726,12 +6105,22 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
 {_label_unit_html('、'.join(sorted(g['s'], key=_sort_strength))) or '—'}
 {f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div></div>"""
             )
+        single = e.get("n") == 1 and e.get("t") == 1
+        single_table = _name_product_table(single_rows.get(e["k"], []), I18N["en"]) if single else ""
         body = f"""<h1>{esc(e['d'])}</h1>
-<p class="sub"><span data-i18n="name.also">Also written as</span>:
+<p class="sub">{('<span class="st-badge st-unknown brand-none" data-i18n="brand.none">'
+                 + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}<span data-i18n="name.also">Also written as</span>:
 {esc('、'.join(variants.get(e['k'], [])[:6]))} ·
 <span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
-{banner}{''.join(cards) if cards else '<p class="empty" data-i18n="name.empty">No records</p>'}{_family_block(e, families, displays, variants, page_keys)}"""
-        (OUT / "name" / e["u"]).write_text(page(e["d"], body, "../"), encoding="utf-8")
+{banner}{''.join(cards) if cards else '<p class="empty" data-i18n="name.empty">No records</p>'}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
+        if single:
+            for lang in ("en", "es", "zh", "zh-Hant"):
+                note = I18N[lang].get("name.single_note") or I18N["en"]["name.single_note"]
+                body += (f'<div class="lang-block" data-lang-block="{lang}">'
+                         f'<p class="sub name-single-note">{esc(note)}</p></div>')
+            NOINDEX_RELS.add(f'name/{e["u"]}')
+        (OUT / "name" / e["u"]).write_text(
+            page(e["d"], body, "../", noindex=single), encoding="utf-8")
         made += 1
     return made
 
@@ -5982,11 +6371,12 @@ MAKER_PRODUCT_CAP = 60   # 每页产品行上限（按国家均摊）；控制 d
 
 
 def build_maker_pages(entries, db: sqlite3.Connection) -> int:
-    """v0.5.4：生成 /maker/<slug>.html（厂家 / 上市许可持有人页）。
+    """v0.5.4 / v0.9.0：生成 /maker/<slug>.html（厂家 / 上市许可持有人页）。
 
-    - 数据：data/maker_candidates.csv（阈值 MAKER_MIN_PRODUCTS，占位厂家由 is_placeholder=1 排除）
+    - 数据：data/maker_candidates.csv（v0.9.0 起阈值 1：所有非占位厂家都有页）
     - 内容：厂家名、产品数/市场数/品牌数、按国家分组的品牌行（品牌→品牌页、成分→成分/组合页）、
       来源链接与许可说明；每页产品行最多 MAKER_PRODUCT_CAP（按国家均摊），多出的显示截断提示。
+    - 单产品厂家页：底部注明「目前未收录该厂家的其他产品」，noindex,follow 且不进 sitemap。
     - 链接目标全部在构建期验证过（无 404）：combo 只在已经生成了组合页时使用，否则逐个成分链 drug。
     """
     if not MAKERS:
@@ -6128,6 +6518,13 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
                         .replace("{shown}", f"{shown:,}").replace("{total}", f"{n_products:,}"))
                 capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
                                   f'<p class="sub">{esc(note)}</p></div>')
+        single_html = ""
+        single = n_products == 1
+        if single:
+            for lang in ("en", "es", "zh", "zh-Hant"):
+                note = I18N[lang].get("maker.single_note") or I18N["en"]["maker.single_note"]
+                single_html += (f'<div class="lang-block" data-lang-block="{lang}">'
+                                f'<p class="sub maker-single-note">{esc(note)}</p></div>')
         body = f"""<h1>{esc(info["name"])}</h1>
 <p class="sub" data-i18n="maker.title">{esc(T["maker.title"])}</p>
 {intro_blocks}
@@ -6135,10 +6532,20 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
 <h2 data-i18n="maker.by_country">{esc(T["maker.by_country"])}</h2>
 {''.join(sections) if sections else '<p class="empty" data-i18n="maker.empty">No products recorded.</p>'}
 {capped_blocks}
-<div class="notice" data-i18n-html="maker.source_note">{T["maker.source_note"]}</div>"""
+<div class="notice" data-i18n-html="maker.source_note">{T["maker.source_note"]}</div>
+{single_html}"""
+        rel = f'maker/{info["slug"]}.html'
+        if single:
+            NOINDEX_RELS.add(rel)
         (OUT / "maker" / f'{info["slug"]}.html').write_text(
-            page(info["name"], body, "../"), encoding="utf-8")
+            page(info["name"], body, "../", noindex=single), encoding="utf-8")
         made += 1
+    # v0.9.0 task-20：明细面板按原始 MAH 名查厂家页 slug（懒加载，避免结果索引塞 18k 条）。
+    maker_map = {p["mah"]: page_makers[p["mkey"]]["slug"]
+                 for p in prod.values() if p["mkey"] in page_makers}
+    (OUT / "data").mkdir(parents=True, exist_ok=True)
+    (OUT / "data" / "maker-map.json").write_text(
+        json.dumps(maker_map, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return made
 
 
@@ -6209,6 +6616,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="AU" data-i18n="home.au">Australia</option>
     <option value="CA" data-i18n="home.ca">Canada</option>
     <option value="TW" data-i18n="home.tw">Taiwan</option>
+    <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option></select>
   {{hero_examples}}
 </div>
@@ -6300,7 +6708,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
     T = I18N["en"]
     parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
     for key in ("about.lead", "about.rules", "about.nick", "about.terms",
-                "about.sources", "about.tw_source", "about.sg_source"):
+                "about.sources", "about.tw_source", "about.sg_source", "about.hk_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append(LICENCE_HTML)
     for key in ("about.samename", "about.gaps"):
@@ -6471,6 +6879,15 @@ ATC_I18N = {
                             "Drug Statistics Methodology ATC/DDD Index (copyright WHOCC; the "
                             "index itself is not reproduced). Ingredient/strength facts come from "
                             "the regulator records listed on About."),
+        "atc.show_all": "Show all {n} (currently showing {shown})",
+        "atc.salt_label": "Salt form",
+        "atc.status_note": ("Status badges summarise the product records recorded for each "
+                            "ingredient (active / discontinued / withdrawn / unknown); an "
+                            "ingredient can carry more than one status across markets."),
+        "atc.names_source_note": ("Class names are editorial translations or come from "
+                                  "Wikipedia (CC BY-SA 4.0) / Wikidata (CC0); each ATC page lists "
+                                  "the exact source, licence and link for every language. Only "
+                                  "the ATC code and the WHO hierarchy are authoritative."),
         "atc.all_classes": "All ATC classes", "atc.search_link": "Search this class",
         "atc.view_class": "View this ATC class", "atc.categories_link": "Consumer categories",
         "cat.quick_title": "Browse by category", "cat.browse_title": "Common consumer categories",
@@ -6505,6 +6922,16 @@ ATC_I18N = {
                             "Collaborating Centre for Drug Statistics Methodology (copyright "
                             "WHOCC; no se reproduce el índice). Los datos de principios activos "
                             "proceden de los registros regulatorios listados en Acerca de."),
+        "atc.show_all": "Mostrar los {n} (ahora se muestran {shown})",
+        "atc.salt_label": "Sal",
+        "atc.status_note": ("Las insignias de estado resumen los registros de producto de cada "
+                            "principio activo (activo / descatalogado / retirado / desconocido); "
+                            "un mismo principio puede tener más de un estado según el mercado."),
+        "atc.names_source_note": ("Los nombres de clase son traducciones editoriales o provienen "
+                                  "de Wikipedia (CC BY-SA 4.0) / Wikidata (CC0); cada página ATC "
+                                  "indica la fuente, la licencia y el enlace exactos de cada "
+                                  "idioma. Solo el código ATC y la jerarquía de la OMS son "
+                                  "autoritativos."),
         "atc.all_classes": "Todas las clases ATC", "atc.search_link": "Buscar en esta clase",
         "atc.view_class": "Ver esta clase ATC", "atc.categories_link": "Categorías de consumidor",
         "cat.quick_title": "Explorar por categoría",
@@ -6532,6 +6959,13 @@ ATC_I18N = {
         "atc.source_note": ("ATC 码与层级引自 WHO Collaborating Centre for Drug Statistics "
                             "Methodology 的 ATC/DDD Index（版权归 WHOCC，本站不转载索引全文）。"
                             "成分/规格事实来自 About 页所列监管记录。"),
+        "atc.show_all": "显示全部 {n} 个（当前显示前 {shown} 个）",
+        "atc.salt_label": "盐型",
+        "atc.status_note": ("状态角标按每个成分的产品记录汇总（在售 / 已停售 / 已撤市 / 状态未知）；"
+                            "同一成分在不同市场可能同时存在多种状态。"),
+        "atc.names_source_note": ("类别名称为编辑译名，或来自 Wikipedia（CC BY-SA 4.0）/ "
+                                  "Wikidata（CC0）；每个 ATC 页面逐语标注实际来源、许可与链接。"
+                                  "只有 ATC 码与 WHO 层级是权威依据。"),
         "atc.all_classes": "全部 ATC 类别", "atc.search_link": "搜索该类别",
         "atc.view_class": "查看该 ATC 类别", "atc.categories_link": "消费者大类",
         "cat.quick_title": "按大类浏览", "cat.browse_title": "常见消费者大类",
@@ -6556,6 +6990,13 @@ ATC_I18N = {
         "atc.source_note": ("ATC 碼與層級引自 WHO Collaborating Centre for Drug Statistics "
                             "Methodology 的 ATC/DDD Index（版權歸 WHOCC，本站不轉載索引全文）。"
                             "成分/規格事實來自 About 頁所列監管紀錄。"),
+        "atc.show_all": "顯示全部 {n} 個（目前顯示前 {shown} 個）",
+        "atc.salt_label": "鹽型",
+        "atc.status_note": ("狀態角標依每個成分的產品紀錄彙總（在售 / 已停售 / 已撤市 / 狀態未知）；"
+                            "同一成分在不同市場可能同時存在多種狀態。"),
+        "atc.names_source_note": ("類別名稱為編輯譯名，或來自 Wikipedia（CC BY-SA 4.0）/ "
+                                  "Wikidata（CC0）；每個 ATC 頁面逐語標註實際來源、授權與連結。"
+                                  "只有 ATC 碼與 WHO 層級是權威依據。"),
         "atc.all_classes": "全部 ATC 類別", "atc.search_link": "搜尋該類別",
         "atc.view_class": "查看該 ATC 類別", "atc.categories_link": "消費者大類",
         "cat.quick_title": "依大類瀏覽", "cat.browse_title": "常見消費者大類",
@@ -6645,6 +7086,65 @@ ATC_CLASS_I18N = {
                 "R03": "阻塞性氣道疾病用藥", "R05": "咳嗽與感冒用藥", "R06": "全身用抗組胺藥"},
 }
 
+# ── v0.8.5：ATC 类名 v2（构建期只读 data/atc_class_names_v2.csv）────────────
+# 逐语 name/source/url/license；缺本语时回退链 本语 → en → zh → fallback_text。
+# 数据来源：Wikipedia (CC BY-SA 4.0) / Wikidata (CC0) / 编辑译名；来源与许可逐条标注。
+ATC_V2_LANGS = {"en": "en", "es": "es", "zh": "zh", "zh-Hant": "zh_hant"}
+ATC_SOURCE_LABELS = {
+    "en": {"wikipedia": "Wikipedia", "wikipedia-zh-converted": "Wikipedia (zh)",
+           "wikidata": "Wikidata", "editorial": "Editorial translation"},
+    "es": {"wikipedia": "Wikipedia", "wikipedia-zh-converted": "Wikipedia (zh)",
+           "wikidata": "Wikidata", "editorial": "Traducción editorial"},
+    "zh": {"wikipedia": "维基百科", "wikipedia-zh-converted": "维基百科（中文转繁体）",
+           "wikidata": "维基数据", "editorial": "编辑译名"},
+    "zh-Hant": {"wikipedia": "維基百科", "wikipedia-zh-converted": "維基百科（中文轉繁體）",
+                "wikidata": "維基數據", "editorial": "編輯譯名"},
+}
+ATC_EDITORIAL_LICENSE = {
+    "en": "editorial (project)", "es": "editorial (proyecto)",
+    "zh": "编辑整理（项目）", "zh-Hant": "編輯整理（專案）",
+}
+ATC_FALLBACK_LABEL = {
+    "en": "fallback name", "es": "nombre de respaldo",
+    "zh": "回退名", "zh-Hant": "回退名",
+}
+ATC_SRC_PREFIX = {
+    "en": "Source: ", "es": "Fuente: ", "zh": "来源：", "zh-Hant": "來源：",
+}
+
+
+def _load_atc_class_v2() -> tuple[dict[str, dict[str, dict[str, str]]], dict[str, str]]:
+    """读 ATC 类名 v2 CSV → ({code: {lang: {name, source, url, license}}}, {code: fallback})。"""
+    path = ROOT / "data" / "atc_class_names_v2.csv"
+    names: dict[str, dict[str, dict[str, str]]] = {}
+    fallback: dict[str, str] = {}
+    if not path.exists():
+        print(f"atc names v2: 缺少 {path}，回退内置 ATC_CLASS_I18N", flush=True)
+        return names, fallback
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            code = (row.get("code") or "").strip()
+            if not code:
+                continue
+            fallback[code] = (row.get("fallback_text") or "").strip()
+            entry: dict[str, dict[str, str]] = {}
+            for lang, col in ATC_V2_LANGS.items():
+                entry[lang] = {
+                    "name": (row.get(f"name_{col}") or "").strip(),
+                    "source": (row.get(f"source_{col}") or "").strip(),
+                    "url": (row.get(f"url_{col}") or "").strip(),
+                    "license": (row.get(f"license_{col}") or "").strip(),
+                }
+            names[code] = entry
+    named = sum(1 for v in names.values() if v["en"]["name"])
+    print(f"atc names v2: {len(names):,} codes ({named:,} with en name, "
+          f"{sum(1 for v in names.values() if v['zh']['name']):,} zh, "
+          f"{sum(1 for v in names.values() if v['es']['name']):,} es)", flush=True)
+    return names, fallback
+
+
+ATC_CLASS_V2, ATC_CLASS_FALLBACK = _load_atc_class_v2()
+
 CONSUMER_CATEGORIES = [
     {"id": "antihypertensives", "prefixes": ["C02", "C03", "C07", "C08", "C09"],
      "labels": {"en": "Blood-pressure medicines", "es": "Medicamentos para la presión arterial",
@@ -6664,20 +7164,59 @@ CONSUMER_CATEGORIES = [
      "desc": {"en": "ATC A10 — drugs used in diabetes.",
               "es": "ATC A10 — fármacos para diabetes.", "zh": "ATC A10——糖尿病用药。",
               "zh-Hant": "ATC A10——糖尿病用藥。"}},
-    {"id": "weight-loss", "prefixes": ["A08"],
+    {"id": "weight-loss", "prefixes": ["A08", "A10BJ", "A10BX16"],
      "labels": {"en": "Weight-loss medicines", "es": "Medicamentos para perder peso",
                 "zh": "减肥药", "zh-Hant": "減重藥"},
-     "desc": {"en": "ATC A08 — antiobesity preparations.", "es": "ATC A08 — antiobesidad.",
-              "zh": "ATC A08——抗肥胖药。", "zh-Hant": "ATC A08——抗肥胖藥。"}},
-    {"id": "cold-medicine", "prefixes": ["R05", "N02BE", "R06"],
+     "desc": {"en": ("ATC A08 + A10BJ (GLP-1) + A10BX16 (tirzepatide) — antiobesity preparations "
+                     "and GLP-1 weight-loss medicines. GLP-1s also belong to the diabetes class "
+                     "A10; this is a browse-by-indication collection, not a claim of equivalence."),
+              "es": ("ATC A08 + A10BJ (GLP-1) + A10BX16 (tirzepatida) — preparados antiobesidad "
+                     "y medicamentos GLP-1 para perder peso. Los GLP-1 también pertenecen a la "
+                     "clase de diabetes A10; es una colección por indicación, no una afirmación "
+                     "de equivalencia."),
+              "zh": ("ATC A08 + A10BJ（GLP-1）+ A10BX16（tirzepatide）——传统抗肥胖药与 GLP-1 "
+                     "减重药。GLP-1 同属降糖大类 A10；这里按减重适应症浏览，不代表同效或可互换。"),
+              "zh-Hant": ("ATC A08 + A10BJ（GLP-1）+ A10BX16（tirzepatide）——傳統抗肥胖藥與 "
+                          "GLP-1 減重藥。GLP-1 同屬降糖大類 A10；這裡按減重適應症瀏覽，"
+                          "不代表同效或可互換。")},
+     "notes": {"en": ("GLP-1 medicines such as semaglutide, tirzepatide, liraglutide, "
+                      "dulaglutide and exenatide are also listed under Diabetes medicines (A10). "
+                      "The same ingredient appears in both categories by indication — not as an "
+                      "interchangeable alternative."),
+               "es": ("Los medicamentos GLP-1 (semaglutida, tirzepatida, liraglutida, dulaglutida, "
+                      "exenatida) también figuran en Medicamentos para la diabetes (A10). El mismo "
+                      "principio aparece en ambas categorías por indicación, no como alternativa "
+                      "intercambiable."),
+               "zh": ("司美格鲁肽（semaglutide）、替尔泊肽（tirzepatide）、利拉鲁肽（liraglutide）、"
+                      "度拉糖肽（dulaglutide）、艾塞那肽（exenatide）等 GLP-1 也列在「降糖药"
+                      "（A10）」大类。同一成分因适应症不同出现在两个大类，不代表可以互换。"),
+               "zh-Hant": ("司美格魯肽（semaglutide）、替爾泊肽（tirzepatide）、利拉魯肽"
+                           "（liraglutide）、度拉糖肽（dulaglutide）、艾塞那肽（exenatide）等 "
+                           "GLP-1 也列在「降血糖藥（A10）」大類。同一成分因適應症不同出現在"
+                           "兩個大類，不代表可以互換。")}},
+    {"id": "cold-medicine", "prefixes": ["R05", "N02BE"],
      "labels": {"en": "Cold & cough medicines", "es": "Medicamentos para resfriado y tos",
                 "zh": "感冒咳嗽药", "zh-Hant": "感冒咳嗽藥"},
-     "desc": {"en": "ATC R05/N02BE/R06 — cough/cold preparations and antihistamines. Consumer "
-                    "“cold medicine” is broader than one ATC class.",
-              "es": "ATC R05/N02BE/R06 — tos/resfriado y antihistamínicos; el término popular es "
-                    "más amplio que una clase ATC.",
-              "zh": "ATC R05/N02BE/R06——咳嗽/感冒与抗组胺类；消费者说的「感冒药」比单一 ATC 类别更宽。",
-              "zh-Hant": "ATC R05/N02BE/R06——咳嗽/感冒與抗組胺類；消費者說的「感冒藥」比單一 ATC 類別更寬。"}},
+     "desc": {"en": ("ATC R05 + N02BE — cough/cold preparations and anilides (paracetamol). "
+                     "Consumer “cold medicine” is broader than one ATC class; systemic "
+                     "antihistamines (R06) are listed under Allergy medicines."),
+              "es": ("ATC R05 + N02BE — preparados para la tos/resfriado y anilidas "
+                     "(paracetamol). El término popular es más amplio que una clase ATC; los "
+                     "antihistamínicos sistémicos (R06) están en Medicamentos para la alergia."),
+              "zh": ("ATC R05 + N02BE——咳嗽/感冒制剂与苯胺类（对乙酰氨基酚）。消费者说的"
+                     "「感冒药」比单一 ATC 类别更宽；全身用抗组胺药（R06）归入抗过敏药。"),
+              "zh-Hant": ("ATC R05 + N02BE——咳嗽/感冒製劑與苯胺類（對乙醯氨基酚）。消費者說的"
+                          "「感冒藥」比單一 ATC 類別更寬；全身用抗組胺藥（R06）歸入抗過敏藥。")},
+     "notes": {"en": ("Cross-over: some combination cold medicines contain R06 antihistamines. "
+                      "This site lists all R06 under Allergy medicines, so the two categories "
+                      "overlap — see the Allergy medicines page."),
+               "es": ("Solapamiento: algunos antigripales combinados contienen antihistamínicos "
+                      "R06. Este sitio incluye todo R06 en Medicamentos para la alergia; las dos "
+                      "categorías se solapan."),
+               "zh": ("有交叉：部分复方感冒药含 R06 抗组胺成分；本站把全部 R06 归入「抗过敏药」，"
+                      "两个大类互有重叠，可互相对照。"),
+               "zh-Hant": ("有交叉：部分複方感冒藥含 R06 抗組胺成分；本站把全部 R06 歸入"
+                           "「抗過敏藥」，兩個大類互有重疊，可互相對照。")}},
     {"id": "analgesics", "prefixes": ["N02", "M01A"],
      "labels": {"en": "Pain & fever relief", "es": "Analgésicos y antitérmicos",
                 "zh": "退烧止痛", "zh-Hant": "退燒止痛"},
@@ -6687,9 +7226,22 @@ CONSUMER_CATEGORIES = [
     {"id": "allergy", "prefixes": ["R06"],
      "labels": {"en": "Allergy medicines", "es": "Medicamentos para la alergia",
                 "zh": "抗过敏药", "zh-Hant": "抗過敏藥"},
-     "desc": {"en": "ATC R06 — systemic antihistamines.",
-              "es": "ATC R06 — antihistamínicos sistémicos.", "zh": "ATC R06——全身用抗组胺药。",
-              "zh-Hant": "ATC R06——全身用抗組胺藥。"}},
+     "desc": {"en": ("ATC R06 — systemic antihistamines. Some also appear in combination cold "
+                     "medicines; see Cold & cough medicines."),
+              "es": ("ATC R06 — antihistamínicos sistémicos. Algunos también aparecen en "
+                     "antigripales combinados; ver Medicamentos para resfriado y tos."),
+              "zh": "ATC R06——全身用抗组胺药。部分也出现在复方感冒药中；可与「感冒咳嗽药」对照。",
+              "zh-Hant": "ATC R06——全身用抗組胺藥。部分也出現在複方感冒藥中；可與「感冒咳嗽藥」對照。"},
+     "notes": {"en": ("Cross-over: R06 antihistamines may be components of combination cold "
+                      "medicines. All R06 are listed here; Cold & cough medicines only covers "
+                      "R05 + N02BE, so the two categories overlap."),
+               "es": ("Solapamiento: los antihistamínicos R06 pueden formar parte de antigripales "
+                      "combinados. Todo R06 está aquí; Medicamentos para resfriado y tos solo "
+                      "cubre R05 + N02BE, por lo que las categorías se solapan."),
+               "zh": ("有交叉：R06 抗组胺药可能是复方感冒药的成分。全部 R06 列在本大类；"
+                      "「感冒咳嗽药」只含 R05 + N02BE，因此两个大类有重叠。"),
+               "zh-Hant": ("有交叉：R06 抗組胺藥可能是複方感冒藥的成分。全部 R06 列在本大類；"
+                           "「感冒咳嗽藥」只含 R05 + N02BE，因此兩個大類有重疊。")}},
     {"id": "acid-related", "prefixes": ["A02"],
      "labels": {"en": "Stomach / acid medicines", "es": "Medicamentos gástricos / de acidez",
                 "zh": "胃药", "zh-Hant": "胃藥"},
@@ -6705,12 +7257,23 @@ CONSUMER_CATEGORIES = [
               "es": "ATC B01 — antitrombóticos; no todos son intercambiables.",
               "zh": "ATC B01——抗血栓药；彼此不都可互换。",
               "zh-Hant": "ATC B01——抗血栓藥；彼此不都可互換。"}},
-    {"id": "statins", "prefixes": ["C10AA"],
+    {"id": "statins", "prefixes": ["C10AA"], "exclude": ["cerivastatin"],
      "labels": {"en": "Statins", "es": "Estatinas", "zh": "他汀类", "zh-Hant": "他汀類"},
-     "desc": {"en": "ATC C10AA — HMG-CoA reductase inhibitors.",
-              "es": "ATC C10AA — inhibidores de la HMG-CoA reductasa.",
-              "zh": "ATC C10AA——HMG-CoA 还原酶抑制剂。",
-              "zh-Hant": "ATC C10AA——HMG-CoA 還原酶抑制劑。"}},
+     "desc": {"en": ("ATC C10AA — HMG-CoA reductase inhibitors. Cerivastatin (withdrawn 2001) "
+                     "is excluded from the member list; status badges show current product "
+                     "records."),
+              "es": ("ATC C10AA — inhibidores de la HMG-CoA reductasa. La cerivastatina "
+                     "(retirada en 2001) se excluye de la lista; las insignias muestran el "
+                     "estado de los registros."),
+              "zh": ("ATC C10AA——HMG-CoA 还原酶抑制剂。已撤市的 cerivastatin（西立伐他汀，"
+                     "2001 年撤市）从成员列表中排除；状态角标显示产品记录状态。"),
+              "zh-Hant": ("ATC C10AA——HMG-CoA 還原酶抑制劑。已撤市的 cerivastatin"
+                          "（西立伐他汀，2001 年撤市）從成員列表中排除；狀態角標顯示產品紀錄狀態。")},
+     "notes": {"en": ("Cerivastatin (C10AA06) was withdrawn in 2001; it is excluded here rather "
+                      "than listed as a current option."),
+               "es": ("La cerivastatina (C10AA06) se retiró en 2001; se excluye de esta lista."),
+               "zh": "cerivastatin（C10AA06）已于 2001 年撤市，本大类不将其列为现售选项。",
+               "zh-Hant": "cerivastatin（C10AA06）已於 2001 年撤市，本大類不將其列為現售選項。"}},
     {"id": "beta-blockers", "prefixes": ["C07"],
      "labels": {"en": "Beta blockers", "es": "Betabloqueantes", "zh": "β受体阻滞剂",
                 "zh-Hant": "β受體阻斷劑"},
@@ -6769,11 +7332,29 @@ def build_glossary() -> None:
 
 
 # ── v0.7.x：ATC 类目页 / 大类页 / landing / 客户端 categories.json ──────────
-ATC_MEMBER_CAP = 60
+ATC_MEMBER_CAP = 80
 ATC_LEN_LEVEL = {1: 1, 3: 2, 4: 3, 5: 4}
 
 
+def _atc_v2_entry(code: str, lang: str) -> dict[str, str] | None:
+    """按 本语 → en → zh 回退取 v2 类名记录（source/license/url 跟随实际语种）。"""
+    rec = ATC_CLASS_V2.get(code)
+    if not rec:
+        return None
+    for src_lang in (lang, "en", "zh"):
+        entry = rec.get(src_lang)
+        if entry and entry.get("name"):
+            return {**entry, "lang": src_lang, "fallback": "1" if src_lang != lang else ""}
+    return None
+
+
 def _atc_display_name(lang: str, code: str) -> str:
+    entry = _atc_v2_entry(code, lang)
+    if entry:
+        return entry["name"]
+    if code in ATC_CLASS_V2:
+        return ATC_CLASS_FALLBACK.get(code, "")
+    # CSV 缺行（或文件缺失）→ 旧内置表最后兜底
     if len(code) == 1:
         return ATC_L1_I18N.get(lang, {}).get(code, "")
     return ATC_CLASS_I18N.get(lang, {}).get(code, "")
@@ -6783,12 +7364,60 @@ def _atc_names(code: str) -> dict[str, str]:
     return {lang: _atc_display_name(lang, code) for lang in ("en", "es", "zh", "zh-Hant")}
 
 
+def _atc_all_fallback(code: str) -> bool:
+    return bool(code in ATC_CLASS_V2) and not any(
+        _atc_v2_entry(code, lang) for lang in ("en", "es", "zh", "zh-Hant"))
+
+
+def _atc_source_html(code: str, lang: str) -> str:
+    """逐语来源小字：Wikipedia / Wikidata / 编辑译名 + 许可 + 链接；回退时标注。"""
+    entry = _atc_v2_entry(code, lang)
+    if not entry:
+        return ""
+    source = entry.get("source") or ""
+    label = ATC_SOURCE_LABELS.get(lang, {}).get(source, source)
+    url = entry.get("url") or ""
+    label_html = (f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>'
+                  if url else esc(label))
+    license_text = entry.get("license") or ""
+    if "editorial" in license_text.lower():
+        license_text = ATC_EDITORIAL_LICENSE.get(lang, license_text)
+    fallback = (f' · {esc(ATC_FALLBACK_LABEL.get(lang, ""))} ({esc(entry.get("lang", ""))})'
+                if entry.get("fallback") else "")
+    return f"{label_html} · {esc(license_text)}{fallback}"
+
+
+def _lang_blocks(parts: dict[str, str]) -> str:
+    """四语行内块；空值不输出（无值时不显示该语言）。"""
+    return "".join(
+        f'<span class="lang-block" data-lang-block="{lang}" data-lang-inline="1">{html}</span>'
+        for lang, html in parts.items() if html)
+
+
+def _lang_block_text(key: str, **fmt: object) -> str:
+    """同一句 UI 文案的四语块（数字占位在构建期替换）。"""
+    out = {}
+    for lang in ("en", "es", "zh", "zh-Hant"):
+        text = (I18N.get(lang) or {}).get(key) or I18N["en"].get(key, "")
+        for k, v in fmt.items():
+            text = text.replace("{" + k + "}", str(v))
+        out[lang] = esc(text)
+    return _lang_blocks(out)
+
+
+def _atc_source_line(code: str) -> str:
+    """ATC 类目页标题下的逐语来源/许可/链接小字。"""
+    parts = {lang: _atc_source_html(code, lang) for lang in ("en", "es", "zh", "zh-Hant")}
+    if not any(parts.values()):
+        return ""
+    parts = {lang: ATC_SRC_PREFIX.get(lang, "") + html
+             for lang, html in parts.items() if html}
+    return f'<p class="sub atc-src-line">{_lang_blocks(parts)}</p>'
+
+
 def _lang_inline(labels: dict[str, str]) -> str:
     """行内语言块（i18n.js 对 data-lang-inline=1 用 inline 显示）。"""
-    return "".join(
-        f'<span class="lang-block" data-lang-block="{lang}" data-lang-inline="1">'
-        f'{esc(text)}</span>'
-        for lang, text in labels.items() if text)
+    return _lang_blocks({lang: esc(text) for lang, text in labels.items() if text})
 
 
 def _atc_groups(db: sqlite3.Connection) -> dict[int, dict[str, list[dict]]]:
@@ -6814,34 +7443,103 @@ def _sub_name_spans(en: str, zh: str, sid: str) -> str:
             f'data-n-zhh="{esc(zhh)}" data-n-es="{esc(es)}">{esc(en_txt)}</span>')
 
 
-def _atc_members_html(subs: list[dict], cap: int = ATC_MEMBER_CAP,
+def _sub_status_map(db: sqlite3.Connection,
+                    base_of: dict[str, str]) -> dict[str, dict[str, int]]:
+    """base substance_id → {status: 产品数}；状态角标按产品记录聚合。"""
+    out: dict[str, dict[str, int]] = {}
+    for sid, status, n in db.execute(
+            """SELECT v.substance_id, p.status, COUNT(DISTINCT p.product_id)
+               FROM product p
+               JOIN product_component pc ON pc.product_id = p.product_id
+               JOIN variant v ON v.variant_id = pc.variant_id
+               WHERE p.status IS NOT NULL AND p.status <> ''
+               GROUP BY v.substance_id, p.status"""):
+        base = base_of.get(sid, sid)
+        counts = out.setdefault(base, {})
+        counts[status] = counts.get(status, 0) + int(n)
+    return out
+
+
+def _member_context(db: sqlite3.Connection):
+    """ATC/大类页共用：盐型 base 映射 + 名称 + 产品状态聚合。"""
+    base_of, sub_names = _sub_base_map(db)
+    return base_of, sub_names, _sub_status_map(db, base_of)
+
+
+def _collapse_members(subs: list[dict], base_of: dict[str, str],
+                      sub_names: dict[str, tuple[str, str]],
+                      status_by_base: dict[str, dict[str, int]],
+                      drug_sids: set[str]) -> list[dict]:
+    """同一 ATC 码/大类下，按 base 成分归并盐型与同名重复，一个 base 一行。"""
+    grouped: dict[str, list[dict]] = {}
+    for r in subs:
+        base = base_of.get(r["substance_id"], r["substance_id"])
+        grouped.setdefault(base, []).append(r)
+    items: list[dict] = []
+    for base, rows in grouped.items():
+        base_en, base_zh = sub_names.get(base, ("", ""))
+        if not base_en:
+            base_en = rows[0].get("inn_en") or ""
+        if not base_zh:
+            base_zh = rows[0].get("inn_zh") or ""
+        salts = sorted((r for r in rows if r["substance_id"] != base),
+                       key=lambda r: (r.get("inn_en") or "").lower())
+        codes = sorted({(r.get("atc") or "").strip() for r in rows
+                        if (r.get("atc") or "").strip()})
+        sid = base if base in drug_sids else next(
+            (r["substance_id"] for r in rows if r["substance_id"] in drug_sids), base)
+        items.append({"base": base, "en": base_en, "zh": base_zh, "sid": sid,
+                      "codes": codes, "salts": salts,
+                      "statuses": status_by_base.get(base, {})})
+    return items
+
+
+def _atc_members_html(items: list[dict], cap: int = ATC_MEMBER_CAP,
                       drug_sids: set[str] | None = None) -> str:
-    # 有中文名的排前（中文用户优先看到可读名），其余按 en；再按 sid 稳定
-    ordered = sorted(subs, key=lambda r: (
-        0 if (r.get("inn_zh") or "").strip() else 1,
-        (r.get("inn_zh") or r.get("inn_en") or "").lower(), r.get("substance_id") or ""))
-    items = []
-    for r in ordered[:cap]:
-        zh = r.get("inn_zh") or ""
-        en = r.get("inn_en") or ""
-        sid = r["substance_id"]
-        name_html = _sub_name_spans(en, zh, sid)
-        if drug_sids is None or sid in drug_sids:
-            label = f'<a href="../drug/{esc(sid)}.html">{name_html}</a>'
+    """成员列表：base 名 + 盐型附注 + 状态角标；超过 cap 用 <details> 展开（无 JS 也能点开）。"""
+    # 有中文名的排前（中文用户优先看到可读名），其余按 en；再按 base 稳定
+    ordered = sorted(items, key=lambda r: (
+        0 if (r.get("zh") or "").strip() else 1,
+        (r.get("zh") or r.get("en") or "").lower(), r.get("base") or ""))
+    lis: list[str] = []
+    for it in ordered:
+        name_html = _sub_name_spans(it.get("en", ""), it.get("zh", ""), it["sid"])
+        if drug_sids is None or it["sid"] in drug_sids:
+            label = f'<a href="../drug/{esc(it["sid"])}.html">{name_html}</a>'
         else:
             # 有 ATC 但没有 product 的成分没有 drug 页 → 纯文本，避免 ../drug/ 404
             label = f'<span class="brand-plain">{name_html}</span>'
-        items.append(f'<li>{label} <code>{esc(r["atc"])}</code></li>')
-    more = ""
-    if len(ordered) > cap:
-        more = (f'<p class="sub" data-i18n="atc.more">and {len(ordered) - cap} more</p>')
-    return f'<ul class="sub atclist atcmembers">{"".join(items)}</ul>{more}'
+        codes = " ".join(f'<code>{esc(c)}</code>' for c in it["codes"])
+        salt = ""
+        if it["salts"]:
+            salt_names = " · ".join(
+                _sub_name_spans(r.get("inn_en") or "", r.get("inn_zh") or "",
+                                r["substance_id"]) for r in it["salts"])
+            salt = (f'<span class="salt"><span data-i18n="atc.salt_label">'
+                    f'{esc(I18N["en"].get("atc.salt_label", "Salt form"))}</span> '
+                    f'{salt_names}</span>')
+        badges = ""
+        for st in ("withdrawn", "discontinued", "active", "unknown"):
+            n = it["statuses"].get(st, 0)
+            if n:
+                badges += (f'<span class="st-badge st-{st}" data-i18n="drug.status.{st}" '
+                           f'title="{n}">{esc(I18N["en"].get("drug.status." + st, st))}</span>')
+        lis.append(f'<li>{label} {codes}{salt}{badges}</li>')
+    head = "".join(lis[:cap])
+    rest = "".join(lis[cap:])
+    if rest:
+        summary = _lang_block_text("atc.show_all", n=len(lis), shown=cap)
+        return (f'<ul class="sub atclist atcmembers">{head}</ul>'
+                f'<details class="atcdetails"><summary>{summary}</summary>'
+                f'<ul class="sub atclist atcmembers">{rest}</ul></details>')
+    return f'<ul class="sub atclist atcmembers">{head}</ul>'
 
 
 def build_atc_pages(db: sqlite3.Connection) -> int:
     """L1–L4 ATC 类目页 /atc/<prefix>.html（父/子类目可逐级浏览）。"""
     groups = _atc_groups(db)
     drug_sids = {p.stem for p in (OUT / "drug").glob("*.html")}
+    base_of, sub_names, status_by_base = _member_context(db)
     (OUT / "atc").mkdir(parents=True, exist_ok=True)
     T = I18N["en"]
     made = 0
@@ -6851,10 +7549,12 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
             level = ATC_LEN_LEVEL[len(code)]
             parent = {3: code[:1], 4: code[:3], 5: code[:4]}.get(len(code), "")
             names = _atc_names(code)
+            fallback_only = _atc_all_fallback(code) or not any(names.values())
             name_html = _lang_inline(names)
-            title_html = f'<code>{esc(code)}</code> {name_html}'
-            unnamed = "" if any(names.values()) else (
-                f'<p class="sub" data-i18n="atc.unnamed">{esc(T["atc.unnamed"])}</p>')
+            title_html = (name_html if fallback_only
+                          else f'<code>{esc(code)}</code> {name_html}')
+            unnamed = (f'<p class="sub" data-i18n="atc.unnamed">{esc(T["atc.unnamed"])}</p>'
+                       if fallback_only else "")
             crumbs = (f'<a href="../atc.html" data-i18n="atc.all_classes">'
                       f'{esc(T["atc.all_classes"])}</a>')
             if parent:
@@ -6866,21 +7566,27 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
                 if kids:
                     lis = []
                     for c, s in kids:
+                        n_kid = len(_collapse_members(
+                            s, base_of, sub_names, status_by_base, drug_sids))
                         lis.append(f'<li><a href="../atc/{esc(c)}.html"><code>{esc(c)}</code> '
                                    f'{_lang_inline(_atc_names(c))}</a> '
-                                   f'<span class="meta">({len(s)})</span></li>')
+                                   f'<span class="meta">({n_kid})</span></li>')
                     children = (f'<h2 data-i18n="atc.children">{esc(T["atc.children"])}</h2>'
                                 f'<ul class="sub atclist">{"".join(lis)}</ul>')
+            members = _collapse_members(subs, base_of, sub_names, status_by_base, drug_sids)
             search_href = f'../index.html?q={esc(code)}'
             body = f"""<p class="sub">{crumbs}</p>
 <h1>{title_html} <span class="tag">L{level}</span></h1>
 {unnamed}
+{_atc_source_line(code)}
 <p class="sub"><span data-i18n="atc.level">{esc(T["atc.level"])}</span> L{level} ·
 <a class="linkbtn" href="{search_href}" data-i18n="atc.search_link">{esc(T["atc.search_link"])}</a>
 · <a href="../atc.html" data-i18n="atc.categories_link">{esc(T["atc.categories_link"])}</a></p>
 {children}
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
-{_atc_members_html(subs, drug_sids=drug_sids)}
+<p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
+{_atc_members_html(members, drug_sids=drug_sids)}
+<div class="notice" data-i18n="atc.status_note">{esc(T["atc.status_note"])}</div>
 <div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
 <div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
             (OUT / "atc" / f"{code}.html").write_text(
@@ -6889,40 +7595,80 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
     return made
 
 
+def _cat_related_html(prefixes: list[str],
+                      groups: dict[int, dict[str, list[dict]]]) -> str:
+    """大类页「相关 ATC 类别」：v2 四语类名 + 逐语来源；无类目页的 L5 码给搜索链接。"""
+    lis = []
+    for code in prefixes:
+        exists = code in groups.get(len(code), {})
+        parts: dict[str, str] = {}
+        for lang in ("en", "es", "zh", "zh-Hant"):
+            display = _atc_display_name(lang, code) or f"ATC {code}"
+            inner = f'<code>{esc(code)}</code> {esc(display)}'
+            if exists:
+                inner = f'<a href="../atc/{esc(code)}.html">{inner}</a>'
+            else:
+                inner = (f'<span class="brand-plain">{inner}</span> '
+                         f'<a class="linkbtn" href="../index.html?q={esc(code)}" '
+                         f'data-i18n="atc.search_link">Search this class</a>')
+            src = _atc_source_html(code, lang)
+            if src:
+                inner += f' <span class="atc-src">{src}</span>'
+            parts[lang] = inner
+        lis.append(f'<li>{_lang_blocks(parts)}</li>')
+    return f'<ul class="sub atclist">{"".join(lis)}</ul>'
+
+
 def build_category_pages(db: sqlite3.Connection) -> int:
     """常见消费者大类 /cat/<id>.html（主题合集，非药效等同）。"""
     rows = [dict(r) for r in db.execute(
         "SELECT substance_id, inn_en, inn_zh, atc FROM substance "
         "WHERE atc IS NOT NULL AND atc <> '' ORDER BY atc, inn_en")]
+    groups = _atc_groups(db)
     drug_sids = {p.stem for p in (OUT / "drug").glob("*.html")}
+    base_of, sub_names, status_by_base = _member_context(db)
     (OUT / "cat").mkdir(parents=True, exist_ok=True)
     T = I18N["en"]
     made = 0
     for cat in CONSUMER_CATEGORIES:
-        seen = set()
+        exclude = {_norm_name(x) for x in cat.get("exclude", [])}
         subs = []
         for r in rows:
-            if any(r["atc"].startswith(p) for p in cat["prefixes"]):
-                if r["substance_id"] not in seen:
-                    seen.add(r["substance_id"])
-                    subs.append(r)
-        related = "".join(
-            f'<li><a href="../atc/{esc(p)}.html"><code>{esc(p)}</code> '
-            f'{_lang_inline(_atc_names(p))}</a></li>' for p in cat["prefixes"])
+            if not any(r["atc"].startswith(p) for p in cat["prefixes"]):
+                continue
+            base = base_of.get(r["substance_id"], r["substance_id"])
+            base_en = sub_names.get(base, ("", ""))[0]
+            if _norm_name(r.get("inn_en") or "") in exclude or _norm_name(base_en) in exclude:
+                continue
+            subs.append(r)
+        members = _collapse_members(subs, base_of, sub_names, status_by_base, drug_sids)
+        related = _cat_related_html(cat["prefixes"], groups)
         title_labels = cat["labels"]
         display_title = _lang_inline(title_labels)
         desc_blocks = "".join(
             f'<div class="lang-block" data-lang-block="{lang}">{esc(cat["desc"][lang])}</div>'
             for lang in ("en", "es", "zh", "zh-Hant"))
+        notes = ""
+        if cat.get("notes"):
+            badge = ('<span class="st-badge st-withdrawn" data-i18n="drug.status.withdrawn">'
+                     '已撤市</span> ' if cat.get("exclude") else "")
+            note_blocks = "".join(
+                f'<div class="lang-block" data-lang-block="{lang}">{badge}'
+                f'{esc(cat["notes"][lang])}</div>'
+                for lang in ("en", "es", "zh", "zh-Hant"))
+            notes = f'<div class="notice cat-note">{note_blocks}</div>'
         body = f"""<p class="sub"><a href="../atc.html" data-i18n="cat.back">{esc(T["cat.back"])}</a></p>
 <h1>{display_title}</h1>
 <p class="sub cat-en">{esc(cat["labels"]["en"])}</p>
 {desc_blocks}
+{notes}
 <p class="sub" data-i18n="cat.disclaimer">{esc(T["cat.disclaimer"])}</p>
 <h2 data-i18n="cat.related_atc">{esc(T["cat.related_atc"])}</h2>
-<ul class="sub atclist">{related}</ul>
+{related}
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
-{_atc_members_html(subs, cap=80, drug_sids=drug_sids)}
+<p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
+{_atc_members_html(members, cap=80, drug_sids=drug_sids)}
+<div class="notice" data-i18n="atc.status_note">{esc(T["atc.status_note"])}</div>
 <div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
 <div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
         (OUT / "cat" / f'{cat["id"]}.html').write_text(
@@ -6931,13 +7677,25 @@ def build_category_pages(db: sqlite3.Connection) -> int:
     return made
 
 
+def _atc_card_inline(code: str) -> str:
+    """atc.html L1 卡片：v2 四语类名 + 逐语来源/许可小字。"""
+    parts: dict[str, str] = {}
+    for lang in ("en", "es", "zh", "zh-Hant"):
+        inner = f'<code>{esc(code)}</code> {esc(_atc_display_name(lang, code))}'
+        src = _atc_source_html(code, lang)
+        if src:
+            inner += f' <span class="atc-src">{src}</span>'
+        parts[lang] = inner
+    return _lang_blocks(parts)
+
+
 def build_atc_index() -> None:
-    """���式 /atc.html：14 个 ATC L1 大类 + 16 个消费者大类入口。"""
+    """落地页 /atc.html：14 个 ATC L1 大类 + 16 个消费者大类入口（类名 v2）。"""
     T = I18N["en"]
     l1_codes = ("A", "B", "C", "D", "G", "H", "J", "L", "M", "N", "P", "R", "S", "V")
     l1_html = "".join(
-        f'<a class="atccard" href="atc/{code}.html"><code>{code}</code> '
-        f'{_lang_inline(_atc_names(code))}</a>' for code in l1_codes)
+        f'<a class="atccard" href="atc/{code}.html">{_atc_card_inline(code)}</a>'
+        for code in l1_codes)
     cat_html = "".join(
         f'<a class="atccard" href="cat/{cat["id"]}.html">'
         f'<span class="lang-block" data-lang-block="en" data-lang-inline="1">'
@@ -6958,6 +7716,7 @@ def build_atc_index() -> None:
 <div data-i18n="cat.intro">{esc(T["cat.intro"])}</div>
 <div class="catgrid">{cat_html}</div>
 <p class="sub" data-i18n="cat.disclaimer">{esc(T["cat.disclaimer"])}</p>
+<div class="notice" data-i18n="atc.names_source_note">{esc(T["atc.names_source_note"])}</div>
 <div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
 <div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
     (OUT / "atc.html").write_text(page("ATC classes & categories", body, ""), encoding="utf-8")
@@ -6972,15 +7731,17 @@ def build_categories_json(db: sqlite3.Connection) -> None:
         items.append({"kind": "cat", "id": cat["id"], "url": f'cat/{cat["id"]}.html',
                       "prefixes": list(cat["prefixes"]), "labels": labels,
                       "aliases": [a for a in aliases if a]})
-    codes = set(ATC_L1_I18N["en"]) | set(ATC_CLASS_I18N["en"])
-    for code in sorted(codes):
-        items.append({"kind": "atc", "id": code, "url": f"atc/{code}.html",
-                      "prefixes": [code], "labels": _atc_names(code), "aliases": [code.lower()]})
     # atc_codes 用于客户端判断「该类目页是否存在」（全部 L1–L4 前缀，1,154 个）
     groups = _atc_groups(db)
     all_codes: set[str] = set()
     for ln in (1, 3, 4, 5):
         all_codes.update(groups[ln].keys())
+    # v0.8.5：类名 v2 覆盖到的 ATC 码全部进客户端搜索（不再只收内置 25 个）
+    codes = {c for c in all_codes
+             if c in ATC_CLASS_V2 or c in ATC_CLASS_I18N["en"] or c in ATC_L1_I18N["en"]}
+    for code in sorted(codes):
+        items.append({"kind": "atc", "id": code, "url": f"atc/{code}.html",
+                      "prefixes": [code], "labels": _atc_names(code), "aliases": [code.lower()]})
     (OUT / "data" / "categories.json").write_text(
         json.dumps({"categories": items, "atc_codes": sorted(all_codes)},
                    ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -7045,7 +7806,7 @@ def build_seo_files() -> None:
     urls: list[str] = []
     for p in OUT.rglob("*.html"):
         rel = p.relative_to(OUT).as_posix()
-        if rel == "404.html":
+        if rel == "404.html" or rel in NOINDEX_RELS:
             continue
         if rel == "index.html":
             urls.append(SITE_URL)
@@ -7390,9 +8151,9 @@ def main() -> None:
     });
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
     // v0.6.6/v0.7.0/v0.7.x：语言列序（含 TW/SG：zh → CN,TW,SG；zh-Hant → TW,CN,HK,SG；es → ES,MX…）
-    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW'],
-                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW'],
-                  zh: ['CN','TW','SG','US','GB','CA','AU','ES','MX'],
+    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK'],
+                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK'],
+                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX'],
                   'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX']};
     var morder = MORDER[window.LANG] || MORDER.en;
     window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
