@@ -1,5 +1,5 @@
 # 药品商品名跨国定位站的项目预设：standard 骨架 + 项目人设。
-# 相对 standard 的差异只有：persona 换成中文项目工程师、去掉 schedule 与插件管理工具、
+# 相对 standard 的差异只有：persona 换成中文项目工程师、保留 schedule（谷段 cron + 申请提醒），去掉插件管理工具、
 # 不挂 cordis 创作工具。项目规则在仓库根的 AGENTS.md，流程在 .dsh/skills/。
 - insert:
     - id: preset-drug
@@ -47,6 +47,8 @@
             name: '@deepseek-ai/dsh-command-goal'
           - id: tool-goal
             name: '@deepseek-ai/dsh-tool-goal'
+          - id: tool-schedule
+            name: '@deepseek-ai/dsh-tool-schedule'
           - id: planning
             name: cordis:group
             group: true
