@@ -53,4 +53,11 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 - **未全量生成 102,192 单包装页**：按 Lead「dist >800MB 先降级」口径取 CN/TW/ES/MX；若要全量：`$env:SINGLE_NAME_ALL='1'` 后构建（预估 dist ~870MiB，需确认上限）。
 - 1,055 个单包装 trade key 在 DB 无 `product_component` 行，索引无法建页；另有约 423 个差异见 `index_smoke` 口径，未强行造页（避免空页）。
 - 移动端「市场折叠」用纵向卡片实现，未做折叠开关；无 JS 仍可读。
-- 最终 build 后需实测「西替利嗪默认 3 列、横滚、sticky、ES 不截断、MX 筛入、CN 列高、+N、ARALEVO/RIDEXIN 页、noindex/sitemap」。
+
+## 5. 构建结果（2026-10-30，v0.9.0）
+
+- `== done ==` exit 0，耗时 **2.92 分钟**（`.tmp/build-v090.log` 保留）。
+- dist **116,883 文件 / 770,754,926 B（770.8 MB / 735.1 MiB）**，0 字节 0；sitemap **68,430 URL**（旧 62,057；noindex 页已排除，未暴涨）。
+- 页数：**name 77,030**（旧 31,134，新增 45,896）；其中**单包装子集 44,040**（noindex）；drug 12,436；combo 10,842；maker 15,213；页脚 **v0.9.0**。
+- 抽查：ARALEVO/RIDEXIN 单包装页存在且 noindex/底部文案/产品表/厂家链接通过、不进 sitemap；首页 HK、About HK、矩阵 HK、orlistat 120 mg+原记录均通过。
+- **未完成（下一版）**：全量 **102,192** 个单包装名字页未做（本版 44,040 子集；全量预估 >800MB，需先压模板/分批）；1,055 个单包装 trade key 无 component 行无法建页。

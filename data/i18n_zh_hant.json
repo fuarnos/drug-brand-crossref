@@ -451,6 +451,10 @@
     "home.hk": "中國香港",
     "matrix.hk_note": "香港紀錄僅名稱/成分層：無規格、無劑型、無註冊狀態；在冊不代表在售。",
     "about.hk_source": "<p class=\"sub\"><b>中國香港</b>：香港衞生署藥物辦公室「<b>註冊藥劑製品名單</b>」（data.gov.hk 資料集 hk-dh-dh_do-hk-dh-do-pharmaceutical-product），依 <b>DATA.GOV.HK 使用條款</b>可自由再使用、須署名（不暗示政府背書）；資料截止 <b>2026-10-23</b>。僅名稱/持有人/註冊號/活性成分層——<b>無規格、無劑型、無註冊狀態；在冊不代表在售。</b></p>",
-    "matrix.hidden_note": "已停售、撤市或狀態未確認的產品預設隱藏；香港記錄（僅名稱/成分層）例外顯示。"
+    "matrix.hidden_note": "已停售、撤市或狀態未確認的產品預設隱藏；香港及澳大利亞紀錄例外顯示。",
+    "ingredient.unrecorded": "成分未收錄（名稱層）",
+    "badge.export_only": "僅供出口",
+    "about.au_source": "<p class=\"sub\"><b>澳大利亞</b>：TGA <b>ARTG Medicines 2026-10-28</b>（Australian Register of Therapeutic Goods；署名 TGA/ARTG）；資料截止 <b>2026-10-28</b>。匯出<b>無註冊狀態欄</b>，狀態一律顯示「未確認」；<b>在冊不代表在售</b>。另有 3,911 個無成分紀錄的產品，僅按名稱層展示。</p>",
+    "matrix.au_note": "澳大利亞 ARTG 資料無註冊狀態欄，狀態一律顯示「未確認」；在冊不代表在售。"
   }
 }

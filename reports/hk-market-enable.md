@@ -44,3 +44,10 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 - 构建后抽查：首页下拉 HK、覆盖行 HK 13,935、成分页 HK 列/说明、About 四语署名、无 404。
 - HK 无规格/剂型/状态，D1 剂量对应不可用；页面已明示，不补猜。
 - 未改 CHANGELOG；发布说明由发布经理统一写 v0.9.0。
+
+## 5. 构建结果（2026-10-30，v0.9.0）
+
+- `== done ==` exit 0，2.92 分钟；dist **116,883 文件 / 770,754,926 B（770.8 MB / 735.1 MiB）**；sitemap 68,430；页脚 v0.9.0。
+- 首页下拉含 `value="HK"`，四语 `home.hk` = Hong Kong / Hong Kong / 中国香港 / 中國香港。
+- About 静态页含 `<td>HK</td>` 覆盖行 + `about.hk_source` 署名；构建后实测 HK 矩阵页（hypromellose）含 `data-country="HK"` + `matrix-hk-note`。
+- **未完成（数据侧限制）**：HK 无 status / strength / dosage_form / release；矩阵以「未公开规格」显示并在页面注明「仅名称/成分层、在册≠在售」，不补猜；D1 剂量对应不可用。

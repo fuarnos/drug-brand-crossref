@@ -53,3 +53,10 @@ Get-Content .tmp/cat2/task1-smoke.json -Encoding utf8
 - 全量构建与 dist 数字（文件数/体积/sitemap）待 DB 窗口后统一构建；本报告不填。
 - zh-Hant 类名回退按 Lead 指定链 本语→en→zh；个别类目（如 A10BJ）zh/es 无值时显示英文名并标 fallback，不机器翻译。
 - 「696 同码页」为 ATC 类目级码语义，非盐型重复；报告已单列口径。
+
+## 6. 构建结果（2026-10-30，v0.9.0）
+
+- `== done ==` exit 0，2.92 分钟；dist **116,883 文件 / 770,754,926 B（770.8 MB / 735.1 MiB）**；sitemap 68,430；页脚 v0.9.0。
+- ATC 类目页 1,154 + 大类页 16 全部生成；`categories.json` v2 码集生效。
+- 构建后静态抽查：weight-loss 含 semaglutide/tirzepatide、cold 无 R06 成员、allergy 有 R06、statins 成员无 cerivastatin（仅说明文字）、A 页 `<details>` 首段 80 行；四语 key 无缺。
+- 未完成/说明：HK 无 ATC/规格/状态（仅名称成分层），不影响 ATC v2；「696 同码页」解释见上。

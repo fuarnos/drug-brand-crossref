@@ -56,3 +56,10 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 - 原记录快照已进仓库（`data/sources/unit_normalization_20261030.csv`，3.4 MB）；`.tmp` 只是兜底。缺快照时构建会报错，不会静默丢「原记录」。
 - 未做名称页/结果行的规格原记录（本任务只要求矩阵）。
 - **全量单包装名字页待做（下一版）**：见 `reports/matrix-columns-ondemand.md`；本版按 800MB 守卫用 CN/TW/ES/MX 子集。
+
+## 5. 构建结果（2026-10-30，v0.9.0）
+
+- `== done ==` exit 0，2.92 分钟；dist **116,883 文件 / 770,754,926 B（770.8 MB / 735.1 MiB）**；sitemap 68,430；页脚 v0.9.0。
+- 构建后抽查 `site/dist/drug/orlistat.html`：**120 mg 合并行 + 「原记录：0.12 g」小字**通过；无「0.12 g」独立规格行。
+- 原记录快照 `data/sources/unit_normalization_20261030.csv` 在构建期被优先读取（109,161 行），未报错。
+- **未完成**：名称页/结果行的原记录未做（仅矩阵）；全量单包装名字页留待下一版。
