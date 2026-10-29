@@ -137,13 +137,13 @@ I18N = {
                      "Chinese, full-width and Cyrillic input all work, and you can include the "
                      "dose — e.g. Lipitor 20mg, Tylenol, or Paracetamol 500mg."),
         "home.ph": "Brand name / generic name / nickname / a line from the pack",
-        "home.all": "All countries", "home.us": "United States",
+        "home.all": "All countries and regions", "home.us": "United States",
         "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
         "home.mx": "Mexico", "home.au": "Australia", "home.ca": "Canada",
         "home.sg": "Singapore",
         "home.tw": "Taiwan",
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
-                          "Coverage:"),
+                          "Coverage (countries and regions):"),
         "home.loading": "Loading index…",
         "home.hint_idle": ("First search loads only one small shard of the index (~0.2 MB); the "
                            "full index fills in the background — start typing, focus the search "
@@ -204,7 +204,7 @@ I18N = {
         "drug.confused_note": ("FDA recommends tall-man lettering for this pair; check the "
                                "ingredient, not the name."),
         "drug.confused_all": "All pairs",
-        "name.countries": "Countries", "name.form": "Form",
+        "name.countries": "Countries & regions", "name.form": "Form",
         "name.strength": "Strength", "name.release": "Release",
         "name.also": "Also written as", "name.found": "Found in",
         "name.empty": "No records",
@@ -249,13 +249,13 @@ I18N = {
                       "mean the drugs are interchangeable. FDA recommends tall-man lettering."),
         "conf.pair": "Pair", "conf.tml": "Tall-man spelling",
         "conf.search_hit": "This name is easily confused with",
-        "home.country_label": "See what this medicine is called in:",
+        "home.country_label": "See what this medicine is called in each country/region:",
         "home.country_label_sel": "See what this medicine is called in {country}:",
-        "country.missing": "This market has no product listed under this name.",
+        "country.missing": "This country/region has no product listed under this name.",
         "country.missing_note": ("The name matched an ingredient, not a product in this "
-                                 "country. Switch country or open the ingredient page."),
+                                 "country/region. Switch country/region or open the ingredient page."),
         "country.open_card": "Ingredient page",
-        "country.change": "Change country",
+        "country.change": "Change country/region",
         "parse.label": "Parsed query",
         "parse.name": "Name", "parse.dose": "Dose", "parse.form": "Form",
         "parse.match": "Match",
@@ -272,7 +272,7 @@ I18N = {
         "res.loaded_all": "All results shown",
         "res.copy": "Copy table", "res.csv": "Download CSV",
         "res.copied": "Copied", "res.copy_fail": "Copy failed — select the table manually",
-        "res.col_country": "Countries", "res.col_form": "Form",
+        "res.col_country": "Countries & regions", "res.col_form": "Form",
         "res.col_match": "Match", "res.col_link": "Page",
         "a3.salt": "Salt forms:", "a3.release": "Release:",
         "a3.incompat": "Not interchangeable — see warning",
@@ -293,13 +293,13 @@ I18N = {
                      "También funciona en chino, ancho completo y cirílico; puedes incluir la "
                      "dosis — p. ej. Paracetamol 500mg, Ibuprofeno 600mg o Lipitor 20mg."),
         "home.ph": "Nombre comercial / genérico / apodo / una línea del envase",
-        "home.all": "Todos los países", "home.us": "Estados Unidos",
+        "home.all": "Todos los países y regiones", "home.us": "Estados Unidos",
         "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
         "home.mx": "México", "home.au": "Australia", "home.ca": "Canadá",
         "home.sg": "Singapur",
         "home.tw": "Taiwán",
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
-                          "Cobertura:"),
+                          "Cobertura (países y regiones):"),
         "home.loading": "Cargando el índice…",
         "home.hint_idle": ("La primera búsqueda carga solo un fragmento pequeño del índice "
                            "(~0,2 MB); el índice completo se completa en segundo plano — empieza "
@@ -324,7 +324,7 @@ I18N = {
         "res.brands": "nombres comerciales encontrados",
         "res.alias": "alias encontrado",
         "res.alias_no_products": "no es un producto único — ver la nota",
-        "res.notin": "No incluido en este país",
+        "res.notin": "No incluido en este país/región",
         "res.caveat": "un resultado vacío no significa que el medicamento no exista",
     "res.partial": "resultados parciales — cargando el índice completo…",
         "artg.title": "También en el ARTG (principio activo no registrado)",
@@ -360,7 +360,7 @@ I18N = {
         "drug.confused_note": ("La FDA recomienda tall-man lettering para este par; "
                                "comprueba el principio activo, no el nombre."),
         "drug.confused_all": "Todos los pares",
-        "name.countries": "Países", "name.form": "Forma",
+        "name.countries": "Países y regiones", "name.form": "Forma",
         "name.strength": "Concentración", "name.release": "Liberación",
         "name.also": "También escrito como", "name.found": "Presente en",
         "name.empty": "Sin registros",
@@ -407,13 +407,14 @@ I18N = {
                       "los medicamentos sean intercambiables. La FDA recomienda tall-man lettering."),
         "conf.pair": "Par", "conf.tml": "Grafía tall-man",
         "conf.search_hit": "Este nombre se confunde fácilmente con",
-        "home.country_label": "Mira cómo se llama este medicamento en:",
+        "home.country_label": "Mira cómo se llama este medicamento en cada país/región:",
         "home.country_label_sel": "Mira cómo se llama este medicamento en {country}:",
-        "country.missing": "Este mercado no tiene ningún producto registrado con este nombre.",
+        "country.missing": "Este país/región no tiene ningún producto registrado con este nombre.",
         "country.missing_note": ("El nombre coincide con un principio activo, no con un producto "
-                                 "de este país. Cambia de país o abre la ficha del principio activo."),
+                                 "de este país/región. Cambia de país/región o abre la ficha del "
+                                 "principio activo."),
         "country.open_card": "Ficha del principio",
-        "country.change": "Cambiar país",
+        "country.change": "Cambiar país/región",
         "parse.label": "Consulta interpretada",
         "parse.name": "Nombre", "parse.dose": "Dosis", "parse.form": "Forma",
         "parse.match": "Coincidencia",
@@ -430,7 +431,7 @@ I18N = {
         "res.loaded_all": "Todos los resultados mostrados",
         "res.copy": "Copiar tabla", "res.csv": "Descargar CSV",
         "res.copied": "Copiado", "res.copy_fail": "No se pudo copiar — selecciona la tabla",
-        "res.col_country": "Países", "res.col_form": "Forma",
+        "res.col_country": "Países y regiones", "res.col_form": "Forma",
         "res.col_match": "Coincidencia", "res.col_link": "Página",
         "a3.salt": "Formas salinas:", "a3.release": "Liberación:",
         "a3.incompat": "No intercambiables — ver aviso",
@@ -450,12 +451,12 @@ I18N = {
         "home.sub": ("商品名、通用名、俗称都能搜（比如「两只青蛙」）；支持中英文、全角、"
                      "西里尔字母，也可以连剂量一起输入，例如 Lipitor 20mg、泰诺、СОРТИС。"),
         "home.ph": "商品名 / 通用名 / 俗称 / 包装上的一行字",
-        "home.all": "全部国家", "home.us": "美国",
+        "home.all": "全部国家和地区", "home.us": "美国",
         "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
         "home.sg": "新加坡",
         "home.tw": "台湾",
-        "home.coverage": "查不到不代表这个药不存在。当前覆盖：",
+        "home.coverage": "查不到不代表这个药不存在。当前覆盖（国家和地区）：",
         "home.loading": "正在加载索引…",
         "home.hint_idle": ("首次搜索只加载当前首字符的一小片索引（约 0.2 MB），完整索引会在后台补全"
                            "——直接输入、点搜索框或选一个示例。"),
@@ -477,7 +478,7 @@ I18N = {
         "res.brands": "个商品名命中",
         "res.alias": "个别名命中",
         "res.alias_no_products": "不是单一商品，见上方说明",
-        "res.notin": "所选国家没有收录这个名字",
+        "res.notin": "所选国家/地区没有收录这个名字",
         "res.caveat": "查不到不代表这个药不存在",
     "res.partial": "部分结果 —— 正在加载完整索引…",
         "artg.title": "ARTG 也有登记（成分尚未收录）",
@@ -510,7 +511,7 @@ I18N = {
         "drug.confused": "易混淆",
         "drug.confused_note": "FDA 建议这一对使用 tall-man 大小写；请核对成分，不要按名字等同。",
         "drug.confused_all": "查看全部药对",
-        "name.countries": "国家", "name.form": "剂型",
+        "name.countries": "国家/地区", "name.form": "剂型",
         "name.strength": "规格", "name.release": "释放",
         "name.also": "写法", "name.found": "覆盖",
         "name.empty": "无记录",
@@ -548,12 +549,12 @@ I18N = {
                       "FDA 建议这一对使用 tall-man 大小写。"),
         "conf.pair": "药对", "conf.tml": "建议 tall-man 写法",
         "conf.search_hit": "这个药名容易与以下名字混淆",
-        "home.country_label": "看这个药在哪个国家叫什么：",
+        "home.country_label": "看这个药在哪个国家/地区叫什么：",
         "home.country_label_sel": "看这个药在{country}叫什么：",
-        "country.missing": "该市场没有以这个名字上架的产品。",
-        "country.missing_note": "这个名字命中的是成分卡，不是该国上架的产品。可以换一个国家，或直接看成分卡。",
+        "country.missing": "该国家/地区没有以这个名字上架的产品。",
+        "country.missing_note": "这个名字命中的是成分卡，不是该国家/地区上架的产品。可以换一个国家/地区，或直接看成分卡。",
         "country.open_card": "看成分卡",
-        "country.change": "换国家",
+        "country.change": "换国家/地区",
         "parse.label": "检索解析",
         "parse.name": "名称", "parse.dose": "剂量", "parse.form": "剂型",
         "parse.match": "匹配方式",
@@ -561,7 +562,7 @@ I18N = {
         "parse.match.prefix": "前缀", "parse.match.contains": "包含",
         "parse.match.fuzzy": "模糊", "parse.match.nickname": "别名",
     "parse.match.pinyin": "拼音",
-        "parse.match.country": "国家视图", "parse.match.none": "无匹配",
+        "parse.match.country": "国家/地区视图", "parse.match.none": "无匹配",
         "ac.suggestions": "搜索建议",
         "res.brands_noun": "个品牌",
         "res.show_brands": "展开全部品牌",
@@ -570,7 +571,7 @@ I18N = {
         "res.loaded_all": "已显示全部结果",
         "res.copy": "复制表格", "res.csv": "下载 CSV",
         "res.copied": "已复制", "res.copy_fail": "复制失败，请手动选择表格",
-        "res.col_country": "国家", "res.col_form": "剂型",
+        "res.col_country": "国家/地区", "res.col_form": "剂型",
         "res.col_match": "匹配方式", "res.col_link": "页面",
         "a3.salt": "盐型：", "a3.release": "释放：",
         "a3.incompat": "不可互换 — 见警示",
@@ -660,17 +661,17 @@ UI_I18N = {
                           "dose included is fine."),
         "u1.step2": "See the ingredient and strength",
         "u1.step2_hint": "You always get a candidate set — never a single answer.",
-        "u1.step3": "Switch to a country",
-        "u1.step3_hint": ("Pick a market to see the names it is sold under there, "
-                          "or use the names-by-country row."),
+        "u1.step3": "Switch to a country/region",
+        "u1.step3_hint": ("Pick a country/region to see the names it is sold under there, "
+                          "or use the names-by-country/region row."),
         "u1.try": "Try:", "u1.close": "Dismiss", "u1.aria": "Getting-started guide",
-        "u2.title": "Names by country",
-        "u2.hint": ("Same ingredient, local name — click a country to see its products. "
+        "u2.title": "Names by country/region",
+        "u2.hint": ("Same ingredient, local name — click a country/region to see its products. "
                     "Not listed does not prove it is unavailable there."),
         "u2.none": "Not listed",
         "u2.none_hint": ("No product under this ingredient in this market's public data. "
                          "This does not prove it is unavailable there."),
-        "u2.multi": "Several ingredients match — switch country to see the full list.",
+        "u2.multi": "Several ingredients match — switch country/region to see the full list.",
         # v0.6.4 A2：ATC 码搜索 + B10 术语表
         "nav.glossary": "Glossary",
         "meta.glossary.title": "Glossary · Medicine Brand Cross-Reference",
@@ -694,17 +695,17 @@ UI_I18N = {
                           "ir incluida."),
         "u1.step2": "Mira el principio activo y la concentración",
         "u1.step2_hint": "Siempre obtienes un conjunto de candidatos, nunca una única respuesta.",
-        "u1.step3": "Cambia a un país",
-        "u1.step3_hint": ("Elige un mercado para ver los nombres con los que se vende "
-                          "allí, o usa la fila de nombres por país."),
+        "u1.step3": "Cambia a un país/región",
+        "u1.step3_hint": ("Elige un país/región para ver los nombres con los que se vende "
+                          "allí, o usa la fila de nombres por país/región."),
         "u1.try": "Prueba:", "u1.close": "Cerrar", "u1.aria": "Guía de inicio",
-        "u2.title": "Nombres por país",
-        "u2.hint": ("Mismo principio, nombre local: haz clic en un país para ver sus "
+        "u2.title": "Nombres por país/región",
+        "u2.hint": ("Mismo principio, nombre local: haz clic en un país/región para ver sus "
                     "productos. «Sin datos» no prueba que no exista allí."),
         "u2.none": "Sin datos",
         "u2.none_hint": ("Sin datos públicos para este principio en ese mercado; no prueba "
                          "que no exista allí."),
-        "u2.multi": "Varios principios coinciden — cambia de país para ver la lista completa.",
+        "u2.multi": "Varios principios coinciden — cambia de país/región para ver la lista completa.",
         # v0.6.4 A2：ATC 码搜索 + B10 术语表
         "nav.glossary": "Glosario",
         "meta.glossary.title": "Glosario · Medicine Brand Cross-Reference",
@@ -727,14 +728,14 @@ UI_I18N = {
         "u1.step1_hint": "商品名、通用名、俗称或包装上一行字；可连剂量一起输入。",
         "u1.step2": "看成分和规格",
         "u1.step2_hint": "结果永远是候选集，不保证唯一。",
-        "u1.step3": "切国家看叫法",
-        "u1.step3_hint": "选一个国家，看这个成分在当地叫什么；也可以用结果顶部的「各国叫法」横排。",
+        "u1.step3": "切国家/地区看叫法",
+        "u1.step3_hint": "选一个国家/地区，看这个成分在当地叫什么；也可以用结果顶部的「国家/地区叫法」横排。",
         "u1.try": "试试：", "u1.close": "关闭", "u1.aria": "使用引导",
-        "u2.title": "各国叫法",
-        "u2.hint": "同一成分在当地叫什么；点国家看该国商品。未收录不等于该国没有这个药。",
+        "u2.title": "国家/地区叫法",
+        "u2.hint": "同一成分在当地叫什么；点国家/地区看该地商品。未收录不等于该国家/地区没有这个药。",
         "u2.none": "未收录",
         "u2.none_hint": "公开数据里暂无该国该成分的产品；不等于该国没有这个药。",
-        "u2.multi": "多成分/多结果，切国家查看全部。",
+        "u2.multi": "多成分/多结果，切国家/地区查看全部。",
         # v0.6.4 A2：ATC 码搜索 + B10 术语表
         "nav.glossary": "术语表",
         "meta.glossary.title": "术语表 · 药品商品名跨国定位",
@@ -754,14 +755,14 @@ UI_I18N = {
         "u1.step1_hint": "商品名、通用名、俗稱或包裝上一行字；可連劑量一起輸入。",
         "u1.step2": "看成分和規格",
         "u1.step2_hint": "結果永遠是候選集，不保證唯一。",
-        "u1.step3": "切國家看叫法",
-        "u1.step3_hint": "選一個國家，看這個成分在當地叫什麼；也可以用結果頂部的「各國叫法」橫排。",
+        "u1.step3": "切國家/地區看叫法",
+        "u1.step3_hint": "選一個國家/地區，看這個成分在當地叫什麼；也可以用結果頂部的「國家/地區叫法」橫排。",
         "u1.try": "試試：", "u1.close": "關閉", "u1.aria": "使用引導",
-        "u2.title": "各國叫法",
-        "u2.hint": "同一成分在當地叫什麼；點國家看該國商品。未收錄不等於該國沒有這個藥。",
+        "u2.title": "國家/地區叫法",
+        "u2.hint": "同一成分在當地叫什麼；點國家/地區看該地商品。未收錄不等於該國家/地區沒有這個藥。",
         "u2.none": "未收錄",
         "u2.none_hint": "公開資料裡暫無該國該成分的產品；不等於該國沒有這個藥。",
-        "u2.multi": "多成分/多結果，切國家查看全部。",
+        "u2.multi": "多成分/多結果，切國家/地區查看全部。",
         # v0.6.4 A2：ATC 码搜索 + B10 術語表
         "nav.glossary": "術語表",
         "meta.glossary.title": "術語表 · 藥品商品名跨國定位",
@@ -1036,7 +1037,7 @@ ABOUT_I18N = {
             '<a href="confused.html">See the list</a>.</li></ul>'),
         "about.sources": (
             '<h2>Sources and coverage</h2>'
-            '<div class="tablewrap"><table><tr><th>Market</th><th>Products</th>'
+            '<div class="tablewrap"><table><tr><th>Country / region</th><th>Products</th>'
             '<th>Data as of</th></tr>@@COV@@</table></div>'
             '<p class="sub"><b>Data as of</b> = the date the source itself published / took effect '
             '/ snapshotted, not our crawl date. <code>live</code> = a live directory with no '
@@ -1165,7 +1166,7 @@ ABOUT_I18N = {
             '@@CONFUSABLE@@ pares oficiales. <a href="confused.html">Ver la lista</a>.</li></ul>'),
         "about.sources": (
             '<h2>Fuentes y cobertura</h2>'
-            '<div class="tablewrap"><table><tr><th>Mercado</th><th>Productos</th>'
+            '<div class="tablewrap"><table><tr><th>País / región</th><th>Productos</th>'
             '<th>Datos hasta</th></tr>@@COV@@</table></div>'
             '<p class="sub"><b>Datos hasta</b> = la fecha en que la propia fuente publicó / entró '
             'en vigor / tomó la instantánea, no la fecha de nuestro rastreo. <code>live</code> = '
@@ -1287,7 +1288,7 @@ ABOUT_I18N = {
             '@@CONFUSABLE@@ 对，<a href="confused.html">见列表</a>。</li></ul>'),
         "about.sources": (
             '<h2>数据来源与覆盖</h2>'
-            '<div class="tablewrap"><table><tr><th>市场</th><th>已收录产品</th>'
+            '<div class="tablewrap"><table><tr><th>国家/地区</th><th>已收录产品</th>'
             '<th>数据截止</th></tr>@@COV@@</table></div>'
             '<p class="sub"><b>数据截止</b> = 数据源自己发布 / 生效 / 快照的日期，不是我们的抓取'
             '日期。<code>live</code> = 实时目录，源头没有单独日期；<b>—</b> = 只有年度清单。</p>'
@@ -6191,15 +6192,15 @@ def build_index_page(entries, stats, coverage) -> None:
       <p class="sub" data-i18n="u1.step2_hint">You always get a candidate set — never a single answer.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
         {{try2}}</div></li>
-    <li class="u1step"><b data-i18n="u1.step3">Switch to a country</b>
-      <p class="sub" data-i18n="u1.step3_hint">Pick a market to see the names it is sold under there, or use the names-by-country row.</p>
+    <li class="u1step"><b data-i18n="u1.step3">Switch to a country/region</b>
+      <p class="sub" data-i18n="u1.step3_hint">Pick a country/region to see the names it is sold under there, or use the names-by-country/region row.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
         {{try3}}</div></li>
   </ol>
 </section>
 <div class="row">
   <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
-  <select id="country"><option value="" data-i18n="home.all">All countries</option>
+  <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
     <option value="US" data-i18n="home.us">United States</option>
     <option value="GB" data-i18n="home.gb">United Kingdom</option>
     <option value="CN" data-i18n="home.cn">China</option>
@@ -6362,7 +6363,7 @@ GLOSSARY_TERMS = ("inn", "ban", "usan", "atc", "mah", "din", "ndc", "artg",
 # ── v0.8.3 task-119：矩阵筛选器文案（四语）──────────────────────────────────
 FILTER_I18N = {
     "en": {"matrix.filters": "Filters", "matrix.mobile_filters": "Filters",
-           "matrix.country": "Countries", "matrix.form": "Form",
+           "matrix.country": "Countries & regions", "matrix.form": "Form",
            "matrix.release": "Release", "matrix.spec_search": "Search strength",
            "matrix.reset": "Reset", "matrix.all": "All",
            "matrix.showing": "{n} / {total} rows",
@@ -6370,7 +6371,7 @@ FILTER_I18N = {
            "matrix.spec_check": "check strength",
            "matrix.close": "Close"},
     "es": {"matrix.filters": "Filtros", "matrix.mobile_filters": "Filtros",
-           "matrix.country": "Países", "matrix.form": "Forma",
+           "matrix.country": "Países y regiones", "matrix.form": "Forma",
            "matrix.release": "Liberación", "matrix.spec_search": "Buscar concentración",
            "matrix.reset": "Restablecer", "matrix.all": "Todos",
            "matrix.showing": "{n} / {total} filas",
@@ -6378,14 +6379,14 @@ FILTER_I18N = {
            "matrix.spec_check": "verificar concentración",
            "matrix.close": "Cerrar"},
     "zh": {"matrix.filters": "筛选", "matrix.mobile_filters": "筛选",
-           "matrix.country": "国家", "matrix.form": "剂型", "matrix.release": "释放",
+           "matrix.country": "国家/地区", "matrix.form": "剂型", "matrix.release": "释放",
            "matrix.spec_search": "搜索规格", "matrix.reset": "重置",
            "matrix.all": "全部", "matrix.showing": "{n} / {total} 行",
            "matrix.sort_note": "常用规格在前；未公开规格排最后。",
            "matrix.spec_check": "规格待核",
            "matrix.close": "关闭"},
     "zh-Hant": {"matrix.filters": "篩選", "matrix.mobile_filters": "篩選",
-                "matrix.country": "國家", "matrix.form": "劑型", "matrix.release": "釋放",
+                "matrix.country": "國家/地區", "matrix.form": "劑型", "matrix.release": "釋放",
                 "matrix.spec_search": "搜尋規格", "matrix.reset": "重設",
                 "matrix.all": "全部", "matrix.showing": "{n} / {total} 列",
                 "matrix.sort_note": "常用規格在前；未公開規格排最後。",
@@ -6403,8 +6404,8 @@ BILINGUAL_I18N = {
         "bilingual.source.pharmacopoeia": "pharmacopoeia",
         "bilingual.source.manual": "editorial",
         "nav.menu": "Menu",
-        "matrix.brand_note": ("Each country column shows the locally registered trade names — "
-                              "not translations."),
+        "matrix.brand_note": ("Each country/region column shows the locally registered trade "
+                              "names — not translations."),
     },
     "es": {
         "bilingual.toggle": "Mostrar original",
@@ -6414,8 +6415,8 @@ BILINGUAL_I18N = {
         "bilingual.source.pharmacopoeia": "farmacopea",
         "bilingual.source.manual": "editorial",
         "nav.menu": "Menú",
-        "matrix.brand_note": ("Cada columna muestra los nombres comerciales registrados en ese "
-                              "mercado — no son traducciones."),
+        "matrix.brand_note": ("Cada columna de país/región muestra los nombres comerciales "
+                              "registrados en ese mercado — no son traducciones."),
     },
     "zh": {
         "bilingual.toggle": "显示原文对照",
@@ -6425,7 +6426,7 @@ BILINGUAL_I18N = {
         "bilingual.source.pharmacopoeia": "药典",
         "bilingual.source.manual": "编辑整理",
         "nav.menu": "菜单",
-        "matrix.brand_note": "各国列显示当地注册商品名，不是翻译；中英文名仅作对照。",
+        "matrix.brand_note": "各国家/地区列显示当地注册商品名，不是翻译；中英文名仅作对照。",
     },
     "zh-Hant": {
         "bilingual.toggle": "顯示原文對照",
@@ -6435,7 +6436,7 @@ BILINGUAL_I18N = {
         "bilingual.source.pharmacopoeia": "藥典",
         "bilingual.source.manual": "編輯整理",
         "nav.menu": "選單",
-        "matrix.brand_note": "各國欄顯示當地註冊商品名，不是翻譯；中英文名僅作對照。",
+        "matrix.brand_note": "各國家/地區欄顯示當地註冊商品名，不是翻譯；中英文名僅作對照。",
         "about.analytics": (
             '<h2>訪問統計</h2><p class="sub">本站使用 '
             '<a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> '
