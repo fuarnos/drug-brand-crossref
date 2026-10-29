@@ -191,6 +191,30 @@ def _ensure_family_columns(db: sqlite3.Connection) -> None:
     db.commit()
 
 
+def _ensure_substance_name_lang(db: sqlite3.Connection) -> None:
+    """task-5：给已有库补 substance.name_lang 并回填（主名含 CJK → 'zh'，其余 → 'en'）。
+
+    幂等：只加缺失列、只回填 NULL 行；不修改任何名字本身。
+    """
+    have = {r[1] for r in db.execute("PRAGMA table_info(substance)")}
+    if not have:
+        return
+    if "name_lang" not in have:
+        db.execute("ALTER TABLE substance ADD COLUMN name_lang TEXT CHECK "
+                   "(name_lang IN ('en', 'zh', 'zh-Hant', 'es', 'other'))")
+        print("迁移 substance 表：新增列 name_lang")
+    cjk = re.compile(r"[\u3400-\u9fff\uf900-\ufaff]")
+    rows = [(sid, "zh" if cjk.search(name or "") else "en")
+            for sid, name in db.execute(
+                "SELECT substance_id, inn_en FROM substance WHERE name_lang IS NULL")]
+    if rows:
+        db.executemany("UPDATE substance SET name_lang=? WHERE substance_id=?",
+                       [(lang, sid) for sid, lang in rows])
+        n_zh = sum(1 for _s, lang in rows if lang == "zh")
+        print(f"回填 substance.name_lang：{len(rows):,} 行（zh {n_zh:,} / en {len(rows) - n_zh:,}）")
+    db.commit()
+
+
 def _ensure_indexes(db: sqlite3.Connection) -> None:
     """v0.4.2：给已有库补 DB 优化审计落地的两个小索引（幂等）。"""
     for ddl in (
@@ -286,6 +310,7 @@ def build(db_path: Path) -> sqlite3.Connection:
     _ensure_variant_columns(db)
     _ensure_substance_columns(db)
     _ensure_family_columns(db)
+    _ensure_substance_name_lang(db)
     _ensure_indexes(db)
     print(f"init_db 完成：{db_path}（{time.perf_counter() - t0:.2f}s）")
     return db

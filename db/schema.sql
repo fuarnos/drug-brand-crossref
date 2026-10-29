@@ -56,7 +56,10 @@ CREATE TABLE IF NOT EXISTS substance (
     source_id     TEXT,
     method        TEXT CHECK (method IN ('rule', 'multi-source', 'editorial', 'imported')),
     confidence    TEXT CHECK (confidence IN ('high', 'medium', 'low', 'unknown')),
-    decided_at    TEXT
+    decided_at    TEXT,
+    -- task-5：`inn_en` 是「canonical 主名」，name_lang 标记其语言（避免把中文当英文）。
+    -- 回填规则（init_db 幂等）：主名含 CJK → 'zh'，其余 → 'en'；迁移后旧行不再有 NULL。
+    name_lang     TEXT CHECK (name_lang IN ('en', 'zh', 'zh-Hant', 'es', 'other'))
 );
 
 -- L1b 盐型 / 水合物 / 酯：可替代性判定的最小单位
