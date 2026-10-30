@@ -1,5 +1,5 @@
 side,rank,substance_id,inn_en,inn_zh,home_n,partner_n,verdict,base,partner_candidates
-CN,1,glucose,Glucose,葡萄糖,6546,0,synonym,glucose,"Anhydrous Dextrose:7|Dextrose, Unspecified Form:38|Dextrose:211"
+CN,1,glucose,Glucose,葡萄糖,6546,0,synonym,glucose,Anhydrous Dextrose:7|Dextrose:211
 CN,2,acetaminophen,Acetaminophen,对乙酰氨基酚,4299,3482,present,acetaminophen,
 CN,3,sodium-chloride,Sodium Chloride,氯化钠,2812,605,present,,
 CN,4,metronidazole,Metronidazole,甲硝唑,1998,184,present,metronidazole,
