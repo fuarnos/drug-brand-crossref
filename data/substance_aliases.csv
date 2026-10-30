@@ -13,3 +13,13 @@ Isoprenaline,isoprenaline,Isoproterenol,isoproterenol,synonym,INN vs USAN,美国
 Ciclosporin,ciclosporin,Cyclosporine,cyclosporine,synonym,INN vs USAN,美国标签用 Cyclosporine
 Furosemide,furosemide,Frusemide Sodium,frusemide-sodium,synonym_salt,INN vs USAN + salt,澳洲用 Frusemide（含钠盐写法）
 Epinephrine,epinephrine,Adrenaline Acid Tartrate,adrenaline-acid-tartrate,synonym_salt,INN vs USAN + salt,澳洲用 Adrenaline Acid Tartrate
+Bromelain,bromelain,Bromelaína,bromelaina,lang_variant,ES label,同一中文名「菠萝蛋白酶」；ATC B06AA11/D03BA03 邻近
+Benzbromarone,benzbromarone,Benzbromarona,benzbromarona,lang_variant,ES label,同一中文名「苯溴马隆」；ATC M04AB
+Potassium Iodide,potassium-iodide,Potasio Ioduro,potasio-ioduro,lang_variant,ES label,同一中文名「碘化钾」
+Mefenamic Acid,mefenamic-acid,Ácido Mefenámico,acido-mefenamico,lang_variant,ES label,同一中文名「甲芬那酸」；ATC M01AG
+Cyproterone,cyproterone,Ciproterona,ciproterona,lang_variant,ES label,同一中文名「环丙孕酮」；ATC G03HA01
+Clomifene,clomifene,Clomifeno,clomifeno,lang_variant,ES label,同一中文名「氯米芬」；ATC G03GB
+Zinc Oxide,zinc-oxide,Zinc Óxido,zinc-oxido,lang_variant,ES label,同一中文名「氧化锌」；ATC D02AB
+Aminosalicylic Acid,aminosalicylic-acid,Ácido Para Aminosalicílico,acido-para-aminosalicilico,lang_variant,ES label,同一中文名「对氨基水杨酸」；ATC J04AA
+Scopolamine Butylbromide,scopolamine-butylbromide,Butilescopolamina,butilescopolamina,lang_variant,ES label,同一中文名「丁溴东莨菪碱」；ATC A03BB
+Water For Injection,water-for-injection,Agua Estéril Para Preparaciones Inyectables,agua-esteril-para-preparaciones-inyectables,lang_variant,ES label,同一中文名「灭菌注射用水」

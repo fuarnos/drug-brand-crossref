@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PATH = ROOT / "data" / "substance_aliases.csv"
 
 RELATIONS = frozenset(
-    {"synonym", "spelling", "hydrate_variant", "salt_variant", "synonym_salt", "editorial"}
+    {"synonym", "spelling", "hydrate_variant", "salt_variant", "synonym_salt", "lang_variant", "editorial"}
 )
 
 
