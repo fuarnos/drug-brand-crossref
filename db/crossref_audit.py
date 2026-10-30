@@ -26,6 +26,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "drugs.db"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from lib.aliases import load as load_aliases  # noqa: E402  （异名表，task-141）
 
 # 盐 / 水合物 / 酯 / 前药后缀（归一化后按词匹配，命中即从 base 名去掉）
 SALT_TOKENS = {
@@ -42,30 +46,6 @@ SALT_TOKENS = {
     "axetil", "pivoxil", "proxetil", "fosamil", "etabonate", "trifenatate",
     "acid", "unspecified", "form", "synthetic",
 }
-
-# 同物异名组（INN vs USAN / 拼写差异）；组内互相视为同一成分的候选
-SYNONYM_GROUPS: tuple[tuple[str, ...], ...] = (
-    ("glucose", "dextrose"),
-    ("chlorphenamine", "chlorpheniramine"),
-    ("glycerol", "glycerin", "glycerine"),
-    ("manitol", "mannitol"),
-    ("glibenclamide", "glyburide"),
-    ("salbutamol", "albuterol"),
-    ("lignocaine", "lidocaine"),
-    ("adrenaline", "epinephrine"),
-    ("noradrenaline", "norepinephrine"),
-    ("frusemide", "furosemide"),
-    ("hyoscine", "scopolamine"),
-    ("isoprenaline", "isoproterenol"),
-    ("tetracaine", "amethocaine"),
-    ("rifampicin", "rifampin"),
-    ("ciclosporin", "cyclosporine"),
-    ("norethisterone", "norethindrone"),
-    ("oestradiol", "estradiol"),
-    ("amoxycillin", "amoxicillin"),
-    ("cephalexin", "cefalexin"),
-    ("cephradine", "cefradine"),
-)
 
 # 非药品：辅料 / 医用气体 / 溶剂 / 防晒与化妆活性物（不参与「药品跨市场对照」口径）
 NON_DRUG = {
@@ -124,10 +104,7 @@ def main() -> int:
     for sid, (en, _zh) in names.items():
         by_base.setdefault(base_name(en), set()).add(sid)
 
-    synonym_of: dict[str, set[str]] = {}
-    for group in SYNONYM_GROUPS:
-        for member in group:
-            synonym_of[member] = set(group) - {member}
+    am = load_aliases()  # 同物异名表（data/substance_aliases.csv）
 
     rows: list[dict[str, object]] = []
     for side, partner in (("CN", "US"), ("US", "CN")):
@@ -139,11 +116,9 @@ def main() -> int:
             same_base = sorted(by_base.get(base, set()) - {sid}) if len(base) >= 3 else []
             base_hits = [(h, cnt[partner].get(h, 0)) for h in same_base if cnt[partner].get(h, 0) > 0]
 
-            syn_hits: list[tuple[str, int]] = []
-            for alias in synonym_of.get(base, set()):
-                for h in by_base.get(alias, set()):
-                    if h != sid and cnt[partner].get(h, 0) > 0:
-                        syn_hits.append((h, cnt[partner][h]))
+            syn_hits: list[tuple[str, int]] = [
+                (h, cnt[partner][h]) for h in sorted(am.aliases(sid)) if cnt[partner].get(h, 0) > 0
+            ]
 
             if partner_n > 0:
                 verdict = "present"

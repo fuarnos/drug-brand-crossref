@@ -1,0 +1,15 @@
+canonical_inn,canonical_id,alias_inn,alias_id,relation,source,note
+Glucose,glucose,Dextrose,dextrose,synonym,INN vs USAN,美国药典与标签通用 Dextrose；中国输液/口服制剂用 Glucose
+Glucose,glucose,Anhydrous Dextrose,anhydrous-dextrose,hydrate_variant,US label,同一成分的无水写法
+Chlorphenamine,chlorphenamine,Chlorpheniramine,chlorpheniramine,synonym,INN vs USAN,中文名含盐（马来酸氯苯那敏）
+Glycerol,glycerol,Glycerin,glycerin,synonym,INN vs USAN,中文名「开塞露」是剂型/商品型名，非成分名
+Glycerol,glycerol,Glycerine,glycerine,spelling,US label,拼写变体
+Manitol,manitol,Mannitol,mannitol,spelling,record typo,库内拼写不一致；两者 inn_zh 都是「甘露醇」
+Glibenclamide,glibenclamide,Glyburide,glyburide,synonym,INN vs USAN,美国标签用 Glyburide
+Salbutamol,salbutamol,Albuterol,albuterol,synonym,INN vs USAN,美国标签用 Albuterol
+Cefalexin,cefalexin,Cephalexin,cephalexin,synonym,INN vs USAN,美国标签用 Cephalexin
+Hyoscine,hyoscine,Scopolamine,scopolamine,synonym,INN vs USAN,英国/澳洲用 Hyoscine
+Isoprenaline,isoprenaline,Isoproterenol,isoproterenol,synonym,INN vs USAN,美国标签用 Isoproterenol
+Ciclosporin,ciclosporin,Cyclosporine,cyclosporine,synonym,INN vs USAN,美国标签用 Cyclosporine
+Furosemide,furosemide,Frusemide Sodium,frusemide-sodium,synonym_salt,INN vs USAN + salt,澳洲用 Frusemide（含钠盐写法）
+Epinephrine,epinephrine,Adrenaline Acid Tartrate,adrenaline-acid-tartrate,synonym_salt,INN vs USAN + salt,澳洲用 Adrenaline Acid Tartrate
