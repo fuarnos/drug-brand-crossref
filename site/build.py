@@ -2583,6 +2583,16 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atcdetails{margin:8px 0 0}
 .atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
 .atcdetails .atcmembers{margin-top:6px}
+/* v0.9.6 task-145b：ATC4 页「按剂型看跨市场明细」（客户端懒加载 data/idx/atc4-forms.json） */
+.atc4forms{margin:10px 0 0}
+.atc4forms summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
+.atc4forms table{font-size:13px}
+.atc4forms th,.atc4forms td{padding:4px 6px;border-bottom:1px solid var(--line)}
+.atc4forms thead th{white-space:nowrap;font-variant-numeric:tabular-nums}
+.atc4forms tbody th{font-weight:600}
+.atc4forms tbody td{text-align:right;font-variant-numeric:tabular-nums}
+.atc4forms tbody td.z{color:var(--muted);text-align:center}
+.atc4note{margin:4px 0 0;font-size:12px}
 .cat-note .lang-block{margin:2px 0}
 .catquick{margin:18px 0 6px}
 .catquick h2{font-size:16px;margin:0 0 8px}
@@ -7642,6 +7652,20 @@ ATC_I18N = {
                                   "the ATC code and the WHO hierarchy are authoritative."),
         "atc.all_classes": "All ATC classes", "atc.search_link": "Search this class",
         "atc.view_class": "View this ATC class", "atc.categories_link": "Consumer categories",
+        # v0.9.6 task-145b：L4 页「按剂型看跨市场明细」（事实表 JSON 懒加载；行=剂型/列=市场）
+        "atc4.summary": "By dosage form, across markets",
+        "atc4.loading": "Loading form detail…",
+        "atc4.notice": ("An ATC class only groups medicines by similar pharmacology/chemistry — it "
+                        "does not mean they are interchangeable. A different ingredient, dosage "
+                        "form, release mechanism or strength is not interchangeable."),
+        "atc4.scope": ("Only ingredients with a recorded ATC class are listed "
+                       "(@@ATC_ALL@@ of @@ATC_ALL_N@@)."),
+        "atc4.form_col": "Dosage form", "atc4.form_other": "other forms",
+        "atc4.sort_note": ("Rows are alphabetical by dosage form and markets follow a fixed market "
+                           "order; nothing here is ranked or recommended. Only ingredients with "
+                           "product records have rows."),
+        "atc4.empty": "No form-level product records for this class yet.",
+        "atc4.error": "Could not load the form detail.",
         "cat.quick_title": "Browse by category", "cat.browse_title": "Common consumer categories",
         "cat.intro": ("Editorial topic collections: each category maps to ATC classes and active "
                       "ingredients. It is a way to browse, not evidence that the medicines are "
@@ -7686,6 +7710,21 @@ ATC_I18N = {
                                   "autoritativos."),
         "atc.all_classes": "Todas las clases ATC", "atc.search_link": "Buscar en esta clase",
         "atc.view_class": "Ver esta clase ATC", "atc.categories_link": "Categorías de consumidor",
+        # v0.9.6 task-145b
+        "atc4.summary": "Por forma farmacéutica y mercado",
+        "atc4.loading": "Cargando el detalle por forma…",
+        "atc4.notice": ("Una clase ATC solo agrupa medicamentos de farmacología/química parecida — "
+                        "no significa que sean intercambiables. Un principio activo, forma "
+                        "farmacéutica, mecanismo de liberación o concentración distintos no son "
+                        "intercambiables."),
+        "atc4.scope": ("Solo se listan los principios activos con código ATC registrado "
+                       "(@@ATC_ALL@@ de @@ATC_ALL_N@@)."),
+        "atc4.form_col": "Forma farmacéutica", "atc4.form_other": "otras formas",
+        "atc4.sort_note": ("Las filas van por orden alfabético de forma farmacéutica y los mercados "
+                           "siguen un orden fijo; nada se clasifica ni se recomienda. Solo tienen "
+                           "fila los principios activos con registros de producto."),
+        "atc4.empty": "Todavía no hay registros de producto por forma en esta clase.",
+        "atc4.error": "No se pudo cargar el detalle por forma.",
         "cat.quick_title": "Explorar por categoría",
         "cat.browse_title": "Categorías comunes de consumidor",
         "cat.intro": ("Colecciones temáticas editoriales: cada categoría se asigna a clases ATC "
@@ -7720,6 +7759,17 @@ ATC_I18N = {
                                   "只有 ATC 码与 WHO 层级是权威依据。"),
         "atc.all_classes": "全部 ATC 类别", "atc.search_link": "搜索该类别",
         "atc.view_class": "查看该 ATC 类别", "atc.categories_link": "消费者大类",
+        # v0.9.6 task-145b
+        "atc4.summary": "按剂型看跨市场明细",
+        "atc4.loading": "正在加载剂型明细…",
+        "atc4.notice": ("同一 ATC 类目只表示药理/化学分类相近，不代表可以互换；"
+                        "成分、剂型、释放机制、规格不同不可互换。"),
+        "atc4.scope": "仅含已收录 ATC 的成分（@@ATC_ALL@@/@@ATC_ALL_N@@）。",
+        "atc4.form_col": "剂型", "atc4.form_other": "其他剂型",
+        "atc4.sort_note": ("行按剂型字母序、市场按固定顺序排列，不排序推荐；"
+                           "只有存在产品记录的成分才有行。"),
+        "atc4.empty": "该类别暂无剂型级产品记录。",
+        "atc4.error": "剂型明细加载失败。",
         "cat.quick_title": "按大类浏览", "cat.browse_title": "常见消费者大类",
         "cat.intro": ("编辑整理的主题合集：每个大类映射到 ATC 类别与活性成分。它只是浏览入口，"
                       "不代表这些药可以互相替代或等同。"),
@@ -7751,6 +7801,17 @@ ATC_I18N = {
                                   "只有 ATC 碼與 WHO 層級是權威依據。"),
         "atc.all_classes": "全部 ATC 類別", "atc.search_link": "搜尋該類別",
         "atc.view_class": "查看該 ATC 類別", "atc.categories_link": "消費者大類",
+        # v0.9.6 task-145b
+        "atc4.summary": "依劑型看跨市場明細",
+        "atc4.loading": "正在載入劑型明細…",
+        "atc4.notice": ("同一 ATC 類目只表示藥理/化學分類相近，不代表可以互換；"
+                        "成分、劑型、釋放機制、規格不同不可互換。"),
+        "atc4.scope": "僅含已收錄 ATC 的成分（@@ATC_ALL@@/@@ATC_ALL_N@@）。",
+        "atc4.form_col": "劑型", "atc4.form_other": "其他劑型",
+        "atc4.sort_note": ("列依劑型字母序、市場依固定順序排列，不排序推薦；"
+                           "只有具產品紀錄的成分才有列。"),
+        "atc4.empty": "該類別暫無劑型級產品紀錄。",
+        "atc4.error": "劑型明細載入失敗。",
         "cat.quick_title": "依大類瀏覽", "cat.browse_title": "常見消費者大類",
         "cat.intro": ("編輯整理的主題合集：每個大類對應 ATC 類別與有效成分。它只是瀏覽入口，"
                       "不代表這些藥可以互相替代或等同。"),
@@ -8288,6 +8349,137 @@ def _atc_members_html(items: list[dict], cap: int = ATC_MEMBER_CAP,
     return f'<ul class="sub atclist atcmembers">{head}</ul>'
 
 
+# ── v0.9.6 task-145b：ATC4 页「按剂型看跨市场明细」────────────────────────────
+# 事实表由 db/atc4_forms.py 预生成（ATC4 × 成分 × 剂型 × 市场 的产品数），构建时压缩
+# 写出到 dist/data/idx/atc4-forms.json，只在用户展开折叠区时由客户端 fetch（懒加载）。
+# 体积预算见 reports/task146-size-budget-20261031.md：798 个 L4 页每页只加折叠区与
+# notice（实测 +608 B/页），明细表不进静态 HTML（28,378 行 × 多市场会直接超 900 MiB）。
+ATC4_FORMS_SRC = ROOT / "data" / "sources" / "atc4_forms_20261031.json"
+ATC4_FORMS_REL = "data/idx/atc4-forms.json"
+# 构建期只读一次：payload（原样写 dist）+ {ATC4: 行数}（决定该页是否渲染折叠区）
+ATC4_PAYLOAD: dict = {}
+ATC4_CLASS_ROWS: dict[str, int] = {}
+
+ATC4_JS = r"""(function(){
+// v0.9.6 task-145b：ATC4 页「按剂型看跨市场明细」——展开才 fetch 事实表（懒加载）。
+// 行=剂型（字母序）、列=市场（固定市场序），值=产品数；不排序推荐、不做替代判断。
+var el = document.querySelector('details[data-atc4]');
+if(!el || !window.fetch) return;
+el.hidden = false;                       // 无 JS 时保持 hidden：折叠区不出现，页面其余照常
+var code = el.getAttribute('data-atc4');
+var body = el.querySelector('.atc4-body');
+var prefix = window.DSH_PREFIX || '';
+var url = prefix + 'data/idx/atc4-forms.json?v=__BUILD_V__';
+var ORDER = ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK'];
+function T(k, d){
+  var t = window.T;
+  if(!t) return d;
+  var v = t(k);
+  return (v === k || v === undefined) ? d : v;
+}
+function esc(x){
+  return String(x).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+  });
+}
+function formLabel(f){
+  if(f === 'other') return T('atc4.form_other', 'other forms');
+  return T('form.' + f, f);
+}
+function render(rows){
+  var markets = [], forms = {}, seen = {}, i;
+  for(i = 0; i < rows.length; i++){
+    var f = rows[i][2], c = rows[i][3];
+    if(!seen[c]){ seen[c] = 1; markets.push(c); }
+    if(!forms[f]) forms[f] = {};
+    forms[f][c] = (forms[f][c] || 0) + rows[i][4];
+  }
+  markets.sort(function(a, b){
+    var ia = ORDER.indexOf(a), ib = ORDER.indexOf(b);
+    return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+  });
+  var list = Object.keys(forms).sort();
+  var h = ['<table class="atc4t"><thead><tr><th scope="col">'
+           + esc(T('atc4.form_col', 'Dosage form')) + '</th>'];
+  for(i = 0; i < markets.length; i++){
+    h.push('<th scope="col" data-country="' + esc(markets[i]) + '">'
+           + esc(markets[i]) + '</th>');
+  }
+  h.push('</tr></thead><tbody>');
+  for(var r = 0; r < list.length; r++){
+    h.push('<tr><th scope="row">' + esc(formLabel(list[r])) + '</th>');
+    for(var m = 0; m < markets.length; m++){
+      var n = forms[list[r]][markets[m]];
+      h.push(n ? '<td>' + n + '</td>' : '<td class="z">·</td>');
+    }
+    h.push('</tr>');
+  }
+  h.push('</tbody></table><p class="sub atc4note">'
+         + esc(T('atc4.sort_note', '')) + '</p>');
+  body.innerHTML = h.join('');
+}
+var cache = null;
+function show(){
+  if(!cache){
+    // 加载提示由 JS 写（静态 HTML 只留折叠入口，省 798 页的每页体积）。
+    body.innerHTML = '<p class="sub">' + esc(T('atc4.loading', '…')) + '</p>';
+    cache = fetch(url, {credentials: 'same-origin'}).then(function(r){
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+  cache.then(function(d){
+    var all = (d && d.rows) || [], rows = [];
+    for(var i = 0; i < all.length; i++){
+      if(all[i][0] === code) rows.push(all[i]);
+    }
+    if(rows.length) render(rows);
+    else body.innerHTML = '<p class="sub">' + esc(T('atc4.empty', '')) + '</p>';
+  }).catch(function(){
+    body.innerHTML = '<p class="sub">' + esc(T('atc4.error', '')) + '</p>';
+  });
+}
+el.addEventListener('toggle', function(){ if(el.open) show(); });
+})();
+"""
+
+
+def build_atc4_forms_json() -> int:
+    """读入 ATC4 事实表快照 → 压缩写出 dist/data/idx/atc4-forms.json（客户端懒加载）。
+
+    只复制事实（不重算、不排序推荐）；缺快照时跳过并打印，ATC 页自动不渲染折叠区。
+    """
+    global ATC4_PAYLOAD, ATC4_CLASS_ROWS
+    if not ATC4_FORMS_SRC.exists():
+        print(f"  atc4-forms.json 跳过：缺 {ATC4_FORMS_SRC.relative_to(ROOT)}", flush=True)
+        return 0
+    payload = json.loads(ATC4_FORMS_SRC.read_text(encoding="utf-8"))
+    rows = payload.get("rows") or []
+    counts: dict[str, int] = {}
+    for r in rows:
+        counts[r[0]] = counts.get(r[0], 0) + 1
+    ATC4_PAYLOAD, ATC4_CLASS_ROWS = payload, counts
+    (OUT / "data" / "idx").mkdir(parents=True, exist_ok=True)
+    path = OUT / ATC4_FORMS_REL
+    path.write_bytes(json.dumps(payload, ensure_ascii=False,
+                                separators=(",", ":")).encode("utf-8"))
+    print(f"  atc4-forms.json {path.stat().st_size / 1e6:.2f} MB ({len(rows):,} 行 / "
+          f"{len(counts):,} 个 ATC4 类；展开时才加载)", flush=True)
+    return path.stat().st_size
+
+
+def _atc4_forms_html(code: str) -> str:
+    """L4 类目页的折叠区 + 不可互换 notice + 覆盖边界（四语走 i18n 字典，静态仅 en 兜底）。"""
+    if code not in ATC4_CLASS_ROWS:
+        return ""
+    T = I18N["en"]
+    return (f'<details class="atc4forms" data-atc4="{esc(code)}" hidden>'
+            f'<summary data-i18n="atc4.summary">{esc(T["atc4.summary"])}</summary>'
+            f'<div class="atc4-body"></div></details>'
+            f'<div class="notice" data-i18n="atc4.notice">{esc(T["atc4.notice"])}</div>'
+            f'<p class="sub atc4-scope" data-i18n="atc4.scope">{esc(T["atc4.scope"])}</p>')
+
+
 def build_atc_pages(db: sqlite3.Connection) -> int:
     """L1–L4 ATC 类目页 /atc/<prefix>.html（父/子类目可逐级浏览）。"""
     groups = _atc_groups(db)
@@ -8328,6 +8520,9 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
                                 f'<ul class="sub atclist">{"".join(lis)}</ul>')
             members = _collapse_members(subs, base_of, sub_names, status_by_base, drug_sids)
             search_href = f'../index.html?q={esc(code)}'
+            # task-145b：只有 L4（5 位 ATC 码，798 页）挂「按剂型看跨市场明细」折叠区；
+            # 明细走客户端懒加载，静态 HTML 只留折叠入口 + 不可互换 notice + 覆盖边界。
+            atc4_html = _atc4_forms_html(code) if level == 4 else ""
             body = f"""<p class="sub">{crumbs}</p>
 <h1>{title_html} <span class="tag">L{level}</span></h1>
 {unnamed}
@@ -8339,6 +8534,7 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
 <p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
 {_atc_members_html(members, drug_sids=drug_sids)}
+{atc4_html}
 <div class="notice" data-i18n="atc.status_note">{esc(T["atc.status_note"])}</div>
 <div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
 <div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
@@ -8351,9 +8547,13 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
                      "item": f"{SITE_URL}atc/{code}.html"},
                 ],
             }, ensure_ascii=False)
+            # task-145b：折叠区的懒加载脚本只挂在 L4 页（约 57 B/页）。
+            head_js = f'<script type="application/ld+json">{atc_ld}</script>'
+            if atc4_html:
+                head_js += f'<script defer src="../assets/atc4.js?v={BUILD_V}"></script>'
             (OUT / "atc" / f"{code}.html").write_text(
                 page(f"ATC {code}", body, "../", canonical_rel=f"atc/{code}.html",
-                     head_js=f'<script type="application/ld+json">{atc_ld}</script>'),
+                     head_js=head_js),
                 encoding="utf-8")
             made += 1
     return made
@@ -9010,6 +9210,9 @@ def main() -> None:
         "a.onload=function(){var b=document.createElement('script');"
         "b.src=r+'assets/bilingual.js';document.body.appendChild(b);};"
         "document.body.appendChild(a);});\n", encoding="utf-8")
+    # task-145b：ATC4 页折叠区的懒加载脚本（只被 atc/<CODE>.html 引用，版本参数同 BUILD_V）。
+    (OUT / "assets" / "atc4.js").write_text(
+        ATC4_JS.replace("__BUILD_V__", BUILD_V), encoding="utf-8")
     def _render_i18n_js() -> str:
         return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n"
                 + LANG_META_JS + "\n" + r"""
@@ -9384,6 +9587,8 @@ def main() -> None:
     build_coverage_page(db, coverage, source_cover)
     build_whats_new()
     build_glossary()
+    print("building atc4 forms ...", flush=True)
+    build_atc4_forms_json()
     print("building atc pages ...", flush=True)
     n_atc = build_atc_pages(db)
     n_cat = build_category_pages(db)

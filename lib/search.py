@@ -16,6 +16,13 @@ ATC 码（C07 / C07AB02）按 `substance.atc` 前缀匹配；大类词按 `categ
 并补多音字候选；仅当拉丁查询在 name_key 上没有任何命中时才走拼音候选（= 客户端
 「精确/前缀 → 拼音 → 拼写容错」的顺序），因此既有英文/中英文查询行为不变。
 客户端仍使用构建产物 `data/idx/pinyin.json`，本层不改变站点 payload。
+
+同物异名层（task-141b）：名字命中后，用 `lib/aliases.py` 把「这些名字挂着的成分」扩到
+同组写法（Glucose / Dextrose / Anhydrous Dextrose），把同组成分的条目作为**追加候选**
+一起返回，卡片标 `tier="inn_alias"` + `match_source="inn_alias"`，与俗称（nickname /
+drug_term）区分。异名**只说明是同一成分的不同写法**，不合并产品、不判断可互换。
+打分 0.88：低于精确名（exact 1.00）命中、高于纯前缀（prefix 0.80）噪声；
+主结果之间的相对顺序不变（只在分数位上插入，同分时主结果优先）。
 """
 
 from __future__ import annotations
@@ -35,16 +42,26 @@ from pinyin import compact_query, is_cjk_text, pinyin_tokens, query_tokens  # no
 from categories import (  # noqa: E402
     atc_query, category_by_id, cat_norm, match_category,
 )
+try:  # 包内导入（`import lib.search`：三语测试 / 评测脚本）
+    from lib.aliases import AliasMap, load as load_aliases  # noqa: E402
+except ImportError:  # 顶层模块导入（`from search import ...`：cli.py / lib 内测试）
+    from aliases import AliasMap, load as load_aliases  # noqa: E402
 
 DB_DEFAULT = ROOT / "data" / "drugs.db"
 
 TIER = {"exact": 1.00, "compact": 0.95, "prefix": 0.80, "contains": 0.70,
         "atc": 0.92, "category": 0.88, "pinyin": 0.62, "fuzzy": 0.55,
-        "nickname": 1.00}
+        "nickname": 1.00,
+        # 异名（task-141b）：低于 exact/compact，高于 prefix 噪声。
+        "inn_alias": 0.88}
 FUZZY_MIN = 0.75
 MAX_KEYS = 60
 # 拼音 token 可能一对多（首字母 token 尤其多），限制单次候选 key 数，避免大 IN 查询。
 PINYIN_MAX_KEYS = 300
+# 异名追加候选的上限：只为「看到同组条目」，不抢主结果的位子。
+ALIAS_MAX_CARDS = 3
+# 「名字本身命中」的档位：异名追加让位时不许挤掉它们（精确 > 异名 > 前缀噪声）。
+PRECISE_TIERS = frozenset({"exact", "compact", "nickname", "atc", "category"})
 
 # 俗称的类型 → 给人看的标签。昵称命中的提示里会写明是「网络俗称」还是「旧名」，
 # 不让用户以为这是包装上的正式名字。
@@ -77,6 +94,8 @@ class Card:
     score: float = 0.0
     tier: str = ""
     product_id: str = ""
+    # 匹配来源（task-141b）：""=名字本身命中 / "inn_alias"=同物异名带出的追加候选。
+    match_source: str = ""
 
     @property
     def composition(self) -> str:
@@ -101,6 +120,7 @@ class SearchResult:
     # 易混淆药对：这个查询名和哪些名字可能被看错/听错。
     confused: list[dict] = field(default_factory=list)
     # 匹配来源（task-139）：""=普通名字检索 / "atc" / "category"
+    # · task-141b：结果全部来自异名追加时是 "inn_alias"（混合时看每张卡的 match_source）
     match_source: str = ""
     match_detail: dict = field(default_factory=dict)
 
@@ -132,7 +152,8 @@ def _fmt_strength(value, unit, per_v, per_u) -> str:
 
 
 class SearchIndex:
-    def __init__(self, db_path: Path | str = DB_DEFAULT):
+    def __init__(self, db_path: Path | str = DB_DEFAULT,
+                 alias_path: str | Path | None = None):
         self.db = sqlite3.connect(str(db_path))
         self.db.row_factory = sqlite3.Row
         self._norms = [
@@ -171,6 +192,9 @@ class SearchIndex:
         self._atc_index: dict[str, set[str]] | None = None
         self._atc_key_n: dict[str, int] = {}
         self.atc_build_ms: float | None = None
+        # 同物异名（task-141b）：纯 CSV 小表，不碰库；文件缺失时是空表（异名层自动关闭）。
+        # 只读对照：不改 substance 主键、不合并产品。
+        self.alias: AliasMap = load_aliases(alias_path)
 
     def close(self) -> None:
         self.db.close()
@@ -291,6 +315,156 @@ class SearchIndex:
         keys = sorted(hits.items(), key=lambda kv: (order[kv[1]], kv[0]))
         return keys[:MAX_KEYS]
 
+    # --- 同物异名扩展（task-141b） --------------------------------------
+    def _substances_for_keys(self, key_ids: list[str],
+                             include_status: tuple[str, ...]) -> set[str]:
+        """名字 → 这些名字下挂着的 substance_id（异名扩展的种子）。
+
+        两条约束都是刻意的：
+        - **只认单成分产品**：复方/输液的辅料（灭菌注射用水、氯化钠）也是成分，
+          拿它们当种子会把「Agua Estéril」这类无关条目带进「葡萄糖」的结果；
+          单成分产品才能说「这个名字指的是这个成分」。
+        - **不按国家过滤**：用户查 `dextrose` 又限定 CN 时，按名字的主结果会被国家
+          过滤清空，但 Glucose 这条异名线索仍应带出 CN 的葡萄糖条目。
+        """
+        if not key_ids:
+            return set()
+        marks = ",".join("?" * len(key_ids))
+        status_marks = ",".join("?" * len(include_status))
+        rows = self.db.execute(
+            f"""SELECT DISTINCT v.substance_id
+                FROM product_name pn
+                JOIN product p ON p.product_id = pn.product_id
+                JOIN product_component pc ON pc.product_id = p.product_id
+                JOIN variant v ON v.variant_id = pc.variant_id
+                WHERE pn.key_id IN ({marks}) AND p.status IN ({status_marks})
+                  AND NOT EXISTS (SELECT 1 FROM product_component pc2
+                                  WHERE pc2.product_id = p.product_id
+                                    AND pc2.ord <> pc.ord)""",
+            (*key_ids, *include_status),
+        )
+        return {r[0] for r in rows}
+
+    def _alias_expand(self, key_ids: list[str], include_status: tuple[str, ...], n,
+                      country: str | None,
+                      main_cards: list[Card]) -> tuple[list[Card], dict]:
+        """名字命中的成分 → 同组成分的其他写法 → 追加候选卡。
+
+        - 关系只来自 `data/substance_aliases.csv`（`lib/aliases.py` 的并查集），
+          不另写归一化、不写库、不合并产品；
+        - 只扩「异名表里有的成分」（`group` 大于自身才算），其余成分原样放过；
+        - 主结果里已经能看到的成分不再重复追加（按主结果卡的 product_id 反查成分）；
+        - 卡片只收单成分产品（同一成分的条目，不是「配方里顺带有它」的复方），
+          并按「国家 × 组成 × 剂型」与主结果去重；
+        - 每个写法先各给一张（轮转），避免产品数多的写法把同组其他写法挤掉；
+        - 卡片标 tier/match_source = inn_alias，上限 `ALIAS_MAX_CARDS`。
+        """
+        if not self.alias.pairs:
+            return [], {}
+        seeds = {s for s in self._substances_for_keys(key_ids, include_status)
+                 if len(self.alias.group(s)) > 1}
+        if not seeds:
+            return [], {}
+        group: set[str] = set()
+        for sid in seeds:
+            group |= set(self.alias.group(sid))
+        present = self._substances_of_products(
+            [c.product_id for c in main_cards if c.product_id])
+        targets = group - present
+        if not targets:
+            return [], {}
+        seen = {(c.country, tuple(sorted(c.substances)), c.dosage_form)
+                for c in main_cards}
+        per_sid: list[list[Card]] = []
+        for sid in sorted(targets):
+            here: list[Card] = []
+            for card in sorted(self._substance_cards(sid, include_status, tier="inn_alias"),
+                               key=lambda c: (-c.n_products, c.brand.lower())):
+                if len(card.substances) != 1:  # 只要「这个成分自己的条目」
+                    continue
+                if country and card.country != country:
+                    continue
+                sig = (card.country, tuple(sorted(card.substances)), card.dosage_form)
+                if sig in seen:
+                    continue
+                seen.add(sig)
+                card.tier = "inn_alias"
+                card.match_source = "inn_alias"
+                self._score_card(card, n, country)
+                here.append(card)
+            per_sid.append(here)
+        # 轮转：第 1 轮每种写法各一张，再补第 2、3 张。
+        picked: list[Card] = []
+        for i in range(ALIAS_MAX_CARDS):
+            for here in per_sid:
+                if len(picked) >= ALIAS_MAX_CARDS:
+                    break
+                if i < len(here):
+                    picked.append(here[i])
+        if not picked:
+            return [], {}
+        picked.sort(key=lambda c: (-c.score, -c.n_products, c.brand.lower()))
+        meta = {
+            "source": "data/substance_aliases.csv",
+            "seeds": sorted(seeds),
+            "seed_names": [self.alias.name_of(s) for s in sorted(seeds)],
+            "group": sorted(group),
+            "group_names": [self.alias.name_of(s) for s in sorted(group)],
+            "targets": sorted(targets),
+            "cards": len(picked),
+        }
+        return picked, meta
+
+    def _substances_of_products(self, product_ids: list[str]) -> set[str]:
+        """结果卡（首个产品）里已经出现的成分——用于避免异名层重复同一批条目。"""
+        ids = [p for p in product_ids if p]
+        if not ids:
+            return set()
+        marks = ",".join("?" * len(ids))
+        return {r[0] for r in self.db.execute(
+            f"""SELECT DISTINCT v.substance_id
+                FROM product_component pc
+                JOIN variant v ON v.variant_id = pc.variant_id
+                WHERE pc.product_id IN ({marks})""", tuple(ids))}
+
+    @staticmethod
+    def _merge_alias_cards(main: list[Card], extra: list[Card],
+                           limit: int) -> list[Card]:
+        """把异名卡片按分数位插进主结果。
+
+        主结果之间的相对顺序不变（沿用同一个排序键，只多一条「同分时主结果优先」
+        的平局判定），异名卡片落在 exact/compact 之后、prefix/contains 之前。
+        主结果把 limit 占满时，只从**尾部**让位给异名卡片（至多 `ALIAS_MAX_CARDS`
+        个），且绝不挤掉「名字本身命中」的精确/紧凑/俗称/ATC/大类卡。
+        """
+        if not extra:
+            return main[:limit]
+        merged = main + extra
+        merged.sort(key=lambda c: (-c.score, c.match_source == "inn_alias",
+                                   -c.n_products, len(c.key_id), c.brand.lower()))
+        out = merged[:limit]
+        if any(c.match_source == "inn_alias" for c in out):
+            return out
+        keep = list(main[:limit])
+        n_drop = 0
+        for c in reversed(keep):
+            if (n_drop >= len(extra) or n_drop >= ALIAS_MAX_CARDS
+                    or c.tier in PRECISE_TIERS):
+                break
+            n_drop += 1
+        if not n_drop:
+            return out
+        return keep[:len(keep) - n_drop] + extra[:n_drop]
+
+    @staticmethod
+    def _alias_note(meta: dict, shown: int) -> str:
+        """异名追加的说明：只说「同一成分的不同写法」，不说可互换。"""
+        seeds = "、".join(meta["seed_names"]) or "—"
+        members = " / ".join(meta["group_names"]) or "—"
+        return (f"异名命中：{members} 是同一成分的不同写法（{meta['source']}），"
+                f"已按「{seeds}」追加 {shown} 条同组候选；"
+                "只做身份对应，不代表剂型/规格可互换。")
+
     # --- 俗称解析 ------------------------------------------------------
     def _alias_hits(self, n) -> list[dict]:
         """精确命中俗称。不做模糊——昵称差一个字往往就是另一个梗。"""
@@ -392,11 +566,13 @@ class SearchIndex:
         return res
 
     def _substance_cards(self, substance_id: str,
-                         include_status: tuple[str, ...] = ("active",)) -> list[Card]:
+                         include_status: tuple[str, ...] = ("active",),
+                         tier: str = "nickname") -> list[Card]:
         """把一个成分的商品按「国家 × 剂型 × 释放 × 成分组合」折成结果卡。
 
         和按名字检索不同：这里不经过 name_key，所以复方里含有该成分的产品也会出现
         （组成会在成分列里写全），品牌名取该组里出现最多的商品名。
+        `tier` 区分来源：俗称命中是 nickname，同物异名追加是 inn_alias。
         """
         status_marks = ",".join("?" * len(include_status))
         member_sql = """SELECT pc2.product_id FROM product_component pc2
@@ -456,7 +632,7 @@ class SearchIndex:
                     dosage_form=first["form_base"] or first["dosage_form"],
                     status=first["status"],
                     collision="info",
-                    tier="nickname",
+                    tier=tier,
                     product_id=pid,
                 )
                 cards[sig] = card
@@ -753,7 +929,21 @@ class SearchIndex:
             return res
         cards, note = self._cards_for_keys([k for k, _ in keys], dict(keys), n,
                                            country, include_status, limit)
-        if note:
+        # task-141b：异名层——名字命中的成分再按 data/substance_aliases.csv 扩到同组写法。
+        # 追加候选是「额外看到同组成分」，不替代按名字命中的结果。
+        alias_cards, alias_meta = self._alias_expand(
+            [k for k, _ in keys], include_status, n, country, cards)
+        shown = 0
+        if alias_cards:
+            merged = self._merge_alias_cards(cards, alias_cards, limit)
+            shown = sum(1 for c in merged if c.match_source == "inn_alias")
+            if shown:  # 位子全被精确命中占住时不提「追加」，也不改说明
+                res.match_detail["inn_alias"] = {**alias_meta, "shown": shown}
+                if not cards:  # 名字本身在这个国家没有条目，结果全是异名带出来的
+                    res.match_source = "inn_alias"
+                res.note = self._alias_note(alias_meta, shown)
+                cards = merged
+        if not shown and note:
             res.note = note
         res.cards = cards
         return res
