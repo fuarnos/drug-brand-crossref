@@ -1,0 +1,1792 @@
+﻿substance_id,inn_en(当前),inn_zh,atc,候选INN,候选substance_id,证据,置信度,理由
+cn-7764ed6be6,地喹氯铵,地喹氯铵,A01AB,,,,none,丢弃[ATC 冲突]：dequalinium chloride 与 Decualinio 是同一成分的不同写法；候选 Decualinio ATC G01AC05 vs 池内 A01AB；候选 Dequalinium ATC R02AA02 vs 池内 A01AB
+cn-f8d07312a4,碘化铵,碘化铵,A01AB,,,,none,丢弃[ATC 冲突]：Potasio Ioduro 与 Potassium Iodide 是同一成分的不同写法；候选 Potassium Iodide ATC R05CA vs 池内 A01AB；候选 Ammonium ATC R05CA10 vs 池内 A01AB
+cn-5de2de601c,丁硼,丁硼,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-0508e1a649,四环素泼尼松,四环素泼尼松,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-1a5fe4940a,甲硝唑口腔粘,甲硝唑口腔粘,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-777dc24973,甲硝唑口颊,甲硝唑口颊,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-38ee3c6ba5,甲硝唑胶浆,甲硝唑胶浆,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-711c39b125,稀葡萄糖酸氯己定,稀葡萄糖酸氯己定,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-2618412296,氯己定苯佐卡因,氯己定苯佐卡因,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-74ae382915,咪康唑口腔,咪康唑口腔,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-d18c720f33,替硝唑口腔,替硝唑口腔,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-93013451ca,浓替硝唑,浓替硝唑,A01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A01AB 组内英文成分 7 个
+cn-9be0c6ea3c,甘羟铝,甘羟铝,A02AB,Aluminium glycinate,,cn_inn_overrides; wikidata_cache,high,ATC A02AB vs A02AB07 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-ac149aec0e,磷酸铝,磷酸铝,A02AB,aluminium phosphate,,cn_inn_overrides; wikidata_cache,high,ATC A02AB vs A02AB03 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-c690c3e416,铝镁司,铝镁司,A02AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AB 组内英文成分 2 个
+cn-58f94268bd,尿囊素铝,尿囊素铝,A02AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AB 组内英文成分 2 个
+cn-e8b9951a00,丁香罗勒口服,丁香罗勒口服,A02AC,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 A02AC 组内唯一英文成分 Calcium Silicate，但中文名对不上（不猜，未定案）
+cn-7071b6a5ca,碳酸钙二甲硅油,碳酸钙二甲硅油,A02AC,,,,none,丢弃[ATC 冲突]：候选 Dimeticone ATC A03AX vs 池内 A02AC
+cn-8d01611109,碳酸钙甘氨酸,碳酸钙甘氨酸,A02AC,,,,none,丢弃[ATC 冲突]：候选 Glycine ATC B05CX03 vs 池内 A02AC
+cn-5b7bb6c44b,木香铝镁,木香铝镁,A02AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AD 组内英文成分 6 个
+cn-ca4d4a4d97,海藻酸铝镁,海藻酸铝镁,A02AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AD 组内英文成分 6 个
+cn-8cb0e23980,铝镁口服,铝镁口服,A02AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AD 组内英文成分 6 个
+cn-89de2dd833,铝镁,铝镁,A02AD,,,,none,丢弃[盐/酯不一致]：候选 aluminium phosphate 标记 ['phosphate'] vs 中文名 ['magnesium']
+cn-64757ac2da,铝镁加,铝镁加,A02AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AD 组内英文成分 6 个
+cn-11616c7cfd,镁加铝,镁加铝,A02AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AD 组内英文成分 6 个
+cn-70959efd26,芦荟维U,芦荟维U,A02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AX 组内英文成分 4 个
+cn-0d1e837512,维生素U,维生素U,A02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AX 组内英文成分 4 个
+cn-0c370a68f5,胶体酒石酸铋,胶体酒石酸铋,A02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AX 组内英文成分 4 个
+cn-8db7c626ce,铝镁二甲硅油,铝镁二甲硅油,A02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AX 组内英文成分 4 个
+cn-a2473427a9,鼠李铋镁,鼠李铋镁,A02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02AX 组内英文成分 4 个
+cn-4292805759,丙谷胺西咪替丁,丙谷胺西咪替丁,A02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BA 组内英文成分 8 个
+cn-3b221397b0,枸橼酸铋雷尼替丁,枸橼酸铋雷尼替丁,A02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BA 组内英文成分 8 个
+cn-2a57036245,拉呋替丁,拉呋替丁,A02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BA 组内英文成分 8 个
+cn-14fb469d21,安奈拉唑钠,安奈拉唑钠,A02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BC 组内英文成分 18 个
+cn-3ed8496113,富马酸伏诺拉生,富马酸伏诺拉生,A02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BC 组内英文成分 18 个
+cn-e2053df41b,盐酸凯普拉生,盐酸凯普拉生,A02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BC 组内英文成分 18 个
+cn-4e705c0abf,替戈拉生,替戈拉生,A02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BC 组内英文成分 18 个
+cn-fec48a053f,右兰索拉唑,右兰索拉唑,A02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BC 组内英文成分 18 个
+cn-5cd3e0c5e8,碱式硝酸铋,碱式硝酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-f8be7bc921,次硝酸铋,次硝酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-4f6dc1da67,多司马酯,多司马酯,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-c22dc0f2d2,儿茶,儿茶,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-a5eb0c4ba7,甘铋镁,甘铋镁,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-3972da2b46,酵母碳酸铋,酵母碳酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-7679ac27ba,石菖蒲碱式碳酸铋,石菖蒲碱式碳酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-7845bcb2a8,石菖蒲碱式硝酸铋,石菖蒲碱式硝酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-b7d7223572,甘草酸铋,甘草酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-44d979c469,吉法酯,吉法酯,A02BX,gefarnate,,cn_inn_overrides; wikidata_cache,high,ATC A02BX vs A02BX07 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-00ac4298a2,甲溴贝那替秦,甲溴贝那替秦,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-f29f4a9d82,碱式水杨酸铋,碱式水杨酸铋,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-bb2d595ee9,碱式碳酸铋,碱式碳酸铋,A02BX,,,,none,丢弃[ATC 无法校验]：候选 Bismuth Subcarbonate 在库但无 ATC
+cn-95bffe7a9f,聚普瑞锌,聚普瑞锌,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-f18aba16db,硫糖铝混悬,硫糖铝混悬,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-8f5a474982,硫糖铝口服,硫糖铝口服,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-e9a926fd38,曲昔派特,曲昔派特,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-b9cb88f280,曲昔匹特,曲昔匹特,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-c8e70a4bd8,瑞巴派特,瑞巴派特,A02BX,rebamipide,,cn_inn_overrides; wikidata_cache,high,ATC A02BX vs A02BX14 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-fb4310a9df,索法酮,索法酮,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-80d6fd13f4,替普瑞酮,替普瑞酮,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-a05de1c4a7,胸腺蛋白,胸腺蛋白,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-d24c521412,马来酸伊索拉定,马来酸伊索拉定,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-47b5ae5b3b,依卡倍特钠,依卡倍特钠,A02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BX 组内英文成分 10 个
+cn-b1e3168614,醋氨己酸锌,醋氨己酸锌,A02XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02XA 组内无英文成分
+cn-b6136080f9,罗西维林,罗西维林,A03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03AA 组内英文成分 5 个
+cn-8838852ef2,盐酸美贝维林,盐酸美贝维林,A03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03AA 组内英文成分 5 个
+cn-def5d7bcb3,溴甲贝那替秦,溴甲贝那替秦,A03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03AA 组内英文成分 5 个
+cn-ae81e02849,盐酸屈他维林,盐酸屈他维林,A03AD,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 A03AD 组内唯一英文成分 Papaverine，但中文名对不上（不猜，未定案）
+cn-5413b04e5a,盐酸贝那替秦,盐酸贝那替秦,A03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03AX 组内英文成分 11 个
+cn-794b91ea8b,胆汁槟榔维B1,胆汁槟榔维B1,A03AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-27b3cdd5be,猴头菌提取物,猴头菌提取物,A03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03AX 组内英文成分 11 个
+cn-32de57968d,胃铋镁,胃铋镁,A03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03AX 组内英文成分 11 个
+cn-39e8dd2da7,莨菪浸,莨菪浸,A03BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03BA 组内英文成分 3 个
+cn-e26e22b9bf,铝钠颠茄,铝钠颠茄,A03BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03BA 组内英文成分 3 个
+cn-42fe2d3785,盐酸消旋山茛菪碱,盐酸消旋山茛菪碱,A03BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03BA 组内英文成分 3 个
+cn-5edc936892,维U颠茄铋铝,维U颠茄铋铝,A03DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03DB 组内无英文成分
+cn-49d28611ac,维U铝镁双层,维U铝镁双层,A03DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03DB 组内无英文成分
+cn-5db45e6e66,阿托品异丙嗪,阿托品异丙嗪,A03EA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03EA 组内无英文成分
+cn-9b343691a9,溴甲东莨菪碱,溴甲东莨菪碱,A03EA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03EA 组内无英文成分
+cn-3ba12706ad,苹果酸氯波比利,苹果酸氯波比利,A03FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03FA 组内英文成分 12 个
+cn-e1f42b33a7,苹果酸氯波必利,苹果酸氯波必利,A03FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03FA 组内英文成分 12 个
+cn-e19c27f9f0,脾粉,脾粉,A03FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03FA 组内英文成分 12 个
+cn-a069a36694,西沙必利,西沙必利,A03FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03FA 组内英文成分 12 个
+cn-8e5248d235,溴米那普鲁卡因,溴米那普鲁卡因,A03FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A03FA 组内英文成分 12 个
+cn-65a094f125,奈妥匹坦帕洛诺司琼,奈妥匹坦帕洛诺司琼,A04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A04AA 组内英文成分 11 个
+cn-a57375d31f,福沙匹坦双葡甲胺,福沙匹坦双葡甲胺,A04AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A04AD 组内英文成分 9 个
+cn-e79cf7cc01,胆酸钠,胆酸钠,A05AA,Cholic Acid,cholic-acid,wikidata_cache,medium,ATC A05AA vs A05AA03 → L4；盐/酯 base_only
+cn-d5627593f8,牛磺熊去氧胆酸,牛磺熊去氧胆酸,A05AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AA 组内英文成分 8 个
+cn-04ab92b5b3,苯丙醇,苯丙醇,A05AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AB 组内无英文成分
+cn-b6e78d9b17,羟甲烟胺,羟甲烟胺,A05AB,nicotinyl methylamide,,cn_inn_overrides; wikidata_cache,high,ATC A05AB vs A05AB01 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-a958a4d994,非布丙醇,非布丙醇,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-bea9fcfc3f,桂美酸,桂美酸,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-cd68b84e7e,亮菌甲素,亮菌甲素,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-319fa88fa4,柳胺酚,柳胺酚,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-5a6ed855fe,亮菌甲素氯化钠,亮菌甲素氯化钠,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-3fc5aaaca6,亮菌甲素葡萄糖,亮菌甲素葡萄糖,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-3be0e13aad,氯马昔巴特,氯马昔巴特,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-0ed68cbca9,柠檬烯,柠檬烯,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-f6ee521eba,青叶胆提取物,青叶胆提取物,A05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05AX 组内英文成分 8 个
+cn-84fcd7dd12,奥拉米特,奥拉米特,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-f8c11dea5e,虫草胶雷菌,虫草胶雷菌,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-bc3c49c637,大豆磷脂,大豆磷脂,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-43a1274620,蛋氨酸重酒石酸胆碱,蛋氨酸重酒石酸胆碱,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-a4e499f566,多烯磷脂酰胆碱,多烯磷脂酰胆碱,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-d00b1cf6f2,二维葡醛内酯,二维葡醛内酯,A05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-3f6b4bbbee,二氯乙酸二异丙胺,二氯乙酸二异丙胺,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-b5c9665806,二氯醋酸二异丙胺葡萄糖酸钠,二氯醋酸二异丙胺葡萄糖酸钠,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-b5bdc30c5c,扶正女贞素,扶正女贞素,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-9bbef76635,蛋氨酸胆碱,蛋氨酸胆碱,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-e7cbdde0a6,二氯醋酸二异丙胺,二氯醋酸二异丙胺,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-7809746475,肝水解物,肝水解物,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-5e0b64a62c,牛胎肝提取物,牛胎肝提取物,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-13fff8f18b,甘草酸单钾盐,甘草酸单钾盐,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-e2a0091fa1,还原型谷胱甘肽,还原型谷胱甘肽,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-d68c9b1e38,还原型谷胱甘肽钠,还原型谷胱甘肽钠,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-72b2da8935,混合核苷,混合核苷,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-fa08974a6e,核糖核酸Ⅰ,核糖核酸Ⅰ,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-e98b800593,核糖核酸Ⅱ,核糖核酸Ⅱ,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-4843d6cbec,蛋氨酸,蛋氨酸,A05BA,Methionine,methionine,cn_old_name,high,ATC A05BA vs A05BA → L4；盐/酯 same；候选 Dl-Methionine ATC A16AX vs 池内 A05BA
+cn-60780a5af8,精氨酸谷氨酸,精氨酸谷氨酸,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-cff4a88633,抗乙肝免疫核糖核酸,抗乙肝免疫核糖核酸,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-623e163a7b,鞣酸苦参碱,鞣酸苦参碱,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-ad0aaef802,抗乙型肝炎转移因子,抗乙型肝炎转移因子,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-5769457c66,亮菌,亮菌,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-f368875dcd,马洛替酯,马洛替酯,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-3d1c1b49d9,美他多辛,美他多辛,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-d912bf43ad,葡醛酸钠,葡醛酸钠,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-c78abb9d43,水飞蓟素,水飞蓟素,A05BA,silibinin A,silibinina,atc5_exact; cn_inn_overrides,high,ATC A05BA vs A05BA03 → L4；盐/酯 same
+cn-2233edeb45,维丙胺,维丙胺,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-d9269df9a8,叶绿素铜钠,叶绿素铜钠,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-cf43454dba,异甘草酸镁,异甘草酸镁,A05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A05BA 组内英文成分 18 个
+cn-fc08c2ab53,匹可硫酸钠,匹可硫酸钠,A06AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AB 组内英文成分 27 个
+cn-1f9a5bc03c,磷酸氢钠,磷酸氢钠,A06AC,,,,none,丢弃[ATC 冲突]：候选 Sodium Bicarbonate ATC A02AH vs 池内 A06AC；候选 potassium hydrogen carbonate ATC A12BA04 vs 池内 A06AC；候选 potassium hydrogen tartrate ATC A12BA03 vs 池内 A06AC（另有 1 条线索）
+cn-1b5df0d55e,小麦纤维素,小麦纤维素,A06AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AC 组内英文成分 13 个
+cn-f07707db9d,拉克替醇,拉克替醇,A06AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AD 组内英文成分 14 个
+cn-73795bd37f,磷酸钠盐灌肠,磷酸钠盐灌肠,A06AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AD 组内英文成分 14 个
+cn-22eaf4fead,硫酸镁钠钾口服用浓,硫酸镁钠钾口服用浓,A06AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AD 组内英文成分 14 个
+cn-450c0c286d,口服山梨醇,口服山梨醇,A06AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AD 组内英文成分 14 个
+cn-a5bb51e171,无水硫酸钠,无水硫酸钠,A06AD,,,,none,"丢弃[盐/酯不一致]：候选 Magnesium Sulfate 标记 ['magnesium', 'sulfate'] vs 中文名 ['sodium', 'sulfate']"
+cn-3c3dbf1aaf,甘油灌肠剂,甘油灌肠剂,A06AG,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 A06AG 组内唯一英文成分 Sodium Lauryl Sulfoacetate，但中文名对不上（不猜，未定案）
+cn-6e61dde69e,大黄叶绿素铜钠,大黄叶绿素铜钠,A06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AX 组内英文成分 10 个
+cn-05fb7c202b,利那洛肽,利那洛肽,A06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AX 组内英文成分 10 个
+cn-5f556d94f1,芦比前列酮,芦比前列酮,A06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AX 组内英文成分 10 个
+cn-02c756089f,葡甘聚糖,葡甘聚糖,A06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AX 组内英文成分 10 个
+cn-259bd4a321,多黏菌素E甲磺酸钠,多黏菌素E甲磺酸钠,A07AA,,,,none,丢弃[ATC 冲突]：候选 Colistimethate ATC J01XB01 vs 池内 A07AA
+cn-5c1521e97e,磺胺咪,磺胺咪,A07AB,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 A07AB 组内唯一英文成分 Sulfaguanidine，但中文名对不上（不猜，未定案）
+cn-ad989f6d58,鞣酸小檗碱,鞣酸小檗碱,A07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07AX 组内英文成分 2 个
+cn-b6a089e076,奥沙拉秦钠,奥沙拉秦钠,A07EC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07EC 组内英文成分 6 个
+cn-918868e9ba,巴柳氮钠,巴柳氮钠,A07EC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07EC 组内英文成分 6 个
+cn-e644fb3a4d,柳氮磺吡啶,柳氮磺吡啶,A07EC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07EC 组内英文成分 6 个
+cn-a595e5680c,柳氮磺吡啶结,柳氮磺吡啶结,A07EC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07EC 组内英文成分 6 个
+cn-ad732f54a8,美沙拉秦,美沙拉秦,A07EC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07EC 组内英文成分 6 个
+cn-9b556b8ffa,美沙拉嗪,美沙拉嗪,A07EC,mesalazine,mesalamine,atc5_exact; cn_inn_overrides; wikidata_cache,high,ATC A07EC vs A07EC02 → L4；盐/酯 same
+cn-97e4f97ca9,美沙拉秦灌肠,美沙拉秦灌肠,A07EC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07EC 组内英文成分 6 个
+cn-8be757cb8a,布拉氏酵母菌,布拉氏酵母菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-56f028a98f,嗜酸乳杆菌,嗜酸乳杆菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-31f801a8e8,复合乳酸菌,复合乳酸菌,A07FA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-98b0943388,蜡样芽孢杆菌活菌,蜡样芽孢杆菌活菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-4bd40ca15c,蜡样芽胞杆菌,蜡样芽胞杆菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-d5fe8f0146,酪酸梭菌肠球菌三联活菌,酪酸梭菌肠球菌三联活菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-f16500b7d7,酪酸梭菌二联活菌,酪酸梭菌二联活菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-946b7f950e,凝结芽孢杆菌活菌,凝结芽孢杆菌活菌,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-8b7823c37a,口服乳杆菌LB,口服乳杆菌LB,A07FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07FA 组内英文成分 10 个
+cn-5711ee8196,木香小檗碱,木香小檗碱,A07XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07XA 组内英文成分 3 个
+cn-c3d21d7453,石榴皮小檗碱,石榴皮小檗碱,A07XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07XA 组内英文成分 3 个
+cn-6134ac0600,小檗碱鞣酸蛋白,小檗碱鞣酸蛋白,A07XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07XA 组内英文成分 3 个
+cn-83aa4df6a0,鞣酸蛋白,鞣酸蛋白,A07XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07XA 组内英文成分 3 个
+cn-1d7a534c2b,鞣酸蛋白酵母,鞣酸蛋白酵母,A07XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07XA 组内英文成分 3 个
+cn-1ac0e23be0,消化酶,消化酶,A09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A09AA 组内英文成分 16 个
+cn-e42b0333c6,复合凝乳酶,复合凝乳酶,A09AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-c61a1800ad,羔羊胃提取物维B12,羔羊胃提取物维B12,A09AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-3b3656c6b6,含糖胃蛋白酶,含糖胃蛋白酶,A09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A09AA 组内英文成分 16 个
+cn-261aa6a095,链霉蛋白酶,链霉蛋白酶,A09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A09AA 组内英文成分 16 个
+cn-6bebebd31f,米曲菌胰酶,米曲菌胰酶,A09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A09AA 组内英文成分 16 个
+cn-e3aa4ab7f1,维霉素,维霉素,A09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A09AA 组内英文成分 16 个
+cn-bd4a932587,复合磷酸酯酶,复合磷酸酯酶,A09AC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-4a89111921,阿嗪米特,阿嗪米特,A09AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 A09AX 组内唯一英文成分 Dried Yeast，但中文名对不上（不猜，未定案）
+cn-8ece4adbaf,生物合成人胰岛素,生物合成人胰岛素,A10AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AB 组内英文成分 11 个
+cn-7dc534beb6,德谷门冬双胰岛素,德谷门冬双胰岛素,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-b2bd11f296,30/70混合重组人胰岛素,30/70混合重组人胰岛素,A10AD,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-5611fb5437,精蛋白生物合成人胰岛素,精蛋白生物合成人胰岛素,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-8c97501388,精蛋白重组人胰岛素混合,精蛋白重组人胰岛素混合,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-a453206a2c,精蛋白锌胰岛素,精蛋白锌胰岛素,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-7cb63bf57e,精蛋白锌重组赖脯胰岛素混合,精蛋白锌重组赖脯胰岛素混合,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-9820254e8b,精蛋白重组人胰岛素,精蛋白重组人胰岛素,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-a1175f4df6,德谷胰岛素,德谷胰岛素,A10AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AE 组内英文成分 6 个
+cn-aebda460f4,德谷胰岛素利拉鲁肽,德谷胰岛素利拉鲁肽,A10AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AE 组内英文成分 6 个
+cn-7ae49ada4f,磷酸瑞格列汀,磷酸瑞格列汀,A10BH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BH 组内英文成分 11 个
+cn-04a92140c2,氢溴酸替格列汀,氢溴酸替格列汀,A10BH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BH 组内英文成分 11 个
+cn-51f09d3018,艾塞那肽微球,艾塞那肽微球,A10BJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BJ 组内英文成分 6 个
+cn-e51f5ea1ae,贝那鲁肽,贝那鲁肽,A10BJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BJ 组内英文成分 6 个
+cn-fadf73085c,艾托格列净,艾托格列净,A10BK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BK 组内英文成分 7 个
+cn-3a5121ad84,脯氨酸恒格列净,脯氨酸恒格列净,A10BK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BK 组内英文成分 7 个
+cn-ddd1540ae7,多格列艾汀,多格列艾汀,A10BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BX 组内英文成分 6 个
+cn-85b0d10155,米格列奈钙,米格列奈钙,A10BX,mitiglinide,,wikidata_cache,medium,ATC A10BX vs A10BX08 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-b63b68be1e,西格列他钠,西格列他钠,A10BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BX 组内英文成分 6 个
+cn-6616a0571c,复合维生素,复合维生素,A11AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-8ff1fcaf42,九合维生素,九合维生素,A11AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11AA 组内英文成分 3 个
+cn-160b023673,九维,九维,A11AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11AA 组内英文成分 3 个
+cn-538a3cb785,善存,善存,A11AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11AA 组内英文成分 3 个
+cn-5cb712e90b,多种维生素,多种维生素,A11AB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-21c4a0a8c4,九维鱼肝油,九维鱼肝油,A11AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11AB 组内无英文成分
+cn-65904a0778,六合维生素,六合维生素,A11AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11AB 组内无英文成分
+cn-44f5f1c210,多维生素,多维生素,A11AB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-ee167ec7e8,银耳鱼肝油,银耳鱼肝油,A11CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11CB 组内英文成分 2 个
+cn-8b8d5f7269,银耳鱼肝油乳,银耳鱼肝油乳,A11CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11CB 组内英文成分 2 个
+cn-2922fe96cd,麦精鱼肝油,麦精鱼肝油,A11CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11CB 组内英文成分 2 个
+cn-3a6f6bb4bc,葡萄糖鱼肝油乳,葡萄糖鱼肝油乳,A11CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11CB 组内英文成分 2 个
+cn-68346c9c5a,三维鱼肝油乳,三维鱼肝油乳,A11CB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-7734cc2d66,鱼肝油乳,鱼肝油乳,A11CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11CB 组内英文成分 2 个
+cn-ae2eace9b4,艾地骨化醇,艾地骨化醇,A11CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11CC 组内英文成分 10 个
+cn-77c6c2e388,口服维D2葡萄糖,口服维D2葡萄糖,A11CC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-fd62742ed1,口服维生素D2葡萄糖,口服维生素D2葡萄糖,A11CC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-429a787ce4,呋喃硫胺,呋喃硫胺,A11DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11DA 组内英文成分 3 个
+cn-76b2ff5fae,三维B,三维B,A11DB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-0d779d07e4,三维右旋泛酸钙,三维右旋泛酸钙,A11DB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-74245f6f8d,多维,多维,A11EC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-47070f963c,五维B,五维B,A11EC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-bff2ac2bd7,五维葡钙,五维葡钙,A11EC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-e215ec98d1,克补,克补,A11ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11ED 组内无英文成分
+cn-9fd906794b,维胺,维胺,A11ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11ED 组内无英文成分
+cn-95ab018ca7,六维磷脂,六维磷脂,A11EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11EX 组内无英文成分
+cn-3227cc079e,甲橙维C,甲橙维C,A11GB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11GB 组内英文成分 2 个
+cn-e0d3a93b42,维C橙皮苷,维C橙皮苷,A11GB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11GB 组内英文成分 2 个
+cn-01871646bf,核黄素四丁酸酯,核黄素四丁酸酯,A11HA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11HA 组内英文成分 20 个
+cn-6fd5b4bcc1,口服四维葡萄糖,口服四维葡萄糖,A11JA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-8c081fb94d,四维他,四维他,A11JA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-a647fc8778,脂溶性维生素,脂溶性维生素,A11JA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-dd2a5a896a,脂溶性维生素(Ⅱ)/注射用水溶性维生素组合包装,脂溶性维生素(Ⅱ)/注射用水溶性维生素组合包装,A11JA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-abeede535e,参维灵,参维灵,A11JC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11JC 组内英文成分 7 个
+cn-d320540fea,三维亚油酸胶丸Ⅱ,三维亚油酸胶丸Ⅱ,A11JC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-e38aca6dac,三维亚油酸胶丸Ⅰ,三维亚油酸胶丸Ⅰ,A11JC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-2da45aa031,七维牛磺酸,七维牛磺酸,A11JC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11JC 组内英文成分 7 个
+cn-25e8724a4b,三维樟柳碱,三维樟柳碱,A11JC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-8e98188e21,四维王浆葡萄糖,四维王浆葡萄糖,A11JC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-145230e3ab,维E三油,维E三油,A11JC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A11JC 组内英文成分 7 个
+cn-114039b55f,亚油酸维生素E胶丸/二维芦丁,亚油酸维生素E胶丸/二维芦丁,A11JC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-4f9fb58ff6,五维牛磺酸,五维牛磺酸,A11JC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-61d9423b73,泛酸钙,泛酸钙,A12AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AA 组内英文成分 15 个
+cn-d3657dfb5c,枸橼酸苹果酸钙,枸橼酸苹果酸钙,A12AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AA 组内英文成分 15 个
+cn-b6d8ef64c5,磷酸氢钙,磷酸氢钙,A12AA,,,,none,丢弃[ATC 冲突]：候选 Sodium Bicarbonate ATC A02AH vs 池内 A12AA；候选 potassium hydrogen carbonate ATC A12BA04 vs 池内 A12AA；候选 potassium hydrogen tartrate ATC A12BA03 vs 池内 A12AA（另有 1 条线索）
+cn-c214c62e79,氯化钙溴化钠,氯化钙溴化钠,A12AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AA 组内英文成分 15 个
+cn-fbcab04036,门冬氨酸钙,门冬氨酸钙,A12AA,,,,none,丢弃[ATC 无法校验]：候选 Aspartic Acid 在库但无 ATC
+cn-f0b7f0c4d8,碳酸钙口服,碳酸钙口服,A12AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AA 组内英文成分 15 个
+cn-953c5f744c,葡磷泛三钙,葡磷泛三钙,A12AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AA 组内英文成分 15 个
+cn-4eac823018,维D钙,维D钙,A12AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AX 组内英文成分 3 个
+cn-acb8951a3f,二维钙赖氨酸,二维钙赖氨酸,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-313932a344,二维葡钙,二维葡钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-bd5a30b40c,二维葡磷钙,二维葡磷钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-ceea539028,锌铁钙,锌铁钙,A12AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AX 组内英文成分 3 个
+cn-6d2c09117c,可可钙糖,可可钙糖,A12AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AX 组内英文成分 3 个
+cn-35a4134734,葡钙维B1,葡钙维B1,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-d6cb5b99e4,三维钙,三维钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-b92a5dc233,三维葡磷钙,三维葡磷钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-972e80e9e6,四维钙,四维钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-f1833651fe,碳酸钙D₃,碳酸钙D₃,A12AX,Calcium Carbonate,calcium-carbonate,cn2en,medium,ATC A12AX vs A12AA04 → L3；盐/酯 same
+cn-da1f121ffe,碳酸钙维D3元素,碳酸钙维D3元素,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-103d0d8732,维B1钙,维B1钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-ab47bb040f,维D2果糖酸钙,维D2果糖酸钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-bbb3ec54b2,维磷葡钙,维磷葡钙,A12AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12AX 组内英文成分 3 个
+cn-5b8a542f1b,维B1乳酸钙,维B1乳酸钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-4f79be2aa0,四维葡钙,四维葡钙,A12AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-1601217f4b,复合磷酸氢钾,复合磷酸氢钾,A12BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-c0da28d9c8,门冬氨酸钾,门冬氨酸钾,A12BA,,,,none,"丢弃[盐/酯不一致]：候选 Potassium Magnesium Aspartate 标记 ['aspartate', 'magnesium', 'potassium'] vs 中文名 ['aspartate', 'potassium']；候选 Aspartic Acid 在库但无 ATC"
+cn-46c908d41b,氨肽素硫酸锌,氨肽素硫酸锌,A12CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12CB 组内英文成分 4 个
+cn-4ad2475b3d,枸橼酸锌,枸橼酸锌,A12CB,,,,none,"丢弃[ATC 冲突]：候选 Zinc ATC A16AX05 vs 池内 A12CB；候选 Zinc Sulfate 标记 ['sulfate', 'zinc'] vs 中文名 ['citrate', 'zinc']；候选 Potassium Citrate ATC A12BA vs 池内 A12CB（另有 1 条线索）"
+cn-42e1226d3c,四维葡锌,四维葡锌,A12CB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-e349dd5b8e,硫酸镁葡萄糖,硫酸镁葡萄糖,A12CC,,,,none,丢弃[ATC 冲突]：候选 Glucose ATC B05BA03 vs 池内 A12CC；候选 intravenous sugar solution ATC B05BA03 vs 池内 A12CC
+cn-2f3eee659a,硒酵母,硒酵母,A12CE,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 A12CE 组内唯一英文成分 Sodium Selenite，但中文名对不上（不猜，未定案）
+cn-89c8a2fa4c,亚硒酸钠,亚硒酸钠,A12CE,,,,none,丢弃[ATC 无法校验]：候选 Selenious Acid 在库但无 ATC
+cn-086fdbd23b,铁铵锌铜维B1,铁铵锌铜维B1,A12CX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-393cee0345,苯丙酸诺龙,苯丙酸诺龙,A14AB,Nandrolone,nandrolone,cn_inn_overrides,medium,ATC A14AB vs A14AB01 → L4；盐/酯 base_only
+cn-25e58eb6e6,卡谷氨酸,卡谷氨酸,A16AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AA 组内英文成分 11 个
+cn-4253ec76de,L-谷氨酰胺呱仑酸钠,L-谷氨酰胺呱仑酸钠,A16AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AA 组内英文成分 11 个
+cn-ef6452d7a2,丁二磺酸腺苷蛋氨酸,丁二磺酸腺苷蛋氨酸,A16AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AA 组内英文成分 11 个
+cn-20c56396ab,盐酸乙酰左卡尼汀,盐酸乙酰左卡尼汀,A16AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AA 组内英文成分 11 个
+cn-b89f68fd48,阿加糖酶β,阿加糖酶β,A16AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AB 组内英文成分 43 个
+cn-c3f2ca9c29,艾度硫酸酯酶β,艾度硫酸酯酶β,A16AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AB 组内英文成分 43 个
+cn-7edd06b0c7,艾夫糖苷酶α,艾夫糖苷酶α,A16AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AB 组内英文成分 43 个
+cn-7a797fbcf3,拉罗尼酶浓,拉罗尼酶浓,A16AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AB 组内英文成分 43 个
+cn-6ba705bd3f,维拉苷酶α,维拉苷酶α,A16AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AB 组内英文成分 43 个
+cn-e872bd4771,依洛硫酸酯酶α,依洛硫酸酯酶α,A16AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AB 组内英文成分 43 个
+cn-6e26161874,酒石酸艾格司他,酒石酸艾格司他,A16AX,Eliglustat,eliglustat,cn_inn_overrides; wikidata_cache,medium,ATC A16AX vs A16AX10 → L4；盐/酯 base_only
+cn-6b3e002098,苯丁酸钠,苯丁酸钠,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-ea759707a4,口服用苯丁酸甘油酯,口服用苯丁酸甘油酯,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-a7db1baa5f,橙皮,橙皮,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-da875d2d76,颠茄铋镁,颠茄铋镁,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-45ac876b12,颠茄氢氧化铝,颠茄氢氧化铝,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-cb8a75c2a6,尿囊素,尿囊素,A16AX,,,,none,丢弃[ATC 冲突]：候选 Allantoin ATC D02AX vs 池内 A16AX
+cn-edb75a6c29,溴丙胺太林铝镁,溴丙胺太林铝镁,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-6ebac609f1,延胡索氢氧化铝,延胡索氢氧化铝,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-4cc3dcb57c,甘氨酸碳酸钙,甘氨酸碳酸钙,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-9f096208ff,甲磺酸加贝酯,甲磺酸加贝酯,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-40b5713aed,硫糖铝小檗碱,硫糖铝小檗碱,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-d744dea72d,铝镁颠茄,铝镁颠茄,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-fbaa3d880d,麦格司他,麦格司他,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-7742e06bb5,神黄钠铝,神黄钠铝,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-13eb11c216,盐酸沙丙蝶呤,盐酸沙丙蝶呤,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-45efd319c8,乌司他丁,乌司他丁,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-2512853d5a,低分子肝素钙,低分子肝素钙,B01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AB 组内英文成分 16 个
+cn-d84cee4c32,低分子肝素钠,低分子肝素钠,B01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AB 组内英文成分 16 个
+cn-7a68e3df36,肝素钠封管,肝素钠封管,B01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AB 组内英文成分 16 个
+cn-7820891df3,贝前列素钠,贝前列素钠,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-8a27206a02,阿魏酸钠阿司匹林,阿魏酸钠阿司匹林,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-1b31a7a1f4,卡巴匹林钙,卡巴匹林钙,B01AC,carbaspirin calcium,,cn_inn_overrides,high,ATC B01AC vs B01AC08 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-b75ed14a71,铝镁匹林,铝镁匹林,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-84a4920956,利马前列素,利马前列素,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-4775325a0a,曲前列尼尔,曲前列尼尔,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-8533988800,盐酸沙格雷酯,盐酸沙格雷酯,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-2e19dcf2e2,司来帕格,司来帕格,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-b77647d164,吲哚布芬,吲哚布芬,B01AC,indobufen,,cn_inn_overrides; wikidata_cache,high,ATC B01AC vs B01AC10 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-03940587ca,依替巴肽,依替巴肽,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-da78512bf5,葡激酶,葡激酶,B01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AD 组内英文成分 17 个
+cn-c34369ae70,人组织型纤溶酶原激酶衍生物,人组织型纤溶酶原激酶衍生物,B01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AD 组内英文成分 17 个
+cn-8cfa7cd6d5,人尿激酶原,人尿激酶原,B01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AD 组内英文成分 17 个
+cn-91195038b7,人TNK组织型纤溶酶原激活剂,人TNK组织型纤溶酶原激活剂,B01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AD 组内英文成分 17 个
+cn-f3c9561860,蕲蛇酶,蕲蛇酶,B01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AD 组内英文成分 17 个
+cn-64fe50bba7,纤溶酶,纤溶酶,B01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AD 组内英文成分 17 个
+cn-481576c11c,比伐芦定,比伐芦定,B01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AE 组内英文成分 7 个
+cn-461c1751e3,磺达肝癸钠,磺达肝癸钠,B01AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AF 组内英文成分 3 个
+cn-13e86b28a2,舒洛地特,舒洛地特,B01AF,sulodexide,sulodexida,atc5_exact; cn_inn_overrides; wikidata_cache,medium,ATC B01AF vs B01AB11 → L3；盐/酯 same
+cn-772e7a968b,肠多糖,肠多糖,B01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AX 组内英文成分 7 个
+cn-b55a7fefdd,参芎葡萄糖,参芎葡萄糖,B01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AX 组内英文成分 7 个
+cn-e50da1ad1e,甲磺酸萘莫司他,甲磺酸萘莫司他,B01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AX 组内英文成分 7 个
+cn-644e76afcf,输血用1号抗凝,输血用1号抗凝,B01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AX 组内英文成分 7 个
+cn-c36398a295,输血用2号抗凝,输血用2号抗凝,B01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AX 组内英文成分 7 个
+cn-ad11a0f77f,人凝血酶,人凝血酶,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-51f90d92a2,可溶性纤维素钠,可溶性纤维素钠,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-04f50a8776,可溶性止血纱布,可溶性止血纱布,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-c511e9ca4c,冻干人凝血酶,冻干人凝血酶,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-0228c8aa27,吸收性明胶海绵,吸收性明胶海绵,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-ad26b2587c,止血纤维,止血纤维,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-7cb766f2fa,猪源纤维蛋白粘,猪源纤维蛋白粘,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-c643609e2d,猪纤维蛋白粘,猪纤维蛋白粘,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-95a45d4895,艾诺凝血素α,艾诺凝血素α,B02BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BD 组内英文成分 42 个
+cn-b5f42ed708,人凝血因子ⅦA,人凝血因子ⅦA,B02BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BD 组内英文成分 42 个
+cn-38d3b9ed4e,人凝血因子Ⅷ,人凝血因子Ⅷ,B02BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BD 组内英文成分 42 个
+cn-1874898036,人凝血因子Ⅸ,人凝血因子Ⅸ,B02BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BD 组内英文成分 42 个
+cn-ad435132b6,人凝血酶原复合物,人凝血酶原复合物,B02BD,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-528f905e93,艾曲泊帕乙醇胺,艾曲泊帕乙醇胺,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-07a6285b24,艾美赛珠单抗,艾美赛珠单抗,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-c4b3f3eb12,马来酸阿伐曲泊帕,马来酸阿伐曲泊帕,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-93871ba7d7,白眉蛇毒血凝酶,白眉蛇毒血凝酶,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-8d53edbcfc,人血小板生成素,人血小板生成素,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-305cf960d7,二乙酰氨乙酸乙二胺,二乙酰氨乙酸乙二胺,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-35d6d2361d,二乙酰氨乙酸乙二胺氯化钠,二乙酰氨乙酸乙二胺氯化钠,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-d1e0e5525d,海曲泊帕乙醇胺,海曲泊帕乙醇胺,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-a6c2a886d1,尖吻蝮蛇血凝酶,尖吻蝮蛇血凝酶,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-1bc9abc60a,聚桂醇,聚桂醇,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-85804983da,咖啡酸,咖啡酸,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-34e988caa0,罗普司亭,罗普司亭,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-d941018a18,芦曲泊帕,芦曲泊帕,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-a9c5559f52,矛头蝮蛇血凝酶,矛头蝮蛇血凝酶,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-836c78495a,蛇毒血凝酶,蛇毒血凝酶,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-6da119d64d,蹄鞘,蹄鞘,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-97659886f3,二维亚铁,二维亚铁,B03AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-332a40df33,当归亚铁,当归亚铁,B03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AA 组内英文成分 9 个
+cn-988e2ace5b,三维亚铁,三维亚铁,B03AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-d4e77ec48e,乳酸亚铁,乳酸亚铁,B03AA,,,,none,"丢弃[盐/酯不一致]：候选 Ferrous 标记 ['ferrous'] vs 中文名 ['ferrous', 'lactate']；候选 Ferrous Gluconate 标记 ['ferrous', 'gluconate'] vs 中文名 ['ferrous', 'lactate']；候选 Ferrous Succinate 标记 ['ferrous', 'succinate'] vs 中文名 ['ferrous', 'lactate']（另有 4 条线索）"
+cn-51cb83ce38,维铁,维铁,B03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AA 组内英文成分 9 个
+cn-1c077f7174,四维亚铁,四维亚铁,B03AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-1640a41c3a,蛋白琥珀酸铁,蛋白琥珀酸铁,B03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AB 组内英文成分 7 个
+cn-67b1c1c745,山梨醇铁,山梨醇铁,B03AC,,,,none,丢弃[ATC 冲突]：候选 Sorbitol ATC A06AD18 vs 池内 B03AC
+cn-53549872ca,羧基麦芽糖铁,羧基麦芽糖铁,B03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AC 组内英文成分 4 个
+cn-4ef3ad07a6,异麦芽糖酐铁,异麦芽糖酐铁,B03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AC 组内英文成分 4 个
+cn-a9429037fd,多维铁,多维铁,B03AE,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-805a9cb706,胚肝铁铵,胚肝铁铵,B03AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AE 组内英文成分 3 个
+cn-2180d51e1f,十维铁,十维铁,B03AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03AE 组内英文成分 3 个
+cn-786aa527e1,达依泊汀α,达依泊汀α,B03XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03XA 组内英文成分 11 个
+cn-c67bba4ad0,恩那度司他,恩那度司他,B03XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03XA 组内英文成分 11 个
+cn-8fcd701788,甲氧聚二醇重组人促红素,甲氧聚二醇重组人促红素,B03XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03XA 组内英文成分 11 个
+cn-6b6e08aa1e,利可君,利可君,B03XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03XA 组内英文成分 11 个
+cn-0a216b8894,罗特西普,罗特西普,B03XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03XA 组内英文成分 11 个
+cn-aed0cd617c,培莫沙肽,培莫沙肽,B03XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B03XA 组内英文成分 11 个
+cn-9cb8ff29a9,高渗氯化钠羟乙基淀粉40,高渗氯化钠羟乙基淀粉40,B05AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05AA 组内英文成分 16 个
+cn-ee0c4bf3e5,高渗羟乙基淀粉200/0.5氯化钠,高渗羟乙基淀粉200/0.5氯化钠,B05AA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-0cfcdb3430,氨基酸(15)腹膜透析,氨基酸(15)腹膜透析,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-7773b77051,长链脂肪乳,长链脂肪乳,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-745f8361a4,肠外营养,肠外营养,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-015fa0cea2,多种油脂肪乳,多种油脂肪乳,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-35a3b3cd71,维生素,维生素,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-cfd6076448,18种氨基酸,18种氨基酸,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-89e6c5534b,结构脂肪乳,结构脂肪乳,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-aaed64f319,结构脂肪乳(20%)/氨基酸(16)/葡萄糖,结构脂肪乳(20%)/氨基酸(16)/葡萄糖,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-57bc8c2aba,六合氨基酸,六合氨基酸,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-830c51318f,水解蛋白,水解蛋白,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-9c76df2dad,ω-3鱼油脂肪乳,ω-3鱼油脂肪乳,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-2adea44598,ω-3鱼油中/长链脂肪乳,ω-3鱼油中/长链脂肪乳,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-ceff6f236a,ω-3甘油三酯(2%)中/长链脂肪乳/氨基酸(16)/葡萄糖(36%)注射,ω-3甘油三酯(2%)中/长链脂肪乳/氨基酸(16)/葡萄糖(36%)注射,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-e4e2b19ec3,脂肪乳氨基酸,脂肪乳氨基酸,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-ec66d040ab,脂肪乳氨基酸(17)葡萄糖,脂肪乳氨基酸(17)葡萄糖,B05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BA 组内英文成分 12 个
+cn-71935a3a3a,脂肪乳(20%)/氨基酸(15)/葡萄糖,脂肪乳(20%)/氨基酸(15)/葡萄糖,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-6686f5971e,10%脂肪乳(OO)/5.5%氨基酸(15)/葡萄糖,10%脂肪乳(OO)/5.5%氨基酸(15)/葡萄糖,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-307d24c23b,脂肪乳(10%)/氨基酸(15)/葡萄糖,脂肪乳(10%)/氨基酸(15)/葡萄糖,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-42d08f21b7,中长链脂肪乳/氨基酸(16)/葡萄糖,中长链脂肪乳/氨基酸(16)/葡萄糖,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-cb2eca6b98,氨丁三醇,氨丁三醇,B05BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BB 组内英文成分 9 个
+cn-ae03445154,乳酸钠山梨醇,乳酸钠山梨醇,B05BB,,,,none,丢弃[ATC 冲突]：D-sorbitol 与 Sorbitol 是同一成分的不同写法；候选 Sorbitol ATC A06AD18 vs 池内 B05BB
+cn-270bd7fdfc,氯化钾葡萄糖,氯化钾葡萄糖,B05BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BB 组内英文成分 9 个
+cn-1267bbdd5d,钠钾葡萄糖,钠钾葡萄糖,B05BB,Glucose | intravenous sugar solution,glucose,cn2en; db_inn_zh; wikidata_cache,low,不定案：2 个候选（ATC B05BB；盐/酯 Glucose:base_only/intravenous sugar solution:base_only）
+cn-0db68086a2,钠钾镁钙葡萄糖,钠钾镁钙葡萄糖,B05BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05BB 组内英文成分 9 个
+cn-ae9bb00d5f,钠钾镁钙,钠钾镁钙,B05BB,,,,none,丢弃[ATC 冲突]：候选 Calcium Carbonate ATC A12AA04 vs 池内 B05BB；候选 Calcium Acetate ATC A12AA vs 池内 B05BB；候选 Calcium Phosphate ATC V02DE vs 池内 B05BB（另有 4 条线索）
+cn-831434e9dd,葡萄糖电解质,葡萄糖电解质,B05BB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-3416326bc6,抗凝血用枸橼酸钠,抗凝血用枸橼酸钠,B05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05CB 组内英文成分 2 个
+cn-a1d29852ec,血液保存,血液保存,B05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05CB 组内英文成分 2 个
+cn-efbda0f8da,血液保存液Ⅱ,血液保存液Ⅱ,B05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05CB 组内英文成分 2 个
+cn-cabc798b41,血液保存液Ⅲ,血液保存液Ⅲ,B05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05CB 组内英文成分 2 个
+cn-fd9b213eed,山梨醇甘露醇冲,山梨醇甘露醇冲,B05CX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 B05CX 组内唯一英文成分 Glycine，但中文名对不上（不猜，未定案）
+cn-e056597953,无水乙醇,无水乙醇,B05CX,,,,none,丢弃[ATC 无法校验]：候选 Ethanol 在库但无 ATC
+cn-cd1971d171,氨基酸（15）腹膜透析,氨基酸（15）腹膜透析,B05DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 B05DA 组内唯一英文成分 Icodextrin，但中文名对不上（不猜，未定案）
+cn-e439c92e69,艾考糊精腹膜透析,艾考糊精腹膜透析,B05DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 B05DA 组内唯一英文成分 Icodextrin，但中文名对不上（不猜，未定案）
+cn-c1a38cb5a3,低钙腹膜透析,低钙腹膜透析,B05DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 B05DA 组内唯一英文成分 Icodextrin，但中文名对不上（不猜，未定案）
+cn-d907c531cc,腹膜透析,腹膜透析,B05DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 B05DA 组内唯一英文成分 Icodextrin，但中文名对不上（不猜，未定案）
+cn-8deffd3bb8,低钙腹膜透,低钙腹膜透,B05DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 B05DA 组内唯一英文成分 Icodextrin，但中文名对不上（不猜，未定案）
+cn-031ff6257d,氯化钾氯化钠,氯化钾氯化钠,B05XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05XA 组内英文成分 17 个
+cn-024df93441,输血用氯化钠,输血用氯化钠,B05XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B05XA 组内英文成分 17 个
+cn-f36589942b,电解质补给,电解质补给,B05XA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-b46751b5ce,玻璃酸酶,玻璃酸酶,B06AA,Hyaluronidase,hyaluronidase,cn_inn_overrides,high,ATC B06AA vs B06AA03 → L4；盐/酯 same
+cn-f7348bd0dd,芦笋菠萝蛋白酶,芦笋菠萝蛋白酶,B06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B06AA 组内英文成分 3 个
+cn-ac65f65d13,糜蛋白酶,糜蛋白酶,B06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B06AA 组内英文成分 3 个
+cn-9d914cf7e9,胰蛋白酶,胰蛋白酶,B06AA,trypsin,,cn_inn_overrides; wikidata_cache,high,ATC B06AA vs B06AA07 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-c68016cdd8,拉那利尤单抗,拉那利尤单抗,B06AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B06AC 组内英文成分 11 个
+cn-ffbc8072b7,盐酸决奈达隆,盐酸决奈达隆,C01BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01BD 组内英文成分 6 个
+cn-d01f2f8857,盐酸尼非卡兰,盐酸尼非卡兰,C01BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01BD 组内英文成分 6 个
+cn-33e886da05,重酒石酸间羟胺,重酒石酸间羟胺,C01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01CA 组内英文成分 21 个
+cn-36d751da09,盐酸米多君,盐酸米多君,C01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01CA 组内英文成分 21 个
+cn-0ff25be3da,重酒石酸去甲肾上腺素,重酒石酸去甲肾上腺素,C01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01CA 组内英文成分 21 个
+cn-65cf2e3f9b,盐酸去氧肾上腺素,盐酸去氧肾上腺素,C01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01CA 组内英文成分 21 个
+cn-c71aa2ffbc,硝酸戊四醇酯,硝酸戊四醇酯,C01DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DA 组内英文成分 7 个
+cn-88d7b5adcc,戊四硝酯,戊四硝酯,C01DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DA 组内英文成分 7 个
+cn-e145dacdab,盐酸奥昔非君,盐酸奥昔非君,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-74e10266e4,盐酸卡波罗孟,盐酸卡波罗孟,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-efb475ff8b,吗多明,吗多明,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-73a29d7e4e,曲匹地尔,曲匹地尔,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-9153df1536,瑞香素,瑞香素,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-96a6ff736a,维立西呱,维立西呱,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-42162d63dc,乳酸心可定,乳酸心可定,C01DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01DX 组内英文成分 5 个
+cn-6cbf0f6fb9,醋柳黄酮,醋柳黄酮,C01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01EB 组内英文成分 15 个
+cn-e35a7ffefe,人脑利钠肽,人脑利钠肽,C01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01EB 组内英文成分 15 个
+cn-89704a8dec,丹参酮ⅡA磺酸钠,丹参酮ⅡA磺酸钠,C01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01EB 组内英文成分 15 个
+cn-e1d910d382,盐酸关附甲素,盐酸关附甲素,C01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01EB 组内英文成分 15 个
+cn-c6795c8604,瑞加诺生,瑞加诺生,C01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01EB 组内英文成分 15 个
+cn-93037e0a7e,心肌肽,心肌肽,C01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C01EB 组内英文成分 15 个
+cn-fe7f2a57be,罗布麻片Ⅰ,罗布麻片Ⅰ,C02AA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C02AA 组内唯一英文成分 Reserpine，但中文名对不上（不猜，未定案）
+cn-8820e351dc,罗布麻,罗布麻,C02AA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C02AA 组内唯一英文成分 Reserpine，但中文名对不上（不猜，未定案）
+cn-52da9dc65c,罗布麻片Ⅱ,罗布麻片Ⅱ,C02AA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C02AA 组内唯一英文成分 Reserpine，但中文名对不上（不猜，未定案）
+cn-e2e0f9f092,萝芙木,萝芙木,C02AA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C02AA 组内唯一英文成分 Reserpine，但中文名对不上（不猜，未定案）
+cn-d28570a2fd,盐酸可乐定,盐酸可乐定,C02AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02AC 组内英文成分 6 个
+cn-eeb4859f3f,可乐定,可乐定,C02AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02AC 组内英文成分 6 个
+cn-89cbf6a4de,可乐定透皮,可乐定透皮,C02AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02AC 组内英文成分 6 个
+cn-2383be3cc9,丹参川芎嗪,丹参川芎嗪,C02CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02CA 组内英文成分 7 个
+cn-fe8db259ab,穿龙薯蓣皂苷,穿龙薯蓣皂苷,C02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02CX 组内无英文成分
+cn-8e34265b5a,薯蓣皂苷,薯蓣皂苷,C02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02CX 组内无英文成分
+cn-47930a9bd1,银杏达莫,银杏达莫,C02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02CX 组内无英文成分
+cn-8db3b6db9e,银杏蜜环,银杏蜜环,C02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02CX 组内无英文成分
+cn-bb26701c34,安立生坦,安立生坦,C02KX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02KX 组内英文成分 8 个
+cn-972ea051a3,利奥西呱,利奥西呱,C02KX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02KX 组内英文成分 8 个
+cn-6c53be5aa5,马昔腾坦,马昔腾坦,C02KX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02KX 组内英文成分 8 个
+cn-cc59749ed0,利血平氨苯蝶啶,利血平氨苯蝶啶,C02LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02LA 组内无英文成分
+cn-32149353b6,利血平氢氯噻嗪,利血平氢氯噻嗪,C02LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02LA 组内无英文成分
+cn-d6b6e0822c,双嗪利血平,双嗪利血平,C02LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02LA 组内无英文成分
+cn-5e3925d44c,四嗪利血平,四嗪利血平,C02LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02LA 组内无英文成分
+cn-85b26a68bf,地舍平,地舍平,C02LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02LA 组内无英文成分
+cn-1d3dbcdc85,硫酸双肼屈嗪,硫酸双肼屈嗪,C02LG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C02LG 组内无英文成分
+cn-b51037d126,地巴唑氢氯噻嗪,地巴唑氢氯噻嗪,C03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C03AX 组内无英文成分
+cn-da2dca4fa6,葛根氢氯噻嗪,葛根氢氯噻嗪,C03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C03AX 组内无英文成分
+cn-ba7ee51326,三嗪芦丁,三嗪芦丁,C03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C03AX 组内无英文成分
+cn-eaffec441a,氯噻酮,氯噻酮,C03BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C03BA 组内英文成分 7 个
+cn-7bdd1b8ce2,呋噻米,呋噻米,C03CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C03CA 组内英文成分 4 个
+cn-567b7bd086,依普利酮,依普利酮,C03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C03DA 组内英文成分 5 个
+cn-27b92b7358,盐酸布酚宁,盐酸布酚宁,C04AA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C04AA 组内唯一英文成分 Nylidrin，但中文名对不上（不猜，未定案）
+cn-0a5b3fbb04,甘露醇烟酸酯,甘露醇烟酸酯,C04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AC 组内英文成分 2 个
+cn-bcc0f21ed0,甘露六烟酯,甘露六烟酯,C04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AC 组内英文成分 2 个
+cn-649b7fe7c0,烟酸肌醇酯,烟酸肌醇酯,C04AC,,,,none,丢弃[ATC 冲突]：候选 Inositol ATC A11HA07 vs 池内 C04AC
+cn-b5192c62fb,甲磺酸二氢麦角碱,甲磺酸二氢麦角碱,C04AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AE 组内英文成分 4 个
+cn-084a2dcbd6,甲磺酸双氢麦角毒碱,甲磺酸双氢麦角毒碱,C04AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AE 组内英文成分 4 个
+cn-baac1b376a,长春胺,长春胺,C04AX,vincamine,,cn_inn_overrides,high,ATC C04AX vs C04AX07 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-3afb92c2af,毛冬青氯贝酸铝,毛冬青氯贝酸铝,C04AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AX 组内英文成分 8 个
+cn-a2508e4e0b,马来酸桂哌齐特,马来酸桂哌齐特,C04AX,cinepazide,,cn_inn_overrides,medium,ATC C04AX vs C04AX27 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-bc2f721990,盐酸托哌酮,盐酸托哌酮,C04AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AX 组内英文成分 8 个
+cn-8caf5459c9,杏芎氯化钠,杏芎氯化钠,C04AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C04AX 组内英文成分 8 个
+cn-1601480a1b,草木犀流浸,草木犀流浸,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-46deef7774,次没食子酸铋,次没食子酸铋,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-c3d15aa987,角菜酸酯,角菜酸酯,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-52e666c509,次没食子酸铋栓Ⅱ,次没食子酸铋栓Ⅱ,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-829a2ce6a1,红古豆醇酯,红古豆醇酯,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-38b4dc4b47,硫化钠薄荷脑,硫化钠薄荷脑,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-cad24f1963,硫酸铝钾鞣酸,硫酸铝钾鞣酸,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-568e4e6fd8,美辛唑酮,美辛唑酮,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-66d26d9d71,美辛唑酮红古豆醇酯,美辛唑酮红古豆醇酯,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-47cb72a375,鱼石脂颠茄,鱼石脂颠茄,C05AX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C05AX 组内唯一英文成分 Cocoa Butter，但中文名对不上（不猜，未定案）
+cn-63341e98ab,聚多卡醇,聚多卡醇,C05BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C05BB 组内英文成分 6 个
+cn-0757b08560,柑橘黄酮,柑橘黄酮,C05CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C05CA 组内英文成分 8 个
+cn-9478ab00d1,曲肽,曲肽,C05CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C05CA 组内英文成分 8 个
+cn-cd369bc1b5,盐酸普洛萘尔,盐酸普洛萘尔,C07AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C07AA 组内英文成分 7 个
+cn-d3ed623e20,盐酸贝凡洛尔,盐酸贝凡洛尔,C07AB,bevantolol,,wikidata_cache,medium,ATC C07AB vs C07AB06 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-4527716a5e,盐酸兰地洛尔,盐酸兰地洛尔,C07AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C07AB 组内英文成分 14 个
+cn-c5f8b27df7,盐酸阿罗洛尔,盐酸阿罗洛尔,C07AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C07AG 组内英文成分 3 个
+cn-eb88c7b75a,阿折地平,阿折地平,C08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08CA 组内英文成分 17 个
+cn-e0c81b6854,盐酸贝尼地平,盐酸贝尼地平,C08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08CA 组内英文成分 17 个
+cn-3cd575ff5b,盐酸乐卡地平,盐酸乐卡地平,C08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08CA 组内英文成分 17 个
+cn-8e4d1304a1,尼群洛尔,尼群洛尔,C08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08CA 组内英文成分 17 个
+cn-0c461b936d,尼索地平,尼索地平,C08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08CA 组内英文成分 17 个
+cn-bd2d3d49b2,西尼地平,西尼地平,C08CA,cilnidipine,,cn_inn_overrides; wikidata_cache,high,ATC C08CA vs C08CA14 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-9335088441,盐酸苄普地尔,盐酸苄普地尔,C08EA,bepridil,,wikidata_cache,medium,ATC C08EA vs C08EA02 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-fbf47ea258,盐酸洛美利嗪,盐酸洛美利嗪,C08EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08EX 组内英文成分 2 个
+cn-ad1941dc68,阿利沙坦酯,阿利沙坦酯,C09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C09CA 组内英文成分 13 个
+cn-00b379ea3a,美阿沙坦钾,美阿沙坦钾,C09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C09CA 组内英文成分 13 个
+cn-7030b49ff9,坎地氢噻,坎地氢噻,C09DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C09DA 组内无英文成分
+cn-296dffdc2f,非诺贝酸,非诺贝酸,C10AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AB 组内英文成分 6 个
+cn-14b09928a3,阿利西尤单抗,阿利西尤单抗,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-978bac3936,弹性酶,弹性酶,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-8bcfcdcf43,二十碳五烯酸乙酯,二十碳五烯酸乙酯,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-74a2575edb,泛硫乙胺,泛硫乙胺,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-75a1ab9c73,呋咱甲氢龙,呋咱甲氢龙,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-2a5f5bd455,参芪维E,参芪维E,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-3e4cf26729,亚油酸钙,亚油酸钙,C10AX,,,,none,丢弃[ATC 冲突]：候选 Linoleic Acid ATC A11JC vs 池内 C10AX
+cn-9c106c748f,亚油酸乙酯,亚油酸乙酯,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-97de93c744,甘糖酯,甘糖酯,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-1274acf257,海博麦布,海博麦布,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-3be26be4b0,莫海林,莫海林,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-3739e13919,托莱西单抗,托莱西单抗,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-8d75c060b6,ω-3脂肪酸乙酯90,ω-3脂肪酸乙酯90,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-7cc0b156ce,益多酯,益多酯,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-8987ad7be9,蛹油α-亚麻酸乙酯,蛹油α-亚麻酸乙酯,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-3107ad763a,依洛尤单抗,依洛尤单抗,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-2eaa846feb,英克司兰钠,英克司兰钠,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-e1fc7e4ce6,那氟沙星,那氟沙星,D01AA,,,,none,丢弃[ATC 冲突]：候选 nadifloxacin ATC D10AF05 vs 池内 D01AA
+cn-d9497be482,珊瑚姜溶液尿素咪康唑软膏复合制剂,珊瑚姜溶液尿素咪康唑软膏复合制剂,D01AC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-70860f7397,克霉唑药,克霉唑药,D01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AC 组内英文成分 12 个
+cn-d3d4927b13,克霉唑尿素,克霉唑尿素,D01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AC 组内英文成分 12 个
+cn-de721398a6,克霉庆大倍松,克霉庆大倍松,D01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AC 组内英文成分 12 个
+cn-817aced9cd,盐酸奈康唑,盐酸奈康唑,D01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AC 组内英文成分 12 个
+cn-7eaeca2bea,益康倍松,益康倍松,D01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AC 组内英文成分 12 个
+cn-d107b9ec80,硝酸益康唑癣药水,硝酸益康唑癣药水,D01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AC 组内英文成分 12 个
+cn-a75144d0ed,硝酸异康唑,硝酸异康唑,D01AC,isoconazole,,wikidata_cache,medium,ATC D01AC vs D01AC05 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-2db1c19533,盐酸氮芥,盐酸氮芥,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-eafc36d659,二硫化硒,二硫化硒,D01AE,selenium disulfide,,cn_inn_overrides; wikidata_cache,high,ATC D01AE vs D01AE13 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-a604958fd0,呋喃西林,呋喃西林,D01AE,,,,none,丢弃[ATC 冲突]：候选 nitrofurazone ATC B05CA03 vs 池内 D01AE
+cn-09b0a26dfd,柳唑,柳唑,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-c36fafa5ef,五倍子水杨酸,五倍子水杨酸,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-2f02023649,紫荆皮水杨酸,紫荆皮水杨酸,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-213ffee253,利拉萘酯,利拉萘酯,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-175c5602b8,柳烯酸,柳烯酸,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-ff4daf633c,萘替芬酮康唑,萘替芬酮康唑,D01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D01AE 组内英文成分 16 个
+cn-0263adfef7,桉油尿素,桉油尿素,D02AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AE 组内无英文成分
+cn-5b4f0839d6,薄荷柳酯,薄荷柳酯,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-5db93d56fb,苦参水杨酸,苦参水杨酸,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-3bc001ea10,马勃水杨酸,马勃水杨酸,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-d35d4be9b4,水杨酸苯胺甲酯,水杨酸苯胺甲酯,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-d2cc84a2ac,水杨酸苯甲酸,水杨酸苯甲酸,D02AF,,,,none,丢弃[ATC 冲突]：候选 Benzoic Acid ATC D01AE vs 池内 D02AF
+cn-fcd6bc474c,水杨酸复合,水杨酸复合,D02AF,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-3eb3937fc9,水杨酸冰,水杨酸冰,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-26d02f5c50,柳薄樟敏,柳薄樟敏,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-3f2145cdf4,鞣柳硼三酸,鞣柳硼三酸,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-bc41d62ee0,水杨酸苯甲酸松油,水杨酸苯甲酸松油,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-223823c247,水杨酸冰醋酸,水杨酸冰醋酸,D02AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AF 组内无英文成分
+cn-840a8cd424,水杨酸氧化锌,水杨酸氧化锌,D02AF,,,,none,"丢弃[盐/酯不一致]：Zinc Óxido 与 Zinc Oxide 是同一成分的不同写法；候选 Zinc Oxide 标记 ['oxide', 'zinc'] vs 中文名 ['oxide', 'salicylate', 'zinc']"
+cn-eb1cca3250,外用人粒细胞巨噬细胞刺激因子,外用人粒细胞巨噬细胞刺激因子,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-7b527966ff,参皇,参皇,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-e7a9a46dff,弹性火棉,弹性火棉,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-0d7f60d1a2,乳酸,乳酸,D02AX,,,,none,丢弃[ATC 无法校验]：候选 L-Lactic Acid 在库但无 ATC；候选 DL-lactic acid ATC G01AD01 vs 池内 D02AX
+cn-a49a3d3207,甘油醇,甘油醇,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-2f8f0fd94c,肝素钠维E,肝素钠维E,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-e8e3a0b094,硼砂甘油钾,硼砂甘油钾,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-0e8b6a13d2,稀甘油,稀甘油,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-790111985f,参芪鱼肝油,参芪鱼肝油,D03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AA 组内无英文成分
+cn-ad1515315f,鱼肝油氧化锌,鱼肝油氧化锌,D03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AA 组内无英文成分
+cn-1dd2eead7c,牛碱性成纤维细胞生长因子外用,牛碱性成纤维细胞生长因子外用,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-d32ce58a3d,牛碱性成纤维细胞生长因子,牛碱性成纤维细胞生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-71ca03cc67,外用人表皮生长因子,外用人表皮生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-f89dc1e857,外用重组人碱性成纤维细胞生长因子,外用重组人碱性成纤维细胞生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-b47ccb3d21,人碱性成纤维细胞生长因子,人碱性成纤维细胞生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-9346f9a433,外用重组人酸性成纤维细胞生长因子,外用重组人酸性成纤维细胞生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-743f1e0f92,人表皮生长因子,人表皮生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-bf4ccf2951,人表皮生长因子外用,人表皮生长因子外用,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-8af8498439,外用牛碱性成纤维细胞生长因子,外用牛碱性成纤维细胞生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-7578f18779,双磺沙棘桉青,双磺沙棘桉青,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-c8b1f190c3,水杨酸甲酯苯海拉明,水杨酸甲酯苯海拉明,D04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D04AA 组内英文成分 5 个
+cn-1f4488fa6b,盐酸氯环利嗪,盐酸氯环利嗪,D04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D04AA 组内英文成分 5 个
+cn-21ae43a7e7,乙氧苯柳胺,乙氧苯柳胺,D04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D04AA 组内英文成分 5 个
+cn-a8352d2589,盐酸奥布卡因,盐酸奥布卡因,D04AB,,,,none,丢弃[ATC 冲突]：候选 Oxibuprocaína ATC S01HA02 vs 池内 D04AB
+cn-a8c6843f57,达克罗宁薄荷,达克罗宁薄荷,D04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D04AB 组内英文成分 2 个
+cn-5e8273c6d8,水杨酸苯佐卡因,水杨酸苯佐卡因,D04AB,,,,none,丢弃[ATC 冲突]：候选 Benzocaine ATC N01BA05 vs 池内 D04AB
+cn-3f389e904e,樟脑薄荷柳酯,樟脑薄荷柳酯,D04AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D04AX 组内英文成分 4 个
+cn-fd442288d3,地蒽酚,地蒽酚,D05AC,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 D05AC 组内唯一英文成分 Dithranol，但中文名对不上（不猜，未定案）
+cn-cb279fbcfa,本维莫德,本维莫德,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-114fa9694d,卡泊三醇,卡泊三醇,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-de60a9012d,抗人白介素-8鼠单抗,抗人白介素-8鼠单抗,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-d42934617e,卡泊三醇倍他米松,卡泊三醇倍他米松,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-2ea9684873,雷公藤内酯,雷公藤内酯,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-d6b0a69f48,软皂,软皂,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-ac95c48424,他扎罗汀倍他米松,他扎罗汀倍他米松,D05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D05AX 组内英文成分 7 个
+cn-043b07df44,甲硝唑氯己定,甲硝唑氯己定,D06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D06AX 组内英文成分 11 个
+cn-42ffba13d3,磺胺氧化锌,磺胺氧化锌,D06BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D06BA 组内英文成分 4 个
+cn-60bf426d24,灭菌结晶磺胺,灭菌结晶磺胺,D06BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D06BA 组内英文成分 4 个
+cn-b7a3e7714d,人干扰素α2a,人干扰素α2a,D06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D06BB 组内英文成分 12 个
+cn-850d4ed85a,二十二醇,二十二醇,D06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D06BB 组内英文成分 12 个
+cn-90cc82ab9a,酞丁安,酞丁安,D06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D06BB 组内英文成分 12 个
+cn-3001dc311a,戊酸二氟可龙,戊酸二氟可龙,D07AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07AC 组内英文成分 14 个
+cn-39c8565721,十一烯酸锌曲安奈德,十一烯酸锌曲安奈德,D07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07BB 组内无英文成分
+cn-db81849d06,卤米松/三氯生,卤米松/三氯生,D07BC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-d48fee5c95,新霉素氟轻松,新霉素氟轻松,D07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07BC 组内无英文成分
+cn-65f62f3ed8,异康唑二氟可龙,异康唑二氟可龙,D07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07BC 组内无英文成分
+cn-437401e48f,咪康唑氯倍他索,咪康唑氯倍他索,D07BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07BD 组内无英文成分
+cn-7250ce20fa,新氢松,新氢松,D07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07CA 组内无英文成分
+cn-872886f870,氟米松,氟米松,D07CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07CB 组内无英文成分
+cn-56b51fafda,克霉唑倍他米松,克霉唑倍他米松,D07CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07CC 组内无英文成分
+cn-7f4f16de92,酮康他索,酮康他索,D07CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07CD 组内无英文成分
+cn-6a4790d32e,冰樟桉氟轻松,冰樟桉氟轻松,D07XB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07XB 组内无英文成分
+cn-a4fc4de952,氟轻松维B6,氟轻松维B6,D07XC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-642e159cbb,氟轻松尿素,氟轻松尿素,D07XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07XC 组内无英文成分
+cn-1373f5ed21,无极,无极,D07XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07XC 组内无英文成分
+cn-2923cbef06,冻疮,冻疮,D08AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AD 组内英文成分 4 个
+cn-ad8ef97013,硼酸,硼酸,D08AD,orthoboric acid,,cn_inn_overrides; wikidata_cache,high,ATC D08AD vs D08AD → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-499d235977,硼酸氧化锌,硼酸氧化锌,D08AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AD 组内英文成分 4 个
+cn-1692852023,硼酸氧化锌冰,硼酸氧化锌冰,D08AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AD 组内英文成分 4 个
+cn-549f07a7d9,碘-聚醇醚,碘-聚醇醚,D08AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AG 组内英文成分 6 个
+cn-29d960a04a,水杨酸樟碘溶液Ⅰ,水杨酸樟碘溶液Ⅰ,D08AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AG 组内英文成分 6 个
+cn-ac2fd69636,强力碘,强力碘,D08AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AG 组内英文成分 6 个
+cn-98ce2085d0,氯碘羟喹,氯碘羟喹,D08AH,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 D08AH 组内唯一英文成分 Clioquinol，但中文名对不上（不猜，未定案）
+cn-d44549d379,苯扎溴铵,苯扎溴铵,D08AJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AJ 组内英文成分 7 个
+cn-098bb8a93c,稀戊二醛,稀戊二醛,D08AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D08AX 组内英文成分 18 个
+cn-32b596bec6,呋喃西林止血膏布,呋喃西林止血膏布,D09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D09AA 组内无英文成分
+cn-55faf110c6,硫磺硼砂,硫磺硼砂,D10AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D10AB 组内英文成分 2 个
+cn-3785ac9cce,维胺酯维E,维胺酯维E,D10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D10AD 组内英文成分 3 个
+cn-c94867c0ad,间苯二酚,间苯二酚,D10AX,resorcin,,cn_inn_overrides; wikidata_cache,high,ATC D10AX vs D10AX02 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-9e2f5cc0b0,人参间苯二酚,人参间苯二酚,D10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D10AX 组内英文成分 6 个
+cn-e5acae70f8,间苯二酚水杨酸,间苯二酚水杨酸,D10AX,resorcin,,wikidata_cache,medium,ATC D10AX vs D10AX02 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-12fd704afc,甲硝唑棒,甲硝唑棒,D10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D10AX 组内英文成分 6 个
+cn-5d8650e628,度普利尤单抗,度普利尤单抗,D11AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AH 组内英文成分 9 个
+cn-eb50c85048,吡硫翁钠,吡硫翁钠,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-f99da02152,吡美莫司,吡美莫司,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-55bb04baf2,薄荷麝香草酚,薄荷麝香草酚,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-daad2ca623,丁苯羟酸,丁苯羟酸,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-2e34d4bc45,丁香罗勒油,丁香罗勒油,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-36fdbb4e74,硫酸氢黄连素,硫酸氢黄连素,D11AX,,,,none,丢弃[ATC 冲突]：候选 Berberine ATC A07AX vs 池内 D11AX
+cn-400575095b,炉甘石外用,炉甘石外用,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-b8d4993b00,麝香草酚撒,麝香草酚撒,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-7ad4bad9ef,氟芬那酸丁酯,氟芬那酸丁酯,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-d9ce3349d0,谷固醇,谷固醇,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-0ab7329958,甲胂酸钠,甲胂酸钠,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-39ac2bb93b,浓煤焦油,浓煤焦油,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-a0eaaed8fe,猪胆粉薄荷脑,猪胆粉薄荷脑,D11AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AX 组内英文成分 13 个
+cn-ae7498e4f5,甲硝维参,甲硝维参,G01AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AF 组内英文成分 5 个
+cn-d4c27a6761,甲硝维参阴道膨胀,甲硝维参阴道膨胀,G01AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AF 组内英文成分 5 个
+cn-f93d4018d1,氯己定甲硝唑,氯己定甲硝唑,G01AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AF 组内英文成分 5 个
+cn-372c6e8722,双唑泰阴道膨胀,双唑泰阴道膨胀,G01AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AF 组内英文成分 5 个
+cn-8b88becb1d,硝酸益康唑阴道膨胀,硝酸益康唑阴道膨胀,G01AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AF 组内英文成分 5 个
+cn-6b22d83c53,特康唑,特康唑,G01AG,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 G01AG 组内唯一英文成分 Terconazole，但中文名对不上（不猜，未定案）
+cn-49125dbc7a,甲硝氯己冰片阴道膨胀,甲硝氯己冰片阴道膨胀,G01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AX 组内英文成分 3 个
+cn-7d884a2f56,黄藤素,黄藤素,G01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AX 组内英文成分 3 个
+cn-03bb42aa52,苦参碱阴道膨胀,苦参碱阴道膨胀,G01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G01AX 组内英文成分 3 个
+cn-446df7da56,乳酸菌,乳酸菌,G02CC,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 G02CC 组内唯一英文成分 Houttuynin，但中文名对不上（不猜，未定案）
+cn-b0aabc939b,醋酸阿托西班,醋酸阿托西班,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-6dfccefdee,人干扰素α2а,人干扰素α2а,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-7126069fe8,醋酸棉酚,醋酸棉酚,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-23e8cbd92b,四维女贞子,四维女贞子,G02CX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-5940e516c1,王不留行,王不留行,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-466dd6d609,卡波姆产道,卡波姆产道,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-38a7678abf,门冬酰胺,门冬酰胺,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-bcd87be92c,阴道用乳杆菌活菌,阴道用乳杆菌活菌,G02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G02CX 组内英文成分 9 个
+cn-b568f4e9af,庚酸炔诺酮,庚酸炔诺酮,G03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03AA 组内英文成分 5 个
+cn-10faaf24f1,已酸羟孕酮,已酸羟孕酮,G03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03AA 组内英文成分 5 个
+cn-cc5b160cb1,甲地孕酮,甲地孕酮,G03AA,megestrol acetate,,wikidata_cache,medium,ATC G03AA vs G03AC05 → L3；盐/酯 extra；候选 INN 不在库（后续需新增 substance）；候选 Megestrol ATC L02AB01 vs 池内 G03AA
+cn-e7ad153484,炔诺酮,炔诺酮,G03AA,norethisterone,,cn_inn_overrides,medium,ATC G03AA vs G03AC01 → L3；盐/酯 same；候选 INN 不在库（后续需新增 substance）；候选 Noretisterona ATC G03DC02 vs 池内 G03AA
+cn-ac01d00708,双炔失碳酯,双炔失碳酯,G03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03AA 组内英文成分 5 个
+cn-fa9e3fae9d,屈螺酮炔雌醇,屈螺酮炔雌醇,G03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03AA 组内英文成分 5 个
+cn-314c604079,去氧孕烯炔雌醇,去氧孕烯炔雌醇,G03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03AA 组内英文成分 5 个
+cn-93d770cb41,依托孕烯植入剂,依托孕烯植入剂,G03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03AC 组内英文成分 3 个
+cn-4a7cd0534c,苯甲酸雌二醇,苯甲酸雌二醇,G03CA,Estradiol,estradiol,alias_group; atc5_exact; cn2en; cn_inn_overrides; db_inn_zh; wikidata_cache,medium,ATC G03CA vs G03CA03 → L4；盐/酯 base_only；17β-estradiol 与 Estradiol 是同一成分的不同写法
+cn-34b7e9e314,结合雌激素,结合雌激素,G03CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03CA 组内英文成分 12 个
+cn-a9cb857f66,普罗雌烯,普罗雌烯,G03CA,promestriene,promestrieno,atc5_exact; cn_inn_overrides; wikidata_cache,high,ATC G03CA vs G03CA09 → L4；盐/酯 same
+cn-75f6bd11d5,尼尔雌醇,尼尔雌醇,G03CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03CB 组内英文成分 2 个
+cn-a321aa2b54,替勃龙,替勃龙,G03CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03CX 组内英文成分 2 个
+cn-703b826ec4,硫酸普拉睾酮钠,硫酸普拉睾酮钠,G03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03DA 组内英文成分 4 个
+cn-319fa6169e,醋酸甲地孕酮口服,醋酸甲地孕酮口服,G03DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03DB 组内英文成分 5 个
+cn-fe4bf4e8d8,炔雌醇环丙孕酮,炔雌醇环丙孕酮,G03EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03EB 组内无英文成分
+cn-7bb29df0c4,八维甲睾酮,八维甲睾酮,G03EK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03EK 组内无英文成分
+cn-fe61a6525e,雌二醇屈螺酮,雌二醇屈螺酮,G03FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 G03FA 组内唯一英文成分 Ethisterone，但中文名对不上（不猜，未定案）
+cn-c51d3ac30c,雌二醇片/雌二醇地屈孕酮片复合包装,雌二醇片/雌二醇地屈孕酮片复合包装,G03FB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-3c9c556237,戊酸雌二醇片/雌二醇环丙孕酮片复合包装,戊酸雌二醇片/雌二醇环丙孕酮片复合包装,G03FB,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-61b38ff469,促卵泡素β,促卵泡素β,G03GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03GA 组内英文成分 17 个
+cn-c92123976c,人促黄体激素α,人促黄体激素α,G03GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03GA 组内英文成分 17 个
+cn-54e3c115e8,高纯度尿促性素,高纯度尿促性素,G03GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03GA 组内英文成分 17 个
+cn-a7781246dd,尿促卵泡素,尿促卵泡素,G03GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03GA 组内英文成分 17 个
+cn-9d18fc05b7,尿促卵泡激素,尿促卵泡激素,G03GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03GA 组内英文成分 17 个
+cn-21c941eaf8,盐酸丙哌维林,盐酸丙哌维林,G04BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G04BD 组内英文成分 17 个
+cn-0569dbe12e,枸橼酸爱地那非,枸橼酸爱地那非,G04BE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G04BE 组内英文成分 6 个
+cn-0d81a1da00,包醛氧淀,包醛氧淀,G04BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G04BX 组内英文成分 9 个
+cn-7f59d02b3f,枸橼酸氢钾钠,枸橼酸氢钾钠,G04BX,,,,none,丢弃[ATC 冲突]：候选 Sodium Bicarbonate ATC A02AH vs 池内 G04BX；候选 potassium hydrogen carbonate ATC A12BA04 vs 池内 G04BX；候选 potassium hydrogen tartrate ATC A12BA03 vs 池内 G04BX（另有 1 条线索）
+cn-80c6d53c99,氧化淀,氧化淀,G04BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G04BX 组内英文成分 9 个
+cn-ad15d926c7,爱普列特,爱普列特,G04CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G04CB 组内英文成分 2 个
+cn-7d9a573c1b,蓝棕果,蓝棕果,G04CX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 G04CX 组内唯一英文成分 Serenoa Repens，但中文名对不上（不猜，未定案）
+cn-55090077ff,普适泰,普适泰,G04CX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 G04CX 组内唯一英文成分 Serenoa Repens，但中文名对不上（不猜，未定案）
+cn-b2192754c1,鞣酸加压素,鞣酸加压素,H01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H01BA 组内英文成分 7 个
+cn-36b837c873,卡贝缩宫素,卡贝缩宫素,H01BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H01BB 组内英文成分 2 个
+cn-1de37d611a,醋酸奥曲肽微球,醋酸奥曲肽微球,H01CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H01CB 组内英文成分 7 个
+cn-2ab45ec1cb,人绒促性素,人绒促性素,H01CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H01CC 组内英文成分 5 个
+cn-896623ab85,醋酸加尼瑞克,醋酸加尼瑞克,H01CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H01CC 组内英文成分 5 个
+cn-87097d0d5b,醋酸西曲瑞克,醋酸西曲瑞克,H01CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H01CC 组内英文成分 5 个
+cn-c90b6c81a4,氢化泼尼松,氢化泼尼松,H02AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H02AB 组内英文成分 8 个
+cn-097de24d28,曲安西龙,曲安西龙,H02AB,,,,none,丢弃[ATC 冲突]：候选 Triamcinolone ATC A01AC vs 池内 H02AB
+cn-a81d3cbcab,甲基硫氧嘧啶,甲基硫氧嘧啶,H03BA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 H03BA 组内唯一英文成分 Propylthiouracil，但中文名对不上（不猜，未定案）
+cn-6185d69d6a,盐酸依特卡肽,盐酸依特卡肽,H05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H05BX 组内英文成分 6 个
+cn-90f4b07770,盐酸胍甲环素,盐酸胍甲环素,J01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01AA 组内英文成分 13 个
+cn-fec44e2669,盐酸依拉环素,盐酸依拉环素,J01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01AA 组内英文成分 13 个
+cn-438cce9b55,棕榈氯霉素,棕榈氯霉素,J01BA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 J01BA 组内唯一英文成分 Thiamphenicol，但中文名对不上（不猜，未定案）
+cn-09797eb875,呋苄西林钠,呋苄西林钠,J01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01CA 组内英文成分 15 个
+cn-6583930e10,呋布西林钠,呋布西林钠,J01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01CA 组内英文成分 15 个
+cn-03a49a3ec9,呋脲苄青霉素钾,呋脲苄青霉素钾,J01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01CA 组内英文成分 15 个
+cn-0e557af5a6,盐酸仑氨西林,盐酸仑氨西林,J01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01CA 组内英文成分 15 个
+cn-e5070d3b31,羧苄西林钠,羧苄西林钠,J01CA,carbenicillin,,wikidata_cache,medium,ATC J01CA vs J01CA03 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-a34d491378,头孢西酮钠,头孢西酮钠,J01DB,cefazedone,,wikidata_cache,medium,ATC J01DB vs J01DB06 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-7f8b37ec58,五水头孢唑林钠,五水头孢唑林钠,J01DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DB 组内英文成分 12 个
+cn-19638b4dbc,氟氧头孢钠,氟氧头孢钠,J01DC,flomoxef,,wikidata_cache,medium,ATC J01DC vs J01DC14 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-b27577bf3a,克洛己新,克洛己新,J01DC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DC 组内英文成分 14 个
+cn-1d8454423f,头孢特仑新戊酯,头孢特仑新戊酯,J01DD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DD 组内英文成分 19 个
+cn-d088787153,头孢妥仑匹酯,头孢妥仑匹酯,J01DD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DD 组内英文成分 19 个
+cn-639fcd2043,头孢托仑匹酯,头孢托仑匹酯,J01DD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DD 组内英文成分 19 个
+cn-d4f6d6b6a0,盐酸头孢卡品酯,盐酸头孢卡品酯,J01DD,cefcapene,,wikidata_cache,medium,ATC J01DD vs J01DD17 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-9f12a7ce49,比阿培南,比阿培南,J01DH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DH 组内英文成分 8 个
+cn-c0dca386b2,法罗培南钠,法罗培南钠,J01DI,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DI 组内英文成分 6 个
+cn-30e306dcbb,头孢比罗酯钠,头孢比罗酯钠,J01DI,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01DI 组内英文成分 6 个
+cn-843e46d77b,磺胺对甲氧嘧啶,磺胺对甲氧嘧啶,J01ED,sulphamethoxydiazine,,cn_inn_overrides; wikidata_cache,high,ATC J01ED vs J01ED04 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-1c132a6064,磺胺间甲氧嘧啶,磺胺间甲氧嘧啶,J01ED,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 J01ED 组内唯一英文成分 Sulfamethoxypyridazine，但中文名对不上（不猜，未定案）
+cn-824b3c6206,磺胺林,磺胺林,J01ED,sulfalene,,cn_inn_overrides; wikidata_cache,high,ATC J01ED vs J01ED02 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-b5b0f47be4,磺啶冰黄,磺啶冰黄,J01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01EE 组内无英文成分
+cn-0bcdd7ee3c,联磺甲氧苄碇,联磺甲氧苄碇,J01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01EE 组内无英文成分
+cn-da2eeb42ff,双磺甲氧苄啶,双磺甲氧苄啶,J01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01EE 组内无英文成分
+cn-139d9599e7,双嘧啶,双嘧啶,J01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01EE 组内无英文成分
+cn-e9215880dc,乳糖酸阿奇霉素,乳糖酸阿奇霉素,J01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01FA 组内英文成分 17 个
+cn-66a2d5dee6,红霉素肠溶微,红霉素肠溶微,J01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01FA 组内英文成分 17 个
+cn-20d55beab8,环酯红霉素,环酯红霉素,J01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01FA 组内英文成分 17 个
+cn-6805b038c2,交沙霉素,交沙霉素,J01FA,josamycin,josamicina,atc5_exact; cn_inn_overrides; wikidata_cache,high,ATC J01FA vs J01FA07 → L4；盐/酯 same
+cn-710b74c828,丙酸交沙霉素,丙酸交沙霉素,J01FA,josamycin,josamicina,atc5_exact; wikidata_cache,medium,ATC J01FA vs J01FA07 → L4；盐/酯 base_only
+cn-13212322a5,乳糖酸克拉霉素,乳糖酸克拉霉素,J01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01FA 组内英文成分 17 个
+cn-d3d669aaa0,可利霉素,可利霉素,J01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01FA 组内英文成分 17 个
+cn-92991dccd0,乙酰麦迪霉素,乙酰麦迪霉素,J01FA,Midecamycin,midecamycin,cn_inn_overrides,medium,ATC J01FA vs J01FA → L4；盐/酯 base_only
+cn-d815a52314,盐酸安妥沙星,盐酸安妥沙星,J01MA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MA 组内英文成分 12 个
+cn-2bb338cd78,巴洛沙星,巴洛沙星,J01MA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MA 组内英文成分 12 个
+cn-8a89512b21,盐酸芦氟沙星,盐酸芦氟沙星,J01MA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MA 组内英文成分 12 个
+cn-970a437917,普卢利沙星,普卢利沙星,J01MA,prulifloxacin,,cn_inn_overrides,high,ATC J01MA vs J01MA17 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-0ed19799d0,甲苯磺酸妥舒沙星,甲苯磺酸妥舒沙星,J01MA,tosufloxacin,,wikidata_cache,medium,ATC J01MA vs J01MA22 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-ccd6d53222,甲苯磺酸托氟沙星,甲苯磺酸托氟沙星,J01MA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MA 组内英文成分 12 个
+cn-a0a548096f,西他沙星,西他沙星,J01MA,sitafloxacin,,cn_inn_overrides; wikidata_cache,high,ATC J01MA vs J01MA21 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-44039e9ace,苹果酸奈诺沙星,苹果酸奈诺沙星,J01MB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MB 组内英文成分 2 个
+cn-88f537084e,苹果酸奈诺沙星氯化钠,苹果酸奈诺沙星氯化钠,J01MB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MB 组内英文成分 2 个
+cn-5db4b9ff4a,盐酸去甲万古霉素,盐酸去甲万古霉素,J01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XA 组内英文成分 5 个
+cn-6f2e56c83e,合成鱼腥草素,合成鱼腥草素,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-a184e86f6f,硫酸黏菌素,硫酸黏菌素,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-5772760bd4,康替唑胺,康替唑胺,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-9dbba70589,磷霉素钙甲氧苄啶,磷霉素钙甲氧苄啶,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-5b25dfb7a7,青霉素皮试剂,青霉素皮试剂,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-031924cdd6,磷酸特地唑胺,磷酸特地唑胺,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-94287925bf,马尿酸乌洛托品,马尿酸乌洛托品,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-ddf8469cfb,新鱼腥草素钠,新鱼腥草素钠,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-c5e44f42b7,奥特康唑,奥特康唑,J02AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J02AC 组内英文成分 6 个
+cn-4a92f3756d,泊沙康唑口服,泊沙康唑口服,J02AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J02AC 组内英文成分 6 个
+cn-2e37114b9b,克念菌素,克念菌素,J02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J02AX 组内英文成分 6 个
+cn-dce7c997b6,制霉素,制霉素,J02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J02AX 组内英文成分 6 个
+cn-c1ad6d2fe8,环丝氨酸,环丝氨酸,J04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AB 组内英文成分 7 个
+cn-7a6d947fee,丙硫异烟胺,丙硫异烟胺,J04AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AD 组内英文成分 2 个
+cn-36e010cead,富马酸贝达喹啉,富马酸贝达喹啉,J04AK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AK 组内英文成分 7 个
+cn-cee392e00b,德拉马尼,德拉马尼,J04AK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AK 组内英文成分 7 个
+cn-8afd8a9710,母牛分枝杆菌,母牛分枝杆菌,J04AK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AK 组内英文成分 7 个
+cn-99eb97f932,乙胺吡嗪利福异烟,乙胺吡嗪利福异烟,J04AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AM 组内无英文成分
+cn-b9b2850725,乙胺利福异烟,乙胺利福异烟,J04AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AM 组内无英文成分
+cn-ab542c2d79,异福,异福,J04AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AM 组内无英文成分
+cn-66d705a221,利福平异烟肼,利福平异烟肼,J04AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AM 组内无英文成分
+cn-733fd80719,异福酰胺,异福酰胺,J04AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AM 组内无英文成分
+cn-9bdf2dd026,溴夫定,溴夫定,J05AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AB 组内英文成分 15 个
+cn-2002b5b99b,奈玛特韦片/利托那韦片组合包装,奈玛特韦片/利托那韦片组合包装,J05AE,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-7ef36ffd89,艾米替诺福韦,艾米替诺福韦,J05AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AF 组内英文成分 22 个
+cn-06584707d6,恩夫韦肽,恩夫韦肽,J05AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AF 组内英文成分 22 个
+cn-55e8f89f3c,恩曲他滨,恩曲他滨,J05AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AF 组内英文成分 22 个
+cn-90d5ce9f05,恩曲他滨替诺福韦,恩曲他滨替诺福韦,J05AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AF 组内英文成分 22 个
+cn-ca216abef7,艾诺韦林,艾诺韦林,J05AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AG 组内英文成分 7 个
+cn-9669ff8acf,利匹韦林,利匹韦林,J05AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AG 组内英文成分 7 个
+cn-6102aa8371,帕拉米韦氯化钠,帕拉米韦氯化钠,J05AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AH 组内英文成分 4 个
+cn-ea6b2d2b80,帕拉米韦,帕拉米韦,J05AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AH 组内英文成分 4 个
+cn-727598fec2,卡替拉韦钠,卡替拉韦钠,J05AJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AJ 组内英文成分 4 个
+cn-e7e49e2258,卡替拉韦,卡替拉韦,J05AJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AJ 组内英文成分 4 个
+cn-18802da46e,阿舒瑞韦,阿舒瑞韦,J05AP,Asunaprevir,mx-es-asunaprevir,cn_inn_overrides; wikidata_cache,high,ATC J05AP vs J05AP06 → L4；盐/酯 same
+cn-eb32bc9cc4,艾尔巴韦格拉瑞韦,艾尔巴韦格拉瑞韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-b232da5085,奥磷布韦,奥磷布韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-a68929a039,达诺瑞韦钠,达诺瑞韦钠,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-222a4a9fcc,格卡瑞韦哌仑他韦,格卡瑞韦哌仑他韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-b936982c12,盐酸可洛派韦,盐酸可洛派韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-336ce005c3,来迪派韦索磷布韦,来迪派韦索磷布韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-aef915dbde,盐酸拉维达韦,盐酸拉维达韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-7769dda9c4,索磷布韦维帕他韦,索磷布韦维帕他韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-020ee5d406,索磷维伏,索磷维伏,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-c9234585d0,磷酸依米他韦,磷酸依米他韦,J05AP,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AP 组内英文成分 13 个
+cn-cb24700bc1,阿巴卡韦拉米夫定,阿巴卡韦拉米夫定,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-f2ed72a28d,艾博韦泰,艾博韦泰,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-43f2060bfb,艾考恩丙替,艾考恩丙替,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-9ab8bd3b95,阿兹夫定,阿兹夫定,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-11945669f0,艾诺米替,艾诺米替,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-4c705f7128,比克恩丙诺,比克恩丙诺,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-2d48a57cc1,多替阿巴拉米,多替阿巴拉米,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-10c0b32a57,达芦那韦考比司他,达芦那韦考比司他,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-df4d1b8314,多拉米替,多拉米替,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-eb83ca28a6,恩曲他滨丙酚替诺福韦,恩曲他滨丙酚替诺福韦,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-83600744d6,齐多拉米双夫定,齐多拉米双夫定,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-e425ce3c35,依非米替,依非米替,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-d4f254da9a,奥比帕利,奥比帕利,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-14cb26e76e,安巴韦单抗,安巴韦单抗,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-85b1ba9f8b,阿泰特韦片/利托那韦片组合包装,阿泰特韦片/利托那韦片组合包装,J05AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-9fe22b4b5d,细胞因子基因衍生蛋白,细胞因子基因衍生蛋白,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-c6b0e4472e,氢溴酸氘瑞米德韦,氢溴酸氘瑞米德韦,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-c66b4cbcff,罗米司韦单抗,罗米司韦单抗,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-d2fc24484a,来特莫韦,来特莫韦,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-dc748898d6,来瑞特韦,来瑞特韦,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-e44f2f88d0,盐酸吗啉呱,盐酸吗啉呱,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-da1729ed0a,先诺特韦片/利托那韦片组合包装,先诺特韦片/利托那韦片组合包装,J05AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-e07218390b,A型肉毒毒素,A型肉毒毒素,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-845175a00f,抗蝮蛇毒血清,抗蝮蛇毒血清,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-2cb45d501c,抗狂犬病血清,抗狂犬病血清,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-690ce634cb,抗五步蛇毒血清,抗五步蛇毒血清,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-c74388d5b2,抗眼镜蛇毒血清,抗眼镜蛇毒血清,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-08854a47df,抗银环蛇毒血清,抗银环蛇毒血清,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-42663a275d,破伤风抗毒素,破伤风抗毒素,J06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06AA 组内英文成分 4 个
+cn-d40a360e23,白葡奈氏菌,白葡奈氏菌,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-94b0ddcb74,白葡萄球菌,白葡萄球菌,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-0bed1ef9c3,灭活白葡萄球菌,灭活白葡萄球菌,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-42cec7f959,静注乙型肝炎人免疫球蛋白,静注乙型肝炎人免疫球蛋白,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-4fa68ec8a3,冻干静注乙型肝炎人免疫球蛋白,冻干静注乙型肝炎人免疫球蛋白,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-6c3270fc04,马破伤风免疫球蛋白(F(ab')2),马破伤风免疫球蛋白(F(ab')2),J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-64217a9ee8,细菌溶解产物,细菌溶解产物,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-8bf9fa9d3e,ACYW135群脑膜炎球菌多糖疫苗,ACYW135群脑膜炎球菌多糖疫苗,J07AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AH 组内英文成分 12 个
+cn-958697d849,A群C群脑膜炎球菌多糖疫苗,A群C群脑膜炎球菌多糖疫苗,J07AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AH 组内英文成分 12 个
+cn-e0a61cc72d,A群C群脑膜炎球菌多糖结合疫苗,A群C群脑膜炎球菌多糖结合疫苗,J07AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AH 组内英文成分 12 个
+cn-c440c82729,A、C群脑膜炎球菌结合疫苗,A、C群脑膜炎球菌结合疫苗,J07AH,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-d974c5b152,AC群脑膜炎球菌(结合)B型流感嗜血杆菌(结合)联合疫苗,AC群脑膜炎球菌(结合)B型流感嗜血杆菌(结合)联合疫苗,J07AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AH 组内英文成分 12 个
+cn-e12149a51c,ACYW135群脑膜炎球菌多糖结合疫苗,ACYW135群脑膜炎球菌多糖结合疫苗,J07AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AH 组内英文成分 12 个
+cn-eb5daad520,吸附破伤风疫苗,吸附破伤风疫苗,J07AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AM 组内英文成分 4 个
+cn-b37a43630b,A群脑膜炎球菌多糖疫苗,A群脑膜炎球菌多糖疫苗,J07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AX 组内英文成分 2 个
+cn-cedb081533,钩端螺旋体疫苗,钩端螺旋体疫苗,J07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07AX 组内英文成分 2 个
+cn-2b45abc1c1,甲型H1N1流感病毒裂解疫苗,甲型H1N1流感病毒裂解疫苗,J07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BB 组内英文成分 8 个
+cn-1227962c98,流感病毒亚单位疫苗,流感病毒亚单位疫苗,J07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BB 组内英文成分 8 个
+cn-9f14dcd630,流感病毒裂解疫苗,流感病毒裂解疫苗,J07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BB 组内英文成分 8 个
+cn-7c01ced474,冻干鼻喷流感减毒活疫苗,冻干鼻喷流感减毒活疫苗,J07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BB 组内英文成分 8 个
+cn-edd48725a8,四价流感病毒裂解疫苗,四价流感病毒裂解疫苗,J07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BB 组内英文成分 8 个
+cn-76c55dab5e,四价流感病毒亚单位疫苗,四价流感病毒亚单位疫苗,J07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BB 组内英文成分 8 个
+cn-0d8e446571,戊型肝炎疫苗,戊型肝炎疫苗,J07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BC 组内英文成分 8 个
+cn-8f49ce18aa,冻干甲型肝炎减毒活疫苗,冻干甲型肝炎减毒活疫苗,J07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BC 组内英文成分 8 个
+cn-7ff89e7f7b,甲型乙型肝炎联合疫苗,甲型乙型肝炎联合疫苗,J07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BC 组内英文成分 8 个
+cn-3cf51ccc35,甲型肝炎灭活疫苗,甲型肝炎灭活疫苗,J07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BC 组内英文成分 8 个
+cn-f88f534917,麻疹腮腺炎联合减毒活疫苗,麻疹腮腺炎联合减毒活疫苗,J07BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BD 组内英文成分 2 个
+cn-9b1f32ae7b,麻疹风疹联合减毒活疫苗,麻疹风疹联合减毒活疫苗,J07BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BD 组内英文成分 2 个
+cn-99e4bcce6c,麻疹减毒活疫苗,麻疹减毒活疫苗,J07BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BD 组内英文成分 2 个
+cn-67f271692f,腮腺炎减毒活疫苗,腮腺炎减毒活疫苗,J07BE,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 J07BE 组内唯一英文成分 Mumps Virus Vaccine Live Attenuated，但中文名对不上（不猜，未定案）
+cn-10c614dac8,风疹减毒活疫苗,风疹减毒活疫苗,J07BJ,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 J07BJ 组内唯一英文成分 Rubella Virus Vaccine Live Attenuated，但中文名对不上（不猜，未定案）
+cn-23d2fad492,麻腮风联合减毒活疫苗,麻腮风联合减毒活疫苗,J07BJ,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 J07BJ 组内唯一英文成分 Rubella Virus Vaccine Live Attenuated，但中文名对不上（不猜，未定案）
+cn-d576ab0bc2,带状疱疹疫苗,带状疱疹疫苗,J07BK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BK 组内英文成分 6 个
+cn-3a2d7987cb,带状疱疹减毒活疫苗,带状疱疹减毒活疫苗,J07BK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BK 组内英文成分 6 个
+cn-d10d352cf6,水痘减毒活疫苗,水痘减毒活疫苗,J07BK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BK 组内英文成分 6 个
+cn-2824be1984,肠道病毒71型灭活疫苗,肠道病毒71型灭活疫苗,J07BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BX 组内英文成分 15 个
+cn-aca7149105,新型冠状病毒疫苗,新型冠状病毒疫苗,J07BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BX 组内英文成分 15 个
+cn-92eac5f397,新型冠状病毒蛋白疫苗,新型冠状病毒蛋白疫苗,J07BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07BX 组内英文成分 15 个
+cn-d6f63fbc0c,无细胞百白破b型流感嗜血杆菌联合疫苗,无细胞百白破b型流感嗜血杆菌联合疫苗,J07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07CA 组内英文成分 2 个
+cn-0d895f849e,吸附白喉破伤风联合疫苗,吸附白喉破伤风联合疫苗,J07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07CA 组内英文成分 2 个
+cn-4c1a7d18aa,吸附无细胞百白破联合疫苗,吸附无细胞百白破联合疫苗,J07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07CA 组内英文成分 2 个
+cn-ceb172ee8d,吸咐无细胞百白破联合疫苗,吸咐无细胞百白破联合疫苗,J07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07CA 组内英文成分 2 个
+cn-2e00e166d6,吸附无细胞百白破灭活脊髓灰质炎和b型流感嗜血杆菌(结合)联合疫,吸附无细胞百白破灭活脊髓灰质炎和b型流感嗜血杆菌(结合)联合疫,J07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07CA 组内英文成分 2 个
+cn-be2f73ebf2,双价肾综合征出血热灭活疫苗,双价肾综合征出血热灭活疫苗,J07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J07XX 组内无英文成分
+cn-087a674862,盐酸苯达莫司汀,盐酸苯达莫司汀,L01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01AA 组内英文成分 15 个
+cn-6d3b47d090,甘磷酰芥,甘磷酰芥,L01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01AA 组内英文成分 15 个
+cn-62467e488c,硝卡芥,硝卡芥,L01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01AA 组内英文成分 15 个
+cn-4315edf347,福莫司汀,福莫司汀,L01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01AD 组内英文成分 5 个
+cn-c4d9938c60,盐酸尼莫司汀,盐酸尼莫司汀,L01AD,nimustine,,wikidata_cache,medium,ATC L01AD vs L01AD06 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-a81c6d1750,司莫司汀,司莫司汀,L01AD,semustine,,cn_inn_overrides; wikidata_cache,high,ATC L01AD vs L01AD03 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-121b901ee7,二溴甘露醇,二溴甘露醇,L01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01AX 组内英文成分 3 个
+cn-42bd20167d,氟脲苷,氟脲苷,L01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01BC 组内英文成分 11 个
+cn-7884949cb9,卡莫氟,卡莫氟,L01BC,carmofur,,cn_inn_overrides; wikidata_cache,high,ATC L01BC vs L01BC04 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-ae35a4a811,尿嘧啶替加氟,尿嘧啶替加氟,L01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01BC 组内英文成分 11 个
+cn-5ed348e33d,去氧氟尿苷,去氧氟尿苷,L01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01BC 组内英文成分 11 个
+cn-91f62b51c5,曲氟尿苷替匹嘧啶,曲氟尿苷替匹嘧啶,L01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01BC 组内英文成分 11 个
+cn-104d15700b,重酒石酸长春瑞滨,重酒石酸长春瑞滨,L01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CA 组内英文成分 8 个
+cn-e54900ed70,紫杉醇脂质体,紫杉醇脂质体,L01CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CD 组内英文成分 3 个
+cn-76054e82d8,盐酸伊立替康脂质体,盐酸伊立替康脂质体,L01CE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CE 组内英文成分 3 个
+cn-9cae0f8dee,斑蝥酸钠,斑蝥酸钠,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-0c4446cd40,斑蝥酸钠维生素B6,斑蝥酸钠维生素B6,L01CX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-129c6e75c1,草乌甲素,草乌甲素,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-4b5bb3b82e,甲基斑蝥胺,甲基斑蝥胺,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-5f144cec8f,榄香烯,榄香烯,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-1a3d29a96f,榄香烯口服乳,榄香烯口服乳,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-2d17de92e5,去甲斑蝥素,去甲斑蝥素,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-cebbd7bbc1,去甲斑蝥酸钠,去甲斑蝥酸钠,L01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01CX 组内英文成分 3 个
+cn-6324366133,放线菌素D,放线菌素D,L01DA,actinomycin,,cn_inn_overrides,high,ATC L01DA vs L01DA → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-8beb5736bb,新福菌素,新福菌素,L01DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 L01DA 组内唯一英文成分 Dactinomycin，但中文名对不上（不猜，未定案）
+cn-b87fea2a8d,盐酸阿柔比星,盐酸阿柔比星,L01DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01DB 组内英文成分 16 个
+cn-11ff8a4972,示踪用盐酸米托蒽醌,示踪用盐酸米托蒽醌,L01DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01DB 组内英文成分 16 个
+cn-f3a999786d,盐酸伊达比星,盐酸伊达比星,L01DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01DB 组内英文成分 16 个
+cn-de50f9d297,盐酸平阳霉素,盐酸平阳霉素,L01DC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01DC 组内英文成分 5 个
+cn-5b6808bd1c,丝裂霉素,丝裂霉素,L01DC,mitomycins,,cn_inn_overrides; wikidata_cache,high,ATC L01DC vs L01DC03 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-7b232acf26,优替德隆,优替德隆,L01DC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01DC 组内英文成分 5 个
+cn-30b8d179fe,甲磺酸氟马替尼,甲磺酸氟马替尼,L01EA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EA 组内英文成分 7 个
+cn-bddb8d0f01,甲磺酸阿美替尼,甲磺酸阿美替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-273890d07c,甲磺酸贝福替尼,甲磺酸贝福替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-96bb024c1d,琥珀酸莫博赛替尼,琥珀酸莫博赛替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-26c180c026,舒沃替尼,舒沃替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-650c896213,洛拉替尼,洛拉替尼,L01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01ED 组内英文成分 5 个
+cn-5eda97ad98,伊鲁阿克,伊鲁阿克,L01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01ED 组内英文成分 5 个
+cn-a24de5690a,硫酸氢司美替尼,硫酸氢司美替尼,L01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EE 组内英文成分 6 个
+cn-dd2fd11abc,羟乙磺酸达尔西利,羟乙磺酸达尔西利,L01EF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EF 组内英文成分 3 个
+cn-a3678c4280,哌柏西利,哌柏西利,L01EF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EF 组内英文成分 3 个
+cn-9ee4179e95,琥珀酸瑞波西利,琥珀酸瑞波西利,L01EF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EF 组内英文成分 3 个
+cn-bfab450d79,马来酸吡咯替尼,马来酸吡咯替尼,L01EH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EH 组内英文成分 7 个
+cn-0dc90db381,马来酸奈拉替尼,马来酸奈拉替尼,L01EH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EH 组内英文成分 7 个
+cn-62cb2219f0,维迪西妥单抗,维迪西妥单抗,L01EH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EH 组内英文成分 7 个
+cn-6a509bddda,甲磺酸阿帕替尼,甲磺酸阿帕替尼,L01EK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EK 组内英文成分 4 个
+cn-450ff3f0b6,伏罗尼布,伏罗尼布,L01EK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EK 组内英文成分 4 个
+cn-4dd0db7512,索凡替尼,索凡替尼,L01EK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EK 组内英文成分 4 个
+cn-fe1962d426,阿可替尼,阿可替尼,L01EL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EL 组内英文成分 5 个
+cn-7879026e61,度维利塞,度维利塞,L01EM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EM 组内英文成分 4 个
+cn-174011dcd5,林普利塞,林普利塞,L01EM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EM 组内英文成分 4 个
+cn-24b42d8db6,佩米替尼,佩米替尼,L01EN,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EN 组内英文成分 4 个
+cn-6dfa60c932,阿伐替尼,阿伐替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-515a10005f,伯瑞替尼,伯瑞替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-17a04f6530,甲苯磺酸多纳非尼,甲苯磺酸多纳非尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-fe6a41b391,谷美替尼,谷美替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-5f907d1a8e,硫酸拉罗替尼,硫酸拉罗替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-7fd44c34a3,乙磺酸尼达尼布,乙磺酸尼达尼布,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-cd78ede718,培唑帕尼,培唑帕尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-8351fde22e,普拉替尼,普拉替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-f22fbe3f2f,瑞派替尼,瑞派替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-09e0756d51,苹果酸舒尼替尼,苹果酸舒尼替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-7f97fda8f3,赛沃替尼,赛沃替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-edad73d0ba,塞普替尼,塞普替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-4f24d58aea,盐酸特泊替尼,盐酸特泊替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-767650a70e,格菲妥单抗,格菲妥单抗,L01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FA 组内英文成分 2 个
+cn-c896779c41,瑞帕妥单抗,瑞帕妥单抗,L01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FA 组内英文成分 2 个
+cn-1baa40d5d7,泽贝妥单抗,泽贝妥单抗,L01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FA 组内英文成分 2 个
+cn-93d05e656e,达雷妥尤单抗,达雷妥尤单抗,L01FC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FC 组内英文成分 2 个
+cn-40c7d0a27a,德曲妥珠单抗,德曲妥珠单抗,L01FD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FD 组内英文成分 6 个
+cn-de360585a0,伊尼妥单抗,伊尼妥单抗,L01FD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FD 组内英文成分 6 个
+cn-3809b9434e,阿得贝利单抗,阿得贝利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-04f8937714,卡瑞利珠单抗,卡瑞利珠单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-967ed1ab85,卡度尼利单抗,卡度尼利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-15283ffa52,普特利单抗,普特利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-7350662236,舒格利单抗,舒格利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-53fcaafbda,斯鲁利单抗,斯鲁利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-02482a45fd,索卡佐利单抗,索卡佐利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-bb58ea4d7b,信迪利单抗,信迪利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-1fe0b8998e,戈沙妥珠单抗,戈沙妥珠单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-79fe569e5f,莫格利珠单抗,莫格利珠单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-166615d603,那西妥单抗,那西妥单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-2dab0fe0e8,维泊妥珠单抗,维泊妥珠单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-bd705a98d9,贝林妥欧单抗,贝林妥欧单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-fc5e3e95ef,度伐利尤单抗,度伐利尤单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-0e372c9479,达妥昔单抗β,达妥昔单抗β,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-c78666cd9a,恩美曲妥珠单抗,恩美曲妥珠单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-947b74c342,派安普利单抗,派安普利单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-46eaa19a05,赛帕利单抗,赛帕利单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-fa34455f45,维布妥昔单抗,维布妥昔单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-0f4f73caf3,伊匹木单抗,伊匹木单抗,L01XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XC 组内无英文成分
+cn-eb55a6f2ce,海姆泊芬,海姆泊芬,L01XD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XD 组内英文成分 7 个
+cn-9172be5bd9,马蔺子素,马蔺子素,L01XD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XD 组内英文成分 7 个
+cn-3aee7cf9d8,奥布替尼,奥布替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-9b5f4b7e3e,阿贝西利,阿贝西利,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-1d745769f2,奥雷巴替尼,奥雷巴替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-6fe93ae3e6,恩沃利单抗,恩沃利单抗,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-79931af92a,达可替尼,达可替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-67dca7dbc4,盐酸恩沙替尼,盐酸恩沙替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-1873607376,甲磺酸伏美替尼,甲磺酸伏美替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-b0e01a9401,磷酸芦可替尼,磷酸芦可替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-999bb89643,塞瑞替尼,塞瑞替尼,L01XE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XE 组内英文成分 10 个
+cn-8fee0ef969,磷酸索立德吉,磷酸索立德吉,L01XJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XJ 组内英文成分 3 个
+cn-5790de2b24,甲苯磺酸尼拉帕利,甲苯磺酸尼拉帕利,L01XK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XK 组内英文成分 4 个
+cn-e92bb465cb,帕米帕利,帕米帕利,L01XK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XK 组内英文成分 4 个
+cn-72ffc48e81,纳基奥仑赛,纳基奥仑赛,L01XL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XL 组内英文成分 10 个
+cn-bcd7a99c75,伊基奥仑赛,伊基奥仑赛,L01XL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XL 组内英文成分 10 个
+cn-f81bdd537d,A群链球菌,A群链球菌,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-4eebf77a2e,安吖啶,安吖啶,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-ff845c44d7,奥拉帕利,奥拉帕利,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-3e47a98fea,甲磺酸艾立布林,甲磺酸艾立布林,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-1e4fb4c4a4,艾伏尼布,艾伏尼布,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-c657240d8f,埃普奈明,埃普奈明,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-37e21715ca,盐酸博安霉素,盐酸博安霉素,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-887b0f1b3e,磷酸雌莫司汀,磷酸雌莫司汀,L01XX,Estramustine,estramustine,cn_inn_overrides,medium,ATC L01XX vs L01XX11 → L4；盐/酯 base_only
+cn-9183f827b2,改构人肿瘤坏死因子,改构人肿瘤坏死因子,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-7bf5d35f50,人5型腺病毒,人5型腺病毒,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-98a8635366,人血管内皮抑制素,人血管内皮抑制素,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-19cd1b066f,靛玉红,靛玉红,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-545e489695,氟唑帕利,氟唑帕利,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-d585660c7c,甘氨双唑钠,甘氨双唑钠,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-0ffaaab989,红色诺卡氏菌细胞壁骨架,红色诺卡氏菌细胞壁骨架,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-e7b9747e36,外用红色诺卡氏菌细胞壁骨架,外用红色诺卡氏菌细胞壁骨架,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-7991c64304,盐酸槐定碱,盐酸槐定碱,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-7df4021741,甲苯磺酰胺,甲苯磺酰胺,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-69cceea059,氯氧喹,氯氧喹,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-2ed1d496fb,尿多酸肽,尿多酸肽,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-241e4baca8,培门冬酶,培门冬酶,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-5b7e525d41,去水卫矛醇,去水卫矛醇,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-7284160784,去甲斑蝥酸钠氯化钠,去甲斑蝥酸钠氯化钠,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-19224a4c69,瑞基奥仑赛,瑞基奥仑赛,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-94b2cbe2aa,三尖杉酯碱,三尖杉酯碱,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-07208c54bd,塞利尼索,塞利尼索,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-d4aaf2173b,维奈克拉,维奈克拉,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-56cf8c3146,小牛脾提取物,小牛脾提取物,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-d5683126ee,血卟啉,血卟啉,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-e2a7ca3a23,西达本胺,西达本胺,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-d8e63a356b,亚砷酸氯化钠,亚砷酸氯化钠,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-6e9236a63c,醋酸丙氨瑞林,醋酸丙氨瑞林,L02AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02AE 组内英文成分 8 个
+cn-99f3b892a7,戈那瑞林,戈那瑞林,L02AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02AE 组内英文成分 8 个
+cn-3791212a42,炔雌醇甲羟孕酮,炔雌醇甲羟孕酮,L02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02AX 组内无英文成分
+cn-c6907923c7,阿帕他胺,阿帕他胺,L02BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02BB 组内英文成分 6 个
+cn-8a3c721411,达罗他胺,达罗他胺,L02BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02BB 组内英文成分 6 个
+cn-583bd37f52,瑞维鲁胺,瑞维鲁胺,L02BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02BB 组内英文成分 6 个
+cn-30a1f51ee1,醋酸地加瑞克,醋酸地加瑞克,L02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L02BX 组内英文成分 4 个
+cn-4072d8de5f,艾贝格司亭α,艾贝格司亭α,L03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AA 组内英文成分 9 个
+cn-cd8d01b0f2,硫培非格司亭,硫培非格司亭,L03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AA 组内英文成分 9 个
+cn-b7c8c75f97,拓培非格司亭,拓培非格司亭,L03AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AA 组内英文成分 9 个
+cn-08b3ab939c,人干扰素β1a,人干扰素β1a,L03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AB 组内英文成分 15 个
+cn-24462abdbe,人干扰素γ,人干扰素γ,L03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AB 组内英文成分 15 个
+cn-148df7cc1e,人干扰素β-1b,人干扰素β-1b,L03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AB 组内英文成分 15 个
+cn-53a3bcc76c,培集成干扰素α-2,培集成干扰素α-2,L03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AB 组内英文成分 15 个
+cn-51f76e8d28,人白介素-11,人白介素-11,L03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AC 组内英文成分 2 个
+cn-d52bf094a3,人白细胞介素-2,人白细胞介素-2,L03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AC 组内英文成分 2 个
+cn-d4f9211c13,草分枝杆菌F.U.36,草分枝杆菌F.U.36,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-afce5f7e5e,赤芝孢子多糖,赤芝孢子多糖,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-e7b443748e,多糖蛋白,多糖蛋白,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-04f145c78a,角鲨烯,角鲨烯,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-770d067b57,金葡素,金葡素,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-96865a6517,金葡菌毒素,金葡菌毒素,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-bc7e118a2d,抗肿瘤免疫核糖核酸,抗肿瘤免疫核糖核酸,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-d2a9adabd9,灵孢多糖,灵孢多糖,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-2aa4cecb78,脾氨肽口服,脾氨肽口服,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-e034b2f0b4,脾多肽,脾多肽,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-8008aab00e,普乐沙福,普乐沙福,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-2bdcb4f117,茜草双酯,茜草双酯,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-f215fdfe7b,人参多糖,人参多糖,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-7d2ecc117e,鲨肝醇,鲨肝醇,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-94c8a00e91,羧甲淀粉钠,羧甲淀粉钠,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-aca519b29b,脱氧核苷酸钠,脱氧核苷酸钠,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-c6abef976e,磷酸腺嘌呤,磷酸腺嘌呤,L03AX,,,,none,丢弃[ATC 无法校验]：候选 Adenine 在库但无 ATC
+cn-68c4cea94d,乌苯美司,乌苯美司,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-2848e7ebef,盐酸小檗胺,盐酸小檗胺,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-3c51c72279,银耳孢糖,银耳孢糖,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-0486f12091,至灵菌丝,至灵菌丝,L03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AX 组内英文成分 30 个
+cn-d6b853844b,盐酸奥扎莫德,盐酸奥扎莫德,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-ff30dc62d2,艾加莫德α,艾加莫德α,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-1c3b9e6c70,氘可来昔替尼,氘可来昔替尼,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-57efc6f35f,抗人T细胞兔免疫球蛋白,抗人T细胞兔免疫球蛋白,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-3251446dde,抗人T细胞猪免疫球蛋白,抗人T细胞猪免疫球蛋白,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-b1d862a468,兔抗人胸腺细胞免疫球蛋白,兔抗人胸腺细胞免疫球蛋白,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-0b80d12d45,泰它西普,泰它西普,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-4923c5fea5,维得利珠单抗,维得利珠单抗,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-78541d4485,乌帕替尼,乌帕替尼,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-738afee263,西尼莫德,西尼莫德,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-4704503c79,依马利尤单抗,依马利尤单抗,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-24766cd738,伊奈利珠单抗,伊奈利珠单抗,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-dc88358770,阿达木单抗,阿达木单抗,L04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AB 组内英文成分 5 个
+cn-946fdc2bca,人Ⅱ型肿瘤坏死因子受体-抗体融合蛋白,人Ⅱ型肿瘤坏死因子受体-抗体融合蛋白,L04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AB 组内英文成分 5 个
+cn-7712db881a,培塞利珠单抗,培塞利珠单抗,L04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AB 组内英文成分 5 个
+cn-1cfbec243b,英夫利西单抗,英夫利西单抗,L04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AB 组内英文成分 5 个
+cn-2829e642aa,依那西普,依那西普,L04AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AB 组内英文成分 5 个
+cn-88558f8e21,布罗利尤单抗,布罗利尤单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-dc86c8a149,抗CD25人源化单克隆抗体,抗CD25人源化单克隆抗体,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-4a7954f95c,古塞奇尤单抗,古塞奇尤单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-0350641639,佩索利单抗,佩索利单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-ce0ef8b720,萨特利珠单抗,萨特利珠单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-62e6fad9ad,托珠单抗,托珠单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-06ccebf4e6,替瑞奇珠单抗,替瑞奇珠单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-55a6301046,乌司奴单抗,乌司奴单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-0546b4acff,依奇珠单抗,依奇珠单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-063002b5c0,富马酸二甲酯,富马酸二甲酯,L04AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AX 组内英文成分 15 个
+cn-5b15ef3752,咪唑立宾,咪唑立宾,L04AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AX 组内英文成分 15 个
+cn-41ff686549,阿西美辛,阿西美辛,M01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AB 组内英文成分 7 个
+cn-828ecb31fd,独活吲哚美辛,独活吲哚美辛,M01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AB 组内英文成分 7 个
+cn-73a98029cd,川芎吲哚美辛,川芎吲哚美辛,M01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AB 组内英文成分 7 个
+cn-079bff4c67,桂美辛,桂美辛,M01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AB 组内英文成分 7 个
+cn-4377039c09,布洛芬混悬,布洛芬混悬,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-97f65c955a,非诺洛芬钙,非诺洛芬钙,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-b250309dad,精氨酸布洛芬,精氨酸布洛芬,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-4cd39df244,萘普生肠溶微,萘普生肠溶微,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-3d569ef3d2,萘普生钠伪麻黄碱,萘普生钠伪麻黄碱,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-42c6c4d194,右酮洛芬,右酮洛芬,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-62a8369eeb,右旋酮洛芬,右旋酮洛芬,M01AE,,,,none,丢弃[立体异构]：候选 Ketoprofen 缺立体标记 dex
+cn-ab44723e51,右旋布洛芬,右旋布洛芬,M01AE,,,,none,丢弃[立体异构]：候选 Ibuprofen 缺立体标记 dex
+cn-6a0bea923c,右旋布洛芬口服,右旋布洛芬口服,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-0620ff65ac,右旋酮洛芬氨丁三醇,右旋酮洛芬氨丁三醇,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-9347cf2a22,右酮洛芬氨丁三醇,右酮洛芬氨丁三醇,M01AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AE 组内英文成分 11 个
+cn-18a982fc1b,艾瑞昔布,艾瑞昔布,M01AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AH 组内英文成分 7 个
+cn-9f33ce66e1,阿克他利,阿克他利,M01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AX 组内英文成分 10 个
+cn-fb7a5be1c5,艾拉莫德,艾拉莫德,M01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AX 组内英文成分 10 个
+cn-5286b50e34,白芍总苷,白芍总苷,M01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AX 组内英文成分 10 个
+cn-3c8f6424d4,盐酸苄达明,盐酸苄达明,M01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AX 组内英文成分 10 个
+cn-e90e6acfaa,非普拉宗,非普拉宗,M01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AX 组内英文成分 10 个
+cn-40c8eedcee,双醋瑞因,双醋瑞因,M01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01AX 组内英文成分 10 个
+cn-13b91ebd0c,保泰松鸡血藤,保泰松鸡血藤,M01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01BA 组内无英文成分
+cn-b5c8e87a9f,蜂毒,蜂毒,M01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01CX 组内无英文成分
+cn-77c1471af1,姜酚,姜酚,M01CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M01CX 组内无英文成分
+cn-72b62cab98,联苯乙酸,联苯乙酸,M02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AA 组内英文成分 4 个
+cn-b0f059038f,依托芬那酯,依托芬那酯,M02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AA 组内英文成分 4 个
+cn-71bde5e051,辣椒颠茄,辣椒颠茄,M02AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AB 组内英文成分 3 个
+cn-55a1a8b5be,麝香雪莲柳酯,麝香雪莲柳酯,M02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AX 组内英文成分 8 个
+cn-b7ad5da440,汉防己甲素,汉防己甲素,M02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AX 组内英文成分 8 个
+cn-7d1170ac73,蝎毒,蝎毒,M02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AX 组内英文成分 8 个
+cn-338b94654d,乙酰乌头碱,乙酰乌头碱,M02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M02AX 组内英文成分 8 个
+cn-0d1c4f7573,樟脑醑,樟脑醑,M02AX,,,,none,"丢弃[ATC 冲突]：候选 Camphor, ( ) ATC A07DA52 vs 池内 M02AX"
+cn-f8d3136b90,米库氯铵,米库氯铵,M03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M03AC 组内英文成分 14 个
+cn-8bdc88d54b,哌库溴铵,哌库溴铵,M03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M03AC 组内英文成分 14 个
+cn-e1645d268e,氯唑氨酚,氯唑氨酚,M03BB,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 M03BB 组内唯一英文成分 Chlorzoxazone，但中文名对不上（不猜，未定案）
+cn-5177c1a0a4,氯膦酸二钠,氯膦酸二钠,M05BA,clodronic acid,,wikidata_cache,medium,ATC M05BA vs M05BA02 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-46d729dbb1,米诺膦酸,米诺膦酸,M05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BA 组内英文成分 17 个
+cn-f5becba653,依替膦酸二钠,依替膦酸二钠,M05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BA 组内英文成分 17 个
+cn-b448525a81,英卡膦酸二钠,英卡膦酸二钠,M05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BA 组内英文成分 17 个
+cn-abf85d513a,因卡膦酸二钠,因卡膦酸二钠,M05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BA 组内英文成分 17 个
+cn-f4d6082361,亚锡亚甲基二膦酸盐,亚锡亚甲基二膦酸盐,M05BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BB 组内无英文成分
+cn-9627cafeb7,布罗索尤单抗,布罗索尤单抗,M05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BX 组内英文成分 7 个
+cn-b6cb7b6df7,胆维丁,胆维丁,M05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BX 组内英文成分 7 个
+cn-539876f4c3,胆维丁乳,胆维丁乳,M05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BX 组内英文成分 7 个
+cn-dfa4f35d40,地舒单抗,地舒单抗,M05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BX 组内英文成分 7 个
+cn-b53cd829ce,纳鲁索拜单抗,纳鲁索拜单抗,M05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M05BX 组内英文成分 7 个
+cn-afaaa0ade5,依普黄酮,依普黄酮,M05BX,ipriflavone,,cn_inn_overrides; wikidata_cache,high,ATC M05BX vs M05BX01 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-933221226f,丹皮酚,丹皮酚,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-1bd2205d42,丹皮酚磺酸钠,丹皮酚磺酸钠,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-14578c91df,丁甘交联玻璃酸钠,丁甘交联玻璃酸钠,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-c003e163d8,辣椒,辣椒,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-189a2f7d58,山金车花,山金车花,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-ad6dd28750,交联玻璃酸钠,交联玻璃酸钠,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-16a9c4f82f,利司扑兰口服溶液用,利司扑兰口服溶液用,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-c3b51dfa7c,盐酸青藤碱,盐酸青藤碱,M09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 M09AX 组内英文成分 17 个
+cn-7a9ea605ec,地氟烷,地氟烷,N01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AB 组内英文成分 6 个
+cn-dc14312ef3,恩氟烷,恩氟烷,N01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AB 组内英文成分 6 个
+cn-8004fd40a2,七氟烷,七氟烷,N01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AB 组内英文成分 6 个
+cn-8cef03b366,异氟烷,异氟烷,N01AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AB 组内英文成分 6 个
+cn-7b0dc44273,盐酸阿芬太尼,盐酸阿芬太尼,N01AH,Alfentanil,alfentanil,cn_inn_overrides; wikidata_cache,high,ATC N01AH vs N01AH02 → L4；盐/酯 same
+cn-a087caae64,盐酸艾司氯胺酮,盐酸艾司氯胺酮,N01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AX 组内英文成分 6 个
+cn-1c5113abb8,环泊酚,环泊酚,N01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AX 组内英文成分 6 个
+cn-cdd8d417f9,磷丙泊酚二钠,磷丙泊酚二钠,N01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AX 组内英文成分 6 个
+cn-795237ce67,羟丁酸钠,羟丁酸钠,N01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01AX 组内英文成分 6 个
+cn-5d2650fb6f,盐酸丁卡因胶浆,盐酸丁卡因胶浆,N01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01BA 组内英文成分 5 个
+cn-3043db9c6f,盐酸氯普鲁卡因,盐酸氯普鲁卡因,N01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01BA 组内英文成分 5 个
+cn-3f323d04d5,阿替卡因肾上腺素,阿替卡因肾上腺素,N01BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01BB 组内英文成分 17 个
+cn-50cec32668,明矾布比卡因,明矾布比卡因,N01BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01BB 组内英文成分 17 个
+cn-172366393c,利丙双卡因,利丙双卡因,N01BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01BB 组内英文成分 17 个
+cn-0fee903138,利多布比卡因,利多布比卡因,N01BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N01BB 组内英文成分 17 个
+cn-f37470ea07,盐酸达克罗宁胶浆,盐酸达克罗宁胶浆,N01BX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 N01BX 组内唯一英文成分 Capsaicin，但中文名对不上（不猜，未定案）
+cn-cee5ae5693,谷固醇达克罗宁,谷固醇达克罗宁,N01BX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 N01BX 组内唯一英文成分 Capsaicin，但中文名对不上（不猜，未定案）
+cn-c0558a3891,氨酚待因,氨酚待因,N02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AA 组内英文成分 12 个
+cn-6e81c020d2,氯芬待因,氯芬待因,N02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AA 组内英文成分 12 个
+cn-8771365c90,洛芬待因,洛芬待因,N02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AA 组内英文成分 12 个
+cn-9b3e5923c6,盐酸纳美芬,盐酸纳美芬,N02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AA 组内英文成分 12 个
+cn-827439fbbe,萘普待因,萘普待因,N02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AA 组内英文成分 12 个
+cn-fdab667c4a,羟考酮纳洛酮,羟考酮纳洛酮,N02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AA 组内英文成分 12 个
+cn-914fe40eb1,酒石酸双氢可待因,酒石酸双氢可待因,N02AA,Dihydrocodeine,dihydrocodeine,cn_inn_overrides,medium,ATC N02AA vs N02AA08 → L4；盐/酯 base_only
+cn-77c19006eb,芬太尼透皮,芬太尼透皮,N02AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AB 组内英文成分 5 个
+cn-edc0016429,氢溴酸依他佐辛,氢溴酸依他佐辛,N02AD,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 N02AD 组内唯一英文成分 Pentazocine，但中文名对不上（不猜，未定案）
+cn-6232bd1fc1,氨酚双氢可待因,氨酚双氢可待因,N02AJ,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 N02AJ 组内唯一英文成分 Co-Codamol，但中文名对不上（不猜，未定案）
+cn-91cd107ee8,氨酚曲马多,氨酚曲马多,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-26591a1b5b,富马酸奥赛利定,富马酸奥赛利定,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-974c09c7b2,盐酸布桂嗪,盐酸布桂嗪,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-ca853b98ee,地佐辛,地佐辛,N02AX,dezocine,,cn_inn_overrides; wikidata_cache,high,ATC N02AX vs N02AX03 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-fcf3b969fc,盐酸二氢埃托啡,盐酸二氢埃托啡,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-af6bd759ab,科洛曲,科洛曲,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-3b59831b10,盐酸替利定,盐酸替利定,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-1ed03279c3,阿苯,阿苯,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-0a7eea7182,阿苯糖,阿苯糖,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-0153c1859f,阿酚咖,阿酚咖,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-a57dea4b44,阿酚咖敏,阿酚咖敏,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-82351576b2,阿咖,阿咖,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-bbd3a205a2,阿司可咖,阿司可咖,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-401eb9ad7c,阿司待因,阿司待因,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-9b9e53ab4c,贝诺酯维B1,贝诺酯维B1,N02BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-f652f929bd,二氟尼柳,二氟尼柳,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-a35b1d4a48,贯众阿司匹林,贯众阿司匹林,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-aea3bd6026,柳安咖,柳安咖,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-a145251a37,呱西替柳,呱西替柳,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-470fbd538f,精氨酸阿司匹林,精氨酸阿司匹林,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-cdcbdb949e,匹林咖敏,匹林咖敏,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-ac234995ba,三水杨酸胆碱镁,三水杨酸胆碱镁,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-c02bb26c39,水杨酸咪唑,水杨酸咪唑,N02BA,,,,none,丢弃[ATC 冲突]：候选 Levamisole ATC D11AX vs 池内 N02BA
+cn-34541e3bf3,特酚伪麻,特酚伪麻,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-6c9313433d,乙水杨胺,乙水杨胺,N02BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BA 组内英文成分 9 个
+cn-81037514d2,盐酸苯羟甲胺,盐酸苯羟甲胺,N02BG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BG 组内英文成分 11 个
+cn-5d1d5d092b,痘苗病毒致炎兔皮提取物,痘苗病毒致炎兔皮提取物,N02BG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BG 组内英文成分 11 个
+cn-f96a7071a6,牛痘疫苗接种家兔炎症皮肤提取物,牛痘疫苗接种家兔炎症皮肤提取物,N02BG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BG 组内英文成分 11 个
+cn-7b000ff9ba,硫酸四氢帕马丁,硫酸四氢帕马丁,N02BG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BG 组内英文成分 11 个
+cn-4aca1c347c,硫酸延胡索乙素,硫酸延胡索乙素,N02BG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BG 组内英文成分 11 个
+cn-cfb147b555,麦角胺咖啡因,麦角胺咖啡因,N02CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CA 组内英文成分 3 个
+cn-121dbf26a1,苯甲酸利扎曲普坦,苯甲酸利扎曲普坦,N02CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CC 组内英文成分 12 个
+cn-e4dac7cb17,琥珀酸舒马普坦,琥珀酸舒马普坦,N02CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CC 组内英文成分 12 个
+cn-2f2b081904,依瑞奈尤单抗,依瑞奈尤单抗,N02CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CD 组内英文成分 9 个
+cn-3375d83071,安那度尔,安那度尔,N02CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CX 组内英文成分 3 个
+cn-81406bceba,苯噻啶,苯噻啶,N02CX,pizotyline,,cn_inn_overrides; wikidata_cache,high,ATC N02CX vs N02CX01 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-e32567221a,氨络酸,氨络酸,N03AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AG 组内英文成分 5 个
+cn-b7e6bfbcbe,氨己烯酸口服溶液用,氨己烯酸口服溶液用,N03AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AG 组内英文成分 5 个
+cn-e5373190c8,丙戊酰胺,丙戊酰胺,N03AG,Valpromide,,cn_inn_overrides; wikidata_cache,high,ATC N03AG vs N03AG02 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-aba19cbeec,香草醛,香草醛,N03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AX 组内英文成分 19 个
+cn-872c0578f2,伊来西胺,伊来西胺,N03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AX 组内英文成分 19 个
+cn-b7c0a51e44,吡贝地尔,吡贝地尔,N04BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N04BC 组内英文成分 9 个
+cn-80a94e50d4,罗替高汀,罗替高汀,N04BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N04BC 组内英文成分 9 个
+cn-dc93d3e4c9,氯丙嗪异丙嗪,氯丙嗪异丙嗪,N05AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AA 组内英文成分 5 个
+cn-f72af8dd8f,氟哌啶,氟哌啶,N05AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AD 组内英文成分 5 个
+cn-ae82ea603e,癸酸氟哌啶醇,癸酸氟哌啶醇,N05AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AD 组内英文成分 5 个
+cn-6282de1260,奥氮平口溶,奥氮平口溶,N05AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AH 组内英文成分 8 个
+cn-e7b3cd7ab0,奥氮平氟西汀,奥氮平氟西汀,N05AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AH 组内英文成分 8 个
+cn-232c4784bd,丁二酸洛沙平,丁二酸洛沙平,N05AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AH 组内英文成分 8 个
+cn-ba0c8b2336,盐酸硫必利,盐酸硫必利,N05AL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AL 组内英文成分 4 个
+cn-fcb3ce8af6,盐酸硫必利氯化钠,盐酸硫必利氯化钠,N05AL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AL 组内英文成分 4 个
+cn-4439bb4a06,布南色林,布南色林,N05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AX 组内英文成分 10 个
+cn-f0552b8c72,氘丁苯那嗪,氘丁苯那嗪,N05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AX 组内英文成分 10 个
+cn-9e32314f8f,利培酮微球,利培酮微球,N05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AX 组内英文成分 10 个
+cn-2decb97ddc,盐酸哌罗匹隆,盐酸哌罗匹隆,N05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AX 组内英文成分 10 个
+cn-a265e36c5e,棕榈帕利哌酮酯,棕榈帕利哌酮酯,N05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05AX 组内英文成分 10 个
+cn-68bcf203b8,氯氮卓,氯氮卓,N05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05BA 组内英文成分 14 个
+cn-5df35cd6ea,氯氮,氯氮,N05BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05BA 组内英文成分 14 个
+cn-d0f4e54c7e,枸橼酸坦度螺酮,枸橼酸坦度螺酮,N05BE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05BE 组内英文成分 2 个
+cn-1ad2b8a070,水合氯醛灌肠剂,水合氯醛灌肠剂,N05CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CC 组内英文成分 3 个
+cn-3c7f3a7b6e,水合氯醛/糖浆组合包装,水合氯醛/糖浆组合包装,N05CC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-abde303e03,单盐酸氟西泮,单盐酸氟西泮,N05CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CD 组内英文成分 14 个
+cn-d3675cadaf,甲苯磺酸瑞马唑仑,甲苯磺酸瑞马唑仑,N05CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CD 组内英文成分 14 个
+cn-7cc49f1b0e,苯磺酸瑞马唑仑,苯磺酸瑞马唑仑,N05CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CD 组内英文成分 14 个
+cn-e89f1b23d1,地达西尼,地达西尼,N05CF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CF 组内英文成分 5 个
+cn-f199995204,扎莱普隆,扎莱普隆,N05CF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CF 组内英文成分 5 个
+cn-a5eaa46fb3,溴化钙,溴化钙,N05CM,,,,none,丢弃[ATC 冲突]：候选 Calcium ATC A11JB vs 池内 N05CM
+cn-ced860cf37,乙酰天麻素,乙酰天麻素,N05CM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N05CM 组内英文成分 12 个
+cn-d4f195aaca,琥珀酸地文拉法辛,琥珀酸地文拉法辛,N06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06AX 组内英文成分 30 个
+cn-e01da2f827,盐酸米安色林,盐酸米安色林,N06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06AX 组内英文成分 30 个
+cn-2f55c2a75b,噻奈普汀钠,噻奈普汀钠,N06AX,(±)-tianeptine,tianeptina,atc5_exact; wikidata_cache,medium,ATC N06AX vs N06AX14 → L4；盐/酯 base_only
+cn-c7c3718082,盐酸托鲁地文拉法辛,盐酸托鲁地文拉法辛,N06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06AX 组内英文成分 30 个
+cn-08354b9ead,谷红,谷红,N06BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06BX 组内英文成分 15 个
+cn-736be6aca1,硝酸一叶萩碱,硝酸一叶萩碱,N06BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06BX 组内英文成分 15 个
+cn-b1908be086,氟哌噻吨美利曲辛,氟哌噻吨美利曲辛,N06CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06CA 组内无英文成分
+cn-e78c13b722,浓维磷,浓维磷,N06CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06CB 组内无英文成分
+cn-c3484441f3,维磷,维磷,N06CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06CB 组内无英文成分
+cn-90014c05f6,盐酸多萘哌齐,盐酸多萘哌齐,N06DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DA 组内英文成分 7 个
+cn-dfb9ed88fe,氢溴酸二氢加兰他敏,氢溴酸二氢加兰他敏,N06DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DA 组内英文成分 7 个
+cn-6c241d4c1b,重酒石酸卡巴拉汀,重酒石酸卡巴拉汀,N06DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DA 组内英文成分 7 个
+cn-73dc9e8cdf,脑肽节苷脂,脑肽节苷脂,N06DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DX 组内英文成分 6 个
+cn-f931564cca,甘露特钠,甘露特钠,N06DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DX 组内英文成分 6 个
+cn-c991ed3d3c,盐酸美金刚口溶,盐酸美金刚口溶,N06DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DX 组内英文成分 6 个
+cn-cdf86932cf,尼古丁咀嚼,尼古丁咀嚼,N07BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07BA 组内英文成分 6 个
+cn-eff235930c,盐酸洛非西定,盐酸洛非西定,N07BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07BC 组内英文成分 5 个
+cn-882b2d4938,盐酸苯环壬酯,盐酸苯环壬酯,N07CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07CA 组内英文成分 5 个
+cn-55b4cfeac2,二维三七桂利嗪,二维三七桂利嗪,N07CA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-9077c9e38e,氨吡啶,氨吡啶,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-b1068cefc1,胞二磷胆碱,胞二磷胆碱,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-95dad0b731,乙酰胺吡咯烷酮,乙酰胺吡咯烷酮,N07XX,,,,none,丢弃[ATC 冲突]：候选 Piracetam ATC N06BX03 vs 池内 N07XX
+cn-0c32516f21,丁苯酞,丁苯酞,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-39dd098d38,丁苯酞氯化钠,丁苯酞氯化钠,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-41898c5d27,刺五加硫胺,刺五加硫胺,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-57a50e0480,天麻蜜环糖肽,天麻蜜环糖肽,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-3453c29122,五味子,五味子,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-77577211c8,谷维素双维B,谷维素双维B,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-490c51e0d9,合成天麻素,合成天麻素,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-0b43214103,科博肽,科博肽,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-0a01e88278,利鲁唑口服,利鲁唑口服,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-d393e59060,氯苯唑酸葡胺,氯苯唑酸葡胺,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-379608543c,小牛血清去蛋白,小牛血清去蛋白,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-960a2e28ff,乙胺硫脲,乙胺硫脲,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-3f842b27ee,尤瑞克林,尤瑞克林,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-85e6edb569,三苯双脒,三苯双脒,P01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P01AX 组内英文成分 5 个
+cn-33109d9b10,磷酸氯喹,磷酸氯喹,P01BA,Chloroquine,chloroquine,wikidata_cache,high,ATC P01BA vs P01BA01 → L4；盐/酯 same
+cn-546981db87,磷酸哌喹,磷酸哌喹,P01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P01BA 组内英文成分 8 个
+cn-28c4634320,青蒿琥酯阿莫地喹,青蒿琥酯阿莫地喹,P01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P01BA 组内英文成分 8 个
+cn-a58bd2fafc,二盐酸奎宁,二盐酸奎宁,P01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P01BC 组内英文成分 5 个
+cn-ff2c099d7a,双氢青蒿素,双氢青蒿素,P01BF,dihydroartemisinin,artenimol,atc5_exact; cn_inn_overrides; wikidata_cache,medium,ATC P01BF vs P01BE05 → L3；盐/酯 same
+cn-207853903d,双氢青蒿素哌喹,双氢青蒿素哌喹,P01BF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P01BF 组内无英文成分
+cn-2c563259da,磷酸萘酚喹,磷酸萘酚喹,P01BX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 P01BX 组内唯一英文成分 Halofantrine，但中文名对不上（不猜，未定案）
+cn-6fd65e262a,磷酸咯萘啶,磷酸咯萘啶,P01BX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 P01BX 组内唯一英文成分 Halofantrine，但中文名对不上（不猜，未定案）
+cn-a6d1e6a0b3,磷酸哌嗪宝塔糖,磷酸哌嗪宝塔糖,P02CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P02CB 组内英文成分 3 个
+cn-a3179e9d32,林旦,林旦,P03AB,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 P03AB 组内唯一英文成分 Lindane，但中文名对不上（不猜，未定案）
+cn-612d3f1b79,克罗米通,克罗米通,P03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 P03AX 组内英文成分 5 个
+cn-73a058e6d8,盐酸萘甲唑林,盐酸萘甲唑林,R01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R01AA 组内英文成分 6 个
+cn-9b76c616fe,呋麻,呋麻,R01AB,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R01AB 组内唯一英文成分 L Ephedrine，但中文名对不上（不猜，未定案）
+cn-9ccfb91dc3,萘林那敏溴铵,萘林那敏溴铵,R01AB,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R01AB 组内唯一英文成分 L Ephedrine，但中文名对不上（不猜，未定案）
+cn-f9615b5b01,苯环喹溴铵,苯环喹溴铵,R01AC,,,,none,丢弃[盐/酯不一致]：ATC4 唯一成分 Sodium Cromoglicate 标记 ['sodium'] vs 中文名 ['ammonium']
+cn-0c3c8ee88b,氮䓬斯汀氟替卡松,氮䓬斯汀氟替卡松,R01AC,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R01AC 组内唯一英文成分 Sodium Cromoglicate，但中文名对不上（不猜，未定案）
+cn-ff75aa3700,色甘萘甲那敏,色甘萘甲那敏,R01AC,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R01AC 组内唯一英文成分 Sodium Cromoglicate，但中文名对不上（不猜，未定案）
+cn-795711e591,盐酸左卡巴斯汀,盐酸左卡巴斯汀,R01AC,,,,none,丢弃[盐/酯不一致]：ATC4 唯一成分 Sodium Cromoglicate 标记 ['sodium'] vs 中文名 ['hydrochloride']
+cn-e5dffbe966,麻黄碱色甘酸钠,麻黄碱色甘酸钠,R01AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R01AD 组内英文成分 3 个
+cn-9e569ea826,薄荷脑鼻用吸入剂,薄荷脑鼻用吸入剂,R01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R01AX 组内英文成分 2 个
+cn-e6d46618c9,薄荷桉油,薄荷桉油,R02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R02AX 组内英文成分 2 个
+cn-519d7d3e8a,薄荷喉,薄荷喉,R02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R02AX 组内英文成分 2 个
+cn-35d3712c58,薄荷茴桉苯甲酸钠,薄荷茴桉苯甲酸钠,R02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R02AX 组内英文成分 2 个
+cn-8218a4aa2b,熊胆薄荷,熊胆薄荷,R02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R02AX 组内英文成分 2 个
+cn-c6f63cb50a,盐酸克仑特罗吸入,盐酸克仑特罗吸入,R03AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03AC 组内英文成分 14 个
+cn-3c5b26497c,妥洛特罗,妥洛特罗,R03AC,tulobuterol,,cn_inn_overrides,high,ATC R03AC vs R03AC11 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-44ec532fbb,甲麻芩苷那敏,甲麻芩苷那敏,R03AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03AH 组内无英文成分
+cn-8d1b3d6351,倍氯福格吸入,倍氯福格吸入,R03AK,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R03AK 组内唯一英文成分 Indacaterol Acetate，但中文名对不上（不猜，未定案）
+cn-df4d21f7e2,茶碱沙丁胺醇,茶碱沙丁胺醇,R03AK,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R03AK 组内唯一英文成分 Indacaterol Acetate，但中文名对不上（不猜，未定案）
+cn-897dde55b0,氟替美维吸入,氟替美维吸入,R03AK,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R03AK 组内唯一英文成分 Indacaterol Acetate，但中文名对不上（不猜，未定案）
+cn-78fbea502d,布地格福吸入,布地格福吸入,R03AL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03AL 组内英文成分 2 个
+cn-d890903c0b,格隆溴铵福莫特罗吸入,格隆溴铵福莫特罗吸入,R03AL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03AL 组内英文成分 2 个
+cn-b8063f40c9,乌美溴铵维兰特罗吸入,乌美溴铵维兰特罗吸入,R03AL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03AL 组内英文成分 2 个
+cn-c3b221d52d,茚达格莫吸入,茚达格莫吸入,R03AL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03AL 组内英文成分 2 个
+cn-a48c8cc74e,格隆溴铵吸入粉雾剂用,格隆溴铵吸入粉雾剂用,R03BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03BB 组内英文成分 11 个
+cn-1ad1bdba61,格隆溴铵吸入,格隆溴铵吸入,R03BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03BB 组内英文成分 11 个
+cn-68150ea835,妥英麻黄茶碱,妥英麻黄茶碱,R03CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CA 组内英文成分 3 个
+cn-328554fa29,盐酸甲麻黄碱,盐酸甲麻黄碱,R03CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CA 组内英文成分 3 个
+cn-94606a35f3,麻黄碱桔梗,麻黄碱桔梗,R03CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CA 组内英文成分 3 个
+cn-92d701dba0,盐酸甲氧那明,盐酸甲氧那明,R03CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CB 组内无英文成分
+cn-3d66470aa8,阿托品麻黄碱,阿托品麻黄碱,R03CK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CK 组内无英文成分
+cn-e1ff116aa8,甲氧那明,甲氧那明,R03CK,(RS)-methoxyphenamine,,cn_inn_overrides,medium,ATC R03CK vs R03CB02 → L3；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-5f6850d904,氯丙那林溴己新,氯丙那林溴己新,R03CK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CK 组内无英文成分
+cn-db067b72e5,愈酚麻黄,愈酚麻黄,R03CK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CK 组内无英文成分
+cn-9795d4a6a4,麻黄碱苯海拉明,麻黄碱苯海拉明,R03CK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CK 组内无英文成分
+cn-fa9d912c4a,甘氨酸茶碱钠,甘氨酸茶碱钠,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-abdd826f02,氨茶碱暴马子,氨茶碱暴马子,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-9940118076,氨基比林茶碱,氨基比林茶碱,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-49944e892c,茶碱甲麻黄碱,茶碱甲麻黄碱,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-d1e1c5af39,茶酮,茶酮,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-016d4867fc,胆氨,胆氨,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-4c4e25c90f,羟丙茶碱去氯羟嗪,羟丙茶碱去氯羟嗪,R03DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DA 组内英文成分 7 个
+cn-54fa488104,奥马珠单抗α,奥马珠单抗α,R03DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DX 组内英文成分 8 个
+cn-6cb8237541,茶新那敏,茶新那敏,R03DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DX 组内英文成分 8 个
+cn-6a69f75fda,紫龙,紫龙,R03DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DX 组内英文成分 8 个
+cn-8f49129837,美泊利珠单抗,美泊利珠单抗,R03DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DX 组内英文成分 8 个
+cn-be408d86b3,塞曲司特,塞曲司特,R03DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DX 组内英文成分 8 个
+cn-128241a0b3,杜香油,杜香油,R05CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05CA 组内英文成分 13 个
+cn-eed5d08f05,吐根,吐根,R05CA,syrup of ipecac,,wikidata_cache,medium,ATC R05CA vs R05CA04 → L4；盐/酯 same；候选名含剂型词，非单成分 INN 写法；候选 INN 不在库（后续需新增 substance）
+cn-7cb767f423,桉柠蒎,桉柠蒎,R05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05CB 组内英文成分 11 个
+cn-fe2c7c94e6,盐酸氨溴索直服,盐酸氨溴索直服,R05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05CB 组内英文成分 11 个
+cn-f4cba3e422,盐酸美司坦,盐酸美司坦,R05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05CB 组内英文成分 11 个
+cn-9731d6dd25,舍雷肽酶,舍雷肽酶,R05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05CB 组内英文成分 11 个
+cn-0871ab6552,盐酸依普拉酮,盐酸依普拉酮,R05CB,eprazinone,,wikidata_cache,medium,ATC R05CB vs R05CB04 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-5b99f7778e,中性蛋白酶,中性蛋白酶,R05CB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05CB 组内英文成分 11 个
+cn-ef6fb3a06a,那可丁,那可丁,R05DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05DA 组内英文成分 10 个
+cn-058f055638,磷酸苯丙哌啉,磷酸苯丙哌啉,R05DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05DB 组内英文成分 13 个
+cn-161ca8e9b5,虫草头孢菌,虫草头孢菌,R05DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05DB 组内英文成分 13 个
+cn-fde9559034,对-伞花烃,对-伞花烃,R05DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05DB 组内英文成分 13 个
+cn-d7c6ab64c0,鸡胆,鸡胆,R05DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05DB 组内英文成分 13 个
+cn-d3806499c9,杏仁腈,杏仁腈,R05DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05DB 组内英文成分 13 个
+cn-fa18c953a2,阿桔,阿桔,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-cb9a24a356,待因麻黄铵氯敏,待因麻黄铵氯敏,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-69831109c5,可待因桔梗,可待因桔梗,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-9b6dceed0f,可愈,可愈,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-a0463c1cbe,可待因异丙嗪,可待因异丙嗪,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-bcc391f340,愈酚待因,愈酚待因,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-6815ec7b1a,愈酚伪麻待因,愈酚伪麻待因,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-26303c2760,愈创罂粟待因,愈创罂粟待因,R05FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05FA 组内唯一英文成分 Terpin，但中文名对不上（不猜，未定案）
+cn-a3b8b4d6ab,茶碱愈创甘油醚,茶碱愈创甘油醚,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-2cbae1e91e,茶愈,茶愈,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-f150e1aa17,甘草氯化铵,甘草氯化铵,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-bbaec31df1,桔梗氯化铵,桔梗氯化铵,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-194a06498a,桔梗麻黄碱,桔梗麻黄碱,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-25e041262c,桔梗麻黄碱糖浆Ⅱ,桔梗麻黄碱糖浆Ⅱ,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-8762008e7d,桔梗枇杷,桔梗枇杷,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-fa320a996f,桔梗远志麻黄碱片Ⅰ,桔梗远志麻黄碱片Ⅰ,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-a4c957add7,枇杷氯化铵,枇杷氯化铵,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-3c91dae7bd,枇杷喷托维林,枇杷喷托维林,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-7f0d299fe7,松醇那敏,松醇那敏,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-ee9e2fc1f9,甘草麻黄碱,甘草麻黄碱,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-63aa43c36f,枸磺新啶,枸磺新啶,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-11b853c89a,美羧伪麻,美羧伪麻,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-95eee999d4,美芬那敏铵,美芬那敏铵,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-2c1e9641a6,愈美那敏,愈美那敏,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-23cf34451a,愈酚甲麻那敏,愈酚甲麻那敏,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-4f5f455c26,愈酚伪麻,愈酚伪麻,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-f9fea2dc8b,愈酚溴新,愈酚溴新,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-4a1aa09294,愈美甲麻敏,愈美甲麻敏,R05FB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R05FB 组内英文成分 2 个
+cn-fbbc0b1017,氨酚咖黄烷胺,氨酚咖黄烷胺,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-0be86f7db1,氨酚伪麻,氨酚伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-4dad7eb128,氨酚伪麻美芬,氨酚伪麻美芬,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-40312c0989,氨酚伪麻美芬片/氨麻美敏片Ⅱ,氨酚伪麻美芬片/氨麻美敏片Ⅱ,R05XX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-9f13d9777c,氨酚伪麻美芬片Ⅱ/氨麻苯美,氨酚伪麻美芬片Ⅱ/氨麻苯美,R05XX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-95827495be,氨酚伪麻那敏,氨酚伪麻那敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-6133b3255d,氨金黄敏,氨金黄敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-164f216be0,氨咖麻敏,氨咖麻敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-e1dd9041c5,氨咖愈敏,氨咖愈敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-85f5314073,氨麻美敏,氨麻美敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-5b1ba7abff,氨麻美敏片Ⅱ,氨麻美敏片Ⅱ,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-f857e034ef,氨酚伪麻美芬片(Ⅱ)/苯酚伪麻,氨酚伪麻美芬片(Ⅱ)/苯酚伪麻,R05XX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-65a72b2da6,氨酚伪麻美芬片(日片)/氨麻美敏片Ⅱ,氨酚伪麻美芬片(日片)/氨麻美敏片Ⅱ,R05XX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-7c7beef94a,氨酚伪麻美芬片(Ⅲ)/氨麻美敏,氨酚伪麻美芬片(Ⅲ)/氨麻美敏,R05XX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-0de5ead8ff,贝敏伪麻,贝敏伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-3e4b876c6d,酚咖麻敏,酚咖麻敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-533b4afe5d,酚麻美,酚麻美,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-0b0a080afb,酚麻美敏,酚麻美敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-5a0390c107,氨酚美沙,氨酚美沙,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-15a1ad913b,氨酚葡锌,氨酚葡锌,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-25288f4890,北豆根氨酚那敏,北豆根氨酚那敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-a3ad2c3932,贝母氯化铵,贝母氯化铵,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-25449c214f,酚咖伪麻,酚咖伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-72dd84d5f9,甘草浙贝氯化铵,甘草浙贝氯化铵,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-2968e1263e,氯丙那林鱼腥草素钠,氯丙那林鱼腥草素钠,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-4c78908645,忍冬藤阿司匹林,忍冬藤阿司匹林,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-fcfe9737e7,锌布,锌布,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-ebbe725835,银翘氨敏,银翘氨敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-1e5930ef78,愈酚喷托那敏,愈酚喷托那敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-d38029e559,氨酚肾素,氨酚肾素,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-058df405c8,解热止痛,解热止痛,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-e5e60f1097,金龙胆草浸,金龙胆草浸,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-84ff5d0b36,咖酚伪麻,咖酚伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-723933afe2,柳酚咖敏,柳酚咖敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-b8b4cbe2e3,氯雷氨酚伪麻,氯雷氨酚伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-302a2f3276,氯雷伪麻,氯雷伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-185937239e,洛芬葡锌那敏,洛芬葡锌那敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-dbefab34e0,麻敏维C,麻敏维C,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-d249d44ff7,美酚伪麻,美酚伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-36609773b6,美敏伪麻,美敏伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-759a10ed11,美扑伪麻,美扑伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-4c9ffa497d,美息伪麻,美息伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-33e3515ce9,美愈伪麻,美愈伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-ae4e49a6a5,扑尔伪麻,扑尔伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-8583b11c56,特洛伪麻,特洛伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-5cf4ff3faa,伪麻那敏,伪麻那敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-c582e88748,伪麻,伪麻,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-7c671a6796,愈创维林那敏,愈创维林那敏,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-d50d105925,愈酚喷托异丙嗪,愈酚喷托异丙嗪,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-a2e3bda741,愈酚维林,愈酚维林,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-261ad64dfb,愈美,愈美,R05XX,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R05XX 组内唯一英文成分 Guaiacol，但中文名对不上（不猜，未定案）
+cn-d6a0dbce7c,盐酸曲吡那敏,盐酸曲吡那敏,R06AC,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 R06AC 组内唯一英文成分 Tripelennamine，但中文名对不上（不猜，未定案）
+cn-37a9f6a477,西替伪麻,西替伪麻,R06AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AE 组内英文成分 8 个
+cn-34b93c5762,盐酸安他唑啉,盐酸安他唑啉,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-a3c3152a83,苯磺贝他斯汀,苯磺贝他斯汀,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-36ff075b4c,比拉斯汀,比拉斯汀,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-bd82fbefdd,枸地氯雷他定,枸地氯雷他定,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-5a40f67bb8,富马酸卢帕他定,富马酸卢帕他定,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-07b721b1a7,盐酸曲普利啶,盐酸曲普利啶,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-58c06073ee,盐酸司他斯汀,盐酸司他斯汀,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-f2dee5a088,富马酸酮替芬鼻吸入,富马酸酮替芬鼻吸入,R06AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R06AX 组内英文成分 13 个
+cn-755d52ad1d,五维甘草那敏,五维甘草那敏,R06AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-b42f2f3940,富马酸依美斯汀,富马酸依美斯汀,R06AX,,,,none,丢弃[ATC 冲突]：候选 Emedastine ATC S01GX06 vs 池内 R06AX
+cn-b546c4dccf,贝美格,贝美格,R07AB,bemegride,,cn_inn_overrides; wikidata_cache,high,ATC R07AB vs R07AB05 → L4；盐/酯 same；候选 INN 不在库（后续需新增 substance）
+cn-05c2d0a546,盐酸二甲弗林,盐酸二甲弗林,R07AB,dimefline,,wikidata_cache,medium,ATC R07AB vs R07AB08 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-906fbb6974,过氧化碳酰胺,过氧化碳酰胺,R07AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AB 组内英文成分 2 个
+cn-0dcba2ce06,盐酸洛贝林,盐酸洛贝林,R07AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AB 组内英文成分 2 个
+cn-77d8af383e,氧化樟脑,氧化樟脑,R07AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AB 组内英文成分 2 个
+cn-1ae81d9aea,樟脑磺酸钠,樟脑磺酸钠,R07AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AB 组内英文成分 2 个
+cn-78fd6dc8fb,核酪,核酪,R07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AX 组内英文成分 7 个
+cn-799654ebf6,磺啶新林,磺啶新林,R07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AX 组内英文成分 7 个
+cn-2354cff264,榕敏,榕敏,R07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AX 组内英文成分 7 个
+cn-ff6f1f1acf,西维来司他钠,西维来司他钠,R07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R07AX 组内英文成分 7 个
+cn-d590c22245,滴眼用利福平,滴眼用利福平,S01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01AA 组内英文成分 7 个
+cn-6236572f6a,那他霉素,那他霉素,S01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01AA 组内英文成分 7 个
+cn-78b443e4d0,新地松,新地松,S01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01AA 组内英文成分 7 个
+cn-d221cd581e,黄氧化汞,黄氧化汞,S01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01AX 组内英文成分 7 个
+cn-9abfca50c6,硫酸锌尿囊素,硫酸锌尿囊素,S01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01AX 组内英文成分 7 个
+cn-b9d93a2e34,盐酸羟苄唑,盐酸羟苄唑,S01AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01AX 组内英文成分 7 个
+cn-fa466f0de9,氟米龙,氟米龙,S01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01BA 组内英文成分 9 个
+cn-c871b330ab,氟轻松玻璃体内植入剂,氟轻松玻璃体内植入剂,S01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01BA 组内英文成分 9 个
+cn-b8355865cf,氯替泼诺混悬,氯替泼诺混悬,S01BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01BA 组内英文成分 9 个
+cn-0a6df5506d,普拉洛芬,普拉洛芬,S01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01BC 组内英文成分 3 个
+cn-9329a2489f,溴芬酸钠,溴芬酸钠,S01BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01BC 组内英文成分 3 个
+cn-0efea84cea,氯替泼诺妥布霉素,氯替泼诺妥布霉素,S01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01CA 组内无英文成分
+cn-bb01eb899f,盐酸四环素醋酸可的松,盐酸四环素醋酸可的松,S01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01CA 组内无英文成分
+cn-14164b85c8,四环素可的松,四环素可的松,S01CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01CA 组内无英文成分
+cn-bcdd888fd7,盐酸安普乐定,盐酸安普乐定,S01EA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01EA 组内英文成分 6 个
+cn-5af4cdad3c,贝美素噻吗洛尔,贝美素噻吗洛尔,S01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01ED 组内英文成分 5 个
+cn-485e68701f,拉坦噻吗,拉坦噻吗,S01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01ED 组内英文成分 5 个
+cn-6fe00ff38b,曲伏噻吗,曲伏噻吗,S01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01ED 组内英文成分 5 个
+cn-50c9b7cdc4,马来酸右噻吗洛尔,马来酸右噻吗洛尔,S01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01ED 组内英文成分 5 个
+cn-05c92ee97f,盐酸左布诺洛尔,盐酸左布诺洛尔,S01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01ED 组内英文成分 5 个
+cn-6bb98371bb,贝美前列素,贝美前列素,S01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01EE 组内英文成分 6 个
+cn-b353a5d92c,樟柳碱,樟柳碱,S01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01FA 组内英文成分 6 个
+cn-c1146b017e,盐酸环喷托酯,盐酸环喷托酯,S01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01FA 组内英文成分 6 个
+cn-570cf1aa75,氢溴酸樟柳碱,氢溴酸樟柳碱,S01FA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01FA 组内英文成分 6 个
+cn-8aca3c9bf8,吡嘧司特钾,吡嘧司特钾,S01GX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01GX 组内英文成分 11 个
+cn-34605e6c1c,洛度沙胺氨丁三醇,洛度沙胺氨丁三醇,S01GX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01GX 组内英文成分 11 个
+cn-1719bd48fc,曲尼司特,曲尼司特,S01GX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01GX 组内英文成分 11 个
+cn-4e0d410d65,羧甲基纤维素钠,羧甲基纤维素钠,S01JX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01JX 组内无英文成分
+cn-ff6b2420c0,阿柏西普眼内注射,阿柏西普眼内注射,S01LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01LA 组内英文成分 6 个
+cn-fc9e41daaa,康柏西普眼用,康柏西普眼用,S01LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01LA 组内英文成分 6 个
+cn-a0e9c5982b,雷珠单抗,雷珠单抗,S01LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01LA 组内英文成分 6 个
+cn-38ba58d1c7,维替泊芬,维替泊芬,S01LA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01LA 组内英文成分 6 个
+cn-ee5ea2081d,氨碘肽,氨碘肽,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-87d16d51c9,人表皮生长因子衍生物,人表皮生长因子衍生物,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-95284ff546,地夸磷索钠,地夸磷索钠,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-ecd806a224,法可林,法可林,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-2dc66e877c,门冬维甘,门冬维甘,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-792f05eeac,尿维氨,尿维氨,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-3377fe3c77,萘维新,萘维新,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-52f8bc5bf9,普罗碘铵,普罗碘铵,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-d8cd049d06,羟糖甘,羟糖甘,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-330a492bed,塞奈吉明,塞奈吉明,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-b44411c3e4,眼氨肽,眼氨肽,S01XA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S01XA 组内英文成分 26 个
+cn-f5df45e57f,氯霉素耳,氯霉素耳,S02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S02AA 组内英文成分 2 个
+cn-6dc723c38b,硼酸冰,硼酸冰,S02AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 S02AA 组内英文成分 2 个
+cn-34f3c17ff2,短肽型肠内营养剂,短肽型肠内营养剂,V01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V01AA 组内英文成分 46 个
+cn-c335cf1507,营养,营养,V01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V01AA 组内英文成分 46 个
+cn-77480e73fb,黄花蒿花粉变应原舌下,黄花蒿花粉变应原舌下,V01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V01AA 组内英文成分 46 个
+cn-cc47340d6c,整蛋白型肠内营养剂,整蛋白型肠内营养剂,V01AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V01AA 组内英文成分 46 个
+cn-be93e69e11,混合糖电解质,混合糖电解质,V02DC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-6468b9cab1,赖氨肌醇维B12,赖氨肌醇维B12,V02DC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-2db2538bfa,葡萄糖粉剂,葡萄糖粉剂,V02DC,,,,none,丢弃[ATC 冲突]：Glucose 与 Dextrose 是同一成分的不同写法；候选 Dextrose ATC B05BA03 vs 池内 V02DC
+cn-2458053711,口服葡萄糖,口服葡萄糖,V02DC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DC 组内英文成分 2 个
+cn-bd28d21078,转化糖电解质,转化糖电解质,V02DC,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-86dc9560eb,肝水解肽,肝水解肽,V02DD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DD 组内无英文成分
+cn-e9b80ab1bd,抗乙型肝炎胎盘转移因子,抗乙型肝炎胎盘转移因子,V02DD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DD 组内无英文成分
+cn-ab4a01b6cd,蹄甲多肽,蹄甲多肽,V02DD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DD 组内无英文成分
+cn-dddcbedf9c,氨维,氨维,V02DE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DE 组内英文成分 2 个
+cn-0467349256,田参氨基酸,田参氨基酸,V02DE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DE 组内英文成分 2 个
+cn-aa70550327,维D2磷葡钙,维D2磷葡钙,V02DE,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-8945953f4c,单糖浆,单糖浆,V02DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DX 组内英文成分 7 个
+cn-a23da7965a,多种微量元素,多种微量元素,V02DX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-db2b3a2cad,复合辅酶,复合辅酶,V02DX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-74cea27274,谷丙甘氨酸,谷丙甘氨酸,V02DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DX 组内英文成分 7 个
+cn-bd42947c7b,L-赖氨酸盐酸盐,L-赖氨酸盐酸盐,V02DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DX 组内英文成分 7 个
+cn-1c17461e59,赖氨酸维B12,赖氨酸维B12,V02DX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-d157eda6ab,五维赖氨酸,五维赖氨酸,V02DX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-bf581b82b5,口服五维赖氨酸葡萄糖,口服五维赖氨酸葡萄糖,V02DX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-59200c74c4,碘解磷定,碘解磷定,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-0ce52486cb,二巯丙磺钠,二巯丙磺钠,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-29f8227d89,二巯丁二钠,二巯丁二钠,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-2319de8ea8,甘草酸铵,甘草酸铵,V03AB,,,,none,丢弃[ATC 冲突]：候选 Glycyrrhizin ATC A05BA vs 池内 V03AB
+cn-959513aa23,氯解磷定,氯解磷定,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-c518606e33,双半胱乙酯,双半胱乙酯,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-45c251f82c,盐酸戊乙奎醚,盐酸戊乙奎醚,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-e4b28805b8,亚锡双半胱氨酸,亚锡双半胱氨酸,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-9ef265e25b,亚锡双半胱乙酯,亚锡双半胱乙酯,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-f74fd17f31,亚硝酸异戊酯吸入剂,亚硝酸异戊酯吸入剂,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-df2058f876,乙酰胺,乙酰胺,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-d6eca02306,依达赛珠单抗,依达赛珠单抗,V03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AB 组内英文成分 27 个
+cn-70c7e6e6e4,聚磺苯乙烯钠,聚磺苯乙烯钠,V03AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AE 组内英文成分 21 个
+cn-3c4fbace72,碳酸司维拉姆,碳酸司维拉姆,V03AE,Sevelamer,sevelamer,cn2en,medium,ATC V03AE vs V03AE02 → L4；盐/酯 base_only
+cn-3eb61d73aa,蔗糖羟基氧化铁,蔗糖羟基氧化铁,V03AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AE 组内英文成分 21 个
+cn-27aba2f152,美司那,美司那,V03AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AF 组内英文成分 13 个
+cn-aebaeb44ca,盐酸曲拉西利,盐酸曲拉西利,V03AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AF 组内英文成分 13 个
+cn-b19459f464,左亚叶酸钙,左亚叶酸钙,V03AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AF 组内英文成分 13 个
+cn-abb9d4a8f2,左亚叶酸,左亚叶酸,V03AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AF 组内英文成分 13 个
+cn-a795f2cd1d,鱼肝油酸钠,鱼肝油酸钠,V03AM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AM 组内无英文成分
+cn-97af75e1d2,氨基丁酸维E,氨基丁酸维E,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-d76570d90e,灵芝二维甲硫氨酸,灵芝二维甲硫氨酸,V03AX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-ab3092d7c4,钠石灰,钠石灰,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-9905031733,盐酸纳呋拉啡,盐酸纳呋拉啡,V03AX,nalfurafine,,wikidata_cache,medium,ATC V03AX vs V03AX02 → L4；盐/酯 base_only；候选 INN 不在库（后续需新增 substance）
+cn-80a2adca80,人胎盘,人胎盘,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-13b7a341b0,人胎盘脂多糖,人胎盘脂多糖,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-64acc8eabc,人胎盘组织,人胎盘组织,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-6eaa821cd5,胎盘多肽,胎盘多肽,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-d1f7355358,维参锌,维参锌,V03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V03AX 组内英文成分 6 个
+cn-7b5683349f,癌抗原15-3免疫放射分析药盒,癌抗原15-3免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-c7db62b8e6,癌胚抗原放射免疫分析药盒,癌胚抗原放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-7b6e2d8a5e,丙型肝炎病毒抗体诊断试剂盒,丙型肝炎病毒抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-ec0bdfb78c,白蛋白放射免疫诊断试剂,白蛋白放射免疫诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-a7d613bc53,丙型肝炎病毒抗体检测试剂盒,丙型肝炎病毒抗体检测试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-aa333f7209,白桦花粉变应原皮肤点刺,白桦花粉变应原皮肤点刺,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-80c8ab6d3a,层粘连蛋白放射免疫分析药盒,层粘连蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-4c7862f4bf,C肽放射免疫诊断试剂,C肽放射免疫诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-e134a24d8e,碘[125I]TH糖蛋白放射免疫分析药盒,碘[125I]TH糖蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-414028a40c,碘[125I]β2-微球蛋白放射免疫分析药盒,碘[125I]β2-微球蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-410d11931d,碘[125I]癌胚抗原放射免疫分析药盒,碘[125I]癌胚抗原放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-7e866c8b53,碘[125I]白蛋白放射免疫分析药盒,碘[125I]白蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-de0aad950c,碘[125I]-雌二醇放射免疫分析药盒,碘[125I]-雌二醇放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-9ef67983a0,碘[125I]雌三醇放射免疫分析药盒,碘[125I]雌三醇放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-52e4274bf9,碘[125I]-催乳素放射免疫分析药盒,碘[125I]-催乳素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-e62ff61e71,碘[125I]地高辛放射免疫分析药盒,碘[125I]地高辛放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-3c1c0300ed,碘[125I]反三碘甲腺原氨酸放射免疫分析药盒,碘[125I]反三碘甲腺原氨酸放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-bf0651fcb0,碘[125I]甘胆酸放射免疫分析药盒,碘[125I]甘胆酸放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-f015ba3317,碘[125I]甲胎蛋白放射免疫分析药盒,碘[125I]甲胎蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-e0b94c2dbf,碘[125I]甲状腺球蛋白放射免疫分析药盒,碘[125I]甲状腺球蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b95c25f37b,碘[125I]甲状腺球蛋白抗体分析药盒,碘[125I]甲状腺球蛋白抗体分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-bb2757e740,碘[125I]-甲状腺素放射免疫分析药盒,碘[125I]-甲状腺素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-719f5d5da8,碘[125I]甲状腺微粒体抗体分析药盒,碘[125I]甲状腺微粒体抗体分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-5a64944e8e,碘[125I]皮质醇放射免疫分析药盒,碘[125I]皮质醇放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-7c09e84b55,碘[125I]醛固酮放射免疫分析药盒,碘[125I]醛固酮放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-724e292964,碘[125I]人C肽放射免疫分析药盒,碘[125I]人C肽放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-2000d6df2c,碘[125I]-人促黄体生成激素放射免疫分析药盒,碘[125I]-人促黄体生成激素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-96a1fb276f,碘[125I]-人促甲状腺激素放射免疫分析药盒,碘[125I]-人促甲状腺激素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b4d0993809,碘[125I]-人促卵泡生成激素放射免疫分析药盒,碘[125I]-人促卵泡生成激素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-48c9aa08b4,碘[125I]人绒毛膜促性腺激素-β亚单位放射免疫分析药盒,碘[125I]人绒毛膜促性腺激素-β亚单位放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-346106be97,碘[125I]人绒毛膜促性腺激素放射免疫分析药盒,碘[125I]人绒毛膜促性腺激素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-26f628cf19,碘[125I]人生长激素放射免疫分析药盒,碘[125I]人生长激素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-4373c2b217,碘[125I]三碘甲腺原氨酸放射免疫分析药盒,碘[125I]三碘甲腺原氨酸放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-bc5798e082,碘[125I]铁蛋白放射免疫分析药盒,碘[125I]铁蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-c528ecafab,碘[125I]胰高血糖素放射免疫分析药盒,碘[125I]胰高血糖素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-08451554d4,游离甲状腺素放射免疫分析药盒,游离甲状腺素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-ddad2f1cd0,碘[125I]游离甲状腺素放射免疫分析药盒,碘[125I]游离甲状腺素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-ba1b4f61a1,碘[125I]游离三碘甲状腺原氨酸放射免疫分析药盒,碘[125I]游离三碘甲状腺原氨酸放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-8e4caed20e,碘[125I]-孕酮放射免疫分析药盒,碘[125I]-孕酮放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-353b66887f,碘[125I]胰岛素抗体分析药盒,碘[125I]胰岛素抗体分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-393ce66494,碘[125I]人促甲状腺激素免疫放射分析药盒,碘[125I]人促甲状腺激素免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-2203e42d91,碘[125I]胰岛素放射免疫分析药盒,碘[125I]胰岛素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-63bfa8dffd,碘[125I]血管紧张素I放射免疫分析药盒,碘[125I]血管紧张素I放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-04e7bfb04a,碘[125I]心钠素放射免疫分析药盒,碘[125I]心钠素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-fecd5a17d8,碘[125I]胃泌素放射免疫分析药盒,碘[125I]胃泌素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-9064ea216b,碘[125I]血管紧张素II放射免疫分析药盒,碘[125I]血管紧张素II放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-c721f45e76,碘[125I]脱氧核糖核酸抗体分析药盒,碘[125I]脱氧核糖核酸抗体分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-53d3903c26,碘[125I]-睾酮放射免疫分析药盒,碘[125I]-睾酮放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-6cf2bc5975,游离三碘甲腺原氨酸放射免疫分析药盒,游离三碘甲腺原氨酸放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-73a181814a,粉尘螨皮肤点刺诊断试剂盒,粉尘螨皮肤点刺诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-8d2ae98761,反三碘甲状腺原氨酸放射免疫诊断试剂,反三碘甲状腺原氨酸放射免疫诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-bc30859502,黄花蒿花粉变应原皮肤点刺,黄花蒿花粉变应原皮肤点刺,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-3fb8da9527,甲状腺过氧化酶自身抗体放射免疫分析药盒,甲状腺过氧化酶自身抗体放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-d183952c8d,Ⅳ型胶原放射免疫分析药盒,Ⅳ型胶原放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-be1bb9e74c,甲状腺球蛋白抗体及甲状腺微粒体抗体诊断试剂盒,甲状腺球蛋白抗体及甲状腺微粒体抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-5c404ee553,甲状腺球蛋白抗体及甲状腺微粒抗体诊断试剂盒,甲状腺球蛋白抗体及甲状腺微粒抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-11170d8077,甲胎蛋白放射免疫分析药盒,甲胎蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-efefd00c0f,抗A抗B血型定型试剂,抗A抗B血型定型试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-596b76f2b7,葎草花粉变应原皮肤点刺,葎草花粉变应原皮肤点刺,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-55174b62c6,螨变应原皮肤点刺试剂盒,螨变应原皮肤点刺试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-d580c30c13,梅毒甲苯胺红不加热血清试验诊断试剂,梅毒甲苯胺红不加热血清试验诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-ea743cebeb,梅毒快速血浆反应素诊断试剂,梅毒快速血浆反应素诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-c05d2608ab,梅毒螺旋体抗体诊断试剂盒,梅毒螺旋体抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-f5810e05c6,内皮素放射免疫分析药盒,内皮素放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-653aec96cf,尿素[13C]呼气试验诊断试剂盒,尿素[13C]呼气试验诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-0a45349df6,尿素[13C]胶囊呼气试验药盒,尿素[13C]胶囊呼气试验药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-3ca7b2b57f,尿素[13C]片呼气试验药盒,尿素[13C]片呼气试验药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-70a4e66f65,尿素[13C]散剂呼气试验药盒,尿素[13C]散剂呼气试验药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-71f845ffbe,尿素[14C]呼气试验药盒,尿素[14C]呼气试验药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b224794385,皮炎诊断,皮炎诊断,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-7cb38c07f0,Ⅲ型前胶原氨端肽放射免疫分析药盒,Ⅲ型前胶原氨端肽放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-732b80a8b3,前列腺特异抗原免疫放射分析药盒,前列腺特异抗原免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b05e939ad2,人类免疫缺陷病毒(HIV)抗原抗体诊断试剂盒,人类免疫缺陷病毒(HIV)抗原抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b181fa54bd,人类免疫缺陷病毒抗体抗原联合诊断试剂盒,人类免疫缺陷病毒抗体抗原联合诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-10ac32b206,人类免疫缺陷病毒抗体诊断试剂盒,人类免疫缺陷病毒抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-062f755152,人类免疫缺陷病毒抗原抗体诊断试剂盒,人类免疫缺陷病毒抗原抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-191d807bc5,人血清促甲状腺素受体自身抗体放射受体分析药盒,人血清促甲状腺素受体自身抗体放射受体分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-5944dbbf05,人促甲状腺激素免疫放射诊断试剂,人促甲状腺激素免疫放射诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-3ad33cd645,人绒毛膜促性腺激素β亚单位放射免疫试剂盒,人绒毛膜促性腺激素β亚单位放射免疫试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-0cd34da141,人类免疫缺陷病毒抗原抗体检测试剂盒,人类免疫缺陷病毒抗原抗体检测试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-31a904f8fe,神经原特异性烯醇化酶免疫放射分析药盒,神经原特异性烯醇化酶免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-dbb3400d72,糖类抗原125免疫放射分析药盒,糖类抗原125免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b24754c6bc,糖类抗原242免疫放射分析药盒,糖类抗原242免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-a320ff6b44,糖类抗原50免疫放射分析药盒,糖类抗原50免疫放射分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-f99e2e0c3c,糖类抗原50放射免疫诊断试剂盒,糖类抗原50放射免疫诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-9b2a466928,α1-微球蛋白放射免疫分析药盒,α1-微球蛋白放射免疫分析药盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-d989f308d6,屋尘螨皮肤点刺诊断试剂盒,屋尘螨皮肤点刺诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-5155c7b3e0,乙型肝炎病毒e抗体诊断试剂盒,乙型肝炎病毒e抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-bca806ae86,乙型肝炎病毒表面抗体诊断试剂盒,乙型肝炎病毒表面抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-5e025471ef,乙型肝炎病毒表面抗原诊断试剂盒,乙型肝炎病毒表面抗原诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-ede1239590,乙型肝炎病毒、 丙型肝炎病毒 、人类免疫缺陷病毒(1＋2型)核酸,乙型肝炎病毒、 丙型肝炎病毒 、人类免疫缺陷病毒(1＋2型)核酸,V04CW,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-f320713b24,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒(1＋2型)核酸检测,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒(1＋2型)核酸检测,V04CW,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-6ed34caebf,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒(1＋2型)核酸检测试剂,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒(1＋2型)核酸检测试剂,V04CW,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-87502e499d,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒(1型)核酸检测试剂盒,乙型肝炎病毒丙型肝炎病毒人类免疫缺陷病毒(1型)核酸检测试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-22f25544a6,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒(1型)核酸检,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒(1型)核酸检,V04CW,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-68a3fbd396,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒1型核酸检测试剂,乙型肝炎病毒、丙型肝炎病毒、人类免疫缺陷病毒1型核酸检测试剂,V04CW,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-1ed9444975,乙型肝炎病毒核心抗体诊断试剂盒,乙型肝炎病毒核心抗体诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-b42eed7392,乙型肝炎病毒e抗原诊断试剂盒,乙型肝炎病毒e抗原诊断试剂盒,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-219cbad010,胰岛素放射免疫诊断试剂,胰岛素放射免疫诊断试剂,V04CW,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CW 组内无英文成分
+cn-33f0ed256f,氯醋甲胆碱,氯醋甲胆碱,V04CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V04CX 组内英文成分 25 个
+cn-10ce7afe9a,螨变应原,螨变应原,V06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V06AA 组内无英文成分
+cn-0d70cb21f0,屋尘螨变应原制剂,屋尘螨变应原制剂,V06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V06AA 组内无英文成分
+cn-3f95c24af4,哈拉宗,哈拉宗,V07AV,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V07AV 组内无英文成分
+cn-d6d651e98e,甲酚皂,甲酚皂,V07AV,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V07AV 组内无英文成分
+cn-d8d2265f57,加香甲酚皂,加香甲酚皂,V07AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V07AX 组内英文成分 2 个
+cn-e52f64eae1,高渗枸橼酸盐嘌呤,高渗枸橼酸盐嘌呤,V07AY,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V07AY 组内无英文成分
+cn-99dbf331de,纳米炭混悬,纳米炭混悬,V07AY,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V07AY 组内无英文成分
+cn-59c390802a,碘比醇,碘比醇,V08AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08AB 组内英文成分 10 个
+cn-dfcd1324c0,钆贝葡胺,钆贝葡胺,V08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08CA 组内英文成分 19 个
+cn-b7902e5328,钆特醇,钆特醇,V08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08CA 组内英文成分 19 个
+cn-30c80b0164,八氟丙烷脂质微球,八氟丙烷脂质微球,V08DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08DA 组内英文成分 5 个
+cn-ed46c3f201,全氟丙烷人血白蛋白微球,全氟丙烷人血白蛋白微球,V08DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08DA 组内英文成分 5 个
+cn-bcd7a851cf,全氟丁烷微球,全氟丁烷微球,V08DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08DA 组内英文成分 5 个
+cn-6e014fab8b,双重造影产气剂,双重造影产气剂,V08DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V08DA 组内英文成分 5 个
+cn-29769ea3a6,放射性碘[125I]化钠,放射性碘[125I]化钠,V09AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09AX 组内英文成分 6 个
+cn-749eadf347,锝[99mTc]亚甲基二膦酸,锝[99mTc]亚甲基二膦酸,V09BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09BA 组内英文成分 2 个
+cn-628fb5cebd,锝[99Tc]亚甲基二膦酸盐,锝[99Tc]亚甲基二膦酸盐,V09BA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09BA 组内英文成分 2 个
+cn-5e2b7e3783,锝[99mTc]二巯丁二酸盐,锝[99mTc]二巯丁二酸盐,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-2d31bed696,锝[99mTc]喷替酸盐,锝[99mTc]喷替酸盐,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-69aa6328b5,锝[99mTc]双半胱氨酸,锝[99mTc]双半胱氨酸,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-26a26f6713,锝[99mTc]双半胱乙酯,锝[99mTc]双半胱乙酯,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-39624974ad,双半胱氨酸,双半胱氨酸,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-d3c22a4075,亚锡二巯丁二钠,亚锡二巯丁二钠,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-0b90d47af1,亚锡喷替酸,亚锡喷替酸,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-44b675dc31,亚锡葡庚糖酸钠,亚锡葡庚糖酸钠,V09CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CA 组内英文成分 4 个
+cn-96ccc60536,邻碘[131I]马尿酸钠,邻碘[131I]马尿酸钠,V09CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09CX 组内无英文成分
+cn-ad38258d80,锝[99mTc]植酸盐,锝[99mTc]植酸盐,V09DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09DB 组内英文成分 3 个
+cn-ae1116028c,亚锡植酸钠,亚锡植酸钠,V09DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09DB 组内英文成分 3 个
+cn-cf4c8fc7bf,甲氧异腈,甲氧异腈,V09GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09GA 组内英文成分 4 个
+cn-b515fb2830,亚锡甲氧异腈,亚锡甲氧异腈,V09GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09GA 组内英文成分 4 个
+cn-29fbdb9d76,亚锡焦磷酸钠,亚锡焦磷酸钠,V09GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09GA 组内英文成分 4 个
+cn-399b4ab048,亚锡替曲膦,亚锡替曲膦,V09GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09GA 组内英文成分 4 个
+cn-994c82d90f,碘[125I]密封籽源,碘[125I]密封籽源,V09GB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09GB 组内无英文成分
+cn-a66df51425,氯化亚铊,氯化亚铊,V09GX,,,,none,丢弃[ATC 无法校验]：候选 Thallium 在库但无 ATC
+cn-51c2d99266,碘[131I]美妥昔单抗皮试制剂,碘[131I]美妥昔单抗皮试制剂,V09IX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09IX 组内英文成分 15 个
+cn-ef205c254e,碘[131I]美妥昔单抗,碘[131I]美妥昔单抗,V09IX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09IX 组内英文成分 15 个
+cn-8ef9735c05,来昔决南钐,来昔决南钐,V10BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V10BX 组内英文成分 3 个
+cn-53e1b38b20,磷[32P]酸钠盐,磷[32P]酸钠盐,V10XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V10XX 组内英文成分 7 个
+cn-5edb4144c1,氯化镭,氯化镭,V10XX,,,,none,丢弃[ATC 无法校验]：候选 Radium 在库但无 ATC
+cn-8fe7222b3a,热敷袋,热敷袋,V20AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V20AX 组内无英文成分
+cn-a1f20a56ec,戊二酸利那拉生酯,戊二酸利那拉生酯,A02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A02BC 组内英文成分 18 个
+cn-31ad3764f7,硫酸镁钠钾囗服用浓,硫酸镁钠钾囗服用浓,A06AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A06AD 组内英文成分 14 个
+cn-42c939ae02,口服溶液用盐酸万古霉素,口服溶液用盐酸万古霉素,A07AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A07AA 组内英文成分 6 个
+cn-a69592ad9f,胰酶胆汁,胰酶胆汁,A09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A09AA 组内英文成分 16 个
+cn-ecc988f6ca,精蛋白锌赖脯胰岛素混合,精蛋白锌赖脯胰岛素混合,A10AD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AD 组内英文成分 3 个
+cn-f95627fa4a,依柯胰岛素,依柯胰岛素,A10AE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10AE 组内英文成分 6 个
+cn-e9e2df56f3,恒格列净二甲双胍,恒格列净二甲双胍,A10BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BD 组内无英文成分
+cn-87f3037331,苯甲酸福格列汀,苯甲酸福格列汀,A10BH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BH 组内英文成分 11 个
+cn-2ac2304753,考格列汀,考格列汀,A10BH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BH 组内英文成分 11 个
+cn-323b08e347,普卢格列汀,普卢格列汀,A10BH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BH 组内英文成分 11 个
+cn-1cef93338d,磷酸森格列汀,磷酸森格列汀,A10BH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BH 组内英文成分 11 个
+cn-3ffd61979e,依苏帕格鲁肽α,依苏帕格鲁肽α,A10BJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BJ 组内英文成分 6 个
+cn-512ccb57f7,脯氨酸加格列净,脯氨酸加格列净,A10BK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A10BK 组内英文成分 7 个
+cn-9998db89c9,磷酸二氢钠磷酸氢二钠,磷酸二氢钠磷酸氢二钠,A12CX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A12CX 组内英文成分 8 个
+cn-0f84918e42,苯乙酸钠苯甲酸钠,苯乙酸钠苯甲酸钠,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-486a717668,尼替西农口服,尼替西农口服,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-2f61083658,盐酸曲恩汀,盐酸曲恩汀,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-c4fb8a2850,替度格鲁肽,替度格鲁肽,A16AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 A16AX 组内英文成分 33 个
+cn-b0c210597d,枸橼酸倍维巴肽,枸橼酸倍维巴肽,B01AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B01AC 组内英文成分 20 个
+cn-d52b9b9971,伏尼凝血素α,伏尼凝血素α,B02BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BC 组内英文成分 5 个
+cn-358d22c486,培妥罗凝血素α,培妥罗凝血素α,B02BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BD 组内英文成分 42 个
+cn-1e058c413f,罗普司亭N01,罗普司亭N01,B02BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 B02BX 组内英文成分 14 个
+cn-a62f661d43,ω-3甘油三酯(2%)中/长链脂肪乳/氨基酸(16)/葡萄糖(16%)注射,ω-3甘油三酯(2%)中/长链脂肪乳/氨基酸(16)/葡萄糖(16%)注射,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-198c89bb86,ω-3甘油三酯(2%)中/长链脂肪乳/氨基酸(16)/葡萄糖(30%)注射,ω-3甘油三酯(2%)中/长链脂肪乳/氨基酸(16)/葡萄糖(30%)注射,B05BA,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-421987e092,醋酸钠葡萄糖,醋酸钠葡萄糖,B05BB,Glucose | intravenous sugar solution,glucose,cn2en; db_inn_zh; wikidata_cache,low,不定案：2 个候选（ATC B05BB；盐/酯 Glucose:base_only/intravenous sugar solution:base_only）
+cn-11a0e59f80,葡萄糖/电解质颅脑手术,葡萄糖/电解质颅脑手术,B05CX,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-61cbf190a1,二氮嗪口服,二氮嗪口服,C02DA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 C02DA 组内唯一英文成分 Diazoxide，但中文名对不上（不猜，未定案）
+cn-7175bdb5de,氯维地平,氯维地平,C08CA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C08CA 组内英文成分 17 个
+cn-8cd876c9e4,精氨酸培哚普利,精氨酸培哚普利,C09AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C09AA 组内英文成分 21 个
+cn-6c1f8b18ec,阿利沙坦酯氨氯地平,阿利沙坦酯氨氯地平,C09DB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C09DB 组内无英文成分
+cn-70f182e7d8,昂戈瑞西单抗,昂戈瑞西单抗,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-7e4ebb4af5,瑞卡西单抗,瑞卡西单抗,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-cc51ebc614,伊努西单抗,伊努西单抗,C10AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 C10AX 组内英文成分 23 个
+cn-723e5bea13,甘油外用,甘油外用,D02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D02AX 组内英文成分 4 个
+cn-dbbf669e57,冻干鼠表皮生长因子,冻干鼠表皮生长因子,D03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D03AX 组内英文成分 9 个
+cn-06f481b098,氟轻松氢醌维A酸,氟轻松氢醌维A酸,D07XC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D07XC 组内无英文成分
+cn-2401eecd45,司普奇拜单抗,司普奇拜单抗,D11AH,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 D11AH 组内英文成分 9 个
+cn-97cdb50b7c,雌二醇地屈孕酮,雌二醇地屈孕酮,G03FA,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 G03FA 组内唯一英文成分 Ethisterone，但中文名对不上（不猜，未定案）
+cn-c94b0c36ad,人促卵泡激素δ,人促卵泡激素δ,G03GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G03GA 组内英文成分 17 个
+cn-db2a6c5546,前列地尔尿道,前列地尔尿道,G04BE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 G04BE 组内英文成分 6 个
+cn-b2f9aa7aa8,人促甲状腺素,人促甲状腺素,H01AB,,,,none,丢弃[仅 ATC4 唯一]：ATC 前 5 位 H01AB 组内唯一英文成分 Thyrotropin Alfa，但中文名对不上（不猜，未定案）
+cn-769ed45d88,伐莫洛龙口服,伐莫洛龙口服,H02AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H02AB 组内英文成分 8 个
+cn-9b42f4a513,依伏卡塞,依伏卡塞,H05BX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 H05BX 组内英文成分 6 个
+cn-bc3c039ca5,舒巴坦钠/注射用度洛巴坦钠组合包装,舒巴坦钠/注射用度洛巴坦钠组合包装,J01CG,,,,none,丢弃[复方/多成分]：cn_inn_overrides status=combination → 不映射
+cn-59d8b811c0,甲磺酸加诺沙星,甲磺酸加诺沙星,J01MA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01MA 组内英文成分 12 个
+cn-ffd406b262,醋酸来法莫林,醋酸来法莫林,J01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J01XX 组内英文成分 12 个
+cn-dd8d5fa7bc,普托马尼,普托马尼,J04AK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J04AK 组内英文成分 7 个
+cn-3104babe3d,甲磺酸普雷福韦,甲磺酸普雷福韦,J05AF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AF 组内英文成分 22 个
+cn-ad78ba84fb,恩曲利匹丙诺,恩曲利匹丙诺,J05AR,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AR 组内英文成分 4 个
+cn-27cf456cb0,马立巴韦,马立巴韦,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-f89a8d9d21,玛舒拉沙韦,玛舒拉沙韦,J05AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J05AX 组内英文成分 23 个
+cn-4538ef0507,泽美洛韦玛佐瑞韦单抗,泽美洛韦玛佐瑞韦单抗,J06BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 J06BB 组内英文成分 17 个
+cn-bf03593790,利厄替尼,利厄替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-644ad17188,甲磺酸瑞厄替尼,甲磺酸瑞厄替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-823a0e7aef,甲磺酸瑞齐替尼,甲磺酸瑞齐替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-98f7683202,盐酸佐利替尼,盐酸佐利替尼,L01EB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EB 组内英文成分 8 个
+cn-f3d8b6625c,枸橼酸依奉阿克,枸橼酸依奉阿克,L01ED,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01ED 组内英文成分 5 个
+cn-ee9cd28ee1,妥拉美替尼,妥拉美替尼,L01EE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EE 组内英文成分 6 个
+cn-4ae223b39a,硫酸艾玛昔替尼,硫酸艾玛昔替尼,L01EJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EJ 组内英文成分 5 个
+cn-b74c6267b5,戈利昔替尼,戈利昔替尼,L01EJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EJ 组内英文成分 5 个
+cn-94c72f70f4,马来酸阿可替尼,马来酸阿可替尼,L01EL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EL 组内英文成分 5 个
+cn-c362becc70,匹妥布替尼,匹妥布替尼,L01EL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EL 组内英文成分 5 个
+cn-c723dfba34,伊那利塞,伊那利塞,L01EM,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EM 组内英文成分 4 个
+cn-147cd12af7,富马酸安奈克替尼,富马酸安奈克替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-632c1b91de,氟泽雷塞,氟泽雷塞,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-13d256fa80,盐酸卡马替尼,盐酸卡马替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-0fb0d26ee0,己二酸他雷替尼,己二酸他雷替尼,L01EX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01EX 组内英文成分 27 个
+cn-e281797fb4,艾沙妥昔单抗,艾沙妥昔单抗,L01FC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FC 组内英文成分 2 个
+cn-f94d8f1f9d,西妥昔单抗β,西妥昔单抗β,L01FE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FE 组内英文成分 3 个
+cn-b8775d5ea9,西妥昔单抗N01,西妥昔单抗N01,L01FE,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FE 组内英文成分 3 个
+cn-48a70199bd,艾帕洛利托沃瑞利单抗,艾帕洛利托沃瑞利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-1668f6081c,贝莫苏拜单抗,贝莫苏拜单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-0199a21971,恩朗苏拜单抗,恩朗苏拜单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-7e9b2a4bcb,菲诺利单抗,菲诺利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-b367ed1bc4,塔戈利单抗,塔戈利单抗,L01FF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FF 组内英文成分 12 个
+cn-5f1328959c,埃纳妥单抗,埃纳妥单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-ad74b64db8,芦康沙妥珠单抗,芦康沙妥珠单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-59ef203a93,莫妥珠单抗,莫妥珠单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-6f2ddd8828,索米妥昔单抗,索米妥昔单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-bc693d1f4e,特立妥单抗,特立妥单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-2206e0a454,塔奎妥单抗,塔奎妥单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-50d91046c8,维恩妥尤单抗,维恩妥尤单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-3a8287e82b,依沃西单抗,依沃西单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-1221be771a,佐妥昔单抗,佐妥昔单抗,L01FX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01FX 组内英文成分 32 个
+cn-5575bfb2f4,尼拉帕利阿比特龙,尼拉帕利阿比特龙,L01XK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XK 组内英文成分 4 个
+cn-3aef72d4ef,塞纳帕利,塞纳帕利,L01XK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XK 组内英文成分 4 个
+cn-c988aad128,甲苯磺酸他拉唑帕利,甲苯磺酸他拉唑帕利,L01XK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XK 组内英文成分 4 个
+cn-3ed2f1ba9a,泽沃基奥仑赛,泽沃基奥仑赛,L01XL,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XL 组内英文成分 10 个
+cn-53f830a166,盐酸阿那格雷,盐酸阿那格雷,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-79ff6d2be6,格索雷塞,格索雷塞,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-a3ae370584,可伐利单抗,可伐利单抗,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-6c34a77281,芦比替定,芦比替定,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-fd83922cb6,氢溴酸他泽司他,氢溴酸他泽司他,L01XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XX 组内英文成分 37 个
+cn-537635d785,帕妥珠曲妥珠单抗,帕妥珠曲妥珠单抗,L01XY,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L01XY 组内无英文成分
+cn-da2b8f4f8b,罗培干扰素α-2b,罗培干扰素α-2b,L03AB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L03AB 组内英文成分 15 个
+cn-90e33fd6cc,甲磺酸贝舒地尔,甲磺酸贝舒地尔,L04AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AA 组内英文成分 23 个
+cn-a62a570c24,阿那白滞素,阿那白滞素,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-3c6ec9a999,比奇珠单抗,比奇珠单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-bd122cedfa,夫那奇珠单抗,夫那奇珠单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-e616a90c2a,利纳西普,利纳西普,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-1607a53bc6,赛立奇单抗,赛立奇单抗,L04AC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AC 组内英文成分 23 个
+cn-741ee39202,替妥尤单抗N01,替妥尤单抗N01,L04AG,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AG 组内英文成分 12 个
+cn-1fb204f1eb,盐酸伊普可泮,盐酸伊普可泮,L04AJ,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 L04AJ 组内英文成分 11 个
+cn-047f4ee85a,富马酸泰吉利定,富马酸泰吉利定,N02AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02AX 组内英文成分 6 个
+cn-b1dd997934,苯磺酸克利加巴林,苯磺酸克利加巴林,N02BF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BF 组内英文成分 2 个
+cn-9c193cebed,苯磺酸美洛加巴林,苯磺酸美洛加巴林,N02BF,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02BF 组内英文成分 2 个
+cn-9344cb438b,琥珀酸呋罗曲坦,琥珀酸呋罗曲坦,N02CC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CC 组内英文成分 12 个
+cn-8be86b2ddf,加卡奈珠单抗,加卡奈珠单抗,N02CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CD 组内英文成分 9 个
+cn-a3aa5c7855,硫酸瑞美吉泮,硫酸瑞美吉泮,N02CD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N02CD 组内英文成分 9 个
+cn-fbdd4a4360,吡仑帕奈口服,吡仑帕奈口服,N03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AX 组内英文成分 19 个
+cn-ec1577ea4e,布立西坦,布立西坦,N03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AX 组内英文成分 19 个
+cn-32e151a36b,加那索龙,加那索龙,N03AX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N03AX 组内英文成分 19 个
+cn-027830f266,罗替高汀微球,罗替高汀微球,N04BC,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N04BC 组内英文成分 9 个
+cn-36d702c107,甲磺酸沙非胺,甲磺酸沙非胺,N04BD,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N04BD 组内英文成分 4 个
+cn-997ef86830,洛沙平吸入剂,洛沙平吸入剂,N05AH,Loxapine,loxapine,wikidata_cache,high,ATC N05AH vs N05AH01 → L4；盐/酯 same
+cn-bbf4a2c7d5,重酒石酸利斯的明,重酒石酸利斯的明,N06DA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N06DA 组内英文成分 7 个
+cn-d64f8f5bb5,盐酸纳曲酮植入剂,盐酸纳曲酮植入剂,N07BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07BB 组内英文成分 8 个
+cn-f07f8c7278,托夫生,托夫生,N07XX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 N07XX 组内英文成分 30 个
+cn-66763e7c8d,阿地溴铵吸入,阿地溴铵吸入,R03BB,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03BB 组内英文成分 11 个
+cn-b76718214e,盐酸克仑特罗,盐酸克仑特罗,R03CK,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03CK 组内无英文成分
+cn-5623370855,本瑞利珠单抗,本瑞利珠单抗,R03DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 R03DX 组内英文成分 8 个
+cn-6c739634f0,北芪精,北芪精,V02DX,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V02DX 组内英文成分 7 个
+cn-e0f2f50f33,德国小蠊变应原皮肤点刺,德国小蠊变应原皮肤点刺,V06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V06AA 组内无英文成分
+cn-8673b89711,猫毛皮屑变应原皮肤点刺,猫毛皮屑变应原皮肤点刺,V06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V06AA 组内无英文成分
+cn-d9153c8118,悬铃木花粉变应原皮肤点刺,悬铃木花粉变应原皮肤点刺,V06AA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V06AA 组内无英文成分
+cn-d5c7ccf0f4,异硫蓝,异硫蓝,V07AY,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V07AY 组内无英文成分
+cn-2d6a40596b,锝[99mTc]替曲膦,锝[99mTc]替曲膦,V09GA,,,,none,丢弃[无名字证据]：无本地名字证据；ATC 前 5 位 V09GA 组内英文成分 4 个
