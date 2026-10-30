@@ -135,9 +135,11 @@ I18N = {
         "nav.search": "Search", "nav.confused": "Confused names", "nav.about": "About",
         "nav.whatsnew": "What's new",
         "home.h1": "Find out what a medicine really is",
-        "home.sub": ("Type a brand name, a generic name, a nickname, or a line from the pack. "
-                     "Chinese, full-width and Cyrillic input all work, and you can include the "
-                     "dose — e.g. Lipitor 20mg, Tylenol, or Paracetamol 500mg."),
+        "home.sub": ("Brand name, generic name, nickname, or a line from the pack — Chinese, "
+                     "full-width and Cyrillic input all work. You always get a candidate set, "
+                     "never a single answer."),
+        "home.recent": "Recently updated",
+        "home.recent_all": "See all updates →",
         "home.ph": "Brand name / generic name / nickname / a line from the pack",
         "home.all": "All countries and regions", "home.us": "United States",
         "home.gb": "United Kingdom", "home.cn": "China", "home.es": "Spain",
@@ -316,9 +318,11 @@ I18N = {
         "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
         "nav.whatsnew": "Novedades",
         "home.h1": "Descubre qué es realmente un medicamento",
-        "home.sub": ("Escribe un nombre comercial, un genérico, un apodo o una línea del envase. "
-                     "También funciona en chino, ancho completo y cirílico; puedes incluir la "
-                     "dosis — p. ej. Paracetamol 500mg, Ibuprofeno 600mg o Lipitor 20mg."),
+        "home.sub": ("Nombre comercial, genérico, apodo o una línea del envase — también funciona "
+                     "en chino, ancho completo y cirílico. Siempre obtienes un conjunto de "
+                     "candidatos, nunca una única respuesta."),
+        "home.recent": "Novedades recientes",
+        "home.recent_all": "Ver todas las novedades →",
         "home.ph": "Nombre comercial / genérico / apodo / una línea del envase",
         "home.all": "Todos los países y regiones", "home.us": "Estados Unidos",
         "home.gb": "Reino Unido", "home.cn": "China", "home.es": "España",
@@ -501,8 +505,10 @@ I18N = {
         "nav.search": "检索", "nav.confused": "易混淆药名", "nav.about": "关于",
         "nav.whatsnew": "更新日志",
         "home.h1": "查一个药名，看它在各国是什么",
-        "home.sub": ("商品名、通用名、俗称都能搜（比如「两只青蛙」）；支持中英文、全角、"
-                     "西里尔字母，也可以连剂量一起输入，例如 Lipitor 20mg、泰诺、СОРТИС。"),
+        "home.sub": ("商品名、通用名、俗称或包装上一行字；中英文、全角、西里尔字母都能搜。"
+                     "结果永远是候选集，不是唯一答案。"),
+        "home.recent": "最近更新",
+        "home.recent_all": "查看全部更新 →",
         "home.ph": "商品名 / 通用名 / 俗称 / 包装上的一行字",
         "home.all": "全部国家和地区", "home.us": "美国",
         "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
@@ -994,8 +1000,10 @@ UI_I18N = {
         "atc.none": "已收錄的有效成分中沒有這個 ATC 碼或前綴。",
         "atc.none_meta": "{code} 沒有 ATC 命中",
         "atc.loading": "正在載入索引以進行 ATC 搜尋…",
-        "home.sub": ("商品名、通用名、俗稱或包裝上一行字；支援中英文、全形、西里爾字母，"
-                     "也可連劑量一起輸入，例如 Lipitor 20mg、泰諾、СОРТИС。"),
+        "home.sub": ("商品名、通用名、俗稱或包裝上一行字；中英文、全形、西里爾字母都能搜。"
+                     "結果永遠是候選集，不是唯一答案。"),
+        "home.recent": "最近更新",
+        "home.recent_all": "查看全部更新 →",
         "home.hint_idle": ("首次搜尋只載入一個檢索分片（中位約 1.0 MB，gzip 後約 0.16 MB）；"
                            "完整索引（core 約 42 MB，gzip 後約 9–10 MB）會在背景補齊"
                            "——直接輸入、點搜尋框或選一個範例。"),
@@ -2356,7 +2364,7 @@ def build_warn(db: sqlite3.Connection) -> int:
 <div class="notice warnbox" data-i18n-html="warn.source_note">{I18N["en"]["warn.source_note"]}</div>
 <script>{pager_js}</script>"""
     html = page("Warnings", body, meta_key="warn", alternates=True,
-                canonical_rel="warn.html", alt_rel="warn.html")
+                canonical_rel="warn.html", alt_rel="warn.html", nav_coverage=True)
     _write_with_copies("warn.html", html, "warn")
     return len(rows)
 
@@ -2581,6 +2589,16 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
   border-radius:999px;background:#faf9f6;color:var(--fg);font-size:13px}
 .catchip:hover{border-color:var(--accent)}
+/* v0.9.6 task-143：首页「最近更新」= 最近 3 个版本（版本号/日期是事实，不翻译） */
+.homeupd{margin:18px 0 6px}
+.homeupd h2{font-size:16px;margin:0 0 8px}
+.homeupd .updlist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.homeupd .updlist a{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;
+  border:1px solid var(--line);border-radius:999px;background:#faf9f6;color:var(--fg);
+  font-size:13px;text-decoration:none}
+.homeupd .updlist a:hover{border-color:var(--accent)}
+.homeupd .upd-date{color:var(--muted);font-size:12px}
+.homeupd .sub{margin:8px 0 0;font-size:13px}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 /* v0.9.1 task-22：可访问性基础 */
 .skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:#0b6b53;color:#fff;
@@ -5164,11 +5182,19 @@ def build_terms_json(db: sqlite3.Connection) -> dict[str, int]:
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
          canonical_rel: str = "", alt_rel: str = "", head_js: str = "",
-         noindex: bool = False, defer_i18n: bool = True) -> str:
+         noindex: bool = False, defer_i18n: bool = True,
+         nav_coverage: bool = False) -> str:
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
     )
+    # v0.9.6 task-142：只有顶层页静态写「覆盖与新鲜度」入口（8 页 ×4 语 ≈ +3 KB）。
+    # 长尾页（drug/name/combo/maker/atc 子页，约 121k 页）继续由 boot.js 注入，
+    # 每页 +110 B 会吃掉 900 MiB 上限剩下的 1.76 MiB。
+    cov_nav = ""
+    if nav_coverage:
+        cov_nav = (f'    <a href="{prefix}coverage.html" data-i18n="nav.coverage" '
+                   f'data-coverage="1">Coverage</a>\n')
     alt = ""
     if alternates:
         # hreflang 必须带 GitHub Pages 的项目子路径（线上是 /drug-brand-crossref/），
@@ -5245,7 +5271,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     <a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What's new</a>
     <a href="{prefix}glossary.html" data-i18n="nav.glossary">Glossary</a>
     <a href="{prefix}atc.html" data-i18n="nav.atc">ATC &amp; categories</a>
-    <span class="langs">{sw}</span></nav>
+{cov_nav}    <span class="langs">{sw}</span></nav>
 </div></header>
 <main id="main"><div class="wrap">{body}</div></main>
 <footer><div class="wrap">
@@ -5485,7 +5511,7 @@ def build_whats_new() -> None:
             f'<section class="release"><h2>{esc(ver)}'
             f'<span class="rel-date">{esc(r["date"])}</span></h2>{body_html}</section>')
     html = page("What's new", "\n".join(parts), meta_key="whatsnew", alternates=True,
-                canonical_rel="whats-new.html", alt_rel="whats-new.html")
+                canonical_rel="whats-new.html", alt_rel="whats-new.html", nav_coverage=True)
     _write_with_copies("whats-new.html", html, "whatsnew")
 
 
@@ -7112,19 +7138,15 @@ def _sort_strength(text: str) -> float:
 
 
 # v0.6.5：首页示例按钮按页面语言渲染（en/es/zh/zh-Hant；zh-Hant 用繁體示例）
+# v0.9.6 task-143：去掉原「hero」一整排示例按钮（与 3 步引导里的 Try 重复），只留引导内示例。
 HOME_EXAMPLES = {
-    "en": {"hero": ["Lipitor 20mg", "Tylenol", "Benadryl", "Gaviscon"],
-           "try1": ["Lipitor 20mg", "Tylenol"], "try2": ["Paracetamol 500mg"],
+    "en": {"try1": ["Lipitor 20mg", "Tylenol"], "try2": ["Paracetamol 500mg"],
            "try3": ["Benadryl", "Gaviscon"]},
-    "es": {"hero": ["Paracetamol 500mg", "Ibuprofeno 600mg", "Omeprazol 20mg",
-                    "Loratadina 10mg"],
-           "try1": ["Paracetamol 500mg", "Omeprazol 20mg"],
+    "es": {"try1": ["Paracetamol 500mg", "Omeprazol 20mg"],
            "try2": ["Ibuprofeno 600mg"], "try3": ["Loratadina 10mg", "Omeprazol 20mg"]},
-    "zh": {"hero": ["泰诺", "两只青蛙", "Lipitor 20mg", "Benadryl", "Gaviscon"],
-           "try1": ["泰诺", "Lipitor 20mg"], "try2": ["两只青蛙"],
+    "zh": {"try1": ["泰诺", "Lipitor 20mg"], "try2": ["两只青蛙"],
            "try3": ["Benadryl", "Gaviscon"]},
-    "zh-Hant": {"hero": ["泰諾", "兩隻青蛙", "Lipitor 20mg", "Benadryl", "Gaviscon"],
-                "try1": ["泰諾", "Lipitor 20mg"], "try2": ["兩隻青蛙"],
+    "zh-Hant": {"try1": ["泰諾", "Lipitor 20mg"], "try2": ["兩隻青蛙"],
                 "try3": ["Benadryl", "Gaviscon"]},
 }
 
@@ -7140,6 +7162,34 @@ def _app_boot(prefix: str) -> str:
             'var s=document.createElement("script");'
             's.src="' + prefix + 'assets/app.js?v=' + BUILD_V + '";'
             'document.body.appendChild(s);});</script>')
+
+
+def _coverage_entry_js(root_expr: str) -> str:
+    """v0.9.6 task-142：nav / footer 的「覆盖与新鲜度」入口注入（幂等）。
+
+    顶层页已由 page(nav_coverage=True) 写好静态链接（带 data-coverage），约 121k 个
+    长尾页仍靠这里补。除了 data-coverage 再按 href 判断一次：页面已有静态链接时
+    不插第二次，脚本重复执行也安全。
+    root_expr 是站点根 URL 的 JS 表达式（boot.js 用 'r'，首页内联用 '_r'）。
+    """
+    return (
+        "(function(){var n=document.querySelector('header nav');"
+        "function has(el){if(!el)return true;"
+        "if(el.querySelector('[data-coverage]'))return true;"
+        "var as=el.getElementsByTagName('a');"
+        "for(var i=0;i<as.length;i++){var h=as[i].getAttribute('href')||'';"
+        "if(h.indexOf('coverage.html')>=0)return true;}return false;}"
+        "if(n&&!has(n)){var a=document.createElement('a');"
+        "a.href=" + root_expr + "+'coverage.html';"
+        "a.setAttribute('data-i18n','nav.coverage');"
+        "a.setAttribute('data-coverage','1');a.textContent='Coverage';"
+        "n.insertBefore(a,n.querySelector('.langs')||null);}"
+        "var f=document.querySelector('.foot-links');"
+        "if(f&&!has(f)){var b=document.createElement('a');"
+        "b.href=" + root_expr + "+'coverage.html';"
+        "b.setAttribute('data-i18n','nav.coverage');"
+        "b.setAttribute('data-coverage','1');b.textContent='Coverage';f.appendChild(b);}})();"
+    )
 
 
 def _optimize_home_html(html: str, prefix: str) -> str:
@@ -7164,35 +7214,68 @@ def _optimize_home_html(html: str, prefix: str) -> str:
         "apply(); window.addEventListener('load', apply);")
     boot = (
         f'<script>window.__DSH_I18N_ROOT=new URL({prefix!r} || "../", location.href).href;</script>'
-        f'<script>var _r=new URL({prefix!r} || "../", location.href).href;'
-        "(function(){var n=document.querySelector('header nav');"
-        "if(n&&!n.querySelector('[data-coverage]')){var a=document.createElement('a');"
-        "a.href=_r+'coverage.html';a.setAttribute('data-i18n','nav.coverage');"
-        "a.setAttribute('data-coverage','1');a.textContent='Coverage';"
-        "n.insertBefore(a,n.querySelector('.langs')||null);}"
-        "var f=document.querySelector('.foot-links');"
-        "if(f&&!f.querySelector('[data-coverage]')){var b=document.createElement('a');"
-        "b.href=_r+'coverage.html';b.setAttribute('data-i18n','nav.coverage');"
-        "b.setAttribute('data-coverage','1');b.textContent='Coverage';f.appendChild(b);}})();</script>"
-        f"<script>{i18n_js}</script>"
-        "<script>window.addEventListener('load',function(){"
-        f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
-        "document.body.appendChild(s);"
-        f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js?v={BUILD_V}';"
-        "document.body.appendChild(b);});</script>")
+        + f'<script>var _r=new URL({prefix!r} || "../", location.href).href;'
+        + _coverage_entry_js("_r")
+        + "</script>"
+        + f"<script>{i18n_js}</script>"
+        + "<script>window.addEventListener('load',function(){"
+        + f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
+        + "document.body.appendChild(s);"
+        + f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js?v={BUILD_V}';"
+        + "document.body.appendChild(b);});</script>")
     return html.replace("</body>", boot + "</body>")
+
+
+def _home_recent(prefix: str, limit: int = 3) -> str:
+    """v0.9.6 task-143：首页「最近更新」= CHANGELOG 最近 N 个版本。
+
+    版本号和日期是事实（四语共用，不做翻译）；摘要正文仍只在 whats-new 页，
+    避免把只翻了三语的更新说明搬进首屏。
+    """
+    releases = load_releases()[:limit]
+    if not releases:
+        return ""
+    items = "".join(
+        f'<li><a href="{prefix}whats-new.html"><b>{esc(r["version"])}</b>'
+        f'<span class="upd-date">{esc(r["date"])}</span></a></li>' for r in releases)
+    return (f'<section class="homeupd" aria-labelledby="updtitle">'
+            f'<h2 id="updtitle" data-i18n="home.recent">Recently updated</h2>'
+            f'<ul class="updlist">{items}</ul>'
+            f'<p class="sub"><a href="{prefix}whats-new.html" data-i18n="home.recent_all">'
+            f'See all updates →</a></p></section>')
 
 
 def build_index_page(entries, stats, coverage) -> None:
     """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
-<p class="sub" data-i18n="home.sub">Type a brand name, a generic name, a nickname, or a line from the pack. Chinese, full-width and Cyrillic input all work, and you can include the dose — e.g. Lipitor 20mg, Tylenol, or Paracetamol 500mg.</p>
+<p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work. You always get a candidate set, never a single answer.</p>
 <div class="searchwrap">
 <label class="sr-only" for="q" data-i18n="home.ph">Brand name / generic name / nickname / a line from the pack</label>
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac">
 <div id="ac" role="listbox" aria-label="Suggestions"></div>
 </div>
+<p class="sub" id="meta" style="margin-top:14px"></p>
+<div class="row">
+  <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
+  <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
+    <option value="US" data-i18n="home.us">United States</option>
+    <option value="GB" data-i18n="home.gb">United Kingdom</option>
+    <option value="CN" data-i18n="home.cn">China</option>
+    <option value="ES" data-i18n="home.es">Spain</option>
+    <option value="MX" data-i18n="home.mx">Mexico</option>
+    <option value="AU" data-i18n="home.au">Australia</option>
+    <option value="CA" data-i18n="home.ca">Canada</option>
+    <option value="TW" data-i18n="home.tw">Taiwan</option>
+    <option value="HK" data-i18n="home.hk">Hong Kong</option>
+    <option value="SG" data-i18n="home.sg">Singapore</option></select>
+</div>
+<div id="out"></div>
+<p class="sub report-line" id="report" style="display:none">
+  <span data-i18n="report.note">Wrong ingredient, wrong dose, or a drug we do not have? Tell us:</span>
+  <a id="reportLink" href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
+     target="_blank" rel="noopener" data-i18n="report.cta">Report this result</a>
+</p>
 <section id="u1guide" class="u1guide" aria-labelledby="u1title" data-i18n-aria="u1.aria">
   <div class="u1head"><h2 id="u1title" data-i18n="u1.title">How to use it in 3 steps</h2>
     <button type="button" id="u1close" class="u1close" data-i18n-aria="u1.close"
@@ -7212,31 +7295,10 @@ def build_index_page(entries, stats, coverage) -> None:
         {{try3}}</div></li>
   </ol>
 </section>
-<div class="row">
-  <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
-  <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
-    <option value="US" data-i18n="home.us">United States</option>
-    <option value="GB" data-i18n="home.gb">United Kingdom</option>
-    <option value="CN" data-i18n="home.cn">China</option>
-    <option value="ES" data-i18n="home.es">Spain</option>
-    <option value="MX" data-i18n="home.mx">Mexico</option>
-    <option value="AU" data-i18n="home.au">Australia</option>
-    <option value="CA" data-i18n="home.ca">Canada</option>
-    <option value="TW" data-i18n="home.tw">Taiwan</option>
-    <option value="HK" data-i18n="home.hk">Hong Kong</option>
-    <option value="SG" data-i18n="home.sg">Singapore</option></select>
-  {{hero_examples}}
-</div>
 <section class="catquick"><h2 data-i18n="cat.quick_title">Browse by category</h2>
 <div class="catgrid">{{cat_chips}}</div></section>
+{{recent}}
 <p class="sub" id="loadhint" data-i18n="home.hint_idle">First search loads one index shard (median ~1.0 MB, ~0.16 MB gzip); the full index (core ~42 MB raw, ~9–10 MB gzip) fills in the background — start typing, focus the search box, or pick a sample.</p>
-<p class="sub" id="meta" style="margin-top:14px"></p>
-<div id="out"></div>
-<p class="sub report-line" id="report" style="display:none">
-  <span data-i18n="report.note">Wrong ingredient, wrong dose, or a drug we do not have? Tell us:</span>
-  <a id="reportLink" href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
-     target="_blank" rel="noopener" data-i18n="report.cta">Report this result</a>
-</p>
 <div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
 does not exist. Coverage:</span> {covline}.</div>
 <script defer src="{{prefix}}assets/app.js?v={BUILD_V}"></script>"""
@@ -7244,18 +7306,18 @@ does not exist. Coverage:</span> {covline}.</div>
         prefix = "../" if path else ""
         ex = HOME_EXAMPLES.get(code) or HOME_EXAMPLES["en"]
         page_body = (body.replace("{prefix}", prefix)
-                     .replace("{hero_examples}", _sample_buttons(ex["hero"]))
                      .replace("{try1}", _sample_buttons(ex["try1"]))
                      .replace("{try2}", _sample_buttons(ex["try2"]))
                      .replace("{try3}", _sample_buttons(ex["try3"]))
                      .replace("{cat_chips}", _home_cat_chips(code, prefix))
+                     .replace("{recent}", _home_recent(prefix))
                      .replace("{APP_BOOT}", _app_boot(prefix)))
         html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
                     canonical_rel=path, alt_rel="",
                     head_js=U1_HEAD_JS + '<link rel="alternate" type="application/ld+json" href="../dataset.jsonld">' if path else
                     U1_HEAD_JS + '<link rel="alternate" type="application/ld+json" href="dataset.jsonld">',
-                    defer_i18n=False)
+                    defer_i18n=False, nav_coverage=True)
         target = OUT / (path + "index.html")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(_optimize_home_html(html, prefix), encoding="utf-8")
@@ -7336,7 +7398,8 @@ def build_about(stats, coverage, source_cover=()) -> None:
     body = "\n".join(parts)
     html = page("About", body, meta_key="about", alternates=True,
                 canonical_rel="about.html", alt_rel="about.html",
-                head_js='<link rel="alternate" type="application/ld+json" href="dataset.jsonld">')
+                head_js='<link rel="alternate" type="application/ld+json" href="dataset.jsonld">',
+                nav_coverage=True)
     _write_with_copies("about.html", html, "about")
 
 def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> None:
@@ -7405,7 +7468,7 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
 </tr></thead><tbody>{"".join(rows)}</tbody></table></div>
 <p class="sub" data-i18n="coverage.source_note">{esc(T["coverage.source_note"])}</p>"""
     html = page("Coverage & freshness", body, meta_key="coverage", alternates=True,
-                canonical_rel="coverage.html", alt_rel="coverage.html")
+                canonical_rel="coverage.html", alt_rel="coverage.html", nav_coverage=True)
     _write_with_copies("coverage.html", html, "coverage")
 
 
@@ -7446,7 +7509,7 @@ other; it does not mean the drugs are interchangeable.</div>
 </tr></thead><tbody>{''.join(body_rows)}</tbody></table></div>
 <p class="sub" data-i18n-html="conf.source_note">{I18N['en']['conf.source_note']}</p>"""
     html = page("Easily confused drug names", body, meta_key="confused", alternates=True,
-                canonical_rel="confused.html", alt_rel="confused.html")
+                canonical_rel="confused.html", alt_rel="confused.html", nav_coverage=True)
     _write_with_copies("confused.html", html, "confused")
     return len(rows)
 
@@ -8016,7 +8079,7 @@ def build_glossary() -> None:
             + f'<div class="notice" data-i18n="glossary.note">'
               f'{esc(I18N["en"]["glossary.note"])}</div>')
     html = page("Glossary", body, meta_key="glossary", alternates=True,
-                canonical_rel="glossary.html", alt_rel="glossary.html")
+                canonical_rel="glossary.html", alt_rel="glossary.html", nav_coverage=True)
     _write_with_copies("glossary.html", html, "glossary")
 
 
@@ -8422,7 +8485,8 @@ def build_atc_index() -> None:
 <div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
 <div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
     (OUT / "atc.html").write_text(
-        page("ATC classes & categories", body, "", canonical_rel="atc.html"),
+        page("ATC classes & categories", body, "", canonical_rel="atc.html",
+             nav_coverage=True),
         encoding="utf-8")
 
 
@@ -8940,16 +9004,8 @@ def main() -> None:
     (OUT / "assets" / "boot.js").write_text(
         "var s=document.currentScript;"
         "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
-        "(function(){var n=document.querySelector('header nav');"
-        "if(n&&!n.querySelector('[data-coverage]')){var a=document.createElement('a');"
-        "a.href=r+'coverage.html';a.setAttribute('data-i18n','nav.coverage');"
-        "a.setAttribute('data-coverage','1');a.textContent='Coverage';"
-        "n.insertBefore(a,n.querySelector('.langs')||null);}"
-        "var f=document.querySelector('.foot-links');"
-        "if(f&&!f.querySelector('[data-coverage]')){var b=document.createElement('a');"
-        "b.href=r+'coverage.html';b.setAttribute('data-i18n','nav.coverage');"
-        "b.setAttribute('data-coverage','1');b.textContent='Coverage';f.appendChild(b);}})();"
-        "window.addEventListener('load',function(){"
+        + _coverage_entry_js("r")
+        + "window.addEventListener('load',function(){"
         "var a=document.createElement('script');a.src=r+'assets/i18n.js';"
         "a.onload=function(){var b=document.createElement('script');"
         "b.src=r+'assets/bilingual.js';document.body.appendChild(b);};"
