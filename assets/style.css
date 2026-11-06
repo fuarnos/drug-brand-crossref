@@ -99,12 +99,32 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atcdetails{margin:8px 0 0}
 .atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
 .atcdetails .atcmembers{margin-top:6px}
+/* v0.9.6 task-145b：ATC4 页「按剂型看跨市场明细」（客户端懒加载 data/idx/atc4-forms.json） */
+.atc4forms{margin:10px 0 0}
+.atc4forms summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
+.atc4forms table{font-size:13px}
+.atc4forms th,.atc4forms td{padding:4px 6px;border-bottom:1px solid var(--line)}
+.atc4forms thead th{white-space:nowrap;font-variant-numeric:tabular-nums}
+.atc4forms tbody th{font-weight:600}
+.atc4forms tbody td{text-align:right;font-variant-numeric:tabular-nums}
+.atc4forms tbody td.z{color:var(--muted);text-align:center}
+.atc4note{margin:4px 0 0;font-size:12px}
 .cat-note .lang-block{margin:2px 0}
 .catquick{margin:18px 0 6px}
 .catquick h2{font-size:16px;margin:0 0 8px}
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
   border-radius:999px;background:#faf9f6;color:var(--fg);font-size:13px}
 .catchip:hover{border-color:var(--accent)}
+/* v0.9.6 task-143：首页「最近更新」= 最近 3 个版本（版本号/日期是事实，不翻译） */
+.homeupd{margin:18px 0 6px}
+.homeupd h2{font-size:16px;margin:0 0 8px}
+.homeupd .updlist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.homeupd .updlist a{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;
+  border:1px solid var(--line);border-radius:999px;background:#faf9f6;color:var(--fg);
+  font-size:13px;text-decoration:none}
+.homeupd .updlist a:hover{border-color:var(--accent)}
+.homeupd .upd-date{color:var(--muted);font-size:12px}
+.homeupd .sub{margin:8px 0 0;font-size:13px}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 /* v0.9.1 task-22：可访问性基础 */
 .skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:#0b6b53;color:#fff;
