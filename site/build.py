@@ -7424,9 +7424,16 @@ def _optimize_home_html(html: str, prefix: str) -> str:
     i18n_js = i18n_js.replace(
         "window.addEventListener('load', apply);",
         "apply(); window.addEventListener('load', apply);")
+    # v0.9.7 task-10（用户报障「切换语言跳 404」）：这里必须用 Python 侧算好的前缀。
+    # 原写法是 f'... new URL({prefix!r} || "../", location.href)' —— JS 里 '' 是 falsy，
+    # 根级首页（prefix=''）会取到 "../"，于是 ROOT = new URL('../', '.../drug-brand-crossref/index.html')
+    # = 域名根 https://<user>.github.io/（越过项目子路径一层）；langTarget() 再拼
+    # ROOT + 'zh/index.html' 就落到域名根的 /zh/index.html，GitHub Pages 返回默认 404。
+    # 改成 './'：根级首页解析到项目根，语言副本（prefix='../'）行为不变。
+    root_prefix = prefix or "./"
     boot = (
-        f'<script>window.__DSH_I18N_ROOT=new URL({prefix!r} || "../", location.href).href;</script>'
-        + f'<script>var _r=new URL({prefix!r} || "../", location.href).href;'
+        f'<script>window.__DSH_I18N_ROOT=new URL({root_prefix!r}, location.href).href;</script>'
+        + f'<script>var _r=new URL({root_prefix!r}, location.href).href;'
         + _coverage_entry_js("_r")
         + "</script>"
         + f"<script>{i18n_js}</script>"
@@ -9581,11 +9588,13 @@ def main() -> None:
   }
   function langTarget(code){
     // v0.5.5/v0.6.2：有 /es/、/zh/、/zh-hant/ 静态副本的页面（首页/about/confused/
-    // warn/whats-new）切到对应语言副本；其它子页面留在原页只换 lang 参数。
+    // warn/whats-new/glossary/coverage）切到对应语言副本；其它子页面留在原页只换 lang 参数。
+    // v0.9.7 task-10：glossary/coverage 也有副本（此前漏列 → 只能落 ?lang= 变体，虽不 404
+    // 但 URL 与语言不一致），一并纳入。
     code = canon(code) || DEFAULT_LANG;
     var params = new URLSearchParams(location.search);
     params.delete('lang');
-    var m = relPath().match(/(?:^|\/)(index\.html|about\.html|confused\.html|whats-new\.html|warn\.html)$/);
+    var m = relPath().match(/(?:^|\/)(index\.html|about\.html|confused\.html|whats-new\.html|warn\.html|glossary\.html|coverage\.html)$/);
     var qs = params.toString();
     if(m){
       return ROOT + (LANG_PATH[code] || '') + m[1]
