@@ -1143,6 +1143,46 @@ UI_I18N = {
     },
 }
 
+# ── v0.9.8 task-13（UI 批次 A-2）：统一外壳 / 名字页警示 / 成分页身份行文案 ──
+SHELL_I18N = {
+    "en": {
+        "nav.categories": "Categories", "nav.markets": "Markets",
+        "nav.all_categories": "All categories & ATC",
+        "tab.search": "Search", "tab.categories": "Categories",
+        "tab.coverage": "Coverage", "tab.about": "About",
+        "drug.markets": "markets",
+        "name.notice": "Same name — check the ingredient; names are not interchangeable.",
+        "name.show_more": "Show more",
+    },
+    "es": {
+        "nav.categories": "Categorías", "nav.markets": "Mercados",
+        "nav.all_categories": "Todas las categorías y ATC",
+        "tab.search": "Buscar", "tab.categories": "Categorías",
+        "tab.coverage": "Cobertura", "tab.about": "Acerca de",
+        "drug.markets": "mercados",
+        "name.notice": "Mismo nombre — comprueba el principio activo; no son intercambiables.",
+        "name.show_more": "Ver más",
+    },
+    "zh": {
+        "nav.categories": "按类别", "nav.markets": "按市场",
+        "nav.all_categories": "全部类别与 ATC",
+        "tab.search": "搜索", "tab.categories": "类别",
+        "tab.coverage": "覆盖", "tab.about": "关于",
+        "drug.markets": "个市场",
+        "name.notice": "同名不代表同一成分——请核对成分，不可互换。",
+        "name.show_more": "显示更多",
+    },
+    "zh-Hant": {
+        "nav.categories": "按類別", "nav.markets": "按市場",
+        "nav.all_categories": "全部類別與 ATC",
+        "tab.search": "搜尋", "tab.categories": "類別",
+        "tab.coverage": "覆蓋", "tab.about": "關於",
+        "drug.markets": "個市場",
+        "name.notice": "同名不代表同一成分——請核對成分，不可互換。",
+        "name.show_more": "顯示更多",
+    },
+}
+
 # ── v0.6.4 B10：术语表 /glossary.html（四语，INN/BAN/USAN/ATC/MAH/DIN/NDC/ARTG/FDC/LASA…）──
 GLOSSARY_I18N = {
     "en": {
@@ -1953,7 +1993,7 @@ def _merge_static_i18n(values: dict) -> None:
         for source in (ABOUT_I18N[lang], PAGE_I18N[lang], WARN_I18N[lang], COMBO_I18N[lang],
                        MAKER_I18N[lang], META_I18N[lang], GLOSSARY_I18N[lang],
                        ATC_I18N[lang], BILINGUAL_I18N[lang], FILTER_I18N[lang],
-                       LABEL_I18N[lang], UI_I18N[lang]):
+                       LABEL_I18N[lang], UI_I18N[lang], SHELL_I18N[lang]):
             for key, text in source.items():
                 merged = text
                 for ph, val in values.items():
@@ -1983,7 +2023,8 @@ def _install_zh_hant(values: dict) -> None:
     # 避免新 key 回落到简体中文。
     for extra in (LABEL_I18N["zh-Hant"], UI_I18N["zh-Hant"], GLOSSARY_I18N["zh-Hant"],
                   ATC_I18N["zh-Hant"], BILINGUAL_I18N["zh-Hant"], FILTER_I18N["zh-Hant"],
-                  COVERAGE_I18N["zh-Hant"], NAME_LANG_I18N["zh-Hant"]):
+                  COVERAGE_I18N["zh-Hant"], NAME_LANG_I18N["zh-Hant"],
+                  SHELL_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
     I18N["zh-Hant"] = merged
@@ -3070,6 +3111,91 @@ a.grp-name{color:var(--accent)}
   .warnpager{gap:6px}
   .warnpager a,.warnpager span{min-width:40px;min-height:40px;font-size:15px}
 }
+
+/* ── v0.9.8 task-13（UI 批次 A-2）：统一外壳 / 44px 触控 / 名字页 / 成分页 ── */
+.sn{display:flex;align-items:center;gap:2px;font-size:14px;white-space:nowrap;margin-left:8px}
+.sn>a,.sn>details>summary{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;
+ border-radius:8px;color:var(--fg);cursor:pointer;list-style:none;white-space:nowrap}
+.sn>a:hover,.sn>details>summary:hover{background:#f1f8f4;text-decoration:none}
+.sn>a.on{color:var(--accent);font-weight:600}
+.sn>details>summary::-webkit-details-marker{display:none}
+.sn>details[open]>summary{background:#f1f8f4;color:var(--accent)}
+.sn>details>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:10px}
+.sn-dd{position:relative}
+.sn-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:60;background:#fff;
+ border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(31,35,40,.12);
+ padding:12px;min-width:300px}
+.sn-cats,.sn-mkts{display:grid;grid-template-columns:repeat(2,minmax(170px,1fr));gap:2px 10px}
+.sn-about{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px}
+.sn-cats a,.sn-mkts a,.sn-about a{display:flex;align-items:center;gap:8px;min-height:40px;
+ padding:4px 8px;border-radius:8px;color:var(--fg);font-size:14px}
+.sn-cats a:hover,.sn-mkts a:hover,.sn-about a:hover{background:#f1f8f4;text-decoration:none}
+.sn-mkts .meta{color:var(--muted);font-size:12px;margin-left:auto}
+.sn-foot{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;display:flex;
+ justify-content:space-between;gap:12px;font-size:13px}
+.tabbar{display:none}
+@media (max-width:767px){
+  header.hdr-shell .wrap{height:56px;flex-wrap:nowrap;gap:8px;padding:0 12px}
+  header.hdr-shell .logo{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+  header.hdr-shell .logo-zh{display:none}
+  header.hdr-shell nav{display:none}
+  header.hdr-shell .nav-toggle{display:none}
+  header.hdr-shell .langs{margin-left:auto;flex-shrink:0;gap:2px}
+  header.hdr-shell .langs a{min-width:44px;min-height:44px;display:inline-flex;
+   align-items:center;justify-content:center;padding:0 4px;font-size:12px}
+  body{padding-bottom:56px}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;height:56px;background:#fff;
+   border-top:1px solid var(--line);z-index:45;padding-bottom:env(safe-area-inset-bottom)}
+  .tabbar a{flex:1;display:inline-flex;align-items:center;justify-content:center;
+   min-height:44px;font-size:12px;color:var(--muted);position:relative}
+  .tabbar a.on{color:var(--accent);font-weight:600}
+  .tabbar a.on:before{content:"";position:absolute;top:0;left:26%;right:26%;height:3px;
+   background:var(--accent);border-radius:0 0 3px 3px}
+}
+/* P0-7：六类触控目标 ≥44×44（min-height 扩张，视觉基本不变） */
+nav a{min-height:44px;display:inline-flex;align-items:center}
+.langs a{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.catchip{min-height:44px}
+.atccard{min-height:44px}
+.u1try button{min-height:44px}
+.homeupd .updlist a{min-height:44px}
+/* P0-8：名字页「不可互换」警示 + 成分卡折叠 */
+.name-notice{color:var(--warn);margin:6px 0 2px}
+.name-more{margin:10px 0}
+.name-more>summary{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;
+ border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:14px}
+.name-more>summary::-webkit-details-marker{display:none}
+.name-more>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:10px}
+.name-more[open]>summary:after{content:"▴"}
+/* P0-9：成分页筛选器默认收起（details 由 JS 包） */
+.mf-slot{min-height:44px}
+.mf-details{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.mf-details>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;
+ cursor:pointer;font-size:14px;font-weight:600;list-style:none}
+.mf-details>summary::-webkit-details-marker{display:none}
+.mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:12px}
+.mf-details[open]>summary{border-bottom:1px solid var(--line)}
+.mf-details .matrix-filters{margin:0;border:0;border-radius:0}
+.mf-details .mf-toggle{display:none}
+.mf-details .mf-panel{display:grid}
+.drug-identity{margin:2px 0 10px}
+.drug-identity b{color:var(--fg)}
+
+/* A-2 fix：桌面壳单行（1280 下 5 项 nav 不再折行被 header 高度裁切） */
+@media (min-width:1100px){
+  header.hdr-shell .wrap{max-width:1120px;height:64px;flex-wrap:nowrap}
+  header.hdr-shell .sn{flex-wrap:nowrap}
+  header.hdr-shell .langs{margin-left:auto}
+}
+@media (min-width:768px) and (max-width:1099px){
+  header.hdr-shell .wrap{max-width:1120px;height:auto;flex-wrap:wrap;
+   padding-top:8px;padding-bottom:8px;gap:6px 12px}
+  header.hdr-shell .sn{order:3;flex-basis:100%;flex-wrap:wrap;margin-left:0;gap:4px 8px}
+  header.hdr-shell .langs{margin-left:auto}
+}
+
+/* A-2 fix2：头部双语开关单行（zh「显示原文对照」6 字，1280 下不折行） */
+header.hdr-shell .bil-toggle{white-space:nowrap;margin:0 6px;flex:none}
 """
 
 APP_JS = r"""
@@ -5251,8 +5377,11 @@ BILINGUAL_JS = r"""
     lab.className = 'bil-toggle';
     lab.innerHTML = '<input type="checkbox" id="bilOrig"> <span></span>';
     lab.querySelector('span').textContent = T('bilingual.toggle');
-    var langs = nav.querySelector('.langs');
-    nav.insertBefore(lab, langs || null);
+    // v0.9.8 task-13：新壳把 .langs 放在 nav 外，开关改插到 header 里的 langs 之前，
+    // 避免它变成第 6 个导航项（旧壳 langs 在 nav 内，行为不变）。
+    var langs = nav.querySelector('.langs') || document.querySelector('header .langs');
+    if(langs && langs.parentNode){ langs.parentNode.insertBefore(lab, langs); }
+    else { nav.appendChild(lab); }
     var cb = lab.querySelector('input');
     cb.checked = SHOW;
     cb.addEventListener('change', function(){
@@ -5326,12 +5455,19 @@ BILINGUAL_JS = r"""
       });
       var T = window.T || function(k){ return k; };
       function opt(v, label){ var o = document.createElement('option'); o.value = v; o.textContent = label; return o; }
+      // v0.9.8 task-13（P0-9）：筛选器默认收起；details 在客户端包，长尾页静态 0 增量。
+      var det = document.createElement('details');
+      det.className = 'mf-details';
+      var sumEl = document.createElement('summary');
+      sumEl.textContent = T('matrix.filters');
+      det.appendChild(sumEl);
       var box = document.createElement('section');
       box.className = 'matrix-filters';
       box.innerHTML = '<div class="mf-head"><span class="mf-title"></span>'
         + '<span class="mf-count" aria-live="polite"></span>'
         + '<button type="button" class="mf-toggle" aria-expanded="false"></button></div>'
         + '<div class="mf-panel"></div>';
+      det.appendChild(box);
       box.querySelector('.mf-title').textContent = T('matrix.filters');
       box.querySelector('.mf-toggle').textContent = T('matrix.mobile_filters');
       var panel = box.querySelector('.mf-panel');
@@ -5385,10 +5521,10 @@ BILINGUAL_JS = r"""
       note.textContent = T('matrix.sort_note');
       var slot = wrap.previousElementSibling;
       if(slot && slot.classList.contains('mf-slot')){
-        slot.appendChild(box);
+        slot.appendChild(det);
         slot.appendChild(note);
       }else{
-        wrap.parentNode.insertBefore(box, wrap);
+        wrap.parentNode.insertBefore(det, wrap);
         wrap.parentNode.insertBefore(note, wrap);
       }
       function current(){
@@ -5432,6 +5568,10 @@ BILINGUAL_JS = r"""
           cnt.textContent = T('matrix.showing').replace('{n}', visible).replace('{total}', rows.length)
             + ' · ' + T('matrix.market_count')
               .replace('{shown}', s.countries.length).replace('{total}', s.all.length);
+          if(sumEl){
+            sumEl.textContent = T('matrix.filters') + ' · ' + visible + '/' + rows.length
+              + ' · ' + s.countries.length + '/' + s.all.length;
+          }
         }
         if(updateURL){
           try{
@@ -5612,6 +5752,87 @@ def _slim_shell(*chunks: str) -> tuple[str, ...]:
     return tuple(out)
 
 
+# ── v0.9.8 task-13（UI 批次 A-2）：统一外壳 ────────────────────────────────
+# 顶层约 30 页静态输出新壳（5 项导航 + `<details>` 面板 + 移动底栏 + 语言常显）；
+# 121k 长尾页保持原壳不动（每页静态增量 0 B），新壳由 assets/boot.js 运行时注入，
+# 两边共用下面同一份模板（boot.js 里把根前缀写成 __R__ 占位）。
+SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA", "home.ca"),
+                 ("AU", "home.au"), ("ES", "home.es"), ("TW", "home.tw"), ("HK", "home.hk"),
+                 ("MX", "home.mx"), ("SG", "home.sg"))
+SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
+
+
+def _shell_cat_links(prefix: str) -> str:
+    """类别面板：16 个消费者大类（沿用 .lang-block 四语块，无 JS 也有英文）。"""
+    return "".join(
+        f'<a href="{prefix}cat/{cat["id"]}.html">' + "".join(
+            f'<span class="lang-block" data-lang-block="{lbl}">{esc(cat["labels"][lbl])}</span>'
+            for lbl in SHELL_LANGS) + "</a>"
+        for cat in CONSUMER_CATEGORIES)
+
+
+def _shell_market_links(prefix: str) -> str:
+    """市场面板：10 个市场，锚到覆盖页对应行（覆盖页每行有 id="market-XX"）。"""
+    return "".join(
+        f'<a href="{prefix}coverage.html#market-{cc}">'
+        f'<span data-i18n="{key}">{esc(I18N["en"].get(key, cc))}</span>'
+        f'<span class="meta">{cc}</span></a>'
+        for cc, key in SHELL_MARKETS)
+
+
+def _nav_active(canonical_rel: str) -> str:
+    """顶层页当前导航项：search / categories / coverage / about。"""
+    rel = (canonical_rel or "").strip()
+    if rel.startswith(("atc", "cat/")):
+        return "categories"
+    if rel.startswith("coverage"):
+        return "coverage"
+    if rel.startswith(("about", "glossary", "confused", "warn", "whats-new")):
+        return "about"
+    return "search"
+
+
+def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
+    """桌面 5 项导航 + `<details>` 面板 + 语言切换（nav 与 langs 同级放在 header 里）。"""
+    on = ' class="on" aria-current="page"'
+    return f"""<nav class="sn" data-shell="1" aria-label="Primary">
+    <a href="{prefix}index.html" data-i18n="nav.search"{on if active == 'search' else ''}>Search</a>
+    <details class="sn-dd"><summary data-i18n="nav.categories">Categories</summary>
+      <div class="sn-panel"><div class="sn-cats">{_shell_cat_links(prefix)}</div>
+        <div class="sn-foot"><a href="{prefix}atc.html" data-i18n="nav.all_categories">All categories &amp; ATC</a></div></div>
+    </details>
+    <details class="sn-dd"><summary data-i18n="nav.markets">Markets</summary>
+      <div class="sn-panel"><div class="sn-mkts">{_shell_market_links(prefix)}</div>
+        <div class="sn-foot"><a href="{prefix}coverage.html" data-i18n="nav.coverage">Coverage &amp; freshness</a></div></div>
+    </details>
+    <a href="{prefix}coverage.html" data-i18n="nav.coverage" data-coverage="1"{on if active == 'coverage' else ''}>Coverage</a>
+    <details class="sn-dd"><summary data-i18n="nav.about">About</summary>
+      <div class="sn-panel"><div class="sn-about">
+        <a href="{prefix}about.html" data-i18n="nav.about">About</a>
+        <a href="{prefix}glossary.html" data-i18n="nav.glossary">Glossary</a>
+        <a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What's new</a>
+        <a href="{prefix}warn.html" data-i18n="nav.warn">Warnings</a>
+        <a href="{prefix}confused.html" data-i18n="nav.confused">Confused names</a>
+      </div></div>
+    </details>
+  </nav>
+  <span class="langs">{sw}</span>"""
+
+
+def _shell_tabbar(prefix: str, active: str = "search") -> str:
+    """移动底栏：搜索 / 类别 / 覆盖 / 关于（44px 触控 + aria-current）。"""
+    items = (("search", "index.html", "tab.search", "Search"),
+             ("categories", "atc.html", "tab.categories", "Categories"),
+             ("coverage", "coverage.html", "tab.coverage", "Coverage"),
+             ("about", "about.html", "tab.about", "About"))
+    parts = []
+    for aid, href, key, label in items:
+        flag = ' class="on" aria-current="page"' if aid == active else ""
+        parts.append(f'<a href="{prefix}{href}" data-i18n="{key}"{flag}>{label}</a>')
+    return ('<nav class="tabbar" data-shell="1" aria-label="Sections">'
+            + "".join(parts) + "</nav>")
+
+
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
          canonical_rel: str = "", alt_rel: str = "", head_js: str = "",
@@ -5627,13 +5848,6 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
     )
-    # v0.9.6 task-142：只有顶层页静态写「覆盖与新鲜度」入口（8 页 ×4 语 ≈ +3 KB）。
-    # 长尾页（drug/name/combo/maker/atc 子页，约 121k 页）继续由 boot.js 注入，
-    # 每页 +110 B 会吃掉 900 MiB 上限剩下的 1.76 MiB。
-    cov_nav = ""
-    if nav_coverage:
-        cov_nav = (f'    <a href="{prefix}coverage.html" data-i18n="nav.coverage" '
-                   f'data-coverage="1">Coverage</a>\n')
     alt = ""
     if alternates:
         # hreflang 必须带 GitHub Pages 的项目子路径（线上是 /drug-brand-crossref/），
@@ -5699,7 +5913,21 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
 {head_scripts}
 <script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>"""
-    top = f"""
+    # v0.9.8 task-13（UI 批次 A-2）：nav_coverage 就是「顶层页」标记 → 静态新壳；
+    # 长尾页仍走下面 else 分支的原壳，字节不变（壳由 boot.js 注入）。
+    shell_top = nav_coverage
+    if shell_top:
+        top = f"""
+<body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+<header class="hdr-shell"><div class="wrap">
+  <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
+    <span class="logo-zh">药品商品名跨国定位</span></a>
+  {_shell_nav_html(prefix, _nav_active(canonical_rel), sw)}
+</div></header>
+<main id="main"><div class="wrap">"""
+    else:
+        top = f"""
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header><div class="wrap">
@@ -5712,9 +5940,10 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     <a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What's new</a>
     <a href="{prefix}glossary.html" data-i18n="nav.glossary">Glossary</a>
     <a href="{prefix}atc.html" data-i18n="nav.atc">ATC &amp; categories</a>
-{cov_nav}    <span class="langs">{sw}</span></nav>
+    <span class="langs">{sw}</span></nav>
 </div></header>
 <main id="main"><div class="wrap">"""
+    tabbar = _shell_tabbar(prefix, _nav_active(canonical_rel)) if shell_top else ""
     bottom = f"""</div></main>
 <footer><div class="wrap">
   <span data-i18n="footer">{esc(I18N['en']['footer'])}</span>
@@ -5726,7 +5955,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
        data-i18n="report.all">Known issues</a>
   </span>
 </div></footer>
-{boot_scripts}
+{tabbar}{boot_scripts}
 </body></html>"""
     if slim:
         head, top, bottom = _slim_shell(head, top, bottom)
@@ -7021,17 +7250,23 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                     f'data-sub-orig="{esc(inn_en or sid)}"{_nl_attr}{_zh_attr}>{esc(inn_en or sid)}</span>'
                     if sid in TERMS_SUB_IDS else
                     f'<span{_nl_attr}{_zh_attr}>{esc(inn_en or sid)}</span>')
+        # v0.9.8 task-13（P0-9）：H1 → 一句话身份 → 矩阵 → 异名 → 不可互换警示；
+        # 筛选器默认收起改在客户端（APP_JS 包 <details>），长尾页静态 0 增量。
+        n_markets = len({r[1] for r in rows})
+        n_records = len({r[10] for r in rows})
+        identity = (f'<p class="sub drug-identity">ATC {esc(atc) or "—"} · '
+                    f'<b>{n_markets}</b> <span data-i18n="drug.markets">markets</span> · '
+                    f'<b>{n_records}</b> <span data-i18n="drug.records">records</span></p>')
         body = f"""<h1>{h1_inner}</h1>
 <p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span></p>
-<p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
-<code>{esc(sid)}</code></p>
-{warn_line}
+{identity}
+{matrix_html}
 {syn_line}{nick_line}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
 brand names in different countries, and the same name can point to a different ingredient.
 Listed by country — not interchangeable.</div>
-{matrix_html}
+{warn_line}
 {hidden_note}"""
         (OUT / "drug").mkdir(parents=True, exist_ok=True)
         drug_ld = json.dumps({
@@ -7199,14 +7434,26 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
             none_ing = ('<p class="sub"><span class="st-badge st-unknown" '
                         'data-i18n="ingredient.unrecorded">'
                         + esc(I18N["en"]["ingredient.unrecorded"]) + '</span></p>')
-        cards_html = ''.join(cards) if cards else (
-            '' if name_only else '<p class="empty" data-i18n="name.empty">No records</p>')
+        # v0.9.8 task-13（P0-8）：多成分名字页先给「不可互换」警示（四语），
+        # 且首屏最多 3 张成分卡，其余收进 <details>「显示更多」。
+        gen_notice = "" if banner else (
+            '<p class="sub name-notice" data-i18n="name.notice">Same name — check the '
+            'ingredient; names are not interchangeable.</p>' if len(cards) > 1 else "")
+        if cards:
+            cards_html = ''.join(cards[:3])
+            rest = ''.join(cards[3:])
+            if rest:
+                cards_html += ('<details class="name-more"><summary data-i18n="name.show_more">'
+                               'Show more</summary>' + rest + '</details>')
+        else:
+            cards_html = '' if name_only else (
+                '<p class="empty" data-i18n="name.empty">No records</p>')
         body = f"""<h1>{esc(e['d'])}</h1>
 <p class="sub">{('<span class="st-badge st-unknown brand-none" data-i18n="brand.none">'
                  + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}<span data-i18n="name.also">Also written as</span>:
 {esc('、'.join(variants.get(e['k'], [])[:6]))} ·
 <span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
-{banner}{cards_html}{none_ing}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
+{banner}{gen_notice}{cards_html}{none_ing}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
         if single:
             for lang in ("en", "es", "zh", "zh-Hant"):
                 note = I18N[lang].get("name.single_note") or I18N["en"]["name.single_note"]
@@ -8001,7 +8248,7 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             note += (f' <span class="meta">· {nt:,} ({nt / n * 100:.1f}%) '
                      f'<span data-i18n="coverage.no_brand">no trade-name records</span></span>')
         rows.append(
-            f'<tr><td data-label="{esc(T["coverage.col.market"])}">'
+            f'<tr id="market-{c}"><td data-label="{esc(T["coverage.col.market"])}">'
             f'<span data-i18n="home.{c.lower()}">{esc(T.get("home." + c.lower(), c))}</span> '
             f'<span class="meta">{esc(c)}</span></td>'
             f'<td data-label="{esc(T["coverage.col.products"])}">{n:,}</td>'
@@ -9749,9 +9996,32 @@ def main() -> None:
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     (OUT / "data").mkdir(parents=True, exist_ok=True)
     (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
+    # v0.9.8 task-13：长尾页（121k）用 boot.js 注入与顶层页同一份壳；顶层页已有
+    # [data-shell] 直接跳过（幂等）。模板里 __R__ 是站点根前缀占位。
+    shell_nav_js = json.dumps(_shell_nav_html("__R__"))
+    shell_tab_js = json.dumps(_shell_tabbar("__R__"))
     (OUT / "assets" / "boot.js").write_text(
         "var s=document.currentScript;"
         "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
+        "var SN=" + shell_nav_js + ",TB=" + shell_tab_js + ";"
+        ";(function(){var h=document.querySelector('header');"
+        "if(!h||h.querySelector('[data-shell]'))return;"
+        "h.className=(h.className?h.className+' ':'')+'hdr-shell';"
+        "var html=SN.replace(/__R__/g,r),nav=h.querySelector('nav'),w=h.querySelector('.wrap');"
+        "if(nav){nav.outerHTML=html;}else if(w){w.insertAdjacentHTML('beforeend',html);}"
+        "var box=document.createElement('div');box.innerHTML=TB.replace(/__R__/g,r);"
+        "while(box.firstChild){document.body.appendChild(box.firstChild);}"
+        "var p=location.pathname,t=document.querySelector('.tabbar');if(!t)return;"
+        "var key=(p.indexOf('/atc')>=0||p.indexOf('/cat/')>=0)?'categories':"
+        "p.indexOf('coverage')>=0?'coverage':"
+        "((p.indexOf('/about')>=0||p.indexOf('warn')>=0||p.indexOf('glossary')>=0||"
+        "p.indexOf('confused')>=0||p.indexOf('whats-new')>=0)?'about':'search');"
+        "var as=t.querySelectorAll('a');"
+        "for(var i=0;i<as.length;i++){var href=as[i].getAttribute('href')||'';"
+        "var k=href.indexOf('atc')>=0?'categories':href.indexOf('coverage')>=0?'coverage':"
+        "href.indexOf('about')>=0?'about':'search';"
+        "if(k===key){as[i].className='on';as[i].setAttribute('aria-current','page');}}"
+        "})();"
         + _coverage_entry_js("r")
         + "window.addEventListener('load',function(){"
         "var a=document.createElement('script');a.src=r+'assets/i18n.js';"
