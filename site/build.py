@@ -205,6 +205,23 @@ I18N = {
         "res.records_noun": "records",
         "res.matched_name": "Matched name",
         "res.no_brand_note": "{n} record(s) have no trade name and are shown at name level.",
+        # v0.9.7 task-12 UI 批次 A-1：结果页身份卡 / 分页 / 零结果三动作（ES 同理）
+        "res.identity.ingredient": "Active ingredient",
+        "res.identity.markets": "Markets covered",
+        "res.identity.records": "{n} records",
+        "res.same_name": "Same name, different drug",
+        "res.not_interchangeable": "Not interchangeable across markets",
+        "res.identity_note": ("The same name can point to a different ingredient in another "
+                              "market. Check the ingredient, strength and form — not just the name."),
+        "res.action_drug": "Open ingredient page",
+        "res.action_copy": "Copy generic name",
+        "res.empty_h1": "No match for “{q}”",
+        "res.empty_spelling": "Check the spelling, or try the generic name",
+        "res.empty_browse": "Browse by category",
+        "res.empty_coverage": "See coverage & freshness",
+        "res.details": "Details",
+        "res.col_market": "Market",
+        "res.showing": "Showing {n} of {total}",
         "badge.severe": "Same name, different drug",
         "badge.warning": "Different release",
         "badge.combo": "Combination",
@@ -398,6 +415,23 @@ I18N = {
         "res.records_noun": "registros",
         "res.matched_name": "Nombre coincidente",
         "res.no_brand_note": "{n} registro(s) sin nombre comercial se muestran a nivel de nombre.",
+        # v0.9.7 task-12
+        "res.identity.ingredient": "Principio activo",
+        "res.identity.markets": "Mercados cubiertos",
+        "res.identity.records": "{n} registros",
+        "res.same_name": "Mismo nombre, otro medicamento",
+        "res.not_interchangeable": "No intercambiable entre mercados",
+        "res.identity_note": ("El mismo nombre puede señalar otro principio activo en otro "
+                              "mercado. Comprueba principio, concentración y forma, no solo el nombre."),
+        "res.action_drug": "Ver la ficha del principio",
+        "res.action_copy": "Copiar nombre genérico",
+        "res.empty_h1": "Sin resultados para «{q}»",
+        "res.empty_spelling": "Revisa la ortografía o prueba el nombre genérico",
+        "res.empty_browse": "Explorar por categoría",
+        "res.empty_coverage": "Ver cobertura y actualización",
+        "res.details": "Detalles",
+        "res.col_market": "Mercado",
+        "res.showing": "Mostrando {n} de {total}",
         "badge.severe": "Mismo nombre, otro medicamento",
         "badge.warning": "Liberación diferente",
         "badge.combo": "Combinación",
@@ -588,6 +622,23 @@ I18N = {
         "res.records_noun": "条记录",
         "res.matched_name": "命中名",
         "res.no_brand_note": "有 {n} 条记录没有商品名，按名称层展示。",
+        # v0.9.7 task-12
+        "res.identity.ingredient": "活性成分",
+        "res.identity.markets": "覆盖市场",
+        "res.identity.records": "{n} 条记录",
+        "res.same_name": "同名不同药",
+        "res.not_interchangeable": "跨市场不可互换",
+        "res.identity_note": ("同一个名字在别的市场可能指向另一种成分；"
+                              "请按成分、规格、剂型核对，不要只看名字。"),
+        "res.action_drug": "查看成分页",
+        "res.action_copy": "复制标准名",
+        "res.empty_h1": "没有匹配「{q}」",
+        "res.empty_spelling": "检查拼写，或改用通用名",
+        "res.empty_browse": "按类别浏览",
+        "res.empty_coverage": "看覆盖与新鲜度",
+        "res.details": "详情",
+        "res.col_market": "市场",
+        "res.showing": "显示 {n} / {total}",
         "badge.severe": "同名不同药",
         "badge.warning": "释放机制不同",
         "badge.combo": "复方",
@@ -1020,6 +1071,23 @@ UI_I18N = {
         "atc.none": "已收錄的有效成分中沒有這個 ATC 碼或前綴。",
         "atc.none_meta": "{code} 沒有 ATC 命中",
         "atc.loading": "正在載入索引以進行 ATC 搜尋…",
+        # v0.9.7 task-12 UI 批次 A-1：结果页身份卡 / 分页 / 零结果（繁体显式覆盖层）
+        "res.identity.ingredient": "有效成分",
+        "res.identity.markets": "覆蓋市場",
+        "res.identity.records": "{n} 筆紀錄",
+        "res.same_name": "同名不同藥",
+        "res.not_interchangeable": "跨市場不可互換",
+        "res.identity_note": ("同一個名字在別的市場可能指向另一種成分；"
+                              "請依成分、規格、劑型核對，不要只看名字。"),
+        "res.action_drug": "查看成分頁",
+        "res.action_copy": "複製標準名",
+        "res.empty_h1": "沒有符合「{q}」",
+        "res.empty_spelling": "檢查拼寫，或改用通用名",
+        "res.empty_browse": "依類別瀏覽",
+        "res.empty_coverage": "看覆蓋與新鮮度",
+        "res.details": "詳情",
+        "res.col_market": "市場",
+        "res.showing": "顯示 {n} / {total}",
         "home.sub": ("商品名、通用名、俗稱或包裝上一行字；中英文、全形、西里爾字母都能搜。"
                      "結果永遠是候選集，不是唯一答案。"),
         "home.recent": "最近更新",
@@ -2734,6 +2802,51 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
 .detbtn{margin-left:6px;font-size:12px}
 .restools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
 .restools .exportnote{color:var(--muted);font-size:12px}
+/* v0.9.7 task-12 UI 批次 A-1：身份卡 / 结果分页 / 零结果三动作 / 粘性搜索 / 骨架 */
+#identity:empty{display:none}
+.idcard{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;
+ background:#fff;padding:12px 14px;margin:14px 0 10px}
+.idcard .idrow{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin:0 0 6px}
+.idcard .idrow .idq{font-size:20px;font-weight:700}
+.idcard .idrow .idarrow{color:var(--muted)}
+.idcard .idrow .iding{font-size:16px;font-weight:600;color:var(--accent)}
+.idbadge{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4;border-radius:999px;
+ padding:2px 10px;font-size:12px;white-space:nowrap}
+.idfields{display:flex;flex-wrap:wrap;gap:3px 16px;font-size:13px;color:var(--muted);margin:0}
+.idfields b{color:var(--fg);font-weight:600}
+.idwarn{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;padding:9px 12px;
+ font-size:13px;margin:9px 0 0}
+.idacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.idacts a,.idacts button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;
+ padding:0 15px;border-radius:10px;border:1px solid var(--accent);background:#fff;color:var(--accent);
+ font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
+.idacts .primary{background:var(--accent);color:#fff}
+.idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
+.res-more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+ margin:10px 0 0}
+.res-more .sub{margin:0;font-size:13px}
+.res-more button{min-height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--accent);
+ background:#fff;color:var(--accent);font-size:14px;cursor:pointer;font-family:inherit}
+.res-more button:hover{filter:brightness(.96)}
+.res-samelist{margin:6px 0 10px;padding-left:20px}
+.res-samelist li{margin:3px 0;font-size:13px}
+table.res.rows td.c-det{text-align:right;white-space:nowrap}
+table.res.rows .rowform{display:block;color:var(--muted);font-size:12px}
+.empty3{margin:12px 0 0}.empty3 .e3acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.empty3 .e3acts a,.empty3 .e3acts button{min-height:40px;display:inline-flex;align-items:center;
+ padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--fg);
+ font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
+.empty3 .e3acts a:hover,.empty3 .e3acts button:hover{border-color:var(--accent);color:var(--accent)}
+.res-skeleton .sk-row{height:36px;margin:8px 0;border-radius:8px;
+ background:linear-gradient(90deg,#f1efe9 25%,#f8f6f1 37%,#f1efe9 63%);
+ background-size:400% 100%;animation:skfade 1.2s ease-in-out infinite}
+@keyframes skfade{0%{background-position:100% 50%}100%{background-position:0 50%}}
+@media (prefers-reduced-motion:reduce){.res-skeleton .sk-row{animation:none}}
+@media (max-width:767px){
+  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:#fff;padding:6px 0;
+   border-bottom:1px solid var(--line)}
+  .has-q .searchwrap #ac{top:calc(100% + 2px)}
+}
 table.det{margin:4px 0 8px;font-size:13px;background:#faf9f6;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
 table.det th{background:#f4f2ec;font-size:11px}
@@ -2964,6 +3077,11 @@ const box = document.getElementById('q');
 const out = document.getElementById('out');
 const ctry = document.getElementById('country');
 const meta = document.getElementById('meta');
+// v0.9.7 task-12：结果页 H1 改成查询名（清空查询时还原首页 H1）；身份卡挂在表前的 #identity。
+const h1El = document.getElementById('h1');
+const identityEl = document.getElementById('identity');
+const H1_DEFAULT = h1El ? (h1El.textContent || '').trim() : '';
+const TITLE_DEFAULT = document.title;
 // v0.9.1 P0-3：结果计数/加载/零结果固定在搜索框下方（移动端不滚过引导卡）。
 const searchWrapEl = document.querySelector('.searchwrap');
 if(searchWrapEl && meta){
@@ -3235,21 +3353,6 @@ function confHits(nq){
   // 易混淆药对也只做精确命中：这是「名字像」的提示，不做模糊扩展。
   return CONF.filter(p => p.n === nq);
 }
-function rowHTML(r){
-  const T = window.T || (k=>k);
-  const badge = r.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
-                r.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
-  const tags = r.c.map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
-  const combo = (r.x || '').indexOf(' + ') >= 0
-    ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
-  const exp = r.eo ? `<span class="badge export">${T('badge.export_only')}</span>` : '';
-  const mah = makerHTML(r, T);
-  return `<tr>
-    <td class="c-ing">${ingredientHTML(r)}</td>
-    <td class="c-dose" data-label="${esc(T('col.dose'))}">${r.d || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(r)}${tags}${combo}${exp}${badge}</td>
-    <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
-}
 // ── UI P0 ③④：自动完成 / 解析条 / 成分分组 + 品牌折叠 + 加载更多 ──────
 // 一条「品牌行」= 一个索引条目（同成分下的一个品牌/写法），剂量合并展示，
 // 不再按每个规格各占一行；分组头显示成分与品牌数。
@@ -3409,8 +3512,9 @@ function brandRowHTML(e, T){
     <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${exp}${badge}${ctx}${det}${rep}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
-const RES_PAGE = 25;              // 每次「加载更多」新增的品牌行数
+const RES_PAGE = 20;              // v0.9.7 task-12：默认 20 行，「显示更多」每次 +20
 let RES_LIMIT = RES_PAGE;
+let RES_MODE = 'grouped';         // 'flat' = 普通查询的扁平表；'grouped' = ATC/大类结果（保持原样）
 let RES_EXPANDED = new Set();     // 已展开的分组下标
 let RES_GROUPS = null;            // [{ing, tags:Set, rows:[entry]}]
 let LAST_DISPLAY = [];            // v0.5.6 B7：当前视图全部命中（[score,tier,entry]）
@@ -3495,11 +3599,200 @@ function resultsTableHTML(T){
       <th>${T('col.brand')}</th><th>${T('col.mah')}</th>
     </tr></thead><tbody>${resultsHTML(T)}</tbody></table>`;
 }
+// ── v0.9.7 task-12：普通结果 = 扁平表（规格 / 品牌(注册名) / 市场 / 详情）+ 「显示更多」──
+// 只保留四列、默认 20 行；行按原命中顺序（不加排序/推荐）。ATC、大类结果仍走分组表。
+function formLabelOf(e){
+  const f = (e && e.f) ? String(e.f) : '';
+  return f ? labelOf('form', f, f) : '';
+}
+function marketTags(list, max){
+  const cs = [];
+  for(const c of (list || [])) if(c && cs.indexOf(c) < 0) cs.push(c);
+  cs.sort();
+  const n = max || 6;
+  const head = cs.slice(0, n)
+    .map(c => `<span class="tag ${String(c).toLowerCase()}">${esc(c)}</span>`).join('');
+  return head + (cs.length > n ? ` <span class="meta">+${cs.length - n}</span>` : '');
+}
+function flatRowHTML(e, T){
+  const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+  const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
+                e.l==='warning' ? `<span class="badge warn">${esc(T('badge.warning'))}</span>` : '';
+  const combo = (e.x || '').indexOf(' + ') >= 0
+    ? `<span class="tag combo">${esc(T('badge.combo'))}</span>` : '';
+  const exp = e.eo ? `<span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
+  const form = formLabelOf(e);
+  const rel = (e.rl && e.rl !== 'none') ? ' · ' + labelOf('release', e.rl, e.rl) : '';
+  const formLine = form ? `<span class="rowform">${esc(form + rel)}</span>` : '';
+  let det;
+  if(e.n){
+    det = `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}"`
+      + ` aria-expanded="false">${esc(T('res.details'))}</button>`;
+  } else if(e.u){
+    det = `<a href="${BASE}name/${esc(e.u)}">${esc(T('res.details'))}</a>`;
+  } else if(e.v){
+    det = `<a href="${BASE}drug/${encodeURIComponent(e.v)}.html">${esc(T('res.details'))}</a>`;
+  } else {
+    det = '—';
+  }
+  return `<tr class="br" data-k="${esc(e.k)}">
+    <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${badge}${combo}${exp}${formLine}</td>
+    <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, 4) || '—'}</td>
+    <td class="c-det">${det}</td></tr>`;
+}
+function flatTableHTML(T){
+  const disp = (LAST_DISPLAY && LAST_DISPLAY.length) ? LAST_DISPLAY : [];
+  const total = disp.length;
+  if(!total) return '';
+  const shown = Math.min(RES_LIMIT, total);
+  const body = disp.slice(0, shown).map(x => flatRowHTML(x[2], T)).join('');
+  const count = T('res.showing').replace('{n}', String(shown)).replace('{total}', String(total));
+  const more = shown < total
+    ? `<button type="button" data-loadmore="1">${esc(T('res.load_more'))}`
+      + ` (+${Math.min(RES_PAGE, total - shown)})</button>`
+    : '';
+  return `<table class="res rows"><thead><tr>
+      <th>${esc(T('col.dose'))}</th><th>${esc(T('col.brand'))}</th>
+      <th>${esc(T('res.col_market'))}</th><th>${esc(T('res.details'))}</th>
+    </tr></thead><tbody>${body}</tbody></table>`
+    + `<div class="res-more"><span class="sub">${esc(count)}</span>${more}</div>`;
+}
 function paintResultsOnly(){
   const wrap = document.getElementById('reswrap');
-  if(!wrap || !RES_GROUPS) return;
+  if(!wrap) return;
   const T = window.T || (k=>k);
+  if(RES_MODE === 'flat'){ wrap.innerHTML = flatTableHTML(T); return; }
+  if(!RES_GROUPS) return;
   wrap.innerHTML = resultsTableHTML(T);
+}
+// ── v0.9.7 task-12：H1 / 骨架 / 身份卡 / 零结果三动作 / 复制标准名 ──────────
+function setH1(text, key){
+  if(!h1El) return;
+  if(key){
+    h1El.setAttribute('data-i18n', key);
+    h1El.textContent = (window.T || function(k){ return k; })(key);
+  } else {
+    h1El.removeAttribute('data-i18n');
+    h1El.textContent = text || H1_DEFAULT;
+  }
+  document.title = (text || H1_DEFAULT) + ' · Medicine Brand Cross-Reference';
+}
+function skeletonHTML(T){
+  // P0-12：首搜用 3 行骨架占位（无 JS 时页面仍是静态首页，不受影响）
+  return '<div class="res-skeleton" aria-hidden="true">'
+    + '<div class="sk-row"></div><div class="sk-row"></div><div class="sk-row"></div>'
+    + '</div><p class="sub">' + esc(T('home.loading')) + '</p>';
+}
+function suggestNames(nq, limit){
+  // 零结果改写法建议：在已加载的索引里找编辑距离最近的 3 个名字（只读，不改结果）。
+  // 找不到（乱敲的串/只加载了少量分片）时退回页面自带的 3 个示例名，保证动作永远可点。
+  const res = [], seen = new Set();
+  const push = v => { const s = String(v || '').trim(); if(!s || seen.has(s)) return; seen.add(s); res.push(s); };
+  if(nq && IDX && IDX.length){
+    const first = nq.charAt(0), cand = [];
+    for(let i = 0; i < IDX.length; i++){
+      const e = IDX[i], k = e && e.k;
+      if(!k || !e.d || k.charAt(0) !== first) continue;
+      if(Math.abs(k.length - nq.length) > 3) continue;
+      const d = lev(nq, k);
+      if(d <= 3) cand.push([d, e.d, k]);
+    }
+    cand.sort((a, b) => a[0] - b[0] || a[2].length - b[2].length);
+    for(const c of cand){
+      push(c[1]);
+      if(res.length >= (limit || 3)) break;
+    }
+  }
+  if(res.length < (limit || 3)){
+    document.querySelectorAll('.u1try [data-q]').forEach(b => {
+      if(res.length < (limit || 3)) push(b.getAttribute('data-q'));
+    });
+  }
+  return res;
+}
+function identityCardHTML(q, display, nicks, confs, T){
+  if(!display || !display.length) return '';
+  let first = null;
+  for(const item of display){
+    const e = item[2];
+    if(e && (e.x || e.d)){ first = e; break; }
+  }
+  if(!first) return '';
+  const ing = ingredientLabel(first);
+  const zhName = (first.xz && first.xz.length) ? first.xz.join(' + ') : '';
+  const other = (window.LANG === 'zh' || window.LANG === 'zh-Hant')
+    ? (first.x || '') : zhName;
+  const ingLine = `<span class="iding">${esc(ing)}</span>`
+    + (other && other !== ing ? ` <span class="meta">${esc(other)}</span>` : '');
+  let severe = !!(confs && confs.length) || first.l === 'severe';
+  for(const item of display){ if(item[2] && item[2].l === 'severe'){ severe = true; break; } }
+  const badge = severe ? ` <span class="idbadge">${esc(T('res.same_name'))}</span>` : '';
+  const strengths = [];
+  for(const s of (first.s || [])){ if(s && strengths.indexOf(s) < 0) strengths.push(s); }
+  if(!strengths.length){
+    for(const item of display.slice(0, 8)){
+      for(const s of (item[2].s || [])){ if(s && strengths.indexOf(s) < 0) strengths.push(s); }
+      if(strengths.length >= 3) break;
+    }
+  }
+  const markets = [];
+  for(const item of display) for(const c of (item[2].c || [])) if(c && markets.indexOf(c) < 0) markets.push(c);
+  let recs = 0;
+  for(const item of display) recs += (item[2].n || 1);
+  const form = formLabelOf(first);
+  const fields = [];
+  if(strengths.length){
+    fields.push(`<span>${esc(T('col.dose'))} <b>${esc(strengths.join(' / '))}</b></span>`);
+  }
+  if(form) fields.push(`<span><b>${esc(form)}</b></span>`);
+  if(markets.length){
+    fields.push(`<span>${esc(T('res.identity.markets'))} ${marketTags(markets, 6)}</span>`);
+  }
+  if(recs) fields.push(`<span>${esc(T('res.identity.records').replace('{n}', String(recs)))}</span>`);
+  const drugHref = first.cu ? (BASE + first.cu)
+    : (first.v ? (BASE + 'drug/' + encodeURIComponent(first.v) + '.html') : '');
+  const std = String(first.x || first.d || '').trim();
+  const acts = [];
+  if(drugHref){
+    acts.push(`<a class="primary" href="${drugHref}">${esc(T('res.action_drug'))}</a>`);
+  }
+  if(std){
+    acts.push(`<button type="button" data-copying="${esc(std)}">${esc(T('res.action_copy'))}</button>`);
+  }
+  acts.push(`<a href="${esc(reportURL(q))}" target="_blank" rel="noopener">`
+    + `${esc(T('report.cta'))}</a>`);
+  return `<section class="idcard" aria-label="${esc(T('res.identity.ingredient'))}">
+    <div class="idrow"><span class="idq">${esc(q)}</span>
+      <span class="idarrow">→</span>${ingLine}${badge}</div>
+    <p class="idfields">${fields.join('')}</p>
+    <div class="idwarn">${esc(T('res.not_interchangeable'))} · ${esc(T('res.identity_note'))}</div>
+    <div class="idacts">${acts.join('')}</div>
+  </section>`;
+}
+function emptyActionsHTML(q, nq, T){
+  // P0-2：零结果三个动作（改写法建议 / 按类别 / 看覆盖），文字始终可见，保留报告入口。
+  // 分类 chip 不做：`.catchip` 里含四语文本块，直接搬文字会混语；类别入口用 /atc.html 链接。
+  const sug = suggestNames(nq, 3);
+  const chips = sug.map(s =>
+    `<button type="button" data-q="${esc(s)}">${esc(s)}</button>`).join('');
+  return `<div class="empty3">
+    <p class="sub">${esc(T('res.empty_spelling'))}</p>
+    <div class="e3acts">${chips}
+      <a href="${BASE}atc.html">${esc(T('res.empty_browse'))}</a>
+      <a href="${BASE}coverage.html">${esc(T('res.empty_coverage'))}</a>
+    </div>
+  </div>`;
+}
+function copyGenericName(text){
+  const T = window.T || (k=>k);
+  const done = ok => { if(meta) meta.textContent = T(ok ? 'res.copied' : 'res.copy_fail'); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => done(true))
+      .catch(() => done(fallbackCopy(text)));
+  } else {
+    done(fallbackCopy(text));
+  }
 }
 // ── 解析条：名称 / 剂量 / 剂型 / 匹配方式 ─────────────────────────
 const FORM_TOKENS = ['片剂','片','胶囊','颗粒剂','颗粒','口服液','注射液','注射剂','软膏',
@@ -3987,7 +4280,7 @@ function renderATC(atcCode, q){
   const T = window.T || (k=>k);
   syncURL(q);
   scheduleSearchEvent(q);
-  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
+  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null; RES_MODE = 'grouped';
   const bar = parseBarHTML({atc: atcCode}, T('parse.match.atc'));
   // 有对应类别页才链接（L1–L4）；L5 成分码（如 C07AB02）回退到其 L4 类别 C07AB
   let classCode = '';
@@ -4055,7 +4348,7 @@ function renderCategory(cat, q){
   const T = window.T || (k=>k);
   syncURL(q);
   scheduleSearchEvent(q);
-  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null;
+  RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_GROUPS = null; RES_MODE = 'grouped';
   const label = (cat.labels && (cat.labels[window.LANG] || cat.labels.en)) || cat.id;
   const bar = parseBarHTML({category: label}, T('parse.match.category'));
   const catUrl = BASE + String(cat.url || '');
@@ -4097,7 +4390,12 @@ function render(){
     try{ localStorage.setItem('u1.dismiss.v1', '1'); }catch(e){}
   }
   if(!q){ out.innerHTML=''; meta.textContent=''; syncURL('');
+    document.documentElement.classList.remove('has-q');
+    if(identityEl) identityEl.innerHTML='';
+    setH1('', 'home.h1');
+    document.title = TITLE_DEFAULT;
     const r0 = document.getElementById('report'); if(r0) r0.style.display='none'; return; }
+  document.documentElement.classList.add('has-q');   // task-12：移动端粘性搜索条
   // v0.6.4 A2：ATC 码/类前缀优先走独立路径（C07 / C07A / C07AB02 …）
   const atcCode = atcQuery(splitDose(q)[0]);
   if(atcCode){ renderATC(atcCode, q); return; }
@@ -4111,6 +4409,7 @@ function render(){
   RES_LIMIT = RES_PAGE;
   RES_EXPANDED = new Set();
   RES_GROUPS = null;
+  RES_MODE = 'flat';        // v0.9.7 task-12：普通查询用扁平表（ATC/大类在各自入口另设）
   scheduleSearchEvent(q);
   syncURL(q);
   const c = ctry.value;
@@ -4288,7 +4587,7 @@ function render(){
       + `<button type="button" class="linkbtn" data-export="csv">${esc(T2('res.csv'))}</button>`
       + `<span class="exportnote" id="exportnote" role="status" aria-live="polite"></span>`
       + `</div>`
-      + `<div id="reswrap">${resultsTableHTML(T2)}</div>`;
+      + `<div id="reswrap">${RES_MODE === 'flat' ? flatTableHTML(T2) : resultsTableHTML(T2)}</div>`;
     const noBrand = shown.filter(x => x[2] && x[2].t !== 1).length;
     if(noBrand){
       resHTML += `<p class="sub res-nobrand">`
@@ -4329,27 +4628,31 @@ function render(){
       if(sameSet(e)) sameRows.push(e);
       else relatedRows.push(e);
     }
-    function tableFor(rows2, limit){
-      const oRows = [];
-      for(const e of rows2.slice(0, limit || 40)){
-        const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
-        for(const d of ds) oRows.push({x:e.x, xz:e.xz, d:d, b:e.d, m:e.m, mn:e.mn, mu:e.mu, ml:e.ml,
-                                   c:e.c, l:e.l, u:e.u, v:e.v, cu:e.cu, eo:e.eo, nc:e.nc});
-      }
-      return `<table class="res"><thead><tr>
-          <th>${T2('col.ing')}</th><th>${T2('col.dose')}</th>
-          <th>${T2('col.brand')}</th><th>${T2('col.mah')}</th>
-        </tr></thead><tbody>${oRows.slice(0,80).map(rowHTML).join('')}</tbody></table>`;
+    // v0.9.7 task-12：这两组从「表格」改成紧凑列表 —— 结果页 <tr> 预算 ≤25，
+    // 表格版（每行一个规格、上限 80 行）会一次塞进上百行；列表保留可点名、市场与规格。
+    function listFor(rows2, limit){
+      const list = rows2.slice(0, limit || 8);
+      const lis = list.map(e => {
+        const ds = (e.s && e.s.length)
+          ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)).slice(0, 2).join(' / ') : '';
+        const cs = (e.c || []).slice(0, 3)
+          .map(c => `<span class="tag ${String(c).toLowerCase()}">${esc(c)}</span>`).join(' ');
+        return `<li>${brandHTML(e)}${ds ? ' <span class="meta">' + esc(ds) + '</span>' : ''}`
+          + `${cs ? ' ' + cs : ''}</li>`;
+      }).join('');
+      const rest = rows2.length - list.length;
+      return `<ul class="sub res-samelist">${lis}</ul>`
+        + (rest > 0 ? `<p class="sub">${esc(T2('atc.more').replace('{n}', String(rest)))}</p>` : '');
     }
     sameHTML = '';
     const parts = [];
     if(sameRows.length){
       parts.push(`<h2>${T2('same.ing')}</h2>`
-        + `<p class="sub">${T2('same.note')}</p>` + tableFor(sameRows, 40));
+        + `<p class="sub">${T2('same.note')}</p>` + listFor(sameRows, 8));
     }
     if(relatedRows.length){
       parts.push(`<h2>${T2('same.related')}</h2>`
-        + `<p class="sub">${T2('same.related_note')}</p>` + tableFor(relatedRows, 40));
+        + `<p class="sub">${T2('same.related_note')}</p>` + listFor(relatedRows, 8));
     }
     if(parts.length){
       sameHTML = `<div class="notice" data-i18n="same.warning">${esc(T2('same.warning'))}</div>`
@@ -4362,8 +4665,22 @@ function render(){
   if(!partial && !countryMiss && !display.length && !nicks.length && !confs.length){
     scheduleSearch0(q);
   }
+  // ── v0.9.7 task-12：身份卡（表前）+ H1=查询名 + 零结果三动作 ──
+  const hasResult = !!(display.length && !countryMiss);
+  const isBlank = !hits.length && !nicks.length && !confs.length && !countryMiss && !partial;
+  if(identityEl){
+    identityEl.innerHTML = hasResult
+      ? identityCardHTML(parsed.name || q, display, nicks, confs, T) : '';
+  }
+  if(hasResult || !isBlank){
+    setH1(parsed.name || q);
+  } else {
+    setH1(T('res.empty_h1').replace('{q}', parsed.name || q));
+  }
+  const emptyHTML = isBlank ? emptyActionsHTML(parsed.name || q, nq, T) : '';
   out.innerHTML = parseBarHTML(parsed, matchLabel) + countryBarHTML + confHTML + nickHTML + warnHTML
-    + countryMissHTML + resHTML + sameHTML + extraHTML;
+    + countryMissHTML + resHTML + sameHTML + extraHTML + emptyHTML;
+  out.setAttribute('aria-busy', 'false');
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
   // 选了澳洲但澳洲产品为空时同样触发（很多 listed OTC 只有 ARTG 名字）。
   const hasAU = display.some(x => ((x[2].c) || []).includes('AU'));
@@ -4574,9 +4891,15 @@ function startSearch(){
     try{ localStorage.setItem('u1.dismiss.v1', '1'); }catch(e){}
   }
   // v0.9.1 P0-3：加载态放在搜索框下方（同结果计数位置），移动端首屏可见。
+  // v0.9.7 task-12 P0-12：首搜改成 3 行骨架占位（#meta 仍有 aria-live 文本给读屏）。
   if(meta && !POOL_READY){
     meta.textContent = (window.T || function(k){ return k; })('home.loading');
   }
+  if(out && !POOL_READY && q){
+    out.innerHTML = skeletonHTML(window.T || function(k){ return k; });
+    out.setAttribute('aria-busy', 'true');
+  }
+  document.documentElement.classList.add('has-q');
   // v0.6.4 A2：ATC 码查询需要完整索引（分片里的条目不一定带 atc 聚合），先确保 core 到位。
   if(atcQuery(splitDose(q)[0])){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const nq = norm(splitDose(q)[0]);
@@ -4606,6 +4929,16 @@ out.addEventListener('click', ev => {
   if(t.closest('[data-loadmore]')){
     RES_LIMIT += RES_PAGE;
     paintResultsOnly();
+    return;
+  }
+  // v0.9.7 task-12：零结果的「改写法建议」按钮（渲染后才存在，故在委托里处理）
+  const qb = t.closest('[data-q]');
+  if(qb){
+    box.value = qb.getAttribute('data-q');
+    acClose();
+    trackSearchSubmit(box.value);
+    startSearch();
+    box.focus();
     return;
   }
   const fold = t.closest('[data-gi]');
@@ -4653,7 +4986,9 @@ out.addEventListener('click', ev => {
     const e = findEntryByKey(k) || {k: k, v: ''};
     const row = document.createElement('tr');
     row.className = 'detrow';
-    row.innerHTML = `<td colspan="7" class="detcell">${esc(Tr('a1.loading'))}</td>`;
+    // task-12：扁平结果表是 4 列，分组表是 4 列（ATC/大类），按当前行实际列数取 colspan
+    const ncol = tr ? tr.children.length : 4;
+    row.innerHTML = `<td colspan="${ncol}" class="detcell">${esc(Tr('a1.loading'))}</td>`;
     tr.parentNode.insertBefore(row, tr.nextSibling);
     detBtn.setAttribute('aria-expanded', 'true');
     loadDetailBucket(detBucketOf(e)).then(payload => Promise.all([loadMakerMap(), loadExportOnly()]).then(() => {
@@ -4679,6 +5014,9 @@ out.addEventListener('click', ev => {
 });
 // 点击事件：结果里的品牌/成分链接、报告入口、更新日志（只记事件，不记用户）。
 document.addEventListener('click', ev => {
+  // v0.9.7 task-12：身份卡「复制标准名」（卡片在 #out 之外，用文档级委托）
+  const cp = ev.target && ev.target.closest ? ev.target.closest('[data-copying]') : null;
+  if(cp){ copyGenericName(cp.getAttribute('data-copying')); return; }
   const a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
   if(!a) return;
   const href = a.getAttribute('href') || '';
@@ -7467,14 +7805,14 @@ def _home_recent(prefix: str, limit: int = 3) -> str:
 def build_index_page(entries, stats, coverage) -> None:
     """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
-    body = f"""<h1 data-i18n="home.h1">Find out what a medicine really is</h1>
+    body = f"""<h1 id="h1" data-i18n="home.h1">Find out what a medicine really is</h1>
 <p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work. You always get a candidate set, never a single answer.</p>
 <div class="searchwrap">
 <label class="sr-only" for="q" data-i18n="home.ph">Brand name / generic name / nickname / a line from the pack</label>
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac">
 <div id="ac" role="listbox" aria-label="Suggestions"></div>
 </div>
-<p class="sub" id="meta" style="margin-top:14px"></p>
+<p class="sub" id="meta" role="status" aria-live="polite" aria-atomic="true" style="margin-top:14px"></p>
 <div class="row">
   <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
   <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
@@ -7489,6 +7827,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option></select>
 </div>
+<div id="identity"></div>
 <div id="out"></div>
 <p class="sub report-line" id="report" style="display:none">
   <span data-i18n="report.note">Wrong ingredient, wrong dose, or a drug we do not have? Tell us:</span>
