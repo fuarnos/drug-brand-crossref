@@ -3,8 +3,8 @@
   "name": "drug-brand-crossref-derived",
   "title": "Medicine Brand Cross-Reference — derived data package",
   "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
-  "version": "v0.9.6",
-  "created": "2026-11-06T17:33:16Z",
+  "version": "v0.9.7",
+  "created": "2026-11-06T20:18:33Z",
   "homepage": "https://fuarnos.github.io/drug-brand-crossref/",
   "licenses": [
     {
@@ -485,7 +485,7 @@
       "format": "csv",
       "mediatype": "text/csv",
       "bytes": 383,
-      "hash": "sha256:342825ab9477202c7abb4251ac02d51b300b87c530932d744ba58b9f319d573c",
+      "hash": "sha256:af87fb2365230730ca20ee558e0f640fc01b38512d83acd1db0ca4a16966aa1d",
       "count": 10,
       "schema": {
         "fields": [
@@ -520,7 +520,7 @@
       "format": "csv",
       "mediatype": "text/csv",
       "bytes": 249,
-      "hash": "sha256:1a419bc48be1804b787fee8823aa110de75b9f41dccd34d8069018bf29b62801",
+      "hash": "sha256:a3afa57668816f7573a7e626f4a3b010a908a878ad5a47dc8b81ff29bffb9ee7",
       "count": 10,
       "schema": {
         "fields": [
@@ -577,9 +577,9 @@
       "path": "data/exports/substances.csv",
       "format": "csv",
       "mediatype": "text/csv",
-      "bytes": 743300,
-      "hash": "sha256:ce5e9e999ff712a1c25e90de6e08728d43d2e3c42d3e9453780351bcdae30485",
-      "count": 12649,
+      "bytes": 742734,
+      "hash": "sha256:7a36225ddafe35942c96aa6466e086edacb7fe43b87324876d8d61a4cc34ca01",
+      "count": 12637,
       "schema": {
         "fields": [
           {
@@ -608,7 +608,7 @@
   ],
   "counts": {
     "products": 477098,
-    "substances": 12649,
+    "substances": 12637,
     "name_keys": 202092,
     "markets": 10
   }
