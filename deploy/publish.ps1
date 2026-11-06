@@ -87,6 +87,7 @@ param(
     [switch]$SkipVerify,
     [switch]$FullPush,
     [switch]$AutoRollback,
+    [int]$PagesWaitMinutes = 45,
     [switch]$KeepWork,
     [switch]$DryRun,
     [switch]$Force
@@ -489,16 +490,17 @@ function Test-Homepage([string]$Url, [string]$ExpectVersion = '') {
 }
 
 function Wait-PagesBuild([string]$CommitSha, $Headers, [string]$Url) {
-    $built = $false
-    $deadline = (Get-Date).AddMinutes(8)
+    # 返回 'built' / 'errored' / 'timeout'。GitHub Pages 对大站点的构建可能耗时远超 8 分钟，
+    # 超时不再当作失败（不回滚），只提示稍后再查。
+    $deadline = (Get-Date).AddMinutes($PagesWaitMinutes)
     while ((Get-Date) -lt $deadline) {
         try {
             $builds = @(Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/pages/builds?per_page=5" -Headers $Headers -TimeoutSec 30 | ForEach-Object { $_ })
             foreach ($b in $builds) {
                 if ($b.commit -eq $CommitSha) {
                     Say ("build {0} {1}" -f ([string]$b.commit).Substring(0, 8), [string]$b.status)
-                    if ($b.status -eq 'built') { return $true }
-                    if ($b.status -eq 'errored') { return $false }
+                    if ($b.status -eq 'built') { return 'built' }
+                    if ($b.status -eq 'errored') { return 'errored' }
                     break
                 }
             }
@@ -507,7 +509,7 @@ function Wait-PagesBuild([string]$CommitSha, $Headers, [string]$Url) {
         }
         Start-Sleep -Seconds 10
     }
-    return $false
+    return 'timeout'
 }
 
 function Invoke-Rollback([string]$ToSha, $Headers, [string]$Url) {
@@ -516,8 +518,8 @@ function Invoke-Rollback([string]$ToSha, $Headers, [string]$Url) {
     & $Git -C $CacheDir push --force origin ("{0}:refs/heads/gh-pages" -f $ToSha)
     if ($LASTEXITCODE -ne 0) { Say 'ERROR: rollback push failed'; return $false }
     Say 'rolled back: gh-pages'
-    $built = Wait-PagesBuild $ToSha $Headers $Url
-    if (-not $built) { Say 'ERROR: rollback Pages build failed/timed out'; return $false }
+    $rb = Wait-PagesBuild $ToSha $Headers $Url
+    if ($rb -ne 'built') { Say ('ERROR: rollback Pages build {0}' -f $rb); return $false }
     $ok = Test-Homepage $Url
     if ($ok) { Say 'rollback verified: homepage 200 OK' } else { Say 'ERROR: rollback homepage check failed' }
     return $ok
@@ -545,8 +547,13 @@ if ($SkipVerify) {
     }
     Say "site: $PagesUrl"
 
-    $built = Wait-PagesBuild $Sha $headers $PagesUrl
-    if (-not $built) { $VerifyError = 'Pages build failed or timed out waiting for it (8 min)' }
+    $buildStatus = Wait-PagesBuild $Sha $headers $PagesUrl
+    if ($buildStatus -eq 'errored') { $VerifyError = 'Pages build errored' }
+    elseif ($buildStatus -eq 'timeout') {
+        Say ('build still in progress after {0} min; gh-pages pushed OK. Re-check later: api.github.com/repos/{1}/{2}/pages/builds/latest' -f $PagesWaitMinutes, $Owner, $Repo)
+        Write-Manifest
+        exit 0
+    }
 
     if (-not $VerifyError) {
         Step 'Checking the homepage'

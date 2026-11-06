@@ -1,0 +1,81 @@
+# Pages 兜底部署：把 gh-pages 分支的现有内容交给 GitHub Actions 直接发布，
+# 不依赖 legacy（branch + Jekyll）构建，也不在本地重新打包。
+#
+# 什么时候用：
+#   legacy 分支构建连续失败（API 只回 "Page build failed."）、或站点逼近
+#   branch 构建的 1 GB / 10 min 上限时，才切到这条路径。
+#   2026-11-06 的 v0.9.6 事故最终靠「重试一次 legacy 构建」解决，本文件是当时的
+#   备选方案，**默认不启用**（只挂 workflow_dispatch，不会自己跑）。
+#
+# 启用顺序（缺一步就会让线上 404，必须按序）：
+#   1) 先把这个文件提交到默认分支 main（workflow_dispatch 要求 workflow 存在于 main）；
+#   2) 仓库 Settings → Pages → Source 改成 "GitHub Actions"
+#      （或 `deploy/pages_deploy.ps1 -SwitchToWorkflow`，需要 pages:write 的 token）；
+#   3) `deploy/pages_deploy.ps1 -Dispatch`（或 Actions 页面点 Run workflow）。
+#   4) `python deploy/verify_live.py --expect-version vX.Y.Z` 通过才算上线。
+# 回滚：Source 切回 "Deploy from a branch" → gh-pages / (root)，即回到上一个
+#       成功构建的 legacy 版本（v0.9.5 977436aa 就是这样可用的）。
+name: pages-fallback
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-fallback
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy gh-pages artifact
+    runs-on: ubuntu-24.04
+    # 121,292 文件 / 842 MiB：checkout + tar + upload 需要时间，给足 60 分钟。
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout gh-pages (site content only)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+          path: site
+          # 大仓库关掉凭证持久化，省一次无用的 credential 配置
+          persist-credentials: false
+
+      - name: Preflight — 关键文件与体积
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd site
+          for f in .nojekyll index.html 404.html sitemap.xml robots.txt data/idx/core.json; do
+            test -e "$f" || { echo "缺少 $f（artifact 不完整，停止部署）"; exit 1; }
+          done
+          files=$(find . -type f | wc -l)
+          bytes=$(du -sb . | cut -f1)
+          echo "files=$files bytes=$bytes"
+          echo "version=$(grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+' whats-new.html | head -n 1)"
+          # branch / workflow 两种模式共用 1 GB 已发布体积上限，超了直接失败而不是半成品
+          if [ "$bytes" -gt 1000000000 ]; then
+            echo "站点 $bytes B 超过 1 GB 上限，先瘦身再部署"; exit 1
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+          retention-days: 1
+
+      - id: deployment
+        name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+      - name: Summary
+        run: |
+          echo "page_url=${{ steps.deployment.outputs.page_url }}"
+          echo "部署后跑：python deploy/verify_live.py --expect-version <版本>"
