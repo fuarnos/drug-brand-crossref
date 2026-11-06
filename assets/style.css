@@ -224,6 +224,51 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
 .detbtn{margin-left:6px;font-size:12px}
 .restools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
 .restools .exportnote{color:var(--muted);font-size:12px}
+/* v0.9.7 task-12 UI 批次 A-1：身份卡 / 结果分页 / 零结果三动作 / 粘性搜索 / 骨架 */
+#identity:empty{display:none}
+.idcard{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;
+ background:#fff;padding:12px 14px;margin:14px 0 10px}
+.idcard .idrow{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;margin:0 0 6px}
+.idcard .idrow .idq{font-size:20px;font-weight:700}
+.idcard .idrow .idarrow{color:var(--muted)}
+.idcard .idrow .iding{font-size:16px;font-weight:600;color:var(--accent)}
+.idbadge{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4;border-radius:999px;
+ padding:2px 10px;font-size:12px;white-space:nowrap}
+.idfields{display:flex;flex-wrap:wrap;gap:3px 16px;font-size:13px;color:var(--muted);margin:0}
+.idfields b{color:var(--fg);font-weight:600}
+.idwarn{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;padding:9px 12px;
+ font-size:13px;margin:9px 0 0}
+.idacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.idacts a,.idacts button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;
+ padding:0 15px;border-radius:10px;border:1px solid var(--accent);background:#fff;color:var(--accent);
+ font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
+.idacts .primary{background:var(--accent);color:#fff}
+.idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
+.res-more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+ margin:10px 0 0}
+.res-more .sub{margin:0;font-size:13px}
+.res-more button{min-height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--accent);
+ background:#fff;color:var(--accent);font-size:14px;cursor:pointer;font-family:inherit}
+.res-more button:hover{filter:brightness(.96)}
+.res-samelist{margin:6px 0 10px;padding-left:20px}
+.res-samelist li{margin:3px 0;font-size:13px}
+table.res.rows td.c-det{text-align:right;white-space:nowrap}
+table.res.rows .rowform{display:block;color:var(--muted);font-size:12px}
+.empty3{margin:12px 0 0}.empty3 .e3acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.empty3 .e3acts a,.empty3 .e3acts button{min-height:40px;display:inline-flex;align-items:center;
+ padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--fg);
+ font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
+.empty3 .e3acts a:hover,.empty3 .e3acts button:hover{border-color:var(--accent);color:var(--accent)}
+.res-skeleton .sk-row{height:36px;margin:8px 0;border-radius:8px;
+ background:linear-gradient(90deg,#f1efe9 25%,#f8f6f1 37%,#f1efe9 63%);
+ background-size:400% 100%;animation:skfade 1.2s ease-in-out infinite}
+@keyframes skfade{0%{background-position:100% 50%}100%{background-position:0 50%}}
+@media (prefers-reduced-motion:reduce){.res-skeleton .sk-row{animation:none}}
+@media (max-width:767px){
+  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:#fff;padding:6px 0;
+   border-bottom:1px solid var(--line)}
+  .has-q .searchwrap #ac{top:calc(100% + 2px)}
+}
 table.det{margin:4px 0 8px;font-size:13px;background:#faf9f6;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
 table.det th{background:#f4f2ec;font-size:11px}
@@ -447,3 +492,88 @@ a.grp-name{color:var(--accent)}
   .warnpager{gap:6px}
   .warnpager a,.warnpager span{min-width:40px;min-height:40px;font-size:15px}
 }
+
+/* ── v0.9.8 task-13（UI 批次 A-2）：统一外壳 / 44px 触控 / 名字页 / 成分页 ── */
+.sn{display:flex;align-items:center;gap:2px;font-size:14px;white-space:nowrap;margin-left:8px}
+.sn>a,.sn>details>summary{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;
+ border-radius:8px;color:var(--fg);cursor:pointer;list-style:none;white-space:nowrap}
+.sn>a:hover,.sn>details>summary:hover{background:#f1f8f4;text-decoration:none}
+.sn>a.on{color:var(--accent);font-weight:600}
+.sn>details>summary::-webkit-details-marker{display:none}
+.sn>details[open]>summary{background:#f1f8f4;color:var(--accent)}
+.sn>details>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:10px}
+.sn-dd{position:relative}
+.sn-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:60;background:#fff;
+ border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(31,35,40,.12);
+ padding:12px;min-width:300px}
+.sn-cats,.sn-mkts{display:grid;grid-template-columns:repeat(2,minmax(170px,1fr));gap:2px 10px}
+.sn-about{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px}
+.sn-cats a,.sn-mkts a,.sn-about a{display:flex;align-items:center;gap:8px;min-height:40px;
+ padding:4px 8px;border-radius:8px;color:var(--fg);font-size:14px}
+.sn-cats a:hover,.sn-mkts a:hover,.sn-about a:hover{background:#f1f8f4;text-decoration:none}
+.sn-mkts .meta{color:var(--muted);font-size:12px;margin-left:auto}
+.sn-foot{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;display:flex;
+ justify-content:space-between;gap:12px;font-size:13px}
+.tabbar{display:none}
+@media (max-width:767px){
+  header.hdr-shell .wrap{height:56px;flex-wrap:nowrap;gap:8px;padding:0 12px}
+  header.hdr-shell .logo{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+  header.hdr-shell .logo-zh{display:none}
+  header.hdr-shell nav{display:none}
+  header.hdr-shell .nav-toggle{display:none}
+  header.hdr-shell .langs{margin-left:auto;flex-shrink:0;gap:2px}
+  header.hdr-shell .langs a{min-width:44px;min-height:44px;display:inline-flex;
+   align-items:center;justify-content:center;padding:0 4px;font-size:12px}
+  body{padding-bottom:56px}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;height:56px;background:#fff;
+   border-top:1px solid var(--line);z-index:45;padding-bottom:env(safe-area-inset-bottom)}
+  .tabbar a{flex:1;display:inline-flex;align-items:center;justify-content:center;
+   min-height:44px;font-size:12px;color:var(--muted);position:relative}
+  .tabbar a.on{color:var(--accent);font-weight:600}
+  .tabbar a.on:before{content:"";position:absolute;top:0;left:26%;right:26%;height:3px;
+   background:var(--accent);border-radius:0 0 3px 3px}
+}
+/* P0-7：六类触控目标 ≥44×44（min-height 扩张，视觉基本不变） */
+nav a{min-height:44px;display:inline-flex;align-items:center}
+.langs a{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+.catchip{min-height:44px}
+.atccard{min-height:44px}
+.u1try button{min-height:44px}
+.homeupd .updlist a{min-height:44px}
+/* P0-8：名字页「不可互换」警示 + 成分卡折叠 */
+.name-notice{color:var(--warn);margin:6px 0 2px}
+.name-more{margin:10px 0}
+.name-more>summary{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;
+ border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:14px}
+.name-more>summary::-webkit-details-marker{display:none}
+.name-more>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:10px}
+.name-more[open]>summary:after{content:"▴"}
+/* P0-9：成分页筛选器默认收起（details 由 JS 包） */
+.mf-slot{min-height:44px}
+.mf-details{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.mf-details>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;
+ cursor:pointer;font-size:14px;font-weight:600;list-style:none}
+.mf-details>summary::-webkit-details-marker{display:none}
+.mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:12px}
+.mf-details[open]>summary{border-bottom:1px solid var(--line)}
+.mf-details .matrix-filters{margin:0;border:0;border-radius:0}
+.mf-details .mf-toggle{display:none}
+.mf-details .mf-panel{display:grid}
+.drug-identity{margin:2px 0 10px}
+.drug-identity b{color:var(--fg)}
+
+/* A-2 fix：桌面壳单行（1280 下 5 项 nav 不再折行被 header 高度裁切） */
+@media (min-width:1100px){
+  header.hdr-shell .wrap{max-width:1120px;height:64px;flex-wrap:nowrap}
+  header.hdr-shell .sn{flex-wrap:nowrap}
+  header.hdr-shell .langs{margin-left:auto}
+}
+@media (min-width:768px) and (max-width:1099px){
+  header.hdr-shell .wrap{max-width:1120px;height:auto;flex-wrap:wrap;
+   padding-top:8px;padding-bottom:8px;gap:6px 12px}
+  header.hdr-shell .sn{order:3;flex-basis:100%;flex-wrap:wrap;margin-left:0;gap:4px 8px}
+  header.hdr-shell .langs{margin-left:auto}
+}
+
+/* A-2 fix2：头部双语开关单行（zh「显示原文对照」6 字，1280 下不折行） */
+header.hdr-shell .bil-toggle{white-space:nowrap;margin:0 6px;flex:none}

@@ -112,8 +112,11 @@
     lab.className = 'bil-toggle';
     lab.innerHTML = '<input type="checkbox" id="bilOrig"> <span></span>';
     lab.querySelector('span').textContent = T('bilingual.toggle');
-    var langs = nav.querySelector('.langs');
-    nav.insertBefore(lab, langs || null);
+    // v0.9.8 task-13：新壳把 .langs 放在 nav 外，开关改插到 header 里的 langs 之前，
+    // 避免它变成第 6 个导航项（旧壳 langs 在 nav 内，行为不变）。
+    var langs = nav.querySelector('.langs') || document.querySelector('header .langs');
+    if(langs && langs.parentNode){ langs.parentNode.insertBefore(lab, langs); }
+    else { nav.appendChild(lab); }
     var cb = lab.querySelector('input');
     cb.checked = SHOW;
     cb.addEventListener('change', function(){
@@ -187,12 +190,19 @@
       });
       var T = window.T || function(k){ return k; };
       function opt(v, label){ var o = document.createElement('option'); o.value = v; o.textContent = label; return o; }
+      // v0.9.8 task-13（P0-9）：筛选器默认收起；details 在客户端包，长尾页静态 0 增量。
+      var det = document.createElement('details');
+      det.className = 'mf-details';
+      var sumEl = document.createElement('summary');
+      sumEl.textContent = T('matrix.filters');
+      det.appendChild(sumEl);
       var box = document.createElement('section');
       box.className = 'matrix-filters';
       box.innerHTML = '<div class="mf-head"><span class="mf-title"></span>'
         + '<span class="mf-count" aria-live="polite"></span>'
         + '<button type="button" class="mf-toggle" aria-expanded="false"></button></div>'
         + '<div class="mf-panel"></div>';
+      det.appendChild(box);
       box.querySelector('.mf-title').textContent = T('matrix.filters');
       box.querySelector('.mf-toggle').textContent = T('matrix.mobile_filters');
       var panel = box.querySelector('.mf-panel');
@@ -246,10 +256,10 @@
       note.textContent = T('matrix.sort_note');
       var slot = wrap.previousElementSibling;
       if(slot && slot.classList.contains('mf-slot')){
-        slot.appendChild(box);
+        slot.appendChild(det);
         slot.appendChild(note);
       }else{
-        wrap.parentNode.insertBefore(box, wrap);
+        wrap.parentNode.insertBefore(det, wrap);
         wrap.parentNode.insertBefore(note, wrap);
       }
       function current(){
@@ -293,6 +303,10 @@
           cnt.textContent = T('matrix.showing').replace('{n}', visible).replace('{total}', rows.length)
             + ' · ' + T('matrix.market_count')
               .replace('{shown}', s.countries.length).replace('{total}', s.all.length);
+          if(sumEl){
+            sumEl.textContent = T('matrix.filters') + ' · ' + visible + '/' + rows.length
+              + ' · ' + s.countries.length + '/' + s.all.length;
+          }
         }
         if(updateURL){
           try{
