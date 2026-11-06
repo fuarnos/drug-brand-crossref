@@ -45,8 +45,12 @@ OUT = Path(os.environ.get("SITE_OUT") or (ROOT / "site" / "dist"))
 REPORT_REPO = "https://github.com/fuarnos/drug-brand-crossref"
 # 公开站根地址：404 页、robots.txt、sitemap.xml 里要用绝对 URL。
 SITE_URL = "https://fuarnos.github.io/drug-brand-crossref/"
-# 每次构建换一个版本号，给 css/js/json 都带上，避免用户拿到缓存里的旧代码。
-BUILD_V = str(int(time.time()))
+# 构建版本号：给 css/js/json 带 ?v=，避免用户拿到缓存里的旧代码。
+# v0.9.9 task-14：从 `int(time.time())` 改成「输入内容哈希」。
+# 旧写法每次构建都换号 → 121,280 个产物里 112,692 个（每页 <head> 的 ?v=）逐字节全变，
+# gh-pages 发布 diff 爆到 11 万文件、GitHub Pages 构建反复超时。内容哈希保证：
+# 同一份源码 + 同一份数据，两次构建逐字节一致；只有输入真的变了才换号。
+BUILD_V = ""  # main() 开头用 _compute_build_v() 写定（要等模块常量就位）
 
 CHANGELOG = ROOT / "CHANGELOG.md"
 
@@ -55,6 +59,35 @@ CHANGELOG = ROOT / "CHANGELOG.md"
 # data/zh_hant_t2s.json（OpenCC TSCharacters 常用字子集，构建期注入 app.js）。
 ZH_HANT_I18N_FILE = ROOT / "data" / "i18n_zh_hant.json"
 ZH_HANT_T2S_FILE = ROOT / "data" / "zh_hant_t2s.json"
+
+
+def _sha1_inputs(*paths: Path) -> str:
+    """把若干输入文件的「名字 + 内容」串起来做 sha1（缺失文件用占位符，不抛错）。"""
+    h = hashlib.sha1()
+    for p in paths:
+        h.update(p.name.encode("utf-8"))
+        h.update(b"\0")
+        try:
+            h.update(p.read_bytes())
+        except OSError:
+            h.update(b"<missing>")
+        h.update(b"\0")
+    return h.hexdigest()
+
+
+def _compute_build_v() -> str:
+    """构建版本号 = 静态资源源码的内容哈希（task-14，替代 time.time()）。
+
+    只哈希「决定 css/js 字节」的输入：build.py 自身（CSS / APP_JS / BILINGUAL_JS /
+    ATC4_JS / LANG_META_JS 都是本文件里的常量）+ zh-Hant 两份字典。
+    **刻意不含数据库**：数据更新（最常见的一类发布）不该让 12 万页的 ?v= 全变；
+    资源文件的缓存 TTL（GitHub Pages 10 分钟）与 HTML 同量级，数据新鲜度不受影响。
+    结果转成十进制数字串，保持线上 `?v=<数字>` 的既有形状（deploy/verify_live.py 会校验）。
+    """
+    digest = _sha1_inputs(Path(__file__).resolve(), ZH_HANT_I18N_FILE, ZH_HANT_T2S_FILE)
+    # 取 8 位十六进制转十进制并定宽补零：恒为 10 位数字，与旧的时间戳同宽
+    # （121k 页 × 每页 2–4 处 ?v=，宽度变化会让 dist 体积无谓变动）。
+    return f"{int(digest[:8], 16):010d}"
 
 
 def _load_json_file(path: Path) -> dict:
@@ -7417,13 +7450,18 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
         cards = []
         for sid, g in d["subs"].items():
             rel = g["rel"] - {"none"}
+            # v0.9.9 task-14：g['s'] 是 set，_sort_strength 只比数值 → 「5 mg / 5 mL」
+            # 「0.6 kg / 0.6 mL」这类同数值不同单位会并列，而 sorted 是稳定排序，
+            # 并列顺序就退回 set 的迭代顺序（受 PYTHONHASHSEED 影响）→ 两次构建这 109 个
+            # 名字页逐字节不同。补一个「原串码点」兜底键，让排序全序化。
+            strengths = '、'.join(sorted(g['s'], key=lambda s: (_sort_strength(s), s)))
             cards.append(
                 f"""<div class="card"><h2><a href="../drug/{sid}.html">{esc(g['inn'])}</a></h2>
 <div class="meta"><span data-i18n="name.countries">Countries</span>:
 {esc('、'.join(sorted(g['country'])))} ·
 <span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))} ·
 <span data-i18n="name.strength">Strength</span>:
-{_label_unit_html('、'.join(sorted(g['s'], key=_sort_strength))) or '—'}
+{_label_unit_html(strengths) or '—'}
 {f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div></div>"""
             )
         single = e.get("n") == 1 and e.get("t") == 1
@@ -9643,6 +9681,10 @@ def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cov
         })
 
     version = LATEST_VERSION or "v0.9.2"
+    # v0.9.9 task-14：数据包时间戳以前取「构建时刻」（精确到秒）→ 两次构建必不同，
+    # 还会经 checksums.txt 的 datapackage.json 哈希级联出第 2 个差异文件。
+    # 改成 CHANGELOG 顶部那一版的日期：同一次发布的所有构建共用同一个值。
+    pkg_date = LATEST_DATE or time.strftime("%Y-%m-%d", time.gmtime())
     pkg = {
         "profile": "tabular-data-package",
         "name": "drug-brand-crossref-derived",
@@ -9651,7 +9693,7 @@ def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cov
                         "reference. Product/name records are not redistributed from restricted sources; "
                         "only aggregates and a substance list are included."),
         "version": version,
-        "created": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "created": f"{pkg_date}T00:00:00Z",
         "homepage": SITE_URL,
         "licenses": [{
             "name": "mixed-derived",
@@ -9673,7 +9715,7 @@ def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cov
         "description": pkg["description"],
         "url": SITE_URL + "datapackage.json",
         "version": version,
-        "dateModified": time.strftime("%Y-%m-%d", time.gmtime()),
+        "dateModified": pkg_date,
         "license": pkg["licenses"][0]["path"],
         "creator": {"@type": "Organization", "name": "Medicine Brand Cross-Reference",
                     "url": SITE_URL},
@@ -9954,7 +9996,9 @@ def encode_shards(entries) -> dict:
     buckets: dict[str, list] = {}
     for e in entries:
         buckets.setdefault(_shard_bucket(e["k"]), []).append(e)
-    manifest = {"v": int(time.time()), "n": len(entries), "buckets": {},
+    # v0.9.9 task-14：分片版本号跟 BUILD_V 走（客户端只拿它拼 ?v=，不解析内容），
+    # 不用 time.time()，否则 manifest.json 每次构建都变。
+    manifest = {"v": BUILD_V, "n": len(entries), "buckets": {},
                 "cjkInitials": {},
                 "core": {"f": "data/idx/core.json", "bytes": core_path.stat().st_size}}
     target = 1_100_000  # 原始字节/片（gzip 后约 150-220 KB）
@@ -9991,6 +10035,10 @@ def encode_shards(entries) -> dict:
 
 
 def main() -> None:
+    global BUILD_V
+    # task-14：版本号由输入内容决定（不是时间），必须在写任何产物之前定下来。
+    BUILD_V = _compute_build_v()
+    print(f"build version: {BUILD_V} (content hash)", flush=True)
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
@@ -10240,9 +10288,9 @@ def main() -> None:
     (OUT / "assets" / "app.js").write_text(
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
         .replace("__T2S_JSON__", json.dumps(t2s, ensure_ascii=False, separators=(",", ":")))
-        .replace("data/idx/core.json", f"data/idx/core.json?v={int(time.time())}")
-        .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={int(time.time())}")
-        .replace("data/idx/manifest.json", f"data/idx/manifest.json?v={int(time.time())}"),
+        .replace("data/idx/core.json", f"data/idx/core.json?v={BUILD_V}")
+        .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={BUILD_V}")
+        .replace("data/idx/manifest.json", f"data/idx/manifest.json?v={BUILD_V}"),
         encoding="utf-8")
 
     db = sqlite3.connect(DB)
