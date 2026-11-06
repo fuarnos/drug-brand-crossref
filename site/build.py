@@ -218,6 +218,9 @@ I18N = {
         "drug.status_note.withdrawn": "market authorisation withdrawn",
         "drug.status_note.unknown": "validity unknown",
         "drug.no_brand": "(no brand name)", "drug.also_called": "Also called:",
+        # v0.9.6 task-141c：同一成分的「同物异名」（data/substance_aliases.csv）——
+        # 只列出别的写法，不翻译、不改主名；与俗称（also_called）分开显示。
+        "drug.also_known": "Also known as:", "syn.tag": "synonym",
         "brand.none": "No trade name",
         "a11y.skip": "Skip to content",
         "ingredient.unrecorded": "Ingredient not recorded (name-level)",
@@ -262,6 +265,12 @@ I18N = {
                            "check the composition."),
         "nick.caveat": ("Nicknames point to an ingredient, not to a specific pack: the same "
                         "ingredient is sold under different brand names in each country."),
+        # task-141c：同物异名（INN vs USAN / 拼写变体）命中的身份卡，与俗称卡区分。
+        "nick.synonym": "synonym",
+        "nick.synonym_hit": "Also known as",
+        "nick.synonym_caveat": ("Another name for the same active ingredient (INN vs USAN or a "
+                                "spelling variant). It identifies the ingredient — products in "
+                                "different countries are still not interchangeable."),
         "footer": ("Information only — not medical advice, and no substitute for a pharmacist."),
         "report.link": "Report a data error",
         "report.all": "Known issues",
@@ -402,6 +411,7 @@ I18N = {
         "drug.status_note.withdrawn": "autorización retirada",
         "drug.status_note.unknown": "validez desconocida",
         "drug.no_brand": "(sin nombre comercial)", "drug.also_called": "También llamado:",
+        "drug.also_known": "También conocido como:", "syn.tag": "sinónimo",
         "brand.none": "Sin nombre comercial",
         "a11y.skip": "Saltar al contenido",
         "ingredient.unrecorded": "Principio no registrado (nivel de nombre)",
@@ -447,6 +457,11 @@ I18N = {
                            "comprueba la composición."),
         "nick.caveat": ("Los apodos señalan un principio activo, no un envase concreto: el mismo "
                         "principio se vende con marcas distintas en cada país."),
+        "nick.synonym": "sinónimo",
+        "nick.synonym_hit": "También conocido como",
+        "nick.synonym_caveat": ("Otro nombre del mismo principio activo (INN frente a USAN o una "
+                                "variante ortográfica). Identifica el principio; los productos de "
+                                "otros países siguen sin ser intercambiables."),
         "footer": ("Solo información — no es consejo médico ni sustituye a un farmacéutico."),
         "report.link": "Informar de un error",
         "report.all": "Problemas conocidos",
@@ -586,6 +601,7 @@ I18N = {
         "drug.status_note.withdrawn": "批文已撤销",
         "drug.status_note.unknown": "有效期待确认",
         "drug.no_brand": "（无商品名）", "drug.also_called": "也叫：",
+        "drug.also_known": "也称：", "syn.tag": "异名",
         "brand.none": "无商品名",
         "a11y.skip": "跳到主要内容",
         "ingredient.unrecorded": "成分未收录（名称层）",
@@ -621,6 +637,10 @@ I18N = {
         "nick.nomap_caveat": "这个词指向的成分在本库没有上市产品记录，因此不列商品名。",
         "nick.ambiguous": "这个叫法可能对应不止一个成分，请按成分核对。",
         "nick.caveat": "俗称指向成分，不指向某个包装；同一成分在各国的商品名不同。",
+        "nick.synonym": "异名",
+        "nick.synonym_hit": "也称",
+        "nick.synonym_caveat": ("同一活性成分的另一种写法（INN 与 USAN 差异或拼写变体）。"
+                                "只用于确认成分身份，不代表不同国家的产品可以互换。"),
         "footer": "本站只做标识对应，不构成用药建议，不能替代医师或药师。",
         "report.link": "报错 / 纠错",
         "report.all": "已知问题",
@@ -1025,6 +1045,12 @@ UI_I18N = {
         "badge.export_only": "僅供出口",
         "maker.single_note": "目前未收錄該廠商的其他產品。",
         "name.single_note": "此名稱目前僅收錄 1 筆產品紀錄。",
+        # task-141c：同物異名（成分頁「也稱」+ 檢索身份卡）的繁中值，避免回落簡體。
+        "drug.also_known": "也稱：", "syn.tag": "異名",
+        "nick.synonym": "異名",
+        "nick.synonym_hit": "也稱",
+        "nick.synonym_caveat": ("同一有效成分的另一種寫法（INN 與 USAN 差異或拼寫變體）。"
+                                "只用於確認成分身分，不代表不同國家的產品可以互換。"),
         # v0.6.7：/warn 分頁
         "warn.page_prev": "上一頁", "warn.page_next": "下一頁",
         "warn.pagination": "警示分頁",
@@ -3193,9 +3219,17 @@ function makerHTML(e, T){
     + `<button type="button" class="linkbtn mah-toggle" data-mah="1" aria-expanded="false">+${extraTotal}</button>`
     + `<ul class="mah-list" hidden>${items}${tail}</ul></span>`;
 }
+function _flatAccents(s){
+  // 西语别名里的 é/í/ó 是预组合字符，norm() 只删组合标记，这里再按 NFKD 折一次；
+  // 只影响匹配（Bromelaina 也能命中 Bromelaína），显示名仍保留原写法。
+  return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+}
 function aliasHits(nq){
   // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
-  return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
+  // task-141c：同物异名（成分别名）也走这里，额外容忍重音差异。
+  const fq = _flatAccents(nq);
+  return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,'')
+    || _flatAccents(a.n).replace(/ /g,'') === fq.replace(/ /g,''));
 }
 function confHits(nq){
   // 易混淆药对也只做精确命中：这是「名字像」的提示，不做模糊扩展。
@@ -4183,7 +4217,8 @@ function render(){
       const detail = window.LANG === 'zh' ? (a.hint || a.m) : (a.me || '');
       const hint = detail ? `<div class="sub">${esc(detail)}</div>` : '';
       const packs = a.np ? ` · ${a.np} ${T('card.packs')}` : '';
-      const caveat = a.k === 'class' ? T('nick.class_caveat')
+      const caveat = a.k === 'synonym' ? T('nick.synonym_caveat')
+        : a.k === 'class' ? T('nick.class_caveat')
         : a.k === 'folk' ? T('nick.folk_caveat')
         : (a.v ? T('nick.caveat') : T('nick.nomap_caveat'));
       const unverified = a.cf && a.cf !== 'documented';
@@ -4198,7 +4233,10 @@ function render(){
             : esc(a.src))
         : '—';
       const srcLine = `<div class="sub src">${T('nick.source')}: ${srcText}</div>`;
-      return `<div class="notice nick"><div class="nick-head">${T('nick.hit')}：
+      // task-141c：同物异名卡（如 Dextrose → Glucose）与俗称卡共用一条渲染，
+      // 只换标题；来源行仍打印 CSV 的 source，中文说明只在中文界面展开。
+      const headKey = a.k === 'synonym' ? 'nick.synonym_hit' : 'nick.hit';
+      return `<div class="notice nick"><div class="nick-head">${T(headKey)}：
         <b>${esc(a.a)}</b> → ${target}
         <span class="tag">${esc(T('nick.'+a.k))}</span>${cfTag}</div>
         <div class="sub">${caveat}${packs}</div>${hint}${srcLine}</div>`;
@@ -5189,11 +5227,64 @@ def build_terms_json(db: sqlite3.Connection) -> dict[str, int]:
     return counts
 
 
+# v0.9.6 task-149：长尾 name 页公共壳瘦身（77,058 页 × 782 B ≈ 57.5 MiB，实测）。
+# 只处理「壳」，正文一个字节都不动；四条规则各自可逆，改回 slim=False 即恢复原样。
+_SLIM_JSONLD_RE = re.compile(
+    r'<script type="application/ld\+json">\{"@context":"https://schema\.org",'
+    r'"@type":"WebSite".*?</script>', re.S)
+_SLIM_DESC_RE = re.compile(r'<meta name="description" content="[^"]*">')
+_SLIM_ICON_RE = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*">')
+_WS_BETWEEN_TAGS_RE = re.compile(r">[\r\n\t ]+<")
+_WS_RUN_RE = re.compile(r"[\r\n\t ]{2,}")
+_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _collapse_tag_ws(html: str) -> str:
+    """只压「标签内部」的连续空白（属性之间的换行/缩进）。
+
+    文本节点一个空格都不动：站点里有商品名本身带双空格（如
+    `ACETA TABLETS  "C.H."`），压了就等于改标题，SEO 与页面口径都会漂。
+    """
+    return _TAG_RE.sub(lambda m: _WS_RUN_RE.sub(" ", m.group(0)), html)
+
+
+def _slim_shell(*chunks: str) -> tuple[str, ...]:
+    """把一页的「壳」压瘦：head、<body>~正文 之间、正文~</body> 之间三段各自处理。
+
+    - 去掉站点级 WebSite JSON-LD：站点级事实在首页/顶层页已声明，7.7 万长尾页重复声明无收益；
+    - 去掉模板化 description：77k 页同构文案对搜索引擎无价值，交给它按正文生成摘要；
+    - favicon 的 SVG data URI 换成空 data URI：省 205 B，同时避免长尾页每次访问都请求
+      不存在的 /favicon.ico（负缓存之前每页一次 404）；
+    - 压掉标签之间的换行缩进、标签内连续空白：header/footer 都是 flex + gap 排版，
+      标签间空白不参与渲染，版式与无 JS 可读性不变。
+
+    保留：title / canonical / hreflang / noindex / style.css / boot.js / DSH_PREFIX /
+    分析脚本 / 导航 / 页脚署名与免责声明 —— 所以去掉公共壳后剩下的仍是完整可读页面。
+    正文 chunk 不传进来，调用方只对首尾两段调用。
+    """
+    out: list[str] = []
+    for idx, chunk in enumerate(chunks):
+        if idx == 0:  # head：去掉三类可选块
+            chunk = _SLIM_JSONLD_RE.sub("", chunk)
+            chunk = _SLIM_DESC_RE.sub("", chunk, count=1)
+            chunk = _SLIM_ICON_RE.sub('<link rel="icon" href="data:,">', chunk, count=1)
+        chunk = _WS_BETWEEN_TAGS_RE.sub("><", chunk)
+        # chunk 边界都落在标签边界上，首尾空白同样只是排版空白
+        out.append(_collapse_tag_ws(chunk).strip())
+    return tuple(out)
+
+
 def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
          canonical_rel: str = "", alt_rel: str = "", head_js: str = "",
          noindex: bool = False, defer_i18n: bool = True,
-         nav_coverage: bool = False) -> str:
+         nav_coverage: bool = False, slim: bool = False) -> str:
+    """渲染整页 HTML。
+
+    slim=True 只给长尾 name 页用（77,058 页）：保留 title/canonical/hreflang 与导航、页脚，
+    去掉重复的结构化数据、模板化 description 与 favicon data URI，并压掉壳里的空白。
+    首页 / drug / atc 等 LCP 目标页继续走 slim=False 的原模板。
+    """
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
@@ -5261,14 +5352,16 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     head_scripts = (f'<script defer src="{prefix}assets/boot.js?v={BUILD_V}"></script>'
                     if defer_i18n else "")
     boot_scripts = ""
-    return f"""<!doctype html>
+    # 壳拆三段（head / 正文前 / 正文后）：slim 只重排首尾两段，body 原样插入，绝不被压缩。
+    head = f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}{noindex_meta}
 {favicon}{site_ld}
 <link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
 {head_scripts}
-<script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>
+<script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>"""
+    top = f"""
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header><div class="wrap">
@@ -5283,7 +5376,8 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     <a href="{prefix}atc.html" data-i18n="nav.atc">ATC &amp; categories</a>
 {cov_nav}    <span class="langs">{sw}</span></nav>
 </div></header>
-<main id="main"><div class="wrap">{body}</div></main>
+<main id="main"><div class="wrap">"""
+    bottom = f"""</div></main>
 <footer><div class="wrap">
   <span data-i18n="footer">{esc(I18N['en']['footer'])}</span>
   <span class="foot-links">
@@ -5296,6 +5390,9 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 </div></footer>
 {boot_scripts}
 </body></html>"""
+    if slim:
+        head, top, bottom = _slim_shell(head, top, bottom)
+    return head + top + body + bottom
 
 
 def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
@@ -5959,6 +6056,93 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
     return out
 
 
+# ── v0.9.6 task-141c：同物异名（data/substance_aliases.csv）──────────────
+# 数据层在 CSV 里（24 组异名），站点只读它：成分页多一行「也称」，检索多一张
+# 身份卡。名字一律保留原文、不翻译、不改成分页主名；只做身份对应，不判断可互换。
+SUBSTANCE_ALIASES_CSV = ROOT / "data" / "substance_aliases.csv"
+SUBSTANCE_ALIAS_CAP = 5   # 成分页「也称」每页最多列 5 个别的写法
+
+
+def _norm_alias(s: str) -> str:
+    """与 app.js 的 norm() 逐条同口径：NFKC → 小写 → 去组合音标 → 压空白。
+
+    注意 JS 端同样是 NFKC（组合式）后才删 U+0300–U+036F，所以预组合重音（é/í）
+    会保留：西语别名要按原写法命中，与既有俗称索引的匹配规则一致。
+    """
+    s = unicodedata.normalize("NFKC", s or "").lower()
+    s = re.sub(r"[\u0300-\u036f]", "", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def load_substance_aliases(
+        db: sqlite3.Connection) -> tuple[dict[str, list[dict[str, str]]], list[dict]]:
+    """把同物异名表读成两份站内数据（只读 CSV，不改库、不改主名）。
+
+    - `also`：成分页「也称」表，substance_id → [{"n": 显示名, "t": 可跳转成分 id}]，
+      **成对双向**（glucose 页列 Dextrose，dextrose 页也列 Glucose），每页最多
+      `SUBSTANCE_ALIAS_CAP` 条。显示名优先取库里 `substance.inn_en` 原文，没有
+      该成分才回退 CSV 原文 —— 不翻译。
+    - `hits`：追加进 `data/aliases.json` 的检索条目（字段与 `load_aliases()` 同构），
+      只做 alias → canonical **单向**：搜 Dextrose 得到「Dextrose → Glucose」身份卡
+      并链到 glucose 成分页；规范名本身已有名字索引，不反向加噪。规范成分没有
+      产品页时不生成条目，避免链到 404。
+    """
+    also: dict[str, list[dict[str, str]]] = {}
+    hits: list[dict] = []
+    path = SUBSTANCE_ALIASES_CSV
+    if not path.exists():
+        return also, hits
+    subs = {sid: (inn or "")
+            for sid, inn in db.execute("SELECT substance_id, inn_en FROM substance")}
+    page_sids = {r[0] for r in db.execute(
+        """SELECT DISTINCT v.substance_id FROM product p
+           JOIN product_component pc ON pc.product_id = p.product_id
+           JOIN variant v ON v.variant_id = pc.variant_id""")}
+
+    def _add_also(sid: str, name: str, target: str) -> None:
+        bucket = also.setdefault(sid, [])
+        if not name or len(bucket) >= SUBSTANCE_ALIAS_CAP:
+            return
+        if any((x["n"] or "").lower() == name.lower() for x in bucket):
+            return
+        bucket.append({"n": name, "t": target if target in page_sids else ""})
+
+    seen_hits: set[str] = set()
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            csid = (row.get("canonical_id") or "").strip()
+            asid = (row.get("alias_id") or "").strip()
+            if not csid or not asid or csid == asid:
+                continue
+            cname = subs.get(csid) or (row.get("canonical_inn") or "").strip()
+            aname = subs.get(asid) or (row.get("alias_inn") or "").strip()
+            if not cname or not aname:
+                continue
+            _add_also(csid, aname, asid)
+            _add_also(asid, cname, csid)
+            norm = _norm_alias(aname)
+            if csid not in page_sids or not norm or norm in seen_hits:
+                continue
+            seen_hits.add(norm)
+            hits.append({
+                "a": aname,
+                "n": norm,
+                "v": csid,
+                "i": cname,
+                "x": cname,          # 卡片显示「别名 → 规范名」，两边都不翻译
+                "k": "synonym",
+                "cf": "documented",
+                "hint": (row.get("note") or "").strip(),
+                "src": (row.get("source") or "").strip(),
+                "su": "",
+                "m": "", "me": "",
+                "ct": "",
+                "c": [],
+                "np": 0,
+            })
+    return also, hits
+
+
 def load_confusable(db: sqlite3.Connection) -> list[dict]:
     """易混淆药对的检索索引：一行 = 一个名字 → 它容易混的那个名字。"""
     out: list[dict] = []
@@ -6169,8 +6353,11 @@ def _strip_form_from_label(label: str, form: str) -> str:
     return text
 
 
-def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
+def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
     T = I18N["en"]
+    # task-141c：同物异名表（也传进来的话复用主流程那一份，避免重复读 CSV）
+    if also is None:
+        also = load_substance_aliases(db)[0]
     entry_by_k = {e["k"]: e for e in (entries or [])}
     # task-136：CN 中文注册名可附的英文原名（同 key 的拉丁写法；无则不造）
     cn_latin: dict[str, str] = {}
@@ -6456,9 +6643,22 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
                        'default; Hong Kong and Australia records are shown as exceptions.</p>')
         nick_line = ""
         if sid in nicknames:
-            also = "、".join(esc(x) for x in nicknames[sid])
+            also_names = "、".join(esc(x) for x in nicknames[sid])
             nick_line = (f'<p class="sub"><span data-i18n="drug.also_called">Also called:</span> '
-                         f'{also} <span class="tag" data-i18n="nick.tag">nickname</span></p>')
+                         f'{also_names} <span class="tag" data-i18n="nick.tag">nickname</span></p>')
+        # task-141c：同物异名（INN vs USAN / 拼写变体）——只列别的写法，最多 5 个；
+        # 目标成分有产品页就链过去，名字保留原文、不翻译，主名（h1）不动。
+        syn_line = ""
+        if also.get(sid):
+            bits = []
+            for item in also[sid][:SUBSTANCE_ALIAS_CAP]:
+                label = esc(item["n"])
+                if item["t"]:
+                    label = f'<a href="{esc(item["t"])}.html">{label}</a>'
+                bits.append(label)
+            syn_line = (f'<p class="sub drug-also"><span data-i18n="drug.also_known">'
+                        f'Also known as:</span> ' + ", ".join(bits)
+                        + ' <span class="tag" data-i18n="syn.tag">synonym</span></p>\n')
         conf_line = ""
         if conflicts.get(sid):
             items = []
@@ -6488,7 +6688,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None) -> int:
 <p class="sub">ATC {esc(atc) or '—'} · <span data-i18n="drug.sid">Substance ID</span>
 <code>{esc(sid)}</code></p>
 {warn_line}
-{nick_line}
+{syn_line}{nick_line}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
 brand names in different countries, and the same name can point to a different ingredient.
@@ -6676,7 +6876,9 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                          f'<p class="sub name-single-note">{esc(note)}</p></div>')
             NOINDEX_RELS.add(f'name/{e["u"]}')
         (OUT / "name" / e["u"]).write_text(
-            page(e["d"], body, "../", noindex=single,
+            # v0.9.6 task-149：name 页是长尾页（77,058 个，占全站 50.7% 体积），
+            # 走 slim 壳：单页省 782 B，全站省 57.5 MiB；正文与 SEO 骨架不变。
+            page(e["d"], body, "../", noindex=single, slim=True,
                  canonical_rel=f'name/{e["u"]}'), encoding="utf-8")
         made += 1
     return made
@@ -9533,9 +9735,12 @@ def main() -> None:
 
     print("building nickname index ...", flush=True)
     aliases = load_aliases(db)
+    # task-141c：同物异名也进检索索引（alias → canonical 身份卡），与人工俗称同构。
+    sub_aliases, sub_alias_hits = load_substance_aliases(db)
+    aliases += sub_alias_hits
     (OUT / "data" / "aliases.json").write_text(
         json.dumps(aliases, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"  {len(aliases)} nicknames", flush=True)
+    print(f"  {len(aliases)} nicknames ({len(sub_alias_hits)} substance synonyms)", flush=True)
 
     # 搜索增强（task-28）：拼音/首字母 token 表（客户端按需懒加载，见 APP_JS 的 pinyinFetch）
     piny = encode_pinyin(entries, aliases)
@@ -9560,7 +9765,7 @@ def main() -> None:
     print(f"  {len(artg)} ARTG names", flush=True)
 
     print("building drug pages ...", flush=True)
-    n_drug = build_drug_pages(db, entries)
+    n_drug = build_drug_pages(db, entries, sub_aliases)
     print("collecting name data ...", flush=True)
     data = collect_name_data(db)
     families: dict[str, dict] = {}
