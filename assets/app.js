@@ -258,9 +258,17 @@ function makerHTML(e, T){
     + `<button type="button" class="linkbtn mah-toggle" data-mah="1" aria-expanded="false">+${extraTotal}</button>`
     + `<ul class="mah-list" hidden>${items}${tail}</ul></span>`;
 }
+function _flatAccents(s){
+  // 西语别名里的 é/í/ó 是预组合字符，norm() 只删组合标记，这里再按 NFKD 折一次；
+  // 只影响匹配（Bromelaina 也能命中 Bromelaína），显示名仍保留原写法。
+  return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+}
 function aliasHits(nq){
   // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
-  return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,''));
+  // task-141c：同物异名（成分别名）也走这里，额外容忍重音差异。
+  const fq = _flatAccents(nq);
+  return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,'')
+    || _flatAccents(a.n).replace(/ /g,'') === fq.replace(/ /g,''));
 }
 function confHits(nq){
   // 易混淆药对也只做精确命中：这是「名字像」的提示，不做模糊扩展。
@@ -708,7 +716,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793385030（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1793986252（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -761,7 +769,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793385030').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1793986252').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1248,7 +1256,8 @@ function render(){
       const detail = window.LANG === 'zh' ? (a.hint || a.m) : (a.me || '');
       const hint = detail ? `<div class="sub">${esc(detail)}</div>` : '';
       const packs = a.np ? ` · ${a.np} ${T('card.packs')}` : '';
-      const caveat = a.k === 'class' ? T('nick.class_caveat')
+      const caveat = a.k === 'synonym' ? T('nick.synonym_caveat')
+        : a.k === 'class' ? T('nick.class_caveat')
         : a.k === 'folk' ? T('nick.folk_caveat')
         : (a.v ? T('nick.caveat') : T('nick.nomap_caveat'));
       const unverified = a.cf && a.cf !== 'documented';
@@ -1263,7 +1272,10 @@ function render(){
             : esc(a.src))
         : '—';
       const srcLine = `<div class="sub src">${T('nick.source')}: ${srcText}</div>`;
-      return `<div class="notice nick"><div class="nick-head">${T('nick.hit')}：
+      // task-141c：同物异名卡（如 Dextrose → Glucose）与俗称卡共用一条渲染，
+      // 只换标题；来源行仍打印 CSV 的 source，中文说明只在中文界面展开。
+      const headKey = a.k === 'synonym' ? 'nick.synonym_hit' : 'nick.hit';
+      return `<div class="notice nick"><div class="nick-head">${T(headKey)}：
         <b>${esc(a.a)}</b> → ${target}
         <span class="tag">${esc(T('nick.'+a.k))}</span>${cfTag}</div>
         <div class="sub">${caveat}${packs}</div>${hint}${srcLine}</div>`;
@@ -1437,7 +1449,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793385030，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1793986252，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1481,10 +1493,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793385030 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1793986252 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1793385030').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1793986252').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1494,7 +1506,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793385030').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1793986252').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
