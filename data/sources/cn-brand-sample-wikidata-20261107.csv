@@ -1,0 +1,187 @@
+wikidata_qid,class,zh_label,zh_alias,en_label,atc,ingredient_zh,ingredient_en,license,source_url,in_db_name_key,is_substance_inn_zh
+Q1000106,medication,仁丹,,Jintan,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1000106,no,no
+Q100391783,medication,巴尼韋單抗,,bamlanivimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q100391783,no,no
+Q100420563,medication,阿替韦单抗,,atoltivimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q100420563,no,no
+Q100692768,medication,盧馬西蘭,,lumasiran,A16AX18,,,CC0 1.0,https://www.wikidata.org/wiki/Q100692768,no,no
+Q103085694,medication,那西妥單抗,,naxitamab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q103085694,no,no
+Q103815273,medication,Sotatercept,,sotatercept,,,,CC0 1.0,https://www.wikidata.org/wiki/Q103815273,yes,no
+Q10420388,pharmaceutical product,阿斯匹靈,,Aspirin,,阿司匹林,aspirin,CC0 1.0,https://www.wikidata.org/wiki/Q10420388,no,no
+Q105091132,medication,多奈单抗,,donanemab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q105091132,no,yes
+Q105217191,medication,COVIran Barekat,,COVIran Barekat,,,,CC0 1.0,https://www.wikidata.org/wiki/Q105217191,no,no
+Q105296036,medication,门冬酰胺酶,,Asparaginase,L01XX02,,,CC0 1.0,https://www.wikidata.org/wiki/Q105296036,no,yes
+Q105687595,medication,瑞丹韦单抗,,regdanvimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q105687595,no,no
+Q106167301,medication,QazCovid-in 2019冠狀病毒病疫苗,,QazCovid-in,,,,CC0 1.0,https://www.wikidata.org/wiki/Q106167301,no,no
+Q106390652,medication,阿布達拉,阿布达拉,Abdala,,,,CC0 1.0,https://www.wikidata.org/wiki/Q106390652,no,no
+Q106943333,medication,索托维单抗,沙利姆單抗,Sotrovimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q106943333,no,no
+Q106957199,medication,埃万妥单抗,,amivantamab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q106957199,no,yes
+Q107229181,medication,COVI-VAC,,COVI-VAC,,,,CC0 1.0,https://www.wikidata.org/wiki/Q107229181,no,no
+Q107391591,medication,Valoctocogene roxaparvovec,,valoctocogene roxaparvovec,,,,CC0 1.0,https://www.wikidata.org/wiki/Q107391591,no,no
+Q107400400,medication,艾卡基奥干赛,,exagamglogene autotemcel,B06AX05,,,CC0 1.0,https://www.wikidata.org/wiki/Q107400400,no,no
+Q107401582,medication,Evusheld抗体组合,恩适得,AZD7442,,,,CC0 1.0,https://www.wikidata.org/wiki/Q107401582,no,no
+Q108670929,medication,替索單抗,,tisotumab vedotin,,,,CC0 1.0,https://www.wikidata.org/wiki/Q108670929,no,no
+Q10868995,medication|pharmaceutical product,专注达,專思達,Concerta,,哌甲酯,methylphenidate,CC0 1.0,https://www.wikidata.org/wiki/Q10868995,yes,no
+Q110442458,pharmaceutical product,奈玛特韦/利托那韦,帕罗韦德,nirmatrelvir/ritonavir,,PF-07321332|利托那韋,nirmatrelvir|ritonavir,CC0 1.0,https://www.wikidata.org/wiki/Q110442458,no,no
+Q110931681,medication,贝特洛维单抗,,bebtelovimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q110931681,no,no
+Q111172579,medication,司柏索利單抗,,spesolimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q111172579,no,no
+Q111535760,medication,尼塞韦单抗,,nirsevimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q111535760,no,yes
+Q111697913,medication,莫妥珠單抗,,mosunetuzumab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q111697913,no,no
+Q112620160,medication,武特里西蘭,,vutrisiran,,,,CC0 1.0,https://www.wikidata.org/wiki/Q112620160,no,no
+Q113366205,medication,特立妥單抗,,teclistamab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q113366205,no,no
+Q11338747,medication,Borraginol藥膏,保能痔,Borraginol,,,,CC0 1.0,https://www.wikidata.org/wiki/Q11338747,no,no
+Q1138664,medication,林格氏液,,Ringer's solution,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1138664,yes,no
+Q113957587,medication,抗结核药物,,antituberculotic,,,,CC0 1.0,https://www.wikidata.org/wiki/Q113957587,no,no
+Q115285803,medication,索米妥昔單抗,,mirvetuximab soravtansine,,,,CC0 1.0,https://www.wikidata.org/wiki/Q115285803,no,no
+Q117349369,medication,瑞弗利單抗,,retifanlimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q117349369,no,no
+Q119025940,medication,艾可瑞妥单抗,,epcoritamab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q119025940,no,no
+Q120487896,medication,利特昔替尼,,Ritlecitinib,L04AF08,,,CC0 1.0,https://www.wikidata.org/wiki/Q120487896,no,no
+Q12187,medication,抗生素,抗細菌藥|抗菌药,antibiotic,,,,CC0 1.0,https://www.wikidata.org/wiki/Q12187,no,no
+Q123397307,medication,特瑞普利单抗,,toripalimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q123397307,no,yes
+Q123739066,pharmaceutical product,补佳乐,普女榮|普女榮®|补佳乐®|補佳樂,Progynova,,戊酸雌二醇,estradiol valerate,CC0 1.0,https://www.wikidata.org/wiki/Q123739066,yes,no
+Q123753003,medication,凝血因子IX濃縮物,,Factor IX concentrate,,,,CC0 1.0,https://www.wikidata.org/wiki/Q123753003,no,no
+Q1321793,medication,羅倫佐的油,,Lorenzo's oil,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1321793,no,no
+Q13530468,medication,麻黄,麻黃,ephedra,,,,CC0 1.0,https://www.wikidata.org/wiki/Q13530468,no,no
+Q135928397,medication,瑞扎布鲁替尼,,Rilzabrutinib,,,,CC0 1.0,https://www.wikidata.org/wiki/Q135928397,no,no
+Q141204813,medication,Rasonque,,Rasonque,,,,CC0 1.0,https://www.wikidata.org/wiki/Q141204813,yes,no
+Q1429522,medication,胃腸蠕動促進素,消化道促动力药|胃腸蠕動促進劑|腸胃蠕動促進劑,prokinetic agent,A03F,,,CC0 1.0,https://www.wikidata.org/wiki/Q1429522,no,no
+Q1431381,medication,神經節阻滯劑,,ganglionic blocker,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1431381,no,no
+Q1474269,medication,抑菌剂,,fungistatic,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1474269,no,no
+Q1492328,medication,膽酸結合劑,胆汁酸螯合剂,bile acid sequestrant,C10AC,,,CC0 1.0,https://www.wikidata.org/wiki/Q1492328,no,no
+Q15708335,medication,三氟胸苷∕替吡嘧啶,,tipiracil / trifluridine,,,,CC0 1.0,https://www.wikidata.org/wiki/Q15708335,no,no
+Q15893399,medication,白喉抗毒素,,diphtheria antitoxin,J06AA01,,,CC0 1.0,https://www.wikidata.org/wiki/Q15893399,no,no
+Q15927127,pharmaceutical product,胃仙U,,Weisen-U,,,,CC0 1.0,https://www.wikidata.org/wiki/Q15927127,no,no
+Q16252338,medication,德谷胰島素,,Insulin degludec,A10AD06,,,CC0 1.0,https://www.wikidata.org/wiki/Q16252338,no,no
+Q1703024,medication,人工淚液,,artificial tears,S01XA20,,,CC0 1.0,https://www.wikidata.org/wiki/Q1703024,no,no
+Q17173047,medication,抗痛风剂,,antigout agent,M04,,,CC0 1.0,https://www.wikidata.org/wiki/Q17173047,no,no
+Q17486688,pharmaceutical product,ZMapp,,ZMapp,,,,CC0 1.0,https://www.wikidata.org/wiki/Q17486688,no,no
+Q1763990,medication,奎奴普汀/达福普汀,,quinupristin/dalfopristin,J01FG02,,,CC0 1.0,https://www.wikidata.org/wiki/Q1763990,no,no
+Q1786125,medication,魚油,,fish oil,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1786125,no,no
+Q18212318,pharmaceutical product,硫酸鎂,,magnesium sulfate,,硫酸镁,magnesium sulfate,CC0 1.0,https://www.wikidata.org/wiki/Q18212318,yes,no
+Q185690,medication,促腎上腺皮質激素,Acth|促皮質素|促腎上腺皮質素,corticotropin,H01AA01,,,CC0 1.0,https://www.wikidata.org/wiki/Q185690,no,no
+Q190016,medication,肝素,肝素钠,heparin,B01AB01,,,CC0 1.0,https://www.wikidata.org/wiki/Q190016,no,yes
+Q190878,medication,活性炭,活性碳,activated carbon,,,,CC0 1.0,https://www.wikidata.org/wiki/Q190878,no,no
+Q19272800,medication,膠質銀,銀的醫療用途,medical uses of silver,D08AL30,,,CC0 1.0,https://www.wikidata.org/wiki/Q19272800,no,no
+Q19597688,medication,复方索非布韦雷迪帕韦片,雷迪帕韋/索非布韋,ledipasvir/sofosbuvir,J05AP51,,,CC0 1.0,https://www.wikidata.org/wiki/Q19597688,no,no
+Q1992711,medication,京都念慈菴川貝枇杷膏,川貝枇杷膏|枇杷膏,Nin Jiom Pei Pa Koa,,,,CC0 1.0,https://www.wikidata.org/wiki/Q1992711,no,no
+Q19946892,medication,腦活素,,cerebrolysin,,,,CC0 1.0,https://www.wikidata.org/wiki/Q19946892,no,no
+Q2046403,medication,耳滴劑,滴耳液,ear drop,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2046403,no,no
+Q20817212,medication,人蔘,人参 (药材),ginseng,,,,CC0 1.0,https://www.wikidata.org/wiki/Q20817212,no,no
+Q2172867,medication,外用类固醇,,topical steroid,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2172867,no,no
+Q2289781,medication,歐斯洛可舒能,,Oscillococcinum,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2289781,no,no
+Q2309849,medication,抗心绞痛药,,antianginal,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2309849,no,no
+Q2314345,medication,液体创可贴,,liquid bandage,D02AD,,,CC0 1.0,https://www.wikidata.org/wiki/Q2314345,no,no
+Q251005,medication,耐絲菌素,,nystatin,A07AA02,,,CC0 1.0,https://www.wikidata.org/wiki/Q251005,no,no
+Q25110523,medication,索磷布韋/維帕他韋,,sofosbuvir/velpatasvir,J05AP55,索磷布韦|维帕他韦,sofosbuvir|velpatasvir,CC0 1.0,https://www.wikidata.org/wiki/Q25110523,no,no
+Q2604964,medication,药物堕胎,,medical abortion,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2604964,no,no
+Q269829,medication,安慰劑,,placebo,,,,CC0 1.0,https://www.wikidata.org/wiki/Q269829,no,no
+Q2705066,medication,屈大麻酚,,dronabinol,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2705066,no,no
+Q27863114,medication,睪酮,,testosterone,,,,CC0 1.0,https://www.wikidata.org/wiki/Q27863114,no,no
+Q28136530,pharmaceutical product,催產素 (藥物),,Oxytocin,,催产素,oxytocin,CC0 1.0,https://www.wikidata.org/wiki/Q28136530,no,no
+Q28163580,medication,多巴胺,,Dopamine,,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163580,no,yes
+Q28163596,medication,异烟肼/利福平,,isoniazid/rifampicin,J04AM02,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163596,no,no
+Q28163599,medication,乙胺丁醇/异烟肼/利福平,,ethambutol/isoniazid/rifampicin,J04AM07,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163599,no,no
+Q28163603,medication,乙胺丁醇/异烟肼/吡嗪酰胺/利福平,,ethambutol/isoniazid/pyrazinamide/rifampicin,J04AM06,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163603,no,no
+Q28163611,medication,拉米夫定/奈韦拉平/齐多夫定,,lamivudine/nevirapine/zidovudine,J05AR05,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163611,no,no
+Q28163615,medication,注射避孕,,estradiol cypionate/medroxyprogesterone acetate,G03AA08,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163615,no,no
+Q28163637,medication,右旋糖酐70,葡聚糖70,Dextran 70,B05AA05,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163637,no,yes
+Q28163641,medication,肺表面活性剂,,pulmonary surfactant,R07AA,肺部介面活性劑,pulmonary surfactant,CC0 1.0,https://www.wikidata.org/wiki/Q28163641,no,no
+Q28163645,medication,抗破伤风免疫球蛋白,,anti-tetanus immunoglobulin,J06AA02,,,CC0 1.0,https://www.wikidata.org/wiki/Q28163645,no,no
+Q28209583,medication,替雷利珠单抗,,tislelizumab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q28209583,no,yes
+Q28209706,medication,炔雌醇/依托孕烯,,ethinylestradiol/etonogestrel,G02BB01,,,CC0 1.0,https://www.wikidata.org/wiki/Q28209706,no,no
+Q28453488,medication,乙酸 (醫用),,medical use of acetic acid,,,,CC0 1.0,https://www.wikidata.org/wiki/Q28453488,no,no
+Q28453504,medication,過錳酸鉀,,potassium permanganate,,,,CC0 1.0,https://www.wikidata.org/wiki/Q28453504,no,no
+Q28453531,medication,螢光素 (醫用),,fluorescein,,,,CC0 1.0,https://www.wikidata.org/wiki/Q28453531,no,no
+Q2853298,medication,抗分枝桿菌,,antimycobacterial,J04,,,CC0 1.0,https://www.wikidata.org/wiki/Q2853298,no,no
+Q2869808,medication,依法韦仑/恩曲他滨/替诺福韦,,emtricitabine/tenofovir/efavirenz,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2869808,no,no
+Q28859600,medication,头孢洛扎/塔唑巴坦,Zerbaxa,ceftolozane / tazobactam,,,,CC0 1.0,https://www.wikidata.org/wiki/Q28859600,no,no
+Q29006157,pharmaceutical product,哌加他尼纳,,Macugen,,治斑劑,pegaptanib,CC0 1.0,https://www.wikidata.org/wiki/Q29006157,no,no
+Q29053744,medication,液态水,水|液態水,liquid water,,,,CC0 1.0,https://www.wikidata.org/wiki/Q29053744,no,no
+Q292982,medication,Α-1抗胰蛋白酶,,Serpin family A member 1,,,,CC0 1.0,https://www.wikidata.org/wiki/Q292982,no,no
+Q2957662,medication,藥用活性炭,医用活性炭,activated charcoal,,,,CC0 1.0,https://www.wikidata.org/wiki/Q2957662,no,no
+Q30314624,medication,替沙仑赛,,tisagenlecleucel,,,,CC0 1.0,https://www.wikidata.org/wiki/Q30314624,no,no
+Q30314851,medication,阿基仑赛,,axicabtagene ciloleucel,,,,CC0 1.0,https://www.wikidata.org/wiki/Q30314851,no,yes
+Q3140118,medication,红参,,red ginseng,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3140118,no,no
+Q3221044,medication,三硝酸甘油脂,硝化甘油|硝酸甘油 (藥物),pharmaceutical preparation of nitroglycerin,,硝酸甘油,nitroglycerin,CC0 1.0,https://www.wikidata.org/wiki/Q3221044,no,no
+Q3245302,medication|pharmaceutical product,泰诺,,Tylenol,,对乙酰氨基酚,paracetamol,CC0 1.0,https://www.wikidata.org/wiki/Q3245302,yes,no
+Q3273681,medication,美樂事,,Maalox,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3273681,no,no
+Q3286619,medication,神经肌肉阻滞药,,neuromuscular-blocking drug,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3286619,no,no
+Q3375044,medication,佩托比斯摩,,Pepto-Bismol,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3375044,no,no
+Q3424651,medication,血容量擴充劑,代用血漿|寫容擴充劑,volume expander,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3424651,no,no
+Q3579672,medication,抗帕金森製劑,抗帕金森藥,antiparkinson,N04,,,CC0 1.0,https://www.wikidata.org/wiki/Q3579672,no,no
+Q3595652,medication,腸痛水,,gripe water,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3595652,no,no
+Q3645272,medication,鳳梨莖酶,,stem bromelain,,,,CC0 1.0,https://www.wikidata.org/wiki/Q3645272,no,no
+Q388565,medication,利福黴素,利福黴素類,rifamycin,J04AB03,,,CC0 1.0,https://www.wikidata.org/wiki/Q388565,no,no
+Q39048381,medication,瑞瑪奈珠單抗,,fremanezumab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q39048381,no,no
+Q39057117,medication,隆卡妥昔單抗替西林,,loncastuximab tesirine,,,,CC0 1.0,https://www.wikidata.org/wiki/Q39057117,no,no
+Q3997863,medication,恩美曲妥珠單抗,,ado-trastuzumab emtansine,L01XC14,,,CC0 1.0,https://www.wikidata.org/wiki/Q3997863,no,no
+Q40441442,medication,帕替西蘭,,patisiran,N07XX12,,,CC0 1.0,https://www.wikidata.org/wiki/Q40441442,no,no
+Q4067112,medication,狂犬病免疫球蛋白,,rabies immunoglobulin or antiserum,J06AA06,,,CC0 1.0,https://www.wikidata.org/wiki/Q4067112,no,no
+Q408014,medication,硫酸軟骨素,硫酸软骨素|鯊魚軟骨素|鲨鱼氨糖软骨素|鲨鱼软骨素,chondroitin sulfate,M01AX25,,,CC0 1.0,https://www.wikidata.org/wiki/Q408014,no,no
+Q4118295,medication,普立馬,,conjugated estrogens,G03CA57,,,CC0 1.0,https://www.wikidata.org/wiki/Q4118295,no,no
+Q415909,medication,卷曲霉素,,capreomycin,J04AB30,,,CC0 1.0,https://www.wikidata.org/wiki/Q415909,no,no
+Q4162027,medication,蒙脱石散,思密達,Diosmectite,A07BC05,,,CC0 1.0,https://www.wikidata.org/wiki/Q4162027,yes,no
+Q416545,medication,阿塞那平,,asenapine,N05AH05,,,CC0 1.0,https://www.wikidata.org/wiki/Q416545,no,no
+Q416821,medication,人類停經期促性腺激素,普格鈉,menotropin,G03GA02,,,CC0 1.0,https://www.wikidata.org/wiki/Q416821,no,no
+Q418980,medication,短杆菌肽,,gramicidin D,R02AB30,,,CC0 1.0,https://www.wikidata.org/wiki/Q418980,no,no
+Q419375,medication,二硫化硒,,selenium disulfide,D01AE13,,,CC0 1.0,https://www.wikidata.org/wiki/Q419375,no,yes
+Q420885,medication,反苯环丙胺,,tranylcypromine,N06AF04,,,CC0 1.0,https://www.wikidata.org/wiki/Q420885,no,no
+Q421700,medication,钙通道阻滞剂,鈣離子阻斷劑|钙通道拮抗剂,calcium channel blocker,C08,,,CC0 1.0,https://www.wikidata.org/wiki/Q421700,no,no
+Q422324,pharmaceutical product,維布妥昔單抗,,brentuximab vedotin,L01XC12,,,CC0 1.0,https://www.wikidata.org/wiki/Q422324,no,no
+Q423098,medication,新霉素,,neomycin,A01AB08,,,CC0 1.0,https://www.wikidata.org/wiki/Q423098,no,no
+Q423292,pharmaceutical product,帕利哌酮,,paliperidone,N05AX13,,,CC0 1.0,https://www.wikidata.org/wiki/Q423292,no,yes
+Q4334524,medication,Omega-3脂肪酸乙酯,多烯酸乙酯,omega-3-acid ethyl esters,,,,CC0 1.0,https://www.wikidata.org/wiki/Q4334524,no,no
+Q44543,pharmaceutical product,Depo-Provera,,Depo-Provera,,甲羟孕酮,medroxyprogesterone,CC0 1.0,https://www.wikidata.org/wiki/Q44543,yes,no
+Q45071,medication,孕激素,,progestogen,,,,CC0 1.0,https://www.wikidata.org/wiki/Q45071,no,no
+Q47521288,pharmaceutical product,麻卡因,,Marcaine,,布比卡因,bupivacaine-(RS),CC0 1.0,https://www.wikidata.org/wiki/Q47521288,no,no
+Q47521639,pharmaceutical product,來適泄,,Lasix,,呋塞米,furosemide,CC0 1.0,https://www.wikidata.org/wiki/Q47521639,yes,no
+Q47521826,pharmaceutical product,利他林,利他能,Ritalin,,哌甲酯,methylphenidate,CC0 1.0,https://www.wikidata.org/wiki/Q47521826,yes,no
+Q47521861,pharmaceutical product,马利兰,,Myleran,,白消安,busulfan,CC0 1.0,https://www.wikidata.org/wiki/Q47521861,yes,no
+Q48563715,medication,吡格列酮/二甲双胍,,metformin / pioglitazone,A10BD05,,,CC0 1.0,https://www.wikidata.org/wiki/Q48563715,no,no
+Q48566733,medication,美罗培南/法硼巴坦,,meropenem/vaborbactam,J01DH52,,,CC0 1.0,https://www.wikidata.org/wiki/Q48566733,no,no
+Q4860325,medication,前列腺素E,,prostaglandin E,,,,CC0 1.0,https://www.wikidata.org/wiki/Q4860325,no,no
+Q48826073,pharmaceutical product,奥尼普雷德,,Omnipred,,泼尼松龙,prednisolone,CC0 1.0,https://www.wikidata.org/wiki/Q48826073,no,no
+Q48828062,pharmaceutical product,开瑞坦,佳力天|納寧,,,氯雷他定,loratadine,CC0 1.0,https://www.wikidata.org/wiki/Q48828062,yes,no
+Q48841284,medication,雌激素,,estrogen,G03C,,,CC0 1.0,https://www.wikidata.org/wiki/Q48841284,no,no
+Q4886804,pharmaceutical product,可他敏,可太敏|盐酸苯海拉明|苯乃准|苯海拉明|苯那君,Benadryl,,苯海拉明,diphenhydramine,CC0 1.0,https://www.wikidata.org/wiki/Q4886804,yes,no
+Q506319,medication,通用名药物,通用名|通用药物|非专利药|非专利药品|非专利药物|非原廠藥物,generic drug,,,,CC0 1.0,https://www.wikidata.org/wiki/Q506319,no,no
+Q55606818,medication,西米普利單抗,,cemiplimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q55606818,no,no
+Q55641547,medication|pharmaceutical product,拉夫利珠單抗,,ravulizumab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q55641547,no,no
+Q5572286,medication,胰高血糖素样肽-1类似物,GLP-1类似物|Glp-1类似物|胰高血糖素样肽-1受体激动剂,glucagon-like peptide-1 agonist,A10BJ,,,CC0 1.0,https://www.wikidata.org/wiki/Q5572286,no,no
+Q56274769,medication,仑卡奈单抗,,lecanemab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q56274769,no,yes
+Q56297041,medication,吉沃西蘭,,givosiran,,,,CC0 1.0,https://www.wikidata.org/wiki/Q56297041,no,no
+Q56934130,medication,Onasemnogene abeparvovec,,onasemnogene abeparvovec,,,,CC0 1.0,https://www.wikidata.org/wiki/Q56934130,yes,no
+Q58218746,medication,薩特利珠單抗,,satralizumab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q58218746,no,no
+Q584065,medication,抗胸腺球蛋白,,anti-thymocyte globulin,,,,CC0 1.0,https://www.wikidata.org/wiki/Q584065,no,no
+Q5940878,medication,重組因子VIIa,注射用重组人凝血因子VIIa|诺其,recombinant factor VIIa,,,,CC0 1.0,https://www.wikidata.org/wiki/Q5940878,no,no
+Q6046441,medication,干扰素-α,,interferon alfa,L03AB01,,,CC0 1.0,https://www.wikidata.org/wiki/Q6046441,no,no
+Q61653285,medication,殺念菌素,,candicidin,G01AA04,,,CC0 1.0,https://www.wikidata.org/wiki/Q61653285,no,no
+Q63313766,medication,信迪利单抗,,sintilimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q63313766,no,yes
+Q635415,medication,替伊莫單抗,替伊莫单抗|替依莫单抗,ibritumomab,V10XX02,,,CC0 1.0,https://www.wikidata.org/wiki/Q635415,no,no
+Q6436553,medication,克力生物素,,Krebiozen,,,,CC0 1.0,https://www.wikidata.org/wiki/Q6436553,no,no
+Q6718023,pharmaceutical product,長效嗎啡,,MS Contin,,嗎啡,morphine,CC0 1.0,https://www.wikidata.org/wiki/Q6718023,no,no
+Q69488,pharmaceutical product,MDMA,"3,4-亚甲二氧甲基苯丙胺|3,4-亞甲二氧基甲基安非他明|E仔|Fing頭|Fing頭丸|二亚甲基双氧安非他明|亚甲二氧甲基苯丙胺|亞甲二氧基甲基安非他明|亞甲二氧甲基苯丙胺|快樂丸|搖頭丸|狂喜",MDMA,,,,CC0 1.0,https://www.wikidata.org/wiki/Q69488,no,no
+Q7005626,medication,酏剂,,elixir,,,,CC0 1.0,https://www.wikidata.org/wiki/Q7005626,no,no
+Q7070620,pharmaceutical product,陰道避孕環,,NuvaRing,,,,CC0 1.0,https://www.wikidata.org/wiki/Q7070620,no,no
+Q718658,medication,先进治疗医学产品,先進治療產品,Advanced Therapy Medicinal Product,,,,CC0 1.0,https://www.wikidata.org/wiki/Q718658,no,no
+Q7205991,pharmaceutical product,肺炎球菌结合疫苗,普雷维纳|肺炎球菌联合疫苗|肺炎結合型疫苗,pneumococcal conjugate vaccine,,,,CC0 1.0,https://www.wikidata.org/wiki/Q7205991,no,no
+Q7206090,medication,保濟丸,,Po Chai Pills,,,,CC0 1.0,https://www.wikidata.org/wiki/Q7206090,no,no
+Q7239230,medication,暴露前预防,,pre-exposure prophylaxis against HIV,,,,CC0 1.0,https://www.wikidata.org/wiki/Q7239230,no,no
+Q748786,pharmaceutical product,鱼肝油,鱈魚肝油,cod liver oil,D03AA,,,CC0 1.0,https://www.wikidata.org/wiki/Q748786,yes,yes
+Q79448,medication,免疫球蛋白G,,immunoglobulin G,J06BA02,,,CC0 1.0,https://www.wikidata.org/wiki/Q79448,no,no
+Q80109553,medication,德曲妥珠單抗,,trastuzumab deruxtecan,,,,CC0 1.0,https://www.wikidata.org/wiki/Q80109553,no,no
+Q8189667,medication,正露丸,喇叭正露丸|喇叭牌正露丸|征露丸,seirogan,,,,CC0 1.0,https://www.wikidata.org/wiki/Q8189667,no,no
+Q8193267,medication,樋屋奇應丸,通屋奇應丸,,,,,CC0 1.0,https://www.wikidata.org/wiki/Q8193267,no,no
+Q847705,medication,鎮靜劑,,sedative,,,,CC0 1.0,https://www.wikidata.org/wiki/Q847705,no,no
+Q85757472,medication,多斯塔利單抗,,dostarlimab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q85757472,no,no
+Q85874692,medication,九期一,甘露特钠,sodium oligomannate,,,,CC0 1.0,https://www.wikidata.org/wiki/Q85874692,yes,no
+Q898739,medication,鴉片酊,阿片酊,laudanum,,,,CC0 1.0,https://www.wikidata.org/wiki/Q898739,no,no
+Q926024,medication,維斯涅夫斯基擦劑,,Vishnevsky liniment,,,,CC0 1.0,https://www.wikidata.org/wiki/Q926024,no,no
+Q935761,medication|pharmaceutical product,阿得拉,,Adderall,,右旋安非他命|苯丙胺,DL-amphetamine|dextroamphetamine,CC0 1.0,https://www.wikidata.org/wiki/Q935761,no,no
+Q96401585,medication,呼吸道合胞病毒疫苗,,respiratory syncytial virus vaccine,,,,CC0 1.0,https://www.wikidata.org/wiki/Q96401585,no,no
+Q967942,medication,磺胺酏剂,磺胺酏劑,Elixir sulfanilamide,,,,CC0 1.0,https://www.wikidata.org/wiki/Q967942,no,no
+Q97154240,pharmaceutical product,辉瑞-BioNTech 2019冠状病毒病疫苗,BNT162b2|BNT疫苗|Comirnaty|Tozinameran|复必泰|复必泰疫苗|復必泰|復必泰疫苗|復星新型肺炎疫苗|輝瑞新型肺炎疫苗|辉瑞疫苗,Pfizer–BioNTech COVID-19 vaccine,J07BX,,,CC0 1.0,https://www.wikidata.org/wiki/Q97154240,no,no
+Q98078915,medication,坦昔妥單抗,,tafasitamab,,,,CC0 1.0,https://www.wikidata.org/wiki/Q98078915,no,no
+Q98139657,medication,贝兰他单抗莫福汀,,belantamab mafodotin,,,,CC0 1.0,https://www.wikidata.org/wiki/Q98139657,no,no
+Q98139660,medication,布来韦肽,,bulevirtide,,,,CC0 1.0,https://www.wikidata.org/wiki/Q98139660,no,no
+Q98270627,medication,加马列亚2019冠状病毒病疫苗,衛星5號|衛星五號,Gam-COVID-Vac,J07BN02,,,CC0 1.0,https://www.wikidata.org/wiki/Q98270627,no,no
+Q98703813,medication,BBV152,,Covaxin / BBV152,,,,CC0 1.0,https://www.wikidata.org/wiki/Q98703813,no,no
+Q99754007,medication,Ropeginterferon alfa-2b,,ropeginterferon alfa-2b,L03AB15,,,CC0 1.0,https://www.wikidata.org/wiki/Q99754007,yes,no
