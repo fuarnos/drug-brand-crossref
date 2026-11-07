@@ -1186,6 +1186,7 @@ SHELL_I18N = {
         "drug.markets": "markets",
         "name.notice": "Same name — check the ingredient; names are not interchangeable.",
         "name.show_more": "Show more",
+        "warn.filter.all": "All", "cat.all_link": "All categories →", "coverage.sort_products": "By products", "coverage.sort_market": "By market", "glossary.h2": "Terms & codes", "conf.h2": "FDA tall-man pairs", "atc.more_notes": "Notes & licences", "res.density": "Compact view",
     },
     "es": {
         "nav.categories": "Categorías", "nav.markets": "Mercados",
@@ -1195,6 +1196,7 @@ SHELL_I18N = {
         "drug.markets": "mercados",
         "name.notice": "Mismo nombre — comprueba el principio activo; no son intercambiables.",
         "name.show_more": "Ver más",
+        "warn.filter.all": "Todas", "cat.all_link": "Todas las categorías →", "coverage.sort_products": "Por productos", "coverage.sort_market": "Por mercado", "glossary.h2": "Términos y códigos", "conf.h2": "Pares tall-man de la FDA", "atc.more_notes": "Notas y licencias", "res.density": "Vista compacta",
     },
     "zh": {
         "nav.categories": "按类别", "nav.markets": "按市场",
@@ -1204,6 +1206,7 @@ SHELL_I18N = {
         "drug.markets": "个市场",
         "name.notice": "同名不代表同一成分——请核对成分，不可互换。",
         "name.show_more": "显示更多",
+        "warn.filter.all": "全部", "cat.all_link": "全部类别 →", "coverage.sort_products": "按产品数", "coverage.sort_market": "按市场", "glossary.h2": "术语与代码", "conf.h2": "FDA tall-man 易混淆药对", "atc.more_notes": "说明与许可", "res.density": "紧凑视图",
     },
     "zh-Hant": {
         "nav.categories": "按類別", "nav.markets": "按市場",
@@ -1213,6 +1216,7 @@ SHELL_I18N = {
         "drug.markets": "個市場",
         "name.notice": "同名不代表同一成分——請核對成分，不可互換。",
         "name.show_more": "顯示更多",
+        "warn.filter.all": "全部", "cat.all_link": "全部類別 →", "coverage.sort_products": "按產品數", "coverage.sort_market": "按市場", "glossary.h2": "術語與代碼", "conf.h2": "FDA tall-man 易混淆藥對", "atc.more_notes": "說明與許可", "res.density": "緊湊視圖",
     },
 }
 
@@ -2428,9 +2432,9 @@ def _warn_lang_blocks(row: dict, sub_names: dict[str, str], *, prefix: str,
         body = row.get("body_" + lang) or row.get("body_en") or ""
         fallback = "" if row.get("body_" + lang) else (
             ' <span class="meta">(EN)</span>' if lang != "en" else "")
-        head = f'<h3>{_warn_badge(row["severity"], lang)} {esc(title)}{fallback}</h3>'
+        head = f'<h2>{_warn_badge(row["severity"], lang)} {esc(title)}{fallback}</h2>'
         if link:
-            head = (f'<h3><a href="{prefix}warn.html#w-{esc(row["warning_id"])}">'
+            head = (f'<h2><a href="{prefix}warn.html#w-{esc(row["warning_id"])}">'
                     f'{esc(title)}{fallback}</a>{_warn_badge(row["severity"], lang)}</h3>')
         out.append(
             f'<div class="lang-block" data-lang-block="{lang}">'
@@ -2470,14 +2474,15 @@ def build_warn(db: sqlite3.Connection) -> int:
     sub_names: dict[str, str] = {}
     for sid, inn_zh, inn_en in db.execute(
             "SELECT substance_id, inn_zh, inn_en FROM substance"):
-        sub_names[sid] = inn_zh or inn_en or sid
+        sub_names[sid] = inn_en or inn_zh or sid  # v0.10.0 P1-4：英文界面不再混入中文成分名
     groups = {"high": [], "medium": [], "info": []}
     for row in rows:
         groups.setdefault(row["severity"], []).append(row)
     items_html = []
     for row in rows:
         items_html.append(
-            f'<article class="warn-item" id="w-{esc(row["warning_id"])}">'
+            f'<article class="warn-item" id="w-{esc(row["warning_id"])}" '
+            f'data-sev="{esc(row["severity"])}">'
             + _warn_lang_blocks(row, sub_names, prefix="") + "</article>")
     # v0.6.7：客户端分页（10 条/页）。无 JS 时全部可见（优雅降级）；?page=N 刷新/分享保持。
     pager_js = """
@@ -2522,15 +2527,37 @@ def build_warn(db: sqlite3.Connection) -> int:
   html += link(cur + 1, T('warn.page_next') + ' ›', 'pg-next', 'next', cur >= total);
   pager.innerHTML = html;
 })();
+
+  // v0.10.0 P1-4: severity filter (client-side, keeps pager hidden while filtering)
+  var fbox = document.querySelector('.warnfilters');
+  if(fbox){
+    fbox.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('[data-sev]') : null;
+      if(!b) return;
+      var sev = b.getAttribute('data-sev') || '';
+      fbox.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); });
+      items.forEach(function(el){
+        var show = !sev || el.getAttribute('data-sev') === sev;
+        el.style.display = show ? '' : 'none';
+      });
+      pager.style.display = sev ? 'none' : '';
+    });
+  }
 """
     body = f"""<h1 data-i18n="warn.title">{esc(I18N["en"]["warn.title"])}</h1>
 <div data-i18n-html="warn.intro">{I18N["en"]["warn.intro"]}</div>
 <div class="notice" data-i18n="warn.no_advice">{esc(I18N["en"]["warn.no_advice"])}</div>
 <div data-i18n-html="warn.count">{I18N["en"]["warn.count"]}</div>
+<div class="warnfilters" role="group" aria-label="Severity filter">
+<button type="button" data-sev="" class="on" data-i18n="warn.filter.all">All</button>
+<button type="button" data-sev="high" data-i18n="warn.sev.high">High</button>
+<button type="button" data-sev="medium" data-i18n="warn.sev.medium">Medium</button>
+<button type="button" data-sev="info" data-i18n="warn.sev.info">Info</button></div>
 <div id="warnlist">{''.join(items_html) if items_html else '<p class="empty" data-i18n="warn.empty">No published warnings yet.</p>'}</div>
 <nav id="warnpager" class="warnpager" aria-label="Warning pages" data-i18n-aria="warn.pagination"></nav>
 <div class="notice warnbox" data-i18n-html="warn.source_note">{I18N["en"]["warn.source_note"]}</div>
-<script>{pager_js}</script>"""
+<script>{pager_js}</script>
+"""
     html = page("Warnings", body, meta_key="warn", alternates=True,
                 canonical_rel="warn.html", alt_rel="warn.html", nav_coverage=True)
     _write_with_copies("warn.html", html, "warn")
@@ -2651,8 +2678,12 @@ paid data service; if that changes, the NC/conditional sources above must be re-
 
 
 CSS = """
-:root{--bg:#fbfbf9;--fg:#1f2328;--muted:#646b73;--line:#e3e1da;--card:#fff;
---accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec}
+:root{--bg:#fbfbf9;--fg:#1f2328;--muted:#4b5257;--line:#cfcabf;--line-soft:#e3e1da;
+--card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
+--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
+--fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:24px;
+--lh-tight:1.3;--lh-heading:1.35;--lh-ui:1.5;--lh-body:1.6;
+--r-sm:8px;--r-md:12px;--r-pill:999px;--prose:600px}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
 display:flex;flex-direction:column;
@@ -2662,24 +2693,24 @@ header{border-bottom:1px solid var(--line);background:#fff}
 .wrap{max-width:920px;margin:0 auto;padding:0 20px}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
 .logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
-.logo-zh{font-weight:400;font-size:13px;color:var(--muted);margin-left:8px;white-space:nowrap}
+.logo-zh{font-weight:400;font-size:14px;color:var(--muted);margin-left:8px;white-space:nowrap}
 /* v0.6.5：logo 中文副标题只在简体中文界面显示（en/es/zh-Hant 隐藏，移动端仍隐藏） */
 html:not([lang="zh"]) .logo-zh{display:none}
-.langs{margin-left:6px;font-size:13px;display:flex;align-items:center;gap:6px;
+.langs{margin-left:6px;font-size:14px;display:flex;align-items:center;gap:6px;
   white-space:nowrap;flex-wrap:nowrap}
-.langs a{color:var(--muted);padding:1px 5px;border-radius:5px;white-space:nowrap;
+.langs a{color:var(--muted);padding:1px 5px;border-radius:8px;white-space:nowrap;
   display:inline-flex;align-items:center}
 .langs a.on{background:var(--accent);color:#fff}
 nav{display:flex;gap:14px;font-size:14px;flex-wrap:nowrap;white-space:nowrap;align-items:center}
 nav a{white-space:nowrap}
 /* v0.8.2 task-118：宽屏一行；768–1023 允许换行（禁止单字竖排）；<768 汉堡菜单 */
-@media (max-width:1099px) and (min-width:768px){
+@media (max-width:1024px) and (min-width:768px){
   header .wrap{height:auto;flex-wrap:wrap;gap:6px 12px;padding-top:8px;padding-bottom:8px}
-  nav{order:3;flex-basis:100%;flex-wrap:wrap;gap:8px 12px;font-size:13px}
+  nav{order:3;flex-basis:100%;flex-wrap:wrap;gap:8px 12px;font-size:14px}
   .langs{margin-left:auto;order:2;gap:4px}
 }
 .nav-toggle{display:none;align-items:center;justify-content:center;min-width:40px;min-height:40px;
-  font-size:18px;background:#fff;color:var(--fg);border:1px solid var(--line);border-radius:8px;
+  font-size:20px;background:#fff;color:var(--fg);border:1px solid var(--line);border-radius:8px;
   cursor:pointer}
 @media (max-width:767px){
   header .wrap{height:auto;flex-wrap:wrap;gap:8px 12px}
@@ -2690,14 +2721,15 @@ nav a{white-space:nowrap}
   header nav a{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap}
   .langs{margin-left:0;gap:6px}
   .langs a{min-height:40px;padding:4px 6px}
-  .logo{font-size:15px}
+  .logo{font-size:16px}
   .logo-zh{display:none}
 }
-main{padding:28px 0 60px;flex:1}
-h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:28px 0 10px}
-.sub{color:var(--muted);font-size:14px;margin:0 0 18px}
-#q{width:100%;padding:14px 16px;font-size:17px;border:1px solid var(--line);
-border-radius:10px;background:#fff}
+main{padding:24px 0 64px;flex:1}
+h1{font-size:var(--fs-xl);line-height:var(--lh-tight);margin:0 0 8px}
+h2{font-size:var(--fs-lg);line-height:var(--lh-heading);margin:24px 0 12px}
+.sub{color:var(--muted);font-size:var(--fs-sm);line-height:var(--lh-ui);margin:0 0 16px;max-width:var(--prose)}
+#q{width:100%;padding:14px 16px;font-size:16px;border:1px solid var(--line);
+border-radius:12px;background:#fff}
 .row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
 select,button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;
 background:#fff;font-size:14px}
@@ -2706,7 +2738,7 @@ button{cursor:pointer;background:var(--accent);color:#fff;border-color:var(--acc
 padding:14px 16px;margin:10px 0}
 .card h3{margin:0 0 4px;font-size:16px}
 .card h2{margin:0 0 4px;font-size:16px}
-.card .meta{color:var(--muted);font-size:13px}
+.card .meta{color:var(--muted);font-size:14px}
 .tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;
 border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.cn{color:#8a4b00;border-color:#e8c9a6}
@@ -2720,32 +2752,33 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
 .tag.sg{color:#7a1f3d;border-color:#e3b7c5}
 /* v0.8.1：双语对照开关/来源徽章/版本/原文 */
-.bil-toggle{display:inline-flex;align-items:center;gap:4px;font-size:12px;
+.bil-toggle{display:inline-flex;align-items:center;gap:4px;font-size:14px;
   color:var(--muted);margin:0 8px;cursor:pointer}
 .bil-toggle input{width:14px;height:14px}
-.tr-badge{display:inline-block;margin-left:6px;font-size:11px;padding:0 5px;
-  border:1px solid var(--line);border-radius:6px;color:var(--muted);vertical-align:1px}
-.tr-ver{font-size:11px;color:var(--muted);margin-left:4px}
+.tr-badge{display:inline-block;margin-left:6px;font-size:12px;padding:0 5px;
+  border:1px solid var(--line);border-radius:8px;color:var(--muted);vertical-align:1px}
+.tr-ver{font-size:14px;color:var(--muted);margin-left:4px}
 .tr-orig{color:var(--muted);font-weight:400}
 /* v0.7.x：ATC 类别 / 大类浏览 */
-.atcgrid,.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+.atcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.catgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
   gap:8px;margin:10px 0}
-.atccard{display:block;padding:8px 10px;border:1px solid var(--line);border-radius:10px;
+.atccard{display:block;padding:8px 10px;border:1px solid var(--line);border-radius:12px;
   background:#fff;color:var(--fg);font-size:14px}
 .atccard:hover{border-color:var(--accent)}
 .atccard code{font-weight:700;margin-right:4px}
 .atclist{columns:2;column-gap:24px}
 .atclist li{break-inside:avoid;margin:2px 0}
-@media (max-width:719px){ .atclist{columns:1} }
+@media (max-width:767px){ .atclist{columns:1} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
-.atc-src{color:var(--muted);font-size:11px;margin-left:6px;white-space:nowrap}
+.atc-src{color:var(--muted);font-size:12px;margin-left:6px;white-space:nowrap}
 .atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
 .atc-src-line{margin:-8px 0 10px}
 .atc-count{margin:-6px 0 10px}
-.salt{color:var(--muted);font-size:12px;margin-left:6px}
-.drug-name-src{min-height:18px;margin:2px 0 0;font-size:12px}
+.salt{color:var(--muted);font-size:14px;margin-left:6px}
+.drug-name-src{min-height:18px;margin:2px 0 0;font-size:14px}
 .drug-name-src [data-sub-src]:not(:empty){display:inline-block;padding:1px 7px;
-  border:1px solid var(--line);border-radius:999px;background:#faf9f6;color:var(--muted)}
+  border:1px solid var(--line);border-radius:999px;background:#f6f5f0;color:var(--muted)}
 .salt .nm{color:var(--muted)}
 .atcmembers .st-badge{margin-left:4px}
 .atcdetails{margin:8px 0 0}
@@ -2754,29 +2787,29 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 /* v0.9.6 task-145b：ATC4 页「按剂型看跨市场明细」（客户端懒加载 data/idx/atc4-forms.json） */
 .atc4forms{margin:10px 0 0}
 .atc4forms summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
-.atc4forms table{font-size:13px}
+.atc4forms table{font-size:14px}
 .atc4forms th,.atc4forms td{padding:4px 6px;border-bottom:1px solid var(--line)}
 .atc4forms thead th{white-space:nowrap;font-variant-numeric:tabular-nums}
 .atc4forms tbody th{font-weight:600}
 .atc4forms tbody td{text-align:right;font-variant-numeric:tabular-nums}
 .atc4forms tbody td.z{color:var(--muted);text-align:center}
-.atc4note{margin:4px 0 0;font-size:12px}
+.atc4note{margin:4px 0 0;font-size:14px}
 .cat-note .lang-block{margin:2px 0}
 .catquick{margin:18px 0 6px}
 .catquick h2{font-size:16px;margin:0 0 8px}
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
-  border-radius:999px;background:#faf9f6;color:var(--fg);font-size:13px}
+  border-radius:999px;background:#f6f5f0;color:var(--fg);font-size:14px}
 .catchip:hover{border-color:var(--accent)}
 /* v0.9.6 task-143：首页「最近更新」= 最近 3 个版本（版本号/日期是事实，不翻译） */
 .homeupd{margin:18px 0 6px}
 .homeupd h2{font-size:16px;margin:0 0 8px}
 .homeupd .updlist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .homeupd .updlist a{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;
-  border:1px solid var(--line);border-radius:999px;background:#faf9f6;color:var(--fg);
-  font-size:13px;text-decoration:none}
+  border:1px solid var(--line);border-radius:999px;background:#f6f5f0;color:var(--fg);
+  font-size:14px;text-decoration:none}
 .homeupd .updlist a:hover{border-color:var(--accent)}
-.homeupd .upd-date{color:var(--muted);font-size:12px}
-.homeupd .sub{margin:8px 0 0;font-size:13px}
+.homeupd .upd-date{color:var(--muted);font-size:14px}
+.homeupd .sub{margin:8px 0 0;font-size:14px}
 .tag.warn{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 /* v0.9.1 task-22：可访问性基础 */
 .skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:#0b6b53;color:#fff;
@@ -2787,57 +2820,57 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
 /* v0.9.1 task-29 P0/P1 */
 .search-status{margin:8px 0 0;min-height:20px}
-.match-name{display:inline-block;margin-left:6px;font-size:12px;color:var(--fg)}
+.match-name{display:inline-block;margin-left:6px;font-size:14px;color:var(--fg)}
 .linkbtn,.detbtn,.rowreport,.mf-reset,.bil-toggle,.m-more summary{min-height:24px;
   display:inline-flex;align-items:center;justify-content:center}
 #q,.mf-field select,.mf-field input[type=search]{border:2px solid #6f7c75}
 header nav{flex-wrap:wrap;row-gap:6px}
 .langs{margin-left:auto;flex-shrink:0}
-@media (max-width:719px){
+@media (max-width:767px){
   .linkbtn,.detbtn,.rowreport,.mf-reset,.m-more summary{min-height:44px;min-width:44px}
 }
-.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:6px;
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:8px;
 margin-left:8px}
 .badge.sev{background:var(--sevbg);color:var(--sev);border:1px solid #f0c4c4}
 .badge.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4}
 .badge.export{background:#eef4fb;color:#1f4f8a;border:1px solid #b9cde6}
-.notice{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;
+.notice{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:12px;
 padding:12px 14px;font-size:14px;margin:14px 0}
 .notice.nick{background:#f1f8f4;border-color:#cfe6da}
-.notice.nick .nick-head{font-size:15px}
-.notice.nick .nick-head b{font-size:17px}
+.notice.nick .nick-head{font-size:16px}
+.notice.nick .nick-head b{font-size:16px}
 .notice.nick .sub{margin:6px 0 0}
 .notice.nick .sub a{white-space:nowrap}
-.notice.nick .sub.src{font-size:12px;margin-top:4px}
+.notice.nick .sub.src{font-size:14px;margin-top:4px}
 .notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
-th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
-th{color:var(--muted);font-weight:600;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;margin-top:8px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;font-size:14px}
 table.res{margin-top:12px;background:#fff;border:1px solid var(--line);
-border-radius:12px;overflow:hidden}
-table.res th{background:#faf9f6;font-size:12px;letter-spacing:.02em}
+border-radius:12px;overflow:hidden;font-size:16px;line-height:1.5}
+table.res th{background:#f6f5f0;font-size:14px;letter-spacing:.02em}
 table.res td{vertical-align:top}
 table.res tbody tr:hover{background:#fcfcfa}
 .c-ing{font-weight:600;width:26%}
 .c-dose{width:14%;white-space:nowrap;font-variant-numeric:tabular-nums}
 .c-brand{width:38%}
-.c-mah{width:22%;color:var(--muted);font-size:13px}
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;
+.c-mah{width:22%;color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px;
 padding:18px 0 40px;background:#fff}
 footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline}
 .foot-links{margin-left:auto;display:flex;gap:14px;white-space:nowrap}
 .foot-links a{color:var(--accent)}
 .report-line{margin-top:14px}
-kbd{background:#eee;padding:1px 5px;border-radius:4px;font-size:13px}
+kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 .empty{color:var(--muted);padding:20px 0}
 .release{border-top:1px solid var(--line);padding:18px 0 6px;margin-top:18px}
 .release:first-of-type{border-top:0;margin-top:0;padding-top:4px}
 .release h2{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin:0 0 8px}
-.release .rel-date{font-size:13px;font-weight:400;color:var(--muted)}
-.release table{font-size:13px}
+.release .rel-date{font-size:12px;font-weight:400;color:var(--muted)}
+.release table{font-size:14px}
 .release ul{margin:6px 0 12px;padding-left:22px}
 .release li{margin:4px 0}
-.release-pending{color:var(--warn);font-size:13px;margin:6px 0 0}
+.release-pending{color:var(--warn);font-size:14px;margin:6px 0 0}
 /* ── UI P0：解析条 / 自动完成 / 分组折叠 / 加载更多 / 国家提示 ── */
 .sel-label{color:var(--muted);font-size:14px;margin-right:2px}
 .searchwrap{position:relative}
@@ -2850,16 +2883,16 @@ padding:9px 12px;cursor:pointer;font-size:14px;border-bottom:1px solid #f1efe9}
 .ac-item:last-child{border-bottom:0}
 .ac-item.on{background:#f1f8f4}
 .ac-name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ac-meta{color:var(--muted);font-size:12px;white-space:nowrap;flex:none}
+.ac-meta{color:var(--muted);font-size:14px;white-space:nowrap;flex:none}
 .parsebar{display:flex;flex-wrap:wrap;gap:6px 16px;background:#f4f6f4;
-border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;margin:14px 0}
+border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:14px;margin:14px 0}
 .parsebar b{color:var(--muted);font-weight:600;margin-right:4px}
 .parsebar .pmatch{color:var(--accent)}
 .grp-name{font-weight:600}
-.grp-count{color:var(--muted);font-size:12px;font-weight:400;margin-left:6px}
+.grp-count{color:var(--muted);font-size:14px;font-weight:400;margin-left:6px}
 .grp-tags{text-align:right}
 .linkbtn{background:none;border:0;color:var(--accent);padding:2px 0;cursor:pointer;
-font-size:13px;text-decoration:underline}
+font-size:14px;text-decoration:underline}
 .fold-row td{padding:2px 8px 8px}
 .loadmore{text-align:center;margin:10px 0 0}
 .loadmore button{padding:8px 16px;font-size:14px}
@@ -2867,15 +2900,15 @@ font-size:13px;text-decoration:underline}
 .countrymiss .cm-actions a,.countrymiss .cm-actions button{font-size:14px}
 /* v0.5.6：A1 详情 / A3 盐型释放上下文 / B6 行级报告 / B7 导出工具条 */
 .ctxwrap{margin-left:4px}
-.ctx{display:inline-block;font-size:12px;line-height:1.5;padding:1px 7px;border-radius:999px;
+.ctx{display:inline-block;font-size:14px;line-height:1.5;padding:1px 7px;border-radius:999px;
  border:1px solid var(--line);color:var(--muted);margin:1px 4px 1px 0;white-space:nowrap}
 .ctx.warn{color:var(--warn);border-color:#f0d3c4;background:#fff6e8}
 a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
-.rowreport{display:inline-block;margin-left:6px;font-size:13px;color:var(--muted);text-decoration:none}
+.rowreport{display:inline-block;margin-left:6px;font-size:14px;color:var(--muted);text-decoration:none}
 .rowreport:hover{color:var(--warn);text-decoration:none}
-.detbtn{margin-left:6px;font-size:12px}
+.detbtn{margin-left:6px;font-size:14px}
 .restools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0 0}
-.restools .exportnote{color:var(--muted);font-size:12px}
+.restools .exportnote{color:var(--muted);font-size:14px}
 /* v0.9.7 task-12 UI 批次 A-1：身份卡 / 结果分页 / 零结果三动作 / 粘性搜索 / 骨架 */
 #identity:empty{display:none}
 .idcard{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;
@@ -2885,30 +2918,30 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
 .idcard .idrow .idarrow{color:var(--muted)}
 .idcard .idrow .iding{font-size:16px;font-weight:600;color:var(--accent)}
 .idbadge{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4;border-radius:999px;
- padding:2px 10px;font-size:12px;white-space:nowrap}
-.idfields{display:flex;flex-wrap:wrap;gap:3px 16px;font-size:13px;color:var(--muted);margin:0}
+ padding:2px 10px;font-size:14px;white-space:nowrap}
+.idfields{display:flex;flex-wrap:wrap;gap:3px 16px;font-size:14px;color:var(--muted);margin:0}
 .idfields b{color:var(--fg);font-weight:600}
-.idwarn{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:10px;padding:9px 12px;
- font-size:13px;margin:9px 0 0}
+.idwarn{background:var(--warnbg);border:1px solid #f0d3c4;border-radius:12px;padding:9px 12px;
+ font-size:14px;margin:9px 0 0}
 .idacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .idacts a,.idacts button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;
- padding:0 15px;border-radius:10px;border:1px solid var(--accent);background:#fff;color:var(--accent);
+ padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:#fff;color:var(--accent);
  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
 .idacts .primary{background:var(--accent);color:#fff}
 .idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
 .res-more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
  margin:10px 0 0}
-.res-more .sub{margin:0;font-size:13px}
-.res-more button{min-height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--accent);
+.res-more .sub{margin:0;font-size:14px}
+.res-more button{min-height:40px;padding:0 16px;border-radius:12px;border:1px solid var(--accent);
  background:#fff;color:var(--accent);font-size:14px;cursor:pointer;font-family:inherit}
 .res-more button:hover{filter:brightness(.96)}
 .res-samelist{margin:6px 0 10px;padding-left:20px}
-.res-samelist li{margin:3px 0;font-size:13px}
+.res-samelist li{margin:3px 0;font-size:14px}
 table.res.rows td.c-det{text-align:right;white-space:nowrap}
-table.res.rows .rowform{display:block;color:var(--muted);font-size:12px}
+table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
 .empty3{margin:12px 0 0}.empty3 .e3acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
 .empty3 .e3acts a,.empty3 .e3acts button{min-height:40px;display:inline-flex;align-items:center;
- padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--fg);
+ padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--fg);
  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
 .empty3 .e3acts a:hover,.empty3 .e3acts button:hover{border-color:var(--accent);color:var(--accent)}
 .res-skeleton .sk-row{height:36px;margin:8px 0;border-radius:8px;
@@ -2921,27 +2954,27 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:12px}
    border-bottom:1px solid var(--line)}
   .has-q .searchwrap #ac{top:calc(100% + 2px)}
 }
-table.det{margin:4px 0 8px;font-size:13px;background:#faf9f6;border:1px solid var(--line);
+table.det{margin:4px 0 8px;font-size:14px;background:#f6f5f0;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
-table.det th{background:#f4f2ec;font-size:11px}
+table.det th{background:#f6f5f0;font-size:14px}
 table.det td{padding:5px 8px;vertical-align:top}
-tr.detrow>td.detcell{padding:4px 8px 10px;background:#faf9f6}
+tr.detrow>td.detcell{padding:4px 8px 10px;background:#f6f5f0}
 tr.detrow table.det{margin:0}
 /* v0.6.3 U1：首屏 3 步引导（v0.8.2 task-115：移到搜索框正下方、国家行之前；层级增强） */
 .u1guide{border:1px solid var(--line);border-radius:12px;background:#fff;
  padding:16px 18px;margin:12px 0 2px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .u1head{display:flex;align-items:baseline;gap:10px}
-.u1head h2{margin:0;font-size:18px;font-weight:700;letter-spacing:.01em}
+.u1head h2{margin:0;font-size:20px;font-weight:700;letter-spacing:.01em}
 .u1close{margin-left:auto;background:none;border:0;color:var(--muted);font-size:20px;
  line-height:1;padding:6px 8px;min-width:36px;min-height:36px;cursor:pointer}
 .u1close:hover{color:var(--fg)}
 .u1steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 0;
  padding:0;list-style:none}
-.u1step{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#faf9f6}
-.u1step b{display:block;font-size:15px;margin:0 0 3px}
-.u1step .sub{margin:4px 0 0;font-size:13px}
-.u1try{margin-top:6px;font-size:12px;color:var(--muted)}
-.u1try button{padding:3px 8px;font-size:12px;margin:2px 4px 2px 0;border-radius:8px}
+.u1step{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#f6f5f0}
+.u1step b{display:block;font-size:16px;margin:0 0 3px}
+.u1step .sub{margin:4px 0 0;font-size:14px}
+.u1try{margin-top:6px;font-size:14px;color:var(--muted)}
+.u1try button{padding:3px 8px;font-size:14px;margin:2px 4px 2px 0;border-radius:8px}
 html.u1-off #u1guide{display:none!important}
 /* v0.8.2 task-116：搜索后收起「按大类浏览」 */
 .catquick.cat-hidden{display:none!important}
@@ -2950,34 +2983,34 @@ html.u1-off #u1guide{display:none!important}
  padding:10px 12px;margin:12px 0}
 .u2head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
 .u2head b{font-size:14px}
-.u2head .sub{margin:0;font-size:12px}
+.u2head .sub{margin:0;font-size:14px}
 .u2chips{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;
  margin-top:8px;padding-bottom:2px}
 .u2chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:1px;
- background:#faf9f6;border:1px solid var(--line);color:var(--fg);border-radius:10px;
- padding:6px 10px;font-size:12px;cursor:pointer;text-align:left;min-width:0;max-width:220px}
+ background:#f6f5f0;border:1px solid var(--line);color:var(--fg);border-radius:12px;
+ padding:6px 10px;font-size:14px;cursor:pointer;text-align:left;min-width:0;max-width:220px}
 .u2chip:hover{border-color:var(--accent)}
 .u2chip.on{border-color:var(--accent);background:#f1f8f4}
-.u2chip .u2c{font-weight:600;color:var(--muted);font-size:11px}
+.u2chip .u2c{font-weight:600;color:var(--muted);font-size:12px}
 .u2chip .u2n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
 .u2chip .u2n.empty{color:var(--muted);font-style:italic}
 /* v0.6.6：成分页多国并排矩阵（行=规格/剂型/释放，列=国家；服务端默认 en 序，客户端按语言重排） */
 .matwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
 table.matrix{width:100%;border-collapse:collapse;min-width:860px}
-table.matrix th,table.matrix td{border:1px solid var(--line);padding:6px 8px;
-  text-align:left;vertical-align:top;font-size:14px}
+table.matrix th,table.matrix td{border:1px solid var(--line);padding:8px 12px;
+  text-align:left;vertical-align:top;font-size:16px;line-height:1.5}
 table.matrix thead th{white-space:nowrap;font-weight:650}
-table.matrix td.m-spec{white-space:nowrap;background:#faf9f6}
+table.matrix td.m-spec{white-space:nowrap;background:#f6f5f0}
 table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   -webkit-line-clamp:2;overflow:hidden;max-width:220px;margin:0 6px 2px 0;
   vertical-align:top;line-height:1.35;min-height:24px;padding:3px 0;
   text-decoration:underline;text-underline-offset:2px}
-.m-en{display:inline-block;margin:0 6px 2px 0;font-size:11px;color:var(--muted)}
-.m-zh{display:inline-block;margin:0 0 2px 0;font-size:11px;color:var(--muted)}
+.m-en{display:inline-block;margin:0 6px 2px 0;font-size:12px;color:var(--muted)}
+.m-zh{display:inline-block;margin:0 0 2px 0;font-size:12px;color:var(--muted)}
 /* v0.9.0 task-19/6：无商品名占位 / 矩阵 +N 展开 */
 .brand-none{color:var(--muted);font-weight:600}
-.m-none-ing{display:inline-block;font-size:11px;color:var(--muted);margin-left:4px}
-.m-more{display:inline-block;margin-left:4px;font-size:12px}
+.m-none-ing{display:inline-block;font-size:14px;color:var(--muted);margin-left:4px}
+.m-more{display:inline-block;margin-left:4px;font-size:14px}
 /* v0.9.1 task-29/22：矩阵筛选器占位，避免 JS 插入时把表格整体推下去（CLS） */
 .mf-slot{min-height:170px}
 @media (max-width:767px){ .mf-slot{min-height:92px} }
@@ -2985,47 +3018,47 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .m-more summary::-webkit-details-marker{display:none}
 .m-more summary:before{content:"+";font-weight:600}
 .m-more[open] summary:before{content:"−"}
-.m-rest{display:block;margin-top:4px;font-size:12px}
-.m-orig{display:block;margin-top:2px;font-size:11px;color:var(--muted);font-weight:400;white-space:normal}
-.name-single-note,.maker-single-note{margin:18px 0 0;color:var(--muted);font-size:13px}
+.m-rest{display:block;margin-top:4px;font-size:14px}
+.m-orig{display:block;margin-top:2px;font-size:14px;color:var(--muted);font-weight:400;white-space:normal}
+.name-single-note,.maker-single-note{margin:18px 0 0;color:var(--muted);font-size:14px}
 /* v0.8.4 task-128：状态彩色角标（A1 明细等） */
-.st-badge{display:inline-block;font-size:11px;padding:1px 6px;border-radius:999px;
+.st-badge{display:inline-block;font-size:12px;padding:1px 6px;border-radius:999px;
   border:1px solid var(--line);margin-right:4px;white-space:nowrap}
 .st-active{color:#0b6b53;border-color:#a9d3c5;background:#eef7f3}
 .st-discontinued{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .st-withdrawn{color:#8a2c1f;border-color:#e6bdb4;background:#fdf0ee}
 .st-unknown{color:var(--muted);background:#f6f5f2}
 .c-brand{overflow-wrap:anywhere}
-.matrix-brand-note{margin:6px 0 0;font-size:12px}
-.matrix-hk-note{margin:4px 0 0;font-size:12px;color:var(--warn)}
+.matrix-brand-note{margin:6px 0 0;font-size:14px}
+.matrix-hk-note{margin:4px 0 0;font-size:14px;color:var(--warn)}
 /* v0.8.3 task-119：矩阵筛选器 */
-.matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;
+.matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;
   background:#fff;padding:10px 12px}
 .mf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .mf-title{font-weight:600;font-size:14px}
-.mf-count{color:var(--muted);font-size:13px}
+.mf-count{color:var(--muted);font-size:14px}
 .mf-toggle{margin-left:auto}
 .mf-panel{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
   gap:8px 14px;margin-top:10px}
-.mf-field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+.mf-field{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
 .mf-field select,.mf-field input[type=search]{padding:6px 8px;border:1px solid var(--line);
-  border-radius:8px;font-size:13px;background:#fff;color:var(--fg)}
-.mf-countries{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--fg)}
+  border-radius:8px;font-size:14px;background:#fff;color:var(--fg)}
+.mf-countries{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:14px;color:var(--fg)}
 .mf-countries label{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .m-reset{border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:8px;
-  padding:6px 12px;font-size:13px;cursor:pointer}
+  padding:6px 12px;font-size:14px;cursor:pointer}
 .mf-country-actions{display:flex;gap:6px;margin-top:4px}
-.mf-country-actions .mf-reset{padding:2px 8px;font-size:12px}
+.mf-country-actions .mf-reset{padding:2px 8px;font-size:14px}
 .mf-count.mf-warn{color:var(--warn);font-weight:600}
-.matrix-scroll-hint{display:none;margin:2px 0 0;font-size:12px}
-@media (max-width:719px){ .matrix-scroll-hint{display:block} }
+.matrix-scroll-hint{display:none;margin:2px 0 0;font-size:14px}
+@media (max-width:767px){ .matrix-scroll-hint{display:block} }
 /* v0.9.0 task-6：横滑 + 规格列 sticky + 移动端卡片 */
 .matwrap{position:relative}
 table.matrix thead th:first-child,
 table.matrix td.m-spec{position:sticky;left:0;z-index:2}
 table.matrix th[data-country]:not([data-defcol]),
 table.matrix td[data-country]:not([data-defcol]){display:none}
-.matrix-sort-note{margin:4px 0 0;font-size:12px}
+.matrix-sort-note{margin:4px 0 0;font-size:14px}
 @media (max-width:767px){
   .matrix-filters .mf-panel{display:none}
   .matrix-filters.mf-open .mf-panel{display:grid}
@@ -3037,36 +3070,36 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
   /* v0.9.1 P0-4：桌面筛选面板本来常显，隐藏无效的「筛选」按钮 */
   .mf-toggle{display:none}
 }
-@media (max-width:719px){
+@media (max-width:767px){
   /* 移动端：每规格一张卡，市场列纵向排列，不横向滚动 */
   .matwrap{overflow-x:visible;margin:8px 0}
   table.matrix{display:block;min-width:0;width:100%;border-collapse:separate;border-spacing:0}
   table.matrix thead{display:none}
   table.matrix tbody{display:block}
   table.matrix tr{display:block;background:#fff;border:1px solid var(--line);
-    border-radius:10px;margin:8px 0;padding:6px 8px}
-  table.matrix td{display:block;border:0;padding:3px 2px;white-space:normal;font-size:13px}
+    border-radius:12px;margin:8px 0;padding:6px 8px}
+  table.matrix td{display:block;border:0;padding:3px 2px;white-space:normal;font-size:14px}
   table.matrix td.m-spec{position:static;background:transparent;border-bottom:1px solid var(--line);
     margin-bottom:4px;padding-bottom:6px}
   table.matrix td[data-country]:before{content:attr(data-country) " · ";color:var(--muted);
-    font-weight:600;font-size:12px}
+    font-weight:600;font-size:14px}
 }
-@media (max-width:719px){
+@media (max-width:767px){
   .u1steps{grid-template-columns:1fr}
   .u1close{min-width:44px;min-height:44px}
   .u2chip{max-width:70vw}
 }
-@media (max-width:719px){
+@media (max-width:767px){
   .wrap{padding:0 14px}
   header .wrap{height:auto;flex-wrap:wrap;padding:10px 14px;gap:8px 12px}
-  .logo{font-size:15px}
+  .logo{font-size:16px}
   .logo-zh{display:none}
-  nav{flex-wrap:wrap;gap:8px 12px;font-size:13px}
+  nav{flex-wrap:wrap;gap:8px 12px;font-size:14px}
   .langs{margin-left:auto}
   #q{font-size:16px;padding:12px 14px}
   .row{gap:8px}
   .sel-label{display:block;width:100%;margin:2px 0 0}
-  .parsebar{gap:4px 12px;font-size:12px}
+  .parsebar{gap:4px 12px;font-size:14px}
   .card{padding:12px}
   footer .wrap{display:block}
   .foot-links{margin:8px 0 0;display:flex;flex-wrap:wrap;white-space:normal;gap:8px 14px}
@@ -3076,16 +3109,16 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
   table.res tbody{display:block}
   table.res tr{display:block;background:#fff;border:1px solid var(--line);
     border-radius:12px;margin:8px 0;padding:8px 12px}
-  table.res td{display:block;border:0;padding:2px 0;width:auto}
+  table.res td{display:block;border:0;padding:8px 0;width:auto}
   table.res td.c-dose{white-space:normal}
   table.res td.c-empty{display:none}
-  table.res td[data-label]:before{content:attr(data-label) " · ";color:var(--muted);font-size:12px}
+  table.res td[data-label]:before{content:attr(data-label) " · ";color:var(--muted);font-size:14px}
   table.res tr.grp{background:#f7f8f5;border-color:#e7e5dc;padding:8px 12px}
   table.res tr.grp td{display:block;width:auto}
   table.res tr.grp .grp-tags{text-align:left;margin-top:2px}
   table.res tr.fold-row{background:transparent;border:0;padding:0;margin:0}
   table.res tr.fold-row td{padding:0 0 4px}
-  table.res tr.detrow{background:#faf9f6;border-color:#e7e5dc;padding:4px 8px}
+  table.res tr.detrow{background:#f6f5f0;border-color:#e7e5dc;padding:4px 8px}
   table.res tr.detrow>td.detcell{display:block;padding:0}
   table.det{display:block;overflow-x:auto;white-space:nowrap}
   .restools{margin-top:8px}
@@ -3093,9 +3126,9 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
   .loadmore button{width:100%}
 }
 /* i18n P1：静态页（About / What's new / Confused）移动端收尾 */
-@media (max-width:719px){
+@media (max-width:767px){
   .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  main table:not(.res){font-size:13px}
+  main table:not(.res){font-size:14px}
   .release table{display:block;overflow-x:auto}
   .release ul,.release li,p,li{overflow-wrap:anywhere}
 }
@@ -3112,12 +3145,12 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
 dl.glossary{margin:10px 0;border-top:1px solid var(--line)}
 dl.glossary dt{font-weight:650;margin:10px 0 2px}
 dl.glossary dd{margin:0 0 4px;color:var(--muted)}
-.atcbar code{font-size:13px}
+.atcbar code{font-size:14px}
 /* v0.5.4：厂家列（可点厂家 + 「+N」展开列表） */
 .maker-link{color:var(--accent)}
 .maker-plain{color:var(--fg)}
-.mah-toggle{font-size:12px;margin-left:4px;padding:0;text-decoration:underline}
-.mah-list{margin:6px 0 0;padding-left:18px;font-size:13px}
+.mah-toggle{font-size:14px;margin-left:4px;padding:0;text-decoration:underline}
+.mah-list{margin:6px 0 0;padding-left:18px;font-size:14px}
 .mah-list[hidden]{display:none}
 .mah-list li{margin:2px 0}
 .maker-page table.res{margin-top:6px}
@@ -3127,11 +3160,11 @@ a.grp-name{color:var(--accent)}
   padding:12px 14px;margin:10px 0}
 .warn-item h3{margin:0 0 6px;font-size:16px;line-height:1.45}
 .warn-item .warn-body{margin:0 0 8px}
-.warn-item .warn-meta{color:var(--muted);font-size:13px;margin:0;overflow-wrap:anywhere}
+.warn-item .warn-meta{color:var(--muted);font-size:14px;margin:0;overflow-wrap:anywhere}
 .warn-item .badge{vertical-align:2px}
 /* v0.6.7：/warn 分页（10 条/页；移动端 ≥40px 可点） */
 .warnpager{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:16px 0 4px;font-size:14px}
-.warnpager .pg-status{color:var(--muted);font-size:13px;margin-right:6px}
+.warnpager .pg-status{color:var(--muted);font-size:14px;margin-right:6px}
 .warnpager a,.warnpager span{min-width:36px;min-height:36px;display:inline-flex;
   align-items:center;justify-content:center;padding:4px 9px;border:1px solid var(--line);
   border-radius:8px;color:var(--fg);background:#fff}
@@ -3139,10 +3172,10 @@ a.grp-name{color:var(--accent)}
 .warnpager .pg-num.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
 .warnpager .disabled{color:var(--muted);opacity:.5;cursor:not-allowed}
 .drugwarn ul{margin:6px 0 4px;padding-left:20px}
-@media (max-width:719px){
-  .warn-item .warn-meta{font-size:12px}
+@media (max-width:767px){
+  .warn-item .warn-meta{font-size:14px}
   .warnpager{gap:6px}
-  .warnpager a,.warnpager span{min-width:40px;min-height:40px;font-size:15px}
+  .warnpager a,.warnpager span{min-width:40px;min-height:40px;font-size:16px}
 }
 
 /* ── v0.9.8 task-13（UI 批次 A-2）：统一外壳 / 44px 触控 / 名字页 / 成分页 ── */
@@ -3153,7 +3186,7 @@ a.grp-name{color:var(--accent)}
 .sn>a.on{color:var(--accent);font-weight:600}
 .sn>details>summary::-webkit-details-marker{display:none}
 .sn>details[open]>summary{background:#f1f8f4;color:var(--accent)}
-.sn>details>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:10px}
+.sn>details>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:14px}
 .sn-dd{position:relative}
 .sn-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:60;background:#fff;
  border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(31,35,40,.12);
@@ -3163,9 +3196,9 @@ a.grp-name{color:var(--accent)}
 .sn-cats a,.sn-mkts a,.sn-about a{display:flex;align-items:center;gap:8px;min-height:40px;
  padding:4px 8px;border-radius:8px;color:var(--fg);font-size:14px}
 .sn-cats a:hover,.sn-mkts a:hover,.sn-about a:hover{background:#f1f8f4;text-decoration:none}
-.sn-mkts .meta{color:var(--muted);font-size:12px;margin-left:auto}
+.sn-mkts .meta{color:var(--muted);font-size:14px;margin-left:auto}
 .sn-foot{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;display:flex;
- justify-content:space-between;gap:12px;font-size:13px}
+ justify-content:space-between;gap:12px;font-size:14px}
 .tabbar{display:none}
 @media (max-width:767px){
   header.hdr-shell .wrap{height:56px;flex-wrap:nowrap;gap:8px;padding:0 12px}
@@ -3175,12 +3208,12 @@ a.grp-name{color:var(--accent)}
   header.hdr-shell .nav-toggle{display:none}
   header.hdr-shell .langs{margin-left:auto;flex-shrink:0;gap:2px}
   header.hdr-shell .langs a{min-width:44px;min-height:44px;display:inline-flex;
-   align-items:center;justify-content:center;padding:0 4px;font-size:12px}
+   align-items:center;justify-content:center;padding:0 4px;font-size:14px}
   body{padding-bottom:56px}
   .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;height:56px;background:#fff;
    border-top:1px solid var(--line);z-index:45;padding-bottom:env(safe-area-inset-bottom)}
   .tabbar a{flex:1;display:inline-flex;align-items:center;justify-content:center;
-   min-height:44px;font-size:12px;color:var(--muted);position:relative}
+   min-height:44px;font-size:14px;color:var(--muted);position:relative}
   .tabbar a.on{color:var(--accent);font-weight:600}
   .tabbar a.on:before{content:"";position:absolute;top:0;left:26%;right:26%;height:3px;
    background:var(--accent);border-radius:0 0 3px 3px}
@@ -3198,15 +3231,15 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 .name-more>summary{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;
  border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:14px}
 .name-more>summary::-webkit-details-marker{display:none}
-.name-more>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:10px}
+.name-more>summary:after{content:"▾";margin-left:6px;color:var(--muted);font-size:14px}
 .name-more[open]>summary:after{content:"▴"}
 /* P0-9：成分页筛选器默认收起（details 由 JS 包） */
 .mf-slot{min-height:44px}
-.mf-details{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.mf-details{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .mf-details>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;
  cursor:pointer;font-size:14px;font-weight:600;list-style:none}
 .mf-details>summary::-webkit-details-marker{display:none}
-.mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:12px}
+.mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:14px}
 .mf-details[open]>summary{border-bottom:1px solid var(--line)}
 .mf-details .matrix-filters{margin:0;border:0;border-radius:0}
 .mf-details .mf-toggle{display:none}
@@ -3220,7 +3253,7 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
   header.hdr-shell .sn{flex-wrap:nowrap}
   header.hdr-shell .langs{margin-left:auto}
 }
-@media (min-width:768px) and (max-width:1099px){
+@media (min-width:768px) and (max-width:1024px){
   header.hdr-shell .wrap{max-width:1120px;height:auto;flex-wrap:wrap;
    padding-top:8px;padding-bottom:8px;gap:6px 12px}
   header.hdr-shell .sn{order:3;flex-basis:100%;flex-wrap:wrap;margin-left:0;gap:4px 8px}
@@ -3229,6 +3262,46 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 
 /* A-2 fix2：头部双语开关单行（zh「显示原文对照」6 字，1280 下不折行） */
 header.hdr-shell .bil-toggle{white-space:nowrap;margin:0 6px;flex:none}
+
+/* ── v0.10.0 tokens 2.0 配套 ── */
+.notice>div,.warn-item .warn-body,.idcard .notice div{max-width:var(--prose)}
+table.res tbody tr:nth-child(even):not(.grp):not(.detrow):not(.fold-row){background:var(--surface-2)}
+table.res tbody tr:hover{background:var(--surface-2)}
+body.density-compact table.res td{padding:4px 8px;font-size:14px}
+body.density-compact table.res th{padding:4px 8px;font-size:12px}
+body.density-compact table.res{font-size:14px}
+.warn-item h2{margin:0 0 6px;font-size:16px;line-height:1.4;font-weight:700}
+.warn-item h3{margin:0 0 6px;font-size:16px;line-height:1.4;font-weight:700}
+.warnfilters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.warnfilters button{min-height:44px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:#fff;color:var(--fg);font-size:14px}
+.warnfilters button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.atc-notes{margin:14px 0}
+.atc-notes>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:14px;color:var(--accent)}
+.atc-notes .notice{margin:8px 0}
+.covtools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.covtools button{min-height:44px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:#fff;color:var(--fg);font-size:14px}
+@media (max-width:767px){
+  .coverage-table .covgap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .tabbar{padding-bottom:env(safe-area-inset-bottom)}
+  main{padding-bottom:80px}
+}
+@media (max-width:767px){.catgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.u1guide{padding:12px}.card{padding:12px}}
+
+/* v0.10.0: neutral background bands + right-top category/language controls */
+main .section,main .catquick{background:var(--band);border:1px solid var(--line);border-radius:12px;padding:16px}
+.u1guide{background:#fff}
+.sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
+.sn-right details{position:relative}
+.sn-right summary{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 10px;border-radius:8px;cursor:pointer;list-style:none;font-size:14px;color:var(--fg)}
+.sn-right summary::-webkit-details-marker{display:none}
+.sn-right details[open]>summary{background:var(--accent-weak);color:var(--accent)}
+.sn-panel-right{right:0;left:auto;min-width:210px}
+.lang-menu a{display:flex;min-height:44px;align-items:center;padding:0 10px;border-radius:8px;color:var(--fg)}
+.lang-menu a.on{background:var(--accent-weak);color:var(--accent);font-weight:600}
+.sn-cats.compact{grid-template-columns:repeat(2,minmax(150px,1fr))}
+.mmenu{display:none}
+@media (max-width:767px){.sn-right .qcat,.sn-right .langdd{display:none}.mmenu{display:inline-flex}}
 """
 
 APP_JS = r"""
@@ -3242,11 +3315,7 @@ const identityEl = document.getElementById('identity');
 const H1_DEFAULT = h1El ? (h1El.textContent || '').trim() : '';
 const TITLE_DEFAULT = document.title;
 // v0.9.1 P0-3：结果计数/加载/零结果固定在搜索框下方（移动端不滚过引导卡）。
-const searchWrapEl = document.querySelector('.searchwrap');
-if(searchWrapEl && meta){
-  searchWrapEl.insertAdjacentElement('afterend', meta);
-  meta.classList.add('search-status');
-}
+// v0.10.0 P1-13: #meta already sits below the search box in static HTML (no JS move => no CLS)
 const acEl = document.getElementById('ac');
 const ctryLabel = document.getElementById('ctrylabel');
 // v0.6.3 U1：首屏引导关闭记忆（localStorage flag；隐私模式失败也不影响关闭）
@@ -4737,6 +4806,14 @@ function render(){
   }
   // 主结果：按成分聚合；同成分多品牌折叠（默认显示前 2 个品牌），
   // 超过 RES_PAGE 行时用「加载更多」分页，不再一刀切 40 行/80 行。
+  // v0.10.0 P1-14：大表密度切换（紧凑/舒适，localStorage 记忆）
+  try{ if(localStorage.getItem('dsh.density')==='compact') document.body.classList.add('density-compact'); }catch(e){}
+  document.addEventListener('click', function(ev){
+    var b = ev.target && ev.target.closest ? ev.target.closest('[data-density]') : null;
+    if(!b) return;
+    var on = document.body.classList.toggle('density-compact');
+    try{ localStorage.setItem('dsh.density', on ? 'compact' : 'comfy'); }catch(e){}
+  });
   let resHTML = '';
   if(!countryMiss && display.length){
     RES_GROUPS = groupByIngredient(display);
@@ -4744,6 +4821,7 @@ function render(){
     resHTML = `<div class="restools">`
       + `<button type="button" class="linkbtn" data-export="copy">${esc(T2('res.copy'))}</button>`
       + `<button type="button" class="linkbtn" data-export="csv">${esc(T2('res.csv'))}</button>`
+      + `<button type="button" class="linkbtn" data-density="toggle">${esc(T2('res.density'))}</button>`
       + `<span class="exportnote" id="exportnote" role="status" aria-live="polite"></span>`
       + `</div>`
       + `<div id="reswrap">${RES_MODE === 'flat' ? flatTableHTML(T2) : resultsTableHTML(T2)}</div>`;
@@ -5795,13 +5873,13 @@ SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA",
 SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
 
 
-def _shell_cat_links(prefix: str) -> str:
-    """类别面板：16 个消费者大类（沿用 .lang-block 四语块，无 JS 也有英文）。"""
+def _shell_cat_links(prefix: str, limit: int = 99) -> str:
+    """类别面板：消费者大类（沿用 .lang-block 四语块，无 JS 也有英文）。"""
     return "".join(
         f'<a href="{prefix}cat/{cat["id"]}.html">' + "".join(
             f'<span class="lang-block" data-lang-block="{lbl}">{esc(cat["labels"][lbl])}</span>'
             for lbl in SHELL_LANGS) + "</a>"
-        for cat in CONSUMER_CATEGORIES)
+        for cat in CONSUMER_CATEGORIES[:limit])
 
 
 def _shell_market_links(prefix: str) -> str:
@@ -5826,7 +5904,7 @@ def _nav_active(canonical_rel: str) -> str:
 
 
 def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
-    """桌面 5 项导航 + `<details>` 面板 + 语言切换（nav 与 langs 同级放在 header 里）。"""
+    """桌面 5 项导航（语言/类别快捷键在 _shell_right）。"""
     on = ' class="on" aria-current="page"'
     return f"""<nav class="sn" data-shell="1" aria-label="Primary">
     <a href="{prefix}index.html" data-i18n="nav.search"{on if active == 'search' else ''}>Search</a>
@@ -5848,8 +5926,24 @@ def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
         <a href="{prefix}confused.html" data-i18n="nav.confused">Confused names</a>
       </div></div>
     </details>
-  </nav>
-  <span class="langs">{sw}</span>"""
+  </nav>"""
+
+
+def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
+    """右上角：类别入口 + 语言下拉；移动端收进「⋯」菜单（v0.10.0）。"""
+    labels = {c: l for c, l, _ in LANGS}
+    label = labels.get(lang, "EN")
+    quick = _shell_cat_links(prefix, limit=8)
+    all_link = (f'<div class="sn-foot"><a href="{prefix}atc.html" '
+                f'data-i18n="cat.all_link">All categories →</a></div>')
+    return f"""<span class="sn-right">
+    <details class="qcat"><summary data-i18n="nav.categories">Categories</summary>
+      <div class="sn-panel sn-panel-right"><div class="sn-cats compact">{quick}</div>{all_link}</div></details>
+    <details class="langdd"><summary><span aria-hidden="true">🌐</span> <span class="lname">{label}</span> ▾</summary>
+      <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div></div></details>
+    <details class="mmenu"><summary aria-label="More">⋯</summary>
+      <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div>{all_link}</div></details>
+  </span>"""
 
 
 def _shell_tabbar(prefix: str, active: str = "search") -> str:
@@ -5879,7 +5973,9 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     """
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
     sw = "".join(
-        f'<a data-lang="{code}" href="?lang={code}">{label}</a>' for code, label, _ in LANGS
+        f'<a data-lang="{code}" href="?lang={code}"'
+        + (' aria-current="true"' if code == lang else "")
+        + f'>{label}</a>' for code, label, _ in LANGS
     )
     alt = ""
     if alternates:
@@ -5956,7 +6052,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <header class="hdr-shell"><div class="wrap">
   <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
     <span class="logo-zh">药品商品名跨国定位</span></a>
-  {_shell_nav_html(prefix, _nav_active(canonical_rel), sw)}
+  {_shell_nav_html(prefix, _nav_active(canonical_rel))}{_shell_right(prefix, sw, lang)}
 </div></header>
 <main id="main"><div class="wrap">"""
     else:
@@ -7459,9 +7555,7 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                 f"""<div class="card"><h2><a href="../drug/{sid}.html">{esc(g['inn'])}</a></h2>
 <div class="meta"><span data-i18n="name.countries">Countries</span>:
 {esc('、'.join(sorted(g['country'])))} ·
-<span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))} ·
-<span data-i18n="name.strength">Strength</span>:
-{_label_unit_html(strengths) or '—'}
+<span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))}{f" · <span data-i18n='name.strength'>Strength</span>: {_label_unit_html(strengths)}" if strengths else ''}
 {f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div></div>"""
             )
         single = e.get("n") == 1 and e.get("t") == 1
@@ -7492,6 +7586,9 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
 {esc('、'.join(variants.get(e['k'], [])[:6]))} ·
 <span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
 {banner}{gen_notice}{cards_html}{none_ing}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
+        _alts = [v for v in variants.get(e["k"], [])[:6] if v and v != e["d"]]
+        if not _alts:
+            body = re.sub(r'<span data-i18n="name.also">Also written as</span>:\s*[^<]*?·\s*', '', body, count=1)
         if single:
             for lang in ("en", "es", "zh", "zh-Hant"):
                 note = I18N[lang].get("name.single_note") or I18N["en"]["name.single_note"]
@@ -7775,6 +7872,9 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
 {cross_html(slug)}
 <p class="sub"><a href="../warn.html">{esc(T["combo.see_warnings"])}</a></p>
 <div class="notice" data-i18n-html="combo.source_note">{T["combo.source_note"]}</div>"""
+        # v0.10.0 P1-7: drop <code> when it repeats the ingredient label
+        body = re.sub(r"([^\s<>]+)\s*<code>([^<]+)</code>",
+                      lambda m: m.group(1) if m.group(1).lower() == m.group(2).lower() else m.group(0), body)
         (OUT / "combo" / slug).write_text(
             page(title, body, "../", canonical_rel=f"combo/{slug}"), encoding="utf-8")
         made += 1
@@ -8035,7 +8135,10 @@ def _optimize_home_html(html: str, prefix: str) -> str:
     - app.js / bilingual.js 在 load 后注入，保证搜索可用但不挡首屏。
     """
     css_link = f'<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">'
-    html = html.replace(css_link, f"<style>{CSS}</style>")
+    css_inline = re.sub(r"/\*.*?\*/", "", CSS, flags=re.S)
+    css_inline = re.sub(r"\s*([{};])\s*", r"\1", css_inline)
+    css_inline = re.sub(r"\s+", " ", css_inline).strip()
+    html = html.replace(css_link, f"<style>{css_inline}</style>")
     for pat in (
             rf'<script defer src="{re.escape(prefix)}assets/i18n\.js\?v={re.escape(BUILD_V)}"></script>',
             rf'<script defer src="{re.escape(prefix)}assets/bilingual\.js\?v={re.escape(BUILD_V)}"></script>',
@@ -8097,7 +8200,7 @@ def build_index_page(entries, stats, coverage) -> None:
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac">
 <div id="ac" role="listbox" aria-label="Suggestions"></div>
 </div>
-<p class="sub" id="meta" role="status" aria-live="polite" aria-atomic="true" style="margin-top:14px"></p>
+<p class="sub search-status" id="meta" role="status" aria-live="polite" aria-atomic="true"></p>
 <div class="row">
   <label class="sel-label" for="country" id="ctrylabel" data-i18n="home.country_label">See what this medicine is called in:</label>
   <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
@@ -8227,7 +8330,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
                 "about.sources", "about.tw_source", "about.sg_source", "about.hk_source",
                 "about.au_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
-    parts.append(LICENCE_HTML)
+    parts.append('<details class="lic-wrap"><summary>Data sources and licences · 数据来源与许可 · Fuentes y licencias</summary>' + LICENCE_HTML + '</details>')
     for key in ("about.samename", "about.gaps"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     if GOATCOUNTER_CODE:
@@ -8239,11 +8342,33 @@ def build_about(stats, coverage, source_cover=()) -> None:
                  '<a href="docs/data-dictionary.md">Data dictionary</a></p>')
     parts.append('<p class="sub"><a href="coverage.html" data-i18n="nav.coverage">Coverage &amp; freshness</a></p>')
     body = "\n".join(parts)
+    # v0.10.0 P1-5：来源表补 thead/tbody（渲染期一次性修正，三语共用）
+    body = re.sub(r'<table><tr><th>(.*?)</tr>',
+                  r'<table><thead><tr><th>\1</tr></thead><tbody>', body, count=1, flags=re.S)
+    body = body.replace('</table>', '</tbody></table>', 1)
     html = page("About", body, meta_key="about", alternates=True,
                 canonical_rel="about.html", alt_rel="about.html",
                 head_js='<link rel="alternate" type="application/ld+json" href="dataset.jsonld">',
                 nav_coverage=True)
     _write_with_copies("about.html", html, "about")
+
+COVERAGE_SORT_JS = """
+<script>(function(){var t=document.getElementById('covtable');if(!t)return;
+var tb=t.querySelector('tbody');var rows=Array.prototype.slice.call(tb.rows);
+document.querySelectorAll('[data-covsort]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-covsort');
+    var sorted=rows.slice().sort(function(a,c){
+      if(k==='products'){return parseInt(c.cells[1].textContent.replace(/[^0-9]/g,''),10)-parseInt(a.cells[1].textContent.replace(/[^0-9]/g,''),10);}
+      return a.cells[0].textContent.localeCompare(c.cells[0].textContent);
+    });
+    sorted.forEach(function(r){tb.appendChild(r);});
+    document.querySelectorAll('[data-covsort]').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+  });
+});})();</script>
+"""
+
 
 def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> None:
     """v0.9.4 A4：每市场覆盖/新鲜度页（只列事实，不写数据口径）。"""
@@ -8294,13 +8419,16 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             f' <span class="meta">({mapped:,}/{n:,})</span></td>'
             f'<td data-label="{esc(T["coverage.col.spec"])}">{spct:.1f}%'
             f' <span class="meta">({spec:,}/{n:,})</span></td>'
-            f'<td data-label="{esc(T["coverage.col.last"])}">{esc(r.get("last_synced") or "—")}</td>'
+            f'<td data-label="{esc(T["coverage.col.last"])}" '
+            f'title="{esc(r.get("last_synced") or "")}">{esc((r.get("last_synced") or "—")[:10])}</td>'
             f'<td data-label="{esc(T["coverage.col.asof"])}">{esc(asof.get(c) or "—")}</td>'
             f'<td data-label="{esc(T["coverage.col.notes"])}">{note}</td></tr>')
     body = f"""<h1 data-i18n="coverage.title">{esc(T["coverage.title"])}</h1>
 <p class="sub" data-i18n="coverage.intro">{esc(T["coverage.intro"])}</p>
 <div class="notice" data-i18n="coverage.notice">{esc(T["coverage.notice"])}</div>
-<div class="tablewrap"><table class="res coverage-table"><thead><tr>
+<div class="covtools"><button type="button" data-covsort="products" data-i18n="coverage.sort_products">By products</button>
+<button type="button" data-covsort="market" data-i18n="coverage.sort_market">By market</button></div>
+<div class="tablewrap"><table class="res coverage-table" id="covtable"><thead><tr>
 <th data-i18n="coverage.col.market">{esc(T["coverage.col.market"])}</th>
 <th data-i18n="coverage.col.products">{esc(T["coverage.col.products"])}</th>
 <th data-i18n="coverage.col.mapping">{esc(T["coverage.col.mapping"])}</th>
@@ -8309,7 +8437,7 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
 <th data-i18n="coverage.col.asof">{esc(T["coverage.col.asof"])}</th>
 <th data-i18n="coverage.col.notes">{esc(T["coverage.col.notes"])}</th>
 </tr></thead><tbody>{"".join(rows)}</tbody></table></div>
-<p class="sub" data-i18n="coverage.source_note">{esc(T["coverage.source_note"])}</p>"""
+<p class="sub" data-i18n="coverage.source_note">{esc(T["coverage.source_note"])}</p>""" + COVERAGE_SORT_JS
     html = page("Coverage & freshness", body, meta_key="coverage", alternates=True,
                 canonical_rel="coverage.html", alt_rel="coverage.html", nav_coverage=True)
     _write_with_copies("coverage.html", html, "coverage")
@@ -8347,6 +8475,7 @@ def build_confused(db: sqlite3.Connection) -> int:
 Differentiation Project. This is the official tall-man list, not the full ISMP LASA list.</p>
 <div class="notice" data-i18n="conf.note">A pair here means the names can be mistaken for each
 other; it does not mean the drugs are interchangeable.</div>
+<h2 data-i18n="conf.h2">FDA tall-man pairs</h2>
 <div class="tablewrap"><table><thead><tr>
   <th data-i18n="conf.pair">Pair</th><th></th><th data-i18n="conf.tml">Tall-man spelling</th>
 </tr></thead><tbody>{''.join(body_rows)}</tbody></table></div>
@@ -8969,6 +9098,7 @@ def build_glossary() -> None:
                       f'<dl class="glossary">{rows}</dl></div>')
     body = (f'<h1 data-i18n="glossary.title">{esc(I18N["en"]["glossary.title"])}</h1>'
             f'<div data-i18n-html="glossary.intro">{I18N["en"]["glossary.intro"]}</div>'
+            f'<h2 data-i18n="glossary.h2">Terms &amp; codes</h2>'
             + "".join(blocks)
             + f'<div class="notice" data-i18n="glossary.note">'
               f'{esc(I18N["en"]["glossary.note"])}</div>')
@@ -9035,7 +9165,7 @@ def _atc_source_html(code: str, lang: str) -> str:
 
 def _lang_blocks(parts: dict[str, str]) -> str:
     """四语行内块；空值不输出（无值时不显示该语言）。"""
-    return "".join(
+    return " ".join(
         f'<span class="lang-block" data-lang-block="{lang}" data-lang-inline="1">{html}</span>'
         for lang, html in parts.items() if html)
 
@@ -9368,9 +9498,7 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
 <p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
 {_atc_members_html(members, drug_sids=drug_sids)}
 {atc4_html}
-<div class="notice" data-i18n="atc.status_note">{esc(T["atc.status_note"])}</div>
-<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
-<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
+{_atc_notes_html(T)}"""
             atc_ld = json.dumps({
                 "@context": "https://schema.org", "@type": "BreadcrumbList",
                 "itemListElement": [
@@ -9465,14 +9593,26 @@ def build_category_pages(db: sqlite3.Connection) -> int:
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
 <p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
 {_atc_members_html(members, cap=80, drug_sids=drug_sids)}
-<div class="notice" data-i18n="atc.status_note">{esc(T["atc.status_note"])}</div>
-<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
-<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
+{_atc_notes_html(T)}"""
         (OUT / "cat" / f'{cat["id"]}.html').write_text(
             page(cat["labels"]["en"], body, "../", canonical_rel=f'cat/{cat["id"]}.html'),
             encoding="utf-8")
         made += 1
     return made
+
+
+
+def _atc_notes_html(T: dict, *, with_status: bool = True) -> str:
+    """v0.10.0 P1-1：ATC/大类页把 3–4 条 notice 合成 1 条主提示 + details 折叠。"""
+    main = (f'<div class="notice" data-i18n="atc.names_source_note">'
+            f'{esc(T["atc.names_source_note"])}</div>')
+    extra = []
+    if with_status:
+        extra.append(f'<div class="notice" data-i18n="atc.status_note">{esc(T["atc.status_note"])}</div>')
+    extra.append(f'<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>')
+    extra.append(f'<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>')
+    return (main + '<details class="atc-notes"><summary data-i18n="atc.more_notes">'
+            'Notes &amp; licences</summary>' + "".join(extra) + '</details>')
 
 
 def _atc_card_inline(code: str) -> str:
@@ -9508,15 +9648,14 @@ def build_atc_index() -> None:
         for cat in CONSUMER_CATEGORIES)
     body = f"""<h1 data-i18n="atc.browse_title">{esc(T["atc.browse_title"])}</h1>
 <div data-i18n="atc.browse_intro">{esc(T["atc.browse_intro"])}</div>
-<h2 data-i18n="atc.browse_title">{esc(T["atc.browse_title"])}</h2>
+<h2 data-i18n="atc.all_classes">{esc(T["atc.all_classes"])}</h2>
 <div class="atcgrid">{l1_html}</div>
 <h2 data-i18n="cat.browse_title">{esc(T["cat.browse_title"])}</h2>
 <div data-i18n="cat.intro">{esc(T["cat.intro"])}</div>
 <div class="catgrid">{cat_html}</div>
 <p class="sub" data-i18n="cat.disclaimer">{esc(T["cat.disclaimer"])}</p>
 <div class="notice" data-i18n="atc.names_source_note">{esc(T["atc.names_source_note"])}</div>
-<div class="notice" data-i18n="atc.ai_note">{esc(T["atc.ai_note"])}</div>
-<div class="notice" data-i18n="atc.source_note">{esc(T["atc.source_note"])}</div>"""
+{_atc_notes_html(T, with_status=False)}"""
     (OUT / "atc.html").write_text(
         page("ATC classes & categories", body, "", canonical_rel="atc.html",
              nav_coverage=True),
@@ -9548,52 +9687,63 @@ def build_categories_json(db: sqlite3.Connection) -> None:
                    ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
-def _home_cat_chips(lang: str, prefix: str) -> str:
-    """v0.8.2 task-114：chips 四语内联块（根页/副本都随 UI 语言切换，不再固定英文）。"""
+def _home_cat_chips(lang: str, prefix: str, limit: int = 8) -> str:
+    """v0.10.0：首页只放 8 个高频大类 chip（2×4）+ 「全部类别」链接；其余在导航面板。"""
     langs = ("en", "es", "zh", "zh-Hant")
     parts = []
-    for cat in CONSUMER_CATEGORIES:
+    for cat in CONSUMER_CATEGORIES[:limit]:
         spans = "".join(
             f'<span class="lang-block" data-lang-block="{l}" data-lang-inline="1">'
             f'{esc(cat["labels"][l])}</span>' for l in langs)
         parts.append(f'<a class="catchip" href="{prefix}cat/{cat["id"]}.html">{spans}</a>')
+    parts.append(f'<a class="catchip catchip-all" href="{prefix}atc.html" '
+                 f'data-i18n="cat.all_link">All categories →</a>')
     return "".join(parts)
 
 
 def build_404() -> None:
-    """404 页：GitHub Pages 在路径不存在时返回它。
+    """v0.10.0 P1-8：404 页补统一壳（skip-link + 5 项导航 + 语言切换 + 页脚 + 移动底栏）。
 
-    404 会出现在任意子路径下，相对资源路径会解析错，所以这一页不引用
-    assets/、链接全用绝对地址。
+    404 会出现在任意子路径下，所有链接用绝对 URL（SITE_URL），不引用相对 assets。
     """
+    t = I18N["en"]
+    sw = "".join(f'<a href="{SITE_URL}?lang={code}">{label}</a>' for code, label, _ in LANGS)
+    nav = (f'<nav class="sn" data-shell="1"><a href="{SITE_URL}">{esc(t["nav.search"])}</a>'
+           f'<a href="{SITE_URL}atc.html">{esc(t["nav.atc"])}</a>'
+           f'<a href="{SITE_URL}coverage.html">{esc(t["nav.coverage"])}</a>'
+           f'<a href="{SITE_URL}about.html">{esc(t["nav.about"])}</a></nav>')
+    tab = (f'<nav class="tabbar" data-shell="1" aria-label="Sections">'
+           f'<a href="{SITE_URL}">{esc(t["tab.search"])}</a>'
+           f'<a href="{SITE_URL}atc.html">{esc(t["tab.categories"])}</a>'
+           f'<a href="{SITE_URL}coverage.html">{esc(t["tab.coverage"])}</a>'
+           f'<a href="{SITE_URL}about.html">{esc(t["tab.about"])}</a></nav>')
     html = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Page not found · Medicine Brand Cross-Reference</title>
+<link rel="stylesheet" href="{SITE_URL}assets/style.css?v={BUILD_V}">
+</head><body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+<header class="hdr-shell"><div class="wrap">
+  <a class="logo" href="{SITE_URL}">Medicine Brand Cross-Reference</a>
+  {nav}<span class="langs">{sw}</span>
+</div></header>
+<main id="main"><div class="wrap">
+<h1 data-i18n="notfound.title">{esc(t["notfound.title"])}</h1>
+<p data-i18n="notfound.p1">{esc(t["notfound.p1"])}</p>
+<p data-i18n="notfound.p2">{esc(t["notfound.p2"])}</p>
+<p class="sub links"><a href="{SITE_URL}" data-i18n="notfound.search">{esc(t["notfound.search"])}</a>
+<a href="{SITE_URL}about.html" data-i18n="notfound.about">{esc(t["notfound.about"])}</a>
+<a href="{SITE_URL}confused.html" data-i18n="notfound.confused">{esc(t["notfound.confused"])}</a>
+<a href="{SITE_URL}whats-new.html" data-i18n="notfound.whatsnew">{esc(t["notfound.whatsnew"])}</a></p>
+<p class="sub" style="margin-top:24px" data-i18n-html="notfound.report">{t["notfound.report"]}</p>
+</div></main>
+<footer><div class="wrap"><span data-i18n="footer">{esc(t["footer"])}</span></div></footer>
+{tab}
 <script src="{SITE_URL}assets/i18n.js?v={BUILD_V}"></script>
-<style>
-:root{{color-scheme:light dark}}
-body{{margin:0;font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;
-  background:#f6f7f5;color:#17201c}}
-main{{max-width:640px;margin:12vh auto;padding:0 24px}}
-h1{{font-size:22px;margin:0 0 10px}}
-p{{color:#3d4a43;margin:8px 0}}
-.links{{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap}}
-a{{color:#0b6b53}}
-</style></head><body><main>
-<h1 data-i18n="notfound.title">Page not found</h1>
-<p data-i18n="notfound.p1">This address has no page. It may be an old link, a typo, or a renamed entry.</p>
-<p data-i18n="notfound.p2">Go back to the home page and type a medicine name (brand, generic or nickname).</p>
-<p class="links"><a href="{SITE_URL}" data-i18n="notfound.search">Search</a>
-<a href="{SITE_URL}about.html" data-i18n="notfound.about">About</a>
-<a href="{SITE_URL}confused.html" data-i18n="notfound.confused">Confused names</a>
-<a href="{SITE_URL}whats-new.html" data-i18n="notfound.whatsnew">What's new</a></p>
-<p style="margin-top:28px;font-size:13px;color:#7a857e" data-i18n-html="notfound.report">If an internal link is broken, tell us on
-<a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a>.</p>
-</main></body></html>"""
+</body></html>"""
     (OUT / "404.html").write_text(html, encoding="utf-8")
-
 
 def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cover) -> None:
     """v0.9.2 task-23：派生层数据包（聚合/覆盖/成分清单），不导出受限来源原始记录。"""
@@ -10046,7 +10196,10 @@ def main() -> None:
     (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
     # v0.9.8 task-13：长尾页（121k）用 boot.js 注入与顶层页同一份壳；顶层页已有
     # [data-shell] 直接跳过（幂等）。模板里 __R__ 是站点根前缀占位。
-    shell_nav_js = json.dumps(_shell_nav_html("__R__"))
+    shell_nav_js = json.dumps(_shell_nav_html("__R__")
+                               + _shell_right("__R__", "".join(
+                                   f'<a data-lang="{code}" href="?lang={code}">{label}</a>'
+                                   for code, label, _ in LANGS)))
     shell_tab_js = json.dumps(_shell_tabbar("__R__"))
     (OUT / "assets" / "boot.js").write_text(
         "var s=document.currentScript;"
@@ -10235,8 +10388,15 @@ def main() -> None:
       opts.forEach(function(o){ selC.appendChild(o); });
     }
     document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = window.T(el.dataset.ph); });
-    document.querySelectorAll('.langs a').forEach(function(a){
-      a.classList.toggle('on', a.dataset.lang === window.LANG);
+    // v0.10.0: language label + aria-current follow the active language (dropdown + mobile menu)
+    var LBL = {en:'EN', es:'ES', zh:'\u4e2d\u6587', 'zh-Hant':'\u7e41'};
+    document.querySelectorAll('.langs a, .lang-menu a').forEach(function(a){
+      var on = a.dataset.lang === window.LANG;
+      a.classList.toggle('on', on);
+      if(on){ a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+    });
+    document.querySelectorAll('.langdd .lname').forEach(function(n){
+      if(LBL[window.LANG]) n.textContent = LBL[window.LANG];
     });
     // v0.8.2 task-120：语言确定后再渲染 ATC/组合页成分名（避免 defer 早于 ?lang 解析）
     if(window.renderBilingualNames) window.renderBilingualNames();
