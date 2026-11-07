@@ -9,11 +9,7 @@ const identityEl = document.getElementById('identity');
 const H1_DEFAULT = h1El ? (h1El.textContent || '').trim() : '';
 const TITLE_DEFAULT = document.title;
 // v0.9.1 P0-3：结果计数/加载/零结果固定在搜索框下方（移动端不滚过引导卡）。
-const searchWrapEl = document.querySelector('.searchwrap');
-if(searchWrapEl && meta){
-  searchWrapEl.insertAdjacentElement('afterend', meta);
-  meta.classList.add('search-status');
-}
+// v0.10.0 P1-13: #meta already sits below the search box in static HTML (no JS move => no CLS)
 const acEl = document.getElementById('ac');
 const ctryLabel = document.getElementById('ctrylabel');
 // v0.6.3 U1：首屏引导关闭记忆（localStorage flag；隐私模式失败也不影响关闭）
@@ -896,7 +892,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1794000962（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=3161699148（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -949,7 +945,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1794000962').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=3161699148').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1504,6 +1500,14 @@ function render(){
   }
   // 主结果：按成分聚合；同成分多品牌折叠（默认显示前 2 个品牌），
   // 超过 RES_PAGE 行时用「加载更多」分页，不再一刀切 40 行/80 行。
+  // v0.10.0 P1-14：大表密度切换（紧凑/舒适，localStorage 记忆）
+  try{ if(localStorage.getItem('dsh.density')==='compact') document.body.classList.add('density-compact'); }catch(e){}
+  document.addEventListener('click', function(ev){
+    var b = ev.target && ev.target.closest ? ev.target.closest('[data-density]') : null;
+    if(!b) return;
+    var on = document.body.classList.toggle('density-compact');
+    try{ localStorage.setItem('dsh.density', on ? 'compact' : 'comfy'); }catch(e){}
+  });
   let resHTML = '';
   if(!countryMiss && display.length){
     RES_GROUPS = groupByIngredient(display);
@@ -1511,6 +1515,7 @@ function render(){
     resHTML = `<div class="restools">`
       + `<button type="button" class="linkbtn" data-export="copy">${esc(T2('res.copy'))}</button>`
       + `<button type="button" class="linkbtn" data-export="csv">${esc(T2('res.csv'))}</button>`
+      + `<button type="button" class="linkbtn" data-density="toggle">${esc(T2('res.density'))}</button>`
       + `<span class="exportnote" id="exportnote" role="status" aria-live="polite"></span>`
       + `</div>`
       + `<div id="reswrap">${RES_MODE === 'flat' ? flatTableHTML(T2) : resultsTableHTML(T2)}</div>`;
@@ -1653,7 +1658,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=1794000962，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=3161699148，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1697,10 +1702,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1794000962 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=3161699148 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1794000962').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=3161699148').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1710,7 +1715,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1794000962').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=3161699148').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
