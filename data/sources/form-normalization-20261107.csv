@@ -1,0 +1,877 @@
+﻿raw,count,normalized,note
+tablet,181973,tablet,已是标准类目（原值保留）
+injection,71443,injection,已是标准类目（原值保留）
+liquid,70190,liquid,已是标准类目（原值保留）
+capsule,55070,capsule,已是标准类目（原值保留）
+topical,43269,topical,已是标准类目（原值保留）
+(NULL),13935,unknown,"空值（NULL）：来源没有剂型列（HK 13,935 行）→ unknown；建议保持 NULL，不写 unknown"
+powder,10409,powder,已是标准类目（原值保留）
+pellet,7337,pellet,已是标准类目（原值保留）
+unknown,5872,unknown,占位符/空值（'unknown'）→ unknown
+inhalation,3096,inhalation,已是标准类目（原值保留）
+stick,2491,stick,已是标准类目（原值保留）
+kit,2247,kit,已是标准类目（原值保留）
+suppository,1729,suppository,已是标准类目（原值保留）
+gas,986,gas,已是标准类目（原值保留）
+cloth,602,cloth,已是标准类目（原值保留）
+soap,416,soap,已是标准类目（原值保留）
+pill,390,pill,已是标准类目（原值保留）
+swab,370,swab,已是标准类目（原值保留）
+mouthwash,328,mouthwash,已是标准类目（原值保留）
+"gum, chewing",320,gum,"同义写法收敛：gum, chewing → gum"
+globule,290,pill,同义写法收敛：globule → pill
+oil,278,oil,已是标准类目（原值保留）
+other,255,other,无法归类：未命中任何剂型关键词 → other
+rinse,194,mouthwash,同义写法收敛：rinse → mouthwash
+jelly,193,gel,同义写法收敛：jelly → gel
+lipstick,149,stick,自由文本：按关键词归类（en:pencil/stick）
+nasal,147,nasal,已是标准类目（原值保留）
+inhalant,106,inhalation,同义写法收敛：inhalant → inhalation
+pastille,105,pill,自由文本：按关键词归类（en:lozenge/pastille）
+salve,83,ointment,同义写法收敛：salve → ointment
+radiofarmaco,72,radiopharmaceutical,同义写法收敛：radiofarmaco → radiopharmaceutical
+soap bar,57,soap,同义写法收敛：soap bar → soap
+implant,57,implant,已是标准类目（原值保留）
+plaster,54,patch,同义写法收敛：plaster → patch
+cord,51,other,无法归类：未命中任何剂型关键词 → other
+tincture,50,liquid,自由文本：按关键词归类（en:液体）
+sponge,43,cloth,自由文本：按关键词归类（en:敷料/纱布）
+tea (herbal),39,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+strip,39,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+film,37,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+dialisis peritoneal,36,liquid,自由文本：按关键词归类（en:液体）
+wipe,35,cloth,自由文本：按关键词归类（en:敷料/纱布）
+chlorhexidine gluconate 0.2% mouthwash,32,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+null,29,unknown,占位符/空值（'null'）→ unknown
+irrigant,28,liquid,自由文本：按关键词归类（en:液体）
+system,26,device,自由文本：按关键词归类（en:ring/insert/pump）
+mouthwash/gargle,26,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+"film, soluble",26,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+film (soluble),26,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+dressing,26,cloth,自由文本：按关键词归类（en:敷料/纱布）
+clotrimazole 500mg pessaries,26,pessary,自由文本：按关键词归类（en:pessar*）
+chicle,26,gum,同义写法收敛：chicle → gum
+amorolfine 5% medicated nail lacquer,25,topical,自由文本：按关键词归类（en:topical）
+pad,23,cloth,自由文本：按关键词归类（en:敷料/纱布）
+nitrous oxide 50% / oxygen 50%,22,gas,自由文本：按关键词归类（en:气体）
+barniz unas,21,topical,自由文本：按关键词归类（es:barniz de uñas）
+aposito,21,cloth,自由文本：按关键词归类（es:apósito）
+semisolido vaginal,19,topical,自由文本：按关键词归类（es:semisólido）
+semisolido rectal,19,topical,自由文本：按关键词归类（es:semisólido）
+pulverizacion bucal,19,inhalation,自由文本：按关键词归类（en:inhalation）
+nicotine 4mg medicated chewing gum sugar free,19,gum,自由文本：按关键词归类（en:chewing gum）
+nicotine 2mg medicated chewing gum sugar free,19,gum,自由文本：按关键词归类（en:chewing gum）
+insert,19,device,同义写法收敛：insert → device
+diclofenac 100mg suppositories,19,suppository,自由文本：按关键词归类（en:suppositor*）
+tioconazole 283mg/ml medicated nail lacquer,17,topical,自由文本：按关键词归类（en:topical）
+"film, extended release",17,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+mesalazine 1g suppositories,16,suppository,自由文本：按关键词归类（en:suppositor*）
+implante,16,implant,自由文本：按关键词归类（es:implante）
+dispositivo vaginal,16,device,自由文本：按关键词归类（es:dispositivo）
+glycerol 4g suppositories,15,suppository,自由文本：按关键词归类（en:suppositor*）
+lidocaine 700mg medicated plasters,14,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+indometacin 100mg suppositories,14,suppository,自由文本：按关键词归类（en:suppositor*）
+hemofiltracion,14,liquid,自由文本：按关键词归类（en:液体）
+cancelado,14,unknown,占位符/空值（'cancelado'）→ unknown
+wafer,13,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+pholcodine 5mg/5ml linctus sugar free,13,liquid,自由文本：按关键词归类（en:液体）
+paracetamol 500mg suppositories,13,suppository,自由文本：按关键词归类（en:suppositor*）
+liniment,13,liquid,自由文本：按关键词归类（en:液体）
+disc,13,other,无法归类：未命中任何剂型关键词 → other
+"bar, chewable",13,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+cavity dressing 2g,12,cloth,自由文本：按关键词归类（en:敷料/纱布）
+adhesivo tisular,12,other,无法归类：未命中任何剂型关键词 → other
+desmopressin 120microgram oral lyophilisates sugar free,11,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+codeine 15mg/5ml linctus sugar free,11,liquid,自由文本：按关键词归类（en:液体）
+pholcodine 10mg/5ml linctus strong sugar free,10,liquid,自由文本：按关键词归类（en:液体）
+paracetamol 1g suppositories,10,suppository,自由文本：按关键词归类（en:suppositor*）
+olanzapine 5mg oral lyophilisates sugar free,10,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 10mg oral lyophilisates sugar free,10,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+metered-dose pump,10,device,自由文本：按关键词归类（en:ring/insert/pump）
+gum,10,gum,已是标准类目（原值保留）
+estradiol 10microgram pessaries,10,pessary,自由文本：按关键词归类（en:pessar*）
+"drug delivery system, transdermal",10,device,自由文本：按关键词归类（en:delivery system）
+dispersion,10,liquid,自由文本：按关键词归类（en:液体）
+desmopressin 240microgram oral lyophilisates sugar free,10,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+betamethasone valerate 0.1% scalp application,10,topical,自由文本：按关键词归类（en:topical）
+benzydamine 0.15% mouthwash sugar free,10,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+soya oil 84.75% bath oil,9,liquid,自由文本：按关键词归类（en:液体）
+soya oil 82.95% / lauromacrogols 15% bath oil,9,liquid,自由文本：按关键词归类（en:液体）
+sodium fluoride 0.05% mouthwash sugar free,9,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+salicylic acid 40% medicated plasters,9,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+glycerol 2g suppositories,9,suppository,自由文本：按关键词归类（en:suppositor*）
+glycerol 1g suppositories,9,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 15mg/5ml linctus,9,liquid,自由文本：按关键词归类（en:液体）
+clobetasol 0.05% scalp application,9,topical,自由文本：按关键词归类（en:topical）
+carbon dioxide 5% / oxygen 95%,9,gas,自由文本：按关键词归类（en:气体）
+bisacodyl 10mg suppositories,9,suppository,自由文本：按关键词归类（en:suppositor*）
+tape,8,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+rizatriptan 10mg oral lyophilisates sugar free,8,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+ring,8,device,同义写法收敛：ring → device
+prednisolone sodium phosphate 5mg suppositories,8,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 250mg suppositories,8,suppository,自由文本：按关键词归类（en:suppositor*）
+ondansetron 4mg oral lyophilisates sugar free,8,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 20mg oral lyophilisates sugar free,8,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 15mg oral lyophilisates sugar free,8,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+levonorgestrel 20micrograms/24hours intrauterine device,8,device,自由文本：按关键词归类（en:IUD/ring）
+intrauterine device,8,device,自由文本：按关键词归类（en:IUD/ring）
+"insert, extended release",8,device,自由文本：按关键词归类（en:ring/insert/pump）
+etonogestrel 68mg implant,8,implant,自由文本：按关键词归类（en:implant）
+cinchocaine 5mg / hydrocortisone 5mg suppositories,8,suppository,自由文本：按关键词归类（en:suppositor*）
+betamethasone dipropionate 0.05% / salicylic acid 2% scalp application,8,topical,自由文本：按关键词归类（en:topical）
+benzyl benzoate 25% application,8,topical,自由文本：按关键词归类（en:topical）
+,8,unknown,占位符/空值（''）→ unknown
+pholcodine 5mg/5ml linctus,7,liquid,自由文本：按关键词归类（en:液体）
+paracetamol 125mg suppositories,7,suppository,自由文本：按关键词归类（en:suppositor*）
+industrial methylated spirit 95%,7,liquid,自由文本：按关键词归类（en:液体）
+helium 79% / oxygen 21%,7,gas,自由文本：按关键词归类（en:气体）
+ethinylestradiol 2.7mg / etonogestrel 11.7mg vaginal delivery system,7,device,自由文本：按关键词归类（en:delivery system）
+estradiol 25microgram pessaries,7,pessary,自由文本：按关键词归类（en:pessar*）
+salicylic acid 16.7% / lactic acid 16.7% paint,6,liquid,自由文本：按关键词归类（en:液体）
+preparado irrigacion vesical,6,liquid,自由文本：按关键词归类（en:液体）
+piece (chewable),6,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+mesalazine 500mg suppositories,6,suppository,自由文本：按关键词归类（en:suppositor*）
+generic renapro shot 60ml bottles,6,other,无法归类：未命中任何剂型关键词 → other
+floss,6,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+chlorhexidine gluconate 0.06% / sodium fluoride 0.05% mouthwash sugar free,6,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+ring (slow-release),5,device,自由文本：按关键词归类（en:ring/insert/pump）
+perlas,5,pill,自由文本：按关键词归类（es:perlas/trociscos）
+paracetamol 120mg suppositories,5,suppository,自由文本：按关键词归类（en:suppositor*）
+oxygen cylinders 1360litres,5,gas,自由文本：按关键词归类（en:气体）
+morphine sulfate 30mg suppositories,5,suppository,自由文本：按关键词归类（en:suppositor*）
+methyl salicylate 25% liniment,5,liquid,自由文本：按关键词归类（en:液体）
+generic promin low protein snax 25g sachets,5,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic promin low protein imitation rice pudding 69g sachets,5,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic promin low protein dessert 36.5g sachets,5,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic promin low protein 40g breakfast bars,5,other,无法归类：未命中任何剂型关键词 → other
+estriol 500microgram pessaries,5,pessary,自由文本：按关键词归类（en:pessar*）
+dispositivo intrauterino,5,device,自由文本：按关键词归类（es:dispositivo）
+clotrimazole 100mg pessaries,5,pessary,自由文本：按关键词归类（en:pessar*）
+aspirin 300mg suppositories,5,suppository,自由文本：按关键词归类（en:suppositor*）
+testosterone 200mg implant,4,implant,自由文本：按关键词归类（en:implant）
+testosterone 100mg implant,4,implant,自由文本：按关键词归类（en:implant）
+pholcodine 10mg/5ml linctus strong,4,liquid,自由文本：按关键词归类（en:液体）
+permethrin 1% scalp application,4,topical,自由文本：按关键词归类（en:topical）
+paracetamol 240mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+ovule,4,pessary,自由文本：按关键词归类（en/es:ovule）
+ondansetron 8mg oral lyophilisates sugar free,4,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+morphine sulfate 20mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine sulfate 15mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+metronidazole 500mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+metronidazole 1g suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+mesalazine 250mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+laminilla,4,other,无法归类：未命中任何剂型关键词 → other
+industrial methylated spirit 70%,4,liquid,自由文本：按关键词归类（en:液体）
+generic promin low protein sausage mix 30g sachets,4,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic phlexy-10 drink mix 20g sachets,4,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic k.yo semi-solid food 100g pots,4,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic hydrafruit pre-thickened fruit water with sweetener 125ml,4,other,无法归类：未命中任何剂型关键词 → other
+generic hydrafruit pre-thickened fruit water with sugar 125ml,4,other,无法归类：未命中任何剂型关键词 → other
+generic altrashot 120ml bottles,4,other,无法归类：未命中任何剂型关键词 → other
+fludroxycortide 4micrograms/square cm tape 7.5cm,4,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+ethanol 90% including duty,4,liquid,自由文本：按关键词归类（en:液体）
+estradiol 50mg implant,4,implant,自由文本：按关键词归类（en:implant）
+econazole 150mg pessaries,4,pessary,自由文本：按关键词归类（en:pessar*）
+douche,4,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+diclofenac 50mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+crystal,4,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+chlorhexidine gluconate 0.2% mouthwash sugar free,4,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+carbamazepine 250mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+carbamazepine 125mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+bismuth subgallate 300mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+aspirin 150mg suppositories,4,suppository,自由文本：按关键词归类（en:suppositor*）
+amyl nitrite vitrellae 0.2ml,4,other,无法归类：未命中任何剂型关键词 → other
+water for irrigation 500ml bottles,3,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 1litre bottles,3,liquid,自由文本：按关键词归类（en:液体）
+trociscos,3,pill,自由文本：按关键词归类（es:perlas/trociscos）
+terpin 32.5mg/5ml / codeine 16mg/5ml linctus,3,liquid,自由文本：按关键词归类（en:液体）
+silver nitrate 95% caustic pencils,3,stick,自由文本：按关键词归类（en:pencil/stick）
+sildenafil 50mg orodispersible films sugar free,3,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+selegiline 1.25mg oral lyophilisates sugar free,3,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+seed,3,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+salicylic acid 12% collodion,3,liquid,自由文本：按关键词归类（en:液体）
+progesterone 200 mg pessary,3,pessary,自由文本：按关键词归类（en:pessar*）
+preparado uretral,3,other,无法归类：未命中任何剂型关键词 → other
+pentazocine 50mg suppositories,3,suppository,自由文本：按关键词归类（en:suppositor*）
+package,3,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+oxygen cylinders 300litres,3,gas,自由文本：按关键词归类（en:气体）
+oxygen composite cylinders 1360litres with integral headset,3,gas,自由文本：按关键词归类（en:气体）
+oxygen 28% constant performance masks,3,gas,自由文本：按关键词归类（en:气体）
+"nystatin 100,000unit pessaries",3,pessary,自由文本：按关键词归类（en:pessar*）
+morphine sulfate 10mg suppositories,3,suppository,自由文本：按关键词归类（en:suppositor*）
+methadone 2mg/5ml linctus,3,liquid,自由文本：按关键词归类（en:液体）
+meloxicam 15mg suppositories,3,suppository,自由文本：按关键词归类（en:suppositor*）
+insert (extended-release),3,device,自由文本：按关键词归类（en:ring/insert/pump）
+generic promin low protein burger mix 62g sachets,3,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic glytactin complete 15 81g bars,3,other,无法归类：未命中任何剂型关键词 → other
+estradiol 7.5micrograms/24hours vaginal delivery system,3,device,自由文本：按关键词归类（en:delivery system）
+estradiol 25mg implant,3,implant,自由文本：按关键词归类（en:implant）
+estradiol 100mg implant,3,implant,自由文本：按关键词归类（en:implant）
+diclofenac 0.074% mouthwash sugar free,3,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+copper tetramibi tetrafluoroborate 1mg kit for radiopharmaceutical preparation,3,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+colirio,3,drops,自由文本：按关键词归类（es:colirio/gotas）
+clotrimazole 200mg pessaries,3,pessary,自由文本：按关键词归类（en:pessar*）
+zinc oxide 283.5mg / lidocaine 13.2mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+sulfasalazine 500mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+sodium oxidronate 3mg kit for radiopharmaceutical preparation,2,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+sodium dihydrogen phosphate dihydrate 680mg / sodium bicarbonate 500mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+silver nitrate 75% caustic pencils,2,stick,自由文本：按关键词归类（en:pencil/stick）
+silver nitrate 75% caustic applicators,2,stick,自由文本：按关键词归类（en:pencil/stick）
+silver nitrate 40% caustic pencils,2,stick,自由文本：按关键词归类（en:pencil/stick）
+salicylic acid 16.7% / lactic acid 15% paint,2,liquid,自由文本：按关键词归类（en:液体）
+route of administration oral,2,unknown,占位符/空值（'route of administration oral'）→ unknown
+rizatriptan 10 mg wafer,2,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+progesterone 400mg pessaries,2,pessary,自由文本：按关键词归类（en:pessar*）
+progesterone 100 mg pessary,2,pessary,自由文本：按关键词归类（en:pessar*）
+prochlorperazine 5mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+prochlorperazine 25mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+pessary,2,pessary,已是标准类目（原值保留）
+paraffin gauze dressing bp light loading 90-130g per square metre 10cm x 10cm,2,cloth,自由文本：按关键词归类（en:敷料/纱布）
+paint,2,liquid,自由文本：按关键词归类（en:液体）
+oxygen cylinders 680litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 430litres with integral headset,2,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 430litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 340litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 2300litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 170litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 10600litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen composite cylinders 2122litres with integral headset,2,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 3400litres,2,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 1360litres,2,gas,自由文本：按关键词归类（en:气体）
+ondansetron 4mg orodispersible films sugar free,2,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+ondansetron 16mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+nitrous oxide cylinders 900litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide cylinders 9000litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide cylinders 3600litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide cylinders 1800litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide cylinders 18000litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 580litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 500litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 5000litres,2,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 2000litres,2,gas,自由文本：按关键词归类（en:气体）
+naproxen 500mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+menthol 8mg/g / eucalyptus oil 6mg/g pastilles,2,pill,自由文本：按关键词归类（en:lozenge/pastille）
+loperamide 2mg oral lyophilisates sugar free,2,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+leaf,2,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+laminilla dispersable,2,other,无法归类：未命中任何剂型关键词 → other
+ketoprofen 100mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+kaolin poultice 100g pouches,2,cloth,自由文本：按关键词归类（en:敷料/纱布）
+jam,2,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+hexetidine 0.1% mouthwash sugar free,2,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+helium cylinders 1200litres,2,gas,自由文本：按关键词归类（en:气体）
+helium 79% / oxygen 21% cylinders 1200litres,2,gas,自由文本：按关键词归类（en:气体）
+gozetotide 25microgram kit for radiopharmaceutical preparation,2,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+generic ketoclassic 3:1 breakfast 47g sachets,2,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+gemeprost 1mg pessaries,2,pessary,自由文本：按关键词归类（en:pessar*）
+fibrinogen 5.5mg/square cm / thrombin 2units/square cm sealant matrix 4.8cm x 4.8cm,2,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+fentanyl 40micrograms/dose transdermal system,2,device,自由文本：按关键词归类（en:ring/insert/pump）
+exametazime 500microgram kit for radiopharmaceutical preparation,2,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+estradiol 10 microgram modified release pessary,2,pessary,自由文本：按关键词归类（en:pessar*）
+domperidone 30mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+dinoprostone 10mg vaginal device,2,device,自由文本：按关键词归类（en:IUD/ring）
+diclofenac 140mg medicated plasters,2,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+diazepam 10mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+desmopressin 60microgram oral lyophilisates sugar free,2,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+chlorpromazine 100mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 500mg/5ml mixture bp 2000,2,liquid,自由文本：按关键词归类（en:液体）
+cetylpyridinium chloride 1.28mg/g / menthol 330micrograms/g pastilles sugar free,2,pill,自由文本：按关键词归类（en:lozenge/pastille）
+cellular sheet,2,cloth,自由文本：按关键词归类（en:敷料/纱布）
+carbon dioxide cylinders 450litres,2,gas,自由文本：按关键词归类（en:气体）
+carbon dioxide cylinders 1800litres,2,gas,自由文本：按关键词归类（en:气体）
+carbon dioxide 5% / air 95%,2,gas,自由文本：按关键词归类（en:气体）
+carbon dioxide 20% / oxygen 80%,2,gas,自由文本：按关键词归类（en:气体）
+carbon dioxide 10% / oxygen 90%,2,gas,自由文本：按关键词归类（en:气体）
+cantharidin 0.7% collodion,2,liquid,自由文本：按关键词归类（en:液体）
+buprenorphine 8mg oral lyophilisates sugar free,2,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+budesonide 4mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+bisacodyl 5mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+betiatide 1mg kit for radiopharmaceutical preparation,2,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+betamethasone valerate 2.25mg medicated plasters,2,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+alprostadil 500microgram urethral sticks,2,stick,自由文本：按关键词归类（en:pencil/stick）
+alprostadil 250microgram urethral sticks,2,stick,自由文本：按关键词归类（en:pencil/stick）
+alprostadil 1mg urethral sticks,2,stick,自由文本：按关键词归类（en:pencil/stick）
+allantoin 10.25mg / lidocaine 10.25mg suppositories,2,suppository,自由文本：按关键词归类（en:suppositor*）
+albumin human nano sized colloid 500microgram kit for radiopharmaceutical preparation,2,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+air cylinders 640litres,2,gas,自由文本：按关键词归类（en:气体）
+air cylinders 5200litres,2,gas,自由文本：按关键词归类（en:气体）
+air cylinders 3200litres,2,gas,自由文本：按关键词归类（en:气体）
+zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+zinc oxide 15% and ichthammol 1% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+water for irrigation 45ml unit dose,1,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 45ml bottles,1,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 3litre bags,1,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 2litre bottles,1,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 1litre bags,1,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 150ml bottles,1,liquid,自由文本：按关键词归类（en:液体）
+water for irrigation 100ml sachets,1,liquid,自由文本：按关键词归类（en:液体）
+water for gastroenteral feeds 1litre bags,1,liquid,自由文本：按关键词归类（en:液体）
+volulyte 6%,1,other,无法归类：未命中任何剂型关键词 → other
+vancomycin 20mg pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+urea 50% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+urea 5% scalp application,1,topical,自由文本：按关键词归类（en:topical）
+urea 40% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+urea 40% / starch 7.2% / zinc oxide 7.2% / salicylic acid 0.6% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+urea 20% / starch 9.6% / zinc oxide 9.6% / salicylic acid 0.8% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+urea 20% / salicylic acid 30% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+tranexamic acid 5% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+tranexamic acid 1% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+tilmanocept 50microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+thyme 59.5mg pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+theophylline 300mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+tetrofosmin 230microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+tetrofosmin (bis)tetrafluoroborate 230microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+testosterone 2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+tar 2.3% bath additive,1,liquid,自由文本：按关键词归类（en:液体）
+tambocor cr 200 mg,1,other,无法归类：未命中任何剂型关键词 → other
+tambocor cr 100 mg,1,other,无法归类：未命中任何剂型关键词 → other
+tacrolimus 2microgram suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+tacrolimus 2mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+tacrolimus 0.005% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+tacrolimus 0.0001% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+sulfur 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+succimer 1mg kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+soya oil 83.45% / lauromacrogols 15% bath oil,1,liquid,自由文本：按关键词归类（en:液体）
+soya oil 83.35% bath additive,1,liquid,自由文本：按关键词归类（en:液体）
+sodium valproate 300mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+sodium valproate 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+sodium pyrophosphate decahydrate 20mg kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+sodium fluoride 2% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+sodium fluoride 1.1% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+sodium fluoride 0.2% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+sodium fluoride 0.11% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+sodium dihydrogen phosphate dihydrate 1.69g / sodium bicarbonate 1.08g suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+sodium dihydrogen phosphate anhydrous 680mg / sodium bicarbonate 500mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+sodium dihydrogen phosphate anhydrous 340mg / sodium bicarbonate 250mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+sodium bicarbonate 0.625% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+sistema de liberacion,1,device,自由文本：按关键词归类（en:delivery system）
+silver nitrate 95% caustic applicators,1,stick,自由文本：按关键词归类（en:pencil/stick）
+sildenafil 75mg orodispersible films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+sildenafil 25mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+sildenafil 100mg orodispersible films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+shark liver oil 3% / yeast cell extract 1% suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+salicylic acid 8% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 75% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 70% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 60% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 60% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 60% in hydrous wool fat,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 6% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 6% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 52% / trichloroacetic acid 21% in glycerol,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 50% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 5% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 5% / lactic acid 5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 40% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 40% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 4% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 4% / sulfur 4% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 4% / phenol 2.5% / pyrogallol 2.5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 30% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 3% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 3% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 3% / sulfur 3% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 3% / lactic acid 3% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 3% / hydrous wool fat 25% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 26% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 25% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 24% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 20% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 20% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 20% in flexible collodion,1,liquid,自由文本：按关键词归类（en:液体）
+salicylic acid 2% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 2% in arachis oil,1,oil,自由文本：按关键词归类（en:oil）
+salicylic acid 2% / sulfur 4% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 2% / sulfur 2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 17% paint,1,liquid,自由文本：按关键词归类（en:液体）
+salicylic acid 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 15% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 10% medicated plasters,1,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+salicylic acid 10% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 10% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 1% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+salicylic acid 1% / starch 12% / zinc oxide 12% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+rimegepant 75mg oral lyophilisates sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+riluzole 50mg orodispersible films,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+resorcinol 50% in glycerol,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+pyrogallol 40% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+pyrogallol 20% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+pyrogallol 10% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+pulverizacion sublingual,1,inhalation,自由文本：按关键词归类（en:inhalation）
+pulmicort respules 500mcg/2ml,1,injection,自由文本：按关键词归类（en:injection）
+prueba alergia,1,diagnostic,自由文本：按关键词归类（en:诊断试剂）
+propylthiouracil 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+progesterone 200mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+progesterone 100mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+prasterone 6.5mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+povidone-iodine 200mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+povidone-iodine 10% paint,1,liquid,自由文本：按关键词归类（en:液体）
+povidone-iodine 1% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+poultice,1,cloth,自由文本：按关键词归类（en:敷料/纱布）
+podophyllum 50% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+podophyllum 40% in compound benzoin tincture,1,liquid,自由文本：按关键词归类（en:液体）
+podophyllum 25% in industrial methylated spirit,1,liquid,自由文本：按关键词归类（en:液体）
+podophyllum 25% in compound benzoin tincture,1,liquid,自由文本：按关键词归类（en:液体）
+podophyllum 20% in compound benzoin tincture,1,liquid,自由文本：按关键词归类（en:液体）
+podophyllum 10% in compound benzoin tincture,1,liquid,自由文本：按关键词归类（en:液体）
+piroxicam 20mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+pholcodine 0.12% pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+phenylephrine 5.4mg / tropicamide 0.28mg ophthalmic inserts preservative free,1,device,自由文本：按关键词归类（en:ring/insert/pump）
+phenol 0.71% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+pethidine 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+"pessary, compressed",1,pessary,自由文本：按关键词归类（en:pessar*）
+pentetic acid 20.8mg kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+pencil,1,stick,自由文本：按关键词归类（en:pencil/stick）
+pellet (dental),1,pellet,同义写法收敛：pellet (dental) → pellet
+pasta,1,cream,自由文本：按关键词归类（es:pasta）
+paraffin gauze dressing bp sterile normal loading 175-220g per square metre 10cm x 7m,1,cloth,自由文本：按关键词归类（en:敷料/纱布）
+paraffin gauze dressing bp sterile normal loading 175-220g per square metre 10cm x 40cm,1,cloth,自由文本：按关键词归类（en:敷料/纱布）
+paracetamol 80mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 60mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 30mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 25mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 20mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 15mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+paracetamol 10mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+pad; plaster,1,cloth,自由文本：按关键词归类（en:敷料/纱布）
+package; tea (herbal),1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+oxygen ventimask mk iv 28%,1,gas,自由文本：按关键词归类（en:气体）
+oxygen venticaire venturi mask 28%,1,gas,自由文本：按关键词归类（en:气体）
+oxygen intersurgical 010 mask 28%,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 740litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 7300litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 6800litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 600litres with integral headset,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 5700litres with integral headset,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 5700litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 5100litres with integral headset,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 490litres with integral headset,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 460litres with integral headset 2 and 4litres/minute flow rate,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 460litres with integral headset 0-15litres/minute flow rate,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 3400litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 2600litres with integral headset,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 2300litres with integral headset,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 2100litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 2000litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 1440litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen cylinders 1100litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 7200litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 6800litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 5800litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 2300litres,1,gas,自由文本：按关键词归类（en:气体）
+oxygen 95% / carbon dioxide 5% cylinders 10500litres,1,gas,自由文本：按关键词归类（en:气体）
+oxycodone pectinate 30mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+oxycodone hydrochloride 60mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+oxycodone hydrochloride 30mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+ondansetron 8mg orodispersible films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+ondansetron 8 mg wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+ondansetron 4 mg wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 5 mg wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 20 mg wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 15 mg wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+olanzapine 10 mg wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+oblea,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+"nystatin 100,000unit pastilles",1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+nonoxinol-9 6% pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+nonoxinol-9 5% pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+nitrous oxide cylinders 450litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 794litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 420litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 3970litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 290litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 2900litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 2730litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 2200litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 2120litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 210litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 14500litres,1,gas,自由文本：按关键词归类（en:气体）
+nitrous oxide 50% / oxygen 50% cylinders 10600litres,1,gas,自由文本：按关键词归类（en:气体）
+nitric oxide 800ppm cylinders 353litres,1,gas,自由文本：按关键词归类（en:气体）
+nitric oxide 800ppm cylinders 1963litres,1,gas,自由文本：按关键词归类（en:气体）
+nitric oxide 100ppm cylinders 353litres,1,gas,自由文本：按关键词归类（en:气体）
+nitric oxide 100ppm cylinders 1963litres,1,gas,自由文本：按关键词归类（en:气体）
+nicotinic acid 250mg,1,other,无法归类：未命中任何剂型关键词 → other
+nicotine 6mg medicated chewing gum sugar free,1,gum,自由文本：按关键词归类（en:chewing gum）
+nicotine 2.5mg orodispersible films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+mycophenolate mofetil 0.1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+morphine sulfate 750mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine sulfate 60mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine sulfate 5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine sulfate 50mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine sulfate 2.5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine sulfate 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine hydrochloride 30mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine hydrochloride 15mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+morphine hydrochloride 10mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+misoprostol 7micrograms/hour vaginal delivery system,1,device,自由文本：按关键词归类（en:delivery system）
+miscellaneous,1,other,无法归类：未命中任何剂型关键词 → other
+miconazole 100mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+metronidazole 200mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+methylene blue 50mg/5ml,1,other,无法归类：未命中任何剂型关键词 → other
+methyl salicylate 105mg / levomenthol 31.5mg medicated plasters,1,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+methoxsalen 1.2% bath additive,1,liquid,自由文本：按关键词归类（en:液体）
+methoxsalen 1% paint,1,liquid,自由文本：按关键词归类（en:液体）
+methoxsalen 0.15% paint,1,liquid,自由文本：按关键词归类（en:液体）
+methadone 60mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+methadone 40mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+methadone 30mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+methadone 30mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+methadone 15mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+methadone 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+methadone 100mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+mertiatide 200microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+menthol 16mg pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+menthol 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+menthol 0.5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+meloxicam 7.5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+medium chain triglycerides oral oil,1,oil,自由文本：按关键词归类（en:oil）
+meclozine 12.5mg pastilles sugar free,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+macrosalb 2mg kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+loratadine 10mg oral lyophilisates sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+loperamide 2mg oral lyophilisates_sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+liposomes,1,other,无法归类：未命中任何剂型关键词 → other
+"liner, dental",1,other,无法归类：未命中任何剂型关键词 → other
+lidocaine 70mg / tetracaine 70mg medicated plasters,1,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+lidocaine 1% / hydrocortisone 0.1% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+lidocaine 0.25% / aminoacridine 0.025% pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+lidocaine 0.2% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+levonorgestrel 52 mg intrauterine drug delivery system,1,device,自由文本：按关键词归类（en:IUD/ring）
+levonorgestrel 19.5mg intrauterine device,1,device,自由文本：按关键词归类（en:IUD/ring）
+levonorgestrel 19.5 mg intrauterine drug delivery system,1,device,自由文本：按关键词归类（en:IUD/ring）
+levonorgestrel 13.5mg intrauterine device,1,device,自由文本：按关键词归类（en:IUD/ring）
+lauromacrogol 400 50mg / heparinoid 4mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+lactoperoxidase 50unit medicated chewing gum sugar free,1,gum,自由文本：按关键词归类（en:chewing gum）
+lactic acid 250mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+kit; stick,1,stick,自由文本：按关键词归类（en:pencil/stick）
+iv,1,injection,自由文本：按关键词归类（en:iv）
+isopropyl alcohol 70% impregnated swabs,1,swab,自由文本：按关键词归类（en:swab）
+industrial methylated spirit 99%,1,liquid,自由文本：按关键词归类（en:液体）
+indium [in-111] chloride 122mbq/1.1ml / pentetreotide 10microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+implant; kit,1,implant,自由文本：按关键词归类（en:implant）
+ichthammol 9% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 8% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 7% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 5% / zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 2% / zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 13% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 10% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 10% / zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 1% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ichthammol 1% / zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+ibuprofen 200mg medicated plasters,1,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+ibritumomab tiuxetan 3.2mg/2ml kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+hyprolose 5mg ophthalmic inserts,1,device,自由文本：按关键词归类（en:ring/insert/pump）
+hydrogen peroxide 1.5% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+hydrocortisone 50mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+hydrocortisone 4mg pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+hydrocortisone 25mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+hydrocortisone 200mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+hydrocortisone 2.5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+hydrocortisone 2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+hydrocortisone 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+hydrocortisone 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+honey 1.76% / menthol 0.076% pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+histrelin 50mg implant with device,1,implant,自由文本：按关键词归类（en:implant）
+"high fat formula with vitamins, minerals and trace elements and low in protein and carbohydrate oral semi-solid",1,other,无法归类：未命中任何剂型关键词 → other
+hidroclorotiazida,1,other,无法归类：未命中任何剂型关键词 → other
+helium cylinders 300litres,1,gas,自由文本：按关键词归类（en:气体）
+helium cylinders 2000litres,1,gas,自由文本：按关键词归类（en:气体）
+helium 79% / oxygen 21% cylinders 5000litres,1,gas,自由文本：按关键词归类（en:气体）
+helium 79% / oxygen 21% cylinders 3000litres,1,gas,自由文本：按关键词归类（en:气体）
+helium 79% / oxygen 21% cylinders 2000litres,1,gas,自由文本：按关键词归类（en:气体）
+helium 79% / oxygen 21% cylinders 1780litres,1,gas,自由文本：按关键词归类（en:气体）
+goserelin 3.6 mg implant,1,implant,自由文本：按关键词归类（en:implant）
+goserelin 10.8 mg implant,1,implant,自由文本：按关键词归类（en:implant）
+glycopyrronium bromide 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+glycomacropeptide and essential amino acids with vitamins and minerals containing 15 g of protein equivalent bar,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+glycomacropeptide and essential amino acids with vitamins and minerals bar,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+glyceryl trinitrate 0.4% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+glyceryl trinitrate 0.3% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+glyceryl trinitrate 0.3% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+glyceryl trinitrate 0.2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+glycerol 66mg / thymol 880microgram pastilles,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+glycerol 60mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+glycerol 10% wash,1,soap,自由文本：按关键词归类（en:洗发/皂）
+glucose and ketone indicator urine diagnostic strip,1,diagnostic,自由文本：按关键词归类（en:诊断试剂）
+gentamicin 75mg implant,1,implant,自由文本：按关键词归类（en:implant）
+gentamicin 28mg implant,1,implant,自由文本：按关键词归类（en:implant）
+gentamicin 225mg implant,1,implant,自由文本：按关键词归类（en:implant）
+generic tisseel 5ml kit,1,kit,自由文本：按关键词归类（en:kit）
+generic tisseel 2ml kit,1,kit,自由文本：按关键词归类（en:kit）
+generic tisseel 1ml kit,1,kit,自由文本：按关键词归类（en:kit）
+generic tektrotyd 16microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+generic spatone original 20ml sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic spatone apple with vitamin c 25ml sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic softpac g394 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g393 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g391 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g298 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g295 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g294 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g208 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g206 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g204 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g194 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac g193 non-pvc 5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c395 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c394 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c393 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c391 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c299 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c298 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c295 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c294 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c293 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c197 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c194 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic softpac c193 non-pvc 3.5litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic smartset ghv gentamicin bone cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic smartset ghv gentamicin bone cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic skinsan 2% antimicrobial wash,1,soap,自由文本：按关键词归类（en:洗发/皂）
+generic selectbag one ax475g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax450g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax425g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax375g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax365g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax350g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax350 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax325g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax325 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax275g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax275 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax250g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax250 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax225g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax225 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax200g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax175g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax150g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax150 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax125g 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic selectbag one ax125 1litre bags,1,other,无法归类：未命中任何剂型关键词 → other
+generic refobacin revision cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic pulmotec 1.34g kit for radiopharmaceutical preparation 300microlitre crucibles,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+generic pulmotec 1.34g kit for radiopharmaceutical preparation 135microlitre crucibles,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+generic pulmocare ready-to-hang 500ml bottle,1,other,无法归类：未命中任何剂型关键词 → other
+generic promin low protein croutons 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic promin low protein chicken burger mix 62g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic potter's cleansing herbs 65g sachets sugar free,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic pku golike bar 5 30g bars,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic pku golike bar 10 60g bars,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic pelijelly lubricant 5g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic palforzia level 8 (160mg daily) 2 week up-dosing pack,1,kit,自由文本：按关键词归类（en:kit）
+generic palforzia level 7 (120mg daily) 2 week up-dosing pack,1,kit,自由文本：按关键词归类（en:kit）
+generic palforzia level 3 (12mg daily) 2 week up-dosing pack,1,kit,自由文本：按关键词归类（en:kit）
+generic palforzia level 10 (240mg daily) 2 week up-dosing pack,1,kit,自由文本：按关键词归类（en:kit）
+generic palacos r-40 with gentamicin cement 40.8g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic palacos r-40 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic palacos r-20 with gentamicin cement 20.4g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic palacos mv+g cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic palacos mv+g cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic palacos lv-40 with gentamicin cement 41.8g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic optibac bifido & fibre 6g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic optibac babies and children 1.5g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic ketoclassic 3:1 meal 135g pouches,1,other,无法归类：未命中任何剂型关键词 → other
+generic ketoclassic 3:1 meal 130g pouches,1,other,无法归类：未命中任何剂型关键词 → other
+generic hydrafast pre-thickened fruit water 90ml pouches,1,other,无法归类：未命中任何剂型关键词 → other
+generic gentafix 3 cement 41.6g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic gentafix 1 cement 41.6g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+"generic floseal hemostatic matrix 5,000units/10ml kit",1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+"generic floseal hemostatic matrix 2,500units/5ml kit",1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic flexitol 25% urea heel balm,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+generic everfresh 100% organic rye sourdough bread,1,other,无法归类：未命中任何剂型关键词 → other
+generic eucerin urearepair plus replenishing 5% body wash,1,soap,自由文本：按关键词归类（en:洗发/皂）
+generic eucerin acute 5% lip balm,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+generic endurance gentamicin cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic endurance gentamicin cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic endurance cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic endurance cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic coriplast 3 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic coriplast 1 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic copal g+c cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 3 gentamicin cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 3 gentamicin cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 3 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 3 cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2000 gentamicin cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2000 gentamicin cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2000 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2000 cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2 gentamicin cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2 gentamicin cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 2 cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 1 radiopaque cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 1 radiopaque cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 1 original gentamicin cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 1 original cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 1 gentamicin cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cmw 1 gentamicin cement 20g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cemfix 3 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+generic cemfix 1 cement 40g sachets,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+flurbiprofen 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+fluorescein 1mg ophthalmic strips,1,other,无法归类：未命中任何剂型关键词 → other
+fluocinolone acetonide 190microgram intravitreal implant with device,1,implant,自由文本：按关键词归类（en:implant）
+fibrinogen 5.5mg/square cm / thrombin 2units/square cm sealant matrix 4.8cm x 9.5cm,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+fibrinogen 5.5mg/square cm / thrombin 2units/square cm sealant matrix 2.5cm x 3cm,1,other,自由文本：按关键词归类（en:食品/原辅料/膜剂→other）
+fentanyl 800microgram buccal films sugar free,1,other,无法归类：未命中任何剂型关键词 → other
+fentanyl 400microgram buccal films sugar free,1,other,无法归类：未命中任何剂型关键词 → other
+fentanyl 200microgram buccal films sugar free,1,other,无法归类：未命中任何剂型关键词 → other
+extract,1,other,无法归类：未命中任何剂型关键词 → other
+exametazime (stabilised) 500microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+etonogestrel 68 mg implant,1,implant,自由文本：按关键词归类（en:implant）
+etonogestrel 120 microgram/24 hours + ethinylestradiol 15 microgram/24 hours vaginal drug delivery system,1,device,自由文本：按关键词归类（en:delivery system）
+ethanol 70% duty paid,1,liquid,自由文本：按关键词归类（en:液体）
+estriol 500 microgram pessary,1,pessary,自由文本：按关键词归类（en:pessar*）
+estriol 30microgram pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+estradiol acetate 1.25mg vaginal ring,1,device,自由文本：按关键词归类（en:IUD/ring）
+estradiol 2mg vaginal ring,1,device,自由文本：按关键词归类（en:IUD/ring）
+ergotamine tartrate 2mg / caffeine 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+equivalente tejido vivo,1,other,无法归类：未命中任何剂型关键词 → other
+eosin 0.5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+edotreotide 40microgram kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+dithranol 4% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 4% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 3% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 2% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 2% / salicylic acid 2% / coal tar 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 1% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.5% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.4% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.4% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.25% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.25% / salicylic acid 0.5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.125% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.1% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dithranol 0.01% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+dinoprostone 3mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+diethylstilbestrol 500microgram / lactic acid 5% pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+diclofenac 25mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+diclofenac 12.5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+dichlorobenzyl alcohol 1.29mg pastilles sugar free,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+diamorphine 60mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+diamorphine 5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+diamorphine 50mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+diamorphine 40mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+diamorphine 30mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+diamorphine 20mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+diamorphine 120mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+diamorphine 100mg impregnated cigarettes,1,other,无法归类：未命中任何剂型关键词 → other
+dextromethorphan 7.5mg pastilles sugar free,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+dexamethasone 700microgram intravitreal implant with device,1,implant,自由文本：按关键词归类（en:implant）
+dexamethasone 700 microgram implant,1,implant,自由文本：按关键词归类（en:implant）
+desmopressin 50microgram oral lyophilisates sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+desmopressin 25microgram oral lyophilisates sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+desmopressin 240 microgram sublingual wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+desmopressin 120 microgram sublingual wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+dequalinium chloride 250microgram pastilles sugar free,1,pill,自由文本：按关键词归类（en:lozenge/pastille）
+cyclizine 50mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+cyclizine 25mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+cyclizine 12.5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+conservacion organos,1,other,无法归类：未命中任何剂型关键词 → other
+codeine 6mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 3mg/5ml linctus paediatric sugar free,1,liquid,自由文本：按关键词归类（en:液体）
+codeine 3mg/5ml linctus paediatric,1,liquid,自由文本：按关键词归类（en:液体）
+codeine 3mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 30mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 2mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 20mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 1mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 15mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+codeine 10mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+coconut oil 50% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+cocaine 5% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+cocaine 2% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+cocaine 10% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+coal tar 6% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 6% / salicylic acid 6% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 5% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 5% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 30% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 3% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 25% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 20% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 20% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 20% / zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 2% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 2% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 2% / salicylic acid 2% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 12% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 12% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 12% / salicylic acid 3% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 10% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 10% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 1% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 1% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 1% / zinc oxide 15% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 0.5% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+coal tar 0.25% in yellow soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+clonazepam 500microgram oral lyophilisates sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+cinchocaine 1mg / prednisolone hexanoate 1.3mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+choline dihydrogen citrate 10% mixture,1,liquid,自由文本：按关键词归类（en:液体）
+chlorpromazine 25mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chlorobutanol 1% tincture,1,liquid,自由文本：按关键词归类（en:液体）
+chlorhexidine gluconate 0.12% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+chlorhexidine gluconate 0.1% / chlorobutanol 0.5% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+chlorhexidine 0.5% / isopropyl alcohol 70% impregnated swabs,1,swab,自由文本：按关键词归类（en:swab）
+chloral hydrate 750mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 50mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 500mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 25mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 250mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 200mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 125mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+chloral hydrate 100mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+cetylpyridinium chloride 0.025% mouthwash sugar free,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+cavity dressing 1g,1,cloth,自由文本：按关键词归类（en:敷料/纱布）
+carvedilol 3.5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+carmustine 7.7mg implant,1,implant,自由文本：按关键词归类（en:implant）
+carmustine 7.7 mg implant,1,implant,自由文本：按关键词归类（en:implant）
+carbon dioxide cylinders 3600litres,1,gas,自由文本：按关键词归类（en:气体）
+calcium folinate 0.3% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+calcium carbonate 750mg medicated chewing gum sugar free,1,gum,自由文本：按关键词归类（en:chewing gum）
+buprenorphine 8mg / naloxone 2mg sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+buprenorphine 8 mg + naloxone 2 mg sublingual film,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+buprenorphine 74.2mg implant,1,implant,自由文本：按关键词归类（en:implant）
+buprenorphine 2mg oral lyophilisates sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+buprenorphine 2mg / naloxone 500microgram sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+buprenorphine 2 mg + naloxone 500 microgram sublingual film,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+boric acid 600mg pessaries,1,pessary,自由文本：按关键词归类（en:pessar*）
+blood collection,1,other,无法归类：未命中任何剂型关键词 → other
+bisacodyl 7.5mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+besilesomab 1mg kit for radiopharmaceutical preparation,1,radiopharmaceutical,自由文本：按关键词归类（en:放射性药品）
+benzydamine hydrochloride 0.15% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+benzoyl peroxide 10% wash,1,soap,自由文本：按关键词归类（en:洗发/皂）
+beclometasone 0.025% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+beclometasone 0.0025% in white soft paraffin,1,ointment,自由文本：按关键词归类（en:ointment/软膏基质）
+asenapine 5 mg sublingual wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+asenapine 10 mg sublingual wafer,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+apomorphine 30mg sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+apomorphine 25mg sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+apomorphine 20mg sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+apomorphine 15mg sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+apomorphine 10mg/15mg/20mg/25mg/30mg sublingual films sugar free treatment initiation pack,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+apomorphine 10mg sublingual films sugar free,1,tablet,自由文本：按关键词归类（en:口腔崩解/口溶）
+aminophylline 360mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+amino acid formula with vitamins and minerals without phenylalanine oral semi-solid,1,other,无法归类：未命中任何剂型关键词 → other
+alum 10% bladder irrigation 100ml bottles,1,liquid,自由文本：按关键词归类（en:液体）
+alprostadil 125microgram urethral sticks,1,stick,自由文本：按关键词归类（en:pencil/stick）
+allopurinol 0.1% mouthwash,1,mouthwash,自由文本：按关键词归类（en:漱口/冲洗）
+air cylinders 9800litres,1,gas,自由文本：按关键词归类（en:气体）
+air cylinders 6800litres,1,gas,自由文本：按关键词归类（en:气体）
+air cylinders 6400litres,1,gas,自由文本：按关键词归类（en:气体）
+air cylinders 2100litres,1,gas,自由文本：按关键词归类（en:气体）
+air cylinders 1280litres,1,gas,自由文本：按关键词归类（en:气体）
+afamelanotide 16mg implant,1,implant,自由文本：按关键词归类（en:implant）
+acetarsol 500mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+acetarsol 360mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+acetarsol 250mg suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+acetarsol 1g suppositories,1,suppository,自由文本：按关键词归类（en:suppositor*）
+5-aminolevulinic acid 8mg medicated plasters,1,patch,自由文本：按关键词归类（en:plaster/patch/tape）
+0-unassigned,1,unknown,占位符/空值（'0-unassigned'）→ unknown

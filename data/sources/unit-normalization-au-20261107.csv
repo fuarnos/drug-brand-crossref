@@ -1,0 +1,88 @@
+﻿raw_unit,count,kind,normalized,note
+(空),6904,other,(无),[暂不处理] strength_unit 6904 行；空值（NULL）：无单位，不换算
+%,445,percent,%,[需规则] strength_unit 445 行；百分比：不是质量单位，不能自动换算
+ALU,8,iu,ALU,[需规则] strength_unit 8 行；生物效价单位（alu）：与 IU/其它效价单位不可互换，只统一写法
+ALU/g,2,iu,ALU/g,[需规则] strength_unit 2 行；复合单位（分子 alu→ALU，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+AU/mL,4,iu,AU/mL,[需规则] strength_unit 4 行；复合单位（分子 au→AU，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+AgU,2,iu,AgU,[需规则] strength_unit 2 行；生物效价单位（agu）：与 IU/其它效价单位不可互换，只统一写法
+AgU/mL,1,iu,AgU/mL,[需规则] strength_unit 1 行；复合单位（分子 agu→AgU，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+CCID,8,iu,CCID,[需规则] strength_unit 8 行；生物效价单位（ccid）：与 IU/其它效价单位不可互换，只统一写法
+CFU,3,iu,CFU,[需规则] strength_unit 3 行；生物效价单位（cfu）：与 IU/其它效价单位不可互换，只统一写法
+CFU/g,1,iu,CFU/g,[需规则] strength_unit 1 行；复合单位（分子 cfu→CFU，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+CU,14,iu,CU,[需规则] strength_unit 14 行；生物效价单位（cu）：与 IU/其它效价单位不可互换，只统一写法
+CU/g,2,iu,CU/g,[需规则] strength_unit 2 行；复合单位（分子 cu→CU，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+DAgU,19,iu,DAgU,[需规则] strength_unit 19 行；生物效价单位（dagu）：与 IU/其它效价单位不可互换，只统一写法
+DNA,1,iu,DNA,[需规则] strength_unit 1 行；生物效价单位（dna）：与 IU/其它效价单位不可互换，只统一写法
+DU,3,iu,DU,[需规则] strength_unit 3 行；生物效价单位（du）：与 IU/其它效价单位不可互换，只统一写法
+DU/g,4,iu,DU/g,[需规则] strength_unit 4 行；复合单位（分子 du→DU，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+ELISA,3,iu,ELISA,[需规则] strength_unit 3 行；生物效价单位（elisa）：与 IU/其它效价单位不可互换，只统一写法
+FFU,2,iu,FFU,[需规则] strength_unit 2 行；生物效价单位（ffu）：与 IU/其它效价单位不可互换，只统一写法
+GBq,3,other,MBq,"[可自动] strength_unit 3 行；放射性活度：可自动换算（gbq→MBq，×1,000）"
+HUT/g,1,iu,HUT/g,[需规则] strength_unit 1 行；复合单位（分子 hut→HUT，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IR,6,iu,IR,[需规则] strength_unit 6 行；生物效价单位（ir）：与 IU/其它效价单位不可互换，只统一写法
+IR/mL,40,iu,IR/mL,[需规则] strength_unit 40 行；复合单位（分子 ir→IR，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IU,382,iu,IU,[需规则] strength_unit 382 行；生物效价单位（iu）：与 IU/其它效价单位不可互换，只统一写法
+IU/L,2,iu,IU/L,[需规则] strength_unit 2 行；复合单位（分子 iu→IU，分母 l→L）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IU/cm,1,iu,IU/cm,[需规则] strength_unit 1 行；复合单位（分子 iu→IU，分母 cm→cm）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IU/g,1,iu,IU/g,[需规则] strength_unit 1 行；复合单位（分子 iu→IU，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IU/mL,120,iu,IU/mL,[需规则] strength_unit 120 行；复合单位（分子 iu→IU，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IU/mg,2,iu,IU/mg,[需规则] strength_unit 2 行；复合单位（分子 iu→IU，分母 mg→mg）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+IU/microgram,1,iu,IU/microgram,[需规则] strength_unit 1 行；复合单位（分子 iu→IU，分母 microgram→microgram）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+KIU,1,iu,KIU,[需规则] strength_unit 1 行；生物效价单位（kiu）：与 IU/其它效价单位不可互换，只统一写法
+KIU/mL,4,iu,KIU/mL,[需规则] strength_unit 4 行；复合单位（分子 kiu→KIU，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+L/L,19,volume,L/L,[需规则] strength_unit 19 行；复合单位（分子 l→L，分母 l→L）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+LipU,30,iu,LipU,[需规则] strength_unit 30 行；生物效价单位（lipu）：与 IU/其它效价单位不可互换，只统一写法
+LipU/g,3,iu,LipU/g,[需规则] strength_unit 3 行；复合单位（分子 lipu→LipU，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+MBq,4,other,MBq,[可自动] strength_unit 4 行；放射性活度：可自动换算（mbq→MBq，1）
+MBq/mL,10,other,MBq/mL,[需规则] strength_unit 10 行；复合单位（分子 mbq→MBq，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+PFU,14,iu,PFU,[需规则] strength_unit 14 行；生物效价单位（pfu）：与 IU/其它效价单位不可互换，只统一写法
+PFU/mL,5,iu,PFU/mL,[需规则] strength_unit 5 行；复合单位（分子 pfu→PFU，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+QS,14,other,QS,[暂不处理] strength_unit 14 行；QS＝quantity sufficient（数值 0，无计量意义）→ 暂不处理
+SQ,3,iu,SQ,[需规则] strength_unit 3 行；生物效价单位（sq）：与 IU/其它效价单位不可互换，只统一写法
+TCID,18,iu,TCID,[需规则] strength_unit 18 行；生物效价单位（tcid）：与 IU/其它效价单位不可互换，只统一写法
+Thousand,35,other,thousand,"[需规则] strength_unit 35 行；计数修饰词（thousand）：需先确定底层单位（CFU/IU/ALU…）才能换算（×1,000）"
+U/g,5,iu,U/g,[需规则] strength_unit 5 行；复合单位（分子 u→U，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+U/mL,24,iu,U/mL,[需规则] strength_unit 24 行；复合单位（分子 u→U，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+USP,2,iu,USP,[需规则] strength_unit 2 行；生物效价单位（usp）：与 IU/其它效价单位不可互换，只统一写法
+X,22,other,X,[暂不处理] strength_unit 22 行；X＝比例/倍数占位 → 暂不处理
+anti,17,iu,anti-Xa,[需规则] strength_unit 17 行；生物效价单位（anti）：与 IU/其它效价单位不可互换，只统一写法
+billion,1356,other,billion,"[需规则] strength_unit 1356 行；计数修饰词（billion）：需先确定底层单位（CFU/IU/ALU…）才能换算（×1,000,000,000）"
+g/L,1251,mass,g/L,[需规则] strength_unit 1251 行；复合单位（分子 g→g，分母 l→L）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+g/g,95,mass,g/g,[需规则] strength_unit 95 行；复合单位（分子 g→g，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+g/mL,15,mass,g/mL,[需规则] strength_unit 15 行；复合单位（分子 g→g，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+kBq,4,other,MBq,[可自动] strength_unit 4 行；放射性活度：可自动换算（kbq→MBq，×0.001）
+mL,1155,volume,mL,[可自动] strength_unit 130 行; per_volume_unit 1025 行；体积：可自动换算（ml→mL，1）
+mL/L,17,volume,mL/L,[需规则] strength_unit 17 行；复合单位（分子 ml→mL，分母 l→L）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mL/g,4,volume,mL/g,[需规则] strength_unit 4 行；复合单位（分子 ml→mL，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mL/mL,147,volume,mL/mL,[需规则] strength_unit 147 行；复合单位（分子 ml→mL，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mg,58728,mass,mg,[可自动] strength_unit 58312 行; per_volume_unit 416 行；质量：可自动换算（mg→mg，1）
+mg/L,64,mass,mg/L,[需规则] strength_unit 64 行；复合单位（分子 mg→mg，分母 l→L）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mg/actuation,22,mass,mg/actuation,[需规则] strength_unit 22 行；复合单位（分子 mg→mg，分母 actuation→actuation）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mg/cm,3,mass,mg/cm,[需规则] strength_unit 3 行；复合单位（分子 mg→mg，分母 cm→cm）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mg/g,9678,mass,mg/g,[需规则] strength_unit 9678 行；复合单位（分子 mg→mg，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mg/mL,3881,mass,mg/mL,[需规则] strength_unit 3881 行；复合单位（分子 mg→mg，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mg/mg,1,mass,mg/mg,[需规则] strength_unit 1 行；复合单位（分子 mg→mg，分母 mg→mg）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microgram,6102,mass,mg,[可自动] strength_unit 6102 行；质量：可自动换算（microgram→mg，×0.001）
+microgram/actuation,187,mass,microgram/actuation,[需规则] strength_unit 187 行；复合单位（分子 microgram→microgram，分母 actuation→actuation）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microgram/cm,4,mass,microgram/cm,[需规则] strength_unit 4 行；复合单位（分子 microgram→microgram，分母 cm→cm）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microgram/g,1047,mass,microgram/g,[需规则] strength_unit 1047 行；复合单位（分子 microgram→microgram，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microgram/mL,676,mass,microgram/mL,[需规则] strength_unit 676 行；复合单位（分子 microgram→microgram，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microlitre,22,volume,mL,[可自动] strength_unit 22 行；体积：可自动换算（microlitre→mL，×0.001）
+microlitre/L,1,volume,microlitre/L,[需规则] strength_unit 1 行；复合单位（分子 microlitre→microlitre，分母 l→L）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microlitre/g,48,volume,microlitre/g,[需规则] strength_unit 48 行；复合单位（分子 microlitre→microlitre，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+microlitre/mL,437,volume,microlitre/mL,[需规则] strength_unit 437 行；复合单位（分子 microlitre→microlitre，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+micromole/mL,2,other,micromole/mL,[需规则] strength_unit 2 行；复合单位（分子 micromole→micromole，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+million,415,other,million,"[需规则] strength_unit 415 行；计数修饰词（million）：需先确定底层单位（CFU/IU/ALU…）才能换算（×1,000,000）"
+million unit,6,other,million unit,"[需规则] strength_unit 6 行；计数修饰词（million unit）：需先确定底层单位（CFU/IU/ALU…）才能换算（×1,000,000）"
+mmol/mL,1,other,mmol/mL,[需规则] strength_unit 1 行；复合单位（分子 mmol→mmol，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+mol,1,other,mol,[需规则] strength_unit 1 行；摩尔量：需分子量才能换成质量，不能自动换算
+nanolitre,3,volume,mL,[可自动] strength_unit 3 行；体积：可自动换算（nanolitre→mL，×0.000001）
+nanolitre/mL,16,volume,nanolitre/mL,[需规则] strength_unit 16 行；复合单位（分子 nanolitre→nanolitre，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+ng/g,41,mass,ng/g,[需规则] strength_unit 41 行；复合单位（分子 ng→ng，分母 g→g）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+ng/mL,7,mass,ng/mL,[需规则] strength_unit 7 行；复合单位（分子 ng→ng，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+nmol,4,other,nmol,[需规则] strength_unit 4 行；摩尔量：需分子量才能换成质量，不能自动换算
+nmol/mL,10,other,nmol/mL,[需规则] strength_unit 10 行；复合单位（分子 nmol→nmol，分母 ml→mL）：分母是 per-volume/per-mass 语义，不能自动换算；只统一写法，数值不动
+thousand,61,other,thousand,"[需规则] strength_unit 61 行；计数修饰词（thousand）：需先确定底层单位（CFU/IU/ALU…）才能换算（×1,000）"
+unit,128,iu,unit,[需规则] strength_unit 128 行；生物效价单位（unit）：与 IU/其它效价单位不可互换，只统一写法
+actuation,167,other,actuation,[需规则] per_volume_unit 167 行；按「次/剂」计量（per-actuation / per-dose）：不是质量或体积单位
+actuations,3,other,actuations,[需规则] per_volume_unit 3 行；按「次/剂」计量（per-actuation / per-dose）：不是质量或体积单位
