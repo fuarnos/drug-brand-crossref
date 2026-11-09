@@ -1,6 +1,7 @@
-# 药品商品名跨国定位站的项目预设：standard 骨架 + 项目人设。
-# 相对 standard 的差异只有：persona 换成中文项目工程师、保留 schedule（谷段 cron + 申请提醒），去掉插件管理工具、
-# 不挂 cordis 创作工具。项目规则在仓库根的 AGENTS.md，流程在 .dsh/skills/。
+# 药品商品名跨国定位站的项目预设（DSH 0.2.2 版）。
+# 骨架 = 0.2.2 的 standard：persona 换成中文项目工程师；保留 schedule（谷段提醒）；
+# 去掉插件管理工具；不挂 cordis 创作工具。
+# 相对 0.2.2 standard 的改动点会在改 DSH 版本时对照 presets/standard.patch.yml 复核。
 - insert:
     - id: preset-drug
       name: '@deepseek-ai/dsh-agent-preset'
@@ -33,6 +34,9 @@
             disabled: !!js process.platform !== 'win32'
           - id: tool-fs
             name: '@deepseek-ai/dsh-tool-fs'
+            config:
+              # 不带 apply_patch，保持 read/write/edit 三件套。
+              applyPatch: false
           - id: tool-fs-search
             name: '@deepseek-ai/dsh-tool-fs-search'
             config:
@@ -95,14 +99,13 @@
             config:
               - id: tool-subagent-control
                 name: '@deepseek-ai/dsh-tool-subagent-control'
-              - id: tool-subagent-list-agents
-                name: '@deepseek-ai/dsh-tool-subagent-control/list-agents'
               - id: tool-subagent
                 name: '@deepseek-ai/dsh-tool-subagent'
                 config:
                   provider: spawn
                   toolName: subagent
-                  modelSelectionSettings: true
+                  modelSelection: true
+                  modelDiscovery: true
               - id: tool-subagent-fork
                 name: '@deepseek-ai/dsh-tool-subagent'
                 config:

@@ -1,82 +1,69 @@
 ---
 name: site-build
-description: 改站点、重建 site/dist 或发布前验收时用：构建、完整性检查、三语抽查、性能与链接回归、本地预览。
-whenToUse: 任务涉及 site/build.py、页面文案 / 样式 / 前端、站点计数口径、发布前检查、首屏性能或索引体积时。
+description: 改站点/前端/文案、重建 site/dist 或发布前验收时用：构建、完整性与确定性检查、三语与市场抽查、性能体积预算、本地预览。
+whenToUse: 任务涉及 site/build.py、页面/样式/文案/i18n、索引与分片、发布前检查、首屏性能或 dist 体积时。
 ---
 
 # 建站与验收（site-build）
 
-`site/build.py` 从 `data/drugs.db` 生成整个静态站到 `site/dist/`（v0.9.0 实测：116,883 个文件 / 770.8 MB）。
-它同时是页面模板、i18n 字典和版本号的来源，改动会放大到全站，必须按顺序验收。
-
-> 完整优化流程（外部标准映射）与发布前 12 项 / 发布后 6 项检查清单：`docs/网站优化流程.md`。
+`site/build.py` 从 `data/drugs.db` 生成整个静态站到 `site/dist/`（约 12 万文件 / 800+ MB）。
+**`site/build.py` 是唯一写者**：构建期间冻结，同一时间只允许一个会话跑它或 `deploy/publish.ps1`。
 
 ## 1. 构建
 
 ```powershell
 $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
 
-& $py site/build.py            # 看到终端出现 == done == 才算完成
+& $py site/build.py            # 等终端出现 == done ==
 & $py run_all.py --no-ingest   # 等价写法（不重建库）
 ```
 
-- 构建要几分钟，**构建期间不要跑 `publish.ps1`**，也不要在另一个会话同时构建（会互相踩 dist）。
-- `site/dist/` 是生成物（gitignore），不要手工编辑；发布只走 `deploy/publish.ps1`。
+全量构建约 20 分钟（机器/缓存不同；`docs/网站优化流程.md` §2.1 有耗时预算）。
 
-## 2. 完整性检查（必做）
+## 2. 产物清单
 
-```powershell
-$dist = 'site/dist'
-'index.html','about.html','confused.html','whats-new.html','404.html',
-'robots.txt','sitemap.xml','.nojekyll','data/idx/core.json','data/aliases.json',
-'data/artg.json','data/confused.json','assets/style.css','assets/i18n.js' |
-  ForEach-Object { "{0,-22} {1}" -f $_, (Test-Path (Join-Path $dist $_)) }
+- 根页面：`index.html`、`about.html`、`confused.html`、`whats-new.html`、`404.html`、
+  `robots.txt`、`sitemap.xml`、`.nojekyll`
+- 目录：`assets/`、`data/`、`drug/`（成分页）、`name/`（同名碰撞页）、`atc/`、`maker/`、
+  `cat/`、`combo/`、`docs/`、`es/`、`zh/`、`zh-hant/`（语言落地页；其余页面客户端 i18n）
+- 搜索索引（v0.6.1 起只有它）：`data/idx/core.json` + `shard-*.json` + `detail-*.json` +
+  `pinyin.json` + `atc4-forms.json` + `manifest.json`
+- 数据资产：`data/{aliases,artg,categories,confused,export-only,maker-map,terms}.json`；
+  导出 CSV 在 `data/exports/`
+- `data/index.json` 已废弃（v0.6.1 起不再生成），不要再当验收项。
 
-(Get-ChildItem $dist -Recurse -File).Count                                        # 期望 ≥ 24,000（publish 门槛；v0.9.0 实测 116,883）
-[math]::Round((Get-ChildItem $dist -Recurse -File | Measure-Object Length -Sum).Sum/1MB)  # 站点体积（v0.9.0 实测 770.8 MB）
-[math]::Round((Get-Item "$dist/data/idx/core.json").Length/1MB)                   # 唯一搜索索引，期望 ≥ 10 MB raw（v0.9.0 实测 35.8 MB raw / 8.68 MB gzip）
-(Get-ChildItem $dist -Recurse -File | Where-Object Length -eq 0).Count            # 必须 0
-```
-
-目录结构：`drug/` ≈ 1.24 万张成分页，`name/` ≈ 7.7 万张名称页（其中单包装轻量页 4.4 万，noindex），`es/`、`zh/`、`zh-hant/` 是语言入口页；
-其余页面是一份 HTML + 客户端 `?lang=en|es|zh` 切换（`assets/i18n.js`），`hreflang` 指向 `/es/`、`/zh/`。
-
-## 3. 三语与检索抽查
-
-- 同一成分用英 / 西 / 中三种叫法都应落到同一 substance 页（示例：Tylenol / paracetamol / 泰诺 + 对乙酰氨基酚）。
-- 结构化验证优先跑现成测试，不要手搓：
+## 3. 必做检查
 
 ```powershell
-& $py tests/trilingual/run_tests.py            # 全量三语一致性（只读开库）
-& $py tests/trilingual/run_tests.py --only amlodipine,metoprolol
-& $py cli.py "泰诺"                            # 单条查询
+& $py deploy/ci_checks.py --fast          # 18 秒：编译 / unittest / dist 完整性
+& $py deploy/ci_checks.py                 # 全量（发版前，约 10 分钟，含 trilingual）
+& $py deploy/check_build_determinism.py   # 构建确定性（按脚本用法）
+& $py serve.py 8000                       # 预览 http://127.0.0.1:8000/
 ```
 
-- 页面侧抽查：打开 `drug/` 下对应成分页，切 EN / ES / 中文，确认标题、剂量列、"查不到 ≠ 不存在" 提示一致。
-- 改到检索语义时，加跑 `& $py -m unittest discover -s lib -t lib`。
+手工抽查：
 
-## 4. 回归关注点
+- 必需文件都在：`index.html`、`404.html`、`robots.txt`、`sitemap.xml`、`.nojekyll`、
+  `data/idx/core.json`、`assets/style.css`、`assets/app.js`
+- 文件数 / 体积：`(Get-ChildItem site/dist -Recurse -File).Count`、
+  `(Get-ChildItem site/dist -Recurse -File | Measure-Object Length -Sum).Sum`；0 字节文件必须为 0
+- `data/idx/core.json` raw ≥ 10 MB（publish 门槛）；gzip 体积按 `docs/网站优化流程.md` §2.1 预算
+  （近期约 9.8 MB gz，目标 ≤ 9.5 MB；`verify_live.py` 护栏 gzip 2.5–12 MB / raw 11–50 MB）
+- dist 总量：自设 900 MiB 上限，GitHub Pages 已发布上限 1 GB；当前约 839 MiB，余量约 60 MiB
+- sitemap URL 数 = HTML 数 − noindex 数（公式见 `docs/网站优化流程.md` §4-11）
+- 三语：同一成分用英 / 西 / 中名都落到同一 substance 页；语言切换与 `hreflang` 正常
+- 十个市场：国家视图与 `data/markets.json` 一致
 
-| 项 | 期望 |
-|---|---|
-| 首屏体积 | 首屏约 311 KB raw / 104 KB gz（HTML+CSS+i18n+app+bilingual，v0.9.0 实测）；搜索索引懒加载：首次输入 / 带 `?q=` 才拉 `data/idx/core.json`（8.68 MB gzip）+ 前缀分片（中位 1.04 MB raw） |
-| 索引 | `data/idx/core.json` 与分片大小变化要能解释（core ≥ 10 MB raw 是 publish 门槛）；`?legacy=1` 仍可回退到旧行为 |
-| 版本号 | 页脚 / `whats-new.html` / Release 都取 CHANGELOG 第一节 `## vX.Y.Z — YYYY-MM-DD` |
-| 链接与 SEO | `sitemap.xml` 覆盖全量页面；`404.html` 在任意子路径都能回站内；`robots.txt`、`.nojekyll` 在 |
-| 资产缓存 | `assets/*.js|css` 带 `?v=` 时间戳，改完确认 URL 变了（否则浏览器拿旧文件） |
-| 计数口径 | 页面上数字与 `data/drugs.db` 现查一致；README / About / CHANGELOG 同步 |
+## 4. 站点/前端改动的完整流程
 
-## 5. 本地预览
+先读 `docs/网站优化流程.md`：改前 §3.1–§3.2，改后 §4 的 12 项，发布后 §5 的 6 项。
+门槛：Lighthouse 移动端四项 ≥ 90；首屏 ≤ 330 KB raw / 110 KB gz；单页 HTML ≤ 6 KB。
+三项纪律：`build.py` 唯一写者、发布只走 `publish.ps1`、数字以实测为准（不抄旧数字）。
 
-```powershell
-& $py serve.py 8000    # http://127.0.0.1:8000/
-```
+## 5. 常见坑
 
-预览能替代截图验收；需要留图时放 `docs/img/`（kebab-case），文档里相对链接引用。
-
-## 6. 常见坑
-
-- **没出现 `== done ==` 就发布**：曾导致 gh-pages 只有 assets/、整站 404（见 DEPLOY.md），这是本项目最贵的一次事故。
-- 只改一种语言的文案：本站是客户端 i18n，三语字典在 `site/build.py` 里，漏一种就是漏全站。
+- **没出现 `== done ==` 就发布**：曾导致 gh-pages 只有 assets/、整站 404（见 [DEPLOY.md](DEPLOY.md)）。
+- 只改一种语言 / 一个市场：i18n 三份字典 + `data/markets.json` 要一起改。
 - 手工改 `site/dist/`：下次构建就没了，改源头。
-- 在构建进行中跑测试 / 入库 / 发布：都会读到半成品，串行做。
+- 构建进行中跑测试 / 入库 / 发布：会读到半成品，串行做。
+- 索引或体积改动后忘了同步预算和 `verify_live.py` 的体积断言。

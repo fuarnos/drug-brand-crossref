@@ -1,62 +1,75 @@
 ---
 name: market-ingest
-description: 接入新市场、重跑某国入库或更新数据源时用：抓取落到 data/raw、ingest 进 data/drugs.db、核对计数并同步 README/CHANGELOG。
-whenToUse: 任务涉及 etl/ingest_*、etl/fetch_*、新市场接入、数据源更新、条数对不上、覆盖表要更新时。
+description: 接入新市场、重跑某国入库或更新数据源时用：许可与市场注册表先过、抓取落 data/raw、ingest 进库、核数并同步口径。
+whenToUse: 任务涉及 etl/ingest_*、etl/fetch_*、新市场接入、数据源更新、条数对不上、覆盖表或许可清单要更新时。
 ---
 
 # 市场入库（market-ingest）
 
-目标：把某个市场的公开数据变成 `data/drugs.db` 里的产品行，且**每一步都能离线重跑、每次都核对计数**。
+目标：把公开数据变成 `data/drugs.db` 的产品行，每一步可离线重跑、每次核数。
 
-## 0. 动手前确认三件事
+## 0. 动手前（缺一不可）
 
-1. **许可**：这个源能不能再发布？结论写在哪份 `docs/` 里？现有状态见 README「数据现实」表
-   （ES / MX 待确认，CN 没找到明确许可，AU 的 ARTG 全量只能走 FOI）。
-2. **批量可得性**：官方批量文件 / API / PDF？拿不到就先记进 docs 并标「待确认」，不要硬写爬虫。
-3. **缓存位置**：`data/raw/<source>/`，不进版本库。没有缓存时 ingest 应**跳过而不是报错**
-   （`run_all.py` 里每个市场都是这个写法）。
+1. **许可**：先看 `docs/许可清单.md` 与 `docs/数据溯源与许可.md`；新源先写结论再入库。
+2. **市场注册表**：新增市场 = 改 `data/markets.json`（必要时 `data/languages.json`）+ 写
+   ETL 插件 + 跑测试；完整 9 步见 `docs/市场扩展接口.md`。校验：
 
-## 1. 标准流程
+   ```powershell
+   & $py lib/markets.py --check
+   & $py -m unittest tests.test_markets_registry -v
+   ```
 
-| 步骤 | 做法 |
-|---|---|
-| 抓取 | `etl/fetch_*.py` / `etl/*_discover.py`，原始响应落 `data/raw/<source>/`，限速写死在代码里 |
-| 解析 | PDF / HTML 先落中间 CSV / JSONL（`etl/extract_*.py`），原始和中间产物都留在 data/raw |
-| 归一化 | 复用 `etl/normalize_name.py`（NFKC / 全角 / 西里尔 / 繁简 / 尾部剂量切分），不要另写一套 |
-| 入库 | `etl/ingest_<market>.py`：幂等（先删后插或 UPSERT），只读缓存不联网 |
-| 核数 | `db/q.py` 查条数与字段覆盖率；跑 `db/check_data.py` |
-| 收尾 | 同步 README / CHANGELOG 数字；`db/source_dates.py` 更新数据截止日；新脚本接进 `run_all.py` |
+   不要在任何页面/脚本里硬编码国家列表。
+3. **缓存**：原始数据落 `data/raw/<source>/`（不入库）；没有缓存时 ingest 应跳过而不是报错
+   （`run_all.py` 就是这个写法）。
 
-## 2. 各市场入口（含坑）
+## 1. 现有十个市场（以 DB `source` 表为准）
 
-| 市场 | 抓取 → 入库 | 缓存 / 坑 |
+| 市场 | 抓取 → 入库 | 备注 |
 |---|---|---|
-| US | `etl/ingest_openfda_ndc.py` | `data/raw/openfda/ndc-01.json`；无缓存时 run_all 跳过美国；SSL 被企业代理拦时先用 PowerShell 下好再跑 |
-| GB | `etl/trud_fetch.py` → `etl/ingest_dmd.py` | TRUD key 在 `.env` 的 `TRUD_API_KEY`；`data/raw/dmd/nhsbsa_dmd_*.zip`；名字里没有剂量的是器械/耗材，要滤掉（约 10 万条） |
-| CN | 快照 PDF/公示 → `etl/extract_nhsa_pdf.py` → `etl/ingest_nhsa.py` | 医保库；产品身份是「通用名 + 厂家 + 规格 + 批准文号」，商品名可缺省；`merge_nhsa_parts.py`、`diff_nhsa_snapshots.py`、`fix_cn_combos.py` 处理切片与复方 |
-| ES | `etl/ingest_cima.py`（自己下载 128 页列表） | `data/raw/cima/page-*.json`、ATC 详情 `data/raw/cima/atc/`；首次联网后离线 |
-| MX | `etl/mx_discover.py --download alop` → `extract_cofepris_alop.py` → `extract_cofepris_status.py`（+ `extract_cofepris_prorroga.py`）→ `fetch_mx_catalogs.py` → `build_mx_inn_map.py` → `etl/ingest_mx.py` | `data/raw/mx/`；源**没有浓度列**，只能唯一值回填（≈29%），空是数据事实不是 bug；状态 = 有效期 + 注销清单 + 续期清单三线索 |
-| AU | `fetch_pbs.py`（3 个请求，20 秒/次限速）→ `ingest_pbs.py`；`fetch_tga_cmi.py` → `ingest_tga_cmi.py`；`fetch_artg_index.py` → `ingest_artg_index.py`；`ingest_artg_enrich.py`；`fetch_artg_details.py` → `ingest_artg_details.py`（很慢，单独跑） | `data/raw/pbs/api/items.json`、`data/raw/tga_cmi/cmi.json`、`data/raw/artg/*.jsonl`；ARTG 无批量导出，全量只能 FOI（`docs/foi-artg-request.md`） |
-| CA | `etl/fetch_ca_dpd.py`（9 个端点一次全量） → `etl/ingest_ca_dpd.py` | `data/raw/ca/dpd/`；排除顺势疗法 / 兽药 / 辅料；复方剂量按每片、每 mL 折算 |
+| US | `etl/ingest_openfda_ndc.py` | `data/raw/openfda/ndc-01.json`；SSL 被代理拦时先手动下好 |
+| GB | `etl/trud_fetch.py` → `etl/ingest_dmd.py`；盐型 `etl/fix_dmd_salts.py --apply --confirm-real-db` | TRUD key 在 `.env`；器械/耗材按「名字里有没有剂量」滤掉 |
+| CN | `etl/extract_nhsa_pdf.py` / `merge_nhsa_parts.py` → `etl/ingest_nhsa.py`；`diff_nhsa_snapshots.py`、`fix_cn_combos.py`、`cleanup_cn_data.py`、`build_cn_aliases.py`、`apply_cn_brand_candidates.py` | 产品身份 = 通用名 + 厂家 + 规格 + 批准文号；商品名可空 |
+| ES | `etl/ingest_cima.py`；`fix_es_combos.py`、`merge_es_substances.py` | `data/raw/cima/page-*.json` + ATC 详情 `atc/` |
+| MX | `mx_discover.py --download alop` → `extract_cofepris_alop.py` → `extract_cofepris_status.py`（+ prorroga）→ `fetch_mx_catalogs.py` → `build_mx_inn_map.py` → `ingest_mx.py`；`ingest_mx_ccby.py`、`ingest_mx_pervolume.py --apply --allow-real` | 源无浓度列，只能唯一值回填；空是数据事实 |
+| AU | `fetch_pbs.py` → `ingest_pbs.py`；`fetch_tga_cmi.py` → `ingest_tga_cmi.py`；`fetch_artg_index.py` → `ingest_artg_index.py`；`ingest_artg_enrich.py`；`fetch_artg_details.py` → `ingest_artg_details.py`（慢，单独跑）；`ingest_artg_medicines.py`（ARTG 全量 32,904） | PBS 限速 20 秒/次 |
+| CA | `etl/fetch_ca_dpd.py` → `etl/ingest_ca_dpd.py` | 9 端点全量；排除顺势 / 兽药 / 辅料 |
+| TW | `etl/fetch_tw_tfda.py` → `etl/ingest_tw_tfda.py`；`build_tw_aliases.py` | 规格来自品名解析，置信度有限 |
+| SG | `etl/ingest_sg_hsa.py` | HSA SODL v1.0 |
+| HK | `etl/ingest_hk_druglist.py` | 仅名称/成分层，无规格/剂型/状态 |
+| EU（占位） | `etl/ingest_eu.py` / `etl/ingest_ema_medicines.py` | region 占位；写库窗口等排期 |
+
+## 2. 标准流程
+
+抓取（限速写死）→ 解析（PDF/HTML → CSV/JSONL，落 `data/raw/`）→ 归一化
+（`normalize_name.py`、`normalize_strength.py`、`normalize_salts.py --apply --confirm-real-db`、
+`normalize_units_*.py`）→ 入库（幂等、只读缓存）→ 合并/补全（`merge_*_substances.py`、
+`auto_merge_substances.py`、`apply_salt_fractions.py`、`ingest_chembl_atc.py`、`ingest_wikidata_atc.py`、
+`seed_warnings.py`）→ 核数 → 收尾。
+
+`run_all.py` 已串全量重建（建库 → 各市场 → 种子 → 俗名/术语 → 归一化/补全 → `db/source_dates.py`
+→ `site/build.py`）。注意其中不少脚本带 `--apply --confirm-real-db`，跑前确认是写正式库还是先 dry-run。
 
 ## 3. 入库后必查
 
 ```powershell
-$py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
-
-& $py db/q.py "SELECT country, COUNT(*) FROM product GROUP BY country ORDER BY 2 DESC"
-& $py db/q.py "SELECT country, ROUND(100.0*SUM(strength IS NOT NULL)/COUNT(*),1) AS pct FROM product GROUP BY country"
 & $py db/check_data.py
+& $py deploy/ci_checks.py --fast
+& $py lib/markets.py --check
+& $py db/q.py "SELECT country, COUNT(*) FROM product GROUP BY country ORDER BY 2 DESC"
+& $py etl/provenance.py --status      # 溯源覆盖率（只读）
+& $py etl/drift_check.py              # 10 个来源的漂移扫描（只读；写基线看脚本用法）
 ```
 
-- 条数变化要和预期对得上；对不上先查去重键（品牌 + 成分 + 规格 + 剂型 + 包装）和排除规则。
-- 新增 substance 时确认没和英文 INN 分家：现成合并入口是 `merge_cn_substances.py`、
-  `merge_es_substances.py`、`auto_merge_substances.py`。
-- 改了数据截止日就重跑 `db/source_dates.py`，覆盖表要显示源自己的日期而不是抓取时间。
-- 改了顶层数字后，同步 README / About 文案 / CHANGELOG（口径一致，别只改一处）。
+- 条数变化要对得上；对不上先查去重键（品牌 + 成分 + 规格 + 剂型 + 包装）与排除规则。
+- 新成分确认没和英文 INN 分家（`merge_cn_substances.py` / `merge_es_substances.py` /
+  `auto_merge_substances.py` / `build_cross_market_candidates.py` 是现成入口）。
+- 空字段是源事实，不要伪造；改数据截止日重跑 `db/source_dates.py`。
+- 改口径 → README / About / CHANGELOG 同步；新源/许可结论 → `docs/许可清单.md`。
 
 ## 4. 红线
 
-- 不提交 `data/raw/`、`data/*.db` 和中间 CSV；只有 `data/sources/` 那种许可明确的小快照入库。
-- 不要「先写进库再说许可」；许可未定的源，页面上必须标「待确认」并署名链回原文。
-- 不在别的会话跑构建 / 入库时并行改 `data/drugs.db`；动库前先在任务里写明。
+- 不提交 `data/raw/`、`data/*.db`、中间 CSV（除许可明确的 `data/sources/` 小快照）。
+- 许可未定必须页面标「待确认」并署名链回；不绕 WAF、不付费买数据。
+- 不在别的会话构建/发布时并行改 `data/drugs.db`；动库前先在任务里写明。
+- 大改前后各跑一次 `db/check_data.py`，before/after 写进 `reports/`。

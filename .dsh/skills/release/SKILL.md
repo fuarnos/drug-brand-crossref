@@ -1,81 +1,87 @@
 ---
 name: release
-description: 版本发布、打 tag、更新 CHANGELOG、回滚线上站点时用：唯一发布入口 deploy/publish.ps1 的完整流程与检查项。
-whenToUse: 任务涉及发版、CHANGELOG 版本节、git tag / GitHub Release、gh-pages、线上 404 / 回滚时。
+description: 版本发布、打 tag、更新 CHANGELOG、回滚线上站点时用：ci_checks → build == done == → publish.ps1 → verify_live → tag/Release 的完整流程。
+whenToUse: 任务涉及发版、CHANGELOG 版本节、gh-pages、verify_live 失败、Pages 构建失败或回滚时。
 ---
 
 # 发布（release）
 
-线上地址：<https://fuarnos.github.io/drug-brand-crossref/>，GitHub Pages（legacy，从 `gh-pages` 分支发布）。
-**唯一发布入口是 `deploy/publish.ps1`**，绝不手工往 `gh-pages` 推。
+线上：<https://fuarnos.github.io/drug-brand-crossref/>，GitHub Pages **legacy**（从 `gh-pages` 分支发布）。
+**唯一发布入口是 `deploy/publish.ps1`**；不手工推 `gh-pages`、不手工改线上文件。
 
-> 背景：曾有一次 `site/build.py` 还在写页面时就提交并推送，那次 gh-pages 只有 `assets/`、
-> 根目录没有 `index.html`，全站 404。publish.ps1 就是为堵这个洞写的（见 DEPLOY.md）。
+> 背景：曾有一次 `site/build.py` 还在写页面就推送，gh-pages 只有 `assets/`、根目录没有
+> `index.html`，全站 404。publish.ps1 就是为堵这个洞写的（见 [DEPLOY.md](DEPLOY.md)）。
 
-## 1. 发布前检查
+## 1. 发布前
 
-1. 测试全过（没有 CI，本地跑就是门槛）：
+```powershell
+$py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
 
-   ```powershell
-   $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
-   & $py -m unittest discover -s etl -t etl
-   & $py -m unittest discover -s lib -t lib
-   & $py tests/trilingual/run_tests.py
-   & $py db/check_data.py
-   ```
+& $py deploy/ci_checks.py --fast     # 改代码时基线（18 秒）
+& $py deploy/ci_checks.py            # 发版前全量（约 10 分钟，含 trilingual）
+```
 
-2. `CHANGELOG.md` 最上面加一节，格式必须是 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）。
-   版本号唯一来源就是这一节：站点页脚、`whats-new.html`、GitHub Release 全从它生成，别在别处改版本。
-3. 建站跑完：`& $py site/build.py`，等终端出现 `== done ==`。
-4. 工作区没有正在跑的 build / run_all；确认没有别的会话在同时构建或发布。
+1. 测试全过（CI 里没有 `data/drugs.db`，库相关检查会 SKIP，以本地为准）。
+2. `CHANGELOG.md` 最上面加一节 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）。
+   版本号唯一来源就是这一节：站点页脚、`whats-new.html`、GitHub Release 都从它生成。
+3. `& $py site/build.py` 等 `== done ==`，按 site-build 技能检查 `site/dist` 完整性。
+4. 确认没有别的会话在构建 / 发布（构建与发布串行）。
 
 ## 2. 发布
 
 ```powershell
-# 先干跑检查（不打公开变更）
+# 干跑：检查 + 复制 + 估算 push 体积，不推
 powershell -NoProfile -ExecutionPolicy Bypass -File deploy\publish.ps1 -DryRun
 
-# 正式发布（等价于双击 发布网站.cmd）
+# 正式发布（默认增量：复用 gh-pages 缓存，只传 delta）
 powershell -NoProfile -ExecutionPolicy Bypass -File deploy\publish.ps1
 ```
 
-脚本会：检查 `site/dist` 完整性（`index.html`、`data/index.json` ≥ 5 MB、文件数 ≥ 24,000、无 0 字节、
-最新文件写入 ≥ 15 秒、没有 build.py / run_all.py 在跑）→ 复制到临时目录干净提交 → 复核源目录
-→ 强制推 `gh-pages` → 等 Pages 构建结束 → 请求首页确认 200。失败会保留临时目录，别手动清理。
+- 检查项：`index.html`、`data/idx/core.json`（≥ 10 MB，或过渡期旧 `data/index.json`）、
+  文件数 ≥ `-MinFiles 24000`、无 0 字节、最新文件 ≥ `-StableSeconds 15`、无 build/run_all 进程。
+- 参数：`-Message`、`-Dist`、`-CacheDir`、`-SkipVerify`、`-FullPush`（仅应急，全量重传）、
+  `-AutoRollback`、`-PagesWaitMinutes 45`、`-KeepWork`、`-DryRun`、`-Force`（不建议）。
+- token：`$env:GITHUB_TOKEN`，否则仓库根 `.env` 的 `GITHUB_TOKEN=`（Contents: RW + Pages: Read）。
+- 失败会保留临时目录 / 缓存，别手动清理。
 
-常用参数：`-Message "..."`（提交信息）、`-MinFiles 25000`、`-SkipVerify`、`-DryRun`、
-`-Force`（跳过完整性检查，不建议）、`-KeepWork`（保留临时目录）。
-认证：先读 `$env:GITHUB_TOKEN`，再读仓库根 `.env` 的 `GITHUB_TOKEN=`（fine-grained token 需要
-Contents: Read and write，Pages: Read）。
-
-## 3. 打 tag / Release
+## 3. 发布后验证
 
 ```powershell
-$git = '.\tools\git\cmd\git.exe'     # 本机 git 不在 PATH
-& $git tag -a vX.Y.Z -m "vX.Y.Z - 一句话"
-& $git push origin vX.Y.Z
+& $py deploy/verify_live.py --expect-version vX.Y.Z
+& $py deploy/verify_live.py --compare-dist                    # 顺带对比 dist 体积
+& .\deploy\pages_status.ps1 -Wait -MaxMinutes 15              # Pages 构建状态（只读）
 ```
 
-GitHub Release 正文直接用 CHANGELOG 那一节 markdown（GitHub 会渲染）。
+`verify_live.py` 检查：首页 200/标题/版本、`es/` `zh/` 落地页版本、`whats-new` 顶部版本、
+About、GoatCounter、`data/idx/core.json` gzip 体积区间（2.5–12 MB）、关键页面、sitemap 数、
+robots、404。退出码 0 才算上线成功；失败先看 stdout 的 JSON。
+发布后还按 `docs/网站优化流程.md` §5 的 6 项复核（smoke 复核 / 统计 / 搜索 / 漂移 / 夜间指标）。
 
-## 4. 发布后核对
+## 4. tag / Release
 
-- 首页 200：脚本已经检查；再人工开一次首页、`/whats-new.html`、任意一个成分页。
-- 页脚版本号 = CHANGELOG 第一节；`whats-new.html` 列表顶部是最新版本。
-- 随机抽一条检索，确认线上结果与本地一致（必要时 `?legacy=1` 对照）。
+```powershell
+$git = '.\tools\git\cmd\git.exe'      # 本机 git 不在 PATH
+& $git tag -a vX.Y.Z -m "vX.Y.Z - 一句话"
+& $git push origin vX.Y.Z
+& $py deploy/github_release.py --tag vX.Y.Z     # 正文取 CHANGELOG 该节
+```
 
-## 5. 回滚（先问人再动手）
+## 5. 失败与回滚（人工拍板）
 
-回滚会动公开站点，必须由人拍板。可行路径按顺序考虑：
+- Pages 构建失败 / 首页检查失败：带 `-AutoRollback` 会恢复上一个 gh-pages commit 并复验；
+  先 `pages_status.ps1` 看最近构建时间线，再决定重试或回滚。
+- legacy 构建连续失败：`.github/workflows/pages-fallback.yml` 是备选（默认不启用；
+  启用/回滚顺序见文件注释，切 Pages Source 前必须按序）。
+- 源码层回滚：revert → 重建 → 重新发布；数据层变了要一起回。
+- 绝不手工推 gh-pages 或手工改线上文件。
 
-1. 先 `publish.ps1 -DryRun` 看当前 dist 是否完整，排除只是本地没建完。
-2. 源码层回滚：`git revert` 出问题的提交 → 重新 build → publish（数据层若也变了要一起回）。
-3. 构建层回滚：checkout 上一个 tag 的源码，重新 build 后 publish。
-4. 直接恢复 gh-pages 上一个提交属于最后手段，且要人工确认后再操作。
+## 6. 体积与限额
 
-## 6. 红线
+`site/dist` 约 839 MiB / 12 万文件；自设 900 MiB 上限，GitHub Pages 已发布上限 1 GB。
+逼近上限先清冗余 / 优化索引，并在报告与 CHANGELOG 说明。
 
-- 不手工推 `gh-pages`、不手工改线上文件、不用 GitHub 网页删文件。
-- 不在构建过程中发布；不用 `-Force` 绕过完整性检查（除非已确认原因）。
-- 不启用 `deploy/pages.yml`（GitHub Actions Pages 模板，未启用）：本仓库发布走 gh-pages + publish.ps1，
-  且 `site/dist` 不在版本库里，启用会得到一个空部署。
+## 7. 红线
+
+- 不在构建过程中发布；不用 `-Force` 绕过完整性检查（除非已确认原因并记录）。
+- 每版三件齐：CHANGELOG 版本节、build 完成、verify_live 通过 + tag/Release。
+- 涉及花钱 / 公开口径 / 连续 2 次发布失败：停下来写报告等人。
