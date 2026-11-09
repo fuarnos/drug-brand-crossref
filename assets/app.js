@@ -87,6 +87,14 @@ function scheduleSearch0(q){
   }, 900);
 }
 let IDX = [], NICKS = [], CONF = [], CATS = null;
+// v0.10.2：类别发现快车道（data/idx/cats.json + data/idx/cat-<id>.json + atc-ing.json）。
+// 类别词 / ATC 码的首查不再等 core.json（41.5 MB raw / 9.9 MB gz）：先拉这 23 KB 的词表
+// 和一份 30–57 KB 的切片出结果，core 在后台补全。产物由 site/build.py 构建期生成。
+let CATX = null, CATX_P = null, ATCING = null, ATCING_P = null;
+// 快车道已经渲染过结果：core 拉失败时保留切片视图（不把用户刚看到的结果换成错误框）。
+let FAST_SHOWN = 0;
+// 首屏这条路（快车道 → 分片）是否正在加载：acUpdate() 据此不抢跑 core。
+let LANE_BUSY = false;
 // 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
 let SEARCH_LAYERS = null, PY_MAP = null, PY_P = null;
 // P2 分片（task-36）：manifest + 已加载分片池；分片先出结果，核心随后后台加载补全。
@@ -209,6 +217,15 @@ function brandHTML(e){
       .filter(Boolean).join(' · ');
     const matched = e.d ? ` <span class="match-name" title="${esc(T('res.matched_name'))}">`
       + `${esc(T('res.matched_name'))}: ${esc(e.d)}</span>` : '';
+    // v0.10.2 task-10：CN 无商品名的产品 100% 有上市许可持有人 → 名称位显示「厂家：<MAH>」。
+    // 只显示：厂家名不进 name_key / 索引，也不生成厂家页（避免假商品名污染检索）。
+    const cnMah = ((e.c || []).indexOf('CN') >= 0) ? String(e.m || '').trim() : '';
+    if(cnMah){
+      const short = cnMah.length > 28 ? cnMah.slice(0, 27) + '…' : cnMah;
+      return `<span data-brand="0" class="m-brand m-mah" title="${esc(cnMah)}">`
+        + `<span class="mah-k">${esc(T('brand.mah'))}</span> ${esc(short)}</span>`
+        + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
+    }
     return `<span data-brand="0" class="st-badge st-unknown brand-none">${esc(T('brand.none'))}</span>`
       + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
   }
@@ -434,7 +451,9 @@ function brandRowHTML(e, T){
     <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${exp}${badge}${ctx}${det}${rep}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
-const RES_PAGE = 20;              // v0.9.7 task-12：默认 20 行，「显示更多」每次 +20
+// v0.10.2 M-4：手机上一条结果就是一张卡（≈190–220px），20 条要滚 5 屏多；
+// 移动端首屏分页取 10（桌面仍是 20），「显示更多」每次仍按 RES_PAGE 增量。
+const RES_PAGE = (window.matchMedia && window.matchMedia('(max-width:767px)').matches) ? 10 : 20;
 let RES_LIMIT = RES_PAGE;
 let RES_MODE = 'grouped';         // 'flat' = 普通查询的扁平表；'grouped' = ATC/大类结果（保持原样）
 let RES_EXPANDED = new Set();     // 已展开的分组下标
@@ -837,7 +856,13 @@ function acUpdate(){
   const rawName = splitDose(raw)[0];
   const nq = norm(rawName);
   if(nq.length < 2 && atcQuery(rawName) === ''){ AC_WANT = false; acClose(); return; }
-  if(!IDX_READY && !POOL_READY){ AC_WANT = true; acClose(); if(!SHARD_P) loadIndex(); return; }  // 加载完成后补算（分片加载中不抢跑 core）
+  if(!IDX_READY && !POOL_READY){
+    AC_WANT = true; acClose();
+    // v0.10.2：快车道/分片正在路上时不再抢跑 core（原来这里会为了补全提示立刻拉 9.9 MB，
+    // 把「core 后台门控」整条抵消掉）。分片或 core 任一到位后都会回到这里重算补全。
+    if(!SHARD_P && !LANE_BUSY) loadIndex();
+    return;
+  }
   AC_WANT = false;
   AC_T = setTimeout(()=>{ AC_ITEMS = acCompute(nq, rawName); AC_I = -1; acPaint(); }, 90);
 }
@@ -892,7 +917,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=3973462234（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=0743706957（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -945,7 +970,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=3973462234').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=0743706957').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1227,6 +1252,9 @@ function renderATC(atcCode, q){
     if(codes && codes.some(c => c.indexOf(atcCode) === 0)) hits.push(e);
   }
   hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  // v0.10.2 F4a：与 lib/search.py 的「方案 H」同口径——先按成分在该码里的产品总数排，
+  // 再按条目 n；否则复方大卡 + 命名碎片化会系统性占优（审计报告 §4）。
+  sortBySid(hits, atcIngWeights(atcCode));
   const shown = hits.slice(0, 200);
   if(!shown.length){
     RES_GROUPS = null; LAST_DISPLAY = [];
@@ -1252,9 +1280,18 @@ function _catNorm(s){
     .replace(/\s+/g, '').toLowerCase();
 }
 function catHit(nq){
-  if(!CATS || !CATS.categories || !nq) return null;
+  if(!nq) return null;
   const q = _catNorm(nq);
   if(q.length < 2) return null;
+  // v0.10.2：先查构建期 word 表（cats.json，与 lib/categories.py 同源），
+  // 再回退 data/categories.json 的 label/alias 循环——两条路认识的词集一致，
+  // 差别只在「老缓存页面没有 cats.json 时也认识口令词」。
+  const x = catxHit(nq);
+  if(x && x.kind === 'cat'){
+    const c = catxCat(x.id);
+    if(c) return c;
+  }
+  if(!CATS || !CATS.categories) return null;
   for(const c of CATS.categories){
     const labels = [];
     const L = c.labels || {};
@@ -1286,6 +1323,7 @@ function renderCategory(cat, q){
     if(codes && codes.some(c => prefs.some(p => c.indexOf(p) === 0))) hits.push(e);
   }
   hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  sortByIngredient(hits, ingWeightMap(catxCat(cat.id)));
   const shown = hits.slice(0, 200);
   const link = `<p class="sub"><a href="${esc(catUrl)}">${esc(T('atc.view_class'))}</a> · `
     + `${esc(T('cat.disclaimer'))}</p>`;
@@ -1302,6 +1340,104 @@ function renderCategory(cat, q){
   out.innerHTML = bar + `<div class="notice">${esc(T('parse.category_note'))}</div>` + link
     + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
   meta.textContent = `${hits.length} ${T('res.matched')} · ${T('parse.category')} ${label}`;
+}
+// ── v0.10.2 快车道渲染（cats.json + 预生成切片，首查不等 core.json）──────────
+// 与 renderCategory() 输出同构（解析条 + 说明 + 类目页链接 + 分组表），只是数据源换成
+// 构建期切片；随后 loadIndex(true) 在后台补国家视图/同成分/分页，core 到位后 render() 重绘。
+// 切片 404 / JSON 坏 / 用语改词 → 返回 false，调用方回退 loadShardedIndex / loadIndex。
+function catxCat(id){
+  return (CATX && CATX.cats || []).find(c => c.id === id) || null;
+}
+function renderCategoryFast(cx, id, q){
+  const T = window.T || (k=>k);
+  const cat = (cx && cx.cats || []).find(c => c.id === id);
+  if(!cat || !cat.slice || !cat.slice.f) return Promise.resolve(false);
+  const label = (cat.labels && (cat.labels[window.LANG] || cat.labels.en)) || cat.id;
+  return fetchJSON(BASE + cat.slice.f + (cx.v ? '?v=' + cx.v : ''))
+    .then(rows => {
+      if(box.value.trim() !== q) return true;      // 用户已改词：丢弃这次切片
+      syncURL(q);
+      RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_MODE = 'grouped';
+      const bar = parseBarHTML({category: label}, T('parse.match.category'));
+      const link = `<p class="sub"><a href="${esc(BASE + String(cat.url || ''))}">`
+        + `${esc(T('atc.view_class'))}</a> · ${esc(T('cat.disclaimer'))}</p>`;
+      const display = (rows || []).map(e => [1, 'category', e]);
+      RES_GROUPS = groupByIngredient(display);
+      LAST_DISPLAY = display;
+      out.innerHTML = bar + `<div class="notice">${esc(T('parse.category_note'))}</div>` + link
+        + (display.length
+            ? `<div id="reswrap">${resultsTableHTML(T)}</div>`
+            : `<div class="notice warnbox">${esc(T('cat.no_data'))}</div>`)
+        + (coreLoadPending() ? `<p class="sub">${esc(T('res.partial'))}</p>` : '');
+      meta.textContent = `${display.length} ${T('res.matched')} · ${T('parse.category')} ${label}`;
+      document.documentElement.classList.add('has-q');
+      out.removeAttribute('aria-busy');
+      const repEl = document.getElementById('report');
+      if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink');
+                 if(a) a.href = reportURL(q); }
+      FAST_SHOWN = 1;
+      // 后台补全走与分片路径同一个门控（省流 / 2g-3g 不预取、空闲再拉、后台挂起），
+      // 不在这里直接 loadIndex()——否则「类别词首查」又变成一次 9.9 MB 的强制下载。
+      ensureCoreInBackground();
+      return true;
+    })
+    .catch(() => false);
+}
+function renderATCFast(cx, code, q){
+  const T = window.T || (k=>k);
+  return loadAtcIng().then(d => {
+    const rows = (d && d.codes) ? d.codes[code] : null;
+    if(!rows || !rows.length) return false;       // 没有这个码的成分表 → 回退老路径
+    if(box.value.trim() !== q) return true;
+    syncURL(q);
+    RES_GROUPS = null; LAST_DISPLAY = [];
+    const bar = parseBarHTML({atc: code}, T('parse.match.atc'));
+    const codes = (cx && cx.atc_codes) || (CATS && CATS.atc_codes) || [];
+    let classCode = '';
+    if(codes.indexOf(code) >= 0) classCode = code;
+    else if(code.length === 7 && codes.indexOf(code.slice(0, 5)) >= 0) classCode = code.slice(0, 5);
+    const classLink = classCode
+      ? `<p class="sub"><a href="${BASE}atc/${esc(classCode)}.html">${esc(T('atc.view_class'))} (${esc(classCode)})</a></p>`
+      : '';
+    const zh = window.LANG === 'zh' || window.LANG === 'zh-Hant';
+    const names = d.n || {}, totals = d.t || {};
+    const lis = rows.map(r => {
+      const nm = names[r[0]] || [];
+      const label = (zh && nm[1]) ? nm[1] : (nm[0] || r[0]);
+      return `<li><a href="${BASE}drug/${esc(r[0])}.html">${esc(label)}</a></li>`;
+    }).join('');
+    // 不静默截断：成分表只带前 N 个，页面必须说明「还有多少」，并且等 core 到位后
+    // renderATC() 会用完整结果整块替换这一屏（不是追加，所以不会留下半截列表）。
+    const total = totals[code] || rows.length;
+    const more = (total > rows.length)
+      ? `<p class="sub">${esc(T('atc.ing_more').replace('{n}', String(total - rows.length)))}</p>`
+      : '';
+    out.innerHTML = bar + `<div class="notice atcbar">${esc(T('atc.ing_overview'))}</div>`
+      + `<ul class="sub atclist">${lis}</ul>` + more + classLink
+      + (coreLoadPending() ? `<p class="sub">${esc(T('res.partial'))}</p>` : '');
+    meta.textContent = `${T('atc.label')} ${code}`;
+    document.documentElement.classList.add('has-q');
+    out.removeAttribute('aria-busy');
+    const repEl = document.getElementById('report');
+    if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink');
+               if(a) a.href = reportURL(q); }
+    FAST_SHOWN = 1;
+    ensureCoreInBackground();   // 同上：补全走门控，不强制拉 core
+    return true;
+  }).catch(() => false);
+}
+// 快车道入口：类别词 → 切片；ATC 码 → 成分表。判定不了或产物缺失 → false（走老路径）。
+function startFastLane(q){
+  if(IDX_READY || LEGACY) return Promise.resolve(false);
+  return loadCatx().then(cx => {
+    if(!cx) return false;
+    const atc = atcQuery(splitDose(q)[0]);
+    if(atc) return renderATCFast(cx, atc, q);
+    const hit = catxHit(norm(splitDose(q)[0])) || catxHit(q);
+    if(!hit) return false;
+    if(hit.kind === 'cat') return renderCategoryFast(cx, hit.id, q);
+    return renderATCFast(cx, hit.id, q);
+  }).catch(() => false);
 }
 function render(){
   const q = box.value.trim();
@@ -1402,7 +1538,9 @@ function render(){
       : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
            : `${T('res.none')} — ${T('res.caveat')}.`);
   }
-  if(partial) meta.textContent += ' · ' + T('res.partial');
+  // v0.10.2：core 被省流/弱网门控时不再谎称「正在加载完整索引」，只有真的在拉才提示；
+  // 用户换国家（聚合视图）时 ensureIndexOnDemand() 会按需加载并重绘。
+  if(partial && coreLoadPending()) meta.textContent += ' · ' + T('res.partial');
   // 国家无匹配：显式提示 + 「看成分卡」/「换国家」，不再静默回退到各国列表。
   let countryMissHTML = '';
   if(countryMiss){
@@ -1658,7 +1796,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=3973462234，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=0743706957，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1702,10 +1840,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=3973462234 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=0743706957 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=3973462234').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=0743706957').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1715,7 +1853,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=3973462234').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=0743706957').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
@@ -1728,6 +1866,75 @@ function loadSupport(){
   ]).then(([a,c,cat])=>{ NICKS = a || []; CONF = c || []; CATS = cat || null; return true; })
     .catch(()=>{ SUPPORT_P = null; return false; });
   return SUPPORT_P;
+}
+// ── v0.10.2 类别发现快车道：轻量词表 + 预生成切片 ─────────────────────────
+// 审计：reports/search-discovery-audit-20261110.md §2。失败一律返回 null，调用方回退老路径
+// （loadShardedIndex / loadIndex），行为与 v0.10.1 逐字节一致，不弹错、不白屏。
+function loadCatx(){
+  if(CATX) return Promise.resolve(CATX);
+  if(CATX_P) return CATX_P;
+  CATX_P = fetchJSON(BASE + 'data/idx/cats.json')
+    .then(x => { CATX = x || null; return CATX; })
+    .catch(() => { CATX = null; CATX_P = null; return null; });
+  return CATX_P;
+}
+function loadAtcIng(){
+  if(ATCING) return Promise.resolve(ATCING);
+  if(ATCING_P) return ATCING_P;
+  ATCING_P = fetchJSON(BASE + 'data/idx/atc-ing.json')
+    .then(x => { ATCING = x || null; return ATCING; })
+    .catch(() => { ATCING = null; ATCING_P = null; return null; });
+  return ATCING_P;
+}
+// 类别词解释：先查 cats.json 的 words（快车道 + 老客户端都吃这一份），
+// 查不到再回退 data/categories.json 的 label/alias 循环（catHit）。
+function catxHit(nq){
+  if(!CATX || !CATX.words) return null;
+  const q = _catNorm(nq);
+  if(q.length < 2) return null;
+  const hit = CATX.words[q];
+  if(!hit) return null;
+  if(hit.indexOf('cat:') === 0) return {kind: 'cat', id: hit.slice(4)};
+  return {kind: 'atc', id: hit.slice(4)};
+}
+// 成分在本类别的产品数（cats.json 的 cats[].ing），给 ATC/大类结果换排序键——
+// 与 lib/search.py 的 _order_by_ingredient 同口径（审计报告 §4 方案 H）。
+function ingWeightMap(cat){
+  const m = new Map();
+  if(!cat || !cat.ing) return m;
+  for(const r of cat.ing) m.set(r[0], r[1]);
+  return m;
+}
+function sortByIngredient(hits, weights){
+  if(!weights || !weights.size) return;
+  hits.sort((a, b)=>{
+    const wa = Math.max(0, ...(String(a.x || '').split(' + ').map(s => weights.get(s) || 0)));
+    const wb = Math.max(0, ...(String(b.x || '').split(' + ').map(s => weights.get(s) || 0)));
+    return wb - wa || (b.n || 0) - (a.n || 0);
+  });
+}
+// ATC 码的排序权重按 substance_id 存（atc-ing.json 的 [sid, 产品数]），与大类按名字不同。
+// 权重表未就绪时先按 n 排（v0.10.1 行为），表到了再重排一次（同一查询才重排）。
+function atcIngWeights(code){
+  if(!ATCING || !ATCING.codes || !ATCING.codes[code]){
+    loadAtcIng().then(d => {
+      if(!d || !d.codes || !d.codes[code]) return;
+      const q = box.value.trim();
+      if(q && atcQuery(splitDose(q)[0]) === code) render();
+    });
+    return null;
+  }
+  const m = new Map();
+  for(const r of ATCING.codes[code]) m.set(r[0], r[1]);
+  return m;
+}
+function sortBySid(hits, weights){
+  if(!weights || !weights.size) return;
+  const weightOf = e => {
+    const sids = (e.vs && e.vs.length) ? e.vs : [e.v];
+    return Math.max(0, ...sids.filter(Boolean).map(s => weights.get(s) || 0));
+  };
+  hits.sort((a, b)=> weightOf(b) - weightOf(a) || (b.n || 0) - (a.n || 0));
 }
 function shardKeyOf(nq){
   const ch = nq && nq[0];
@@ -1762,6 +1969,8 @@ function loadShards(files){
     IDX = pool;
     POOL_READY = true;
     for(const f of files) POOL_FILES.add(f.f);
+    // v0.10.2：分片到位就能给补全提示（core 现在要等安静期才拉，别让补全一直空着）
+    if(typeof AC_WANT !== 'undefined' && AC_WANT) acUpdate();
     return pool;
   });
 }
@@ -1773,9 +1982,69 @@ function loadShardedIndex(q){
     return loadShards(files);
   });
 }
+// ── v0.10.2 M-2：core.json（≈9.9 MB gz）后台预取门控 ──────────────────────
+// core 只补「国家视图 / 同成分 / 品牌家族 / 拼音重试」这些跨条目的聚合区块；
+// identity 卡与命中表在分片阶段已经出来，所以搜完立刻白拉 9.9 MB 对手机是纯浪费：
+//   1) 网络：saveData（省流）或 slow-2g / 2g / 3g 完全不预取；
+//   2) 首屏：先让首屏安顿，用 requestIdleCallback(…, {timeout: 8000}) 空闲再拉
+//      （Safari 没有 idle callback，退化成 3s setTimeout）；
+//   3) 页面不可见（切到后台 tab）时挂起，回到前台再试一次。
+// 用户主动要聚合视图（换国家下拉）时走 ensureIndexOnDemand()，按需加载并重绘，
+// 失败降级保持原样（分片结果继续可用 + 「重试」按钮，见 loadIndex 的 catch）。
+const CORE_BG = {pending: 0, timer: 0, waiting: 0};
+const CORE_BG_DELAY = 9000;          // 首屏安静这么久之后才考虑拉 core（不抢首屏带宽）
+const CORE_BG_IDLE_TIMEOUT = 8000;   // 安静期过后，空闲回调最长再等 8s
+const CORE_BG_FALLBACK_DELAY = 3000; // 兼容位：无 requestIdleCallback 时的等价延后
+function coreNetAllowsPrefetch(){
+  const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if(!c) return true;                // Safari 没有 connection API → 交给空闲/可见性门控
+  if(c.saveData) return false;       // 用户开了省流模式：不预取
+  const et = c.effectiveType || '';
+  return et !== 'slow-2g' && et !== '2g' && et !== '3g';
+}
+function coreLoadPending(){ return !!(IDX_P || CORE_BG.pending); }
 function ensureCoreInBackground(){
   if(IDX_READY || IDX_P || LEGACY) return;
-  try{ setTimeout(()=>{ loadIndex(true); }, 0); }catch(e){}
+  if(!coreNetAllowsPrefetch()) return;
+  if(document.visibilityState === 'hidden'){
+    if(CORE_BG.waiting) return;
+    CORE_BG.waiting = 1;
+    document.addEventListener('visibilitychange', function onVisible(){
+      if(document.visibilityState === 'hidden') return;
+      document.removeEventListener('visibilitychange', onVisible);
+      CORE_BG.waiting = 0;
+      ensureCoreInBackground();
+    });
+    return;
+  }
+  if(CORE_BG.pending) return;
+  CORE_BG.pending = 1;
+  const fire = function(){
+    CORE_BG.pending = 0;
+    if(CORE_BG.timer){ clearTimeout(CORE_BG.timer); CORE_BG.timer = 0; }
+    if(IDX_READY || IDX_P) return;
+    loadIndex(true);
+  };
+  // 先等一段「安静期」再排空闲回调：requestIdleCallback 在空闲页面里几乎立刻触发，
+  // 只靠它等于「输入 2 个字就拉 9.9 MB」——那是 M-2 要修的问题本身。
+  // CORE_BG_DELAY 之内用户还在打字/切词，就不该为补全抢带宽。
+  try{
+    CORE_BG.timer = setTimeout(function(){
+      CORE_BG.timer = 0;
+      try{
+        if(window.requestIdleCallback){
+          window.requestIdleCallback(fire, {timeout: CORE_BG_IDLE_TIMEOUT});
+        }else{
+          fire();
+        }
+      }catch(e){ fire(); }
+    }, CORE_BG_DELAY);
+  }catch(e){ fire(); }
+}
+// 用户明确要聚合视图（换国家/地区）：不等空闲，直接按需加载 core 后重绘。
+function ensureIndexOnDemand(){
+  if(IDX_READY || IDX_P || LEGACY) return;
+  loadIndex().then(ok => { if(ok && box.value.trim()) render(); });
 }
 function loadIndex(quiet){
   if(IDX_READY) return Promise.resolve(true);
@@ -1798,8 +2067,9 @@ function loadIndex(quiet){
   }).catch(err=>{
     // 失败后清掉缓存的 Promise，允许点「重试」重新发起。
     IDX_P = null;
-    if(quiet && POOL_READY){
-      if(window.console && console.warn) console.warn('core index unavailable (sharded view kept)', err);
+    if(quiet && (POOL_READY || FAST_SHOWN)){
+      // 分片 / 快车道切片已经出了结果：core 失败不推翻已显示的内容，只在控制台留痕。
+      if(window.console && console.warn) console.warn('core index unavailable (partial view kept)', err);
       return false;
     }
     setHint(HINT_IDLE);
@@ -1831,21 +2101,35 @@ function startSearch(){
     out.setAttribute('aria-busy', 'true');
   }
   document.documentElement.classList.add('has-q');
+  // v0.10.2：类别词 / ATC 码先走轻量索引（≈23 KB 词表 + 一份 30–57 KB 切片），
+  // 命中就直接出结果，core.json 在后台补全；判定不了 / 产物缺失 → 回退下面的老路径。
+  // LANE_BUSY 让 acUpdate() 知道「首屏这条路正在加载」，别为了补全提示抢跑 core。
+  LANE_BUSY = true;
+  startFastLane(q).then(taken => {
+    LANE_BUSY = false;
+    if(!taken) startSlowLane(q);
+  });
+}
+// 老路径（v0.10.1 行为逐字节不变）：分片先出结果，core 后台补；ATC 码直接等 core。
+function startSlowLane(q){
+  FAST_SHOWN = 0;    // 这一轮不是快车道渲染的：core 失败要照常报错，别保留旧内容
   // v0.6.4 A2：ATC 码查询需要完整索引（分片里的条目不一定带 atc 聚合），先确保 core 到位。
   if(atcQuery(splitDose(q)[0])){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const nq = norm(splitDose(q)[0]);
   if(POOL_READY){
     const files = shardsForQuery(nq);
     if(files && files.some(f=> !POOL_FILES.has(f.f))){
-      loadShards(files).then(()=>{ render(); ensureCoreInBackground(); })
-        .catch(()=>{ render(); ensureCoreInBackground(); });
+      // v0.10.2：先排后台预取（同步置 pending），再 render()——否则首帧算不出
+      // 「partial 且 core 在拉」这个状态，#meta 会漏掉「部分结果」提示。
+      loadShards(files).then(()=>{ ensureCoreInBackground(); render(); })
+        .catch(()=>{ ensureCoreInBackground(); render(); });
     }else{
-      render();
       ensureCoreInBackground();
+      render();
     }
     return;
   }
-  SHARD_P = loadShardedIndex(q).then(()=>{ render(); ensureCoreInBackground(); })
+  SHARD_P = loadShardedIndex(q).then(()=>{ ensureCoreInBackground(); render(); })
     .catch(()=> loadIndex().then(ok => { if(ok) render(); }));
 }
 // 结果区事件委托：失败重试 / 加载更多 / 品牌折叠展开 / 换国家。
@@ -1960,6 +2244,9 @@ ctry.addEventListener('change', ()=>{
   gcEvent('country-' + (ctry.value || 'ALL'));
   updateCtryLabel();
   acClose();
+  // v0.10.2：选了国家/地区就是「要按国家看的聚合视图」，这需要完整 core；
+  // 后台预取被省流/弱网门控时，这里按需加载（HINT_LOADING + 失败重试照旧）。
+  if(ctry.value) ensureIndexOnDemand();
   startSearch();
 });
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
@@ -2034,3 +2321,5 @@ if(LEGACY){
   trackSearchSubmit(initial);
   startSearch();
 }
+// v0.10.2：空闲时预热类别词表（≈7 KB gz），首次输入「退烧药」这类词时不用等。
+if(!LEGACY){ try{ setTimeout(loadCatx, 0); }catch(e){} }

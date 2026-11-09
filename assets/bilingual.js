@@ -72,8 +72,11 @@
       var zhh = el.getAttribute('data-n-zhh') || '';
       var es = el.getAttribute('data-n-es') || '';
       var lang = window.LANG || 'en';
-      if(lang === 'zh') el.textContent = zh || (en + ' 暂无中文名');
-      else if(lang === 'zh-Hant') el.textContent = zhh || (en + ' 暫無中文名');
+      // v0.10.2：缺当前语言名不再把「暂无中文名」拼进名字（会进链接可访问名，
+      // 且每个盐型各出现一次）。改由 applyNameLangBadges() / markAtcRowGaps()
+      // 在名字**之后**放一枚徽章，ATC/大类行每行只标一次，盐型不单独标。
+      if(lang === 'zh') el.textContent = zh || en;
+      else if(lang === 'zh-Hant') el.textContent = zhh || en;
       else if(lang === 'es') el.textContent = es || en;
       else el.textContent = en;
     });
@@ -231,7 +234,11 @@
       ff.querySelector('span').textContent = T('matrix.form');
       var fsel = ff.querySelector('select');
       fsel.appendChild(opt('', T('matrix.all')));
-      Object.keys(forms).sort().forEach(function(f){ fsel.appendChild(opt(f, f)); });
+      Object.keys(forms).sort().forEach(function(f){
+        // v0.10.2：剂型下拉显示四语标签（原来显示英文原码 effervescent / tablet）
+        var lb = T('form.' + f);
+        fsel.appendChild(opt(f, (lb && lb.indexOf('form.') !== 0) ? lb : f));
+      });
       panel.appendChild(ff);
       // 释放
       var rf = document.createElement('label'); rf.className = 'mf-field';
@@ -277,9 +284,28 @@
           if(s.form && (tr.getAttribute('data-form') || '') !== s.form) ok = false;
           if(s.rel && (tr.getAttribute('data-release') || '') !== s.rel) ok = false;
           if(s.spec && (tr.getAttribute('data-spec') || '').toLowerCase().indexOf(s.spec) < 0) ok = false;
-          tr.style.display = ok ? '' : 'none';
+          // v0.10.2 task-4：「首屏可见列全空」的行默认不渲染；一旦它所在的隐藏市场被
+          // 加入列（?mk= 或下面的「加为一列」按钮），这一行就应当出现。
+          // 注意：CSS 里 `tr[data-hide-empty]` 是 display:none，所以显示时必须写
+          // 明确的 'table-row'（置空 '' 会退回 CSS 的 none）。
+          if(tr.getAttribute('data-hide-empty') === '1'){
+            var hid = (tr.getAttribute('data-hidden-mk') || '').split(',');
+            var shownNow = hid.some(function(c){ return c && s.countries.indexOf(c) >= 0; });
+            ok = ok && shownNow;
+            tr.style.display = ok ? 'table-row' : 'none';
+          }else{
+            tr.style.display = ok ? '' : 'none';
+          }
           if(ok) visible++;
         });
+        // 「另有 N 个…」提示：全部显示出来后就不再提示（数字是构建期按默认列算的）
+        var boxNR = document.querySelector('.matrix-hidden-rows');
+        if(boxNR){
+          var stillHidden = rows.some(function(tr){
+            return tr.getAttribute('data-hide-empty') === '1' && tr.style.display === 'none';
+          });
+          boxNR.style.display = stillHidden ? '' : 'none';
+        }
         var mobile = window.matchMedia && window.matchMedia('(max-width:719px)').matches;
         ths.forEach(function(th){
           var c = th.getAttribute('data-country');
@@ -364,6 +390,20 @@
       box.querySelector('.mf-toggle').addEventListener('click', function(){
         var open = box.classList.toggle('mf-open');
         this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // v0.10.2 task-4：「另有 N 个规格/剂型仅在 US · GB 有记录」后面的市场按钮 ——
+      // 点一下就把该市场加进列（走同一套 ?mk= 机制，可分享），对应行随之出现。
+      var noteHost = wrap.parentNode || document;
+      Array.prototype.forEach.call(noteHost.querySelectorAll('[data-mk-add]'), function(btn){
+        btn.addEventListener('click', function(){
+          var c = btn.getAttribute('data-mk-add');
+          var cb = cbox.querySelector('input[data-mf-country="' + c + '"]');
+          if(!cb){ return; }
+          cb.checked = true;
+          apply(true);
+          var nr = noteHost.querySelector('.matrix-hidden-rows');
+          if(nr) nr.scrollIntoView ? nr.scrollIntoView({block: 'nearest'}) : null;
+        });
       });
       apply(false);
     });

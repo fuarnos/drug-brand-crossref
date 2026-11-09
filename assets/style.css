@@ -1,17 +1,17 @@
 
 :root{--bg:#fbfbf9;--fg:#1f2328;--muted:#4b5257;--line:#cfcabf;--line-soft:#e3e1da;
---card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
+--card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--accent-weak:#f1f8f4;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
 --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
 --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:24px;
 --lh-tight:1.3;--lh-heading:1.35;--lh-ui:1.5;--lh-body:1.6;
---r-sm:8px;--r-md:12px;--r-pill:999px;--prose:600px}
+--r-sm:8px;--r-md:12px;--r-pill:999px;--prose:72ch}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
 display:flex;flex-direction:column;
 font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);background:#fff}
-.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:var(--bg)}
+.wrap{max-width:1600px;margin:0 auto;padding:0 20px}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
 .logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
 .logo-zh{font-weight:400;font-size:14px;color:var(--muted);margin-left:8px;white-space:nowrap}
@@ -90,18 +90,38 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atccard code{font-weight:700;margin-right:4px}
 .atclist{columns:2;column-gap:24px}
 .atclist li{break-inside:avoid;margin:2px 0}
-@media (max-width:767px){ .atclist{columns:1} }
+/* v0.10.2 task-3：ATC/大类页成分列表改自适应多列网格——宽屏（1440 / 2560）不再把内容
+   挤在中间一列（旧 .wrap 920px + columns:2，2560 视口下列宽只有 268px）。
+   minmax(300px,1fr) 保证单列 ≥300px，行内「主名 + 盐型子行 + 状态角标」不折断。 */
+.atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+ column-gap:24px;row-gap:0;columns:auto;padding-left:20px;margin:6px 0 10px;max-width:none}
+.atcmembers li{font-size:16px;line-height:1.3;break-inside:auto}
+@media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:18px}
+ .atcmembers li{font-size:16px} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
 .atc-src{color:var(--muted);font-size:12px;margin-left:6px;white-space:nowrap}
 .atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
 .atc-src-line{margin:-8px 0 10px}
 .atc-count{margin:-6px 0 10px}
 .salt{color:var(--muted);font-size:14px;margin-left:6px}
+/* v0.10.2 task-3：盐型独立成块级子行（左缩进对齐主名），文案「盐型：Name」。
+   原来是内联 span，390px 下与主名/角标抢行，且每个盐型各带一次「暂无中文名」。 */
+.salt-row{display:block;margin:1px 0 2px;color:var(--muted);font-size:15px;line-height:1.4}
+.salt-row .salt-k{color:var(--muted)}
+.salt-row .nm{color:var(--muted)}
 .drug-name-src{min-height:18px;margin:2px 0 0;font-size:14px}
 .drug-name-src [data-sub-src]:not(:empty){display:inline-block;padding:1px 7px;
   border:1px solid var(--line);border-radius:999px;background:#f6f5f0;color:var(--muted)}
 .salt .nm{color:var(--muted)}
-.atcmembers .st-badge{margin-left:4px}
+.atcmembers .st-badge{margin-left:4px;padding:0 5px;margin-right:3px;font-size:13px;
+  line-height:1.2}
+/* v0.10.2：状态角标尾部带市场码（reports/atc-status-aggregation-20261110.md）。
+   字号 12px 是硬线（v0.10.2 起「任何可见文字 <12px 即违规」）：11px 虽然能把 390px 下
+   4 徽章行压到 2 行，但那是拿可读性换高度。12px + padding:0 5px + line-height 1.2 时
+   4 徽章行平均 48px（v0.10.1 无市场码时 52px），仍然比原来矮。 */
+.st-badge .mk{margin-left:3px;font-size:12px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.atc-mk-hint{margin:-4px 0 10px}
+/* 盐型子行不再逐个标「暂无中文名」：标记由 markAtcRowGaps() 每行只放一枚（链接外） */
 .atcdetails{margin:8px 0 0}
 .atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
 .atcdetails .atcmembers{margin-top:6px}
@@ -195,6 +215,9 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 /* ── UI P0：解析条 / 自动完成 / 分组折叠 / 加载更多 / 国家提示 ── */
 .sel-label{color:var(--muted);font-size:14px;margin-right:2px}
 .searchwrap{position:relative}
+/* v0.10.2 M-4：#ac 的锚点从 .searchwrap 换成 .searchbar，方便把 #meta / 国家行
+   一起放进 sticky 的 .searchwrap 里，而不让建议列表跟着往下挪两层。 */
+.searchbar{position:relative}
 #ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
 background:#fff;border:1px solid var(--line);border-radius:12px;
 box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
@@ -246,7 +269,7 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
  font-size:14px;margin:9px 0 0}
 .idacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .idacts a,.idacts button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;
- padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:#fff;color:var(--accent);
+ padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:var(--surface-2);color:var(--accent);
  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
 .idacts .primary{background:var(--accent);color:#fff}
 .idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
@@ -271,9 +294,13 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
 @keyframes skfade{0%{background-position:100% 50%}100%{background-position:0 50%}}
 @media (prefers-reduced-motion:reduce){.res-skeleton .sk-row{animation:none}}
 @media (max-width:767px){
-  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:#fff;padding:6px 0;
+  /* v0.10.2 M-4：sticky 区从「只有输入框」扩到「输入框 + 命中数 + 国家/地区」。
+     手机滚到第 3 屏后仍能看到「共多少条」并直接换国家（原来要一路滚回顶部）。 */
+  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:var(--bg);padding:6px 0;
    border-bottom:1px solid var(--line)}
   .has-q .searchwrap #ac{top:calc(100% + 2px)}
+  .has-q .searchwrap .search-status{margin:2px 0 0;min-height:0}
+  .has-q .searchwrap .row{margin-top:4px}
 }
 table.det{margin:4px 0 8px;font-size:14px;background:#f6f5f0;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
@@ -326,8 +353,9 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   -webkit-line-clamp:2;overflow:hidden;max-width:220px;margin:0 6px 2px 0;
   vertical-align:top;line-height:1.35;min-height:24px;padding:3px 0;
   text-decoration:underline;text-underline-offset:2px}
-.m-en{display:inline-block;margin:0 6px 2px 0;font-size:12px;color:var(--muted)}
-.m-zh{display:inline-block;margin:0 0 2px 0;font-size:12px;color:var(--muted)}
+/* v0.10.2 M-5：矩阵卡里的成分对照名是判断「这条到底是什么药」的关键信息，12px → 14px */
+.m-en{display:inline-block;margin:0 6px 2px 0;font-size:14px;color:var(--muted)}
+.m-zh{display:inline-block;margin:0 0 2px 0;font-size:14px;color:var(--muted)}
 /* v0.9.0 task-19/6：无商品名占位 / 矩阵 +N 展开 */
 .brand-none{color:var(--muted);font-weight:600}
 .m-none-ing{display:inline-block;font-size:14px;color:var(--muted);margin-left:4px}
@@ -343,18 +371,44 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .m-orig{display:block;margin-top:2px;font-size:14px;color:var(--muted);font-weight:400;white-space:normal}
 .name-single-note,.maker-single-note{margin:18px 0 0;color:var(--muted);font-size:14px}
 /* v0.8.4 task-128：状态彩色角标（A1 明细等） */
-.st-badge{display:inline-block;font-size:12px;padding:1px 6px;border-radius:999px;
+.st-badge{display:inline-block;font-size:13px;padding:2px 6px;border-radius:999px;
   border:1px solid var(--line);margin-right:4px;white-space:nowrap}
 .st-active{color:#0b6b53;border-color:#a9d3c5;background:#eef7f3}
 .st-discontinued{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .st-withdrawn{color:#8a2c1f;border-color:#e6bdb4;background:#fdf0ee}
 .st-unknown{color:var(--muted);background:#f6f5f2}
 .c-brand{overflow-wrap:anywhere}
+/* v0.10.2 task-5：成分页顶部精简悬浮条（滚过 H1 后仍知道「我在看哪个成分」）。
+   纯 CSS sticky：不加自动隐藏动画、不改键盘/读屏顺序；高度 ≤56px；
+   z-index 15 < 手机底栏 .tabbar 的 45，> 矩阵内容（行头 2）。 */
+.drug-sticky{position:sticky;top:0;z-index:15;display:flex;align-items:center;gap:10px;
+  min-height:44px;max-height:56px;margin:0 0 10px;padding:6px 10px;
+  background:var(--bg);border:1px solid var(--line);border-radius:10px}
+.drug-sticky .ds-name{flex:1 1 auto;min-width:0;font-weight:600;font-size:15px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drug-sticky .ds-meta{flex:0 0 auto;color:var(--muted);font-size:12px;white-space:nowrap}
+.drug-sticky .ds-filter{flex:0 0 auto;min-height:32px;display:inline-flex;align-items:center;
+  padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);
+  color:var(--fg);font-size:13px;text-decoration:none}
+.drug-sticky .ds-filter:hover{border-color:var(--accent);color:var(--accent)}
+#filters,table.matrix th[data-country],table.matrix td[data-country]{scroll-margin-top:64px}
+@media (max-width:767px){ .drug-sticky{max-height:56px;padding:4px 8px} }
 .matrix-brand-note{margin:6px 0 0;font-size:14px}
+/* v0.10.2 task-10：CN 无商品名 → 名称位显示「厂家：<MAH>」（弱化，不是品牌名） */
+.m-mah{color:var(--fg);font-weight:600}
+.m-mah .mah-k{color:var(--muted);font-weight:400;font-size:12px}
+.m-mah .m-n{color:var(--muted);font-weight:400;font-size:12px}
+/* v0.10.2 R1：剂型列里的「来源原文」小字（不翻译原文，只翻译这个标签） */
+.m-orig{color:var(--muted);font-size:12px}
+.m-orig-raw{color:var(--muted);font-size:12px}
+/* v0.10.2 task-4：可见列全空的行（只在被隐藏市场有记录）默认不渲染，说明 + 一键加列在表下 */
+.matrix-hidden-rows{margin:8px 0 0}
+.matrix-hidden-rows .sub{margin:0 0 6px}
+table.matrix tr[data-hide-empty="1"]{display:none}
 .matrix-hk-note{margin:4px 0 0;font-size:14px;color:var(--warn)}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;
-  background:#fff;padding:10px 12px}
+  background:var(--surface-2);padding:10px 12px}
 .mf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .mf-title{font-weight:600;font-size:14px}
 .mf-count{color:var(--muted);font-size:14px}
@@ -371,8 +425,9 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .mf-country-actions{display:flex;gap:6px;margin-top:4px}
 .mf-country-actions .mf-reset{padding:2px 8px;font-size:14px}
 .mf-count.mf-warn{color:var(--warn);font-weight:600}
+/* v0.10.2 M-3：「横滑看更多市场」只对桌面（表格态）成立，手机是卡片态、没有横滑，不再显示 */
 .matrix-scroll-hint{display:none;margin:2px 0 0;font-size:14px}
-@media (max-width:767px){ .matrix-scroll-hint{display:block} }
+@media (min-width:768px){ .matrix-scroll-hint{display:block} }
 /* v0.9.0 task-6：横滑 + 规格列 sticky + 移动端卡片 */
 .matwrap{position:relative}
 table.matrix thead th:first-child,
@@ -385,7 +440,8 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
   .matrix-filters.mf-open .mf-panel{display:grid}
   .mf-toggle{display:inline-flex;min-height:40px;align-items:center}
   .mf-field select,.mf-field input[type=search]{min-height:40px}
-  .mf-countries label{min-height:36px}
+  /* v0.10.2 M-3：筛选器复选框 36px → 44px 触控目标（WCAG 2.2 AA 推荐 44×44） */
+  .mf-countries label{min-height:44px}
 }
 @media (min-width:768px){
   /* v0.9.1 P0-4：桌面筛选面板本来常显，隐藏无效的「筛选」按钮 */
@@ -562,7 +618,7 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 .mf-details>summary::-webkit-details-marker{display:none}
 .mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:14px}
 .mf-details[open]>summary{border-bottom:1px solid var(--line)}
-.mf-details .matrix-filters{margin:0;border:0;border-radius:0}
+.mf-details .matrix-filters{margin:0;border:0;border-radius:0 0 12px 12px}
 .mf-details .mf-toggle{display:none}
 .mf-details .mf-panel{display:grid}
 .drug-identity{margin:2px 0 10px}
@@ -611,6 +667,9 @@ body.density-compact table.res{font-size:14px}
 
 /* v0.10.0: neutral background bands + right-top category/language controls */
 main .section,main .catquick{background:var(--band);border:1px solid var(--line);border-radius:12px;padding:16px}
+/* v0.10.2 同色守卫：catquick 是「面板」层（--card），chip 才是里面的井（--surface-2）；
+   两层都用 --band 会白压白，只剩 1px 边框分界。 */
+main .catquick{background:var(--card)}
 .u1guide{background:#fff}
 .sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
 .sn-right details{position:relative}
