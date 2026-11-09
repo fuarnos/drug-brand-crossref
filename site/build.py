@@ -793,6 +793,9 @@ LANG_ALIASES = {
 LANG_META_JS = (
     "var LANG_PATH=" + json.dumps(LANG_PATH, ensure_ascii=False, separators=(",", ":")) + ";\n"
     + "var LANG_ALIAS=" + json.dumps(LANG_ALIASES, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    # v0.10.1：首页只内联当前语言字典时，canon() 仍要知道站点支持哪些语言
+    # （否则 ?lang=es / localStorage=zh 会被当成不支持 → 掉回 en）。
+    + "var I18N_LANGS=" + json.dumps([c for c, _l, _p in LANGS], separators=(",", ":")) + ";\n"
     + "var DEFAULT_LANG='en';"
 )
 
@@ -6368,13 +6371,17 @@ def _sub_base_map(db: sqlite3.Connection) -> tuple[dict[str, str], dict[str, tup
         sub_names[sid0] = (en0 or "", zh0 or "")
     by_norm: dict[str, str] = {}
     for sid0, (en0, _zh0) in sub_names.items():
-        if en0:
-            by_norm.setdefault(_norm_name(en0), sid0)
+        # v0.10.1 热修：_norm_name 只保留 [a-z0-9]，纯中文名会归一成空串；
+        # 空串一旦进 by_norm，所有中文名成分都会被映射到同一个 sid
+        # （表现为 ATC/大类页里「地喹氯铵」下挂几十个不相关抗生素名）。
+        n0 = _norm_name(en0)
+        if n0:
+            by_norm.setdefault(n0, sid0)
     # 同名重复 substance（如 povidone-iodine / povidone-iodine-<hash>）→ 规范到同一 sid
     canon: dict[str, str] = {}
     for sid0, (en0, _zh0) in sub_names.items():
-        if en0:
-            canon[sid0] = by_norm.get(_norm_name(en0), sid0)
+        n0 = _norm_name(en0)
+        canon[sid0] = by_norm.get(n0, sid0) if n0 else sid0
     salt_to_base: dict[str, str] = {}
     for sid0, (en0, _zh0) in sub_names.items():
         if canon.get(sid0) != sid0:
@@ -8127,11 +8134,15 @@ def _coverage_entry_js(root_expr: str) -> str:
     )
 
 
-def _optimize_home_html(html: str, prefix: str) -> str:
+def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
     """v0.9.2 task-34：首页首屏优化（仅首页，避免全站 HTML 膨胀）。
 
     - CSS 内联，去掉 24KB 阻塞样式请求；
     - i18n 内联并在 body 末尾立即 apply()，避免 defer 脚本拖 LCP；
+      v0.10.1 P2-2：只内联**当前语言**的字典（四语 128.8 KB → 22–42 KB）。
+      语言切换走 /es/ /zh/ /zh-hant/ 静态副本的整页导航，首屏只需当前语言；
+      ?lang= 深链或 localStorage 偏好与内联语言不一致时，再加载完整
+      assets/i18n.js 用全字典 apply 一次（不改变切换行为，只是晚一拍）；
     - app.js / bilingual.js 在 load 后注入，保证搜索可用但不挡首屏。
     """
     css_link = f'<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">'
@@ -8150,6 +8161,16 @@ def _optimize_home_html(html: str, prefix: str) -> str:
     i18n_js = i18n_js.replace(
         "window.addEventListener('load', apply);",
         "apply(); window.addEventListener('load', apply);")
+    # v0.10.1：i18n.js = "window.I18N=<四语字典>;\n<逻辑>"，只把字典换成当前语言子集，
+    # 后面的 T()/apply()/语言链接逻辑原样保留，行为不变。
+    m = re.match(r"window\.I18N=(\{.*?\});\n", i18n_js, re.S)
+    if m:
+        full = json.loads(m.group(1))
+        keep = [lang] if lang in full else ["en"]
+        subset = {code: full[code] for code in keep}
+        i18n_js = ("window.I18N=" + json.dumps(subset, ensure_ascii=False,
+                                               separators=(",", ":")) + ";\n"
+                   + i18n_js[m.end():])
     # v0.9.7 task-10（用户报障「切换语言跳 404」）：这里必须用 Python 侧算好的前缀。
     # 原写法是 f'... new URL({prefix!r} || "../", location.href)' —— JS 里 '' 是 falsy，
     # 根级首页（prefix=''）会取到 "../"，于是 ROOT = new URL('../', '.../drug-brand-crossref/index.html')
@@ -8162,7 +8183,7 @@ def _optimize_home_html(html: str, prefix: str) -> str:
         + f'<script>var _r=new URL({root_prefix!r}, location.href).href;'
         + _coverage_entry_js("_r")
         + "</script>"
-        + f"<script>{i18n_js}</script>"
+        + f"<script>window.__I18N_PARTIAL={lang!r};{i18n_js}</script>"
         + "<script>window.addEventListener('load',function(){"
         + f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
         + "document.body.appendChild(s);"
@@ -8266,7 +8287,7 @@ does not exist. Coverage:</span> {covline}.</div>
                     defer_i18n=False, nav_coverage=True)
         target = OUT / (path + "index.html")
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(_optimize_home_html(html, prefix), encoding="utf-8")
+        target.write_text(_optimize_home_html(html, prefix, code), encoding="utf-8")
 
 
 SOURCE_SHORT = {
@@ -10233,7 +10254,9 @@ def main() -> None:
     (OUT / "assets" / "atc4.js").write_text(
         ATC4_JS.replace("__BUILD_V__", BUILD_V), encoding="utf-8")
     def _render_i18n_js() -> str:
-        return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False) + ";\n"
+        # v0.10.1：紧凑分隔符（非首页的每页都会加载这份外部 i18n.js，省 ~4 KB）
+        return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False,
+                                            separators=(",", ":")) + ";\n"
                 + LANG_META_JS + "\n" + r"""
 (function(){
   var D = window.I18N;
@@ -10251,11 +10274,14 @@ def main() -> None:
   function canon(x){
     if(!x) return '';
     var c = String(x).trim();
-    if(D[c]) return c;
+    // v0.10.1：首页可能只内联当前语言字典，语言是否受支持以 I18N_LANGS 为准，
+    // 不能只看 D 里有没有这门语言的字符串。
+    function has(y){ return (window.I18N_LANGS || []).indexOf(y) >= 0 || !!D[y]; }
+    if(has(c)) return c;
     var l = c.toLowerCase();
-    if(LANG_ALIAS[l] && D[LANG_ALIAS[l]]) return LANG_ALIAS[l];
+    if(LANG_ALIAS[l] && has(LANG_ALIAS[l])) return LANG_ALIAS[l];
     var base = l.split('-')[0];
-    if(base && D[base]) return base;
+    if(base && has(base)) return base;
     return '';
   }
   function pick(){
@@ -10271,6 +10297,15 @@ def main() -> None:
     return n || DEFAULT_LANG;
   }
   window.LANG = pick();
+  // v0.10.1：首页为压首屏体积只内联了当前语言字典（window.__I18N_PARTIAL）。
+  // 若 ?lang= / localStorage / 路径指定的语言不在内联字典里，补载完整 assets/i18n.js：
+  // 它会把 window.I18N 换成四语字典并重新 apply，页面文本随语言切换。
+  // 其它页面加载的就是完整 i18n.js，没有这个标记，不会重复请求。
+  if(window.__I18N_PARTIAL && !D[window.LANG]){
+    var partialI18n = document.createElement('script');
+    partialI18n.src = ROOT + 'assets/i18n.js?v=__BUILD_V__';
+    document.head.appendChild(partialI18n);
+  }
   window.T = function(k){
     var L = D[window.LANG];
     var v = L ? L[k] : undefined;
@@ -10439,8 +10474,7 @@ def main() -> None:
   else { apply(); }
   window.addEventListener('load', apply);
 })();
-"""
-        )
+""").replace("__BUILD_V__", BUILD_V)
     (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
     (OUT / "assets" / "bilingual.js").write_text(BILINGUAL_JS, encoding="utf-8")
     t2s = _load_zh_hant_t2s()
