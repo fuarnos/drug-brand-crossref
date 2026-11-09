@@ -3,6 +3,8 @@
 
 - ATC 识别口径与客户端 `atcQuery()` 一致；
 - 16 大类四语 label / alias 匹配与客户端 `catHit()` 口径一致；口语别名是 lib 扩展；
+- v0.10.3：口语词表（66 条）是唯一来源；「口语词 = 真实 name_key」的防遮蔽白名单；
+  12 个口语词的验收（期望大类 + 期望首个成分）；
 - SearchIndex.search 返回 match_source（atc / category）与结果卡；
 - 普通名字检索行为不变。
 """
@@ -49,6 +51,8 @@ class CategoryMatchTest(unittest.TestCase):
         for cid, c in ours.items():
             d = dist[cid]
             self.assertEqual(c["prefixes"], list(d.get("prefixes") or []))
+            self.assertEqual(c.get("aliases"), list(d.get("aliases") or []),
+                             f"{cid} 的 aliases 与构建产物不同步")
             for lang in ("en", "es", "zh", "zh-Hant"):
                 if (d.get("labels") or {}).get(lang):
                     self.assertEqual(c["labels"].get(lang), d["labels"][lang])
@@ -84,6 +88,53 @@ class CategoryMatchTest(unittest.TestCase):
     def test_no_false_positive(self) -> None:
         for q in ("lipitor", "药", "C07", "tylenol", ""):
             self.assertIsNone(cat_mod.match_category(q), q)
+
+
+class ColloquialTableTest(unittest.TestCase):
+    """v0.10.3 #2：口语词表单一来源 + 防遮蔽白名单（不碰 DB 的部分）。"""
+
+    def test_table_is_single_source(self) -> None:
+        # 66 条是审计基线（reports/search-discovery-audit-20261110.md §3.1）；改动必须同步报告
+        self.assertEqual(len(cat_mod.COLLOQUIAL_ALIASES), 66)
+        ids = {c["id"] for c in cat_mod.CATEGORY_SNAPSHOT}
+        self.assertLessEqual(set(cat_mod.COLLOQUIAL_ALIASES.values()), ids,
+                             "口语词指向了不存在的大类 id")
+
+    def test_client_alias_export(self) -> None:
+        by = cat_mod.colloquial_aliases_by_category()
+        flat = [w for words in by.values() for w in words]
+        self.assertEqual(len(flat), 65, "66 条口语词减去 1 条防遮蔽白名单")
+        self.assertEqual(len(by), 16, "16 个大类都应分到口语词")
+        self.assertIn("退烧药", by["analgesics"])
+        self.assertIn("blood pressure medicine", by["antihypertensives"])
+        self.assertNotIn("antibiotic", flat, "防遮蔽白名单里的词不进客户端 aliases")
+
+    def test_shadowed_word_keeps_name_path(self) -> None:
+        # 「ANTIBIOTIC」是美/加在售商品名 → 大类层让给药名/俗称层
+        self.assertIsNone(cat_mod.match_category("antibiotic"))
+        self.assertTrue(cat_mod.is_shadowed("Antibiotic"))
+        # 复数官方 label 仍然进大类
+        m = cat_mod.match_category("antibiotics")
+        self.assertIsNotNone(m)
+        self.assertEqual(m["cat"]["id"], "antibiotics")
+
+
+class NameKeyShadowTest(unittest.TestCase):
+    """v0.10.3 #2：现查 name_key，新的「口语词 = 商品名」撞车必须先登记白名单。"""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        if not DB.exists():
+            raise unittest.SkipTest("没有 data/drugs.db")
+        cls.db = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.db.close()
+
+    def test_no_unlisted_shadow(self) -> None:
+        self.assertEqual(cat_mod.find_name_key_shadows(self.db), ["antibiotic"])
+        cat_mod.assert_no_unlisted_shadow(self.db)   # 新增撞车会抛 ValueError
 
 
 class AtcCategorySearchTest(unittest.TestCase):
@@ -152,6 +203,53 @@ class AtcCategorySearchTest(unittest.TestCase):
         self.assertEqual(res.match_source, "")
         self.assertTrue(res.cards)
         self.assertEqual(res.cards[0].tier, "exact")
+
+    def test_shadowed_colloquial_not_category(self) -> None:
+        # 防遮蔽：这个词是真商品名（美/加 OTC 抗菌软膏），不许被大类接走
+        res = self.idx.search("antibiotic")
+        self.assertNotEqual(res.match_source, "category")
+
+    def test_real_product_name_not_swallowed(self) -> None:
+        # 报告 §3.4-4 的验收项：真实商品名「消炎药膏」仍返回商品名结果
+        res = self.idx.search("消炎药膏")
+        self.assertEqual(res.match_source, "")
+        self.assertTrue(res.cards)
+        self.assertIn("Sulfanilamide",
+                      {s for c in res.cards for s in c.substances})
+
+    def test_colloquial_acceptance_words(self) -> None:
+        """v0.10.3 #2 验收：12 个口语词 → 期望大类 + 期望首个成分（现查 DB 口径）。"""
+        cases = [
+            ("退烧药", "analgesics", "Acetaminophen"),
+            ("消炎药", "antibiotics", "Amoxicillin"),
+            ("胃药", "acid-related", "Omeprazole"),
+            ("降血压药", "antihypertensives", "Hydrochlorothiazide"),
+            ("降糖药", "diabetes", "Metformin"),
+            ("减肥药", "weight-loss", "Orlistat"),
+            ("感冒药", "cold-medicine", "Acetaminophen"),
+            ("抗过敏药", "allergy", "Chlorpheniramine"),
+            ("抗凝药", "anticoagulants", "Aspirin"),
+            ("他汀", "statins", "Atorvastatin"),
+            ("抗抑郁药", "antidepressants", "Venlafaxine"),
+            ("皮肤药", "dermatologicals", "Zinc Oxide"),
+        ]
+        for q, cid, ing in cases:
+            res = self.idx.search(q)
+            self.assertEqual(res.match_source, "category", q)
+            self.assertEqual(res.match_detail["category_id"], cid, q)
+            self.assertTrue(res.cards, q)
+            self.assertIn(ing, res.cards[0].substances, f"{q} 的首个成分应为 {ing}")
+
+    def test_category_top1_by_ingredient_total(self) -> None:
+        """v0.10.3 #3 排序：Top-1 = 该类别里 active 产品最多的成分（方案 H）。"""
+        for q, cid, ing in (("抗过敏药", "allergy", "Chlorpheniramine"),
+                            ("Blood-pressure medicines", "antihypertensives",
+                             "Hydrochlorothiazide"),
+                            ("抗抑鬱藥", "antidepressants", "Venlafaxine")):
+            res = self.idx.search(q)
+            self.assertEqual(res.match_detail["category_id"], cid, q)
+            # 首位卡片可以是复方卡（如 Irbesartan + Hydrochlorothiazide），但必须含期望成分
+            self.assertIn(ing, res.cards[0].substances, q)
 
     def test_invalid_atc_not_misrouted(self) -> None:
         self.assertNotEqual(self.idx.search("C7").match_source, "atc")

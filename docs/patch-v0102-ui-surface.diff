@@ -1,0 +1,68 @@
+diff --git a/site/build.py b/site/build.py
+index d2d08d9..11b8182 100644
+--- a/site/build.py
++++ b/site/build.py
+@@ -2722,7 +2722,7 @@ paid data service; if that changes, the NC/conditional sources above must be re-
+ 
+ CSS = """
+ :root{--bg:#fbfbf9;--fg:#1f2328;--muted:#4b5257;--line:#cfcabf;--line-soft:#e3e1da;
+---card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
++--card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--accent-weak:#f1f8f4;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
+ --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
+ --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:24px;
+ --lh-tight:1.3;--lh-heading:1.35;--lh-ui:1.5;--lh-body:1.6;
+@@ -2732,7 +2732,7 @@ body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
+ display:flex;flex-direction:column;
+ font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+-header{border-bottom:1px solid var(--line);background:#fff}
++header{border-bottom:1px solid var(--line);background:var(--bg)}
+ .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+ header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
+ .logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
+@@ -2971,7 +2971,7 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
+  font-size:14px;margin:9px 0 0}
+ .idacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+ .idacts a,.idacts button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;
+- padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:#fff;color:var(--accent);
++ padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:var(--surface-2);color:var(--accent);
+  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
+ .idacts .primary{background:var(--accent);color:#fff}
+ .idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
+@@ -2998,7 +2998,7 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
+ @media (max-width:767px){
+   /* v0.10.2 M-4：sticky 区从「只有输入框」扩到「输入框 + 命中数 + 国家/地区」。
+      手机滚到第 3 屏后仍能看到「共多少条」并直接换国家（原来要一路滚回顶部）。 */
+-  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:#fff;padding:6px 0;
++  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:var(--bg);padding:6px 0;
+    border-bottom:1px solid var(--line)}
+   .has-q .searchwrap #ac{top:calc(100% + 2px)}
+   .has-q .searchwrap .search-status{margin:2px 0 0;min-height:0}
+@@ -3084,7 +3084,7 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
+ .matrix-hk-note{margin:4px 0 0;font-size:14px;color:var(--warn)}
+ /* v0.8.3 task-119：矩阵筛选器 */
+ .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;
+-  background:#fff;padding:10px 12px}
++  background:var(--surface-2);padding:10px 12px}
+ .mf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+ .mf-title{font-weight:600;font-size:14px}
+ .mf-count{color:var(--muted);font-size:14px}
+@@ -3294,7 +3294,7 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
+ .mf-details>summary::-webkit-details-marker{display:none}
+ .mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:14px}
+ .mf-details[open]>summary{border-bottom:1px solid var(--line)}
+-.mf-details .matrix-filters{margin:0;border:0;border-radius:0}
++.mf-details .matrix-filters{margin:0;border:0;border-radius:0 0 12px 12px}
+ .mf-details .mf-toggle{display:none}
+ .mf-details .mf-panel{display:grid}
+ .drug-identity{margin:2px 0 10px}
+@@ -3343,6 +3343,9 @@ body.density-compact table.res{font-size:14px}
+ 
+ /* v0.10.0: neutral background bands + right-top category/language controls */
+ main .section,main .catquick{background:var(--band);border:1px solid var(--line);border-radius:12px;padding:16px}
++/* v0.10.2 同色守卫：catquick 是「面板」层（--card），chip 才是里面的井（--surface-2）；
++   两层都用 --band 会白压白，只剩 1px 边框分界。 */
++main .catquick{background:var(--card)}
+ .u1guide{background:#fff}
+ .sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
+ .sn-right details{position:relative}

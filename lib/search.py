@@ -12,6 +12,10 @@ ATC 码（C07 / C07AB02）按 `substance.atc` 前缀匹配；大类词按 `categ
 16 大类四语 label/alias + lib 侧口语别名（退烧药等）匹配；结果标记 `match_source`
 （atc / category）。客户端行为不变（只改 lib/CLI/CI）。
 
+ATC/大类排序（v0.10.3）：结果卡先按「成分在本类别内的 active 产品数」降序，再按
+卡片 `n_products`（审计报告 `reports/search-discovery-audit-20261110.md` §4 方案 H）。
+只换排序键，不合并产品、不改碰撞语义、不加人工标注；名字检索路径的排序键不变。
+
 拼音层（task-111）：`lib/pinyin.py` 移植客户端 `_pinyin_tokens` 口径（s:/j:/i: token），
 并补多音字候选；仅当拉丁查询在 name_key 上没有任何命中时才走拼音候选（= 客户端
 「精确/前缀 → 拼音 → 拼写容错」的顺序），因此既有英文/中英文查询行为不变。
@@ -192,6 +196,9 @@ class SearchIndex:
         self._atc_index: dict[str, set[str]] | None = None
         self._atc_key_n: dict[str, int] = {}
         self.atc_build_ms: float | None = None
+        # v0.10.3：成分在本类别内的 active 产品数（大类/ATC 排序键），按 prefixes 元组缓存。
+        self._ing_totals_cache: dict[tuple[str, ...], dict[str, int]] = {}
+        self.ing_totals_ms: float | None = None
         # 同物异名（task-141b）：纯 CSV 小表，不碰库；文件缺失时是空表（异名层自动关闭）。
         # 只读对照：不改 substance 主键、不合并产品。
         self.alias: AliasMap = load_aliases(alias_path)
@@ -678,10 +685,57 @@ class SearchIndex:
                         + 0.01 * release_score, 4)
 
     # --- ATC / 大类检索（task-139，与客户端 v0.6.4 / v0.7.1 对齐） ----------
+    def _ingredient_totals(self, prefixes: list[str]) -> dict[str, int]:
+        """成分在本类别内的 active 产品数（大类/ATC 排序用；与 DB 口径一致）。
+
+        v0.10.3：一张卡 = key × 国家 × 成分组合 × 剂型，会把同一成分拆成很多小卡；
+        按单卡 `n_products` 排序时，复方 + 命名碎片化会系统性占优（审计报告 §4.2）。
+        这里算出「成分在本类别里的产品总量」当排序权重，结果顺序与
+        `tests/search_eval/gen_atc_category_cases.py` 的期望定义（该类别里 active
+        产品最多的成分）一致；只是排序权重，不合并产品、不改碰撞语义。
+        """
+        key = tuple(prefixes)
+        if key in self._ing_totals_cache:
+            return self._ing_totals_cache[key]
+        prefixes = [p for p in prefixes if p]
+        if not prefixes:
+            self._ing_totals_cache[key] = {}
+            return {}
+        import time as _t
+        t0 = _t.perf_counter()
+        cond = " OR ".join("s.atc LIKE ?" for _ in prefixes)
+        out: dict[str, int] = {}
+        for r in self.db.execute(
+                f"""SELECT s.inn_en AS inn, COUNT(DISTINCT p.product_id) AS n
+                    FROM substance s JOIN variant v ON v.substance_id = s.substance_id
+                    JOIN product_component pc ON pc.variant_id = v.variant_id
+                    JOIN product p ON p.product_id = pc.product_id AND p.status = 'active'
+                    WHERE s.atc IS NOT NULL AND ({cond})
+                    GROUP BY s.substance_id""", tuple(p + "%" for p in prefixes)):
+            out[r["inn"]] = max(out.get(r["inn"], 0), r["n"])
+        self._ing_totals_cache[key] = out
+        self.ing_totals_ms = round((_t.perf_counter() - t0) * 1000, 1)
+        return out
+
+    def _order_by_ingredient(self, totals: dict[str, int]):
+        """成分聚合排序键：先按成分在本类别内的产品数，再按卡片 `n_products`。
+
+        同一成分的卡因此相邻（=组内去重，配合前端 `groupByIngredient`），
+        组间按成分总量；复方卡取它命中的最强成分（max），不再被单张复方大卡顶掉。
+        """
+        def key(c: Card):
+            hit = max((totals.get(s, 0) for s in c.substances if s), default=0)
+            return (-hit, -c.n_products, len(c.key_id), c.brand.lower())
+        return key
+
     def _cards_for_keys(self, key_ids: list[str], tier_of: dict[str, str], n,
                         country: str | None, include_status: tuple[str, ...],
-                        limit: int) -> tuple[list[Card], str]:
-        """按 key_ids 构建结果卡（抽自名字检索的同一套卡片逻辑）。"""
+                        limit: int, order=None) -> tuple[list[Card], str]:
+        """按 key_ids 构建结果卡（抽自名字检索的同一套卡片逻辑）。
+
+        `order` 只给 ATC/大类查询换排序键（v0.10.3）；传 None 时与名字检索
+        逐字节一致（-score, -n_products, key 长度, 品牌名）。
+        """
         if not key_ids:
             return [], "没有匹配的名字"
         marks = ",".join("?" * len(key_ids))
@@ -768,7 +822,8 @@ class SearchIndex:
             result = [c for c in result if c.country == country]
             if not result:
                 return [], (f"在 {country} 没有收录到这个名字 —— 查不到不代表该药不存在")
-        result.sort(key=lambda c: (-c.score, -c.n_products, len(c.key_id), c.brand.lower()))
+        result.sort(key=order or (lambda c: (-c.score, -c.n_products,
+                                             len(c.key_id), c.brand.lower())))
         return result[:limit], ""
 
     def _get_atc_index(self) -> tuple[dict[str, set[str]], dict[str, int]]:
@@ -852,9 +907,11 @@ class SearchIndex:
         if not keys:
             res.note = f"ATC {code}: 没有匹配的活性成分"
             return res
-        cards, note = self._cards_for_keys([k for k, _ in keys],
-                                           {k: "atc" for k, _ in keys},
-                                           n, country, include_status, limit)
+        cards, note = self._cards_for_keys(
+            [k for k, _ in keys], {k: "atc" for k, _ in keys},
+            n, country, include_status, 200,        # 与客户端 hits.slice(0,200) 同上限
+            order=self._order_by_ingredient(self._ingredient_totals([code])))
+        cards = cards[:limit]
         if note:
             res.note = note
         res.cards = cards
@@ -881,9 +938,11 @@ class SearchIndex:
         if not keys:
             res.note = f"Category {label}: 没有匹配的活性成分"
             return res
-        cards, note = self._cards_for_keys([k for k, _ in keys],
-                                           {k: "category" for k, _ in keys},
-                                           n, country, include_status, limit)
+        cards, note = self._cards_for_keys(
+            [k for k, _ in keys], {k: "category" for k, _ in keys},
+            n, country, include_status, 200,
+            order=self._order_by_ingredient(self._ingredient_totals(prefixes)))
+        cards = cards[:limit]
         if note:
             res.note = note
         res.cards = cards

@@ -26,11 +26,13 @@ import csv
 import gzip
 import hashlib
 import html
+import importlib.util
 import json
 import os
 import re
 import shutil
 import sqlite3
+import sys
 import time
 import unicodedata
 from collections import defaultdict
@@ -38,6 +40,18 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# v0.10.2：口语类别词表（退烧药 / 降压药 / painkiller…）的唯一来源在 lib/categories.py，
+# 构建期把同一份表写进 data/categories.json（客户端 aliases）与 data/idx/cats.json（words）。
+# build.py 不是包，直接跑时 sys.path[0] 是 site/，所以先把仓库根加进去。
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from lib.categories import (  # noqa: E402  （必须在 sys.path 插入之后）
+    COLLOQUIAL_ALIASES,
+    assert_no_unlisted_shadow,
+    cat_norm,
+    colloquial_aliases_by_category,
+)
+
 DB = ROOT / "data" / "drugs.db"
 # 默认 site/dist；SITE_OUT 允许并发构建到独立目录，避免两个进程互相 rmtree。
 OUT = Path(os.environ.get("SITE_OUT") or (ROOT / "site" / "dist"))
@@ -59,6 +73,14 @@ CHANGELOG = ROOT / "CHANGELOG.md"
 # data/zh_hant_t2s.json（OpenCC TSCharacters 常用字子集，构建期注入 app.js）。
 ZH_HANT_I18N_FILE = ROOT / "data" / "i18n_zh_hant.json"
 ZH_HANT_T2S_FILE = ROOT / "data" / "zh_hant_t2s.json"
+
+# v0.10.2：四语（en / es / zh / zh-Hant）一致性守卫。用户规则（2026-11-10）：
+# 多语言翻译必须同步更新、写进底层逻辑，缺译不许静默回落。这里记录「只能回落简体」
+# 的 zh-Hant key，main() 里由 _assert_i18n_complete() 判定是否允许构建。
+I18N_REQUIRED_LANGS = ("en", "es", "zh", "zh-Hant")
+ZH_HANT_FALLBACK_KEYS: list[str] = []
+# 允许回落简体的 zh-Hant key（历史遗留，补上繁体值后请从这里删掉；新 key 一律不许进）
+ZH_HANT_FALLBACK_OK: set[str] = set()
 
 
 def _sha1_inputs(*paths: Path) -> str:
@@ -799,6 +821,46 @@ LANG_META_JS = (
     + "var DEFAULT_LANG='en';"
 )
 
+# v0.10.2：语言判定（?lang= → 路径 → localStorage → navigator.language）只有这一份源码。
+# boot.js 要在插入字典包**之前**就知道该拉哪份，i18n.js 里也要用它算 window.LANG，
+# 两处引用同一段文本，改这里两边同时生效（LANG_PATH/LANG_ALIAS/I18N_LANGS 来自 LANG_META_JS）。
+# 函数名加 __dsh 前缀：boot.js 是普通脚本，函数会落在全局，避免和 app.js 撞名。
+LANG_PICK_JS = r"""
+function __dshLangHas(y){
+  if(!y) return false;
+  if((window.I18N_LANGS || []).indexOf(y) >= 0) return true;   // v0.10.1：以支持列表为准
+  return !!(window.I18N && window.I18N[y]);
+}
+function __dshCanonLang(x){
+  if(!x) return '';
+  var c = String(x).trim();
+  if(__dshLangHas(c)) return c;
+  var l = c.toLowerCase();
+  if(LANG_ALIAS[l] && __dshLangHas(LANG_ALIAS[l])) return LANG_ALIAS[l];
+  var base = l.split('-')[0];
+  if(base && __dshLangHas(base)) return base;
+  return '';
+}
+function __dshRelPath(rootPath){
+  // 相对站点根的路径，例如 /drug-brand-crossref/es/ → "es/"，子页 → "drug/x.html"。
+  var p = location.pathname;
+  rootPath = rootPath || '/';
+  return p.indexOf(rootPath) === 0 ? p.slice(rootPath.length) : p.replace(/^\//, '');
+}
+function __dshPickLang(rootPath){
+  var q = __dshCanonLang(new URLSearchParams(location.search).get('lang'));
+  if(q){ try{localStorage.setItem('lang',q);}catch(e){} return q; }
+  var first = __dshRelPath(rootPath).split('/').filter(Boolean)[0] || '';
+  // 直接进 /es/、/zh/、/zh-hant/（hreflang 主入口）时把语言写进 localStorage，
+  // 这样点导航去 /about.html 等根路径页面不会掉回 en。
+  var seg = __dshCanonLang(first);
+  if(seg){ try{localStorage.setItem('lang',seg);}catch(e){} return seg; }
+  try{ var s = __dshCanonLang(localStorage.getItem('lang')); if(s) return s; }catch(e){}
+  var n = __dshCanonLang(navigator.language);
+  return n || (window.DEFAULT_LANG || 'en');
+}
+"""
+
 # ── v0.6.3 U3：界面标签本地化（LABEL_I18N）+ U1/U2 文案（UI_I18N） ──────────
 # 单一数据源：服务端 label helper 与客户端 T() 共用同一批 key；zh-Hant 直接给值，
 # 不再依赖 data/i18n_zh_hant.json（新 key 无法及时进该 JSON 时也不会回落简体）。
@@ -809,6 +871,7 @@ LABEL_I18N = {
         "form.suppository": "suppository", "form.inhalation": "inhalation",
         "form.pellet": "pellet", "form.stick": "stick", "form.kit": "kit",
         "form.gas": "gas", "form.unknown": "unknown",
+        "form.effervescent": "effervescent", "form.granule": "granules", "form.solution": "solution",
         "release.ER": "extended-release", "release.DR": "delayed-release",
         "release.MR": "modified-release", "release.none": "—",
         "unit.iu": "IU", "unit.unit": "unit", "unit.meq": "mEq", "unit.mci": "mCi",
@@ -817,9 +880,10 @@ LABEL_I18N = {
     "es": {
         "form.tablet": "comprimido", "form.capsule": "cápsula", "form.liquid": "líquido",
         "form.injection": "inyectable", "form.topical": "tópico", "form.powder": "polvo",
-        "form.suppository": "supositorio", "form.inhalation": "inhalado",
-        "form.pellet": "pellet", "form.stick": "stick", "form.kit": "kit",
+        "form.suppository": "supositorio", "form.inhalation": "inhalación",
+        "form.pellet": "pélete", "form.stick": "barra", "form.kit": "kit",
         "form.gas": "gas", "form.unknown": "desconocido",
+        "form.effervescent": "efervescente", "form.granule": "granulado", "form.solution": "solución",
         "release.ER": "liberación prolongada", "release.DR": "liberación retardada",
         "release.MR": "liberación modificada", "release.none": "—",
         "unit.iu": "UI", "unit.unit": "unidad", "unit.meq": "meq", "unit.mci": "mCi",
@@ -831,6 +895,7 @@ LABEL_I18N = {
         "form.suppository": "栓剂", "form.inhalation": "吸入剂",
         "form.pellet": "微丸", "form.stick": "棒剂", "form.kit": "套装",
         "form.gas": "气体", "form.unknown": "未知",
+        "form.effervescent": "泡腾剂", "form.granule": "颗粒", "form.solution": "溶液",
         "release.ER": "缓释", "release.DR": "延迟释放",
         "release.MR": "改良释放", "release.none": "—",
         "unit.iu": "国际单位", "unit.unit": "单位", "unit.meq": "毫当量", "unit.mci": "mCi",
@@ -842,6 +907,7 @@ LABEL_I18N = {
         "form.suppository": "栓劑", "form.inhalation": "吸入劑",
         "form.pellet": "微丸", "form.stick": "棒劑", "form.kit": "套組",
         "form.gas": "氣體", "form.unknown": "未知",
+        "form.effervescent": "泡騰劑", "form.granule": "顆粒", "form.solution": "溶液",
         "release.ER": "緩釋", "release.DR": "延遲釋放",
         "release.MR": "修飾釋放", "release.none": "—",
         "unit.iu": "國際單位", "unit.unit": "單位", "unit.meq": "毫當量", "unit.mci": "mCi",
@@ -1019,6 +1085,37 @@ UI_I18N = {
         "atc.none": "No recorded active ingredient carries this ATC code or prefix.",
         "atc.none_meta": "No ATC match for {code}",
         "atc.loading": "Loading the index for ATC search…",
+        # v0.10.2 i18n：原来写死在模板里的 9 处文案（404 标题品牌名 / About 数据包四链接 /
+        # 许可折叠标题 / 组合页 stub 三句）。四语齐，模板改走 data-i18n。
+        "site.name": "Medicine Brand Cross-Reference",
+        "about.data_package": "Data package",
+        "about.dataset_jsonld": "Dataset metadata (schema.org)",
+        "about.checksums": "SHA-256 checksums",
+        "about.data_dictionary": "Data dictionary",
+        "about.licences_summary": "Data sources and licences",
+        "combo.stub_badge": "Combination record",
+        "combo.stub_note": ("This combination page is not expanded; use the ingredient pages "
+                            "or search."),
+        "combo.stub_search": "Search",
+        # ATC 码首查（v0.10.2 快车道）：先给成分摘要，商品名行由 core 在后台补
+        "atc.ing_overview": ("Active ingredients in this ATC class — brand-name rows load in "
+                             "the background."),
+        # v0.10.2 task-4：矩阵里「可见列全空」的行不渲染，但必须说明还有多少、一键加列
+        "matrix.hidden_rows": ("{n} more strength/form rows are recorded only in {mk} and are "
+                               "not shown in this table."),
+        "matrix.hidden_show": "Add this market as a column",
+        "matrix.undisclosed_note": ("“not disclosed” means the source does not publish the "
+                                    "strength — it does not mean the product has none."),
+        # v0.10.2 R1：剂型列并列「来源原文」+ 中国来源的剂型粒度说明
+        "name.form_source": "as recorded by source",
+        "name.form_granularity_cn": ("Source records dose form only at class level (e.g. "
+                                     "“tablet”); effervescent/coated sub-forms are not "
+                                     "distinguished."),
+        "matrix.filters_short": "Filters",
+        # v0.10.2 task-10：CN 无商品名的产品，名称位显示「厂家：<上市许可持有人>」
+        "brand.mah": "Manufacturer:",
+        "brand.mah_note": ("This product has no registered trade name; the market "
+                           "authorisation holder is shown instead."),
     },
     "es": {
         "u1.title": "Cómo funciona en 3 pasos",
@@ -1053,6 +1150,33 @@ UI_I18N = {
         "atc.none": "Ningún principio activo registrado lleva este código o prefijo ATC.",
         "atc.none_meta": "Sin coincidencias ATC para {code}",
         "atc.loading": "Cargando el índice para la búsqueda ATC…",
+        # v0.10.2 i18n：与 en 同一批 key（模板里原来写死的 9 处）
+        "site.name": "Referencia cruzada de marcas de medicamentos",
+        "about.data_package": "Paquete de datos",
+        "about.dataset_jsonld": "Metadatos del conjunto de datos (schema.org)",
+        "about.checksums": "Sumas de verificación SHA-256",
+        "about.data_dictionary": "Diccionario de datos",
+        "about.licences_summary": "Fuentes de datos y licencias",
+        "combo.stub_badge": "Registro de combinación",
+        "combo.stub_note": ("Esta página de combinación no está ampliada; usa las páginas de "
+                            "principios o la búsqueda."),
+        "combo.stub_search": "Buscar",
+        # ATC 码首查（v0.10.2 快车道）：先给成分摘要，商品名行由 core 在后台补
+        "atc.ing_overview": ("Principios activos de esta clase ATC — las filas de nombres "
+                             "comerciales se cargan en segundo plano."),
+        "matrix.hidden_rows": ("Hay {n} filas de concentración/forma registradas solo en {mk} "
+                               "que no se muestran en esta tabla."),
+        "matrix.hidden_show": "Añadir este mercado como columna",
+        "matrix.undisclosed_note": ("«no consta» significa que la fuente no publica la "
+                                    "concentración; no significa que el producto no la tenga."),
+        "name.form_source": "según la fuente",
+        "name.form_granularity_cn": ("La fuente registra solo la forma de nivel de clase (p. ej. "
+                                     "«comprimido»); no distingue subformas como efervescente o "
+                                     "recubierto."),
+        "matrix.filters_short": "Filtros",
+        "brand.mah": "Titular:",
+        "brand.mah_note": ("Este producto no tiene nombre comercial registrado; se muestra el "
+                           "titular de la autorización."),
     },
     "zh": {
         "u1.title": "三步看懂",
@@ -1080,6 +1204,25 @@ UI_I18N = {
         "atc.none": "已收录的活性成分中没有这个 ATC 码或前缀。",
         "atc.none_meta": "{code} 没有 ATC 命中",
         "atc.loading": "正在加载索引以进行 ATC 搜索…",
+        # v0.10.2 i18n：与 en 同一批 key（模板里原来写死的 9 处 + ATC 首查摘要）
+        "site.name": "药品商品名跨国定位",
+        "about.data_package": "数据包",
+        "about.dataset_jsonld": "数据集元数据（schema.org）",
+        "about.checksums": "SHA-256 校验和",
+        "about.data_dictionary": "字段字典",
+        "about.licences_summary": "数据来源与许可",
+        "combo.stub_badge": "组合记录",
+        "combo.stub_note": "该组合页暂未展开；请从成分页或搜索入口查看。",
+        "combo.stub_search": "搜索",
+        "atc.ing_overview": "该 ATC 类目下的活性成分——商品名行由完整索引在后台补全。",
+        "matrix.hidden_rows": "另有 {n} 个规格/剂型仅在 {mk} 有记录（未在本表显示）。",
+        "matrix.hidden_show": "把这个市场加为一列",
+        "matrix.undisclosed_note": "「未公开」表示来源没有披露规格，不等于该产品没有规格。",
+        "name.form_source": "来源原文",
+        "name.form_granularity_cn": "来源只记到剂型大类（如「片剂」），不细分泡腾、薄膜衣等子剂型。",
+        "matrix.filters_short": "筛选",
+        "brand.mah": "厂家：",
+        "brand.mah_note": "该产品没有登记商品名，这里显示上市许可持有人。",
     },
     "zh-Hant": {
         "u1.title": "三步看懂",
@@ -1107,6 +1250,25 @@ UI_I18N = {
         "atc.none": "已收錄的有效成分中沒有這個 ATC 碼或前綴。",
         "atc.none_meta": "{code} 沒有 ATC 命中",
         "atc.loading": "正在載入索引以進行 ATC 搜尋…",
+        # v0.10.2 i18n：與 en 同一批 key（模板裡原來寫死的 9 處 + ATC 首查摘要）
+        "site.name": "藥品商品名跨國定位",
+        "about.data_package": "資料包",
+        "about.dataset_jsonld": "資料集詮釋資料（schema.org）",
+        "about.checksums": "SHA-256 校驗碼",
+        "about.data_dictionary": "欄位字典",
+        "about.licences_summary": "資料來源與許可",
+        "combo.stub_badge": "組合紀錄",
+        "combo.stub_note": "該組合頁暫未展開；請從成分頁或搜尋入口查看。",
+        "combo.stub_search": "搜尋",
+        "atc.ing_overview": "該 ATC 類目下的有效成分——商品名資料列由完整索引在背景補齊。",
+        "matrix.hidden_rows": "另有 {n} 個規格/劑型僅在 {mk} 有記錄（未在本表顯示）。",
+        "matrix.hidden_show": "把這個市場加為一欄",
+        "matrix.undisclosed_note": "「未公開」表示來源沒有揭露規格，不等於該產品沒有規格。",
+        "name.form_source": "來源原文",
+        "name.form_granularity_cn": "來源只記到劑型大類（如「錠劑」），不細分發泡、膜衣等子劑型。",
+        "matrix.filters_short": "篩選",
+        "brand.mah": "廠商：",
+        "brand.mah_note": "該產品沒有登記商品名，這裡顯示上市許可持有人。",
         # v0.9.7 task-12 UI 批次 A-1：结果页身份卡 / 分页 / 零结果（繁体显式覆盖层）
         "res.identity.ingredient": "有效成分",
         "res.identity.markets": "覆蓋市場",
@@ -2050,6 +2212,7 @@ def _install_zh_hant(values: dict) -> None:
     overrides = _load_zh_hant_dict()
     merged: dict[str, str] = {}
     fallback = 0
+    from_extra: set[str] = set()
     for key, text in base.items():
         value = overrides.get(key)
         if value is None:
@@ -2067,9 +2230,103 @@ def _install_zh_hant(values: dict) -> None:
                   SHELL_I18N["zh-Hant"]):
         for key, text in extra.items():
             merged[key] = _subst_placeholders(text, values)
+            from_extra.add(key)
     I18N["zh-Hant"] = merged
+    # 记下哪些 key 只能拿简体充数（json 没覆盖、build.py 也没给繁体值）
+    global ZH_HANT_FALLBACK_KEYS
+    ZH_HANT_FALLBACK_KEYS = [k for k in merged
+                             if k not in overrides and k not in from_extra]
     print(f"i18n zh-Hant: {len(merged)} keys "
           f"({len(overrides)} from json, {fallback} fallback zh)", flush=True)
+
+
+def _assert_i18n_complete() -> None:
+    """构建期硬拦四语不一致（用户规则 2026-11-10：翻译必须同步，缺译不许静默回落）。
+
+    i18n.js 的回落顺序是「当前语言 → zh-Hant 先看简体 → 英文」，所以缺 key 不会报错，
+    只会让西语/繁中用户静默看到英文或简体——那类滞后正是本函数要拦住的。
+    与 deploy/i18n_check.py（CI 的 fast 模式也跑）同一口径：那边静态查字典常量，
+    这边查合并后的运行时字典，双保险，谁也不能绕过。
+
+    失败时打印缺哪些 key 并以 SystemExit 中止构建（不写任何页面）。
+    确属无需翻译的 key 走 ZH_HANT_FALLBACK_OK / i18n_check.py 的白名单，别默默放行。
+    """
+    en = set(I18N["en"])
+    problems: list[str] = []
+    for lang in I18N_REQUIRED_LANGS:
+        if lang not in I18N:
+            problems.append(f"缺整份 {lang} 字典")
+            continue
+        missing = sorted(en - set(I18N[lang]))
+        extra = sorted(set(I18N[lang]) - en)
+        if missing:
+            problems.append(f"{lang} 缺 {len(missing)} 个 key（会静默回落）："
+                            f"{', '.join(missing[:12])}")
+        if extra and lang != "en":
+            problems.append(f"{lang} 多出 {len(extra)} 个 en 没有的 key（陈旧/拼错）："
+                            f"{', '.join(extra[:12])}")
+    bad_hant = sorted(set(ZH_HANT_FALLBACK_KEYS) - ZH_HANT_FALLBACK_OK)
+    if bad_hant:
+        problems.append(f"zh-Hant 有 {len(bad_hant)} 个 key 只能回落简体（繁体用户看到简体）："
+                        f"{', '.join(bad_hant[:12])}")
+    if problems:
+        raise SystemExit("i18n 四语不一致，构建中止（补译文，或在 ZH_HANT_FALLBACK_OK "
+                         "里登记已知遗留）：\n  " + "\n  ".join(problems))
+    print(f"i18n 四语一致: {len(en)} keys × {len(I18N_REQUIRED_LANGS)} 语言"
+          f"（zh-Hant 回落 {len(ZH_HANT_FALLBACK_OK)} 个已登记 key）", flush=True)
+
+
+def _load_i18n_check():
+    """懒加载 `deploy/i18n_check.py`（只读、无副作用），复用 CI 的同一份判定规则。
+
+    构建期不重写一份「什么算缺译」的逻辑——否则两边口径会漂。文件不在时返回 None，
+    由调用方降级（CI 仍会在提交时跑它）。
+    """
+    path = ROOT / "deploy" / "i18n_check.py"
+    if not path.exists():
+        return None
+    spec = importlib.util.spec_from_file_location("_i18n_check_build", path)
+    if spec is None or spec.loader is None:
+        return None
+    mod = importlib.util.module_from_spec(spec)
+    # dataclass 装饰器要求模块已登记在 sys.modules（否则 cls.__module__ 取不到 __dict__）
+    sys.modules.setdefault(spec.name or "_i18n_check_build", mod)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _assert_i18n_rules() -> None:
+    """构建期复跑 CI 的两条硬规则（v0.10.2 用户规则：翻译必须同步，不许英语/西语滞后）。
+
+    ① `release notes` 最新版本节四语齐全（只查「最新版」，历史积压是 WARN 不拦构建）；
+    ② `LABEL_I18N` 的剂型/释放机制译名与 `data/label_translations.csv` 一致
+       （术语表是单一真相源，build.py 手写的译名必须跟它对齐）。
+
+    判定代码直接复用 `deploy/i18n_check.py`（`check_release_notes` / `check_label_terms`），
+    与 CI 完全同口径；有 FAIL 就打印清单并中止构建，一个页面都不写。
+    """
+    mod = _load_i18n_check()
+    if mod is None:
+        print("i18n rules  : deploy/i18n_check.py 不在，跳过（CI 仍会跑）", flush=True)
+        return
+    findings = mod.Findings()
+    try:
+        sections = mod.parse_changelog()
+    except Exception as exc:                       # noqa: BLE001  只报告，不中断
+        sections = []
+        print(f"i18n rules  : CHANGELOG 解析失败（{exc}），跳过 release notes 检查", flush=True)
+    if sections:
+        mod.check_release_notes(sections, findings)
+    mod.check_label_terms({"LABEL_I18N": LABEL_I18N}, findings)
+    hard = [f for f in findings.fail]
+    if hard:
+        lines = [f"{r['rule']}: {r['detail']}" for r in hard]
+        raise SystemExit("i18n 规则不通过，构建中止（与 deploy/i18n_check.py 同口径）：\n  "
+                         + "\n  ".join(lines))
+    latest = sections[0]["version"] if sections else "?"
+    warn_n = len(findings.warn)
+    print(f"i18n rules  : 最新版 {latest} 四语齐全 · LABEL_I18N 术语一致"
+          f"（WARN {warn_n} 条不拦构建）", flush=True)
 
 
 # ── /warn 页 + 成分页警示：文案三语（页面 UI；警示正文来自 dose_warning 数据）──
@@ -2682,18 +2939,18 @@ paid data service; if that changes, the NC/conditional sources above must be re-
 
 CSS = """
 :root{--bg:#fbfbf9;--fg:#1f2328;--muted:#4b5257;--line:#cfcabf;--line-soft:#e3e1da;
---card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
+--card:#fff;--surface-2:#f6f5f0;--band:#f6f5f0;--accent:#0b6b53;--accent-weak:#f1f8f4;--warn:#b4471f;--warnbg:#fdf1ec;--sev:#a01b1b;--sevbg:#fdecec;
 --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
 --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:24px;
 --lh-tight:1.3;--lh-heading:1.35;--lh-ui:1.5;--lh-body:1.6;
---r-sm:8px;--r-md:12px;--r-pill:999px;--prose:600px}
+--r-sm:8px;--r-md:12px;--r-pill:999px;--prose:72ch}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
 display:flex;flex-direction:column;
 font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);background:#fff}
-.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:var(--bg)}
+.wrap{max-width:1600px;margin:0 auto;padding:0 20px}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
 .logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
 .logo-zh{font-weight:400;font-size:14px;color:var(--muted);margin-left:8px;white-space:nowrap}
@@ -2772,18 +3029,38 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atccard code{font-weight:700;margin-right:4px}
 .atclist{columns:2;column-gap:24px}
 .atclist li{break-inside:avoid;margin:2px 0}
-@media (max-width:767px){ .atclist{columns:1} }
+/* v0.10.2 task-3：ATC/大类页成分列表改自适应多列网格——宽屏（1440 / 2560）不再把内容
+   挤在中间一列（旧 .wrap 920px + columns:2，2560 视口下列宽只有 268px）。
+   minmax(300px,1fr) 保证单列 ≥300px，行内「主名 + 盐型子行 + 状态角标」不折断。 */
+.atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+ column-gap:24px;row-gap:0;columns:auto;padding-left:20px;margin:6px 0 10px;max-width:none}
+.atcmembers li{font-size:16px;line-height:1.3;break-inside:auto}
+@media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:18px}
+ .atcmembers li{font-size:16px} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
 .atc-src{color:var(--muted);font-size:12px;margin-left:6px;white-space:nowrap}
 .atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
 .atc-src-line{margin:-8px 0 10px}
 .atc-count{margin:-6px 0 10px}
 .salt{color:var(--muted);font-size:14px;margin-left:6px}
+/* v0.10.2 task-3：盐型独立成块级子行（左缩进对齐主名），文案「盐型：Name」。
+   原来是内联 span，390px 下与主名/角标抢行，且每个盐型各带一次「暂无中文名」。 */
+.salt-row{display:block;margin:1px 0 2px;color:var(--muted);font-size:15px;line-height:1.4}
+.salt-row .salt-k{color:var(--muted)}
+.salt-row .nm{color:var(--muted)}
 .drug-name-src{min-height:18px;margin:2px 0 0;font-size:14px}
 .drug-name-src [data-sub-src]:not(:empty){display:inline-block;padding:1px 7px;
   border:1px solid var(--line);border-radius:999px;background:#f6f5f0;color:var(--muted)}
 .salt .nm{color:var(--muted)}
-.atcmembers .st-badge{margin-left:4px}
+.atcmembers .st-badge{margin-left:4px;padding:0 5px;margin-right:3px;font-size:13px;
+  line-height:1.2}
+/* v0.10.2：状态角标尾部带市场码（reports/atc-status-aggregation-20261110.md）。
+   字号 12px 是硬线（v0.10.2 起「任何可见文字 <12px 即违规」）：11px 虽然能把 390px 下
+   4 徽章行压到 2 行，但那是拿可读性换高度。12px + padding:0 5px + line-height 1.2 时
+   4 徽章行平均 48px（v0.10.1 无市场码时 52px），仍然比原来矮。 */
+.st-badge .mk{margin-left:3px;font-size:12px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.atc-mk-hint{margin:-4px 0 10px}
+/* 盐型子行不再逐个标「暂无中文名」：标记由 markAtcRowGaps() 每行只放一枚（链接外） */
 .atcdetails{margin:8px 0 0}
 .atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
 .atcdetails .atcmembers{margin-top:6px}
@@ -2877,6 +3154,9 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 /* ── UI P0：解析条 / 自动完成 / 分组折叠 / 加载更多 / 国家提示 ── */
 .sel-label{color:var(--muted);font-size:14px;margin-right:2px}
 .searchwrap{position:relative}
+/* v0.10.2 M-4：#ac 的锚点从 .searchwrap 换成 .searchbar，方便把 #meta / 国家行
+   一起放进 sticky 的 .searchwrap 里，而不让建议列表跟着往下挪两层。 */
+.searchbar{position:relative}
 #ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
 background:#fff;border:1px solid var(--line);border-radius:12px;
 box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
@@ -2928,7 +3208,7 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
  font-size:14px;margin:9px 0 0}
 .idacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .idacts a,.idacts button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;
- padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:#fff;color:var(--accent);
+ padding:0 15px;border-radius:12px;border:1px solid var(--accent);background:var(--surface-2);color:var(--accent);
  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
 .idacts .primary{background:var(--accent);color:#fff}
 .idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
@@ -2953,9 +3233,13 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
 @keyframes skfade{0%{background-position:100% 50%}100%{background-position:0 50%}}
 @media (prefers-reduced-motion:reduce){.res-skeleton .sk-row{animation:none}}
 @media (max-width:767px){
-  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:#fff;padding:6px 0;
+  /* v0.10.2 M-4：sticky 区从「只有输入框」扩到「输入框 + 命中数 + 国家/地区」。
+     手机滚到第 3 屏后仍能看到「共多少条」并直接换国家（原来要一路滚回顶部）。 */
+  .has-q .searchwrap{position:sticky;top:0;z-index:20;background:var(--bg);padding:6px 0;
    border-bottom:1px solid var(--line)}
   .has-q .searchwrap #ac{top:calc(100% + 2px)}
+  .has-q .searchwrap .search-status{margin:2px 0 0;min-height:0}
+  .has-q .searchwrap .row{margin-top:4px}
 }
 table.det{margin:4px 0 8px;font-size:14px;background:#f6f5f0;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
@@ -3008,8 +3292,9 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   -webkit-line-clamp:2;overflow:hidden;max-width:220px;margin:0 6px 2px 0;
   vertical-align:top;line-height:1.35;min-height:24px;padding:3px 0;
   text-decoration:underline;text-underline-offset:2px}
-.m-en{display:inline-block;margin:0 6px 2px 0;font-size:12px;color:var(--muted)}
-.m-zh{display:inline-block;margin:0 0 2px 0;font-size:12px;color:var(--muted)}
+/* v0.10.2 M-5：矩阵卡里的成分对照名是判断「这条到底是什么药」的关键信息，12px → 14px */
+.m-en{display:inline-block;margin:0 6px 2px 0;font-size:14px;color:var(--muted)}
+.m-zh{display:inline-block;margin:0 0 2px 0;font-size:14px;color:var(--muted)}
 /* v0.9.0 task-19/6：无商品名占位 / 矩阵 +N 展开 */
 .brand-none{color:var(--muted);font-weight:600}
 .m-none-ing{display:inline-block;font-size:14px;color:var(--muted);margin-left:4px}
@@ -3025,18 +3310,44 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .m-orig{display:block;margin-top:2px;font-size:14px;color:var(--muted);font-weight:400;white-space:normal}
 .name-single-note,.maker-single-note{margin:18px 0 0;color:var(--muted);font-size:14px}
 /* v0.8.4 task-128：状态彩色角标（A1 明细等） */
-.st-badge{display:inline-block;font-size:12px;padding:1px 6px;border-radius:999px;
+.st-badge{display:inline-block;font-size:13px;padding:2px 6px;border-radius:999px;
   border:1px solid var(--line);margin-right:4px;white-space:nowrap}
 .st-active{color:#0b6b53;border-color:#a9d3c5;background:#eef7f3}
 .st-discontinued{color:#8a4b12;border-color:#e6c9a2;background:#fff6e8}
 .st-withdrawn{color:#8a2c1f;border-color:#e6bdb4;background:#fdf0ee}
 .st-unknown{color:var(--muted);background:#f6f5f2}
 .c-brand{overflow-wrap:anywhere}
+/* v0.10.2 task-5：成分页顶部精简悬浮条（滚过 H1 后仍知道「我在看哪个成分」）。
+   纯 CSS sticky：不加自动隐藏动画、不改键盘/读屏顺序；高度 ≤56px；
+   z-index 15 < 手机底栏 .tabbar 的 45，> 矩阵内容（行头 2）。 */
+.drug-sticky{position:sticky;top:0;z-index:15;display:flex;align-items:center;gap:10px;
+  min-height:44px;max-height:56px;margin:0 0 10px;padding:6px 10px;
+  background:var(--bg);border:1px solid var(--line);border-radius:10px}
+.drug-sticky .ds-name{flex:1 1 auto;min-width:0;font-weight:600;font-size:15px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drug-sticky .ds-meta{flex:0 0 auto;color:var(--muted);font-size:12px;white-space:nowrap}
+.drug-sticky .ds-filter{flex:0 0 auto;min-height:32px;display:inline-flex;align-items:center;
+  padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);
+  color:var(--fg);font-size:13px;text-decoration:none}
+.drug-sticky .ds-filter:hover{border-color:var(--accent);color:var(--accent)}
+#filters,table.matrix th[data-country],table.matrix td[data-country]{scroll-margin-top:64px}
+@media (max-width:767px){ .drug-sticky{max-height:56px;padding:4px 8px} }
 .matrix-brand-note{margin:6px 0 0;font-size:14px}
+/* v0.10.2 task-10：CN 无商品名 → 名称位显示「厂家：<MAH>」（弱化，不是品牌名） */
+.m-mah{color:var(--fg);font-weight:600}
+.m-mah .mah-k{color:var(--muted);font-weight:400;font-size:12px}
+.m-mah .m-n{color:var(--muted);font-weight:400;font-size:12px}
+/* v0.10.2 R1：剂型列里的「来源原文」小字（不翻译原文，只翻译这个标签） */
+.m-orig{color:var(--muted);font-size:12px}
+.m-orig-raw{color:var(--muted);font-size:12px}
+/* v0.10.2 task-4：可见列全空的行（只在被隐藏市场有记录）默认不渲染，说明 + 一键加列在表下 */
+.matrix-hidden-rows{margin:8px 0 0}
+.matrix-hidden-rows .sub{margin:0 0 6px}
+table.matrix tr[data-hide-empty="1"]{display:none}
 .matrix-hk-note{margin:4px 0 0;font-size:14px;color:var(--warn)}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;
-  background:#fff;padding:10px 12px}
+  background:var(--surface-2);padding:10px 12px}
 .mf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .mf-title{font-weight:600;font-size:14px}
 .mf-count{color:var(--muted);font-size:14px}
@@ -3053,8 +3364,9 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .mf-country-actions{display:flex;gap:6px;margin-top:4px}
 .mf-country-actions .mf-reset{padding:2px 8px;font-size:14px}
 .mf-count.mf-warn{color:var(--warn);font-weight:600}
+/* v0.10.2 M-3：「横滑看更多市场」只对桌面（表格态）成立，手机是卡片态、没有横滑，不再显示 */
 .matrix-scroll-hint{display:none;margin:2px 0 0;font-size:14px}
-@media (max-width:767px){ .matrix-scroll-hint{display:block} }
+@media (min-width:768px){ .matrix-scroll-hint{display:block} }
 /* v0.9.0 task-6：横滑 + 规格列 sticky + 移动端卡片 */
 .matwrap{position:relative}
 table.matrix thead th:first-child,
@@ -3067,7 +3379,8 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
   .matrix-filters.mf-open .mf-panel{display:grid}
   .mf-toggle{display:inline-flex;min-height:40px;align-items:center}
   .mf-field select,.mf-field input[type=search]{min-height:40px}
-  .mf-countries label{min-height:36px}
+  /* v0.10.2 M-3：筛选器复选框 36px → 44px 触控目标（WCAG 2.2 AA 推荐 44×44） */
+  .mf-countries label{min-height:44px}
 }
 @media (min-width:768px){
   /* v0.9.1 P0-4：桌面筛选面板本来常显，隐藏无效的「筛选」按钮 */
@@ -3244,7 +3557,7 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 .mf-details>summary::-webkit-details-marker{display:none}
 .mf-details>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:14px}
 .mf-details[open]>summary{border-bottom:1px solid var(--line)}
-.mf-details .matrix-filters{margin:0;border:0;border-radius:0}
+.mf-details .matrix-filters{margin:0;border:0;border-radius:0 0 12px 12px}
 .mf-details .mf-toggle{display:none}
 .mf-details .mf-panel{display:grid}
 .drug-identity{margin:2px 0 10px}
@@ -3293,6 +3606,9 @@ body.density-compact table.res{font-size:14px}
 
 /* v0.10.0: neutral background bands + right-top category/language controls */
 main .section,main .catquick{background:var(--band);border:1px solid var(--line);border-radius:12px;padding:16px}
+/* v0.10.2 同色守卫：catquick 是「面板」层（--card），chip 才是里面的井（--surface-2）；
+   两层都用 --band 会白压白，只剩 1px 边框分界。 */
+main .catquick{background:var(--card)}
 .u1guide{background:#fff}
 .sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
 .sn-right details{position:relative}
@@ -3396,6 +3712,14 @@ function scheduleSearch0(q){
   }, 900);
 }
 let IDX = [], NICKS = [], CONF = [], CATS = null;
+// v0.10.2：类别发现快车道（data/idx/cats.json + data/idx/cat-<id>.json + atc-ing.json）。
+// 类别词 / ATC 码的首查不再等 core.json（41.5 MB raw / 9.9 MB gz）：先拉这 23 KB 的词表
+// 和一份 30–57 KB 的切片出结果，core 在后台补全。产物由 site/build.py 构建期生成。
+let CATX = null, CATX_P = null, ATCING = null, ATCING_P = null;
+// 快车道已经渲染过结果：core 拉失败时保留切片视图（不把用户刚看到的结果换成错误框）。
+let FAST_SHOWN = 0;
+// 首屏这条路（快车道 → 分片）是否正在加载：acUpdate() 据此不抢跑 core。
+let LANE_BUSY = false;
 // 搜索增强（task-28）：运行时候选层 + 拼音表懒加载状态，见 collectHits()/pinyinFetch()。
 let SEARCH_LAYERS = null, PY_MAP = null, PY_P = null;
 // P2 分片（task-36）：manifest + 已加载分片池；分片先出结果，核心随后后台加载补全。
@@ -3518,6 +3842,15 @@ function brandHTML(e){
       .filter(Boolean).join(' · ');
     const matched = e.d ? ` <span class="match-name" title="${esc(T('res.matched_name'))}">`
       + `${esc(T('res.matched_name'))}: ${esc(e.d)}</span>` : '';
+    // v0.10.2 task-10：CN 无商品名的产品 100% 有上市许可持有人 → 名称位显示「厂家：<MAH>」。
+    // 只显示：厂家名不进 name_key / 索引，也不生成厂家页（避免假商品名污染检索）。
+    const cnMah = ((e.c || []).indexOf('CN') >= 0) ? String(e.m || '').trim() : '';
+    if(cnMah){
+      const short = cnMah.length > 28 ? cnMah.slice(0, 27) + '…' : cnMah;
+      return `<span data-brand="0" class="m-brand m-mah" title="${esc(cnMah)}">`
+        + `<span class="mah-k">${esc(T('brand.mah'))}</span> ${esc(short)}</span>`
+        + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
+    }
     return `<span data-brand="0" class="st-badge st-unknown brand-none">${esc(T('brand.none'))}</span>`
       + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
   }
@@ -3743,7 +4076,9 @@ function brandRowHTML(e, T){
     <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${exp}${badge}${ctx}${det}${rep}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
-const RES_PAGE = 20;              // v0.9.7 task-12：默认 20 行，「显示更多」每次 +20
+// v0.10.2 M-4：手机上一条结果就是一张卡（≈190–220px），20 条要滚 5 屏多；
+// 移动端首屏分页取 10（桌面仍是 20），「显示更多」每次仍按 RES_PAGE 增量。
+const RES_PAGE = (window.matchMedia && window.matchMedia('(max-width:767px)').matches) ? 10 : 20;
 let RES_LIMIT = RES_PAGE;
 let RES_MODE = 'grouped';         // 'flat' = 普通查询的扁平表；'grouped' = ATC/大类结果（保持原样）
 let RES_EXPANDED = new Set();     // 已展开的分组下标
@@ -4146,7 +4481,13 @@ function acUpdate(){
   const rawName = splitDose(raw)[0];
   const nq = norm(rawName);
   if(nq.length < 2 && atcQuery(rawName) === ''){ AC_WANT = false; acClose(); return; }
-  if(!IDX_READY && !POOL_READY){ AC_WANT = true; acClose(); if(!SHARD_P) loadIndex(); return; }  // 加载完成后补算（分片加载中不抢跑 core）
+  if(!IDX_READY && !POOL_READY){
+    AC_WANT = true; acClose();
+    // v0.10.2：快车道/分片正在路上时不再抢跑 core（原来这里会为了补全提示立刻拉 9.9 MB，
+    // 把「core 后台门控」整条抵消掉）。分片或 core 任一到位后都会回到这里重算补全。
+    if(!SHARD_P && !LANE_BUSY) loadIndex();
+    return;
+  }
   AC_WANT = false;
   AC_T = setTimeout(()=>{ AC_ITEMS = acCompute(nq, rawName); AC_I = -1; acPaint(); }, 90);
 }
@@ -4536,6 +4877,9 @@ function renderATC(atcCode, q){
     if(codes && codes.some(c => c.indexOf(atcCode) === 0)) hits.push(e);
   }
   hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  // v0.10.2 F4a：与 lib/search.py 的「方案 H」同口径——先按成分在该码里的产品总数排，
+  // 再按条目 n；否则复方大卡 + 命名碎片化会系统性占优（审计报告 §4）。
+  sortBySid(hits, atcIngWeights(atcCode));
   const shown = hits.slice(0, 200);
   if(!shown.length){
     RES_GROUPS = null; LAST_DISPLAY = [];
@@ -4561,9 +4905,18 @@ function _catNorm(s){
     .replace(/\s+/g, '').toLowerCase();
 }
 function catHit(nq){
-  if(!CATS || !CATS.categories || !nq) return null;
+  if(!nq) return null;
   const q = _catNorm(nq);
   if(q.length < 2) return null;
+  // v0.10.2：先查构建期 word 表（cats.json，与 lib/categories.py 同源），
+  // 再回退 data/categories.json 的 label/alias 循环——两条路认识的词集一致，
+  // 差别只在「老缓存页面没有 cats.json 时也认识口令词」。
+  const x = catxHit(nq);
+  if(x && x.kind === 'cat'){
+    const c = catxCat(x.id);
+    if(c) return c;
+  }
+  if(!CATS || !CATS.categories) return null;
   for(const c of CATS.categories){
     const labels = [];
     const L = c.labels || {};
@@ -4595,6 +4948,7 @@ function renderCategory(cat, q){
     if(codes && codes.some(c => prefs.some(p => c.indexOf(p) === 0))) hits.push(e);
   }
   hits.sort((a,b)=> (b.n || 0) - (a.n || 0));
+  sortByIngredient(hits, ingWeightMap(catxCat(cat.id)));
   const shown = hits.slice(0, 200);
   const link = `<p class="sub"><a href="${esc(catUrl)}">${esc(T('atc.view_class'))}</a> · `
     + `${esc(T('cat.disclaimer'))}</p>`;
@@ -4611,6 +4965,104 @@ function renderCategory(cat, q){
   out.innerHTML = bar + `<div class="notice">${esc(T('parse.category_note'))}</div>` + link
     + `<div id="reswrap">${resultsTableHTML(T)}</div>`;
   meta.textContent = `${hits.length} ${T('res.matched')} · ${T('parse.category')} ${label}`;
+}
+// ── v0.10.2 快车道渲染（cats.json + 预生成切片，首查不等 core.json）──────────
+// 与 renderCategory() 输出同构（解析条 + 说明 + 类目页链接 + 分组表），只是数据源换成
+// 构建期切片；随后 loadIndex(true) 在后台补国家视图/同成分/分页，core 到位后 render() 重绘。
+// 切片 404 / JSON 坏 / 用语改词 → 返回 false，调用方回退 loadShardedIndex / loadIndex。
+function catxCat(id){
+  return (CATX && CATX.cats || []).find(c => c.id === id) || null;
+}
+function renderCategoryFast(cx, id, q){
+  const T = window.T || (k=>k);
+  const cat = (cx && cx.cats || []).find(c => c.id === id);
+  if(!cat || !cat.slice || !cat.slice.f) return Promise.resolve(false);
+  const label = (cat.labels && (cat.labels[window.LANG] || cat.labels.en)) || cat.id;
+  return fetchJSON(BASE + cat.slice.f + (cx.v ? '?v=' + cx.v : ''))
+    .then(rows => {
+      if(box.value.trim() !== q) return true;      // 用户已改词：丢弃这次切片
+      syncURL(q);
+      RES_LIMIT = RES_PAGE; RES_EXPANDED = new Set(); RES_MODE = 'grouped';
+      const bar = parseBarHTML({category: label}, T('parse.match.category'));
+      const link = `<p class="sub"><a href="${esc(BASE + String(cat.url || ''))}">`
+        + `${esc(T('atc.view_class'))}</a> · ${esc(T('cat.disclaimer'))}</p>`;
+      const display = (rows || []).map(e => [1, 'category', e]);
+      RES_GROUPS = groupByIngredient(display);
+      LAST_DISPLAY = display;
+      out.innerHTML = bar + `<div class="notice">${esc(T('parse.category_note'))}</div>` + link
+        + (display.length
+            ? `<div id="reswrap">${resultsTableHTML(T)}</div>`
+            : `<div class="notice warnbox">${esc(T('cat.no_data'))}</div>`)
+        + (coreLoadPending() ? `<p class="sub">${esc(T('res.partial'))}</p>` : '');
+      meta.textContent = `${display.length} ${T('res.matched')} · ${T('parse.category')} ${label}`;
+      document.documentElement.classList.add('has-q');
+      out.removeAttribute('aria-busy');
+      const repEl = document.getElementById('report');
+      if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink');
+                 if(a) a.href = reportURL(q); }
+      FAST_SHOWN = 1;
+      // 后台补全走与分片路径同一个门控（省流 / 2g-3g 不预取、空闲再拉、后台挂起），
+      // 不在这里直接 loadIndex()——否则「类别词首查」又变成一次 9.9 MB 的强制下载。
+      ensureCoreInBackground();
+      return true;
+    })
+    .catch(() => false);
+}
+function renderATCFast(cx, code, q){
+  const T = window.T || (k=>k);
+  return loadAtcIng().then(d => {
+    const rows = (d && d.codes) ? d.codes[code] : null;
+    if(!rows || !rows.length) return false;       // 没有这个码的成分表 → 回退老路径
+    if(box.value.trim() !== q) return true;
+    syncURL(q);
+    RES_GROUPS = null; LAST_DISPLAY = [];
+    const bar = parseBarHTML({atc: code}, T('parse.match.atc'));
+    const codes = (cx && cx.atc_codes) || (CATS && CATS.atc_codes) || [];
+    let classCode = '';
+    if(codes.indexOf(code) >= 0) classCode = code;
+    else if(code.length === 7 && codes.indexOf(code.slice(0, 5)) >= 0) classCode = code.slice(0, 5);
+    const classLink = classCode
+      ? `<p class="sub"><a href="${BASE}atc/${esc(classCode)}.html">${esc(T('atc.view_class'))} (${esc(classCode)})</a></p>`
+      : '';
+    const zh = window.LANG === 'zh' || window.LANG === 'zh-Hant';
+    const names = d.n || {}, totals = d.t || {};
+    const lis = rows.map(r => {
+      const nm = names[r[0]] || [];
+      const label = (zh && nm[1]) ? nm[1] : (nm[0] || r[0]);
+      return `<li><a href="${BASE}drug/${esc(r[0])}.html">${esc(label)}</a></li>`;
+    }).join('');
+    // 不静默截断：成分表只带前 N 个，页面必须说明「还有多少」，并且等 core 到位后
+    // renderATC() 会用完整结果整块替换这一屏（不是追加，所以不会留下半截列表）。
+    const total = totals[code] || rows.length;
+    const more = (total > rows.length)
+      ? `<p class="sub">${esc(T('atc.ing_more').replace('{n}', String(total - rows.length)))}</p>`
+      : '';
+    out.innerHTML = bar + `<div class="notice atcbar">${esc(T('atc.ing_overview'))}</div>`
+      + `<ul class="sub atclist">${lis}</ul>` + more + classLink
+      + (coreLoadPending() ? `<p class="sub">${esc(T('res.partial'))}</p>` : '');
+    meta.textContent = `${T('atc.label')} ${code}`;
+    document.documentElement.classList.add('has-q');
+    out.removeAttribute('aria-busy');
+    const repEl = document.getElementById('report');
+    if(repEl){ repEl.style.display = 'block'; const a = document.getElementById('reportLink');
+               if(a) a.href = reportURL(q); }
+    FAST_SHOWN = 1;
+    ensureCoreInBackground();   // 同上：补全走门控，不强制拉 core
+    return true;
+  }).catch(() => false);
+}
+// 快车道入口：类别词 → 切片；ATC 码 → 成分表。判定不了或产物缺失 → false（走老路径）。
+function startFastLane(q){
+  if(IDX_READY || LEGACY) return Promise.resolve(false);
+  return loadCatx().then(cx => {
+    if(!cx) return false;
+    const atc = atcQuery(splitDose(q)[0]);
+    if(atc) return renderATCFast(cx, atc, q);
+    const hit = catxHit(norm(splitDose(q)[0])) || catxHit(q);
+    if(!hit) return false;
+    if(hit.kind === 'cat') return renderCategoryFast(cx, hit.id, q);
+    return renderATCFast(cx, hit.id, q);
+  }).catch(() => false);
 }
 function render(){
   const q = box.value.trim();
@@ -4711,7 +5163,9 @@ function render(){
       : (c ? `${T('res.none')} — ${T('res.notin')}. ${T('res.caveat')}.`
            : `${T('res.none')} — ${T('res.caveat')}.`);
   }
-  if(partial) meta.textContent += ' · ' + T('res.partial');
+  // v0.10.2：core 被省流/弱网门控时不再谎称「正在加载完整索引」，只有真的在拉才提示；
+  // 用户换国家（聚合视图）时 ensureIndexOnDemand() 会按需加载并重绘。
+  if(partial && coreLoadPending()) meta.textContent += ' · ' + T('res.partial');
   // 国家无匹配：显式提示 + 「看成分卡」/「换国家」，不再静默回退到各国列表。
   let countryMissHTML = '';
   if(countryMiss){
@@ -5038,6 +5492,75 @@ function loadSupport(){
     .catch(()=>{ SUPPORT_P = null; return false; });
   return SUPPORT_P;
 }
+// ── v0.10.2 类别发现快车道：轻量词表 + 预生成切片 ─────────────────────────
+// 审计：reports/search-discovery-audit-20261110.md §2。失败一律返回 null，调用方回退老路径
+// （loadShardedIndex / loadIndex），行为与 v0.10.1 逐字节一致，不弹错、不白屏。
+function loadCatx(){
+  if(CATX) return Promise.resolve(CATX);
+  if(CATX_P) return CATX_P;
+  CATX_P = fetchJSON(BASE + 'data/idx/cats.json')
+    .then(x => { CATX = x || null; return CATX; })
+    .catch(() => { CATX = null; CATX_P = null; return null; });
+  return CATX_P;
+}
+function loadAtcIng(){
+  if(ATCING) return Promise.resolve(ATCING);
+  if(ATCING_P) return ATCING_P;
+  ATCING_P = fetchJSON(BASE + 'data/idx/atc-ing.json')
+    .then(x => { ATCING = x || null; return ATCING; })
+    .catch(() => { ATCING = null; ATCING_P = null; return null; });
+  return ATCING_P;
+}
+// 类别词解释：先查 cats.json 的 words（快车道 + 老客户端都吃这一份），
+// 查不到再回退 data/categories.json 的 label/alias 循环（catHit）。
+function catxHit(nq){
+  if(!CATX || !CATX.words) return null;
+  const q = _catNorm(nq);
+  if(q.length < 2) return null;
+  const hit = CATX.words[q];
+  if(!hit) return null;
+  if(hit.indexOf('cat:') === 0) return {kind: 'cat', id: hit.slice(4)};
+  return {kind: 'atc', id: hit.slice(4)};
+}
+// 成分在本类别的产品数（cats.json 的 cats[].ing），给 ATC/大类结果换排序键——
+// 与 lib/search.py 的 _order_by_ingredient 同口径（审计报告 §4 方案 H）。
+function ingWeightMap(cat){
+  const m = new Map();
+  if(!cat || !cat.ing) return m;
+  for(const r of cat.ing) m.set(r[0], r[1]);
+  return m;
+}
+function sortByIngredient(hits, weights){
+  if(!weights || !weights.size) return;
+  hits.sort((a, b)=>{
+    const wa = Math.max(0, ...(String(a.x || '').split(' + ').map(s => weights.get(s) || 0)));
+    const wb = Math.max(0, ...(String(b.x || '').split(' + ').map(s => weights.get(s) || 0)));
+    return wb - wa || (b.n || 0) - (a.n || 0);
+  });
+}
+// ATC 码的排序权重按 substance_id 存（atc-ing.json 的 [sid, 产品数]），与大类按名字不同。
+// 权重表未就绪时先按 n 排（v0.10.1 行为），表到了再重排一次（同一查询才重排）。
+function atcIngWeights(code){
+  if(!ATCING || !ATCING.codes || !ATCING.codes[code]){
+    loadAtcIng().then(d => {
+      if(!d || !d.codes || !d.codes[code]) return;
+      const q = box.value.trim();
+      if(q && atcQuery(splitDose(q)[0]) === code) render();
+    });
+    return null;
+  }
+  const m = new Map();
+  for(const r of ATCING.codes[code]) m.set(r[0], r[1]);
+  return m;
+}
+function sortBySid(hits, weights){
+  if(!weights || !weights.size) return;
+  const weightOf = e => {
+    const sids = (e.vs && e.vs.length) ? e.vs : [e.v];
+    return Math.max(0, ...sids.filter(Boolean).map(s => weights.get(s) || 0));
+  };
+  hits.sort((a, b)=> weightOf(b) - weightOf(a) || (b.n || 0) - (a.n || 0));
+}
 function shardKeyOf(nq){
   const ch = nq && nq[0];
   if(!ch) return null;
@@ -5071,6 +5594,8 @@ function loadShards(files){
     IDX = pool;
     POOL_READY = true;
     for(const f of files) POOL_FILES.add(f.f);
+    // v0.10.2：分片到位就能给补全提示（core 现在要等安静期才拉，别让补全一直空着）
+    if(typeof AC_WANT !== 'undefined' && AC_WANT) acUpdate();
     return pool;
   });
 }
@@ -5082,9 +5607,69 @@ function loadShardedIndex(q){
     return loadShards(files);
   });
 }
+// ── v0.10.2 M-2：core.json（≈9.9 MB gz）后台预取门控 ──────────────────────
+// core 只补「国家视图 / 同成分 / 品牌家族 / 拼音重试」这些跨条目的聚合区块；
+// identity 卡与命中表在分片阶段已经出来，所以搜完立刻白拉 9.9 MB 对手机是纯浪费：
+//   1) 网络：saveData（省流）或 slow-2g / 2g / 3g 完全不预取；
+//   2) 首屏：先让首屏安顿，用 requestIdleCallback(…, {timeout: 8000}) 空闲再拉
+//      （Safari 没有 idle callback，退化成 3s setTimeout）；
+//   3) 页面不可见（切到后台 tab）时挂起，回到前台再试一次。
+// 用户主动要聚合视图（换国家下拉）时走 ensureIndexOnDemand()，按需加载并重绘，
+// 失败降级保持原样（分片结果继续可用 + 「重试」按钮，见 loadIndex 的 catch）。
+const CORE_BG = {pending: 0, timer: 0, waiting: 0};
+const CORE_BG_DELAY = 9000;          // 首屏安静这么久之后才考虑拉 core（不抢首屏带宽）
+const CORE_BG_IDLE_TIMEOUT = 8000;   // 安静期过后，空闲回调最长再等 8s
+const CORE_BG_FALLBACK_DELAY = 3000; // 兼容位：无 requestIdleCallback 时的等价延后
+function coreNetAllowsPrefetch(){
+  const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if(!c) return true;                // Safari 没有 connection API → 交给空闲/可见性门控
+  if(c.saveData) return false;       // 用户开了省流模式：不预取
+  const et = c.effectiveType || '';
+  return et !== 'slow-2g' && et !== '2g' && et !== '3g';
+}
+function coreLoadPending(){ return !!(IDX_P || CORE_BG.pending); }
 function ensureCoreInBackground(){
   if(IDX_READY || IDX_P || LEGACY) return;
-  try{ setTimeout(()=>{ loadIndex(true); }, 0); }catch(e){}
+  if(!coreNetAllowsPrefetch()) return;
+  if(document.visibilityState === 'hidden'){
+    if(CORE_BG.waiting) return;
+    CORE_BG.waiting = 1;
+    document.addEventListener('visibilitychange', function onVisible(){
+      if(document.visibilityState === 'hidden') return;
+      document.removeEventListener('visibilitychange', onVisible);
+      CORE_BG.waiting = 0;
+      ensureCoreInBackground();
+    });
+    return;
+  }
+  if(CORE_BG.pending) return;
+  CORE_BG.pending = 1;
+  const fire = function(){
+    CORE_BG.pending = 0;
+    if(CORE_BG.timer){ clearTimeout(CORE_BG.timer); CORE_BG.timer = 0; }
+    if(IDX_READY || IDX_P) return;
+    loadIndex(true);
+  };
+  // 先等一段「安静期」再排空闲回调：requestIdleCallback 在空闲页面里几乎立刻触发，
+  // 只靠它等于「输入 2 个字就拉 9.9 MB」——那是 M-2 要修的问题本身。
+  // CORE_BG_DELAY 之内用户还在打字/切词，就不该为补全抢带宽。
+  try{
+    CORE_BG.timer = setTimeout(function(){
+      CORE_BG.timer = 0;
+      try{
+        if(window.requestIdleCallback){
+          window.requestIdleCallback(fire, {timeout: CORE_BG_IDLE_TIMEOUT});
+        }else{
+          fire();
+        }
+      }catch(e){ fire(); }
+    }, CORE_BG_DELAY);
+  }catch(e){ fire(); }
+}
+// 用户明确要聚合视图（换国家/地区）：不等空闲，直接按需加载 core 后重绘。
+function ensureIndexOnDemand(){
+  if(IDX_READY || IDX_P || LEGACY) return;
+  loadIndex().then(ok => { if(ok && box.value.trim()) render(); });
 }
 function loadIndex(quiet){
   if(IDX_READY) return Promise.resolve(true);
@@ -5107,8 +5692,9 @@ function loadIndex(quiet){
   }).catch(err=>{
     // 失败后清掉缓存的 Promise，允许点「重试」重新发起。
     IDX_P = null;
-    if(quiet && POOL_READY){
-      if(window.console && console.warn) console.warn('core index unavailable (sharded view kept)', err);
+    if(quiet && (POOL_READY || FAST_SHOWN)){
+      // 分片 / 快车道切片已经出了结果：core 失败不推翻已显示的内容，只在控制台留痕。
+      if(window.console && console.warn) console.warn('core index unavailable (partial view kept)', err);
       return false;
     }
     setHint(HINT_IDLE);
@@ -5140,21 +5726,35 @@ function startSearch(){
     out.setAttribute('aria-busy', 'true');
   }
   document.documentElement.classList.add('has-q');
+  // v0.10.2：类别词 / ATC 码先走轻量索引（≈23 KB 词表 + 一份 30–57 KB 切片），
+  // 命中就直接出结果，core.json 在后台补全；判定不了 / 产物缺失 → 回退下面的老路径。
+  // LANE_BUSY 让 acUpdate() 知道「首屏这条路正在加载」，别为了补全提示抢跑 core。
+  LANE_BUSY = true;
+  startFastLane(q).then(taken => {
+    LANE_BUSY = false;
+    if(!taken) startSlowLane(q);
+  });
+}
+// 老路径（v0.10.1 行为逐字节不变）：分片先出结果，core 后台补；ATC 码直接等 core。
+function startSlowLane(q){
+  FAST_SHOWN = 0;    // 这一轮不是快车道渲染的：core 失败要照常报错，别保留旧内容
   // v0.6.4 A2：ATC 码查询需要完整索引（分片里的条目不一定带 atc 聚合），先确保 core 到位。
   if(atcQuery(splitDose(q)[0])){ loadIndex().then(ok => { if(ok) render(); }); return; }
   const nq = norm(splitDose(q)[0]);
   if(POOL_READY){
     const files = shardsForQuery(nq);
     if(files && files.some(f=> !POOL_FILES.has(f.f))){
-      loadShards(files).then(()=>{ render(); ensureCoreInBackground(); })
-        .catch(()=>{ render(); ensureCoreInBackground(); });
+      // v0.10.2：先排后台预取（同步置 pending），再 render()——否则首帧算不出
+      // 「partial 且 core 在拉」这个状态，#meta 会漏掉「部分结果」提示。
+      loadShards(files).then(()=>{ ensureCoreInBackground(); render(); })
+        .catch(()=>{ ensureCoreInBackground(); render(); });
     }else{
-      render();
       ensureCoreInBackground();
+      render();
     }
     return;
   }
-  SHARD_P = loadShardedIndex(q).then(()=>{ render(); ensureCoreInBackground(); })
+  SHARD_P = loadShardedIndex(q).then(()=>{ ensureCoreInBackground(); render(); })
     .catch(()=> loadIndex().then(ok => { if(ok) render(); }));
 }
 // 结果区事件委托：失败重试 / 加载更多 / 品牌折叠展开 / 换国家。
@@ -5269,6 +5869,9 @@ ctry.addEventListener('change', ()=>{
   gcEvent('country-' + (ctry.value || 'ALL'));
   updateCtryLabel();
   acClose();
+  // v0.10.2：选了国家/地区就是「要按国家看的聚合视图」，这需要完整 core；
+  // 后台预取被省流/弱网门控时，这里按需加载（HINT_LOADING + 失败重试照旧）。
+  if(ctry.value) ensureIndexOnDemand();
   startSearch();
 });
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
@@ -5343,6 +5946,8 @@ if(LEGACY){
   trackSearchSubmit(initial);
   startSearch();
 }
+// v0.10.2：空闲时预热类别词表（≈7 KB gz），首次输入「退烧药」这类词时不用等。
+if(!LEGACY){ try{ setTimeout(loadCatx, 0); }catch(e){} }
 """
 
 
@@ -5451,8 +6056,11 @@ BILINGUAL_JS = r"""
       var zhh = el.getAttribute('data-n-zhh') || '';
       var es = el.getAttribute('data-n-es') || '';
       var lang = window.LANG || 'en';
-      if(lang === 'zh') el.textContent = zh || (en + ' 暂无中文名');
-      else if(lang === 'zh-Hant') el.textContent = zhh || (en + ' 暫無中文名');
+      // v0.10.2：缺当前语言名不再把「暂无中文名」拼进名字（会进链接可访问名，
+      // 且每个盐型各出现一次）。改由 applyNameLangBadges() / markAtcRowGaps()
+      // 在名字**之后**放一枚徽章，ATC/大类行每行只标一次，盐型不单独标。
+      if(lang === 'zh') el.textContent = zh || en;
+      else if(lang === 'zh-Hant') el.textContent = zhh || en;
       else if(lang === 'es') el.textContent = es || en;
       else el.textContent = en;
     });
@@ -5610,7 +6218,11 @@ BILINGUAL_JS = r"""
       ff.querySelector('span').textContent = T('matrix.form');
       var fsel = ff.querySelector('select');
       fsel.appendChild(opt('', T('matrix.all')));
-      Object.keys(forms).sort().forEach(function(f){ fsel.appendChild(opt(f, f)); });
+      Object.keys(forms).sort().forEach(function(f){
+        // v0.10.2：剂型下拉显示四语标签（原来显示英文原码 effervescent / tablet）
+        var lb = T('form.' + f);
+        fsel.appendChild(opt(f, (lb && lb.indexOf('form.') !== 0) ? lb : f));
+      });
       panel.appendChild(ff);
       // 释放
       var rf = document.createElement('label'); rf.className = 'mf-field';
@@ -5656,9 +6268,28 @@ BILINGUAL_JS = r"""
           if(s.form && (tr.getAttribute('data-form') || '') !== s.form) ok = false;
           if(s.rel && (tr.getAttribute('data-release') || '') !== s.rel) ok = false;
           if(s.spec && (tr.getAttribute('data-spec') || '').toLowerCase().indexOf(s.spec) < 0) ok = false;
-          tr.style.display = ok ? '' : 'none';
+          // v0.10.2 task-4：「首屏可见列全空」的行默认不渲染；一旦它所在的隐藏市场被
+          // 加入列（?mk= 或下面的「加为一列」按钮），这一行就应当出现。
+          // 注意：CSS 里 `tr[data-hide-empty]` 是 display:none，所以显示时必须写
+          // 明确的 'table-row'（置空 '' 会退回 CSS 的 none）。
+          if(tr.getAttribute('data-hide-empty') === '1'){
+            var hid = (tr.getAttribute('data-hidden-mk') || '').split(',');
+            var shownNow = hid.some(function(c){ return c && s.countries.indexOf(c) >= 0; });
+            ok = ok && shownNow;
+            tr.style.display = ok ? 'table-row' : 'none';
+          }else{
+            tr.style.display = ok ? '' : 'none';
+          }
           if(ok) visible++;
         });
+        // 「另有 N 个…」提示：全部显示出来后就不再提示（数字是构建期按默认列算的）
+        var boxNR = document.querySelector('.matrix-hidden-rows');
+        if(boxNR){
+          var stillHidden = rows.some(function(tr){
+            return tr.getAttribute('data-hide-empty') === '1' && tr.style.display === 'none';
+          });
+          boxNR.style.display = stillHidden ? '' : 'none';
+        }
         var mobile = window.matchMedia && window.matchMedia('(max-width:719px)').matches;
         ths.forEach(function(th){
           var c = th.getAttribute('data-country');
@@ -5743,6 +6374,20 @@ BILINGUAL_JS = r"""
       box.querySelector('.mf-toggle').addEventListener('click', function(){
         var open = box.classList.toggle('mf-open');
         this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // v0.10.2 task-4：「另有 N 个规格/剂型仅在 US · GB 有记录」后面的市场按钮 ——
+      // 点一下就把该市场加进列（走同一套 ?mk= 机制，可分享），对应行随之出现。
+      var noteHost = wrap.parentNode || document;
+      Array.prototype.forEach.call(noteHost.querySelectorAll('[data-mk-add]'), function(btn){
+        btn.addEventListener('click', function(){
+          var c = btn.getAttribute('data-mk-add');
+          var cb = cbox.querySelector('input[data-mf-country="' + c + '"]');
+          if(!cb){ return; }
+          cb.checked = true;
+          apply(true);
+          var nr = noteHost.querySelector('.matrix-hidden-rows');
+          if(nr) nr.scrollIntoView ? nr.scrollIntoView({block: 'nearest'}) : null;
+        });
       });
       apply(false);
     });
@@ -6559,7 +7204,7 @@ def load_index(db: sqlite3.Connection):
             # v0.5.5：与 x 的分段一一对应的中文名；没有中文名留 ""（客户端逐段回退英文）
             a["subs_zh"].append(inn_zh or "")
         if sv is not None:
-            st = f"{sv:g} {su or ''}".strip()
+            st = f"{_fmt_qty(sv)} {su or ''}".strip()
             if st not in a["s"]:
                 a["s"].append(st)
         f = form_base or dosage_form
@@ -6961,6 +7606,22 @@ def _fmt_decimal(d: Decimal) -> str:
     return s or "0"
 
 
+def _fmt_qty(value) -> str:
+    """数量定点显示（千分位），避免 `:g` 把 1000000 输出成 `1e+06`。
+
+    v0.10.2 修：全库 372 行（强度 67 + 每剂量 311）原来会显示 `1e+06 IU/100 mL`，
+    还让排序键 `_spec_num()` 把 1e+06 当成 1。
+    """
+    try:
+        f = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+    if f != f or f in (float("inf"), float("-inf")):      # NaN / inf：原样交回
+        return str(value)
+    out = f"{f:,.6f}".rstrip("0").rstrip(".")
+    return out or "0"
+
+
 def _normalized_strength(value, unit) -> str:
     """重量单位 → mg 显示串；>100,000 mg 的异常值保持原单位（task-16 未换算的不猜）。"""
     if value is None:
@@ -6971,10 +7632,10 @@ def _normalized_strength(value, unit) -> str:
         try:
             num = Decimal(str(value)) * factor
         except InvalidOperation:
-            return f"{value:g} {unit}".strip()
+            return f"{_fmt_qty(value)} {unit}".strip()
         if num <= Decimal("100000"):
             return f"{_fmt_decimal(num)} mg"
-    return f"{value:g} {unit}".strip()
+    return f"{_fmt_qty(value)} {unit}".strip()
 
 
 def _strength_raw_map() -> dict[str, str]:
@@ -7003,7 +7664,7 @@ def _strength_raw_map() -> dict[str, str]:
             old_u = (row.get("old_unit") or "").strip()
             if pid and ord_ and old_v and old_u:
                 try:
-                    out[f"{pid}|{ord_}"] = f"{float(old_v):g} {old_u}"
+                    out[f"{pid}|{ord_}"] = f"{_fmt_qty(float(old_v))} {old_u}"
                 except ValueError:
                     out[f"{pid}|{ord_}"] = f"{old_v} {old_u}".strip()
     _STRENGTH_RAW = out
@@ -7014,7 +7675,7 @@ def _raw_strength(pid, ord_, sv, su) -> str:
     raw = _strength_raw_map().get(f"{pid}|{ord_}")
     if raw:
         return raw
-    return f"{sv:g} {su}".strip() if sv is not None else ""
+    return f"{_fmt_qty(sv)} {su}".strip() if sv is not None else ""
 
 
 def _strength_origin_html(raws: set[str], display: str) -> str:
@@ -7029,6 +7690,7 @@ def _strength_origin_html(raws: set[str], display: str) -> str:
 
 
 _FORM_WORD_ZH = {
+    "effervescent": ("泡腾", "泡騰"),
     "tablet": ("片", "片剂"), "capsule": ("胶囊",), "injection": ("注射液", "注射剂"),
     "solution": ("溶液", "口服液", "液"), "syrup": ("糖浆",), "suspension": ("混悬液",),
     "cream": ("乳膏", "霜"), "ointment": ("软膏",), "gel": ("凝胶", "凝胶剂"),
@@ -7036,6 +7698,36 @@ _FORM_WORD_ZH = {
     "drops": ("滴剂", "滴眼液", "滴耳液", "滴鼻液"), "inhaler": ("吸入剂",),
     "suppository": ("栓",), "patch": ("贴剂", "贴片"),
 }
+
+
+# v0.10.2：泡腾类（effervescent）是**一个** form_base（片/颗粒/溶液都在里面），
+# 显示时若能从来来源原文分出亚型，就拼「泡腾剂·片 / ·颗粒 / ·溶液」——
+# 既保住「泡腾片」这层信息，又不会把 84 行泡腾颗粒、28 行泡腾溶液硬说成片。
+_EFF_SUBFORM_WORDS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("tablet", ("tablet", "comprimido", "tableta", "片", "錠")),
+    ("granule", ("granule", "granulado", "颗粒", "顆粒", "sachet")),
+    ("solution", ("solution", "solución", "solucion", "溶液")),
+)
+
+
+def _form_display(form: str, dosage: str = "") -> str:
+    """剂型显示（HTML）：受控词走 data-i18n 标签；effervescent 再按来源原文补亚型后缀。"""
+    base = _label_html("form", form, form)
+    if (form or "").strip().lower() != "effervescent":
+        return base
+    d = (dosage or "").strip().lower()
+    for code, words in _EFF_SUBFORM_WORDS:
+        if any(w and w in d for w in words):
+            return base + "·" + _label_html("form", code, code)
+    return base
+
+
+def _label_plain(prefix: str, code: str) -> str:
+    """受控词 → 纯文本标签（en 值；用于 <option> 这类不能放 span 的地方）。"""
+    code = (code or "").strip()
+    if not code:
+        return ""
+    return I18N["en"].get(f"{prefix}.{code}", code)
 
 
 def _strip_form_from_label(label: str, form: str) -> str:
@@ -7077,7 +7769,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
     for row in db.execute(
         """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
                   p.status, pc.strength_value, pc.strength_unit,
-                  pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh, pc.ord
+                  pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh, pc.ord,
+                  p.mah
            FROM product p
            JOIN product_component pc ON pc.product_id = p.product_id
            JOIN variant v ON v.variant_id = pc.variant_id
@@ -7147,9 +7840,12 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
 
         # v0.6.6：按「规格 + 剂型 + 释放机制」聚合，国家并排；默认只显示 active。
         NO_TRADE = "__no_trade__"
+        # task-10：厂家占位键（厂家名只用于这一格显示，不进任何索引/名称表）
+        MAH_PREFIX = "__mah__:"
+        mah_count: dict[tuple[str, str], int] = {}
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
         spec_raws: dict[tuple, set[str]] = {}
-        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord_) in rows:
+        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord_, mah) in rows:
             # v0.9.0 task-9 / v0.9.1 task-28：HK 无 status、AU 导出无状态列，
             # 这些 unknown 记录不整批跳过；其他市场仍按原规则隐藏。
             if status != "active" and not (
@@ -7160,16 +7856,25 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             st = _normalized_strength(sv, su)
             raw_st = _raw_strength(pid, ord_, sv, su)
             if pv:
-                st += f"/{pv:g} {pu}"
-                raw_st += f"/{pv:g} {pu}"
+                st += f"/{_fmt_qty(pv)} {pu}"
+                raw_st += f"/{_fmt_qty(pv)} {pu}"
             spec = (st.strip(), fb or df or "", rel)
             if raw_st.strip():
                 spec_raws.setdefault(spec, set()).add(raw_st.strip())
             bucket = spec_countries.setdefault(spec, {}).setdefault(country, {})
             traded = names.get(pid, [])
             if not traded:
-                # v0.9.0 task-19：无 trade 名的产品也在矩阵里占位，不静默消失
-                bucket.setdefault(NO_TRADE, ("", "", ""))
+                # v0.9.0 task-19：无 trade 名的产品也在矩阵里占位，不静默消失。
+                # v0.10.2 task-10：CN 这 126,716 条 100% 有上市许可持有人，
+                # 名称位改显示「厂家：<MAH>」（只显示，不入 name_key/检索，不生成厂家页）；
+                # 同一厂家在同一格只出现一次并计 ×N（下面的 mah_count）。
+                if country == "CN" and (mah or "").strip():
+                    key = MAH_PREFIX + (mah or "").strip()
+                    if key not in bucket:
+                        bucket[key] = ("", "", "")
+                    mah_count[(country, key)] = mah_count.get((country, key), 0) + 1
+                else:
+                    bucket.setdefault(NO_TRADE, ("", "", ""))
             for key_id, raw in traded:
                 e = entry_by_k.get(key_id)
                 label = (e or {}).get("d") or raw
@@ -7177,10 +7882,22 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                     en = cn_latin.get(key_id, "") if country == "CN" else ""
                     bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en,
                                      (zh_sub or "") if country == "CN" else "")
-        def _brand_bit(label, url, en, zh_sub, form):
+        def _brand_bit(label, url, en, zh_sub, form, country=""):
             if label == NO_TRADE:
                 return (f'<span class="m-brand st-badge st-unknown brand-none" data-brand="0" '
                         f'data-i18n="brand.none">{esc(T["brand.none"])}</span>')
+            if label.startswith(MAH_PREFIX):
+                # task-10：CN 无商品名 → 名称位显示「厂家：<MAH>」；前缀弱化、
+                # 过长截断（title 放全称）、同厂家多条标 ×N。它不是品牌名。
+                mah_name = label[len(MAH_PREFIX):]
+                shown = mah_name if len(mah_name) <= 28 else mah_name[:27] + "…"
+                n_same = mah_count.get((country, label), 1)
+                times = f' <span class="m-n">×{n_same}</span>' if n_same > 1 else ""
+                return (f'<span class="m-brand m-mah" data-brand="0" title="{esc(mah_name)}" '
+                        f'data-i18n-title="brand.mah_note">'
+                        f'<span class="mah-k" data-i18n="brand.mah">'
+                        f'{esc(T.get("brand.mah", "Manufacturer:"))}</span> '
+                        f'{esc(shown)}{times}</span>')
             display = _strip_form_from_label(label, form)
             if url:
                 bit = (f'<a class="m-brand" data-brand="1" title="{esc(label)}" '
@@ -7220,14 +7937,28 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # 移动端由 .matwrap 横向滚动；界面语言只决定列顺序（i18n.js MORDER）。
         # v0.8.3 task-119：常用度排序（跨国家产品/品牌记录数），「未公开」最后，空行隐藏。
         def _spec_num(st: str) -> float:
-            m2 = re.match(r"\s*([0-9]+(?:[.,][0-9]+)?)", st or "")
+            """取规格里的首个数字（用于「同频按数值」排序）。
+
+            v0.10.2 修：`1,000,000` 是千分位、不是小数点；`1.23e+06` 也要认。
+            旧实现把 `1,000,000` 读成 1.000000 → 大规格排到最后。
+            """
+            m2 = re.match(r"\s*([0-9][0-9.,]*(?:[eE][+-]?[0-9]+)?)", st or "")
+            if not m2:
+                return -1.0
+            tok = m2.group(1).rstrip(".,")
+            if re.fullmatch(r"[0-9]{1,3}(,[0-9]{3})+(\.[0-9]+)?([eE][+-]?[0-9]+)?", tok):
+                tok = tok.replace(",", "")
+            else:
+                tok = tok.replace(",", ".")
             try:
-                return float(m2.group(1).replace(",", ".")) if m2 else -1.0
+                return float(tok)
             except ValueError:
                 return -1.0
 
         def _form_rank(form: str) -> int:
             f = (form or "").lower()
+            if "effervescent" in f:      # v0.10.2：泡腾类排在最前（原会落到 return 9 排最后）
+                return 0
             if "tablet" in f:
                 return 0
             if "capsule" in f:
@@ -7267,7 +7998,18 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                           f'{esc(c)}</th>'
                           for c in countries))
         tbody = []
-        for spec, by_c in shown:
+        # v0.10.2 task-4：可见列全「未收录」的行 = 纯噪音（用户截图那种整行空白）。
+        # 判据只用「首屏可见列」= default_cols；被隐藏的市场里有记录 → 不渲染空行，
+        # 但要计数并在矩阵下方给「另有 N 个…」+ 一键把该市场加入列（复用 ?mk= 机制）。
+        # 若某行在所有市场（含隐藏）都没有记录（理论上不该发生）→ 同样计入未显示，
+        # 便于发现渲染 bug，不静默丢信息。
+        hide_empty: dict[int, list[str]] = {}      # 行序号 → 该行有记录的被隐藏市场
+        for idx_row, (spec, by_c) in enumerate(shown):
+            if any(by_c.get(c) for c in default_cols):
+                continue
+            hidden_mk = [c for c in countries if c not in default_cols_set and by_c.get(c)]
+            hide_empty[idx_row] = hidden_mk
+        for idx_row, (spec, by_c) in enumerate(shown):
             st, form, rel = spec
             suspect = suspect_by_spec.get(spec, False)
             st_html = _label_unit_html(st) if st else (
@@ -7290,12 +8032,12 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                                  f'<span class="meta" data-i18n="matrix.none">not recorded</span></td>')
                     continue
                 ordered = sorted(cell_brands.items(), key=lambda kv: kv[0].lower())
-                bits = [_brand_bit(label, url, en, zh_sub, form)
+                bits = [_brand_bit(label, url, en, zh_sub, form, c)
                         for label, (url, en, zh_sub) in ordered[:3]]
                 rest_html = ""
                 if len(ordered) > 3:
                     # v0.9.0 task-6：+N 用原生 <details> 展开，无 JS 也可点开阅读
-                    rest_bits = [_brand_bit(label, url, en, zh_sub, form)
+                    rest_bits = [_brand_bit(label, url, en, zh_sub, form, c)
                                  for label, (url, en, zh_sub) in ordered[3:]]
                     rest_html = (f'<details class="m-more"><summary>'
                                  f'+{len(ordered) - 3}</summary>'
@@ -7303,9 +8045,12 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                 cells.append(f'<td data-country="{esc(c)}" data-label="{esc(c)}"'
                              f'{_defcol_attr(c)}>'
                              f'{" ".join(bits)}{rest_html}</td>')
+            hid = hide_empty.get(idx_row)
+            hid_attr = (f' data-hide-empty="1" data-hidden-mk="{esc(",".join(hid))}"'
+                        if hid is not None else "")
             tbody.append(f'<tr data-form="{esc(form or "")}" data-release="{esc(rel or "")}" '
                          f'data-spec="{esc(st + " " + " ".join(sorted(spec_raws.get(spec, set()))))}" '
-                         f'data-suspect="{1 if suspect else 0}" '
+                         f'data-suspect="{1 if suspect else 0}"{hid_attr} '
                          f'data-freq="{freq_by_spec.get(spec, 0)}">'
                          + "".join(cells) + "</tr>")
         capped_blocks = ""
@@ -7317,6 +8062,31 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                 capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
                                   f'<p class="sub">{esc(note)}</p></div>')
         if tbody:
+            # v0.10.2 task-4：可见列全空的行的「不静默丢信息」说明 + 一键加列
+            hidden_rows_html = ""
+            undisclosed_note = ""
+            if any((kv[0][0] or "").strip() == "" for kv in shown):
+                undisclosed_note = ('<p class="sub" data-i18n="matrix.undisclosed_note">'
+                                    '“not disclosed” means the source does not publish the '
+                                    'strength — it does not mean the product has none.</p>')
+            if hide_empty:
+                mk_union: list[str] = []
+                for hidden in hide_empty.values():
+                    for c in hidden:
+                        if c not in mk_union:
+                            mk_union.append(c)
+                mk_union.sort(key=lambda c: (COUNTRY_PRIORITY.index(c)
+                                             if c in COUNTRY_PRIORITY
+                                             else len(COUNTRY_PRIORITY), c))
+                btns = "".join(
+                    f'<button type="button" class="mf-reset" data-mk-add="{esc(c)}" '
+                    f'data-i18n-aria="matrix.hidden_show">{esc(c)}</button>'
+                    for c in mk_union)
+                hidden_rows_html = (
+                    f'<div class="matrix-hidden-rows" data-hidden-count="{len(hide_empty)}">'
+                    f'<p class="sub">{_lang_block_text("matrix.hidden_rows", n=len(hide_empty), mk=" · ".join(mk_union) or "—")}</p>'
+                    + (f'<p class="mf-country-actions">{btns}</p>' if mk_union else "")
+                    + '</div>')
             hk_note = ""
             if "HK" in countries:
                 hk_note = ('<p class="sub matrix-hk-note" data-i18n="matrix.hk_note">'
@@ -7329,7 +8099,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                            'Australia ARTG data has no registration-status column, so status is '
                            'shown as unknown; being on the register does not mean currently '
                            'marketed.</p>')
-            matrix_html = ('<div class="mf-slot"></div>'
+            matrix_html = ('<div class="mf-slot" id="filters"></div>'
                            '<div class="matwrap"><table class="matrix"><thead><tr>'
                            + head + "</tr></thead><tbody>" + "".join(tbody)
                            + "</tbody></table></div>"
@@ -7337,7 +8107,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                              'Scroll horizontally for more markets →</p>'
                            + '<p class="sub matrix-brand-note" data-i18n="matrix.brand_note">'
                              'Each country column shows the locally registered trade names — '
-                             'not translations.</p>' + hk_note + au_note + capped_blocks)
+                             'not translations.</p>'
+                           + hidden_rows_html + undisclosed_note
+                           + hk_note + au_note + capped_blocks)
         else:
             matrix_html = ('<p class="empty" data-i18n="drug.empty">'
                            'No products recorded yet.</p>')
@@ -7388,14 +8160,22 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                     f'<span{_nl_attr}{_zh_attr}>{esc(inn_en or sid)}</span>')
         # v0.9.8 task-13（P0-9）：H1 → 一句话身份 → 矩阵 → 异名 → 不可互换警示；
         # 筛选器默认收起改在客户端（APP_JS 包 <details>），长尾页静态 0 增量。
-        n_markets = len({r[1] for r in rows})
-        n_records = len({r[10] for r in rows})
+        # v0.10.2 修：rows 是 (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord, mah)，
+        # 市场是 r[0]、产品 id 是 r[9]。原来取 r[1]=剂型、r[10]=inn_zh，导致第一句就写错数字
+        # （acetaminophen 显示「24 个市场 · 1 条记录」，实际 10 个市场 / 12,645 产品）。
+        n_markets = len({r[0] for r in rows})
+        n_records = len({r[9] for r in rows})
         identity = (f'<p class="sub drug-identity">ATC {esc(atc) or "—"} · '
                     f'<b>{n_markets}</b> <span data-i18n="drug.markets">markets</span> · '
                     f'<b>{n_records}</b> <span data-i18n="drug.records">records</span></p>')
         body = f"""<h1>{h1_inner}</h1>
 <p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span></p>
 {identity}
+<div class="drug-sticky" role="group">
+  <span class="ds-name" title="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>
+  <span class="ds-meta">{n_markets} <span data-i18n="drug.markets">markets</span> · {n_records} <span data-i18n="drug.records">records</span></span>
+  <a class="ds-filter" href="#filters" data-i18n="matrix.filters_short">Filters</a>
+</div>
 {matrix_html}
 {syn_line}{nick_line}
 {conf_line}
@@ -7443,7 +8223,7 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
             sid, {"inn": inn_en, "nl": nl or "", "country": set(), "s": set(),
                   "f": set(), "rel": set()})
         s["country"].add(country)
-        st = f"{sv:g} {su or ''}".strip() if sv is not None else ""
+        st = f"{_fmt_qty(sv)} {su or ''}".strip() if sv is not None else ""
         if st:
             s["s"].add(st)
         s["f"].add(form_base or dosage_form)
@@ -7458,10 +8238,16 @@ def _name_product_table(rows: list, T: dict) -> str:
     body = []
     for (country, dosage, form_base, rel, status, mah, src, approval,
          sv, su, zh, en, pnote, pcat) in rows:
-        st = f"{sv:g} {su}".strip() if sv is not None else "—"
-        form = form_base or dosage or "—"
+        st = f"{_fmt_qty(sv)} {su}".strip() if sv is not None else "—"
+        # v0.10.2 R1：剂型列走四语标签（原来直接打印来源英文原码 tablet/efervescente），
+        # 并把来源原文并列出来（「泡腾剂·片 · 来源原文：片剂(泡腾)」→ 不再是「看起来像错的数据」）。
+        form_html = _form_display(form_base or "", dosage or "")
         if rel and rel != "none":
-            form += f" · {rel}"
+            form_html += f' · {_label_html("release", rel, rel)}'
+        if dosage and (dosage or "").strip() != (form_base or "").strip():
+            form_html += (f' <span class="m-orig" data-i18n="name.form_source">'
+                          f'as recorded by source</span> <span class="m-orig-raw">'
+                          f'{esc(dosage)}</span>')
         maker = ""
         if mah:
             info = MAKERS.get(norm_maker(mah))
@@ -7488,7 +8274,7 @@ def _name_product_table(rows: list, T: dict) -> str:
             f'<td data-label="{esc(T["col.dose"])}" data-i18n-label="col.dose">'
             f'{_label_unit_html(st)}{extras}</td>'
             f'<td data-label="{esc(T["name.form"])}" data-i18n-label="name.form">'
-            f'{esc(form)}</td>'
+            f'{form_html}</td>'
             f'<td data-label="{esc(T["a1.status"])}" data-i18n-label="a1.status">'
             f'<span class="st-badge st-{esc(status)}" data-i18n="drug.status.{esc(status)}">'
             f'{esc(T.get("drug.status." + str(status), status))}</span></td>'
@@ -7587,12 +8373,19 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
         else:
             cards_html = '' if name_only else (
                 '<p class="empty" data-i18n="name.empty">No records</p>')
+        # v0.10.2 R1：中国来源的剂型只记到大类（片剂/胶囊剂…），不细分泡腾、薄膜衣等子剂型。
+        # 页面上说明一次，避免把「来源写片剂」读成「我们断定它不是泡腾片」。
+        cn_granularity = ""
+        if any("CN" in g["country"] for g in d["subs"].values()):
+            cn_granularity = ('<p class="sub" data-i18n="name.form_granularity_cn">'
+                              'Source records dose form only at class level (e.g. "tablet"); '
+                              'effervescent/coated sub-forms are not distinguished.</p>')
         body = f"""<h1>{esc(e['d'])}</h1>
 <p class="sub">{('<span class="st-badge st-unknown brand-none" data-i18n="brand.none">'
                  + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}<span data-i18n="name.also">Also written as</span>:
 {esc('、'.join(variants.get(e['k'], [])[:6]))} ·
 <span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
-{banner}{gen_notice}{cards_html}{none_ing}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
+{banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
         _alts = [v for v in variants.get(e["k"], [])[:6] if v and v != e["d"]]
         if not _alts:
             body = re.sub(r'<span data-i18n="name.also">Also written as</span>:\s*[^<]*?·\s*', '', body, count=1)
@@ -7639,6 +8432,55 @@ def _family_block(e, families, displays, variants, page_keys=None) -> str:
 
 
 COMBO_ROW_CAP = 200
+
+
+def _combo_stub_html(names: str, stub_items: str) -> str:
+    """被体积策略裁剪的组合页 stub（200 + noindex,follow，保留 v0.9.0 旧链接不 404）。
+
+    v0.10.2 i18n：原来把四种语言塞进同一句（「Combination record · 组合记录」），四语用户
+    都看到同一串中英混排。现在每种语言各写一份，用 8 行内联脚本按 ?lang= / localStorage /
+    浏览器语言选一份——stub 不加载 assets/i18n.js（为了看一句提示拉 165 KB 不值得），
+    所以语言判定在这里自带一份最小实现，与 i18n.js 的顺序一致（?lang= → 存储 → 浏览器）。
+    无 JS 时显示英文那一份（默认可见，其余 hidden）。
+    """
+    langs = ("en", "es", "zh", "zh-Hant")
+
+    def _pick(key: str) -> str:
+        out = []
+        for lang in langs:
+            hidden = "" if lang == "en" else " hidden"
+            out.append(f'<span class="lb" data-lb="{lang}" data-i18n="{key}"{hidden}>'
+                       f'{esc(UI_I18N[lang][key])}</span>')
+        return "".join(out)
+
+    picker = """<script>
+(function(){
+  var L = '';
+  try{ L = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || ''; }catch(e){}
+  L = String(L || (navigator.language || 'en')).toLowerCase();
+  var pick = 'en';
+  if(L.indexOf('zh') === 0){ pick = (L === 'zh' || L.indexOf('zh-cn') === 0 || L.indexOf('zh-hans') === 0) ? 'zh' : 'zh-Hant'; }
+  else if(L.indexOf('es') === 0){ pick = 'es'; }
+  var all = document.querySelectorAll('[data-lb]');
+  for(var i = 0; i < all.length; i++){
+    all[i].style.display = (all[i].getAttribute('data-lb') === pick) ? 'inline' : 'none';
+  }
+})();
+</script>"""
+    return ("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
+            "<meta name=\"robots\" content=\"noindex,follow\">"
+            f"<title>{esc(names)}</title>"
+            "<style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:2rem auto;"
+            "padding:0 1rem;color:#1f2328}a{color:#0b6b53}.meta{color:#5f6b64;font-size:.9rem}"
+            ".lb[hidden]{display:none}</style>"
+            "</head><body><main>"
+            f"<p class=\"meta\">{_pick('combo.stub_badge')}</p>"
+            f"<h1>{esc(names)}</h1>"
+            f"<p>{_pick('combo.stub_note')}</p>"
+            f"<ul>{stub_items}</ul>"
+            f"<p><a href=\"../index.html\">{_pick('combo.stub_search')}</a></p>"
+            f"{picker}</main></body></html>")
 
 
 def build_combo_pages(entries, db: sqlite3.Connection) -> int:
@@ -7812,18 +8654,7 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
             names = " + ".join(subs.get(s, (s, s))[1] for s in sids)
             stub_items = "".join(
                 f'<li>{_drug_ref(s, esc(subs.get(s, (s, s))[1]))}</li>' for s in sids)
-            stub = ("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
-                    "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
-                    "<meta name=\"robots\" content=\"noindex,follow\">"
-                    f"<title>{esc(names)}</title>"
-                    "<style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:2rem auto;"
-                    "padding:0 1rem;color:#1f2328}a{color:#0b6b53}.meta{color:#5f6b64;font-size:.9rem}</style>"
-                    "</head><body><main><p class=\"meta\">Combination record · 组合记录</p>"
-                    f"<h1>{esc(names)}</h1>"
-                    "<p>该组合页暂未展开；请从成分页或搜索入口查看。 "
-                    "This combination page is not expanded; use the ingredient pages or search.</p>"
-                    f"<ul>{stub_items}</ul><p><a href=\"../index.html\">Search / 搜索</a></p>"
-                    "</main></body></html>")
+            stub = _combo_stub_html(names, stub_items)
             (OUT / "combo" / slug).write_text(stub, encoding="utf-8")
             NOINDEX_RELS.add(f"combo/{slug}")
             stub_made += 1
@@ -8141,8 +8972,8 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
     - i18n 内联并在 body 末尾立即 apply()，避免 defer 脚本拖 LCP；
       v0.10.1 P2-2：只内联**当前语言**的字典（四语 128.8 KB → 22–42 KB）。
       语言切换走 /es/ /zh/ /zh-hant/ 静态副本的整页导航，首屏只需当前语言；
-      ?lang= 深链或 localStorage 偏好与内联语言不一致时，再加载完整
-      assets/i18n.js 用全字典 apply 一次（不改变切换行为，只是晚一拍）；
+      v0.10.2：?lang= 深链或 localStorage 偏好与内联语言不一致时，只补载那一份
+      assets/i18n.<lang>.js（≈14 KB gz，原先补四语全量 59 KB gz），拉不到再回落全量；
     - app.js / bilingual.js 在 load 后注入，保证搜索可用但不挡首屏。
     """
     css_link = f'<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">'
@@ -8217,6 +9048,7 @@ def build_index_page(entries, stats, coverage) -> None:
     body = f"""<h1 id="h1" data-i18n="home.h1">Find out what a medicine really is</h1>
 <p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work. You always get a candidate set, never a single answer.</p>
 <div class="searchwrap">
+<div class="searchbar">
 <label class="sr-only" for="q" data-i18n="home.ph">Brand name / generic name / nickname / a line from the pack</label>
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac">
 <div id="ac" role="listbox" aria-label="Suggestions"></div>
@@ -8235,6 +9067,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option></select>
+</div>
 </div>
 <div id="identity"></div>
 <div id="out"></div>
@@ -8351,16 +9184,20 @@ def build_about(stats, coverage, source_cover=()) -> None:
                 "about.sources", "about.tw_source", "about.sg_source", "about.hk_source",
                 "about.au_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
-    parts.append('<details class="lic-wrap"><summary>Data sources and licences · 数据来源与许可 · Fuentes y licencias</summary>' + LICENCE_HTML + '</details>')
+    parts.append('<details class="lic-wrap"><summary data-i18n="about.licences_summary">'
+                 'Data sources and licences</summary>' + LICENCE_HTML + '</details>')
     for key in ("about.samename", "about.gaps"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     if GOATCOUNTER_CODE:
         parts.append(f'<div data-i18n-html="about.analytics">{T["about.analytics"]}</div>')
     parts.append(f'<div data-i18n-html="about.stats">{T["about.stats"]}</div>')
-    parts.append('<p class="sub"><a href="datapackage.json">Data package</a> · '
-                 '<a href="dataset.jsonld">Dataset metadata (schema.org)</a> · '
-                 '<a href="checksums.txt">SHA-256 checksums</a> · '
-                 '<a href="docs/data-dictionary.md">Data dictionary</a></p>')
+    parts.append('<p class="sub"><a href="datapackage.json" data-i18n="about.data_package">'
+                 'Data package</a> · '
+                 '<a href="dataset.jsonld" data-i18n="about.dataset_jsonld">'
+                 'Dataset metadata (schema.org)</a> · '
+                 '<a href="checksums.txt" data-i18n="about.checksums">SHA-256 checksums</a> · '
+                 '<a href="docs/data-dictionary.md" data-i18n="about.data_dictionary">'
+                 'Data dictionary</a></p>')
     parts.append('<p class="sub"><a href="coverage.html" data-i18n="nav.coverage">Coverage &amp; freshness</a></p>')
     body = "\n".join(parts)
     # v0.10.0 P1-5：来源表补 thead/tbody（渲染期一次性修正，三语共用）
@@ -8625,10 +9462,19 @@ ATC_I18N = {
                             "index itself is not reproduced). Ingredient/strength facts come from "
                             "the regulator records listed on About."),
         "atc.show_all": "Show all {n} (currently showing {shown})",
-        "atc.salt_label": "Salt form",
-        "atc.status_note": ("Status badges summarise the product records recorded for each "
-                            "ingredient (active / discontinued / withdrawn / unknown); an "
-                            "ingredient can carry more than one status across markets."),
+        "atc.salt_label": "Salt form:",
+        "atc.status_note": ("Status badges summarise the product records held for each "
+                            "ingredient (active / discontinued / withdrawn / unknown), and the "
+                            "market codes after each badge show where that status is recorded. "
+                            "Only some registers publish a status column: CA, ES and MX do; AU "
+                            "and HK have no status column and are recorded as unknown; CN, US, "
+                            "GB, TW and SG records are on the register and marked active."),
+        "atc.markets_hint": ("The market codes after a status are the markets where that status "
+                             "is recorded (same codes as the product tables). An ingredient can "
+                             "be on sale in one market and withdrawn in another; that is a record "
+                             "fact, not a safety judgement."),
+        "atc.ing_more": ("{n} more ingredients — the full list appears when the complete index "
+                         "finishes loading."),
         "atc.names_source_note": ("Class names are editorial translations or come from "
                                   "Wikipedia (CC BY-SA 4.0) / Wikidata (CC0); each ATC page lists "
                                   "the exact source, licence and link for every language. Only "
@@ -8682,10 +9528,19 @@ ATC_I18N = {
                             "WHOCC; no se reproduce el índice). Los datos de principios activos "
                             "proceden de los registros regulatorios listados en Acerca de."),
         "atc.show_all": "Mostrar los {n} (ahora se muestran {shown})",
-        "atc.salt_label": "Sal",
+        "atc.salt_label": "Forma sal:",
         "atc.status_note": ("Las insignias de estado resumen los registros de producto de cada "
                             "principio activo (activo / descatalogado / retirado / desconocido); "
-                            "un mismo principio puede tener más de un estado según el mercado."),
+                            "los códigos de mercado tras cada insignia indican dónde consta ese "
+                            "estado. Solo algunos registros publican columna de estado: CA, ES y "
+                            "MX sí; AU y HK no la tienen y figuran como desconocido; los "
+                            "registros de CN, US, GB, TW y SG figuran como activos."),
+        "atc.markets_hint": ("Los códigos de mercado tras cada estado indican dónde consta ese "
+                             "estado (los mismos códigos que en las tablas de productos). Un "
+                             "mismo principio activo puede estar comercializado en un mercado y "
+                             "retirado en otro; es un hecho registral, no un juicio de seguridad."),
+        "atc.ing_more": ("{n} principios activos más — la lista completa aparece cuando termine "
+                         "de cargar el índice completo."),
         "atc.names_source_note": ("Los nombres de clase son traducciones editoriales o provienen "
                                   "de Wikipedia (CC BY-SA 4.0) / Wikidata (CC0); cada página ATC "
                                   "indica la fuente, la licencia y el enlace exactos de cada "
@@ -8734,9 +9589,15 @@ ATC_I18N = {
                             "Methodology 的 ATC/DDD Index（版权归 WHOCC，本站不转载索引全文）。"
                             "成分/规格事实来自 About 页所列监管记录。"),
         "atc.show_all": "显示全部 {n} 个（当前显示前 {shown} 个）",
-        "atc.salt_label": "盐型",
+        "atc.salt_label": "盐型：",
         "atc.status_note": ("状态角标按每个成分的产品记录汇总（在售 / 已停售 / 已撤市 / 状态未知）；"
-                            "同一成分在不同市场可能同时存在多种状态。"),
+                            "每个角标后面的市场码表示该状态记录在哪些市场。只有部分市场的"
+                            "登记库带状态列：CA、ES、MX 有；AU、HK 没有状态列，记为状态未知；"
+                            "CN、US、GB、TW、SG 的记录按在售登记。"),
+        "atc.markets_hint": ("状态后面的市场码表示该状态记录在哪些市场（与产品表同一套代码）。"
+                             "同一成分可能在一个市场在售、在另一个市场已撤市；这只是登记事实，"
+                             "不是安全性判断。"),
+        "atc.ing_more": "另有 {n} 个成分，完整索引加载完成后显示。",
         "atc.names_source_note": ("类别名称为编辑译名，或来自 Wikipedia（CC BY-SA 4.0）/ "
                                   "Wikidata（CC0）；每个 ATC 页面逐语标注实际来源、许可与链接。"
                                   "只有 ATC 码与 WHO 层级是权威依据。"),
@@ -8776,9 +9637,15 @@ ATC_I18N = {
                             "Methodology 的 ATC/DDD Index（版權歸 WHOCC，本站不轉載索引全文）。"
                             "成分/規格事實來自 About 頁所列監管紀錄。"),
         "atc.show_all": "顯示全部 {n} 個（目前顯示前 {shown} 個）",
-        "atc.salt_label": "鹽型",
-        "atc.status_note": ("狀態角標依每個成分的產品紀錄彙總（在售 / 已停售 / 已撤市 / 狀態未知）；"
-                            "同一成分在不同市場可能同時存在多種狀態。"),
+        "atc.salt_label": "鹽型：",
+        "atc.status_note": ("狀態角標依每個成分的產品紀錄彙總（販售中 / 已停售 / 已下市 / 狀態未知）；"
+                            "每個角標後面的市場碼表示該狀態記錄在哪些市場。只有部分市場的"
+                            "登記庫帶狀態列：CA、ES、MX 有；AU、HK 沒有狀態列，記為狀態未知；"
+                            "CN、US、GB、TW、SG 的紀錄按販售中登記。"),
+        "atc.markets_hint": ("狀態後面的市場碼表示該狀態記錄在哪些市場（與產品表同一套代碼）。"
+                             "同一成分可能在一個市場販售中、在另一個市場已下市；這只是登記事實，"
+                             "不是安全性判斷。"),
+        "atc.ing_more": "另有 {n} 個成分，完整索引載入完成後顯示。",
         "atc.names_source_note": ("類別名稱為編輯譯名，或來自 Wikipedia（CC BY-SA 4.0）/ "
                                   "Wikidata（CC0）；每個 ATC 頁面逐語標註實際來源、授權與連結。"
                                   "只有 ATC 碼與 WHO 層級是權威依據。"),
@@ -9242,19 +10109,23 @@ def _sub_name_spans(en: str, zh: str, sid: str) -> str:
 
 
 def _sub_status_map(db: sqlite3.Connection,
-                    base_of: dict[str, str]) -> dict[str, dict[str, int]]:
-    """base substance_id → {status: 产品数}；状态角标按产品记录聚合。"""
-    out: dict[str, dict[str, int]] = {}
-    for sid, status, n in db.execute(
-            """SELECT v.substance_id, p.status, COUNT(DISTINCT p.product_id)
+                    base_of: dict[str, str]) -> dict[str, dict[str, dict[str, int]]]:
+    """base substance_id → {status: {country: 产品记录数}}。
+
+    v0.10.2：状态角标必须写清是哪些市场——同一个成分可能在一个市场在售、在另一个市场
+    已撤市，一行四色其实是「几本登记簿各说各话」（reports/atc-status-aggregation-20261110.md）。
+    计数只用来判断有无，不进 HTML（同一产品同时挂 base 与盐型时会重复计）。
+    """
+    out: dict[str, dict[str, dict[str, int]]] = {}
+    for sid, status, country, n in db.execute(
+            """SELECT v.substance_id, p.status, p.country, COUNT(DISTINCT p.product_id)
                FROM product p
                JOIN product_component pc ON pc.product_id = p.product_id
                JOIN variant v ON v.variant_id = pc.variant_id
-               WHERE p.status IS NOT NULL AND p.status <> ''
-               GROUP BY v.substance_id, p.status"""):
-        base = base_of.get(sid, sid)
-        counts = out.setdefault(base, {})
-        counts[status] = counts.get(status, 0) + int(n)
+               WHERE p.status IS NOT NULL AND p.status <> '' AND p.country IS NOT NULL
+               GROUP BY v.substance_id, p.status, p.country"""):
+        per = out.setdefault(base_of.get(sid, sid), {}).setdefault(status, {})
+        per[country] = per.get(country, 0) + int(n)
     return out
 
 
@@ -9266,7 +10137,7 @@ def _member_context(db: sqlite3.Connection):
 
 def _collapse_members(subs: list[dict], base_of: dict[str, str],
                       sub_names: dict[str, tuple[str, str]],
-                      status_by_base: dict[str, dict[str, int]],
+                      status_by_base: dict[str, dict[str, dict[str, int]]],
                       drug_sids: set[str]) -> list[dict]:
     """同一 ATC 码/大类下，按 base 成分归并盐型与同名重复，一个 base 一行。"""
     grouped: dict[str, list[dict]] = {}
@@ -9292,6 +10163,33 @@ def _collapse_members(subs: list[dict], base_of: dict[str, str],
     return items
 
 
+def _status_badges_html(statuses: dict[str, dict[str, int]]) -> str:
+    """状态角标 + 该状态记录在哪些市场（固定序，不截断、不写 title）。
+
+    - **不折 `+N`**：实测不截断时 390 px 下最长一行也只占 2 行；折叠后的完整清单只能塞进
+      `title`，触屏用户拿不到 = 真丢信息（reports/atc-status-aggregation-20261110.md §2.5）。
+    - **同一国家可以出现在多枚徽章里**：现库有 3,599 个「成分×市场」格子本来就同时有
+      >1 种状态，按国家去重会伪造出一个不存在的「唯一状态」。
+    - **不写 title 条数**（触屏拿不到；条数在成分页已有）。
+    - 排序用现成的 COUNTRY_PRIORITY：市场码不是词，服务端固定序保证构建确定性；
+      不用客户端 MORDER（那是按界面语言重排的）。
+    """
+    out: list[str] = []
+    for st in ("withdrawn", "discontinued", "active", "unknown"):
+        per = statuses.get(st) or {}
+        if not per:
+            continue
+        markets = "·".join(sorted(
+            per, key=lambda c: (COUNTRY_PRIORITY.index(c) if c in COUNTRY_PRIORITY
+                                else len(COUNTRY_PRIORITY), c)))
+        out.append(
+            f'<span class="st-badge st-{st}">'
+            f'<span data-i18n="drug.status.{st}">'
+            f'{esc(I18N["en"].get("drug.status." + st, st))}</span>'
+            f'<span class="mk">{esc(markets)}</span></span>')
+    return "".join(out)
+
+
 def _atc_members_html(items: list[dict], cap: int = ATC_MEMBER_CAP,
                       drug_sids: set[str] | None = None) -> str:
     """成员列表：base 名 + 盐型附注 + 状态角标；超过 cap 用 <details> 展开（无 JS 也能点开）。"""
@@ -9310,18 +10208,17 @@ def _atc_members_html(items: list[dict], cap: int = ATC_MEMBER_CAP,
         codes = " ".join(f'<code>{esc(c)}</code>' for c in it["codes"])
         salt = ""
         if it["salts"]:
+            # v0.10.2 task-3：盐型改成块级子行（左缩进对齐），文案「盐型：Name」；
+            # 原来是内联 `盐型 a · b`，390 px 下会跟主名、状态角标抢同一行并断裂。
             salt_names = " · ".join(
                 _sub_name_spans(r.get("inn_en") or "", r.get("inn_zh") or "",
                                 r["substance_id"]) for r in it["salts"])
-            salt = (f'<span class="salt"><span data-i18n="atc.salt_label">'
-                    f'{esc(I18N["en"].get("atc.salt_label", "Salt form"))}</span> '
+            salt = (f'<span class="salt-row"><span class="salt-k" '
+                    f'data-i18n="atc.salt_label">'
+                    f'{esc(I18N["en"].get("atc.salt_label", "Salt form:"))}</span> '
                     f'{salt_names}</span>')
-        badges = ""
-        for st in ("withdrawn", "discontinued", "active", "unknown"):
-            n = it["statuses"].get(st, 0)
-            if n:
-                badges += (f'<span class="st-badge st-{st}" data-i18n="drug.status.{st}" '
-                           f'title="{n}">{esc(I18N["en"].get("drug.status." + st, st))}</span>')
+        # v0.10.2：状态角标按「状态 + 市场」聚合；不再重复标记（同一状态只一枚）
+        badges = _status_badges_html(it["statuses"])
         lis.append(f'<li>{label} {codes}{salt}{badges}</li>')
     head = "".join(lis[:cap])
     rest = "".join(lis[cap:])
@@ -9517,6 +10414,7 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
 {children}
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
 <p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
+<p class="sub atc-mk-hint" data-i18n="atc.markets_hint">{esc(T["atc.markets_hint"])}</p>
 {_atc_members_html(members, drug_sids=drug_sids)}
 {atc4_html}
 {_atc_notes_html(T)}"""
@@ -9613,6 +10511,7 @@ def build_category_pages(db: sqlite3.Connection) -> int:
 {related}
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
 <p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
+<p class="sub atc-mk-hint" data-i18n="atc.markets_hint">{esc(T["atc.markets_hint"])}</p>
 {_atc_members_html(members, cap=80, drug_sids=drug_sids)}
 {_atc_notes_html(T)}"""
         (OUT / "cat" / f'{cat["id"]}.html').write_text(
@@ -9684,11 +10583,17 @@ def build_atc_index() -> None:
 
 
 def build_categories_json(db: sqlite3.Connection) -> None:
-    """客户端搜索用：大类/ATC 类别名 + 前缀 + 页面 URL + 已生成的 ATC 码集合。"""
+    """客户端搜索用：大类/ATC 类别名 + 前缀 + 页面 URL + 已生成的 ATC 码集合。
+
+    v0.10.2：16 个大类的 `aliases` 里并入 `lib/categories.py` 的口语词（`退烧药` / `painkiller`
+    等 66 条里除遮蔽白名单外的口语词），客户端 `catHit()` 本来就遍历 aliases，所以老缓存页面
+    也会立刻认识这些词，不必等新 JS。
+    """
+    colloquial = colloquial_aliases_by_category()
     items = []
     for cat in CONSUMER_CATEGORIES:
         labels = dict(cat["labels"])
-        aliases = [labels.get("en", ""), cat["id"]]
+        aliases = [labels.get("en", ""), cat["id"], *colloquial.get(cat["id"], [])]
         items.append({"kind": "cat", "id": cat["id"], "url": f'cat/{cat["id"]}.html',
                       "prefixes": list(cat["prefixes"]), "labels": labels,
                       "aliases": [a for a in aliases if a]})
@@ -9706,6 +10611,160 @@ def build_categories_json(db: sqlite3.Connection) -> None:
     (OUT / "data" / "categories.json").write_text(
         json.dumps({"categories": items, "atc_codes": sorted(all_codes)},
                    ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"  categories : {len(items):,} items (colloquial aliases: "
+          f"{sum(len(v) for v in colloquial.values())})", flush=True)
+
+
+# ── v0.10.2：类别发现快车道（构建期预生成的紧凑索引） ────────────────────────
+# 现状（v0.10.1）：客户端要认出一个大类词（`退烧药`）必须先 loadIndex() 拉完整个
+# core.json（41.5 MB raw / 9.9 MB gz），8 Mbps 下首查 12.6 s。审计见
+# reports/search-discovery-audit-20261110.md §2。这里把「类别词 → 大类/ATC」的判定
+# 与 16 个大类的 top200 结果切片预先算好，客户端首查只拉 cats.json（≈23 KB raw）
+# + 一份切片（30–57 KB raw）：8 Mbps 下 34 ms 出结果，core 在后台补全。
+CAT_IDX_REL = "data/idx/cats.json"
+CAT_ATC_ING_REL = "data/idx/atc-ing.json"
+CAT_SLICE_TOP = 200          # 与客户端 hits.slice(0, 200) 同口径
+CAT_ING_PREVIEW = 16         # cats.json 里每类带的成分预览条数
+ATC_ING_TOP = 15             # atc-ing.json 每个码带的成分条数（首屏摘要，core 到位后补全）
+
+
+def _cat_ing_totals(db: sqlite3.Connection, prefixes: list[str]) -> list[tuple[str, int]]:
+    """成分在该大类里的 active 产品数（降序）；类别切片的排序键。"""
+    prefixes = [p for p in prefixes if p]
+    if not prefixes:
+        return []
+    cond = " OR ".join("s.atc LIKE ?" for _ in prefixes)
+    rows = db.execute(
+        f"""SELECT s.inn_en AS inn, COUNT(DISTINCT p.product_id) AS n
+            FROM substance s JOIN variant v ON v.substance_id = s.substance_id
+            JOIN product_component pc ON pc.variant_id = v.variant_id
+            JOIN product p ON p.product_id = pc.product_id AND p.status = 'active'
+            WHERE s.atc IS NOT NULL AND ({cond})
+            GROUP BY s.substance_id ORDER BY n DESC""",
+        tuple(p + "%" for p in prefixes)).fetchall()
+    rows = sorted(((r[0], int(r[1])) for r in rows if r[0]),
+                  key=lambda r: (-r[1], r[0].lower()))   # 同数按名字，保证构建确定性
+    return rows
+
+
+def _cat_atc4(db: sqlite3.Connection, prefixes: list[str]) -> list[str]:
+    """该大类实际覆盖到的 ATC 4 位码（现查，不用手工表）。"""
+    prefixes = [p for p in prefixes if p]
+    if not prefixes:
+        return []
+    cond = " OR ".join("s.atc LIKE ?" for _ in prefixes)
+    return sorted({(r[0] or "")[:4] for r in db.execute(
+        f"SELECT DISTINCT s.atc FROM substance s WHERE s.atc IS NOT NULL AND ({cond})",
+        tuple(p + "%" for p in prefixes)) if r[0] and len(r[0]) >= 4})
+
+
+def _slice_entry(e: dict) -> dict:
+    """切片里只留客户端渲染结果行需要的字段（体积优先，丢弃厂家/明细桶等）。
+
+    `l` = collision 级别：快车道首屏也必须有「同名并列 / 不可互换」的碰撞警示——
+    否则用户要等 core 到位（最长 9 s）才看到警示，等于把底线二藏起来 9 秒。
+    """
+    out = {k: e[k] for k in ("k", "d", "c", "x", "s", "f", "l", "n", "v") if e.get(k) is not None}
+    if e.get("atc"):
+        out["atc"] = e["atc"]
+    if e.get("vs"):
+        out["vs"] = e["vs"]
+    if e.get("u"):
+        out["u"] = e["u"]
+    return out
+
+
+def build_cat_word_index(db: sqlite3.Connection, entries: list[dict]) -> dict[str, int]:
+    """生成「类别词 → 大类/ATC」索引 + 16 个大类 top200 切片（v0.10.2）。
+
+    派生自 `CONSUMER_CATEGORIES` + `COLLOQUIAL_ALIASES` + 本次构建的检索条目，
+    不引入任何人工标注；切片里同样只是候选条目，页面文案与「不可互换」警示不变。
+    产物：`data/idx/cats.json` + `data/idx/cat-<id>.json` × 16。
+    """
+    idx_dir = OUT / "data" / "idx"
+    idx_dir.mkdir(parents=True, exist_ok=True)
+    words: dict[str, str] = {}
+    cats: list[dict] = []
+    for cat in CONSUMER_CATEGORIES:
+        for label in cat["labels"].values():
+            if label:
+                words[cat_norm(label)] = "cat:" + cat["id"]
+        words[cat_norm(cat["id"])] = "cat:" + cat["id"]
+        totals = dict(_cat_ing_totals(db, cat["prefixes"]))
+        prefixes = list(cat["prefixes"])
+        hit = [e for e in entries
+               if e.get("atc") and any(str(c).startswith(p) for c in e["atc"] for p in prefixes)]
+        # 排序口径与 lib/search.py 的大类排序（方案 H）一致：成分在该类别的产品数，
+        # 再按条目产品数 —— 否则复方/命名碎片化会系统性占优（审计报告 §4）。
+        hit.sort(key=lambda e: (-max((totals.get(s, 0) for s in (e.get("x") or "").split(" + ")),
+                                     default=0), -(e.get("n") or 0)))
+        top = hit[:CAT_SLICE_TOP]
+        name = f"cat-{cat['id']}.json"
+        (idx_dir / name).write_bytes(json.dumps(
+            [_slice_entry(e) for e in top], ensure_ascii=False,
+            separators=(",", ":")).encode("utf-8"))
+        cats.append({"id": cat["id"], "url": f'cat/{cat["id"]}.html',
+                     "prefixes": prefixes, "labels": dict(cat["labels"]),
+                     "atc4": _cat_atc4(db, prefixes),
+                     "ing": [[inn, n] for inn, n in _cat_ing_totals(db, prefixes)[:CAT_ING_PREVIEW]],
+                     "slice": {"f": "data/idx/" + name, "n": len(top)}})
+    # 口语词：同一份词表 → 两处产物。已剔除 lib 的「全等撞真实商品名」白名单
+    # （如 antibiotic），它们必须留给药名检索（AGENTS §1 先定位名字）。
+    for cat_id, ws in colloquial_aliases_by_category().items():
+        for word in ws:
+            words.setdefault(cat_norm(word), "cat:" + cat_id)
+    all_codes: set[str] = set()
+    groups = _atc_groups(db)
+    for ln in (1, 3, 4, 5):
+        all_codes.update(groups[ln].keys())
+    payload = {"v": BUILD_V, "words": words, "cats": cats, "atc_codes": sorted(all_codes)}
+    (idx_dir / "cats.json").write_bytes(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    return {"words": len(words), "cats": len(cats),
+            "bytes": (idx_dir / "cats.json").stat().st_size}
+
+
+def build_atc_ing_json(db: sqlite3.Connection) -> dict[str, int]:
+    """ATC L1/L3/L4 码 → 成分（产品数降序，最多 ATC_ING_TOP 个；成分名单独一张表）。
+
+    一次查询算完，不按码逐条查库；只给客户端「先出成分摘要、core 后台补商品名行」用，
+    不做替代判断、不合并成分。名字按 substance 存一份（同一成分出现在多个码下不重复）。
+    """
+    idx_dir = OUT / "data" / "idx"
+    idx_dir.mkdir(parents=True, exist_ok=True)
+    by_code: dict[str, list[list]] = {}
+    names: dict[str, list[str]] = {}
+    for sid, inn, zh, atc, n in db.execute(
+            """SELECT s.substance_id, s.inn_en, s.inn_zh, s.atc,
+                      COUNT(DISTINCT p.product_id)
+               FROM substance s
+               JOIN variant v ON v.substance_id = s.substance_id
+               JOIN product_component pc ON pc.variant_id = v.variant_id
+               JOIN product p ON p.product_id = pc.product_id AND p.status = 'active'
+               WHERE s.atc IS NOT NULL AND s.atc <> '' AND s.inn_en IS NOT NULL
+               GROUP BY s.substance_id"""):
+        names[sid] = [inn, zh or ""]
+        for ln in (1, 3, 4):
+            if len(atc or "") >= ln:
+                by_code.setdefault(atc[:ln], []).append([sid, int(n)])
+    out: dict[str, list[list]] = {}
+    totals: dict[str, int] = {}
+    used: set[str] = set()
+    for code, rows in by_code.items():
+        rows.sort(key=lambda r: (-r[1], names.get(r[0], [""])[0].lower()))
+        top = rows[:ATC_ING_TOP]
+        out[code] = top
+        totals[code] = len(rows)          # 客户端要能说「还有 N 个成分」，不许静默截断
+        for sid, _n in top:
+            used.add(sid)
+    payload = {"v": BUILD_V, "n": {sid: names[sid] for sid in sorted(used)},
+               "codes": out, "t": totals}
+    (idx_dir / "atc-ing.json").write_bytes(
+        json.dumps(payload, ensure_ascii=False,
+                   separators=(",", ":")).encode("utf-8"))
+    return {"codes": len(out), "names": len(used),
+            "bytes": (idx_dir / "atc-ing.json").stat().st_size}
+
 
 
 def _home_cat_chips(lang: str, prefix: str, limit: int = 8) -> str:
@@ -9742,7 +10801,7 @@ def build_404() -> None:
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Page not found · Medicine Brand Cross-Reference</title>
+<title>{esc(t["notfound.title"])} · {esc(t["site.name"])}</title>
 <link rel="stylesheet" href="{SITE_URL}assets/style.css?v={BUILD_V}">
 </head><body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -10223,8 +11282,13 @@ def main() -> None:
                                    for code, label, _ in LANGS)))
     shell_tab_js = json.dumps(_shell_tabbar("__R__"))
     (OUT / "assets" / "boot.js").write_text(
+        # v0.10.2：长尾页只拉当前语言的字典包。语言判定必须在插入 <script> 之前完成，
+        # 所以 boot.js 里带一份 LANG_META_JS + LANG_PICK_JS（与 assets/i18n.js 同一段源码）。
+        LANG_META_JS + LANG_PICK_JS +
         "var s=document.currentScript;"
         "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
+        "var _rp='/';try{_rp=new URL(r).pathname||'/';}catch(e){}"
+        "var LK=__dshPickLang(_rp);"
         "var SN=" + shell_nav_js + ",TB=" + shell_tab_js + ";"
         ";(function(){var h=document.querySelector('header');"
         "if(!h||h.querySelector('[data-shell]'))return;"
@@ -10245,73 +11309,87 @@ def main() -> None:
         "if(k===key){as[i].className='on';as[i].setAttribute('aria-current','page');}}"
         "})();"
         + _coverage_entry_js("r")
+        # v0.10.2：单语包缺失（老构建 / 网络抖动 / 语言码异常）时回落到四语全量 i18n.js，
+        # 与 v0.10.1 的行为一致，不会出现「页面整片英文、语言链接失效」。
         + "window.addEventListener('load',function(){"
-        "var a=document.createElement('script');a.src=r+'assets/i18n.js';"
+        "var a=document.createElement('script');"
+        "a.src=r+'assets/i18n.'+LK+'.js?v=__BUILD_V__';"
+        "a.onerror=function(){var f=document.createElement('script');"
+        "f.src=r+'assets/i18n.js?v=__BUILD_V__';document.body.appendChild(f);};"
         "a.onload=function(){var b=document.createElement('script');"
         "b.src=r+'assets/bilingual.js';document.body.appendChild(b);};"
-        "document.body.appendChild(a);});\n", encoding="utf-8")
+        "document.body.appendChild(a);});\n".replace("__BUILD_V__", BUILD_V), encoding="utf-8")
     # task-145b：ATC4 页折叠区的懒加载脚本（只被 atc/<CODE>.html 引用，版本参数同 BUILD_V）。
     (OUT / "assets" / "atc4.js").write_text(
         ATC4_JS.replace("__BUILD_V__", BUILD_V), encoding="utf-8")
-    def _render_i18n_js() -> str:
-        # v0.10.1：紧凑分隔符（非首页的每页都会加载这份外部 i18n.js，省 ~4 KB）
-        return ("window.I18N=" + json.dumps(I18N, ensure_ascii=False,
-                                            separators=(",", ":")) + ";\n"
-                + LANG_META_JS + "\n" + r"""
+    def _render_i18n_js(langs: list[str] | None = None) -> str:
+        """渲染 i18n 脚本（v0.10.2：按语言拆包）。
+
+        langs=None  → `assets/i18n.js`：四语全量字典 + 逻辑（404 页、老缓存页、单语包回落用）。
+        langs=['zh'] → `assets/i18n.<lang>.js`：只含该语言字典的独立包，长尾页只拉这一份
+                       （四语全量 165,747 B raw / 59,129 B gz → 单语 ≈50 KB raw / ≈14 KB gz）。
+
+        单语包里把「该语言缺的键」预先算成 `window.I18N_FALLBACK`（zh-Hant 先回退简体，再回退
+        英文），所以 T() 的回落顺序与四语全量文件一致，不需要为了缺键再下整包。
+        """
+        if langs:
+            keep = {c: I18N[c] for c in langs if c in I18N} or {"en": I18N["en"]}
+            fallback: dict[str, str] = {}
+            for code, table in keep.items():
+                for src in (("zh", "en") if code == "zh-Hant" else ("en",)):
+                    if src == code or src not in I18N:
+                        continue
+                    for k, v in I18N[src].items():
+                        if k not in table and k not in fallback:
+                            fallback[k] = v
+            head = ("window.I18N=" + json.dumps(keep, ensure_ascii=False,
+                                                separators=(",", ":")) + ";\n")
+            if fallback:
+                head += ("window.I18N_FALLBACK=" + json.dumps(fallback, ensure_ascii=False,
+                                                              separators=(",", ":")) + ";\n")
+        else:
+            # v0.10.1：紧凑分隔符（非首页的每页都会加载这份外部 i18n.js，省 ~4 KB）
+            head = ("window.I18N=" + json.dumps(I18N, ensure_ascii=False,
+                                                separators=(",", ":")) + ";\n")
+        return (head + LANG_META_JS + "\n" + LANG_PICK_JS + "\n" + r"""
 (function(){
   var D = window.I18N;
   // 站点根路径：i18n.js 在 <head> 同步执行，currentScript 可用。
   // GitHub Pages 是项目子路径（/drug-brand-crossref/），不能假设语言目录在域名根。
   var scriptEl = document.currentScript;
-  var ROOT = window.__DSH_I18N_ROOT || ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n\.js.*$/, '');
+  // v0.10.2：两种文件名都要能剥出站点根——四语全量 assets/i18n.js 与单语 assets/i18n.<lang>.js，
+  // 否则 ROOT 会带上文件名，langTarget() 拼出来的语言链接就 404（v0.9.7 task-10 的同类坑）。
+  var ROOT = window.__DSH_I18N_ROOT || ((scriptEl && scriptEl.src) || location.href).replace(/assets\/i18n(?:\.[A-Za-z-]+)?\.js.*$/, '');
   var rootPath = '/';
   try{ rootPath = new URL(ROOT).pathname || '/'; }catch(e){}
-  function relPath(){
-    // 相对站点根的路径，例如 /drug-brand-crossref/es/ → "es/"，子页 → "drug/x.html"。
-    var p = location.pathname;
-    return p.indexOf(rootPath) === 0 ? p.slice(rootPath.length) : p.replace(/^\//, '');
-  }
-  function canon(x){
-    if(!x) return '';
-    var c = String(x).trim();
-    // v0.10.1：首页可能只内联当前语言字典，语言是否受支持以 I18N_LANGS 为准，
-    // 不能只看 D 里有没有这门语言的字符串。
-    function has(y){ return (window.I18N_LANGS || []).indexOf(y) >= 0 || !!D[y]; }
-    if(has(c)) return c;
-    var l = c.toLowerCase();
-    if(LANG_ALIAS[l] && has(LANG_ALIAS[l])) return LANG_ALIAS[l];
-    var base = l.split('-')[0];
-    if(base && has(base)) return base;
-    return '';
-  }
-  function pick(){
-    var q = canon(new URLSearchParams(location.search).get('lang'));
-    if(q){ try{localStorage.setItem('lang',q);}catch(e){} return q; }
-    var first = relPath().split('/').filter(Boolean)[0] || '';
-    // 直接进 /es/、/zh/、/zh-hant/（hreflang 主入口）时把语言写进 localStorage，
-    // 这样点导航去 /about.html 等根路径页面不会掉回 en。
-    var seg = canon(first);
-    if(seg){ try{localStorage.setItem('lang',seg);}catch(e){} return seg; }
-    try{ var s = canon(localStorage.getItem('lang')); if(s) return s; }catch(e){}
-    var n = canon(navigator.language);
-    return n || DEFAULT_LANG;
-  }
+  // v0.10.2：语言判定（canon/pick/relPath）统一由 LANG_PICK_JS 提供，与 boot.js 里插入
+  // 字典包之前用的是同一段源码，避免「boot 挑 zh、i18n 算 en」这种两处分叉。
+  function relPath(){ return __dshRelPath(rootPath); }
+  function canon(x){ return __dshCanonLang(x); }
+  function pick(){ return __dshPickLang(rootPath); }
   window.LANG = pick();
-  // v0.10.1：首页为压首屏体积只内联了当前语言字典（window.__I18N_PARTIAL）。
-  // 若 ?lang= / localStorage / 路径指定的语言不在内联字典里，补载完整 assets/i18n.js：
-  // 它会把 window.I18N 换成四语字典并重新 apply，页面文本随语言切换。
-  // 其它页面加载的就是完整 i18n.js，没有这个标记，不会重复请求。
+  // v0.10.1/v0.10.2：首页为压首屏体积只内联了本页语言字典（window.__I18N_PARTIAL）。
+  // 若 ?lang= / localStorage / 路径指定的语言不在内联字典里，只补载那一份
+  // assets/i18n.<lang>.js（≈14 KB gz；v0.10.1 是补四语全量 59 KB gz）；
+  // 单语包拉不到（老缓存 / 离线）再回落到四语全量 assets/i18n.js。
   if(window.__I18N_PARTIAL && !D[window.LANG]){
-    var partialI18n = document.createElement('script');
-    partialI18n.src = ROOT + 'assets/i18n.js?v=__BUILD_V__';
-    document.head.appendChild(partialI18n);
+    var oneI18n = document.createElement('script');
+    oneI18n.src = ROOT + 'assets/i18n.' + encodeURIComponent(window.LANG) + '.js?v=__BUILD_V__';
+    oneI18n.onerror = function(){
+      var fullI18n = document.createElement('script');
+      fullI18n.src = ROOT + 'assets/i18n.js?v=__BUILD_V__';
+      document.head.appendChild(fullI18n);
+    };
+    document.head.appendChild(oneI18n);
   }
   window.T = function(k){
     var L = D[window.LANG];
     var v = L ? L[k] : undefined;
     // v0.6.2：繁体字典缺键时回退简体（再回退英文），避免出现空文本
     if(v === undefined && window.LANG === 'zh-Hant' && D.zh) v = D.zh[k];
-    if(v === undefined) v = D.en[k];
+    // v0.10.2：单语包把缺键的 en/zh 值预置在 I18N_FALLBACK；D.en 在单语包里不存在，要判空
+    if(v === undefined && window.I18N_FALLBACK) v = window.I18N_FALLBACK[k];
+    if(v === undefined && D.en) v = D.en[k];
     return v === undefined ? k : v;
   };
   function nameLangBadge(nl, hasZh){
@@ -10355,6 +11433,25 @@ def main() -> None:
       s.className = 'st-badge st-unknown nolang-badge';
       s.textContent = text;
       host.appendChild(s);
+    });
+  }
+  // v0.10.2 task-3：ATC/大类页「缺当前语言名」每行只标一次，且标在链接之外
+  //（盐型在 .salt-row 里，不再逐个标）。必须晚于 applyNameLangBadges()（先铺非 ATC 场景）。
+  function markAtcRowGaps(){
+    document.querySelectorAll('.atcmembers li').forEach(function(li){
+      li.querySelectorAll('.nolang-badge').forEach(function(n){ n.remove(); });
+      var nm = li.querySelector('.nm');          // 只取主名；盐型不再单独标
+      if(!nm) return;
+      var cjk = /[\u3400-\u9fff]/.test(nm.textContent || '');
+      var L = window.LANG, key = '';
+      if(cjk && (L === 'en' || L === 'es')) key = (L === 'en' ? 'name.no_en' : 'name.no_es');
+      else if(!cjk && (L === 'zh' || L === 'zh-Hant')) key = (L === 'zh' ? 'name.no_zh' : 'name.no_zh_hant');
+      if(!key) return;
+      var s = document.createElement('span');
+      s.className = 'st-badge st-unknown nolang-badge';
+      s.textContent = window.T(key);
+      var host = (nm.closest && nm.closest('a')) || nm;   // 徽章放链接之后，不污染链接文本
+      host.parentNode.insertBefore(s, host.nextSibling);
     });
   }
   function apply(){
@@ -10437,6 +11534,8 @@ def main() -> None:
     if(window.renderBilingualNames) window.renderBilingualNames();
     // v0.9.4：name_lang 无译名角标（不翻译；H1 角标放来源行）
     applyNameLangBadges();
+    // v0.10.2：ATC/大类页收口——每行最多一枚标签，且不进链接文本
+    markAtcRowGaps();
   }
   function langTarget(code){
     // v0.5.5/v0.6.2：有 /es/、/zh/、/zh-hant/ 静态副本的页面（首页/about/confused/
@@ -10475,7 +11574,27 @@ def main() -> None:
   window.addEventListener('load', apply);
 })();
 """).replace("__BUILD_V__", BUILD_V)
-    (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
+    def _write_i18n_assets(announce: bool = False) -> None:
+        """写 i18n 资产：四语全量 `assets/i18n.js` + 每语言一份 `assets/i18n.<lang>.js`。
+
+        v0.10.2：12 万长尾页原来每次都拉四语全量（165,747 B raw / 59,129 B gz，占该页首屏
+        gz 的 57%），现在 boot.js 先判语言、只拉那一份（≈50 KB raw / ≈14 KB gz）。
+        全量文件保留：404 页（路径未知，要按运行时语言挑）、发布前老缓存页面、
+        单语包拉不到时的回落都用它。
+        """
+        (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
+        for code, _label, _path in LANGS:
+            (OUT / "assets" / f"i18n.{code}.js").write_text(
+                _render_i18n_js([code]), encoding="utf-8")
+        if announce:
+            sizes = []
+            for code, _label, _path in LANGS:
+                p = OUT / "assets" / f"i18n.{code}.js"
+                sizes.append(f"{code} {p.stat().st_size:,}")
+            print(f"  i18n split : assets/i18n.js {(OUT / 'assets' / 'i18n.js').stat().st_size:,} B"
+                  f" (+per-lang {' / '.join(sizes)})", flush=True)
+
+    _write_i18n_assets()
     (OUT / "assets" / "bilingual.js").write_text(BILINGUAL_JS, encoding="utf-8")
     t2s = _load_zh_hant_t2s()
     print(f"i18n t2s    : {len(t2s):,} chars (zh-Hant input normalization)", flush=True)
@@ -10532,7 +11651,11 @@ def main() -> None:
     _values = _i18n_placeholders(stats, atc_cov, coverage, source_cover)
     _merge_static_i18n(_values)
     _install_zh_hant(_values)
-    (OUT / "assets" / "i18n.js").write_text(_render_i18n_js(), encoding="utf-8")
+    # 四语不一致就别建站了：任何缺译都会在 i18n.js 里静默回落英文/简体
+    _assert_i18n_complete()
+    # 同一套规则的第二层：最新版 release notes 四语齐全 + LABEL_I18N 与术语表一致
+    _assert_i18n_rules()
+    _write_i18n_assets(announce=True)
 
     # v0.5.4：厂家页清单（必须在 load_index 之前载入，索引要用 mu/ml 字段）
     global MAKERS
@@ -10659,6 +11782,15 @@ def main() -> None:
     n_cat = build_category_pages(db)
     build_atc_index()
     build_categories_json(db)
+    # v0.10.2：类别发现快车道（cats.json + 16 类 top200 切片 + ATC 成分表）。
+    # 防遮蔽：口语词若与真实商品名全等，必须已在 lib 的白名单里登记，否则构建中止
+    # （AGENTS §1：先定位名字，不能把商品名结果整片换成大类候选集）。
+    assert_no_unlisted_shadow(db)
+    catx = build_cat_word_index(db, entries)
+    atc_ing = build_atc_ing_json(db)
+    print(f"  cats.json  : {catx['bytes']:,} B · {catx['words']:,} words · "
+          f"{catx['cats']} slices", flush=True)
+    print(f"  atc-ing    : {atc_ing['bytes']:,} B · {atc_ing['codes']:,} codes", flush=True)
     build_export_only_json(db)
     build_data_package(db, stats, coverage, source_cover)
     print("building 404 ...", flush=True)

@@ -22,7 +22,8 @@
   ```
 
 - Git 在本机不在 PATH，用仓库自带的便携版：`& .\tools\git\cmd\git.exe status`（`tools/` 被 gitignore，换机器要自备 git）。
-- **没有 CI**：本地跑测试就是唯一门槛。仓库在 `main`，远端 `origin` = `github.com/fuarnos/drug-brand-crossref`。
+- **CI**：GitHub Actions 跑 `deploy/ci_checks.py`（`.github/workflows/ci.yml`；无 `data/drugs.db` 时库相关检查 SKIP），
+  本地发布前仍必须跑全套（`ci_checks.py` 全量 + trilingual）。仓库在 `main`，远端 `origin` = `github.com/fuarnos/drug-brand-crossref`。
 
 ## 3. 常用命令
 
@@ -40,6 +41,8 @@
 | 手机看板（进度 + 指令队列） | `& $py mobile/server.py`（或双击 `手机看板.cmd`）→ http://127.0.0.1:8787/ |
 | 手机看板 · 外网 / 4G | `& $py mobile/server.py --tunnel`（cloudflared 快速隧道，见 `docs/手机通道.md`） |
 | 手机指令：看有没有待办 | `& $py mobile/inbox.py pending` |
+| 快速全局检查（约 18 秒） | `& $py deploy/ci_checks.py --fast` |
+| 发布前全量检查（约 10 分钟） | `& $py deploy/ci_checks.py` |
 
 测试四套，改到哪层跑哪套，发布前全跑：
 
@@ -65,11 +68,12 @@
 |---|---|
 | `etl/**` | 重跑对应 ingest → `db/check_data.py` → 条数变化写进 CHANGELOG / README |
 | `lib/search.py`、归一化 | 对应 unittest + `tests/trilingual/run_tests.py` |
-| `site/build.py`、页面 / 前端 | 全量建站到 `== done ==`；三语各抽 3 条检索；页数 / 索引大小 / 首屏体积回归；链接、404、sitemap 抽检 |
+| `site/build.py`、页面 / 前端 | 全量建站到 `== done ==`；**首屏守卫**（`deploy/first_screen_check.py`，改前 / 改后各跑一次并写前后数字，结论不进就不算验完）；三语各抽 3 条检索；页数 / 索引大小 / 首屏体积回归；链接、404、sitemap 抽检 |
 | 页面文案 | zh / en / es 三语同步，别只改一种 |
 | `db/schema.sql`、`db/init_db.py` | 老库能直接升级（幂等）；重跑 init_db 验证 |
 
-> 站点 / 前端 / 文案改动的**完整优化流程与发布前 12 项 / 发布后 6 项清单**见 [docs/网站优化流程.md](docs/网站优化流程.md)（外部标准映射 + 命令 / 判定值）。
+> 站点 / 前端 / 文案改动的**完整优化流程与发布前 13 项 / 发布后 6 项清单**见 [docs/网站优化流程.md](docs/网站优化流程.md)（外部标准映射 + 命令 / 判定值）。
+> 「一屏里人能看到什么」的 7 个指标（AFCR / 主操作 / 条目数 / chrome / 悬浮 / 字号 / 横向溢出）、阈值与基线见 [docs/设计原则-按人能看到的来.md](docs/设计原则-按人能看到的来.md)：**v0.10.2 为报告模式（出数字、不阻塞发布），v0.10.3 起对「内容页 AFCR / 首屏条目 / chrome 占比 / 字号」四项阻塞；新增页面与组件从 v0.10.3 起默认按新阈值设计，不等「以后统一改」。**
 
 ## 6. 发布纪律
 
@@ -142,8 +146,9 @@
 
 ## 附：项目技能
 
-`.dsh/skills/` 下有四个项目技能，命中场景时用 `skill` 工具加载：
+`.dsh/skills/` 下有五个项目技能，命中场景时用 `skill` 工具加载：
 
+- `daily-open` —— 每天「开工」：手机指令 → 18 秒 CI 基线 → 现查状态 → 读开工卡/队列/提醒
 - `market-ingest` —— 接入新市场 / 重跑某国入库 / 数据源更新
 - `site-build` —— 建站与验收（含三语抽查、性能回归、本地预览）
 - `data-audit` —— 数据体检、覆盖率统计、写报告
