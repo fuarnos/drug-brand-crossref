@@ -17,8 +17,8 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b6b53'/%3E%3Cpath d='M8 3v10M3 8h10' stroke='white' stroke-width='2'/%3E%3C/svg%3E"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Medicine Brand Cross-Reference","alternateName":"药品商品名跨国定位","url":"https://fuarnos.github.io/drug-brand-crossref/"}</script>
-<link rel="stylesheet" href="assets/style.css?v=3161699148">
-<script defer src="assets/boot.js?v=3161699148"></script>
+<link rel="stylesheet" href="assets/style.css?v=3973462234">
+<script defer src="assets/boot.js?v=3973462234"></script>
 <script>window.DSH_PREFIX='';</script>
 <script data-goatcounter="https://drug-brand-crossref.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></head>
 <body>
@@ -58,6 +58,7 @@
 <main id="main"><div class="wrap"><h1 data-i18n="whatsnew.title">What&#x27;s new</h1>
 <div data-i18n-html="whatsnew.intro">Every release ships with a short summary. Old versions are backfilled from git tags; the full history lives in <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</div>
 <div class="notice" data-i18n="whatsnew.lang_note">Release notes are machine-translated (AI); the Chinese original in CHANGELOG.md is authoritative.</div>
+<section class="release"><h2>v0.10.1<span class="rel-date">2026-11-10</span></h2><ul><li><strong>修复 ATC / 大类页「中文名成分被误合并」</strong>：纯中文名成分在归一化时变成空串，互相覆盖后全被算成同一个成分——<code>/atc/J01.html</code> 里「地喹氯铵」一个条目下挂出几十个不相关抗生素名。现在各成分只出现在自己的 ATC 类目与成分页里，盐型归并口径不变。</li><li><strong>首页体积回到预算内</strong>：四份首页（en / es / zh / zh-hant）只内联当前语言的界面字典（四语 128.8 KB → 单语 22–42 KB），首页 HTML 226.5 KB → <strong>109–113 KB（−52%）</strong>，回到 UI 规格上限（215.8 KB）以内；语言切换 16/16、<code>?lang=</code> 深链 4/4、localStorage 偏好 3/3 真浏览器验证 0 文本错配，搜索结果页 4/4 HTTP 200。</li><li>站点 121,293 文件 / 880.2 MB（839.4 MiB）；sitemap 63,363 URL；四语对齐。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
 <section class="release"><h2>v0.10.0<span class="rel-date">2026-11-07</span></h2><ul><li><strong>重做排版与可读性</strong>：字号从 11 档收敛到 5 档（12/14/16/20/24），正文 16px；次要文字对比度 5.2:1 → <strong>7.67:1</strong>，分隔线 1.26:1 → 1.58:1；10–13px 的小字声明从 85 处降到 10 处。这次是设计层面的调整，不是加功能。</li><li><strong>导航与首页重排</strong>：桌面导航收成 5 项（搜索 / 按类别 / 按市场 / 覆盖 / 关于），语言收进「🌐 中文 ▾」下拉，右上补「类别」入口；首页那十几行类别长条改成 8 个高频类别 2×4 + 「全部类别 →」；手机端底部 4 个入口常驻。</li><li><strong>详情页层级理顺</strong>：成分页改成「身份 → 各国矩阵 → 也称 → 不可互换」；名字页补「同名不代表同一成分」提示；ATC 页四条提示合并成一条；覆盖页时间显示为日期并按市场排序；404 页补上导航与语言切换。</li><li>站点 121,280 文件 / 879.58 MB（838.8 MiB），比上一版小 6 MB；sitemap 63,351 URL；四语对齐。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
 <section class="release"><h2>v0.9.8<span class="rel-date">2026-11-07</span></h2><ul><li><strong>结果页先给答案</strong>：搜索后顶部出现「身份卡」——查询名对应哪个成分、规格、剂型、覆盖哪些市场、记录数，以及「查看成分页 / 复制标准名 / 报告错误」三个动作；H1 改为你查的名字。</li><li><strong>长列表不再一屏铺完</strong>：结果默认 20 行，「显示更多」每次加 20；单个查询的页面体积从 1.86 MB 降到 210 KB（−89%）。</li><li><strong>新导航</strong>：桌面 5 项（搜索 / 按类别 / 按市场 / 覆盖与新鲜度 / 关于）带下拉面板；手机底部 4 个常驻入口，语言切换常显；所有可点目标 ≥44px。</li><li><strong>警示放到该在的位置</strong>：名字页新增「同名不代表同一成分」提示；成分页顺序改为「身份 → 各国矩阵 → 也称 → 不可互换」，筛选器收起不再挡内容。</li><li>站点 121,280 文件 / 885.56 MB（844.5 MiB）；sitemap 63,351 URL；四语对齐。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
 <section class="release"><h2>v0.9.7<span class="rel-date">2026-11-07</span></h2><ul><li><strong>修复语言切换跳 404</strong>：首页与搜索结果页切换语言时会跳到域名根（GitHub 默认 404），现已修正为留在本站路径；术语表与覆盖页也纳入语言副本跳转。</li><li><strong>合并 12 条重复成分记录</strong>：甘露醇、美沙拉嗪、硼酸、丝裂霉素等同一成分的重复条目并入英文主记录（产品数与组件数不变，仅去掉重复身份）。</li><li><strong>成分页补「也称」</strong>：24 组同物异名（葡萄糖 / Dextrose、格列本脲 / Glyburide…）在成分页直接可见。</li><li>站点 121,280 文件 / 883.32 MB（842.4 MiB）；sitemap 63,363 URL；四语 i18n 对齐。</li></ul><p class="sub release-pending" data-i18n="whatsnew.pending">Chinese original only — English/Spanish translation pending.</p></section>
@@ -258,7 +259,7 @@
 <footer><div class="wrap">
   <span data-i18n="footer">Information only — not medical advice, and no substitute for a pharmacist.</span>
   <span class="foot-links">
-    <a href="whats-new.html">v0.10.0 · 2026-11-07</a>
+    <a href="whats-new.html">v0.10.1 · 2026-11-10</a>
     <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml"
        target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
     <a href="https://github.com/fuarnos/drug-brand-crossref/issues" target="_blank" rel="noopener"
