@@ -148,7 +148,10 @@ PAGES: list[dict] = [
         "items": [".mkrow", "table.matrix tbody tr"],
         "items_mode": "first-match",
         "items_min": 5,
-        "must_not_cover": ["main h1", ".mkblock h3", ".drug-sticky", "table.matrix thead"],
+        # 2026-11-11：成分页块头由 h3 提到 h2（修 h1→h3 跳级），选择器两种都留，
+        # 否则新产物里 `.mkblock h3` 恒空 → 「不许遮」检查静默失效。
+        "must_not_cover": ["main h1", ".mkblock h2, .mkblock h3", ".drug-sticky",
+                           "table.matrix thead"],
     },
     {
         "name": "name",
