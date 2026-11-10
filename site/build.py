@@ -202,6 +202,14 @@ I18N = {
         "home.sg": "Singapore",
         "home.tw": "Taiwan",
         "home.hk": "Hong Kong",
+        "home.eu": "European Union (EU)",
+        "eu.region_title": "EU centralised authorisation (EMA)",
+        "eu.region_note": ("Authorised at EU level — not a record of sale in any single country. "
+                           "The EU register carries no strength, dosage form or pack size."),
+        "eu.coverage_note": ("EU regional layer — central authorisations only; "
+                             "authorisation ≠ on sale in each country."),
+        "coverage.gap.eu": ("Regional layer: central authorisations (EMA / EC Union Register). "
+                            "No strength, form or pack size; authorisation ≠ on sale in a country."),
         "home.coverage": ("An empty result does not mean the medicine does not exist. "
                           "Coverage (countries and regions):"),
         "home.loading": "Loading index…",
@@ -411,6 +419,15 @@ I18N = {
         "home.sg": "Singapur",
         "home.tw": "Taiwán",
         "home.hk": "Hong Kong",
+        "home.eu": "Unión Europea (UE)",
+        "eu.region_title": "Autorización centralizada de la UE (EMA)",
+        "eu.region_note": ("Autorizado a nivel de la UE: no es un registro de venta en ningún país "
+                           "concreto. El registro de la UE no incluye dosis, forma farmacéutica "
+                           "ni tamaño de envase."),
+        "eu.coverage_note": ("Capa regional de la UE: solo autorizaciones centralizadas; "
+                             "autorización ≠ venta en cada país."),
+        "coverage.gap.eu": ("Capa regional: autorizaciones centralizadas (EMA / Registro de la Unión). "
+                            "Sin dosis, forma ni envase; autorización ≠ venta en un país."),
         "home.coverage": ("Un resultado vacío no significa que el medicamento no exista. "
                           "Cobertura (países y regiones):"),
         "home.loading": "Cargando el índice…",
@@ -620,6 +637,11 @@ I18N = {
         "home.sg": "新加坡",
         "home.tw": "台湾",
         "home.hk": "中国香港",
+        "home.eu": "欧盟（EU）",
+        "eu.region_title": "欧盟集中审批（EMA）",
+        "eu.region_note": ("欧盟层授权，不是某一国家的在售记录；欧盟登记不含规格、剂型、包装。"),
+        "eu.coverage_note": "欧盟区域层——仅集中审批产品；授权有效 ≠ 各国在售。",
+        "coverage.gap.eu": "区域层：欧盟集中审批（EMA / EC Union Register）；不含规格、剂型、包装；授权有效 ≠ 某国在售。",
         "home.coverage": "查不到不代表这个药不存在。当前覆盖（国家和地区）：",
         "home.loading": "正在加载索引…",
         "home.hint_idle": ("首次搜索只加载一个检索分片（中位约 1.0 MB，gzip 后约 0.16 MB）；"
@@ -1368,6 +1390,11 @@ UI_I18N = {
         # v0.7.0：TW 市場（zh-Hant 直接給值，避免 JSON 未含時回落簡體）
         "home.tw": "台灣",
         "home.hk": "中國香港",
+        "home.eu": "歐盟（EU）",
+        "eu.region_title": "歐盟集中審批（EMA）",
+        "eu.region_note": "歐盟層授權，不是某一國家的在售記錄；歐盟登記不含規格、劑型、包裝。",
+        "eu.coverage_note": "歐盟區域層——僅集中審批產品；授權有效 ≠ 各國在售。",
+        "coverage.gap.eu": "區域層：歐盟集中審批（EMA / EC Union Register）；不含規格、劑型、包裝；授權有效 ≠ 某國在售。",
         "about.tw_source": (
             '<p class="sub"><b>台灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
             '依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；'
@@ -1706,6 +1733,14 @@ ABOUT_I18N = {
             '<b>2026-10-28</b>. The export has <b>no registration-status column</b>, so status is '
             'shown as unknown; <b>being on the register does not mean currently marketed</b>. '
             '3,911 products have no ingredient records and are shown at name level only.</p>'),
+        "about.eu_source": (
+            '<p class="sub"><b>EU regional layer</b>: <b>European Commission — Union Register of '
+            'medicinal products</b> (CC BY 4.0; attribution European Commission / Union Register) '
+            'plus <b>EMA Medicines</b> data for cross-checking (source: European Medicines Agency '
+            '(EMA); no EMA logo, no implied endorsement). Central authorisations only (human '
+            'medicines), data as of <b>2026-11-03</b>. <b>An EU authorisation is not a record of '
+            'sale in any single country, and the register carries no strength, dosage form or pack '
+            'size.</b> Products that map to no known ingredient are shown at name level only.</p>'),
         "about.samename": (
             '<h2>Why “same name, different drug” happens</h2>'
             '<p class="sub">The same trademark is held by different companies in different '
@@ -1856,6 +1891,15 @@ ABOUT_I18N = {
             'así que el estado se muestra como desconocido; <b>estar en el registro no significa '
             'que se comercialice actualmente</b>. 3,911 productos no tienen componentes '
             'registrados y se muestran solo a nivel de nombre.</p>'),
+        "about.eu_source": (
+            '<p class="sub"><b>Capa regional de la UE</b>: <b>Comisión Europea — Union Register '
+            'of medicinal products</b> (CC BY 4.0; atribución Comisión Europea / Union Register) '
+            'y datos de <b>EMA Medicines</b> para contraste (fuente: European Medicines Agency '
+            '(EMA); sin logotipo ni respaldo implícito). Solo autorizaciones centralizadas '
+            '(medicamentos humanos), datos hasta <b>2026-11-03</b>. <b>Una autorización de la UE '
+            'no es un registro de venta en un país concreto, y el registro no incluye dosis, '
+            'forma farmacéutica ni tamaño de envase.</b> Los productos sin ingrediente identificado '
+            'se muestran solo a nivel de nombre.</p>'),
         "about.samename": (
             '<h2>Por qué ocurre «mismo nombre, otro medicamento»</h2>'
             '<p class="sub">La misma marca pertenece a empresas distintas en cada mercado y la '
@@ -1982,6 +2026,13 @@ ABOUT_I18N = {
             '（Australian Register of Therapeutic Goods；署名 TGA/ARTG）；数据截止 '
             '<b>2026-10-28</b>。导出<b>无注册状态列</b>，状态一律显示「未确认」；'
             '<b>在册不代表在售</b>。另有 3,911 个无成分记录的产品，仅按名称层展示。</p>'),
+        "about.eu_source": (
+            '<p class="sub"><b>欧盟区域层</b>：<b>欧盟委员会 — Union Register of medicinal '
+            'products</b>（CC BY 4.0；署名 European Commission / Union Register），'
+            '并用 <b>EMA Medicines</b> 数据交叉核对（来源：European Medicines Agency（EMA）；'
+            '不使用 EMA logo、不暗示背书）。只收人用药品的集中审批产品，数据截止 '
+            '<b>2026-11-03</b>。<b>欧盟授权不是某一国家的在售记录，登记也不含规格、剂型、包装。</b>'
+            '映射不到已知成分的产品仅按名称层展示。</p>'),
         "about.samename": (
             '<h2>为什么会有「同名不同药」</h2>'
             '<p class="sub">同一个商标在不同市场属于不同公司，配方可能完全不同。已验证的例子：'
@@ -2883,6 +2934,19 @@ fácticos (nombres, principios activos, concentraciones, formas farmacéuticas, 
 al original; no reproducimos prospectos, textos CMI/SmPC ni volcados de datos. Las condiciones y
 atribuciones por fuente están en el <a href="{DOCS_LICENCE_URL}">registro de licencias</a>.</p>
 <ul class="sub">
+<li><b>EU 欧盟 / Unión Europea</b>: <b>European Commission — Union Register of medicinal
+products</b> under <b>CC BY 4.0</b> (attribution: European Commission / Union Register), plus
+<b>EMA Medicines</b> data for cross-checking (source: European Medicines Agency (EMA); no EMA
+logo, no implied endorsement). Central authorisations (human medicines) only; the register
+carries <b>no strength, dosage form or pack size</b>, and an EU authorisation is not a record of
+sale in any single country. 中文：欧盟委员会 Union Register（CC BY 4.0，署名 European Commission /
+Union Register）+ EMA 药品数据（署名 EMA，不用 logo、不暗示背书）；只收集中审批产品，不含规格 /
+剂型 / 包装，「授权有效 ≠ 各国在售」。ES: Comisión Europea — Union Register (CC BY 4.0; atribución
+Comisión Europea / Union Register) + datos de EMA (atribución EMA, sin logotipo); solo
+autorizaciones centralizadas, sin dosis ni forma farmacéutica.
+<a href="https://ec.europa.eu/health/documents/community-register/html/index_en.htm">Union Register</a> ·
+<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> ·
+<a href="https://www.ema.europa.eu/en/about-us/about-website/legal-notice">EMA legal notice</a></li>
 <li><b>China 中国 / China</b>: 医保药品分类与代码数据库由<b>国家医保局</b>公开；我们<b>未找到开放的再发布许可</b>，
 只存事实字段并链回原文，不再发布原始数据表。EN: the NHSA catalogue is public but we found
 <b>no open licence for redistribution</b>; factual fields only, with links, no bulk republication.
@@ -6630,7 +6694,7 @@ def _slim_shell(*chunks: str) -> tuple[str, ...]:
 # 两边共用下面同一份模板（boot.js 里把根前缀写成 __R__ 占位）。
 SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA", "home.ca"),
                  ("AU", "home.au"), ("ES", "home.es"), ("TW", "home.tw"), ("HK", "home.hk"),
-                 ("MX", "home.mx"), ("SG", "home.sg"))
+                 ("MX", "home.mx"), ("SG", "home.sg"), ("EU", "home.eu"))
 SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
 
 
@@ -6644,7 +6708,7 @@ def _shell_cat_links(prefix: str, limit: int = 99) -> str:
 
 
 def _shell_market_links(prefix: str) -> str:
-    """市场面板：10 个市场，锚到覆盖页对应行（覆盖页每行有 id="market-XX"）。"""
+    """市场面板：10 个国别市场 + EU 区域层，锚到覆盖页对应行（覆盖页每行有 id="market-XX"）。"""
     return "".join(
         f'<a href="{prefix}coverage.html#market-{cc}">'
         f'<span data-i18n="{key}">{esc(I18N["en"].get(key, cc))}</span>'
@@ -7259,7 +7323,7 @@ def load_index(db: sqlite3.Connection):
         comp_keys.setdefault(pid, set()).add(_norm_name(inn))
     for (key_id, pid, country, form_base, dosage_form, sv, su,
          inn_en, inn_zh, atc, sid, mah, rel, ntype, n_ing, pnote, pcat, nl) in db.execute(
-        """SELECT pn.key_id, p.product_id, p.country, p.form_base, p.dosage_form,
+        """SELECT pn.key_id, p.product_id, COALESCE(p.country, p.region) AS mk, p.form_base, p.dosage_form,
                   pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.atc, s.substance_id,
                   p.mah, p.release,
                   pn.name_type,
@@ -7395,7 +7459,10 @@ def load_index(db: sqlite3.Connection):
                      or bool(set(a["c"]) & SINGLE_NAME_PAGE_MARKETS))
         # v0.9.1 P0 回归修复：只排除 AU-only 的 name_key；AU+其他国家的名字页保留
         # （原逻辑 "AU" not in c 误杀 3,345 个多国名字，/name/lipitor.html 等旧 URL 404）。
-        worth_page = ((not pure_inn) and set(a["c"]) != {"AU"}
+        # v0.11.0：EU 区域层只在「搜索结果 + 成分页 + 覆盖页」出现，不建名字页
+        # （647 个新 name_key 若都建页 ≈ +2.7 MB dist；EU 产品每个都能从成分页进）。
+        region_only = set(a["c"]) <= {"EU"}
+        worth_page = ((not pure_inn) and set(a["c"]) != {"AU"} and not region_only
                       and ((a["trade"] and single_ok) or level == "warning"))
         ordered_mah = sorted(a["mah"].items(), key=lambda kv: (-kv[1], kv[0]))
         first_maker = ordered_mah[0][0] if ordered_mah else ""
@@ -7477,7 +7544,7 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
     counts: dict[str, tuple[int, set[str]]] = {}
     for sid, n, countries in db.execute(
         """SELECT v.substance_id, COUNT(DISTINCT p.product_id),
-                  GROUP_CONCAT(DISTINCT p.country)
+                  GROUP_CONCAT(DISTINCT COALESCE(p.country, p.region))
            FROM product p
            JOIN product_component pc ON pc.product_id = p.product_id
            JOIN variant v ON v.variant_id = pc.variant_id
@@ -7677,7 +7744,7 @@ def _label_unit_html(text: str) -> str:
 
 
 # v0.6.6：成分页多国矩阵（行=规格/剂型/释放；列=国家；服务端默认 en 顺序，客户端按界面语言重排）
-COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK")
+COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "EU")
 MATRIX_ROW_CAP = 120
 
 
@@ -7880,7 +7947,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             cn_latin.setdefault(kid, txt)
     products: dict[str, list] = {}
     for row in db.execute(
-        """SELECT v.substance_id, p.country, p.form_base, p.dosage_form, p.release,
+        """SELECT v.substance_id, COALESCE(p.country, p.region) AS mk, p.form_base, p.dosage_form, p.release,
                   p.status, pc.strength_value, pc.strength_unit,
                   pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh, pc.ord,
                   p.mah
@@ -7967,7 +8034,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             # 这些 unknown 记录不整批跳过；其他市场仍按原规则隐藏。
             if status != "active" and not (
                     status in ("unknown", "", None)
-                    and country in ("HK", "AU")):
+                    and country in ("HK", "AU", "EU")):
                 continue
             # v0.9.0 task-17：显示按归一后 mg 聚合；原记录从 task-16 审计 CSV 取。
             st = _normalized_strength(sv, su)
@@ -8046,8 +8113,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             for c in countries
         }
         order = sorted(countries, key=lambda c: (-country_totals.get(c, 0), c))
+        # v0.11.0：EU 区域层没有规格/剂型 → 默认 3 列不选它（可在筛选器里手动加列）
+        order_pick = [c for c in order if c != "EU"] or order
         default_cols: list[str] = []
-        for c in ([order[0]] if order else []) + ["US"] + order[1:]:
+        for c in ([order_pick[0]] if order_pick else []) + ["US"] + order_pick[1:]:
             if c in countries and c not in default_cols:
                 default_cols.append(c)
             if len(default_cols) >= 3:
@@ -8349,7 +8418,8 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
     data: dict[str, dict] = {}
     for (key_id, pid, inn_en, sid, country, form_base, dosage_form, rel,
          sv, su, nl) in db.execute(
-        """SELECT pn.key_id, p.product_id, s.inn_en, s.substance_id, p.country, p.form_base,
+        """SELECT pn.key_id, p.product_id, s.inn_en, s.substance_id, COALESCE(p.country, p.region) AS mk,
+                  p.form_base,
                   p.dosage_form, p.release, pc.strength_value, pc.strength_unit, s.name_lang
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
@@ -8448,7 +8518,7 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
     # v0.9.0 task-6：单包装名字页的产品明细一次查完，避免 10 万次逐页查询。
     single_rows: dict[str, list] = {}
     for r in db.execute(
-            """SELECT pn.key_id, p.country, p.dosage_form, p.form_base, p.release,
+            """SELECT pn.key_id, COALESCE(p.country, p.region) AS mk, p.dosage_form, p.form_base, p.release,
                       p.status, p.mah, p.source_url, p.approval_id,
                       pc.strength_value, pc.strength_unit, s.inn_zh, s.inn_en,
                       p.note, p.category
@@ -9064,7 +9134,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
     # 一次性取产品（只保留有页厂家），再补品牌名与成分
     prod: dict[str, dict] = {}
     for (pid, country, mah, form, base, rel, pack, appr, src) in db.execute(
-        """SELECT product_id, country, mah, dosage_form, form_base, release, pack,
+        """SELECT product_id, COALESCE(country, region) AS mk, mah, dosage_form, form_base, release, pack,
                   approval_id, source_url
            FROM product WHERE mah IS NOT NULL AND mah <> ''"""
     ):
@@ -9381,7 +9451,8 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="CA" data-i18n="home.ca">Canada</option>
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
-    <option value="SG" data-i18n="home.sg">Singapore</option></select>
+    <option value="SG" data-i18n="home.sg">Singapore</option>
+    <option value="EU" data-i18n="home.eu">European Union (EU)</option></select>
 </div>
 </div>
 <div id="identity"></div>
@@ -9497,7 +9568,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
     parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
     for key in ("about.lead", "about.rules", "about.nick", "about.terms",
                 "about.sources", "about.tw_source", "about.sg_source", "about.hk_source",
-                "about.au_source"):
+                "about.au_source", "about.eu_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append('<details class="lic-wrap"><summary data-i18n="about.licences_summary">'
                  'Data sources and licences</summary>' + LICENCE_HTML + '</details>')
@@ -9547,20 +9618,20 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
     """v0.9.4 A4：每市场覆盖/新鲜度页（只列事实，不写数据口径）。"""
     stats = {}
     for r in db.execute(
-            """SELECT p.country,
+            """SELECT COALESCE(p.country, p.region) AS country,
                       COUNT(DISTINCT CASE WHEN pc.product_id IS NOT NULL
                                           THEN p.product_id END) AS mapped,
                       COUNT(DISTINCT CASE WHEN pc.strength_value IS NOT NULL
                                           THEN p.product_id END) AS spec
                FROM product p
                LEFT JOIN product_component pc ON pc.product_id = p.product_id
-               GROUP BY p.country"""):
+               GROUP BY COALESCE(p.country, p.region)"""):
         stats[r["country"]] = dict(r)
     no_trade = {r[0]: r[1] for r in db.execute(
-        """SELECT p.country, COUNT(*) FROM product p
+        """SELECT COALESCE(p.country, p.region) AS country, COUNT(*) FROM product p
            WHERE NOT EXISTS (SELECT 1 FROM product_name pn
                              WHERE pn.product_id=p.product_id AND pn.name_type='trade')
-           GROUP BY p.country""")}
+           GROUP BY COALESCE(p.country, p.region)""")}
     asof = {}
     for r in source_cover:
         c, d = r.get("country"), r.get("data_as_of")
@@ -10433,12 +10504,14 @@ def _sub_status_map(db: sqlite3.Connection,
     """
     out: dict[str, dict[str, dict[str, int]]] = {}
     for sid, status, country, n in db.execute(
-            """SELECT v.substance_id, p.status, p.country, COUNT(DISTINCT p.product_id)
+            """SELECT v.substance_id, p.status, COALESCE(p.country, p.region) AS mk,
+                      COUNT(DISTINCT p.product_id)
                FROM product p
                JOIN product_component pc ON pc.product_id = p.product_id
                JOIN variant v ON v.variant_id = pc.variant_id
-               WHERE p.status IS NOT NULL AND p.status <> '' AND p.country IS NOT NULL
-               GROUP BY v.substance_id, p.status, p.country"""):
+               WHERE p.status IS NOT NULL AND p.status <> ''
+                 AND COALESCE(p.country, p.region) IS NOT NULL
+               GROUP BY v.substance_id, p.status, COALESCE(p.country, p.region)"""):
         per = out.setdefault(base_of.get(sid, sid), {}).setdefault(status, {})
         per[country] = per.get(country, 0) + int(n)
     return out
@@ -10566,7 +10639,7 @@ var code = el.getAttribute('data-atc4');
 var body = el.querySelector('.atc4-body');
 var prefix = window.DSH_PREFIX || '';
 var url = prefix + 'data/idx/atc4-forms.json?v=__BUILD_V__';
-var ORDER = ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK'];
+var ORDER = ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','EU'];
 function T(k, d){
   var t = window.T;
   if(!t) return d;
@@ -11164,20 +11237,20 @@ def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cov
     coverage_res = write_csv("coverage.csv", coverage_fields, cov_rows)
 
     market_rows = db.execute(
-        """SELECT p.country, COUNT(DISTINCT p.product_id) AS products,
+        """SELECT COALESCE(p.country, p.region) AS country, COUNT(DISTINCT p.product_id) AS products,
                   COUNT(DISTINCT v.substance_id) AS substances,
                   COUNT(DISTINCT pn.key_id) AS name_keys
            FROM product p
            LEFT JOIN product_component pc ON pc.product_id=p.product_id
            LEFT JOIN variant v ON v.variant_id=pc.variant_id
            LEFT JOIN product_name pn ON pn.product_id=p.product_id
-           GROUP BY p.country ORDER BY p.country""").fetchall()
+           GROUP BY COALESCE(p.country, p.region) ORDER BY 1""").fetchall()
     market_res = write_csv("market-summary.csv", [
         ("country", "string"), ("products", "integer"), ("substances", "integer"),
         ("name_keys", "integer")], [list(r) for r in market_rows])
 
     name_rows = db.execute(
-        """SELECT country, name_type, COUNT(*) AS n
+        """SELECT COALESCE(p.country, p.region) AS country, name_type, COUNT(*) AS n
            FROM product_name pn JOIN product p USING(product_id)
            GROUP BY country, name_type ORDER BY country, name_type""").fetchall()
     name_res = write_csv("name-summary.csv", [
@@ -11797,10 +11870,10 @@ def main() -> None:
     });
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
     // v0.6.6/v0.7.0/v0.7.x：语言列序（含 TW/SG：zh → CN,TW,SG；zh-Hant → TW,CN,HK,SG；es → ES,MX…）
-    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK'],
-                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK'],
-                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX'],
-                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX']};
+    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','EU'],
+                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK','EU'],
+                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX','EU'],
+                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX','EU']};
     var morder = MORDER[window.LANG] || MORDER.en;
     window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
     document.querySelectorAll('table.matrix').forEach(function(tb){
@@ -11980,12 +12053,12 @@ def main() -> None:
           f"display-default ingredient translations", flush=True)
     coverage = [dict(r) for r in db.execute("SELECT * FROM coverage ORDER BY country")]
     source_cover = [dict(r) for r in db.execute(
-        """SELECT p.country, p.source_id,
+        """SELECT COALESCE(p.country, p.region) AS country, p.source_id,
                   COUNT(DISTINCT p.product_id) AS n_products,
                   s.data_as_of, s.data_as_of_note
            FROM product p LEFT JOIN source s ON s.source_id = p.source_id
-           GROUP BY p.country, p.source_id
-           ORDER BY p.country, n_products DESC""")]
+           GROUP BY country, p.source_id
+           ORDER BY country, n_products DESC""")]
     stats = {
         "products": db.execute("SELECT COUNT(*) FROM product").fetchone()[0],
         "substances": db.execute("SELECT COUNT(*) FROM substance").fetchone()[0],

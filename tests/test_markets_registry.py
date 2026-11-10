@@ -42,6 +42,8 @@ DB = ROOT / "data" / "drugs.db"
 # v0.9.0（HK 启用）：HK 接入 → 10 市场；语言仍 4（HK 为繁中/英文名称层）。
 SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/")}
 SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK"}
+# v0.11.0：EU 区域层启用（kind=region，own_data=true，不进 country_order）
+SITE_REGION_I18N = {"EU"}
 
 
 def _db_countries() -> set[str] | None:
@@ -51,7 +53,22 @@ def _db_countries() -> set[str] | None:
     uri = "file:" + str(DB.resolve()).replace("\\", "/").replace(" ", "%20") + "?mode=ro"
     con = sqlite3.connect(uri, uri=True, timeout=30)
     try:
-        return {r[0] for r in con.execute("SELECT DISTINCT country FROM product")}
+        # v0.11.0：EU 区域层行的 country 为 NULL，国家集合只取非空值
+        return {r[0] for r in con.execute("SELECT DISTINCT country FROM product")
+                if r[0]}
+    finally:
+        con.close()
+
+
+def _db_regions() -> set[str] | None:
+    if not DB.exists():
+        return None
+    import sqlite3
+    uri = "file:" + str(DB.resolve()).replace("\\", "/").replace(" ", "%20") + "?mode=ro"
+    con = sqlite3.connect(uri, uri=True, timeout=30)
+    try:
+        return {r[0] for r in con.execute("SELECT DISTINCT region FROM product")
+                if r[0]}
     finally:
         con.close()
 
@@ -124,7 +141,8 @@ class TestMarkets(RegistryBase):
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU"}, codes)
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK"},
                          set(self.reg.country_order))
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK"},
+        # v0.11.0：EU 区域层启用（own_data=true，国家集合不变）
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -156,8 +174,8 @@ class TestMarkets(RegistryBase):
         self.assertEqual(len(keys), len(set(keys)))
         for m in self.reg.enabled_markets:
             self.assertEqual(f"home.{m.code.lower()}", m.i18n_key)
-        # 现有 8 国（US/GB/CA/AU/ES/MX/CN/TW）的 i18n key 与 site/build.py I18N 的 home.* 完全一致
-        self.assertEqual({f"home.{c.lower()}" for c in SITE_COUNTRY_I18N},
+        # 现有市场（10 国 + EU 区域层）的 i18n key 与 site/build.py I18N 的 home.* 完全一致
+        self.assertEqual({f"home.{c.lower()}" for c in SITE_COUNTRY_I18N | SITE_REGION_I18N},
                          {m.i18n_key for m in self.reg.enabled_markets})
         # 占位市场的 key 已预留，便于后续直接启用
         self.assertEqual("home.tw", self.reg.require_market("TW").i18n_key)
@@ -176,12 +194,21 @@ class TestMarkets(RegistryBase):
             self.skipTest("data/drugs.db 不存在，跳过国家集合校验")
         self.assertEqual(set(self.reg.country_order), self.db_countries,
                          "注册表启用国家与 DB product.country 不一致（改 DB 前先改注册表）")
+        # v0.11.0：区域层（product.region）与注册表 region 集合一致
+        regions = _db_regions()
+        self.assertIsNotNone(regions)
+        self.assertEqual(set(self.reg.region_codes), regions,
+                         "注册表区域层与 DB product.region 不一致")
 
     def test_parent_relationship(self) -> None:
         eu = self.reg.require_market("EU")
         self.assertTrue(eu.is_region)
         self.assertIsNone(eu.parent)
-        self.assertFalse(eu.enabled)
+        # v0.11.0：EU 区域层启用（自带数据，不等子市场）
+        self.assertTrue(eu.enabled)
+        self.assertTrue(eu.own_data)
+        self.assertEqual("eu_union_register", eu.source_id)
+        self.assertIn("ema_medicines", eu.extra_source_ids)
         for code in self.reg.country_order:
             self.assertIsNone(self.reg.require_market(code).parent)
         # 若将来国家挂到 region 下，父节点必须是 region
@@ -189,16 +216,18 @@ class TestMarkets(RegistryBase):
             if self.reg.market("EU") and m.parent == "EU":
                 self.assertTrue(self.reg.require_market("EU").is_region)
 
-    def test_region_placeholder_cannot_be_enabled_alone(self) -> None:
-        # 手工构造「EU enabled 但没有子市场」的注册表 → 校验必须报错
+    def test_region_without_own_data_cannot_be_enabled_alone(self) -> None:
+        # 手工构造「EU enabled 但没有子市场、也没声明 own_data」→ 校验必须报错
         eu = self.reg.require_market("EU")
         markets = dict(self.reg.markets)
-        markets["EU"] = M.Market(**{**eu.__dict__, "enabled": True})
+        markets["EU"] = M.Market(**{**eu.__dict__, "own_data": False})
         broken = M.MarketsRegistry(markets, self.reg.languages,
                                    source_ids=self.source_ids,
                                    planned_markets=self.reg.planned_markets)
         errs = broken.validate()
         self.assertTrue(any("region 至少要有 1 个启用的子市场" in e for e in errs), errs)
+        # 真实注册表（own_data=true）必须通过
+        self.assertEqual([], self.reg.validate())
 
     def test_tw_is_planned_placeholder(self) -> None:
         tw = self.reg.require_market("TW")
@@ -433,7 +462,7 @@ class TestApiHelpers(RegistryBase):
         self.assertEqual(["es"], [x.code for x in self.reg.languages_for_market("MX")])
         self.assertEqual(["es"], [x.code for x in self.reg.languages_for_market("ES")])
         self.assertEqual(["zh"], [x.code for x in self.reg.languages_for_market("CN")])
-        self.assertEqual((), self.reg.languages_for_market("EU"))
+        self.assertEqual(["en"], [x.code for x in self.reg.languages_for_market("EU")])
 
     def test_display_names_and_helpers(self) -> None:
         self.assertEqual("美国", self.reg.require_market("US").display_name("zh"))

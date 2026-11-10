@@ -479,6 +479,9 @@ def _dry_run_counts(db: sqlite3.Connection, products: list[dict], comps: list[di
     used_pids: set[str] = set()
     new_keys: list[str] = []
     new_variants: list[tuple[str, str]] = []
+    # 同一批里两个产品可能共用同一个商品名（同 name_key），写库是 INSERT OR IGNORE，
+    # 所以 dry-run 也要按 (key, raw) 去重，否则预测值比实际写入多（v0.11.0 实测多 8 行）。
+    seen_variant_pairs: set[tuple[str, str]] = set()
     n_components = n_no_variant = n_products_no_component = 0
     pid_collisions = 0
     samples: list[dict] = []
@@ -493,9 +496,11 @@ def _dry_run_counts(db: sqlite3.Connection, products: list[dict], comps: list[di
             new_keys.append(key)
         raw_name = p["display_name"]
         if key and raw_name:
-            if not db.execute("SELECT 1 FROM name_variant WHERE key_id=? AND raw=?",
-                              (key, raw_name)).fetchone():
-                new_variants.append((key, raw_name))
+            pair = (key, raw_name)
+            if pair not in seen_variant_pairs and not db.execute(
+                    "SELECT 1 FROM name_variant WHERE key_id=? AND raw=?", (key, raw_name)).fetchone():
+                seen_variant_pairs.add(pair)
+                new_variants.append(pair)
         written: list[dict] = []
         for c in comps_by_row.get(p["row_key"], []):
             vid = resolve(c["substance_id"], c["token"])

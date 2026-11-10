@@ -6,7 +6,7 @@
 sitemap 顺序）、`db/schema.sql`（`product.country` 的 CHECK 枚举）和 About 文案里，
 加一个市场要改四五处、容易漏。本模块把「市场 / 语言」抽成数据文件 + 一个小 API：
 
-    data/markets.json     市场：现有 7 国（US/GB/CA/AU/ES/MX/CN）+ 占位 TW + EU region（disabled）
+    data/markets.json     市场：10 国（US/GB/CA/AU/ES/MX/CN/TW/SG/HK）+ EU region（v0.11.0 启用，own_data）
     data/languages.json   UI 语言：en/es/zh + zh-Hant（预留）+ EU 语言占位（disabled）
     lib/markets.py        读取 / 校验 / 查询 / 注册（本文件）
 
@@ -133,6 +133,9 @@ class Market:
     group: str = ""
     extra_source_ids: tuple[str, ...] = ()
     notes: str = ""
+    # v0.11.0：区域层自带数据（EU 集中审批 = product.region='EU'，不由子市场汇总）。
+    # 只有 own_data=True 的 region 才允许「无 enabled 子市场」上线。
+    own_data: bool = False
 
     @property
     def is_country(self) -> bool:
@@ -155,6 +158,7 @@ class Market:
             "default_lang": self.default_lang,
             "languages": list(self.languages),
             "enabled": self.enabled, "order": self.order, "notes": self.notes,
+            "own_data": self.own_data,
         }
 
     @classmethod
@@ -177,6 +181,7 @@ class Market:
             group=str(d.get("group") or ""),
             extra_source_ids=tuple(str(x) for x in (d.get("extra_source_ids") or [])),
             notes=str(d.get("notes") or ""),
+            own_data=bool(d.get("own_data")),
         )
 
 
@@ -539,10 +544,11 @@ def _validate_markets(markets: Mapping[str, Market],
         if m.parent:
             children.setdefault(m.parent, []).append(m.code)
     for code, m in markets.items():
-        if m.kind == KIND_REGION and m.enabled:
+        if m.kind == KIND_REGION and m.enabled and not m.own_data:
             kids = [c for c in children.get(code, []) if markets[c].enabled]
             if not kids:
-                errs.append(f"市场 {code}: 启用的 region 至少要有 1 个启用的子市场")
+                errs.append(f"市场 {code}: 启用的 region 至少要有 1 个启用的子市场"
+                            f"（或声明 own_data=true 表示区域层自带数据）")
     return errs
 
 

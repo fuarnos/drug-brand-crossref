@@ -465,6 +465,7 @@
     "res.no_brand_note": "有 {n} 筆紀錄沒有商品名，按名稱層顯示。",
     "matrix.market_count": "市場 {shown}/{total}",
     "matrix.empty_markets": "至少選一個市場才會顯示欄。",
-    "matrix.scroll_hint": "左右滑動查看更多市場 →"
+    "matrix.scroll_hint": "左右滑動查看更多市場 →",
+    "about.eu_source": "<p class=\"sub\"><b>歐盟區域層</b>：<b>歐盟委員會 — Union Register of medicinal products</b>（CC BY 4.0；署名 European Commission / Union Register），並用 <b>EMA Medicines</b> 資料交叉核對（來源：European Medicines Agency（EMA）；不使用 EMA logo、不暗示背書）。只收人用藥品的集中審批產品，資料截止 <b>2026-11-03</b>。<b>歐盟授權不是某一國家的在售記錄，登記也不含規格、劑型、包裝。</b>對應不到已知成分的產品僅按名稱層呈現。</p>"
   }
 }

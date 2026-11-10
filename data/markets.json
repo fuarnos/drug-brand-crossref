@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-30",
+  "updated": "2026-11-11",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -182,13 +182,15 @@
       "name": { "en": "European Union", "es": "Unión Europea", "zh": "欧盟" },
       "i18n_key": "home.eu",
       "flag": "🇪🇺",
-      "source_id": null,
-      "extra_source_ids": [],
+      "source_id": "eu_union_register",
+      "extra_source_ids": ["ema_medicines"],
       "default_lang": "en",
-      "languages": [],
-      "enabled": false,
+      "languages": ["en"],
+      "enabled": true,
+      "own_data": true,
       "order": 90,
-      "notes": "区域占位（禁用）：EU 不是单一国家市场，不能直接生成产品国家页。未来成员国用 kind=country、parent=EU 注册；聚合页只做导航/EMA 集中审批标记。"
+      "data_as_of": "2026-11-03",
+      "notes": "区域层（kind=region，非国别）：EU 集中审批 = product.region='EU' + country=NULL（EC Union Register 主源 CC BY 4.0 + EMA 交叉核对）。v0.11.0（2026-11-11）写入 2,095 产品。own_data=true 表示区域层自带数据、不由子市场汇总（因此可单独启用）。口径：授权有效 ≠ 各国在售；无规格/剂型/包装；不建 EU 名字页（只在搜索结果/成分页/覆盖页出现）。成员国后续用 kind=country、parent=EU 注册。"
     }
   ]
 }
