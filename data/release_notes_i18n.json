@@ -998,21 +998,21 @@
       "**口径改成「10 国 + EU 区域」**：覆盖页、About、首页文案统一；EU 是区域层（region='EU'、country 为空），不进国家统计，但进市场下拉与筛选。",
       "**不建 EU 名字页**：647 个只在欧盟层出现的名字不生成单页（省 2.7 MB），从搜索结果直接点进成分页。",
       "**同名提醒（collision）905 → 925（+20）**：新增的 20 条来自欧盟层「同名不同成分」，仍是自动推导，不手工标注。",
-      "站点 121,450 文件 / 880.8 MB（840.0 MiB）；sitemap 63,685 URL；core.json 41.6 MB raw；四语对齐（i18n 键集 532 × 4，zh-Hant 无回落）。"
+      "**EU 成分页说清「区域层」口径（四语）**：EU 市场块与并排表的 EU 列都写明「欧盟集中审批（EMA）— 欧盟层授权，不是某一国家的在售记录；欧盟登记不含规格、剂型、包装」，随界面语言在 en / es / zh / zh-Hant 之间切换。"
     ],
     "en": [
       "**EU regional layer is live**: EC Union Register (CC BY 4.0) plus EMA data add 2,095 centrally authorised products and 2,138 ingredient records (1,547 active, 406 withdrawn, 142 unknown status); the database now holds 479,193 products. Coverage gains an EU row, ingredient pages show EU central-authorisation records, and search results carry an EU tag. The EU layer has no strength, dosage form or pack size, so pages say \"not recorded\" and spell out that an EU authorisation is not a record of sale in any country.",
       "**Coverage wording is now \"10 countries + EU region\"** across the coverage page, About and the home page. EU is a regional layer (region='EU', country empty): it is excluded from country statistics but appears in the market selector and filters.",
       "**No EU name pages**: the 647 names that only exist at EU level get no page of their own (saving 2.7 MB); search results lead straight to the ingredient page.",
       "**Same-name warnings (collision) 905 → 925 (+20)**: the 20 new ones come from EU-level same-name/different-ingredient cases, still derived automatically, never hand-labelled.",
-      "Site: 121,450 files / 880.8 MB (840.0 MiB); sitemap 63,685 URLs; core.json 41.6 MB raw; all four UI languages aligned (532 i18n keys × 4, no zh-Hant fallback)."
+      "**EU pages now spell out what the regional layer means (four languages)**: the EU market block and the EU column of the side-by-side table both say 'EU centralised authorisation (EMA) — authorised at EU level, not a record of sale in any single country; the EU register carries no strength, dosage form or pack size', switching between en / es / zh / zh-Hant with the interface language."
     ],
     "es": [
       "**Capa regional de la UE en línea**: el Union Register de la Comisión Europea (CC BY 4.0) y los datos de la EMA añaden 2,095 productos de autorización centralizada y 2,138 registros de componentes (1,547 autorizados, 406 retirados, 142 con estado desconocido); la base contiene ahora 479,193 productos. La cobertura gana una fila EU, las páginas de principio activo muestran los registros de autorización centralizada y los resultados de búsqueda llevan la etiqueta EU. La capa EU no tiene dosis, forma farmacéutica ni envase, así que las páginas dicen «no registrado» y aclaran que una autorización de la UE no es un registro de venta en ningún país.",
       "**La cobertura pasa a «10 países + región UE»** en la página de cobertura, About y la portada. La UE es una capa regional (region='EU', country vacío): no entra en las estadísticas por país, pero sí en el selector y los filtros de mercado.",
       "**Sin páginas de nombre para la UE**: los 647 nombres que solo existen a nivel UE no generan página propia (ahorra 2.7 MB); los resultados de búsqueda llevan directo a la página del principio activo.",
       "**Avisos de mismo nombre (collision) 905 → 925 (+20)**: los 20 nuevos provienen de casos de mismo nombre con principio activo distinto en la capa UE; siguen derivándose automáticamente, nunca se etiquetan a mano.",
-      "Sitio: 121,450 archivos / 880.8 MB (840.0 MiB); sitemap de 63,685 URL; core.json 41.6 MB en bruto; las cuatro lenguas de interfaz alineadas (532 claves i18n × 4, sin respaldo de zh-Hant)."
+      "**Las páginas de la UE explican qué es la capa regional (cuatro idiomas)**: el bloque de mercado UE y la columna UE de la tabla comparativa dicen «Autorización centralizada de la UE (EMA): autorizado a nivel de la UE, no es un registro de venta en ningún país concreto; el registro de la UE no incluye dosis, forma farmacéutica ni tamaño de envase», y cambian con el idioma de la interfaz (en / es / zh / zh-Hant)."
     ],
     "zh-Hant": [
       "**歐盟區域層（EU）上線**：EC Union Register（CC BY 4.0）＋ EMA 資料接入 2,095 個集中審批產品／2,138 條成分紀錄（在售 1,547、已撤市 406、狀態未知 142），全庫 479,193 產品；覆蓋頁多一列 EU，成分頁可看「同名在歐盟層的集中審批紀錄」，搜尋結果帶 EU 標記。EU 層沒有規格、劑型、包裝，頁面一律寫「未收錄」，並明說「授權有效 ≠ 各國在售」。",

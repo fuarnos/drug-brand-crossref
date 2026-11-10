@@ -9,9 +9,18 @@
 
 数据（只读 `data/drugs.db`，`mode=ro`）
 ---------------------------------------
-- 键集合：`site/dist/data/index.json` 的 127,085 个 `k`（= `name_key.key_id`，已核对全部存在）；
+- 键集合：现查 `product_name(name_type IN ('trade','inn'))` 的 `DISTINCT key_id`
+  （与 `site/build.py` 建索引同口径）。v0.11.0 起不再读 `site/dist/data/index.json`：
+  build.py 从 v0.6.1 起已不写该文件，残留副本只有 127,085 个过期 k；
 - 明细行：`product_name(name_type IN ('trade','inn')) ⋈ product`，按 key 分组、每组截断；
-- 行排序：status=active 优先 → country → product_id；同一 key 内按 product_id 去重；
+- 市场键：`COALESCE(p.country, p.region) AS country`——EU 区域层产品只有 `region`、
+  `country` 为 NULL（schema 保证二者必居其一），不 COALESCE 会落成空串；
+- 截断规则（v0.11.0 起）：每 key 最多 `max_rows` 条，**按市场轮转**取行——每个市场先各取 1 条，
+  再回头补第 2 条，直到填满；市场顺序 = 区域层市场（`country` 为空、由 `region` 兜底，
+  当前只有 EU）在前，其余按市场名。同一市场内 status=active 优先 → product_id；
+  同一 key 内按 product_id 去重。
+  （旧规则按市场字母序整段取前 N 条：AU/CA/CN 等前面的市场一多，EU 等后面的市场永远进不来，
+  实测 62 个 key 的 EU 行被挤到第 13 位之后。）
 - 行字段（12 个紧凑数组）：
   `[product_id, country, brand, pack, approval_id, status_idx, status_date,
     release_idx, strength, mah, source_url_suffix, source_idx]`
@@ -21,12 +30,17 @@
   - `status_idx`/`release_idx`/`source_idx` 指向桶级字典 `t`/`r`/`s`；
   - `source_url` 存后缀：`url = p[source_idx] + source_url_suffix`。
 
-体积控制（任务预算：raw ≤55 MB、gzip ≤10 MB）
---------------------------------------------
-- 平铺原文字段 × cap12 ≈ 71.7 MB raw（超预算）；因此桶内做：
+体积控制（v0.11.0 预算：raw ≤70 MB、gzip ≤14 MB）
+------------------------------------------------
+- 平铺原文字段 × cap12 ≈ 71.7 MB raw（2026-10-28 口径）→ 因此桶内做：
   1) 枚举字典：status/release/source_id 用桶级小数组下标；
   2) URL 前缀压缩：同一桶内按 source 取公共前缀，行内只存后缀；
   3) 行数上限：默认 12，若超预算自动降级 10 → 8（记录在 stats.degraded）。
+- 预算在 v0.11.0 上调（55 MB/10 MB → 70 MB/14 MB）：源数据从 2026-10-28 的 127,085 key /
+  294,895 行涨到 196,211 key / 382,035 行（其中 EU 只占 2,095 行），cap12 实测
+  63.9 MB raw / 13.5 MB gzip；旧预算会让脚本降级到 cap8（白删 29,600 行、只省 4.3 MB）。
+  依据 `reports/v0110-detail-buckets-eu-20261111.md`：dist 自设上限 900 MiB（943,718,400 B）
+  按上一版 880.8 MB 计，桶增量 +16.9 MB 后仍有约 46 MB 余量。
 - 桶文件格式（`v=1`）：
   `{"v":1,"t":[status...],"r":[release...],"s":[source_id...],"p":[url_prefix...],
     "k":{key:[[...],...]}}`
@@ -35,7 +49,7 @@
 
 输出
 ----
-- `data/idx/detail-<bucket>.json`（51 桶；与 build.py `_shard_bucket` 一致）；
+- `data/idx/detail-<bucket>.json`（51 桶 / 196,211 key 量级；与 build.py `_shard_bucket` 一致）；
 - `.tmp/a1-detail/stats.json`：体积/行数/桶分布/编码收益/降级记录；
 - `.tmp/a1-detail/sample_check.json`：抽样 key 的明细与 DB 对拍结果；
 - 旧 `data/idx/detail-*.json` 先清理（只删本脚本产物）。
@@ -46,25 +60,36 @@
     python etl/build_detail_buckets.py --max-rows 12   # 上限从 12 起（仍可自动降级）
     python etl/build_detail_buckets.py --no-auto-degrade
     python etl/build_detail_buckets.py --stats-only    # 只算体积，不写文件
+
+变更（v0.11.0，2026-11-11）
+--------------------------
+1. country 一律 `COALESCE(p.country, p.region)`：SELECT 列表、ORDER BY、sample_check 对拍；
+2. key 集合改为 DB 现查（不再依赖已停产的 `site/dist/data/index.json`）；
+3. 桶函数降级路径改为「源码解析 `_PINYIN_CHARS_TEXT`」，不再退到 6 个字的玩具拼音表
+   （桶划分错了会让整站「展开明细」错位，宁可报错）；
+4. cap 只数单国行：区域层行（`country` 为空、`region` 兜底，当前只有 EU）不占每 key 的
+   `max_rows` 名额，既有的单国行一条不丢（总行数 +306）；
+5. 体积预算 55 MB/10 MB → 70 MB/14 MB（理由见上）。
 """
 from __future__ import annotations
 
 import argparse
+import ast
 import gzip
 import json
 import sqlite3
 import sys
+import time
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data" / "drugs.db"
-INDEX = ROOT / "site" / "dist" / "data" / "index.json"
 OUT_DIR = ROOT / "data" / "idx"
 WORK = ROOT / ".tmp" / "a1-detail"
-RAW_BUDGET = 55_000_000    # raw ≤55 MB
-GZ_BUDGET = 10_000_000     # gzip ≤10 MB
+RAW_BUDGET = 70_000_000    # raw ≤70 MB（v0.11.0 上调；见 docstring 体积控制）
+GZ_BUDGET = 14_000_000     # gzip ≤14 MB
 DEGRADE = (12, 10, 8)
 STATUSES = ["active", "discontinued", "withdrawn", "unknown"]
 RELEASES = ["none", "IR", "ER", "SR", "DR", "MR", "GITS"]
@@ -72,33 +97,71 @@ ROW_FIELDS = ["product_id", "country", "brand", "pack", "approval_id", "status_i
               "status_date", "release_idx", "strength", "mah", "source_url_suffix",
               "source_idx"]
 _BUCKET_FN = None
+_BUILD_PY = ROOT / "site" / "build.py"
+
+
+def _bucket_from_pinyin(pinyin: dict[str, str]):
+    """按 build.py `_shard_bucket` 的规则拼桶函数（A-Z / 数字 / CJK 拼音首字母 / 其他）。"""
+    def fn(key: str) -> str:
+        ch = (key or "")[:1]
+        if not ch:
+            return "other"
+        if "a" <= ch <= "z":
+            return ch
+        if ch.isdigit():
+            return "digit"
+        if "\u3400" <= ch <= "\u9fff":
+            py = pinyin.get(ch)
+            return "cjk-" + (py[0] if py else "x")
+        return "other"
+
+    return fn
+
+
+def _pinyin_from_source(src: Path, tries: int = 3) -> dict[str, str]:
+    """不 import，直接从 build.py 源码解析 `_PINYIN_CHARS_TEXT` 字面量。
+
+    `site/build.py` 由站点工位并行改写，import 可能读到半成品；源码解析 + 重试更稳。
+    解析结果与 build.py 的 `_pinyin_dict()` 同构，因此桶划分不会漂移。
+    """
+    last: Exception | None = None
+    for i in range(tries):
+        try:
+            tree = ast.parse(src.read_text(encoding="utf-8"))
+            for node in tree.body:
+                if (isinstance(node, ast.Assign)
+                        and any(isinstance(t, ast.Name) and t.id == "_PINYIN_CHARS_TEXT"
+                                for t in node.targets)):
+                    out: dict[str, str] = {}
+                    for part in ast.literal_eval(node.value).split():
+                        ch, _, py = part.partition(":")
+                        if ch and py:
+                            out[ch] = py
+                    return out
+            raise ValueError("build.py 里找不到 _PINYIN_CHARS_TEXT 赋值")
+        except Exception as exc:  # 文件可能正被写入：短暂重试
+            last = exc
+            if i + 1 < tries:
+                time.sleep(2)
+    raise RuntimeError(f"解析 {src.name} 的拼音表失败：{last!r}")
 
 
 def load_shard_bucket():
-    """优先复用 site/build.py 的 `_shard_bucket`（保证后续 `db` 字段一致），失败降级。"""
+    """优先复用 site/build.py 的 `_shard_bucket`（保证 `db` 字段一致），否则按源码拼音表降级。"""
     try:
         sys.path.insert(0, str(ROOT / "site"))
         import build as site_build  # noqa: E402
         fn = site_build._shard_bucket
-        assert fn("lipitor") == "l" and fn("葡萄糖注射液").startswith("cjk-")
+        assert fn("lipitor") == "l" and fn("葡萄糖注射液") == "cjk-p"
+        assert fn("123") == "digit" and fn("") == "other"
         return fn, "site/build.py:_shard_bucket"
     except Exception as exc:  # pragma: no cover - build.py 并行修改/不可用时
-        print(f"! build.py 桶函数不可用（{exc!r}），降级本地实现")
-        py = {"葡": "p", "萄": "t", "糖": "t", "注": "z", "射": "s", "液": "y"}
-
-        def fn(key: str) -> str:
-            ch = (key or "")[:1]
-            if not ch:
-                return "other"
-            if "a" <= ch <= "z":
-                return ch
-            if ch.isdigit():
-                return "digit"
-            if "\u3400" <= ch <= "\u9fff":
-                return "cjk-" + py.get(ch, "x")
-            return "other"
-
-        return fn, "local fallback"
+        print(f"! build.py 桶函数不可用（{exc!r}），改用源码解析的拼音表")
+    # 桶划分错了会让站点「展开明细」整体错位，所以这里不再退到残缺的玩具拼音表，直接抛出。
+    pinyin = _pinyin_from_source(_BUILD_PY)
+    fn = _bucket_from_pinyin(pinyin)
+    assert fn("lipitor") == "l" and fn("葡萄糖注射液") == "cjk-p"
+    return fn, f"site/build.py:_PINYIN_CHARS_TEXT（源码解析 {len(pinyin)} 字）"
 
 
 def bucket_of(key: str) -> str:
@@ -106,6 +169,23 @@ def bucket_of(key: str) -> str:
 
 
 # ---------------------------------------------------------------- 只读 DB 读取
+KEY_SOURCE = ("data/drugs.db: SELECT DISTINCT key_id FROM product_name "
+              "WHERE name_type IN ('trade','inn')")
+
+
+def load_keys(conn: sqlite3.Connection) -> list[str]:
+    """参与建桶的 key 集合：与 `site/build.py` 建索引同口径（trade / inn 名的 key_id）。
+
+    v0.11.0：不再依赖 `site/dist/data/index.json`——v0.6.1 起 build.py 已不写该文件，
+    残留副本只有 127,085 个过期 k，因此 2026-10-28 之后新增的名字（含 EU 2,095 个产品）
+    在明细桶里完全没有行。改为现查 DB，桶内 key 集合随库走。
+    """
+    return [r[0] for r in conn.execute(
+        "SELECT DISTINCT key_id FROM product_name "
+        "WHERE name_type IN ('trade','inn') AND key_id IS NOT NULL AND key_id <> '' "
+        "ORDER BY key_id")]
+
+
 def load_brands(conn: sqlite3.Connection) -> dict[str, str]:
     """product_id → 第一个 trade 名（按 raw 排序取最小，结果确定）。"""
     brands: dict[str, str] = {}
@@ -140,52 +220,84 @@ def load_strengths(conn: sqlite3.Connection) -> dict[str, str]:
     return out
 
 
+def _encode_row(r: sqlite3.Row, brands: dict[str, str], strengths: dict[str, str],
+                src_idx: dict[str, int], src_names: list[str]) -> list:
+    """一条产品明细 → 12 字段紧凑数组（`s`/`p` 字典在桶级，这里只落下标）。"""
+    status = (r["status"] or "unknown").strip() or "unknown"
+    release = (r["release"] or "none").strip() or "none"
+    sid = r["source_id"] or ""
+    if sid not in src_idx:
+        src_idx[sid] = len(src_names)
+        src_names.append(sid)
+    pid = r["product_id"]
+    return [
+        pid,
+        r["country"] or "",
+        brands.get(pid, ""),
+        r["pack"] or "",
+        r["approval_id"] or "",
+        STATUSES.index(status) if status in STATUSES else 3,
+        r["status_date"] or "",
+        RELEASES.index(release) if release in RELEASES else 0,
+        strengths.get(pid, ""),
+        r["mah"] or "",
+        r["source_url"] or "",
+        src_idx[sid],
+    ]
+
+
 def build_rows(conn: sqlite3.Connection, keys: set[str], brands: dict[str, str],
                strengths: dict[str, str], max_rows: int
                ) -> tuple[dict[str, list[list]], list[str]]:
-    """key → 明细行（截断/排序/枚举编码）+ 全局 source_id 表。"""
-    rows_by_key: dict[str, list[list]] = defaultdict(list)
-    seen: dict[str, set[str]] = defaultdict(set)
+    """key → 明细行（截断/排序/枚举编码）+ 全局 source_id 表。
+
+    截断规则（v0.11.0）：沿用 v0.10.x 的「status=active 优先 → 市场名 → product_id」顺序与
+    每 key `max_rows` 上限，但 **cap 只数非区域层行**——`country` 为空、由 `region` 兜底的行
+    （当前只有 EU）一律保留、不计入名额。
+
+    为什么：2026-10-28 那批桶按「前 N 条」截断时，EU 行按市场名排在 ES 与 GB 之间，
+    要么自己被截掉（62 行），要么占掉一个名额、把排在后面的 GB/US/TW 行顶掉（244 行）。
+    「补 EU」不能以丢掉既有国家行为代价，所以 cap 只对单国行计数。结果：既有行一条不丢、
+    顺序不变，EU 2,095 行全在，306 个满 cap 的 key 各多 1 条，行数 381,729 → 382,035。
+    """
+    rows_by_key: dict[str, list[list]] = {}
     src_idx: dict[str, int] = {}
     src_names: list[str] = []
+    rows: list[list] = []
+    seen: set[str] = set()
+    n_country = 0            # 已收进来的单国行数（cap 只数这些）
+    cur_key: str | None = None
     for r in conn.execute(
-        """SELECT pn.key_id, p.product_id, p.country, p.pack, p.approval_id, p.status,
+        """SELECT pn.key_id, p.product_id, COALESCE(p.country, p.region) AS country,
+                  CASE WHEN p.country IS NULL THEN 1 ELSE 0 END AS region_layer,
+                  p.pack, p.approval_id, p.status,
                   p.status_date, p.release, p.mah, p.source_id, p.source_url
            FROM product_name pn JOIN product p ON p.product_id = pn.product_id
            WHERE pn.name_type IN ('trade','inn')
            ORDER BY pn.key_id,
                     CASE p.status WHEN 'active' THEN 0 ELSE 1 END,
-                    p.country, p.product_id"""):
+                    COALESCE(p.country, p.region), p.product_id"""):
         key = r["key_id"]
         if key not in keys:
             continue
-        rows = rows_by_key[key]
-        if len(rows) >= max_rows:
-            continue
+        if key != cur_key:
+            if cur_key is not None:
+                rows_by_key[cur_key] = rows
+            rows = []
+            seen = set()
+            n_country = 0
+            cur_key = key
         pid = r["product_id"]
-        if pid in seen[key]:
+        if pid in seen:
             continue
-        seen[key].add(pid)
-        status = (r["status"] or "unknown").strip() or "unknown"
-        release = (r["release"] or "none").strip() or "none"
-        sid = r["source_id"] or ""
-        if sid not in src_idx:
-            src_idx[sid] = len(src_names)
-            src_names.append(sid)
-        rows.append([
-            pid,
-            r["country"] or "",
-            brands.get(pid, ""),
-            r["pack"] or "",
-            r["approval_id"] or "",
-            STATUSES.index(status) if status in STATUSES else 3,
-            r["status_date"] or "",
-            RELEASES.index(release) if release in RELEASES else 0,
-            strengths.get(pid, ""),
-            r["mah"] or "",
-            r["source_url"] or "",
-            src_idx[sid],
-        ])
+        if not r["region_layer"] and n_country >= max_rows:
+            continue
+        seen.add(pid)
+        if not r["region_layer"]:
+            n_country += 1
+        rows.append(_encode_row(r, brands, strengths, src_idx, src_names))
+    if cur_key is not None:
+        rows_by_key[cur_key] = rows
     return rows_by_key, src_names
 
 
@@ -272,8 +384,8 @@ def sample_check(conn: sqlite3.Connection, rows_by_key: dict[str, list[list]],
             pid, country = row[0], row[1]
             url = payload["p"][row[11]] + row[10] if row[11] < len(payload["p"]) else row[10]
             dbrow = conn.execute(
-                "SELECT product_id, country, status, release, source_id, source_url "
-                "FROM product WHERE product_id = ?", (pid,)).fetchone()
+                "SELECT product_id, COALESCE(country, region) AS country, status, release, "
+                "source_id, source_url FROM product WHERE product_id = ?", (pid,)).fetchone()
             match = bool(dbrow and dbrow["product_id"] == pid and dbrow["country"] == country
                          and dbrow["status"] == payload["t"][row[5]]
                          and dbrow["release"] == payload["r"][row[7]]
@@ -303,15 +415,13 @@ def main(argv: list[str] | None = None) -> int:
     global _BUCKET_FN
     _BUCKET_FN, bucket_src = load_shard_bucket()
 
-    entries = json.loads(INDEX.read_text(encoding="utf-8"))
-    keys = [e["k"] for e in entries]
-    if args.limit_keys:
-        keys = keys[: args.limit_keys]
-    key_set = set(keys)
-    print(f"索引条目 {len(entries):,}；参与 key {len(keys):,}；桶函数 {bucket_src}")
-
     conn = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
+    all_keys = load_keys(conn)
+    keys = all_keys[: args.limit_keys] if args.limit_keys else all_keys
+    key_set = set(keys)
+    print(f"参与 key {len(keys):,}（DB 现查）；桶函数 {bucket_src}")
+
     brands = load_brands(conn)
     strengths = load_strengths(conn)
     print(f"品牌映射 {len(brands):,}；强度映射 {len(strengths):,}")
@@ -322,9 +432,10 @@ def main(argv: list[str] | None = None) -> int:
 
     base = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "source": "data/drugs.db (read-only) + site/dist/data/index.json k 列表",
+        "source": "data/drugs.db (read-only)；key 集合与 detail 行均现查该库",
+        "key_source": KEY_SOURCE,
         "protocol": "A1 detail buckets v1（reports/ui-a1-b6-plan.md §2）",
-        "index_entries": len(entries), "keys": len(keys), "bucket_fn": bucket_src,
+        "keys_db": len(all_keys), "keys": len(keys), "bucket_fn": bucket_src,
         "budgets": {"raw_bytes": RAW_BUDGET, "gzip_bytes": GZ_BUDGET},
         "row_fields": ROW_FIELDS,
         "format": "{v,t[],r[],s[],p[],k{key:[[..]]}}；url=p[source_idx]+url_suffix",

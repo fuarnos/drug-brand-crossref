@@ -586,7 +586,8 @@ class SearchIndex:
                         JOIN variant v2 ON v2.variant_id = pc2.variant_id
                         WHERE v2.substance_id = ?"""
         rows = self.db.execute(
-            f"""SELECT p.product_id, p.country, p.form_base, p.dosage_form, p.release,
+            f"""SELECT p.product_id, COALESCE(p.country, p.region) AS country,
+                       p.form_base, p.dosage_form, p.release,
                        p.status, pc.ord, pc.strength_value, pc.strength_unit,
                        pc.per_volume_value, pc.per_volume_unit,
                        v.substance_id, s.inn_en
@@ -741,8 +742,8 @@ class SearchIndex:
         marks = ",".join("?" * len(key_ids))
         status_marks = ",".join("?" * len(include_status))
         rows = self.db.execute(
-            f"""SELECT pn.key_id, p.product_id, p.country, p.dosage_form, p.form_base,
-                       p.release, p.status
+            f"""SELECT pn.key_id, p.product_id, COALESCE(p.country, p.region) AS country,
+                       p.dosage_form, p.form_base, p.release, p.status
                 FROM product_name pn
                 JOIN product p ON p.product_id = pn.product_id
                 WHERE pn.key_id IN ({marks}) AND p.status IN ({status_marks})""",
@@ -1016,7 +1017,7 @@ class SearchIndex:
         if not key:
             return None
         rows = self.db.execute(
-            """SELECT p.country, p.dosage_form, p.status, p.mah,
+            """SELECT COALESCE(p.country, p.region) AS country, p.dosage_form, p.status, p.mah,
                       pc.strength_value, pc.strength_unit,
                       pc.per_volume_value, pc.per_volume_unit,
                       s.substance_id, s.inn_en, v.salt
@@ -1077,14 +1078,15 @@ class SearchIndex:
         if not sub:
             return None
         rows = self.db.execute(
-            """SELECT p.product_id, p.country, p.dosage_form, p.release, p.status,
+            """SELECT p.product_id, COALESCE(p.country, p.region) AS country,
+                      p.dosage_form, p.release, p.status,
                       p.mah, pc.strength_value, pc.strength_unit,
                       pc.per_volume_value, pc.per_volume_unit
                FROM product p
                JOIN product_component pc ON pc.product_id = p.product_id
                JOIN variant v ON v.variant_id = pc.variant_id
                WHERE v.substance_id = ?
-               ORDER BY p.country, pc.strength_value""",
+               ORDER BY COALESCE(p.country, p.region), pc.strength_value""",
             (substance_id,),
         ).fetchall()
         names: dict[str, list[str]] = {}

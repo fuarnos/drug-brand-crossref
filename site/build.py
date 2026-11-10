@@ -3522,6 +3522,13 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .matrix-hidden-rows .sub{margin:0 0 6px}
 table.matrix tr[data-hide-empty="1"]{display:none}
 .matrix-hk-note{margin:4px 0 0;font-size:14px;color:var(--warn)}
+/* v0.11.0 P1：EU 区域层的口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装）。
+   与 .matrix-hk-note 同一档字号（14px，≥ 辅助 13px 底线），不新起一套字号。 */
+.matrix-region-note,.mkregion{margin:4px 0 0;font-size:14px;line-height:1.55;
+  color:var(--muted);max-width:var(--prose)}
+.matrix-region-note{color:var(--warn)}
+.mkregion{margin:0 0 10px}
+.mkregion b{color:var(--fg);font-weight:600}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;
   background:var(--surface-2);padding:10px 12px}
@@ -4126,7 +4133,7 @@ function rowReportURL(e){
 }
 function detBucketOf(e){ return (e && e.db) ? e.db : 'other'; }
 function loadDetailBucket(bucket){
-  // 懒加载：只在用户点「详情」时拉一个桶（最大 ~4 MB raw / ~0.9 MB gzip），并缓存。
+  // 懒加载：只在用户点「详情」时拉一个桶（v0.11.0 实测最大 detail-a.json ~5.7 MB raw / ~1.2 MB gzip），并缓存。
   if(DET_CACHE.has(bucket)) return Promise.resolve(DET_CACHE.get(bucket));
   return fetchManifest().catch(()=>null).then(m => {
     const ver = (m && m.v) ? '?v=' + m.v : '';
@@ -8186,7 +8193,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         ))
         shown = spec_rows[:MATRIX_ROW_CAP]
         head = (f'<th data-i18n="matrix.spec">{esc(T["matrix.spec"])}</th>'
-                + "".join(f'<th data-country="{esc(c)}"{_defcol_attr(c)}>'
+                + "".join(f'<th data-country="{esc(c)}"{_defcol_attr(c)}'
+                          f'{EU_TH_ATTR if c == "EU" else ""}>'
                           f'{esc(c)}</th>'
                           for c in countries))
         tbody = []
@@ -8291,6 +8299,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                            'Australia ARTG data has no registration-status column, so status is '
                            'shown as unknown; being on the register does not mean currently '
                            'marketed.</p>')
+            # v0.11.0 P1：矩阵里 EU 那一列不是国家列，是欧盟集中审批层（无规格/剂型/包装）。
+            eu_note = _eu_region_note("sub matrix-region-note") if "EU" in countries else ""
             matrix_html = ('<div class="mf-slot" id="filters"></div>'
                            '<div class="matwrap"><table class="matrix"><thead><tr>'
                            + head + "</tr></thead><tbody>" + "".join(tbody)
@@ -8301,7 +8311,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                              'Each country column shows the locally registered trade names — '
                              'not translations.</p>'
                            + hidden_rows_html + undisclosed_note
-                           + hk_note + au_note + capped_blocks)
+                           + hk_note + au_note + eu_note + capped_blocks)
         else:
             matrix_html = ('<p class="empty" data-i18n="drug.empty">'
                            'No products recorded yet.</p>')
@@ -8718,6 +8728,30 @@ def _form_chip_key(form: str) -> str:
 
 LIST_ROWS_PER_BLOCK = 12      # 每国家块默认渲染的规格行数（其余一行文本）
 
+# v0.11.0 P1：EU 是「区域层」而不是国家 —— 列头 / 块头都要能读出「欧盟集中审批（EMA）」，
+# 不能只留两个字母。文案本体在 i18n 字典（eu.region_title / eu.region_note，四语齐），
+# 这里只补一个无障碍标签；可见说明由 _eu_region_note() 负责。
+EU_TH_ATTR = ' data-i18n-aria="eu.region_title"'
+
+
+def _eu_region_note(cls: str = "mkregion") -> str:
+    """EU 区域层的口径说明（成分页 EU 市场块 / 矩阵 EU 列下方共用一份）。
+
+    语义要点（照 v0.11.0 数据纪律，不许改写成用药建议）：
+    ① 这是**欧盟集中审批**（EMA / EC Union Register），不是某个国家的上市记录；
+    ② 授权有效 ≠ 在某国在售；
+    ③ EU 层**不含规格 / 剂型 / 包装**，所以 EU 列/行里没有规格可读。
+
+    英文写在 HTML 里作服务端兜底（无 JS 也能读），其余三语由 i18n.js 按 `?lang=` 切换。
+    """
+    T = I18N["en"]
+    return (f'<p class="{cls}"><b data-i18n="eu.region_title">'
+            + esc(T.get("eu.region_title", "EU centralised authorisation (EMA)"))
+            + '</b> — <span data-i18n="eu.region_note">'
+            + esc(T.get("eu.region_note", ""))
+            + "</span></p>")
+
+
 def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[str, int],
                     n_specs: int, name_bit, status_cell: dict[tuple, set[str]],
                     T: dict) -> tuple[str, float]:
@@ -8838,11 +8872,15 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             undis_html = (f'<p class="mkundis"><b><span data-i18n="drug.undisclosed_block">'
                           f'Records without a stated strength</span> · {len(undisclosed)}</b> '
                           + " ".join(ubits) + '</p>')
+        # v0.11.0 P1：EU 块头给一句口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装），
+        # 否则用户只看到「EU」两个字（reports/v0110-verify-20261111.md §3.3）。
+        region_html = _eu_region_note("mkregion") if c == "EU" else ""
         blocks.append(
             f'<section class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}">'
             f'<h3>{esc(c)} <span class="sub">{rec_by_country.get(c, 0):,} '
             f'<span data-i18n="drug.records">records</span> · {len(rows_c)} '
             f'<span data-i18n="drug.specs">strengths</span></span></h3>'
+            f'{region_html}'
             f'<ul class="mkspecs">{"".join(lis)}</ul>{rest_html}{undis_html}</section>')
     return chip_html + '<div class="mkblocks">' + "".join(blocks) + "</div>", multi_ratio
 

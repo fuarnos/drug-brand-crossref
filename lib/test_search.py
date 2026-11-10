@@ -28,6 +28,8 @@ SUBS = [
     ("acrivastine", "Acrivastine", "阿伐斯汀"),
     ("pseudoephedrine", "Pseudoephedrine", "伪麻黄碱"),
     ("metformin", "Metformin", "二甲双胍"),
+    # v0.11.0：EU 区域层回归用（同一商品名同时有国别行和区域层行）
+    ("denosumab", "Denosumab", "地舒单抗"),
 ]
 
 # (pid, country, brand, form, base, release, [(sub, strength, unit)])
@@ -48,7 +50,42 @@ PRODUCTS = [
      [("acrivastine", 8.0, "mg")]),
     ("CN-glucophage", "CN", "格华止", "tablet", "tablet", "none",
      [("metformin", 500.0, "mg")]),
+    ("US-prolia", "US", "Prolia", "injection, solution", "injection", "none",
+     [("denosumab", 60.0, "mg")]),
 ]
+
+# 区域层（EU=EMA 集中审批）产品：schema 要求 country IS NULL + region='EU'（二选一）。
+# 刻意只给 region —— 检索层任何未做 COALESCE(p.country, p.region) 的取数都会拿到 None，
+# 下面的 EU 回归测试因此会在「裸 p.country」实现下失败（这正是它要锁住的行为）。
+# (pid, brand, form, base, release, [(sub, strength, unit)])
+EU_PRODUCTS = [
+    ("EU-prolia", "Prolia", "injection, solution", "injection", "none",
+     [("denosumab", 60.0, "mg")]),
+]
+
+
+def insert_product(db: sqlite3.Connection, pid: str, brand: str, form: str, base: str,
+                   rel: str, comps: list[tuple[str, float, str]], *,
+                   country: str | None = None, region: str | None = None,
+                   route: str = "oral") -> None:
+    """写一行产品（country / region 二选一）、它的成分和商品名。"""
+    db.execute(
+        "INSERT INTO product (product_id, country, region, dosage_form, form_base, route,"
+        " release, is_branded, status, source_id, retrieved_at)"
+        " VALUES (?,?,?,?,?,?,?,1,'active','test','2026-01-01')",
+        (pid, country, region, form, base, route, rel))
+    for i, (sub, val, unit) in enumerate(comps):
+        db.execute(
+            "INSERT INTO product_component (product_id, ord, variant_id,"
+            " strength_value, strength_unit) VALUES (?,?,?,?,?)",
+            (pid, i, sub, val, unit))
+    n = normalize(brand)
+    db.execute("INSERT OR IGNORE INTO name_key (key_id, norm, compact, script)"
+               " VALUES (?,?,?,?)", (n.norm, n.norm, n.compact, n.script))
+    db.execute("INSERT OR IGNORE INTO name_variant (key_id, raw, source_id)"
+               " VALUES (?,?, 'test')", (n.norm, brand))
+    db.execute("INSERT INTO product_name (product_id, key_id, name_type, is_primary)"
+               " VALUES (?,?, 'trade', 1)", (pid, n.norm))
 
 
 def build_fixture(path: Path) -> None:
@@ -62,23 +99,11 @@ def build_fixture(path: Path) -> None:
         db.execute("INSERT INTO variant (variant_id, substance_id) VALUES (?,?)", (sid, sid))
 
     for pid, country, brand, form, base, rel, comps in PRODUCTS:
-        db.execute(
-            "INSERT INTO product (product_id, country, dosage_form, form_base, route,"
-            " release, is_branded, status, source_id, retrieved_at)"
-            " VALUES (?,?,?,?,?,?,1,'active','test','2026-01-01')",
-            (pid, country, form, base, "oral", rel))
-        for i, (sub, val, unit) in enumerate(comps):
-            db.execute(
-                "INSERT INTO product_component (product_id, ord, variant_id,"
-                " strength_value, strength_unit) VALUES (?,?,?,?,?)",
-                (pid, i, sub, val, unit))
-        n = normalize(brand)
-        db.execute("INSERT OR IGNORE INTO name_key (key_id, norm, compact, script)"
-                   " VALUES (?,?,?,?)", (n.norm, n.norm, n.compact, n.script))
-        db.execute("INSERT OR IGNORE INTO name_variant (key_id, raw, source_id)"
-                   " VALUES (?,?, 'test')", (n.norm, brand))
-        db.execute("INSERT INTO product_name (product_id, key_id, name_type, is_primary)"
-                   " VALUES (?,?, 'trade', 1)", (pid, n.norm))
+        insert_product(db, pid, brand, form, base, rel, comps, country=country)
+    # 区域层行：country 保持 NULL，只给 region（见上面 EU_PRODUCTS 的注释）。
+    for pid, brand, form, base, rel, comps in EU_PRODUCTS:
+        insert_product(db, pid, brand, form, base, rel, comps, region="EU",
+                       route="subcutaneous")
 
     db.execute("INSERT INTO brand_family (family_id, label, note)"
                " VALUES ('tylenol','Tylenol / 泰诺','美国单方、中国复方')")
@@ -252,6 +277,32 @@ class SearchTests(unittest.TestCase):
 
     def test_unknown_substance(self):
         self.assertIsNone(self.idx.drug_page("nope"))
+
+    # --- 区域层（EU=EMA）country 归一化：v0.11.0 P0 回归 -------------------
+    # 夹具里 EU-prolia 只写 region='EU'、country 为 NULL（schema 二选一）。
+    # 若 lib/search.py 的取数退回裸 `p.country`，卡片 country 会变成 None：
+    # 第一条测试直接失败；name_page / drug_page 还会在 sorted(None, 'US') 上抛 TypeError。
+    def test_eu_region_card_country_is_eu(self):
+        res = self.idx.search("Prolia")
+        self.assertTrue(res.cards)
+        self.assertEqual([c for c in res.cards if c.country is None], [],
+                         "EU 区域层卡片的 country 不能是 None")
+        self.assertIn("EU", {c.country for c in res.cards})
+        # 国家过滤也要能吃区域层：裸 p.country 实现下这里恒 0 条，还回「在 EU 没有收录」的假阴性
+        res_eu = self.idx.search("Prolia", country="EU")
+        self.assertTrue(res_eu.cards)
+        self.assertEqual({c.country for c in res_eu.cards}, {"EU"})
+
+    def test_eu_region_pages_sort_eu_with_country(self):
+        # 原 bug 崩溃点：sorted({c.country ...}) / sorted(s["countries"]) 里 None 与 'US' 比较
+        page = self.idx.name_page("prolia")
+        self.assertIsNotNone(page)
+        self.assertEqual(sorted(page["countries"]), ["EU", "US"])
+        self.assertEqual(page["substances"][0]["countries"], ["EU", "US"])
+        drug = self.idx.drug_page("denosumab")
+        self.assertIsNotNone(drug)
+        self.assertIn("EU", drug["by_country"])
+        self.assertNotIn(None, drug["by_country"])
 
 
 if __name__ == "__main__":
