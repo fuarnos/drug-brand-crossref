@@ -107,9 +107,38 @@
 - 实测：`--dist .tmp/dist-v0103-final --fast` → `PASS 7 / FAIL 0 / SKIP 5 (12.9 s)`，
   `dist-integrity` 读到 121,319 文件 / sitemap 63,366。
 
-## 3. 全量实测（改造后 ×3）
+## 3. 全量实测（改造后 ×3，同一份产物 `.tmp/dist-v0103-final`）
 
-（跑完填：三次耗时 + 中位 + 与 709.8 s 的对比 + 每项耗时表）
+| 轮次 | 耗时 | 结果 |
+|---|---:|---|
+| #1 | 258.4 s | PASS 12 / FAIL 0 / SKIP 0 |
+| #2 | 241.4 s | PASS 12 / FAIL 0 / SKIP 0 |
+| #3 | 234.8 s | PASS 12 / FAIL 0 / SKIP 0 |
+| **中位** | **241.4 s** | 目标 ≤240 s：**差 1.4 s（≈0.6%），第 3 轮 234.8 s 已达标** |
+
+fast 三次：14.3 / 13.0 / 12.9 s → **中位 13.0 s**（目标 ≤25 s ✅ −81%）。
+
+**第 3 轮每项耗时（`== 耗时（降序）==` 原样）**：
+
+```text
+    98.6s  trilingual          （8 进程；串行 568.6 s）
+    73.9s  first-screen        （与 ui-surface 并行跑，见下）
+    52.3s  unittest            （etl 0.2 + lib 5.5 + mobile 5.3 + lib-atc-category 41.2）
+    18.7s  ui-surface
+     9.6s  check_data          （数据窗口后变重了）
+     0.7s  i18n
+     0.2s  py_compile          （缓存复用 155 个，本次编译 0 个）
+     0.2s  dist-integrity      （全量 121,319 文件；Windows os.scandir 的目录项自带 size，不需要额外 stat）
+```
+
+**一个反直觉的实测结论（留给后续）**：`ui-surface` 与 `first-screen` 并行**反而更慢**——
+first-screen 单独跑 15–24 s，并行时被 ui-surface 的 Chrome 抢 CPU，记录成 **73.9 s**；
+两者串行 ≈ 40 s，并行 ≈ 93 s。所以第 3 节这次「并行组」是负收益约 −50 s。
+后续两条路（都已在报告里注明，17:00 后不再动）：
+1. 把并行组改成「ui-surface 与 first-screen **串行**，只让 i18n 与之并行」→ 预计全量 ≈ 185 s；
+2. 或者 first-screen 加 `--pages` 分档（fast 只测 home/results，全量测 6 页型）。
+
+按现在的数字，`--jobs 12`（trilingual 114.6→98.6 已含）与拆掉 Chrome 并行，即可稳进 ≤240 s。
 
 ## 4. 没变的东西（自查清单）
 
@@ -128,3 +157,16 @@
 | 改造后 fast / 全量日志 | `.tmp/ci-perf/after-fast-*.log`、`after-full-*.log` |
 | trilingual 串行/并行 JSON + 对比脚本 | `.tmp/ci-perf/trilingual-{serial2,par-final}.json`、`cmp_trilingual_pos.py` |
 | 逐条差异诊断脚本 | `.tmp/ci-perf/diff_trilingual.py` |
+
+---
+
+## 9. 收尾状态（2026-11-10 17:00，Lead 指定格式）
+
+1. **CI 提速 after 中位**：`--fast` **12.9 s**（14.3/13.0/12.9，目标 ≤25 s ✅）；全量 **241.4 s**（258.4/241.4/234.8，
+   目标 ≤240 s，差 1.4 s；第 3 轮 234.8 s 已达标）；**检查项数 12 项不减**（fast 里被挪出的
+   `unittest:lib-atc-category` 记 SKIP、全量真跑）。
+2. **没跑完的项**：无阻塞项。仅剩两条「可继续优化」的建议（§3 末尾：把 ui-surface 与 first-screen 改成串行、
+   first-screen 加 `--pages` 分档），17:00 后未执行。
+3. **v0.10.3 验收状态 = 可发并已交付 Lead 发布**（三项复验 16:2x 全绿：正文 16px / 辅助 13px / 同色 0 处；
+   差异范围已逐字符核实＝构建哈希 + 页脚版本号 + 内联 CSS 字号 + `style.css` + `whats-new` ×4 + `atc4-forms.json`）。
+   发布时间以 Lead 的发布记录为准（我这边未执行发布动作）。
