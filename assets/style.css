@@ -475,6 +475,13 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .matrix-hidden-rows .sub{margin:0 0 6px}
 table.matrix tr[data-hide-empty="1"]{display:none}
 .matrix-hk-note{margin:4px 0 0;font-size:14px;color:var(--warn)}
+/* v0.11.0 P1：EU 区域层的口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装）。
+   与 .matrix-hk-note 同一档字号（14px，≥ 辅助 13px 底线），不新起一套字号。 */
+.matrix-region-note,.mkregion{margin:4px 0 0;font-size:14px;line-height:1.55;
+  color:var(--muted);max-width:var(--prose)}
+.matrix-region-note{color:var(--warn)}
+.mkregion{margin:0 0 10px}
+.mkregion b{color:var(--fg);font-weight:600}
 /* v0.8.3 task-119：矩阵筛选器 */
 .matrix-filters{margin:10px 0 6px;border:1px solid var(--line);border-radius:12px;
   background:var(--surface-2);padding:10px 12px}

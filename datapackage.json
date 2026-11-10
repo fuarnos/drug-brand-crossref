@@ -3,8 +3,8 @@
   "name": "drug-brand-crossref-derived",
   "title": "Medicine Brand Cross-Reference — derived data package",
   "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
-  "version": "v0.10.3",
-  "created": "2026-11-10T00:00:00Z",
+  "version": "v0.11.0",
+  "created": "2026-11-11T00:00:00Z",
   "homepage": "https://fuarnos.github.io/drug-brand-crossref/",
   "licenses": [
     {
@@ -187,6 +187,30 @@
       "data_as_of": "2026-10-19",
       "countries": [
         "GB"
+      ],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "ema_medicines",
+      "name": "European Medicines Agency — Medicines data (JSON)",
+      "url": "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format",
+      "license": "© European Medicines Agency; re-use permitted with acknowledgement (EMA legal notice)",
+      "license_url": "https://www.ema.europa.eu/en/about-us/about-website/legal-notice",
+      "data_as_of": "2026-11-06",
+      "countries": [],
+      "redistributable": true,
+      "note": ""
+    },
+    {
+      "id": "eu_union_register",
+      "name": "European Commission — Union Register of medicinal products",
+      "url": "https://ec.europa.eu/health/documents/community-register/html/index_en.htm",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "data_as_of": "2026-11-03",
+      "countries": [
+        "EU"
       ],
       "redistributable": true,
       "note": ""
@@ -484,9 +508,9 @@
       "path": "data/exports/coverage.csv",
       "format": "csv",
       "mediatype": "text/csv",
-      "bytes": 383,
-      "hash": "sha256:af87fb2365230730ca20ee558e0f640fc01b38512d83acd1db0ca4a16966aa1d",
-      "count": 10,
+      "bytes": 413,
+      "hash": "sha256:3cffc9111d9733710681cdbf283cb4d3f6cc408f2f8b05b2be71e78f996ce230",
+      "count": 11,
       "schema": {
         "fields": [
           {
@@ -519,9 +543,9 @@
       "path": "data/exports/market-summary.csv",
       "format": "csv",
       "mediatype": "text/csv",
-      "bytes": 249,
-      "hash": "sha256:a3afa57668816f7573a7e626f4a3b010a908a878ad5a47dc8b81ff29bffb9ee7",
-      "count": 10,
+      "bytes": 268,
+      "hash": "sha256:27a335d6352a26a91aac43775e3cdbe9460a637d2802d0cb9afa14365357c240",
+      "count": 11,
       "schema": {
         "fields": [
           {
@@ -550,9 +574,9 @@
       "path": "data/exports/name-summary.csv",
       "format": "csv",
       "mediatype": "text/csv",
-      "bytes": 265,
-      "hash": "sha256:f74f88ead003406fc2072ca5b88bac883e8f14adbf85ab64bf4eb592c6bec20a",
-      "count": 16,
+      "bytes": 280,
+      "hash": "sha256:7d2f76255fc6f66610ad20bb38d20da51307f79429b5ca907482a414875b72d4",
+      "count": 17,
       "schema": {
         "fields": [
           {
@@ -607,9 +631,9 @@
     }
   ],
   "counts": {
-    "products": 477098,
+    "products": 479193,
     "substances": 12637,
-    "name_keys": 202092,
-    "markets": 10
+    "name_keys": 202739,
+    "markets": 11
   }
 }

@@ -7,8 +7,8 @@ el.hidden = false;                       // 无 JS 时保持 hidden：折叠区�
 var code = el.getAttribute('data-atc4');
 var body = el.querySelector('.atc4-body');
 var prefix = window.DSH_PREFIX || '';
-var url = prefix + 'data/idx/atc4-forms.json?v=4059119559';
-var ORDER = ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK'];
+var url = prefix + 'data/idx/atc4-forms.json?v=0600034174';
+var ORDER = ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','EU'];
 function T(k, d){
   var t = window.T;
   if(!t) return d;
