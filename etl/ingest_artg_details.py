@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
-from ingest_openfda_ndc import form_base_of, slug  # noqa: E402
+from ingest_openfda_ndc import form_base_of, release_of, slug  # noqa: E402
 from ingest_pbs import EXTRA_ALIASES  # noqa: E402
 from ingest_dmd import ALIASES  # noqa: E402
 from normalize_name import normalize  # noqa: E402
@@ -155,7 +155,8 @@ def main() -> None:
             " status_date, source_id, source_url, retrieved_at, note)"
             " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (pid, "AU", (r.get("dosage_form") or "not stated")[:120],
-             form_base_of(r.get("dosage_form") or ""), r.get("route") or None, "none",
+             form_base_of(r.get("dosage_form") or ""), r.get("route") or None,
+             release_of(r.get("dosage_form") or ""),
              None, r.get("sponsor"), r["artg_id"], r.get("approval_area"), 1, status,
              TODAY, SOURCE_ID,
              "https://www.ebs.tga.gov.au/ebs/ANZTPAR/PublicWeb.nsf/Medicines?openview",

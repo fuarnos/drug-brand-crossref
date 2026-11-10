@@ -34,6 +34,7 @@ import json
 import sqlite3
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -42,6 +43,9 @@ sys.path.insert(0, str(ROOT))
 import lib.search as search_mod  # noqa: E402
 
 DB = ROOT / "data" / "drugs.db"
+
+# 子进程里的 SearchIndex（由 _worker_init 建；主进程不用）
+_WORKER_IDX = None
 
 # 只读：把 sqlite3.connect 拦成 URI mode=ro（SearchIndex 只做 SELECT）
 _REAL_CONNECT = sqlite3.connect
@@ -407,10 +411,61 @@ def run_case(idx, case):
     return out
 
 
+def _print_case(r: dict, quiet: bool) -> None:
+    """按案例打印一行（串行/并行共用；输出格式与提速前逐字一致）。"""
+    if quiet:
+        return
+    s = r["summary"]
+    mark = "PASS" if s["case_pass_same_substance"] else "FAIL"
+    print("[%s] %-22s %-6s 查询 %d/%d 命中Top5, Top1 %d/%d  %s" % (
+        mark, r["sid"], r["cat"], s["queries_hit_top5"], s["queries"],
+        s["queries_hit_top1"], s["queries"], "跨国✓" if s["cross_market_ok"] else "跨国✗"))
+    if not s["case_pass_same_substance"]:
+        for lang in s["langs_queried"]:
+            lv = r["langs"][lang]
+            if lv["resolved"]:
+                continue
+            fails = [x for x in lv["rows"] if x["rank"] is None]
+            for f in fails:
+                print("       %s %-30r cards=%d top1=%s note=%s" % (
+                    lang, f["query"], f["n_cards"], f["top1"], f["note"]))
+
+
+def _worker_init() -> None:
+    """子进程初始化：拦成只读连接 + 建自己的 SearchIndex（每进程一次）。"""
+    sqlite3.connect = _ro_connect
+    global _WORKER_IDX
+    _WORKER_IDX = search_mod.SearchIndex(DB)
+
+
+def _worker_run(case: dict) -> dict:
+    """在子进程里跑一个案例（返回值必须可 pickle：纯 dict）。"""
+    return run_case(_WORKER_IDX, case)
+
+
+def _run_parallel(cases: list[dict], jobs: int, quiet: bool) -> list[dict]:
+    """多进程跑案例（8 进程实测约 7–8 倍；线程版被 GIL 卡住，已弃用）。
+
+    每个子进程一条只读 SQLite 连接 + 自己的 SearchIndex（202k 行 name_key，约 1–2 s 装载）。
+    确定性：按 future 提交顺序取结果 → 输出顺序、汇总与串行逐字一致。
+    """
+    results: list[dict] = []
+    with ProcessPoolExecutor(max_workers=max(1, jobs),
+                             initializer=_worker_init) as ex:
+        futures = [ex.submit(_worker_run, c) for c in cases]
+        for fut in futures:
+            r = fut.result()
+            results.append(r)
+            _print_case(r, quiet)
+    return results
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", default=str(ROOT / ".tmp" / "trilingual" / "results.json"))
     ap.add_argument("--only", default="", help="逗号分隔的 sid 过滤")
+    ap.add_argument("--jobs", type=int, default=1,
+                    help="并行进程数（默认 1 = 串行；8 进程约快 7–8 倍，结果逐条一致）")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -418,32 +473,25 @@ def main() -> int:
         print(f"FATAL: DB 不存在: {DB}", file=sys.stderr)
         return 2
     sqlite3.connect = _ro_connect
-    idx = search_mod.SearchIndex(DB)
+    # 并行模式不建主线程索引：每个 worker 自建一条只读连接（省一次 20 万行装载）
+    idx = search_mod.SearchIndex(DB) if args.jobs <= 1 else None
 
     only = {s.strip() for s in args.only.split(",") if s.strip()}
     cases = [c for c in CASES if not only or c["sid"] in only]
 
     results = []
     t_start = time.time()
-    for case in cases:
-        r = run_case(idx, case)
-        results.append(r)
-        if not args.quiet:
-            s = r["summary"]
-            mark = "PASS" if s["case_pass_same_substance"] else "FAIL"
-            print("[%s] %-22s %-6s 查询 %d/%d 命中Top5, Top1 %d/%d  %s" % (
-                mark, r["sid"], r["cat"], s["queries_hit_top5"], s["queries"],
-                s["queries_hit_top1"], s["queries"], "跨国✓" if s["cross_market_ok"] else "跨国✗"))
-            if not s["case_pass_same_substance"]:
-                for lang in s["langs_queried"]:
-                    lv = r["langs"][lang]
-                    if lv["resolved"]:
-                        continue
-                    fails = [x for x in lv["rows"] if x["rank"] is None]
-                    for f in fails:
-                        print("       %s %-30r cards=%d top1=%s note=%s" % (
-                            lang, f["query"], f["n_cards"], f["top1"], f["note"]))
-    idx.close()
+    if args.jobs <= 1 or len(cases) <= 1:
+        # 串行路径：与提速前逐字一致（--jobs 1 用来做「逐条结果」对照基准）
+        for case in cases:
+            r = run_case(idx, case)
+            results.append(r)
+            _print_case(r, args.quiet)
+        idx.close()
+    else:
+        results = _run_parallel(cases, args.jobs, args.quiet)
+        if idx is not None:   # 并行模式下主线程不建索引
+            idx.close()
     dt = time.time() - t_start
 
     total_queries = sum(r["summary"]["queries"] for r in results)
@@ -485,7 +533,7 @@ def main() -> int:
 
     out = {"meta": {"db": str(DB), "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
                     "search_module": str(Path(search_mod.__file__).relative_to(ROOT)),
-                    "readonly": True}, "summary": summary, "results": results}
+                    "jobs": args.jobs, "readonly": True}, "summary": summary, "results": results}
     Path(args.json).parent.mkdir(parents=True, exist_ok=True)
     Path(args.json).write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
 

@@ -40,10 +40,11 @@ DEFAULT_DB = ROOT / "data" / "drugs.db"
 WORK = ROOT / ".tmp" / "cn-cleanup"
 DEFAULT_RUN_ID = "cn-cleanup-v1"
 
-# canonical 剂型（audit 的 11 值 + build.py LABEL_I18N 支持的 pellet/stick/kit/gas）
+# canonical 剂型（audit 的 11 值 + build.py LABEL_I18N 支持的 pellet/stick/kit/gas
+# + 2026-11-10 新增的 effervescent）
 CANON_FORMS = {"tablet", "capsule", "injection", "topical", "powder", "liquid",
                "suppository", "inhalation", "pill", "other", "unknown",
-               "pellet", "stick", "kit", "gas"}
+               "pellet", "stick", "kit", "gas", "effervescent"}
 
 FORM_MAP = {
     "灌肠剂": "liquid", "体外诊断试剂": "other", "缓释制剂": "unknown",

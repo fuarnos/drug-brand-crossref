@@ -103,7 +103,10 @@ FAMILIES: tuple[Family, ...] = (
         gap=frozenset({"other", "device"}), target="implant"),
     Family("effervescent", "effervescent", "泡腾（片/颗粒）", _pat(
         r"effervescen", r"efervescen", r"泡腾", r"泡騰", r"發泡", r"发泡", r"fizzy"),
-        ok=frozenset(), coarse=frozenset(), gap=frozenset({"powder"}),
+        # 2026-11-10：`effervescent` 成为正式取值（etl/ingest_openfda_ndc.py 的 FORM_BASES），
+        # 这一族从「子类缺失（gap/conflict）」变成 ok；残留的 `powder` 仍按 gap 解释
+        # （泡腾颗粒的粗粒度）。改后跑这一族应 conflict 0 / gap 0。
+        ok=frozenset({"effervescent"}), coarse=frozenset(), gap=frozenset({"powder"}),
         target="effervescent"),
     Family("chewable", "chewable", "咀嚼（片/胶）", _pat(
         r"chewable", r"chewing", r"咀嚼", r"口嚼", r"medicated chewing",
@@ -247,7 +250,7 @@ PLACEHOLDER_BASES = frozenset({"", "unknown", "other", "n/a", "na", "-", "/", "-
                                "\\", "none", "not stated", "不适用", "null"})
 
 CANON_BASES = ("tablet", "capsule", "liquid", "injection", "topical", "inhalation",
-               "suppository", "powder")
+               "suppository", "powder", "effervescent")
 
 RE_DIGIT = re.compile(r"\d")
 

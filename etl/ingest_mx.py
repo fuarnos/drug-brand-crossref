@@ -37,6 +37,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
 from normalize_name import normalize  # noqa: E402
+from ingest_openfda_ndc import form_base_of  # noqa: E402  兜底用共享规则（单值词表 / other）
 
 RAW = ROOT / "data" / "raw" / "mx"
 DB = ROOT / "data" / "drugs.db"
@@ -66,6 +67,7 @@ def key(s: str) -> str:
 
 # --- 剂型：西语 → form_base ------------------------------------------------
 FORM_BASES = (
+    ("effervescent", ("efervesc", "effervesc", "泡腾", "泡騰", "發泡", "发泡", "fizzy")),
     ("tablet", ("tableta", "comprimido", "gragea", "caplet", "pastilla")),
     ("capsule", ("capsula", "cap ") ),
     ("injection", ("inyectable", "inyeccion", "ampolleta", "infusion", "intravenosa",
@@ -85,11 +87,13 @@ def form_base_es(form: str) -> str:
     for base, keys in FORM_BASES:
         if any(k in f for k in keys):
             return base
-    return f or "unknown"
+    # 兜底交给共享规则：能认出的单值剂型名原样保留，认不出的整串原文一律 other
+    # （不再把 `chicle` / `perlas` 这种原文塞进 form_base）
+    return form_base_of(f)
 
 
 # 固体制剂：放宽浓度匹配时只对这几类生效（mg 与 mg/ml 不可比）
-SOLID_BASES = {"tablet", "capsule", "powder"}
+SOLID_BASES = {"tablet", "capsule", "powder", "effervescent"}
 
 
 def release_es(form: str) -> str:

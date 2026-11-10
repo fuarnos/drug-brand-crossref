@@ -375,9 +375,12 @@ def split_ingredients(raw: str) -> list[str]:
 
 
 FORM_MAP: tuple[tuple[str, tuple[str, ...]], ...] = (
+    # 泡腾必须排第一：`發泡錠` 含「錠」、`發泡顆粒劑` 含「顆粒」，排在 tablet/powder 之后
+    # 就永远改不出来（TW 28 行，见 reports/form-effervescent-20261110.md §1.3）
+    ("effervescent", ("發泡", "发泡", "泡騰", "泡腾", "fizzy")),
     ("tablet", ("口溶膜", "錠", "片")),
     ("capsule", ("膠囊", "胶囊")),
-    ("injection", ("注射", "輸液", "输液", "點滴")),
+    ("injection", ("注射", "輸液", "输液", "點滴", "靜脈", "静脉", "輸注", "输注")),
     ("inhalation", ("吸入", "噴霧", "喷雾", "吸入劑")),
     ("suppository", ("栓", "灌腸", "灌肠", "浣腸")),
     ("topical", ("軟膏", "软膏", "乳膏", "凝膠", "凝胶", "貼", "贴", "藥膠布",

@@ -1302,6 +1302,8 @@ RE_NUM = re.compile(r"[\d]+(?:[.,]\d+)?")
 # 剂型中→英：先翻成英文剂型词，再交给 ingest_openfda_ndc.form_base_of 归一化，
 # 这样 form_base 与 US/GB 的 tablet / injection 等取值是同一套。
 FORM_ZH_EN = [
+    # 泡腾先于「片/顆粒」：`片剂(泡腾)`、`颗粒剂(泡腾)` 里「片」「颗粒」会先命中
+    ("泡腾", "effervescent"), ("泡騰", "effervescent"),
     ("注射用", "injection"), ("注射", "injection"), ("输液", "injection"),
     ("滴眼", "drops"), ("滴耳", "drops"), ("滴鼻", "drops"), ("眼用", "drops"),
     ("片", "tablet"), ("丸", "pill"), ("胶囊", "capsule"), ("颗粒", "granule"),

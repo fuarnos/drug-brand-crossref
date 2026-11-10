@@ -1116,6 +1116,17 @@ UI_I18N = {
         "brand.mah": "Manufacturer:",
         "brand.mah_note": ("This product has no registered trade name; the market "
                            "authorisation holder is shown instead."),
+        # v0.10.3 task-16：成分页按国家分组清单
+        "drug.forms_all": "All dosage forms",
+        "drug.forms_label": "Dosage forms",
+        "drug.forms_short": "Forms",
+        "drug.also_in": "also in",
+        "drug.undisclosed_block": "Records without a stated strength",
+        "drug.specs": "strengths",
+        "drug.compare_side": "Side-by-side table",
+        "drug.view_list": "Back to the list",
+        "drug.more_specs": "Other strengths",
+        "drug.compare_note": "A side-by-side table is offered only when this ingredient has records in many markets; otherwise this list is the whole picture.",
     },
     "es": {
         "u1.title": "Cómo funciona en 3 pasos",
@@ -1177,6 +1188,17 @@ UI_I18N = {
         "brand.mah": "Titular:",
         "brand.mah_note": ("Este producto no tiene nombre comercial registrado; se muestra el "
                            "titular de la autorización."),
+        # v0.10.3 task-16：成分页按国家分组清单
+        "drug.forms_all": "Todas las formas farmacéuticas",
+        "drug.forms_label": "Formas farmacéuticas",
+        "drug.forms_short": "Formas",
+        "drug.also_in": "también en",
+        "drug.undisclosed_block": "Registros sin concentración indicada",
+        "drug.specs": "presentaciones",
+        "drug.compare_side": "Tabla comparativa",
+        "drug.view_list": "Volver a la lista",
+        "drug.more_specs": "Otras presentaciones",
+        "drug.compare_note": "La tabla comparativa solo se ofrece cuando este principio tiene registros en muchos mercados; si no, esta lista es la información completa.",
     },
     "zh": {
         "u1.title": "三步看懂",
@@ -1223,6 +1245,17 @@ UI_I18N = {
         "matrix.filters_short": "筛选",
         "brand.mah": "厂家：",
         "brand.mah_note": "该产品没有登记商品名，这里显示上市许可持有人。",
+        # v0.10.3 task-16：成分页按国家分组清单
+        "drug.forms_all": "全部剂型",
+        "drug.forms_label": "剂型",
+        "drug.forms_short": "剂型",
+        "drug.also_in": "也在",
+        "drug.undisclosed_block": "未公开规格的记录",
+        "drug.specs": "个规格",
+        "drug.compare_side": "并排对照表",
+        "drug.view_list": "回到清单",
+        "drug.more_specs": "其余规格",
+        "drug.compare_note": "并排对照表只在该成分跨市场记录较多时提供；否则这份清单就是全部。",
     },
     "zh-Hant": {
         "u1.title": "三步看懂",
@@ -1269,6 +1302,17 @@ UI_I18N = {
         "matrix.filters_short": "篩選",
         "brand.mah": "廠商：",
         "brand.mah_note": "該產品沒有登記商品名，這裡顯示上市許可持有人。",
+        # v0.10.3 task-16：成分页按国家分组清单
+        "drug.forms_all": "全部劑型",
+        "drug.forms_label": "劑型",
+        "drug.forms_short": "劑型",
+        "drug.also_in": "也在",
+        "drug.undisclosed_block": "未公開規格的紀錄",
+        "drug.specs": "個規格",
+        "drug.compare_side": "並排對照表",
+        "drug.view_list": "回到清單",
+        "drug.more_specs": "其餘規格",
+        "drug.compare_note": "並排對照表只在該成分跨市場紀錄較多時提供；否則這份清單就是全部。",
         # v0.9.7 task-12 UI 批次 A-1：结果页身份卡 / 分页 / 零结果（繁体显式覆盖层）
         "res.identity.ingredient": "有效成分",
         "res.identity.markets": "覆蓋市場",
@@ -2943,14 +2987,20 @@ CSS = """
 --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
 --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:24px;
 --lh-tight:1.3;--lh-heading:1.35;--lh-ui:1.5;--lh-body:1.6;
---r-sm:8px;--r-md:12px;--r-pill:999px;--prose:72ch}
+--r-sm:8px;--r-md:12px;--r-pill:999px;--prose:72ch;
+/* v0.10.3 task-17：桌面内容带按视口比例取「中间 2/3」，而不是固定像素。
+   ≥1280 用 66.67vw（1440→960 / 1920→1280 / 2560→1707，被 1680 封顶）；
+   768–1279 保持 v0.10.2 的满宽手感（默认 100%；实测原值就是 100%，不是 100% - 48px，
+   改成 -48px 会让 768 档与 v0.10.2 不逐像素一致，故不改）；<768 满宽 + 14px 内边距不变。 */
+--band-w:100%;--wrap-pad:20px}
+.wrap{width:var(--band-w);max-width:1680px;margin-inline:auto;padding:0 var(--wrap-pad)}
+@media (min-width:1280px){:root{--band-w:66.67vw}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
 display:flex;flex-direction:column;
 font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 header{border-bottom:1px solid var(--line);background:var(--bg)}
-.wrap{max-width:1600px;margin:0 auto;padding:0 20px}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
 .logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
 .logo-zh{font-weight:400;font-size:14px;color:var(--muted);margin-left:8px;white-space:nowrap}
@@ -2999,7 +3049,7 @@ padding:14px 16px;margin:10px 0}
 .card h3{margin:0 0 4px;font-size:16px}
 .card h2{margin:0 0 4px;font-size:16px}
 .card .meta{color:var(--muted);font-size:14px}
-.tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;
+.tag{display:inline-block;font-size:13px;padding:1px 7px;border-radius:999px;
 border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .tag.cn{color:#8a4b00;border-color:#e8c9a6}
 .tag.gb{color:#1f4f8a;border-color:#b9cde6}
@@ -3015,7 +3065,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .bil-toggle{display:inline-flex;align-items:center;gap:4px;font-size:14px;
   color:var(--muted);margin:0 8px;cursor:pointer}
 .bil-toggle input{width:14px;height:14px}
-.tr-badge{display:inline-block;margin-left:6px;font-size:12px;padding:0 5px;
+.tr-badge{display:inline-block;margin-left:6px;font-size:13px;padding:0 5px;
   border:1px solid var(--line);border-radius:8px;color:var(--muted);vertical-align:1px}
 .tr-ver{font-size:14px;color:var(--muted);margin-left:4px}
 .tr-orig{color:var(--muted);font-weight:400}
@@ -3038,7 +3088,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 @media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:18px}
  .atcmembers li{font-size:16px} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
-.atc-src{color:var(--muted);font-size:12px;margin-left:6px;white-space:nowrap}
+.atc-src{color:var(--muted);font-size:13px;margin-left:6px;white-space:nowrap}
 .atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
 .atc-src-line{margin:-8px 0 10px}
 .atc-count{margin:-6px 0 10px}
@@ -3058,7 +3108,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
    字号 12px 是硬线（v0.10.2 起「任何可见文字 <12px 即违规」）：11px 虽然能把 390px 下
    4 徽章行压到 2 行，但那是拿可读性换高度。12px + padding:0 5px + line-height 1.2 时
    4 徽章行平均 48px（v0.10.1 无市场码时 52px），仍然比原来矮。 */
-.st-badge .mk{margin-left:3px;font-size:12px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.st-badge .mk{margin-left:3px;font-size:13px;letter-spacing:0;font-variant-numeric:tabular-nums}
 .atc-mk-hint{margin:-4px 0 10px}
 /* 盐型子行不再逐个标「暂无中文名」：标记由 markAtcRowGaps() 每行只放一枚（链接外） */
 .atcdetails{margin:8px 0 0}
@@ -3109,7 +3159,7 @@ header nav{flex-wrap:wrap;row-gap:6px}
 @media (max-width:767px){
   .linkbtn,.detbtn,.rowreport,.mf-reset,.m-more summary{min-height:44px;min-width:44px}
 }
-.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:8px;
+.badge{display:inline-block;font-size:13px;padding:2px 8px;border-radius:8px;
 margin-left:8px}
 .badge.sev{background:var(--sevbg);color:var(--sev);border:1px solid #f0c4c4}
 .badge.warn{background:var(--warnbg);color:var(--warn);border:1px solid #f0d3c4}
@@ -3146,7 +3196,7 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 .release{border-top:1px solid var(--line);padding:18px 0 6px;margin-top:18px}
 .release:first-of-type{border-top:0;margin-top:0;padding-top:4px}
 .release h2{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin:0 0 8px}
-.release .rel-date{font-size:12px;font-weight:400;color:var(--muted)}
+.release .rel-date{font-size:13px;font-weight:400;color:var(--muted)}
 .release table{font-size:14px}
 .release ul{margin:6px 0 12px;padding-left:22px}
 .release li{margin:4px 0}
@@ -3278,7 +3328,7 @@ html.u1-off #u1guide{display:none!important}
  padding:6px 10px;font-size:14px;cursor:pointer;text-align:left;min-width:0;max-width:220px}
 .u2chip:hover{border-color:var(--accent)}
 .u2chip.on{border-color:var(--accent);background:#f1f8f4}
-.u2chip .u2c{font-weight:600;color:var(--muted);font-size:12px}
+.u2chip .u2c{font-weight:600;color:var(--muted);font-size:13px}
 .u2chip .u2n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
 .u2chip .u2n.empty{color:var(--muted);font-style:italic}
 /* v0.6.6：成分页多国并排矩阵（行=规格/剂型/释放，列=国家；服务端默认 en 序，客户端按语言重排） */
@@ -3325,21 +3375,84 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
   background:var(--bg);border:1px solid var(--line);border-radius:10px}
 .drug-sticky .ds-name{flex:1 1 auto;min-width:0;font-weight:600;font-size:15px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.drug-sticky .ds-meta{flex:0 0 auto;color:var(--muted);font-size:12px;white-space:nowrap}
+.drug-sticky .ds-meta{flex:0 0 auto;color:var(--muted);font-size:13px;white-space:nowrap}
 .drug-sticky .ds-filter{flex:0 0 auto;min-height:32px;display:inline-flex;align-items:center;
   padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);
   color:var(--fg);font-size:13px;text-decoration:none}
 .drug-sticky .ds-filter:hover{border-color:var(--accent);color:var(--accent)}
 #filters,table.matrix th[data-country],table.matrix td[data-country]{scroll-margin-top:64px}
 @media (max-width:767px){ .drug-sticky{max-height:56px;padding:4px 8px} }
+/* v0.10.3 task-16：成分页主视图 = 按国家分组清单（矩阵降级 ?view=table）。
+   目标行高：1440 ≤72px / 390 ≤88px；零「未收录」格子；无 JS 也可读。 */
+.formchips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.formchip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;
+ border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg);
+ font-size:14px;text-decoration:none}
+.formchip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.formchip.on{background:var(--accent-weak);border-color:var(--accent);color:var(--accent);
+ font-weight:600}
+.formchip .n{color:var(--muted);font-size:13px}
+.mkblock{margin:0 0 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);
+ padding:10px 12px}
+.mkblock>h3{margin:0 0 6px;font-size:16px}
+.mkblock>h3 .sub{font-weight:400;margin-left:6px}
+.mkspecs{list-style:none;margin:0;padding:0}
+.mkrow{display:grid;grid-template-columns:minmax(120px,1.1fr) minmax(90px,.9fr) 3fr;
+ align-items:baseline;gap:4px 10px;padding:6px 0;border-top:1px solid var(--line-soft);
+ font-size:16px;line-height:1.35}
+.mkrow:first-child{border-top:0}
+.mkst{font-weight:600}
+.mkf{color:var(--muted);font-size:14px}
+.mkname-cell{display:flex;align-items:baseline;gap:6px;min-width:0;overflow:hidden;
+ max-height:3em}
+/* 名字最多两行（长中文/英文商品名在 390 下会占 3 行，把行高顶到 135） */
+.mknames{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+ overflow:hidden;white-space:normal;min-width:0;line-height:1.35}
+.mknames .m-brand{white-space:nowrap}
+/* `+N`：纯 CSS 展开（checkbox + label），无 JS 可点。
+   不用 <details>：它和矩阵遗留的 .m-brand/.m-rest 规则打架，390 下把行高从 71 顶到 95。 */
+.mkname-cell .m-x{display:none}
+.mkname-cell .m-more{display:inline-block;margin:0;cursor:pointer;color:var(--accent);
+ border:1px solid var(--line);border-radius:999px;padding:0 6px;font-size:13px;line-height:20px}
+.mkname-cell .m-rest{display:none}
+.mkname-cell .m-x:checked ~ .m-rest{display:inline}
+.mkname-cell .m-x:checked ~ .m-more{background:var(--accent-weak);border-color:var(--accent)}
+/* 矩阵里的 .m-brand 是 -webkit-box 行夹（块级），清单里要行内排，否则每个名字独占一行 */
+.mkname-cell .m-brand{display:inline;max-width:none;min-height:0;padding:0;
+ text-decoration:none;-webkit-line-clamp:none}
+.mkrowmeta{grid-column:1 / -1;display:flex;align-items:center;gap:8px;min-width:0}
+.mkx{color:var(--muted);font-size:13px;white-space:nowrap;min-width:0;
+ overflow:hidden;text-overflow:ellipsis}
+.mkx a{margin:0 1px}
+.mkundis{margin:8px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:16px;
+ color:var(--muted)}
+.mkundis .uname{margin-right:8px}
+.mkcmp{margin:6px 0 10px}
+.tableview[hidden]{display:none}
+.mkblock.mkflash{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){
+ .mkblock{transition:outline-color .2s}
+}
+@media (max-width:767px){
+ /* chips 单行横滑（24 个 chip 换成受控码后最多 8 个，仍不铺多行占首屏） */
+ .formchips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  padding-bottom:2px;margin-bottom:8px}
+ .formchip{flex:0 0 auto}
+ .mkrow{grid-template-columns:1fr auto;font-size:16px;padding:4px 0;line-height:1.25}
+ .mkf{grid-column:2;text-align:right}
+ .mknames{grid-column:1 / -1}
+ /* 手机上省掉「也在」这两个字，只留市场码，避免行高被推到 100px+ */
+ .mkx [data-i18n]{display:none}
+ /* 手机只显示第一个名字（任务允许 ≤2），第二个及以后进 +N，保证行高 ≤88px */
+}
 .matrix-brand-note{margin:6px 0 0;font-size:14px}
 /* v0.10.2 task-10：CN 无商品名 → 名称位显示「厂家：<MAH>」（弱化，不是品牌名） */
 .m-mah{color:var(--fg);font-weight:600}
-.m-mah .mah-k{color:var(--muted);font-weight:400;font-size:12px}
-.m-mah .m-n{color:var(--muted);font-weight:400;font-size:12px}
+.m-mah .mah-k{color:var(--muted);font-weight:400;font-size:13px}
+.m-mah .m-n{color:var(--muted);font-weight:400;font-size:13px}
 /* v0.10.2 R1：剂型列里的「来源原文」小字（不翻译原文，只翻译这个标签） */
-.m-orig{color:var(--muted);font-size:12px}
-.m-orig-raw{color:var(--muted);font-size:12px}
+.m-orig{color:var(--muted);font-size:13px}
+.m-orig-raw{color:var(--muted);font-size:13px}
 /* v0.10.2 task-4：可见列全空的行（只在被隐藏市场有记录）默认不渲染，说明 + 一键加列在表下 */
 .matrix-hidden-rows{margin:8px 0 0}
 .matrix-hidden-rows .sub{margin:0 0 6px}
@@ -3565,12 +3678,12 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 
 /* A-2 fix：桌面壳单行（1280 下 5 项 nav 不再折行被 header 高度裁切） */
 @media (min-width:1100px){
-  header.hdr-shell .wrap{max-width:1120px;height:64px;flex-wrap:nowrap}
+  header.hdr-shell .wrap{height:64px;flex-wrap:nowrap}
   header.hdr-shell .sn{flex-wrap:nowrap}
   header.hdr-shell .langs{margin-left:auto}
 }
 @media (min-width:768px) and (max-width:1024px){
-  header.hdr-shell .wrap{max-width:1120px;height:auto;flex-wrap:wrap;
+  header.hdr-shell .wrap{height:auto;flex-wrap:wrap;
    padding-top:8px;padding-bottom:8px;gap:6px 12px}
   header.hdr-shell .sn{order:3;flex-basis:100%;flex-wrap:wrap;margin-left:0;gap:4px 8px}
   header.hdr-shell .langs{margin-left:auto}
@@ -3584,7 +3697,7 @@ header.hdr-shell .bil-toggle{white-space:nowrap;margin:0 6px;flex:none}
 table.res tbody tr:nth-child(even):not(.grp):not(.detrow):not(.fold-row){background:var(--surface-2)}
 table.res tbody tr:hover{background:var(--surface-2)}
 body.density-compact table.res td{padding:4px 8px;font-size:14px}
-body.density-compact table.res th{padding:4px 8px;font-size:12px}
+body.density-compact table.res th{padding:4px 8px;font-size:13px}
 body.density-compact table.res{font-size:14px}
 .warn-item h2{margin:0 0 6px;font-size:16px;line-height:1.4;font-weight:700}
 .warn-item h3{margin:0 0 6px;font-size:16px;line-height:1.4;font-weight:700}
@@ -7845,6 +7958,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         mah_count: dict[tuple[str, str], int] = {}
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
         spec_raws: dict[tuple, set[str]] = {}
+        # task-16：清单视图要「每国记录数」与「每格状态」，一次遍历顺手收集
+        rec_by_country: dict[str, int] = {}
+        _pids_seen: dict[str, set[str]] = {}
+        status_cell: dict[tuple, set[str]] = {}
         for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord_, mah) in rows:
             # v0.9.0 task-9 / v0.9.1 task-28：HK 无 status、AU 导出无状态列，
             # 这些 unknown 记录不整批跳过；其他市场仍按原规则隐藏。
@@ -7862,6 +7979,12 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             if raw_st.strip():
                 spec_raws.setdefault(spec, set()).add(raw_st.strip())
             bucket = spec_countries.setdefault(spec, {}).setdefault(country, {})
+            # task-16：记录数按产品去重（同一产品多成分行只算一次）+ 每格状态集合
+            seen = _pids_seen.setdefault(country, set())
+            if pid not in seen:
+                seen.add(pid)
+                rec_by_country[country] = rec_by_country.get(country, 0) + 1
+            status_cell.setdefault((spec, country), set()).add(status)
             traded = names.get(pid, [])
             if not traded:
                 # v0.9.0 task-19：无 trade 名的产品也在矩阵里占位，不静默消失。
@@ -8113,9 +8236,30 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         else:
             matrix_html = ('<p class="empty" data-i18n="drug.empty">'
                            'No products recorded yet.</p>')
+        # ── v0.10.3 task-16：主视图换成「按国家分组清单」，矩阵降级为 ?view=table ──
+        # 清单永远渲染（默认可见）；矩阵只在「多市场密度高」的页面内嵌（实测 789 页），
+        # 其余页面不内嵌 —— 否则 12k 页每页多背一整张矩阵，与「单页 ≤ 现页 60%」冲突。
+        list_html, multi_ratio = _drug_list_html(
+            spec_rows, countries, rec_by_country, len(spec_rows),
+            _brand_bit, status_cell, T)
+        table_block = ""
+        compare_link = ""
+        if tbody and multi_ratio >= 0.40:
+            compare_link = (
+                f'<p class="sub mkcmp"><a href="?view=table#tableview" '
+                f'data-i18n="drug.compare_side">Side-by-side table</a></p>')
+            table_block = (f'<div class="tableview" id="tableview" hidden>{matrix_html}'
+                           f'<p class="sub"><a href="?view=list#list" '
+                           f'data-i18n="drug.view_list">Back to the list</a></p></div>')
         hidden_note = ('<p class="sub" data-i18n="matrix.hidden_note">'
                        'Discontinued, withdrawn or unverified-status products are hidden by '
                        'default; Hong Kong and Australia records are shown as exceptions.</p>')
+        # v0.10.3 task-16：没有内嵌并排对照表的页面（多市场占比 <40%）说明一句，
+        # 免得用户以为「?view=table 没反应」是 bug。
+        if not table_block:
+            hidden_note += ('<p class="sub" data-i18n="drug.compare_note">A side-by-side table is '
+                            'offered only when this ingredient has records in many markets; '
+                            'otherwise this list is the whole picture.</p>')
         nick_line = ""
         if sid in nicknames:
             also_names = "、".join(esc(x) for x in nicknames[sid])
@@ -8174,9 +8318,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
 <div class="drug-sticky" role="group">
   <span class="ds-name" title="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>
   <span class="ds-meta">{n_markets} <span data-i18n="drug.markets">markets</span> · {n_records} <span data-i18n="drug.records">records</span></span>
-  <a class="ds-filter" href="#filters" data-i18n="matrix.filters_short">Filters</a>
+  <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>
 </div>
-{matrix_html}
+<div id="list" class="listview">{list_html}</div>{compare_link}{table_block}
 {syn_line}{nick_line}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
@@ -8481,6 +8625,177 @@ def _combo_stub_html(names: str, stub_items: str) -> str:
             f"<ul>{stub_items}</ul>"
             f"<p><a href=\"../index.html\">{_pick('combo.stub_search')}</a></p>"
             f"{picker}</main></body></html>")
+
+
+_FORM_CHIP_CODES = ("effervescent", "tablet", "capsule", "injection", "liquid", "topical",
+                    "powder", "suppository", "inhalation", "pellet", "stick", "gas", "kit")
+
+
+def _form_chip_key(form: str) -> str:
+    """把任意 form_base/原文串折成受控剂型码（chips 与行过滤共用）。
+
+    原始值可能是 `Tablet, film coated` / `comprimido recubierto` 这类长尾串，
+    直接当 chips 会一页铺出 20+ 个（实测 708 px 高，首屏条目直接归零）。
+    """
+    f = (form or "").strip().lower()
+    if not f:
+        return "other"
+    for code in _FORM_CHIP_CODES:
+        if code in f:
+            return code
+    return "other"
+
+
+LIST_ROWS_PER_BLOCK = 12      # 每国家块默认渲染的规格行数（其余一行文本）
+
+def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[str, int],
+                    n_specs: int, name_bit, status_cell: dict[tuple, set[str]],
+                    T: dict) -> tuple[str, float]:
+    """成分页主视图：按国家分组的产品清单（v0.10.3 task-16）。
+
+    设计依据 `reports/matrix-form-decision-20261110.md`：≥2 国同规格行只占 9.27%，
+    矩阵当默认不划算；而矩阵 73.3% 的格子是「未收录」。清单里没有格子，只有「真有」。
+
+    - 零「未收录」：只渲染该国家真实存在的规格行；
+    - 未公开规格（HK/TW/MX 大量）单独成段，不混进规格行、不丢；
+    - 名字 ≤2 + `<details>+N`（无 JS 可点开）；
+    - 跨市场：行尾「也在 GB·US」锚点到对应国家块；
+    - 返回 (html, multi_ratio)：multi_ratio = ≥2 国规格行占比，用于决定是否给「并排对照」。
+
+    `name_bit(label, url, en, zh_sub, form, country)` 由调用方传入（与矩阵同一套名字渲染）。
+    """
+    order = sorted(countries,
+                   key=lambda c: (-rec_by_country.get(c, 0),
+                                  COUNTRY_PRIORITY.index(c) if c in COUNTRY_PRIORITY
+                                  else len(COUNTRY_PRIORITY), c))
+    # spec → 有记录的市场列表（一次算完，避免逐行重扫 spec_rows）
+    markets_of: dict[tuple, list[str]] = {}
+    forms: dict[str, int] = {}
+    for spec, by_c in spec_rows:
+        ms = [c for c in order if by_c.get(c)]
+        if ms:
+            markets_of[spec] = ms
+        f = (spec[1] or "").strip()
+        forms[f] = forms.get(f, 0) + 1
+    multi = sum(1 for ms in markets_of.values() if len(ms) >= 2)
+    multi_ratio = multi / len(markets_of) if markets_of else 0.0
+
+    # 剂型 chips（按本成分实际存在的剂型，标准序）；无 JS 时是纯锚点
+    # chips 按受控剂型码聚合（原始 form_base/原文串会有 20+ 种，手机上铺 700px 高）
+    chip_counts: dict[str, int] = {}
+    for spec, by_c in spec_rows:
+        k = _form_chip_key(spec[1])
+        chip_counts[k] = chip_counts.get(k, 0) + 1
+    chips = [f'<a class="formchip on" href="#list" data-form-filter="">'
+             f'{esc(T.get("drug.forms_all", "All dosage forms"))}</a>']
+    for k in sorted(chip_counts, key=lambda x: (-chip_counts[x], _FORM_RANK_OUTER(x), x)):
+        label = I18N["en"].get(f"form.{k}", k if k != "other" else T.get("atc4.form_other", "other"))
+        chips.append(f'<a class="formchip" href="#list" data-form-filter="{esc(k)}">'
+                     f'{esc(label)} <span class="n">{chip_counts[k]}</span></a>')
+    chip_html = ('<nav class="formchips" id="forms" aria-label="'
+                 + esc(T.get("drug.forms_label", "Dosage forms")) + '">'
+                 + "".join(chips) + "</nav>")
+
+    blocks: list[str] = []
+    n_uid = 0          # 每行 +N 的展开 checkbox 要唯一 id（确定性计数器，别用 hash）
+    for c in order:
+        rows_c = [(spec, by_c[c]) for spec, by_c in spec_rows if by_c.get(c)]
+        if not rows_c:
+            continue
+        disclosed = [(s, b) for s, b in rows_c if (s[0] or "").strip()]
+        undisclosed = [(s, b) for s, b in rows_c if not (s[0] or "").strip()]
+        lis: list[str] = []
+        # v0.10.3：每块只渲染前 LIST_ROWS_PER_BLOCK 个规格（余下用一行紧凑文本），
+        # 否则大成分页会从 300 KB 涨到 900 KB（acetaminophen 实测）。
+        head_rows = disclosed[:LIST_ROWS_PER_BLOCK]
+        tail_rows = disclosed[LIST_ROWS_PER_BLOCK:]
+        for spec, bucket in head_rows:
+            n_uid += 1
+            st, form, rel = spec
+            also = ""
+            others = [o for o in markets_of.get(spec, []) if o != c]
+            if others:
+                shown_mk = others[:3]
+                tail_mk = f" +{len(others) - 3}" if len(others) > 3 else ""
+                also = (' <span class="mkx"><span data-i18n="drug.also_in">also in</span> '
+                        + "·".join(f'<a href="#mk-{esc(o)}">{esc(o)}</a>' for o in shown_mk)
+                        + tail_mk + '</span>')
+            names = sorted(bucket.keys(), key=lambda k: (k.startswith("__"), k.lower()))
+            bits = [name_bit(k, *bucket[k], form, c) for k in names[:1]]
+            more = ""
+            if len(names) > 1:
+                # 无 JS 展开：checkbox + label（纯 CSS）。用 <details> 会让行高从 71 涨到 95：
+                # 它和矩阵遗留的 .m-brand/.m-rest 规则打架，在手机上把名字挤成两行。
+                uid = f"mx-{n_uid}"
+                rest_names = [k for k in names[1:]]
+                rest = "、".join(esc(k) for k in rest_names[:8])
+                if len(rest_names) > 8:
+                    rest += f" +{len(rest_names) - 8}"
+                more = (f'<input type="checkbox" class="m-x" id="{uid}" hidden>'
+                        f'<label class="m-more" for="{uid}">+{len(names) - 1}</label>'
+                        f'<span class="m-rest">{rest}</span>')
+            st_html = _label_unit_html(st)
+            form_html = _form_display(form, "") if form else ""
+            rel_html = (f' · {_label_html("release", rel, rel)}'
+                        if rel not in ("", "none") else "")
+            st_badge = ""
+            if any(x in ("unknown", "", None) for x in status_cell.get((spec, c), set())):
+                st_badge = (' <span class="st-badge st-unknown" '
+                            'data-i18n="drug.status.unknown">unknown</span>')
+            lis.append(f'<li class="mkrow" data-form="{esc(_form_chip_key(form))}" data-spec="{esc(st)}" '
+                       f'data-mk="{esc(c)}"><span class="mkst">{st_html}</span>'
+                       f'<span class="mkf">{form_html}{rel_html}</span>'
+                       f'<span class="mkname-cell"><span class="mknames">'
+                       f'{" ".join(bits)}</span>{more}</span>'
+                       f'<span class="mkrowmeta">{also}{st_badge}</span></li>')
+        rest_html = ""
+        if tail_rows:
+            labels = "、".join(
+                (s0[0] or T.get("drug.nostrength", "not disclosed")) + (f" {s0[1]}" if s0[1] else "")
+                for s0, _b in tail_rows)
+            rest_html = (f'<p class="mkrest" data-n="{len(tail_rows)}"><span '
+                         f'data-i18n="drug.more_specs">Other strengths</span>: {esc(labels)}</p>')
+        undis_html = ""
+        if undisclosed:
+            ubits = []
+            for spec, bucket in undisclosed:
+                names = sorted(bucket.keys(), key=lambda k: (k.startswith("__"), k.lower()))
+                tail = f' <span class="meta">+{len(names) - 3}</span>' if len(names) > 3 else ""
+                plain = "、".join(esc(k) for k in names[:8])
+                if len(names) > 8:
+                    plain += f" +{len(names) - 8}"
+                ubits.append('<span class="uname">' + plain + tail + '</span>')
+            undis_html = (f'<p class="mkundis"><b><span data-i18n="drug.undisclosed_block">'
+                          f'Records without a stated strength</span> · {len(undisclosed)}</b> '
+                          + " ".join(ubits) + '</p>')
+        blocks.append(
+            f'<section class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}">'
+            f'<h3>{esc(c)} <span class="sub">{rec_by_country.get(c, 0):,} '
+            f'<span data-i18n="drug.records">records</span> · {len(rows_c)} '
+            f'<span data-i18n="drug.specs">strengths</span></span></h3>'
+            f'<ul class="mkspecs">{"".join(lis)}</ul>{rest_html}{undis_html}</section>')
+    return chip_html + '<div class="mkblocks">' + "".join(blocks) + "</div>", multi_ratio
+
+
+def _FORM_RANK_OUTER(form: str) -> int:
+    """剂型标准序（与 `build_drug_pages` 内 `_form_rank` 同口径的模块级副本）。"""
+    f = (form or "").lower()
+    if "effervescent" in f or "tablet" in f:
+        return 0
+    if "capsule" in f:
+        return 1
+    if any(w in f for w in ("solution", "liquid", "syrup", "suspension",
+                            "elixir", "drops")):
+        return 2
+    if any(w in f for w in ("injection", "infusion", "injectable", "vial", "ampoule")):
+        return 3
+    if any(w in f for w in ("cream", "ointment", "gel", "lotion", "patch", "suppositor")):
+        return 4
+    if any(w in f for w in ("spray", "inhaler", "aerosol", "nebuli")):
+        return 5
+    if any(w in f for w in ("powder", "granule", "sachet")):
+        return 6
+    return 9
 
 
 def build_combo_pages(entries, db: sqlite3.Connection) -> int:
@@ -11536,6 +11851,55 @@ def main() -> None:
     applyNameLangBadges();
     // v0.10.2：ATC/大类页收口——每行最多一枚标签，且不进链接文本
     markAtcRowGaps();
+    // v0.10.3 task-16：成分页清单视图（?view=table 切矩阵、剂型 chips 过滤、语言市场置顶）
+    initListView();
+  }
+  // ── v0.10.3 task-16：成分页「按国家分组清单」的渐进增强 ────────────────────
+  // 服务器已经渲染好清单（默认可见）与可选的矩阵（hidden）；这里只做三件事：
+  //   ① ?view=table → 显示矩阵、隐藏清单（无 JS 时矩阵 hidden，清单照常可读）；
+  //   ② 当前语言市场那一块置顶（服务器按记录数排，语言偏好只有浏览器知道）；
+  //   ③ 剂型 chips 过滤（无 JS 时是纯锚点，行全部可见）。
+  function initListView(){
+    var list = document.getElementById('list');
+    var table = document.getElementById('tableview');
+    if(!list) return;
+    var params = new URLSearchParams(location.search);
+    if(table && params.get('view') === 'table'){
+      table.hidden = false;
+      list.hidden = true;
+    }
+    // ② 语言市场置顶
+    var blocks = document.querySelector('.mkblocks');
+    if(blocks){
+      var prefer = {en:'US', es:'ES', zh:'CN', 'zh-Hant':'TW'}[window.LANG] || '';
+      var first = prefer ? blocks.querySelector('.mkblock[data-mk="' + prefer + '"]') : null;
+      if(first && first !== blocks.firstElementChild) blocks.insertBefore(first, blocks.firstElementChild);
+    }
+    // ③ 剂型 chips
+    var chips = document.querySelectorAll('[data-form-filter]');
+    var rows = document.querySelectorAll('.mkrow');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(ev){
+        var want = chip.getAttribute('data-form-filter') || '';
+        chips.forEach(function(c){ c.classList.toggle('on', c === chip); });
+        rows.forEach(function(row){
+          row.hidden = !!(want && row.getAttribute('data-form') !== want);
+        });
+        ev.preventDefault();
+        var anchor = document.getElementById('list');
+        if(anchor && anchor.scrollIntoView) anchor.scrollIntoView({block: 'start'});
+      });
+    });
+    // 跨市场锚点：跳到对应国家块并高亮一次
+    document.querySelectorAll('.mkx a[href^="#mk-"]').forEach(function(a){
+      a.addEventListener('click', function(){
+        var t = document.querySelector(a.getAttribute('href'));
+        if(!t) return;
+        t.classList.remove('mkflash');
+        void t.offsetWidth;
+        t.classList.add('mkflash');
+      });
+    });
   }
   function langTarget(code){
     // v0.5.5/v0.6.2：有 /es/、/zh/、/zh-hant/ 静态副本的页面（首页/about/confused/

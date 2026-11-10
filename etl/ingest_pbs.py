@@ -30,7 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
-from ingest_openfda_ndc import form_base_of, slug  # noqa: E402
+from ingest_openfda_ndc import form_base_of, release_of, slug  # noqa: E402
 from ingest_dmd import ALIASES  # noqa: E402
 from normalize_name import normalize  # noqa: E402
 
@@ -70,9 +70,6 @@ RE_CONC = re.compile(
     r"(\d+(?:[.,]\d+)?)\s*" + _UNIT + r"\s*/\s*(?:(\d+(?:[.,]\d+)?)\s*)?" + _PER + _NB,
     re.I)
 RE_SINGLE = re.compile(r"(\d+(?:[.,]\d+)?)\s*" + _UNIT + _NB, re.I)
-RELEASE_WORDS = re.compile(
-    r"modified release|extended release|sustained release|prolonged release|"
-    r"\b(xr|sr|cr|mr|er|dr)\b", re.I)
 
 
 def parse_strengths(core: str) -> list[tuple[str, str, str | None, str | None]]:
@@ -204,9 +201,10 @@ def main() -> None:
             counts["no_strength"] += 1
 
         form_base = form_base_of(core)
-        release = "none"
-        if RELEASE_WORDS.search(core):
-            release = "DR" if re.search(r"delayed|enteric|gastro", core, re.I) else "ER"
+        # 释放机制统一走 etl/ingest_openfda_ndc.release_of（原先本文件自带一套词表，
+        # 只认 `modified/extended/… release` + 短码，`Tablet, enteric coated` 会漏，
+        # 见 reports/consistency-audit-form-20261110.md R3）
+        release = release_of(core)
         dosage_form = core[:120]
 
         bn = normalize(brand).norm

@@ -100,7 +100,8 @@ CREATE TABLE IF NOT EXISTS product (
     -- 老库由 db/init_db.py 幂等重建 product 表（country 可空 + region 列需要一次重建）。
     -- 不要用 country='EU' 表示欧盟层（EU 不是国家市场）。
     dosage_form    TEXT NOT NULL,
-    form_base      TEXT,                      -- 归一化剂型：tablet / capsule / liquid / ...
+    form_base      TEXT,                      -- 归一化剂型：tablet / capsule / liquid / injection /
+                                              -- topical / inhalation / suppository / powder / effervescent ...
     route          TEXT,
     release        TEXT NOT NULL DEFAULT 'none'
                    CHECK (release IN ('none', 'IR', 'ER', 'SR', 'DR', 'GITS', 'MR')),

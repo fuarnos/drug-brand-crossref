@@ -329,6 +329,7 @@ EXTRA_FORMS = [
     ("swab", "swab", "torunda", "拭子", "拭子", "zaragatoa"),
     ("mouthwash", "mouthwash", "enjuague bucal", "漱口水", "漱口水", "elixir bucal"),
     ("gum, chewing", "chewing gum", "chicle", "咀嚼胶", "咀嚼膠", "goma de mascar"),
+    ("effervescent", "effervescent", "efervescente", "泡腾剂", "泡騰劑", "efervescente"),
     ("globule", "globule", "glóbulo", "球剂", "球劑", "glóbulo"),
     ("oil", "oil", "aceite", "油剂", "油劑", "óleo"),
     ("rinse", "rinse", "enjuague", "冲洗剂", "沖洗劑", "lavagem"),

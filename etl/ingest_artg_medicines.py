@@ -10,8 +10,9 @@ Visualisation Tool 导出，37,097 行 / 34,606 个 ARTG ID / 32 列）。许可
 - 产品键 = `AU-ARTG-<ARTG ID>`（与既有 artg_detail/artg_enrich 一致，可合并身份）；
 - 同一 ARTG ID 的多行（2,170 个 ID / 4,661 行）合并成一个产品：名称/sponsor/剂型/途径取首个非空，
   包装合并去重，成分按 (成分名, 规格) 并集；
-- **`status='unknown'`**（导出无条目状态列，不推断在售）；`release='none'`；`strength` 只来自
-  `Active Ingredients` 的 `Quantity`，不猜；
+- **`status='unknown'`**（导出无条目状态列，不推断在售）；`release` 从剂型原文判
+  （`extended/controlled/modified release` → ER、`enteric/gastro-resistant` → DR，其余 none）；
+  `strength` 只来自 `Active Ingredients` 的 `Quantity`，不猜；
 - 剂型保留 ARTG 原文（`dosage_form`），另算 canonical `form_base`；`category` 保留
   `Registered` / `Listed` / `Listed (Export Only)`（出口专用会在 note 标注）；
 - 成分映射复用 TW/HK 的机制（DB inn_en + 盐 variant + TW 别名表 + BAN→INN）；**未匹配成分丢弃计数**，
@@ -49,6 +50,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
 
 from normalize_name import normalize  # noqa: E402
+from ingest_openfda_ndc import release_of  # noqa: E402  释放机制与 US/GB/SG 同一套词表
 from ingest_tw_tfda import (  # noqa: E402  复用成分映射
     _split_salt_local,
     load_aliases,
@@ -82,16 +84,20 @@ VOLUME = {"ml": Decimal(1), "l": Decimal(1000), "ul": Decimal("0.001"),
 UNIT_CANON = {"iu": "IU", "unit": "unit", "units": "unit", "u": "unit",
               "meq": "mEq", "mci": "mCi", "uci": "µCi", "vg": "VG", "vp": "VP",
               "%": "%", "%w/v": "%w/v", "%w/w": "%w/w"}
+# 剂型：ARTG 原文 → form_base。与 etl/ingest_openfda_ndc.py 的 FORM_BASES 同口径
+# （(keys, base) 反序存法），顺序即优先级：`liquid` 必须最后，否则 `Powder for solution`
+# 会被降级成液体；泡腾（`effervescent` / `efervescent`）必须先命中。
 FORM_BASE = (
+    (("effervesc", "efervesc", "泡腾", "泡騰", "發泡", "发泡", "fizzy"), "effervescent"),
     (("tablet", "caplet", "lozenge", "pastille"), "tablet"),
     (("capsule",), "capsule"),
     (("injection", "infusion", "vial", "ampoule", "syringe"), "injection"),
     (("cream", "ointment", "gel", "lotion", "paste", "patch", "plaster", "emulsion"), "topical"),
-    (("liquid", "solution", "syrup", "suspension", "elixir", "drops", "mouthwash"), "liquid"),
     (("powder", "granule", "sachet"), "powder"),
     (("suppository", "pessary", "enema"), "suppository"),
     (("inhaler", "inhalation", "aerosol", "spray", "nebuliser", "nebulizer"), "inhalation"),
     (("pill",), "pill"),
+    (("liquid", "solution", "syrup", "suspension", "elixir", "drops", "mouthwash"), "liquid"),
 )
 
 
@@ -260,6 +266,9 @@ def build(records: dict, mapping: dict, aliases: dict, limit: int = 0,
         kept.append({
             "product_id": f"AU-ARTG-{aid}", "artg_id": aid, "name": rec["name"],
             "sponsor": rec["sponsor"], "form": rec["form"], "form_base": form_base_of(rec["form"]),
+            # 释放机制从 ARTG 剂型原文判（`Tablet, controlled release` 1,176 行 +
+            # `Tablet, enteric coated` 644 行原先被写死成 none，见审计报告 R3）
+            "release": release_of(rec["form"]),
             "route": rec["route"], "pack": " / ".join(rec["packs"])[:200] or None,
             "category": rec["category"] or None, "note": "；".join(note_bits)[:300],
             "components_detail": comps, "n_ingredients": len(rec["ings"]),
@@ -427,7 +436,7 @@ def write_db(db_path: Path, kept: list[dict], stats: dict, manifest_path: Path,
                 " status_date, source_id, source_url, retrieved_at, note)"
                 " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 (pid, "AU", row["form"] or "not stated", row["form_base"], row["route"] or None,
-                 "none", row["pack"], row["sponsor"] or None, row["artg_id"],
+                 row["release"], row["pack"], row["sponsor"] or None, row["artg_id"],
                  f"ARTG {row['category']}" if row["category"] else None, 1, "unknown", None,
                  SOURCE_ID, SOURCE_URL, TODAY, row["note"]))
             product_ids.append(pid)

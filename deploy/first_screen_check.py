@@ -93,6 +93,12 @@ TYPE_THRESHOLDS: dict[str, dict] = {
     "results": {"afcr_min": 0.35, "items_min": 5.0, "chrome_max": 0.40},
 }
 GLOBAL_THRESHOLDS = {
+    # 带宽比（Lead 2026-11-10）：≥1280 视口内容带要占 66.7%（中间 2/3），<1280 要占满。
+    # 容差 ±0.015（0.652–0.682）：桌面用 max-width:1680 兜住过长行，2560 视口下带宽比 = 65.6%；
+    # 精确 2/3（1707px）会把单行拉到过长，为 0.1 pt 改宽度不划算，所以把容差写清并注明原因。
+    "band_ratio_wide": 0.667,
+    "band_ratio_wide_tol": 0.015,
+    "band_ratio_narrow": 0.99,
     "overlay_max": 0.20,      # sticky/fixed 覆盖 ≤20% 视口
     "body_font_min": 16,      # 正文最小字号
     "aux_font_min": 13,       # 辅助文字最小字号
@@ -100,6 +106,11 @@ GLOBAL_THRESHOLDS = {
     "lt14_ratio_warn": 0.50,  # <14px 文本占比超 50% 记 WARN（写进报告，不阻断）
     "cover_ratio": 0.25,      # 悬浮压住「不许遮」目标 ≥25% 面积 = 遮挡
 }
+
+# 指标口径版本：AFCR v2（分母 = 内容带面积）+ 新增 band_ratio。
+# v0.10.1/v0.10.2 的基线是 v1 口径（分母 = 视口），**不可跨版本直接比**；
+# compare_baseline 遇到口径不同会跳过 AFCR/band_ratio 并出一条说明。
+METRIC_VERSION = "afcr-band-v2"
 
 # 页面清单。primary = (标签, 选择器, 必须完整可见, 上缘上限占视口比 or None)
 PAGES: list[dict] = [
@@ -125,13 +136,19 @@ PAGES: list[dict] = [
         "must_not_cover": ["main h1", "#q", "main table thead"],
     },
     {
+        # v0.10.3（task-16）：主视图 = 按国家分组清单，一行 `.mkrow` = 国家 × 规格；
+        # 矩阵降级到 `?view=table`（只在内嵌矩阵的多市场页出现）。
+        # items 用 items_mode=first-match：优先 .mkrow，老产物（矩阵页）回退 table.matrix tbody tr，
+        # 两者不会同时计数（也就不会「首屏条目 0」假绿）。
         "name": "drug",
         "type": "content",
         "paths": ["drug/acetaminophen.html"],
-        "primary": [("filter-entry", ".matrix-filters", False, 0.50)],
-        "items": ["table.matrix tbody tr"],
+        "primary": [("form-chips", ".formchips", False, 0.50),
+                    ("filter-entry", ".matrix-filters", False, 0.50)],
+        "items": [".mkrow", "table.matrix tbody tr"],
+        "items_mode": "first-match",
         "items_min": 5,
-        "must_not_cover": ["main h1", "table.matrix thead", "table.matrix tbody tr .m-spec"],
+        "must_not_cover": ["main h1", ".mkblock h3", ".drug-sticky", "table.matrix thead"],
     },
     {
         "name": "name",
@@ -163,6 +180,10 @@ PAGES: list[dict] = [
 ]
 
 # 主内容区：优先 <main id="main">，退到 main/#main，再退到 body。
+# 成分页「首屏条目」的默认选择器（矩阵页）。换模板时用 --rows-selector 覆盖，
+# 不改脚本：python deploy/first_screen_check.py --rows-selector ".country-block .prow"
+DRUG_ROWS_SEL = "table.matrix tbody tr"
+
 MAIN_SEL = "main#main, main, #main"
 # 「内容块」= 真正承载文字/数据的元素：用来求首屏内容带宽度，也用来判悬浮遮挡。
 CONTENT_SEL = ("main h1, main h2, main h3, main p, main li, main td, main th, main tr,"
@@ -336,7 +357,13 @@ MEASURE_JS = r"""(function(){
     }
   }
   var cellArea = STEP*STEP;
-  var afcr = cells ? (effective*cellArea)/vpArea : 0;
+  // AFCR 口径 v2（Lead 2026-11-10）：分母是**内容带**面积，不是视口面积。
+  // 理由：用户要求桌面内容带收窄到中间 2/3，用视口当分母会把「按要求收窄」判成退化。
+  // 绝对量（首屏条目 / 字号 / 横向溢出）另有独立判定，不会因此放松。
+  var bandArea = band ? Math.max(1, band.w * band.h) : 1;
+  var afcr = (effective*cellArea)/bandArea;
+  var afcrVp = cells ? (effective*cellArea)/vpArea : 0;   // 旧口径，仅留档，跨版本不可比
+  var bandRatio = vw ? (band ? band.w/vw : 0) : 0;         // 带宽比
   var chromeRatio = cells ? (chromeCells*cellArea)/vpArea : 0;
   var chromeOverflow = chromeRatio > 1 ? 1 : 0;   // chrome 互相重叠时的兜底
 
@@ -358,16 +385,21 @@ MEASURE_JS = r"""(function(){
   }
 
   // ── 3. 首屏可见条目数（半条 = 0.5）──────────────────────────────────────
-  var items = {count:0, seen:0, available:0, by_sel:[], rows:[]};
+  var items = {count:0, seen:0, available:0, by_sel:[], rows:[], sel_used:null};
   var seenSet = [];
   for(var s=0;s<CFG.items.length;s++){
     var list = qa(CFG.items[s]);
+    // first-match：模板换过一次（矩阵 → 国家分组清单）时，用第一个真有命中的选择器，
+    // 避免「新选择器 0 命中 → 首屏条目 0」这种假绿/假红交错。
+    if(CFG.items_mode === 'first-match' && items.sel_used !== null && list.length === 0) continue;
+    if(CFG.items_mode === 'first-match' && items.sel_used === null && list.length === 0) continue;
     var sub = 0;
     for(var q=0;q<list.length && q<600;q++){
       var el = list[q];
       if(seenSet.indexOf(el)>=0) continue;
       seenSet.push(el);
       items.available++;
+      if(items.sel_used === null) items.sel_used = CFG.items[s];
       var bb = el.getBoundingClientRect();
       if(bb.width < 4 || bb.height < 4) continue;
       var cc = clip({x:bb.left,y:bb.top,w:bb.width,h:bb.height});
@@ -538,11 +570,13 @@ MEASURE_JS = r"""(function(){
     main_w: mainR ? Math.round(mainR.w) : 0,
     band_w: band ? Math.round(band.w) : 0,
     content_blocks: contentRects.length,
-    metrics: {afcr: afcr, chrome_ratio: chromeRatio, items: items.count,
+    metrics: {afcr: afcr, afcr_vp: afcrVp, band_ratio: bandRatio,
+              chrome_ratio: chromeRatio, items: items.count,
               overlay_ratio: overlayRatio, overflow: overflow?1:0},
     primary: primary,
     items_detail: {by_sel: items.by_sel, visible_elements: items.seen,
-                   available: items.available, samples: items.rows},
+                   available: items.available, sel_used: items.sel_used,
+                   samples: items.rows},
     chrome_hits: chromeHits,
     overlays: overlayList,
     overlay_covered_targets: coveredTargets,
@@ -650,6 +684,7 @@ def _cfg(page: dict) -> dict:
         "chrome_sel": CHROME_SEL,
         "primary": [{"label": p[0], "sel": p[1]} for p in page["primary"]],
         "items": page["items"],
+        "items_mode": page.get("items_mode", "union"),
         "must_not_cover": page["must_not_cover"],
         "aux_self": list(AUX_SELF),
         "aux_anc": list(AUX_ANC),
@@ -751,6 +786,16 @@ def judge(page: dict, viewport: str, data: dict) -> tuple[list[dict], list[dict]
     afcr = float(m.get("afcr") or 0)
     if afcr < th["afcr_min"]:
         bad("afcr", round(afcr, 3), th["afcr_min"])
+    # 带宽比：宽屏要中间 2/3，窄屏要占满（收窄内容带是产品决定，但比例得守住）
+    bw = float(m.get("band_ratio") or 0)
+    vw = int(data.get("vw") or 0)
+    target = GLOBAL_THRESHOLDS["band_ratio_wide"]
+    tol = GLOBAL_THRESHOLDS["band_ratio_wide_tol"]
+    if vw >= 1280:
+        if abs(bw - target) > tol:
+            bad("band_ratio", round(bw, 3), f"{target}±{tol}")
+    elif bw < GLOBAL_THRESHOLDS["band_ratio_narrow"]:
+        bad("band_ratio", round(bw, 3), GLOBAL_THRESHOLDS["band_ratio_narrow"])
     items = float(m.get("items") or 0)
     items_min = page.get("items_min", th["items_min"])
     available = float((data.get("items_detail") or {}).get("available") or 0)
@@ -820,6 +865,17 @@ def compare_baseline(cur: dict, base: dict) -> list[dict]:
 
     b, c = index(base), index(cur)
     regressions: list[dict] = []
+    base_ver = base.get("metric_version") or "afcr-viewport-v1"
+    cur_ver = cur.get("metric_version") or "afcr-viewport-v1"
+    skip_metrics: set[str] = set()
+    if base_ver != cur_ver:
+        skip_metrics = {"afcr", "band_ratio"}
+        regressions.append({
+            "page": "*", "viewport": "*", "metric": "metric_version",
+            "before": base_ver, "after": cur_ver, "note": True,
+            "msg": f"口径变了（{base_ver} → {cur_ver}）：AFCR / band_ratio 不参与跨口径对比，"
+                   f"其余指标照常比",
+        })
     for key, brec in b.items():
         crec = c.get(key)
         if crec is None:
@@ -834,6 +890,8 @@ def compare_baseline(cur: dict, base: dict) -> list[dict]:
         cm.update({k: v for k, v in (crec.get("fonts") or {}).items() if k in
                    ("body_min", "aux_min", "hard_min")})
         for metric in HIGHER_BETTER:
+            if metric in skip_metrics:
+                continue
             bv, cv = bm.get(metric), cm.get(metric)
             if bv is None or cv is None or not isinstance(bv, (int, float)):
                 continue
@@ -846,6 +904,8 @@ def compare_baseline(cur: dict, base: dict) -> list[dict]:
                                     "delta_pct": round(-drop * 100, 1),
                                     "msg": f"{metric} 从 {bv} 退到 {cv}（-{drop:.1%}）"})
         for metric in LOWER_BETTER:
+            if metric in skip_metrics:
+                continue
             bv, cv = bm.get(metric), cm.get(metric)
             if bv is None or cv is None or not isinstance(bv, (int, float)):
                 continue
@@ -873,7 +933,8 @@ def compare_baseline(cur: dict, base: dict) -> list[dict]:
                                     "before": bv, "after": cv,
                                     "delta_pct": round(-drop * 100, 1),
                                     "msg": f"{metric} 从 {bv}px 变到 {cv}px（-{drop:.1%}）"})
-    return regressions
+    return [r for r in regressions if not r.get("note")], \
+        [r for r in regressions if r.get("note")]
 
 
 def _resolve(page: dict, dist: Path | None) -> str | None:
@@ -888,7 +949,9 @@ def _resolve(page: dict, dist: Path | None) -> str | None:
 def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                viewports: list[tuple[int, int, str]], scroll_probe: bool,
                shots: Path | None, only: list[str] | None,
-               expand: bool = False, gate: bool = False) -> dict:
+               expand: bool = False, gate: bool = False,
+               rows_selector: str | None = None,
+               table_view_probe: bool = False) -> dict:
     site = Site(dist) if dist is not None else None
     srv = site.start(0) if site is not None else None
     base = f"http://127.0.0.1:{srv.server_address[1]}/" if srv is not None else (base_url or "")
@@ -899,13 +962,20 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
         "base": base,
         "chrome": str(chrome),
         "viewports": [v[2] for v in viewports],
+        # 口径版本：AFCR v2 = 带内占比（v0.10.3 起）。跨口径的 baseline 不比 AFCR。
+        "metric_version": METRIC_VERSION,
         "thresholds": {"types": TYPE_THRESHOLDS, "global": GLOBAL_THRESHOLDS},
         "pages": [],
         "expanded": [],
+        "table_view": [],
         "skipped": [],
         "shots": [],
     }
     pages = [p for p in PAGES if not only or p["name"] in only]
+    if rows_selector:
+        # 成分页换了模板时，条目选择器从这里覆盖（其余页型不动）
+        pages = [dict(p, items=[rows_selector]) if p["name"] == "drug" else p
+                 for p in pages]
     proc: subprocess.Popen | None = None
     profile_root = profile
 
@@ -972,6 +1042,7 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                     "page": page["name"],
                     "type": page["type"],
                     "viewport": vp,
+                    "vw": data.get("vw"),
                     "url": rel,
                     "href": data.get("href"),
                     "metrics": data.get("metrics") or {},
@@ -1015,6 +1086,7 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                 m, f = rec["metrics"], rec["fonts"]
                 flag = ("FAIL" if gate else "未达") if fails else "ok  "
                 print(f"  [{flag}] {page['name']:8} {vp:10} AFCR {m.get('afcr', 0):.2f} "
+                      f"带宽 {m.get('band_ratio', 0):.2f} "
                       f"条目 {m.get('items', 0):4.1f} chrome {m.get('chrome_ratio', 0):.2f} "
                       f"悬浮 {m.get('overlay_ratio', 0):.3f} "
                       f"正文 {f.get('body_min')}px 辅助 {f.get('aux_min')}px "
@@ -1022,6 +1094,25 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                       + (f"  ← {len(fails)} 项未达" if fails else ""))
                 for item in fails:
                     print(f"         · {item['msg']}")
+                if table_view_probe and page["name"] == "drug":
+                    tv_page = dict(page, items=[DRUG_ROWS_SEL])
+                    tv_url = url + ("&view=table" if "?" in url else "?view=table")
+                    try:
+                        tdata = scan(cdp, tv_url, width, height, tv_page, False)
+                        tm = tdata.get("metrics") or {}
+                        tv_items = tdata.get("items_detail") or {}
+                        out["table_view"].append({
+                            "page": page["name"], "viewport": vp, "url": rel + "?view=table",
+                            "metrics": tm,
+                            "items_detail": tv_items,
+                            # True = 该页内嵌矩阵（multi_ratio ≥ 0.40 的 789 页）；
+                            # False = 只有清单视图，?view=table 应回落到清单并给出说明
+                            "has_matrix": bool(tv_items.get("available")),
+                        })
+                        print(f"         ?view=table：AFCR {tm.get('afcr', 0):.2f} "
+                              f"条目 {tm.get('items', 0):.1f}（兼容视图，不参与判定）")
+                    except Exception as exc:  # noqa: BLE001
+                        print(f"         ?view=table 采集失败：{str(exc)[:120]}")
                 if shots is not None:
                     png = shots / f"fs-{page['name']}-{width}x{height}.png"
                     try:
@@ -1080,7 +1171,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--viewports", default=None, help="逗号分隔的 WxH，默认 4 档全量")
     ap.add_argument("--json", default=None, help="结果 JSON 落盘路径（同时可当 --baseline）")
     ap.add_argument("--shots", default=None, help="截图目录")
-    ap.add_argument("--baseline", default=None, help="上一轮 JSON：任一指标退化 >5% 也 FAIL")
+    ap.add_argument("--baseline", default=None, help="上一轮 JSON：任一指标退化超过 5%% 也 FAIL")
     ap.add_argument("--scroll-probe", action="store_true",
                     help="额外量「滚到文档中部」的悬浮条（证据用，不参与判定）")
     ap.add_argument("--expand", action="store_true",
@@ -1088,6 +1179,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--gate", action="store_true",
                     help="阻塞模式：未达标 → 退出码 1。默认是报告模式（只出数字，不阻塞发布）")
     ap.add_argument("--pages", default=None, help="只扫这些页型（逗号分隔，如 drug,atc）")
+    ap.add_argument("--rows-selector", default=None,
+                    help="成分页「首屏条目」选择器（默认 table.matrix tbody tr；换模板时覆盖）")
+    ap.add_argument("--table-view-probe", action="store_true",
+                    help="额外量一次 drug/...?view=table（矩阵降级视图），只作兼容证据")
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -1107,9 +1202,14 @@ def main(argv: list[str] | None = None) -> int:
     started = time.time()
     print(f"== 首屏守卫 == dist={dist or '(用 --base-url)'} 视口 {len(viewports)} 档 "
           f"页型 {len(only) if only else len(PAGES)} 种 chrome={chrome}")
+    if args.rows_selector:
+        print(f"   成分页行选择器：{args.rows_selector}（默认 {DRUG_ROWS_SEL}）")
+    if args.table_view_probe:
+        print(f"   兼容测量：?view=table 也会量一次（选择器 {DRUG_ROWS_SEL}）")
     out = run_checks(dist, args.base_url, chrome, viewports, args.scroll_probe, shots, only,
-                     args.expand, args.gate)
+                     args.expand, args.gate, args.rows_selector, args.table_view_probe)
     out["generated"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+    out["rows_selector"] = args.rows_selector or DRUG_ROWS_SEL
     out["elapsed_s"] = round(time.time() - started, 1)
 
     all_fails = [(rec["page"], rec["viewport"], item) for rec in out["pages"]
@@ -1119,12 +1219,13 @@ def main(argv: list[str] | None = None) -> int:
 
     # ── 汇总表：一屏能看懂的「页面 × 视口」矩阵 ──────────────────────────────
     print("\n== 汇总（AFCR / 条目 / chrome / 悬浮 / 正文px / 辅助px / <14px / 溢出 / 判定）==")
-    print(f"  {'页面':8} {'视口':10} {'AFCR':>6} {'条目':>6} {'chrome':>7} {'悬浮':>6} "
+    print(f"  {'页面':8} {'视口':10} {'AFCR':>6} {'带宽':>6} {'条目':>6} {'chrome':>7} {'悬浮':>6} "
           f"{'正文':>5} {'辅助':>5} {'<14px':>6} {'溢出':>4}  判定")
     for rec in out["pages"]:
         m, f = rec["metrics"], rec["fonts"]
         verdict = ("FAIL" if args.gate else "未达") if rec["fails"] else "ok"
         print(f"  {rec['page']:8} {rec['viewport']:10} {m.get('afcr', 0):6.2f} "
+              f"{m.get('band_ratio', 0):6.2f} "
               f"{m.get('items', 0):6.1f} {m.get('chrome_ratio', 0):7.2f} "
               f"{m.get('overlay_ratio', 0):6.3f} {str(f.get('body_min')):>5} "
               f"{str(f.get('aux_min')):>5} {f.get('lt14_ratio', 0):6.0%} "
@@ -1140,7 +1241,9 @@ def main(argv: list[str] | None = None) -> int:
             print(f"\n[WARN] baseline 文件不存在：{bpath}（本轮不比对）")
         else:
             base = json.loads(bpath.read_text(encoding="utf-8"))
-            regressions = compare_baseline(out, base)
+            regressions, notes = compare_baseline(out, base)
+            for n in notes:
+                print(f"  [注意] {n['msg']}")
             out["baseline"] = {"path": str(bpath), "regressions": regressions}
             print(f"\n== baseline 对比（{bpath}）==" +
                   (f" 退化 {len(regressions)} 项" if regressions else " 无退化"))
