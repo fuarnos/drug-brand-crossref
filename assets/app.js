@@ -216,22 +216,27 @@ function ingredientLabel(e){
 // v0.5.3 点击目标规则（用户报 Excedrin 点品牌跳到 acetaminophen 页）：
 //   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
-function brandHTML(e){
+function brandHTML(e, withFormHint){
   let d = e && e.d != null ? String(e.d) : '';
   const T = window.T || (k=>k);
   if(e && e.t !== 1){
     // v0.9.0 task-19：没有 trade 名 → 商品名位置只显示「无商品名」纯文本，
     // 不链接、不放厂家；通用名/剂型作小字说明。
-    const hint = [e.x || '', e.f ? labelOf('form', e.f, '') : '']
+    const hint = [e.x || '',
+                  (withFormHint === false ? '' : (e.f ? labelOf('form', e.f, '') : ''))]
       .filter(Boolean).join(' · ');
     const matched = e.d ? ` <span class="match-name" title="${esc(T('res.matched_name'))}">`
       + `${esc(T('res.matched_name'))}: ${esc(e.d)}</span>` : '';
     // v0.10.2 task-10：CN 无商品名的产品 100% 有上市许可持有人 → 名称位显示「厂家：<MAH>」。
     // 只显示：厂家名不进 name_key / 索引，也不生成厂家页（避免假商品名污染检索）。
-    const cnMah = ((e.c || []).indexOf('CN') >= 0) ? String(e.m || '').trim() : '';
-    if(cnMah){
-      const short = cnMah.length > 28 ? cnMah.slice(0, 27) + '…' : cnMah;
-      return `<span data-brand="0" class="m-brand m-mah" title="${esc(cnMah)}">`
+    // 2026-11-13 task-28（用户截图）：**不限国家** —— 任何国家只要无 trade 名且有 e.m，
+    // 名称位都显示「厂家：<MAH>」；e.m 为空才回退「无商品名」。截断/title/样式沿用。
+    // 2026-11-13 task-31：`withFormHint=false` 时 hint 只留成分（结果表把剂型移到剂量列，
+    // 避免「Zopiclone · 片剂」+ 下一行「片剂」重复）。
+    const mah = String(e.m || '').trim();
+    if(mah){
+      const short = mah.length > 28 ? mah.slice(0, 27) + '…' : mah;
+      return `<span data-brand="0" class="m-brand m-mah" title="${esc(mah)}">`
         + `<span class="mah-k">${esc(T('brand.mah'))}</span> ${esc(short)}</span>`
         + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
     }
@@ -379,10 +384,24 @@ function detPanelHTML(payload, key, e, T){
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
       + `<td>${makerLinkHTML(r[9], T)}</td></tr>`;
   }).join('');
+  // 2026-11-13 task-34（用户截图）：明细面板底部「全部见成分页」要可点。
+  // a1.more 四语文案里已带 <a href="{url}">；这里注入当前条目的成分页 URL。
+  // e.v 为空（名称层/复方无单一成分）时退回纯文本，绝不输出占位符。
+  let moreHTML = '';
+  if(rows.length >= 12){
+    const tpl = T('a1.more');
+    if(e && e.v){
+      const drugUrl = BASE + 'drug/' + encodeURIComponent(e.v) + '.html';
+      moreHTML = `<p class="sub">${tpl.replace(/\{url\}/g, esc(drugUrl))}</p>`;
+    }else{
+      moreHTML = '<p class="sub">'
+        + esc(tpl.replace(/<[^>]+>/g, '').replace(/\{url\}/g, '')) + '</p>';
+    }
+  }
   return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('col.brand'))}</th>`
     + `<th>${esc(T('a1.pack'))}</th><th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
     + `<th>${esc(T('a1.source'))}</th><th>${esc(T('col.mah'))}</th></tr></thead><tbody>${body}</tbody></table>`
-    + (rows.length >= 12 ? `<p class="sub">${esc(T('a1.more'))}</p>` : '');
+    + moreHTML;
 }
 // B7：导出当前视图全部结果（含折叠/未加载更多的行），纯前端。
 function exportRows(){
@@ -568,15 +587,19 @@ function marketTags(list, max){
   return head + (cs.length > n ? ` <span class="meta">+${cs.length - n}</span>` : '');
 }
 function flatRowHTML(e, T){
-  const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+  const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [];
   const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
                 e.l==='warning' ? `<span class="badge warn">${esc(T('badge.warning'))}</span>` : '';
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${esc(T('badge.combo'))}</span>` : '';
   const exp = e.eo ? `<span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
+  // 2026-11-13 task-31（用户截图）：剂型从品牌列移到「剂量」列并突出显示，
+  // 品牌列不再追加 .rowform —— 否则无商品名行会「Zopiclone · 片剂」+「片剂」出现两次。
   const form = formLabelOf(e);
   const rel = (e.rl && e.rl !== 'none') ? ' · ' + labelOf('release', e.rl, e.rl) : '';
-  const formLine = form ? `<span class="rowform">${esc(form + rel)}</span>` : '';
+  const formTag = form ? `<span class="form-tag">${esc(form + rel)}</span>` : '';
+  const doseTxt = ds.length ? esc(ds.join(' / ')) : '';
+  const doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || '—');
   let det;
   if(e.n){
     det = `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}"`
@@ -589,8 +612,8 @@ function flatRowHTML(e, T){
     det = '—';
   }
   return `<tr class="br" data-k="${esc(e.k)}">
-    <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${badge}${combo}${exp}${formLine}</td>
+    <td class="c-dose" data-label="${esc(T('col.dose'))}">${doseCell}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e, false)}${badge}${combo}${exp}</td>
     <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, 4) || '—'}</td>
     <td class="c-det">${det}</td></tr>`;
 }
@@ -978,7 +1001,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1434160105（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=0183915096（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -1031,7 +1054,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1434160105').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=0183915096').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1921,10 +1944,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1434160105 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=0183915096 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=1434160105').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=0183915096').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1934,7 +1957,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1434160105').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=0183915096').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }

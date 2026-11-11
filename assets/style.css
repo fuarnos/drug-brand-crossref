@@ -151,11 +151,15 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
  column-gap:16px;row-gap:8px;columns:auto;padding-left:0;margin:6px 0 12px;max-width:none;
  list-style:none}
 .atcmembers>li{display:grid;grid-template-rows:auto auto auto;align-content:start;
- align-items:start;align-self:start;row-gap:0;font-size:16px;line-height:1.3;
+ align-items:stretch;align-self:stretch;row-gap:0;font-size:16px;line-height:1.3;
  break-inside:avoid;border:1px solid var(--line);border-radius:10px;background:var(--card);
- padding:10px 12px;margin:0}
-.atcmembers .salt-row{margin:0}
-.atcmembers .atc-strip{margin-top:0}
+ padding:10px 12px;margin:0;min-height:84px}
+/* 2026-11-13 task-40：卡片固定 3 行（名+码 / 盐型 / 状态），每行 1 行、超长省略 + title；
+   展开时 details 内容自然撑高（允许打破等高），不用 height/overflow 硬裁切。 */
+.atc-nm{display:flex;flex-wrap:nowrap;align-items:baseline;gap:0 8px;min-width:0;overflow:hidden}
+.atc-nm>a,.atc-nm>.brand-plain{min-width:0;overflow:hidden;text-overflow:ellipsis;
+ white-space:nowrap;display:block;flex:0 1 auto}
+.atc-nm .atc-codes,.atc-nm .st-badge{flex:none}
 /* 第 1 行：主名 + ATC 码；码用等宽数字 + 固定最小宽，1 码/2 码不会把下一行推歪 */
 .atc-nm{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;min-width:0}
 .atc-codes{display:inline-flex;flex-wrap:wrap;gap:0 6px;min-width:5.4em;
@@ -223,7 +227,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
    这里只说 text-align:center —— 里面装的是四语 .lang-block span（非当前语言 display:none），
    改成 flex 会打乱多语块显隐，不要动。hover 也跟 .homeupd 一致：只变边框、不加下划线。 */
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
-  border-radius:999px;background:#f6f5f0;color:var(--fg);font-size:14px;text-align:center}
+  border-radius:999px;background:var(--card);color:var(--fg);font-size:14px;text-align:center}
 .catchip:hover{border-color:var(--accent);text-decoration:none}
 /* v0.9.6 task-143：首页「最近更新」= 最近 3 个版本（版本号/日期是事实，不翻译） */
 .homeupd{margin:18px 0 6px}
@@ -406,6 +410,11 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
 .res-samelist li{margin:3px 0;font-size:14px}
 table.res.rows td.c-det{text-align:right;white-space:nowrap}
 table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
+/* 2026-11-13 task-31（用户截图）：剂型在结果表「剂量」列里突出显示（只出现一次）。
+   浅绿底 + accent 字，白底行上对比达标；inline-block 不额外占行高。 */
+.form-tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;
+ background:var(--accent-weak);color:var(--accent);font-size:14px;font-weight:600;line-height:1.5;
+ white-space:nowrap;vertical-align:1px}
 .empty3{margin:12px 0 0}.empty3 .e3acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
 .empty3 .e3acts a,.empty3 .e3acts button{min-height:40px;display:inline-flex;align-items:center;
  padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--fg);
@@ -882,9 +891,10 @@ body.density-compact table.res{font-size:14px}
 
 /* v0.10.0: neutral background bands + right-top category/language controls */
 main .section,main .catquick{background:var(--band);border:1px solid var(--line);border-radius:12px;padding:16px}
-/* v0.10.2 同色守卫：catquick 是「面板」层（--card），chip 才是里面的井（--surface-2）；
-   两层都用 --band 会白压白，只剩 1px 边框分界。 */
-main .catquick{background:var(--card)}
+/* v0.10.2 同色守卫 + 2026-11-13 task-29（用户截图）：两层要能分出层次 ——
+   外层「按大类浏览」面板改浅绿（--accent-weak），内部类别 chip 改白（--card + --line 边框），
+   框内/框外颜色不许一致（用户 2026-11-10 硬规则）。 */
+main .catquick{background:var(--accent-weak)}
 .u1guide{background:#fff}
 .sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
 .sn-right details{position:relative}
@@ -897,3 +907,73 @@ main .catquick{background:var(--card)}
 .sn-cats.compact{grid-template-columns:repeat(2,minmax(150px,1fr))}
 .mmenu{display:none}
 @media (max-width:767px){.sn-right .qcat,.sn-right .langdd{display:none}.mmenu{display:inline-flex}}
+/* 2026-11-13 task-30（用户截图「还是竖着的」@1400）：
+   v0.11.1 的 nowrap 只覆盖 .sn 与 .langs a；右侧「按类别」summary（w=34 h=67）与
+   .lname「中文」（w=14 h=45）仍被挤成 min-content 竖排。这里：
+   ① 页头所有含文字导航元素统一 nowrap（含 summary / .lname / 语言菜单）；
+   ② 右侧组 flex:0 0 auto + min-width:max-content，不再被压缩；
+   ③ 1100–1440 先隐藏 logo 副标题、再收窄间距；仍紧时 logo 省略号截断，绝不竖排/溢出。 */
+header .sn a, header .sn summary, header .sn-right summary, header .sn-right .lname,
+header .sn-right .langs, header .sn-right a, header .sn-right details > summary,
+header .lang-menu a, header nav a, header .langs a, header .logo, header .logo-zh,
+header .hdr-shell .sn, header .hdr-shell .sn-right{white-space:nowrap}
+header .sn-right{flex:0 0 auto;min-width:max-content}
+header .sn{flex:0 0 auto}
+@media (min-width:1100px){
+  header.hdr-shell .wrap{gap:8px}
+  header.hdr-shell .logo{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  header.hdr-shell .sn{gap:0}
+  header.hdr-shell .sn>a, header.hdr-shell .sn>details>summary{padding:0 8px}
+  header.hdr-shell .sn-right summary{padding:0 8px}
+}
+@media (min-width:1100px) and (max-width:1440px){
+  header.hdr-shell .logo-zh{display:none}
+}
+/* 2026-11-13 task-40 收尾：桌面卡片第 1 行必须真的 1 行（实测有卡片 .atc-nm 仍
+   flex-wrap:wrap → 名称+码折成 2 行，高度极差 16.9px）。这里用更具体的选择器压住
+   旧规则；390 不受影响（下面的 mobile 覆盖）。 */
+@media (min-width:768px){
+  .atcmembers .atc-nm{display:flex;flex-wrap:nowrap;white-space:nowrap;
+   align-items:center;overflow:hidden}
+  .atcmembers .atc-nm .atc-codes{flex-wrap:nowrap;flex:none}
+  .atcmembers .atc-nm .st-badge,.atcmembers .atc-nm .nolang-badge{white-space:nowrap;flex:none}
+}
+/* 2026-11-13 task-37（用户截图：ATC 三列像多列流、同一行卡片上下边缘参差）：
+   .atclist 的 multicol 与 li 的 align-self:start 是根因。清掉 columns，桌面走真正的
+   行优先 grid；li 用默认 stretch → 同一行自动等高；ul align-content:start 让首行贴顶。
+   长内容换行带动整行高度；390 仍是单列自然高度（现有 media query 的 display:block 保留）。 */
+.atclist.atcmembers{columns:unset}
+@media (min-width:768px){
+  .atclist.atcmembers{display:grid;align-items:stretch;align-content:start}
+}
+.atcmembers>li{align-self:stretch}
+/* 2026-11-13 task-39/40/41：盐型 / 状态都折成一行（原生 details，无 JS 可开、键盘可达）。
+   摘要只显示第一个盐名/第一组状态 +「另有 N 个」，展开列全部；不丢信息、不硬裁切。 */
+.atcmembers .salt-details,.atcmembers .st-details{margin:0;display:block;min-width:0}
+.atcmembers .salt-details>summary,.atcmembers .st-details>summary{
+ display:flex;align-items:center;gap:0;min-height:0;line-height:1.3;font-size:16px;
+ cursor:pointer;list-style:none;color:var(--muted);white-space:nowrap;overflow:hidden}
+.atcmembers .salt-details>summary::-webkit-details-marker,
+.atcmembers .st-details>summary::-webkit-details-marker{display:none}
+.atcmembers .salt-details>summary::after,.atcmembers .st-details>summary::after{
+ content:"▾";flex:none;margin-left:auto;color:var(--accent);font-size:14px;line-height:1}
+.atcmembers .salt-details[open]>summary::after,
+.atcmembers .st-details[open]>summary::after{content:"▴"}
+.atcmembers .salt-details>summary .ln,.atcmembers .st-details>summary .ln{
+ flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.atcmembers .salt-list,.atcmembers .st-list{margin:2px 0 0;font-size:16px;line-height:1.35;
+ color:var(--muted)}
+.atcmembers .st-details .st-word{color:var(--fg);white-space:nowrap}
+.atcmembers .st-details .st-line{display:block}
+.atcmembers .st-details .st-line + .st-line{margin-top:2px}
+.atcmembers .st-details .atc-mk{white-space:normal}
+@media (max-width:767px){
+ /* 390 单列：允许名称换行、卡片按内容自然高度（不裁切；展开自然变高） */
+ .atcmembers>li{min-height:0}
+ .atc-nm{flex-wrap:wrap}
+ .atc-nm>a,.atc-nm>.brand-plain{white-space:normal;overflow:visible;text-overflow:clip}
+ .atcmembers .salt-details>summary,.atcmembers .st-details>summary{white-space:normal;overflow:visible}
+ .atcmembers .salt-details>summary .ln,.atcmembers .st-details>summary .ln{
+   white-space:normal;overflow:visible;text-overflow:clip}
+ .atcmembers .salt-details>summary,.atcmembers .st-details>summary{min-height:44px}
+}
