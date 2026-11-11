@@ -1,0 +1,2468 @@
+{
+ "_meta": {
+  "schema": 1,
+  "source": "GoatCounter API v0 (stats/*)",
+  "site_code": "drug-brand-crossref",
+  "token_masked": "qsea…6oyc",
+  "date": "2026-11-11",
+  "range": {
+   "start": "2026-11-05T00:00:00Z",
+   "end": "2026-11-12T00:00:00Z"
+  },
+  "generated_at": "2026-11-11T17:50:00+00:00",
+  "site_path_prefix": "/drug-brand-crossref"
+ },
+ "totals": {
+  "hits": 149,
+  "events": 30,
+  "pageviews": 119,
+  "days": [
+   {
+    "day": "2026-11-07",
+    "hits": 37
+   },
+   {
+    "day": "2026-11-10",
+    "hits": 32
+   },
+   {
+    "day": "2026-11-11",
+    "hits": 78
+   },
+   {
+    "day": "2026-11-12",
+    "hits": 2
+   }
+  ],
+  "active_days": 4
+ },
+ "top_pages": [
+  {
+   "path_id": 115962266,
+   "path": "/drug-brand-crossref",
+   "event": false,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 12,
+   "days": {
+    "2026-11-07": 6,
+    "2026-11-10": 2,
+    "2026-11-11": 4
+   }
+  },
+  {
+   "path_id": 120911385,
+   "path": "/",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference — drug names across countries",
+   "count": 10,
+   "days": {
+    "2026-11-11": 10
+   }
+  },
+  {
+   "path_id": 120909374,
+   "path": "/index.html",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference — drug names across countries",
+   "count": 6,
+   "days": {
+    "2026-11-11": 5,
+    "2026-11-12": 1
+   }
+  },
+  {
+   "path_id": 116251196,
+   "path": "/drug-brand-crossref/cat/antihypertensives.html",
+   "event": false,
+   "title": "Blood-pressure medicines · Medicine Brand Cross-Reference",
+   "count": 4,
+   "days": {
+    "2026-11-10": 1,
+    "2026-11-11": 3
+   }
+  },
+  {
+   "path_id": 120919441,
+   "path": "/zh/index.html",
+   "event": false,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 4,
+   "days": {
+    "2026-11-11": 4
+   }
+  },
+  {
+   "path_id": 120916922,
+   "path": "/atc.html",
+   "event": false,
+   "title": "ATC classes & categories · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-11-11": 3
+   }
+  },
+  {
+   "path_id": 120915881,
+   "path": "/cat/antihypertensives.html",
+   "event": false,
+   "title": "Blood-pressure medicines · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-11-11": 2,
+    "2026-11-12": 1
+   }
+  },
+  {
+   "path_id": 119733492,
+   "path": "/drug-brand-crossref/coverage.html",
+   "event": false,
+   "title": "Coverage & freshness · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-10": 2
+   }
+  },
+  {
+   "path_id": 120913109,
+   "path": "/whats-new.html",
+   "event": false,
+   "title": "What's new · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-11-11": 3
+   }
+  },
+  {
+   "path_id": 120916871,
+   "path": "/about.html",
+   "event": false,
+   "title": "About · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-11": 2
+   }
+  },
+  {
+   "path_id": 120919147,
+   "path": "/cat/allergy.html",
+   "event": false,
+   "title": "Allergy medicines · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-11": 2
+   }
+  },
+  {
+   "path_id": 120916838,
+   "path": "/coverage.html",
+   "event": false,
+   "title": "Coverage & freshness · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-11": 2
+   }
+  },
+  {
+   "path_id": 116248546,
+   "path": "/drug-brand-crossref/atc.html",
+   "event": false,
+   "title": "ATC classes & categories · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 116900632,
+   "path": "/drug-brand-crossref/cat/antibiotics.html",
+   "event": false,
+   "title": "Antibiotics · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 120620520,
+   "path": "/drug-brand-crossref/cat/cold-medicine.html",
+   "event": false,
+   "title": "Cold & cough medicines · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-10": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 116251786,
+   "path": "/drug-brand-crossref/cat/diabetes.html",
+   "event": false,
+   "title": "Diabetes medicines · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 119716013,
+   "path": "/drug-brand-crossref/drug/cefoperazone.html",
+   "event": false,
+   "title": "Cefoperazone · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 116205401,
+   "path": "/drug-brand-crossref/zh",
+   "event": false,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 120911388,
+   "path": "/zh",
+   "event": false,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 2,
+   "days": {
+    "2026-11-11": 2
+   }
+  },
+  {
+   "path_id": 120915744,
+   "path": "/?q=%E4%B8%A4%E5%8F%AA%E9%9D%92%E8%9B%99",
+   "event": false,
+   "title": "Medicine Brand Cross-Reference — drug names across countries",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120918541,
+   "path": "/atc/S.html",
+   "event": false,
+   "title": "ATC S · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120916815,
+   "path": "/cat/analgesics.html",
+   "event": false,
+   "title": "Pain & fever relief · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120911520,
+   "path": "/cat/antibiotics.html",
+   "event": false,
+   "title": "Antibiotics · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120916957,
+   "path": "/combo/ferric-oxide-red+pramoxine+zinc-oxide.html",
+   "event": false,
+   "title": "Ferric Oxide Red + Pramoxine + Zinc Oxide · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120916885,
+   "path": "/confused.html",
+   "event": false,
+   "title": "Easily confused drug names · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 115967008,
+   "path": "/drug-brand-crossref/about.html",
+   "event": false,
+   "title": "About · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 119733845,
+   "path": "/drug-brand-crossref/atc/J01.html",
+   "event": false,
+   "title": "ATC J01 · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 120611811,
+   "path": "/drug-brand-crossref/atc/R06A.html",
+   "event": false,
+   "title": "ATC R06A · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-10": 1
+   }
+  },
+  {
+   "path_id": 119734541,
+   "path": "/drug-brand-crossref/cat/acid-related.html",
+   "event": false,
+   "title": "Stomach / acid medicines · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 116250372,
+   "path": "/drug-brand-crossref/cat/allergy.html",
+   "event": false,
+   "title": "Allergy medicines · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-10": 1
+   }
+  }
+ ],
+ "search_events": [
+  {
+   "path_id": 120608349,
+   "path": "search-泰诺?lang=zh&q_len=2",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 3,
+   "days": {
+    "2026-11-10": 1,
+    "2026-11-11": 2
+   }
+  },
+  {
+   "path_id": 119746062,
+   "path": "search-力度伸?lang=en&q_len=3",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference — drug names across countries",
+   "count": 2,
+   "days": {
+    "2026-11-07": 2
+   }
+  },
+  {
+   "path_id": 120706613,
+   "path": "search-虫草素?lang=zh&q_len=3",
+   "event": true,
+   "title": "虫草素 · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-10": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 119738895,
+   "path": "search-benzonia acid?lang=zh&q_len=13",
+   "event": true,
+   "title": "benzonia acid · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 120916681,
+   "path": "search-tylenol?lang=zh&q_len=7",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120915745,
+   "path": "search-两只青蛙?lang=en&q_len=4",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference — drug names across countries",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 120915729,
+   "path": "search-两只青蛙?lang=zh&q_len=4",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 1,
+   "days": {
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 119730929,
+   "path": "search-力度伸?lang=zh&q_len=3",
+   "event": true,
+   "title": "力度伸 · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 119716257,
+   "path": "search-头孢?lang=zh&q_len=2",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  }
+ ],
+ "other_events": [
+  {
+   "path_id": 119716114,
+   "path": "country-US",
+   "event": true,
+   "title": "头孢 · Medicine Brand Cross-Reference",
+   "count": 3,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-11": 2
+   }
+  },
+  {
+   "path_id": 115623504,
+   "path": "click-result",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 115966679,
+   "path": "click-whatsnew",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-10": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 116248647,
+   "path": "country-ALL",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 115623571,
+   "path": "country-CN",
+   "event": true,
+   "title": "Medicine Brand Cross-Reference · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 119731187,
+   "path": "country-HK",
+   "event": true,
+   "title": "力度伸 · Medicine Brand Cross-Reference",
+   "count": 2,
+   "days": {
+    "2026-11-07": 1,
+    "2026-11-11": 1
+   }
+  },
+  {
+   "path_id": 119731450,
+   "path": "click-report",
+   "event": true,
+   "title": "力度伸 · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 119731238,
+   "path": "country-SG",
+   "event": true,
+   "title": "力度伸 · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 116281486,
+   "path": "country-TW",
+   "event": true,
+   "title": "药品商品名跨国定位 — 跨国家/语言的药品名对照",
+   "count": 1,
+   "days": {
+    "2026-11-07": 1
+   }
+  },
+  {
+   "path_id": 120706644,
+   "path": "search0-虫草素?lang=zh&q_len=3",
+   "event": true,
+   "title": "没有匹配「虫草素」 · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-10": 1
+   }
+  }
+ ],
+ "zero_result_events": [
+  {
+   "path_id": 120706644,
+   "path": "search0-虫草素?lang=zh&q_len=3",
+   "event": true,
+   "title": "没有匹配「虫草素」 · Medicine Brand Cross-Reference",
+   "count": 1,
+   "days": {
+    "2026-11-10": 1
+   }
+  }
+ ],
+ "zero_result_event_implemented": true,
+ "countries": [
+  {
+   "id": "US",
+   "name": "United States",
+   "count": 144
+  },
+  {
+   "id": "GB",
+   "name": "United Kingdom",
+   "count": 3
+  },
+  {
+   "id": "DE",
+   "name": "Germany",
+   "count": 1
+  },
+  {
+   "id": "FR",
+   "name": "France",
+   "count": 1
+  }
+ ],
+ "browsers": [
+  {
+   "id": "Chrome",
+   "name": "Chrome",
+   "count": 145
+  },
+  {
+   "id": "Safari",
+   "name": "Safari",
+   "count": 3
+  },
+  {
+   "id": "Firefox",
+   "name": "Firefox",
+   "count": 1
+  }
+ ],
+ "systems": [
+  {
+   "id": "Windows",
+   "name": "Windows",
+   "count": 124
+  },
+  {
+   "id": "Linux",
+   "name": "Linux",
+   "count": 11
+  },
+  {
+   "id": "Android",
+   "name": "Android",
+   "count": 10
+  },
+  {
+   "id": "iOS",
+   "name": "iOS",
+   "count": 3
+  },
+  {
+   "id": "macOS",
+   "name": "macOS",
+   "count": 1
+  }
+ ],
+ "languages": [
+  {
+   "id": "(unknown)",
+   "name": "(unknown)",
+   "count": 149
+  }
+ ],
+ "sizes": [
+  {
+   "id": "phone",
+   "name": "",
+   "count": 14
+  },
+  {
+   "id": "tablet",
+   "name": "",
+   "count": 2
+  },
+  {
+   "id": "desktop",
+   "name": "",
+   "count": 130
+  },
+  {
+   "id": "desktophd",
+   "name": "",
+   "count": 3
+  },
+  {
+   "id": "unknown",
+   "name": "",
+   "count": 0
+  }
+ ],
+ "campaigns": [],
+ "refs": [
+  {
+   "name": "",
+   "count": 65,
+   "ref_scheme": "o"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/cat/antibiotics.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/cat/antibiotics.html",
+   "count": 9,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref",
+   "name": "fuarnos.github.io/drug-brand-crossref",
+   "count": 8,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/index.html",
+   "name": "drugcrossref.com/index.html",
+   "count": 8,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/index.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/index.html",
+   "count": 7,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com",
+   "name": "drugcrossref.com",
+   "count": 5,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/zh",
+   "name": "drugcrossref.com/zh",
+   "count": 5,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/atc.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/atc.html",
+   "count": 4,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/cat/allergy.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/cat/allergy.html",
+   "count": 3,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "bing.com",
+   "name": "bing.com",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/zh",
+   "name": "fuarnos.github.io/drug-brand-crossref/zh",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/whats-new.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/whats-new.html",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/about.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/about.html",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/cat/antihypertensives.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/cat/antihypertensives.html",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/zh-hant",
+   "name": "fuarnos.github.io/drug-brand-crossref/zh-hant",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/drug/cefoperazone.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/drug/cefoperazone.html",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/coverage.html",
+   "name": "drugcrossref.com/coverage.html",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/atc.html",
+   "name": "drugcrossref.com/atc.html",
+   "count": 2,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "weixin110.qq.com",
+   "name": "weixin110.qq.com",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+   "name": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/es",
+   "name": "fuarnos.github.io/drug-brand-crossref/es",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/zh/index.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/zh/index.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/zh/whats-new.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/zh/whats-new.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/cat/diabetes.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/cat/diabetes.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/combo/cefalexin+cephalexin.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/combo/cefalexin+cephalexin.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/drug/benzoic-acid.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/drug/benzoic-acid.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "fuarnos.github.io/drug-brand-crossref/coverage.html",
+   "name": "fuarnos.github.io/drug-brand-crossref/coverage.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/name/%E7%AB%8B%E5%B0%86.html",
+   "name": "drugcrossref.com/name/%E7%AB%8B%E5%B0%86.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/cat/analgesics.html",
+   "name": "drugcrossref.com/cat/analgesics.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/cat/antihypertensives.html",
+   "name": "drugcrossref.com/cat/antihypertensives.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/cat/antibiotics.html",
+   "name": "drugcrossref.com/cat/antibiotics.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/drug/cn-92991dccd0.html",
+   "name": "drugcrossref.com/drug/cn-92991dccd0.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/zh/index.html",
+   "name": "drugcrossref.com/zh/index.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/cat/allergy.html",
+   "name": "drugcrossref.com/cat/allergy.html",
+   "count": 1,
+   "ref_scheme": "h"
+  },
+  {
+   "id": "drugcrossref.com/about.html",
+   "name": "drugcrossref.com/about.html",
+   "count": 1,
+   "ref_scheme": "h"
+  }
+ ],
+ "path_cross_tab": [
+  {
+   "path_id": 115962266,
+   "path": "/drug-brand-crossref",
+   "count": 12,
+   "event": false,
+   "systems": {
+    "Windows": 9,
+    "Linux": 2,
+    "iOS": 1
+   },
+   "browsers": {
+    "Chrome": 11,
+    "Safari": 1
+   },
+   "sizes": {
+    "phone": 1,
+    "tablet": 1,
+    "desktop": 10
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 7,
+     "scheme": "o"
+    },
+    {
+     "name": "bing.com",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "weixin110.qq.com",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "fuarnos.github.io/drug-brand-crossref/cat/antihypertensives.html",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "fuarnos.github.io/drug-brand-crossref/coverage.html",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 120911385,
+   "path": "/",
+   "count": 10,
+   "event": false,
+   "systems": {
+    "Windows": 5,
+    "iOS": 2,
+    "Linux": 2,
+    "macOS": 1
+   },
+   "browsers": {
+    "Chrome": 7,
+    "Safari": 2,
+    "Firefox": 1
+   },
+   "sizes": {
+    "phone": 3,
+    "desktop": 7
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 10,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 120909374,
+   "path": "/index.html",
+   "count": 6,
+   "event": false,
+   "systems": {
+    "Windows": 4,
+    "Android": 1,
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 6
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 5
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 3,
+     "scheme": "o"
+    },
+    {
+     "name": "drugcrossref.com",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "drugcrossref.com/atc.html",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "drugcrossref.com/cat/allergy.html",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 116251196,
+   "path": "/drug-brand-crossref/cat/antihypertensives.html",
+   "count": 4,
+   "event": false,
+   "systems": {
+    "Windows": 4
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120919441,
+   "path": "/zh/index.html",
+   "count": 4,
+   "event": false,
+   "systems": {
+    "Windows": 3,
+    "Android": 1
+   },
+   "browsers": {
+    "Chrome": 4
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 2,
+    "desktophd": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    },
+    {
+     "name": "drugcrossref.com/index.html",
+     "count": 2,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 120916922,
+   "path": "/atc.html",
+   "count": 3,
+   "event": false,
+   "systems": {
+    "Windows": 2,
+    "Android": 1
+   },
+   "browsers": {
+    "Chrome": 3
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 2
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 1,
+     "scheme": "o"
+    },
+    {
+     "name": "drugcrossref.com/coverage.html",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "drugcrossref.com/cat/antihypertensives.html",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 120915881,
+   "path": "/cat/antihypertensives.html",
+   "count": 3,
+   "event": false,
+   "systems": {
+    "Windows": 3
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119733492,
+   "path": "/drug-brand-crossref/coverage.html",
+   "count": 3,
+   "event": false,
+   "systems": {
+    "Windows": 2,
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 3
+   },
+   "sizes": {
+    "desktop": 3
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    },
+    {
+     "name": "fuarnos.github.io/drug-brand-crossref",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 120913109,
+   "path": "/whats-new.html",
+   "count": 3,
+   "event": false,
+   "systems": {
+    "Windows": 2,
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 3
+   },
+   "sizes": {
+    "desktop": 3
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    },
+    {
+     "name": "drugcrossref.com/zh",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 119716114,
+   "path": "country-US",
+   "count": 3,
+   "event": true,
+   "systems": {
+    "Windows": 2,
+    "Android": 1
+   },
+   "browsers": {
+    "Chrome": 3
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1,
+    "desktophd": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    },
+    {
+     "name": "fuarnos.github.io/drug-brand-crossref/zh-hant",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 120608349,
+   "path": "search-泰诺?lang=zh&q_len=2",
+   "count": 3,
+   "event": true,
+   "systems": {
+    "Windows": 2,
+    "Android": 1
+   },
+   "browsers": {
+    "Chrome": 3
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1,
+    "desktophd": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 3,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 120916871,
+   "path": "/about.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Android": 1,
+    "Windows": 1
+   },
+   "browsers": {
+    "Chrome": 2
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "drugcrossref.com/coverage.html",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "drugcrossref.com/zh/index.html",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 120919147,
+   "path": "/cat/allergy.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916838,
+   "path": "/coverage.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Android": 1,
+    "Windows": 1
+   },
+   "browsers": {
+    "Chrome": 2
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "drugcrossref.com/cat/analgesics.html",
+     "count": 1,
+     "scheme": "h"
+    },
+    {
+     "name": "drugcrossref.com/about.html",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 116248546,
+   "path": "/drug-brand-crossref/atc.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116900632,
+   "path": "/drug-brand-crossref/cat/antibiotics.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120620520,
+   "path": "/drug-brand-crossref/cat/cold-medicine.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116251786,
+   "path": "/drug-brand-crossref/cat/diabetes.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119716013,
+   "path": "/drug-brand-crossref/drug/cefoperazone.html",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116205401,
+   "path": "/drug-brand-crossref/zh",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120911388,
+   "path": "/zh",
+   "count": 2,
+   "event": false,
+   "systems": {
+    "Linux": 1,
+    "Windows": 1
+   },
+   "browsers": {
+    "Chrome": 2
+   },
+   "sizes": {
+    "desktop": 2
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 1,
+     "scheme": "o"
+    },
+    {
+     "name": "drugcrossref.com",
+     "count": 1,
+     "scheme": "h"
+    }
+   ]
+  },
+  {
+   "path_id": 115623504,
+   "path": "click-result",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115966679,
+   "path": "click-whatsnew",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116248647,
+   "path": "country-ALL",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Android": 1,
+    "Windows": 1
+   },
+   "browsers": {
+    "Chrome": 2
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 115623571,
+   "path": "country-CN",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Android": 1,
+    "Windows": 1
+   },
+   "browsers": {
+    "Chrome": 2
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 119731187,
+   "path": "country-HK",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Android": 1,
+    "Windows": 1
+   },
+   "browsers": {
+    "Chrome": 2
+   },
+   "sizes": {
+    "phone": 1,
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 2,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 119746062,
+   "path": "search-力度伸?lang=en&q_len=3",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120706613,
+   "path": "search-虫草素?lang=zh&q_len=3",
+   "count": 2,
+   "event": true,
+   "systems": {
+    "Windows": 2
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120915744,
+   "path": "/?q=%E4%B8%A4%E5%8F%AA%E9%9D%92%E8%9B%99",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120918541,
+   "path": "/atc/S.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916815,
+   "path": "/cat/analgesics.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120911520,
+   "path": "/cat/antibiotics.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916957,
+   "path": "/combo/ferric-oxide-red+pramoxine+zinc-oxide.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916885,
+   "path": "/confused.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115967008,
+   "path": "/drug-brand-crossref/about.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119733845,
+   "path": "/drug-brand-crossref/atc/J01.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120611811,
+   "path": "/drug-brand-crossref/atc/R06A.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119734541,
+   "path": "/drug-brand-crossref/cat/acid-related.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116250372,
+   "path": "/drug-brand-crossref/cat/allergy.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116905213,
+   "path": "/drug-brand-crossref/cat/dermatologicals.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119716208,
+   "path": "/drug-brand-crossref/combo/cefalexin+cephalexin.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115962447,
+   "path": "/drug-brand-crossref/drug/acetaminophen.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119738940,
+   "path": "/drug-brand-crossref/drug/benzoic-acid.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119716234,
+   "path": "/drug-brand-crossref/drug/cefalexin.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119716065,
+   "path": "/drug-brand-crossref/drug/cefradine.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119715982,
+   "path": "/drug-brand-crossref/drug/ceftazidime.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120619095,
+   "path": "/drug-brand-crossref/drug/cloxacillin.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120619078,
+   "path": "/drug-brand-crossref/drug/cn-5772760bd4.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116250427,
+   "path": "/drug-brand-crossref/drug/cn-755d52ad1d.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119715854,
+   "path": "/drug-brand-crossref/drug/cn-7764ed6be6.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120908134,
+   "path": "/drug-brand-crossref/drug/cn-ba7ee51326.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120609869,
+   "path": "/drug-brand-crossref/drug/cn-bd82fbefdd.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120612327,
+   "path": "/drug-brand-crossref/drug/desloratadine.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120612556,
+   "path": "/drug-brand-crossref/drug/metformin.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120612549,
+   "path": "/drug-brand-crossref/drug/omeprazole.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120618559,
+   "path": "/drug-brand-crossref/drug/polymyxin-b.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 115621230,
+   "path": "/drug-brand-crossref/es",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120620302,
+   "path": "/drug-brand-crossref/name/%E4%BE%9D%E7%BE%8E%E6%AC%A3.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120619981,
+   "path": "/drug-brand-crossref/name/%E9%93%83%E5%85%B0%E6%AC%A3.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119739009,
+   "path": "/drug-brand-crossref/name/uribel.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120851045,
+   "path": "/drug-brand-crossref/name/valsartan.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 1
+   },
+   "sizes": {
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 1,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 115966681,
+   "path": "/drug-brand-crossref/whats-new.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116248812,
+   "path": "/drug-brand-crossref/zh-hant",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116249876,
+   "path": "/drug-brand-crossref/zh-hant/whats-new.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116249894,
+   "path": "/drug-brand-crossref/zh/whats-new.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916768,
+   "path": "/drug/acetaminophen.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120918902,
+   "path": "/drug/cn-92991dccd0.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120911412,
+   "path": "/es",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 1
+   },
+   "sizes": {
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 1,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 120918639,
+   "path": "/es/index.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916908,
+   "path": "/glossary.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120917016,
+   "path": "/index.html?q=Tylenol",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916935,
+   "path": "/maker/kenvue-brands-llc.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120915771,
+   "path": "/name/%E7%AB%8B%E5%B0%86.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120915809,
+   "path": "/name/%E7%AB%8B%E5%B0%86.html?lang=zh",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120919121,
+   "path": "/name/%E7%BE%8E%E5%8A%9B%E6%B3%B0.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916786,
+   "path": "/name/tylenol-extra-strength.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916898,
+   "path": "/warn.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120911414,
+   "path": "/zh-hant",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Linux": 1
+   },
+   "browsers": {
+    "Chrome": 1
+   },
+   "sizes": {
+    "desktop": 1
+   },
+   "refs": [
+    {
+     "name": "",
+     "count": 1,
+     "scheme": "o"
+    }
+   ]
+  },
+  {
+   "path_id": 120918885,
+   "path": "/zh-hant/index.html",
+   "count": 1,
+   "event": false,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119731450,
+   "path": "click-report",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119731238,
+   "path": "country-SG",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 116281486,
+   "path": "country-TW",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119738895,
+   "path": "search-benzonia acid?lang=zh&q_len=13",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120916681,
+   "path": "search-tylenol?lang=zh&q_len=7",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120915745,
+   "path": "search-两只青蛙?lang=en&q_len=4",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120915729,
+   "path": "search-两只青蛙?lang=zh&q_len=4",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119730929,
+   "path": "search-力度伸?lang=zh&q_len=3",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 119716257,
+   "path": "search-头孢?lang=zh&q_len=2",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  },
+  {
+   "path_id": 120706644,
+   "path": "search0-虫草素?lang=zh&q_len=3",
+   "count": 1,
+   "event": true,
+   "systems": {
+    "Windows": 1
+   },
+   "browsers": {},
+   "sizes": {},
+   "refs": []
+  }
+ ],
+ "russia": {
+  "conclusion": "存在扫描器特征路径（.env/.git/wp-* 等），更像**扫描器/爬虫**",
+  "confidence": "高",
+  "evidence": {
+   "ru_hits": 0,
+   "ru_share_of_hits": 0.0,
+   "non_windows_paths": [
+    {
+     "path": "/drug-brand-crossref",
+     "count": 12,
+     "systems": {
+      "Windows": 9,
+      "Linux": 2,
+      "iOS": 1
+     },
+     "browsers": {
+      "Chrome": 11,
+      "Safari": 1
+     },
+     "sizes": {
+      "phone": 1,
+      "tablet": 1,
+      "desktop": 10
+     }
+    },
+    {
+     "path": "/",
+     "count": 10,
+     "systems": {
+      "Windows": 5,
+      "iOS": 2,
+      "Linux": 2,
+      "macOS": 1
+     },
+     "browsers": {
+      "Chrome": 7,
+      "Safari": 2,
+      "Firefox": 1
+     },
+     "sizes": {
+      "phone": 3,
+      "desktop": 7
+     }
+    },
+    {
+     "path": "/index.html",
+     "count": 6,
+     "systems": {
+      "Windows": 4,
+      "Android": 1,
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 6
+     },
+     "sizes": {
+      "phone": 1,
+      "desktop": 5
+     }
+    },
+    {
+     "path": "/drug-brand-crossref/coverage.html",
+     "count": 3,
+     "systems": {
+      "Windows": 2,
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 3
+     },
+     "sizes": {
+      "desktop": 3
+     }
+    },
+    {
+     "path": "/whats-new.html",
+     "count": 3,
+     "systems": {
+      "Windows": 2,
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 3
+     },
+     "sizes": {
+      "desktop": 3
+     }
+    },
+    {
+     "path": "/zh",
+     "count": 2,
+     "systems": {
+      "Linux": 1,
+      "Windows": 1
+     },
+     "browsers": {
+      "Chrome": 2
+     },
+     "sizes": {
+      "desktop": 2
+     }
+    },
+    {
+     "path": "/drug-brand-crossref/name/valsartan.html",
+     "count": 1,
+     "systems": {
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 1
+     },
+     "sizes": {
+      "desktop": 1
+     }
+    },
+    {
+     "path": "/es",
+     "count": 1,
+     "systems": {
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 1
+     },
+     "sizes": {
+      "desktop": 1
+     }
+    },
+    {
+     "path": "/zh-hant",
+     "count": 1,
+     "systems": {
+      "Linux": 1
+     },
+     "browsers": {
+      "Chrome": 1
+     },
+     "sizes": {
+      "desktop": 1
+     }
+    }
+   ],
+   "suspicious_paths": [
+    "/?q=%E4%B8%A4%E5%8F%AA%E9%9D%92%E8%9B%99",
+    "/drug-brand-crossref/name/%E4%BE%9D%E7%BE%8E%E6%AC%A3.html",
+    "/drug-brand-crossref/name/%E9%93%83%E5%85%B0%E6%AC%A3.html",
+    "/name/%E7%AB%8B%E5%B0%86.html",
+    "/name/%E7%AB%8B%E5%B0%86.html?lang=zh",
+    "/name/%E7%BE%8E%E5%8A%9B%E6%B3%B0.html"
+   ],
+   "candidate": {
+    "path": "/drug-brand-crossref",
+    "path_id": 115962266,
+    "path_hits": 12,
+    "systems": {
+     "Windows": 9,
+     "Linux": 2,
+     "iOS": 1
+    },
+    "browsers": {
+     "Chrome": 11,
+     "Safari": 1
+    },
+    "sizes": {
+     "phone": 1,
+     "tablet": 1,
+     "desktop": 10
+    },
+    "refs": [
+     {
+      "name": "",
+      "count": 7,
+      "scheme": "o"
+     },
+     {
+      "name": "bing.com",
+      "count": 1,
+      "scheme": "h"
+     },
+     {
+      "name": "weixin110.qq.com",
+      "count": 1,
+      "scheme": "h"
+     },
+     {
+      "name": "github.com/fuarnos/drug-brand-crossref/deployments/github-pages",
+      "count": 1,
+      "scheme": "h"
+     },
+     {
+      "name": "fuarnos.github.io/drug-brand-crossref/cat/antihypertensives.html",
+      "count": 1,
+      "scheme": "h"
+     },
+     {
+      "name": "fuarnos.github.io/drug-brand-crossref/coverage.html",
+      "count": 1,
+      "scheme": "h"
+     }
+    ],
+    "is_event": false
+   }
+  },
+  "limitations": [
+   "GoatCounter API 不提供 UA/IP/ASN；CSV export 需 export 权限（本 token 403），无法做原始 hit 级交叉表",
+   "国家/浏览器/系统等维度按 GoatCounter 统计口径（含事件、按访问者计），与 PV 不完全等价",
+   "站点挂在 GitHub Pages，无服务端日志；如需 100% 确证需 Cloudflare/服务端访问日志或 GoatCounter 后台查看 UA"
+  ],
+  "advice": [
+   "按机器人/噪音流量忽略即可，不需要封禁（本站无登录/写接口，无风险面）",
+   "自测流量建议在 GoatCounter 后台设置 skip-dev（按 UA/IP 排除），避免污染统计",
+   "如后续要监控异常，可给站点加 Cloudflare（免费版）看 ASN/UA，或在 GoatCounter 后台加 Bot 过滤",
+   "搜索零结果事件已埋点（search0-<term>，v0.8.2）；可用 --search-weekly 生成 Top 搜索词/零结果周报"
+  ]
+ }
+}
