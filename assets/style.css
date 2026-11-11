@@ -17,6 +17,11 @@ body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
 display:flex;flex-direction:column;
 font:16px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+/* 2026-11-11 P1：`hidden` 属性的兜底。UA 样式表是 `[hidden]{display:none}`，任何作者样式
+   里的 `display:grid/flex/block` 都会盖掉它 —— 成分页剂型筛选「点了没反应」就是这么来的
+   （`.mkrow{display:grid}` 赢了 UA 规则）。这里给一条带 !important 的兜底，
+   以后再加 display 组件也不会把 hidden 弄失效。 */
+[hidden]{display:none!important}
 header{border-bottom:1px solid var(--line);background:var(--bg)}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
 .logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
@@ -55,8 +60,28 @@ main{padding:24px 0 64px;flex:1}
 h1{font-size:var(--fs-xl);line-height:var(--lh-tight);margin:0 0 8px}
 h2{font-size:var(--fs-lg);line-height:var(--lh-heading);margin:24px 0 12px}
 .sub{color:var(--muted);font-size:var(--fs-sm);line-height:var(--lh-ui);margin:0 0 16px;max-width:var(--prose)}
+/* 2026-11-11 UI：候选集单独一行 —— 16px 正常前景色（不是 muted 14px），
+   因为「永远是候选集」是本站的口径而不是注脚。 */
+.candidate-line{font-size:var(--fs-md);line-height:var(--lh-ui);color:var(--fg);
+ margin:0 0 16px;max-width:var(--prose)}
 #q{width:100%;padding:14px 16px;font-size:16px;border:1px solid var(--line);
 border-radius:12px;background:#fff}
+/* 2026-11-11 UI：搜索框内 44×44 可见提交按钮 + 右侧「按 / 聚焦」提示（13px 灰字）。
+   按钮绝对定位于输入框右侧；提示只在输入框为空时显示（:placeholder-shown），
+   有内容时自动隐藏，不会压住用户输入。输入框右侧留 56px 内边距给按钮。 */
+.searchbar #q{padding-right:56px}
+.sb-go{position:absolute;top:50%;right:6px;transform:translateY(-50%);width:44px;height:44px;
+ padding:0;display:inline-flex;align-items:center;justify-content:center;
+ border:1px solid var(--accent);border-radius:10px;background:var(--accent);color:#fff;
+ font-size:18px;line-height:1;cursor:pointer}
+.sb-go:hover{filter:brightness(1.08)}
+.sb-hint{position:absolute;top:50%;right:58px;transform:translateY(-50%);font-size:13px;
+ line-height:1;color:var(--muted);pointer-events:none;white-space:nowrap}
+#q:not(:placeholder-shown) ~ .sb-hint{display:none}
+@media (max-width:767px){
+ /* 触屏没有 / 键，提示会白占一行宽度；按钮照留（= 移动端键盘的 search 键） */
+ .sb-hint{display:none}
+}
 .row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
 select,button{padding:8px 12px;border:1px solid var(--line);border-radius:8px;
 background:#fff;font-size:14px}
@@ -95,13 +120,35 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atccard:hover{border-color:var(--accent)}
 .atccard code{font-weight:700;margin-right:4px}
 .atclist{columns:2;column-gap:24px}
-.atclist li{break-inside:avoid;margin:2px 0}
+/* 2026-11-11 Batch 2：列表项是**内容**不是注脚 —— 外层 ul 带 .sub（14px）是历史写法，
+   li 必须自己写回 16px，否则 first_screen_check 的「正文 ≥16px」会把 14px 的 ATC 子类
+   列表当成正文最小值（atc/R06A.html 实测 14px 就是 `ul.sub.atclist > li`）。 */
+.atclist li{break-inside:avoid;margin:2px 0;font-size:16px}
 /* v0.10.2 task-3：ATC/大类页成分列表改自适应多列网格——宽屏（1440 / 2560）不再把内容
    挤在中间一列（旧 .wrap 920px + columns:2，2560 视口下列宽只有 268px）。
-   minmax(300px,1fr) 保证单列 ≥300px，行内「主名 + 盐型子行 + 状态角标」不折断。 */
+   minmax(300px,1fr) 保证单列 ≥300px，行内「主名 + 盐型子行 + 状态角标」不折断。
+   2026-11-11 Batch 2：每条固定 2–3 行（名+码 / 盐型 / 状态+市场），顶部对齐 ——
+   同一行里相邻条目不再因为「一行只有名字、一行带两枚状态」而上下错位。 */
 .atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
  column-gap:24px;row-gap:0;columns:auto;padding-left:20px;margin:6px 0 10px;max-width:none}
-.atcmembers li{font-size:16px;line-height:1.3;break-inside:auto}
+.atcmembers li{display:grid;grid-template-rows:auto auto auto;align-content:start;
+ align-items:start;row-gap:1px;font-size:16px;line-height:1.3;break-inside:auto}
+/* 第 1 行：主名 + ATC 码；码用等宽数字 + 固定最小宽，1 码/2 码不会把下一行推歪 */
+.atc-nm{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;min-width:0}
+.atc-codes{display:inline-flex;flex-wrap:wrap;gap:0 6px;min-width:5.4em;
+ font-variant-numeric:tabular-nums}
+.atc-codes code{font-size:13px;color:var(--muted);white-space:nowrap}
+/* 第 3 行：状态 + 市场码。状态词只出现一次、市场码紧随其后用空格分隔，
+   不同状态之间才用「·」（reports/2026-11-11-新UI-site-ui.md §B）。 */
+.atc-strip{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px;margin-top:1px}
+.atc-st-grp{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:0 5px;min-width:0}
+.atc-st{font-size:13px;line-height:1.25;color:var(--fg);white-space:nowrap}
+.atc-st.st-discontinued{color:var(--warn)}
+.atc-st.st-withdrawn{color:var(--sev)}
+.atc-st.st-unknown{color:var(--muted)}
+.atc-mk{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;
+ letter-spacing:0;white-space:nowrap}
+.atc-st-sep{color:var(--muted);font-size:13px;line-height:1.25}
 @media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:18px}
  .atcmembers li{font-size:16px} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
@@ -111,22 +158,26 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atc-count{margin:-6px 0 10px}
 .salt{color:var(--muted);font-size:14px;margin-left:6px}
 /* v0.10.2 task-3：盐型独立成块级子行（左缩进对齐主名），文案「盐型：Name」。
-   原来是内联 span，390px 下与主名/角标抢行，且每个盐型各带一次「暂无中文名」。 */
-.salt-row{display:block;margin:1px 0 2px;color:var(--muted);font-size:15px;line-height:1.4}
+   原来是内联 span，390px 下与主名/角标抢行，且每个盐型各带一次「暂无中文名」。
+   2026-11-11 Batch 2：15px → 16px（盐型是内容，不是辅助文字；正文硬线 ≥16px）。 */
+.salt-row{display:block;margin:1px 0 2px;color:var(--muted);font-size:16px;line-height:1.35}
 .salt-row .salt-k{color:var(--muted)}
 .salt-row .nm{color:var(--muted)}
 .drug-name-src{min-height:18px;margin:2px 0 0;font-size:14px}
 .drug-name-src [data-sub-src]:not(:empty){display:inline-block;padding:1px 7px;
   border:1px solid var(--line);border-radius:999px;background:#f6f5f0;color:var(--muted)}
 .salt .nm{color:var(--muted)}
-.atcmembers .st-badge{margin-left:4px;padding:0 5px;margin-right:3px;font-size:13px;
-  line-height:1.2}
-/* v0.10.2：状态角标尾部带市场码（reports/atc-status-aggregation-20261110.md）。
-   字号 12px 是硬线（v0.10.2 起「任何可见文字 <12px 即违规」）：11px 虽然能把 390px 下
-   4 徽章行压到 2 行，但那是拿可读性换高度。12px + padding:0 5px + line-height 1.2 时
-   4 徽章行平均 48px（v0.10.1 无市场码时 52px），仍然比原来矮。 */
+/* 2026-11-11 Batch 2：成分列表里的状态不再用「四色圆角底墙」。
+   原来是 .st-badge 底色 + 0 竖向内边距（impeccable cramped-padding 在 atc/A.html 报了
+   1630 条，全部指向这里）。现在状态词是纯文字（13px），只有「已停售 / 已撤市」保留警示色，
+   「状态未知」用 muted；行内只剩「暂无中文名」这一种徽章，也去掉底色/描边（见下）。
+   v0.10.2 的历史结论保留：不折 +N（触屏拿不到 title）、同一国家可以出现在多个状态里
+   （3,599 个「成分×市场」格子本来就多状态）、字号 12px 是硬线。 */
+.atcmembers .st-badge{margin:0 0 0 6px;padding:0;border:0;background:none;
+  font-size:13px;line-height:1.25;color:var(--muted)}
 .st-badge .mk{margin-left:3px;font-size:13px;letter-spacing:0;font-variant-numeric:tabular-nums}
 .atc-mk-hint{margin:-4px 0 10px}
+.atc-nolang-note{margin:-4px 0 10px}
 /* 盐型子行不再逐个标「暂无中文名」：标记由 markAtcRowGaps() 每行只放一枚（链接外） */
 .atcdetails{margin:8px 0 0}
 .atcdetails summary{cursor:pointer;color:var(--accent);font-size:14px;margin:4px 0}
@@ -144,9 +195,13 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .cat-note .lang-block{margin:2px 0}
 .catquick{margin:18px 0 6px}
 .catquick h2{font-size:16px;margin:0 0 8px}
+/* 2026-11-11（v0.11.1）：chip 是等宽栅格项（.catgrid 4 列），文字默认靠左，英文短标签
+   （Antibiotics）右边会空一大片，看着像没对齐；中文标签长度接近列宽所以「显得居中」。
+   这里只说 text-align:center —— 里面装的是四语 .lang-block span（非当前语言 display:none），
+   改成 flex 会打乱多语块显隐，不要动。hover 也跟 .homeupd 一致：只变边框、不加下划线。 */
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
-  border-radius:999px;background:#f6f5f0;color:var(--fg);font-size:14px}
-.catchip:hover{border-color:var(--accent)}
+  border-radius:999px;background:#f6f5f0;color:var(--fg);font-size:14px;text-align:center}
+.catchip:hover{border-color:var(--accent);text-decoration:none}
 /* v0.9.6 task-143：首页「最近更新」= 最近 3 个版本（版本号/日期是事实，不翻译） */
 .homeupd{margin:18px 0 6px}
 .homeupd h2{font-size:16px;margin:0 0 8px}
@@ -306,7 +361,9 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
    border-bottom:1px solid var(--line)}
   .has-q .searchwrap #ac{top:calc(100% + 2px)}
   .has-q .searchwrap .search-status{margin:2px 0 0;min-height:0}
-  .has-q .searchwrap .row{margin-top:4px}
+  /* 2026-11-11：国家/地区收进 details 后，sticky 区里那一行换成 44px summary（比原来
+     「整行标签 + 下拉」矮，换国家的入口还在） */
+  .has-q .searchwrap .ctry-details{margin-top:4px}
 }
 table.det{margin:4px 0 8px;font-size:14px;background:#f6f5f0;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
@@ -411,12 +468,17 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .formchip .n{color:var(--muted);font-size:13px}
 .mkblock{margin:0 0 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);
  padding:10px 12px}
-.mkblock>h3{margin:0 0 6px;font-size:16px}
-.mkblock>h3 .sub{font-weight:400;margin-left:6px}
+/* 2026-11-11 UI：成分页「按国家分组」的块头由 h3 提到 h2（原来 h1 → h3 跳级，
+   impeccable skipped-heading）；字号/外边距保持原来的 16px / 6px，不动全局 h2 规则。 */
+.mkblock>h2{margin:0 0 6px;font-size:16px}
+.mkblock>h2 .sub{font-weight:400;margin-left:6px}
 .mkspecs{list-style:none;margin:0;padding:0}
 .mkrow{display:grid;grid-template-columns:minmax(120px,1.1fr) minmax(90px,.9fr) 3fr;
  align-items:baseline;gap:4px 10px;padding:6px 0;border-top:1px solid var(--line-soft);
  font-size:16px;line-height:1.35}
+/* 剂型筛选靠 row.hidden 切换；`.mkrow{display:grid}` 会盖掉 UA 的 [hidden]，
+   所以这里显式写一遍（全局 [hidden] 兜底之外的第二道保险）。 */
+.mkrow[hidden]{display:none}
 .mkrow:first-child{border-top:0}
 .mkst{font-weight:600}
 .mkf{color:var(--muted);font-size:14px}
@@ -697,6 +759,11 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 .mf-details .matrix-filters{margin:0;border:0;border-radius:0 0 12px 12px}
 .mf-details .mf-toggle{display:none}
 .mf-details .mf-panel{display:grid}
+/* 2026-11-11 UI：首页「只看某个国家/地区」也走 .mf-details（44px summary + ▾），
+   面板里竖排「说明 + 下拉」，触控高度 44px。 */
+.ctry-panel{padding:10px 12px}
+.ctry-panel .sel-label{display:block;margin:0 0 6px}
+.ctry-panel select{min-height:44px;max-width:100%}
 .drug-identity{margin:2px 0 10px}
 .drug-identity b{color:var(--fg)}
 

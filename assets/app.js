@@ -876,6 +876,11 @@ function acSelect(i){
   try{ box.focus(); }catch(e){}
 }
 // ── 国家语义：标签随选择变化 / 该国无匹配时的显式提示 ────────────────
+// 2026-11-11：国家/地区下拉收进 <details class="mf-details"> 后，这段话写的是 summary；
+// 选了国家就把 details 展开（?country= 深链、back/forward 一样走这里）。
+// 注意**不能** removeAttribute('data-i18n')：那会让切语言（含 ?lang= 补载）后这句不再翻译。
+// 改成保留 data-i18n（apply() 先按字典重写基础文案），再由 __DSH_APPLY_HOOKS 在 apply()
+// 结尾回填国家名，语言与选择两者都不丢。
 function updateCtryLabel(){
   if(!ctryLabel) return;
   const T = window.T || (k=>k);
@@ -884,11 +889,15 @@ function updateCtryLabel(){
   try{
     for(const o of ctry.options){ if(o.value === c){ name = o.text; break; } }
   }catch(e){}
+  if(c && ctry && ctry.closest){
+    const d = ctry.closest('details');
+    if(d && !d.open) d.open = true;
+  }
   ctryLabel.textContent = c
     ? T('home.country_label_sel').replace('{country}', name)
-    : T('home.country_label');
-  if(ctryLabel.removeAttribute) ctryLabel.removeAttribute('data-i18n');
+    : T('home.country_summary');
 }
+(window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(updateCtryLabel);
 // ── URL 状态：q / country 可分享、可前进后退（history.replaceState，不新增历史项）──
 let URL_T = null;
 function syncURL(q){
@@ -917,7 +926,7 @@ if(window.addEventListener){
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=0600034174（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=2432887534（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -970,7 +979,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=0600034174').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=2432887534').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1796,7 +1805,7 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=0600034174，见 reports/index-p1-impl.md）──
+// ── P1 列式 + 字典编码核心（data/idx/core.json?v=2432887534，见 reports/index-p1-impl.md）──
 // 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
 // index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
@@ -1840,10 +1849,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=0600034174 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=2432887534 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=0600034174').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=2432887534').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1853,7 +1862,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=0600034174').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=2432887534').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
@@ -2240,6 +2249,18 @@ document.addEventListener('click', ev => {
   if(href.indexOf('whats-new') >= 0){ gcEvent('click-whatsnew'); return; }
 });
 box.addEventListener('input', ()=>{ startSearch(); acUpdate(); });
+// 2026-11-11 UI：搜索框里那个可见提交按钮（44×44，移动端键盘的 search 键同一条路径）。
+// 输入时已经实时出结果，这里只负责「提交」这一下：收起建议、记一次提交、重渲染、回焦。
+const goBtn = document.getElementById('qgo');
+if(goBtn && box){
+  goBtn.addEventListener('click', ()=>{
+    acClose();
+    if(!box.value.trim()){ try{ box.focus(); }catch(e){} return; }
+    trackSearchSubmit(box.value);
+    startSearch();
+    try{ box.focus(); }catch(e){}
+  });
+}
 ctry.addEventListener('change', ()=>{
   gcEvent('country-' + (ctry.value || 'ALL'));
   updateCtryLabel();
