@@ -6,8 +6,9 @@ whenToUse: 任务涉及发版、CHANGELOG 版本节、gh-pages、verify_live 失
 
 # 发布（release）
 
-线上：<https://fuarnos.github.io/drug-brand-crossref/>，GitHub Pages **legacy**（从 `gh-pages` 分支发布）。
-**唯一发布入口是 `deploy/publish.ps1`**；不手工推 `gh-pages`、不手工改线上文件。
+**主站 = 自有域名 <https://drugcrossref.com/>（Cloudflare R2 + 自定义域）**；**备份 = gh-pages <https://fuarnos.github.io/drug-brand-crossref/>**（GitHub Pages legacy，仅回滚/备份，不承担主索引）。
+**主入口是 `deploy/sync_r2.ps1`，备份入口是 `deploy/publish.ps1`**；不手工推 `gh-pages`、不手工改线上文件。
+`SITE_URL`（canonical / hreflang / sitemap / robots / OG）一律写主域；gh-pages 上 canonical 指主域是预期行为，对 gh-pages 只做首页 + 版本冒烟。
 
 > 背景：曾有一次 `site/build.py` 还在写页面就推送，gh-pages 只有 `assets/`、根目录没有
 > `index.html`，全站 404。publish.ps1 就是为堵这个洞写的（见 [DEPLOY.md](DEPLOY.md)）。
@@ -27,28 +28,33 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 3. `& $py site/build.py` 等 `== done ==`，按 site-build 技能检查 `site/dist` 完整性。
 4. 确认没有别的会话在构建 / 发布（构建与发布串行）。
 
-## 2. 发布
+## 2. 发布（主域先、备份后）
 
 ```powershell
-# 干跑：检查 + 复制 + 估算 push 体积，不推
-powershell -NoProfile -ExecutionPolicy Bypass -File deploy\publish.ps1 -DryRun
+# 主通道：R2 自定义域（发布门槛）；先干跑看增量
+powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -DryRun
+powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1
 
-# 正式发布（默认增量：复用 gh-pages 缓存，只传 delta）
+# 备份通道：gh-pages（GitHub 备份/回滚；默认增量）
 powershell -NoProfile -ExecutionPolicy Bypass -File deploy\publish.ps1
 ```
 
-- 检查项：`index.html`、`data/idx/core.json`（≥ 10 MB，或过渡期旧 `data/index.json`）、
-  文件数 ≥ `-MinFiles 24000`、无 0 字节、最新文件 ≥ `-StableSeconds 15`、无 build/run_all 进程。
+- **顺序：先 R2（主域）后 gh-pages（备份）**；R2 直接吃 `site/dist`，不必等 Pages 构建。
+- `sync_r2.ps1` 是 `rclone sync --checksum` 增量，但改 CSS/JS/模板时几乎所有页面都变（样式内联），增量≈准全量：按约 30 分钟、Class A ≈11 万排窗口；Class A 写入数与耗时记进发布报告。
+- `publish.ps1` 检查项：`index.html`、`data/idx/core.json`（≥ 10 MB）、文件数 ≥ `-MinFiles 24000`、无 0 字节、最新文件 ≥ `-StableSeconds 15`、无 build/run_all 进程。
 - 参数：`-Message`、`-Dist`、`-CacheDir`、`-SkipVerify`、`-FullPush`（仅应急，全量重传）、
   `-AutoRollback`、`-PagesWaitMinutes 45`、`-KeepWork`、`-DryRun`、`-Force`（不建议）。
 - token：`$env:GITHUB_TOKEN`，否则仓库根 `.env` 的 `GITHUB_TOKEN=`（Contents: RW + Pages: Read）。
-- 失败会保留临时目录 / 缓存，别手动清理。
+- 发布前**不要**跑 `site/build.py`；发布期间 `site/dist` 冻结。失败会保留临时目录 / 缓存，别手动清理。
 
 ## 3. 发布后验证
 
 ```powershell
-& $py deploy/verify_live.py --expect-version vX.Y.Z
-& $py deploy/verify_live.py --compare-dist                    # 顺带对比 dist 体积
+# 主域（发布门槛：必须 0 failures）
+& $py deploy/verify_live.py --base https://drugcrossref.com --expect-version vX.Y.Z
+& $py deploy/verify_live.py --base https://drugcrossref.com --compare-dist
+
+# 备份通道：只做首页 + 版本冒烟（其 robots/sitemap 行指向主域，不跑全量 verify_live）
 & .\deploy\pages_status.ps1 -Wait -MaxMinutes 15              # Pages 构建状态（只读）
 ```
 

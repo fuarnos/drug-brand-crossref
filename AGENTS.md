@@ -77,13 +77,13 @@
 
 ## 6. 发布纪律
 
-- **双通道（用户 2026-11-11 定）**：每次发布**两个通道都要更新**，缺一个不算发完。
-  - ① `deploy/publish.ps1` → gh-pages（`https://fuarnos.github.io/drug-brand-crossref/`）
-  - ② `deploy/sync_r2.ps1` → R2 自定义域（`https://drugcrossref.com/`，增量同步，`--transfers 32`）
-  - 两个域名各跑一次 `deploy/verify_live.py --expect-version vX.Y.Z`，都要 0 failures；R2 的 Class A 写入数记进发布报告。
-  - 顺序：先 gh-pages 后 R2（R2 直接吃 `site/dist`，不需要等 Pages 构建）。
-- 唯一入口是 `deploy/publish.ps1`（或双击 `发布网站.cmd`），**绝不手工往 `gh-pages` 推**。曾发生过 `site/build.py` 还在写页面就推送、整站 404 的事故，见 [DEPLOY.md](DEPLOY.md)。
-- 顺序：① `CHANGELOG.md` 最上面加一节 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）→ ② `& $py site/build.py` 等 `== done ==` → ③ `& .\deploy\publish.ps1` → ④ `git tag -a vX.Y.Z` + GitHub Release（正文用 CHANGELOG 那一节）。
+- **双通道（用户 2026-11-11 定；2026-11-12 起「自有域名为主、Git 只作备份」）**：两个通道都要更新，缺一个不算发完。
+  - **主通道**：`deploy/sync_r2.ps1` → R2 自定义域 `https://drugcrossref.com/`（增量同步 `--transfers 32`）。发布门槛以它为准：`verify_live.py --base https://drugcrossref.com --expect-version vX.Y.Z` 必须 0 failures；Class A 写入数记进发布报告。
+  - **备份通道**：`deploy/publish.ps1` → gh-pages `https://fuarnos.github.io/drug-brand-crossref/`（GitHub 备份/回滚，不承担主索引）。
+  - **`SITE_URL` 一律写主域** `https://drugcrossref.com/`：canonical / hreflang / sitemap / robots / OG / datapackage 都从它生成。gh-pages 上 canonical 指主域是**预期行为**；对 gh-pages 只做首页 + 版本冒烟（它的 robots/sitemap 行会指向主域，不跑全量 verify_live）。
+  - 顺序：先 R2（主域，发布门槛）后 gh-pages（备份）。
+- 发布入口：主域用 `deploy/sync_r2.ps1`，备份用 `deploy/publish.ps1`（或双击 `发布网站.cmd`），**绝不手工往 `gh-pages` 推**。曾发生过 `site/build.py` 还在写页面就推送、整站 404 的事故，见 [DEPLOY.md](DEPLOY.md)。
+- 顺序：① `CHANGELOG.md` 最上面加一节 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）→ ② `& $py site/build.py` 等 `== done ==` → ③ `& .\deploy\sync_r2.ps1`（主域）+ `& .\deploy\publish.ps1`（备份）→ ④ `git tag -a vX.Y.Z` + GitHub Release（正文用 CHANGELOG 那一节）。
 - 版本号唯一来源是 CHANGELOG 第一节；站点页脚、`whats-new.html`、GitHub Release 都从它生成。
 - `publish.ps1` 自带完整性检查（`index.html`、`data/idx/core.json` ≥ 10 MB raw（v0.9.0 实测 35.8 MB raw / 8.68 MB gzip；v0.9.1 AU 全量后 41.3 MB raw / 9.67 MB gzip，**2026-10-30 起 `verify_live.py` 护栏为 gzip 2.5–12 MB / raw 11–50 MB**；`data/index.json` 自 v0.6.1 起不再生成）、文件数 ≥ 24,000、无 0 字节文件、构建未在跑）；失败会保留临时目录，别手动清理。
 - 回滚要人来拍板：先 `-DryRun` 检查，再考虑重新发布上一个 tag 的构建产物。
@@ -147,7 +147,7 @@
 - **决策权**：产品 / 技术 / 数据 / 版本 / 发布由 agent 按本文验收门槛自主决定，**不再逐项请示**。红线不变：§1.3 不给用药建议、不做剂量换算、不判断可替代（理由见 `docs/为什么不做替代推荐.md`）；§9 全部禁区；不做 login；不付费买数据；不绕 WAF。
 - **钱**：默认零新增支出（托管走免费额度、不买域名、不租服务器）；需要花钱的方向只写进 `docs/服务器迁移路线.md` 待批，不主动执行。
 - **省 token**：开工只读「每日开工卡 + 队列顶部 + 跟进提醒」三处，不通读 CHANGELOG/大报告；重活（`site/build.py`、发布）尽量落在北京时间 **00:30–08:30 谷段**；一次构建串多个任务；收尾写模板化交接，不复制历史。
-- **发布**：唯一入口仍是 `deploy/publish.ps1`；每版 CHANGELOG → build 到 `== done ==` → publish → `verify_live.py --expect-version` → tag/Release。连续 2 次发布失败即停并写报告。
+- **发布**：主域 `deploy/sync_r2.ps1`（发布门槛，`verify_live --base https://drugcrossref.com`）+ 备份 `deploy/publish.ps1`（gh-pages）；每版 CHANGELOG → build 到 `== done ==` → R2 → verify → gh-pages 备份 → tag/Release。连续 2 次发布失败即停并写报告。
 - **交接**：每天收尾必须更新 `docs/交接-YYYYMMDD.md`（数字现查，不照抄）与队列「已完成」；新会话只信这两处 + `data/drugs.db` 现查。
 
 ## 附：项目技能
