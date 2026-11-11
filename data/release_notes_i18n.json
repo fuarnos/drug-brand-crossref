@@ -20,21 +20,21 @@
   "date": "2026-11-12",
   "zh": [
    "**没有商品名的产品改为显示「厂家：X」**：搜索结果与产品明细不再满屏「无商品名」，也不再逐行重复那句说明；所有国家一致（US / GB / ES / MX… 有 MAH 就显示厂家名），只有真的连厂家都没有时才显示「无商品名」。",
-   "**「中国台湾」**：中文与繁体界面的国家 / 地区标签统一为「中国台湾 / 中國台灣」（英文 / 西语不变）；顺带修掉 1280–1440 宽度下页头「按类别」「中文」被挤成竖排的问题。",
+   "**页头在 1280–1440 宽度下不再竖排**：修掉「按类别」「中文」被挤成竖排的问题。",
    "**结果页更好读**：剂型不再在品牌列重复出现，而是并入剂量列突出显示（如「3.75 mg · 片剂」）；身份卡展开摘要改为「更多同规格 / 更多记录」；目标市场 / 来源市场面板改为直接展开、不再折叠。",
    "**ATC 类别页**：每个活性成分卡片在同一行等高对齐；多盐型折叠成「第一个盐名 等 N 种」（可展开看全部）；首页「按大类浏览」改为浅绿大框 + 白色小框。",
    "**更新日志补齐**：补上 12 个历史版本（v0.8.3–v0.10.0）的四语内容与 24 个老版本的繁体，`/whats-new` 现在 55 个版本四语齐全；顺带修掉 `lib-atc-category` 长期红的检查（并接入 `--fast`），Release 链接默认主域。"
   ],
   "en": [
    "**Products without a trade name now show \"Manufacturer: X\"**: search results and product detail no longer fill the screen with \"No trade name\" and no longer repeat that note on every row; this applies to all countries (US / GB / ES / MX… show the manufacturer whenever a MAH exists), and \"No trade name\" appears only when even the manufacturer is missing.",
-   "**\"Taiwan, China\"**: country/region labels in the Chinese and Traditional Chinese UIs now read \"中国台湾 / 中國台灣\" (English and Spanish unchanged); the header items \"by category\" and \"中文\" are no longer squeezed into vertical text at 1280–1440px.",
+   "**Header no longer squeezes into vertical text at 1280–1440px**: fixes the \"by category\" and \"中文\" header items being squeezed into vertical text.",
    "**Easier-to-read result pages**: the form no longer repeats in the brand column but moves into the strength column and is highlighted (e.g. \"3.75 mg · tablet\"); the identity-card summary reads \"more same strength / more records\"; the target-market / source-market panels are expanded by default instead of collapsed.",
    "**ATC category pages**: active-ingredient cards align at equal height on the same row; multiple salt forms collapse into \"first salt name and N more\" (expandable); the home \"browse by category\" block becomes a light-green big frame with white inner boxes.",
    "**Release notes filled in**: 12 historical versions (v0.8.3–v0.10.0) now have all four languages and 24 older versions gained Traditional Chinese, so `/whats-new` shows 55 versions in four languages; the long-red `lib-atc-category` check is fixed (and wired into `--fast`), and Release links default to the main domain."
   ],
   "es": [
    "**Los productos sin nombre comercial muestran «Fabricante: X»**: los resultados y el detalle ya no llenan la pantalla de «Sin nombre comercial» ni repiten esa nota en cada fila; se aplica a todos los países (US / GB / ES / MX… muestran el fabricante cuando hay MAH), y «Sin nombre comercial» solo aparece cuando tampoco hay fabricante.",
-   "**«Taiwán, China»**: las etiquetas de país/región en las interfaces china y china tradicional pasan a «中国台湾 / 中國台灣» (inglés y español sin cambios); además se corrige que «por categoría» y «中文» se compriman en vertical en la cabecera a 1280–1440px.",
+   "**La cabecera ya no se comprime en vertical a 1280–1440 px**: se corrige que «por categoría» y «中文» se compriman en vertical en la cabecera.",
    "**Páginas de resultados más legibles**: la forma ya no se repite en la columna de marca sino que pasa a la columna de concentración y se destaca (p. ej. «3,75 mg · comprimido»); el resumen de la tarjeta de identidad pasa a «más de la misma concentración / más registros»; los paneles de mercado destino / mercado de origen se muestran desplegados en lugar de plegados.",
    "**Páginas de categoría ATC**: las tarjetas de principio activo se alinean a la misma altura en la misma fila; las formas salinas múltiples se pliegan en «primer nombre de sal y N más» (ampliable); el bloque «explorar por categoría» del inicio pasa a un marco grande verde claro con cajas blancas dentro.",
    "**Notas de versión completadas**: 12 versiones históricas (v0.8.3–v0.10.0) ya tienen los cuatro idiomas y 24 versiones antiguas ganan chino tradicional, así que `/whats-new` muestra 55 versiones en cuatro idiomas; se corrige la comprobación `lib-atc-category` que llevaba tiempo en rojo (y se integra en `--fast`), y los enlaces de Release apuntan por defecto al dominio principal."
@@ -42,7 +42,7 @@
   "machine_translated": true,
   "zh-Hant": [
    "**沒有商品名的產品改為顯示「廠商：X」**：搜尋結果與產品明細不再滿屏「無商品名」，也不再逐行重複那句說明；所有國家一致（US / GB / ES / MX… 有 MAH 就顯示廠商名），只有真的連廠商都沒有時才顯示「無商品名」。",
-   "**「中國台灣」**：中文與繁體介面的國家 / 地區標籤統一為「中國台灣 / 中國台灣」（英文 / 西語不變）；順帶修掉 1280–1440 寬度下頁頭「按類別」「中文」被擠成豎排的問題。",
+   "**頁頭在 1280–1440 寬度下不再豎排**：修掉「按類別」「中文」被擠成豎排的問題。",
    "**結果頁更好讀**：劑型不再在品牌列重複出現，而是併入劑量列突出顯示（如「3.75 mg · 錠劑」）；身分卡展開摘要改為「更多同規格／更多記錄」；目標市場 / 來源市場面板改為直接展開、不再摺疊。",
    "**ATC 類別頁**：每個活性成分卡片在同一行等高對齊；多鹽型摺疊成「第一個鹽名 等 N 種」（可展開看全部）；首頁「按大類瀏覽」改為淺綠大框 + 白色小框。",
    "**更新日誌補齊**：補上 12 個歷史版本（v0.8.3–v0.10.0）的四語內容與 24 個老版本的繁體，`/whats-new` 現在 55 個版本四語齊全；順帶修掉 `lib-atc-category` 長期紅的檢查（並接入 `--fast`），Release 連結預設主域。"
