@@ -19,8 +19,11 @@
    所以「可见行数 = chip 数字」在数学上不成立（实测 `powder 44` → 11 行、`injection 17` → 0 行）。
 2. 成分页：`?view=table` → `#tableview`（矩阵）可见、`#list`（清单）隐藏；不带参数时相反。
 3. 首页：填 `#q` → 点 `#qgo` → `#meta` 从空闲/加载态变成带命中数的结果态。
-4. 首页：`?country=CN` → `#ctrydetails` 自动展开，且 `#country.value == "CN"`。
-5. 首页：`?lang=zh` / `?lang=es` → `#h1`、`.candidate-line`、国家/地区 summary 标签都换语言。
+4. 首页：目标/来源市场面板（`#ctrydetails`）**常显无折叠** + 深链回填：
+   `?country=CN` → 面板可见、`#country.value == "CN"`、`#src` 存在；
+   `?src=US` → 面板可见、`#src.value == "US"`。
+   （v0.11.3 起面板不再是 `<details>`、`#ctrylabel` 已删，旧的「open=true / summary 存在」断言作废。）
+5. 首页：`?lang=zh` / `?lang=es` → `#h1`、`.candidate-line`、市场面板标签都换语言。
 6. ATC 页：`[data-i18n="atc.names_source_note"]` 每个页面 ≤1 次（防重复渲染回归）。
 7. 通用：每个 `<details>` 点开后内容高度 > 0（折叠组件「点了没反应」的通用判据）。
 
@@ -199,6 +202,32 @@ CLICK_CHIP_JS = r"""(function(i){
   return 'clicked';
 })"""
 
+# 目标/来源市场面板（v0.11.3 起常显、无折叠）：可见性 + 深链回填一次量完。
+# 判「可见」的口径与 `.mkrow` 那套一致：hidden 属性 / display / visibility 三档 + 几何尺寸——
+# 只判 CSS 会漏掉「元素在、但高度 0」这种假可见。
+COUNTRY_PANEL_JS = r"""(function(){
+  function info(el){
+    if(!el) return null;
+    var cs = getComputedStyle(el), b = el.getBoundingClientRect();
+    return {tag: el.tagName.toLowerCase(), hidden: !!el.hidden,
+            display: cs.display, visibility: cs.visibility,
+            w: Math.round(b.width), h: Math.round(b.height),
+            visible: !el.hidden && cs.display !== 'none' && cs.visibility !== 'hidden'
+                     && b.width > 0 && b.height > 0};
+  }
+  var panel = document.getElementById('ctrydetails');
+  var cty = document.getElementById('country');
+  var src = document.getElementById('src');
+  return JSON.stringify({
+    panel: info(panel),
+    panel_is_details: !!(panel && panel.tagName.toLowerCase() === 'details'),
+    panel_summary: !!(panel && panel.querySelector('summary')),
+    panel_always: panel ? panel.getAttribute('data-always-open') : null,
+    country: cty ? {value: cty.value, info: info(cty)} : null,
+    src: src ? {value: src.value, info: info(src)} : null
+  });
+})()"""
+
 
 # ── 断言小工具 ─────────────────────────────────────────────────────────────
 def record(results: list[dict], cid: str, title: str, ok: bool, detail: str,
@@ -371,44 +400,82 @@ def check_3_submit(cdp: CDP, base: str) -> list[dict]:
 
 
 def check_4_country(cdp: CDP, base: str) -> list[dict]:
-    """④ ?country=CN → #ctrydetails 自动展开且 #country.value == "CN"。"""
-    goto(cdp, base + "index.html?country=CN&lang=zh", "document.getElementById('ctrydetails')")
-    st = js_obj(cdp, r"""(function(){
-      var d = document.getElementById('ctrydetails');
-      var c = document.getElementById('country');
-      var s = d ? d.querySelector('summary') : null;
-      return JSON.stringify({
-        has_details: !!d, open: !!(d && d.open),
-        value: c ? c.value : null,
-        summary: s ? (s.textContent||'').replace(/\s+/g,' ').trim().slice(0,60) : null,
-        panel_h: d ? Math.round((d.scrollHeight||0) - (s ? s.getBoundingClientRect().height : 0)) : 0
-      });
-    })()""")
-    if not st.get("has_details"):
-        return [{"id": "4", "title": "?country=CN 自动展开", "pass": False,
-                 "detail": "选择器缺失：没有 #ctrydetails",
-                 "root_cause": "首页国家筛选还没收进 <details>（v0.11.0 及更早）", "data": st}]
-    ok = st.get("open") is True and st.get("value") == "CN"
+    """④ 目标/来源市场面板常显 + 深链回填（`?country=CN` / `?src=US`）。
+
+    判据（v0.11.3 起，见 reports/2026-11-13-v0113-ui.md §2.5）：
+      · `#ctrydetails` **常显无折叠** —— 元素存在、`display`/`visibility` 正常、有几何尺寸，
+        且已经不是 `<details>`、里面没有 `summary`（`#ctrylabel` 也随折叠一起删掉了）；
+      · `?country=CN` → `#country.value == "CN"`、`#src` 存在；
+      · `?src=US` → `#src.value == "US"`、面板同样可见。
+
+    旧版断言是「`#ctrydetails.open == true` 且 `summary` 存在」，v0.11.3 去掉折叠后必然假红，
+    所以换成上面这套「看得见 + 值回填」的语义；语义变化本身也是本次要验的东西：
+    面板常显意味着**用户不用点一下**就能看到两个市场下拉。
+    """
+    cases: list[dict] = []
+    bad: list[str] = []
+
+    def one(tag: str, query: str, want: dict[str, str], need_src: bool = False) -> None:
+        goto(cdp, base + "index.html?" + query, "document.getElementById('ctrydetails')")
+        st = js_obj(cdp, COUNTRY_PANEL_JS)
+        errs: list[str] = []
+        panel = st.get("panel")
+        if not panel:
+            errs.append("没有 #ctrydetails")
+        else:
+            if not panel.get("visible"):
+                errs.append(f"面板不可见（display={panel.get('display')}、"
+                            f"visibility={panel.get('visibility')}、"
+                            f"{panel.get('w')}x{panel.get('h')}px）")
+            if st.get("panel_is_details") or st.get("panel_summary"):
+                errs.append("面板仍是可折叠 <details>/summary（v0.11.3 起应常显无折叠）")
+        for key, val in want.items():
+            node = st.get(key)
+            if not node:
+                errs.append(f"没有 #{key}")
+            elif (node.get("value") or "") != val:
+                errs.append(f"#{key}.value={(node.get('value') or '')!r} ≠ {val!r}")
+        if need_src and not st.get("src"):
+            errs.append("没有 #src（来源市场下拉缺失）")
+        cases.append({"tag": tag, "query": query, "want": want, "got": st, "errors": errs})
+        bad.extend(f"{tag}：{e}" for e in errs)
+
+    one("?country=CN", "country=CN&lang=zh", {"country": "CN"}, need_src=True)
+    one("?src=US", "src=US&lang=zh", {"src": "US"})
+
+    first, second = cases[0], cases[1]
+    got1, got2 = first["got"], second["got"]
+    panel = got1.get("panel") or {}
+    ctry_v = (got1.get("country") or {}).get("value")
+    src_v = (got2.get("src") or {}).get("value")
+    detail = (f"面板常显：<{panel.get('tag') or '?'}> {panel.get('w')}x{panel.get('h')}px"
+              f"、display={panel.get('display')}、summary={got1.get('panel_summary')}、"
+              f"data-always-open={got1.get('panel_always')!r}；"
+              f"?country=CN → #country={ctry_v!r}；"
+              f"?src=US → #src={src_v!r}、面板可见 "
+              f"{(got2.get('panel') or {}).get('visible')}"
+              + ("；" + "；".join(bad[:3]) if bad else ""))
     cause = ""
-    if st.get("value") != "CN":
-        cause = "#country 没回填 CN（URL 参数没进选择器）"
-    elif not st.get("open"):
-        cause = "#ctrydetails 没自动展开（参数存在时缺 open 逻辑）"
-    return [{"id": "4", "title": "?country=CN 自动展开", "pass": ok,
-             "detail": f"#ctrydetails.open={st.get('open')}、#country.value={st.get('value')!r}、"
-                       f"summary={st.get('summary')!r}、面板高 {st.get('panel_h')}px",
-             "root_cause": cause, "data": st}]
+    if bad:
+        cause = ("市场面板不是常显块（hidden / 仍是 details / 尺寸 0），"
+                 "或 URL 参数没回填到 #country / #src")
+    return [{"id": "4", "title": "市场面板常显 + ?country=CN / ?src=US 深链回填",
+             "pass": not bad, "detail": detail, "root_cause": cause,
+             "data": {"cases": cases}}]
 
 
 def _lang_probe(cdp: CDP) -> dict:
     return js_obj(cdp, r"""(function(){
       function tx(sel){ var e = document.querySelector(sel); return e ? (e.textContent||'').replace(/\s+/g,' ').trim() : null; }
-      var sum = document.getElementById('ctrydetails');
-      var sumLab = sum ? sum.querySelector('summary') : null;
+      // v0.11.3 起 #ctrydetails 不再是 <details>、`#ctrylabel` 已删：市场面板的可见标签
+      // 变成 .ctry-panel 里的 label[for="country"]（i18n 键 home.country_label），
+      // 旧的两条 `summary#ctrylabel` / `#ctrylabel` 命中留作兼容证据（新产物应为 false）。
+      var panel = document.getElementById('ctrydetails');
+      var selLab = panel ? panel.querySelector('label[for="country"]') : null;
       return JSON.stringify({
         h1: tx('#h1'),
         candidate: tx('.candidate-line'),
-        ctry: sumLab ? (sumLab.textContent||'').replace(/\s+/g,' ').trim() : tx('#ctrylabel'),
+        ctry: selLab ? (selLab.textContent||'').replace(/\s+/g,' ').trim() : tx('#ctrylabel'),
         ctry_sel_summary_id: !!document.querySelector('summary#ctrylabel'),
         ctry_sel_inner: !!document.querySelector('#ctrylabel')
       });
@@ -416,7 +483,7 @@ def _lang_probe(cdp: CDP) -> dict:
 
 
 def check_5_lang(cdp: CDP, base: str) -> list[dict]:
-    """⑤ ?lang=zh / ?lang=es → #h1 / .candidate-line / 国家 summary 都换语言。"""
+    """⑤ ?lang=zh / ?lang=es → #h1 / .candidate-line / 市场面板标签都换语言。"""
     out: list[dict] = []
     got: dict[str, dict] = {}
     for lang in ("en", "zh", "es"):
@@ -431,7 +498,8 @@ def check_5_lang(cdp: CDP, base: str) -> list[dict]:
             prev = cur
             time.sleep(0.3)
         got[lang] = _lang_probe(cdp)
-    fields = (("h1", "#h1"), ("candidate", ".candidate-line"), ("ctry", "国家/地区 summary 标签"))
+    fields = (("h1", "#h1"), ("candidate", ".candidate-line"),
+              ("ctry", "市场面板标签 #ctrydetails label[for=country]"))
     missing = [n for n in ("h1", "candidate", "ctry") if not got["en"].get(n)]
     if missing:
         out.append({"id": "5", "title": "语言切换", "pass": False,
@@ -453,11 +521,12 @@ def check_5_lang(cdp: CDP, base: str) -> list[dict]:
     elif not es_ok:
         cause = "#h1 在 ?lang=es 下没有变成西语"
     out.append({
-        "id": "5", "title": "语言切换 zh/en/es（#h1 / .candidate-line / summary）", "pass": ok,
+        "id": "5", "title": "语言切换 zh/en/es（#h1 / .candidate-line / 市场面板标签）", "pass": ok,
         "detail": (f"en={got['en']['h1']!r}｜zh={got['zh']['h1']!r}｜es={got['es']['h1']!r}；"
-                   f"候选集行 zh={got['zh']['candidate']!r}；summary zh={got['zh']['ctry']!r}；"
-                   f"`summary#ctrylabel` 命中={got['en']['ctry_sel_summary_id']}（实际 id 在内层 span，"
-                   f"`#ctrylabel` 命中={got['en']['ctry_sel_inner']}）"),
+                   f"候选集行 zh={got['zh']['candidate']!r}；市场面板标签 zh={got['zh']['ctry']!r}；"
+                   f"`summary#ctrylabel` 命中={got['en']['ctry_sel_summary_id']}、"
+                   f"`#ctrylabel` 命中={got['en']['ctry_sel_inner']}"
+                   f"（v0.11.3 起两者都应为 false，标签在 label[for=country]）"),
         "root_cause": cause, "data": got})
     return out
 
@@ -569,8 +638,8 @@ CHECKS = {
           check_1_form_filter),
     "2": ("?view=table：矩阵可见 / 清单隐藏", check_2_view_table),
     "3": "首页 #qgo 提交 → #meta 出结果",
-    "4": "?country=CN → #ctrydetails 展开 + #country=CN",
-    "5": "语言切换 zh/es → #h1 / .candidate-line / summary",
+    "4": "市场面板常显（无折叠）+ ?country=CN / ?src=US 深链回填",
+    "5": "语言切换 zh/es → #h1 / .candidate-line / 市场面板标签",
     "6": "ATC 说明行 atc.names_source_note ≤1",
     "7": "<details> 展开后内容高度 > 0",
 }

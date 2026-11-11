@@ -9,8 +9,9 @@
 分层（v0.10.3 提速：**一条检查都不删、判定不放松**，只做「分层 + 缓存 + 并行」）：
 
     fast（≤25 s）   i18n · py_compile(缓存) · unittest:etl/lib/mobile ·
+                    unittest:lib-atc-category（快照同步那组，0.01 s）·
                     dist-integrity(抽样) · workflow
-    全量（≤4 min）  fast 的全部（dist 全扫 0 字节）+ unittest:lib-atc-category（重，47 s）·
+    全量（≤4 min）  fast 的全部（dist 全扫 0 字节）+ unittest:lib-atc-category 整模块（重，47 s）·
                     trilingual（8 线程）· check_data · ui-surface ∥ first-screen（并行）
 
     被挪出 fast 的项仍然出现在输出里（记 SKIP），只是不在 fast 真跑；判定逻辑完全不变。
@@ -259,9 +260,14 @@ def check_unittests(fast: bool) -> None:
     # v0.10.3：#3 之前 tests/ 下这条用例只存在、没进 CI，lib 快照漂了 9/16 个大类也没人发现
     # （审计报告 §3.3 / §3.5 风险 C）。`-s lib` 的 discover 只收 lib/ 目录内的文件，收不到它。
     # 无 data/drugs.db / site/dist 时用例自己 skip，CI 不会因此变红。
-    # 2026-11-10 提速：这条要 47 s（占 fast 的 65%），挪到全量模式；判定逻辑没动。
+    # 2026-11-10 提速：整条模块要 47 s（占 fast 的 65%），挪到全量模式；判定逻辑没动。
+    # 2026-11-12（v0.11.3）：这里长期 `--fast` 记 SKIP 是有代价的 —— CATEGORY_SNAPSHOT
+    # 与产物漂移了 16/16 个大类，红了 3 个版本没人看见（reports/2026-11-13-lib-atc-category-fix.md）。
+    # 现在快模式改跑 CategoryMatchTest：纯 Python、不碰 DB/Chrome，0.01 s 就能抓住快照漂移；
+    # 全量仍跑整个模块（含 SearchIndex 的 47 s DB 用例）。
     if fast:
-        record("SKIP", "unittest:lib-atc-category", "--fast 跳过（47 s，全量才跑）")
+        _run_unittest("unittest:lib-atc-category",
+                      ["tests.test_lib_atc_category.CategoryMatchTest"])
     else:
         _run_unittest("unittest:lib-atc-category", ["tests.test_lib_atc_category"])
 

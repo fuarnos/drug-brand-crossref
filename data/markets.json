@@ -128,7 +128,7 @@
       "kind": "country",
       "parent": null,
       "group": "ASIA",
-      "name": { "en": "Taiwan", "es": "Taiwán", "zh": "台湾" },
+      "name": { "en": "Taiwan", "es": "Taiwán", "zh": "中国台湾" },
       "i18n_key": "home.tw",
       "flag": "🇹🇼",
       "source_id": "tfda_tw",

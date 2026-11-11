@@ -291,7 +291,7 @@ I18N = {
         "res.action_copy": "Copy generic name",
         # 2026-11-11 v0.11.2（条目 9/10）：身份卡标题 + 折叠摘要 + 来源市场（?src=）
         "res.identity_title": "candidate 1 of {n}",
-        "res.more_detail": "Strength · markets · actions",
+        "res.more_detail": "More strengths / more records",
         "res.src_label": "Source market (only records from):",
         "res.src_all": "All source markets",
         "res.src_active": "source market {c}",
@@ -426,7 +426,8 @@ I18N = {
         "a1.goto": "Open substance page",
         "a1.market": "Market", "a1.pack": "Pack", "a1.approval": "Approval / NDC / DIN",
         "a1.status": "Status", "a1.source": "Source", "a1.raw": "Original record",
-        "a1.more": "Showing the first 12 records; see the substance page for all.",
+        "a1.more": ("Showing the first 12 records; see the <a href=\"{url}\">"
+                    "substance page</a> for all."),
     },
     "es": {
         "nav.search": "Buscar", "nav.confused": "Nombres confundibles", "nav.about": "Acerca de",
@@ -528,7 +529,7 @@ I18N = {
         "res.action_drug": "Ver la ficha del principio",
         "res.action_copy": "Copiar nombre genérico",
         "res.identity_title": "candidato 1 de {n}",
-        "res.more_detail": "Dosis · mercados · acciones",
+        "res.more_detail": "Más concentraciones / más registros",
         "res.src_label": "Mercado de origen (solo registros de):",
         "res.src_all": "Todos los mercados de origen",
         "res.src_active": "mercado de origen {c}",
@@ -659,7 +660,8 @@ I18N = {
         "a1.goto": "Abrir página del principio activo",
         "a1.market": "Mercado", "a1.pack": "Envase", "a1.approval": "Registro / NDC / DIN",
         "a1.status": "Estado", "a1.source": "Fuente", "a1.raw": "Registro original",
-        "a1.more": "Se muestran los primeros 12 registros; la página del principio activo tiene todos.",
+        "a1.more": ("Se muestran los primeros 12 registros; "
+                    "<a href=\"{url}\">la página del principio activo</a> tiene todos."),
     },
     "zh": {
         "nav.search": "检索", "nav.confused": "易混淆药名", "nav.about": "关于",
@@ -679,7 +681,7 @@ I18N = {
         "home.gb": "英国", "home.cn": "中国", "home.es": "西班牙",
         "home.mx": "墨西哥", "home.au": "澳大利亚", "home.ca": "加拿大",
         "home.sg": "新加坡",
-        "home.tw": "台湾",
+        "home.tw": "中国台湾",
         "home.hk": "中国香港",
         "home.eu": "欧盟（EU）",
         "eu.region_title": "欧盟集中审批（EMA）",
@@ -754,7 +756,7 @@ I18N = {
         "res.action_drug": "查看成分页",
         "res.action_copy": "复制标准名",
         "res.identity_title": "共 {n} 条候选，这是第 1 条",
-        "res.more_detail": "规格 · 市场 · 动作",
+        "res.more_detail": "更多同规格 / 更多记录",
         "res.src_label": "来源市场（只看这些登记库的记录）：",
         "res.src_all": "全部来源市场",
         "res.src_active": "来源市场 {c}",
@@ -871,7 +873,7 @@ I18N = {
         "a1.goto": "打开成分页",
         "a1.market": "市场", "a1.pack": "包装", "a1.approval": "批准号 / NDC / DIN",
         "a1.status": "状态", "a1.source": "来源", "a1.raw": "原始记录",
-        "a1.more": "仅显示前 12 条记录，全部见成分页。",
+        "a1.more": "仅显示前 12 条记录，<a href=\"{url}\">全部见成分页</a>。",
     },
 }
 
@@ -1402,7 +1404,6 @@ UI_I18N = {
         "res.action_drug": "查看成分頁",
         "res.action_copy": "複製標準名",
         "res.identity_title": "共 {n} 條候選，這是第 1 條",
-        "res.more_detail": "規格 · 市場 · 動作",
         "res.src_label": "來源市場（只看這些登記庫的紀錄）：",
         "res.src_all": "全部來源市場",
         "res.src_active": "來源市場 {c}",
@@ -1448,8 +1449,8 @@ UI_I18N = {
         "warn.page_prev": "上一頁", "warn.page_next": "下一頁",
         "warn.pagination": "警示分頁",
         "warn.page_status": "第 {n} / {total} 頁 · 共 {count} 條",
-        # v0.7.0：TW 市場（zh-Hant 直接給值，避免 JSON 未含時回落簡體）
-        "home.tw": "台灣",
+        # 2026-11-13 task-27：TW 中文标签改「中国台湾」（与「中国香港」一致）；
+        # zh-Hant 不再手写覆盖，由 data/i18n_zh_hant.json 生成器给出的「中國台灣」生效。
         "home.hk": "中國香港",
         "home.eu": "歐盟（EU）",
         "eu.region_title": "歐盟集中審批（EMA）",
@@ -1457,7 +1458,7 @@ UI_I18N = {
         "eu.coverage_note": "歐盟區域層——僅集中審批產品；授權有效 ≠ 各國在售。",
         "coverage.gap.eu": "區域層：歐盟集中審批（EMA / EC Union Register）；不含規格、劑型、包裝；授權有效 ≠ 某國在售。",
         "about.tw_source": (
-            '<p class="sub"><b>台灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
+            '<p class="sub"><b>中國台灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
             '依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；'
             '資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、'
             '許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>'
@@ -2062,7 +2063,7 @@ ABOUT_I18N = {
             '允许非商业再使用并须注明来源。<b>中国</b>：国家医保局「医保药品分类与代码数据库」'
             '（2025-04-04 快照）；未找到开放的再发布许可，只存事实字段并链回原文。</p>'),
         "about.tw_source": (
-            '<p class="sub"><b>台湾</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
+            '<p class="sub"><b>中国台湾</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）'
             '依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；'
             '資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、'
             '許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>'
@@ -3283,11 +3284,15 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
  column-gap:16px;row-gap:8px;columns:auto;padding-left:0;margin:6px 0 12px;max-width:none;
  list-style:none}
 .atcmembers>li{display:grid;grid-template-rows:auto auto auto;align-content:start;
- align-items:start;align-self:start;row-gap:0;font-size:16px;line-height:1.3;
+ align-items:stretch;align-self:stretch;row-gap:0;font-size:16px;line-height:1.3;
  break-inside:avoid;border:1px solid var(--line);border-radius:10px;background:var(--card);
- padding:10px 12px;margin:0}
-.atcmembers .salt-row{margin:0}
-.atcmembers .atc-strip{margin-top:0}
+ padding:10px 12px;margin:0;min-height:84px}
+/* 2026-11-13 task-40：卡片固定 3 行（名+码 / 盐型 / 状态），每行 1 行、超长省略 + title；
+   展开时 details 内容自然撑高（允许打破等高），不用 height/overflow 硬裁切。 */
+.atc-nm{display:flex;flex-wrap:nowrap;align-items:baseline;gap:0 8px;min-width:0;overflow:hidden}
+.atc-nm>a,.atc-nm>.brand-plain{min-width:0;overflow:hidden;text-overflow:ellipsis;
+ white-space:nowrap;display:block;flex:0 1 auto}
+.atc-nm .atc-codes,.atc-nm .st-badge{flex:none}
 /* 第 1 行：主名 + ATC 码；码用等宽数字 + 固定最小宽，1 码/2 码不会把下一行推歪 */
 .atc-nm{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;min-width:0}
 .atc-codes{display:inline-flex;flex-wrap:wrap;gap:0 6px;min-width:5.4em;
@@ -3355,7 +3360,7 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
    这里只说 text-align:center —— 里面装的是四语 .lang-block span（非当前语言 display:none），
    改成 flex 会打乱多语块显隐，不要动。hover 也跟 .homeupd 一致：只变边框、不加下划线。 */
 .catchip{display:inline-block;margin:0 8px 8px 0;padding:5px 10px;border:1px solid var(--line);
-  border-radius:999px;background:#f6f5f0;color:var(--fg);font-size:14px;text-align:center}
+  border-radius:999px;background:var(--card);color:var(--fg);font-size:14px;text-align:center}
 .catchip:hover{border-color:var(--accent);text-decoration:none}
 /* v0.9.6 task-143：首页「最近更新」= 最近 3 个版本（版本号/日期是事实，不翻译） */
 .homeupd{margin:18px 0 6px}
@@ -3538,6 +3543,11 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
 .res-samelist li{margin:3px 0;font-size:14px}
 table.res.rows td.c-det{text-align:right;white-space:nowrap}
 table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
+/* 2026-11-13 task-31（用户截图）：剂型在结果表「剂量」列里突出显示（只出现一次）。
+   浅绿底 + accent 字，白底行上对比达标；inline-block 不额外占行高。 */
+.form-tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;
+ background:var(--accent-weak);color:var(--accent);font-size:14px;font-weight:600;line-height:1.5;
+ white-space:nowrap;vertical-align:1px}
 .empty3{margin:12px 0 0}.empty3 .e3acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
 .empty3 .e3acts a,.empty3 .e3acts button{min-height:40px;display:inline-flex;align-items:center;
  padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--fg);
@@ -4014,9 +4024,10 @@ body.density-compact table.res{font-size:14px}
 
 /* v0.10.0: neutral background bands + right-top category/language controls */
 main .section,main .catquick{background:var(--band);border:1px solid var(--line);border-radius:12px;padding:16px}
-/* v0.10.2 同色守卫：catquick 是「面板」层（--card），chip 才是里面的井（--surface-2）；
-   两层都用 --band 会白压白，只剩 1px 边框分界。 */
-main .catquick{background:var(--card)}
+/* v0.10.2 同色守卫 + 2026-11-13 task-29（用户截图）：两层要能分出层次 ——
+   外层「按大类浏览」面板改浅绿（--accent-weak），内部类别 chip 改白（--card + --line 边框），
+   框内/框外颜色不许一致（用户 2026-11-10 硬规则）。 */
+main .catquick{background:var(--accent-weak)}
 .u1guide{background:#fff}
 .sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
 .sn-right details{position:relative}
@@ -4029,6 +4040,76 @@ main .catquick{background:var(--card)}
 .sn-cats.compact{grid-template-columns:repeat(2,minmax(150px,1fr))}
 .mmenu{display:none}
 @media (max-width:767px){.sn-right .qcat,.sn-right .langdd{display:none}.mmenu{display:inline-flex}}
+/* 2026-11-13 task-30（用户截图「还是竖着的」@1400）：
+   v0.11.1 的 nowrap 只覆盖 .sn 与 .langs a；右侧「按类别」summary（w=34 h=67）与
+   .lname「中文」（w=14 h=45）仍被挤成 min-content 竖排。这里：
+   ① 页头所有含文字导航元素统一 nowrap（含 summary / .lname / 语言菜单）；
+   ② 右侧组 flex:0 0 auto + min-width:max-content，不再被压缩；
+   ③ 1100–1440 先隐藏 logo 副标题、再收窄间距；仍紧时 logo 省略号截断，绝不竖排/溢出。 */
+header .sn a, header .sn summary, header .sn-right summary, header .sn-right .lname,
+header .sn-right .langs, header .sn-right a, header .sn-right details > summary,
+header .lang-menu a, header nav a, header .langs a, header .logo, header .logo-zh,
+header .hdr-shell .sn, header .hdr-shell .sn-right{white-space:nowrap}
+header .sn-right{flex:0 0 auto;min-width:max-content}
+header .sn{flex:0 0 auto}
+@media (min-width:1100px){
+  header.hdr-shell .wrap{gap:8px}
+  header.hdr-shell .logo{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  header.hdr-shell .sn{gap:0}
+  header.hdr-shell .sn>a, header.hdr-shell .sn>details>summary{padding:0 8px}
+  header.hdr-shell .sn-right summary{padding:0 8px}
+}
+@media (min-width:1100px) and (max-width:1440px){
+  header.hdr-shell .logo-zh{display:none}
+}
+/* 2026-11-13 task-40 收尾：桌面卡片第 1 行必须真的 1 行（实测有卡片 .atc-nm 仍
+   flex-wrap:wrap → 名称+码折成 2 行，高度极差 16.9px）。这里用更具体的选择器压住
+   旧规则；390 不受影响（下面的 mobile 覆盖）。 */
+@media (min-width:768px){
+  .atcmembers .atc-nm{display:flex;flex-wrap:nowrap;white-space:nowrap;
+   align-items:center;overflow:hidden}
+  .atcmembers .atc-nm .atc-codes{flex-wrap:nowrap;flex:none}
+  .atcmembers .atc-nm .st-badge,.atcmembers .atc-nm .nolang-badge{white-space:nowrap;flex:none}
+}
+/* 2026-11-13 task-37（用户截图：ATC 三列像多列流、同一行卡片上下边缘参差）：
+   .atclist 的 multicol 与 li 的 align-self:start 是根因。清掉 columns，桌面走真正的
+   行优先 grid；li 用默认 stretch → 同一行自动等高；ul align-content:start 让首行贴顶。
+   长内容换行带动整行高度；390 仍是单列自然高度（现有 media query 的 display:block 保留）。 */
+.atclist.atcmembers{columns:unset}
+@media (min-width:768px){
+  .atclist.atcmembers{display:grid;align-items:stretch;align-content:start}
+}
+.atcmembers>li{align-self:stretch}
+/* 2026-11-13 task-39/40/41：盐型 / 状态都折成一行（原生 details，无 JS 可开、键盘可达）。
+   摘要只显示第一个盐名/第一组状态 +「另有 N 个」，展开列全部；不丢信息、不硬裁切。 */
+.atcmembers .salt-details,.atcmembers .st-details{margin:0;display:block;min-width:0}
+.atcmembers .salt-details>summary,.atcmembers .st-details>summary{
+ display:flex;align-items:center;gap:0;min-height:0;line-height:1.3;font-size:16px;
+ cursor:pointer;list-style:none;color:var(--muted);white-space:nowrap;overflow:hidden}
+.atcmembers .salt-details>summary::-webkit-details-marker,
+.atcmembers .st-details>summary::-webkit-details-marker{display:none}
+.atcmembers .salt-details>summary::after,.atcmembers .st-details>summary::after{
+ content:"▾";flex:none;margin-left:auto;color:var(--accent);font-size:14px;line-height:1}
+.atcmembers .salt-details[open]>summary::after,
+.atcmembers .st-details[open]>summary::after{content:"▴"}
+.atcmembers .salt-details>summary .ln,.atcmembers .st-details>summary .ln{
+ flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.atcmembers .salt-list,.atcmembers .st-list{margin:2px 0 0;font-size:16px;line-height:1.35;
+ color:var(--muted)}
+.atcmembers .st-details .st-word{color:var(--fg);white-space:nowrap}
+.atcmembers .st-details .st-line{display:block}
+.atcmembers .st-details .st-line + .st-line{margin-top:2px}
+.atcmembers .st-details .atc-mk{white-space:normal}
+@media (max-width:767px){
+ /* 390 单列：允许名称换行、卡片按内容自然高度（不裁切；展开自然变高） */
+ .atcmembers>li{min-height:0}
+ .atc-nm{flex-wrap:wrap}
+ .atc-nm>a,.atc-nm>.brand-plain{white-space:normal;overflow:visible;text-overflow:clip}
+ .atcmembers .salt-details>summary,.atcmembers .st-details>summary{white-space:normal;overflow:visible}
+ .atcmembers .salt-details>summary .ln,.atcmembers .st-details>summary .ln{
+   white-space:normal;overflow:visible;text-overflow:clip}
+ .atcmembers .salt-details>summary,.atcmembers .st-details>summary{min-height:44px}
+}
 """
 
 def _detail_row_fields() -> list[str]:
@@ -4269,22 +4350,27 @@ function ingredientLabel(e){
 // v0.5.3 点击目标规则（用户报 Excedrin 点品牌跳到 acetaminophen 页）：
 //   品牌列 → name/<u>.html；没有品牌页就渲染成不可点文本，**绝不回退 drug 页**。
 //   成分列 → 复方（索引 cu 字段）进 /combo/<slug>.html；单成分进 drug/<v>.html。
-function brandHTML(e){
+function brandHTML(e, withFormHint){
   let d = e && e.d != null ? String(e.d) : '';
   const T = window.T || (k=>k);
   if(e && e.t !== 1){
     // v0.9.0 task-19：没有 trade 名 → 商品名位置只显示「无商品名」纯文本，
     // 不链接、不放厂家；通用名/剂型作小字说明。
-    const hint = [e.x || '', e.f ? labelOf('form', e.f, '') : '']
+    const hint = [e.x || '',
+                  (withFormHint === false ? '' : (e.f ? labelOf('form', e.f, '') : ''))]
       .filter(Boolean).join(' · ');
     const matched = e.d ? ` <span class="match-name" title="${esc(T('res.matched_name'))}">`
       + `${esc(T('res.matched_name'))}: ${esc(e.d)}</span>` : '';
     // v0.10.2 task-10：CN 无商品名的产品 100% 有上市许可持有人 → 名称位显示「厂家：<MAH>」。
     // 只显示：厂家名不进 name_key / 索引，也不生成厂家页（避免假商品名污染检索）。
-    const cnMah = ((e.c || []).indexOf('CN') >= 0) ? String(e.m || '').trim() : '';
-    if(cnMah){
-      const short = cnMah.length > 28 ? cnMah.slice(0, 27) + '…' : cnMah;
-      return `<span data-brand="0" class="m-brand m-mah" title="${esc(cnMah)}">`
+    // 2026-11-13 task-28（用户截图）：**不限国家** —— 任何国家只要无 trade 名且有 e.m，
+    // 名称位都显示「厂家：<MAH>」；e.m 为空才回退「无商品名」。截断/title/样式沿用。
+    // 2026-11-13 task-31：`withFormHint=false` 时 hint 只留成分（结果表把剂型移到剂量列，
+    // 避免「Zopiclone · 片剂」+ 下一行「片剂」重复）。
+    const mah = String(e.m || '').trim();
+    if(mah){
+      const short = mah.length > 28 ? mah.slice(0, 27) + '…' : mah;
+      return `<span data-brand="0" class="m-brand m-mah" title="${esc(mah)}">`
         + `<span class="mah-k">${esc(T('brand.mah'))}</span> ${esc(short)}</span>`
         + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
     }
@@ -4432,10 +4518,24 @@ function detPanelHTML(payload, key, e, T){
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
       + `<td>${makerLinkHTML(r[9], T)}</td></tr>`;
   }).join('');
+  // 2026-11-13 task-34（用户截图）：明细面板底部「全部见成分页」要可点。
+  // a1.more 四语文案里已带 <a href="{url}">；这里注入当前条目的成分页 URL。
+  // e.v 为空（名称层/复方无单一成分）时退回纯文本，绝不输出占位符。
+  let moreHTML = '';
+  if(rows.length >= 12){
+    const tpl = T('a1.more');
+    if(e && e.v){
+      const drugUrl = BASE + 'drug/' + encodeURIComponent(e.v) + '.html';
+      moreHTML = `<p class="sub">${tpl.replace(/\{url\}/g, esc(drugUrl))}</p>`;
+    }else{
+      moreHTML = '<p class="sub">'
+        + esc(tpl.replace(/<[^>]+>/g, '').replace(/\{url\}/g, '')) + '</p>';
+    }
+  }
   return `<table class="det"><thead><tr><th>${esc(T('a1.market'))}</th><th>${esc(T('col.brand'))}</th>`
     + `<th>${esc(T('a1.pack'))}</th><th>${esc(T('a1.approval'))}</th><th>${esc(T('a1.status'))}</th>`
     + `<th>${esc(T('a1.source'))}</th><th>${esc(T('col.mah'))}</th></tr></thead><tbody>${body}</tbody></table>`
-    + (rows.length >= 12 ? `<p class="sub">${esc(T('a1.more'))}</p>` : '');
+    + moreHTML;
 }
 // B7：导出当前视图全部结果（含折叠/未加载更多的行），纯前端。
 function exportRows(){
@@ -4621,15 +4721,19 @@ function marketTags(list, max){
   return head + (cs.length > n ? ` <span class="meta">+${cs.length - n}</span>` : '');
 }
 function flatRowHTML(e, T){
-  const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [''];
+  const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [];
   const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
                 e.l==='warning' ? `<span class="badge warn">${esc(T('badge.warning'))}</span>` : '';
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${esc(T('badge.combo'))}</span>` : '';
   const exp = e.eo ? `<span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
+  // 2026-11-13 task-31（用户截图）：剂型从品牌列移到「剂量」列并突出显示，
+  // 品牌列不再追加 .rowform —— 否则无商品名行会「Zopiclone · 片剂」+「片剂」出现两次。
   const form = formLabelOf(e);
   const rel = (e.rl && e.rl !== 'none') ? ' · ' + labelOf('release', e.rl, e.rl) : '';
-  const formLine = form ? `<span class="rowform">${esc(form + rel)}</span>` : '';
+  const formTag = form ? `<span class="form-tag">${esc(form + rel)}</span>` : '';
+  const doseTxt = ds.length ? esc(ds.join(' / ')) : '';
+  const doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || '—');
   let det;
   if(e.n){
     det = `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}"`
@@ -4642,8 +4746,8 @@ function flatRowHTML(e, T){
     det = '—';
   }
   return `<tr class="br" data-k="${esc(e.k)}">
-    <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${badge}${combo}${exp}${formLine}</td>
+    <td class="c-dose" data-label="${esc(T('col.dose'))}">${doseCell}</td>
+    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e, false)}${badge}${combo}${exp}</td>
     <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, 4) || '—'}</td>
     <td class="c-det">${det}</td></tr>`;
 }
@@ -6495,6 +6599,35 @@ def esc(v) -> str:
     return html.escape("" if v is None else str(v))
 
 
+# 2026-11-13 task-42：内部占位符/桶键绝不允许进渲染产物。
+# 事故：成分页「未公开规格的记录」段直接 esc() 了桶键 → 页面显示 `__mah__:卫材…`。
+_INTERNAL_TOKEN_RE = re.compile(r"__mah__:|__no_trade__|@@[A-Z_]+@@")
+
+
+def _assert_no_internal_tokens(page_html: str, where: str) -> str:
+    """构建期守卫：页面上出现内部占位符就中止构建（宁可失败，不发布脏文案）。"""
+    m = _INTERNAL_TOKEN_RE.search(page_html or "")
+    if m:
+        ctx = (page_html or "")[max(0, m.start() - 90):m.start() + 90].replace("\n", " ")
+        raise SystemExit(f"{where} 渲染产物含内部占位符 {m.group(0)!r}，构建中止"
+                         f"（上下文：…{ctx}…）；检查 NO_TRADE/MAH_PREFIX 是否直接输出")
+    return page_html
+
+
+def _bucket_key_html(key: str, T: dict) -> str:
+    """内部桶键 → 人话（task-42）：`__no_trade__` → 无商品名；`__mah__:X` → 厂家：X。"""
+    if key == "__no_trade__":
+        return ('<span class="m-brand st-badge st-unknown brand-none" data-brand="0" '
+                f'data-i18n="brand.none">{esc(T.get("brand.none", "No trade name"))}</span>')
+    if key.startswith("__mah__:"):
+        name = key[len("__mah__:"):]
+        shown = name if len(name) <= 28 else name[:27] + "…"
+        return (f'<span class="m-brand m-mah" data-brand="0" title="{esc(name)}">'
+                f'<span class="mah-k" data-i18n="brand.mah">'
+                f'{esc(T.get("brand.mah", "Manufacturer:"))}</span> {esc(shown)}</span>')
+    return esc(key)
+
+
 def key_file(key: str) -> str:
     """文件名尽量保留可读性（含中文），只替换路径非法字符。
 
@@ -7482,7 +7615,9 @@ def build_whats_new() -> None:
     v0.5.3/v0.5.4/v0.5.5 从正文消失（线上 smoke whats-new-version 失败）。
     现在的规则：
       1) 版本顺序永远以 CHANGELOG.md 为准（最新在上，含全部版本）；
-      2) 有 JSON 译文的版本 → 渲染 zh/en/es 三个语言块（按界面语言只显示一块）；
+      2) 有 JSON 译文的版本 → 渲染 zh/en/es/zh-Hant 四个语言块（按界面语言只显示一块）；
+        （2026-11-13 task-44：原来只渲染三语，zh-Hant 界面按 data-lang-block 显隐会把正文
+         全部隐藏；这里补 zh-Hant，缺值时回退 zh。）
       3) 没有译文的版本 → 显示 CHANGELOG 中文原文 + 「译文待补」提示。
     """
     parts = [f'<h1 data-i18n="whatsnew.title">{esc(I18N["en"]["whatsnew.title"])}</h1>',
@@ -7506,7 +7641,7 @@ def build_whats_new() -> None:
         item = translations.get(ver)
         if item:
             blocks = []
-            for lang in ("zh", "en", "es"):
+            for lang in ("zh", "en", "es", "zh-Hant"):
                 items = item.get(lang) or item.get("zh") or []
                 lis = "".join(f"<li>{_md_inline(str(x))}</li>" for x in items)
                 blocks.append(f'<div class="lang-block" data-lang-block="{lang}">'
@@ -8438,7 +8573,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                 # v0.10.2 task-10：CN 这 126,716 条 100% 有上市许可持有人，
                 # 名称位改显示「厂家：<MAH>」（只显示，不入 name_key/检索，不生成厂家页）；
                 # 同一厂家在同一格只出现一次并计 ×N（下面的 mah_count）。
-                if country == "CN" and (mah or "").strip():
+                # 2026-11-13 task-28（用户截图）：**不限国家** —— 任何国家无 trade 名且有 MAH
+                # 都按厂家分桶显示「厂家：X」；没有 MAH 的才落 NO_TRADE（「无商品名」）。
+                if (mah or "").strip():
                     key = MAH_PREFIX + (mah or "").strip()
                     if key not in bucket:
                         bucket[key] = ("", "", "")
@@ -8459,12 +8596,17 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             if label.startswith(MAH_PREFIX):
                 # task-10：CN 无商品名 → 名称位显示「厂家：<MAH>」；前缀弱化、
                 # 过长截断（title 放全称）、同厂家多条标 ×N。它不是品牌名。
+                # 2026-11-13 task-25（用户截图）：删除原来的 data-i18n-title="brand.mah_note"。
+                # i18n.js 的 apply() 对 [data-i18n-title] 是 `el.textContent = T(key)`（为 <title>
+                # 设计的写法），挂在 <span> 上会把「厂家：X」整段替换成
+                # 「该产品没有登记商品名，这里显示上市许可持有人。」——又长又占地方。
+                # 现在名称位只留「厂家：<MAH>」，长句不再出现；I18N 里的 brand.mah_note 键保留
+                # （不删键，避免四语键集/zh-Hant 生成器连锁改动），代码里不再引用。
                 mah_name = label[len(MAH_PREFIX):]
                 shown = mah_name if len(mah_name) <= 28 else mah_name[:27] + "…"
                 n_same = mah_count.get((country, label), 1)
                 times = f' <span class="m-n">×{n_same}</span>' if n_same > 1 else ""
-                return (f'<span class="m-brand m-mah" data-brand="0" title="{esc(mah_name)}" '
-                        f'data-i18n-title="brand.mah_note">'
+                return (f'<span class="m-brand m-mah" data-brand="0" title="{esc(mah_name)}">'
                         f'<span class="mah-k" data-i18n="brand.mah">'
                         f'{esc(T.get("brand.mah", "Manufacturer:"))}</span> '
                         f'{esc(shown)}{times}</span>')
@@ -8788,8 +8930,10 @@ Listed by country — not interchangeable.</div>
             "about": {"@type": "Drug", "name": inn_en or sid},
         }, ensure_ascii=False)
         (OUT / "drug" / f"{sid}.html").write_text(
-            page(f"{inn_en}", body, "../", canonical_rel=f"drug/{sid}.html",
-                 head_js=f'<script type="application/ld+json">{drug_ld}</script>'),
+            _assert_no_internal_tokens(
+                page(f"{inn_en}", body, "../", canonical_rel=f"drug/{sid}.html",
+                     head_js=f'<script type="application/ld+json">{drug_ld}</script>'),
+                f"drug/{sid}.html"),
             encoding="utf-8")
         DRUG_PAGE_IDS.add(sid)
         made += 1
@@ -8995,8 +9139,11 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
         (OUT / "name" / e["u"]).write_text(
             # v0.9.6 task-149：name 页是长尾页（77,058 个，占全站 50.7% 体积），
             # 走 slim 壳：单页省 782 B，全站省 57.5 MiB；正文与 SEO 骨架不变。
-            page(e["d"], body, "../", noindex=single, slim=True,
-                 canonical_rel=f'name/{e["u"]}'), encoding="utf-8")
+            _assert_no_internal_tokens(
+                page(e["d"], body, "../", noindex=single, slim=True,
+                     canonical_rel=f'name/{e["u"]}'),
+                f"name/{e['u']}"),
+            encoding="utf-8")
         made += 1
     return made
 
@@ -9205,7 +9352,8 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 # 它和矩阵遗留的 .m-brand/.m-rest 规则打架，在手机上把名字挤成两行。
                 uid = f"mx-{n_uid}"
                 rest_names = [k for k in names[1:]]
-                rest = "、".join(esc(k) for k in rest_names[:8])
+                # task-42：这里同样会把 __mah__:X / __no_trade__ 直接输出 → 用同一映射。
+                rest = "、".join(_bucket_key_html(k, T) for k in rest_names[:8])
                 if len(rest_names) > 8:
                     rest += f" +{len(rest_names) - 8}"
                 more = (f'<input type="checkbox" class="m-x" id="{uid}" hidden>'
@@ -9238,7 +9386,10 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             for spec, bucket in undisclosed:
                 names = sorted(bucket.keys(), key=lambda k: (k.startswith("__"), k.lower()))
                 tail = f' <span class="meta">+{len(names) - 3}</span>' if len(names) > 3 else ""
-                plain = "、".join(esc(k) for k in names[:8])
+                # 2026-11-13 task-42（用户截图）：这里原来直接 esc(k)，把内部桶键
+                # `__mah__:X` / `__no_trade__` 泄漏成字面量。现在用 _bucket_key_html 的
+                # 同一映射：__no_trade__ → 「无商品名」；__mah__:X → 「厂家：X」（28 字截断、title 全名）。
+                plain = "、".join(_bucket_key_html(k, T) for k in names[:8])
                 if len(names) > 8:
                     plain += f" +{len(names) - 8}"
                 ubits.append('<span class="uname">' + plain + tail + '</span>')
@@ -9519,7 +9670,10 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         body = re.sub(r"([^\s<>]+)\s*<code>([^<]+)</code>",
                       lambda m: m.group(1) if m.group(1).lower() == m.group(2).lower() else m.group(0), body)
         (OUT / "combo" / slug).write_text(
-            page(title, body, "../", canonical_rel=f"combo/{slug}"), encoding="utf-8")
+            _assert_no_internal_tokens(
+                page(title, body, "../", canonical_rel=f"combo/{slug}"),
+                f"combo/{slug}"),
+            encoding="utf-8")
         made += 1
     print(f"  combo stubs: {stub_made} (noindex, old URL compatibility)")
     return made
@@ -9867,8 +10021,11 @@ def build_index_page(entries, stats, coverage) -> None:
 <div id="ac" role="listbox" aria-label="Suggestions" data-i18n-aria="home.suggestions"></div>
 </div>
 <p class="sub search-status" id="meta" role="status" aria-live="polite" aria-atomic="true"></p>
-<details class="mf-details ctry-details" id="ctrydetails">
-  <summary><span id="ctrylabel" data-i18n="home.country_summary">Target market (optional)</span></summary>
+</div>
+<div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
+<div id="identity"></div>
+<div id="out"></div>
+<div class="mf-details ctry-visible ctry-details" id="ctrydetails" data-always-open="1">
   <div class="ctry-panel">
   <label class="sel-label" for="country" data-i18n="home.country_label">Target market: show the names used there (optional)</label>
   <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
@@ -9897,11 +10054,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="SG" data-i18n="home.sg">Singapore</option>
     <option value="EU" data-i18n="home.eu">European Union (EU)</option></select>
   </div>
-</details>
 </div>
-<div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
-<div id="identity"></div>
-<div id="out"></div>
 <p class="sub report-line" id="report" style="display:none">
   <span data-i18n="report.note">Wrong ingredient, wrong dose, or a drug we do not have? Tell us:</span>
   <a id="reportLink" href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
@@ -10300,10 +10453,12 @@ ATC_I18N = {
                             "Only some registers publish a status column: CA, ES and MX do; AU "
                             "and HK have no status column and are recorded as unknown; CN, US, "
                             "GB, TW and SG records are on the register and marked active."),
-        "atc.markets_hint": ("The market codes after a status are the markets where that status "
-                             "is recorded (same codes as the product tables). An ingredient can "
-                             "be on sale in one market and withdrawn in another; that is a record "
-                             "fact, not a safety judgement."),
+        "atc.markets_hint": ("Each market now shows one aggregated status: a market counts "
+                             "as on sale if it has any active record; individual record "
+                             "statuses are shown in the details. The same market can also have "
+                             "several registration records with different statuses, so each "
+                             "market appears only once here; that is a record fact, not a "
+                             "safety judgement."),
         "atc.ing_more": ("{n} more ingredients — the full list appears when the complete index "
                          "finishes loading."),
         # 2026-11-11 Batch 2：页级说明替代「每行一枚『无中文名』」的逐条噪音
@@ -10369,10 +10524,11 @@ ATC_I18N = {
                             "estado. Solo algunos registros publican columna de estado: CA, ES y "
                             "MX sí; AU y HK no la tienen y figuran como desconocido; los "
                             "registros de CN, US, GB, TW y SG figuran como activos."),
-        "atc.markets_hint": ("Los códigos de mercado tras cada estado indican dónde consta ese "
-                             "estado (los mismos códigos que en las tablas de productos). Un "
-                             "mismo principio activo puede estar comercializado en un mercado y "
-                             "retirado en otro; es un hecho registral, no un juicio de seguridad."),
+        "atc.markets_hint": ("Cada mercado muestra ahora un estado agregado: cuenta como en "
+                             "venta si tiene algún registro activo; los estados de cada registro "
+                             "están en el detalle. Un mismo mercado también puede tener varios "
+                             "registros con estados distintos, por eso cada mercado aparece una "
+                             "sola vez aquí; es un hecho registral, no un juicio de seguridad."),
         "atc.ing_more": ("{n} principios activos más — la lista completa aparece cuando termine "
                          "de cargar el índice completo."),
         "atc.nolang_note": ("Un nombre ausente se marca en su fila solo cuando es la excepción; "
@@ -10430,9 +10586,9 @@ ATC_I18N = {
                             "每个角标后面的市场码表示该状态记录在哪些市场。只有部分市场的"
                             "登记库带状态列：CA、ES、MX 有；AU、HK 没有状态列，记为状态未知；"
                             "CN、US、GB、TW、SG 的记录按在售登记。"),
-        "atc.markets_hint": ("状态后面的市场码表示该状态记录在哪些市场（与产品表同一套代码）。"
-                             "同一成分可能在一个市场在售、在另一个市场已撤市；这只是登记事实，"
-                             "不是安全性判断。"),
+        "atc.markets_hint": ("每个市场只显示一个汇总状态：只要该市场有在售记录就算在售；"
+                             "单条记录的状态见详情。同一市场也可能有多条注册记录、状态各不相同，"
+                             "所以一个市场在这里只出现一次；这只是登记事实，不是安全性判断。"),
         "atc.ing_more": "另有 {n} 个成分，完整索引加载完成后显示。",
         "atc.nolang_note": "缺当前语言名属个别情况时才在该行标一次；多数都缺时整页不逐行标记。",
         "atc.names_source_note": ("类别名称为编辑译名，或来自 Wikipedia（CC BY-SA 4.0）/ "
@@ -10479,9 +10635,9 @@ ATC_I18N = {
                             "每個角標後面的市場碼表示該狀態記錄在哪些市場。只有部分市場的"
                             "登記庫帶狀態列：CA、ES、MX 有；AU、HK 沒有狀態列，記為狀態未知；"
                             "CN、US、GB、TW、SG 的紀錄按販售中登記。"),
-        "atc.markets_hint": ("狀態後面的市場碼表示該狀態記錄在哪些市場（與產品表同一套代碼）。"
-                             "同一成分可能在一個市場販售中、在另一個市場已下市；這只是登記事實，"
-                             "不是安全性判斷。"),
+        "atc.markets_hint": ("每個市場只顯示一個彙總狀態：只要該市場有販售中記錄就算販售中；"
+                             "單條記錄的狀態見詳情。同一市場也可能有多條註冊記錄、狀態各不相同，"
+                             "所以一個市場在這裡只出現一次；這只是登記事實，不是安全性判斷。"),
         "atc.ing_more": "另有 {n} 個成分，完整索引載入完成後顯示。",
         "atc.nolang_note": "缺中文名或英文名的條目會在該列標一次，不按鹽型逐個重複。",
         "atc.names_source_note": ("類別名稱為編輯譯名，或來自 Wikipedia（CC BY-SA 4.0）/ "
@@ -11018,6 +11174,56 @@ def _collapse_members(subs: list[dict], base_of: dict[str, str],
 ATC_STATUS_ORDER = ("active", "released", "discontinued", "withdrawn", "unknown")
 
 
+def _status_summary_html(statuses: dict[str, dict[str, int]]) -> str:
+    """ATC 卡片的状态行：**按国家聚合、每国只出现一次**（task-41）。
+
+    - 优先级 active > released > discontinued > withdrawn > unknown：只要该市场有在售记录，
+      这个国家就归「在售」，同国的已停售/已撤市/未知不再并列；没有在售才显示其最强状态。
+    - 输出 `<details class="st-details">`：折叠态一行只显示第一组状态 + 前 5 个市场码 +
+      「另有 N 个」；展开列全部「状态 → 市场码」。无 JS 可点、键盘可达，不丢信息。
+    - 单条产品记录的状态仍在「详情」表的状态列（`detPanelHTML` 未改）。
+    """
+    if not statuses:
+        return ""
+    rank = {s: i for i, s in enumerate(ATC_STATUS_ORDER)}
+    best: dict[str, str] = {}
+    for st, per in statuses.items():
+        r = rank.get(st, len(ATC_STATUS_ORDER) - 1)
+        for c in (per or {}):
+            cur = best.get(c)
+            if cur is None or r < rank.get(cur, len(ATC_STATUS_ORDER) - 1):
+                best[c] = st
+    def _sort_codes(cs):
+        return sorted(cs, key=lambda c: (COUNTRY_PRIORITY.index(c)
+                                         if c in COUNTRY_PRIORITY else 99, c))
+    groups: list[tuple[str, list[str]]] = []
+    for st in ATC_STATUS_ORDER:
+        cs = _sort_codes(c for c, s in best.items() if s == st)
+        if cs:
+            groups.append((st, cs))
+    leftover = _sort_codes(c for c, s in best.items() if s not in rank)
+    if leftover:
+        groups.append(("unknown", leftover))
+    if not groups:
+        return ""
+    def _word(st: str) -> str:
+        return (f'<span class="st-word st-{esc(st)}" data-i18n="drug.status.{esc(st)}">'
+                f'{esc(I18N["en"].get("drug.status." + st, st))}</span>')
+    first_st, first_cs = groups[0]
+    shown = first_cs[:5]
+    total_codes = sum(len(cs) for _st, cs in groups)
+    remaining = total_codes - len(shown) + max(0, len(groups) - 1)
+    summary = (_word(first_st) + ' <span class="atc-mk">' + esc(" ".join(shown)) + '</span>')
+    if remaining > 0:
+        summary += ' · ' + _lang_block_text("atc.more", n=remaining)
+    body = " · ".join(
+        f'<span class="st-line">{_word(st)} '
+        f'<span class="atc-mk">{esc(" ".join(cs))}</span></span>'
+        for st, cs in groups)
+    return (f'<details class="st-details"><summary><span class="ln">{summary}</span>'
+            f'</summary><div class="st-list">{body}</div></details>')
+
+
 def _status_badges_html(statuses: dict[str, dict[str, int]]) -> str:
     """状态行：`在售 CN US GB · 已撤市 ES MX`（状态词一次、市场码空格分隔）。
 
@@ -11128,20 +11334,27 @@ def _atc_members_html(items: list[dict], cap: int = ATC_MEMBER_CAP,
             label = f'<span class="brand-plain">{name_html}</span>'
         codes = "".join(f'<code>{esc(c)}</code>' for c in it["codes"])
         codes = f'<span class="atc-codes">{codes}</span>' if codes else ""
+        full_name = it.get("en") or it.get("zh") or it["sid"]
+        name_title = f' title="{esc(full_name)}"'
         salt = ""
         if it["salts"]:
-            # v0.10.2 task-3：盐型改成块级子行（左缩进对齐），文案「盐型：Name」；
-            # 原来是内联 `盐型 a · b`，390 px 下会跟主名、状态角标抢同一行并断裂。
-            salt_names = " · ".join(
+            # 2026-11-13 task-39/40（用户截图）：盐型行固定 1 行 —— 摘要只显示第一个盐名
+            # （+「另有 N 个」），用原生 <details> 展开列全部盐名；不藏信息、键盘可达。
+            # 1 个盐型也走 details（摘要就是「盐型：Name」），保证卡片 3 行等高。
+            salt_names = [
                 _sub_name_spans(r.get("inn_en") or "", r.get("inn_zh") or "",
-                                r["substance_id"]) for r in it["salts"])
-            salt = (f'<span class="salt-row"><span class="salt-k" '
-                    f'data-i18n="atc.salt_label">'
-                    f'{esc(I18N["en"].get("atc.salt_label", "Salt form:"))}</span> '
-                    f'{salt_names}</span>')
-        # v0.10.2：状态按「状态 + 市场」聚合，同一状态只出现一次；Batch 2 换成纯文字行
-        strip = _status_badges_html(it["statuses"])
-        lis.append(f'<li><span class="atc-nm">{label}{codes}</span>{salt}{strip}</li>')
+                                r["substance_id"]) for r in it["salts"]]
+            salt_label = (f'<span class="salt-k" data-i18n="atc.salt_label">'
+                          f'{esc(I18N["en"].get("atc.salt_label", "Salt form:"))}</span>')
+            salt_more = (f' · {_lang_block_text("atc.more", n=len(salt_names) - 1)}'
+                         if len(salt_names) > 1 else '')
+            salt = (f'<details class="salt-details"><summary><span class="ln">'
+                    f'{salt_label} {salt_names[0]}{salt_more}</span></summary>'
+                    f'<div class="salt-list">{" · ".join(salt_names)}</div></details>')
+        # 2026-11-13 task-40/41：状态行固定 1 行，按国家聚合（每国只出现一次；
+        # 有在售记录就算在售），摘要「在售 US GB CA… · 另有 N 个」，展开列全部。
+        strip = _status_summary_html(it["statuses"])
+        lis.append(f'<li><span class="atc-nm"{name_title}>{label}{codes}</span>{salt}{strip}</li>')
     head = "".join(lis[:cap])
     rest = "".join(lis[cap:])
     # 2026-11-11 2b：整页缺名比例 ≥50% 的语言写进 data-nolang-mute，逐行徽章由

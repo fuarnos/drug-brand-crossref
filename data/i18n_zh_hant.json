@@ -14,7 +14,7 @@
     "STCharacters.txt": "OpenCC (Apache-2.0)",
     "TWVariants.txt": "OpenCC (Apache-2.0)"
    },
-   "tw_terms": 130,
+   "tw_terms": 137,
    "generated_by": ".tmp/zh-hant/build_hant.py"
   },
   "machine_translated": false,
@@ -24,12 +24,12 @@
   "validation": {
    "key_parity": true,
    "empty_values": 0,
-   "problems": 0,
+   "problems": 1,
    "residual_simplified_keys": 0
   },
   "license_note": "简繁/台湾用语词典来自 OpenCC（https://github.com/BYVoid/OpenCC，Apache License 2.0）；台湾 IT/药事术语表为本项目自建（TW_TERMS）。",
   "manual_review_required": true,
-  "generated_at": "2026-11-11T17:14:13+00:00"
+  "generated_at": "2026-11-11T20:05:09+00:00"
  },
  "zh-Hant": {
   "nav.search": "檢索",
@@ -58,7 +58,7 @@
   "home.au": "澳大利亞",
   "home.ca": "加拿大",
   "home.sg": "新加坡",
-  "home.tw": "臺灣",
+  "home.tw": "中國台灣",
   "home.hk": "中國香港",
   "home.eu": "歐盟（EU）",
   "eu.region_title": "歐盟集中審批（EMA）",
@@ -123,7 +123,7 @@
   "res.action_drug": "檢視成分頁",
   "res.action_copy": "複製標準名",
   "res.identity_title": "共 {n} 條候選，這是第 1 條",
-  "res.more_detail": "規格 · 市場 · 動作",
+  "res.more_detail": "更多同規格／更多記錄",
   "res.src_label": "來源市場（只看這些登記庫的記錄）：",
   "res.src_all": "全部來源市場",
   "res.src_active": "來源市場 {c}",
@@ -268,7 +268,7 @@
   "a1.status": "狀態",
   "a1.source": "來源",
   "a1.raw": "原始記錄",
-  "a1.more": "僅顯示前 12 條記錄，全部見成分頁。",
+  "a1.more": "僅顯示前 12 條記錄，<a href=\"{url}\">全部見成分頁</a>。",
   "nav.coverage": "覆蓋與新鮮度",
   "meta.coverage.title": "覆蓋與新鮮度 · 藥品商品名跨國定位",
   "meta.coverage.desc": "各市場的產品數、成分對應率、規格覆蓋、最後同步與已知缺口；數字按當前資料庫構建期計算。",
@@ -304,7 +304,7 @@
   "about.nick": "<h2>俗稱與舊名</h2><p>「兩隻青蛙」不是商品名，也永遠不當作商品名儲存：它指向成分二甲雙胍。俗稱是單獨的人工維護表，可檢索，但刻意不進入商品名表。命中時先標註<i>「網路俗稱 / 舊名」</i>，再列該成分的商品名，絕不把它說成包裝上的名字。每條都寫出處；「使用者提供」只算線索，公開頁標<i>「未證實」</i>，找到獨立出處後才升級為 <code>documented</code>。沒有來源就不新增。</p><ul class=\"sub\"><li>@@NICKNAMES@@ 條俗稱在 <code>data/seed_nicknames.py</code> 裡人工維護並重建，不自動抓取。</li><li>俗稱不參與同名碰撞推導，也不生成同名頁——暱稱不是身分，成分才是。</li></ul>",
   "about.terms": "<h2>民間叫法與類別詞</h2><p>另有一張表 <code>drug_term</code>（@@DRUGTERMS@@ 條）收錄<b>合法藥品</b>的民間叫法與類別詞：water pill（利尿劑）、blood thinner（抗凝藥）、睡前藥、the pill、morning-after pill、statin 等。與 <code>nickname</code> 不同，它可以指向類別而不是單一成分，因此 <code>substance_id</code> 可空；檢索層讀 <code>alias_all</code> 統一檢視。<b>毒品與娛樂性用藥黑話明確不在收錄範圍</b>（街頭/娛樂性用藥黑話），此類條目已從庫中移除，不再新增。</p><ul class=\"sub\"><li><b>NIDA / DEA 清單</b>不再用於娛樂性黑話，只保留合法藥品的處方藥類別詞，並逐條帶出處 URL。</li><li><b>MedlinePlus（NLM）</b>提供常見民間/類別詞（美國政府作品）；社區來源（CN/GB/AU/ES）標<i>「社區叫法」</i>並保留檢索。FDA 官方 tall-man 藥對：@@CONFUSABLE@@ 對，<a href=\"confused.html\">見列表</a>。</li></ul>",
   "about.sources": "<h2>資料來源與覆蓋</h2><div class=\"tablewrap\"><table><tr><th>國家/地區</th><th>已收錄產品</th><th>資料截止</th></tr>@@COV@@</table></div><p class=\"sub\"><b>資料截止</b> = 資料來源自己發布 / 生效 / 快照的日期，不是我們的抓取日期。<code>live</code> = 即時目錄，源頭沒有單獨日期；<b>—</b> = 只有年度清單。</p><p class=\"sub\"><b>美國</b>：openFDA NDC Directory（美國政府公開資料）。<b>英國</b>：NHSBSA dm+d，Open Government Licence v3.0——<i>Contains public sector information licensed under the Open Government Licence v3.0.</i> <b>西班牙</b>：AEMPS CIMA——引用須註明來源與檔案最後更新日期，非開放許可（見下方許可段）。<b>墨西哥</b>：COFEPRIS 註冊清單（未標註開放許可，只存事實欄位並鏈回原文）；規格回填來自 datos.gob.mx 的採購/價格資料集，CC BY 4.0。<b>澳洲</b>：PBS Schedule API（保留版權宣告）+ TGA CMI 目錄 + 人工核對的 listed OTC 種子，只存事實欄位，不轉載 CMI/ARTG 全文。<b>加拿大</b>：Health Canada DPD，允許非商業再使用並須註明來源。<b>中國</b>：國家醫保局「醫保藥品分類與程式碼資料庫」（2025-04-04 快照）；未找到開放的再發布許可，只存事實欄位並鏈回原文。</p>",
-  "about.tw_source": "<p class=\"sub\"><b>臺灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>授權：<a href=\"https://data.gov.tw/license\">data.gov.tw/license</a>。</p>",
+  "about.tw_source": "<p class=\"sub\"><b>中國台灣</b>：TFDA「全部藥品許可證資料集」（data.gov.tw 資料集 9122）依<b>政府資料開放授權條款第 1 版（OGDL v1.0）</b>釋出，須署名「衛福部食藥署 TFDA」；資料截止 <b>2026-10-22</b>（每週同步）。只存事實欄位（品名、成分、劑型、廠商、許可證號、狀態）。<b>規格由品名解析，置信度有限。</b>授權：<a href=\"https://data.gov.tw/license\">data.gov.tw/license</a>。</p>",
   "about.sg_source": "<p class=\"sub\"><b>新加坡</b>：HSA「Listing of Registered Therapeutic Products」（data.gov.sg 資料集 d_767279312753558cbf19d48344577084）依<b>新加坡開放資料許可第 1 版（SODL v1.0）</b>釋出，須署名並鏈回許可頁，不得暗示政府背書；資料截止 <b>2026-08-07</b>（每 6 個月更新）。<b>在冊名單不代表販售中。</b>商品名保留英文原文、不翻譯；中文僅成分名（inn_zh）可顯示。署名：Contains information from Listing of Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences Authority (HSA), and made available under the Singapore Open Data Licence v1.0（<a href=\"https://data.gov.sg/open-data-licence\">許可</a>）。</p>",
   "about.hk_source": "<p class=\"sub\"><b>中國香港</b>：香港衞生署藥物辦公室「<b>註冊藥劑製品名單</b>」（data.gov.hk 資料集 hk-dh-dh_do-hk-dh-do-pharmaceutical-product），依 <b>DATA.GOV.HK 使用條款</b>可自由再使用、須署名（不暗示政府背書）；資料截止 <b>2026-10-23</b>。僅名稱/持有人/註冊號/活性成分層——<b>無規格、無劑型、無註冊狀態；在冊不代表販售中。</b></p>",
   "about.au_source": "<p class=\"sub\"><b>澳大利亞</b>：TGA <b>ARTG Medicines 2026-10-28</b>（Australian Register of Therapeutic Goods；署名 TGA/ARTG）；資料截止 <b>2026-10-28</b>。匯出<b>無註冊狀態列</b>，狀態一律顯示「未確認」；<b>在冊不代表販售中</b>。另有 3,911 個無成分記錄的產品，僅按名稱層展示。</p>",
@@ -435,7 +435,7 @@
   "atc.show_all": "顯示全部 {n} 個（當前顯示前 {shown} 個）",
   "atc.salt_label": "鹽型：",
   "atc.status_note": "狀態角標按每個成分的產品記錄彙總（販售中 / 已停售 / 已下市 / 狀態未知）；每個角標後面的市場碼錶示該狀態記錄在哪些市場。只有部分市場的登記庫帶狀態列：CA、ES、MX 有；AU、HK 沒有狀態列，記為狀態未知；CN、US、GB、TW、SG 的記錄按販售中登記。",
-  "atc.markets_hint": "狀態後面的市場碼錶示該狀態記錄在哪些市場（與產品表同一套程式碼）。同一成分可能在一個市場販售中、在另一個市場已下市；這只是登記事實，不是安全性判斷。",
+  "atc.markets_hint": "每個市場只顯示一個彙總狀態：只要該市場有販售中記錄就算販售中；單條記錄的狀態見詳情。同一市場也可能有多條註冊記錄、狀態各不相同，所以一個市場在這裡只出現一次；這只是登記事實，不是安全性判斷。",
   "atc.ing_more": "另有 {n} 個成分，完整索引載入完成後顯示。",
   "atc.nolang_note": "缺當前語言名屬個別情況時才在該行標一次；多數都缺時整頁不逐行標記。",
   "atc.names_source_note": "類別名稱為編輯譯名，或來自 Wikipedia（CC BY-SA 4.0）/ Wikidata（CC0）；每個 ATC 頁面逐語標註實際來源、許可與連結。只有 ATC 碼與 WHO 層級是權威依據。",

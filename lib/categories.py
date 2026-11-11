@@ -3,12 +3,17 @@
 
 来源与口径
 ----------
-- 16 大类定义（id/url/prefixes/四语 labels/aliases，`CATEGORY_SNAPSHOT`）是构建产物
-  `site/dist/data/categories.json` 的**镜像快照**，现与站点 v0.10.1 产物一致
+- 16 大类定义（id/url/prefixes/四语 labels，`CATEGORY_SNAPSHOT`）是构建产物
+  `site/dist/data/categories.json` 的**镜像快照**，现与站点 v0.11.2 产物一致
   （= `site/build.py` 的 `CONSUMER_CATEGORIES`）。同步方向只有一个：
   **build.py（线上真相）→ 本快照**，不许反过来拿 lib 的旧口径去改构建。
   `tests/test_lib_atc_category.py::test_snapshot_sync_with_dist` 逐字段比对；
-  该用例已接进 `deploy/ci_checks.py` 的 lib 阶段（v0.10.3），漂移会让 CI 变红。
+  v0.11.3 起该用例的快照同步部分也进了 `deploy/ci_checks.py --fast`（0.01 s），
+  漂移当天就会变红（此前只在全量模式跑，漂了 3 个版本没人发现）。
+- **`aliases` 是派生的，不手抄**（v0.11.3）：`[官方英文 label, 大类 id, *该类口语别名]`，
+  与 `site/build.py` 构建期同一口径。快照里原来逐字抄了 97 条，v0.10.3 把口语别名
+  接进构建后没重建，16 类全部对不上——见
+  `reports/2026-11-13-lib-atc-category-fix.md`。
 - 客户端 `catHit()` 的匹配口径：NFKD 去重音 + 去空格 + 小写后做**整串相等**匹配
   （见 site/build.py 的 `_catNorm`），本模块严格复刻。
 - **口语别名**（`COLLOQUIAL_ALIASES`，66 条）是**唯一来源**：lib 匹配、构建期
@@ -35,102 +40,88 @@ import unicodedata
 # 16 大类（顺序与客户端 CATS.categories 一致；匹配时按顺序取第一个命中）
 # 快照自 site/dist/data/categories.json（站点 v0.10.1；v0.10.3 修正 9 处过期：
 # 5 处四语 label + weight-loss / cold-medicine 的 prefixes）。
+# **`aliases` 不写在这里**：它是 `COLLOQUIAL_ALIASES` 的派生结果，见文件下方
+# 「aliases 派生」一节（v0.11.3 起）。手工镜像那份已经漂移了 3 个版本。
 CATEGORY_SNAPSHOT: list[dict] = [
     {
         'id': 'antihypertensives', 'url': 'cat/antihypertensives.html',
         'prefixes': ['C02', 'C03', 'C07', 'C08', 'C09'],
         'labels': {'en': 'Blood-pressure medicines', 'es': 'Medicamentos para la presión arterial', 'zh': '降压药', 'zh-Hant': '降血壓藥'},
-        'aliases': ['Blood-pressure medicines', 'antihypertensives'],
     },
     {
         'id': 'antibiotics', 'url': 'cat/antibiotics.html',
         'prefixes': ['J01'],
         'labels': {'en': 'Antibiotics', 'es': 'Antibióticos', 'zh': '抗生素', 'zh-Hant': '抗生素'},
-        'aliases': ['Antibiotics', 'antibiotics'],
     },
     {
         'id': 'diabetes', 'url': 'cat/diabetes.html',
         'prefixes': ['A10'],
         'labels': {'en': 'Diabetes medicines', 'es': 'Medicamentos para la diabetes', 'zh': '降糖药', 'zh-Hant': '降血糖藥'},
-        'aliases': ['Diabetes medicines', 'diabetes'],
     },
     {
         'id': 'weight-loss', 'url': 'cat/weight-loss.html',
         'prefixes': ['A08', 'A10BJ', 'A10BX16'],
         'labels': {'en': 'Weight-loss medicines', 'es': 'Medicamentos para perder peso', 'zh': '减肥药', 'zh-Hant': '減重藥'},
-        'aliases': ['Weight-loss medicines', 'weight-loss'],
     },
     {
         'id': 'cold-medicine', 'url': 'cat/cold-medicine.html',
         'prefixes': ['R05', 'N02BE'],
         'labels': {'en': 'Cold & cough medicines', 'es': 'Medicamentos para resfriado y tos', 'zh': '感冒咳嗽药', 'zh-Hant': '感冒咳嗽藥'},
-        'aliases': ['Cold & cough medicines', 'cold-medicine'],
     },
     {
         'id': 'analgesics', 'url': 'cat/analgesics.html',
         'prefixes': ['N02', 'M01A'],
         'labels': {'en': 'Pain & fever relief', 'es': 'Analgésicos y antitérmicos', 'zh': '退烧止痛', 'zh-Hant': '退燒止痛'},
-        'aliases': ['Pain & fever relief', 'analgesics'],
     },
     {
         'id': 'allergy', 'url': 'cat/allergy.html',
         'prefixes': ['R06'],
         'labels': {'en': 'Allergy medicines', 'es': 'Medicamentos para la alergia', 'zh': '抗过敏药', 'zh-Hant': '抗過敏藥'},
-        'aliases': ['Allergy medicines', 'allergy'],
     },
     {
         'id': 'acid-related', 'url': 'cat/acid-related.html',
         'prefixes': ['A02'],
         'labels': {'en': 'Stomach / acid medicines', 'es': 'Medicamentos gástricos / de acidez', 'zh': '胃药', 'zh-Hant': '胃藥'},
-        'aliases': ['Stomach / acid medicines', 'acid-related'],
     },
     {
         'id': 'anticoagulants', 'url': 'cat/anticoagulants.html',
         'prefixes': ['B01'],
         'labels': {'en': 'Blood thinners / antithrombotics', 'es': 'Anticoagulantes / antitrombóticos', 'zh': '抗凝药', 'zh-Hant': '抗凝血藥'},
-        'aliases': ['Blood thinners / antithrombotics', 'anticoagulants'],
     },
     {
         'id': 'statins', 'url': 'cat/statins.html',
         'prefixes': ['C10AA'],
         'labels': {'en': 'Statins', 'es': 'Estatinas', 'zh': '他汀类', 'zh-Hant': '他汀類'},
-        'aliases': ['Statins', 'statins'],
     },
     {
         'id': 'beta-blockers', 'url': 'cat/beta-blockers.html',
         'prefixes': ['C07'],
         'labels': {'en': 'Beta blockers', 'es': 'Betabloqueantes', 'zh': 'β受体阻滞剂', 'zh-Hant': 'β受體阻斷劑'},
-        'aliases': ['Beta blockers', 'beta-blockers'],
     },
     {
         'id': 'antidepressants', 'url': 'cat/antidepressants.html',
         'prefixes': ['N06A'],
         'labels': {'en': 'Antidepressants', 'es': 'Antidepresivos', 'zh': '抗抑郁药', 'zh-Hant': '抗憂鬱藥'},
-        'aliases': ['Antidepressants', 'antidepressants'],
     },
     {
         'id': 'asthma-copd', 'url': 'cat/asthma-copd.html',
         'prefixes': ['R03'],
         'labels': {'en': 'Asthma / COPD inhalers', 'es': 'Inhaladores para asma / EPOC', 'zh': '哮喘·慢阻肺吸入剂', 'zh-Hant': '哮喘·慢阻肺吸入劑'},
-        'aliases': ['Asthma / COPD inhalers', 'asthma-copd'],
     },
     {
         'id': 'corticosteroids', 'url': 'cat/corticosteroids.html',
         'prefixes': ['H02'],
         'labels': {'en': 'Steroid hormones', 'es': 'Hormonas esteroideas', 'zh': '激素类', 'zh-Hant': '荷爾蒙類'},
-        'aliases': ['Steroid hormones', 'corticosteroids'],
     },
     {
         'id': 'antivirals', 'url': 'cat/antivirals.html',
         'prefixes': ['J05'],
         'labels': {'en': 'Antivirals', 'es': 'Antivirales', 'zh': '抗病毒药', 'zh-Hant': '抗病毒藥'},
-        'aliases': ['Antivirals', 'antivirals'],
     },
     {
         'id': 'dermatologicals', 'url': 'cat/dermatologicals.html',
         'prefixes': ['D'],
         'labels': {'en': 'Skin medicines', 'es': 'Medicamentos dermatológicos', 'zh': '皮肤外用药', 'zh-Hant': '皮膚外用藥'},
-        'aliases': ['Skin medicines', 'dermatologicals'],
     },
 ]
 
@@ -224,6 +215,23 @@ def colloquial_aliases_by_category() -> dict[str, list[str]]:
     return out
 
 
+# ── aliases 派生（v0.11.3）────────────────────────────────────────────────
+# 构建期口径见 site/build.py:11544：
+#     aliases = [官方英文 label, 大类 id, *该类口语别名（已剔除防遮蔽白名单）]
+# 快照原来把这 97 条逐字抄在 CATEGORY_SNAPSHOT 里，v0.10.3 把口语别名接进构建后
+# 一直没重建 —— 16 类全部与产物不一致，`tests.test_lib_atc_category` 红了 3 个版本
+# （该用例那时只在 ci_checks 全量模式跑，--fast 里是 SKIP，日常看不见）。
+# 改成派生后：词表/label 一改自动同步，「构建侧公式被改掉」仍由
+# test_snapshot_sync_with_dist 逐字段比对产物来守。
+_COLLOQUIAL_BY_CAT: dict[str, list[str]] = colloquial_aliases_by_category()
+_COLLOQUIAL_WORDS: frozenset[str] = frozenset(COLLOQUIAL_ALIASES)
+
+for _cat in CATEGORY_SNAPSHOT:
+    _cat["aliases"] = [_cat["labels"]["en"], _cat["id"],
+                       *_COLLOQUIAL_BY_CAT.get(_cat["id"], [])]
+del _cat
+
+
 def find_name_key_shadows(db) -> list[str]:
     """现查 DB：哪些口语词的 norm 与某个 `name_key.norm` 全等（含已登记白名单）。"""
     norms = {r[0] for r in db.execute("SELECT norm FROM name_key")}
@@ -257,6 +265,11 @@ def match_category(query: str) -> dict | None:
     与客户端 catHit() 一样：长度 <2 不匹配；整串相等匹配，不做子串。
     `NAME_KEY_SHADOW_EXCEPTIONS` 里的词不在这里接走（它们是真商品名，走药名检索），
     保证 lib 与改造后的客户端口径一致。
+
+    v0.11.3：`cat["aliases"]` 现在含构建期的口语别名（镜像产物），所以 alias 这一轮
+    要跳过口语词 —— 否则「退烧药」会被判成 source=alias，`source` 三分类的语义就变了。
+    口语词仍旧由下面的 colloquial 分支认领；与官方 zh label 同形的词（胃药 / 降糖药）
+    仍先被 label 分支接走，与 v0.10.3 行为一致。
     """
     q = cat_norm(query)
     if len(q) < 2:
@@ -267,6 +280,8 @@ def match_category(query: str) -> dict | None:
                 return {"cat": cat, "matched": label, "source": "label",
                         "lang": lang}
         for alias in cat.get("aliases") or []:
+            if alias in _COLLOQUIAL_WORDS:
+                continue
             if alias and cat_norm(alias) == q:
                 return {"cat": cat, "matched": alias, "source": "alias",
                         "lang": ""}

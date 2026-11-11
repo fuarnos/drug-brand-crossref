@@ -12,6 +12,8 @@
 说明：
 - token 从仓库根 `.env` 的 GITHUB_TOKEN 读取（不打印）；
 - 正文默认取 CHANGELOG.md 里该版本的一节；
+- Site 链接默认取 `site/build.py` 的 `SITE_URL`（可用环境变量 `SITE_URL` 或 `--site` 覆盖）；
+  主站已切到自有域名，gh-pages 只作备份，不再作为默认 Site 链接；
 - Release 已存在则 PATCH 标题/正文，不存在则创建；
 - 默认仓库 fuarnos/drug-brand-crossref，可用 --repo 覆盖。
 """
@@ -19,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -27,7 +30,40 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPO = "fuarnos/drug-brand-crossref"
-DEFAULT_SITE = "https://fuarnos.github.io/drug-brand-crossref/"
+FALLBACK_SITE = "https://drugcrossref.com/"
+
+
+def _site_url_from_build() -> str:
+    """从 site/build.py 读 `SITE_URL = "..."`（单一真相源；读不到返回空串）。"""
+    p = ROOT / "site" / "build.py"
+    try:
+        m = re.search(r'(?m)^SITE_URL\s*=\s*["\']([^"\']+)["\']',
+                      p.read_text(encoding="utf-8"))
+    except OSError:
+        return ""
+    return m.group(1) if m else ""
+
+
+def resolve_site_url(explicit: str = "") -> str:
+    """Release 的 Site 根地址：--site > 环境变量 SITE_URL > site/build.py > 主域兜底。"""
+    for raw in (explicit, os.environ.get("SITE_URL", ""), _site_url_from_build()):
+        if raw and raw.strip():
+            site = raw.strip().rstrip("/") + "/"
+            if site.startswith(("http://", "https://")):
+                return site
+    return FALLBACK_SITE
+
+
+def link_hosts(text: str) -> dict[str, int]:
+    """统计正文里出现的链接主机（用于确认 Release 正文都指主域）。"""
+    hosts: dict[str, int] = {}
+    for m in re.finditer(r"https?://([^/\s)\]>'\"]+)", text):
+        host = m.group(1).lower()
+        hosts[host] = hosts.get(host, 0) + 1
+    return hosts
+
+
+DEFAULT_SITE = resolve_site_url()
 
 
 def read_token() -> str:
@@ -70,14 +106,26 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--tag", required=True, help="如 v0.5.1")
     ap.add_argument("--name", help="Release 标题；默认 vX - 日期")
     ap.add_argument("--repo", default=DEFAULT_REPO)
+    ap.add_argument("--site", default="",
+                    help="Site 根地址；默认取 SITE_URL 环境变量或 site/build.py 的 SITE_URL")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args(argv)
 
-    body = changelog_section(args.tag) + f"\n\n---\nSite: {DEFAULT_SITE}\n"
+    site = resolve_site_url(args.site)
+    section = changelog_section(args.tag)
+    body = section + f"\n\n---\nSite: {site}\n"
     name = args.name or args.tag
+    hosts = link_hosts(body)
+    legacy = hosts.get("fuarnos.github.io", 0)
+    if legacy:
+        print(f"warn: Release 正文含 {legacy} 个 gh-pages 链接（确认是否只是备份说明）",
+              file=sys.stderr)
     if args.dry_run:
         print("tag:", args.tag)
         print("name:", name)
+        print("site:", site)
+        print("body_len:", len(body))
+        print("link_hosts:", json.dumps(hosts, ensure_ascii=False, sort_keys=True))
         print("body head:", body[:120].replace("\n", " "))
         return 0
 
