@@ -77,6 +77,11 @@
 
 ## 6. 发布纪律
 
+- **双通道（用户 2026-11-11 定）**：每次发布**两个通道都要更新**，缺一个不算发完。
+  - ① `deploy/publish.ps1` → gh-pages（`https://fuarnos.github.io/drug-brand-crossref/`）
+  - ② `deploy/sync_r2.ps1` → R2 自定义域（`https://drugcrossref.com/`，增量同步，`--transfers 32`）
+  - 两个域名各跑一次 `deploy/verify_live.py --expect-version vX.Y.Z`，都要 0 failures；R2 的 Class A 写入数记进发布报告。
+  - 顺序：先 gh-pages 后 R2（R2 直接吃 `site/dist`，不需要等 Pages 构建）。
 - 唯一入口是 `deploy/publish.ps1`（或双击 `发布网站.cmd`），**绝不手工往 `gh-pages` 推**。曾发生过 `site/build.py` 还在写页面就推送、整站 404 的事故，见 [DEPLOY.md](DEPLOY.md)。
 - 顺序：① `CHANGELOG.md` 最上面加一节 `## vX.Y.Z — YYYY-MM-DD`（2–5 条用户能感知的变化）→ ② `& $py site/build.py` 等 `== done ==` → ③ `& .\deploy\publish.ps1` → ④ `git tag -a vX.Y.Z` + GitHub Release（正文用 CHANGELOG 那一节）。
 - 版本号唯一来源是 CHANGELOG 第一节；站点页脚、`whats-new.html`、GitHub Release 都从它生成。
