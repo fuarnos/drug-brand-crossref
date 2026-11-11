@@ -23,21 +23,21 @@
    "**国家 / 地区筛选收进「只看某个国家/地区（可选）」**：首页主路径回到「一个输入框」；`?country=CN` 这类深链会自动展开并显示「看这个药在中国叫什么」；顺带修掉「切换界面语言后这行标签不再翻译」的旧问题。",
    "**搜索框多了一个看得见的提交按钮**（44×44，移动端键盘的「搜索」键同一条路径），桌面输入框右侧提示「按 / 聚焦」，有内容时提示自动隐去。",
    "**读屏与语义**：主导航 / 更多 / 分区导航 / 搜索建议的无障碍名改成四语（中文与西语页不再中途冒出英文）；成分页「按国家分组」块头由 h3 提到 h2，修掉 h1 → h3 的跳级。",
-   "**ATC 大类页状态徽章不再贴边**：竖向内边距补足 3px（文字原来贴住圆角底色的上沿）。"
+   "**ATC 大类页状态改成纯文字**：去掉四色圆角底墙，改成「状态词 + 市场码」的纯文字行（在售用正常前景色，已停售 / 已撤市用警示色，状态未知用次要色）；impeccable 的 cramped-padding 从 1,630 条降到 0。"
   ],
   "en": [
    "**The three home pages now say the same thing**: the English and Spanish home headlines used to promise \"find out what a medicine really is\" (like a pill identifier). They now match the Chinese wording: look up one medicine name and see what it is called in each country. \"You always get a candidate set\" moved out of the subtitle into its own 16px line on the first screen, instead of hiding as a footnote.",
    "**The country/region filter folded into \"Only one country/region (optional)\"**: the home page main path is back to a single input box. Deep links such as `?country=CN` expand it automatically and show \"See what this medicine is called in China\". This also fixes the old bug where the label stopped being translated after switching interface language.",
    "**The search box has a visible submit button** (44×44, the same path as the mobile keyboard's search key), with a desktop hint \"Press / to focus\" that hides as soon as you type.",
    "**Screen readers and semantics**: the accessible names of the primary navigation, the \"more\" menu, the section bar and the suggestion list are now translated in all four languages (Chinese and Spanish pages no longer switch to English mid-page); on ingredient pages the market block heading moved from h3 to h2, fixing the h1 to h3 skip.",
-   "**ATC class pages no longer have edge-crowded status badges**: 3px vertical padding was added; the text used to sit flush against the top of the rounded background."
+   "**ATC class pages moved status to plain text**: the four-colour rounded badge wall is gone, replaced by a plain \"status word + market codes\" row (on-sale in normal foreground, discontinued and withdrawn in warning colours, unknown in the muted colour); the cramped-padding count from impeccable dropped from 1,630 to 0."
   ],
   "es": [
    "**Las tres páginas de inicio dicen lo mismo**: los títulos en inglés y español prometían «descubre qué es realmente un medicamento» (como un identificador de pastillas). Ahora coinciden con el texto chino: busca un nombre de medicamento y mira cómo se llama en cada país. «Siempre obtienes un conjunto de candidatos» sale del subtítulo y pasa a su propia línea de 16px en la primera pantalla.",
    "**El filtro de país/región se pliega en «Solo un país/región (opcional)»**: la ruta principal de la página de inicio vuelve a ser una sola caja de búsqueda. Los enlaces directos como `?country=CN` lo despliegan solos y muestran «Mira cómo se llama este medicamento en China». También se corrige el fallo antiguo por el que la etiqueta dejaba de traducirse al cambiar de idioma.",
    "**La caja de búsqueda tiene un botón de envío visible** (44×44, la misma ruta que la tecla de búsqueda del teclado móvil), con la pista «Pulsa / para enfocar» en escritorio, que se oculta al escribir.",
    "**Lectores de pantalla y semántica**: los nombres accesibles de la navegación principal, el menú «más», la barra de secciones y la lista de sugerencias están ahora en los cuatro idiomas (las páginas en chino y español ya no cambian a inglés a mitad de página); en las páginas de ingredientes el título de cada bloque de mercado pasa de h3 a h2, corrigiendo el salto de h1 a h3.",
-   "**Las insignias de estado de las páginas de clase ATC ya no tocan el borde**: se añadieron 3px de relleno vertical; el texto quedaba pegado al borde superior del fondo redondeado."
+   "**Las páginas de clase ATC pasan el estado a texto plano**: desaparece el muro de insignias redondeadas de cuatro colores y se sustituye por una fila de texto «palabra de estado + códigos de mercado» (en venta en color normal, retirado y suspendido en colores de aviso, estado desconocido en color atenuado); las incidencias de cramped-padding de impeccable bajan de 1.630 a 0."
   ],
   "machine_translated": true,
   "zh-Hant": [
@@ -45,7 +45,7 @@
    "**國家 / 地區篩選收進「只看某個國家/地區（可選）」**：首頁主路徑回到「一個輸入框」；`?country=CN` 這類深鏈會自動展開並顯示「看這個藥在中國叫什麼」；順帶修掉「切換介面語言後這行標籤不再翻譯」的舊問題。",
    "**搜尋框多了一個看得見的送出按鈕**（44×44，行動裝置鍵盤的「搜尋」鍵同一條路徑），桌面輸入框右側提示「按 / 聚焦」，有內容時提示自動隱去。",
    "**讀屏與語義**：主導航 / 更多 / 分區導航 / 搜尋建議的無障礙名稱改成四語（中文與西語頁不再中途冒出英文）；成分頁「按國家分組」區塊標題由 h3 提到 h2，修掉 h1 → h3 的跳級。",
-   "**ATC 大類頁狀態徽章不再貼邊**：垂直內距補足 3px（文字原來貼住圓角底色的上沿）。"
+   "**ATC 大類頁狀態改成純文字**：去掉四色圓角底牆，改成「狀態詞 + 市場碼」的純文字列（在售用正常前景色，已停售 / 已撤市用警示色，狀態未知用次要色）；impeccable 的 cramped-padding 從 1,630 條降到 0。"
   ]
  },
  "v0.10.3": {
