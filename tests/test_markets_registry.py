@@ -40,8 +40,10 @@ DB = ROOT / "data" / "drugs.db"
 # v0.7.0（task-87）：TW 市场 + zh-Hant 语言启用 → 8 国/4 语；
 # v0.8.0（SG 启用窗口）：SG 市场启用 → 9 国；语言仍 4（SG 为英文市场）。
 # v0.9.0（HK 启用）：HK 接入 → 10 市场；语言仍 4（HK 为繁中/英文名称层）。
-SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/")}
-SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK"}
+# v0.11.4（2026-11-14）：FR 市场 + fr 语言启用 → 11 国/5 语。
+SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/"),
+              ("fr", "fr/")}
+SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK", "FR"}
 # v0.11.0：EU 区域层启用（kind=region，own_data=true，不进 country_order）
 SITE_REGION_I18N = {"EU"}
 
@@ -138,11 +140,13 @@ class TestJsonStructure(RegistryBase):
 class TestMarkets(RegistryBase):
     def test_registered_market_set(self) -> None:
         codes = set(self.reg.markets)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU"}, codes)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK"},
+        # v0.11.4（2026-11-14）：FR 已随 BDPM 数据启用（enabled 市场 == DB 国家集合）
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR"},
+                         codes)
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "FR"},
                          set(self.reg.country_order))
         # v0.11.0：EU 区域层启用（own_data=true，国家集合不变）
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -250,7 +254,8 @@ class TestLanguages(RegistryBase):
         codes = set(self.reg.languages)
         self.assertEqual({"en", "es", "zh", "zh-Hant", "de", "fr", "it", "nl", "pl", "pt"},
                          codes)
-        self.assertEqual({"en", "es", "zh", "zh-Hant"},
+        # v0.11.4：fr 随 FR 市场启用（2026-11-14）
+        self.assertEqual({"en", "es", "zh", "zh-Hant", "fr"},
                          {x.code for x in self.reg.enabled_languages})
 
     def test_language_required_shape(self) -> None:
@@ -294,7 +299,8 @@ class TestLanguages(RegistryBase):
         self.assertTrue(tw.enabled)
 
     def test_eu_language_placeholders(self) -> None:
-        for code in ("de", "fr", "it", "nl", "pl", "pt"):
+        # v0.11.4：fr 已启用（FR 市场），不再属于 EU 占位语言
+        for code in ("de", "it", "nl", "pl", "pt"):
             lang = self.reg.require_language(code)
             self.assertFalse(lang.enabled)
             self.assertEqual("EU", lang.region)
@@ -314,9 +320,10 @@ class TestLanguages(RegistryBase):
     def test_site_langs_compatibility(self) -> None:
         """现有 site/build.py 的 LANGS 入口必须能从注册表推导出来（v0.7.0 起四语含 zh-Hant）。"""
         self.assertEqual(SITE_LANGS, {(x.code, x.path) for x in self.reg.enabled_languages})
-        self.assertEqual({"en": "", "es": "es/", "zh": "zh/", "zh-Hant": "zh-Hant/"},
+        self.assertEqual({"en": "", "es": "es/", "zh": "zh/", "zh-Hant": "zh-Hant/",
+                          "fr": "fr/"},
                          self.reg.hreflang_map())
-        self.assertEqual({"en", "es", "zh", "zh-Hant"}, set(self.reg.i18n_prefixes()))
+        self.assertEqual({"en", "es", "zh", "zh-Hant", "fr"}, set(self.reg.i18n_prefixes()))
 
     def test_language_ui_labels_unique(self) -> None:
         labels = [x.ui_label for x in self.reg.languages.values()]
@@ -498,7 +505,8 @@ class TestCliAndDocs(RegistryBase):
                            capture_output=True, text=True, encoding="utf-8", cwd=str(ROOT))
         self.assertEqual(0, p.returncode, p.stderr[-500:])
         data = json.loads(p.stdout)
-        self.assertEqual(11, len(data["markets"]))
+        # v0.11.4 task-55 过渡态：FR 已注册（enabled:false），市场数 11 → 12
+        self.assertEqual(12, len(data["markets"]))
         self.assertEqual(10, len(data["languages"]))
         self.assertEqual("US", data["markets"][0]["code"])
 

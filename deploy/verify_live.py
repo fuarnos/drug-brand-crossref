@@ -11,6 +11,7 @@
 检查项（见 reports/release-guardrails.md）：
   首页 200 / 标题 / 懒加载提示 / 无索引 preload / app.js 引用；
   页脚版本 + 日期（--expect-version 时断言一致），es/zh 落地页版本一致；
+  **语言根路径全部 200（/、/es/、/zh/、/zh-hant/、/fr/）且首页 hreflang 每个目标可达**；
   whats-new 顶部版本 = 页脚版本；About 200 且含访问统计隐私说明；
   GoatCounter 脚本存在（首页 + 落地页；--allow-missing-analytics 可降级为 warning）；
   data/idx/core.json 可请求、Content-Type JSON、gzip 后体积在合理区间（可选 --compare-dist）；
@@ -55,6 +56,11 @@ CORE_RAW_RANGE = (11_000_000, 50_000_000)
 INDEX_GZ_RANGE = (4_500_000, 13_000_000)
 INDEX_RAW_RANGE = (28_000_000, 60_000_000)
 SITEMAP_MIN_URLS = 25_000
+# 启用的语言根路径（英文在根）。**新增语言时必须同步这里**：发布门槛要求全部 200。
+# 背景：v0.11.4 法语上线时 `/fr/` 因 Cloudflare Transform Rules 未加 fr 而 404
+#（`/fr/index.html` 200），verify 当时没有语言根/hreflang 检查，0 failures 漏掉了它。
+LANG_ROOTS = (("", "/"), ("es/", "/es/"), ("zh/", "/zh/"),
+              ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"))
 
 
 class Checks:
@@ -150,6 +156,19 @@ def core_size_bytes(headers: dict, body: bytes, wire_bytes: int) -> tuple[int, s
     if body:
         return len(body), "raw", "（无 Content-Length，用实测 body 字节数）"
     return 0, ("gzip" if "gzip" in cenc else "raw"), ""
+
+
+def hreflang_targets(html: str) -> list[tuple[str, str]]:
+    """从页面 head 解析 `<link rel="alternate" hreflang=... href=...>`（属性顺序无关）。"""
+    out: list[tuple[str, str]] = []
+    for tag in re.findall(r"<link\b[^>]*>", html or "", re.I):
+        if 'rel="alternate"' not in tag.lower():
+            continue
+        mh = re.search(r'hreflang="([^"]+)"', tag, re.I)
+        mu = re.search(r'href="([^"]+)"', tag, re.I)
+        if mh and mu:
+            out.append((mh.group(1), mu.group(1)))
+    return out
 
 
 def fmt_bytes(n: int) -> str:
@@ -254,6 +273,43 @@ def main() -> int:
     am = FOOTER_RE.search(ab)
     checks.add("about-version", bool(am) and (not live_version or am.group(1) == live_version),
                f"About 页脚 {am.group(1) if am else '缺失'}（应 = {live_version}）")
+
+    # ── 3b. 语言根路径 + hreflang 目标可达（v0.11.4 起）────────────
+    # R2 自定义域不会把 `/xx/` 自动映射到 `/xx/index.html`，靠 Cloudflare Transform Rules；
+    # 新增语言必须同时加规则（v0.11.4 的 /fr/ 就是这么漏的）。这里逐语言根 + hreflang 目标验 200。
+    root_res = {"": home, "/es/": pages["/es/"], "/zh/": pages["/zh/"]}
+    for prefix, label in LANG_ROOTS:
+        if label in root_res:
+            res = root_res[label]
+        else:
+            try:
+                res = get(prefix)
+            except Exception as e:
+                checks.add(f"lang-root-{label}", False, f"{label} 不可达: {e}")
+                continue
+        checks.add(f"lang-root-{label}", res["status"] == 200 and len(res["body"]) > 500,
+                   f"{label} HTTP {res['status']}, {len(res['body']):,} B")
+
+    targets = hreflang_targets(home_text)
+    by_url: dict[str, list[str]] = {}
+    for lang, url in targets:
+        if url.startswith("/"):
+            url = base.rstrip("/") + url
+        by_url.setdefault(url, []).append(lang)
+    if not targets:
+        checks.add("hreflang-links", False, "首页没有 hreflang alternate 链接")
+    else:
+        checks.add("hreflang-links", len(by_url) >= len(LANG_ROOTS),
+                   f"{len(targets)} 条 hreflang / {len(by_url)} 个唯一目标（应 ≥ {len(LANG_ROOTS)}）")
+        for url, langs in by_url.items():
+            label = ",".join(sorted(set(langs)))
+            try:
+                res = fetch(url, timeout=args.timeout, retries=args.retries)
+            except Exception as e:
+                checks.add(f"hreflang-target-{label}", False, f"{url} 不可达: {e}")
+                continue
+            checks.add(f"hreflang-target-{label}", res["status"] == 200 and len(res["body"]) > 500,
+                       f"{url} HTTP {res['status']}, {len(res['body']):,} B")
 
     # ── 4. GoatCounter 访问统计（v0.4.1 起） ────────────────────────
     gm = ANALYTICS_RE.search(home_text)

@@ -10,8 +10,10 @@
    `decided_at`（`_ensure_substance_columns` / `_ensure_family_columns`；旧行保持 NULL，
    写入由 `etl/provenance.py` 负责）；
 5. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
-   （US → GB → CN → ES → MX → AU → CA → **TW** → **HK**），所以每次 schema.sql 扩了枚举，这里就把
-   老库里的 product 表换成新定义，数据原样搬过去。
+   （US → GB → CN → ES → MX → AU → CA → **TW** → **HK** → **SG** → **FR/LV/JP/KR**（v0.11.3
+   task-56 一次补齐，枚举先行、数据后到）），所以每次 schema.sql 扩了枚举，这里就把
+   老库里的 product 表换成新定义，数据原样搬过去。判断依据是「DB 里的枚举 ≠ schema.sql 的枚举」
+   ——**幂等**：已含四国的库再跑不会重建。
 5. **区域层（region）**：EU = 欧盟集中审批（EMA），不是国家市场。schema 的 `product.country`
    改为可空并新增 `product.region`（country 与 region 二选一，CHECK 约束）；老库缺 region 列
    或 country 仍是 NOT NULL 时，用同一套 `_rebuild_product()` 重建（列拷贝、region 默认 NULL），
@@ -30,8 +32,9 @@
     校验：行数 / 索引集合 / 视图可查 / foreign_key_check / quick_check
 
 迁移**只对副本**（`--db .tmp/...`）验证时也安全；真实库建议先由 run_all 备份。
-`python db/migrate_country_tw.py` / `db/migrate_country_hk.py` 是同一套逻辑的独立可回滚版本
-（task-62 / task-88；init_db 路径没有撤销清单，回滚走 DB 备份恢复）。
+`python db/migrate_country_tw.py` / `db/migrate_country_hk.py` / `db/migrate_country_check.py`
+是同一套逻辑的独立可回滚版本（task-62 / task-88 / task-56；init_db 路径没有撤销清单，
+回滚走 DB 备份恢复）。
 """
 
 from __future__ import annotations

@@ -3,8 +3,8 @@
   "schema": 1,
   "language": "zh-Hant",
   "source_language": "zh (Simplified, from site/build.py I18N)",
-  "source_keys": 550,
-  "keys": 550,
+  "source_keys": 560,
+  "keys": 560,
   "conversion": {
    "method": "OpenCC 词典链（STPhrases → TWPhrases → STCharacters → TWVariants） + 自建台湾 IT/药事术语表（TW_TERMS）",
    "dictionaries": {
@@ -19,8 +19,8 @@
   },
   "machine_translated": false,
   "review": "台湾用语优先；专有名词/INN/法规名、许可与法律表述需人工复核（见 reports/zh-hant-i18n.md）",
-  "unchanged_keys": 64,
-  "changed_keys": 486,
+  "unchanged_keys": 65,
+  "changed_keys": 495,
   "validation": {
    "key_parity": true,
    "empty_values": 0,
@@ -29,7 +29,7 @@
   },
   "license_note": "简繁/台湾用语词典来自 OpenCC（https://github.com/BYVoid/OpenCC，Apache License 2.0）；台湾 IT/药事术语表为本项目自建（TW_TERMS）。",
   "manual_review_required": true,
-  "generated_at": "2026-11-11T20:05:09+00:00"
+  "generated_at": "2026-11-11T22:30:11+00:00"
  },
  "zh-Hant": {
   "nav.search": "檢索",
@@ -61,6 +61,9 @@
   "home.tw": "中國台灣",
   "home.hk": "中國香港",
   "home.eu": "歐盟（EU）",
+  "home.fr": "法國",
+  "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，須署名；更新日期見資料包；授權有效 ≠ 販售中。",
+  "about.fr_source": "<p class=\"sub\"><b>法國</b>：BDPM（Base de données publique des médicaments，ANSM），<b>Licence Ouverte / etalab-2.0</b>，須署名並註明更新日期；資料截至 <b>2026-11-03</b>。只存事實欄位（名稱、成分、劑型、廠商、授權號）。<a href=\"https://base-donnees-publique.medicaments.gouv.fr/\">BDPM</a>。</p>",
   "eu.region_title": "歐盟集中審批（EMA）",
   "eu.region_note": "歐盟層授權，不是某一國家的販售中記錄；歐盟登記不含規格、劑型、包裝。",
   "eu.coverage_note": "歐盟區域層——僅集中審批產品；授權有效 ≠ 各國販售中。",
@@ -563,6 +566,13 @@
   "drug.compare_side": "並排對照表",
   "drug.view_list": "回到清單",
   "drug.more_specs": "其餘規格",
+  "drug.more_specs_n": "其餘規格 {n} 個 · 涉及 {m} 種劑型",
+  "drug.ms_more": "該劑型還有 {n} 個",
+  "drug.full_list": "完整清單見資料包",
+  "drug.und_more": "還有 {n} 個（{k} 個廠商）",
+  "drug.undisclosed_n": "{n} 個記錄 · {k} 個廠商",
+  "drug.brand_group": "有商品名",
+  "drug.mah_group": "僅廠商",
   "drug.compare_note": "並排對照表只在該成分跨市場記錄較多時提供；否則這份清單就是全部。",
   "nav.categories": "按類別",
   "nav.markets": "按市場",

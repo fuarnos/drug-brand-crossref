@@ -3,11 +3,21 @@
   "updated": "2026-10-28",
   "description": "语言注册表（唯一真相源）：站点 UI 语言 + URL 路由 + hreflang。新增语言必须改这里、补 I18N 字典与站点路由，并跑 tests/test_markets_registry.py + tests/trilingual/。当前启用 en/es/zh；预留 zh-Hant（繁体）与 EU 语言占位（全部 disabled）。",
   "fields_doc": "docs/市场扩展接口.md#32-datalanguagesjson字段",
-  "planned_markets": ["DE", "FR", "IT", "NL", "PL", "PT"],
+  "planned_markets": [
+    "DE",
+    "IT",
+    "NL",
+    "PL",
+    "PT"
+  ],
   "languages": [
     {
       "code": "en",
-      "name": { "en": "English", "es": "Inglés", "zh": "英语" },
+      "name": {
+        "en": "English",
+        "es": "Inglés",
+        "zh": "英语"
+      },
       "native_name": "English",
       "ui_label": "EN",
       "script": "latin",
@@ -23,7 +33,11 @@
     },
     {
       "code": "es",
-      "name": { "en": "Spanish", "es": "Español", "zh": "西班牙语" },
+      "name": {
+        "en": "Spanish",
+        "es": "Español",
+        "zh": "西班牙语"
+      },
       "native_name": "Español",
       "ui_label": "ES",
       "script": "latin",
@@ -39,7 +53,11 @@
     },
     {
       "code": "zh",
-      "name": { "en": "Chinese (Simplified)", "es": "Chino simplificado", "zh": "简体中文" },
+      "name": {
+        "en": "Chinese (Simplified)",
+        "es": "Chino simplificado",
+        "zh": "简体中文"
+      },
       "native_name": "简体中文",
       "ui_label": "中文",
       "script": "han",
@@ -75,7 +93,11 @@
     },
     {
       "code": "de",
-      "name": { "en": "German", "es": "Alemán", "zh": "德语" },
+      "name": {
+        "en": "German",
+        "es": "Alemán",
+        "zh": "德语"
+      },
       "native_name": "Deutsch",
       "ui_label": "DE",
       "script": "latin",
@@ -91,7 +113,11 @@
     },
     {
       "code": "fr",
-      "name": { "en": "French", "es": "Francés", "zh": "法语" },
+      "name": {
+        "en": "French",
+        "es": "Francés",
+        "zh": "法语"
+      },
       "native_name": "Français",
       "ui_label": "FR",
       "script": "latin",
@@ -101,13 +127,17 @@
       "i18n_key_prefix": "fr",
       "default_country": "FR",
       "region": "EU",
-      "enabled": false,
+      "enabled": true,
       "order": 60,
-      "notes": "EU 语言占位（disabled）。"
+      "notes": "v0.11.4（2026-11-13）FR 随 BDPM 数据启用；site LANGS 自动生成 /fr/ 与 hreflang。"
     },
     {
       "code": "it",
-      "name": { "en": "Italian", "es": "Italiano", "zh": "意大利语" },
+      "name": {
+        "en": "Italian",
+        "es": "Italiano",
+        "zh": "意大利语"
+      },
       "native_name": "Italiano",
       "ui_label": "IT",
       "script": "latin",
@@ -123,7 +153,11 @@
     },
     {
       "code": "nl",
-      "name": { "en": "Dutch", "es": "Neerlandés", "zh": "荷兰语" },
+      "name": {
+        "en": "Dutch",
+        "es": "Neerlandés",
+        "zh": "荷兰语"
+      },
       "native_name": "Nederlands",
       "ui_label": "NL",
       "script": "latin",
@@ -139,7 +173,11 @@
     },
     {
       "code": "pl",
-      "name": { "en": "Polish", "es": "Polaco", "zh": "波兰语" },
+      "name": {
+        "en": "Polish",
+        "es": "Polaco",
+        "zh": "波兰语"
+      },
       "native_name": "Polski",
       "ui_label": "PL",
       "script": "latin",
@@ -155,7 +193,11 @@
     },
     {
       "code": "pt",
-      "name": { "en": "Portuguese", "es": "Portugués", "zh": "葡萄牙语" },
+      "name": {
+        "en": "Portuguese",
+        "es": "Portugués",
+        "zh": "葡萄牙语"
+      },
       "native_name": "Português",
       "ui_label": "PT",
       "script": "latin",

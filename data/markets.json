@@ -9,13 +9,21 @@
       "kind": "country",
       "parent": null,
       "group": "NA",
-      "name": { "en": "United States", "es": "Estados Unidos", "zh": "美国" },
+      "name": {
+        "en": "United States",
+        "es": "Estados Unidos",
+        "zh": "美国"
+      },
       "i18n_key": "home.us",
       "flag": "🇺🇸",
       "source_id": "openfda_ndc",
-      "extra_source_ids": ["medlineplus"],
+      "extra_source_ids": [
+        "medlineplus"
+      ],
       "default_lang": "en",
-      "languages": ["en"],
+      "languages": [
+        "en"
+      ],
       "enabled": true,
       "order": 10,
       "notes": "FDA NDC Directory（美国政府作品）+ MedlinePlus 俗名；产品/规格来自 NDC。"
@@ -25,13 +33,19 @@
       "kind": "country",
       "parent": null,
       "group": "EUROPE",
-      "name": { "en": "United Kingdom", "es": "Reino Unido", "zh": "英国" },
+      "name": {
+        "en": "United Kingdom",
+        "es": "Reino Unido",
+        "zh": "英国"
+      },
       "i18n_key": "home.gb",
       "flag": "🇬🇧",
       "source_id": "dmd",
       "extra_source_ids": [],
       "default_lang": "en",
-      "languages": ["en"],
+      "languages": [
+        "en"
+      ],
       "enabled": true,
       "order": 20,
       "notes": "NHSBSA dm+d（OGL v3.0）；含 ATC/盐型线索。"
@@ -41,13 +55,19 @@
       "kind": "country",
       "parent": null,
       "group": "NA",
-      "name": { "en": "Canada", "es": "Canadá", "zh": "加拿大" },
+      "name": {
+        "en": "Canada",
+        "es": "Canadá",
+        "zh": "加拿大"
+      },
       "i18n_key": "home.ca",
       "flag": "🇨🇦",
       "source_id": "hc_dpd",
       "extra_source_ids": [],
       "default_lang": "en",
-      "languages": ["en"],
+      "languages": [
+        "en"
+      ],
       "enabled": true,
       "order": 30,
       "notes": "Health Canada DPD；允许非商业再使用并须注明来源。"
@@ -57,13 +77,24 @@
       "kind": "country",
       "parent": null,
       "group": "OCEANIA",
-      "name": { "en": "Australia", "es": "Australia", "zh": "澳大利亚" },
+      "name": {
+        "en": "Australia",
+        "es": "Australia",
+        "zh": "澳大利亚"
+      },
       "i18n_key": "home.au",
       "flag": "🇦🇺",
       "source_id": "artg_index",
-      "extra_source_ids": ["artg_detail", "artg_enrich", "tga_cmi", "pbs"],
+      "extra_source_ids": [
+        "artg_detail",
+        "artg_enrich",
+        "tga_cmi",
+        "pbs"
+      ],
       "default_lang": "en",
-      "languages": ["en"],
+      "languages": [
+        "en"
+      ],
       "enabled": true,
       "order": 40,
       "notes": "TGA ARTG 公开登记 + PBS 药品福利计划（价格）；许可边界见 docs/许可清单.md。"
@@ -73,13 +104,19 @@
       "kind": "country",
       "parent": null,
       "group": "EUROPE",
-      "name": { "en": "Spain", "es": "España", "zh": "西班牙" },
+      "name": {
+        "en": "Spain",
+        "es": "España",
+        "zh": "西班牙"
+      },
       "i18n_key": "home.es",
       "flag": "🇪🇸",
       "source_id": "cima",
       "extra_source_ids": [],
       "default_lang": "es",
-      "languages": ["es"],
+      "languages": [
+        "es"
+      ],
       "enabled": true,
       "order": 50,
       "notes": "AEMPS CIMA（引用须注明来源与最后更新日期，非开放许可）。"
@@ -89,7 +126,11 @@
       "kind": "country",
       "parent": null,
       "group": "LATAM",
-      "name": { "en": "Mexico", "es": "México", "zh": "墨西哥" },
+      "name": {
+        "en": "Mexico",
+        "es": "México",
+        "zh": "墨西哥"
+      },
       "i18n_key": "home.mx",
       "flag": "🇲🇽",
       "source_id": "cofepris_mx",
@@ -102,7 +143,9 @@
         "semar_ccby"
       ],
       "default_lang": "es",
-      "languages": ["es"],
+      "languages": [
+        "es"
+      ],
       "enabled": true,
       "order": 60,
       "notes": "COFEPRIS 注册清单（未标注开放许可）+ ISSSTE/PROFECO/datos.gob.mx 4 个 CC-BY-4.0 采购数据集补浓度。"
@@ -112,13 +155,24 @@
       "kind": "country",
       "parent": null,
       "group": "ASIA",
-      "name": { "en": "China", "es": "China", "zh": "中国" },
+      "name": {
+        "en": "China",
+        "es": "China",
+        "zh": "中国"
+      },
       "i18n_key": "home.cn",
       "flag": "🇨🇳",
       "source_id": "nhsa",
-      "extra_source_ids": ["community_cn", "wikipedia_zh", "alihealth_cn", "wikidata"],
+      "extra_source_ids": [
+        "community_cn",
+        "wikipedia_zh",
+        "alihealth_cn",
+        "wikidata"
+      ],
       "default_lang": "zh",
-      "languages": ["zh"],
+      "languages": [
+        "zh"
+      ],
       "enabled": true,
       "order": 70,
       "notes": "国家医保局分类代码库（未找到再发布许可）+ 中文维基/社区俗名（只存短事实）。"
@@ -128,13 +182,19 @@
       "kind": "country",
       "parent": null,
       "group": "ASIA",
-      "name": { "en": "Taiwan", "es": "Taiwán", "zh": "中国台湾" },
+      "name": {
+        "en": "Taiwan",
+        "es": "Taiwán",
+        "zh": "中国台湾"
+      },
       "i18n_key": "home.tw",
       "flag": "🇹🇼",
       "source_id": "tfda_tw",
       "extra_source_ids": [],
       "default_lang": "zh-Hant",
-      "languages": ["zh-Hant"],
+      "languages": [
+        "zh-Hant"
+      ],
       "enabled": true,
       "order": 80,
       "data_as_of": "2026-10-22",
@@ -145,13 +205,19 @@
       "kind": "country",
       "parent": null,
       "group": "ASIA",
-      "name": { "en": "Singapore", "es": "Singapur", "zh": "新加坡" },
+      "name": {
+        "en": "Singapore",
+        "es": "Singapur",
+        "zh": "新加坡"
+      },
       "i18n_key": "home.sg",
       "flag": "🇸🇬",
       "source_id": "hsa_sg",
       "extra_source_ids": [],
       "default_lang": "en",
-      "languages": ["en"],
+      "languages": [
+        "en"
+      ],
       "enabled": true,
       "order": 85,
       "data_as_of": "2026-08-07",
@@ -162,30 +228,69 @@
       "kind": "country",
       "parent": null,
       "group": "ASIA",
-      "name": { "en": "Hong Kong", "es": "Hong Kong", "zh": "中国香港" },
+      "name": {
+        "en": "Hong Kong",
+        "es": "Hong Kong",
+        "zh": "中国香港"
+      },
       "i18n_key": "home.hk",
       "flag": "🇭🇰",
       "source_id": "hk_dh",
       "extra_source_ids": [],
       "default_lang": "zh-Hant",
-      "languages": ["zh-Hant", "en"],
+      "languages": [
+        "zh-Hant",
+        "en"
+      ],
       "enabled": true,
       "order": 88,
       "data_as_of": "2026-10-23",
       "notes": "已启用（v0.9.0，2026-10-30）：香港衞生署藥物辦公室（Drug Office）註冊藥劑製品名單（data.gov.hk，dataset hk-dh-dh_do-hk-dh-do-pharmaceutical-product；DATA.GOV.HK 条款允许自由再使用、须署名）。仅名称/持有人/注册号/活性成分层：**无规格、无剂型、无注册状态**；在册≠在售，页面须明示覆盖边界。真实库 13,935 个在册产品（2026-10-29 窗口入库），source_id=hk_dh，data_as_of=2026-10-23。"
     },
     {
+      "code": "FR",
+      "kind": "country",
+      "parent": null,
+      "group": "EUROPE",
+      "name": {
+        "en": "France",
+        "es": "Francia",
+        "zh": "法国"
+      },
+      "i18n_key": "home.fr",
+      "flag": "🇫🇷",
+      "source_id": "bdpm_fr",
+      "extra_source_ids": [],
+      "default_lang": "fr",
+      "languages": [
+        "fr",
+        "en"
+      ],
+      "enabled": true,
+      "order": 52,
+      "data_as_of": "2026-11-03",
+      "notes": "v0.11.4 站点侧准备（2026-11-13，enabled:false）：BDPM（Base de données publique des médicaments，ANSM）Licence Ouverte / etalab-2.0，须署名来源与更新日期；data_as_of 待 DB 窗口写入后回填。enabled:false 期间不得出现在任何构建产物的市场列表/页面里（开启步骤见 reports/2026-11-13-fr-site-prep.md）。"
+    },
+    {
       "code": "EU",
       "kind": "region",
       "parent": null,
       "group": "EUROPE",
-      "name": { "en": "European Union", "es": "Unión Europea", "zh": "欧盟" },
+      "name": {
+        "en": "European Union",
+        "es": "Unión Europea",
+        "zh": "欧盟"
+      },
       "i18n_key": "home.eu",
       "flag": "🇪🇺",
       "source_id": "eu_union_register",
-      "extra_source_ids": ["ema_medicines"],
+      "extra_source_ids": [
+        "ema_medicines"
+      ],
       "default_lang": "en",
-      "languages": ["en"],
+      "languages": [
+        "en"
+      ],
       "enabled": true,
       "own_data": true,
       "order": 90,

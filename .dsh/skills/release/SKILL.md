@@ -1,17 +1,18 @@
 ---
 name: release
-description: 版本发布、打 tag、更新 CHANGELOG、回滚线上站点时用：ci_checks → build == done == → publish.ps1 → verify_live → tag/Release 的完整流程。
-whenToUse: 任务涉及发版、CHANGELOG 版本节、gh-pages、verify_live 失败、Pages 构建失败或回滚时。
+description: 版本发布、打 tag、更新 CHANGELOG、回滚线上站点时用：ci_checks → build == done == → sync_r2.ps1（唯一通道）→ verify_live → tag/Release 的完整流程。
+whenToUse: 任务涉及发版、CHANGELOG 版本节、R2 上传、verify_live 失败或回滚时。
 ---
 
 # 发布（release）
 
-**主站 = 自有域名 <https://drugcrossref.com/>（Cloudflare R2 + 自定义域）**；**备份 = gh-pages <https://fuarnos.github.io/drug-brand-crossref/>**（GitHub Pages legacy，仅回滚/备份，不承担主索引）。
-**主入口是 `deploy/sync_r2.ps1`，备份入口是 `deploy/publish.ps1`**；不手工推 `gh-pages`、不手工改线上文件。
-`SITE_URL`（canonical / hreflang / sitemap / robots / OG）一律写主域；gh-pages 上 canonical 指主域是预期行为，对 gh-pages 只做首页 + 版本冒烟。
+**站点唯一发布通道 = 自有域名 <https://drugcrossref.com/>（Cloudflare R2 + 自定义域）**；**git 仓库只作源码/文件备份**。
+**gh-pages 已停用**（历史分支与旧产物只作回滚参考，不再推送、不再做备份冒烟）；`deploy/publish.ps1`（及 `发布网站.cmd`）标注为**「历史 / 不再用于发布」**。
+**唯一入口是 `deploy/sync_r2.ps1`**；不手工改 R2 对象、不手工推 `gh-pages`、不手工改线上文件。
+`SITE_URL`（canonical / hreflang / sitemap / robots / OG）一律写主域。
 
 > 背景：曾有一次 `site/build.py` 还在写页面就推送，gh-pages 只有 `assets/`、根目录没有
-> `index.html`，全站 404。publish.ps1 就是为堵这个洞写的（见 [DEPLOY.md](DEPLOY.md)）。
+> `index.html`，全站 404。publish.ps1 就是为堵这个洞写的（见 [DEPLOY.md](../../../DEPLOY.md)）。
 
 ## 1. 发布前
 
@@ -28,34 +29,26 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 3. `& $py site/build.py` 等 `== done ==`，按 site-build 技能检查 `site/dist` 完整性。
 4. 确认没有别的会话在构建 / 发布（构建与发布串行）。
 
-## 2. 发布（主域先、备份后）
+## 2. 发布（唯一通道：R2 主域）
 
 ```powershell
-# 主通道：R2 自定义域（发布门槛）；先干跑看增量
+# 先干跑看增量，再实跑（唯一发布通道）
 powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -DryRun
 powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1
-
-# 备份通道：gh-pages（GitHub 备份/回滚；默认增量）
-powershell -NoProfile -ExecutionPolicy Bypass -File deploy\publish.ps1
 ```
 
-- **顺序：先 R2（主域）后 gh-pages（备份）**；R2 直接吃 `site/dist`，不必等 Pages 构建。
-- `sync_r2.ps1` 是 `rclone sync --checksum` 增量，但改 CSS/JS/模板时几乎所有页面都变（样式内联），增量≈准全量：按约 30 分钟、Class A ≈11 万排窗口；Class A 写入数与耗时记进发布报告。
-- `publish.ps1` 检查项：`index.html`、`data/idx/core.json`（≥ 10 MB）、文件数 ≥ `-MinFiles 24000`、无 0 字节、最新文件 ≥ `-StableSeconds 15`、无 build/run_all 进程。
-- 参数：`-Message`、`-Dist`、`-CacheDir`、`-SkipVerify`、`-FullPush`（仅应急，全量重传）、
-  `-AutoRollback`、`-PagesWaitMinutes 45`、`-KeepWork`、`-DryRun`、`-Force`（不建议）。
-- token：`$env:GITHUB_TOKEN`，否则仓库根 `.env` 的 `GITHUB_TOKEN=`（Contents: RW + Pages: Read）。
-- 发布前**不要**跑 `site/build.py`；发布期间 `site/dist` 冻结。失败会保留临时目录 / 缓存，别手动清理。
+- **没有第二条通道**：gh-pages 已停用，不再跑 `publish.ps1`、不再做备份冒烟；R2 直接吃 `site/dist`。
+- `sync_r2.ps1` 是 `rclone sync --checksum` 增量，但改 CSS/JS/模板时几乎所有页面都变（样式内联），增量≈准全量：
+  v0.11.3 改 112,796 / 121,450 个文件；v0.11.4 上传 117,445 文件 / 868.4 MB。按 **30 分钟** 排窗口，Class A 写入数与耗时记进发布报告。
+- 发布前**不要**跑 `site/build.py`；发布期间 `site/dist` 冻结。失败会保留临时目录，别手动清理。
+- `deploy/publish.ps1`（及 `发布网站.cmd`）是**历史脚本**，只在回滚旧产物时由人拍板临时使用。
 
 ## 3. 发布后验证
 
 ```powershell
-# 主域（发布门槛：必须 0 failures）
+# 发布门槛：必须 0 failures
 & $py deploy/verify_live.py --base https://drugcrossref.com --expect-version vX.Y.Z
 & $py deploy/verify_live.py --base https://drugcrossref.com --compare-dist
-
-# 备份通道：只做首页 + 版本冒烟（其 robots/sitemap 行指向主域，不跑全量 verify_live）
-& .\deploy\pages_status.ps1 -Wait -MaxMinutes 15              # Pages 构建状态（只读）
 ```
 
 `verify_live.py` 检查：首页 200/标题/版本、`es/` `zh/` 落地页版本、`whats-new` 顶部版本、
@@ -74,17 +67,16 @@ $git = '.\tools\git\cmd\git.exe'      # 本机 git 不在 PATH
 
 ## 5. 失败与回滚（人工拍板）
 
-- Pages 构建失败 / 首页检查失败：带 `-AutoRollback` 会恢复上一个 gh-pages commit 并复验；
-  先 `pages_status.ps1` 看最近构建时间线，再决定重试或回滚。
-- legacy 构建连续失败：`.github/workflows/pages-fallback.yml` 是备选（默认不启用；
-  启用/回滚顺序见文件注释，切 Pages Source 前必须按序）。
+- `verify_live` 失败：先看 stdout JSON 判断是「本机网络」还是「线上产物」；确认是产物问题再考虑回滚。
+- 回滚 = 用上一版 `site/dist` 重新 `sync_r2.ps1`（或 gh-pages 历史分支里的旧产物）；**回滚要人拍板**。
 - 源码层回滚：revert → 重建 → 重新发布；数据层变了要一起回。
-- 绝不手工推 gh-pages 或手工改线上文件。
+- 绝不手工改 R2 对象、绝不手工推 gh-pages。
 
 ## 6. 体积与限额
 
-`site/dist` 约 839 MiB / 12 万文件；自设 900 MiB 上限，GitHub Pages 已发布上限 1 GB。
-逼近上限先清冗余 / 优化索引，并在报告与 CHANGELOG 说明。
+**单通道后口径**：`site/dist` v0.11.4 约 **930.5 MiB（125,968 文件）**；唯一硬约束是 **R2 免费额度 10 GiB**（用量约 9%），
+旧「900 MiB 自设 / GitHub Pages 1 GB」上限**已不适用**。
+**页面性能单独看**：单页 KB（drug 页约 160 KB）与 `core.json` gzip（v0.11.4 为 10.164 MB，护栏 2.5–12 MB）；继续瘦身是为首屏速度，不是配额。
 
 ## 7. 红线
 

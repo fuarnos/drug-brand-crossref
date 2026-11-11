@@ -214,6 +214,14 @@ I18N = {
         "home.tw": "Taiwan",
         "home.hk": "Hong Kong",
         "home.eu": "European Union (EU)",
+        "home.fr": "France",
+        "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution required; "
+                            "update date in the data package; authorisation ≠ on sale."),
+        "about.fr_source": ('<p class="sub"><b>France</b> : BDPM (Base de données publique des '
+                            'médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b>; attribution '
+                            'and update date required. Data as of <b>2026-11-03</b>. Facts only '
+                            '(name, ingredient, form, manufacturer, authorisation). '
+                            '<a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>.</p>'),
         "eu.region_title": "EU centralised authorisation (EMA)",
         "eu.region_note": ("Authorised at EU level — not a record of sale in any single country. "
                            "The EU register carries no strength, dosage form or pack size."),
@@ -451,6 +459,14 @@ I18N = {
         "home.tw": "Taiwán",
         "home.hk": "Hong Kong",
         "home.eu": "Unión Europea (UE)",
+        "home.fr": "Francia",
+        "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, atribución obligatoria; "
+                            "fecha de actualización en el paquete de datos; autorización ≠ venta."),
+        "about.fr_source": ('<p class="sub"><b>Francia</b> : BDPM (Base de données publique des '
+                            'médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b>; atribución y '
+                            'fecha de actualización obligatorias. Datos a <b>2026-11-03</b>. Solo '
+                            'hechos (nombre, principio, forma, fabricante, autorización). '
+                            '<a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>.</p>'),
         "eu.region_title": "Autorización centralizada de la UE (EMA)",
         "eu.region_note": ("Autorizado a nivel de la UE: no es un registro de venta en ningún país "
                            "concreto. El registro de la UE no incluye dosis, forma farmacéutica "
@@ -684,6 +700,12 @@ I18N = {
         "home.tw": "中国台湾",
         "home.hk": "中国香港",
         "home.eu": "欧盟（EU）",
+        "home.fr": "法国",
+        "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，须署名；更新日期见数据包；授权有效 ≠ 在售。",
+        "about.fr_source": ('<p class="sub"><b>法国</b>：BDPM（Base de données publique des médicaments，ANSM），'
+                            '<b>Licence Ouverte / etalab-2.0</b>，须署名并注明更新日期；数据截至 <b>2026-11-03</b>。'
+                            '只存事实栏位（名称、成分、剂型、厂家、授权号）。'
+                            '<a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>。</p>'),
         "eu.region_title": "欧盟集中审批（EMA）",
         "eu.region_note": ("欧盟层授权，不是某一国家的在售记录；欧盟登记不含规格、剂型、包装。"),
         "eu.coverage_note": "欧盟区域层——仅集中审批产品；授权有效 ≠ 各国在售。",
@@ -877,9 +899,486 @@ I18N = {
     },
 }
 
+# v0.11.4：FR 站点侧准备（task-55）。开关：data/languages.json 的 fr.enabled=false +
+# data/markets.json 的 FR.enabled=false → LANGS 不含 fr，不生成 /fr/，线上产物不变。
+# I18N["fr"] 的键集与 I18N["en"] 完全相同（_merge_static_i18n 里按 en 键补全）；
+# 本字典是高频 UI 的机器翻译（约 170 键），其余键暂回退英文，开开关前需补齐
+# （reports/2026-11-13-fr-site-prep.md 的开启清单里有「en==fr 待补键」检查步骤）。
+FR_I18N: dict[str, str] = {
+    "nav.search": "Rechercher", "nav.confused": "Noms trompeurs", "nav.about": "À propos",
+    "nav.whatsnew": "Nouveautés", "nav.primary": "Navigation principale", "nav.more": "Plus",
+    "nav.sections": "Sections", "nav.search_compact": "Rechercher un nom",
+    "home.h1": "Recherchez un nom de médicament — voyez ce qu'il est dans chaque pays",
+    "home.sub": ("Nom commercial, nom générique, surnom ou une ligne de la boîte — le chinois, "
+                 "le pleine largeur et le cyrillique fonctionnent aussi."),
+    "home.candidate": "Vous obtenez toujours un ensemble de candidats, jamais une réponse unique.",
+    "flow.s1": "Nom", "flow.s2": "Confirmer le produit", "flow.s3": "Marché cible",
+    "home.recent": "Récemment mis à jour", "home.recent_all": "Voir toutes les mises à jour →",
+    "home.ph": "Nom commercial / générique / surnom / une ligne de la boîte",
+    "home.all": "Tous les pays et régions", "home.us": "États-Unis", "home.gb": "Royaume-Uni",
+    "home.cn": "Chine", "home.es": "Espagne", "home.mx": "Mexique", "home.au": "Australie",
+    "home.ca": "Canada", "home.sg": "Singapour", "home.tw": "Chine Taïwan",
+    "home.hk": "Chine Hong Kong", "home.eu": "Union européenne (UE)",
+    "eu.region_title": "Autorisation centralisée UE (EMA)",
+    "eu.region_note": ("Autorisé au niveau de l'UE — pas une preuve de vente dans un pays donné. "
+                       "Le registre de l'UE ne contient ni dosage, ni forme, ni conditionnement."),
+    "eu.coverage_note": ("Couche régionale UE — autorisations centralisées uniquement ; "
+                         "autorisation ≠ vente dans chaque pays."),
+    "coverage.gap.eu": ("Couche régionale : autorisations centralisées (EMA / registre de l'Union). "
+                        "Ni dosage, ni forme, ni conditionnement ; autorisation ≠ vente."),
+    "home.coverage": ("Un résultat vide ne signifie pas que le médicament n'existe pas. Couverture :"),
+    "home.loading": "Chargement…",
+    "home.hint_idle": ("La première recherche charge un fragment d'index (médiane ~1 Mo, "
+                       "~0,16 Mo gzip) ; l'index complet (~42 Mo brut, ~9–10 Mo gzip) se charge "
+                       "en arrière-plan — commencez à taper, ciblez la recherche ou choisissez un exemple."),
+    "home.hint_loading": "Chargement de l'index…",
+    "matrix.spec": "Dosage", "matrix.original": "Libellé d'origine", "matrix.none": "Non renseigné",
+    "matrix.country_all": "Tous les pays", "matrix.country_clear": "Effacer",
+    "matrix.market_count": "Marchés {shown}/{total}",
+    "matrix.empty_markets": "Sélectionnez au moins un marché pour afficher des colonnes.",
+    "matrix.scroll_hint": "Faites défiler horizontalement pour plus de marchés →",
+    "matrix.hidden_note": "Les marchés masqués restent accessibles via le sélecteur.",
+    "matrix.capped": "Limité aux {n} premiers dosages.",
+    "warn.page_prev": "Précédent", "warn.page_next": "Suivant",
+    "warn.pagination": "Pagination des alertes",
+    "warn.page_status": "Page {n} sur {total} · {count} alertes",
+    "error.index_failed": "Échec du chargement de l'index.",
+    "error.local_file": ("Ouvrez le site via un serveur local (les fichiers JSON ne sont pas lus "
+                         "depuis file://)."),
+    "error.retry": "Réessayer",
+    "res.matched": "correspondances", "res.none": "Aucun résultat", "res.brands": "marques",
+    "res.alias": "alias", "res.alias_no_products": "alias sans produit",
+    "res.notin": "absent de",
+    "res.caveat": "Un nom identique ne prouve pas que les produits sont interchangeables.",
+    "res.partial": "Index partiel — les résultats se complètent en arrière-plan.",
+    "artg.title": "Nom enregistré au registre ARTG",
+    "artg.note": "L'enregistrement ne prouve pas la vente.",
+    "artg.sponsor": "Sponsor", "artg.id": "ARTG ID",
+    "res.fuzzy": "approchant", "card.packs": "conditionnements",
+    "col.ing": "Principe actif", "col.dose": "Dosage", "col.brand": "Marque", "col.mah": "Fabricant",
+    "same.ing": "Autres produits avec le même principe actif",
+    "same.note": "Vous avez cherché une marque — voici d'autres produits avec le même principe actif.",
+    "same.warning": "Même nom ou même principe actif ne signifie pas interchangeables.",
+    "same.related": "Contient l'un des mêmes principes actifs (pas la même association)",
+    "same.related_note": ("Ces enregistrements partagent au moins un principe actif, mais pas "
+                          "l'association complète ; ce ne sont pas les mêmes produits."),
+    "res.records_noun": "enregistrements", "res.matched_name": "nom correspondant",
+    "res.no_brand_note": "{n} enregistrements sans nom commercial sont affichés par nom.",
+    "res.identity.ingredient": "Principe actif", "res.identity.markets": "Marchés couverts",
+    "res.identity.records": "{n} enregistrements", "res.same_name": "Même nom, autre médicament",
+    "res.not_interchangeable": "Non interchangeables entre marchés",
+    "res.identity_note": ("Le même nom peut désigner un autre principe actif ailleurs ; vérifiez "
+                          "le principe, le dosage et la forme."),
+    "res.action_drug": "Ouvrir la fiche du principe actif",
+    "res.action_copy": "Copier le nom générique",
+    "res.identity_title": "candidat 1 sur {n}",
+    "res.more_detail": "Plus de dosages / plus d'enregistrements",
+    "res.src_label": "Marché source (enregistrements de) :",
+    "res.src_all": "Tous les marchés sources", "res.src_active": "marché source {c}",
+    "res.empty_h1": "Aucun résultat pour « {q} »",
+    "res.empty_spelling": "Vérifiez l'orthographe ou essayez le nom générique",
+    "res.empty_browse": "Parcourir par catégorie", "res.empty_coverage": "Voir la couverture",
+    "res.details": "Détails", "res.col_market": "Marchés",
+    "res.showing": "{n} sur {total} affichés", "res.density": "Densité",
+    "badge.severe": "Même nom, autre médicament", "badge.warning": "Non interchangeable",
+    "badge.combo": "Association", "fam.title": "La même marque dans d'autres marchés",
+    "fam.warn": "Même nom, autre médicament",
+    "drug.brand": "Marque", "drug.strength": "Dosage", "drug.nostrength": "non indiqué",
+    "drug.release": "Libération", "drug.status": "Statut",
+    "drug.status.active": "En vente", "drug.status.discontinued": "Commercialisation arrêtée",
+    "drug.status.withdrawn": "Retiré", "drug.status.unknown": "Statut inconnu",
+    "brand.none": "Pas de nom commercial", "brand.mah": "Fabricant :",
+    "a11y.skip": "Aller au contenu", "ingredient.unrecorded": "Non enregistré",
+    "badge.export_only": "Export uniquement",
+    "home.country_label": "Marché cible : voir les noms utilisés sur place (facultatif)",
+    "home.country_summary": "Marché cible (facultatif)", "home.submit": "Rechercher",
+    "home.slash_hint": "Appuyez sur / pour cibler", "home.suggestions": "Suggestions",
+    "home.country_label_sel": "Marché cible : comment cela s'appelle à {country} :",
+    "country.missing": "Ce pays/région n'a aucun produit enregistré sous ce nom.",
+    "country.missing_note": ("Le nom correspond à un principe actif, pas à un produit de ce pays. "
+                             "Changez de pays ou ouvrez la fiche du principe actif."),
+    "country.open_card": "Fiche du principe actif", "country.change": "Changer de pays/région",
+    "parse.label": "Analyse de la requête", "parse.name": "Nom", "parse.dose": "Dosage",
+    "parse.form": "Forme", "parse.match": "Correspondance",
+    "parse.match.exact": "exacte", "parse.match.compact": "sans espaces",
+    "parse.match.prefix": "préfixe", "parse.match.contains": "contenu",
+    "parse.match.fuzzy": "approchant", "parse.match.nickname": "alias",
+    "parse.match.pinyin": "pinyin", "parse.match.country": "vue pays",
+    "parse.match.none": "aucune",
+    "ac.suggestions": "Suggestions", "res.brands_noun": "marques",
+    "res.show_brands": "Afficher toutes les marques", "res.fold": "Réduire",
+    "res.load_more": "Charger plus", "res.loaded_all": "Tous les résultats affichés",
+    "res.copy": "Copier le tableau", "res.csv": "Télécharger CSV",
+    "res.copied": "Copié", "res.copy_fail": "Copie impossible, sélectionnez le tableau",
+    "res.col_country": "Pays/région", "res.col_form": "Forme",
+    "res.col_match": "Type de correspondance", "res.col_link": "Page",
+    "a3.salt": "Forme saline :", "a3.release": "Libération :",
+    "a3.incompat": "Non interchangeables — voir alertes", "row.report": "Signaler cette ligne",
+    "report.field_row": "Ligne", "a1.expand": "Détails", "a1.loading": "Chargement du détail…",
+    "a1.none": "Aucun produit sous ce nom.", "a1.goto": "Ouvrir la fiche du principe actif",
+    "a1.market": "Marché", "a1.pack": "Conditionnement", "a1.approval": "Autorisation / NDC / DIN",
+    "a1.status": "Statut", "a1.source": "Source", "a1.raw": "Enregistrement d'origine",
+    "a1.more": ("Seuls les 12 premiers enregistrements sont affichés ; "
+                "<a href=\"{url}\">voir tous sur la fiche du principe actif</a>."),
+    "nav.coverage": "Couverture", "coverage.title": "Couverture et fraîcheur",
+    "coverage.intro": "Chiffres par marché, d'après la base.",
+    "coverage.notice": ("Les chiffres de couverture sont des faits d'enregistrement, pas des "
+                        "recommandations."),
+    "coverage.col.market": "Marché", "coverage.col.products": "Produits",
+    "coverage.col.mapping": "Principe actif associé", "coverage.col.spec": "Dosage",
+    "coverage.col.last": "Dernière mise à jour", "coverage.col.asof": "Données au",
+    "coverage.col.notes": "Notes", "coverage.no_brand": "enregistrements sans nom commercial",
+    "coverage.source_note": "Sources et licences : voir À propos.",
+    "name.no_en": "Pas de nom anglais", "name.no_es": "Pas de nom espagnol",
+    "name.no_zh": "Pas de nom chinois", "name.no_zh_hant": "Pas de nom chinois traditionnel",
+    "about.title": "À propos",
+    "about.lead": ("Nous identifions un médicament et comparons son identité entre pays — "
+                   "sans conseil d'utilisation."),
+    "about.rules": "Règles", "about.nick": "Surnoms", "about.terms": "Conditions",
+    "about.sources": "Sources et licences", "about.samename": "Même nom, autre médicament",
+    "about.gaps": "Lacunes connues", "about.analytics": "Statistiques",
+    "about.stats": "Chiffres clés",
+    "whatsnew.title": "Nouveautés", "whatsnew.intro": "Historique des versions.",
+    "whatsnew.lang_note": "Les anciennes versions peuvent n'être que partiellement traduites.",
+    "whatsnew.pending": "Traduction à venir",
+    "notfound.title": "Page introuvable", "notfound.p1": "Cette adresse n'existe pas.",
+    "notfound.p2": "Essayez la recherche.", "notfound.search": "Rechercher",
+    "notfound.about": "À propos", "notfound.confused": "Noms trompeurs",
+    "notfound.whatsnew": "Nouveautés", "notfound.report": "Signaler",
+    "nav.warn": "Alertes",
+    "warn.title": "Alertes : même nom, autre médicament / non interchangeables",
+    "warn.intro": "Alertes publiées, avec leur source réglementaire.",
+    "warn.count": "{n} alertes publiées.", "warn.no_advice": "Aucun conseil d'utilisation.",
+    "warn.group.high": "Gravité élevée", "warn.group.medium": "Moyenne", "warn.group.info": "Info",
+    "warn.sev.high": "Élevée", "warn.sev.medium": "Moyenne", "warn.sev.info": "Info",
+    "warn.source": "Source", "warn.related": "Lié", "warn.countries": "Pays",
+    "warn.reviewed": "Vérifié", "warn.drug_summary": "Résumé", "warn.see_all": "Tout voir",
+    "warn.empty": "Aucune alerte publiée.",
+    "warn.source_note": "Chaque alerte cite sa source réglementaire.",
+    "combo.title": "Association à dosage fixe",
+    "combo.intro": "Cette page décrit une association exacte de principes actifs.",
+    "combo.ingredients": "Principes actifs", "combo.products": "Marques avec cette association exacte",
+    "combo.no_advice": "Aucun conseil d'utilisation.",
+    "combo.empty": "Aucune marque enregistrée pour cette association.",
+    "combo.capped": "Limité aux {cap} premières marques sur {total}.",
+    "combo.source_note": "Mêmes sources que les fiches de principes actifs.",
+    "combo.see_warnings": "Voir les alertes", "combo.no_page": "Pas de page de marque",
+    "combo.stub_badge": "Page non détaillée",
+    "combo.stub_note": ("Cette page d'association n'est pas détaillée ; utilisez les fiches de "
+                        "principes actifs ou la recherche."),
+    "combo.stub_search": "Rechercher",
+    "maker.title": "Fabricants",
+    "maker.intro": ("{name} — {products} produits dans {markets} marchés, {brands} noms commerciaux."),
+    "maker.stats": "Chiffres", "maker.by_country": "Par pays", "maker.brand": "Marque",
+    "maker.ingredient": "Principe actif", "maker.source": "Source",
+    "maker.capped": "Limité aux {n} premiers produits.", "maker.no_page": "Pas de page fabricant",
+    "maker.no_page_count": "{n} autres sans page", "maker.empty": "Aucun produit.",
+    "maker.single_note": "Un seul produit enregistré.",
+    "maker.source_note": "Sources et licences : voir À propos.",
+    "glossary.title": "Glossaire", "glossary.intro": "Termes utilisés sur le site.",
+    "glossary.term": "Terme", "glossary.def": "Définition",
+    "glossary.note": "Définitions factuelles, sans conseil.",
+    "tab.search": "Recherche", "tab.categories": "Catégories", "tab.coverage": "Couverture",
+    "tab.about": "À propos", "nav.categories": "Catégories", "nav.markets": "Marchés",
+    "nav.all_categories": "Toutes les catégories", "nav.glossary": "Glossaire",
+    "nav.atc": "ATC", "nav.menu": "Menu",
+    "form.tablet": "comprimé", "form.capsule": "gélule", "form.liquid": "liquide",
+    "form.injection": "injection", "form.topical": "topique", "form.powder": "poudre",
+    "form.suppository": "suppositoire", "form.inhalation": "inhalation",
+    "form.pellet": "granulé", "form.stick": "bâtonnet", "form.kit": "kit",
+    "form.gas": "gaz", "form.unknown": "forme inconnue", "form.effervescent": "effervescent",
+    "form.granule": "granulé", "form.solution": "solution",
+    "release.ER": "libération prolongée", "release.DR": "libération différée",
+    "release.MR": "libération modifiée", "release.none": "—",
+    "unit.iu": "UI", "unit.unit": "unité", "unit.meq": "mEq", "unit.mci": "mCi",
+    "unit.ug": "µg", "unit.microgram": "µg", "unit.万iu": "100 000 UI",
+    "u1.title": "Comprendre en 3 étapes", "u1.step1": "Saisissez le nom de la boîte",
+    "u1.step1_hint": "Marque, générique, surnom ou une ligne de la boîte ; le dosage peut être inclus.",
+    "u1.step2": "Vérifiez ce candidat : principe, dosage, forme",
+    "u1.step2_hint": "La carte ne montre qu'un candidat, jamais la réponse ; comparez avec votre boîte.",
+    "u1.step3": "Choisissez le marché cible",
+    "u1.step3_hint": "Choisissez un marché cible pour voir le nom local ; la liste des candidats ne change pas.",
+    "u1.try": "Essayez :", "u1.close": "Fermer", "u1.aria": "Guide de démarrage",
+    "u2.title": "Noms par pays", "u2.hint": "Le nom du même principe actif sur place ; cliquez pour voir les produits.",
+    "u2.none": "aucun", "u2.none_hint": "Aucun enregistrement pour ce pays.", "u2.multi": "plusieurs",
+    "parse.atc": "Code ATC", "parse.match.atc": "préfixe ATC", "atc.label": "ATC",
+    "atc.hint": "Correspondance par préfixe ATC", "atc.hit": "correspondances", "atc.none": "aucun",
+    "atc.none_meta": "Aucun code ATC correspondant.", "atc.loading": "Chargement des données ATC…",
+    "site.name": "Référentiel des noms commerciaux de médicaments",
+    "report.note": "Mauvais principe, dosage ou médicament absent ? Dites-le-nous :",
+    "report.cta": "Signaler ce résultat", "report.link": "Signaler", "report.all": "Tous les signalements",
+    "report.issue_title": "Erreur de données : ", "report.field_query": "Requête",
+    "report.field_page": "Page", "report.field_expected": "Attendu", "report.field_actual": "Obtenu",
+    "report.field_pack": "Boîte",
+    "conf.title": "Médicaments à ne pas confondre", "conf.intro": "Paires de noms proches.",
+    "conf.note": "Un nom proche ne signifie pas interchangeables.",
+    "conf.pair": "Paire", "conf.tml": "Écriture tall-man",
+    "conf.search_hit": "Ce nom est facilement confondu avec",
+}
+FR_I18N.update({
+    "coverage.gap.fr": "BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution requise ; date de mise à jour dans le paquet de données ; autorisation ≠ en vente.",
+    "about.fr_source": "<p class=\"sub\"><b>France</b> : BDPM (Base de données publiques des médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b>; attribution et date de mise à jour requises. Données au <b>2026-11-03</b>. Faits uniquement (nom, ingrédient, forme, fabricant, autorisation). <a href=\"https://base-donnees-publique.medicaments.gouv.fr/\">BDPM</a>.</p>",
+    "matrix.hk_note": "Les enregistrements de Hong Kong portent uniquement sur le nom/l'ingrédient : pas de concentration, de forme posologique ou de statut d'enregistrement ; le fait d'être inscrit au registre ne prouve pas l'approvisionnement actuel.",
+    "matrix.au_note": "Les données australiennes ARTG ne comportent pas de colonne de statut d'enregistrement, le statut est donc affiché comme inconnu ; être inscrit au registre ne signifie pas être actuellement commercialisé.",
+    "artg.sponsor": "Parrainer",
+    "artg.id": "ID ARTG",
+    "drug.status_note.discontinued": "expiré",
+    "drug.status_note.withdrawn": "autorisation de mise sur le marché retirée",
+    "drug.status_note.unknown": "validité inconnue",
+    "drug.no_brand": "(pas de marque)",
+    "drug.also_called": "Aussi appelé :",
+    "drug.also_known": "Aussi connu sous le nom de :",
+    "syn.tag": "synonyme",
+    "drug.records": "enregistrements",
+    "drug.showing": "montrant les 40 premiers de",
+    "drug.sid": "Identifiant de la substance",
+    "drug.notice": "Le même ingrédient peut porter des noms de marque complètement différents selon les pays, et le même nom peut désigner un ingrédient différent. Répertorié par pays – non interchangeable.",
+    "drug.empty": "Aucun produit enregistré pour l'instant.",
+    "drug.confused": "Facilement confondu avec",
+    "drug.confused_note": "La FDA recommande le lettrage d'un homme de grande taille pour cette paire ; vérifiez l'ingrédient, pas le nom.",
+    "drug.confused_all": "Toutes les paires",
+    "name.countries": "Pays et régions",
+    "name.form": "Formulaire",
+    "name.strength": "Force",
+    "name.release": "Libérer",
+    "name.also": "Également écrit comme",
+    "name.found": "Trouvé dans",
+    "name.empty": "Aucun enregistrement",
+    "name.single_note": "Jusqu'à présent, un seul enregistrement de produit pour ce nom.",
+    "name.severe": "Ce nom de marque désigne différents principes actifs selon les pays ou les variantes. Vérifiez la composition, ne traitez jamais les noms comme équivalents.",
+    "name.warning": "Même nom, mais version immédiate ou modifiée – non interchangeable.",
+    "nick.hit": "Surnom",
+    "nick.slang": "surnom Internet",
+    "nick.legacy": "ancien nom",
+    "nick.translit": "ancien nom translittéré",
+    "nick.abbrev": "abréviation",
+    "nick.misnomer": "terme abusif",
+    "nick.unverified": "fourni par l'utilisateur (non vérifié)",
+    "nick.community": "nom de la communauté",
+    "nick.tag": "surnom",
+    "nick.street": "Nom de la rue aux États-Unis",
+    "nick.folk": "nom populaire",
+    "nick.class": "terme de classe",
+    "nick.class_caveat": "Il s’agit d’un terme de classe et non d’un médicament spécifique : il peut recouvrir plusieurs ingrédients. Vérifiez l'ingrédient.",
+    "nick.folk_caveat": "Il s’agit d’un terme populaire/catégorie, et non d’un médicament spécifique – il peut couvrir plusieurs ingrédients. Un produit dont le nom contient le terme n'appartient pas nécessairement à cette classe ; vérifiez l'ingrédient.",
+    "nick.nomap_caveat": "Ce terme désigne une substance sans produit commercialisé dans cette base de données, donc aucune liste de produits n'est affichée.",
+    "nick.ambiguous": "Ce surnom peut faire référence à plusieurs ingrédients – vérifiez la composition.",
+    "nick.caveat": "Les surnoms font référence à un ingrédient et non à un emballage spécifique : le même ingrédient est vendu sous des marques différentes dans chaque pays.",
+    "nick.synonym": "synonyme",
+    "nick.synonym_hit": "Aussi connu sous le nom",
+    "nick.synonym_caveat": "Un autre nom pour le même ingrédient actif (INN vs USAN ou une variante orthographique). Il identifie l'ingrédient — les produits des différents pays ne sont toujours pas interchangeables.",
+    "footer": "Information uniquement – ​​pas de conseil médical et ne remplace pas un pharmacien.",
+    "meta.coverage.title": "Couverture et fraîcheur · Référence croisée des marques de médicaments",
+    "meta.coverage.desc": "Produits, cartographie des ingrédients, couverture des spécifications, dernière synchronisation et lacunes connues pour chaque marché ; les chiffres sont calculés à partir de la base de données actuelle.",
+    "coverage.gap.us": "Source entièrement ouverte FDA ; travaux du gouvernement américain relevant du domaine public.",
+    "coverage.gap.gb": "Source dm+d complète ; Attribution de la licence du gouvernement ouvert.",
+    "coverage.gap.ca": "Source DPD complète ; réutilisation non commerciale avec attribution.",
+    "coverage.gap.au": "L'exportation ARTG n'a pas de colonne de statut d'enregistrement ; le statut est inconnu, pas « en vente ». Certains produits n'ont aucun enregistrement d'ingrédients.",
+    "coverage.gap.sg": "L'inscription enregistrée ne prouve pas l'approvisionnement actuel.",
+    "coverage.gap.cn": "Aucune licence de redistribution publique confirmée ; certains disques n'ont pas de nom commercial.",
+    "coverage.gap.es": "La licence source pour la redistribution est en attente de confirmation.",
+    "coverage.gap.mx": "La licence source est en attente de confirmation ; les inscriptions plus anciennes sont incluses.",
+    "coverage.gap.tw": "La force est analysée à partir du nom du produit ; la confiance est limitée.",
+    "coverage.gap.hk": "Couche de nom/ingrédient uniquement : pas de concentration, de forme ou de statut d'enregistrement ; enregistré ≠ commercialisé.",
+    "about.tw_source": "<p class=\"sub\"><b>Taiwan 台灣</b> : TFDA 「全部藥品許可證資料集」 (ensemble de données data.gov.tw 9122) sous <b>Open Government Data License v1.0 (OGDL v1.0)</b> ; attribution requise : 衛福部食藥署 TFDA. Données au <b>2026-10-22</b> (synchronisation hebdomadaire). Faits uniquement (nom du produit, ingrédients, forme posologique, fabricant, numéro de licence, statut). <b>Les points forts sont analysés à partir des noms de produits, la confiance est donc limitée.</b> Licence : <a href=\"https://data.gov.tw/license\">data.gov.tw/license</a>.</p>",
+    "about.sg_source": "<p class=\"sub\"><b>Singapour 新加坡</b> : HSA <b>Liste des produits thérapeutiques enregistrés</b> (ensemble de données data.gov.sg d_767279312753558cbf19d48344577084) sous la <b>Singapour Open Data License v1.0 (SODL)</b> ; attribution et lien de licence requis, aucune approbation gouvernementale implicite. Données au <b>2026-08-07</b> (mises à jour tous les 6 mois). <b>Le fait d'être inscrit au registre ne signifie pas que le produit est actuellement commercialisé.</b> Les noms de marques restent en anglais et ne sont jamais traduits ; seuls les noms d'ingrédients chinois (inn_zh) peuvent être affichés. Attribution : contient des informations tirées de la liste des produits thérapeutiques enregistrés, consultée le 2026-10-28 auprès de la Health Sciences Authority (HSA) et mise à disposition sous la licence Open Data de Singapour v1.0 (<a href=\"https://data.gov.sg/open-data-licence\">licence</a>).</p>",
+    "about.hk_source": "<p class=\"sub\"><b>Hong Kong 中国香港</b> : Drug Office, Department of Health — <b>Liste des produits pharmaceutiques enregistrés</b> (ensemble de données data.gov.hk hk-dh-dh_do-hk-dh-do-pharmaceutical-product) sous <b>DATA.GOV.HK Terms and Conditions</b> (réutilisation gratuite avec attribution ; non approbation implicite du gouvernement). Données au <b>2026-10-23</b>. <b>Couche de nom/ingrédient uniquement – pas de dosage, de forme posologique ou de statut d'enregistrement ; le fait d'être inscrit au registre ne prouve pas l'approvisionnement actuel.</b></p>",
+    "about.au_source": "<p class=\"sub\"><b>Australie</b> : TGA <b>ARTG Medicines 2026-10-28</b> (Registre australien des produits thérapeutiques ; attribution TGA/ARTG). Données au <b>2026-10-28</b>. L'exportation n'a <b>aucune colonne de statut d'enregistrement</b>, le statut est donc affiché comme inconnu ; <b>être inscrit au registre ne signifie pas être actuellement commercialisé</b>. 3 911 produits n'ont aucun enregistrement d'ingrédients et sont affichés au niveau du nom uniquement.</p>",
+    "about.eu_source": "<p class=\"sub\"><b>Couche régionale de l'UE</b> : [[3]Commission européenne — Registre de l'Union des médicaments</b> (CC BY 4.0 ; attribution Commission européenne / Registre de l'Union) plus données [[5]EMA Medicines</b> pour vérification croisée (source : Agence européenne des médicaments (EMA) ; pas de logo de l'EMA, pas d'approbation implicite). Autorisations centrales uniquement (médicaments à usage humain), données au <b>2026-11-03</b>. <b>Une autorisation de l'UE ne constitue pas un enregistrement de vente dans un seul pays, et le registre ne contient aucun dosage, forme posologique ou taille d'emballage.</b> Les produits qui ne correspondent à aucun ingrédient connu sont affichés au niveau du nom uniquement.</p>",
+    "conf.source_note": "Source : <a href=\"https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project\" target=\"_blank\" rel=\"noopener\">Projet de différenciation des noms de la FDA</a> (contenu à jour au 12/06/2026 ; travaux du gouvernement américain). Seules les paires @@CONF_PAIRS@@ officiellement republiables de la liste FDA sont incluses ; le copyright ISMP/ECRI « Liste des noms de médicaments confus » n'est pas copié. Les noms uniques figurant sur la liste de la FDA sans paire (hydromorphone, mitoxantrone) ne sont pas répertoriés. Une paire est un avertissement concernant les noms, et non une déclaration selon laquelle les médicaments sont équivalents.",
+    "warn.sev.info": "Informations",
+    "combo.compact": "combinaison",
+    "combo.cross_title": "Même combinaison sur d'autres marchés",
+    "combo.cross_exact": "Ces marchés enregistrent des produits contenant la même combinaison d’ingrédients actifs. Identité uniquement – ​​et non une recommandation selon laquelle les produits sont interchangeables.",
+    "combo.cross_products": "produits",
+    "combo.cross_record": "enregistrer",
+    "combo.cross_overlap": "La combinaison la plus proche trouvée sur d’autres marchés est similaire mais PAS identique : elle n’est pas interchangeable.",
+    "combo.cross_none": "Aucun produit avec cette combinaison n'est encore enregistré sur les autres marchés couverts.",
+    "combo.cross_primary": "Seul l’ingrédient principal est le même : il ne s’agit PAS de la même association à dose fixe.",
+    "combo.cross_primary_link": "Voir l'ingrédient principal",
+    "combo.cross_unmatched": "La comparaison entre marchés n'est pas disponible pour ce nom groupé.",
+    "meta.index.title": "Références croisées sur les marques de médicaments : noms de médicaments dans tous les pays",
+    "meta.index.desc": "Recherchez un nom de marque, un nom générique ou un surnom et consultez l'ingrédient actif, la concentration et les noms du même produit dans d'autres pays. Référence publique et non commerciale.",
+    "meta.about.title": "À propos · Référence croisée des marques de médicaments",
+    "meta.about.desc": "Comment fonctionne ce croisement : sources et couverture, licences et attribution, lacunes connues et règles éditoriales. Référence uniquement, pas un avis médical.",
+    "meta.confused.title": "Noms de médicaments faciles à confondre · Référence croisée des marques de médicaments",
+    "meta.confused.desc": "Paires de sosies et de sons semblables d'hommes de grande taille de la FDA : un avertissement sur les noms, pas une déclaration selon laquelle les médicaments sont interchangeables.",
+    "meta.warn.title": "Avertissements : même nom, médicament différent · Référence croisée des marques de médicaments",
+    "meta.warn.desc": "Avertissements publiés sur les produits et combinaisons de médicaments de même nom/différents qui ne sont pas interchangeables selon les pays, les formes de sel ou les mécanismes de libération. Information seulement.",
+    "meta.whatsnew.title": "Quoi de neuf · Référence croisée entre les marques de médicaments",
+    "meta.whatsnew.desc": "Notes de version pour les références croisées des marques de médicaments : correctifs et ajouts dans chaque version.",
+    "glossary.t.inn": "AUBERGE",
+    "glossary.d.inn": "Dénomination commune internationale : le nom générique de l'OMS pour un ingrédient actif (par exemple, acétaminophène/paracétamol, métoprolol).",
+    "glossary.t.ban": "INTERDIRE",
+    "glossary.d.ban": "British Approved Name : le nom générique britannique, généralement identique à INN ; quelques noms plus anciens diffèrent (par exemple, adrénaline pour épinéphrine).",
+    "glossary.t.usan": "USAAN",
+    "glossary.d.usan": "Nom adopté aux États-Unis : le nom générique américain ; principalement DCI, mais parfois différent (par exemple albutérol pour le salbutamol).",
+    "glossary.t.atc": "Code ATC",
+    "glossary.d.atc": "Classification Anatomique Thérapeutique Chimique (OMS) : un code tel que C07AB02. Les premières lettres/chiffres sont regroupés par organe/système, classe et substance – utiles pour trouver le même type de médicament sur tous les marchés.",
+    "glossary.d.mah": "Titulaire de l'autorisation de mise sur le marché : l'entreprise qui détient la licence pour un produit sur un marché ; pas nécessairement l'usine.",
+    "glossary.t.din": "VACARME",
+    "glossary.d.din": "Numéro d'identification du médicament : l'identifiant canadien du produit; Le DIN-HM est utilisé pour les produits homéopathiques.",
+    "glossary.t.ndc": "CDN",
+    "glossary.d.ndc": "National Drug Code : l'identifiant du produit américain (étiqueteur + produit + segments d'emballage).",
+    "glossary.d.artg": "Numéro du Registre australien des produits thérapeutiques : identifie un bien thérapeutique répertorié/enregistré pour l'Australie.",
+    "glossary.d.fdc": "Association à dose fixe : deux ingrédients actifs ou plus dans un seul produit (par exemple metformine + glibenclamide). Une page combinée sur ce site.",
+    "glossary.t.lasa": "LASA / homme de grande taille",
+    "glossary.d.lasa": "Noms de médicaments qui se ressemblent et se ressemblent. Les lettres « grand homme » de la FDA et la liste de noms confus aident à éviter les confusions entre des noms similaires.",
+    "glossary.t.otc": "De gré à gré",
+    "glossary.d.otc": "En vente libre : vendu sans ordonnance sur ce marché ; le même médicament peut être délivré uniquement sur ordonnance ailleurs.",
+    "glossary.t.rx": "réception",
+    "glossary.d.rx": "Médicament uniquement sur ordonnance sur ce marché.",
+    "glossary.t.strength": "Force",
+    "glossary.d.strength": "La quantité de principe actif par unité (par exemple 500 mg par comprimé) ; les forces et les formes de version peuvent varier selon les marchés.",
+    "atc.browse_title": "Rechercher par classe ATC",
+    "atc.browse_intro": "Les classes ATC de l’OMS regroupent les médicaments par organe/système et classe pharmacologique. Partez d’un groupe de niveau supérieur ou d’une catégorie de consommateurs ; chaque page répertorie les ingrédients actifs enregistrés ici.",
+    "atc.level": "Niveau ATC",
+    "atc.parent": "Classe parentale",
+    "atc.children": "Cours pour enfants",
+    "atc.ingredients": "Principes actifs de cette classe",
+    "atc.count": "{n} ingrédients actifs",
+    "atc.more": "et {n} plus",
+    "atc.no_data": "Aucun ingrédient actif enregistré dans cette classe pour le moment.",
+    "atc.unnamed": "Le nom de la classe n'a pas encore été révisé — le code ATC fait autorité.",
+    "atc.ai_note": "Les noms de classe et de catégorie sont des traductions éditoriales ou assistées par l’IA ; seuls le code ATC et la hiérarchie de l'OMS font autorité.",
+    "atc.source_note": "Les codes ATC et la hiérarchie font référence à l’index ATC/DDD du Centre collaborateur de l’OMS pour la méthodologie des statistiques sur les médicaments (droit d’auteur WHOCC ; l’index lui-même n’est pas reproduit). Les informations sur les ingrédients/concentrations proviennent des dossiers des régulateurs répertoriés dans À propos.",
+    "atc.show_all": "Afficher tout {n} (affichant actuellement {shown})",
+    "atc.salt_label": "Forme de sel :",
+    "atc.status_note": "Les badges de statut résument les enregistrements de produits détenus pour chaque ingrédient (actif / abandonné / retiré / inconnu), et les codes de marché après chaque badge indiquent où ce statut est enregistré. Seuls certains registres publient une colonne d'état : CA, ES et MX le font ; AU et HK n'ont pas de colonne de statut et sont enregistrés comme inconnus ; Les enregistrements CN, US, GB, TW et SG sont inscrits au registre et marqués comme actifs.",
+    "atc.markets_hint": "Chaque marché affiche désormais un statut agrégé : un marché est considéré comme en vente s'il a un enregistrement actif ; les statuts des enregistrements individuels sont affichés dans les détails. Un même marché peut également avoir plusieurs enregistrements d'enregistrement avec des statuts différents, de sorte que chaque marché n'apparaît ici qu'une seule fois ; il s'agit d'un fait enregistré, pas d'un jugement de sécurité.",
+    "atc.ing_more": "{n} plus d'ingrédients — la liste complète apparaît lorsque le chargement de l'index complet est terminé.",
+    "atc.nolang_note": "Un nom manquant est marqué dans sa ligne uniquement lorsqu'il s'agit d'une exception ; alors que la plupart des noms en manquent, la liste reste anonyme.",
+    "atc.names_source_note": "Les noms de classes sont des traductions éditoriales ou proviennent de Wikipédia (CC BY-SA 4.0) / Wikidata (CC0) ; chaque page ATC répertorie la source exacte, la licence et le lien pour chaque langue. Seuls le code ATC et la hiérarchie de l'OMS font autorité.",
+    "atc.all_classes": "Toutes les classes ATC",
+    "atc.search_link": "Rechercher cette classe",
+    "atc.view_class": "Voir cette classe ATC",
+    "atc.categories_link": "Catégories de consommateurs",
+    "atc4.summary": "Par forme galénique, sur tous les marchés",
+    "atc4.loading": "Chargement des détails du formulaire…",
+    "atc4.notice": "Une classe ATC regroupe uniquement les médicaments selon une pharmacologie/chimie similaire – cela ne signifie pas qu’ils sont interchangeables. Un ingrédient, une forme posologique, un mécanisme de libération ou une concentration différents ne sont pas interchangeables.",
+    "atc4.scope": "Seuls les ingrédients avec une classe ATC enregistrée sont répertoriés (@@ATC_ALL@@ de @@ATC_ALL_N@@).",
+    "atc4.form_col": "Forme posologique",
+    "atc4.form_other": "d'autres formes",
+    "atc4.sort_note": "Les lignes sont alphabétiques par forme posologique et les marchés suivent un ordre de marché fixe ; rien ici n’est classé ou recommandé. Seuls les ingrédients avec des enregistrements de produits comportent des lignes.",
+    "atc4.empty": "Aucun enregistrement de produit au niveau du formulaire pour cette classe pour le moment.",
+    "atc4.error": "Impossible de charger les détails du formulaire.",
+    "cat.quick_title": "Parcourir par catégorie",
+    "cat.browse_title": "Catégories de consommateurs courantes",
+    "cat.intro": "Collections de sujets éditoriaux : chaque catégorie correspond aux classes ATC et aux ingrédients actifs. C'est une façon de parcourir, pas une preuve que les médicaments sont équivalents.",
+    "cat.disclaimer": "Collection thématique – pas une revendication d’équivalence ou d’interchangeabilité.",
+    "cat.count": "{n} ingrédients actifs",
+    "cat.related_atc": "Classes ATC associées",
+    "cat.no_data": "Aucun ingrédient actif enregistré pour cette catégorie pour le moment.",
+    "cat.back": "Toutes les classes et catégories ATC",
+    "parse.category": "Catégorie",
+    "parse.category_note": "Collection de sujets correspondant – pas un nom, ni une revendication d'équivalence.",
+    "parse.match.category": "Catégorie / Classe ATC",
+    "bilingual.toggle": "Afficher l'original",
+    "bilingual.brand_note": "Nom tel qu'enregistré sur ce marché – pas une traduction.",
+    "bilingual.source.official": "officiel",
+    "bilingual.source.regulator": "régulateur",
+    "bilingual.source.pharmacopoeia": "pharmacopée",
+    "bilingual.source.manual": "éditorial",
+    "matrix.brand_note": "Chaque colonne de pays/région affiche les noms commerciaux enregistrés localement, et non les traductions.",
+    "matrix.filters": "Filtres",
+    "matrix.mobile_filters": "Filtres",
+    "matrix.country": "Pays et régions",
+    "matrix.form": "Formulaire",
+    "matrix.release": "Libérer",
+    "matrix.spec_search": "Force de recherche",
+    "matrix.reset": "Restaurer les valeurs par défaut",
+    "matrix.all": "Tous",
+    "matrix.showing": "{n} / {total} lignes",
+    "matrix.sort_note": "Les atouts communs d’abord ; force non divulguée en dernier.",
+    "matrix.spec_check": "vérifier la force",
+    "matrix.close": "Fermer",
+    "form.kit": "trousse",
+    "unit.meq": "mÉq",
+    "meta.glossary.title": "Glossaire · Référence croisée entre les marques de médicaments",
+    "meta.glossary.desc": "Brèves définitions des codes et termes utilisés sur ce site : INN, BAN, USAN, ATC, MAH, DIN, NDC, ARTG, FDC, LASA, OTC, Rx, Strength.",
+    "about.data_package": "Paquet de données",
+    "about.dataset_jsonld": "Métadonnées de l'ensemble de données (schema.org)",
+    "about.checksums": "Sommes de contrôle SHA-256",
+    "about.data_dictionary": "Dictionnaire de données",
+    "about.licences_summary": "Sources de données et licences",
+    "atc.ing_overview": "Ingrédients actifs de cette classe ATC : les lignes de noms de marque se chargent en arrière-plan.",
+    "matrix.hidden_rows": "{n} des lignes supplémentaires de force/forme sont enregistrées uniquement dans {mk} et ne sont pas affichées dans ce tableau.",
+    "matrix.hidden_show": "Ajouter ce marché en colonne",
+    "matrix.undisclosed_note": "« non divulgué » signifie que la source ne publie pas la concentration – cela ne signifie pas que le produit n'en a pas.",
+    "name.form_source": "tel qu'enregistré par la source",
+    "name.form_granularity_cn": "La source enregistre la forme posologique uniquement au niveau de la classe (par exemple, « comprimé » ); les sous-formes effervescentes/enrobées ne sont pas distinguées.",
+    "matrix.filters_short": "Filtres",
+    "brand.mah_note": "Ce produit n'a pas de nom commercial enregistré ; le titulaire de l'autorisation de mise sur le marché est indiqué à la place.",
+    "drug.forms_all": "Toutes les formes galéniques",
+    "drug.forms_label": "Formes posologiques",
+    "drug.forms_short": "Formulaires",
+    "drug.also_in": "également dans",
+    "drug.undisclosed_block": "Enregistrements sans force déclarée",
+    "drug.specs": "points forts",
+    "drug.compare_side": "Table côte à côte",
+    "drug.view_list": "Retour à la liste",
+    "drug.more_specs": "Autres atouts",
+    "drug.more_specs_n": "Autres dosages : {n} · {m} formes posologiques",
+    "drug.ms_more": "Ce formulaire a {n} plus",
+    "drug.full_list": "Liste complète dans le paquet de données",
+    "drug.und_more": "et {n} autres ({k} fabricants)",
+    "drug.undisclosed_n": "{n} enregistrements · {k} fabricants",
+    "drug.brand_group": "Avec un nom de marque",
+    "drug.mah_group": "Fabricant uniquement",
+    "drug.compare_note": "Un tableau côte à côte n'est proposé que lorsque cet ingrédient a des records sur de nombreux marchés ; sinon, cette liste représente l’ensemble du tableau.",
+    "drug.markets": "marchés",
+    "name.notice": "Même nom – vérifiez l’ingrédient ; les noms ne sont pas interchangeables.",
+    "name.show_more": "Afficher plus",
+    "warn.filter.all": "Tous",
+    "cat.all_link": "Toutes les catégories →",
+    "coverage.sort_products": "Par produits",
+    "coverage.sort_market": "Par marché",
+    "glossary.h2": "Termes et codes",
+    "conf.h2": "Paires d'hommes de grande taille FDA",
+    "atc.more_notes": "Remarques et licences",
+})
+
+
+# 覆盖页/About 的 FR 专用文案（不放进 I18N["fr"]，避免 fr 键集 ≠ en；开开关时按清单并入
+# en/es/zh + 重生成 zh-Hant，并由 FR_I18N 提供 fr 值）。
+FR_PREP_KEYS: dict[str, str] = {
+    "home.fr": "France",
+    "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution requise ; "
+                        "date de mise à jour dans le paquet de données ; autorisation ≠ vente."),
+    "about.fr_source": ("<p class=\"sub\"><b>France</b> : BDPM (Base de données publique des "
+                        "médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b> ; attribution "
+                        "et date de mise à jour requises. Données au <b>2026-11-03</b>. Faits "
+                        "seulement (nom, principe, forme, titulaire, autorisation). "
+                        "<a href=\"https://base-donnees-publique.medicaments.gouv.fr/\">BDPM</a>.</p>"),
+}
+
+
 # v0.6.2：四语言。zh-Hant 的 URL 目录用全小写 zh-hant/（hreflang 仍是 BCP47 zh-Hant）。
-LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/"),
-         ("zh-Hant", "繁", "zh-hant/")]
+# v0.11.4（task-55）：LANGS 由 data/languages.json 的 enabled 决定 —— fr 目前 enabled:false
+# → 不生成 /fr/、不产 fr 资产；把 fr 改成 true 才会上线（开启清单见 reports/2026-11-13-fr-site-prep.md）。
+_BASE_LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/"),
+               ("zh-Hant", "繁", "zh-hant/")]
+
+
+def _enabled_ui_langs() -> list[tuple[str, str, str]]:
+    """注册表 enabled 语言 → 站点 LANGS（仅收已具备 I18N 字典的语言）。"""
+    langs = list(_BASE_LANGS)
+    try:
+        reg = json.loads((ROOT / "data" / "languages.json").read_text(encoding="utf-8"))
+        enabled = {x.get("code") for x in reg.get("languages", []) if x.get("enabled")}
+    except (OSError, ValueError):
+        enabled = set()
+    for code, label, path in (("fr", "FR", "fr/"),):
+        # 注意：I18N["fr"] 由 _merge_static_i18n() 在 main() 里生成，模块导入时还不存在；
+        # 这里只按注册表 enabled 判断（fr 的语言字典在构建前一定已就绪）。
+        if code in enabled:
+            langs.append((code, label, path))
+    return langs
+
+
+LANGS = _enabled_ui_langs()
+# 构建期四语硬拦：跟随 LANGS（fr 关闭时仍是 4 语；开启后 fr 也纳入键集检查）。
+I18N_REQUIRED_LANGS = tuple(code for code, _label, _path in LANGS)
 LANG_PATH = {code: path for code, _label, path in LANGS}
 LANG_HREFLANG = {code: ("zh-Hant" if code == "zh-Hant" else code)
                  for code, _label, _path in LANGS}
@@ -1205,6 +1704,13 @@ UI_I18N = {
         "drug.compare_side": "Side-by-side table",
         "drug.view_list": "Back to the list",
         "drug.more_specs": "Other strengths",
+        "drug.more_specs_n": "Other strengths: {n} · {m} dosage forms",
+        "drug.ms_more": "This form has {n} more",
+        "drug.full_list": "Full list in the data package",
+        "drug.und_more": "and {n} more ({k} manufacturers)",
+        "drug.undisclosed_n": "{n} records · {k} manufacturers",
+        "drug.brand_group": "With a brand name",
+        "drug.mah_group": "Manufacturer only",
         "drug.compare_note": "A side-by-side table is offered only when this ingredient has records in many markets; otherwise this list is the whole picture.",
     },
     "es": {
@@ -1278,6 +1784,13 @@ UI_I18N = {
         "drug.compare_side": "Tabla comparativa",
         "drug.view_list": "Volver a la lista",
         "drug.more_specs": "Otras presentaciones",
+        "drug.more_specs_n": "Otras concentraciones: {n} · {m} formas farmacéuticas",
+        "drug.ms_more": "Esta forma tiene {n} más",
+        "drug.full_list": "Lista completa en el paquete de datos",
+        "drug.und_more": "y {n} más ({k} fabricantes)",
+        "drug.undisclosed_n": "{n} registros · {k} fabricantes",
+        "drug.brand_group": "Con nombre comercial",
+        "drug.mah_group": "Solo fabricante",
         "drug.compare_note": "La tabla comparativa solo se ofrece cuando este principio tiene registros en muchos mercados; si no, esta lista es la información completa.",
     },
     "zh": {
@@ -1335,6 +1848,13 @@ UI_I18N = {
         "drug.compare_side": "并排对照表",
         "drug.view_list": "回到清单",
         "drug.more_specs": "其余规格",
+        "drug.more_specs_n": "其余规格 {n} 个 · 涉及 {m} 种剂型",
+        "drug.ms_more": "该剂型还有 {n} 个",
+        "drug.full_list": "完整清单见数据包",
+        "drug.und_more": "还有 {n} 个（{k} 个厂家）",
+        "drug.undisclosed_n": "{n} 个记录 · {k} 个厂家",
+        "drug.brand_group": "有商品名",
+        "drug.mah_group": "仅厂家",
         "drug.compare_note": "并排对照表只在该成分跨市场记录较多时提供；否则这份清单就是全部。",
     },
     "zh-Hant": {
@@ -1392,6 +1912,13 @@ UI_I18N = {
         "drug.compare_side": "並排對照表",
         "drug.view_list": "回到清單",
         "drug.more_specs": "其餘規格",
+        "drug.more_specs_n": "其餘規格 {n} 個 · 涉及 {m} 種劑型",
+        "drug.ms_more": "該劑型還有 {n} 個",
+        "drug.full_list": "完整清單見資料包",
+        "drug.und_more": "還有 {n} 個（{k} 個廠商）",
+        "drug.undisclosed_n": "{n} 個記錄 · {k} 個廠商",
+        "drug.brand_group": "有商品名",
+        "drug.mah_group": "僅廠商",
         "drug.compare_note": "並排對照表只在該成分跨市場紀錄較多時提供；否則這份清單就是全部。",
         # v0.9.7 task-12 UI 批次 A-1：结果页身份卡 / 分页 / 零结果（繁体显式覆盖层）
         "res.identity.ingredient": "有效成分",
@@ -1453,6 +1980,12 @@ UI_I18N = {
         # zh-Hant 不再手写覆盖，由 data/i18n_zh_hant.json 生成器给出的「中國台灣」生效。
         "home.hk": "中國香港",
         "home.eu": "歐盟（EU）",
+        "home.fr": "法國",
+        "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，須署名；更新日期見資料包；授權有效 ≠ 在售。",
+        "about.fr_source": ('<p class="sub"><b>法國</b>：BDPM（Base de données publique des médicaments，ANSM），'
+                            '<b>Licence Ouverte / etalab-2.0</b>，須署名並註明更新日期；資料截至 <b>2026-11-03</b>。'
+                            '只存事實欄位（名稱、成分、劑型、廠商、授權號）。'
+                            '<a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>。</p>'),
         "eu.region_title": "歐盟集中審批（EMA）",
         "eu.region_note": "歐盟層授權，不是某一國家的在售記錄；歐盟登記不含規格、劑型、包裝。",
         "eu.coverage_note": "歐盟區域層——僅集中審批產品；授權有效 ≠ 各國在售。",
@@ -2358,6 +2891,18 @@ def _merge_static_i18n(values: dict) -> None:
                 for ph, val in values.items():
                     merged = merged.replace("@@" + ph + "@@", str(val))
                 I18N[lang][key] = merged
+    # v0.11.4（task-55）FR 站点准备：I18N["fr"] **键集与 en 完全相同**。
+    # 高频 UI 用 FR_I18N 的机器翻译；其余键（含 ABOUT/PAGE 等合并进来的）暂用 en 占位。
+    # fr 在 languages.json 里 enabled:false 时不会生成 /fr/ 页面，也不影响现有四语产物。
+    # 开开关前：把 en==fr 的键补完（检查命令见 reports/2026-11-13-fr-site-prep.md）。
+    fr_values = dict(FR_I18N)
+    if "fr" in I18N_REQUIRED_LANGS:      # 仅开启后并入 FR 专用键（届时 en/es/zh 也要补）
+        fr_values.update(FR_PREP_KEYS)
+    I18N["fr"] = {k: (fr_values.get(k) or v) for k, v in I18N["en"].items()}
+    if "fr" in I18N_REQUIRED_LANGS:
+        for key, text in fr_values.items():
+            if key not in I18N["fr"]:
+                I18N["fr"][key] = text
 
 
 def _install_zh_hant(values: dict) -> None:
@@ -3978,6 +4523,20 @@ nav a{min-height:44px;display:inline-flex;align-items:center}
 .ctry-panel{padding:10px 12px}
 .ctry-panel .sel-label{display:block;margin:0 0 6px}
 .ctry-panel select{min-height:44px;max-width:100%}
+/* 2026-11-13 task-58（用户截图：目标/来源市场上下堆叠）：≥1024px 两列并排，
+   左目标 #country、右来源 #src，等宽、顶部对齐、间距 20px；<1024（含 390）仍上下堆叠。 */
+@media (min-width:1024px){
+  #ctrydetails .ctry-panel{display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-areas:"lc sc" "ls ss";
+    column-gap:20px;row-gap:2px;align-items:end}
+  #ctrydetails .sel-label[for="country"]{grid-area:lc}
+  #ctrydetails #country{grid-area:ls}
+  #ctrydetails .sel-label[for="src"]{grid-area:sc}
+  #ctrydetails #src{grid-area:ss}
+  #ctrydetails .ctry-panel select{width:100%}
+  #ctrydetails .ctry-panel .sel-label{margin:0}
+}
 .drug-identity{margin:2px 0 10px}
 .drug-identity b{color:var(--fg)}
 
@@ -4028,6 +4587,9 @@ main .section,main .catquick{background:var(--band);border:1px solid var(--line)
    外层「按大类浏览」面板改浅绿（--accent-weak），内部类别 chip 改白（--card + --line 边框），
    框内/框外颜色不许一致（用户 2026-11-10 硬规则）。 */
 main .catquick{background:var(--accent-weak)}
+/* 2026-11-13 task-57（用户：大框绿色再深一点，小框保持白）：用现有色板混一档，
+   目标 #e0efe6–#e6f2ea；chip 仍是 --card 白 + --line 边框。 */
+main .catquick{background:color-mix(in srgb, var(--accent) 7%, var(--accent-weak))}
 .u1guide{background:#fff}
 .sn-right{display:flex;align-items:center;gap:2px;margin-left:auto}
 .sn-right details{position:relative}
@@ -4059,9 +4621,66 @@ header .sn{flex:0 0 auto}
   header.hdr-shell .sn>a, header.hdr-shell .sn>details>summary{padding:0 8px}
   header.hdr-shell .sn-right summary{padding:0 8px}
 }
+/* 2026-11-13 task-62（用户：其余规格/未公开规格「这一坨」）：折叠摘要一行 +
+   展开按组列 chip；不改数据、不丢条目。 */
+.more-specs,.undis{margin:10px 0 0;border:1px solid var(--line);border-radius:10px;
+ background:var(--card);padding:8px 10px}
+.more-specs>summary,.undis>summary{display:flex;align-items:center;gap:6px;list-style:none;
+ cursor:pointer;font-size:14px;line-height:1.5;color:var(--muted);white-space:nowrap;overflow:hidden}
+.more-specs>summary::-webkit-details-marker,.undis>summary::-webkit-details-marker{display:none}
+.more-specs>summary .ln,.undis>summary .ln{flex:1 1 auto;min-width:0;overflow:hidden;
+ text-overflow:ellipsis;white-space:nowrap}
+.more-specs>summary::after,.undis>summary::after{content:"▾";flex:none;font-size:13px;
+ line-height:1;color:var(--muted)}
+.more-specs[open]>summary::after,.undis[open]>summary::after{content:"▴"}
+.ms-body,.und-body{margin-top:8px;font-size:14px}
+.ms-grp{margin:6px 0}
+.ms-grp>summary{font-size:14px;line-height:1.5;color:var(--muted);cursor:pointer}
+.ms-h,.und-h{display:block;color:var(--muted);font-size:14px;margin:0 0 4px}
+.ms-list,.und-chips{display:flex;flex-wrap:wrap;gap:4px 8px}
+.ms-spec,.uname{display:inline-block;padding:1px 8px;border:1px solid var(--line);
+ border-radius:999px;background:var(--band);font-size:14px;line-height:1.6}
+.uname .x{color:var(--muted);font-size:13px}
+.ms-more,.und-more{color:var(--muted);font-size:14px}
+.ms-more{margin-left:2px}
+.und-more{margin:6px 0 0}
+.full-list{margin:6px 0 0;font-size:14px}
+.und-grp + .und-grp{margin-top:8px}
+.und-grp{display:block}
+@media (max-width:767px){
+ .more-specs,.undis{padding:8px}
+ .ms-spec,.uname{font-size:14px}
+}
+/* 2026-11-13 task-59（用户：「原来的字符大小、颜色等不要动」）：ATC 卡片只保留
+   几何对齐（border/radius/padding/min-height/grid/details），文字排版与颜色全部回到
+   v0.11.2 原值 —— 名称 16/1.3 muted、ATC 码 13 muted、盐型 16/1.35 muted、
+   状态词 13/1.25（在售 fg、停售 warn、撤市 sev、未知 muted）、市场码 13 muted；
+   折叠摘要与 ▾ 箭头也不超过原字号、不用 accent 色。 */
+.atcmembers .atc-nm{font-size:16px;line-height:1.3;font-weight:400;letter-spacing:normal}
+.atcmembers .atc-codes code{font-size:13px;line-height:1.3;color:var(--muted)}
+.atcmembers .salt-details>summary{line-height:1.35}
+.atcmembers .salt-details>summary .ln{font-size:16px;line-height:1.35;font-weight:400;
+ color:var(--muted);letter-spacing:normal}
+.atcmembers .salt-details .salt-k,.atcmembers .salt-details .nm{color:var(--muted)}
+.atcmembers .salt-details>summary::after{font-size:13px;line-height:1.25;color:var(--muted)}
+.atcmembers .salt-list{font-size:16px;line-height:1.35;color:var(--muted)}
+.atcmembers .st-details>summary .ln{font-size:13px;line-height:1.25;font-weight:400;
+ color:var(--muted);letter-spacing:normal}
+.atcmembers .st-details .st-word{font-size:13px;line-height:1.25;font-weight:400;
+ letter-spacing:0;color:var(--fg)}
+.atcmembers .st-details .st-word.st-discontinued{color:var(--warn)}
+.atcmembers .st-details .st-word.st-withdrawn{color:var(--sev)}
+.atcmembers .st-details .st-word.st-unknown{color:var(--muted)}
+.atcmembers .st-details .atc-mk{font-size:13px;line-height:1.25;color:var(--muted);
+ letter-spacing:0;font-variant-numeric:tabular-nums}
+.atcmembers .st-details>summary::after{font-size:13px;line-height:1.25;color:var(--muted)}
+.atcmembers .st-list{font-size:13px;line-height:1.25;color:var(--muted)}
 @media (min-width:1100px) and (max-width:1440px){
   header.hdr-shell .logo-zh{display:none}
 }
+/* task-59 收尾：折叠箭头必须在所有覆盖之后仍是 13px / muted（不得用 accent、不得大于原字号）。 */
+.atcmembers .salt-details>summary::after,
+.atcmembers .st-details>summary::after{font-size:13px;line-height:1.25;color:var(--muted)}
 /* 2026-11-13 task-40 收尾：桌面卡片第 1 行必须真的 1 行（实测有卡片 .atc-nm 仍
    flex-wrap:wrap → 名称+码折成 2 行，高度极差 16.9px）。这里用更具体的选择器压住
    旧规则；390 不受影响（下面的 mobile 覆盖）。 */
@@ -4100,6 +4719,9 @@ header .sn{flex:0 0 auto}
 .atcmembers .st-details .st-line{display:block}
 .atcmembers .st-details .st-line + .st-line{margin-top:2px}
 .atcmembers .st-details .atc-mk{white-space:normal}
+/* task-59 最终覆盖：必须排在 task-40 的 ▾ 规则之后（那里写了 14px/accent）。 */
+.atcmembers .salt-details>summary::after,
+.atcmembers .st-details>summary::after{font-size:13px;line-height:1.25;color:var(--muted)}
 @media (max-width:767px){
  /* 390 单列：允许名称换行、卡片按内容自然高度（不裁切；展开自然变高） */
  .atcmembers>li{min-height:0}
@@ -4130,6 +4752,11 @@ def _detail_row_fields() -> list[str]:
 DETAIL_ROW_FIELDS = _detail_row_fields()
 if "brand" not in DETAIL_ROW_FIELDS or "pack" not in DETAIL_ROW_FIELDS:
     raise SystemExit(f"ROW_FIELDS 缺 brand/pack，明细面板列无法定位：{DETAIL_ROW_FIELDS}")
+
+# v0.11.5 task-70：共享 CSS 用内容哈希命名（不可变资源）；页面里的 ?v= 用「本页内容哈希」。
+# 这样改一条文案只变命中页；改 CSS 只变引用该文件的页；改数据不再让 12 万页全变。
+PAGE_V = "__PAGE_V__"
+CSS_FILE = "assets/style." + hashlib.sha256(CSS.encode("utf-8")).hexdigest()[:10] + ".css"
 
 
 APP_JS = r"""
@@ -4337,13 +4964,19 @@ function ingredientLabel(e){
     const tr = ent && ent[window.LANG];
     if(tr && tr.n) return tr.n;
   }
-  if(window.LANG === 'zh' && e && e.xz && e.xz.length){
+  // v0.11.5 task-71：中文/繁体界面优先用索引里的中文成分名（e.xz）；
+  // 英文 INN 作为 name key 时 xz 可能缺失，由服务端从 substance.inn_zh 回填。
+  const zhNames = (e && Array.isArray(e.xz)) ? e.xz.filter(function(z){
+    return z && String(z).trim();
+  }) : [];
+  if((window.LANG === 'zh' || window.LANG === 'zh-Hant') && zhNames.length){
     const parts = String(x).split(' + ');
-    if(e.xz.length === parts.length){
+    if(zhNames.length === parts.length){
       return parts.map(function(p, i){
-        return (e.xz[i] && String(e.xz[i]).trim()) ? e.xz[i] : p;
+        return (zhNames[i] && String(zhNames[i]).trim()) ? zhNames[i] : p;
       }).join(' + ');
     }
+    return zhNames.join(' + ');
   }
   return x;
 }
@@ -4393,8 +5026,13 @@ function ingredientHTML(e, cls){
   const label = ingredientLabel(e);
   const orig = (e && (e.x || e.d)) || '';
   const cjk = /[\u3400-\u9fff]/.test(orig);
+  const hasZh = !!(e && Array.isArray(e.xz)
+    && e.xz.some(function(z){ return z && String(z).trim(); }));
   let badge = '';
-  if(cjk && (window.LANG === 'en' || window.LANG === 'es')){
+  if(hasZh && (window.LANG === 'zh' || window.LANG === 'zh-Hant')){
+    // v0.11.5 task-71：有中文成分名就绝不判「无中文名」。
+    badge = '';
+  }else if(cjk && (window.LANG === 'en' || window.LANG === 'es')){
     badge = ` <span class="st-badge st-unknown nolang-badge">${esc(T(window.LANG === 'en' ? 'name.no_en' : 'name.no_es'))}</span>`;
   }else if(!cjk && (window.LANG === 'zh' || window.LANG === 'zh-Hant')){
     badge = ` <span class="st-badge st-unknown nolang-badge">${esc(T(window.LANG === 'zh' ? 'name.no_zh' : 'name.no_zh_hant'))}</span>`;
@@ -7368,7 +8006,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
                '"alternateName":"药品商品名跨国定位","url":"' + SITE_URL + '"}</script>')
     dataset_link = (f'<link rel="alternate" type="application/ld+json" '
                     f'href="{prefix}dataset.jsonld">')
-    head_scripts = (f'<script defer src="{prefix}assets/boot.js?v={BUILD_V}"></script>'
+    head_scripts = (f'<script defer src="{prefix}assets/boot.js?v={PAGE_V}"></script>'
                     if defer_i18n else "")
     boot_scripts = ""
     # 壳拆三段（head / 正文前 / 正文后）：slim 只重排首尾两段，body 原样插入，绝不被压缩。
@@ -7377,7 +8015,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}{noindex_meta}
 {favicon}{site_ld}
-<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">
+<link rel="stylesheet" href="{prefix}{CSS_FILE}?v={PAGE_V}">
 {head_scripts}
 <script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>"""
     # v0.9.8 task-13（UI 批次 A-2）：nav_coverage 就是「顶层页」标记 → 静态新壳；
@@ -7426,7 +8064,10 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 </body></html>"""
     if slim:
         head, top, bottom = _slim_shell(head, top, bottom)
-    return head + top + body + bottom
+    html = head + top + body + bottom
+    # v0.11.5 task-70：在**根页面**返回前做页级内容哈希（这里不能走下面的副本后处理，
+    # 否则根页相对链接会被错误加 ../）。副本沿用根页哈希，内容仍稳定。
+    return html.replace(PAGE_V, hashlib.sha256(html.encode("utf-8")).hexdigest()[:10])
 
 
 def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
@@ -7453,6 +8094,8 @@ def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
     # 根页相对链接 → ../ 前缀（绝对 URL / #锚点 / ?参数 不改）
     html = re.sub(r'(?P<attr>href|src)="(?P<url>(?![a-zA-Z]+:|#|/|\?)[^"]*)"',
                   lambda m: f'{m.group("attr")}="../{m.group("url")}"', html)
+    # v0.11.5 task-70：页面级内容哈希（不含版本号的渲染结果），内容不变 → 字节不变。
+    html = html.replace(PAGE_V, hashlib.sha256(html.encode("utf-8")).hexdigest()[:10])
     return html
 
 
@@ -7991,6 +8634,12 @@ def load_index(db: sqlite3.Connection):
                 ml.append([mname, info["slug"]])
         # v0.5.6：单成分条目才有盐型/警示上下文；复方条目 sl/rl/wi 留空
         sid1 = next(iter(a["sids"])) if len(a["sids"]) == 1 else ""
+        # v0.11.5 task-71：英文 INN 作为 name key 时 subs_zh 可能为空，
+        # 但该 substance 的 inn_zh 有中文名 → 回填，避免中文界面误标「无中文名」。
+        if sid1 and not any((z or "").strip() for z in (a["subs_zh"] or [])[:6]):
+            _zh0 = (sub_names.get(sid1) or ("", ""))[1]
+            if _zh0:
+                a["subs_zh"] = [_zh0]
         forms = forms_by_sub.get(sid1, []) if sid1 else []
         sl_hint = "/".join(forms[:3]) if len(forms) > 1 else ""
         rl_hint = ",".join(sorted(a.get("rels") or [])) if a.get("rels") else ""
@@ -8259,7 +8908,18 @@ def _label_unit_html(text: str) -> str:
 
 
 # v0.6.6：成分页多国矩阵（行=规格/剂型/释放；列=国家；服务端默认 en 顺序，客户端按界面语言重排）
-COUNTRY_PRIORITY = ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "EU")
+def _market_is_enabled(code: str) -> bool:
+    """注册表里该市场是否 enabled（v0.11.4：FR 站点侧已注册但默认关闭）。"""
+    try:
+        reg = json.loads((ROOT / "data" / "markets.json").read_text(encoding="utf-8"))
+        return any(m.get("code") == code and m.get("enabled")
+                   for m in reg.get("markets", []))
+    except (OSError, ValueError):
+        return False
+
+
+COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "EU")
+                    + (("FR",) if _market_is_enabled("FR") else ()))
 MATRIX_ROW_CAP = 120
 
 
@@ -8538,6 +9198,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # task-10：厂家占位键（厂家名只用于这一格显示，不进任何索引/名称表）
         MAH_PREFIX = "__mah__:"
         mah_count: dict[tuple[str, str], int] = {}
+        # v0.11.4 task-62：未公开规格段的计数（记录数 / 名字次数 / 厂家次数），
+        # 供折叠摘要「N 个记录 · K 个厂家」与 chip 的 ×N 使用（不再用「、」拼段落）。
+        und_meta: dict[str, dict] = {}
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
         spec_raws: dict[tuple, set[str]] = {}
         # task-16：清单视图要「每国记录数」与「每格状态」，一次遍历顺手收集
@@ -8568,6 +9231,13 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                 rec_by_country[country] = rec_by_country.get(country, 0) + 1
             status_cell.setdefault((spec, country), set()).add(status)
             traded = names.get(pid, [])
+            und = None
+            if not st.strip():
+                und = und_meta.setdefault(country, {"records": 0, "names": {}, "mah": {},
+                                                    "pids": set()})
+                if pid not in und["pids"]:
+                    und["pids"].add(pid)
+                    und["records"] += 1
             if not traded:
                 # v0.9.0 task-19：无 trade 名的产品也在矩阵里占位，不静默消失。
                 # v0.10.2 task-10：CN 这 126,716 条 100% 有上市许可持有人，
@@ -8580,8 +9250,12 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                     if key not in bucket:
                         bucket[key] = ("", "", "")
                     mah_count[(country, key)] = mah_count.get((country, key), 0) + 1
+                    if und is not None:
+                        und["mah"][key] = und["mah"].get(key, 0) + 1
                 else:
                     bucket.setdefault(NO_TRADE, ("", "", ""))
+                    if und is not None:
+                        und["names"][NO_TRADE] = und["names"].get(NO_TRADE, 0) + 1
             for key_id, raw in traded:
                 e = entry_by_k.get(key_id)
                 label = (e or {}).get("d") or raw
@@ -8589,6 +9263,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                     en = cn_latin.get(key_id, "") if country == "CN" else ""
                     bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en,
                                      (zh_sub or "") if country == "CN" else "")
+                if und is not None and label:
+                    und["names"][label] = und["names"].get(label, 0) + 1
         def _brand_bit(label, url, en, zh_sub, form, country=""):
             if label == NO_TRADE:
                 return (f'<span class="m-brand st-badge st-unknown brand-none" data-brand="0" '
@@ -8835,7 +9511,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # 其余页面不内嵌 —— 否则 12k 页每页多背一整张矩阵，与「单页 ≤ 现页 60%」冲突。
         list_html, multi_ratio = _drug_list_html(
             spec_rows, countries, rec_by_country, len(spec_rows),
-            _brand_bit, status_cell, T)
+            _brand_bit, status_cell, T, und_meta)
         table_block = ""
         compare_link = ""
         if tbody and multi_ratio >= 0.40:
@@ -8903,15 +9579,23 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # （acetaminophen 显示「24 个市场 · 1 条记录」，实际 10 个市场 / 12,645 产品）。
         n_markets = len({r[0] for r in rows})
         n_records = len({r[9] for r in rows})
+        # v0.11.4 task-63：数字加千分位（`12,645`），与页内块头 `{recs:,} records` 一致。
         identity = (f'<p class="sub drug-identity">ATC {esc(atc) or "—"} · '
-                    f'<b>{n_markets}</b> <span data-i18n="drug.markets">markets</span> · '
-                    f'<b>{n_records}</b> <span data-i18n="drug.records">records</span></p>')
+                    f'<b>{n_markets:,}</b> <span data-i18n="drug.markets">markets</span> · '
+                    f'<b>{n_records:,}</b> <span data-i18n="drug.records">records</span></p>')
+        # v0.11.4 task-63：成分名的中文名（inn_zh）只在中文/繁体界面显示，且只在数据里
+        # 真有中文名（含 CJK）时才输出 —— 不硬翻；英文/西语界面保持原来的纯英文 H1。
+        # 默认 hidden + inline display:none，由 i18n.js 的 applyInnZh() 按语言开关。
+        _inn_zh = (inn_zh or "").strip()
+        name_zh = (f'<span class="name-zh" data-inn-zh hidden style="display:none">'
+                   f'{esc(_inn_zh)}</span>'
+                   if any("\u4e00" <= ch <= "\u9fff" for ch in _inn_zh) else "")
         body = f"""<h1>{h1_inner}</h1>
-<p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span></p>
+<p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span>{name_zh}</p>
 {identity}
 <div class="drug-sticky" role="group">
   <span class="ds-name" title="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>
-  <span class="ds-meta">{n_markets} <span data-i18n="drug.markets">markets</span> · {n_records} <span data-i18n="drug.records">records</span></span>
+  <span class="ds-meta">{n_markets:,} <span data-i18n="drug.markets">markets</span> · {n_records:,} <span data-i18n="drug.records">records</span></span>
   <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>
 </div>
 <div id="list" class="listview">{list_html}</div>{compare_link}{table_block}
@@ -9274,7 +9958,7 @@ def _eu_region_note(cls: str = "mkregion") -> str:
 
 def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[str, int],
                     n_specs: int, name_bit, status_cell: dict[tuple, set[str]],
-                    T: dict) -> tuple[str, float]:
+                    T: dict, und_meta: dict | None = None) -> tuple[str, float]:
     """成分页主视图：按国家分组的产品清单（v0.10.3 task-16）。
 
     设计依据 `reports/matrix-form-decision-20261110.md`：≥2 国同规格行只占 9.27%，
@@ -9310,6 +9994,11 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
     for spec, by_c in spec_rows:
         k = _form_chip_key(spec[1])
         chip_counts[k] = chip_counts.get(k, 0) + 1
+    # v0.11.4 task-63（用户截图，简中界面）：chips 的标签原来写死英文（取 I18N["en"]），
+    # 简中/繁中/西语界面全是 `All dosage forms` / `liquid 107` …，而旁边的「剂型」按钮
+    # （服务端 data-i18n）却是中文。这里服务端仍输出英文（无 JS 兜底、体积 0 增量），
+    # 由 i18n.js 的 initListView() → labelChips() 按 data-form-filter 的剂型码取字典改写
+    # 标签文本节点（`.n` 计数不动），切换语言重跑 apply() 即时生效。
     chips = [f'<a class="formchip on" href="#list" data-form-filter="">'
              f'{esc(T.get("drug.forms_all", "All dosage forms"))}</a>']
     for k in sorted(chip_counts, key=lambda x: (-chip_counts[x], _FORM_RANK_OUTER(x), x)):
@@ -9375,27 +10064,93 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                        f'<span class="mkrowmeta">{also}{st_badge}</span></li>')
         rest_html = ""
         if tail_rows:
-            labels = "、".join(
-                (s0[0] or T.get("drug.nostrength", "not disclosed")) + (f" {s0[1]}" if s0[1] else "")
-                for s0, _b in tail_rows)
-            rest_html = (f'<p class="mkrest" data-n="{len(tail_rows)}"><span '
-                         f'data-i18n="drug.more_specs">Other strengths</span>: {esc(labels)}</p>')
+            # v0.11.4 task-62（用户：「这一坨」）：其余规格折叠成一行摘要
+            # 「其余规格 N 个 · 涉及 M 种剂型」，展开按剂型分组；组内 >12 个再折叠。
+            groups: dict[str, list] = {}
+            for s0, _b in tail_rows:
+                groups.setdefault((s0[1] or "").strip(), []).append(s0)
+
+            def _spec_chip(s0) -> str:
+                txt = esc(s0[0] or T.get("drug.nostrength", "not disclosed"))
+                rel = s0[2] if len(s0) > 2 else ""
+                if rel not in ("", "none", None):
+                    txt += ' · ' + _label_html("release", rel, rel)
+                return f'<span class="ms-spec">{txt}</span>'
+
+            ghtml: list[str] = []
+            for form in sorted(groups, key=lambda f: (_FORM_RANK_OUTER(f), f)):
+                specs = groups[form]
+                head = (_form_display(form, "") if form
+                        else esc(T.get("matrix.none", "—")))
+                shown = specs[:10]
+                chips = "".join(_spec_chip(s0) for s0 in shown)
+                more = ""
+                if len(specs) > 10:
+                    more = (' <span class="ms-more">'
+                            + _lang_block_text("drug.ms_more", n=len(specs) - 10)
+                            + '</span>')
+                ghtml.append(
+                    f'<div class="ms-grp"><span class="ms-h">{head} · {len(specs)}</span>'
+                    f'<span class="ms-list">{chips}{more}</span></div>')
+            rest_html = (
+                f'<details class="more-specs"><summary><span class="ln">'
+                f'{_lang_block_text("drug.more_specs_n", n=len(tail_rows), m=len(groups))}'
+                f'</span></summary><div class="ms-body">' + "".join(ghtml)
+                + f'<p class="sub full-list"><a href="datapackage.json">'
+                + _lang_block_text("drug.full_list") + '</a></p></div></details>')
         undis_html = ""
         if undisclosed:
-            ubits = []
-            for spec, bucket in undisclosed:
-                names = sorted(bucket.keys(), key=lambda k: (k.startswith("__"), k.lower()))
-                tail = f' <span class="meta">+{len(names) - 3}</span>' if len(names) > 3 else ""
-                # 2026-11-13 task-42（用户截图）：这里原来直接 esc(k)，把内部桶键
-                # `__mah__:X` / `__no_trade__` 泄漏成字面量。现在用 _bucket_key_html 的
-                # 同一映射：__no_trade__ → 「无商品名」；__mah__:X → 「厂家：X」（28 字截断、title 全名）。
-                plain = "、".join(_bucket_key_html(k, T) for k in names[:8])
-                if len(names) > 8:
-                    plain += f" +{len(names) - 8}"
-                ubits.append('<span class="uname">' + plain + tail + '</span>')
-            undis_html = (f'<p class="mkundis"><b><span data-i18n="drug.undisclosed_block">'
-                          f'Records without a stated strength</span> · {len(undisclosed)}</b> '
-                          + " ".join(ubits) + '</p>')
+            # v0.11.4 task-62：未公开规格不再用「、」拼段落 —— 折叠摘要
+            # 「N 个记录 · K 个厂家」；展开分「有商品名（名字 ×N）」与「仅厂家（厂家：X ×N）」。
+            meta = (und_meta or {}).get(c) or {}
+            names: dict[str, int] = {}
+            mahs: dict[str, int] = {}
+            for _spec, bucket in undisclosed:
+                for k in bucket.keys():
+                    if k.startswith("__mah__:"):
+                        mahs[k] = int((meta.get("mah") or {}).get(k) or 1)
+                    else:
+                        names[k] = int((meta.get("names") or {}).get(k) or 1)
+            n_rec = int(meta.get("records") or (sum(names.values()) + sum(mahs.values())))
+            k_mah = len(mahs)
+
+            def _und_chips(d: dict[str, int]) -> str:
+                out = []
+                for k in sorted(d, key=lambda x: (x.startswith("__"), x.lower())):
+                    out.append(f'<span class="uname">{_bucket_key_html(k, T)} '
+                               f'<span class="x">×{d[k]}</span></span>')
+                return "".join(out)
+
+            # task-68（体积瘦身）：展开态只列前 8 个名字，其余用「还有 N 个（K 个厂家）」+
+            # 数据包链接；折叠摘要仍给全量计数，完整清单在 datapackage.json 可取。
+            body: list[str] = []
+            named_keys = sorted(names, key=lambda x: (x.startswith("__"), x.lower()))
+            mah_keys = sorted(mahs, key=lambda x: x.lower())
+            shown_keys = named_keys[:8] or mah_keys[:8]
+            shown_map = ({k: names[k] for k in shown_keys} if named_keys
+                         else {k: mahs[k] for k in shown_keys})
+            if shown_map:
+                head_key = "drug.brand_group" if named_keys else "drug.mah_group"
+                body.append(
+                    '<div class="und-grp"><span class="und-h">'
+                    + _lang_block_text(head_key)
+                    + '</span><span class="und-chips">' + _und_chips(shown_map)
+                    + '</span></div>')
+            if named_keys:
+                remaining = (len(named_keys) - len(shown_keys)) + len(mah_keys)
+            else:
+                remaining = len(mah_keys) - len(shown_keys)
+            if remaining > 0:
+                body.append('<p class="und-more">'
+                            + _lang_block_text("drug.und_more", n=remaining,
+                                               k=len(mah_keys))
+                            + '</p>')
+            body.append('<p class="sub full-list"><a href="datapackage.json">'
+                        + _lang_block_text("drug.full_list") + '</a></p>')
+            undis_html = (
+                f'<details class="undis"><summary><span class="ln">'
+                f'{_lang_block_text("drug.undisclosed_n", n=n_rec, k=k_mah)}'
+                f'</span></summary><div class="und-body">' + "".join(body) + '</div></details>')
         # v0.11.0 P1：EU 块头给一句口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装），
         # 否则用户只看到「EU」两个字（reports/v0110-verify-20261111.md §3.3）。
         region_html = _eu_region_note("mkregion") if c == "EU" else ""
@@ -9892,7 +10647,7 @@ def _app_boot(prefix: str) -> str:
     """v0.9.1 task-22：首屏先渲染，load 后再注入 app.js，降低 LCP render delay。"""
     return ('<script>window.addEventListener("load",function(){'
             'var s=document.createElement("script");'
-            's.src="' + prefix + 'assets/app.js?v=' + BUILD_V + '";'
+            's.src="' + prefix + 'assets/app.js";'
             'document.body.appendChild(s);});</script>')
 
 
@@ -9935,22 +10690,23 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
       assets/i18n.<lang>.js（≈14 KB gz，原先补四语全量 59 KB gz），拉不到再回落全量；
     - app.js / bilingual.js 在 load 后注入，保证搜索可用但不挡首屏。
     """
-    css_link = f'<link rel="stylesheet" href="{prefix}assets/style.css?v={BUILD_V}">'
     css_inline = re.sub(r"/\*.*?\*/", "", CSS, flags=re.S)
     css_inline = re.sub(r"\s*([{};])\s*", r"\1", css_inline)
     css_inline = re.sub(r"\s+", " ", css_inline).strip()
-    html = html.replace(css_link, f"<style>{css_inline}</style>")
-    for pat in (
-            rf'<script defer src="{re.escape(prefix)}assets/i18n\.js\?v={re.escape(BUILD_V)}"></script>',
-            rf'<script defer src="{re.escape(prefix)}assets/bilingual\.js\?v={re.escape(BUILD_V)}"></script>',
-            rf'<script defer src="{re.escape(prefix)}assets/app\.js\?v={re.escape(BUILD_V)}"></script>',
-    ):
-        html = re.sub(pat, "", html)
+    html = re.sub(
+        rf'<link rel="stylesheet" href="{re.escape(prefix + CSS_FILE)}\?v=[^"]+">',
+        f"<style>{css_inline}</style>", html, count=1)
+    for _name in ("i18n.js", "bilingual.js", "app.js"):
+        html = re.sub(
+            rf'<script defer src="{re.escape(prefix)}assets/{re.escape(_name)}(?:\?v=[^"]+)?"></script>',
+            "", html)
     i18n_path = OUT / "assets" / "i18n.js"
     i18n_js = (i18n_path.read_text(encoding="utf-8") if i18n_path.exists() else "")
     i18n_js = i18n_js.replace(
         "window.addEventListener('load', apply);",
         "apply(); window.addEventListener('load', apply);")
+    # task-70：内联字典不能带全局构建号，否则每次构建首页都变。
+    i18n_js = i18n_js.replace(BUILD_V, "")
     # v0.10.1：i18n.js = "window.I18N=<四语字典>;\n<逻辑>"，只把字典换成当前语言子集，
     # 后面的 T()/apply()/语言链接逻辑原样保留，行为不变。
     m = re.match(r"window\.I18N=(\{.*?\});\n", i18n_js, re.S)
@@ -9975,9 +10731,9 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
         + "</script>"
         + f"<script>window.__I18N_PARTIAL={lang!r};{i18n_js}</script>"
         + "<script>window.addEventListener('load',function(){"
-        + f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
+        + f"var s=document.createElement('script');s.src='{prefix}assets/app.js';"
         + "document.body.appendChild(s);"
-        + f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js?v={BUILD_V}';"
+        + f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js';"
         + "document.body.appendChild(b);});</script>")
     return html.replace("</body>", boot + "</body>")
 
@@ -10039,7 +10795,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="EU" data-i18n="home.eu">European Union (EU)</option></select>
+    <option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   <label class="sel-label src-label" for="src" data-i18n="res.src_label">Source market (only records from):</label>
   <select id="src"><option value="" data-i18n="res.src_all">All source markets</option>
     <option value="US" data-i18n="home.us">United States</option>
@@ -10052,7 +10808,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="EU" data-i18n="home.eu">European Union (EU)</option></select>
+    <option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   </div>
 </div>
 <p class="sub report-line" id="report" style="display:none">
@@ -10085,7 +10841,7 @@ def build_index_page(entries, stats, coverage) -> None:
 <p class="sub" id="loadhint" data-i18n="home.hint_idle">First search loads one index shard (median ~1.0 MB, ~0.16 MB gzip); the full index (core ~42 MB raw, ~9–10 MB gzip) fills in the background — start typing, focus the search box, or pick a sample.</p>
 <div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
 does not exist. Coverage:</span> {covline}.</div>
-<script defer src="{{prefix}}assets/app.js?v={BUILD_V}"></script>"""
+<script defer src="{{prefix}}assets/app.js"></script>"""
     for code, _label, path in LANGS:
         prefix = "../" if path else ""
         ex = HOME_EXAMPLES.get(code) or HOME_EXAMPLES["en"]
@@ -10166,7 +10922,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
     parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
     for key in ("about.lead", "about.rules", "about.nick", "about.terms",
                 "about.sources", "about.tw_source", "about.sg_source", "about.hk_source",
-                "about.au_source", "about.eu_source"):
+                "about.au_source", "about.eu_source", "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append('<details class="lic-wrap"><summary data-i18n="about.licences_summary">'
                  'Data sources and licences</summary>' + LICENCE_HTML + '</details>')
@@ -11463,6 +12219,17 @@ function show(){
   });
 }
 el.addEventListener('toggle', function(){ if(el.open) show(); });
+// v0.11.4 task-63：同一页内切界面语言（i18n.js 的 apply()）后重绘已展开的明细表，
+// 否则表头与剂型列还停在上一种语言（数据已缓存在 cache，不会重复 fetch）。
+if(window.__DSH_APPLY_HOOKS){
+  window.__DSH_APPLY_HOOKS.push(function(){
+    if(el.open && cache){ cache.then(function(d){
+      var all = (d && d.rows) || [], rows = [];
+      for(var i = 0; i < all.length; i++){ if(all[i][0] === code) rows.push(all[i]); }
+      if(rows.length) render(rows);
+    }).catch(function(){}); }
+  });
+}
 })();
 """
 
@@ -11573,7 +12340,7 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
             # task-145b：折叠区的懒加载脚本只挂在 L4 页（约 57 B/页）。
             head_js = f'<script type="application/ld+json">{atc_ld}</script>'
             if atc4_html:
-                head_js += f'<script defer src="../assets/atc4.js?v={BUILD_V}"></script>'
+                head_js += '<script defer src="../assets/atc4.js"></script>'
             (OUT / "atc" / f"{code}.html").write_text(
                 page(f"ATC {code}", body, "../", canonical_rel=f"atc/{code}.html",
                      head_js=head_js),
@@ -11964,7 +12731,7 @@ def build_404() -> None:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>{esc(t["notfound.title"])} · {esc(t["site.name"])}</title>
-<link rel="stylesheet" href="{SITE_URL}assets/style.css?v={BUILD_V}">
+<link rel="stylesheet" href="{SITE_URL}{CSS_FILE}">
 </head><body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header class="hdr-shell"><div class="wrap">
@@ -11983,7 +12750,7 @@ def build_404() -> None:
 </div></main>
 <footer><div class="wrap"><span data-i18n="footer">{esc(t["footer"])}</span></div></footer>
 {tab}
-<script src="{SITE_URL}assets/i18n.js?v={BUILD_V}"></script>
+<script src="{SITE_URL}assets/i18n.js"></script>
 </body></html>"""
     (OUT / "404.html").write_text(html, encoding="utf-8")
 
@@ -12446,6 +13213,8 @@ def main() -> None:
         shutil.rmtree(OUT)
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     (OUT / "data").mkdir(parents=True, exist_ok=True)
+    (OUT / "assets" / CSS_FILE.split("/")[-1]).write_text(CSS, encoding="utf-8")
+    # 兼容旧缓存/旧引用：稳定名保留（内容可变）；新页面只引用上面的哈希文件。
     (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
     # v0.9.8 task-13：长尾页（121k）用 boot.js 注入与顶层页同一份壳；顶层页已有
     # [data-shell] 直接跳过（幂等）。模板里 __R__ 是站点根前缀占位。
@@ -12531,7 +13300,9 @@ def main() -> None:
                                                               separators=(",", ":")) + ";\n")
         else:
             # v0.10.1：紧凑分隔符（非首页的每页都会加载这份外部 i18n.js，省 ~4 KB）
-            head = ("window.I18N=" + json.dumps(I18N, ensure_ascii=False,
+            # v0.11.4：只导出启用的四语（fr 关闭时不得因 I18N["fr"] 存在而膨胀全量包）。
+            enabled = {c: I18N[c] for c in I18N_REQUIRED_LANGS if c in I18N}
+            head = ("window.I18N=" + json.dumps(enabled, ensure_ascii=False,
                                                 separators=(",", ":")) + ";\n")
         return (head + LANG_META_JS + "\n" + LANG_PICK_JS + "\n" + r"""
 (function(){
@@ -12648,6 +13419,17 @@ def main() -> None:
       host.parentNode.insertBefore(s, host.nextSibling);
     });
   }
+  // v0.11.4 task-63：成分名的中文名（inn_zh）只在中文/繁体界面显示。
+  // 服务端只在「该成分真有中文名」时才渲染 [data-inn-zh]（不硬翻），这里按界面语言开关。
+  // 用 inline style 而不是只靠 [hidden] —— 作者样例会打败 [hidden]（v0.11.2 踩过这个坑）。
+  function applyInnZh(){
+    var L = window.LANG || 'en';
+    var on = (L === 'zh' || L === 'zh-Hant');
+    document.querySelectorAll('[data-inn-zh]').forEach(function(el){
+      el.style.display = on ? 'inline' : 'none';
+      el.hidden = !on;
+    });
+  }
   function apply(){
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
@@ -12728,6 +13510,8 @@ def main() -> None:
     if(window.renderBilingualNames) window.renderBilingualNames();
     // v0.9.4：name_lang 无译名角标（不翻译；H1 角标放来源行）
     applyNameLangBadges();
+    // v0.11.4 task-63：中文/繁体界面补显示成分中文名（inn_zh），其余语言隐藏
+    applyInnZh();
     // v0.10.2：ATC/大类页收口——每行最多一枚标签，且不进链接文本
     markAtcRowGaps();
     // v0.10.3 task-16：成分页清单视图（?view=table 切矩阵、剂型 chips 过滤、语言市场置顶）
@@ -12789,6 +13573,30 @@ def main() -> None:
         }
       });
     }
+    // v0.11.4 task-63（用户截图）：剂型 chips 的标签原来是服务端写死的英文
+    // （`All dosage forms` / `liquid 107` …），简中/繁中/西语界面也跟着显示英文，
+    // 而旁边的「剂型」按钮却是中文。这里按 data-form-filter 的剂型码取字典值，
+    // 只改**标签文本节点**（`.n` 里的计数不动）：静态 HTML 保持英文（无 JS 兜底、
+    // 体积 0 增量），切换语言时 apply() 会重跑 initListView() → 即时换成当前语言。
+    function labelChips(){
+      if(!window.T) return;
+      var nav = document.getElementById('forms');
+      if(nav) nav.setAttribute('aria-label', window.T('drug.forms_label'));
+      chips.forEach(function(chip){
+        var k = chip.getAttribute('data-form-filter') || '';
+        var key = k ? (k === 'other' ? 'atc4.form_other' : 'form.' + k) : 'drug.forms_all';
+        var v = window.T(key);
+        if(!v || v === key) return;          // 字典缺这个键 → 保留服务端英文，不渲染 key 字面量
+        for(var i = 0; i < chip.childNodes.length; i++){
+          var nd = chip.childNodes[i];
+          if(nd.nodeType === 3 && (nd.nodeValue || '').trim()){
+            nd.nodeValue = v + ' ';
+            break;
+          }
+        }
+      });
+    }
+    labelChips();
     chips.forEach(function(chip){
       chip.addEventListener('click', function(ev){
         var want = chip.getAttribute('data-form-filter') || '';
@@ -12799,8 +13607,10 @@ def main() -> None:
         if(anchor && anchor.scrollIntoView) anchor.scrollIntoView({block: 'start'});
       });
     });
-    // 切语言会重跑 apply()（重写 data-i18n 文本），计数按当前筛选状态重算一次
+    // 切语言会重跑 apply()（重写 data-i18n 文本 + 按当前语言重写 chips 标签），
+    // 计数按当前筛选状态重算一次
     (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(function(){
+      labelChips();
       if(!document.querySelector('.mkrow')) return;
       var on = document.querySelector('[data-form-filter].on');
       var want = on ? (on.getAttribute('data-form-filter') || '') : '';

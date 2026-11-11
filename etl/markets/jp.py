@@ -50,6 +50,7 @@ CLI：
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import io
 import json
@@ -464,23 +465,153 @@ DIGRAPH = {"キャ": "kya", "キュ": "kyu", "キョ": "kyo", "シャ": "sha", "
            "フォ": "fo", "ティ": "ti", "ディ": "di", "デュ": "du", "トゥ": "tu", "ドゥ": "du",
            "チェ": "che", "シェ": "she", "ジェ": "je", "ツィ": "ti", "ウィ": "ui", "ウェ": "ue",
            "ウォ": "uo"}
-SALT_JP = ["塩酸塩", "硫酸塩", "硝酸塩", "リン酸塩", "酢酸塩", "コハク酸塩", "フマル酸塩",
-           "酒石酸塩", "クエン酸塩", "マレイン酸塩", "メシル酸塩", "ベシル酸塩", "トシル酸塩",
-           "水和物", "無水物", "ナトリウム", "カリウム", "カルシウム", "マグネシウム",
-           "アンモニウム", "塩化物", "臭化物", "ヨウ化物", "エステル"]
-JP_ACID = {"酸": "acid", "尿素": "urea", "糖": "sugar"}
+# 盐型词表：日文盐名 → 英文盐名。**分前缀与后缀**，因为日语既写「塩酸アムロジピン」也写
+# 「ドネペジル塩酸塩」。用来（a）剥掉盐名取母体做音韵匹配、（b）给候选做「盐型一致性」校验。
+# 注意：**不要**再做单字 `酸 → acid` 的全局替换——那会把「グルコン酸」「アミノ酸」「炭酸ランタン」
+# 全毁掉（旧版 53.3% 里 2,227 个 token 就是这么丢的）。
+JP_SALT_SUFFIX = {
+    "塩酸塩": "hydrochloride", "硫酸塩": "sulfate", "硝酸塩": "nitrate", "リン酸塩": "phosphate",
+    "酢酸塩": "acetate", "コハク酸塩": "succinate", "フマル酸塩": "fumarate", "酒石酸塩": "tartrate",
+    "クエン酸塩": "citrate", "マレイン酸塩": "maleate", "メシル酸塩": "mesylate",
+    "ベシル酸塩": "besylate", "トシル酸塩": "tosylate", "グルコン酸塩": "gluconate",
+    "シュウ酸塩": "oxalate", "乳酸塩": "lactate", "炭酸塩": "carbonate",
+    "塩化物": "chloride", "臭化物": "bromide", "ヨウ化物": "iodide",
+    "水和物": "", "無水物": "", "エステル": "",
+    "ナトリウム": "sodium", "カリウム": "potassium", "カルシウム": "calcium",
+    "マグネシウム": "magnesium", "アンモニウム": "ammonium",
+}
+JP_SALT_PREFIX = {
+    "塩酸": "hydrochloride", "硫酸": "sulfate", "硝酸": "nitrate", "リン酸": "phosphate",
+    "酢酸": "acetate", "乳酸": "lactate", "炭酸": "carbonate", "クエン酸": "citrate",
+    "コハク酸": "succinate", "フマル酸": "fumarate", "マレイン酸": "maleate",
+    "メシル酸": "mesylate", "ベシル酸": "besylate", "トシル酸": "tosylate",
+    "グルコン酸": "gluconate", "シュウ酸": "oxalate", "酒石酸": "tartrate",
+}
+_JP_SALT_ORDER = sorted(list(JP_SALT_SUFFIX) + list(JP_SALT_PREFIX), key=len, reverse=True)
+
+# 整串短语词典：这些「盐」的英文不是简单前后缀，必须整串映射（否则会被剥成「水素」「酸化」）。
+JP_SALT_PHRASE = {
+    "炭酸水素ナトリウム": "sodium bicarbonate",
+    "炭酸水素カリウム": "potassium bicarbonate",
+    "酸化マグネシウム": "magnesium oxide",
+    "水酸化マグネシウム": "magnesium hydroxide",
+    "水酸化アルミニウム": "aluminium hydroxide",
+    "水酸化ナトリウム": "sodium hydroxide",
+    "塩化ナトリウム": "sodium chloride",
+    "塩化カリウム": "potassium chloride",
+    "塩化カルシウム": "calcium chloride",
+    "炭酸カルシウム": "calcium carbonate",
+    "炭酸リチウム": "lithium carbonate",
+    "リン酸水素ナトリウム": "sodium phosphate",
+    "リン酸二水素ナトリウム": "sodium dihydrogen phosphate",
+    "クエン酸ナトリウム": "sodium citrate",
+    "酢酸ナトリウム": "sodium acetate",
+}
+
+# 类目/生物制剂/汉方方剂/生药：来源里 `成分名` 写的是**类别**而不是某一个 INN，无法落到 substance。
+# 这些 token 不计入映射率分母（单独计数并写进报告），避免用「硬配一个」把数字做上去。
+JP_NON_SUBSTANCE = {
+    "腹膜透析液", "人工透析液", "血液透析液", "透析液", "維持液", "補液", "輸液",
+    "電解質", "電解質輸液", "糖", "糖質", "ビタミン", "総合ビタミン", "アミノ酸輸液",
+    "親水クリーム", "複方ヨード", "耐性乳酸菌", "酪酸菌", "肝不全用アミノ酸製剤",
+    "術後回復液", "脱水補給液", "ヒト下垂体性性腺刺激ホルモン",
+    "オウギ", "オウゴン", "リュウコツ", "ブシ末", "ブシ", "オウバク", "オウレン",
+    "サフラン", "ショウキョウ", "バクモンドウ", "レンギョウ", "ケイガイ", "コウカ",
+    "サンショウ", "シンイ", "チンピ", "ハッカ", "マオウ", "モッコウ", "ダイオウ末",
+    "チクジョ", "ブクリョウ", "タクシャ", "コウボク", "サンシシ", "トウキ", "ケイヒ末",
+    "乾燥濃縮人血液凝固第VIII因子", "乾燥濃縮人血液凝固第IX因子",
+}
+JP_NON_SUBSTANCE_RE = re.compile(
+    r"(?:エキス$)"
+    r"|(?:^[\u4e00-\u9fff]{2,}(?:湯|散|丸)$)"
+    r"|(?:^(?:人|ヒト)(?:血小板|赤血球|血漿|アルブミン|免疫グロブリン))"
+    r"|(?:(?:維持液|開始液|補液|輸液|リンゲル|成分栄養剤|配合剤)$)"
+)
+
+
+def is_non_substance(text: str) -> bool:
+    """类目词判定（不是单一 INN）。仅为把「本来就不是成分名」的行从映射率里摘出去。"""
+    s = nfkc(text)
+    return s in JP_NON_SUBSTANCE or bool(JP_NON_SUBSTANCE_RE.search(s))
+
+
+def split_jp_salt(text: str) -> tuple[str, tuple[str, ...]]:
+    """日文成分名 → (母体, 英文盐名元组)。
+
+    `ドネペジル塩酸塩` → (`ドネペジル`, (`hydrochloride`,))；
+    `ヘパリンナトリウム` → (`ヘパリン`, (`sodium`,))。
+
+    两条实现要点（都是踩过的坑）：
+    1. **反复迭代到稳定**：`ロキソプロフェンナトリウム水和物` 去掉「水和物」后才露出「ナトリウム」；
+    2. **过度剥离保护**：`炭酸水素ナトリウム` 若把「炭酸」当盐前缀剥掉，只剩「水素」
+       → 母体短于 2 字或变成纯汉字时回退为不剥离（交给 `JP_SALT_PHRASE` / 词典）。
+    """
+    s = nfkc(text)
+    salts: list[str] = []
+    changed = True
+    while changed:
+        changed = False
+        for word in _JP_SALT_ORDER:
+            if not word:
+                continue
+            if s.startswith(word) and len(s) > len(word):
+                s = s[len(word):]
+                en = JP_SALT_PREFIX.get(word) or JP_SALT_SUFFIX.get(word) or ""
+                if en:
+                    salts.append(en)
+                changed = True
+                break
+            if s.endswith(word) and len(s) > len(word):
+                s = s[:-len(word)]
+                en = JP_SALT_PREFIX.get(word) or JP_SALT_SUFFIX.get(word) or ""
+                if en:
+                    salts.append(en)
+                changed = True
+                break
+    core = s.strip(" ・,、")
+    if len(core) < 2 or (not re.search(r"[\u30a1-\u30fa\u30fc]", core)
+                         and re.search(r"[\u4e00-\u9fff]", core)):
+        return nfkc(text).strip(), tuple(dict.fromkeys(salts))
+    return core, tuple(dict.fromkeys(salts))
 
 
 def kata_to_romaji(text: str) -> str:
+    """片假名 → 罗马字（ヘボン式近似）：处理促音 `ッ`、长音 `ー`、拨音 `ン`。
+
+    - 促音 `ッ`：双写下个辅音；
+    - 长音 `ー`：重复前一个元音（`イソプロパノール` → `isopuropanooru`）；
+    - 拨音 `ン` 后接 b/p/m：写作 `m`（更接近英文 povidone-iodine 的读音）。
+    片假名以外的字符（汉字/ASCII）原样保留，由调用方决定后续处理。
+    """
     out: list[str] = []
     i = 0
     while i < len(text):
+        ch = text[i]
+        if ch == "ッ":
+            rom = DIGRAPH.get(text[i + 1:i + 3]) or KANA.get(text[i + 1:i + 2], "")
+            if rom:
+                out.append(rom[0])
+            i += 1
+            continue
+        if ch == "ー":
+            if out:
+                prev = out[-1]
+                m = re.search(r"([aeiou])([^aeiou]*)$", prev)
+                out[-1] = (prev[:m.end(1)] + m.group(1) + prev[m.end(1):]) if m else (prev + prev[-1])
+            i += 1
+            continue
+        if ch == "ン":
+            nxt = text[i + 1:i + 2]
+            out.append("m" if nxt in {"バ", "ビ", "ブ", "ベ", "ボ", "パ", "ピ", "プ", "ペ", "ポ",
+                                      "マ", "ミ", "ム", "メ", "モ"} else "n")
+            i += 1
+            continue
         two = text[i:i + 2]
         if two in DIGRAPH:
             out.append(DIGRAPH[two])
             i += 2
             continue
-        out.append(KANA.get(text[i], text[i]))
+        out.append(KANA.get(ch, ch))
         i += 1
     return "".join(out)
 
@@ -521,16 +652,78 @@ JP_KANJI_INGREDIENTS = {
     "ブドウ糖": "glucose", "葡萄糖": "glucose", "生理食塩液": "sodium chloride",
     "食塩": "sodium chloride", "塩化ナトリウム": "sodium chloride",
     "精製水": "water for injection", "注射用水": "water for injection",
+    "アミノ酸": "amino acids", "電解質": "electrolytes", "輸液": "infusion",
 }
+
+# 人工复核过的覆盖表（CSV）：命中即用，优先级最高。
+CSV_MAP = ROOT / "data" / "sources" / "jp_inn_map.csv"
+
+# 宽松层（等价骨架 / 模糊）的最低拼写相似度：低于这个比例一律不认，交给人工。
+MIN_SPELLING_RATIO = 0.35
+MIN_SPELLING_RATIO_FUZZY = 0.40
+
+
+def strip_jp_annotations(text: str) -> str:
+    """去掉括注与空白：`ダルベポエチンアルファ(遺伝子組換え)[…後続1]` → `ダルベポエチンアルファ`。
+
+    括注不参与 INN 匹配，但**必须保留在原文里**（写库时进 `product_name` 的 raw，不丢信息）。
+    """
+    s = nfkc(text)
+    s = re.sub(r"[\(（\[［【].*?[\)）\]］】]", "", s)
+    return re.sub(r"\s+", "", s).strip(" ・,、")
+
+
+def strip_jp_adjectives(text: str) -> str:
+    """剥离「精製/乾燥/合成/天然/濃縮/抽出」等修饰词（不是盐名，但同样不参与 INN 匹配）。"""
+    s = nfkc(text)
+    for word in ("精製", "乾燥", "合成", "天然", "濃縮", "抽出", "結晶", "粉末", "凍結",
+                 "遺伝子組換え", "組換え", "ヒト", "ウシ", "ブタ"):
+        if s.startswith(word) and len(s) > len(word):
+            s = s[len(word):]
+    return s.strip(" ・,、")
+
+
+def _spelling_ratio(a: str, b: str) -> float:
+    """罗马字 ↔ INN 的字符相似度（仅字母，忽略大小写与连字符）。"""
+    import difflib
+    x = re.sub(r"[^a-z]", "", (a or "").lower())
+    y = re.sub(r"[^a-z]", "", (b or "").lower())
+    if not x or not y:
+        return 0.0
+    return difflib.SequenceMatcher(None, x, y).ratio()
+
+
+def _head_match(a_skel: str, b_skel: str, n: int = 2) -> bool:
+    """首 n 个辅音必须一致。
+
+    日文转写与英文 INN 的**词头**通常同音；而「后缀家族」（…tinib / …zole / …rizinol）恰恰是
+    误配高发区：`タスルグラチニブ → Tolebrutinib`、`ガンマオリザノール → Bemotrizinol`、
+    `サッカリンナトリウム → Sarecycline` 都是尾部像、头部不像。加这条后这些全被挡掉，
+    而 `クラリスロマイシン → Clarithromycin`（krr=krr）这类正确匹配不受影响。
+    """
+    return a_skel[:n] == b_skel[:n]
+
+
+def _edit_distance(a: str, b: str, cap: int = 2) -> int:
+    """带早停的编辑距离（超过 cap 直接返回 cap+1）。"""
+    if abs(len(a) - len(b)) > cap:
+        return cap + 1
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i] + [0] * len(b)
+        best = cur[0]
+        for j, cb in enumerate(b, 1):
+            cur[j] = min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb))
+            best = min(best, cur[j])
+        if best > cap:
+            return cap + 1
+        prev = cur
+    return prev[-1]
 
 
 def strip_jp_salts(text: str) -> str:
-    s = nfkc(text)
-    for salt in SALT_JP:
-        s = s.replace(salt, "")
-    for jp, en in JP_ACID.items():
-        s = s.replace(jp, en)
-    return s.strip(" ・,、")
+    """只取母体（`split_jp_salt` 的薄封装，保留老调用点与 self-check）。"""
+    return split_jp_salt(text)[0]
 
 
 def split_ingredients(text: str) -> list[str]:
@@ -542,58 +735,183 @@ def split_ingredients(text: str) -> list[str]:
 
 
 class JpMapper:
-    """日文成分名 → substance_id：片假名→罗马字→音韵骨架，对库内 `inn_en` 唯一命中才接受。"""
+    """日文成分名 → substance_id。六级流水，**越往后越保守，拿不准一律不配**。
 
-    def __init__(self, db: sqlite3.Connection):
-        self.by_skel: dict[str, list[tuple[str, str]]] = {}
-        for sid, inn in db.execute("SELECT substance_id, inn_en FROM substance"):
+    1. `data/sources/jp_inn_map.csv`（人工复核覆盖表）→ `manual-international`
+    2. 日文汉字名 ↔ 库内 `inn_zh` 字形相同 → `jp-zh-exact`
+    3. 汉字/固有名词典 `JP_KANJI_INGREDIENTS` → `jp-kanji-dict`
+    4. 整串盐短语 `JP_SALT_PHRASE`（炭酸水素ナトリウム 之类）→ `jp-salt-phrase`
+    5. 精确骨架 → `katakana-skeleton*`；等价骨架 → `katakana-skeleton-equiv*`
+    6. 编辑距离 ≤2/≤3 → `katakana-fuzzy2`
+
+    多候选裁决（**任何一步只剩一个才接受**）：首辅音一致 → 盐型一致 → 全库唯一带 ATC →
+    基名是其余候选前缀 → 池内唯一。宽松层（5 的 equiv 与 6）额外要求**候选有 ATC 且
+    罗马字拼写相似度 ≥ MIN_SPELLING_RATIO**；实测不加这两条会出现
+    `ミゾリビン → Hemoglobin`、`ブナゾシン → Benzocaine` 这类误配。
+    """
+
+    def __init__(self, db: sqlite3.Connection, csv_path: Path = CSV_MAP):
+        self.manual: dict[str, tuple[str, str]] = {}
+        self.csv_rows: list[dict] = []
+        if csv_path.exists():
+            with csv_path.open(encoding="utf-8-sig", newline="") as fh:
+                for rec in csv.DictReader(fh):
+                    jp_name = nfkc((rec.get("jp_name") or "").strip())
+                    sid = (rec.get("substance_id") or "").strip()
+                    if not jp_name or not sid:
+                        continue
+                    method = (rec.get("method") or "manual-international").strip() or "manual-international"
+                    self.manual[jp_name] = (sid, method)
+                    self.csv_rows.append(rec)
+        self.by_skel: dict[str, list[tuple[str, str, str]]] = {}
+        self.by_zh: dict[str, tuple[str, str, str]] = {}
+        self.known_sids: set[str] = set()
+        for sid, inn, atc, zh in db.execute(
+                "SELECT substance_id, inn_en, atc, inn_zh FROM substance"):
+            self.known_sids.add(sid)
+            if zh and re.search(r"[\u4e00-\u9fff]", zh):
+                self.by_zh.setdefault(nfkc(zh).strip(), (sid, inn or "", (atc or "").strip()))
             if not re.search(r"[A-Za-z]", inn or ""):
                 continue          # 库里有一部分 inn_en 是中文（CN 市场主名），不能参与音韵匹配
             skel = phonetic_skeleton(inn)
             if len(skel) < 3:
                 continue
-            self.by_skel.setdefault(skel, []).append((sid, inn))
+            self.by_skel.setdefault(skel, []).append((sid, inn, (atc or "").strip()))
+        self._skel_keys = list(self.by_skel)
         self.memo: dict[str, tuple[str, str]] = {}
 
+    # ---- 裁决 ----------------------------------------------------------
     @staticmethod
-    def _pick(cands: list[tuple[str, str]]) -> tuple[str, str] | None:
-        """多候选时只在「有一个基名是其余候选的前缀」（Donepezil / Donepezil Hydrochloride）
-        这种安全情形下取基名；否则返回 None（不猜）。"""
-        if len(cands) == 1:
-            return cands[0]
-        bases = [c for c in cands
+    def _pick(cands: list[tuple[str, str, str]],
+              salts: tuple[str, ...] = (),
+              first: str = "") -> tuple[tuple[str, str, str], str] | None:
+        """多候选 → (候选, 依据)；拿不准返回 None（不猜）。"""
+        if not cands:
+            return None
+        pool = cands
+        if first:                                        # ⓪ 首辅音一致
+            hit = [c for c in pool if (phonetic_skeleton(c[1]) or " ")[0] == first]
+            if hit:
+                pool = hit
+        if salts:                                        # ① 盐型一致
+            hit = [c for c in pool
+                   if all(s in (c[1] or "").lower().split() or s in (c[1] or "").lower()
+                          for s in salts)]
+            if len(hit) == 1:
+                return hit[0], "salt"
+            if hit:
+                pool = hit
+        if len(pool) == 1:
+            return pool[0], "single"
+        with_atc = [c for c in pool if c[2]]              # ② 全库唯一带 ATC
+        if len(with_atc) == 1:
+            return with_atc[0], "atc"
+        if with_atc:
+            pool = with_atc
+        bases = [c for c in pool                         # ③ 基名是其余候选的前缀
                  if all(o[1].lower().startswith(c[1].lower() + " ") or o[1] == c[1]
-                        for o in cands)]
-        return bases[0] if len(bases) == 1 else None
+                        for o in pool)]
+        if len(bases) == 1:
+            return bases[0], "base-prefix"
+        return None
+
+    # ---- 查询 ----------------------------------------------------------
+    def _lookup_skel(self, skel: str, salts: tuple[str, ...], romaji: str = ""):
+        """先精确骨架，再等价写法；返回 (cand|None, method, 是否有候选但裁决失败)。
+
+        `romaji` 非空表示走的是**宽松层**（等价），要求候选有 ATC 且拼写相似度达标。
+        """
+        first = skel[:1]
+        strict = bool(romaji)      # 只有宽松层（等价骨架）才加严；精确骨架保持原判据
+        pool0 = self.by_skel.get(skel) or []
+        picked = self._pick(pool0, salts, first)
+        if picked:
+            return picked[0], ("skeleton" if picked[1] in {"single", "base-prefix"}
+                               else f"skeleton-{picked[1]}"), False
+        if self.by_skel.get(skel):
+            return None, "", True
+        for alt in _skeleton_variants(skel):
+            if alt == skel:
+                continue
+            pool = self.by_skel.get(alt) or []
+            if strict:
+                pool = [c for c in pool
+                        if c[2] and _spelling_ratio(romaji, c[1]) >= MIN_SPELLING_RATIO
+                        and _head_match(skel, phonetic_skeleton(c[1]))]
+            picked = self._pick(pool, salts, first)
+            if picked:
+                return picked[0], ("skeleton-equiv" if picked[1] in {"single", "base-prefix"}
+                                   else f"skeleton-equiv-{picked[1]}"), False
+            if pool:
+                return None, "", True
+        return None, "", False
+
+    def _fuzzy(self, skel: str, salts: tuple[str, ...], romaji: str = ""):
+        """编辑距离模糊：长骨架放宽到 3；只接受**唯一最小距离**且通过 ATC+拼写校验的候选。"""
+        cap = 3 if len(skel) >= 7 else 2
+        best = cap + 1
+        hits: list[tuple[str, str, str]] = []
+        for key in self._skel_keys:
+            d = _edit_distance(skel, key, cap)
+            if d > cap:
+                continue
+            if d < best:
+                best, hits = d, list(self.by_skel[key])
+            elif d == best:
+                hits.extend(self.by_skel[key])
+        if not hits:
+            return None
+        hits = [c for c in hits
+                if c[2] and _spelling_ratio(romaji, c[1]) >= MIN_SPELLING_RATIO_FUZZY
+                and _head_match(skel, phonetic_skeleton(c[1]))]
+        if not hits:
+            return None
+        picked = self._pick(hits, salts, skel[:1])
+        return picked[0] if picked else None
 
     def map(self, token: str) -> tuple[str, str]:
         """token → (substance_id, method)；未映射返回 ("", "unmapped")。"""
         if token in self.memo:
             return self.memo[token]
-        kanji = JP_KANJI_INGREDIENTS.get(nfkc(token))
-        if kanji:
-            picked = self._pick(self.by_skel.get(phonetic_skeleton(kanji)) or [])
-            if picked:
-                self.memo[token] = (picked[0], "jp-kanji-dict")
-                return self.memo[token]
-        core = strip_jp_salts(token)
-        result = ("", "unmapped")
-        if core:
-            skel = phonetic_skeleton(kata_to_romaji(core))
-            if skel:
-                picked = self._pick(self.by_skel.get(skel) or [])
-                if picked:
-                    result = (picked[0], "katakana-skeleton")
-                elif self.by_skel.get(skel):
-                    result = ("", "ambiguous")
-                else:
-                    for alt in _skeleton_variants(skel):
-                        picked = self._pick(self.by_skel.get(alt) or [])
-                        if picked:
-                            result = (picked[0], "katakana-skeleton-equiv")
-                            break
-                    else:
-                        result = ("", "unmapped")
+        key = strip_jp_annotations(token)
+        result: tuple[str, str] = ("", "unmapped")
+        if is_non_substance(key):                       # 类目/生药/汉方：不计入
+            self.memo[token] = ("", "non-substance")
+            return self.memo[token]
+        hit = self.manual.get(key) or self.manual.get(split_jp_salt(strip_jp_adjectives(key))[0])
+        if hit and hit[0] in self.known_sids:
+            result = hit
+        else:
+            zh = self.by_zh.get(key.strip())
+            if zh:
+                result = (zh[0], "jp-zh-exact")
+            if not result[0]:
+                kanji = JP_KANJI_INGREDIENTS.get(key)
+                if kanji:
+                    cand, _why, _amb = self._lookup_skel(phonetic_skeleton(kanji), ())
+                    if cand:
+                        result = (cand[0], "jp-kanji-dict")
+            if not result[0]:
+                phrase = JP_SALT_PHRASE.get(key)
+                if phrase:
+                    cand, _why, _amb = self._lookup_skel(phonetic_skeleton(phrase), ())
+                    if cand:
+                        result = (cand[0], "jp-salt-phrase")
+            if not result[0]:
+                core, salts = split_jp_salt(strip_jp_adjectives(key))
+                if core:
+                    romaji = kata_to_romaji(core)
+                    skel = phonetic_skeleton(romaji)
+                    if len(skel) >= 3:
+                        cand, method, ambiguous = self._lookup_skel(skel, salts, romaji)
+                        if cand:
+                            result = (cand[0], "katakana-" + method)
+                        elif ambiguous:
+                            result = ("", "ambiguous")
+                        else:
+                            fuzzy = self._fuzzy(skel, salts, romaji)
+                            if fuzzy:
+                                result = (fuzzy[0], "katakana-fuzzy2")
         self.memo[token] = result
         return result
 
@@ -611,6 +929,7 @@ def _collect(snap: dict, mapper: JpMapper, resolve) -> dict:
     forms_method: Counter = Counter()
     unmapped: Counter = Counter()
     unmapped_occ: Counter = Counter()
+    nonsub: Counter = Counter()
     units: Counter = Counter()
     pack_units: Counter = Counter()
     flags: Counter = Counter()
@@ -623,6 +942,7 @@ def _collect(snap: dict, mapper: JpMapper, resolve) -> dict:
     products_all_mapped = 0
     products_partial = 0
     products_none = 0
+    products_nonsub = 0
     components_no_variant = 0
     spec_numeric = 0
     spec_dimension = 0
@@ -672,13 +992,21 @@ def _collect(snap: dict, mapper: JpMapper, resolve) -> dict:
         mapped: list[tuple[str, str, str]] = []
         for token in tokens:
             sid, method = mapper.map(token)
+            if method == "non-substance":
+                # 类目词/生药/汉方方剂：来源里不是单一 INN → 不计入映射率分母，单独计数
+                st["ingredient_tokens_nonsub"] += 1
+                nonsub[token] += 1
+                continue
             st["ingredient_tokens"] += 1
             if sid:
                 st["ingredient_tokens_mapped"] += 1
             unmapped_occ[method] += 1
             mapped.append((token, sid, method))
         n_map = sum(1 for _t, sid, _m in mapped if sid)
-        if mapped and n_map == len(mapped):
+        if not mapped:
+            products_nonsub += 1
+            n_map = 0
+        elif n_map == len(mapped):
             products_all_mapped += 1
         elif mapped and n_map:
             products_partial += 1
@@ -747,12 +1075,14 @@ def _collect(snap: dict, mapper: JpMapper, resolve) -> dict:
     st["products_all_mapped"] = products_all_mapped
     st["products_partial_mapped"] = products_partial
     st["products_none_mapped"] = products_none
+    st["products_non_substance"] = products_nonsub
     st["status_discontinued_expiry"] = status_by_expiry
     st["unique_makers"] = len(makers)
     st["unique_ingredients"] = len({r["ingredient"] for r in snap["rows"]})
     return {
         "stats": st, "products": products, "forms": forms, "forms_method": forms_method,
         "routes": routes, "kubuns": kubuns, "unmapped": unmapped, "unmapped_method": unmapped_occ,
+        "nonsub": nonsub,
         "units": units, "pack_units": pack_units, "flags": flags, "makers": makers,
         "name_keys": name_keys, "name_pairs": name_pairs, "samples": samples,
     }
@@ -911,12 +1241,15 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "tokens": st["ingredient_tokens"],
             "tokens_mapped": st["ingredient_tokens_mapped"],
             "token_rate_pct": round(st["ingredient_tokens_mapped"] / n_tok * 100, 1),
+            "tokens_non_substance": st.get("ingredient_tokens_nonsub", 0),
+            "non_substance_top": result["nonsub"].most_common(10),
             "unique_unmapped": len(result["unmapped"]),
             "unmapped_top30": result["unmapped"].most_common(30),
             "method": result["unmapped_method"].most_common(8),
             "products_all_mapped": st["products_all_mapped"],
             "products_partial_mapped": st["products_partial_mapped"],
             "products_none_mapped": st["products_none_mapped"],
+            "products_non_substance": st.get("products_non_substance", 0),
             "bridge": "日文片假名成分名 → 罗马字 → 音韵辅音骨架 → 库内 inn_en 唯一命中；"
                       "盐名（塩酸塩/ナトリウム…）先剥离；多候选/未命中一律空着（不猜）",
         },
@@ -967,6 +1300,7 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
           f" · 分布 {result['forms'].most_common(6)}")
     print(f"  成分映射: {st['ingredient_tokens_mapped']:,}/{st['ingredient_tokens']:,} = "
           f"{summary['substance']['token_rate_pct']}% · 未映射写法 {len(result['unmapped']):,}"
+          f" · 非单一成分(不计入分母) {st.get('ingredient_tokens_nonsub', 0):,}"
           f" · top5 {[x[0] for x in result['unmapped'].most_common(5)]}")
     print(f"  状态: active {summary['status']['active']:,} · 过渡期(経過措置) "
           f"{summary['status']['discontinued_expiry']:,}")

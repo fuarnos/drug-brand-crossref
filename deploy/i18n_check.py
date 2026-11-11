@@ -144,6 +144,16 @@ HARDCODED_INFO_TEXTS: dict[str, str] = {
 HARDCODED_INFO_CONSTS: dict[str, str] = {
     "LICENCE_HTML": "许可原文按 EN / 中文 / ES 三语并列展示（设计如此，非缺陷）",
 }
+# 「只装译文」的字典名：除 `*_I18N` / `I18N` 之外还要认的。
+# v0.11.4 的 FR_PREP_KEYS 放的是法语文案（home.fr / coverage.gap.fr / about.fr_source），
+# 名字不带 _I18N，旧逻辑把它当模板里的硬编码，误报 3 条。
+HARDCODED_DICT_NAMES: set[str] = {"FR_PREP_KEYS"}
+
+
+def _is_i18n_dict_name(name: str) -> bool:
+    """这个名字的常量是不是一张 i18n 译文表（里面的字面量不该当硬编码文案）。"""
+    return name == "I18N" or name.endswith("_I18N") or name in HARDCODED_DICT_NAMES
+
 # 历史 release notes 缺口已知清单（补齐后请从本表移除；最新版永远不在此表）
 RELEASE_BACKLOG_OK: set[str] = set()
 
@@ -678,13 +688,25 @@ def check_hardcoded(tree: ast.Module, out: Findings) -> None:
                     and isinstance(body[0].value.value, str):
                 docstrings.add(id(body[0].value))
     for node in tree.body:
-        if not isinstance(node, ast.Assign):
-            continue
-        for target in node.targets:
-            if not isinstance(target, ast.Name):
-                continue
+        # 译文表既可能写成 `FR_I18N = {...}`，也可能带类型注解
+        # `FR_I18N: dict[str, str] = {...}`（v0.11.4 就是后者）。旧代码只认 ast.Assign，
+        # 于是整块法语译文被当成「模板里的硬编码文案」，误报 50 条。
+        if isinstance(node, ast.Assign):
+            targets = [t for t in node.targets if isinstance(t, ast.Name)]
+        elif isinstance(node, ast.AnnAssign):
+            targets = [node.target] if isinstance(node.target, ast.Name) else []
+        else:
+            targets = []
+            # `FR_I18N.update({...})` 同样是译文表的一部分（v0.11.4 用它追加 keys）
+            if isinstance(node, ast.Expr) and isinstance(node.value, ast.Call):
+                fn = node.value.func
+                if isinstance(fn, ast.Attribute) and fn.attr == "update" \
+                        and isinstance(fn.value, ast.Name) \
+                        and _is_i18n_dict_name(fn.value.id):
+                    dict_spans.append((node.lineno, node.end_lineno or node.lineno))
+        for target in targets:
             span = (node.lineno, node.end_lineno or node.lineno)
-            if target.id.endswith("_I18N") or target.id == "I18N":
+            if _is_i18n_dict_name(target.id):
                 dict_spans.append(span)
             text = _eval_text(node.value, ns)
             if not isinstance(text, str):

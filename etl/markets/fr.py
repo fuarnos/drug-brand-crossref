@@ -16,23 +16,26 @@
 许可证据原样存在 `data/raw/fr_bdpm_20261112/license/`（页面 HTML + 正文摘录 + 数据集 JSON +
 Licence Ouverte 原文），`fetch_meta.json` 记 URL / HTTP 头 / 字节 / sha256 / 数据更新日期。
 
-**为什么仍然没有 `--apply`**：用户 2026-11-12 的口径是「先获取数据，等 UI 改完再正式上线」。
-站点还没有 `fr` 市场与语言（`data/markets.json`、`data/languages.json`、`site/build.py` 均未接入），
-此时入库会让 `product.country` 的 CHECK 枚举、`coverage` 视图与建站测试处于过渡态红。
-所以本脚本只有 `--fetch`（抓快照）、`--dry-run`（读缓存 → 解析 → 统计，**只读**开库副本）、
-`--self-check`（离线断言）。写库三段式（`--apply` / `--rollback` / `--manifest`）等站点接入清单
-（`reports/2026-11-12-fr-bdpm-acquisition.md` §6）落地后另开任务补。
+**写库三段式（2026-11-13 task-54 补齐）**：`--apply`（事务写 `source` + product / component /
+product_name / name_key / name_variant / ingest_run，幂等：同 source 先删后写）、`--manifest`
+（撤销清单：本次新增行的全量快照 + 计数 + 库文件 sha256 before/after）、`--rollback`（按 manifest
+只删本次写入的行，保护既有数据）。`--allow-real` 护栏沿用 `etl/ingest_eu.py`：没有它时 `--apply` /
+`--rollback` 拒绝真库 `data/drugs.db`，只允许 `.tmp/` 副本。
+**今天（v0.11.3→FR 上线前）仍不写真实库**：DB 窗口排下一会话；真库写入前必须先做
+`product.country` CHECK 加 `FR` 的 schema 迁移（`db/schema.sql` + `db/init_db.py` 的幂等重建路径）。
 
 数据源（整库文件，`https://base-donnees-publique.medicaments.gouv.fr/download/file/<name>`）
 --------------------------------------------------------------------------------------------
-- `CIS_bdpm.txt`：15,799 行，23 列 = 一个 CIS（药品注册号）一行：商品名（dénomination）、
-  剂型、给药途径、授权状态、授权程序、上市状态、AMM 日期、MAH 等。
-- `CIS_COMPO_bdpm.txt`：32,449 行，9 列 = 成分/剂量行（`SA` 活性成分 + `FT` 治疗分组分），
-  剂量写成「dosage + référence de dosage」（如 `500 mg` + `pour 1 comprimé`）。
-- `CIS_CIP_bdpm.txt`：20,908 行，9 列 = 每个 CIS 的**包装**（CIP7/CIP13 + 包装描述 + 展示状态）。
-- `CIS_GENER_bdpm.txt`：仿制药组（CIS ↔ 参比制剂 CIS ↔ 组号 ↔ 类型）。
+- `CIS_bdpm.txt`：15,799 行，**12 列**（实测）= 一个 CIS（药品注册号）一行：商品名
+  （dénomination）、剂型、给药途径、授权状态、授权程序、上市状态、AMM 日期、供应预警、
+  **欧盟号**、MAH、加强监测。
+- `CIS_COMPO_bdpm.txt`：32,449 行，**8 列** = 剂型 + 成分代码 + 成分名 + dosage + référence
+  + nature（`SA` 活性成分 26,951 / `FT` 治疗分组分 5,498）+ 编号。
+- `CIS_CIP_bdpm.txt`：20,908 行，**13 列** = 每个 CIS 的**包装**（CIP7/CIP13 + 包装描述 +
+  展示状态 + 价格/报销列，价格列不入库）。
+- `CIS_GENER_bdpm.txt`：10,614 行，**5 列** = 仿制药组（组号 / 组标签 / CIS / 类型 / 组内序号）。
 
-三个文件都是 **TAB 分隔、无表头**，编码不统一：`CIS_bdpm.txt` / `CIS_COMPO_bdpm.txt` 是
+前三个文件不是同一编码：`CIS_bdpm.txt` / `CIS_COMPO_bdpm.txt` / `CIS_GENER_bdpm.txt` 是
 **cp1252（latin-1 超集）**，`CIS_CIP_bdpm.txt` 是 **UTF-8**（实测，见 `fetch_meta.json`
 每文件的 `encoding`）。所以字段一律按**列序**写死映射，不猜表头；每行校验列数。
 
@@ -51,10 +54,12 @@ CLI：
     python etl/markets/fr.py --fetch          # 抓快照 + 许可证据到 data/raw/fr_bdpm_20261112/
     python etl/markets/fr.py --prepare-copy   # 真库 → .tmp/fr-ingest/drugs_fr_copy.db（只拷一次）
     python etl/markets/fr.py --dry-run        # 默认：读缓存 → 解析 → 统计（只读开库副本）
-    python etl/markets/fr.py --self-check     # 离线断言：列数 / 编码 / 解析样例 / 无 --apply
+    python etl/markets/fr.py --self-check     # 离线断言 + manifest / 护栏 / 预测一致性
+    python etl/markets/fr.py --apply --allow-real --db <副本> --manifest <json>   # 写库（副本）
+    python etl/markets/fr.py --rollback --allow-real --db <副本> --manifest <json>
 
-产物：`.tmp/fr-ingest/fr_dry_run.json` + `fr_samples.json` + 控制台摘要。
-`data/raw/`、`.tmp/` 都不入 git；`data/drugs.db` 全程只读（`mode=ro`）。
+产物：`.tmp/fr-ingest/fr_dry_run.json` + `fr_samples.json` + `fr_manifest*.json` + 控制台摘要。
+`data/raw/`、`.tmp/` 都不入 git；真实库 `data/drugs.db` 只有在 `--apply --allow-real` 下才会写。
 """
 
 from __future__ import annotations
@@ -110,6 +115,19 @@ SOURCE_ID = "bdpm_fr"
 COUNTRY = "FR"
 UA = "drug-brand-crossref/0.1 (dry-run only; +https://github.com/fuarnos/drug-brand-crossref)"
 TAB = "\t"
+# 写库窗口用：source 行元数据（与 docs/许可清单.md §2.11 的 bdpm_fr 行一致）
+SOURCE_META = {
+    "name": "Base de données publique des médicaments (BDPM) — ANSM",
+    "url": DOWNLOAD_PAGE,
+    "license": "Licence Ouverte / Open Licence 2.0 (etalab-2.0)",
+    "license_url": DOWNLOAD_PAGE,
+    "data_as_of": "2026-11-03",
+    "data_as_of_note": "BDPM 下载页「Dernière mise à jour le 03/11/2026」",
+    "notes": "法国 BDPM 整库文件（CIS / CIS_COMPO / CIS_CIP / CIS_GENER）：商品名/剂型/途径/"
+             "成分+剂量/包装；页面须署名 + 数据更新日期；不是「在售」记录",
+}
+MANIFEST = WORK / "fr_manifest.json"
+TODAY = datetime.now(timezone.utc).date().isoformat()
 
 # 文件 → 列数 / 角色（无表头，字段按列序写死；2026-11-12 实测列数）
 FILES: dict[str, dict] = {
@@ -480,32 +498,54 @@ def split_routes(value: str) -> list[str]:
     return [p.strip() for p in parts if p.strip()]
 
 
-def fr_form_base(forme: str) -> str:
-    """法语剂型 → 仓库统一 `form_base`（复用 `form_base_of()`，只补法语词形）。
+def fr_form_base(forme: str, voies: str = "") -> str:
+    """法语剂型（+ 给药途径）→ 仓库已有 `form_base` 取值。
 
-    `form_base_of()` 是英文词表；法语剂型（`comprimé pelliculé`、`solution injectable`、
-    `poudre pour suspension buvable`…）需要先翻成英文关键词再交给它，否则全落 `other`。
+    2026-11-14（task-68）：优先用 BDPM 结构化字段 `forme pharmaceutique`，`voie` 只作兜底；
+    目标值限定在库内已出现的词（`tablet / capsule / liquid / injection / topical / powder /
+    inhalation / suppository / effervescent / gas / gum / pastille / mouthwash / pad / stick /
+    kit / device / film / implant / radiofarmaco / tea (herbal)`），不新造枚举。
     """
     f = _fold(forme)
-    # 顺序即优先级：更具体的剂型先判（`solution injectable` 是注射剂，不是「液体」；
-    # `poudre pour suspension buvable` 是粉剂；`gélule` 里含 `gel`，必须先于凝胶）
+    v = _fold(voies)
     mapping = [
         ("comprime effervescent", "effervescent"), ("effervescent", "effervescent"),
         ("gastro-resistant", "tablet"), ("gastro resistant", "tablet"),
-        ("injectable", "injection"), ("injection", "injection"), ("perfusion", "injection"),
-        ("poudre", "powder"), ("granule", "powder"), ("lyophilisat", "powder"),
         ("comprime", "tablet"), ("gelule", "capsule"), ("capsule", "capsule"),
         ("suppositoire", "suppository"), ("ovule", "suppository"),
-        ("collyre", "ophthalmic"), ("inhal", "inhalation"), ("aerosol", "inhalation"),
-        ("pommade", "topical"), ("creme", "topical"), ("emplatre", "transdermal"),
-        ("patch", "transdermal"), ("gel", "topical"), ("implant", "implant"),
+        ("injectable", "injection"), ("injection", "injection"), ("perfusion", "injection"),
+        ("poudre", "powder"), ("granule", "powder"), ("lyophilisat", "powder"),
         ("sirop", "liquid"), ("solution", "liquid"), ("suspension", "liquid"),
-        ("emulsion", "liquid"), ("buvable", "liquid"),
-        ("dispositif", "other"),
+        ("emulsion", "liquid"), ("buvable", "liquid"), ("collyre", "liquid"),
+        ("pommade", "topical"), ("creme", "topical"), ("gel", "topical"),
+        ("emplatre", "topical"), ("pansement", "pad"), ("patch", "topical"),
+        ("implant", "implant"), ("inhal", "inhalation"), ("aerosol", "inhalation"),
+        ("gaz", "gas"), ("gomme", "gum"), ("pastille", "pastille"), ("pate a sucer", "pastille"),
+        ("collutoire", "mouthwash"), ("bain de bouche", "mouthwash"),
+        ("pate dentifrice", "topical"), ("vernis", "topical"), ("mousse", "topical"),
+        ("compresse", "pad"), ("baton", "stick"), ("plante", "tea (herbal)"),
+        ("tisane", "tea (herbal)"), ("dispositif", "device"), ("trousse", "kit"),
+        ("generateur", "radiofarmaco"), ("systeme", "device"), ("radiopharma", "radiofarmaco"),
+        ("film", "film"),
     ]
-    for needle, en in mapping:
+    for needle, base in mapping:
         if needle in f:
-            return form_base_of(en) or en
+            return base
+    # `forme` 认不出时用结构化 `voie d'administration` 兜底（不是从品名猜）
+    if v:
+        if any(k in v for k in ("intraveineuse", "intramusculaire", "sous-cutanee",
+                                "intraarterielle", "intraveineux", "injectable")):
+            return "injection"
+        if any(k in v for k in ("ophtalmique", "auriculaire")):
+            return "liquid"
+        if "inhalation" in v or "nasale" in v:
+            return "inhalation"
+        if "cutanee" in v or "transdermique" in v:
+            return "topical"
+        if "orale" in v or "buvable" in v:
+            return "liquid"
+        if "rectale" in v or "vaginale" in v:
+            return "suppository"
     return form_base_of(forme) or "other"
 
 
@@ -604,6 +644,51 @@ def parse_dosage(dosage: str, reference: str = "") -> dict | None:
             "per_volume_unit": per_u}
 
 
+# ---------------------------------------------------------------- 解析：品名侧规格（补足用）
+_RE_IE_FR = re.compile(r"\b(UI|U\.I\.?|IE|IU)\b", re.I)
+_RE_MICRO_FR = re.compile(r"\b(?:microgrammes?|µg|μg)\b", re.I)
+_RE_MILLIONS_UI = re.compile(
+    r"(\d+(?:[.,]\d+)?)\s*(?:millions?|M)\s*(?:d['’]?\s*)?(?:UI|U\.I\.?)\b", re.I)
+
+
+def _strength_input(name: str) -> str:
+    """品名里的法语单位 → `normalize()` 认得的写法（只改单位词，不动数值）。"""
+    s = _RE_IE_FR.sub("IU", name or "")
+    s = _RE_MICRO_FR.sub("mcg", s)
+    return _RE_MILLIONS_UI.sub(lambda m: m.group(1).replace(",", ".") + " MIU", s)
+
+
+def parse_name_strengths(name: str) -> list[dict]:
+    """品名（dénomination）侧抽规格 → schema 四列；只在 composition 没给剂量时**补足**用。
+
+    复用法语写法整形（`UI`→`IU`、`microgrammes`→`mcg`、`millions d'UI`→`MIU`）+
+    仓库统一 `normalize()`（吃 `0,5 mg`、`x mg/2 ml`）；只摆数值，不做换算。
+    """
+    out: list[dict] = []
+    for raw_value, raw_unit in normalize(_strength_input(name)).strengths:
+        values = str(raw_value).split("/")
+        units = str(raw_unit).split("/")
+        try:
+            value = float(values[0].replace(",", "."))
+        except ValueError:
+            continue
+        unit, _rule = norm_unit(units[0])
+        unit = _FR_UNIT.get(units[0].lower(), unit or units[0])
+        per_v: float | None = None
+        per_u: str | None = None
+        if len(values) > 1 or len(units) > 1:
+            try:
+                per_v = float(values[1].replace(",", ".")) if len(values) > 1 else 1.0
+            except ValueError:
+                per_v = None
+            if len(units) > 1:
+                per_u, _ = norm_unit(units[1])
+                per_u = _FR_UNIT.get(units[1].lower(), per_u or units[1])
+        out.append({"value": value, "unit": unit or None,
+                    "per_volume_value": per_v, "per_volume_unit": per_u})
+    return out
+
+
 # ---------------------------------------------------------------- 解析：成分（法语 → INN）
 # 法语盐名 / 水合物 / 修饰词 → 英文 INN 写法（只生成候选，命中仍由库里 substance 决定）
 FR_SALT_WORDS = {
@@ -688,6 +773,109 @@ FR_INN_SYNONYMS = {
     "lidocaine": "lidocaine",
     "prilocaine": "prilocaine",
 }
+
+# v0.11.5（task-68）质量提升：法语盐名/酯/水合物/载体词与常见同义词扩充。
+# 键全部是 `_fold()` 之后的无重音写法（`hydrogénotartrate` → `hydrogenotartrate`）。
+FR_SALT_WORDS.update({
+    "hydrogenotartrate": "hydrogen tartrate", "hydrogentartrate": "hydrogen tartrate",
+    "hydrogenosuccinate": "hydrogen succinate", "hydrogensuccinate": "hydrogen succinate",
+    "hydrogenosulfate": "hydrogen sulfate", "hydrogensulfate": "hydrogen sulfate",
+    "hydrogenophosphate": "hydrogen phosphate", "hydrogenphosphate": "hydrogen phosphate",
+    "dihydrogenophosphate": "dihydrogen phosphate", "dihydrogenphosphate": "dihydrogen phosphate",
+    "metasulfobenzoate": "metasulfobenzoate", "metasulphobenzoate": "metasulphobenzoate",
+    "tetradecylsulfate": "tetradecyl sulfate", "hyclate": "hyclate", "lysinate": "lysinate",
+    "ethanolate": "ethanolate", "ditartrate": "ditartrate",
+    "hemisuccinate": "hemisuccinate", "hemifumarate": "hemifumarate",
+    "pivalate": "pivalate", "propionate": "propionate", "undecylate": "undecylate",
+    "benzoyle": "benzoyl", "sel": "", "cuivre": "copper", "tetrakis": "tetrakis",
+    "tosilate": "tosylate", "tosylate": "tosylate", "besilate": "besylate",
+    "sodique": "sodium", "potassique": "potassium", "calcique": "calcium",
+    "magnesique": "magnesium", "monosodique": "monosodium", "disodique": "disodium",
+    "dipotassique": "dipotassium", "ammonium": "ammonium", "ferrique": "ferric",
+    "ferreux": "ferrous", "lanthane": "lanthanum", "titane": "titanium",
+    "anhydre": "anhydrous", "monohydrate": "monohydrate", "dihydrate": "dihydrate",
+    "trihydrate": "trihydrate", "hemihydrate": "hemihydrate",
+})
+FR_ANIONS = FR_ANIONS | {
+    "digluconate", "gluconate", "hyaluronate", "metasulfobenzoate", "metasulphobenzoate",
+    "tetradecylsulfate", "dihydrogenophosphate", "phosphate", "sulfate", "sulphate",
+    "nitrate", "citrate", "tartrate", "maleate", "fumarate", "succinate", "acetate",
+    "carbonate", "bicarbonate", "lactate", "benzoate", "salicylate", "mesilate",
+    "tosylate", "tosilate", "besilate", "hyclate", "pivalate", "ethanolate", "lysinate",
+}
+# 金属/阳离子：需要翻译成英文，但**不参与**「盐名前置→后置」的词序旋转
+FR_METALS = frozenset({"sodium", "potassium", "calcium", "magnesium", "zinc", "iron",
+                       "ferrous", "aluminium", "ammonium", "lanthanum", "titanium"})
+# 盐形容词：PHOSPHATE SODIQUE DE X 的 SODIQUE（只有这些词参与「阴离子+形容词」语序）
+FR_SALT_ADJECTIVES = frozenset({"sodique", "potassique", "calcique", "magnesique",
+                                "monosodique", "disodique", "dipotassique", "ammonium",
+                                "ferrique", "ferreux"})
+# 载体/剂型前缀词：`SOLUTION DE X` 里的 SOLUTION 不参与成分名匹配
+FR_CARRIERS = frozenset({"solution", "suspension", "poudre", "emulsion", "sirop", "granules",
+                         "comprimes", "gel", "creme", "pommade", "collyre", "extrait",
+                         "concentrat", "complexe", "fraction", "sel", "ester", "co", "cristal"})
+FR_INN_SYNONYMS.update({
+    "acetylleucine": "levacetylleucine",
+    "somatotropine": "somatropin",
+    "fludesoxyglucose": "fludeoxyglucose",
+    "monoxyde azote": "nitric oxide",
+    "chlorure benzalkonium": "benzalkonium chloride",
+    "lanthane carbonate hydrate": "lanthanum carbonate hydrate",
+    "vitamine a synthetique forme huileuse": "retinol",
+    "concentrat vitamine a synthetique forme huileuse": "retinol",
+    "hyaluronate sodium": "sodium hyaluronate",
+    "doxycycline hyclate": "doxycycline hyclate",
+    "ibuprofene lysinate": "ibuprofen lysine",
+    "diclofenac epolamine": "diclofenac epolamine",
+    "testosterone enantate": "testosterone enanthate",
+    "almotriptan hydrogenomalate": "almotriptan malate",
+    "diacereine": "diacerein",
+})
+# 关键词级同义词（在 _fold 后的整串上匹配；用于植物/生物制品/特殊词序，逐条可解释）
+FR_KEYWORD_SYNONYMS: list[tuple[str, str]] = [
+    # 植物药（法国名 → 库内英文植物名；只做「同物异名」的事实对应）
+    ("serenoa repens", "serenoa repens"), ("palmier de floride", "serenoa repens"),
+    ("palmier nain", "serenoa repens"), ("saw palmetto", "saw palmetto"),
+    ("aubepine", "hawthorn"), ("artichaut", "artichoke"),
+    ("passiflore", "passiflora incarnata top"), ("thym", "thymus vulgaris leaf"),
+    ("flavonoique", "bioflavonoids"), ("arachis hypogaea", "arachis hypogaea"),
+    ("graine d arachis", "arachis hypogaea"), ("peroxyde de benzoele", "benzoyl peroxide"), ("peroxyde de benzole", "benzoyl peroxide"),
+    ("niaouli", "niaouli oil"), ("sene de l inde", "senna pods"),
+    ("sene de l inde", "senna pods"), ("sene", "senna leaf"), ("ispaghul", "ispaghula husk"),
+    ("plantain", "plantago major"),
+    # 生物制品 / 疫苗（法国描述 → 库内物质）
+    ("virus de la grippe", "influenza virus vaccine"),
+    ("antigene de surface de l hepatite b", "hepatitis b surface antigen"),
+    ("antigene f du vrs", "recombinant respiratory syncytial virus pre-fusion f protein"),
+    ("glycoproteine f", "recombinant respiratory syncytial virus pre-fusion f protein"),
+    ("polyoside pneumococcique", "pneumococcal polysaccharide"),
+    ("haemophilus type b", "haemophilus influenzae type b"),
+    ("antithrombine humaine", "antithrombin iii"),
+    ("adamts13", "radamts13"),
+    ("venin d abeille", "apis mellifera venom"),
+    ("venin d abeilles", "apis mellifera venom"),
+    ("venin de guepe vespula", "vespula spp venom"),
+    ("venin de guepe poliste", "polistes spp venom protein extract"),
+    ("venin de guepe", "vespula spp venom"),
+    ("abeille venin", "apis mellifera venom"),
+    ("guepe poliste venin", "polistes spp venom protein extract"),
+    ("guepe vespula venin", "vespula spp venom"),
+    ("guepe venin", "vespula spp venom"),
+    ("pelargonium", "pelargonium sidoides root"),
+    ("pancreas poudre porcine", "sus scrofa pancreas"),
+    ("pancreas porcine", "sus scrofa pancreas"),
+    ("rifampicine", "rifampin"),
+    ("ioflupane", "ioflupane i 123"),
+    ("fluciclovine", "fluciclovine f 18"),
+    ("phenoxymethylpenicilline", "phenoxymethylpenicillin benzathine"),
+    ("benzathine phenoxymethylpenicilline", "phenoxymethylpenicillin benzathine"),
+    ("venin de guepe polistes", "polistes annularis venom"),
+    # 特殊词序 / 法语习惯名
+    ("peroxyde de benzoyle", "benzoyl peroxide"),
+    ("fludesoxyglucose", "fludeoxyglucose f 18"),
+    ("monoxyde d azote", "nitric oxide"),
+    ("chlorure de benzalkonium", "benzalkonium chloride"),
+]
 _RE_PAREN = re.compile(r"\([^)]*\)")
 _RE_MULTI = re.compile(r"\s*[#;]\s*|\s+et\s+|\s*\+\s*", re.I)
 # 法语冠词 / 介词：`CHLORHYDRATE DE METFORMINE` 里的 DE、`D'AMLODIPINE` 里的 D 对成分名无意义
@@ -697,13 +885,19 @@ FR_ARTICLES = frozenset({"d", "l", "de", "du", "des", "la", "le", "les"})
 def french_clean_token(token: str) -> str:
     """法语成分串 → 可比较的小写写法：去括号注释/等效说明/剂量尾巴、盐名英文化、去冠词。
 
-    括号里如果是**盐型/水合物**（`AMOXICILLINE (TRIHYDRATÉE)`、`(SODIQUE)`），那是成分名的
-    一部分，要保留；其它括号（注释、商品说明）丢掉。法语形容词有阴性词尾 `-ée`，先还原再查表。
+    2026-11-14（task-68）在原有基础上补：
+    - **载体词**（`SOLUTION DE X`、`CO-CRISTAL D'X`）先剥掉，避免把剂型词当成分；
+    - **阴离子 + 形容词** 语序（`PHOSPHATE SODIQUE DE DEXAMÉTHASONE` → `dexamethasone sodium phosphate`）；
+    - 更多盐/酯/水合物词（`hydrogénotartrate`、`métasulfobenzoate`、`hyclate`、`pivalate`…）；
+    - `dl-` 前缀与 `(SULFATE D')` 这类括号盐名保留。
     """
     s = _fold(token)
     paren_extra: list[str] = []
     paren_anions: list[str] = []
+    paren_acid = False
     for group in _RE_PAREN.findall(s):
+        if "acide" in group:
+            paren_acid = True
         for word in re.findall(r"[a-z]+", group):
             hit = FR_SALT_WORDS.get(word) or (FR_SALT_WORDS.get(word[:-1])
                                               if word.endswith("e") else None)
@@ -717,41 +911,60 @@ def french_clean_token(token: str) -> str:
                  r"|\brace\b|\bsoit\b", s)[0]
     s = re.sub(r"\b\d+(?:[.,]\d+)?\s*(?:mg|g|mcg|µg|ml|l|ui|iu|%)\b.*$", " ", s)
     s = re.sub(r"[^a-z0-9%]+", " ", s).strip()
-    words = [w for w in s.split() if w not in FR_ARTICLES]
-    # 法语词序：`ACIDE X` → `X acid`；`CHLORURE DE SODIUM` → `sodium chloride`；
-    # `CHLORHYDRATE DE METFORMINE` → `metformine hydrochloride`
+    words = [w for w in s.split()
+             if w not in FR_ARTICLES and w not in {"dl", "d", "sel"}]
+    # PEROXYDE DE BENZOYLE → enzoyl peroxide
+    if len(words) > 1 and words[0] in {"peroxyde", "oxyde", "hydroxyde"}:
+        words = words[1:] + [words[0]]
+    # 剥载体/剂型前缀（最多 3 层）：`solution de digluconate de chlorhexidine` → `digluconate chlorhexidine`
+    for _ in range(3):
+        if len(words) > 1 and words[0] in FR_CARRIERS:
+            words = words[1:]
+        else:
+            break
+    # 法语词序：`ACIDE X` → `X acid`
     if words and words[0] == "acide" and len(words) > 1:
         words = words[1:] + ["acid"]
+    # `PHOSPHATE SODIQUE DE X` → `X sodium phosphate`（阴离子 + 形容词 一起后置）
+    elif (len(words) >= 3 and words[0] in FR_ANIONS
+          and words[1] in FR_SALT_ADJECTIVES):
+        words = words[2:] + [words[1], words[0]]
     elif words and words[0] in FR_ANIONS and len(words) > 1:
         # 阴离子插在金属后面：`chlorure calcium dihydrate` → `calcium chloride dihydrate`
         words = [words[1], words[0]] + words[2:]
-    elif words and words[0] in FR_SALT_WORDS and len(words) > 1:
+    elif words and words[0] in FR_SALT_WORDS and words[0] not in FR_METALS and len(words) > 1:
         words = words[1:] + [words[0]]
     words += [w for w in paren_extra if w not in words and w not in paren_anions]
     # `CALCIUM (CHLORURE DE) DIHYDRATÉ` → `calcium chloride dihydrate`：阴离子插到金属后面
     for anion in paren_anions:
         if words and anion not in words:
             words = [words[0], anion] + words[1:]
+    if paren_acid and words and "acid" not in words:
+        words = words + ["acid"]
     return " ".join(FR_SALT_WORDS.get(w, w) for w in words).strip()
 
 
 def fr_substance_candidates(token: str) -> list[str]:
-    """法语成分 token → 候选写法（按优先级去重，最多 32 个）。
+    """法语成分 token → 候选写法（按优先级去重，最多 64 个）。
 
     只做**写法变换**，不做匹配：候选交给 `SgMapper.map_basic()` / WHO INN 法语名桥接，
     能不能挂上由库里 `substance` 说了算（不新增 substance、不做模糊匹配）。
+
+    2026-11-14（task-68）新增：
+    - 逐词去载体词（最多 2 层），处理 `COMPLEXE … SACUBITRIL VALSARTAN` 这类前缀；
+    - 法/西拼写桥（词尾 `e`↔`a`，DB 里有一部分成分主名是西语/葡语拼写）；
+    - 辅音简化（`ff`→`f`、`ll`→`l`、`tt`→`t`…）与 `œ`→`oe`、`æ`→`ae`。
     """
     base = french_clean_token(token)
     if not base:
         return []
     out: list[str] = [base]
-    syn = FR_INN_SYNONYMS.get(base)
-    if syn:
-        out.append(syn)
-    # 盐名在尾部（`metformine chlorhydrate`）→ 逐层去掉
+    if base in FR_INN_SYNONYMS:
+        out.append(FR_INN_SYNONYMS[base])
     words = base.split()
+    # 去尾部词（盐名/载体尾巴）最多 4 层；每层再查一次同义词
     tail = words[:]
-    for _ in range(3):
+    for _ in range(4):
         if len(tail) <= 1:
             break
         tail = tail[:-1]
@@ -759,7 +972,17 @@ def fr_substance_candidates(token: str) -> list[str]:
         out.append(cand)
         if cand in FR_INN_SYNONYMS:
             out.append(FR_INN_SYNONYMS[cand])
-    # 法语拼写 → 英语拼写：去尾 e、-ine↔-in、f↔ph、y↔i、cqu↔cqu
+    # 去开头词（载体/复杂前缀）最多 2 层
+    head = words[:]
+    for _ in range(2):
+        if len(head) <= 1:
+            break
+        head = head[1:]
+        cand = " ".join(head)
+        out.append(cand)
+        if cand in FR_INN_SYNONYMS:
+            out.append(FR_INN_SYNONYMS[cand])
+    # 逐词拼写变换（法语 ↔ 英语/西语）
     for stem in list(dict.fromkeys(out)):
         ws = stem.split()
         for i, w in enumerate(ws):
@@ -767,9 +990,17 @@ def fr_substance_candidates(token: str) -> list[str]:
                 continue
             alts = {w[:-1] if w.endswith("e") else w + "e",
                     w.replace("ph", "f"), w.replace("f", "ph"),
-                    w.replace("y", "i"), w.replace("i", "y")}
-            if w.endswith("ique"):        # 法语形容词 → 英语：glutamique → glutamic
+                    w.replace("y", "i"), w.replace("i", "y"),
+                    w.replace("oe", "e"), w.replace("e", "oe"),
+                    w.replace("ae", "e")}
+            if w.endswith("e"):            # 西语/葡语主名桥（diacereine → diacereina）
+                alts.add(w[:-1] + "a")
+            if w.endswith("ique"):         # 法语形容词 → 英语：glutamique → glutamic
                 alts.add(w[:-4] + "ic")
+            for a, b in (("ff", "f"), ("ll", "l"), ("mm", "m"), ("nn", "n"),
+                         ("pp", "p"), ("tt", "t"), ("ss", "s"), ("rr", "r")):
+                if a in w:
+                    alts.add(w.replace(a, b))
             for alt in alts:
                 if alt and alt != w:
                     out.append(" ".join(ws[:i] + [alt] + ws[i + 1:]))
@@ -777,7 +1008,7 @@ def fr_substance_candidates(token: str) -> list[str]:
     if base.startswith("acide "):
         out.append(base[len("acide "):])
         out.append(base[len("acide "):] + " acid")
-    return list(dict.fromkeys(x for x in out if x))[:32]
+    return list(dict.fromkeys(x for x in out if x))[:64]
 
 
 def split_composition(value: str) -> list[str]:
@@ -803,6 +1034,10 @@ class FrMapper:
         self.mapper = SgMapper(db)
         self.by_fr: dict[str, str] = {}
         self.by_fr_sid: dict[str, str] = {}
+        self._cand_memo: dict[str, list[tuple[str, str, str]]] = {}
+        # 关键词去标点归一（法语撇号/连字符会切断朴素子串匹配）
+        self._kw = [(re.sub(r"[^a-z0-9]+", " ", _fold(k)).strip(), v)
+                    for k, v in FR_KEYWORD_SYNONYMS]
         # 同义词表按键也走同一套清洗（`ACIDE ASCORBIQUE` → `ascorbique acid`），否则查不到
         self.synonyms = {french_clean_token(k): v for k, v in FR_INN_SYNONYMS.items()}
         who = who_inn or (ROOT / "data" / "who_inn_names.csv")
@@ -818,25 +1053,56 @@ class FrMapper:
                             self.by_fr.setdefault(fr, sid)
                             self.by_fr_sid.setdefault(fr, sid)
 
-    def map(self, token: str) -> tuple[str, str]:
-        """token → (substance_id, method)；未映射返回 ("", "unmapped")。"""
+    def map_candidates(self, token: str) -> list[tuple[str, str, str]]:
+        """token → 有序候选 [(substance_id, method, 英文候选写法)]。
+
+        2026-11-14（task-68）：库里有一部分 substance **没有 variant 行**（如
+        `esomeprazole-magnesium-dihydrate`），直接返回它会让 component 被 `_variant_resolver`
+        丢掉；所以这里返回整条候选链，由调用方挑第一个「有 variant」的（见 `_collect`）。
+        另外先跑关键词级同义词（植物/生物制品/特殊词序），再跑 WHO INN 法语名与写法候选。
+        """
+        if token in self._cand_memo:
+            return self._cand_memo[token]
+        out: list[tuple[str, str, str]] = []
+        folded = _fold(token)
+
+        def push(sid: str, method: str, cand: str) -> None:
+            if sid and all(sid != x[0] for x in out):
+                out.append((sid, method, cand))
+
+        folded_norm = re.sub(r"[^a-z0-9]+", " ", folded).strip()
+        for needle, target in self._kw:
+            if needle in folded_norm:
+                sid, _salt, method = self.mapper.map_basic(target)
+                push(sid, f"kw-{method}", target)
+        # 肺炎链球菌多糖：按血清型精确对应（库内是 serotype-N 的独立物质）
+        m_sero = re.search(r"polyoside pneumococcique.*?serotype\s*([0-9]+[a-z]?)", folded_norm)
+        if m_sero:
+            target = f"pneumococcal polysaccharide serotype {m_sero.group(1)}"
+            sid, _salt, method = self.mapper.map_basic(target)
+            push(sid, f"kw-sero-{method}", target)
         cleaned = french_clean_token(token)
-        if not cleaned:
-            return "", "empty"
-        if cleaned in self.by_fr:
-            return self.by_fr[cleaned], "who-inn-fr"
-        syn = self.synonyms.get(cleaned)
-        if syn:
-            sid, _salt, method = self.mapper.map_basic(syn)
-            if sid:
-                return sid, f"fr-synonym-{method}"
+        if cleaned and cleaned in self.by_fr:
+            push(self.by_fr[cleaned], "who-inn-fr", cleaned)
+        if cleaned and cleaned in self.synonyms:
+            sid, _salt, method = self.mapper.map_basic(self.synonyms[cleaned])
+            push(sid, f"fr-synonym-{method}", self.synonyms[cleaned])
         for idx, cand in enumerate(fr_substance_candidates(token)):
             if cand in self.by_fr:
-                return self.by_fr[cand], "who-inn-fr"
+                push(self.by_fr[cand], "who-inn-fr", cand)
             sid, _salt, method = self.mapper.map_basic(cand)
-            if sid:
-                return sid, ("raw" if idx == 0 else f"fr-{method}")
-        return "", "unmapped"
+            push(sid, ("raw" if idx == 0 else f"fr-{method}"), cand)
+        self._cand_memo[token] = out
+        return out
+
+    def map(self, token: str) -> tuple[str, str]:
+        """token → (substance_id, method)；未映射返回 ("", "unmapped")。"""
+        if not french_clean_token(token):
+            return "", "empty"
+        cands = self.map_candidates(token)
+        if not cands:
+            return "", "unmapped"
+        return cands[0][0], cands[0][1]
 
 
 # ---------------------------------------------------------------- dry-run 统计
@@ -956,7 +1222,7 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
 
     products: list[dict] = []
     tokens_seen: set[str] = set()
-    memo: dict[str, tuple[str, str]] = {}
+    memo: dict[str, tuple[str, str, str]] = {}
     name_keys: set[str] = set()
     name_pairs: set[tuple[str, str]] = set()
     components_planned = 0
@@ -965,6 +1231,8 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
     products_all_mapped = 0
     products_partial = 0
     products_none = 0
+    products_with_component = 0
+    products_with_strength = 0
     packages_total = 0
     packages_multi = 0
     packages_active = 0
@@ -981,10 +1249,12 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
         procedures[_clean(row["procedure"]) or "(空)"] += 1
         markets[_clean(row["etat_commercialisation"]) or "(空)"] += 1
         forms[forme or "(空)"] += 1
-        base = fr_form_base(forme)
+        base = fr_form_base(forme, row["voies"])
         form_bases[base] += 1
         if base not in {"other", "unknown", ""}:
             forms_with_base += 1
+        else:
+            st["form_other_or_unknown"] += 1
         for rt in split_routes(row["voies"]):
             routes[rt] += 1
         # 包装（CIP）
@@ -1034,17 +1304,25 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
                     st["homeo_tokens"] += 1
                 hit = memo.get(token)
                 if hit is None:
-                    hit = memo[token] = mapper.map(token)
-                sid, method = hit
+                    cands = mapper.map_candidates(token)
+                    chosen = next(((csid, cmethod, ccand) for csid, cmethod, ccand in cands
+                                   if resolve(csid, ccand)), None)
+                    if chosen is None and cands:
+                        # 有 substance 但没有 variant：token 映射上，component 写不进去
+                        hit = (cands[0][0], cands[0][1] + "+no-variant", cands[0][2])
+                    else:
+                        hit = chosen or ("", "unmapped", "")
+                    memo[token] = hit
+                sid, method, cand_str = hit
                 if sid:
                     st["ingredient_tokens_mapped"] += 1
                     if not is_homeo:
                         st["ingredient_tokens_mapped_nonhomeo"] += 1
-                mapped.append((token, sid, method, dosage))
+                mapped.append((token, sid, method, dosage, cand_str))
         if homeo_rows:
             st["homeo_products"] += 1
         st["composition_rows"] += nat_rows
-        n_map = sum(1 for _t, sid, _m, _d in mapped if sid)
+        n_map = sum(1 for row_ in mapped if row_[1] and "+no-variant" not in row_[2])
         if mapped and n_map == len(mapped):
             products_all_mapped += 1
         elif mapped and n_map:
@@ -1052,12 +1330,12 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
         elif mapped:
             products_none += 1
         planned = []
-        for token, sid, method, dosage in mapped:
-            if not sid:
+        for token, sid, method, dosage, cand_str in mapped:
+            if not sid or "+no-variant" in method:
                 unmapped[token] += 1
                 st[f"map_method:{method}"] += 1
                 continue
-            vid = resolve(sid, token)
+            vid = resolve(sid, cand_str or token)
             if not vid:
                 components_no_variant += 1
                 continue
@@ -1065,23 +1343,54 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
             if dosage:
                 components_with_strength += 1
             planned.append({"token": token, "substance_id": sid, "variant_id": vid,
-                            "method": method, "strength": dosage})
+                            "method": method, "strength": dosage,
+                            "strength_source": "composition" if dosage else ""})
+        # v0.11.5（task-68）规格补足：composition 没给剂量、且只有 1 个 component 时，
+        # 用品名里的规格补（BDPM 的 dosage 空值行 2,764 条，其中 2,400 个产品品名里有规格）。
+        strength_fallback = False
+        if planned and not any(c["strength"] for c in planned) and len(planned) == 1:
+            name_strengths = parse_name_strengths(denom)
+            if len(name_strengths) == 1:
+                planned[0]["strength"] = name_strengths[0]
+                planned[0]["strength_source"] = "name"
+                components_with_strength += 1
+                st["components_strength_from_name"] += 1
+                strength_fallback = True
+        if planned:
+            products_with_component += 1
+            st["products_with_component"] += 1
+            if any(c["strength"] for c in planned):
+                products_with_strength += 1
+                st["products_with_strength"] += 1
+                if strength_fallback:
+                    st["products_strength_from_name"] += 1
+                else:
+                    st["products_strength_from_composition"] += 1
         # 名称键（与库里 name_key 比对；复用 normalize()，与其它市场同口径）
         nm = normalize(denom)
         if not nm.is_empty:
             name_keys.add(nm.norm)
             name_pairs.add((nm.norm, denom))
         gener = gener_by_cis.get(cis)
+        row_routes = split_routes(row["voies"])
+        pack_summary = ""
+        if packs:
+            first = _clean(packs[0]["libelle"])
+            pack_summary = first[:200] + (f" (+{len(packs) - 1})" if len(packs) > 1 else "")
         products.append({
             "product_id": _product_id(cis, denom), "cis": cis, "denomination": denom,
             "name_norm": "" if nm.is_empty else nm.norm,
+            "key_compact": "" if nm.is_empty else nm.compact,
+            "key_script": "latin" if nm.is_empty else nm.script,
             "forme": forme, "form_base": base, "release": release_of(denom, forme),
-            "routes": split_routes(row["voies"]), "status": status, "status_raw": status_raw,
+            "routes": row_routes, "route": "; ".join(row_routes) if row_routes else None,
+            "status": status, "status_raw": status_raw,
             "procedure": procedure, "mah": _clean(row["titulaires"]),
             "amm_date": _clean(row["date_amm"]), "surveillance": _clean(row["surveillance_renforcee"]),
             "dispo_status": _clean(row.get("dispo_status", "")), "eu_number": eu_number,
             "homeo": bool(homeo_rows),
             "parallel_import": "importation" in _fold(procedure),
+            "pack": pack_summary or None,
             "packages": [{"cip7": p["cip7"], "libelle": p["libelle"],
                           "statut": p["statut_presentation"],
                           "cip13": p["cip13"]} for p in packs],
@@ -1091,7 +1400,7 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
             "generic_label": _clean(gener.get("libelle_groupe")) if gener else "",
             "components": planned,
             "substance_ids": sorted({c["substance_id"] for c in planned}),
-            "unmapped_tokens": sorted({t for t, sid, _m, _d in mapped if not sid}),
+            "unmapped_tokens": sorted({m[0] for m in mapped if not m[1]}),
         })
         if len(samples) < 6:
             samples.append({
@@ -1102,7 +1411,7 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
                 "n_packages": len(packs),
                 "components": [{"token": c["token"], "sid": c["substance_id"] or "未映射",
                                 "strength": c["strength"]} for c in planned],
-                "unmapped": [t for t, sid, _m, _d in mapped if not sid],
+                "unmapped": [m[0] for m in mapped if not m[1]],
             })
 
     st["products"] = len(products)
@@ -1138,6 +1447,328 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
     }
 
 
+# ---------------------------------------------------------------- 写库 / 撤销（task-54）
+def _connect(db_path: Path, write: bool = False) -> sqlite3.Connection:
+    """写库连接开 `foreign_keys=ON`；只读用 `mode=ro`（本节之外一律只读）。"""
+    if write:
+        db = sqlite3.connect(db_path, timeout=180)
+        db.execute("PRAGMA foreign_keys=ON")
+    else:
+        db = sqlite3.connect(f"file:{db_path.as_posix()}?mode=ro", uri=True, timeout=120)
+    db.row_factory = sqlite3.Row
+    return db
+
+
+def _guard_real(db_path: Path, action: str, allow_real: bool) -> None:
+    """真实库写保护（沿用 `etl/ingest_eu.py`）：没有 `--allow-real` 只允许写 `.tmp/` 副本。"""
+    try:
+        is_real = db_path.resolve() == REAL_DB.resolve()
+    except OSError:
+        is_real = False
+    if is_real and not allow_real:
+        raise SystemExit(
+            f"拒绝在真实库 {db_path} 执行 {action}：DB 窗口未开（排下一会话）。\n"
+            "先在副本 `.tmp/fr-ingest/` 跑完整链路；确需写真实库时加 --allow-real，"
+            "并先备份 data/drugs.db、按 reports/2026-11-13-fr-apply-ready.md 的清单执行。")
+    if is_real:
+        print(f"!! 警告：正在对真实库 {db_path} 执行 {action}（--allow-real），"
+              "请确认已备份并持有 manifest。")
+
+
+def _require_country_schema(db: sqlite3.Connection) -> None:
+    """`product.country` 的 CHECK 必须包含 'FR'，否则产品行写不进去。"""
+    row = db.execute("SELECT sql FROM sqlite_master WHERE name='product'").fetchone()
+    sql = (row["sql"] if row else "") or ""
+    if "'FR'" not in sql:
+        raise SystemExit(
+            "product.country 的 CHECK 枚举没有 'FR'：写库窗口第一步必须先做 schema 迁移"
+            "（db/schema.sql 加 FR + db/init_db.py 幂等重建 product 表）。\n"
+            "库副本上可先用 `.tmp/migrate_fr_copy.py` 演练同一迁移（本工位不改 db/）。")
+
+
+def _table_counts(db: sqlite3.Connection) -> dict:
+    """逐表计数（写前/写后/回滚后用同一口径）。"""
+    return {
+        "product": db.execute("SELECT COUNT(*) FROM product").fetchone()[0],
+        "product_fr": db.execute(
+            "SELECT COUNT(*) FROM product WHERE country=? AND source_id=?",
+            (COUNTRY, SOURCE_ID)).fetchone()[0],
+        "product_component": db.execute("SELECT COUNT(*) FROM product_component").fetchone()[0],
+        "product_name": db.execute("SELECT COUNT(*) FROM product_name").fetchone()[0],
+        "name_key": db.execute("SELECT COUNT(*) FROM name_key").fetchone()[0],
+        "name_variant": db.execute("SELECT COUNT(*) FROM name_variant").fetchone()[0],
+        "source": db.execute("SELECT COUNT(*) FROM source").fetchone()[0],
+        "ingest_run": db.execute("SELECT COUNT(*) FROM ingest_run").fetchone()[0],
+    }
+
+
+def _insert_source(db: sqlite3.Connection) -> tuple[bool, dict | None]:
+    """写/更新 `bdpm_fr` 的 source 行 → (写前是否存在, 写前行快照)。"""
+    before = db.execute("SELECT * FROM source WHERE source_id=?", (SOURCE_ID,)).fetchone()
+    db.execute(
+        "INSERT INTO source (source_id, name, url, license, license_url, retrieved_at,"
+        " data_as_of, data_as_of_note, notes) VALUES (?,?,?,?,?,?,?,?,?)"
+        " ON CONFLICT(source_id) DO UPDATE SET name=excluded.name, url=excluded.url,"
+        " license=excluded.license, license_url=excluded.license_url,"
+        " retrieved_at=excluded.retrieved_at, data_as_of=excluded.data_as_of,"
+        " data_as_of_note=excluded.data_as_of_note, notes=excluded.notes",
+        (SOURCE_ID, SOURCE_META["name"], SOURCE_META["url"], SOURCE_META["license"],
+         SOURCE_META["license_url"], TODAY, SOURCE_META["data_as_of"],
+         SOURCE_META["data_as_of_note"], SOURCE_META["notes"]))
+    return (before is not None), (dict(before) if before else None)
+
+
+def _product_note(p: dict) -> str:
+    bits = [
+        "法国 BDPM（CIS=" + p["cis"] + "）；BDPM 的 État de commercialisation 是上市状态，"
+        "不代表当前在售",
+        f"procedure: {p['procedure']}" if p.get("procedure") else "",
+        f"AMM: {p['amm_date']}" if p.get("amm_date") else "",
+        f"EU: {p['eu_number']}" if p.get("eu_number") else "",
+        f"MAH: {p['mah']}" if p.get("mah") else "",
+        f"surveillance renforcée: {p['surveillance']}" if p.get("surveillance") else "",
+        f"dispo: {p['dispo_status']}" if p.get("dispo_status") else "",
+        "平行进口（Autorisation d'importation）" if p.get("parallel_import") else "",
+        "顺势疗法（HOMÉOPATHIQUES）" if p.get("homeo") else "",
+        f"packages: {p['n_packages']}" if p.get("n_packages") else "",
+    ]
+    return " · ".join(b for b in bits if b)[:500]
+
+
+def _write_rows(db: sqlite3.Connection, products: list[dict], run_id: str,
+                rows_in: int) -> dict:
+    """把 FR 国别层写进正式表（调用方管事务）；返回按表统计的写入行数。"""
+    written: Counter = Counter()
+    for p in products:
+        pid = p["product_id"]
+        written["product"] += db.execute(
+            "INSERT OR REPLACE INTO product (product_id, country, region, dosage_form,"
+            " form_base, route, release, pack, mah, approval_id, category, is_branded,"
+            " status, status_date, source_id, source_url, retrieved_at, note)"
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (pid, COUNTRY, None, p["forme"] or "unknown", p["form_base"] or "other",
+             p.get("route"), p["release"], p.get("pack"), p.get("mah") or None,
+             p["cis"], p.get("procedure") or None, 1, p["status"], None,
+             SOURCE_ID, DOWNLOAD_PAGE, TODAY, _product_note(p))).rowcount
+        key = p["name_norm"]
+        if key:
+            written["name_key"] += db.execute(
+                "INSERT OR IGNORE INTO name_key (key_id, norm, compact, script)"
+                " VALUES (?,?,?,?)",
+                (key, key, p.get("key_compact") or key.replace(" ", ""),
+                 p.get("key_script") or "latin")).rowcount
+            written["name_variant"] += db.execute(
+                "INSERT OR IGNORE INTO name_variant (key_id, raw, source_id) VALUES (?,?,?)",
+                (key, p["denomination"], SOURCE_ID)).rowcount
+            written["product_name"] += db.execute(
+                "INSERT OR IGNORE INTO product_name (product_id, key_id, name_type, is_primary)"
+                " VALUES (?,?,?,?)", (pid, key, "trade", 1)).rowcount
+        for ord_, comp in enumerate(p.get("components") or []):
+            s = comp.get("strength") or {}
+            written["product_component"] += db.execute(
+                "INSERT OR REPLACE INTO product_component (product_id, ord, variant_id,"
+                " strength_value, strength_unit, per_volume_value, per_volume_unit)"
+                " VALUES (?,?,?,?,?,?,?)",
+                (pid, ord_, comp["variant_id"], s.get("value"), s.get("unit"),
+                 s.get("per_volume_value"), s.get("per_volume_unit"))).rowcount
+    written["ingest_run"] += db.execute(
+        "INSERT OR REPLACE INTO ingest_run (run_id, source_id, started_at, finished_at,"
+        " rows_in, rows_kept, rows_rejected, status, note) VALUES (?,?,?,?,?,?,?,?,?)",
+        (run_id, SOURCE_ID, TODAY, _now(), rows_in, len(products),
+         max(0, rows_in - len(products)), "ok",
+         json.dumps({"country": COUNTRY, "layer": "country", "source_id": SOURCE_ID,
+                     "components": written.get("product_component", 0),
+                     "note": "BDPM 医保/药价基准数据；不是上市注册库"}, ensure_ascii=False))
+    ).rowcount
+    return dict(written)
+
+
+def _collect_for(db_path: Path, src: Path) -> tuple[dict, dict]:
+    """只读打开 → 解析 → 统计；`--dry-run` 与 `--apply` 共用，保证「预测的就是要写的」。"""
+    snap = load_snapshot(src)
+    db = _connect_ro(db_path)
+    try:
+        mapper = FrMapper(db)
+        resolve = _variant_resolver(db)
+        existing_keys = {r[0] for r in db.execute("SELECT key_id FROM name_key")}
+        existing_pairs = {(r[0], r[1]) for r in db.execute("SELECT key_id, raw FROM name_variant")}
+        before_counts = _table_counts(db)
+        result = _collect(snap, mapper, resolve)
+        overlap = _eu_overlap(db, result["products"])
+        result["before_counts"] = before_counts
+        result["overlap"] = overlap
+        result["existing_keys"] = existing_keys
+        result["existing_pairs"] = existing_pairs
+        result["db_products"] = before_counts["product"]
+    finally:
+        db.close()
+    return result, snap
+
+
+def cmd_apply(args: argparse.Namespace) -> int:
+    """写库（默认只允许副本）：source + 产品/组件/名称 + ingest_run；幂等（同 source 先删后写）。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    _guard_real(db_path, "apply", args.allow_real)
+    if not db_path.exists():
+        raise SystemExit(f"库不存在：{db_path}（先跑 --prepare-copy）")
+    manifest_path = args.manifest if args.manifest.is_absolute() else (ROOT / args.manifest)
+    src = args.src if args.src.is_absolute() else (ROOT / args.src)
+    t0 = time.perf_counter()
+    db_sha_before = _sha256_file(db_path)
+    result, snap = _collect_for(db_path, src)
+    products = result["products"]
+    st = result["stats"]
+    run_id = f"{SOURCE_ID}-{TODAY}"
+    before = result["before_counts"]
+
+    db = _connect(db_path, write=True)
+    try:
+        _require_country_schema(db)
+        db.execute("BEGIN IMMEDIATE")
+        source_existed, source_before = _insert_source(db)
+        removed_products = db.execute(
+            "DELETE FROM product WHERE country=? AND source_id=?",
+            (COUNTRY, SOURCE_ID)).rowcount
+        written = _write_rows(db, products, run_id, rows_in=len(snap["cis"]))
+        db.commit()
+        after = _table_counts(db)
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+    db_sha_after = _sha256_file(db_path)
+    created_keys = sorted({p["name_norm"] for p in products if p["name_norm"]}
+                          - result["existing_keys"])
+    created_pairs = sorted({(p["name_norm"], p["denomination"])
+                            for p in products if p["name_norm"]}
+                           - result["existing_pairs"])
+    manifest = {
+        "tool": "etl/markets/fr.py",
+        "db": str(db_path),
+        "db_is_real": db_path.resolve() == REAL_DB.resolve(),
+        "country": COUNTRY,
+        "source_id": SOURCE_ID,
+        "run_id": run_id,
+        "created_at": _now(),
+        "data_as_of": SOURCE_META["data_as_of"],
+        "snapshot": {name: {"bytes": (src / name).stat().st_size,
+                            "sha256": _sha256_file(src / name)} for name in FILES},
+        "db_sha256_before": db_sha_before,
+        "db_sha256_after": db_sha_after,
+        "product_ids": [p["product_id"] for p in products],
+        "created_name_keys": created_keys,
+        "created_name_variants": [list(x) for x in created_pairs],
+        "source_existed": source_existed,
+        "source_before": source_before,
+        "counts_before": before,
+        "counts_after": after,
+        "counts_planned": {
+            "products": len(products), "components": st["components_planned"],
+            "name_keys_new": len(created_keys), "name_variants_new": len(created_pairs),
+            "substance_new": 0,
+        },
+        "written": written,
+        "removed_products_before_write": removed_products,
+        "rollback_hint": (
+            "python etl/markets/fr.py --rollback --allow-real --db <同一个库> --manifest <本文件>；"
+            "或从备份恢复 data/drugs.db（窗口前必做备份）。校验："
+            "SELECT COUNT(*) FROM product WHERE country='FR' AND source_id='bdpm_fr' 应为 0，"
+            "coverage 不应有 FR 行。"),
+    }
+    _write_json(manifest_path, manifest)
+    elapsed = round(time.perf_counter() - t0, 2)
+    print("=== FR（BDPM）写入完成 ===")
+    print(json.dumps({"written": written, "counts_before": before, "counts_after": after},
+                     ensure_ascii=False, indent=1))
+    print(f"  旧 FR 行删除 {removed_products} · 撤销清单 {manifest_path}")
+    print(f"  db sha256 {db_sha_before[:16]}… → {db_sha_after[:16]}… · 耗时 {elapsed}s")
+    return 0
+
+
+def _rollback_targets(manifest: dict) -> dict:
+    """从 manifest 解析回滚目标（纯函数；`--rollback` 与 `--self-check` 共用）。"""
+    if manifest.get("source_id") != SOURCE_ID or manifest.get("country") != COUNTRY:
+        raise SystemExit("manifest 的 source_id/country 与 FR 不匹配，拒绝执行")
+    return {
+        "product_ids": list(manifest.get("product_ids") or []),
+        "name_keys": list(manifest.get("created_name_keys") or []),
+        "name_variants": [tuple(x) for x in (manifest.get("created_name_variants") or [])],
+        "run_id": manifest.get("run_id") or "",
+        "source_existed": bool(manifest.get("source_existed")),
+        "source_before": manifest.get("source_before"),
+        "counts_before": manifest.get("counts_before") or {},
+    }
+
+
+def cmd_rollback(args: argparse.Namespace) -> int:
+    """按 manifest 只删本次写入的行（保护既有数据），并逐表核对是否回到写前计数。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    _guard_real(db_path, "rollback", args.allow_real)
+    manifest_path = args.manifest if args.manifest.is_absolute() else (ROOT / args.manifest)
+    if not manifest_path.exists():
+        raise SystemExit(f"找不到撤销清单：{manifest_path}")
+    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    targets = _rollback_targets(data)
+    db = _connect(db_path, write=True)
+    removed = Counter()
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        for pid in targets["product_ids"]:
+            removed["product"] += db.execute(
+                "DELETE FROM product WHERE product_id=? AND country=? AND source_id=?",
+                (pid, COUNTRY, SOURCE_ID)).rowcount
+        removed["ingest_run"] += db.execute(
+            "DELETE FROM ingest_run WHERE run_id=?", (targets["run_id"],)).rowcount
+        for key, raw in targets["name_variants"]:
+            removed["name_variant"] += db.execute(
+                "DELETE FROM name_variant WHERE key_id=? AND raw=? AND source_id=?",
+                (key, raw, SOURCE_ID)).rowcount
+        for key in targets["name_keys"]:
+            if not db.execute("SELECT 1 FROM product_name WHERE key_id=? LIMIT 1",
+                              (key,)).fetchone():
+                removed["name_variant"] += db.execute(
+                    "DELETE FROM name_variant WHERE key_id=? AND source_id=?",
+                    (key, SOURCE_ID)).rowcount
+                removed["name_key"] += db.execute(
+                    "DELETE FROM name_key WHERE key_id=?", (key,)).rowcount
+        if targets["source_existed"]:
+            before = targets["source_before"] or {}
+            if before:
+                db.execute(
+                    "UPDATE source SET name=?, url=?, license=?, license_url=?, retrieved_at=?,"
+                    " data_as_of=?, data_as_of_note=?, notes=? WHERE source_id=?",
+                    (before.get("name"), before.get("url"), before.get("license"),
+                     before.get("license_url"), before.get("retrieved_at"),
+                     before.get("data_as_of"), before.get("data_as_of_note"),
+                     before.get("notes"), SOURCE_ID))
+        else:
+            still = db.execute(
+                "SELECT COUNT(*) FROM product WHERE source_id=? AND country=?",
+                (SOURCE_ID, COUNTRY)).fetchone()[0]
+            if not still:
+                removed["source"] += db.execute(
+                    "DELETE FROM source WHERE source_id=?", (SOURCE_ID,)).rowcount
+        db.commit()
+        after = _table_counts(db)
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+    expected = targets["counts_before"]
+    diff = {k: after.get(k, 0) - int(expected.get(k, 0)) for k in after}
+    nonzero = {k: v for k, v in diff.items() if v}
+    print("=== FR（BDPM）回滚完成 ===")
+    print(json.dumps({"removed": dict(removed), "counts_after": after,
+                      "diff_vs_counts_before": diff}, ensure_ascii=False, indent=1))
+    if nonzero:
+        print(f"  !! 与写前计数不一致：{nonzero}")
+        return 1
+    print("  逐表差异 0（已回到写前基线）")
+    return 0
+
+
 def prepare_copy(real: Path, copy: Path, force: bool = False) -> dict:
     """真库 → `.tmp/fr-ingest/drugs_fr_copy.db`（只读复制；已存在且大小一致则复用）。"""
     if not real.exists():
@@ -1165,6 +1796,33 @@ def cmd_prepare_copy(args: argparse.Namespace) -> int:
     return 0
 
 
+def _db_fr_baseline(db: sqlite3.Connection) -> dict | None:
+    """当前库里 FR 行的覆盖率（before 口径，与覆盖页 build.py 的 SQL 一致）。"""
+    n = db.execute("SELECT COUNT(*) FROM product WHERE country=?", (COUNTRY,)).fetchone()[0]
+    if not n:
+        return None
+    mapped = db.execute(
+        "SELECT COUNT(DISTINCT p.product_id) FROM product p "
+        "JOIN product_component pc ON pc.product_id=p.product_id WHERE p.country=?",
+        (COUNTRY,)).fetchone()[0]
+    spec = db.execute(
+        "SELECT COUNT(DISTINCT p.product_id) FROM product p "
+        "JOIN product_component pc ON pc.product_id=p.product_id "
+        "WHERE p.country=? AND pc.strength_value IS NOT NULL", (COUNTRY,)).fetchone()[0]
+    form = db.execute(
+        "SELECT COUNT(*) FROM product WHERE country=? AND form_base IS NOT NULL "
+        "AND form_base NOT IN ('other','unknown','')", (COUNTRY,)).fetchone()[0]
+    return {
+        "products": n,
+        "products_with_component": mapped,
+        "mapping_pct": round(mapped / n * 100, 1),
+        "products_with_strength": spec,
+        "strength_pct": round(spec / n * 100, 1),
+        "form_mapped": form,
+        "form_pct": round(form / n * 100, 1),
+    }
+
+
 def cmd_dry_run(args: argparse.Namespace) -> int:
     """读缓存 → 解析 → 统计；**只读**开库副本，真库不碰、不写任何库。"""
     src = args.src if args.src.is_absolute() else (ROOT / args.src)
@@ -1190,11 +1848,22 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
         db_products = db.execute("SELECT COUNT(*) FROM product").fetchone()[0]
         result = _collect(snap, mapper, resolve)
         overlap = _eu_overlap(db, result["products"])
+        before = _db_fr_baseline(db)
     finally:
         db.close()
     elapsed = round(time.perf_counter() - t0, 2)
 
     st = result["stats"]
+    after = {
+        "products": st["products"],
+        "products_with_component": st["products_with_component"],
+        "mapping_pct": round(st["products_with_component"] / n_rows * 100, 1)
+        if (n_rows := max(1, st["products"])) else 0.0,
+        "products_with_strength": st["products_with_strength"],
+        "strength_pct": round(st["products_with_strength"] / max(1, st["products"]) * 100, 1),
+        "form_mapped": st["form_base_ok"],
+        "form_pct": round(st["form_base_ok"] / max(1, st["products"]) * 100, 1),
+    }
     new_keys = sorted(result["name_keys"] - existing_keys)
     new_variants = sorted(p for p in result["name_pairs"] if p not in existing_pairs)
     n_rows = max(1, st["products"])
@@ -1211,7 +1880,7 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "can_ingest": True,
             "obligations": ["不得篡改数据", "注明来源 base-donnees-publique.medicaments.gouv.fr",
                             "注明数据更新日期", "不得暗示 ANSM/HAS/UNCAM 背书"],
-            "apply_flag": "本脚本不提供 --apply（等站点 fr 市场/语言接入后再开写库窗口）",
+            "apply_flag": "--apply 已可用（默认只允许 .tmp/ 副本；真库需 --allow-real + 备份）",
         },
         "db": {"path": str(db_path), "mode": "read-only(mode=ro)", "products": db_products,
                "is_real_db": False},
@@ -1247,11 +1916,14 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "parallel_import_products": st["parallel_import_products"],
         },
         "dosage_form": {
+            "source": "BDPM orme pharmaceutique（结构化字段）+ oie d'administration 兜底；不从品名猜",
             "distinct": len(result["forms"]),
             "top15": result["forms"].most_common(15),
-            "form_base": result["form_bases"].most_common(15),
+            "form_base": result["form_bases"].most_common(18),
             "form_base_ok": st["form_base_ok"],
             "form_base_ok_pct": round(st["form_base_ok"] / n_rows * 100, 1),
+            "form_other_or_unknown": st["form_other_or_unknown"],
+            "form_other_pct": round(st["form_other_or_unknown"] / n_rows * 100, 1),
         },
         "route": {"distinct": len(result["routes"]), "top10": result["routes"].most_common(10)},
         "packages": {
@@ -1282,6 +1954,15 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "components_total": st["components_planned"],
             "components_with_strength_pct": round(
                 st["components_with_strength"] / max(1, st["components_planned"]) * 100, 1),
+            "components_from_composition": st["components_with_strength"]
+            - st["components_strength_from_name"],
+            "components_from_name": st["components_strength_from_name"],
+            "products_with_component": st["products_with_component"],
+            "products_with_strength": st["products_with_strength"],
+            "products_with_strength_pct": round(
+                st["products_with_strength"] / n_rows * 100, 1),
+            "products_strength_from_composition": st["products_strength_from_composition"],
+            "products_strength_from_name": st["products_strength_from_name"],
             "units_top": result["units"].most_common(12),
             "per_volume_units": result["refs"].most_common(8),
             "note": "顺势疗法的 `2CH à 30CH …` 不是数值剂量（不解析）；空 dosage 保持 NULL，不猜。",
@@ -1316,14 +1997,23 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "cip_rows_orphan": st["cip_rows_orphan"],
             "cip_cis_orphan": st["cip_cis_orphan"],
             "compo_rows_orphan": st["compo_rows_orphan"],
-            "products_without_component": st["products"] - st["products_all_mapped"],
+            "products_without_component": st["products"] - st["products_with_component"],
+            "products_without_strength": st["products"] - st["products_with_strength"],
             "note": "CIP 里有、CIS_bdpm 里没有的包装行（旧注册残留）：只统计，不入库",
         },
         "eu_overlap": overlap,
         "dedupe": _dedupe_stats(result["products"]),
+        "quality_before_after": {
+            "before": before,
+            "after": after,
+            "note": "before = 当前库里的 FR 行（覆盖页口径：有 component / n；有 strength / n）；"
+                    "after = 本次改进解析/映射后的预测；name_fallback = composition 无剂量时用品名补",
+        },
         "would_write": {
             "products": st["products"],
             "components": st["components_planned"],
+            "products_with_component": st["products_with_component"],
+            "products_with_strength": st["products_with_strength"],
             "components_no_variant": st["components_no_variant"],
             "product_names": st["products"],
             "name_keys_new": len(new_keys),
@@ -1354,8 +2044,19 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
     print(f"  上市状态: {result['markets'].most_common(5)}")
     print(f"  授权程序: {result['procedures'].most_common(5)}")
     print(f"  剂型: {len(result['forms']):,} 种 · form_base 认出 {st['form_base_ok']:,}"
-          f"（{summary['dosage_form']['form_base_ok_pct']}%）· top {result['form_bases'].most_common(5)}")
+          f"（{summary['dosage_form']['form_base_ok_pct']}%）· other {st['form_other_or_unknown']:,}"
+          f" · top {result['form_bases'].most_common(5)}")
     print(f"  给药途径: {len(result['routes']):,} 种 · top {result['routes'].most_common(5)}")
+    print(f"  产品级: 有成分 {st['products_with_component']:,}/{st['products']:,}"
+          f"（{summary['quality_before_after']['after']['mapping_pct']}%）· 有规格 "
+          f"{st['products_with_strength']:,}/{st['products']:,}"
+          f"（{summary['quality_before_after']['after']['strength_pct']}%"
+          f"；其中品名补足 {st['products_strength_from_name']:,}）")
+    if before:
+        print(f"  before→after: 映射 {before['mapping_pct']}% → "
+              f"{summary['quality_before_after']['after']['mapping_pct']}% · 规格 "
+              f"{before['strength_pct']}% → {summary['quality_before_after']['after']['strength_pct']}%"
+              f" · 剂型 {before['form_pct']}% → {summary['quality_before_after']['after']['form_pct']}%")
     print(f"  成分映射: 全部 {st['ingredient_tokens_mapped']:,}/{st['ingredient_tokens']:,} = "
           f"{summary['substance']['token_rate_pct']}%"
           f" · 非顺势 {st['ingredient_tokens_mapped_nonhomeo']:,}/"
@@ -1486,21 +2187,69 @@ def self_check(raw: Path = RAW) -> int:
           french_clean_token("AMOXICILLINE (TRIHYDRATÉE) 500 mg"))
     check("成分串不按分号误切单成分", split_composition("PARACÉTAMOL") == ["PARACÉTAMOL"])
 
-    # 7) 不提供 --apply（等站点接入）
-    try:
-        with contextlib.redirect_stderr(io.StringIO()):
-            main(["--apply"])
-    except SystemExit:
-        pass
-    else:
-        failures.append("--apply 竟然被接受")
+    # 7) 三段式 CLI / 护栏 / manifest 可回滚性
     ap = build_parser()
     flags = {opt for action in ap._actions for opt in action.option_strings}
-    check("CLI 没有 --apply / --rollback", "--apply" not in flags and "--rollback" not in flags)
+    check("CLI 有 --apply / --rollback / --manifest / --allow-real",
+          {"--apply", "--rollback", "--manifest", "--allow-real"} <= flags)
     check("CLI 有 --fetch / --dry-run / --self-check / --prepare-copy",
           {"--fetch", "--dry-run", "--self-check", "--prepare-copy"} <= flags)
-    check("dry-run 默认库是 .tmp 副本，不是真库", ap.get_default("db") != REAL_DB,
+    check("默认库是 .tmp 副本，不是真库", ap.get_default("db") != REAL_DB,
           str(ap.get_default("db")))
+    check("默认 manifest 在 .tmp/ 下", str(ap.get_default("manifest")).find(".tmp") >= 0,
+          str(ap.get_default("manifest")))
+    # 护栏：不允许写真实库时 _guard_real 必须抛 SystemExit；显式 allow_real 才放行
+    try:
+        _guard_real(REAL_DB, "apply", False)
+    except SystemExit:
+        guard_ok = True
+    else:
+        guard_ok = False
+    check("--apply 无 --allow-real 时拒绝真库", guard_ok)
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):   # 探针不该把「警告真实库」打到终端
+            _guard_real(REAL_DB, "apply", True)
+        allow_ok = True
+    except SystemExit:
+        allow_ok = False
+    check("--allow-real 时放行（仅打印警告）", allow_ok)
+    # 产品 id 确定性 + 唯一
+    ids = [_product_id(c, "") for c in ("61266250", "62869109", "69103878")]
+    check("product_id 形如 FR-<CIS> 且唯一",
+          all(x.startswith("FR-") for x in ids) and len(set(ids)) == len(ids), str(ids))
+    # manifest（如果已跑过 apply）：结构 + 可回滚 + 与 dry-run 预测一致
+    manifest_path = WORK / "fr_manifest.json"
+    dry_path = WORK / "fr_dry_run.json"
+    if manifest_path.exists():
+        man = json.loads(manifest_path.read_text(encoding="utf-8"))
+        check("manifest 记录了 product_ids 全量",
+              len(man.get("product_ids") or []) == (man.get("counts_planned") or {}).get("products"),
+              f"{len(man.get('product_ids') or [])}")
+        check("manifest 记录库文件 sha256 before/after",
+              bool(man.get("db_sha256_before")) and bool(man.get("db_sha256_after")))
+        targets = _rollback_targets(man)
+        check("manifest 可回滚目标非空且只含 FR 产品",
+              bool(targets["product_ids"]) and all(x.startswith("FR-") for x in targets["product_ids"]),
+              f"{len(targets['product_ids'])} 产品")
+        planned = man.get("counts_planned") or {}
+        written = man.get("written") or {}
+        check("manifest 的 planned 与 written 一致",
+              planned.get("products") == written.get("product")
+              and planned.get("components") == written.get("product_component"),
+              f"planned={planned} · written={written}")
+        check("manifest 的 name_key/name_variant 快照与计数一致",
+              planned.get("name_keys_new") == len(man.get("created_name_keys") or [])
+              and planned.get("name_variants_new") == len(man.get("created_name_variants") or []))
+        check("manifest 不新增 substance", planned.get("substance_new") == 0)
+    else:
+        print("  skip manifest 检查（还没跑过 --apply；副本验证后会有 .tmp/fr-ingest/fr_manifest.json）")
+    # 回滚目标解析（纯函数）
+    sample = {"product_ids": ["FR-1"], "created_name_keys": ["a"], "created_name_variants": [["a", "A"]],
+              "run_id": "bdpm_fr-x", "source_id": SOURCE_ID, "country": COUNTRY}
+    t = _rollback_targets(sample)
+    check("回滚计划只使用 manifest 里的键",
+          t["product_ids"] == ["FR-1"] and t["name_keys"] == ["a"]
+          and t["name_variants"] == [("a", "A")] and t["run_id"] == "bdpm_fr-x", str(t))
 
     print(f"\n=== self-check {'全部通过' if not failures else '有失败'}（{len(failures)} 项失败）===")
     return 0 if not failures else 1
@@ -1514,11 +2263,10 @@ def cmd_self_check(args: argparse.Namespace) -> int:
 # ---------------------------------------------------------------- CLI
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(
-        description="法国 BDPM 整库文件 ETL 骨架：只做干跑，**不写库**。"
-                    "许可已是 ✅（Licence Ouverte 2.0），但站点 fr 市场/语言未接入，"
-                    "写库窗口等 UI 改完再开，故本脚本不提供 --apply。",
+        description="法国 BDPM 整库文件 ETL：默认 dry-run；--apply / --rollback 需 --allow-real 才写真实库。"
+                    "许可 ✅ Licence Ouverte 2.0。",
         epilog="例：--fetch 抓快照与许可证据；--prepare-copy 复制库；--dry-run 出统计；"
-               "--self-check 跑离线断言。")
+               "--apply --allow-real --db <副本> 写库（并写 manifest）；--rollback 按 manifest 撤销。")
     ap.add_argument("--fetch", action="store_true",
                     help="抓 BDPM 下载页/许可证据 + 4 个整库文件到 data/raw/fr_bdpm_20261112/")
     ap.add_argument("--prepare-copy", action="store_true",
@@ -1528,10 +2276,17 @@ def build_parser() -> argparse.ArgumentParser:
     mode.add_argument("--dry-run", action="store_true",
                       help="读缓存 → 解析 → 统计（默认；只读开库副本，不写库）")
     mode.add_argument("--self-check", action="store_true",
-                      help="离线断言：许可证据 / 列数 / 编码 / 状态 / 剂量 / 成分候选 / 无 --apply")
+                      help="离线断言：许可 / 列数 / 编码 / 状态 / 剂量 / 成分 / manifest / 护栏")
+    mode.add_argument("--apply", action="store_true",
+                      help="事务写库（source + product/component/name + ingest_run；幂等）")
+    mode.add_argument("--rollback", action="store_true", help="按 manifest 撤销本次写入")
     ap.add_argument("--db", type=Path, default=DB_COPY,
-                    help="只读打开的库副本（默认 .tmp/fr-ingest/drugs_fr_copy.db；拒绝真库）")
+                    help="目标库（默认 .tmp/fr-ingest/drugs_fr_copy.db；写真实库需 --allow-real）")
     ap.add_argument("--src", type=Path, default=RAW, help="快照目录（默认 data/raw/fr_bdpm_20261112）")
+    ap.add_argument("--manifest", type=Path, default=MANIFEST,
+                    help="撤销清单路径（apply 时写、rollback 时读；默认 .tmp/fr-ingest/fr_manifest.json）")
+    ap.add_argument("--allow-real", action="store_true",
+                    help="允许对真实库 data/drugs.db 执行 apply/rollback（默认拒绝）")
     ap.add_argument("--copy", action="store_true",
                     help="库副本不存在时先复制真库（默认不自动复制，避免误碰真库）")
     return ap
@@ -1540,13 +2295,16 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     ap = build_parser()
     args = ap.parse_args(argv)
-    # 本脚本刻意不实现 --apply / --rollback：站点接入与写库窗口等 UI 改完后另开任务。
     if args.fetch:
         return cmd_fetch(args)
     if args.prepare_copy:
         return cmd_prepare_copy(args)
     if args.self_check:
         return cmd_self_check(args)
+    if args.rollback:
+        return cmd_rollback(args)
+    if args.apply:
+        return cmd_apply(args)
     return cmd_dry_run(args)
 
 

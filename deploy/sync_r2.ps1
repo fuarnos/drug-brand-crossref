@@ -123,6 +123,22 @@ try {
         Write-Host 'upload done; verifying sizes'
         & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
+
+        # TEMPORARY FIX (approved 2026-11-13): Cloudflare Transform Rules currently only cover
+        # /, /zh/, /es/, /zh-hant/ - NOT /fr/ - so https://drugcrossref.com/fr/ 404s while
+        # /fr/index.html is fine. We PUT fr/index.html as object key "fr/" to work around it.
+        # That key is not part of site/dist, so every sync deletes it -> replay after each sync.
+        # FINAL FIX: add the 5th Transform Rule (/fr/ -> /fr/index.html) in Cloudflare; then drop this.
+        # Only fr/ is handled; a failure here only warns (upload success still exits 0).
+        $pyExe = if ($env:PYTHON) { $env:PYTHON } else { 'python' }
+        try {
+            & $pyExe (Join-Path $PSScriptRoot 'fix_fr_root.py') --dist $Dist
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host ("WARN: /fr/ fallback object NOT written (fix_fr_root.py exit {0}); /fr/ may 404. Add the 5th Transform Rule in Cloudflare." -f $LASTEXITCODE)
+            }
+        } catch {
+            Write-Host ("WARN: /fr/ fallback not executed ({0}); add the 5th Transform Rule in Cloudflare." -f $_.Exception.Message)
+        }
     }
     Write-Host 'OK'
     exit 0
