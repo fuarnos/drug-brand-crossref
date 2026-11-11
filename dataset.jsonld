@@ -3,49 +3,49 @@
   "@type": "Dataset",
   "name": "Medicine Brand Cross-Reference — derived data",
   "description": "Derived, aggregate-first data package for the cross-market medicine brand reference. Product/name records are not redistributed from restricted sources; only aggregates and a substance list are included.",
-  "url": "https://fuarnos.github.io/drug-brand-crossref/datapackage.json",
-  "version": "v0.11.1",
-  "dateModified": "2026-11-11",
+  "url": "https://drugcrossref.com/datapackage.json",
+  "version": "v0.11.2",
+  "dateModified": "2026-11-12",
   "license": "https://github.com/fuarnos/drug-brand-crossref/blob/main/docs/数据溯源与许可.md",
   "creator": {
     "@type": "Organization",
     "name": "Medicine Brand Cross-Reference",
-    "url": "https://fuarnos.github.io/drug-brand-crossref/"
+    "url": "https://drugcrossref.com/"
   },
   "isAccessibleForFree": true,
   "distribution": [
     {
       "@type": "DataDownload",
       "name": "coverage",
-      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/coverage.csv",
+      "contentUrl": "https://drugcrossref.com/data/exports/coverage.csv",
       "encodingFormat": "text/csv",
       "contentSize": 413
     },
     {
       "@type": "DataDownload",
       "name": "market-summary",
-      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/market-summary.csv",
+      "contentUrl": "https://drugcrossref.com/data/exports/market-summary.csv",
       "encodingFormat": "text/csv",
       "contentSize": 268
     },
     {
       "@type": "DataDownload",
       "name": "name-summary",
-      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/name-summary.csv",
+      "contentUrl": "https://drugcrossref.com/data/exports/name-summary.csv",
       "encodingFormat": "text/csv",
       "contentSize": 280
     },
     {
       "@type": "DataDownload",
       "name": "substances",
-      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/data/exports/substances.csv",
+      "contentUrl": "https://drugcrossref.com/data/exports/substances.csv",
       "encodingFormat": "text/csv",
       "contentSize": 742734
     },
     {
       "@type": "DataDownload",
       "name": "datapackage.json",
-      "contentUrl": "https://fuarnos.github.io/drug-brand-crossref/datapackage.json",
+      "contentUrl": "https://drugcrossref.com/datapackage.json",
       "encodingFormat": "application/json"
     }
   ]

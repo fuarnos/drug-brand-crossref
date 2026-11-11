@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n-title="meta.warn.title">警語：同名不同藥 / 不可互換 · 藥品商品名跨國定位</title><link rel="alternate" hreflang="en" href="https://fuarnos.github.io/drug-brand-crossref/warn.html">
-<link rel="alternate" hreflang="es" href="https://fuarnos.github.io/drug-brand-crossref/es/warn.html">
-<link rel="alternate" hreflang="zh" href="https://fuarnos.github.io/drug-brand-crossref/zh/warn.html">
-<link rel="alternate" hreflang="zh-Hant" href="https://fuarnos.github.io/drug-brand-crossref/zh-hant/warn.html">
-<link rel="alternate" hreflang="x-default" href="https://fuarnos.github.io/drug-brand-crossref/warn.html">
-<link rel="alternate" hreflang="zh-TW" href="https://fuarnos.github.io/drug-brand-crossref/zh-hant/warn.html">
-<link rel="canonical" href="https://fuarnos.github.io/drug-brand-crossref/zh-hant/warn.html">
+<title data-i18n-title="meta.warn.title">警語：同名不同藥 / 不可互換 · 藥品商品名跨國定位</title><link rel="alternate" hreflang="en" href="https://drugcrossref.com/warn.html">
+<link rel="alternate" hreflang="es" href="https://drugcrossref.com/es/warn.html">
+<link rel="alternate" hreflang="zh" href="https://drugcrossref.com/zh/warn.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://drugcrossref.com/zh-hant/warn.html">
+<link rel="alternate" hreflang="x-default" href="https://drugcrossref.com/warn.html">
+<link rel="alternate" hreflang="zh-TW" href="https://drugcrossref.com/zh-hant/warn.html">
+<link rel="canonical" href="https://drugcrossref.com/zh-hant/warn.html">
 <meta name="description" content="已發布的警語：同名不同藥，以及跨國、鹽型或釋放機制下不可互換的複方產品。" data-i18n-meta="meta.warn.desc">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Medicine Brand Cross-Reference">
 <meta property="og:title" content="警語：同名不同藥 / 不可互換 · 藥品商品名跨國定位" data-i18n-meta="meta.warn.title">
 <meta property="og:description" content="已發布的警語：同名不同藥，以及跨國、鹽型或釋放機制下不可互換的複方產品。" data-i18n-meta="meta.warn.desc">
-<meta property="og:url" content="https://fuarnos.github.io/drug-brand-crossref/zh-hant/warn.html">
+<meta property="og:url" content="https://drugcrossref.com/zh-hant/warn.html">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b6b53'/%3E%3Cpath d='M8 3v10M3 8h10' stroke='white' stroke-width='2'/%3E%3C/svg%3E"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Medicine Brand Cross-Reference","alternateName":"药品商品名跨国定位","url":"https://fuarnos.github.io/drug-brand-crossref/"}</script>
-<link rel="stylesheet" href="../assets/style.css?v=2432887534">
-<script defer src="../assets/boot.js?v=2432887534"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b6b53'/%3E%3Cpath d='M8 3v10M3 8h10' stroke='white' stroke-width='2'/%3E%3C/svg%3E"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Medicine Brand Cross-Reference","alternateName":"药品商品名跨国定位","url":"https://drugcrossref.com/"}</script>
+<link rel="stylesheet" href="../assets/style.css?v=1434160105">
+<script defer src="../assets/boot.js?v=1434160105"></script>
 <script>window.DSH_PREFIX='';</script>
 <script data-goatcounter="https://drug-brand-crossref.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></head>
 <body>
@@ -75,14 +75,18 @@
   if(!list || !pager) return;
   var items = Array.prototype.slice.call(list.querySelectorAll('article.warn-item'));
   var total = Math.ceil(items.length / PAGE);
-  if(total <= 1) return;
-  var T = window.T || function(k){ return k; };
+  var fbox = document.querySelector('.warnfilters');
   var params = new URLSearchParams(location.search);
   var cur = parseInt(params.get('page') || '1', 10);
   if(!cur || cur < 1) cur = 1;
   if(cur > total) cur = total;
   if(params.get('page') && String(cur) !== params.get('page')){
     try{ params.set('page', String(cur)); history.replaceState(null, '', '?' + params.toString()); }catch(e){}
+  }
+  // 文案延迟到渲染时取，i18n 未就绪时用英文兜底（绝不把内部键名渲染到页面上）。
+  function T(k, fallback){
+    var v = (window.T || function(){ return ''; })(k);
+    return (!v || v === k) ? fallback : v;
   }
   function pageHref(n){
     var p = new URLSearchParams(location.search);
@@ -91,46 +95,60 @@
     var q = p.toString();
     return '?' + q;
   }
-  items.forEach(function(el, i){
-    el.style.display = (i >= (cur - 1) * PAGE && i < cur * PAGE) ? '' : 'none';
-  });
   function link(n, label, cls, rel, disabled){
     if(disabled) return '<span class="' + cls + ' disabled" aria-disabled="true">' + label + '</span>';
     return '<a class="' + cls + '" href="../' + pageHref(n) + '"' + (rel ? ' rel="' + rel + '"' : '') + '>' + label + '</a>';
   }
-  var html = '<span class="pg-status" aria-live="polite">' +
-    T('warn.page_status').replace('{n}', cur).replace('{total}', total).replace('{count}', items.length) +
-    '</span>';
-  html += link(cur - 1, '‹ ' + T('warn.page_prev'), 'pg-prev', 'prev', cur <= 1);
-  for(var n = 1; n <= total; n++){
-    if(n === cur) html += '<span class="pg-num on" aria-current="page">' + n + '</span>';
-    else html += link(n, String(n), 'pg-num', '', false);
+  function renderPager(){
+    if(total <= 1){ pager.innerHTML = ''; return; }
+    var html = '<span class="pg-status" aria-live="polite">' +
+      T('warn.page_status', 'Page {n} of {total} · {count} warnings')
+        .replace('{n}', cur).replace('{total}', total).replace('{count}', items.length) +
+      '</span>';
+    html += link(cur - 1, '‹ ' + T('warn.page_prev', 'Previous'), 'pg-prev', 'prev', cur <= 1);
+    for(var n = 1; n <= total; n++){
+      if(n === cur) html += '<span class="pg-num on" aria-current="page">' + n + '</span>';
+      else html += link(n, String(n), 'pg-num', '', false);
+    }
+    html += link(cur + 1, T('warn.page_next', 'Next') + ' ›', 'pg-next', 'next', cur >= total);
+    pager.innerHTML = html;
   }
-  html += link(cur + 1, T('warn.page_next') + ' ›', 'pg-next', 'next', cur >= total);
-  pager.innerHTML = html;
-})();
-
-  // v0.10.0 P1-4: severity filter (client-side, keeps pager hidden while filtering)
-  var fbox = document.querySelector('.warnfilters');
+  function showPage(){
+    items.forEach(function(el, i){
+      el.style.display = (i >= (cur - 1) * PAGE && i < cur * PAGE) ? '' : 'none';
+    });
+  }
+  function init(){
+    showPage();
+    renderPager();
+    pager.style.display = '';
+  }
   if(fbox){
     fbox.addEventListener('click', function(ev){
-      var b = ev.target.closest ? ev.target.closest('[data-sev]') : null;
+      var b = ev.target && ev.target.closest ? ev.target.closest('[data-sev]') : null;
       if(!b) return;
       var sev = b.getAttribute('data-sev') || '';
       fbox.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); });
       items.forEach(function(el){
-        var show = !sev || el.getAttribute('data-sev') === sev;
-        el.style.display = show ? '' : 'none';
+        var match = !sev || el.getAttribute('data-sev') === sev;
+        el.style.display = match ? '' : 'none';
       });
       pager.style.display = sev ? 'none' : '';
     });
   }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+  // i18n.js 由 boot.js 在 window load 后注入；它调用 apply() 时会跑这里注册的钩子，
+  // 用当前语言重绘页码/上一页/下一页（切语言后也不会残留英文或键名）。
+  (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(init);
+})();
 </script>
 </div></main>
 <footer><div class="wrap">
   <span data-i18n="footer">Information only — not medical advice, and no substitute for a pharmacist.</span>
   <span class="foot-links">
-    <a href="../whats-new.html">v0.11.1 · 2026-11-11</a>
+    <a href="../whats-new.html">v0.11.2 · 2026-11-12</a>
     <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml"
        target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
     <a href="https://github.com/fuarnos/drug-brand-crossref/issues" target="_blank" rel="noopener"

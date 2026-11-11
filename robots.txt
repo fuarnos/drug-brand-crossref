@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fuarnos.github.io/drug-brand-crossref/sitemap.xml
+Sitemap: https://drugcrossref.com/sitemap.xml

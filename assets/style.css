@@ -64,6 +64,23 @@ h2{font-size:var(--fs-lg);line-height:var(--lh-heading);margin:24px 0 12px}
    因为「永远是候选集」是本站的口径而不是注脚。 */
 .candidate-line{font-size:var(--fs-md);line-height:var(--lh-ui);color:var(--fg);
  margin:0 0 16px;max-width:var(--prose)}
+/* 2026-11-12 v0.11.2（条目 8）：首页三步流程条（输名 → 确认产品 → 选目标市场）。
+   只在「还没有查询」时出现；.has-q 后隐藏，结果页首屏不为它付高度。 */
+.flow3{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;list-style:none;
+ margin:0 0 12px;padding:0;font-size:var(--fs-md);line-height:1.35;color:var(--fg)}
+.flow3 li{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.flow3 .n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+ border-radius:var(--r-pill);background:var(--accent-weak);color:var(--accent);font-size:13px;
+ font-weight:700;line-height:1}
+.flow3 li+li::before{content:"→";color:var(--muted);margin-right:2px}
+html.has-q .flow3{display:none}
+/* 2026-11-12 v0.11.2（条目 10）：来源市场（?src=）生效时的状态行，与目标市场分开显示。 */
+.srcnote{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:8px 0 0;
+ font-size:var(--fs-sm);color:var(--muted)}
+.srcnote b{color:var(--fg);font-weight:600}
+.srcnote button{padding:2px 0;border:0;background:none;color:var(--accent);font-size:var(--fs-sm);
+ text-decoration:underline;min-height:auto}
+.srcnote[hidden]{display:none!important}
 #q{width:100%;padding:14px 16px;font-size:16px;border:1px solid var(--line);
 border-radius:12px;background:#fff}
 /* 2026-11-11 UI：搜索框内 44×44 可见提交按钮 + 右侧「按 / 聚焦」提示（13px 灰字）。
@@ -126,13 +143,19 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atclist li{break-inside:avoid;margin:2px 0;font-size:16px}
 /* v0.10.2 task-3：ATC/大类页成分列表改自适应多列网格——宽屏（1440 / 2560）不再把内容
    挤在中间一列（旧 .wrap 920px + columns:2，2560 视口下列宽只有 268px）。
-   minmax(300px,1fr) 保证单列 ≥300px，行内「主名 + 盐型子行 + 状态角标」不折断。
-   2026-11-11 Batch 2：每条固定 2–3 行（名+码 / 盐型 / 状态+市场），顶部对齐 ——
-   同一行里相邻条目不再因为「一行只有名字、一行带两枚状态」而上下错位。 */
-.atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
- column-gap:24px;row-gap:0;columns:auto;padding-left:20px;margin:6px 0 10px;max-width:none}
-.atcmembers li{display:grid;grid-template-rows:auto auto auto;align-content:start;
- align-items:start;row-gap:1px;font-size:16px;line-height:1.3;break-inside:auto}
+   2026-11-12 用户截图要求（task-6）：每个活性成分一个独立框 —— 1px 边框 + 圆角 + 10–12px
+   内边距 + 与页面底色不同的面板底色（--card 白 vs --bg），不再连成一片。
+   列数保持 3（≥1280）/ 2（768–1279）/ 1（<768）；卡片 align-self:start + break-inside:avoid
+   防止跨列断裂。状态仍是纯文字（不恢复 v0.11.1 去掉的彩色底墙）。 */
+.atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+ column-gap:16px;row-gap:8px;columns:auto;padding-left:0;margin:6px 0 12px;max-width:none;
+ list-style:none}
+.atcmembers>li{display:grid;grid-template-rows:auto auto auto;align-content:start;
+ align-items:start;align-self:start;row-gap:0;font-size:16px;line-height:1.3;
+ break-inside:avoid;border:1px solid var(--line);border-radius:10px;background:var(--card);
+ padding:10px 12px;margin:0}
+.atcmembers .salt-row{margin:0}
+.atcmembers .atc-strip{margin-top:0}
 /* 第 1 行：主名 + ATC 码；码用等宽数字 + 固定最小宽，1 码/2 码不会把下一行推歪 */
 .atc-nm{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;min-width:0}
 .atc-codes{display:inline-flex;flex-wrap:wrap;gap:0 6px;min-width:5.4em;
@@ -149,8 +172,8 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atc-mk{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;
  letter-spacing:0;white-space:nowrap}
 .atc-st-sep{color:var(--muted);font-size:13px;line-height:1.25}
-@media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:18px}
- .atcmembers li{font-size:16px} }
+@media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:0}
+ .atcmembers>li{font-size:16px;padding:10px;margin:0 0 8px} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
 .atc-src{color:var(--muted);font-size:13px;margin-left:6px;white-space:nowrap}
 .atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
@@ -245,6 +268,18 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 .notice.nick .sub a{white-space:nowrap}
 .notice.nick .sub.src{font-size:14px;margin-top:4px}
 .notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
+/* 2026-11-12 v0.11.2（条目 10）：同名不同药的家族说明可折叠 —— 390 上只留一行警示摘要，
+   长注释放展开区；桌面端 summary 隐藏、默认展开（信息不丢）。 */
+.famnotice{padding:8px 12px}
+.famnotice>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:8px}
+.famnotice>summary::-webkit-details-marker{display:none}
+.famnotice>summary::after{content:"＋";margin-left:auto;color:var(--accent);font-size:14px}
+.famnotice[open]>summary::after{content:"－"}
+.famnotice>.famnote{margin:6px 0 0}
+@media (min-width:601px){
+ .famnotice>summary{display:none}
+ .famnotice>.famnote{margin:0}
+}
 table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;margin-top:8px}
 th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:14px}
@@ -279,6 +314,16 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 /* v0.10.2 M-4：#ac 的锚点从 .searchwrap 换成 .searchbar，方便把 #meta / 国家行
    一起放进 sticky 的 .searchwrap 里，而不让建议列表跟着往下挪两层。 */
 .searchbar{position:relative}
+/* 2026-11-12 v0.11.2（条目 26）：内容页常驻的简洁搜索栏（成分页 / 商品名页可续查）。
+   顶层页静态渲染；长尾页（drug / name / combo / maker…）由 assets/boot.js 注入同一段，
+   所以 121k 页不增加每页字节。首页不显示（大搜索框已承担）。 */
+.hsearch-row{border-top:1px solid var(--line);background:var(--bg)}
+.hsearch-row .wrap{height:auto;display:block;padding-top:6px;padding-bottom:8px}
+.hsearch{display:flex;gap:8px;align-items:center;max-width:600px}
+.hsearch input{flex:1;min-width:0;padding:10px 12px;font-size:16px;border:1px solid var(--line);
+ border-radius:10px;background:#fff}
+.hsearch button{flex:none;min-width:44px;min-height:44px;padding:0 12px;border-radius:10px;
+ font-size:16px;line-height:1}
 #ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
 background:#fff;border:1px solid var(--line);border-radius:12px;
 box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
@@ -334,6 +379,23 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
 .idacts .primary{background:var(--accent);color:#fff}
 .idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
+/* 2026-11-12 v0.11.2（条目 9）：身份卡标题写清「概括的是哪一条候选」——
+   位置（第 1 条 / 共 N 条）+ 这一条自己的商品名（不是把整个品牌当答案）。
+   390x844 下卡片折成紧凑头：只留标题 + 查询→成分一行，规格/市场/警示/动作进可展开区。 */
+.idcard .idtitle{margin:0 0 6px;font-size:var(--fs-md);line-height:1.4;color:var(--muted)}
+.idcard .idtitle b{color:var(--fg);font-size:var(--fs-md);font-weight:700}
+.idcard .idtitle .idmake{color:var(--muted);font-weight:400}
+.idmore{margin:0}
+.idmore>summary{display:none}
+.idmore>.idbody{margin:0}
+@media (max-width:600px){
+ .idmore>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  min-height:44px;cursor:pointer;color:var(--accent);font-size:var(--fs-sm);list-style:none}
+ .idmore>summary::-webkit-details-marker{display:none}
+ .idmore>summary::after{content:"＋";font-size:16px;line-height:1}
+ .idmore[open]>summary::after{content:"－"}
+ .idmore[open]>.idbody{padding-top:8px;border-top:1px solid var(--line-soft);margin-top:4px}
+}
 .res-more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
  margin:10px 0 0}
 .res-more .sub{margin:0;font-size:14px}
@@ -364,6 +426,16 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
   /* 2026-11-11：国家/地区收进 details 后，sticky 区里那一行换成 44px summary（比原来
      「整行标签 + 下拉」矮，换国家的入口还在） */
   .has-q .searchwrap .ctry-details{margin-top:4px}
+}
+/* 2026-11-12 v0.11.2（条目 10）：结果区上方的重复说明在窄屏压缩 —— 手机首屏留给候选表，
+   解析条 / 「国家/地区叫法」提示不各占一整行（警示文字已移进身份卡的展开区）。 */
+@media (max-width:600px){
+  .parsebar{padding:6px 10px;margin:8px 0;font-size:var(--fs-sm)}
+  .u2bar{padding:8px 10px;margin:8px 0}
+  .u2bar .u2head .sub{display:none}
+  .u2chips{margin-top:6px}
+  .idcard{padding:10px 12px;margin:10px 0 8px}
+  .idcard .idrow .idq{font-size:18px}
 }
 table.det{margin:4px 0 8px;font-size:14px;background:#f6f5f0;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}

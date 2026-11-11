@@ -1,7 +1,16 @@
 
+// v0.11.2 P0-2：明细行字段表由构建期从 etl/build_detail_buckets.py 的 ROW_FIELDS 注入，
+// 明细面板的列下标一律从它取名（曾把品牌列写成 r[3]=pack，60.8% 明细行显示成包装）。
+const DETAIL_ROW_FIELDS = ["product_id", "country", "brand", "pack", "approval_id", "status_idx", "status_date", "release_idx", "strength", "mah", "source_url_suffix", "source_idx"];
+const DETAIL_COL = {brand: DETAIL_ROW_FIELDS.indexOf('brand'),
+                    pack: DETAIL_ROW_FIELDS.indexOf('pack')};
 const box = document.getElementById('q');
 const out = document.getElementById('out');
 const ctry = document.getElementById('country');
+// v0.11.2（条目 10）：来源市场（?src=）与目标市场（?country=）是两个语义：
+//   country = 目标市场（这个成分在该国叫什么）；src = 来源市场（只看这些登记库的记录）。
+const srcEl = document.getElementById('src');
+const srcNote = document.getElementById('srcnote');
 const meta = document.getElementById('meta');
 // v0.9.7 task-12：结果页 H1 改成查询名（清空查询时还原首页 H1）；身份卡挂在表前的 #identity。
 const h1El = document.getElementById('h1');
@@ -357,11 +366,14 @@ function detPanelHTML(payload, key, e, T){
     const rel = (payload.r && payload.r[r[7]]) || '';
     const src = (payload.s && payload.s[r[11]]) || '';
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
-    const brandCell = r[3] ? esc(r[3]) : esc(T('brand.none'));
+    // v0.11.2 P0-2：下标来自 ROW_FIELDS（构建期注入），别再手写数字。
+    // 其它列（country=1 / approval=4 / status=5 / release=7 / strength=8 / mah=9 /
+    // source_url=10 / source_idx=11）仍按 ROW_FIELDS 的既有契约读取。
+    const brandCell = r[DETAIL_COL.brand] ? esc(r[DETAIL_COL.brand]) : esc(T('brand.none'));
     const exp = (EXPORT_ONLY && EXPORT_ONLY.has(r[0]))
       ? ` <span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
     return `<tr><td>${esc(r[1])}</td><td>${brandCell}${exp}</td>`
-      + `<td>${esc(r[3]) || '—'}${strength}</td>`
+      + `<td>${esc(r[DETAIL_COL.pack]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
       + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
@@ -652,6 +664,10 @@ function suggestNames(nq, limit){
   }
   return res;
 }
+// v0.11.2（条目 9/10）：窄屏（390）判定——身份卡折成紧凑头、结果区上方说明可折叠。
+function compactUI(){
+  try{ return !!(window.matchMedia && matchMedia('(max-width:600px)').matches); }catch(e){ return false; }
+}
 function identityCardHTML(q, display, nicks, confs, T){
   if(!display || !display.length) return '';
   let first = null;
@@ -664,9 +680,7 @@ function identityCardHTML(q, display, nicks, confs, T){
   const zhName = (first.xz && first.xz.length) ? first.xz.join(' + ') : '';
   const other = (window.LANG === 'zh' || window.LANG === 'zh-Hant')
     ? (first.x || '') : zhName;
-  const ingLine = `<span class="iding">${esc(ing)}</span>`
-    + (other && other !== ing ? ` <span class="meta">${esc(other)}</span>` : '');
-  let severe = !!(confs && confs.length) || first.l === 'severe';
+  const ingLine = `<span class="iding">${esc(ing)}</span>`;  let severe = !!(confs && confs.length) || first.l === 'severe';
   for(const item of display){ if(item[2] && item[2].l === 'severe'){ severe = true; break; } }
   const badge = severe ? ` <span class="idbadge">${esc(T('res.same_name'))}</span>` : '';
   const strengths = [];
@@ -691,6 +705,9 @@ function identityCardHTML(q, display, nicks, confs, T){
     fields.push(`<span>${esc(T('res.identity.markets'))} ${marketTags(markets, 6)}</span>`);
   }
   if(recs) fields.push(`<span>${esc(T('res.identity.records').replace('{n}', String(recs)))}</span>`);
+  // v0.11.2（条目 10）：另一语言的成分名不再占卡片常显区（390 上会多 3 行），
+  // 移进展开后的字段行；桌面端默认展开，信息不丢。
+  if(other && other !== ing) fields.push(`<span>${esc(other)}</span>`);
   const drugHref = first.cu ? (BASE + first.cu)
     : (first.v ? (BASE + 'drug/' + encodeURIComponent(first.v) + '.html') : '');
   const std = String(first.x || first.d || '').trim();
@@ -703,12 +720,30 @@ function identityCardHTML(q, display, nicks, confs, T){
   }
   acts.push(`<a href="${esc(reportURL(q))}" target="_blank" rel="noopener">`
     + `${esc(T('report.cta'))}</a>`);
+  // v0.11.2（条目 9）：标题写清「概括的是哪一条候选」——位置 + 这一条自己的商品名/厂家，
+  // 不让人把卡片当成整个品牌的结论（整个品牌/名称仍是候选集）。
+  let candName = String(first.d || first.k || q);
+  if(candName.length > 42) candName = candName.slice(0, 41) + '…';
+  let maker = String(first.m || '');
+  if(maker.length > 24) maker = maker.slice(0, 23) + '…';
+  const candTitle = esc(T('res.identity_title').replace('{n}', String(display.length)))
+    + ` · <b>${esc(candName)}</b>`
+    + (maker ? ` <span class="idmake">· ${esc(maker)}</span>` : '');
+  // v0.11.2（条目 10 / task-3）：390 宽下卡片折成紧凑头——标题 + 查询→成分一行常显，
+  // 规格/市场/警示/动作收进可展开区；桌面端默认展开且不显示摘要行。
+  const compactCard = compactUI();
   return `<section class="idcard" aria-label="${esc(T('res.identity.ingredient'))}">
+    <p class="idtitle">${candTitle}</p>
     <div class="idrow"><span class="idq">${esc(q)}</span>
       <span class="idarrow">→</span>${ingLine}${badge}</div>
-    <p class="idfields">${fields.join('')}</p>
-    <div class="idwarn">${esc(T('res.not_interchangeable'))} · ${esc(T('res.identity_note'))}</div>
-    <div class="idacts">${acts.join('')}</div>
+    <details class="idmore"${compactCard ? '' : ' open'}>
+      <summary>${esc(T('res.more_detail'))}</summary>
+      <div class="idbody">
+        <p class="idfields">${fields.join('')}</p>
+        <div class="idwarn">${esc(T('res.not_interchangeable'))} · ${esc(T('res.identity_note'))}</div>
+        <div class="idacts">${acts.join('')}</div>
+      </div>
+    </details>
   </section>`;
 }
 function emptyActionsHTML(q, nq, T){
@@ -898,6 +933,18 @@ function updateCtryLabel(){
     : T('home.country_summary');
 }
 (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(updateCtryLabel);
+// v0.11.2（条目 10）：来源市场状态行（只在选了来源市场时出现；与目标市场分开显示）。
+// 目标市场仍由 #country 的 summary 表示，两者互不改写对方的文案。
+function updateSrcNote(){
+  if(!srcNote) return;
+  const T = window.T || (k=>k);
+  const v = srcEl ? srcEl.value : '';
+  if(!v){ srcNote.hidden = true; srcNote.innerHTML = ''; return; }
+  srcNote.hidden = false;
+  srcNote.innerHTML = esc(T('res.src_active').replace('{c}', v)) + ' · '
+    + '<button type="button" data-clearsrc="1">' + esc(T('res.src_all')) + '</button>';
+}
+(window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(updateSrcNote);
 // ── URL 状态：q / country 可分享、可前进后退（history.replaceState，不新增历史项）──
 let URL_T = null;
 function syncURL(q){
@@ -909,6 +956,9 @@ function syncURL(q){
       if(q) u.searchParams.set('q', q); else u.searchParams.delete('q');
       const c = ctry.value;
       if(c) u.searchParams.set('country', c); else u.searchParams.delete('country');
+      // v0.11.2（条目 10）：来源市场单独一个参数，不占用 country 的语义
+      const s = srcEl ? srcEl.value : '';
+      if(s) u.searchParams.set('src', s); else u.searchParams.delete('src');
       window.history.replaceState(null, '', u.pathname + (u.search || '') + (u.hash || ''));
     }catch(e){}
   }, 300);
@@ -919,14 +969,16 @@ if(window.addEventListener){
       const p = new URLSearchParams(location.search);
       box.value = p.get('q') || '';
       ctry.value = (p.get('country') || '').toUpperCase();
+      if(srcEl) srcEl.value = (p.get('src') || '').toUpperCase();
       updateCtryLabel();
+      updateSrcNote();
       if(box.value.trim()) startSearch(); else render();
     }catch(e){}
   });
 }
 /* ── 搜索增强（task-28）：运行时派生匹配层 + 拼音懒加载 ──────────────────────
    在已下载的 IDX 上零新增下载派生 exact/连写 Map、前缀排序数组、CJK bigram、
-   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=2432887534（懒加载）。?legacy=1 不启用。
+   拉丁 trigram；拼音/首字母用 data/idx/pinyin.json?v=1434160105（懒加载）。?legacy=1 不启用。
    collectHits() 与旧线性扫描共享同一套 addHit/tier/排序，保证候选集/碰撞/国家
    视图语义不变；派生层构建失败时自动退回旧路径。基准见 reports/search-engine-v2.md */
 function searchLayersBuildLight(){
@@ -979,7 +1031,7 @@ function searchLayersScheduleHeavy(){
 function pinyinFetch(){
   if(PY_MAP) return Promise.resolve(true);
   if(PY_P) return PY_P;
-  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=2432887534').then(r=>{
+  PY_P = fetch(BASE + 'data/idx/pinyin.json?v=1434160105').then(r=>{
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   }).then(d=>{
@@ -1489,7 +1541,7 @@ function render(){
   // P2：分片阶段先出结果；core 未到位时标记 partial，跨条目的区块延后到补全后
   const partial = !!(POOL_READY && !IDX_READY && !LEGACY);
   const matched = collectHits(nq, st, nicks, nickSids, onlyUnmapped, c);
-  const hits = matched.hits;
+  let hits = matched.hits;
   const fuzzyUsed = matched.fuzzyUsed;
   // 拼音兜底：拉丁查询零命中（或只有模糊命中）且拼音表未加载 → 懒加载 pinyin.json 后重跑一次。
   if(!nicks.length && !LEGACY && SEARCH_LAYERS && /^[a-z0-9 ]{2,}$/.test(nq) && !PY_MAP
@@ -1498,6 +1550,13 @@ function render(){
   }
   hits.sort((a,b)=> b[0]-a[0] || (a[2].q?1:0)-(b[2].q?1:0) ||
                      b[2].n-a[2].n || a[2].d.length-b[2].d.length);
+  // v0.11.2（条目 10）：来源市场（?src=）只筛候选集——保留在该登记库有记录的条目。
+  // 目标市场（c，?country=）在下面单独改变视图；两个语义不混。分片阶段字段未全时先不筛，
+  // core 到位后 render 会重跑，届时再按来源市场过滤。
+  const src = srcEl ? srcEl.value : '';
+  if(src && !partial){
+    hits = hits.filter(h => (h[2].c || []).indexOf(src) >= 0);
+  }
   // UI P0 ④：不再 40 行/80 行硬截断——保留至多 200 条候选交给前端
   // 「成分聚合 + 品牌折叠 + 加载更多」分页展示（默认每页 25 行可见品牌）。
   const shown = hits.slice(0, 200);
@@ -1632,9 +1691,14 @@ function render(){
   }
   let warnHTML = '';
   const T2 = window.T || (k=>k);
+  // v0.11.2（条目 10）：同名不同药的家族说明在 390 上折成一行摘要（警示标签仍常显，
+  // 长注释放展开区），桌面端默认展开——结果区上方不再被说明文字吃满首屏。
+  const famCompact = compactUI();
   for(const [label, f] of byFam){
     if(f.comps.size > 1){
-      warnHTML += `<div class="notice"><b>${T2('fam.warn')}：${label}。</b>${f.note||''}</div>`;
+      warnHTML += `<details class="notice famnotice"${famCompact ? '' : ' open'}>`
+        + `<summary><b>${T2('fam.warn')}：${label}。</b></summary>`
+        + `<div class="famnote">${f.note||''}</div></details>`;
     }
   }
   let extraHTML = '';
@@ -1715,7 +1779,15 @@ function render(){
           ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)).slice(0, 2).join(' / ') : '';
         const cs = (e.c || []).slice(0, 3)
           .map(c => `<span class="tag ${String(c).toLowerCase()}">${esc(c)}</span>`).join(' ');
-        return `<li>${brandHTML(e)}${ds ? ' <span class="meta">' + esc(ds) + '</span>' : ''}`
+        // 2026-11-12 task-18（用户截图）：有商品名的条目也显示厂家，和「无商品名」条目
+        // 的「厂家：X 命中名：Y」对齐。>28 字截 27 + …，title 放全名；样式沿用 meta。
+        let mah = '';
+        if(e.t === 1 && e.m){
+          const full = String(e.m);
+          const short = full.length > 28 ? full.slice(0, 27) + '…' : full;
+          mah = ` <span class="meta" title="${esc(full)}">${esc(T2('brand.mah'))} ${esc(short)}</span>`;
+        }
+        return `<li>${brandHTML(e)}${mah}${ds ? ' <span class="meta">' + esc(ds) + '</span>' : ''}`
           + `${cs ? ' ' + cs : ''}</li>`;
       }).join('');
       const rest = rows2.length - list.length;
@@ -1805,9 +1877,9 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json?v=2432887534，见 reports/index-p1-impl.md）──
-// 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
-// index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
+// 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧 index.json
+// 同字段（字段清单见 build.py 的 CORE_FIELDS；v0.11.2 起 t/nc/eo 也在 core 里）的 IDX 数组，
+// render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
 //   cols[f] = [值...]                                普通列
 //   d 与 k 只差 ASCII 大小写时 cols.d 存 ""，cols.dp 存大小写位置模式（'0-2,5'）；
@@ -1849,10 +1921,10 @@ function fetchJSON(url){
 }
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
-  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=2432887534 + decodeCore；
+  // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json?v=1434160105 + decodeCore；
   // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
   // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json?v=2432887534').then(decodeCore).catch(err=>{
+  return fetchJSON(BASE + 'data/idx/core.json?v=1434160105').then(decodeCore).catch(err=>{
     if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
     return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
   });
@@ -1862,7 +1934,7 @@ function loadMainIndex(){
 function fetchManifest(){
   if(MANIFEST) return Promise.resolve(MANIFEST);
   if(MANIFEST_P) return MANIFEST_P;
-  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=2432887534').then(m=>{ MANIFEST = m; return m; })
+  MANIFEST_P = fetchJSON(BASE + 'data/idx/manifest.json?v=1434160105').then(m=>{ MANIFEST = m; return m; })
     .catch(err=>{ MANIFEST_P = null; throw err; });
   return MANIFEST_P;
 }
@@ -2234,6 +2306,13 @@ out.addEventListener('click', ev => {
     ctry.value = '';
     updateCtryLabel();
     render();
+    return;
+  }
+  // v0.11.2（条目 10）：清掉来源市场过滤，候选集回到全部登记库
+  if(t.closest('[data-clearsrc]')){
+    if(srcEl) srcEl.value = '';
+    updateSrcNote();
+    render();
   }
 });
 // 点击事件：结果里的品牌/成分链接、报告入口、更新日志（只记事件，不记用户）。
@@ -2270,6 +2349,14 @@ ctry.addEventListener('change', ()=>{
   if(ctry.value) ensureIndexOnDemand();
   startSearch();
 });
+// v0.11.2（条目 10）：来源市场只过滤候选集（登记库），不触发国家聚合视图。
+if(srcEl){
+  srcEl.addEventListener('change', ()=>{
+    updateSrcNote();
+    acClose();
+    startSearch();
+  });
+}
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
   box.value=b.dataset.q; acClose(); trackSearchSubmit(box.value); startSearch(); box.focus();
 }));
@@ -2331,7 +2418,11 @@ const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
 const ctry0 = new URLSearchParams(location.search).get('country');
 if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
+// v0.11.2（条目 10）：?src= 来源市场深链（与 ?country= 目标市场并列，互不覆盖）
+const src0 = new URLSearchParams(location.search).get('src');
+if(src0 && srcEl){ srcEl.value = src0.toUpperCase(); }
 updateCtryLabel();   // 「看这个药在哪个国家叫什么」标签随 URL/选择初始化
+updateSrcNote();     // 来源市场状态行（选了才出现）
 if(LEGACY){
   // 回滚开关：?legacy=1 = 旧行为，页面一加载就拉全量索引。
   setHint('');

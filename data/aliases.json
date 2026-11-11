@@ -10880,60 +10880,6 @@
   "np": 9
  },
  {
-  "a": "速效伤风胶囊",
-  "n": "速效伤风胶囊",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "documented",
-  "hint": "候选来源：wikipedia_zh;alihealth_cn；别名表：氨咖黄敏 ← 速效伤风胶囊；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; 公开健康平台页面整理（许可待确认；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：wikipedia_zh;alihealth_cn。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E6%B0%A8%E5%92%96%E9%BB%84%E6%95%8F",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
- },
- {
-  "a": "速效感冒胶囊",
-  "n": "速效感冒胶囊",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "documented",
-  "hint": "候选来源：wikipedia_zh;alihealth_cn；别名表：氨咖黄敏 ← 速效感冒胶囊；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; 公开健康平台页面整理（许可待确认；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：wikipedia_zh;alihealth_cn。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E6%B0%A8%E5%92%96%E9%BB%84%E6%95%8F",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
- },
- {
   "a": "速降血压灵",
   "n": "速降血压灵",
   "v": "atenolol",
@@ -12217,33 +12163,6 @@
   "np": 109
  },
  {
-  "a": "万艾可的",
-  "n": "万艾可的",
-  "v": "sildenafil",
-  "i": "Sildenafil",
-  "x": "Sildenafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；万艾可的别名 | 百度健康·医学科普 万艾可的通用名为枸橼酸西地那非片,其常见别名包括 “西地那非” (英文名Sildenafil)及非正式称呼 “伟哥” (Viagra)。 该药物主要 ... 万艾可；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Sildenafil（sildenafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=16a51c96516afdc389f8ddafe7452cbffbae533eba7b43eb5d2b9fb84e7dc6f5JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYyMzg2NDk5NTg4NDc2MDQ1ODI&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "TW",
-   "US"
-  ],
-  "np": 1142
- },
- {
   "a": "三唑侖",
   "n": "三唑侖",
   "v": "triazolam",
@@ -12317,30 +12236,6 @@
    "US"
   ],
   "np": 442
- },
- {
-  "a": "不一样",
-  "n": "不一样",
-  "v": "domperidone",
-  "i": "Domperidone",
-  "x": "Domperidone",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；多潘立酮片别名叫什么? | 百度健康·医学科普 二、买药时怎么认 不同厂家可能商品名不一样,但主要成分都应是多潘立酮,常见规格为10mg/片。 购买时认准“多潘立酮”和“国药准 ... 多潘立酮；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Domperidone（domperidone）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=a0530076f4237ffc3a43301ec149e4f78bac07e95f5f89bcb1facf486e007fa6JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzY3MzAxNjYzMTY5MTI1ODM1Njg&ntb=1",
-  "c": [
-   "AU",
-   "CN",
-   "ES",
-   "GB",
-   "SG",
-   "TW"
-  ],
-  "np": 272
  },
  {
   "a": "丙三醇三硝酸酯",
@@ -13080,34 +12975,6 @@
   "np": 158
  },
  {
-  "a": "他达拉非是药品",
-  "n": "他达拉非是药品",
-  "v": "tadalafil",
-  "i": "Tadalafil",
-  "x": "Tadalafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；他达拉非是希爱力吗,希爱力和他达拉非有区别吗 - 搜狐 2022年9月20日 · 他达拉非是药品的通用名称,希爱力是药品商品名称。 他达拉非有很多品牌,希爱力美国礼来制药研发并生产,希 ... 希爱力；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Tadalafil（tadalafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=5645525ef40a841adbab4aeaa324149c590254b9adf5ec977eb46a51ab31072eJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuc29odS5jb20vYS81ODY0NzgyMzhfMTIxMTYxMDE2&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1610
- },
- {
   "a": "他達那非",
   "n": "他達那非",
   "v": "tadalafil",
@@ -13211,33 +13078,6 @@
    "US"
   ],
   "np": 506
- },
- {
-  "a": "伟哥的",
-  "n": "伟哥的",
-  "v": "sildenafil",
-  "i": "Sildenafil",
-  "x": "Sildenafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；伟哥的别名 - 有来医生 2023年10月23日 · 伟哥的别名是万艾可,化学名是枸橼酸西地那非片,是治疗勃起功能障碍的药物,有时可用于治疗肺动脉高压。 存 ... 万艾可；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Sildenafil（sildenafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=d79349578e7d777fc1a16b805322d2598c1ff593eb7be157a26146bf399fca00JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9tLnlvdWxhaS5jbi9wamluZ2JpYW4vYXJ0aWNsZS9BQTA0RkZnTUJVVi5odG1s&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "TW",
-   "US"
-  ],
-  "np": 1142
  },
  {
   "a": "伪麻黄素",
@@ -14175,26 +14015,6 @@
   "np": 505
  },
  {
-  "a": "分别为慷定来和化疣敵",
-  "n": "分别为慷定来和化疣敵",
-  "v": "podofilox",
-  "i": "Podofilox",
-  "x": "Podofilox",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：wikipedia_zh；wikipedia：鬼臼毒素 的别名 分别为慷定来和化疣敵；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; CC BY-SA 4.0（维基百科/维基数据；仅存短名+链接）; CC BY-SA 4.0（维基百科重定向；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 Podofilox（podofilox）；来源：wikipedia_zh。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E9%AC%BC%E8%87%BC%E6%AF%92%E7%B4%A0",
-  "c": [
-   "CN",
-   "US"
-  ],
-  "np": 13
- },
- {
   "a": "利他林",
   "n": "利他林",
   "v": "methylphenidate",
@@ -14295,32 +14115,6 @@
   "np": 134
  },
  {
-  "a": "利拉鲁肽的",
-  "n": "利拉鲁肽的",
-  "v": "liraglutide",
-  "i": "Liraglutide",
-  "x": "Liraglutide",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；利拉鲁肽的别名是什么 | 百度健康·医学科普 关于利拉鲁肽的别名与关键信息 别名来源1. 利拉鲁肽的别名“诺和力”为其商品名称,由研发企业命名。 国际非专利名称(INN) ... 利拉鲁肽；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Liraglutide（liraglutide）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=92837138328c730fb74cdabbd2f8d900f848e15379a00710cb092c7e7e9a6f1bJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYyNjkxOTM1MjAwMzI5NTk2Mzg&ntb=1",
-  "c": [
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 68
- },
- {
   "a": "利發黴素",
   "n": "利發黴素",
   "v": "rifampin",
@@ -14418,59 +14212,6 @@
    "US"
   ],
   "np": 453
- },
- {
-  "a": "别称",
-  "n": "别称",
-  "v": "moxifloxacin",
-  "i": "Moxifloxacin",
-  "x": "Moxifloxacin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；拜复乐还叫什么 | 百度健康·医学科普 二、常见商品名/别称 拜复乐 (原研,德国拜耳) 拜复乐 的片剂、注射液都叫这个商品名 部分药店或患者口头上会叫成“莫西沙星”、“ ... 拜复乐；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Moxifloxacin（moxifloxacin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=90dcbdb0914f6050840324485e149841455eb8342eac61f6f7f52735b60d6517JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzU5OTQ0ODgxNjMyODMzNDg0MjQ&ntb=1",
-  "c": [
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 361
- },
- {
-  "a": "别被",
-  "n": "别被",
-  "v": "sildenafil",
-  "i": "Sildenafil",
-  "x": "Sildenafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；别被俗称误导:厘清“伟哥”注册商标与辉瑞万艾可的品牌边界 2026年8月24日 · 在日常交流中,很多人会习惯性把辉瑞的万艾可称作“伟哥”,把二者混为一谈。 但从知识产权档案、药监公开资料来 ... 万艾可；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Sildenafil（sildenafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=435e98b095bf7853c7914339aee65bf66f35559b94b71e42f16e472b414f6d7fJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cudG91dGlhby5jb20vYXJ0aWNsZS83Njc3NTM2MTEzOTYzMTg4NzcxLw&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "TW",
-   "US"
-  ],
-  "np": 1142
  },
  {
   "a": "力復平",
@@ -14774,34 +14515,6 @@
   "np": 95
  },
  {
-  "a": "可以说都很低调",
-  "n": "可以说都很低调",
-  "v": "metformin",
-  "i": "Metformin",
-  "x": "Metformin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；“胍”吹必看 丨我就是神药——二甲双胍 - 知乎 2021年10月8日 · 二甲双胍 (Metformin),又叫 格华止 (Glucophage),学术名和商品名可以说都很低调,与 ... 二甲双胍；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Metformin（metformin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=1928bc0667a6521ffe610b8fa33bf0572230c8cb9ea8482271e72ec32ec3b276JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MTkyMDI5MDI&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 2895
- },
- {
   "a": "可多普洛菲",
   "n": "可多普洛菲",
   "v": "ketoprofen",
@@ -14873,33 +14586,6 @@
   "np": 21
  },
  {
-  "a": "可能因生产厂商",
-  "n": "可能因生产厂商",
-  "v": "rosuvastatin",
-  "i": "Rosuvastatin",
-  "x": "Rosuvastatin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；瑞舒伐他汀又叫日本什么 | 百度健康·医学科普 瑞舒伐他汀 在国际市场上的通用名为 Rosuvastatin,在日本通常被称为 ロスバスタチン(Rosuvastatin),其商品名可能因生产厂商 ... 瑞舒伐他汀；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Rosuvastatin（rosuvastatin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=febc14cb3b065b3ee723f4a7d058cb5e11eb24128315a9c04d79eb59356064ddJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYyMTU4ODc5NjM0ODMzMzc5NDI&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1278
- },
- {
   "a": "可迈丁",
   "n": "可迈丁",
   "v": "warfarin",
@@ -14939,31 +14625,6 @@
   "me": "",
   "ct": "CN",
   "su": "https://zh.wikipedia.org/wiki/%E5%8F%B3%E7%BE%8E%E6%B2%99%E8%8A%AC",
-  "c": [
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 685
- },
- {
-  "a": "右美沙芬片的",
-  "n": "右美沙芬片的",
-  "v": "dextromethorphan",
-  "i": "Dextromethorphan",
-  "x": "氢溴酸右美沙芬",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；右美沙芬片的别名 | 百度健康·医学科普 右美沙芬片的常见别名是氢溴酸右美沙芬片,部分药品说明中也会简称为 美沙芬 或 右甲吗喃。 它是临床常用的中枢性镇咳药,通过 ... 右美沙芬；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 氢溴酸右美沙芬（dextromethorphan）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=2981eca90c653161363ea25ae3b6290790f9ae0c752bc988feb53fe3a826d937JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYwMzAyMDEzNjYwOTI5ODQ1Nzc&ntb=1",
   "c": [
    "CN",
    "ES",
@@ -15217,30 +14878,6 @@
   "np": 655
  },
  {
-  "a": "呼吸科的",
-  "n": "呼吸科的",
-  "v": "ambroxol",
-  "i": "Ambroxol",
-  "x": "Ambroxol",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；化痰药氨溴索为何又叫呼吸科的“万金油”?安全使用要注意什么? 2023年8月8日 · 氨溴索 是最常用的化痰药之一,它是 溴已新 在人体中活性代谢的产物,1980年初 德国 首次生产,作为新一代 呼吸 ... 氨溴索；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Ambroxol（ambroxol）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=2dcdd3ca3db2c54ee3d42ef9e2d912bf69496fc4f67e9c367e555e2b6a81004fJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDg4Mjg0MDE&ntb=1",
-  "c": [
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW"
-  ],
-  "np": 963
- },
- {
   "a": "咪唑尼達",
   "n": "咪唑尼達",
   "v": "metronidazole",
@@ -15290,61 +14927,6 @@
    "TW"
   ],
   "np": 158
- },
- {
-  "a": "啥名",
-  "n": "啥名",
-  "v": "ibuprofen",
-  "i": "Ibuprofen",
-  "x": "Ibuprofen",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；布洛芬又叫啥名 - 百度 2025年7月25日 · 布洛芬是临床上比较常见的一种药物,常用的剂型包括片剂、胶囊剂、颗粒剂,通常具有解热镇痛的效果,通过抑制 ... 布洛芬；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Ibuprofen（ibuprofen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=659368732dd999a5f680addfbc634819b14df84fd0024453bdb9e50ab22871b6JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9tLmJhaWR1LmNvbS9iaC9tL2RldGFpbC9hcl8zNzIyNDIzMzE0NjEyODU4NjE1&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 3218
- },
- {
-  "a": "啥名字",
-  "n": "啥名字",
-  "v": "diazepam",
-  "i": "Diazepam",
-  "x": "Diazepam",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；地西泮又叫啥名字 | 百度健康·医学科普 地西泮 的通用名为 苯甲二氮䓬,其常用商品名为 安定。 此外,它也被称为 Diazepam (英文音译名)。 该药属于 苯二氮䓬类抗焦虑 ... 地西泮；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Diazepam（diazepam）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=6784c5a0ed1035c03114a5e9851bb709917e3926ad167449c321c2aef1036095JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzU2Njk4NjMwMzMwMjUwNTk5MDY&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 526
  },
  {
   "a": "善纤达",
@@ -15544,33 +15126,6 @@
   "np": 557
  },
  {
-  "a": "塞来昔布的",
-  "n": "塞来昔布的",
-  "v": "celecoxib",
-  "i": "Celecoxib",
-  "x": "Celecoxib",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；塞来昔布的俗称叫什么 - 必需药 2026年9月14日 · 塞来昔布的常见俗称是西乐葆,这是该药品最初进入国内市场时的注册商品名,后续逐渐成为患者群体中的通用俗称 ... 塞来昔布；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Celecoxib（celecoxib）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=8ab3d6a2067c179c0406c1ffde1097c19b7186a060fc4440488d671cfe136046JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuaGltZC5jb20vZGVub3N1bWFiLzIyMjQxNDY2&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 557
- },
- {
   "a": "壬基酚聚氧乙烯醚",
   "n": "壬基酚聚氧乙烯醚",
   "v": "nonoxinol",
@@ -15589,60 +15144,6 @@
    "GB"
   ],
   "np": 41
- },
- {
-  "a": "多个",
-  "n": "多个",
-  "v": "rosuvastatin",
-  "i": "Rosuvastatin",
-  "x": "Rosuvastatin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；瑞舒伐他汀的别名叫什么 - 百度 2024年8月29日 · 瑞舒伐他汀的别名有多个,包括罗伐他汀、罗素他汀、罗苏伐他汀等。 瑞舒伐他汀全名叫瑞舒伐他汀钙,是通用名 ... 瑞舒伐他汀；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Rosuvastatin（rosuvastatin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=d002df6ada0a0f01c4cca5d5f1c4f410a1624009dbd3781d0709e3e3d4a96acaJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9tLmJhaWR1LmNvbS9iaC9tL2RldGFpbC9hcl85OTI0ODI2MDg2NDQ1NDc2MjM4&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1278
- },
- {
-  "a": "多为",
-  "n": "多为",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；panadol中文名 | 百度健康·医学科普 一、不同地区叫法 中国大陆:商品名多为“必理通”,也有其他品牌的对乙酰氨基酚片。 1. 中国香港:叫“必理痛”。 2. 中国台湾:叫“普 ... 必理通；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=b25dafa74f81b226cac692688016ec84e344094508b843cf207e440989c67032JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzUxNzQ5Mzc4MTUxODUzMDEwMjY&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
  },
  {
   "a": "多沙普伦",
@@ -15685,32 +15186,6 @@
    "US"
   ],
   "np": 24
- },
- {
-  "a": "多潘立酮或吗丁啉",
-  "n": "多潘立酮或吗丁啉",
-  "v": "dopamine",
-  "i": "Dopamine",
-  "x": "Dopamine",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；Domperidone多潘立酮/吗丁啉 多巴胺受体拮抗剂|CAS 57808-66-9 - 翌 ... 产品介绍 Domperidone (R33812, R-33812, Motilium),又称多潘立酮或吗丁啉,是一种可口服多巴胺受体选择性拮抗剂,促进胃肠蠕 ... 吗丁啉；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Dopamine（dopamine）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=0eb2ef74239f2d864349348ea4c7db03e490d680136952fbc449af48863bf504JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cueWVhc2VuLmNvbS9wcm9kdWN0cy9kZXRhaWwvNDM4Nw&ntb=1",
-  "c": [
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 184
  },
  {
   "a": "大苏打",
@@ -15811,28 +15286,6 @@
   "k": "folk",
   "cf": "community",
   "hint": "候选来源：wikipedia_zh；wikipedia：门冬酰胺酶 的别名 天冬酰胺酶；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; CC BY-SA 4.0（维基百科/维基数据；仅存短名+链接）; CC BY-SA 4.0（维基百科重定向；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 Asparaginase（asparaginase）；来源：wikipedia_zh。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E9%97%A8%E5%86%AC%E9%85%B0%E8%83%BA%E9%85%B6",
-  "c": [
-   "CN",
-   "EU",
-   "GB",
-   "US"
-  ],
-  "np": 13
- },
- {
-  "a": "天冬酰胺酶或天门冬酰胺酶",
-  "n": "天冬酰胺酶或天门冬酰胺酶",
-  "v": "asparaginase",
-  "i": "Asparaginase",
-  "x": "Asparaginase",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：wikipedia_zh；wikipedia：门冬酰胺酶 的别名 天冬酰胺酶或天门冬酰胺酶；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; CC BY-SA 4.0（维基百科/维基数据；仅存短名+链接）; CC BY-SA 4.0（维基百科重定向；仅存短名+链接）",
   "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
   "m": "中文俗名/别名，指向 Asparaginase（asparaginase）；来源：wikipedia_zh。",
   "me": "",
@@ -16453,33 +15906,6 @@
   "np": 2815
  },
  {
-  "a": "宣传自己的商品",
-  "n": "宣传自己的商品",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；扑热息痛明明很好读也很好理解,通用名为啥改成对乙酰氨基酚? 在INN中,“扑热息痛”选定的名称是Paracetamol。 商品名是生产厂家为突出、宣传自己的商品,创造品牌效应而起的名字,与药品的 ... 扑热息痛；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=76e0a5024c4a1eb57019092d3284262b300f234e965297d53f64ef54ce12e5e6JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzU3MjgwNzUwMw&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
- },
- {
   "a": "富來頓",
   "n": "富來頓",
   "v": "furazolidone",
@@ -16683,28 +16109,6 @@
    "US"
   ],
   "np": 1144
- },
- {
-  "a": "就是必利劲",
-  "n": "就是必利劲",
-  "v": "dapoxetine",
-  "i": "Dapoxetine",
-  "x": "Dapoxetine",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；达泊西汀片又叫什么 药物的别名_男性用品_男性_99健康网 达泊西汀片的通用别名 必利劲:达泊西汀片最为人熟知的别名就是必利劲。 必利劲是其原研药的商品名,由德国拜耳公司研发生产。 ... 达泊西汀；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Dapoxetine（dapoxetine）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=806298b927f183c4fe396eee1bc80c3a74c520337d5fa9bfd7f99fd1c6826273JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9uYW4uOTkuY29tLmNuL3lvbmdwaW4vMjEwNDY2MS5odG0&ntb=1",
-  "c": [
-   "CN",
-   "ES",
-   "GB",
-   "SG"
-  ],
-  "np": 286
  },
  {
   "a": "尼克酰胺",
@@ -17162,59 +16566,6 @@
    "US"
   ],
   "np": 273
- },
- {
-  "a": "常为",
-  "n": "常为",
-  "v": "metoprolol",
-  "i": "Metoprolol",
-  "x": "Metoprolol",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：wiki；美托洛尔 美托洛尔在美国的商品名为 Lopressor、Toprol-XL,台湾商品名常为\"舒压宁控释锭\"(Betaloc® ZOK)。 美托洛尔；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 Metoprolol（metoprolol）；来源：wiki。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E7%BE%8E%E6%89%98%E6%B4%9B%E5%B0%94",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "TW",
-   "US"
-  ],
-  "np": 1057
- },
- {
-  "a": "常见药品",
-  "n": "常见药品",
-  "v": "valsartan",
-  "i": "Valsartan",
-  "x": "Valsartan",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；常见药品的通用名和别名.doc_文档猫 常见商品名:Cozaar 简要说明:血管紧张素II受体拮抗药,常用于高血压及肾保保护等 场景。 缬沙坦(valsartan) 别名:valsartan ... 缬沙坦；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Valsartan（valsartan）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=c58714655577560f7d8a67b9d6087218ec987e9aa4691e62911a13f2227ed693JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93ZW5kYW5nLnh1ZWhpLmNuL2RvYy8yZ3ljdW52anRlcjNoeXVyaDQ1aXN2MXp0cnJxeHlvZi5odG1s&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1787
  },
  {
   "a": "干安能",
@@ -17803,25 +17154,6 @@
   "np": 128
  },
  {
-  "a": "扑尔敏的",
-  "n": "扑尔敏的",
-  "v": "chlorphenamine",
-  "i": "Chlorphenamine",
-  "x": "马来酸氯苯那敏",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；扑尔敏的俗称叫什么 | 百度健康·医学科普 马来酸氯苯那敏 扑尔敏的俗称是马来酸氯苯那敏,这是一种常见的抗过敏药物,主要用于治疗皮肤瘙痒、鼻炎等过敏症状。 由于其成 ... 扑尔敏；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 马来酸氯苯那敏（chlorphenamine）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=8be0244ac8d820be6b8afdef8aada5a134b2e17e7f32a05680a27d2cc24316acJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzU4MjcwODYxMjYyODc3ODA4MzQ&ntb=1",
-  "c": [
-   "CN"
-  ],
-  "np": 1164
- },
- {
   "a": "抗坏血酸",
   "n": "抗坏血酸",
   "v": "ascorbic-acid",
@@ -17920,33 +17252,6 @@
    "US"
   ],
   "np": 362
- },
- {
-  "a": "抗癬乳膏",
-  "n": "抗癬乳膏",
-  "v": "clotrimazole",
-  "i": "Clotrimazole",
-  "x": "Clotrimazole",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：wikipedia_zh；wikipedia：克霉唑 的别名 抗癬乳膏；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; CC BY-SA 4.0（维基百科/维基数据；仅存短名+链接）; CC BY-SA 4.0（维基百科重定向；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 Clotrimazole（clotrimazole）；来源：wikipedia_zh。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E5%85%8B%E9%9C%89%E5%94%91",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 776
  },
  {
   "a": "拉K",
@@ -18105,33 +17410,6 @@
    "US"
   ],
   "np": 112
- },
- {
-  "a": "收载",
-  "n": "收载",
-  "v": "methylphenidate",
-  "i": "Methylphenidate",
-  "x": "Methylphenidate",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；“哌甲酯”与“利他林”:没有所谓的使人聪明效果_名称_中国_药品 2023年5月6日 · 可见,1990年版以后《中华人民共和国药典》收载的药品名称都是“哌甲酯”。 鉴于《中华人民共和国药典》收载的药 ... 哌甲酯；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Methylphenidate（methylphenidate）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=d112ea317e92fc214e500343508c17d6fb66163e167bc938cd9394044ebe907dJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuc29odS5jb20vYS82NzMzMzA4NjBfMTIxMTA2OTA4&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 657
  },
  {
   "a": "敏諾西代",
@@ -18324,32 +17602,6 @@
   "np": 727
  },
  {
-  "a": "无环鸟苷的阿昔洛韦",
-  "n": "无环鸟苷的阿昔洛韦",
-  "v": "ganciclovir",
-  "i": "Ganciclovir",
-  "x": "Ganciclovir",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：wikipedia_zh；wikipedia：更昔洛韦 的别名 无环鸟苷的阿昔洛韦；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; CC BY-SA 4.0（维基百科/维基数据；仅存短名+链接）; CC BY-SA 4.0（维基百科重定向；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 Ganciclovir（ganciclovir）；来源：wikipedia_zh。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E6%9B%B4%E6%98%94%E6%B4%9B%E9%9F%A6",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 358
- },
- {
   "a": "既成維生素A",
   "n": "既成維生素a",
   "v": "retinol",
@@ -18453,33 +17705,6 @@
    "US"
   ],
   "np": 828
- },
- {
-  "a": "普拿疼或醋氨酚",
-  "n": "普拿疼或醋氨酚",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；panadol药物名字 - 百度知道 2024年12月18日 · panadol,对乙酰氨基酚的商品名(英文:paracetamol或acetaminophen,又称普拿疼或醋氨酚),由英 ... 普拿疼；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=dabffa301d05b16c3c9606ad0e4c88e60b605448123dbd06efcc08592b18439cJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly96aGlkYW8uYmFpZHUuY29tL3F1ZXN0aW9uLzE2MTc0MDkwNzI1ODU2NTg4NjcuaHRtbA&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
  },
  {
   "a": "普服芬",
@@ -18609,27 +17834,6 @@
    "US"
   ],
   "np": 128
- },
- {
-  "a": "曾用名",
-  "n": "曾用名",
-  "v": "hydrotalcite",
-  "i": "Hydrotalcite",
-  "x": "Hydrotalcite",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；铝碳酸镁咀嚼片 (达喜/曾用名:铝碳酸镁片)详细说明书-注意事项-不良反 ... 商品名称:达喜/曾用名:铝碳酸镁片 英文名称:Hydrotalcite Tablets 汉语拼音:Lutansuanmei Pian 【成份】 铝碳酸镁 【性状】 本品 ... 达喜；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Hydrotalcite（hydrotalcite）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=9b8277274990f7c9c4ab5d8cee0237680a5959566dcc58f9b5d5f5a9958c554fJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly95cGsuMzkubmV0LzUwODMwNi9tYW51YWwv&ntb=1",
-  "c": [
-   "CN",
-   "GB",
-   "TW"
-  ],
-  "np": 296
  },
  {
   "a": "柔沛",
@@ -19160,34 +18364,6 @@
   "np": 504
  },
  {
-  "a": "氨氯地平的",
-  "n": "氨氯地平的",
-  "v": "amlodipine",
-  "i": "Amlodipine",
-  "x": "Amlodipine",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；氨氯地平的别名 | 百度健康·医学科普 氨氯地平 的通用名为 苯磺酸氨氯地平,是临床常用的降压药之一。 其别名包括 络活喜 (原研药商品名)及 安内真 等,但需注意这 ... 氨氯地平；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Amlodipine（amlodipine）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=7ce87d50af173d428bf1323b89068d6302a8cf324e6844c89085c9f60840c140JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYxNjk0MDIxNDk1NDgwMDAzNDE&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 2512
- },
- {
   "a": "氨甲喋呤",
   "n": "氨甲喋呤",
   "v": "methotrexate",
@@ -19541,32 +18717,6 @@
    "US"
   ],
   "np": 39
- },
- {
-  "a": "沙星类药物",
-  "n": "沙星类药物",
-  "v": "moxifloxacin",
-  "i": "Moxifloxacin",
-  "x": "Moxifloxacin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；「每日一药」盐酸莫西沙星片(拜复乐) - 搜狐 2017年12月24日 · 作者:中国人民解放军武汉总医院药剂科团队 盐酸莫西沙星属于喹诺酮类抗生素(俗称沙星类药物),可杀灭多种 ... 拜复乐；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Moxifloxacin（moxifloxacin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=7d29ca1cc6a477273ea3cc09a9e63a6215387b5ab53a8a70c61fe1b78f99149bJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuc29odS5jb20vYS8yMTIzOTk4MjVfMTAwMDMzNTQz&ntb=1",
-  "c": [
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 361
  },
  {
   "a": "沫舒痰",
@@ -20382,33 +19532,6 @@
   "np": 818
  },
  {
-  "a": "瑞舒伐他汀的",
-  "n": "瑞舒伐他汀的",
-  "v": "rosuvastatin",
-  "i": "Rosuvastatin",
-  "x": "Rosuvastatin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；瑞舒伐他汀的别名叫什么 - 百度 2024年8月29日 · 瑞舒伐他汀的别名有多个,包括罗伐他汀、罗素他汀、罗苏伐他汀等。 瑞舒伐他汀全名叫瑞舒伐他汀钙,是通用名 ... 瑞舒伐他汀；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Rosuvastatin（rosuvastatin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=d002df6ada0a0f01c4cca5d5f1c4f410a1624009dbd3781d0709e3e3d4a96acaJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9tLmJhaWR1LmNvbS9iaC9tL2RldGFpbC9hcl85OTI0ODI2MDg2NDQ1NDc2MjM4&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1278
- },
- {
   "a": "環矽酸鋯鈉",
   "n": "環矽酸鋯鈉",
   "v": "sodium-zirconium-cyclosilicate",
@@ -20459,33 +19582,6 @@
    "US"
   ],
   "np": 971
- },
- {
-  "a": "生产厂家为突出",
-  "n": "生产厂家为突出",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；扑热息痛明明很好读也很好理解,通用名为啥改成对乙酰氨基酚? 在INN中,“扑热息痛”选定的名称是Paracetamol。 商品名是生产厂家为突出、宣传自己的商品,创造品牌效应而起的名字,与药品的 ... 扑热息痛；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=76e0a5024c4a1eb57019092d3284262b300f234e965297d53f64ef54ce12e5e6JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzU3MjgwNzUwMw&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
  },
  {
   "a": "甲吡唑头孢菌素",
@@ -21322,33 +20418,6 @@
    "US"
   ],
   "np": 1627
- },
- {
-  "a": "硫酸氢氯吡格雷片是波立维",
-  "n": "硫酸氢氯吡格雷片是波立维",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；波立维又叫什么药名 - 百度 建议患者严格遵医嘱用药,不要擅自停药或改变用药剂量。 硫酸氢氯吡格雷片是波立维的通用名称,呈现粉红色的薄膜衣片剂,临床 ... 波立维；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=813d612b9487953673e7441e70b376d26672ecbf5517ac98500923915daefa4fJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9tLmJhaWR1LmNvbS9iaC9tL2RldGFpbC9hcl8xMTU1MTk0ODMxNzkwNTk5MjA2MQ&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
  },
  {
   "a": "硫鳥嘌呤",
@@ -22228,34 +21297,6 @@
   "np": 9
  },
  {
-  "a": "维达莎或委丹扎",
-  "n": "维达莎或委丹扎",
-  "v": "azacitidine",
-  "i": "Azacitidine",
-  "x": "Azacitidine",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：wikipedia_zh；wikipedia：阿扎胞苷 的别名 维达莎或委丹扎；许可：CC BY-SA 4.0（维基百科/维基数据合并表）; CC BY-SA 4.0（维基百科/维基数据；仅存短名+链接）; CC BY-SA 4.0（维基百科重定向；仅存短名+链接）",
-  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
-  "m": "中文俗名/别名，指向 Azacitidine（azacitidine）；来源：wikipedia_zh。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%89%8E%E8%83%9E%E8%8B%B7",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 118
- },
- {
   "a": "绿矾",
   "n": "绿矾",
   "v": "ferrous",
@@ -22560,33 +21601,6 @@
    "ES"
   ],
   "np": 5
- },
- {
-  "a": "而来",
-  "n": "而来",
-  "v": "acetaminophen",
-  "i": "Acetaminophen",
-  "x": "对乙酰氨基酚",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；扑热息痛又称为对乙酰氨基酚 | 百度健康·医学科普 一、名称来源 对乙酰氨基酚 是通用化学名。 1. 扑热息痛 是曾长期使用的别名,由英文 Paracetamol 音译而来。 2. 其他常见叫法还有 ... 扑热息痛；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=e7f11f0e57c8f717b60ef3c31bf310f6a2ccefc490ebe1b4af0c6563f324625fJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYxNTQwMTA5MTA4ODA4MTg0Mjg&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 10002
  },
  {
   "a": "聚氧乙烯",
@@ -23334,34 +22348,6 @@
   "np": 33
  },
  {
-  "a": "芬必得吗",
-  "n": "芬必得吗",
-  "v": "ibuprofen",
-  "i": "Ibuprofen",
-  "x": "Ibuprofen",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；布洛芬又叫芬必得吗 - 妙手医生 布洛芬是又叫芬必得,日常生活中应在医生指导下使用药物。 布洛芬和芬必得属于同一种药物,芬必得属于商品名,而布洛芬属于通 ... 芬必得；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Ibuprofen（ibuprofen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=484ebb3e74dfc5ebc33b6195ba5e06d43cdbf37984f5f8eb1cc3b904056e8f5dJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cubWlhb3Nob3UubmV0L2FydGljbGUvWnBOcmxuT1FCcWEyRE9kOV8xODFjMjQ1YjZiODJiYjY0Lmh0bWw&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 3218
- },
- {
   "a": "芸香甘",
   "n": "芸香甘",
   "v": "rutin",
@@ -23549,33 +22535,6 @@
    "US"
   ],
   "np": 57
- },
- {
-  "a": "药品",
-  "n": "药品",
-  "v": "rosuvastatin",
-  "i": "Rosuvastatin",
-  "x": "Rosuvastatin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；瑞舒伐他汀钙片又叫什么名字 | 百度健康·医学科普 瑞舒伐他汀钙片 是药品的通用名称,其核心成分为瑞舒伐他汀钙,属于他汀类降脂药物。 该药主要用于治疗高胆固醇血症和混合型血 ... 瑞舒伐他汀；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Rosuvastatin（rosuvastatin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=df2afef6b37401f0fc0a618c7a72877925aacf844fcd75132eb3f123ff8be1cfJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzY5NjIzOTcxNzQyMDY2OTQyMTE&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1278
  },
  {
   "a": "莫匹羅星",
@@ -24174,33 +23133,6 @@
   "np": 1142
  },
  {
-  "a": "西地那非的",
-  "n": "西地那非的",
-  "v": "sildenafil",
-  "i": "Sildenafil",
-  "x": "Sildenafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；西地那非的别名 | 百度健康·医学科普 西地那非的 通用名 为 枸橼酸西地那非,是治疗男性勃起功能障碍(ED)的主要药物成分。 其常见 别名 包括 万艾可 (商品名),但 ... 万艾可；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Sildenafil（sildenafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=c56576774df7f24ab607b352e909562caeb7e95c622da50db8dd81fd0a1f9bbbJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzc1NzIyNzg1MDU5NTUyMzQ2OTM&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "TW",
-   "US"
-  ],
-  "np": 1142
- },
- {
   "a": "西米替丁",
   "n": "西米替丁",
   "v": "cimetidine",
@@ -24348,33 +23280,6 @@
   "np": 265
  },
  {
-  "a": "误导",
-  "n": "误导",
-  "v": "sildenafil",
-  "i": "Sildenafil",
-  "x": "Sildenafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；别被俗称误导:厘清“伟哥”注册商标与辉瑞万艾可的品牌边界 2026年8月24日 · 在日常交流中,很多人会习惯性把辉瑞的万艾可称作“伟哥”,把二者混为一谈。 但从知识产权档案、药监公开资料来 ... 万艾可；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Sildenafil（sildenafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=435e98b095bf7853c7914339aee65bf66f35559b94b71e42f16e472b414f6d7fJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cudG91dGlhby5jb20vYXJ0aWNsZS83Njc3NTM2MTEzOTYzMTg4NzcxLw&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "TW",
-   "US"
-  ],
-  "np": 1142
- },
- {
   "a": "诺罗芬",
   "n": "诺罗芬",
   "v": "ibuprofen",
@@ -24388,34 +23293,6 @@
   "me": "",
   "ct": "CN",
   "su": "https://www.bing.com/ck/a?!&&p=1fb5c3d90873edac809cde349f46d717ab4b28c505291fde175a89fea6036c11JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9iYWlrZS5iYWlkdS5jb20vaXRlbS8lRTUlQjglODMlRTYlQjQlOUIlRTglOEElQUMvMzkwMjcxNA&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 3218
- },
- {
-  "a": "诺罗芬和美林",
-  "n": "诺罗芬和美林",
-  "v": "ibuprofen",
-  "i": "Ibuprofen",
-  "x": "Ibuprofen",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；布洛芬90%是“假”药?内行知识全部公开!_止痛镇痛_什么值得买 2024年9月7日 · 布洛芬是一种常用的非甾体抗炎药,主要用于缓解轻至中度疼痛、退烧和消炎,商品名包括芬必得、诺罗芬和美林等 ... 芬必得；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Ibuprofen（ibuprofen）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=6aa4df078acab70128315c06a2b2e4a947df05df6757a64ca3f57fecfabbc607JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2cHJ2OXo0Lw&ntb=1",
   "c": [
    "AU",
    "CA",
@@ -24837,54 +23714,6 @@
    "MX"
   ],
   "np": 1056
- },
- {
-  "a": "选项C胶岭石是蒙脱石",
-  "n": "选项c胶岭石是蒙脱石",
-  "v": "diosmectite",
-  "i": "Diosmectite",
-  "x": "蒙脱石",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；蒙脱石散在医疗领域有多种名称,以下哪些是蒙脱石散的别名或商品名... 选项B思密达是蒙脱石散最常用的商品名,由药企注册,方便消费者记忆和区分。 选项C胶岭石是蒙脱石的学名之一,但它更多是作为 ... 蒙脱石散；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 蒙脱石（diosmectite）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=f7866d6f86a8b64deca0be66e6a2ca3467d4254534c4d0f3ec73f31e08f8a012JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cud2VuZGFuZ3dhbmcuY29tL2RvYy9kMDllNzk1OWY0NWM4NWZmMzQzYmJkZWU2NDdiOGM2MzA0NDcyNmYy&ntb=1",
-  "c": [
-   "CN",
-   "MX"
-  ],
-  "np": 232
- },
- {
-  "a": "通常为",
-  "n": "通常为",
-  "v": "valsartan",
-  "i": "Valsartan",
-  "x": "Valsartan",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；缬沙坦胶囊别名 | 百度健康·医学科普 缬沙坦胶囊 是血管紧张素II受体拮抗剂类药物的通用名称,临床主要用于治疗 高血压 和 心力衰竭。 其别名通常为 缬沙坦,部分厂家 ... 缬沙坦；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Valsartan（valsartan）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=2e8ba331a4b685213eed6254bcfa6cb5bc9d7dd740b6baebe6ffd785a4ec7e94JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYyOTU0MzQ0OTQ0Mzc2NTU3NTU&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1787
  },
  {
   "a": "速博新",
@@ -25463,86 +24292,6 @@
   "np": 1795
  },
  {
-  "a": "阿司匹林的",
-  "n": "阿司匹林的",
-  "v": "aspirin",
-  "i": "Aspirin",
-  "x": "Aspirin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；阿司匹林的别名叫什么 - 百度 阿司匹林的别名叫乙酰水杨酸,是常见的非甾体抗炎药。 阿司匹林的最主要作用是抗血小板聚集,可用于预防心肌梗死、一过性脑缺 ... 阿司匹林；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Aspirin（aspirin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=1f7ec943096308fea7077afbcd14fec8d514f20e7f754da9257577a9050dc881JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9tLmJhaWR1LmNvbS9iaC9tL2RldGFpbC9hcl81ODg3MDMyNTYwOTQ2OTUzNzE4&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 2149
- },
- {
-  "a": "阿司匹林的三个",
-  "n": "阿司匹林的三个",
-  "v": "aspirin",
-  "i": "Aspirin",
-  "x": "Aspirin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；阿司匹林的三个别名 | 百度健康·医学科普 阿司匹林 是一种历史悠久的经典药物,其三个常用别名为 乙酰水杨酸 (化学名)、 ASA (英文缩写)和 醋柳酸 (部分地区的传统 ... 阿司匹林；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Aspirin（aspirin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=c0f75c3b71a3eeee715984e12aa1fa4a390d130dd4e3a6f4d41b4e37214fabacJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzYzNDkxNzA1MDUyNzQ5MjM3NzU&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 2149
- },
- {
-  "a": "阿奇霉素的",
-  "n": "阿奇霉素的",
-  "v": "erythromycin",
-  "i": "Erythromycin",
-  "x": "Erythromycin",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；阿奇霉素的别名是 | 百度健康·医学科普 阿奇霉素 的常用别名包括 阿齐霉素 、 阿红霉素,外文名为 Azithromycin。 它是大环内酯类抗生素,通过抑制细菌蛋白质合成发挥抗 ... 阿奇霉素；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Erythromycin（erythromycin）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=fa7112b2075e8ac811676e4ce2b6b805886f830c18ae2b0c7fad237a3cec9656JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzY0NjQzMDA2NjQzODQ1NDc5MzM&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "GB",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1218
- },
- {
   "a": "阿托伐他丁",
   "n": "阿托伐他丁",
   "v": "atorvastatin",
@@ -26075,34 +24824,6 @@
    "US"
   ],
   "np": 118
- },
- {
-  "a": "音译",
-  "n": "音译",
-  "v": "tadalafil",
-  "i": "Tadalafil",
-  "x": "Tadalafil",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；他达拉非俗称叫什么 | 百度健康·医学科普 他达拉非 的俗称是 “长效伟哥” 或 “希爱力” (后者为品牌名音译)。 它是一种 PDE5抑制剂 类药物,主要用于治疗男性 勃起功能障 ... 他达拉非；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文俗名/别名，指向 Tadalafil（tadalafil）；来源：bing。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=59c2ecd9de8f0de10d0855e172585247eea4113d62b4a96008c3d44950218704JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9oZWFsdGguYmFpZHUuY29tL20vZGV0YWlsL2FyXzcyNzMyNjgwNzk2MDA0NjIyNzM&ntb=1",
-  "c": [
-   "AU",
-   "CA",
-   "CN",
-   "ES",
-   "EU",
-   "GB",
-   "MX",
-   "SG",
-   "TW",
-   "US"
-  ],
-  "np": 1610
  },
  {
   "a": "頭孢力欣",
@@ -26926,40 +25647,6 @@
   "np": 0
  },
  {
-  "a": "不同",
-  "n": "不同",
-  "v": null,
-  "i": "不同",
-  "x": "不同",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；替尔泊肽(Tirzepatide)又名替西帕肽? - 知乎 替尔泊肽 与替西帕肽是同一种药物,只是中文译名不同,它们在化学结构、作用机制和治疗效果完全相同。 ... 替尔泊肽；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文别名/叫法；成分未能唯一确定（歧义或本库无产品），检索时按歧义展示。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=daefc82c1e1c89458f1342e1fbd7e3270f2d4ef97a9a4bae926f028bc985b64dJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzE5NTc5MDU1OTI2ODIyODQ1Njc&ntb=1",
-  "c": [],
-  "np": 0
- },
- {
-  "a": "之一",
-  "n": "之一",
-  "v": null,
-  "i": "之一",
-  "x": "之一",
-  "k": "folk",
-  "cf": "community",
-  "hint": "候选来源：bing；必理痛是什么药?成分、功效、用法用量及注意事项全解析 必理痛(也常被称为必理通)是对乙酰氨基酚片的常见商品名之一,它是一种广泛应用于缓解轻度至中度疼痛和退热的非处方药。 其 ... 必理痛；许可：用户/社区公开内容（仅存叫法事实+原链接）",
-  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
-  "m": "中文别名/叫法；成分未能唯一确定（歧义或本库无产品），检索时按歧义展示。",
-  "me": "",
-  "ct": "CN",
-  "su": "https://www.bing.com/ck/a?!&&p=f9fbb43708569c299aeebf6ba3a27432ea960e3abe15401fd68289cc716420d1JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly93ZW5rdS5iYWlkdS5jb20vdmlldy81MmFjZjkwY2E5MDJkZTgwZDRkOGQxNWFiZTIzNDgyZmI1ZGEwMjEzLmh0bWw&ntb=1",
-  "c": [],
-  "np": 0
- },
- {
   "a": "减肥针",
   "n": "减肥针",
   "v": null,
@@ -27111,6 +25798,151 @@
   "su": "https://zh.wikipedia.org/wiki/%E5%8D%8E%E6%B3%95%E6%9E%97",
   "c": [],
   "np": 0
+ },
+ {
+  "a": "慷定来",
+  "n": "慷定来",
+  "v": "podofilox",
+  "i": "Podofilox",
+  "x": "Podofilox",
+  "k": "folk",
+  "cf": "community",
+  "hint": "P0-3 由「分别为慷定来和化疣敵」拆分（原 term_id=870）",
+  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
+  "m": "中文俗名/别名，指向 Podofilox（podofilox）；来源：wikipedia_zh。",
+  "me": "",
+  "ct": "CN",
+  "su": "https://zh.wikipedia.org/wiki/%E9%AC%BC%E8%87%BC%E6%AF%92%E7%B4%A0",
+  "c": [
+   "CN",
+   "US"
+  ],
+  "np": 13
+ },
+ {
+  "a": "化疣敵",
+  "n": "化疣敵",
+  "v": "podofilox",
+  "i": "Podofilox",
+  "x": "Podofilox",
+  "k": "folk",
+  "cf": "community",
+  "hint": "P0-3 由「分别为慷定来和化疣敵」拆分（原 term_id=870）",
+  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
+  "m": "中文俗名/别名，指向 Podofilox（podofilox）；来源：wikipedia_zh。",
+  "me": "",
+  "ct": "CN",
+  "su": "https://zh.wikipedia.org/wiki/%E9%AC%BC%E8%87%BC%E6%AF%92%E7%B4%A0",
+  "c": [
+   "CN",
+   "US"
+  ],
+  "np": 13
+ },
+ {
+  "a": "必利劲",
+  "n": "必利劲",
+  "v": "dapoxetine",
+  "i": "Dapoxetine",
+  "x": "Dapoxetine",
+  "k": "folk",
+  "cf": "community",
+  "hint": "P0-3 由「就是必利劲」拆分（原 term_id=972）",
+  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
+  "m": "中文俗名/别名，指向 Dapoxetine（dapoxetine）；来源：bing。",
+  "me": "",
+  "ct": "CN",
+  "su": "https://www.bing.com/ck/a?!&&p=806298b927f183c4fe396eee1bc80c3a74c520337d5fa9bfd7f99fd1c6826273JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9uYW4uOTkuY29tLmNuL3lvbmdwaW4vMjEwNDY2MS5odG0&ntb=1",
+  "c": [
+   "CN",
+   "ES",
+   "GB",
+   "SG"
+  ],
+  "np": 286
+ },
+ {
+  "a": "普拿疼",
+  "n": "普拿疼",
+  "v": "acetaminophen",
+  "i": "Acetaminophen",
+  "x": "对乙酰氨基酚",
+  "k": "folk",
+  "cf": "community",
+  "hint": "P0-3 由「普拿疼或醋氨酚」拆分（原 term_id=1042）",
+  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
+  "m": "中文俗名/别名，指向 对乙酰氨基酚（acetaminophen）；来源：bing。",
+  "me": "",
+  "ct": "CN",
+  "su": "https://www.bing.com/ck/a?!&&p=dabffa301d05b16c3c9606ad0e4c88e60b605448123dbd06efcc08592b18439cJmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly96aGlkYW8uYmFpZHUuY29tL3F1ZXN0aW9uLzE2MTc0MDkwNzI1ODU2NTg4NjcuaHRtbA&ntb=1",
+  "c": [
+   "AU",
+   "CA",
+   "CN",
+   "ES",
+   "GB",
+   "MX",
+   "SG",
+   "TW",
+   "US"
+  ],
+  "np": 10002
+ },
+ {
+  "a": "维达莎",
+  "n": "维达莎",
+  "v": "azacitidine",
+  "i": "Azacitidine",
+  "x": "Azacitidine",
+  "k": "folk",
+  "cf": "community",
+  "hint": "P0-3 由「维达莎或委丹扎」拆分（原 term_id=1194）",
+  "src": "Chinese Wikipedia (中文维基百科：重定向/别名)",
+  "m": "中文俗名/别名，指向 Azacitidine（azacitidine）；来源：wikipedia_zh。",
+  "me": "",
+  "ct": "CN",
+  "su": "https://zh.wikipedia.org/wiki/%E9%98%BF%E6%89%8E%E8%83%9E%E8%8B%B7",
+  "c": [
+   "AU",
+   "CA",
+   "CN",
+   "ES",
+   "EU",
+   "GB",
+   "MX",
+   "SG",
+   "TW",
+   "US"
+  ],
+  "np": 118
+ },
+ {
+  "a": "美林",
+  "n": "美林",
+  "v": "ibuprofen",
+  "i": "Ibuprofen",
+  "x": "Ibuprofen",
+  "k": "folk",
+  "cf": "community",
+  "hint": "P0-3 由「诺罗芬和美林」拆分（原 term_id=1284）",
+  "src": "中文社区/搜索抓取（维基/必应/头条/小红书/知乎等）",
+  "m": "中文俗名/别名，指向 Ibuprofen（ibuprofen）；来源：bing。",
+  "me": "",
+  "ct": "CN",
+  "su": "https://www.bing.com/ck/a?!&&p=6aa4df078acab70128315c06a2b2e4a947df05df6757a64ca3f57fecfabbc607JmltdHM9MTc5MzA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=2c2560b7-8139-6f21-263c-774880876e8a&u=a1aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2cHJ2OXo0Lw&ntb=1",
+  "c": [
+   "AU",
+   "CA",
+   "CN",
+   "ES",
+   "EU",
+   "GB",
+   "MX",
+   "SG",
+   "TW",
+   "US"
+  ],
+  "np": 3218
  },
  {
   "a": "Dextrose",
