@@ -57,11 +57,22 @@ def connect(db_path: Path, readonly: bool) -> sqlite3.Connection:
 
 
 def load_removals(csv_path: Path) -> list[dict]:
+    """读删除清单。兼容两种列格式：
+
+    * 执行格式：`id,table,alias,substance_id,reason,evidence`（`data/drug_term_removals.csv`）
+    * 审计格式：`id,term,source,reason,decided_by,decided_at`（`data/alias_cleanup_removals.csv`）
+
+    审计格式没有 `table` 列时置为 `auto`，由 `plan()` 用「id + 别名」在 drug_term / nickname
+    里唯一匹配来决定表；两边都能对上就跳过并报「表不明确」，不做猜测。
+    """
     rows = list(csv.DictReader(open(csv_path, encoding="utf-8-sig")))
     out = []
     for r in rows:
         item = {k: (r.get(k) or "").strip() for k in
                 ("id", "table", "alias", "substance_id", "reason", "evidence")}
+        item["alias"] = item["alias"] or (r.get("term") or "").strip()
+        item["evidence"] = item["evidence"] or (r.get("source") or "").strip()
+        item["table"] = item["table"] or "auto"
         try:
             item["id"] = int(item["id"])
         except ValueError:
@@ -76,6 +87,19 @@ def plan(con: sqlite3.Connection, rows: list[dict]) -> dict:
     by_table: Counter = Counter()
     for r in rows:
         table = r["table"]
+        if table in ("", "auto"):
+            hits = [t for t, meta in TABLES.items()
+                    if con.execute(
+                        f"SELECT 1 FROM {t} WHERE {meta['pk']}=? AND {meta['alias']}=?",
+                        (r["id"], r["alias"])).fetchone()]
+            if len(hits) == 1:
+                table = hits[0]
+            elif len(hits) > 1:
+                skipped.append(dict(**r, why=f"表不明确（{'/'.join(sorted(hits))} 都有同 id+别名）"))
+                continue
+            else:
+                skipped.append(dict(**r, why="行不存在（可能已删除/已清理）"))
+                continue
         if table not in TABLES:
             skipped.append(dict(**r, why=f"未知表 {table}"))
             continue
@@ -89,7 +113,10 @@ def plan(con: sqlite3.Connection, rows: list[dict]) -> dict:
         if cur_alias != r["alias"]:
             skipped.append(dict(**r, why=f"alias 不匹配：库内为 {cur_alias!r}"))
             continue
-        accepted.append(dict(**r, snapshot=dict(row)))
+        rec = dict(r)
+        rec["table"] = table
+        rec["snapshot"] = dict(row)
+        accepted.append(rec)
         by_table[table] += 1
     return dict(rows=rows, accepted=accepted, skipped=skipped, by_table=by_table)
 

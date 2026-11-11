@@ -92,10 +92,12 @@ def fetch(url: str, *, method: str = "GET", timeout: float = 25.0,
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 body = resp.read() if method == "GET" else b""
+                wire_bytes = len(body)          # gzip 解压前的传输字节数（chunked 时没有 Content-Length）
                 if body and resp.headers.get("Content-Encoding") == "gzip":
                     body = gzip.decompress(body)
                 headers = {k.lower(): v for k, v in resp.headers.items()}
                 return {"status": resp.status, "headers": headers, "body": body,
+                        "wire_bytes": wire_bytes,
                         "ms": int((time.perf_counter() - t0) * 1000)}
         except urllib.error.HTTPError as e:
             try:
@@ -105,7 +107,7 @@ def fetch(url: str, *, method: str = "GET", timeout: float = 25.0,
             if e.code >= 500 and attempt < retries:
                 time.sleep(1.0 + attempt)
                 continue
-            return {"status": e.code, "headers": {}, "body": body,
+            return {"status": e.code, "headers": {}, "body": body, "wire_bytes": len(body),
                     "ms": int((time.perf_counter() - t0) * 1000), "error": f"HTTP {e.code}"}
         except Exception as e:                      # 网络层错误：超时/DNS/TLS
             last_err = e
@@ -128,6 +130,26 @@ def local_core_gz() -> int | None:
     if not p.is_file():
         return None
     return gz_len(p.read_bytes())
+
+
+def core_size_bytes(headers: dict, body: bytes, wire_bytes: int) -> tuple[int, str, str]:
+    """core.json 的判定字节数与口径：优先 Content-Length，缺头时用实测 body 兜底。
+
+    R2 自定义域对 core.json 走 gzip + Transfer-Encoding: chunked，不返回
+    Content-Length；此时用实际读到的字节数判定（gzip 用压缩后的 wire 字节，
+    明文用解压后的 body 字节）。护栏 CORE_GZ_RANGE / CORE_RAW_RANGE 不变。
+
+    返回 (字节数, "gzip" | "raw", 兜底说明)；取不到任何长度时返回 0。
+    """
+    cenc = (headers.get("content-encoding") or "").lower()
+    clen = int(headers.get("content-length") or 0)
+    if clen:
+        return clen, ("gzip" if "gzip" in cenc else "raw"), ""
+    if "gzip" in cenc and wire_bytes:
+        return wire_bytes, "gzip", "（无 Content-Length，用 gzip 实测字节数）"
+    if body:
+        return len(body), "raw", "（无 Content-Length，用实测 body 字节数）"
+    return 0, ("gzip" if "gzip" in cenc else "raw"), ""
 
 
 def fmt_bytes(n: int) -> str:
@@ -258,22 +280,27 @@ def main() -> int:
 
     # ── 5. 索引文件：P1 核心 + 旧 index.json 回退 ───────────────────
     core = get("data/idx/core.json", method="HEAD")
+    # R2 自定义域对 core.json 走 gzip + chunked，不返回 Content-Length；
+    # HEAD 拿不到大小时补一次 GET，用实测 body 字节数判定（护栏不变）。
+    if core["status"] == 200 and not int(core["headers"].get("content-length") or 0):
+        core = get("data/idx/core.json")
     ctype = core["headers"].get("content-type", "")
-    clen = int(core["headers"].get("content-length") or 0)
-    cenc = core["headers"].get("content-encoding", "")
     core_ok = core["status"] == 200 and "json" in ctype.lower()
     checks.add("core-json-http", core_ok,
                f"HTTP {core['status']}, content-type={ctype or '缺'}", core["ms"])
+    clen, cenc, size_note = core_size_bytes(
+        core["headers"], core.get("body") or b"", int(core.get("wire_bytes") or 0))
     if core_ok and clen:
         if cenc == "gzip":
             lo, hi = CORE_GZ_RANGE
             checks.add("core-json-size", lo <= clen <= hi,
-                       f"gzip {fmt_bytes(clen)}（合理区间 {lo:,}–{hi:,} B）")
+                       f"gzip {fmt_bytes(clen)}{size_note}（合理区间 {lo:,}–{hi:,} B）")
         else:
             lo, hi = CORE_RAW_RANGE
             checks.add("core-json-size", lo <= clen <= hi,
-                       f"未 gzip，明文 {fmt_bytes(clen)}（合理区间 {lo:,}–{hi:,} B）")
-            checks.warn("core-json-gzip", "core.json 未按 gzip 传输（首搜 15 MB 明文，检查 Pages 压缩）")
+                       f"未 gzip，明文 {fmt_bytes(clen)}{size_note}（合理区间 {lo:,}–{hi:,} B）")
+            checks.warn("core-json-gzip", "core.json 未按 gzip 传输（首搜 15 MB 明文，检查 Pages 压缩）"
+                        + size_note)
         if args.compare_dist:
             local = local_core_gz()
             if local is None:
@@ -284,7 +311,7 @@ def main() -> int:
                 checks.add("core-size-vs-dist", ok,
                            f"线上 {fmt_bytes(clen)} / 本地 gzip -9 {fmt_bytes(local)} = {ratio:.2f}×")
     else:
-        checks.add("core-json-size", False, "core.json 缺 Content-Length")
+        checks.add("core-json-size", False, "core.json 缺 Content-Length 且无实测 body")
 
     idx = get("data/index.json", method="HEAD")
     iclen = int(idx["headers"].get("content-length") or 0)

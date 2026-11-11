@@ -57,8 +57,10 @@ DB = ROOT / "data" / "drugs.db"
 OUT = Path(os.environ.get("SITE_OUT") or (ROOT / "site" / "dist"))
 # 报错入口：静态站没有后端，用 GitHub Issue 收集纠错，附上查询词和页面 URL。
 REPORT_REPO = "https://github.com/fuarnos/drug-brand-crossref"
-# 公开站根地址：404 页、robots.txt、sitemap.xml 里要用绝对 URL。
-SITE_URL = "https://fuarnos.github.io/drug-brand-crossref/"
+# 公开站根地址：404 页、robots.txt、sitemap.xml、canonical / hreflang / OG 里要用绝对 URL。
+# 2026-11-12 用户定新口径：主站 = 自有域名 drugcrossref.com，gh-pages 只作备份；
+# 所以这里一律写主域（gh-pages 上的 canonical 指主域是预期行为）。
+SITE_URL = "https://drugcrossref.com/"
 # 构建版本号：给 css/js/json 带 ?v=，避免用户拿到缓存里的旧代码。
 # v0.9.9 task-14：从 `int(time.time())` 改成「输入内容哈希」。
 # 旧写法每次构建都换号 → 121,280 个产物里 112,692 个（每页 <head> 的 ?v=）逐字节全变，
@@ -192,12 +194,16 @@ I18N = {
         # 2026-11-11 UI：壳与搜索区的 aria-label 走 i18n（原来四处硬编码英文）
         "nav.primary": "Primary navigation", "nav.more": "More",
         "nav.sections": "Sections",
+        "nav.search_compact": "Search a name",
         # 2026-11-11 UI：H1 三语统一口径「查一个药名，看它在各国是什么」（spec §3.5）
         "home.h1": "Look up a medicine name — see what it is in each country",
         "home.sub": ("Brand name, generic name, nickname, or a line from the pack — Chinese, "
                      "full-width and Cyrillic input all work."),
         # 候选集单独一行（16px 正常前景色），不再埋在 home.sub 第二句里
         "home.candidate": "You always get a candidate set, never a single answer.",
+        # 2026-11-12 v0.11.2（条目 8）：首页三步流程（输名 → 确认产品 → 选目标市场）。
+        # 搜索框上方常驻一条紧凑流程；有查询时由 .has-q 隐藏，不占结果首屏。
+        "flow.s1": "Name", "flow.s2": "Confirm product", "flow.s3": "Target market",
         "home.recent": "Recently updated",
         "home.recent_all": "See all updates →",
         "home.ph": "Brand name / generic name / nickname / a line from the pack",
@@ -283,6 +289,12 @@ I18N = {
                               "market. Check the ingredient, strength and form — not just the name."),
         "res.action_drug": "Open ingredient page",
         "res.action_copy": "Copy generic name",
+        # 2026-11-11 v0.11.2（条目 9/10）：身份卡标题 + 折叠摘要 + 来源市场（?src=）
+        "res.identity_title": "candidate 1 of {n}",
+        "res.more_detail": "Strength · markets · actions",
+        "res.src_label": "Source market (only records from):",
+        "res.src_all": "All source markets",
+        "res.src_active": "source market {c}",
         "res.empty_h1": "No match for “{q}”",
         "res.empty_spelling": "Check the spelling, or try the generic name",
         "res.empty_browse": "Browse by category",
@@ -372,13 +384,16 @@ I18N = {
                       "mean the drugs are interchangeable. FDA recommends tall-man lettering."),
         "conf.pair": "Pair", "conf.tml": "Tall-man spelling",
         "conf.search_hit": "This name is easily confused with",
-        "home.country_label": "See what this medicine is called in each country/region:",
+        # 2026-11-11 v0.11.2（条目 10）：这个控件的语义一直是「目标市场」——查询词先定位成分
+        #（不受国家限制），再把这个成分在该国的商品名列出来（见 APP_JS render() 的注释）。
+        # 这里只把话说清，`?country=` 的语义与 URL 一字不动；来源市场另用新增的 `?src=`。
+        "home.country_label": "Target market: show the names used there (optional)",
         # 2026-11-11 UI：国家/地区下拉收进「更多筛选」details，summary 用这句
-        "home.country_summary": "Only one country/region (optional)",
+        "home.country_summary": "Target market (optional)",
         # 2026-11-11 UI：可见提交按钮 + 「/ 聚焦」提示 + 自动完成列表的无障碍名
         "home.submit": "Search", "home.slash_hint": "Press / to focus",
         "home.suggestions": "Suggestions",
-        "home.country_label_sel": "See what this medicine is called in {country}:",
+        "home.country_label_sel": "Target market: see what it is called in {country}:",
         "country.missing": "This country/region has no product listed under this name.",
         "country.missing_note": ("The name matched an ingredient, not a product in this "
                                  "country/region. Switch country/region or open the ingredient page."),
@@ -418,10 +433,13 @@ I18N = {
         "nav.whatsnew": "Novedades",
         "nav.primary": "Navegación principal", "nav.more": "Más",
         "nav.sections": "Secciones",
+        "nav.search_compact": "Buscar un nombre",
         "home.h1": "Busca un nombre de medicamento y mira qué es en cada país",
         "home.sub": ("Nombre comercial, genérico, apodo o una línea del envase — también funciona "
                      "en chino, ancho completo y cirílico."),
         "home.candidate": "Siempre obtienes un conjunto de candidatos, nunca una única respuesta.",
+        # v0.11.2（条目 8）：三步流程，与 en/zh 同步
+        "flow.s1": "Nombre", "flow.s2": "Confirmar producto", "flow.s3": "Mercado destino",
         "home.recent": "Novedades recientes",
         "home.recent_all": "Ver todas las novedades →",
         "home.ph": "Nombre comercial / genérico / apodo / una línea del envase",
@@ -509,6 +527,11 @@ I18N = {
                               "mercado. Comprueba principio, concentración y forma, no solo el nombre."),
         "res.action_drug": "Ver la ficha del principio",
         "res.action_copy": "Copiar nombre genérico",
+        "res.identity_title": "candidato 1 de {n}",
+        "res.more_detail": "Dosis · mercados · acciones",
+        "res.src_label": "Mercado de origen (solo registros de):",
+        "res.src_all": "Todos los mercados de origen",
+        "res.src_active": "mercado de origen {c}",
         "res.empty_h1": "Sin resultados para «{q}»",
         "res.empty_spelling": "Revisa la ortografía o prueba el nombre genérico",
         "res.empty_browse": "Explorar por categoría",
@@ -597,11 +620,12 @@ I18N = {
                       "los medicamentos sean intercambiables. La FDA recomienda tall-man lettering."),
         "conf.pair": "Par", "conf.tml": "Grafía tall-man",
         "conf.search_hit": "Este nombre se confunde fácilmente con",
-        "home.country_label": "Mira cómo se llama este medicamento en cada país/región:",
-        "home.country_summary": "Solo un país/región (opcional)",
+        # v0.11.2（条目 10）：与 en/zh 同步成「目标市场」口径（?country= 语义不变）
+        "home.country_label": "Mercado destino: muestra los nombres usados allí (opcional)",
+        "home.country_summary": "Mercado destino (opcional)",
         "home.submit": "Buscar", "home.slash_hint": "Pulsa / para enfocar",
         "home.suggestions": "Sugerencias",
-        "home.country_label_sel": "Mira cómo se llama este medicamento en {country}:",
+        "home.country_label_sel": "Mercado destino: cómo se llama en {country}:",
         "country.missing": "Este país/región no tiene ningún producto registrado con este nombre.",
         "country.missing_note": ("El nombre coincide con un principio activo, no con un producto "
                                  "de este país/región. Cambia de país/región o abre la ficha del "
@@ -642,9 +666,12 @@ I18N = {
         "nav.whatsnew": "更新日志",
         "nav.primary": "主导航", "nav.more": "更多",
         "nav.sections": "分区导航",
+        "nav.search_compact": "搜一个药名",
         "home.h1": "查一个药名，看它在各国是什么",
         "home.sub": "商品名、通用名、俗称或包装上一行字；中英文、全角、西里尔字母都能搜。",
         "home.candidate": "结果永远是候选集，不是唯一答案。",
+        # v0.11.2（条目 8）：三步流程（输名 → 确认产品 → 选目标市场）
+        "flow.s1": "输名", "flow.s2": "确认产品", "flow.s3": "选目标市场",
         "home.recent": "最近更新",
         "home.recent_all": "查看全部更新 →",
         "home.ph": "商品名 / 通用名 / 俗称 / 包装上的一行字",
@@ -726,6 +753,11 @@ I18N = {
                               "请按成分、规格、剂型核对，不要只看名字。"),
         "res.action_drug": "查看成分页",
         "res.action_copy": "复制标准名",
+        "res.identity_title": "共 {n} 条候选，这是第 1 条",
+        "res.more_detail": "规格 · 市场 · 动作",
+        "res.src_label": "来源市场（只看这些登记库的记录）：",
+        "res.src_all": "全部来源市场",
+        "res.src_active": "来源市场 {c}",
         "res.empty_h1": "没有匹配「{q}」",
         "res.empty_spelling": "检查拼写，或改用通用名",
         "res.empty_browse": "按类别浏览",
@@ -802,9 +834,10 @@ I18N = {
                       "FDA 建议这一对使用 tall-man 大小写。"),
         "conf.pair": "药对", "conf.tml": "建议 tall-man 写法",
         "conf.search_hit": "这个药名容易与以下名字混淆",
-        "home.country_label": "看这个药在哪个国家/地区叫什么：",
-        "home.country_label_sel": "看这个药在{country}叫什么：",
-        "home.country_summary": "只看某个国家/地区（可选）",
+        # v0.11.2（条目 10）：与 en/es 同步成「目标市场」口径（?country= 语义不变）
+        "home.country_label": "目标市场：看当地用什么名字（可选）",
+        "home.country_label_sel": "目标市场：看{country}当地的叫法：",
+        "home.country_summary": "目标市场（可选）",
         "home.submit": "搜索", "home.slash_hint": "按 / 聚焦",
         "home.suggestions": "搜索建议",
         "country.missing": "该国家/地区没有以这个名字上架的产品。",
@@ -1099,11 +1132,13 @@ UI_I18N = {
         "u1.step1": "Type the name from the pack",
         "u1.step1_hint": ("Brand, generic name, nickname, or a line from the pack — "
                           "dose included is fine."),
-        "u1.step2": "See the ingredient and strength",
-        "u1.step2_hint": "You always get a candidate set — never a single answer.",
-        "u1.step3": "Switch to a country/region",
-        "u1.step3_hint": ("Pick a country/region to see the names it is sold under there, "
-                          "or use the names-by-country/region row."),
+        # 2026-11-11 v0.11.2（条目 8）：三步改成「输名 → 确认这条候选的成分/规格/剂型 → 选目标市场」
+        "u1.step2": "Check this candidate: ingredient, strength, dosage form",
+        "u1.step2_hint": ("The card shows one candidate, never the answer — check its "
+                          "ingredient, strength and form against your pack."),
+        "u1.step3": "Pick the target market",
+        "u1.step3_hint": ("Pick a target market to see what the same ingredient is called "
+                          "there; the candidate list itself does not change."),
         "u1.try": "Try:", "u1.close": "Dismiss", "u1.aria": "Getting-started guide",
         "u2.title": "Names by country/region",
         "u2.hint": ("Same ingredient, local name — click a country/region to see its products. "
@@ -1175,11 +1210,12 @@ UI_I18N = {
         "u1.step1": "Escribe el nombre del envase",
         "u1.step1_hint": ("Marca, genérico, apodo o una línea del envase; la dosis puede "
                           "ir incluida."),
-        "u1.step2": "Mira el principio activo y la concentración",
-        "u1.step2_hint": "Siempre obtienes un conjunto de candidatos, nunca una única respuesta.",
-        "u1.step3": "Cambia a un país/región",
-        "u1.step3_hint": ("Elige un país/región para ver los nombres con los que se vende "
-                          "allí, o usa la fila de nombres por país/región."),
+        "u1.step2": "Comprueba este candidato: principio activo, dosis y forma",
+        "u1.step2_hint": ("La tarjeta muestra un candidato, nunca la respuesta: compara "
+                          "principio activo, dosis y forma con tu envase."),
+        "u1.step3": "Elige el mercado destino",
+        "u1.step3_hint": ("Elige un mercado destino para ver cómo se llama el mismo "
+                          "principio activo allí; la lista de candidatos no cambia."),
         "u1.try": "Prueba:", "u1.close": "Cerrar", "u1.aria": "Guía de inicio",
         "u2.title": "Nombres por país/región",
         "u2.hint": ("Mismo principio, nombre local: haz clic en un país/región para ver sus "
@@ -1246,10 +1282,10 @@ UI_I18N = {
         "u1.title": "三步看懂",
         "u1.step1": "输入包装上的名字",
         "u1.step1_hint": "商品名、通用名、俗称或包装上一行字；可连剂量一起输入。",
-        "u1.step2": "看成分和规格",
-        "u1.step2_hint": "结果永远是候选集，不保证唯一。",
-        "u1.step3": "切国家/地区看叫法",
-        "u1.step3_hint": "选一个国家/地区，看这个成分在当地叫什么；也可以用结果顶部的「国家/地区叫法」横排。",
+        "u1.step2": "核对这条候选：成分、规格、剂型",
+        "u1.step2_hint": "卡片只概括其中一条候选，不是答案；拿成分、规格、剂型和包装对一遍。",
+        "u1.step3": "选目标市场",
+        "u1.step3_hint": "选一个目标市场，看这个成分在当地叫什么；候选列表本身不变。",
         "u1.try": "试试：", "u1.close": "关闭", "u1.aria": "使用引导",
         "u2.title": "国家/地区叫法",
         "u2.hint": "同一成分在当地叫什么；点国家/地区看该地商品。未收录不等于该国家/地区没有这个药。",
@@ -1303,10 +1339,10 @@ UI_I18N = {
         "u1.title": "三步看懂",
         "u1.step1": "輸入包裝上的名字",
         "u1.step1_hint": "商品名、通用名、俗稱或包裝上一行字；可連劑量一起輸入。",
-        "u1.step2": "看成分和規格",
-        "u1.step2_hint": "結果永遠是候選集，不保證唯一。",
-        "u1.step3": "切國家/地區看叫法",
-        "u1.step3_hint": "選一個國家/地區，看這個成分在當地叫什麼；也可以用結果頂部的「國家/地區叫法」橫排。",
+        "u1.step2": "核對這條候選：成分、規格、劑型",
+        "u1.step2_hint": "卡片只概括其中一條候選，不是答案；拿成分、規格、劑型和包裝對一遍。",
+        "u1.step3": "選目標市場",
+        "u1.step3_hint": "選一個目標市場，看這個成分在當地叫什麼；候選清單本身不變。",
         "u1.try": "試試：", "u1.close": "關閉", "u1.aria": "使用引導",
         "u2.title": "國家/地區叫法",
         "u2.hint": "同一成分在當地叫什麼；點國家/地區看該地商品。未收錄不等於該國家/地區沒有這個藥。",
@@ -1365,6 +1401,11 @@ UI_I18N = {
                               "請依成分、規格、劑型核對，不要只看名字。"),
         "res.action_drug": "查看成分頁",
         "res.action_copy": "複製標準名",
+        "res.identity_title": "共 {n} 條候選，這是第 1 條",
+        "res.more_detail": "規格 · 市場 · 動作",
+        "res.src_label": "來源市場（只看這些登記庫的紀錄）：",
+        "res.src_all": "全部來源市場",
+        "res.src_active": "來源市場 {c}",
         "res.empty_h1": "沒有符合「{q}」",
         "res.empty_spelling": "檢查拼寫，或改用通用名",
         "res.empty_browse": "依類別瀏覽",
@@ -2860,6 +2901,12 @@ def build_warn(db: sqlite3.Connection) -> int:
             f'data-sev="{esc(row["severity"])}">'
             + _warn_lang_blocks(row, sub_names, prefix="") + "</article>")
     # v0.6.7：客户端分页（10 条/页）。无 JS 时全部可见（优雅降级）；?page=N 刷新/分享保持。
+    # 2026-11-12 v0.11.2（task-7）：分页脚本原来在 body 末尾同步跑，此时 window.T 还没来
+    # （i18n 由 boot.js 在 window load 后才注入）→ T 回退成 identity，页面直接露出
+    # 「warn.page_prev / warn.page_next」字面键。现在：① 文案在真正渲染时再取 T()（带英文兜底）；
+    # ② DOMContentLoaded 先渲染一次；③ i18n 就绪后经 __DSH_APPLY_HOOKS 按当前语言重绘；
+    # ④ 顺带把原来漏在 IIFE 外的 severity filter 收进闭包（它引用的 items/pager 属闭包，
+    #    点击时会 ReferenceError，筛选后分页也不隐藏）。
     pager_js = """
 (function(){
   var PAGE = 10;
@@ -2868,14 +2915,18 @@ def build_warn(db: sqlite3.Connection) -> int:
   if(!list || !pager) return;
   var items = Array.prototype.slice.call(list.querySelectorAll('article.warn-item'));
   var total = Math.ceil(items.length / PAGE);
-  if(total <= 1) return;
-  var T = window.T || function(k){ return k; };
+  var fbox = document.querySelector('.warnfilters');
   var params = new URLSearchParams(location.search);
   var cur = parseInt(params.get('page') || '1', 10);
   if(!cur || cur < 1) cur = 1;
   if(cur > total) cur = total;
   if(params.get('page') && String(cur) !== params.get('page')){
     try{ params.set('page', String(cur)); history.replaceState(null, '', '?' + params.toString()); }catch(e){}
+  }
+  // 文案延迟到渲染时取，i18n 未就绪时用英文兜底（绝不把内部键名渲染到页面上）。
+  function T(k, fallback){
+    var v = (window.T || function(){ return ''; })(k);
+    return (!v || v === k) ? fallback : v;
   }
   function pageHref(n){
     var p = new URLSearchParams(location.search);
@@ -2884,40 +2935,54 @@ def build_warn(db: sqlite3.Connection) -> int:
     var q = p.toString();
     return '?' + q;
   }
-  items.forEach(function(el, i){
-    el.style.display = (i >= (cur - 1) * PAGE && i < cur * PAGE) ? '' : 'none';
-  });
   function link(n, label, cls, rel, disabled){
     if(disabled) return '<span class="' + cls + ' disabled" aria-disabled="true">' + label + '</span>';
     return '<a class="' + cls + '" href="' + pageHref(n) + '"' + (rel ? ' rel="' + rel + '"' : '') + '>' + label + '</a>';
   }
-  var html = '<span class="pg-status" aria-live="polite">' +
-    T('warn.page_status').replace('{n}', cur).replace('{total}', total).replace('{count}', items.length) +
-    '</span>';
-  html += link(cur - 1, '‹ ' + T('warn.page_prev'), 'pg-prev', 'prev', cur <= 1);
-  for(var n = 1; n <= total; n++){
-    if(n === cur) html += '<span class="pg-num on" aria-current="page">' + n + '</span>';
-    else html += link(n, String(n), 'pg-num', '', false);
+  function renderPager(){
+    if(total <= 1){ pager.innerHTML = ''; return; }
+    var html = '<span class="pg-status" aria-live="polite">' +
+      T('warn.page_status', 'Page {n} of {total} · {count} warnings')
+        .replace('{n}', cur).replace('{total}', total).replace('{count}', items.length) +
+      '</span>';
+    html += link(cur - 1, '‹ ' + T('warn.page_prev', 'Previous'), 'pg-prev', 'prev', cur <= 1);
+    for(var n = 1; n <= total; n++){
+      if(n === cur) html += '<span class="pg-num on" aria-current="page">' + n + '</span>';
+      else html += link(n, String(n), 'pg-num', '', false);
+    }
+    html += link(cur + 1, T('warn.page_next', 'Next') + ' ›', 'pg-next', 'next', cur >= total);
+    pager.innerHTML = html;
   }
-  html += link(cur + 1, T('warn.page_next') + ' ›', 'pg-next', 'next', cur >= total);
-  pager.innerHTML = html;
-})();
-
-  // v0.10.0 P1-4: severity filter (client-side, keeps pager hidden while filtering)
-  var fbox = document.querySelector('.warnfilters');
+  function showPage(){
+    items.forEach(function(el, i){
+      el.style.display = (i >= (cur - 1) * PAGE && i < cur * PAGE) ? '' : 'none';
+    });
+  }
+  function init(){
+    showPage();
+    renderPager();
+    pager.style.display = '';
+  }
   if(fbox){
     fbox.addEventListener('click', function(ev){
-      var b = ev.target.closest ? ev.target.closest('[data-sev]') : null;
+      var b = ev.target && ev.target.closest ? ev.target.closest('[data-sev]') : null;
       if(!b) return;
       var sev = b.getAttribute('data-sev') || '';
       fbox.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); });
       items.forEach(function(el){
-        var show = !sev || el.getAttribute('data-sev') === sev;
-        el.style.display = show ? '' : 'none';
+        var match = !sev || el.getAttribute('data-sev') === sev;
+        el.style.display = match ? '' : 'none';
       });
       pager.style.display = sev ? 'none' : '';
     });
   }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+  // i18n.js 由 boot.js 在 window load 后注入；它调用 apply() 时会跑这里注册的钩子，
+  // 用当前语言重绘页码/上一页/下一页（切语言后也不会残留英文或键名）。
+  (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(init);
+})();
 """
     body = f"""<h1 data-i18n="warn.title">{esc(I18N["en"]["warn.title"])}</h1>
 <div data-i18n-html="warn.intro">{I18N["en"]["warn.intro"]}</div>
@@ -3131,6 +3196,23 @@ h2{font-size:var(--fs-lg);line-height:var(--lh-heading);margin:24px 0 12px}
    因为「永远是候选集」是本站的口径而不是注脚。 */
 .candidate-line{font-size:var(--fs-md);line-height:var(--lh-ui);color:var(--fg);
  margin:0 0 16px;max-width:var(--prose)}
+/* 2026-11-12 v0.11.2（条目 8）：首页三步流程条（输名 → 确认产品 → 选目标市场）。
+   只在「还没有查询」时出现；.has-q 后隐藏，结果页首屏不为它付高度。 */
+.flow3{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;list-style:none;
+ margin:0 0 12px;padding:0;font-size:var(--fs-md);line-height:1.35;color:var(--fg)}
+.flow3 li{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.flow3 .n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+ border-radius:var(--r-pill);background:var(--accent-weak);color:var(--accent);font-size:13px;
+ font-weight:700;line-height:1}
+.flow3 li+li::before{content:"→";color:var(--muted);margin-right:2px}
+html.has-q .flow3{display:none}
+/* 2026-11-12 v0.11.2（条目 10）：来源市场（?src=）生效时的状态行，与目标市场分开显示。 */
+.srcnote{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:8px 0 0;
+ font-size:var(--fs-sm);color:var(--muted)}
+.srcnote b{color:var(--fg);font-weight:600}
+.srcnote button{padding:2px 0;border:0;background:none;color:var(--accent);font-size:var(--fs-sm);
+ text-decoration:underline;min-height:auto}
+.srcnote[hidden]{display:none!important}
 #q{width:100%;padding:14px 16px;font-size:16px;border:1px solid var(--line);
 border-radius:12px;background:#fff}
 /* 2026-11-11 UI：搜索框内 44×44 可见提交按钮 + 右侧「按 / 聚焦」提示（13px 灰字）。
@@ -3193,13 +3275,19 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atclist li{break-inside:avoid;margin:2px 0;font-size:16px}
 /* v0.10.2 task-3：ATC/大类页成分列表改自适应多列网格——宽屏（1440 / 2560）不再把内容
    挤在中间一列（旧 .wrap 920px + columns:2，2560 视口下列宽只有 268px）。
-   minmax(300px,1fr) 保证单列 ≥300px，行内「主名 + 盐型子行 + 状态角标」不折断。
-   2026-11-11 Batch 2：每条固定 2–3 行（名+码 / 盐型 / 状态+市场），顶部对齐 ——
-   同一行里相邻条目不再因为「一行只有名字、一行带两枚状态」而上下错位。 */
-.atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
- column-gap:24px;row-gap:0;columns:auto;padding-left:20px;margin:6px 0 10px;max-width:none}
-.atcmembers li{display:grid;grid-template-rows:auto auto auto;align-content:start;
- align-items:start;row-gap:1px;font-size:16px;line-height:1.3;break-inside:auto}
+   2026-11-12 用户截图要求（task-6）：每个活性成分一个独立框 —— 1px 边框 + 圆角 + 10–12px
+   内边距 + 与页面底色不同的面板底色（--card 白 vs --bg），不再连成一片。
+   列数保持 3（≥1280）/ 2（768–1279）/ 1（<768）；卡片 align-self:start + break-inside:avoid
+   防止跨列断裂。状态仍是纯文字（不恢复 v0.11.1 去掉的彩色底墙）。 */
+.atcmembers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+ column-gap:16px;row-gap:8px;columns:auto;padding-left:0;margin:6px 0 12px;max-width:none;
+ list-style:none}
+.atcmembers>li{display:grid;grid-template-rows:auto auto auto;align-content:start;
+ align-items:start;align-self:start;row-gap:0;font-size:16px;line-height:1.3;
+ break-inside:avoid;border:1px solid var(--line);border-radius:10px;background:var(--card);
+ padding:10px 12px;margin:0}
+.atcmembers .salt-row{margin:0}
+.atcmembers .atc-strip{margin-top:0}
 /* 第 1 行：主名 + ATC 码；码用等宽数字 + 固定最小宽，1 码/2 码不会把下一行推歪 */
 .atc-nm{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;min-width:0}
 .atc-codes{display:inline-flex;flex-wrap:wrap;gap:0 6px;min-width:5.4em;
@@ -3216,8 +3304,8 @@ border:1px solid var(--line);margin-left:6px;color:var(--muted)}
 .atc-mk{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;
  letter-spacing:0;white-space:nowrap}
 .atc-st-sep{color:var(--muted);font-size:13px;line-height:1.25}
-@media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:18px}
- .atcmembers li{font-size:16px} }
+@media (max-width:767px){ .atclist{columns:1} .atcmembers{display:block;padding-left:0}
+ .atcmembers>li{font-size:16px;padding:10px;margin:0 0 8px} }
 /* v0.8.5：ATC 类名 v2 来源小字 / 盐型附注 / 状态角标 / 查看更多 */
 .atc-src{color:var(--muted);font-size:13px;margin-left:6px;white-space:nowrap}
 .atccard .atc-src{display:block;margin:2px 0 0;white-space:normal}
@@ -3312,6 +3400,18 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 .notice.nick .sub a{white-space:nowrap}
 .notice.nick .sub.src{font-size:14px;margin-top:4px}
 .notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
+/* 2026-11-12 v0.11.2（条目 10）：同名不同药的家族说明可折叠 —— 390 上只留一行警示摘要，
+   长注释放展开区；桌面端 summary 隐藏、默认展开（信息不丢）。 */
+.famnotice{padding:8px 12px}
+.famnotice>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:8px}
+.famnotice>summary::-webkit-details-marker{display:none}
+.famnotice>summary::after{content:"＋";margin-left:auto;color:var(--accent);font-size:14px}
+.famnotice[open]>summary::after{content:"－"}
+.famnotice>.famnote{margin:6px 0 0}
+@media (min-width:601px){
+ .famnotice>summary{display:none}
+ .famnotice>.famnote{margin:0}
+}
 table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5;margin-top:8px}
 th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
 th{color:var(--muted);font-weight:600;font-size:14px}
@@ -3346,6 +3446,16 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 /* v0.10.2 M-4：#ac 的锚点从 .searchwrap 换成 .searchbar，方便把 #meta / 国家行
    一起放进 sticky 的 .searchwrap 里，而不让建议列表跟着往下挪两层。 */
 .searchbar{position:relative}
+/* 2026-11-12 v0.11.2（条目 26）：内容页常驻的简洁搜索栏（成分页 / 商品名页可续查）。
+   顶层页静态渲染；长尾页（drug / name / combo / maker…）由 assets/boot.js 注入同一段，
+   所以 121k 页不增加每页字节。首页不显示（大搜索框已承担）。 */
+.hsearch-row{border-top:1px solid var(--line);background:var(--bg)}
+.hsearch-row .wrap{height:auto;display:block;padding-top:6px;padding-bottom:8px}
+.hsearch{display:flex;gap:8px;align-items:center;max-width:600px}
+.hsearch input{flex:1;min-width:0;padding:10px 12px;font-size:16px;border:1px solid var(--line);
+ border-radius:10px;background:#fff}
+.hsearch button{flex:none;min-width:44px;min-height:44px;padding:0 12px;border-radius:10px;
+ font-size:16px;line-height:1}
 #ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
 background:#fff;border:1px solid var(--line);border-radius:12px;
 box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
@@ -3401,6 +3511,23 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
  font-size:14px;text-decoration:none;cursor:pointer;font-family:inherit}
 .idacts .primary{background:var(--accent);color:#fff}
 .idacts a:hover,.idacts button:hover{text-decoration:none;filter:brightness(.96)}
+/* 2026-11-12 v0.11.2（条目 9）：身份卡标题写清「概括的是哪一条候选」——
+   位置（第 1 条 / 共 N 条）+ 这一条自己的商品名（不是把整个品牌当答案）。
+   390x844 下卡片折成紧凑头：只留标题 + 查询→成分一行，规格/市场/警示/动作进可展开区。 */
+.idcard .idtitle{margin:0 0 6px;font-size:var(--fs-md);line-height:1.4;color:var(--muted)}
+.idcard .idtitle b{color:var(--fg);font-size:var(--fs-md);font-weight:700}
+.idcard .idtitle .idmake{color:var(--muted);font-weight:400}
+.idmore{margin:0}
+.idmore>summary{display:none}
+.idmore>.idbody{margin:0}
+@media (max-width:600px){
+ .idmore>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  min-height:44px;cursor:pointer;color:var(--accent);font-size:var(--fs-sm);list-style:none}
+ .idmore>summary::-webkit-details-marker{display:none}
+ .idmore>summary::after{content:"＋";font-size:16px;line-height:1}
+ .idmore[open]>summary::after{content:"－"}
+ .idmore[open]>.idbody{padding-top:8px;border-top:1px solid var(--line-soft);margin-top:4px}
+}
 .res-more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
  margin:10px 0 0}
 .res-more .sub{margin:0;font-size:14px}
@@ -3431,6 +3558,16 @@ table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
   /* 2026-11-11：国家/地区收进 details 后，sticky 区里那一行换成 44px summary（比原来
      「整行标签 + 下拉」矮，换国家的入口还在） */
   .has-q .searchwrap .ctry-details{margin-top:4px}
+}
+/* 2026-11-12 v0.11.2（条目 10）：结果区上方的重复说明在窄屏压缩 —— 手机首屏留给候选表，
+   解析条 / 「国家/地区叫法」提示不各占一整行（警示文字已移进身份卡的展开区）。 */
+@media (max-width:600px){
+  .parsebar{padding:6px 10px;margin:8px 0;font-size:var(--fs-sm)}
+  .u2bar{padding:8px 10px;margin:8px 0}
+  .u2bar .u2head .sub{display:none}
+  .u2chips{margin-top:6px}
+  .idcard{padding:10px 12px;margin:10px 0 8px}
+  .idcard .idrow .idq{font-size:18px}
 }
 table.det{margin:4px 0 8px;font-size:14px;background:#f6f5f0;border:1px solid var(--line);
  border-radius:8px;overflow:hidden}
@@ -3894,10 +4031,39 @@ main .catquick{background:var(--card)}
 @media (max-width:767px){.sn-right .qcat,.sn-right .langdd{display:none}.mmenu{display:inline-flex}}
 """
 
+def _detail_row_fields() -> list[str]:
+    """读 etl/build_detail_buckets.py 的 ROW_FIELDS（明细行下标的唯一真相源）。
+
+    v0.11.2 P0-2：``detPanelHTML()`` 曾把品牌列手写成 ``r[3]``，而 ROW_FIELDS[3] 是 pack →
+    382,035 条明细行里 232,353 条（60.8%）的「品牌」列显示成包装原文。现在构建期把这份
+    字段表注入 app.js，前端用 ``indexOf('brand')`` / ``indexOf('pack')`` 取名，不再写数字。
+    """
+    src = (ROOT / "etl" / "build_detail_buckets.py").read_text(encoding="utf-8")
+    m = re.search(r"^ROW_FIELDS\s*=\s*\[(.*?)\]", src, re.S | re.M)
+    if not m:
+        raise SystemExit("etl/build_detail_buckets.py 里找不到 ROW_FIELDS，明细面板下标无法校验")
+    return [part.strip().strip("\"'") for part in m.group(1).replace("\n", " ").split(",")
+            if part.strip()]
+
+
+DETAIL_ROW_FIELDS = _detail_row_fields()
+if "brand" not in DETAIL_ROW_FIELDS or "pack" not in DETAIL_ROW_FIELDS:
+    raise SystemExit(f"ROW_FIELDS 缺 brand/pack，明细面板列无法定位：{DETAIL_ROW_FIELDS}")
+
+
 APP_JS = r"""
+// v0.11.2 P0-2：明细行字段表由构建期从 etl/build_detail_buckets.py 的 ROW_FIELDS 注入，
+// 明细面板的列下标一律从它取名（曾把品牌列写成 r[3]=pack，60.8% 明细行显示成包装）。
+const DETAIL_ROW_FIELDS = __DETAIL_ROW_FIELDS__;
+const DETAIL_COL = {brand: DETAIL_ROW_FIELDS.indexOf('brand'),
+                    pack: DETAIL_ROW_FIELDS.indexOf('pack')};
 const box = document.getElementById('q');
 const out = document.getElementById('out');
 const ctry = document.getElementById('country');
+// v0.11.2（条目 10）：来源市场（?src=）与目标市场（?country=）是两个语义：
+//   country = 目标市场（这个成分在该国叫什么）；src = 来源市场（只看这些登记库的记录）。
+const srcEl = document.getElementById('src');
+const srcNote = document.getElementById('srcnote');
 const meta = document.getElementById('meta');
 // v0.9.7 task-12：结果页 H1 改成查询名（清空查询时还原首页 H1）；身份卡挂在表前的 #identity。
 const h1El = document.getElementById('h1');
@@ -4253,11 +4419,14 @@ function detPanelHTML(payload, key, e, T){
     const rel = (payload.r && payload.r[r[7]]) || '';
     const src = (payload.s && payload.s[r[11]]) || '';
     const strength = r[8] ? ' · ' + esc(r[8]) : '';
-    const brandCell = r[3] ? esc(r[3]) : esc(T('brand.none'));
+    // v0.11.2 P0-2：下标来自 ROW_FIELDS（构建期注入），别再手写数字。
+    // 其它列（country=1 / approval=4 / status=5 / release=7 / strength=8 / mah=9 /
+    // source_url=10 / source_idx=11）仍按 ROW_FIELDS 的既有契约读取。
+    const brandCell = r[DETAIL_COL.brand] ? esc(r[DETAIL_COL.brand]) : esc(T('brand.none'));
     const exp = (EXPORT_ONLY && EXPORT_ONLY.has(r[0]))
       ? ` <span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
     return `<tr><td>${esc(r[1])}</td><td>${brandCell}${exp}</td>`
-      + `<td>${esc(r[3]) || '—'}${strength}</td>`
+      + `<td>${esc(r[DETAIL_COL.pack]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
       + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
@@ -4548,6 +4717,10 @@ function suggestNames(nq, limit){
   }
   return res;
 }
+// v0.11.2（条目 9/10）：窄屏（390）判定——身份卡折成紧凑头、结果区上方说明可折叠。
+function compactUI(){
+  try{ return !!(window.matchMedia && matchMedia('(max-width:600px)').matches); }catch(e){ return false; }
+}
 function identityCardHTML(q, display, nicks, confs, T){
   if(!display || !display.length) return '';
   let first = null;
@@ -4560,9 +4733,7 @@ function identityCardHTML(q, display, nicks, confs, T){
   const zhName = (first.xz && first.xz.length) ? first.xz.join(' + ') : '';
   const other = (window.LANG === 'zh' || window.LANG === 'zh-Hant')
     ? (first.x || '') : zhName;
-  const ingLine = `<span class="iding">${esc(ing)}</span>`
-    + (other && other !== ing ? ` <span class="meta">${esc(other)}</span>` : '');
-  let severe = !!(confs && confs.length) || first.l === 'severe';
+  const ingLine = `<span class="iding">${esc(ing)}</span>`;  let severe = !!(confs && confs.length) || first.l === 'severe';
   for(const item of display){ if(item[2] && item[2].l === 'severe'){ severe = true; break; } }
   const badge = severe ? ` <span class="idbadge">${esc(T('res.same_name'))}</span>` : '';
   const strengths = [];
@@ -4587,6 +4758,9 @@ function identityCardHTML(q, display, nicks, confs, T){
     fields.push(`<span>${esc(T('res.identity.markets'))} ${marketTags(markets, 6)}</span>`);
   }
   if(recs) fields.push(`<span>${esc(T('res.identity.records').replace('{n}', String(recs)))}</span>`);
+  // v0.11.2（条目 10）：另一语言的成分名不再占卡片常显区（390 上会多 3 行），
+  // 移进展开后的字段行；桌面端默认展开，信息不丢。
+  if(other && other !== ing) fields.push(`<span>${esc(other)}</span>`);
   const drugHref = first.cu ? (BASE + first.cu)
     : (first.v ? (BASE + 'drug/' + encodeURIComponent(first.v) + '.html') : '');
   const std = String(first.x || first.d || '').trim();
@@ -4599,12 +4773,30 @@ function identityCardHTML(q, display, nicks, confs, T){
   }
   acts.push(`<a href="${esc(reportURL(q))}" target="_blank" rel="noopener">`
     + `${esc(T('report.cta'))}</a>`);
+  // v0.11.2（条目 9）：标题写清「概括的是哪一条候选」——位置 + 这一条自己的商品名/厂家，
+  // 不让人把卡片当成整个品牌的结论（整个品牌/名称仍是候选集）。
+  let candName = String(first.d || first.k || q);
+  if(candName.length > 42) candName = candName.slice(0, 41) + '…';
+  let maker = String(first.m || '');
+  if(maker.length > 24) maker = maker.slice(0, 23) + '…';
+  const candTitle = esc(T('res.identity_title').replace('{n}', String(display.length)))
+    + ` · <b>${esc(candName)}</b>`
+    + (maker ? ` <span class="idmake">· ${esc(maker)}</span>` : '');
+  // v0.11.2（条目 10 / task-3）：390 宽下卡片折成紧凑头——标题 + 查询→成分一行常显，
+  // 规格/市场/警示/动作收进可展开区；桌面端默认展开且不显示摘要行。
+  const compactCard = compactUI();
   return `<section class="idcard" aria-label="${esc(T('res.identity.ingredient'))}">
+    <p class="idtitle">${candTitle}</p>
     <div class="idrow"><span class="idq">${esc(q)}</span>
       <span class="idarrow">→</span>${ingLine}${badge}</div>
-    <p class="idfields">${fields.join('')}</p>
-    <div class="idwarn">${esc(T('res.not_interchangeable'))} · ${esc(T('res.identity_note'))}</div>
-    <div class="idacts">${acts.join('')}</div>
+    <details class="idmore"${compactCard ? '' : ' open'}>
+      <summary>${esc(T('res.more_detail'))}</summary>
+      <div class="idbody">
+        <p class="idfields">${fields.join('')}</p>
+        <div class="idwarn">${esc(T('res.not_interchangeable'))} · ${esc(T('res.identity_note'))}</div>
+        <div class="idacts">${acts.join('')}</div>
+      </div>
+    </details>
   </section>`;
 }
 function emptyActionsHTML(q, nq, T){
@@ -4794,6 +4986,18 @@ function updateCtryLabel(){
     : T('home.country_summary');
 }
 (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(updateCtryLabel);
+// v0.11.2（条目 10）：来源市场状态行（只在选了来源市场时出现；与目标市场分开显示）。
+// 目标市场仍由 #country 的 summary 表示，两者互不改写对方的文案。
+function updateSrcNote(){
+  if(!srcNote) return;
+  const T = window.T || (k=>k);
+  const v = srcEl ? srcEl.value : '';
+  if(!v){ srcNote.hidden = true; srcNote.innerHTML = ''; return; }
+  srcNote.hidden = false;
+  srcNote.innerHTML = esc(T('res.src_active').replace('{c}', v)) + ' · '
+    + '<button type="button" data-clearsrc="1">' + esc(T('res.src_all')) + '</button>';
+}
+(window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(updateSrcNote);
 // ── URL 状态：q / country 可分享、可前进后退（history.replaceState，不新增历史项）──
 let URL_T = null;
 function syncURL(q){
@@ -4805,6 +5009,9 @@ function syncURL(q){
       if(q) u.searchParams.set('q', q); else u.searchParams.delete('q');
       const c = ctry.value;
       if(c) u.searchParams.set('country', c); else u.searchParams.delete('country');
+      // v0.11.2（条目 10）：来源市场单独一个参数，不占用 country 的语义
+      const s = srcEl ? srcEl.value : '';
+      if(s) u.searchParams.set('src', s); else u.searchParams.delete('src');
       window.history.replaceState(null, '', u.pathname + (u.search || '') + (u.hash || ''));
     }catch(e){}
   }, 300);
@@ -4815,7 +5022,9 @@ if(window.addEventListener){
       const p = new URLSearchParams(location.search);
       box.value = p.get('q') || '';
       ctry.value = (p.get('country') || '').toUpperCase();
+      if(srcEl) srcEl.value = (p.get('src') || '').toUpperCase();
       updateCtryLabel();
+      updateSrcNote();
       if(box.value.trim()) startSearch(); else render();
     }catch(e){}
   });
@@ -5385,7 +5594,7 @@ function render(){
   // P2：分片阶段先出结果；core 未到位时标记 partial，跨条目的区块延后到补全后
   const partial = !!(POOL_READY && !IDX_READY && !LEGACY);
   const matched = collectHits(nq, st, nicks, nickSids, onlyUnmapped, c);
-  const hits = matched.hits;
+  let hits = matched.hits;
   const fuzzyUsed = matched.fuzzyUsed;
   // 拼音兜底：拉丁查询零命中（或只有模糊命中）且拼音表未加载 → 懒加载 pinyin.json 后重跑一次。
   if(!nicks.length && !LEGACY && SEARCH_LAYERS && /^[a-z0-9 ]{2,}$/.test(nq) && !PY_MAP
@@ -5394,6 +5603,13 @@ function render(){
   }
   hits.sort((a,b)=> b[0]-a[0] || (a[2].q?1:0)-(b[2].q?1:0) ||
                      b[2].n-a[2].n || a[2].d.length-b[2].d.length);
+  // v0.11.2（条目 10）：来源市场（?src=）只筛候选集——保留在该登记库有记录的条目。
+  // 目标市场（c，?country=）在下面单独改变视图；两个语义不混。分片阶段字段未全时先不筛，
+  // core 到位后 render 会重跑，届时再按来源市场过滤。
+  const src = srcEl ? srcEl.value : '';
+  if(src && !partial){
+    hits = hits.filter(h => (h[2].c || []).indexOf(src) >= 0);
+  }
   // UI P0 ④：不再 40 行/80 行硬截断——保留至多 200 条候选交给前端
   // 「成分聚合 + 品牌折叠 + 加载更多」分页展示（默认每页 25 行可见品牌）。
   const shown = hits.slice(0, 200);
@@ -5528,9 +5744,14 @@ function render(){
   }
   let warnHTML = '';
   const T2 = window.T || (k=>k);
+  // v0.11.2（条目 10）：同名不同药的家族说明在 390 上折成一行摘要（警示标签仍常显，
+  // 长注释放展开区），桌面端默认展开——结果区上方不再被说明文字吃满首屏。
+  const famCompact = compactUI();
   for(const [label, f] of byFam){
     if(f.comps.size > 1){
-      warnHTML += `<div class="notice"><b>${T2('fam.warn')}：${label}。</b>${f.note||''}</div>`;
+      warnHTML += `<details class="notice famnotice"${famCompact ? '' : ' open'}>`
+        + `<summary><b>${T2('fam.warn')}：${label}。</b></summary>`
+        + `<div class="famnote">${f.note||''}</div></details>`;
     }
   }
   let extraHTML = '';
@@ -5611,7 +5832,15 @@ function render(){
           ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)).slice(0, 2).join(' / ') : '';
         const cs = (e.c || []).slice(0, 3)
           .map(c => `<span class="tag ${String(c).toLowerCase()}">${esc(c)}</span>`).join(' ');
-        return `<li>${brandHTML(e)}${ds ? ' <span class="meta">' + esc(ds) + '</span>' : ''}`
+        // 2026-11-12 task-18（用户截图）：有商品名的条目也显示厂家，和「无商品名」条目
+        // 的「厂家：X 命中名：Y」对齐。>28 字截 27 + …，title 放全名；样式沿用 meta。
+        let mah = '';
+        if(e.t === 1 && e.m){
+          const full = String(e.m);
+          const short = full.length > 28 ? full.slice(0, 27) + '…' : full;
+          mah = ` <span class="meta" title="${esc(full)}">${esc(T2('brand.mah'))} ${esc(short)}</span>`;
+        }
+        return `<li>${brandHTML(e)}${mah}${ds ? ' <span class="meta">' + esc(ds) + '</span>' : ''}`
           + `${cs ? ' ' + cs : ''}</li>`;
       }).join('');
       const rest = rows2.length - list.length;
@@ -5701,9 +5930,9 @@ function setHint(html, show){
   hintEl.innerHTML = html || '';
   hintEl.style.display = (show === false || !html) ? 'none' : '';
 }
-// ── P1 列式 + 字典编码核心（data/idx/core.json，见 reports/index-p1-impl.md）──
-// 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧
-// index.json 完全同构（同字段、同顺序）的 IDX 数组，render() 以下逻辑一行不改。
+// 构建把 index.json 编成「版本头 + 列式数组 + 字符串字典」；这里解码回与旧 index.json
+// 同字段（字段清单见 build.py 的 CORE_FIELDS；v0.11.2 起 t/nc/eo 也在 core 里）的 IDX 数组，
+// render() 以下逻辑一行不改。
 //   cols[f] = {d:[字典值...], i:[每行的字典下标...]}  字典列
 //   cols[f] = [值...]                                普通列
 //   d 与 k 只差 ASCII 大小写时 cols.d 存 ""，cols.dp 存大小写位置模式（'0-2,5'）；
@@ -6130,6 +6359,13 @@ out.addEventListener('click', ev => {
     ctry.value = '';
     updateCtryLabel();
     render();
+    return;
+  }
+  // v0.11.2（条目 10）：清掉来源市场过滤，候选集回到全部登记库
+  if(t.closest('[data-clearsrc]')){
+    if(srcEl) srcEl.value = '';
+    updateSrcNote();
+    render();
   }
 });
 // 点击事件：结果里的品牌/成分链接、报告入口、更新日志（只记事件，不记用户）。
@@ -6166,6 +6402,14 @@ ctry.addEventListener('change', ()=>{
   if(ctry.value) ensureIndexOnDemand();
   startSearch();
 });
+// v0.11.2（条目 10）：来源市场只过滤候选集（登记库），不触发国家聚合视图。
+if(srcEl){
+  srcEl.addEventListener('change', ()=>{
+    updateSrcNote();
+    acClose();
+    startSearch();
+  });
+}
 document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>{
   box.value=b.dataset.q; acClose(); trackSearchSubmit(box.value); startSearch(); box.focus();
 }));
@@ -6227,7 +6471,11 @@ const initial = new URLSearchParams(location.search).get('q');
 if(initial){ box.value = initial; }
 const ctry0 = new URLSearchParams(location.search).get('country');
 if(ctry0 && ctry){ ctry.value = ctry0.toUpperCase(); }
+// v0.11.2（条目 10）：?src= 来源市场深链（与 ?country= 目标市场并列，互不覆盖）
+const src0 = new URLSearchParams(location.search).get('src');
+if(src0 && srcEl){ srcEl.value = src0.toUpperCase(); }
 updateCtryLabel();   // 「看这个药在哪个国家叫什么」标签随 URL/选择初始化
+updateSrcNote();     // 来源市场状态行（选了才出现）
 if(LEGACY){
   // 回滚开关：?legacy=1 = 旧行为，页面一加载就拉全量索引。
   setHint('');
@@ -6884,6 +7132,22 @@ def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
     <details class="mmenu"><summary aria-label="More" data-i18n-aria="nav.more">⋯</summary>
       <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div>{all_link}</div></details>
   </span>"""
+
+
+def _shell_search_html(prefix: str) -> str:
+    """2026-11-12 v0.11.2（条目 26）：内容页常驻的简洁搜索栏。
+
+    首页由大搜索框承担，不渲染；其它页（成分 / 商品名 / 分类 / 覆盖 / 关于…）都给一条
+    44px 续查入口，提交走 ``index.html?q=``，与首页 ``?q=`` 深链同一条路径（app.js 已有）。
+    """
+    return f"""<div class="hsearch-row" data-shell="1"><div class="wrap">
+  <form class="hsearch" role="search" action="{prefix}index.html" method="get">
+    <label class="sr-only" for="hq" data-i18n="nav.search_compact">Search a name</label>
+    <input id="hq" name="q" type="search" autocomplete="off" enterkeyhint="search"
+      placeholder="Search a name" data-ph="nav.search_compact"
+      aria-label="Search a name" data-i18n-aria="nav.search_compact">
+    <button type="submit" data-i18n-aria="home.submit" aria-label="Search">→</button>
+  </form></div></div>"""
 
 
 def _shell_tabbar(prefix: str, active: str = "search") -> str:
@@ -9215,18 +9479,26 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
             doses = " / ".join(e.get("s") or []) or "—"
             mah = e.get("m") or "—"
             body_rows.append(
-                f'<tr><td class="c-brand" data-label="{esc(T["col.brand"])}">'
+                f'<tr><td class="c-brand" data-label="{esc(T["col.brand"])}" '
+                f'data-i18n-label="col.brand">'
                 f'{brand}{tags}</td>'
-                f'<td data-label="{esc(T["col.dose"])}">{esc(doses)}</td>'
-                f'<td data-label="{esc(T["col.mah"])}">{esc(mah)}</td></tr>')
+                f'<td data-label="{esc(T["col.dose"])}" data-i18n-label="col.dose">'
+                f'{esc(doses)}</td>'
+                f'<td data-label="{esc(T["col.mah"])}" data-i18n-label="col.mah">'
+                f'{esc(mah)}</td></tr>')
         capped_html = ""
         if total > COMBO_ROW_CAP:
             capped = (T["combo.capped"].replace("{cap}", str(COMBO_ROW_CAP))
                       .replace("{total}", str(total)))
             capped_html = f'<p class="sub">{capped}</p>'
+        # 2026-11-12（task-7 ②）：复方页表头四语 —— 旧 task-4③ 以为 v0.10.3 改版后已无表，
+        # 现查 6,790 个真复方页仍有这张「Brand / Dose / Manufacturer」表；补 data-i18n /
+        # data-i18n-label，界面语言切换后表头与移动端行标签都跟着翻（不再只有英文）。
         rows_html = (
             '<div class="tablewrap"><table class="res"><thead><tr>'
-            f'<th>{T["col.brand"]}</th><th>{T["col.dose"]}</th><th>{T["col.mah"]}</th>'
+            f'<th data-i18n="col.brand">{T["col.brand"]}</th>'
+            f'<th data-i18n="col.dose">{T["col.dose"]}</th>'
+            f'<th data-i18n="col.mah">{T["col.mah"]}</th>'
             f'</tr></thead><tbody>{"".join(body_rows)}</tbody></table></div>'
             if body_rows else
             '<p class="empty" data-i18n="combo.empty">No brand names recorded for this '
@@ -9581,6 +9853,11 @@ def build_index_page(entries, stats, coverage) -> None:
     body = f"""<h1 id="h1" data-i18n="home.h1">Look up a medicine name — see what it is in each country</h1>
 <p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work.</p>
 <p class="candidate-line" data-i18n="home.candidate">You always get a candidate set, never a single answer.</p>
+<ol class="flow3">
+  <li><span class="n" aria-hidden="true">1</span><span data-i18n="flow.s1">Name</span></li>
+  <li><span class="n" aria-hidden="true">2</span><span data-i18n="flow.s2">Confirm product</span></li>
+  <li><span class="n" aria-hidden="true">3</span><span data-i18n="flow.s3">Target market</span></li>
+</ol>
 <div class="searchwrap">
 <div class="searchbar">
 <label class="sr-only" for="q" data-i18n="home.ph">Brand name / generic name / nickname / a line from the pack</label>
@@ -9591,10 +9868,23 @@ def build_index_page(entries, stats, coverage) -> None:
 </div>
 <p class="sub search-status" id="meta" role="status" aria-live="polite" aria-atomic="true"></p>
 <details class="mf-details ctry-details" id="ctrydetails">
-  <summary><span id="ctrylabel" data-i18n="home.country_summary">Only one country/region (optional)</span></summary>
+  <summary><span id="ctrylabel" data-i18n="home.country_summary">Target market (optional)</span></summary>
   <div class="ctry-panel">
-  <label class="sel-label" for="country" data-i18n="home.country_label">See what this medicine is called in:</label>
+  <label class="sel-label" for="country" data-i18n="home.country_label">Target market: show the names used there (optional)</label>
   <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
+    <option value="US" data-i18n="home.us">United States</option>
+    <option value="GB" data-i18n="home.gb">United Kingdom</option>
+    <option value="CN" data-i18n="home.cn">China</option>
+    <option value="ES" data-i18n="home.es">Spain</option>
+    <option value="MX" data-i18n="home.mx">Mexico</option>
+    <option value="AU" data-i18n="home.au">Australia</option>
+    <option value="CA" data-i18n="home.ca">Canada</option>
+    <option value="TW" data-i18n="home.tw">Taiwan</option>
+    <option value="HK" data-i18n="home.hk">Hong Kong</option>
+    <option value="SG" data-i18n="home.sg">Singapore</option>
+    <option value="EU" data-i18n="home.eu">European Union (EU)</option></select>
+  <label class="sel-label src-label" for="src" data-i18n="res.src_label">Source market (only records from):</label>
+  <select id="src"><option value="" data-i18n="res.src_all">All source markets</option>
     <option value="US" data-i18n="home.us">United States</option>
     <option value="GB" data-i18n="home.gb">United Kingdom</option>
     <option value="CN" data-i18n="home.cn">China</option>
@@ -9609,6 +9899,7 @@ def build_index_page(entries, stats, coverage) -> None:
   </div>
 </details>
 </div>
+<div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
 <div id="identity"></div>
 <div id="out"></div>
 <p class="sub report-line" id="report" style="display:none">
@@ -9625,12 +9916,12 @@ def build_index_page(entries, stats, coverage) -> None:
       <p class="sub" data-i18n="u1.step1_hint">Brand, generic name, nickname, or a line from the pack — dose included is fine.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
         {{try1}}</div></li>
-    <li class="u1step"><b data-i18n="u1.step2">See the ingredient and strength</b>
-      <p class="sub" data-i18n="u1.step2_hint">You always get a candidate set — never a single answer.</p>
+    <li class="u1step"><b data-i18n="u1.step2">Check this candidate: ingredient, strength, dosage form</b>
+      <p class="sub" data-i18n="u1.step2_hint">The card shows one candidate, never the answer — check its ingredient, strength and form against your pack.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
         {{try2}}</div></li>
-    <li class="u1step"><b data-i18n="u1.step3">Switch to a country/region</b>
-      <p class="sub" data-i18n="u1.step3_hint">Pick a country/region to see the names it is sold under there, or use the names-by-country/region row.</p>
+    <li class="u1step"><b data-i18n="u1.step3">Pick the target market</b>
+      <p class="sub" data-i18n="u1.step3_hint">Pick a target market to see what the same ingredient is called there; the candidate list itself does not change.</p>
       <div class="u1try"><span data-i18n="u1.try">Try:</span>
         {{try3}}</div></li>
   </ol>
@@ -11712,6 +12003,12 @@ def build_seo_files() -> None:
 CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m", "f",
                   "db", "sl", "rl", "wi")
 CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz", "atc")     # 值是数组：先 JSON 化再进字典
+# v0.11.2 P0-1：core 必须逐行携带的列。t / nc / eo 是 v0.9.0–v0.9.1 才加进 load_index()
+# 条目的字段，这里的手写清单曾漏掉它们 → core 解码后 e.t === undefined，客户端 166,846 /
+# 196,200 行（85.0%）的品牌名被换成「无商品名 + 命中名」。新增条目字段时必须同步这份清单
+# （encode_core() 里的构建期守卫会在漏列时直接中止构建）。
+CORE_FIELDS = ("c", "x", "xz", "atc", "s", "l", "f", "n", "t", "v", "vs", "nc", "eo",
+               "u", "cu", "mu", "ml", "g", "gn", "m", "mn", "db", "sl", "rl", "wi")
 
 
 def _d_case_pattern(d: str, k: str) -> str | None:
@@ -11759,8 +12056,13 @@ def encode_core(entries) -> dict:
             d_col.append("")         # 可由 k + 模式还原
             dp_col.append(pat)
     cols: dict[str, object] = {"k": [e["k"] for e in entries], "d": d_col, "dp": dp_col}
-    for f in ("c", "x", "xz", "atc", "s", "l", "f", "n", "v", "vs", "u", "cu", "mu", "ml", "g", "gn",
-              "m", "mn", "db", "sl", "rl", "wi"):
+    # P0-1 守卫：core 一旦漏列，decodeCore 后该字段是 undefined，前端静默渲染错位
+    # （v0.9.0 的 t 就这样丢了 85% 的商品名）。宁可构建失败，不要发布缺列的 core。
+    unknown = {f for e in entries for f in e} - set(CORE_FIELDS) - {"k", "d", "q"}
+    if unknown:
+        raise SystemExit(f"encode_core 漏字段 {sorted(unknown)}：core.json 会缺列，"
+                         "客户端渲染错位（把新字段加进 CORE_FIELDS）")
+    for f in CORE_FIELDS:
         vals = [e.get(f) for e in entries]
         if f in CORE_ARRAY_COLS:
             # 数组先序列化再字典化：客户端解码时把字典值直接给出（数组引用共享，
@@ -11939,6 +12241,8 @@ def main() -> None:
                                    f'<a data-lang="{code}" href="?lang={code}">{label}</a>'
                                    for code, label, _ in LANGS)))
     shell_tab_js = json.dumps(_shell_tabbar("__R__"))
+    # v0.11.2（条目 26）：长尾页的常驻搜索栏也由 boot.js 注入（每页静态 0 B）。
+    shell_search_js = json.dumps(_shell_search_html("__R__"))
     (OUT / "assets" / "boot.js").write_text(
         # v0.10.2：长尾页只拉当前语言的字典包。语言判定必须在插入 <script> 之前完成，
         # 所以 boot.js 里带一份 LANG_META_JS + LANG_PICK_JS（与 assets/i18n.js 同一段源码）。
@@ -11947,12 +12251,19 @@ def main() -> None:
         "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
         "var _rp='/';try{_rp=new URL(r).pathname||'/';}catch(e){}"
         "var LK=__dshPickLang(_rp);"
-        "var SN=" + shell_nav_js + ",TB=" + shell_tab_js + ";"
+        "var SN=" + shell_nav_js + ",TB=" + shell_tab_js + ",HS=" + shell_search_js + ";"
         ";(function(){var h=document.querySelector('header');"
         "if(!h||h.querySelector('[data-shell]'))return;"
         "h.className=(h.className?h.className+' ':'')+'hdr-shell';"
         "var html=SN.replace(/__R__/g,r),nav=h.querySelector('nav'),w=h.querySelector('.wrap');"
         "if(nav){nav.outerHTML=html;}else if(w){w.insertAdjacentHTML('beforeend',html);}"
+        # v0.11.2（条目 26）：常驻搜索栏只给「成分页 / 商品名页」这类可续查的内容页
+        # （drug/name/combo/maker）。ATC/覆盖/关于等顶层页不加，避免把首屏内容压下去
+        # （390 下多一行 57px 会让 atc/R06A 首屏条目少 1 条）。
+        # 注意用 location.pathname 判断页面类型：_rp 是「站点根」的 pathname（boot.js 自己
+        # 在 assets/ 下，r 去掉文件名后是根），在 /drug/ 页上它永远是 "/"。
+        "if(!h.querySelector('.hsearch-row')&&/\\/(drug|name|combo|maker)\\//.test(location.pathname))"
+        "{h.insertAdjacentHTML('beforeend',HS.replace(/__R__/g,r));}"
         "var box=document.createElement('div');box.innerHTML=TB.replace(/__R__/g,r);"
         "while(box.firstChild){document.body.appendChild(box.firstChild);}"
         "var p=location.pathname,t=document.querySelector('.tabbar');if(!t)return;"
@@ -12356,6 +12667,7 @@ def main() -> None:
     print(f"i18n t2s    : {len(t2s):,} chars (zh-Hant input normalization)", flush=True)
     (OUT / "assets" / "app.js").write_text(
         APP_JS.replace("REPORT_REPO_PLACEHOLDER", REPORT_REPO)
+        .replace("__DETAIL_ROW_FIELDS__", json.dumps(DETAIL_ROW_FIELDS, ensure_ascii=False))
         .replace("__T2S_JSON__", json.dumps(t2s, ensure_ascii=False, separators=(",", ":")))
         .replace("data/idx/core.json", f"data/idx/core.json?v={BUILD_V}")
         .replace("data/idx/pinyin.json", f"data/idx/pinyin.json?v={BUILD_V}")

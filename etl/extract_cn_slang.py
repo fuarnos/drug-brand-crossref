@@ -47,6 +47,11 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
 import ingest_nhsa as nh  # noqa: E402
 from normalize_name import _T2S, normalize  # noqa: E402
+from alias_rules import (  # noqa: E402
+    SELF_CHECK_JUNK,
+    alias_junk_reason,
+    self_check as alias_self_check,
+)
 
 DB = ROOT / "data" / "drugs.db"
 RAW_TERMS = ROOT / "data" / "raw" / "cn_slang" / "raw_terms.jsonl"
@@ -142,9 +147,11 @@ DRUG_ABUSE_SIDS = {
     "synthetic-cannabinoid", "mephedrone", "cathinone",
 }
 # 句子碎片/功能词：命中即丢
+# v0.11.2 P0-3：删掉 `^是` / `^为` / `^的` 三个**行首锚点**——它们就是「句中整句放行」的直接原因；
+# 现在这类判定统一走 etl/alias_rules.py（句中判定，抽取与入库共用一套）。
 JUNK_PATTERNS = [
     r"上市", r"首次", r"批准", r"用于", r"一种", r"属于", r"称为", r"又称", r"也叫",
-    r"^是", r"^为", r"^的", r"^在", r"^与", r"^和", r"^或", r"^等", r"^及",
+    r"^在", r"^与", r"^和", r"^或", r"^等", r"^及",
     r"成分", r"制剂", r"剂量", r"服用", r"疗效", r"作用", r"适应症", r"说明书",
     r"化学名", r"商品名$", r"通用名", r"英文名", r"别名$",
     r"注射剂$", r"片剂$", r"口服液$", r"胶囊剂$", r"栓剂$", r"咀嚼片$", r"滴眼液$",
@@ -178,6 +185,11 @@ def is_junk_term(term: str, target: str) -> str:
         return "含剂量/规格"
     if not RE_ONLY_HAN_PUNCT.match(t):
         return "含异常标点"
+    # v0.11.2 P0-3：句中虚词 / 说明文字 / 剂型尾缀 / 两名挤一格（规则见 etl/alias_rules.py）。
+    # 与入库侧 etl/ingest_cn_slang.py 共用同一套，避免「抽的时候拦、入库又放回来」。
+    why = alias_junk_reason(t)
+    if why:
+        return why
     if RE_JUNK.search(t):
         return "句子碎片/功能词"
     if re.search(r"[A-Za-z]{2,}", t):
@@ -510,10 +522,37 @@ def classify_term_type(term: str, method: str, pattern: str) -> str:
 # ---------------------------------------------------------------------------
 # 主流程
 # ---------------------------------------------------------------------------
+def self_check() -> int:
+    """P0-3 回归断言：45 行脏样本 / 合法叫法 / 候选 CSV 金值 / 本模块闸门本身。
+
+    `python etl/extract_cn_slang.py --self-check`；退出码 0 = 全过。
+    """
+    print("== etl/alias_rules.py 规则自检 ==")
+    fails = alias_self_check()
+    print("\n== 本模块 is_junk_term() 闸门 ==")
+    extra = 0
+    for t in SELF_CHECK_JUNK:
+        why = is_junk_term(t, "")
+        if not why:
+            print(f"  !! 未拦住：{t}")
+            extra += 1
+    print(f"  {len(SELF_CHECK_JUNK)} 行脏样本：拦住 {len(SELF_CHECK_JUNK) - extra}/"
+          f"{len(SELF_CHECK_JUNK)}")
+    fails += [f"is_junk_term 漏拦 {extra} 行"] if extra else []
+    print("\n" + ("自检通过" if not fails else f"自检失败 {len(fails)} 项"))
+    for f in fails:
+        print(f"  !! {f}")
+    return 1 if fails else 0
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="抽取中文俗名候选（Tier B，不写库）")
     ap.add_argument("--dry-run", action="store_true", help="只统计不写 CSV")
+    ap.add_argument("--self-check", action="store_true",
+                    help="只跑 P0-3 闸门回归断言（不读库、不写文件）")
     args = ap.parse_args()
+    if args.self_check:
+        raise SystemExit(self_check())
 
     con = sqlite3.connect("file:" + str(DB) + "?mode=ro", uri=True)
     idx = build_db_index(con)

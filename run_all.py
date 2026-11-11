@@ -115,11 +115,15 @@ def main() -> None:
     run("etl/ingest_us_terms.py")
     # 社区叫法 / 各国街头叫法（CN/GB/AU/ES），人工策展 + 逐条 URL。
     run("etl/ingest_community_terms.py")
-    # 清除毒品 / 娱乐性用药黑话（用户口径：只保留合法药品俗名；脚本幂等）。
-    run("etl/clean_drug_terms.py", "--apply")
     # 中文互联网俗名（Tier B，全部进 drug_term；候选 CSV 在仓库里，可离线重跑）。
+    # v0.11.2 P0-3：入库侧已有整句/说明文字闸门（etl/alias_rules.py），候选 CSV 里的
+    # 「宣传自己的商品」「生产厂家为突出」这类不会再进来。
     if (ROOT / "data/cn_slang_candidates.csv").exists():
         run("etl/ingest_cn_slang.py", "--apply")
+    # 清除毒品 / 娱乐性用药黑话（用户口径：只保留合法药品俗名；脚本幂等）。
+    # v0.11.2 P0-3：**顺序必须在 ingest_cn_slang 之后**——clean 先跑的话（旧顺序），
+    # 删掉的词会被后面的中文俗名入库重新灌回来，这也是历史上「清完又复活」的原因。
+    run("etl/clean_drug_terms.py", "--apply")
     # 盐型规范化（为 D2 折算铺路）、/warn 种子。
     run("etl/normalize_salts.py", "--apply", "--confirm-real-db")
     run("data/seed_warnings.py", "--apply", "--confirm-real-db")

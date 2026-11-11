@@ -48,6 +48,12 @@ CSV_DEFAULT = ROOT / "data" / "cn_slang_candidates.csv"
 DB_DEFAULT = ROOT / "data" / "drugs.db"
 MANIFEST_DIR = ROOT / ".tmp" / "cn-slang-ingest"
 
+# v0.11.2 P0-3：入库侧闸门与抽取侧共用一套规则（etl/alias_rules.py）。
+# 为什么入库也要拦：`run_all.py` 只跑本脚本、不跑 extract_cn_slang.py，
+# 只补抽取侧闸门的话，历史候选 CSV 里的整句会在每次重建时被重新灌回 drug_term。
+sys.path.insert(0, str(ROOT / "etl"))
+from alias_rules import alias_junk_reason  # noqa: E402
+
 # 新增 source 行（与候选 CSV 的 platform/license 对应）
 SOURCES = {
     "wikipedia_zh": dict(
@@ -191,6 +197,14 @@ def build_plan(con: sqlite3.Connection, rows: list[dict]) -> dict:
         if not term or not tkey:
             skipped["术语为空"] += 1
             continue
+        # v0.11.2 P0-3：整句 / 说明文字 / 剂型尾缀 / 两名挤一格 一律不收。
+        why = alias_junk_reason(term)
+        if why:
+            skipped[f"P0-3 闸门：{why}"] += 1
+            samples = skipped_samples.setdefault(why, [])
+            if len(samples) < 8:
+                samples.append(term)
+            continue
         if ttype not in ("street", "folk", "class", "brand_generic"):
             skipped["term_type 非法"] += 1
             continue
@@ -256,6 +270,8 @@ def print_plan(plan: dict) -> None:
     print(f"可入库：{len(plan['accepted'])} 行；跳过：{sum(plan['skipped'].values())} 行")
     for k, v in plan["skipped"].most_common():
         print(f"  跳过 {k}: {v}")
+    for why, terms in (plan.get("skipped_samples") or {}).items():
+        print(f"    · {why} 样例：{'、'.join(terms)}")
     print("kind 分布:", dict(plan["kind"]))
     print("source 分布:", dict(plan["source"]))
     print("confidence 分布:", dict(plan["confidence"]),

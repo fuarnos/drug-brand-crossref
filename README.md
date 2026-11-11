@@ -25,7 +25,7 @@
 | 搜索增强：拼音 / 首字母、错拼容错、短中文片段、自动完成，结果按成分聚合 | ✅ 匹配 P50 ~1 ms |
 | 首搜索引分片：输入后只拉首字符分片 | ✅ 41.5 MB → ~150 KB（gz） |
 | 俗称 / 网络别名 / 旧名检索（两只青蛙 → 二甲双胍） | ✅ 57 条 `nickname`（指向成分） |
-| 民间 / 类别 / 中文互联网叫法（water pill、blood thinner、必理痛、减肥针…；不含毒品/娱乐用药） | ✅ 1,062 条 `drug_term` / 1,144 条 `alias_all` |
+| 民间 / 类别 / 中文互联网叫法（water pill、blood thinner、必理痛、减肥针…；不含毒品/娱乐用药） | ✅ 1,017 条 `drug_term` / 1,074 条 `alias_all` |
 | /warn「同名不同药 / 不可互换」警示页 | ✅ 顶栏入口 + 成分页提示 |
 | 访问统计（GoatCounter，cookieless、只后台看、不公开计数） | ✅ 隐私说明见 About |
 | 易混淆药对（FDA tall-man，hydrALAZINE ↔ hydrOXYzine…） | ✅ 22 对 |
