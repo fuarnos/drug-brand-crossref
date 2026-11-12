@@ -18,10 +18,23 @@
     List what would change; upload nothing.
 
 .PARAMETER CheckOnly
-    Skip the sync; only run rclone check (size-only) against the bucket.
+    Skip the sync; only run rclone check (size-only, one-way: every local file
+    must exist remotely). Ignores the synthetic fr/ fallback object and any
+    pre-sync extras that the next sync would delete.
 
 .PARAMETER Transfers
-    Concurrent transfers. Default 32.
+    Concurrent transfers / checkers. Default 64.
+
+    2026-11-13 v0.11.5 measurements (same 125,510 files, 0 differences, exit 0):
+    32 -> 55m13s, 64 -> 21m15s. Runtime is roughly inversely proportional to
+    concurrency: the average file is ~7.8 KB, so the bottleneck is R2
+    round-trip latency, not bandwidth. Concurrency does NOT change the R2
+    Class A write count: one full sync is still ~117k PUTs (dry-run basis),
+    well under the 1M/month free tier (two publishes = ~234k). The cost is
+    memory: rclone may buffer up to --buffer-size (default 16 MiB) per
+    transfer, so 64 transfers is ~1 GiB worst case (actual files average
+    7.8 KB, so far less in practice). Fall back to -Transfers 32 if R2
+    returns 429/503 or the machine is memory-tight.
 
 .EXAMPLE
     powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -DryRun
@@ -37,7 +50,7 @@ param(
     [string]$Dist = '',
     [switch]$DryRun,
     [switch]$CheckOnly,
-    [int]$Transfers = 32
+    [int]$Transfers = 64
 )
 
 $ErrorActionPreference = 'Stop'
@@ -59,6 +72,65 @@ function Read-DotEnv([string]$Path) {
         $map[$k] = $v
     }
     return $map
+}
+
+# -- Python resolution for the /fr/ fallback (fixed 2026-11-13) ----------------
+# The old `$pyExe = if ($env:PYTHON) { $env:PYTHON } else { 'python' }` resolved
+# to C:\Users\asus\AppData\Local\Microsoft\WindowsApps\python.exe here - the
+# Microsoft Store app alias, which exits 9009 and prints nothing. The /fr/
+# fallback was silently skipped (WARN only), so v0.11.5's first publish left
+# /fr/ at 404 and the Lead had to replay the PUT by hand.
+# Now resolve explicitly in the AGENTS.md section 2 order, and probe every
+# candidate's capability: fix_fr_root.py needs botocore for SigV4 signing, so
+# "python starts" is not enough - this host's `py` launcher is Python 3.15
+# without botocore and would still fail with exit 2.
+$FrRuntimePython = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
+
+function Test-FrPython([string]$Exe) {
+    # Probe: must start AND import botocore (fix_fr_root.py's only third-party dep).
+    $ErrorActionPreference = 'SilentlyContinue'   # function scope only; rest of script unaffected
+    try {
+        $null = & $Exe -c 'import botocore' 2>$null
+        return ($LASTEXITCODE -eq 0)
+    } catch {
+        return $false
+    }
+}
+
+function Resolve-FrPython([string[]]$RuntimeCandidates = @($FrRuntimePython)) {
+    # Order: $env:PYTHON -> python (PATH) -> py (PATH launcher) -> runtime path
+    # documented in AGENTS.md. Skip WindowsApps app aliases by path (never run
+    # them, to avoid popping the Store); the log still records exit 9009.
+    $candidates = @()
+    if ($env:PYTHON) { $candidates += [pscustomobject]@{ Exe = $env:PYTHON; Via = 'PYTHON' } }
+    foreach ($name in @('python', 'py')) {
+        $cmd = Get-Command $name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($cmd) { $candidates += [pscustomobject]@{ Exe = $cmd.Source; Via = $name } }
+    }
+    foreach ($rt in $RuntimeCandidates) { $candidates += [pscustomobject]@{ Exe = $rt; Via = 'runtime' } }
+
+    foreach ($c in $candidates) {
+        $exe = $c.Exe
+        if (-not (Test-Path -LiteralPath $exe -PathType Leaf)) {
+            # $env:PYTHON may be a bare command name (e.g. "python"); resolve once more.
+            $resolved = Get-Command $exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+            if (-not $resolved) {
+                Write-Host ("fr/: skip {0}={1} (not found)" -f $c.Via, $exe)
+                continue
+            }
+            $exe = $resolved.Source
+        }
+        if ($exe -match '\\WindowsApps\\') {
+            Write-Host ("fr/: skip {0}={1} (Microsoft Store app alias, exit 9009)" -f $c.Via, $exe)
+            continue
+        }
+        if (Test-FrPython $exe) {
+            Write-Host ("fr/: python = {0} (via {1}; botocore ok)" -f $exe, $c.Via)
+            return [pscustomobject]@{ Exe = $exe; Via = $c.Via }
+        }
+        Write-Host ("fr/: skip {0}={1} (import botocore failed)" -f $c.Via, $exe)
+    }
+    return $null
 }
 
 $dotenv = Read-DotEnv (Join-Path $Root '.env')
@@ -101,10 +173,15 @@ try {
     $confArgs = @('--config', $conf, '--fast-list')
 
     if ($CheckOnly) {
-        Write-Host ("check: {0} -> r2:{1} (size-only)" -f $Dist, $bucket)
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs
+        # --one-way: the bucket intentionally holds the synthetic `fr/` fallback object
+        # (not in site/dist), and may hold pre-sync extras that the next sync deletes;
+        # a strict two-way check would always report those as differences (2026-11-13:
+        # without --one-way, -CheckOnly exited 1 with `1 differences / 1 files missing`
+        # on a healthy bucket, purely because of fr/).
+        Write-Host ("check: {0} -> r2:{1} (size-only, one-way)" -f $Dist, $bucket)
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
-        Write-Host 'check: OK (size-only)'
+        Write-Host 'check: OK (size-only, one-way)'
         exit 0
     }
 
@@ -129,15 +206,21 @@ try {
         # /fr/index.html is fine. We PUT fr/index.html as object key "fr/" to work around it.
         # That key is not part of site/dist, so every sync deletes it -> replay after each sync.
         # FINAL FIX: add the 5th Transform Rule (/fr/ -> /fr/index.html) in Cloudflare; then drop this.
-        # Only fr/ is handled; a failure here only warns (upload success still exits 0).
-        $pyExe = if ($env:PYTHON) { $env:PYTHON } else { 'python' }
+        # Only fr/ is handled; a failure here only warns (upload success still exits 0),
+        # but https://drugcrossref.com/fr/ 404s until it is fixed, and verify_live.py gates
+        # every LANG_ROOT (incl. fr/) - so a release cannot pass silently with a broken /fr/.
         try {
-            & $pyExe (Join-Path $PSScriptRoot 'fix_fr_root.py') --dist $Dist
-            if ($LASTEXITCODE -ne 0) {
-                Write-Host ("WARN: /fr/ fallback object NOT written (fix_fr_root.py exit {0}); /fr/ may 404. Add the 5th Transform Rule in Cloudflare." -f $LASTEXITCODE)
+            $frPy = Resolve-FrPython
+            if ($frPy) {
+                & $frPy.Exe (Join-Path $PSScriptRoot 'fix_fr_root.py') --dist $Dist
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Host ("WARN: /fr/ fallback object NOT written (fix_fr_root.py exit {0}, python={1}); https://drugcrossref.com/fr/ will 404 until the 5th Transform Rule is added in Cloudflare." -f $LASTEXITCODE, $frPy.Exe)
+                }
+            } else {
+                Write-Host 'WARN: /fr/ fallback NOT written (fix_fr_root.py exit 9009 = no usable python: tried $env:PYTHON, python, py, runtime path; all missing or lacking botocore); https://drugcrossref.com/fr/ will 404 until the 5th Transform Rule is added in Cloudflare.'
             }
         } catch {
-            Write-Host ("WARN: /fr/ fallback not executed ({0}); add the 5th Transform Rule in Cloudflare." -f $_.Exception.Message)
+            Write-Host ("WARN: /fr/ fallback not executed ({0}); https://drugcrossref.com/fr/ may 404 until the 5th Transform Rule is added in Cloudflare." -f $_.Exception.Message)
         }
     }
     Write-Host 'OK'

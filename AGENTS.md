@@ -78,7 +78,7 @@
 ## 6. 发布纪律
 
 - **单通道（用户 2026-11-12 定）：站点只发布到 R2 主域 `https://drugcrossref.com/`；git 仓库只作源码/文件备份，不再承担托管。**
-  - **唯一发布入口**：`deploy/sync_r2.ps1` → R2 自定义域 `https://drugcrossref.com/`（增量同步 `--transfers 32`）。
+  - **唯一发布入口**：`deploy/sync_r2.ps1` → R2 自定义域 `https://drugcrossref.com/`（增量同步，默认 `--transfers 64`；实测 32=55m13s / 64=21m15s，遇到 429/503 或内存吃紧回退 `-Transfers 32`）。
     发布门槛 = `verify_live.py --base https://drugcrossref.com --expect-version vX.Y.Z` **必须 0 failures**。
   - **gh-pages 不再发布**：历史 `gh-pages` 分支与旧产物只作回滚参考，**不再推送、不再做备份冒烟**；
     `deploy/publish.ps1`（以及双击它的 `发布网站.cmd`）标注为**「历史 / 不再用于发布」**，只有回滚旧产物时由人拍板临时使用。
