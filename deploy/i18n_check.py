@@ -1,33 +1,53 @@
-"""四语（en / es / zh / zh-Hant）i18n 一致性门禁（只读、纯静态、毫秒级）。
+"""多语言（en / es / zh / zh-Hant / fr）i18n 一致性门禁（只读、纯静态、毫秒级）。
 
 规则来源（用户 2026-11-10）：**多语言翻译要同步更新，写进底层逻辑，不能英语和西语滞后。**
-也就是四语必须键集一致、内容同步，缺译不许静默回落英文，而且必须由构建期/CI 拦住，
+也就是各语言必须键集一致、内容同步，缺译不许静默回落英文，而且必须由构建期/CI 拦住，
 不能靠人记得改。
 
 本脚本是这条规则的**静态守卫**：不建站、不读库、不联网，只解析
   site/build.py                          18 个 i18n 字典常量（AST，不 import，避免副作用）
+  site/build.py 的法语扁平表              FR_I18N（含 .update() 追加）+ FR_PREP_KEYS
   data/i18n_zh_hant.json                 zh-Hant 覆盖字典（缺键时构建期回落简体 zh）
-  data/release_notes_i18n.json           What's new 的四语译文（逐版本逐条）
+  data/release_notes_i18n.json           What's new 的译文（逐版本逐条）
   CHANGELOG.md                           版本与条目数的唯一真相源
   data/terminology_glossary.csv          术语表（专有名词 / 缩写，用于「同形」白名单判定）
+  data/languages.json                    语言注册表（判断某语言是否已上线）
 
 规则（默认 --strict：有 FAIL 即退出码 1）
   FAIL  键集不一致：某语言缺 key（会给完整 key 清单），或 dict 里多出 en 没有的 key
   FAIL  缺译：非 en 语言的值与其 en 值完全相同，且不属于专有名词 / 缩写 / 单位 /
-        有意同形（白名单见 PSEUDO_OK_KEYS / PSEUDO_ACRONYMS / UNITS）
+        有意同形（白名单见 PSEUDO_OK_KEYS / PSEUDO_SUSPECT_KEYS / UNITS）
   FAIL  zh-Hant 缺键：既不在 build.py 的 zh-Hant 字典里、也不在 i18n_zh_hant.json 里
         （构建期会静默回落简体 zh，等于繁体用户看到简体）
   FAIL  zh-Hant 未转换：json 值与 zh 值相同且含「只可能是简体」的字
-  FAIL  最新版 release notes 缺语言：CHANGELOG 第一节在 json 里缺 zh/en/es/zh-Hant，
+  FAIL  最新版 release notes 缺语言：CHANGELOG 第一节在 json 里缺 zh/en/es/zh-Hant/fr，
         或条目数与 CHANGELOG 不符（这正是「英语和西语滞后」最常发生的地方）
   FAIL  术语不一致：LABEL_I18N 的剂型 / 释放机制译名与 data/label_translations.csv 不符
         （单位符号类紧凑写法已在 LABEL_TERM_OK 登记，不算不一致）
   FAIL  模板引用了不存在的 key：data-i18n="x.y" 在合并后的字典里找不到（页面会渲染空白）
+  FAIL  fr 键集 / 伪翻译：见下「fr 的判定口径」
   WARN  值等于英文但命中白名单（可疑同形：缩写 / 外来词 / 疑似机器翻译没改）
   WARN  陈旧 key：字典里有、en 没有；json 里有、base 里没有
   WARN  历史版本 release notes 缺语言（积压；不阻断，但要清）
   WARN  硬编码文案：HTML 模板里直接写、没走 data-i18n（标出影响哪些语言）
   INFO  有意同形 / 大型三语并列块（例如 LICENCE_HTML 的许可原文，四语并列展示是设计要求）
+  INFO  fr 译文覆盖：见下「fr 的判定口径」
+
+fr 的判定口径（v0.11.5 接入；fr 界面 v0.11.4 上线）
+  build.py 里没有 `FR_I18N = {"fr": {...}}` 这一层：法语是**扁平表**（FR_I18N /
+  FR_PREP_KEYS，键就是 i18n key），构建期由 `_merge_static_i18n()` 展开成
+  `I18N["fr"]`，键集与 en 完全相同、没有译文的键静默回落英文。所以本脚本先做
+  **形状归一化**（`normalize_fr()`：扁平表按 en 键反查 → 每张字典的 fr 子表），再判：
+    · 键集：fr 子表只能取 en 的子集（多出来的算 FAIL：拼错 / 陈旧）；合并后的
+      `I18N["fr"]` 必须与 en 同键集（560/560），否则 FAIL（构建期同一条硬拦）。
+    · 伪翻译：**有**法语译文却和 en 值一模一样 → 按白名单判 FAIL / WARN（真问题）。
+    · 缺译：键在、法语译文没有（构建期回落英文）→ **不静默**：逐字典覆盖率与全部
+      回落键写进 stats.fr_coverage（摘要打一行 INFO）。这是 fr 上线初期的已知滞后
+      （v0.11.5 实测 560 键中 556 键有译文、4 键回落英文；另有 2 个服务端字典
+      ATC_L1_I18N / ATC_CLASS_I18N 各 0 键），不代表「已通过」。译文补齐后把
+      FR_FALLBACK_BLOCKS 置 True，缺译立即升级为 FAIL。
+    · 术语：data/label_translations.csv 没有 fr 列 → fr 的剂型译名一致性暂未覆盖，
+      以 INFO 记一笔（见 stats.label_terms.fr）。
 
 用法
     python deploy/i18n_check.py                          # 人类可读摘要
@@ -35,7 +55,8 @@
     python deploy/i18n_check.py --no-strict              # 只报告，退出码恒 0（排查用）
     python deploy/i18n_check.py --max-list 200           # 摘要里每类最多列几条（默认 40）
 
-接在 deploy/ci_checks.py 里（fast 与全量都跑）；也可单独跑。
+接在 deploy/ci_checks.py 里（fast 与全量都跑）；也可单独跑。site/build.py 会 import
+check_release_notes / check_label_terms 复用同一口径（改签名要同步 build.py）。
 边界：本脚本只读文件，不改 build.py / 译文；与 etl/check_translations.py 分工——
 那边查「译得对不对」（术语 / 数字 / 单位 / 占位符 / HTML），这边查「有没有、齐不齐」。
 """
@@ -43,6 +64,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import contextlib
 import csv
 import json
 import re
@@ -57,11 +79,25 @@ ZH_HANT_JSON = ROOT / "data" / "i18n_zh_hant.json"
 RELEASE_JSON = ROOT / "data" / "release_notes_i18n.json"
 CHANGELOG = ROOT / "CHANGELOG.md"
 GLOSSARY_CSV = ROOT / "data" / "terminology_glossary.csv"
-# 剂型 / 释放机制 / 单位 / 状态的四语术语表（项目内唯一真相源，见 reports/terminology-accuracy.md）
+# 剂型 / 释放机制 / 单位 / 状态的四语术语表（项目内唯一真相源，见 reports/terminology-accuracy.md；
+# 目前只有 en/es/zh/zh-Hant 列，没有 fr 列 → fr 的术语一致性暂未覆盖）
 LABEL_CSV = ROOT / "data" / "label_translations.csv"
+# 语言注册表：判断某语言是否已上线（fr 自 v0.11.4 起 enabled:true）
+LANGUAGES_JSON = ROOT / "data" / "languages.json"
 
-LANGS = ("en", "es", "zh", "zh-Hant")
+LANGS = ("en", "es", "zh", "zh-Hant", "fr")
 BASE_LANGS = ("en", "es", "zh")
+FR_LANG = "fr"
+# build.py 里 fr 的表是**扁平**结构（键就是 i18n key），不是 {lang: {...}}：
+#   FR_I18N      约 550 个键的法语译文（v0.11.4；主表 + 一次 FR_I18N.update({...})）
+#   FR_PREP_KEYS 覆盖页 / About 的 FR 专用文案，构建期仅在 fr 启用时并入
+FR_FLAT_TABLES = ("FR_I18N", "FR_PREP_KEYS")
+# fr 的「键在、译文没有」（构建期回落英文）是否阻塞：v0.11.5 先按 INFO 报覆盖，
+# 译文补齐后改 True 即升级为 FAIL（见模块 docstring「fr 的判定口径」）。
+FR_FALLBACK_BLOCKS = False
+# 后加语言在 release notes 里只从最新版起要求（历史版本不补）：
+# fr 界面 v0.11.4 上线，译文从 v0.11.5 起纳入。
+RELEASE_LATE_LANGS: dict[str, str] = {"fr": "v0.11.5"}
 
 # site/build.py 里的 18 个 i18n 字典（顺序 = 声明顺序；新增字典请同步加到这里）
 I18N_DICTS = (
@@ -118,6 +154,26 @@ PSEUDO_SUSPECT_KEYS: dict[str, str] = {
     "form.stick": "stick 在 es 里是外来词（可写 barra/pluma）",
     "form.kit": "kit 在 es 同形，但也可写 equipo",
     "form.gas": "gas 在 es 同形（gas/ gaseous 均可），确认即可",
+}
+# fr 与 en 本来就同形的 key（法语里就是这个词）：只登记「确实是同一个词」的，
+# 别拿它盖住真缺译。v0.11.5 接入 fr 时逐条核对，依据见 reports/2026-11-13-i18n-fr-gate.md。
+PSEUDO_OK_KEYS_FR: dict[str, str] = {
+    # 国家名：法语里就是同一个词（与 home.cn / home.au / home.hk 的 es 白名单同例）
+    "home.ca": "Canada 在法语同形",
+    "home.fr": "France 在法语同形",
+    # 法语与英语拼写完全相同的普通词（不是漏译）
+    "nav.sections": "Sections 是法语 section 的复数，同形",
+    "nav.menu": "Menu 在法语同形",
+    "report.field_page": "Page 在法语同形",
+    "res.col_link": "Page 在法语同形（表格列名）",
+    "a1.source": "Source 在法语同形",
+    "maker.source": "Source 在法语同形",
+    "home.suggestions": "Suggestions 在法语同形",
+    "ac.suggestions": "Suggestions 在法语同形",
+    # 剂型名：法语沿用拉丁词根，与英语同形（术语表暂无 fr 列，无对照可查）
+    "form.inhalation": "inhalation 是法语剂型名（拉丁同词）",
+    "form.effervescent": "effervescent 是法语剂型名（拉丁同词）",
+    "form.solution": "solution 是法语剂型名（拉丁同词）",
 }
 # LABEL_I18N 里刻意用「紧凑显示缩写」的 key：与 data/label_translations.csv 的全称不同，
 # 属于设计选择（页面表格宽度有限），不算术语不一致。
@@ -272,10 +328,103 @@ def load_build_i18n(path: Path = BUILD_PY) -> tuple[dict[str, dict[str, dict[str
     return dicts, lines, tree, src
 
 
+# ── 1b. 法语扁平表（FR_I18N / FR_PREP_KEYS）与形状归一化 ──────────────────────
+def _eval_flat_dict(node: ast.AST, ns: dict[str, object]) -> dict[str, str] | None:
+    """扁平译文表 {key: text}：fr 的常量是这种形状（不是 {lang: {key: text}}）。"""
+    if not isinstance(node, ast.Dict):
+        return None
+    out: dict[str, str] = {}
+    for k_node, v_node in zip(node.keys, node.values):
+        if not (isinstance(k_node, ast.Constant) and isinstance(k_node.value, str)):
+            return None
+        text = _eval_text(v_node, ns)
+        if text is None:
+            try:
+                text = str(ast.literal_eval(v_node))
+            except (ValueError, TypeError, SyntaxError):
+                return None
+        out[k_node.value] = text
+    return out
+
+
+def load_fr_flat(tree: ast.Module) -> tuple[dict[str, str], dict[str, int]]:
+    """取 build.py 的扁平法语表：FR_I18N + FR_I18N.update({...}) + FR_PREP_KEYS。
+
+    返回 ({key: 法语文本}, {key: 行号})；后者用于在报告里定位。不 import build.py。
+    """
+    ns = _module_namespace(tree)
+    flat: dict[str, str] = {}
+    lines: dict[str, int] = {}
+    for node in tree.body:
+        targets: list[ast.Name] = []
+        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+            targets = [node.target]
+        elif isinstance(node, ast.Assign):
+            targets = [t for t in node.targets if isinstance(t, ast.Name)]
+        for target in targets:
+            if target.id not in FR_FLAT_TABLES:
+                continue
+            table = _eval_flat_dict(node.value, ns)
+            if not table:
+                continue
+            flat.update(table)
+            lines.update({key: node.lineno for key in table})
+        # `FR_I18N.update({...})`：v0.11.4 用它追加第二批 key
+        if isinstance(node, ast.Expr) and isinstance(node.value, ast.Call):
+            fn = node.value.func
+            if isinstance(fn, ast.Attribute) and fn.attr == "update" \
+                    and isinstance(fn.value, ast.Name) and fn.value.id in FR_FLAT_TABLES \
+                    and node.value.args:
+                table = _eval_flat_dict(node.value.args[0], ns)
+                if table:
+                    flat.update(table)
+                    lines.update({key: node.lineno for key in table})
+    return flat, lines
+
+
+def normalize_fr(dicts: dict[str, dict[str, dict[str, str]]],
+                 fr_flat: dict[str, str]) -> tuple[dict[str, dict[str, dict[str, str]]], dict]:
+    """形状归一化：把**扁平**法语表摊进每张字典的 fr 子表（不改 build.py）。
+
+    直接加 fr 到 LANGS 会让 18 张字典全报「缺 fr」（build.py 里没有 `{"fr": {...}}` 这一层）。
+    这里在读取层按 en 键反查：某字典的 fr 子表 = 该字典 en 的键 ∩ 扁平法语表。
+    返回 (归一化副本, {扁平键数 / 命中键数 / 未命中键 / 逐字典命中数})。
+    """
+    out: dict[str, dict[str, dict[str, str]]] = {}
+    matched: set[str] = set()
+    by_dict: dict[str, int] = {}
+    for name, table in dicts.items():
+        new_table = {lang: dict(rows) for lang, rows in table.items()}
+        en = new_table.get("en") or {}
+        fr_sub: dict[str, str] = {}
+        for key in en:
+            if key in fr_flat:
+                fr_sub[key] = fr_flat[key]
+                matched.add(key)
+        new_table[FR_LANG] = fr_sub
+        out[name] = new_table
+        by_dict[name] = len(fr_sub)
+    stats = {"flat_keys": len(fr_flat), "matched_keys": len(matched),
+             "orphans": sorted(set(fr_flat) - matched), "by_dict": by_dict}
+    return out, stats
+
+
+def _live_langs() -> set[str]:
+    """data/languages.json 里 enabled 的语言；读不到时按「除 fr 外都上线」保守处理。"""
+    try:
+        reg = json.loads(LANGUAGES_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {lang for lang in LANGS if lang != FR_LANG}
+    return {str(x.get("code")) for x in reg.get("languages", []) if x.get("enabled")}
+
+
 # ── 2. 合并成 i18n.js 实际下发的字典（复刻 build.py 的装载顺序）────────────────
 def effective_i18n(dicts: dict[str, dict[str, dict[str, str]]],
-                   zh_hant: dict[str, str]) -> tuple[dict[str, dict[str, str]], dict[str, list[str]]]:
-    """复刻 build.py：I18N 打底 → 各字典按声明顺序覆盖 → zh-Hant 用 json + build.py 覆盖。
+                   zh_hant: dict[str, str],
+                   fr_flat: dict[str, str] | None = None) -> tuple[dict[str, dict[str, str]],
+                                                                   dict[str, list[str]]]:
+    """复刻 build.py：I18N 打底 → 各字典按声明顺序覆盖 → zh-Hant 用 json + build.py 覆盖
+    → fr 由扁平法语表补全（键集与 en 相同，没译文的键回落 en）。
 
     返回 ({lang: {key: text}}, {lang: [靠回落拿到的 key]})。
     """
@@ -301,6 +450,17 @@ def effective_i18n(dicts: dict[str, dict[str, dict[str, str]]],
             if key in fallback["zh-Hant"]:
                 fallback["zh-Hant"].remove(key)
     eff["zh-Hant"] = hant
+    # fr：复刻 build.py `_merge_static_i18n()` —— 扁平表打底，其余键按 en 补全（= 静默回退）
+    flat = fr_flat or {}
+    fr: dict[str, str] = {}
+    for key, text in eff["en"].items():
+        fr[key] = flat.get(key, text)
+    if FR_LANG in _live_langs():
+        # 构建期只在 fr 启用时并入「en 里还没有的」FR 专用键（届时 en/es/zh 必须同步补）
+        for key, text in flat.items():
+            fr.setdefault(key, text)
+    eff["fr"] = fr
+    fallback["fr"] = [key for key in eff["en"] if key not in flat]
     # en/es/zh 缺 key 时 i18n.js 回落英文，这里记下来
     for lang in ("es", "zh"):
         fallback[lang] = [k for k in eff["en"] if k not in eff[lang]]
@@ -330,6 +490,8 @@ def _pseudo_verdict(dict_name: str, lang: str, key: str, value: str,
         return "FAIL", "空值"
     if key in PSEUDO_OK_KEYS:
         return "INFO", PSEUDO_OK_KEYS[key]
+    if lang == FR_LANG and key in PSEUDO_OK_KEYS_FR:
+        return "INFO", PSEUDO_OK_KEYS_FR[key]
     if key in PSEUDO_SUSPECT_KEYS:
         return "WARN", PSEUDO_SUSPECT_KEYS[key]
     if not LATIN_RE.search(stripped):
@@ -346,7 +508,7 @@ def _pseudo_verdict(dict_name: str, lang: str, key: str, value: str,
 
 
 def check_dicts(dicts, lines, eff, fallback, zh_hant, glossary_terms, out: Findings) -> None:
-    """① 每个字典的四语键集 ② 合并后缺键 ③ 伪翻译 ④ 陈旧 key。"""
+    """① 每个字典的五语键集 ② 合并后缺键 ③ 伪翻译 ④ 陈旧 key ⑤ fr 译文覆盖。"""
     # ① 字典在不在、能不能解析
     for name in I18N_DICTS:
         if name not in dicts:
@@ -365,6 +527,19 @@ def check_dicts(dicts, lines, eff, fallback, zh_hant, glossary_terms, out: Findi
             continue
         for lang in LANGS:
             if lang == "en":
+                continue
+            if lang == FR_LANG:
+                # fr 是扁平表归一化出来的子表：只可能是 en 的子集。
+                # 「多出 key」= 法语表拼错 / 陈旧 → FAIL；「缺 key」= 还没有译文 →
+                # 不在这里报 FAIL，统一在 ⑤ 按覆盖率报（不许静默，见模块 docstring）。
+                fr_keys = set(table.get(FR_LANG) or {})
+                row["missing_fr"] = sorted(en - fr_keys)
+                row["extra_fr"] = sorted(fr_keys - en)
+                if row["extra_fr"]:
+                    out.add("FAIL", "fr-key-extra",
+                            f"{name} 的 fr 多出 {len(row['extra_fr'])} 个 en 没有的 key"
+                            f"（法语表拼错 / 陈旧）", dict=name, lang=FR_LANG,
+                            keys=row["extra_fr"])
                 continue
             if lang not in table:
                 if not (lang == "zh-Hant" and name in ZH_HANT_FROM_JSON):
@@ -396,6 +571,11 @@ def check_dicts(dicts, lines, eff, fallback, zh_hant, glossary_terms, out: Findi
                     f"合并后 {lang} 缺 {len(missing)} 个 key（运行时会静默回落 "
                     f"{'简体 zh' if lang == 'zh-Hant' else '英文'}）",
                     lang=lang, keys=missing)
+    extra_fr = sorted(set(eff.get(FR_LANG) or {}) - set(eff["en"]))
+    if extra_fr:
+        out.add("FAIL", "fr-keyset",
+                f"合并后 fr 多出 {len(extra_fr)} 个 en 没有的 key（build.py 的 "
+                f"_assert_i18n_complete 也会因此中止构建）", keys=extra_fr)
     for lang in LANGS:
         out.stats[f"eff_{lang}"] = len(eff[lang])
 
@@ -405,7 +585,7 @@ def check_dicts(dicts, lines, eff, fallback, zh_hant, glossary_terms, out: Findi
     for name in I18N_DICTS:
         table = dicts.get(name) or {}
         en = table.get("en") or {}
-        for lang in ("es", "zh", "zh-Hant"):
+        for lang in ("es", "zh", "zh-Hant", FR_LANG):
             for key, text in (table.get(lang) or {}).items():
                 en_text = en.get(key)
                 if not en_text or text != en_text or not text.strip():
@@ -414,9 +594,14 @@ def check_dicts(dicts, lines, eff, fallback, zh_hant, glossary_terms, out: Findi
                 same_rows.append({"dict": name, "lang": lang, "key": key,
                                   "value": text, "level": level, "reason": reason})
                 seen_pairs.add((lang, key))
-    for lang in ("es", "zh", "zh-Hant"):
+    fr_fallback = set(fallback.get(FR_LANG) or [])
+    for lang in ("es", "zh", "zh-Hant", FR_LANG):
         for key, text in (eff.get(lang) or {}).items():
             if (lang, key) in seen_pairs:
+                continue
+            if lang == FR_LANG and key in fr_fallback:
+                # 没有法语译文 = 构建期回落英文，属于「缺译」而不是「伪翻译」
+                # （缺译在 ⑤ 按覆盖率如实报，不在这里重复计一条 FAIL）
                 continue
             en_text = eff["en"].get(key)
             if en_text and text == en_text and text.strip():
@@ -463,6 +648,33 @@ def check_dicts(dicts, lines, eff, fallback, zh_hant, glossary_terms, out: Findi
                             "covered": len(set(zh_hant) & base_zh),
                             "untranslated_rows": untranslated}
 
+    # ⑤ fr 译文覆盖（v0.11.5）：键集已由 normalize_fr 补齐，这里如实报「多少键真有法语译文」
+    by_dict: dict[str, dict[str, int]] = {}
+    for name in I18N_DICTS:
+        en = (dicts.get(name) or {}).get("en") or {}
+        fr = (dicts.get(name) or {}).get(FR_LANG) or {}
+        by_dict[name] = {"en": len(en), "fr": len(fr), "missing": len(en) - len(fr)}
+    total = len(eff["en"])
+    missing_fr = sorted(fallback.get(FR_LANG) or [])
+    translated = total - len(missing_fr)
+    pct = round(100.0 * translated / total, 1) if total else 0.0
+    live = FR_LANG in _live_langs()
+    out.stats["fr_coverage"] = {
+        "live": live, "merged_total": total, "merged_translated": translated,
+        "merged_missing": len(missing_fr), "pct": pct, "by_dict": by_dict,
+        "missing_keys": missing_fr,
+    }
+    if FR_FALLBACK_BLOCKS and missing_fr:
+        out.add("FAIL", "fr-key-missing",
+                f"合并后 fr 缺 {len(missing_fr)} 个 key（构建期会静默回落英文）",
+                lang=FR_LANG, keys=missing_fr)
+    else:
+        out.add("INFO", "fr-coverage",
+                f"fr {'已上线' if live else '未上线'}：{total} 键中 {translated} 键有法语译文"
+                f"（{pct}%），{len(missing_fr)} 键构建期回落英文 —— 逐字典覆盖见 "
+                f"stats.fr_coverage.by_dict，回落键全清单见 stats.fr_coverage.missing_keys"
+                f"（补齐译文后把 FR_FALLBACK_BLOCKS 置 True 即阻塞）")
+
 
 # ── 4. 标签术语一致性（LABEL_I18N vs data/label_translations.csv）───────────
 def _load_label_terms() -> dict[tuple[str, str], dict[str, str]]:
@@ -505,7 +717,12 @@ def check_label_terms(dicts, out: Findings) -> None:
                          "category": cat})
     out.stats["label_terms"] = {"checked": sum(len(label.get(lang) or {})
                                               for lang in ("es", "zh", "zh-Hant")),
-                               "mismatch": len(rows), "rows": rows}
+                               "mismatch": len(rows), "rows": rows,
+                               "fr": "术语表（data/label_translations.csv）没有 fr 列，未覆盖"}
+    if FR_LANG in LANGS:
+        out.add("INFO", "label-term-fr-gap",
+                "fr 的剂型 / 释放机制译名未做术语表比对：data/label_translations.csv 只有 "
+                "en/es/zh/zh_hant 列（补 fr 列后本项自动纳入）")
     for row in rows:
         level = "INFO" if row["key"] in LABEL_TERM_OK else (
             "FAIL" if row["category"] == "form" else "WARN")
@@ -530,7 +747,7 @@ def check_template_refs(src: str, eff: dict[str, dict[str, str]], out: Findings)
                 f"{len(missing)} 个 data-i18n key 在字典里不存在（页面会渲染空白）", keys=missing)
     # 服务端直接取值 I18N["xx"]["k"]：key 不存在会 KeyError / 空
     direct: set[tuple[str, str]] = set()
-    for m in re.finditer(r"I18N\[\"(en|es|zh|zh-Hant)\"\]\[\"([^\"]+)\"\]", src):
+    for m in re.finditer(r"I18N\[\"(en|es|zh|zh-Hant|fr)\"\]\[\"([^\"]+)\"\]", src):
         direct.add((m.group(1), m.group(2)))
     bad_direct = sorted({f"{lang}:{key}" for lang, key in direct if key not in eff[lang]})
     if bad_direct:
@@ -599,6 +816,9 @@ def check_release_notes(sections: list[dict], out: Findings,
             vals = block.get(lang)
             n = len(vals) if isinstance(vals, list) else 0
             row["langs"][lang] = n
+            if lang in RELEASE_LATE_LANGS and idx != 0:
+                # 后加语言（fr）只从最新版起要求：历史版本不补译，单独记在 late_langs 里
+                continue
             if not n:
                 bad.append(lang)
             elif n != len(items):
@@ -607,10 +827,21 @@ def check_release_notes(sections: list[dict], out: Findings,
         if bad:
             if idx == 0:
                 out.add("FAIL", "release-latest-incomplete",
-                        f"最新版 {ver} 四语不齐：缺 {', '.join(bad)}", version=ver, missing=bad)
+                        f"最新版 {ver} 译文不齐：缺 {', '.join(bad)}", version=ver, missing=bad)
             elif ver not in RELEASE_BACKLOG_OK:
                 incomplete_versions.append({"version": ver, "missing": bad,
                                             "items": len(items)})
+    # 后加语言（fr）：只从最新版起强制，历史版本没有译文属预期，汇总成一条 INFO
+    late_gaps: dict[str, dict] = {}
+    for lang, since in RELEASE_LATE_LANGS.items():
+        older = [s["version"] for s in sections[1:]
+                 if not (versions.get(s["version"]) or {}).get(lang)]
+        late_gaps[lang] = {"since": since, "older_missing": len(older)}
+        if older:
+            out.add("INFO", "release-late-lang",
+                    f"{lang} 译文自 {since} 起纳入 What's new；{len(older)} 个历史版本没有 "
+                    f"{lang} 译文（{older[-1]}→{older[0]}，历史不补）", lang=lang,
+                    versions=older)
     # 历史版本积压：聚合成一条 WARN（逐版明细在 JSON 里），否则一次刷出几十条噪声
     backlog = [v for v in missing_versions if v["version"] not in RELEASE_BACKLOG_OK
                and v["version"] != latest["version"]]
@@ -643,6 +874,7 @@ def check_release_notes(sections: list[dict], out: Findings,
         "missing_versions": [v["version"] for v in missing_versions],
         "missing_items": missing_items,
         "incomplete_versions": incomplete_versions,
+        "late_langs": late_gaps,
         "rows": rows,
     }
 
@@ -805,6 +1037,23 @@ def check_hardcoded(tree: ast.Module, out: Findings) -> None:
 
 
 # ── 7. 自检：证明门禁真的会红（--self-test，不依赖真实仓库数据）────────────────
+@contextlib.contextmanager
+def _workspace_tmp(name: str):
+    """仓库内临时目录（用完删干净）。
+
+    不用 tempfile.TemporaryDirectory：系统 temp 在沙箱里常不可写，而 mkdtemp 给的
+    0o700 DACL 在受限令牌下连自己都打不开（WinError 5）。
+    """
+    path = ROOT / ".tmp" / name
+    path.mkdir(parents=True, exist_ok=True)
+    try:
+        yield path
+    finally:
+        for child in path.glob("*"):
+            child.unlink(missing_ok=True)
+        path.rmdir()
+
+
 def self_test() -> int:
     """用合成样例跑一遍规则，确认「该红的红、该绿的绿」。返回失败条数。"""
     bad = 0
@@ -869,9 +1118,8 @@ def self_test() -> int:
     expect(any(r["rule"] == "template-ref-missing" for r in out2.fail),
            "data-i18n 指向不存在的 key → FAIL")
 
-    # ⑤ release notes：最新版缺译文 → FAIL
-    import tempfile
-    with tempfile.TemporaryDirectory() as td:
+    # ⑤ release notes：最新版缺译文 → FAIL；fr 只从最新版起要求
+    with _workspace_tmp("i18n-selftest") as td:
         ch = Path(td) / "CHANGELOG.md"
         ch.write_text("## v9.9.9 — 2026-01-01\n\n- 一条\n- 两条\n", encoding="utf-8")
         js = Path(td) / "release.json"
@@ -881,12 +1129,28 @@ def self_test() -> int:
         check_release_notes(parse_changelog(ch), out3, js)
         expect(any(r["rule"] == "release-latest-incomplete" for r in out3.fail),
                "最新版条目数不符 → FAIL")
-        js.write_text(json.dumps({"v9.9.9": {"zh": ["甲", "乙"], "en": ["a", "b"],
-                                             "es": ["c", "d"], "zh-Hant": ["丙", "丁"]}}),
+        full = {"zh": ["甲", "乙"], "en": ["a", "b"], "es": ["c", "d"], "zh-Hant": ["丙", "丁"]}
+        js.write_text(json.dumps({"v9.9.9": full}), encoding="utf-8")
+        out_latest = Findings()
+        check_release_notes(parse_changelog(ch), out_latest, js)
+        expect(any(r["rule"] == "release-latest-incomplete" and "fr" in r["missing"]
+                   for r in out_latest.fail), "最新版缺 fr → FAIL（fr 已并入五语）")
+        js.write_text(json.dumps({"v9.9.9": dict(full, fr=["e", "f"])}), encoding="utf-8")
+        out_fr_ok = Findings()
+        check_release_notes(parse_changelog(ch), out_fr_ok, js)
+        expect(not out_fr_ok.fail, "五语齐 + 条数对 → 不报 FAIL")
+        # 历史版本没有 fr：fr 自最新版起才要求，历史不补，也不该报积压 WARN
+        ch.write_text("## v9.9.9 — 2026-01-01\n\n- 一条\n- 两条\n\n"
+                      "## v9.9.8 — 2025-12-01\n\n- 旧一条\n", encoding="utf-8")
+        js.write_text(json.dumps({"v9.9.9": dict(full, fr=["e", "f"]),
+                                  "v9.9.8": {"zh": ["旧"], "en": ["old"],
+                                             "es": ["viejo"], "zh-Hant": ["舊"]}}),
                       encoding="utf-8")
-        out4 = Findings()
-        check_release_notes(parse_changelog(ch), out4, js)
-        expect(not out4.fail, "四语齐 + 条数对 → 不报 FAIL")
+        out_hist = Findings()
+        check_release_notes(parse_changelog(ch), out_hist, js)
+        expect(not out_hist.fail
+               and not any(r["rule"] == "release-backlog-incomplete" for r in out_hist.warn),
+               "历史版本没有 fr → 既不 FAIL 也不报积压 WARN")
 
     # ⑥ 硬编码：裸文案被抓、带 data-i18n 的不抓
     src = ('X = """<p class="a">Hello user</p>'
@@ -895,6 +1159,35 @@ def self_test() -> int:
     check_hardcoded(ast.parse(src), out5)
     hits = [r for r in out5.warn if r["rule"] == "hardcoded"]
     expect(len(hits) == 1, f"只抓没有 data-i18n 的那一处（实际 {len(hits)}）")
+
+    # ⑦ fr（v0.11.5 接入）：扁平表归一化 / 伪翻译 / 缺译不静默
+    flat = {"a": "FR-A", "b": "FR-B", "stale.key": "FR-陈旧"}
+    dicts_fr = {"I18N": {"en": {"a": "A", "b": "B"}, "es": {"a": "甲", "b": "乙"},
+                         "zh": {"a": "甲", "b": "乙"}, "zh-Hant": {"a": "甲繁", "b": "乙繁"}}}
+    norm, norm_stats = normalize_fr(dicts_fr, flat)
+    expect(norm["I18N"]["fr"] == {"a": "FR-A", "b": "FR-B"},
+           "扁平 fr 表按 en 键摊成每字典 fr 子表")
+    expect(norm_stats["orphans"] == ["stale.key"], "扁平表里 en 没有的 key 记进 orphans")
+    eff_fr, fb_fr = effective_i18n(norm, {}, {"a": "FR-A"})
+    expect(set(eff_fr["fr"]) == set(eff_fr["en"]),
+           "合并后 fr 键集与 en 完全一致（缺译文只补键，不静默丢 key）")
+    expect(fb_fr["fr"] == ["b"], "没有法语译文的 key 进 fallback['fr']（缺译如实记）")
+    expect(_pseudo_verdict("I18N", "fr", "x.y", "Same English sentence", set())[0] == "FAIL",
+           "fr 有译文但值与英文相同 → 判 FAIL")
+    expect(_pseudo_verdict("I18N", "fr", "nav.new_stub", "Menu", set())[0] == "FAIL",
+           "未登记的 fr 同形词仍会判 FAIL（白名单必须逐条登记）")
+    expect(_pseudo_verdict("I18N", "fr", "home.fr", "France", set())[0] == "INFO",
+           "已登记的 fr 同形词（France）走 INFO，不误报")
+    out_fr = Findings()
+    dicts_extra = {"I18N": {"en": {"a": "A"}, "fr": {"a": "FR-A", "typo": "FR-错"}}}
+    check_dicts(dicts_extra, {"I18N": 1},
+                {"en": {"a": "A"}, "es": {"a": "甲"}, "zh": {"a": "甲"},
+                 "zh-Hant": {"a": "甲繁"}, "fr": {"a": "FR-A", "typo": "FR-错"}},
+                {"en": [], "es": [], "zh": [], "zh-Hant": [], "fr": []}, {}, set(), out_fr)
+    expect(any(r["rule"] == "fr-key-extra" for r in out_fr.fail),
+           "fr 子表多出 en 没有的 key → FAIL（拼错 / 陈旧）")
+    expect(not any(r["rule"] == "fr-key-missing" for r in out_fr.fail),
+           "fr 缺译文默认不判 FAIL（按覆盖率 INFO 报，FR_FALLBACK_BLOCKS 才阻塞）")
 
     print(f"\nself-test: {'全部通过' if not bad else f'{bad} 项失败'}")
     return bad
@@ -928,13 +1221,20 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
         out.add("FAIL", "build-py", f"读不到 {build_py}：{exc}")
         return out, {"ok": False, "counts": {"fail": 1, "warn": 0, "info": 0},
                      "stats": {}, "fail": out.fail, "warn": [], "info": []}
+    # fr 在 build.py 里是扁平表（FR_I18N / FR_PREP_KEYS），先归一化成每字典的 fr 子表，
+    # 否则加进 LANGS 会让 18 张字典全报「缺 fr」
+    try:
+        fr_flat, fr_lines = load_fr_flat(tree)
+    except (SyntaxError, ValueError):
+        fr_flat, fr_lines = {}, {}
+    dicts, fr_norm = normalize_fr(dicts, fr_flat)
     try:
         zh_hant_all = json.loads(ZH_HANT_JSON.read_text(encoding="utf-8"))
         zh_hant = zh_hant_all.get("zh-Hant") or {}
     except (OSError, ValueError):
         zh_hant = {}
         out.add("FAIL", "zh-hant-json", "读不到 data/i18n_zh_hant.json")
-    eff, fallback = effective_i18n(dicts, zh_hant)
+    eff, fallback = effective_i18n(dicts, zh_hant, fr_flat)
     check_dicts(dicts, lines, eff, fallback, zh_hant, _glossary_terms(), out)
     check_label_terms(dicts, out)
     check_template_refs(src, eff, out)
@@ -943,8 +1243,14 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
     check_hardcoded(tree, out)
     out.add("INFO", "server-only-dicts",
             f"{len(I18N_SERVER_ONLY)} 个字典只在服务端用、不合并进 i18n.js："
-            f"{', '.join(I18N_SERVER_ONLY)}（仍按四语键集检查，故合并后键数少于逐字典之和）")
+            f"{', '.join(I18N_SERVER_ONLY)}（仍按五语键集检查，故合并后键数少于逐字典之和）")
     out.stats["langs"] = list(LANGS)
+    out.stats["fr"] = {"flat_keys": fr_norm["flat_keys"],
+                       "matched_keys": fr_norm["matched_keys"],
+                       "orphans": fr_norm["orphans"],
+                       "by_dict": fr_norm["by_dict"],
+                       "source_lines": fr_lines}
+    out.stats["live_langs"] = sorted(_live_langs())
     out.stats["build_py"] = str(build_py)
     payload = {
         "ok": out.ok,
@@ -959,13 +1265,18 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
 
 def _print_summary(out: Findings, args: argparse.Namespace) -> None:
     st = out.stats
-    print("== i18n 一致性门禁（四语 en / es / zh / zh-Hant）==")
+    print("== i18n 一致性门禁（en / es / zh / zh-Hant / fr）==")
     print(f"build.py: {st.get('build_py')}  有效字典: "
           + " / ".join(f"{lang} {st.get(f'eff_{lang}', 0)} 键" for lang in LANGS))
+    frc = st.get("fr_coverage") or {}
+    print(f"fr 译文: {frc.get('merged_translated', 0)}/{frc.get('merged_total', 0)} 键"
+          f"（{frc.get('pct', 0)}%，其余回落英文；fr "
+          f"{'已上线' if frc.get('live') else '未上线'}，逐字典覆盖见 --json 的 "
+          f"stats.fr_coverage）")
     rel = st.get("release") or {}
     print(f"release notes: CHANGELOG {rel.get('changelog_versions', 0)} 版 / json "
           f"{rel.get('json_versions', 0)} 版，最新 {rel.get('latest', '?')} "
-          f"{'四语齐' if rel.get('latest_ok') else '不齐/缺'}；缺 {len(rel.get('missing_versions') or [])} 版"
+          f"{'译文齐' if rel.get('latest_ok') else '不齐/缺'}；缺 {len(rel.get('missing_versions') or [])} 版"
           f"（{rel.get('missing_items', 0)} 条待译）")
     hard = st.get("hardcoded") or {}
     print(f"硬编码文案: {hard.get('count', 0)} 处 {hard.get('by_impact') or {}}")
@@ -988,7 +1299,7 @@ def _print_summary(out: Findings, args: argparse.Namespace) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="四语 i18n 一致性门禁（只读、纯静态）")
+    ap = argparse.ArgumentParser(description="多语言 i18n 一致性门禁（只读、纯静态）")
     ap.add_argument("--json", type=Path, default=None, help="同时写机器可读 JSON 到这个路径")
     ap.add_argument("--strict", dest="strict", action="store_true", default=True,
                     help="有 FAIL 时退出码 1（默认）")

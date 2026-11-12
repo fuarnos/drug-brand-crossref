@@ -193,7 +193,7 @@ site/    build.py（静态生成，含 /confused.html） + dist/（产物）
 | 新加坡 | HSA「Listing of Registered Therapeutic Products」（data.gov.sg） | 有 | Singapore Open Data Licence（SODL v1.0），须署名 | ✅ 已接入 5,511 条（在册≠在售；数据截止 2026-08-07，每 6 个月更新） |
 | 中国香港 | 衞生署藥物辦公室（Drug Office）註冊藥劑製品名單（data.gov.hk） | 有 | DATA.GOV.HK 使用条款；只做署名 TGA/ARTG 式来源标注，不写授权措辞 | ✅ 已接入 13,935 条（**仅名称/成分层，无规格/剂型/状态**；在册≠在售；数据截止 2026-10-23） |
 
-**TW（台湾）**：v0.7.0 已上线——TFDA **16,457** 产品入库、quick_check ok / FK 0；`data/markets.json` TW 与 `data/languages.json` zh-Hant 已启用，站点 **10 国 + EU 区域层**、四语（含 zh-Hant 全站），About 加 TFDA / OGDL v1.0 署名（数据截止 2026-10-22）；TW 规格来自品名解析、成分页已标注置信度有限。**HK（中国香港）** v0.9.0 已上线名称/成分层（13,935 在册产品，无规格/剂型/状态）；**EU（欧盟区域层）** v0.11.0 已上线——EC Union Register（CC BY 4.0）+ EMA，**2,095** 个集中审批产品、2,138 条成分记录（无规格/剂型/包装；授权有效 ≠ 各国在售）；**MO** 先做链接层 + 申请信（获批前不入库）。当前全库 **479,193** 产品（AU 44,794；EU 2,095；TGA ARTG Medicines 2026-10-28 已入库）。
+**TW（台湾）**：v0.7.0 已上线——TFDA **16,457** 产品入库、quick_check ok / FK 0；`data/markets.json` TW 与 `data/languages.json` zh-Hant 已启用，站点 **10 国 + EU 区域层**、四语（含 zh-Hant 全站），About 加 TFDA / OGDL v1.0 署名（数据截止 2026-10-22）；TW 规格来自品名解析、成分页已标注置信度有限。**HK（中国香港）** v0.9.0 已上线名称/成分层（13,935 在册产品，无规格/剂型/状态）；**EU（欧盟区域层）** v0.11.0 已上线——EC Union Register（CC BY 4.0）+ EMA，**2,095** 个集中审批产品、2,138 条成分记录（无规格/剂型/包装；授权有效 ≠ 各国在售）；**MO** 先做链接层 + 申请信（获批前不入库）。当前全库 **494,992** 产品（AU 44,794；EU 2,095；FR 15,799，数据截止 2026-11-03；TGA ARTG Medicines 2026-10-28 已入库）。
 
 英国这 61,051 条是从 167,533 条 AMP 里过滤出来的：dm+d 那个条目同时收录**器械/耗材**
 （造口袋、弹力袜、敷料、支具），用「名字里有没有剂量」这一条滤掉约 10 万条。
@@ -203,8 +203,8 @@ base variant、把盐丢了。`etl/fix_dmd_salts.py` 从 `f_ingredient2` 解析�
 （盐型覆盖 2.0% → 25.0%，新建 127 个 variant），为 D2 碱基折算铺路；详见
 [reports/gb-salt-recovery.md](reports/gb-salt-recovery.md)。
 
-**ATC 覆盖率**：全部 substance **47.6%**（6,021 / 12,637）；只算药物实体
-（INN / 生物制品 / 营养剂）是 **67.4%**（5,702 / 8,459）。生药 / 顺势 / 材料等非 INN 实体不再追 ATC
+**ATC 覆盖率**：全部 substance **47.6%**（6,016 / 12,644）；只算药物实体
+（INN / 生物制品 / 营养剂）是 **67.4%**（5,690 / 8,447）。生药 / 顺势 / 材料等非 INN 实体不再追 ATC
 缺口——`data/entity_type.csv` 做实体分类，ChEMBL（CC BY-SA）只补空值。
 
 > 2026-10 复核：国家医保局「医保药品分类与代码数据库」有独立的商品名一列，

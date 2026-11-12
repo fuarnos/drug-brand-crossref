@@ -1116,7 +1116,8 @@ FR_I18N: dict[str, str] = {
     "conf.search_hit": "Ce nom est facilement confondu avec",
 }
 FR_I18N.update({
-    "coverage.gap.fr": "BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution requise ; date de mise à jour dans le paquet de données ; autorisation ≠ en vente.",
+    # v0.11.5 task-3：fr 启用时由 FR_PREP_KEYS 覆盖本行，两处保持同一句。
+    "coverage.gap.fr": "BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution requise ; date de mise à jour dans le paquet de données ; autorisation ≠ vente. 1 987 produits sur 15 799 ont une teneur issue du nom du produit (la composition BDPM ne donne pas de dosage) ; données au 2026-11-03.",
     "about.fr_source": "<p class=\"sub\"><b>France</b> : BDPM (Base de données publiques des médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b>; attribution et date de mise à jour requises. Données au <b>2026-11-03</b>. Faits uniquement (nom, ingrédient, forme, fabricant, autorisation). <a href=\"https://base-donnees-publique.medicaments.gouv.fr/\">BDPM</a>.</p>",
     "matrix.hk_note": "Les enregistrements de Hong Kong portent uniquement sur le nom/l'ingrédient : pas de concentration, de forme posologique ou de statut d'enregistrement ; le fait d'être inscrit au registre ne prouve pas l'approvisionnement actuel.",
     "matrix.au_note": "Les données australiennes ARTG ne comportent pas de colonne de statut d'enregistrement, le statut est donc affiché comme inconnu ; être inscrit au registre ne signifie pas être actuellement commercialisé.",
@@ -1343,8 +1344,13 @@ FR_I18N.update({
 # en/es/zh + 重生成 zh-Hant，并由 FR_I18N 提供 fr 值）。
 FR_PREP_KEYS: dict[str, str] = {
     "home.fr": "France",
+    # v0.11.5 task-3：法国行补「规格来源」说明（fr-only；en/es/zh 各自的 coverage.gap.fr 不动）。
+    # 1,987 / 15,799 来自 reports/2026-11-14-fr-quality.md（品名补足，BDPM composition 未给剂量）；
+    # 该说明成立的前提是 task-68 的 FR apply 已写库，否则本行规格% 仍是 71.2%。
     "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution requise ; "
-                        "date de mise à jour dans le paquet de données ; autorisation ≠ vente."),
+                        "date de mise à jour dans le paquet de données ; autorisation ≠ vente. "
+                        "1 987 produits sur 15 799 ont une teneur issue du nom du produit "
+                        "(la composition BDPM ne donne pas de dosage) ; données au 2026-11-03."),
     "about.fr_source": ("<p class=\"sub\"><b>France</b> : BDPM (Base de données publique des "
                         "médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b> ; attribution "
                         "et date de mise à jour requises. Données au <b>2026-11-03</b>. Faits "
@@ -4753,10 +4759,14 @@ DETAIL_ROW_FIELDS = _detail_row_fields()
 if "brand" not in DETAIL_ROW_FIELDS or "pack" not in DETAIL_ROW_FIELDS:
     raise SystemExit(f"ROW_FIELDS 缺 brand/pack，明细面板列无法定位：{DETAIL_ROW_FIELDS}")
 
-# v0.11.5 task-70：共享 CSS 用内容哈希命名（不可变资源）；页面里的 ?v= 用「本页内容哈希」。
-# 这样改一条文案只变命中页；改 CSS 只变引用该文件的页；改数据不再让 12 万页全变。
-PAGE_V = "__PAGE_V__"
-CSS_FILE = "assets/style." + hashlib.sha256(CSS.encode("utf-8")).hexdigest()[:10] + ".css"
+# v0.11.5 task-70 + task-5：共享静态资源一律「内容哈希文件名 + 全站同一 URL」，页面 HTML 不带 ?v=。
+# （task-70 原先把「本页内容哈希」当 ?v= 加在 CSS/boot.js 上，浏览器按完整 URL 缓存 →
+#   每换一页就重下 67 KB CSS + 18 KB boot.js，v0.11.4 是全站同一 URL；task-5 改回不可变文件名。）
+# 效果：改一条文案只变命中页；改 CSS 只变引用该文件的页；改数据不再让 12 万页全变。
+CSS_HASH = hashlib.sha256(CSS.encode("utf-8")).hexdigest()[:10]
+CSS_FILE = "assets/style." + CSS_HASH + ".css"
+# boot.js 里带 i18n 子资源的 ?v=BUILD_V，哈希要等 main() 定下 BUILD_V 后才能算，那里写定。
+BOOT_JS_FILE = "assets/boot.js"
 
 
 APP_JS = r"""
@@ -8006,7 +8016,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
                '"alternateName":"药品商品名跨国定位","url":"' + SITE_URL + '"}</script>')
     dataset_link = (f'<link rel="alternate" type="application/ld+json" '
                     f'href="{prefix}dataset.jsonld">')
-    head_scripts = (f'<script defer src="{prefix}assets/boot.js?v={PAGE_V}"></script>'
+    head_scripts = (f'<script defer src="{prefix}{BOOT_JS_FILE}"></script>'
                     if defer_i18n else "")
     boot_scripts = ""
     # 壳拆三段（head / 正文前 / 正文后）：slim 只重排首尾两段，body 原样插入，绝不被压缩。
@@ -8015,7 +8025,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}{noindex_meta}
 {favicon}{site_ld}
-<link rel="stylesheet" href="{prefix}{CSS_FILE}?v={PAGE_V}">
+<link rel="stylesheet" href="{prefix}{CSS_FILE}">
 {head_scripts}
 <script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>"""
     # v0.9.8 task-13（UI 批次 A-2）：nav_coverage 就是「顶层页」标记 → 静态新壳；
@@ -8065,9 +8075,9 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     if slim:
         head, top, bottom = _slim_shell(head, top, bottom)
     html = head + top + body + bottom
-    # v0.11.5 task-70：在**根页面**返回前做页级内容哈希（这里不能走下面的副本后处理，
-    # 否则根页相对链接会被错误加 ../）。副本沿用根页哈希，内容仍稳定。
-    return html.replace(PAGE_V, hashlib.sha256(html.encode("utf-8")).hexdigest()[:10])
+    # v0.11.5 task-5：页面不再注入页级 ?v=（共享资源改用内容哈希文件名后已无引用者）；
+    # 同一份输入两次构建的页面字节完全一致。
+    return html
 
 
 def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
@@ -8094,8 +8104,6 @@ def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
     # 根页相对链接 → ../ 前缀（绝对 URL / #锚点 / ?参数 不改）
     html = re.sub(r'(?P<attr>href|src)="(?P<url>(?![a-zA-Z]+:|#|/|\?)[^"]*)"',
                   lambda m: f'{m.group("attr")}="../{m.group("url")}"', html)
-    # v0.11.5 task-70：页面级内容哈希（不含版本号的渲染结果），内容不变 → 字节不变。
-    html = html.replace(PAGE_V, hashlib.sha256(html.encode("utf-8")).hexdigest()[:10])
     return html
 
 
@@ -10644,10 +10652,16 @@ def _sample_buttons(queries) -> str:
 
 
 def _app_boot(prefix: str) -> str:
-    """v0.9.1 task-22：首屏先渲染，load 后再注入 app.js，降低 LCP render delay。"""
+    """v0.9.1 task-22：首屏先渲染，load 后再注入 app.js，降低 LCP render delay。
+
+    v0.11.5 task-8：app.js 是稳定文件名、内容随 BUILD_V 变，这里也带 ?v=BUILD_V
+    （README 口径：稳定名资源必须带版本参数）。注：当前首页模板里 `{APP_BOOT}` 占位已被
+    `_optimize_home_html` 的注入取代，本函数在现有 5 个首页产物中不出现（见报告 §7），
+    保留并按同口径加版本号，避免以后接回模板时再踩裸 URL 缓存坑。
+    """
     return ('<script>window.addEventListener("load",function(){'
             'var s=document.createElement("script");'
-            's.src="' + prefix + 'assets/app.js";'
+            f's.src="{prefix}assets/app.js?v={BUILD_V}";'
             'document.body.appendChild(s);});</script>')
 
 
@@ -10694,7 +10708,7 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
     css_inline = re.sub(r"\s*([{};])\s*", r"\1", css_inline)
     css_inline = re.sub(r"\s+", " ", css_inline).strip()
     html = re.sub(
-        rf'<link rel="stylesheet" href="{re.escape(prefix + CSS_FILE)}\?v=[^"]+">',
+        rf'<link rel="stylesheet" href="{re.escape(prefix + CSS_FILE)}(?:\?v=[^"]*)?">',
         f"<style>{css_inline}</style>", html, count=1)
     for _name in ("i18n.js", "bilingual.js", "app.js"):
         html = re.sub(
@@ -10731,9 +10745,11 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
         + "</script>"
         + f"<script>window.__I18N_PARTIAL={lang!r};{i18n_js}</script>"
         + "<script>window.addEventListener('load',function(){"
-        + f"var s=document.createElement('script');s.src='{prefix}assets/app.js';"
+        # v0.11.5 task-8：app.js / bilingual.js 是**稳定文件名**（内容随 BUILD_V 变），
+        # 必须带 ?v=BUILD_V，否则浏览器缓存旧版首页搜索逻辑（verify_live 的 homepage-appjs 守卫也查这个）。
+        + f"var s=document.createElement('script');s.src='{prefix}assets/app.js?v={BUILD_V}';"
         + "document.body.appendChild(s);"
-        + f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js';"
+        + f"var b=document.createElement('script');b.src='{prefix}assets/bilingual.js?v={BUILD_V}';"
         + "document.body.appendChild(b);});</script>")
     return html.replace("</body>", boot + "</body>")
 
@@ -13213,9 +13229,16 @@ def main() -> None:
         shutil.rmtree(OUT)
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     (OUT / "data").mkdir(parents=True, exist_ok=True)
-    (OUT / "assets" / CSS_FILE.split("/")[-1]).write_text(CSS, encoding="utf-8")
+    # v0.11.5 task-5：CSS 文件名就是内容哈希，写盘前自检一次 ——
+    # 防以后在 main() 里改 CSS 常量而文件名没跟着变（文件名与内容不一致会让缓存永远命中旧样式）。
+    # 注意必须用 write_bytes：Windows 下 write_text 会把 \n 翻成 \r\n，文件名哈希就对不上实际字节。
+    _css_bytes = CSS.encode("utf-8")
+    _css_check = "assets/style." + hashlib.sha256(_css_bytes).hexdigest()[:10] + ".css"
+    if _css_check != CSS_FILE:
+        raise SystemExit(f"CSS 文件名与内容哈希不一致：{CSS_FILE} != {_css_check}")
+    (OUT / "assets" / CSS_FILE.split("/")[-1]).write_bytes(_css_bytes)
     # 兼容旧缓存/旧引用：稳定名保留（内容可变）；新页面只引用上面的哈希文件。
-    (OUT / "assets" / "style.css").write_text(CSS, encoding="utf-8")
+    (OUT / "assets" / "style.css").write_bytes(_css_bytes)
     # v0.9.8 task-13：长尾页（121k）用 boot.js 注入与顶层页同一份壳；顶层页已有
     # [data-shell] 直接跳过（幂等）。模板里 __R__ 是站点根前缀占位。
     shell_nav_js = json.dumps(_shell_nav_html("__R__")
@@ -13225,12 +13248,13 @@ def main() -> None:
     shell_tab_js = json.dumps(_shell_tabbar("__R__"))
     # v0.11.2（条目 26）：长尾页的常驻搜索栏也由 boot.js 注入（每页静态 0 B）。
     shell_search_js = json.dumps(_shell_search_html("__R__"))
-    (OUT / "assets" / "boot.js").write_text(
+    boot_js_src = (
         # v0.10.2：长尾页只拉当前语言的字典包。语言判定必须在插入 <script> 之前完成，
         # 所以 boot.js 里带一份 LANG_META_JS + LANG_PICK_JS（与 assets/i18n.js 同一段源码）。
         LANG_META_JS + LANG_PICK_JS +
         "var s=document.currentScript;"
-        "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.js.*$/,'');"
+        # v0.11.5 task-5：文件名改成 assets/boot.<hash>.js，剥「站点根」的正则要匹配任意 boot.*.js
+        "var r=((s&&s.src)||location.href).replace(/assets\\/boot\\.[^\\/]*$/,'');"
         "var _rp='/';try{_rp=new URL(r).pathname||'/';}catch(e){}"
         "var LK=__dshPickLang(_rp);"
         "var SN=" + shell_nav_js + ",TB=" + shell_tab_js + ",HS=" + shell_search_js + ";"
@@ -13268,8 +13292,19 @@ def main() -> None:
         "a.onerror=function(){var f=document.createElement('script');"
         "f.src=r+'assets/i18n.js?v=__BUILD_V__';document.body.appendChild(f);};"
         "a.onload=function(){var b=document.createElement('script');"
-        "b.src=r+'assets/bilingual.js';document.body.appendChild(b);};"
-        "document.body.appendChild(a);});\n".replace("__BUILD_V__", BUILD_V), encoding="utf-8")
+        # v0.11.5 task-8：bilingual.js 同 app.js 一样是稳定名 + 内容随 BUILD_V 变，带 ?v 防旧缓存
+        "b.src=r+'assets/bilingual.js?v=__BUILD_V__';document.body.appendChild(b);};"
+        "document.body.appendChild(a);});\n")
+    boot_js = boot_js_src.replace("__BUILD_V__", BUILD_V)
+    # v0.11.5 task-5：boot.js 也改「内容哈希文件名 + 不带 ?v=」，同一构建内全站同一 URL、可跨页缓存；
+    # 数据只变时字节不变 → 页面 HTML 也不用跟着变（增量构建前提）。
+    # 哈希与写盘都按实际字节（write_bytes）：Windows 下 write_text 的 \n → \r\n 会让名字对不上内容。
+    global BOOT_JS_FILE
+    _boot_bytes = boot_js.encode("utf-8")
+    BOOT_JS_FILE = "assets/boot." + hashlib.sha256(_boot_bytes).hexdigest()[:10] + ".js"
+    (OUT / "assets" / BOOT_JS_FILE.split("/")[-1]).write_bytes(_boot_bytes)
+    # 兼容旧缓存页面（v0.11.4 的 HTML 仍引用 assets/boot.js?v=<旧号>）：留稳定名副本，避免 404。
+    (OUT / "assets" / "boot.js").write_bytes(_boot_bytes)
     # task-145b：ATC4 页折叠区的懒加载脚本（只被 atc/<CODE>.html 引用，版本参数同 BUILD_V）。
     (OUT / "assets" / "atc4.js").write_text(
         ATC4_JS.replace("__BUILD_V__", BUILD_V), encoding="utf-8")

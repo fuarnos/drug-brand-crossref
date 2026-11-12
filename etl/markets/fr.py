@@ -1024,6 +1024,41 @@ def is_homeopathic(designation: str) -> bool:
     return "homeopathique" in _fold(designation)
 
 
+# v0.11.5（task-6）：FR 层黑名单——「判不了的不写库，宁缺勿错」。
+# 泛称离子物质（`Sodium`/`Calcium`/… 是盐名碎片，不是成分身份）与 `cn-*` 中文命名物质
+# （中成药/生物制品专用 id，法语成分串不该落到那里）一律不予映射；只挡 FR，不动其它市场。
+FR_BLOCKED_SUBSTANCES = ("sodium", "calcium", "potassium", "sulfate", "ferric", "sulfur", "water")
+
+# 「无实词残串」词表：功能词 / 剂型 / 单位 / 顺势说明。候选串里一个实词都不剩时直接丢弃，
+# 避免 `a 3 pour cent`、`b pour preparations homeopathiques` 这类截断残串进入低特异性匹配层。
+_RESIDUAL_WORDS = frozenset({
+    "a", "au", "aux", "de", "d", "du", "des", "la", "le", "les", "l", "un", "une",
+    "et", "en", "pour", "par", "avec", "sans", "sur", "sous", "dans", "ou", "ou",
+    "solution", "solutions", "sol", "suspension", "emulsion", "dispersion", "sirop",
+    "preparation", "preparations", "homeopathique", "homeopathiques", "homeopathie",
+    "cent", "pct", "vol", "volume", "volumes", "ml", "mg", "g", "kg", "ui", "iu",
+    "degre", "dilution", "compris", "presentation",
+})
+
+
+def _is_residual_candidate(cand: str) -> bool:
+    """候选串是否「一个实词都没有」（纯虚词/剂型/单位/百分比残串）。
+
+    2026-11-15（task-6）：`fr_substance_candidates()` 的逐层截断会产生
+    `a 3 pour cent` 这类残串，交给 `SgMapper.map_basic()` 的低特异性层后
+    会命中首字母相同的泛称离子 / `cn-*` 物质，把「没判出来」伪装成「已映射」。
+    这里在送进匹配层之前挡掉；长度 ≤2 的碎片（`b`、`mg`）同样算残串。
+    """
+    toks = [t for t in cand.split() if t]
+    if not toks:
+        return True
+    if len("".join(toks)) < 3:
+        return True
+    meaningful = [t for t in toks
+                  if len(t) > 2 and t not in _RESIDUAL_WORDS and not t.isdigit()]
+    return not meaningful
+
+
 class FrMapper:
     """法语成分 → substance_id：WHO INN 法语名桥接 + 写法候选 + 库里四级规则。
 
@@ -1035,6 +1070,9 @@ class FrMapper:
         self.by_fr: dict[str, str] = {}
         self.by_fr_sid: dict[str, str] = {}
         self._cand_memo: dict[str, list[tuple[str, str, str]]] = {}
+        # v0.11.5（task-6）：黑名单（泛称离子无条件挡 / cn-* 只挡残串命中）+ 丢弃计数
+        self.blocked_generic, self.blocked_cn = self._load_blocked(db)
+        self.stats: Counter = Counter()
         # 关键词去标点归一（法语撇号/连字符会切断朴素子串匹配）
         self._kw = [(re.sub(r"[^a-z0-9]+", " ", _fold(k)).strip(), v)
                     for k, v in FR_KEYWORD_SYNONYMS]
@@ -1053,6 +1091,24 @@ class FrMapper:
                             self.by_fr.setdefault(fr, sid)
                             self.by_fr_sid.setdefault(fr, sid)
 
+    @staticmethod
+    def _load_blocked(db: sqlite3.Connection) -> tuple[frozenset[str], frozenset[str]]:
+        """黑名单：(泛称离子物质, `cn-*` 物质)（task-6；只影响 FR 层映射）。
+
+        泛称离子无条件挡（`Sodium`/`Calcium` 这类是盐名碎片，不是成分身份）；
+        `cn-*` 只挡**截断残串**命中的情况（`a 3 pour cent` 之类），
+        完整 token / 显式同义词直接命中时保留（如 `VALPROMIDE` → 库内 cn 行的丙戊酰胺），
+        否则会丢掉本来正确的身份对应。
+        """
+        marks = ",".join("?" * len(FR_BLOCKED_SUBSTANCES))
+        rows = db.execute(
+            "SELECT substance_id, LOWER(inn_en) FROM substance"
+            f" WHERE substance_id LIKE 'cn-%' OR LOWER(inn_en) IN ({marks})",
+            [s.lower() for s in FR_BLOCKED_SUBSTANCES]).fetchall()
+        generic = frozenset(r[0] for r in rows if (r[1] or "") in FR_BLOCKED_SUBSTANCES)
+        cn = frozenset(r[0] for r in rows if (r[0] or "").startswith("cn-"))
+        return generic, cn
+
     def map_candidates(self, token: str) -> list[tuple[str, str, str]]:
         """token → 有序候选 [(substance_id, method, 英文候选写法)]。
 
@@ -1060,38 +1116,54 @@ class FrMapper:
         `esomeprazole-magnesium-dihydrate`），直接返回它会让 component 被 `_variant_resolver`
         丢掉；所以这里返回整条候选链，由调用方挑第一个「有 variant」的（见 `_collect`）。
         另外先跑关键词级同义词（植物/生物制品/特殊词序），再跑 WHO INN 法语名与写法候选。
+
+        2026-11-15（task-6）：**送入匹配层之前**先过两道闸——
+        ① 整个 token 是残串（`a 3 pour cent`）直接判「没判出来」；
+        ② 命中黑名单（泛称离子 / 残串命中 `cn-*`）的候选丢弃并计数，不再伪装成已映射。
         """
         if token in self._cand_memo:
             return self._cand_memo[token]
         out: list[tuple[str, str, str]] = []
         folded = _fold(token)
 
-        def push(sid: str, method: str, cand: str) -> None:
-            if sid and all(sid != x[0] for x in out):
+        def push(sid: str, method: str, cand: str, exact: bool = False) -> None:
+            if not sid:
+                return
+            if sid in self.blocked_generic or (sid in self.blocked_cn and not exact):
+                self.stats["blocked_substance_hits"] += 1
+                return
+            if all(sid != x[0] for x in out):
                 out.append((sid, method, cand))
 
         folded_norm = re.sub(r"[^a-z0-9]+", " ", folded).strip()
+        if not folded_norm or _is_residual_candidate(folded_norm):
+            self.stats["residual_tokens"] += 1
+            self._cand_memo[token] = []
+            return []
         for needle, target in self._kw:
             if needle in folded_norm:
                 sid, _salt, method = self.mapper.map_basic(target)
-                push(sid, f"kw-{method}", target)
+                push(sid, f"kw-{method}", target, exact=True)
         # 肺炎链球菌多糖：按血清型精确对应（库内是 serotype-N 的独立物质）
         m_sero = re.search(r"polyoside pneumococcique.*?serotype\s*([0-9]+[a-z]?)", folded_norm)
         if m_sero:
             target = f"pneumococcal polysaccharide serotype {m_sero.group(1)}"
             sid, _salt, method = self.mapper.map_basic(target)
-            push(sid, f"kw-sero-{method}", target)
+            push(sid, f"kw-sero-{method}", target, exact=True)
         cleaned = french_clean_token(token)
         if cleaned and cleaned in self.by_fr:
-            push(self.by_fr[cleaned], "who-inn-fr", cleaned)
+            push(self.by_fr[cleaned], "who-inn-fr", cleaned, exact=True)
         if cleaned and cleaned in self.synonyms:
             sid, _salt, method = self.mapper.map_basic(self.synonyms[cleaned])
-            push(sid, f"fr-synonym-{method}", self.synonyms[cleaned])
+            push(sid, f"fr-synonym-{method}", self.synonyms[cleaned], exact=True)
         for idx, cand in enumerate(fr_substance_candidates(token)):
+            if _is_residual_candidate(cand):
+                self.stats["residual_candidates_dropped"] += 1
+                continue
             if cand in self.by_fr:
-                push(self.by_fr[cand], "who-inn-fr", cand)
+                push(self.by_fr[cand], "who-inn-fr", cand, exact=True)
             sid, _salt, method = self.mapper.map_basic(cand)
-            push(sid, ("raw" if idx == 0 else f"fr-{method}"), cand)
+            push(sid, ("raw" if idx == 0 else f"fr-{method}"), cand, exact=(idx == 0))
         self._cand_memo[token] = out
         return out
 
@@ -1437,6 +1509,9 @@ def _collect(snap: dict, mapper: FrMapper, resolve) -> dict:
     st["products_with_generic_group"] = sum(1 for p in products if p["generic_group"])
     st["generic_groups"] = len({p["generic_group"] for p in products if p["generic_group"]})
     st["products_active"] = sum(1 for p in products if p["status"] == "active")
+    # v0.11.5（task-6）：黑名单 / 残串丢弃计数（「丢弃并计数」，进 dry-run JSON）
+    for gkey in ("blocked_substance_hits", "residual_tokens", "residual_candidates_dropped"):
+        st[f"fr_guard_{gkey}"] = mapper.stats.get(gkey, 0)
     gener_types = Counter(p["generic_type"] or "(空)" for p in products if p["generic_group"])
     return {
         "stats": st, "products": products, "forms": forms, "form_bases": form_bases,
@@ -1985,6 +2060,14 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "nature": result["nature"].most_common(6),
             "bridge": "WHO INN 法语名（data/who_inn_names.csv inn_fr → inn_en）+ 法语拼写/盐名候选，"
                       "命中由库里 substance 决定；不新增 substance",
+            "guard": {
+                "blocked_substances": list(FR_BLOCKED_SUBSTANCES) + ["cn-*"],
+                "blocked_substance_hits": st["fr_guard_blocked_substance_hits"],
+                "residual_tokens": st["fr_guard_residual_tokens"],
+                "residual_candidates_dropped": st["fr_guard_residual_candidates_dropped"],
+                "note": "task-6：泛称离子 / cn-* 物质与无实词残串不映射（丢弃并计数），"
+                        "宁可没有 component 也不写粗略成分",
+            },
         },
         "homeopathy": {
             "products": st["homeo_products"],
@@ -2070,6 +2153,9 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
           f" · component 带剂量 {st['components_with_strength']:,}/{st['components_planned']:,}")
     print(f"  顺势疗法: 产品 {st['homeo_products']:,} · SA 行 {st['homeo_tokens']:,}"
           f"（占 token {summary['homeopathy']['token_share_pct']}%）· 不做 INN 映射")
+    print(f"  丢弃并计数(task-6): 黑名单命中 {st['fr_guard_blocked_substance_hits']:,}"
+          f" · 残串 token {st['fr_guard_residual_tokens']:,}"
+          f" · 残串候选 {st['fr_guard_residual_candidates_dropped']:,}")
     print(f"  平行进口: {st['parallel_import_products']:,} 个 CIS（`Autorisation d'importation`）"
           f" · 数据质量: CIP 孤儿 {st['cip_rows_orphan']:,} 行 / {st['cip_cis_orphan']:,} 个 CIS")
     print(f"  EU 重叠: 带欧盟号 {overlap['fr_rows_with_eu_number']:,} 行"

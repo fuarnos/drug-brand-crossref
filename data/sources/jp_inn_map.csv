@@ -1,0 +1,185 @@
+jp_name,substance_id,inn_en,method,confidence,note,source
+ヒドロクロロチアジド,hydrochlorothiazide,Hydrochlorothiazide,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ポビドンヨード,povidone-iodine-57d2b4,Povidone-Iodine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+イソプロパノール,isopropyl-alcohol,Isopropyl Alcohol,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アシクロビル,aciclovir,Aciclovir,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+テオフィリン,theophylline,Theophylline,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+シクロスポリン,ciclosporin,Ciclosporin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+カルボプラチン,carboplatin,Carboplatin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ボリコナゾール,voriconazole,Voriconazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+オロパタジン塩酸塩,olopatadine,Olopatadine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+セチリジン塩酸塩,cetirizine,Cetirizine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+レボセチリジン塩酸塩,levocetirizine,Levocetirizine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+バルプロ酸ナトリウム,valproic-acid,Valproic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+バラシクロビル塩酸塩,valaciclovir,Valaciclovir,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アレンドロン酸ナトリウム水和物,alendronic-acid,Alendronic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+リセドロン酸ナトリウム水和物,risedronic-acid,Risedronic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ホルモテロールフマル酸塩水和物,formoterol,Formoterol,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+モルヒネ塩酸塩水和物,morphine,Morphine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ニカルジピン塩酸塩,nicardipine,Nicardipine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+モメタゾンフランカルボン酸エステル水和物,mometasone,Mometasone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+モメタゾンフランカルボン酸エステル,mometasone,Mometasone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+トラネキサム酸,tranexamic-acid,Tranexamic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+エチニルエストラジオール,ethinylestradiol,Ethinylestradiol,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アジスロマイシン水和物,azithromycin,Azithromycin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+L-カルボシステイン,carbocisteine,Carbocisteine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+カルボシステイン,carbocisteine,Carbocisteine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ゾレドロン酸水和物,zoledronic-acid,Zoledronic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ホスホマイシンナトリウム,fosfomycin,Fosfomycin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+セファレキシン,cephalexin,Cephalexin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+イオプロミド,iopromide,Iopromide,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ウルソデオキシコール酸,ursodeoxycholic-acid,Ursodeoxycholic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+シタラビン,cytarabine,Cytarabine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+フラジオマイシン硫酸塩,framycetin,Framycetin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+クロベタゾールプロピオン酸エステル,clobetasol,Clobetasol,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ベタメタゾン酪酸エステルプロピオン酸エステル,betamethasone,Betamethasone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ペメトレキセドナトリウムヘミペンタ水和物,pemetrexed,Pemetrexed,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+フルチカゾンフランカルボン酸エステル,fluticasone,Fluticasone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+カルバゾクロムスルホン酸ナトリウム水和物,carbazochrome,Carbazochrome,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+沈降炭酸カルシウム,calcium-carbonate,Calcium Carbonate,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+果糖,fructose,Fructose,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ヒト絨毛性性腺刺激ホルモン,chorionic-gonadotrophin,Chorionic Gonadotrophin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+精製ヒアルロン酸ナトリウム,hyaluronic-acid,Hyaluronic Acid,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+レボホリナートカルシウム,calcium-folinate,Calcium Folinate,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+塩化ナトリウム,sodium-chloride,Sodium Chloride,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ブドウ糖,glucose,Glucose,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アムロジピン,amlodipine,Amlodipine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ロサルタン,losartan,Losartan,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+カンデサルタン,candesartan,Candesartan,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+バルサルタン,valsartan,Valsartan,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+テルミサルタン,telmisartan,Telmisartan,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+オルメサルタン,olmesartan,Olmesartan,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+フロセミド,furosemide,Furosemide,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+スピロノラクトン,spironolactone,Spironolactone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アトルバスタチン,atorvastatin,Atorvastatin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ロスバスタチン,rosuvastatin,Rosuvastatin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+プラバスタチン,pravastatin,Pravastatin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+シンバスタチン,simvastatin,Simvastatin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+メトホルミン,metformin,Metformin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+グリメピリド,glimepiride,Glimepiride,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+シタグリプチン,sitagliptin,Sitagliptin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ランソプラゾール,lansoprazole,Lansoprazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+オメプラゾール,omeprazole,Omeprazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+エソメプラゾール,esomeprazole,Esomeprazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ラベプラゾール,rabeprazole,Rabeprazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ファモチジン,famotidine,Famotidine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+レバミピド,cn-c8e70a4bd8,Rebamipide,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+プレガバリン,pregabalin,Pregabalin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+デュロキセチン,duloxetine,Duloxetine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+エスシタロプラムシュウ酸塩,escitalopram,Escitalopram,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+パロキセチン,paroxetine,Paroxetine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+セルトラリン,sertraline,Sertraline,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+フルボキサミン,fluvoxamine,Fluvoxamine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ミルタザピン,mirtazapine,Mirtazapine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アリピプラゾール,aripiprazole,Aripiprazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+オランザピン,olanzapine,Olanzapine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+クエチアピン,quetiapine,Quetiapine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+リスペリドン,risperidone,Risperidone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ブロチゾラム,brotizolam,Brotizolam,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ゾルピデム,zolpidem,Zolpidem,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ロキソプロフェンナトリウム水和物,loxoprofen,Loxoprofen,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+イブプロフェン,ibuprofen,Ibuprofen,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ジクロフェナク,diclofenac,Diclofenac,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+セレコキシブ,celecoxib,Celecoxib,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+トラマドール塩酸塩,tramadol,Tramadol,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ワルファリン,warfarin,Warfarin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アピキサバン,apixaban,Apixaban,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+リバーロキサバン,rivaroxaban,Rivaroxaban,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+エドキサバン,edoxaban,Edoxaban,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+クロピドグレル,clopidogrel,Clopidogrel,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+レボチロキシン,levothyroxine,Levothyroxine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+チアマゾール,thiamazole,Thiamazole,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+プレドニゾロン,prednisolone,Prednisolone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+デキサメタゾン,dexamethasone,Dexamethasone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ベタメタゾン,betamethasone,Betamethasone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ヒドロコルチゾン,hydrocortisone,Hydrocortisone,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+フェキソフェナジン,fexofenadine,Fexofenadine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ロラタジン,loratadine,Loratadine,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アセトアミノフェン,acetaminophen,Acetaminophen,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+アスピリン,aspirin,Aspirin,manual-international,high,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+ガドテル酸メグルミン,gadoterate,Gadoterate,manual-international,medium,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+セフジトレン ピボキシル,cefditoreno,Cefditoreno,manual-international,medium,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+セフジトレン ピボキシル塩酸塩水和物,cefditoreno,Cefditoreno,manual-international,medium,人工复核：日文医薬品一般名 ↔ 英文 INN（薬価基準 成分名）,reports/2026-11-14-jp-mapping.md
+尿素,urea,Urea,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+亜鉛華,zinc-oxide,Zinc Oxide,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+酢酸,acetic-acid,Acetic Acid,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+オリブ油,olive-oil,Olive Oil,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+グリチルリチン,glycyrrhizin,Glycyrrhizin,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+ダイオウ,rhubarb,Rhubarb,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+ソウジュツ,atractylodes-lancea-root,Atractylodes Lancea Root,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+サイコ,bupleurum-chinense-dc,Bupleurum Chinense Dc,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+ジオウ,rehmannia-glutinosa-root,Rehmannia Glutinosa Root,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+B6,pyridoxine,Pyridoxine,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+B1,thiamine,Thiamine,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+B12,cyanocobalamin,Cyanocobalamin,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+クエン酸ナトリウム水和物,sodium-citrate,Sodium Citrate,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+アデノシン三リン酸二ナトリウム水和物,adenosine-triphosphate,Adenosine Triphosphate,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+ダルベポエチンアルファ,darbepoetin-alfa,Darbepoetin Alfa,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+ビフィズス菌,bifidobacterium,Bifidobacterium,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+ポリエチレングリコール,polyethylene-glycol-3350,Polyethylene Glycol 3350,manual-international,medium,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+トコフェロール,tocopherol,Tocopherol,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+葉酸,folic-acid,Folic Acid,manual-international,high,人工复核：日文通用名/生药名 ↔ 库内通用名（第二批：含汉方生药与无机物）,reports/2026-11-14-jp-mapping.md
+シスプラチン,cisplatin,Cisplatin,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+イトラコナゾール,itraconazole,Itraconazole,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+エストリオール,estriol,Estriol,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+メフェナム酸,mefenamic-acid,Mefenamic Acid,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ミルリノン,milrinone,Milrinone,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+アトロピン硫酸塩水和物,atropine,Atropine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ヨウ化カリウム,potassium-iodide,Potassium Iodide,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+亜酸化窒素,nitrous-oxide,Nitrous Oxide,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ハッカ油,peppermint-oil,Peppermint Oil,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+チオ硫酸ナトリウム水和物,sodium-thiosulfate,Sodium Thiosulfate,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+イバンドロン酸ナトリウム水和物,ibandronic-acid,Ibandronic Acid,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+L-グルタミン,glutamine,Glutamine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+チオプロニン,tiopronin,Tiopronin,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+トシリズマブ,tocilizumab,Tocilizumab,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+エタネルセプト,etanercept,Etanercept,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+インスリングラルギン,insulin-glargine,Insulin Glargine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+アルテプラーゼ,alteplase,Alteplase,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+デキサメタゾンプロピオン酸エステル,dexamethasone,Dexamethasone,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ジフルコルトロン吉草酸エステル,diflucortolone,Diflucortolone,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ヒドララジン塩酸塩,hydralazine,Hydralazine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ジヒドロコデインリン酸塩,dihydrocodeine,Dihydrocodeine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+L-アスパラギン酸カリウム,potassium-aspartate,Potassium Aspartate,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+L-アルギニン塩酸塩,arginine,Arginine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+コリスチンメタンスルホン酸ナトリウム,colistin,Colistin,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ペチジン塩酸塩,pethidine,Pethidine,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+アルプロスタジル,alprostadil,Alprostadil,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+パシレオチドパモ酸塩,pasireotide,Pasireotide,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ダイズ油,soybean-oil,Soybean Oil,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+イオジキサノール,iodixanol,Iodixanol,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+イロプロスト,iloprost,Iloprost,manual-international,high,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+ケイヒ,cinnamon,Cinnamon,manual-international,medium,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+タゾバクタム,tazobactam,Tazobactam,manual-international,medium,人工复核：第三批（常见通用名，含盐型归一）,reports/2026-11-14-jp-mapping.md
+アジルサルタン,azilsartan,Azilsartan,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+フルチカゾンプロピオン酸エステル,fluticasone,Fluticasone,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+アモキシシリン水和物,amoxicillin,Amoxicillin,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+アモキシシリン,amoxicillin,Amoxicillin,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+メサラジン,mesalamine,Mesalamine,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+白色ワセリン,petrolatum,Petrolatum,manual-international,medium,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+エトポシド,etoposide,Etoposide,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+フェノバルビタール,phenobarbital,Phenobarbital,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+フェノバルビタールナトリウム,phenobarbital,Phenobarbital,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+アルプラゾラム,alprazolam,Alprazolam,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+クロルプロマジン塩酸塩,chlorpromazine,Chlorpromazine,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+アミノフィリン水和物,aminophylline,Aminophylline,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+メドロキシプロゲステロン酢酸エステル,medroxyprogesterone,Medroxyprogesterone,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+モルヒネ硫酸塩水和物,morphine,Morphine,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+ヨウ素,iodine,Iodine,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+乳糖水和物,lactose,Lactose,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+滅菌精製水(容器入り),water-for-injection,Water For Injection,manual-international,medium,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+滅菌精製水,water-for-injection,Water For Injection,manual-international,medium,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+サルメテロールキシナホ酸塩,salmeterol,Salmeterol,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+ギメラシル,gimeracil,Gimeracil,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+ベタメタゾンジプロピオン酸エステル,betamethasone,Betamethasone,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+クレマスチンフマル酸塩,clemastine,Clemastine,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+ビランテロールトリフェニル酢酸塩,vilanterol,Vilanterol,manual-international,high,人工复核：第四批（高频通用名补漏）,reports/2026-11-14-jp-mapping.md
+クロルヘキシジングルコン酸塩,chlorhexidine,Chlorhexidine,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セフメタゾールナトリウム,cefmetazole,Cefmetazole,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セフトリアキソンナトリウム水和物,ceftriaxone,Ceftriaxone,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セファゾリンナトリウム水和物,cefazolin,Cefazolin,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セファクロル,cefaclor,Cefaclor,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セフォチアム塩酸塩,cefotiam,Cefotiam,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セフジニル,cefdinir,Cefdinir,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+アドレナリン,epinephrine,Epinephrine,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+セフカペン ピボキシル塩酸塩水和物,cefditoreno,Cefditoreno,manual-international,medium,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
