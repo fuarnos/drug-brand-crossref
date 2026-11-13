@@ -1,0 +1,833 @@
+product_id,country,product_name,name_strength_token,structured_strength,form_base,reason
+AU-10341G-clopine-suspension-b2d5c1,AU,CLOPINE TAB 100MG,100 MG,50 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=50 mg
+AU-10341G-clopine-suspension-b2d5c1,AU,CLOPINE TAB 25MG,25 MG,50 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=50 mg
+AU-13997Q-tamoxifen-sandoz-3f098b,AU,TAMOXIFEN SANDOZ TABLETS 10MG,10 MG,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+AU-1454M-zoladex-implant-a48465,AU,Zoladex 10.8mg Implant,10.8 mg,3.6 mg,implant,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=3.6 mg
+AU-1824B-ponstan-799b30,AU,PONSTAN FILM COATED TAB 500MG,500 MG,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=250 mg
+AU-ARTG-110297,AU,Spring Leaf Ginkgo Biloba 2000mg,2000 mg,40 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40 mg
+AU-ARTG-110301,AU,Spring Leaf Grape Seed 12000mg OPC,12000 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+AU-ARTG-116916,AU,Sheep Placenta 3000mg,3000 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+AU-ARTG-117208,AU,GOLDEN NATURE ROYAL JELLY EXTRACT 500mg CAPSULE,500 mg,1500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+AU-ARTG-118824,AU,PARACETAMOL ALPHAPHARM paracetamol 500 mg tablet blister pack,500 mg,499.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=499.5 mg
+AU-ARTG-119963,AU,LOXALATE escitalopram oxalate 5mg tablets bottles,5 mg,6.39 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=6.39 mg
+AU-ARTG-121023,AU,Green Health Food Eucalyptus PROPOLIS 2000mg,2000 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+AU-ARTG-122592,AU,Natural Life Royal Jelly 1000 mg,1000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-12508,AU,FORTUM 1g powder for injection vial,1 g,1164 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1164 mg
+AU-ARTG-12509,AU,FORTUM 2g powder injection,2 g,2328 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2328 mg
+AU-ARTG-130100,AU,ORENCIA abatacept (rch) 250 mg powder for IV infusion vial,250 mg,262.5 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262.5 mg
+AU-ARTG-130850,AU,Mother's Care Royal Jelly 500mg CAPSULE,500 mg,167 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=167 mg
+AU-ARTG-131444,AU,Erythrocin IV 1g powder for injection vial,1 g,1515 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1515 mg
+AU-ARTG-13319,AU,PTU propylthiouracil 50mg tablet bottle,50 mg,50.75 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50.75 mg
+AU-ARTG-13397,AU,LUCAS PAPAW OINTMENT 25G,25 G,39 mg/1000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=39 mg
+AU-ARTG-136005,AU,MYOZYME alglucosidase alfa-rch 50 mg / 10 mL powder for concentrate for solution for infusion,50 mg,52.5 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=52.5 mg
+AU-ARTG-142533,AU,Meo Healthcare Glucosamine Sulfate 750mg,750 mg,1000 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1000 mg
+AU-ARTG-142898,AU,Blackmores Glucosamine 500mg,500 mg,660.05 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=660.05 mg
+AU-ARTG-146016,AU,APO-ESCITALOPRAM escitalopram 20 mg tablet bottle pack,20 mg,25.54 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=25.54 mg
+AU-ARTG-151120,AU,Ausway Propolis Capsules 1000mg,1000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-155397,AU,BACTOL BLUE ethanol 70% v/v liquid topical bottle,70 %,62.58 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62.58 %
+AU-ARTG-156332,AU,APO-Pantoprazole Heartburn Relief pantoprazole sodium 20mg enteric coated tablets blister pack,20 mg,22.6 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.6 mg
+AU-ARTG-160935,AU,SPIRIGEL ethanol 68% w/w gel bottle,68 %,67.9685 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=67.9685 %
+AU-ARTG-162551,AU,Grape Seed 12000mg,12000 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=100 mg
+AU-ARTG-162828,AU,RIASTAP human fibrinogen 1g powder for injection vial,1 g,900 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=900 mg
+AU-ARTG-164165,AU,Spring Leaf  Liver Detox 15000mg,15000 mg,214.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=214.29 mg
+AU-ARTG-165978,AU,Colostem 433mg Capsules,433 mg,8 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=8 mg
+AU-ARTG-166317,AU,Blooms Horse Chestnut 1500 mg,1500 mg,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+AU-ARTG-177174,AU,ORENCIA abatacept (rch) 125 mg single dose syringe subcutaneous injection needle guard,125 mg,125.875 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=125.875 mg
+AU-ARTG-177176,AU,ORENCIA abatacept (rch) 125 mg single dose syringe subcutaneous injection flange extender,125 mg,125.875 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=125.875 mg
+AU-ARTG-179333,AU,AQIUM GEL ethanol  70% w/w bottle,70 %,73.76 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=73.76 %
+AU-ARTG-179422,AU,"Milk Thistle Liver Tonic 13,000mg capsules","13,000 mg",185.7 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=185.7 mg
+AU-ARTG-181977,AU,Apo-Risedronate risedronate sodium 75mg tablets bottle,75 mg,86.7 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=86.7 mg
+AU-ARTG-188136,AU,NICORETTE FRESHDROPS nicotine 2mg lozenge blister pack,2 mg,6.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=6.2 mg
+AU-ARTG-190155,AU,AURO-RISEDRONATE 5 risedronate sodium 5mg tablet blister pack,5 mg,5.74 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.74 mg
+AU-ARTG-190156,AU,AURO-RISEDRONATE 30 risedronate sodium 30mg tablet blister pack,30 mg,34.43 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=34.43 mg
+AU-ARTG-190158,AU,AURO-RISEDRONATE 35 risedronate sodium 35mg tablet blister pack,35 mg,40.17 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40.17 mg
+AU-ARTG-192527,AU,Cal-Care 600 mg Tablets,600 mg,1500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+AU-ARTG-195882,AU,VITA ORGANIC Royal Jelly 1000mg 2%,1000 mg,334 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=334 mg
+AU-ARTG-205184,AU,MICROSHIELD ANGEL BLUE ANTIMICROBIAL HAND GEL ethanol 70% v/v topical gel bottle,70 %,66.01 %,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=66.01 %
+AU-ARTG-206764,AU,ORENCIA abatacept (rch) 125 mg single dose syringe subcutaneous injection ultrasafe passive needle guard and flange extender,125 mg,125.875 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=125.875 mg
+AU-ARTG-207695,AU,ELELYSO taliglucerase alfa rpc 200 units powder for injection,200 units,212 unit,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=212 unit
+AU-ARTG-210042,AU,KYNTELES vedolizumab (rch) 300 mg powder for injection vial,300 mg,331.2 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=331.2 mg
+AU-ARTG-210048,AU,ENTYVIO vedolizumab 300 mg powder for injection vial,300 mg,331.2 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=331.2 mg
+AU-ARTG-213963,AU,"FluQuadri Inactivated Quadrivalent Influenza Vaccine (Split Virion), Influenza virus haemagglutinin 60mcg, 0.5mL suspension for injection - 2025 season",60 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-220008,AU,PARALGIN PARACETAMOL 500 mg uncoated tablet bottle (new formulation),500 mg,500.22 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500.22 mg
+AU-ARTG-220009,AU,CHEMISTS' OWN PARACETAMOL 500mg tablet blister pack (new formulation),500 mg,500.22 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500.22 mg
+AU-ARTG-220970,AU,Detox King with Milk Thistle 38000mg,38000 mg,542.86 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=542.86 mg
+AU-ARTG-22103,AU,KOREAN GINSENG 500mg SUPER STRENGTH,500 mg,167 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=167 mg
+AU-ARTG-223099,AU,Living Healthy Glucosamine Sulphate 1500mg Complex,1500 mg,2105 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2105 mg
+AU-ARTG-223276,AU,Herron Gold Paracetamol 500 mg (new formulation) capsule shaped film coated tablets bottle,500 mg,500.22 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500.22 mg
+AU-ARTG-223277,AU,Herron Gold Paracetamol 500 mg (new formulation) capsule shaped film coated tablet blister,500 mg,500.22 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500.22 mg
+AU-ARTG-223355,AU,Living Healthy Calcium 600mg,600 mg,1500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+AU-ARTG-225898,AU,Nature’s Own Ginkgo Biloba 2000mg,2000 mg,40 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=40 mg
+AU-ARTG-227167,AU,BETADINE SORE THROAT LOZENGES Soothing Honey & Lemon dichlorobenzylalcohol 1.2 mg and amylmetacresol 600 mcg lozenge blister pack,1.2 mg,0.6 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.6 mg
+AU-ARTG-228023,AU,SANICLEAR ALCOHOL GEL ethanol 70% v/v liquid topical bottle application,70 %,62.581 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62.581 %
+AU-ARTG-228600,AU,Bilberry 15000mg Soft Gel Capsule,15000 mg,150 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=150 mg
+AU-ARTG-228603,AU,Milk Thistle Liver Tonic 35000mg Soft Gel Capsules,35000 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-232067,AU,PARALGIN PARACETAMOL 500mg tablet blister pack (new formulation),500 mg,500.22 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500.22 mg
+AU-ARTG-232323,AU,Glutathione 150mg,150 mg,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=250 mg
+AU-ARTG-232323,AU,Glutathione 50mg capsules,50 mg,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=250 mg
+AU-ARTG-233175,AU,Doryx (doxycycline) 200mg tablet bottle,200 mg,231.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=231.2 mg
+AU-ARTG-235126,AU,Quality Health Australia Daily Glucosamine Sulfate 1500mg,1500 mg,1884 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1884 mg
+AU-ARTG-236039,AU,ORENCIA abatacept (rch) 125 mg single dose ClickJect prefilled autoinjector,125 mg,125.875 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=125.875 mg
+AU-ARTG-240194,AU,"Ginkgo 10,000mg One-A-Day","10,000 mg",200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-260760,AU,MICROSHIELD ANGEL CLEAR ANTIMICROBIAL HAND GEL ethanol 70% v/v topical gel bottle,70 %,62 %,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62 %
+AU-ARTG-261759,AU,Celery 5000mg,5000 mg,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=10 mg
+AU-ARTG-262428,AU,"AFLURIA QUAD - Inactivated Quadrivalent Influenza vaccine (split virion), 60 mcg HA, Suspension for injection, pre-filled syringe, with attached needle, SH2025",60 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-27193-nicotinic-acid-250mg,AU,Nicotinic acid 50mg tablets,50 mg,250 mg,other,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=250 mg
+AU-ARTG-273243,AU,Nubolic Max Grape Seed Forte 60000mg,60000 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-275134,AU,Squalene 1000mg plus Vitamin E,1000 mg,7.5 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=7.5 mg
+AU-ARTG-281242,AU,Premier Gold Green Lipped Mussel 4000mg,4000 mg,4.8 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=4.8 mg
+AU-ARTG-282613,AU,VITAMIN C 1000mg & ROSEHIP 500mg,500 mg,1000 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1000 mg
+AU-ARTG-285443,AU,"AZALINE rasagiline mesilate 1 mg tablets, blister",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285445,AU,"AZIGILINE rasagiline mesilate 1 mg tablets, bottle",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285446,AU,"RASAGILINE MYLAN rasagiline mesilate 1 mg tablets, blister",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285447,AU,"RASAGILINE GPPL rasagiline mesilate 1 mg tablets, bottle",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285448,AU,"RASAZILECT rasagiline mesilate 1 mg tablets, blister",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285449,AU,"ASAGILINE rasagiline mesilate 1 mg tablets, blister",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285450,AU,AZIGILINE rasagiline mesilate 1 mg tablets blister,1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285451,AU,"RASAZILECT rasagiline mesilate1 mg tablets, bottle",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285452,AU,"AZALINE rasagiline mesilate 1 mg tablets, bottle",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285453,AU,"RASAGILINE GXP rasagiline mesilate1 mg tablets, blister",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285454,AU,RASAGILINE GXP rasagiline 1 mg tablets bottle,1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285455,AU,"ASAGILINE rasagiline mesilate 1 mg tablets, bottle",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-285456,AU,"RASAGILINE GPPL rasagiline mesilate 1 mg tablets, blister",1 mg,1.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-293189,AU,Grape Seed 12000mg,12000 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=100 mg
+AU-ARTG-294907,AU,"AFLURIA QUAD - Inactivated Quadrivalent Influenza vaccine (split virion), 60 mcg HA, Suspension for injection, pre-filled syringe needle free, SH2025",60 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-299922,AU,VAXIGRIP TETRA Inactivated Quadrivalent Influenza Vaccine (Split Virion) influenza virus haemagglutinin 60 mcg 0.5 mL suspension for injection in pre-filled syringe needle free 2025 Season,60 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-300149,AU,Lifetime Green Lipped Mussel Premium Gold 4000mg,4000 mg,4.8 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=4.8 mg
+AU-ARTG-303406,AU,Grape Seed Extract 150 mg,150 mg,167.973 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=167.973 mg
+AU-ARTG-303874,AU,PHARMACY CARE CALCIUM 600MG,600 MG,1500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+AU-ARTG-308747,AU,Microgenics Magnesium Orotate 400mg,400 mg,443.6 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=443.6 mg
+AU-ARTG-309472,AU,Healthy Haniel Liver Tonic 36000mg,36000 mg,514.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=514.29 mg
+AU-ARTG-309476,AU,Healthy Haniel Wild Dark Propolis 2000mg,2000 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+AU-ARTG-312053,AU,Auswelllife cranberry 50000mg,50000 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+AU-ARTG-313724,AU,FLUAD QUAD inactivated quadrivalent influenza vaccine (surface antigen) adjuvanted suspension for injection 60 mcg HA / 0.5 mL PFS needle-free 2025 Season,60 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-316323,AU,"FLUAD QUAD inactivated quadrivalent influenza vaccine (surface antigen) adjuvanted suspension for injection 60 mcg HA/ 0.5 mL PFS with attached needle, 2025 Season",60 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-316797,AU,Cellife Royal Jelly 1000mg,1000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-317100,AU,WOOLWORTHS ESSENTIALS PARACETAMOL 500 mg tablet blister pack (new formulation),500 mg,499.95 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=499.95 mg
+AU-ARTG-317517,AU,Selenium Forte 150 mcg,150 mcg,375 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=375 microgram
+AU-ARTG-317620,AU,Budesonide 1mg orodispersible tablets sugar free,1 mg,3 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=3 mg
+AU-ARTG-318057,AU,OPDIVO nivolumab 240 mg in 24 mL (10 mg/mL) concentrate solution for IV infusion vial,240 mg,250 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+AU-ARTG-320962,AU,"FLUZONE HIGH-DOSE QIV inactivated quadrivalent influenza vaccine (Split Virion) influenza virus haemagglutinin 240 mcg, suspension for injection PFS, SH2025 Season",240 mcg,60 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=60 microgram
+AU-ARTG-323767,AU,Ginkgo 2500mg Soft Gel Capsule,2500 mg,50 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+AU-ARTG-324371,AU,GO SELENIUM 150mcg,150 mcg,372.58 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=372.58 microgram
+AU-ARTG-324413,AU,Aurinda Propolis 500mg Soft Gel Capsules,500 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+AU-ARTG-325420,AU,"TURMERIC 17,500MG","17,500 MG",20 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=20 mg
+AU-ARTG-330146,AU,Nicotinamide 50mg tablets,50 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-336953,AU,EVO GEL ethanol absolute 70% v/v bottle,70 %,62 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62 %
+AU-ARTG-336954,AU,AERIS GUARD ACTISAN GEL ethanol absolute 70% v/v bottle,70 %,62 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62 %
+AU-ARTG-338056,AU,ESTRADOT 25 estradiol 25 microgram transdermal drug delivery system sachet,25 microgram,0.39 mg,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.39 mg
+AU-ARTG-338057,AU,ESTRADOT 37.5 estradiol 37.5 microgram transdermal drug delivery system sachet,37.5 microgram,0.585 mg,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.585 mg
+AU-ARTG-338058,AU,ESTRADOT 50 estradiol 50 microgram transdermal drug delivery system sachet,50 microgram,0.78 mg,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.78 mg
+AU-ARTG-338059,AU,ESTRADOT 75 estradiol 75 microgram transdermal drug delivery system sachet,75 microgram,1.17 mg,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.17 mg
+AU-ARTG-338060,AU,ESTRADOT 100 estradiol 100 microgram transdermal drug delivery system sachet,100 microgram,1.56 mg,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.56 mg
+AU-ARTG-338574,AU,Memory Ginkgo Biloba 2000mg,2000 mg,40 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40 mg
+AU-ARTG-338831,AU,Minomycin 100mg (NZ),100 mg,117.65 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=117.65 mg
+AU-ARTG-343006,AU,PROGETIC GINKGO BILOBA 750MG,750 MG,15 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 mg
+AU-ARTG-343031,AU,Essential Health Glucosamine 1500mg,1500 mg,2054 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2054 mg
+AU-ARTG-343237,AU,Royal Jelly Supreme 750mg,750 mg,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+AU-ARTG-34468,AU,BOC GASES OXYGEN 99.5% MEDICAL EP GRADE gas medicinal,99.5 %,100 %,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 %
+AU-ARTG-347050,AU,RELPAX MIGRAINE eletriptan hydrobromide 40 mg tablet blister pack,40 mg,48.485 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=48.485 mg
+AU-ARTG-349253,AU,My Vit Glucosamine Sulphate 1500mg,1500 mg,1985 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1985 mg
+AU-ARTG-352115,AU,MAYNE PHARMA ANTIBACTERIAL HAND SANITISER GEL ethanol 80% v/v bottle,80 %,79.5 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=79.5 %
+AU-ARTG-354277,AU,"MILK THISTLE ONE-A-DAY 50,000MG","50,000 MG",714.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=714.29 mg
+AU-ARTG-356399,AU,VIDALIFE PARA-ORIGINAL paracetamol 500 mg tablet blister pack,500 mg,499.95 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=499.95 mg
+AU-ARTG-357683,AU,High Strength Cranberry 30000mg,30000 mg,60 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=60 mg
+AU-ARTG-362597,AU,SELENIUM 150mcg ONE-A-DAY,150 mcg,372.58 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=372.58 microgram
+AU-ARTG-364450,AU,PRAMIN metoclopramide hydrochloride 10 mg tablet blister pack,10 mg,10.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10.5 mg
+AU-ARTG-366955,AU,Activated folate 400mcg,400 mcg,0.714 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.714 mg
+AU-ARTG-370841,AU,APOHEALTH PARACETAMOL GELTABS paracetamol 500 mg gelatin coated tablet blister pack,500 mg,498.929 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=498.929 mg
+AU-ARTG-373911,AU,Natural Astaxanthin 12mg,12 mg,420 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=420 mg
+AU-ARTG-380724,AU,Premium Liver Detox 15000mg,15000 mg,214.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=214.29 mg
+AU-ARTG-380975,AU,TORK ALCOHOL GEL HAND SANITISER ethanol 80% v/v gel bottle,80 %,84.96 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=84.96 %
+AU-ARTG-386354,AU,"Lumir 12.5:12.5 Balanced Cannabis Oil 30mL (THC 12.5 mg/mL, CBD 12.5mg/mL)",30 mL,0.35 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.35 mL
+AU-ARTG-387573,AU,BACTOL 90 ethanol 90% v/v solution bottle,90 %,85.2 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=85.2 %
+AU-ARTG-390599,AU,Propolis + Super Active Power 6000mg Hard Vege Capsule,6000 mg,600 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=600 mg
+AU-ARTG-391413,AU,IDEFIRIX imlifidase 11 mg powder for concentrate for solution for infusion,11 mg,12 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=12 mg
+AU-ARTG-393195,AU,Kids Smart DHA 300mg Triple Strength,300 mg,597.6 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=597.6 mg
+AU-ARTG-393312,AU,Premier Gold Eucalys Propolis 12500mg,12500 mg,416.67 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=416.67 mg
+AU-ARTG-393674,AU,KD Black Propolis 1000mg,1000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-39416,AU,New Image King C 600mg tablets,600 mg,626 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=626 mg
+AU-ARTG-403014,AU,WEZLANA ustekinumab 5 mg / 1.0 mL(130 mg/26 mL) solution for intravenous infusion injection vial,5 mg,130 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=130 mg
+AU-ARTG-404939,AU,Caltrate 600 mg Tablets,600 mg,1500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+AU-ARTG-405528,AU,VELSIPITY etrasimod 2 mg tablet bottle,2 mg,2.762 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2.762 mg
+AU-ARTG-405529,AU,VELSIPITY etrasimod 2 mg tablet blister pack,2 mg,2.762 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2.762 mg
+AU-ARTG-409074,AU,PRIMEON HAND SANITISER ethanol absolute 70% v/v gel bottle,70 %,66 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=66 %
+AU-ARTG-409313,AU,Maxi Grape Seed 60000mg Capsule One-A-Day,60000 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-410937,AU,AQIUM MOISTURISING absolute ethanol 70% w/w gel bottle,70 %,73.76 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=73.76 %
+AU-ARTG-414820,AU,SpringLeaf Ultra Strength Liver Detox 51800mg,51800 mg,740 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=740 mg
+AU-ARTG-419093,AU,Biosis Propolis 2000 mg,2000 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+AU-ARTG-419591,AU,BYLVAY odevixibat 400 microgram capsule bottle,400 microgram,414 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=414 microgram
+AU-ARTG-419592,AU,BYLVAY odevixibat 1200 microgram capsule bottle,1200 microgram,1244 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1244 microgram
+AU-ARTG-419593,AU,BYLVAY odevixibat 600 microgram capsule bottle,600 microgram,622 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=622 microgram
+AU-ARTG-422311,AU,Biosis Ginkgo 6000 mg plus Brahmi 3000 mg,6000 mg + 3000 mg,120 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=120 mg
+AU-ARTG-425174,AU,Ginkgo 10000mg Memory,10000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-426251,AU,Super Propolis 1000mg,1000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-426952,AU,Nature’s Way High Strength Adult Vita Gummies Iron 24mg,24 mg,92.1999 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=92.1999 mg
+AU-ARTG-430784,AU,"Priceline Milk Thistle 21,000mg","21,000 mg",300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300 mg
+AU-ARTG-430791,AU,"Pharmacy Health Milk Thistle 21,000mg","21,000 mg",300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300 mg
+AU-ARTG-44107,AU,GAMOPHEN triclosan 1% MEDICATED SOAP,1 %,1.1 %,unknown,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.1 %
+AU-ARTG-441298,AU,Healthy Haniel Liver Support 52000mg Max,52000 mg,742.86 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=742.86 mg
+AU-ARTG-441430,AU,AJEMNYE ustekinumab 5 mg / 1.0 mL(130 mg/26 mL) solution for intravenous infusion injection vial,5 mg,130 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=130 mg
+AU-ARTG-443609,AU,Nature Forest Dark Organic Propolis 5000mg,5000 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-443933,AU,Ginseng 600mg tablets,600 mg,300 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300 mg
+AU-ARTG-446791,AU,"FLUBLOK trivalent recombinant influenza vaccine, Influenza haemagglutinin recombinant 135 mcg, 0.5 mL solution for injection syringe",135 mcg,45 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=45 microgram
+AU-ARTG-453108,AU,"Cranberry 60,000mg","60,000 mg",100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+AU-ARTG-453118,AU,"Pharmacy Health PLUS Cranberry 60,000mg","60,000 mg",100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+AU-ARTG-454426,AU,GO Hemp Seed Oil 1100 mg,1100 mg,2.5 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2.5 mg
+AU-ARTG-455295,AU,Ausvita Liver Detox 51800mg,51800 mg,740 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=740 mg
+AU-ARTG-455486,AU,UltraLife Cranberry High Strength 65000mg,65000 mg,108.33 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=108.33 mg
+AU-ARTG-456049,AU,Ausvita Propolis Capsule 6000mg,6000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-460765,AU,ADENUBEX febuxostat 80 mg tablet blister pack,80 mg,84.433 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=84.433 mg
+AU-ARTG-460785,AU,FEBEXIC febuxostat 80 mg tablet blister pack,80 mg,84.433 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=84.433 mg
+AU-ARTG-460786,AU,FEBUXOSTAT PHARMACOR febuxostat 80 mg tablet blister pack,80 mg,84.433 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=84.433 mg
+AU-ARTG-460787,AU,URIBEXO febuxostat 80 mg tablet blister pack,80 mg,84.433 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=84.433 mg
+AU-ARTG-462079,AU,Revefore Liver Tonic 35000mg Vegan Hard-Shell Capsules,35000 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-462531,AU,Ginkgo 6000mg hard capsules,6000 mg,120 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=120 mg
+AU-ARTG-462532,AU,UltraLife High Strength Ginkgo Biloba 12000mg,12000 mg,240 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=240 mg
+AU-ARTG-463469,AU,Liver Care with Milk Thistle 40000mg,40000 mg,571.43 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=571.43 mg
+AU-ARTG-464405,AU,POPNUTRI OYSTER 2000mg complex,2000 mg,50 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+AU-ARTG-465534,AU,VAXIGRIP Inactivated Trivalent Influenza Vaccine (Split Virion) influenza virus HA 45 mcg 0.5 mL suspension for injection PFS needle free 2026 Season,45 mcg,15 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 microgram
+AU-ARTG-467814,AU,Nourex Professional Cranberry 50000 mg,50000 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+AU-ARTG-470394,AU,Kordel's Glucosamine 1500mg Effervescent Tablet,1500 mg,1990 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1990 mg
+AU-ARTG-473285,AU,LIVDELZI seladelpar 10 mg capsule bottle,10 mg,14.104 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=14.104 mg
+AU-ARTG-473685,AU,"FLUZONE HIGH-DOSE inactivated trivalent influenza vaccine (Split Virion) influenza virus haemagglutinin 180 mcg, suspension for injection PFS - 2026 season",180 mcg,60 microgram,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=60 microgram
+AU-ARTG-473925,AU,RISEDRONATE WAY risedronate sodium 150 mg tablet blister pack,150 mg,172.12 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=172.12 mg
+AU-ARTG-477989,AU,Glutamine 500mg capsules,500 mg,1000 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1000 mg
+AU-ARTG-478488,AU,Thompson's One-A-Day Ginkgo 12500mg,12500 mg,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+AU-ARTG-479737,AU,Grapeseed 36000mg,36000 mg,300 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=300 mg
+AU-ARTG-481728,AU,Taurine 500mg capsules,500 mg,1000 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1000 mg
+AU-ARTG-485707,AU,A-WON Calcium 600mg Tablet,600 mg,1518 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1518 mg
+AU-ARTG-486667,AU,FEBUXOSTAT MSN febuxostat 80 mg tablet blister pack,80 mg,82.28 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=82.28 mg
+AU-ARTG-490876,AU,"Cranberry Ultra 65,000 mg","65,000 mg",108.33 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=108.33 mg
+AU-ARTG-496136,AU,Vital Nature Liver Tonic 36000mg Plus Turmeric,36000 mg,514.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=514.29 mg
+AU-ARTG-49952,AU,GREEN CIRCLE NOW FULL Ginkgo biloba extract equiv 2g dry leaf capsule bulk,2 g,40 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40 mg
+AU-ARTG-505013,AU,Nature's Way Kids Smart Bursts DHA 300mg Triple Strength,300 mg,597.6 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=597.6 mg
+AU-ARTG-505013,AU,Nature’s Way Kids Smart Bursts DHA 300mg Triple Strength,300 mg,597.6 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=597.6 mg
+AU-ARTG-508669,AU,Unice Liver Tonic 38000mg,38000 mg,542.86 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=542.86 mg
+AU-ARTG-509265,AU,Ginkgo High Strength 10000mg,10000 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-511346,AU,"Microgenics Ginkgo Forte 12,000 mg","12,000 mg",240 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=240 mg
+AU-ARTG-511347,AU,"Microgenics Ginkgo 10,000 mg","10,000 mg",200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+AU-ARTG-513791,AU,Nature’s Own Ginkgo Biloba 2000mg,2000 mg,40 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=40 mg
+AU-ARTG-514569,AU,Nature's Way Glucosamine Sulfate 1500mg,1500 mg,1884 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1884 mg
+AU-ARTG-515472,AU,Nature's Way Kids Smart Bursts DHA 300mg Triple Strength,300 mg,597.6 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=597.6 mg
+AU-ARTG-515472,AU,Nature’s Way Kids Smart Bursts DHA 300mg Triple Strength,300 mg,597.6 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=597.6 mg
+AU-ARTG-518778,AU,Dark Black Propolis 2000mg,2000 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+AU-ARTG-518780,AU,Nell Boten Liver Tonic Max 36000mg,36000 mg,514.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=514.29 mg
+AU-ARTG-521376,AU,"Garlic Pearls 12,000 mg","12,000 mg",5 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5 mg
+AU-ARTG-521571,AU,T ZOLE 20 HEARTBURN RELIEF pantoprazole enteric coated tablet 20 mg blister pack,20 mg,22.55 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.55 mg
+AU-ARTG-521698,AU,Liver Protect 15000mg,15000 mg,214.29 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=214.29 mg
+AU-ARTG-522987,AU,Blackmores Ginkgo 6000 mg Tebonin EGb 761,6000 mg,120 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=120 mg
+AU-ARTG-524056,AU,Nature Forest Squalene 1000mg,1000 mg,3.5 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.5 mg
+AU-ARTG-524926,AU,Omega-3 302.5mg Soft Capsules,3 302.5 mg,529.485 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=529.485 mg
+AU-ARTG-525604,AU,ARX-FEBUXOSTAT febuxostat 80 mg tablet blister pack,80 mg,82.28 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=82.28 mg
+AU-ARTG-525605,AU,FEBUXOSTAT-WGR febuxostat 80 mg tablet blister pack,80 mg,82.28 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=82.28 mg
+AU-ARTG-525775,AU,GLM Ultra Concentrated 30:1 Extract 800mg,800 mg,58 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=58 mg
+AU-ARTG-530204,AU,NEO Glucosamine Sulfate 1500mg Tablet,1500 mg,1923 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1923 mg
+AU-ARTG-530818,AU,SpringLeaf Ultra Strength CoQ10 300mg With Piperine 8mg,8 mg,300 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300 mg
+AU-ARTG-531571,AU,GO SELENIUM 150mcg,150 mcg,372.58 microgram,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=372.58 microgram
+AU-ARTG-61164,AU,CIPRAMIL Citalopram hydrobromide 20mg tablet blister pack,20 mg,24.98 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=24.98 mg
+AU-ARTG-63203,AU,DBL CEPHALOTIN SODIUM 1g powder for injection vial,1 g,1058 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1058 mg
+AU-ARTG-73166,AU,WEALTHY HEALTH ORGANIC SQUALENE 1000MG WITH VITAMIN E,1000 MG,3.5 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.5 mg
+AU-ARTG-78063,AU,PEROXYL ORAL CLEANSER hydrogen peroxide 1.5% w/v  solution bottle,1.5 %,1.4493 %,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.4493 %
+AU-ARTG-79777,AU,THYROGEN thyrotropin alfa-rch 0.9 mg powder for   injection vial,0.9 mg,1.1 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.1 mg
+AU-ARTG-80941,AU,FRESH & NATURAL GOLD ROYAL JELLY 1000mg capsules  bottle,1000 mg,183.1 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=183.1 mg
+AU-ARTG-82070,AU,WEALTHY HEALTH ROYAL JELLY 1000MG,1000 MG,333.33 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=333.33 mg
+AU-ARTG-90114,AU,SIGMAXIN PG digoxin 62.5microgram tablet bottle,62.5 microgram,0.0625 microgram,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.0625 microgram
+AU-ARTG-93724,AU,ALVESCO ciclesonide 80 micrograms per actuation aerosol can,80 micrograms,100 microgram,inhalation,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 microgram
+AU-ARTG-93725,AU,ALVESCO ciclesonide 160 micrograms per actuation aerosol can,160 micrograms,200 microgram,inhalation,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 microgram
+AU-ARTG-96130,AU,ANDROGEL testosterone 1% 5g sachets,5 g,50 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+AU-ARTG-96131,AU,TESTOGEL testosterone 1% 5g sachets,5 g,50 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+CA-00036218,CA,MILK OF MAGNESIA 7% TO,7 %,7.75 %,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=7.75 %
+CA-00155225,CA,PONSTAN FILM COATED TAB 500MG,500 MG,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=250 mg
+CA-00156728,CA,Chlorpropamide 100mg tablets,100 mg,250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=250 mg
+CA-00179647,CA,Ferrous sulfate 200mg tablets,200 mg,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=300 mg
+CA-00415030,CA,Ferrous fumarate 210mg tablets,210 mg,200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+CA-00417629,CA,Ferrous sulfate 200mg tablets,200 mg,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=300 mg
+CA-00430943,CA,CHLORPROMAZINE 25MG,25 MG,27.9 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=27.9 mg
+CA-00430943,CA,Chlorpromazine 25mg tablets,25 mg,27.9 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=27.9 mg
+CA-00430986,CA,Chlorpropamide 100mg tablets,100 mg,250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=250 mg
+CA-00438847,CA,FORMULA C34 .13MG,13 MG,0.13 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.13 mg
+CA-00468924,CA,Magnesium oxide heavy 100mg capsules,100 mg,240 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=240 mg
+CA-00529001,CA,VIT C CHEW 250MG,250 MG,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=300 mg
+CA-00627607,CA,PROMETHAZINE HCL TAB 10MG,10 MG,28.2 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=28.2 mg
+CA-00694851,CA,NUTROL-CAL 875MG,875 MG,350 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=350 mg
+CA-00700843,CA,Pyridoxine 50mg tablets,50 mg,250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+CA-00723134,CA,VITAMIN C WAFERS 100MG,100 MG,500 mg,other,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=500 mg
+CA-00781347,CA,BEBULIN VH 500UNIT,500 UNIT,50 unit/1 mL,powder,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=50 unit
+CA-00792705,CA,PMS-DIPHENHYDRAMINE CAP 50MG,50 MG,2.5 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=2.5 mg
+CA-00800813,CA,DM TAB 30MG,30 MG,3 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=3 mg
+CA-00833223,CA,CHILDREN'S ACETAMINOPHEN ELX 160MG,160 MG,32 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=32 mg
+CA-01905708,CA,Calcium pantothenate 550mg capsules,550 mg,250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+CA-01952137,CA,DM TAB 30MG,30 MG,3 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=3 mg
+CA-01982591,CA,Calcium acetate 1g tablets,1 g,667 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=667 mg
+CA-01987135,CA,Ferrous sulfate 200mg tablets,200 mg,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=300 mg
+CA-02017776,CA,Primaquine 7.5mg tablets,7.5 mg,26.3 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=26.3 mg
+CA-02030861,CA,CERTIFIED NAS PHYS. OF NACL .9% W/V B.P,9 %,0.9 %,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.9 %
+CA-02080036,CA,Etoposide 50mg capsules,50 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02141574,CA,ERYTHROMYCIN CAP 250MG,250 MG,5 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=5 mg
+CA-02154854,CA,DTIC-DOME -PWS IV 200MG,200 MG,10 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 mg
+CA-02202778,CA,DM TAB 30MG,30 MG,3 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=3 mg
+CA-02218046,CA,"DAUNOXOME LIPOSOMAL - IV 2MG/ML, 50MG",50 MG,2 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2 mg
+CA-02223600,CA,Fenofibrate 200mg capsules,200 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+CA-02225980,CA,Fenofibrate 200mg capsules,200 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+CA-02229569,CA,MEFENAMIC ACID TAB 125MG,125 MG,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=15;key_spec=250 mg
+CA-02229569,CA,MEFENAMIC ACID TAB 500MG,500 MG,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=15;key_spec=250 mg
+CA-02229711,CA,Ephedrine hydrochloride 15mg tablets,15 mg,25 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=25 mg
+CA-02229868,CA,HYOSCINE BUTYLBROMIDE TAB 10MG,10 MG,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02229868,CA,Hyoscine butylbromide 10mg tablets,10 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02230929,CA,NO-AD ALOE VERA 98% PURE,98 %,0.5 %,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.5 %
+CA-02232449,CA,Droperidol 1mg capsules,1 mg,2.5 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2.5 mg
+CA-02235352,CA,Azathioprine 25mg tablets,25 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=50 mg
+CA-02237132,CA,PHL-CHOLESTYRAMINE LIGHT - 210G TIN,210 G,800 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=800 mg
+CA-02237133,CA,PHL-CHOLESTYRAMINE REGULAR - 378G TIN,378 G,444.444 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=444.444 mg
+CA-02237339,CA,PMS-TRAZODONE TAB 100MG,100 MG,75 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=75 mg
+CA-02237339,CA,PMS-TRAZODONE TAB 50MG,50 MG,75 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=75 mg
+CA-02237873,CA,Etoposide 50mg capsules,50 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02238984,CA,URSO TAB 50MG,50 MG,250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=250 mg
+CA-02239961,CA,Etoposide 50mg capsules,50 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02243098,CA,Acetylcysteine 600mg capsules,600 mg,200 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+CA-02244931,CA,Mesna 600mg tablets,600 mg,100 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+CA-02247661,CA,"Simethicone Capsules USP, 125 mg",125 mg,180 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=180 mg
+CA-02253666,CA,ACETAMINOPHEN 160 MG CHILDREN USP,160 MG,32 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=32 mg
+CA-02253674,CA,ACETAMINOPHEN 160 MG CHILDREN USP,160 MG,32 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=32 mg
+CA-02282186,CA,ZIDOVUDINE TABLETS USP 300MG,300 MG,10 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=10 mg
+CA-02282216,CA,LAMIVUDINE TABLETS 100MG,100 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+CA-02282216,CA,LAMIVUDINE TABLETS 150MG,150 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+CA-02282216,CA,LAMIVUDINE TABLETS 300MG,300 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+CA-02282216,CA,Lamivudine 300mg tablets,300 mg,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+CA-02295970,CA,"Ibuprofen Tablets USP, 200mg",200 mg,20 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+CA-02300435,CA,Acetylcysteine 600mg capsules,600 mg,200 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+CA-02319918,CA,Cladribine 10mg tablets,10 mg,1 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1 mg
+CA-02325233,CA,Bicalutamide 150mg tablets,150 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=50 mg
+CA-02343002,CA,Azathioprine 25mg tablets,25 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=50 mg
+CA-02344890,CA,Cabergoline 4mg tablets,4 mg,0.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.5 mg
+CA-02358506,CA,CHLORPHENIRAMINE TAB 2MG,2 MG,4 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=12;key_spec=4 mg
+CA-02360098,CA,Bicalutamide 150mg tablets,150 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=50 mg
+CA-02382423,CA,Bicalutamide 150mg tablets,150 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=50 mg
+CA-02410028,CA,Idarubicin 5mg capsules,5 mg,1 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1 mg
+CA-02414759,CA,Alfuzosin 2.5mg tablets,2.5 mg,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=10 mg
+CA-02431033,CA,Levonorgestrel 1.5mg tablets,1.5 mg,0.75 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.75 mg
+CA-02447576,CA,Alfuzosin 2.5mg tablets,2.5 mg,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=10 mg
+CA-02460912,CA,Phenytoin sodium 300mg capsules,300 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+CA-02463733,CA,Busulfan 2mg tablets,2 mg,6 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=6 mg
+CA-02473127,CA,Busulfan 2mg tablets,2 mg,6 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=6 mg
+CA-02475006,CA,Busulfan 2mg tablets,2 mg,6 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=6 mg
+CA-02483874,CA,Budesonide 1mg orodispersible tablets sugar free,1 mg,3 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=3 mg
+CA-02494574,CA,Cladribine 10mg tablets,10 mg,1 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1 mg
+CA-02516160,CA,HYDRALAZINE HYDROCHLORIDE TABLETS USP 10MG,10 MG,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02516160,CA,HYDRALAZINE HYDROCHLORIDE TABLETS USP 25MG,25 MG,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02519178,CA,Bicalutamide 150mg tablets,150 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=50 mg
+CA-02519844,CA,Alfuzosin 2.5mg tablets,2.5 mg,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=10 mg
+CA-02521296,CA,Busulfan 2mg tablets,2 mg,6 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=6 mg
+CA-02528274,CA,Acetylcysteine 600mg capsules,600 mg,200 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+CA-02534908,CA,Acetylcysteine 600mg capsules,600 mg,200 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+CA-02536935,CA,Busulfan 2mg tablets,2 mg,6 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=6 mg
+CA-02537699,CA,HYDRALAZINE HYDROCHLORIDE TABLETS USP 10MG,10 MG,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02537699,CA,HYDRALAZINE HYDROCHLORIDE TABLETS USP 25MG,25 MG,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02552671,CA,Etoposide 50mg capsules,50 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02560585,CA,Treosulfan 250mg capsules,250 mg,5000 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5000 mg
+CA-02560984,CA,HYOSCINE BUTYLBROMIDE TAB 10MG,10 MG,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02560984,CA,Hyoscine butylbromide 10mg tablets,10 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=20 mg
+CA-02567806,CA,Semaglutide 3mg tablets,3 mg,1.34 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1.34 mg
+CA-02567814,CA,Semaglutide 3mg tablets,3 mg,1.34 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1.34 mg
+CA-02570912,CA,Semaglutide 3mg tablets,3 mg,1.34 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1.34 mg
+CA-02570920,CA,Semaglutide 3mg tablets,3 mg,1.34 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1.34 mg
+ES-1-20685,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-1-20685,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-1-20685IP,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-1-20685IP,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004IP,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004IP,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004IP1,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004IP1,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004IP2,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-4691-2004IP2,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-55797,ES,DIUREX TAB 40MG,40 MG,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=20 mg
+ES-59080,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-59080,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-66050,ES,BLOPRESS 16MG PLUS TAB 16/12.5MG,16 MG,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-66050,ES,BLOPRESS 8MG PLUS TAB 8/12.5MG,8 MG,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-66050,ES,Blopress 16mg Plus 12.5mg Tablets,16 mg,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-66050,ES,Blopress 8mg Plus 12.5mg Tablets,8 mg,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-670180000,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-670180000IP,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-670180000IP1,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-670180000IP2,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-71026,ES,BLOPRESS 16MG PLUS TAB 16/12.5MG,16 MG,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-71026,ES,BLOPRESS 8MG PLUS TAB 8/12.5MG,8 MG,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-71026,ES,Blopress 16mg Plus 12.5mg Tablets,16 mg,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-71026,ES,Blopress 8mg Plus 12.5mg Tablets,8 mg,12.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=12.5 mg
+ES-73-948-10-C,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-73-948-10-CIP,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-81879,ES,MICTONORM TAB 15MG,15 MG,30 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=30 mg
+ES-8539291C,ES,DAFLON FILM-COATED TABLET 1000 mg,1000 mg,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+ES-8539291C,ES,DAFLON TABLETS 1000MG,1000 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=14;key_spec=500 mg
+FR-60065294,FR,"PANTOPRAZOLE ZF 20 mg, comprimé gastro-résistant",20 mg,22.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.56 mg
+FR-60222137,FR,"CALTRATE 600 mg, comprimé pelliculé",600 mg,1498 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1498 mg
+FR-60271248,FR,"TERCIAN 100 mg, comprimé pelliculé sécable",100 mg,146.4 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=146.4 mg
+FR-60271248,FR,"TERCIAN 25 mg, comprimé pelliculé sécable",25 mg,146.4 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=146.4 mg
+FR-60365142,FR,"ACIDE ALENDRONIQUE ARROW LAB 70 mg, comprimé",70 mg,91.363 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.363 mg
+FR-60385522,FR,"ULTRAVIST 300 (300 mg d'Iode/mL), solution injectable en seringue préremplie pour injecteur automatique",300 mg,623.4 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=623.4 mg
+FR-60407463,FR,"XENETIX 250 (250 mg d'iode/mL), solution injectable",250 mg,54.84 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=54.84 g
+FR-60435263,FR,"TIGREAT 2,5 mg, comprimé pelliculé","2,5 mg",3.91 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.91 mg
+FR-60495132,FR,"IOMERON 400 (400 mg Iode/mL), solution injectable",400 mg,816 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=816 mg
+FR-60635449,FR,"FLUOCARIL BI FLUORE 250 mg MENTHE, gel dentifrice",250 mg,0.3315 g/100 g,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.3315 g
+FR-60675618,FR,"ESTRACYT 140 mg, gélule",140 mg,156.7 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=156.7 mg
+FR-60779570,FR,"TYRUKO 300 mg, solution à diluer pour perfusion",300 mg,20 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+FR-60875266,FR,"DIFFU-K 600 mg, gélule",600 mg,480 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=480 mg
+FR-60912227,FR,"PERJETA 420 mg, solution à diluer pour perfusion",420 mg,30 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=30 mg
+FR-60981771,FR,"FLECTOR 50 mg, granulés pour solution buvable en sachet-dose",50 mg,65 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=65 mg
+FR-61054849,FR,"CAYSTON 75 mg, poudre et solvant pour solution pour inhalation par nébiliseur",75 mg,121.7 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=121.7 mg
+FR-61208902,FR,"LACTULOSE SANDOZ 10 g, solution buvable en sachet-dose",10 g,20 g,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 g
+FR-61214570,FR,"ESCITALOPRAM CRISTERS PHARMA 5 mg, comprimé pelliculé",5 mg,6.385 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=6.385 mg
+FR-61228659,FR,"CEFPODOXIME ZENTIVA 100 mg, comprimé pelliculé",100 mg,130.45 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=130.45 mg
+FR-61249354,FR,"TEKTROTYD 16 microgrammes, trousse pour préparation radiopharmaceutique",16 microgrammes,10 mg,kit,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 mg
+FR-61334559,FR,"FOSFOMYCINE TEVA SANTE ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-61358994,FR,"DEPAKINE CHRONO 500 mg, comprimé pelliculé sécable à libération prolongée",500 mg,145 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=145 mg
+FR-61374393,FR,"PRASUGREL ARROW 10 mg, comprimé pelliculé sécable",10 mg,12.17 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=12.17 mg
+FR-61405223,FR,"ARANESP 80 microgrammes, solution injectable en seringue préremplie",80 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-61414553,FR,"CERDELGA 84 mg, gélule",84 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+FR-61491578,FR,"NICOTINELL FRUIT EXOTIQUE 2 mg, gomme à mâcher médicamenteuse",2 mg,10 mg,gum,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 mg
+FR-61521103,FR,"ASCOFER 33 mg, gélule",33 mg,245 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=245 mg
+FR-61539350,FR,"PREDNISOLONE EG 20 mg, comprimé effervescent sécable",20 mg,31.44 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-61561635,FR,"MARSILID 50 mg, comprimé sécable",50 mg,77.42 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=77.42 mg
+FR-61567061,FR,"FOSFOPHARM ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-61572941,FR,"ERY 500 mg, comprimé",500 mg,538 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=538 mg
+FR-61587822,FR,"FLUOCARIL BI-FLUORE 250 mg MENTHE, pâte dentifrice",250 mg,0.3315 g/100 g,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.3315 g
+FR-61596554,FR,"DESMOPRESSINE SANDOZ  240 microgrammes, comprimé sublingual",240 microgrammes,267 mcg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=267 mcg
+FR-61606614,FR,TechneScan PYP 20 mg trousse pour préparation radiopharmaceutique,20 mg,4 mg,kit,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=4 mg
+FR-61673399,FR,"CYCLADOL 20 mg, comprimé effervescent",20 mg,191.2 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=191.2 mg
+FR-61767507,FR,"CLOPIDOGREL KRKA 75 mg, comprimé pelliculé",75 mg,83.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=83.5 mg
+FR-61851777,FR,"CALCIUM SANDOZ 500 mg, comprimé effervescent",500 mg,875 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=875 mg
+FR-61872561,FR,"CALPEROS 500 mg, comprimé à sucer sécable",500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+FR-61926055,FR,"TRIENTINE WAYMADE 200 mg, gélule",200 mg,300 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300 mg
+FR-61935264,FR,"FOSFOMYCINE VIATRIS ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-61979766,FR,"CITALOPRAM ARROW LAB 20 mg, comprimé pelliculé sécable",20 mg,24.98 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=24.98 mg
+FR-62059315,FR,"TELEBRIX GASTRO (300 mg l/mL), solution pour administration par voie orale ou rectale",300 mg,66.03 g/100 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=66.03 g
+FR-62059468,FR,"ZITHROMAX MONODOSE 250 mg, comprimé pelliculé",250 mg,262.05 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262.05 mg
+FR-62069124,FR,"CEFADROXIL BIOGARAN 500 mg, gélule",500 mg,525 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=525 mg
+FR-62128284,FR,"KETESSE 25 mg, comprimé pelliculé",25 mg,36.9 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=36.9 mg
+FR-62163538,FR,"CYCLADOL 20 mg, comprimé sécable",20 mg,191.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=191.2 mg
+FR-62174246,FR,"HYPERIUM 1 mg, comprimé",1 mg,1.544 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1.544 mg
+FR-62240543,FR,"RASAGILINE VIATRIS 1 mg, comprimé",1 mg,1.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.44 mg
+FR-62263894,FR,"MINIRIN SPRAY 10 microgrammes par dose, solution endonasale en flacon pulvérisateur",10 microgrammes,0.1 mg/1 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.1 mg
+FR-62363097,FR,"ARANESP 100 microgrammes, solution injectable en stylo prérempli",100 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-62393941,FR,"RISEDRONATE BIOGARAN 35 mg, comprimé pelliculé",35 mg,40.17 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40.17 mg
+FR-62429565,FR,"ARANESP 40 microgrammes, solution injectable en stylo prérempli",40 microgrammes,100 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mcg
+FR-62457618,FR,"AMOXICILLINE EG 1 g, comprimé dispersible",1 g,1.148 g,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.148 g
+FR-62514713,FR,"AZITHROMYCINE CRISTERS 250 mg, comprimé pelliculé",250 mg,262.05 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262.05 mg
+FR-62525777,FR,"AGOMELATINE ZENTIVA 25 mg, comprimé pelliculé",25 mg,44.74 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=44.74 mg
+FR-62527664,FR,"ESCITALOPRAM ALMUS 5 mg, comprimé pelliculé",5 mg,6.385 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=6.385 mg
+FR-62536738,FR,"LYTOS 520 mg, comprimé pelliculé",520 mg,649.73 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=649.73 mg
+FR-62554177,FR,"ENDOXAN 50 mg, comprimé enrobé",50 mg,53.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=53.5 mg
+FR-62597050,FR,"PREDNISOLONE BIOGARAN 20 mg, comprimé effervescent sécable",20 mg,31.44 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-62670616,FR,"FOSFOMYCINE ZYDUS 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-62710847,FR,"ARANESP 40 microgrammes, solution injectable en seringue préremplie",40 microgrammes,100 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mcg
+FR-62729413,FR,"ULTRAVIST 370 (370 mg d'Iode/mL), solution injectable",370 mg,76.9 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=76.9 g
+FR-62845713,FR,"CITALOPRAM ALTER 20 mg, comprimé pelliculé sécable",20 mg,25 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=25 mg
+FR-62867371,FR,"MEGAMAG 45 mg, gélule",45 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+FR-62883639,FR,"RILMENIDINE EVOLUGEN 1 mg, comprimé",1 mg,1.544 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.544 mg
+FR-62884890,FR,"FOSFOMYCINE CRISTERS PHARMA ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-63080629,FR,"PREDNISOLONE CRISTERS 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-63103152,FR,"OROCAL 500 mg, comprimé à sucer/à croquer",500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+FR-63152181,FR,"PRASUGREL CRISTERS 10 mg, comprimé pelliculé sécable",10 mg,12.17 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=12.17 mg
+FR-63174719,FR,"ACIDE ALENDRONIQUE VIATRIS 70 mg, comprimé",70 mg,91.37 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.37 mg
+FR-63197358,FR,"FOSFOMYCINE SUBSTIPHARM 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-63207425,FR,"KENGREXAL 50 mg, poudre pour solution à diluer pour solution injectable/pour perfusion",50 mg,55.6 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=55.6 mg
+FR-63269291,FR,"AZITHROMYCINE EG 250 mg, comprimé pelliculé",250 mg,262 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262 mg
+FR-63274872,FR,"FLUOGEL 2000 mg, gel dentaire",2000 mg,1.1 g/100 g,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.1 g
+FR-63281774,FR,"ACIDE ALENDRONIQUE BIOGARAN 70 mg, comprimé",70 mg,91.36 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.36 mg
+FR-63303231,FR,"CITALOPRAM EVOLUGEN 20 mg, comprimé pelliculé sécable",20 mg,24.98 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=24.98 mg
+FR-63308730,FR,"TENOFOVIR DISOPROXIL VIATRIS 245 mg, comprimé pelliculé",245 mg,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300 mg
+FR-63344192,FR,"SURMONTIL 25 mg, comprimé",25 mg,34.86 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=34.86 mg
+FR-63392333,FR,"IOMERON 250 (250 mg Iode/mL), solution injectable",250 mg,510 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=510 mg
+FR-63411794,FR,"NOTEZINE 100 mg, comprimé sécable",100 mg,196.4 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=196.4 mg
+FR-63459312,FR,"CEFPODOXIME ARROW LAB 100 mg, comprimé pelliculé",100 mg,130.45 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=130.45 mg
+FR-63525488,FR,"ACIDE ALENDRONIQUE ZENTIVA 70 mg, comprimé",70 mg,91.37 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.37 mg
+FR-63563115,FR,"NICOPASS 1,5 mg SANS SUCRE EUCALYPTUS, pastille édulcorée à l'aspartam et à l'acésulfame potassique","1,5 mg",8.33 mg,pastille,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=8.33 mg
+FR-63625015,FR,"IOMERON 300 (300 mg Iode/mL), solution injectable",300 mg,612 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=612 mg
+FR-63828371,FR,"RIFAMYCINE CHIBRET 1000 000 UI POUR CENT, collyre en solution",1000 000 UI,0 IU,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0 IU
+FR-63957761,FR,"SELINCRO 18 mg, comprimé pelliculé",18 mg,21.917 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=21.917 mg
+FR-63973299,FR,"PANTOPRAZOLE TEVA CONSEIL 20 mg, comprimé gastro-résistant",20 mg,22.6 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.6 mg
+FR-63977461,FR,"POLYSTYRENE SULFONATE DE SODIUM SUBSTIPHARM 454 g, poudre pour suspension orale et rectale",454 g,453.7 g/454 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=453.7 g
+FR-63992335,FR,"CEFUROXIME ZENTIVA 250 mg, comprimé pelliculé",250 mg,300.72 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300.72 mg
+FR-64011803,FR,"AMOXICILLINE CRISTERS 500 mg, gélule",500 mg,578 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=578 mg
+FR-64059844,FR,"FLUORURE DE CALCIUM CRINEX 0,25 mg, comprimé","0,25 mg",0.513 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.513 mg
+FR-64062783,FR,"FOSFOMYCINE EVOLUGEN 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-64132502,FR,"CLOPIDOGREL TAW PHARMA 75 mg, comprimé pelliculé",75 mg,83.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=83.5 mg
+FR-64165648,FR,"ALMOTRIPTAN ARROW 12,5 mg, comprimé pelliculé","12,5 mg",17.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=17.5 mg
+FR-64181047,FR,"ARANESP 50 microgrammes, solution injectable en seringue préremplie",50 microgrammes,100 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mcg
+FR-64236198,FR,"AMOXICILLINE TEVA 500 mg, gélule",500 mg,574 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=574 mg
+FR-64350928,FR,"AZITHROMYCINE ARROW LAB 500 mg, comprimé pelliculé sécable",500 mg,524 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=524 mg
+FR-64404201,FR,"FUMAFER 66 mg, comprimé pelliculé",66 mg,200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+FR-64481322,FR,"IBUPROFENE ZENTIVA FRANCE 400 mg, comprimé pelliculé",400 mg,683.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=683.2 mg
+FR-64594722,FR,"IBUPROFENE VIATRIS CONSEIL 400 mg, comprimé pelliculé",400 mg,684 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=684 mg
+FR-64682720,FR,"IOPAMIRON 200 (200 mg d'Iode par mL), solution injectable",200 mg,40.83 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40.83 g
+FR-64747367,FR,"IOMERON 350 (350 mg Iode/mL), solution injectable",350 mg,714 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=714 mg
+FR-64754536,FR,"GASTROGRAFINE 370 mg d'iode/mL, solution buvable ou rectale",370 mg,66 g/100 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=66 g
+FR-64801797,FR,"MAG 2 SANS SUCRE 122 mg, solution buvable en ampoule édulcoré à la saccharine sodique",122 mg,1500 mg/10 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+FR-64806919,FR,"PANTOPRAZOLE ARROW LAB 20 mg, comprimé gastro-résistant",20 mg,22.6 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.6 mg
+FR-64868034,FR,"SURMONTIL 100 mg, comprimé pelliculé sécable",100 mg,139.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=139.44 mg
+FR-64870843,FR,"TENOFOVIR DISOPROXIL BIOGARAN 245 mg, comprimé pelliculé",245 mg,300.6 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300.6 mg
+FR-64899318,FR,"ARANESP 130 microgrammes, solution injectable en seringue préremplie",130 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-64912872,FR,"ARANESP 100 microgrammes, solution injectable en seringue préremplie",100 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-64949002,FR,"PREDNISOLONE TEVA 20 mg, comprimé effervescent sécable",20 mg,31.44 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-64971365,FR,"FOSFOMYCINE CRISTERS 3 g ADULTES, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-65009278,FR,"PREDNISOLONE ARROW 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-65027575,FR,"ULTRAVIST 370 (370 mg d'Iode/mL), solution injectable en seringue préremplie pour injecteur automatique",370 mg,768.86 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=768.86 mg
+FR-65028022,FR,"ALENDRONATE TEVA 10 mg, comprimé",10 mg,11.6 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=11.6 mg
+FR-65043451,FR,"NICORETTE 2 mg, comprimé à sucer",2 mg,10.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10.5 mg
+FR-65045274,FR,"COTELLIC 20 mg, comprimé pelliculé",20 mg,22.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.2 mg
+FR-65071397,FR,"BONASOL 70 mg, solution buvable",70 mg,91.35 mg/100 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.35 mg
+FR-65130778,FR,"NIVAQUINE 100 mg, comprimé sécable",100 mg,136 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=136 mg
+FR-65171903,FR,"AMOXICILLINE TEVA SANTE 500 mg, gélule",500 mg,578 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=578 mg
+FR-65216768,FR,"POLYSTYRENE SULFONATE DE SODIUM ZENTIVA 400 g, poudre pour suspension orale et rectale",400 g,399 g/400 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=399 g
+FR-65220720,FR,"ARANESP 20 microgrammes, solution injectable en seringue préremplie",20 microgrammes,40 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40 mcg
+FR-65235238,FR,"FROVATRIPTAN BIOGARAN 2,5 mg, comprimé pelliculé","2,5 mg",3.91 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.91 mg
+FR-65309165,FR,"PANTOPRAZOLE ALTER 20 mg, comprimé gastrorésistant",20 mg,22.55 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.55 mg
+FR-65358002,FR,"IBUPROFENE SET 400 mg, comprimé pelliculé",400 mg,684 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=684 mg
+FR-65386717,FR,"ALCOOL A USAGE MEDICAL GILBERT 0,5 ml, compresse imprégnée","0,5 ml",2.5 mL,pad,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=2.5 mL
+FR-65399255,FR,"CEFUROXIME KRKA 250 mg, comprimé pelliculé",250 mg,300.715 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=300.715 mg
+FR-65410328,FR,"PANTOPRAZOLE VIATRIS GENERIQUES 20 mg, comprimé gastro-résistant",20 mg,22.55 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.55 mg
+FR-65424299,FR,"PREDNISOLONE EVOLUGEN 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-65424751,FR,"ZINFORO 600 mg, poudre pour solution à diluer pour perfusion",600 mg,668.4 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=668.4 mg
+FR-65458611,FR,"SANMIGRAN 0,50 mg, comprimé enrobé","0,50 mg",0.73 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.73 mg
+FR-65462218,FR,"RASAGILINE BIOGARAN 1 mg, comprimé",1 mg,1.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.44 mg
+FR-65521079,FR,"ARANESP 60 microgrammes, solution injectable en seringue préremplie",60 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-65528337,FR,"ORELOX 100 mg, comprimé pelliculé",100 mg,130.45 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=130.45 mg
+FR-65634493,FR,"ARANESP 300 microgrammes, solution injectable en stylo prérempli",300 microgrammes,500 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mcg
+FR-65644772,FR,"NOXAFIL 300 mg, solution à diluer pour perfusion",300 mg,18 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=18 mg
+FR-65649698,FR,"LEVITRA 20 mg, comprimé pelliculé",20 mg,23.705 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=23.705 mg
+FR-65714530,FR,"AZADOSE 600 mg, comprimé pelliculé",600 mg,628.93 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=628.93 mg
+FR-65724460,FR,"ALMOTRIPTAN EG 12,5 mg, comprimé pelliculé","12,5 mg",17.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=17.5 mg
+FR-65735898,FR,"NICORETTE MICROTAB 2 mg, comprimé sublingual",2 mg,17.1 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=17.1 mg
+FR-65772900,FR,"OPTIRAY 350 (350 mg I/mL), solution injectable en flacon",350 mg,74.2 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=74.2 g
+FR-65780135,FR,"IBUPROFENE CRISTERS CONSEIL 400 mg, comprimé pelliculé",400 mg,684 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=684 mg
+FR-65788737,FR,"PREDNISOLONE SANDOZ 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-65836776,FR,"ROCGEL 1,2 g, suspension buvable en sachet-dose","1,2 g",8.08 g/11.6 g,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=8.08 g
+FR-65951045,FR,"FOSFOMYCINE SANDOZ ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-65987568,FR,"XYDALBA 500 mg, poudre pour solution à diluer pour perfusion",500 mg,516 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=516 mg
+FR-66066271,FR,"ARANESP 10 microgrammes, solution injectable en seringue préremplie",10 microgrammes,25 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=25 mcg
+FR-66203873,FR,"PREDNISOLONE VIATRIS 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-66216486,FR,"PREDNISOLONE BIOGARAN 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-66322048,FR,"BETNESOL 0,50 mg, comprimé effervescent","0,50 mg",0.6578 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.6578 mg
+FR-66350332,FR,"PANTOPRAZOLE VIATRIS CONSEIL 20 mg, comprimé gastro-résistant",20 mg,22.55 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.55 mg
+FR-66373181,FR,"ELETRIPTAN VIATRIS 40 mg, comprimé pelliculé",40 mg,48.485 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=48.485 mg
+FR-66430643,FR,"FOSFOMYCINE ARROW 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-66470506,FR,"ALFATIL LP 500 mg, comprimé pelliculé à libération prolongée",500 mg,523 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=523 mg
+FR-66600871,FR,"SOMATOSTATINE EUMEDICA 6 mg, poudre et solvant pour solution à diluer pour perfusion",6 mg,7.06 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=7.06 mg
+FR-66613769,FR,"XENETIX 350 (350 mg d'Iode/mL), solution injectable",350 mg,76.78 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=76.78 g
+FR-66683568,FR,"STRUCTOFLEX 625 mg, gélule",625 mg,750 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=750 mg
+FR-66688298,FR,"ESCITALOPRAM EVOLUGEN 5 mg, comprimé pelliculé",5 mg,6.385 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=6.385 mg
+FR-66694372,FR,"IOPAMIRON 300 (300 mg d'Iode par mL), solution injectable",300 mg,61.24 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=61.24 g
+FR-66730562,FR,"PREDNISOLONE EG 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-66744925,FR,"FIXICAL 500 mg, comprimé à croquer ou à sucer",500 mg,1248.75 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1248.75 mg
+FR-66748343,FR,"AMOXICILLINE TEVA SANTE 1 g, comprimé dispersible",1 g,1147.8 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1147.8 mg
+FR-66806921,FR,"FOSFOMYCINE BIOGARAN 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-66870977,FR,"PANTOPRAZOLE ARROW CONSEIL 20 mg, comprimé gastro-résistant",20 mg,22.56 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.56 mg
+FR-66901771,FR,"FROVATRIPTAN VIATRIS 2,5 mg, comprimé pelliculé","2,5 mg",3.91 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.91 mg
+FR-66929144,FR,"FLUODONTYL 1350 mg, pâte dentifrice",1350 mg,3 g/100 g,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3 g
+FR-67185182,FR,"NICOPASS MENTHE FRAICHEUR 2,5 mg SANS SUCRE, pastille édulcorée à l'aspartam et à l'acésulfame potassique","2,5 mg",13.88 mg,pastille,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=13.88 mg
+FR-67207458,FR,"DICLOFENAC URGO 140 mg, emplâtre médicamenteux",140 mg,180 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=180 mg
+FR-67229344,FR,"BREXIN 20 mg, comprimé effervescent",20 mg,191.2 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=191.2 mg
+FR-67237394,FR,"IOPAMIRON 370 (370 mg d'Iode par mL), solution injectable",370 mg,75.52 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=75.52 g
+FR-67282578,FR,"MAGNESPASMYL 47,4 mg, comprimé pelliculé","47,4 mg",465.4 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=465.4 mg
+FR-67351818,FR,"LYMECYCLINE ARROW 408 mg (équivalent à 300 mg de tétracycline base), gélule",300 mg,408 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=408 mg
+FR-67406937,FR,"AMOXICILLINE VIATRIS 1 g, comprimé dispersible",1 g,1.148 g,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.148 g
+FR-67456363,FR,"FORXIGA 10 mg, comprimé pelliculé",10 mg,12.3 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=12.3 mg
+FR-67464926,FR,"ACIDE ALENDRONIQUE CRISTERS 70 mg, comprimé",70 mg,91.37 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.37 mg
+FR-67490401,FR,"PANTOPRAZOLE SUN PHARMA CONSEIL 20 mg, comprimé gastro-résistant",20 mg,22.557 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22.557 mg
+FR-67541600,FR,"HYPERIUM 1 mg, comprimé",1 mg,1.544 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1.544 mg
+FR-67588906,FR,"MEGAMAGNESIA 45 mg, gélule",45 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+FR-67637794,FR,"AZITHROMYCINE PFIZER 250 mg, comprimé pelliculé",250 mg,262.05 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262.05 mg
+FR-67652611,FR,"PREDNISOLONE ZENTIVA LAB 20 mg, comprimé orodispersible",20 mg,31.44 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=31.44 mg
+FR-67722465,FR,"OPTIRAY 300 (300 mg l/mL), solution injectable en flacon",300 mg,63.6 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=63.6 g
+FR-67890598,FR,"TIAPRIDAL 100 mg, comprimé sécable",100 mg,111.1 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=111.1 mg
+FR-67899241,FR,"PROFEMIGR 150 mg, comprimé sécable",150 mg,75 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=75 mg
+FR-67940065,FR,"RADIOSELECTAN URINAIRE 30 POUR CENT (146 mg d'Iode/ml), solution injectable",146 mg,26.044 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=26.044 g
+FR-67951706,FR,"MONURIL 3 g, granulés pour solution buvable en sachet",3 g,5.631 g/8 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=5.631 g
+FR-67954855,FR,"FLECTOR 50 mg, comprimé",50 mg,65 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=65 mg
+FR-67971107,FR,"MAGNESIUM ARROW CONSEIL 150 mg, comprimé effervescent",150 mg,270 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=270 mg
+FR-67972426,FR,"MONURIL 3 g, granulés pour solution buvable en sachet",3 g,5.631 g/8 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=5.631 g
+FR-67976232,FR,"NIQUITIN MENTHE DOUCE 4 mg SANS SUCRE, comprimé à sucer édulcoré à l'aspartam",4 mg,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+FR-68085562,FR,"NICOTINELL FRUIT 2 mg SANS SUCRE, gomme à mâcher médicamenteuse",2 mg,10 mg,gum,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 mg
+FR-68095745,FR,"DESMOPRESSINE SANDOZ 120 microgrammes, comprimé sublingual",120 microgrammes,133 mcg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=133 mcg
+FR-68099640,FR,"RASAGILINE EVOLUGEN 1 mg, comprimé",1 mg,1.438 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.438 mg
+FR-68133135,FR,"AZITHROMYCINE ARROW LAB 250 mg, comprimé pelliculé",250 mg,262 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262 mg
+FR-68222947,FR,"CHLORHEXIDINE DIGLUCONATE / ALCOOL ISOPROPYLIQUE GILBERT HEALTHCARE 2 g / 70 mL pour 100 mL, solution pour application cutanée",2 g,10.65 g/100 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10.65 g
+FR-68229767,FR,"ACIDE ALENDRONIQUE EG 70 mg, comprimé",70 mg,91.36 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.36 mg
+FR-68324489,FR,"XENETIX 300 (300 mg d'Iode/mL), solution injectable",300 mg,65.81 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=65.81 g
+FR-68343016,FR,"RILMENIDINE BIOGARAN 1 mg, comprimé",1 mg,1.544 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.544 mg
+FR-68354856,FR,"NUROFENFEM 400 mg, comprimé pelliculé",400 mg,684 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=684 mg
+FR-68362550,FR,"NALGESIC 300 mg, comprimé pelliculé",300 mg,346 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=346 mg
+FR-68368699,FR,"ARANESP 150 microgrammes, solution injectable en stylo prérempli",150 microgrammes,500 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mcg
+FR-68373358,FR,"ULTRAVIST 300 (300 mg d'Iode/mL), solution injectable",300 mg,62.34 g/100 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62.34 g
+FR-68491591,FR,"CITALOPRAM BIOGARAN 20 mg, comprimé pelliculé sécable",20 mg,24.98 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=24.98 mg
+FR-68543173,FR,"IOMERON 150 (150 mg Iode/mL), solution injectable",150 mg,306 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=306 mg
+FR-68626690,FR,"BREXIN 20 mg, comprimé sécable",20 mg,191.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=191.2 mg
+FR-68628809,FR,"GONAPEPTYL 3,75 mg, poudre et solvant pour suspension injectable à libération prolongée en seringues pré-remplies","3,75 mg",4.12 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=4.12 mg
+FR-68633852,FR,"MAG 2 100 mg, comprimé",2 100 mg,395.85 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=395.85 mg
+FR-68645185,FR,"LODINE 300 mg, comprimé pelliculé",300 mg,200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=200 mg
+FR-68659822,FR,"ACIDE ALENDRONIQUE TEVA SANTE 70 mg, comprimé",70 mg,91.37 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.37 mg
+FR-68722564,FR,"TYSABRI 300 mg, solution à diluer pour perfusion",300 mg,20 mg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+FR-68759025,FR,"ARANESP 60 microgrammes, solution injectable en stylo prérempli",60 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-68852892,FR,"NICOPASS 1,5 mg SANS SUCRE MENTHE FRAICHEUR, pastille édulcorée à l'aspartam et à l'acésulfame potassique","1,5 mg",8.33 mg,pastille,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=8.33 mg
+FR-68859538,FR,"RISEDRONATE ALTER 35 mg, comprimé pelliculé",35 mg,40.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40.2 mg
+FR-68878862,FR,"ARANESP 300 microgrammes, solution injectable en seringue préremplie",300 microgrammes,500 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mcg
+FR-68912300,FR,"TIAPRIDE VIATRIS 100 mg, comprimé sécable",100 mg,111.13 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=111.13 mg
+FR-69138306,FR,"FOSFOMYCINE ZENTIVA ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+FR-69165716,FR,"CALCIUM ARROW 500 mg, comprimé à sucer",500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+FR-69381048,FR,"CALPRIMUM 500 mg, comprimé enrobé à croquer",500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+FR-69388669,FR,"SEROPRAM 20 mg, comprimé pelliculé sécable",20 mg,24.98 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=24.98 mg
+FR-69454261,FR,"PIXUVRI 29 mg, poudre pour solution à diluer pour perfusion",29 mg,50 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+FR-69485666,FR,"ARANESP 80 microgrammes, solution injectable en stylo prérempli",80 microgrammes,200 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mcg
+FR-69489433,FR,"AMOXICILLINE CRISTERS 1 g, comprimé dispersible",1 g,1.148 g,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.148 g
+FR-69497921,FR,"TIAPRIDE SANDOZ 100 mg, comprimé sécable",100 mg,111.13 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=111.13 mg
+FR-69514954,FR,"ELETRIPTAN ZYDUS 40 mg, comprimé pelliculé",40 mg,48.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=48.5 mg
+FR-69581846,FR,"ARANESP 30 microgrammes, solution injectable en seringue préremplie",30 microgrammes,100 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mcg
+FR-69591915,FR,"ISIMIG 2,5 mg, comprimé pelliculé","2,5 mg",3.91 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.91 mg
+FR-69620719,FR,"CALCIUM COOPER 500 mg, comprimé à sucer ou à croquer",500 mg,1237.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1237.5 mg
+FR-69627140,FR,"ARANESP 150 microgrammes, solution injectable en seringue préremplie",150 microgrammes,500 mcg/1 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mcg
+FR-69716272,FR,"CALCIDIA 1,54 g, granulé pour suspension buvable en sachet-dose","1,54 g",3.85 g/5 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3.85 g
+FR-69717844,FR,"FLEXEA 625 mg, comprimé",625 mg,750 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=750 mg
+FR-69733040,FR,"INDAPAMIDE ZENTIVA LP 1,5 mg, comprimé pelliculé à libération prolongée","1,5 mg",1.54 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.54 mg
+FR-69783762,FR,"DIFRAREL 100 mg, comprimé enrobé",100 mg,5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5 mg
+FR-69784280,FR,"ACIDE ALENDRONIQUE ALTER 70 mg, comprimé pelliculé",70 mg,91.35 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=91.35 mg
+FR-69801139,FR,"AZITHROMYCINE ZENTIVA 250 mg, comprimé pelliculé",250 mg,262.05 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=262.05 mg
+FR-69899585,FR,"DEPAKINE CHRONO 500 mg, comprimé pelliculé sécable à libération prolongée",500 mg,145 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=145 mg
+FR-69907338,FR,"FOSFOMYCINE EG ADULTES 3 g, granulés pour solution buvable en sachet",3 g,5.631 g,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.631 g
+GB-10633511000001106,GB,NORIT TABLET 125 mg,125 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+GB-10843211000001100,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-11494611000001105,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-11494811000001109,GB,Byetta 5micrograms/0.02ml solution for injection 1.2ml pre-filled pens,1.2 ml,0.02 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=0.02 mL
+GB-12317911000001103,GB,VITAMIN C CHEWABLE TAB 250MG,250 MG,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=300 mg
+GB-12317911000001103,GB,Vitamin C 250mg Chewable Tablet,250 mg,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=300 mg
+GB-13102311000001100,GB,Cacit 500mg effervescent tablets,500 mg,1250 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1250 mg
+GB-13773411000001104,GB,Scopoderm TTS 1.5mg patches,1.5 mg,1 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-13839811000001100,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-15548411000001103,GB,Yondelis 0.25mg powder for concentrate for solution for infusion vials,0.25 mg,1 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1 mg
+GB-16143511000001103,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-16260111000001106,GB,Cacit 500mg effervescent tablets,500 mg,1250 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1250 mg
+GB-16351811000001109,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-16528011000001108,GB,Nicorette combi 15mg transdermal patches + 2mg medicated gum,2 mg,15 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 mg
+GB-16542611000001100,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-16602911000001106,GB,Rebif 22micrograms/0.5ml (6million units) solution for injection 1.5ml cartridges,1.5 ml,0.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.5 mL
+GB-16603211000001108,GB,Rebif 44micrograms/0.5ml (12million units) solution for injection 1.5ml cartridges,1.5 ml,0.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.5 mL
+GB-16658811000001107,GB,Modigraf 0.2mg granules for oral suspension sachets,0.2 mg,1 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-17306511000001108,GB,Lamberts Iron 14mg tablets,14 mg,62 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=62 mg
+GB-17496211000001101,GB,Byetta 5micrograms/0.02ml solution for injection 1.2ml pre-filled pens,1.2 ml,0.02 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=0.02 mL
+GB-17534611000001105,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-17616111000001106,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-18517311000001107,GB,L-arginine 500mg capsules,500 mg,750 mg/5 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=750 mg
+GB-18633111000001100,GB,Scopoderm TTS 1.5mg patches,1.5 mg,1 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-19326011000001102,GB,Vega Evening Primrose Oil Extra High Strength 1000mg capsules,1000 mg,95 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=95 mg
+GB-19372311000001102,GB,Azyter 15mg/g eye drops 0.25g unit dose,0.25 g,15 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 mg
+GB-21941011000001105,GB,Lyxumia 20micrograms/0.2ml solution for injection 3ml pre-filled pens,3 ml,0.2 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.2 mL
+GB-21941511000001102,GB,Lyxumia 10micrograms/0.2ml solution for injection 3ml pre-filled pens,3 ml,0.2 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.2 mL
+GB-226811000001107,GB,PONSTAN FILM COATED TAB 500MG,500 MG,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=250 mg
+GB-22783711000001105,GB,Neomag (magnesium 97mg (4mmol)) chewable tablets,97 mg,97.2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=97.2 mg
+GB-24507511000001101,GB,Minims povidone iodine 5% eye drops 0.5ml unit dose,0.5 ml,0.4 mL,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=0.4 mL
+GB-28010711000001106,GB,Cometriq 20mg capsules and Cometriq 80mg capsules,80 mg,20 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+GB-284511000001107,GB,Calcichew 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=1250 mg
+GB-29980811000001105,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-30269611000001101,GB,Byetta 5micrograms/0.02ml solution for injection 1.2ml pre-filled pens,1.2 ml,0.02 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=0.02 mL
+GB-3160411000001108,GB,Scopoderm TTS 1.5mg patches,1.5 mg,1 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-32507311000001103,GB,Quinsair 240mg nebuliser solution ampoules,240 mg,100 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+GB-34192111000001101,GB,G & G MSM 500mg & Vitamin C 100mg capsules,100 mg,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=500 mg
+GB-34966811000001109,GB,SunVit-D3 200unit with Calcium 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+GB-34967311000001102,GB,SunVit-D3 400unit with Calcium 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+GB-35459711000001105,GB,DuoVisc ophthalmic viscosurgical device 0.4ml pre-filled syringes and 0.35ml pre-filled syringes,0.35 ml,0.4 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.4 mL
+GB-36763511000001102,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-37037811000001101,GB,SunVit-D3 400unit with Calcium 600mg chewable tablets tutti frutti,600 mg,1500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+GB-37038311000001106,GB,SunVit-D3 400unit with Calcium 600mg chewable tablets lemon,600 mg,1500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+GB-37355411000001109,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-37432611000001108,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-37716411000001108,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-37728011000001108,GB,Scopoderm 1.5mg patches,1.5 mg,1 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-38074211000001100,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-38123611000001107,GB,Byetta 10micrograms/0.04ml solution for injection 2.4ml pre-filled pens,2.4 ml,0.04 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=8;key_spec=0.04 mL
+GB-38123811000001106,GB,Byetta 5micrograms/0.02ml solution for injection 1.2ml pre-filled pens,1.2 ml,0.02 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=0.02 mL
+GB-3823211000001102,GB,Doloxene 100mg capsules,100 mg,60 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=60 mg
+GB-38575511000001104,GB,Pabrinex Intravenous High Potency one pair of 5ml ampoules in Sodium chloride 0.9% 100ml infusion bags,100 ml,5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5 mL
+GB-38576511000001106,GB,Pabrinex Intravenous High Potency two pairs of 5ml ampoules in Sodium chloride 0.9% 100ml infusion bags,100 ml,5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5 mL
+GB-38910011000001103,GB,Piqray 50mg tablets and Piqray 200mg tablets,200 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+GB-39586611000001103,GB,Zolgensma 20 tera vector genomes/ml (patient weight 3.1-3.5kg) solution for infusion 2 x 5.5ml + 1 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39586911000001109,GB,Zolgensma 20 tera vector genomes/ml (patient weight 3.6-4.0kg) solution for infusion 1 x 5.5ml + 2 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39587211000001103,GB,Zolgensma 20 tera vector genomes/ml (patient weight 4.6-5.0kg) solution for infusion 2 x 5.5ml + 2 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39587711000001105,GB,Zolgensma 20 tera vector genomes/ml (patient weight 5.1-5.5kg) solution for infusion 1 x 5.5ml + 3 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39588411000001100,GB,Zolgensma 20 tera vector genomes/ml (patient weight 6.1-6.5kg) solution for infusion 2 x 5.5ml + 3 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39588711000001106,GB,Zolgensma 20 tera vector genomes/ml (patient weight 6.6-7.0kg) solution for infusion 1 x 5.5ml + 4 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39589311000001101,GB,Zolgensma 20 tera vector genomes/ml (patient weight 7.6-8.0kg) solution for infusion 2 x 5.5ml + 4 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39589611000001106,GB,Zolgensma 20 tera vector genomes/ml (patient weight 8.1-8.5kg) solution for infusion 1 x 5.5ml + 5 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39590211000001103,GB,Zolgensma 20 tera vector genomes/ml (patient weight 9.1-9.5kg) solution for infusion 2 x 5.5ml + 5 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39590511000001100,GB,Zolgensma 20 tera vector genomes/ml (patient weight 9.6-10.0kg) solution for infusion 1 x 5.5ml + 6 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39591111000001103,GB,Zolgensma 20 tera vector genomes/ml (patient weight 10.6-11.0kg) solution for infusion 2 x 5.5ml + 6 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39591411000001108,GB,Zolgensma 20 tera vector genomes/ml (patient weight 11.1-11.5kg) solution for infusion 1 x 5.5ml + 7 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39592011000001107,GB,Zolgensma 20 tera vector genomes/ml (patient weight 12.1-12.5kg) solution for infusion 2 x 5.5ml + 7 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39592311000001105,GB,Zolgensma 20 tera vector genomes/ml (patient weight 12.6-13.0kg) solution for infusion 1 x 5.5ml + 8 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39593311000001100,GB,Zolgensma 20 tera vector genomes/ml (patient weight 13.6-14.0kg) solution for infusion 2 x 5.5ml + 8 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39594111000001100,GB,Zolgensma 20 tera vector genomes/ml (patient weight 14.1-14.5kg) solution for infusion 1 x 5.5ml + 9 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39594811000001107,GB,Zolgensma 20 tera vector genomes/ml (patient weight 20.1-20.5kg) solution for infusion 1 x 5.5ml + 13 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39595111000001101,GB,Zolgensma 20 tera vector genomes/ml (patient weight 15.1-15.5kg) solution for infusion 2 x 5.5ml + 9 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39595411000001106,GB,Zolgensma 20 tera vector genomes/ml (patient weight 15.6-16.0kg) solution for infusion 1 x 5.5ml + 10 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39595811000001108,GB,Zolgensma 20 tera vector genomes/ml (patient weight 19.6-20.0kg) solution for infusion 2 x 5.5ml + 12 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39596911000001105,GB,Zolgensma 20 tera vector genomes/ml (patient weight 16.6-17.0kg) solution for infusion 2 x 5.5ml + 10 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39598911000001109,GB,Zolgensma 20 tera vector genomes/ml (patient weight 17.1-17.5kg) solution for infusion 1 x 5.5ml + 11 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39600411000001107,GB,Zolgensma 20 tera vector genomes/ml (patient weight 18.1-18.5kg) solution for infusion 2 x 5.5ml + 11 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-39600911000001104,GB,Zolgensma 20 tera vector genomes/ml (patient weight 18.6-19.0kg) solution for infusion 1 x 5.5ml + 12 x 8.3ml vials,8.3 ml,5.5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5.5 mL
+GB-40022811000001107,GB,Klisyri 10mg/g ointment 250mg sachets,250 mg,10 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=10 mg
+GB-40377211000001109,GB,A1-Cal 500mg chewable tablets,500 mg,1250 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1250 mg
+GB-40725511000001100,GB,Palforzia Level 1 (3mg daily) 2 week up-dosing pack,3 mg,1 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1 mg
+GB-40726811000001105,GB,Palforzia Level 2 (6mg daily) 2 week up-dosing pack,6 mg,1 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1 mg
+GB-40727311000001103,GB,Palforzia Level 6 (80mg daily) 2 week up-dosing pack,80 mg,20 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+GB-40727711000001104,GB,Palforzia Level 5 (40mg daily) 2 week up-dosing pack,40 mg,20 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+GB-40728911000001101,GB,Palforzia Level 9 (200mg daily) 2 week up-dosing pack,200 mg,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=100 mg
+GB-42771511000001108,GB,Modigraf 0.2mg granules for oral suspension sachets,0.2 mg,1 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-43395011000001102,GB,Scopoderm 1.5mg patches,1.5 mg,1 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-43574711000001105,GB,Voydeya 50mg tablets and Voydeya 100mg tablets,100 mg,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 mg
+GB-43610811000001108,GB,LipoSil Liposomal Iron 15mg and Active folate 173.88microgram chewable tablets,173.88 microgram,15 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=15 mg
+GB-44990611000001109,GB,Strefen Direct 8.75mg oromucosal spray,8.75 mg,2.92 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=2.92 mg
+GB-4545511000001100,GB,Nurofen Advance 200mg tablets,200 mg,342 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=342 mg
+GB-45620011000001101,GB,Klisyri 10mg/g ointment 250mg sachets,250 mg,10 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=10 mg
+GB-4656111000001106,GB,PARAMOL TAB 500MG,500 MG,7.46 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=7.46 mg
+GB-473311000001105,GB,Magnapen 500mg powder for solution for injection vials,500 mg,250 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+GB-4859211000001104,GB,ACTAL TABLET 216 mg,216 mg,360 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=360 mg
+GB-5493111000001104,GB,Cacit 500mg effervescent tablets,500 mg,1250 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1250 mg
+GB-685111000001101,GB,Cacit 500mg effervescent tablets,500 mg,1250 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=1250 mg
+GB-7530811000001100,GB,Emend 125mg and 80mg capsules,80 mg,125 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=125 mg
+GB-8288311000001104,GB,Pabrinex Intramuscular High Potency solution for injection 5ml and 2ml ampoules,2 ml,5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=5 mL
+GB-8612811000001107,GB,Mercaptopurine 50mg tablets,50 mg,20 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=20 mg
+GB-9062811000001103,GB,Carbex granules 2.8g sachets,2.8 g,1000 mg/10 mL,powder,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1000 mg
+GB-9244511000001107,GB,Scopoderm 1.5mg patches,1.5 mg,1 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1 mg
+GB-9544111000001109,GB,PARAMOL TAB 500MG,500 MG,7.46 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=7.46 mg
+GB-9856611000001109,GB,Lloydspharmacy Evening Primrose Oil 1000mg capsules,1000 mg,90 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=90 mg
+MX-073M85,MX,SOLUCION CS-C 17.7% PISA,17.7 %,0.9 %,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.9 %
+MX-231M2016,MX,BEZALIP RETARD TAB 400MG,400 MG,200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=200 mg
+MX-303M2003,MX,REMERON SOLTAB 15 mg,15 mg,30 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=30 mg
+MX-303M2003,MX,REMERON SOLTAB ORODISPERSIBLE TAB 15MG,15 MG,30 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=30 mg
+MX-541M2001,MX,Aciclovir 200mg tablets,200 mg,3000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=3000 mg
+SG-SIN00175P,SG,COTREN VAGINAL TAB 100MG,100 MG,500 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=500 mg
+SG-SIN01139P,SG,APO-ISDN TAB 10MG,10 MG,5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=5 mg
+SG-SIN02823P,SG,GLYCEROL 2G SUPPOSITORIES FOR CHILDREN,2 G,1400 mg,suppository,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1400 mg
+SG-SIN09435P,SG,KESTINE FILM-COATED TABLET 20MG,20 MG,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=10 mg
+SG-SIN10767P,SG,NIMEGEN SOFT CAP 20MG,20 MG,10 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=10 mg
+SG-SIN11365P,SG,BETASERC TAB 24MG,24 MG,16 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=16 mg
+SG-SIN11365P,SG,BETASERC TAB 8MG,8 MG,16 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=16 mg
+SG-SIN11377P,SG,AKILEN TAB 40MG,40 MG,200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=200 mg
+SG-SIN11658P,SG,VIROX TAB 200MG,200 MG,400 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=400 mg
+SG-SIN12127P,SG,MELOX TAB 15MG,15 MG,7.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=7.5 mg
+SG-SIN12448P,SG,SIMVACOR TAB 20MG,20 MG,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=10 mg
+SG-SIN12448P,SG,SIMVACOR TABLETS 40MG,40 MG,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=10 mg
+SG-SIN13164P,SG,Thyrogen 0.9 mg Powder for Solution for Injection,0.9 mg,1.1 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1.1 mg
+SG-SIN14169P,SG,SPEDIFEN GRANULES 600MG,600 MG,400 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=400 mg
+SG-SIN14319P,SG,RABEPRAZOLE SANDOZ GASTRO-RESISTANT TABLETS 10MG,10 MG,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=20 mg
+SG-SIN14959P,SG,FEBURIC TABLETS 120 MG,120 MG,80 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=80 mg
+SG-SIN17107P,SG,ZEALARGY TABLET 10mg,10 mg,12.79 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=12.79 mg
+SG-SIN17199P,SG,DAPAGLIFLOZIN SANDOZ TABLETS 5MG,5 MG,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=10 mg
+TW-TFDA-000320-0ea5277f,TW,"KOATE-DVI ANTIHEMOPHILIC FACTOR (HUMAN) 500IU,1000IU",500 IU + 1000 IU,250 IU,injection,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=250 IU
+TW-TFDA-001278-e39a6394,TW,VYLOY POWDER FOR CONCENTRATE FOR SOLUTION FOR INFUSION 300MG,300 MG,100 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=100 mg
+TW-TFDA-003213-ce349e49,TW,ASCORMIN TAB 250MG,250 MG,500 mg/5 mL,injection,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=500 mg
+TW-TFDA-005445-55ebc0b4,TW,"PARAFLEX CAPSULES 250MG ""PANBIOTIC""",250 MG,500 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=500 mg
+TW-TFDA-007782-ddd020aa,TW,METHYLTESTOSTERONE CAP 25MG,25 MG,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=20 mg
+TW-TFDA-007782-ddd020aa,TW,Methyltestosterone 10mg capsules,10 mg,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=20 mg
+TW-TFDA-009099-946ea313,TW,IKODIN CAPSULE 500MG,500 MG,250 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=250 mg
+TW-TFDA-013409-14a099bd,TW,AKAMON TAB 1.5MG,1.5 MG,3 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=3 mg
+TW-TFDA-016195-a144f148,TW,DEXTROMETHORPHAN TAB 15MG,15 MG,30 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=30 mg
+TW-TFDA-016999-2e95f21f,TW,Mecobalamin 5mg capsules,5 mg,0.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.5 mg
+TW-TFDA-018091-7c74fe64,TW,METHON TAB 30MG,30 MG,15 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=15 mg
+TW-TFDA-018876-4f261816,TW,METHOTREXAT TAB 2.5MG (EBEWE),2.5 MG,100 mg,injection,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+TW-TFDA-022139-e5517356,TW,PANTOLOC GASTRO-RESISTANT TAB 20MG,20 MG,40 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=40 mg
+TW-TFDA-022927-cf4b2c30,TW,MEDOVIR TAB 200MG,200 MG,400 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=400 mg
+TW-TFDA-023898-a44ed150,TW,FLUIMUCIL A GRANULES 100MG,100 MG,600 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=600 mg
+TW-TFDA-023898-a44ed150,TW,FLUIMUCIL A GRANULES 200MG,200 MG,600 mg,effervescent,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=600 mg
+TW-TFDA-024009-d4f7bced,TW,REMERON SOLTAB 15 mg,15 mg,30 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=30 mg
+TW-TFDA-024009-d4f7bced,TW,REMERON SOLTAB ORODISPERSIBLE TAB 15MG,15 MG,30 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=30 mg
+TW-TFDA-024554-b8bd6672,TW,SPEDIFEN GRANULES 600MG,600 MG,400 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=400 mg
+TW-TFDA-025025-caa02793,TW,"NYSTATIN TABLETS 500000 units ""Y.C.""",500000 units,50 IU,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 IU
+TW-TFDA-025427-5779bcb1,TW,FEBURIC TABLETS 120 MG,120 MG,80 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=80 mg
+TW-TFDA-026268-fc07974b,TW,RUPAN TAB 200MG,200 MG,400 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=400 mg
+TW-TFDA-026409-9c3686db,TW,ALVOPREL FILM COATED TABLETS 150MG,150 MG,300 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=300 mg
+TW-TFDA-026622-9d0dd9eb,TW,Pantoprazole 20mg gastro-resistant tablets,20 mg,40 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=40 mg
+TW-TFDA-027110-958d3978,TW,NORIT TABLET 125 mg,125 mg,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+TW-TFDA-027557-0196155c,TW,"STATIN VAGINAL TABLETS 100000 UNITS ""STANDARD"" (NYSTATIN)",100000 UNITS,10 IU,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 IU
+TW-TFDA-027583-4abbaf6f,TW,TEREXIB TABLETS 60MG,60 MG,120 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=120 mg
+TW-TFDA-027583-4abbaf6f,TW,TEREXIB TABLETS 90MG,90 MG,120 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=120 mg
+TW-TFDA-027651-d1b2dd35,TW,TADALAFIL STELLA TABLETS 10MG,10 MG,20 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=20 mg
+TW-TFDA-028149-1b18b6b0,TW,VIARTRIL-S CAP 314MG,314 MG,750 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=750 mg
+TW-TFDA-028149-1b18b6b0,TW,VIARTRIL-S CAP 500MG,500 MG,750 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=750 mg
+TW-TFDA-034583-173e3ec3,TW,"VIRLESS TABLETS 800MG (ACYCLOVIR) ""YUNG SHIN""",800 MG,200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=200 mg
+TW-TFDA-038280-8314733b,TW,"ANSOLIN TABLET 100MG (HALOPERIDOL) ""GCPC""",100 MG,5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=5 mg
+TW-TFDA-038776-9959d118,TW,"Jiawiller F.C. Tablets 20mg(Famotidine) ""C.L.""",20 mg,40 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=40 mg
+TW-TFDA-040573-da61110e,TW,"NYSTATIN CAPSULES 500,000UNITS ""CHIN TENG""","500,000 UNITS",50 IU,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=50 IU
+TW-TFDA-042433-7b6967f6,TW,"CEFXIN F.C. TABLETS 250MG  ""STANDARD""(CEFUROXIME)",250 MG,125 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=125 mg
+TW-TFDA-042826-85b2fec6,TW,SYNPID TABLETS 160MG,160 MG,100 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=100 mg
+TW-TFDA-043931-6fd9cd1e,TW,FELOPINE E.R. F.C. TABLETS 5MG,5 MG,10 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=10 mg
+TW-TFDA-045407-65bd8cd7,TW,Meloxin Tablets 15mg,15 mg,7.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=7.5 mg
+TW-TFDA-045781-93283df4,TW,AZAMUN TABLETS 25MG,25 MG,50 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=50 mg
+TW-TFDA-047235-f5f67b14,TW,ACET JOHNSON GRANULES 100MG,100 MG,200 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=200 mg
+TW-TFDA-047679-3d0a7956,TW,KNOWFUL CAP 400MG,400 MG,1200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1200 mg
+TW-TFDA-047679-3d0a7956,TW,KNOWFUL FILM COATED TAB 800MG,800 MG,1200 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1200 mg
+TW-TFDA-049236-6701fa4b,TW,ANLITIN TAB 0.75MG,0.75 MG,1.5 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=1.5 mg
+TW-TFDA-050134-a7490a0b,TW,ZEROCAL CAP 120MG,120 MG,60 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=60 mg
+TW-TFDA-050134-a7490a0b,TW,Zerocal Capsules 120mg,120 mg,60 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=3;key_spec=60 mg
+TW-TFDA-052544-aec7bcdb,TW,0.298% KCl in 0.9% NaCl Injection“TBC”,0.9 %,0.298 %,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.298 %
+TW-TFDA-052551-053f658a,TW,0.149% KCl in 0.9% NaCl Injection“TBC”,0.9 %,0.149 %,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.149 %
+TW-TFDA-055924-e7af29df,TW,"Rivopam Tablets 0.5mg ""Y.Y.""",0.5 mg,2 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=2 mg
+TW-TFDA-057296-fd88bd2a,TW,Okbeauty Capsules 120mg,120 mg,60 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=60 mg
+TW-TFDA-057924-01db4601,TW,"FUKEAN Vaginal Tablets 100,000units (Nystatin)","100,000 units",10 IU,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 IU
+TW-TFDA-058200-66d856d6,TW,"0.149% KCl in 0.9% NaCl Injection ""Chi Sheng""",0.9 %,0.149 %,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.149 %
+TW-TFDA-058246-ef1402c8,TW,"0.298% KCl in 0.9% NaCl Injection ""Chi Sheng""",0.9 %,0.298 %,injection,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=0.298 %
+TW-TFDA-060863-061a8e09,TW,"BowLax 10g ""Kojar""",10 g,12000 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=12000 mg
+TW-TFDA-061476-6de3d9ad,TW,ACAROSE TAB 50MG,50 MG,100 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+US-27808-249,US,Deflazacort 6mg tablets,6 mg,22.75 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=22.75 mg
+US-42291-496,US,Lithium carbonate 250mg tablets,250 mg,450 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=450 mg
+US-43598-267,US,Icosapent 998mg capsules,998 mg,1000 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1000 mg
+US-53345-011,US,DEXTROMETHORPHAN HBR TAB 25MG,25 MG,15 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=15 mg
+US-53345-028,US,DEXTROMETHORPHAN HBR TAB 25MG,25 MG,15 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=15 mg
+US-57664-993,US,Deflazacort 6mg tablets,6 mg,22.75 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=22.75 mg
+US-59779-878,US,Cortisone 25mg tablets,25 mg,1000 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1000 mg
+US-60717-648,US,EMJ ANTIPERSPIRANT MOUNTAIN AIR 2.6 OZ (73 g),73 g,200 mg,stick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+US-60717-649,US,EMJ ANTIPERSPIRANT COCONUT AND DRIFTWOOD 2.6 OZ (73 g),73 g,200 mg,stick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+US-60717-650,US,EMJ ANTIPERSPIRANT COCONUT VANILLA 2.6 OZ (73 g),73 g,200 mg,stick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=200 mg
+US-62135-706,US,LAMIVUDINE TABLETS 100MG,100 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-62135-706,US,LAMIVUDINE TABLETS 150MG,150 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-62135-706,US,LAMIVUDINE TABLETS 300MG,300 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-62135-706,US,Lamivudine 300mg tablets,300 mg,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-63629-9312,US,Icosapent 998mg capsules,998 mg,1000 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=1000 mg
+US-67046-0408,US,Lithium carbonate 250mg tablets,250 mg,450 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=450 mg
+US-68083-161,US,Mesna 600mg tablets,600 mg,100 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=100 mg
+US-68462-224,US,Lithium carbonate 250mg tablets,250 mg,450 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=450 mg
+US-68999-706,US,LAMIVUDINE TABLETS 100MG,100 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-68999-706,US,LAMIVUDINE TABLETS 150MG,150 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-68999-706,US,LAMIVUDINE TABLETS 300MG,300 MG,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-68999-706,US,Lamivudine 300mg tablets,300 mg,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=6;key_spec=10 mg
+US-69339-159,US,Itraconazole 100mg capsules,100 mg,10 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=10 mg
+US-70377-188,US,Deflazacort 6mg tablets,6 mg,22.75 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=22.75 mg
+US-70518-4589,US,Lithium carbonate 250mg tablets,250 mg,450 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=4;key_spec=450 mg
+US-70710-2007,US,Deflazacort 6mg tablets,6 mg,22.75 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=22.75 mg
+US-72336-641,US,Glimepiride 1mg tablets,1 mg,3 mg,tablet,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=3 mg
+US-75328-211,US,MHB SKIN HYDRATING HAND SANITIZER SANTAL WAVE 35ml,35 ml,70 mL/100 mL,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=70 mL
+US-80425-0271,US,INDOMETHACIN CAP 25MG,25 MG,75 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=7;key_spec=75 mg
+US-81104-104,US,Naked Sundays Glow Balm Mineral Peptide Stick Broad Spectrum SPF50 Bronze 8g,8 g,22100 mg/100000 mg,stick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22100 mg
+US-81104-105,US,Naked Sundays Glow Balm Mineral Peptide Stick Broad Spectrum SPF50 Dusky Pink 8g,8 g,23750 mg/100000 mg,stick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=23750 mg
+US-81104-106,US,Naked Sundays Glow Balm Mineral Peptide Stick Broad Spectrum SPF50 Pink Pop 8g,8 g,22750 mg/100000 mg,stick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22750 mg
+US-81104-896,US,SPF50 SHEER GLOW BALM CHAMPAGNE 9g,9 g,22750 mg/100000 mg,lipstick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22750 mg
+US-81104-897,US,SPF50 SHEER GLOW BALM ESPRESSO MARTINI 9g,9 g,22750 mg/100000 mg,lipstick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22750 mg
+US-81104-898,US,SPF50 SHEER GLOW BALM ROSE 9g,9 g,22750 mg/100000 mg,lipstick,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=22750 mg
+US-81806-200,US,Deflazacort 6mg tablets,6 mg,22.75 mg,liquid,name_token_not_in_key_spec;key_specs=1;key_products=5;key_spec=22.75 mg
+US-82876-010,US,Cannarelief 1000mg,1000 mg,7900 mg/71900 mg,salve,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=7900 mg
+US-82876-011,US,Cannarelief 1000mg,1000 mg,7900 mg/71900 mg,salve,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=7900 mg
+US-82876-999,US,Earthmed Sport 2000mg,2000 mg,7900 mg/71900 mg,salve,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=7900 mg
+US-83112-400,US,Cefixime 200mg tablets,200 mg,400 mg,capsule,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=400 mg
+US-83512-0008,US,Aspen Glow 100% Mineral Broad Spectrum SPF 30 Powder Sunscreen 0.16 oz / 4.6 g,4.6 g,24900 mg/100000 mg,powder,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=24900 mg
+US-83696-602,US,Medterra Pain Relief 1000mg Hemp Menthol Cream,1000 mg,2012 mg/50300 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=2012 mg
+US-83696-603,US,Medterra Pain Relief 1000mg Hemp Menthol Cream,1000 mg,2012 mg/50300 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=2012 mg
+US-83818-008,US,MEOLY Wart Removal Cream 20g,20 g,1500 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=1500 mg
+US-85215-001,US,Bubble Gum Flavor For Kids 25g 50g,25 g + 50 g,250 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+US-85215-002,US,Fluoride Anti Caries 65g Coconut Whip Juicy Peach Mango Smoothie Summer Watermelon Hami Melom Cream Strawberries Blueberry,65 g,250 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+US-85215-005,US,Freshness Coffee Toothpaste100g,100 g,250 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+US-85215-006,US,Freshness Blueberry Toothpaste100g,100 g,250 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+US-85215-007,US,Freshness Flower Rose Toothpaste100g,100 g,250 mg/100000 mg,topical,name_token_not_in_key_spec;key_specs=1;key_products=1;key_spec=250 mg
+US-85537-111,US,MHB SKIN HYDRATING HAND SANITIZER SANTAL WAVE 35ml,35 ml,70 mL/100 mL,topical,name_token_not_in_key_spec;key_specs=1;key_products=2;key_spec=70 mL

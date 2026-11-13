@@ -36,7 +36,7 @@ import sys
 import time
 import unicodedata
 from collections import defaultdict
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1114,6 +1114,30 @@ FR_I18N: dict[str, str] = {
     "conf.note": "Un nom proche ne signifie pas interchangeables.",
     "conf.pair": "Paire", "conf.tml": "Écriture tall-man",
     "conf.search_hit": "Ce nom est facilement confondu avec",
+    # v0.11.6 task-1（T12 C2/C3/C4）：品牌页「配方差异」表（fr 跟随 en 键集）。
+    "fam.cmp_title": "Noms de marque liés et différences de formule",
+    "fam.cmp_intro": ("Un même nom de marque peut être enregistré autrement et contenir des "
+                      "principes actifs différents selon le marché. Ce tableau établit une "
+                      "correspondance d'identité : ce n'est pas une traduction, et il n'implique "
+                      "pas que les produits soient interchangeables."),
+    "fam.cmp_market": "Marché",
+    "fam.cmp_name": "Nom enregistré",
+    "fam.cmp_ing": "Principes actifs complets",
+    "fam.cmp_rel": "Lien avec cette page",
+    "fam.cmp_this": "Cette page",
+    "fam.rel.same": "Principes actifs identiques",
+    "fam.rel.diff": "Principes actifs différents : non interchangeables",
+    "fam.rel.partial": ("Certains principes actifs en commun : pas la même association, "
+                        "non interchangeables"),
+    "fam.rel.release": ("Principes actifs identiques, libération différente : non "
+                        "interchangeables"),
+    "fam.rel.none": "Aucun principe actif enregistré",
+    # T10（plan §9）：与 en 同键集。
+    "matrix.multi_form": "Formes galéniques multiples",
+    "drug.mono_section": "Uniquement ce principe actif",
+    "drug.combo_section": "Associations contenant ce principe actif",
+    "matrix.spec_conflict": "dosage non vérifié",
+    "name.form_spec": "Dosage par forme galénique",
 }
 FR_I18N.update({
     # v0.11.5 task-3：fr 启用时由 FR_PREP_KEYS 覆盖本行，两处保持同一句。
@@ -1718,6 +1742,29 @@ UI_I18N = {
         "drug.brand_group": "With a brand name",
         "drug.mah_group": "Manufacturer only",
         "drug.compare_note": "A side-by-side table is offered only when this ingredient has records in many markets; otherwise this list is the whole picture.",
+        # v0.11.6 task-1（T12 C2/C3/C4）：品牌页「相关品牌名称与配方差异」表。
+        # 文案只说身份对应与不可互换，不提 collision 视图的分级（「碰撞」是内部术语）。
+        "fam.cmp_title": "Related brand names and formula differences",
+        "fam.cmp_intro": ("A brand name can be registered differently and carry different active "
+                          "ingredients in each market. This table is an identity mapping — not a "
+                          "translation, and not a claim that the products are interchangeable."),
+        "fam.cmp_market": "Market",
+        "fam.cmp_name": "Registered name",
+        "fam.cmp_ing": "All active ingredients",
+        "fam.cmp_rel": "Relation",
+        "fam.cmp_this": "This page",
+        "fam.rel.same": "Same active ingredients",
+        "fam.rel.diff": "Different active ingredients — not interchangeable",
+        "fam.rel.partial": ("Some active ingredients in common — not the same combination, "
+                            "not interchangeable"),
+        "fam.rel.release": "Same active ingredients, different release — not interchangeable",
+        "fam.rel.none": "No active ingredient recorded",
+        # T10（plan §9）：剂型/规格成对、单复方分段、规格冲突机制（默认关闭）。
+        "matrix.multi_form": "Multiple dosage forms",
+        "drug.mono_section": "Only this ingredient",
+        "drug.combo_section": "Combination products containing this ingredient",
+        "matrix.spec_conflict": "strength unverified",
+        "name.form_spec": "Strength by dosage form",
     },
     "es": {
         "u1.title": "Cómo funciona en 3 pasos",
@@ -1798,6 +1845,29 @@ UI_I18N = {
         "drug.brand_group": "Con nombre comercial",
         "drug.mah_group": "Solo fabricante",
         "drug.compare_note": "La tabla comparativa solo se ofrece cuando este principio tiene registros en muchos mercados; si no, esta lista es la información completa.",
+        # v0.11.6 task-1（T12 C2/C3/C4）：品牌页「配方差异」表（与 en 同键集）。
+        "fam.cmp_title": "Nombres de marca relacionados y diferencias de fórmula",
+        "fam.cmp_intro": ("Un nombre de marca puede estar registrado de otra forma y contener "
+                          "principios activos distintos en cada mercado. Esta tabla es una "
+                          "correspondencia de identidad: no es una traducción y no implica que "
+                          "los productos sean intercambiables."),
+        "fam.cmp_market": "Mercado",
+        "fam.cmp_name": "Nombre registrado",
+        "fam.cmp_ing": "Principios activos completos",
+        "fam.cmp_rel": "Relación",
+        "fam.cmp_this": "Esta página",
+        "fam.rel.same": "Mismos principios activos",
+        "fam.rel.diff": "Principios activos distintos: no intercambiables",
+        "fam.rel.partial": ("Comparte parte de los principios activos: no es la misma "
+                            "combinación, no intercambiables"),
+        "fam.rel.release": ("Mismos principios activos, liberación distinta: no intercambiables"),
+        "fam.rel.none": "Sin principios activos registrados",
+        # T10（plan §9）：与 en 同键集。
+        "matrix.multi_form": "Varias formas farmacéuticas",
+        "drug.mono_section": "Solo este principio activo",
+        "drug.combo_section": "Asociaciones que contienen este principio activo",
+        "matrix.spec_conflict": "concentración sin verificar",
+        "name.form_spec": "Concentración por forma",
     },
     "zh": {
         "u1.title": "三步看懂",
@@ -1862,6 +1932,26 @@ UI_I18N = {
         "drug.brand_group": "有商品名",
         "drug.mah_group": "仅厂家",
         "drug.compare_note": "并排对照表只在该成分跨市场记录较多时提供；否则这份清单就是全部。",
+        # v0.11.6 task-1（T12 C2/C3/C4）：品牌页「配方差异」表（与 en 同键集）。
+        "fam.cmp_title": "相关品牌名称与配方差异",
+        "fam.cmp_intro": ("同一个品牌名在各市场的注册名与活性成分可以不同。下表只做身份对应"
+                          "——不是翻译对照，也不代表这些产品可以互换。"),
+        "fam.cmp_market": "市场",
+        "fam.cmp_name": "注册名",
+        "fam.cmp_ing": "完整活性成分",
+        "fam.cmp_rel": "关系说明",
+        "fam.cmp_this": "本页",
+        "fam.rel.same": "活性成分相同",
+        "fam.rel.diff": "活性成分不同，不可互换",
+        "fam.rel.partial": "成分部分相同，不是同一复方，不可互换",
+        "fam.rel.release": "成分相同，释放机制不同，不可互换",
+        "fam.rel.none": "成分未收录",
+        # T10（plan §9）：与 en 同键集。
+        "matrix.multi_form": "多剂型",
+        "drug.mono_section": "仅含此成分",
+        "drug.combo_section": "含此成分的复方",
+        "matrix.spec_conflict": "规格待核实",
+        "name.form_spec": "规格（按剂型）",
     },
     "zh-Hant": {
         "u1.title": "三步看懂",
@@ -2010,6 +2100,26 @@ UI_I18N = {
             '第 1 版（SODL v1.0）</b>釋出，須署名並鏈回授權頁，不得暗示政府背書；資料截止 '
             '<b>2026-08-07</b>（每 6 個月更新）。<b>在冊名單不代表在售。</b>商品名保留英文原文、'
             '不翻譯；中文僅成分名（inn_zh）可顯示。</p>'),
+        # v0.11.6 task-1（T12 C2/C3/C4）：品牌頁「配方差異」表（與 en 同鍵集）。
+        "fam.cmp_title": "相關品牌名稱與配方差異",
+        "fam.cmp_intro": ("同一個品牌名在各市場的註冊名與活性成分可以不同。下表只做身分對應"
+                          "——不是翻譯對照，也不代表這些產品可以互換。"),
+        "fam.cmp_market": "市場",
+        "fam.cmp_name": "註冊名",
+        "fam.cmp_ing": "完整活性成分",
+        "fam.cmp_rel": "關係說明",
+        "fam.cmp_this": "本頁",
+        "fam.rel.same": "活性成分相同",
+        "fam.rel.diff": "活性成分不同，不可互換",
+        "fam.rel.partial": "成分部分相同，不是同一複方，不可互換",
+        "fam.rel.release": "成分相同，釋放機制不同，不可互換",
+        "fam.rel.none": "成分未收錄",
+        # T10（plan §9）：與 en 同鍵集。
+        "matrix.multi_form": "多劑型",
+        "drug.mono_section": "僅含此成分",
+        "drug.combo_section": "含此成分的複方",
+        "matrix.spec_conflict": "規格待核實",
+        "name.form_spec": "規格（按劑型）",
     },
 }
 
@@ -4186,6 +4296,9 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .m-zh{display:inline-block;margin:0 0 2px 0;font-size:14px;color:var(--muted)}
 /* v0.9.0 task-19/6：无商品名占位 / 矩阵 +N 展开 */
 .brand-none{color:var(--muted);font-weight:600}
+/* v0.11.6 task-1（T12 C1/C2）：品牌页成分卡与配方差异表里的成分中文名（只在中文/繁体界面显示）。
+   成分页的同名 span 在 .drug-name-src 里，靠 .sub 的样式；这里是 h2 / 表格单元格里，单独给一层。 */
+.card h2 .name-zh,.famcmp .name-zh,.m-combo .name-zh{font-size:15px;font-weight:400;color:var(--muted);margin-left:.4em}
 .m-none-ing{display:inline-block;font-size:14px;color:var(--muted);margin-left:4px}
 .m-more{display:inline-block;margin-left:4px;font-size:14px}
 /* v0.9.1 task-29/22：矩阵筛选器占位，避免 JS 插入时把表格整体推下去（CLS） */
@@ -4404,6 +4517,13 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
   .restools{margin-top:8px}
   table.res tbody tr:hover{background:#fff}
   .loadmore button{width:100%}
+  /* v0.11.6 task-1（T12 C2）：品牌页「配方差异」表在手机上排两列——市场 / 注册名 同一行，
+     完整活性成分与关系说明各占整行。四行逐格堆叠时整表 686 px，两列后 518 px（实测 390×844），
+     首屏可见条目 2.5 → 3 条；字号仍是 16 px，不碰正文下限。 */
+  table.res.famcmp tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:12px}
+  table.res.famcmp td{padding:4px 0}
+  table.res.famcmp td[data-i18n-label="fam.cmp_ing"],
+  table.res.famcmp td[data-i18n-label="fam.cmp_rel"]{grid-column:1 / -1}
 }
 /* i18n P1：静态页（About / What's new / Confused）移动端收尾 */
 @media (max-width:767px){
@@ -5000,7 +5120,8 @@ function brandHTML(e, withFormHint){
     // v0.9.0 task-19：没有 trade 名 → 商品名位置只显示「无商品名」纯文本，
     // 不链接、不放厂家；通用名/剂型作小字说明。
     const hint = [e.x || '',
-                  (withFormHint === false ? '' : (e.f ? labelOf('form', e.f, '') : ''))]
+                  // T10：e.f 可能是 "multi"（多剂型）→ 走 formLabelOf，显示「多剂型」而不是 `multi`
+                  (withFormHint === false ? '' : formLabelOf(e))]
       .filter(Boolean).join(' · ');
     const matched = e.d ? ` <span class="match-name" title="${esc(T('res.matched_name'))}">`
       + `${esc(T('res.matched_name'))}: ${esc(e.d)}</span>` : '';
@@ -5260,7 +5381,17 @@ function brandRowHTML(e, T){
     + ` rel="noopener" title="${esc(T('row.report'))}" aria-label="${esc(T('row.report'))}">⚑</a>`;
   return `<tr class="br" data-k="${esc(e.k)}">
     <td class="c-ing c-empty"></td>
-    <td class="c-dose" data-label="${esc(T('col.dose'))}">${esc(ds.join(' / ')) || '—'}</td>
+    <td class="c-dose" data-label="${esc(T('col.dose'))}">${(function(){
+      // T10：分组表（ATC/大类结果）同样按「剂型 + 规格」成对出，不再只拼规格
+      const g = specPairsOf(e, 3);
+      if(!g.hasFs) return esc(ds.join(' / ')) || '—';
+      const bits = g.pairs.map(x => {
+        const tx = esc(x.specs.join(' / '));
+        return x.form ? `<span class="form-tag">${esc(x.form)}</span> ${tx}` : tx;
+      });
+      return bits.join(' · ') + (g.restGroups
+        ? ` <span class="meta">+${g.restGroups} ${esc(T('matrix.multi_form'))}</span>` : '');
+    })()}</td>
     <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e)}${tags}${combo}${exp}${badge}${ctx}${det}${rep}</td>
     <td class="c-mah" data-label="${esc(T('col.mah'))}">${mah || '—'}</td></tr>`;
 }
@@ -5357,7 +5488,23 @@ function resultsTableHTML(T){
 // 只保留四列、默认 20 行；行按原命中顺序（不加排序/推荐）。ATC、大类结果仍走分组表。
 function formLabelOf(e){
   const f = (e && e.f) ? String(e.f) : '';
+  // T10（plan §3.4 ④）：多剂型时索引把 f 置为 "multi"，标签走 matrix.multi_form，
+  // 不再用第一个剂型代表整个名字（「500 mg / 960 mg · 片剂」的根因之一）。
+  if(f === 'multi') return window.T ? window.T('matrix.multi_form') : 'Multi-form';
   return f ? labelOf('form', f, f) : '';
+}
+// T10（plan §3.4 ④ / §7-A、B）：把 e.fs（紧凑串 `剂型|规格;规格`）渲染成
+// 「片剂 500 mg · 液体 960 mg/30 mL」。旧索引 / 单剂型条目没有 fs → 回退到 e.s + e.f。
+function specPairsOf(e, maxGroups){
+  const fs = (e && Array.isArray(e.fs)) ? e.fs.filter(s => typeof s === 'string' && s) : [];
+  const n = maxGroups || 3;
+  const parsed = fs.map(s => {
+    const i = s.indexOf('|');
+    const fm = i >= 0 ? s.slice(0, i) : '';
+    const specs = (i >= 0 ? s.slice(i + 1) : s).split(';').filter(Boolean);
+    return { form: fm ? labelOf('form', fm, fm) : '', specs: specs.slice(0, 2) };
+  });
+  return { pairs: parsed.slice(0, n), restGroups: Math.max(0, parsed.length - n), hasFs: parsed.length > 0 };
 }
 function marketTags(list, max){
   const cs = [];
@@ -5379,9 +5526,23 @@ function flatRowHTML(e, T){
   // 品牌列不再追加 .rowform —— 否则无商品名行会「Zopiclone · 片剂」+「片剂」出现两次。
   const form = formLabelOf(e);
   const rel = (e.rl && e.rl !== 'none') ? ' · ' + labelOf('release', e.rl, e.rl) : '';
-  const formTag = form ? `<span class="form-tag">${esc(form + rel)}</span>` : '';
-  const doseTxt = ds.length ? esc(ds.join(' / ')) : '';
-  const doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || '—');
+  // T10（plan §7-A）：有 fs 就出「剂型 + 规格」成对（片剂 500 mg · 液体 960 mg/30 mL），
+  // 多出来的剂型用「+N 多剂型」；没有 fs（旧索引）才回退到旧的「规格 / 剂型」写法。
+  const sp = specPairsOf(e, 3);
+  let doseCell;
+  if(sp.hasFs){
+    const bits = sp.pairs.map(g => {
+      const tx = esc(g.specs.join(' / '));
+      return g.form ? `<span class="form-tag">${esc(g.form)}</span> ${tx}` : tx;
+    });
+    const moreG = sp.restGroups
+      ? ` <span class="meta">+${sp.restGroups} ${esc(T('matrix.multi_form'))}</span>` : '';
+    doseCell = bits.join(' · ') + moreG + (rel ? rel : '');
+  } else {
+    const formTag = form ? `<span class="form-tag">${esc(form + rel)}</span>` : '';
+    const doseTxt = ds.length ? esc(ds.join(' / ')) : '';
+    doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || '—');
+  }
   let det;
   if(e.n){
     det = `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}"`
@@ -5502,10 +5663,26 @@ function identityCardHTML(q, display, nicks, confs, T){
   for(const item of display) recs += (item[2].n || 1);
   const form = formLabelOf(first);
   const fields = [];
-  if(strengths.length){
-    fields.push(`<span>${esc(T('col.dose'))} <b>${esc(strengths.join(' / '))}</b></span>`);
+  // T10（plan §7-B）：身份卡也按「剂型 + 规格」成对给出；多剂型时写明「多剂型：片剂 / 液体…」
+  const sp = specPairsOf(first, 3);
+  if(sp.hasFs){
+    const doseBits = sp.pairs.map(g => {
+      const tx = esc(g.specs.join(' / '));
+      return g.form ? `${esc(g.form)} ${tx}` : tx;
+    });
+    const moreG = sp.restGroups ? ` +${sp.restGroups}` : '';
+    fields.push(`<span>${esc(T('col.dose'))} <b>${doseBits.join(' · ')}${moreG}</b></span>`);
+    if(sp.pairs.length > 1){
+      fields.push(`<span><b>${esc(T('matrix.multi_form'))}</b>: ${esc(sp.pairs.map(g => g.form || '—').join(' / '))}</span>`);
+    } else if(sp.pairs[0] && sp.pairs[0].form){
+      fields.push(`<span><b>${esc(sp.pairs[0].form)}</b></span>`);
+    }
+  } else {
+    if(strengths.length){
+      fields.push(`<span>${esc(T('col.dose'))} <b>${esc(strengths.join(' / '))}</b></span>`);
+    }
+    if(form) fields.push(`<span><b>${esc(form)}</b></span>`);
   }
-  if(form) fields.push(`<span><b>${esc(form)}</b></span>`);
   if(markets.length){
     fields.push(`<span>${esc(T('res.identity.markets'))} ${marketTags(markets, 6)}</span>`);
   }
@@ -6501,16 +6678,21 @@ function render(){
   const famCompact = compactUI();
   for(const [label, f] of byFam){
     if(f.comps.size > 1){
+      // v0.11.6 task-1（T12 C3）：原来把 brand_family.note 原文贴出来（含「属严重碰撞」这种
+      // collision 视图内部术语，且只有中文）。现在按数据推导一句人话：同一个名字挂了多种
+      // 活性成分——同名不同药、不可互换；分级仍只在后台 collision 视图里。
       warnHTML += `<details class="notice famnotice"${famCompact ? '' : ' open'}>`
-        + `<summary><b>${T2('fam.warn')}：${label}。</b></summary>`
-        + `<div class="famnote">${f.note||''}</div></details>`;
+        + `<summary><b>${T2('fam.warn')}：${esc(label)}。</b></summary>`
+        + `<div class="famnote">${esc(T2('name.severe'))}</div></details>`;
     }
   }
   let extraHTML = '';
   for(const [label, f] of byFam){
     const members = IDX.filter(x=>x.g===label && !shownKeys.has(x.k));
     if(!members.length) continue;
-    extraHTML += `<h2>${T2('fam.title')}</h2>` +
+    // v0.11.6 task-1（T12 C2）：标题不再暗示「同一品牌在各国的写法」——这里是同族
+    // 但配方可能不同的名字，只做身份对应。
+    extraHTML += `<h2>${T2('fam.cmp_title')}</h2>` +
       members.map(e=>`<div class="card"><h3>${e.u ? `<a href="${BASE}name/${e.u}">${esc(e.d)}</a>` : `<b>${esc(e.d)}</b>`}</h3>
       <div class="meta">${esc(e.x)} · ${esc((e.s||[]).join(' / ')||'—')}</div></div>`).join('');
   }
@@ -7300,7 +7482,35 @@ def _page_meta(lang: str, meta_key: str | None) -> tuple[str, str]:
 
 TERMS_SUB_IDS: set[str] = set()
 SUB_NAME_LANG: dict[str, str] = {}   # v0.9.4 name_lang：base 名语言（仅展示，不改名）
+# v0.11.6 task-1（T12 C5）：成分自己的中文名（substance.inn_zh）只在这里装一次，
+# 成分页（H1 下方）/ 品牌页（成分卡、配方差异表）都读同一个映射，页面之间不许各写一套。
+SUB_ZH: dict[str, str] = {}
 BILINGUAL_TRANS: dict = {}
+
+
+def _sub_zh_name(sid: str) -> str:
+    """成分自己的中文名——品牌页与成分页共用的唯一入口（T12 C5）。
+
+    用法边界（对应 2026-11-13 用户评审 C1）：
+      · 只有 `substance.inn_zh` 里**真有 CJK** 才返回，绝不硬翻、不音译；
+      · 返回值贴在**成分**旁（成分页 H1 下方、品牌页成分卡、配方差异表）；
+      · 拿到非空值就说明「这个成分有中文名」，页面不得再给它贴「无中文名」徽标——
+        那个徽标属于**名称**（商品名/通用名的写法），不属于成分。
+
+    SUB_ZH 由 main() 用 load_substance_zh() 在入库后一次性填好。
+    """
+    zh = (SUB_ZH.get(sid) or "").strip()
+    return zh if any("\u4e00" <= ch <= "\u9fff" for ch in zh) else ""
+
+
+def load_substance_zh(db: sqlite3.Connection) -> dict[str, str]:
+    """从 `substance.inn_zh` 装载成分中文名映射（唯一数据源，T12 C5）。"""
+    SUB_ZH.clear()
+    for sid, zh in db.execute("SELECT substance_id, inn_zh FROM substance"):
+        zh = (zh or "").strip()
+        if zh:
+            SUB_ZH[sid] = zh
+    return SUB_ZH
 
 # v0.8.1：双语对照显示（独立脚本，避免改动 i18n.js 模板；所有页面 defer 加载）
 BILINGUAL_JS = r"""
@@ -8487,10 +8697,11 @@ def load_index(db: sqlite3.Connection):
            JOIN substance s ON s.substance_id = v.substance_id"""
     ):
         comp_keys.setdefault(pid, set()).add(_norm_name(inn))
-    for (key_id, pid, country, form_base, dosage_form, sv, su,
+    for (key_id, pid, country, form_base, dosage_form, sv, su, pv, pu,
          inn_en, inn_zh, atc, sid, mah, rel, ntype, n_ing, pnote, pcat, nl) in db.execute(
         """SELECT pn.key_id, p.product_id, COALESCE(p.country, p.region) AS mk, p.form_base, p.dosage_form,
-                  pc.strength_value, pc.strength_unit, s.inn_en, s.inn_zh, s.atc, s.substance_id,
+                  pc.strength_value, pc.strength_unit, pc.per_volume_value, pc.per_volume_unit,
+                  s.inn_en, s.inn_zh, s.atc, s.substance_id,
                   p.mah, p.release,
                   pn.name_type,
                   (SELECT COUNT(*) FROM product_component pc2
@@ -8520,7 +8731,7 @@ def load_index(db: sqlite3.Connection):
         a = agg.get(key_id)
         if a is None:
             a = agg[key_id] = {"pids": set(), "c": set(), "subs": [], "subs_zh": [], "s": [],
-                               "f": [], "v": sid, "mah": {}, "trade": False,
+                               "f": [], "fs": {}, "v": sid, "mah": {}, "trade": False,
                                "sids": set(), "rels": set(), "atc": set(), "export": False,
                                "nl": ""}
         if ntype == "trade":
@@ -8547,9 +8758,15 @@ def load_index(db: sqlite3.Connection):
             # v0.5.5：与 x 的分段一一对应的中文名；没有中文名留 ""（客户端逐段回退英文）
             a["subs_zh"].append(inn_zh or "")
         if sv is not None:
-            st = f"{_fmt_qty(sv)} {su or ''}".strip()
-            if st not in a["s"]:
-                a["s"].append(st)
+            # T10（plan §3.4 ④）：规格串收敛到 _spec_text（含 per_volume，如 960 mg/30 mL），
+            # 并按剂型分桶 —— 原来「强度跨剂型拼一条 + f 只留第一个」是「500 mg / 960 mg + 片剂」的根因。
+            st = _spec_text(sv, su, pv, pu)
+            if st:
+                if st not in a["s"]:
+                    a["s"].append(st)
+                fs = a["fs"].setdefault(form_base or dosage_form or "", [])
+                if st not in fs:
+                    fs.append(st)
         f = form_base or dosage_form
         if f and f not in a["f"]:
             a["f"].append(f)
@@ -8663,7 +8880,13 @@ def load_index(db: sqlite3.Connection):
             # v0.6.4 A2：ATC 码数组（最多 8 个；无 ATC 的条目为 None）
             "atc": sorted(a["atc"])[:8] or None,
             "s": a["s"][:6],
-            "f": a["f"][0] if a["f"] else "",
+            # T10（plan §3.4 ④）：剂型 × 规格成对给出（紧凑串，≤3 组、每组 ≤3 个）。
+            # 只有一个剂型的条目**不写** fs（客户端用 s + f 回退）—— 单剂型行行为不变，
+            # core.json 少约 2.4 MB（实测 48.7 → 46.3 MB dec）。
+            "fs": _fs_pack(a["fs"]),
+            # 多剂型时 f = "multi"（客户端改用 matrix.multi_form），单剂型仍给剂型名
+            "f": ("multi" if len([fm for fm in a["fs"] if fm]) > 1
+                  else (a["f"][0] if a["f"] else "")),
             "l": level,
             "n": n,
             # v0.9.0 task-19：1=该名字是 trade 名；0=只有通用名 → 商品名位置显示「无商品名」
@@ -8985,8 +9208,31 @@ def _fmt_qty(value) -> str:
     return out or "0"
 
 
+def _snap_strength(v: Decimal) -> Decimal:
+    """显示层归整（T10 / plan §4.1）：只把「换算残渣」贴回最近的整数，绝不抹平真实小数。
+
+    窄口三条同时满足才归整：`v ≥ 1` ∧ `|偏差| ≤ 0.01` ∧ `|偏差| ≤ 2e-5 × 整数`。
+      · 499.9996 → 500、500.0082 → 500（TGA 的 g↔mg 换算噪声，41 个 500.x 全在这里）
+      · 0.00025 / 0.008 不动（`v ≥ 1` 硬门槛；否则会被抹成 0）
+      · 469.01 / 790.02 / 100.008 不动（相对门槛挡掉，绝对门槛单独会放过 469.01）
+    **数据层不动**：原始值仍在 `product_component.strength_value` 与数据包里，
+    `_raw_strength()` 会把它显示成「原记录 499.9996 mg」（`_strength_origin_html`）。
+    """
+    if v is None or v < 1:
+        return v
+    r = v.to_integral_value(rounding=ROUND_HALF_UP)
+    dev = abs(v - r)
+    if dev <= Decimal("0.01") and dev <= Decimal("0.00002") * r:
+        return r
+    return v
+
+
 def _normalized_strength(value, unit) -> str:
-    """重量单位 → mg 显示串；>100,000 mg 的异常值保持原单位（task-16 未换算的不猜）。"""
+    """重量单位 → mg 显示串；>100,000 mg 的异常值保持原单位（task-16 未换算的不猜）。
+
+    T10：无论走哪条分支都过一次 `_snap_strength` —— 但只在真的归整时才换写法，
+    其余格式（`_fmt_qty` 的千分位）保持原样，避免「顺手改了 12 万页的数字写法」。
+    """
     if value is None:
         return ""
     unit = (unit or "").strip()
@@ -8997,7 +9243,16 @@ def _normalized_strength(value, unit) -> str:
         except InvalidOperation:
             return f"{_fmt_qty(value)} {unit}".strip()
         if num <= Decimal("100000"):
-            return f"{_fmt_decimal(num)} mg"
+            return f"{_fmt_decimal(_snap_strength(num))} mg"
+        return f"{_fmt_qty(value)} {unit}".strip()
+    # 非重量换算单位（本来就用 mg / IU / % …）：只做窄口归整，格式原样
+    try:
+        num = Decimal(str(value))
+    except InvalidOperation:
+        return f"{_fmt_qty(value)} {unit}".strip()
+    snapped = _snap_strength(num)
+    if snapped != num:
+        return f"{_fmt_qty(snapped)} {unit}".strip()
     return f"{_fmt_qty(value)} {unit}".strip()
 
 
@@ -9050,6 +9305,118 @@ def _strength_origin_html(raws: set[str], display: str) -> str:
     more = f' +{len(others) - 3}' if len(others) > 3 else ""
     return (f'<span class="m-orig"><span data-i18n="matrix.original">Recorded as</span>: '
             f'{esc("、".join(shown))}{esc(more)}</span>')
+
+
+# ── T10（2026-11-14）：全站唯一的规格串 ──────────────────────────────────────
+# 用户评审 §1.2 的核心：`960 mg/30 mL` 不能被缩成 `960 mg`，也不能把「每片含量」
+# 与「液体浓度」印成一个样子。全站 5 处各自手拼字符串（成分页 / 品牌页成分卡 /
+# 品牌页明细表 / 搜索索引 / 明细桶）→ 收敛成这一个函数；第 5 处（明细桶）在 `etl/`，
+# 不属本工位写权限，另记 T10b。
+def _spec_text(sv, su, pv=None, pu=None) -> str:
+    """强度 + 每单位基数 → 规格串（只做显示，不改数据、不做换算）。
+
+    - 无 per_volume：`_normalized_strength()`（重量归一到 mg，含 `_snap_strength` 归整）；
+    - 有 per_volume：`{强度}/{每基数} {单位}`，如 `960 mg/30 mL`、`0.4 mg/tablet`。
+    """
+    s = _normalized_strength(sv, su)
+    if s and pv is not None:
+        s += f"/{_fmt_qty(pv)} {(pu or '').strip()}".rstrip()
+    return s
+
+
+def _spec_kind(pu: str) -> str:
+    """per_volume 单位分类（只用于 `data-spec-kind` 属性与排序，不改文案）。
+
+    volume = 浓度（每 mL/L）；mass = 每份基质；count = 每片/每剂；time = 速率。
+    现查 94,799 行有 per_volume：mL 79,554 / mg 13,666 / h 312 / tablet 140 …
+    """
+    u = (pu or "").strip().lower()
+    if u in ("ml", "l", "cl", "dl"):
+        return "volume"
+    if u in ("mg", "g", "mcg", "ug", "μg", "µg", "kg"):
+        return "mass"
+    if u in ("h", "hours", "hr", "d", "day", "days"):
+        return "time"
+    return "count"
+
+
+# ── 名称-规格冲突（T10 / plan §6）：只做机制，v0.11.6 默认关闭 ────────────────
+# Lead 2026-11-14 决定：T15 清单 B（832 行）抽 40 条，约 9 成是基准/口径差
+# （盐型 PRASUGREL 10↔12.17、元素量 CALCIUM 500↔2940、提取物 vs 原料、净重 24 G↔74.7 mg），
+# 全量打标会成片误报，比不打更糟。所以：机制写好、开关默认关，构建时一条徽标都不渲染。
+# 打开前缺的东西：`variant.base_fraction` 全是 1.0、`salt_code` 只有 15% 有值
+# → 无法把「名称里的量」和「结构化含量」放到同一基准上比。
+SPEC_CONFLICT_CSV = ROOT / "data" / "sources" / "name_spec_conflict_20261114.csv"
+SPEC_CONFLICTS: dict[str, str] = {}
+
+
+def load_spec_conflicts(enabled: bool | None = None) -> dict[str, str]:
+    """装载「名称-规格冲突」清单（product_id → 名称里的规格原文）。
+
+    默认 **不启用**；只有 `SPEC_CONFLICT=1` 且清单文件在位才加载。
+    返回空 dict 时，页面一条徽标都不渲染（默认状态）。
+    """
+    global SPEC_CONFLICTS
+    SPEC_CONFLICTS = {}
+    on = (os.environ.get("SPEC_CONFLICT", "").strip() == "1") if enabled is None else enabled
+    if not on or not SPEC_CONFLICT_CSV.exists():
+        return SPEC_CONFLICTS
+    with SPEC_CONFLICT_CSV.open("r", encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            pid = (row.get("product_id") or "").strip()
+            tok = (row.get("name_strength_token") or "").strip()
+            if pid and tok:
+                SPEC_CONFLICTS.setdefault(pid, tok)
+    return SPEC_CONFLICTS
+
+
+def _fs_pack(fs: dict[str, list[str]], max_groups: int = 3, max_specs: int = 3) -> list[str] | None:
+    """剂型 → 规格分桶 → 索引里的紧凑串 `["tablet|500 mg;325 mg", ...]`（T10 / plan §3.4 ④）。
+
+    取舍（实测 core.json 48.7 → 46.3 MB dec）：
+      · 只有一个剂型（或没有）→ 返回 None：单剂型行用 `s` + `f` 就够，写进索引只涨体积；
+      · 组上限 3、每组规格上限 3 —— 溢出部分在结果行里用「+N 多剂型」提示，不塞爆索引；
+      · 扁平字符串比嵌套数组小约 0.6 MB，且字典化后重复值更多（体积 × 2 层红利）。
+    """
+    items = [(fm, specs) for fm, specs in fs.items() if fm and specs]
+    if len(items) < 2:
+        return None
+    items.sort(key=lambda kv: (_FORM_RANK_OUTER(kv[0]), kv[0]))
+    out = [f"{fm}|" + ";".join(specs[:max_specs]) for fm, specs in items[:max_groups]]
+    return out or None
+
+
+def _spec_conflict_badge(spec: tuple, conflicts: dict[tuple, str], T: dict) -> str:
+    """规格单元格里的「规格待核实」徽标（默认不触发；开关打开后才可能出现）。
+
+    只加标记、**不改数值、不改分组、不改排序**（plan §6.2-3）；`data-spec-conflict`
+    与 title 放名称里的规格原文，便于抽检复核，不判断哪一侧对。
+    """
+    tok = conflicts.get(spec)
+    if not tok:
+        return ""
+    return (' <span class="tag warn" data-i18n="matrix.spec_conflict" '
+            f'data-spec-conflict="{esc(tok)}" title="{esc(tok)}">'
+            f'{esc(T.get("matrix.spec_conflict", "strength unverified"))}</span>')
+
+
+def _combo_line_html(comp_list: list[tuple[str, str]],
+                     sub_label: dict[str, tuple[str, str]]) -> str:
+    """复方行的「全部活性成分 + 各自含量」（T10 / plan §5.2、用户评审 §1.3）。
+
+    只列事实：每个成分的名字 + **它自己**的含量（如「羟考酮 5 mg + 对乙酰氨基酚 325 mg」），
+    不做换算、不求和、不判断能否互换。中文名走 `_sub_zh_name()`（与品牌页/成分页同一映射），
+    默认 hidden，中文/繁体界面由 `applyInnZh()` 打开。
+    """
+    bits = []
+    for cs, sx in comp_list:
+        en, zh = sub_label.get(cs) or (cs, _sub_zh_name(cs))
+        label = esc(en)
+        if zh:
+            label += (f'<span class="name-zh" data-inn-zh hidden style="display:none"> '
+                      f'{esc(zh)}</span>')
+        bits.append(f"{label} {esc(sx)}".strip() if sx else label)
+    return " + ".join(bits)
 
 
 _FORM_WORD_ZH = {
@@ -9153,6 +9520,18 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             bucket.append(item)
 
     subs = db.execute("SELECT substance_id, inn_en, inn_zh, atc FROM substance").fetchall()
+    # T10（plan §2.1/§5.2）：一次预扫「每个产品的完整成分集合 + 各自含量」。
+    # 用途：① 分组键的 others_sig（除本页成分以外的成分签名）；② 复方行显示「全部成分 + 各自含量」。
+    # 650,358 行，构建期内只扫这一次，不逐行查库。
+    comps: dict[str, list[tuple[str, str]]] = {}
+    for _pid, _csid, _sv, _su, _pv, _pu in db.execute(
+            """SELECT pc.product_id, v.substance_id, pc.strength_value, pc.strength_unit,
+                      pc.per_volume_value, pc.per_volume_unit
+               FROM product_component pc
+               JOIN variant v ON v.variant_id = pc.variant_id
+               ORDER BY pc.product_id, v.substance_id"""):
+        comps.setdefault(_pid, []).append((_csid, _spec_text(_sv, _su, _pv, _pu)))
+    sub_label = {_sid: (_en or _sid, _sub_zh_name(_sid)) for _sid, _en, _zh, _atc in subs}
     # 易混淆药对：成分页顶部给一条警告，链到对方成分页和 /confused.html。
     conflicts: dict[str, list[dict]] = defaultdict(list)
     for r in db.execute(
@@ -9211,6 +9590,11 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         und_meta: dict[str, dict] = {}
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
         spec_raws: dict[tuple, set[str]] = {}
+        # T10：每个分组键对应的「完整成分 + 各自含量」与 per_volume 类别（渲染用，一次算完）
+        spec_comps: dict[tuple, list[tuple[str, str]]] = {}
+        spec_kind: dict[tuple, str] = {}
+        # T10/§6：名称-规格冲突（默认空字典 → 一条徽标都不渲染）
+        spec_conflict: dict[tuple, str] = {}
         # task-16：清单视图要「每国记录数」与「每格状态」，一次遍历顺手收集
         rec_by_country: dict[str, int] = {}
         _pids_seen: dict[str, set[str]] = {}
@@ -9223,12 +9607,22 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                     and country in ("HK", "AU", "EU")):
                 continue
             # v0.9.0 task-17：显示按归一后 mg 聚合；原记录从 task-16 审计 CSV 取。
-            st = _normalized_strength(sv, su)
+            # T10（plan §3.4 ①）：规格串改走 _spec_text（与 per_volume 的关系一起保留）。
+            st = _spec_text(sv, su, pv, pu)
             raw_st = _raw_strength(pid, ord_, sv, su)
             if pv:
-                st += f"/{_fmt_qty(pv)} {pu}"
                 raw_st += f"/{_fmt_qty(pv)} {pu}"
-            spec = (st.strip(), fb or df or "", rel)
+            # T10（plan §2.1）：分组键补上「除本页成分以外的成分签名」，
+            # 单方产品 others_sig 为空 → 与旧 key 等价（纯单方页零回归）。
+            _others = tuple(sorted((cs, sx) for cs, sx in (comps.get(pid) or [(sid, st)])
+                                   if cs != sid))
+            others_sig = "|".join(f"{cs}@{sx}" for cs, sx in _others)
+            spec = (st.strip(), fb or df or "", rel, others_sig)
+            spec_comps.setdefault(spec, list(comps.get(pid) or [(sid, st)]))
+            spec_kind.setdefault(spec, _spec_kind(pu))
+            # T10/§6：名称-规格冲突只在开关打开时才有内容（默认 SPEC_CONFLICTS 为空）
+            if SPEC_CONFLICTS.get(pid):
+                spec_conflict.setdefault(spec, SPEC_CONFLICTS[pid])
             if raw_st.strip():
                 spec_raws.setdefault(spec, set()).add(raw_st.strip())
             bucket = spec_countries.setdefault(spec, {}).setdefault(country, {})
@@ -9334,25 +9728,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # v0.8.0：不再静默截断到 8 列——全部市场列都显示（US/GB/CA/AU/SG/CN/ES/MX/TW），
         # 移动端由 .matwrap 横向滚动；界面语言只决定列顺序（i18n.js MORDER）。
         # v0.8.3 task-119：常用度排序（跨国家产品/品牌记录数），「未公开」最后，空行隐藏。
-        def _spec_num(st: str) -> float:
-            """取规格里的首个数字（用于「同频按数值」排序）。
-
-            v0.10.2 修：`1,000,000` 是千分位、不是小数点；`1.23e+06` 也要认。
-            旧实现把 `1,000,000` 读成 1.000000 → 大规格排到最后。
-            """
-            m2 = re.match(r"\s*([0-9][0-9.,]*(?:[eE][+-]?[0-9]+)?)", st or "")
-            if not m2:
-                return -1.0
-            tok = m2.group(1).rstrip(".,")
-            if re.fullmatch(r"[0-9]{1,3}(,[0-9]{3})+(\.[0-9]+)?([eE][+-]?[0-9]+)?", tok):
-                tok = tok.replace(",", "")
-            else:
-                tok = tok.replace(",", ".")
-            try:
-                return float(tok)
-            except ValueError:
-                return -1.0
-
+        # T10：`_spec_num` 提到模块级（品牌页排序也用它，两处同一口径，见文件末尾定义）。
         def _form_rank(form: str) -> int:
             f = (form or "").lower()
             if "effervescent" in f:      # v0.10.2：泡腾类排在最前（原会落到 return 9 排最后）
@@ -9385,10 +9761,14 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         spec_rows.sort(key=lambda kv: (
             kv[0][0].strip() == "",                  # 未公开规格排最后
             suspect_by_spec.get(kv[0], False),        # 规格待核排最后
+            kv[0][3] != "",                           # T10：单方在前、复方在后
+            len(kv[0][3].split("|")) if kv[0][3] else 0,   # 复方内：成分少的在前
             -freq_by_spec.get(kv[0], 0),              # 常用度降序
             _form_rank(kv[0][1]),                     # 剂型标准顺序
             -_spec_num(kv[0][0]),                     # 同频按数值（大→小）
-            kv[0][2],
+            # T10（plan §2.2）：末位补全序 —— key 现在是 4 元组，并列时不能退回 dict 迭代顺序
+            # （受 PYTHONHASHSEED 影响，两次构建会逐字节不同；名字页有同类先例）。
+            kv[0][1], kv[0][2], kv[0][3],
         ))
         shown = spec_rows[:MATRIX_ROW_CAP]
         head = (f'<th data-i18n="matrix.spec">{esc(T["matrix.spec"])}</th>'
@@ -9409,7 +9789,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             hidden_mk = [c for c in countries if c not in default_cols_set and by_c.get(c)]
             hide_empty[idx_row] = hidden_mk
         for idx_row, (spec, by_c) in enumerate(shown):
-            st, form, rel = spec
+            st, form, rel, others_sig = spec
             suspect = suspect_by_spec.get(spec, False)
             st_html = _label_unit_html(st) if st else (
                 '<span class="meta" data-i18n="drug.nostrength">not disclosed</span>')
@@ -9417,6 +9797,14 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             if suspect:
                 st_html += (' <span class="tag warn" data-i18n="matrix.spec_check">'
                             'check strength</span>')
+            st_html += _spec_conflict_badge(spec, spec_conflict, T)
+            if others_sig:
+                # T10（plan §5.2）：矩阵视图也要能看出这是复方，并列出其它成分与各自含量
+                st_html += (' <span class="tag" data-i18n="badge.combo">'
+                            + esc(T.get("badge.combo", "Association")) + '</span>'
+                            + f'<br><span class="m-combo">'
+                            + _combo_line_html(spec_comps.get(spec, []), sub_label)
+                            + '</span>')
             form_html = (_label_html("form", form, form) if form
                          else '<span class="meta">—</span>')
             rel_html = (f' · {_label_html("release", rel, rel)}'
@@ -9449,6 +9837,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                         if hid is not None else "")
             tbody.append(f'<tr data-form="{esc(form or "")}" data-release="{esc(rel or "")}" '
                          f'data-spec="{esc(st + " " + " ".join(sorted(spec_raws.get(spec, set()))))}" '
+                         f'data-others="{esc(others_sig)}" data-spec-kind="{esc(spec_kind.get(spec, ""))}" '
+                         f'data-combo="{1 if others_sig else 0}" '
                          f'data-suspect="{1 if suspect else 0}"{hid_attr} '
                          f'data-freq="{freq_by_spec.get(spec, 0)}">'
                          + "".join(cells) + "</tr>")
@@ -9519,7 +9909,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # 其余页面不内嵌 —— 否则 12k 页每页多背一整张矩阵，与「单页 ≤ 现页 60%」冲突。
         list_html, multi_ratio = _drug_list_html(
             spec_rows, countries, rec_by_country, len(spec_rows),
-            _brand_bit, status_cell, T, und_meta)
+            _brand_bit, status_cell, T, und_meta,
+            spec_comps=spec_comps, sub_label=sub_label, spec_kind=spec_kind,
+            spec_conflict=spec_conflict)
         table_block = ""
         compare_link = ""
         if tbody and multi_ratio >= 0.40:
@@ -9594,10 +9986,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # v0.11.4 task-63：成分名的中文名（inn_zh）只在中文/繁体界面显示，且只在数据里
         # 真有中文名（含 CJK）时才输出 —— 不硬翻；英文/西语界面保持原来的纯英文 H1。
         # 默认 hidden + inline display:none，由 i18n.js 的 applyInnZh() 按语言开关。
-        _inn_zh = (inn_zh or "").strip()
+        # v0.11.6 task-1（T12 C5）：改走 _sub_zh_name()，与品牌页同一份映射。
+        _inn_zh = _sub_zh_name(sid)
         name_zh = (f'<span class="name-zh" data-inn-zh hidden style="display:none">'
-                   f'{esc(_inn_zh)}</span>'
-                   if any("\u4e00" <= ch <= "\u9fff" for ch in _inn_zh) else "")
+                   f'{esc(_inn_zh)}</span>' if _inn_zh else "")
         body = f"""<h1>{h1_inner}</h1>
 <p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span>{name_zh}</p>
 {identity}
@@ -9636,10 +10028,11 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
     """一次性把名字页需要的全部数据取到内存，避免上万次逐条查询。"""
     data: dict[str, dict] = {}
     for (key_id, pid, inn_en, sid, country, form_base, dosage_form, rel,
-         sv, su, nl) in db.execute(
+         sv, su, pv, pu, nl) in db.execute(
         """SELECT pn.key_id, p.product_id, s.inn_en, s.substance_id, COALESCE(p.country, p.region) AS mk,
                   p.form_base,
-                  p.dosage_form, p.release, pc.strength_value, pc.strength_unit, s.name_lang
+                  p.dosage_form, p.release, pc.strength_value, pc.strength_unit,
+                  pc.per_volume_value, pc.per_volume_unit, s.name_lang
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
            LEFT JOIN product_component pc ON pc.product_id = p.product_id
@@ -9654,12 +10047,16 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
             continue
         s = d["subs"].setdefault(
             sid, {"inn": inn_en, "nl": nl or "", "country": set(), "s": set(),
-                  "f": set(), "rel": set()})
+                  "f": set(), "fs": {}, "rel": set()})
         s["country"].add(country)
-        st = f"{_fmt_qty(sv)} {su or ''}".strip() if sv is not None else ""
+        # T10（plan §3.4 ②）：成分卡按「剂型 → 规格」分桶，规格串用 _spec_text
+        # （含 per_volume，`960 mg/30 mL` 不再缩成 `960 mg`，也不再跨剂型拼成一条）。
+        st = _spec_text(sv, su, pv, pu) if sv is not None else ""
+        fm = form_base or dosage_form
         if st:
             s["s"].add(st)
-        s["f"].add(form_base or dosage_form)
+            s["fs"].setdefault(fm or "", set()).add(st)
+        s["f"].add(fm)
         s["rel"].add(rel)
     return data
 
@@ -9670,8 +10067,9 @@ def _name_product_table(rows: list, T: dict) -> str:
         return ""
     body = []
     for (country, dosage, form_base, rel, status, mah, src, approval,
-         sv, su, zh, en, pnote, pcat) in rows:
-        st = f"{_fmt_qty(sv)} {su}".strip() if sv is not None else "—"
+         sv, su, pv, pu, zh, en, pnote, pcat) in rows:
+        # T10（plan §3.4 ③）：明细行也用 _spec_text —— 浓度型规格保留「/30 mL」关系
+        st = _spec_text(sv, su, pv, pu) if sv is not None else "—"
         # v0.10.2 R1：剂型列走四语标签（原来直接打印来源英文原码 tablet/efervescente），
         # 并把来源原文并列出来（「泡腾剂·片 · 来源原文：片剂(泡腾)」→ 不再是「看起来像错的数据」）。
         form_html = _form_display(form_base or "", dosage or "")
@@ -9739,7 +10137,8 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
     for r in db.execute(
             """SELECT pn.key_id, COALESCE(p.country, p.region) AS mk, p.dosage_form, p.form_base, p.release,
                       p.status, p.mah, p.source_url, p.approval_id,
-                      pc.strength_value, pc.strength_unit, s.inn_zh, s.inn_en,
+                      pc.strength_value, pc.strength_unit,
+                      pc.per_volume_value, pc.per_volume_unit, s.inn_zh, s.inn_en,
                       p.note, p.category
                FROM product_name pn
                JOIN product p ON p.product_id = pn.product_id
@@ -9777,11 +10176,34 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
             # 并列顺序就退回 set 的迭代顺序（受 PYTHONHASHSEED 影响）→ 两次构建这 109 个
             # 名字页逐字节不同。补一个「原串码点」兜底键，让排序全序化。
             strengths = '、'.join(sorted(g['s'], key=lambda s: (_sort_strength(s), s)))
+            # T10（plan §3.4 ② / §7-C）：多剂型时规格按剂型成对列出——
+            # 「规格（按剂型）: 片剂 500 mg；液体 960 mg/30 mL」，不再把 500 mg 与 960 mg
+            # 拼成一条、由单一剂型代表（用户评审 §1.2 的原始抱怨）。
+            _fs = {fm: sorted(specs, key=lambda s: (_sort_strength(s), s))
+                   for fm, specs in (g.get("fs") or {}).items() if specs}
+            if len(_fs) > 1:
+                _parts = []
+                for fm, specs in sorted(_fs.items(), key=lambda kv: (_FORM_RANK_OUTER(kv[0]), kv[0])):
+                    _sp = _label_unit_html('、'.join(specs))
+                    _parts.append((_form_display(fm, "") + " " + _sp).strip() if fm else _sp)
+                strength_key, strength_value = "name.form_spec", "；".join(_parts)
+            else:
+                strength_key, strength_value = "name.strength", (
+                    _label_unit_html(strengths) if strengths else "")
+            strength_bit = (f" · <span data-i18n='{strength_key}'>"
+                            f"{esc(I18N['en'][strength_key])}</span>: {strength_value}"
+                            if strength_value else "")
+            # v0.11.6 task-1（T12 C1/C5）：成分卡显示成分**自己的**中文名（与成分页同一映射），
+            # 并给链接打 data-zh="1" ——「无中文名」徽标只属于名称，不许再贴到有中文名的成分旁。
+            _zh = _sub_zh_name(sid)
+            zh_html = (f'<span class="name-zh" data-inn-zh hidden style="display:none">'
+                       f'{esc(_zh)}</span>' if _zh else "")
+            zh_attr = ' data-zh="1"' if _zh else ""
             cards.append(
-                f"""<div class="card"><h2><a href="../drug/{sid}.html">{esc(g['inn'])}</a></h2>
+                f"""<div class="card"><h2><a href="../drug/{sid}.html"{zh_attr}>{esc(g['inn'])}</a>{zh_html}</h2>
 <div class="meta"><span data-i18n="name.countries">Countries</span>:
 {esc('、'.join(sorted(g['country'])))} ·
-<span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))}{f" · <span data-i18n='name.strength'>Strength</span>: {_label_unit_html(strengths)}" if strengths else ''}
+<span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))}{strength_bit}
 {f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div></div>"""
             )
         single = e.get("n") == 1 and e.get("t") == 1
@@ -9813,58 +10235,156 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
             cn_granularity = ('<p class="sub" data-i18n="name.form_granularity_cn">'
                               'Source records dose form only at class level (e.g. "tablet"); '
                               'effervescent/coated sub-forms are not distinguished.</p>')
+        # v0.11.6 task-1（T12 C4）：写法列表先按「原文==译文（大小写 / 空格 / 全半角）+
+        # 同一来源」去重，页面标题本身也在去重集合里 —— 不再出现「Tylenol Extra Strength、
+        # TYLENOL EXTRA STRENGTH」这种只是大小写不同的两条。
+        alts = _dedupe_variants(e["d"], variants.get(e["k"], []))
+        also_bit = ('<span data-i18n="name.also">Also written as</span>: '
+                    + esc('、'.join(alts)) + ' · ') if alts else ""
         body = f"""<h1>{esc(e['d'])}</h1>
 <p class="sub">{('<span class="st-badge st-unknown brand-none" data-i18n="brand.none">'
-                 + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}<span data-i18n="name.also">Also written as</span>:
-{esc('、'.join(variants.get(e['k'], [])[:6]))} ·
-<span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
-{banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys)}{single_table}"""
-        _alts = [v for v in variants.get(e["k"], [])[:6] if v and v != e["d"]]
-        if not _alts:
-            body = re.sub(r'<span data-i18n="name.also">Also written as</span>:\s*[^<]*?·\s*', '', body, count=1)
+                 + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}{also_bit}<span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
+{banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys, data)}{single_table}"""
         if single:
             for lang in ("en", "es", "zh", "zh-Hant"):
                 note = I18N[lang].get("name.single_note") or I18N["en"]["name.single_note"]
                 body += (f'<div class="lang-block" data-lang-block="{lang}">'
                          f'<p class="sub name-single-note">{esc(note)}</p></div>')
             NOINDEX_RELS.add(f'name/{e["u"]}')
-        (OUT / "name" / e["u"]).write_text(
-            # v0.9.6 task-149：name 页是长尾页（77,058 个，占全站 50.7% 体积），
-            # 走 slim 壳：单页省 782 B，全站省 57.5 MiB；正文与 SEO 骨架不变。
-            _assert_no_internal_tokens(
-                page(e["d"], body, "../", noindex=single, slim=True,
-                     canonical_rel=f'name/{e["u"]}'),
-                f"name/{e['u']}"),
-            encoding="utf-8")
+        # v0.9.6 task-149：name 页是长尾页（77,058 个，占全站 50.7% 体积），
+        # 走 slim 壳：单页省 782 B，全站省 57.5 MiB；正文与 SEO 骨架不变。
+        _name_html = _assert_no_internal_tokens(
+            page(e["d"], body, "../", noindex=single, slim=True,
+                 canonical_rel=f'name/{e["u"]}'),
+            f"name/{e['u']}")
+        # T12 C3：品牌页不出现「碰撞」这类 collision 视图内部术语（分级只在后台推导）。
+        if "碰撞" in _name_html:
+            raise SystemExit(f"name/{e['u']} 渲染产物出现内部术语「碰撞」，构建中止"
+                             "（T12 C3：collision 视图只在后台推导，页面只说同名不同药 / 不可互换）")
+        (OUT / "name" / e["u"]).write_text(_name_html, encoding="utf-8")
         made += 1
     return made
 
 
-def _family_block(e, families, displays, variants, page_keys=None) -> str:
-    """同一品牌在其他市场的写法——这是跨语言碰撞唯一能落地的地方。
+def _dedupe_variants(display: str, variants: list[str], cap: int = 6) -> list[str]:
+    """名称写法去重（T12 C4）：原文==译文、同一写法的不同来源都只留一条。
 
-    page_keys：有 name 页的 key 集合；v0.5.3 起没有品牌页的成员渲染成不可点文本，
-    保证站内不出现指向不存在页面的链接（无 404）。
+    判重口径：NFKC 归一（全角→半角）+ 空白折叠 + casefold（大小写不敏感）。
+    `Tylenol Extra Strength` / `TYLENOL EXTRA STRENGTH` 是同一个写法，算一条；
+    页面标题 `display` 也进判重集合，所以「标题已经写着它」的那条不再重复列出来。
+    """
+    def _norm(v: str) -> str:
+        return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", v or "")).strip().casefold()
+
+    seen = {_norm(display)}
+    out: list[str] = []
+    for raw in variants:
+        text = (raw or "").strip()
+        key = _norm(text)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.append(text)
+        if len(out) >= cap:
+            break
+    return out
+
+
+def _key_subs(data: dict, key: str) -> dict:
+    """一个商品名 key 下的成分聚合（品牌对照表的关系判定只看这里，不另查库）。"""
+    return ((data or {}).get(key) or {}).get("subs") or {}
+
+
+def _key_releases(subs: dict) -> set[str]:
+    """该名字下出现过的释放机制集合（去掉 none）。"""
+    return {x for g in subs.values() for x in (g.get("rel") or ()) if x and x != "none"}
+
+
+def _family_relation(cur_subs: dict, sib_subs: dict) -> str:
+    """品牌对照表「关系说明」列：只由成分集合与释放机制推导，不手工标注（§1.2）。
+
+    四种结论各对应一个 i18n key；页面上只说人话（同一成分 / 成分不同 / 部分相同 /
+    释放不同），不出现 collision 视图那套「碰撞」分级术语（T12 C3）。
+    """
+    a, b = set(cur_subs), set(sib_subs)
+    if not a or not b:
+        return "fam.rel.none"
+    if a == b:
+        return "fam.rel.release" if _key_releases(cur_subs) != _key_releases(sib_subs) else "fam.rel.same"
+    return "fam.rel.partial" if a & b else "fam.rel.diff"
+
+
+def _family_ing_html(subs: dict) -> str:
+    """「完整活性成分」列：英文 INN + 成分自己的中文名（同一份 _sub_zh_name 映射）。"""
+    if not subs:
+        return "—"
+    bits = []
+    for sid in sorted(subs, key=lambda s: (subs[s].get("inn") or s).casefold()):
+        en = subs[sid].get("inn") or sid
+        cell = esc(en)
+        cell = (f'<a href="../drug/{sid}.html">{cell}</a>'
+                if sid in DRUG_PAGE_IDS else f"<b>{cell}</b>")
+        zh = _sub_zh_name(sid)
+        if zh:
+            cell += (f'<span class="name-zh" data-inn-zh hidden style="display:none"> '
+                     f'{esc(zh)}</span>')
+        bits.append(cell)
+    return "、".join(bits)
+
+
+def _family_name_html(key: str, display: str, page_keys: set[str] | None) -> str:
+    """「注册名」列：有品牌页的做成链接，没有的不可点（站内不出 404）。"""
+    label = esc(display or key)
+    if page_keys is None or key in page_keys:
+        return f'<a href="{key_file(key)}">{label}</a>'
+    return f"<b>{label}</b>"
+
+
+def _family_block(e, families, displays, variants, page_keys=None, data=None) -> str:
+    """相关品牌名称与配方差异（T12 C2）。
+
+    背景（2026-11-13 用户评审 §1.6）：原来标题写「同一品牌在其他市场的写法」、
+    正文却是「同名不同药」，读起来像「同一品牌在各国的翻译」，实际是不同配方。
+    现在改成**配方差异表**：市场 / 注册名 / 完整活性成分 / 关系说明——
+      · 关系说明由成分集合与释放机制自动推导（_family_relation），不手工标注；
+      · 品牌关系只做身份对应，不写成翻译关系，也不承诺可互换；
+      · 不带 `<span class="tag">key</span>`：名字已经写在「注册名」列，重复一次就是噪音
+        （T12 C4：泰诺 / 泰诺林 各重复显示一次）。
+
+    page_keys：有 name 页的 key 集合；没有品牌页的成员渲染成不可点文本。
+    data：collect_name_data() 的结果（成分集合 / 覆盖市场都从这里取）。
     """
     fam = families.get(e["k"])
     if not fam:
         return ""
-    fam_id, label, note = fam["id"], fam["label"], fam["note"]
-    siblings = [k for k in fam["members"] if k != e["k"]]
-    if not siblings:
+    members = [e["k"]] + [k for k in fam["members"] if k != e["k"]]
+    if len(members) < 2:
         return ""
-    items = []
-    for k in siblings:
-        siblings_names = "、".join(variants.get(k, [])[:2])
-        label_html = esc(displays.get(k, siblings_names))
-        if page_keys is None or k in page_keys:
-            items.append(f'<li><a href="{key_file(k)}">{label_html}</a>'
-                         f'<span class="tag">{esc(k)}</span></li>')
-        else:
-            items.append(f'<li><b>{label_html}</b><span class="tag">{esc(k)}</span></li>')
-    return (f'<h2 data-i18n="fam.title">The same brand in other markets</h2>'
-            f'<div class="notice">{esc(note or "")}</div>'
-            f'<ul class="sub">{"".join(items)}</ul>')
+    T = I18N["en"]
+    cur_subs = _key_subs(data, e["k"])
+    rows = []
+    for k in members:
+        subs = _key_subs(data, k)
+        name_cell = _family_name_html(k, displays.get(k) or "、".join(variants.get(k, [])[:2]), page_keys)
+        if k == e["k"]:
+            name_cell += f' <span class="tag" data-i18n="fam.cmp_this">{esc(T["fam.cmp_this"])}</span>'
+        markets = "、".join(sorted(((data or {}).get(k) or {}).get("countries") or [])) or "—"
+        rel_key = _family_relation(cur_subs, subs)
+        rows.append(
+            f'<tr><td data-label="{esc(T["fam.cmp_market"])}" data-i18n-label="fam.cmp_market">'
+            f'{esc(markets)}</td>'
+            f'<td data-label="{esc(T["fam.cmp_name"])}" data-i18n-label="fam.cmp_name">{name_cell}</td>'
+            f'<td data-label="{esc(T["fam.cmp_ing"])}" data-i18n-label="fam.cmp_ing">{_family_ing_html(subs)}</td>'
+            f'<td data-label="{esc(T["fam.cmp_rel"])}" data-i18n-label="fam.cmp_rel">'
+            f'<span data-i18n="{rel_key}">{esc(T[rel_key])}</span></td></tr>')
+    return (f'<h2 data-i18n="fam.cmp_title">{esc(T["fam.cmp_title"])}</h2>'
+            f'<p class="sub" data-i18n="fam.cmp_intro">{esc(T["fam.cmp_intro"])}</p>'
+            f'<div class="tablewrap"><table class="res famcmp"><thead><tr>'
+            f'<th data-i18n="fam.cmp_market">{esc(T["fam.cmp_market"])}</th>'
+            f'<th data-i18n="fam.cmp_name">{esc(T["fam.cmp_name"])}</th>'
+            f'<th data-i18n="fam.cmp_ing">{esc(T["fam.cmp_ing"])}</th>'
+            f'<th data-i18n="fam.cmp_rel">{esc(T["fam.cmp_rel"])}</th>'
+            f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
 COMBO_ROW_CAP = 200
@@ -9939,6 +10459,9 @@ def _form_chip_key(form: str) -> str:
 
 
 LIST_ROWS_PER_BLOCK = 12      # 每国家块默认渲染的规格行数（其余一行文本）
+# T10（plan §5.4）：复方行比单方行贵得多（每行要列「全部成分 + 各自含量」，实测 1.26 KB/行），
+# 每国 × 复方段先给 6 行，其余进折叠 —— 12 行时 acetaminophen 页 299.6 KB，6 行实测 240 KB 以内。
+COMBO_ROWS_PER_BLOCK = 5
 
 # v0.11.0 P1：EU 是「区域层」而不是国家 —— 列头 / 块头都要能读出「欧盟集中审批（EMA）」，
 # 不能只留两个字母。文案本体在 i18n 字典（eu.region_title / eu.region_note，四语齐），
@@ -9966,7 +10489,10 @@ def _eu_region_note(cls: str = "mkregion") -> str:
 
 def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[str, int],
                     n_specs: int, name_bit, status_cell: dict[tuple, set[str]],
-                    T: dict, und_meta: dict | None = None) -> tuple[str, float]:
+                    T: dict, und_meta: dict | None = None,
+                    spec_comps: dict | None = None, sub_label: dict | None = None,
+                    spec_kind: dict | None = None,
+                    spec_conflict: dict | None = None) -> tuple[str, float]:
     """成分页主视图：按国家分组的产品清单（v0.10.3 task-16）。
 
     设计依据 `reports/matrix-form-decision-20261110.md`：≥2 国同规格行只占 9.27%，
@@ -9984,6 +10510,10 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                    key=lambda c: (-rec_by_country.get(c, 0),
                                   COUNTRY_PRIORITY.index(c) if c in COUNTRY_PRIORITY
                                   else len(COUNTRY_PRIORITY), c))
+    spec_comps = spec_comps or {}
+    sub_label = sub_label or {}
+    spec_kind = spec_kind or {}
+    spec_conflict = spec_conflict or {}
     # spec → 有记录的市场列表（一次算完，避免逐行重扫 spec_rows）
     markets_of: dict[tuple, list[str]] = {}
     forms: dict[str, int] = {}
@@ -10019,20 +10549,42 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
 
     blocks: list[str] = []
     n_uid = 0          # 每行 +N 的展开 checkbox 要唯一 id（确定性计数器，别用 hash）
-    for c in order:
-        rows_c = [(spec, by_c[c]) for spec, by_c in spec_rows if by_c.get(c)]
-        if not rows_c:
-            continue
-        disclosed = [(s, b) for s, b in rows_c if (s[0] or "").strip()]
-        undisclosed = [(s, b) for s, b in rows_c if not (s[0] or "").strip()]
+    # T10（plan §5）：本页只要有复方行，就按「仅含此成分 / 含此成分的复方」两段渲染；
+    # 纯单方页（6,311 个）不加任何段标题，避免凭空多出标题、也保证零回归。
+    has_combo = any((s[3] or "") for s, _b in spec_rows)
+
+    def _seg_rows(rows_c: list, is_combo: bool | None) -> list:
+        if is_combo is None:
+            return rows_c
+        return [(s, b) for s, b in rows_c if bool(s[3] or "") == is_combo]
+
+    def _render_segment(seg_rows: list, c: str, is_combo: bool) -> str:
+        """一段（单方或复方）的清单 + 折叠摘要；口径与 v0.10.3 原实现一致。"""
+        nonlocal n_uid
+        disclosed = [(s, b) for s, b in seg_rows if (s[0] or "").strip()]
+        if not disclosed:
+            return ""
+        # v0.10.3：每段只渲染前 N 个规格（余下用一行紧凑文本），否则大成分页会从 300 KB
+        # 涨到 900 KB（acetaminophen 实测）。复方段更贵 → 用更小的 COMBO_ROWS_PER_BLOCK。
+        _cap = COMBO_ROWS_PER_BLOCK if is_combo else LIST_ROWS_PER_BLOCK
+        head_rows = disclosed[:_cap]
+        tail_rows = disclosed[_cap:]
+        # T10（plan §5.4）：折叠会吃掉浓度型规格（v0.11.5 的 acetaminophen 页
+        # `960 mg/30 mL` 出现 0 次）→ 本段有 volume 类规格却没进可见区时，用它替换
+        # 可见区最后一个非 volume 行（不增加行数，不动 12 行护栏）。
+        if (any(spec_kind.get(s, "") == "volume" for s, _b in disclosed)
+                and not any(spec_kind.get(s, "") == "volume" for s, _b in head_rows)):
+            cand = next((r for r in tail_rows if spec_kind.get(r[0], "") == "volume"), None)
+            swap = next((i for i in range(len(head_rows) - 1, -1, -1)
+                         if spec_kind.get(head_rows[i][0], "") != "volume"), None)
+            if cand is not None and swap is not None:
+                tail_rows.insert(0, head_rows[swap])
+                head_rows[swap] = cand
+                tail_rows = [r for r in tail_rows if r is not cand]
         lis: list[str] = []
-        # v0.10.3：每块只渲染前 LIST_ROWS_PER_BLOCK 个规格（余下用一行紧凑文本），
-        # 否则大成分页会从 300 KB 涨到 900 KB（acetaminophen 实测）。
-        head_rows = disclosed[:LIST_ROWS_PER_BLOCK]
-        tail_rows = disclosed[LIST_ROWS_PER_BLOCK:]
         for spec, bucket in head_rows:
             n_uid += 1
-            st, form, rel = spec
+            st, form, rel, others_sig = spec
             also = ""
             others = [o for o in markets_of.get(spec, []) if o != c]
             if others:
@@ -10057,16 +10609,27 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                         f'<label class="m-more" for="{uid}">+{len(names) - 1}</label>'
                         f'<span class="m-rest">{rest}</span>')
             st_html = _label_unit_html(st)
+            st_html += _spec_conflict_badge(spec, spec_conflict, T)
             form_html = _form_display(form, "") if form else ""
             rel_html = (f' · {_label_html("release", rel, rel)}'
                         if rel not in ("", "none") else "")
+            # T10（plan §5.2）：复方行给出「全部活性成分 + 各自含量」，只列事实
+            combo_html = ""
+            if others_sig:
+                combo_html = (' <span class="tag" data-i18n="badge.combo">'
+                              + esc(T.get("badge.combo", "Association")) + '</span>'
+                              + '<span class="mkcombo">'
+                              + _combo_line_html(spec_comps.get(spec, []), sub_label)
+                              + '</span>')
             st_badge = ""
             if any(x in ("unknown", "", None) for x in status_cell.get((spec, c), set())):
                 st_badge = (' <span class="st-badge st-unknown" '
                             'data-i18n="drug.status.unknown">unknown</span>')
             lis.append(f'<li class="mkrow" data-form="{esc(_form_chip_key(form))}" data-spec="{esc(st)}" '
-                       f'data-mk="{esc(c)}"><span class="mkst">{st_html}</span>'
-                       f'<span class="mkf">{form_html}{rel_html}</span>'
+                       f'data-mk="{esc(c)}" data-spec-kind="{esc(spec_kind.get(spec, ""))}"'
+                       f' data-combo="{1 if others_sig else 0}">'
+                       f'<span class="mkst">{st_html}</span>'
+                       f'<span class="mkf">{form_html}{rel_html}{combo_html}</span>'
                        f'<span class="mkname-cell"><span class="mknames">'
                        f'{" ".join(bits)}</span>{more}</span>'
                        f'<span class="mkrowmeta">{also}{st_badge}</span></li>')
@@ -10091,6 +10654,11 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 head = (_form_display(form, "") if form
                         else esc(T.get("matrix.none", "—")))
                 shown = specs[:10]
+                # T10（plan §5.4）：每个剂型至少露出一个浓度型规格（否则又被折叠吃掉）
+                if (any(spec_kind.get(s, "") == "volume" for s in specs)
+                        and not any(spec_kind.get(s, "") == "volume" for s in shown)):
+                    cand = next(s for s in specs if spec_kind.get(s, "") == "volume")
+                    shown = shown[:9] + [cand]
                 chips = "".join(_spec_chip(s0) for s0 in shown)
                 more = ""
                 if len(specs) > 10:
@@ -10100,12 +10668,39 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 ghtml.append(
                     f'<div class="ms-grp"><span class="ms-h">{head} · {len(specs)}</span>'
                     f'<span class="ms-list">{chips}{more}</span></div>')
+            # T10（plan §5.4）：折叠内容默认隐藏（innerText 看不到），所以浓度型规格要**写在摘要里**：
+            # 该段所有带 per_volume 的规格都列出来（多为 3–6 个），用户一眼看到「960 mg/30 mL」这类
+            # 浓度规格确实存在，展开后每个剂型还各自带一个（见上面的 ms-grp 保底）。
+            _vol_specs = [s[0] for s, _b in tail_rows if spec_kind.get(s, "") == "volume"]
+            _vol_bit = ('<span class="ms-vol"> · ' + "、".join(esc(v) for v in _vol_specs)
+                        + '</span>') if _vol_specs else ""
             rest_html = (
                 f'<details class="more-specs"><summary><span class="ln">'
                 f'{_lang_block_text("drug.more_specs_n", n=len(tail_rows), m=len(groups))}'
-                f'</span></summary><div class="ms-body">' + "".join(ghtml)
+                + _vol_bit
+                + '</span></summary><div class="ms-body">' + "".join(ghtml)
                 + f'<p class="sub full-list"><a href="datapackage.json">'
                 + _lang_block_text("drug.full_list") + '</a></p></div></details>')
+        seg_head = ""
+        if has_combo:
+            key = "drug.combo_section" if is_combo else "drug.mono_section"
+            label = T.get(key) or ("Combination products" if is_combo else "Only this ingredient")
+            seg_head = (f'<h3 class="mkseg-h" data-i18n="{key}">{esc(label)}</h3>')
+        return (f'<div class="mkseg" data-seg="{"combo" if is_combo else "mono"}">'
+                f'{seg_head}<ul class="mkspecs">{"".join(lis)}</ul>{rest_html}</div>')
+
+    for c in order:
+        rows_c = [(spec, by_c[c]) for spec, by_c in spec_rows if by_c.get(c)]
+        if not rows_c:
+            continue
+        undisclosed = [(s, b) for s, b in rows_c if not (s[0] or "").strip()]
+        seg_html = ""
+        if has_combo:
+            seg_html += _render_segment(_seg_rows(rows_c, False), c, False)
+            seg_html += _render_segment(_seg_rows(rows_c, True), c, True)
+        else:
+            seg_html += _render_segment(_seg_rows(rows_c, None), c, False)
+        n_head = len([1 for s, _b in rows_c if (s[0] or "").strip()])
         undis_html = ""
         if undisclosed:
             # v0.11.4 task-62：未公开规格不再用「、」拼段落 —— 折叠摘要
@@ -10160,16 +10755,16 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 f'{_lang_block_text("drug.undisclosed_n", n=n_rec, k=k_mah)}'
                 f'</span></summary><div class="und-body">' + "".join(body) + '</div></details>')
         # v0.11.0 P1：EU 块头给一句口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装），
-        # 否则用户只看到「EU」两个字（reports/v0110-verify-20261111.md §3.3）。
+        # 否则用户只看到「EU」两个字（reports/v0110-verify-20261111 §3.3）。
         region_html = _eu_region_note("mkregion") if c == "EU" else ""
         blocks.append(
             f'<section class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}">'
             f'<h2>{esc(c)} <span class="sub">{rec_by_country.get(c, 0):,} '
             f'<span data-i18n="drug.records">records</span> · '
-            f'<b class="mkspec-n" data-total="{len(head_rows)}">{len(rows_c)}</b> '
+            f'<b class="mkspec-n" data-total="{n_head}">{len(rows_c)}</b> '
             f'<span data-i18n="drug.specs">strengths</span></span></h2>'
             f'{region_html}'
-            f'<ul class="mkspecs">{"".join(lis)}</ul>{rest_html}{undis_html}</section>')
+            f'{seg_html}{undis_html}</section>')
     return chip_html + '<div class="mkblocks">' + "".join(blocks) + "</div>", multi_ratio
 
 
@@ -10627,9 +11222,29 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
     return made
 
 
+def _spec_num(st: str) -> float:
+    """取规格里的首个数字（成分页分组排序 + 品牌页写法排序共用，T10 起提到模块级）。
+
+    v0.10.2 修：`1,000,000` 是千分位、不是小数点；`1.23e+06` 也要认。
+    旧实现把 `1,000,000` 读成 1.000000 → 大规格排到最后。
+    """
+    m2 = re.match(r"\s*([0-9][0-9.,]*(?:[eE][+-]?[0-9]+)?)", st or "")
+    if not m2:
+        return -1.0
+    tok = m2.group(1).rstrip(".,")
+    if re.fullmatch(r"[0-9]{1,3}(,[0-9]{3})+(\.[0-9]+)?([eE][+-]?[0-9]+)?", tok):
+        tok = tok.replace(",", "")
+    else:
+        tok = tok.replace(",", ".")
+    try:
+        return float(tok)
+    except ValueError:
+        return -1.0
+
+
 def _sort_strength(text: str) -> float:
-    m = re.match(r"([\d.]+)", text)
-    return float(m.group(1)) if m else 0.0
+    """旧接口保留（调用点多），统一走 `_spec_num`：`1,000 mg` / `1.23e+06` 都认。"""
+    return _spec_num(text)
 
 
 # v0.6.5：首页示例按钮按页面语言渲染（en/es/zh/zh-Hant；zh-Hant 用繁體示例）
@@ -12998,13 +13613,15 @@ def build_seo_files() -> None:
 #   index.json 完全同构（除 f 外 19 字段已验证 0 差异；f 只有 ~9 种字典值，core +0.2–0.3 MB）。
 CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m", "f",
                   "db", "sl", "rl", "wi")
-CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz", "atc")     # 值是数组：先 JSON 化再进字典
+CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz", "atc", "fs")     # 值是数组：先 JSON 化再进字典
 # v0.11.2 P0-1：core 必须逐行携带的列。t / nc / eo 是 v0.9.0–v0.9.1 才加进 load_index()
 # 条目的字段，这里的手写清单曾漏掉它们 → core 解码后 e.t === undefined，客户端 166,846 /
 # 196,200 行（85.0%）的品牌名被换成「无商品名 + 命中名」。新增条目字段时必须同步这份清单
 # （encode_core() 里的构建期守卫会在漏列时直接中止构建）。
 CORE_FIELDS = ("c", "x", "xz", "atc", "s", "l", "f", "n", "t", "v", "vs", "nc", "eo",
-               "u", "cu", "mu", "ml", "g", "gn", "m", "mn", "db", "sl", "rl", "wi")
+               "u", "cu", "mu", "ml", "g", "gn", "m", "mn", "db", "sl", "rl", "wi",
+               # T10（plan §3.4 ④）：剂型 × 规格对；新增条目字段必须同步这份清单
+               "fs")
 
 
 def _d_case_pattern(d: str, k: str) -> str | None:
@@ -13403,6 +14020,10 @@ def main() -> None:
       return '';
     }
     document.querySelectorAll('.nm, .card h2 a, [data-i18n-label="maker.ingredient"]').forEach(function(el){
+      // v0.11.6 task-1（T12 C1）：「无中文名」徽标只属于**名称**。服务端在「成分自己有
+      // inn_zh」的元素上打了 data-zh="1"（品牌页成分卡 / 配方差异表，与成分页同一映射），
+      // 这里一律不再贴徽标 —— 用户评审看到的就是「Acetaminophen 旁边写着无中文名」。
+      if(el.getAttribute('data-zh') === '1') return;
       var text = badgeFor(el.textContent || '');
       if(!text) return;
       var s = document.createElement('span');
@@ -13737,6 +14358,12 @@ def main() -> None:
     SUB_NAME_LANG.clear()
     for _sid, _nl in db.execute("SELECT substance_id, name_lang FROM substance"):
         SUB_NAME_LANG[_sid] = _nl or ""
+    # v0.11.6 task-1（T12 C5）：成分中文名映射在建成分页之前装好，品牌页后面复用同一份。
+    print(f"ingredient zh: {len(load_substance_zh(db)):,} substances with inn_zh", flush=True)
+    # T10/§6：名称-规格冲突清单（T15 产出）。默认关闭 → 页面不出现任何「规格待核实」徽标。
+    _sc = load_spec_conflicts()
+    print(f"spec conflict: {'ON · ' + format(len(_sc), ',') + ' products' if _sc else 'off (mechanism only, T15 list not enabled)'}",
+          flush=True)
     tr_counts = build_terms_json(db)
     print(f"bilingual   : {tr_counts.get('zh', 0)} zh / {tr_counts.get('es', 0)} es "
           f"display-default ingredient translations", flush=True)
