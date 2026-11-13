@@ -1138,6 +1138,34 @@ FR_I18N: dict[str, str] = {
     "drug.combo_section": "Associations contenant ce principe actif",
     "matrix.spec_conflict": "dosage non vérifié",
     "name.form_spec": "Dosage par forme galénique",
+    # T13（v0.11.7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
+    "lf.market": "Marché", "lf.kind": "Type", "lf.all": "Tous", "lf.title": "Filtres",
+    "lf.all_kinds": "Tous types", "lf.spec": "Dosage",
+    "lf.spec_ph": "Filtrer les dosages, p. ex. 500 mg",
+    "lf.none": "Aucune ligne ne correspond à ces filtres.",
+    "lf.count": "{shown} sur {total} lignes",
+    "drug.more_names": "Voir les {n} autres",
+    "drug.mkx_more": "{n} autres marchés",
+    "drug.spec_count": "{shown} sur {n} affichées",
+    "mkmeta.source": "Origine", "mkmeta.asof": "Données au",
+    "mkmeta.undisclosed": "certains enregistrements n'indiquent pas le dosage",
+    "mkmeta.unknown": "inclut des enregistrements au statut inconnu (pas une preuve de vente)",
+    "cat.help": "Comment lire cette liste", "cat.subcat": "Sous-classe",
+    "cat.search_ph": "Rechercher un principe dans cette catégorie",
+    "cat.search_none": "Aucun principe ne correspond.",
+    "coverage.col.products": "Enregistrements",
+    "t11.pick_this": "Celle-ci", "t11.pick_mine": "C'est celle-ci",
+    "t11.picked": "Sélectionnée",
+    "t11.reselect": "Changer", "t11.compare_link": "Comparer champ par champ →",
+    "t11.still_candidates": "L'ensemble des candidats reste {n} enregistrements — celle-ci n'en est qu'un. Voir tous les candidats ↓",
+    "t11.all_markets": "Tous",
+    "t11.cmp_title": "Comparaison champ par champ (identité seulement)",
+    "t11.cmp_you": "Votre enregistrement", "t11.cmp_target": "Marché cible",
+    "t11.same": "Identique", "t11.diff": "Différent", "t11.missing": "Non enregistré",
+    "t11.name": "Nom enregistré", "t11.spec": "Dosage", "t11.release": "Libération",
+    "t11.cmp_note": "Comparaison de champs d'identité uniquement. Un nom ou un principe actif identique ne signifie pas que les produits sont interchangeables.",
+    "t11.adv": "Filtres avancés",
+    "res.src_label": "Marché d'enregistrement (seulement les enregistrements de ce marché)",
 }
 FR_I18N.update({
     # v0.11.5 task-3：fr 启用时由 FR_PREP_KEYS 覆盖本行，两处保持同一句。
@@ -1765,6 +1793,35 @@ UI_I18N = {
         "drug.combo_section": "Combination products containing this ingredient",
         "matrix.spec_conflict": "strength unverified",
         "name.form_spec": "Strength by dosage form",
+        # T13（v0.11.7，用户评审 D1–D7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
+        "lf.market": "Market", "lf.kind": "Kind", "lf.all": "All", "lf.title": "Filters",
+        "lf.all_kinds": "All kinds", "lf.spec": "Strength",
+        "lf.spec_ph": "Filter strengths, e.g. 500 mg",
+        "lf.none": "No row matches these filters.",
+        "lf.count": "{shown} of {total} rows",
+        "drug.more_names": "Show the other {n}",
+        "drug.mkx_more": "Other {n} markets",
+        "drug.spec_count": "{shown} shown of {n}",
+        "mkmeta.source": "Source", "mkmeta.asof": "Data as of",
+        "mkmeta.undisclosed": "some records have no stated strength",
+        "mkmeta.unknown": "includes records with unknown status (not proof of sale)",
+        "cat.help": "How to read this list", "cat.subcat": "Subclass",
+        "cat.search_ph": "Search an ingredient in this category",
+        "cat.search_none": "No ingredient matches.",
+        "coverage.col.products": "Records",
+        # T11（v0.11.7）：三步确认 + 对照（B1–B3）。徽标只用 same/diff/missing，不用「等价/可替代/可互换」。
+        "t11.pick_this": "This one", "t11.pick_mine": "This is mine",
+        "t11.picked": "Selected",
+        "t11.reselect": "Reselect", "t11.compare_link": "Compare item by item →",
+        "t11.still_candidates": "The candidate set is still {n} records — this is only one of them. See all candidates ↓",
+        "t11.all_markets": "All",
+        "t11.cmp_title": "Item-by-item comparison (identity only)",
+        "t11.cmp_you": "Yours", "t11.cmp_target": "Target market",
+        "t11.same": "Same", "t11.diff": "Different", "t11.missing": "Not recorded",
+        "t11.name": "Registered name", "t11.spec": "Strength", "t11.release": "Release",
+        "t11.cmp_note": "Field-by-field identity comparison only. Same name or same ingredient does not mean the products are interchangeable.",
+        "t11.adv": "Advanced filters",
+        "res.src_label": "Record market (only records registered here)",
     },
     "es": {
         "u1.title": "Cómo funciona en 3 pasos",
@@ -1868,6 +1925,34 @@ UI_I18N = {
         "drug.combo_section": "Asociaciones que contienen este principio activo",
         "matrix.spec_conflict": "concentración sin verificar",
         "name.form_spec": "Concentración por forma",
+        # T13（v0.11.7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
+        "lf.market": "Mercado", "lf.kind": "Tipo", "lf.all": "Todos", "lf.title": "Filtros",
+        "lf.all_kinds": "Todos los tipos", "lf.spec": "Concentración",
+        "lf.spec_ph": "Filtrar concentraciones, p. ej. 500 mg",
+        "lf.none": "Ninguna fila coincide con estos filtros.",
+        "lf.count": "{shown} de {total} filas",
+        "drug.more_names": "Ver los otros {n}",
+        "drug.mkx_more": "{n} mercados más",
+        "drug.spec_count": "{shown} de {n} mostradas",
+        "mkmeta.source": "Fuente", "mkmeta.asof": "Datos a",
+        "mkmeta.undisclosed": "algunos registros no indican la concentración",
+        "mkmeta.unknown": "incluye registros con estado desconocido (no implica venta)",
+        "cat.help": "Cómo leer esta lista", "cat.subcat": "Subclase",
+        "cat.search_ph": "Buscar un principio en esta categoría",
+        "cat.search_none": "Ningún principio coincide.",
+        "coverage.col.products": "Registros",
+        "t11.pick_this": "Esta", "t11.pick_mine": "Es esta",
+        "t11.picked": "Elegida",
+        "t11.reselect": "Elegir otra", "t11.compare_link": "Comparar campo por campo →",
+        "t11.still_candidates": "El conjunto de candidatos sigue siendo {n} registros: esta es solo una. Ver todos los candidatos ↓",
+        "t11.all_markets": "Todos",
+        "t11.cmp_title": "Comparación campo por campo (solo identidad)",
+        "t11.cmp_you": "Tu registro", "t11.cmp_target": "Mercado destino",
+        "t11.same": "Igual", "t11.diff": "Distinto", "t11.missing": "Sin registro",
+        "t11.name": "Nombre registrado", "t11.spec": "Concentración", "t11.release": "Liberación",
+        "t11.cmp_note": "Solo se comparan campos de identidad. Mismo nombre o mismo principio no significa que los productos sean intercambiables.",
+        "t11.adv": "Filtros avanzados",
+        "res.src_label": "Mercado del registro (solo registros de aquí)",
     },
     "zh": {
         "u1.title": "三步看懂",
@@ -1952,6 +2037,34 @@ UI_I18N = {
         "drug.combo_section": "含此成分的复方",
         "matrix.spec_conflict": "规格待核实",
         "name.form_spec": "规格（按剂型）",
+        # T13（v0.11.7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
+        "lf.market": "市场", "lf.kind": "成分类型", "lf.all": "全部", "lf.title": "筛选",
+        "lf.all_kinds": "单方与复方", "lf.spec": "规格",
+        "lf.spec_ph": "筛选规格，如 500 mg",
+        "lf.none": "没有符合这些筛选条件的行。",
+        "lf.count": "已展示 {shown} / 共 {total} 行",
+        "drug.more_names": "查看其余 {n} 项",
+        "drug.mkx_more": "另 {n} 个市场",
+        "drug.spec_count": "展示 {shown} 个，共 {n} 个",
+        "mkmeta.source": "来源", "mkmeta.asof": "数据截止",
+        "mkmeta.undisclosed": "部分记录未公开规格",
+        "mkmeta.unknown": "含状态未知记录（不等于在售）",
+        "cat.help": "怎么看这份清单", "cat.subcat": "子类别",
+        "cat.search_ph": "在本类中搜索成分",
+        "cat.search_none": "没有匹配的成分。",
+        "coverage.col.products": "记录数",
+        "t11.pick_this": "这条", "t11.pick_mine": "我用的是这条",
+        "t11.picked": "已选",
+        "t11.reselect": "重选", "t11.compare_link": "逐项对照 →",
+        "t11.still_candidates": "候选集仍然是 {n} 条记录——这条只是其中一条。看全部候选 ↓",
+        "t11.all_markets": "全部",
+        "t11.cmp_title": "逐项对照（只比身份字段）",
+        "t11.cmp_you": "你这条", "t11.cmp_target": "目标市场",
+        "t11.same": "相同", "t11.diff": "不同", "t11.missing": "未收录",
+        "t11.name": "注册名", "t11.spec": "规格", "t11.release": "释放",
+        "t11.cmp_note": "只按登记字段做身份对照；名字相同或成分相同都不代表这些产品可以互换。",
+        "t11.adv": "高级筛选",
+        "res.src_label": "记录市场（只看登记在这里的记录）",
     },
     "zh-Hant": {
         "u1.title": "三步看懂",
@@ -2120,6 +2233,34 @@ UI_I18N = {
         "drug.combo_section": "含此成分的複方",
         "matrix.spec_conflict": "規格待核實",
         "name.form_spec": "規格（按劑型）",
+        # T13（v0.11.7）：成分頁篩選條、可點擊計數、來源/日期提示、分類頁搜尋。
+        "lf.market": "市場", "lf.kind": "成分類型", "lf.all": "全部", "lf.title": "篩選",
+        "lf.all_kinds": "單方與複方", "lf.spec": "規格",
+        "lf.spec_ph": "篩選規格，如 500 mg",
+        "lf.none": "沒有符合這些篩選條件的列。",
+        "lf.count": "已顯示 {shown} / 共 {total} 列",
+        "drug.more_names": "檢視其餘 {n} 項",
+        "drug.mkx_more": "另 {n} 個市場",
+        "drug.spec_count": "顯示 {shown} 個，共 {n} 個",
+        "mkmeta.source": "來源", "mkmeta.asof": "資料截止",
+        "mkmeta.undisclosed": "部分記錄未公開規格",
+        "mkmeta.unknown": "含狀態未知記錄（不等於在售）",
+        "cat.help": "怎麼看這份清單", "cat.subcat": "子類別",
+        "cat.search_ph": "在本類中搜尋成分",
+        "cat.search_none": "沒有符合的成分。",
+        "coverage.col.products": "紀錄數",
+        "t11.pick_this": "這筆", "t11.pick_mine": "我用的是這筆",
+        "t11.picked": "已選",
+        "t11.reselect": "重選", "t11.compare_link": "逐項對照 →",
+        "t11.still_candidates": "候選集仍然是 {n} 筆記錄——這筆只是其中一筆。看全部候選 ↓",
+        "t11.all_markets": "全部",
+        "t11.cmp_title": "逐項對照（只比身分欄位）",
+        "t11.cmp_you": "你這筆", "t11.cmp_target": "目標市場",
+        "t11.same": "相同", "t11.diff": "不同", "t11.missing": "未收錄",
+        "t11.name": "註冊名", "t11.spec": "規格", "t11.release": "釋放",
+        "t11.cmp_note": "只按登記欄位做身分對照；名稱相同或成分相同都不代表這些產品可以互換。",
+        "t11.adv": "進階篩選",
+        "res.src_label": "記錄市場（只看登記在這裡的記錄）",
     },
 }
 
@@ -4115,7 +4256,7 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
 /* 2026-11-12 v0.11.2（条目 26）：内容页常驻的简洁搜索栏（成分页 / 商品名页可续查）。
    顶层页静态渲染；长尾页（drug / name / combo / maker…）由 assets/boot.js 注入同一段，
    所以 121k 页不增加每页字节。首页不显示（大搜索框已承担）。 */
-.hsearch-row{border-top:1px solid var(--line);background:var(--bg)}
+.hsearch-row{border-top:1px solid var(--line);background:transparent}
 .hsearch-row .wrap{height:auto;display:block;padding-top:6px;padding-bottom:8px}
 .hsearch{display:flex;gap:8px;align-items:center;max-width:600px}
 .hsearch input{flex:1;min-width:0;padding:10px 12px;font-size:16px;border:1px solid var(--line);
@@ -4384,7 +4525,129 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .mkundis{margin:8px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:16px;
  color:var(--muted)}
 .mkundis .uname{margin-right:8px}
+/* T13（v0.11.7）：成分页「市场 / 单方·复方 / 规格」筛选条 + 块头来源行 + 可点开的「另 N 个市场」 */
+/* T13（v0.11.7）：筛选条挂在成分页的 sticky 条里（z 常规流里的一个 chip，收起时零高度），
+   展开时是浮层（absolute），不把正文往下推 —— 首屏条目零损失。 */
+.listfilters{display:inline-flex;flex-direction:column;position:relative}
+.listfilters>summary{list-style:none;cursor:pointer}
+.listfilters>summary::-webkit-details-marker{display:none}
+.listfilters>summary::after{content:" ▾";color:var(--muted);font-size:12px}
+/* 与 `.ds-filter` 同高（32px），否则 sticky 条在 390 会多出一行（+12px → 首屏条目掉 0.5 条） */
+.drug-sticky .listfilters>summary{display:inline-flex;align-items:center;min-height:32px;
+ padding:0 4px;font-size:14px;line-height:1.2;white-space:nowrap}
+.listfilters[open]>summary::after{content:" ▴"}
+/* 面板用站点既有色阶 `--surface-2`（#f6f5f0，表头/色带同色），chip 仍是 #fff ——
+   「框内颜色 ≠ 最近不透明祖先的填充色」是用户 2026-11-10 的硬规则，
+   deploy/ui_surface_check.py 会拦；白底白底曾报 11 处 FAIL。 */
+.lf-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:30;background:var(--surface-2);
+ border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;
+ gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.10);min-width:min(92vw,640px)}
+.listfilters .lf-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.listfilters .lf-status{margin:0;font-size:13px;color:var(--muted)}
+.listfilters .lf-none{margin:0;font-size:15px;color:var(--fg)}
+.lf-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.lf-k{font-size:13px;color:var(--muted);min-width:3.5em}
+.lf-chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 10px;
+ border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--fg);
+ font-size:14px;cursor:pointer;text-decoration:none}
+.lf-chip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.lf-chip.on{background:var(--accent-weak);border-color:var(--accent);color:var(--accent);font-weight:600}
+.lf-chip .n{color:var(--muted);font-size:12px}
+.lf-input{min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:8px;
+ font-size:15px;min-width:12em;flex:0 1 18em}
+.lf-status{margin:0;font-size:13px;color:var(--muted)}
+.lf-none{margin:6px 0;font-size:15px;color:var(--fg)}
+.mkmeta{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;
+ white-space:nowrap;color:var(--muted);font-size:13px;font-weight:400;vertical-align:baseline}
+@media (max-width:767px){ .mkmeta{display:none} }
+.mkx-more{display:inline;margin-left:4px}
+.mkx-more>summary{display:inline;cursor:pointer;color:var(--accent);list-style:none}
+.mkx-more>summary::-webkit-details-marker{display:none}
+.mkx-more .mkx-links{display:inline;margin-left:4px}
+/* `+N` 自己是一个叶子节点（atc4-ui D6 按「叶子文本 = +N」判可点），句子在旁边一格 */
+.mkx-plus{font-weight:600;margin-right:2px}
+.mkx-lbl{margin-left:0}
+/* T13（v0.11.7）：分类页页内搜索 + 子类筛选 + 说明折叠
+   v0.11.7 复审：子类 chip 收进 `<details>` 浮层（默认收起）、搜索框/子类入口/计数同一行，
+   分类页首屏条目 9 → 回到 10.5 以上（−5% 线是阻塞项）。 */
+.catfinder{display:flex;flex-direction:column;gap:4px;margin:6px 0 8px}
+.catfinder .cf-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.catfinder .cf-input{min-height:34px;padding:0 10px;border:1px solid var(--line);
+ border-radius:8px;font-size:16px;flex:1 1 14em}
+.catfinder .cf-status{margin:0;font-size:13px;color:var(--muted);flex:0 0 auto}
+.catfinder .cf-sub{position:relative;flex:0 0 auto}
+.catfinder .cf-sub>summary{display:inline-flex;align-items:center;min-height:34px;padding:0 10px;
+ border:1px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;
+ font-size:14px;list-style:none;color:var(--fg)}
+.catfinder .cf-sub>summary::-webkit-details-marker{display:none}
+.catfinder .cf-sub>summary::after{content:" ▾";color:var(--muted);font-size:12px}
+.catfinder .cf-sub[open]>summary::after{content:" ▴"}
+/* 浮层用站点既有 `--surface-2`：chip 是 #fff，框内 ≠ 框外（ui_surface_check 硬规则） */
+.catfinder .cf-chips{position:absolute;top:calc(100% + 4px);left:0;z-index:25;
+ display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:var(--surface-2);
+ border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+ min-width:min(92vw,520px)}
+.cat-help{margin:6px 0 10px;font-size:15px}
+.cat-help>summary{cursor:pointer;color:var(--accent);list-style:none}
+.cat-help>summary::-webkit-details-marker{display:none}
+.cat-help>summary::before{content:"▸ ";font-size:13px}
+.cat-help[open]>summary::before{content:"▾ "}
+.atcmembers li[hidden],.mkrow[hidden],.mkblock[hidden],.mkseg[hidden]{display:none!important}
+.src-asof{color:var(--muted);font-size:13px;white-space:normal}
 .mkcmp{margin:6px 0 10px}
+/* T11（v0.11.7）：sticky 里的「状态 + 目标市场 chips」同一行；pickbar 与对照块 */
+.t11row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 0}
+.t11row .search-status{margin:0;flex:1 1 auto;min-width:0}
+.mkchips{display:flex;gap:4px;overflow-x:auto;max-width:100%;padding:2px 0}
+.mkchip{flex:0 0 auto;min-height:28px;padding:0 8px;border:1px solid var(--line);border-radius:999px;
+ background:#fff;color:var(--fg);font-size:13px;cursor:pointer}
+.mkchip.on{background:var(--accent-weak);border-color:var(--accent);color:var(--accent);font-weight:600}
+.pickbar{margin:4px 0 0;padding:6px 10px;border:1px solid var(--line);border-left:4px solid var(--accent);
+ border-radius:8px;background:#fff}
+.pickbar .pickrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:15px}
+.pickbar .pickname{font-weight:600}
+.pickbar .pickmeta{color:var(--muted);font-size:14px}
+.pickbar .picknote{margin:2px 0 0;font-size:13px}
+.cmpbox{margin:10px 0 4px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.cmpbox h2{margin:0 0 6px;font-size:var(--fs-md)}
+table.res.cmp{font-size:15px}
+table.res.cmp th:first-child{width:8em;color:var(--muted);font-weight:600}
+.cmp-b{display:inline-block;font-size:13px;padding:0 8px;border-radius:999px;border:1px solid var(--line)}
+.cmp-b.same{color:var(--accent);border-color:var(--accent);background:var(--accent-weak)}
+.cmp-b.diff{color:var(--warn);border-color:var(--warn)}
+.cmp-b.miss{color:var(--muted)}
+.cmp-note{margin:6px 0 0;font-size:13px}
+/* T11：桌面端结果行必须保持 ~42px（首屏条目靠它）——
+   ① 「数据截止」小字在 ≥768 只留在身份卡里，不进窄的市场列（否则行高 42 → 138）；
+   ② 手机端市场 chips 收进高级筛选，sticky 行里只留一行「目标市场 ▾」入口（高度 0 增量）。 */
+@media (min-width:768px){ td.c-market .src-asof{display:none} }
+.mkopen{display:none}
+@media (max-width:767px){
+  .mkchips{display:none}
+  .mkopen{display:inline-block;font-size:13px;color:var(--accent);margin-left:6px;white-space:nowrap}
+}
+/* T11：行内「这条」按钮做成轻链接样式 —— 结果行高度必须保持 ~42px（首屏条目靠它） */
+.pickbtn{border:0;background:none;color:var(--accent);font:inherit;font-size:13px;
+ padding:0 6px 0 0;margin:0;cursor:pointer;white-space:nowrap;line-height:1.6}
+.pickbtn:hover{text-decoration:underline}
+/* 详情列不许换行：里面现在有「◎ / 详情 / ⚑」三件，换行会把行高从 42 撑到 65px。
+   「◎ 这条」用绝对定位贴到行右缘：不参与表格布局 → 行高与 v0.11.6 完全一致（首屏条目靠它）。 */
+td.c-det{white-space:nowrap}
+tr.br{position:relative}
+tr.br .pickbtn{position:absolute;right:2px;top:2px;min-height:0;height:auto;
+ padding:0 2px;line-height:1.1;font-size:12px}
+/* ↑ 不设 background：按钮浮在结果行（表底 #fff）上，白底=白底会被
+   deploy/ui_surface_check.py 判「框内颜色 == 框外颜色」（用户 2026-11-10 硬规则）。 */
+.advfilter{margin:6px 0 10px}
+/* 「高级筛选」面板本身刷 `--surface-2`：里面的 `#country` / `#src` 是浏览器默认白底
+   （rgb(255,255,255)），若面板沿用 `.mf-details` 的 #fff，就会被
+   deploy/ui_surface_check.py 判「框内 == 框外」（home/results × 两个视口共 8 处）。
+   只改填充，不动 padding / margin（首屏条目与 #mkchips 位置保持不变）。 */
+details.advfilter{background:var(--surface-2)}
+.advfilter>summary{cursor:pointer;color:var(--accent);font-size:15px;list-style:none}
+.advfilter>summary::-webkit-details-marker{display:none}
+.advfilter>summary::before{content:"▸ ";font-size:13px}
+.advfilter[open]>summary::before{content:"▾ "}
 .tableview[hidden]{display:none}
 .mkblock.mkflash{outline:2px solid var(--accent);outline-offset:2px}
 @media (prefers-reduced-motion:no-preference){
@@ -4750,7 +5013,9 @@ header .sn{flex:0 0 auto}
 /* 2026-11-13 task-62（用户：其余规格/未公开规格「这一坨」）：折叠摘要一行 +
    展开按组列 chip；不改数据、不丢条目。 */
 .more-specs,.undis{margin:10px 0 0;border:1px solid var(--line);border-radius:10px;
- background:var(--card);padding:8px 10px}
+ /* transparent：它们坐在 `.mkblock`（--card 白）里，再刷同色会被
+    deploy/ui_surface_check.py 判「框内 == 框外」（24 处）；透明与白底视觉一致 */
+ background:transparent;padding:8px 10px}
 .more-specs>summary,.undis>summary{display:flex;align-items:center;gap:6px;list-style:none;
  cursor:pointer;font-size:14px;line-height:1.5;color:var(--muted);white-space:nowrap;overflow:hidden}
 .more-specs>summary::-webkit-details-marker,.undis>summary::-webkit-details-marker{display:none}
@@ -5377,6 +5642,10 @@ function brandRowHTML(e, T){
   const ctx = a3HintHTML(e, T);
   const det = (e.n ? `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}" `
     + `aria-expanded="false">${esc(T('a1.expand'))}</button>` : '');
+  // T11（v0.11.7）B1 第 2 步：行内「这条」——点击后把这行记成「你手里这条」，候选集不变。
+  // 用**一个字符**的按钮（title/aria 带完整文案）：`.c-det` 列很窄，放整句会把行高
+  // 从 42 撑到 138px，1440 首屏条目会从 4.5 掉到 1.5（首屏守卫的硬指标）。
+  const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">◎</button> `;
   const rep = `<a class="rowreport" href="${esc(rowReportURL(e))}" target="_blank"`
     + ` rel="noopener" title="${esc(T('row.report'))}" aria-label="${esc(T('row.report'))}">⚑</a>`;
   return `<tr class="br" data-k="${esc(e.k)}">
@@ -5517,6 +5786,10 @@ function marketTags(list, max){
 }
 function flatRowHTML(e, T){
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [];
+  // T11（v0.11.7）B1 第 2 步：行内「这条」——点击后把这行记成「你手里这条」，候选集不变。
+  // 用**一个字符**的按钮（title/aria 带完整文案）：`.c-det` 列很窄，放整句会把行高
+  // 从 42 撑到 138px，1440 首屏条目会从 4.5 掉到 1.5（首屏守卫的硬指标）。
+  const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">◎</button> `;
   const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
                 e.l==='warning' ? `<span class="badge warn">${esc(T('badge.warning'))}</span>` : '';
   const combo = (e.x || '').indexOf(' + ') >= 0
@@ -5558,7 +5831,7 @@ function flatRowHTML(e, T){
     <td class="c-dose" data-label="${esc(T('col.dose'))}">${doseCell}</td>
     <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e, false)}${badge}${combo}${exp}</td>
     <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, 4) || '—'}</td>
-    <td class="c-det">${det}</td></tr>`;
+    <td class="c-det">${pickBtn}${det}</td></tr>`;
 }
 function flatTableHTML(T){
   const disp = (LAST_DISPLAY && LAST_DISPLAY.length) ? LAST_DISPLAY : [];
@@ -5694,6 +5967,9 @@ function identityCardHTML(q, display, nicks, confs, T){
     : (first.v ? (BASE + 'drug/' + encodeURIComponent(first.v) + '.html') : '');
   const std = String(first.x || first.d || '').trim();
   const acts = [];
+  // T11（v0.11.7）B1 第 2 步的第二入口：身份卡上「我用的是这条」（默认取该条目的第一个市场）。
+  acts.push(`<button type="button" class="pickbtn" data-pick="${esc(first.k)}|${esc((first.c && first.c[0]) || '')}">`
+    + `${esc(T('t11.pick_mine'))}</button>`);
   if(drugHref){
     acts.push(`<a class="primary" href="${drugHref}">${esc(T('res.action_drug'))}</a>`);
   }
@@ -6482,6 +6758,138 @@ function startFastLane(q){
     return renderATCFast(cx, hit.id, q);
   }).catch(() => false);
 }
+// ── T11（v0.11.7）：三步确认 + 目标市场常驻 + 逐项对照 ───────────────────────
+// 状态全在 URL：`pick=<key_id>`（第 2 步确认的那条）+ `pmk=<记录市场>`；第 3 步的
+// `country=<目标市场>` 语义不变 —— **只有不带 pick 时 country 才走老的「整表替换」**。
+// 红线：不判断能否互换、不给替代建议、不做剂量换算；「相同/不同」只是字段字面比较。
+const T11 = {
+  pick: '', pmk: '',
+  parse(){
+    try{
+      const p = new URLSearchParams(location.search);
+      this.pick = p.get('pick') || '';
+      this.pmk = p.get('pmk') || '';
+    }catch(e){ this.pick = ''; this.pmk = ''; }
+  },
+  set(key, mk){
+    const p = new URLSearchParams(location.search);
+    if(key){ p.set('pick', key); if(mk) p.set('pmk', mk); else p.delete('pmk'); }
+    else { p.delete('pick'); p.delete('pmk'); }
+    const qs = p.toString();
+    try{ history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '')); }catch(e){}
+    this.parse();
+    render();
+  },
+  entry(){
+    if(!this.pick) return null;
+    return IDX.find(x => x.k === this.pick) || null;
+  }
+};
+T11.parse();
+
+function t11Subs(e){ return ((e && e.vs && e.vs.length) ? e.vs : [e && e.v]).filter(Boolean); }
+
+function t11RenderChips(T){
+  const box2 = document.getElementById('mkchips');
+  const sel = document.getElementById('country');
+  if(!box2 || !sel) return;
+  const cur = sel.value || '';
+  box2.innerHTML = [...sel.options].map(o => {
+    const v = o.value || '';
+    const label = v || T('t11.all_markets');
+    const on = (v === cur) ? ' on' : '';
+    return `<button type="button" class="mkchip${on}" data-mkchip="${esc(v)}" `
+      + `aria-pressed="${v === cur ? 'true' : 'false'}">${esc(label)}</button>`;
+  }).join('');
+}
+
+function t11CompareHTML(pe, mk, hits, T){
+  const subs = t11Subs(pe);
+  // 目标市场里「至少有同一个成分」的候选（不是「答案」，只是可比的登记记录）
+  const others = IDX.filter(x => x !== pe && (x.c || []).includes(mk)
+    && t11Subs(x).some(s => subs.indexOf(s) >= 0));
+  const mineSpec = (pe.s || []).slice().sort().join(' / ');
+  const theirSpec = [...new Set(others.flatMap(x => x.s || []))].sort().join(' / ');
+  const mineRel = (pe.rl && pe.rl !== 'none') ? labelOf('release', pe.rl, pe.rl) : '';
+  const theirRel = [...new Set(others.map(x => x.rl).filter(r => r && r !== 'none')
+    .map(r => labelOf('release', r, r)))].join(' / ');
+  const mineName = pe.d || pe.k;
+  const theirName = others.slice(0, 3).map(x => x.d || x.k).join('、');
+  function badge(a, b){
+    if(!b) return `<span class="cmp-b miss">${esc(T('t11.missing'))}</span>`;
+    return a === b ? `<span class="cmp-b same">${esc(T('t11.same'))}</span>`
+                   : `<span class="cmp-b diff">${esc(T('t11.diff'))}</span>`;
+  }
+  function row(key, a, b){
+    return `<tr><th>${esc(T(key))}</th><td>${esc(a) || '—'}</td><td>${esc(b) || '—'}</td>`
+      + `<td>${badge(a, b)}</td></tr>`;
+  }
+  return `<div class="cmpbox" id="cmp"><h2>${esc(T('t11.cmp_title'))}</h2>`
+    + `<div class="tablewrap"><table class="res cmp"><thead><tr><th></th>`
+    + `<th>${esc(T('t11.cmp_you'))}</th>`
+    + `<th>${esc(T('t11.cmp_target'))} ${esc(mk)}</th><th></th></tr></thead><tbody>`
+    + row('t11.name', mineName, theirName)
+    + row('t11.spec', mineSpec, theirSpec)
+    + row('t11.release', mineRel, theirRel)
+    + `</tbody></table></div><p class="sub cmp-note">${esc(T('t11.cmp_note'))}</p></div>`;
+}
+
+function t11AfterRender(hits, c, T){
+  t11RenderChips(T);
+  const bar = document.getElementById('pickbar');
+  if(!bar) return;
+  const old = document.getElementById('cmp');
+  if(old) old.remove();
+  const pe = T11.entry();
+  if(!pe){
+    bar.hidden = true;
+    bar.innerHTML = '';
+    return;
+  }
+  const mk = T11.pmk || (pe.c && pe.c[0]) || '';
+  const subs = t11Subs(pe);
+  const target = c || '';
+  const drugHref = BASE + 'drug/' + encodeURIComponent(subs[0] || '') + '.html'
+    + '?pick=' + encodeURIComponent(pe.k)
+    + (target ? '&country=' + encodeURIComponent(target) : '')
+    + '#mk-' + encodeURIComponent(target || mk);
+  const sp = specPairsOf(pe, 2);
+  const specs = sp.hasFs
+    ? sp.pairs.map(g => (g.form ? g.form + ' ' : '') + g.specs.join(' / ')).join(' · ')
+    : (pe.s || []).slice(0, 2).join(' / ');
+  bar.hidden = false;
+  bar.innerHTML = '<div class="pickrow">'
+    + `<b>${esc(T('t11.picked'))}</b> `
+    + `<span class="pickname">${esc(pe.d || pe.k)}</span> `
+    + `<span class="tag">${esc(mk)}</span> `
+    + `<span class="pickmeta">${esc(ingredientLabel(pe))}${specs ? ' · ' + esc(specs) : ''}</span> `
+    + `<button type="button" class="linkbtn" data-pickset="0">${esc(T('t11.reselect'))}</button> `
+    + `<a class="linkbtn" href="${drugHref}">${esc(T('t11.compare_link'))}</a></div>`
+    + `<p class="sub picknote">${esc(T('t11.still_candidates').replace('{n}', String(hits.length)))}</p>`;
+  if(target) out.insertAdjacentHTML('beforeend', t11CompareHTML(pe, target, hits, T));
+}
+
+document.addEventListener('click', function(ev){
+  const t = (ev.target && ev.target.closest)
+    ? ev.target.closest('[data-pick],[data-pickset],[data-mkchip]') : null;
+  if(!t) return;
+  if(t.hasAttribute('data-pick')){
+    ev.preventDefault();
+    const parts = String(t.getAttribute('data-pick') || '').split('|');
+    T11.set(parts[0] || '', parts[1] || '');
+  } else if(t.hasAttribute('data-pickset')){
+    ev.preventDefault();
+    T11.set('', '');
+  } else {
+    ev.preventDefault();
+    const sel2 = document.getElementById('country');
+    if(sel2){
+      sel2.value = t.getAttribute('data-mkchip') || '';
+      sel2.dispatchEvent(new Event('change', {bubbles: true}));
+    }
+  }
+});
+
 function render(){
   const q = box.value.trim();
   setCatsHidden(!!q);   // v0.8.2 task-116：有查询（结果/零结果）即收起大类块；清空恢复
@@ -6547,7 +6955,8 @@ function render(){
   let display = shown;
   let countryMiss = false;    // 选了国家但该国没有任何该成分产品（不再静默回退到各国列表）
   let countryView = false;    // 当前展示的是「该国该成分的商品名」
-  if(c && hits.length && !partial){
+  // T11（v0.11.7）：**只有不带 pick 时才允许整表替换**（老深链 ?country= 行为不变）。
+  if(c && hits.length && !partial && !T11.pick){
     try{
       const sids = new Set();
       for(const [, , e] of hits.slice(0,3)){
@@ -6818,6 +7227,9 @@ function render(){
   out.innerHTML = parseBarHTML(parsed, matchLabel) + countryBarHTML + confHTML + nickHTML + warnHTML
     + countryMissHTML + resHTML + sameHTML + extraHTML + emptyHTML;
   out.setAttribute('aria-busy', 'false');
+  // T11（v0.11.7）：三步确认的「已选」条 + 目标市场 chips + 逐项对照块（无 pick 时什么都不做，
+  // 老深链 `?country=` 仍走上面的 countryView 老路径，行为逐字节不变）。
+  t11AfterRender(hits, c, T);
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
   // 选了澳洲但澳洲产品为空时同样触发（很多 listed OTC 只有 ARTG 名字）。
   const hasAU = display.some(x => ((x[2].c) || []).includes('AU'));
@@ -9496,11 +9908,16 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                 and not any("\u4e00" <= ch <= "\u9fff" for ch in txt):
             cn_latin.setdefault(kid, txt)
     products: dict[str, list] = {}
+    # T13 / D7：块头要能写「来源 / 数据截止」——先把 source 表读成两张小表（一次查询）
+    src_name = {r[0]: (r[1] or r[0]) for r in db.execute(
+        "SELECT source_id, name FROM source")}
+    src_asof = {r[0]: ((r[1] or "").strip() or (r[2] or "").strip())
+                for r in db.execute("SELECT source_id, data_as_of, data_as_of_note FROM source")}
     for row in db.execute(
         """SELECT v.substance_id, COALESCE(p.country, p.region) AS mk, p.form_base, p.dosage_form, p.release,
                   p.status, pc.strength_value, pc.strength_unit,
                   pc.per_volume_value, pc.per_volume_unit, p.product_id, s.inn_zh, pc.ord,
-                  p.mah
+                  p.mah, p.source_id
            FROM product p
            JOIN product_component pc ON pc.product_id = p.product_id
            JOIN variant v ON v.variant_id = pc.variant_id
@@ -9590,6 +10007,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         und_meta: dict[str, dict] = {}
         spec_countries: dict[tuple, dict[str, dict[str, str]]] = {}
         spec_raws: dict[tuple, set[str]] = {}
+        # T13 / D7：每国「来源库 + 是否含状态未知记录」，用于块头一句实话
+        mk_sources: dict[str, set[str]] = {}
+        mk_unknown: set[str] = set()
         # T10：每个分组键对应的「完整成分 + 各自含量」与 per_volume 类别（渲染用，一次算完）
         spec_comps: dict[tuple, list[tuple[str, str]]] = {}
         spec_kind: dict[tuple, str] = {}
@@ -9599,7 +10019,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         rec_by_country: dict[str, int] = {}
         _pids_seen: dict[str, set[str]] = {}
         status_cell: dict[tuple, set[str]] = {}
-        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord_, mah) in rows:
+        for (country, fb, df, rel, status, sv, su, pv, pu, pid, zh_sub, ord_, mah,
+             src_id) in rows:
             # v0.9.0 task-9 / v0.9.1 task-28：HK 无 status、AU 导出无状态列，
             # 这些 unknown 记录不整批跳过；其他市场仍按原规则隐藏。
             if status != "active" and not (
@@ -9626,6 +10047,11 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             if raw_st.strip():
                 spec_raws.setdefault(spec, set()).add(raw_st.strip())
             bucket = spec_countries.setdefault(spec, {}).setdefault(country, {})
+            # T13 / D7：按国家收「来源库 / 是否含状态未知记录」，块头用
+            if src_id:
+                mk_sources.setdefault(country, set()).add(src_id)
+            if status in ("unknown", "", None):
+                mk_unknown.add(country)
             # task-16：记录数按产品去重（同一产品多成分行只算一次）+ 每格状态集合
             seen = _pids_seen.setdefault(country, set())
             if pid not in seen:
@@ -9907,11 +10333,26 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         # ── v0.10.3 task-16：主视图换成「按国家分组清单」，矩阵降级为 ?view=table ──
         # 清单永远渲染（默认可见）；矩阵只在「多市场密度高」的页面内嵌（实测 789 页），
         # 其余页面不内嵌 —— 否则 12k 页每页多背一整张矩阵，与「单页 ≤ 现页 60%」冲突。
-        list_html, multi_ratio = _drug_list_html(
+        # T13 / D7：把「来源库 / 数据截止 / 缺字段 / 状态含义」按国家整理成块头一句实话。
+        block_meta: dict[str, dict] = {}
+        for _c in countries:
+            _srcs = [src_name.get(s, s) for s in sorted(mk_sources.get(_c, ()))]
+            # 一个市场常挂多个来源（如 AU 的 ARTG/PBS/TGA CMI）→ 最多列 2 个，其余「等 N 个」
+            _src_txt = "、".join(s.split(" — ")[0].split(" – ")[0][:34] for s in _srcs[:2])
+            if len(_srcs) > 2:
+                _src_txt += f" +{len(_srcs) - 2}"
+            _asofs = sorted({src_asof.get(s, "") for s in mk_sources.get(_c, ()) if src_asof.get(s)})
+            block_meta[_c] = {
+                "source": _src_txt,
+                "asof": "、".join(a[:10] for a in _asofs[-2:]),   # 多来源取最新两个
+                "undisclosed": bool((und_meta or {}).get(_c)),
+                "unknown": _c in mk_unknown,
+            }
+        list_html, multi_ratio, lf_html = _drug_list_html(
             spec_rows, countries, rec_by_country, len(spec_rows),
             _brand_bit, status_cell, T, und_meta,
             spec_comps=spec_comps, sub_label=sub_label, spec_kind=spec_kind,
-            spec_conflict=spec_conflict)
+            spec_conflict=spec_conflict, block_meta=block_meta)
         table_block = ""
         compare_link = ""
         if tbody and multi_ratio >= 0.40:
@@ -9996,7 +10437,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
 <div class="drug-sticky" role="group">
   <span class="ds-name" title="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>
   <span class="ds-meta">{n_markets:,} <span data-i18n="drug.markets">markets</span> · {n_records:,} <span data-i18n="drug.records">records</span></span>
-  <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>
+  <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>{lf_html}
 </div>
 <div id="list" class="listview">{list_html}</div>{compare_link}{table_block}
 {syn_line}{nick_line}
@@ -10492,7 +10933,8 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                     T: dict, und_meta: dict | None = None,
                     spec_comps: dict | None = None, sub_label: dict | None = None,
                     spec_kind: dict | None = None,
-                    spec_conflict: dict | None = None) -> tuple[str, float]:
+                    spec_conflict: dict | None = None,
+                    block_meta: dict | None = None) -> tuple[str, float, str]:
     """成分页主视图：按国家分组的产品清单（v0.10.3 task-16）。
 
     设计依据 `reports/matrix-form-decision-20261110.md`：≥2 国同规格行只占 9.27%，
@@ -10514,6 +10956,7 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
     sub_label = sub_label or {}
     spec_kind = spec_kind or {}
     spec_conflict = spec_conflict or {}
+    block_meta = block_meta or {}
     # spec → 有记录的市场列表（一次算完，避免逐行重扫 spec_rows）
     markets_of: dict[tuple, list[str]] = {}
     forms: dict[str, int] = {}
@@ -10543,15 +10986,49 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
         label = I18N["en"].get(f"form.{k}", k if k != "other" else T.get("atc4.form_other", "other"))
         chips.append(f'<a class="formchip" href="#list" data-form-filter="{esc(k)}">'
                      f'{esc(label)} <span class="n">{chip_counts[k]}</span></a>')
-    chip_html = ('<nav class="formchips" id="forms" aria-label="'
-                 + esc(T.get("drug.forms_label", "Dosage forms")) + '">'
-                 + "".join(chips) + "</nav>")
+    # T13 / D1：筛选条作为一个 chip 挂在 `.formchips` 里（lf_html 稍后构造，见下），
+    # 收起时零高度、展开时铺满整行 —— 首屏条目不受影响。
+    chip_head = ('<nav class="formchips" id="forms" aria-label="'
+                 + esc(T.get("drug.forms_label", "Dosage forms")) + '">')
 
     blocks: list[str] = []
     n_uid = 0          # 每行 +N 的展开 checkbox 要唯一 id（确定性计数器，别用 hash）
     # T10（plan §5）：本页只要有复方行，就按「仅含此成分 / 含此成分的复方」两段渲染；
     # 纯单方页（6,311 个）不加任何段标题，避免凭空多出标题、也保证零回归。
     has_combo = any((s[3] or "") for s, _b in spec_rows)
+    # T13 / D1（用户评审 §2）：清单顶部加「市场 / 单方·复方 / 规格」三个筛选。
+    # 无 JS 时：市场 chip 是普通锚点（跳到该国家块），entire list 全可见；JS 只做渐进增强。
+    lf_parts = [f'<div class="lf-row"><span class="lf-k" data-i18n="lf.market">'
+                f'{esc(T.get("lf.market", "Market"))}</span>'
+                f'<button type="button" class="lf-chip on" data-mk-filter="" '
+                f'data-i18n="lf.all">{esc(T.get("lf.all", "All"))}</button>']
+    for _c in order:
+        lf_parts.append(f'<a class="lf-chip" href="#mk-{esc(_c)}" data-mk-filter="{esc(_c)}">'
+                        f'{esc(_c)} <span class="n">{rec_by_country.get(_c, 0):,}</span></a>')
+    lf_parts.append("</div>")
+    if has_combo:
+        lf_parts.append(
+            f'<div class="lf-row"><span class="lf-k" data-i18n="lf.kind">'
+            f'{esc(T.get("lf.kind", "Kind"))}</span>'
+            f'<button type="button" class="lf-chip on" data-seg-filter="" '
+            f'data-i18n="lf.all_kinds">{esc(T.get("lf.all_kinds", "All kinds"))}</button>'
+            f'<button type="button" class="lf-chip" data-seg-filter="mono" '
+            f'data-i18n="drug.mono_section">{esc(T.get("drug.mono_section", "Only this ingredient"))}</button>'
+            f'<button type="button" class="lf-chip" data-seg-filter="combo" '
+            f'data-i18n="drug.combo_section">'
+            f'{esc(T.get("drug.combo_section", "Combination products"))}</button></div>')
+    lf_parts.append(
+        f'<div class="lf-row"><label class="lf-k" for="lf-spec" data-i18n="lf.spec">'
+        f'{esc(T.get("lf.spec", "Strength"))}</label>'
+        f'<input type="search" id="lf-spec" class="lf-input" autocomplete="off" '
+        f'placeholder="{esc(T.get("lf.spec_ph", "Filter strengths, e.g. 500 mg"))}"></div>'
+        f'<p class="lf-status" id="lf-status" role="status" aria-live="polite"></p>'
+        f'<p class="lf-none" id="lf-none" hidden data-i18n="lf.none">'
+        f'{esc(T.get("lf.none", "No row matches these filters."))}</p>')
+    lf_html = ('<details class="listfilters" id="listfilters">'
+               f'<summary class="formchip lf-toggle" data-i18n="lf.title">'
+               f'{esc(T.get("lf.title", "Filters"))}</summary>'
+               '<div class="lf-panel">' + "".join(lf_parts) + "</div></details>")
 
     def _seg_rows(rows_c: list, is_combo: bool | None) -> list:
         if is_combo is None:
@@ -10563,7 +11040,7 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
         nonlocal n_uid
         disclosed = [(s, b) for s, b in seg_rows if (s[0] or "").strip()]
         if not disclosed:
-            return ""
+            return "", 0
         # v0.10.3：每段只渲染前 N 个规格（余下用一行紧凑文本），否则大成分页会从 300 KB
         # 涨到 900 KB（acetaminophen 实测）。复方段更贵 → 用更小的 COMBO_ROWS_PER_BLOCK。
         _cap = COMBO_ROWS_PER_BLOCK if is_combo else LIST_ROWS_PER_BLOCK
@@ -10589,7 +11066,25 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             others = [o for o in markets_of.get(spec, []) if o != c]
             if others:
                 shown_mk = others[:3]
-                tail_mk = f" +{len(others) - 3}" if len(others) > 3 else ""
+                # T13 / D2（用户评审 §2）：「+6」这种纯计数改成能点开的「另 6 个市场」。
+                # 无 JS 也能用（原生 <details>），链接仍锚到对应国家块。
+                tail_mk = ""
+                if len(others) > 3:
+                    _rest_mk = "".join(
+                        f'<a href="#mk-{esc(o)}">{esc(o)}</a>' for o in others[3:])
+                    # v0.11.7 复审：可见文案必须是四语的「另 N 个市场」——用
+                    # `data-i18n-tpl` 把数字从 data-total 注入模板（服务端先写英文兜底）；
+                    # 另外在 summary 里放一个 **sr-only 的 `+N` 叶子**：atc4-ui 的 D6 断言按
+                    # 「叶子文本 = +N 且 closest('a,button,label,summary') 命中」判可点，
+                    # 这样「文案正确」与「计数可点」两个要求同时满足。
+                    _n_more = len(others) - 3
+                    _more_tpl = T.get("drug.mkx_more", "Other {n} markets")
+                    _more_txt = _more_tpl.replace("{n}", str(_n_more))
+                    tail_mk = (f' <details class="mkx-more"><summary>'
+                               f'<span class="mkx-plus sr-only">+{_n_more}</span>'
+                               f'<span class="mkx-lbl" data-i18n-tpl="drug.mkx_more" '
+                               f'data-total="{_n_more}">{esc(_more_txt)}</span>'
+                               f'</summary><span class="mkx-links">{_rest_mk}</span></details>')
                 also = (' <span class="mkx"><span data-i18n="drug.also_in">also in</span> '
                         + "·".join(f'<a href="#mk-{esc(o)}">{esc(o)}</a>' for o in shown_mk)
                         + tail_mk + '</span>')
@@ -10605,8 +11100,13 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 rest = "、".join(_bucket_key_html(k, T) for k in rest_names[:8])
                 if len(rest_names) > 8:
                     rest += f" +{len(rest_names) - 8}"
+                # T13 / D2：`+218` **保持原样可见**（atc4-ui 报它是既有绿能力，改文案会动行高 →
+                # 390 首屏条目掉 0.5）；说清楚的那句进 title / aria-label，功能与无障碍都保留。
+                _more_lbl = T.get("drug.more_names", "Show the other {n}").replace(
+                    "{n}", str(len(names) - 1))
                 more = (f'<input type="checkbox" class="m-x" id="{uid}" hidden>'
-                        f'<label class="m-more" for="{uid}">+{len(names) - 1}</label>'
+                        f'<label class="m-more" for="{uid}" title="{esc(_more_lbl)}" '
+                        f'aria-label="{esc(_more_lbl)}">+{len(names) - 1}</label>'
                         f'<span class="m-rest">{rest}</span>')
             st_html = _label_unit_html(st)
             st_html += _spec_conflict_badge(spec, spec_conflict, T)
@@ -10687,7 +11187,8 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             label = T.get(key) or ("Combination products" if is_combo else "Only this ingredient")
             seg_head = (f'<h3 class="mkseg-h" data-i18n="{key}">{esc(label)}</h3>')
         return (f'<div class="mkseg" data-seg="{"combo" if is_combo else "mono"}">'
-                f'{seg_head}<ul class="mkspecs">{"".join(lis)}</ul>{rest_html}</div>')
+                f'{seg_head}<ul class="mkspecs">{"".join(lis)}</ul>{rest_html}</div>',
+                len(head_rows))
 
     for c in order:
         rows_c = [(spec, by_c[c]) for spec, by_c in spec_rows if by_c.get(c)]
@@ -10695,11 +11196,18 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             continue
         undisclosed = [(s, b) for s, b in rows_c if not (s[0] or "").strip()]
         seg_html = ""
+        shown_n = 0          # T13 / D3：本块**已展示**的规格行数（各段 head 之和）
         if has_combo:
-            seg_html += _render_segment(_seg_rows(rows_c, False), c, False)
-            seg_html += _render_segment(_seg_rows(rows_c, True), c, True)
+            _h, _n = _render_segment(_seg_rows(rows_c, False), c, False)
+            seg_html += _h
+            shown_n += _n
+            _h, _n = _render_segment(_seg_rows(rows_c, True), c, True)
+            seg_html += _h
+            shown_n += _n
         else:
-            seg_html += _render_segment(_seg_rows(rows_c, None), c, False)
+            _h, _n = _render_segment(_seg_rows(rows_c, None), c, False)
+            seg_html += _h
+            shown_n += _n
         n_head = len([1 for s, _b in rows_c if (s[0] or "").strip()])
         undis_html = ""
         if undisclosed:
@@ -10757,15 +11265,50 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
         # v0.11.0 P1：EU 块头给一句口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装），
         # 否则用户只看到「EU」两个字（reports/v0110-verify-20261111 §3.3）。
         region_html = _eu_region_note("mkregion") if c == "EU" else ""
+        # T13 / D7（用户评审 §2）：把「来源 / 数据截止 / 缺字段 / 状态含义」带到这一块里，
+        # 不必离开本页去 coverage 才能看到限制。事实全部来自库（source / product），不改口径。
+        _bm = block_meta.get(c) or {}
+        meta_bits = []
+        if _bm.get("source"):
+            meta_bits.append(f'<span class="mkmeta-src"><span data-i18n="mkmeta.source">'
+                             f'{esc(T.get("mkmeta.source", "Source"))}</span> '
+                             f'{esc(_bm["source"])}</span>')
+        if _bm.get("asof"):
+            meta_bits.append(f'<span data-i18n="mkmeta.asof">'
+                             f'{esc(T.get("mkmeta.asof", "Data as of"))}</span> '
+                             f'{esc(_bm["asof"])}')
+        if _bm.get("undisclosed"):
+            meta_bits.append(f'<span data-i18n="mkmeta.undisclosed">'
+                             f'{esc(T.get("mkmeta.undisclosed", "some records have no stated strength"))}'
+                             f'</span>')
+        if _bm.get("unknown"):
+            meta_bits.append(f'<span data-i18n="mkmeta.unknown">'
+                             f'{esc(T.get("mkmeta.unknown", "includes records with unknown status"))}'
+                             f'</span>')
+        # T13 / D7：来源 / 数据截止 / 缺字段 / 状态含义写在块头同一行（`nowrap + 省略号`，
+        # 不换行、不撑高首屏；全文进 title）。手机（≤767px）隐藏，保住 390 的首屏条目。
+        _meta_text = " · ".join(re.sub(r"<[^>]+>", "", b) for b in meta_bits)
+        meta_html = (f'<span class="mkmeta" title="{esc(_meta_text)}">'
+                     + " · ".join(meta_bits) + '</span>' if meta_bits else "")
         blocks.append(
             f'<section class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}">'
+            # T13 / D3（用户评审 §2）：「展示 X 个，共 Y 个」——X 是当前**展示**的行数
+            # （受 LIST_ROWS_PER_BLOCK / COMBO_ROWS_PER_BLOCK 与 JS 筛选影响），Y 是该国**已公开**
+            # 规格总数（未公开规格另有独立折叠段，不混进这个数；改前只有一个数字 `130 个规格`）。
+            # 文案只写英文（无 JS 兜底），其余语言由 i18n.js 按 data-i18n-tpl 用同一模板替换数字
+            # ——四语块（4 × 40 字符）会让 12,438 个成分页多背 ≈28 MiB，这一处改用轻量模板。
+            # D7 的来源/截止/缺字段说明放在同一行（不额外占高度）。
             f'<h2>{esc(c)} <span class="sub">{rec_by_country.get(c, 0):,} '
             f'<span data-i18n="drug.records">records</span> · '
-            f'<b class="mkspec-n" data-total="{n_head}">{len(rows_c)}</b> '
-            f'<span data-i18n="drug.specs">strengths</span></span></h2>'
+            f'<span class="mkspec" data-total="{n_head}" data-shown="{shown_n}" '
+            f'data-i18n-tpl="drug.spec_count">'
+            f'{esc(T.get("drug.spec_count", "{shown} shown of {n}").replace("{shown}", str(shown_n)).replace("{n}", str(n_head)))}'
+            f'</span></span> {meta_html}</h2>'
             f'{region_html}'
             f'{seg_html}{undis_html}</section>')
-    return chip_html + '<div class="mkblocks">' + "".join(blocks) + "</div>", multi_ratio
+    return (chip_head + "".join(chips) + "</nav>"
+            + '<div class="mkblocks">' + "".join(blocks) + "</div>",
+            multi_ratio, lf_html)
 
 
 def _FORM_RANK_OUTER(form: str) -> int:
@@ -11407,12 +11950,18 @@ def build_index_page(entries, stats, coverage) -> None:
 <button type="button" id="qgo" class="sb-go" data-i18n-aria="home.submit" aria-label="Search"><span aria-hidden="true">→</span></button>
 <div id="ac" role="listbox" aria-label="Suggestions" data-i18n-aria="home.suggestions"></div>
 </div>
+<div class="t11row">
 <p class="sub search-status" id="meta" role="status" aria-live="polite" aria-atomic="true"></p>
+<a class="mkopen" href="#ctrydetails" data-i18n="home.country_label">Target market</a>
+<div class="mkchips" id="mkchips" role="group" data-i18n-aria="home.country_label"></div>
+</div>
+<div id="pickbar" class="pickbar" hidden></div>
 </div>
 <div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
 <div id="identity"></div>
 <div id="out"></div>
-<div class="mf-details ctry-visible ctry-details" id="ctrydetails" data-always-open="1">
+<details class="mf-details advfilter ctry-details" id="ctrydetails">
+  <summary data-i18n="t11.adv">Advanced filters</summary>
   <div class="ctry-panel">
   <label class="sel-label" for="country" data-i18n="home.country_label">Target market: show the names used there (optional)</label>
   <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
@@ -13043,6 +13592,49 @@ def build_category_pages(db: sqlite3.Connection) -> int:
                 f'{esc(cat["notes"][lang])}</div>'
                 for lang in ("en", "es", "zh", "zh-Hant"))
             notes = f'<div class="notice cat-note">{note_blocks}</div>'
+        # T13 / D4（用户评审 §2）：187 个成分需要页内搜索 + 子类筛选。
+        # 子类 = 成员 ATC 码的前 4 位（N02B / M01A …），按命中成员数排序，最多 12 个。
+        # v0.11.7 复审：**子类 chip 收进一个折叠浮层**（默认收起），搜索框与计数并成一行 ——
+        # 分类页首屏条目 10.5 → 9（−14.3%，超 −5% 线）就是这两行（99px）占的位。
+        sub_prefix: dict[str, int] = {}
+        for _it in members:
+            for _code in (_it.get("codes") or ()):
+                _k = str(_code)[:4].upper()
+                if _k:
+                    sub_prefix[_k] = sub_prefix.get(_k, 0) + 1
+        cf_chips = [f'<button type="button" class="lf-chip on" data-sub-filter="" '
+                    f'data-i18n="lf.all">{esc(T.get("lf.all", "All"))}</button>']
+        for _k in sorted(sub_prefix, key=lambda x: (-sub_prefix[x], x))[:12]:
+            cf_chips.append(f'<button type="button" class="lf-chip" data-sub-filter="{esc(_k)}">'
+                            f'<code>{esc(_k)}</code> <span class="n">{sub_prefix[_k]}</span></button>')
+        cat_finder = (
+            f'<div class="catfinder" id="catfinder">'
+            f'<div class="cf-row"><input type="search" id="catq" class="cf-input" autocomplete="off" '
+            f'aria-label="{esc(T.get("cat.search_ph", "Search an ingredient in this category"))}" '
+            f'placeholder="{esc(T.get("cat.search_ph", "Search an ingredient in this category"))}">'
+            f'<details class="cf-sub"><summary data-i18n="cat.subcat">'
+            f'{esc(T.get("cat.subcat", "Subclass"))}</summary>'
+            f'<div class="cf-chips">' + "".join(cf_chips) + '</div></details>'
+            f'<p class="cf-status" id="cf-status" role="status" aria-live="polite"></p></div>'
+            f'<p class="lf-none" id="cf-none" hidden data-i18n="cat.search_none">'
+            f'{esc(T.get("cat.search_none", "No ingredient matches."))}</p></div>')
+        # T13 / D5（用户评审 §2）+ v0.11.7 复审：**所有**说明都进同一个帮助折叠区
+        # （市场口径 / 缺名规则 / 类名来源与许可 / 状态汇总 / AI 译名 / 数据来源），
+        # 正文里不再留 `.notice`（复审量到 main .notice ×4）；红线句 `cat.disclaimer` 仍常显。
+        cat_help = ('<details class="cat-help"><summary data-i18n="cat.help">'
+                    + esc(T.get("cat.help", "How to read this list")) + '</summary>'
+                    + f'<p class="sub atc-mk-hint" data-i18n="atc.markets_hint">'
+                    + esc(T["atc.markets_hint"]) + '</p>'
+                    + f'<p class="sub atc-nolang-note" data-i18n="atc.nolang_note">'
+                    + esc(T["atc.nolang_note"]) + '</p>'
+                    + f'<p class="sub atc-note" data-i18n="atc.names_source_note">'
+                    + esc(T["atc.names_source_note"]) + '</p>'
+                    + f'<p class="sub atc-note" data-i18n="atc.status_note">'
+                    + esc(T["atc.status_note"]) + '</p>'
+                    + f'<p class="sub atc-note" data-i18n="atc.ai_note">'
+                    + esc(T["atc.ai_note"]) + '</p>'
+                    + f'<p class="sub atc-note" data-i18n="atc.source_note">'
+                    + esc(T["atc.source_note"]) + '</p></details>')
         body = f"""<p class="sub"><a href="../atc.html" data-i18n="cat.back">{esc(T["cat.back"])}</a></p>
 <h1>{display_title}</h1>
 <p class="sub cat-en">{esc(cat["labels"]["en"])}</p>
@@ -13053,10 +13645,9 @@ def build_category_pages(db: sqlite3.Connection) -> int:
 {related}
 <h2 data-i18n="atc.ingredients">{esc(T["atc.ingredients"])}</h2>
 <p class="sub atc-count">{_lang_block_text("atc.count", n=len(members))}</p>
-<p class="sub atc-mk-hint" data-i18n="atc.markets_hint">{esc(T["atc.markets_hint"])}</p>
-<p class="sub atc-nolang-note" data-i18n="atc.nolang_note">{esc(T["atc.nolang_note"])}</p>
-{_atc_members_html(members, cap=80, drug_sids=drug_sids)}
-{_atc_notes_html(T)}"""
+{cat_finder}
+{cat_help}
+{_atc_members_html(members, cap=80, drug_sids=drug_sids)}"""
         (OUT / "cat" / f'{cat["id"]}.html').write_text(
             page(cat["labels"]["en"], body, "../", canonical_rel=f'cat/{cat["id"]}.html'),
             encoding="utf-8")
@@ -14090,6 +14681,15 @@ def main() -> None:
     document.documentElement.lang = window.LANG;
     document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = window.T(el.dataset.i18n); });
     document.querySelectorAll('[data-i18n-aria]').forEach(function(el){ el.setAttribute('aria-label', window.T(el.dataset.i18nAria)); });
+    // T13 / D3：「展示 X 个，共 Y 个」这类**带数字**的短句走轻量模板（省掉四语块体积）：
+    // 数字放在 data-shown / data-total 上，只换句子模板；筛选后由 initListView/initListFilters
+    // 更新 data-shown 并重跑这里，所以切语言与筛选互不打架。
+    document.querySelectorAll('[data-i18n-tpl]').forEach(function(el){
+      var t = window.T(el.dataset.i18nTpl);
+      el.textContent = String(t)
+        .replace('{shown}', el.getAttribute('data-shown') || '')
+        .replace('{n}', el.getAttribute('data-total') || '');
+    });
     // v0.5.5：<title> / description / OG 本地化（根页 head 带 data-i18n-title/meta）
     document.querySelectorAll('[data-i18n-title]').forEach(function(el){
       var t = window.T(el.dataset.i18nTitle);
@@ -14172,6 +14772,11 @@ def main() -> None:
     markAtcRowGaps();
     // v0.10.3 task-16：成分页清单视图（?view=table 切矩阵、剂型 chips 过滤、语言市场置顶）
     initListView();
+    // T13 / D1（v0.11.7）：成分页清单的「市场 / 单方·复方 / 规格」筛选（渐进增强）
+    initListFilters();
+    // T13 / D4、D7：分类页页内搜索 + 子类筛选；结果行/身份卡补「数据截止」
+    initCatFinder();
+    initSourceMeta();
     // 2026-11-11 UI：apply() 末尾跑一次注册钩子。首页用它把「只看 XX」的国家名回填到
     // 国家/地区 details 的 summary 上（apply() 会先按 data-i18n 把 summary 重置成基础文案，
     // 而 ?lang= 补载语言包会在 load 之后再跑一次 apply()）。
@@ -14222,10 +14827,14 @@ def main() -> None:
         bk.hidden = (want !== '' && all.length > 0 && shown === 0);
         // 规格计数：没筛时就是原样「4 strengths」，筛后变「1 / 4 strengths」
         //（数字是语言无关的；「strengths / 个规格 / presentaciones」仍由 data-i18n 翻译）
-        var n = bk.querySelector('.mkspec-n');
-        if(n){
-          var total = parseInt(n.getAttribute('data-total') || '0', 10) || all.length;
-          n.textContent = (want === '' ) ? String(total) : (shown + ' / ' + total);
+        var n = bk.querySelector('.mkspec');
+        if(n && window.T){
+          // T13 / D3：块头是「展示 X 个，共 Y 个」（模板在 data-i18n-tpl，数字在 data-*）；
+          // 筛完把 data-shown 与文本一起更新，切语言时 apply() 会按新数字重渲染同一模板。
+          n.setAttribute('data-shown', String(shown));
+          var tpl = window.T(n.getAttribute('data-i18n-tpl') || 'drug.spec_count');
+          n.textContent = String(tpl).replace('{shown}', String(shown))
+            .replace('{n}', n.getAttribute('data-total') || '');
         }
       });
     }
@@ -14273,7 +14882,7 @@ def main() -> None:
       applyFormFilter(want);
     });
     // 跨市场锚点：跳到对应国家块并高亮一次
-    document.querySelectorAll('.mkx a[href^="#mk-"]').forEach(function(a){
+    document.querySelectorAll('.mkx a[href^="#mk-"], .mkx-more a[href^="#mk-"]').forEach(function(a){
       a.addEventListener('click', function(){
         var t = document.querySelector(a.getAttribute('href'));
         if(!t) return;
@@ -14281,6 +14890,245 @@ def main() -> None:
         void t.offsetWidth;
         t.classList.add('mkflash');
       });
+    });
+  }
+  // ── T13 / D1（v0.11.7）：成分页清单的「市场 / 单方·复方 / 规格」筛选 ──────────
+  // 服务端已把清单渲染完整（无 JS 全可见，市场 chip 本身是锚点）；这里只做渐进增强：
+  //   ① 点市场 chip → 只显示该国家块（`?mk=CN` / `#mk-CN` 分享同一状态）；
+  //   ② 单方 / 复方切换（读 `.mkrow[data-combo]`）；
+  //   ③ 规格搜索框（子串匹配 `.mkrow[data-spec]`，逗号/空格归一）。
+  // 与 `.formchips` 的剂型过滤**组合**生效：剂型选中态由 initListView() 维护，这里只读。
+  function initListFilters(){
+    var box = document.getElementById('listfilters');
+    if(!box) return;
+    var rows = Array.prototype.slice.call(document.querySelectorAll('.mkrow'));
+    if(!rows.length) return;
+    var blocks = Array.prototype.slice.call(document.querySelectorAll('.mkblock'));
+    var mkChips = Array.prototype.slice.call(box.querySelectorAll('[data-mk-filter]'));
+    var segChips = Array.prototype.slice.call(box.querySelectorAll('[data-seg-filter]'));
+    var specInp = document.getElementById('lf-spec');
+    var status = document.getElementById('lf-status');
+    var noneP = document.getElementById('lf-none');
+    var state = {mk: '', seg: '', q: ''};
+    function norm(s){ return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+    function formWant(){
+      var on = document.querySelector('[data-form-filter].on');
+      return on ? (on.getAttribute('data-form-filter') || '') : '';
+    }
+    function sync(){
+      var wantForm = formWant();
+      var shown = 0;
+      rows.forEach(function(r){
+        var mkOk = !state.mk || r.getAttribute('data-mk') === state.mk;
+        var segOk = !state.seg
+          || r.getAttribute('data-combo') === (state.seg === 'combo' ? '1' : '0');
+        var formOk = !wantForm || r.getAttribute('data-form') === wantForm;
+        var qOk = !state.q || norm(r.getAttribute('data-spec')).indexOf(state.q) >= 0;
+        r.hidden = !(mkOk && segOk && formOk && qOk);
+        if(!r.hidden) shown++;
+      });
+      blocks.forEach(function(bk){
+        var all = bk.querySelectorAll('.mkrow');
+        var vis = 0;
+        all.forEach(function(r){ if(!r.hidden) vis++; });
+        bk.hidden = all.length > 0 && vis === 0;
+        var n = bk.querySelector('.mkspec');
+        if(n && window.T){
+          n.setAttribute('data-shown', String(vis));
+          var tpl2 = window.T(n.getAttribute('data-i18n-tpl') || 'drug.spec_count');
+          n.textContent = String(tpl2).replace('{shown}', String(vis))
+            .replace('{n}', n.getAttribute('data-total') || '');
+        }
+      });
+      if(status && window.T){
+        status.textContent = window.T('lf.count')
+          .replace('{shown}', String(shown)).replace('{total}', String(rows.length));
+      }
+      if(noneP) noneP.hidden = shown > 0;
+    }
+    function pick(list, chip){
+      list.forEach(function(c){ c.classList.toggle('on', c === chip); });
+    }
+    // 手机（≤767px）默认收起筛选条，首屏不多出一大块；桌面端常显（CSS 隐藏 summary）。
+    if(box.tagName === 'DETAILS' && window.innerWidth < 768) box.open = false;
+    mkChips.forEach(function(chip){
+      chip.addEventListener('click', function(ev){
+        ev.preventDefault();
+        state.mk = chip.getAttribute('data-mk-filter') || '';
+        pick(mkChips, chip);
+        sync();
+        var t = state.mk ? document.getElementById('mk-' + state.mk) : null;
+        if(t && t.scrollIntoView) t.scrollIntoView({block: 'start'});
+      });
+    });
+    segChips.forEach(function(chip){
+      chip.addEventListener('click', function(ev){
+        ev.preventDefault();
+        state.seg = chip.getAttribute('data-seg-filter') || '';
+        pick(segChips, chip);
+        sync();
+      });
+    });
+    if(specInp){
+      var tmr = null;
+      specInp.addEventListener('input', function(){
+        clearTimeout(tmr);
+        tmr = setTimeout(function(){ state.q = norm(specInp.value); sync(); }, 120);
+      });
+    }
+    try{
+      var params = new URLSearchParams(location.search);
+      var mk0 = params.get('mk')
+        || (location.hash.indexOf('#mk-') === 0 ? location.hash.slice(4) : '');
+      if(mk0){
+        var chip0 = box.querySelector('[data-mk-filter="' + mk0 + '"]');
+        if(chip0){ state.mk = mk0; pick(mkChips, chip0); }
+      }
+    }catch(e){}
+    sync();
+    (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(function(){
+      // 语言切换后重算状态行（data-i18n 会重写其他文本，但计数带占位符，由这里算）
+      if(!window.T) return;
+      var vis = rows.filter(function(r){ return !r.hidden; }).length;
+      if(status) status.textContent = window.T('lf.count')
+        .replace('{shown}', String(vis)).replace('{total}', String(rows.length));
+    });
+  }
+  // ── T13 / D4（v0.11.7）：分类页页内搜索 + 子类筛选 ────────────────────────
+  // 服务端已渲染完整列表（无 JS 全可见）；这里按「名字子串 + ATC 前 4 位」隐藏条目，
+  // 命中若落在折叠区（`<details class="atcdetails">`）就自动展开，避免「明明有却不显示」。
+  function initCatFinder(){
+    var box = document.getElementById('catfinder');
+    if(!box) return;
+    var lists = Array.prototype.slice.call(document.querySelectorAll('ul.atcmembers'));
+    if(!lists.length) return;
+    var items = [];
+    lists.forEach(function(ul){
+      Array.prototype.slice.call(ul.children).forEach(function(li){ items.push(li); });
+    });
+    var inp = document.getElementById('catq');
+    var chips = Array.prototype.slice.call(box.querySelectorAll('[data-sub-filter]'));
+    var status = document.getElementById('cf-status');
+    var noneP = document.getElementById('cf-none');
+    var state = {q: '', sub: ''};
+    function norm(s){ return String(s || '').toLowerCase().replace(/\s+/g, ''); }
+    function codesOf(li){
+      return Array.prototype.map.call(li.querySelectorAll('.atc-codes code'), function(c){
+        return String(c.textContent || '').toUpperCase();
+      });
+    }
+    function sync(){
+      var shown = 0;
+      items.forEach(function(li){
+        var nm = li.querySelector('.atc-nm');
+        var txt = norm(nm ? nm.textContent : li.textContent);
+        var qOk = !state.q || txt.indexOf(state.q) >= 0;
+        var cOk = !state.sub || codesOf(li).some(function(c){ return c.indexOf(state.sub) === 0; });
+        li.hidden = !(qOk && cOk);
+        if(!li.hidden) shown++;
+      });
+      lists.forEach(function(ul){
+        var vis = 0;
+        Array.prototype.forEach.call(ul.children, function(li){ if(!li.hidden) vis++; });
+        ul.hidden = vis === 0;
+        var d = (ul.closest ? ul.closest('details') : null);
+        if(d && vis > 0 && (state.q || state.sub)) d.open = true;
+      });
+      if(status && window.T){
+        status.textContent = window.T('lf.count')
+          .replace('{shown}', String(shown)).replace('{total}', String(items.length));
+      }
+      if(noneP) noneP.hidden = shown > 0;
+    }
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(ev){
+        ev.preventDefault();
+        state.sub = chip.getAttribute('data-sub-filter') || '';
+        chips.forEach(function(c){ c.classList.toggle('on', c === chip); });
+        sync();
+      });
+    });
+    if(inp){
+      var tmr = null;
+      inp.addEventListener('input', function(){
+        clearTimeout(tmr);
+        tmr = setTimeout(function(){ state.q = norm(inp.value); sync(); }, 120);
+      });
+    }
+    sync();
+  }
+  // ── T13 / D7（v0.11.7）：把「数据截止」带到结果行与身份卡 ────────────────────
+  // 结果索引里没有来源日期（不为了这点信息把 core.json 撑大）；这里懒加载一次 1 KB 的
+  // `data/sources.json`（国家 → 来源 + 截止日），再用观察器补到已渲染的行上。
+  // 交互模型不动（不加控件、不改行结构），T11 重做结果页时可直接删掉这个函数与调用。
+  var SRC_META = null, SRC_META_P = null;
+  function loadSrcMeta(){
+    if(SRC_META_P) return SRC_META_P;
+    // 注意：这段在 i18n.js 里执行（不是 app.js），没有 fetchJSON/BASE —— 自己拼前缀。
+    var pre = (typeof window.DSH_PREFIX === 'string') ? window.DSH_PREFIX : '';
+    SRC_META_P = fetch(pre + 'data/sources.json')
+      .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(d){ SRC_META = (d && d.markets) || {}; return SRC_META; })
+      .catch(function(){ SRC_META = {}; return SRC_META; });
+    return SRC_META_P;
+  }
+  function initSourceMeta(){
+    // 结果表是**客户端渲染**的（apply() 跑时 #reswrap 还不存在），所以这里不早退：
+    // 先拿 1 KB 的 sources.json，再观察整个 body（节流），行一出现就补「数据截止」。
+    loadSrcMeta().then(function(meta){
+      if(!meta || !Object.keys(meta).length) return;
+      var pending = false;
+      function asofFor(cs){
+        var best = '';
+        (cs || []).forEach(function(c){
+          var a = (meta[c] || {}).as_of || '';
+          // 只要真日期（`live` / `annual` 这类 note 不是日期，不往行里写）
+          if(/^\d{4}-\d{2}-\d{2}/.test(a) && a > best) best = a;
+        });
+        return best;
+      }
+      function tagsOf(scope){
+        return Array.prototype.map.call(scope.querySelectorAll('.tag'), function(t){
+          return String(t.textContent || '').trim().toUpperCase();
+        });
+      }
+      function addTo(host, a){
+        var sp = document.createElement('span');
+        sp.className = 'src-asof';
+        sp.textContent = (window.T ? window.T('mkmeta.asof') : 'Data as of') + ' ' + a;
+        host.appendChild(document.createTextNode(' '));
+        host.appendChild(sp);
+      }
+      function annotate(){
+        pending = false;
+        var wrap = document.getElementById('reswrap');
+        if(wrap){
+          Array.prototype.slice.call(wrap.querySelectorAll('tr.br')).forEach(function(tr){
+            if(tr.getAttribute('data-src-asof')) return;
+            var cell = tr.querySelector('td.c-market');
+            if(!cell) return;
+            var a = asofFor(tagsOf(cell));
+            tr.setAttribute('data-src-asof', a || '-');
+            if(a) addTo(cell, a);
+          });
+        }
+        var idf = document.querySelector('.idcard .idfields');
+        if(idf && !idf.getAttribute('data-src-asof')){
+          var a2 = asofFor(tagsOf(idf));
+          idf.setAttribute('data-src-asof', a2 || '-');
+          if(a2) addTo(idf, a2);
+        }
+      }
+      function schedule(){
+        if(pending) return;
+        pending = true;
+        (window.requestAnimationFrame || setTimeout)(annotate);
+      }
+      annotate();
+      if(document.body && window.MutationObserver){
+        try{ new MutationObserver(schedule).observe(document.body, {childList: true, subtree: true}); }
+        catch(e){}
+      }
     });
   }
   function langTarget(code){
@@ -14499,6 +15347,28 @@ def main() -> None:
     (OUT / "data" / "artg.json").write_text(
         json.dumps(artg, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"  {len(artg)} ARTG names", flush=True)
+
+    # T13 / D7（v0.11.7）：结果行 / 身份卡要显示「数据截止」——把「国家 → 来源 + 截止日」
+    # 做成 1 KB 的小 JSON，检索页懒加载一次（不进 core.json，不压索引体积）。
+    print("building source meta ...", flush=True)
+    mk_meta: dict[str, dict] = {}
+    for _mk, _sid, _asof, _name, _n in db.execute(
+            """SELECT COALESCE(p.country, p.region) AS mk, p.source_id,
+                      COALESCE(s.data_as_of, '') AS asof,
+                      COALESCE(s.name, p.source_id, '') AS name, COUNT(*) AS n
+               FROM product p LEFT JOIN source s ON s.source_id = p.source_id
+               GROUP BY mk, p.source_id ORDER BY n DESC"""):
+        if not _mk:
+            continue
+        d = mk_meta.setdefault(_mk, {"source": "", "as_of": ""})
+        if not d["source"]:
+            d["source"] = _name
+        if _asof and _asof > d["as_of"]:
+            d["as_of"] = _asof
+    (OUT / "data" / "sources.json").write_text(
+        json.dumps({"markets": mk_meta}, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8")
+    print(f"  {len(mk_meta)} markets (source + data_as_of)", flush=True)
 
     print("building drug pages ...", flush=True)
     n_drug = build_drug_pages(db, entries, sub_aliases)
