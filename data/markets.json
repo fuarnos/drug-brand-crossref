@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-11",
+  "updated": "2026-11-15",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -296,6 +296,31 @@
       "order": 90,
       "data_as_of": "2026-11-03",
       "notes": "区域层（kind=region，非国别）：EU 集中审批 = product.region='EU' + country=NULL（EC Union Register 主源 CC BY 4.0 + EMA 交叉核对）。v0.11.0（2026-11-11）写入 2,095 产品。own_data=true 表示区域层自带数据、不由子市场汇总（因此可单独启用）。口径：授权有效 ≠ 各国在售；无规格/剂型/包装；不建 EU 名字页（只在搜索结果/成分页/覆盖页出现）。成员国后续用 kind=country、parent=EU 注册。"
+    },
+    {
+      "code": "JP",
+      "kind": "country",
+      "parent": null,
+      "group": "ASIA",
+      "name": {
+        "en": "Japan",
+        "es": "Japón",
+        "zh": "日本",
+        "zh-Hant": "日本",
+        "fr": "Japon"
+      },
+      "i18n_key": "home.jp",
+      "flag": "🇯🇵",
+      "source_id": "jp_yakka",
+      "extra_source_ids": [],
+      "default_lang": "en",
+      "languages": [
+        "en"
+      ],
+      "enabled": true,
+      "order": 120,
+      "data_as_of": "2026-11-01",
+      "notes": "厚生労働省「薬価基準収載品目リスト」2026-11-01 版（PDL 1.0，署名+加工声明）。口径：**仅收载医保（薬価基準）品目，不是注册库，也不等于当前在售**；成分名为日文一般名，商品名原样日文（不翻译）；无 ATC 的成分页面显示「—」。v0.12.0（2026-11-15）写入 12,442 产品 / 10,403 成分。"
     }
   ]
 }

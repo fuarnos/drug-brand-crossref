@@ -1,0 +1,97 @@
+substance_id,inn_en,inn_zh,inn_zh_source,atc,atc_source,confidence,jp_names,tokens,evidence
+maxacalcitol,Maxacalcitol,,,,,medium,マキサカルシトール,23,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+sodium-azulene-sulfonate,Sodium Azulene Sulfonate,,,,,medium,アズレンスルホン酸ナトリウム水和物,21,fuzzy2 人工判定：原映射错指 Zuranolone；本行为正确 INN（库内无）
+blonanserin,Blonanserin,,,,,medium,ブロナンセリン,20,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+nafamostat,Nafamostat,,,,,medium,ナファモスタットメシル酸塩,17,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+imidafenacin,Imidafenacin,,,,,high,イミダフェナシン,15,WHO INN 名录 PR090-021（list_no 90）
+sarpogrelate,Sarpogrelate,,,,,medium,サルポグレラート塩酸塩,15,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+pantethine,Pantethine,二硫二泛酸,Wikidata Q228762 zh 标签（CC0，非药典名）,A11HA32,Wikidata Q228762 P267,high,パンテチン,14,Wikidata Q228762 en 标签一致+ATC A11HA32
+mitiglinide,Mitiglinide,,,,,medium,ミチグリニドカルシウム水和物,14,fuzzy2 人工判定：原映射错指 Metocurine；本行为正确 INN（库内无）
+benidipine,Benidipine,,,,,medium,ベニジピン塩酸塩,13,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+cefditoren-pivoxil,Cefditoren pivoxil,,,,,medium,セフジトレン ピボキシル,13,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+arbekacin,Arbekacin,,,,,medium,アルベカシン硫酸塩,12,fuzzy2 人工判定：原映射错指 Reboxetine；本行为正确 INN（库内无）
+zinc-acetate,Zinc acetate,乙酸锌,Wikidata Q204639 zh 标签（CC0，非药典名）,A16AX05,Wikidata Q204639 P267,high,酢酸亜鉛水和物,11,Wikidata Q204639 en 标签一致+ATC A16AX05
+fursultiamine,Fursultiamine,,,,,medium,フルスルチアミン塩酸塩,11,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+eldecalcitol,Eldecalcitol,,,,,high,エルデカルシトール,10,WHO INN 名录 RE059-024（list_no 59）
+beraprost,Beraprost,,,B01AC19,Wikidata Q5977854 P267,high,ベラプロストナトリウム,9,Wikidata Q5977854 en 标签一致+ATC B01AC19
+tranilast,Tranilast,,,,,medium,トラニラスト,9,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+suplatast,Suplatast,,,,,medium,スプラタストトシル酸塩,9,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+pemirolast,Pemirolast,,,,,medium,ペミロラストカリウム,9,fuzzy2 人工判定：原映射错指 Pamidronate；本行为正确 INN（库内无）
+etizolam,Etizolam,依替唑侖,Wikidata Q409966 zh 标签（CC0，非药典名）,N05BA19,Wikidata Q409966 P267,high,エチゾラム,8,Wikidata Q409966 en 标签一致+ATC N05BA19
+taltirelin,Taltirelin,,,,,medium,タルチレリン水和物,8,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+mirogabalin,Mirogabalin,,,,,medium,ミロガバリンベシル酸塩,8,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+azelnidipine,Azelnidipine,,,,,medium,アゼルニジピン,8,fuzzy2 人工判定：原映射错指 Isradipine；本行为正确 INN（库内无）
+mequitazine,Mequitazine,,,R06AD07,Wikidata Q3333256 P267,high,メキタジン,7,Wikidata Q3333256 en 标签一致+ATC R06AD07
+parnaparin,Parnaparin,帕肝素,Wikidata Q3896308 zh 标签（CC0，非药典名）,B01AB07,Wikidata Q3896308 P267,high,パルナパリンナトリウム,7,Wikidata Q3896308 en 标签一致+ATC B01AB07
+tocopherol-nicotinate,Tocopherol nicotinate,,,,,medium,トコフェロールニコチン酸エステル,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+irsogladine,Irsogladine,,,,,medium,イルソグラジンマレイン酸塩,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+upacicalcet,Upacicalcet,,,,,medium,ウパシカルセトナトリウム水和物,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+bromperidol,Bromperidol,,,N05AD06,Wikidata Q4973749 P267,high,ブロムペリドール,6,Wikidata Q4973749 en 标签一致+ATC N05AD06
+trichlormethiazide,Trichlormethiazide,三氯噻嗪,Wikidata Q2072745 zh 标签（CC0，非药典名）,C03AA06,Wikidata Q2072745 P267,high,トリクロルメチアジド,6,Wikidata Q2072745 en 标签一致+ATC C03AA06
+temocapril,Temocapril,,,C09AA14,Wikidata Q7698194 P267,high,テモカプリル塩酸塩,6,Wikidata Q7698194 en 标签一致+ATC C09AA14
+tipepidine,Tipepidine,,,R05DB24,Wikidata Q7808816 P267,high,チペピジンヒベンズ酸塩,6,Wikidata Q7808816 en 标签一致+ATC R05DB24
+topiroxostat,Topiroxostat,,,,,high,トピロキソスタット,6,WHO INN 名录 RE064-051（list_no 64）
+teneligliptin,Teneligliptin,,,,,high,テネリグリプチン臭化水素酸塩水和物,6,WHO INN 名录 PR099-064（list_no 99）
+rurioctocog-alfa,Rurioctocog Alfa,,,B02BD02,EMA Afstyla atc_code_human,high,ルリオクトコグアルファ(遺伝子組換え),6,EMA 上市药 Afstyla | 库内已有：lonoctocog-alfa | 更正：ルリオクトコグ アルファ = Rurioctocog Alfa（アドベイト）；库内只有 rurioctocog-alfa-pegol（アディノベイト = pegol 长效型），不是同一成分
+lanoconazole,Lanoconazole,卢立康唑,cn_inn_overrides.csv（https://www.wikidata.org/wiki/Q15624030；置信 high）,D01AC18,Wikidata Q15624030 P267,high,ラノコナゾール,6,WHO INN 名录 RE048-027（list_no 48） | Wikidata Q15624030 en 标签一致+ATC D01AC18 | 库内已有：luliconazole | 更正：ラノコナゾール = Lanoconazole（アスタット）；与同市场并存的ルリコナゾール = Luliconazole（ルリコン）是两个药，旧稿误指 Luliconazole
+tandospirone,Tandospirone,,,,,medium,タンドスピロンクエン酸塩,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+perospirone,Perospirone,,,,,medium,ペロスピロン塩酸塩水和物,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+esaxerenone,Esaxerenone,,,,,medium,エサキセレノン,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+sodium-ferrous-citrate,Sodium ferrous citrate,,,,,medium,クエン酸第一鉄ナトリウム,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+tiquizium,Tiquizium,,,,,medium,チキジウム臭化物,6,fuzzy2 人工判定：原映射错指 Chickweed；本行为正确 INN（库内无）
+dimemorfan,Dimemorfan,,,,,medium,ジメモルファンリン酸塩,6,fuzzy2 人工判定：原映射错指 Diamorphine；本行为正确 INN（库内无）
+lafutidine,Lafutidine,,,,,medium,ラフチジン,6,fuzzy2 人工判定：原映射错指 Rifandin；本行为正确 INN（库内无）
+gabexate,Gabexate,,,,,medium,ガベキサートメシル酸塩,6,fuzzy2 人工判定：原映射错指 Cobicistat；本行为正确 INN（库内无）
+suxamethonium,Suxamethonium,,,,,medium,スキサメトニウム塩化物水和物,6,fuzzy2 判定：应为该 INN，库内无（原映射指向 Suxametonio）
+ethyl-loflazepate,Ethyl loflazepate,,,N05BA18,Wikidata Q5404460 P267,high,ロフラゼプ酸エチル,5,Wikidata Q5404460 en 标签一致+ATC N05BA18
+denopamine,Denopamine,,,,,medium,デノパミン,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+pilsicainide,Pilsicainide,,,,,medium,ピルシカイニド塩酸塩水和物,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+methylephedrine,Methylephedrine,,,,,medium,dl-メチルエフェドリン塩酸塩,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+thiamine-disulfide,Thiamine disulfide,,,,,medium,チアミンジスルフィド,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）
+propericiazine,Propericiazine,,,,,medium,プロペリシアジン,5,fuzzy2 人工判定：原映射错指 Paliperidone；本行为正确 INN（库内无）
+clotiazepam,Clotiazepam,,,,,medium,クロチアゼパム,5,fuzzy2 人工判定：原映射错指 Clonazepam；本行为正确 INN（库内无）
+arotinolol,Arotinolol,,,,,medium,アロチノロール塩酸塩,5,fuzzy2 人工判定：原映射错指 Retinol；本行为正确 INN（库内无）
+cibenzoline,Cibenzoline,,,,,medium,シベンゾリンコハク酸塩,5,fuzzy2 人工判定：原映射错指 Soybean Oil；本行为正确 INN（库内无）
+trafermin,Trafermin,,,,,medium,トラフェルミン(遺伝子組換え),5,fuzzy2 人工判定：原映射错指 Trolamine；本行为正确 INN（库内无）
+clocapramine,Clocapramine,,,,,medium,クロカプラミン塩酸塩水和物,4,fuzzy2 人工判定：原映射错指 Clomipramine；本行为正确 INN（库内无）
+mosapramine,Mosapramine,,,,,medium,モサプラミン塩酸塩,4,fuzzy2 人工判定：原映射错指 Mesalamine；本行为正确 INN（库内无）
+bepridil,Bepridil,,,,,medium,ベプリジル塩酸塩水和物,4,fuzzy2 人工判定：原映射错指 Biperiden；本行为正确 INN（库内无）
+trapidil,Trapidil,,,,,medium,トラピジル,4,fuzzy2 人工判定：原映射错指 Etripamil；本行为正确 INN（库内无）
+ifenprodil,Ifenprodil,,,,,medium,イフェンプロジル酒石酸塩,4,fuzzy2 人工判定：原映射错指 Fampridine；本行为正确 INN（库内无）
+gamma-oryzanol,Gamma-Oryzanol,,,,,medium,ガンマオリザノール,4,fuzzy2 人工判定：原映射错指 Cyamemazine；本行为正确 INN（库内无）
+iothalamate-meglumine,Iothalamate Meglumine,,,,,medium,イオタラム酸メグルミン,4,fuzzy2 人工判定：原映射错指 Trimipramine；本行为正确 INN（库内无）
+oxazolam,Oxazolam,,,,,medium,オキサゾラム,3,fuzzy2 人工判定：原映射错指 Oxazepam；本行为正确 INN（库内无）
+cloxazolam,Cloxazolam,,,,,medium,クロキサゾラム,3,fuzzy2 人工判定：原映射错指 Carbazochrome；本行为正确 INN（库内无）
+pemoline,Pemoline,,,,,medium,ペモリン,3,fuzzy2 人工判定：原映射错指 Apomorphine；本行为正确 INN（库内无）
+vornorexant,Vornorexant,,,,,medium,ボルノレキサント水和物,3,fuzzy2 人工判定：原映射错指 Vernakalant；本行为正确 INN（库内无）
+pimobendan,Pimobendan,,,,,medium,ピモベンダン,3,fuzzy2 人工判定：原映射错指 Pimavanserin；本行为正确 INN（库内无）
+dotinurad,Dotinurad,,,,,medium,ドチヌラド,3,fuzzy2 人工判定：原映射错指 Dithranol；本行为正确 INN（库内无）
+faropenem,Faropenem,,,,,medium,ファロペネムナトリウム水和物,3,fuzzy2 人工判定：原映射错指 Ioflupane I 123；本行为正确 INN（库内无）
+dibekacin,Dibekacin,,,,,medium,ジベカシン硫酸塩,3,fuzzy2 人工判定：原映射错指 Dibucaine；本行为正确 INN（库内无）
+isopropyl-unoprostone,Isopropyl Unoprostone,,,,,medium,イソプロピルウノプロストン,3,fuzzy2 人工判定：原映射错指 Isopropyl Myristate；本行为正确 INN（库内无）
+setiptiline,Setiptiline,,,,,medium,セチプチリンマレイン酸塩,2,fuzzy2 人工判定：原映射错指 Azathioprine；本行为正确 INN（库内无）
+nemonapride,Nemonapride,,,,,medium,ネモナプリド,2,fuzzy2 人工判定：原映射错指 Nimesulide；本行为正确 INN（库内无）
+etretinate,Etretinate,,,,,medium,エトレチナート,2,fuzzy2 人工判定：原映射错指 Tretinoin；本行为正确 INN（库内无）
+ramatroban,Ramatroban,,,,,medium,ラマトロバン,2,fuzzy2 人工判定：原映射错指 Lamotrigine；本行为正确 INN（库内无）
+bucladesine,Bucladesine,,,,,medium,ブクラデシンナトリウム,2,fuzzy2 人工判定：原映射错指 Baclofen；本行为正确 INN（库内无）
+ozoralizumab,Ozoralizumab,,,,,medium,オゾラリズマブ(遺伝子組換え),2,fuzzy2 人工判定：原映射错指 Sarilumab；本行为正确 INN（库内无）
+benzylpenicillin,Benzylpenicillin,,,,,medium,ベンジルペニシリンカリウム,2,fuzzy2 人工判定：原映射错指 Benproperine；本行为正确 INN（库内无）
+cefozopran,Cefozopran,,,,,medium,セフォゾプラン塩酸塩,2,fuzzy2 人工判定：原映射错指 Isoflurane；本行为正确 INN（库内无）
+pimaricin,Pimaricin,,,,,medium,ピマリシン,2,fuzzy2 人工判定：原映射错指 Apomorphine；本行为正确 INN（库内无）
+ethenzamide,Ethenzamide,,,,,medium,エテンザミド,1,fuzzy2 人工判定：原映射错指 Ethionamide；本行为正确 INN（库内无）
+isopropylantipyrine,Isopropylantipyrine,,,,,medium,イソプロピルアンチピリン,1,fuzzy2 人工判定：原映射错指 Sapropterin；本行为正确 INN（库内无）
+bucolome,Bucolome,,,,,medium,ブコローム,1,fuzzy2 人工判定：原映射错指 Vecuronium；本行为正确 INN（库内无）
+dimetotiazine,Dimetotiazine,,,,,medium,ジメトチアジンメシル酸塩,1,fuzzy2 人工判定：原映射错指 Dimetindene；本行为正确 INN（库内无）
+pipamperone,Pipamperone,,,,,medium,ピパンペロン塩酸塩,1,fuzzy2 人工判定：原映射错指 Papaverine；本行为正确 INN（库内无）
+mepenzolate,Mepenzolate,,,,,medium,メペンゾラート臭化物,1,fuzzy2 人工判定：原映射错指 Omeprazole；本行为正确 INN（库内无）
+afloqualone,Afloqualone,,,,,medium,アフロクアロン,1,fuzzy2 人工判定：原映射错指 Fluorine；本行为正确 INN（库内无）
+cetotiamine,Cetotiamine,,,,,medium,セトチアミン塩酸塩水和物,1,fuzzy2 人工判定：原映射错指 Histamine；本行为正确 INN（库内无）
+bisbentiamine,Bisbentiamine,,,,,medium,ビスベンチアミン,1,fuzzy2 人工判定：原映射错指 Bosentan；本行为正确 INN（库内无）
+tofogliflozin,Tofogliflozin,,,,,medium,トホグリフロジン水和物,1,fuzzy2 人工判定：原映射错指 Ethacridine；本行为正确 INN（库内无）
+anamorelin,Anamorelin,,,,,medium,アナモレリン塩酸塩,1,fuzzy2 人工判定：原映射错指 Inamrinone；本行为正确 INN（库内无）
+forodesine,Forodesine,,,,,medium,フォロデシン塩酸塩,1,fuzzy2 人工判定：原映射错指 Felodipine；本行为正确 INN（库内无）
+gumarontinib,Gumarontinib,,,,,medium,グマロンチニブ水和物,1,fuzzy2 人工判定：原映射错指 Agomelatine；本行为正确 INN（库内无）
+prosultiamine,Prosultiamine,,,,,medium,プロスルチアミン,1,fuzzy2 人工判定：原映射错指 Eprosartan；本行为正确 INN（库内无）
+thrombomodulin-alfa,Thrombomodulin Alfa,,,,,medium,トロンボモデュリンアルファ(遺伝子組換え),1,fuzzy2 人工判定：原映射错指 Thrombin Alfa；本行为正确 INN（库内无）
+diclofenac-etalhyaluronate,Diclofenac Etalhyaluronate,,,,,medium,ジクロフェナクエタルヒアルロン酸ナトリウム,1,fuzzy2 人工判定：原映射错指 Diclofenac Diethylamine；本行为正确 INN（库内无）
+iomazenil,Iomazenil,,,,,medium,イオマゼニル(123I),1,fuzzy2 人工判定：原映射错指 Mazindol；本行为正确 INN（库内无）

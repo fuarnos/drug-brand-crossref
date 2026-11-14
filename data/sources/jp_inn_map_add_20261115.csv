@@ -1,0 +1,134 @@
+jp_name,substance_id,inn_en,target_inn,jp_name_norm,method,confidence,source,tokens,note
+セフカペン ピボキシル塩酸塩水和物,cn-d4f6d6b6a0,Cefcapene pivoxil,Cefcapene pivoxil,セフカペン ピボキシル塩酸塩水和物,t17-manual-gap,high,库内已有：cn-d4f6d6b6a0,18,库内已有成分，映射层未认出
+アスコルビン酸,ascorbic-acid,Ascorbic Acid,Ascorbic Acid,アスコルビン酸,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,16,维生素C；库内有 ascorbic-acid
+ピペラシリン水和物,piperacillin,Piperacillin,Piperacillin,ピペラシリン水和物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,15,哌拉西林；库内有 piperacillin
+シロスタゾール,cilostazol,Cilostazol,Cilostazol,シロスタゾール,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,14,西洛他唑；库内有 cilostazol
+トスフロキサシントシル酸塩水和物,cn-0ed19799d0,Tosufloxacin,Tosufloxacin,トスフロキサシントシル酸塩水和物,t17-manual-gap,high,Wikidata Q3995932 en 标签一致+ATC J01MA22 | 库内已有：cn-0ed19799d0,13,库内已有成分，映射层未认出
+クロラムフェニコール,chloramphenicol,Chloramphenicol,Chloramphenicol,クロラムフェニコール,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,13,氯霉素；应指向 chloramphenicol 而非 ES 行
+クロモグリク酸ナトリウム,sodium-cromoglicate,Sodium Cromoglicate,Sodium Cromoglicate,クロモグリク酸ナトリウム,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,13,色甘酸钠；应指向英文行
+ピペラシリンナトリウム,piperacillin,Piperacillin,Piperacillin,ピペラシリンナトリウム,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,12,哌拉西林钠
+セファゾリンナトリウム,cefazolin-sodium,Cefazolin Sodium,Cefazolin Sodium,セファゾリンナトリウム,t17-manual-gap,high,库内已有：cefazolin-sodium,11,库内已有成分，映射层未认出
+ホリナートカルシウム,calcium-folinate,Calcium Folinate,Calcium Folinate,ホリナートカルシウム,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,11,亚叶酸钙
+パリペリドンパルミチン酸エステル,paliperidone-palmitate,Paliperidone Palmitate,Paliperidone Palmitate,パリペリドンパルミチン酸エステル,t17-manual-gap,high,库内已有：paliperidone-palmitate,9,库内已有成分，映射层未认出
+セフタジジム水和物,ceftazidime-pentahydrate,Ceftazidime Pentahydrate,Ceftazidime Pentahydrate,セフタジジム水和物,t17-manual-gap,high,库内已有：ceftazidime-pentahydrate,9,库内已有成分，映射层未认出
+セフォペラゾンナトリウム,cefoperazone,Cefoperazone,Cefoperazone,セフォペラゾンナトリウム,t17-manual-gap,high,Wikidata Q2325775 en 标签一致+ATC J01DD12 | 库内已有：cefoperazone,9,库内已有成分，映射层未认出
+ナルフラフィン塩酸塩,cn-9905031733,Nalfurafine,Nalfurafine,ナルフラフィン塩酸塩,t17-manual-gap,high,WHO INN 名录 RE049-030（list_no 49） | Wikidata Q6960874 en 标签一致+ATC V03AX02 | 库内已有：cn-9905031733,8,库内已有成分，映射层未认出
+シメチジン,cimetidine,Cimetidine,Cimetidine,シメチジン,t17-manual-gap,high,Wikidata Q409492 en 标签一致+ATC A02BA01 | 库内已有：cimetidine,8,库内已有成分，映射层未认出
+クロルフェニラミンマレイン酸塩,chlorpheniramine,Chlorpheniramine,Chlorpheniramine,クロルフェニラミンマレイン酸塩,t17-manual-gap,high,Wikidata Q420133 en 标签一致+ATC R06AB04 | 库内已有：chlorpheniramine,8,库内已有成分，映射层未认出
+エポエチン ベータ ペゴル(遺伝子組換え),methoxy-polyethylene-glycol-epoetin-beta,Methoxy Polyethylene Glycol Epoetin Beta,Methoxy Polyethylene Glycol Epoetin Beta,エポエチン ベータ ペゴル(遺伝子組換え),t17-manual-gap,high,库内已有：methoxy-polyethylene-glycol-epoetin-beta,8,库内已有成分，映射层未认出
+エフラロクトコグ アルファ(遺伝子組換え),efmoroctocog-alfa,Efmoroctocog Alfa,Efmoroctocog Alfa,エフラロクトコグ アルファ(遺伝子組換え),t17-manual-gap,high,EMA 上市药 Elocta | 库内已有：efmoroctocog-alfa,8,库内已有成分，映射层未认出
+ポリスチレンスルホン酸カルシウム,calcium-polystyrene-sulfonate,Calcium Polystyrene Sulfonate,Calcium Polystyrene Sulfonate,ポリスチレンスルホン酸カルシウム,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,8,聚苯乙烯磺酸钙
+サラゾスルファピリジン,sulfasalazine,Sulfasalazine,Sulfasalazine,サラゾスルファピリジン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,8,柳氮磺吡啶；库内有 sulfasalazine
+ドセタキセル水和物,docetaxel,Docetaxel,Docetaxel,ドセタキセル水和物,t17-manual-gap,high,Wikidata Q420436 en 标签一致+ATC L01CD02 | EMA 上市药 Taxotere | 库内已有：docetaxel,7,库内已有成分，映射层未认出
+ベクロメタゾンプロピオン酸エステル,beclometasone-dipropionate,Beclometasone Dipropionate,Beclometasone Dipropionate,ベクロメタゾンプロピオン酸エステル,t17-manual-gap,high,库内已有：beclometasone-dipropionate,7,库内已有成分，映射层未认出
+酒石酸,tartaric-acid,Tartaric Acid,Tartaric Acid,酒石酸,t17-manual-gap,high,库内 tartaric-acid（Tartaric Acid），日文「酒石酸」= 酒石酸，非盐型,7,库内已有成分，映射层未认出
+シルニジピン,cn-bd2d3d49b2,Cilnidipine,Cilnidipine,シルニジピン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,7,西尼地平
+ヒドロキシジンパモ酸塩,hydroxyzine,Hydroxyzine,Hydroxyzine,ヒドロキシジンパモ酸塩,t17-manual-gap,high,库内已有：hydroxyzine,6,库内已有成分，映射层未认出
+オメガ-3脂肪酸エチル,omega-3-acid-ethyl-esters,Omega 3 Acid Ethyl Esters,Omega 3 Acid Ethyl Esters,オメガ-3脂肪酸エチル,t17-manual-gap,high,库内已有：omega-3-acid-ethyl-esters,6,库内已有成分，映射层未认出
+ヨウ化ナトリウム(131I),sodium-iodide-i-131,Sodium Iodide I 131,Sodium Iodide I 131,ヨウ化ナトリウム(131I),t17-manual-gap,high,库内已有：sodium-iodide-i-131,6,库内已有成分，映射层未认出
+D-マンニトール,mannitol,Mannitol,Mannitol,D-マンニトール,t17-manual-gap,high,EMA 上市药 Bronchitol | 库内已有：mannitol,6,库内已有成分，映射层未认出
+シチコリン,citicoline,Citicoline,Citicoline,シチコリン,t17-manual-gap,high,Wikidata Q28529682 en 标签一致+ATC N06BX06 | 库内已有：citicoline,6,库内已有成分，映射层未认出
+エミシズマブ(遺伝子組換え),emicizumab,Emicizumab,Emicizumab,エミシズマブ(遺伝子組換え),t17-manual-gap,high,Wikidata Q27155409 en 标签一致+ATC B02BX06 | EMA 上市药 Hemlibra | 库内已有：emicizumab,6,库内已有成分，映射层未认出
+デキサメタゾンメタスルホ安息香酸エステルナトリウム,dexamethasone-sodium-metasulphobenzoate,Dexamethasone Sodium Metasulphobenzoate,Dexamethasone Sodium Metasulphobenzoate,デキサメタゾンメタスルホ安息香酸エステルナトリウム,t17-manual-gap,high,库内已有：dexamethasone-sodium-metasulphobenzoate,6,库内已有成分，映射层未认出
+氷酢酸,acetic-acid,Acetic Acid,Acetic Acid,氷酢酸,t17-manual-gap,high,Wikidata Q47512 en 标签一致+ATC S02AA10 | 库内已有：acetic-acid | 库内 acetic-acid（Acetic Acid），氷酢酸 = 冰醋酸,6,库内已有成分，映射层未认出
+アザシチジン,azacitidine,Azacitidine,Azacitidine,アザシチジン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,6,阿扎胞苷
+クロルジアゼポキシド,chlordiazepoxide,Chlordiazepoxide,Chlordiazepoxide,クロルジアゼポキシド,t17-manual-gap,high,Wikidata Q178566 en 标签一致+ATC N05BA02 | 库内已有：chlordiazepoxide,5,库内已有成分，映射层未认出
+セフポドキシム プロキセチル,cefpodoxime-proxetil,Cefpodoxime Proxetil,Cefpodoxime Proxetil,セフポドキシム プロキセチル,t17-manual-gap,high,库内已有：cefpodoxime-proxetil,5,库内已有成分，映射层未认出
+D-ソルビトール,sorbitol,Sorbitol,Sorbitol,D-ソルビトール,t17-manual-gap,high,库内已有：sorbitol,5,库内已有成分，映射层未认出
+アルプロスタジル アルファデクス,alprostadil,Alprostadil,Alprostadil,アルプロスタジル アルファデクス,t17-manual-gap,high,Wikidata Q579348 en 标签一致+ATC G04BE01 | 库内已有：alprostadil,5,库内已有成分，映射层未认出
+テストステロンエナント酸エステル,testosterone-enantate,Testosterone Enantate,Testosterone Enantate,テストステロンエナント酸エステル,t17-manual-gap,high,库内已有：testosterone-enantate,5,库内已有成分，映射层未认出
+アスホターゼ アルファ(遺伝子組換え),asfotase-alfa,Asfotase Alfa,Asfotase Alfa,アスホターゼ アルファ(遺伝子組換え),t17-manual-gap,high,WHO INN 名录 PR104-008（list_no 104） | Wikidata Q22075839 en 标签一致+ATC A16AB13 | EMA 上市药 Strensiq | 库内已有：asfotase-alfa,5,库内已有成分，映射层未认出
+クエン酸水和物,citric-acid,Citric Acid,Citric Acid,クエン酸水和物,t17-manual-gap,high,库内 citric-acid（Citric Acid），「水和物」是结晶水，不是另一个成分,5,库内已有成分，映射层未认出
+ホスホマイシンカルシウム水和物,fosfomycin,Fosfomycin,Fosfomycin,ホスホマイシンカルシウム水和物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,5,磷霉素钙
+安息香酸ナトリウムカフェイン,caffeine,Caffeine,Caffeine,安息香酸ナトリウムカフェイン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,4,苯甲酸钠咖啡因，落咖啡因母体
+L-システイン,cysteine,Cysteine,Cysteine,L-システイン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,4,半胱氨酸
+アムホテリシンB,amphotericin-b,Amphotericin B,Amphotericin B,アムホテリシンB,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,4,两性霉素B
+カンレノ酸カリウム,potassium-canrenoate,Potassium Canrenoate,Potassium Canrenoate,カンレノ酸カリウム,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,4,坎利酸钾
+ジフロラゾン酢酸エステル,diflorasone-diacetate,Diflorasone Diacetate,Diflorasone Diacetate,ジフロラゾン酢酸エステル,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,4,双氟拉松二醋酸酯
+dl-イソプレナリン塩酸塩,isoprenaline,Isoprenaline,Isoprenaline,dl-イソプレナリン塩酸塩,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,异丙肾上腺素
+ポリスチレンスルホン酸ナトリウム,sodium-polystyrene-sulfonate,Sodium Polystyrene Sulfonate,Sodium Polystyrene Sulfonate,ポリスチレンスルホン酸ナトリウム,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,3,聚苯乙烯磺酸钠
+グルコン酸カルシウム水和物,calcium-gluconate,Calcium Gluconate,Calcium Gluconate,グルコン酸カルシウム水和物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,葡萄糖酸钙
+シナカルセト塩酸塩,cinacalcet,Cinacalcet,Cinacalcet,シナカルセト塩酸塩,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,西那卡塞
+シプロヘプタジン塩酸塩水和物,cyproheptadine,Cyproheptadine,Cyproheptadine,シプロヘプタジン塩酸塩水和物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,赛庚啶
+ダルナビル エタノール付加物,darunavir,Darunavir,Darunavir,ダルナビル エタノール付加物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,达芦那韦；エタノール付加物是晶型
+フォリトロピン ベータ(遺伝子組換え),follitropin-beta,Follitropin Beta,Follitropin Beta,フォリトロピン ベータ(遺伝子組換え),t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,3,促卵泡激素β，改指英文行
+ホリトロピンデルタ(遺伝子組換え),follitropin-delta,Follitropin Delta,Follitropin Delta,ホリトロピンデルタ(遺伝子組換え),t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,促卵泡激素δ
+シラスタチンナトリウム,cilastatin,Cilastatin,Cilastatin,シラスタチンナトリウム,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,3,西司他丁钠
+アセタゾラミド,acetazolamide,Acetazolamide,Acetazolamide,アセタゾラミド,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,2,乙酰唑胺（库内有）
+アセチルシステイン,acetylcysteine,Acetylcysteine,Acetylcysteine,アセチルシステイン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,2,乙酰半胱氨酸（库内可能有）
+アロプリノール,allopurinol,Allopurinol,Allopurinol,アロプリノール,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,2,别嘌醇
+レンバチニブメシル酸塩,lenvatinib,Lenvatinib,Lenvatinib,レンバチニブメシル酸塩,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,2,仑伐替尼
+メサドン塩酸塩,methadone,Methadone,Methadone,メサドン塩酸塩,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,2,美沙酮
+ニトロプルシドナトリウム水和物,sodium-nitroprusside,Sodium Nitroprusside,Sodium Nitroprusside,ニトロプルシドナトリウム水和物,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,2,硝普钠，改指英文行
+デヒドロコール酸,dehydrocholic-acid,Dehydrocholic Acid,Dehydrocholic Acid,デヒドロコール酸,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,2,去氢胆酸
+ベンジルペニシリンベンザチン水和物,benzathine-benzylpenicillin,Benzathine Benzylpenicillin,Benzathine Benzylpenicillin,ベンジルペニシリンベンザチン水和物,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,2,苄星青霉素，改指英文行
+ジサイクロミン,dicyclomine,Dicyclomine,Dicyclomine,ジサイクロミン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,双环维林
+結合型エストロゲン,conjugated-estrogens,Conjugated Estrogens,Conjugated Estrogens,結合型エストロゲン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,结合雌激素（库内可能无）
+クエン酸鉄アンモニウム,ferric-ammonium-citrate,Ferric Ammonium Citrate,Ferric Ammonium Citrate,クエン酸鉄アンモニウム,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,枸橼酸铁铵
+ホスフェニトインナトリウム水和物,fosphenytoin,Fosphenytoin,Fosphenytoin,ホスフェニトインナトリウム水和物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,磷苯妥英
+アセチルコリン塩化物,acetylcholine,Acetylcholine,Acetylcholine,アセチルコリン塩化物,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,氯乙酰胆碱
+アセタゾラミドナトリウム,acetazolamide,Acetazolamide,Acetazolamide,アセタゾラミドナトリウム,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,乙酰唑胺钠
+コリオゴナドトロピン アルファ(遺伝子組換え),choriogonadotropin-alfa,Choriogonadotropin Alfa,Choriogonadotropin Alfa,コリオゴナドトロピン アルファ(遺伝子組換え),t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,1,绒促性素α，改指英文行
+ノルアドレナリン,norepinephrine,Norepinephrine,Norepinephrine,ノルアドレナリン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,去甲肾上腺素
+イホスファミド,ifosfamide,Ifosfamide,Ifosfamide,イホスファミド,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,异环磷酰胺
+アクチノマイシンD,dactinomycin,Dactinomycin,Dactinomycin,アクチノマイシンD,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,放线菌素D
+クロラムフェニコールコハク酸エステルナトリウム,chloramphenicol,Chloramphenicol,Chloramphenicol,クロラムフェニコールコハク酸エステルナトリウム,t17-fuzzy2-retarget,high,fuzzy2 判定：同物落到西语重复行，改指英文行,1,氯霉素琥珀酸钠，改指英文行
+ホルマリン,formaldehyde,Formaldehyde,Formaldehyde,ホルマリン,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,甲醛溶液
+プロピトカイン塩酸塩,prilocaine,Prilocaine,Prilocaine,プロピトカイン塩酸塩,t17-fuzzy2-fix,high,fuzzy2 人工判定（本条错配，改指正确 INN）,1,丙胺卡因（别称 propitocaine）
+アズレンスルホン酸ナトリウム水和物,sodium-azulene-sulfonate,Sodium Azulene Sulfonate,Sodium Azulene Sulfonate,アズレンスルホン酸ナトリウム水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,21,阿兹兰磺酸钠；AZAEL 对照
+ミチグリニドカルシウム水和物,mitiglinide,Mitiglinide,Mitiglinide,ミチグリニドカルシウム水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,14,米格列奈钙
+アルベカシン硫酸塩,arbekacin,Arbekacin,Arbekacin,アルベカシン硫酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,12,阿贝卡星
+ペミロラストカリウム,pemirolast,Pemirolast,Pemirolast,ペミロラストカリウム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,9,吡嘧司特钾
+アゼルニジピン,azelnidipine,Azelnidipine,Azelnidipine,アゼルニジピン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,8,阿折地平
+チキジウム臭化物,tiquizium,Tiquizium,Tiquizium,チキジウム臭化物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,6,噻喹溴铵
+ジメモルファンリン酸塩,dimemorfan,Dimemorfan,Dimemorfan,ジメモルファンリン酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,6,二甲啡烷
+ラフチジン,lafutidine,Lafutidine,Lafutidine,ラフチジン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,6,拉呋替丁
+スキサメトニウム塩化物水和物,suxamethonium,Suxamethonium,Suxamethonium,スキサメトニウム塩化物水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,6,氯化琥珀胆碱；应指向英文行
+ガベキサートメシル酸塩,gabexate,Gabexate,Gabexate,ガベキサートメシル酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,6,加贝酯
+プロペリシアジン,propericiazine,Propericiazine,Propericiazine,プロペリシアジン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,5,丙氯拉嗪类吩噻嗪；プロペリシアジン=Propericiazine
+クロチアゼパム,clotiazepam,Clotiazepam,Clotiazepam,クロチアゼパム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,5,氯噻西泮
+アロチノロール塩酸塩,arotinolol,Arotinolol,Arotinolol,アロチノロール塩酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,5,阿罗洛尔
+シベンゾリンコハク酸塩,cibenzoline,Cibenzoline,Cibenzoline,シベンゾリンコハク酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,5,西苯唑啉
+トラフェルミン(遺伝子組換え),trafermin,Trafermin,Trafermin,トラフェルミン(遺伝子組換え),t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,5,重组人碱性成纤维细胞生长因子
+クロカプラミン塩酸塩水和物,clocapramine,Clocapramine,Clocapramine,クロカプラミン塩酸塩水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,氯卡帕明
+モサプラミン塩酸塩,mosapramine,Mosapramine,Mosapramine,モサプラミン塩酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,莫沙帕明
+ベプリジル塩酸塩水和物,bepridil,Bepridil,Bepridil,ベプリジル塩酸塩水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,苄普地尔
+トラピジル,trapidil,Trapidil,Trapidil,トラピジル,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,曲匹地尔
+イフェンプロジル酒石酸塩,ifenprodil,Ifenprodil,Ifenprodil,イフェンプロジル酒石酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,依芬普地
+ガンマオリザノール,gamma-oryzanol,Gamma-Oryzanol,Gamma-Oryzanol,ガンマオリザノール,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,γ-谷维素
+イオタラム酸メグルミン,iothalamate-meglumine,Iothalamate Meglumine,Iothalamate Meglumine,イオタラム酸メグルミン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,4,碘他拉酸葡甲胺
+オキサゾラム,oxazolam,Oxazolam,Oxazolam,オキサゾラム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,奥沙唑仑
+クロキサゾラム,cloxazolam,Cloxazolam,Cloxazolam,クロキサゾラム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,氯噁唑仑
+ペモリン,pemoline,Pemoline,Pemoline,ペモリン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,匹莫林
+ボルノレキサント水和物,vornorexant,Vornorexant,Vornorexant,ボルノレキサント水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,食欲素受体拮抗剂（日本新药）
+ピモベンダン,pimobendan,Pimobendan,Pimobendan,ピモベンダン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,匹莫苯丹
+ドチヌラド,dotinurad,Dotinurad,Dotinurad,ドチヌラド,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,多替诺雷
+ファロペネムナトリウム水和物,faropenem,Faropenem,Faropenem,ファロペネムナトリウム水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,法罗培南
+ジベカシン硫酸塩,dibekacin,Dibekacin,Dibekacin,ジベカシン硫酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,地贝卡星（库内无）
+イソプロピルウノプロストン,isopropyl-unoprostone,Isopropyl Unoprostone,Isopropyl Unoprostone,イソプロピルウノプロストン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,3,异丙基乌诺前列酮（库内无）
+セチプチリンマレイン酸塩,setiptiline,Setiptiline,Setiptiline,セチプチリンマレイン酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,司普替林
+ネモナプリド,nemonapride,Nemonapride,Nemonapride,ネモナプリド,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,奈莫必利
+エトレチナート,etretinate,Etretinate,Etretinate,エトレチナート,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,阿维A酯
+ラマトロバン,ramatroban,Ramatroban,Ramatroban,ラマトロバン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,雷马曲班
+ブクラデシンナトリウム,bucladesine,Bucladesine,Bucladesine,ブクラデシンナトリウム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,布拉地新钠
+オゾラリズマブ(遺伝子組換え),ozoralizumab,Ozoralizumab,Ozoralizumab,オゾラリズマブ(遺伝子組換え),t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,奥佐利珠单抗
+ベンジルペニシリンカリウム,benzylpenicillin,Benzylpenicillin,Benzylpenicillin,ベンジルペニシリンカリウム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,青霉素钾
+セフォゾプラン塩酸塩,cefozopran,Cefozopran,Cefozopran,セフォゾプラン塩酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,头孢唑兰
+ピマリシン,pimaricin,Pimaricin,Pimaricin,ピマリシン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,2,纳他霉素（匹马霉素）
+エテンザミド,ethenzamide,Ethenzamide,Ethenzamide,エテンザミド,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,乙水杨胺
+イソプロピルアンチピリン,isopropylantipyrine,Isopropylantipyrine,Isopropylantipyrine,イソプロピルアンチピリン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,异丙安替比林
+ブコローム,bucolome,Bucolome,Bucolome,ブコローム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,布可隆
+ジメトチアジンメシル酸塩,dimetotiazine,Dimetotiazine,Dimetotiazine,ジメトチアジンメシル酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,二甲替嗪
+ピパンペロン塩酸塩,pipamperone,Pipamperone,Pipamperone,ピパンペロン塩酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,匹泮哌隆
+メペンゾラート臭化物,mepenzolate,Mepenzolate,Mepenzolate,メペンゾラート臭化物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,甲哌佐酯
+アフロクアロン,afloqualone,Afloqualone,Afloqualone,アフロクアロン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,阿氟喹酮
+セトチアミン塩酸塩水和物,cetotiamine,Cetotiamine,Cetotiamine,セトチアミン塩酸塩水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,赛托硫胺
+ビスベンチアミン,bisbentiamine,Bisbentiamine,Bisbentiamine,ビスベンチアミン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,双苯酰硫胺
+トホグリフロジン水和物,tofogliflozin,Tofogliflozin,Tofogliflozin,トホグリフロジン水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,托格列净
+アナモレリン塩酸塩,anamorelin,Anamorelin,Anamorelin,アナモレリン塩酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,阿那莫林
+フォロデシン塩酸塩,forodesine,Forodesine,Forodesine,フォロデシン塩酸塩,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,福罗地辛
+グマロンチニブ水和物,gumarontinib,Gumarontinib,Gumarontinib,グマロンチニブ水和物,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,谷美替尼
+プロスルチアミン,prosultiamine,Prosultiamine,Prosultiamine,プロスルチアミン,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,丙硫硫胺
+トロンボモデュリンアルファ(遺伝子組換え),thrombomodulin-alfa,Thrombomodulin Alfa,Thrombomodulin Alfa,トロンボモデュリンアルファ(遺伝子組換え),t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,重组血栓调节蛋白α
+ジクロフェナクエタルヒアルロン酸ナトリウム,diclofenac-etalhyaluronate,Diclofenac Etalhyaluronate,Diclofenac Etalhyaluronate,ジクロフェナクエタルヒアルロン酸ナトリウム,t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,双氯芬酸依泊胺（透明质酸盐）
+イオマゼニル(123I),iomazenil,Iomazenil,Iomazenil,イオマゼニル(123I),t17-fuzzy2-newsub,medium,fuzzy2 判定：原映射错指，改为新增成分,1,碘马西尼（放射性）

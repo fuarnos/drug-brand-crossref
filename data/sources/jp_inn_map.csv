@@ -183,3 +183,174 @@ L-アルギニン塩酸塩,arginine,Arginine,manual-international,high,人工复
 セフジニル,cefdinir,Cefdinir,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
 アドレナリン,epinephrine,Epinephrine,manual-international,high,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
 セフカペン ピボキシル塩酸塩水和物,cefditoreno,Cefditoreno,manual-international,medium,人工复核：第五批（头孢类/高频补漏）,reports/2026-11-14-jp-mapping.md
+アスコルビン酸,ascorbic-acid,Ascorbic Acid,t17-fuzzy2-fix,high,维生素C；库内有 ascorbic-acid,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ピペラシリン水和物,piperacillin,Piperacillin,t17-fuzzy2-fix,high,哌拉西林；库内有 piperacillin,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シロスタゾール,cilostazol,Cilostazol,t17-fuzzy2-fix,high,西洛他唑；库内有 cilostazol,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トスフロキサシントシル酸塩水和物,cn-0ed19799d0,Tosufloxacin,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロラムフェニコール,chloramphenicol,Chloramphenicol,t17-fuzzy2-retarget,high,氯霉素；应指向 chloramphenicol 而非 ES 行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロモグリク酸ナトリウム,sodium-cromoglicate,Sodium Cromoglicate,t17-fuzzy2-retarget,high,色甘酸钠；应指向英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ピペラシリンナトリウム,piperacillin,Piperacillin,t17-fuzzy2-fix,high,哌拉西林钠,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セファゾリンナトリウム,cefazolin-sodium,Cefazolin Sodium,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ホリナートカルシウム,calcium-folinate,Calcium Folinate,t17-fuzzy2-fix,high,亚叶酸钙,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+パリペリドンパルミチン酸エステル,paliperidone-palmitate,Paliperidone Palmitate,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セフタジジム水和物,ceftazidime-pentahydrate,Ceftazidime Pentahydrate,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セフォペラゾンナトリウム,cefoperazone,Cefoperazone,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ナルフラフィン塩酸塩,cn-9905031733,Nalfurafine,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シメチジン,cimetidine,Cimetidine,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロルフェニラミンマレイン酸塩,chlorpheniramine,Chlorpheniramine,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エポエチン ベータ ペゴル(遺伝子組換え),methoxy-polyethylene-glycol-epoetin-beta,Methoxy Polyethylene Glycol Epoetin Beta,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エフラロクトコグ アルファ(遺伝子組換え),efmoroctocog-alfa,Efmoroctocog Alfa,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ポリスチレンスルホン酸カルシウム,calcium-polystyrene-sulfonate,Calcium Polystyrene Sulfonate,t17-fuzzy2-retarget,high,聚苯乙烯磺酸钙,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+サラゾスルファピリジン,sulfasalazine,Sulfasalazine,t17-fuzzy2-fix,high,柳氮磺吡啶；库内有 sulfasalazine,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ドセタキセル水和物,docetaxel,Docetaxel,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ベクロメタゾンプロピオン酸エステル,beclometasone-dipropionate,Beclometasone Dipropionate,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+酒石酸,tartaric-acid,Tartaric Acid,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シルニジピン,cn-bd2d3d49b2,Cilnidipine,t17-fuzzy2-fix,high,西尼地平,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ヒドロキシジンパモ酸塩,hydroxyzine,Hydroxyzine,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+オメガ-3脂肪酸エチル,omega-3-acid-ethyl-esters,Omega 3 Acid Ethyl Esters,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ヨウ化ナトリウム(131I),sodium-iodide-i-131,Sodium Iodide I 131,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+D-マンニトール,mannitol,Mannitol,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シチコリン,citicoline,Citicoline,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エミシズマブ(遺伝子組換え),emicizumab,Emicizumab,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+デキサメタゾンメタスルホ安息香酸エステルナトリウム,dexamethasone-sodium-metasulphobenzoate,Dexamethasone Sodium Metasulphobenzoate,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+氷酢酸,acetic-acid,Acetic Acid,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アザシチジン,azacitidine,Azacitidine,t17-fuzzy2-fix,high,阿扎胞苷,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロルジアゼポキシド,chlordiazepoxide,Chlordiazepoxide,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セフポドキシム プロキセチル,cefpodoxime-proxetil,Cefpodoxime Proxetil,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+D-ソルビトール,sorbitol,Sorbitol,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アルプロスタジル アルファデクス,alprostadil,Alprostadil,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+テストステロンエナント酸エステル,testosterone-enantate,Testosterone Enantate,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アスホターゼ アルファ(遺伝子組換え),asfotase-alfa,Asfotase Alfa,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クエン酸水和物,citric-acid,Citric Acid,t17-manual-gap,high,库内已有成分，映射层未认出,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ホスホマイシンカルシウム水和物,fosfomycin,Fosfomycin,t17-fuzzy2-fix,high,磷霉素钙,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+安息香酸ナトリウムカフェイン,caffeine,Caffeine,t17-fuzzy2-fix,high,苯甲酸钠咖啡因，落咖啡因母体,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+L-システイン,cysteine,Cysteine,t17-fuzzy2-fix,high,半胱氨酸,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アムホテリシンB,amphotericin-b,Amphotericin B,t17-fuzzy2-fix,high,两性霉素B,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+カンレノ酸カリウム,potassium-canrenoate,Potassium Canrenoate,t17-fuzzy2-fix,high,坎利酸钾,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ジフロラゾン酢酸エステル,diflorasone-diacetate,Diflorasone Diacetate,t17-fuzzy2-fix,high,双氟拉松二醋酸酯,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+dl-イソプレナリン塩酸塩,isoprenaline,Isoprenaline,t17-fuzzy2-fix,high,异丙肾上腺素,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ポリスチレンスルホン酸ナトリウム,sodium-polystyrene-sulfonate,Sodium Polystyrene Sulfonate,t17-fuzzy2-retarget,high,聚苯乙烯磺酸钠,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+グルコン酸カルシウム水和物,calcium-gluconate,Calcium Gluconate,t17-fuzzy2-fix,high,葡萄糖酸钙,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シナカルセト塩酸塩,cinacalcet,Cinacalcet,t17-fuzzy2-fix,high,西那卡塞,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シプロヘプタジン塩酸塩水和物,cyproheptadine,Cyproheptadine,t17-fuzzy2-fix,high,赛庚啶,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ダルナビル エタノール付加物,darunavir,Darunavir,t17-fuzzy2-fix,high,达芦那韦；エタノール付加物是晶型,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+フォリトロピン ベータ(遺伝子組換え),follitropin-beta,Follitropin Beta,t17-fuzzy2-retarget,high,促卵泡激素β，改指英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ホリトロピンデルタ(遺伝子組換え),follitropin-delta,Follitropin Delta,t17-fuzzy2-fix,high,促卵泡激素δ,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シラスタチンナトリウム,cilastatin,Cilastatin,t17-fuzzy2-fix,high,西司他丁钠,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アセタゾラミド,acetazolamide,Acetazolamide,t17-fuzzy2-fix,high,乙酰唑胺（库内有）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アセチルシステイン,acetylcysteine,Acetylcysteine,t17-fuzzy2-fix,high,乙酰半胱氨酸（库内可能有）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アロプリノール,allopurinol,Allopurinol,t17-fuzzy2-fix,high,别嘌醇,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+レンバチニブメシル酸塩,lenvatinib,Lenvatinib,t17-fuzzy2-fix,high,仑伐替尼,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+メサドン塩酸塩,methadone,Methadone,t17-fuzzy2-fix,high,美沙酮,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ニトロプルシドナトリウム水和物,sodium-nitroprusside,Sodium Nitroprusside,t17-fuzzy2-retarget,high,硝普钠，改指英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+デヒドロコール酸,dehydrocholic-acid,Dehydrocholic Acid,t17-fuzzy2-fix,high,去氢胆酸,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ベンジルペニシリンベンザチン水和物,benzathine-benzylpenicillin,Benzathine Benzylpenicillin,t17-fuzzy2-retarget,high,苄星青霉素，改指英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ジサイクロミン,dicyclomine,Dicyclomine,t17-fuzzy2-fix,high,双环维林,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+結合型エストロゲン,conjugated-estrogens,Conjugated Estrogens,t17-fuzzy2-fix,high,结合雌激素（库内可能无）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クエン酸鉄アンモニウム,ferric-ammonium-citrate,Ferric Ammonium Citrate,t17-fuzzy2-fix,high,枸橼酸铁铵,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ホスフェニトインナトリウム水和物,fosphenytoin,Fosphenytoin,t17-fuzzy2-fix,high,磷苯妥英,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アセチルコリン塩化物,acetylcholine,Acetylcholine,t17-fuzzy2-fix,high,氯乙酰胆碱,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アセタゾラミドナトリウム,acetazolamide,Acetazolamide,t17-fuzzy2-fix,high,乙酰唑胺钠,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+コリオゴナドトロピン アルファ(遺伝子組換え),choriogonadotropin-alfa,Choriogonadotropin Alfa,t17-fuzzy2-retarget,high,绒促性素α，改指英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ノルアドレナリン,norepinephrine,Norepinephrine,t17-fuzzy2-fix,high,去甲肾上腺素,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イホスファミド,ifosfamide,Ifosfamide,t17-fuzzy2-fix,high,异环磷酰胺,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アクチノマイシンD,dactinomycin,Dactinomycin,t17-fuzzy2-fix,high,放线菌素D,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロラムフェニコールコハク酸エステルナトリウム,chloramphenicol,Chloramphenicol,t17-fuzzy2-retarget,high,氯霉素琥珀酸钠，改指英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ホルマリン,formaldehyde,Formaldehyde,t17-fuzzy2-fix,high,甲醛溶液,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+プロピトカイン塩酸塩,prilocaine,Prilocaine,t17-fuzzy2-fix,high,丙胺卡因（别称 propitocaine）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アズレンスルホン酸ナトリウム水和物,sodium-azulene-sulfonate,Sodium Azulene Sulfonate,t17-fuzzy2-newsub,medium,阿兹兰磺酸钠；AZAEL 对照,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ミチグリニドカルシウム水和物,mitiglinide,Mitiglinide,t17-fuzzy2-newsub,medium,米格列奈钙,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アルベカシン硫酸塩,arbekacin,Arbekacin,t17-fuzzy2-newsub,medium,阿贝卡星,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ペミロラストカリウム,pemirolast,Pemirolast,t17-fuzzy2-newsub,medium,吡嘧司特钾,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アゼルニジピン,azelnidipine,Azelnidipine,t17-fuzzy2-newsub,medium,阿折地平,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+チキジウム臭化物,tiquizium,Tiquizium,t17-fuzzy2-newsub,medium,噻喹溴铵,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ジメモルファンリン酸塩,dimemorfan,Dimemorfan,t17-fuzzy2-newsub,medium,二甲啡烷,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ラフチジン,lafutidine,Lafutidine,t17-fuzzy2-newsub,medium,拉呋替丁,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+スキサメトニウム塩化物水和物,suxamethonium,Suxamethonium,t17-fuzzy2-newsub,medium,氯化琥珀胆碱；应指向英文行,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ガベキサートメシル酸塩,gabexate,Gabexate,t17-fuzzy2-newsub,medium,加贝酯,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+プロペリシアジン,propericiazine,Propericiazine,t17-fuzzy2-newsub,medium,丙氯拉嗪类吩噻嗪；プロペリシアジン=Propericiazine,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロチアゼパム,clotiazepam,Clotiazepam,t17-fuzzy2-newsub,medium,氯噻西泮,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アロチノロール塩酸塩,arotinolol,Arotinolol,t17-fuzzy2-newsub,medium,阿罗洛尔,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+シベンゾリンコハク酸塩,cibenzoline,Cibenzoline,t17-fuzzy2-newsub,medium,西苯唑啉,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トラフェルミン(遺伝子組換え),trafermin,Trafermin,t17-fuzzy2-newsub,medium,重组人碱性成纤维细胞生长因子,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロカプラミン塩酸塩水和物,clocapramine,Clocapramine,t17-fuzzy2-newsub,medium,氯卡帕明,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+モサプラミン塩酸塩,mosapramine,Mosapramine,t17-fuzzy2-newsub,medium,莫沙帕明,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ベプリジル塩酸塩水和物,bepridil,Bepridil,t17-fuzzy2-newsub,medium,苄普地尔,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トラピジル,trapidil,Trapidil,t17-fuzzy2-newsub,medium,曲匹地尔,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イフェンプロジル酒石酸塩,ifenprodil,Ifenprodil,t17-fuzzy2-newsub,medium,依芬普地,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ガンマオリザノール,gamma-oryzanol,Gamma-Oryzanol,t17-fuzzy2-newsub,medium,γ-谷维素,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イオタラム酸メグルミン,iothalamate-meglumine,Iothalamate Meglumine,t17-fuzzy2-newsub,medium,碘他拉酸葡甲胺,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+オキサゾラム,oxazolam,Oxazolam,t17-fuzzy2-newsub,medium,奥沙唑仑,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クロキサゾラム,cloxazolam,Cloxazolam,t17-fuzzy2-newsub,medium,氯噁唑仑,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ペモリン,pemoline,Pemoline,t17-fuzzy2-newsub,medium,匹莫林,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ボルノレキサント水和物,vornorexant,Vornorexant,t17-fuzzy2-newsub,medium,食欲素受体拮抗剂（日本新药）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ピモベンダン,pimobendan,Pimobendan,t17-fuzzy2-newsub,medium,匹莫苯丹,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ドチヌラド,dotinurad,Dotinurad,t17-fuzzy2-newsub,medium,多替诺雷,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ファロペネムナトリウム水和物,faropenem,Faropenem,t17-fuzzy2-newsub,medium,法罗培南,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ジベカシン硫酸塩,dibekacin,Dibekacin,t17-fuzzy2-newsub,medium,地贝卡星（库内无）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イソプロピルウノプロストン,isopropyl-unoprostone,Isopropyl Unoprostone,t17-fuzzy2-newsub,medium,异丙基乌诺前列酮（库内无）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セチプチリンマレイン酸塩,setiptiline,Setiptiline,t17-fuzzy2-newsub,medium,司普替林,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ネモナプリド,nemonapride,Nemonapride,t17-fuzzy2-newsub,medium,奈莫必利,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エトレチナート,etretinate,Etretinate,t17-fuzzy2-newsub,medium,阿维A酯,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ラマトロバン,ramatroban,Ramatroban,t17-fuzzy2-newsub,medium,雷马曲班,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ブクラデシンナトリウム,bucladesine,Bucladesine,t17-fuzzy2-newsub,medium,布拉地新钠,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+オゾラリズマブ(遺伝子組換え),ozoralizumab,Ozoralizumab,t17-fuzzy2-newsub,medium,奥佐利珠单抗,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ベンジルペニシリンカリウム,benzylpenicillin,Benzylpenicillin,t17-fuzzy2-newsub,medium,青霉素钾,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セフォゾプラン塩酸塩,cefozopran,Cefozopran,t17-fuzzy2-newsub,medium,头孢唑兰,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ピマリシン,pimaricin,Pimaricin,t17-fuzzy2-newsub,medium,纳他霉素（匹马霉素）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エテンザミド,ethenzamide,Ethenzamide,t17-fuzzy2-newsub,medium,乙水杨胺,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イソプロピルアンチピリン,isopropylantipyrine,Isopropylantipyrine,t17-fuzzy2-newsub,medium,异丙安替比林,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ブコローム,bucolome,Bucolome,t17-fuzzy2-newsub,medium,布可隆,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ジメトチアジンメシル酸塩,dimetotiazine,Dimetotiazine,t17-fuzzy2-newsub,medium,二甲替嗪,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ピパンペロン塩酸塩,pipamperone,Pipamperone,t17-fuzzy2-newsub,medium,匹泮哌隆,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+メペンゾラート臭化物,mepenzolate,Mepenzolate,t17-fuzzy2-newsub,medium,甲哌佐酯,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アフロクアロン,afloqualone,Afloqualone,t17-fuzzy2-newsub,medium,阿氟喹酮,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+セトチアミン塩酸塩水和物,cetotiamine,Cetotiamine,t17-fuzzy2-newsub,medium,赛托硫胺,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ビスベンチアミン,bisbentiamine,Bisbentiamine,t17-fuzzy2-newsub,medium,双苯酰硫胺,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トホグリフロジン水和物,tofogliflozin,Tofogliflozin,t17-fuzzy2-newsub,medium,托格列净,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+アナモレリン塩酸塩,anamorelin,Anamorelin,t17-fuzzy2-newsub,medium,阿那莫林,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+フォロデシン塩酸塩,forodesine,Forodesine,t17-fuzzy2-newsub,medium,福罗地辛,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+グマロンチニブ水和物,gumarontinib,Gumarontinib,t17-fuzzy2-newsub,medium,谷美替尼,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+プロスルチアミン,prosultiamine,Prosultiamine,t17-fuzzy2-newsub,medium,丙硫硫胺,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トロンボモデュリンアルファ(遺伝子組換え),thrombomodulin-alfa,Thrombomodulin Alfa,t17-fuzzy2-newsub,medium,重组血栓调节蛋白α,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ジクロフェナクエタルヒアルロン酸ナトリウム,diclofenac-etalhyaluronate,Diclofenac Etalhyaluronate,t17-fuzzy2-newsub,medium,双氯芬酸依泊胺（透明质酸盐）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イオマゼニル(123I),iomazenil,Iomazenil,t17-fuzzy2-newsub,medium,碘马西尼（放射性）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イミダフェナシン,imidafenacin,Imidafenacin,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+パンテチン,pantethine,Pantethine,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+酢酸亜鉛水和物,zinc-acetate,Zinc acetate,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エルデカルシトール,eldecalcitol,Eldecalcitol,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ベラプロストナトリウム,beraprost,Beraprost,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エチゾラム,etizolam,Etizolam,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+メキタジン,mequitazine,Mequitazine,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+パルナパリンナトリウム,parnaparin,Parnaparin,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ブロムペリドール,bromperidol,Bromperidol,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トリクロルメチアジド,trichlormethiazide,Trichlormethiazide,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+テモカプリル塩酸塩,temocapril,Temocapril,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+チペピジンヒベンズ酸塩,tipepidine,Tipepidine,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トピロキソスタット,topiroxostat,Topiroxostat,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+テネリグリプチン臭化水素酸塩水和物,teneligliptin,Teneligliptin,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ルリオクトコグアルファ(遺伝子組換え),rurioctocog-alfa,Rurioctocog Alfa,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ラノコナゾール,lanoconazole,Lanoconazole,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ロフラゼプ酸エチル,ethyl-loflazepate,Ethyl loflazepate,t17-gap-newsub,high,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+マキサカルシトール,maxacalcitol,Maxacalcitol,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ブロナンセリン,blonanserin,Blonanserin,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ナファモスタットメシル酸塩,nafamostat,Nafamostat,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+サルポグレラート塩酸塩,sarpogrelate,Sarpogrelate,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ベニジピン塩酸塩,benidipine,Benidipine,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トラニラスト,tranilast,Tranilast,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+スプラタストトシル酸塩,suplatast,Suplatast,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+タルチレリン水和物,taltirelin,Taltirelin,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ミロガバリンベシル酸塩,mirogabalin,Mirogabalin,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+トコフェロールニコチン酸エステル,tocopherol-nicotinate,Tocopherol nicotinate,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+イルソグラジンマレイン酸塩,irsogladine,Irsogladine,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ウパシカルセトナトリウム水和物,upacicalcet,Upacicalcet,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+タンドスピロンクエン酸塩,tandospirone,Tandospirone,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ペロスピロン塩酸塩水和物,perospirone,Perospirone,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+エサキセレノン,esaxerenone,Esaxerenone,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+クエン酸第一鉄ナトリウム,sodium-ferrous-citrate,Sodium ferrous citrate,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+フルスルチアミン塩酸塩,fursultiamine,Fursultiamine,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+デノパミン,denopamine,Denopamine,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+ピルシカイニド塩酸塩水和物,pilsicainide,Pilsicainide,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+dl-メチルエフェドリン塩酸塩,methylephedrine,Methylephedrine,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+チアミンジスルフィド,thiamine-disulfide,Thiamine disulfide,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3
+フルスルチアミン,fursultiamine,Fursultiamine,t17-gap-newsub,medium,新增成分的显式映射（骨架认不出片假名转写）,reports/2026-11-15-jp-dryrun.md §6.2/§6.3

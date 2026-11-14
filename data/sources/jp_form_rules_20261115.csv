@@ -1,0 +1,40 @@
+rule,form_base,hit_items,note
+口腔内崩壊錠,tablet,78,品名包含该词 → form_base（首个命中优先）
+フィルムコーティング錠,tablet,0,品名包含该词 → form_base（首个命中优先）
+腸溶錠,tablet,10,品名包含该词 → form_base（首个命中优先）
+徐放錠,tablet,30,品名包含该词 → form_base（首个命中优先）
+持続性錠,tablet,0,品名包含该词 → form_base（首个命中优先）
+錠,tablet,4257,品名包含该词 → form_base（首个命中优先）
+カプセル,capsule,564,品名包含该词 → form_base（首个命中优先）
+顆粒,powder,382,品名包含该词 → form_base（首个命中优先）
+細粒,powder,441,品名包含该词 → form_base（首个命中优先）
+ドライシロップ,powder,67,品名包含该词 → form_base（首个命中优先）
+散,powder,177,品名包含该词 → form_base（首个命中优先）
+シロップ,liquid,76,品名包含该词 → form_base（首个命中优先）
+懸濁液,liquid,5,品名包含该词 → form_base（首个命中优先）
+エリキシル,liquid,4,品名包含该词 → form_base（首个命中优先）
+注射液,injection,459,品名包含该词 → form_base（首个命中优先）
+注射,injection,219,品名包含该词 → form_base（首个命中优先）
+点滴,injection,544,品名包含该词 → form_base（首个命中优先）
+輸液,injection,166,品名包含该词 → form_base（首个命中优先）
+シリンジ,injection,384,品名包含该词 → form_base（首个命中优先）
+静注,injection,463,品名包含该词 → form_base（首个命中优先）
+注,injection,843,品名包含该词 → form_base（首个命中优先）
+軟膏,topical,181,品名包含该词 → form_base（首个命中优先）
+クリーム,topical,128,品名包含该词 → form_base（首个命中优先）
+ゲル,topical,52,品名包含该词 → form_base（首个命中优先）
+ローション,topical,53,品名包含该词 → form_base（首个命中优先）
+テープ,transdermal,154,品名包含该词 → form_base（首个命中优先）
+貼付,transdermal,26,品名包含该词 → form_base（首个命中优先）
+パップ,topical,35,品名包含该词 → form_base（首个命中优先）
+組織接着用,topical,12,品名包含该词 → form_base（首个命中优先）
+点眼,ophthalmic,295,品名包含该词 → form_base（首个命中优先）
+点鼻,nasal,60,品名包含该词 → form_base（首个命中优先）
+坐剤,suppository,62,品名包含该词 → form_base（首个命中优先）
+浣腸,rectal,21,品名包含该词 → form_base（首个命中优先）
+吸入,inhalation,89,品名包含该词 → form_base（首个命中优先）
+エアロゾル,inhalation,0,品名包含该词 → form_base（首个命中优先）
+区分=内用薬,other,1014,品名无剂型词时用区分兜底
+区分=注射薬,injection,417,品名无剂型词时用区分兜底
+区分=外用薬,other,659,品名无剂型词时用区分兜底
+区分=歯科用薬剤,other,15,品名无剂型词时用区分兜底

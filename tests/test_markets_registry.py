@@ -41,9 +41,11 @@ DB = ROOT / "data" / "drugs.db"
 # v0.8.0（SG 启用窗口）：SG 市场启用 → 9 国；语言仍 4（SG 为英文市场）。
 # v0.9.0（HK 启用）：HK 接入 → 10 市场；语言仍 4（HK 为繁中/英文名称层）。
 # v0.11.4（2026-11-14）：FR 市场 + fr 语言启用 → 11 国/5 语。
+# v0.12.0（2026-11-15）：JP 市场启用（薬価基準 12,442 品目）→ 12 国/5 语（不新增 ja UI 语言）。
 SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/"),
               ("fr", "fr/")}
-SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK", "FR"}
+SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK",
+                     "FR", "JP"}
 # v0.11.0：EU 区域层启用（kind=region，own_data=true，不进 country_order）
 SITE_REGION_I18N = {"EU"}
 
@@ -141,12 +143,12 @@ class TestMarkets(RegistryBase):
     def test_registered_market_set(self) -> None:
         codes = set(self.reg.markets)
         # v0.11.4（2026-11-14）：FR 已随 BDPM 数据启用（enabled 市场 == DB 国家集合）
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR", "JP"},
                          codes)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "FR"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "FR", "JP"},
                          set(self.reg.country_order))
         # v0.11.0：EU 区域层启用（own_data=true，国家集合不变）
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR", "JP"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -506,7 +508,7 @@ class TestCliAndDocs(RegistryBase):
         self.assertEqual(0, p.returncode, p.stderr[-500:])
         data = json.loads(p.stdout)
         # v0.11.4 task-55 过渡态：FR 已注册（enabled:false），市场数 11 → 12
-        self.assertEqual(12, len(data["markets"]))
+        self.assertEqual(13, len(data["markets"]))
         self.assertEqual(10, len(data["languages"]))
         self.assertEqual("US", data["markets"][0]["code"])
 

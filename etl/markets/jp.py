@@ -521,6 +521,29 @@ JP_NON_SUBSTANCE = {
     "チクジョ", "ブクリョウ", "タクシャ", "コウボク", "サンシシ", "トウキ", "ケイヒ末",
     "乾燥濃縮人血液凝固第VIII因子", "乾燥濃縮人血液凝固第IX因子",
 }
+# v0.12.0（task-4）：fuzzy2 层抽检错配 50% 后，把「不是单一成分」的写法一次性摘出分母。
+# 来源：data/sources/jp_fuzzy2_fix_20261115.csv（verdict=reclassify）+
+#       data/sources/jp_inn_gap_20261115.csv（decision=reclassify_nonsub）。
+JP_NON_SUBSTANCE |= {
+    # 生薬（単味）
+    "カンゾウ", "ゴシツ", "ジコッピ", "カッセキ", "ゲンチアナ", "カンテン",
+    "テンナンショウ", "リュウガンニク", "アンソッコウ", "エンゴサク",
+    "エンメイソウ", "キササゲ", "ケツメイシ", "ザクロヒ", "サンザシ",
+    "シソシ", "シャゼンソウ", "センコツ", "テンモンドウ", "トウドクカツ",
+    "モッカ", "レンニク", "バクガ", "ハンゲ", "コウブシ", "ガジュツ",
+    "ビンロウジ", "モクツウ", "クジン", "シャゼンシ", "複方カンゾウ", "酒石酸",
+    # 生物制剂 / 疫苗 / 血液制剂
+    "肺炎球菌ワクチン", "乾燥組織培養不活化狂犬病ワクチン", "沈降破傷風トキソイド",
+    "乾燥濃縮人C1-インアクチベーター", "4価髄膜炎菌ワクチン(破傷風トキソイド結合体)",
+    "乾燥ジフテリアウマ抗毒素", "肺サーファクタント",
+    "pH4処理酸性人免疫グロブリン", "pH4処理酸性人免疫グロブリン(皮下注射)",
+    "ポリエチレングリコール処理人免疫グロブリン",
+    # 辅料 / 酊剂 / 混合物 / 特殊食品
+    "セタノール", "ラウリル硫酸ナトリウム", "パラオキシ安息香酸ブチル",
+    "カンタリスチンキ", "亜鉛華デンプン", "デンプン部分加水分解物",
+    "バリン除去ミルク", "クレオソート", "ヨードチンキ", "希ヨードチンキ",
+}
+
 JP_NON_SUBSTANCE_RE = re.compile(
     r"(?:エキス$)"
     r"|(?:^[\u4e00-\u9fff]{2,}(?:湯|散|丸)$)"
@@ -734,6 +757,27 @@ def split_ingredients(text: str) -> list[str]:
     return [x.strip() for x in re.split(r"[・･]", t) if x.strip()]
 
 
+# ---------------------------------------------------------------- fuzzy2 门禁
+# v0.12.0（task-4）：`katakana-fuzzy2`（编辑距离模糊层）实测错配率 50–62%，
+# 所以这一层**只允许**回放已经人工核验过的写法（verdict=ok），其余一律不映射、
+# 计入 `unmapped-fuzzy2-unverified` 并单独计数（不猜、不兜底）。
+FUZZY2_VERIFIED_CSV = ROOT / "data" / "sources" / "jp_fuzzy2_fix_20261115.csv"
+
+
+def load_fuzzy2_verified(path: Path = FUZZY2_VERIFIED_CSV) -> set[str]:
+    """人工核验为「映射正确」的写法集合（verdict == 'ok'）。"""
+    if not path.exists():
+        return set()
+    out: set[str] = set()
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        for rec in csv.DictReader(fh):
+            if (rec.get("verdict") or "").strip() == "ok":
+                tok = nfkc((rec.get("jp_token") or "").strip())
+                if tok:
+                    out.add(tok)
+    return out
+
+
 class JpMapper:
     """日文成分名 → substance_id。六级流水，**越往后越保守，拿不准一律不配**。
 
@@ -762,6 +806,11 @@ class JpMapper:
                         continue
                     method = (rec.get("method") or "manual-international").strip() or "manual-international"
                     self.manual[jp_name] = (sid, method)
+                    # v0.12.0：map() 里查表用的是 strip_jp_annotations 后的写法（会去空格/括号），
+                    # 所以同一行要按两种写法各注册一次，否则带空格/括号的写法永远命不中。
+                    alias = nfkc(strip_jp_annotations(jp_name)).strip()
+                    if alias and alias != jp_name:
+                        self.manual.setdefault(alias, (sid, method))
                     self.csv_rows.append(rec)
         self.by_skel: dict[str, list[tuple[str, str, str]]] = {}
         self.by_zh: dict[str, tuple[str, str, str]] = {}
@@ -779,6 +828,9 @@ class JpMapper:
             self.by_skel.setdefault(skel, []).append((sid, inn, (atc or "").strip()))
         self._skel_keys = list(self.by_skel)
         self.memo: dict[str, tuple[str, str]] = {}
+        # 核验清单按「去空格/去括号」后的写法比对（map() 里查表用的就是这个形态）
+        self.fuzzy2_verified = {nfkc(strip_jp_annotations(t)).strip()
+                               for t in load_fuzzy2_verified()}
 
     # ---- 裁决 ----------------------------------------------------------
     @staticmethod
@@ -911,7 +963,11 @@ class JpMapper:
                         else:
                             fuzzy = self._fuzzy(skel, salts, romaji)
                             if fuzzy:
-                                result = (fuzzy[0], "katakana-fuzzy2")
+                                # v0.12.0 门禁：模糊层只回放人工核验过的写法
+                                if key in self.fuzzy2_verified:
+                                    result = (fuzzy[0], "katakana-fuzzy2")
+                                else:
+                                    result = ("", "unmapped-fuzzy2-unverified")
         self.memo[token] = result
         return result
 
@@ -998,6 +1054,8 @@ def _collect(snap: dict, mapper: JpMapper, resolve) -> dict:
                 nonsub[token] += 1
                 continue
             st["ingredient_tokens"] += 1
+            if method == "unmapped-fuzzy2-unverified":
+                st["ingredient_tokens_fuzzy2_unverified"] += 1
             if sid:
                 st["ingredient_tokens_mapped"] += 1
             unmapped_occ[method] += 1
@@ -1242,6 +1300,8 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
             "tokens_mapped": st["ingredient_tokens_mapped"],
             "token_rate_pct": round(st["ingredient_tokens_mapped"] / n_tok * 100, 1),
             "tokens_non_substance": st.get("ingredient_tokens_nonsub", 0),
+            "tokens_fuzzy2_unverified": st.get("ingredient_tokens_fuzzy2_unverified", 0),
+            "fuzzy2_verified_patterns": len(mapper.fuzzy2_verified),
             "non_substance_top": result["nonsub"].most_common(10),
             "unique_unmapped": len(result["unmapped"]),
             "unmapped_top30": result["unmapped"].most_common(30),
@@ -1298,6 +1358,9 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
     print(f"  剂型: 品名派生 {summary['dosage_form']['derived_from_name_pct']}%"
           f" · 区分兜底 {summary['dosage_form']['fallback_kubun_pct']}%"
           f" · 分布 {result['forms'].most_common(6)}")
+    fz_unv = st.get("ingredient_tokens_fuzzy2_unverified", 0)
+    print(f"  fuzzy2 门禁: 未核验 {fz_unv:,} token（只回放核验过的写法："
+          f"{len(mapper.fuzzy2_verified)} 种）")
     print(f"  成分映射: {st['ingredient_tokens_mapped']:,}/{st['ingredient_tokens']:,} = "
           f"{summary['substance']['token_rate_pct']}% · 未映射写法 {len(result['unmapped']):,}"
           f" · 非单一成分(不计入分母) {st.get('ingredient_tokens_nonsub', 0):,}"
@@ -1312,6 +1375,215 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
           f" · name_key 新建 {len(new_keys):,} · name_variant 新建 {len(new_variants):,}"
           f" · substance 新增 0")
     print(f"  耗时 {elapsed}s · 汇总 {out.relative_to(ROOT)}")
+    return 0
+
+
+# ---------------------------------------------------------------- 写库（v0.12.0）
+# 只允许 `--apply --confirm-real-db`；单事务；manifest 全量 old→new；
+# `--rollback <manifest>` 幂等回滚。fuzzy2 门禁在 JpMapper.map() 里生效，
+# 「未核验的模糊匹配」根本不会进库。
+SUBSTANCE_CSV = ROOT / "data" / "sources" / "jp_substance_add_20261115.csv"
+ROUTE_BY_KUBUN = {"内用薬": "oral", "注射薬": "injection",
+                  "外用薬": "topical", "歯科用薬剤": "dental"}
+
+
+def _load_new_substances(path: Path = SUBSTANCE_CSV) -> list[dict]:
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8-sig", newline="") as fh:
+        return [r for r in csv.DictReader(fh)]
+
+
+def cmd_apply(args: argparse.Namespace) -> int:
+    """把 JP 12,442 品目写进库（单事务）。默认只跑副本；真库要 --confirm-real-db。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    real = db_path.resolve() == REAL_DB.resolve()
+    if real and not args.confirm_real_db:
+        raise SystemExit("真库写入必须加 --confirm-real-db（并先备份 + 副本演练）")
+    if not db_path.exists():
+        raise SystemExit(f"库不存在：{db_path}")
+    before_sha = _sha256_file(db_path)
+    snap = load_snapshot(args.src if args.src.is_absolute() else (ROOT / args.src))
+    subs_new = _load_new_substances()
+    con = sqlite3.connect(str(db_path), timeout=180)
+    con.row_factory = sqlite3.Row
+    con.execute("PRAGMA foreign_keys = ON")
+    manifest = {
+        "tool": "etl/markets/jp.py --apply", "country": COUNTRY, "source_id": SOURCE_ID,
+        "list_date": LIST_DATE, "db": str(db_path.resolve()),
+        "db_sha256_before": before_sha, "created_at": _now(), "committed": False,
+        "substances_added": [], "products_added": 0, "components_added": 0,
+        "name_keys_added": 0, "name_variants_added": 0, "product_names_added": 0,
+        "skipped_existing": 0, "source_created": False,
+    }
+    try:
+        con.execute("BEGIN IMMEDIATE")
+        have = con.execute("SELECT COUNT(*) FROM product WHERE country = ?",
+                           (COUNTRY,)).fetchone()[0]
+        if have:
+            con.rollback()
+            print(f"JP 已有 {have:,} 条产品，幂等退出（未写库）")
+            return 0
+        if not con.execute("SELECT 1 FROM source WHERE source_id = ?",
+                           (SOURCE_ID,)).fetchone():
+            con.execute(
+                "INSERT INTO source (source_id, name, url, license, license_url,"
+                " retrieved_at, notes, data_as_of) VALUES (?,?,?,?,?,?,?,?)",
+                (SOURCE_ID, "厚生労働省 薬価基準収載品目リスト", LIST_PAGE,
+                 "公共データ利用規約（第1.0版）PDL1.0", PDL_URL, LIST_DATE,
+                 "出典：厚生労働省ウェブサイト、PDL1.0；本サイトは加工して作成。"
+                 "収載≠在售。", LIST_DATE))
+            manifest["source_created"] = True
+        # ① 新增 substance + base variant
+        for r in subs_new:
+            sid = (r.get("substance_id") or "").strip()
+            inn = (r.get("inn_en") or "").strip()
+            if not sid or not inn:
+                continue
+            if con.execute("SELECT 1 FROM substance WHERE substance_id=?",
+                           (sid,)).fetchone():
+                manifest["skipped_existing"] += 1
+                continue
+            con.execute(
+                "INSERT INTO substance (substance_id, inn_en, inn_zh, atc, source_id,"
+                " method, confidence, decided_at, name_lang) VALUES (?,?,?,?,?,?,?,?,?)",
+                (sid, inn, (r.get("inn_zh") or None), (r.get("atc") or None),
+                 SOURCE_ID, "imported", (r.get("confidence") or "medium").strip(),
+                 LIST_DATE, "en"))
+            vid = sid
+            if con.execute("SELECT 1 FROM variant WHERE variant_id = ?",
+                           (vid,)).fetchone():
+                vid = sid + "-base"
+                n = 1
+                while con.execute("SELECT 1 FROM variant WHERE variant_id = ?",
+                                  (vid,)).fetchone():
+                    n += 1
+                    vid = f"{sid}-base{n}"
+            con.execute(
+                "INSERT INTO variant (variant_id, substance_id, salt, hydrate, ester,"
+                " base_fraction, interchange, interchange_note, salt_code, strength_basis)"
+                " VALUES (?,?,?,?,?,1.0,'unknown',NULL,'','unknown')",
+                (vid, sid, "", "", ""))
+            manifest["substances_added"].append({"substance_id": sid, "inn_en": inn,
+                                                 "atc": r.get("atc") or "",
+                                                 "inn_zh": r.get("inn_zh") or ""})
+        # ② 用「新库 + 新映射 + 新门禁」重新映射
+        mapper = JpMapper(con)
+        resolve = _variant_resolver(con)
+        result = _collect(snap, mapper, resolve)
+        prods, comps, keys, variants, pnames = [], [], {}, [], []
+        for p in result["products"]:
+            prods.append((
+                p["product_id"], COUNTRY, p["form_base"], p["form_base"],
+                ROUTE_BY_KUBUN.get(p["kubun"], "other"), p["release"], None,
+                (p["maker"] or None), p["code"], p["kubun"], p["is_branded"],
+                p["status"], (p["expiry"] or None), SOURCE_ID, LIST_PAGE, LIST_DATE,
+                f"薬価基準収載（収載≠在售）；区分={p['kubun']}；"
+                f"{'先発品' if p['senpatsu'] else ('後発品' if p['generic_addon'] else '先発/後発未标注')}"))
+            nm = normalize(p["name"])
+            if nm and not nm.is_empty:
+                keys[nm.norm] = nm
+                pnames.append((p["product_id"], nm.norm, "trade", 1))
+            for i, c in enumerate(p["components"]):
+                st = c.get("strength") or {}
+                comps.append((p["product_id"], i, c["variant_id"],
+                              st.get("value"), st.get("unit"),
+                              st.get("per_volume_value"), st.get("per_volume_unit")))
+        con.executemany(
+            "INSERT INTO product (product_id, country, dosage_form, form_base, route,"
+            " release, pack, mah, approval_id, category, is_branded, status,"
+            " status_date, source_id, source_url, retrieved_at, note)"
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", prods)
+        con.executemany(
+            "INSERT OR IGNORE INTO name_key (key_id, norm, compact, script, lang)"
+            " VALUES (?,?,?,?,NULL)",
+            [(nm.norm, nm.norm, nm.compact, nm.script) for nm in keys.values()])
+        con.executemany(
+            "INSERT OR IGNORE INTO name_variant (key_id, raw, source_id) VALUES (?,?,?)",
+            [(nm.norm, nm.raw, SOURCE_ID) for nm in keys.values()])
+        con.executemany(
+            "INSERT INTO product_name (product_id, key_id, name_type, is_primary)"
+            " VALUES (?,?,?,?)", pnames)
+        con.executemany(
+            "INSERT INTO product_component (product_id, ord, variant_id, strength_value,"
+            " strength_unit, per_volume_value, per_volume_unit) VALUES (?,?,?,?,?,?,?)",
+            comps)
+        manifest.update(
+            products_added=len(prods), components_added=len(comps),
+            name_keys_added=len(keys), name_variants_added=len(keys),
+            product_names_added=len(pnames),
+            new_name_key_ids=sorted(keys), )
+        args.manifest.parent.mkdir(parents=True, exist_ok=True)
+        args.manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=1),
+                                 encoding="utf-8")
+        con.commit()
+        manifest["committed"] = True
+        manifest["committed_at"] = _now()
+        args.manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=1),
+                                 encoding="utf-8")
+    except Exception:
+        con.rollback()
+        print("!! 写库失败，已回滚", file=sys.stderr)
+        raise
+    finally:
+        con.close()
+    print(f"已写入 product {manifest['products_added']:,} · "
+          f"component {manifest['components_added']:,} · "
+          f"substance {len(manifest['substances_added'])} · "
+          f"name_key {manifest['name_keys_added']:,} · "
+          f"name_variant {manifest['name_variants_added']:,}")
+    print(f"撤销清单: {args.manifest}")
+    return 0
+
+
+def cmd_rollback(args: argparse.Namespace) -> int:
+    """按 manifest 删除本次写入的 JP 数据（幂等）。"""
+    data = json.loads(Path(args.rollback).read_text(encoding="utf-8"))
+    if not data.get("committed"):
+        raise SystemExit("清单未标记 committed，拒绝回滚")
+    db_path = Path(data["db"])
+    con = sqlite3.connect(str(db_path), timeout=180)
+    con.row_factory = sqlite3.Row
+    con.execute("PRAGMA foreign_keys = ON")
+    removed = Counter()
+    try:
+        con.execute("BEGIN IMMEDIATE")
+        pids = [r[0] for r in con.execute(
+            "SELECT product_id FROM product WHERE country = ?", (COUNTRY,))]
+        n_comp = con.execute(
+            "SELECT COUNT(*) FROM product_component WHERE product_id IN (SELECT"
+            " product_id FROM product WHERE country = ?)", (COUNTRY,)).fetchone()[0]
+        con.executemany("DELETE FROM product_component WHERE product_id = ?",
+                        [(p,) for p in pids])
+        removed["component"] = n_comp
+        con.executemany("DELETE FROM product_name WHERE product_id = ?",
+                        [(p,) for p in pids])
+        con.executemany("DELETE FROM product WHERE product_id = ?",
+                        [(p,) for p in pids])
+        removed["product"] = len(pids)
+        kids = data.get("new_name_key_ids") or []
+        con.executemany("DELETE FROM name_variant WHERE key_id = ? AND source_id = ?",
+                        [(k, SOURCE_ID) for k in kids])
+        for k in kids:
+            if not con.execute("SELECT 1 FROM name_variant WHERE key_id = ?",
+                               (k,)).fetchone():
+                con.execute("DELETE FROM name_key WHERE key_id = ?", (k,))
+        removed["name_key"] = len(kids)
+        for r in data.get("substances_added") or []:
+            sid = r["substance_id"]
+            con.execute("DELETE FROM variant WHERE substance_id = ?", (sid,))
+            con.execute("DELETE FROM substance WHERE substance_id = ?", (sid,))
+        removed["substance"] = len(data.get("substances_added") or [])
+        if data.get("source_created"):
+            con.execute("DELETE FROM source WHERE source_id = ?", (SOURCE_ID,))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    finally:
+        con.close()
+    print(f"已回滚：product {removed['product']:,} · substance {removed['substance']} · "
+          f"name_key {removed['name_key']:,}（source/substance 按 manifest）")
     return 0
 
 
@@ -1384,7 +1656,16 @@ def self_check(raw: Path = RAW) -> int:
     # CLI
     ap = build_parser()
     flags = {opt for action in ap._actions for opt in action.option_strings}
-    check("CLI 没有 --apply / --rollback", "--apply" not in flags and "--rollback" not in flags)
+    check("CLI 有 --apply / --rollback（真库写入必须 --confirm-real-db）",
+          {"--apply", "--rollback", "--confirm-real-db"} <= flags)
+    # ---- fuzzy2 门禁（v0.12.0）------------------------------------------
+    verified = load_fuzzy2_verified()
+    check("fuzzy2 核验清单存在且非空（data/sources/jp_fuzzy2_fix_20261115.csv）",
+          len(verified) > 0, f"{len(verified)} 种写法")
+    import inspect as _inspect
+    src_map = _inspect.getsource(JpMapper.map)
+    check("映射表不得存在「来自 fuzzy2 但不在核验清单」的条目（门禁在代码里）",
+          "fuzzy2_verified" in src_map and "unmapped-fuzzy2-unverified" in src_map)
     check("CLI 有 --fetch / --dry-run / --self-check / --prepare-copy",
           {"--fetch", "--dry-run", "--self-check", "--prepare-copy"} <= flags)
     check("dry-run 默认库是 .tmp 副本，不是真库", ap.get_default("db") != REAL_DB,
@@ -1414,6 +1695,12 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--db", type=Path, default=DB_COPY, help="只读库副本（拒绝真库）")
     ap.add_argument("--src", type=Path, default=RAW, help="快照目录")
     ap.add_argument("--copy", action="store_true", help="库副本不存在时先复制真库")
+    ap.add_argument("--apply", action="store_true",
+                    help="写库（默认只跑副本；真库需 --confirm-real-db）")
+    ap.add_argument("--confirm-real-db", action="store_true", help="确认对真库写入")
+    ap.add_argument("--manifest", type=Path,
+                    default=WORK / "jp_ingest_manifest.json", help="撤销清单路径")
+    ap.add_argument("--rollback", type=Path, default=None, help="按 manifest 回滚")
     return ap
 
 
@@ -1426,6 +1713,10 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_prepare_copy(args)
     if args.self_check:
         return cmd_self_check(args)
+    if args.rollback is not None:
+        return cmd_rollback(args)
+    if args.apply:
+        return cmd_apply(args)
     return cmd_dry_run(args)
 
 

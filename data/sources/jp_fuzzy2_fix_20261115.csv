@@ -1,0 +1,218 @@
+jp_token,tokens,mapped_inn,substance_id,verdict,correct_inn,target,correct_in_db,action,note
+オルメサルタンメドキソミル,26,Olmesartan Medoxomil,olmesartan-medoxomil,ok,,Olmesartan Medoxomil,,keep,
+クラリスロマイシン,23,Clarithromycin,clarithromycin,ok,,Clarithromycin,,keep,
+フェブキソスタット,22,Febuxostat,febuxostat,ok,,Febuxostat,,keep,
+アズレンスルホン酸ナトリウム水和物,21,Zuranolone,zuranolone,wrong,Sodium Azulene Sulfonate,Sodium Azulene Sulfonate,no,new_substance,阿兹兰磺酸钠；AZAEL 对照
+スガマデクスナトリウム,19,Sugammadex,sugammadex,ok,,Sugammadex,,keep,
+アスコルビン酸,16,Secretin,secretin,wrong,Ascorbic Acid,Ascorbic Acid,yes,map_row,维生素C；库内有 ascorbic-acid
+ピペラシリン水和物,15,Piperazine,piperazine,wrong,Piperacillin,Piperacillin,yes,map_row,哌拉西林；库内有 piperacillin
+d-クロルフェニラミンマレイン酸塩,14,Dexchlorpheniramine,dexchlorpheniramine,ok,,Dexchlorpheniramine,,keep,
+シロスタゾール,14,Sulfathiazole,sulfathiazole,wrong,Cilostazol,Cilostazol,yes,map_row,西洛他唑；库内有 cilostazol
+ミチグリニドカルシウム水和物,14,Metocurine,metocurine,wrong,Mitiglinide,Mitiglinide,no,new_substance,米格列奈钙
+エパルレスタット,14,Epalrestat,epalrestat,ok,,Epalrestat,,keep,
+クロラムフェニコール,13,Cloranfenicol,cloranfenicol,dup_es,Chloramphenicol,Chloramphenicol,yes,retarget,氯霉素；应指向 chloramphenicol 而非 ES 行
+インスリン ヒト(遺伝子組換え),13,Insulin,insulin,ok,Insulin,Insulin,yes,keep,人胰岛素（母体）
+クロモグリク酸ナトリウム,13,Cromoglicato,cromoglicato,dup_es,Sodium Cromoglicate,Sodium Cromoglicate,yes,retarget,色甘酸钠；应指向英文行
+アルベカシン硫酸塩,12,Reboxetine,reboxetine,wrong,Arbekacin,Arbekacin,no,new_substance,阿贝卡星
+ピペラシリンナトリウム,12,Piperazine,piperazine,wrong,Piperacillin,Piperacillin,yes,map_row,哌拉西林钠
+ホリナートカルシウム,11,Ornithine,ornithine,wrong,Calcium Folinate,Calcium Folinate,yes,map_row,亚叶酸钙
+カンゾウ,11,Econazole,econazole,reclassify,,,,reclassify_nonsub,甘草（生薬），不是单一 INN
+ペミロラストカリウム,9,Pamidronate,pamidronate,wrong,Pemirolast,Pemirolast,no,new_substance,吡嘧司特钾
+トリアムシノロンアセトニド,9,Triamcinolone Acetonide,triamcinolone-acetonide,ok,,Triamcinolone Acetonide,,keep,
+グリコピロニウム臭化物,9,Glycopyrronium,glycopyrronium,ok,,Glycopyrronium,,keep,
+フィブリノゲン加第XIII因子,9,Fibrinogen,fibrinogen,ok,Fibrinogen,Fibrinogen,yes,keep,纤维蛋白原 + XIII 因子制剂，落母体
+アゼルニジピン,8,Isradipine,isradipine,wrong,Azelnidipine,Azelnidipine,no,new_substance,阿折地平
+ポリスチレンスルホン酸カルシウム,8,Poliestireno Sulfonato,poliestireno-sulfonato,dup_es,Calcium Polystyrene Sulfonate,Calcium Polystyrene Sulfonate,yes,retarget,聚苯乙烯磺酸钙
+サラゾスルファピリジン,8,Sulfapyridine,sulfapyridine,wrong,Sulfasalazine,Sulfasalazine,yes,map_row,柳氮磺吡啶；库内有 sulfasalazine
+シルニジピン,7,Isradipine,isradipine,wrong,Cilnidipine,Cilnidipine,yes,map_row,西尼地平
+デスモプレシン酢酸塩水和物,7,Desmopressin,desmopressin,ok,,Desmopressin,,keep,
+テノホビル アラフェナミドフマル酸塩,7,Tenofovir Alafenamide,tenofovir-alafenamide,ok,,Tenofovir Alafenamide,,keep,
+チキジウム臭化物,6,Chickweed,chickweed,wrong,Tiquizium,Tiquizium,no,new_substance,噻喹溴铵
+ジメモルファンリン酸塩,6,Diamorphine,diamorphine,wrong,Dimemorfan,Dimemorfan,no,new_substance,二甲啡烷
+ラフチジン,6,Rifandin,rifandin,wrong,Lafutidine,Lafutidine,no,new_substance,拉呋替丁
+カリジノゲナーゼ,6,Kallidinogenase,kallidinogenase,ok,,Kallidinogenase,,keep,
+ゴシツ,6,Oxibato,oxibato,reclassify,,,,reclassify_nonsub,牛膝（生薬）
+スキサメトニウム塩化物水和物,6,Suxametonio,suxametonio,dup_es,Suxamethonium,Suxamethonium,no,new_substance,氯化琥珀胆碱；应指向英文行
+インコボツリヌストキシンA,6,Incobotulinumtoxina,incobotulinumtoxina,ok,,Incobotulinumtoxina,,keep,
+ガベキサートメシル酸塩,6,Cobicistat,cobicistat,wrong,Gabexate,Gabexate,no,new_substance,加贝酯
+アザシチジン,6,Azasetron,azasetron,wrong,Azacitidine,Azacitidine,yes,map_row,阿扎胞苷
+プロペリシアジン,5,Paliperidone,paliperidone,wrong,Propericiazine,Propericiazine,no,new_substance,丙氯拉嗪类吩噻嗪；プロペリシアジン=Propericiazine
+クロチアゼパム,5,Clonazepam,clonazepam,wrong,Clotiazepam,Clotiazepam,no,new_substance,氯噻西泮
+アロチノロール塩酸塩,5,Retinol,retinol,wrong,Arotinolol,Arotinolol,no,new_substance,阿罗洛尔
+シベンゾリンコハク酸塩,5,Soybean Oil,soybean-oil,wrong,Cibenzoline,Cibenzoline,no,new_substance,西苯唑啉
+シャゼンシ,5,Ossein,ossein,reclassify,,,,reclassify_nonsub,车前子（生薬）
+ホスホマイシンカルシウム水和物,5,Semustine,cn-a81c6d1750,wrong,Fosfomycin,Fosfomycin,yes,map_row,磷霉素钙
+トラフェルミン(遺伝子組換え),5,Trolamine,trolamine,wrong,Trafermin,Trafermin,no,new_substance,重组人碱性成纤维细胞生长因子
+フルオシノロンアセトニド,5,Fluocinolone Acetonide,fluocinolone-acetonide,ok,,Fluocinolone Acetonide,,keep,
+クロカプラミン塩酸塩水和物,4,Clomipramine,clomipramine,wrong,Clocapramine,Clocapramine,no,new_substance,氯卡帕明
+スルトプリド塩酸塩,4,Sulpiride,sulpiride,ok,,Sulpiride,,keep,
+モサプラミン塩酸塩,4,Mesalamine,mesalamine,wrong,Mosapramine,Mosapramine,no,new_substance,莫沙帕明
+安息香酸ナトリウムカフェイン,4,Netilmicin,netilmicin,wrong,Caffeine,Caffeine,yes,map_row,苯甲酸钠咖啡因，落咖啡因母体
+ベプリジル塩酸塩水和物,4,Biperiden,biperiden,wrong,Bepridil,Bepridil,no,new_substance,苄普地尔
+トラピジル,4,Etripamil,etripamil,wrong,Trapidil,Trapidil,no,new_substance,曲匹地尔
+イフェンプロジル酒石酸塩,4,Fampridine,fampridine,wrong,Ifenprodil,Ifenprodil,no,new_substance,依芬普地
+ガンマオリザノール,4,Cyamemazine,cyamemazine,wrong,Gamma-Oryzanol,Gamma-Oryzanol,no,new_substance,γ-谷维素
+L-システイン,4,Losartan,losartan,wrong,Cysteine,Cysteine,yes,map_row,半胱氨酸
+ダプロデュスタット,4,Daprodustat,daprodustat,ok,,Daprodustat,,keep,
+ジコッピ,4,Doxepin,doxepin,reclassify,,,,reclassify_nonsub,地骨皮（生薬）
+アムホテリシンB,4,Metirosine,metirosine,wrong,Amphotericin B,Amphotericin B,yes,map_row,两性霉素B
+カンレノ酸カリウム,4,Eugenol,eugenol,wrong,Potassium Canrenoate,Potassium Canrenoate,yes,map_row,坎利酸钾
+エポエチンベータ(遺伝子組換え),4,Epoetin Beta,epoetin-beta,ok,,Epoetin Beta,,keep,
+イオタラム酸メグルミン,4,Trimipramine,trimipramine,wrong,Iothalamate Meglumine,Iothalamate Meglumine,no,new_substance,碘他拉酸葡甲胺
+ジフロラゾン酢酸エステル,4,Difluoro Silane,difluoro-silane,wrong,Diflorasone Diacetate,Diflorasone Diacetate,yes,map_row,双氟拉松二醋酸酯
+オキサゾラム,3,Oxazepam,oxazepam,wrong,Oxazolam,Oxazolam,no,new_substance,奥沙唑仑
+クロキサゾラム,3,Carbazochrome,carbazochrome,wrong,Cloxazolam,Cloxazolam,no,new_substance,氯噁唑仑
+ペモリン,3,Apomorphine,apomorphine,wrong,Pemoline,Pemoline,no,new_substance,匹莫林
+ボルノレキサント水和物,3,Vernakalant,vernakalant,wrong,Vornorexant,Vornorexant,no,new_substance,食欲素受体拮抗剂（日本新药）
+dl-イソプレナリン塩酸塩,3,Drospirenone,drospirenone,wrong,Isoprenaline,Isoprenaline,yes,map_row,异丙肾上腺素
+ピモベンダン,3,Pimavanserin,pimavanserin,wrong,Pimobendan,Pimobendan,no,new_substance,匹莫苯丹
+ポリスチレンスルホン酸ナトリウム,3,Poliestireno Sulfonato,poliestireno-sulfonato,dup_es,Sodium Polystyrene Sulfonate,Sodium Polystyrene Sulfonate,yes,retarget,聚苯乙烯磺酸钠
+次硝酸ビスマス,3,Bismuth,bismuth,ok,Bismuth,Bismuth,yes,keep,碱式硝酸铋，落铋母体
+グルコン酸カルシウム水和物,3,Glycopyrronium,glycopyrronium,wrong,Calcium Gluconate,Calcium Gluconate,yes,map_row,葡萄糖酸钙
+フェブキソスタット水和物,3,Febuxostat,febuxostat,ok,,Febuxostat,,keep,
+ドチヌラド,3,Dithranol,dithranol,wrong,Dotinurad,Dotinurad,no,new_substance,多替诺雷
+ミコフェノール酸 モフェチル,3,Mycophenolate Mofetil,mycophenolate-mofetil,ok,,Mycophenolate Mofetil,,keep,
+シナカルセト塩酸塩,3,Senecio Aureus,senecio-aureus,wrong,Cinacalcet,Cinacalcet,yes,map_row,西那卡塞
+ヒドロキシクロロキン硫酸塩,3,Hydroxychloroquine,hydroxychloroquine,ok,,Hydroxychloroquine,,keep,
+ロキサデュスタット,3,Roxadustat,roxadustat,ok,,Roxadustat,,keep,
+シプロヘプタジン塩酸塩水和物,3,Sapropterin,sapropterin,wrong,Cyproheptadine,Cyproheptadine,yes,map_row,赛庚啶
+カッセキ,3,Quassia,quassia,reclassify,,,,reclassify_nonsub,滑石（生薬）
+ゲンチアナ,3,Guanethidine,guanethidine,reclassify,,,,reclassify_nonsub,龙胆（生薬）
+ファロペネムナトリウム水和物,3,Ioflupane I 123,ioflupane-i-123,wrong,Faropenem,Faropenem,no,new_substance,法罗培南
+ロキシスロマイシン,3,Roxithromycin,roxithromycin,ok,,Roxithromycin,,keep,
+テノホビル ジソプロキシルフマル酸塩,3,Tenofovir Disoproxil,tenofovir-disoproxil,ok,,Tenofovir Disoproxil,,keep,
+ダルナビル エタノール付加物,3,Dronabinol,dronabinol,wrong,Darunavir,Darunavir,yes,map_row,达芦那韦；エタノール付加物是晶型
+フォリトロピン ベータ(遺伝子組換え),3,Folitropina Beta,folitropina-beta,dup_es,Follitropin Beta,Follitropin Beta,yes,retarget,促卵泡激素β，改指英文行
+ホリトロピンデルタ(遺伝子組換え),3,Lutropin Alfa,lutropin-alfa,wrong,Follitropin Delta,Follitropin Delta,yes,map_row,促卵泡激素δ
+シラスタチンナトリウム,3,Azelastine,azelastine,wrong,Cilastatin,Cilastatin,yes,map_row,西司他丁钠
+ジベカシン硫酸塩,3,Dibucaine,dibucaine,wrong,Dibekacin,Dibekacin,no,new_substance,地贝卡星（库内无）
+イソプロピルウノプロストン,3,Isopropyl Myristate,isopropyl-myristate,wrong,Isopropyl Unoprostone,Isopropyl Unoprostone,no,new_substance,异丙基乌诺前列酮（库内无）
+アクタリット,2,Acitretin,acitretin,ok,,Acitretin,,keep,
+セチプチリンマレイン酸塩,2,Azathioprine,azathioprine,wrong,Setiptiline,Setiptiline,no,new_substance,司普替林
+ネモナプリド,2,Nimesulide,nimesulide,wrong,Nemonapride,Nemonapride,no,new_substance,奈莫必利
+リスデキサンフェタミンメシル酸塩,2,Lisdexamfetamine,lisdexamfetamine,ok,,Lisdexamfetamine,,keep,
+無水カフェイン,2,Caffeine,caffeine,ok,Caffeine,Caffeine,yes,keep,无水咖啡因，落母体
+アセタゾラミド,2,Estazolam,estazolam,wrong,Acetazolamide,Acetazolamide,yes,map_row,乙酰唑胺（库内有）
+セベラマー塩酸塩,2,Sevelamer,sevelamer,ok,,Sevelamer,,keep,
+オシロドロスタットリン酸塩,2,Osilodrostat,osilodrostat,ok,,Osilodrostat,,keep,
+エトレチナート,2,Tretinoin,tretinoin,wrong,Etretinate,Etretinate,no,new_substance,阿维A酯
+ダビガトランエテキシラートメタンスルホン酸塩,2,Dabigatran Etexilate Mesilate,dabigatran-etexilate-mesilate,ok,,Dabigatran Etexilate Mesilate,,keep,
+オデビキシバット水和物,2,Odevixibat,odevixibat,ok,,Odevixibat,,keep,
+アセチルシステイン,2,Estramustine,estramustine,wrong,Acetylcysteine,Acetylcysteine,yes,map_row,乙酰半胱氨酸（库内可能有）
+アロプリノール,2,Haloperidol,haloperidol,wrong,Allopurinol,Allopurinol,yes,map_row,别嘌醇
+エリグルスタット酒石酸塩,2,Eliglustat,eliglustat,ok,,Eliglustat,,keep,
+ニンテダニブエタンスルホン酸塩,2,Nintedanib Esilate,nintedanib-esilate,ok,,Nintedanib Esilate,,keep,
+バダデュスタット,2,Vadadustat,vadadustat,ok,,Vadadustat,,keep,
+レンバチニブメシル酸塩,2,Remibrutinib,remibrutinib,wrong,Lenvatinib,Lenvatinib,yes,map_row,仑伐替尼
+ツカチニブ エタノール付加物,2,Tucatinib,tucatinib,ok,Tucatinib,Tucatinib,yes,keep,图卡替尼，乙醇付加物=晶型
+ラマトロバン,2,Lamotrigine,lamotrigine,wrong,Ramatroban,Ramatroban,no,new_substance,雷马曲班
+カンテン,2,Guanethidine,guanethidine,reclassify,,,,reclassify_nonsub,寒天（辅料）
+テンナンショウ,2,Tenapanor,tenapanor,reclassify,,,,reclassify_nonsub,天南星（生薬）
+リュウガンニク,2,Arginine,arginine,reclassify,,,,reclassify_nonsub,龙眼肉（生薬）
+リファンピシン,2,Rifampin,rifampin,ok,,Rifampin,,keep,
+デンプン部分加水分解物,2,Domiphen,domiphen,reclassify,,,,reclassify_nonsub,淀粉部分水解物（辅料）
+メサドン塩酸塩,2,Mesna,mesna,wrong,Methadone,Methadone,yes,map_row,美沙酮
+ブクラデシンナトリウム,2,Baclofen,baclofen,wrong,Bucladesine,Bucladesine,no,new_substance,布拉地新钠
+ニトロプルシドナトリウム水和物,2,Nitroprusiato,nitroprusiato,dup_es,Sodium Nitroprusside,Sodium Nitroprusside,yes,retarget,硝普钠，改指英文行
+デヒドロコール酸,2,Dihidrocodeina,dihidrocodeina,wrong,Dehydrocholic Acid,Dehydrocholic Acid,yes,map_row,去氢胆酸
+オゾラリズマブ(遺伝子組換え),2,Sarilumab,sarilumab,wrong,Ozoralizumab,Ozoralizumab,no,new_substance,奥佐利珠单抗
+アフリベルセプト ベータ(遺伝子組換え),2,Aflibercept,aflibercept,ok,Aflibercept,Aflibercept,yes,keep,阿柏西普（β 变体落母体）
+ロペグインターフェロン アルファ-2b(遺伝子組換え),2,Ropeginterferon Alfa 2B,ropeginterferon-alfa-2b,ok,,Ropeginterferon Alfa 2B,,keep,
+ベランタマブ マホドチン(遺伝子組換え),2,Belantamab Mafodotin,belantamab-mafodotin,ok,,Belantamab Mafodotin,,keep,
+ベンジルペニシリンカリウム,2,Benproperine,benproperine,wrong,Benzylpenicillin,Benzylpenicillin,no,new_substance,青霉素钾
+ベンジルペニシリンベンザチン水和物,2,Bencilpenicilina Benzatina,bencilpenicilina-benzatina,dup_es,Benzathine Benzylpenicillin,Benzathine Benzylpenicillin,yes,retarget,苄星青霉素，改指英文行
+セフォゾプラン塩酸塩,2,Isoflurane,isoflurane,wrong,Cefozopran,Cefozopran,no,new_substance,头孢唑兰
+肺炎球菌ワクチン,2,Vacuna,mx-es-vacuna,reclassify,,,,reclassify_nonsub,疫苗（生物制剂）
+乾燥組織培養不活化狂犬病ワクチン,2,Vacuna,mx-es-vacuna,reclassify,,,,reclassify_nonsub,狂犬病疫苗（生物制剂）
+沈降破傷風トキソイド,2,Tocainide,tocainide,reclassify,,,,reclassify_nonsub,破伤风类毒素（生物制剂）
+乾燥濃縮人C1-インアクチベーター,2,Cinacalcet,cinacalcet,reclassify,,,,reclassify_nonsub,人 C1 酯酶抑制剂（血液制剂）
+インターフェロン ガンマ-1a(遺伝子組換え),2,Interferon Gamma,interferon-gamma,ok,Interferon Gamma,Interferon Gamma,yes,keep,干扰素γ-1a 落母体
+ペグインターフェロン アルファ-2a(遺伝子組換え),2,Peginterferon Alfa,peginterferon-alfa,ok,,Peginterferon Alfa,,keep,
+インターフェロン ベータ-1a(遺伝子組換え),2,Interferon Beta 1A,interferon-beta-1a,ok,,Interferon Beta 1A,,keep,
+ガドキセト酸ナトリウム,2,Gadoxetate,gadoxetate,ok,,Gadoxetate,,keep,
+ピマリシン,2,Apomorphine,apomorphine,wrong,Pimaricin,Pimaricin,no,new_substance,纳他霉素（匹马霉素）
+オキシグルタチオン,2,Oxitriptan,oxitriptan,unverified,,,,drop_unverified,氧化型谷胱甘肽，非标准 INN，无把握
+ベンダザック,2,Bendazac,bendazac,ok,,Bendazac,,keep,
+エテンザミド,1,Ethionamide,ethionamide,wrong,Ethenzamide,Ethenzamide,no,new_substance,乙水杨胺
+イソプロピルアンチピリン,1,Sapropterin,sapropterin,wrong,Isopropylantipyrine,Isopropylantipyrine,no,new_substance,异丙安替比林
+ブコローム,1,Vecuronium,vecuronium,wrong,Bucolome,Bucolome,no,new_substance,布可隆
+ジメトチアジンメシル酸塩,1,Dimetindene,dimetindene,wrong,Dimetotiazine,Dimetotiazine,no,new_substance,二甲替嗪
+イストラデフィリン,1,Istradefylline,istradefylline,ok,,Istradefylline,,keep,
+プロクロルペラジンマレイン酸塩,1,Prochlorperazine,prochlorperazine,ok,,Prochlorperazine,,keep,
+ピパンペロン塩酸塩,1,Papaverine,papaverine,wrong,Pipamperone,Pipamperone,no,new_substance,匹泮哌隆
+ベタネコール塩化物,1,Bethanechol,bethanechol,ok,Bethanechol,Bethanechol,yes,keep,氯贝胆碱
+メペンゾラート臭化物,1,Omeprazole,omeprazole,wrong,Mepenzolate,Mepenzolate,no,new_substance,甲哌佐酯
+アフロクアロン,1,Fluorine,fluorine,wrong,Afloqualone,Afloqualone,no,new_substance,阿氟喹酮
+カフェイン水和物,1,Caffeine,caffeine,ok,Caffeine,Caffeine,yes,keep,咖啡因水合物，落母体
+ジサイクロミン,1,Desipramine,desipramine,wrong,Dicyclomine,Dicyclomine,yes,map_row,双环维林
+カルメロースナトリウム,1,Carmellose,carmellose,ok,,Carmellose,,keep,
+複方カンゾウ,1,Econazole,econazole,reclassify,,,,reclassify_nonsub,复方甘草（生薬制剂）
+結合型エストロゲン,1,Estrone,estrone,wrong,Conjugated Estrogens,Conjugated Estrogens,yes,map_row,结合雌激素（库内可能无）
+リンザゴリクスコリン,1,Linzagolix,linzagolix,ok,Linzagolix,Linzagolix,yes,keep,胆碱盐落母体
+セトチアミン塩酸塩水和物,1,Histamine,histamine,wrong,Cetotiamine,Cetotiamine,no,new_substance,赛托硫胺
+ビスベンチアミン,1,Bosentan,bosentan,wrong,Bisbentiamine,Bisbentiamine,no,new_substance,双苯酰硫胺
+バリン除去ミルク,1,Bromelain,bromelain,reclassify,,,,reclassify_nonsub,去缬氨酸牛奶（特殊食品）
+マラリキシバット塩化物,1,Maralixibat,maralixibat,ok,Maralixibat,Maralixibat,yes,keep,氯盐落母体
+トホグリフロジン水和物,1,Ethacridine,ethacridine,wrong,Tofogliflozin,Tofogliflozin,no,new_substance,托格列净
+イノシンプラノベクス,1,Inosine Pranobex,inosine-pranobex,ok,,Inosine Pranobex,,keep,
+エチドロン酸二ナトリウム,1,Etidronate,etidronate,ok,Etidronate,Etidronate,yes,keep,二钠盐落母体
+カルグルミン酸,1,Gallamine,gallamine,unverified,,,,drop_unverified,非标准名，无把握
+アナモレリン塩酸塩,1,Inamrinone,inamrinone,wrong,Anamorelin,Anamorelin,no,new_substance,阿那莫林
+フォロデシン塩酸塩,1,Felodipine,felodipine,wrong,Forodesine,Forodesine,no,new_substance,福罗地辛
+グマロンチニブ水和物,1,Agomelatine,agomelatine,wrong,Gumarontinib,Gumarontinib,no,new_substance,谷美替尼
+ベロトラルスタット塩酸塩,1,Berotralstat,berotralstat,ok,,Berotralstat,,keep,
+セベトラルスタット,1,Sebetralstat,sebetralstat,ok,,Sebetralstat,,keep,
+アンソッコウ,1,Insulin,insulin,reclassify,,,,reclassify_nonsub,安息香（生薬）
+エンゴサク,1,Enoxacin,enoxacin,reclassify,,,,reclassify_nonsub,延胡索（生薬）
+エンメイソウ,1,Ammonia,ammonia,reclassify,,,,reclassify_nonsub,延命草（生薬）
+キササゲ,1,Quassia,quassia,reclassify,,,,reclassify_nonsub,キササゲ（生薬）
+ケツメイシ,1,Ketamine,ketamine,reclassify,,,,reclassify_nonsub,決明子（生薬）
+ザクロヒ,1,Ozagrel,ozagrel,reclassify,,,,reclassify_nonsub,石榴皮（生薬）
+サンザシ,1,Isoniazid,isoniazid,reclassify,,,,reclassify_nonsub,山査子（生薬）
+シソシ,1,Ossein,ossein,reclassify,,,,reclassify_nonsub,紫蘇子（生薬）
+シャゼンソウ,1,Ossein,ossein,reclassify,,,,reclassify_nonsub,車前草（生薬）
+センコツ,1,Senega,senega,reclassify,,,,reclassify_nonsub,川骨（生薬）
+テンモンドウ,1,Thymosin,thymosin,reclassify,,,,reclassify_nonsub,天門冬（生薬）
+トウドクカツ,1,Etodolac,etodolac,reclassify,,,,reclassify_nonsub,独活（生薬）
+モッカ,1,Amikacin,amikacin,reclassify,,,,reclassify_nonsub,木香（生薬）
+レンニク,1,Rennin,rennin,reclassify,,,,reclassify_nonsub,蓮肉（生薬）
+バクガ,1,Vacuna,mx-es-vacuna,reclassify,,,,reclassify_nonsub,麦芽（生薬）
+バカンピシリン塩酸塩,1,Bacampicillin,bacampicillin,ok,,Bacampicillin,,keep,
+クエン酸鉄アンモニウム,1,Kanamycin,kanamycin,wrong,Ferric Ammonium Citrate,Ferric Ammonium Citrate,yes,map_row,枸橼酸铁铵
+ホスフェニトインナトリウム水和物,1,Sufentanil,sufentanil,wrong,Fosphenytoin,Fosphenytoin,yes,map_row,磷苯妥英
+アポモルヒネ塩酸塩水和物,1,Apomorphine,apomorphine,ok,Apomorphine,Apomorphine,yes,keep,盐酸阿扑吗啡
+プロクロルペラジン,1,Prochlorperazine,prochlorperazine,ok,,Prochlorperazine,,keep,
+アセチルコリン塩化物,1,Histrelin,histrelin,wrong,Acetylcholine,Acetylcholine,yes,map_row,氯乙酰胆碱
+アセタゾラミドナトリウム,1,Estazolam,estazolam,wrong,Acetazolamide,Acetazolamide,yes,map_row,乙酰唑胺钠
+エポプロステノールナトリウム専用溶解液,1,Epoprostenol Sodium,epoprostenol-sodium,ok,Epoprostenol Sodium,Epoprostenol Sodium,yes,keep,依前列醇钠
+コリオゴナドトロピン アルファ(遺伝子組換え),1,Coriogonadotrofina Alfa,coriogonadotrofina-alfa,dup_es,Choriogonadotropin Alfa,Choriogonadotropin Alfa,yes,retarget,绒促性素α，改指英文行
+バソプレシン,1,Vasopressin,vasopressin,ok,,Vasopressin,,keep,
+ノルアドレナリン,1,Nylidrin,nylidrin,wrong,Norepinephrine,Norepinephrine,yes,map_row,去甲肾上腺素
+プロスルチアミン,1,Eprosartan,eprosartan,wrong,Prosultiamine,Prosultiamine,no,new_substance,丙硫硫胺
+トロンボモデュリンアルファ(遺伝子組換え),1,Thrombin Alfa,thrombin-alfa,wrong,Thrombomodulin Alfa,Thrombomodulin Alfa,no,new_substance,重组血栓调节蛋白α
+プレリキサホル,1,Plerixafor,plerixafor,ok,,Plerixafor,,keep,
+アンデキサネット アルファ(遺伝子組換え),1,Andexanet Alfa,andexanet-alfa,ok,,Andexanet Alfa,,keep,
+ジクロフェナクエタルヒアルロン酸ナトリウム,1,Diclofenac Diethylamine,diclofenac-diethylamine,wrong,Diclofenac Etalhyaluronate,Diclofenac Etalhyaluronate,no,new_substance,双氯芬酸依泊胺（透明质酸盐）
+イホスファミド,1,Safinamide,safinamide,wrong,Ifosfamide,Ifosfamide,yes,map_row,异环磷酰胺
+アクチノマイシンD,1,Cetrimide,cetrimide,wrong,Dactinomycin,Dactinomycin,yes,map_row,放线菌素D
+イオマゼニル(123I),1,Mazindol,mazindol,wrong,Iomazenil,Iomazenil,no,new_substance,碘马西尼（放射性）
+フロルベタピル(18F),1,Florbetapir (18F),florbetapir-18f,ok,,Florbetapir (18F),,keep,
+リソカブタゲン マラルユーセル,1,Lisocabtagene Maraleucel,lisocabtagene-maraleucel,ok,,Lisocabtagene Maraleucel,,keep,
+イデカブタゲン ビクルユーセル,1,Idecabtagene Vicleucel,idecabtagene-vicleucel,ok,,Idecabtagene Vicleucel,,keep,
+クロラムフェニコールコハク酸エステルナトリウム,1,Cloranfenicol,cloranfenicol,dup_es,Chloramphenicol,Chloramphenicol,yes,retarget,氯霉素琥珀酸钠，改指英文行
+4価髄膜炎菌ワクチン(破傷風トキソイド結合体),1,Vacuna,mx-es-vacuna,reclassify,,,,reclassify_nonsub,疫苗（生物制剂）
+乾燥ジフテリアウマ抗毒素,1,Iodoform,iodoform,reclassify,,,,reclassify_nonsub,白喉抗毒素（生物制剂）
+インターフェロン ベータ-1b(遺伝子組換え),1,Interferon Beta-1B,interferon-beta-1b,ok,,Interferon Beta-1B,,keep,
+フェノールスルホンフタレイン,1,Phenolphthalein,phenolphthalein,ok,,Phenolphthalein,,keep,
+グリコピロニウムトシル酸塩水和物,1,Glycopyrronium,glycopyrronium,ok,Glycopyrronium,Glycopyrronium,yes,keep,托西酸盐落母体
+肺サーファクタント,1,Sufentanil,sufentanil,reclassify,,,,reclassify_nonsub,肺表面活性物质（生物制剂）
+ジメチルスルホキシド,1,Dimethyl Sulfoxide,dimethyl-sulfoxide,ok,,Dimethyl Sulfoxide,,keep,
+クレオソート,1,Kerosine,kerosine,reclassify,,,,reclassify_nonsub,木馏油（制剂/混合物）
+ホルマリン,1,Lumasiran,lumasiran,wrong,Formaldehyde,Formaldehyde,yes,map_row,甲醛溶液
+亜鉛華デンプン,1,Domiphen,domiphen,reclassify,,,,reclassify_nonsub,氧化锌淀粉（混合物）
+カンタリスチンキ,1,Quinupristin,quinupristin,reclassify,,,,reclassify_nonsub,斑蝥酊（酊剂）
+次没食子酸ビスマス,1,Bismuth,bismuth,ok,Bismuth,Bismuth,yes,keep,次没食子酸铋，落铋母体
+セタノール,1,Sotalol,sotalol,reclassify,,,,reclassify_nonsub,十六醇（辅料）
+ラウリル硫酸ナトリウム,1,Riluzole,riluzole,reclassify,,,,reclassify_nonsub,十二烷基硫酸钠（辅料）
+パラオキシ安息香酸ブチル,1,Polycarbophil,polycarbophil,reclassify,,,,reclassify_nonsub,对羟基苯甲酸丁酯（辅料）
+プロピトカイン塩酸塩,1,Proparacaine,proparacaine,wrong,Prilocaine,Prilocaine,yes,map_row,丙胺卡因（别称 propitocaine）

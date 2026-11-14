@@ -1,0 +1,80 @@
+category,decision,confidence,jp_name,romaji,salts,inn_en,inn_phonetic_ratio,inn_zh_candidate,inn_zh_source,atc,atc_source,cas,substance_id_if_exists,variant_ok,suggested_substance_id,token_occurrences,products_affected,evidence,note,prev_verdict
+mapper_gap,new_substance_high,high,イミダフェナシン,imidafenashin,,Imidafenacin,0.88,,,,,,,,imidafenacin,15,15,WHO INN 名录 PR090-021（list_no 90）,,可定案
+missing_inn,new_substance_high,high,パンテチン,pantechin,,Pantethine,0.84,二硫二泛酸,Wikidata Q228762 zh 标签（CC0，非药典名）,A11HA32,Wikidata Q228762 P267,16816-67-4,,,pantethine,14,14,Wikidata Q228762 en 标签一致+ATC A11HA32,,可定案
+missing_inn,new_substance_high,high,酢酸亜鉛水和物,酢酸亜鉛水和物,acetate,Zinc acetate,0.0,乙酸锌,Wikidata Q204639 zh 标签（CC0，非药典名）,A16AX05,Wikidata Q204639 P267,557-34-6,,,zinc-acetate,11,11,Wikidata Q204639 en 标签一致+ATC A16AX05,,可定案
+missing_inn,new_substance_high,high,エルデカルシトール,erudekarushitooru,,Eldecalcitol,0.48,,,,,,,,eldecalcitol,10,10,WHO INN 名录 RE059-024（list_no 59）,,可定案
+missing_inn,new_substance_high,high,ベラプロストナトリウム,berapurosuto,sodium,Beraprost,0.86,,,B01AC19,Wikidata Q5977854 P267,88430-50-6,,,beraprost,9,9,Wikidata Q5977854 en 标签一致+ATC B01AC19,,可定案
+missing_inn,new_substance_high,high,エチゾラム,echizoramu,,Etizolam,0.67,依替唑侖,Wikidata Q409966 zh 标签（CC0，非药典名）,N05BA19,Wikidata Q409966 P267,40054-69-1,,,etizolam,8,8,Wikidata Q409966 en 标签一致+ATC N05BA19,,可定案
+missing_inn,new_substance_high,high,メキタジン,mekitajin,,Mequitazine,0.7,,,R06AD07,Wikidata Q3333256 P267,29216-28-2,,,mequitazine,7,7,Wikidata Q3333256 en 标签一致+ATC R06AD07,,可定案
+missing_inn,new_substance_high,high,パルナパリンナトリウム,parunaparin,sodium,Parnaparin,0.95,帕肝素,Wikidata Q3896308 zh 标签（CC0，非药典名）,B01AB07,Wikidata Q3896308 P267,91449-79-5,,,parnaparin,7,7,Wikidata Q3896308 en 标签一致+ATC B01AB07,,可定案
+missing_inn,new_substance_high,high,ブロムペリドール,buromuperidooru,,Bromperidol,0.77,,,N05AD06,Wikidata Q4973749 P267,10457-90-6,,,bromperidol,6,6,Wikidata Q4973749 en 标签一致+ATC N05AD06,,可定案
+missing_inn,new_substance_high,high,トリクロルメチアジド,torikurorumechiajido,,Trichlormethiazide,0.53,三氯噻嗪,Wikidata Q2072745 zh 标签（CC0，非药典名）,C03AA06,Wikidata Q2072745 P267,133-67-5,,,trichlormethiazide,6,6,Wikidata Q2072745 en 标签一致+ATC C03AA06,,可定案
+missing_inn,new_substance_high,high,テモカプリル塩酸塩,temokapuriru,hydrochloride,Temocapril,0.73,,,C09AA14,Wikidata Q7698194 P267,111902-57-9,,,temocapril,6,6,Wikidata Q7698194 en 标签一致+ATC C09AA14,,可定案
+missing_inn,new_substance_high,high,チペピジンヒベンズ酸塩,chipepijinhibenzu酸塩,,Tipepidine,0.59,,,R05DB24,Wikidata Q7808816 P267,5169-78-8,,,tipepidine,6,6,Wikidata Q7808816 en 标签一致+ATC R05DB24,,可定案
+missing_inn,new_substance_high,high,トピロキソスタット,topirokisosutatto,,Topiroxostat,0.76,,,,,,,,topiroxostat,6,6,WHO INN 名录 RE064-051（list_no 64）,,可定案
+missing_inn,new_substance_high,high,テネリグリプチン臭化水素酸塩水和物,teneriguripuchin臭化水素酸塩,,Teneligliptin,0.69,,,,,,,,teneligliptin,6,6,WHO INN 名录 PR099-064（list_no 99）,,可定案
+mapper_gap,new_substance_high,high,ルリオクトコグアルファ(遺伝子組換え),ruriokutokoguarufa,,Rurioctocog Alfa,0.5,,,B02BD02,EMA Afstyla atc_code_human,,lonoctocog-alfa,yes,,6,6,EMA 上市药 Afstyla | 库内已有：lonoctocog-alfa | 更正：ルリオクトコグ アルファ = Rurioctocog Alfa（アドベイト）；库内只有 rurioctocog-alfa-pegol（アディノベイト = pegol 长效型），不是同一成分,更正：ルリオクトコグ アルファ = Rurioctocog Alfa（アドベイト）；库内只有 rurioctocog-alfa-pegol（アディノベイト = pegol 长效型），不是同一成分,可定案
+mapper_gap,new_substance_high,high,ラノコナゾール,ranokonazooru,,Lanoconazole,0.4,卢立康唑,cn_inn_overrides.csv（https://www.wikidata.org/wiki/Q15624030；置信 high）,D01AC18,Wikidata Q15624030 P267,187164-19-8,luliconazole,yes,,6,6,WHO INN 名录 RE048-027（list_no 48） | Wikidata Q15624030 en 标签一致+ATC D01AC18 | 库内已有：luliconazole | 更正：ラノコナゾール = Lanoconazole（アスタット）；与同市场并存的ルリコナゾール = Luliconazole（ルリコン）是两个药，旧稿误指 Luliconazole,更正：ラノコナゾール = Lanoconazole（アスタット）；与同市场并存的ルリコナゾール = Luliconazole（ルリコン）是两个药，旧稿误指 Luliconazole,可定案
+missing_inn,new_substance_high,high,ロフラゼプ酸エチル,rofurazepu酸echiru,,Ethyl loflazepate,0.44,,,N05BA18,Wikidata Q5404460 P267,29177-84-2,,,ethyl-loflazepate,5,5,Wikidata Q5404460 en 标签一致+ATC N05BA18,,可定案
+missing_inn,new_substance_pending,medium,マキサカルシトール,makisakarushitooru,,Maxacalcitol,0.47,,,,,,,,maxacalcitol,23,23,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ブロナンセリン,buronanserin,,Blonanserin,0.87,,,,,,,,blonanserin,20,20,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ナファモスタットメシル酸塩,nafamosutatto,mesylate,Nafamostat,0.87,,,,,,,,nafamostat,17,17,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,サルポグレラート塩酸塩,sarupogureraato,hydrochloride,Sarpogrelate,0.74,,,,,,,,sarpogrelate,15,15,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ベニジピン塩酸塩,benijipin,hydrochloride,Benidipine,0.84,,,,,,,,benidipine,13,13,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+mapper_gap,new_substance_pending,medium,セフジトレン ピボキシル,sefujitorempibokishiru,,Cefditoren pivoxil,0.56,,,,,,,,cefditoren-pivoxil,13,13,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,トラニラスト,toranirasuto,,Tranilast,0.76,,,,,,,,tranilast,9,9,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,スプラタストトシル酸塩,supuratasuto,tosylate,Suplatast,0.76,,,,,,,,suplatast,9,9,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,タルチレリン水和物,taruchirerin,,Taltirelin,0.64,,,,,,,,taltirelin,8,8,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ミロガバリンベシル酸塩,mirogabarin,besylate,Mirogabalin,0.91,,,,,,,,mirogabalin,8,8,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,トコフェロールニコチン酸エステル,tokoferoorunikochin酸,,Tocopherol nicotinate,0.56,,,,,,,,tocopherol-nicotinate,7,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,イルソグラジンマレイン酸塩,irusogurajin,maleate,Irsogladine,0.7,,,,,,,,irsogladine,7,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ウパシカルセトナトリウム水和物,upashikaruseto,sodium,Upacicalcet,0.56,,,,,,,,upacicalcet,7,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,待确认
+missing_inn,new_substance_pending,medium,タンドスピロンクエン酸塩,tandosupiron,citrate,Tandospirone,0.92,,,,,,,,tandospirone,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ペロスピロン塩酸塩水和物,perosupiron,hydrochloride,Perospirone,0.91,,,,,,,,perospirone,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,エサキセレノン,esakiserenon,,Esaxerenone,0.78,,,,,,,,esaxerenone,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,クエン酸第一鉄ナトリウム,kuen酸第一鉄natoriumu,sodium|citrate,Sodium ferrous citrate,0.3,,,,,,,,sodium-ferrous-citrate,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,待确认
+missing_inn,new_substance_pending,medium,フルスルチアミン塩酸塩,furusuruchiamin,hydrochloride,Fursultiamine,0.71,,,,,,,,fursultiamine,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,デノパミン,denopamin,,Denopamine,0.95,,,,,,,,denopamine,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,ピルシカイニド塩酸塩水和物,pirushikainido,hydrochloride,Pilsicainide,0.69,,,,,,,,pilsicainide,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+missing_inn,new_substance_pending,medium,dl-メチルエフェドリン塩酸塩,dl-mechiruefedorin,hydrochloride,Methylephedrine,0.56,,,,,,,,methylephedrine,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,待确认
+missing_inn,new_substance_pending,medium,チアミンジスルフィド,chiaminjisurufido,,Thiamine disulfide,0.71,,,,,,,,thiamine-disulfide,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,待确认
+missing_inn,new_substance_pending,medium,フルスルチアミン,furusuruchiamin,,Fursultiamine,0.71,,,,,,,,fursultiamine,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+mapper_gap,map_row,high,セフカペン ピボキシル塩酸塩水和物,sefukapempibokishiru,hydrochloride,Cefcapene pivoxil,0.5,盐酸头孢卡品酯,库内 substance.inn_zh（cn-d4f6d6b6a0）,J01DD17,jp_missing_inn_20261113.csv（phaseb-candidates-20261031.csv）,,cn-d4f6d6b6a0,yes,,18,18,库内已有：cn-d4f6d6b6a0,,可定案
+mapper_gap,map_row,high,トスフロキサシントシル酸塩水和物,tosufurokisashin,tosylate,Tosufloxacin,0.64,甲苯磺酸妥舒沙星,库内 substance.inn_zh（cn-0ed19799d0）,J01MA22,Wikidata Q3995932 P267,100490-36-6,cn-0ed19799d0,yes,,13,13,Wikidata Q3995932 en 标签一致+ATC J01MA22 | 库内已有：cn-0ed19799d0,,可定案
+mapper_gap,map_row,high,セファゾリンナトリウム,sefazorin,sodium,Cefazolin Sodium,0.58,,,,,,cefazolin-sodium,yes,,11,11,库内已有：cefazolin-sodium,,可定案
+mapper_gap,map_row,high,パリペリドンパルミチン酸エステル,pariperidomparumichin酸,,Paliperidone Palmitate,0.62,,,,,,paliperidone-palmitate,yes,,9,9,库内已有：paliperidone-palmitate,,可定案
+mapper_gap,map_row,high,セフタジジム水和物,sefutajijimu,,Ceftazidime Pentahydrate,0.4,,,,,,ceftazidime-pentahydrate,yes,,9,9,库内已有：ceftazidime-pentahydrate,,可定案
+mapper_gap,map_row,high,セフォペラゾンナトリウム,sefoperazon,sodium,Cefoperazone,0.87,头孢哌酮,库内 substance.inn_zh（cefoperazone）,J01DD12,Wikidata Q2325775 P267,62893-19-0,cefoperazone,yes,,9,9,Wikidata Q2325775 en 标签一致+ATC J01DD12 | 库内已有：cefoperazone,,可定案
+mapper_gap,map_row,high,ナルフラフィン塩酸塩,narufurafin,hydrochloride,Nalfurafine,0.82,盐酸纳呋拉啡,库内 substance.inn_zh（cn-9905031733）,V03AX02,Wikidata Q6960874 P267,152657-84-6,cn-9905031733,yes,,8,8,WHO INN 名录 RE049-030（list_no 49） | Wikidata Q6960874 en 标签一致+ATC V03AX02 | 库内已有：cn-9905031733,,可定案
+mapper_gap,map_row,high,シメチジン,shimechijin,,Cimetidine,0.57,西咪替丁,库内 substance.inn_zh（cimetidine）,A02BA01,Wikidata Q409492 P267,51481-61-9,cimetidine,yes,,8,8,Wikidata Q409492 en 标签一致+ATC A02BA01 | 库内已有：cimetidine,,可定案
+mapper_gap,map_row,high,クロルフェニラミンマレイン酸塩,kurorufeniramin,maleate,Chlorpheniramine,0.65,氯苯那敏,Wikidata Q420133 zh 标签（CC0，非药典名）,R06AB04,Wikidata Q420133 P267,132-22-9,chlorpheniramine,yes,,8,8,Wikidata Q420133 en 标签一致+ATC R06AB04 | 库内已有：chlorpheniramine,,可定案
+mapper_gap,map_row,high,エポエチン ベータ ペゴル(遺伝子組換え),epoechimbeetapegoru,,Methoxy Polyethylene Glycol Epoetin Beta,0.33,,,,,,methoxy-polyethylene-glycol-epoetin-beta,yes,,8,8,库内已有：methoxy-polyethylene-glycol-epoetin-beta,,可定案
+mapper_gap,map_row,high,エフラロクトコグ アルファ(遺伝子組換え),efurarokutokoguarufa,,Efmoroctocog Alfa,0.61,,,B02BD02,EMA Elocta atc_code_human,,efmoroctocog-alfa,yes,,8,8,EMA 上市药 Elocta | 库内已有：efmoroctocog-alfa,,可定案
+mapper_gap,map_row,high,ドセタキセル水和物,dosetakiseru,,Docetaxel,0.57,多西他赛,库内 substance.inn_zh（docetaxel）,L01CD02,Wikidata Q420436 P267,114977-28-5,docetaxel,yes,,7,7,Wikidata Q420436 en 标签一致+ATC L01CD02 | EMA 上市药 Taxotere | 库内已有：docetaxel,,可定案
+mapper_gap,map_row,high,ベクロメタゾンプロピオン酸エステル,bekurometazompuropion酸,,Beclometasone Dipropionate,0.65,,,,,,beclometasone-dipropionate,yes,,7,7,库内已有：beclometasone-dipropionate,,可定案
+reclassify_nonsub,map_row,high,酒石酸,酒石酸,,Tartaric Acid,0.0,,,,,,tartaric-acid,yes,,7,7,库内 tartaric-acid（Tartaric Acid），日文「酒石酸」= 酒石酸，非盐型,库内 tartaric-acid（Tartaric Acid），日文「酒石酸」= 酒石酸，非盐型,可定案
+mapper_gap,map_row,high,ヒドロキシジンパモ酸塩,hidorokishijimpamo酸塩,,Hydroxyzine,0.34,,,,,,hydroxyzine,yes,,6,6,库内已有：hydroxyzine,,可定案
+mapper_gap,map_row,high,オメガ-3脂肪酸エチル,omega-3脂肪酸echiru,,Omega 3 Acid Ethyl Esters,0.52,,,,,,omega-3-acid-ethyl-esters,yes,,6,6,库内已有：omega-3-acid-ethyl-esters,,可定案
+mapper_gap,map_row,high,ヨウ化ナトリウム(131I),you化,sodium,Sodium Iodide I 131,0.25,碘[131I]化钠,库内 substance.inn_zh（sodium-iodide-i-131）,,,,sodium-iodide-i-131,yes,,6,6,库内已有：sodium-iodide-i-131,,可定案
+mapper_gap,map_row,high,D-マンニトール,D-mannitooru,,Mannitol,0.74,甘露醇,库内 substance.inn_zh（mannitol）,R05CB16,EMA Bronchitol atc_code_human,,mannitol,yes,,6,6,EMA 上市药 Bronchitol | 库内已有：mannitol,,可定案
+mapper_gap,map_row,high,シチコリン,shichikorin,,Citicoline,0.48,胞磷胆碱,库内 substance.inn_zh（citicoline）,N06BX06,Wikidata Q28529682 P267,987-78-0,citicoline,yes,,6,6,Wikidata Q28529682 en 标签一致+ATC N06BX06 | 库内已有：citicoline,,可定案
+mapper_gap,map_row,high,エミシズマブ(遺伝子組換え),emishizumabu,,Emicizumab,0.82,艾米西珠單抗,Wikidata Q27155409 zh 标签（CC0，非药典名）,B02BX06,Wikidata Q27155409 P267,1610943-06-0,emicizumab,yes,,6,6,Wikidata Q27155409 en 标签一致+ATC B02BX06 | EMA 上市药 Hemlibra | 库内已有：emicizumab,,可定案
+mapper_gap,map_row,high,デキサメタゾンメタスルホ安息香酸エステルナトリウム,dekisametazommetasuruho安息香酸,sodium,Dexamethasone Sodium Metasulphobenzoate,0.57,,,,,,dexamethasone-sodium-metasulphobenzoate,yes,,6,6,库内已有：dexamethasone-sodium-metasulphobenzoate,,可定案
+mapper_gap,map_row,high,氷酢酸,氷酢酸,acetate,Acetic Acid,0.0,乙酸,Wikidata Q47512 zh 标签（CC0，非药典名）,S02AA10,Wikidata Q47512 P267,64-19-7,acetic-acid,yes,,6,6,Wikidata Q47512 en 标签一致+ATC S02AA10 | 库内已有：acetic-acid | 库内 acetic-acid（Acetic Acid），氷酢酸 = 冰醋酸,库内 acetic-acid（Acetic Acid），氷酢酸 = 冰醋酸,可定案
+mapper_gap,map_row,high,クロルジアゼポキシド,kurorujiazepokishido,,Chlordiazepoxide,0.56,氯氮䓬,库内 substance.inn_zh（chlordiazepoxide）,N05BA02,Wikidata Q178566 P267,58-25-3,chlordiazepoxide,yes,,5,5,Wikidata Q178566 en 标签一致+ATC N05BA02 | 库内已有：chlordiazepoxide,,可定案
+mapper_gap,map_row,high,セフポドキシム プロキセチル,sefupodokishimupurokisechiru,,Cefpodoxime Proxetil,0.51,,,,,,cefpodoxime-proxetil,yes,,5,5,库内已有：cefpodoxime-proxetil,,可定案
+mapper_gap,map_row,high,D-ソルビトール,D-sorubitooru,,Sorbitol,0.7,山梨醇,库内 substance.inn_zh（sorbitol）,,,,sorbitol,yes,,5,5,库内已有：sorbitol,,可定案
+mapper_gap,map_row,high,アルプロスタジル アルファデクス,arupurosutajiruarufadekusu,,Alprostadil,0.43,前列地尔,库内 substance.inn_zh（alprostadil）,G04BE01,Wikidata Q579348 P267,745-65-3,alprostadil,yes,,5,5,Wikidata Q579348 en 标签一致+ATC G04BE01 | 库内已有：alprostadil,,可定案
+mapper_gap,map_row,high,テストステロンエナント酸エステル,tesutosuteronenanto酸,,Testosterone Enantate,0.82,,,,,,testosterone-enantate,yes,,5,5,库内已有：testosterone-enantate,,可定案
+mapper_gap,map_row,high,アスホターゼ アルファ(遺伝子組換え),asuhotaazearufa,,Asfotase Alfa,0.67,,,A16AB13,Wikidata Q22075839 P267,1174277-80-5,asfotase-alfa,yes,,5,5,WHO INN 名录 PR104-008（list_no 104） | Wikidata Q22075839 en 标签一致+ATC A16AB13 | EMA 上市药 Strensiq | 库内已有：asfotase-alfa,,可定案
+reclassify_nonsub,map_row,high,クエン酸水和物,kuen酸水和物,citrate,Citric Acid,0.0,,,,,,citric-acid,yes,,5,5,库内 citric-acid（Citric Acid），「水和物」是结晶水，不是另一个成分,库内 citric-acid（Citric Acid），「水和物」是结晶水，不是另一个成分,可定案
+reclassify_nonsub,reclassify_nonsub,high,pH4処理酸性人免疫グロブリン(皮下注射),pH4処理酸性人免疫guroburin,,,0.0,,,,,,,,,13,13,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,ハンゲ,hange,,,0.0,,,,,,,,,10,10,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,ポリエチレングリコール処理人免疫グロブリン,poriechirengurikooru処理人免疫guroburin,,,0.0,,,,,,,,,9,9,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,コウブシ,koubushi,,,0.0,,,,,,,,,8,8,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,pH4処理酸性人免疫グロブリン,pH4処理酸性人免疫guroburin,,,0.0,,,,,,,,,7,7,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,希ヨードチンキ,希yoodochinki,,,0.0,,,,,,,,,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,ヨードチンキ,yoodochinki,,,0.0,,,,,,,,,6,6,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,ガジュツ,gajutsu,,,0.0,,,,,,,,,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,ビンロウジ,binrouji,,,0.0,,,,,,,,,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案
+reclassify_nonsub,reclassify_nonsub,high,モクツウ,mokutsuu,,,0.0,,,,,,,,,5,5,仅日文一般名推定（本地名录未覆盖，需 PMDA 添付文書 / WHO INN 在线核）,,可定案

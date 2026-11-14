@@ -214,6 +214,7 @@ I18N = {
         "home.tw": "Taiwan",
         "home.hk": "Hong Kong",
         "home.eu": "European Union (EU)",
+        "home.jp": "Japan",
         "home.fr": "France",
         "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution required; "
                             "update date in the data package; authorisation ≠ on sale."),
@@ -459,6 +460,7 @@ I18N = {
         "home.tw": "Taiwán",
         "home.hk": "Hong Kong",
         "home.eu": "Unión Europea (UE)",
+        "home.jp": "Japón",
         "home.fr": "Francia",
         "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, atribución obligatoria; "
                             "fecha de actualización en el paquete de datos; autorización ≠ venta."),
@@ -700,6 +702,7 @@ I18N = {
         "home.tw": "中国台湾",
         "home.hk": "中国香港",
         "home.eu": "欧盟（EU）",
+        "home.jp": "日本",
         "home.fr": "法国",
         "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，须署名；更新日期见数据包；授权有效 ≠ 在售。",
         "about.fr_source": ('<p class="sub"><b>法国</b>：BDPM（Base de données publique des médicaments，ANSM），'
@@ -919,6 +922,7 @@ FR_I18N: dict[str, str] = {
     "home.cn": "Chine", "home.es": "Espagne", "home.mx": "Mexique", "home.au": "Australie",
     "home.ca": "Canada", "home.sg": "Singapour", "home.tw": "Chine Taïwan",
     "home.hk": "Chine Hong Kong", "home.eu": "Union européenne (UE)",
+    "home.jp": "Japon",
     "eu.region_title": "Autorisation centralisée UE (EMA)",
     "eu.region_note": ("Autorisé au niveau de l'UE — pas une preuve de vente dans un pays donné. "
                        "Le registre de l'UE ne contient ni dosage, ni forme, ni conditionnement."),
@@ -1269,6 +1273,9 @@ FR_I18N.update({
     "coverage.gap.mx": "La licence source est en attente de confirmation ; les inscriptions plus anciennes sont incluses.",
     "coverage.gap.tw": "La force est analysée à partir du nom du produit ; la confiance est limitée.",
     "coverage.gap.hk": "Couche de nom/ingrédient uniquement : pas de concentration, de forme ou de statut d'enregistrement ; enregistré ≠ commercialisé.",
+    "coverage.gap.jp": ("Uniquement les lignes de la liste des prix (薬価基準) : pas un registre "
+                        "des autorisations, ni une preuve de disponibilité actuelle. Source : "
+                        "MHLW (厚生労働省), PDL 1.0, 2026-11-01."),
     "about.tw_source": "<p class=\"sub\"><b>Taiwan 台灣</b> : TFDA 「全部藥品許可證資料集」 (ensemble de données data.gov.tw 9122) sous <b>Open Government Data License v1.0 (OGDL v1.0)</b> ; attribution requise : 衛福部食藥署 TFDA. Données au <b>2026-10-22</b> (synchronisation hebdomadaire). Faits uniquement (nom du produit, ingrédients, forme posologique, fabricant, numéro de licence, statut). <b>Les points forts sont analysés à partir des noms de produits, la confiance est donc limitée.</b> Licence : <a href=\"https://data.gov.tw/license\">data.gov.tw/license</a>.</p>",
     "about.sg_source": "<p class=\"sub\"><b>Singapour 新加坡</b> : HSA <b>Liste des produits thérapeutiques enregistrés</b> (ensemble de données data.gov.sg d_767279312753558cbf19d48344577084) sous la <b>Singapour Open Data License v1.0 (SODL)</b> ; attribution et lien de licence requis, aucune approbation gouvernementale implicite. Données au <b>2026-08-07</b> (mises à jour tous les 6 mois). <b>Le fait d'être inscrit au registre ne signifie pas que le produit est actuellement commercialisé.</b> Les noms de marques restent en anglais et ne sont jamais traduits ; seuls les noms d'ingrédients chinois (inn_zh) peuvent être affichés. Attribution : contient des informations tirées de la liste des produits thérapeutiques enregistrés, consultée le 2026-10-28 auprès de la Health Sciences Authority (HSA) et mise à disposition sous la licence Open Data de Singapour v1.0 (<a href=\"https://data.gov.sg/open-data-licence\">licence</a>).</p>",
     "about.hk_source": "<p class=\"sub\"><b>Hong Kong 中国香港</b> : Drug Office, Department of Health — <b>Liste des produits pharmaceutiques enregistrés</b> (ensemble de données data.gov.hk hk-dh-dh_do-hk-dh-do-pharmaceutical-product) sous <b>DATA.GOV.HK Terms and Conditions</b> (réutilisation gratuite avec attribution ; non approbation implicite du gouvernement). Données au <b>2026-10-23</b>. <b>Couche de nom/ingrédient uniquement – pas de dosage, de forme posologique ou de statut d'enregistrement ; le fait d'être inscrit au registre ne prouve pas l'approvisionnement actuel.</b></p>",
@@ -1618,6 +1625,9 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "Source licence is pending confirmation; older registrations are included.",
         "coverage.gap.tw": "Strength is parsed from the product name; confidence is limited.",
         "coverage.gap.hk": "Name/ingredient layer only: no strength, form or registration status; registered ≠ marketed.",
+        # v0.12.0（JP 上车）：医保价格表（薬価基準）品目，不是注册库，也不代表当前在售。
+        "coverage.gap.jp": ("NHI price-list (薬価基準) items only — not a registration database and not "
+                            "proof of current supply. Source: MHLW (厚生労働省), PDL 1.0, 2026-11-01."),
     },
     "es": {
         "nav.coverage": "Cobertura",
@@ -1650,6 +1660,9 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "La licencia está pendiente de confirmación; se incluyen registros antiguos.",
         "coverage.gap.tw": "La concentración se extrae del nombre del producto; confianza limitada.",
         "coverage.gap.hk": "Solo capa de nombre/ingrediente: sin concentración, forma ni estado de registro; en registro ≠ en venta.",
+        "coverage.gap.jp": ("Solo partidas de la lista de precios de la sanidad pública (薬価基準): no es "
+                            "un registro de autorizaciones ni prueba de suministro actual. Fuente: MHLW "
+                            "(厚生労働省), PDL 1.0, 2026-11-01."),
     },
     "zh": {
         "nav.coverage": "覆盖与新鲜度",
@@ -1677,6 +1690,8 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "许可待确认；包含较早注册记录。",
         "coverage.gap.tw": "规格由品名解析，置信度有限。",
         "coverage.gap.hk": "仅名称/成分层：无规格、无剂型、无注册状态；在册≠在售。",
+        "coverage.gap.jp": ("仅收载医保（薬価基準）品目，非注册库、不等于当前在售；出典 厚生労働省、"
+                            "PDL 1.0、2026-11-01。"),
     },
     "zh-Hant": {
         "nav.coverage": "覆蓋與新鮮度",
@@ -1704,6 +1719,8 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "許可待確認；包含較早註冊紀錄。",
         "coverage.gap.tw": "規格由品名解析，置信度有限。",
         "coverage.gap.hk": "僅名稱/成分層：無規格、無劑型、無註冊狀態；在冊≠在售。",
+        "coverage.gap.jp": ("僅收載健保（薬価基準）品目，非註冊庫、不等於目前在售；出典 厚生労働省、"
+                            "PDL 1.0、2026-11-01。"),
     },
 }
 for _lang, _kv in COVERAGE_I18N.items():
@@ -2342,6 +2359,7 @@ UI_I18N = {
         # zh-Hant 不再手写覆盖，由 data/i18n_zh_hant.json 生成器给出的「中國台灣」生效。
         "home.hk": "中國香港",
         "home.eu": "歐盟（EU）",
+        "home.jp": "日本",
         "home.fr": "法國",
         "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，須署名；更新日期見資料包；授權有效 ≠ 在售。",
         "about.fr_source": ('<p class="sub"><b>法國</b>：BDPM（Base de données publique des médicaments，ANSM），'
@@ -8782,7 +8800,7 @@ def _slim_shell(*chunks: str) -> tuple[str, ...]:
 # 两边共用下面同一份模板（boot.js 里把根前缀写成 __R__ 占位）。
 SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA", "home.ca"),
                  ("AU", "home.au"), ("ES", "home.es"), ("TW", "home.tw"), ("HK", "home.hk"),
-                 ("MX", "home.mx"), ("SG", "home.sg"), ("EU", "home.eu"))
+                 ("MX", "home.mx"), ("SG", "home.sg"), ("JP", "home.jp"), ("EU", "home.eu"))
 SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
 
 
@@ -9921,7 +9939,7 @@ def _market_is_enabled(code: str) -> bool:
         return False
 
 
-COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "EU")
+COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "EU")
                     + (("FR",) if _market_is_enabled("FR") else ()))
 MATRIX_ROW_CAP = 120
 
@@ -12591,7 +12609,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
+    <option value="JP" data-i18n="home.jp">Japan</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   <label class="sel-label src-label" for="src" data-i18n="res.src_label">Source market (only records from):</label>
   <select id="src"><option value="" data-i18n="res.src_all">All source markets</option>
     <option value="US" data-i18n="home.us">United States</option>
@@ -12604,7 +12622,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
+    <option value="JP" data-i18n="home.jp">Japan</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   </div>
 </details>
 <p class="sub report-line" id="report" style="display:none">
