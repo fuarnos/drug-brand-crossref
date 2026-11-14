@@ -310,6 +310,10 @@ def main(argv: list[str] | None = None) -> int:
     try:
         ws = _page_ws(port)
         cdp = CDP(ws)
+        # 必须开 Page/Runtime 域，否则 `Page.loadEventFired` 事件根本不会下发，
+        # wait_event 会白等满 60s 超时（本工位 2026-11-15 踩过：9 页共多花 25 分钟）。
+        cdp.call("Page.enable")
+        cdp.call("Runtime.enable")
         out = {"dist": str(dist), "metric_script": "reports/2026-11-15-ui-baseline-probe.py",
                "runs": []}
         for page in pages:

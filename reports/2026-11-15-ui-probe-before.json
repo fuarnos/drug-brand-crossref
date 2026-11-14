@@ -1,0 +1,2756 @@
+{
+ "meta": {
+  "probe": "atc4-ui 独立验收探头（A 改前基线）",
+  "generated_at": "2026-11-14T12:57:45-08:00",
+  "target": "dist",
+  "base_url": "http://127.0.0.1:59829/",
+  "dist": "D:\\同种药物商品名剂量对应网站\\site\\dist",
+  "dist_index_mtime": "2026-11-14T12:50:16-08:00",
+  "dist_bytes": 1062947228,
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+ },
+ "tally": {
+  "PASS": 27,
+  "FAIL": 16,
+  "N/A": 13
+ },
+ "checks": [
+  {
+   "id": "R1",
+   "group": "results",
+   "title": "结果页就绪（q=tylenol|lang=zh）",
+   "verdict": "PASS",
+   "detail": "ready=True 索引稳定=True 行数=20 列=['产品名称', '成分', '规格与剂型', '市场', '操作'] 首条结果 top=645px/900px；#meta=「187 个名字命中」",
+   "data": {
+    "row_count": 20,
+    "columns": [
+     "产品名称",
+     "成分",
+     "规格与剂型",
+     "市场",
+     "操作"
+    ],
+    "settled": true
+   }
+  },
+  {
+   "id": "R2",
+   "group": "results",
+   "title": "列序：药名是否第一列（L2 目标：产品名称/成分/规格与剂型/市场/操作）",
+   "verdict": "PASS",
+   "detail": "实际列序=['产品名称', '成分', '规格与剂型', '市场', '操作']；第 1 列=「产品名称」",
+   "data": {
+    "columns": [
+     "产品名称",
+     "成分",
+     "规格与剂型",
+     "市场",
+     "操作"
+    ]
+   }
+  },
+  {
+   "id": "R3",
+   "group": "results",
+   "title": "结果表含「成分」列（L2）",
+   "verdict": "PASS",
+   "detail": "含成分列=True；列=['产品名称', '成分', '规格与剂型', '市场', '操作']；成分只在身份卡出现：{'fs': 16, 'fw': 600, 'color': 'rgb(11, 107, 83)', 'text': '对乙酰氨基酚'}",
+   "data": {
+    "columns": [
+     "产品名称",
+     "成分",
+     "规格与剂型",
+     "市场",
+     "操作"
+    ],
+    "identity": {
+     "rect": {
+      "w": 920,
+      "h": 101,
+      "x": 260,
+      "y": 261,
+      "bottom": 362
+     },
+     "details": 1,
+     "text": "共 187 条候选，这是第 1 条 · TYLENOL FILM COATED TABLETS 500MG · JOHNSON & JOHNSON PTE. … tylenol → 对乙酰氨基酚 同名不同药 更多同规格 / 更多记录",
+     "ingredient_font": {
+      "fs": 16,
+      "fw": 600,
+      "color": "rgb(11, 107, 83)",
+      "text": "对乙酰氨基酚"
+     },
+     "title_font": {
+      "fs": 16,
+      "fw": 400,
+      "color": "rgb(75, 82, 87)",
+      "text": "共 187 条候选，这是第 1 条 · TYLENOL FILM COATED TABLETS 500MG · JOHNSON & JOHNSON PTE. …"
+     }
+    }
+   }
+  },
+  {
+   "id": "R4",
+   "group": "results",
+   "title": "药名/规格 computed font-size·font-weight（L2：药名最大字号+较深字重）",
+   "verdict": "PASS",
+   "detail": "药名 17px/700；规格 16px/400；市场 16px/400；字号差=1px，字重差=300",
+   "data": {
+    "brand": {
+     "fs": 17,
+     "fw": 700,
+     "color": "rgb(31, 35, 40)",
+     "text": "TYLENOL FILM COATED TABLETS 500MG"
+    },
+    "dose": {
+     "fs": 16,
+     "fw": 400,
+     "color": "rgb(31, 35, 40)",
+     "text": "500 mg 片剂"
+    },
+    "market": {
+     "fs": 16,
+     "fw": 400,
+     "color": "rgb(31, 35, 40)",
+     "text": "SG 数据截止 2026-08-07"
+    }
+   }
+  },
+  {
+   "id": "R5",
+   "group": "results",
+   "title": "每行边框数（L2：不要每项套边框，靠间距与字号分层）",
+   "verdict": "FAIL",
+   "detail": "前 20 行：每行带边框元素 min=8 max=10 中位=9；要求 0",
+   "data": {
+    "per_row": [
+     8,
+     9,
+     9,
+     10,
+     9,
+     9,
+     9,
+     10,
+     8,
+     10,
+     10,
+     8,
+     8,
+     10,
+     9,
+     9,
+     9,
+     9,
+     10,
+     10
+    ]
+   }
+  },
+  {
+   "id": "R6",
+   "group": "results",
+   "title": "每行胶囊徽章数（L8：国家/剂型/状态不再统一做胶囊）",
+   "verdict": "FAIL",
+   "detail": "前 20 行：胶囊徽章合计=24 max/行=3；`.tag/.form-tag/.badge` 共 67 个；要求 0",
+   "data": {
+    "per_row": [
+     1,
+     3,
+     1,
+     2,
+     1,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "tag_total": 67
+   }
+  },
+  {
+   "id": "R7",
+   "group": "results",
+   "title": "按钮文案语义化（L3）",
+   "verdict": "FAIL",
+   "detail": "行内按钮 41：['选择此产品', '查看登记详情', '选择此产品', '查看登记详情', '选择此产品', '查看登记详情']；页内其他按钮 55：['我用的是这条', '复制标准名', '中国泰诺林', '中国台湾ACETAMINOPHEN', '新加坡PANADOL', '美国ACETAMINOPHEN', '英国Paracetamol 500mg tablets', '加拿大ACETAMINOPHEN']；仍为旧文案=['「这条」仍作为按钮 aria-label/title']；+N 样本=[]",
+   "data": {
+    "row_buttons": [
+     {
+      "tag": "button",
+      "cls": "linkbtn pickbtn",
+      "text": "选择此产品",
+      "aria": "这条",
+      "title": "这条",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn detbtn",
+      "text": "查看登记详情",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn pickbtn",
+      "text": "选择此产品",
+      "aria": "这条",
+      "title": "这条",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn detbtn",
+      "text": "查看登记详情",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn pickbtn",
+      "text": "选择此产品",
+      "aria": "这条",
+      "title": "这条",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn detbtn",
+      "text": "查看登记详情",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn pickbtn",
+      "text": "选择此产品",
+      "aria": "这条",
+      "title": "这条",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "linkbtn detbtn",
+      "text": "查看登记详情",
+      "aria": "",
+      "title": "",
+      "vis": true
+     }
+    ],
+    "other_buttons": [
+     {
+      "tag": "button",
+      "cls": "pickbtn",
+      "text": "我用的是这条",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "",
+      "text": "复制标准名",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "中国泰诺林",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "中国台湾ACETAMINOPHEN",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "新加坡PANADOL",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "美国ACETAMINOPHEN",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "英国Paracetamol 500mg tablets",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "加拿大ACETAMINOPHEN",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "澳大利亚ACETAMINOPHEN",
+      "aria": "",
+      "title": "",
+      "vis": true
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "text": "西班牙ACETAMINOPHEN",
+      "aria": "",
+      "title": "",
+      "vis": true
+     }
+    ],
+    "legacy": {
+     "zhe_tiao": 0,
+     "xiang_qing": 20,
+     "duibi": 0,
+     "genduo_products": [
+      "查看其余 20"
+     ],
+     "plus_n": []
+    },
+    "left": [
+     "「这条」仍作为按钮 aria-label/title"
+    ]
+   }
+  },
+  {
+   "id": "R8",
+   "group": "results",
+   "title": "1440 视口横向溢出（表格/文档）",
+   "verdict": "PASS",
+   "detail": "document.scrollWidth=1440 vs innerWidth=1440；table scrollW/clientW=920/920（差 0px）；表格实宽=920px；#reswrap overflow-x=auto",
+   "data": {
+    "docScrollW": 1440,
+    "innerW": 1440,
+    "wrapScrollW": 920,
+    "wrapClientW": 920,
+    "tableScrollW": 920,
+    "tableClientW": 920,
+    "tableRect": {
+     "w": 920,
+     "h": 839,
+     "x": 260,
+     "y": 607,
+     "bottom": 1446
+    },
+    "wrapRect": {
+     "w": 920,
+     "h": 901,
+     "x": 260,
+     "y": 595,
+     "bottom": 1496
+    },
+    "wrapOverflowX": "auto"
+   }
+  },
+  {
+   "id": "R9",
+   "group": "results",
+   "title": "首屏（1440×900）内容构成（L6 基线）",
+   "verdict": "N/A",
+   "detail": "首条结果 top=645px / 视口 900px；身份卡 bottom=362px；工具条/提示层 4 个",
+   "data": {
+    "first_row_top": 645,
+    "identity_bottom": 362,
+    "innerH": 900,
+    "toolbars": 4
+   }
+  },
+  {
+   "id": "S-drug-head",
+   "group": "secondary",
+   "title": "drug 页头四件套（L7：返回路径+标题+一句话摘要+继续搜索入口）",
+   "verdict": "FAIL",
+   "detail": "返回路径=无(面包屑0/返回类0) · 标题=有「Acetaminophen」 · 摘要=有「ATC N02BE01 · 11 个市场 · 12,875 条记录」 · 继续搜索=有(输入框 534×40) → 3/4",
+   "data": {
+    "four": [
+     false,
+     true,
+     true,
+     true
+    ],
+    "crumbs": [],
+    "backish": [],
+    "lead": {
+     "t": "ATC N02BE01 · 11 个市场 · 12,875 条记录",
+     "cls": "sub drug-identity",
+     "tag": "p",
+     "y": 216
+    },
+    "search": {
+     "input": {
+      "r": {
+       "w": 534,
+       "h": 40,
+       "x": 260,
+       "y": 73
+      },
+      "placeholder": "搜一个药名"
+     },
+     "links": [
+      {
+       "t": "检索",
+       "href": "http://127.0.0.1:59829/index.html",
+       "y": 10
+      }
+     ]
+    },
+    "h1": {
+     "t": "Acetaminophen",
+     "r": {
+      "w": 920,
+      "h": 31,
+      "x": 260,
+      "y": 154
+     }
+    }
+   }
+  },
+  {
+   "id": "S-drug-details",
+   "group": "secondary",
+   "title": "drug 页 <details> 数量",
+   "verdict": "N/A",
+   "detail": "92 个（summary 92 个）；前几个=['按类别', '按市场', '关于', '🌐 中文 ▾', '⋯', '筛选']",
+   "data": {
+    "details_n": 92,
+    "first": [
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按类别"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按市场"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "关于"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "🌐 中文 ▾"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "⋯"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "筛选"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-drug-band",
+   "group": "secondary",
+   "title": "drug 内容带宽比 @1440（E6 硬条件 0.652–0.682）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667；.wrap=960px x=240",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960,
+     "wrap": {
+      "w": 960,
+      "h": 64,
+      "x": 240,
+      "y": 0
+     }
+    },
+    "vw": 1440
+   }
+  },
+  {
+   "id": "S-drug-aria",
+   "group": "secondary",
+   "title": "drug aria / 跳转链接",
+   "verdict": "N/A",
+   "detail": "aria-label 122 · aria-live 1 · 跳到主要内容 1",
+   "data": {
+    "labels": 122,
+    "live": 1,
+    "skip": 1
+   }
+  },
+  {
+   "id": "S-name-head",
+   "group": "secondary",
+   "title": "name 页头四件套（L7：返回路径+标题+一句话摘要+继续搜索入口）",
+   "verdict": "FAIL",
+   "detail": "返回路径=无(面包屑0/返回类0) · 标题=有「Tylenol 8 HR Arthritis Pain」 · 摘要=有「同名不代表可互换——只按登记字段做身份对应。」 · 继续搜索=有(输入框 534×40) → 3/4",
+   "data": {
+    "four": [
+     false,
+     true,
+     true,
+     true
+    ],
+    "crumbs": [],
+    "backish": [],
+    "lead": {
+     "t": "同名不代表可互换——只按登记字段做身份对应。",
+     "cls": "sub name-notice",
+     "tag": "p",
+     "y": 230
+    },
+    "search": {
+     "input": {
+      "r": {
+       "w": 534,
+       "h": 40,
+       "x": 260,
+       "y": 73
+      },
+      "placeholder": "搜一个药名"
+     },
+     "links": [
+      {
+       "t": "检索",
+       "href": "http://127.0.0.1:59829/index.html",
+       "y": 10
+      }
+     ]
+    },
+    "h1": {
+     "t": "Tylenol 8 HR Arthritis Pain",
+     "r": {
+      "w": 920,
+      "h": 31,
+      "x": 260,
+      "y": 154
+     }
+    }
+   }
+  },
+  {
+   "id": "S-name-details",
+   "group": "secondary",
+   "title": "name 页 <details> 数量",
+   "verdict": "N/A",
+   "detail": "5 个（summary 5 个）；前几个=['按类别', '按市场', '关于', '🌐 中文 ▾', '⋯']",
+   "data": {
+    "details_n": 5,
+    "first": [
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按类别"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按市场"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "关于"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "🌐 中文 ▾"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "⋯"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-name-band",
+   "group": "secondary",
+   "title": "name 内容带宽比 @1440（E6 硬条件 0.652–0.682）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667；.wrap=960px x=240",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960,
+     "wrap": {
+      "w": 960,
+      "h": 64,
+      "x": 240,
+      "y": 0
+     }
+    },
+    "vw": 1440
+   }
+  },
+  {
+   "id": "S-name-aria",
+   "group": "secondary",
+   "title": "name aria / 跳转链接",
+   "verdict": "N/A",
+   "detail": "aria-label 6 · aria-live 0 · 跳到主要内容 1",
+   "data": {
+    "labels": 6,
+    "live": 0,
+    "skip": 1
+   }
+  },
+  {
+   "id": "S-combo-head",
+   "group": "secondary",
+   "title": "combo 页头四件套（L7：返回路径+标题+一句话摘要+继续搜索入口）",
+   "verdict": "FAIL",
+   "detail": "返回路径=无(面包屑0/返回类0) · 标题=有「Ferric Oxide Red + Pramoxine」 · 摘要=有「本页列出「活性成分集合恰好等于下面这组」的商品名。这里只做身份对应：复方产品」 · 继续搜索=有(输入框 534×40) → 3/4",
+   "data": {
+    "four": [
+     false,
+     true,
+     true,
+     true
+    ],
+    "crumbs": [],
+    "backish": [],
+    "lead": {
+     "t": "本页列出「活性成分集合恰好等于下面这组」的商品名。这里只做身份对应：复方产品≠各单方成分的简单相加，同名商品在不同市场也不可互换。",
+     "cls": "sub",
+     "tag": "p",
+     "y": 230
+    },
+    "search": {
+     "input": {
+      "r": {
+       "w": 534,
+       "h": 40,
+       "x": 260,
+       "y": 73
+      },
+      "placeholder": "搜一个药名"
+     },
+     "links": [
+      {
+       "t": "检索",
+       "href": "http://127.0.0.1:59829/index.html",
+       "y": 10
+      }
+     ]
+    },
+    "h1": {
+     "t": "Ferric Oxide Red + Pramoxine + Zinc Oxide",
+     "r": {
+      "w": 920,
+      "h": 31,
+      "x": 260,
+      "y": 154
+     }
+    }
+   }
+  },
+  {
+   "id": "S-combo-details",
+   "group": "secondary",
+   "title": "combo 页 <details> 数量",
+   "verdict": "N/A",
+   "detail": "5 个（summary 5 个）；前几个=['按类别', '按市场', '关于', '🌐 中文 ▾', '⋯']",
+   "data": {
+    "details_n": 5,
+    "first": [
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按类别"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按市场"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "关于"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "🌐 中文 ▾"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "⋯"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-combo-band",
+   "group": "secondary",
+   "title": "combo 内容带宽比 @1440（E6 硬条件 0.652–0.682）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667；.wrap=960px x=240",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960,
+     "wrap": {
+      "w": 960,
+      "h": 64,
+      "x": 240,
+      "y": 0
+     }
+    },
+    "vw": 1440
+   }
+  },
+  {
+   "id": "S-combo-aria",
+   "group": "secondary",
+   "title": "combo aria / 跳转链接",
+   "verdict": "N/A",
+   "detail": "aria-label 6 · aria-live 0 · 跳到主要内容 1",
+   "data": {
+    "labels": 6,
+    "live": 0,
+    "skip": 1
+   }
+  },
+  {
+   "id": "S-maker-head",
+   "group": "secondary",
+   "title": "maker 页头四件套（L7：返回路径+标题+一句话摘要+继续搜索入口）",
+   "verdict": "FAIL",
+   "detail": "返回路径=无(面包屑0/返回类0) · 标题=有「Kenvue Brands LLC」 · 摘要=有「厂家 / 上市许可持有人」 · 继续搜索=有(输入框 534×40) → 3/4",
+   "data": {
+    "four": [
+     false,
+     true,
+     true,
+     true
+    ],
+    "crumbs": [],
+    "backish": [],
+    "lead": {
+     "t": "厂家 / 上市许可持有人",
+     "cls": "sub",
+     "tag": "p",
+     "y": 193
+    },
+    "search": {
+     "input": {
+      "r": {
+       "w": 534,
+       "h": 40,
+       "x": 260,
+       "y": 73
+      },
+      "placeholder": "搜一个药名"
+     },
+     "links": [
+      {
+       "t": "检索",
+       "href": "http://127.0.0.1:59829/index.html",
+       "y": 10
+      }
+     ]
+    },
+    "h1": {
+     "t": "Kenvue Brands LLC",
+     "r": {
+      "w": 920,
+      "h": 31,
+      "x": 260,
+      "y": 154
+     }
+    }
+   }
+  },
+  {
+   "id": "S-maker-details",
+   "group": "secondary",
+   "title": "maker 页 <details> 数量",
+   "verdict": "N/A",
+   "detail": "5 个（summary 5 个）；前几个=['按类别', '按市场', '关于', '🌐 中文 ▾', '⋯']",
+   "data": {
+    "details_n": 5,
+    "first": [
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按类别"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按市场"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "关于"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "🌐 中文 ▾"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "⋯"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-maker-band",
+   "group": "secondary",
+   "title": "maker 内容带宽比 @1440（E6 硬条件 0.652–0.682）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667；.wrap=960px x=240",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960,
+     "wrap": {
+      "w": 960,
+      "h": 64,
+      "x": 240,
+      "y": 0
+     }
+    },
+    "vw": 1440
+   }
+  },
+  {
+   "id": "S-maker-aria",
+   "group": "secondary",
+   "title": "maker aria / 跳转链接",
+   "verdict": "N/A",
+   "detail": "aria-label 6 · aria-live 0 · 跳到主要内容 1",
+   "data": {
+    "labels": 6,
+    "live": 0,
+    "skip": 1
+   }
+  },
+  {
+   "id": "S-cat-head",
+   "group": "secondary",
+   "title": "cat 页头四件套（L7：返回路径+标题+一句话摘要+继续搜索入口）",
+   "verdict": "FAIL",
+   "detail": "返回路径=无(面包屑0/返回类0) · 标题=有「Pain & fever relief Analgési」 · 摘要=有「全部 ATC 类别与大类」 · 继续搜索=有(输入框 700×34) → 3/4",
+   "data": {
+    "four": [
+     false,
+     true,
+     true,
+     true
+    ],
+    "crumbs": [],
+    "backish": [],
+    "lead": {
+     "t": "全部 ATC 类别与大类",
+     "cls": "sub",
+     "tag": "p",
+     "y": 89
+    },
+    "search": {
+     "input": {
+      "r": {
+       "w": 700,
+       "h": 34,
+       "x": 260,
+       "y": 496
+      },
+      "placeholder": "Search an ingredient in this category"
+     },
+     "links": [
+      {
+       "t": "检索",
+       "href": "http://127.0.0.1:59829/index.html",
+       "y": 10
+      }
+     ]
+    },
+    "h1": {
+     "t": "Pain & fever relief Analgésicos y antitérmicos 退烧止痛 退燒止痛",
+     "r": {
+      "w": 920,
+      "h": 31,
+      "x": 260,
+      "y": 126
+     }
+    }
+   }
+  },
+  {
+   "id": "S-cat-details",
+   "group": "secondary",
+   "title": "cat 页 <details> 数量",
+   "verdict": "N/A",
+   "detail": "209 个（summary 209 个）；前几个=['按类别', '按市场', '关于', '🌐 中文 ▾', '⋯', '子类别']",
+   "data": {
+    "details_n": 209,
+    "first": [
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按类别"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按市场"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "关于"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "🌐 中文 ▾"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "⋯"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "子类别"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-cat-band",
+   "group": "secondary",
+   "title": "cat 内容带宽比 @1440（E6 硬条件 0.652–0.682）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667；.wrap=960px x=240",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960,
+     "wrap": {
+      "w": 960,
+      "h": 64,
+      "x": 240,
+      "y": 0
+     }
+    },
+    "vw": 1440
+   }
+  },
+  {
+   "id": "S-cat-aria",
+   "group": "secondary",
+   "title": "cat aria / 跳转链接",
+   "verdict": "N/A",
+   "detail": "aria-label 5 · aria-live 1 · 跳到主要内容 1",
+   "data": {
+    "labels": 5,
+    "live": 1,
+    "skip": 1
+   }
+  },
+  {
+   "id": "S-coverage-head",
+   "group": "secondary",
+   "title": "coverage 页头四件套（L7：返回路径+标题+一句话摘要+继续搜索入口）",
+   "verdict": "FAIL",
+   "detail": "返回路径=无(面包屑0/返回类0) · 标题=有「覆盖与新鲜度」 · 摘要=有「各市场贡献什么、完整度如何、最后同步时间。计数是记录数，不是去重药品数；空白」 · 继续搜索=有,链接:检索 → 3/4",
+   "data": {
+    "four": [
+     false,
+     true,
+     true,
+     true
+    ],
+    "crumbs": [],
+    "backish": [],
+    "lead": {
+     "t": "各市场贡献什么、完整度如何、最后同步时间。计数是记录数，不是去重药品数；空白或 0% 表示来源不提供该字段。",
+     "cls": "sub",
+     "tag": "p",
+     "y": 128
+    },
+    "search": {
+     "input": null,
+     "links": [
+      {
+       "t": "检索",
+       "href": "index.html",
+       "y": 10
+      }
+     ]
+    },
+    "h1": {
+     "t": "覆盖与新鲜度",
+     "r": {
+      "w": 920,
+      "h": 31,
+      "x": 260,
+      "y": 89
+     }
+    }
+   }
+  },
+  {
+   "id": "S-coverage-details",
+   "group": "secondary",
+   "title": "coverage 页 <details> 数量",
+   "verdict": "N/A",
+   "detail": "5 个（summary 5 个）；前几个=['按类别', '按市场', '关于', '🌐 中文 ▾', '⋯']",
+   "data": {
+    "details_n": 5,
+    "first": [
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按类别"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "按市场"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "关于"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "🌐 中文 ▾"
+     },
+     {
+      "open": false,
+      "has_summary": true,
+      "text": "⋯"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-coverage-band",
+   "group": "secondary",
+   "title": "coverage 内容带宽比 @1440（E6 硬条件 0.652–0.682）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667；.wrap=960px x=240",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960,
+     "wrap": {
+      "w": 960,
+      "h": 64,
+      "x": 240,
+      "y": 0
+     }
+    },
+    "vw": 1440
+   }
+  },
+  {
+   "id": "S-coverage-aria",
+   "group": "secondary",
+   "title": "coverage aria / 跳转链接",
+   "verdict": "N/A",
+   "detail": "aria-label 4 · aria-live 0 · 跳到主要内容 1",
+   "data": {
+    "labels": 4,
+    "live": 0,
+    "skip": 1
+   }
+  },
+  {
+   "id": "S-drug-tab",
+   "group": "secondary",
+   "title": "drug 键盘可达性（Tab 前 14 落点）",
+   "verdict": "PASS",
+   "detail": "落点 14（有名 13 / 去重 14）；含检索入口=True；第 14 个落点在 main 内=True；顺序=['跳到主要内容', 'Medicine Brand Cross-Reference — 药品商品名跨国定位', '检索', '按类别', '按市场', '覆盖与新鲜度', '关于', 'input']",
+   "data": {
+    "stops": [
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "skip-link",
+      "name": "跳到主要内容",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "#main"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "logo",
+      "name": "Medicine Brand Cross-Reference — 药品商品名跨国定位",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "../index.html"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "on",
+      "name": "检索",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "http://127.0.0.1:59829/index.html"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "按类别",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "按市场",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "覆盖与新鲜度",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "http://127.0.0.1:59829/coverage.html"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "关于",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "input",
+      "id": "bilOrig",
+      "cls": "",
+      "name": "",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "🌐 中文 ▾",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "input",
+      "id": "hq",
+      "cls": "",
+      "name": "搜一个药名",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "button",
+      "id": "",
+      "cls": "",
+      "name": "搜索",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "ds-filter",
+      "name": "剂型",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "#forms"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "formchip lf-toggle",
+      "name": "筛选",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "formchip on",
+      "name": "全部剂型",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "#list"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-maker-tab",
+   "group": "secondary",
+   "title": "maker 键盘可达性（Tab 前 14 落点）",
+   "verdict": "PASS",
+   "detail": "落点 14（有名 13 / 去重 14）；含检索入口=True；第 14 个落点在 main 内=True；顺序=['跳到主要内容', 'Medicine Brand Cross-Reference — 药品商品名跨国定位', '检索', '按类别', '按市场', '覆盖与新鲜度', '关于', 'input']",
+   "data": {
+    "stops": [
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "skip-link",
+      "name": "跳到主要内容",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "#main"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "logo",
+      "name": "Medicine Brand Cross-Reference — 药品商品名跨国定位",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "../index.html"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "on",
+      "name": "检索",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "http://127.0.0.1:59829/index.html"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "按类别",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "按市场",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "覆盖与新鲜度",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "http://127.0.0.1:59829/coverage.html"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "关于",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "input",
+      "id": "bilOrig",
+      "cls": "",
+      "name": "",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "🌐 中文 ▾",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "input",
+      "id": "hq",
+      "cls": "",
+      "name": "搜一个药名",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "button",
+      "id": "",
+      "cls": "",
+      "name": "搜索",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "api.fda.gov",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "https://api.fda.gov/drug/ndc.json?search=product_ndc:\"69968-0888\""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "氢化可的松",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "../drug/hydrocortisone.html"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "Ferric Oxide Red + Pramoxine + 氧化锌",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "../combo/ferric-oxide-red+pramoxine+zinc-oxide.html"
+     }
+    ]
+   }
+  },
+  {
+   "id": "S-coverage-tab",
+   "group": "secondary",
+   "title": "coverage 键盘可达性（Tab 前 14 落点）",
+   "verdict": "PASS",
+   "detail": "落点 14（有名 13 / 去重 14）；含检索入口=True；第 14 个落点在 main 内=False；顺序=['跳到主要内容', 'Medicine Brand Cross-Reference — 药品商品名跨国定位', '检索', '按类别', '按市场', '覆盖与新鲜度', '关于', 'input']",
+   "data": {
+    "stops": [
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "skip-link",
+      "name": "跳到主要内容",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "#main"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "logo",
+      "name": "Medicine Brand Cross-Reference — 药品商品名跨国定位",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "index.html"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "检索",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "index.html"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "按类别",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "按市场",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "on",
+      "name": "覆盖与新鲜度",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "coverage.html"
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "关于",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "input",
+      "id": "bilOrig",
+      "cls": "",
+      "name": "",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "summary",
+      "id": "",
+      "cls": "",
+      "name": "🌐 中文 ▾",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "button",
+      "id": "",
+      "cls": "",
+      "name": "按产品数",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "button",
+      "id": "",
+      "cls": "",
+      "name": "按市场",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": ""
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "v0.11.10 · 2026-11-15",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "whats-new.html"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "报错 / 纠错",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&temp"
+     },
+     {
+      "tag": "a",
+      "id": "",
+      "cls": "",
+      "name": "已知问题",
+      "vis": true,
+      "outline": "solid 3px",
+      "href": "https://github.com/fuarnos/drug-brand-crossref/issues"
+     }
+    ]
+   }
+  },
+  {
+   "id": "H1",
+   "group": "home",
+   "title": "搜索框是唯一视觉中心（L1）",
+   "verdict": "PASS",
+   "detail": "#q 920×50 @y=239（视口 1440×900，上缘 27%）· 搜索框(+按钮)面积占比 3.8% · 首屏输入框 4 个 ['bilOrig', 'q', 'country', 'src'] · 搜索框下方 ≥24px 竞争标题 0 个 []",
+   "data": {
+    "searchbox": {
+     "q": {
+      "tag": "input",
+      "id": "q",
+      "w": 920,
+      "h": 50,
+      "x": 260,
+      "y": 239,
+      "bottom": 289,
+      "fs": "16px",
+      "placeholder": "商品名 / 通用名 / 俗称 / 包装上的一行字",
+      "vis": true
+     },
+     "go": {
+      "tag": "button",
+      "id": "qgo",
+      "w": 79,
+      "h": 44,
+      "x": 1095,
+      "y": 242,
+      "bottom": 286,
+      "fs": "15px",
+      "placeholder": "",
+      "vis": true
+     },
+     "go_text": "搜索→",
+     "in_screen": true,
+     "vw": 1440,
+     "vh": 900,
+     "q_area_ratio": 0.0382,
+     "q_width_ratio": 0.639,
+     "inputs_in_screen": 4,
+     "input_ids": [
+      "bilOrig",
+      "q",
+      "country",
+      "src"
+     ],
+     "largest_input": 46002
+    },
+    "competing": []
+   }
+  },
+  {
+   "id": "H2",
+   "group": "home",
+   "title": "搜索按钮显示「搜索」文字（E2/L1）",
+   "verdict": "PASS",
+   "detail": "#qgo 文案=「搜索→」(79×44, fs=15px)；要求「搜索」",
+   "data": {
+    "go": {
+     "tag": "button",
+     "id": "qgo",
+     "w": 79,
+     "h": 44,
+     "x": 1095,
+     "y": 242,
+     "bottom": 286,
+     "fs": "15px",
+     "placeholder": "",
+     "vis": true
+    }
+   }
+  },
+  {
+   "id": "H3",
+   "group": "home",
+   "title": "搜索框占位文字（L1）",
+   "verdict": "FAIL",
+   "detail": "placeholder=「商品名 / 通用名 / 俗称 / 包装上的一行字」(24 字)；L1 要求「输入商品名、通用名或包装文字」",
+   "data": {
+    "placeholder": "商品名 / 通用名 / 俗称 / 包装上的一行字"
+   }
+  },
+  {
+   "id": "H4",
+   "group": "home",
+   "title": "可点击查询示例（L1 要求 3 个）",
+   "verdict": "PASS",
+   "detail": "可点击示例 3 个：['Tylenol Extra Strength', 'Metformin', '960 mg/30 mL']；`.u1try` 容器 3 个；三步教学步骤 3 个（L1 要求压成一句 +「怎么用」展开）",
+   "data": {
+    "examples": {
+     "n": 8,
+     "list": [
+      {
+       "tag": "button",
+       "q": "Tylenol Extra Strength",
+       "text": "Tylenol Extra Strength",
+       "clickable": true,
+       "vis": true,
+       "y": 321
+      },
+      {
+       "tag": "button",
+       "q": "Metformin",
+       "text": "Metformin",
+       "clickable": true,
+       "vis": true,
+       "y": 321
+      },
+      {
+       "tag": "button",
+       "q": "960 mg/30 mL",
+       "text": "960 mg/30 mL",
+       "clickable": true,
+       "vis": true,
+       "y": 321
+      },
+      {
+       "tag": "button",
+       "q": "Lipitor 20mg",
+       "text": "Lipitor 20mg",
+       "clickable": true,
+       "vis": false,
+       "y": 0
+      },
+      {
+       "tag": "button",
+       "q": "Tylenol",
+       "text": "Tylenol",
+       "clickable": true,
+       "vis": false,
+       "y": 0
+      },
+      {
+       "tag": "button",
+       "q": "Paracetamol 500mg",
+       "text": "Paracetamol 500mg",
+       "clickable": true,
+       "vis": false,
+       "y": 0
+      },
+      {
+       "tag": "button",
+       "q": "Benadryl",
+       "text": "Benadryl",
+       "clickable": true,
+       "vis": false,
+       "y": 0
+      },
+      {
+       "tag": "button",
+       "q": "Gaviscon",
+       "text": "Gaviscon",
+       "clickable": true,
+       "vis": false,
+       "y": 0
+      }
+     ]
+    },
+    "steps": 3,
+    "u1_try_n": 3
+   }
+  },
+  {
+   "id": "H5",
+   "group": "home",
+   "title": "类别卡片尺寸统一（L1）",
+   "verdict": "PASS",
+   "detail": "9 张卡：宽集合=[208] 高集合=[44]（L1 写 8 入口，实测 9）",
+   "data": {
+    "n": 9,
+    "uniq_w": [
+     208
+    ],
+    "uniq_h": [
+     44
+    ],
+    "rects": [
+     {
+      "w": 208,
+      "h": 44,
+      "x": 277,
+      "y": 480
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 500,
+      "y": 480
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 724,
+      "y": 480
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 948,
+      "y": 480
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 277,
+      "y": 540
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 500,
+      "y": 540
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 724,
+      "y": 540
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 948,
+      "y": 540
+     },
+     {
+      "w": 208,
+      "h": 44,
+      "x": 277,
+      "y": 600
+     }
+    ]
+   }
+  },
+  {
+   "id": "H6",
+   "group": "home",
+   "title": "「core 约 42 MB / gzip / 检索分片」技术说明已移出首页（E4）",
+   "verdict": "PASS",
+   "detail": "可见文字命中 0 处：[]",
+   "data": {
+    "hits": []
+   }
+  },
+  {
+   "id": "H7",
+   "group": "home",
+   "title": "更新日志位置（L1：移到页脚附近）",
+   "verdict": "FAIL",
+   "detail": "`.updlist` y=726px / 文档高 1096px = 66%；在 <footer> 内=False；内容=「v0.11.10 | 2026-11-15 | Desktop content is now the」",
+   "data": {
+    "changelog": {
+     "rect": {
+      "w": 920,
+      "h": 96,
+      "x": 260,
+      "y": 726
+     },
+     "text": "v0.11.10 | 2026-11-15 | Desktop content is now the middle two-t… | v0.11.9 | 2026-11-15 | Combination pages no longer list doses… | v0.11.8 | 2026-11-15 | \"Different release\" is no longer conclu…",
+     "doc_h": 1096,
+     "in_footer": false
+    },
+    "doc_h": 1096
+   }
+  },
+  {
+   "id": "H8",
+   "group": "home",
+   "title": "内容带宽比 @1440（E6 硬条件 0.652–0.682，口径=main 子块并集）",
+   "verdict": "PASS",
+   "detail": "main 子块并集 960px / 1440px = 0.667（x 240–1200）；`.wrap`=960px x=240 → 0.667",
+   "data": {
+    "band_ratio": 0.667,
+    "band": {
+     "left": 240,
+     "right": 1200,
+     "w": 960
+    },
+    "wrap": {
+     "w": 960,
+     "h": 64,
+     "x": 240,
+     "y": 0
+    }
+   }
+  },
+  {
+   "id": "E6",
+   "group": "band",
+   "title": "内容带宽比 1920/2560 两档（E6 硬条件）",
+   "verdict": "PASS",
+   "detail": "8 次测量（2 视口 × 4 页型）未达标 0 个：home@1920x1080=0.667, drug@1920x1080=0.667, coverage@1920x1080=0.667, atc@1920x1080=0.667, home@2560x1440=0.656, drug@2560x1440=0.656, coverage@2560x1440=0.656, atc@2560x1440=0.656",
+   "data": {
+    "rows": [
+     {
+      "viewport": "1920x1080",
+      "page": "home",
+      "band_ratio": 0.667,
+      "band_px": 1280,
+      "vw": 1920,
+      "wrap_px": 1280,
+      "wrap_x": 320,
+      "pass": true
+     },
+     {
+      "viewport": "1920x1080",
+      "page": "drug",
+      "band_ratio": 0.667,
+      "band_px": 1280,
+      "vw": 1920,
+      "wrap_px": 1280,
+      "wrap_x": 320,
+      "pass": true
+     },
+     {
+      "viewport": "1920x1080",
+      "page": "coverage",
+      "band_ratio": 0.667,
+      "band_px": 1280,
+      "vw": 1920,
+      "wrap_px": 1280,
+      "wrap_x": 320,
+      "pass": true
+     },
+     {
+      "viewport": "1920x1080",
+      "page": "atc",
+      "band_ratio": 0.667,
+      "band_px": 1280,
+      "vw": 1920,
+      "wrap_px": 1280,
+      "wrap_x": 320,
+      "pass": true
+     },
+     {
+      "viewport": "2560x1440",
+      "page": "home",
+      "band_ratio": 0.656,
+      "band_px": 1680,
+      "vw": 2560,
+      "wrap_px": 1680,
+      "wrap_x": 440,
+      "pass": true
+     },
+     {
+      "viewport": "2560x1440",
+      "page": "drug",
+      "band_ratio": 0.656,
+      "band_px": 1680,
+      "vw": 2560,
+      "wrap_px": 1680,
+      "wrap_x": 440,
+      "pass": true
+     },
+     {
+      "viewport": "2560x1440",
+      "page": "coverage",
+      "band_ratio": 0.656,
+      "band_px": 1680,
+      "vw": 2560,
+      "wrap_px": 1680,
+      "wrap_x": 440,
+      "pass": true
+     },
+     {
+      "viewport": "2560x1440",
+      "page": "atc",
+      "band_ratio": 0.656,
+      "band_px": 1680,
+      "vw": 2560,
+      "wrap_px": 1680,
+      "wrap_x": 440,
+      "pass": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "M1",
+   "group": "mobile",
+   "title": "390×844 结果页就绪",
+   "verdict": "PASS",
+   "detail": "ready=True",
+   "data": {}
+  },
+  {
+   "id": "M2",
+   "group": "mobile",
+   "title": "结果页首屏条目数（结果页门槛 ≥5）",
+   "verdict": "FAIL",
+   "detail": "选择器=#reswrap tbody tr.br 条目=0.5（可见行 1 / 总 10） 首行 top=[676] 文档高=6031px",
+   "data": {
+    "sel": "#reswrap tbody tr.br",
+    "total": 10,
+    "visible_rows": 1,
+    "items": 0.5,
+    "first_tops": [
+     676
+    ],
+    "innerH": 844,
+    "innerW": 390,
+    "docH": 6031
+   }
+  },
+  {
+   "id": "M3",
+   "group": "mobile",
+   "title": "结果页搜索框首屏可见（L16①）",
+   "verdict": "PASS",
+   "detail": "#q 362×46 @y=115；在首屏=True",
+   "data": {
+    "searchbox": {
+     "q": {
+      "tag": "input",
+      "id": "q",
+      "w": 362,
+      "h": 46,
+      "x": 14,
+      "y": 115,
+      "bottom": 161,
+      "fs": "16px",
+      "placeholder": "商品名 / 通用名 / 俗称 / 包装上的一行字",
+      "vis": true
+     },
+     "go": {
+      "tag": "button",
+      "id": "qgo",
+      "w": 44,
+      "h": 44,
+      "x": 326,
+      "y": 116,
+      "bottom": 160,
+      "fs": "15px",
+      "placeholder": "",
+      "vis": true
+     },
+     "go_text": "搜索→",
+     "in_screen": true,
+     "vw": 390,
+     "vh": 844,
+     "q_area_ratio": 0.0565,
+     "q_width_ratio": 0.928,
+     "inputs_in_screen": 1,
+     "input_ids": [
+      "q"
+     ],
+     "largest_input": 16652
+    }
+   }
+  },
+  {
+   "id": "M4",
+   "group": "mobile",
+   "title": "结果页筛选入口文案（L16②：筛选 · 已选 N 项）",
+   "verdict": "FAIL",
+   "detail": "含「筛选」=True 含「已选」=False；候选 10 个：['中国 泰诺林 中国台湾 ACETAMINOP', '中国 泰诺林', '中国台湾 ACETAMINOPHEN', '新加坡 PANADOL']",
+   "data": {
+    "items": [
+     {
+      "tag": "div",
+      "cls": "u2chips",
+      "t": "中国 泰诺林 中国台湾 ACETAMINOPHEN 新加坡 PANADOL 美国 ACETAMINOPHEN 英国 Paracetamol ",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "中国 泰诺林",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "中国台湾 ACETAMINOPHEN",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "新加坡 PANADOL",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "美国 ACETAMINOPHEN",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "英国 Paracetamol 500mg tablets",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "加拿大 ACETAMINOPHEN",
+      "y": 537
+     },
+     {
+      "tag": "button",
+      "cls": "u2chip",
+      "t": "澳大利亚 ACETAMINOPHEN",
+      "y": 537
+     }
+    ],
+    "n": 10,
+    "filter_word": true,
+    "xuanze": false
+   }
+  },
+  {
+   "id": "M9",
+   "group": "mobile",
+   "title": "结果卡内容是否被截断（L16③ 结果卡片直接纵向阅读）",
+   "verdict": "FAIL",
+   "detail": "前 5 行 25 个单元格里 scrollWidth>clientWidth 的 25 个；正文带省略号 … 的 0 个；样本=[{'row': 0, 'cls': 'c-brand', 'cw': 87, 'sw': 380, 'text': 'TYLENOL FILM COATED TABLETS 500MG'}, {'row': 0, 'cls': 'c-ing', 'cw': 81, 'sw': 135, 'text': '对乙酰氨基酚'}, {'row': 0, 'cls': 'c-dose', 'cw': 81, 'sw': 187, 'text': '500 mg 片剂'}, {'row': 0, 'cls': 'c-market', 'cw': 40, 'sw': 94, 'text': 'SG 数据截止 2026-08-07'}, {'row': 0, 'cls': 'c-det', 'cw': 47, 'sw': 98, 'text': '选择此产品 查看登记详情'}, {'row': 1, 'cls': 'c-brand', 'cw': 87, 'sw': 245, 'text': 'Tylenol Extra Strength'}, {'row': 1, 'cls': 'c-ing', 'cw': 81, 'sw': 135, 'text': '对乙酰氨基酚'}, {'row': 1, 'cls': 'c-dose', 'cw': 81, 'sw': 472, 'text': '片剂 500 mg · 胶囊 500 mg · 液体 960 mg/30 mL'}]",
+   "data": {
+    "clipped_cells": [
+     {
+      "row": 0,
+      "cls": "c-brand",
+      "cw": 87,
+      "sw": 380,
+      "text": "TYLENOL FILM COATED TABLETS 500MG"
+     },
+     {
+      "row": 0,
+      "cls": "c-ing",
+      "cw": 81,
+      "sw": 135,
+      "text": "对乙酰氨基酚"
+     },
+     {
+      "row": 0,
+      "cls": "c-dose",
+      "cw": 81,
+      "sw": 187,
+      "text": "500 mg 片剂"
+     },
+     {
+      "row": 0,
+      "cls": "c-market",
+      "cw": 40,
+      "sw": 94,
+      "text": "SG 数据截止 2026-08-07"
+     },
+     {
+      "row": 0,
+      "cls": "c-det",
+      "cw": 47,
+      "sw": 98,
+      "text": "选择此产品 查看登记详情"
+     },
+     {
+      "row": 1,
+      "cls": "c-brand",
+      "cw": 87,
+      "sw": 245,
+      "text": "Tylenol Extra Strength"
+     },
+     {
+      "row": 1,
+      "cls": "c-ing",
+      "cw": 81,
+      "sw": 135,
+      "text": "对乙酰氨基酚"
+     },
+     {
+      "row": 1,
+      "cls": "c-dose",
+      "cw": 81,
+      "sw": 472,
+      "text": "片剂 500 mg · 胶囊 500 mg · 液体 960 mg/30 mL"
+     }
+    ],
+    "sample": [
+     {
+      "tr": {
+       "cls": "br",
+       "w": 362,
+       "h": 271,
+       "sw": 360,
+       "cw": 360,
+       "of": "visible",
+       "to": "clip",
+       "ws": "normal",
+       "fs": "16px",
+       "text": "TYLENOL FILM COATED TABLETS 500MG 对乙酰氨基酚 500 mg 片剂 SG 数据截止 2"
+      },
+      "cells": [
+       {
+        "cls": "c-brand",
+        "w": 87,
+        "h": 33,
+        "sw": 380,
+        "cw": 87,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "17px",
+        "text": "TYLENOL FILM COATED TABLETS 500MG"
+       },
+       {
+        "cls": "c-ing",
+        "w": 81,
+        "h": 36,
+        "sw": 135,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "对乙酰氨基酚"
+       },
+       {
+        "cls": "c-dose",
+        "w": 81,
+        "h": 36,
+        "sw": 187,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "500 mg 片剂"
+       },
+       {
+        "cls": "c-market",
+        "w": 40,
+        "h": 109,
+        "sw": 94,
+        "cw": 40,
+        "of": "hidden",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "SG 数据截止 2026-08-07"
+       },
+       {
+        "cls": "c-det",
+        "w": 47,
+        "h": 39,
+        "sw": 98,
+        "cw": 47,
+        "of": "visible",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "选择此产品 查看登记详情"
+       }
+      ]
+     },
+     {
+      "tr": {
+       "cls": "br",
+       "w": 362,
+       "h": 271,
+       "sw": 360,
+       "cw": 360,
+       "of": "visible",
+       "to": "clip",
+       "ws": "normal",
+       "fs": "16px",
+       "text": "Tylenol Extra Strength 对乙酰氨基酚 片剂 500 mg · 胶囊 500 mg · 液体 960"
+      },
+      "cells": [
+       {
+        "cls": "c-brand",
+        "w": 87,
+        "h": 33,
+        "sw": 245,
+        "cw": 87,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "17px",
+        "text": "Tylenol Extra Strength"
+       },
+       {
+        "cls": "c-ing",
+        "w": 81,
+        "h": 36,
+        "sw": 135,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "对乙酰氨基酚"
+       },
+       {
+        "cls": "c-dose",
+        "w": 81,
+        "h": 36,
+        "sw": 472,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "片剂 500 mg · 胶囊 500 mg · 液体 960 mg/30 mL"
+       },
+       {
+        "cls": "c-market",
+        "w": 40,
+        "h": 109,
+        "sw": 132,
+        "cw": 40,
+        "of": "hidden",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "CAUS 数据截止 2026-10-23"
+       },
+       {
+        "cls": "c-det",
+        "w": 47,
+        "h": 39,
+        "sw": 98,
+        "cw": 47,
+        "of": "visible",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "选择此产品 查看登记详情"
+       }
+      ]
+     },
+     {
+      "tr": {
+       "cls": "br",
+       "w": 362,
+       "h": 272,
+       "sw": 360,
+       "cw": 360,
+       "of": "visible",
+       "to": "clip",
+       "ws": "normal",
+       "fs": "16px",
+       "text": "TYLENOL SINUS SEVERE复方 对乙酰氨基酚 + 愈创甘油醚 5 mg / 200 mg / 325 mg"
+      },
+      "cells": [
+       {
+        "cls": "c-brand",
+        "w": 87,
+        "h": 34,
+        "sw": 308,
+        "cw": 87,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "17px",
+        "text": "TYLENOL SINUS SEVERE复方"
+       },
+       {
+        "cls": "c-ing",
+        "w": 81,
+        "h": 36,
+        "sw": 234,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "对乙酰氨基酚 + 愈创甘油醚"
+       },
+       {
+        "cls": "c-dose",
+        "w": 81,
+        "h": 36,
+        "sw": 306,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "5 mg / 200 mg / 325 mg 片剂"
+       },
+       {
+        "cls": "c-market",
+        "w": 40,
+        "h": 109,
+        "sw": 94,
+        "cw": 40,
+        "of": "hidden",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "US 数据截止 2026-10-23"
+       },
+       {
+        "cls": "c-det",
+        "w": 47,
+        "h": 39,
+        "sw": 98,
+        "cw": 47,
+        "of": "visible",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "选择此产品 查看登记详情"
+       }
+      ]
+     },
+     {
+      "tr": {
+       "cls": "br",
+       "w": 362,
+       "h": 273,
+       "sw": 360,
+       "cw": 360,
+       "of": "visible",
+       "to": "clip",
+       "ws": "normal",
+       "fs": "16px",
+       "text": "Tylenol PM Extra Strength同名不同药复方 对乙酰氨基酚 + 苯海拉明 片剂 500 mg / 2"
+      },
+      "cells": [
+       {
+        "cls": "c-brand",
+        "w": 87,
+        "h": 35,
+        "sw": 415,
+        "cw": 87,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "17px",
+        "text": "Tylenol PM Extra Strength同名不同药复方"
+       },
+       {
+        "cls": "c-ing",
+        "w": 81,
+        "h": 36,
+        "sw": 218,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "对乙酰氨基酚 + 苯海拉明"
+       },
+       {
+        "cls": "c-dose",
+        "w": 81,
+        "h": 36,
+        "sw": 535,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "片剂 500 mg / 25 mg · 液体 1,000 mg/30 mL / 50 mg/30 mL"
+       },
+       {
+        "cls": "c-market",
+        "w": 40,
+        "h": 109,
+        "sw": 94,
+        "cw": 40,
+        "of": "hidden",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "US 数据截止 2026-10-23"
+       },
+       {
+        "cls": "c-det",
+        "w": 47,
+        "h": 39,
+        "sw": 98,
+        "cw": 47,
+        "of": "visible",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "选择此产品 查看登记详情"
+       }
+      ]
+     },
+     {
+      "tr": {
+       "cls": "br",
+       "w": 362,
+       "h": 271,
+       "sw": 360,
+       "cw": 360,
+       "of": "visible",
+       "to": "clip",
+       "ws": "normal",
+       "fs": "16px",
+       "text": "TYLENOL Regular Strength 对乙酰氨基酚 325 mg 片剂 CAUS 数据截止 2026-10-"
+      },
+      "cells": [
+       {
+        "cls": "c-brand",
+        "w": 87,
+        "h": 33,
+        "sw": 281,
+        "cw": 87,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "17px",
+        "text": "TYLENOL Regular Strength"
+       },
+       {
+        "cls": "c-ing",
+        "w": 81,
+        "h": 36,
+        "sw": 135,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "对乙酰氨基酚"
+       },
+       {
+        "cls": "c-dose",
+        "w": 81,
+        "h": 36,
+        "sw": 187,
+        "cw": 81,
+        "of": "hidden",
+        "to": "ellipsis",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "325 mg 片剂"
+       },
+       {
+        "cls": "c-market",
+        "w": 40,
+        "h": 109,
+        "sw": 132,
+        "cw": 40,
+        "of": "hidden",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "CAUS 数据截止 2026-10-23"
+       },
+       {
+        "cls": "c-det",
+        "w": 47,
+        "h": 39,
+        "sw": 98,
+        "cw": 47,
+        "of": "visible",
+        "to": "clip",
+        "ws": "nowrap",
+        "fs": "16px",
+        "text": "选择此产品 查看登记详情"
+       }
+      ]
+     }
+    ],
+    "row0_html": "<tr class=\"br\" data-k=\"tylenol\" data-src-asof=\"2026-08-07\">\n    <td class=\"c-brand\" data-label=\"产品名称\"><span data-brand=\"1\" title=\"TYLENOL FILM COATED TABLETS 500MG — 该市场注册名，不是翻译。\" class=\"brand-plain\" data-title-full=\"TYLENOL FILM COATED TABLETS 500MG\">TYLENOL FILM COATED TABLETS 500MG</span></td>\n    <td class=\"c-ing\" data-label=\"成分\">对乙酰氨基酚</td>\n    <td class=\"c-dose\" data-label=\"规格与剂型\">500 mg <span class=\"form-tag\">片剂</span></td>\n    <td class=\"c-market\" data-label=\"市场\"><span class=\"tag sg\">SG</span> <span class=\"src-asof\">数据截止 2026-08-07</span></td>\n    <td class=\"c-det\"><button type=\"button\" class=\"linkbtn pickbtn\" data-pick=\"tylenol|SG\" title=\"这条\" aria-label=\"这条\">选择此产品</button><button type=\"button\" class=\"linkbtn detbtn\" data-det=\"tylenol\" aria-expanded=\"false\">查看登记详情</button></td></tr>",
+    "table_cls": "res rows"
+   }
+  },
+  {
+   "id": "M5",
+   "group": "mobile",
+   "title": "390×844 成分页就绪",
+   "verdict": "PASS",
+   "detail": "ready=True",
+   "data": {}
+  },
+  {
+   "id": "M6",
+   "group": "mobile",
+   "title": "成分页首屏条目数（内容页门槛 ≥5）",
+   "verdict": "FAIL",
+   "detail": "选择器=.mkrow 条目=4.5（可见行 5 / 总 150） 首行 top=[481, 557, 654, 731, 808] 文档高=3797px",
+   "data": {
+    "sel": ".mkrow",
+    "total": 150,
+    "visible_rows": 5,
+    "items": 4.5,
+    "first_tops": [
+     481,
+     557,
+     654,
+     731,
+     808
+    ],
+    "innerH": 844,
+    "innerW": 390,
+    "docH": 3797
+   }
+  },
+  {
+   "id": "M7",
+   "group": "mobile",
+   "title": "成分页搜索框首屏可见（L16①）",
+   "verdict": "PASS",
+   "detail": "#q=有；在首屏=True；首屏输入框 2 个 ['hq', 'lf-spec']",
+   "data": {
+    "searchbox": {
+     "q": {
+      "tag": "input",
+      "id": "hq",
+      "w": 300,
+      "h": 40,
+      "x": 12,
+      "y": 59,
+      "bottom": 99,
+      "fs": "16px",
+      "placeholder": "搜一个药名",
+      "vis": true
+     },
+     "go": null,
+     "go_text": null,
+     "in_screen": true,
+     "vw": 390,
+     "vh": 844,
+     "q_area_ratio": 0.0365,
+     "q_width_ratio": 0.769,
+     "inputs_in_screen": 2,
+     "input_ids": [
+      "hq",
+      "lf-spec"
+     ],
+     "largest_input": 12000
+    }
+   }
+  },
+  {
+   "id": "M8",
+   "group": "mobile",
+   "title": "成分页筛选入口文案（L16②）",
+   "verdict": "PASS",
+   "detail": "筛选/折叠控件 99 个；含「筛选」=True；前几个=['⋯', '筛选', '全部剂型 片剂 306 液体 261 胶囊 15', '全部剂型']",
+   "data": {
+    "items": [
+     {
+      "tag": "summary",
+      "cls": "",
+      "t": "⋯",
+      "y": 6,
+      "in_screen": true
+     },
+     {
+      "tag": "summary",
+      "cls": "formchip lf-toggle",
+      "t": "筛选",
+      "y": 237,
+      "in_screen": true
+     },
+     {
+      "tag": "nav",
+      "cls": "formchips",
+      "t": "全部剂型 片剂 306 液体 261 胶囊 156 粉末 137 其他剂型 87 泡腾剂 36 栓剂 25 注射剂 21 外用 5",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip on",
+      "t": "全部剂型",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip",
+      "t": "片剂 306",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip",
+      "t": "液体 261",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip",
+      "t": "胶囊 156",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip",
+      "t": "粉末 137",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip",
+      "t": "其他剂型 87",
+      "y": 285,
+      "in_screen": true
+     },
+     {
+      "tag": "a",
+      "cls": "formchip",
+      "t": "泡腾剂 36",
+      "y": 285,
+      "in_screen": true
+     }
+    ],
+    "n": 99
+   }
+  },
+  {
+   "id": "M10",
+   "group": "mobile",
+   "title": "成分页「含此成分的复方」区规格列是否被压成竖排（L11/L16③）",
+   "verdict": "FAIL",
+   "detail": "复方区行 5 行；宽度 ≤24px 的子元素 10 个；样本=[('mkst', 14, 5), ('mkname-cell', 14, 2), ('mkst', 14, 5), ('mkname-cell', 14, 2)]（如 250 mg 被压成 5 行竖排）",
+   "data": {
+    "narrow": [
+     {
+      "cls": "mkst",
+      "w": 14,
+      "h": 100,
+      "fs": "16px",
+      "lh": "20px",
+      "lines": 5,
+      "text": "250 mg"
+     },
+     {
+      "cls": "mkname-cell",
+      "w": 14,
+      "h": 48,
+      "fs": "16px",
+      "lh": "20px",
+      "lines": 2,
+      "text": "厂家： 修正药业集团股份有限公司 ×9 +33"
+     },
+     {
+      "cls": "mkst",
+      "w": 14,
+      "h": 100,
+      "fs": "16px",
+      "lh": "20px",
+      "lines": 5,
+      "text": "250 mg"
+     },
+     {
+      "cls": "mkname-cell",
+      "w": 14,
+      "h": 48,
+      "fs": "16px",
+      "lh": "20px",
+      "lines": 2,
+      "text": "厂家： 上海寿如松药业泌阳制药有限公司 ×7 +12"
+     },
+     {
+      "cls": "mkst",
+      "w": 14,
+      "h": 100,
+      "fs": "16px",
+      "lh": "20px",
+      "lines": 5,
+      "text": "330 mg"
+     },
+     {
+      "cls": "mkname-cell",
+      "w": 14,
+      "h": 43,
+      "fs": "16px",
+      "lh": "20px",
+      "lines": 2,
+      "text": "厂家： 天津市康瑞药业有限公司 ×4 +2"
+     }
+    ],
+    "combo_rows": 5,
+    "combo_text": "含此成分的复方 250 mg 胶囊 复方Acetaminophen 对乙酰氨基酚 250 mg + Amantadine 金刚烷胺 100 mg 厂家： 修正药业集团股份有限公司 ×9 +33 250 mg 片剂 复方Acetaminoph"
+   }
+  },
+  {
+   "id": "M11",
+   "group": "mobile",
+   "title": "成分页「+N」徽章是否溢出所在卡片（L8）",
+   "verdict": "PASS",
+   "detail": "溢出徽章 0 个；样本=[]",
+   "data": {
+    "badge_overflow": []
+   }
+  }
+ ],
+ "screenshots": [
+  {
+   "path": "docs/img/ui-probe-before-results-390x844.png",
+   "page": "index.html?q=tylenol&lang=zh",
+   "viewport": "390x844",
+   "full_page": true,
+   "doc_h": 6031,
+   "clip": {
+    "doc_w": 390,
+    "doc_h": 6031,
+    "clip_h": 6031,
+    "truncated": false
+   },
+   "meta": "187 个名字命中"
+  },
+  {
+   "path": "docs/img/ui-probe-before-drug-390x844.png",
+   "page": "drug/acetaminophen.html",
+   "viewport": "390x844",
+   "full_page": true,
+   "doc_h": 3797,
+   "clip": {
+    "doc_w": 390,
+    "doc_h": 3797,
+    "clip_h": 3797,
+    "truncated": false
+   }
+  }
+ ],
+ "notes": [
+  "只读探头：不改 site/build.py、不写 site/dist、不 commit、不发布。",
+  "数字由本机无头 Chrome(CDP) 实测；判定条文见 docs/谷段需求队列.md L1–L14 / E4 / E6。",
+  "内容带宽比口径 = main 直接子块在首屏内可见矩形的 x 并集 ÷ 视口宽（与首屏守卫同思路）。",
+  "tab 序为真按 Tab 键（Input.dispatchKeyEvent），不是静态查 tabindex。"
+ ]
+}

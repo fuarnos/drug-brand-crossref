@@ -24,17 +24,26 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CLASS_RE = re.compile(r'class="([^"]{1,200})"')
-COUNTRY_CODES = {"us", "cn", "gb", "ca", "au", "es", "mx", "tw", "sg", "hk", "eu"}
+# 国家/地区码：现网 market 码（US GB CA AU SG CN ES MX TW HK EU）+ 2026-11-15 新上的 FR。
+# 判定用「`.tag` 上挂 2 位小写码」这个形状，所以以后新增市场（JP/KR/CZ/LV…）不用改这里；
+# 只把「2 位小写但不是国家码」的 tag 变体列进 NOT_COUNTRY 排除。
+COUNTRY_CODES = {"us", "cn", "gb", "ca", "au", "es", "mx", "tw", "sg", "hk", "eu", "fr"}
+NOT_COUNTRY = {"warn", "combo", "picked-tag", "on", "off"}
 FORM_TOKENS = {"form-tag", "formchip", "tr-badge"}
 STATUS_TOKENS = {"st-badge", "badge", "atc-st", "st-word", "cmp-b", "nolang-badge", "brand-none"}
 OTHER_TOKENS = {"catchip"}
 FILTER_TOKENS = {"lf-chip", "mkchip"}
 
 
+def is_country_token(t: str) -> bool:
+    return len(t) == 2 and t.isalpha() and t.islower() and t not in NOT_COUNTRY
+
+
 def categorize(tokens: set[str]) -> list[str]:
     """返回这个元素命中的类别（可能多类，如 `st-badge st-unknown nolang-badge`）。"""
     cats: list[str] = []
-    if "tag" in tokens and tokens & COUNTRY_CODES:
+    cc = {t for t in tokens if is_country_token(t)}
+    if "tag" in tokens and cc:
         cats.append("country:capsule")
     elif "tag" in tokens:
         cats.append("country:tag-other")      # combo / warn / L3 / picked 等非国家 tag
@@ -96,8 +105,9 @@ def main(argv: list[str] | None = None) -> int:
                 seen_cats.add(c)
             key = ".".join(sorted(tokens))
             class_pair[key] += 1
+            cc = {t for t in tokens if is_country_token(t)}
             if "country:capsule" in cats:
-                for t in sorted(tokens & COUNTRY_CODES):
+                for t in sorted(cc):
                     country_detail[f"tag.{t}"] += 1
             if "form:capsule" in cats:
                 for t in sorted(tokens & FORM_TOKENS):
