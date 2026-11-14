@@ -1170,6 +1170,8 @@ FR_I18N: dict[str, str] = {
     "name.summary": "Produits enregistrés sous ce nom, par marché (identité uniquement).",
     "maker.summary": "Produits enregistrés par ce fabricant, par marché.",
     "about.summary": "Ce qu’est ce site, les règles qu’il suit et l’origine des données.",
+    "lf.applied": "Filtres appliqués",
+    "lf.drop": "Retirer ce filtre",
     "res.col_product": "Nom du produit",
     "res.col_spec": "Dosage et forme",
     "res.actions": "Opérations",
@@ -1888,6 +1890,9 @@ UI_I18N = {
         "name.summary": "Products recorded under this name, by market (identity only).",
         "maker.summary": "Products registered by this manufacturer, by market.",
         "about.summary": "What this site is, the rules it follows, and where the data comes from.",
+        # L9（v0.12.2）：成分页「已选条件」标签条
+        "lf.applied": "Selected filters",
+        "lf.drop": "Remove this filter",
         # L2–L6（v0.11.10 批次 B）：结果区列序/按钮语义/选中态文案
         "res.col_product": "Product name",
         "res.col_spec": "Strength & form",
@@ -2067,6 +2072,8 @@ UI_I18N = {
         "name.summary": "Productos registrados con este nombre, por mercado (solo identidad).",
         "maker.summary": "Productos registrados por este fabricante, por mercado.",
         "about.summary": "Qué es este sitio, qué reglas sigue y de dónde vienen los datos.",
+        "lf.applied": "Filtros aplicados",
+        "lf.drop": "Quitar este filtro",
         "res.col_product": "Nombre del producto",
         "res.col_spec": "Concentración y forma",
         "res.actions": "Acciones",
@@ -2218,6 +2225,8 @@ UI_I18N = {
         "name.summary": "这个名称下登记的各国产品（只做身份对应）。",
         "maker.summary": "这个厂家登记的各国产品。",
         "about.summary": "这个站点是什么、遵循哪些规则、数据从哪里来。",
+        "lf.applied": "已选条件",
+        "lf.drop": "取消这个条件",
         "res.col_product": "产品名称",
         "res.col_spec": "规格与剂型",
         "res.actions": "操作",
@@ -2454,6 +2463,8 @@ UI_I18N = {
         "name.summary": "這個名稱下登記的各國產品（只做身分對應）。",
         "maker.summary": "這個廠家登記的各國產品。",
         "about.summary": "這個站點是什麼、遵循哪些規則、資料從哪裡來。",
+        "lf.applied": "已選條件",
+        "lf.drop": "取消這個條件",
         "res.col_product": "產品名稱",
         "res.col_spec": "規格與劑型",
         "res.actions": "操作",
@@ -4339,6 +4350,20 @@ padding:14px 16px;margin:10px 0}
    只有「需注意的差异」保留颜色语义：combo / warn / sev / export / picked。 */
 .tag.combo,.tag.warn,.tag.sev,.tag.picked,.tag.export{display:inline-block;padding:1px 7px;
  border-radius:var(--r-pill);border:1px solid var(--line);background:var(--surface-2)}
+/* L9（v0.12.2）：成分页中文名 —— h1 是原文/通用名，中文名在下一行作次级（18px、不抢主标题） */
+.drug-zh{margin:2px 0 4px;font-size:18px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+@media (max-width:767px){.drug-zh{font-size:16px}}
+/* L14 前置（v0.12.2）：覆盖页在 <768px 改卡片式 —— 7 列表格挤不下，首屏条目只有 1.5 行 */
+@media (max-width:767px){
+  table.coverage-table{display:block;border:0;font-size:16px}
+  table.coverage-table thead{display:none}
+  table.coverage-table tbody,table.coverage-table tr,table.coverage-table td{display:block;width:auto}
+  table.coverage-table tr{position:static;margin:0 0 8px;padding:6px 0}
+  table.coverage-table td{padding:1px 0;white-space:normal;text-align:left;line-height:1.4}
+  table.coverage-table td::before{content:attr(data-label) " · ";color:var(--muted);font-size:13px}
+  table.coverage-table td:first-child::before{content:""}
+  table.coverage-table td:first-child{font-size:18px;font-weight:700}
+}
 .mktxt{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* L7（v0.12.1）：次级页统一页头四件套 —— 返回路径 / h1 / 一句话摘要 / 继续搜索 */
 .crumbs{font-size:13px;color:var(--muted);margin:0 0 6px;line-height:1.5}
@@ -4599,8 +4624,8 @@ table.res.rows tr.br.picked:hover{background:var(--accent-weak)}
   html.has-q .searchwrap .mkopen{display:none}
   /* 390 首屏：搜索框/标题再收一档，给结果卡让出 ~40px（A5：390 items ≥3） */
   html.has-q h1#h1{font-size:20px;margin:0 0 2px}
-  html.has-q .searchwrap{padding:0}
   html.has-q #q{min-height:40px;padding:9px 12px;font-size:16px}
+  html.has-q .searchwrap{padding:0}
   /* 命中数在结果尾部「显示 X / Y」里已有 → 手机上不重复占一行 */
   html.has-q .searchwrap #meta{display:none}
   /* 搜索后示例行不再需要（它只在「还没输入」时有用），手机首屏让给结果卡 */
@@ -4952,7 +4977,16 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .lf-input{min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:8px;
  font-size:15px;min-width:12em;flex:0 1 18em}
 .lf-status{margin:0;font-size:13px;color:var(--muted)}
-.lf-none{margin:6px 0;font-size:15px;color:var(--fg)}
+/* L9（v0.12.2）：已选条件 = 可取消的小标签（浅绿底 + ×），点 × 只去掉这一条 */
+.lf-applied{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.lf-tag{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:0 10px;
+ border:1px solid var(--accent);border-radius:var(--r-pill);background:var(--accent-weak);
+ color:var(--accent);font-size:14px;font-family:inherit;cursor:pointer}
+.lf-tag:hover{background:var(--accent);color:#fff}
+.lf-tag .lf-x{font-weight:700;line-height:1}
+/* 选中的市场块：左侧 4px 主色条 + 淡绿块头（与结果行选中态同一语义） */
+.mkblock.on{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+.mkblock.on>.mkhead{background:var(--accent-weak)}
 .mkmeta{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;
  white-space:nowrap;color:var(--muted);font-size:13px;font-weight:400;vertical-align:baseline}
 @media (max-width:767px){ .mkmeta{display:none} }
@@ -8948,6 +8982,97 @@ def _mkblock_js() -> str:
         "var mk=String(location.hash||'').replace('#mk-','');if(mk) openOnly(mk);});"
         "window.addEventListener('beforeprint',function(){"
         "all().forEach(function(b){b.open=true;});});"
+        # ── L9（v0.12.2）：成分页筛选条 = 已选条件可取消 + URL 同步 + 选中市场块高亮 ──
+        "var lf=document.getElementById('listfilters');"
+        "var lfpRows=Array.prototype.slice.call(document.querySelectorAll('.mkrow'));"
+        "if(lf&&lfpRows.length){"
+        "var lfp={mk:'',seg:'',q:'',form:''};"
+        "var lfpMk=Array.prototype.slice.call(lf.querySelectorAll('[data-mk-filter]'));"
+        "var lfpSeg=Array.prototype.slice.call(lf.querySelectorAll('[data-seg-filter]'));"
+        "var lfpSpec=document.getElementById('lf-spec');"
+        "var lfpBox=document.getElementById('lf-applied');"
+        "function lfpT(k,d){var v=window.T?window.T(k):'';return (v&&v!==k)?v:d;}"
+        "function lfpNorm(s){return String(s||'').toLowerCase().replace(/\\s+/g,' ').trim();}"
+        "function lfpPick(list,chip){list.forEach(function(c){c.classList.toggle('on',c===chip);});}"
+        "function lfpForm(){var on=document.querySelector('[data-form-filter].on');"
+        "return lfp.form||(on?(on.getAttribute('data-form-filter')||''):'');}"
+        "function lfpSync(){"
+        "var f=lfpForm(),shown=0;"
+        "lfpRows.forEach(function(r){"
+        "var ok=(!lfp.mk||r.getAttribute('data-mk')===lfp.mk)"
+        "&&(!lfp.seg||r.getAttribute('data-combo')===(lfp.seg==='combo'?'1':'0'))"
+        "&&(!f||r.getAttribute('data-form')===f)"
+        "&&(!lfp.q||lfpNorm(r.getAttribute('data-spec')).indexOf(lfp.q)>=0);"
+        "r.hidden=!ok;if(ok)shown++;});"
+        "all().forEach(function(bk){var vis=0;"
+        "Array.prototype.forEach.call(bk.querySelectorAll('.mkrow'),function(r){if(!r.hidden)vis++;});"
+        "bk.hidden=(lfp.mk!==''&&vis===0);"
+        "bk.classList.toggle('on',!!lfp.mk&&bk.getAttribute('data-mk')===lfp.mk);"
+        "var n=bk.querySelector('.mkspec');"
+        "if(n&&window.T){var tpl=window.T(n.getAttribute('data-i18n-tpl')||'drug.spec_count');"
+        "n.setAttribute('data-shown',String(vis));"
+        "n.textContent=String(tpl).replace('{shown}',String(vis))"
+        ".replace('{n}',n.getAttribute('data-total')||'');}});"
+        "var stt=document.getElementById('lf-status');"
+        "if(stt&&window.T){stt.textContent=window.T('lf.count')"
+        ".replace('{shown}',String(shown)).replace('{total}',String(lfpRows.length));}"
+        "var nonep=document.getElementById('lf-none');if(nonep)nonep.hidden=shown>0;"
+        "if(lfpBox){var items=[];"
+        "if(lfp.mk){var c=lf.querySelector('[data-mk-filter=\"'+lfp.mk+'\"]');"
+        "items.push(['mk',(c&&c.firstChild?String(c.firstChild.textContent):lfp.mk).replace(/[\\s,·]+$/,'').trim()]);}"
+        "if(lfp.seg)items.push(['seg',lfpT(lfp.seg==='combo'?'drug.combo_section':'drug.mono_section',lfp.seg)]);"
+        "if(lfp.form)items.push(['form',lfpT('form.'+lfp.form,lfp.form)]);"
+        "if(lfp.q)items.push(['q',lfp.q]);"
+        "lfpBox.hidden=items.length===0;"
+        "lfpBox.innerHTML=items.map(function(it){return '<button type=\"button\" class=\"lf-tag\" "
+        "data-lf-drop=\"'+it[0]+'\" aria-label=\"'+lfpT('lf.drop','Remove this filter')+'\">'"
+        "+it[1]+' <span class=\"lf-x\" aria-hidden=\"true\">\\u00d7</span></button>';}).join('');}"
+        "try{var p=new URLSearchParams(location.search);"
+        "var am={mk:lfp.mk,seg:lfp.seg,q:lfp.q,form:lfp.form};"
+        "Object.keys(am).forEach(function(k){if(am[k])p.set(k,am[k]);else p.delete(k);});"
+        "var qs=p.toString();"
+        "history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);}catch(e){}"
+        "}"
+        "function lfpDrop(kind){"
+        "if(kind==='mk'){lfp.mk='';lfpPick(lfpMk,lf.querySelector('[data-mk-filter=\"\"]'));}"
+        "else if(kind==='seg'){lfp.seg='';lfpPick(lfpSeg,lf.querySelector('[data-seg-filter=\"\"]'));}"
+        "else if(kind==='q'){lfp.q='';if(lfpSpec)lfpSpec.value='';}"
+        "else if(kind==='form'){lfp.form='';document.querySelectorAll('[data-form-filter]').forEach(function(c){"
+        "c.classList.toggle('on',(c.getAttribute('data-form-filter')||'')==='');});}"
+        "lfpSync();}"
+        "lfpMk.forEach(function(ch){ch.addEventListener('click',function(ev){ev.preventDefault();"
+        "lfp.mk=ch.getAttribute('data-mk-filter')||'';lfpPick(lfpMk,ch);lfpSync();"
+        "var t=lfp.mk?document.getElementById('mk-'+lfp.mk):null;"
+        "if(t&&t.scrollIntoView)t.scrollIntoView({block:'start'});});});"
+        "lfpSeg.forEach(function(ch){ch.addEventListener('click',function(ev){ev.preventDefault();"
+        "lfp.seg=ch.getAttribute('data-seg-filter')||'';lfpPick(lfpSeg,ch);lfpSync();});});"
+        "if(lfpSpec){var lfpTmr=null;lfpSpec.addEventListener('input',function(){clearTimeout(lfpTmr);"
+        "lfpTmr=setTimeout(function(){lfp.q=lfpNorm(lfpSpec.value);lfpSync();},120);});}"
+        "document.querySelectorAll('[data-form-filter]').forEach(function(c){"
+        "c.addEventListener('click',function(){lfp.form=c.getAttribute('data-form-filter')||'';lfpSync();});});"
+        "if(lfpBox)lfpBox.addEventListener('click',function(ev){"
+        "var b=(ev.target&&ev.target.closest)?ev.target.closest('[data-lf-drop]'):null;"
+        "if(b)lfpDrop(b.getAttribute('data-lf-drop'));});"
+        "try{var p0=new URLSearchParams(location.search);"
+        "var mk0=p0.get('mk')||(location.hash.indexOf('#mk-')===0?location.hash.slice(4):'');"
+        "if(mk0){var c0=lf.querySelector('[data-mk-filter=\"'+mk0+'\"]');"
+        "if(c0){lfp.mk=mk0;lfpPick(lfpMk,c0);}}"
+        "var s0=p0.get('seg')||'';if(s0){var sc0=lf.querySelector('[data-seg-filter=\"'+s0+'\"]');"
+        "if(sc0){lfp.seg=s0;lfpPick(lfpSeg,sc0);}}"
+        "var q0=p0.get('q')||'';if(q0&&lfpSpec){lfp.q=lfpNorm(q0);lfpSpec.value=q0;}"
+        "var f0=p0.get('form')||'';if(f0){var fc=document.querySelector('[data-form-filter=\"'+f0+'\"]');"
+        "if(fc){lfp.form=f0;document.querySelectorAll('[data-form-filter]').forEach(function(c){"
+        "c.classList.toggle('on',c===fc);});}}}catch(e){}"
+        "if(lf.tagName==='DETAILS'&&innerWidth<768)lf.open=false;"
+        "lfpSync();}"
+        # L9：中文名次级行（zh / zh-Hant 界面才显示；英文/西语保持原文名）
+        "function lfpZh(){var lg=(document.documentElement.lang||'en');"
+        "var on=/^zh/i.test(lg);"
+        "document.querySelectorAll('[data-inn-zh]').forEach(function(el){"
+        "el.hidden=!on;el.style.display=on?(el.tagName==='P'?'block':'inline'):'none';});}"
+        "lfpZh();document.addEventListener('DOMContentLoaded',lfpZh);"
+        "window.addEventListener('load',lfpZh);"
+        "if(window.__DSH_APPLY_HOOKS)window.__DSH_APPLY_HOOKS.push(lfpZh);"
         "})();"
     )
 
@@ -9040,7 +9165,8 @@ def _search_form(prefix: str, form_id: str = "pq", cls: str = "page-search") -> 
 
 
 def _page_head(prefix: str, title_html: str, summary_key: str = "",
-               summary_html: str = "", crumb: str = "", search: bool = True) -> str:
+               summary_html: str = "", crumb: str = "", search: bool = True,
+               extra_crumbs: str = "") -> str:
     """L7（v0.12.1）：次级页统一页头四件套 = 返回路径 → h1 → 一句话摘要 → 继续搜索。
 
     规范见 `reports/2026-11-15-ui-redesign-spec.md` §3-L7：
@@ -9059,6 +9185,8 @@ def _page_head(prefix: str, title_html: str, summary_key: str = "",
         crumbs.append(f'<a href="{prefix}coverage.html" data-i18n="nav.coverage">Coverage</a>')
     elif crumb:
         crumbs.append(f'<a href="{prefix}{esc(crumb)}">{esc(crumb)}</a>')
+    if extra_crumbs:
+        crumbs.append(extra_crumbs)
     out = ['<nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="nav.crumbs">'
            + '<span class="crumbs-sep"> · </span>'.join(crumbs) + "</nav>", title_html]
     if summary_key:
@@ -10994,7 +11122,11 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
                    f'{esc(_inn_zh)}</span>' if _inn_zh else "")
         # L7（v0.12.1）：统一页头四件套（返回路径 → h1 → 一句话摘要 → 继续搜索）
         head = _page_head("../", f'<h1>{h1_inner}</h1>', summary_key="drug.summary")
-        body = f"""{head}<p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span>{name_zh}</p>
+        # L9（v0.12.2）：中文名单独一行、紧跟 h1，作为**次级名**（18px，不抢主标题）；
+        # 有中文名时这一行就是它，页面上不再出现「无中文名」这类徽标（drug 页本来也没有）。
+        zh_line = (f'<p class="drug-zh" data-inn-zh hidden style="display:none">{esc(_inn_zh)}</p>\n'
+                   if _inn_zh else "")
+        body = f"""{head}{zh_line}<p class="sub drug-name-src"><span data-sub-src="{esc(sid)}"></span></p>
 {identity}
 <div class="drug-sticky" role="group">
   <span class="ds-name" title="{esc(inn_en or sid)}">{esc(inn_en or sid)}</span>
@@ -11677,7 +11809,11 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
     lf_html = ('<details class="listfilters" id="listfilters">'
                f'<summary class="formchip lf-toggle" data-i18n="lf.title">'
                f'{esc(T.get("lf.title", "Filters"))}</summary>'
-               '<div class="lf-panel">' + "".join(lf_parts) + "</div></details>")
+               '<div class="lf-panel">'
+               # L9（v0.12.2）：已选条件显示成可取消的小标签（点 × 只去掉这一条）
+               '<div class="lf-applied" id="lf-applied" role="group" '
+               'data-i18n-aria="lf.applied" hidden></div>'
+               + "".join(lf_parts) + "</div></details>")
 
     def _seg_rows(rows_c: list, is_combo: bool | None) -> list:
         if is_combo is None:
@@ -14317,8 +14453,13 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
             # task-145b：只有 L4（5 位 ATC 码，798 页）挂「按剂型看跨市场明细」折叠区；
             # 明细走客户端懒加载，静态 HTML 只留折叠入口 + 不可互换 notice + 覆盖边界。
             atc4_html = _atc4_forms_html(code) if level == 4 else ""
-            body = f"""<p class="sub">{crumbs}</p>
-<h1>{title_html} <span class="tag">L{level}</span></h1>
+            # L9（v0.12.2）：/atc/*.html 类目页也接统一页头（父类目并进面包屑）
+            head = _page_head(
+                "../", f'<h1>{title_html} <span class="tag">L{level}</span></h1>',
+                crumb="atc",
+                extra_crumbs=(f'<a href="../atc/{esc(parent)}.html"><code>{esc(parent)}</code></a>'
+                              if parent else ""))
+            body = f"""{head}
 {unnamed}
 {_atc_source_line(code)}
 <p class="sub"><span data-i18n="atc.level">{esc(T["atc.level"])}</span> L{level} ·
@@ -15744,9 +15885,11 @@ def main() -> None:
     var specInp = document.getElementById('lf-spec');
     var status = document.getElementById('lf-status');
     var noneP = document.getElementById('lf-none');
-    var state = {mk: '', seg: '', q: ''};
+    var state = {mk: '', seg: '', q: '', form: ''};
     function norm(s){ return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
     function formWant(){
+      // L9：剂型条件统一放在 state.form（chips 的 .on 只是它的视觉反映）
+      if(state.form) return state.form;
       var on = document.querySelector('[data-form-filter].on');
       return on ? (on.getAttribute('data-form-filter') || '') : '';
     }
@@ -15775,11 +15918,64 @@ def main() -> None:
             .replace('{n}', n.getAttribute('data-total') || '');
         }
       });
-      if(status && window.T){
-        status.textContent = window.T('lf.count')
-          .replace('{shown}', String(shown)).replace('{total}', String(rows.length));
-      }
       if(noneP) noneP.hidden = shown > 0;
+      // L9：已选条件标签 + URL 同步 + 选中市场块高亮
+      updateApplied();
+      syncUrl();
+      blocks.forEach(function(bk){
+        bk.classList.toggle('on', !!state.mk && bk.getAttribute('data-mk') === state.mk);
+      });
+    }
+    // ── L9（v0.12.2）：已选条件 = 可取消的小标签（点 × 只去掉这一条，其余保留）──
+    var appliedBox = document.getElementById('lf-applied');
+    function chipLabel(sel, attr){
+      var el = box.querySelector('[' + attr + ']');
+      return el ? (el.textContent || '').trim() : '';
+    }
+    function marketLabel(code){
+      var c = box.querySelector('[data-mk-filter="' + code + '"]');
+      return c ? (c.textContent || '').replace(/\s*\d+\s*$/, '').trim() : code;
+    }
+    function drop(kind){
+      if(kind === 'mk') state.mk = '';
+      else if(kind === 'seg') state.seg = '';
+      else if(kind === 'q'){ state.q = ''; if(specInp) specInp.value = ''; }
+      else if(kind === 'form'){
+        state.form = '';
+        document.querySelectorAll('[data-form-filter]').forEach(function(c){
+          c.classList.toggle('on', (c.getAttribute('data-form-filter') || '') === '');
+        });
+      }
+      if(kind === 'mk') pick(mkChips, box.querySelector('[data-mk-filter=""]'));
+      if(kind === 'seg') pick(segChips, box.querySelector('[data-seg-filter=""]'));
+      sync();
+    }
+    function updateApplied(){
+      if(!appliedBox) return;
+      var items = [];
+      if(state.mk) items.push(['mk', marketLabel(state.mk)]);
+      if(state.seg) items.push(['seg', window.T ? window.T(state.seg === 'combo'
+        ? 'drug.combo_section' : 'drug.mono_section') : state.seg]);
+      if(state.form) items.push(['form', window.T ? window.T('form.' + state.form) : state.form]);
+      if(state.q) items.push(['q', state.q]);
+      appliedBox.hidden = items.length === 0;
+      appliedBox.innerHTML = items.map(function(it){
+        return '<button type="button" class="lf-tag" data-lf-drop="' + it[0] + '" '
+          + 'aria-label="' + (window.T ? window.T('lf.drop') : 'Remove this filter') + '">'
+          + it[1] + ' <span class="lf-x" aria-hidden="true">\u00d7</span></button>';
+      }).join('');
+    }
+    // ── L9：筛选状态写进 URL（?mk=&seg=&q=&form=），刷新/分享后仍是同一视图 ──
+    function syncUrl(){
+      try{
+        var p = new URLSearchParams(location.search);
+        var map = {mk: state.mk, seg: state.seg, q: state.q, form: state.form};
+        Object.keys(map).forEach(function(k){
+          if(map[k]) p.set(k, map[k]); else p.delete(k);
+        });
+        var qs = p.toString();
+        history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+      }catch(e){}
     }
     function pick(list, chip){
       list.forEach(function(c){ c.classList.toggle('on', c === chip); });
@@ -15819,7 +16015,37 @@ def main() -> None:
         var chip0 = box.querySelector('[data-mk-filter="' + mk0 + '"]');
         if(chip0){ state.mk = mk0; pick(mkChips, chip0); }
       }
+      var seg0 = params.get('seg') || '';
+      if(seg0){
+        var sc = box.querySelector('[data-seg-filter="' + seg0 + '"]');
+        if(sc){ state.seg = seg0; pick(segChips, sc); }
+      }
+      var q0 = params.get('q') || '';
+      if(q0 && specInp){ state.q = norm(q0); specInp.value = q0; }
+      var f0 = params.get('form') || '';
+      if(f0){
+        var fc = document.querySelector('[data-form-filter="' + f0 + '"]');
+        if(fc){
+          state.form = f0;
+          document.querySelectorAll('[data-form-filter]').forEach(function(c){
+            c.classList.toggle('on', c === fc);
+          });
+        }
+      }
     }catch(e){}
+    // L9：剂型 chips 也进 state（原来由 initListView 单独维护 .on）
+    document.querySelectorAll('[data-form-filter]').forEach(function(c){
+      c.addEventListener('click', function(){
+        state.form = c.getAttribute('data-form-filter') || '';
+        sync();
+      });
+    });
+    if(appliedBox){
+      appliedBox.addEventListener('click', function(ev){
+        var b = ev.target.closest('[data-lf-drop]');
+        if(b) drop(b.getAttribute('data-lf-drop'));
+      });
+    }
     sync();
     (window.__DSH_APPLY_HOOKS = window.__DSH_APPLY_HOOKS || []).push(function(){
       // 语言切换后重算状态行（data-i18n 会重写其他文本，但计数带占位符，由这里算）
