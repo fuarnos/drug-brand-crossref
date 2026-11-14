@@ -1,0 +1,1118 @@
+substance_id,inn_en,inn_zh_old,inn_zh_new,salt_word,salt_variants,method,source,confidence,verdict,reason,evidence
+abiraterone,Abiraterone,醋酸阿比特龙,阿比特龙,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+adenosine-triphosphate,Adenosine Triphosphate,三磷酸腺苷二钠,三磷酸腺苷,二钠,base; disodium,strip_salt_affix,仅构词剥离,medium,fix,人工复核要剥：三磷酸腺苷二钠：磷酸在「三磷酸」结构里，base 名即三磷酸腺苷,manual
+aescin,Aescin,七叶皂苷钠,七叶皂苷,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+afatinib,Afatinib,马来酸阿法替尼,阿法替尼,马来酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+albuterol,Albuterol,硫酸沙丁胺醇,沙丁胺醇,硫酸,base; salbutamol sulfate; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+alectinib,Alectinib,盐酸阿来替尼,阿来替尼,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+alendronic-acid,Alendronic Acid,阿仑膦酸钠,阿仑膦酸,钠,alendronate sodium; alendronate sodium trihydrate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+alfuzosin,Alfuzosin,盐酸阿夫唑嗪,阿夫唑嗪,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+amantadine,Amantadine,盐酸金刚烷胺,金刚烷胺,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+ambroxol,Ambroxol,盐酸氨溴索,氨溴索,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+amikacin,Amikacin,硫酸阿米卡星,阿米卡星,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+amiloride,Amiloride,盐酸阿米洛利,阿米洛利,盐酸,base; hcl; hydrochloride; hydrochloride anhydrous,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+amiodarone,Amiodarone,盐酸胺碘酮,胺碘酮,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+amlodipine,Amlodipine,苯磺酸氨氯地平,氨氯地平,苯磺酸,base; benzoate; besylate; mesilate monohydrate; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（besylate），中文名抢用了盐型名,variant=besylate
+amobarbital,Amobarbital,异戊巴比妥钠,异戊巴比妥,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+amorolfine,Amorolfine,盐酸阿莫罗芬,阿莫罗芬,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+anisodamine,Anisodamine,氢溴酸山莨菪碱,山莨菪碱,氢溴酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+anlotinib,Anlotinib,盐酸安罗替尼,安罗替尼,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+apomorphine,Apomorphine,盐酸阿扑吗啡,阿扑吗啡,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+arbidol,Arbidol,盐酸阿比多尔,阿比多尔,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+arginine,Arginine,盐酸精氨酸,精氨酸,盐酸,aspartato; base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+articaine,Articaine,盐酸阿替卡因,阿替卡因,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+atomoxetine,Atomoxetine,盐酸托莫西汀,托莫西汀,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+atracurium,Atracurium,苯磺酸阿曲库铵,阿曲库铵,苯磺酸,base; besylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（besylate），中文名抢用了盐型名,variant=besylate
+atropine,Atropine,硫酸阿托品,阿托品,硫酸,base; sulfate; sulfato,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+azasetron,Azasetron,盐酸阿扎司琼,阿扎司琼,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+azlocillin,Azlocillin,阿洛西林钠,阿洛西林,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+bambuterol,Bambuterol,盐酸班布特罗,班布特罗,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+barnidipine,Barnidipine,盐酸巴尼地平,巴尼地平,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+bemiparin,Bemiparin,贝米肝素钠,贝米肝素,钠,base; sodio; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+benazepril,Benazepril,盐酸贝那普利,贝那普利,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+benproperine,Benproperine,磷酸苯丙哌林,苯丙哌林,磷酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+berberine,Berberine,盐酸小檗碱,小檗碱,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+betahistine,Betahistine,盐酸倍他司汀,倍他司汀,盐酸,base; mesylate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+betaxolol,Betaxolol,盐酸倍他洛尔,倍他洛尔,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+bisoprolol,Bisoprolol,富马酸比索洛尔,比索洛尔,富马酸,base; fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+bleomycin,Bleomycin,盐酸博来霉素,博来霉素,盐酸,base; sulfate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+brimonidine,Brimonidine,酒石酸溴莫尼定,溴莫尼定,酒石酸,base; tartrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tartrate），中文名抢用了盐型名,variant=tartrate
+bromhexine,Bromhexine,盐酸溴己新,溴己新,盐酸,base; hcl,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hcl），中文名抢用了盐型名,variant=hcl
+bromocriptine,Bromocriptine,甲磺酸溴隐亭,溴隐亭,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+bupivacaine,Bupivacaine,盐酸布比卡因,布比卡因,盐酸,base; hcl; hydrochloride; hydrochloride anhydrous,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+bupropion,Bupropion,盐酸安非他酮,安非他酮,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+buspirone,Buspirone,盐酸丁螺环酮,丁螺环酮,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+butenafine,Butenafine,盐酸布替萘芬,布替萘芬,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+butorphanol,Butorphanol,酒石酸布托啡诺,布托啡诺,酒石酸,base; tartrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tartrate），中文名抢用了盐型名,variant=tartrate
+caffeine,Caffeine,枸橼酸咖啡因,咖啡因,枸橼酸,anhydrous; base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+capreomycin,Capreomycin,硫酸卷曲霉素,卷曲霉素,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+carteolol,Carteolol,盐酸卡替洛尔,卡替洛尔,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+caspofungin,Caspofungin,醋酸卡泊芬净,卡泊芬净,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+cefalotin,Cefalotin,头孢噻吩钠,头孢噻吩,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefazolin,Cefazolin,头孢唑林钠,头孢唑林,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+cefepime,Cefepime,盐酸头孢吡肟,头孢吡肟,盐酸,base; hydrochloride; monohydrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+cefmenoxime,Cefmenoxime,盐酸头孢甲肟,头孢甲肟,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefmetazole,Cefmetazole,头孢美唑钠,头孢美唑,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefminox,Cefminox,头孢米诺钠,头孢米诺,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefodizime,Cefodizime,头孢地嗪钠,头孢地嗪,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefonicid,Cefonicid,头孢尼西钠,头孢尼西,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefoperazone,Cefoperazone,头孢哌酮钠,头孢哌酮,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefotaxime,Cefotaxime,头孢噻肟钠,头孢噻肟,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+cefotiam,Cefotiam,盐酸头孢替安,头孢替安,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cefoxitin,Cefoxitin,头孢西丁钠,头孢西丁,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+cefpirome,Cefpirome,硫酸头孢匹罗,头孢匹罗,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+ceftezole,Ceftezole,头孢替唑钠,头孢替唑,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ceftizoxime,Ceftizoxime,头孢唑肟钠,头孢唑肟,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ceftriaxone,Ceftriaxone,头孢曲松钠,头孢曲松,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+celiprolol,Celiprolol,盐酸塞利洛尔,塞利洛尔,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+cetirizine,Cetirizine,盐酸西替利嗪,西替利嗪,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+chlorphenamine,Chlorphenamine,马来酸氯苯那敏,氯苯那敏,马来酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+chlorpromazine,Chlorpromazine,盐酸氯丙嗪,氯丙嗪,盐酸,base; embonate; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+cinacalcet,Cinacalcet,盐酸西那卡塞,西那卡塞,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+cinitapride,Cinitapride,酒石酸西尼必利,西尼必利,酒石酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cisatracurium,Cisatracurium,苯磺顺阿曲库铵,顺阿曲库铵,苯磺,base; besilato; besylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（besylate），中文名抢用了盐型名,variant=besylate
+citalopram,Citalopram,氢溴酸西酞普兰,西酞普兰,氢溴酸,base; hydrochloride,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+citicoline,Citicoline,胞磷胆碱钠,胞磷胆碱,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+clemastine,Clemastine,富马酸氯马斯汀,氯马斯汀,富马酸,base; fumarate; hydrogen fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+clindamycin,Clindamycin,克林霉素磷酸酯,克林霉素,磷酸酯,2-palmitate hydrochloride; base; hcl; hcl hydrate; hydrochloride; palmitate hydrochloride; phosphate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+clobetasol,Clobetasol,丙酸氯倍他索,氯倍他索,丙酸,base; propionate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（propionate），中文名抢用了盐型名,variant=propionate
+clomipramine,Clomipramine,盐酸氯米帕明,氯米帕明,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+cloperastine,Cloperastine,盐酸氯哌丁,氯哌丁,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+clopidogrel,Clopidogrel,硫酸氢氯吡格雷,氯吡格雷,硫酸氢,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+cloxacillin,Cloxacillin,氯唑西林钠,氯唑西林,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+codeine,Codeine,磷酸可待因,可待因,磷酸,"base; monohydrate, codeine sulfate trihydrate; phosphate; sulfate; sulfate trihydrate, codeine monohydrate",strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（phosphate），中文名抢用了盐型名,variant=phosphate
+cortisone,Cortisone,醋酸可的松,可的松,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+cyproheptadine,Cyproheptadine,盐酸赛庚啶,赛庚啶,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+cytidine-triphosphate,Cytidine Triphosphate,三磷酸胞苷二钠,三磷酸胞苷,二钠,base,strip_salt_affix,仅构词剥离,medium,fix,人工复核要剥：三磷酸胞苷二钠：同上，base 名即三磷酸胞苷,manual
+dabrafenib,Dabrafenib,甲磺酸达拉非尼,达拉非尼,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+daclatasvir,Daclatasvir,盐酸达拉他韦,达拉他韦,盐酸,base; dihydrochloride,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+dantroleno,Dantroleno,丹曲林钠,丹曲林,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+dapoxetine,Dapoxetine,盐酸达泊西汀,达泊西汀,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+dasabuvir,Dasabuvir,达塞布韦钠,达塞布韦,钠,base; sodium monohydrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+deferoxamine,Deferoxamine,甲磺酸去铁胺,去铁胺,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+dexmedetomidine,Dexmedetomidine,盐酸右美托咪定,右美托咪定,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+dexmethylphenidate,Dexmethylphenidate,盐酸右哌甲酯,右哌甲酯,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+dextromethorphan,Dextromethorphan,氢溴酸右美沙芬,右美沙芬,氢溴酸,base; hydrochloride,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+dibutyryl-cyclic-amp,Dibutyryl Cyclic Amp,二丁酰环磷腺苷钙,二丁酰环磷腺苷,钙,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+diltiazem,Diltiazem,盐酸地尔硫卓,地尔硫卓,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+diphenhydramine,Diphenhydramine,盐酸苯海拉明,苯海拉明,盐酸,base; citrate; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+dipivefrin,Dipivefrin,盐酸地匹福林,地匹福林,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+disopyramide,Disopyramide,磷酸丙吡胺,丙吡胺,磷酸,base; phosphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（phosphate），中文名抢用了盐型名,variant=phosphate
+dobutamine,Dobutamine,盐酸多巴酚丁胺,多巴酚丁胺,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+donepezil,Donepezil,盐酸多奈哌齐,多奈哌齐,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+doxapram,Doxapram,盐酸多沙普仑,多沙普仑,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+doxazosin,Doxazosin,甲磺酸多沙唑嗪,多沙唑嗪,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+doxepin,Doxepin,盐酸多塞平,多塞平,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+doxorubicin,Doxorubicin,盐酸多柔比星,多柔比星,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+doxycycline,Doxycycline,盐酸多西环素,多西环素,盐酸,anhydrous; base; hcl,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hcl），中文名抢用了盐型名,variant=hcl
+duloxetine,Duloxetine,盐酸度洛西汀,度洛西汀,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+econazole,Econazole,硝酸益康唑,益康唑,硝酸,base; nitrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（nitrate），中文名抢用了盐型名,variant=nitrate
+edoxaban,Edoxaban,甲苯磺酸艾多沙班,艾多沙班,甲苯磺酸,base; tosylate; tosylate monohydrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tosylate），中文名抢用了盐型名,variant=tosylate
+enalapril,Enalapril,马来酸依那普利,依那普利,马来酸,base; maleate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（maleate），中文名抢用了盐型名,variant=maleate
+enoxaparin,Enoxaparin,依诺肝素钠,依诺肝素,钠,base; sodio; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+eperisone,Eperisone,盐酸乙哌立松,乙哌立松,盐酸,base; hcl,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hcl），中文名抢用了盐型名,variant=hcl
+ephedrine,Ephedrine,盐酸麻黄碱,麻黄碱,盐酸,base; ephedra; hcl; hydrochloride; sulfate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+epinastine,Epinastine,盐酸依匹斯汀,依匹斯汀,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+epinephrine,Epinephrine,盐酸肾上腺素,肾上腺素,盐酸,base; hcl; hydrochloride; racemic epinephrine hydrochloride; tartrate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+epirubicin,Epirubicin,盐酸表柔比星,表柔比星,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+erlotinib,Erlotinib,盐酸厄洛替尼,厄洛替尼,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+ertapenem,Ertapenem,厄他培南钠,厄他培南,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+esmolol,Esmolol,盐酸艾司洛尔,艾司洛尔,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+esomeprazole,Esomeprazole,艾司奥美拉唑镁,艾司奥美拉唑,镁,base; magnesium; magnesium dihydrate; magnesium trihydrate; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（magnesium），中文名抢用了盐型名,variant=magnesium
+ethacridine,Ethacridine,乳酸依沙吖啶,依沙吖啶,乳酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ethambutol,Ethambutol,盐酸乙胺丁醇,乙胺丁醇,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+etimicin,Etimicin,硫酸依替米星,依替米星,硫酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+fasudil,Fasudil,甲磺酸法舒地尔,法舒地尔,甲磺酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+fexofenadine,Fexofenadine,盐酸非索非那定,非索非那定,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+fingolimod,Fingolimod,盐酸芬戈莫德,芬戈莫德,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+flavoxate,Flavoxate,盐酸黄酮哌酯,黄酮哌酯,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+flucloxacillin,Flucloxacillin,氟氯西林钠,氟氯西林,钠,base; magnesium,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+fludarabine,Fludarabine,磷酸氟达拉滨,氟达拉滨,磷酸,base; phosphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（phosphate），中文名抢用了盐型名,variant=phosphate
+flunarizine,Flunarizine,盐酸氟桂利嗪,氟桂利嗪,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+fluocinolone-acetonide,Fluocinolone Acetonide,醋酸氟轻松,氟轻松,醋酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+fluticasone,Fluticasone,丙酸氟替卡松,氟替卡松,丙酸,base; furoate; propionate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（propionate），中文名抢用了盐型名,variant=propionate
+fluvoxamine,Fluvoxamine,马来酸氟伏沙明,氟伏沙明,马来酸,base; maleate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（maleate），中文名抢用了盐型名,variant=maleate
+formoterol,Formoterol,富马酸福莫特罗,福莫特罗,富马酸,base; fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+fosinopril,Fosinopril,福辛普利钠,福辛普利,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+gadoxetate,Gadoxetate,钆塞酸二钠,钆塞酸,二钠,base; disodium,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+galantamine,Galantamine,氢溴酸加兰他敏,加兰他敏,氢溴酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ganglioside,Ganglioside,单唾液酸四己糖神经节苷脂钠,单唾液酸四己糖神经节苷脂,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+gemcitabine,Gemcitabine,盐酸吉西他滨,吉西他滨,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+gemifloxacin,Gemifloxacin,甲磺酸吉米沙星,吉米沙星,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+gentamicin,Gentamicin,硫酸庆大霉素,庆大霉素,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+gilteritinib,Gilteritinib,富马酸吉瑞替尼,吉瑞替尼,富马酸,base; fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+glatiramer,Glatiramer,醋酸格拉替雷,格拉替雷,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+granisetron,Granisetron,盐酸格拉司琼,格拉司琼,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+guaiacol,Guaiacol,愈创木酚磺酸钾,愈创木酚磺酸,钾,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+guanfacine,Guanfacine,盐酸胍法辛,胍法辛,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+hidralazina,Hidralazina,盐酸肼屈嗪,肼屈嗪,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+houttuynin,Houttuynin,鱼腥草素钠,鱼腥草素,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+hydromorphone,Hydromorphone,盐酸氢吗啡酮,氢吗啡酮,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+hydroxychloroquine,Hydroxychloroquine,硫酸羟氯喹,羟氯喹,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+ibandronic-acid,Ibandronic Acid,伊班膦酸钠,伊班膦酸,钠,base; ibandronate sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+ibutilide,Ibutilide,富马酸伊布利特,伊布利特,富马酸,base; fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+icatibant,Icatibant,醋酸艾替班特,艾替班特,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+icotinib,Icotinib,盐酸埃克替尼,埃克替尼,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+imatinib,Imatinib,甲磺酸伊马替尼,伊马替尼,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+imidapril,Imidapril,盐酸咪达普利,咪达普利,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+indinavir,Indinavir,硫酸茚地那韦,茚地那韦,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+irinotecan,Irinotecan,盐酸伊立替康,伊立替康,盐酸,base; hcl trihydrate; hydrochloride; sucrose octasulfate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+isavuconazole,Isavuconazole,硫酸艾沙康唑,艾沙康唑,硫酸,base; isavuconazonium sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+isoprenaline,Isoprenaline,盐酸异丙肾上腺素,异丙肾上腺素,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+itopride,Itopride,盐酸伊托必利,伊托必利,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ivabradine,Ivabradine,盐酸伊伐布雷定,伊伐布雷定,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+ixazomib,Ixazomib,枸橼酸伊沙佐米,伊沙佐米,枸橼酸,base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+kanamycin,Kanamycin,硫酸卡那霉素,卡那霉素,硫酸,base; sulphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulphate），中文名抢用了盐型名,variant=sulphate
+ketorolac,Ketorolac,酮咯酸氨丁三醇,酮咯酸,氨丁三醇,base; tromethamine,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tromethamine），中文名抢用了盐型名,variant=tromethamine
+ketotifen,Ketotifen,富马酸酮替芬,酮替芬,富马酸,base; fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+labetalol,Labetalol,盐酸拉贝洛尔,拉贝洛尔,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+lanreotide,Lanreotide,醋酸兰瑞肽,兰瑞肽,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+lapatinib,Lapatinib,甲苯磺酸拉帕替尼,拉帕替尼,甲苯磺酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+lappaconitine,Lappaconitine,氢溴酸高乌甲素,高乌甲素,氢溴酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+latamoxef,Latamoxef,拉氧头孢钠,拉氧头孢,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+lenvatinib,Lenvatinib,甲磺酸仑伐替尼,仑伐替尼,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+levamisole,Levamisole,盐酸左旋咪唑,左旋咪唑,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+levamlodipine,Levamlodipine,苯磺酸左氨氯地平,左氨氯地平,苯磺酸,base; maleate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+levobupivacaine,Levobupivacaine,盐酸左布比卡因,左布比卡因,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+levocetirizine,Levocetirizine,盐酸左西替利嗪,左西替利嗪,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+lidocaine,Lidocaine,盐酸利多卡因,利多卡因,盐酸,base; hcl; hcl anhydrous; hcl monohydrate; hydrochloride; hydrochloride anhydrous,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+ligustrazine,Ligustrazine,磷酸川芎嗪,川芎嗪,磷酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+lincomycin,Lincomycin,盐酸林可霉素,林可霉素,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+lomefloxacin,Lomefloxacin,盐酸洛美沙星,洛美沙星,盐酸,base; hcl,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hcl），中文名抢用了盐型名,variant=hcl
+loperamide,Loperamide,盐酸洛哌丁胺,洛哌丁胺,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+losartan,Losartan,氯沙坦钾,氯沙坦,钾,base; potassium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（potassium），中文名抢用了盐型名,variant=potassium
+loxoprofen,Loxoprofen,洛索洛芬钠,洛索洛芬,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+lurasidone,Lurasidone,盐酸鲁拉西酮,鲁拉西酮,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+lysine,Lysine,赖氨酸磷酸氢钙,赖氨酸,磷酸氢钙,acetato; base; hidrocloruro; monohidrato; monohydrate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+manidipine,Manidipine,盐酸马尼地平,马尼地平,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+maprotiline,Maprotiline,盐酸马普替林,马普替林,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+meclofenoxate,Meclofenoxate,盐酸甲氯芬酯,甲氯芬酯,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+medroxyprogesterone,Medroxyprogesterone,醋酸甲羟孕酮,甲羟孕酮,醋酸,acetate; base,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+melphalan,Melphalan,盐酸美法仑,美法仑,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+memantine,Memantine,盐酸美金刚,美金刚,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+mepivacaine,Mepivacaine,盐酸甲哌卡因,甲哌卡因,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+metacycline,Metacycline,盐酸美他环素,美他环素,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+metformin,Metformin,盐酸二甲双胍,二甲双胍,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+methadone,Methadone,盐酸美沙酮,美沙酮,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+methoxamine,Methoxamine,盐酸甲氧明,甲氧明,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+methylprednisolone,Methylprednisolone,甲泼尼龙琥珀酸钠,甲泼尼龙,钠,acetate; base; sodium succinate; succinate,strip_salt_affix,仅构词剥离,medium,fix,人工复核要剥：甲泼尼龙琥珀酸钠：酯盐复合后缀，base 是甲泼尼龙,manual
+metilergometrina,Metilergometrina,马来酸麦角新碱,麦角新碱,马来酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+mexiletine,Mexiletine,盐酸美西律,美西律,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+mezlocillin,Mezlocillin,美洛西林钠,美洛西林,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+miconazole,Miconazole,硝酸咪康唑,咪康唑,硝酸,base; nitrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（nitrate），中文名抢用了盐型名,variant=nitrate
+micronomicin,Micronomicin,硫酸小诺霉素,小诺霉素,硫酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+milnacipran,Milnacipran,盐酸米那普仑,米那普仑,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+mitoxantrone,Mitoxantrone,盐酸米托蒽醌,米托蒽醌,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+montelukast,Montelukast,孟鲁司特钠,孟鲁司特,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+moroxydine,Moroxydine,盐酸吗啉胍,吗啉胍,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+mosapride,Mosapride,枸橼酸莫沙必利,莫沙必利,枸橼酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+moxifloxacin,Moxifloxacin,盐酸莫西沙星,莫西沙星,盐酸,base; hcl; hydrochloride; hydrochloride monohydrate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+moxonidine,Moxonidine,盐酸莫索尼定,莫索尼定,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+nadroparin,Nadroparin,那屈肝素钙,那屈肝素,钙,base; calcium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（calcium），中文名抢用了盐型名,variant=calcium
+naftifine,Naftifine,盐酸萘替芬,萘替芬,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+nalbuphine,Nalbuphine,盐酸纳布啡,纳布啡,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+naloxone,Naloxone,盐酸纳洛酮,纳洛酮,盐酸,base; hcl; hydrochloride; hydrochloride dihydrate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+naltrexone,Naltrexone,盐酸纳曲酮,纳曲酮,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+naphazoline,Naphazoline,盐酸萘甲唑啉,萘甲唑啉,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+nefopam,Nefopam,盐酸奈福泮,奈福泮,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+neomycin,Neomycin,硫酸新霉素,新霉素,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+neostigmine,Neostigmine,甲硫酸新斯的明,新斯的明,甲硫酸,base; bromide,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+netilmicin,Netilmicin,硫酸奈替米星,奈替米星,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+nicardipine,Nicardipine,盐酸尼卡地平,尼卡地平,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+nusinersen,Nusinersen,诺西那生钠,诺西那生,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+octreotide,Octreotide,醋酸奥曲肽,奥曲肽,醋酸,acetate; base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+olopatadine,Olopatadine,盐酸奥洛他定,奥洛他定,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+omadacycline,Omadacycline,甲苯磺酸奥马环素,奥马环素,甲苯磺酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ondansetron,Ondansetron,盐酸昂丹司琼,昂丹司琼,盐酸,base; hcl dihydrate; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+ornithine,Ornithine,门冬氨酸鸟氨酸,鸟氨酸,门冬氨酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+oseltamivir,Oseltamivir,磷酸奥司他韦,奥司他韦,磷酸,base; phosphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（phosphate），中文名抢用了盐型名,variant=phosphate
+oxacillin,Oxacillin,苯唑西林钠,苯唑西林,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+oxiconazole,Oxiconazole,硝酸奥昔康唑,奥昔康唑,硝酸,base; nitrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（nitrate），中文名抢用了盐型名,variant=nitrate
+oxycodone,Oxycodone,盐酸羟考酮,羟考酮,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+oxymetazoline,Oxymetazoline,盐酸羟甲唑啉,羟甲唑啉,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+ozagrel,Ozagrel,奥扎格雷钠,奥扎格雷,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+palonosetron,Palonosetron,盐酸帕洛诺司琼,帕洛诺司琼,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+pamidronic-acid,Pamidronic Acid,帕米膦酸二钠,帕米膦酸,二钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pantoprazole,Pantoprazole,泮托拉唑钠,泮托拉唑,钠,base; magnesium; magnesium hemipentahydrate; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+papaverine,Papaverine,盐酸罂粟碱,罂粟碱,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+parecoxib,Parecoxib,帕瑞昔布钠,帕瑞昔布,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+paromomycin,Paromomycin,硫酸巴龙霉素,巴龙霉素,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+pazufloxacin,Pazufloxacin,甲磺酸帕珠沙星,帕珠沙星,甲磺酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pefloxacin,Pefloxacin,甲磺酸培氟沙星,培氟沙星,甲磺酸,base; mesilate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+pemetrexed,Pemetrexed,培美曲塞二钠,培美曲塞,二钠,base; disodium; monohydrate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+penicillin-g,Penicillin G,青霉素钠,青霉素,钠,base; potassium; sodium; sódica,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+pentoxyverine,Pentoxyverine,枸橼酸喷托维林,喷托维林,枸橼酸,base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+pethidine,Pethidine,盐酸哌替啶,哌替啶,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+phenazopyridine,Phenazopyridine,盐酸非那吡啶,非那吡啶,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+phentolamine,Phentolamine,甲磺酸酚妥拉明,酚妥拉明,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+phenytoin,Phenytoin,苯妥英钠,苯妥英,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+pilocarpine,Pilocarpine,硝酸毛果芸香碱,毛果芸香碱,硝酸,base; hcl; hydrochloride,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pioglitazone,Pioglitazone,盐酸吡格列酮,吡格列酮,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+piperacillin,Piperacillin,哌拉西林钠,哌拉西林,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+piperazine,Piperazine,磷酸哌嗪,哌嗪,磷酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pirantel,Pirantel,双羟萘酸噻嘧啶,噻嘧啶,双羟萘酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pirarubicin,Pirarubicin,盐酸吡柔比星,吡柔比星,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pirenoxine,Pirenoxine,吡诺克辛钠,吡诺克辛,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pirenzepine,Pirenzepine,盐酸哌仑西平,哌仑西平,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pitavastatin,Pitavastatin,匹伐他汀钙,匹伐他汀,钙,base; calcium; calcium hydrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（calcium），中文名抢用了盐型名,variant=calcium
+pitolisant,Pitolisant,盐酸替洛利生,替洛利生,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+pramipexole,Pramipexole,盐酸普拉克索,普拉克索,盐酸,base; monohydrate,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+pravastatin,Pravastatin,普伐他汀钠,普伐他汀,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+prazosin,Prazosin,盐酸哌唑嗪,哌唑嗪,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+prednisolone,Prednisolone,醋酸泼尼松龙,泼尼松龙,醋酸,acetate; base; sodium phosphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（acetate），中文名抢用了盐型名,variant=acetate
+prednisone,Prednisone,醋酸泼尼松,泼尼松,醋酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+primaquine,Primaquine,磷酸伯氨喹,伯氨喹,磷酸,base; phosphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（phosphate），中文名抢用了盐型名,variant=phosphate
+procaine,Procaine,盐酸普鲁卡因,普鲁卡因,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+procaterol,Procaterol,盐酸丙卡特罗,丙卡特罗,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+promethazine,Promethazine,盐酸异丙嗪,异丙嗪,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+propacetamol,Propacetamol,盐酸丙帕他莫,丙帕他莫,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+propafenone,Propafenone,盐酸普罗帕酮,普罗帕酮,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+propranolol,Propranolol,盐酸普萘洛尔,普萘洛尔,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+protamine,Protamine,硫酸鱼精蛋白,鱼精蛋白,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+prucalopride,Prucalopride,琥珀酸普芦卡必利,普芦卡必利,琥珀酸,base; succinate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（succinate），中文名抢用了盐型名,variant=succinate
+pseudoephedrine,Pseudoephedrine,盐酸伪麻黄碱,伪麻黄碱,盐酸,base; hcl; hydrochloride; sulfate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+pyritinol,Pyritinol,盐酸吡硫醇,吡硫醇,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+quetiapine,Quetiapine,富马酸喹硫平,喹硫平,富马酸,base; fumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+quinapril,Quinapril,盐酸喹那普利,喹那普利,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+rabeprazole,Rabeprazole,雷贝拉唑钠,雷贝拉唑,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+raloxifene,Raloxifene,盐酸雷洛昔芬,雷洛昔芬,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+ramosetron,Ramosetron,盐酸雷莫司琼,雷莫司琼,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ranitidine,Ranitidine,盐酸雷尼替丁,雷尼替丁,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+rasagiline,Rasagiline,甲磺酸雷沙吉兰,雷沙吉兰,甲磺酸,base; mesylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+reboxetine,Reboxetine,甲磺酸瑞波西汀,瑞波西汀,甲磺酸,base; mesilate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（mesylate），中文名抢用了盐型名,variant=mesylate
+ribostamycin,Ribostamycin,硫酸核糖霉素,核糖霉素,硫酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+rifamycin,Rifamycin,利福霉素钠,利福霉素,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+rimantadine,Rimantadine,盐酸金刚乙胺,金刚乙胺,盐酸,hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+risedronic-acid,Risedronic Acid,利塞膦酸钠,利塞膦酸,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+ritlecitinib,Ritlecitinib,甲苯磺酸利特昔替尼,利特昔替尼,甲苯磺酸,base; tosylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tosylate），中文名抢用了盐型名,variant=tosylate
+ritodrine,Ritodrine,盐酸利托君,利托君,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+rosuvastatin,Rosuvastatin,瑞舒伐他汀钙,瑞舒伐他汀,钙,base; calcium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（calcium），中文名抢用了盐型名,variant=calcium
+roxatidine,Roxatidine,盐酸罗沙替丁醋酸酯,罗沙替丁,醋酸酯+盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+scopolamine,Scopolamine,氢溴酸东莨菪碱,东莨菪碱,氢溴酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+secobarbital,Secobarbital,司可巴比妥钠,司可巴比妥,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+selegiline,Selegiline,盐酸司来吉兰,司来吉兰,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+sertaconazole,Sertaconazole,硝酸舍他康唑,舍他康唑,硝酸,base; nitrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（nitrate），中文名抢用了盐型名,variant=nitrate
+sildenafil,Sildenafil,枸橼酸西地那非,西地那非,枸橼酸,base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+sisomicin,Sisomicin,硫酸西索米星,西索米星,硫酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+sitagliptin,Sitagliptin,磷酸西格列汀,西格列汀,磷酸,base; hcl monohydrate; malate; phosphate; tartrate hemihydrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（phosphate），中文名抢用了盐型名,variant=phosphate
+solifenacin,Solifenacin,琥珀酸索利那新,索利那新,琥珀酸,base; succinate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（succinate），中文名抢用了盐型名,variant=succinate
+sorafenib,Sorafenib,甲苯磺酸索拉非尼,索拉非尼,甲苯磺酸,base; tosylate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tosylate），中文名抢用了盐型名,variant=tosylate
+sparfloxacin,Sparfloxacin,乳酸司帕沙星,司帕沙星,乳酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+spectinomycin,Spectinomycin,盐酸大观霉素,大观霉素,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+streptomycin,Streptomycin,硫酸链霉素,链霉素,硫酸,base; sulfate; sulphate,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（sulfate,sulphate），中文名抢用了盐型名","variant=sulfate,sulphate"
+sugammadex,Sugammadex,舒更葡糖钠,舒更葡糖,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+sulbactam,Sulbactam,舒巴坦钠,舒巴坦,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+sulbenicillin,Sulbenicillin,磺苄西林钠,磺苄西林,钠,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+sulconazole,Sulconazole,硝酸硫康唑,硫康唑,硝酸,base; nitrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（nitrate），中文名抢用了盐型名,variant=nitrate
+sulfacetamide,Sulfacetamide,磺胺醋酰钠,磺胺醋酰,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+tamoxifen,Tamoxifen,枸橼酸他莫昔芬,他莫昔芬,枸橼酸,base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+tamsulosin,Tamsulosin,盐酸坦洛新,坦洛新,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+tapentadol,Tapentadol,盐酸他喷他多,他喷他多,盐酸,base; hydrochloride; phosphate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+tenofovir-alafenamide,Tenofovir Alafenamide,富马酸丙酚替诺福韦,丙酚替诺福韦,富马酸,base; fumarate; hemifumarate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（fumarate），中文名抢用了盐型名,variant=fumarate
+terazosin,Terazosin,盐酸特拉唑嗪,特拉唑嗪,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+terbinafine,Terbinafine,盐酸特比萘芬,特比萘芬,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+terbutaline,Terbutaline,硫酸特布他林,特布他林,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+ticlopidine,Ticlopidine,盐酸噻氯匹定,噻氯匹定,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+timolol,Timolol,马来酸噻吗洛尔,噻吗洛尔,马来酸,anhydrous; base; maleate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（maleate），中文名抢用了盐型名,variant=maleate
+tirofiban,Tirofiban,盐酸替罗非班,替罗非班,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+tizanidine,Tizanidine,盐酸替扎尼定,替扎尼定,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+tofacitinib,Tofacitinib,枸橼酸托法替布,托法替布,枸橼酸,base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+topotecan,Topotecan,盐酸托泊替康,托泊替康,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+toremifene,Toremifene,枸橼酸托瑞米芬,托瑞米芬,枸橼酸,base; citrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（citrate），中文名抢用了盐型名,variant=citrate
+trazodone,Trazodone,盐酸曲唑酮,曲唑酮,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+trihexyphenidyl,Trihexyphenidyl,盐酸苯海索,苯海索,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+trimetazidine,Trimetazidine,盐酸曲美他嗪,曲美他嗪,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+tropisetron,Tropisetron,盐酸托烷司琼,托烷司琼,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+undecylenic-acid,Undecylenic Acid,十一烯酸锌,十一烯酸,锌,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+urapidil,Urapidil,盐酸乌拉地尔,乌拉地尔,盐酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+valganciclovir,Valganciclovir,盐酸缬更昔洛韦,缬更昔洛韦,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+valproic-acid,Valproic Acid,丙戊酸钠,丙戊酸,钠,base; divalproex sodium; sodium valproate,strip_salt_affix,仅构词剥离,medium,fix,人工复核要剥：丙戊酸钠：残形里的「戊酸」是拼词巧合，base 名即丙戊酸,manual
+vancomycin,Vancomycin,盐酸万古霉素,万古霉素,盐酸,base; hcl; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,"variant 层有这个盐型（hcl,hydrochloride），中文名抢用了盐型名","variant=hcl,hydrochloride"
+varenicline,Varenicline,酒石酸伐尼克兰,伐尼克兰,酒石酸,base; tartrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tartrate），中文名抢用了盐型名,variant=tartrate
+venlafaxine,Venlafaxine,盐酸文拉法辛,文拉法辛,盐酸,base; besylate monohydrate; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+verapamil,Verapamil,盐酸维拉帕米,维拉帕米,盐酸,base; hydrochloride,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（hydrochloride），中文名抢用了盐型名,variant=hydrochloride
+vidarabine,Vidarabine,单磷酸阿糖腺苷,阿糖腺苷,单磷酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+vincristine,Vincristine,硫酸长春新碱,长春新碱,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+vindesine,Vindesine,硫酸长春地辛,长春地辛,硫酸,base; sulfate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sulfate），中文名抢用了盐型名,variant=sulfate
+vinorelbine,Vinorelbine,酒石酸长春瑞滨,长春瑞滨,酒石酸,base; tartrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tartrate），中文名抢用了盐型名,variant=tartrate
+vortioxetine,Vortioxetine,氢溴酸伏硫西汀,伏硫西汀,氢溴酸,base,strip_salt_affix,仅构词剥离,medium,fix,variant 层没有该盐型，按构词剥离（已人工复核）,none
+warfarin,Warfarin,华法林钠,华法林,钠,base; sodium,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（sodium），中文名抢用了盐型名,variant=sodium
+zolpidem,Zolpidem,酒石酸唑吡坦,唑吡坦,酒石酸,base; tartrate,strip_salt_affix,variant 盐型对照,high,fix,variant 层有这个盐型（tartrate），中文名抢用了盐型名,variant=tartrate
+aceclofenac,Aceclofenac,醋氯芬酸,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+aceite-etiodado,Aceite Etiodado,碘化油,,碘化,base,discard,规则丢弃,,discard,残形过短/无中文，剥完不是成分名,
+acido-para-aminosalicilico,Ácido Para Aminosalicílico,对氨基水杨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+aluminum-hydroxide,Aluminum Hydroxide,氢氧化铝,,铝,base; dried aluminum hydroxide gel,discard,规则丢弃,,discard,inn_en 自带盐型词（aluminum），该成分本身就是这个盐,
+aminosalicylic-acid,Aminosalicylic Acid,对氨基水杨酸,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+ammonium,Ammonium,铵,,,base; bromide; chloride; lactate,discard,规则丢弃,,discard,inn_en 自带盐型词（ammonium），该成分本身就是这个盐,
+antimoniato,Antimoniato,葡萄糖酸锑钠,,钠+葡萄糖酸,base; meglumina,discard,规则丢弃,,discard,残形过短/无中文，剥完不是成分名,
+arsenic-trioxide,Arsenic Trioxide,三氧化二砷,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+baclofen,Baclofen,巴氯芬,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+bario,Bario,钡,,,base; sulfato,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+beclometasone,Beclometasone,倍氯米松,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+benzalkonium,Benzalkonium,苯扎氯铵,,,base; chloride,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+benzbromarona,Benzbromarona,苯溴马隆,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+benzbromarone,Benzbromarone,苯溴马隆,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+benzoic-acid,Benzoic Acid,苯甲酸,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+benzyl-benzoate,Benzyl Benzoate,苯甲酸苄酯,,苯甲酸,base; benzoate,discard,规则丢弃,,discard,inn_en 自带盐型词（benzoate），该成分本身就是这个盐,
+bismuth,Bismuth,胶体果胶铋,,铋,base; phosphate,discard,规则丢弃,,discard,inn_en 自带盐型词（bismuth），该成分本身就是这个盐,
+bismuth-aluminate,Bismuth Aluminate,铝酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 自带盐型词（bismuth），该成分本身就是这个盐,
+bismuth-subcitrate,Bismuth Subcitrate,枸橼酸铋钾,,钾+枸橼酸,base; potassium,discard,规则丢弃,,discard,inn_en 自带盐型词（bismuth），该成分本身就是这个盐,
+butilescopolamina,Butilescopolamina,丁溴东莨菪碱,,,base; bromuro,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+calcitonina-salmon-sintetica,Calcitonina Salmón Sintética,鲑降钙素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+calcium-acetate,Calcium Acetate,醋酸钙,,钙,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（acetate,calcium），该成分本身就是这个盐",
+calcium-carbonate,Calcium Carbonate,碳酸钙,,钙,base; dolomite; oyster shells,discard,规则丢弃,,discard,inn_en 自带盐型词（calcium），该成分本身就是这个盐,
+calcium-chloride,Calcium Chloride,氯化钙,,钙,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（calcium,chloride），该成分本身就是这个盐",
+calcium-citrate,Calcium Citrate,枸橼酸钙,,钙,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（calcium,citrate），该成分本身就是这个盐",
+calcium-dobesilate,Calcium Dobesilate,羟苯磺酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 自带盐型词（calcium），该成分本身就是这个盐,
+calcium-folinate,Calcium Folinate,亚叶酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 自带盐型词（calcium），该成分本身就是这个盐,
+calcium-gluconate,Calcium Gluconate,葡萄糖酸钙,,钙,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（calcium,gluconate），该成分本身就是这个盐",
+calcium-lactate,Calcium Lactate,乳酸钙,,钙,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（calcium,lactate），该成分本身就是这个盐",
+calcium-phosphate,Calcium Phosphate,磷酸钙,,钙,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（calcium,phosphate），该成分本身就是这个盐",
+calcium-polycarbophil,Calcium Polycarbophil,聚卡波非钙,,钙,base,discard,规则丢弃,,discard,inn_en 自带盐型词（calcium），该成分本身就是这个盐,
+carbenoxolone,Carbenoxolone,甘珀酸钠,,钠,base; sodium,discard,规则丢弃,,discard,残形与另一成分的中文名重名（carbenoxolona），会撞名,
+cefamandole,Cefamandole,头孢孟多酯钠,,钠,base,discard,规则丢弃,,discard,剥掉阳离子后剩下的是酯名，base 在酯的前面，规则剥不到,
+cefetamet,Cefetamet,盐酸头孢他美酯,,盐酸,base,discard,规则丢弃,,discard,人工复核不剥：盐酸头孢他美酯：酯属于衍生物（cefetamet pivoxil），base 是头孢他美，剥到酯层反而写错,none
+cetylpyridinium,Cetylpyridinium,西吡氯铵,,,base; chloride,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chloral-hydrate,Chloral Hydrate,水合氯醛,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chlorambucil,Chlorambucil,苯丁酸氮芥,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chloramphenicol,Chloramphenicol,氯霉素,,,base; sodium succinate,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chlordiazepoxide,Chlordiazepoxide,氯氮䓬,,,base; hcl; hydrochloride,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chlorhexidine,Chlorhexidine,氯己定,,,acetate; base; gluconate; hcl,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chlorpropamide,Chlorpropamide,氯磺丙脲,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chlorzoxazone,Chlorzoxazone,氯唑沙宗,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+chondroitin-sulfate,Chondroitin Sulfate,硫酸软骨素钠,,钠+硫酸,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sulfate），该成分本身就是这个盐,
+clobazam,Clobazam,氯巴占,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clobetasona,Clobetasona,氯倍他松,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clofarabine,Clofarabine,氯法拉滨,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clofazimine,Clofazimine,氯法齐明,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clomifene,Clomifene,氯米芬,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clomifeno,Clomifeno,氯米芬,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clonazepam,Clonazepam,氯硝西泮,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+clozapine,Clozapine,氯氮平,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+cn-00ac4298a2,甲溴贝那替秦,甲溴贝那替秦,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-00b379ea3a,美阿沙坦钾,美阿沙坦钾,,钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-01871646bf,核黄素四丁酸酯,核黄素四丁酸酯,,酸酯,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-024df93441,输血用氯化钠,输血用氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-031924cdd6,磷酸特地唑胺,磷酸特地唑胺,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-031ff6257d,氯化钾氯化钠,氯化钾氯化钠,,钠+氯化,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-03a49a3ec9,呋脲苄青霉素钾,呋脲苄青霉素钾,,钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-043b07df44,甲硝唑氯己定,甲硝唑氯己定,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-047f4ee85a,富马酸泰吉利定,富马酸泰吉利定,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-04a92140c2,氢溴酸替格列汀,氢溴酸替格列汀,,氢溴酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-04e7bfb04a,碘[125I]心钠素放射免疫分析药盒,碘[125I]心钠素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0569dbe12e,枸橼酸爱地那非,枸橼酸爱地那非,,枸橼酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-058f055638,磷酸苯丙哌啉,磷酸苯丙哌啉,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-05c2d0a546,盐酸二甲弗林,盐酸二甲弗林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-05c92ee97f,盐酸左布诺洛尔,盐酸左布诺洛尔,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0620ff65ac,右旋酮洛芬氨丁三醇,右旋酮洛芬氨丁三醇,,氨丁三醇,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-063002b5c0,富马酸二甲酯,富马酸二甲酯,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-07b721b1a7,盐酸曲普利啶,盐酸曲普利啶,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-084a2dcbd6,甲磺酸双氢麦角毒碱,甲磺酸双氢麦角毒碱,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-086fdbd23b,铁铵锌铜维B1,铁铵锌铜维B1,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0871ab6552,盐酸依普拉酮,盐酸依普拉酮,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-087a674862,盐酸苯达莫司汀,盐酸苯达莫司汀,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-09797eb875,呋苄西林钠,呋苄西林钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-09e0756d51,苹果酸舒尼替尼,苹果酸舒尼替尼,,苹果酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0a5b3fbb04,甘露醇烟酸酯,甘露醇烟酸酯,,酸酯,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0ab7329958,甲胂酸钠,甲胂酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0c370a68f5,胶体酒石酸铋,胶体酒石酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0c4446cd40,斑蝥酸钠维生素B6,斑蝥酸钠维生素B6,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0ce52486cb,二巯丙磺钠,二巯丙磺钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0d779d07e4,三维右旋泛酸钙,三维右旋泛酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0d7f60d1a2,乳酸,乳酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0db68086a2,钠钾镁钙葡萄糖,钠钾镁钙葡萄糖,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0dc90db381,马来酸奈拉替尼,马来酸奈拉替尼,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0dcba2ce06,盐酸洛贝林,盐酸洛贝林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0e557af5a6,盐酸仑氨西林,盐酸仑氨西林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0ed19799d0,甲苯磺酸妥舒沙星,甲苯磺酸妥舒沙星,,甲苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0efea84cea,氯替泼诺妥布霉素,氯替泼诺妥布霉素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0f84918e42,苯乙酸钠苯甲酸钠,苯乙酸钠苯甲酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-0ff25be3da,重酒石酸去甲肾上腺素,重酒石酸去甲肾上腺素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-103d0d8732,维B1钙,维B1钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-104d15700b,重酒石酸长春瑞滨,重酒石酸长春瑞滨,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-11616c7cfd,镁加铝,镁加铝,,铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-11ff8a4972,示踪用盐酸米托蒽醌,示踪用盐酸米托蒽醌,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-121b901ee7,二溴甘露醇,二溴甘露醇,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-121dbf26a1,苯甲酸利扎曲普坦,苯甲酸利扎曲普坦,,苯甲酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1267bbdd5d,钠钾葡萄糖,钠钾葡萄糖,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-13d256fa80,盐酸卡马替尼,盐酸卡马替尼,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-13eb11c216,盐酸沙丙蝶呤,盐酸沙丙蝶呤,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-13fff8f18b,甘草酸单钾盐,甘草酸单钾盐,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-14578c91df,丁甘交联玻璃酸钠,丁甘交联玻璃酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-147cd12af7,富马酸安奈克替尼,富马酸安奈克替尼,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-14fb469d21,安奈拉唑钠,安奈拉唑钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-15a1ad913b,氨酚葡锌,氨酚葡锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1601217f4b,复合磷酸氢钾,复合磷酸氢钾,,钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1640a41c3a,蛋白琥珀酸铁,蛋白琥珀酸铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1692852023,硼酸氧化锌冰,硼酸氧化锌冰,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-17a04f6530,甲苯磺酸多纳非尼,甲苯磺酸多纳非尼,,甲苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-185937239e,洛芬葡锌那敏,洛芬葡锌那敏,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1873607376,甲磺酸伏美替尼,甲磺酸伏美替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-19638b4dbc,氟氧头孢钠,氟氧头孢钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1ad1bdba61,格隆溴铵吸入,格隆溴铵吸入,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1ad2b8a070,水合氯醛灌肠剂,水合氯醛灌肠剂,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1ae81d9aea,樟脑磺酸钠,樟脑磺酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1b31a7a1f4,卡巴匹林钙,卡巴匹林钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1bd2205d42,丹皮酚磺酸钠,丹皮酚磺酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1c077f7174,四维亚铁,四维亚铁,,亚铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1cef93338d,磷酸森格列汀,磷酸森格列汀,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1d3dbcdc85,硫酸双肼屈嗪,硫酸双肼屈嗪,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1de37d611a,醋酸奥曲肽微球,醋酸奥曲肽微球,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1f4488fa6b,盐酸氯环利嗪,盐酸氯环利嗪,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1f9a5bc03c,磷酸氢钠,磷酸氢钠,,钠+磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-1fb204f1eb,盐酸伊普可泮,盐酸伊普可泮,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2000d6df2c,碘[125I]-人促黄体生成激素放射免疫分析药盒,碘[125I]-人促黄体生成激素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-20c56396ab,盐酸乙酰左卡尼汀,盐酸乙酰左卡尼汀,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2180d51e1f,十维铁,十维铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-21c941eaf8,盐酸丙哌维林,盐酸丙哌维林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2203e42d91,碘[125I]胰岛素放射免疫分析药盒,碘[125I]胰岛素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-223823c247,水杨酸冰醋酸,水杨酸冰醋酸,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-22eaf4fead,硫酸镁钠钾口服用浓,硫酸镁钠钾口服用浓,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2319de8ea8,甘草酸铵,甘草酸铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2512853d5a,低分子肝素钙,低分子肝素钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-259bd4a321,多黏菌素E甲磺酸钠,多黏菌素E甲磺酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-25e58eb6e6,卡谷氨酸,卡谷氨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2618412296,氯己定苯佐卡因,氯己定苯佐卡因,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-26591a1b5b,富马酸奥赛利定,富马酸奥赛利定,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-26f628cf19,碘[125I]人生长激素放射免疫分析药盒,碘[125I]人生长激素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-270bd7fdfc,氯化钾葡萄糖,氯化钾葡萄糖,,氯化,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-273890d07c,甲磺酸贝福替尼,甲磺酸贝福替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-27b92b7358,盐酸布酚宁,盐酸布酚宁,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2848e7ebef,盐酸小檗胺,盐酸小檗胺,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2968e1263e,氯丙那林鱼腥草素钠,氯丙那林鱼腥草素钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-29769ea3a6,放射性碘[125I]化钠,放射性碘[125I]化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-29d960a04a,水杨酸樟碘溶液Ⅰ,水杨酸樟碘溶液Ⅰ,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-29f8227d89,二巯丁二钠,二巯丁二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-29fbdb9d76,亚锡焦磷酸钠,亚锡焦磷酸钠,,磷酸钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2c563259da,磷酸萘酚喹,磷酸萘酚喹,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2db1c19533,盐酸氮芥,盐酸氮芥,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2decb97ddc,盐酸哌罗匹隆,盐酸哌罗匹隆,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2eaa846feb,英克司兰钠,英克司兰钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2f02023649,紫荆皮水杨酸,紫荆皮水杨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2f55c2a75b,噻奈普汀钠,噻奈普汀钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2f61083658,盐酸曲恩汀,盐酸曲恩汀,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-2f8f0fd94c,肝素钠维E,肝素钠维E,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3001dc311a,戊酸二氟可龙,戊酸二氟可龙,,戊酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-302a2f3276,氯雷伪麻,氯雷伪麻,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3043db9c6f,盐酸氯普鲁卡因,盐酸氯普鲁卡因,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-305cf960d7,二乙酰氨乙酸乙二胺,二乙酰氨乙酸乙二胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-30a1f51ee1,醋酸地加瑞克,醋酸地加瑞克,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-30b8d179fe,甲磺酸氟马替尼,甲磺酸氟马替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-30e306dcbb,头孢比罗酯钠,头孢比罗酯钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3104babe3d,甲磺酸普雷福韦,甲磺酸普雷福韦,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-313932a344,二维葡钙,二维葡钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-319fa6169e,醋酸甲地孕酮口服,醋酸甲地孕酮口服,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-31ad3764f7,硫酸镁钠钾囗服用浓,硫酸镁钠钾囗服用浓,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-31f801a8e8,复合乳酸菌,复合乳酸菌,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-32149353b6,利血平氢氯噻嗪,利血平氢氯噻嗪,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-328554fa29,盐酸甲麻黄碱,盐酸甲麻黄碱,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-32de57968d,胃铋镁,胃铋镁,,镁+铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-33109d9b10,磷酸氯喹,磷酸氯喹,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-332a40df33,当归亚铁,当归亚铁,,亚铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-33e886da05,重酒石酸间羟胺,重酒石酸间羟胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-33f0ed256f,氯醋甲胆碱,氯醋甲胆碱,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3416326bc6,抗凝血用枸橼酸钠,抗凝血用枸橼酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-34605e6c1c,洛度沙胺氨丁三醇,洛度沙胺氨丁三醇,,氨丁三醇,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-346106be97,碘[125I]人绒毛膜促性腺激素放射免疫分析药盒,碘[125I]人绒毛膜促性腺激素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-34b93c5762,盐酸安他唑啉,盐酸安他唑啉,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-353b66887f,碘[125I]胰岛素抗体分析药盒,碘[125I]胰岛素抗体分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-35a4134734,葡钙维B1,葡钙维B1,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-35d3712c58,薄荷茴桉苯甲酸钠,薄荷茴桉苯甲酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-35d6d2361d,二乙酰氨乙酸乙二胺氯化钠,二乙酰氨乙酸乙二胺氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-36d702c107,甲磺酸沙非胺,甲磺酸沙非胺,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-36d751da09,盐酸米多君,盐酸米多君,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-36e010cead,富马酸贝达喹啉,富马酸贝达喹啉,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-36fdbb4e74,硫酸氢黄连素,硫酸氢黄连素,,硫酸氢,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-37e21715ca,盐酸博安霉素,盐酸博安霉素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-38b4dc4b47,硫化钠薄荷脑,硫化钠薄荷脑,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-393ce66494,碘[125I]人促甲状腺激素免疫放射分析药盒,碘[125I]人促甲状腺激素免疫放射分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-393cee0345,苯丙酸诺龙,苯丙酸诺龙,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3972da2b46,酵母碳酸铋,酵母碳酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-39c8565721,十一烯酸锌曲安奈德,十一烯酸锌曲安奈德,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-39dd098d38,丁苯酞氯化钠,丁苯酞氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3afb92c2af,毛冬青氯贝酸铝,毛冬青氯贝酸铝,,铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3b221397b0,枸橼酸铋雷尼替丁,枸橼酸铋雷尼替丁,,枸橼酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3b59831b10,盐酸替利定,盐酸替利定,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3ba12706ad,苹果酸氯波比利,苹果酸氯波比利,,苹果酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3bc001ea10,马勃水杨酸,马勃水杨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3be0e13aad,氯马昔巴特,氯马昔巴特,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3c1c0300ed,碘[125I]反三碘甲腺原氨酸放射免疫分析药盒,碘[125I]反三碘甲腺原氨酸放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3c4fbace72,碳酸司维拉姆,碳酸司维拉姆,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3c7f3a7b6e,水合氯醛/糖浆组合包装,水合氯醛/糖浆组合包装,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3c8f6424d4,盐酸苄达明,盐酸苄达明,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3c9c556237,戊酸雌二醇片/雌二醇环丙孕酮片复合包装,戊酸雌二醇片/雌二醇环丙孕酮片复合包装,,戊酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3cd575ff5b,盐酸乐卡地平,盐酸乐卡地平,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3d569ef3d2,萘普生钠伪麻黄碱,萘普生钠伪麻黄碱,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3e47a98fea,甲磺酸艾立布林,甲磺酸艾立布林,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3e4cf26729,亚油酸钙,亚油酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3eb3937fc9,水杨酸冰,水杨酸冰,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3eb61d73aa,蔗糖羟基氧化铁,蔗糖羟基氧化铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3ed8496113,富马酸伏诺拉生,富马酸伏诺拉生,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3f6b4bbbee,二氯乙酸二异丙胺,二氯乙酸二异丙胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-3fb8da9527,甲状腺过氧化酶自身抗体放射免疫分析药盒,甲状腺过氧化酶自身抗体放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-40b5713aed,硫糖铝小檗碱,硫糖铝小檗碱,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-410d11931d,碘[125I]癌胚抗原放射免疫分析药盒,碘[125I]癌胚抗原放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-414028a40c,碘[125I]β2-微球蛋白放射免疫分析药盒,碘[125I]β2-微球蛋白放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-42162d63dc,乳酸心可定,乳酸心可定,,乳酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-421987e092,醋酸钠葡萄糖,醋酸钠葡萄糖,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4253ec76de,L-谷氨酰胺呱仑酸钠,L-谷氨酰胺呱仑酸钠,,钠,acetate; base; hydrochloride,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-42c939ae02,口服溶液用盐酸万古霉素,口服溶液用盐酸万古霉素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-42e1226d3c,四维葡锌,四维葡锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-42fe2d3785,盐酸消旋山茛菪碱,盐酸消旋山茛菪碱,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-42ffba13d3,磺胺氧化锌,磺胺氧化锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4373c2b217,碘[125I]三碘甲腺原氨酸放射免疫分析药盒,碘[125I]三碘甲腺原氨酸放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-437401e48f,咪康唑氯倍他索,咪康唑氯倍他索,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-438cce9b55,棕榈氯霉素,棕榈氯霉素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-43a1274620,蛋氨酸重酒石酸胆碱,蛋氨酸重酒石酸胆碱,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-44039e9ace,苹果酸奈诺沙星,苹果酸奈诺沙星,,苹果酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-446df7da56,乳酸菌,乳酸菌,,乳酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-44b675dc31,亚锡葡庚糖酸钠,亚锡葡庚糖酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4527716a5e,盐酸兰地洛尔,盐酸兰地洛尔,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-45ac876b12,颠茄氢氧化铝,颠茄氢氧化铝,,铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-45c251f82c,盐酸戊乙奎醚,盐酸戊乙奎醚,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-461c1751e3,磺达肝癸钠,磺达肝癸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-46c908d41b,氨肽素硫酸锌,氨肽素硫酸锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-46deef7774,次没食子酸铋,次没食子酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-47b5ae5b3b,依卡倍特钠,依卡倍特钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-48c9aa08b4,碘[125I]人绒毛膜促性腺激素-β亚单位放射免疫分析药盒,碘[125I]人绒毛膜促性腺激素-β亚单位放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-49125dbc7a,甲硝氯己冰片阴道膨胀,甲硝氯己冰片阴道膨胀,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-499d235977,硼酸氧化锌,硼酸氧化锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-49d28611ac,维U铝镁双层,维U铝镁双层,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4a7cd0534c,苯甲酸雌二醇,苯甲酸雌二醇,,苯甲酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4aca1c347c,硫酸延胡索乙素,硫酸延胡索乙素,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4ad2475b3d,枸橼酸锌,枸橼酸锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4ae223b39a,硫酸艾玛昔替尼,硫酸艾玛昔替尼,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4c4e25c90f,羟丙茶碱去氯羟嗪,羟丙茶碱去氯羟嗪,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4cc3dcb57c,甘氨酸碳酸钙,甘氨酸碳酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4e0d410d65,羧甲基纤维素钠,羧甲基纤维素钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4eac823018,维D钙,维D钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4ef3ad07a6,异麦芽糖酐铁,异麦芽糖酐铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4f24d58aea,盐酸特泊替尼,盐酸特泊替尼,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-4f79be2aa0,四维葡钙,四维葡钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-50c9b7cdc4,马来酸右噻吗洛尔,马来酸右噻吗洛尔,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5177c1a0a4,氯膦酸二钠,氯膦酸二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-51c2d99266,碘[131I]美妥昔单抗皮试制剂,碘[131I]美妥昔单抗皮试制剂,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-51cb83ce38,维铁,维铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-51f90d92a2,可溶性纤维素钠,可溶性纤维素钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-52e4274bf9,碘[125I]-催乳素放射免疫分析药盒,碘[125I]-催乳素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-52e666c509,次没食子酸铋栓Ⅱ,次没食子酸铋栓Ⅱ,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-52f8bc5bf9,普罗碘铵,普罗碘铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-53549872ca,羧基麦芽糖铁,羧基麦芽糖铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-53d3903c26,碘[125I]-睾酮放射免疫分析药盒,碘[125I]-睾酮放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-53e1b38b20,磷[32P]酸钠盐,磷[32P]酸钠盐,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-53f830a166,盐酸阿那格雷,盐酸阿那格雷,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5413b04e5a,盐酸贝那替秦,盐酸贝那替秦,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-546981db87,磷酸哌喹,磷酸哌喹,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-549f07a7d9,碘-聚醇醚,碘-聚醇醚,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-570cf1aa75,氢溴酸樟柳碱,氢溴酸樟柳碱,,氢溴酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5790de2b24,甲苯磺酸尼拉帕利,甲苯磺酸尼拉帕利,,甲苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-58c06073ee,盐酸司他斯汀,盐酸司他斯汀,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-58f94268bd,尿囊素铝,尿囊素铝,,铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-59200c74c4,碘解磷定,碘解磷定,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-59c390802a,碘比醇,碘比醇,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-59d8b811c0,甲磺酸加诺沙星,甲磺酸加诺沙星,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5a40f67bb8,富马酸卢帕他定,富马酸卢帕他定,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5a64944e8e,碘[125I]皮质醇放射免疫分析药盒,碘[125I]皮质醇放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5a6ed855fe,亮菌甲素氯化钠,亮菌甲素氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5b7bb6c44b,木香铝镁,木香铝镁,,镁+铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5b8a542f1b,维B1乳酸钙,维B1乳酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5cd3e0c5e8,碱式硝酸铋,碱式硝酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5d2650fb6f,盐酸丁卡因胶浆,盐酸丁卡因胶浆,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5db4b9ff4a,盐酸去甲万古霉素,盐酸去甲万古霉素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5db93d56fb,苦参水杨酸,苦参水杨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5df35cd6ea,氯氮,氯氮,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5e8273c6d8,水杨酸苯佐卡因,水杨酸苯佐卡因,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5edb4144c1,氯化镭,氯化镭,,氯化,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5edc936892,维U颠茄铋铝,维U颠茄铋铝,,铝+铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5f6850d904,氯丙那林溴己新,氯丙那林溴己新,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-5f907d1a8e,硫酸拉罗替尼,硫酸拉罗替尼,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-60780a5af8,精氨酸谷氨酸,精氨酸谷氨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6102aa8371,帕拉米韦氯化钠,帕拉米韦氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6185d69d6a,盐酸依特卡肽,盐酸依特卡肽,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-61d9423b73,泛酸钙,泛酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-63bfa8dffd,碘[125I]血管紧张素I放射免疫分析药盒,碘[125I]血管紧张素I放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-644ad17188,甲磺酸瑞厄替尼,甲磺酸瑞厄替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-64757ac2da,铝镁加,铝镁加,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-649b7fe7c0,烟酸肌醇酯,烟酸肌醇酯,,烟酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6583930e10,呋布西林钠,呋布西林钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-65cf2e3f9b,盐酸去氧肾上腺素,盐酸去氧肾上腺素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-66763e7c8d,阿地溴铵吸入,阿地溴铵吸入,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-67b1c1c745,山梨醇铁,山梨醇铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-67dca7dbc4,盐酸恩沙替尼,盐酸恩沙替尼,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-68bcf203b8,氯氮卓,氯氮卓,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-69cceea059,氯氧喹,氯氧喹,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6a509bddda,甲磺酸阿帕替尼,甲磺酸阿帕替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6b3e002098,苯丁酸钠,苯丁酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6c1f8b18ec,阿利沙坦酯氨氯地平,阿利沙坦酯氨氯地平,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6c241d4c1b,重酒石酸卡巴拉汀,重酒石酸卡巴拉汀,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6cf2bc5975,游离三碘甲腺原氨酸放射免疫分析药盒,游离三碘甲腺原氨酸放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6d2c09117c,可可钙糖,可可钙糖,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6e26161874,酒石酸艾格司他,酒石酸艾格司他,,酒石酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6e61dde69e,大黄叶绿素铜钠,大黄叶绿素铜钠,,钠+铜,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6e81c020d2,氯芬待因,氯芬待因,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6e9236a63c,醋酸丙氨瑞林,醋酸丙氨瑞林,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6ebac609f1,延胡索氢氧化铝,延胡索氢氧化铝,,铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-6fd65e262a,磷酸咯萘啶,磷酸咯萘啶,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-703b826ec4,硫酸普拉睾酮钠,硫酸普拉睾酮钠,,钠+硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7071b6a5ca,碳酸钙二甲硅油,碳酸钙二甲硅油,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-70c7e6e6e4,聚磺苯乙烯钠,聚磺苯乙烯钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-710b74c828,丙酸交沙霉素,丙酸交沙霉素,,丙酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-711c39b125,稀葡萄糖酸氯己定,稀葡萄糖酸氯己定,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7126069fe8,醋酸棉酚,醋酸棉酚,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7175bdb5de,氯维地平,氯维地平,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-719f5d5da8,碘[125I]甲状腺微粒体抗体分析药盒,碘[125I]甲状腺微粒体抗体分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-724e292964,碘[125I]人C肽放射免疫分析药盒,碘[125I]人C肽放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-727598fec2,卡替拉韦钠,卡替拉韦钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7284160784,去甲斑蝥酸钠氯化钠,去甲斑蝥酸钠氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-72b62cab98,联苯乙酸,联苯乙酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-72dd84d5f9,甘草浙贝氯化铵,甘草浙贝氯化铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-736be6aca1,硝酸一叶萩碱,硝酸一叶萩碱,,硝酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-73795bd37f,磷酸钠盐灌肠,磷酸钠盐灌肠,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-73a058e6d8,盐酸萘甲唑林,盐酸萘甲唑林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-74e10266e4,盐酸卡波罗孟,盐酸卡波罗孟,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-76054e82d8,盐酸伊立替康脂质体,盐酸伊立替康脂质体,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7679ac27ba,石菖蒲碱式碳酸铋,石菖蒲碱式碳酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7742e06bb5,神黄钠铝,神黄钠铝,,铝+钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7764ed6be6,地喹氯铵,地喹氯铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-77d8af383e,氧化樟脑,氧化樟脑,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7820891df3,贝前列素钠,贝前列素钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7845bcb2a8,石菖蒲碱式硝酸铋,石菖蒲碱式硝酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-795237ce67,羟丁酸钠,羟丁酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-795711e591,盐酸左卡巴斯汀,盐酸左卡巴斯汀,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7991c64304,盐酸槐定碱,盐酸槐定碱,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7a68e3df36,肝素钠封管,肝素钠封管,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7ae49ada4f,磷酸瑞格列汀,磷酸瑞格列汀,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7b000ff9ba,硫酸四氢帕马丁,硫酸四氢帕马丁,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7b0dc44273,盐酸阿芬太尼,盐酸阿芬太尼,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7c09e84b55,碘[125I]醛固酮放射免疫分析药盒,碘[125I]醛固酮放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7cb63bf57e,精蛋白锌重组赖脯胰岛素混合,精蛋白锌重组赖脯胰岛素混合,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7cc49f1b0e,苯磺酸瑞马唑仑,苯磺酸瑞马唑仑,,苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7df4021741,甲苯磺酰胺,甲苯磺酰胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7e866c8b53,碘[125I]白蛋白放射免疫分析药盒,碘[125I]白蛋白放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7f59d02b3f,枸橼酸氢钾钠,枸橼酸氢钾钠,,钠+枸橼酸+钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-7f8b37ec58,五水头孢唑林钠,五水头孢唑林钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-805a9cb706,胚肝铁铵,胚肝铁铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-80c6d53c99,氧化淀,氧化淀,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-81037514d2,盐酸苯羟甲胺,盐酸苯羟甲胺,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-817aced9cd,盐酸奈康唑,盐酸奈康唑,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-823a0e7aef,甲磺酸瑞齐替尼,甲磺酸瑞齐替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-840a8cd424,水杨酸氧化锌,水杨酸氧化锌,,锌+水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8533988800,盐酸沙格雷酯,盐酸沙格雷酯,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-85b0d10155,米格列奈钙,米格列奈钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-87097d0d5b,醋酸西曲瑞克,醋酸西曲瑞克,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-87f3037331,苯甲酸福格列汀,苯甲酸福格列汀,,苯甲酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-882b2d4938,盐酸苯环壬酯,盐酸苯环壬酯,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8838852ef2,盐酸美贝维林,盐酸美贝维林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-887b0f1b3e,磷酸雌莫司汀,磷酸雌莫司汀,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-88f537084e,苹果酸奈诺沙星氯化钠,苹果酸奈诺沙星氯化钠,,钠+苹果酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-896623ab85,醋酸加尼瑞克,醋酸加尼瑞克,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-89704a8dec,丹参酮ⅡA磺酸钠,丹参酮ⅡA磺酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-89c8a2fa4c,亚硒酸钠,亚硒酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-89de2dd833,铝镁,铝镁,,镁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8a27206a02,阿魏酸钠阿司匹林,阿魏酸钠阿司匹林,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8a89512b21,盐酸芦氟沙星,盐酸芦氟沙星,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8aca3c9bf8,吡嘧司特钾,吡嘧司特钾,,钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8b88becb1d,硝酸益康唑阴道膨胀,硝酸益康唑阴道膨胀,,硝酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8bdc88d54b,哌库溴铵,哌库溴铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8caf5459c9,杏芎氯化钠,杏芎氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8cb0e23980,铝镁口服,铝镁口服,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8d01611109,碳酸钙甘氨酸,碳酸钙甘氨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8d1b3d6351,倍氯福格吸入,倍氯福格吸入,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8d2ae98761,反三碘甲状腺原氨酸放射免疫诊断试剂,反三碘甲状腺原氨酸放射免疫诊断试剂,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8db7c626ce,铝镁二甲硅油,铝镁二甲硅油,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8deffd3bb8,低钙腹膜透,低钙腹膜透,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8e4caed20e,碘[125I]-孕酮放射免疫分析药盒,碘[125I]-孕酮放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8e5248d235,溴米那普鲁卡因,溴米那普鲁卡因,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8f5a474982,硫糖铝口服,硫糖铝口服,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-8fee0ef969,磷酸索立德吉,磷酸索立德吉,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-90014c05f6,盐酸多萘哌齐,盐酸多萘哌齐,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9064ea216b,碘[125I]血管紧张素II放射免疫分析药盒,碘[125I]血管紧张素II放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-906fbb6974,过氧化碳酰胺,过氧化碳酰胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-90e33fd6cc,甲磺酸贝舒地尔,甲磺酸贝舒地尔,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-90f4b07770,盐酸胍甲环素,盐酸胍甲环素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-914fe40eb1,酒石酸双氢可待因,酒石酸双氢可待因,,酒石酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-918868e9ba,巴柳氮钠,巴柳氮钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-92d701dba0,盐酸甲氧那明,盐酸甲氧那明,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9329a2489f,溴芬酸钠,溴芬酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9335088441,盐酸苄普地尔,盐酸苄普地尔,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9344cb438b,琥珀酸呋罗曲坦,琥珀酸呋罗曲坦,,琥珀酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9347cf2a22,右酮洛芬氨丁三醇,右酮洛芬氨丁三醇,,氨丁三醇,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-94c72f70f4,马来酸阿可替尼,马来酸阿可替尼,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-94c8a00e91,羧甲淀粉钠,羧甲淀粉钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-95284ff546,地夸磷索钠,地夸磷索钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-953c5f744c,葡磷泛三钙,葡磷泛三钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-959513aa23,氯解磷定,氯解磷定,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-95bffe7a9f,聚普瑞锌,聚普瑞锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-95eee999d4,美芬那敏铵,美芬那敏铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-96a1fb276f,碘[125I]-人促甲状腺激素放射免疫分析药盒,碘[125I]-人促甲状腺激素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-96bb024c1d,琥珀酸莫博赛替尼,琥珀酸莫博赛替尼,,琥珀酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-96ccc60536,邻碘[131I]马尿酸钠,邻碘[131I]马尿酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-972e80e9e6,四维钙,四维钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-974c09c7b2,盐酸布桂嗪,盐酸布桂嗪,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-97659886f3,二维亚铁,二维亚铁,,亚铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-97af75e1d2,氨基丁酸维E,氨基丁酸维E,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-97f65c955a,非诺洛芬钙,非诺洛芬钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-988e2ace5b,三维亚铁,三维亚铁,,亚铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-98ce2085d0,氯碘羟喹,氯碘羟喹,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-98f7683202,盐酸佐利替尼,盐酸佐利替尼,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9905031733,盐酸纳呋拉啡,盐酸纳呋拉啡,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-994c82d90f,碘[125I]密封籽源,碘[125I]密封籽源,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9998db89c9,磷酸二氢钠磷酸氢二钠,磷酸二氢钠磷酸氢二钠,,二钠+磷酸二氢,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9abfca50c6,硫酸锌尿囊素,硫酸锌尿囊素,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9b343691a9,溴甲东莨菪碱,溴甲东莨菪碱,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9b3e5923c6,盐酸纳美芬,盐酸纳美芬,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9bdf2dd026,溴夫定,溴夫定,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9be0c6ea3c,Aluminium Glycinate,甘羟铝,,铝,base,discard,规则丢弃,,discard,inn_en 自带盐型词（aluminium），该成分本身就是这个盐,
+cn-9c193cebed,苯磺酸美洛加巴林,苯磺酸美洛加巴林,,苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9cae0f8dee,斑蝥酸钠,斑蝥酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9cb8ff29a9,高渗氯化钠羟乙基淀粉40,高渗氯化钠羟乙基淀粉40,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9ccfb91dc3,萘林那敏溴铵,萘林那敏溴铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9dbba70589,磷霉素钙甲氧苄啶,磷霉素钙甲氧苄啶,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9ee4179e95,琥珀酸瑞波西利,琥珀酸瑞波西利,,琥珀酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9ef67983a0,碘[125I]雌三醇放射免疫分析药盒,碘[125I]雌三醇放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-9f096208ff,甲磺酸加贝酯,甲磺酸加贝酯,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a087caae64,盐酸艾司氯胺酮,盐酸艾司氯胺酮,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a184e86f6f,硫酸黏菌素,硫酸黏菌素,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a2473427a9,鼠李铋镁,鼠李铋镁,,镁+铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a24de5690a,硫酸氢司美替尼,硫酸氢司美替尼,,硫酸氢,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a2508e4e0b,马来酸桂哌齐特,马来酸桂哌齐特,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a34d491378,头孢西酮钠,头孢西酮钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a3aa5c7855,硫酸瑞美吉泮,硫酸瑞美吉泮,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a3ad2c3932,贝母氯化铵,贝母氯化铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a3c3152a83,苯磺贝他斯汀,苯磺贝他斯汀,,苯磺,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a453206a2c,精蛋白锌胰岛素,精蛋白锌胰岛素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a48c8cc74e,格隆溴铵吸入粉雾剂用,格隆溴铵吸入粉雾剂用,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a4c957add7,枇杷氯化铵,枇杷氯化铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a58bd2fafc,二盐酸奎宁,二盐酸奎宁,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a5bb51e171,无水硫酸钠,无水硫酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a5eaa46fb3,溴化钙,溴化钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a5eb0c4ba7,甘铋镁,甘铋镁,,镁+铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a66df51425,氯化亚铊,氯化亚铊,,氯化,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a68929a039,达诺瑞韦钠,达诺瑞韦钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a6d1e6a0b3,磷酸哌嗪宝塔糖,磷酸哌嗪宝塔糖,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a75144d0ed,硝酸异康唑,硝酸异康唑,,硝酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a795f2cd1d,鱼肝油酸钠,鱼肝油酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a8352d2589,盐酸奥布卡因,盐酸奥布卡因,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-a9429037fd,多维铁,多维铁,,铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-aa70550327,维D2磷葡钙,维D2磷葡钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ab3092d7c4,钠石灰,钠石灰,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ab47bb040f,维D2果糖酸钙,维D2果糖酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-abde303e03,单盐酸氟西泮,单盐酸氟西泮,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-abf85d513a,因卡膦酸二钠,因卡膦酸二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ac149aec0e,Aluminium Phosphate,磷酸铝,,铝,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（aluminium,phosphate），该成分本身就是这个盐",
+cn-ac234995ba,三水杨酸胆碱镁,三水杨酸胆碱镁,,镁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ac2fd69636,强力碘,强力碘,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-aca519b29b,脱氧核苷酸钠,脱氧核苷酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-acb8951a3f,二维钙赖氨酸,二维钙赖氨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ad1515315f,鱼肝油氧化锌,鱼肝油氧化锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ad6dd28750,交联玻璃酸钠,交联玻璃酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ae03445154,乳酸钠山梨醇,乳酸钠山梨醇,,乳酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ae1116028c,亚锡植酸钠,亚锡植酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ae81e02849,盐酸屈他维林,盐酸屈他维林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ae82ea603e,癸酸氟哌啶醇,癸酸氟哌啶醇,,癸酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ae9bb00d5f,钠钾镁钙,钠钾镁钙,,钙+镁+钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-aebaeb44ca,盐酸曲拉西利,盐酸曲拉西利,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-aef915dbde,盐酸拉维达韦,盐酸拉维达韦,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b0aabc939b,醋酸阿托西班,醋酸阿托西班,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b0c210597d,枸橼酸倍维巴肽,枸橼酸倍维巴肽,,枸橼酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b0e01a9401,磷酸芦可替尼,磷酸芦可替尼,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b19459f464,左亚叶酸钙,左亚叶酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b1dd997934,苯磺酸克利加巴林,苯磺酸克利加巴林,,苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b1e3168614,醋氨己酸锌,醋氨己酸锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b42f2f3940,富马酸依美斯汀,富马酸依美斯汀,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b448525a81,英卡膦酸二钠,英卡膦酸二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b4d0993809,碘[125I]-人促卵泡生成激素放射免疫分析药盒,碘[125I]-人促卵泡生成激素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b51037d126,地巴唑氢氯噻嗪,地巴唑氢氯噻嗪,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b5192c62fb,甲磺酸二氢麦角碱,甲磺酸二氢麦角碱,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b568f4e9af,庚酸炔诺酮,庚酸炔诺酮,,庚酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b5c9665806,二氯醋酸二异丙胺葡萄糖酸钠,二氯醋酸二异丙胺葡萄糖酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b63b68be1e,西格列他钠,西格列他钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b6a089e076,奥沙拉秦钠,奥沙拉秦钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b6d8ef64c5,磷酸氢钙,磷酸氢钙,,钙+磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b75ed14a71,铝镁匹林,铝镁匹林,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b76718214e,盐酸克仑特罗,盐酸克仑特罗,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b7d7223572,甘草酸铋,甘草酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b8063f40c9,乌美溴铵维兰特罗吸入,乌美溴铵维兰特罗吸入,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b8355865cf,氯替泼诺混悬,氯替泼诺混悬,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b87fea2a8d,盐酸阿柔比星,盐酸阿柔比星,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b8b4cbe2e3,氯雷氨酚伪麻,氯雷氨酚伪麻,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b92a5dc233,三维葡磷钙,三维葡磷钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b936982c12,盐酸可洛派韦,盐酸可洛派韦,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b95c25f37b,碘[125I]甲状腺球蛋白抗体分析药盒,碘[125I]甲状腺球蛋白抗体分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-b9d93a2e34,盐酸羟苄唑,盐酸羟苄唑,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ba0c8b2336,盐酸硫必利,盐酸硫必利,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ba1b4f61a1,碘[125I]游离三碘甲状腺原氨酸放射免疫分析药盒,碘[125I]游离三碘甲状腺原氨酸放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bb01eb899f,盐酸四环素醋酸可的松,盐酸四环素醋酸可的松,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bb2757e740,碘[125I]-甲状腺素放射免疫分析药盒,碘[125I]-甲状腺素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bb2d595ee9,碱式碳酸铋,碱式碳酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bbaec31df1,桔梗氯化铵,桔梗氯化铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bbb3ec54b2,维磷葡钙,维磷葡钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bbf4a2c7d5,重酒石酸利斯的明,重酒石酸利斯的明,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bc2f721990,盐酸托哌酮,盐酸托哌酮,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bc3c039ca5,舒巴坦钠/注射用度洛巴坦钠组合包装,舒巴坦钠/注射用度洛巴坦钠组合包装,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bc41d62ee0,水杨酸苯甲酸松油,水杨酸苯甲酸松油,,水杨酸+苯甲酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bc5798e082,碘[125I]铁蛋白放射免疫分析药盒,碘[125I]铁蛋白放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bcdd888fd7,盐酸安普乐定,盐酸安普乐定,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bd42947c7b,L-赖氨酸盐酸盐,L-赖氨酸盐酸盐,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bd4a932587,复合磷酸酯酶,复合磷酸酯酶,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bd5a30b40c,二维葡磷钙,二维葡磷钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bd82fbefdd,枸地氯雷他定,枸地氯雷他定,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bddb8d0f01,甲磺酸阿美替尼,甲磺酸阿美替尼,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bf0651fcb0,碘[125I]甘胆酸放射免疫分析药盒,碘[125I]甘胆酸放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bfab450d79,马来酸吡咯替尼,马来酸吡咯替尼,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-bff2ac2bd7,五维葡钙,五维葡钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c02bb26c39,水杨酸咪唑,水杨酸咪唑,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c0da28d9c8,门冬氨酸钾,门冬氨酸钾,,钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c0dca386b2,法罗培南钠,法罗培南钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c1146b017e,盐酸环喷托酯,盐酸环喷托酯,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c1a38cb5a3,低钙腹膜透析,低钙腹膜透析,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c214c62e79,氯化钙溴化钠,氯化钙溴化钠,,钠+氯化,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c36fafa5ef,五倍子水杨酸,五倍子水杨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c3b51dfa7c,盐酸青藤碱,盐酸青藤碱,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c3f2ca9c29,艾度硫酸酯酶β,艾度硫酸酯酶β,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c4b3f3eb12,马来酸阿伐曲泊帕,马来酸阿伐曲泊帕,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c4d9938c60,盐酸尼莫司汀,盐酸尼莫司汀,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c528ecafab,碘[125I]胰高血糖素放射免疫分析药盒,碘[125I]胰高血糖素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c5f8b27df7,盐酸阿罗洛尔,盐酸阿罗洛尔,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c690c3e416,铝镁司,铝镁司,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c6abef976e,磷酸腺嘌呤,磷酸腺嘌呤,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c6b0e4472e,氢溴酸氘瑞米德韦,氢溴酸氘瑞米德韦,,氢溴酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c6f63cb50a,盐酸克仑特罗吸入,盐酸克仑特罗吸入,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c71aa2ffbc,硝酸戊四醇酯,硝酸戊四醇酯,,硝酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c721f45e76,碘[125I]脱氧核糖核酸抗体分析药盒,碘[125I]脱氧核糖核酸抗体分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c7c3718082,盐酸托鲁地文拉法辛,盐酸托鲁地文拉法辛,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c8b1f190c3,水杨酸甲酯苯海拉明,水杨酸甲酯苯海拉明,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c9234585d0,磷酸依米他韦,磷酸依米他韦,,磷酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c988aad128,甲苯磺酸他拉唑帕利,甲苯磺酸他拉唑帕利,,甲苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-c991ed3d3c,盐酸美金刚口溶,盐酸美金刚口溶,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ca4d4a4d97,海藻酸铝镁,海藻酸铝镁,,镁+铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cad24f1963,硫酸铝钾鞣酸,硫酸铝钾鞣酸,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cb2eca6b98,氨丁三醇,氨丁三醇,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cb9a24a356,待因麻黄铵氯敏,待因麻黄铵氯敏,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ccd6d53222,甲苯磺酸托氟沙星,甲苯磺酸托氟沙星,,甲苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cd369bc1b5,盐酸普洛萘尔,盐酸普洛萘尔,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cdd8d417f9,磷丙泊酚二钠,磷丙泊酚二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cebbd7bbc1,去甲斑蝥酸钠,去甲斑蝥酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ceea539028,锌铁钙,锌铁钙,,钙+铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-cf43454dba,异甘草酸镁,异甘草酸镁,,镁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d01f2f8857,盐酸尼非卡兰,盐酸尼非卡兰,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d0f4e54c7e,枸橼酸坦度螺酮,枸橼酸坦度螺酮,,枸橼酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d107b9ec80,硝酸益康唑癣药水,硝酸益康唑癣药水,,硝酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d1f7355358,维参锌,维参锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d221cd581e,黄氧化汞,黄氧化汞,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d24c521412,马来酸伊索拉定,马来酸伊索拉定,,马来酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d28570a2fd,盐酸可乐定,盐酸可乐定,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d2cc84a2ac,水杨酸苯甲酸,水杨酸苯甲酸,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d35d4be9b4,水杨酸苯胺甲酯,水杨酸苯胺甲酯,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d3657dfb5c,枸橼酸苹果酸钙,枸橼酸苹果酸钙,,钙+枸橼酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d3675cadaf,甲苯磺酸瑞马唑仑,甲苯磺酸瑞马唑仑,,甲苯磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d393e59060,氯苯唑酸葡胺,氯苯唑酸葡胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d3c22a4075,亚锡二巯丁二钠,亚锡二巯丁二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d3ed623e20,盐酸贝凡洛尔,盐酸贝凡洛尔,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d44549d379,苯扎溴铵,苯扎溴铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d4e77ec48e,乳酸亚铁,乳酸亚铁,,亚铁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d4f195aaca,琥珀酸地文拉法辛,琥珀酸地文拉法辛,,琥珀酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d4f6d6b6a0,盐酸头孢卡品酯,盐酸头孢卡品酯,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d585660c7c,甘氨双唑钠,甘氨双唑钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d64f8f5bb5,盐酸纳曲酮植入剂,盐酸纳曲酮植入剂,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d68c9b1e38,还原型谷胱甘肽钠,还原型谷胱甘肽钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d6a0dbce7c,盐酸曲吡那敏,盐酸曲吡那敏,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d6b853844b,盐酸奥扎莫德,盐酸奥扎莫德,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d6cb5b99e4,三维钙,三维钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d744dea72d,铝镁颠茄,铝镁颠茄,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d815a52314,盐酸安妥沙星,盐酸安妥沙星,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d84cee4c32,低分子肝素钠,低分子肝素钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d890903c0b,格隆溴铵福莫特罗吸入,格隆溴铵福莫特罗吸入,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d8e63a356b,亚砷酸氯化钠,亚砷酸氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d912bf43ad,葡醛酸钠,葡醛酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-d9269df9a8,叶绿素铜钠,叶绿素铜钠,,钠+铜,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-da1f121ffe,碳酸钙维D3元素,碳酸钙维D3元素,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-da2dca4fa6,葛根氢氯噻嗪,葛根氢氯噻嗪,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-da875d2d76,颠茄铋镁,颠茄铋镁,,镁+铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-db81849d06,卤米松/三氯生,卤米松/三氯生,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-dc93d3e4c9,氯丙嗪异丙嗪,氯丙嗪异丙嗪,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-dd2fd11abc,羟乙磺酸达尔西利,羟乙磺酸达尔西利,,羟乙磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ddad2f1cd0,碘[125I]游离甲状腺素放射免疫分析药盒,碘[125I]游离甲状腺素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ddf8469cfb,新鱼腥草素钠,新鱼腥草素钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-de0aad950c,碘[125I]-雌二醇放射免疫分析药盒,碘[125I]-雌二醇放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-de50f9d297,盐酸平阳霉素,盐酸平阳霉素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-def5d7bcb3,溴甲贝那替秦,溴甲贝那替秦,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-dfb9ed88fe,氢溴酸二氢加兰他敏,氢溴酸二氢加兰他敏,,氢溴酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e01da2f827,盐酸米安色林,盐酸米安色林,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e0b94c2dbf,碘[125I]甲状腺球蛋白放射免疫分析药盒,碘[125I]甲状腺球蛋白放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e0c81b6854,盐酸贝尼地平,盐酸贝尼地平,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e134a24d8e,碘[125I]TH糖蛋白放射免疫分析药盒,碘[125I]TH糖蛋白放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e145dacdab,盐酸奥昔非君,盐酸奥昔非君,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e1645d268e,氯唑氨酚,氯唑氨酚,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e1d910d382,盐酸关附甲素,盐酸关附甲素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e1f42b33a7,苹果酸氯波必利,苹果酸氯波必利,,苹果酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e2053df41b,盐酸凯普拉生,盐酸凯普拉生,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e26e22b9bf,铝钠颠茄,铝钠颠茄,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e349dd5b8e,硫酸镁葡萄糖,硫酸镁葡萄糖,,硫酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e35a7ffefe,人脑利钠肽,人脑利钠肽,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e44f2f88d0,盐酸吗啉呱,盐酸吗啉呱,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e4dac7cb17,琥珀酸舒马普坦,琥珀酸舒马普坦,,琥珀酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e5070d3b31,羧苄西林钠,羧苄西林钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e50da1ad1e,甲磺酸萘莫司他,甲磺酸萘莫司他,,甲磺酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e52f64eae1,高渗枸橼酸盐嘌呤,高渗枸橼酸盐嘌呤,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e5acae70f8,间苯二酚水杨酸,间苯二酚水杨酸,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e5dffbe966,麻黄碱色甘酸钠,麻黄碱色甘酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e62ff61e71,碘[125I]地高辛放射免疫分析药盒,碘[125I]地高辛放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e79cf7cc01,胆酸钠,胆酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e7cbdde0a6,二氯醋酸二异丙胺,二氯醋酸二异丙胺,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e872bd4771,依洛硫酸酯酶α,依洛硫酸酯酶α,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-e8e3a0b094,硼砂甘油钾,硼砂甘油钾,,钾,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ea759707a4,口服用苯丁酸甘油酯,口服用苯丁酸甘油酯,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-eaffec441a,氯噻酮,氯噻酮,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-eb50c85048,吡硫翁钠,吡硫翁钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ecc988f6ca,精蛋白锌赖脯胰岛素混合,精蛋白锌赖脯胰岛素混合,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-edb75a6c29,溴丙胺太林铝镁,溴丙胺太林铝镁,,镁+铝,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-edc0016429,氢溴酸依他佐辛,氢溴酸依他佐辛,,氢溴酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ee0c4bf3e5,高渗羟乙基淀粉200/0.5氯化钠,高渗羟乙基淀粉200/0.5氯化钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ee5ea2081d,氨碘肽,氨碘肽,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ef205c254e,碘[131I]美妥昔单抗,碘[131I]美妥昔单抗,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-eff235930c,盐酸洛非西定,盐酸洛非西定,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f015ba3317,碘[125I]甲胎蛋白放射免疫分析药盒,碘[125I]甲胎蛋白放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f0b7f0c4d8,碳酸钙口服,碳酸钙口服,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f150e1aa17,甘草氯化铵,甘草氯化铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f1833651fe,碳酸钙D₃,碳酸钙D₃,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f18aba16db,硫糖铝混悬,硫糖铝混悬,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f29f4a9d82,碱式水杨酸铋,碱式水杨酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f2dee5a088,富马酸酮替芬鼻吸入,富马酸酮替芬鼻吸入,,富马酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f37470ea07,盐酸达克罗宁胶浆,盐酸达克罗宁胶浆,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f3a999786d,盐酸伊达比星,盐酸伊达比星,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f3d8b6625c,枸橼酸依奉阿克,枸橼酸依奉阿克,,枸橼酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f4cba3e422,盐酸美司坦,盐酸美司坦,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f5becba653,依替膦酸二钠,依替膦酸二钠,,二钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f5df45e57f,氯霉素耳,氯霉素耳,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f74fd17f31,亚硝酸异戊酯吸入剂,亚硝酸异戊酯吸入剂,,亚硝酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f8be7bc921,次硝酸铋,次硝酸铋,,铋,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f8d07312a4,碘化铵,碘化铵,,碘化,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f8d3136b90,米库氯铵,米库氯铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f931564cca,甘露特钠,甘露特钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f93d4018d1,氯己定甲硝唑,氯己定甲硝唑,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f9615b5b01,苯环喹溴铵,苯环喹溴铵,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-f9fea2dc8b,愈酚溴新,愈酚溴新,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fa9d912c4a,甘氨酸茶碱钠,甘氨酸茶碱钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fbcab04036,门冬氨酸钙,门冬氨酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fbf47ea258,盐酸洛美利嗪,盐酸洛美利嗪,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fc08c2ab53,匹可硫酸钠,匹可硫酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fcb3ce8af6,盐酸硫必利氯化钠,盐酸硫必利氯化钠,,钠+盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fcd6bc474c,水杨酸复合,水杨酸复合,,水杨酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fcf3b969fc,盐酸二氢埃托啡,盐酸二氢埃托啡,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fcfe9737e7,锌布,锌布,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fd83922cb6,氢溴酸他泽司他,氢溴酸他泽司他,,氢溴酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fe2c7c94e6,盐酸氨溴索直服,盐酸氨溴索直服,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fec44e2669,盐酸依拉环素,盐酸依拉环素,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-fecd5a17d8,碘[125I]胃泌素放射免疫分析药盒,碘[125I]胃泌素放射免疫分析药盒,,,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ff6f1f1acf,西维来司他钠,西维来司他钠,,钠,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ffbc8072b7,盐酸决奈达隆,盐酸决奈达隆,,盐酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+cn-ffd406b262,醋酸来法莫林,醋酸来法莫林,,醋酸,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+colistimethate,Colistimethate,多黏菌素E甲磺酸钠,,钠,base; sodio; sodium,discard,规则丢弃,,discard,残形里仍有盐型词，剥离不干净,
+condensed-glucose,Condensed Glucose,缩合葡萄糖氯化钠,,钠,base,discard,规则丢弃,,discard,残形里仍有盐型词，剥离不干净,
+creatine-phosphate,Creatine Phosphate,磷酸肌酸钠,,钠+磷酸,base,discard,规则丢弃,,discard,inn_en 自带盐型词（phosphate），该成分本身就是这个盐,
+decualinio,Decualinio,地喹氯铵,,,base; cloruro,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+deferiprone,Deferiprone,去铁酮,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+desloratadine,Desloratadine,地氯雷他定,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+dextran,Dextran,右旋糖酐20氯化钠,,钠,base,discard,规则丢弃,,discard,残形里仍有盐型词，剥离不干净,
+diclofenac,Diclofenac,双氯芬酸,,,base; potassium; sodium,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+edetic-acid,Edetic Acid,依地酸钙钠,,钠+依地酸,base,discard,规则丢弃,,discard,残形过短/无中文，剥完不是成分名,
+ferric-ammonium-citrate,Ferric Ammonium Citrate,枸橼酸铁铵,,枸橼酸,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（ammonium,citrate,ferric），该成分本身就是这个盐",
+ferrous,Ferrous,亚铁,,铁,base; fumarate; iodide; phosphate; sulfate,discard,规则丢弃,,discard,inn_en 自带盐型词（ferrous），该成分本身就是这个盐,
+ferrous-gluconate,Ferrous Gluconate,葡萄糖酸亚铁,,亚铁,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（ferrous,gluconate），该成分本身就是这个盐",
+ferrous-succinate,Ferrous Succinate,琥珀酸亚铁,,亚铁,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（ferrous,succinate），该成分本身就是这个盐",
+fructose-diphosphate,Fructose Diphosphate,"1,6-二磷酸果糖",,,base,discard,规则丢弃,,discard,inn_en 自带盐型词（diphosphate），该成分本身就是这个盐,
+glutamic-acid,Glutamic Acid,谷氨酸,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+glycyrrhizin,Glycyrrhizin,甘草酸单铵,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+hydrochlorothiazide,Hydrochlorothiazide,氢氯噻嗪,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+hydrocortisone-butyrate,Hydrocortisone Butyrate,丁酸氢化可的松,,丁酸,base,discard,规则丢弃,,discard,inn_en 自带盐型词（butyrate），该成分本身就是这个盐,
+hydrogen-peroxide,Hydrogen Peroxide,过氧化氢,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+hydrotalcite,Hydrotalcite,铝碳酸镁,,镁,base,discard,规则丢弃,,discard,残形里仍有盐型词，剥离不干净,
+hydroxyethyl-starch,Hydroxyethyl Starch,羟乙基淀粉20氯化钠,,钠,base,discard,规则丢弃,,discard,残形里仍有盐型词，剥离不干净,
+idoxuridine,Idoxuridine,碘苷,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+inositol-nicotinate,Inositol Nicotinate,肌醇烟酸酯,,酸酯,base,discard,规则丢弃,,discard,inn_en 自带盐型词（nicotinate），该成分本身就是这个盐,
+iodine,Iodine,碘酊,,,"base; ethiodized oil; iodinated casein; iodophor; iohexol; iopamidol; iotrolan; ioversol; kelp; kelp, potassium iodide; potassium iodide; potassium iodide, kelp; povidone-iodine; sodium iodide",discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iodixanol,Iodixanol,碘克沙醇,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iodized-lecithin,Iodized Lecithin,卵磷脂络合碘,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iodophor,Iodophor,西地碘,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iohexol,Iohexol,碘海醇,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iomeprol,Iomeprol,碘美普尔,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iopamidol,Iopamidol,碘帕醇,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iopanoic-acid,Iopanoic Acid,碘番酸,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iopromide,Iopromide,碘普罗胺,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+ioversol,Ioversol,碘佛醇,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+ipratropium,Ipratropium,异丙托溴铵,,,base; bromide,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+iron-dextran,Iron Dextran,右旋糖酐铁,,铁,base,discard,规则丢弃,,discard,inn_en 自带盐型词（iron），该成分本身就是这个盐,
+iron-sucrose,Iron Sucrose,蔗糖铁,,铁,base,discard,规则丢弃,,discard,inn_en 自带盐型词（iron），该成分本身就是这个盐,
+isosorbide-dinitrate,Isosorbide Dinitrate,硝酸异山梨酯,,硝酸,base,discard,规则丢弃,,discard,inn_en 自带盐型词（dinitrate），该成分本身就是这个盐,
+isosorbide-mononitrate,Isosorbide Mononitrate,单硝酸异山梨酯,,,base,discard,规则丢弃,,discard,inn_en 自带盐型词（mononitrate），该成分本身就是这个盐,
+ketamine,Ketamine,氯胺酮,,,base; hcl; hydrochloride,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+lactasin,Lactasin,乳酸菌素,,乳酸,base,discard,规则丢弃,,discard,人工复核不剥：乳酸菌素：整名就是 lactasin，剥完「菌素」不是成分名,none
+lanthanum-carbonate,Lanthanum Carbonate,碳酸镧,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+lithium-carbonate,Lithium Carbonate,碳酸锂,,锂,base,discard,规则丢弃,,discard,inn_en 自带盐型词（lithium），该成分本身就是这个盐,
+loratadine,Loratadine,氯雷他定,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+lornoxicam,Lornoxicam,氯诺昔康,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+magnesio-hidroxido,Magnesio Hidróxido,氢氧化镁,,镁,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+magnesium-gluconate,Magnesium Gluconate,葡萄糖酸镁,,镁,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（gluconate,magnesium），该成分本身就是这个盐",
+magnesium-sulfate,Magnesium Sulfate,硫酸镁,,镁,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（magnesium,sulfate），该成分本身就是这个盐",
+magnesium-trisilicate,Magnesium Trisilicate,三硅酸镁,,镁,base,discard,规则丢弃,,discard,inn_en 自带盐型词（magnesium），该成分本身就是这个盐,
+megestrol,Megestrol,醋酸甲地孕酮,,醋酸,acetate; base,discard,规则丢弃,,discard,残形与另一成分的中文名重名（cn-cc5b160cb1），会撞名,
+merbromina,Merbromina,汞溴红,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+mesna,Mesna,美司钠,,钠,base,discard,规则丢弃,,discard,人工复核不剥：美司钠：钠是 INN 自带（mesna = 美司钠），剥完「美司」不是成分名,none
+methyl-salicylate,Methyl Salicylate,水杨酸甲酯,,水杨酸,base,discard,规则丢弃,,discard,inn_en 自带盐型词（salicylate），该成分本身就是这个盐,
+metoclopramide,Metoclopramide,甲氧氯普胺,,,base; hcl; hydrochloride,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+moclobemide,Moclobemide,吗氯贝胺,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+mycophenolate-sodium,Mycophenolate Sodium,麦考酚钠,,钠,sodium,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+nicotinic-acid,Nicotinic Acid,烟酸,,,base; inositol niacinate; nicotinamide,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+nitric-oxide,Nitric Oxide,一氧化氮,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+nitroglycerin,Nitroglycerin,硝酸甘油,,硝酸,base,discard,规则丢弃,,discard,人工复核不剥：硝酸甘油：硝酸是硝酸酯的一部分（不是成盐），剥完「甘油」是另一个成分,none
+nitroprusiato,Nitroprusiato,硝普钠,,钠,base; sódico,discard,variant 盐型对照,,discard,人工复核不剥：硝普钠：西语名 nitroprusside，剥完「硝普」不是成分名,variant=sodium
+otilonio,Otilonio,奥替溴铵,,,base; bromuro,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+pinaverium,Pinaverium,匹维溴铵,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+polysaccharide-iron-complex-0895b3,Polysaccharide Iron Complex,多糖铁复合物,,,base,discard,规则丢弃,,discard,inn_en 自带盐型词（iron），该成分本身就是这个盐,
+polystyrene-sulfonate-calcium,Polystyrene Sulfonate - Calcium,聚苯乙烯磺酸钙,,钙,base,discard,规则丢弃,,discard,inn_en 自带盐型词（calcium），该成分本身就是这个盐,
+polystyrene-sulfonate-sodium,Polystyrene Sulfonate - Sodium,聚苯乙烯磺酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+potasio-ioduro,Potasio Ioduro,碘化钾,,钾,base,discard,规则丢弃,,discard,残形本身仍是盐型词（如「碘化」），不是成分名,
+potassium-chloride,Potassium Chloride,氯化钾,,钾,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（chloride,potassium），该成分本身就是这个盐",
+potassium-citrate,Potassium Citrate,枸橼酸钾,,钾,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（citrate,potassium），该成分本身就是这个盐",
+potassium-iodide,Potassium Iodide,碘化钾,,钾,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（iodide,potassium），该成分本身就是这个盐",
+potassium-magnesium-aspartate,Potassium Magnesium Aspartate,门冬氨酸钾镁,,镁+门冬氨酸,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（aspartate,magnesium,potassium），该成分本身就是这个盐",
+potassium-permanganate,Potassium Permanganate,高锰酸钾外用,,,base,discard,规则丢弃,,discard,inn_en 自带盐型词（potassium），该成分本身就是这个盐,
+povidone-iodine-57d2b4,Povidone-Iodine,聚维酮碘,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+pseudomonas-aeruginosa,Pseudomonas Aeruginosa,铜绿假单胞菌,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+pyridostigmine,Pyridostigmine,溴吡斯的明,,,base; bromide,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+rocuronium,Rocuronium,罗库溴铵,,,base; bromide,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+salicilato-de-trolamina,Salicilato De Trolamina,水杨酸三乙醇胺,,三乙醇胺,base,discard,规则丢弃,,discard,残形与另一成分的中文名重名（salicylic-acid），会撞名,
+salicylic-acid,Salicylic Acid,水杨酸,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+scopolamine-butylbromide,Scopolamine Butylbromide,丁溴东莨菪碱,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+sodium-acetate,Sodium Acetate,醋酸钠,,钠,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（acetate,sodium），该成分本身就是这个盐",
+sodium-alginate,Sodium Alginate,海藻酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+sodium-bicarbonate,Sodium Bicarbonate,碳酸氢钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+sodium-chloride,Sodium Chloride,氯化钠,,钠,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（chloride,sodium），该成分本身就是这个盐",
+sodium-citrate,Sodium Citrate,枸橼酸钠血滤置换,,枸橼酸,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（citrate,sodium），该成分本身就是这个盐",
+sodium-cromoglicate,Sodium Cromoglicate,色甘酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+sodium-hyaluronate,Sodium Hyaluronate,玻璃酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+sodium-iodide-i-131,Sodium Iodide I 131,碘[131I]化钠,,钠,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（iodide,sodium），该成分本身就是这个盐",
+sodium-lactate,Sodium Lactate,乳酸钠林格,,乳酸,base; lactato sodio,discard,规则丢弃,,discard,"inn_en 自带盐型词（lactate,sodium），该成分本身就是这个盐",
+sodium-nitrite,Sodium Nitrite,亚硝酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+sodium-phosphate,Sodium Phosphate,磷酸钠盐,,磷酸,base; tribasic,discard,规则丢弃,,discard,"inn_en 自带盐型词（phosphate,sodium），该成分本身就是这个盐",
+sodium-thiosulfate,Sodium Thiosulfate,硫代硫酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+sodium-zirconium-cyclosilicate,Sodium Zirconium Cyclosilicate,环硅酸锆钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+strontium-chloride,Strontium Chloride,氯化锶[89Sr],,氯化,base,discard,规则丢弃,,discard,"inn_en 自带盐型词（chloride,strontium），该成分本身就是这个盐",
+sucralfate,Sucralfate,硫糖铝,,铝,base,discard,规则丢弃,,discard,人工复核不剥：硫糖铝：整名就是 sucralfate，剥完「硫糖」不是成分名,none
+tafamidis,Tafamidis,氯苯唑酸,,,base; meglumine,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+technetium-tc-99m-sodium-pertechnetate,Technetium Tc 99M Sodium Pertechnetate,高锝[99mTc]酸钠,,钠,base,discard,规则丢弃,,discard,inn_en 自带盐型词（sodium），该成分本身就是这个盐,
+tiotropium,Tiotropium,噻托溴铵,,,base; bromide anhydrous; bromide monohydrate,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+tolbutamide,Tolbutamide,甲苯磺丁脲,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+trolamine,Trolamine,三乙醇胺,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+trospium,Trospium,曲司氯铵,,,base; chloride,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+vecuronium,Vecuronium,维库溴铵,,,base; bromide,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,
+vinpocetine,Vinpocetine,长春西汀氯化钠,,钠,base,discard,规则丢弃,,discard,残形里仍有盐型词，剥离不干净,
+ytrio-citrato-90y,Ytrio Citrato (90Y),枸橼酸钇[90Y],,枸橼酸,base,discard,规则丢弃,,discard,人工复核不剥：枸橼酸钇[90Y]：放射性核素名，残形带同位素标记，不剥,none
+zinc,Zinc,锌,,,"acetate; acetate anhydrous; acetate dihydrate; acetato; acetato dihidrato; ascorbate; base; bromide; chelate; chloride; citrate; citrate, zinc gluconate; citrate, zinc hvp chelate; citrate, zinc malate; cloruro; fumarate; gluconate; gluconate, zinc citrate; gluconate, zinc hvp chelate; gluconate, zinc oxide; glutarate; hvp chelate; hvp chelate, zinc citrate; iodide; malate; maleate; oxide, zinc gluconate; succinate; sulfate; sulfate anhydrous; valerate dihydrate",discard,规则丢弃,,discard,inn_en 自带盐型词（zinc），该成分本身就是这个盐,
+zinc-gluconate,Zinc Gluconate,赖氨葡锌,,锌,gluconate,discard,规则丢弃,,discard,"inn_en 自带盐型词（gluconate,zinc），该成分本身就是这个盐",
+zinc-glycyrrhizinate,Zinc Glycyrrhizinate,甘草锌,,锌,base,discard,规则丢弃,,discard,inn_en 自带盐型词（zinc），该成分本身就是这个盐,
+zinc-oxide,Zinc Oxide,氧化锌,,锌,base,discard,规则丢弃,,discard,inn_en 自带盐型词（zinc），该成分本身就是这个盐,
+zinc-oxido,Zinc Óxido,氧化锌,,锌,base,discard,规则丢弃,,discard,inn_en 本身不是英文（中文/西语等名），没有可对照的英文成分名,
+zinc-sulfate,Zinc Sulfate,硫酸锌,,锌,,discard,规则丢弃,,discard,"inn_en 自带盐型词（sulfate,zinc），该成分本身就是这个盐",
+zuclopentixol,Zuclopentixol,氯普噻吨,,,base,discard,规则丢弃,,discard,盐型词在词中/词尾但剥不动，无法在不改原名的前提下得到成分名,

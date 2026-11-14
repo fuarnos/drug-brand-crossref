@@ -1132,6 +1132,14 @@ FR_I18N: dict[str, str] = {
     "fam.rel.release": ("Principes actifs identiques, libération différente : non "
                         "interchangeables"),
     "fam.rel.none": "Aucun principe actif enregistré",
+    # T16（v0.11.8 H1）：与 en 同键集（品牌级锁不住具体记录时不下释放结论）。
+    "fam.rel.multi": "Plusieurs libérations enregistrées : choisissez un produit précis",
+    "fam.rel.multi_unknown": ("Libération non renseignée pour tous les produits : choisissez "
+                              "un produit précis"),
+    "fam.rel.multi_why": "certains enregistrements n'indiquent pas le type de libération",
+    "name.rel_multi_title": "Plusieurs types de libération",
+    "name.rel_unknown_title": "Libération partiellement renseignée",
+    "name.rel_note": "choisissez un produit précis pour comparer",
     # T10（plan §9）：与 en 同键集。
     "matrix.multi_form": "Formes galéniques multiples",
     "drug.mono_section": "Uniquement ce principe actif",
@@ -1162,6 +1170,7 @@ FR_I18N: dict[str, str] = {
     "t11.cmp_title": "Comparaison champ par champ (identité seulement)",
     "t11.cmp_you": "Votre enregistrement", "t11.cmp_target": "Marché cible",
     "t11.same": "Identique", "t11.diff": "Différent", "t11.missing": "Non enregistré",
+    "t11.multi": "Choisir un produit",
     "t11.name": "Nom enregistré", "t11.spec": "Dosage", "t11.release": "Libération",
     "t11.cmp_note": "Comparaison de champs d'identité uniquement. Un nom ou un principe actif identique ne signifie pas que les produits sont interchangeables.",
     "t11.adv": "Filtres avancés",
@@ -1787,6 +1796,14 @@ UI_I18N = {
                             "not interchangeable"),
         "fam.rel.release": "Same active ingredients, different release — not interchangeable",
         "fam.rel.none": "No active ingredient recorded",
+        # T16（v0.11.8 H1）：品牌级不再下「释放方式不同」结论——只在两侧都能锁定到具体记录时
+        # 才用 fam.rel.release；否则改这两句中性的「去选具体产品」，并说明为什么锁不住。
+        "fam.rel.multi": "Multiple releases recorded — pick a specific product",
+        "fam.rel.multi_unknown": "Release not recorded for every product — pick a specific product",
+        "fam.rel.multi_why": "some records do not state a release type",
+        "name.rel_multi_title": "Multiple release types",
+        "name.rel_unknown_title": "Release partly unrecorded",
+        "name.rel_note": "pick a specific product to compare",
         # T10（plan §9）：剂型/规格成对、单复方分段、规格冲突机制（默认关闭）。
         "matrix.multi_form": "Multiple dosage forms",
         "drug.mono_section": "Only this ingredient",
@@ -1818,6 +1835,9 @@ UI_I18N = {
         "t11.cmp_title": "Item-by-item comparison (identity only)",
         "t11.cmp_you": "Yours", "t11.cmp_target": "Target market",
         "t11.same": "Same", "t11.diff": "Different", "t11.missing": "Not recorded",
+        # T16（v0.11.8 H1）：对照行的「释放」只在两侧都只有 1 种已知释放方式时给 same/diff；
+        # 否则这枚徽标改成「选择具体产品」（不再由品牌级汇总推出相同/不同）。
+        "t11.multi": "Pick a product",
         "t11.name": "Registered name", "t11.spec": "Strength", "t11.release": "Release",
         "t11.cmp_note": "Field-by-field identity comparison only. Same name or same ingredient does not mean the products are interchangeable.",
         "t11.adv": "Advanced filters",
@@ -1919,6 +1939,14 @@ UI_I18N = {
                             "combinación, no intercambiables"),
         "fam.rel.release": ("Mismos principios activos, liberación distinta: no intercambiables"),
         "fam.rel.none": "Sin principios activos registrados",
+        # T16（v0.11.8 H1）：与 en 同键集。
+        "fam.rel.multi": "Varias liberaciones registradas: elige un producto concreto",
+        "fam.rel.multi_unknown": ("Liberación sin registrar en todos los productos: elige un "
+                                  "producto concreto"),
+        "fam.rel.multi_why": "algunos registros no indican el tipo de liberación",
+        "name.rel_multi_title": "Varios tipos de liberación",
+        "name.rel_unknown_title": "Liberación registrada solo en parte",
+        "name.rel_note": "elige un producto concreto para comparar",
         # T10（plan §9）：与 en 同键集。
         "matrix.multi_form": "Varias formas farmacéuticas",
         "drug.mono_section": "Solo este principio activo",
@@ -1949,6 +1977,7 @@ UI_I18N = {
         "t11.cmp_title": "Comparación campo por campo (solo identidad)",
         "t11.cmp_you": "Tu registro", "t11.cmp_target": "Mercado destino",
         "t11.same": "Igual", "t11.diff": "Distinto", "t11.missing": "Sin registro",
+        "t11.multi": "Elige un producto",
         "t11.name": "Nombre registrado", "t11.spec": "Concentración", "t11.release": "Liberación",
         "t11.cmp_note": "Solo se comparan campos de identidad. Mismo nombre o mismo principio no significa que los productos sean intercambiables.",
         "t11.adv": "Filtros avanzados",
@@ -2031,6 +2060,13 @@ UI_I18N = {
         "fam.rel.partial": "成分部分相同，不是同一复方，不可互换",
         "fam.rel.release": "成分相同，释放机制不同，不可互换",
         "fam.rel.none": "成分未收录",
+        # T16（v0.11.8 H1）：与 en 同键集。品牌级锁不住具体记录时只说记录状况，不下结论。
+        "fam.rel.multi": "存在多种释放方式，请选择具体产品",
+        "fam.rel.multi_unknown": "释放方式未逐条记录，请选择具体产品",
+        "fam.rel.multi_why": "部分记录未标注释放方式",
+        "name.rel_multi_title": "多种释放方式",
+        "name.rel_unknown_title": "释放方式未逐条记录",
+        "name.rel_note": "请选择具体产品后再对照",
         # T10（plan §9）：与 en 同键集。
         "matrix.multi_form": "多剂型",
         "drug.mono_section": "仅含此成分",
@@ -2061,6 +2097,7 @@ UI_I18N = {
         "t11.cmp_title": "逐项对照（只比身份字段）",
         "t11.cmp_you": "你这条", "t11.cmp_target": "目标市场",
         "t11.same": "相同", "t11.diff": "不同", "t11.missing": "未收录",
+        "t11.multi": "选择具体产品",
         "t11.name": "注册名", "t11.spec": "规格", "t11.release": "释放",
         "t11.cmp_note": "只按登记字段做身份对照；名字相同或成分相同都不代表这些产品可以互换。",
         "t11.adv": "高级筛选",
@@ -2227,6 +2264,13 @@ UI_I18N = {
         "fam.rel.partial": "成分部分相同，不是同一複方，不可互換",
         "fam.rel.release": "成分相同，釋放機制不同，不可互換",
         "fam.rel.none": "成分未收錄",
+        # T16（v0.11.8 H1）：與 en 同鍵集。品牌級鎖不住具體記錄時只說記錄狀況，不下結論。
+        "fam.rel.multi": "存在多種釋放方式，請選擇具體產品",
+        "fam.rel.multi_unknown": "釋放方式未逐條記錄，請選擇具體產品",
+        "fam.rel.multi_why": "部分記錄未標註釋放方式",
+        "name.rel_multi_title": "多種釋放方式",
+        "name.rel_unknown_title": "釋放方式未逐條記錄",
+        "name.rel_note": "請選擇具體產品後再對照",
         # T10（plan §9）：與 en 同鍵集。
         "matrix.multi_form": "多劑型",
         "drug.mono_section": "僅含此成分",
@@ -2257,6 +2301,7 @@ UI_I18N = {
         "t11.cmp_title": "逐項對照（只比身分欄位）",
         "t11.cmp_you": "你這筆", "t11.cmp_target": "目標市場",
         "t11.same": "相同", "t11.diff": "不同", "t11.missing": "未收錄",
+        "t11.multi": "選擇具體產品",
         "t11.name": "註冊名", "t11.spec": "規格", "t11.release": "釋放",
         "t11.cmp_note": "只按登記欄位做身分對照；名稱相同或成分相同都不代表這些產品可以互換。",
         "t11.adv": "進階篩選",
@@ -4616,6 +4661,10 @@ table.res.cmp th:first-child{width:8em;color:var(--muted);font-weight:600}
 .cmp-b.same{color:var(--accent);border-color:var(--accent);background:var(--accent-weak)}
 .cmp-b.diff{color:var(--warn);border-color:var(--warn)}
 .cmp-b.miss{color:var(--muted)}
+/* T16（v0.11.8 H1）：锁不到具体记录时的中性徽标（不给相同/不同结论） */
+.cmp-b.multi{color:var(--muted);border-style:dashed}
+/* 品牌对照表「关系说明」列：中性提示后的补充说明（为什么锁不住） */
+.rel-why{display:inline-block;color:var(--muted);font-size:13px}
 .cmp-note{margin:6px 0 0;font-size:13px}
 /* T11：桌面端结果行必须保持 ~42px（首屏条目靠它）——
    ① 「数据截止」小字在 ≥768 只留在身份卡里，不进窄的市场列（否则行高 42 → 138）；
@@ -5630,8 +5679,12 @@ function copyTSV(rows, T){
   }
 }
 function brandRowHTML(e, T){
+  // T16（v0.11.8 H1）：e.l==='warning' 只说明 release 字段出现过 >1 个值（其中 'none' 是
+  // 「未记录」，也算一个值）。只有本条目真有 ≥2 种**已知**释放码（e.rl 逗号分隔）时，
+  // 才贴「释放机制不同」徽标 —— 否则这一行并没有释放方式对比的证据。
+  const nRel = String(e.rl || '').split(',').filter(Boolean).length;
   const badge = e.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
-                e.l==='warning' ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
+                (e.l==='warning' && nRel > 1) ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
   const tags = (e.c || []).map(x=>`<span class="tag ${x.toLowerCase()}">${x}</span>`).join('');
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
@@ -5790,8 +5843,10 @@ function flatRowHTML(e, T){
   // 用**一个字符**的按钮（title/aria 带完整文案）：`.c-det` 列很窄，放整句会把行高
   // 从 42 撑到 138px，1440 首屏条目会从 4.5 掉到 1.5（首屏守卫的硬指标）。
   const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">◎</button> `;
+  // T16（v0.11.8 H1）：同 brandRowHTML —— 只有 ≥2 种已知释放码才贴「释放机制不同」徽标。
+  const nRelFlat = String(e.rl || '').split(',').filter(Boolean).length;
   const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
-                e.l==='warning' ? `<span class="badge warn">${esc(T('badge.warning'))}</span>` : '';
+                (e.l==='warning' && nRelFlat > 1) ? `<span class="badge warn">${esc(T('badge.warning'))}</span>` : '';
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${esc(T('badge.combo'))}</span>` : '';
   const exp = e.eo ? `<span class="badge export">${esc(T('badge.export_only'))}</span>` : '';
@@ -6803,6 +6858,11 @@ function t11RenderChips(T){
   }).join('');
 }
 
+function t11RelList(v){
+  // T16（v0.11.8 H1）：索引里的 rl 是逗号连接的**已知**释放码（'none' 不进索引）。
+  return [...new Set(String(v || '').split(',').map(s => s.trim()).filter(r => r && r !== 'none'))];
+}
+
 function t11CompareHTML(pe, mk, hits, T){
   const subs = t11Subs(pe);
   // 目标市场里「至少有同一个成分」的候选（不是「答案」，只是可比的登记记录）
@@ -6810,9 +6870,12 @@ function t11CompareHTML(pe, mk, hits, T){
     && t11Subs(x).some(s => subs.indexOf(s) >= 0));
   const mineSpec = (pe.s || []).slice().sort().join(' / ');
   const theirSpec = [...new Set(others.flatMap(x => x.s || []))].sort().join(' / ');
-  const mineRel = (pe.rl && pe.rl !== 'none') ? labelOf('release', pe.rl, pe.rl) : '';
-  const theirRel = [...new Set(others.map(x => x.rl).filter(r => r && r !== 'none')
-    .map(r => labelOf('release', r, r)))].join(' / ');
+  // T16（H1）：释放方式结论只在「你这条」与「目标市场」都锁定到唯一释放方式时给；
+  // 任一侧有多种（或目标市场候选之间不一致）→ 只说「选择具体产品」，不给相同/不同。
+  const mineRels = t11RelList(pe.rl);
+  const theirRels = [...new Set(others.flatMap(x => t11RelList(x.rl)))];
+  const mineRel = mineRels.map(r => labelOf('release', r, r)).join(' / ');
+  const theirRel = theirRels.map(r => labelOf('release', r, r)).join(' / ');
   const mineName = pe.d || pe.k;
   const theirName = others.slice(0, 3).map(x => x.d || x.k).join('、');
   function badge(a, b){
@@ -6824,13 +6887,25 @@ function t11CompareHTML(pe, mk, hits, T){
     return `<tr><th>${esc(T(key))}</th><td>${esc(a) || '—'}</td><td>${esc(b) || '—'}</td>`
       + `<td>${badge(a, b)}</td></tr>`;
   }
+  function relRow(a, b, locked){
+    let cls = 'miss', txt = T('t11.missing');
+    if(a && b){
+      if(!locked){ cls = 'multi'; txt = T('t11.multi'); }
+      else if(a === b){ cls = 'same'; txt = T('t11.same'); }
+      else { cls = 'diff'; txt = T('t11.diff'); }
+    }
+    return `<tr><th>${esc(T('t11.release'))}</th><td>${esc(a) || '—'}</td>`
+      + `<td>${esc(b) || '—'}</td>`
+      + `<td><span class="cmp-b ${cls}">${esc(txt)}</span></td></tr>`;
+  }
+  const relLocked = (mineRels.length === 1 && theirRels.length === 1);
   return `<div class="cmpbox" id="cmp"><h2>${esc(T('t11.cmp_title'))}</h2>`
     + `<div class="tablewrap"><table class="res cmp"><thead><tr><th></th>`
     + `<th>${esc(T('t11.cmp_you'))}</th>`
     + `<th>${esc(T('t11.cmp_target'))} ${esc(mk)}</th><th></th></tr></thead><tbody>`
     + row('t11.name', mineName, theirName)
     + row('t11.spec', mineSpec, theirSpec)
-    + row('t11.release', mineRel, theirRel)
+    + relRow(mineRel, theirRel, relLocked)
     + `</tbody></table></div><p class="sub cmp-note">${esc(T('t11.cmp_note'))}</p></div>`;
 }
 
@@ -10562,6 +10637,35 @@ def _name_product_table(rows: list, T: dict) -> str:
             f'</tr></thead><tbody>{"".join(body)}</tbody></table></div>')
 
 
+def _release_variant_notice(subs: dict) -> str:
+    """名字页顶部「释放方式」提示（T16/H1）：锁不到具体记录时只描述记录状况，不下结论。
+
+    collision 视图的 level='warning' 只说明「这个名字下 release 字段出现过 >1 个不同值」，
+    其中 'none'（未记录）也算一个值。所以两种情形必须分开说话：
+      · 已知释放方式 ≥2 种 → `name.rel_multi_title`（「多种释放方式」）+ `name.rel_note`
+      · 只有 1 种已知码、其余记录未标注 → `name.rel_unknown_title`（「释放方式未逐条记录」）
+        + `name.rel_note`
+      · 连 1 种已知码都没有 → 不出提示（没有任何释放证据，就不应该说释放方式的事）
+    两种文案都只引导用户去看具体记录：不判断能否互换、不给用药建议、不做剂量换算。
+    """
+    T = I18N["en"]
+    known = _key_releases(subs)
+    unknown = _release_unrecorded(subs)
+    if len(known) >= 2:
+        title = "name.rel_multi_title"
+    elif len(known) == 1 and unknown:
+        title = "name.rel_unknown_title"
+    else:
+        return ""
+    # 「部分记录未标注」只在「已知多种」时补一句：unknown-only 的情形标题已经说过了。
+    why = (f'<span class="rel-why" data-i18n="fam.rel.multi_why">'
+           f'{esc(T["fam.rel.multi_why"])}</span>'
+           if unknown and len(known) >= 2 else "")
+    return (f'<div class="notice"><b data-i18n="{title}">{esc(T[title])}</b>'
+            f'<span data-i18n="name.rel_note"> — {esc(T["name.rel_note"])}</span>'
+            f'{(" " + why) if why else ""}</div>')
+
+
 def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                      families: dict | None = None, displays: dict | None = None) -> int:
     families = families or {}
@@ -10605,8 +10709,11 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
             "severe": '<div class="notice"><b data-i18n="badge.severe">Same name, different drug</b>'
                       '<span data-i18n="name.severe"> — this brand name points to different '
                       'active ingredients. Check the composition.</span></div>',
-            "warning": '<div class="notice"><b data-i18n="badge.warning">Different release</b>'
-                       '<span data-i18n="name.warning"> — not interchangeable.</span></div>',
+            # T16（v0.11.8 H1）：level=warning 原来固定写「Different release — not interchangeable」，
+            # 但 collision 视图按 COUNT(DISTINCT release) 分级，'none'（未记录）也算一个 distinct
+            # 值 —— 现查 925 个 warning 页里 850 个其实是「1 种已知释放方式 + 其余未标注」，
+            # 整条品牌被说成「释放方式不同」是没有证据的结论。改为按记录状况出中性提示。
+            "warning": _release_variant_notice(d.get("subs") or {}),
         }.get(level, "")
 
         cards = []
@@ -10736,23 +10843,67 @@ def _key_subs(data: dict, key: str) -> dict:
     return ((data or {}).get(key) or {}).get("subs") or {}
 
 
+# T16（v0.11.8 H1）：`product.release` 用 'none' 表示「来源没有记录释放方式」。
+# 它不是一个释放方式 —— 既不能当值参与「相同/不同」比较，也不能算作两个不同释放机制之一。
+RELEASE_UNKNOWN = frozenset({"none", ""})
+
+
 def _key_releases(subs: dict) -> set[str]:
-    """该名字下出现过的释放机制集合（去掉 none）。"""
-    return {x for g in subs.values() for x in (g.get("rel") or ()) if x and x != "none"}
+    """该名字下**已知**的释放方式集合（T16：'none' 是「未记录」，不是一种释放方式）。"""
+    return {x for g in subs.values() for x in (g.get("rel") or ())
+            if x and x not in RELEASE_UNKNOWN}
+
+
+def _release_unrecorded(subs: dict) -> bool:
+    """该侧是否存在「释放方式未记录」的产品记录（T16：未知 ≠ 不同，不能当值参与比较）。"""
+    return any(x in RELEASE_UNKNOWN for g in subs.values() for x in (g.get("rel") or ()))
+
+
+def _key_release_locked(subs: dict) -> bool:
+    """该侧能否**锁定**到唯一释放方式：已知码恰好 1 种，且没有未记录的记录。
+
+    T16（v0.11.8 H1）：品牌级对比只有在两侧都能锁定时才允许输出「相同 / 不同」结论；
+    否则一条记录里既有未标注又有缓释时，任何「释放方式不同」都是没有证据的推断。
+    """
+    return len(_key_releases(subs)) == 1 and not _release_unrecorded(subs)
 
 
 def _family_relation(cur_subs: dict, sib_subs: dict) -> str:
     """品牌对照表「关系说明」列：只由成分集合与释放机制推导，不手工标注（§1.2）。
 
-    四种结论各对应一个 i18n key；页面上只说人话（同一成分 / 成分不同 / 部分相同 /
+    结论各对应一个 i18n key；页面上只说人话（同一成分 / 成分不同 / 部分相同 /
     释放不同），不出现 collision 视图那套「碰撞」分级术语（T12 C3）。
+
+    T16（v0.11.8 H1）：`fam.rel.release`（「成分相同，释放机制不同，不可互换」）**只在
+    两侧都能锁定到具体记录时**才用 —— 即两侧各自只有 1 种已知释放方式、且没有未记录的
+    产品；否则改中性提示，引导用户去选具体产品：
+      · 两侧/任一侧记录了 ≥2 种已知释放方式 → `fam.rel.multi`
+      · 只有 1 种已知码、其余记录未标注（无法一对一配上）→ `fam.rel.multi_unknown`
+    现查实例（泰诺林 vs Tylenol Extra Strength）：一侧 4 条 ER + 8 条未标注，另一侧 26 条
+    全未标注 —— 原来比较的是 {} 与 {ER}，于是整块品牌被标成「释放机制不同」。
     """
     a, b = set(cur_subs), set(sib_subs)
     if not a or not b:
         return "fam.rel.none"
-    if a == b:
-        return "fam.rel.release" if _key_releases(cur_subs) != _key_releases(sib_subs) else "fam.rel.same"
-    return "fam.rel.partial" if a & b else "fam.rel.diff"
+    if a != b:
+        return "fam.rel.partial" if a & b else "fam.rel.diff"
+    rel_cur, rel_sib = _key_releases(cur_subs), _key_releases(sib_subs)
+    if rel_cur == rel_sib:
+        # 释放集合相同 ⇒ 不下释放结论（fam.rel.same 只说「活性成分相同」）
+        return "fam.rel.same"
+    if _key_release_locked(cur_subs) and _key_release_locked(sib_subs):
+        return "fam.rel.release"
+    return "fam.rel.multi" if len(rel_cur | rel_sib) > 1 else "fam.rel.multi_unknown"
+
+
+def _family_rel_html(rel_key: str, *sides: dict) -> str:
+    """关系说明单元格：中性提示后补一句「为什么锁不住」（多种已知释放方式 + 部分未标注）。"""
+    T = I18N["en"]
+    html = f'<span data-i18n="{rel_key}">{esc(T[rel_key])}</span>'
+    if rel_key == "fam.rel.multi" and any(_release_unrecorded(s) for s in sides):
+        html += (f' <span class="rel-why" data-i18n="fam.rel.multi_why">'
+                 f'{esc(T["fam.rel.multi_why"])}</span>')
+    return html
 
 
 def _family_ing_html(subs: dict) -> str:
@@ -10811,13 +10962,16 @@ def _family_block(e, families, displays, variants, page_keys=None, data=None) ->
             name_cell += f' <span class="tag" data-i18n="fam.cmp_this">{esc(T["fam.cmp_this"])}</span>'
         markets = "、".join(sorted(((data or {}).get(k) or {}).get("countries") or [])) or "—"
         rel_key = _family_relation(cur_subs, subs)
+        # T16（H1）：中性提示（fam.rel.multi*）后面补一句「部分记录未标注释放方式」，
+        # 让用户知道为什么这一行锁不到具体记录；原来的 fam.rel.release 结论不再无条件出现。
+        rel_html = _family_rel_html(rel_key, cur_subs, subs)
         rows.append(
             f'<tr><td data-label="{esc(T["fam.cmp_market"])}" data-i18n-label="fam.cmp_market">'
             f'{esc(markets)}</td>'
             f'<td data-label="{esc(T["fam.cmp_name"])}" data-i18n-label="fam.cmp_name">{name_cell}</td>'
             f'<td data-label="{esc(T["fam.cmp_ing"])}" data-i18n-label="fam.cmp_ing">{_family_ing_html(subs)}</td>'
             f'<td data-label="{esc(T["fam.cmp_rel"])}" data-i18n-label="fam.cmp_rel">'
-            f'<span data-i18n="{rel_key}">{esc(T[rel_key])}</span></td></tr>')
+            f'{rel_html}</td></tr>')
     return (f'<h2 data-i18n="fam.cmp_title">{esc(T["fam.cmp_title"])}</h2>'
             f'<p class="sub" data-i18n="fam.cmp_intro">{esc(T["fam.cmp_intro"])}</p>'
             f'<div class="tablewrap"><table class="res famcmp"><thead><tr>'
