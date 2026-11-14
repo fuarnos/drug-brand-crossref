@@ -1,0 +1,82 @@
+route,rule,hit_rows,kind,evidence,verdict
+injection,dosage_form~注射,56306,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~片,53123,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~tablet,26300,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~胶囊,17962,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~oral,8659,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,form_base=tablet,7259,form_base,form_base=tablet（我们自己的 ingest 口径：口服固体制剂）,fill
+oral,dosage_form~capsule,7071,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+injection,dosage_form~injection,6142,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~颗粒,5066,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~口服,3442,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+injection,dosage_form~infusion,3436,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~乳膏,2712,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~膠囊,2003,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+ophthalmic,dosage_form~eye drop,1491,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+ophthalmic,dosage_form~眼用,1326,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~cream,1072,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+rectal,dosage_form~栓,958,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~散剂,951,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~溶液剂,936,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,form_base=topical,850,form_base,form_base=topical,fill
+inhalation,dosage_form~inhal,781,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+ophthalmic,dosage_form~滴眼,699,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~软膏,662,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~transdermal,645,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~ointment,635,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~糖浆,604,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+inhalation,dosage_form~吸入,572,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~gel,514,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~洗剂,503,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~外用,487,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~軟膏,475,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~內服,435,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~凝胶,404,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+nasal,dosage_form~nasal,355,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+rectal,dosage_form~suppositor,315,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+inhalation,dosage_form~nebuli,287,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~顆粒,273,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~糖漿,262,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~凝膠,260,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+injection,form_base=injection,255,form_base,form_base=injection,fill
+topical,dosage_form~搽剂,208,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~granule,190,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+rectal,dosage_form~灌肠,173,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~酊剂,165,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+inhalation,dosage_form~喷雾,164,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+nasal,dosage_form~鼻用,153,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~贴剂,140,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+injection,dosage_form~冻干,97,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~散劑,97,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+ophthalmic,dosage_form~eye oint,86,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+injection,dosage_form~粉针,85,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+inhalation,dosage_form~气雾,85,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+rectal,form_base=suppository,83,form_base,form_base=suppository（栓剂默认直肠）,fill
+topical,dosage_form~lotion,77,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+ophthalmic,dosage_form~眼膏,77,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~paste,73,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,name~片,72,name_suffix,商品名尾缀（只在 form_base 无信号时兜底）,fill_low_confidence
+inhalation,form_base=inhalation,67,form_base,form_base=inhalation,fill
+rectal,dosage_form~enema,62,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+ophthalmic,dosage_form~ophthalmic,60,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~滴丸,54,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~丸剂,53,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+nasal,dosage_form~滴鼻,50,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+rectal,dosage_form~rectal,39,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+inhalation,dosage_form~aerosol,27,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,form_base=effervescent,27,form_base,form_base=effervescent（泡腾→口服）,fill
+topical,dosage_form~洗劑,26,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~cutaneous,22,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+inhalation,dosage_form~噴霧,20,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~溶液劑,12,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+nasal,dosage_form~鼻喷,8,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~elixir,5,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+dental,dosage_form~dental,5,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,form_base=capsule,5,form_base,form_base=capsule,fill
+oral,name~胶囊,3,name_suffix,商品名尾缀（只在 form_base 无信号时兜底）,fill_low_confidence
+oral,dosage_form~合剂,3,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,dosage_form~酊劑,3,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+dental,dosage_form~牙,2,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+oral,dosage_form~syrup,1,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
+topical,name~凝膠,1,name_suffix,商品名尾缀（只在 form_base 无信号时兜底）,fill_low_confidence
+oral,dosage_form~丸劑,1,dosage_form,dosage_form 文本含该剂型词（各市场 regulator 原始字段）,fill
