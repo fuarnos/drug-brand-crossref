@@ -1140,6 +1140,33 @@ FR_I18N: dict[str, str] = {
     "name.rel_multi_title": "Plusieurs types de libération",
     "name.rel_unknown_title": "Libération partiellement renseignée",
     "name.rel_note": "choisissez un produit précis pour comparer",
+    # T18/H3 + T21/H6 + T26/I2 + T28/I3（v0.11.9）：与 en 同键集。
+    "combo.col_comp": "Composition et dosage",
+    "combo.comp_more": "Autres {n} compositions",
+    "spec.no_basis": "base par mL / par unité non précisée",
+    "spec.no_basis_note": ("Certains dosages sont enregistrés sans base par mL / par unité. Ils "
+                           "sont affichés tels quels et ne sont pas comparés aux autres marchés."),
+    "spec.cannot_compare": "non comparable",
+    "about.nick_merged": ("Parmi les @@NICKNAMES_TOTAL@@ entrées de surnoms, "
+                          "@@NICKNAMES_MERGED@@ sont les noms chinois enregistrés avant la fusion "
+                          "des formes salines (kind=misnomer) : ils restent recherchables comme "
+                          "alias et ne sont jamais traités comme des noms de marque."),
+    "about.loading": (
+        '<h2>Chargement de la recherche</h2><p>La première recherche charge un fragment d’index '
+        '(médiane ~1 Mo ; ~0,16 Mo gzip) ; l’index complet (core ~42 Mo brut, ~9–10 Mo gzip) se '
+        'complète en arrière-plan dès la saisie, le focus ou un clic sur un exemple. Pendant le '
+        'chargement, les résultats sont marqués <i>partiels</i> ; en cas d’échec, la page continue '
+        'avec ce qu’elle a et propose un bouton <i>Réessayer</i>. La recherche n’envoie rien de '
+        'retour chez nous.</p>'),
+    "mk.expand_all": "Tout déplier",
+    "mk.collapse_all": "Tout replier",
+    "res.col_product": "Nom du produit",
+    "res.col_spec": "Dosage et forme",
+    "res.actions": "Opérations",
+    "res.pick": "Choisir ce produit",
+    "res.reg": "Fiche d’enregistrement",
+    "res.picked": "Sélectionné",
+    "res.more_n": "Voir les {n} autres produits",
     # T10（plan §9）：与 en 同键集。
     "matrix.multi_form": "Formes galéniques multiples",
     "drug.mono_section": "Uniquement ce principe actif",
@@ -1389,7 +1416,8 @@ FR_I18N.update({
     "drug.mah_group": "Fabricant uniquement",
     "drug.compare_note": "Un tableau côte à côte n'est proposé que lorsque cet ingrédient a des records sur de nombreux marchés ; sinon, cette liste représente l’ensemble du tableau.",
     "drug.markets": "marchés",
-    "name.notice": "Même nom – vérifiez l’ingrédient ; les noms ne sont pas interchangeables.",
+    "name.notice": "Un même nom ne signifie pas interchangeables : l’identité est "
+                   "établie champ par champ, telle qu’enregistrée.",
     "name.show_more": "Afficher plus",
     "warn.filter.all": "Tous",
     "cat.all_link": "Toutes les catégories →",
@@ -1804,6 +1832,40 @@ UI_I18N = {
         "name.rel_multi_title": "Multiple release types",
         "name.rel_unknown_title": "Release partly unrecorded",
         "name.rel_note": "pick a specific product to compare",
+        # T18/H3 + T21/H6 + T26/I2 + T28/I3（v0.11.9）：这几条新文案写在 UI_I18N 里，
+        # 好让 zh-Hant 值与其它语言一起进 build.py（data/i18n_zh_hant.json 不属本工位写权限）。
+        "combo.col_comp": "Composition & strength",
+        "combo.comp_more": "Other {n} compositions",
+        "spec.no_basis": "per mL / per unit basis not stated",
+        "spec.no_basis_note": ("Some strengths are recorded without a per mL / per unit basis. "
+                               "They are shown as recorded and are not compared with other "
+                               "markets."),
+        "spec.cannot_compare": "cannot compare",
+        "about.nick_merged": ("Of the @@NICKNAMES_TOTAL@@ nickname entries, "
+                              "@@NICKNAMES_MERGED@@ are the Chinese names recorded before the "
+                              "salt-form merge (kind=misnomer): they stay searchable as aliases "
+                              "so an old pack label still finds the ingredient, and they are "
+                              "never treated as brand names."),
+        # E4（v0.11.10）：首页底部原来那段「分片 / core 42 MB / gzip」加载机制说明搬到
+        # About 的「How search loads」一节（首页只留状态与重试）。
+        "about.loading": (
+            '<h2>How search loads</h2><p>The first search loads one index shard '
+            '(median ~1.0 MB, ~0.16 MB gzip); the full index (core ~42 MB raw, ~9–10 MB gzip) '
+            'fills in the background — typing, focusing the search box or picking a sample '
+            'starts it. While a shard or the full index is still loading, results are marked '
+            '<i>partial</i>; if a load fails the page keeps working with what it already has and '
+            'offers a <i>Retry</i> button. Nothing is sent back to us by searching.</p>'),
+        # K1/T35（v0.11.10）：成分页市场块的「全部展开 / 全部收起」（无 JS 时按钮隐藏）
+        "mk.expand_all": "Expand all",
+        "mk.collapse_all": "Collapse all",
+        # L2–L6（v0.11.10 批次 B）：结果区列序/按钮语义/选中态文案
+        "res.col_product": "Product name",
+        "res.col_spec": "Strength & form",
+        "res.actions": "Actions",
+        "res.pick": "Pick this product",
+        "res.reg": "Registry details",
+        "res.picked": "Selected",
+        "res.more_n": "Show the other {n} products",
         # T10（plan §9）：剂型/规格成对、单复方分段、规格冲突机制（默认关闭）。
         "matrix.multi_form": "Multiple dosage forms",
         "drug.mono_section": "Only this ingredient",
@@ -1947,6 +2009,35 @@ UI_I18N = {
         "name.rel_multi_title": "Varios tipos de liberación",
         "name.rel_unknown_title": "Liberación registrada solo en parte",
         "name.rel_note": "elige un producto concreto para comparar",
+        # T18/H3 + T21/H6 + T26/I2 + T28/I3（v0.11.9）：与 en 同键集。
+        "combo.col_comp": "Composición y concentración",
+        "combo.comp_more": "Otras {n} composiciones",
+        "spec.no_basis": "no consta la base por mL / por unidad",
+        "spec.no_basis_note": ("Algunas concentraciones se registran sin base por mL / por "
+                               "unidad. Se muestran tal como constan y no se comparan con otros "
+                               "mercados."),
+        "spec.cannot_compare": "no comparable",
+        "about.nick_merged": ("De las @@NICKNAMES_TOTAL@@ entradas de apodos, "
+                              "@@NICKNAMES_MERGED@@ son los nombres chinos registrados antes de "
+                              "la fusión de formas salinas (kind=misnomer): siguen siendo "
+                              "buscables como alias para que una etiqueta antigua encuentre el "
+                              "principio activo, y nunca se tratan como nombres de marca."),
+        "about.loading": (
+            '<h2>Cómo se carga la búsqueda</h2><p>La primera búsqueda carga un fragmento del '
+            'índice (mediana ~1,0 MB; ~0,16 MB gzip); el índice completo (core ~42 MB en bruto, '
+            '~9–10 MB gzip) se completa en segundo plano al escribir, enfocar el buscador o '
+            'pulsar un ejemplo. Mientras carga, los resultados se marcan como <i>parciales</i>; '
+            'si falla, la página sigue funcionando con lo que ya tiene y ofrece un botón '
+            '<i>Reintentar</i>. Buscar no envía nada de vuelta a nosotros.</p>'),
+        "mk.expand_all": "Desplegar todo",
+        "mk.collapse_all": "Contraer todo",
+        "res.col_product": "Nombre del producto",
+        "res.col_spec": "Concentración y forma",
+        "res.actions": "Acciones",
+        "res.pick": "Elegir este producto",
+        "res.reg": "Ficha del registro",
+        "res.picked": "Seleccionado",
+        "res.more_n": "Ver los otros {n} productos",
         # T10（plan §9）：与 en 同键集。
         "matrix.multi_form": "Varias formas farmacéuticas",
         "drug.mono_section": "Solo este principio activo",
@@ -2067,6 +2158,31 @@ UI_I18N = {
         "name.rel_multi_title": "多种释放方式",
         "name.rel_unknown_title": "释放方式未逐条记录",
         "name.rel_note": "请选择具体产品后再对照",
+        # T18/H3 + T21/H6 + T26/I2 + T28/I3（v0.11.9）：与 en 同键集。
+        "combo.col_comp": "成分与含量",
+        "combo.comp_more": "另有 {n} 种含量组合",
+        "spec.no_basis": "原记录未明确每 mL／每单位基准",
+        "spec.no_basis_note": ("部分规格的记录没有注明每 mL／每单位基准：这些规格按原文显示，"
+                               "不与其他市场的规格比较。"),
+        "spec.cannot_compare": "无法比较",
+        "about.nick_merged": ("在 @@NICKNAMES_TOTAL@@ 条俗称条目里，@@NICKNAMES_MERGED@@ 条是盐型"
+                              "合并前记录的中文名（kind=misnomer）：保留为可检索别名，让旧包装上的"
+                              "写法还能找到成分，但不当作商品名使用。"),
+        "about.loading": (
+            '<h2>搜索是怎么加载的</h2><p>首次搜索只加载一个检索分片（中位约 1.0 MB，gzip 后约 '
+            '0.16 MB）；完整索引（core 约 42 MB，gzip 后约 9–10 MB）会在后台补全 —— 输入、聚焦'
+            '搜索框或点示例即开始加载。分片或完整索引还在路上时，结果会标注「部分结果」；加载'
+            '失败时页面用已有数据继续工作，并给出「重试」按钮。搜索不会把任何内容回传到我们这里。'
+            '</p>'),
+        "mk.expand_all": "全部展开",
+        "mk.collapse_all": "全部收起",
+        "res.col_product": "产品名称",
+        "res.col_spec": "规格与剂型",
+        "res.actions": "操作",
+        "res.pick": "选择此产品",
+        "res.reg": "查看登记详情",
+        "res.picked": "已选择",
+        "res.more_n": "查看其余 {n} 个产品",
         # T10（plan §9）：与 en 同键集。
         "matrix.multi_form": "多剂型",
         "drug.mono_section": "仅含此成分",
@@ -2271,6 +2387,31 @@ UI_I18N = {
         "name.rel_multi_title": "多種釋放方式",
         "name.rel_unknown_title": "釋放方式未逐條記錄",
         "name.rel_note": "請選擇具體產品後再對照",
+        # T18/H3 + T21/H6 + T26/I2 + T28/I3（v0.11.9）：與 en 同鍵集。
+        "combo.col_comp": "成分與含量",
+        "combo.comp_more": "另有 {n} 種含量組合",
+        "spec.no_basis": "原記錄未明確每 mL／每單位基準",
+        "spec.no_basis_note": ("部分規格的記錄沒有註明每 mL／每單位基準：這些規格按原文顯示，"
+                               "不與其他市場的規格比較。"),
+        "spec.cannot_compare": "無法比較",
+        "about.nick_merged": ("在 @@NICKNAMES_TOTAL@@ 條俗稱條目裡，@@NICKNAMES_MERGED@@ 條是鹽型"
+                              "合併前記錄的中文名（kind=misnomer）：保留為可檢索別名，讓舊包裝上的"
+                              "寫法還能找到成分，但不當作商品名使用。"),
+        "about.loading": (
+            '<h2>搜尋是怎麼載入的</h2><p>首次搜尋只載入一個檢索分片（中位約 1.0 MB，gzip 後約 '
+            '0.16 MB）；完整索引（core 約 42 MB，gzip 後約 9–10 MB）會在背景補全 —— 輸入、聚焦'
+            '搜尋框或點示例即開始載入。分片或完整索引還在路上時，結果會標註「部分結果」；載入'
+            '失敗時頁面用已有資料繼續工作，並給出「重試」按鈕。搜尋不會把任何內容回傳到我們這裡。'
+            '</p>'),
+        "mk.expand_all": "全部展開",
+        "mk.collapse_all": "全部收起",
+        "res.col_product": "產品名稱",
+        "res.col_spec": "規格與劑型",
+        "res.actions": "操作",
+        "res.pick": "選擇此產品",
+        "res.reg": "檢視登記詳情",
+        "res.picked": "已選擇",
+        "res.more_n": "檢視其餘 {n} 個產品",
         # T10（plan §9）：與 en 同鍵集。
         "matrix.multi_form": "多劑型",
         "drug.mono_section": "僅含此成分",
@@ -2317,7 +2458,8 @@ SHELL_I18N = {
         "tab.search": "Search", "tab.categories": "Categories",
         "tab.coverage": "Coverage", "tab.about": "About",
         "drug.markets": "markets",
-        "name.notice": "Same name — check the ingredient; names are not interchangeable.",
+        "name.notice": "Same name does not mean interchangeable — identity is matched field by "
+                       "field, as recorded.",
         "name.show_more": "Show more",
         "warn.filter.all": "All", "cat.all_link": "All categories →", "coverage.sort_products": "By products", "coverage.sort_market": "By market", "glossary.h2": "Terms & codes", "conf.h2": "FDA tall-man pairs", "atc.more_notes": "Notes & licences", "res.density": "Compact view",
     },
@@ -2327,7 +2469,8 @@ SHELL_I18N = {
         "tab.search": "Buscar", "tab.categories": "Categorías",
         "tab.coverage": "Cobertura", "tab.about": "Acerca de",
         "drug.markets": "mercados",
-        "name.notice": "Mismo nombre — comprueba el principio activo; no son intercambiables.",
+        "name.notice": "Mismo nombre no significa intercambiables: solo se empareja la "
+                       "identidad campo por campo, tal como consta.",
         "name.show_more": "Ver más",
         "warn.filter.all": "Todas", "cat.all_link": "Todas las categorías →", "coverage.sort_products": "Por productos", "coverage.sort_market": "Por mercado", "glossary.h2": "Términos y códigos", "conf.h2": "Pares tall-man de la FDA", "atc.more_notes": "Notas y licencias", "res.density": "Vista compacta",
     },
@@ -2337,7 +2480,7 @@ SHELL_I18N = {
         "tab.search": "搜索", "tab.categories": "类别",
         "tab.coverage": "覆盖", "tab.about": "关于",
         "drug.markets": "个市场",
-        "name.notice": "同名不代表同一成分——请核对成分，不可互换。",
+        "name.notice": "同名不代表可互换——只按登记字段做身份对应。",
         "name.show_more": "显示更多",
         "warn.filter.all": "全部", "cat.all_link": "全部类别 →", "coverage.sort_products": "按产品数", "coverage.sort_market": "按市场", "glossary.h2": "术语与代码", "conf.h2": "FDA tall-man 易混淆药对", "atc.more_notes": "说明与许可", "res.density": "紧凑视图",
     },
@@ -2347,7 +2490,7 @@ SHELL_I18N = {
         "tab.search": "搜尋", "tab.categories": "類別",
         "tab.coverage": "覆蓋", "tab.about": "關於",
         "drug.markets": "個市場",
-        "name.notice": "同名不代表同一成分——請核對成分，不可互換。",
+        "name.notice": "同名不代表可互換——只按登記欄位做身分對應。",
         "name.show_more": "顯示更多",
         "warn.filter.all": "全部", "cat.all_link": "全部類別 →", "coverage.sort_products": "按產品數", "coverage.sort_market": "按市場", "glossary.h2": "術語與代碼", "conf.h2": "FDA tall-man 易混淆藥對", "atc.more_notes": "說明與許可", "res.density": "緊湊視圖",
     },
@@ -3164,6 +3307,10 @@ def _i18n_placeholders(stats: dict, atc_cov: dict, coverage, source_cover) -> di
         "KEYS": f"{stats['keys']:,}",
         "ALIASES": f"{stats['aliases']:,}",
         "NICKNAMES": f"{stats['nickname']:,}",
+        # T28/I3（v0.11.9）：「@@NICKNAMES@@ 条人工俗称」之外，再说清总数与合并前中文名
+        # （现查 57 人工 + 339 合并前 = 396，全部以库现查为准）。
+        "NICKNAMES_TOTAL": f"{stats.get('nickname_total', stats['nickname']):,}",
+        "NICKNAMES_MERGED": f"{stats.get('nickname_merged', 0):,}",
         "DRUGTERMS": f"{stats['drug_term']:,}",
         "CONFUSABLE": str(stats["confusable"]),
         "CONF_PAIRS": str(stats["confusable"]),
@@ -3991,7 +4138,20 @@ CSS = """
    改成 -48px 会让 768 档与 v0.10.2 不逐像素一致，故不改）；<768 满宽 + 14px 内边距不变。 */
 --band-w:100%;--wrap-pad:20px}
 .wrap{width:var(--band-w);max-width:1680px;margin-inline:auto;padding:0 var(--wrap-pad)}
-@media (min-width:1280px){:root{--band-w:66.67vw}}
+/* E6/T34（v0.11.10）：桌面（≥1024px）内容带 = 视口 2/3 且水平居中；<1024px 保持整宽。
+   硬门槛（用户 2026-11-15「这是硬条件」）：band_ratio 0.652–0.682（约 2/3），
+   由 deploy/first_screen_check.py 在 1440/1920/2560 三档量；窄栏后宽表格走 .tablewrap 横滑。 */
+@media (min-width:1024px){:root{--band-w:min(66.67vw,1680px)}}
+@media (max-width:1023px){:root{--band-w:100%}}
+/* E6 配套（v0.11.10）：1024–1279 的窄栏放不下「logo + 5 项导航 + 语言」，头部改成可换行、
+   隐藏 logo 中文副标题，并把下拉面板限制在视口内 —— 否则窄栏下会出现横向滚动（溢出硬门槛）。 */
+@media (min-width:1024px) and (max-width:1279px){
+  header.hdr-shell .wrap{height:auto;flex-wrap:wrap;row-gap:2px;padding-top:6px;padding-bottom:6px}
+  header.hdr-shell .logo-zh{display:none}
+  header.hdr-shell .sn{flex-wrap:wrap;gap:0}
+  header.hdr-shell .sn-right{flex-wrap:wrap}
+}
+.sn-panel{max-width:calc(100vw - 24px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);min-height:100vh;
 display:flex;flex-direction:column;
@@ -4004,8 +4164,8 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 [hidden]{display:none!important}
 header{border-bottom:1px solid var(--line);background:var(--bg)}
 header .wrap{display:flex;align-items:center;gap:16px;height:60px;flex-wrap:nowrap}
-.logo{font-weight:700;font-size:16px;color:var(--fg);white-space:nowrap}
-.logo-zh{font-weight:400;font-size:14px;color:var(--muted);margin-left:8px;white-space:nowrap}
+.logo{font-weight:700;font-size:16px;color:var(--fg);line-height:1.25;white-space:normal}
+.logo-zh{font-weight:400;font-size:14px;color:var(--muted);margin-left:8px;white-space:normal}
 /* v0.6.5：logo 中文副标题只在简体中文界面显示（en/es/zh-Hant 隐藏，移动端仍隐藏） */
 html:not([lang="zh"]) .logo-zh{display:none}
 .langs{margin-left:6px;font-size:14px;display:flex;align-items:center;gap:6px;
@@ -4067,11 +4227,45 @@ border-radius:12px;background:#fff}
    按钮绝对定位于输入框右侧；提示只在输入框为空时显示（:placeholder-shown），
    有内容时自动隐藏，不会压住用户输入。输入框右侧留 56px 内边距给按钮。 */
 .searchbar #q{padding-right:56px}
-.sb-go{position:absolute;top:50%;right:6px;transform:translateY(-50%);width:44px;height:44px;
- padding:0;display:inline-flex;align-items:center;justify-content:center;
+/* E2（v0.11.10）：提交按钮显示「搜索 / Search / Buscar / Rechercher」文字（用户评审：
+   只有一个箭头看不出是提交）。手机端空间紧张 → 只留箭头；桌面 ≥768px 出文字。 */
+.sb-go{position:absolute;top:50%;right:6px;transform:translateY(-50%);min-width:44px;height:44px;
+ padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
  border:1px solid var(--accent);border-radius:10px;background:var(--accent);color:#fff;
- font-size:18px;line-height:1;cursor:pointer}
-.sb-go:hover{filter:brightness(1.08)}
+ font-size:15px;font-weight:600;line-height:1;cursor:pointer;white-space:nowrap}
+.sb-go .sbg-t{display:none}
+.sb-go .sbg-ico{font-size:17px}
+@media (min-width:768px){.sb-go .sbg-t{display:inline}}
+.searchbar #q{padding-right:56px}
+@media (min-width:768px){.searchbar #q{padding-right:150px}}
+/* K1/T35（v0.11.10）：成分页每个市场块 = 原生 <details>（summary 保留原 h2 的全部信息）。
+   无 JS 可用；打印时全部展开（另有 beforeprint 脚本兜底）。 */
+details.mkblock>summary.mkhead{display:block;position:relative;cursor:pointer;
+ font-size:var(--fs-md,#18px);font-weight:700;margin:0 0 6px;padding-right:22px;list-style:none}
+details.mkblock>summary.mkhead .mkhead-t{margin:0;font-size:inherit;font-weight:inherit;display:inline}
+details.mkblock>summary.mkhead::-webkit-details-marker{display:none}
+details.mkblock>summary.mkhead::after{content:"▾";position:absolute;right:4px;top:2px;
+ color:var(--muted);font-size:14px;font-weight:400}
+details.mkblock[open]>summary.mkhead::after{content:"▴"}
+details.mkblock>summary.mkhead:hover{color:var(--accent)}
+.mkctl{display:none;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+html.js .mkctl{display:flex}
+.mkctl button{min-height:36px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;
+ background:#fff;color:var(--fg);font-size:14px;cursor:pointer}
+.mkctl button:hover{border-color:var(--accent);color:var(--accent)}
+@media print{
+  details.mkblock>summary.mkhead::after{content:""}
+  .mkctl{display:none}
+}
+/* E3（v0.11.10）：首页可点击示例行（商品名 / 中文名 / 包装文字） */
+.tryrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 2px;font-size:15px}
+.tryrow .try-lbl{color:var(--muted);font-size:14px}
+.tryrow button{min-height:36px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;
+ background:#fff;color:var(--fg);font-size:14px;cursor:pointer}
+.tryrow button:hover{border-color:var(--accent);color:var(--accent)}
+/* E5（v0.11.10）：最近更新条目里的一句变化 */
+.homeupd .updlist .upd-liner{color:var(--muted);font-size:13px;max-width:280px;overflow:hidden;
+ text-overflow:ellipsis;white-space:nowrap}
 .sb-hint{position:absolute;top:50%;right:58px;transform:translateY(-50%);font-size:13px;
  line-height:1;color:var(--muted);pointer-events:none;white-space:nowrap}
 #q:not(:placeholder-shown) ~ .sb-hint{display:none}
@@ -4275,6 +4469,44 @@ table.res tbody tr:hover{background:#fcfcfa}
 .c-ing{font-weight:600;width:26%}
 .c-dose{width:14%;white-space:nowrap;font-variant-numeric:tabular-nums}
 .c-brand{width:38%}
+/* L2–L5（v0.11.10 批次 B）：结果表的五列（产品名称 / 成分 / 规格与剂型 / 市场 / 操作），
+   药名最大字号最深字重；操作列是紧凑文字按钮；选中行浅绿底 + 左侧标记。
+   `table-layout:fixed` + 列宽百分比：窄栏（桌面 2/3）下单元格用省略号收，绝不让表格把页面撑宽。 */
+table.res.rows{table-layout:fixed;width:100%;font-size:16px}
+#reswrap{overflow-x:auto}
+table.res.rows .c-brand{width:26%;font-size:17px;font-weight:700;color:var(--fg);line-height:1.25;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table.res.rows .c-brand a{color:var(--fg);text-decoration:none}
+table.res.rows .c-brand a:hover{text-decoration:underline}
+table.res.rows .c-ing{width:24%;font-weight:400;color:var(--muted);font-size:16px;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table.res.rows .c-dose{width:24%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px}
+table.res.rows .c-market{width:12%;white-space:nowrap;overflow:hidden}
+table.res.rows td.c-det{width:14%;white-space:nowrap;text-align:right}
+table.res.rows td{padding-top:6px;padding-bottom:6px}
+table.res.rows tr.br.picked{background:var(--accent-weak);box-shadow:inset 3px 0 0 var(--accent)}
+table.res.rows tr.br.picked:hover{background:var(--accent-weak)}
+.picked-tag{background:var(--accent);color:#fff;border-color:var(--accent);font-size:12px}
+table.res.rows .pickbtn,table.res.rows .detbtn{display:inline-block;min-height:26px;
+ padding:1px 7px;margin:0 4px 0 0;border:1px solid var(--line);border-radius:8px;
+ background:transparent;color:var(--accent);font-size:13px;line-height:1.4;cursor:pointer;
+ vertical-align:middle}
+table.res.rows .detbtn{color:var(--fg)}
+table.res.rows .pickbtn:hover,table.res.rows .detbtn:hover{border-color:var(--accent)}
+/* L6（v0.11.10）：搜索后压缩标题引导 —— 抬头与副标题让位给结果；三列小标与「三步骤」条
+   在 .has-q 状态下已经隐藏（见上），这里再收一次 H1 与候选集行的字号/间距。 */
+html.has-q h1#h1{font-size:22px;margin:0 0 2px;line-height:1.2}
+html.has-q .sub[data-i18n="home.sub"]{display:none}
+html.has-q .candidate-line{display:none}   /* 候选集声明在 pickbar / 首行里已表达，不占首屏 */
+html.has-q #u1guide,html.has-q .flow3,html.has-q #loadhint{display:none}
+html.has-q .searchwrap{margin-top:2px}
+/* 身份卡在结果页收紧成「查询→成分 + 更多记录」；再往下压会与首条结果重复，
+   所以结果页默认不展开规格/警示/动作（L6：搜索后压缩标题引导）。 */
+html.has-q .idcard{padding:8px 10px}
+html.has-q .idcard .idtitle{margin:0 0 2px;font-size:16px}
+html.has-q .idcard .idrow{margin:0 0 2px}
+html.has-q .idcard .idrow .idq{font-size:18px}
+html.has-q .idmore>summary{min-height:26px}
 .c-mah{width:22%;color:var(--muted);font-size:14px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px;
 padding:18px 0 40px;background:#fff}
@@ -4370,16 +4602,12 @@ a.ctx:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
 .idcard .idtitle b{color:var(--fg);font-size:var(--fs-md);font-weight:700}
 .idcard .idtitle .idmake{color:var(--muted);font-weight:400}
 .idmore{margin:0}
-.idmore>summary{display:none}
-.idmore>.idbody{margin:0}
-@media (max-width:600px){
- .idmore>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;
-  min-height:44px;cursor:pointer;color:var(--accent);font-size:var(--fs-sm);list-style:none}
- .idmore>summary::-webkit-details-marker{display:none}
- .idmore>summary::after{content:"＋";font-size:16px;line-height:1}
- .idmore[open]>summary::after{content:"－"}
- .idmore[open]>.idbody{padding-top:8px;border-top:1px solid var(--line-soft);margin-top:4px}
-}
+.idmore>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;
+ min-height:32px;cursor:pointer;color:var(--accent);font-size:var(--fs-sm);list-style:none}
+.idmore>summary::-webkit-details-marker{display:none}
+.idmore>summary::after{content:"＋";font-size:16px;line-height:1}
+.idmore[open]>summary::after{content:"－"}
+.idmore[open]>.idbody{padding-top:8px;border-top:1px solid var(--line-soft);margin-top:4px}
 .res-more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
  margin:10px 0 0}
 .res-more .sub{margin:0;font-size:14px}
@@ -4665,6 +4893,13 @@ table.res.cmp th:first-child{width:8em;color:var(--muted);font-weight:600}
 .cmp-b.multi{color:var(--muted);border-style:dashed}
 /* 品牌对照表「关系说明」列：中性提示后的补充说明（为什么锁不住） */
 .rel-why{display:inline-block;color:var(--muted);font-size:13px}
+/* T18/H3（v0.11.9）：复方页每条记录的「成分 + 含量」列表（不用斜杠串当唯一剂量信息） */
+table.res .cspec{list-style:none;margin:0;padding:0}
+table.res .cspec li{padding:1px 0;font-size:15px}
+table.res .cspec .cform{color:var(--muted);font-size:13px}
+table.res .cspec .cn{color:var(--muted);font-size:13px}
+table.res .cspec .ccomp{color:var(--fg)}
+table.res .cmore{margin:2px 0 0}
 .cmp-note{margin:6px 0 0;font-size:13px}
 /* T11：桌面端结果行必须保持 ~42px（首屏条目靠它）——
    ① 「数据截止」小字在 ≥768 只留在身份卡里，不进窄的市场列（否则行高 42 → 138）；
@@ -5054,7 +5289,10 @@ header .sn-right{flex:0 0 auto;min-width:max-content}
 header .sn{flex:0 0 auto}
 @media (min-width:1100px){
   header.hdr-shell .wrap{gap:8px}
-  header.hdr-shell .logo{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  /* E1（v0.11.10，用户截图「品牌中文名称被挤成省略号」）：原来 ≥1100px 时 logo 用
+     overflow:hidden + text-overflow:ellipsis 压缩，中文副标题会变成「药品…」；
+     现在允许品牌名换行（两行仍在 64px 行高内），不再截断。 */
+  header.hdr-shell .logo{min-width:0;overflow:visible;text-overflow:clip;white-space:normal}
   header.hdr-shell .sn{gap:0}
   header.hdr-shell .sn>a, header.hdr-shell .sn>details>summary{padding:0 8px}
   header.hdr-shell .sn-right summary{padding:0 8px}
@@ -5204,6 +5442,9 @@ BOOT_JS_FILE = "assets/boot.js"
 
 
 APP_JS = r"""
+// K1/T35（v0.11.10）：标记「有 JS」，让只给 JS 用的控件（成分页「全部展开/收起」）
+// 在无 JS 时不出现（每块仍是原生 <details>，点开可用）。
+document.documentElement.classList.add('js');
 // v0.11.2 P0-2：明细行字段表由构建期从 etl/build_detail_buckets.py 的 ROW_FIELDS 注入，
 // 明细面板的列下标一律从它取名（曾把品牌列写成 r[3]=pack，60.8% 明细行显示成包装）。
 const DETAIL_ROW_FIELDS = __DETAIL_ROW_FIELDS__;
@@ -5839,10 +6080,11 @@ function marketTags(list, max){
 }
 function flatRowHTML(e, T){
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [];
-  // T11（v0.11.7）B1 第 2 步：行内「这条」——点击后把这行记成「你手里这条」，候选集不变。
-  // 用**一个字符**的按钮（title/aria 带完整文案）：`.c-det` 列很窄，放整句会把行高
-  // 从 42 撑到 138px，1440 首屏条目会从 4.5 掉到 1.5（首屏守卫的硬指标）。
-  const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">◎</button> `;
+  // L4（v0.11.10 批次 B）：已被选中（T11.pick）的那一行给浅绿底 + 左侧标记 + 「已选择」，
+  // 并隐藏「选择此产品」按钮（顶部 pickbar 里有紧凑摘要 + 重新选择）。
+  const isPicked = !!(window.T11 && T11.pick && T11.pick === e.k);
+  // L3：动作改成文字按钮：「选择此产品」= 记成你手里这条；「详情」= 打开登记详情。
+  const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">${esc(T('res.pick'))}</button>`;
   // T16（v0.11.8 H1）：同 brandRowHTML —— 只有 ≥2 种已知释放码才贴「释放机制不同」徽标。
   const nRelFlat = String(e.rl || '').split(',').filter(Boolean).length;
   const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
@@ -5874,19 +6116,20 @@ function flatRowHTML(e, T){
   let det;
   if(e.n){
     det = `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}"`
-      + ` aria-expanded="false">${esc(T('res.details'))}</button>`;
+      + ` aria-expanded="false">${esc(T('res.reg'))}</button>`;
   } else if(e.u){
-    det = `<a href="${BASE}name/${esc(e.u)}">${esc(T('res.details'))}</a>`;
+    det = `<a class="linkbtn" href="${BASE}name/${esc(e.u)}">${esc(T('res.reg'))}</a>`;
   } else if(e.v){
-    det = `<a href="${BASE}drug/${encodeURIComponent(e.v)}.html">${esc(T('res.details'))}</a>`;
+    det = `<a class="linkbtn" href="${BASE}drug/${encodeURIComponent(e.v)}.html">${esc(T('res.reg'))}</a>`;
   } else {
     det = '—';
   }
-  return `<tr class="br" data-k="${esc(e.k)}">
-    <td class="c-dose" data-label="${esc(T('col.dose'))}">${doseCell}</td>
-    <td class="c-brand" data-label="${esc(T('col.brand'))}">${brandHTML(e, false)}${badge}${combo}${exp}</td>
+  return `<tr class="br${isPicked ? ' picked' : ''}" data-k="${esc(e.k)}">
+    <td class="c-brand" data-label="${esc(T('res.col_product'))}">${brandHTML(e, false)}${badge}${combo}${exp}${isPicked ? ' <span class="tag picked-tag">' + esc(T('res.picked')) + '</span>' : ''}</td>
+    <td class="c-ing" data-label="${esc(T('col.ing'))}">${esc(ingredientLabel(e)) || '—'}</td>
+    <td class="c-dose" data-label="${esc(T('res.col_spec'))}">${doseCell}</td>
     <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, 4) || '—'}</td>
-    <td class="c-det">${pickBtn}${det}</td></tr>`;
+    <td class="c-det">${isPicked ? '' : pickBtn}${det}</td></tr>`;
 }
 function flatTableHTML(T){
   const disp = (LAST_DISPLAY && LAST_DISPLAY.length) ? LAST_DISPLAY : [];
@@ -5896,12 +6139,14 @@ function flatTableHTML(T){
   const body = disp.slice(0, shown).map(x => flatRowHTML(x[2], T)).join('');
   const count = T('res.showing').replace('{n}', String(shown)).replace('{total}', String(total));
   const more = shown < total
-    ? `<button type="button" data-loadmore="1">${esc(T('res.load_more'))}`
-      + ` (+${Math.min(RES_PAGE, total - shown)})</button>`
+    ? `<button type="button" class="linkbtn" data-loadmore="1">`
+      + `${esc(T('res.more_n').replace('{n}', String(Math.min(RES_PAGE, total - shown))))}</button>`
     : '';
+  // L2（v0.11.10 批次 B）：列序按用户口径 = 产品名称 / 成分 / 规格与剂型 / 市场 / 操作。
   return `<table class="res rows"><thead><tr>
-      <th>${esc(T('col.dose'))}</th><th>${esc(T('col.brand'))}</th>
-      <th>${esc(T('res.col_market'))}</th><th>${esc(T('res.details'))}</th>
+      <th>${esc(T('res.col_product'))}</th><th>${esc(T('col.ing'))}</th>
+      <th>${esc(T('res.col_spec'))}</th><th>${esc(T('res.col_market'))}</th>
+      <th>${esc(T('res.actions'))}</th>
     </tr></thead><tbody>${body}</tbody></table>`
     + `<div class="res-more"><span class="sub">${esc(count)}</span>${more}</div>`;
 }
@@ -6042,14 +6287,14 @@ function identityCardHTML(q, display, nicks, confs, T){
   const candTitle = esc(T('res.identity_title').replace('{n}', String(display.length)))
     + ` · <b>${esc(candName)}</b>`
     + (maker ? ` <span class="idmake">· ${esc(maker)}</span>` : '');
-  // v0.11.2（条目 10 / task-3）：390 宽下卡片折成紧凑头——标题 + 查询→成分一行常显，
-  // 规格/市场/警示/动作收进可展开区；桌面端默认展开且不显示摘要行。
-  const compactCard = compactUI();
+  // L6（v0.11.10 批次 B）：搜索后压缩标题引导 —— 身份卡在所有宽度下都折成「标题 + 查询→成分」
+  // 一行常显，规格/市场/警示/动作收进可展开区（原来只有 ≤600px 才折，桌面默认展开占 ~290px，
+  // 把首屏结果挤到只剩 2 行）。用户点「更多记录」再展开。
   return `<section class="idcard" aria-label="${esc(T('res.identity.ingredient'))}">
     <p class="idtitle">${candTitle}</p>
     <div class="idrow"><span class="idq">${esc(q)}</span>
       <span class="idarrow">→</span>${ingLine}${badge}</div>
-    <details class="idmore"${compactCard ? '' : ' open'}>
+    <details class="idmore">
       <summary>${esc(T('res.more_detail'))}</summary>
       <div class="idbody">
         <p class="idfields">${fields.join('')}</p>
@@ -7341,7 +7586,9 @@ const LEGACY = new URLSearchParams(location.search).get('legacy') === '1';
 // i18n.js 先于本脚本执行（<head>），window.T 可用；保留降级到原键名。
 function Tr(k){ return (window.T || function(x){ return x; })(k); }
 const hintEl = document.getElementById('loadhint');
-const HINT_IDLE = Tr('home.hint_idle');
+// E4（v0.11.10）：加载机制说明已移到 /about.html；首页只在「正在加载 / 失败 + 重试」时
+// 才显示 #loadhint（静态文案已删，idle 态留空 → setHint('') 会把元素隐藏）。
+const HINT_IDLE = '';
 const HINT_LOADING = Tr('home.hint_loading');
 function setHint(html, show){
   if(!hintEl) return;
@@ -8539,6 +8786,45 @@ SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA",
 SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
 
 
+def _mkblock_js() -> str:
+    """K1/T35（v0.11.10）：成分页市场块（原生 `<details>`）的渐进增强脚本。
+
+    放进 boot.js（长尾页只加载这一份，可跨页缓存），不依赖 app.js：
+      ① 首次进入：`?mk=XX` / `#mk-XX` 有值就只展开该市场，否则展开第一个市场
+         （语言偏好市场由 i18n.js 的 initListView 置顶，这里用「当前第一个」）；
+      ② 「全部展开 / 全部收起」按钮（无 JS 时按钮由 CSS 隐藏，每块仍可点开）；
+      ③ 点站内 `#mk-XX` 链接、hashchange → 展开对应块；打印前全部展开。
+    只在有 `.mkblock` 的页面生效（其它页零开销）。
+    """
+    return (
+        "(function(){"
+        # 「全部展开/收起」只在有 JS 时显示（`html.js .mkctl{display:flex}`）；长尾页不加载
+        # app.js，所以这个标记也必须在 boot.js 里打。
+        "document.documentElement.classList.add('js');"
+        "function all(){return Array.prototype.slice.call(document.querySelectorAll('.mkblock'));}"
+        "function openOnly(mk){all().forEach(function(b){"
+        "b.open=(!mk)||b.getAttribute('data-mk')===mk;});}"
+        "var bs=all(); if(!bs.length) return;"
+        "if(!window.__mkInited){"
+        "var mk='';try{var p=new URLSearchParams(location.search).get('mk')||'';"
+        "mk=p||String(location.hash||'').replace('#mk-','');}catch(e){}"
+        "if(mk&&mk!=='#'){openOnly(mk);}else{bs.forEach(function(b,i){b.open=(i===0);});}"
+        "window.__mkInited=1;}"
+        "document.querySelectorAll('[data-mk-all]').forEach(function(btn){"
+        "btn.addEventListener('click',function(ev){ev.preventDefault();"
+        "var o=btn.getAttribute('data-mk-all')==='open';"
+        "all().forEach(function(b){b.open=o;});});});"
+        "document.addEventListener('click',function(ev){"
+        "var a=(ev.target&&ev.target.closest)?ev.target.closest('a[href^=\"#mk-\"]'):null;"
+        "if(a) openOnly(a.getAttribute('href').replace('#mk-',''));});"
+        "window.addEventListener('hashchange',function(){"
+        "var mk=String(location.hash||'').replace('#mk-','');if(mk) openOnly(mk);});"
+        "window.addEventListener('beforeprint',function(){"
+        "all().forEach(function(b){b.open=true;});});"
+        "})();"
+    )
+
+
 def _shell_cat_links(prefix: str, limit: int = 99) -> str:
     """类别面板：消费者大类（沿用 .lang-block 四语块，无 JS 也有英文）。"""
     return "".join(
@@ -8599,12 +8885,11 @@ def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
     """右上角：类别入口 + 语言下拉；移动端收进「⋯」菜单（v0.10.0）。"""
     labels = {c: l for c, l, _ in LANGS}
     label = labels.get(lang, "EN")
-    quick = _shell_cat_links(prefix, limit=8)
+    # E1（v0.11.10）：右上角重复的「Categories」入口已删除 —— 桌面导航里已有一份
+    # （_shell_nav_html）；移动端仍可从「⋯」菜单进「全部类别」。
     all_link = (f'<div class="sn-foot"><a href="{prefix}atc.html" '
                 f'data-i18n="cat.all_link">All categories →</a></div>')
     return f"""<span class="sn-right">
-    <details class="qcat"><summary data-i18n="nav.categories">Categories</summary>
-      <div class="sn-panel sn-panel-right"><div class="sn-cats compact">{quick}</div>{all_link}</div></details>
     <details class="langdd"><summary><span aria-hidden="true">🌐</span> <span class="lname">{label}</span> ▾</summary>
       <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div></div></details>
     <details class="mmenu"><summary aria-label="More" data-i18n-aria="nav.more">⋯</summary>
@@ -8624,7 +8909,7 @@ def _shell_search_html(prefix: str) -> str:
     <input id="hq" name="q" type="search" autocomplete="off" enterkeyhint="search"
       placeholder="Search a name" data-ph="nav.search_compact"
       aria-label="Search a name" data-i18n-aria="nav.search_compact">
-    <button type="submit" data-i18n-aria="home.submit" aria-label="Search">→</button>
+    <button type="submit" data-i18n-aria="home.submit" aria-label="Search"><span class="sbg-t" data-i18n="home.submit">Search</span></button>
   </form></div></div>"""
 
 
@@ -8733,7 +9018,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header class="hdr-shell"><div class="wrap">
-  <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
+  <a class="logo" href="{prefix}index.html" title="Medicine Brand Cross-Reference — 药品商品名跨国定位">Medicine Brand Cross-Reference
     <span class="logo-zh">药品商品名跨国定位</span></a>
   {_shell_nav_html(prefix, _nav_active(canonical_rel))}{_shell_right(prefix, sw, lang)}
 </div></header>
@@ -8743,7 +9028,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header><div class="wrap">
-  <a class="logo" href="{prefix}index.html">Medicine Brand Cross-Reference
+  <a class="logo" href="{prefix}index.html" title="Medicine Brand Cross-Reference — 药品商品名跨国定位">Medicine Brand Cross-Reference
     <span class="logo-zh">药品商品名跨国定位</span></a>
   <nav><a href="{prefix}index.html" data-i18n="nav.search">Search</a>
     <a href="{prefix}confused.html" data-i18n="nav.confused">Confused names</a>
@@ -9965,7 +10250,9 @@ def _strip_form_from_label(label: str, form: str) -> str:
     return text
 
 
-def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
+def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
+                     only_sids: set[str] | None = None) -> int:
+    """成分页。`only_sids` 仅供测试/证据脚本渲染指定成分（默认 None = 全站，行为不变）。"""
     T = I18N["en"]
     # task-141c：同物异名表（也传进来的话复用主流程那一份，避免重复读 CSV）
     if also is None:
@@ -10012,6 +10299,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             bucket.append(item)
 
     subs = db.execute("SELECT substance_id, inn_en, inn_zh, atc FROM substance").fetchall()
+    if only_sids:
+        subs = [s for s in subs if s[0] in only_sids]
     # T10（plan §2.1/§5.2）：一次预扫「每个产品的完整成分集合 + 各自含量」。
     # 用途：① 分组键的 others_sig（除本页成分以外的成分签名）；② 复方行显示「全部成分 + 各自含量」。
     # 650,358 行，构建期内只扫这一次，不逐行查库。
@@ -10090,6 +10379,9 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
         spec_kind: dict[tuple, str] = {}
         # T10/§6：名称-规格冲突（默认空字典 → 一条徽标都不渲染）
         spec_conflict: dict[tuple, str] = {}
+        # T21/H6（v0.11.9）：缺计量基准的规格（注射/液体剂型 + 有强度但 per_volume 为空）
+        # → 记录数；页面显示「原记录未明确每 mL／每单位基准」，且不参与跨市场规格比较。
+        spec_nobasis: dict[tuple, int] = {}
         # task-16：清单视图要「每国记录数」与「每格状态」，一次遍历顺手收集
         rec_by_country: dict[str, int] = {}
         _pids_seen: dict[str, set[str]] = {}
@@ -10116,6 +10408,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             spec = (st.strip(), fb or df or "", rel, others_sig)
             spec_comps.setdefault(spec, list(comps.get(pid) or [(sid, st)]))
             spec_kind.setdefault(spec, _spec_kind(pu))
+            # T21/H6：注射/液体剂型有强度、但原记录没有 per_volume（每 mL／每单位）基准
+            # → 记一笔「基准未注明」；这类规格只在基准充分时参与跨市场比较。
+            if st.strip() and not pv and _form_chip_key(fb or df or "") in ("injection", "liquid"):
+                spec_nobasis[spec] = spec_nobasis.get(spec, 0) + 1
             # T10/§6：名称-规格冲突只在开关打开时才有内容（默认 SPEC_CONFLICTS 为空）
             if SPEC_CONFLICTS.get(pid):
                 spec_conflict.setdefault(spec, SPEC_CONFLICTS[pid])
@@ -10299,6 +10595,13 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
                 st_html += (' <span class="tag warn" data-i18n="matrix.spec_check">'
                             'check strength</span>')
             st_html += _spec_conflict_badge(spec, spec_conflict, T)
+            # T21/H6（v0.11.9）：并排对照表里，缺计量基准的规格**不当作可比较**：
+            # 徽标说明「原记录未明确每 mL／每单位基准」，再补「无法比较」。
+            if spec_nobasis.get(spec):
+                st_html += (' <span class="tag warn" data-i18n="spec.no_basis">'
+                            + esc(T.get("spec.no_basis", "per mL / per unit basis not stated"))
+                            + '</span> <span class="tag" data-i18n="spec.cannot_compare">'
+                            + esc(T.get("spec.cannot_compare", "cannot compare")) + '</span>')
             if others_sig:
                 # T10（plan §5.2）：矩阵视图也要能看出这是复方，并列出其它成分与各自含量
                 st_html += (' <span class="tag" data-i18n="badge.combo">'
@@ -10427,7 +10730,15 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
             spec_rows, countries, rec_by_country, len(spec_rows),
             _brand_bit, status_cell, T, und_meta,
             spec_comps=spec_comps, sub_label=sub_label, spec_kind=spec_kind,
-            spec_conflict=spec_conflict, block_meta=block_meta)
+            spec_conflict=spec_conflict, spec_nobasis=spec_nobasis, block_meta=block_meta)
+        # T21/H6（v0.11.9）：本页有「没注明每 mL／每单位基准」的规格时，页面级说一句
+        # ——这些规格按原文显示、不参与跨市场比较（不把「10 mg」当作可比等价规格）。
+        nobasis_note = ""
+        if spec_nobasis:
+            nobasis_note = ('<p class="sub spec-nobasis-note" data-i18n="spec.no_basis_note">'
+                            + esc(T.get("spec.no_basis_note", "Some strengths are recorded "
+                                     "without a per mL / per unit basis."))
+                            + '</p>')
         table_block = ""
         compare_link = ""
         if tbody and multi_ratio >= 0.40:
@@ -10514,7 +10825,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None) -> int:
   <span class="ds-meta">{n_markets:,} <span data-i18n="drug.markets">markets</span> · {n_records:,} <span data-i18n="drug.records">records</span></span>
   <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>{lf_html}
 </div>
-<div id="list" class="listview">{list_html}</div>{compare_link}{table_block}
+<div id="list" class="listview">{list_html}</div>{nobasis_note}{compare_link}{table_block}
 {syn_line}{nick_line}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
@@ -10764,9 +11075,11 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                         + esc(I18N["en"]["ingredient.unrecorded"]) + '</span></p>')
         # v0.9.8 task-13（P0-8）：多成分名字页先给「不可互换」警示（四语），
         # 且首屏最多 3 张成分卡，其余收进 <details>「显示更多」。
-        gen_notice = "" if banner else (
-            '<p class="sub name-notice" data-i18n="name.notice">Same name — check the '
-            'ingredient; names are not interchangeable.</p>' if len(cards) > 1 else "")
+        # T26/I2（v0.11.9）：v0.11.8 按 H1 去掉 925 页的结论式释放提示后，这些页正文没有
+        # 一句通用声明 → 现在**每个名字页固定 1 次**页面级提示：只陈述「同名不代表可互换、
+        # 只按登记字段做身份对应」，不判断具体两药（不新增结论、不给替代建议）。
+        gen_notice = ('<p class="sub name-notice" data-i18n="name.notice">' + esc(
+            I18N["en"]["name.notice"]) + '</p>')
         if cards:
             cards_html = ''.join(cards[:3])
             rest = ''.join(cards[3:])
@@ -10983,6 +11296,9 @@ def _family_block(e, families, displays, variants, page_keys=None, data=None) ->
 
 
 COMBO_ROW_CAP = 200
+# T18/H3（v0.11.9）：复方页每个品牌行最多列 4 条「成分 + 含量」记录（同含量合并 ×N），
+# 其余显示「另有 N 种含量组合」——15,547 个复方页 / 35,504 个品牌行的体积可控。
+COMBO_COMP_CAP = 4
 
 
 def _combo_stub_html(names: str, stub_items: str) -> str:
@@ -11088,6 +11404,7 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                     spec_comps: dict | None = None, sub_label: dict | None = None,
                     spec_kind: dict | None = None,
                     spec_conflict: dict | None = None,
+                    spec_nobasis: dict | None = None,
                     block_meta: dict | None = None) -> tuple[str, float, str]:
     """成分页主视图：按国家分组的产品清单（v0.10.3 task-16）。
 
@@ -11110,6 +11427,7 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
     sub_label = sub_label or {}
     spec_kind = spec_kind or {}
     spec_conflict = spec_conflict or {}
+    spec_nobasis = spec_nobasis or {}
     block_meta = block_meta or {}
     # spec → 有记录的市场列表（一次算完，避免逐行重扫 spec_rows）
     markets_of: dict[tuple, list[str]] = {}
@@ -11218,6 +11536,10 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             st, form, rel, others_sig = spec
             also = ""
             others = [o for o in markets_of.get(spec, []) if o != c]
+            # T21/H6（v0.11.9）：缺计量基准的规格不参与跨市场比较 —— 不声称「也在 X 市场有
+            # 同一规格」（那是把「10 mg」当成可比较的等价规格），只显示记录本身 + 徽标。
+            if spec_nobasis.get(spec):
+                others = []
             if others:
                 shown_mk = others[:3]
                 # T13 / D2（用户评审 §2）：「+6」这种纯计数改成能点开的「另 6 个市场」。
@@ -11264,6 +11586,11 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                         f'<span class="m-rest">{rest}</span>')
             st_html = _label_unit_html(st)
             st_html += _spec_conflict_badge(spec, spec_conflict, T)
+            # T21/H6（v0.11.9）：注射/液体剂型的强度没注明每 mL／每单位基准 → 页面上直说。
+            if spec_nobasis.get(spec):
+                st_html += (' <span class="tag warn" data-i18n="spec.no_basis">'
+                            + esc(T.get("spec.no_basis", "per mL / per unit basis not stated"))
+                            + '</span>')
             form_html = _form_display(form, "") if form else ""
             rel_html = (f' · {_label_html("release", rel, rel)}'
                         if rel not in ("", "none") else "")
@@ -11444,24 +11771,38 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
         _meta_text = " · ".join(re.sub(r"<[^>]+>", "", b) for b in meta_bits)
         meta_html = (f'<span class="mkmeta" title="{esc(_meta_text)}">'
                      + " · ".join(meta_bits) + '</span>' if meta_bits else "")
+        # K1/T35（v0.11.10，用户 2026-11-15「每个国家和地区都做成可以收起的」）：
+        # 每个市场块改成原生 <details>：summary 保留原来的「市场 + N 条记录 + 展示 X 个/共 Y 个
+        # + 来源·数据截止·缺字段」整行；**首个市场默认展开**（首屏条目 ≥5 不退化），其余收起。
+        # 无 JS 也能点开每块（原生 details）；#mk-XX 锚点 / ?mk= 由页面脚本自动展开（见 APP_JS）。
+        # 说明保留：T13 / D3「展示 X 个，共 Y 个」的 X 是当前展示行数（受 LIST_ROWS_PER_BLOCK
+        # 与 JS 筛选影响），Y 是已公开规格总数；文案只写英文（无 JS 兜底），其余语言由
+        # i18n.js 按 data-i18n-tpl 替换数字 —— 四语块会让 12,438 个成分页多背 ≈28 MiB。
+        _is_first = not blocks
         blocks.append(
-            f'<section class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}">'
-            # T13 / D3（用户评审 §2）：「展示 X 个，共 Y 个」——X 是当前**展示**的行数
-            # （受 LIST_ROWS_PER_BLOCK / COMBO_ROWS_PER_BLOCK 与 JS 筛选影响），Y 是该国**已公开**
-            # 规格总数（未公开规格另有独立折叠段，不混进这个数；改前只有一个数字 `130 个规格`）。
-            # 文案只写英文（无 JS 兜底），其余语言由 i18n.js 按 data-i18n-tpl 用同一模板替换数字
-            # ——四语块（4 × 40 字符）会让 12,438 个成分页多背 ≈28 MiB，这一处改用轻量模板。
-            # D7 的来源/截止/缺字段说明放在同一行（不额外占高度）。
-            f'<h2>{esc(c)} <span class="sub">{rec_by_country.get(c, 0):,} '
+            f'<details class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}"'
+            + (' open' if _is_first else '') + '>'
+            # 标题仍是 h2（`.mkblock h2` 是首屏守卫「不许遮」的选择器之一，不能让它失配）
+            f'<summary class="mkhead"><h2 class="mkhead-t">{esc(c)} '
+            f'<span class="sub">{rec_by_country.get(c, 0):,} '
             f'<span data-i18n="drug.records">records</span> · '
             f'<span class="mkspec" data-total="{n_head}" data-shown="{shown_n}" '
             f'data-i18n-tpl="drug.spec_count">'
             f'{esc(T.get("drug.spec_count", "{shown} shown of {n}").replace("{shown}", str(shown_n)).replace("{n}", str(n_head)))}'
-            f'</span></span> {meta_html}</h2>'
+            f'</span></span> {meta_html}</h2></summary>'
             f'{region_html}'
-            f'{seg_html}{undis_html}</section>')
+            f'{seg_html}{undis_html}</details>')
+    # K1/T35：「全部展开 / 全部收起」—— 有 JS 时一键；无 JS 时按钮隐藏（每块仍是原生 details，
+    # 点开可用）。`<noscript>` 里把按钮藏掉，避免出现点了没反应的控件。
+    _open_txt = esc(T.get("mk.expand_all", "Expand all"))
+    _close_txt = esc(T.get("mk.collapse_all", "Collapse all"))
+    mkctl = ('<div class="mkctl js-only">'
+             f'<button type="button" data-mk-all="open" data-i18n="mk.expand_all">'
+             f'{_open_txt}</button>'
+             f'<button type="button" data-mk-all="close" data-i18n="mk.collapse_all">'
+             f'{_close_txt}</button></div>')
     return (chip_head + "".join(chips) + "</nav>"
-            + '<div class="mkblocks">' + "".join(blocks) + "</div>",
+            + mkctl + '<div class="mkblocks">' + "".join(blocks) + "</div>",
             multi_ratio, lf_html)
 
 
@@ -11486,8 +11827,11 @@ def _FORM_RANK_OUTER(form: str) -> int:
     return 9
 
 
-def build_combo_pages(entries, db: sqlite3.Connection) -> int:
+def build_combo_pages(entries, db: sqlite3.Connection,
+                      only_slugs: set[str] | None = None) -> int:
     """v0.5.3：按「活性成分集合」生成组合页 /combo/<slug>.html。
+
+    `only_slugs` 仅供测试/证据脚本渲染指定页（默认 None = 全站，含旧 URL stub，行为不变）。
 
     背景：结果页「成分」列对复方（x 含 ' + '）必须点进组合页，而不是第一个成分的
     drug 页。组合页 slug 与索引里的 `cu` 字段共用 combo_slug()，保证一一对应。
@@ -11504,6 +11848,36 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         if not vs or len(vs) < 2:
             continue
         groups.setdefault(tuple(sorted(vs)), []).append(e)
+    # T18/H3（v0.11.9）：复方页「每条记录一行、写出完整成分 + 各自含量 + 基准」的数据源。
+    # 旧实现把 `e["s"]`（该名字下**所有成分行**的强度串）用 ` / ` 拼成一条，用户看不出
+    # `5 mg / 75 mg / 10 mg` 各自属于哪个成分/产品（用户评审 H3 的原始截图）。
+    # 这里一次流式扫过 product_component，只保留会出现在复方页上的名字键：现查 35,504 个
+    # 品牌行 / 15,547 个复方页，内存与耗时都可控（不逐页查库）。
+    combo_keys = {e["k"] for rows in groups.values() for e in rows}
+    subs_label: dict[str, tuple[str, str]] = {
+        sid: (en or sid, _sub_zh_name(sid)) for sid, (_zh, en) in subs.items()}
+    # 成分 id 走与检索索引同一套「盐型归并到 base」口径（_sub_base_map）：
+    # ① 页面 sids 本身来自索引（base），不归一会对不上；
+    # ② 同一条记录里同一成分出现多行（来源把 base 与盐型各记一次）时按键去重。
+    _base_of, _ = _sub_base_map(db)
+    record_comps: dict[str, dict[str, dict]] = defaultdict(dict)   # key → pid → {form, comps}
+    for (ckey, cpid, cfb, cdf, csv_, csu, cpv, cpu, csid) in db.execute(
+            """SELECT pn.key_id, p.product_id, p.form_base, p.dosage_form,
+                      pc.strength_value, pc.strength_unit,
+                      pc.per_volume_value, pc.per_volume_unit, v.substance_id
+               FROM product p
+               JOIN product_name pn ON pn.product_id = p.product_id AND pn.name_type = 'trade'
+               JOIN product_component pc ON pc.product_id = p.product_id
+               LEFT JOIN variant v ON v.variant_id = pc.variant_id"""):
+        if ckey not in combo_keys:
+            continue
+        rec = record_comps[ckey].setdefault(
+            cpid, {"form": cfb or cdf or "", "comps": {}})
+        bsid = _base_of.get(csid, csid) if csid else ""
+        spec = _spec_text(csv_, csu, cpv, cpu)
+        prev = rec["comps"].get(bsid)
+        if prev is None or (not prev and spec):
+            rec["comps"][bsid] = spec
     # v0.6.0：页面 sids 集合 → CSV 归一名数签名。
     # 组合页的 vs 是「同一 name_key 下所有产品的成分并集」，不一定等于单个产品的成分集合；
     # 先用「产品原始 sids 集合 == 页面集合」精确反查，再用页面归一并集兜底；
@@ -11560,7 +11934,6 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         if sid and sid in DRUG_PAGE_IDS:
             return f'<a href="../drug/{esc(sid)}.html">{inner}</a>'
         return f'<span class="meta">{inner}</span>'
-
     def _record_link(pid: str, fallback_sid: str) -> str:
         k = pid_key.get(pid or "")
         u = (entry_by_k.get(k) or {}).get("u") if k else ""
@@ -11570,6 +11943,30 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
             return (f'<a href="../drug/{esc(fallback_sid)}.html" '
                     f'data-i18n="combo.cross_record">record</a>')
         return '<span data-i18n="combo.cross_record">record</span>'
+
+    def combo_comp_lines(key_id: str, page_sids: set[str]) -> list[tuple[str, str, int]]:
+        """该名字键下**每条记录**的成分 + 各自含量（T18/H3）。
+
+        返回 [(剂型 HTML, 成分行 HTML, 记录数)]。优先收「成分集合 == 本页复方集合」的记录；
+        一条都没有时退到「成分集合 ⊂ 本页复方」的记录（同一品牌在不同市场的部分配方，
+        按记录自身成分显示，不补也不删）。按成分集合去重并计数，不做换算、不求和。
+        """
+        agg: dict[tuple, dict] = {}
+        for _pid, rec in (record_comps.get(key_id) or {}).items():
+            comps = {sid: sx for sid, sx in (rec["comps"] or {}).items() if sid}
+            if not comps or not set(comps) <= page_sids:
+                continue
+            sig = tuple(sorted(comps.items()))
+            item = agg.setdefault(sig, {"form": rec["form"], "n": 0, "exact": False})
+            item["n"] += 1
+            item["exact"] = item["exact"] or set(comps) == page_sids
+        if not any(item["exact"] for item in agg.values()):
+            # 没有「恰好等于本页复方」的记录时，用部分配方记录（exact=False 排在后面）
+            pass
+        out = [(_form_display(item["form"], ""), _combo_line_html(list(sig), subs_label),
+                item["n"], item["exact"]) for sig, item in agg.items()]
+        out.sort(key=lambda x: (not x[3], -x[2], x[1]))
+        return [(form_html, comp_html, n) for form_html, comp_html, n, _exact in out]
 
     def cross_html(slug: str) -> str:
         title_html = (f'<h2 data-i18n="combo.cross_title">'
@@ -11650,6 +12047,8 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
     stub_made = 0
     for sids, rows in groups.items():
         slug = combo_slug(sids)
+        if only_slugs is not None and slug not in only_slugs:
+            continue
         if slug not in COMBO_PAGE_SLUGS:
             # v0.9.2 task-33：被体积策略裁剪的旧组合 URL 保留极简 stub（200/noindex），
             # 避免 v0.9.0 旧链接 404；不加入 sitemap。
@@ -11670,6 +12069,7 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
                 f'<li>{_drug_ref(sid, _sub_name_spans(en, zh, sid))} '
                 f'<code>{esc(sid)}</code></li>')
         title = " + ".join(subs.get(s, (s, s))[1] for s in sids)
+        page_sids = set(sids)
         rows = sorted(rows, key=lambda e: -e["n"])
         total = len(rows)
         body_rows = []
@@ -11682,14 +12082,34 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
                          f'{esc(e["d"])}</span>')
             tags = "".join(
                 f'<span class="tag {c.lower()}">{esc(c)}</span>' for c in (e.get("c") or []))
-            doses = " / ".join(e.get("s") or []) or "—"
+            # T18/H3：每行 = 一条产品记录（复方页不再用「多值斜杠串」当唯一剂量信息）。
+            comp_lines = combo_comp_lines(e["k"], page_sids)
+            if comp_lines:
+                lis = []
+                for form_html, comp_html, n_rec in comp_lines[:COMBO_COMP_CAP]:
+                    cnt = f' <span class="cn">×{n_rec}</span>' if n_rec > 1 else ""
+                    lis.append(f'<li><span class="cform">{form_html}</span>{cnt} '
+                               f'<span class="ccomp">{comp_html}</span></li>')
+                more = ""
+                if len(comp_lines) > COMBO_COMP_CAP:
+                    _n_more_comp = len(comp_lines) - COMBO_COMP_CAP
+                    _more_comp_txt = (T.get("combo.comp_more", "Other {n} compositions")
+                                      .replace("{n}", str(_n_more_comp)))
+                    more = ('<p class="sub cmore">'
+                            f'<span data-i18n-tpl="combo.comp_more" '
+                            f'data-total="{_n_more_comp}">{esc(_more_comp_txt)}</span></p>')
+                dose_cell = f'<ul class="cspec">{"".join(lis)}</ul>{more}'
+            else:
+                # 兜底：该名字键下没有「成分集合 == 本页」的记录时，保留旧的多值串
+                # （— 而不是空白，用户至少知道来源记录写了什么）。
+                dose_cell = esc(" / ".join(e.get("s") or []) or "—")
             mah = e.get("m") or "—"
             body_rows.append(
-                f'<tr><td class="c-brand" data-label="{esc(T["col.brand"])}" '
-                f'data-i18n-label="col.brand">'
+                f'<tr data-key="{esc(e["k"])}"><td class="c-brand" '
+                f'data-label="{esc(T["col.brand"])}" data-i18n-label="col.brand">'
                 f'{brand}{tags}</td>'
-                f'<td data-label="{esc(T["col.dose"])}" data-i18n-label="col.dose">'
-                f'{esc(doses)}</td>'
+                f'<td class="c-dose" data-label="{esc(T["combo.col_comp"])}" '
+                f'data-i18n-label="combo.col_comp">{dose_cell}</td>'
                 f'<td data-label="{esc(T["col.mah"])}" data-i18n-label="col.mah">'
                 f'{esc(mah)}</td></tr>')
         capped_html = ""
@@ -11701,9 +12121,9 @@ def build_combo_pages(entries, db: sqlite3.Connection) -> int:
         # 现查 6,790 个真复方页仍有这张「Brand / Dose / Manufacturer」表；补 data-i18n /
         # data-i18n-label，界面语言切换后表头与移动端行标签都跟着翻（不再只有英文）。
         rows_html = (
-            '<div class="tablewrap"><table class="res"><thead><tr>'
+            '<div class="tablewrap"><table class="res ctable"><thead><tr>'
             f'<th data-i18n="col.brand">{T["col.brand"]}</th>'
-            f'<th data-i18n="col.dose">{T["col.dose"]}</th>'
+            f'<th data-i18n="combo.col_comp">{T["combo.col_comp"]}</th>'
             f'<th data-i18n="col.mah">{T["col.mah"]}</th>'
             f'</tr></thead><tbody>{"".join(body_rows)}</tbody></table></div>'
             if body_rows else
@@ -11947,14 +12367,20 @@ def _sort_strength(text: str) -> float:
 # v0.6.5：首页示例按钮按页面语言渲染（en/es/zh/zh-Hant；zh-Hant 用繁體示例）
 # v0.9.6 task-143：去掉原「hero」一整排示例按钮（与 3 步引导里的 Try 重复），只留引导内示例。
 HOME_EXAMPLES = {
+    # E3（v0.11.10）：「quick」= 首页搜索框下方那组可点击示例，按「商品名 / 中文名 /
+    # 包装上一行字（含规格）」混合，让第一次来的人知道能输什么。
     "en": {"try1": ["Lipitor 20mg", "Tylenol"], "try2": ["Paracetamol 500mg"],
-           "try3": ["Benadryl", "Gaviscon"]},
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": ["Tylenol Extra Strength", "Metformin", "960 mg/30 mL"]},
     "es": {"try1": ["Paracetamol 500mg", "Omeprazol 20mg"],
-           "try2": ["Ibuprofeno 600mg"], "try3": ["Loratadina 10mg", "Omeprazol 20mg"]},
+           "try2": ["Ibuprofeno 600mg"], "try3": ["Loratadina 10mg", "Omeprazol 20mg"],
+           "quick": ["Paracetamol 500mg", "Metformina", "960 mg/30 mL"]},
     "zh": {"try1": ["泰诺", "Lipitor 20mg"], "try2": ["两只青蛙"],
-           "try3": ["Benadryl", "Gaviscon"]},
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": ["泰诺", "Tylenol Extra Strength", "960 mg/30 mL"]},
     "zh-Hant": {"try1": ["泰諾", "Lipitor 20mg"], "try2": ["兩隻青蛙"],
-                "try3": ["Benadryl", "Gaviscon"]},
+                "try3": ["Benadryl", "Gaviscon"],
+                "quick": ["泰諾", "Tylenol Extra Strength", "960 mg/30 mL"]},
 }
 
 
@@ -12066,21 +12492,54 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
     return html.replace("</body>", boot + "</body>")
 
 
-def _home_recent(prefix: str, limit: int = 3) -> str:
+def _release_oneliner(version: str, lang: str, limit: int = 40) -> str:
+    """E5（v0.11.10）：取某版 release notes 第一条的首句（截断到 ~limit 字）。
+
+    数据源 = `data/release_notes_i18n.json`（与 /whats-new 同一份四语译文）；缺该语言或
+    该版时返回空串，首页就只显示版本号 + 日期（不硬翻、不用英文顶替）。
+    """
+    try:
+        data = json.loads((ROOT / "data" / "release_notes_i18n.json")
+                          .read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ""
+    if not isinstance(data, dict):
+        return ""
+    entry = (data.get(version) or {}).get(lang) or (data.get(version) or {}).get("en") or []
+    if not isinstance(entry, list) or not entry:
+        return ""
+    first = re.sub(r"[*_`#>\[\]]", "", str(entry[0])).strip()
+    first = re.sub(r"\s+", " ", first)
+    # 首句：到第一个句号 / 分号 / 冒号 / 全角标点为止
+    m = re.split(r"(?<=[。！？.!?；;：:])\s*", first, maxsplit=1)
+    text = m[0].strip() if m else first
+    if len(text) > limit:
+        text = text[: limit - 1].rstrip("，,、；;：: ") + "…"
+    return text
+
+
+def _home_recent(prefix: str, lang: str = "en", limit: int = 3) -> str:
     """v0.9.6 task-143：首页「最近更新」= CHANGELOG 最近 N 个版本。
 
-    版本号和日期是事实（四语共用，不做翻译）；摘要正文仍只在 whats-new 页，
-    避免把只翻了三语的更新说明搬进首屏。
+    E5（v0.11.10）：每个版本号 + 日期后面补**一句用户能感知的变化**（该版 release notes
+    第一条的首句，按界面语言取译文，截断 ~40 字），不再只有版本号和日期。
+    首页四份产物各按自己的语言服务端渲染这句；该语言缺译文时只显示版本号 + 日期
+    （不静默用英文顶替中文/西语界面）。
     """
     releases = load_releases()[:limit]
     if not releases:
         return ""
-    items = "".join(
-        f'<li><a href="{prefix}whats-new.html"><b>{esc(r["version"])}</b>'
-        f'<span class="upd-date">{esc(r["date"])}</span></a></li>' for r in releases)
+    items = []
+    for r in releases:
+        liner = _release_oneliner(r["version"], lang)
+        items.append(
+            f'<li><a href="{prefix}whats-new.html"><b>{esc(r["version"])}</b>'
+            f'<span class="upd-date">{esc(r["date"])}</span>'
+            + (f'<span class="upd-liner">{esc(liner)}</span>' if liner else "")
+            + "</a></li>")
     return (f'<section class="homeupd" aria-labelledby="updtitle">'
             f'<h2 id="updtitle" data-i18n="home.recent">Recently updated</h2>'
-            f'<ul class="updlist">{items}</ul>'
+            f'<ul class="updlist">{"".join(items)}</ul>'
             f'<p class="sub"><a href="{prefix}whats-new.html" data-i18n="home.recent_all">'
             f'See all updates →</a></p></section>')
 
@@ -12101,7 +12560,7 @@ def build_index_page(entries, stats, coverage) -> None:
 <label class="sr-only" for="q" data-i18n="home.ph">Brand name / generic name / nickname / a line from the pack</label>
 <input id="q" data-ph="home.ph" placeholder="Brand name / generic name / nickname / a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac" enterkeyhint="search">
 <span class="sb-hint" data-i18n="home.slash_hint">Press / to focus</span>
-<button type="button" id="qgo" class="sb-go" data-i18n-aria="home.submit" aria-label="Search"><span aria-hidden="true">→</span></button>
+<button type="button" id="qgo" class="sb-go" data-i18n-aria="home.submit" aria-label="Search"><span class="sbg-t" data-i18n="home.submit">Search</span><span class="sbg-ico" aria-hidden="true">→</span></button>
 <div id="ac" role="listbox" aria-label="Suggestions" data-i18n-aria="home.suggestions"></div>
 </div>
 <div class="t11row">
@@ -12111,6 +12570,9 @@ def build_index_page(entries, stats, coverage) -> None:
 </div>
 <div id="pickbar" class="pickbar" hidden></div>
 </div>
+<!-- E3（v0.11.10）：首页给一组**可点击**示例（商品名 / 中文名 / 包装上一行字），
+     点击即填入搜索框并立即搜索；文案四语，取 HOME_EXAMPLES[lang]["quick"]。 -->
+<div class="tryrow"><span class="try-lbl" data-i18n="u1.try">Try:</span>{{examples}}</div>
 <div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
 <div id="identity"></div>
 <div id="out"></div>
@@ -12144,7 +12606,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="SG" data-i18n="home.sg">Singapore</option>
     <option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   </div>
-</div>
+</details>
 <p class="sub report-line" id="report" style="display:none">
   <span data-i18n="report.note">Wrong ingredient, wrong dose, or a drug we do not have? Tell us:</span>
   <a id="reportLink" href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
@@ -12172,7 +12634,9 @@ def build_index_page(entries, stats, coverage) -> None:
 <section class="catquick"><h2 data-i18n="cat.quick_title">Browse by category</h2>
 <div class="catgrid">{{cat_chips}}</div></section>
 {{recent}}
-<p class="sub" id="loadhint" data-i18n="home.hint_idle">First search loads one index shard (median ~1.0 MB, ~0.16 MB gzip); the full index (core ~42 MB raw, ~9–10 MB gzip) fills in the background — start typing, focus the search box, or pick a sample.</p>
+<!-- E4（v0.11.10）：加载机制说明（分片 / core 42 MB / gzip …）已移到 /about.html 的
+     「How search loads」一节；首页只保留脚本写入的状态（正在补全 / 加载失败 + 重试）。 -->
+<p class="sub" id="loadhint" hidden></p>
 <div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
 does not exist. Coverage:</span> {covline}.</div>
 <script defer src="{{prefix}}assets/app.js"></script>"""
@@ -12183,8 +12647,9 @@ does not exist. Coverage:</span> {covline}.</div>
                      .replace("{try1}", _sample_buttons(ex["try1"]))
                      .replace("{try2}", _sample_buttons(ex["try2"]))
                      .replace("{try3}", _sample_buttons(ex["try3"]))
+                     .replace("{examples}", _sample_buttons(ex["quick"]))
                      .replace("{cat_chips}", _home_cat_chips(code, prefix))
-                     .replace("{recent}", _home_recent(prefix))
+                     .replace("{recent}", _home_recent(prefix, code))
                      .replace("{APP_BOOT}", _app_boot(prefix)))
         html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
@@ -12254,9 +12719,9 @@ def build_about(stats, coverage, source_cover=()) -> None:
     """
     T = I18N["en"]
     parts = [f'<h1 data-i18n="about.title">{esc(T["about.title"])}</h1>']
-    for key in ("about.lead", "about.rules", "about.nick", "about.terms",
-                "about.sources", "about.tw_source", "about.sg_source", "about.hk_source",
-                "about.au_source", "about.eu_source", "about.fr_source"):
+    for key in ("about.lead", "about.rules", "about.nick", "about.nick_merged", "about.terms",
+                "about.sources", "about.loading", "about.tw_source", "about.sg_source",
+                "about.hk_source", "about.au_source", "about.eu_source", "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append('<details class="lic-wrap"><summary data-i18n="about.licences_summary">'
                  'Data sources and licences</summary>' + LICENCE_HTML + '</details>')
@@ -14656,7 +15121,10 @@ def main() -> None:
         "a.onload=function(){var b=document.createElement('script');"
         # v0.11.5 task-8：bilingual.js 同 app.js 一样是稳定名 + 内容随 BUILD_V 变，带 ?v 防旧缓存
         "b.src=r+'assets/bilingual.js?v=__BUILD_V__';document.body.appendChild(b);};"
-        "document.body.appendChild(a);});\n")
+        "document.body.appendChild(a);});"
+        # K1/T35（v0.11.10）：成分页市场块可收起（原生 <details>）的渐进增强。
+        # 放在 boot.js 里（长尾页只加载这一份脚本、18 KB 可跨页缓存），不依赖 app.js。
+        + _mkblock_js() + "\n")
     boot_js = boot_js_src.replace("__BUILD_V__", BUILD_V)
     # v0.11.5 task-5：boot.js 也改「内容哈希文件名 + 不带 ?v=」，同一构建内全站同一 URL、可跨页缓存；
     # 数据只变时字节不变 → 页面 HTML 也不用跟着变（增量构建前提）。
@@ -14931,6 +15399,11 @@ def main() -> None:
     // T13 / D4、D7：分类页页内搜索 + 子类筛选；结果行/身份卡补「数据截止」
     initCatFinder();
     initSourceMeta();
+    // K1/T35（v0.11.10）：成分页市场块默认展开态（须在 initListView 置顶语言市场之后再定
+    // 「第一个市场」；只在首次运行，语言切换重跑 apply() 不会改回用户的手动开合）。
+    // apply() 在 i18n.js 里、initMkBlocks 在 app.js 里 —— 两个文件加载顺序不保证，
+    // 所以这里只做「有就调」的守卫。
+    if(typeof initMkBlocks === 'function') initMkBlocks();
     // 2026-11-11 UI：apply() 末尾跑一次注册钩子。首页用它把「只看 XX」的国家名回填到
     // 国家/地区 details 的 summary 上（apply() 会先按 data-i18n 把 summary 重置成基础文案，
     // 而 ?lang= 补载语言包会在 load 之后再跑一次 apply()）。
@@ -15211,6 +15684,57 @@ def main() -> None:
     }
     sync();
   }
+  // ── K1/T35（v0.11.10）：成分页市场块可收起（原生 <details>）的渐进增强 ──────────
+  // 服务器已渲染好每块与默认展开态（首个市场 open，其余收起）；这里补三件 JS 才能做的事：
+  //   ① ?mk=XX / #mk-XX 时展开那一块（其余收起）——锚点与跨市场链接仍可用；
+  //   ② 「全部展开 / 全部收起」按钮；③ 打印前全部展开。
+  // 初始化只做一次（window.__mkInited），避免语言切换重跑 apply() 时把用户的手动开合改回去。
+  function mkBlocksAll(){
+    return Array.prototype.slice.call(document.querySelectorAll('.mkblock'));
+  }
+  function mkOpenOnly(mk){
+    mkBlocksAll().forEach(function(b){
+      b.open = (!mk) || b.getAttribute('data-mk') === mk;
+    });
+  }
+  function initMkBlocks(){
+    var blocks = mkBlocksAll();
+    if(!blocks.length) return;
+    if(!window.__mkInited){
+      var params = new URLSearchParams(location.search);
+      var mk = params.get('mk') || String(location.hash || '').replace('#mk-', '');
+      if(mk && mk !== '#'){
+        mkOpenOnly(mk);
+      } else {
+        // 第一个市场（语言偏好市场已由 initListView 置顶）默认展开 → 首屏条目 ≥5
+        blocks.forEach(function(b, i){ b.open = (i === 0); });
+      }
+      window.__mkInited = 1;
+    }
+    document.querySelectorAll('[data-mk-all]').forEach(function(btn){
+      if(btn.getAttribute('data-mk-bound')) return;
+      btn.setAttribute('data-mk-bound', '1');
+      btn.addEventListener('click', function(ev){
+        ev.preventDefault();
+        var open = btn.getAttribute('data-mk-all') === 'open';
+        mkBlocksAll().forEach(function(b){ b.open = open; });
+      });
+    });
+  }
+  document.addEventListener('click', function(ev){
+    var a = (ev.target && ev.target.closest) ? ev.target.closest('a[href^="#mk-"]') : null;
+    if(a) mkOpenOnly(a.getAttribute('href').replace('#mk-', ''));
+  });
+  window.addEventListener('beforeprint', function(){
+    mkBlocksAll().forEach(function(b){ b.open = true; });
+  });
+  window.addEventListener('hashchange', function(){
+    var mk = String(location.hash || '').replace('#mk-', '');
+    if(mk) mkOpenOnly(mk);
+  });
+  // app.js 自己也要拉一次（defer 脚本执行时 DOM 已就绪；i18n.js 的 apply() 里也有守卫调用）
+  if(document.readyState !== 'loading') initMkBlocks();
+  else document.addEventListener('DOMContentLoaded', initMkBlocks);
   // ── T13 / D7（v0.11.7）：把「数据截止」带到结果行与身份卡 ────────────────────
   // 结果索引里没有来源日期（不为了这点信息把 core.json 撑大）；这里懒加载一次 1 KB 的
   // `data/sources.json`（国家 → 来源 + 截止日），再用观察器补到已渲染的行上。
@@ -15377,13 +15901,25 @@ def main() -> None:
            FROM product p LEFT JOIN source s ON s.source_id = p.source_id
            GROUP BY country, p.source_id
            ORDER BY country, n_products DESC""")]
+    # T28/I3（v0.11.9）：nickname 口径拆分（人工俗称 / T17 合并前中文名），一次查完。
+    _nick_total = db.execute("SELECT COUNT(*) FROM nickname").fetchone()[0]
+    _nick_merged = db.execute(
+        "SELECT COUNT(*) FROM nickname WHERE source LIKE 'T17%'").fetchone()[0]
     stats = {
         "products": db.execute("SELECT COUNT(*) FROM product").fetchone()[0],
         "substances": db.execute("SELECT COUNT(*) FROM substance").fetchone()[0],
         "atc": db.execute(
             "SELECT COUNT(*) FROM substance WHERE atc IS NOT NULL AND atc <> ''").fetchone()[0],
         "keys": db.execute("SELECT COUNT(*) FROM name_key").fetchone()[0],
-        "nickname": db.execute("SELECT COUNT(*) FROM nickname").fetchone()[0],
+        # T28/I3（v0.11.9）：`nickname` 表现在混两类条目 —— 人工维护的俗称／旧名，和 T17
+        # 盐型合并前记录的中文名（kind=misnomer，来源列以 “T17” 开头，现查 340 条里 339 条）。
+        # 公开文案分开说、数字以库现查为准（不照抄报告里的 396）：
+        #   @@NICKNAMES@@         = 人工维护的俗称／旧名（现在 57）
+        #   @@NICKNAMES_TOTAL@@   = 全部 nickname 条目（396）
+        #   @@NICKNAMES_MERGED@@  = 合并前中文名（339）
+        "nickname": _nick_total - _nick_merged,
+        "nickname_total": _nick_total,
+        "nickname_merged": _nick_merged,
         "aliases": db.execute("SELECT COUNT(*) FROM alias_all").fetchone()[0],
         "confusable": db.execute("SELECT COUNT(*) FROM confusable_pair").fetchone()[0],
         "severe": db.execute(
