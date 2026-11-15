@@ -32,6 +32,7 @@ drug_term）区分。异名**只说明是同一成分的不同写法**，不合�
 from __future__ import annotations
 
 import difflib
+import re
 import sqlite3
 import sys
 from collections import Counter
@@ -66,6 +67,39 @@ PINYIN_MAX_KEYS = 300
 ALIAS_MAX_CARDS = 3
 # 「名字本身命中」的档位：异名追加让位时不许挤掉它们（精确 > 异名 > 前缀噪声）。
 PRECISE_TIERS = frozenset({"exact", "compact", "nickname", "atc", "category"})
+
+# --- G3 方案 b（v0.13.2）：盐型 → 基名的排序规则 ---------------------------
+# 同一活性成分在 substance 表里可能被拆成「基名行 + 盐型行」（如
+# Metformin / Metformin Hydrochloride）。新市场数据把盐型行的产品数放大后，
+# 卡片排序的 `n_products` 平手键会让盐型卡顶到 rank0（reports/2026-11-16-g3-salt-split.md）。
+# 这里沿用 site/build.py `_sub_base_map()` 的同一套去盐口径（+ hydrogen 修饰词），
+# 在 SearchIndex 装载时把「inn_en → 基名 inn_en」预计算成表；查询期只查表，不改 DB。
+SALT_WORDS = frozenset({
+    "hydrochloride", "hydrobromide", "sodium", "potassium", "calcium", "magnesium",
+    "phosphate", "sulfate", "sulphate", "citrate", "tartrate", "maleate", "fumarate",
+    "oxalate", "succinate", "malate", "glutamate", "aspartate", "lactate", "acetate", "carbonate",
+    "bicarbonate", "chloride", "iodide", "bromide", "nitrate", "oxide", "hydroxide",
+    "hydrate", "dihydrate", "trihydrate", "monohydrate", "sesquihydrate", "hemihydrate",
+    "tetrahydrate", "anhydrous", "hydrogen",
+    "mesilate", "mesylate", "besylate", "besilate", "benzoate", "trometamol",
+    "tromethamine", "disodium", "dipotassium", "dicalcium",
+    "monohydrochloride", "dihydrochloride", "lysine", "arginine", "gluconate",
+    "digluconate", "heptanoate", "enantate", "decanoate", "palmitate", "stearate",
+    "oleate", "laurate", "propionate", "butyrate", "valerate", "undecylenate",
+    "cypionate", "phenylpropionate", "nitrite", "sulfite", "bisulfate", "edetate",
+    "gluceptate", "glycinate", "asparto", "pamoate", "embonate", "hyclate",
+    "edisylate", "estolate", "taurate", "xinafoate", "furoate", "aceponate",
+    "dipropionate", "diacetate", "dibenzoate", "pivalate", "tebutate",
+})
+SALT_ELEMENTS = frozenset({"sodium", "potassium", "calcium", "magnesium", "lithium",
+                           "iron", "zinc", "copper", "aluminium", "aluminum", "barium",
+                           "selenium"})
+_RE_NONALNUM = re.compile(r"[^a-z0-9]+")
+
+
+def _norm_inn(name: str) -> str:
+    """成分名归一化（只用于和 substance.inn_en 比对，不用于查询归一）。"""
+    return _RE_NONALNUM.sub(" ", (name or "").lower()).strip()
 
 # 俗称的类型 → 给人看的标签。昵称命中的提示里会写明是「网络俗称」还是「旧名」，
 # 不让用户以为这是包装上的正式名字。
@@ -160,6 +194,8 @@ class SearchIndex:
                  alias_path: str | Path | None = None):
         self.db = sqlite3.connect(str(db_path))
         self.db.row_factory = sqlite3.Row
+        # G3 方案 b：inn_en → 基名 inn_en（去盐/水合物，装载时一次算好；查询期只查表）
+        self._inn_base: dict[str, str] = self._load_inn_base()
         self._norms = [
             (r["key_id"], r["norm"], r["compact"])
             for r in self.db.execute("SELECT key_id, norm, compact FROM name_key")
@@ -729,6 +765,89 @@ class SearchIndex:
             return (-hit, -c.n_products, len(c.key_id), c.brand.lower())
         return key
 
+    # --- G3 方案 b（v0.13.2）：同名下基名卡优先于盐型卡 -------------------
+    def _load_inn_base(self) -> dict[str, str]:
+        """substance.inn_en → 基名 inn_en（去盐/水合物，迭代到不动点）。
+
+        与 `site/build.py::_sub_base_map()` 同一口径（G3 方案 b / build 期 base_of）；
+        只读一次 substance（13,648 行），查询期只查表。**不改 DB、不合并成分身份**。
+        """
+        rows = self.db.execute("SELECT substance_id, inn_en FROM substance").fetchall()
+        names = {r["substance_id"]: r["inn_en"] for r in rows if r["inn_en"]}
+        by_norm: dict[str, str] = {}
+        for sid, inn in names.items():
+            n = _norm_inn(inn)
+            if n:
+                by_norm.setdefault(n, sid)
+        # 同名重复 substance（如 povidone-iodine / povidone-iodine-<hash>）规范到同一 sid
+        canon = {sid: by_norm.get(_norm_inn(inn), sid) for sid, inn in names.items()}
+        salt_to_base: dict[str, str] = {}
+        for sid, inn in names.items():
+            if canon.get(sid) != sid:
+                continue
+            toks = _norm_inn(inn).split()
+            while len(toks) > 1 and toks[-1] in SALT_WORDS:
+                toks = toks[:-1]
+                base_n = " ".join(toks)
+                if base_n in SALT_WORDS or base_n in SALT_ELEMENTS or len(base_n) < 4:
+                    continue
+                b = by_norm.get(base_n)
+                if b and b != sid:
+                    salt_to_base[sid] = b
+                    break
+        base_name: dict[str, str] = {}
+        for sid, inn in names.items():
+            cur, seen = sid, set()
+            while cur not in seen:
+                seen.add(cur)
+                nxt = salt_to_base.get(cur) or canon.get(cur, cur)
+                if nxt == cur:
+                    break
+                cur = nxt
+            base_name[inn] = names.get(cur, inn)
+        return base_name
+
+    def _card_base_key(self, card: Card) -> tuple[str, ...] | None:
+        """卡片的 base 成分组合（复方 → 排序后的基名 tuple）；有成分缺映射时返回 None。"""
+        if not card.substances:
+            return None
+        out: list[str] = []
+        for s in card.substances:
+            b = self._inn_base.get(s)
+            if not b:
+                return None
+            out.append(b)
+        return tuple(sorted(out))
+
+    def _card_is_salt(self, card: Card) -> bool:
+        """卡片是否含盐型成分行（任一成分的 inn_en 能剥离到另一个基名）。"""
+        return any(self._inn_base.get(s, s) != s for s in card.substances)
+
+    def _prefer_base_ingredient(self, cards: list[Card]) -> None:
+        """G3 方案 b：同一 key（同名）下、同一 base 成分组内，基名卡排在盐型卡前。
+
+        · 只在这批卡的组内位置换位（稳定分区），组外顺序与其它排序键完全不变；
+        · 盐型卡仍保留在候选集里 —— 不合并产品、不改身份/碰撞语义、不做剂量换算。
+        · 组键 = (key_id, base 成分 tuple)：只修「同名下」的盐型/基名卡，不跨名字重排。
+        """
+        groups: dict[tuple, list[int]] = {}
+        for i, c in enumerate(cards):
+            base = self._card_base_key(c)
+            if base is None:
+                continue
+            groups.setdefault((c.key_id, base), []).append(i)
+        for idxs in groups.values():
+            if len(idxs) < 2:
+                continue
+            flags = [self._card_is_salt(cards[i]) for i in idxs]
+            if all(flags) or not any(flags):
+                continue
+            ordered = ([i for i, f in zip(idxs, flags) if not f]
+                       + [i for i, f in zip(idxs, flags) if f])
+            chosen = [cards[i] for i in ordered]
+            for pos, card in zip(idxs, chosen):
+                cards[pos] = card
+
     def _cards_for_keys(self, key_ids: list[str], tier_of: dict[str, str], n,
                         country: str | None, include_status: tuple[str, ...],
                         limit: int, order=None) -> tuple[list[Card], str]:
@@ -825,6 +944,8 @@ class SearchIndex:
                 return [], (f"在 {country} 没有收录到这个名字 —— 查不到不代表该药不存在")
         result.sort(key=order or (lambda c: (-c.score, -c.n_products,
                                              len(c.key_id), c.brand.lower())))
+        # G3 方案 b（v0.13.2）：同名同 base 成分下，基名卡优先于盐型卡（组内稳定换位）。
+        self._prefer_base_ingredient(result)
         return result[:limit], ""
 
     def _get_atc_index(self) -> tuple[dict[str, set[str]], dict[str, int]]:

@@ -7512,6 +7512,54 @@ document.addEventListener('click', function(ev){
   }
 });
 
+// ── G3 方案 b（v0.13.2）：同名下基名条目优先于盐型条目 ──────────────────
+// 与 lib/search.py `_prefer_base_ingredient` 同一规则：同 base 成分组内做稳定分区，
+// 基名条目在前、盐型条目在后；组外顺序与其它排序键不变，不合并条目、不改输出字段。
+var G3_SALT_WORDS = ['hydrochloride','hydrobromide','sulfate','sulphate','citrate','tartrate','maleate','fumarate','oxalate','succinate','malate','glutamate','aspartate','lactate','acetate','carbonate','bicarbonate','chloride','iodide','bromide','nitrate','oxide','hydroxide','hydrate','dihydrate','trihydrate','monohydrate','sesquihydrate','hemihydrate','tetrahydrate','anhydrous','hydrogen','mesilate','mesylate','besylate','besilate','benzoate','trometamol','tromethamine','disodium','dipotassium','dicalcium','monohydrochloride','dihydrochloride','lysine','arginine','gluconate','digluconate','palmitate','stearate','propionate','valerate','gluceptate','glycinate','pamoate','embonate','hyclate','edisylate','estolate','taurate','xinafoate','furoate','aceponate','dipropionate','diacetate','dibenzoate','pivalate','tebutate','sodium','potassium','calcium','magnesium','lithium','iron','zinc','copper','aluminium','aluminum','barium','selenium'];
+var G3_SALT_SET = new Set(G3_SALT_WORDS);
+var G3_ELEMENT_SET = new Set(['sodium','potassium','calcium','magnesium','lithium','iron','zinc','copper','aluminium','aluminum','barium','selenium']);
+function g3Toks(s){
+  return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').filter(Boolean);
+}
+function g3BaseName(s){
+  var t = g3Toks(s);
+  while(t.length > 1 && G3_SALT_SET.has(t[t.length - 1])) t.pop();
+  return t.join(' ');
+}
+function g3BaseKey(e){
+  var parts = String((e && e.x) || '').split(' + ').map(g3BaseName).filter(Boolean);
+  for(var i = 0; i < parts.length; i++){
+    var one = parts[i].split(' ');
+    if(one.length === 1 && (one[0].length < 4 || G3_ELEMENT_SET.has(one[0]))) return '';
+  }
+  parts.sort();
+  return parts.length ? parts.join('|') : '';
+}
+function g3IsSalt(e){
+  return String((e && e.x) || '').split(' + ').some(function(p){
+    return g3Toks(p).some(function(w){ return G3_SALT_SET.has(w); });
+  });
+}
+function g3PreferBase(hits){
+  var groups = {};
+  for(var i = 0; i < hits.length; i++){
+    var k = g3BaseKey(hits[i][2]);
+    if(!k) continue;
+    if(!groups[k]) groups[k] = [];
+    groups[k].push(i);
+  }
+  Object.keys(groups).forEach(function(k){
+    var idx = groups[k];
+    if(idx.length < 2) return;
+    var flags = idx.map(function(i){ return g3IsSalt(hits[i][2]); });
+    if(flags.every(Boolean) || !flags.some(Boolean)) return;
+    var ordered = idx.filter(function(_, j){ return !flags[j]; })
+                     .concat(idx.filter(function(_, j){ return flags[j]; }));
+    var chosen = ordered.map(function(i){ return hits[i]; });
+    for(var p = 0; p < idx.length; p++) hits[idx[p]] = chosen[p];
+  });
+}
+
 function render(){
   const q = box.value.trim();
   setCatsHidden(!!q);   // v0.8.2 task-116：有查询（结果/零结果）即收起大类块；清空恢复
@@ -7562,6 +7610,8 @@ function render(){
   }
   hits.sort((a,b)=> b[0]-a[0] || (a[2].q?1:0)-(b[2].q?1:0) ||
                      b[2].n-a[2].n || a[2].d.length-b[2].d.length);
+  // G3 方案 b（v0.13.2）：同名下基名条目优先于盐型条目（规则见上方 g3PreferBase）。
+  g3PreferBase(hits);
   // v0.11.2（条目 10）：来源市场（?src=）只筛候选集——保留在该登记库有记录的条目。
   // 目标市场（c，?country=）在下面单独改变视图；两个语义不混。分片阶段字段未全时先不筛，
   // core 到位后 render 会重跑，届时再按来源市场过滤。
