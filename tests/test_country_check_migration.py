@@ -1,7 +1,7 @@
-"""`product.country` CHECK 迁移的回归测试（task-56：一次加 FR / LV / JP / KR）。
+"""`product.country` CHECK 迁移的回归测试（task-56：FR / LV / JP / KR；task-1：+ CZ）。
 
 覆盖：
-1. `db/schema.sql` 的枚举含四国、无重复、EU 不进 country；
+1. `db/schema.sql` 的枚举含新增国家、无重复、EU 不进 country；
 2. 全新库按 schema 建出来后枚举正确，且**第二次 build 不重建**（幂等）；
 3. 老库（枚举仍是 10 国）能就地升级，数据行原样保留；
 4. `db/migrate_country_check.py`：dry-run 不写库 → apply 生效 → 再 apply 幂等 → rollback 回旧枚举；
@@ -36,7 +36,7 @@ import migrate_country_check as mig  # noqa: E402
 SCHEMA = ROOT / "db" / "schema.sql"
 WORK = ROOT / ".tmp" / "tests-country-check"
 OLD_MARKETS = ["US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "HK", "SG"]
-NEW_MARKETS = ["FR", "LV", "JP", "KR"]
+NEW_MARKETS = ["FR", "LV", "JP", "KR", "CZ"]
 
 _CREATED: list[Path] = []
 

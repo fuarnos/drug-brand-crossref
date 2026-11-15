@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -321,6 +321,56 @@
       "order": 120,
       "data_as_of": "2026-11-01",
       "notes": "厚生労働省「薬価基準収載品目リスト」2026-11-01 版（PDL 1.0，署名+加工声明）。口径：**仅收载医保（薬価基準）品目，不是注册库，也不等于当前在售**；成分名为日文一般名，商品名原样日文（不翻译）；无 ATC 的成分页面显示「—」。v0.12.0（2026-11-15）写入 12,442 产品 / 10,403 成分。"
+    },
+    {
+      "code": "CZ",
+      "kind": "country",
+      "parent": null,
+      "group": "EUROPE",
+      "name": {
+        "en": "Czechia",
+        "es": "Chequia",
+        "zh": "捷克",
+        "zh-Hant": "捷克",
+        "fr": "Tchéquie"
+      },
+      "i18n_key": "home.cz",
+      "flag": "🇨🇿",
+      "source_id": "sukl_dlp",
+      "extra_source_ids": [],
+      "default_lang": "en",
+      "languages": [
+        "en"
+      ],
+      "enabled": true,
+      "order": 130,
+      "data_as_of": "2026-11-01",
+      "notes": "SÚKL 开放数据使用条款（可复制/分发/商用；须署名 SÚKL、不得改变数据含义、再分发须附条款链接）；**SPC/PIL/OBALY 第三方文档不取不发布**；排除 FSMP/PZLU 非药品（1,451 行），EU/ 集中审批（13,385 行）与 EU 区域层去重。快照 DLP20261027（2026-11-11 抓取），source_id=sukl_dlp，data_as_of=2026-11-01（快照 dlp_platnost.platnost_od）。口径：**注册库授权 ≠ 当前在售**（状态含 discontinued/withdrawn），商品名原样捷克语（不翻译）。"
+    },
+    {
+      "code": "LV",
+      "kind": "country",
+      "parent": null,
+      "group": "EUROPE",
+      "name": {
+        "en": "Latvia",
+        "es": "Letonia",
+        "zh": "拉脱维亚",
+        "zh-Hant": "拉脫維亞",
+        "fr": "Lettonie"
+      },
+      "i18n_key": "home.lv",
+      "flag": "🇱🇻",
+      "source_id": "zva_lv_register",
+      "extra_source_ids": [],
+      "default_lang": "en",
+      "languages": [
+        "en"
+      ],
+      "enabled": true,
+      "order": 140,
+      "data_as_of": "2026-11-11",
+      "notes": "ZVA（Zāļu valsts aģentūra）「Latvijas Zāļu reģistrs」HumanProducts（data.gov.lv，**CC0 1.0**，无强制义务；本站仍按惯例署名 ZVA + 数据截止日）。包装级 40,600 条 → 注册号 18,766；EU 集中审批 1,561 个药号与 EU 区域层去重。快照 2026-11-11 抓取，source_id=zva_lv_register，data_as_of=2026-11-11（ZIP/状态表 Last-Modified）。口径：**授权/收载 ≠ 当前在售**（`status`/`prd_removed`/`sell_stop_date` 三开关联合判，active 4,551；平行进口与未注册药品单独计数）。"
     }
   ]
 }

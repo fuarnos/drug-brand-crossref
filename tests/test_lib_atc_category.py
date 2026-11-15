@@ -7,6 +7,9 @@
   12 个口语词的验收（期望大类 + 期望首个成分）；
 - SearchIndex.search 返回 match_source（atc / category）与结果卡；
 - 普通名字检索行为不变。
+- v0.13.0：数据窗口加 CZ 68,581 + LV 18,766 产品后，两条 Top-1 期望按「现查 DB」口径
+  更新（减肥药 Orlistat→Semaglutide、抗抑郁药 Venlafaxine→Duloxetine）；口径与实现未变，
+  数字与判定见 reports/2026-11-16-atc-category-top1.md。
 """
 from __future__ import annotations
 
@@ -218,19 +221,25 @@ class AtcCategorySearchTest(unittest.TestCase):
                       {s for c in res.cards for s in c.substances})
 
     def test_colloquial_acceptance_words(self) -> None:
-        """v0.10.3 #2 验收：12 个口语词 → 期望大类 + 期望首个成分（现查 DB 口径）。"""
+        """v0.10.3 #2 验收：12 个口语词 → 期望大类 + 期望首个成分（现查 DB 口径）。
+
+        v0.13.0 数据窗口（新增 CZ / LV）后两条期望随现查变化，非实现改动：
+        · 减肥药：Semaglutide 316 > Orlistat 308（剔除 CZ+LV 复算：Orlistat 254 > Semaglutide 207）
+        · 抗抑郁药：Duloxetine 866 > Venlafaxine 815（剔除 CZ+LV：Venlafaxine 813 > Duloxetine 658）
+        口径仍是「该类别内 active 产品最多的成分」（见 test_category_top1_by_ingredient_total）。
+        """
         cases = [
             ("退烧药", "analgesics", "Acetaminophen"),
             ("消炎药", "antibiotics", "Amoxicillin"),
             ("胃药", "acid-related", "Omeprazole"),
             ("降血压药", "antihypertensives", "Hydrochlorothiazide"),
             ("降糖药", "diabetes", "Metformin"),
-            ("减肥药", "weight-loss", "Orlistat"),
+            ("减肥药", "weight-loss", "Semaglutide"),        # v0.13.0：Orlistat 308 → Semaglutide 316
             ("感冒药", "cold-medicine", "Acetaminophen"),
             ("抗过敏药", "allergy", "Chlorpheniramine"),
             ("抗凝药", "anticoagulants", "Aspirin"),
             ("他汀", "statins", "Atorvastatin"),
-            ("抗抑郁药", "antidepressants", "Venlafaxine"),
+            ("抗抑郁药", "antidepressants", "Duloxetine"),   # v0.13.0：Venlafaxine 815 → Duloxetine 866
             ("皮肤药", "dermatologicals", "Zinc Oxide"),
         ]
         for q, cid, ing in cases:
@@ -241,11 +250,18 @@ class AtcCategorySearchTest(unittest.TestCase):
             self.assertIn(ing, res.cards[0].substances, f"{q} 的首个成分应为 {ing}")
 
     def test_category_top1_by_ingredient_total(self) -> None:
-        """v0.10.3 #3 排序：Top-1 = 该类别里 active 产品最多的成分（方案 H）。"""
+        """v0.10.3 #3 排序：Top-1 = 该类别里 active 产品最多的成分（方案 H）。
+
+        v0.13.0 按现查 DB 更新抗抑鬱藥期望：Venlafaxine 815 < Duloxetine 866；
+        剔除 CZ+LV 复算为 Venlafaxine 813 > Duloxetine 658（旧期望在旧窗口成立）。
+        注意：Venlafaxine Hydrochloride 是另一条 substance 行（434，其中 CZ 395），
+        本口径按 substance 行计数（与 gen_atc_category_cases.py / 客户端 atc-ing 同源），
+        不合并盐型；合并后 815+434=1,249 的口径不在本任务范围（见报告 §5）。
+        """
         for q, cid, ing in (("抗过敏药", "allergy", "Chlorpheniramine"),
                             ("Blood-pressure medicines", "antihypertensives",
                              "Hydrochlorothiazide"),
-                            ("抗抑鬱藥", "antidepressants", "Venlafaxine")):
+                            ("抗抑鬱藥", "antidepressants", "Duloxetine")):
             res = self.idx.search(q)
             self.assertEqual(res.match_detail["category_id"], cid, q)
             # 首位卡片可以是复方卡（如 Irbesartan + Hydrochlorothiazide），但必须含期望成分

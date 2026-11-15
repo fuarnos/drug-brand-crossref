@@ -215,6 +215,8 @@ I18N = {
         "home.hk": "Hong Kong",
         "home.eu": "European Union (EU)",
         "home.jp": "Japan",
+        "home.cz": "Czechia",
+        "home.lv": "Latvia",
         "home.fr": "France",
         "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, attribution required; "
                             "update date in the data package; authorisation ≠ on sale."),
@@ -461,6 +463,8 @@ I18N = {
         "home.hk": "Hong Kong",
         "home.eu": "Unión Europea (UE)",
         "home.jp": "Japón",
+        "home.cz": "Chequia",
+        "home.lv": "Letonia",
         "home.fr": "Francia",
         "coverage.gap.fr": ("BDPM (ANSM) — Licence Ouverte / etalab-2.0, atribución obligatoria; "
                             "fecha de actualización en el paquete de datos; autorización ≠ venta."),
@@ -703,6 +707,8 @@ I18N = {
         "home.hk": "中国香港",
         "home.eu": "欧盟（EU）",
         "home.jp": "日本",
+        "home.cz": "捷克",
+        "home.lv": "拉脱维亚",
         "home.fr": "法国",
         "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，须署名；更新日期见数据包；授权有效 ≠ 在售。",
         "about.fr_source": ('<p class="sub"><b>法国</b>：BDPM（Base de données publique des médicaments，ANSM），'
@@ -923,6 +929,8 @@ FR_I18N: dict[str, str] = {
     "home.ca": "Canada", "home.sg": "Singapour", "home.tw": "Chine Taïwan",
     "home.hk": "Chine Hong Kong", "home.eu": "Union européenne (UE)",
     "home.jp": "Japon",
+    "home.cz": "Tchéquie",
+    "home.lv": "Lettonie",
     "eu.region_title": "Autorisation centralisée UE (EMA)",
     "eu.region_note": ("Autorisé au niveau de l'UE — pas une preuve de vente dans un pays donné. "
                        "Le registre de l'UE ne contient ni dosage, ni forme, ni conditionnement."),
@@ -1281,6 +1289,12 @@ FR_I18N.update({
     "coverage.gap.mx": "La licence source est en attente de confirmation ; les inscriptions plus anciennes sont incluses.",
     "coverage.gap.tw": "La force est analysée à partir du nom du produit ; la confiance est limitée.",
     "coverage.gap.hk": "Couche de nom/ingrédient uniquement : pas de concentration, de forme ou de statut d'enregistrement ; enregistré ≠ commercialisé.",
+    "coverage.gap.cz": ("Registre de données ouvertes SÚKL (DLP) : enregistrements seulement, pas une "
+                        "liste de vente actuelle ; les notices SPC/PIL ne sont ni récupérées ni "
+                        "republiées. Source : SÚKL, 2026-11-01 (instantané DLP20261027)."),
+    "coverage.gap.lv": ("Données ouvertes HumanProducts de la ZVA (niveau conditionnement, regroupé par "
+                        "numéro d'enregistrement) : un registre, pas une liste de ce qui est actuellement "
+                        "vendu. Source : ZVA, CC0 1.0, 2026-11-11."),
     "coverage.gap.jp": ("Uniquement les lignes de la liste des prix (薬価基準) : pas un registre "
                         "des autorisations, ni une preuve de disponibilité actuelle. Source : "
                         "MHLW (厚生労働省), PDL 1.0, 2026-11-01."),
@@ -1290,6 +1304,27 @@ FR_I18N.update({
     "about.au_source": "<p class=\"sub\"><b>Australie</b> : TGA <b>ARTG Medicines 2026-10-28</b> (Registre australien des produits thérapeutiques ; attribution TGA/ARTG). Données au <b>2026-10-28</b>. L'exportation n'a <b>aucune colonne de statut d'enregistrement</b>, le statut est donc affiché comme inconnu ; <b>être inscrit au registre ne signifie pas être actuellement commercialisé</b>. 3 911 produits n'ont aucun enregistrement d'ingrédients et sont affichés au niveau du nom uniquement.</p>",
     "about.eu_source": "<p class=\"sub\"><b>Couche régionale de l'UE</b> : [[3]Commission européenne — Registre de l'Union des médicaments</b> (CC BY 4.0 ; attribution Commission européenne / Registre de l'Union) plus données [[5]EMA Medicines</b> pour vérification croisée (source : Agence européenne des médicaments (EMA) ; pas de logo de l'EMA, pas d'approbation implicite). Autorisations centrales uniquement (médicaments à usage humain), données au <b>2026-11-03</b>. <b>Une autorisation de l'UE ne constitue pas un enregistrement de vente dans un seul pays, et le registre ne contient aucun dosage, forme posologique ou taille d'emballage.</b> Les produits qui ne correspondent à aucun ingrédient connu sont affichés au niveau du nom uniquement.</p>",
     "conf.source_note": "Source : <a href=\"https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project\" target=\"_blank\" rel=\"noopener\">Projet de différenciation des noms de la FDA</a> (contenu à jour au 12/06/2026 ; travaux du gouvernement américain). Seules les paires @@CONF_PAIRS@@ officiellement republiables de la liste FDA sont incluses ; le copyright ISMP/ECRI « Liste des noms de médicaments confus » n'est pas copié. Les noms uniques figurant sur la liste de la FDA sans paire (hydromorphone, mitoxantrone) ne sont pas répertoriés. Une paire est un avertissement concernant les noms, et non une déclaration selon laquelle les médicaments sont équivalents.",
+    "about.cz_source": ("<p class=\"sub\"><b>Tchéquie</b> : SÚKL <b>DLP</b> (base de données des "
+                        "médicaments, données ouvertes mensuelles) selon les <b>conditions "
+                        "d'utilisation des données ouvertes de SÚKL</b> — copie, rediffusion et usage "
+                        "commercial autorisés ; <b>attribution : SÚKL</b>, sens inchangé "
+                        "(<a href=\"https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat\">"
+                        "conditions</a>). Données au <b>2026-11-01</b> (instantané DLP20261027). Faits uniquement (nom, dosage, "
+                        "forme, ATC, ingrédient, titulaire, statut d'enregistrement) ; la normalisation "
+                        "des dosages et le découpage des ingrédients sont <b>dérivés</b> des champs "
+                        "officiels. <b>Les notices SPC/PIL et les conditionnements sont des documents "
+                        "de tiers : jamais récupérés ni republiés</b> ; les lignes FSMP et PZLÚ "
+                        "(non-médicaments) sont exclues, et les autorisations centralisées de l'UE sont "
+                        "dédoublonnées par rapport à la couche UE. <b>Figurer au registre ne signifie "
+                        "pas être en vente actuellement.</b></p>"),
+    "about.lv_source": ("<p class=\"sub\"><b>Lettonie</b> : ZVA <b>HumanProducts</b> (Latvijas Zāļu "
+                        "reģistrs, export quotidien) publié sous <b>CC0 1.0</b> ; aucune attribution "
+                        "n'est exigée, mais nous créditons par convention <b>Zāļu valsts aģentūra "
+                        "(ZVA)</b>. Données au <b>2026-11-11</b>. Les lignes au niveau du "
+                        "conditionnement sont regroupées par numéro d'enregistrement ; faits uniquement "
+                        "(noms letton et d'origine, dosage, forme, INN, ATC, titulaire, statut). Les "
+                        "autorisations centralisées de l'UE sont dédoublonnées par rapport à la couche "
+                        "UE. <b>L'enregistrement n'est pas une preuve de vente actuelle.</b></p>"),
     "warn.sev.info": "Informations",
     "combo.compact": "combinaison",
     "combo.cross_title": "Même combinaison sur d'autres marchés",
@@ -1636,6 +1671,12 @@ COVERAGE_I18N = {
         # v0.12.0（JP 上车）：医保价格表（薬価基準）品目，不是注册库，也不代表当前在售。
         "coverage.gap.jp": ("NHI price-list (薬価基準) items only — not a registration database and not "
                             "proof of current supply. Source: MHLW (厚生労働省), PDL 1.0, 2026-11-01."),
+        # v0.13.0（CZ/LV 上车）：开放数据注册库，不是在售清单；CZ 的 SPC/PIL 第三文档不取不发布。
+        "coverage.gap.cz": ("SÚKL open-data register (DLP) — registration records, not a current-sale "
+                            "list; SPC/PIL leaflets are never taken or republished. Source: SÚKL, 2026-11-01 (snapshot DLP20261027)."),
+        "coverage.gap.lv": ("ZVA HumanProducts open data (pack level, grouped by registration number) — "
+                            "a register, not a list of what is currently on sale. Source: ZVA, CC0 1.0, "
+                            "2026-11-11."),
     },
     "es": {
         "nav.coverage": "Cobertura",
@@ -1671,6 +1712,12 @@ COVERAGE_I18N = {
         "coverage.gap.jp": ("Solo partidas de la lista de precios de la sanidad pública (薬価基準): no es "
                             "un registro de autorizaciones ni prueba de suministro actual. Fuente: MHLW "
                             "(厚生労働省), PDL 1.0, 2026-11-01."),
+        "coverage.gap.cz": ("Registro de datos abiertos de SÚKL (DLP) — solo registros, no una lista de "
+                            "venta actual; los prospectos SPC/PIL no se recogen ni se republican. Fuente: "
+                            "SÚKL, 2026-11-01 (instantánea DLP20261027)."),
+        "coverage.gap.lv": ("Datos abiertos HumanProducts de ZVA (nivel de envase agrupado por número de "
+                            "registro) — un registro, no una lista de lo que se vende actualmente. Fuente: "
+                            "ZVA, CC0 1.0, 2026-11-11."),
     },
     "zh": {
         "nav.coverage": "覆盖与新鲜度",
@@ -1698,6 +1745,10 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "许可待确认；包含较早注册记录。",
         "coverage.gap.tw": "规格由品名解析，置信度有限。",
         "coverage.gap.hk": "仅名称/成分层：无规格、无剂型、无注册状态；在册≠在售。",
+        "coverage.gap.cz": ("仅收载 SÚKL 开放数据（DLP）注册记录，不是在售清单；SPC/PIL 说明书不取不发布；"
+                            "出典 SÚKL、2026-11-01（快照 DLP20261027）。"),
+        "coverage.gap.lv": ("仅收载 ZVA HumanProducts 开放数据（包装级按注册号归并），是注册库、不是在售清单；"
+                            "出典 ZVA、CC0 1.0、2026-11-11。"),
         "coverage.gap.jp": ("仅收载医保（薬価基準）品目，非注册库、不等于当前在售；出典 厚生労働省、"
                             "PDL 1.0、2026-11-01。"),
     },
@@ -1727,6 +1778,10 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "許可待確認；包含較早註冊紀錄。",
         "coverage.gap.tw": "規格由品名解析，置信度有限。",
         "coverage.gap.hk": "僅名稱/成分層：無規格、無劑型、無註冊狀態；在冊≠在售。",
+        "coverage.gap.cz": ("僅收載 SÚKL 開放資料（DLP）註冊紀錄，不是在售清單；SPC/PIL 說明書不取不發布；"
+                            "出典 SÚKL、2026-11-01（快照 DLP20261027）。"),
+        "coverage.gap.lv": ("僅收載 ZVA HumanProducts 開放資料（包裝級按註冊號歸併），是註冊庫、不是在售清單；"
+                            "出典 ZVA、CC0 1.0、2026-11-11。"),
         "coverage.gap.jp": ("僅收載健保（薬価基準）品目，非註冊庫、不等於目前在售；出典 厚生労働省、"
                             "PDL 1.0、2026-11-01。"),
     },
@@ -2394,6 +2449,8 @@ UI_I18N = {
         "home.hk": "中國香港",
         "home.eu": "歐盟（EU）",
         "home.jp": "日本",
+        "home.cz": "捷克",
+        "home.lv": "拉脫維亞",
         "home.fr": "法國",
         "coverage.gap.fr": "BDPM（ANSM）— Licence Ouverte / etalab-2.0，須署名；更新日期見資料包；授權有效 ≠ 在售。",
         "about.fr_source": ('<p class="sub"><b>法國</b>：BDPM（Base de données publique des médicaments，ANSM），'
@@ -2418,6 +2475,22 @@ UI_I18N = {
             '第 1 版（SODL v1.0）</b>釋出，須署名並鏈回授權頁，不得暗示政府背書；資料截止 '
             '<b>2026-08-07</b>（每 6 個月更新）。<b>在冊名單不代表在售。</b>商品名保留英文原文、'
             '不翻譯；中文僅成分名（inn_zh）可顯示。</p>'),
+        # v0.13.0（CZ/LV 上车）：About 来源段落；zh-Hant 值写在这里（data/i18n_zh_hant.json 不属本工位写权限）。
+        "about.cz_source": (
+            '<p class="sub"><b>捷克</b>：SÚKL「藥品資料庫（DLP）」月度開放資料，依 '
+            '<b>SÚKL 開放資料使用條款</b>使用（允許複製／再散布與商用；須署名 SÚKL 且不得暗示其背書；'
+            '不得改變或歪曲資料含義；再散布須附條款連結）。資料截至 <b>2026-11-01</b>（快照 DLP20261027）。'
+            '只存事實欄位（品名、規格、劑型、ATC、成分、MAH、註冊狀態）；規格正規化與成分拆分'
+            '<b>衍生自</b>官方欄位，不改寫原文。<b>SPC/PIL 與包裝說明書屬第三方智慧財產，一律不取不發布</b>；'
+            '排除 FSMP 與 PZLÚ 非藥品行，歐盟集中審批產品與 EU 區域層去重。<b>收載 ≠ 目前在售。</b>'
+            '條款：<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">'
+            'opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat</a>。</p>'),
+        "about.lv_source": (
+            '<p class="sub"><b>拉脫維亞</b>：ZVA <b>HumanProducts</b>（Latvijas Zāļu reģistrs，每日匯出）'
+            '依 <b>CC0 1.0</b> 發布，無強制署名義務；本站仍按慣例署名 '
+            '<b>Zāļu valsts aģentūra（ZVA）</b>。資料截至 <b>2026-11-11</b>。'
+            '包裝級紀錄按註冊號歸併；只存事實欄位（拉語名與原始名、規格、劑型、INN、ATC、MAH、狀態）。'
+            '歐盟集中審批產品與 EU 區域層去重。<b>收載 ≠ 目前在售。</b></p>'),
         # v0.11.6 task-1（T12 C2/C3/C4）：品牌頁「配方差異」表（與 en 同鍵集）。
         "fam.cmp_title": "相關品牌名稱與配方差異",
         "fam.cmp_intro": ("同一個品牌名在各市場的註冊名與活性成分可以不同。下表只做身分對應"
@@ -2841,6 +2914,26 @@ ABOUT_I18N = {
             'medicines), data as of <b>2026-11-03</b>. <b>An EU authorisation is not a record of '
             'sale in any single country, and the register carries no strength, dosage form or pack '
             'size.</b> Products that map to no known ingredient are shown at name level only.</p>'),
+        # v0.13.0（CZ/LV 上车）：许可/署名段（数据表 @@COV@@ 由 source 表自动生成，这两段是人工许可口径）。
+        "about.cz_source": (
+            '<p class="sub"><b>Czechia 捷克</b>: SÚKL <b>DLP</b> (Database of Medicinal Products, '
+            'monthly open data) under the <b>SÚKL open-data terms</b> — copying, redistribution and '
+            'commercial use are allowed; <b>attribution: SÚKL</b> and the meaning must not be altered '
+            '(<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">terms</a>). Data '
+            'as of <b>2026-11-01</b> (snapshot DLP20261027). Facts only (name, strength, form, ATC, ingredient, MAH, '
+            'registration status); strength normalisation and ingredient splitting are <b>derived</b> '
+            'from the official fields. <b>SPC/PIL and pack leaflets are third-party documents and are '
+            'never taken or republished</b>; FSMP and PZLÚ non-medicine rows are excluded, and EU '
+            'central authorisations are deduplicated against the EU layer. <b>Being on the register '
+            'does not mean the product is currently on sale.</b></p>'),
+        "about.lv_source": (
+            '<p class="sub"><b>Latvia 拉脱维亚</b>: ZVA <b>HumanProducts</b> (Latvijas Zāļu reģistrs, '
+            'daily export) released under <b>CC0 1.0</b>; no attribution is required, but we credit '
+            '<b>Zāļu valsts aģentūra (ZVA)</b> by convention. Data as of <b>2026-11-11</b>. '
+            'Pack-level rows are grouped under the registration number; facts only (Latvian and '
+            'original names, strength, form, INN, ATC, MAH, status). EU centrally authorised '
+            'products are deduplicated against the EU layer. <b>Registration is not a record of '
+            'current sale.</b></p>'),
         "about.samename": (
             '<h2>Why “same name, different drug” happens</h2>'
             '<p class="sub">The same trademark is held by different companies in different '
@@ -3000,6 +3093,26 @@ ABOUT_I18N = {
             'no es un registro de venta en un país concreto, y el registro no incluye dosis, '
             'forma farmacéutica ni tamaño de envase.</b> Los productos sin ingrediente identificado '
             'se muestran solo a nivel de nombre.</p>'),
+        "about.cz_source": (
+            '<p class="sub"><b>Chequia 捷克</b>: SÚKL <b>DLP</b> (base de datos de medicamentos, datos '
+            'abiertos mensuales) bajo las <b>condiciones de datos abiertos de SÚKL</b> — se permite '
+            'copiar, redistribuir y usar comercialmente; <b>atribución: SÚKL</b> y sin alterar el '
+            'significado (<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">'
+            'condiciones</a>). Datos hasta <b>2026-11-01</b> (instantánea DLP20261027). Solo campos de hecho (nombre, '
+            'concentración, forma, ATC, principio activo, titular, estado del registro); la '
+            'normalización de concentraciones y el desglose de ingredientes son <b>derivados</b> de '
+            'los campos oficiales. <b>Los prospectos SPC/PIL y los envases son documentos de terceros '
+            'y no se recogen ni se republican</b>; se excluyen las filas FSMP y PZLÚ (no '
+            'medicamentos), y las autorizaciones centralizadas de la UE se deduplican contra la capa '
+            'de la UE. <b>Estar en el registro no significa que se venda actualmente.</b></p>'),
+        "about.lv_source": (
+            '<p class="sub"><b>Letonia 拉脱维亚</b>: ZVA <b>HumanProducts</b> (Latvijas Zāļu reģistrs, '
+            'exportación diaria) publicado bajo <b>CC0 1.0</b>; no exige atribución, pero citamos por '
+            'convención a <b>Zāļu valsts aģentūra (ZVA)</b>. Datos hasta <b>2026-11-11</b>. Las filas '
+            'por envase se agrupan por número de registro; solo campos de hecho (nombres en letón y '
+            'originales, concentración, forma, INN, ATC, titular, estado). Las autorizaciones '
+            'centralizadas de la UE se deduplican contra la capa de la UE. <b>Estar en el registro no '
+            'es un registro de venta actual.</b></p>'),
         "about.samename": (
             '<h2>Por qué ocurre «mismo nombre, otro medicamento»</h2>'
             '<p class="sub">La misma marca pertenece a empresas distintas en cada mercado y la '
@@ -3133,6 +3246,21 @@ ABOUT_I18N = {
             '不使用 EMA logo、不暗示背书）。只收人用药品的集中审批产品，数据截止 '
             '<b>2026-11-03</b>。<b>欧盟授权不是某一国家的在售记录，登记也不含规格、剂型、包装。</b>'
             '映射不到已知成分的产品仅按名称层展示。</p>'),
+        "about.cz_source": (
+            '<p class="sub"><b>捷克</b>：SÚKL「药品数据库（DLP）」月度开放数据，依 '
+            '<b>SÚKL 开放数据使用条款</b>使用（允许复制／再分发与商用；须署名 SÚKL 且不得暗示其背书；'
+            '不得改变或歪曲数据含义；再分发须附条款链接）。数据截至 <b>2026-11-01</b>（快照 DLP20261027）。'
+            '只存事实栏位（品名、规格、剂型、ATC、成分、MAH、注册状态）；规格归一与成分拆分'
+            '<b>派生自</b>官方字段，不改写原文。<b>SPC/PIL 与包装说明书属第三方知识产权，一律不取不发布</b>；'
+            '排除 FSMP 与 PZLÚ 非药品行，欧盟集中审批产品与 EU 区域层去重。<b>收载 ≠ 当前在售。</b>'
+            '条款：<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">'
+            'opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat</a>。</p>'),
+        "about.lv_source": (
+            '<p class="sub"><b>拉脱维亚</b>：ZVA <b>HumanProducts</b>（Latvijas Zāļu reģistrs，每日导出）'
+            '依 <b>CC0 1.0</b> 发布，无强制署名义务；本站仍按惯例署名 '
+            '<b>Zāļu valsts aģentūra（ZVA）</b>。数据截至 <b>2026-11-11</b>。'
+            '包装级记录按注册号归并；只存事实栏位（拉语名与原始名、规格、剂型、INN、ATC、MAH、状态）。'
+            '欧盟集中审批产品与 EU 区域层去重。<b>收载 ≠ 当前在售。</b></p>'),
         "about.samename": (
             '<h2>为什么会有「同名不同药」</h2>'
             '<p class="sub">同一个商标在不同市场属于不同公司，配方可能完全不同。已验证的例子：'
@@ -4399,7 +4527,9 @@ padding:14px 16px;margin:10px 0}
 .tag.us{color:#0b6b53;border-color:#a9d3c5}
 .tag.es{color:#8a2c1f;border-color:#e6bdb4}
 .tag.au{color:#6b3b0b;border-color:#e0c9a6}
-.tag.combo{color:#7a3b1f;border-color:#e6c3b3}
+/* v0.13.0（task-6）：combo 胶囊原用 --surface-2 打底，和结果行斑马纹 / 浅色行同色（246,245,240）
+   → 改「差异色」打底（--warnbg），与 .tag.warn 同一口径：差异徽章只靠自己的颜色区分，不靠中性底色。 */
+.tag.combo{color:#7a3b1f;border-color:#e6c3b3;background:var(--warnbg)}
 .tag.ca{color:#7a1420;border-color:#e7c3c7}
 .tag.mx{color:#4b5b0b;border-color:#cdd6a6}
 .tag.tw{color:#1f5c7a;border-color:#b7d5e3}
@@ -8996,7 +9126,8 @@ def _slim_shell(*chunks: str) -> tuple[str, ...]:
 # 两边共用下面同一份模板（boot.js 里把根前缀写成 __R__ 占位）。
 SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA", "home.ca"),
                  ("AU", "home.au"), ("ES", "home.es"), ("TW", "home.tw"), ("HK", "home.hk"),
-                 ("MX", "home.mx"), ("SG", "home.sg"), ("JP", "home.jp"), ("EU", "home.eu"))
+                 ("MX", "home.mx"), ("SG", "home.sg"), ("JP", "home.jp"),
+                 ("CZ", "home.cz"), ("LV", "home.lv"), ("EU", "home.eu"))
 SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
 
 
@@ -9140,7 +9271,7 @@ def _shell_cat_links(prefix: str, limit: int = 99) -> str:
 
 
 def _shell_market_links(prefix: str) -> str:
-    """市场面板：10 个国别市场 + EU 区域层，锚到覆盖页对应行（覆盖页每行有 id="market-XX"）。"""
+    """市场面板：13 个国别市场 + EU 区域层，锚到覆盖页对应行（覆盖页每行有 id="market-XX"）。"""
     return "".join(
         f'<a href="{prefix}coverage.html#market-{cc}">'
         f'<span data-i18n="{key}">{esc(I18N["en"].get(key, cc))}</span>'
@@ -10276,7 +10407,7 @@ def _market_is_enabled(code: str) -> bool:
         return False
 
 
-COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "EU")
+COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "EU")
                     + (("FR",) if _market_is_enabled("FR") else ()))
 MATRIX_ROW_CAP = 120
 
@@ -12978,7 +13109,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="JP" data-i18n="home.jp">Japan</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
+    <option value="JP" data-i18n="home.jp">Japan</option><option value="CZ" data-i18n="home.cz">Czechia</option><option value="LV" data-i18n="home.lv">Latvia</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   <label class="sel-label src-label" for="src" data-i18n="res.src_label">Source market (only records from):</label>
   <select id="src"><option value="" data-i18n="res.src_all">All source markets</option>
     <option value="US" data-i18n="home.us">United States</option>
@@ -12991,7 +13122,7 @@ def build_index_page(entries, stats, coverage) -> None:
     <option value="TW" data-i18n="home.tw">Taiwan</option>
     <option value="HK" data-i18n="home.hk">Hong Kong</option>
     <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="JP" data-i18n="home.jp">Japan</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
+    <option value="JP" data-i18n="home.jp">Japan</option><option value="CZ" data-i18n="home.cz">Czechia</option><option value="LV" data-i18n="home.lv">Latvia</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
   </div>
 </details>
 <p class="sub report-line" id="report" style="display:none">
@@ -13061,6 +13192,9 @@ SOURCE_SHORT = {
     "cima": "CIMA",
     "cofepris_mx": "COFEPRIS",
     "hc_dpd": "Health Canada DPD",
+    # v0.13.0（CZ/LV 上车）：About 覆盖表的「数据日期」列按 source_id 取短名
+    "sukl_dlp": "SÚKL",
+    "zva_lv_register": "ZVA",
     "manual_seed": "manual",
 }
 
@@ -13110,7 +13244,8 @@ def build_about(stats, coverage, source_cover=()) -> None:
                         summary_key="about.summary")]
     for key in ("about.lead", "about.rules", "about.nick", "about.nick_merged", "about.terms",
                 "about.sources", "about.loading", "about.tw_source", "about.sg_source",
-                "about.hk_source", "about.au_source", "about.eu_source", "about.fr_source"):
+                "about.hk_source", "about.au_source", "about.eu_source", "about.cz_source",
+                "about.lv_source", "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     parts.append('<details class="lic-wrap"><summary data-i18n="about.licences_summary">'
                  'Data sources and licences</summary>' + LICENCE_HTML + '</details>')
@@ -15814,10 +15949,11 @@ def main() -> None:
     });
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
     // v0.6.6/v0.7.0/v0.7.x：语言列序（含 TW/SG：zh → CN,TW,SG；zh-Hant → TW,CN,HK,SG；es → ES,MX…）
-    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','EU'],
-                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK','EU'],
-                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX','EU'],
-                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX','EU']};
+    // v0.13.0（task-4）：补 FR/JP/CZ/LV —— 原来缺这些码会让 rank[code] 为 undefined（矩阵列/国家 chips 排到 99 之后，顺序不稳定）
+    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','FR','JP','CZ','LV','EU'],
+                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK','FR','JP','CZ','LV','EU'],
+                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','EU'],
+                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','EU']};
     var morder = MORDER[window.LANG] || MORDER.en;
     window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
     document.querySelectorAll('table.matrix').forEach(function(tb){

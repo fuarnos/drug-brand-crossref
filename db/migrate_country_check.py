@@ -49,8 +49,9 @@ SCHEMA = ROOT / "db" / "schema.sql"
 DEFAULT_DB = ROOT / "data" / "drugs.db"
 DEFAULT_MANIFEST = ROOT / ".tmp" / "country-mig" / "country_check_manifest.json"
 
-# 本任务新增的四个市场（仅用于「回滚前置检查」与报告；目标枚举仍从 schema.sql 读）
-NEW_MARKETS = ("FR", "LV", "JP", "KR")
+# 本任务新增的市场（仅用于「回滚前置检查」与报告；目标枚举仍从 schema.sql 读）
+# task-56 加 FR / LV / JP / KR；task-1（v0.13.0，2026-11-16）加 CZ。
+NEW_MARKETS = ("FR", "LV", "JP", "KR", "CZ")
 
 CHECK_RE = re.compile(
     r"country\s+TEXT\s+(?:NOT\s+NULL\s+|NULL\s+)?CHECK\s*\(\s*"

@@ -10,12 +10,12 @@
 
 评估依据：`reports/2026-11-12-eu-member-states-scan.md` §12.1 / §14③。
 
-本阶段为什么不写库
-------------------
-许可没问题，**但 UI 改版未完成（用户 2026-11-12 定「先取数，等 UI 改完再上线」）**，且
-`product.country` 的 CHECK 枚举还没有 LV（要 `db/migrate_country_lv.py` 重建表）。因此本脚本
-**故意不提供 `--apply` / `--rollback`**，只有 `--fetch` / `--dry-run` / `--self-check`。
-写库路径等上线窗口另开任务，按 `etl/ingest_eu.py` 的 `--apply` / `--rollback` / `--manifest` 三段式补。
+本阶段为什么不写库（2026-11-16 更新：已补写库路径）
+----------------------------------------------------
+许可没问题；`product.country` 的 CHECK 枚举已在 v0.13.0 数据窗口（2026-11-16）连同 CZ 一起
+落库，本脚本照 `etl/markets/fr.py` / `etl/ingest_eu.py` 的 `--apply` / `--rollback` /
+`--manifest` 三段式补了写库路径：40,600 个包装级条目按 `authorisation_no` 聚合成 18,766 个
+产品（同一药号不重复计产品），成分只做已有成分的精确映射（本轮不建新成分）。
 
 数据源与形状
 ------------
@@ -105,11 +105,13 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
+sys.path.insert(0, str(ROOT / "etl" / "markets"))
 
 from ingest_openfda_ndc import form_base_of, slug  # noqa: E402
 from ingest_sg_hsa import SgMapper  # noqa: E402
 from normalize_name import normalize  # noqa: E402
 from normalize_strength import norm_unit  # noqa: E402
+import _ingest_common as common  # noqa: E402
 
 # Windows 控制台默认 GBK，拉脱维亚语 ā/č/ē/ģ/ī/ķ/ļ/ņ/š/ū/ž 会让 print 抛 UnicodeEncodeError。
 try:  # pragma: no cover - 只影响终端显示
@@ -822,6 +824,349 @@ def cmd_dry_run(args: argparse.Namespace) -> int:
     return 0
 
 
+# ---------------------------------------------------------------- 写库 / 回滚（M1 窗口，2026-11-16）
+# 照 etl/markets/fr.py / etl/ingest_eu.py 的三段式：--apply / --rollback / --manifest。
+# 口径（不猜）：一条 XML `<product>` 是**包装级**条目，同一 `authorisation_no` 只写 1 个产品
+# （40,600 包装 → 18,766 注册号）；成分全部映射成功才写；强度只按来源 `strength` 原文，
+# 解析段数与成分数对不上就留空；不建新成分（LV 这一轮只做「已有成分精确映射」）。
+RETRIEVED_AT = "2026-11-11"          # fetch_meta.json 抓取日（ZIP Last-Modified 2026-11-11）
+DATA_AS_OF = "2026-11-11"
+REAL_DB = DEFAULT_DB
+MANIFEST_DEFAULT = ROOT / "data" / "sources" / "lv_ingest_manifest_20261116.json"
+SOURCE_META = {
+    "name": "Zāļu valsts aģentūra (ZVA) — Latvijas Zāļu reģistrs (HumanProducts)",
+    "url": URL_DATASET,
+    "license": "CC0 1.0 Universal (Public Domain Dedication)",
+    "license_url": LICENCE["url"],
+    "retrieved_at": RETRIEVED_AT,
+    "data_as_of": DATA_AS_OF,
+    "data_as_of_note": "导出文件 Last-Modified 2026-11-11；快照抓取 2026-11-11T17:58Z（fetch_meta.json）",
+    "notes": "拉脱维亚国家药品注册库（包装级 40,600 行 → 按注册号 18,766 个产品）；"
+             "CC0 仍按惯例署名 ZVA；授权/收载 ≠ 当前在售"
+             "（status/prd_removed/sell_stop_date 三开关联合判）。",
+}
+
+
+def lv_release_of(form_en: str) -> str:
+    """剂型原文 → release 枚举（只认原文里的释放词，不改写剂型）。"""
+    f = (form_en or "").lower()
+    if "prolonged" in f or "extended" in f:
+        return "ER"
+    if "gastro-resistant" in f or "delayed" in f:
+        return "DR"
+    if "modified" in f:
+        return "MR"
+    return "none"
+
+
+def _assign_strengths(parts: list[dict], n: int) -> list[dict | None]:
+    """来源 `strength` 解析段 → 每个成分的强度。段数与成分数对不上就全部留空（不猜顺序）。"""
+    if n == 1 and len(parts) == 1:
+        return [parts[0]]
+    if len(parts) == n:
+        return list(parts)
+    return [None] * n
+
+
+def build_plan(db: sqlite3.Connection) -> dict:
+    """XML 快照 → 待写产品（按注册号聚合）。**只读库**（不写）。"""
+    from ingest_ema_medicines import _variant_resolver
+
+    status_map = load_status()
+    mapper = SgMapper(db)
+    resolve = _variant_resolver(db)
+    eu_ids = {r[0] for r in db.execute(
+        "SELECT approval_id FROM product WHERE region='EU' AND approval_id IS NOT NULL")}
+
+    stats: collections.Counter = collections.Counter()
+    groups: dict[str, list[dict]] = {}
+    for row in iter_products():
+        stats["packages"] += 1
+        auth = (row.get("authorisation_no") or "").strip()
+        if not auth:
+            stats["skip_no_authorisation_no"] += 1
+            continue
+        cls = classify(row, status_map.get(row.get("product_id", "")))
+        groups.setdefault(auth, []).append({
+            "product_id": (row.get("product_id") or "").strip(),
+            "medicine_name": (row.get("medicine_name") or "").strip(),
+            "original_name": (row.get("original_name") or "").strip(),
+            "short_name": (row.get("short_name") or "").strip(),
+            "form": (row.get("pharmaceutical_form") or "").strip(),
+            "strength": (row.get("strength") or "").strip(),
+            "package": (row.get("package_en") or "").strip() or (row.get("package") or "").strip(),
+            "mah": (row.get("marketing_authorisation_holder") or "").strip(),
+            "active_substance": (row.get("active_substance") or "").strip(),
+            "procedure": (row.get("authorisation_procedure") or "").strip(),
+            "atc": (row.get("atc_code") or "").strip(),
+            "auth_date": (row.get("date_of_authorisation") or "").strip(),
+            "sell_stop_date": (row.get("sell_stop_date") or "").strip(),
+            "remove_date": (row.get("remove_date") or "").strip(),
+            "status": cls["status"],
+            "active": cls["active"],
+            "registered_ok": cls["registered_ok"],
+            "centralised": cls["is_centralised"],
+            "parallel": cls["is_parallel"] or cls["is_unregistered"],
+        })
+
+    stats["authorisations"] = len(groups)
+    if len(groups) != EXPECTED_PRODUCTS and len(groups) != 18_766:
+        stats["warn_authorisation_count"] = len(groups)
+
+    products: list[dict] = []
+    used_ids: set[str] = set()
+    for auth, packages in groups.items():
+        packages.sort(key=lambda p: p["product_id"])
+        rep = packages[0]
+        n_active = sum(1 for p in packages if p["active"])
+        if n_active:
+            status, stats["status:active"] = "active", stats["status:active"] + 1
+        else:
+            status = rep["status"]
+            stats[f"status:{status}"] += 1
+        if any(p["parallel"] for p in packages):
+            stats["parallel_authorisations"] += 1
+        tokens: list[str] = []
+        for p in packages:
+            if p["active_substance"]:
+                tokens = split_substances(p["active_substance"])
+                rep = {**rep, "active_substance": p["active_substance"],
+                       "strength": p["strength"], "form": p["form"] or rep["form"]}
+                break
+        base_pid = f"LV-{slug(auth)}"[:60]
+        pid = base_pid if base_pid not in used_ids else f"{base_pid[:50]}-{slug(auth)}"[-8:]
+        n = 1
+        while pid in used_ids:
+            n += 1
+            pid = f"{base_pid[:50]}-{n}"
+        used_ids.add(pid)
+
+        names: list[tuple[str, str, int]] = []
+        seen_names: set[str] = set()
+        for raw, name_type, primary in (
+                (rep["medicine_name"], "trade", 1),
+                (rep["original_name"], "trade", 0),
+                (rep["short_name"], "colloquial", 0)):
+            if raw and raw not in seen_names:
+                seen_names.add(raw)
+                names.append((raw, name_type, primary))
+
+        comps: list[dict] = []
+        mapped: list[tuple[str, str]] = []
+        all_ok = bool(tokens)
+        for token in tokens:
+            sid, method = map_substance(mapper, token)
+            stats["substance_tokens"] += 1
+            if not sid:
+                stats["substance_unmapped"] += 1
+                all_ok = False
+                continue
+            stats["substance_mapped"] += 1
+            vid = resolve(sid, token)
+            if not vid:
+                stats["component_no_variant"] += 1
+                all_ok = False
+                continue
+            mapped.append((sid, vid))
+        parts = parse_strength_field(rep["strength"])
+        if parts:
+            stats["strength_parsed_products"] += 1
+        strengths = _assign_strengths(parts, len(mapped)) if mapped else []
+        if mapped and all_ok:
+            for idx, (_sid, vid) in enumerate(mapped):
+                comps.append({"variant_id": vid, "strength": strengths[idx] if strengths else None})
+            stats["products_with_components"] += 1
+            stats["components"] += len(comps)
+        elif tokens:
+            stats["products_components_skipped"] += 1
+        else:
+            stats["products_without_ingredient"] += 1
+
+        note_bits = [
+            f"拉脱维亚 ZVA 注册号={auth}",
+            f"包装级 {len(packages)} 条聚合为 1 个产品（原文见 source_url）",
+            f"程序={rep['procedure']}" if rep["procedure"] else "",
+            f"批准日期={rep['auth_date']}" if rep["auth_date"] else "",
+            f"ATC={rep['atc']}" if rep["atc"] else "",
+            f"原文剂型={rep['form']}" if rep["form"] else "",
+            f"原文规格={rep['strength']}" if rep["strength"] else "",
+            f"停售日期={rep['sell_stop_date']}" if rep["sell_stop_date"] else "",
+            f"移除日期={rep['remove_date']}" if rep["remove_date"] else "",
+            f"active 包装 {n_active}" if n_active else "",
+            "授权/收载 ≠ 当前在售",
+        ]
+        products.append({
+            "product_id": pid,
+            "country": "LV",
+            "dosage_form": rep["form"] or "unknown",
+            "form_base": form_base_of(rep["form"]) if rep["form"] else "other",
+            "route": None,
+            "release": lv_release_of(rep["form"]),
+            "pack": rep["package"] or None,
+            "mah": rep["mah"] or None,
+            "approval_id": auth,
+            "category": rep["procedure"] or None,
+            "is_branded": 1,
+            "status": status,
+            "status_date": None,
+            "source_id": SOURCE_ID,
+            "source_url": URL_DATASET,
+            "retrieved_at": RETRIEVED_AT,
+            "note": " · ".join(b for b in note_bits if b)[:500],
+            "names": names,
+            "components": comps,
+            "centralised": bool(rep["centralised"]),
+        })
+        # EU 区域层去重口径：集中审批在 LV 是包装级药号（EU/1/00/129/001），
+        # 去包装段后与 region='EU' 的 approval_id 对账；DB 里两行都保留（区域层 vs 国家层），
+        # 页面按层分组展示，不把同一支药算成两次「国家上市」。
+        eu_prefix = re.sub(r"/\d+$", "", auth)
+        if auth in eu_ids or eu_prefix in eu_ids:
+            stats["eu_overlap_authorisations"] += 1
+        if rep["centralised"]:
+            stats["centralised_authorisations"] += 1
+    stats["products"] = len(products)
+    stats["eu_layer_approval_ids"] = len(eu_ids)
+    return {"products": products, "stats": dict(stats),
+            "snapshot": {"zip_bytes": ZIP_PATH.stat().st_size,
+                         "zip_sha256": _sha256_file(ZIP_PATH)}}
+
+
+def write_plan(db: sqlite3.Connection, plan: dict) -> dict:
+    """把 plan 写进正式表（调用方管事务）；返回按表统计的写入行数。"""
+    written: collections.Counter = collections.Counter()
+    for p in plan["products"]:
+        written["product"] += common.write_product(db, p)
+        for raw, name_type, is_primary in p["names"]:
+            for key, value in common.write_name(
+                    db, p["product_id"], raw, name_type, is_primary, SOURCE_ID,
+                    normalize).items():
+                written[key] += value
+        for ord_, comp in enumerate(p["components"]):
+            written["product_component"] += common.write_component(
+                db, p["product_id"], ord_, comp["variant_id"], comp.get("strength"))
+    return dict(written)
+
+
+def _created_names(plan: dict, existing_keys: set[str],
+                   existing_pairs: set[tuple[str, str]]) -> tuple[list[str], list[list[str]]]:
+    keys: set[str] = set()
+    pairs: set[tuple[str, str]] = set()
+    for p in plan["products"]:
+        for raw, _ntype, _primary in p["names"]:
+            nm = normalize(raw)
+            if not nm or not nm.norm:
+                continue
+            if nm.norm not in existing_keys:
+                keys.add(nm.norm)
+            if (nm.norm, raw) not in existing_pairs:
+                pairs.add((nm.norm, raw))
+    return sorted(keys), [list(x) for x in sorted(pairs)]
+
+
+def cmd_apply(args: argparse.Namespace) -> int:
+    """写 LV 国别层（真实库需 --allow-real）：source + 新产品/名称/组件 + ingest_run。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    common.guard_real(db_path, REAL_DB, "apply", args.allow_real)
+    if not db_path.exists():
+        raise SystemExit(f"库不存在：{db_path}（先复制一份副本演练）")
+    manifest_path = args.manifest if args.manifest.is_absolute() else (ROOT / args.manifest)
+    t0 = time.perf_counter()
+    sha_before = common.sha256_file(db_path)
+
+    db = common.connect(db_path, write=False)
+    try:
+        common.require_country(db, "LV")
+        before = common.table_counts(db, "LV", SOURCE_ID)
+        existing_keys = {r[0] for r in db.execute("SELECT key_id FROM name_key")}
+        existing_pairs = {(r[0], r[1]) for r in db.execute("SELECT key_id, raw FROM name_variant")}
+        plan = build_plan(db)
+    finally:
+        db.close()
+
+    db = common.connect(db_path, write=True)
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        source_existed, source_before = common.insert_source(db, SOURCE_ID, SOURCE_META)
+        removed = db.execute("DELETE FROM product WHERE country=? AND source_id=?",
+                             ("LV", SOURCE_ID)).rowcount
+        written = write_plan(db, plan)
+        common.write_ingest_run(
+            db, f"{SOURCE_ID}-{RETRIEVED_AT}", SOURCE_ID, RETRIEVED_AT,
+            plan["stats"].get("packages", 0), len(plan["products"]),
+            {"country": "LV", "layer": "country", "source_id": SOURCE_ID,
+             "components": written.get("product_component", 0),
+             "aggregation": "packaging rows → authorisation_no",
+             "note": "ZVA 注册库；授权≠在售；不建新成分"})
+        db.commit()
+        after = common.table_counts(db, "LV", SOURCE_ID)
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+    created_keys, created_pairs = _created_names(plan, existing_keys, existing_pairs)
+    manifest = {
+        "tool": "etl/markets/lv.py",
+        "db": str(db_path),
+        "country": "LV",
+        "source_id": SOURCE_ID,
+        "run_id": f"{SOURCE_ID}-{RETRIEVED_AT}",
+        "created_at": common.now(),
+        "data_as_of": DATA_AS_OF,
+        "snapshot": plan["snapshot"],
+        "db_sha256_before": sha_before,
+        "db_sha256_after": common.sha256_file(db_path),
+        "product_ids": [p["product_id"] for p in plan["products"]],
+        "created_name_keys": created_keys,
+        "created_name_variants": created_pairs,
+        "created_substances": [],
+        "source_existed": source_existed,
+        "source_before": source_before,
+        "counts_before": before,
+        "counts_after": after,
+        "counts_planned": plan["stats"],
+        "written": written,
+        "removed_products_before_write": removed,
+        "rollback_hint": (
+            "python etl/markets/lv.py --rollback --allow-real --db <同一个库> --manifest <本文件>；"
+            "或从备份恢复 data/drugs.db。校验：SELECT COUNT(*) FROM product WHERE country='LV'"
+            " AND source_id='zva_lv_register' 应为 0。"),
+    }
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("=== LV（ZVA 注册库）写入完成 ===")
+    print(json.dumps({"written": written, "counts_before": before, "counts_after": after},
+                     ensure_ascii=False, indent=1))
+    print(f"  注册号聚合：{plan['stats'].get('packages', 0):,} 包装 → "
+          f"{len(plan['products']):,} 产品 · 旧 LV 行删除 {removed}")
+    print(f"  撤销清单 {manifest_path}")
+    print(f"  db sha256 {sha_before[:16]}… → {manifest['db_sha256_after'][:16]}… · "
+          f"耗时 {time.perf_counter() - t0:.1f}s")
+    return 0
+
+
+def cmd_rollback(args: argparse.Namespace) -> int:
+    """按 manifest 只删本次写入的行，并核对是否回到写前计数。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    common.guard_real(db_path, REAL_DB, "rollback", args.allow_real)
+    manifest_path = args.manifest if args.manifest.is_absolute() else (ROOT / args.manifest)
+    if not manifest_path.exists():
+        raise SystemExit(f"找不到撤销清单：{manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    removed, after, diff = common.rollback(db_path, manifest, "LV", SOURCE_ID)
+    nonzero = {k: v for k, v in diff.items() if v}
+    print("=== LV（ZVA 注册库）回滚完成 ===")
+    print(json.dumps({"removed": removed, "counts_after": after,
+                      "diff_vs_counts_before": diff}, ensure_ascii=False, indent=1))
+    if nonzero:
+        print(f"  !! 与写前计数不一致：{nonzero}")
+        return 1
+    print("  逐表差异 0（已回到写前基线）")
+    return 0
+
+
 # ---------------------------------------------------------------- 自测
 def self_check(src: Path = ZIP_PATH, status: Path = STATUS_PATH) -> int:
     """离线断言：标签齐全 / 状态规则自洽 / 变音折叠 / 无 --apply。返回 0 = 全过。"""
@@ -885,11 +1230,12 @@ def self_check(src: Path = ZIP_PATH, status: Path = STATUS_PATH) -> int:
     ok(not classify({**fake, "authorisation_procedure": PROC_UNREGISTERED}, {"mah_status": "1"})["active"],
        "未注册药品 → 不是 active")
 
-    # 无 --apply
+    # 写库路径（2026-11-16 起）：CLI 必须有 --apply / --rollback，且默认拒绝写真实库。
     ap = build_parser()
     opts = {a for a in ap._option_string_actions}  # noqa: SLF001 - 断言用
-    ok("--apply" not in opts and "--rollback" not in opts,
-       f"CLI 无 --apply / --rollback（实际开关：{sorted(o for o in opts if o.startswith('--'))}）")
+    ok("--apply" in opts and "--rollback" in opts and "--allow-real" in opts,
+       f"CLI 有 --apply / --rollback / --allow-real（实际开关："
+       f"{sorted(o for o in opts if o.startswith('--'))}）")
 
     print(f"=== {'全部通过' if not fails else f'失败 {len(fails)} 项'} ===")
     return 0 if not fails else 1
@@ -904,30 +1250,38 @@ def cmd_self_check(args: argparse.Namespace) -> int:
 # ---------------------------------------------------------------- CLI
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(
-        description="拉脱维亚 ZVA 国家药品注册库 ETL 骨架（CC0 1.0）：只做干跑，**不写库**。"
-                    "许可已获批，但 UI 未改完 + country CHECK 未迁移，故本脚本不提供 --apply。",
-        epilog="例：--fetch 抓快照；--dry-run 出统计（默认）；--self-check 跑离线断言。")
+        description="拉脱维亚 ZVA 国家药品注册库 ETL（CC0 1.0）：抓快照 / 干跑 / 自检 / 写库 / 回滚。",
+        epilog="例：--fetch 抓快照；--dry-run 出统计（默认）；--self-check 离线断言；"
+               "--apply 写库（真实库需 --allow-real）。")
     ap.add_argument("--fetch", action="store_true",
                     help=f"抓 {URL_ZIP} + 状态表 + CC0 元数据到 data/raw/lv_zalu_20261112/")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true",
                       help="读缓存 → 解析 → 统计（默认；只读开库，不写库）")
     mode.add_argument("--self-check", action="store_true",
-                      help="离线断言：49 标签 / 状态规则 / 变音折叠 / 无 --apply")
-    ap.add_argument("--db", type=Path, default=DEFAULT_DB, help="只读打开的库（默认 data/drugs.db）")
+                      help="离线断言：49 标签 / 状态规则 / 变音折叠 / CLI 开关")
+    mode.add_argument("--apply", action="store_true",
+                      help="写库（副本默认允许，真实库需 --allow-real）")
+    mode.add_argument("--rollback", action="store_true", help="按 manifest 回滚")
+    ap.add_argument("--db", type=Path, default=DEFAULT_DB, help="库路径（默认 data/drugs.db）")
     ap.add_argument("--src", type=Path, default=ZIP_PATH, help="ZIP 快照路径")
     ap.add_argument("--status", type=Path, default=STATUS_PATH, help="状态码表 CSV 路径")
+    ap.add_argument("--allow-real", action="store_true", help="允许写真实库 data/drugs.db")
+    ap.add_argument("--manifest", type=Path, default=MANIFEST_DEFAULT, help="撤销清单路径")
     return ap
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = build_parser()
     args = ap.parse_args(argv)
-    # 本脚本刻意不实现 --apply / --rollback：UI 未改完 + country CHECK 未迁移，写库路径另开任务。
     if args.fetch:
         return cmd_fetch(args)
     if args.self_check:
         return cmd_self_check(args)
+    if args.rollback:
+        return cmd_rollback(args)
+    if args.apply:
+        return cmd_apply(args)
     return cmd_dry_run(args)
 
 

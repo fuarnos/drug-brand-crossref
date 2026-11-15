@@ -6,8 +6,8 @@
 
 覆盖：
     - data/markets.json / data/languages.json 结构、字段、格式、唯一性；
-    - 现有 7 市场 + TW 占位 + EU region 占位（disabled）；
-    - en/es/zh 启用、zh-Hant 预留、EU 语言占位（disabled）；
+    - 现有 14 国 + EU region（v0.13.0，含 CZ / LV）；
+    - en/es/zh/zh-Hant/fr 启用、EU 语言占位（disabled）；
     - source_id 与 DB source 表一致、enabled 市场与国家集合 = DB product.country 集合；
     - 语言默认国家/默认语言交叉一致性；
     - dummy 市场/语言可注册（`with_market` / `with_language`）且不报错；
@@ -42,10 +42,12 @@ DB = ROOT / "data" / "drugs.db"
 # v0.9.0（HK 启用）：HK 接入 → 10 市场；语言仍 4（HK 为繁中/英文名称层）。
 # v0.11.4（2026-11-14）：FR 市场 + fr 语言启用 → 11 国/5 语。
 # v0.12.0（2026-11-15）：JP 市场启用（薬価基準 12,442 品目）→ 12 国/5 语（不新增 ja UI 语言）。
+# v0.13.0（2026-11-16）：CZ / LV 市场启用（SÚKL DLP / ZVA HumanProducts）→ 14 国/5 语
+#   （不新增 cs / lv UI 语言，两个市场默认英文，与 JP 同型）。
 SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/"),
               ("fr", "fr/")}
 SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK",
-                     "FR", "JP"}
+                     "FR", "JP", "CZ", "LV"}
 # v0.11.0：EU 区域层启用（kind=region，own_data=true，不进 country_order）
 SITE_REGION_I18N = {"EU"}
 
@@ -142,15 +144,36 @@ class TestJsonStructure(RegistryBase):
 class TestMarkets(RegistryBase):
     def test_registered_market_set(self) -> None:
         codes = set(self.reg.markets)
-        # v0.11.4（2026-11-14）：FR 已随 BDPM 数据启用（enabled 市场 == DB 国家集合）
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR", "JP"},
+        # v0.13.0（2026-11-16）：CZ / LV 已随数据启用（enabled 市场 == DB 国家集合）
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
+                          "EU", "FR", "JP", "CZ", "LV"},
                          codes)
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "FR", "JP"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
+                          "FR", "JP", "CZ", "LV"},
                          set(self.reg.country_order))
         # v0.11.0：EU 区域层启用（own_data=true，国家集合不变）
-        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK", "EU", "FR", "JP"},
+        self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
+                          "EU", "FR", "JP", "CZ", "LV"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
+
+    def test_cz_lv_market_rows(self) -> None:
+        """v0.13.0：CZ / LV 市场行（五语名 / i18n_key / source_id / 英文市场，不新增 UI 语言）。"""
+        for code, source_id, order in (("CZ", "sukl_dlp", 130),
+                                       ("LV", "zva_lv_register", 140)):
+            m = self.reg.require_market(code)
+            self.assertTrue(m.enabled, code)
+            self.assertEqual(M.KIND_COUNTRY, m.kind, code)
+            self.assertEqual("EUROPE", m.group, code)
+            self.assertIsNone(m.parent, code)
+            self.assertEqual(f"home.{code.lower()}", m.i18n_key, code)
+            self.assertEqual(source_id, m.source_id, code)
+            self.assertEqual(order, m.order, code)
+            self.assertEqual(("en",), m.languages, code)
+            self.assertEqual("en", m.default_lang, code)
+            for lang in ("en", "es", "zh", "zh-Hant", "fr"):
+                self.assertTrue((m.name.get(lang) or "").strip(),
+                                f"{code} 缺 name.{lang}")
 
     def test_market_required_shape(self) -> None:
         for m in self.reg.markets.values():
@@ -180,7 +203,7 @@ class TestMarkets(RegistryBase):
         self.assertEqual(len(keys), len(set(keys)))
         for m in self.reg.enabled_markets:
             self.assertEqual(f"home.{m.code.lower()}", m.i18n_key)
-        # 现有市场（10 国 + EU 区域层）的 i18n key 与 site/build.py I18N 的 home.* 完全一致
+        # 现有市场（14 国 + EU 区域层）的 i18n key 与 site/build.py I18N 的 home.* 完全一致
         self.assertEqual({f"home.{c.lower()}" for c in SITE_COUNTRY_I18N | SITE_REGION_I18N},
                          {m.i18n_key for m in self.reg.enabled_markets})
         # 占位市场的 key 已预留，便于后续直接启用
@@ -507,8 +530,8 @@ class TestCliAndDocs(RegistryBase):
                            capture_output=True, text=True, encoding="utf-8", cwd=str(ROOT))
         self.assertEqual(0, p.returncode, p.stderr[-500:])
         data = json.loads(p.stdout)
-        # v0.11.4 task-55 过渡态：FR 已注册（enabled:false），市场数 11 → 12
-        self.assertEqual(13, len(data["markets"]))
+        # v0.13.0（2026-11-16）：15 市场（14 国 + EU region），语言仍 5（CZ/LV 不新增 UI 语言）
+        self.assertEqual(15, len(data["markets"]))
         self.assertEqual(10, len(data["languages"]))
         self.assertEqual("US", data["markets"][0]["code"])
 

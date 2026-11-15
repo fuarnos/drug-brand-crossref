@@ -14,9 +14,16 @@ SÚKL 开放数据使用条款明示允许**复制 / 分发 / 公开传播 / 商
 评估与证据：`reports/2026-11-12-eu-member-states-scan.md` §2.1 / §3.2、
 `reports/2026-11-12-cz-sukl-acquisition.md`（本工位）、`docs/许可清单.md`（CZ 行由 Lead 统一落）。
 
-因此本脚本**故意不提供 `--apply` / `--rollback`**：只有 `--fetch`（抓快照）、`--dry-run`
-（读快照 → 解析 → 统计，只读开库）和 `--self-check`（离线断言）。写库路径等 Lead 在独立
-DB 窗口开启后，按 `etl/ingest_eu.py` 的 `--apply` / `--rollback` / `--manifest` 三段式另补。
+M1 数据窗口（2026-11-16，task-1）起本脚本补了写库路径，照 `etl/ingest_eu.py` 的三段式：
+`--apply`（写库，真实库需 `--allow-real`）/ `--rollback`（按 manifest 只删本次写入的行）/
+`--manifest`（撤销清单，默认 `data/sources/cz_ingest_manifest_20261116.json`）。
+写库口径（不猜）：
+  - 产品 = DLP 一行（`KOD_SUKL` 唯一）；排除 `REG ∈ {P, J}`（FSMP / PZLÚ 非药品，1,451 行）；
+  - 成分 = `dlp_slozeni.S='L'`，**全部成分都映射成功才写**（复方缺一个整条不写，同 EU 层口径）；
+  - 新成分只收有出处的：英文名（或去盐母体）在 `data/who_inn_names.csv`（WHO INN 名录）里
+    精确命中才建，其余判不了的不写库并计数；
+  - 强度按 `dlp_slozeni.AMNT × UN` 原文落库，不换算、不四舍五入；
+  - 途径按 `dlp_cesty.NAZEV_EN` 派生，**只有单一含义才填**（多义如「Auricular/ocular」留空）。
 
 数据源
 ------
@@ -42,6 +49,9 @@ CLI：
     python etl/markets/cz.py --dry-run      # 默认：读快照 → 解析 → 统计（只读开库，不写库）
     python etl/markets/cz.py --self-check   # 离线断言：44 列 / CP1250 / 变音符号归一 / 样例行
     python etl/markets/cz.py --dry-run --db .tmp/cz-ingest/drugs-copy.db
+    python etl/markets/cz.py --apply --db .tmp/cz-ingest/drugs-copy.db            # 副本演练
+    python etl/markets/cz.py --apply --allow-real --db data/drugs.db             # 窗口正式写
+    python etl/markets/cz.py --rollback --allow-real --manifest data/sources/…
 
 产物：`.tmp/cz-ingest/cz_dry_run.json`（统计）+ 控制台摘要。`.tmp/`、`data/raw/` 都不入库。
 """
@@ -66,9 +76,13 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
+sys.path.insert(0, str(ROOT / "etl" / "markets"))
 
 from ingest_openfda_ndc import form_base_of  # noqa: E402
+from ingest_ema_medicines import _variant_resolver  # noqa: E402
+from normalize_name import normalize  # noqa: E402
 from normalize_strength import norm_unit  # noqa: E402
+import _ingest_common as common  # noqa: E402
 
 UA = {"User-Agent": "drug-brand-crossref/0.2 (public-data research)"}
 DATASET_PAGE = ("https://opendata.sukl.gov.cz/katalog-otevrenych-dat/"
@@ -589,6 +603,457 @@ def dry_run(db_path: Path) -> int:
 
 
 # ---------------------------------------------------------------------------
+# 写库 / 回滚（M1 数据窗口，2026-11-16；照 etl/ingest_eu.py 三段式）
+# ---------------------------------------------------------------------------
+SOURCE_ID = "sukl_dlp"
+RETRIEVED_AT = "2026-11-11"          # fetch_meta.json 的抓取日（快照 DLP20261027）
+DATA_AS_OF = "2026-11-01"            # dlp_platnost.platnost_od = 01.11.2026（源自己的有效期）
+REAL_DB = ROOT / "data" / "drugs.db"
+WHO_CSV = ROOT / "data" / "who_inn_names.csv"
+MANIFEST_DEFAULT = ROOT / "data" / "sources" / "cz_ingest_manifest_20261116.json"
+SOURCE_META = {
+    "name": "Státní ústav pro kontrolu léčiv (SÚKL) — Databáze léků (DLP)",
+    "url": DATASET_PAGE,
+    "license": "SÚKL 开放数据使用条款（须署名 SÚKL、不得改变数据含义、再分发须附条款链接）",
+    "license_url": TERMS_PAGE,
+    "retrieved_at": RETRIEVED_AT,
+    "data_as_of": DATA_AS_OF,
+    "data_as_of_note": "DLP 快照 DLP20261027 的 dlp_platnost.platnost_od=01.11.2026；抓取 2026-11-11",
+    "notes": "捷克药品注册库 DLP 事实表（商品名/成分/规格/剂型/途径/ATC/状态）；"
+             "SPC/PIL/OBALY 第三方文档不取不发布；排除 FSMP/PZLU；注册 ≠ 当前在售。",
+}
+
+# EDQM 途径名（NAZEV_EN）→ 本站 route 词表。只认单一含义：多义/无信号一律留空（不猜）。
+ROUTE_KEYS = (
+    ("dental", ("dental", "gingival")),
+    ("ophthalmic", ("ophthalmic", "ocular")),
+    ("transdermal", ("transdermal",)),
+    ("nasal", ("nasal",)),
+    ("rectal", ("rectal",)),
+    ("inhalation", ("inhalation", "endotracheopulmonary")),
+    ("injection", ("intravenous", "intramuscular", "subcutaneous", "intraarterial",
+                   "intraarticular", "intrathecal", "intraperitoneal", "intrapleural",
+                   "intraosseous", "intracardiac", "intradermal", "epidural", "perineural",
+                   "intravesical", "intracavitary", "intracameral", "intravitreal",
+                   "intralymphatic", "intraamniotic", "intrauterine", "intracerebral",
+                   "injection", "infusion", "infiltration")),
+    ("oral", ("oral", "peroral", "buccal", "sublingual", "oromucosal", "gastric")),
+    ("topical", ("cutaneous", "dermal", "epilesional")),
+)
+_SPLIT_ROUTE_RE = re.compile(r"[/,;]| and ")
+
+
+def route_of(cesta_en: str) -> tuple[str | None, str]:
+    """EDQM 途径英文名 → (route, 判定)。只有唯一含义才填，多义返回 (None, 'multi')。"""
+    tokens = [t.strip() for t in _SPLIT_ROUTE_RE.split((cesta_en or "").lower()) if t.strip()]
+    classes: set[str] = set()
+    for token in tokens:
+        for route, keys in ROUTE_KEYS:
+            if any(k in token for k in keys):
+                classes.add(route)
+                break
+    if len(classes) == 1:
+        return classes.pop(), "single"
+    return None, ("multi" if classes else "none")
+
+
+def release_of(form_en: str) -> str:
+    """剂型原文 → release 枚举（只认原文里的释放词，不改写剂型）。"""
+    f = (form_en or "").lower()
+    if "prolonged" in f or "extended" in f:
+        return "ER"
+    if "modified" in f:
+        return "MR"
+    if "gastro-resistant" in f or "delayed" in f:
+        return "DR"
+    return "none"
+
+
+def load_who_inn() -> dict[str, str]:
+    """WHO INN 名录（`data/who_inn_names.csv`）→ {归一名字: 名录里的写法}。
+
+    只用来给「新成分」找出处：名字或去盐母体在名录里命中时用名录写法（出处更强）。
+    """
+    out: dict[str, str] = {}
+    if not WHO_CSV.exists():
+        raise SystemExit(f"缺 WHO INN 名录：{WHO_CSV}（新成分必须有出处）")
+    with WHO_CSV.open(encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            name = re.sub(r"\s+", " ", (row.get("inn_en") or "").strip())
+            key = norm_inn(name)
+            if key:
+                out.setdefault(key, name[:1].upper() + name[1:])
+    return out
+
+
+# 新成分黑名单：这些名字说的是辅料 / 溶剂 / 疫苗株 / 混合物，不是单一活性成分，
+# 判不了就不写库（在报告里计数）。词表只收「一看就不是 INN」的词，宁少不滥。
+NEW_SUBSTANCE_BLOCKLIST = (
+    "OIL", "VIRUS", "VACCINE", "TOXOID", "SOLUTION", "TRIGLYCERID", "CONCENTRATE",
+    "SUSPENSION", "EXTRACT", "ADJUVANT", "DILUTION", "PLASMA", "SERUM", "CELLS",
+    "TISSUE", "REFINED", "MEDIUM-CHAIN", "FLAVONOID",
+)
+
+
+def new_substance_name(name_en: str) -> str | None:
+    """CZ 英文成分名 → 可建的新成分名（Title Case）；判不了返回 None（不写库）。
+
+    出处是 SÚKL DLP 自己的英文成分名（`dlp_latky.NAZEV_EN/NAZEV_INN`），不是猜的：
+    只做「去盐/水合物尾巴 + 大小写整形」，不改词义；黑名单里的辅料/疫苗株一律不建。
+    """
+    name = re.sub(r"\s+", " ", (name_en or "").strip())
+    if len(name) < 3:
+        return None
+    if any(b in name.upper() for b in NEW_SUBSTANCE_BLOCKLIST):
+        return None
+    base = strip_salt(norm_inn(name)) or norm_inn(name)
+    if len(base) < 3:
+        return None
+    return base.title()
+
+
+def _component_strength(amnt: str, un: str) -> tuple[dict | None, str]:
+    """`AMNT × UN`（来源原文）→ strength 字典；不换算、不四舍五入。返回 (strength, 分类)。"""
+    raw = (amnt or "").strip()
+    if not re.fullmatch(r"\d+(?:[.,]\d+)?", raw):
+        return None, ("empty" if not raw else "not_numeric")
+    value = float(raw.replace(",", "."))
+    unit_raw = (un or "").strip().upper()
+    if not unit_raw:
+        return None, "no_unit"
+    if "/" in unit_raw:
+        num, den = [x.strip() for x in unit_raw.split("/", 1)]
+        unit, _ = norm_unit(num)
+        per_unit, _ = norm_unit(den)
+        if not unit or not per_unit:
+            return None, "unit_unmapped"
+        return {"value": value, "unit": unit, "per_volume_value": 1.0,
+                "per_volume_unit": per_unit}, "numeric"
+    unit, _ = norm_unit(unit_raw)
+    if not unit:
+        return None, "unit_unmapped"
+    return {"value": value, "unit": unit, "per_volume_value": None,
+            "per_volume_unit": None}, "numeric"
+
+
+def _load_write_inputs() -> dict:
+    """读快照 + 码表（写库路径专用；`load_snapshot()` 同一份缓存，不重复下载）。"""
+    snap = load_snapshot()
+    T = snap["tables"]
+    return {
+        "products": T[PRODUCT_TABLE],
+        "slozeni": T["dlp_slozeni.csv"],
+        "latky": {r["KOD_LATKY"]: r for r in T["dlp_latky.csv"]},
+        "formy_en": codebook(T["dlp_formy.csv"], "FORMA", "NAZEV_EN"),
+        "formy_cz": codebook(T["dlp_formy.csv"], "FORMA", "NAZEV"),
+        "cesty": codebook(T["dlp_cesty.csv"], "CESTA", "NAZEV_EN"),
+        "orgs": codebook(T["dlp_organizace.csv"], "ZKR_ORG", "NAZEV"),
+        "stavy": codebook(T["dlp_stavyreg.csv"], "REG", "NAZEV"),
+        "platnost": T.get("dlp_platnost.csv") or [{}],
+    }
+
+
+def _resolve_ingredient(name_en: str, db_inn: dict[str, str], who: dict[str, str],
+                        new_map: dict[str, list[str]]) -> tuple[str | None, str | None, str,
+                                                                    tuple[str, str, str] | None]:
+    """成分英文名 → (substance_id, variant_id, 层级, 待建新成分(key, inn, evidence))。
+
+    优先级：库内 exact/salt/prefix/synonym → 本次待建（new_map）→ WHO INN 出处 →
+    CZ 英文成分名（去盐后）→ miss（判不了，不写库）。
+    """
+    sid, tier = map_inn(name_en, db_inn)
+    if sid:
+        return sid, None, tier, None
+    key = re.sub(r"\s*\([^)]*\)", "", norm_inn(name_en)).strip()
+    base = strip_salt(key) or key
+    for cand in (key, base):
+        if cand and cand in new_map:
+            return new_map[cand][0], new_map[cand][1], "new-substance", None
+    for cand in (key, base):
+        if cand and cand in who:
+            return None, None, "who-inn-pending", (base, who[cand], "who-inn")
+    inn = new_substance_name(name_en)
+    if inn:
+        return None, None, "cz-name-pending", (base, inn, "cz-regulator-name")
+    return None, None, "miss", None
+
+
+def build_plan(db: sqlite3.Connection, who: dict[str, str],
+               new_map: dict[str, list[str]] | None = None) -> dict:
+    """快照 → 待写产品（含名称/组件）+ 待建新成分清单。**只读库**（不写）。"""
+    data = _load_write_inputs()
+    resolve = _variant_resolver(db)
+    db_inn = db_substances(db)
+    new_map = new_map or {}
+
+    active_by: dict[str, list[dict]] = {}
+    for r in data["slozeni"]:
+        if (r.get("S") or "").strip() != "L":
+            continue
+        active_by.setdefault((r.get("KOD_SUKL") or "").strip(), []).append(r)
+    for rows in active_by.values():
+        rows.sort(key=lambda r: int(r.get("SQ") or 0) if (r.get("SQ") or "").isdigit() else 0)
+
+    stats: Counter = Counter()
+    products: list[dict] = []
+    pending: dict[str, tuple[str, str]] = {}
+    for r in data["products"]:
+        stats["rows"] += 1
+        reg = (r.get("REG") or "").strip()
+        if reg in EXCLUDED_REG:
+            stats["skip_excluded_fsmp_pzlu"] += 1
+            continue
+        status = STATUS_MAP.get(reg, "unknown")
+        code = (r.get("KOD_SUKL") or "").strip()
+        form_code = (r.get("FORMA") or "").strip()
+        form_en = data["formy_en"].get(form_code, "")
+        form_cz = data["formy_cz"].get(form_code, "")
+        form_base = form_base_of(form_en) if form_en else ""
+        route, route_how = route_of(data["cesty"].get((r.get("CESTA") or "").strip(), ""))
+        stats[f"route:{route_how}"] += 1
+        if route:
+            stats["route_filled"] += 1
+        names: list[tuple[str, str, int]] = []
+        nazev = (r.get("NAZEV") or "").strip()
+        nazev_reg = (r.get("NAZEV_REG") or "").strip()
+        if nazev:
+            names.append((nazev, "trade", 1))
+        if nazev_reg and nazev_reg != nazev:
+            names.append((nazev_reg, "trade", 0))
+        elif not nazev_reg:
+            stats["no_registered_name"] += 1
+
+        # ---- 成分：全部映射成功才写（复方缺一个整条不写） ----
+        comps: list[dict] = []
+        raw_comps = active_by.get(code) or []
+        all_ok = bool(raw_comps)
+        for cr in raw_comps:
+            lk = data["latky"].get(cr["KOD_LATKY"])
+            name_en = ""
+            if lk:
+                name_en = (lk.get("NAZEV_EN") or "").strip() or (lk.get("NAZEV_INN") or "").strip()
+            if not name_en:
+                stats["component_no_name"] += 1
+                all_ok = False
+                continue
+            sid, vid, tier, pending_new = _resolve_ingredient(name_en, db_inn, who, new_map)
+            if pending_new:
+                pending[pending_new[0]] = (pending_new[1], pending_new[2])
+                stats[f"pending:{pending_new[2]}"] += 1
+            if not sid:
+                stats[f"unmapped:{tier}"] += 1
+                if tier == "miss":
+                    stats["new_substance_blocked"] += 1
+                all_ok = False
+                continue
+            stats[f"map:{tier}"] += 1
+            if not vid:
+                vid = resolve(sid, name_en)
+            if not vid:
+                stats["component_no_variant"] += 1
+                all_ok = False
+                continue
+            strength, kind = _component_strength(cr.get("AMNT"), cr.get("UN"))
+            stats[f"strength:{kind}"] += 1
+            comps.append({"variant_id": vid, "strength": strength, "token": name_en})
+        if raw_comps and all_ok:
+            stats["products_with_components"] += 1
+            stats["components"] += len(comps)
+        elif raw_comps:
+            stats["products_components_skipped"] += 1
+            comps = []
+        else:
+            stats["products_without_ingredient"] += 1
+
+        mah = data["orgs"].get((r.get("DRZ") or "").strip(), "") if (r.get("DRZ") or "").strip() else ""
+        note_bits = [
+            f"捷克 SÚKL DLP（KOD_SUKL={code}）",
+            f"注册状态 REG={reg}（{data['stavy'].get(reg, '?')}）",
+            f"SILA={r.get('SILA', '').strip()}" if (r.get("SILA") or "").strip() else "",
+            f"FORMA={form_cz or form_code}" if (form_cz or form_code) else "",
+            f"CESTA={data['cesty'].get((r.get('CESTA') or '').strip(), '')}",
+            f"ATC={r.get('ATC_WHO', '').strip()}" if (r.get("ATC_WHO") or "").strip() else "",
+            f"RC={r.get('RC', '').strip()}" if (r.get("RC") or "").strip() else "",
+            f"TYP_LP={r.get('TYP_LP', '').strip()}" if (r.get("TYP_LP") or "").strip() else "",
+            "注册库授权 ≠ 当前在售",
+        ]
+        products.append({
+            "product_id": f"CZ-{code}"[:64],
+            "country": "CZ",
+            "dosage_form": form_en or form_cz or "unknown",
+            "form_base": form_base or "other",
+            "route": route,
+            "release": release_of(form_en or form_cz),
+            "pack": (r.get("BALENI") or "").strip() or None,
+            "mah": mah or None,
+            "approval_id": (r.get("RC") or "").strip() or code,
+            "category": (r.get("TYP_LP") or "").strip() or None,
+            "is_branded": 1,
+            "status": status,
+            "status_date": None,
+            "source_id": SOURCE_ID,
+            "source_url": DATASET_PAGE,
+            "retrieved_at": RETRIEVED_AT,
+            "note": " · ".join(b for b in note_bits if b)[:500],
+            "names": names,
+            "components": comps,
+        })
+        stats[f"status:{status}"] += 1
+    stats["products"] = len(products)
+    stats["pending_new_substances"] = len(pending)
+    return {"products": products, "stats": dict(stats), "pending_new": pending,
+            "snapshot": {"zip_bytes": ZIP_PATH.stat().st_size,
+                         "zip_sha256": hashlib.sha256(ZIP_PATH.read_bytes()).hexdigest(),
+                         "platnost": data["platnost"][0] if data["platnost"] else {}}}
+
+
+def write_plan(db: sqlite3.Connection, plan: dict) -> dict:
+    """把 plan 写进正式表（调用方管事务）；返回按表统计的写入行数。"""
+    written: Counter = Counter()
+    for p in plan["products"]:
+        written["product"] += common.write_product(db, p)
+        for raw, name_type, is_primary in p["names"]:
+            for key, value in common.write_name(
+                    db, p["product_id"], raw, name_type, is_primary, SOURCE_ID,
+                    normalize).items():
+                written[key] += value
+        for ord_, comp in enumerate(p["components"]):
+            written["product_component"] += common.write_component(
+                db, p["product_id"], ord_, comp["variant_id"], comp.get("strength"))
+    return dict(written)
+
+
+def _created_names(plan: dict, existing_keys: set[str],
+                   existing_pairs: set[tuple[str, str]]) -> tuple[list[str], list[list[str]]]:
+    keys: set[str] = set()
+    pairs: set[tuple[str, str]] = set()
+    for p in plan["products"]:
+        for raw, _ntype, _primary in p["names"]:
+            nm = normalize(raw)
+            if not nm or not nm.norm:
+                continue
+            if nm.norm not in existing_keys:
+                keys.add(nm.norm)
+            if (nm.norm, raw) not in existing_pairs:
+                pairs.add((nm.norm, raw))
+    return sorted(keys), [list(x) for x in sorted(pairs)]
+
+
+def cmd_apply(args: argparse.Namespace) -> int:
+    """写 CZ 国别层（真实库需 --allow-real）：source + 新产品/名称/组件 + ingest_run。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    common.guard_real(db_path, REAL_DB, "apply", args.allow_real)
+    if not db_path.exists():
+        raise SystemExit(f"库不存在：{db_path}（先复制一份副本演练）")
+    manifest_path = args.manifest if args.manifest.is_absolute() else (ROOT / args.manifest)
+    t0 = time.perf_counter()
+    sha_before = common.sha256_file(db_path)
+    who = load_who_inn()
+
+    db = common.connect(db_path, write=False)
+    try:
+        common.require_country(db, "CZ")
+        before = common.table_counts(db, "CZ", SOURCE_ID)
+        existing_keys = {r[0] for r in db.execute("SELECT key_id FROM name_key")}
+        existing_pairs = {(r[0], r[1]) for r in db.execute("SELECT key_id, raw FROM name_variant")}
+        plan_dry = build_plan(db, who)
+    finally:
+        db.close()
+    pending = plan_dry["pending_new"]
+
+    db = common.connect(db_path, write=True)
+    created_substances: list[str] = []
+    new_map: dict[str, list[str]] = {}
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        source_existed, source_before = common.insert_source(db, SOURCE_ID, SOURCE_META)
+        removed = db.execute("DELETE FROM product WHERE country=? AND source_id=?",
+                             ("CZ", SOURCE_ID)).rowcount
+        for key, (inn, evidence) in pending.items():
+            sid, vid, created_sub, _created_var = common.ensure_substance(
+                db, inn, SOURCE_ID, RETRIEVED_AT,
+                confidence="high" if evidence == "who-inn" else "medium")
+            new_map[key] = [sid, vid]
+            if created_sub:
+                created_substances.append(sid)
+        plan = build_plan(db, who, new_map)
+        written = write_plan(db, plan)
+        common.write_ingest_run(db, f"{SOURCE_ID}-{RETRIEVED_AT}", SOURCE_ID, RETRIEVED_AT,
+                                plan["stats"].get("rows", 0), len(plan["products"]),
+                                {"country": "CZ", "layer": "country", "source_id": SOURCE_ID,
+                                 "components": written.get("product_component", 0),
+                                 "new_substances": len(created_substances),
+                                 "note": "DLP 注册库；注册≠在售；SPC/PIL 不取"})
+        db.commit()
+        after = common.table_counts(db, "CZ", SOURCE_ID)
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+    created_keys, created_pairs = _created_names(plan, existing_keys, existing_pairs)
+    manifest = {
+        "tool": "etl/markets/cz.py",
+        "db": str(db_path),
+        "country": "CZ",
+        "source_id": SOURCE_ID,
+        "run_id": f"{SOURCE_ID}-{RETRIEVED_AT}",
+        "created_at": common.now(),
+        "data_as_of": DATA_AS_OF,
+        "snapshot": plan["snapshot"],
+        "db_sha256_before": sha_before,
+        "db_sha256_after": common.sha256_file(db_path),
+        "product_ids": [p["product_id"] for p in plan["products"]],
+        "created_name_keys": created_keys,
+        "created_name_variants": created_pairs,
+        "created_substances": created_substances,
+        "source_existed": source_existed,
+        "source_before": source_before,
+        "counts_before": before,
+        "counts_after": after,
+        "counts_planned": plan["stats"],
+        "written": written,
+        "removed_products_before_write": removed,
+        "rollback_hint": (
+            "python etl/markets/cz.py --rollback --allow-real --db <同一个库> --manifest <本文件>；"
+            "或从备份恢复 data/drugs.db。校验：SELECT COUNT(*) FROM product WHERE country='CZ'"
+            " AND source_id='sukl_dlp' 应为 0。"),
+    }
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("=== CZ（SÚKL DLP）写入完成 ===")
+    print(json.dumps({"written": written, "counts_before": before, "counts_after": after},
+                     ensure_ascii=False, indent=1))
+    print(f"  新成分 {len(created_substances):,}（WHO INN / CZ 英文成分名出处）· "
+          f"旧 CZ 行删除 {removed}")
+    print(f"  撤销清单 {manifest_path}")
+    print(f"  db sha256 {sha_before[:16]}… → {manifest['db_sha256_after'][:16]}… · "
+          f"耗时 {time.perf_counter() - t0:.1f}s")
+    return 0
+
+
+def cmd_rollback(args: argparse.Namespace) -> int:
+    """按 manifest 只删本次写入的行，并核对是否回到写前计数。"""
+    db_path = args.db if args.db.is_absolute() else (ROOT / args.db)
+    common.guard_real(db_path, REAL_DB, "rollback", args.allow_real)
+    manifest_path = args.manifest if args.manifest.is_absolute() else (ROOT / args.manifest)
+    if not manifest_path.exists():
+        raise SystemExit(f"找不到撤销清单：{manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    removed, after, diff = common.rollback(db_path, manifest, "CZ", SOURCE_ID)
+    nonzero = {k: v for k, v in diff.items() if v}
+    print("=== CZ（SÚKL DLP）回滚完成 ===")
+    print(json.dumps({"removed": removed, "counts_after": after,
+                      "diff_vs_counts_before": diff}, ensure_ascii=False, indent=1))
+    if nonzero:
+        print(f"  !! 与写前计数不一致：{nonzero}")
+        return 1
+    print("  逐表差异 0（已回到写前基线）")
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # 自检（离线，不读库）
 # ---------------------------------------------------------------------------
 def self_check() -> int:
@@ -672,20 +1137,28 @@ def self_check() -> int:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="捷克 SÚKL DLP：抓快照 / 干跑 / 自检（不写库）")
+    ap = argparse.ArgumentParser(description="捷克 SÚKL DLP：抓快照 / 干跑 / 自检 / 写库 / 回滚")
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--fetch", action="store_true", help="抓快照（写 data/raw）")
     g.add_argument("--dry-run", action="store_true", help="读快照 → 解析 → 统计（默认）")
     g.add_argument("--self-check", action="store_true", help="离线断言")
-    ap.add_argument("--db", default=None, help="只读库（默认 data/drugs.db）")
+    g.add_argument("--apply", action="store_true", help="写库（副本默认允许，真实库需 --allow-real）")
+    g.add_argument("--rollback", action="store_true", help="按 manifest 回滚")
+    ap.add_argument("--db", type=Path, default=None, help="库路径（默认 data/drugs.db）")
+    ap.add_argument("--allow-real", action="store_true", help="允许写真实库 data/drugs.db")
+    ap.add_argument("--manifest", type=Path, default=MANIFEST_DEFAULT, help="撤销清单路径")
     args = ap.parse_args()
     if args.fetch:
         raise SystemExit(fetch())
     if args.self_check:
         raise SystemExit(self_check())
+    if args.rollback:
+        raise SystemExit(cmd_rollback(args))
     db = Path(args.db) if args.db else ROOT / "data" / "drugs.db"
     if not db.exists():
         raise SystemExit(f"库不存在：{db}")
+    if args.apply:
+        raise SystemExit(cmd_apply(args))
     raise SystemExit(dry_run(db))
 
 
