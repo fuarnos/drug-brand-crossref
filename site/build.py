@@ -4478,6 +4478,10 @@ padding:14px 16px;margin:10px 0}
    只有「需注意的差异」保留颜色语义：combo / warn / sev / export / picked。 */
 .tag.combo,.tag.warn,.tag.sev,.tag.picked,.tag.export{display:inline-block;padding:1px 7px;
  border-radius:var(--r-pill);border:1px solid var(--line);background:var(--surface-2)}
+/* L8（v0.13.1）：普通状态/属性一律纯文字 —— 无边框、无底色、13px（沿用 v0.12.1 字号口径）。
+   只有 6 类差异（severe / warning / EU 文字 / picked / combo / export）值得颜色。 */
+.st-text{font-size:13px;color:var(--muted)}
+.atcmembers .st-details .st-text{font-size:13px;line-height:1.25;color:var(--muted)}
 /* L9（v0.12.2）：成分页中文名 —— h1 是原文/通用名，中文名在下一行作次级（18px、不抢主标题） */
 .drug-zh{margin:2px 0 4px;font-size:18px;font-weight:600;color:var(--muted);letter-spacing:.02em}
 @media (max-width:767px){.drug-zh{font-size:16px}}
@@ -4899,7 +4903,7 @@ table.res.rows td.c-det{text-align:right;white-space:nowrap}
 table.res.rows .rowform{display:block;color:var(--muted);font-size:14px}
 /* 2026-11-13 task-31（用户截图）：剂型在结果表「剂量」列里突出显示（只出现一次）。
    浅绿底 + accent 字，白底行上对比达标；inline-block 不额外占行高。 */
-.form-tag{display:inline;margin-left:6px;padding:0;border-radius:0;background:none;
+.form-txt{display:inline;margin-left:6px;padding:0;border-radius:0;background:none;
  color:var(--muted);font-size:14px;font-weight:400;white-space:nowrap;vertical-align:1px}
 .empty3{margin:12px 0 0}.empty3 .e3acts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
 .empty3 .e3acts a,.empty3 .e3acts button{min-height:40px;display:inline-flex;align-items:center;
@@ -5986,7 +5990,7 @@ function brandHTML(e, withFormHint){
         + `<span class="mah-k">${esc(T('brand.mah'))}</span> ${esc(short)}</span>`
         + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
     }
-    return `<span data-brand="0" class="st-badge st-unknown brand-none">${esc(T('brand.none'))}</span>`
+    return `<span data-brand="0" class="st-text brand-none">${esc(T('brand.none'))}</span>`
       + matched + (hint ? ` <span class="m-none-ing">${esc(hint)}</span>` : '');
   }
   if(e && e.f){
@@ -6000,7 +6004,7 @@ function brandHTML(e, withFormHint){
 function ingredientHTML(e, cls){
   const T = window.T || (k=>k);
   if(e && e.nc){
-    return `<span class="st-badge st-unknown" data-i18n="ingredient.unrecorded">${esc(T('ingredient.unrecorded'))}</span>`;
+    return `<span class="st-text" data-i18n="ingredient.unrecorded">${esc(T('ingredient.unrecorded'))}</span>`;
   }
   const label = ingredientLabel(e);
   const orig = (e && (e.x || e.d)) || '';
@@ -6012,9 +6016,9 @@ function ingredientHTML(e, cls){
     // v0.11.5 task-71：有中文成分名就绝不判「无中文名」。
     badge = '';
   }else if(cjk && (window.LANG === 'en' || window.LANG === 'es')){
-    badge = ` <span class="st-badge st-unknown nolang-badge">${esc(T(window.LANG === 'en' ? 'name.no_en' : 'name.no_es'))}</span>`;
+    badge = ` <span class="st-text nolang-badge">${esc(T(window.LANG === 'en' ? 'name.no_en' : 'name.no_es'))}</span>`;
   }else if(!cjk && (window.LANG === 'zh' || window.LANG === 'zh-Hant')){
-    badge = ` <span class="st-badge st-unknown nolang-badge">${esc(T(window.LANG === 'zh' ? 'name.no_zh' : 'name.no_zh_hant'))}</span>`;
+    badge = ` <span class="st-text nolang-badge">${esc(T(window.LANG === 'zh' ? 'name.no_zh' : 'name.no_zh_hant'))}</span>`;
   }
   if(e.cu) return `<a class="${cls || ''}" href="${BASE}${e.cu}">${label}</a>${badge}`;
   if(e.v) return `<a class="${cls || ''}" data-sub-ingredient="${esc(e.v)}" data-sub-orig="${esc(orig)}" href="${BASE}drug/${e.v}.html">${label}</a>${badge}`;
@@ -6131,7 +6135,7 @@ function detPanelHTML(payload, key, e, T){
     return `<tr><td>${esc(r[1])}</td><td>${brandCell}${exp}</td>`
       + `<td>${esc(r[DETAIL_COL.pack]) || '—'}${strength}</td>`
       + `<td><code>${esc(r[4]) || '—'}</code></td>`
-      + `<td><span class="st-badge st-${esc(status)}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
+      + `<td><span class="${(status === 'discontinued' || status === 'withdrawn') ? 'st-badge st-' + esc(status) : 'st-text'}">${esc(labelOf('drug.status', status, status))}</span>${r[6] ? ' · ' + esc(r[6]) : ''}${rel && rel !== 'none' ? ' · ' + esc(labelOf('release', rel, rel)) : ''}</td>`
       + `<td>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(src || T('a1.raw'))} ↗</a>` : '—'}</td>`
       + `<td>${makerLinkHTML(r[9], T)}</td></tr>`;
   }).join('');
@@ -6243,7 +6247,7 @@ function brandRowHTML(e, T){
       if(!g.hasFs) return esc(ds.join(' / ')) || '—';
       const bits = g.pairs.map(x => {
         const tx = esc(x.specs.join(' / '));
-        return x.form ? `<span class="form-tag">${esc(x.form)}</span> ${tx}` : tx;
+        return x.form ? `<span class="form-txt">${esc(x.form)}</span> ${tx}` : tx;
       });
       return bits.join(' · ') + (g.restGroups
         ? ` <span class="meta">+${g.restGroups} ${esc(T('matrix.multi_form'))}</span>` : '');
@@ -6401,13 +6405,13 @@ function flatRowHTML(e, T){
   if(sp.hasFs){
     const bits = sp.pairs.map(g => {
       const tx = esc(g.specs.join(' / '));
-      return g.form ? `<span class="form-tag">${esc(g.form)}</span> ${tx}` : tx;
+      return g.form ? `<span class="form-txt">${esc(g.form)}</span> ${tx}` : tx;
     });
     const moreG = sp.restGroups
       ? ` <span class="meta">+${sp.restGroups} ${esc(T('matrix.multi_form'))}</span>` : '';
     doseCell = bits.join(' · ') + moreG + (rel ? rel : '');
   } else {
-    const formTag = form ? `<span class="form-tag">${esc(form + rel)}</span>` : '';
+    const formTag = form ? `<span class="form-txt">${esc(form + rel)}</span>` : '';
     const doseTxt = ds.length ? esc(ds.join(' / ')) : '';
     doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || '—');
   }
@@ -7422,7 +7426,8 @@ function t11CompareHTML(pe, mk, hits, T){
   const theirName = others.slice(0, 3).map(x => x.d || x.k).join('、');
   function badge(a, b){
     if(!b) return `<span class="cmp-b miss">${esc(T('t11.missing'))}</span>`;
-    return a === b ? `<span class="cmp-b same">${esc(T('t11.same'))}</span>`
+    // L8：相同不是差异 → 纯文字；不同/缺失才用颜色。
+    return a === b ? `<span class="st-text">${esc(T('t11.same'))}</span>`
                    : `<span class="cmp-b diff">${esc(T('t11.diff'))}</span>`;
   }
   function row(key, a, b){
@@ -7438,7 +7443,7 @@ function t11CompareHTML(pe, mk, hits, T){
     }
     return `<tr><th>${esc(T('t11.release'))}</th><td>${esc(a) || '—'}</td>`
       + `<td>${esc(b) || '—'}</td>`
-      + `<td><span class="cmp-b ${cls}">${esc(txt)}</span></td></tr>`;
+      + `<td><span class="${cls === 'same' ? 'st-text' : 'cmp-b ' + cls}">${esc(txt)}</span></td></tr>`;
   }
   const relLocked = (mineRels.length === 1 && theirRels.length === 1);
   return `<div class="cmpbox" id="cmp"><h2>${esc(T('t11.cmp_title'))}</h2>`
@@ -7478,7 +7483,7 @@ function t11AfterRender(hits, c, T){
   bar.innerHTML = '<div class="pickrow">'
     + `<b>${esc(T('t11.picked'))}</b> `
     + `<span class="pickname">${esc(pe.d || pe.k)}</span> `
-    + `<span class="tag">${esc(mk)}</span> `
+    + `<span class="mktxt">${esc(mk)}</span> `
     + `<span class="pickmeta">${esc(ingredientLabel(pe))}${specs ? ' · ' + esc(specs) : ''}</span> `
     + `<button type="button" class="linkbtn" data-pickset="0">${esc(T('t11.reselect'))}</button> `
     + `<a class="linkbtn" href="${drugHref}">${esc(T('t11.compare_link'))}</a></div>`
@@ -7660,7 +7665,7 @@ function render(){
       const cfTag = !unverified ? ''
         : (a.cf === 'user'
             ? ` <span class="tag warn">${T('nick.unverified')}</span>`
-            : ` <span class="tag">${T('nick.community')}</span>`);
+            : ` <span class="st-text">${T('nick.community')}</span>`);
       // 每条都显示出处；有 URL 的做成链接，没有 URL 的至少显示 provenance 文本。
       const srcText = a.src
         ? (a.su
@@ -7673,7 +7678,7 @@ function render(){
       const headKey = a.k === 'synonym' ? 'nick.synonym_hit' : 'nick.hit';
       return `<div class="notice nick"><div class="nick-head">${T(headKey)}：
         <b>${esc(a.a)}</b> → ${target}
-        <span class="tag">${esc(T('nick.'+a.k))}</span>${cfTag}</div>
+        <span class="st-text">${esc(T('nick.'+a.k))}</span>${cfTag}</div>
         <div class="sub">${caveat}${packs}</div>${hint}${srcLine}</div>`;
     }).join('');
     if(nicks.length > 1) nickHTML += `<div class="notice">${T('nick.ambiguous')}</div>`;
@@ -7791,7 +7796,7 @@ function render(){
         const ds = (e.s && e.s.length)
           ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)).slice(0, 2).join(' / ') : '';
         const cs = (e.c || []).slice(0, 3)
-          .map(c => `<span class="tag ${String(c).toLowerCase()}">${esc(c)}</span>`).join(' ');
+          .map(c => `<span class="mktxt">${esc(c)}</span>`).join(' ');
         // 2026-11-12 task-18（用户截图）：有商品名的条目也显示厂家，和「无商品名」条目
         // 的「厂家：X 命中名：Y」对齐。>28 字截 27 + …，title 放全名；样式沿用 meta。
         let mah = '';
@@ -8525,7 +8530,7 @@ def _assert_no_internal_tokens(page_html: str, where: str) -> str:
 def _bucket_key_html(key: str, T: dict) -> str:
     """内部桶键 → 人话（task-42）：`__no_trade__` → 无商品名；`__mah__:X` → 厂家：X。"""
     if key == "__no_trade__":
-        return ('<span class="m-brand st-badge st-unknown brand-none" data-brand="0" '
+        return ('<span class="m-brand st-text brand-none" data-brand="0" '
                 f'data-i18n="brand.none">{esc(T.get("brand.none", "No trade name"))}</span>')
     if key.startswith("__mah__:"):
         name = key[len("__mah__:"):]
@@ -10952,7 +10957,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
                     und["names"][label] = und["names"].get(label, 0) + 1
         def _brand_bit(label, url, en, zh_sub, form, country=""):
             if label == NO_TRADE:
-                return (f'<span class="m-brand st-badge st-unknown brand-none" data-brand="0" '
+                return (f'<span class="m-brand st-text brand-none" data-brand="0" '
                         f'data-i18n="brand.none">{esc(T["brand.none"])}</span>')
             if label.startswith(MAH_PREFIX):
                 # task-10：CN 无商品名 → 名称位显示「厂家：<MAH>」；前缀弱化、
@@ -11086,11 +11091,11 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
             if spec_nobasis.get(spec):
                 st_html += (' <span class="tag warn" data-i18n="spec.no_basis">'
                             + esc(T.get("spec.no_basis", "per mL / per unit basis not stated"))
-                            + '</span> <span class="tag" data-i18n="spec.cannot_compare">'
+                            + '</span> <span class="st-text" data-i18n="spec.cannot_compare">'
                             + esc(T.get("spec.cannot_compare", "cannot compare")) + '</span>')
             if others_sig:
                 # T10（plan §5.2）：矩阵视图也要能看出这是复方，并列出其它成分与各自含量
-                st_html += (' <span class="tag" data-i18n="badge.combo">'
+                st_html += (' <span class="tag combo" data-i18n="badge.combo">'
                             + esc(T.get("badge.combo", "Association")) + '</span>'
                             + f'<br><span class="m-combo">'
                             + _combo_line_html(spec_comps.get(spec, []), sub_label)
@@ -11247,7 +11252,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
         if sid in nicknames:
             also_names = "、".join(esc(x) for x in nicknames[sid])
             nick_line = (f'<p class="sub"><span data-i18n="drug.also_called">Also called:</span> '
-                         f'{also_names} <span class="tag" data-i18n="nick.tag">nickname</span></p>')
+                         f'{also_names} <span class="st-text" data-i18n="nick.tag">nickname</span></p>')
         # task-141c：同物异名（INN vs USAN / 拼写变体）——只列别的写法，最多 5 个；
         # 目标成分有产品页就链过去，名字保留原文、不翻译，主名（h1）不动。
         syn_line = ""
@@ -11260,7 +11265,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
                 bits.append(label)
             syn_line = (f'<p class="sub drug-also"><span data-i18n="drug.also_known">'
                         f'Also known as:</span> ' + ", ".join(bits)
-                        + ' <span class="tag" data-i18n="syn.tag">synonym</span></p>\n')
+                        + ' <span class="st-text" data-i18n="syn.tag">synonym</span></p>\n')
         conf_line = ""
         if conflicts.get(sid):
             items = []
@@ -11380,6 +11385,20 @@ def collect_name_data(db: sqlite3.Connection) -> dict:
     return data
 
 
+def _status_span_html(status: str, T: dict) -> str:
+    """状态词：只有「需注意的差异」才做彩色徽标，常规状态是纯文字（L8 / v0.13.1）。
+
+    - `discontinued` / `withdrawn` = 差异事实 → `st-badge st-<st>`（保留颜色语义）
+    - `active` / `unknown` = 登记常规信息 → `st-text`（13px muted，无边框无底色）
+    状态值全部由 DB 的 `status` 字段推导，本函数只改呈现，不新增任何人工判断。
+    """
+    label = esc(T.get("drug.status." + str(status), status))
+    if status in ("discontinued", "withdrawn"):
+        return (f'<span class="st-badge st-{esc(status)}" '
+                f'data-i18n="drug.status.{esc(status)}">{label}</span>')
+    return f'<span class="st-text" data-i18n="drug.status.{esc(status)}">{label}</span>'
+
+
 def _name_product_table(rows: list, T: dict) -> str:
     """v0.9.0 task-6：单包装名字页的产品明细（市场/规格/剂型/状态/厂家/来源）。"""
     if not rows:
@@ -11412,7 +11431,7 @@ def _name_product_table(rows: list, T: dict) -> str:
                     f'{esc(src.split("//")[-1].split("/")[0])}</a>') if src else "—"
         extras = ""
         if not (zh or en):
-            extras += (' <span class="st-badge st-unknown" data-i18n="ingredient.unrecorded">'
+            extras += (' <span class="st-text" data-i18n="ingredient.unrecorded">'
                        f'{esc(T["ingredient.unrecorded"])}</span>')
         if (pnote and ("出口" in pnote or "Export" in pnote)) or \
                 (pcat and "Export" in pcat):
@@ -11426,8 +11445,7 @@ def _name_product_table(rows: list, T: dict) -> str:
             f'<td data-label="{esc(T["name.form"])}" data-i18n-label="name.form">'
             f'{form_html}</td>'
             f'<td data-label="{esc(T["a1.status"])}" data-i18n-label="a1.status">'
-            f'<span class="st-badge st-{esc(status)}" data-i18n="drug.status.{esc(status)}">'
-            f'{esc(T.get("drug.status." + str(status), status))}</span></td>'
+            f'{_status_span_html(status, T)}</td>'
             f'<td data-label="{esc(T["col.mah"])}" data-i18n-label="col.mah">{maker}</td>'
             f'<td data-label="{esc(T["a1.source"])}" data-i18n-label="a1.source">{src_html}</td></tr>')
     return ('<div class="tablewrap"><table class="res"><thead><tr>'
@@ -11562,7 +11580,7 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
         name_only = d.get("name_only") or set()
         none_ing = ""
         if name_only:
-            none_ing = ('<p class="sub"><span class="st-badge st-unknown" '
+            none_ing = ('<p class="sub"><span class="st-text" '
                         'data-i18n="ingredient.unrecorded">'
                         + esc(I18N["en"]["ingredient.unrecorded"]) + '</span></p>')
         # v0.9.8 task-13（P0-8）：多成分名字页先给「不可互换」警示（四语），
@@ -11596,7 +11614,7 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                     + esc('、'.join(alts)) + ' · ') if alts else ""
         # L7（v0.12.1）：统一页头四件套（名字页 77k 页，页头保持极简：不传 summary 之外的块）
         head = _page_head("../", f'<h1>{esc(e["d"])}</h1>', summary_key="name.summary")
-        body = f"""{head}<p class="sub">{('<span class="st-badge st-unknown brand-none" data-i18n="brand.none">'
+        body = f"""{head}<p class="sub">{('<span class="st-text" data-i18n="brand.none">'
                  + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}{also_bit}<span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
 {banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys, data)}{single_table}"""
         if single:
@@ -11765,7 +11783,7 @@ def _family_block(e, families, displays, variants, page_keys=None, data=None) ->
         subs = _key_subs(data, k)
         name_cell = _family_name_html(k, displays.get(k) or "、".join(variants.get(k, [])[:2]), page_keys)
         if k == e["k"]:
-            name_cell += f' <span class="tag" data-i18n="fam.cmp_this">{esc(T["fam.cmp_this"])}</span>'
+            name_cell += f' <span class="st-text" data-i18n="fam.cmp_this">{esc(T["fam.cmp_this"])}</span>'
         markets = "、".join(sorted(((data or {}).get(k) or {}).get("countries") or [])) or "—"
         rel_key = _family_relation(cur_subs, subs)
         # T16（H1）：中性提示（fam.rel.multi*）后面补一句「部分记录未标注释放方式」，
@@ -12094,14 +12112,14 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             # T10（plan §5.2）：复方行给出「全部活性成分 + 各自含量」，只列事实
             combo_html = ""
             if others_sig:
-                combo_html = (' <span class="tag" data-i18n="badge.combo">'
+                combo_html = (' <span class="tag combo" data-i18n="badge.combo">'
                               + esc(T.get("badge.combo", "Association")) + '</span>'
                               + '<span class="mkcombo">'
                               + _combo_line_html(spec_comps.get(spec, []), sub_label)
                               + '</span>')
             st_badge = ""
             if any(x in ("unknown", "", None) for x in status_cell.get((spec, c), set())):
-                st_badge = (' <span class="st-badge st-unknown" '
+                st_badge = (' <span class="st-text" '
                             'data-i18n="drug.status.unknown">unknown</span>')
             lis.append(f'<li class="mkrow" data-form="{esc(_form_chip_key(form))}" data-spec="{esc(st)}" '
                        f'data-mk="{esc(c)}" data-spec-kind="{esc(spec_kind.get(spec, ""))}"'
@@ -12724,7 +12742,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
         sids = sorted(p["sids"])
         if not sids:
             # v0.9.1 task-28：无成分产品（名称层）
-            return (f'<span class="st-badge st-unknown" data-i18n="ingredient.unrecorded">'
+            return (f'<span class="st-text" data-i18n="ingredient.unrecorded">'
                     f'{esc(I18N[lang]["ingredient.unrecorded"])}</span>')
         labels = []
         for sid in sids[:3]:
@@ -14291,7 +14309,10 @@ def _status_summary_html(statuses: dict[str, dict[str, int]]) -> str:
     if not groups:
         return ""
     def _word(st: str) -> str:
-        return (f'<span class="st-word st-{esc(st)}" data-i18n="drug.status.{esc(st)}">'
+        # L8（v0.13.1）：只有停售/撤市值得颜色；在售/未知是常规登记事实 → 纯文字。
+        cls = (f'st-word st-{esc(st)}'
+               if st in ("discontinued", "withdrawn") else "st-text")
+        return (f'<span class="{cls}" data-i18n="drug.status.{esc(st)}">'
                 f'{esc(I18N["en"].get("drug.status." + st, st))}</span>')
     first_st, first_cs = groups[0]
     shown = first_cs[:5]
@@ -14643,7 +14664,7 @@ def build_atc_pages(db: sqlite3.Connection) -> int:
             atc4_html = _atc4_forms_html(code) if level == 4 else ""
             # L9（v0.12.2）：/atc/*.html 类目页也接统一页头（父类目并进面包屑）
             head = _page_head(
-                "../", f'<h1>{title_html} <span class="tag">L{level}</span></h1>',
+                "../", f'<h1>{title_html} <span class="st-text">L{level}</span></h1>',
                 crumb="atc",
                 extra_crumbs=(f'<a href="../atc/{esc(parent)}.html"><code>{esc(parent)}</code></a>'
                               if parent else ""))
@@ -15853,7 +15874,7 @@ def main() -> None:
       var text = badgeFor(el.textContent || '');
       if(!text) return;
       var s = document.createElement('span');
-      s.className = 'st-badge st-unknown nolang-badge';
+      s.className = 'st-text nolang-badge';
       s.textContent = text;
       el.appendChild(s);
     });
@@ -15865,7 +15886,7 @@ def main() -> None:
       if(el.closest && el.closest('h1')) host = document.querySelector('.drug-name-src');
       if(!host) return;
       var s = document.createElement('span');
-      s.className = 'st-badge st-unknown nolang-badge';
+      s.className = 'st-text nolang-badge';
       s.textContent = text;
       host.appendChild(s);
     });
@@ -15895,7 +15916,7 @@ def main() -> None:
       }
       if(!key) return;
       var s = document.createElement('span');
-      s.className = 'st-badge st-unknown nolang-badge';
+      s.className = 'st-text nolang-badge';
       s.textContent = window.T(key);
       var host = (nm.closest && nm.closest('a')) || nm;   // 徽章放链接之后，不污染链接文本
       host.parentNode.insertBefore(s, host.nextSibling);

@@ -303,6 +303,32 @@ CASES = [
     dict(sid="metoclopramide", cat="zh_only",
          en=["metoclopramide", "reglan"], es=["metoclopramida", "primperan"],
          zh=["甲氧氯普胺", "胃复安"], foreign=["US", "GB", "ES"]),
+    # ---- CZ / LV（v0.13.0 新市场；本地原文放 en 槽，cat 标 cz/lv）----
+    # 期望与 rank 按 2026-11-16 现库实测（reports/2026-11-16-trilingual-cz-lv-landing.md）。
+    dict(sid="hydrochlorothiazide", cat="cz",
+         en=["hydrochlorothiazid"], es=[], zh=[],
+         foreign=["CZ"],
+         note="CZ 写法（去 e）；top1 为 US 英文名，CZ 复方卡在 25 卡内"),
+    dict(sid="pyridoxine", cat="cz",
+         en=["pyridoxin leciva"], es=[], zh=[],
+         foreign=["CZ"],
+         note="CZ 包装名（Léčiva→leciva）；top1 是 Pyridoxine Hydrochloride 盐型行，底座 rank 2"),
+    dict(sid="atorvastatin", cat="cz",
+         en=["sortis 20 mg"], es=[], zh=[],
+         foreign=["CZ", "LV"],
+         note="包装行（品牌+规格）；top1 LV，CZ 卡为 Atorvastatin Calcium Trihydrate 盐型行"),
+    dict(sid="indometacin", cat="lv",
+         en=["indometacin"], es=[], zh=[],
+         foreign=["LV"],
+         note="国际/当地拼法（dup_inn：与 Indomethacin 两行；top1 GB，LV 卡在 25 卡内）"),
+    dict(sid="warfarin", cat="lv",
+         en=["orfarin tabletes"], es=[], zh=[],
+         foreign=["LV"],
+         note="LV 商品名+剂型原文（tabletes）；结果只出 LV 卡"),
+    dict(sid="semaglutide", cat="lv",
+         en=["wegovy"], es=[], zh=[],
+         foreign=["LV"],
+         note="英文原名；LV 卡 rank 4，另有 CZ/US/…"),
 ]
 
 
