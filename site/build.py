@@ -5071,12 +5071,18 @@ table.res .cmore{margin:2px 0 0}
 .pickbtn{border:0;background:none;color:var(--accent);font:inherit;font-size:13px;
  padding:0 6px 0 0;margin:0;cursor:pointer;white-space:nowrap;line-height:1.6}
 .pickbtn:hover{text-decoration:underline}
-/* 详情列不许换行：里面现在有「◎ / 详情 / ⚑」三件，换行会把行高从 42 撑到 65px。
-   「◎ 这条」用绝对定位贴到行右缘：不参与表格布局 → 行高与 v0.11.6 完全一致（首屏条目靠它）。 */
+/* 详情列不许换行：里面现在有「选择此产品 / 查看登记详情」两个按钮，换行会把行高撑高。
+   v0.12.4 P0 热修：v0.12.1 把「◎ 角标」换成文字按钮后，这里**不能再绝对定位**（会叠在
+   详情按钮上）；改成正常行内流 + 小间距，行高保持 ~42px（首屏条目靠它）。
+   `position:static` 只解除结果行的绝对定位，「◎」角标时代的其它选择器不受影响。 */
 td.c-det{white-space:nowrap}
 tr.br{position:relative}
-tr.br .pickbtn{position:absolute;right:2px;top:2px;min-height:0;height:auto;
- padding:0 2px;line-height:1.1;font-size:12px}
+table.res.rows tr.br td.c-det{text-align:right;white-space:nowrap}
+table.res.rows tr.br .pickbtn{position:static;right:auto;top:auto;min-height:26px;height:auto;
+ display:inline-block;padding:0 8px 0 0;line-height:1.4;font-size:14px;font-weight:600}
+table.res.rows tr.br .detbtn{min-height:26px;line-height:1.4;font-size:14px;font-weight:400;
+ display:inline-block}
+table.res.rows tr.br.picked td.c-det{text-align:right}
 /* ↑ 不设 background：按钮浮在结果行（表底 #fff）上，白底=白底会被
    deploy/ui_surface_check.py 判「框内颜色 == 框外颜色」（用户 2026-11-10 硬规则）。 */
 .advfilter{margin:6px 0 10px}
