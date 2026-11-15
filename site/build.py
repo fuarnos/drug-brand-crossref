@@ -7774,6 +7774,21 @@ function applyCase(k, pat){
   }
   return out.join('');
 }
+// v2（2026-11-15 core 瘦身）解码：输出条目与 v1 完全同构（字段名/含义不变），
+// render() 以下逻辑一行不改。
+//   · u 不再逐行存：客户端用 slugFile(k) 复刻 build.py key_file()；ux=无 name 页的行下标，
+//     uxv=推导不安全（>80 字符 md5 / astral / 异常空白）或与推导不符的例外值。
+//   · ml（+N 厂家列表）的字典值是全局 mk 表下标，这里映射回 [[name, slug], ...]。
+//   · fl = t | nc<<1 | eo<<2，这里拆回 e.t / e.nc / e.eo。
+// 旧格式（v1）仍可解：v1 的 u/t/nc/eo 是普通列，走下面的通用分支。
+const CORE_V = 2;
+function slugFile(key){
+  let s = String(key == null ? '' : key).replace(/[\u0000-\u001f\u007f]+/g, '');
+  s = s.trim().replace(/[\\/:*?"<>|\s]+/g, '-').replace(/^[-.]+/, '').replace(/[-.]+$/, '');
+  // >80 字符会走 md5 后缀（见 build.py key_file）：构建期已放进 uxv 例外表，这里不推导。
+  if(!s || s.length > 80) return '';
+  return s + '.html';
+}
 function decodeCore(c){
   if(!c || !Array.isArray(c.cols && c.cols.k) || typeof c.n !== 'number') throw new Error('bad core');
   const n = c.n, C = c.cols, out = new Array(n);
@@ -7784,16 +7799,38 @@ function decodeCore(c){
     if(!d) d = dpcol[i] ? applyCase(k, dpcol[i]) : k;
     out[i] = {k: k, d: d};
   }
+  const MK = c.mk || null;
   for(const f in C){
-    if(f === 'k' || f === 'd' || f === 'dp') continue;
+    if(f === 'k' || f === 'd' || f === 'dp' || f === 'ux' || f === 'uxv') continue;
     const col = C[f];
     if(!col) continue;
-    if(col.d && col.i){                       // 字典列
+    if(f === 'ml' && MK && col.d && col.i){   // v2：字典值 = mk 下标数组
+      const dict = col.d, idx = col.i;
+      for(let i = 0; i < n; i++){
+        const ids = dict[idx[i]];
+        if(!ids){ out[i].ml = null; continue; }
+        const arr = new Array(ids.length);
+        for(let j = 0; j < ids.length; j++) arr[j] = MK[ids[j]];
+        out[i].ml = arr;
+      }
+    } else if(f === 'fl' && MK){              // v2：位掩码拆回 t / nc / eo
+      for(let i = 0; i < n; i++){
+        const v = col[i];
+        out[i].t = v & 1; out[i].nc = (v >> 1) & 1; out[i].eo = (v >> 2) & 1;
+      }
+    } else if(col.d && col.i){                // 字典列
       const dict = col.d, idx = col.i;
       for(let i = 0; i < n; i++) out[i][f] = dict[idx[i]];
     } else if(Array.isArray(col)){            // 普通列
       for(let i = 0; i < n; i++) out[i][f] = col[i];
     }
+  }
+  if(MK){                                     // v2：u 由 k 推导 + 稀疏例外
+    for(let i = 0; i < n; i++) out[i].u = slugFile(kcol[i]);
+    const uxv = C.uxv;
+    if(uxv && uxv.i) for(let j = 0; j < uxv.i.length; j++) out[uxv.i[j]].u = uxv.d[j];
+    const ux = C.ux || [];
+    for(let j = 0; j < ux.length; j++) out[ux[j]].u = '';
   }
   for(const i of (c.q || [])) out[i].q = 1;
   return out;
@@ -7804,11 +7841,21 @@ function fetchJSON(url){
 function loadMainIndex(){
   // v0.6.1：data/index.json 双写已停（过渡期可用 WRITE_LEGACY_INDEX=1 恢复）。
   // ?legacy=1（旧「启动即拉全量」行为）与默认路径都走 data/idx/core.json + decodeCore；
-  // 失败时先尝试可选的 data/idx/legacy-mini.json（构建开关 WRITE_LEGACY_MINI=1），
-  // 仍失败则抛出，交给 loadIndex() 的统一错误提示 + 重试按钮，不再请求 index.json。
-  return fetchJSON(BASE + 'data/idx/core.json').then(decodeCore).catch(err=>{
-    if(window.console && console.warn) console.warn('core index unavailable, try legacy-mini', err);
-    return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(decodeCore).catch(()=>{ throw err; });
+  // 2026-11-15 core v2：构建版本号随 build.py 内容变，老 HTML 可能拿着旧 ?v= 请求到新格式，
+  // 这里先校验 c.v；不符就带 cache-bust 重拉一次，仍不符则报错交给统一错误提示 + 重试按钮，
+  // 绝不用错版本的 core 渲染半破页面。随后再试可选的 legacy-mini（WRITE_LEGACY_MINI=1）。
+  const loadOnce = (q) => fetchJSON(BASE + 'data/idx/core.json' + (q || '')).then(c=>{
+    if(!c || c.v !== CORE_V) throw new Error('core v' + (c && c.v) + ' != ' + CORE_V);
+    return decodeCore(c);
+  });
+  return loadOnce('').catch(err=>{
+    if(window.console && console.warn) console.warn('core index version mismatch, retry cache-busted', err);
+    return loadOnce('&r=' + Date.now()).then(idx=>idx).catch(()=>{
+      return fetchJSON(BASE + 'data/idx/legacy-mini.json').then(c=>{
+        if(!c || c.v !== CORE_V) throw err;
+        return decodeCore(c);
+      }).catch(()=>{ throw err; });
+    });
   });
 }
 
@@ -15155,7 +15202,8 @@ def build_seo_files() -> None:
 #       render() 以下逻辑一行不改。旧 index.json 继续双写：?legacy=1 或核心
 #       加载/解码失败时自动回退。设计与体积对比见 reports/index-p1-impl.md。
 #
-# 编码格式（v1）：
+# 编码格式（v2；2026-11-15 core 瘦身，v1 见 git 历史）：
+#   {"v":2,"n":条数,"mk":[[厂家名, slug], ...],   # 全局厂家表（ml 的 id 指向这里）
 #   {"v":1,"n":条数,
 #    "cols":{
 #      "k":[str...],                     检索键（原样，不排序——保持 IDX 原有顺序，
@@ -15165,11 +15213,15 @@ def build_seo_files() -> None:
 #                                        位 toUpperCase 后还原 d）；否则 d 存原文
 #      "c":{"d":[值...],"i":[下标...]}, 字典列：字符串字典 + 每行字典下标
 #      ...（x/s/l/v/vs/g/gn/m 同字典列；c/s/vs 的值是数组，先 JSON 化再字典化）
-#      "n":[int...], "mn":[int...], "u":[str...]   普通列
+#      "n":[int...], "mn":[int...]        普通列
+#      "ml":{"d":[[id...]|null],"i":[下标...]},    v2：+N 厂家列表存全局表 mk 的 id
+#      "ux":[稀疏下标...], "uxv":{"i":[..],"d":[..]}  v2：u 由客户端从 k 推导（key_file 规则），
+#      "fl":[int...]                       v2：t|nc<<1|eo<<2 位掩码（t/nc/eo 三列合一）
 #    },
 #    "q":[稀疏下标...]}                   q=1 的行下标（163 条，单独稀疏存）
 #   f（剂型）v0.6.1 加入核心：B7 CSV 导出用 e.f，且 ?legacy=1 走 core 解码后需与旧
 #   index.json 完全同构（除 f 外 19 字段已验证 0 差异；f 只有 ~9 种字典值，core +0.2–0.3 MB）。
+CORE_VERSION = 2
 CORE_DICT_COLS = ("c", "x", "s", "l", "v", "vs", "cu", "mu", "g", "gn", "m", "f",
                   "db", "sl", "rl", "wi")
 CORE_ARRAY_COLS = ("c", "s", "vs", "ml", "xz", "atc", "fs")     # 值是数组：先 JSON 化再进字典
@@ -15250,8 +15302,79 @@ def encode_core(entries) -> dict:
             cols[f] = {"d": uniq, "i": [pos[v] for v in vals]}
         else:
             cols[f] = vals
-    return {"v": 1, "n": n, "cols": cols,
+    cols, mk = _slim_core_cols(entries, cols)
+    return {"v": CORE_VERSION, "n": n, "mk": mk, "cols": cols,
             "q": [i for i, e in enumerate(entries) if e.get("q")]}
+
+
+def _client_slug(key: str) -> str:
+    """客户端 slugFile() 能独立算出来的 u 值；算不出来（>80 字符要走 md5 / 空）返回 ""。"""
+    cleaned = re.sub(r"[\x00-\x1f\x7f]+", "", key or "")
+    s = re.sub(r'[\\/:*?"<>|\s]+', "-", cleaned.strip()).strip("-.")
+    if not s or len(s) > 80:
+        return ""
+    return s + ".html"
+
+
+def _slim_core_cols(entries, cols: dict) -> tuple[dict, list]:
+    """core v2 结构性瘦身：ml → 全局厂家表 id、u → 客户端推导 + 稀疏例外、t/nc/eo → 位掩码。
+
+    2026-11-15 实测（217,411 行）：raw 47.89 MB → 38.58 MB、gzip 10.71 → 8.86 MB。
+    解码端（decodeCore）输出的条目字段与 v1 逐项同构，render() 以下逻辑不变。
+    """
+    # 1) ml：字典值是 [[厂家名, slug], ...]，同一条会重复出现上百次。
+    #    改成全局 mk 表 + 每行 id 数组；mk 顺序 = 首次出现顺序（确定性，同一条数据每次构建一致）。
+    mk: list[list[str]] = []
+    mk_id: dict[tuple[str, str], int] = {}
+    ml = cols.get("ml")
+    if isinstance(ml, dict):
+        new_d: list[list[int] | None] = []
+        for arr in ml["d"]:
+            if not arr:
+                new_d.append(None)       # 无 +N 列表的行存 null（与 v1 的 None 一致）
+                continue
+            ids: list[int] = []
+            for name, slug in arr:
+                pair = (name, slug)
+                j = mk_id.get(pair)
+                if j is None:
+                    j = len(mk)
+                    mk_id[pair] = j
+                    mk.append([name, slug])
+                ids.append(j)
+            new_d.append(ids)
+        cols["ml"] = {"d": new_d, "i": ml["i"]}
+    # 2) u（name/ 页文件名）：规则就是 key_file(k)，客户端 slugFile() 复刻同一套正则。
+    #    只存两种情况：ux = 无 name 页（u 为空）的行下标；uxv = 推导不安全/与推导不符的例外值。
+    #    不安全 = 键里有 astral 字符（JS 按 UTF-16 计长，与 Python len() 不一致）或非常见空白。
+    u_col = cols.pop("u", None)
+    if isinstance(u_col, list):
+        unsafe = re.compile(r"[^\S \t\n\r\f\v]|[\U00010000-\U0010FFFF]")
+        ux: list[int] = []
+        uxv_i: list[int] = []
+        uxv_v: list[str] = []
+        for i, val in enumerate(u_col):
+            key = entries[i]["k"]
+            want = _client_slug(key)     # 客户端 slugFile() 能算出来的值（算不出来为 ""）
+            if unsafe.search(key or ""):
+                uxv_i.append(i)
+                uxv_v.append(val or "")
+            elif want and val == want:
+                continue                 # 客户端可推导
+            elif not val:
+                ux.append(i)             # 无 name 页：稀疏存下标，值恒为 ""
+            else:
+                uxv_i.append(i)          # 客户端算不出来（>80 字符走 md5 / 空 slug）：存例外值
+                uxv_v.append(val)
+        cols["ux"] = ux
+        if uxv_i:
+            cols["uxv"] = {"i": uxv_i, "d": uxv_v}
+    # 3) t / nc / eo 三个 0/1 列 → 一个位掩码 fl（每列各自 ~0.43 MB，合一后 ~0.43 MB）。
+    t_col, nc_col, eo_col = cols.pop("t", None), cols.pop("nc", None), cols.pop("eo", None)
+    if isinstance(t_col, list):
+        cols["fl"] = [(t_col[i] or 0) | ((nc_col[i] or 0) << 1) | ((eo_col[i] or 0) << 2)
+                      for i in range(len(t_col))]
+    return cols, mk
 
 
 
@@ -16408,8 +16531,9 @@ def main() -> None:
     if os.environ.get("WRITE_LEGACY_MINI") == "1":
         # 可选二级兜底（默认关）：核心损坏时客户端尝试 legacy-mini（<13.1 MB raw）。
         mini_cols = {k: v for k, v in core["cols"].items()
-                     if k in {"k", "d", "dp", "c", "x", "s", "l", "n", "v", "u"}}
-        mini = {"v": 1, "n": core["n"], "cols": mini_cols, "q": core["q"]}
+                     if k in {"k", "d", "dp", "c", "x", "s", "l", "n", "v", "ux", "uxv", "fl"}}
+        mini = {"v": CORE_VERSION, "n": core["n"], "mk": core.get("mk", []),
+                "cols": mini_cols, "q": core["q"]}
         (OUT / "data" / "idx" / "legacy-mini.json").write_bytes(
             json.dumps(mini, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
     print(f"  {len(entries)} keys", flush=True)
