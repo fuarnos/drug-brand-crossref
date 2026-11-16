@@ -1202,6 +1202,7 @@ FR_I18N: dict[str, str] = {
     "drug.more_names": "Voir les {n} autres",
     "drug.mkx_more": "{n} autres marchés",
     "drug.spec_count": "{shown} sur {n} affichées",
+    "drug.spec_count_und": "{shown} affichées · {u} sans dosage indiqué",
     "mkmeta.source": "Origine", "mkmeta.asof": "Données au",
     "mkmeta.undisclosed": "certains enregistrements n'indiquent pas le dosage",
     "mkmeta.unknown": "inclut des enregistrements au statut inconnu (pas une preuve de vente)",
@@ -2019,6 +2020,7 @@ UI_I18N = {
         "drug.more_names": "Show the other {n}",
         "drug.mkx_more": "Other {n} markets",
         "drug.spec_count": "{shown} shown of {n}",
+        "drug.spec_count_und": "{shown} shown · {u} without a stated strength",
         "mkmeta.source": "Source", "mkmeta.asof": "Data as of",
         "mkmeta.undisclosed": "some records have no stated strength",
         "mkmeta.unknown": "includes records with unknown status (not proof of sale)",
@@ -2199,6 +2201,7 @@ UI_I18N = {
         "drug.more_names": "Ver los otros {n}",
         "drug.mkx_more": "{n} mercados más",
         "drug.spec_count": "{shown} de {n} mostradas",
+        "drug.spec_count_und": "{shown} mostradas · {u} sin concentración indicada",
         "mkmeta.source": "Fuente", "mkmeta.asof": "Datos a",
         "mkmeta.undisclosed": "algunos registros no indican la concentración",
         "mkmeta.unknown": "incluye registros con estado desconocido (no implica venta)",
@@ -2352,6 +2355,7 @@ UI_I18N = {
         "drug.more_names": "查看其余 {n} 项",
         "drug.mkx_more": "另 {n} 个市场",
         "drug.spec_count": "展示 {shown} 个，共 {n} 个",
+        "drug.spec_count_und": "展示 {shown} 个 · {u} 条未公开规格",
         "mkmeta.source": "来源", "mkmeta.asof": "数据截止",
         "mkmeta.undisclosed": "部分记录未公开规格",
         "mkmeta.unknown": "含状态未知记录（不等于在售）",
@@ -2608,6 +2612,7 @@ UI_I18N = {
         "drug.more_names": "檢視其餘 {n} 項",
         "drug.mkx_more": "另 {n} 個市場",
         "drug.spec_count": "顯示 {shown} 個，共 {n} 個",
+        "drug.spec_count_und": "顯示 {shown} 個 · {u} 條未公開規格",
         "mkmeta.source": "來源", "mkmeta.asof": "資料截止",
         "mkmeta.undisclosed": "部分記錄未公開規格",
         "mkmeta.unknown": "含狀態未知記錄（不等於在售）",
@@ -9408,7 +9413,9 @@ def _mkblock_js() -> str:
         "if(n&&window.T){var tpl=window.T(n.getAttribute('data-i18n-tpl')||'drug.spec_count');"
         "n.setAttribute('data-shown',String(vis));"
         "n.textContent=String(tpl).replace('{shown}',String(vis))"
-        ".replace('{n}',n.getAttribute('data-total')||'');}});"
+        ".replace('{n}',n.getAttribute('data-total')||'')"
+        # R5：只有未公开规格的块用 drug.spec_count_und，多一个 {u}（记录数，data-und）
+        ".replace('{u}',n.getAttribute('data-und')||'');}});"
         "var stt=document.getElementById('lf-status');"
         "if(stt&&window.T){stt.textContent=window.T('lf.count')"
         ".replace('{shown}',String(shown)).replace('{total}',String(lfpRows.length));}"
@@ -11135,11 +11142,18 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
             traded = names.get(pid, [])
             und = None
             if not st.strip():
-                und = und_meta.setdefault(country, {"records": 0, "names": {}, "mah": {},
-                                                    "pids": set()})
+                # R5（v0.13.5）：未公开规格块的计数一律按**记录（产品）**去重：
+                #   name_pids / mah_pids 存 pid 集合，×N = 该名字 / 该厂家在这个市场有几条记录；
+                #   mahs = 块内全部未公开规格记录的 distinct 厂家（旧版只数「无商品名」那批 → 误报 0）。
+                und = und_meta.setdefault(country, {"records": 0, "pids": set(),
+                                                    "name_pids": {}, "mah_pids": {},
+                                                    "mahs": set()})
                 if pid not in und["pids"]:
                     und["pids"].add(pid)
                     und["records"] += 1
+                _mah_txt = (mah or "").strip()
+                if _mah_txt:
+                    und["mahs"].add(_mah_txt)
             if not traded:
                 # v0.9.0 task-19：无 trade 名的产品也在矩阵里占位，不静默消失。
                 # v0.10.2 task-10：CN 这 126,716 条 100% 有上市许可持有人，
@@ -11153,11 +11167,11 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
                         bucket[key] = ("", "", "")
                     mah_count[(country, key)] = mah_count.get((country, key), 0) + 1
                     if und is not None:
-                        und["mah"][key] = und["mah"].get(key, 0) + 1
+                        und["mah_pids"].setdefault(key, set()).add(pid)
                 else:
                     bucket.setdefault(NO_TRADE, ("", "", ""))
                     if und is not None:
-                        und["names"][NO_TRADE] = und["names"].get(NO_TRADE, 0) + 1
+                        und["name_pids"].setdefault(NO_TRADE, set()).add(pid)
             for key_id, raw in traded:
                 e = entry_by_k.get(key_id)
                 label = (e or {}).get("d") or raw
@@ -11166,7 +11180,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
                     bucket[label] = (f'../name/{e["u"]}' if e and e.get("u") else "", en,
                                      (zh_sub or "") if country == "CN" else "")
                 if und is not None and label:
-                    und["names"][label] = und["names"].get(label, 0) + 1
+                    und["name_pids"].setdefault(label, set()).add(pid)
         def _brand_bit(label, url, en, zh_sub, form, country=""):
             if label == NO_TRADE:
                 return (f'<span class="m-brand st-text brand-none" data-brand="0" '
@@ -12433,26 +12447,32 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             shown_n += _n
         n_head = len([1 for s, _b in rows_c if (s[0] or "").strip()])
         undis_html = ""
+        n_rec = 0          # R5：本块未公开规格的记录数（块头「0 shown · N 未公开」用）
         if undisclosed:
             # v0.11.4 task-62：未公开规格不再用「、」拼段落 —— 折叠摘要
             # 「N 个记录 · K 个厂家」；展开分「有商品名（名字 ×N）」与「仅厂家（厂家：X ×N）」。
+            # R5（v0.13.5）：×N 与厂家数都按 pid 集合算（旧版累加名称变体行数：MX ×14 / HK ×72），
+            # 厂家数改用块内 distinct MAH（旧版只数「无商品名」的桶 → 有商品名时误报 0）。
             meta = (und_meta or {}).get(c) or {}
+            name_pids: dict[str, set[str]] = meta.get("name_pids") or {}
+            mah_pids: dict[str, set[str]] = meta.get("mah_pids") or {}
             names: dict[str, int] = {}
             mahs: dict[str, int] = {}
             for _spec, bucket in undisclosed:
                 for k in bucket.keys():
                     if k.startswith("__mah__:"):
-                        mahs[k] = int((meta.get("mah") or {}).get(k) or 1)
+                        mahs[k] = max(1, len(mah_pids.get(k) or ()))
                     else:
-                        names[k] = int((meta.get("names") or {}).get(k) or 1)
+                        names[k] = max(1, len(name_pids.get(k) or ()))
             n_rec = int(meta.get("records") or (sum(names.values()) + sum(mahs.values())))
-            k_mah = len(mahs)
+            k_mah = len(meta.get("mahs") or ()) or len(mahs)
 
             def _und_chips(d: dict[str, int]) -> str:
                 out = []
                 for k in sorted(d, key=lambda x: (x.startswith("__"), x.lower())):
-                    out.append(f'<span class="uname">{_bucket_key_html(k, T)} '
-                               f'<span class="x">×{d[k]}</span></span>')
+                    # ×1 不写（与名称位 MAH 桶的 ×N 规则一致，避免每行都挂一个「×1」）
+                    times = f' <span class="x">×{d[k]}</span>' if d[k] > 1 else ""
+                    out.append(f'<span class="uname">{_bucket_key_html(k, T)}{times}</span>')
                 return "".join(out)
 
             # task-68（体积瘦身）：展开态只列前 8 个名字，其余用「还有 N 个（K 个厂家）」+
@@ -12520,6 +12540,16 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
         # 说明保留：T13 / D3「展示 X 个，共 Y 个」的 X 是当前展示行数（受 LIST_ROWS_PER_BLOCK
         # 与 JS 筛选影响），Y 是已公开规格总数；文案只写英文（无 JS 兜底），其余语言由
         # i18n.js 按 data-i18n-tpl 替换数字 —— 四语块会让 12,438 个成分页多背 ≈28 MiB。
+        # R5（v0.13.5）：整块都没有结构化规格时（n_head == 0）不能写「0 shown of 0」——
+        # 换成「0 shown · N without a stated strength」（N = 该块未公开规格记录数，data-und）。
+        _und_only = n_head == 0 and n_rec > 0
+        _spec_tpl = "drug.spec_count_und" if _und_only else "drug.spec_count"
+        _spec_txt = T.get(_spec_tpl,
+                          "{shown} shown · {u} without a stated strength" if _und_only
+                          else "{shown} shown of {n}")
+        for _ph, _val in (("{shown}", shown_n), ("{n}", n_head), ("{u}", n_rec)):
+            _spec_txt = _spec_txt.replace(_ph, str(_val))
+        _und_attr = f' data-und="{n_rec}"' if _und_only else ""
         _is_first = not blocks
         blocks.append(
             f'<details class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}"'
@@ -12533,9 +12563,9 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             f'<span class="mkc"> · {esc(c)}</span> '
             f'<span class="sub">{rec_by_country.get(c, 0):,} '
             f'<span data-i18n="drug.records">records</span> · '
-            f'<span class="mkspec" data-total="{n_head}" data-shown="{shown_n}" '
-            f'data-i18n-tpl="drug.spec_count">'
-            f'{esc(T.get("drug.spec_count", "{shown} shown of {n}").replace("{shown}", str(shown_n)).replace("{n}", str(n_head)))}'
+            f'<span class="mkspec" data-total="{n_head}" data-shown="{shown_n}"{_und_attr} '
+            f'data-i18n-tpl="{_spec_tpl}">'
+            f'{esc(_spec_txt)}'
             f'</span></span> {meta_html}</h2></summary>'
             f'{region_html}'
             f'{seg_html}{undis_html}</details>')
@@ -16180,7 +16210,9 @@ def main() -> None:
       var t = window.T(el.dataset.i18nTpl);
       el.textContent = String(t)
         .replace('{shown}', el.getAttribute('data-shown') || '')
-        .replace('{n}', el.getAttribute('data-total') || '');
+        .replace('{n}', el.getAttribute('data-total') || '')
+        // R5：只有未公开规格的块用 drug.spec_count_und，多一个 {u}（记录数，data-und）
+        .replace('{u}', el.getAttribute('data-und') || '');
     });
     // v0.5.5：<title> / description / OG 本地化（根页 head 带 data-i18n-title/meta）
     document.querySelectorAll('[data-i18n-title]').forEach(function(el){
@@ -16353,10 +16385,12 @@ def main() -> None:
         if(n && window.T){
           // T13 / D3：块头是「展示 X 个，共 Y 个」（模板在 data-i18n-tpl，数字在 data-*）；
           // 筛完把 data-shown 与文本一起更新，切语言时 apply() 会按新数字重渲染同一模板。
+          // R5：只有未公开规格的块用 drug.spec_count_und，多一个 {u}（记录数，data-und）。
           n.setAttribute('data-shown', String(shown));
           var tpl = window.T(n.getAttribute('data-i18n-tpl') || 'drug.spec_count');
           n.textContent = String(tpl).replace('{shown}', String(shown))
-            .replace('{n}', n.getAttribute('data-total') || '');
+            .replace('{n}', n.getAttribute('data-total') || '')
+            .replace('{u}', n.getAttribute('data-und') || '');
         }
       });
     }
@@ -16458,10 +16492,12 @@ def main() -> None:
         bk.hidden = all.length > 0 && vis === 0;
         var n = bk.querySelector('.mkspec');
         if(n && window.T){
+          // R5：只有未公开规格的块用 drug.spec_count_und，多一个 {u}（记录数，data-und）
           n.setAttribute('data-shown', String(vis));
           var tpl2 = window.T(n.getAttribute('data-i18n-tpl') || 'drug.spec_count');
           n.textContent = String(tpl2).replace('{shown}', String(vis))
-            .replace('{n}', n.getAttribute('data-total') || '');
+            .replace('{n}', n.getAttribute('data-total') || '')
+            .replace('{u}', n.getAttribute('data-und') || '');
         }
       });
       if(noneP) noneP.hidden = shown > 0;
