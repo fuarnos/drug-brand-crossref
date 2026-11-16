@@ -207,9 +207,10 @@ base variant、把盐丢了。`etl/fix_dmd_salts.py` 从 `f_ingredient2` 解析�
 （盐型覆盖 2.0% → 25.0%，新建 127 个 variant），为 D2 碱基折算铺路；详见
 [reports/gb-salt-recovery.md](reports/gb-salt-recovery.md)。
 
-**ATC 覆盖率**：全部 substance **44.2%**（6,029 / 13,648；v0.13.0 新增 908 个成分后现查）；只算药物实体
-（INN / 生物制品 / 营养剂）的旧口径是 **67.4%**（5,690 / 8,447），新增 908 个成分尚未补进 `data/entity_type.csv`，
-补完后重算。生药 / 顺势 / 材料等非 INN 实体不再追 ATC 缺口——`data/entity_type.csv` 做实体分类，
+**ATC 覆盖率**（2026-11-17 现查）：全部 substance **44.2%**（6,029 / 13,648）；只算药物实体
+（INN / 生物制品 / 营养剂）**67.3%**（5,690 / 8,458）——v0.13.3 已把 v0.13.0 新增的 908 个捷克成分
+全部补进 `data/entity_type.csv`（519 条有类型、389 条「判不了就留空」计数），分母因此从 8,447 变成 8,458。
+生药 / 顺势 / 材料等非 INN 实体不再追 ATC 缺口——`data/entity_type.csv` 做实体分类，
 ChEMBL（CC BY-SA）只补空值。
 
 > 2026-10 复核：国家医保局「医保药品分类与代码数据库」有独立的商品名一列，

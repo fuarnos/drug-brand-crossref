@@ -12,12 +12,12 @@
                     unittest:lib-atc-category（快照同步那组，0.01 s）·
                     dist-integrity(抽样) · workflow
     全量（≤4 min）  fast 的全部（dist 全扫 0 字节）+ unittest:lib-atc-category 整模块（重，47 s）·
-                    trilingual（8 线程）· check_data · ui-surface ∥ first-screen（并行）
+                    trilingual（8 线程）· check_data · ui-surface ∥ first-screen ∥ ui-sort（并行）
 
     被挪出 fast 的项仍然出现在输出里（记 SKIP），只是不在 fast 真跑；判定逻辑完全不变。
 
 检查项：i18n 四语一致性（纯静态，fast 也跑）→ py_compile → unittest →
-trilingual → check_data → dist 完整性 → 同色守卫 / 首屏守卫 → CI 配置自检。
+trilingual → check_data → dist 完整性 → 同色守卫 / 首屏守卫 / 排序冒烟 → CI 配置自检。
 
 GitHub Actions（.github/workflows/ci.yml）与本机发布前跑的是同一个脚本，
 所以「CI 与本地门槛一致」；唯一差异是 CI 里没有 data/drugs.db，
@@ -87,7 +87,7 @@ TIMINGS: list[dict] = []
 SUMMARY_ORDER = [
     "i18n", "py_compile", "unittest:etl", "unittest:lib", "unittest:mobile",
     "unittest:lib-atc-category", "trilingual", "check_data", "dist-integrity",
-    "ui-surface", "first-screen", "workflow",
+    "ui-surface", "first-screen", "ui-sort", "workflow",
 ]
 
 results: list[tuple[str, str, str]] = []  # (状态, 名称, 明细)
@@ -501,6 +501,50 @@ def check_first_screen(verbose: bool) -> None:
         print("  first-screen:", detail)
 
 
+# ── 6c. 排序冒烟（真浏览器；SKIP 安全：无 Chrome / 无产物都不红）────────────
+# 客户端「同名下基名优先」规则（G3 方案 b，与 lib/search.py 同口径）+ 8 条真实查询的首行基名。
+# 全量模式才跑：规则层 + 词表一致性 + 8 条查询约 20 秒（首条查询要拉一次 core.json）。
+UI_SORT_JSON = ROOT / ".tmp" / "ui-sort" / "ci.json"
+
+
+@timed("ui-sort")
+def check_ui_sort(verbose: bool) -> None:
+    script = ROOT / "deploy" / "ui_sort_smoke.py"
+    if not script.exists():
+        record("SKIP", "ui-sort", "缺 deploy/ui_sort_smoke.py")
+        return
+    if not DIST_PATH.is_dir():
+        record("SKIP", "ui-sort", f"无 {_rel(DIST_PATH)}（发布前本地必跑）")
+        return
+    proc = _run([PY, str(script), "--dist", str(DIST_PATH), "--json", str(UI_SORT_JSON)],
+                timeout=900)
+    out = (proc.stdout or "") + (proc.stderr or "")
+    if "[SKIP]" in out:
+        reason = next((ln.strip() for ln in out.splitlines() if "[SKIP]" in ln), "SKIP")
+        record("SKIP", "ui-sort", reason.replace("[SKIP]", "").strip())
+        return
+    m = re.search(r"规则层 (\d+)/(\d+) PASS；数据层 PASS (\d+) / FAIL (\d+)", out)
+    if m is None:
+        record("FAIL", "ui-sort", f"未解析到汇总行（exit {proc.returncode}）：{_tail(out, 4)}")
+        return
+    rule_pass, rule_total, data_pass, data_fail = (int(m.group(i)) for i in (1, 2, 3, 4))
+    warn = re.search(r"观察 WARN (\d+) 条", out)
+    detail = (f"规则层 {rule_pass}/{rule_total}、数据层 {data_pass} 通过"
+              + (f"、WARN {warn.group(1)} 条" if warn else "")
+              + f"（明细 {_rel(UI_SORT_JSON)}）")
+    if proc.returncode == 0:
+        if "词表漂移（WARN" in out:
+            detail += "；两端去盐词表有差异（WARN，需 site/build.py 工位对齐）"
+        record("PASS", "ui-sort", detail)
+    else:
+        fails = [ln.strip() for ln in out.splitlines() if ln.strip().startswith("- FAIL")]
+        record("FAIL", "ui-sort", (f"数据层 FAIL {data_fail}、" if data_fail else "")
+               + f"规则层 {rule_total - rule_pass} 条不过（exit {proc.returncode}）："
+               + "; ".join(fails[:3]))
+    if verbose:
+        print("  ui-sort:", detail)
+
+
 # ── 7. CI 配置自检（防止 workflow 被误删/改名）──────────────────────────
 @timed("workflow")
 def check_workflow() -> None:
@@ -517,7 +561,7 @@ def check_workflow() -> None:
 
 # ── 8. 并行组：互不依赖的检查同时跑 ──────────────────────────────────────
 def _run_parallel(tasks: list[tuple[str, Callable[[], None]]]) -> None:
-    """i18n / ui-surface / first-screen 互不依赖，线程并行；各自 record 自己那一行。
+    """i18n / ui-surface / first-screen / ui-sort 互不依赖，线程并行；各自 record 自己那一行。
 
     每一组都独立进程 + 独立 Chrome 实例/端口，不共享状态。record 只做 list.append，
     并行安全；汇总时按 SUMMARY_ORDER 排版。
@@ -569,6 +613,7 @@ def main(argv: list[str] | None = None) -> int:
         check_dist(args.verbose, fast=True)
         record("SKIP", "ui-surface", "--fast 跳过（要拉无头 Chrome，全量才跑）")
         record("SKIP", "first-screen", "--fast 跳过（要拉无头 Chrome，全量才跑）")
+        record("SKIP", "ui-sort", "--fast 跳过（要拉无头 Chrome，全量才跑）")
         check_workflow()
     else:
         # 全量：先跑串行的（单测 → trilingual → check_data → dist），
@@ -580,7 +625,8 @@ def main(argv: list[str] | None = None) -> int:
         check_dist(args.verbose, fast=False)
         _run_parallel([("i18n", lambda: check_i18n(args.verbose)),
                        ("ui-surface", lambda: check_ui_surface(args.verbose)),
-                       ("first-screen", lambda: check_first_screen(args.verbose))])
+                       ("first-screen", lambda: check_first_screen(args.verbose)),
+                       ("ui-sort", lambda: check_ui_sort(args.verbose))])
         check_workflow()
 
     # 汇总：按固定顺序排版（并行项完成顺序不定），时间表按耗时降序

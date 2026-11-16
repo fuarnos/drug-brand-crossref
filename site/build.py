@@ -1501,8 +1501,12 @@ FR_PREP_KEYS: dict[str, str] = {
 # v0.6.2：四语言。zh-Hant 的 URL 目录用全小写 zh-hant/（hreflang 仍是 BCP47 zh-Hant）。
 # v0.11.4（task-55）：LANGS 由 data/languages.json 的 enabled 决定 —— fr 目前 enabled:false
 # → 不生成 /fr/、不产 fr 资产；把 fr 改成 true 才会上线（开启清单见 reports/2026-11-13-fr-site-prep.md）。
-_BASE_LANGS = [("en", "EN", ""), ("es", "ES", "es/"), ("zh", "中文", "zh/"),
-               ("zh-Hant", "繁", "zh-hant/")]
+# v0.13.3（R2）：语言菜单一律显示**本语言自称**（不随界面语言翻译、不新增 i18n 键）；
+# hreflang / URL 目录不随标签变。i18n.js 的 LBL（客户端改写下拉摘要）也从这份表生成。
+LANG_NATIVE_LABELS = {"en": "English", "es": "Español", "zh": "中文",
+                      "zh-Hant": "繁體中文", "fr": "Français"}
+_BASE_LANGS = [("en", "English", ""), ("es", "Español", "es/"), ("zh", "中文", "zh/"),
+               ("zh-Hant", "繁體中文", "zh-hant/")]
 
 
 def _enabled_ui_langs() -> list[tuple[str, str, str]]:
@@ -1513,7 +1517,7 @@ def _enabled_ui_langs() -> list[tuple[str, str, str]]:
         enabled = {x.get("code") for x in reg.get("languages", []) if x.get("enabled")}
     except (OSError, ValueError):
         enabled = set()
-    for code, label, path in (("fr", "FR", "fr/"),):
+    for code, label, path in (("fr", "Français", "fr/"),):
         # 注意：I18N["fr"] 由 _merge_static_i18n() 在 main() 里生成，模块导入时还不存在；
         # 这里只按注册表 enabled 判断（fr 的语言字典在构建前一定已就绪）。
         if code in enabled:
@@ -1541,6 +1545,50 @@ LANG_META_JS = (
     + "var I18N_LANGS=" + json.dumps([c for c, _l, _p in LANGS], separators=(",", ":")) + ";\n"
     + "var DEFAULT_LANG='en';"
 )
+
+# ── v0.13.3（R1）：国家/地区一律渲染「本语言名称 · 简写」（美国 · US） ───────────
+# 名称来源优先级：UI_I18N 的 home.<code>（五语已齐）→ data/markets.json 的 name.<lang>
+# → 英文 → 回落简写本身。只取现成译名，**不新造译名**；不手工列表。
+_MARKET_NAMES: dict[str, dict[str, str]] = {}
+
+
+def _market_names() -> dict[str, dict[str, str]]:
+    """data/markets.json → {code: {lang: name}}（只读一次，失败就空表）。"""
+    if not _MARKET_NAMES:
+        try:
+            reg = json.loads((ROOT / "data" / "markets.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            reg = {}
+        for m in reg.get("markets", []):
+            code = (m.get("code") or "").upper()
+            if code:
+                _MARKET_NAMES[code] = dict(m.get("name") or {})
+    return _MARKET_NAMES
+
+
+def _country_name(code: str, lang: str = "en") -> str:
+    """国家/地区本语言名称（home.<code> → markets.json → en → 简写）。"""
+    key = f"home.{code.lower()}"
+    for lc in (lang, "en"):
+        v = (I18N.get(lc) or {}).get(key)
+        if v:
+            return v
+        v = _market_names().get(code, {}).get(lc)
+        if v:
+            return v
+    return code
+
+
+# 名称自带简写时去掉重复括号：「欧盟（EU）」→「欧盟」、「European Union (EU)」→「European Union」。
+# 只折叠「纯 2–4 个拉丁字母」的尾部括号，不动正文里的括注。
+_NAME_ABBR_TAIL = re.compile(r"\s*[（(]\s*([A-Za-z]{2,4})\s*[)）]\s*$")
+
+
+def _country_label(code: str, lang: str = "en", sep: str = " · ") -> str:
+    """「美国 · US」：名称 + 简写（去掉与简写重复的尾部括号）。"""
+    name = _NAME_ABBR_TAIL.sub("", _country_name(code, lang)).strip() or code
+    return f"{name}{sep}{code}"
+
 
 # v0.10.2：语言判定（?lang= → 路径 → localStorage → navigator.language）只有这一份源码。
 # boot.js 要在插入字典包**之前**就知道该拉哪份，i18n.js 里也要用它算 window.LANG，
@@ -4497,6 +4545,23 @@ padding:14px 16px;margin:10px 0}
   table.coverage-table td:first-child{font-size:18px;font-weight:700}
 }
 .mktxt{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* v0.13.3（R1）：国家从「US」变成「美国 · US」后更长 ——
+   ① 手机上（<768px 卡片式）允许换行，否则单行 nowrap 会把 390 撑出横向滚动；
+   ② 成分页市场块头在手机上只留本语言名称（`.mkc` = 「 · US」隐藏），
+      免得块头多一行把 390 首屏条目压下去（结果行 / 复方页仍显示「名称 · 简写」）。 */
+@media (max-width:767px){
+  .mktxt{white-space:normal}
+  .mkhead .mkc{display:none}
+}
+/* v0.13.3（R1）实测：5 列等宽时「United Kingdom · GB」在 1024（可用 104px）被裁。
+   把市场列按视口加宽到 32%（768 视口：表 713 → 列 228 / 可用 204；1024：表 643 → 列 205 / 可用 181；
+   1440：表 920 → 列 294 / 可用 270），实测 768/1024/1440 行高仍 40px、商品名列不换行。
+   注意 `table-layout:fixed` 的列宽只认**首行**（thead th），所以这里写 th 而不是 td。 */
+@media (min-width:768px){
+  table.res.rows thead th:nth-child(4){width:32%}
+  /* 兜底：万一某个语言的名字比预算还长，用省略号收尾（而不是硬切） */
+  table.res.rows td.c-market{text-overflow:ellipsis}
+}
 /* L7（v0.12.1）：次级页统一页头四件套 —— 返回路径 / h1 / 一句话摘要 / 继续搜索 */
 .crumbs{font-size:13px;color:var(--muted);margin:0 0 6px;line-height:1.5}
 .crumbs a{color:var(--accent);text-decoration:none}
@@ -6223,7 +6288,7 @@ function brandRowHTML(e, T){
   const nRel = String(e.rl || '').split(',').filter(Boolean).length;
   const badge = e.l==='severe' ? `<span class="badge sev">${T('badge.severe')}</span>` :
                 (e.l==='warning' && nRel > 1) ? `<span class="badge warn">${T('badge.warning')}</span>` : '';
-  const tags = mktText(e.c, 4);
+  const tags = mktText(e.c, 2, 27);   // v0.13.3（R1）：窄列按预算挑标签
   const combo = (e.x || '').indexOf(' + ') >= 0
     ? `<span class="tag combo">${T('badge.combo')}</span>` : '';
   const exp = e.eo ? `<span class="badge export">${T('badge.export_only')}</span>` : '';
@@ -6310,7 +6375,7 @@ function resultsHTML(T){
     if(count >= RES_LIMIT){ cut = true; break; }
     const expanded = RES_EXPANDED.has(gi);
     const vis = expanded ? g.rows : g.rows.slice(0, 2);
-    const tags = mktText([...g.tags], 4);
+    const tags = mktText([...g.tags], 3);
     html += `<tr class="grp"><td class="c-ing">${ingredientHTML(g.rows[0], 'grp-name')}`
       + `<span class="grp-count">${g.rows.length} ${esc(T('res.records_noun'))}</span></td>`
       + `<td colspan="3" class="grp-tags">${tags}</td></tr>`;
@@ -6366,16 +6431,53 @@ function specPairsOf(e, maxGroups){
   });
   return { pairs: parsed.slice(0, n), restGroups: Math.max(0, parsed.length - n), hasFs: parsed.length > 0 };
 }
-function mktText(list, max){
+function mktLabel(code){
+  // v0.13.3（R1）：国家/地区 = 「本语言名称 · 简写」（美国 · US）。名称取 i18n 的
+  // home.<code>（T() 自带 zh-Hant→zh→en 回落）；缺键时 T 会回原键，这里再退回简写。
+  const T = window.T || function(k){ return k; };
+  const key = 'home.' + String(code).toLowerCase();
+  let n = T(key);
+  if(!n || n === key) return String(code);
+  n = String(n).replace(/\s*[（(]\s*[A-Za-z]{2,4}\s*[)）]\s*$/, '').trim() || String(code);
+  return n + ' · ' + code;
+}
+function mktUnits(s){
+  // 宽度粗估：CJK / 全角按 2 个单位，其余 1（13px 下 1 个单位 ≈ 6.3px）。
+  return String(s).replace(/[\u1100-\u115F\u2E80-\uA4CF\uAC00-\uD7A3\uF900-\uFAFF\uFE30-\uFE4F\uFF00-\uFF60\uFFE0-\uFFE6]/g, 'xx').length;
+}
+function mktFit(codes, max, budget){
+  // v0.13.3（R1）：结果页「市场」列窄 —— 按字符预算决定放几个「名称 · 简写」，
+  // 放不下就退回 1 个 + 「+N」（完整列表在 title）。首个标签无论如何都放。
+  const picked = [];
+  let used = 0;
+  for(let i = 0; i < codes.length && picked.length < max; i++){
+    const lab = mktLabel(codes[i]);
+    const sep = picked.length ? 2 : 0;
+    const tail = (i < codes.length - 1) ? 4 : 0;   // 还给「 +N」留位置
+    if(picked.length && used + sep + mktUnits(lab) + tail > budget) break;
+    picked.push(lab);
+    used += sep + mktUnits(lab);
+  }
+  return { picked: picked, rest: codes.length - picked.length };
+}
+function mktText(list, max, budget){
   // R2（v0.12.1，L8）：国家/地区**不再做胶囊徽章** —— 结果行与表格里是纯文字
   // （`--muted`，13px，无边框无底色）；只有「目标市场」这类筛选控件保留 chip。
   const cs = [];
   for(const c of (list || [])) if(c && cs.indexOf(c) < 0) cs.push(c);
   cs.sort();
   const n = max || 6;
-  const head = cs.slice(0, n).join(' ');
-  const rest = cs.length > n ? ` +${cs.length - n}` : '';
-  return `<span class="mktxt">${esc(head)}${rest}</span>`;
+  let shown, restN;
+  if(budget && cs.length > 1){
+    const fit = mktFit(cs, n, budget);
+    shown = fit.picked; restN = fit.rest;
+  } else {
+    shown = cs.slice(0, n).map(mktLabel); restN = Math.max(0, cs.length - n);
+  }
+  const head = shown.join(', ');
+  const rest = restN > 0 ? ` +${restN}` : '';
+  const full = cs.map(mktLabel).join(', ');
+  return `<span class="mktxt" title="${esc(full)}">${esc(head)}${rest}</span>`;
 }
 function marketTags(list, max){
   return mktText(list, max);
@@ -6426,11 +6528,18 @@ function flatRowHTML(e, T){
   } else {
     det = '—';
   }
+  // v0.13.3（R1）：市场列按字符预算挑「名称 · 简写」——
+  // 实测（1440 表宽 920 / 32% = 294px，可用 270px；1024 表宽 643 / 32% = 205px，可用 181px）
+  // 预算 27 个单位 ≈ 170px，保证最长标签「United Kingdom · GB」(19) 不被裁；
+  // 只有正好 2 个市场且两个都短（如 Spain · ES, Mexico · MX = 23）时才显示 2 个。
+  // 手机（<768px）卡片式只放 1 个 + 「+N」（单元格允许换行，见 CSS）。
+  const mkBudget = window.innerWidth >= 768 ? 27 : 0;
+  const mkMax = window.innerWidth >= 768 ? 2 : 1;
   return `<tr class="br${isPicked ? ' picked' : ''}" data-k="${esc(e.k)}">
     <td class="c-brand" data-label="${esc(T('res.col_product'))}">${brandHTML(e, false)}${badge}${combo}${exp}${isPicked ? ' <span class="tag picked-tag">' + esc(T('res.picked')) + '</span>' : ''}</td>
     <td class="c-ing" data-label="${esc(T('col.ing'))}">${esc(ingredientLabel(e)) || '—'}</td>
     <td class="c-dose" data-label="${esc(T('res.col_spec'))}">${doseCell}</td>
-    <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, 4) || '—'}</td>
+    <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, mkMax, mkBudget) || '—'}</td>
     <td class="c-det">${isPicked ? '' : pickBtn}${det}</td></tr>`;
 }
 function flatTableHTML(T){
@@ -6559,7 +6668,7 @@ function identityCardHTML(q, display, nicks, confs, T){
     if(form) fields.push(`<span><b>${esc(form)}</b></span>`);
   }
   if(markets.length){
-    fields.push(`<span>${esc(T('res.identity.markets'))} ${marketTags(markets, 6)}</span>`);
+    fields.push(`<span>${esc(T('res.identity.markets'))} ${marketTags(markets, 3)}</span>`);
   }
   if(recs) fields.push(`<span>${esc(T('res.identity.records').replace('{n}', String(recs)))}</span>`);
   // v0.11.2（条目 10）：另一语言的成分名不再占卡片常显区（390 上会多 3 行），
@@ -6677,7 +6786,7 @@ function acPaint(){
         + `<span class="ac-meta">${esc(T('atc.label'))} · ${it.count} ${esc(T('res.matched'))}</span></div>`;
     }
     const e = it.e;
-    const tags = (e.c || []).length ? mktText(e.c, 3) : '';
+    const tags = (e.c || []).length ? mktText(e.c, 2, 27) : '';   // v0.13.3（R1）：窄列按预算挑标签
     return `<div class="ac-item${i===AC_I?' on':''}" role="option" aria-selected="${i===AC_I}" data-i="${i}">`
       + `<span class="ac-name">${esc(e.d || e.k)}</span>`
       + `<span class="ac-meta">${esc(ingredientLabel(e))}${tags ? ' ' + tags : ''}</span></div>`;
@@ -7483,7 +7592,7 @@ function t11AfterRender(hits, c, T){
   bar.innerHTML = '<div class="pickrow">'
     + `<b>${esc(T('t11.picked'))}</b> `
     + `<span class="pickname">${esc(pe.d || pe.k)}</span> `
-    + `<span class="mktxt">${esc(mk)}</span> `
+    + `<span class="mktxt">${esc(mktLabel(mk))}</span> `
     + `<span class="pickmeta">${esc(ingredientLabel(pe))}${specs ? ' · ' + esc(specs) : ''}</span> `
     + `<button type="button" class="linkbtn" data-pickset="0">${esc(T('t11.reselect'))}</button> `
     + `<a class="linkbtn" href="${drugHref}">${esc(T('t11.compare_link'))}</a></div>`
@@ -7515,9 +7624,13 @@ document.addEventListener('click', function(ev){
 // ── G3 方案 b（v0.13.2）：同名下基名条目优先于盐型条目 ──────────────────
 // 与 lib/search.py `_prefer_base_ingredient` 同一规则：同 base 成分组内做稳定分区，
 // 基名条目在前、盐型条目在后；组外顺序与其它排序键不变，不合并条目、不改输出字段。
-var G3_SALT_WORDS = ['hydrochloride','hydrobromide','sulfate','sulphate','citrate','tartrate','maleate','fumarate','oxalate','succinate','malate','glutamate','aspartate','lactate','acetate','carbonate','bicarbonate','chloride','iodide','bromide','nitrate','oxide','hydroxide','hydrate','dihydrate','trihydrate','monohydrate','sesquihydrate','hemihydrate','tetrahydrate','anhydrous','hydrogen','mesilate','mesylate','besylate','besilate','benzoate','trometamol','tromethamine','disodium','dipotassium','dicalcium','monohydrochloride','dihydrochloride','lysine','arginine','gluconate','digluconate','palmitate','stearate','propionate','valerate','gluceptate','glycinate','pamoate','embonate','hyclate','edisylate','estolate','taurate','xinafoate','furoate','aceponate','dipropionate','diacetate','dibenzoate','pivalate','tebutate','sodium','potassium','calcium','magnesium','lithium','iron','zinc','copper','aluminium','aluminum','barium','selenium'];
+var G3_SALT_WORDS = ['hydrochloride','hydrobromide','sodium','potassium','calcium','magnesium','phosphate','sulfate','sulphate','citrate','tartrate','maleate','fumarate','oxalate','succinate','malate','glutamate','aspartate','lactate','acetate','carbonate','bicarbonate','chloride','iodide','bromide','nitrate','oxide','hydroxide','hydrate','dihydrate','trihydrate','monohydrate','sesquihydrate','hemihydrate','tetrahydrate','anhydrous','hydrogen','mesilate','mesylate','besylate','besilate','benzoate','trometamol','tromethamine','disodium','dipotassium','dicalcium','monohydrochloride','dihydrochloride','lysine','arginine','gluconate','digluconate','heptanoate','enantate','decanoate','palmitate','stearate','oleate','laurate','propionate','butyrate','valerate','undecylenate','cypionate','phenylpropionate','nitrite','sulfite','bisulfate','edetate','gluceptate','glycinate','asparto','pamoate','embonate','hyclate','edisylate','estolate','taurate','xinafoate','furoate','aceponate','dipropionate','diacetate','dibenzoate','pivalate','tebutate'];
 var G3_SALT_SET = new Set(G3_SALT_WORDS);
 var G3_ELEMENT_SET = new Set(['sodium','potassium','calcium','magnesium','lithium','iron','zinc','copper','aluminium','aluminum','barium','selenium']);
+/* v0.13.3（R7）：元素名（钠/钾/钙…）也算盐的一部分，去盐时一起剥；
+   但 G3_SALT_WORDS 本身与 lib/search.py 逐字一致（ui_sort_smoke --strict-words 用它比对），
+   元素表单独放，不混进词表。 */
+G3_ELEMENT_SET.forEach(function(w){ G3_SALT_SET.add(w); });
 function g3Toks(s){
   return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').filter(Boolean);
 }
@@ -7845,8 +7958,8 @@ function render(){
       const lis = list.map(e => {
         const ds = (e.s && e.s.length)
           ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)).slice(0, 2).join(' / ') : '';
-        const cs = (e.c || []).slice(0, 3)
-          .map(c => `<span class="mktxt">${esc(c)}</span>`).join(' ');
+        const cs = (e.c || []).slice(0, 2)
+          .map(c => `<span class="mktxt">${esc(mktLabel(c))}</span>`).join(' ');
         // 2026-11-12 task-18（用户截图）：有商品名的条目也显示厂家，和「无商品名」条目
         // 的「厂家：X 命中名：Y」对齐。>28 字截 27 + …，title 放全名；样式沿用 meta。
         let mah = '';
@@ -9375,7 +9488,7 @@ def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
 def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
     """右上角：类别入口 + 语言下拉；移动端收进「⋯」菜单（v0.10.0）。"""
     labels = {c: l for c, l, _ in LANGS}
-    label = labels.get(lang, "EN")
+    label = labels.get(lang, "English")
     # E1（v0.11.10）：右上角重复的「Categories」入口已删除 —— 桌面导航里已有一份
     # （_shell_nav_html）；移动端仍可从「⋯」菜单进「全部类别」。
     all_link = (f'<div class="sn-foot"><a href="{prefix}atc.html" '
@@ -9843,12 +9956,17 @@ def combo_slug(sids) -> str:
 
 
 # ── v0.8.3 伪复方 build 层归并：base+salt 视为同一 base 成分（不写 DB）────────
+# v0.13.3（R7）：与 lib/search.py::SALT_WORDS 对齐（87 词）。原来少 `hydrogen` / `oxalate`，
+# 于是 clopidogrel hydrogen sulfate / escitalopram oxalate 没折成基名 → 同一个成分被当成
+# 「不同成分」，Plavix / Cipralex 首条候选行误挂「同名不同药（severe）」徽章。
+# 只补词表、不改口径：仍要求「拆盐后基名相同」才并（`_salt_base_of` + `_sub_base_map`）。
 SALT_WORDS = {
     "hydrochloride", "hydrobromide", "sodium", "potassium", "calcium", "magnesium",
     "phosphate", "sulfate", "sulphate", "citrate", "tartrate", "maleate", "fumarate",
-    "succinate", "malate", "glutamate", "aspartate", "lactate", "acetate", "carbonate",
+    "oxalate", "succinate", "malate", "glutamate", "aspartate", "lactate", "acetate", "carbonate",
     "bicarbonate", "chloride", "iodide", "bromide", "nitrate", "oxide", "hydroxide",
     "hydrate", "dihydrate", "trihydrate", "monohydrate", "sesquihydrate", "anhydrous",
+    "hydrogen",
     "mesilate", "mesylate", "besylate", "besilate", "benzoate", "trometamol",
     "tromethamine", "disodium", "dipotassium", "dicalcium", "magnesium",
     "monohydrochloride", "dihydrochloride", "lysine", "arginine", "gluconate",
@@ -11109,9 +11227,14 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
             kv[0][1], kv[0][2], kv[0][3],
         ))
         shown = spec_rows[:MATRIX_ROW_CAP]
+        # v0.13.3（R1）：矩阵列太窄（min-width 860 + 横向滚动）→ 列头仍只写简写，
+        # 全名放 title / aria-label；表格数据属性 data-country 保持简写（CSS/JS 依赖它）。
+        # 成分页是单份英文产物，这里一律写英文名，界面语言由客户端按 data-mkc* 改写。
         head = (f'<th data-i18n="matrix.spec">{esc(T["matrix.spec"])}</th>'
                 + "".join(f'<th data-country="{esc(c)}"{_defcol_attr(c)}'
-                          f'{EU_TH_ATTR if c == "EU" else ""}>'
+                          f'{EU_TH_ATTR if c == "EU" else ""}'
+                          f' title="{esc(_country_label(c))}"'
+                          f' aria-label="{esc(_country_label(c))}">'
                           f'{esc(c)}</th>'
                           for c in countries))
         tbody = []
@@ -11271,7 +11394,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
             spec_rows, countries, rec_by_country, len(spec_rows),
             _brand_bit, status_cell, T, und_meta,
             spec_comps=spec_comps, sub_label=sub_label, spec_kind=spec_kind,
-            spec_conflict=spec_conflict, spec_nobasis=spec_nobasis, block_meta=block_meta)
+            spec_conflict=spec_conflict, spec_nobasis=spec_nobasis, block_meta=block_meta,
+            lang="en")
         # T21/H6（v0.11.9）：本页有「没注明每 mL／每单位基准」的规格时，页面级说一句
         # ——这些规格按原文显示、不参与跨市场比较（不把「10 mg」当作可比等价规格）。
         nobasis_note = ""
@@ -11966,7 +12090,8 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                     spec_kind: dict | None = None,
                     spec_conflict: dict | None = None,
                     spec_nobasis: dict | None = None,
-                    block_meta: dict | None = None) -> tuple[str, float, str]:
+                    block_meta: dict | None = None,
+                    lang: str = "en") -> tuple[str, float, str]:
     """成分页主视图：按国家分组的产品清单（v0.10.3 task-16）。
 
     设计依据 `reports/matrix-form-decision-20261110.md`：≥2 国同规格行只占 9.27%，
@@ -12036,7 +12161,9 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 f'<button type="button" class="lf-chip on" data-mk-filter="" '
                 f'data-i18n="lf.all">{esc(T.get("lf.all", "All"))}</button>']
     for _c in order:
-        lf_parts.append(f'<a class="lf-chip" href="#mk-{esc(_c)}" data-mk-filter="{esc(_c)}">'
+        # v0.13.3（R1）：筛选 chip 仍只写简写（14 个字块会把筛选条撑爆），全名放 title。
+        lf_parts.append(f'<a class="lf-chip" href="#mk-{esc(_c)}" data-mk-filter="{esc(_c)}"'
+                        f' title="{esc(_country_label(_c, lang))}">'
                         f'{esc(_c)} <span class="n">{rec_by_country.get(_c, 0):,}</span></a>')
     lf_parts.append("</div>")
     if has_combo:
@@ -12109,10 +12236,14 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 shown_mk = others[:3]
                 # T13 / D2（用户评审 §2）：「+6」这种纯计数改成能点开的「另 6 个市场」。
                 # 无 JS 也能用（原生 <details>），链接仍锚到对应国家块。
+                # v0.13.3（R1）：链接文字改成「名称 · 简写」；`.mkx` 仍是单行省略号，
+                # 窄屏只露出前一个市场，完整列表在 title 与点开后的「另 N 个市场」里。
                 tail_mk = ""
                 if len(others) > 3:
-                    _rest_mk = "".join(
-                        f'<a href="#mk-{esc(o)}">{esc(o)}</a>' for o in others[3:])
+                    _rest_mk = ", ".join(
+                        f'<a href="#mk-{esc(o)}" data-mkc="{esc(o)}">'
+                        f'{esc(_country_label(o, lang))}</a>'
+                        for o in others[3:])
                     # v0.11.7 复审：可见文案必须是四语的「另 N 个市场」——用
                     # `data-i18n-tpl` 把数字从 data-total 注入模板（服务端先写英文兜底）；
                     # 另外在 summary 里放一个 **sr-only 的 `+N` 叶子**：atc4-ui 的 D6 断言按
@@ -12127,7 +12258,9 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                                f'data-total="{_n_more}">{esc(_more_txt)}</span>'
                                f'</summary><span class="mkx-links">{_rest_mk}</span></details>')
                 also = (' <span class="mkx"><span data-i18n="drug.also_in">also in</span> '
-                        + "·".join(f'<a href="#mk-{esc(o)}">{esc(o)}</a>' for o in shown_mk)
+                        + ", ".join(f'<a href="#mk-{esc(o)}" data-mkc="{esc(o)}">'
+                                    f'{esc(_country_label(o, lang))}</a>'
+                                    for o in shown_mk)
                         + tail_mk + '</span>')
             names = sorted(bucket.keys(), key=lambda k: (k.startswith("__"), k.lower()))
             bits = [name_bit(k, *bucket[k], form, c) for k in names[:1]]
@@ -12348,7 +12481,12 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
             f'<details class="mkblock" id="mk-{esc(c)}" data-mk="{esc(c)}"'
             + (' open' if _is_first else '') + '>'
             # 标题仍是 h2（`.mkblock h2` 是首屏守卫「不许遮」的选择器之一，不能让它失配）
-            f'<summary class="mkhead"><h2 class="mkhead-t">{esc(c)} '
+            # v0.13.3（R1）：名称走 `data-mkc-name`，由 i18n.js 的 apply() 按界面语言改写
+            # （成分页只有一份英文产物，切到中文后块头要变「中国 · CN」）；手机上 .mkc 隐藏，
+            # 免得块头多一行把 390 首屏条目压下去。
+            f'<summary class="mkhead"><h2 class="mkhead-t">'
+            f'<span data-mkc-name="{esc(c)}">{esc(_country_name(c, lang))}</span>'
+            f'<span class="mkc"> · {esc(c)}</span> '
             f'<span class="sub">{rec_by_country.get(c, 0):,} '
             f'<span data-i18n="drug.records">records</span> · '
             f'<span class="mkspec" data-total="{n_head}" data-shown="{shown_n}" '
@@ -12646,8 +12784,12 @@ def build_combo_pages(entries, db: sqlite3.Connection,
                 brand = (f'<span class="brand-plain" title="{esc(T["combo.no_page"])}">'
                          f'{esc(e["d"])}</span>')
             # R2（v0.12.1，L8）：国家不再做胶囊徽章 → 纯文字（13px --muted）
-            tags = (f'<span class="mktxt">{esc(" ".join(sorted(e.get("c") or [])))}</span>'
-                    if e.get("c") else "")
+            # v0.13.3（R1）：「本语言名称 · 简写」。复方页是单份英文产物 + 客户端 i18n，
+            # 服务端先写英文标签，`data-mkc` 留给 i18n.js 的 apply() 按界面语言改写。
+            _cc = sorted(e.get("c") or [])
+            tags = (f'<span class="mktxt" data-mkc="{esc(" ".join(_cc))}">'
+                    f'{esc(", ".join(_country_label(c) for c in _cc))}</span>'
+                    if _cc else "")
             # T18/H3：每行 = 一条产品记录（复方页不再用「多值斜杠串」当唯一剂量信息）。
             comp_lines = combo_comp_lines(e["k"], page_sids)
             if comp_lines:
@@ -16060,7 +16202,8 @@ def main() -> None:
     }
     document.querySelectorAll('[data-ph]').forEach(function(el){ el.placeholder = window.T(el.dataset.ph); });
     // v0.10.0: language label + aria-current follow the active language (dropdown + mobile menu)
-    var LBL = {en:'EN', es:'ES', zh:'\u4e2d\u6587', 'zh-Hant':'\u7e41'};
+    // v0.13.3（R2）：下拉摘要也用本语言自称（与页头/侧栏菜单同一份表，构建期注入）。
+    var LBL = __LANG_LABELS_JSON__;
     document.querySelectorAll('.langs a, .lang-menu a').forEach(function(a){
       var on = a.dataset.lang === window.LANG;
       a.classList.toggle('on', on);
@@ -16068,6 +16211,29 @@ def main() -> None:
     });
     document.querySelectorAll('.langdd .lname').forEach(function(n){
       if(LBL[window.LANG]) n.textContent = LBL[window.LANG];
+    });
+    // v0.13.3（R1）：服务端写了英文国家标签的静态块按当前界面语言改写 ——
+    //   `data-mkc="US GB"`      → 「本语言名称 · 简写」（复方页、成分页「也在」链接）
+    //   `data-mkc-name="CN"`    → 只要名称（成分页市场块头，简写由旁边 .mkc 静态给）
+    // 规则与 app.js 的 mktLabel 同一套（尾部重复简写括号去掉、缺键回落简写）。
+    function mkName(code){
+      var key = 'home.' + String(code).toLowerCase();
+      var n = window.T(key);
+      if(!n || n === key) return code;
+      return String(n).replace(/\s*[（(]\s*[A-Za-z]{2,4}\s*[)）]\s*$/, '').trim() || code;
+    }
+    function mkLabel(code){ return mkName(code) + ' · ' + code; }
+    document.querySelectorAll('[data-mkc-name]').forEach(function(el){
+      var code = String(el.getAttribute('data-mkc-name') || '');
+      if(code) el.textContent = mkName(code);
+    });
+    document.querySelectorAll('[data-mkc]').forEach(function(el){
+      var codes = String(el.getAttribute('data-mkc') || '').split(/\s+/).filter(Boolean);
+      if(!codes.length) return;
+      var max = parseInt(el.getAttribute('data-mkmax') || '0', 10) || codes.length;
+      el.textContent = codes.slice(0, max).map(mkLabel).join(', ')
+        + (codes.length > max ? ' +' + (codes.length - max) : '');
+      el.setAttribute('title', codes.map(mkLabel).join(', '));
     });
     // v0.8.2 task-120：语言确定后再渲染 ATC/组合页成分名（避免 defer 早于 ?lang 解析）
     if(window.renderBilingualNames) window.renderBilingualNames();
@@ -16615,7 +16781,9 @@ def main() -> None:
   else { apply(); }
   window.addEventListener('load', apply);
 })();
-""").replace("__BUILD_V__", BUILD_V)
+""").replace("__BUILD_V__", BUILD_V).replace(
+    "__LANG_LABELS_JSON__",
+    json.dumps(LANG_NATIVE_LABELS, ensure_ascii=False, separators=(",", ":")))
     def _write_i18n_assets(announce: bool = False) -> None:
         """写 i18n 资产：四语全量 `assets/i18n.js` + 每语言一份 `assets/i18n.<lang>.js`。
 

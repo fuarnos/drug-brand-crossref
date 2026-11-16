@@ -1,0 +1,909 @@
+substance_id,inn_en,entity_type,rule,confidence,evidence,cz_report_category,who_review,n_products,n_components,n_variants,markets,with_atc,source_id
+2-4-dichlorobenzyl-alcohol,2 4 Dichlorobenzyl Alcohol,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,109,109,1,CZ,0,sukl_dlp
+abrotanum-dilutio-homeopathica,Abrotanum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+abrus-precatorius-6-c,Abrus Precatorius 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+acetic-acid-glacial,Acetic Acid Glacial,material,cz_excipient,low,名称含辅料/溶剂词 'GLACIAL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,6,6,1,CZ,0,sukl_dlp
+acetyltyrosine,Acetyltyrosine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,10,10,1,CZ,0,sukl_dlp
+achillea-millefolium-3-d,Achillea Millefolium 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+achillea-millefolium-4-d,Achillea Millefolium 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+achillea-millefolium-dilutio-homeopathica,Achillea Millefolium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+acidum-benzoicum-dilutio-homeopathica,Acidum Benzoicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+acidum-hydrochloricum-dilutio-homeopathica,Acidum Hydrochloricum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+acidum-hydrofluoricum-dilutio-homeopathica,Acidum Hydrofluoricum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+acidum-nitricum-dilutio-homeopathica,Acidum Nitricum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+acidum-oxalicum-dilutio-homeopathica,Acidum Oxalicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+acidum-phosphoricum-229-c,Acidum Phosphoricum 229 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '229 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+acidum-phosphoricum-98-c,Acidum Phosphoricum 98 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '98 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+acidum-phosphoricum-999-c,Acidum Phosphoricum 999 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '999 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+acidum-phosphoricum-dilutio-homeopathica,Acidum Phosphoricum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+acidum-sulfuricum-dilutio-homeopathica,Acidum Sulfuricum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+aconite-tincture,Aconite Tincture,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,0,0,1,,0,sukl_dlp
+aconitum-napellus-3-c,Aconitum Napellus 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+aconitum-napellus-3-d,Aconitum Napellus 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+aconitum-napellus-4-d,Aconitum Napellus 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+aconitum-napellus-5-c,Aconitum Napellus 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+aconitum-napellus-6-c,Aconitum Napellus 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+aconitum-napellus-6-d,Aconitum Napellus 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+aconitum-napellus-99-c,Aconitum Napellus 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+aconitum-napellus-dilutio-homeopathica,Aconitum Napellus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+actaea-spicata-dilutio-homeopathica,Actaea Spicata Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+ademetionine-busilate,Ademetionine Busilate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+aesculus-hippocastanum-dilutio-homeopathica,Aesculus Hippocastanum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+aethusa-cynapium-dilutio-homeopathica,Aethusa Cynapium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+agaricus-muscarius-dilutio-homeopathica,Agaricus Muscarius Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+agnus-castus-1-d,Agnus Castus 1 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '1 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+agnus-castus-dilutio-homeopathica,Agnus Castus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+agraphis-nutans-dilutio-homeopathica,Agraphis Nutans Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+ailanthus-altissima-dilutio-homeopathica,Ailanthus Altissima Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+alchemilla-herb,Alchemilla Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+alclometasone-dipropionate,Alclometasone Dipropionate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+alfa-tocopheryl,Alfa Tocopheryl,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,7,7,1,CZ,0,sukl_dlp
+algeldrate,Algeldrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+all-rac-phytomenadione,All Rac Phytomenadione,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+allium-cepa-3-c,Allium Cepa 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+allium-cepa-5-c,Allium Cepa 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+allium-cepa-dilutio-homeopathica,Allium Cepa Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+allium-sativum-dilutio-homeopathica,Allium Sativum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+aloe-socotrina-dilutio-homeopathica,Aloe Socotrina Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+alpha-escin,Alpha Escin,,cz_inn_shape_unconfirmed,low,INN 词尾 'CIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+alpha-pinene,Alpha Pinene,,cz_inn_shape_unconfirmed,low,INN 词尾 'ENE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+aluminii-oxidum-dilutio-homeopathica,Aluminii Oxidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+aluminium-hydroxide,Aluminium Hydroxide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,7,7,1,"CZ,LV",0,sukl_dlp
+ambenonium-chloride,Ambenonium Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+ambra-grisea-dilutio-homeopathica,Ambra Grisea Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+ambrosia-artemisiifolia-5-c,Ambrosia Artemisiifolia 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+amikacin-disulfate,Amikacin Disulfate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,14,14,1,CZ,0,sukl_dlp
+aminofluoride-mix,Aminofluoride Mix,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+ammonii-carbonas-dilutio-homeopathica,Ammonii Carbonas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+ammonii-chloridum-dilutio-homeopathica,Ammonii Chloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+ampicillin-sodium-for-injection,Ampicillin Sodium For Injection,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+amyl-cinnamal,Amyl Cinnamal,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+amylis-nitris-dilutio-homeopathica,Amylis Nitris Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+anacardium-orientale-dilutio-homeopathica,Anacardium Orientale Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+anagallis-arvensis-dilutio-homeopathica,Anagallis Arvensis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+anamirta-cocculus-4-c,Anamirta Cocculus 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+anamirta-cocculus-dilutio-homeopathica,Anamirta Cocculus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+anas-barbariae-hepatis-et-cordis-extr-200-k,Anas Barbariae Hepatis Et Cordis Extr 200 K,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,9,9,1,CZ,0,sukl_dlp
+antiinhibitory-coagulation-factor-complex,Antiinhibitory Coagulation Factor Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+apis-mellifica-4-d,Apis Mellifica 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+apis-mellifica-99-c,Apis Mellifica 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+apis-mellifica-dilutio-homeopathica,Apis Mellifica Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+aralia-racemosa-dilutio-homeopathica,Aralia Racemosa Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+aranea-diadema-6-d,Aranea Diadema 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+aranea-diadema-dilutio-homeopathica,Aranea Diadema Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+argenti-nitras-211-c,Argenti Nitras 211 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '211 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+argenti-nitras-313-c,Argenti Nitras 313 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '313 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+argenti-nitras-dilutio-homeopathica,Argenti Nitras Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+argentum-nitricum-56-c,Argentum Nitricum 56 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '56 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+arginine-glutamate,Arginine Glutamate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+arnica-montana-2-d,Arnica Montana 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+arnica-montana-3-c,Arnica Montana 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+arnica-montana-4-c,Arnica Montana 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+arnica-montana-4-d,Arnica Montana 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+arnica-montana-dilutio-homeopathica,Arnica Montana Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,8,8,1,CZ,0,sukl_dlp
+arnica-montana-tinctura-basica-ad-usum-homeopathicum,Arnica Montana Tinctura Basica Ad Usum Homeopathicum,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'HOMEOPATH',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+arnica-tincture,Arnica Tincture,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ARNICA',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+arseni-triiodidum-dilutio-homeopathica,Arseni Triiodidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+arseni-trioxidum-555-c,Arseni Trioxidum 555 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '555 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+arseni-trioxidum-dilutio-homeopathica,Arseni Trioxidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+arum-triphyllum-3-c,Arum Triphyllum 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+arum-triphyllum-dilutio-homeopathica,Arum Triphyllum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+asa-foetida-dilutio-homeopathica,Asa Foetida Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+ascorbic-acid-coated-with-ethylcellulose,Ascorbic Acid Coated With Ethylcellulose,,cz_excipient_ambiguous,low,辅料词 'CELLULOSE' 命中，但名称是包衣写法（'Coated With'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,43,43,1,CZ,0,sukl_dlp
+asparagine,Asparagine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+aurum-metallicum-dilutio-homeopathica,Aurum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+avena-sativa-2-d,Avena Sativa 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+avena-sativa-dilutio-homeopathica,Avena Sativa Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+baptisia-tinctoria-4-d,Baptisia Tinctoria 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+barii-carbonas-dilutio-homeopathica,Barii Carbonas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+barii-chloridum-dilutio-homeopathica,Barii Chloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+barii-iodidum-dilutio-homeopathica,Barii Iodidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+bean-pericarp-without-seeds,Bean Pericarp Without Seeds,herbal,cz_botanical,medium,名称含植物部位/提取物词 'SEED',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+bearberry-leaf,Bearberry Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,13,13,1,CZ,0,sukl_dlp
+belladona-3-c,Belladona 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+belladonna-3-c,Belladonna 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+belladonna-4-c,Belladonna 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+belladonna-4-d,Belladonna 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,9,9,1,CZ,0,sukl_dlp
+belladonna-5-c,Belladonna 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+belladonna-6-c,Belladonna 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+belladonna-99-c,Belladonna 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+belladonna-dilutio-homeopathica,Belladonna Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+bellis-perennis-2-d,Bellis Perennis 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+bellis-perennis-4-d,Bellis Perennis 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+bellis-perennis-dilutio-homeopathica,Bellis Perennis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+benfotiamine,Benfotiamine,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMINE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,34,34,1,"CZ,LV",0,sukl_dlp
+benzathine-phenoxymethylpenicillin,Benzathine Phenoxymethylpenicillin,,cz_inn_shape_unconfirmed,low,INN 词尾 'CILLIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+benzoxonium-chloride,Benzoxonium Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,5,5,1,CZ,0,sukl_dlp
+benzoyl-peroxide-hydrous,Benzoyl Peroxide Hydrous,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,33,33,1,CZ,0,sukl_dlp
+benzyl-parahydroxybenzoate,Benzyl Parahydroxybenzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+benzylpenicillin-procaine,Benzylpenicillin Procaine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,5,5,1,CZ,0,sukl_dlp
+berberis-vulgaris-dilutio-homeopathica,Berberis Vulgaris Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+beremagene-geperpavec,Beremagene Geperpavec,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,"CZ,LV",0,sukl_dlp
+beta-pinene,Beta Pinene,,cz_inn_shape_unconfirmed,low,INN 词尾 'ENE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+bibrocathol,Bibrocathol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+bilberry-fruit-dried,Bilberry Fruit Dried,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FRUIT',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+bilberry-herb,Bilberry Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,9,9,1,CZ,0,sukl_dlp
+birch-leaf,Birch Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,13,13,1,CZ,0,sukl_dlp
+bismuthi-subnitras-dilutio-homeopathica,Bismuthi Subnitras Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+bisphenol-a-diglycidyl-ether,Bisphenol A Diglycidyl Ether,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+bisulepin,Bisulepin,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+blatta-orientalis-dilutio-homeopathica,Blatta Orientalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+boldo-leaf,Boldo Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+bortezomib-mannitol-ester,Bortezomib Mannitol Ester,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,19,19,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-a,Botulinum Antitoxin Type A,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-b,Botulinum Antitoxin Type B,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-c,Botulinum Antitoxin Type C,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-d,Botulinum Antitoxin Type D,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-e,Botulinum Antitoxin Type E,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-f,Botulinum Antitoxin Type F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+botulinum-antitoxin-type-g,Botulinum Antitoxin Type G,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+botulinum-toxin-trenibotuline-type-e,Botulinum Toxin Trenibotuline Type E,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+botulinum-toxin-type-a-free-from-complex-proteins,Botulinum Toxin Type A Free From Complex Proteins,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,22,22,1,CZ,0,sukl_dlp
+bretovameran,Bretovameran,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,7,7,1,CZ,0,sukl_dlp
+bromum-3-c,Bromum 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+bromum-dilutio-homeopathica,Bromum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+bryonia-3-c,Bryonia 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,6,6,1,CZ,0,sukl_dlp
+bryonia-99-c,Bryonia 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+bryonia-dilutio-homeopathica,Bryonia Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+buchu-leaf,Buchu Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+buffered-meropenem,Buffered Meropenem,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,10,10,1,CZ,0,sukl_dlp
+bufo-dilutio-homeopathica,Bufo Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+burdock-root,Burdock Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+butamirate,Butamirate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,31,31,1,"CZ,LV",0,sukl_dlp
+butedronate-tetrasodium,Butedronate Tetrasodium,,cz_inn_shape_unconfirmed,low,INN 词尾 'IUM'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+butyl-parahydroxybenzoate,Butyl Parahydroxybenzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+butylfenol-formaldehyde-resin,Butylfenol Formaldehyde Resin,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+cactus-grandiflorus-dilutio-homeopathica,Cactus Grandiflorus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cadmii-sulfas-dilutio-homeopathica,Cadmii Sulfas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+caladium-seguinum-dilutio-homeopathica,Caladium Seguinum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+calamus-root,Calamus Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+calcii-carbonas-8-d,Calcii Carbonas 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+calcii-carbonas-dilutio-homeopathica,Calcii Carbonas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+calcii-fluoridum-12-d,Calcii Fluoridum 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+calcii-fluoridum-dilutio-homeopathica,Calcii Fluoridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,5,5,1,CZ,0,sukl_dlp
+calcii-phosphas-12-d,Calcii Phosphas 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+calcii-phosphas-6-d,Calcii Phosphas 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+calcii-phosphas-dilutio-homeopathica,Calcii Phosphas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+calcii-sulfas-dilutio-homeopathica,Calcii Sulfas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,5,5,1,CZ,0,sukl_dlp
+calcii-sulfas-trituratio-d-6,Calcii Sulfas Trituratio D 6,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+calcium-beta-methyloxovalerate,Calcium Beta Methyloxovalerate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+calcium-carbonate-from-eggschale,Calcium Carbonate From Eggschale,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+calcium-chloride-hexahydrate,Calcium Chloride Hexahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,32,32,1,CZ,0,sukl_dlp
+calcium-folinate-pentahydrate,Calcium Folinate Pentahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+calcium-gamma-methyloxovalerate,Calcium Gamma Methyloxovalerate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+calcium-gluconate-for-injection,Calcium Gluconate For Injection,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,CZ,0,sukl_dlp
+calcium-hydroxymethylthiobutyrate,Calcium Hydroxymethylthiobutyrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+calcium-methyloxobutyrate,Calcium Methyloxobutyrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+calcium-oxophenylpropionate,Calcium Oxophenylpropionate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+calcium-trisodium-pentetate,Calcium Trisodium Pentetate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+calendula-flower-with-involucre,Calendula Flower With Involucre,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FLOWER',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+calendula-officinalis-2-d,Calendula Officinalis 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+calendula-officinalis-4-d,Calendula Officinalis 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+calendula-officinalis-6-c,Calendula Officinalis 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+calendula-officinalis-dilutio-homeopathica,Calendula Officinalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cantharis-dilutio-homeopathica,Cantharis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+capsicum-annuum-dilutio-homeopathica,Capsicum Annuum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+carbaethopendecinium-bromide,Carbaethopendecinium Bromide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,9,9,1,CZ,0,sukl_dlp
+carbo-animalis-dilutio-homeopathica,Carbo Animalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+carbo-vegetabilis-4-c,Carbo Vegetabilis 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+carbo-vegetabilis-5-c,Carbo Vegetabilis 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+carbo-vegetabilis-dilutio-homeopathica,Carbo Vegetabilis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+carbomer-974-p,Carbomer 974 P,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+cardiospermum-halicacabum-tinc-basica-ad-usum-homeopathicum,Cardiospermum Halicacabum Tinc Basica Ad Usum Homeopathicum,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'HOMEOPATH',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+carduus-marianus-dilutio-homeopathica,Carduus Marianus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+caspofungin-diacetate,Caspofungin Diacetate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+caulophyllum-thalictroides-4-d,Caulophyllum Thalictroides 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+caulophyllum-thalictroides-dilutio-homeopathica,Caulophyllum Thalictroides Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+causticum-dilutio-homeopathica,Causticum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cebsulfase-alfa,Cebsulfase Alfa,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+cefazolin-sodium-for-injection,Cefazolin Sodium For Injection,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+cefoperazone-sodium-for-injection,Cefoperazone Sodium For Injection,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,10,10,1,CZ,0,sukl_dlp
+ceftaroline-fosamil-acetate-solvate,Ceftaroline Fosamil Acetate Solvate,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Ceftaroline fosamil；尾词 'acetate solvate' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,1,1,1,CZ,0,sukl_dlp
+ceftriaxone-disodium-trihemihydrate,Ceftriaxone Disodium Trihemihydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,46,46,1,CZ,0,sukl_dlp
+cemivameran,Cemivameran,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+centaury,Centaury,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,11,11,1,CZ,0,sukl_dlp
+chamaelirium-luteum-dilutio-homeopathica,Chamaelirium Luteum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+chamomilla-recutita-3-d,Chamomilla Recutita 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+chamomilla-recutita-4-d,Chamomilla Recutita 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+chamomilla-recutita-9-c,Chamomilla Recutita 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+chamomilla-recutita-dilutio-homeopathica,Chamomilla Recutita Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+chelidonium-majus-6-c,Chelidonium Majus 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+chelidonium-majus-dilutio-homeopathica,Chelidonium Majus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+chinini-sulfas-dilutio-homeopathica,Chinini Sulfas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+chlormadinone,Chlormadinone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,17,17,1,"CZ,LV",0,sukl_dlp
+chloroxine,Chloroxine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+cholera-toxin-b-subunit,Cholera Toxin B Subunit,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,CZ,0,sukl_dlp
+chromium-trichloride,Chromium Trichloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+chromium-trichloride-hexahydrate,Chromium Trichloride Hexahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+cicuta-virosa-dilutio-homeopathica,Cicuta Virosa Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cimicifuga-racemosa-dilutio-homeopathica,Cimicifuga Racemosa Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+cina-4-c,Cina 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+cina-dilutio-homeopathica,Cina Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cinchona-succirubra-dilutio-homeopathica,Cinchona Succirubra Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+cineole,Cineole,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,16,16,1,"CZ,LV",0,sukl_dlp
+cinnamal,Cinnamal,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+cinnamyl-alcohol,Cinnamyl Alcohol,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,1,1,1,CZ,0,sukl_dlp
+cinolazepam,Cinolazepam,,cz_inn_shape_unconfirmed,low,INN 词尾 'AZEPAM'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+clarithromycin-lactobionate,Clarithromycin Lactobionate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,6,6,1,CZ,0,sukl_dlp
+clematis-recta-dilutio-homeopathica,Clematis Recta Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+clodronate-disodium-tetrahydrate,Clodronate Disodium Tetrahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+codergocrine,Codergocrine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+coffea-arabica-12-d,Coffea Arabica 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+coffea-arabica-dilutio-homeopathica,Coffea Arabica Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+colchicum-autumnale-dilutio-homeopathica,Colchicum Autumnale Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+colecalciferol,Colecalciferol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,128,128,1,"CZ,LV",0,sukl_dlp
+colocynthis-9-c,Colocynthis 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+colocynthis-dilutio-homeopathica,Colocynthis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+colophony,Colophony,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+coltsfoot-leaf,Coltsfoot Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,1,1,1,CZ,0,sukl_dlp
+common-goat-s-rues-herb,Common Goat S Rues Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+condurango-dilutio-homeopathica,Condurango Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+conium-maculatum-dilutio-homeopathica,Conium Maculatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+copper-oxide,Copper Oxide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,5,5,1,CZ,0,sukl_dlp
+corallium-rubrum-4-c,Corallium Rubrum 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+corallium-rubrum-dilutio-homeopathica,Corallium Rubrum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+crataegus-oxyacantha-dilutio-homeopathica,Crataegus Oxyacantha Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+creosotum-dilutio-homeopathica,Creosotum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+crocus-sativus-dilutio-homeopathica,Crocus Sativus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+croton-tiglium-9-c,Croton Tiglium 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+croton-tiglium-dilutio-homeopathica,Croton Tiglium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+cuprum-arsenicosum-dilutio-homeopathica,Cuprum Arsenicosum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cuprum-metallicum-3-c,Cuprum Metallicum 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+cuprum-metallicum-5-c,Cuprum Metallicum 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,6,6,1,CZ,0,sukl_dlp
+cuprum-metallicum-dilutio-homeopathica,Cuprum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+cyclamen-europaeum-4-d,Cyclamen Europaeum 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+cyclamen-europaeum-dilutio-homeopathica,Cyclamen Europaeum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+cyclohexylbenzothiazylsulphenamide,Cyclohexylbenzothiazylsulphenamide,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMIDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+cyclohexylphenylparaphenylenediamine,Cyclohexylphenylparaphenylenediamine,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMINE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+cypripedium-pubescens-dilutio-homeopathica,Cypripedium Pubescens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+dactylopius-coccus-3-c,Dactylopius Coccus 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+dactylopius-coccus-4-c,Dactylopius Coccus 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+dactylopius-coccus-5-c,Dactylopius Coccus 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+dactylopius-coccus-dilutio-homeopathica,Dactylopius Coccus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+damlecovatein,Damlecovatein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,CZ,0,sukl_dlp
+dandelion-herb,Dandelion Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,2,2,1,CZ,0,sukl_dlp
+dandelion-herb-with-root,Dandelion Herb With Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+dantrolene-sodium-hemiheptahydrate,Dantrolene Sodium Hemiheptahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+daphne-mezereum-15-c,Daphne Mezereum 15 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '15 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+daphne-mezereum-dilutio-homeopathica,Daphne Mezereum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+darunavir-ethanolate,Darunavir Ethanolate,,cz_excipient_ambiguous,low,辅料词 'ETHANOL' 命中，但名称是溶剂化物/包合物写法（'Ethanolate'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,13,13,1,CZ,0,sukl_dlp
+datura-stramonium-9-c,Datura Stramonium 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+datura-stramonium-dilutio-homeopathica,Datura Stramonium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+defatted-powder-of-peanuts,Defatted Powder Of Peanuts,herbal,cz_botanical,medium,名称含植物部位/提取物词 'POWDER',生药/植物（含提取物）,,14,19,1,CZ,0,sukl_dlp
+delphinium-staphisagria-dilutio-homeopathica,Delphinium Staphisagria Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+dibenzthiazyl-disulfide,Dibenzthiazyl Disulfide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+dicyclopentamethylentiuramdisulfide,Dicyclopentamethylentiuramdisulfide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+digitalis-purpurea-dilutio-homeopathica,Digitalis Purpurea Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+dimethylaminophenol,Dimethylaminophenol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+diphenyl-paraphenylenediamine,Diphenyl Paraphenylenediamine,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMINE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+diphenylguanidine,Diphenylguanidine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+dipotassium,Dipotassium,,cz_inn_shape_unconfirmed,low,INN 词尾 'IUM'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+disodium-oxidronate,Disodium Oxidronate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+disodium-pamidronate,Disodium Pamidronate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,16,16,1,CZ,0,sukl_dlp
+disodium-phosphate-dodecahydrate,Disodium Phosphate Dodecahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+disodium-tedizolid,Disodium Tedizolid,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+disperse-blue-106,Disperse Blue 106,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+dog-rose-without-achenes,Dog Rose Without Achenes,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+domestic-animals-hairs-allergens,Domestic Animals Hairs Allergens,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+dorocubicel,Dorocubicel,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,0,0,1,,0,sukl_dlp
+doxorubicin-citrate-complex,Doxorubicin Citrate Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+dried-saccharomyces-boulardii,Dried Saccharomyces Boulardii,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是微生物/益生菌写法（'Saccharomyces'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,8,8,1,CZ,0,sukl_dlp
+drosera-3-c,Drosera 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+drosera-4-c,Drosera 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+drosera-dilutio-homeopathica,Drosera Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+drosera-tinctura-basica-ad-usum-homeopathicum,Drosera Tinctura Basica Ad Usum Homeopathicum,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'HOMEOPATH',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+drotaverine,Drotaverine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,10,10,1,"CZ,LV",0,sukl_dlp
+echinacea-2d,Echinacea 2D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+echinacea-4-d,Echinacea 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+echinacea-angustifolia-3-c,Echinacea Angustifolia 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+echinacea-angustifolia-dilutio-homeopathica,Echinacea Angustifolia Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+echinacea-purpurea-2-d,Echinacea Purpurea 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+echinacea-purpurea-4-d,Echinacea Purpurea 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+edamine-dihydrochloride,Edamine Dihydrochloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+elder-flower,Elder Flower,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FLOWER',生药/植物（含提取物）,,32,32,1,CZ,0,sukl_dlp
+emedastine-difumarate,Emedastine Difumarate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,7,7,1,"CZ,LV",0,sukl_dlp
+ensitrelvir-fumaric-acid,Ensitrelvir Fumaric Acid,,cz_inn_shape_unconfirmed,low,INN 词尾 'ACID'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+enterococcus-faecalis-metabolites,Enterococcus Faecalis Metabolites,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+equisetum-hiemale-4-d,Equisetum Hiemale 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+equisetum-hiemale-dilutio-homeopathica,Equisetum Hiemale Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+equisetum-stem,Equisetum Stem,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,12,12,1,CZ,0,sukl_dlp
+erbium-169er,Erbium 169Er,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,7,7,1,CZ,0,sukl_dlp
+ertugliflozin-pidolic-acid,Ertugliflozin Pidolic Acid,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Ertugliflozin；尾词 'pidolic acid' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,60,60,1,CZ,0,sukl_dlp
+escherichia-coli-metabolites,Escherichia Coli Metabolites,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+escin,Escin,,cz_inn_shape_unconfirmed,low,INN 词尾 'CIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,14,14,1,CZ,0,sukl_dlp
+estradiol-benzoate,Estradiol Benzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+ethinylestradiol-betadex-clathrate,Ethinylestradiol Betadex Clathrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,17,17,1,CZ,0,sukl_dlp
+ethinylestradiol-micronized,Ethinylestradiol Micronized,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,20,20,1,CZ,0,sukl_dlp
+ethoxylated-alcohols-c10-16,Ethoxylated Alcohols C10 16,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,7,7,1,CZ,0,sukl_dlp
+ethoxylated-propoxylated-alcohols-c10-16,Ethoxylated Propoxylated Alcohols C10 16,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,7,7,1,CZ,0,sukl_dlp
+ethyl-icosapentate,Ethyl Icosapentate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+ethyl-parahydroxybenzoate,Ethyl Parahydroxybenzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+etofenamate,Etofenamate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,6,6,1,"CZ,LV",0,sukl_dlp
+etofylline,Etofylline,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+eupatorium-perfoliantum-4-ch,Eupatorium Perfoliantum 4 Ch,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 Ch',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+eupatorium-perfoliatum-4-d,Eupatorium Perfoliatum 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+eupatorium-perfoliatum-dilutio-homeopathica,Eupatorium Perfoliatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+euphorbium-6-d,Euphorbium 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+euphrasia-officinalis-5-c,Euphrasia Officinalis 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+euphrasia-officinalis-dilutio-homeopathica,Euphrasia Officinalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+euspongia-officinalis-3-c,Euspongia Officinalis 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+euspongia-officinalis-4-c,Euspongia Officinalis 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+euspongia-officinalis-6-c,Euspongia Officinalis 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+euspongia-officinalis-dilutio-homeopathica,Euspongia Officinalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+exogonium-purga-beneth-dilutio-homeopathica,Exogonium Purga Beneth Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+fatty-acid-ester-mix,Fatty Acid Ester Mix,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,7,7,1,CZ,0,sukl_dlp
+fenchone,Fenchone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,5,5,1,"CZ,LV",0,sukl_dlp
+fenipentol,Fenipentol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+fennel-bitter,Fennel Bitter,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,16,16,1,CZ,0,sukl_dlp
+fennel-sweet,Fennel Sweet,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,22,22,1,CZ,0,sukl_dlp
+fenpiverinium-bromide,Fenpiverinium Bromide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+ferri-phosphas-12-d,Ferri Phosphas 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+ferri-phosphas-6-c,Ferri Phosphas 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+ferri-phosphas-8-d,Ferri Phosphas 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+ferri-phosphas-dilutio-homeopathica,Ferri Phosphas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+ferric-citrate-coordination-complex,Ferric Citrate Coordination Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+ferric-hexacyanoferrate,Ferric Hexacyanoferrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+ferric-polymaltose,Ferric Polymaltose,,cz_inn_shape_unconfirmed,low,INN 词尾 'OSE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,5,5,1,CZ,0,sukl_dlp
+ferric-sodium-gluconate-complex,Ferric Sodium Gluconate Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+ferric-sucrose,Ferric Sucrose,,cz_inn_shape_unconfirmed,low,INN 词尾 'OSE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+ferric-sucrose-with-starch,Ferric Sucrose With Starch,,cz_excipient_ambiguous,low,辅料词 'STARCH' 命中，但名称是共处理写法（'With Starch'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,5,5,1,CZ,0,sukl_dlp
+ferrosi-iodidum-12-d,Ferrosi Iodidum 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+ferrous-chloride-tetrahydrate,Ferrous Chloride Tetrahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+ferrous-sulfate-dried,Ferrous Sulfate Dried,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是矿物/金属盐写法（'Ferrous'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,4,4,1,CZ,0,sukl_dlp
+ferrum-metallicum-dilutio-homeopathica,Ferrum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+ferrum-phosphoricum-5c,Ferrum Phosphoricum 5C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+fimbriae-type-2-and-3,Fimbriae Type 2 And 3,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,19,19,1,CZ,0,sukl_dlp
+flortaucipir-18f,Flortaucipir 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+fluciclovine-18f,Fluciclovine 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+fludeoxyglucose-18f,Fludeoxyglucose 18F,,cz_excipient_ambiguous,low,辅料词 'GLUCOSE' 命中，但名称是放射性核素标记（'18F'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,74,74,1,CZ,0,sukl_dlp
+fludeoxythymidine-18f,Fludeoxythymidine 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,15,15,1,CZ,0,sukl_dlp
+fluorocholine-18f,Fluorocholine 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,42,42,1,CZ,0,sukl_dlp
+fluoroestradiol-18f,Fluoroestradiol 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,12,12,1,CZ,0,sukl_dlp
+fluoroethyltyrosine-18f,Fluoroethyltyrosine 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+fluorolcholine-18f-chloride,Fluorolcholine 18F Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+fluoromisonidazole-18f,Fluoromisonidazole 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,15,15,1,CZ,0,sukl_dlp
+fluphenazine-decanoate,Fluphenazine Decanoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+folliculinum-dilutio-homeopathica,Folliculinum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+formica-rufa-dilutio-homeopathica,Formica Rufa Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+foscarnet-sodium-hexahydrate,Foscarnet Sodium Hexahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+fosfocreatine-disodium,Fosfocreatine Disodium,,cz_inn_shape_unconfirmed,low,INN 词尾 'IUM'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+fostamatinib-disodium-hexahydrate,Fostamatinib Disodium Hexahydrate,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Fostamatinib；尾词 'disodium hexahydrate' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,2,2,1,CZ,0,sukl_dlp
+freeze-dried-bacterial-lysate-om-85,Freeze Dried Bacterial Lysate Om 85,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是微生物/益生菌写法（'Bacterial'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,13,13,1,CZ,0,sukl_dlp
+freeze-dried-escherichia-coli,Freeze Dried Escherichia Coli,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是微生物/益生菌写法（'Escherichia'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,1,1,1,CZ,0,sukl_dlp
+freeze-dried-escherichia-coli-lysate,Freeze Dried Escherichia Coli Lysate,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是微生物/益生菌写法（'Escherichia'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,4,4,1,CZ,0,sukl_dlp
+freeze-dried-lactobacillus-acidophilus,Freeze Dried Lactobacillus Acidophilus,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是微生物/益生菌写法（'Lactobacillus'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,2,2,1,CZ,0,sukl_dlp
+freeze-dried-saccharomyces-boulardii,Freeze Dried Saccharomyces Boulardii,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是微生物/益生菌写法（'Saccharomyces'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,5,5,1,CZ,0,sukl_dlp
+fucus-vesiculosus-dilutio-homeopathica,Fucus Vesiculosus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+fumaria-officinalis-4-d,Fumaria Officinalis 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+gallium-67ga,Gallium 67Ga,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,CZ,0,sukl_dlp
+gallium-68ga-chloride,Gallium 68Ga Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,21,21,1,CZ,0,sukl_dlp
+gallium-68ga-relitegatide-brexetan,Gallium 68Ga Relitegatide Brexetan,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+gelsemium-3-c,Gelsemium 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+gelsemium-4-c,Gelsemium 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+gelsemium-6-d,Gelsemium 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+gelsemium-9-c,Gelsemium 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+gelsemium-dilutio-homeopathica,Gelsemium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+gentian-root,Gentian Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+gentiana-lutea-5-d,Gentiana Lutea 5 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+geranium-robertianum-4-d,Geranium Robertianum 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+germanium-68ge-chloride,Germanium 68Ge Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,21,21,1,CZ,0,sukl_dlp
+ginkgo-biloba-dilutio-homeopathica,Ginkgo Biloba Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+glucagon-human,Glucagon Human,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+glucose-1-phosphate-disodium-tetrahydrate,Glucose 1 Phosphate Disodium Tetrahydrate,material,cz_excipient,low,名称含辅料/溶剂词 'GLUCOSE'（词表口径，需人工抽检）,辅料/溶剂/化学品,,6,6,1,CZ,0,sukl_dlp
+glyceroli-trinitras-dilutio-homeopathica,Glyceroli Trinitras Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+glycosaminoglycan-polysulfate,Glycosaminoglycan Polysulfate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+glycyl-tyrosine,Glycyl Tyrosine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+goldenrod-european,Goldenrod European,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+gozetotide-trifluoroacetate,Gozetotide Trifluoroacetate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+graminis-pollen-3ch-200ch-3k-10mk,Graminis Pollen 3Ch 200Ch 3K 10Mk,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3Ch',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+granulated-calcium-carbonate,Granulated Calcium Carbonate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,0,0,1,,0,sukl_dlp
+granulated-sodium-phenylbutyrate,Granulated Sodium Phenylbutyrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+graphites,Graphites,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+graphites-229-c,Graphites 229 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '229 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+graphites-98-c,Graphites 98 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '98 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+graphites-999-c,Graphites 999 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '999 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+graphites-dilutio-homeopathica,Graphites Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+grass-pollen-allergens,Grass Pollen Allergens,,cz_botanical_ambiguous,low,生药词 'POLLEN' 命中，但名称是变应原提取物写法（'Allergen'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,6,8,1,CZ,0,sukl_dlp
+guajacum-dilutio-homeopathica,Guajacum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+haemophilus-influenzae-9-ch,Haemophilus Influenzae 9 Ch,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 Ch',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+haemophilus-influenzae-type-b-polysaccharide-conjugated-to-menin,Haemophilus Influenzae Type B Polysaccharide Conjugated To Meningococcal Protein,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'POLYSACCHARIDE',疫苗株/生物抗原,,0,0,1,,0,sukl_dlp
+hamamelis-virginiana-2-d,Hamamelis Virginiana 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+hamamelis-virginiana-4-d,Hamamelis Virginiana 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+hamamelis-virginiana-dilutio-homeopathica,Hamamelis Virginiana Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+harpagophytum-procumbens-dilutio-homeopathica,Harpagophytum Procumbens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hawthorn-berries,Hawthorn Berries,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+hawthorn-leaf-and-flower,Hawthorn Leaf And Flower,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,14,14,1,CZ,0,sukl_dlp
+hekla-lava-dilutio-homeopathica,Hekla Lava Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+hepar-sulfuris-calcareum-6-c,Hepar Sulfuris Calcareum 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+hepar-sulfuris-calcareum-6-d,Hepar Sulfuris Calcareum 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+hepar-sulfuris-calcareum-8-d,Hepar Sulfuris Calcareum 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+hepar-sulfuris-calcareum-dilutio-homeopathica,Hepar Sulfuris Calcareum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+heparinoide-s,Heparinoide S,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+hexamidine-diisetionate,Hexamidine Diisetionate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,7,7,1,CZ,0,sukl_dlp
+hexoprenaline,Hexoprenaline,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+hexylaminolevulinate,Hexylaminolevulinate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+histamini-dihydrochloridum-9-c,Histamini Dihydrochloridum 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+histaminum-dilutio-homeopathiaca,Histaminum Dilutio Homeopathiaca,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hop-strobile,Hop Strobile,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+human-albumin,Human Albumin,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,36,36,1,CZ,0,sukl_dlp
+human-albumin-macroaggregated,Human Albumin Macroaggregated,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+human-alpha-1-proteinase-inhibitor,Human Alpha 1 Proteinase Inhibitor,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,7,7,1,CZ,0,sukl_dlp
+human-anti-d-immunoglobulin-for-intravenous-administration,Human Anti D Immunoglobulin For Intravenous Administration,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+human-c1-esterase-inhibitor,Human C1 Esterase Inhibitor,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+human-coagulation-factor-ix,Human Coagulation Factor Ix,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+human-coagulation-factor-vii,Human Coagulation Factor Vii,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+human-coagulation-factor-viii,Human Coagulation Factor Viii,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,26,26,1,CZ,0,sukl_dlp
+human-coagulation-factor-x,Human Coagulation Factor X,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+human-coagulation-factor-xiii,Human Coagulation Factor Xiii,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+human-fibrinogen,Human Fibrinogen,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,28,28,1,CZ,0,sukl_dlp
+human-hepatitis-b-immunoglobulin,Human Hepatitis B Immunoglobulin,,cz_inn_shape_unconfirmed,low,INN 词尾 'LIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+human-isophane-insulin,Human Isophane Insulin,,cz_inn_shape_unconfirmed,low,INN 词尾 'LIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,30,30,1,CZ,0,sukl_dlp
+human-normal-immunoglobulin-for-intramuscular-administration,Human Normal Immunoglobulin For Intramuscular Administration,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,18,18,1,CZ,0,sukl_dlp
+human-normal-immunoglobulin-for-intravenous-administration,Human Normal Immunoglobulin For Intravenous Administration,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,84,84,1,CZ,0,sukl_dlp
+human-normal-immunoglobulin-for-subcutaneous-administration,Human Normal Immunoglobulin For Subcutaneous Administration,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,70,70,1,CZ,0,sukl_dlp
+human-prothrombin-complex,Human Prothrombin Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+human-rabies-immunoglobulin,Human Rabies Immunoglobulin,,cz_inn_shape_unconfirmed,low,INN 词尾 'LIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+human-tetanus-immunoglobulin,Human Tetanus Immunoglobulin,,cz_inn_shape_unconfirmed,low,INN 词尾 'LIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+human-varicella-immunoglobulin,Human Varicella Immunoglobulin,,cz_inn_shape_unconfirmed,low,INN 词尾 'LIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+human-von-willebrand-factor,Human Von Willebrand Factor,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,16,16,1,CZ,0,sukl_dlp
+hydrargyri-aminochloridum-6-c,Hydrargyri Aminochloridum 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+hydrargyri-cyanidum-8-d,Hydrargyri Cyanidum 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+hydrargyri-cyanidum-dilutio-homeopathica,Hydrargyri Cyanidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hydrargyri-dichloridum-dilutio-homeopathica,Hydrargyri Dichloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+hydrargyri-sulfidum-rubrum-dilutio-homeopathica,Hydrargyri Sulfidum Rubrum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hydrargyrosi-chloridum-dilutio-homeopathica,Hydrargyrosi Chloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hydrastis-canadensis-dilutio-homeopathica,Hydrastis Canadensis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+hydrochloric-acid-25-per-cent-m-m,Hydrochloric Acid 25 Per Cent M M,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+hydrocotyle-asiatica-dilutio-homeopathica,Hydrocotyle Asiatica Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hydroxy-methyl-succinimide,Hydroxy Methyl Succinimide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+hydroxycitronellal,Hydroxycitronellal,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+hynic-phe-tyr-octreotide-tfa,Hynic Phe Tyr Octreotide Tfa,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+hyoscyamus-niger-9-c,Hyoscyamus Niger 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+hyoscyamus-niger-dilutio-homeopathica,Hyoscyamus Niger Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+hypericum-perforatum-2-d,Hypericum Perforatum 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+hypericum-perforatum-6-d,Hypericum Perforatum 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+hypericum-perforatum-dilutio-homeopathica,Hypericum Perforatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+icotrokinra-hydrohloride,Icotrokinra Hydrohloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+indium-111in-calcium-pentetate,Indium 111In Calcium Pentetate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+indium-111in-chloride,Indium 111In Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,7,7,1,CZ,0,sukl_dlp
+indium-111in-oxine,Indium 111In Oxine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+influenzinum-dilutio-homeopathica,Influenzinum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+insect-allergens,Insect Allergens,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+insulin-injection-isophane,Insulin Injection Isophane,,cz_inn_shape_unconfirmed,low,INN 词尾 'ANE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,36,36,1,CZ,0,sukl_dlp
+iobenguane-123i,Iobenguane 123I,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+iodomethylnorcholesterol-131i,Iodomethylnorcholesterol 131I,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+iodum-dilutio-homeopathica,Iodum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+ioflupane-123i,Ioflupane 123I,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+ioxitalamate-meglumine,Ioxitalamate Meglumine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+ipecacuanha-3-c,Ipecacuanha 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+ipecacuanha-4-c,Ipecacuanha 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+ipecacuanha-dilutio-homeopathica,Ipecacuanha Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+irinotecan-sucrosofate,Irinotecan Sucrosofate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+iris-versicolor-2-d,Iris Versicolor 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+iris-versicolor-dilutio-homeopathica,Iris Versicolor Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+isoeugenol,Isoeugenol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+isopropylphenylparaphenylenediamine,Isopropylphenylparaphenylenediamine,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMINE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+isosorbide-mononitrate-diluted,Isosorbide Mononitrate Diluted,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+isothiazolinones,Isothiazolinones,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+itepekimab,Itepekimab,,cz_inn_shape_unconfirmed,low,INN 词尾 'MAB'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+juglans-regia-3-d,Juglans Regia 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+juniperus-sabina-dilutio-homeopathica,Juniperus Sabina Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+kalii-bromidum-9-c,Kalii Bromidum 9 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '9 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+kalii-bromidum-dilutio-homeopathica,Kalii Bromidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+kalii-carbonas-dilutio-homeopathica,Kalii Carbonas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+kalii-chloridum-5-60-d,Kalii Chloridum 5 60 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '60 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+kalii-chloridum-dilutio-homeopathica,Kalii Chloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+kalii-dichromas-3-c,Kalii Dichromas 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+kalii-dichromas-6-c,Kalii Dichromas 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+kalii-dichromas-dilutio-homeopathica,Kalii Dichromas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+kalii-dihydrogenophosphas-6-d,Kalii Dihydrogenophosphas 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+kalii-dihydrogenophosphas-dilutio-homeopathica,Kalii Dihydrogenophosphas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+kalii-iodidum-dilutio-homeopathica,Kalii Iodidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+kalii-stibii-tartras-6-c,Kalii Stibii Tartras 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+kalii-stibii-tartras-dilutio-homeopathica,Kalii Stibii Tartras Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+kalii-sulfas-6-d,Kalii Sulfas 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+kalii-sulfas-dilutio-homeopathica,Kalii Sulfas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,5,5,1,CZ,0,sukl_dlp
+kalii-sulfidum-crudum-8-d,Kalii Sulfidum Crudum 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+kalium-arsenicosum-dilutio-homeopathica,Kalium Arsenicosum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+kalmia-latifolia-dilutio-homeopathica,Kalmia Latifolia Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+knotgrass,Knotgrass,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,15,15,1,CZ,0,sukl_dlp
+krypton-81mkr,Krypton 81Mkr,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,37,37,1,CZ,0,sukl_dlp
+l-malic-acid,L Malic Acid,,cz_inn_shape_unconfirmed,low,INN 词尾 'ACID'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,17,17,1,CZ,0,sukl_dlp
+lac-caninum-dilutio-homeopathica,Lac Caninum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+lachesis-mutus-dilutio-homeopathica,Lachesis Mutus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+lachnanthes-tinctoria-dilutio-homeopathica,Lachnanthes Tinctoria Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+lactobacillus-acidophilus-metabolites,Lactobacillus Acidophilus Metabolites,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+lactobacillus-helveticus,Lactobacillus Helveticus,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+lactobacillus-helveticus-metabolites,Lactobacillus Helveticus Metabolites,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+lactose-with-cyanocobalamine-trituration-0-5-per-cent,Lactose With Cyanocobalamine Trituration 0 5 Per Cent,,cz_excipient_ambiguous,low,辅料词 'LACTOSE' 命中，但名称是研磨稀释写法（'Trituration'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,6,6,1,CZ,0,sukl_dlp
+lactulose-liquid,Lactulose Liquid,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,17,17,1,CZ,0,sukl_dlp
+lapatinib-ditosilate,Lapatinib Ditosilate,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Lapatinib；尾词 'ditosilate' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,7,7,1,CZ,0,sukl_dlp
+ledum-palustre-dilutio-homeopathica,Ledum Palustre Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+ledum-palustre-tinctura-basica-ad-usum-homeopathicum,Ledum Palustre Tinctura Basica Ad Usum Homeopathicum,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'HOMEOPATH',顺势/稀释写法·Dilutio 字样,,0,0,1,,0,sukl_dlp
+lefamuline,Lefamuline,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,"CZ,LV",0,sukl_dlp
+lenalidomide-ammonium-chloride,Lenalidomide Ammonium Chloride,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Lenalidomide；尾词 'ammonium chloride' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,14,14,1,CZ,0,sukl_dlp
+leriglitazone,Leriglitazone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,"CZ,LV",0,sukl_dlp
+levothyroxinum-12-d,Levothyroxinum 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+lilium-tigrinum-3-d,Lilium Tigrinum 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+lilium-tigrinum-dilutio-homeopathica,Lilium Tigrinum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+lime-flower,Lime Flower,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FLOWER',生药/植物（含提取物）,,12,12,1,CZ,0,sukl_dlp
+liquorice-root,Liquorice Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,34,34,1,CZ,0,sukl_dlp
+lithii-carbonas-dilutio-homeopathica,Lithii Carbonas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+live-attenuated-salmonella-typhi,Live Attenuated Salmonella Typhi,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+lobelia-inflata-dilutio-homeopathica,Lobelia Inflata Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+lovage-root,Lovage Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+luffa-operculata-3-d,Luffa Operculata 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+luteinum-dilutio-homeopathica,Luteinum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+lutetium-177-lu-chloride,Lutetium 177 Lu Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,18,18,1,CZ,0,sukl_dlp
+lutetium-177lu-oxodotreotide,Lutetium 177Lu Oxodotreotide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+lutetium-177lu-vipivotide-tetraxetan,Lutetium 177Lu Vipivotide Tetraxetan,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+lycopodium-clavatum-dilutio-homeopathica,Lycopodium Clavatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+lynestrenol,Lynestrenol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+lysine-acetylsalicylate-racemic,Lysine Acetylsalicylate Racemic,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+magnesii-chloridum-dilutio-homeopathica,Magnesii Chloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+magnesii-hydrogenophosphas-6-d,Magnesii Hydrogenophosphas 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,7,7,1,CZ,0,sukl_dlp
+magnesii-hydrogenophosphas-dilutio-homeopathica,Magnesii Hydrogenophosphas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+magnesii-subcarbonas-ponderosus-dilutio-homeopathica,Magnesii Subcarbonas Ponderosus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+magnesium-aspartate-tetrahydrate,Magnesium Aspartate Tetrahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+magnesium-carbonate-heavy,Magnesium Carbonate Heavy,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,28,28,1,CZ,0,sukl_dlp
+magnesium-carbonate-light,Magnesium Carbonate Light,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+magnesium-dl-hydrogenaspartate-tetrahydrate,Magnesium Dl Hydrogenaspartate Tetrahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+magnesium-oxide-heavy,Magnesium Oxide Heavy,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+magnesium-oxide-light,Magnesium Oxide Light,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,21,21,1,CZ,0,sukl_dlp
+magnesium-stearate,Magnesium Stearate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,15,15,1,CZ,0,sukl_dlp
+malic-acid,Malic Acid,,cz_inn_shape_unconfirmed,low,INN 词尾 'ACID'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+mangani-acetas-dilutio-homeopathica,Mangani Acetas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+manganum-metallicum-dilutio-homeopathica,Manganum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+matricaria-flower,Matricaria Flower,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FLOWER',生药/植物（含提取物）,,38,38,1,CZ,0,sukl_dlp
+meglumine-antimonate,Meglumine Antimonate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+melissa-herb,Melissa Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,23,23,1,CZ,0,sukl_dlp
+melphalan-flufenamide,Melphalan flufenamide,inn_drug,cz_who_inn_exact,high,WHO INN 名录命中：Melphalan flufenamide（MELPHALAN FLUFENAMIDE；列表见 data/who_inn_names.csv）,真实 INN（WHO 名录命中）,,1,1,1,CZ,0,sukl_dlp
+menthone,Menthone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,5,5,1,"CZ,LV",0,sukl_dlp
+mepartricin,Mepartricin,,cz_inn_shape_unconfirmed,low,INN 词尾 'CIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,"CZ,LV",0,sukl_dlp
+mephenoxalone,Mephenoxalone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+mercaptamine-bitartrate,Mercaptamine Bitartrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,12,12,1,"CZ,LV",0,sukl_dlp
+mercaptobenzothiazole,Mercaptobenzothiazole,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+mercurius-solubilis-hahnemanni-3-c,Mercurius Solubilis Hahnemanni 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+mercurius-solubilis-hahnemanni-6-d,Mercurius Solubilis Hahnemanni 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+mercurius-solubilis-hahnemanni-8-d,Mercurius Solubilis Hahnemanni 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+mercurius-solubilis-hahnemanni-99-c,Mercurius Solubilis Hahnemanni 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+mercurius-solubilis-hahnemanni-dilutio-homeopathica,Mercurius Solubilis Hahnemanni Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+messenger-rna-mrna-encoding-the-n-terminal-domain-and-receptor-b,Messenger Rna Mrna Encoding The N Terminal Domain And Receptor Binding Domain Of The Viral Spike S Protein Of Sars Cov 2 Xbb 1 5,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+messenger-rna-mrna-encoding-the-viral-spike-s-protein-of-sars-co,Messenger Rna Mrna Encoding The Viral Spike S Protein Of Sars Cov 2 Lp 8 1,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,40,40,1,CZ,0,sukl_dlp
+metacresol,Metacresol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+methionine-11c-methyl,Methionine 11C Methyl,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '11C',顺势/稀释写法·数字稀释度,,27,27,1,CZ,0,sukl_dlp
+methyl-parahydroxybenzoate,Methyl Parahydroxybenzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,"CZ,LV",0,sukl_dlp
+methyldibromoglutaronitrile,Methyldibromoglutaronitrile,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+methylergometrine,Methylergometrine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+micronized-desogestrel,Micronized Desogestrel,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,10,10,1,CZ,0,sukl_dlp
+micronized-dienogest,Micronized Dienogest,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,13,13,1,CZ,0,sukl_dlp
+micronized-diosmin,Micronized Diosmin,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,58,58,1,CZ,0,sukl_dlp
+micronized-levonorgestrel,Micronized Levonorgestrel,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,11,11,1,CZ,0,sukl_dlp
+mifamurtid,Mifamurtid,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+mite-allergens,Mite Allergens,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,11,11,1,CZ,0,sukl_dlp
+mofetil-mycofenolate,Mofetil Mycofenolate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+morphine-hemisulfate-2-5-hydrate,Morphine Hemisulfate 2 5 Hydrate,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,9,9,1,CZ,0,sukl_dlp
+morpholinyl-mercaptobenzothiazole,Morpholinyl Mercaptobenzothiazole,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+moschus-dilutio-homeopathica,Moschus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+moxastine-teoclate,Moxastine Teoclate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+mucuna-pruriens-dilutio-homeopathica,Mucuna Pruriens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+mullein-flower,Mullein Flower,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FLOWER',生药/植物（含提取物）,,1,1,1,CZ,0,sukl_dlp
+mycophyta-allergens,Mycophyta Allergens,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+myocardium-6-c,Myocardium 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+myosotis-arvensis-3-d,Myosotis Arvensis 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+myristica-fragrans-dilutio-homeopathica,Myristica Fragrans Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+myrtecaine,Myrtecaine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+naja-naja-dilutio-homeopathica,Naja Naja Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+nasturtium-aquaticum-4-d,Nasturtium Aquaticum 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+natrii-carbonas-dilutio-homeopathica,Natrii Carbonas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+natrii-chloridum-6-d,Natrii Chloridum 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+natrii-chloridum-dilutio-homeopathica,Natrii Chloridum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+natrii-chloroauras-dilutio-homeopathica,Natrii Chloroauras Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+natrii-hydrogenophosphas-dilutio-homeopathica,Natrii Hydrogenophosphas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+natrii-phosphas-trituratio-d-6,Natrii Phosphas Trituratio D 6,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+natrii-sulfas-4-d,Natrii Sulfas 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+natrii-sulfas-6-d,Natrii Sulfas 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+natrii-sulfas-dilutio-homeopathica,Natrii Sulfas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+natrii-tetraboras-dilutio-homeopathica,Natrii Tetraboras Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-a-oligosaccharide,Neisseria Meningitidis Group A Oligosaccharide,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-a-polysaccharide,Neisseria Meningitidis Group A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'POLYSACCHARIDE',疫苗株/生物抗原,,9,9,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-b-fhbp-fusion-protein,Neisseria Meningitidis Group B Fhbp Fusion Protein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-b-fhbp-protein-subfamily-a,Neisseria Meningitidis Group B Fhbp Protein Subfamily A,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-b-fhbp-protein-subfamily-b,Neisseria Meningitidis Group B Fhbp Protein Subfamily B,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-b-nada-protein,Neisseria Meningitidis Group B Nada Protein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-b-nhba-fusion-protein,Neisseria Meningitidis Group B Nhba Fusion Protein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-c-oligosaccharide,Neisseria Meningitidis Group C Oligosaccharide,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-c-polysaccharide,Neisseria Meningitidis Group C Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'POLYSACCHARIDE',疫苗株/生物抗原,,9,9,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-w-135-polysaccharide,Neisseria Meningitidis Group W 135 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'POLYSACCHARIDE',疫苗株/生物抗原,,9,9,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-w135-oligosaccharide,Neisseria Meningitidis Group W135 Oligosaccharide,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-y-oligosaccharide,Neisseria Meningitidis Group Y Oligosaccharide,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+neisseria-meningitidis-group-y-polysaccharide,Neisseria Meningitidis Group Y Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'POLYSACCHARIDE',疫苗株/生物抗原,,9,9,1,CZ,0,sukl_dlp
+neostigmine-metilsulfate,Neostigmine Metilsulfate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+nerium-oleander-dilutio-homeopathica,Nerium Oleander Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+nettle-herb,Nettle Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+nicotiana-tabacum-4-c,Nicotiana Tabacum 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+nicotiana-tabacum-dilutio-homeopathica,Nicotiana Tabacum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+nicotine-resinate,Nicotine Resinate,herbal,cz_botanical,medium,名称含植物部位/提取物词 'RESINA',生药/植物（含提取物）,,76,76,1,CZ,0,sukl_dlp
+nirogacestat-dihydrobromide,Nirogacestat Dihydrobromide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+nitrofurantoin-macrocrystalline,Nitrofurantoin Macrocrystalline,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,13,13,1,CZ,0,sukl_dlp
+nogapendekin-alfa-inbakicept,Nogapendekin Alfa Inbakicept,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+oak-bark,Oak Bark,herbal,cz_botanical,medium,名称含植物部位/提取物词 'BARK',生药/植物（含提取物）,,2,2,1,CZ,0,sukl_dlp
+oakmoss-lichen,Oakmoss Lichen,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+obecabtagene-autoleucel,Obecabtagene Autoleucel,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,"CZ,LV",0,sukl_dlp
+obicetrapib,Obicetrapib,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,9,9,1,CZ,0,sukl_dlp
+obidoxime-chloride,Obidoxime Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+octenidine-dihydrochloride,Octenidine Dihydrochloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,32,32,1,"CZ,LV",0,sukl_dlp
+opium-dilutio-homeopathica,Opium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+opium-tincture-standardised,Opium Tincture Standardised,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,6,6,1,CZ,0,sukl_dlp
+oregano,Oregano,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+outer-membrane-vesicles-from-neisseria-meningitidis-group-b-stra,Outer Membrane Vesicles From Neisseria Meningitidis Group B Strain Nz98 254,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+ovine-digoxin-antitoxin-fab,Ovine Digoxin Antitoxin Fab,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+padeliporfin-dipotassium,Padeliporfin Dipotassium,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Padeliporfin；尾词 'dipotassium' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,2,2,1,CZ,0,sukl_dlp
+palonosetron-hydrochlorid,Palonosetron Hydrochlorid,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,18,18,1,CZ,0,sukl_dlp
+pancreas-powder,Pancreas Powder,,cz_botanical_ambiguous,low,生药词 'POWDER' 命中，但名称是酶/脏器粉写法（'Pancreas'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,34,34,1,CZ,0,sukl_dlp
+paraffin-light-liquid,Paraffin Light Liquid,material,cz_excipient,low,名称含辅料/溶剂词 'PARAFFIN'（词表口径，需人工抽检）,辅料/溶剂/化学品,,2,2,1,CZ,0,sukl_dlp
+paraffin-liquid,Paraffin Liquid,material,cz_excipient,low,名称含辅料/溶剂词 'PARAFFIN'（词表口径，需人工抽检）,辅料/溶剂/化学品,,7,7,1,CZ,0,sukl_dlp
+paraphenylenediamine,Paraphenylenediamine,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMINE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+parsley-root,Parsley Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,9,9,1,CZ,0,sukl_dlp
+passiflora-incarnata-2-d,Passiflora Incarnata 2 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '2 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+passiflora-incarnata-3-d,Passiflora Incarnata 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+passionflower-herb,Passionflower Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,1,1,1,CZ,0,sukl_dlp
+pegepoetin-beta,Pegepoetin Beta,,cz_inn_shape_unconfirmed,low,INN 词尾 'BETA'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,12,12,1,CZ,0,sukl_dlp
+pelargonium-root-tincture-1-10,Pelargonium Root Tincture 1 10,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+pentamidine-diisetionate,Pentamidine Diisetionate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+peppermint-herb,Peppermint Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,52,52,1,CZ,0,sukl_dlp
+perflutren-gas-in-microspheres,Perflutren Gas In Microspheres,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+peru-balsam,Peru Balsam,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+petroleum-rectificatum-4-c,Petroleum Rectificatum 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+petroleum-rectificatum-dilutio-homeopathica,Petroleum Rectificatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+phosphorus-dilutio-homeopathica,Phosphorus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+phytolacca-decandra-3-c,Phytolacca Decandra 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+phytolacca-decandra-4-d,Phytolacca Decandra 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+phytolacca-decandra-5-c,Phytolacca Decandra 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+phytolacca-decandra-dilutio-homeopathica,Phytolacca Decandra Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+pinus-sylvestris-4-d,Pinus Sylvestris 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+pipecuronium-bromide,Pipecuronium Bromide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+piperaquine-phosphate-tetrahydrate,Piperaquine Phosphate Tetrahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,7,7,1,CZ,0,sukl_dlp
+piritramide,Piritramide,,cz_inn_shape_unconfirmed,low,INN 词尾 'AMIDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,15,15,1,CZ,0,sukl_dlp
+pitofenone,Pitofenone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,7,7,1,CZ,0,sukl_dlp
+pix-liquida-dilutio-homeopathica,Pix Liquida Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+plantago-major-4-d,Plantago Major 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+plantago-major-dilutio-homeopathica,Plantago Major Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+platinum-metallicum-dilutio-homeopathica,Platinum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+plucalopride,Plucalopride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+plumbum-metallicum-dilutio-homeopathica,Plumbum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+podophyllum-peltatum-dilutio-homeopathica,Podophyllum Peltatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+pollen-allergens,Pollen Allergens,,cz_botanical_ambiguous,low,生药词 'POLLEN' 命中，但名称是变应原提取物写法（'Allergen'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,4,4,1,CZ,0,sukl_dlp
+pollens-dilutio-homeopathica,Pollens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+poly-vinyl-alcohol,Poly Vinyl Alcohol,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,2,2,1,CZ,0,sukl_dlp
+polygala-senega-syrup,Polygala Senega Syrup,,cz_excipient_ambiguous,low,辅料词 'SYRUP' 命中，但名称是剂型词 Syrup（'Syrup'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,2,2,1,CZ,0,sukl_dlp
+populus-candicans-6-c,Populus Candicans 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+porcine-lung-phospholipids,Porcine Lung Phospholipids,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+porcine-transfer-factor,Porcine Transfer Factor,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+potasium-azilsartan-medoxomil,Potasium Azilsartan Medoxomil,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,30,30,1,CZ,0,sukl_dlp
+potassium-clavulanate-and-colloidal-silicone-dioxide,Potassium Clavulanate And Colloidal Silicone Dioxide,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,CZ,0,sukl_dlp
+potassium-clavulanate-and-microcristalline-cellulose,Potassium Clavulanate And Microcristalline Cellulose,,cz_excipient_ambiguous,low,辅料词 'CELLULOSE' 命中，但名称是复方/共处理连接词（'And'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,47,47,1,CZ,0,sukl_dlp
+potassium-dl-hydrogenaspartate-hemihydrate,Potassium Dl Hydrogenaspartate Hemihydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+potassium-hydrogen-aspartate-hemihydrate,Potassium Hydrogen Aspartate Hemihydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+poumon-histamine-dilutio-homeopathica,Poumon Histamine Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+povidone-iodinated,Povidone Iodinated,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,55,55,1,CZ,0,sukl_dlp
+povidone-k-30,Povidone K 30,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+powdered-valerian-root,Powdered Valerian Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,1,1,1,CZ,0,sukl_dlp
+prajmalium-bitartrate,Prajmalium Bitartrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+primrose-flower,Primrose Flower,herbal,cz_botanical,medium,名称含植物部位/提取物词 'FLOWER',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+propyl-parahydroxybenzoate,Propyl Parahydroxybenzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,"CZ,LV",0,sukl_dlp
+protamine-insulin-aspart-crystalline,Protamine Insulin Aspart Crystalline,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,13,13,1,CZ,0,sukl_dlp
+proteins,Proteins,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,CZ,0,sukl_dlp
+prothrombin,Prothrombin,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,"CZ,LV",0,sukl_dlp
+pulsatilla-6-c,Pulsatilla 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+pulsatilla-pratensis-3-c,Pulsatilla Pratensis 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+pulsatilla-pratensis-3-d,Pulsatilla Pratensis 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+pulsatilla-pratensis-4-d,Pulsatilla Pratensis 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+pulsatilla-pratensis-c-99,Pulsatilla Pratensis C 99,,cz_botanical_ambiguous,low,生药词 'PULSATILLA' 命中，但名称是顺势度标写法（字母在数字前）（'C 99'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,8,8,1,CZ,0,sukl_dlp
+pulsatilla-pratensis-dilutio-homeopathica,Pulsatilla Pratensis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+pulsatilla-pratensis-tinctura-basica-ad-usum-homeopathicum,Pulsatilla Pratensis Tinctura Basica Ad Usum Homeopathicum,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'HOMEOPATH',顺势/稀释写法·Dilutio 字样,,0,0,1,,0,sukl_dlp
+purified-vi-capsular-polysaccharide-salmonella-typhi,Purified Vi Capsular Polysaccharide Salmonella Typhi,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'POLYSACCHARIDE',疫苗株/生物抗原,,2,2,1,CZ,0,sukl_dlp
+pyrogenium-dilutio-homeopathica,Pyrogenium Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+quaternium-15,Quaternium 15,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+rabbit-thymocyte-immunoglobulin,Rabbit Thymocyte Immunoglobulin,,cz_inn_shape_unconfirmed,low,INN 词尾 'LIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+radium-223ra-dichloride,Radium 223Ra Dichloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+resina-piceae-4-c,Resina Piceae 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+restharrow-root,Restharrow Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,9,9,1,CZ,0,sukl_dlp
+rhenium-186re-sulfide-colloidal,Rhenium 186Re Sulfide Colloidal,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+rheum-5-c,Rheum 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+rhododendron-dilutio-homeopathica,Rhododendron Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+rhus-toxicodendron-15-c,Rhus Toxicodendron 15 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '15 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+rhus-toxicodendron-dilutio-homeopathica,Rhus Toxicodendron Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+ribwort-plantain,Ribwort Plantain,herbal,cz_botanical,medium,名称含植物部位/提取物词 'PLANT',生药/植物（含提取物）,,18,18,1,CZ,0,sukl_dlp
+ricinus-communis-dilutio-homeopathica,Ricinus Communis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,7,7,1,CZ,0,sukl_dlp
+rifampicin,Rifampicin,,cz_inn_shape_unconfirmed,low,INN 词尾 'CIN'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,6,6,1,"CZ,LV",0,sukl_dlp
+robinia-pseudo-acacia-4-c,Robinia Pseudo Acacia 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+robinia-pseudo-acacia-dilutio-homeopathica,Robinia Pseudo Acacia Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+rosemary-leaf,Rosemary Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,6,6,1,CZ,0,sukl_dlp
+rrr-alfa-tocopherol,Rrr Alfa Tocopherol,,cz_inn_shape_unconfirmed,low,INN 词尾 'OL'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+rumex-crispus-6-c,Rumex Crispus 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+rumex-crispus-dilutio-homeopathica,Rumex Crispus Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+rupture-wort-herb,Rupture Wort Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+ruta-graveolens-dilutio-homeopathica,Ruta Graveolens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+ruxolitinib-hemifumarate,Ruxolitinib Hemifumarate,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Ruxolitinib；尾词 'hemifumarate' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,12,12,1,CZ,0,sukl_dlp
+s-lactic-acid,S Lactic Acid,,cz_inn_shape_unconfirmed,low,INN 词尾 'ACID'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+sabadilla-3-c,Sabadilla 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,5,5,1,CZ,0,sukl_dlp
+sabadilla-5-c,Sabadilla 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+sabadilla-dilutio-homeopathica,Sabadilla Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+sacubitril-valsartan-sodium-salt-complex,Sacubitril Valsartan Sodium Salt Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,43,43,1,CZ,0,sukl_dlp
+sacubitril-valsartan-trisodium-salt-complex,Sacubitril Valsartan Trisodium Salt Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,37,37,1,CZ,0,sukl_dlp
+sage-herb-salvia-officinalis,Sage Herb Salvia Officinalis,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+sage-leaf-salvia-officinalis,Sage Leaf Salvia Officinalis,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+samarium-153sm-lexidronam-pentasodium,Samarium 153Sm Lexidronam Pentasodium,,cz_inn_shape_unconfirmed,low,INN 词尾 'IUM'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+sambucus-nigra-dilutio-homeopathica,Sambucus Nigra Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+sanguinaria-canadensis-dilutio-homeopathica,Sanguinaria Canadensis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+sanguisorba-root,Sanguisorba Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,5,5,1,CZ,0,sukl_dlp
+sapropterine-dihydrochloride,Sapropterine Dihydrochloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,11,11,1,CZ,0,sukl_dlp
+sars-cov-2-omicron-jn-1-spike-protein,Sars Cov 2 Omicron Jn 1 Spike Protein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+sars-cov-2-omicron-xbb-1-5-spike-protein-nvx-cov2601,Sars Cov 2 Omicron Xbb 1 5 Spike Protein Nvx Cov2601,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+sars-cov-2-omicron-xfg-spike-protein,Sars Cov 2 Omicron Xfg Spike Protein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,CZ,0,sukl_dlp
+sars-cov-2-spike-protein-nvx-cov2373,Sars Cov 2 Spike Protein Nvx Cov2373,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+sarsaparilla-6-d,Sarsaparilla 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+sarsaparilla-dilutio-homeopathica,Sarsaparilla Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+saxagliptine,Saxagliptine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,66,66,1,"CZ,LV",0,sukl_dlp
+scrophularia-nodosa-3-d,Scrophularia Nodosa 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+secale-cornutum-dilutio-homeopathica,Secale Cornutum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+selenium-metallicum-dilutio-homeopathica,Selenium Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+selvacovatein,Selvacovatein,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+senna-dilutio-homeopathica,Senna Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+sepia-officinalis-dilutio-homeopathica,Sepia Officinalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+serenoa-repens-dilutio-homeopathica,Serenoa Repens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+silibinin-disodium-disuccinate,Silibinin Disodium Disuccinate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+silicii-dioxidum-12-d,Silicii Dioxidum 12 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+silicii-dioxidum-dilutio-homeopathica,Silicii Dioxidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,6,6,1,CZ,0,sukl_dlp
+siponimod-fumaric-acid,Siponimod Fumaric Acid,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Siponimod；尾词 'fumaric acid' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,8,8,1,CZ,0,sukl_dlp
+sitagliptin-malate,Sitagliptin Malate,inn_drug,cz_who_inn_salt_form,medium,WHO INN 母体命中：Sitagliptin；尾词 'malate' 为盐/酯/水合物尾词,疑似 INN·WHO 母体+盐酯尾词复核确认,确认（母体 INN 在 WHO + 盐/酯尾词）,62,62,1,CZ,0,sukl_dlp
+sodium-alendronate,Sodium Alendronate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,59,59,1,"CZ,LV",0,sukl_dlp
+sodium-aurotiosulfate,Sodium Aurotiosulfate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+sodium-fluoride-18f,Sodium Fluoride 18F,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,59,59,1,CZ,0,sukl_dlp
+sodium-glucosamine-sulfate-complex,Sodium Glucosamine Sulfate Complex,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,11,11,1,CZ,0,sukl_dlp
+sodium-glycerophosphate-pentahydrate,Sodium Glycerophosphate Pentahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,6,6,1,CZ,0,sukl_dlp
+sodium-iodide-123i,Sodium Iodide 123I,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,CZ,0,sukl_dlp
+sodium-iodide-131i,Sodium Iodide 131I,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,23,23,1,CZ,0,sukl_dlp
+sodium-metabisulfite,Sodium Metabisulfite,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+sodium-molybdate,Sodium Molybdate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+sodium-pertechnetate-99m-tc,Sodium Pertechnetate 99M Tc,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,30,30,1,CZ,0,sukl_dlp
+sodium-s-lactate,Sodium S Lactate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,74,74,1,CZ,0,sukl_dlp
+sodium-selenate,Sodium Selenate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+sodium-selenite-pentahydrate,Sodium Selenite Pentahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+solanum-dulcamara-4-d,Solanum Dulcamara 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,6,6,1,CZ,0,sukl_dlp
+solanum-dulcamara-99-c,Solanum Dulcamara 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+solanum-dulcamara-dilutio-homeopathica,Solanum Dulcamara Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+solidago-virga-auerea-5-c,Solidago Virga Auerea 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+solidago-virga-aurea-3-d,Solidago Virga Aurea 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+solidago-virga-aurea-dilutio-homeopathica,Solidago Virga Aurea Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+sorrel-herb,Sorrel Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+soya-bean-phospholipids-defatted,Soya Bean Phospholipids Defatted,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,7,7,1,CZ,0,sukl_dlp
+spheroids-of-human-autologous-matrix-associated-chondrocytes,Spheroids Of Human Autologous Matrix Associated Chondrocytes,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,4,4,1,"CZ,LV",0,sukl_dlp
+spigelia-anthelmia-dilutio-homeopathica,Spigelia Anthelmia Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+stibii-trisulfidum-dilutio-homeopathica,Stibii Trisulfidum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+sticta-pulmonaria-3-c,Sticta Pulmonaria 3 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 C',顺势/稀释写法·数字稀释度,,4,4,1,CZ,0,sukl_dlp
+sticta-pulmonaria-dilutio-homeopathica,Sticta Pulmonaria Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-polysaccharide-from-de-o-acetylated-ser,Streptococcus Pneumoniae Polysaccharide From De O Acetylated Serotype 15B,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-1-polysaccharide,Streptococcus Pneumoniae Serotype 1 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-10a-polysaccharide,Streptococcus Pneumoniae Serotype 10A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,18,18,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-11a-polysaccharide,Streptococcus Pneumoniae Serotype 11A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,18,18,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-12f-polysaccharide,Streptococcus Pneumoniae Serotype 12F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,18,18,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-14-polysaccharide,Streptococcus Pneumoniae Serotype 14 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-15a-polysaccharide,Streptococcus Pneumoniae Serotype 15A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-15b-polysaccharide,Streptococcus Pneumoniae Serotype 15B Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,12,12,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-16f-polysaccharide,Streptococcus Pneumoniae Serotype 16F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-17f-polysaccharide,Streptococcus Pneumoniae Serotype 17F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,12,12,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-18c-polysaccharide,Streptococcus Pneumoniae Serotype 18C Polysaccharide,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '18C',顺势/稀释写法·数字稀释度,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-19a-polysaccharide,Streptococcus Pneumoniae Serotype 19A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,41,41,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-19f-polysaccharide,Streptococcus Pneumoniae Serotype 19F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-2-polysaccharide,Streptococcus Pneumoniae Serotype 2 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-20-polysaccharide,Streptococcus Pneumoniae Serotype 20 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-20a-polysaccharide,Streptococcus Pneumoniae Serotype 20A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-22f-polysaccharide,Streptococcus Pneumoniae Serotype 22F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,25,25,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-23a-polysaccharide,Streptococcus Pneumoniae Serotype 23A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-23b-polysaccharide,Streptococcus Pneumoniae Serotype 23B Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-23f-polysaccharide,Streptococcus Pneumoniae Serotype 23F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-24f-polysaccharide,Streptococcus Pneumoniae Serotype 24F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-3-polysaccharide,Streptococcus Pneumoniae Serotype 3 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,41,41,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-31-polysaccharide,Streptococcus Pneumoniae Serotype 31 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-33f-polysaccharide,Streptococcus Pneumoniae Serotype 33F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,25,25,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-35b-polysaccharide,Streptococcus Pneumoniae Serotype 35B Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,6,6,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-4-polysaccharide,Streptococcus Pneumoniae Serotype 4 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-5-polysaccharide,Streptococcus Pneumoniae Serotype 5 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-6a-polysaccharide,Streptococcus Pneumoniae Serotype 6A Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,35,35,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-6b-polysaccharide,Streptococcus Pneumoniae Serotype 6B Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-7f-polysaccharide,Streptococcus Pneumoniae Serotype 7F Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,53,53,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-8-polysaccharide,Streptococcus Pneumoniae Serotype 8 Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,18,18,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-9n-polysaccharide,Streptococcus Pneumoniae Serotype 9N Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,12,12,1,CZ,0,sukl_dlp
+streptococcus-pneumoniae-serotype-9v-polysaccharide,Streptococcus Pneumoniae Serotype 9V Polysaccharide,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'SEROTYPE',疫苗株/生物抗原,,47,47,1,CZ,0,sukl_dlp
+strychnos-ignatii-6-d,Strychnos Ignatii 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,3,3,1,CZ,0,sukl_dlp
+strychnos-ignatii-dilutio-homeopathica,Strychnos Ignatii Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+strychnos-nux-vomica-4-c,Strychnos Nux Vomica 4 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+strychnos-nux-vomica-dilutio-homeopathica,Strychnos Nux Vomica Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+sulfasalazine-with-povidone,Sulfasalazine With Povidone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+sulfur-10-d,Sulfur 10 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '10 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+sulfur-4-d,Sulfur 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+sulfur-5-c,Sulfur 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+sulfur-dilutio-homeopathica,Sulfur Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+sulfur-iodatum-dilutio-homeopathica,Sulfur Iodatum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,3,3,1,CZ,0,sukl_dlp
+sulodexide,Sulodexide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+sweet-orange-tincture,Sweet Orange Tincture,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,0,0,1,,0,sukl_dlp
+symphytum-officinale-4-d,Symphytum Officinale 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+symphytum-officinale-8-d,Symphytum Officinale 8 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '8 D',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+symphytum-officinale-dilutio-homeopathica,Symphytum Officinale Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+syzygium-jambos-dilutio-homeopathica,Syzygium Jambos Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,4,4,1,CZ,0,sukl_dlp
+taraxacum-officinale-dilutio-homeopathica,Taraxacum Officinale Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+tarentula-hispana-dilutio-homeopathica,Tarentula Hispana Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+tauroselcholic-acid,Tauroselcholic Acid,,cz_inn_shape_unconfirmed,low,INN 词尾 'ACID'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+tauroselcholic-acid-75se,Tauroselcholic Acid 75Se,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+tegomil,Tegomil,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,10,10,1,"CZ,LV",0,sukl_dlp
+tenofovir-alafenamide-monofumarate,Tenofovir Alafenamide Monofumarate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 母体 Tenofovir 命中但尾词不合盐/酯规则（非盐/酯尾词：alafenamide）,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+tetramethylthiuram-monosulfide,Tetramethylthiuram Monosulfide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+teucrium-marum-dilutio-homeopathica,Teucrium Marum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+teucrium-scorodonia-3-d,Teucrium Scorodonia 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+thallosi-acetas-dilutio-homeopathica,Thallosi Acetas Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+thallous-201tl-chloride,Thallous 201Tl Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+thiethylperazine-dimaleate,Thiethylperazine Dimaleate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+thiethylperazine-malate,Thiethylperazine Malate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+thioctate-meglumine,Thioctate Meglumine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+thiomersal,Thiomersal,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+thiopental-sodium-and-sodium-carbonate,Thiopental Sodium And Sodium Carbonate,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,24,24,1,CZ,0,sukl_dlp
+thiram,Thiram,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+thuja-occidentalis-99-c,Thuja Occidentalis 99 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '99 C',顺势/稀释写法·数字稀释度,,8,8,1,CZ,0,sukl_dlp
+thuja-occidentalis-dilutio-homeopathica,Thuja Occidentalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,8,8,1,CZ,0,sukl_dlp
+tianeptine,Tianeptine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,"CZ,LV",0,sukl_dlp
+tiapride,Tiapride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,22,22,1,CZ,0,sukl_dlp
+tofisopam,Tofisopam,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,3,3,1,"CZ,LV",0,sukl_dlp
+tolperisone,Tolperisone,,cz_inn_shape_unconfirmed,low,INN 词尾 'ONE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,"CZ,LV",0,sukl_dlp
+tolu-balsam-syrup,Tolu Balsam Syrup,,cz_excipient_ambiguous,low,辅料词 'SYRUP' 命中，但名称是剂型词 Syrup（'Syrup'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,2,2,1,CZ,0,sukl_dlp
+tormentil,Tormentil,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,5,5,1,CZ,0,sukl_dlp
+tree-pollen-allergens,Tree Pollen Allergens,,cz_botanical_ambiguous,low,生药词 'POLLEN' 命中，但名称是变应原提取物写法（'Allergen'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,6,8,1,CZ,0,sukl_dlp
+tribenoside,Tribenoside,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,11,11,1,"CZ,LV",0,sukl_dlp
+trimecaine,Trimecaine,inn_drug,cz_who_inn_exact,high,WHO INN 名录命中：Trimecaine（TRIMECAINE；列表见 data/who_inn_names.csv）,真实 INN（WHO 名录命中）,,17,17,1,CZ,0,sukl_dlp
+trometamol-thioctate,Trometamol Thioctate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+tuberculin-purified-protein-derivative-for-human-use,Tuberculin Purified Protein Derivative For Human Use,,cz_excipient_ambiguous,low,辅料词 'PURIFIED' 命中，但名称是诊断用蛋白衍生物（'Purified Protein Derivative'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,1,1,1,CZ,0,sukl_dlp
+unsaturated-fatty-acids-c18-2-fatty-acids,Unsaturated Fatty Acids C18 2 Fatty Acids,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,8,8,1,CZ,0,sukl_dlp
+urtica-urens-dilutio-homeopathica,Urtica Urens Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+valerian-root,Valerian Root,herbal,cz_botanical,medium,名称含植物部位/提取物词 'ROOT',生药/植物（含提取物）,,9,9,1,CZ,0,sukl_dlp
+valeriana-officinalis-dilutio-homeopathica,Valeriana Officinalis Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+vemurafenib-and-hypromellose,Vemurafenib And Hypromellose,,cz_inn_shape_unconfirmed,low,INN 词尾 'OSE'；WHO 母体 Vemurafenib 命中但尾词不合盐/酯规则（复方/共处理词：and）,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+venice-turpentine,Venice Turpentine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+veratrum-album-dilutio-homeopathica,Veratrum Album Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+verbena-herb,Verbena Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,10,10,1,CZ,0,sukl_dlp
+veronica-officinalis-3-d,Veronica Officinalis 3 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+vibrio-cholerae-o1-inaba-cvd-103-hgr-live-attenuated,Vibrio Cholerae O1 Inaba Cvd 103 Hgr Live Attenuated,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+vibrio-cholerae-o1-inaba-formalin-inactivated,Vibrio Cholerae O1 Inaba Formalin Inactivated,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'INACTIVATED',疫苗株/生物抗原,,3,3,1,CZ,0,sukl_dlp
+vibrio-cholerae-o1-inaba-heat-inactivated,Vibrio Cholerae O1 Inaba Heat Inactivated,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'INACTIVATED',疫苗株/生物抗原,,3,3,1,CZ,0,sukl_dlp
+vibrio-cholerae-o1-ogawa-formalin-inactivated,Vibrio Cholerae O1 Ogawa Formalin Inactivated,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'INACTIVATED',疫苗株/生物抗原,,3,3,1,CZ,0,sukl_dlp
+vibrio-cholerae-o1-ogawa-heat-inactivated,Vibrio Cholerae O1 Ogawa Heat Inactivated,biologic,cz_vaccine_antigen,high,名称含疫苗/抗原词 'INACTIVATED',疫苗株/生物抗原,,3,3,1,CZ,0,sukl_dlp
+viburnum-opulus-6-c,Viburnum Opulus 6 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+vincetoxicum-hirundinaria-10-d,Vincetoxicum Hirundinaria 10 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '10 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+vincetoxicum-hirundinaria-30-d,Vincetoxicum Hirundinaria 30 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '30 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+vincetoxicum-hirundinaria-5-c,Vincetoxicum Hirundinaria 5 C,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5 C',顺势/稀释写法·数字稀释度,,1,1,1,CZ,0,sukl_dlp
+vincetoxicum-hirundinaria-6-d,Vincetoxicum Hirundinaria 6 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+vinflunine-ditartrate,Vinflunine Ditartrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,12,12,1,CZ,0,sukl_dlp
+vinorelbine-ditartrate,Vinorelbine Ditartrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,38,38,1,CZ,0,sukl_dlp
+viola-tricolor-dilutio-homeopathica,Viola Tricolor Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+vipera-redi-dilutio-homeopathica,Vipera Redi Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+viscum-album-dilutio-homeopathica,Viscum Album Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
+vorasidenib-hemicitrate-hemihydrate,Vorasidenib Hemicitrate Hemihydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+vortioxetine-hydrobromide-2-butanol-solvate,Vortioxetine Hydrobromide 2 Butanol Solvate,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,12,12,1,CZ,0,sukl_dlp
+vortioxetine-hydrobromide-benzyl-alcohol-hemi-solvate,Vortioxetine Hydrobromide Benzyl Alcohol Hemi Solvate,,cz_excipient_ambiguous,low,辅料词 'ALCOHOL' 命中，但名称是溶剂化物/包合物写法（'Solvate'），不是辅料本体：留空待人工,辅料/溶剂·词表误命中（留空待人工）,,16,16,1,CZ,0,sukl_dlp
+walnut-leaf,Walnut Leaf,herbal,cz_botanical,medium,名称含植物部位/提取物词 'LEAF',生药/植物（含提取物）,,2,2,1,CZ,0,sukl_dlp
+warfarin-sodium-clathrate,Warfarin Sodium Clathrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,8,8,1,CZ,0,sukl_dlp
+weed-pollen-allergens,Weed Pollen Allergens,,cz_botanical_ambiguous,low,生药词 'POLLEN' 命中，但名称是变应原提取物写法（'Allergen'），不是植物类别：留空待人工,生药/植物·词表误命中（留空待人工）,,4,4,1,CZ,0,sukl_dlp
+white-horehound,White Horehound,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,9,9,1,CZ,0,sukl_dlp
+willow-herb,Willow Herb,herbal,cz_botanical,medium,名称含植物部位/提取物词 'HERB',生药/植物（含提取物）,,4,4,1,CZ,0,sukl_dlp
+wool-alcohols,Wool Alcohols,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,辅料/溶剂/化学品,,1,1,1,CZ,0,sukl_dlp
+yarrow,Yarrow,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,15,15,1,CZ,0,sukl_dlp
+yttrium-90y,Yttrium 90Y,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,19,19,1,CZ,0,sukl_dlp
+yttrium-90y-chloride,Yttrium 90Y Chloride,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 母体 Yttrium ( 命中但尾词不合盐/酯规则（非盐/酯尾词：90y）,疑似 INN·词形规则（WHO 未确认）,未确认,2,2,1,CZ,0,sukl_dlp
+zapomeran,Zapomeran,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,2,2,1,"CZ,LV",0,sukl_dlp
+zikonotide,Zikonotide,,cz_inn_shape_unconfirmed,low,INN 词尾 'IDE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,4,4,1,CZ,0,sukl_dlp
+zinc-dibutyldithiocarbamate,Zinc Dibutyldithiocarbamate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+zinc-ditiocarb,Zinc Ditiocarb,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,判不了（规则未命中）,,1,1,1,CZ,0,sukl_dlp
+zinc-orotate,Zinc Orotate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,3,3,1,CZ,0,sukl_dlp
+zinc-trisodium-pentetate,Zinc Trisodium Pentetate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,疑似 INN·词形规则（WHO 未确认）,未确认,1,1,1,CZ,0,sukl_dlp
+zinci-isovaleras-4-d,Zinci Isovaleras 4 D,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',顺势/稀释写法·数字稀释度,,2,2,1,CZ,0,sukl_dlp
+zincum-metallicum-dilutio-homeopathica,Zincum Metallicum Dilutio Homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',顺势/稀释写法·Dilutio 字样,,2,2,1,CZ,0,sukl_dlp
