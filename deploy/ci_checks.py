@@ -12,7 +12,8 @@
                     unittest:lib-atc-category（快照同步那组，0.01 s）·
                     dist-integrity(抽样) · workflow
     全量（≤4 min）  fast 的全部（dist 全扫 0 字节）+ unittest:lib-atc-category 整模块（重，47 s）·
-                    trilingual（8 线程）· check_data · ui-surface ∥ first-screen ∥ ui-sort（并行）
+                    trilingual（8 线程）· check_data · first-screen（**独占机器**，Q11）·
+                    ui-surface ∥ ui-sort（并行，两套 Chrome 互不抢读数）
 
     被挪出 fast 的项仍然出现在输出里（记 SKIP），只是不在 fast 真跑；判定逻辑完全不变。
 
@@ -496,6 +497,12 @@ def check_first_screen(verbose: bool) -> None:
         pass
     detail = (f"报告模式（不阻塞）：{scans} 次扫描，{fail_scans} 组未达标、{fail_items} 项；"
               f"最差 {worst}（明细 {_rel(FIRST_SCREEN_JSON)}）")
+    unstable = re.search(r"不稳定 (\d+) 组", out)
+    if unstable and int(unstable.group(1)):
+        detail += f"；**不稳定 {unstable.group(1)} 组**（Q11：没取到稳定值，不参与判定，需复跑）"
+    suspect = re.search(r"疑似 (\d+) 组", out)
+    if suspect and int(suspect.group(1)):
+        detail += f"；疑似 {suspect.group(1)} 组（选择器命中但首屏没落下，需人工复核）"
     record("PASS", "first-screen", detail)
     if verbose:
         print("  first-screen:", detail)
@@ -623,9 +630,12 @@ def main(argv: list[str] | None = None) -> int:
         check_trilingual(args.verbose, jobs=max(1, args.jobs))
         check_database()
         check_dist(args.verbose, fast=False)
+        # Q11（task-7）：first-screen **先独占机器跑**。三套 Chrome 并行时它会量到中间态
+        # （drug@1440 条目 4.5→0、atc@2560 48.5→13；同一份产物连跑两次也会差 6 项），
+        # 所以它不跟另外两个 Chrome 检查并行；ui-surface / ui-sort 的判定不依赖时序，仍并行。
+        check_first_screen(args.verbose)
         _run_parallel([("i18n", lambda: check_i18n(args.verbose)),
                        ("ui-surface", lambda: check_ui_surface(args.verbose)),
-                       ("first-screen", lambda: check_first_screen(args.verbose)),
                        ("ui-sort", lambda: check_ui_sort(args.verbose))])
         check_workflow()
 

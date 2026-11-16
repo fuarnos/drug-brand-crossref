@@ -31,7 +31,24 @@
     python deploy/first_screen_check.py --baseline .tmp/first-screen/before.json   # 退化 >5% 也 FAIL
     python deploy/first_screen_check.py --scroll-probe       # 额外量「滚到中部」时的悬浮条状态
 
-退出码：0 = 全过（含 SKIP）；1 = 有 FAIL（含 baseline 退化）。
+读数稳定化（Q11，2026-11-18）
+----------------------------
+事故：同一份产物连跑两次差 6 项；全量 CI 里三套 Chrome 并行时宽视口条目数回落
+（drug@1440 4.5→0、atc@2560 48.5→13、coverage@2560 15→3.5）。根因是**只量一帧**：
+那一帧可能还没被 JS 调整完（app.js 在 window.load 之后才插入，initMkBlocks / render() 在那之后改 DOM），
+也没排完版（CPU 被别的 Chrome 抢走时更明显）。现在每个「页面 × 视口」：
+    ① 量之前先静下来：禁动画/过渡/平滑滚动 → 滚回顶部 → 等字体 → 等 DOM 静默 → 双 rAF；
+    ② 连量多轮，**连续 `--stable-rounds`（默认 2）轮签名完全一致**才算稳；
+    ③ 不稳继续量，最多 `--max-rounds`（默认 5）轮；到顶仍不一致 → 该组记 `unstable`，
+       各指标取**中位数**（绝不记 0），本轮**不参与判定**（只记一条 WARN）；
+    ④ `items=0` 但选择器命中 >0 条 → 记 `suspect`（疑似量到中间态），items 只 WARN 不判红；
+       选择器一条都没命中（`available=0`）仍按原规则判红 —— 坏产物不会被放过。
+JSON 里新增（旧字段一个没改）：`stability_config`、`overrides`、
+`pages[].unstable / suspect / stability{rounds,signatures,samples,settle_ms,...}`、
+`pages[].vh / scroll_y`、`summary.unstable_scans / unstable_list / suspect_scans / suspect_list / ok_gate`。
+
+退出码：0 = 全过（含 SKIP / unstable）；1 = 有 FAIL（含 baseline 退化）。unstable 不算 FAIL，
+但在 `--gate` 下会单独打一行 WARN，提醒「这几组没量稳、门禁结论只基于稳定组」。
 SKIP 的两种情况（都返回 0，只在输出里写明）：找不到本机 Chrome、产物目录不存在。
 
 只读：被服务的文件一律只读打开，Chrome 用户目录放系统临时目录。
@@ -75,6 +92,46 @@ EXPAND_JS = r"""(function(){
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DIST = ROOT / "site" / "dist"
 
+# 稳定化前置：量之前先让页面「静下来」。四件事，缺一件读数就可能抖：
+#   ① 关掉动画/过渡/平滑滚动（骨架屏淡出、hover 过渡会让相邻两帧不同）；
+#   ② 滚回顶部（clip() 用的是视口坐标，带着滚动量会把首屏算歪）；
+#   ③ 等字体（有 webfont 时换字会改行高）；
+#   ④ 等 DOM 静默 + 双 rAF（app.js 在 window.load 之后才插入，initMkBlocks / render() 都在那之后改 DOM）。
+SETTLE_JS = r"""(async function(){
+  var QUIET = %(quiet)d, TMO = %(timeout)d;
+  try{
+    if(!document.getElementById('__fs_quiet')){
+      var st = document.createElement('style');
+      st.id = '__fs_quiet';
+      st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important}' +
+                       'html{scroll-behavior:auto!important}';
+      (document.head || document.documentElement).appendChild(st);
+    }
+  }catch(e){}
+  try{ window.scrollTo(0, 0); }catch(e){}
+  var fonts = false;
+  try{
+    if(document.fonts && document.fonts.ready){ await document.fonts.ready; fonts = true; }
+  }catch(e){}
+  var mutations = 0, last = Date.now(), t0 = Date.now(), ob = null;
+  try{
+    ob = new MutationObserver(function(recs){ mutations += recs.length; last = Date.now(); });
+    ob.observe(document.documentElement,
+               {childList:true, subtree:true, attributes:true, characterData:true});
+  }catch(e){}
+  while(Date.now() - last < QUIET && Date.now() - t0 < TMO){
+    await new Promise(function(r){ setTimeout(r, 30); });
+  }
+  if(ob){ try{ ob.disconnect(); }catch(e){} }
+  await new Promise(function(r){
+    (window.requestAnimationFrame || setTimeout)(function(){
+      (window.requestAnimationFrame || setTimeout)(r, 0);
+    }, 0);
+  });
+  return JSON.stringify({mutations:mutations, waited_ms:Date.now()-t0, fonts:fonts,
+                         scroll_y:Math.round(window.scrollY || 0)});
+})()"""
+
 # ── 视口 ────────────────────────────────────────────────────────────────────
 # 手机（iPhone 12/13 逻辑像素）、平板、笔记本、2K 桌面：四档各覆盖一套 CSS 断点。
 VIEWPORTS: list[tuple[int, int, str]] = [
@@ -111,6 +168,20 @@ GLOBAL_THRESHOLDS = {
 # v0.10.1/v0.10.2 的基线是 v1 口径（分母 = 视口），**不可跨版本直接比**；
 # compare_baseline 遇到口径不同会跳过 AFCR/band_ratio 并出一条说明。
 METRIC_VERSION = "afcr-band-v2"
+
+# ── Q11（2026-11-18）：读数稳定化 ────────────────────────────────────────────
+# 事故（Lead / atc4-ui 三次独立复现）：同一份产物连跑两次差 6 项；全量 CI 里三套 Chrome
+# 并行时宽视口条目数回落（drug@1440 4.5→0、atc@2560 48.5→13、coverage@2560 15→3.5）。
+# 根因：每个「页面 × 视口」只在 load 事件后量**一帧**，而这一帧可能还没被 JS 调整完
+# （app.js 是 window.load 之后才动态插入的：initMkBlocks 只展开第一个市场块、render() 会整块重绘），
+# 也可能还没排完版（CPU 被别的 Chrome 抢走时更明显）→ 量到的是中间态。
+# 做法：每轮先「静一静」（禁动画/滚回顶部/等字体/DOM 静默/双 rAF），再量；
+# 连续 STABLE_ROUNDS 轮完全一致才算稳；不稳就继续量，最多 MAX_ROUNDS 轮；
+# 仍不一致 → 记 `unstable`（各指标取中位数），不参与判定，也**不记 0**。
+STABLE_ROUNDS = 2          # 需要连续几轮一致（含第一轮，即「两轮读数相同」）
+MAX_ROUNDS = 5             # 最多量几轮；到顶仍不一致 → unstable
+SETTLE_QUIET_MS = 220      # DOM 静默窗口：这段时间没有 mutation 才算静
+SETTLE_TIMEOUT_MS = 2500   # 「等 DOM 静默」的上限，超时也照量（但大概率会被判 unstable）
 
 # 页面清单。primary = (标签, 选择器, 必须完整可见, 上缘上限占视口比 or None)
 PAGES: list[dict] = [
@@ -422,6 +493,12 @@ MEASURE_JS = r"""(function(){
   var overlays = [], overlayRects = [];
   for(var o=0;o<all.length;o++){
     var el = all[o];
+    // Q11 提速：先看几何（便宜），只有「真的落在首屏里」的元素才去取 computedStyle。
+    // 语义不变：不在首屏的元素本来就 continue 掉了，只是把昂贵的 getComputedStyle 挪到过滤之后。
+    var ob = el.getBoundingClientRect();
+    if(ob.width < 8 || ob.height < 8) continue;
+    var oc = clip({x:ob.left,y:ob.top,w:ob.width,h:ob.height});
+    if(!oc) continue;
     var cs = getComputedStyle(el);
     var pos = cs.position;
     if(pos!=='sticky' && pos!=='fixed') continue;
@@ -429,10 +506,6 @@ MEASURE_JS = r"""(function(){
     // 它们压住的是同一行的其他单元格，不参与悬浮占比与遮挡判定。
     if(pos==='sticky' && cs.top==='auto' && cs.left!=='auto') continue;
     if(hidden(el, cs)) continue;
-    var ob = el.getBoundingClientRect();
-    if(ob.width < 8 || ob.height < 8) continue;
-    var oc = clip({x:ob.left,y:ob.top,w:ob.width,h:ob.height});
-    if(!oc) continue;
     overlays.push({el:el, rect:oc, pos:pos, sel:sel(el), z:cs.zIndex,
                    w:Math.round(ob.width), h:Math.round(ob.height)});
   }
@@ -496,11 +569,13 @@ MEASURE_JS = r"""(function(){
     // 带文字就算（含包在 <span>/<b> 里的文字：<h1><span>名</span></h1> 这种很常见，
     // 只认直系文本节点会漏掉整块正文）。内联子元素本身不参与最小值，不会重复计数。
     if(!(el.textContent||'').trim().length) continue;
-    var cs = getComputedStyle(el);
-    if(hidden(el, cs)) continue;
+    // Q11 提速：先判几何 + 是否在首屏（便宜），再取 computedStyle（昂贵）。
+    // 语义不变：原代码也是「只算首屏可见」，只是把 getComputedStyle 挪到视口过滤之后。
     var b = el.getBoundingClientRect();
     if(b.width<2 || b.height<2) continue;
     if(b.bottom<0 || b.top>vh || b.right<0 || b.left>vw) continue;   // 只算首屏可见
+    var cs = getComputedStyle(el);
+    if(hidden(el, cs)) continue;
     var fs = parseFloat(cs.fontSize);
     if(!fs || isNaN(fs)) continue;
     F.nodes++;
@@ -742,8 +817,103 @@ def _wait_document(cdp: CDP, timeout: float = 20.0) -> str:
     return state
 
 
+def _wait_settle(cdp: CDP, quiet_ms: int = SETTLE_QUIET_MS,
+                 timeout_ms: int = SETTLE_TIMEOUT_MS) -> dict:
+    """让页面静下来（禁动画 / 回顶 / 等字体 / 等 DOM 静默 / 双 rAF），返回 {mutations, waited_ms}。"""
+    js = SETTLE_JS % {"quiet": quiet_ms, "timeout": timeout_ms}
+    try:
+        raw = _eval_js(cdp, js, await_promise=True, timeout=timeout_ms / 1000 + 30)
+        return json.loads(raw) if raw else {}
+    except Exception as exc:  # noqa: BLE001 —— 静默失败不该让整轮挂掉，继续量（会被判 unstable）
+        return {"error": str(exc)[:160]}
+
+
+# 判定「读数稳没稳」用的签名：只含参与判定的指标 + 两个结构量。
+# 数值先四舍五入（afcr/chrome 到 0.001，doc_h 到 2px），避免 1px 抖动造成假不稳定。
+SIG_METRICS = ("afcr", "band_ratio", "chrome_ratio", "overlay_ratio", "items", "overflow")
+SIG_FONTS = ("body_min", "aux_min", "hard_min")
+
+
+def _sig(data: dict) -> tuple:
+    m = data.get("metrics") or {}
+    f = data.get("fonts") or {}
+    it = data.get("items_detail") or {}
+    out: list = []
+    for k in SIG_METRICS:
+        v = m.get(k)
+        if k == "items":
+            out.append(str(v))
+        elif k == "overflow":
+            out.append(int(v or 0))
+        else:
+            out.append(round(float(v or 0), 3))
+    for k in SIG_FONTS:
+        out.append(str(f.get(k)))
+    out.append(int(it.get("available") or 0))
+    out.append(int(round(float(data.get("doc_h") or 0) / 2)))
+    return tuple(out)
+
+
+def _median(values: list) -> float | None:
+    nums = sorted(float(v) for v in values if isinstance(v, (int, float)))
+    if not nums:
+        return None
+    mid = len(nums) // 2
+    return nums[mid] if len(nums) % 2 else (nums[mid - 1] + nums[mid]) / 2
+
+
+def _combine(samples: list[dict]) -> dict:
+    """多轮不一致时的兜底：各指标取中位数，其余字段取「最接近中位数的那一轮」。
+
+    unstable 轮不参与判定，这里只是让输出有个能看的值；**绝不取 0、也不取最小值**
+    （取最小会把抖动放大成回归）。中位数为偶数个时取偏低那个（更保守）。
+    """
+    if not samples:
+        return {}
+    if len(samples) == 1:
+        return dict(samples[0])
+    base = dict(samples[0])
+    metrics = dict(base.get("metrics") or {})
+    fonts = dict(base.get("fonts") or {})
+    med = {k: _median([(s.get("metrics") or {}).get(k) for s in samples])
+           for k in ("afcr", "band_ratio", "chrome_ratio", "overlay_ratio", "items")}
+    for k, v in med.items():
+        if v is not None:
+            metrics[k] = round(v, 3) if k != "items" else v
+    metrics["overflow"] = int(round(_median([(s.get("metrics") or {}).get("overflow")
+                                             for s in samples]) or 0))
+    for k in ("body_min", "aux_min", "hard_min"):
+        v = _median([(s.get("fonts") or {}).get(k) for s in samples])
+        if v is not None:
+            fonts[k] = int(v) if float(v).is_integer() else v
+    # 选「最像中位数」的那一轮作为其它字段（primary / overlays / items_detail）的来源
+    def dist(sample: dict) -> float:
+        m = sample.get("metrics") or {}
+        tot = 0.0
+        for k in ("afcr", "chrome_ratio", "overlay_ratio"):
+            mv = med.get(k)
+            if mv:
+                tot += abs(float(m.get(k) or 0) - float(mv)) / max(1e-6, abs(float(mv)))
+        if med.get("items") is not None:
+            tot += abs(float(m.get("items") or 0) - float(med["items"])) / max(1.0, float(med["items"]))
+        return tot
+    best = min(samples, key=dist)
+    out = dict(best)
+    out["metrics"] = metrics
+    out["fonts"] = fonts
+    return out
+
+
 def scan(cdp: CDP, url: str, width: int, height: int, page: dict,
-         scroll_probe: bool, expand: bool = False) -> dict:
+         scroll_probe: bool, expand: bool = False,
+         stable_rounds: int = STABLE_ROUNDS,
+         max_rounds: int = MAX_ROUNDS,
+         quiet_ms: int = SETTLE_QUIET_MS) -> dict:
+    """扫一个「页面 × 视口」：导航 → 静下来 → 连量几轮取稳定值。
+
+    稳定 = 连续 `stable_rounds` 轮签名（7 指标 + 字号 + 可用条目数 + 文档高）完全一致。
+    最多 `max_rounds` 轮；到顶不一致 → `unstable: true` + 中位数兜底，**不记 0**。
+    """
     cdp.call("Emulation.setDeviceMetricsOverride", width=width, height=height,
              deviceScaleFactor=1, mobile=False)
     cdp.events.clear()
@@ -755,13 +925,52 @@ def scan(cdp: CDP, url: str, width: int, height: int, page: dict,
         # 展开态：把 <details> / 筛选面板 / 被折叠的类别全部打开，量「点开之后」吃多少屏。
         # 这是证据（反例数字的来源），不参与判定。
         _eval_js(cdp, EXPAND_JS)
-        time.sleep(0.45)
+        time.sleep(0.15)
     js = MEASURE_JS % {"cfg": json.dumps(_cfg(page), ensure_ascii=False)}
-    data = json.loads(_eval_js(cdp, js) or "{}")
-    if data.get("__error"):
-        raise RuntimeError(f"采集失败：{data.get('__error')} @ {data.get('href')} "
-                           f"({data.get('__stack')})")
+    samples: list[dict] = []
+    settles: list[dict] = []
+    stable = False
+    rounds = 0
+    for _ in range(max(1, max_rounds)):
+        rounds += 1
+        settles.append(_wait_settle(cdp, quiet_ms=quiet_ms))
+        data = json.loads(_eval_js(cdp, js) or "{}")
+        if data.get("__error"):
+            raise RuntimeError(f"采集失败：{data.get('__error')} @ {data.get('href')} "
+                               f"({data.get('__stack')})")
+        samples.append(data)
+        if len(samples) >= max(1, stable_rounds):
+            recent = samples[-max(1, stable_rounds):]
+            if all(_sig(r) == _sig(recent[0]) for r in recent[1:]):
+                stable = True
+                break
+    data = samples[-1] if stable else _combine(samples)
+    items = ((data.get("metrics") or {}).get("items") or 0)
+    available = ((data.get("items_detail") or {}).get("available") or 0)
     data["ready"] = ready
+    data["stability"] = {
+        "rounds": rounds,
+        "stable_rounds": stable_rounds,
+        "max_rounds": max_rounds,
+        "stable": stable,
+        "signatures": [list(_sig(s)) for s in samples],
+        "samples": [{"afcr": (s.get("metrics") or {}).get("afcr"),
+                     "items": (s.get("metrics") or {}).get("items"),
+                     "chrome": (s.get("metrics") or {}).get("chrome_ratio"),
+                     "overlay": (s.get("metrics") or {}).get("overlay_ratio"),
+                     "body_min": (s.get("fonts") or {}).get("body_min"),
+                     "aux_min": (s.get("fonts") or {}).get("aux_min"),
+                     "doc_h": s.get("doc_h"),
+                     "available": (s.get("items_detail") or {}).get("available")}
+                    for s in samples],
+        "settle_ms": [s.get("waited_ms") for s in settles],
+        "settle_mutations": [s.get("mutations") for s in settles],
+        "settle_errors": [s.get("error") for s in settles if s.get("error")],
+    }
+    data["unstable"] = not stable
+    # suspect：选择器明明命中了一批条目，但一条都没完整落在首屏 —— 多半是量到了中间态/布局没完，
+    # 也可能是真的「首屏一条都放不下」。两者都先标出来，别直接当红（坏产物另有 available==0 的路径）。
+    data["suspect"] = bool(items == 0 and available > 0)
     if scroll_probe:
         _eval_js(cdp, "(function(){window.scrollTo(0, Math.round(document.documentElement.scrollHeight*0.5)); return 1;})()")
         time.sleep(0.45)
@@ -775,12 +984,28 @@ def scan(cdp: CDP, url: str, width: int, height: int, page: dict,
 
 
 def judge(page: dict, viewport: str, data: dict) -> tuple[list[dict], list[dict]]:
-    """按页面类型阈值判定，返回 (fails, warns)。"""
+    """按页面类型阈值判定，返回 (fails, warns)。
+
+    Q11：先看「这组读数稳不稳」——
+    · `unstable`（多轮不一致、没取到稳定值）→ 本轮**不判定**，只记一条 warn；
+    · `suspect`（选择器命中 >0 条，但首屏一条都没完整落下）→ items 只记 warn，不判红。
+    两种情况都在 JSON / 汇总里单独计数，不会悄悄当成「0 条」。
+    """
     th = TYPE_THRESHOLDS[page["type"]]
     m = data.get("metrics") or {}
     fonts = data.get("fonts") or {}
     fails: list[dict] = []
     warns: list[dict] = []
+    stability = data.get("stability") or {}
+    if data.get("unstable"):
+        warns.append({
+            "metric": "unstable", "value": None, "limit": None,
+            "msg": (f"读数不稳定：{stability.get('rounds')} 轮未收敛"
+                    f"（样本 items={[s.get('items') for s in stability.get('samples') or []]}），"
+                    "本轮不参与判定；值取中位数"),
+        })
+        return fails, warns
+    suspect = bool(data.get("suspect")) and page.get("items_min", th["items_min"]) > 0
 
     def bad(metric: str, value, limit, unit: str = "") -> None:
         fails.append({"metric": metric, "value": value, "limit": limit,
@@ -806,7 +1031,17 @@ def judge(page: dict, viewport: str, data: dict) -> tuple[list[dict], list[dict]
     # 门槛按「实际有多少条」收敛，避免用不可能达标的标准制造假红。
     need = min(items_min, available) if available else items_min
     if need and items < need:
-        bad("items", items, need)
+        if suspect:
+            # 选择器命中 >0 条却一条都没完整落在首屏：先记 suspect（不进红），
+            # 免得把「量到中间态」变成阻断发布；JSON 里 suspect=true 可人工复核。
+            warns.append({"metric": "items:suspect", "value": items, "limit": need,
+                          "msg": f"items {items} 未达 {need}，但选择器命中 {int(available)} 条"
+                                 f"（标 suspect：疑似量到中间态，请人工看一眼截图）"})
+        else:
+            bad("items", items, need)
+    if suspect and not any(w.get("metric") == "items:suspect" for w in warns):
+        warns.append({"metric": "items:suspect", "value": items, "limit": need,
+                      "msg": f"items 0，但选择器命中 {int(available)} 条（标 suspect，需人工复核）"})
     chrome = float(m.get("chrome_ratio") or 0)
     if chrome > th["chrome_max"]:
         bad("chrome_ratio", round(chrome, 3), th["chrome_max"])
@@ -886,6 +1121,12 @@ def compare_baseline(cur: dict, base: dict) -> list[dict]:
                                 "before": "present", "after": "missing",
                                 "msg": "baseline 有这一组（页面×视口），本轮没扫到"})
             continue
+        if crec.get("unstable"):
+            # Q11：本轮没取到稳定值 → 不拿它跟 baseline 比（否则每次抖动都报一条假退化）
+            regressions.append({"page": key[0], "viewport": key[1], "metric": "stability",
+                                "note": True,
+                                "msg": f"{key[0]}@{key[1]} 本轮读数不稳定，跳过 baseline 对比"})
+            continue
         bm = dict(brec.get("metrics") or {})
         bm.update({k: v for k, v in (brec.get("fonts") or {}).items() if k in
                    ("body_min", "aux_min", "hard_min")})
@@ -954,8 +1195,12 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                shots: Path | None, only: list[str] | None,
                expand: bool = False, gate: bool = False,
                rows_selector: str | None = None,
-               table_view_probe: bool = False) -> dict:
-    site = Site(dist) if dist is not None else None
+               table_view_probe: bool = False,
+               overrides: dict[str, Path] | None = None,
+               stable_rounds: int = STABLE_ROUNDS,
+               max_rounds: int = MAX_ROUNDS,
+               quiet_ms: int = SETTLE_QUIET_MS) -> dict:
+    site = Site(dist, overrides) if dist is not None else None
     srv = site.start(0) if site is not None else None
     base = f"http://127.0.0.1:{srv.server_address[1]}/" if srv is not None else (base_url or "")
     port = 9431
@@ -968,6 +1213,10 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
         # 口径版本：AFCR v2 = 带内占比（v0.10.3 起）。跨口径的 baseline 不比 AFCR。
         "metric_version": METRIC_VERSION,
         "thresholds": {"types": TYPE_THRESHOLDS, "global": GLOBAL_THRESHOLDS},
+        # Q11：稳定化参数随结果落盘，便于复现（旧字段一律不动，只加新字段）
+        "stability_config": {"stable_rounds": stable_rounds, "max_rounds": max_rounds,
+                             "settle_quiet_ms": quiet_ms},
+        "overrides": {k: str(v) for k, v in (overrides or {}).items()},
         "pages": [],
         "expanded": [],
         "table_view": [],
@@ -1022,7 +1271,9 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                 last_err = ""
                 for attempt in (1, 2):
                     try:
-                        data = scan(cdp, url, width, height, page, scroll_probe)
+                        data = scan(cdp, url, width, height, page, scroll_probe,
+                                    stable_rounds=stable_rounds, max_rounds=max_rounds,
+                                    quiet_ms=quiet_ms)
                         break
                     except Exception as exc:  # noqa: BLE001
                         last_err = str(exc)[:300]
@@ -1046,6 +1297,7 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                     "type": page["type"],
                     "viewport": vp,
                     "vw": data.get("vw"),
+                    "vh": data.get("vh"),
                     "url": rel,
                     "href": data.get("href"),
                     "metrics": data.get("metrics") or {},
@@ -1062,7 +1314,15 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                     "band_w": data.get("band_w"),
                     "content_blocks": data.get("content_blocks"),
                     "doc_h": data.get("doc_h"),
+                    "scroll_y": data.get("scroll_y"),
                     "ready": data.get("ready"),
+                    # Q11 新增（旧字段一个没改）：这组读数稳不稳 / 是不是可疑中间态
+                    # suspect 只对「本来要求首屏条目数」的页型有意义（首页 items_min=0，不标）
+                    "unstable": bool(data.get("unstable")),
+                    "suspect": bool(data.get("suspect")
+                                    and page.get("items_min",
+                                                 TYPE_THRESHOLDS[page["type"]]["items_min"]) > 0),
+                    "stability": data.get("stability") or {},
                     "fails": fails,
                     "warns": warns,
                 }
@@ -1088,15 +1348,22 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
                         print(f"         展开态采集失败：{str(exc)[:120]}")
                 m, f = rec["metrics"], rec["fonts"]
                 flag = ("FAIL" if gate else "未达") if fails else "ok  "
+                marks = ""
+                if rec["unstable"]:
+                    marks += f" [unstable {rec['stability'].get('rounds')} 轮]"
+                if rec["suspect"]:
+                    marks += " [suspect]"
                 print(f"  [{flag}] {page['name']:8} {vp:10} AFCR {m.get('afcr', 0):.2f} "
                       f"带宽 {m.get('band_ratio', 0):.2f} "
                       f"条目 {m.get('items', 0):4.1f} chrome {m.get('chrome_ratio', 0):.2f} "
                       f"悬浮 {m.get('overlay_ratio', 0):.3f} "
                       f"正文 {f.get('body_min')}px 辅助 {f.get('aux_min')}px "
                       f"<14 {f.get('lt14_ratio', 0):.0%} 溢出 {'是' if m.get('overflow') else '否'}"
-                      + (f"  ← {len(fails)} 项未达" if fails else ""))
+                      + (f"  ← {len(fails)} 项未达" if fails else "") + marks)
                 for item in fails:
                     print(f"         · {item['msg']}")
+                for item in rec.get("warns") or []:
+                    print(f"         [WARN] {item['msg']}")
                 if table_view_probe and page["name"] == "drug":
                     tv_page = dict(page, items=[DRUG_ROWS_SEL])
                     tv_url = url + ("&view=table" if "?" in url else "?view=table")
@@ -1133,13 +1400,14 @@ def run_checks(dist: Path | None, base_url: str | None, chrome: Path,
 
 
 def capture(cdp: CDP, url: str, width: int, height: int, page: dict, png: Path) -> None:
-    """留证截图（干净状态，滚动回到顶部）。"""
+    """留证截图（干净状态，滚动回到顶部；截图前同样先静下来，别截到中间态）。"""
     cdp.call("Emulation.setDeviceMetricsOverride", width=width, height=height,
              deviceScaleFactor=1, mobile=False)
     cdp.events.clear()
     cdp.call("Page.navigate", url=url)
     cdp.wait_event("Page.loadEventFired", 60)
     _wait_ready(cdp, page["name"])
+    _wait_settle(cdp)
     png.parent.mkdir(parents=True, exist_ok=True)
     data = cdp.call("Page.captureScreenshot", format="png")["data"]
     png.write_bytes(base64.b64decode(data))
@@ -1186,6 +1454,16 @@ def main(argv: list[str] | None = None) -> int:
                     help="成分页「首屏条目」选择器（默认 table.matrix tbody tr；换模板时覆盖）")
     ap.add_argument("--table-view-probe", action="store_true",
                     help="额外量一次 drug/...?view=table（矩阵降级视图），只作兼容证据")
+    # ── Q11 稳定化（默认值就是发布用的那一套；只在排查抖动时才需要改）─────────
+    ap.add_argument("--stable-rounds", type=int, default=STABLE_ROUNDS,
+                    help=f"连续几轮读数一致才算稳（默认 {STABLE_ROUNDS}）")
+    ap.add_argument("--max-rounds", type=int, default=MAX_ROUNDS,
+                    help=f"每个「页面×视口」最多量几轮，到顶不一致记 unstable（默认 {MAX_ROUNDS}）")
+    ap.add_argument("--settle-ms", type=int, default=SETTLE_QUIET_MS,
+                    help=f"量之前等 DOM 静默的窗口毫秒（默认 {SETTLE_QUIET_MS}）")
+    ap.add_argument("--override", action="append", default=[], metavar="REL=PATH",
+                    help="用补丁页验证「坏产物仍判红」（如 drug/acetaminophen.html=.tmp/x.html）；"
+                         "正式验收别用")
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -1198,6 +1476,17 @@ def main(argv: list[str] | None = None) -> int:
     if dist is not None and not dist.is_dir():
         print(f"[SKIP] 产物目录不存在：{dist}（先跑 site/build.py）")
         return 0
+    overrides: dict[str, Path] = {}
+    for spec in args.override:
+        if "=" not in spec:
+            print(f"[SKIP] --override 要写成 REL=PATH，收到 {spec!r}")
+            return 0
+        rel, _, p = spec.partition("=")
+        path = Path(p.strip())
+        if not path.is_file():
+            print(f"[SKIP] --override 指向的文件不存在：{rel.strip()}={path}")
+            return 0
+        overrides[rel.strip().lstrip("/")] = path
     viewports = parse_viewports(args.viewports)
     only = [s.strip() for s in args.pages.split(",") if s.strip()] if args.pages else None
     shots = Path(args.shots) if args.shots else None
@@ -1205,12 +1494,19 @@ def main(argv: list[str] | None = None) -> int:
     started = time.time()
     print(f"== 首屏守卫 == dist={dist or '(用 --base-url)'} 视口 {len(viewports)} 档 "
           f"页型 {len(only) if only else len(PAGES)} 种 chrome={chrome}")
+    print(f"   稳定化：连续 {args.stable_rounds} 轮一致才算稳、最多 {args.max_rounds} 轮、"
+          f"静默窗口 {args.settle_ms}ms（不稳记 unstable，不记 0）")
     if args.rows_selector:
         print(f"   成分页行选择器：{args.rows_selector}（默认 {DRUG_ROWS_SEL}）")
     if args.table_view_probe:
         print(f"   兼容测量：?view=table 也会量一次（选择器 {DRUG_ROWS_SEL}）")
+    if overrides:
+        print("   ⚠ 预览模式：" + "、".join(f"{k} ← {v}" for k, v in overrides.items())
+              + "（只用于验证门禁本身会不会红，正式验收请扫构建产物）")
     out = run_checks(dist, args.base_url, chrome, viewports, args.scroll_probe, shots, only,
-                     args.expand, args.gate, args.rows_selector, args.table_view_probe)
+                     args.expand, args.gate, args.rows_selector, args.table_view_probe,
+                     overrides or None, max(1, args.stable_rounds), max(1, args.max_rounds),
+                     max(0, args.settle_ms))
     out["generated"] = time.strftime("%Y-%m-%dT%H:%M:%S")
     out["rows_selector"] = args.rows_selector or DRUG_ROWS_SEL
     out["elapsed_s"] = round(time.time() - started, 1)
@@ -1227,6 +1523,10 @@ def main(argv: list[str] | None = None) -> int:
     for rec in out["pages"]:
         m, f = rec["metrics"], rec["fonts"]
         verdict = ("FAIL" if args.gate else "未达") if rec["fails"] else "ok"
+        if rec.get("unstable"):
+            verdict += "/不稳定"
+        elif rec.get("suspect"):
+            verdict += "/疑似"
         print(f"  {rec['page']:8} {rec['viewport']:10} {m.get('afcr', 0):6.2f} "
               f"{m.get('band_ratio', 0):6.2f} "
               f"{m.get('items', 0):6.1f} {m.get('chrome_ratio', 0):7.2f} "
@@ -1257,6 +1557,9 @@ def main(argv: list[str] | None = None) -> int:
     for _p, _v, item in all_fails:
         key = item["metric"].split(":")[0]
         by_metric[key] = by_metric.get(key, 0) + 1
+    unstable_scans = [f"{r['page']}@{r['viewport']}" for r in out["pages"] if r.get("unstable")]
+    suspect_scans = [f"{r['page']}@{r['viewport']}" for r in out["pages"]
+                     if r.get("suspect") and not r.get("unstable")]
     out["summary"] = {
         "scans": len(out["pages"]),
         "fail_scans": len({(r["page"], r["viewport"]) for r in out["pages"] if r["fails"]}),
@@ -1264,15 +1567,27 @@ def main(argv: list[str] | None = None) -> int:
         "warn_items": len(all_warns),
         "fails_by_metric": by_metric,
         "regressions": len(regressions),
+        # Q11：不稳定 / 疑似 单独计数（都不参与 fail 判定，但要能看见）
+        "unstable_scans": len(unstable_scans),
+        "unstable_list": unstable_scans,
+        "suspect_scans": len(suspect_scans),
+        "suspect_list": suspect_scans,
         "mode": "gate" if args.gate else "report",
-        "ok": not all_fails and not regressions,
+        "ok": not all_fails and not regressions and not unstable_scans,
+        "ok_gate": not all_fails and not regressions,
     }
     s = out["summary"]
     mode_note = ("阻塞模式：未达标 → 退出码 1" if args.gate
                  else "报告模式：只出数字，不影响发布（v0.10.3 起改为阻塞）")
     print(f"\n[{s['mode']}] {mode_note}")
+    # 这行前半句被 deploy/ci_checks.py 的正则解析，**不要改词序**
     print(f"{s['scans']} 次扫描：{s['fail_scans']} 组不达标、共 {s['fail_items']} 项未达"
-          f"（WARN {s['warn_items']}），baseline 退化 {s['regressions']} 项，{out['elapsed_s']}s")
+          f"（WARN {s['warn_items']}），不稳定 {s['unstable_scans']} 组、疑似 {s['suspect_scans']} 组，"
+          f"baseline 退化 {s['regressions']} 项，{out['elapsed_s']}s")
+    if unstable_scans:
+        print("  [unstable] 没取到稳定值（不判定）：" + "、".join(unstable_scans))
+    if suspect_scans:
+        print("  [suspect] 选择器命中但首屏一条没落下（需人工复核）：" + "、".join(suspect_scans))
     if by_metric:
         print("  按指标：" + "、".join(f"{k} {v}" for k, v in sorted(by_metric.items())))
     if out["shots"]:
@@ -1282,7 +1597,10 @@ def main(argv: list[str] | None = None) -> int:
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"JSON: {p}")
-    if args.gate and not s["ok"]:
+    if args.gate and s["unstable_scans"]:
+        print(f"[WARN] 有 {s['unstable_scans']} 组没取到稳定值：门禁结论只基于稳定组，"
+              "这几组请单独复跑（不影响退出码）")
+    if args.gate and not s["ok_gate"]:
         return 1
     return 0
 
