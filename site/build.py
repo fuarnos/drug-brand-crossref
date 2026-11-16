@@ -4370,6 +4370,9 @@ CSS = """
 --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:24px;
 --lh-tight:1.3;--lh-heading:1.35;--lh-ui:1.5;--lh-body:1.6;
 --r-sm:8px;--r-md:12px;--r-pill:999px;--prose:72ch;
+/* R3（v0.13.3，task-4）：浮层类组件的统一钳制 token —— 任何浮层默认不越出视口、超高可滚。
+   改样式时优先复用这两个变量，别再给单个浮层另写一套 min-width。 */
+--float-gutter:12px;--float-max-h:min(70vh,560px);
 /* v0.10.3 task-17：桌面内容带按视口比例取「中间 2/3」，而不是固定像素。
    ≥1280 用 66.67vw（1440→960 / 1920→1280 / 2560→1707，被 1680 封顶）；
    768–1279 保持 v0.10.2 的满宽手感（默认 100%；实测原值就是 100%，不是 100% - 48px，
@@ -4890,7 +4893,8 @@ kbd{background:#eee;padding:1px 5px;border-radius:8px;font-size:14px}
  font-size:16px;line-height:1}
 #ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;display:none;
 background:#fff;border:1px solid var(--line);border-radius:12px;
-box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:hidden;text-align:left}
+box-shadow:0 8px 24px rgba(31,35,40,.12);overflow:auto;overscroll-behavior:contain;
+ max-height:min(50vh,420px);text-align:left}
 #ac.open{display:block}
 .ac-item{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
 padding:9px 12px;cursor:pointer;font-size:14px;border-bottom:1px solid #f1efe9}
@@ -5148,7 +5152,7 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 /* T13（v0.11.7）：成分页「市场 / 单方·复方 / 规格」筛选条 + 块头来源行 + 可点开的「另 N 个市场」 */
 /* T13（v0.11.7）：筛选条挂在成分页的 sticky 条里（z 常规流里的一个 chip，收起时零高度），
    展开时是浮层（absolute），不把正文往下推 —— 首屏条目零损失。 */
-.listfilters{display:inline-flex;flex-direction:column;position:relative}
+.listfilters{display:inline-flex;flex-direction:column}
 .listfilters>summary{list-style:none;cursor:pointer}
 .listfilters>summary::-webkit-details-marker{display:none}
 .listfilters>summary::after{content:" ▾";color:var(--muted);font-size:12px}
@@ -5159,9 +5163,31 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 /* 面板用站点既有色阶 `--surface-2`（#f6f5f0，表头/色带同色），chip 仍是 #fff ——
    「框内颜色 ≠ 最近不透明祖先的填充色」是用户 2026-11-10 的硬规则，
    deploy/ui_surface_check.py 会拦；白底白底曾报 11 处 FAIL。 */
-.lf-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:30;background:var(--surface-2);
- border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;
- gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.10);min-width:min(92vw,640px)}
+/* R3（v0.13.3，task-4）：筛选浮层自适应。包含块交给 `.drug-sticky`（sticky 已是定位祖先，
+   宽度 = 内容带 ≤ 视口），`left:0` 因此落在内容带左缘，而不是触发按钮左缘；再叠
+   width/max-width/max-height + overflow:auto 兜住所有档位。改前只有 min-width 没有上限：
+   1440 实测 panel.right=1755 / 1024 → 1408 / 768 → 1323，全部越出视口并让整页横向溢出。 */
+.lf-panel{position:absolute;top:calc(100% + 6px);left:0;right:auto;z-index:30;
+ background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+ display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,.10);
+ width:min(92vw,640px);min-width:0;max-width:calc(100vw - 2 * var(--float-gutter));
+ max-height:var(--float-max-h);overflow:auto;overscroll-behavior:contain;
+ -webkit-overflow-scrolling:touch}
+/* ≤767：手机端改底部抽屉（fixed 脱离文档流，触发按钮在哪都不可能裁切）。
+   注：`@media (max-width:767px){main .drug-sticky{display:none}}` 把成分页粘性条在手机上
+   收起了，所以这条目前不可达；保留是为了粘性条回到手机端时直接生效（同时满足 R3「手机全宽」）。 */
+@media (max-width:767px){
+  .lf-panel{position:fixed;left:var(--float-gutter);right:var(--float-gutter);top:auto;
+   bottom:calc(64px + env(safe-area-inset-bottom));width:auto;max-width:none;
+   max-height:var(--float-max-h)}
+}
+/* R3：矮视口（高 ≤640px —— 横屏手机 / 小窗）时，粘性条仍在 y≈400，锚在它下面的面板底边会出界。
+   改成贴底的固定浮层：`bottom` 一定在视口内，`max-height` 再兜一层，任何高度都不裁切。 */
+@media (max-height:640px){
+  .lf-panel{position:fixed;left:var(--float-gutter);right:auto;top:auto;
+   bottom:calc(var(--float-gutter) + env(safe-area-inset-bottom));width:min(92vw,640px);
+   max-height:calc(100vh - 2 * var(--float-gutter))}
+}
 .listfilters .lf-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .listfilters .lf-status{margin:0;font-size:13px;color:var(--muted)}
 .listfilters .lf-none{margin:0;font-size:15px;color:var(--fg)}
@@ -5199,12 +5225,13 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 /* T13（v0.11.7）：分类页页内搜索 + 子类筛选 + 说明折叠
    v0.11.7 复审：子类 chip 收进 `<details>` 浮层（默认收起）、搜索框/子类入口/计数同一行，
    分类页首屏条目 9 → 回到 10.5 以上（−5% 线是阻塞项）。 */
-.catfinder{display:flex;flex-direction:column;gap:4px;margin:6px 0 8px}
+/* R3（v0.13.3，task-4）：`.catfinder` 成为子类浮层的包含块（整宽），浮层不再锚在触发按钮上。 */
+.catfinder{position:relative;display:flex;flex-direction:column;gap:4px;margin:6px 0 8px}
 .catfinder .cf-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .catfinder .cf-input{min-height:34px;padding:0 10px;border:1px solid var(--line);
  border-radius:8px;font-size:16px;flex:1 1 14em}
 .catfinder .cf-status{margin:0;font-size:13px;color:var(--muted);flex:0 0 auto}
-.catfinder .cf-sub{position:relative;flex:0 0 auto}
+.catfinder .cf-sub{flex:0 0 auto}
 .catfinder .cf-sub>summary{display:inline-flex;align-items:center;min-height:34px;padding:0 10px;
  border:1px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;
  font-size:14px;list-style:none;color:var(--fg)}
@@ -5212,10 +5239,26 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .catfinder .cf-sub>summary::after{content:" ▾";color:var(--muted);font-size:12px}
 .catfinder .cf-sub[open]>summary::after{content:" ▴"}
 /* 浮层用站点既有 `--surface-2`：chip 是 #fff，框内 ≠ 框外（ui_surface_check 硬规则） */
-.catfinder .cf-chips{position:absolute;top:calc(100% + 4px);left:0;z-index:25;
+/* R3（v0.13.3，task-4）：同 `.lf-panel` —— 包含块上移 + 宽度/高度钳制。
+   改前 768 实测 right=1056（视口 768）、390 实测 right=661（视口 390）、1440 实测 1488。 */
+.catfinder .cf-chips{position:absolute;top:calc(100% + 4px);left:0;right:auto;z-index:25;
  display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:var(--surface-2);
  border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.10);
- min-width:min(92vw,520px)}
+ width:min(92vw,520px);min-width:0;max-width:calc(100vw - 2 * var(--float-gutter));
+ max-height:var(--float-max-h);overflow:auto;overscroll-behavior:contain;
+ -webkit-overflow-scrolling:touch}
+/* ≤767：手机端底部抽屉（抬高 64px 让开固定底栏 `.tabbar` 56px + 8px 间距）。 */
+@media (max-width:767px){
+  .catfinder .cf-chips{position:fixed;left:var(--float-gutter);right:var(--float-gutter);
+   top:auto;bottom:calc(64px + env(safe-area-inset-bottom));width:auto;max-width:none;
+   max-height:var(--float-max-h)}
+}
+/* R3：矮视口（高 ≤640px）同上，子类浮层也贴底。 */
+@media (max-height:640px){
+  .catfinder .cf-chips{position:fixed;left:var(--float-gutter);right:auto;top:auto;
+   bottom:calc(var(--float-gutter) + env(safe-area-inset-bottom));width:min(92vw,520px);
+   max-height:calc(100vh - 2 * var(--float-gutter))}
+}
 .cat-help{margin:6px 0 10px;font-size:15px}
 .cat-help>summary{cursor:pointer;color:var(--accent);list-style:none}
 .cat-help>summary::-webkit-details-marker{display:none}
@@ -5499,7 +5542,8 @@ a.grp-name{color:var(--accent)}
 .sn-dd{position:relative}
 .sn-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:60;background:#fff;
  border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(31,35,40,.12);
- padding:12px;min-width:300px}
+ padding:12px;min-width:300px;max-width:calc(100vw - 2 * var(--float-gutter));
+ max-height:calc(100vh - 96px);overflow:auto;overscroll-behavior:contain}
 .sn-cats,.sn-mkts{display:grid;grid-template-columns:repeat(2,minmax(170px,1fr));gap:2px 10px}
 .sn-about{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px}
 .sn-cats a,.sn-mkts a,.sn-about a{display:flex;align-items:center;gap:8px;min-height:40px;
