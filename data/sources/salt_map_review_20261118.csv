@@ -1,0 +1,69 @@
+﻿salt_code,salt_en,category,map_n_counterions,map_counterion_mw,map_who_inn_hits,map_status,old_table_n_base,old_table_increment_mw,review_n_base,review_increment_mw,review_status,review_note,in_old_40
+sodium,sodium,cation,1,22.99,9,verified,1,21.982,1,21.982,usable,Na(22.990)−H(1.008)；旧表已核，PubChem 左甲状腺素钠 0.9725,yes
+calcium,calcium,cation,1,40.078,1,verified,2,38.062,2,38.062,usable,Ca(40.078)−2H；旧表已核，PubChem 阿托伐他汀钙 0.9670,yes
+furoate,furoate,ester,1,112.084,1,verified,1,94.069,1,94.069,usable,C5H4O3(112.084)−H2O；旧表已核,yes
+zinc,zinc,cation,1,65.38,1,derived,,,2,63.364,usable,Zn(65.380)−2H（salt_map 只给离子 65.38，未减 H）,no
+aceponate,aceponate,ester,1,186.168,0,derived,,,1,168.153,usable,C22H30O6 型酸 186.168−H2O（salt_map 值减水）,no
+acetate,acetate,acid,1,60.052,0,verified,1,60.052,1,60.052,usable,C2H4O2；旧表已核,yes
+aluminium,aluminium,cation,1,26.982,0,derived,,,3,23.958,usable,Al(26.982)−3H（salt_map 只给离子 26.982）,no
+ammonium,ammonium,cation,1,18.039,0,derived,,,1,17.031,usable,NH4(18.039)−H（胺成盐：碱+HCl 型反离子 NH3 增量）,no
+anhydrous,anhydrous,form,0,0.0,0,verified,1,0.0,1,0.0,usable,无水物：Δ=0（f=1）,yes
+aspartate,aspartate,acid,1,133.104,0,verified,1,133.103,1,133.103,usable,C4H7NO4；旧表,yes
+benzoate,benzoate,acid,1,122.123,0,verified,1,122.123,1,122.123,usable,C7H6O2；旧表,yes
+besylate,besylate,acid,1,158.175,0,verified,1,158.171,1,158.171,usable,C6H6O3S；旧表已核（苯磺酸氨氯地平 0.7210）,yes
+buteprate,buteprate,ester,1,158.196,0,derived,,,1,140.181,usable,C3H6O2+丁酸型混合酯 158.196−H2O,no
+butyrate,butyrate,ester,1,88.106,0,derived,,,1,70.091,usable,C4H8O2(88.106)−H2O,no
+citrate,citrate,acid,3,192.124,0,verified,1,192.123,1,192.123,usable,C6H8O7 整酸，1:1（枸橼酸西地那非 0.7119 已核）；salt_map 写 n=3 是价数，2:3 盐需另核,yes
+cypionate,cypionate,ester,1,150.196,0,verified,1,124.183,1,124.183,usable,C8H14O2(142.198)−H2O；旧表；salt_map 的 150.196 与环戊丙酸分子量不符，按 IUPAC 重算,yes
+decanoate,decanoate,ester,1,172.265,0,verified,1,154.253,1,154.253,usable,C10H20O2(172.268)−H2O；旧表,yes
+diethylamine,diethylamine,organic-base,1,73.139,0,derived,,,1,73.139,usable,C4H11N,no
+dihydrate,dihydrate,form,0,36.03,0,derived,,,1,36.03,usable,2·H2O,no
+dihydrogenphosphate,dihydrogen phosphate,amine-acid,1,96.99,0,derived,,,1,97.994,usable,H3PO4，1:1 二氢磷酸盐,no
+dipropionate,dipropionate,ester,2,74.079,0,verified,1,112.128,1,112.128,usable,2×(C3H6O2−H2O)；旧表,yes
+edisylate,edisylate,acid,2,109.145,0,derived,,,2,190.19,usable,C2H6O6S2（乙二磺酸 190.19），2 碱:1 酸；salt_map 的 109.145 与乙二磺酸分子量不符，按 IUPAC 重算,no
+enanthate,enanthate,ester,1,130.185,0,verified,1,112.172,1,112.172,usable,C7H14O2(130.187)−H2O；旧表,yes
+ethylenediamine,ethylenediamine,organic-base,2,60.1,0,derived,,,2,60.1,note,C2H8N2 二价，化学计量依原料药（1:1 / 2:1）,no
+fumarate,fumarate,acid,2,116.072,0,verified,2,116.072,2,116.072,usable,C4H4O4，2 碱:1 酸；旧表已核（富马酸喹硫平 0.8685）,yes
+glucoheptonate,glucoheptonate,acid,1,226.182,0,derived,,,1,226.181,usable,C7H14O8（葡庚糖酸）,no
+gluconate,gluconate,acid,1,196.155,0,verified,1,196.155,1,196.155,usable,C6H12O7；旧表,yes
+glutamate,glutamate,acid,1,147.13,0,derived,,,1,147.13,usable,C5H9NO4（谷氨酸）,no
+hemihydrate,hemihydrate,form,0,9.008,0,derived,,,1,9.008,usable,0.5·H2O,no
+hyclate,hyclate,mixed,1,36.461,0,verified,1,,1,0.0,exclude,多西环素 hyclate = 盐酸盐·½乙醇·½水（复盐+溶剂化物），分子量必须按具体原料药核对；旧表也是 manual_review,yes
+hydriodide,hydriodide,amine-acid,1,127.912,0,derived,,,1,127.912,usable,HI；旧表（iodide 系同理）,no
+hydrobromide,hydrobromide,amine-acid,1,80.912,0,verified,1,80.912,1,80.912,usable,HBr；旧表,yes
+hydrochloride,hydrochloride,amine-acid,1,36.461,0,verified,1,36.458,1,36.458,usable,HCl；旧表已核，PubChem 盐酸舍曲林 0.8935,yes
+hydrogenphosphate,hydrogen phosphate,amine-acid,2,96.99,0,derived,,,2,97.994,usable,H3PO4(97.994)，2 碱:1 酸（HPO4²⁻）,no
+hydrogensulfate,hydrogen sulfate,amine-acid,1,97.07,0,derived,,,1,98.072,usable,H2SO4 整酸（1:1 硫酸氢盐）；salt_map 的 97.07 是 HSO4⁻ 离子,no
+lactate,lactate,acid,1,90.078,0,verified,1,90.078,1,90.078,usable,C3H6O3；旧表已核,yes
+lactobionate,lactobionate,acid,1,358.297,0,derived,,,1,358.296,usable,C12H22O12（乳糖酸）,no
+lithium,lithium,cation,1,6.94,0,derived,,,1,5.932,usable,Li(6.940)−H（salt_map 只给离子 6.94）,no
+magnesium,magnesium,cation,1,24.305,0,verified,2,22.289,2,22.289,usable,Mg(24.305)−2H；旧表已核，PubChem 奥美拉唑镁 0.9687,yes
+malate,malate,acid,1,134.087,0,derived,,,1,134.087,usable,C4H6O5（苹果酸）,no
+maleate,maleate,acid,2,116.072,0,verified,2,116.072,2,116.072,usable,C4H4O4，2 碱:1 酸；旧表,yes
+meglumine,meglumine,organic-base,1,195.216,0,verified,1,195.215,1,195.215,usable,C7H17NO5；旧表,yes
+mesylate,mesylate,acid,1,96.106,0,verified,1,96.1,1,96.106,usable,CH4O3S；旧表（96.100 为同一值四舍五入差）,yes
+monohydrate,monohydrate,form,0,18.015,0,derived,,,1,18.015,usable,1·H2O,no
+napsylate,napsylate,acid,1,207.248,0,derived,,,1,208.231,usable,C10H8O3S 整酸；salt_map 的 207.248 是离子，未加 H,no
+nitrate,nitrate,amine-acid,1,62.005,0,verified,1,63.012,1,63.012,usable,HNO3(63.012)；salt_map 的 62.005 是 NO3⁻ 离子，未加 H,yes
+oxalate,oxalate,acid,2,90.034,0,derived,,,2,90.034,usable,C2H2O4，2 碱:1 酸（草酸盐通常 2:1）,no
+palmitate,palmitate,acid,1,256.424,0,verified,1,238.415,1,238.415,usable,C16H32O2(256.430)−H2O；旧表,yes
+pamoate,pamoate (embonate),acid,2,388.374,0,verified,2,388.375,2,388.375,usable,C23H16O6（双羟萘酸），2:1；旧表,yes
+pentahydrate,pentahydrate,form,0,90.076,0,derived,,,1,90.076,usable,5·H2O,no
+phosphate,phosphate,amine-acid,3,96.99,0,verified,1,97.994,1,97.994,usable,H3PO4，1:1（磷酸可待因型）；salt_map 写 n=3 是价数而非计量比,yes
+piperazine,piperazine,organic-base,2,86.14,0,derived,,,2,86.138,note,C4H10N2 二价，化学计量依原料药,no
+pivalate,pivalate,ester,1,102.132,0,derived,,,1,84.118,usable,C5H10O2(102.133)−H2O,no
+potassium,potassium,cation,1,39.098,0,verified,1,38.09,1,38.09,usable,K(39.098)−H；旧表已核,yes
+probate,probate,ester,1,158.196,0,derived,,,1,140.181,usable,buteprate 的旧写法（同一酯），158.196−H2O,no
+propionate,propionate,ester,1,74.079,0,verified,1,56.064,1,56.064,usable,C3H6O2(74.079)−H2O；旧表,yes
+salicylate,salicylate,acid,1,138.122,0,derived,,,1,138.122,usable,C7H6O3（水杨酸）,no
+sesquihydrate,sesquihydrate,form,0,27.023,0,derived,,,1,27.023,usable,1.5·H2O,no
+stearate,stearate,acid,1,284.478,0,verified,1,266.469,1,266.469,usable,C18H36O2(284.484)−H2O；旧表,yes
+succinate,succinate,acid,2,118.088,0,verified,2,118.088,2,118.088,usable,C4H6O4，2 碱:1 酸；旧表已核（琥珀酸美托洛尔 0.8191）,yes
+sulfate,sulfate,amine-acid,2,96.06,0,verified,2,98.072,2,98.072,usable,H2SO4(98.072)，2 碱:1 酸；旧表已核,yes
+tartrate,tartrate,acid,2,150.087,0,verified,2,150.086,2,150.086,usable,C4H6O6，2 碱:1 酸；旧表已核（酒石酸美托洛尔 0.7808）,yes
+tosylate,tosylate,acid,1,172.202,0,verified,1,172.198,1,172.198,usable,C7H8O3S；旧表,yes
+trihydrate,trihydrate,form,0,54.045,0,derived,,,1,54.045,usable,3·H2O,no
+trolamine,trolamine,organic-base,1,149.189,0,derived,,,1,149.189,usable,C6H15NO3（三乙醇胺）,no
+tromethamine,tromethamine,organic-base,1,121.136,0,verified,1,121.136,1,121.136,usable,C4H11NO3；旧表,yes
+valerate,valerate,ester,1,102.132,0,verified,1,84.118,1,84.118,usable,C5H10O2(102.133)−H2O；旧表,yes
+xinafoate,xinafoate,acid,1,188.203,0,verified,1,188.182,1,188.182,usable,C11H8O3（昔萘酸）；旧表,yes

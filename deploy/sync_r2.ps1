@@ -44,6 +44,14 @@
 .NOTES
     Exit codes: 0 ok, 2 missing credentials / rclone / dist, 1 rclone failure.
     Rollback: the gh-pages copy stays live for 30 days (see DEPLOY.md).
+
+    Logs (Q8, 2026-11-18): the rclone stats block is now printed at NOTICE every 60s and once
+    more at the end, so a captured release log carries the Class A write count and duration:
+        Transferred:           117445 / 117445, 100%   <- files written = Class A PUTs
+        Elapsed time:      21m15.0s                    <- sync duration
+    Parse the LAST `Transferred: N / N, 100%` line. If nothing needed writing, rclone prints
+    only `Transferred: 0 B / 0 B` (no N/N line) -> treat as 0 PUT. Logging flags only; the
+    files selected, checksums and transfer parameters are unchanged.
 #>
 [CmdletBinding()]
 param(
@@ -185,8 +193,28 @@ try {
         exit 0
     }
 
+    # Q8 (2026-11-18): make the Class A write count and duration readable in the release log.
+    # rclone 1.76 defaults `--stats-log-level` to INFO, so a REAL sync at the default NOTICE
+    # log level prints no stats block at all: the v0.13.5 log (.tmp/sync-v0135.log, 16 lines)
+    # has `0 differences / 137323 matching` from the verify step but no `Transferred:` line,
+    # so the PUT count had to be inferred from the dist file count. (Under -DryRun rclone does
+    # log a summary at NOTICE, which is why dry-run logs looked fine - real publishes did not.)
+    # Pin both flags explicitly instead of relying on rclone defaults:
+    #   --stats 60s             one stats block per minute (throughput / ETA on long syncs);
+    #   --stats-log-level NOTICE  stats at NOTICE, i.e. visible without -v. Deliberately NOT
+    #                           -v: that logs one INFO line per file (~117k lines for a full
+    #                           sync) and buries the summary.
+    # Logging only: file selection, checksums and transfer parameters are unchanged. Same
+    # product, `-DryRun` planned file sets are identical before/after the change (evidence in
+    # reports/2026-11-18-q5-q8-deploy.md).
+    # How to read: the LAST `Transferred: N / N, 100%` line - N = files written this run
+    # (planned files under -DryRun) ~= Class A PUTs (average 7.8 KB/file, far below the
+    # multipart threshold, so 1 file = 1 PUT). Duration is the `Elapsed time:` line.
+    # When nothing needs writing rclone prints only `Transferred: 0 B / 0 B` (no N/N line);
+    # parse that as 0 PUT.
     $syncArgs = @('sync', $Dist, ("r2:{0}" -f $bucket), '--checksum',
-                  '--transfers', $Transfers, '--checkers', $Transfers) + $confArgs
+                  '--transfers', $Transfers, '--checkers', $Transfers,
+                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs
     if ($DryRun) { $syncArgs += '--dry-run' }
 
     Write-Host ("sync: {0} -> r2:{1} (dry-run={2})" -f $Dist, $bucket, [bool]$DryRun)

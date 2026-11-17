@@ -197,7 +197,13 @@ PAGES: list[dict] = [
     {
         "name": "results",
         "type": "results",
-        "paths": ["index.html?q=%E6%B3%B0%E8%AF%BA&lang=zh"],
+        # Q5（2026-11-18）：探针从「泰诺」改成英文商品名「tylenol」。
+        # 旧探针 ?q=泰诺 只有 3 条候选，而 judge() 会把 items_min 收敛到实际候选数
+        # （need = min(5, available) = 3）——results 档「首屏 ≥5 条」的标准永远不会被真正检验，
+        # 探针实际只能证明「3 条放得下」。?q=tylenol 命中 60 个检索键，结果页 DOM 里 10–20 行
+        # （390 档 10 行 / ≥768 档 20 行），首屏 5 条门槛因此可测，查询词仍是用户最常见的「商品名」入口。
+        # 只改探针 URL：阈值、选择器、judge() 判定逻辑一律未动。
+        "paths": ["index.html?q=tylenol&lang=zh"],
         "primary": [
             ("search", "#q", True, 0.45),
             ("first-result", "#reswrap tbody tr.br a, #reswrap tbody tr.br button", True, None),

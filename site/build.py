@@ -1040,6 +1040,9 @@ FR_I18N: dict[str, str] = {
     "coverage.col.mapping": "Principe actif associé", "coverage.col.spec": "Dosage",
     "coverage.col.last": "Dernière mise à jour", "coverage.col.asof": "Données au",
     "coverage.col.notes": "Notes", "coverage.no_brand": "enregistrements sans nom commercial",
+    # Q4（v0.13.6）：<768px 卡片式的短标签（手机两列网格里长标签会把数值挤掉）。
+    "coverage.col.mapping_short": "Corresp.", "coverage.col.spec_short": "Dosage",
+    "coverage.col.last_short": "Synchro", "coverage.col.asof_short": "Au",
     "coverage.source_note": "Sources et licences : voir À propos.",
     "name.no_en": "Pas de nom anglais", "name.no_es": "Pas de nom espagnol",
     "name.no_zh": "Pas de nom chinois", "name.no_zh_hant": "Pas de nom chinois traditionnel",
@@ -1203,6 +1206,7 @@ FR_I18N: dict[str, str] = {
     "drug.mkx_more": "{n} autres marchés",
     "drug.spec_count": "{shown} sur {n} affichées",
     "drug.spec_count_und": "{shown} affichées · {u} sans dosage indiqué",
+    "drug.spec_count_und_one": "{shown} affichées · 1 enregistrement sans dosage indiqué",
     "mkmeta.source": "Origine", "mkmeta.asof": "Données au",
     "mkmeta.undisclosed": "certains enregistrements n'indiquent pas le dosage",
     "mkmeta.unknown": "inclut des enregistrements au statut inconnu (pas une preuve de vente)",
@@ -1384,7 +1388,7 @@ FR_I18N.update({
     "atc.source_note": "Les codes ATC et la hiérarchie font référence à l’index ATC/DDD du Centre collaborateur de l’OMS pour la méthodologie des statistiques sur les médicaments (droit d’auteur WHOCC ; l’index lui-même n’est pas reproduit). Les informations sur les ingrédients/concentrations proviennent des dossiers des régulateurs répertoriés dans À propos.",
     "atc.show_all": "Afficher tout {n} (affichant actuellement {shown})",
     "atc.salt_label": "Forme de sel :",
-    "atc.status_note": "Les badges de statut résument les enregistrements de produits détenus pour chaque ingrédient (actif / abandonné / retiré / inconnu), et les codes de marché après chaque badge indiquent où ce statut est enregistré. Seuls certains registres publient une colonne d'état : CA, ES et MX le font ; AU et HK n'ont pas de colonne de statut et sont enregistrés comme inconnus ; Les enregistrements CN, US, GB, TW et SG sont inscrits au registre et marqués comme actifs.",
+    "atc.status_note": "Les badges de statut résument les enregistrements de produits détenus pour chaque ingrédient (actif / abandonné / retiré / inconnu), et les codes de marché après chaque badge indiquent où ce statut est enregistré. Seuls certains registres publient une colonne d'état : CA, ES, MX, FR, JP, CZ, LV et le registre de l'Union européenne le font, comme les fiches ARTG détaillées de l'AU ; l'export ARTG de l'AU et HK n'ont pas de colonne de statut et sont enregistrés comme inconnus ; Les enregistrements CN, US, GB, TW et SG sont inscrits au registre et marqués comme actifs.",
     "atc.markets_hint": "Chaque marché affiche désormais un statut agrégé : un marché est considéré comme en vente s'il a un enregistrement actif ; les statuts des enregistrements individuels sont affichés dans les détails. Un même marché peut également avoir plusieurs enregistrements d'enregistrement avec des statuts différents, de sorte que chaque marché n'apparaît ici qu'une seule fois ; il s'agit d'un fait enregistré, pas d'un jugement de sécurité.",
     "atc.ing_more": "{n} plus d'ingrédients — la liste complète apparaît lorsque le chargement de l'index complet est terminé.",
     "atc.nolang_note": "Un nom manquant est marqué dans sa ligne uniquement lorsqu'il s'agit d'une exception ; alors que la plupart des noms en manquent, la liste reste anonyme.",
@@ -1463,6 +1467,11 @@ FR_I18N.update({
     "drug.full_list": "Liste complète dans le paquet de données",
     "drug.und_more": "et {n} autres ({k} fabricants)",
     "drug.undisclosed_n": "{n} enregistrements · {k} fabricants",
+    # Q13（v0.13.6）：单复数与 en 同口径（fr 的 1 也走单数键）。
+    "drug.und_more_one": "et {n} autres (1 fabricant)",
+    "drug.undisclosed_n_one": "1 enregistrement · {k} fabricants",
+    "drug.undisclosed_k_one": "{n} enregistrements · 1 fabricant",
+    "drug.undisclosed_nk_one": "1 enregistrement · 1 fabricant",
     "drug.brand_group": "Avec un nom de marque",
     "drug.mah_group": "Fabricant uniquement",
     "drug.compare_note": "Un tableau côte à côte n'est proposé que lorsque cet ingrédient a des records sur de nombreux marchés ; sinon, cette liste représente l’ensemble du tableau.",
@@ -1704,6 +1713,9 @@ COVERAGE_I18N = {
         "coverage.col.last": "Last sync",
         "coverage.col.asof": "Data as of",
         "coverage.col.notes": "Known gaps",
+        # Q4（v0.13.6）：<768px 卡片式的短标签 —— 手机两列网格里长标签会把数值挤掉。
+        "coverage.col.mapping_short": "Mapped", "coverage.col.spec_short": "Spec",
+        "coverage.col.last_short": "Synced", "coverage.col.asof_short": "As of",
         "coverage.no_brand": "no trade-name records",
         "coverage.source_note": ("Sources and licences: see About and docs/许可清单.md. Restricted "
                                   "sources are aggregated only in the data package."),
@@ -1745,6 +1757,8 @@ COVERAGE_I18N = {
         "coverage.col.last": "Última sincronización",
         "coverage.col.asof": "Datos hasta",
         "coverage.col.notes": "Huecos conocidos",
+        "coverage.col.mapping_short": "Mapeo", "coverage.col.spec_short": "Conc.",
+        "coverage.col.last_short": "Sincro.", "coverage.col.asof_short": "Datos a",
         "coverage.no_brand": "registros sin nombre comercial",
         "coverage.source_note": ("Fuentes y licencias: ver About y docs/许可清单.md. Las fuentes "
                                   "restringidas solo se agregan en el paquete de datos."),
@@ -1782,6 +1796,8 @@ COVERAGE_I18N = {
         "coverage.col.last": "最后同步",
         "coverage.col.asof": "数据截止",
         "coverage.col.notes": "已知缺口",
+        "coverage.col.mapping_short": "已映射", "coverage.col.spec_short": "规格",
+        "coverage.col.last_short": "同步", "coverage.col.asof_short": "截止",
         "coverage.no_brand": "条记录无商品名",
         "coverage.source_note": "来源与许可见 About 与 docs/许可清单.md；受限来源在数据包中只以聚合形式出现。",
         "coverage.gap.us": "openFDA 全量；美国政府公开领域作品。",
@@ -1815,6 +1831,8 @@ COVERAGE_I18N = {
         "coverage.col.last": "最後同步",
         "coverage.col.asof": "資料截止",
         "coverage.col.notes": "已知缺口",
+        "coverage.col.mapping_short": "已對應", "coverage.col.spec_short": "規格",
+        "coverage.col.last_short": "同步", "coverage.col.asof_short": "截止",
         "coverage.no_brand": "筆紀錄無商品名",
         "coverage.source_note": "來源與許可見 About 與 docs/許可清單.md；受限來源在資料包中只以聚合形式出現。",
         "coverage.gap.us": "openFDA 全量；美國政府公開領域作品。",
@@ -1933,6 +1951,13 @@ UI_I18N = {
         "drug.full_list": "Full list in the data package",
         "drug.und_more": "and {n} more ({k} manufacturers)",
         "drug.undisclosed_n": "{n} records · {k} manufacturers",
+        # Q13（v0.13.6）：数量单复数。**构建期**按计数选单数键（n=1 / k=1 / 两者都为 1），
+        # 不新增客户端模板语法 —— 现有 `data-i18n-tpl` / `_lang_block_text` 只认「键 + {占位符}」，
+        # 所以在服务端就把键定死，切语言 / 筛选时前端照旧只替换数字。
+        "drug.und_more_one": "and {n} more (1 manufacturer)",
+        "drug.undisclosed_n_one": "1 record · {k} manufacturers",
+        "drug.undisclosed_k_one": "{n} records · 1 manufacturer",
+        "drug.undisclosed_nk_one": "1 record · 1 manufacturer",
         "drug.brand_group": "With a brand name",
         "drug.mah_group": "Manufacturer only",
         "drug.compare_note": "A side-by-side table is offered only when this ingredient has records in many markets; otherwise this list is the whole picture.",
@@ -2021,6 +2046,8 @@ UI_I18N = {
         "drug.mkx_more": "Other {n} markets",
         "drug.spec_count": "{shown} shown of {n}",
         "drug.spec_count_und": "{shown} shown · {u} without a stated strength",
+        # Q13（v0.13.6）：u=1 时英文不能写「1 without a stated strength」，单数键带出名词。
+        "drug.spec_count_und_one": "{shown} shown · 1 record without a stated strength",
         "mkmeta.source": "Source", "mkmeta.asof": "Data as of",
         "mkmeta.undisclosed": "some records have no stated strength",
         "mkmeta.unknown": "includes records with unknown status (not proof of sale)",
@@ -2121,6 +2148,11 @@ UI_I18N = {
         "drug.full_list": "Lista completa en el paquete de datos",
         "drug.und_more": "y {n} más ({k} fabricantes)",
         "drug.undisclosed_n": "{n} registros · {k} fabricantes",
+        # Q13（v0.13.6）：与 en 同键集 —— 构建期按计数选单数键。
+        "drug.und_more_one": "y {n} más (1 fabricante)",
+        "drug.undisclosed_n_one": "1 registro · {k} fabricantes",
+        "drug.undisclosed_k_one": "{n} registros · 1 fabricante",
+        "drug.undisclosed_nk_one": "1 registro · 1 fabricante",
         "drug.brand_group": "Con nombre comercial",
         "drug.mah_group": "Solo fabricante",
         "drug.compare_note": "La tabla comparativa solo se ofrece cuando este principio tiene registros en muchos mercados; si no, esta lista es la información completa.",
@@ -2202,6 +2234,7 @@ UI_I18N = {
         "drug.mkx_more": "{n} mercados más",
         "drug.spec_count": "{shown} de {n} mostradas",
         "drug.spec_count_und": "{shown} mostradas · {u} sin concentración indicada",
+        "drug.spec_count_und_one": "{shown} mostradas · 1 registro sin concentración indicada",
         "mkmeta.source": "Fuente", "mkmeta.asof": "Datos a",
         "mkmeta.undisclosed": "algunos registros no indican la concentración",
         "mkmeta.unknown": "incluye registros con estado desconocido (no implica venta)",
@@ -2283,6 +2316,11 @@ UI_I18N = {
         "drug.full_list": "完整清单见数据包",
         "drug.und_more": "还有 {n} 个（{k} 个厂家）",
         "drug.undisclosed_n": "{n} 个记录 · {k} 个厂家",
+        # Q13（v0.13.6）：中文没有单复数变化，但键集必须与 en 一致（构建期会硬拦缺键）。
+        "drug.und_more_one": "还有 {n} 个（1 个厂家）",
+        "drug.undisclosed_n_one": "1 个记录 · {k} 个厂家",
+        "drug.undisclosed_k_one": "{n} 个记录 · 1 个厂家",
+        "drug.undisclosed_nk_one": "1 个记录 · 1 个厂家",
         "drug.brand_group": "有商品名",
         "drug.mah_group": "仅厂家",
         "drug.compare_note": "并排对照表只在该成分跨市场记录较多时提供；否则这份清单就是全部。",
@@ -2356,6 +2394,7 @@ UI_I18N = {
         "drug.mkx_more": "另 {n} 个市场",
         "drug.spec_count": "展示 {shown} 个，共 {n} 个",
         "drug.spec_count_und": "展示 {shown} 个 · {u} 条未公开规格",
+        "drug.spec_count_und_one": "展示 {shown} 个 · 1 条未公开规格",
         "mkmeta.source": "来源", "mkmeta.asof": "数据截止",
         "mkmeta.undisclosed": "部分记录未公开规格",
         "mkmeta.unknown": "含状态未知记录（不等于在售）",
@@ -2437,6 +2476,11 @@ UI_I18N = {
         "drug.full_list": "完整清單見資料包",
         "drug.und_more": "還有 {n} 個（{k} 個廠商）",
         "drug.undisclosed_n": "{n} 個記錄 · {k} 個廠商",
+        # Q13（v0.13.6）：與 en 同鍵集（繁體值用繁體字，i18n_check 才不會判「沒轉換」）。
+        "drug.und_more_one": "還有 {n} 個（1 個廠商）",
+        "drug.undisclosed_n_one": "1 個記錄 · {k} 個廠商",
+        "drug.undisclosed_k_one": "{n} 個記錄 · 1 個廠商",
+        "drug.undisclosed_nk_one": "1 個記錄 · 1 個廠商",
         "drug.brand_group": "有商品名",
         "drug.mah_group": "僅廠商",
         "drug.compare_note": "並排對照表只在該成分跨市場紀錄較多時提供；否則這份清單就是全部。",
@@ -2613,6 +2657,7 @@ UI_I18N = {
         "drug.mkx_more": "另 {n} 個市場",
         "drug.spec_count": "顯示 {shown} 個，共 {n} 個",
         "drug.spec_count_und": "顯示 {shown} 個 · {u} 條未公開規格",
+        "drug.spec_count_und_one": "顯示 {shown} 個 · 1 條未公開規格",
         "mkmeta.source": "來源", "mkmeta.asof": "資料截止",
         "mkmeta.undisclosed": "部分記錄未公開規格",
         "mkmeta.unknown": "含狀態未知記錄（不等於在售）",
@@ -4541,16 +4586,36 @@ padding:14px 16px;margin:10px 0}
 /* L9（v0.12.2）：成分页中文名 —— h1 是原文/通用名，中文名在下一行作次级（18px、不抢主标题） */
 .drug-zh{margin:2px 0 4px;font-size:18px;font-weight:600;color:var(--muted);letter-spacing:.02em}
 @media (max-width:767px){.drug-zh{font-size:16px}}
-/* L14 前置（v0.12.2）：覆盖页在 <768px 改卡片式 —— 7 列表格挤不下，首屏条目只有 1.5 行 */
+/* L14 前置（v0.12.2）：覆盖页在 <768px 改卡片式 —— 7 列表格挤不下，首屏条目只有 1.5 行。
+   Q4（v0.13.6）：卡片从「一行一个字段」改成**两列网格**（390 档首屏条目 1.5 → 4.0）：
+     · 市场名占满一行（17px 粗体），其后 6 个字段两两并排，缺口（第 7 列）占满一行、截断 1 行；
+     · 标签走 `::before`（13px，可缩、可省略号），数值 16px **不截断** —— 宁可截标签也不截数字；
+     · 长标签列另给 `data-label-short`（en「Mapped / Spec / Synced / As of」），
+       否则 390 下「Ingredient mapped · 96.7%」会把数值挤掉；标签随界面语言变（data-i18n-label）。 */
 @media (max-width:767px){
   table.coverage-table{display:block;border:0;font-size:16px}
   table.coverage-table thead{display:none}
-  table.coverage-table tbody,table.coverage-table tr,table.coverage-table td{display:block;width:auto}
-  table.coverage-table tr{position:static;margin:0 0 8px;padding:6px 0}
-  table.coverage-table td{padding:1px 0;white-space:normal;text-align:left;line-height:1.4}
-  table.coverage-table td::before{content:attr(data-label) " · ";color:var(--muted);font-size:13px}
-  table.coverage-table td:first-child::before{content:""}
-  table.coverage-table td:first-child{font-size:18px;font-weight:700}
+  /* 选择器必须带 id：这张表同时还挂着 `.res` 类，全局的手机规则
+     `table.res tr{display:block}` / `table.res td{display:block}` 同特异性且写在后面，
+     只用 `table.coverage-table` 会被它们盖掉（v0.13.6 第一次构建就踩了：网格没生效）。 */
+  #covtable tbody{display:block}
+  #covtable tr{display:grid;grid-template-columns:1fr 1fr;column-gap:6px;
+    position:static;margin:0 0 6px;padding:4px 0 5px;border-top:1px solid var(--line)}
+  #covtable td{padding:1px 0;display:flex;align-items:baseline;min-width:0;
+    white-space:nowrap;overflow:hidden;text-align:left;line-height:1.4}
+  #covtable td::before{content:attr(data-label) " · ";color:var(--muted);
+    font-size:13px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap}
+  #covtable td[data-label-short]::before{content:attr(data-label-short) " · "}
+  #covtable td:first-child{grid-column:1/-1;display:block;font-size:17px;
+    font-weight:700;line-height:1.3}
+  #covtable td:first-child::before{content:none}
+  #covtable td:nth-child(3) .meta,
+  #covtable td:nth-child(4) .meta{display:none}
+  #covtable td:nth-child(7){grid-column:1/-1;display:-webkit-box;
+    -webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;white-space:normal}
+  #covtable td:nth-child(7)::before{display:inline;overflow:visible;flex:none}
+  #covtable .covgap{display:inline;overflow:visible;-webkit-line-clamp:none}
 }
 .mktxt{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* v0.13.3（R1）：国家从「US」变成「美国 · US」后更长 ——
@@ -5657,8 +5722,27 @@ body.density-compact table.res{font-size:14px}
 .atc-notes .notice{margin:8px 0}
 .covtools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .covtools button{min-height:44px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--line);background:#fff;color:var(--fg);font-size:14px}
+/* Q4（v0.13.6）：覆盖页 768–1023 档 —— 7 列在 713px 里互相挤，缺口列被压到 130px、
+   一行换 8 行（行高 137–209px，首屏只有 3.5 行）。改：定宽列 + 缺口最多 2 行（全文进 title）。 */
+@media (max-width:1279px){
+  #covtable .covgap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden}
+}
+@media (min-width:768px) and (max-width:1023px){
+  #covtable{table-layout:fixed;width:100%}
+  /* 正文必须 ≥16px（首屏守卫全局阈值）；只有表头可以走辅助字号。 */
+  #covtable th{padding:6px 6px;font-size:14px}
+  #covtable td{padding:6px 6px;font-size:16px}
+  #covtable th:nth-child(1){width:17%}
+  #covtable th:nth-child(2){width:10%}
+  #covtable th:nth-child(3){width:13%}
+  #covtable th:nth-child(4){width:13%}
+  #covtable th:nth-child(5){width:11%}
+  #covtable th:nth-child(6){width:11%}
+  #covtable th:nth-child(7){width:25%}
+}
 @media (max-width:767px){
-  .coverage-table .covgap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .covtools{margin:6px 0}
   .tabbar{padding-bottom:env(safe-area-inset-bottom)}
   main{padding-bottom:80px}
 }
@@ -12141,6 +12225,20 @@ def _eu_region_note(cls: str = "mkregion") -> str:
             + "</span></p>")
 
 
+def _und_count_key(n_rec: int, k_mah: int) -> str:
+    """Q13（v0.13.6）：「N 个记录 · K 个厂家」按计数选单复数键。
+
+    做法：**构建期**把键定死（服务端已知两个计数），沿用现有 `_lang_block_text(key, **fmt)`
+    的「键 + {占位符}」机制 —— 不新造客户端模板语法，也不需要前端切语言时算复数。
+    只有「等于 1」才走单数键；0 与 ≥2 都按复数（英文 0 manufacturers 才是对的）。
+    """
+    if n_rec == 1 and k_mah == 1:
+        return "drug.undisclosed_nk_one"
+    if n_rec == 1:
+        return "drug.undisclosed_n_one"
+    return "drug.undisclosed_k_one" if k_mah == 1 else "drug.undisclosed_n"
+
+
 def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[str, int],
                     n_specs: int, name_bit, status_cell: dict[tuple, set[str]],
                     T: dict, und_meta: dict | None = None,
@@ -12496,14 +12594,15 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
                 remaining = len(mah_keys) - len(shown_keys)
             if remaining > 0:
                 body.append('<p class="und-more">'
-                            + _lang_block_text("drug.und_more", n=remaining,
-                                               k=len(mah_keys))
+                            + _lang_block_text(
+                                "drug.und_more_one" if len(mah_keys) == 1 else "drug.und_more",
+                                n=remaining, k=len(mah_keys))
                             + '</p>')
             body.append('<p class="sub full-list"><a href="datapackage.json">'
                         + _lang_block_text("drug.full_list") + '</a></p>')
             undis_html = (
                 f'<details class="undis"><summary><span class="ln">'
-                f'{_lang_block_text("drug.undisclosed_n", n=n_rec, k=k_mah)}'
+                f'{_lang_block_text(_und_count_key(n_rec, k_mah), n=n_rec, k=k_mah)}'
                 f'</span></summary><div class="und-body">' + "".join(body) + '</div></details>')
         # v0.11.0 P1：EU 块头给一句口径说明（集中审批 ≠ 某国在售、无规格/剂型/包装），
         # 否则用户只看到「EU」两个字（reports/v0110-verify-20261111 §3.3）。
@@ -12543,10 +12642,15 @@ def _drug_list_html(spec_rows: list, countries: list[str], rec_by_country: dict[
         # R5（v0.13.5）：整块都没有结构化规格时（n_head == 0）不能写「0 shown of 0」——
         # 换成「0 shown · N without a stated strength」（N = 该块未公开规格记录数，data-und）。
         _und_only = n_head == 0 and n_rec > 0
-        _spec_tpl = "drug.spec_count_und" if _und_only else "drug.spec_count"
-        _spec_txt = T.get(_spec_tpl,
-                          "{shown} shown · {u} without a stated strength" if _und_only
-                          else "{shown} shown of {n}")
+        # Q13（v0.13.6）：u=1 时改用单数键（「1 record without a stated strength」）。
+        # 键在构建期定死 → 前端 `data-i18n-tpl` 的替换逻辑一行都不用改（切语言 / 筛选照旧）。
+        if _und_only:
+            _spec_tpl = "drug.spec_count_und_one" if n_rec == 1 else "drug.spec_count_und"
+            _spec_fallback = ("{shown} shown · 1 record without a stated strength"
+                              if n_rec == 1 else "{shown} shown · {u} without a stated strength")
+        else:
+            _spec_tpl, _spec_fallback = "drug.spec_count", "{shown} shown of {n}"
+        _spec_txt = T.get(_spec_tpl, _spec_fallback)
         for _ph, _val in (("{shown}", shown_n), ("{n}", n_head), ("{u}", n_rec)):
             _spec_txt = _spec_txt.replace(_ph, str(_val))
         _und_attr = f' data-und="{n_rec}"' if _und_only else ""
@@ -13615,19 +13719,44 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
         if nt and c == "CN":
             note += (f' <span class="meta">· {nt:,} ({nt / n * 100:.1f}%) '
                      f'<span data-i18n="coverage.no_brand">no trade-name records</span></span>')
+        # Q4（v0.13.6）：缺口格加 `.covgap` 包装 —— ≤1279 收 2 行、手机收 1 行，全文进 `title`。
+        # 同时给每格挂 `data-i18n-label`：卡片式的 `td::before` 读的是 data-label，
+        # 原来永远显示英文（中文界面下也写 "Market"）；长标签列再挂 `data-label-short`
+        # （手机只显示短标签，免得把数值挤掉）。数值列另给 title，手机隐藏括号里的绝对数后仍可查。
+        note_plain = esc(re.sub(r"<[^>]+>", "", note).strip())
         rows.append(
-            f'<tr id="market-{c}"><td data-label="{esc(T["coverage.col.market"])}">'
+            f'<tr id="market-{c}">'
+            f'<td data-label="{esc(T["coverage.col.market"])}" '
+            f'data-i18n-label="coverage.col.market">'
             f'<span data-i18n="home.{c.lower()}">{esc(T.get("home." + c.lower(), c))}</span> '
             f'<span class="meta">{esc(c)}</span></td>'
-            f'<td data-label="{esc(T["coverage.col.products"])}">{n:,}</td>'
-            f'<td data-label="{esc(T["coverage.col.mapping"])}">{mpct:.1f}%'
+            f'<td data-label="{esc(T["coverage.col.products"])}" '
+            f'data-i18n-label="coverage.col.products">{n:,}</td>'
+            f'<td data-label="{esc(T["coverage.col.mapping"])}" '
+            f'data-i18n-label="coverage.col.mapping" '
+            f'data-label-short="{esc(T.get("coverage.col.mapping_short", "Mapped"))}" '
+            f'data-i18n-label-short="coverage.col.mapping_short" '
+            f'title="{mpct:.1f}% ({mapped:,}/{n:,})">{mpct:.1f}%'
             f' <span class="meta">({mapped:,}/{n:,})</span></td>'
-            f'<td data-label="{esc(T["coverage.col.spec"])}">{spct:.1f}%'
+            f'<td data-label="{esc(T["coverage.col.spec"])}" '
+            f'data-i18n-label="coverage.col.spec" '
+            f'data-label-short="{esc(T.get("coverage.col.spec_short", "Spec"))}" '
+            f'data-i18n-label-short="coverage.col.spec_short" '
+            f'title="{spct:.1f}% ({spec:,}/{n:,})">{spct:.1f}%'
             f' <span class="meta">({spec:,}/{n:,})</span></td>'
             f'<td data-label="{esc(T["coverage.col.last"])}" '
+            f'data-i18n-label="coverage.col.last" '
+            f'data-label-short="{esc(T.get("coverage.col.last_short", "Synced"))}" '
+            f'data-i18n-label-short="coverage.col.last_short" '
             f'title="{esc(r.get("last_synced") or "")}">{esc((r.get("last_synced") or "—")[:10])}</td>'
-            f'<td data-label="{esc(T["coverage.col.asof"])}">{esc(asof.get(c) or "—")}</td>'
-            f'<td data-label="{esc(T["coverage.col.notes"])}">{note}</td></tr>')
+            f'<td data-label="{esc(T["coverage.col.asof"])}" '
+            f'data-i18n-label="coverage.col.asof" '
+            f'data-label-short="{esc(T.get("coverage.col.asof_short", "As of"))}" '
+            f'data-i18n-label-short="coverage.col.asof_short">'
+            f'{esc(asof.get(c) or "—")}</td>'
+            f'<td data-label="{esc(T["coverage.col.notes"])}" '
+            f'data-i18n-label="coverage.col.notes">'
+            f'<span class="covgap" title="{note_plain}">{note}</span></td></tr>')
     # L7（v0.12.1）：页头四件套（原 intro 副行保留；页头不再加摘要，避免 3 行 sub）
     head = _page_head("../", f'<h1 data-i18n="coverage.title">{esc(T["coverage.title"])}</h1>',
                       crumb="coverage")
@@ -13818,9 +13947,11 @@ ATC_I18N = {
         "atc.status_note": ("Status badges summarise the product records held for each "
                             "ingredient (active / discontinued / withdrawn / unknown), and the "
                             "market codes after each badge show where that status is recorded. "
-                            "Only some registers publish a status column: CA, ES and MX do; AU "
-                            "and HK have no status column and are recorded as unknown; CN, US, "
-                            "GB, TW and SG records are on the register and marked active."),
+                            "Only some registers publish a status column: CA, ES, MX, FR, JP, CZ, "
+                            "LV and the EU Union Register do, as do the AU ARTG detail records; "
+                            "the AU ARTG export and HK have no status column and are recorded as "
+                            "unknown; CN, US, GB, TW and SG records are on the register and "
+                            "marked active."),
         "atc.markets_hint": ("Each market now shows one aggregated status: a market counts "
                              "as on sale if it has any active record; individual record "
                              "statuses are shown in the details. The same market can also have "
@@ -13889,9 +14020,11 @@ ATC_I18N = {
         "atc.status_note": ("Las insignias de estado resumen los registros de producto de cada "
                             "principio activo (activo / descatalogado / retirado / desconocido); "
                             "los códigos de mercado tras cada insignia indican dónde consta ese "
-                            "estado. Solo algunos registros publican columna de estado: CA, ES y "
-                            "MX sí; AU y HK no la tienen y figuran como desconocido; los "
-                            "registros de CN, US, GB, TW y SG figuran como activos."),
+                            "estado. Solo algunos registros publican columna de estado: CA, ES, "
+                            "MX, FR, JP, CZ, LV y el Registro de la Unión Europea sí, igual que "
+                            "los registros de detalle ARTG de AU; la exportación ARTG de AU y HK "
+                            "no la tienen y figuran como desconocido; los registros de CN, US, "
+                            "GB, TW y SG figuran como activos."),
         "atc.markets_hint": ("Cada mercado muestra ahora un estado agregado: cuenta como en "
                              "venta si tiene algún registro activo; los estados de cada registro "
                              "están en el detalle. Un mismo mercado también puede tener varios "
@@ -13952,8 +14085,9 @@ ATC_I18N = {
         "atc.salt_label": "盐型：",
         "atc.status_note": ("状态角标按每个成分的产品记录汇总（在售 / 已停售 / 已撤市 / 状态未知）；"
                             "每个角标后面的市场码表示该状态记录在哪些市场。只有部分市场的"
-                            "登记库带状态列：CA、ES、MX 有；AU、HK 没有状态列，记为状态未知；"
-                            "CN、US、GB、TW、SG 的记录按在售登记。"),
+                            "登记库带状态列：CA、ES、MX、FR、JP、CZ、LV 和欧盟联合登记库有，"
+                            "AU 的 ARTG 明细记录也有；AU 的 ARTG 导出与 HK 没有状态列，记为"
+                            "状态未知；CN、US、GB、TW、SG 的记录按在售登记。"),
         "atc.markets_hint": ("每个市场只显示一个汇总状态：只要该市场有在售记录就算在售；"
                              "单条记录的状态见详情。同一市场也可能有多条注册记录、状态各不相同，"
                              "所以一个市场在这里只出现一次；这只是登记事实，不是安全性判断。"),
@@ -14001,8 +14135,9 @@ ATC_I18N = {
         "atc.salt_label": "鹽型：",
         "atc.status_note": ("狀態角標依每個成分的產品紀錄彙總（販售中 / 已停售 / 已下市 / 狀態未知）；"
                             "每個角標後面的市場碼表示該狀態記錄在哪些市場。只有部分市場的"
-                            "登記庫帶狀態列：CA、ES、MX 有；AU、HK 沒有狀態列，記為狀態未知；"
-                            "CN、US、GB、TW、SG 的紀錄按販售中登記。"),
+                            "登記庫帶狀態列：CA、ES、MX、FR、JP、CZ、LV 和歐盟聯合登記庫有，"
+                            "AU 的 ARTG 明細紀錄也有；AU 的 ARTG 匯出與 HK 沒有狀態列，記為"
+                            "狀態未知；CN、US、GB、TW、SG 的紀錄按販售中登記。"),
         "atc.markets_hint": ("每個市場只顯示一個彙總狀態：只要該市場有販售中記錄就算販售中；"
                              "單條記錄的狀態見詳情。同一市場也可能有多條註冊記錄、狀態各不相同，"
                              "所以一個市場在這裡只出現一次；這只是登記事實，不是安全性判斷。"),
@@ -14430,9 +14565,17 @@ def _lang_blocks(parts: dict[str, str]) -> str:
 
 
 def _lang_block_text(key: str, **fmt: object) -> str:
-    """同一句 UI 文案的四语块（数字占位在构建期替换）。"""
+    """同一句 UI 文案的语言块（数字占位在构建期替换）。
+
+    Q13（v0.13.6）：fr 上线（v0.11.4）后一直没进这几块 —— 法语界面上成分页
+    「N 个记录 · K 个厂家」/「还有 N 个」/「有商品名」等块是**空白**（`_lang_blocks`
+    只显示与当前语言相同的那一块）。这里把已上线的语言都算进来：文案由
+    `_merge_static_i18n` 在 main() 里先铺好 I18N["fr"]，所以调用时一定取得到。
+    """
+    langs = ["en", "es", "zh", "zh-Hant"]
+    langs += [code for code in ("fr",) if code in I18N_REQUIRED_LANGS]
     out = {}
-    for lang in ("en", "es", "zh", "zh-Hant"):
+    for lang in langs:
         text = (I18N.get(lang) or {}).get(key) or I18N["en"].get(key, "")
         for k, v in fmt.items():
             text = text.replace("{" + k + "}", str(v))
@@ -16229,6 +16372,10 @@ def main() -> None:
     // v0.5.4：移动端卡片列名（CSS content:attr(data-label)）也随语言切换（厂家页等）。
     document.querySelectorAll('[data-i18n-label]').forEach(function(el){
       el.setAttribute('data-label', window.T(el.dataset.i18nLabel));
+    });
+    // Q4（v0.13.6）：覆盖页卡片式的**短标签**同样随语言切换（<768px 的 td::before 读它）。
+    document.querySelectorAll('[data-i18n-label-short]').forEach(function(el){
+      el.setAttribute('data-label-short', window.T(el.dataset.i18nLabelShort));
     });
     // /warn 与成分页的警示正文是数据行（zh/en/es 各一份），按当前语言只显示对应块。
     document.querySelectorAll('[data-lang-block]').forEach(function(el){

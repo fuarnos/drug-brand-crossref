@@ -1,0 +1,183 @@
+{
+ "merges": [
+  {
+   "from": "acetic-acid-glacial",
+   "to": "acetic-acid",
+   "why": "Acetic Acid Glacial = 冰醋酸（纯醋酸），与 Acetic Acid 同一物质；仅性状限定词 Glacial",
+   "from_row": {
+    "substance_id": "acetic-acid-glacial",
+    "inn_en": "Acetic Acid Glacial",
+    "inn_zh": null,
+    "atc": null,
+    "atc_name": null,
+    "drug_class": null,
+    "ddd_value": null,
+    "ddd_unit": null,
+    "ddd_route": null,
+    "source_id": "sukl_dlp",
+    "method": "imported",
+    "confidence": "medium",
+    "decided_at": "2026-11-11",
+    "name_lang": "en"
+   },
+   "to_row": {
+    "substance_id": "acetic-acid",
+    "inn_en": "Acetic Acid",
+    "inn_zh": null,
+    "atc": "S02AA30",
+    "atc_name": null,
+    "drug_class": null,
+    "ddd_value": null,
+    "ddd_unit": null,
+    "ddd_route": null,
+    "source_id": null,
+    "method": null,
+    "confidence": null,
+    "decided_at": null,
+    "name_lang": "en"
+   },
+   "variants": [
+    {
+     "variant_id": "acetic-acid-glacial",
+     "substance_id": "acetic-acid-glacial",
+     "salt": "",
+     "hydrate": "",
+     "ester": "",
+     "salt_code": ""
+    }
+   ],
+   "n_components": 6,
+   "n_products": 6,
+   "refs": {
+    "nickname.substance_id": 0,
+    "drug_term.substance_id": 0
+   }
+  },
+  {
+   "from": "ethinylestradiol-micronized",
+   "to": "ethinylestradiol",
+   "why": "Ethinylestradiol Micronized = 微粉化炔雌醇，与 Ethinylestradiol 同一物质；仅粒径限定词",
+   "from_row": {
+    "substance_id": "ethinylestradiol-micronized",
+    "inn_en": "Ethinylestradiol Micronized",
+    "inn_zh": null,
+    "atc": null,
+    "atc_name": null,
+    "drug_class": null,
+    "ddd_value": null,
+    "ddd_unit": null,
+    "ddd_route": null,
+    "source_id": "sukl_dlp",
+    "method": "imported",
+    "confidence": "medium",
+    "decided_at": "2026-11-11",
+    "name_lang": "en"
+   },
+   "to_row": {
+    "substance_id": "ethinylestradiol",
+    "inn_en": "Ethinylestradiol",
+    "inn_zh": "炔雌醇",
+    "atc": "G03CA",
+    "atc_name": null,
+    "drug_class": "cn-only-en",
+    "ddd_value": null,
+    "ddd_unit": null,
+    "ddd_route": null,
+    "source_id": null,
+    "method": null,
+    "confidence": null,
+    "decided_at": null,
+    "name_lang": "en"
+   },
+   "variants": [
+    {
+     "variant_id": "ethinylestradiol-micronized",
+     "substance_id": "ethinylestradiol-micronized",
+     "salt": "",
+     "hydrate": "",
+     "ester": "",
+     "salt_code": ""
+    }
+   ],
+   "n_components": 20,
+   "n_products": 20,
+   "refs": {
+    "nickname.substance_id": 0,
+    "drug_term.substance_id": 0
+   }
+  },
+  {
+   "from": "ferrous-sulfate-dried",
+   "to": "ferrous-sulfate",
+   "why": "Ferrous Sulfate Dried = 干燥硫酸亚铁，与 Ferrous Sulfate 同一物质；仅干燥工艺限定词",
+   "from_row": {
+    "substance_id": "ferrous-sulfate-dried",
+    "inn_en": "Ferrous Sulfate Dried",
+    "inn_zh": null,
+    "atc": null,
+    "atc_name": null,
+    "drug_class": null,
+    "ddd_value": null,
+    "ddd_unit": null,
+    "ddd_route": null,
+    "source_id": "sukl_dlp",
+    "method": "imported",
+    "confidence": "medium",
+    "decided_at": "2026-11-11",
+    "name_lang": "en"
+   },
+   "to_row": {
+    "substance_id": "ferrous-sulfate",
+    "inn_en": "Ferrous Sulfate",
+    "inn_zh": null,
+    "atc": "B03AA",
+    "atc_name": null,
+    "drug_class": null,
+    "ddd_value": null,
+    "ddd_unit": null,
+    "ddd_route": null,
+    "source_id": null,
+    "method": null,
+    "confidence": null,
+    "decided_at": null,
+    "name_lang": "en"
+   },
+   "variants": [
+    {
+     "variant_id": "ferrous-sulfate-dried",
+     "substance_id": "ferrous-sulfate-dried",
+     "salt": "",
+     "hydrate": "",
+     "ester": "",
+     "salt_code": ""
+    }
+   ],
+   "n_components": 4,
+   "n_products": 4,
+   "refs": {
+    "nickname.substance_id": 0,
+    "drug_term.substance_id": 0
+   }
+  }
+ ],
+ "counts_before": {
+  "substance": 13648,
+  "variant": 15248,
+  "product_component": 767080,
+  "product": 594781,
+  "substance_sukl_dlp": 908
+ },
+ "tool": "db/q2_merge_substances.py",
+ "db": "data\\drugs.db",
+ "db_bytes": 558039040,
+ "sha256_before": "b6182140b4546524eb37f98d06bd937bd9313e945ec7bd1b73fb8e3dd76a3c0d",
+ "created_at": "2026-11-17T18:58:56+00:00",
+ "action": "merge_substances",
+ "counts_after": {
+  "substance": 13645,
+  "variant": 15248,
+  "product_component": 767080,
+  "product": 594781,
+  "substance_sukl_dlp": 905
+ }
+}
