@@ -165,3 +165,20 @@
 - `site-build` —— 建站与验收（含三语抽查、性能回归、本地预览）
 - `data-audit` —— 数据体检、覆盖率统计、写报告
 - `release` —— 版本发布与回滚
+
+## 附二：前端最佳实践参考（vendored，2026-11-17 起）
+
+`vendor/modern-web-guidance/` 是 **Modern Web Guidance**（Google Chrome 主导、Edge / Firefox / MDN 共同维护，Apache-2.0）的**离线存档**：210 篇现代 Web 指南 + 本地检索索引 + CLI；用法、版本与哈希见 `vendor/modern-web-guidance/VENDOR.md`。
+
+- **什么时候用**：改 `site/build.py` 的 HTML / CSS / 客户端 JS 之前（dialog / popover、表格排序、滚动吸附、表单校验、性能、无障碍、排版），先 `search` 出对应指南再决定「手写 / 纯 CSS / 原生 API」——这是 §12「先找现成工具」在页面细节上的落点。
+- **怎么用**（`DISABLE_TELEMETRY=1` 必带：官方默认匿名上报）：
+
+  ```powershell
+  $node = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe'
+  $mwg  = 'vendor\modern-web-guidance\skills\modern-web-guidance\modern-web.mjs'
+  $env:DISABLE_TELEMETRY = '1'
+  & $node $mwg search "light dismiss dialog"
+  & $node $mwg retrieve "dialog,light-dismiss-a-dialog"
+  ```
+
+- **边界**：它是参考，不是依赖——不进 `site/build.py`、不进 `site/dist`、不新增 npm 构建链；`install` / `update` 在本仓一律不跑（会写 agent 目录、污染工作树）。
