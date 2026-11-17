@@ -1140,6 +1140,10 @@ FR_I18N: dict[str, str] = {
     "fam.cmp_ing": "Principes actifs complets",
     "fam.cmp_rel": "Lien avec cette page",
     "fam.cmp_this": "Cette page",
+    # v0.13.7（V2）：当前记录移到表头 + 药名旁的关系徽标
+    "fam.cmp_current": "Produit comparé",
+    "fam.badge.same": "Mêmes principes actifs · type de libération à vérifier",
+    "fam.badge.diff": "Formule différente · {n} principes actifs de plus",
     "fam.rel.same": "Principes actifs identiques",
     "fam.rel.diff": "Principes actifs différents : non interchangeables",
     "fam.rel.partial": ("Certains principes actifs en commun : pas la même association, "
@@ -1972,6 +1976,10 @@ UI_I18N = {
         "fam.cmp_ing": "All active ingredients",
         "fam.cmp_rel": "Relation",
         "fam.cmp_this": "This page",
+        # v0.13.7（V2）：当前记录移到表头 + 药名旁的关系徽标（关系由 _family_relation 自动推导）
+        "fam.cmp_current": "Product being compared",
+        "fam.badge.same": "Same active ingredients · release type to be checked",
+        "fam.badge.diff": "Different formula · {n} more active ingredients",
         "fam.rel.same": "Same active ingredients",
         "fam.rel.diff": "Different active ingredients — not interchangeable",
         "fam.rel.partial": ("Some active ingredients in common — not the same combination, "
@@ -2167,6 +2175,9 @@ UI_I18N = {
         "fam.cmp_ing": "Principios activos completos",
         "fam.cmp_rel": "Relación",
         "fam.cmp_this": "Esta página",
+        "fam.cmp_current": "Producto en comparación",
+        "fam.badge.same": "Mismos principios activos · falta comprobar la liberación",
+        "fam.badge.diff": "Fórmula distinta · {n} principios activos más",
         "fam.rel.same": "Mismos principios activos",
         "fam.rel.diff": "Principios activos distintos: no intercambiables",
         "fam.rel.partial": ("Comparte parte de los principios activos: no es la misma "
@@ -2333,6 +2344,9 @@ UI_I18N = {
         "fam.cmp_ing": "完整活性成分",
         "fam.cmp_rel": "关系说明",
         "fam.cmp_this": "本页",
+        "fam.cmp_current": "正在对照的产品",
+        "fam.badge.same": "成分相同 · 释放方式待核对",
+        "fam.badge.diff": "配方不同 · 另含 {n} 种活性成分",
         "fam.rel.same": "活性成分相同",
         "fam.rel.diff": "活性成分不同，不可互换",
         "fam.rel.partial": "成分部分相同，不是同一复方，不可互换",
@@ -2596,6 +2610,9 @@ UI_I18N = {
         "fam.cmp_ing": "完整活性成分",
         "fam.cmp_rel": "關係說明",
         "fam.cmp_this": "本頁",
+        "fam.cmp_current": "正在對照的產品",
+        "fam.badge.same": "成分相同 · 釋放方式待核對",
+        "fam.badge.diff": "配方不同 · 另含 {n} 種活性成分",
         "fam.rel.same": "活性成分相同",
         "fam.rel.diff": "活性成分不同，不可互換",
         "fam.rel.partial": "成分部分相同，不是同一複方，不可互換",
@@ -5544,8 +5561,19 @@ table.matrix td[data-country]:not([data-defcol]){display:none}
      首屏可见条目 2.5 → 3 条；字号仍是 16 px，不碰正文下限。 */
   table.res.famcmp tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:12px}
   table.res.famcmp td{padding:4px 0}
-  table.res.famcmp td[data-i18n-label="fam.cmp_ing"],
-  table.res.famcmp td[data-i18n-label="fam.cmp_rel"]{grid-column:1 / -1}
+  table.res.famcmp td[data-i18n-label="fam.cmp_ing"]{grid-column:1 / -1}
+  /* v0.13.7（V2）：关系徽标 —— 桌面跟药名同一行，手机（≤767px）落到药名下一行。 */
+  table.res.famcmp .famrel{display:inline-block;margin-left:8px}
+  table.res.famcmp .famcmp-name .famrel{display:block;margin:2px 0 0}
+  .famcur{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin:10px 0 6px;
+    padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+  .famcur-h{font-size:13px;color:var(--muted)}
+  .famcur-n{font-size:18px;font-weight:700}
+  .famcur-mk{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .famcur-ing{flex-basis:100%;font-size:16px}
+  /* 关系徽标：纯文字（不加边框/底色），只有「配方不同」另给颜色语义（差异才需要眼睛停留）。 */
+  .famrel{font-size:14px;color:var(--muted)}
+  .famrel-diff{color:var(--warn)}
 }
 /* i18n P1：静态页（About / What's new / Confused）移动端收尾 */
 @media (max-width:767px){
@@ -9425,10 +9453,25 @@ def _slim_shell(*chunks: str) -> tuple[str, ...]:
 # 顶层约 30 页静态输出新壳（5 项导航 + `<details>` 面板 + 移动底栏 + 语言常显）；
 # 121k 长尾页保持原壳不动（每页静态增量 0 B），新壳由 assets/boot.js 运行时注入，
 # 两边共用下面同一份模板（boot.js 里把根前缀写成 __R__ 占位）。
-SHELL_MARKETS = (("US", "home.us"), ("CN", "home.cn"), ("GB", "home.gb"), ("CA", "home.ca"),
-                 ("AU", "home.au"), ("ES", "home.es"), ("TW", "home.tw"), ("HK", "home.hk"),
-                 ("MX", "home.mx"), ("SG", "home.sg"), ("JP", "home.jp"),
-                 ("CZ", "home.cz"), ("LV", "home.lv"), ("EU", "home.eu"))
+# v0.13.7（V1）：市场菜单**不再手写国家清单** —— 单一真相源是 `data/markets.json`
+# （enabled + order），与覆盖页的行同源同序。原来这里的 14 项硬编码漏了法国 FR
+# （覆盖页早有 15,799 条），用户点不到 FR 过滤。
+def _registry_shell_markets() -> tuple[tuple[str, str], ...]:
+    """(市场码, i18n key) 列表：读 data/markets.json，只取 enabled，按 order 排序。
+
+    读不到文件时退回空元组（菜单为空而不是崩构建；tests/test_markets_registry.py 会拦）。
+    """
+    try:
+        payload = json.loads((ROOT / "data" / "markets.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ()
+    rows = [m for m in (payload.get("markets") or []) if m.get("enabled")]
+    rows.sort(key=lambda m: (m.get("order") or 9999, str(m.get("code") or "")))
+    return tuple((str(m["code"]), str(m["i18n_key"])) for m in rows
+                 if m.get("code") and m.get("i18n_key"))
+
+
+SHELL_MARKETS = _registry_shell_markets()
 SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
 
 
@@ -12072,6 +12115,33 @@ def _family_name_html(key: str, display: str, page_keys: set[str] | None) -> str
     return f"<b>{label}</b>"
 
 
+def _fam_badge(rel_key: str, n_extra: int) -> str:
+    """v0.13.7（V2）：药名旁的**关系徽标**（桌面在药名右侧、手机在药名下一行）。
+
+    关系全部由 `_family_relation()` 自动推导（成分集合 + release），这里只决定「用哪句话」：
+      · 成分集合相同（same / multi / multi_unknown）→ `fam.badge.same`「成分相同 · 释放方式待核对」
+      · 成分集合不同（diff / partial）→ `fam.badge.diff`「配方不同 · 另含 {n} 种活性成分」
+        （n = 对方有、当前记录没有的成分数，由差集算）
+      · 两侧都能锁定且释放不同（release）→ 复用既有 `fam.rel.release`（「不可互换」信号不能丢）
+      · 任一侧没成分记录（none）→ 复用 `fam.rel.none`
+    数字走现有 `data-i18n-tpl` + `data-total`，切语言时前端只替换数字。
+    """
+    T = I18N["en"]
+    if rel_key in ("fam.rel.diff", "fam.rel.partial"):
+        if n_extra <= 0:
+            # 对方是这个页面的**子集**（当前记录另有几种成分）：不能说「另含 N 种」——
+            # N=0 时会变成假话。改回既有的中性表述（部分相同 / 组合不同，不可互换）。
+            key = "fam.rel.partial" if rel_key == "fam.rel.partial" else "fam.rel.diff"
+            return f'<span class="famrel famrel-diff" data-i18n="{key}">{esc(T[key])}</span>'
+        fallback = str(T.get("fam.badge.diff") or "Different formula · {n} more active ingredients")
+        return (f'<span class="famrel famrel-diff" data-i18n-tpl="fam.badge.diff" '
+                f'data-total="{n_extra}">'
+                f'{esc(fallback.replace("{n}", str(n_extra)))}</span>')
+    key = "fam.rel.release" if rel_key == "fam.rel.release" else (
+        "fam.rel.none" if rel_key == "fam.rel.none" else "fam.badge.same")
+    return f'<span class="famrel" data-i18n="{key}">{esc(T.get(key, key))}</span>'
+
+
 def _family_block(e, families, displays, variants, page_keys=None, data=None) -> str:
     """相关品牌名称与配方差异（T12 C2）。
 
@@ -12094,31 +12164,41 @@ def _family_block(e, families, displays, variants, page_keys=None, data=None) ->
         return ""
     T = I18N["en"]
     cur_subs = _key_subs(data, e["k"])
+    cur_name = displays.get(e["k"]) or "、".join(variants.get(e["k"], [])[:2]) or e["k"]
+    cur_markets = "、".join(sorted(((data or {}).get(e["k"]) or {}).get("countries") or [])) or "—"
+    # v0.13.7（V2）：当前记录**从行里移到表头**（用户评审：先读到最后一行才知道「本页」是哪条）。
+    head = (
+        f'<div class="famcur">'
+        f'<span class="famcur-h" data-i18n="fam.cmp_current">'
+        f'{esc(T.get("fam.cmp_current", "Product being compared"))}</span>'
+        f'<b class="famcur-n">{esc(cur_name)}</b>'
+        f'<span class="famcur-mk">{esc(cur_markets)}</span>'
+        f'<span class="famcur-ing">{_family_ing_html(cur_subs)}</span></div>')
     rows = []
     for k in members:
+        if k == e["k"]:
+            continue          # 当前记录已进表头，不再是候选行
         subs = _key_subs(data, k)
         name_cell = _family_name_html(k, displays.get(k) or "、".join(variants.get(k, [])[:2]), page_keys)
-        if k == e["k"]:
-            name_cell += f' <span class="st-text" data-i18n="fam.cmp_this">{esc(T["fam.cmp_this"])}</span>'
         markets = "、".join(sorted(((data or {}).get(k) or {}).get("countries") or [])) or "—"
         rel_key = _family_relation(cur_subs, subs)
-        # T16（H1）：中性提示（fam.rel.multi*）后面补一句「部分记录未标注释放方式」，
-        # 让用户知道为什么这一行锁不到具体记录；原来的 fam.rel.release 结论不再无条件出现。
-        rel_html = _family_rel_html(rel_key, cur_subs, subs)
+        # V2：关系前置成药名旁的徽标（差集只算「对方有、当前没有」的成分数）
+        n_extra = len(set(subs) - set(cur_subs))
+        badge = _fam_badge(rel_key, n_extra)
         rows.append(
-            f'<tr><td data-label="{esc(T["fam.cmp_market"])}" data-i18n-label="fam.cmp_market">'
-            f'{esc(markets)}</td>'
-            f'<td data-label="{esc(T["fam.cmp_name"])}" data-i18n-label="fam.cmp_name">{name_cell}</td>'
+            f'<tr>'
+            f'<td data-label="{esc(T["fam.cmp_name"])}" data-i18n-label="fam.cmp_name" '
+            f'class="famcmp-name">{name_cell}{badge}</td>'
             f'<td data-label="{esc(T["fam.cmp_ing"])}" data-i18n-label="fam.cmp_ing">{_family_ing_html(subs)}</td>'
-            f'<td data-label="{esc(T["fam.cmp_rel"])}" data-i18n-label="fam.cmp_rel">'
-            f'{rel_html}</td></tr>')
+            f'<td data-label="{esc(T["fam.cmp_market"])}" data-i18n-label="fam.cmp_market">'
+            f'{esc(markets)}</td></tr>')
     return (f'<h2 data-i18n="fam.cmp_title">{esc(T["fam.cmp_title"])}</h2>'
             f'<p class="sub" data-i18n="fam.cmp_intro">{esc(T["fam.cmp_intro"])}</p>'
+            f'{head}'
             f'<div class="tablewrap"><table class="res famcmp"><thead><tr>'
-            f'<th data-i18n="fam.cmp_market">{esc(T["fam.cmp_market"])}</th>'
             f'<th data-i18n="fam.cmp_name">{esc(T["fam.cmp_name"])}</th>'
             f'<th data-i18n="fam.cmp_ing">{esc(T["fam.cmp_ing"])}</th>'
-            f'<th data-i18n="fam.cmp_rel">{esc(T["fam.cmp_rel"])}</th>'
+            f'<th data-i18n="fam.cmp_market">{esc(T["fam.cmp_market"])}</th>'
             f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
@@ -13704,7 +13784,11 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             asof[c] = max(asof.get(c, ""), d)
     T = I18N["en"]
     rows = []
-    for r in coverage:
+    # v0.13.7（V1）：覆盖页的行序**跟顶部市场菜单同一份清单同一顺序**（data/markets.json 的 order）。
+    # 原来按 SQL 的 `ORDER BY country`（字母序），菜单里 FR 一进来两边就对不上。
+    _mk_order = {code: i for i, (code, _key) in enumerate(SHELL_MARKETS)}
+    for r in sorted(coverage, key=lambda x: (_mk_order.get(x.get("country") or "", 9999),
+                                             x.get("country") or "")):
         c = r.get("country") or ""
         n = int(r.get("n_products") or 0)
         s = stats.get(c, {})
