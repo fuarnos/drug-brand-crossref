@@ -1518,7 +1518,7 @@ FR_PREP_KEYS: dict[str, str] = {
 # v0.13.3（R2）：语言菜单一律显示**本语言自称**（不随界面语言翻译、不新增 i18n 键）；
 # hreflang / URL 目录不随标签变。i18n.js 的 LBL（客户端改写下拉摘要）也从这份表生成。
 LANG_NATIVE_LABELS = {"en": "English", "es": "Español", "zh": "中文",
-                      "zh-Hant": "繁體中文", "fr": "Français"}
+                      "zh-Hant": "繁體中文", "fr": "Français", "ko": "한국어"}
 _BASE_LANGS = [("en", "English", ""), ("es", "Español", "es/"), ("zh", "中文", "zh/"),
                ("zh-Hant", "繁體中文", "zh-hant/")]
 
@@ -1531,7 +1531,7 @@ def _enabled_ui_langs() -> list[tuple[str, str, str]]:
         enabled = {x.get("code") for x in reg.get("languages", []) if x.get("enabled")}
     except (OSError, ValueError):
         enabled = set()
-    for code, label, path in (("fr", "Français", "fr/"),):
+    for code, label, path in (("fr", "Français", "fr/"), ("ko", "한국어", "ko/")):
         # 注意：I18N["fr"] 由 _merge_static_i18n() 在 main() 里生成，模块导入时还不存在；
         # 这里只按注册表 enabled 判断（fr 的语言字典在构建前一定已就绪）。
         if code in enabled:
@@ -3631,6 +3631,681 @@ def _i18n_placeholders(stats: dict, atc_cov: dict, coverage, source_cover) -> di
     }
 
 
+# ── L1（v0.13.8）：韩语界面文案（第 6 语言）────────────────────────────────
+# 形状与 FR_I18N 相同：扁平 `key -> 韩文`，键集与 en **完全一致**（667 键）。
+# 由 `_merge_static_i18n()` 展开成 I18N["ko"]；缺键才回落英文（现查 0 缺键）。
+# 生成来源：按构建期 en 字典逐键翻译，占位符 {n}/@@X@@ 与 HTML 标签序列逐键一致
+# （校验脚本 .tmp/ko_assemble.py；KR 市场不做，市场数仍 15）。
+KO_I18N: dict[str, str] = {
+    'a1.approval': '승인 / NDC / DIN',
+    'a1.expand': '상세 정보',
+    'a1.goto': '성분 페이지 열기',
+    'a1.loading': '상세 정보 불러오는 중…',
+    'a1.market': '시장',
+    'a1.more': '처음 12개 기록만 표시합니다. 전체 기록은 <a href="{url}">성분 페이지</a>에서 보세요.',
+    'a1.none': '이 이름으로 등록된 제품 기록이 없습니다.',
+    'a1.pack': '포장',
+    'a1.raw': '원본 기록',
+    'a1.source': '출처',
+    'a1.status': '상태',
+    'a11y.skip': '본문으로 건너뛰기',
+    'a3.incompat': '호환 불가 — 경고를 확인하세요',
+    'a3.release': '방출 방식:',
+    'a3.salt': '염 형태:',
+    'about.analytics': '<h2>접속 통계</h2><p class="sub">이 사이트는 익명·쿠키 없는 통계를 위해 <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>를 사용합니다. 개인정보를 저장하지 않고 광고에 사용하지도 않습니다. 저희가 보는 것은 페이지뷰, 유입 경로, 국가/지역, 브라우저와 화면 크기, 그리고 검색 품질 개선을 위한 사이트 내 검색어와 결과 클릭뿐입니다. 검색어(결과가 없던 검색 포함)는 집계된 이벤트 이름으로만 전송되며, 정규화된 검색어 텍스트는 계정·IP 주소·기기 식별자와 절대 연결되지 않습니다. 검색 이벤트는 전송(Enter, 예시 칩, 자동완성 선택) 시에만 발생하고 입력 중간 상태로는 전송되지 않으며, 검색어 길이와 인터페이스 언어만 담습니다. <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter 개인정보 처리방침</a>을 참고하세요.</p>',
+    'about.au_source': '<p class="sub"><b>호주</b>: TGA <b>ARTG Medicines 2026-10-28</b>(의약품 등록부 ARTG, 출처 표기 TGA/ARTG). 데이터 기준일 <b>2026-10-28</b>. 이 내보내기에는 <b>등록 상태 열이 없어</b> 상태는 알 수 없음으로 표시됩니다. <b>등록부에 있다는 것이 현재 판매 중이라는 뜻은 아닙니다.</b> 제품 3,911개는 성분 기록이 없어 이름 수준으로만 표시합니다.</p>',
+    'about.checksums': 'SHA-256 체크섬',
+    'about.cz_source': '<p class="sub"><b>체코 捷克</b>: SÚKL <b>DLP</b>(의약품 데이터베이스, 월간 공개 데이터)를 <b>SÚKL 공개데이터 이용약관</b>에 따라 사용 — 복제·재배포·상업적 이용이 허용되며, <b>출처 표기: SÚKL</b>과 데이터 의미를 변경하지 않아야 합니다(<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">약관</a>). 데이터 기준일 <b>2026-11-01</b>(스냅샷 DLP20261027). 사실 항목만 담습니다(이름, 함량, 제형, ATC, 성분, MAH, 등록 상태). 함량 정규화와 성분 분해는 공식 필드에서 <b>파생</b>한 결과입니다. <b>SPC/PIL 및 포장 설명서는 제3자 문서이므로 절대 수집·재배포하지 않습니다.</b> FSMP와 PZLÚ 비의약품 행은 제외하고, EU 중앙허가 제품은 EU 계층과 중복 제거합니다. <b>등록부에 있다는 것이 현재 판매 중이라는 뜻은 아닙니다.</b></p>',
+    'about.data_dictionary': '데이터 사전',
+    'about.data_package': '데이터 패키지',
+    'about.dataset_jsonld': '데이터셋 메타데이터(schema.org)',
+    'about.eu_source': '<p class="sub"><b>EU 지역 계층</b>: <b>유럽연합집행위원회 — 의약품 연합 등록부</b>(CC BY 4.0, 출처 표기 European Commission / Union Register)와 교차 확인용 <b>EMA Medicines</b> 데이터(출처: European Medicines Agency (EMA), EMA 로고 미사용·보증 시사 없음). 중앙 허가(인체용 의약품)만 수록하며 데이터 기준일 <b>2026-11-03</b>입니다. <b>EU 허가는 어느 한 국가의 판매 기록이 아니고, 이 등록부에는 함량·제형·포장 크기가 없습니다.</b> 알려진 성분에 매핑되지 않는 제품은 이름 수준으로만 표시합니다.</p>',
+    'about.fr_source': '<p class="sub"><b>프랑스</b>: BDPM(공공 의약품 데이터베이스, ANSM), <b>Licence Ouverte / etalab-2.0</b> — 출처 표기와 최신 갱신일 표시가 필요합니다. 데이터 기준일 <b>2026-11-03</b>. 사실 항목만 담습니다(이름, 성분, 제형, 제조사, 허가). <a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>.</p>',
+    'about.gaps': '<h2>알려진 공백</h2><ul class="sub"><li>중국은 화학의약품 등록 146,344건이 있지만 약 9%는 중국 전용 성분(영문 INN 없음)으로만 확인되고, 중국의 ATC는 4단계까지만 저장되어 있습니다. 중약(TCM)은 적재하지 않습니다.</li><li>함량 동등성 판단은 D1(동일 염 형태) 수준에서 멈춥니다. 염–염기 환산(D2)과 생물학적 동등성 판단(D3)은 구현하지 않았습니다.</li><li>멕시코는 규제기관 목록에 함량 열이 없어 공개 카탈로그로 보완할 수 있었던 제품은 29%뿐입니다.</li><li>캐나다 DPD에는 포장 크기와 가격이 없고, 많은 일반의약품 소비자 포장은 DPD 전자화 이전에 허가되어 매장 제품이 빠져 있을 수 있습니다.</li><li><b>ATC 커버리지 — 두 가지 분모:</b> 전체 성분의 @@ATC_ALL_PCT@@%(@@ATC_ALL@@ / @@ATC_ALL_N@@)와 약물 개체(inn_drug)의 @@ATC_DRUG_PCT@@%(@@ATC_DRUG@@ / @@ATC_DRUG_N@@)입니다. 차이는 대부분 데이터 누락이 아니라 비의약품 개체(동종요법, 생약, 식품, 재료)입니다. ATC 데이터는 Wikidata P267(CC0)과 ChEMBL(CC BY-SA 4.0)에서 오며, WHOCC ATC/DDD 색인은 라이선스가 필요해 사용하지 않습니다.</li></ul>',
+    'about.hk_source': '<p class="sub"><b>홍콩 中国香港</b>: 보건서 약품사무소 — <b>등록 의약품 목록</b>(data.gov.hk 데이터셋 hk-dh-dh_do-hk-dh-do-pharmaceutical-product)을 <b>DATA.GOV.HK 이용약관</b>에 따라 사용(출처 표기 시 무료 재사용, 정부 보증 시사 없음). 데이터 기준일 <b>2026-10-23</b>. <b>이름/성분 계층만 제공 — 함량·제형·등록 상태가 없고, 등록부에 있다고 현재 공급 중임을 뜻하지 않습니다.</b></p>',
+    'about.lead': '<p class="sub"><b>하는 일은 하나입니다:</b> 상품명을 실제 성분으로 바꾸고, 그 확실성을 밝힙니다. 이 사이트는 공개·광고 없음·비상업입니다. 모든 답은 후보 집합이며 처방이 아닙니다.</p>',
+    'about.licences_summary': '데이터 출처와 라이선스',
+    'about.loading': '<h2>검색 데이터를 불러오는 방식</h2><p>첫 검색에서 색인 조각 하나(중앙값 ~1.0 MB, gzip ~0.16 MB)를 불러오고, 전체 색인(core 원본 ~42 MB, gzip ~9–10 MB)은 배경에서 채워집니다 — 입력, 검색창 포커스, 예시 선택 중 하나로 시작됩니다. 조각이나 전체 색인이 아직 로딩 중이면 결과에 <i>부분</i> 표시가 붙고, 로딩이 실패해도 페이지는 이미 받은 데이터로 계속 동작하며 <i>다시 시도</i> 버튼을 제공합니다. 검색으로 저희에게 전송되는 내용은 없습니다.</p>',
+    'about.lv_source': '<p class="sub"><b>라트비아 拉脱维亚</b>: ZVA <b>HumanProducts</b>(Latvijas Zāļu reģistrs, 일간 내보내기)를 <b>CC0 1.0</b>으로 공개 — 출처 표기가 의무는 아니지만 관행대로 <b>Zāļu valsts aģentūra (ZVA)</b>를 표기합니다. 데이터 기준일 <b>2026-11-11</b>. 포장 단위 행은 등록번호로 묶었고, 사실 항목만 담습니다(라트비아어 및 원어 이름, 함량, 제형, INN, ATC, MAH, 상태). EU 중앙허가 제품은 EU 계층과 중복 제거합니다. <b>등록은 현재 판매 기록이 아닙니다.</b></p>',
+    'about.nick': '<h2>속칭과 옛 이름</h2><p>“두 마리 개구리(liǎng zhī qīngwā)”는 상품명이 아니며 상품명으로 저장되지 않습니다: 이는 성분(메트포르민)을 가리키는 말입니다. 속칭은 별도의 수작업 관리 표로, 검색은 되지만 상품명 표에는 의도적으로 넣지 않습니다. 일치하면 페이지에 표시(<i>인터넷 속칭 / 옛 이름</i>)한 뒤 그 성분의 상품명을 나열하며, 포장에 인쇄된 이름처럼 제시하지 않습니다. 모든 항목에는 출처가 있고, “사용자 제공”은 <i>미검증</i>으로 표시되며 독립 출처가 붙기 전에는 <code>documented</code>로 승격되지 않습니다. 출처가 없으면 새 항목도 없습니다.</p><ul class="sub"><li>속칭 @@NICKNAMES@@건은 <code>data/seed_nicknames.py</code>에서 수작업으로 관리·재생성하며 스크래핑하지 않습니다.</li><li>속칭은 충돌 감지에 들어가지 않고 “동일 이름” 페이지도 생기지 않습니다: 속칭은 정체성이 아니고 성분이 정체성입니다.</li></ul>',
+    'about.nick_merged': '속칭 @@NICKNAMES_TOTAL@@건 중 @@NICKNAMES_MERGED@@건은 염 형태 통합 이전에 기록된 중국어 이름(kind=misnomer)입니다: 오래된 포장 표기로도 성분을 찾을 수 있도록 별칭으로 검색 가능하게 유지하며, 상품명으로 취급하지 않습니다.',
+    'about.rules': '<h2>세 가지 원칙</h2><ol><li><b>상품명은 기본키가 아닙니다.</b> 모든 조회는 후보 집합을 반환하며, 정체성은 국가 × 제형 × 함량 × 활성성분으로 고정됩니다.</li><li><b>충돌은 파생 결과이지 수작업 표기가 아닙니다.</b> 같은 이름이 서로 다른 성분에 걸리면 사이트가 “같은 이름, 다른 약”을 자동으로 표시합니다.</li><li><b>복약 조언은 하지 않습니다.</b> 정체성 확인과 “호환 불가” 경고만 제공하며, 용량 환산도 대체 추천도 하지 않습니다.</li></ol>',
+    'about.samename': '<h2>“같은 이름, 다른 약”이 생기는 이유</h2><p class="sub">같은 상표를 시장마다 다른 회사가 보유하고, 배합이 완전히 다를 수 있습니다. 확인된 예: 미국 <b>Tylenol</b>은 아세트아미노펜 500 mg 단일성분이지만, 중국 <b>泰诺</b>는 4성분 감기약이고 단일성분 제품은 <b>泰诺林</b>입니다. 미국 <b>Benadryl</b>은 디펜히드라민, 영국 <b>Benadryl</b>은 아크리바스틴입니다. 미국 <b>Gaviscon</b>은 알루미늄/마그네슘 제산제, 영국 Gaviscon은 알지네이트 부상형입니다.</p>',
+    'about.sg_source': '<p class="sub"><b>싱가포르 新加坡</b>: HSA <b>등록 치료제 목록</b>(data.gov.sg 데이터셋 d_767279312753558cbf19d48344577084)을 <b>싱가포르 공개데이터 라이선스 v1.0(SODL)</b>에 따라 사용 — 출처 표기와 라이선스 링크가 필요하며 정부 보증을 시사하지 않습니다. 데이터 기준일 <b>2026-08-07</b>(6개월마다 갱신). <b>등록부에 있다고 현재 판매 중임을 뜻하지 않습니다.</b> 상품명은 영어 원문을 유지하며 번역하지 않고, 중국어 성분명(inn_zh)만 표시할 수 있습니다. 출처 표기: Contains information from Listing of Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences Authority (HSA), and made available under the Singapore Open Data Licence v1.0 (<a href="https://data.gov.sg/open-data-licence">licence</a>).</p>',
+    'about.sources': '<h2>출처와 커버리지</h2><div class="tablewrap"><table><tr><th>국가 / 지역</th><th>제품 수</th><th>데이터 기준일</th></tr>@@COV@@</table></div><p class="sub"><b>데이터 기준일</b>은 출처가 스스로 공표·시행·스냅샷한 날짜이며, 저희 수집 날짜가 아닙니다. <code>live</code>는 단일 기준일이 없는 실시간 디렉터리, <b>—</b>는 연간 목록만 있음을 뜻합니다.</p><p class="sub"><b>미국</b>: openFDA NDC Directory(미국 정부 공개 데이터). <b>영국</b>: NHSBSA dm+d, Open Government Licence v3.0 — <i>Contains public sector information licensed under the Open Government Licence v3.0.</i> <b>스페인</b>: AEMPS CIMA — 명시적 출처 표기와 최종 갱신일 표시 조건으로 재사용 허용, 오픈 라이선스 아님(아래 라이선스 참조). <b>멕시코</b>: COFEPRIS 등록 목록(오픈 라이선스 미명시, 사실 항목과 링크만)과 datos.gob.mx 조달·가격 데이터(CC BY 4.0)로 함량 보완. <b>호주</b>: PBS Schedule API(저작권 고지 유지) + TGA CMI 디렉터리 + 선별 OTC 시드 — 사실 항목만, CMI/ARTG 전문은 재수록하지 않습니다. <b>캐나다</b>: Health Canada DPD — 출처 명시 시 비상업적 재사용 허용. <b>중국</b>: 国家医保局 医保药品分类与代码数据库(2025-04-04 스냅샷), 공개 재배포 라이선스를 확인하지 못해 사실 항목과 링크만 저장합니다.</p>',
+    'about.stats': '<p class="sub">통계: 제품 @@PRODUCTS@@개 · 성분 @@SUBSTANCES@@개 · 이름 키 @@KEYS@@개 · 별칭 @@ALIASES@@개(수작업 속칭 @@NICKNAMES@@개, 통칭/분류어 @@DRUGTERMS@@개) · FDA 혼동 쌍 @@CONFUSABLE@@쌍 · “같은 이름, 다른 약”으로 표시된 이름 @@SEVERE@@개.</p>',
+    'about.summary': '이 사이트가 무엇인지, 어떤 원칙을 따르는지, 데이터가 어디서 오는지.',
+    'about.terms': '<h2>통칭과 분류어</h2><p>별도 표(<code>drug_term</code>, @@DRUGTERMS@@건)에 <b>합법 의약품만</b>의 통칭과 분류어를 담습니다: 이뇨제, 혈전용해제, 수면제(shuìqiányào), 피임약, 사후피임약, 스타틴. <code>nickname</code>과 달리 하나의 성분이 아니라 분류를 가리킬 수 있어 <code>substance_id</code>는 NULL을 허용하며, <code>alias_all</code>이 두 표를 합쳐 검색에 사용합니다. <b>남용 약물과 유흥성 은어는 명시적으로 범위 밖</b>이며, 해당 항목은 데이터베이스에서 제거되어 다시 추가되지 않습니다.</p><ul class="sub"><li><b>NIDA / DEA 목록</b>은 유흥성 은어에 더 이상 사용하지 않습니다. 합법 의약품인 처방약 분류어만 각각 출처 URL과 함께 유지합니다.</li><li><b>MedlinePlus(NLM)</b>는 흔한 통칭/분류어(미국 정부 저작물)를 제공하고, 커뮤니티 출처(CN/GB/AU/ES)는 <i>커뮤니티 명칭</i>으로 표시되어 검색 가능합니다. FDA tall-man 쌍: 공식 @@CONFUSABLE@@쌍. <a href="confused.html">목록 보기</a>.</li></ul>',
+    'about.title': '소개',
+    'about.tw_source': '<p class="sub"><b>대만 台灣</b>: TFDA 「全部藥品許可證資料集」(data.gov.tw 데이터셋 9122)을 <b>Open Government Data Licence v1.0(OGDL v1.0)</b>에 따라 사용, 출처 표기 필요: 衛福部食藥署 TFDA. 데이터 기준일 <b>2026-10-22</b>(주간 동기화). 사실 항목만 담습니다(제품명, 성분, 제형, 제조사, 허가번호, 상태). <b>함량은 제품명에서 파싱하므로 신뢰도가 제한적입니다.</b> 라이선스: <a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>',
+    'ac.suggestions': '추천 검색어',
+    'artg.id': 'ARTG ID',
+    'artg.note': '이 항목들은 호주에 등록되어 있지만 이 사이트가 아직 활성성분과 연결하지 못해 제품으로 표시하지 않습니다.',
+    'artg.sponsor': '스폰서',
+    'artg.title': 'ARTG에만 있는 항목(성분 미연결)',
+    'atc.ai_note': '분류명과 카테고리 이름은 편집·AI 보조 번역이며, 권위 있는 정보는 ATC 코드와 WHO 계층뿐입니다.',
+    'atc.all_classes': '전체 ATC 분류',
+    'atc.browse_intro': 'WHO ATC 분류는 의약품을 장기/계통과 약리 분류로 묶습니다. 최상위 그룹이나 소비자 카테고리에서 시작하세요. 각 페이지에는 여기 기록된 활성성분이 나열됩니다.',
+    'atc.browse_title': 'ATC 분류로 찾아보기',
+    'atc.categories_link': '소비자 카테고리',
+    'atc.children': '하위 분류',
+    'atc.count': '활성성분 {n}개',
+    'atc.hint': 'ATC 접두사 일치 — 결과는 활성성분이 이 ATC 코드를 가진 제품이며, 상품명 일치가 아닙니다.',
+    'atc.hit': 'ATC {code}: 활성성분의 ATC 코드로 일치한 제품명 {n}개. 정체성 정보일 뿐 권장이 아닙니다.',
+    'atc.ing_more': '성분 {n}개 더 있음 — 전체 색인 로딩이 끝나면 전체 목록이 표시됩니다.',
+    'atc.ing_overview': '이 ATC 분류의 활성성분 — 상품명 행은 배경에서 로드됩니다.',
+    'atc.ingredients': '이 분류의 활성성분',
+    'atc.label': 'ATC',
+    'atc.level': 'ATC 단계',
+    'atc.loading': 'ATC 검색용 색인을 불러오는 중…',
+    'atc.markets_hint': '이제 각 시장은 집계된 상태 하나를 표시합니다: 해당 시장에 판매 중 기록이 하나라도 있으면 판매 중으로 계산합니다. 개별 기록의 상태는 상세 정보에 표시됩니다. 같은 시장에 상태가 다른 등록 기록이 여러 개 있을 수 있어 시장은 여기에 한 번만 나오며, 이는 등록 사실이지 안전성 판단이 아닙니다.',
+    'atc.more': '외 {n}개',
+    'atc.more_notes': '주석 및 라이선스',
+    'atc.names_source_note': '분류명은 편집 번역이거나 Wikipedia(CC BY-SA 4.0) / Wikidata(CC0)에서 왔습니다. 각 ATC 페이지에는 언어별 정확한 출처·라이선스·링크가 있습니다. 권위 있는 정보는 ATC 코드와 WHO 계층뿐입니다.',
+    'atc.no_data': '이 분류에 아직 기록된 활성성분이 없습니다.',
+    'atc.nolang_note': '이름이 빠진 것이 예외적인 경우에만 해당 행에 표시하고, 대부분 이름이 없으면 목록에 표시하지 않습니다.',
+    'atc.none': '기록된 활성성분 중 이 ATC 코드나 접두사를 가진 성분이 없습니다.',
+    'atc.none_meta': '{code}에 대한 ATC 일치 없음',
+    'atc.parent': '상위 분류',
+    'atc.salt_label': '염 형태:',
+    'atc.search_link': '이 분류에서 검색',
+    'atc.show_all': '전체 {n}개 보기(현재 {shown}개 표시)',
+    'atc.source_note': 'ATC 코드와 계층은 WHO Collaborating Centre for Drug Statistics Methodology의 ATC/DDD 색인을 참조합니다(저작권 WHOCC, 색인 자체는 재수록하지 않음). 성분·함량 사실은 소개 페이지에 정리한 규제기관 기록에서 옵니다.',
+    'atc.status_note': '상태 배지는 각 성분에 대해 보유한 제품 기록(판매 중 / 단종 / 회수 / 알 수 없음)을 요약하고, 배지 뒤의 시장 코드는 그 상태가 어디에 기록되어 있는지를 보여줍니다. 상태 열을 공개하는 등록부는 일부뿐입니다: CA, ES, MX, FR, JP, CZ, LV와 EU 연합 등록부가 있고, 호주 ARTG 상세 기록도 있습니다. 호주 ARTG 내보내기와 HK는 상태 열이 없어 알 수 없음으로 기록되며, CN, US, GB, TW, SG 기록은 등록부에 있으므로 판매 중으로 표시합니다.',
+    'atc.unnamed': '분류명은 아직 검수되지 않았습니다 — ATC 코드가 권위 있는 정보입니다.',
+    'atc.view_class': '이 ATC 분류 보기',
+    'atc4.empty': '이 분류에 아직 제형 수준 제품 기록이 없습니다.',
+    'atc4.error': '제형 상세 정보를 불러오지 못했습니다.',
+    'atc4.form_col': '제형',
+    'atc4.form_other': '기타 제형',
+    'atc4.loading': '제형 상세 정보 불러오는 중…',
+    'atc4.notice': 'ATC 분류는 약리/화학적으로 비슷한 의약품을 묶는 것일 뿐, 서로 바꿔 쓸 수 있다는 뜻이 아닙니다. 성분, 제형, 방출 기전 또는 함량이 다르면 호환되지 않습니다.',
+    'atc4.scope': 'ATC 분류가 기록된 성분만 나열합니다(@@ATC_ALL@@ / @@ATC_ALL_N@@).',
+    'atc4.sort_note': '행은 제형의 알파벳 순이고 시장은 고정된 순서를 따릅니다. 여기에는 순위나 권장이 없습니다. 제품 기록이 있는 성분만 행이 있습니다.',
+    'atc4.summary': '시장별 제형 보기',
+    'badge.combo': '복합제',
+    'badge.export_only': '내보내기 전용',
+    'badge.severe': '같은 이름, 다른 약',
+    'badge.warning': '방출 방식 다름',
+    'bilingual.brand_note': '해당 시장에 등록된 이름 그대로 — 번역이 아닙니다.',
+    'bilingual.source.manual': '편집',
+    'bilingual.source.official': '공식',
+    'bilingual.source.pharmacopoeia': '약전',
+    'bilingual.source.regulator': '규제기관',
+    'bilingual.toggle': '원문 보기',
+    'brand.mah': '제조사:',
+    'brand.mah_note': '이 제품은 등록된 상품명이 없어 시장 허가 보유자(MAH)를 대신 표시합니다.',
+    'brand.none': '상품명 없음',
+    'card.packs': '포장',
+    'cat.all_link': '전체 카테고리 →',
+    'cat.back': '전체 ATC 분류 및 카테고리',
+    'cat.browse_title': '흔한 소비자 카테고리',
+    'cat.count': '활성성분 {n}개',
+    'cat.disclaimer': '주제별 모음입니다 — 동등성이나 호환성을 주장하지 않습니다.',
+    'cat.help': '이 목록 읽는 방법',
+    'cat.intro': '편집 주제 모음: 각 카테고리는 ATC 분류와 활성성분으로 이어집니다. 찾아보는 방법일 뿐, 의약품이 동등하다는 근거가 아닙니다.',
+    'cat.no_data': '이 카테고리에 아직 기록된 활성성분이 없습니다.',
+    'cat.quick_title': '카테고리로 찾아보기',
+    'cat.related_atc': '관련 ATC 분류',
+    'cat.search_none': '일치하는 성분이 없습니다.',
+    'cat.search_ph': '이 카테고리에서 성분 검색',
+    'cat.subcat': '하위 분류',
+    'col.brand': '상품명',
+    'col.dose': '함량',
+    'col.ing': '성분',
+    'col.mah': '제조사',
+    'combo.capped': '이름 {total}개 중 처음 {cap}개만 표시합니다.',
+    'combo.col_comp': '조성 및 함량',
+    'combo.comp_more': '다른 조성 {n}개',
+    'combo.compact': '복합제',
+    'combo.cross_exact': '이 시장들은 동일한 활성성분 조합의 제품을 기록하고 있습니다. 정체성 정보일 뿐, 제품이 서로 바꿔 쓸 수 있다는 권장이 아닙니다.',
+    'combo.cross_none': '이 조합의 제품은 아직 다른 수록 시장에서 기록되지 않았습니다.',
+    'combo.cross_overlap': '다른 시장에서 찾은 가장 가까운 조합은 비슷하지만 동일하지 않습니다 — 호환되지 않습니다.',
+    'combo.cross_primary': '주성분만 같을 뿐 — 같은 고정용량복합제가 아닙니다.',
+    'combo.cross_primary_link': '주성분 보기',
+    'combo.cross_products': '제품',
+    'combo.cross_record': '기록',
+    'combo.cross_title': '다른 시장의 같은 조합',
+    'combo.cross_unmatched': '이 묶인 이름은 시장 간 비교를 제공하지 않습니다.',
+    'combo.empty': '이 조합에 아직 기록된 상품명이 없습니다.',
+    'combo.ingredients': '활성성분',
+    'combo.intro': '<p class="sub">이 페이지는 활성성분 조합이 아래와 정확히 같은 상품명을 나열합니다. 정체성 정보일 뿐이며, 고정용량복합제는 그 단일성분 제품과 같은 제품이 아니고 상품명은 시장 간에 호환되지 않습니다.</p>',
+    'combo.no_advice': '의학적 조언이 아닙니다. 제품을 비교하기 전에 포장과 정확한 조성을 확인하고, 확실하지 않으면 약사에게 문의하세요.',
+    'combo.no_page': '이 이름에는 별도 상품 페이지가 없습니다',
+    'combo.products': '이 조합과 정확히 같은 상품명',
+    'combo.see_warnings': '이 성분들의 경고 보기',
+    'combo.source_note': '<b>출처 및 라이선스</b>: 성분 페이지와 같은 규제기관 데이터로 만듭니다(openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, NHSA). 사실 항목만 담으며 <a href="../about.html#licences">라이선스 등록부</a>를 참고하세요.',
+    'combo.stub_badge': '복합제 기록',
+    'combo.stub_note': '이 조합 페이지는 확장되어 있지 않습니다. 성분 페이지나 검색을 사용하세요.',
+    'combo.stub_search': '검색',
+    'combo.title': '고정용량복합제',
+    'conf.h2': 'FDA tall-man 쌍',
+    'conf.intro': 'FDA Name Differentiation Project의 모양·발음 유사 쌍입니다. 공식 tall-man 목록이며 ISMP LASA 전체 목록이 아닙니다.',
+    'conf.note': '여기서 한 쌍은 이름이 서로 혼동될 수 있다는 뜻이며, 두 약이 호환된다는 뜻이 아닙니다. FDA는 tall-man 표기를 권장합니다.',
+    'conf.pair': '쌍',
+    'conf.search_hit': '이 이름은 다음 이름과 쉽게 혼동됩니다',
+    'conf.source_note': '출처: <a href="https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" rel="noopener">FDA Name Differentiation Project</a>(내용 기준일 2026-06-12, 미국 정부 저작물). FDA 목록에서 공식적으로 재배포 가능한 @@CONF_PAIRS@@쌍만 수록하며, 저작권이 있는 ISMP/ECRI “List of Confused Drug Names”는 복제하지 않습니다. FDA 목록에서 짝이 없는 단일 이름(hydromorphone, mitoxantrone)은 수록하지 않습니다. 쌍은 이름에 대한 경고이지 두 약이 동등하다는 진술이 아닙니다.',
+    'conf.title': '혼동하기 쉬운 약 이름',
+    'conf.tml': 'Tall-man 표기',
+    'country.change': '국가/지역 변경',
+    'country.missing': '이 국가/지역에는 이 이름으로 등록된 제품이 없습니다.',
+    'country.missing_note': '이 이름은 이 국가/지역의 제품이 아니라 성분과 일치했습니다. 국가/지역을 바꾸거나 성분 페이지를 여세요.',
+    'country.open_card': '성분 페이지',
+    'coverage.col.asof': '데이터 기준일',
+    'coverage.col.asof_short': '기준일',
+    'coverage.col.last': '마지막 동기화',
+    'coverage.col.last_short': '동기화',
+    'coverage.col.mapping': '성분 매핑',
+    'coverage.col.mapping_short': '매핑',
+    'coverage.col.market': '시장',
+    'coverage.col.notes': '알려진 공백',
+    'coverage.col.products': '제품 수',
+    'coverage.col.spec': '함량 커버리지',
+    'coverage.col.spec_short': '함량',
+    'coverage.gap.au': "ARTG 내보내기에는 등록 상태 열이 없어 상태를 알 수 없으며 '판매 중'이 아닙니다. 일부 제품은 성분 기록이 없습니다.",
+    'coverage.gap.ca': 'DPD 전체 출처, 출처 표기 시 비상업적 재사용 허용.',
+    'coverage.gap.cn': '공개 재배포 라이선스를 확인하지 못했습니다. 일부 기록에는 상품명이 없습니다.',
+    'coverage.gap.cz': 'SÚKL 공개데이터 등록부(DLP) — 등록 기록이며 현재 판매 목록이 아닙니다. SPC/PIL 설명서는 수집·재배포하지 않습니다. 출처: SÚKL, 2026-11-01(스냅샷 DLP20261027).',
+    'coverage.gap.es': '재배포 라이선스는 확인 중입니다.',
+    'coverage.gap.eu': '지역 계층: 중앙 허가(EMA / EC Union Register). 함량·제형·포장 크기가 없고, 허가 ≠ 해당 국가 판매.',
+    'coverage.gap.fr': 'BDPM (ANSM) — Licence Ouverte / etalab-2.0, 출처 표기 필요, 데이터 패키지에 갱신일 표시. 허가 ≠ 판매 중.',
+    'coverage.gap.gb': 'dm+d 전체 출처, Open Government Licence 출처 표기.',
+    'coverage.gap.hk': '이름/성분 계층만: 함량·제형·등록 상태 없음. 등록 ≠ 판매 중.',
+    'coverage.gap.jp': 'NHI 가격표(薬価基準) 항목만 — 등록 데이터베이스가 아니고 현재 공급의 증거도 아닙니다. 출처: 후생노동성(厚生労働省), PDL 1.0, 2026-11-01.',
+    'coverage.gap.lv': 'ZVA HumanProducts 공개 데이터(포장 단위, 등록번호로 묶음) — 등록부이며 현재 판매 중인 목록이 아닙니다. 출처: ZVA, CC0 1.0, 2026-11-11.',
+    'coverage.gap.mx': '출처 라이선스는 확인 중이며 오래된 등록도 포함합니다.',
+    'coverage.gap.sg': '등록 목록은 현재 공급을 증명하지 않습니다.',
+    'coverage.gap.tw': '함량은 제품명에서 파싱하므로 신뢰도가 제한적입니다.',
+    'coverage.gap.us': 'openFDA 전체 출처, 미국 정부의 퍼블릭 도메인 저작물.',
+    'coverage.intro': '각 시장이 무엇을 제공하는지, 얼마나 완전한지, 언제 마지막으로 동기화했는지 보여줍니다. 수치는 기록 수이며 고유 의약품 수가 아닙니다. 공백/0%는 출처가 해당 필드를 공개하지 않는다는 뜻입니다.',
+    'coverage.no_brand': '상품명 기록 없음',
+    'coverage.notice': '이 페이지는 데이터 사실만 나열합니다. 제품이 호환되거나 판매 중이거나 시장 간 동등하다는 뜻이 아닙니다.',
+    'coverage.sort_market': '시장순',
+    'coverage.sort_products': '제품 수순',
+    'coverage.source_note': '출처와 라이선스: 소개 페이지와 docs/许可清单.md를 참고하세요. 제한 출처는 데이터 패키지에서 집계 형태로만 제공합니다.',
+    'coverage.title': '커버리지 및 최신성',
+    'drug.also_called': '다른 이름:',
+    'drug.also_in': '다음에도 있음',
+    'drug.also_known': '이렇게도 불림:',
+    'drug.brand': '상품명',
+    'drug.brand_group': '상품명이 있는 경우',
+    'drug.combo_section': '이 성분을 포함한 복합제',
+    'drug.compare_note': '나란히 보기 표는 이 성분이 여러 시장에 기록된 경우에만 제공합니다. 그렇지 않으면 이 목록이 전부입니다.',
+    'drug.compare_side': '나란히 보기 표',
+    'drug.confused': '혼동하기 쉬운 이름',
+    'drug.confused_all': '전체 쌍',
+    'drug.confused_note': 'FDA는 이 쌍에 tall-man 표기를 권장합니다. 이름이 아니라 성분을 확인하세요.',
+    'drug.empty': '아직 기록된 제품이 없습니다.',
+    'drug.forms_all': '전체 제형',
+    'drug.forms_label': '제형',
+    'drug.forms_short': '제형',
+    'drug.full_list': '데이터 패키지의 전체 목록',
+    'drug.mah_group': '제조사만',
+    'drug.markets': '시장',
+    'drug.mkx_more': '다른 시장 {n}곳',
+    'drug.mono_section': '이 성분만',
+    'drug.more_names': '나머지 {n}개 보기',
+    'drug.more_specs': '다른 함량',
+    'drug.more_specs_n': '다른 함량: {n} · 제형 {m}',
+    'drug.ms_more': '이 제형에 {n}개 더 있음',
+    'drug.no_brand': '(상품명 없음)',
+    'drug.nostrength': '미공개',
+    'drug.notice': '같은 성분이 국가마다 전혀 다른 상품명을 가질 수 있고, 같은 이름이 다른 성분을 가리킬 수도 있습니다. 국가별로 나열했으며 호환되지 않습니다.',
+    'drug.records': '기록',
+    'drug.release': '방출',
+    'drug.showing': '처음 40개 표시 중',
+    'drug.sid': '성분 ID',
+    'drug.spec_count': '{n}개 중 {shown}개 표시',
+    'drug.spec_count_und': '{shown}개 표시 · {u}개는 함량 미기재',
+    'drug.spec_count_und_one': '{shown}개 표시 · 1개 기록은 함량 미기재',
+    'drug.specs': '함량',
+    'drug.status': '상태',
+    'drug.status.active': '판매 중',
+    'drug.status.discontinued': '단종',
+    'drug.status.unknown': '알 수 없음',
+    'drug.status.withdrawn': '회수',
+    'drug.status_note.discontinued': '유효기간 만료',
+    'drug.status_note.unknown': '유효성 미확인',
+    'drug.status_note.withdrawn': '시장 허가 철회',
+    'drug.strength': '함량',
+    'drug.summary': '이 성분의 국가별 기록(정체성 정보만).',
+    'drug.und_more': '외 {n}개 ({k}개 제조사)',
+    'drug.und_more_one': '외 {n}개 (제조사 1곳)',
+    'drug.undisclosed_block': '함량이 기재되지 않은 기록',
+    'drug.undisclosed_k_one': '기록 {n}개 · 제조사 1곳',
+    'drug.undisclosed_n': '기록 {n}개 · 제조사 {k}곳',
+    'drug.undisclosed_n_one': '기록 1개 · 제조사 {k}곳',
+    'drug.undisclosed_nk_one': '기록 1개 · 제조사 1곳',
+    'drug.view_list': '목록으로 돌아가기',
+    'error.index_failed': '색인을 불러오지 못했습니다.',
+    'error.local_file': '이 페이지를 직접 열었다면 브라우저가 로컬 파일 읽기를 막습니다 — python -m http.server를 실행하고 http://localhost:8000/ 로 접속하세요.',
+    'error.retry': '다시 시도',
+    'eu.coverage_note': 'EU 지역 계층 — 중앙 허가만 수록. 허가 ≠ 각국 판매.',
+    'eu.region_note': 'EU 수준에서 허가된 것으로, 어느 한 국가의 판매 기록이 아닙니다. EU 등록부에는 함량·제형·포장 크기가 없습니다.',
+    'eu.region_title': 'EU 중앙 허가(EMA)',
+    'fam.badge.diff': '배합 다름 · 활성성분 {n}개 더',
+    'fam.badge.same': '활성성분 동일 · 방출 방식 확인 필요',
+    'fam.cmp_current': '비교 중인 제품',
+    'fam.cmp_ing': '전체 활성성분',
+    'fam.cmp_intro': '같은 상품명이 시장마다 다르게 등록되어 다른 활성성분을 가질 수 있습니다. 이 표는 정체성 대응이며 번역도, 제품이 호환된다는 주장도 아닙니다.',
+    'fam.cmp_market': '시장',
+    'fam.cmp_name': '등록명',
+    'fam.cmp_rel': '관계',
+    'fam.cmp_this': '이 페이지',
+    'fam.cmp_title': '관련 상품명과 배합 차이',
+    'fam.rel.diff': '활성성분이 다름 — 호환되지 않음',
+    'fam.rel.multi': '여러 방출 방식 기록됨 — 구체적인 제품을 선택하세요',
+    'fam.rel.multi_unknown': '모든 제품의 방출 방식이 기록되지 않음 — 구체적인 제품을 선택하세요',
+    'fam.rel.multi_why': '일부 기록에는 방출 유형이 없습니다',
+    'fam.rel.none': '기록된 활성성분 없음',
+    'fam.rel.partial': '일부 활성성분만 같음 — 같은 조합이 아니며 호환되지 않음',
+    'fam.rel.release': '활성성분은 같지만 방출 방식이 다름 — 호환되지 않음',
+    'fam.rel.same': '활성성분 동일',
+    'fam.title': '다른 시장의 같은 상품명',
+    'fam.warn': '같은 상품명, 다른 약',
+    'flow.s1': '이름',
+    'flow.s2': '제품 확인',
+    'flow.s3': '대상 시장',
+    'footer': '정보 제공용입니다 — 의학적 조언이 아니며 약사를 대신할 수 없습니다.',
+    'form.capsule': '캡슐',
+    'form.effervescent': '발포정',
+    'form.gas': '가스',
+    'form.granule': '과립',
+    'form.inhalation': '흡입제',
+    'form.injection': '주사제',
+    'form.kit': '키트',
+    'form.liquid': '액제',
+    'form.pellet': '펠릿',
+    'form.powder': '분말',
+    'form.solution': '용액',
+    'form.stick': '스틱',
+    'form.suppository': '좌제',
+    'form.tablet': '정제',
+    'form.topical': '외용제',
+    'form.unknown': '알 수 없음',
+    'glossary.d.artg': '호주 의약품 등록부(ARTG) 번호: 호주에 등록·신고된 의약품을 식별합니다.',
+    'glossary.d.atc': '해부학적-치료학적-화학적(ATC) 분류(WHO): C07AB02 같은 코드. 앞 글자·숫자가 장기/계통, 계열, 성분을 나타내어 시장 간에 같은 종류의 약을 찾는 데 유용합니다.',
+    'glossary.d.ban': '영국 승인명(BAN): 영국식 일반명으로 대개 INN과 같지만 일부 옛 이름은 다릅니다(예: epinephrine 대신 adrenaline).',
+    'glossary.d.din': '의약품 식별번호(DIN): 캐나다 제품 식별자이며, DIN-HM은 동종요법 제품에 사용합니다.',
+    'glossary.d.fdc': '고정용량복합제(FDC): 한 제품에 활성성분이 두 가지 이상(예: metformin + glibenclamide). 이 사이트의 복합제 페이지입니다.',
+    'glossary.d.inn': '국제 일반명(INN): 활성성분의 WHO 일반명(예: acetaminophen/paracetamol, metoprolol).',
+    'glossary.d.lasa': "모양·발음이 비슷한 약 이름(LASA). FDA의 'tall-man' 표기와 혼동 이름 목록이 비슷한 이름 간 혼동을 줄이는 데 도움이 됩니다.",
+    'glossary.d.mah': '시장 허가 보유자(MAH): 해당 시장에서 제품 허가를 보유한 회사이며, 반드시 제조 공장은 아닙니다.',
+    'glossary.d.ndc': '국가 의약품 코드(NDC): 미국 제품 식별자(라벨러 + 제품 + 포장 구간).',
+    'glossary.d.otc': '일반의약품(OTC): 해당 시장에서 처방 없이 판매되며, 같은 약이 다른 나라에서는 처방전이 필요할 수 있습니다.',
+    'glossary.d.rx': '해당 시장에서 처방전이 필요한 의약품입니다.',
+    'glossary.d.strength': '단위당 활성성분의 양(예: 정제 1정당 500 mg). 함량과 방출 형태는 시장마다 다를 수 있습니다.',
+    'glossary.d.usan': '미국 채택명(USAN): 미국식 일반명으로 대개 INN과 같지만 때때로 다릅니다(예: salbutamol 대신 albuterol).',
+    'glossary.def': '의미',
+    'glossary.h2': '용어 및 코드',
+    'glossary.intro': '제품 라벨, 규제기관 기록, 이 사이트에서 보는 코드와 용어의 짧은 정의입니다. 이해를 돕기 위한 것이지 의학적 조언이 아닙니다.',
+    'glossary.note': '같은 약어도 국가마다 다를 수 있습니다(예: DIN은 캐나다, ARTG 번호는 호주). 코드는 항상 출처와 함께 읽으세요.',
+    'glossary.t.artg': 'ARTG',
+    'glossary.t.atc': 'ATC 코드',
+    'glossary.t.ban': 'BAN',
+    'glossary.t.din': 'DIN',
+    'glossary.t.fdc': 'FDC',
+    'glossary.t.inn': 'INN',
+    'glossary.t.lasa': 'LASA / tall-man',
+    'glossary.t.mah': 'MAH',
+    'glossary.t.ndc': 'NDC',
+    'glossary.t.otc': 'OTC',
+    'glossary.t.rx': 'Rx',
+    'glossary.t.strength': '함량',
+    'glossary.t.usan': 'USAN',
+    'glossary.term': '용어',
+    'glossary.title': '용어집',
+    'home.all': '전체 국가 및 지역',
+    'home.au': '호주',
+    'home.ca': '캐나다',
+    'home.candidate': '항상 후보 집합을 받게 되며, 단일 답은 없습니다.',
+    'home.cn': '중국',
+    'home.country_label': '대상 시장: 그곳에서 쓰는 이름 보기(선택)',
+    'home.country_label_sel': '대상 시장: {country}에서 부르는 이름 보기:',
+    'home.country_summary': '대상 시장(선택)',
+    'home.coverage': '결과가 비어 있다고 해서 그 약이 없는 것은 아닙니다. 커버리지(국가 및 지역):',
+    'home.cz': '체코',
+    'home.es': '스페인',
+    'home.eu': '유럽연합(EU)',
+    'home.fr': '프랑스',
+    'home.gb': '영국',
+    'home.h1': '약 이름을 조회해 각국에서 무엇인지 확인하세요',
+    'home.hint_idle': '첫 검색에서 색인 조각 하나(중앙값 ~1.0 MB, gzip ~0.16 MB)를 불러오고, 전체 색인(core 원본 ~42 MB, gzip ~9–10 MB)은 배경에서 채워집니다 — 입력, 검색창 포커스, 예시 선택 중 하나로 시작됩니다.',
+    'home.hint_loading': '색인 조각(중앙값 ~1.0 MB, gzip ~0.16 MB) 불러오는 중…',
+    'home.hk': '홍콩',
+    'home.jp': '일본',
+    'home.loading': '색인 불러오는 중…',
+    'home.lv': '라트비아',
+    'home.mx': '멕시코',
+    'home.ph': '상품명, 일반명 또는 포장에 적힌 한 줄',
+    'home.recent': '최근 업데이트',
+    'home.recent_all': '전체 업데이트 보기 →',
+    'home.sg': '싱가포르',
+    'home.slash_hint': '/ 를 눌러 포커스',
+    'home.sub': '상품명, 일반명, 속칭 또는 포장에 적힌 한 줄 — 중국어, 전각, 키릴 문자 입력도 모두 됩니다.',
+    'home.submit': '검색',
+    'home.suggestions': '추천',
+    'home.tw': '대만',
+    'home.us': '미국',
+    'ingredient.unrecorded': '성분 미기록(이름 수준)',
+    'lf.all': '전체',
+    'lf.all_kinds': '전체 종류',
+    'lf.applied': '선택한 필터',
+    'lf.count': '{total}행 중 {shown}행',
+    'lf.drop': '이 필터 제거',
+    'lf.kind': '종류',
+    'lf.market': '시장',
+    'lf.none': '이 필터에 맞는 행이 없습니다.',
+    'lf.spec': '함량',
+    'lf.spec_ph': '함량 필터, 예: 500 mg',
+    'lf.title': '필터',
+    'maker.brand': '상품명',
+    'maker.by_country': '국가별 제품',
+    'maker.capped': '제품 {total}개 중 처음 {shown}개만 표시합니다(국가순).',
+    'maker.empty': '이 제조사에 기록된 제품이 없습니다.',
+    'maker.ingredient': '활성성분',
+    'maker.intro': '<p class="sub">{name} — 시장 {markets}곳의 제품 {products}개, 상품명 {brands}개. 제품은 국가별로 묶여 있고 상품명은 상품 페이지로, 성분은 성분 또는 복합제 페이지로 연결됩니다. 이는 규제기관이 기록한 시장 허가 보유자이며 반드시 제조 공장은 아닙니다.</p>',
+    'maker.no_page': '별도 상품 페이지 없음',
+    'maker.no_page_count': '페이지가 없는 제조사 {n}곳 더 있음',
+    'maker.single_note': '이 제조사의 다른 제품은 아직 기록이 없습니다.',
+    'maker.source': '출처',
+    'maker.source_note': '<b>출처 및 라이선스</b>: 제품 행은 규제기관 기록(openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, NHSA)으로 연결됩니다. 사실 항목만 담으며 <a href="../about.html#licences">라이선스 등록부</a>를 참고하세요.',
+    'maker.stats': '<p class="sub">제품 {products}개 · 시장 {markets}곳 · 상품명 {brands}개</p>',
+    'maker.summary': '이 제조사가 등록한 제품을 시장별로.',
+    'maker.title': '제조사 / 시장 허가 보유자',
+    'matrix.all': '전체',
+    'matrix.au_note': '호주 ARTG 데이터에는 등록 상태 열이 없어 상태를 알 수 없음으로 표시합니다. 등록부에 있다고 현재 판매 중임을 뜻하지 않습니다.',
+    'matrix.brand_note': '각 국가/지역 열은 현지에 등록된 상품명을 보여줍니다 — 번역이 아닙니다.',
+    'matrix.capped': '함량/제형 행 {total}개 중 처음 {shown}개만 표시합니다.',
+    'matrix.close': '닫기',
+    'matrix.country': '국가 및 지역',
+    'matrix.country_all': '전체',
+    'matrix.country_clear': '지우기',
+    'matrix.empty_markets': '열로 표시할 시장을 하나 이상 선택하세요.',
+    'matrix.filters': '필터',
+    'matrix.filters_short': '필터',
+    'matrix.form': '제형',
+    'matrix.hidden_note': '단종·회수·상태 미확인 제품은 기본적으로 숨깁니다. 홍콩과 호주 기록은 예외로 표시합니다.',
+    'matrix.hidden_rows': '{mk}에만 기록된 함량/제형 행 {n}개는 이 표에 표시하지 않습니다.',
+    'matrix.hidden_show': '이 시장을 열로 추가',
+    'matrix.hk_note': '홍콩 기록은 이름/성분 수준만 제공합니다: 함량·제형·등록 상태가 없고, 등록부에 있다고 현재 공급 중임을 증명하지 않습니다.',
+    'matrix.market_count': '시장 {shown}/{total}',
+    'matrix.mobile_filters': '필터',
+    'matrix.multi_form': '여러 제형',
+    'matrix.none': '미기록',
+    'matrix.original': '기록된 원문',
+    'matrix.release': '방출',
+    'matrix.reset': '기본값 복원',
+    'matrix.scroll_hint': '더 많은 시장은 가로로 스크롤하세요 →',
+    'matrix.showing': '{total}행 중 {n}행',
+    'matrix.sort_note': '흔한 함량이 먼저, 미공개 함량이 마지막입니다.',
+    'matrix.spec': '함량 / 제형 / 방출',
+    'matrix.spec_check': '함량 확인',
+    'matrix.spec_conflict': '함량 미검증',
+    'matrix.spec_search': '함량 검색',
+    'matrix.undisclosed_note': '“미공개”는 출처가 함량을 공개하지 않는다는 뜻이며, 제품에 함량이 없다는 뜻이 아닙니다.',
+    'meta.about.desc': '이 교차 참조의 작동 방식: 출처와 커버리지, 라이선스와 출처 표기, 알려진 공백과 편집 원칙. 참고용이며 의학적 조언이 아닙니다.',
+    'meta.about.title': '소개 · 의약품 상품명 교차 참조',
+    'meta.confused.desc': 'FDA tall-man 모양·발음 유사 쌍: 이름에 대한 경고이며 두 약이 호환된다는 진술이 아닙니다.',
+    'meta.confused.title': '혼동하기 쉬운 약 이름 · 의약품 상품명 교차 참조',
+    'meta.coverage.desc': '시장별 제품 수, 성분 매핑, 함량 커버리지, 마지막 동기화와 알려진 공백. 수치는 현재 데이터베이스에서 계산합니다.',
+    'meta.coverage.title': '커버리지 및 최신성 · 의약품 상품명 교차 참조',
+    'meta.glossary.desc': '이 사이트에서 쓰는 코드와 용어의 짧은 정의: INN, BAN, USAN, ATC, MAH, DIN, NDC, ARTG, FDC, LASA, OTC, Rx, 함량.',
+    'meta.glossary.title': '용어집 · 의약품 상품명 교차 참조',
+    'meta.index.desc': '상품명·일반명·속칭을 검색해 활성성분과 함량, 그리고 다른 나라에서 같은 제품이 불리는 이름을 확인하세요. 공개·비상업 참고 자료입니다.',
+    'meta.index.title': '의약품 상품명 교차 참조 — 국가별 약 이름',
+    'meta.warn.desc': '같은 이름·다른 약 제품과, 국가·염 형태·방출 기전이 달라 호환되지 않는 복합제에 대한 공개 경고. 정보 제공용입니다.',
+    'meta.warn.title': '경고: 같은 이름, 다른 약 · 의약품 상품명 교차 참조',
+    'meta.whatsnew.desc': '의약품 상품명 교차 참조의 릴리스 노트: 버전별 수정과 추가 사항.',
+    'meta.whatsnew.title': '새 소식 · 의약품 상품명 교차 참조',
+    'mk.collapse_all': '모두 접기',
+    'mk.expand_all': '모두 펼치기',
+    'mkmeta.asof': '데이터 기준일',
+    'mkmeta.source': '출처',
+    'mkmeta.undisclosed': '일부 기록은 함량이 기재되지 않았습니다',
+    'mkmeta.unknown': '상태를 알 수 없는 기록 포함(판매 증거 아님)',
+    'name.also': '다른 표기',
+    'name.countries': '국가 및 지역',
+    'name.empty': '기록 없음',
+    'name.form': '제형',
+    'name.form_granularity_cn': '출처가 제형을 분류 수준(예: “정제”)으로만 기록해 발포정·코팅정 같은 하위 제형은 구분하지 않습니다.',
+    'name.form_source': '출처 기록 그대로',
+    'name.form_spec': '제형별 함량',
+    'name.found': '다음에서 확인됨',
+    'name.no_en': '영문명 미기록',
+    'name.no_es': '스페인어명 미기록',
+    'name.no_zh': '중국어명 없음',
+    'name.no_zh_hant': '중국어명 없음',
+    'name.notice': '같은 이름이라고 해서 바꿔 쓸 수 있는 것은 아닙니다 — 정체성은 기록된 항목을 하나씩 대조해 확인합니다.',
+    'name.rel_multi_title': '여러 방출 유형',
+    'name.rel_note': '비교하려면 구체적인 제품을 선택하세요',
+    'name.rel_unknown_title': '방출 방식이 일부만 기록됨',
+    'name.release': '방출',
+    'name.severe': '이 상품명은 국가나 변형에 따라 서로 다른 활성성분을 가리킵니다. 조성을 확인하고, 이름을 동등하다고 여기지 마세요.',
+    'name.show_more': '더 보기',
+    'name.single_note': '이 이름에는 아직 제품 기록이 하나뿐입니다.',
+    'name.strength': '함량',
+    'name.summary': '이 이름으로 등록된 제품을 시장별로(정체성 정보만).',
+    'name.warning': '이름은 같지만 즉시방출과 서방출 — 호환되지 않습니다.',
+    'nav.about': '소개',
+    'nav.all_categories': '전체 카테고리 및 ATC',
+    'nav.atc': 'ATC 및 카테고리',
+    'nav.back_search': '← 검색으로 돌아가기',
+    'nav.categories': '카테고리',
+    'nav.confused': '혼동 이름',
+    'nav.coverage': '커버리지',
+    'nav.crumbs': '탐색 경로',
+    'nav.glossary': '용어집',
+    'nav.markets': '시장',
+    'nav.menu': '메뉴',
+    'nav.more': '더보기',
+    'nav.primary': '주요 탐색',
+    'nav.search': '검색',
+    'nav.search_compact': '이름 검색',
+    'nav.sections': '섹션',
+    'nav.warn': '경고',
+    'nav.whatsnew': '새 소식',
+    'nick.abbrev': '약어',
+    'nick.ambiguous': '이 속칭은 둘 이상의 성분을 가리킬 수 있습니다 — 조성을 확인하세요.',
+    'nick.caveat': '속칭은 특정 포장이 아니라 성분을 가리킵니다: 같은 성분이 국가마다 다른 상품명으로 판매됩니다.',
+    'nick.class': '분류어',
+    'nick.class_caveat': '이것은 특정 의약품이 아니라 분류어이며 여러 성분을 포함할 수 있습니다. 성분을 확인하세요.',
+    'nick.community': '커뮤니티 명칭',
+    'nick.folk': '통칭',
+    'nick.folk_caveat': '이것은 특정 의약품이 아니라 통칭/분류어이며 여러 성분을 포함할 수 있습니다. 이름에 이 말이 들어간 제품이 반드시 그 분류에 속하는 것은 아니므로 성분을 확인하세요.',
+    'nick.hit': '속칭',
+    'nick.legacy': '옛 이름',
+    'nick.misnomer': '흔한 오칭',
+    'nick.nomap_caveat': '이 용어는 이 데이터베이스에 판매 제품이 없는 물질을 가리키므로 제품 목록을 표시하지 않습니다.',
+    'nick.slang': '인터넷 속칭',
+    'nick.source': '출처',
+    'nick.street': '미국 거리 명칭',
+    'nick.synonym': '동의어',
+    'nick.synonym_caveat': '같은 활성성분의 다른 이름(INN vs USAN 또는 표기 변형). 성분을 식별할 뿐이며, 국가가 다른 제품은 여전히 호환되지 않습니다.',
+    'nick.synonym_hit': '다른 이름',
+    'nick.tag': '속칭',
+    'nick.translit': '음역된 옛 이름',
+    'nick.unverified': '사용자 제공(미검증)',
+    'notfound.about': '소개',
+    'notfound.confused': '혼동 이름',
+    'notfound.p1': '이 주소에는 페이지가 없습니다. 오래된 링크이거나 오타, 또는 이름이 변경된 항목일 수 있습니다.',
+    'notfound.p2': '홈으로 돌아가 약 이름(상품명, 일반명 또는 속칭)을 입력하세요.',
+    'notfound.report': '내부 링크가 깨져 있다면 <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a>에서 알려주세요.',
+    'notfound.search': '검색',
+    'notfound.title': '페이지를 찾을 수 없습니다',
+    'notfound.whatsnew': '새 소식',
+    'parse.atc': 'ATC 코드',
+    'parse.category': '카테고리',
+    'parse.category_note': '주제 모음과 일치했습니다 — 이름이 아니고 동등성 주장도 아닙니다.',
+    'parse.dose': '함량',
+    'parse.form': '제형',
+    'parse.label': '분석된 검색어',
+    'parse.match': '일치 방식',
+    'parse.match.atc': 'ATC 코드',
+    'parse.match.category': '카테고리 / ATC 분류',
+    'parse.match.compact': '붙여쓰기',
+    'parse.match.contains': '부분 문자열',
+    'parse.match.country': '국가 보기',
+    'parse.match.exact': '정확',
+    'parse.match.fuzzy': '유사',
+    'parse.match.nickname': '별칭',
+    'parse.match.none': '일치 없음',
+    'parse.match.pinyin': '병음',
+    'parse.match.prefix': '접두사',
+    'parse.name': '이름',
+    'release.DR': '지연방출',
+    'release.ER': '서방출',
+    'release.MR': '변형방출',
+    'release.none': '—',
+    'report.all': '알려진 문제',
+    'report.cta': '이 결과 신고',
+    'report.field_actual': '실제 결과',
+    'report.field_expected': '기대 결과',
+    'report.field_pack': '포장 또는 로트',
+    'report.field_page': '페이지',
+    'report.field_query': '검색어',
+    'report.field_row': '행',
+    'report.issue_title': '데이터 오류: ',
+    'report.link': '데이터 오류 신고',
+    'report.note': '성분이 다르거나 함량이 틀렸거나 없는 약인가요? 알려주세요:',
+    'res.action_copy': '일반명 복사',
+    'res.action_drug': '성분 페이지 열기',
+    'res.actions': '작업',
+    'res.alias': '별칭 일치',
+    'res.alias_no_products': '단일 제품이 아님 — 위의 안내를 보세요',
+    'res.brands': '상품명 발견',
+    'res.brands_noun': '상품명',
+    'res.caveat': '결과가 비어 있다고 해서 그 약이 없는 것은 아닙니다',
+    'res.col_country': '국가 및 지역',
+    'res.col_form': '제형',
+    'res.col_link': '페이지',
+    'res.col_market': '시장',
+    'res.col_match': '일치',
+    'res.col_product': '제품명',
+    'res.col_spec': '함량 및 제형',
+    'res.copied': '복사됨',
+    'res.copy': '표 복사',
+    'res.copy_fail': '복사 실패 — 표를 직접 선택하세요',
+    'res.csv': 'CSV 내려받기',
+    'res.density': '간략 보기',
+    'res.details': '상세',
+    'res.empty_browse': '카테고리로 찾아보기',
+    'res.empty_coverage': '커버리지 및 최신성 보기',
+    'res.empty_h1': '“{q}”에 대한 일치 없음',
+    'res.empty_spelling': '철자를 확인하거나 일반명으로 시도해 보세요',
+    'res.fold': '접기',
+    'res.fuzzy': '정확한 일치 없음 — 가장 가까운 이름',
+    'res.identity.ingredient': '활성성분',
+    'res.identity.markets': '수록 시장',
+    'res.identity.records': '기록 {n}개',
+    'res.identity_note': '같은 이름이 다른 시장에서 다른 성분을 가리킬 수 있습니다. 이름만 보지 말고 성분·함량·제형을 확인하세요.',
+    'res.identity_title': '{n}개 중 후보 1',
+    'res.load_more': '더 불러오기',
+    'res.loaded_all': '모든 결과를 표시했습니다',
+    'res.matched': '이름 일치',
+    'res.matched_name': '일치한 이름',
+    'res.more_detail': '함량 더 보기 / 기록 더 보기',
+    'res.more_n': '다른 제품 {n}개 보기',
+    'res.no_brand_note': '기록 {n}개는 상품명이 없어 이름 수준으로 표시합니다.',
+    'res.none': '일치 없음',
+    'res.not_interchangeable': '시장 간 호환 불가',
+    'res.notin': '이 국가에는 수록되지 않음',
+    'res.partial': '부분 결과 — 전체 색인을 불러오는 중…',
+    'res.pick': '이 제품 선택',
+    'res.picked': '선택됨',
+    'res.records_noun': '기록',
+    'res.reg': '등록 정보',
+    'res.same_name': '같은 이름, 다른 약',
+    'res.show_brands': '모든 상품명 보기',
+    'res.showing': '{total}개 중 {n}개 표시',
+    'res.src_active': '출처 시장 {c}',
+    'res.src_all': '전체 출처 시장',
+    'res.src_label': '기록 시장(이곳에 등록된 기록만)',
+    'row.report': '이 행 신고',
+    'same.ing': '같은 성분의 다른 제품',
+    'same.note': '상품명을 검색하셨습니다 — 같은 활성성분을 가진 다른 제품입니다.',
+    'same.related': '같은 성분을 하나 이상 포함(같은 조성은 아님)',
+    'same.related_note': '이 기록들은 검색어와 성분을 하나 이상 공유하지만 전체 성분 조합은 다릅니다. 같은 제품이 아닙니다.',
+    'same.warning': '이름이 같거나 성분이 같다고 해서 바꿔 쓸 수 있는 것은 아닙니다.',
+    'site.name': '의약품 상품명 교차 참조',
+    'spec.cannot_compare': '비교할 수 없음',
+    'spec.no_basis': 'mL당 / 단위당 기준 미기재',
+    'spec.no_basis_note': '일부 함량은 mL당 / 단위당 기준 없이 기록되어 있습니다. 기록된 그대로 표시하며 다른 시장과 비교하지 않습니다.',
+    'syn.tag': '동의어',
+    't11.adv': '고급 필터',
+    't11.all_markets': '전체',
+    't11.cmp_note': '항목별 정체성 비교만 제공합니다. 이름이 같거나 성분이 같다고 해서 제품이 호환되는 것은 아닙니다.',
+    't11.cmp_target': '대상 시장',
+    't11.cmp_title': '항목별 비교(정체성만)',
+    't11.cmp_you': '내 것',
+    't11.compare_link': '항목별로 비교 →',
+    't11.diff': '다름',
+    't11.missing': '미기록',
+    't11.multi': '제품 선택',
+    't11.name': '등록명',
+    't11.pick_mine': '이것이 내 것',
+    't11.pick_this': '이것',
+    't11.picked': '선택됨',
+    't11.release': '방출',
+    't11.reselect': '다시 선택',
+    't11.same': '같음',
+    't11.spec': '함량',
+    't11.still_candidates': '후보 집합은 여전히 기록 {n}개입니다 — 이것은 그중 하나일 뿐입니다. 모든 후보 보기 ↓',
+    'tab.about': '소개',
+    'tab.categories': '카테고리',
+    'tab.coverage': '커버리지',
+    'tab.search': '검색',
+    'u1.aria': '이용 안내',
+    'u1.close': '닫기',
+    'u1.step1': '포장에 적힌 이름을 입력하세요',
+    'u1.step1_hint': '상품명, 일반명, 속칭 또는 포장에 적힌 한 줄 — 함량을 함께 입력해도 됩니다.',
+    'u1.step2': '이 후보를 확인하세요: 성분, 함량, 제형',
+    'u1.step2_hint': '카드는 후보 하나를 보여줄 뿐 정답이 아닙니다 — 성분·함량·제형을 포장과 대조하세요.',
+    'u1.step3': '대상 시장을 선택하세요',
+    'u1.step3_hint': '대상 시장을 선택하면 같은 성분이 그곳에서 무엇으로 불리는지 볼 수 있습니다. 후보 목록 자체는 바뀌지 않습니다.',
+    'u1.title': '3단계로 사용하는 방법',
+    'u1.try': '예시:',
+    'u2.hint': '같은 성분의 현지 이름 — 국가/지역을 클릭해 제품을 보세요. 수록되지 않았다고 그곳에 없는 것은 아닙니다.',
+    'u2.multi': '여러 성분이 일치합니다 — 국가/지역을 바꿔 전체 목록을 보세요.',
+    'u2.none': '미수록',
+    'u2.none_hint': '이 시장의 공개 데이터에 이 성분의 제품이 없습니다. 그곳에 없다는 증거는 아닙니다.',
+    'u2.title': '국가/지역별 이름',
+    'unit.iu': 'IU',
+    'unit.mci': 'mCi',
+    'unit.meq': 'mEq',
+    'unit.microgram': 'mcg',
+    'unit.ug': 'mcg',
+    'unit.unit': '단위',
+    'unit.万iu': '10만 IU',
+    'warn.count': '<p class="sub">공개 경고 @@WARN_TOTAL@@건: 심각도 높음 @@WARN_HIGH@@건, 보통 @@WARN_MEDIUM@@건, 정보 @@WARN_INFO@@건. 초안 경고는 표시하지 않습니다.</p>',
+    'warn.countries': '시장',
+    'warn.drug_summary': '이 성분의 안전성 경고',
+    'warn.empty': '아직 공개된 경고가 없습니다.',
+    'warn.filter.all': '전체',
+    'warn.group.high': '심각도 높음 — 호환된다고 가정하지 마세요',
+    'warn.group.info': '알아두면 좋은 내용',
+    'warn.group.medium': '심각도 보통 — 동등하다고 가정하기 전에 확인하세요',
+    'warn.intro': '<p class="sub">혼동하기 쉬운 이름이나 <b>호환되지 않는</b> 제품에 대해 공개된 경고입니다 — 국가, 염 형태, 방출 기전이 다른 경우를 포함합니다. 이 페이지는 정체성과 호환성만 표시하며, <b>복약 조언</b>이나 대체 추천은 담지 않습니다.</p>',
+    'warn.no_advice': '의학적 조언이 아닙니다. 실제 포장과 성분을 확인하고, 제품을 바꾸기 전에 약사에게 문의하세요.',
+    'warn.page_next': '다음',
+    'warn.page_prev': '이전',
+    'warn.page_status': '{total}페이지 중 {n}페이지 · 경고 {count}건',
+    'warn.pagination': '경고 페이지',
+    'warn.related': '관련 성분',
+    'warn.reviewed': '검토',
+    'warn.see_all': '모든 경고 보기',
+    'warn.sev.high': '높음',
+    'warn.sev.info': '정보',
+    'warn.sev.medium': '보통',
+    'warn.source': '규제기관 출처',
+    'warn.source_note': '<b>출처 및 라이선스</b>: 각 경고는 규제기관의 원문 문서로 연결됩니다(DailyMed/FDA, EMA/MHRA, Health Canada DPD, AEMPS CIMA, PBS/TGA, NMPA 등). 사실 발췌만 게시하고 출처 링크를 유지하며, 라벨·SmPC/CMI 전문은 재수록하지 않습니다. 약관은 소개 페이지의 라이선스 등록부를 참고하세요.',
+    'warn.title': '경고: 같은 이름, 다른 약',
+    'whatsnew.intro': '모든 릴리스에는 짧은 요약이 함께 제공됩니다. 이전 버전은 git 태그에서 보충하며, 전체 이력은 <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>에 있습니다.',
+    'whatsnew.lang_note': '릴리스 노트는 기계 번역(AI)이며, CHANGELOG.md의 중국어 원문이 기준입니다.',
+    'whatsnew.pending': '중국어 원문만 있음 — 영어/스페인어 번역 대기 중.',
+    'whatsnew.title': '새 소식',
+}
+
 def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
@@ -3655,6 +4330,11 @@ def _merge_static_i18n(values: dict) -> None:
         for key, text in fr_values.items():
             if key not in I18N["fr"]:
                 I18N["fr"][key] = text
+    # L1（v0.13.8）：韩语是全键翻译表（667/667），键集与 en 相同；万一缺键才回落英文。
+    I18N["ko"] = {k: (KO_I18N.get(k) or v) for k, v in I18N["en"].items()}
+    for key, text in KO_I18N.items():
+        if key not in I18N["ko"]:
+            I18N["ko"][key] = text
 
 
 def _install_zh_hant(values: dict) -> None:
@@ -4137,15 +4817,22 @@ def _warn_meta_html(row: dict, lang: str, sub_names: dict[str, str],
     return '<p class="warn-meta">' + " · ".join(parts) + "</p>"
 
 
+def _data_block_text(d: dict[str, str], lang: str) -> str:
+    """数据型（非 I18N 字典）多语文本：缺该语言时回落英文并标 (EN)（不机翻数据）。"""
+    return d.get(lang) or ((d.get("en") or "") + " (EN)")
+
+
 def _warn_lang_blocks(row: dict, sub_names: dict[str, str], *, prefix: str,
                       link: bool = False) -> str:
-    """一条警示的 zh/en/es 三块正文（data-lang-block；数据缺 es 时回退英文并标注）。"""
+    """一条警示的六语块正文（data-lang-block；fr/ko 无译文 → 复用英文并标 (EN)，不机翻）。"""
     out = []
-    for lang in ("en", "zh", "es"):
-        title = row.get("title_" + lang) or row.get("title_en") or ""
-        body = row.get("body_" + lang) or row.get("body_en") or ""
-        fallback = "" if row.get("body_" + lang) else (
-            ' <span class="meta">(EN)</span>' if lang != "en" else "")
+    for lang in I18N_REQUIRED_LANGS:
+        # zh-Hant 沿用简体数据（与 I18N 的繁体回落规则一致）；fr/ko 走英文 + (EN)
+        data_lang = "zh" if lang == "zh-Hant" else lang
+        title = row.get("title_" + data_lang) or row.get("title_en") or ""
+        body = row.get("body_" + data_lang) or row.get("body_en") or ""
+        fallback = "" if row.get("body_" + data_lang) else (
+            ' <span class="meta">(EN)</span>' if data_lang != "en" else "")
         head = f'<h2>{_warn_badge(row["severity"], lang)} {esc(title)}{fallback}</h2>'
         if link:
             head = (f'<h2><a href="{prefix}warn.html#w-{esc(row["warning_id"])}">'
@@ -4162,10 +4849,14 @@ def _drug_warn_html(rows: list[dict]) -> str:
     if not rows:
         return ""
     parts = ['<div class="notice warnbox drugwarn">']
-    for lang in ("en", "zh", "es"):
+    for lang in I18N_REQUIRED_LANGS:
         T = I18N[lang]
+        data_lang = "zh" if lang == "zh-Hant" else lang   # 繁体沿用简体数据；fr/ko 用英文 + (EN)
         items = "".join(
-            f'<li><a href="../warn.html#w-{esc(r["warning_id"])}">{esc(r.get("title_" + lang) or r.get("title_en") or "")}</a></li>'
+            f'<li><a href="../warn.html#w-{esc(r["warning_id"])}">'
+            f'{esc(r.get("title_" + data_lang) or r.get("title_en") or "")}'
+            + ('' if r.get("title_" + data_lang) or data_lang == "en" else ' <span class="meta">(EN)</span>')
+            + '</a></li>'
             for r in rows[:3])
         parts.append(
             f'<div class="lang-block" data-lang-block="{lang}">'
@@ -8929,8 +9620,9 @@ BILINGUAL_JS = r"""
     SHOW = (saved === '0') ? false : (saved === '1') ? true : (window.LANG !== 'en');
   } catch(e) { SHOW = (window.LANG !== 'en'); }
   function url(){
-    var pre = (typeof window.DSH_PREFIX === 'string') ? window.DSH_PREFIX : '';
-    return pre + 'data/terms.json';
+    // v0.13.8：改用**站点根绝对路径** —— 语言副本（/ko/、/fr/ …）里 window.DSH_PREFIX 仍是 ''，
+    // 相对拼接会打到 /ko/data/terms.json（404）；根绝对路径六语通用（站点发布在主域根）。
+    return '/data/terms.json';
   }
   function load(){
     if(TERMS) return Promise.resolve(TERMS);
@@ -9472,7 +10164,9 @@ def _registry_shell_markets() -> tuple[tuple[str, str], ...]:
 
 
 SHELL_MARKETS = _registry_shell_markets()
-SHELL_LANGS = ("en", "es", "zh", "zh-Hant")
+# v0.13.8：分类链接的语言块补 fr/ko —— JS 按 data-lang-block 显隐，缺块时 /fr/、/ko/ 的
+# 24 个分类链接（首页 8 chip + 抽屉 16）与 coverage 抽屉 16 个会整片空白。
+SHELL_LANGS = ("en", "es", "zh", "zh-Hant", "fr", "ko")
 
 
 def _mkblock_js() -> str:
@@ -9608,7 +10302,7 @@ def _mkblock_js() -> str:
 
 
 def _shell_cat_links(prefix: str, limit: int = 99) -> str:
-    """类别面板：消费者大类（沿用 .lang-block 四语块，无 JS 也有英文）。"""
+    """类别面板：消费者大类（沿用 .lang-block 六语块，无 JS 也有英文）。"""
     return "".join(
         f'<a href="{prefix}cat/{cat["id"]}.html">' + "".join(
             f'<span class="lang-block" data-lang-block="{lbl}">{esc(cat["labels"][lbl])}</span>'
@@ -10080,7 +10774,7 @@ def build_whats_new() -> None:
     v0.5.3/v0.5.4/v0.5.5 从正文消失（线上 smoke whats-new-version 失败）。
     现在的规则：
       1) 版本顺序永远以 CHANGELOG.md 为准（最新在上，含全部版本）；
-      2) 有 JSON 译文的版本 → 渲染 zh/en/es/zh-Hant 四个语言块（按界面语言只显示一块）；
+      2) 有 JSON 译文的版本 → 渲染 zh/en/es/zh-Hant/fr/ko 六个语言块（按界面语言只显示一块）；
         （2026-11-13 task-44：原来只渲染三语，zh-Hant 界面按 data-lang-block 显隐会把正文
          全部隐藏；这里补 zh-Hant，缺值时回退 zh。）
       3) 没有译文的版本 → 显示 CHANGELOG 中文原文 + 「译文待补」提示。
@@ -10106,8 +10800,11 @@ def build_whats_new() -> None:
         item = translations.get(ver)
         if item:
             blocks = []
-            for lang in ("zh", "en", "es", "zh-Hant"):
-                items = item.get(lang) or item.get("zh") or []
+            # L1（v0.13.8）：fr/ko 也必须有块 —— JS 按 data-lang-block 显隐，缺块会把整段正文隐藏。
+            # 后加语言旧版不补译（fr 自 v0.11.5、ko 自 v0.13.8），缺译回落英文而不是中文。
+            for lang in ("zh", "en", "es", "zh-Hant", "fr", "ko"):
+                items = (item.get(lang)
+                         or item.get("en" if lang in ("fr", "ko") else "zh") or [])
                 lis = "".join(f"<li>{_md_inline(str(x))}</li>" for x in items)
                 blocks.append(f'<div class="lang-block" data-lang-block="{lang}">'
                               f'<ul>{lis}</ul></div>')
@@ -11497,7 +12194,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
                          + "".join(cells) + "</tr>")
         capped_blocks = ""
         if len(spec_rows) > MATRIX_ROW_CAP:
-            for lang in ("en", "es", "zh", "zh-Hant"):
+            # v0.13.8：块按**当前启用语言**生成（fr/ko 的 I18N 已有译文；四语写死会让 /fr/、/ko/ 整块空白）
+            for lang in I18N_REQUIRED_LANGS:
                 note = (I18N[lang].get("matrix.capped") or "")
                 note = (note.replace("{shown}", str(len(shown)))
                             .replace("{total}", str(len(spec_rows))))
@@ -11977,7 +12675,8 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                  + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}{also_bit}<span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
 {banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys, data)}{single_table}"""
         if single:
-            for lang in ("en", "es", "zh", "zh-Hant"):
+            # v0.13.8：六语块（name.single_note 在 fr/ko 字典里已存在）
+            for lang in I18N_REQUIRED_LANGS:
                 note = I18N[lang].get("name.single_note") or I18N["en"]["name.single_note"]
                 body += (f'<div class="lang-block" data-lang-block="{lang}">'
                          f'<p class="sub name-single-note">{esc(note)}</p></div>')
@@ -13223,7 +13922,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
                       "markets": str(len(countries)), "brands": f"{len(brands):,}"}
         intro_blocks = ""
         stats_blocks = ""
-        for lang in ("en", "es", "zh"):
+        for lang in I18N_REQUIRED_LANGS:
             li = I18N[lang]["maker.intro"]
             ls = I18N[lang]["maker.stats"]
             for k, v in stats_vals.items():
@@ -13269,7 +13968,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
                 f'</tr></thead><tbody>{"".join(body_rows)}</tbody></table></div>')
         capped_blocks = ""
         if n_products > shown:
-            for lang in ("en", "es", "zh"):
+            for lang in I18N_REQUIRED_LANGS:
                 note = (I18N[lang]["maker.capped"]
                         .replace("{shown}", f"{shown:,}").replace("{total}", f"{n_products:,}"))
                 capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
@@ -13277,7 +13976,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
         single_html = ""
         single = n_products == 1
         if single:
-            for lang in ("en", "es", "zh", "zh-Hant"):
+            for lang in I18N_REQUIRED_LANGS:
                 note = I18N[lang].get("maker.single_note") or I18N["en"]["maker.single_note"]
                 single_html += (f'<div class="lang-block" data-lang-block="{lang}">'
                                 f'<p class="sub maker-single-note">{esc(note)}</p></div>')
@@ -13487,7 +14186,7 @@ def _release_oneliner(version: str, lang: str, limit: int = 40) -> str:
 
 
 def _inject_release_liners() -> None:
-    """R4（v0.12.1）：把最近 3 版 release notes 的「一句话变化」注入五语字典（键 `rel.<version>`）。
+    """R4（v0.12.1）：把最近 3 版 release notes 的「一句话变化」注入六语字典（键 `rel.<version>`）。
 
     首页「最近更新」原来把那句话作为**静态度**按路径语言渲染，用户在根页用 `?lang=` /
     localStorage 切到中文时，其它文案被 i18n.js 翻译了、这一句不会变 —— 现在同一句话
@@ -13497,7 +14196,7 @@ def _inject_release_liners() -> None:
     """
     for rel in load_releases()[:3]:
         ver = rel["version"]
-        for lang in ("en", "es", "zh", "zh-Hant", "fr"):
+        for lang in ("en", "es", "zh", "zh-Hant", "fr", "ko"):
             text = _release_oneliner(ver, lang)
             if text:
                 I18N.setdefault(lang, {})[f"rel.{ver}"] = text
@@ -14343,17 +15042,25 @@ ATC_SOURCE_LABELS = {
            "wikidata": "维基数据", "editorial": "编辑译名"},
     "zh-Hant": {"wikipedia": "維基百科", "wikipedia-zh-converted": "維基百科（中文轉繁體）",
                 "wikidata": "維基數據", "editorial": "編輯譯名"},
+    # v0.13.8：fr/ko 没有 ATC 类名译文，来源小字按英文数据渲染并标 (EN)（不机翻数据）
+    "fr": {"wikipedia": "Wikipédia", "wikipedia-zh-converted": "Wikipédia (zh)",
+           "wikidata": "Wikidata", "editorial": "traduction éditoriale"},
+    "ko": {"wikipedia": "위키백과", "wikipedia-zh-converted": "위키백과(중국어→번체)",
+           "wikidata": "위키데이터", "editorial": "편집 번역"},
 }
 ATC_EDITORIAL_LICENSE = {
     "en": "editorial (project)", "es": "editorial (proyecto)",
     "zh": "编辑整理（项目）", "zh-Hant": "編輯整理（專案）",
+    "fr": "éditorial (projet)", "ko": "편집 정리(프로젝트)",
 }
 ATC_FALLBACK_LABEL = {
     "en": "fallback name", "es": "nombre de respaldo",
     "zh": "回退名", "zh-Hant": "回退名",
+    "fr": "nom de repli", "ko": "대체 이름",
 }
 ATC_SRC_PREFIX = {
     "en": "Source: ", "es": "Fuente: ", "zh": "来源：", "zh-Hant": "來源：",
+    "fr": "Source : ", "ko": "출처: ",
 }
 
 
@@ -14392,25 +15099,29 @@ ATC_CLASS_V2, ATC_CLASS_FALLBACK = _load_atc_class_v2()
 CONSUMER_CATEGORIES = [
     {"id": "antihypertensives", "prefixes": ["C02", "C03", "C07", "C08", "C09"],
      "labels": {"en": "Blood-pressure medicines", "es": "Medicamentos para la presión arterial",
-                "zh": "降压药", "zh-Hant": "降血壓藥"},
+                "zh": "降压药", "zh-Hant": "降血壓藥",
+                "fr": "Médicaments contre l'hypertension", "ko": "혈압약"},
      "desc": {"en": "ATC C02/C03/C07/C08/C09 — antihypertensives and related classes.",
               "es": "ATC C02/C03/C07/C08/C09 — antihipertensivos y clases relacionadas.",
               "zh": "ATC C02/C03/C07/C08/C09——降压及相关类别。",
               "zh-Hant": "ATC C02/C03/C07/C08/C09——降壓及相關類別。"}},
     {"id": "antibiotics", "prefixes": ["J01"],
-     "labels": {"en": "Antibiotics", "es": "Antibióticos", "zh": "抗生素", "zh-Hant": "抗生素"},
+     "labels": {"en": "Antibiotics", "es": "Antibióticos", "zh": "抗生素", "zh-Hant": "抗生素",
+                "fr": "Antibiotiques", "ko": "항생제"},
      "desc": {"en": "ATC J01 — systemic antibacterials.",
               "es": "ATC J01 — antibacterianos sistémicos.", "zh": "ATC J01——全身用抗菌药。",
               "zh-Hant": "ATC J01——全身用抗菌藥。"}},
     {"id": "diabetes", "prefixes": ["A10"],
      "labels": {"en": "Diabetes medicines", "es": "Medicamentos para la diabetes",
-                "zh": "降糖药", "zh-Hant": "降血糖藥"},
+                "zh": "降糖药", "zh-Hant": "降血糖藥",
+                "fr": "Médicaments du diabète", "ko": "당뇨병약"},
      "desc": {"en": "ATC A10 — drugs used in diabetes.",
               "es": "ATC A10 — fármacos para diabetes.", "zh": "ATC A10——糖尿病用药。",
               "zh-Hant": "ATC A10——糖尿病用藥。"}},
     {"id": "weight-loss", "prefixes": ["A08", "A10BJ", "A10BX16"],
      "labels": {"en": "Weight-loss medicines", "es": "Medicamentos para perder peso",
-                "zh": "减肥药", "zh-Hant": "減重藥"},
+                "zh": "减肥药", "zh-Hant": "減重藥",
+                "fr": "Médicaments pour perdre du poids", "ko": "체중 감량약"},
      "desc": {"en": ("ATC A08 + A10BJ (GLP-1) + A10BX16 (tirzepatide) — antiobesity preparations "
                      "and GLP-1 weight-loss medicines. GLP-1s also belong to the diabetes class "
                      "A10; this is a browse-by-indication collection, not a claim of equivalence."),
@@ -14440,7 +15151,8 @@ CONSUMER_CATEGORIES = [
                            "兩個大類，不代表可以互換。")}},
     {"id": "cold-medicine", "prefixes": ["R05", "N02BE"],
      "labels": {"en": "Cold & cough medicines", "es": "Medicamentos para resfriado y tos",
-                "zh": "感冒咳嗽药", "zh-Hant": "感冒咳嗽藥"},
+                "zh": "感冒咳嗽药", "zh-Hant": "感冒咳嗽藥",
+                "fr": "Médicaments contre le rhume et la toux", "ko": "감기·기침약"},
      "desc": {"en": ("ATC R05 + N02BE — cough/cold preparations and anilides (paracetamol). "
                      "Consumer “cold medicine” is broader than one ATC class; systemic "
                      "antihistamines (R06) are listed under Allergy medicines."),
@@ -14463,13 +15175,15 @@ CONSUMER_CATEGORIES = [
                            "「抗過敏藥」，兩個大類互有重疊，可互相對照。")}},
     {"id": "analgesics", "prefixes": ["N02", "M01A"],
      "labels": {"en": "Pain & fever relief", "es": "Analgésicos y antitérmicos",
-                "zh": "退烧止痛", "zh-Hant": "退燒止痛"},
+                "zh": "退烧止痛", "zh-Hant": "退燒止痛",
+                "fr": "Antidouleurs et antipyrétiques", "ko": "진통·해열제"},
      "desc": {"en": "ATC N02/M01A — analgesics and antipyretics.",
               "es": "ATC N02/M01A — analgésicos y antipiréticos.",
               "zh": "ATC N02/M01A——镇痛与退热药。", "zh-Hant": "ATC N02/M01A——鎮痛與退熱藥。"}},
     {"id": "allergy", "prefixes": ["R06"],
      "labels": {"en": "Allergy medicines", "es": "Medicamentos para la alergia",
-                "zh": "抗过敏药", "zh-Hant": "抗過敏藥"},
+                "zh": "抗过敏药", "zh-Hant": "抗過敏藥",
+                "fr": "Médicaments contre les allergies", "ko": "알레르기약"},
      "desc": {"en": ("ATC R06 — systemic antihistamines. Some also appear in combination cold "
                      "medicines; see Cold & cough medicines."),
               "es": ("ATC R06 — antihistamínicos sistémicos. Algunos también aparecen en "
@@ -14488,7 +15202,8 @@ CONSUMER_CATEGORIES = [
                            "「感冒咳嗽藥」只含 R05 + N02BE，因此兩個大類有重疊。")}},
     {"id": "acid-related", "prefixes": ["A02"],
      "labels": {"en": "Stomach / acid medicines", "es": "Medicamentos gástricos / de acidez",
-                "zh": "胃药", "zh-Hant": "胃藥"},
+                "zh": "胃药", "zh-Hant": "胃藥",
+                "fr": "Médicaments pour l'estomac / l'acidité", "ko": "위장·제산제"},
      "desc": {"en": "ATC A02 — acid-related disorder drugs (antacids, PPIs, H2 blockers).",
               "es": "ATC A02 — antiácidos, IBP, antihistamínicos H2.",
               "zh": "ATC A02——抗酸、质子泵抑制剂、H2 受体拮抗剂等。",
@@ -14496,13 +15211,15 @@ CONSUMER_CATEGORIES = [
     {"id": "anticoagulants", "prefixes": ["B01"],
      "labels": {"en": "Blood thinners / antithrombotics",
                 "es": "Anticoagulantes / antitrombóticos", "zh": "抗凝药",
-                "zh-Hant": "抗凝血藥"},
+                "zh-Hant": "抗凝血藥",
+                "fr": "Anticoagulants / antithrombotiques", "ko": "항응고·항혈전제"},
      "desc": {"en": "ATC B01 — antithrombotic agents. Not all are interchangeable.",
               "es": "ATC B01 — antitrombóticos; no todos son intercambiables.",
               "zh": "ATC B01——抗血栓药；彼此不都可互换。",
               "zh-Hant": "ATC B01——抗血栓藥；彼此不都可互換。"}},
     {"id": "statins", "prefixes": ["C10AA"], "exclude": ["cerivastatin"],
-     "labels": {"en": "Statins", "es": "Estatinas", "zh": "他汀类", "zh-Hant": "他汀類"},
+     "labels": {"en": "Statins", "es": "Estatinas", "zh": "他汀类", "zh-Hant": "他汀類",
+                "fr": "Statines", "ko": "스타틴"},
      "desc": {"en": ("ATC C10AA — HMG-CoA reductase inhibitors. Cerivastatin (withdrawn 2001) "
                      "is excluded from the member list; status badges show current product "
                      "records."),
@@ -14520,34 +15237,40 @@ CONSUMER_CATEGORIES = [
                "zh-Hant": "cerivastatin（C10AA06）已於 2001 年撤市，本大類不將其列為現售選項。"}},
     {"id": "beta-blockers", "prefixes": ["C07"],
      "labels": {"en": "Beta blockers", "es": "Betabloqueantes", "zh": "β受体阻滞剂",
-                "zh-Hant": "β受體阻斷劑"},
+                "zh-Hant": "β受體阻斷劑",
+                "fr": "Bêtabloquants", "ko": "베타차단제"},
      "desc": {"en": "ATC C07 — beta blocking agents.", "es": "ATC C07 — betabloqueantes.",
               "zh": "ATC C07——β受体阻滞剂。", "zh-Hant": "ATC C07——β受體阻滯劑。"}},
     {"id": "antidepressants", "prefixes": ["N06A"],
      "labels": {"en": "Antidepressants", "es": "Antidepresivos", "zh": "抗抑郁药",
-                "zh-Hant": "抗憂鬱藥"},
+                "zh-Hant": "抗憂鬱藥",
+                "fr": "Antidépresseurs", "ko": "항우울제"},
      "desc": {"en": "ATC N06A — antidepressants.", "es": "ATC N06A — antidepresivos.",
               "zh": "ATC N06A——抗抑郁药。", "zh-Hant": "ATC N06A——抗抑鬱藥。"}},
     {"id": "asthma-copd", "prefixes": ["R03"],
      "labels": {"en": "Asthma / COPD inhalers", "es": "Inhaladores para asma / EPOC",
-                "zh": "哮喘·慢阻肺吸入剂", "zh-Hant": "哮喘·慢阻肺吸入劑"},
+                "zh": "哮喘·慢阻肺吸入剂", "zh-Hant": "哮喘·慢阻肺吸入劑",
+                "fr": "Inhalateurs pour l'asthme / la BPCO", "ko": "천식·COPD 흡입제"},
      "desc": {"en": "ATC R03 — drugs for obstructive airway diseases.",
               "es": "ATC R03 — enfermedades obstructivas de las vías respiratorias.",
               "zh": "ATC R03——阻塞性气道疾病用药。", "zh-Hant": "ATC R03——阻塞性氣道疾病用藥。"}},
     {"id": "corticosteroids", "prefixes": ["H02"],
      "labels": {"en": "Steroid hormones", "es": "Hormonas esteroideas", "zh": "激素类",
-                "zh-Hant": "荷爾蒙類"},
+                "zh-Hant": "荷爾蒙類",
+                "fr": "Hormones stéroïdiennes", "ko": "스테로이드 호르몬"},
      "desc": {"en": "ATC H02 — corticosteroids for systemic use.",
               "es": "ATC H02 — corticosteroides sistémicos.", "zh": "ATC H02——全身用糖皮质激素。",
               "zh-Hant": "ATC H02——全身用糖皮質激素。"}},
     {"id": "antivirals", "prefixes": ["J05"],
-     "labels": {"en": "Antivirals", "es": "Antivirales", "zh": "抗病毒药", "zh-Hant": "抗病毒藥"},
+     "labels": {"en": "Antivirals", "es": "Antivirales", "zh": "抗病毒药", "zh-Hant": "抗病毒藥",
+                "fr": "Antiviraux", "ko": "항바이러스제"},
      "desc": {"en": "ATC J05 — antivirals for systemic use.",
               "es": "ATC J05 — antivirales sistémicos.", "zh": "ATC J05——全身用抗病毒药。",
               "zh-Hant": "ATC J05——全身用抗病毒藥。"}},
     {"id": "dermatologicals", "prefixes": ["D"],
      "labels": {"en": "Skin medicines", "es": "Medicamentos dermatológicos", "zh": "皮肤外用药",
-                "zh-Hant": "皮膚外用藥"},
+                "zh-Hant": "皮膚外用藥",
+                "fr": "Médicaments pour la peau", "ko": "피부약"},
      "desc": {"en": "ATC D — dermatologicals (broad class).",
               "es": "ATC D — dermatológicos (clase amplia).", "zh": "ATC D——皮肤科用药（大类）。",
               "zh-Hant": "ATC D——皮膚科用藥（大類）。"}},
@@ -14557,7 +15280,7 @@ CONSUMER_CATEGORIES = [
 def build_glossary() -> None:
     """v0.6.4 B10：/glossary.html 术语表（四语，客户端按语言切块 + /es//zh//zh-hant/ 静态副本）。"""
     blocks = []
-    for lang in ("en", "es", "zh", "zh-Hant"):
+    for lang in I18N_REQUIRED_LANGS:
         D = I18N.get(lang) or I18N["en"]
         rows = "".join(
             f'<dt>{esc(D.get("glossary.t." + term, term))}</dt>'
@@ -14606,7 +15329,14 @@ def _atc_display_name(lang: str, code: str) -> str:
 
 
 def _atc_names(code: str) -> dict[str, str]:
-    return {lang: _atc_display_name(lang, code) for lang in ("en", "es", "zh", "zh-Hant")}
+    """六语类名；ATC 数据只有 en/es/zh（zh-Hant 走回落），fr/ko 复用英文并标 (EN)。"""
+    out = {}
+    for lang in I18N_REQUIRED_LANGS:
+        name = _atc_display_name(lang, code)
+        if name and lang in ("fr", "ko"):
+            name += " (EN)"     # 数据无 fr/ko 译文：显示英文类名并标注，不机翻
+        out[lang] = name
+    return out
 
 
 def _atc_all_fallback(code: str) -> bool:
@@ -14669,7 +15399,7 @@ def _lang_block_text(key: str, **fmt: object) -> str:
 
 def _atc_source_line(code: str) -> str:
     """ATC 类目页标题下的逐语来源/许可/链接小字。"""
-    parts = {lang: _atc_source_html(code, lang) for lang in ("en", "es", "zh", "zh-Hant")}
+    parts = {lang: _atc_source_html(code, lang) for lang in I18N_REQUIRED_LANGS}
     if not any(parts.values()):
         return ""
     parts = {lang: ATC_SRC_PREFIX.get(lang, "") + html
@@ -15204,8 +15934,10 @@ def _cat_related_html(prefixes: list[str],
     for code in prefixes:
         exists = code in groups.get(len(code), {})
         parts: dict[str, str] = {}
-        for lang in ("en", "es", "zh", "zh-Hant"):
-            display = _atc_display_name(lang, code) or f"ATC {code}"
+        for lang in I18N_REQUIRED_LANGS:
+            name = _atc_display_name(lang, code)
+            # v0.13.8：数据只有 en/es/zh 类名 → fr/ko 显示英文 + (EN)（不机翻）
+            display = (name + " (EN)") if (name and lang in ("fr", "ko")) else (name or f"ATC {code}")
             inner = f'<code>{esc(code)}</code> {esc(display)}'
             if exists:
                 inner = f'<a href="../atc/{esc(code)}.html">{inner}</a>'
@@ -15248,16 +15980,17 @@ def build_category_pages(db: sqlite3.Connection) -> int:
         title_labels = cat["labels"]
         display_title = _lang_inline(title_labels)
         desc_blocks = "".join(
-            f'<div class="lang-block" data-lang-block="{lang}">{esc(cat["desc"][lang])}</div>'
-            for lang in ("en", "es", "zh", "zh-Hant"))
+            f'<div class="lang-block" data-lang-block="{lang}">'
+            f'{esc(_data_block_text(cat["desc"], lang))}</div>'
+            for lang in I18N_REQUIRED_LANGS)
         notes = ""
         if cat.get("notes"):
             badge = ('<span class="st-badge st-withdrawn" data-i18n="drug.status.withdrawn">'
                      '已撤市</span> ' if cat.get("exclude") else "")
             note_blocks = "".join(
                 f'<div class="lang-block" data-lang-block="{lang}">{badge}'
-                f'{esc(cat["notes"][lang])}</div>'
-                for lang in ("en", "es", "zh", "zh-Hant"))
+                f'{esc(_data_block_text(cat["notes"], lang))}</div>'
+                for lang in I18N_REQUIRED_LANGS)
             notes = f'<div class="notice cat-note">{note_blocks}</div>'
         # T13 / D4（用户评审 §2）：187 个成分需要页内搜索 + 子类筛选。
         # 子类 = 成员 ATC 码的前 4 位（N02B / M01A …），按命中成员数排序，最多 12 个。
@@ -15355,10 +16088,13 @@ def _assert_once(html: str, marker: str, where: str) -> None:
 
 
 def _atc_card_inline(code: str) -> str:
-    """atc.html L1 卡片：v2 四语类名 + 逐语来源/许可小字。"""
+    """atc.html L1 卡片：六语类名 + 逐语来源/许可小字（fr/ko 用英文类名 + (EN)）。"""
     parts: dict[str, str] = {}
-    for lang in ("en", "es", "zh", "zh-Hant"):
-        inner = f'<code>{esc(code)}</code> {esc(_atc_display_name(lang, code))}'
+    for lang in I18N_REQUIRED_LANGS:
+        name = _atc_display_name(lang, code)
+        if name and lang in ("fr", "ko"):
+            name += " (EN)"     # 数据无 fr/ko 译文：显示英文类名并标注，不机翻
+        inner = f'<code>{esc(code)}</code> {esc(name)}'
         src = _atc_source_html(code, lang)
         if src:
             inner += f' <span class="atc-src">{src}</span>'
@@ -15589,7 +16325,8 @@ def build_atc_ing_json(db: sqlite3.Connection) -> dict[str, int]:
 
 def _home_cat_chips(lang: str, prefix: str, limit: int = 8) -> str:
     """v0.10.0：首页只放 8 个高频大类 chip（2×4）+ 「全部类别」链接；其余在导航面板。"""
-    langs = ("en", "es", "zh", "zh-Hant")
+    # v0.13.8：补 fr/ko —— 否则 /fr/、/ko/ 首页 8 个 chip 的文字块全被 JS 隐藏（空白链接）。
+    langs = ("en", "es", "zh", "zh-Hant", "fr", "ko")
     parts = []
     for cat in CONSUMER_CATEGORIES[:limit]:
         spans = "".join(
@@ -16989,9 +17726,9 @@ def main() -> None:
   var SRC_META = null, SRC_META_P = null;
   function loadSrcMeta(){
     if(SRC_META_P) return SRC_META_P;
-    // 注意：这段在 i18n.js 里执行（不是 app.js），没有 fetchJSON/BASE —— 自己拼前缀。
-    var pre = (typeof window.DSH_PREFIX === 'string') ? window.DSH_PREFIX : '';
-    SRC_META_P = fetch(pre + 'data/sources.json')
+    // v0.13.8：改用**站点根绝对路径** —— 语言副本（/ko/、/fr/ …）里 window.DSH_PREFIX 仍是 ''，
+    // 相对拼接会打到 /ko/data/sources.json（404）；根绝对路径六语通用（站点发布在主域根）。
+    SRC_META_P = fetch('/data/sources.json')
       .then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function(d){ SRC_META = (d && d.markets) || {}; return SRC_META; })
       .catch(function(){ SRC_META = {}; return SRC_META; });

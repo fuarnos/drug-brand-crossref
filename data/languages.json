@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-28",
+  "updated": "2026-11-18",
   "description": "语言注册表（唯一真相源）：站点 UI 语言 + URL 路由 + hreflang。新增语言必须改这里、补 I18N 字典与站点路由，并跑 tests/test_markets_registry.py + tests/trilingual/。当前启用 en/es/zh；预留 zh-Hant（繁体）与 EU 语言占位（全部 disabled）。",
   "fields_doc": "docs/市场扩展接口.md#32-datalanguagesjson字段",
   "planned_markets": [
@@ -130,6 +130,26 @@
       "enabled": true,
       "order": 60,
       "notes": "v0.11.4（2026-11-13）FR 随 BDPM 数据启用；site LANGS 自动生成 /fr/ 与 hreflang。"
+    },
+    {
+      "code": "ko",
+      "name": {
+        "en": "Korean",
+        "es": "Coreano",
+        "zh": "韩语"
+      },
+      "native_name": "한국어",
+      "ui_label": "KO",
+      "script": "hangul",
+      "dir": "ltr",
+      "hreflang": "ko",
+      "path": "ko/",
+      "i18n_key_prefix": "ko",
+      "default_country": null,
+      "region": null,
+      "enabled": true,
+      "order": 65,
+      "notes": "v0.13.8（2026-11-18）：先接韩语界面，**不加 KR 市场**（用户定）；KO_I18N 全键翻译，/ko/ 路由 + hreflang=ko。"
     },
     {
       "code": "it",

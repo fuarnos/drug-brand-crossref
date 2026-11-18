@@ -19,8 +19,8 @@
 
 .PARAMETER CheckOnly
     Skip the sync; only run rclone check (size-only, one-way: every local file
-    must exist remotely). Ignores the synthetic fr/ fallback object and any
-    pre-sync extras that the next sync would delete.
+    must exist remotely). Ignores the synthetic language-root fallback objects
+    (fr/, ko/) and any pre-sync extras that the next sync would delete.
 
 .PARAMETER Transfers
     Concurrent transfers / checkers. Default 64.
@@ -82,7 +82,7 @@ function Read-DotEnv([string]$Path) {
     return $map
 }
 
-# -- Python resolution for the /fr/ fallback (fixed 2026-11-13) ----------------
+# -- Python resolution for the language-root fallbacks (fixed 2026-11-13) -----
 # The old `$pyExe = if ($env:PYTHON) { $env:PYTHON } else { 'python' }` resolved
 # to C:\Users\asus\AppData\Local\Microsoft\WindowsApps\python.exe here - the
 # Microsoft Store app alias, which exits 9009 and prints nothing. The /fr/
@@ -92,9 +92,15 @@ function Read-DotEnv([string]$Path) {
 # candidate's capability: fix_fr_root.py needs botocore for SigV4 signing, so
 # "python starts" is not enough - this host's `py` launcher is Python 3.15
 # without botocore and would still fail with exit 2.
-$FrRuntimePython = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
+$FallbackRuntimePython = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
+# Languages whose landing page needs a synthetic object-key fallback: Cloudflare
+# Transform Rules cover /, /zh/, /es/, /zh-hant/ only (no /fr/, no /ko/), so the
+# page is served from R2 object key "<lang>/". Keep this list in sync with
+# deploy/fix_fr_root.py LANG_ROOTS, deploy/verify_live.py LANG_ROOTS and
+# data/languages.json ("新增 UI 语言时三处一起改").
+$FallbackLangs = @('fr', 'ko')
 
-function Test-FrPython([string]$Exe) {
+function Test-FallbackPython([string]$Exe) {
     # Probe: must start AND import botocore (fix_fr_root.py's only third-party dep).
     $ErrorActionPreference = 'SilentlyContinue'   # function scope only; rest of script unaffected
     try {
@@ -105,7 +111,7 @@ function Test-FrPython([string]$Exe) {
     }
 }
 
-function Resolve-FrPython([string[]]$RuntimeCandidates = @($FrRuntimePython)) {
+function Resolve-FallbackPython([string[]]$RuntimeCandidates = @($FallbackRuntimePython)) {
     # Order: $env:PYTHON -> python (PATH) -> py (PATH launcher) -> runtime path
     # documented in AGENTS.md. Skip WindowsApps app aliases by path (never run
     # them, to avoid popping the Store); the log still records exit 9009.
@@ -123,20 +129,20 @@ function Resolve-FrPython([string[]]$RuntimeCandidates = @($FrRuntimePython)) {
             # $env:PYTHON may be a bare command name (e.g. "python"); resolve once more.
             $resolved = Get-Command $exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
             if (-not $resolved) {
-                Write-Host ("fr/: skip {0}={1} (not found)" -f $c.Via, $exe)
+                Write-Host ("lang-root/: skip {0}={1} (not found)" -f $c.Via, $exe)
                 continue
             }
             $exe = $resolved.Source
         }
         if ($exe -match '\\WindowsApps\\') {
-            Write-Host ("fr/: skip {0}={1} (Microsoft Store app alias, exit 9009)" -f $c.Via, $exe)
+            Write-Host ("lang-root/: skip {0}={1} (Microsoft Store app alias, exit 9009)" -f $c.Via, $exe)
             continue
         }
-        if (Test-FrPython $exe) {
-            Write-Host ("fr/: python = {0} (via {1}; botocore ok)" -f $exe, $c.Via)
+        if (Test-FallbackPython $exe) {
+            Write-Host ("lang-root/: python = {0} (via {1}; botocore ok)" -f $exe, $c.Via)
             return [pscustomobject]@{ Exe = $exe; Via = $c.Via }
         }
-        Write-Host ("fr/: skip {0}={1} (import botocore failed)" -f $c.Via, $exe)
+        Write-Host ("lang-root/: skip {0}={1} (import botocore failed)" -f $c.Via, $exe)
     }
     return $null
 }
@@ -181,11 +187,11 @@ try {
     $confArgs = @('--config', $conf, '--fast-list')
 
     if ($CheckOnly) {
-        # --one-way: the bucket intentionally holds the synthetic `fr/` fallback object
-        # (not in site/dist), and may hold pre-sync extras that the next sync deletes;
-        # a strict two-way check would always report those as differences (2026-11-13:
-        # without --one-way, -CheckOnly exited 1 with `1 differences / 1 files missing`
-        # on a healthy bucket, purely because of fr/).
+        # --one-way: the bucket intentionally holds the synthetic language-root fallback
+        # objects (fr/, ko/; not in site/dist), and may hold pre-sync extras that the next
+        # sync deletes; a strict two-way check would always report those as differences
+        # (2026-11-13: without --one-way, -CheckOnly exited 1 with `1 differences / 1 files
+        # missing` on a healthy bucket, purely because of fr/).
         Write-Host ("check: {0} -> r2:{1} (size-only, one-way)" -f $Dist, $bucket)
         & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
@@ -229,26 +235,28 @@ try {
         & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
 
-        # TEMPORARY FIX (approved 2026-11-13): Cloudflare Transform Rules currently only cover
-        # /, /zh/, /es/, /zh-hant/ - NOT /fr/ - so https://drugcrossref.com/fr/ 404s while
-        # /fr/index.html is fine. We PUT fr/index.html as object key "fr/" to work around it.
-        # That key is not part of site/dist, so every sync deletes it -> replay after each sync.
-        # FINAL FIX: add the 5th Transform Rule (/fr/ -> /fr/index.html) in Cloudflare; then drop this.
-        # Only fr/ is handled; a failure here only warns (upload success still exits 0),
-        # but https://drugcrossref.com/fr/ 404s until it is fixed, and verify_live.py gates
-        # every LANG_ROOT (incl. fr/) - so a release cannot pass silently with a broken /fr/.
+        # TEMPORARY FIX (approved 2026-11-13; generalised to a language list 2026-11-18):
+        # Cloudflare Transform Rules currently only cover /, /zh/, /es/, /zh-hant/ - NOT
+        # /fr/ and NOT /ko/ - so https://drugcrossref.com/fr/ and /ko/ 404 while
+        # /fr/index.html and /ko/index.html are fine. We PUT <lang>/index.html as object
+        # key "<lang>/" for every language in $FallbackLangs to work around it.
+        # Those keys are not part of site/dist, so every sync deletes them -> replay after
+        # each sync. FINAL FIX: add Transform Rules for each language (/fr/, /ko/, ...);
+        # then drop this. A failure here only warns (upload success still exits 0), but the
+        # language root 404s until fixed, and verify_live.py gates every LANG_ROOT
+        # (incl. /fr/ and /ko/) - so a release cannot pass silently with a broken root.
         try {
-            $frPy = Resolve-FrPython
-            if ($frPy) {
-                & $frPy.Exe (Join-Path $PSScriptRoot 'fix_fr_root.py') --dist $Dist
+            $fallbackPy = Resolve-FallbackPython
+            if ($fallbackPy) {
+                & $fallbackPy.Exe (Join-Path $PSScriptRoot 'fix_fr_root.py') --dist $Dist --langs ($FallbackLangs -join ',')
                 if ($LASTEXITCODE -ne 0) {
-                    Write-Host ("WARN: /fr/ fallback object NOT written (fix_fr_root.py exit {0}, python={1}); https://drugcrossref.com/fr/ will 404 until the 5th Transform Rule is added in Cloudflare." -f $LASTEXITCODE, $frPy.Exe)
+                    Write-Host ("WARN: language-root fallback object(s) NOT written for {0} (fix_fr_root.py exit {1}, python={2}); https://drugcrossref.com/<lang>/ will 404 until the Transform Rule is added in Cloudflare." -f ($FallbackLangs -join ', '), $LASTEXITCODE, $fallbackPy.Exe)
                 }
             } else {
-                Write-Host 'WARN: /fr/ fallback NOT written (fix_fr_root.py exit 9009 = no usable python: tried $env:PYTHON, python, py, runtime path; all missing or lacking botocore); https://drugcrossref.com/fr/ will 404 until the 5th Transform Rule is added in Cloudflare.'
+                Write-Host ("WARN: language-root fallback NOT written for {0} (no usable python: tried `$env:PYTHON, python, py, runtime path; all missing or lacking botocore); those roots will 404 until the Transform Rules are added in Cloudflare." -f ($FallbackLangs -join ', '))
             }
         } catch {
-            Write-Host ("WARN: /fr/ fallback not executed ({0}); https://drugcrossref.com/fr/ may 404 until the 5th Transform Rule is added in Cloudflare." -f $_.Exception.Message)
+            Write-Host ("WARN: language-root fallback not executed ({0}); {1} may 404 until the Transform Rules are added in Cloudflare." -f $_.Exception.Message, ($FallbackLangs -join ', '))
         }
     }
     Write-Host 'OK'

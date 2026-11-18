@@ -11,7 +11,7 @@
 检查项（见 reports/release-guardrails.md）：
   首页 200 / 标题 / 懒加载提示 / 无索引 preload / app.js 引用；
   页脚版本 + 日期（--expect-version 时断言一致），es/zh 落地页版本一致；
-  **语言根路径全部 200（/、/es/、/zh/、/zh-hant/、/fr/）且首页 hreflang 每个目标可达**；
+  **语言根路径全部 200（/、/es/、/zh/、/zh-hant/、/fr/、/ko/）且首页 hreflang 每个目标可达**；
   whats-new 顶部版本 = 页脚版本；About 200 且含访问统计隐私说明；
   GoatCounter 脚本存在（首页 + 落地页；--allow-missing-analytics 可降级为 warning）；
   data/idx/core.json 可请求、Content-Type JSON、gzip 后体积在合理区间（可选 --compare-dist）；
@@ -59,8 +59,10 @@ SITEMAP_MIN_URLS = 25_000
 # 启用的语言根路径（英文在根）。**新增语言时必须同步这里**：发布门槛要求全部 200。
 # 背景：v0.11.4 法语上线时 `/fr/` 因 Cloudflare Transform Rules 未加 fr 而 404
 #（`/fr/index.html` 200），verify 当时没有语言根/hreflang 检查，0 failures 漏掉了它。
+# v0.13.8 韩语上线：`/ko/` 同一坑（规则仍只有 4 条语言根），这里补第 6 条；
+# `/fr/`、`/ko/` 由 deploy/fix_fr_root.py 写「对象键 fr/ / ko/」兜底（见 sync_r2.ps1）。
 LANG_ROOTS = (("", "/"), ("es/", "/es/"), ("zh/", "/zh/"),
-              ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"))
+              ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"), ("ko/", "/ko/"))
 
 
 class Checks:
