@@ -498,3 +498,32 @@ FAIL 0 / WARN 2 / INFO 26        （WARN 2 = 既有 es form.kit / form.gas）
 - [ ] zh 首屏 24 组对 v0.13.8 保留基线（`.tmp/first-screen/v0138-zh.json`；`ci.json` 已不可用），
       重点复核 **coverage@390 是否回到 ≥3（目标 ≥5）**；`results@390/768` 保持 6.5 / 11.5。
 - [ ] 4 张截图：首页/结果/成分可复用 v0140 文件；覆盖页有变则重截 `docs/img/v0150-ko-coverage.png`。
+
+## 10. v0.16.0（2026-11-19，追加：日语上线）
+
+> CHANGELOG 新增 `## v0.16.0 — 2026-11-19`（2 条：日语界面 + 覆盖页 JP 状态变 ✅）。
+> i18n_check 的 `LANGS` 尚未并入 `ja`（site-ui 在改），本版先落 JSON，等合并后统一复跑。
+
+### 10.1 `data/release_notes_i18n.json` 新增 v0.16.0（七语）
+
+- **七语**（zh / en / es / fr / zh-Hant / ko / **ja**）各 **2 条**；`zh` 与 CHANGELOG v0.16.0 两条逐字一致（`identical=True`）。
+- `_meta.versions` 79 → **80**、`_meta.items` 319 → **321**（现查；Lead 口径写 323，实际 319+2=321）。
+  `_meta.translations` 补 `ja`（机器翻译披露，与 en/es/fr/ko 同格式）。
+- 术语 / 数字：`667`、`12,442`（en 68,000 风格同前）、`ja`/`cs`/`lv` 代码保留；ja 文案按站点既有
+  「インターフェース言語 / カバレッジ / 成分ページ / hreflang」口径写。
+
+### 10.2 门禁（ja 合并前）
+
+- 当前 `deploy/i18n_check.py`（LANGS 6 语）：**FAIL 0**、`latest=v0.16.0 / latest_ok=True`（6 语各 2 条）。
+- **模拟 site-ui 合并 ja 后**（仅 release 规则：`LANGS += ja`、`ja` 自 v0.16.0 起要求）→ **0 FAIL**，
+  v0.16.0 行 `langs={..., 'ja': 2}`、`ok=True`。
+
+### 10.3 最终产物核验（等构建完成）
+
+- [ ] 语言块扫描扩展到 **31 页**（22 ko/fr + 9 ja：`/ja/` 五页 + cat/atc/drug/name `?lang=ja`）→ 目标 **0 / 0**。
+- [ ] `check_ja_pages.py`：`/ja/` 七页 `html lang=ja`、hreflang **七语互指**（+ zh-TW + x-default）、
+      canonical、语言菜单「日本語」、`sitemap.xml` ja 7 条无重复、whats-new v0.16.0 **七语 × 2 条**。
+- [ ] `i18n_check`（site-ui 合并 ja 后）→ FAIL 0，`最新 v0.16.0 译文齐`。
+- [ ] zh 首屏 24 组对 `.tmp/first-screen/v0138-zh.json` 基线；重点看 `coverage@390`。
+- [ ] 截图：`docs/img/v0160-ja-home.png`（/ja/ 首页 1440×900）；
+      覆盖页 JP 行变 ✅，重截 `docs/img/v0160-ko-coverage.png`；其余沿用 v0140 四张。
