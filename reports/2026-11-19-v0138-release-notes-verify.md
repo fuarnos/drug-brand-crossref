@@ -414,18 +414,52 @@ FAIL 0 / WARN 2 / INFO 26        （WARN 2 = 既有 es form.kit / form.gas）
 | ko 首屏 | `.tmp/run_first_screen_ko.py --json .tmp/first-screen/v0140-ko.json --baseline .tmp/first-screen/ci.json --shots .tmp/first-screen/shots-v0140-ko`；24 组四档 |
 | 截图 | `.tmp/shoot_ko_v0140.py` → `docs/img/v0140-ko-{home,results,drug,coverage}.png`（1440×900，本地服务；首页先关「3 步用法」引导） |
 
-**`results@768` 修复前后（待最终产物回填）**
+**`results@768` 修复前后（已回填）**
 
 | 产物 | results@768 items | 说明 |
 |---|---:|---|
 | v0.13.7 基线（`.tmp/first-screen/ci.json`） | 10.5 | 发布门槛参照 |
 | v0.14.0 首次最终构建（修复前） | **9.5** | `.tryrow` 示例区在 768 占 +40px |
-| v0.14.0 重建（`html.has-q .tryrow{display:none}` 后） | 目标 **≥10.5** | 待 `dist ready #3` 回填 |
+| v0.14.0 重建（`html.has-q .tryrow{display:none}` 后） | **11.5** | 已回填（Lead 复测同值），对基线无退化 |
 
-- [ ] 语言块扫描（`.tmp/scan_lang_blocks.py`，22 页含 ko + fr）→ 目标 **0 / 0**；
-      新增页面类型/锚点若超出 22 页清单，按新页补扫（v0.14.0 的「也叫」区块在成分页，已在 drug 两页覆盖）。
-- [ ] `i18n_check` 复跑 → FAIL 0，`最新 v0.14.0 译文齐`。
-- [ ] 静态核验：hreflang / canonical / sitemap（ko 7）/ whats-new v0.14.0 六语 × 5 条 / liners。
-- [ ] zh 首屏四档对 `.tmp/first-screen/ci.json` 基线（`results@768` ≥10.5）；ko 四档（`.tmp/run_first_screen_ko.py`）。
-- [ ] 4 张截图另存 `docs/img/v0140-ko-{home,results,drug,coverage}.png`（1440×900，本地服务）。
-      v0.14.0 影响首页示例、名字页规格折叠、成分页「也叫」、分类/覆盖页计数、手机结果卡，四张都要重截。
+> **基线文件注意**：`.tmp/first-screen/ci.json` 在 v0.14.0 全量 CI 时被覆盖（mtime 10:28，内容=终版读数），
+> 已不能当 v0.13.8 基线用；v0.13.8 基线以保留的 `.tmp/first-screen/v0138-zh.json`（09:38，`results@768=10.5`）为准。
+> 对这份 v0.13.8 基线，`compare_baseline()` 报 4 项 >5%：home@768 9→8.5、atc@2560 48.5→46、
+> coverage@390 3.5→2.5、coverage@2560 chrome 0.086→0.144。Lead 判定：前三项中 home/atc/chrome 接受（V4/V5 排版取舍、
+> 均未破阈值），**coverage@390 2.5 跌破 3 让 site-ui 修（每行 `details`「查看原因」导致卡变高）**，修后重建 #4 再复验。
+
+### 8.4 v0.14.0 首轮终验数字（重建 #3 产物；coverage@390 待重建 #4 定稿）
+
+**语言块（22 页，ko + fr）**：**896 个容器 / `noVisible` 0 / `emptyVisible` 0 / 逐页 4xx 0 → PASS**。
+容器数较 v0.13.8（1316）减少是 v0.14.0 页面结构变化（cat 100/145→27/34、atc 51/19→25/18、whats-new 93→94），
+扫描页型与页数不变、全部 0/0。
+
+**i18n**：**FAIL 0 / WARN 2 / INFO 26**；684 键 × 6 语、fr 681/684；`release notes: 78 版 / 最新 v0.14.0 译文齐`。
+
+**静态核验**：`/ko/` 七页 `html lang=ko`、每页 hreflang 8 条（六语互指 + zh-TW + x-default，目标全在）、
+canonical 逐页对、菜单「한국어」；`sitemap.xml` 75,609 URL / ko 7 / 重复 0；
+`whats-new` **v0.14.0 六语 × 5 条**（v0.13.8 六语 × 3 条仍在）；`/ko/` 首页 `rel.v0.14.0` liners
+服务端与 `i18n.ko.js` 均为韩语。
+
+**zh 首屏（24 组，vs v0.13.8 保留基线）**：
+`results@390` **6.5**、`results@768` **11.5**、`results@1440` 10、`results@2560` 20（items 全部达标）；
+未达 2 项：`drug@1440` items 4.5（v0.13.8 亦为 4.5）、`coverage@390` items **2.5**（v0.13.8 3.5，待重建 #4 修）；
+AFCR / chrome / 字号 / 溢出全部在阈值内、不稳定 0。
+
+**ko 首屏（24 组）**：结果页四档 **6.5 / 12 / 10 / 20**（items 全部达标）；
+未达 1 项：`coverage@390` items 2.5（与 zh 同源、同待修）；其余 23 组达标。
+`atc@768` 首轮出现一次**测量故障**（viewport 读到 1248px、band_ratio 0.667 误报），单页重跑为
+**AFCR 1.01 / band 1.00 / items 11.0 / chrome 0.11 → ok**，以重跑值为准。
+ko 与同版 zh 逐组比：drug/results 略多 0.5–1 行，home@768 4.0（首访「3 步用法」引导的韩文换行更高，
+entry 页 items 不设门槛）、atc 少 1–2.5 行（韩文类名更长），AFCR/chrome/字号/溢出差异 ≤0.02、溢出 0。
+对照 v0.13.8：`results@390` 3.5→6.5、`results@768` 10.5→11.5、`drug@1440` 4.5→5.0（ko）——手机结果页修复生效。
+
+**截图（1440×900，本地服务、非线上；coverage 待重建 #4 后复核/重截）**
+
+| 文件 | 页面 | 大小 |
+|---|---|---:|
+| `docs/img/v0140-ko-home.png` | `/ko/`（新示例：跨国查名 chip + 「포장 문구로 검색」真实包装行；v0.14.0 liner 韩语） | 60,849 B |
+| `docs/img/v0140-ko-results.png` | `/ko/?q=tylenol`（`.tryrow` 已隐藏，1440 首屏 10 行） | 87,495 B |
+| `docs/img/v0140-ko-drug.png` | `/drug/acetaminophen.html?lang=ko`（首屏；与 v0.13.8 逐字节相同，新「也叫」块在下方） | 78,408 B |
+| `docs/img/v0140-ko-drug-alias.png` | 同页滚动到新增「다른 이름（也叫）」块：15 条别名 + 韩文类型/语言/出处标签 | 105,733 B |
+| `docs/img/v0140-ko-coverage.png` | `/ko/coverage.html`（新增「▶ 이유 / 查看原因」列；**待重建 #4 复核**） | 68,680 B |

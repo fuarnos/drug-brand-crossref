@@ -282,3 +282,41 @@ html.has-q .tryrow{display:none}
 - **首页无查询不受影响**：`/index.html`（无 q）`has-q=false`，`.tryrow display=flex h=80`，跨市场链接可见且 `href="?q=Tylenol+Extra+Strength&src=US&country=CN"`。
 - Lead 预期的「~560」是按「一行 40px」估的；实际整行 80px + 间距约 90px 一起移除，所以回到 **485–507**（比基线更好）。
 - `py_compile site/build.py` OK；未跑全量构建（按 Lead 统一重建）。重建后建议用 `deploy/first_screen_check.py` 复量 results@768 落报告。
+
+---
+
+## 12. 发布前回归修复 2：coverage@390 首屏条目 3.5 → 2.5 → **3.5**
+
+**只读定位**（当前 dist v0.14.0，390×844）：15 行**全部**有原因文本（`noReason=[]`），也全部渲染了
+`<details>`；每张卡 **154px**、summary **44px**（移动端 CSS 的 `min-height:44px`），#covtable 第一行 top=389。
+首屏 = US(1) + GB(1) + CA(0.5) = **2.5**。
+
+**修法（标记层，未改任何全局 CSS）**：
+
+1. 新增 `_cov_notes_html(note, has_reason, T)`：**只有真有原因的行**才渲染 `<details>`；无原因行返回空串
+   （回到原来的一行紧凑结构）。`has_reason = gap 非空 or CN 无商品名记录`。
+2. 有原因行的 `<summary>` 加**行内** `style="min-height:22px"`，压过覆盖页 CSS 的 44px（手机）/32px（桌面），
+   卡片高 154 → **132px**；`<details>`/`summary` 的展开、颜色、▾ 指示、触屏可点全部保留。
+3. 只改 coverage 页生成的 markup（6 个副本），**不触碰 `site/build.py` 的 CSS 常量** → 不会让其它 13.7 万页多一次变化。
+
+**验证**（`deploy/first_screen_check.py --pages coverage --viewports 390x844`，用 `.tmp/dist-cov` 复测，
+改前跑 `site/dist`）：
+
+| 轮次 | items | #covtable 首行 top | 卡片高 | summary 高 | 横向溢出 |
+|---|---|---|---|---|---|
+| 改前（site/dist） | **2.5** | 389 | 154 | 44 | 否 |
+| 改后（.tmp/dist-cov） | **3.5** ✅ | 389 | 132 | 22 | 否 |
+
+- JSON：`.tmp/fs-cov-before.json`（2.5）/ `.tmp/fs-cov-after.json`（3.5）；截图
+  `.tmp/fs-cov-shots-before/fs-coverage-390x844.png` / `.tmp/fs-cov-shots-after/fs-coverage-390x844.png`。
+- 改后 chrome 0.27、AFCR 0.79、正文 16px、辅助 14px、<14px 8%、**溢出 否**（与改前同级，无新退化）。
+- **六语不变**：`coverage.html`、`/es/`、`/zh/`、`/zh-hant/`、`/fr/`、`/ko/` 六个副本都是 15 个 details + 2 个
+  `covspec-none`，summary 均 22px；运行时文案随语言切换正确（`查看原因/Why/Porqué/Pourquoi/이유`、
+  `来源未提供规格/…/이유`），`docW=375 < 390` 无横向溢出。
+- 逐语 items：zh / zh-Hant / fr = **3.5**；es / ko = **3.0**（这两语导语换行多，表格首行 top=433，比 zh 低 44px；
+  仍高于改前 2.5，且不低于「至少回到 3」的下限）。
+- `deploy/i18n_check.py` **FAIL 0**（WARN 2 / INFO 26，未新增键）；`py_compile` OK。
+
+**说明**：Lead 原方案「无原因行不渲染 details」在当前数据下不会减少行高（15/15 都有原因），真正根因是
+summary 的 44px 触屏高度；因此保留 details 语义、改用行内 22px（仍可点、宽度足够），只影响 coverage 页产物。
+R2 增量同步的页面集合不因本修复扩大（CSS 常量未改）。
