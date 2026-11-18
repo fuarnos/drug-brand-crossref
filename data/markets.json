@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-16",
+  "updated": "2026-11-19",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -24,6 +24,15 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 10,
       "notes": "FDA NDC Directory（美国政府作品）+ MedlinePlus 俗名；产品/规格来自 NDC。"
@@ -46,6 +55,15 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 20,
       "notes": "NHSBSA dm+d（OGL v3.0）；含 ATC/盐型线索。"
@@ -68,6 +86,15 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 30,
       "notes": "Health Canada DPD；允许非商业再使用并须注明来源。"
@@ -95,6 +122,15 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 40,
       "notes": "TGA ARTG 公开登记 + PBS 药品福利计划（价格）；许可边界见 docs/许可清单.md。"
@@ -117,6 +153,15 @@
       "languages": [
         "es"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 50,
       "notes": "AEMPS CIMA（引用须注明来源与最后更新日期，非开放许可）。"
@@ -146,6 +191,15 @@
       "languages": [
         "es"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 60,
       "notes": "COFEPRIS 注册清单（未标注开放许可）+ ISSSTE/PROFECO/datos.gob.mx 4 个 CC-BY-4.0 采购数据集补浓度。"
@@ -173,6 +227,15 @@
       "languages": [
         "zh"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 70,
       "notes": "国家医保局分类代码库（未找到再发布许可）+ 中文维基/社区俗名（只存短事实）。"
@@ -195,6 +258,15 @@
       "languages": [
         "zh-Hant"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 80,
       "data_as_of": "2026-10-22",
@@ -218,6 +290,15 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 85,
       "data_as_of": "2026-08-07",
@@ -242,6 +323,15 @@
         "zh-Hant",
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 88,
       "data_as_of": "2026-10-23",
@@ -266,6 +356,15 @@
         "fr",
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 52,
       "data_as_of": "2026-11-03",
@@ -291,6 +390,15 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "own_data": true,
       "order": 90,
@@ -317,6 +425,17 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [
+        "ja"
+      ],
       "enabled": true,
       "order": 120,
       "data_as_of": "2026-11-01",
@@ -342,6 +461,17 @@
       "languages": [
         "en"
       ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [
+        "cs"
+      ],
       "enabled": true,
       "order": 130,
       "data_as_of": "2026-11-01",
@@ -366,6 +496,17 @@
       "default_lang": "en",
       "languages": [
         "en"
+      ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko"
+      ],
+      "ui_language_gaps": [
+        "lv"
       ],
       "enabled": true,
       "order": 140,

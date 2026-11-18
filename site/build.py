@@ -14846,6 +14846,8 @@ def build_about(stats, coverage, source_cover=()) -> None:
                 "about.hk_source", "about.au_source", "about.eu_source", "about.cz_source",
                 "about.lv_source", "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
+    # v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口（只链接、不复制数据），六语由 i18n.js 切换
+    parts.append(_official_links_html())
     parts.append('<details class="lic-wrap"><summary data-i18n="about.licences_summary">'
                  'Data sources and licences</summary>' + LICENCE_HTML + '</details>')
     for key in ("about.samename", "about.gaps"):
@@ -14890,18 +14892,127 @@ document.querySelectorAll('[data-covsort]').forEach(function(b){
 """
 
 
-def _cov_notes_html(note: str, has_reason: bool, T: dict) -> str:
-    """V6 + 回归修复：只有**真有原因**的行才出可点开的 <details>；无原因行保持单行紧凑。
+MARKETS_JSON = ROOT / "data" / "markets.json"
+_MARKET_UI_CACHE: dict[str, dict] | None = None
 
-    summary 用行内 `min-height:22px`（略低于 44px 触屏建议值，但保持可点；24px 时手机卡片每张高 2px
-    刚好把第 4 张卡挤出首屏），压过覆盖页 CSS 里的 32px/44px —— 44px 的 summary 让手机卡片每张高 ~22px，
-    coverage@390 首屏条目 3.5 → 2.5。只影响 coverage 页产物（markup 层），不改全局 CSS。
+# v0.15.0（LG3）：「界面语言」状态六语**短文案**（并进「查看原因」summary，不新增行）。
+# 刻意**不加进 I18N 字典** —— 新增 I18N 键会改 assets/i18n.js 与首页内联字典，让全站页面变化。
+_UI_LANG_SHORT = {
+    "en": ("UI languages ✅", "native {gaps} not covered"),
+    "es": ("Idiomas ✅", "falta el idioma nativo {gaps}"),
+    "zh": ("界面语言 ✅", "母语 {gaps} 未覆盖"),
+    "zh-Hant": ("介面語言 ✅", "母語 {gaps} 未覆蓋"),
+    "fr": ("Langues ✅", "langue maternelle {gaps} absente"),
+    "ko": ("언어 ✅", "모국어 {gaps} 미지원"),
+}
+
+# v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口 —— 只链接、不复制数据；同样放在页内六语块。
+_OFFICIAL_LINKS = {
+    "en": ('<h2>Official look-up entries</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           'Macao Health Bureau (ISAF) — Macao SAR drug search</a>: official search entry only; '
+           'this site does not copy its data.</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           'MFDS 의약품안전나라 (Korea)</a>: official search entry only; Korean data requires '
+           'personal registration on data.go.kr and is not imported here yet.</li></ul>'),
+    "es": ('<h2>Accesos oficiales</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           'Servicios de Salud (ISAF), Macao — consulta de medicamentos de la RAEM</a>: solo enlace '
+           'a la consulta oficial; este sitio no copia sus datos.</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           'MFDS 의약품안전나라 (Corea)</a>: solo enlace a la consulta oficial; los datos coreanos '
+           'requieren registro personal en data.go.kr y aún no se importan aquí.</li></ul>'),
+    "zh": ('<h2>官方查询入口</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           '澳门药物监督局 · 澳门特区药品查询（ISAF）</a>：只提供官方查询入口，本站不复制其数据。</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           '韩国 MFDS 의약품안전나라（식품의약품안전처）</a>：只提供官方查询入口；'
+           '韩国数据需本人注册 data.go.kr，本站暂不入库。</li></ul>'),
+    "zh-Hant": ('<h2>官方查詢入口</h2><ul>'
+                '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+                '澳門藥物監督局 · 澳門特區藥品查詢（ISAF）</a>：只提供官方查詢入口，本站不複製其資料。</li>'
+                '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+                '韓國 MFDS 의약품안전나라（식품의약품안전처）</a>：只提供官方查詢入口；'
+                '韓國資料需本人註冊 data.go.kr，本站暫不入庫。</li></ul>'),
+    "fr": ('<h2>Accès officiels</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           'Bureau de la santé (ISAF), Macao — recherche des médicaments de la RAEM</a> : lien vers '
+           'la recherche officielle uniquement ; ce site ne copie pas ses données.</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           'MFDS 의약품안전나라 (Corée)</a> : lien vers la recherche officielle uniquement ; '
+           "l'accès aux données coréennes nécessite une inscription personnelle sur data.go.kr "
+           'et elles ne sont pas encore importées ici.</li></ul>'),
+    "ko": ('<h2>공식 조회 안내</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           '마카오 약물감독국 · 마카오 특별행정구 의약품 조회(ISAF)</a>: 공식 조회 입구만 제공하며, '
+           '이 사이트는 해당 데이터를 복제하지 않습니다.</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           'MFDS 의약품안전나라(대한민국)</a>: 공식 조회 입구만 제공합니다. 한국 데이터는 '
+           'data.go.kr 개인 가입이 필요하며 아직 수집하지 않습니다.</li></ul>'),
+}
+
+
+def _official_links_html() -> str:
+    """MO ISAF / KR MFDS 官方查询入口（六语块；只链接、不复制数据）。"""
+    return "".join(f'<div class="lang-block" data-lang-block="{lang}">{_OFFICIAL_LINKS[lang]}</div>'
+                   for lang in I18N_REQUIRED_LANGS)
+
+
+def _market_ui_meta(code: str) -> dict:
+    """data/markets.json 的 ui_languages / ui_language_gaps（v0.15.0 LG3）。
+
+    容错：文件缺失、字段缺失或类型不对 → 返回空 dict（调用方跳过该行状态，不崩构建）。
+    """
+    global _MARKET_UI_CACHE
+    if _MARKET_UI_CACHE is None:
+        _MARKET_UI_CACHE = {}
+        try:
+            data = json.loads(MARKETS_JSON.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            data = {}
+        for m in ((data.get("markets") or []) if isinstance(data, dict) else []):
+            langs = m.get("ui_languages")
+            gaps = m.get("ui_language_gaps")
+            if isinstance(langs, list) and isinstance(gaps, list):
+                _MARKET_UI_CACHE[str(m.get("code") or "").upper()] = {
+                    "ui_languages": [str(x) for x in langs],
+                    "ui_language_gaps": [str(x) for x in gaps],
+                }
+    return _MARKET_UI_CACHE.get((code or "").upper(), {})
+
+
+def _market_ui_lang_html(code: str, *, inline: bool = False) -> str:
+    """界面语言状态（六语**短**文案；数据缺字段时返回空串 → 该行不显示状态）。
+
+    inline=True 时返回行内六语块（并进「查看原因」summary，不加行高）；否则包一层 `.sub covui`。
+    """
+    ui = _market_ui_meta(code)
+    if not ui:
+        return ""
+    gaps = ui["ui_language_gaps"]
+    blocks: dict[str, str] = {}
+    for lang in I18N_REQUIRED_LANGS:
+        ok_t, gap_t = _UI_LANG_SHORT.get(lang, _UI_LANG_SHORT["en"])
+        text = gap_t.replace("{gaps}", ", ".join(gaps)) if gaps else ok_t
+        blocks[lang] = esc(text)
+    inner = _lang_blocks(blocks)
+    return inner if inline else f'<div class="sub covui">{inner}</div>'
+
+
+def _cov_notes_html(note: str, has_reason: bool, T: dict, ui_status: str = "") -> str:
+    """V6 + 回归修复 + v0.15.0 LG3：缺口说明与「界面语言」状态共用一行 summary。
+
+    - 只有**真有原因**的行才出可点开的 <details>；无原因行不渲染（当前 15/15 都有原因）。
+    - summary 用行内 `min-height:22px`，压过覆盖页 CSS 的 32px/44px（44px 会让手机卡片每张高 22px，
+      coverage@390 首屏条目 3.5 → 2.5）；LG3 的状态文本并进同一行，**不新增行高**。
+    只影响 coverage 页产物（markup 层），不改全局 CSS。
     """
     if not has_reason:
-        return ""
-    return (f'<details class="covgap"><summary style="min-height:22px" '
-            f'data-i18n="coverage.gap.why">{esc(T.get("coverage.gap.why", "Why"))}</summary>'
-            f'{note}</details>')
+        return f'<div class="sub covui">{ui_status}</div>' if ui_status else ""
+    status_bit = f' <span class="covui">· {ui_status}</span>' if ui_status else ""
+    return (f'<details class="covgap"><summary style="min-height:22px">'
+            f'<span data-i18n="coverage.gap.why">{esc(T.get("coverage.gap.why", "Why"))}</span>'
+            f'{status_bit}</summary>{note}</details>')
 
 
 def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> None:
@@ -14959,6 +15070,8 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
                      if n and spec == 0 else "")
         # V6 回归修复：没有原因的行不渲染 <details>（保持单行紧凑）；CN 的无商品名记录也算原因
         has_reason = bool(gap.strip()) or (bool(nt) and c == "CN")
+        # v0.15.0（LG3）：状态并进「查看原因」summary（inline），不新增行；数据缺字段 → 不显示状态
+        ui_lang_html = _market_ui_lang_html(c, inline=True)
         rows.append(
             f'<tr id="market-{c}">'
             f'<td data-label="{esc(T["coverage.col.market"])}" '
@@ -14991,10 +15104,11 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             f'{esc(asof.get(c) or "—")}</td>'
             f'<td data-label="{esc(T["coverage.col.notes"])}" '
             f'data-i18n-label="coverage.col.notes">'
-            f'{_cov_notes_html(note, has_reason, T)}</td></tr>')
+            f'{_cov_notes_html(note, has_reason, T, ui_lang_html)}</td></tr>')
     # L7（v0.12.1）：页头四件套（原 intro 副行保留；页头不再加摘要，避免 3 行 sub）
     head = _page_head("../", f'<h1 data-i18n="coverage.title">{esc(T["coverage.title"])}</h1>',
                       crumb="coverage")
+    official_blocks = _official_links_html()
     body = f"""{head}
 <p class="sub" data-i18n="coverage.intro">{esc(T["coverage.intro"])}</p>
 <div class="notice" data-i18n="coverage.notice">{esc(T["coverage.notice"])}</div>
@@ -15009,6 +15123,8 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
 <th data-i18n="coverage.col.asof">{esc(T["coverage.col.asof"])}</th>
 <th data-i18n="coverage.col.notes">{esc(T["coverage.col.notes"])}</th>
 </tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+<!-- v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口，只链接不复制数据；六语由 i18n.js 切换 -->
+<div class="official-links">{official_blocks}</div>
 <p class="sub" data-i18n="coverage.source_note">{esc(T["coverage.source_note"])}</p>""" + COVERAGE_SORT_JS
     html = page("Coverage & freshness", body, meta_key="coverage", alternates=True,
                 canonical_rel="coverage.html", alt_rel="coverage.html", nav_coverage=True)

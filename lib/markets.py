@@ -92,7 +92,7 @@ KIND_COUNTRY = "country"
 KIND_REGION = "region"
 ALLOWED_KINDS = (KIND_COUNTRY, KIND_REGION)
 ALLOWED_SCRIPTS = ("latin", "han", "traditional", "cyrillic", "japanese",
-                   "korean", "arabic", "devanagari", "other")
+                   "korean", "hangul", "arabic", "devanagari", "other")
 ALLOWED_DIRS = ("ltr", "rtl")
 ALLOWED_GROUPS = ("NA", "EUROPE", "LATAM", "ASIA", "OCEANIA", "AFRICA", "GLOBAL")
 
@@ -604,7 +604,10 @@ def _validate_languages(languages: Mapping[str, Language],
             if not (lang.name.get(lang_key) or "").strip():
                 errs.append(f"{p}: name 缺 {lang_key}")
         if not lang.default_country:
-            errs.append(f"{p}: default_country 必填")
+            # v0.13.8（LG1）：纯界面语言（ko：用户定「先接语言、不加 KR 市场」）允许不指向
+            # 任何市场；未启用的占位语言仍必须写 planned_markets 里的默认国家。
+            if not lang.enabled:
+                errs.append(f"{p}: default_country 必填（未启用语言要指向 planned_markets）")
         elif lang.default_country not in known_countries:
             errs.append(f"{p}: default_country={lang.default_country} 既不在 markets 也不在 planned_markets")
         elif lang.default_country in markets:
@@ -623,6 +626,9 @@ def _validate_cross(markets: Mapping[str, Market],
     # 每种 enabled 语言必须有 enabled 默认市场，且该市场把语言列进 languages
     for lang in languages.values():
         if not lang.enabled:
+            continue
+        if not lang.default_country:
+            # v0.13.8（LG1）：纯界面语言（ko）没有默认市场，跳过本项交叉校验
             continue
         mk = markets.get(lang.default_country)
         if mk is None:

@@ -463,3 +463,38 @@ entry 页 items 不设门槛）、atc 少 1–2.5 行（韩文类名更长），
 | `docs/img/v0140-ko-drug.png` | `/drug/acetaminophen.html?lang=ko`（首屏；与 v0.13.8 逐字节相同，新「也叫」块在下方） | 78,408 B |
 | `docs/img/v0140-ko-drug-alias.png` | 同页滚动到新增「다른 이름（也叫）」块：15 条别名 + 韩文类型/语言/出处标签 | 105,733 B |
 | `docs/img/v0140-ko-coverage.png` | `/ko/coverage.html`（新增「▶ 이유 / 查看原因」列；**待重建 #4 复核**） | 68,680 B |
+
+## 9. v0.15.0（2026-11-19，追加）
+
+> CHANGELOG 新增 `## v0.15.0 — 2026-11-19`（3 条：覆盖页界面语言透明化 + 澳门官方入口 + 韩国官方入口）。
+> 原定「重建 #4 修 coverage@390」被 v0.15.0 全量构建吸收，最终产物以 `dist ready #5` 为准。
+
+### 9.1 `data/release_notes_i18n.json` 新增 v0.15.0
+
+- 六语各 **3 条**；`zh` 与 CHANGELOG v0.15.0 三条逐字一致（脚本逐条 `identical=True`）。
+- `_meta.versions` 78 → **79**、`_meta.items` 316 → **319**（现查一致）。
+- 术语：ko 沿用 `.tmp/ko_i18n.py`（커버리지 / 인터페이스 언어 / 시장 / 의약품안전나라 / 출처 표기 / 적재）；
+  es/fr 沿用既有 `página de cobertura` / `page de couverture`；「6.8 万条」按各语习惯写成
+  `68,000`（en）/ `68.000`（es）/ `68 000`（fr）/ `6.8만`（ko），数字门禁 0 findings。
+
+### 9.2 门禁
+
+```
+& $py deploy/i18n_check.py --json .tmp/i18n-v0150.json --max-list 5
+有效字典: en 684 / es 684 / zh 684 / zh-Hant 684 / fr 684 / ko 684 键
+release notes: CHANGELOG 79 版 / json 79 版，最新 v0.15.0 译文齐；缺 0 版（0 条待译）
+FAIL 0 / WARN 2 / INFO 26        （WARN 2 = 既有 es form.kit / form.gas）
+```
+
+- `etl/check_translations.py`：`release_notes = {'versions': 79, 'items': 319}`、findings **0**。
+
+### 9.3 最终产物核验（等 `dist ready #5`）
+
+- [ ] 语言块扫描（`.tmp/scan_lang_blocks.py`，22 页 ko + fr）→ 目标 **0 / 0**。
+- [ ] `i18n_check` 复跑 → FAIL 0，`最新 v0.15.0 译文齐`。
+- [ ] 静态核验：hreflang / canonical / sitemap / whats-new v0.15.0 **六语 × 3 条**；
+      **About 六语 MO/KR 官方入口**（`check_mo_kr_entries.py`）：About 页六个语言副本各含
+      澳门 ISAF 与韩国 MFDS「의약품안전나라」/`data.go.kr` 链接与署名，覆盖页 MO/KR 行标「官方入口 / 不复制数据」。
+- [ ] zh 首屏 24 组对 v0.13.8 保留基线（`.tmp/first-screen/v0138-zh.json`；`ci.json` 已不可用），
+      重点复核 **coverage@390 是否回到 ≥3（目标 ≥5）**；`results@390/768` 保持 6.5 / 11.5。
+- [ ] 4 张截图：首页/结果/成分可复用 v0140 文件；覆盖页有变则重截 `docs/img/v0150-ko-coverage.png`。
