@@ -14890,6 +14890,20 @@ document.querySelectorAll('[data-covsort]').forEach(function(b){
 """
 
 
+def _cov_notes_html(note: str, has_reason: bool, T: dict) -> str:
+    """V6 + 回归修复：只有**真有原因**的行才出可点开的 <details>；无原因行保持单行紧凑。
+
+    summary 用行内 `min-height:22px`（略低于 44px 触屏建议值，但保持可点；24px 时手机卡片每张高 2px
+    刚好把第 4 张卡挤出首屏），压过覆盖页 CSS 里的 32px/44px —— 44px 的 summary 让手机卡片每张高 ~22px，
+    coverage@390 首屏条目 3.5 → 2.5。只影响 coverage 页产物（markup 层），不改全局 CSS。
+    """
+    if not has_reason:
+        return ""
+    return (f'<details class="covgap"><summary style="min-height:22px" '
+            f'data-i18n="coverage.gap.why">{esc(T.get("coverage.gap.why", "Why"))}</summary>'
+            f'{note}</details>')
+
+
 def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> None:
     """v0.9.4 A4：每市场覆盖/新鲜度页（只列事实，不写数据口径）。"""
     stats = {}
@@ -14943,6 +14957,8 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
         spec_none = (f' <span class="covspec-none" data-i18n="coverage.spec.no_spec">'
                      f'{esc(T.get("coverage.spec.no_spec", ""))}</span>'
                      if n and spec == 0 else "")
+        # V6 回归修复：没有原因的行不渲染 <details>（保持单行紧凑）；CN 的无商品名记录也算原因
+        has_reason = bool(gap.strip()) or (bool(nt) and c == "CN")
         rows.append(
             f'<tr id="market-{c}">'
             f'<td data-label="{esc(T["coverage.col.market"])}" '
@@ -14975,8 +14991,7 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             f'{esc(asof.get(c) or "—")}</td>'
             f'<td data-label="{esc(T["coverage.col.notes"])}" '
             f'data-i18n-label="coverage.col.notes">'
-            f'<details class="covgap"><summary data-i18n="coverage.gap.why">'
-            f'{esc(T.get("coverage.gap.why", "Why"))}</summary>{note}</details></td></tr>')
+            f'{_cov_notes_html(note, has_reason, T)}</td></tr>')
     # L7（v0.12.1）：页头四件套（原 intro 副行保留；页头不再加摘要，避免 3 行 sub）
     head = _page_head("../", f'<h1 data-i18n="coverage.title">{esc(T["coverage.title"])}</h1>',
                       crumb="coverage")
