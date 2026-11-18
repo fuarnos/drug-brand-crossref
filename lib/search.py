@@ -27,14 +27,20 @@ ATC/大类排序（v0.10.3）：结果卡先按「成分在本类别内的 activ
 drug_term）区分。异名**只说明是同一成分的不同写法**，不合并产品、不判断可互换。
 打分 0.88：低于精确名（exact 1.00）命中、高于纯前缀（prefix 0.80）噪声；
 主结果之间的相对顺序不变（只在分数位上插入，同分时主结果优先）。
+
+别名键层（V7b）：`alias_all`（nickname + drug_term）的匹配键在装载时用 `alias_key()`
+现算，与客户端 `data/aliases.json` 的 `n` 同一函数、同一张繁简表（`data/zh_hant_t2s.json`
+2,966 字 + NFKC + 去重音 + 标点归空格）。不依赖 DB 里可能陈旧的 `alias_norm`，也不改库。
 """
 
 from __future__ import annotations
 
 import difflib
+import json
 import re
 import sqlite3
 import sys
+import unicodedata
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -113,6 +119,81 @@ KIND_ZH = {
     "folk": "民间叫法",
     "class": "类别俗称",
 }
+
+
+# --- V7b：别名匹配键（服务端 / 客户端同一口径）-------------------------------
+# 客户端 app.js 的 `norm()` + `aliasHits()` 是昵称索引真正的匹配规则：
+#   繁→简（data/zh_hant_t2s.json 的 2,966 字表，构建期注入 `toSimp`）→ NFKC → lower
+#   → 去 ®™© → 去组合音标 → 标点/符号→空格 → 压空白；
+#   比较时再加「去空格」「去音标去空格」两档，容忍连写与重音输入。
+# 刻意与 product_name 的 normalize() 分开：后者还会删剂型词/剂量、转西里尔，用来比
+# 名字键；昵称是「人嘴里的叫法」，口径必须和客户端逐字一致。
+# 只影响 alias_all 的匹配键（装载时现算），**不改 DB 里的 alias_norm**——那份值是
+# 历史归一化写下的，可能只剩 90 字繁简表，不能当查询期真源。
+_ALIAS_PUNCT = re.compile(r"[\-–—_/\\.,;:!?()\[\]{}'\"’‘“”·•*&+]+")
+# 与 app.js splitDose() 的同一对正则：查询里带剂量时先切掉，名字部分才和别名比。
+_ALIAS_DOSE_RATIO = re.compile(
+    r"([\d.]+)\s*/\s*([\d.]+)\s*(mg|mcg|µg|ug|g)\b", re.IGNORECASE)
+_ALIAS_DOSE_SINGLE = re.compile(
+    r"([\d.]+)\s*(mg|mcg|µg|ug|g|ml|iu|%|万单位)\b", re.IGNORECASE)
+_ZH_HANT_T2S: dict[str, str] | None = None
+
+
+def _zh_hant_t2s() -> dict[str, str]:
+    """繁→简单字表：站点与检索层共用 `data/zh_hant_t2s.json`（不另写一份）。"""
+    global _ZH_HANT_T2S
+    if _ZH_HANT_T2S is None:
+        try:
+            payload = json.loads(
+                (ROOT / "data" / "zh_hant_t2s.json").read_text(encoding="utf-8"))
+            _ZH_HANT_T2S = {
+                str(k): str(v) for k, v in (payload.get("map") or {}).items()}
+        except (OSError, ValueError):
+            _ZH_HANT_T2S = {}
+    return _ZH_HANT_T2S
+
+
+def alias_key(text: str) -> str:
+    """昵称匹配键：与客户端 app.js 的 norm() 逐字同口径（见上方说明）。
+
+    构建期（site/build.py）用它写 `data/aliases.json` 的 `n`，服务端装载别名时
+    用它重算键——两端因此共用同一张繁简表、同一套标点/重音规则。
+    """
+    s = text or ""
+    table = _zh_hant_t2s()
+    if table:
+        s = "".join(table.get(ch, ch) for ch in s)
+    s = unicodedata.normalize("NFKC", s).lower()
+    s = re.sub(r"[®™©]", " ", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = _ALIAS_PUNCT.sub(" ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _alias_flat(text: str) -> str:
+    """去音标（NFKD + 去组合符号）：客户端 `_flatAccents()` 的同一口径。"""
+    return "".join(
+        ch for ch in unicodedata.normalize("NFKD", text)
+        if not unicodedata.combining(ch))
+
+
+def alias_query_key(query: str) -> str:
+    """查询侧别名键：先按客户端 splitDose 的正则切掉剂量，再取 alias_key。"""
+    raw = query or ""
+    m = _ALIAS_DOSE_RATIO.search(raw) or _ALIAS_DOSE_SINGLE.search(raw)
+    if m:
+        raw = (raw[:m.start()] + " " + raw[m.end():]).strip()
+    return alias_key(raw)
+
+
+def alias_key_matches(stored: str, query: str) -> bool:
+    """客户端 aliasHits() 的三档比较：原样 / 去空格 / 去音标去空格。"""
+    if not stored or not query:
+        return False
+    if stored == query or stored.replace(" ", "") == query.replace(" ", ""):
+        return True
+    return (_alias_flat(stored).replace(" ", "")
+            == _alias_flat(query).replace(" ", ""))
 
 
 @dataclass
@@ -217,6 +298,10 @@ class SearchIndex:
             ]
         except sqlite3.OperationalError:
             self._nicknames = []
+        # V7b：别名匹配键在装载时用 alias_key() 现算（与构建期 aliases.json 的 `n`
+        # 同一函数、同一张繁简表）；DB 里的 alias_norm 只作历史来源，不参与匹配。
+        for _a in self._nicknames:
+            _a["match_key"] = alias_key(_a["alias"])
         try:
             self._confusable = [dict(r) for r in self.db.execute(
                 """SELECT norm_a, norm_b, name_a, name_b, tml_a, tml_b,
@@ -509,12 +594,22 @@ class SearchIndex:
                 "只做身份对应，不代表剂型/规格可互换。")
 
     # --- 俗称解析 ------------------------------------------------------
-    def _alias_hits(self, n) -> list[dict]:
-        """精确命中俗称。不做模糊——昵称差一个字往往就是另一个梗。"""
-        compact = n.compact
-        return [a for a in self._nicknames
-                if a["alias_norm"] == n.norm
-                or a["alias_norm"].replace(" ", "") == compact]
+    def _alias_hits(self, query: str) -> list[dict]:
+        """精确命中俗称。不做模糊——昵称差一个字往往就是另一个梗。
+
+        V7b：按 `alias_key()` 现算的匹配键比较（与客户端 aliasHits 同一口径），
+        这样「阿司匹靈 / 阿司匹灵」「morning-after pill / morning after pill」
+        和「654-2 / 654 2」都能对上，也不再依赖 DB 里可能陈旧的 alias_norm。
+        """
+        qkey = alias_query_key(query)
+        if not qkey:
+            return []
+        hits = [a for a in self._nicknames
+                if alias_key_matches(a["match_key"], qkey)]
+        # 同一个叫法既有「类别词」（无成分）又有「具体成分」时，优先成分：
+        # 否则首张别名卡会是不可点的类别词，Top-1 落不到成分页（如「普拿疼」）。
+        mapped = [a for a in hits if a["substance_id"]]
+        return mapped or hits
 
     def _confusable_hits(self, n) -> list[dict]:
         """查询名正好是药对的一端时，返回另一端。
@@ -561,7 +656,9 @@ class SearchIndex:
         """
         res = SearchResult(query=query, norm=n.norm, strengths=n.strengths)
         res.aliases = [self._alias_info(a) for a in hits]
-        res.alias = res.aliases[0]
+        # 首张别名卡优先取「有成分」的那条（hits 已在上游做同样优先级过滤，这里兜底）。
+        res.alias = next((x for x in res.aliases if x["substance_id"]),
+                         res.aliases[0])
         res.total_keys = len(hits)
 
         cards: list[Card] = []
@@ -1096,7 +1193,7 @@ class SearchIndex:
             return self._search_category(cat_hit, query, country, limit, include_status)
 
         res.confused = self._confusable_hits(n)
-        alias_hits = self._alias_hits(n)
+        alias_hits = self._alias_hits(query)
         if alias_hits:
             alias_res = self._search_alias(query, n, alias_hits, country, limit,
                                            include_status)

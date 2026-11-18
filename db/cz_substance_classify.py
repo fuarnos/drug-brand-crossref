@@ -37,6 +37,7 @@ import argparse
 import collections
 import csv
 import io
+import json
 import re
 import sqlite3
 import subprocess
@@ -408,6 +409,17 @@ def main() -> int:
         print("  覆盖行 rule 分布：", dict(collections.Counter(
             r["rule"] for r in cz_rows).most_common()))
         print("  CSV 里有、库里已无的 id：%d（历史遗留，本次未变）" % len(cov_ids - all_ids))
+        # Q17 口径：只统计 2026-11-18 Q2 合并掉的那 3 个 substance（读 manifest，不硬编码）；
+        # 其余悬空是更早历史快照的遗留行，按「不删历史行」保留，单独计数。
+        q2_manifest = SOURCES / "q2_merge_manifest_20261118.json"
+        q2_from: set[str] = set()
+        if q2_manifest.exists():
+            q2_from = {m["from"] for m in json.loads(
+                q2_manifest.read_text(encoding="utf-8")).get("merges", [])}
+        q2_dangling = (cov_ids - all_ids) & q2_from
+        print("  其中 Q2 合并后已不存在的 id（Q17 口径）：%d 条%s"
+              % (len(q2_dangling),
+                 "" if not q2_dangling else "：" + "、".join(sorted(q2_dangling))))
         print("  About「药物实体」ATC 分母：%s"
               % atc_coverage(args.db, {r["substance_id"] for r in on_disk
                                        if (r.get("entity_type") or "").strip() == "inn_drug"}))

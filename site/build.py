@@ -359,6 +359,9 @@ I18N = {
         "nick.unverified": "user-provided (unverified)",
         "nick.community": "community name",
         "nick.source": "Source",
+        # V7a（v0.14.0）：成分页「也叫」块的语言标签。现查别名只有汉字 / 拉丁两类，
+        # 拉丁不猜语种（西语品牌名不硬判成英文），只给这两种确定值。
+        "nick.lang.zh": "Chinese", "nick.lang.en": "English",
         "nick.tag": "nickname",
         "nick.street": "US street name", "nick.folk": "folk name",
         "nick.class": "class term",
@@ -607,6 +610,7 @@ I18N = {
         "nick.unverified": "aportado por el usuario (sin verificar)",
         "nick.community": "nombre de la comunidad",
         "nick.source": "Fuente",
+        "nick.lang.zh": "chino", "nick.lang.en": "inglés",
         "nick.tag": "apodo",
         "nick.street": "nombre callejero en EE. UU.", "nick.folk": "nombre popular",
         "nick.class": "término de clase",
@@ -839,6 +843,7 @@ I18N = {
         "nick.unverified": "用户提供（未证实）",
         "nick.community": "社区叫法",
         "nick.source": "出处",
+        "nick.lang.zh": "中文", "nick.lang.en": "英文",
         "nick.tag": "俗称",
         "nick.street": "美国街头叫法", "nick.folk": "民间叫法",
         "nick.class": "类别俗称",
@@ -1114,6 +1119,9 @@ FR_I18N: dict[str, str] = {
     "u1.step3": "Choisissez le marché cible",
     "u1.step3_hint": "Choisissez un marché cible pour voir le nom local ; la liste des candidats ne change pas.",
     "u1.try": "Essayez :", "u1.close": "Fermer", "u1.aria": "Guide de démarrage",
+    # V4（v0.14.0）：首页「跨国查名」示例链接 + 「按包装文字搜索」分组标签
+    "home.try_cross": "Tylenol Extra Strength (États-Unis) — quel nom en Chine ?",
+    "home.try_pack": "Par texte de l'emballage :",
     "u2.title": "Noms par pays", "u2.hint": "Le nom du même principe actif sur place ; cliquez pour voir les produits.",
     "u2.none": "aucun", "u2.none_hint": "Aucun enregistrement pour ce pays.", "u2.multi": "plusieurs",
     "parse.atc": "Code ATC", "parse.match.atc": "préfixe ATC", "atc.label": "ATC",
@@ -1200,6 +1208,14 @@ FR_I18N: dict[str, str] = {
     "drug.combo_section": "Associations contenant ce principe actif",
     "matrix.spec_conflict": "dosage non vérifié",
     "name.form_spec": "Dosage par forme galénique",
+    # V3（v0.14.0）：名字页规格拆行（剂型折叠 / 液体分浓度与体积 / 缺信息显式标缺）。
+    "name.form_unstated": "Forme non précisée",
+    "name.specs_one": "1 dosage", "name.specs_n": "{n} dosages",
+    "name.records_one": "1 enregistrement", "name.records_n": "{n} enregistrements",
+    "name.spec_conc": "Avec concentration", "name.spec_vol": "Volume seulement",
+    "name.spec_amount": "Autres quantités enregistrées",
+    "name.rel_unrecorded": "Libération non renseignée",
+    "name.spec_unrecorded": "Dosage non renseigné",
     # T13（v0.11.7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
     "lf.market": "Marché", "lf.kind": "Type", "lf.all": "Tous", "lf.title": "Filtres",
     "lf.all_kinds": "Tous types", "lf.spec": "Dosage",
@@ -1273,6 +1289,9 @@ FR_I18N.update({
     "nick.misnomer": "terme abusif",
     "nick.unverified": "fourni par l'utilisateur (non vérifié)",
     "nick.community": "nom de la communauté",
+    "nick.source": "Provenance",
+    "nick.lang.zh": "chinois",
+    "nick.lang.en": "anglais",
     "nick.tag": "surnom",
     "nick.street": "Nom de la rue aux États-Unis",
     "nick.folk": "nom populaire",
@@ -1297,6 +1316,8 @@ FR_I18N.update({
     "coverage.gap.es": "La licence source pour la redistribution est en attente de confirmation.",
     "coverage.gap.mx": "La licence source est en attente de confirmation ; les inscriptions plus anciennes sont incluses.",
     "coverage.gap.tw": "La force est analysée à partir du nom du produit ; la confiance est limitée.",
+    "coverage.spec.no_spec": "La source ne publie pas le dosage",
+    "coverage.gap.why": "Pourquoi",
     "coverage.gap.hk": "Couche de nom/ingrédient uniquement : pas de concentration, de forme ou de statut d'enregistrement ; enregistré ≠ commercialisé.",
     "coverage.gap.cz": ("Registre de données ouvertes SÚKL (DLP) : enregistrements seulement, pas une "
                         "liste de vente actuelle ; les notices SPC/PIL ne sont ni récupérées ni "
@@ -1386,6 +1407,7 @@ FR_I18N.update({
     "atc.ingredients": "Principes actifs de cette classe",
     "atc.count": "{n} ingrédients actifs",
     "atc.more": "et {n} plus",
+    "atc.mk_count": "{n} marchés",
     "atc.no_data": "Aucun ingrédient actif enregistré dans cette classe pour le moment.",
     "atc.unnamed": "Le nom de la classe n'a pas encore été révisé — le code ATC fait autorité.",
     "atc.ai_note": "Les noms de classe et de catégorie sont des traductions éditoriales ou assistées par l’IA ; seuls le code ATC et la hiérarchie de l'OMS font autorité.",
@@ -1733,6 +1755,9 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "Source licence is pending confirmation; older registrations are included.",
         "coverage.gap.tw": "Strength is parsed from the product name; confidence is limited.",
         "coverage.gap.hk": "Name/ingredient layer only: no strength, form or registration status; registered ≠ marketed.",
+        # V6（v0.14.0）：规格覆盖 0.0% 的内联原因 + 缺口说明的可点开标签
+        "coverage.spec.no_spec": "Source does not publish strength",
+        "coverage.gap.why": "Why",
         # v0.12.0（JP 上车）：医保价格表（薬価基準）品目，不是注册库，也不代表当前在售。
         "coverage.gap.jp": ("NHI price-list (薬価基準) items only — not a registration database and not "
                             "proof of current supply. Source: MHLW (厚生労働省), PDL 1.0, 2026-11-01."),
@@ -1776,6 +1801,9 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "La licencia está pendiente de confirmación; se incluyen registros antiguos.",
         "coverage.gap.tw": "La concentración se extrae del nombre del producto; confianza limitada.",
         "coverage.gap.hk": "Solo capa de nombre/ingrediente: sin concentración, forma ni estado de registro; en registro ≠ en venta.",
+        # V6（v0.14.0）：规格覆盖 0.0% 的内联原因 + 缺口说明的可点开标签
+        "coverage.spec.no_spec": "La fuente no publica la concentración",
+        "coverage.gap.why": "Por qué",
         "coverage.gap.jp": ("Solo partidas de la lista de precios de la sanidad pública (薬価基準): no es "
                             "un registro de autorizaciones ni prueba de suministro actual. Fuente: MHLW "
                             "(厚生労働省), PDL 1.0, 2026-11-01."),
@@ -1814,6 +1842,9 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "许可待确认；包含较早注册记录。",
         "coverage.gap.tw": "规格由品名解析，置信度有限。",
         "coverage.gap.hk": "仅名称/成分层：无规格、无剂型、无注册状态；在册≠在售。",
+        # V6（v0.14.0）：规格覆盖 0.0% 的内联原因 + 缺口说明的可点开标签
+        "coverage.spec.no_spec": "来源未提供规格",
+        "coverage.gap.why": "查看原因",
         "coverage.gap.cz": ("仅收载 SÚKL 开放数据（DLP）注册记录，不是在售清单；SPC/PIL 说明书不取不发布；"
                             "出典 SÚKL、2026-11-01（快照 DLP20261027）。"),
         "coverage.gap.lv": ("仅收载 ZVA HumanProducts 开放数据（包装级按注册号归并），是注册库、不是在售清单；"
@@ -1849,6 +1880,9 @@ COVERAGE_I18N = {
         "coverage.gap.mx": "許可待確認；包含較早註冊紀錄。",
         "coverage.gap.tw": "規格由品名解析，置信度有限。",
         "coverage.gap.hk": "僅名稱/成分層：無規格、無劑型、無註冊狀態；在冊≠在售。",
+        # V6（v0.14.0）：規格覆蓋 0.0% 的內聯原因 + 缺口說明的可點開標籤
+        "coverage.spec.no_spec": "來源未提供規格",
+        "coverage.gap.why": "查看原因",
         "coverage.gap.cz": ("僅收載 SÚKL 開放資料（DLP）註冊紀錄，不是在售清單；SPC/PIL 說明書不取不發布；"
                             "出典 SÚKL、2026-11-01（快照 DLP20261027）。"),
         "coverage.gap.lv": ("僅收載 ZVA HumanProducts 開放資料（包裝級按註冊號歸併），是註冊庫、不是在售清單；"
@@ -1887,6 +1921,9 @@ UI_I18N = {
         "u1.step3_hint": ("Pick a target market to see what the same ingredient is called "
                           "there; the candidate list itself does not change."),
         "u1.try": "Try:", "u1.close": "Dismiss", "u1.aria": "Getting-started guide",
+        # V4（v0.14.0）：首页「跨国查名」示例链接 + 「按包装文字搜索」分组标签
+        "home.try_cross": "US Tylenol Extra Strength — what is it called in China?",
+        "home.try_pack": "By pack text:",
         "u2.title": "Names by country/region",
         "u2.hint": ("Same ingredient, local name — click a country/region to see its products. "
                     "Not listed does not prove it is unavailable there."),
@@ -2044,6 +2081,14 @@ UI_I18N = {
         "drug.combo_section": "Combination products containing this ingredient",
         "matrix.spec_conflict": "strength unverified",
         "name.form_spec": "Strength by dosage form",
+        # V3（v0.14.0）：名字页规格拆行（剂型折叠 / 液体分浓度与体积 / 缺信息显式标缺）。
+        "name.form_unstated": "Form not stated",
+        "name.specs_one": "1 strength", "name.specs_n": "{n} strengths",
+        "name.records_one": "1 record", "name.records_n": "{n} records",
+        "name.spec_conc": "With concentration", "name.spec_vol": "Volume only",
+        "name.spec_amount": "Other recorded amounts",
+        "name.rel_unrecorded": "Release not recorded",
+        "name.spec_unrecorded": "Strength not recorded",
         # T13（v0.11.7，用户评审 D1–D7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
         "lf.market": "Market", "lf.kind": "Kind", "lf.all": "All", "lf.title": "Filters",
         "lf.all_kinds": "All kinds", "lf.spec": "Strength",
@@ -2092,6 +2137,9 @@ UI_I18N = {
         "u1.step3_hint": ("Elige un mercado destino para ver cómo se llama el mismo "
                           "principio activo allí; la lista de candidatos no cambia."),
         "u1.try": "Prueba:", "u1.close": "Cerrar", "u1.aria": "Guía de inicio",
+        # V4（v0.14.0）：首页「跨国查名」示例链接 + 「按包装文字搜索」分组标签
+        "home.try_cross": "Tylenol Extra Strength (EE. UU.) — ¿cómo se llama en China?",
+        "home.try_pack": "Por texto del envase:",
         "u2.title": "Nombres por país/región",
         "u2.hint": ("Mismo principio, nombre local: haz clic en un país/región para ver sus "
                     "productos. «Sin datos» no prueba que no exista allí."),
@@ -2235,6 +2283,14 @@ UI_I18N = {
         "drug.combo_section": "Asociaciones que contienen este principio activo",
         "matrix.spec_conflict": "concentración sin verificar",
         "name.form_spec": "Concentración por forma",
+        # V3（v0.14.0）：名字页规格拆行（剂型折叠 / 液体分浓度与体积 / 缺信息显式标缺）。
+        "name.form_unstated": "Forma no indicada",
+        "name.specs_one": "1 concentración", "name.specs_n": "{n} concentraciones",
+        "name.records_one": "1 registro", "name.records_n": "{n} registros",
+        "name.spec_conc": "Con concentración", "name.spec_vol": "Solo volumen",
+        "name.spec_amount": "Otras cantidades registradas",
+        "name.rel_unrecorded": "Liberación no registrada",
+        "name.spec_unrecorded": "Concentración no registrada",
         # T13（v0.11.7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
         "lf.market": "Mercado", "lf.kind": "Tipo", "lf.all": "Todos", "lf.title": "Filtros",
         "lf.all_kinds": "Todos los tipos", "lf.spec": "Concentración",
@@ -2276,6 +2332,9 @@ UI_I18N = {
         "u1.step3": "选目标市场",
         "u1.step3_hint": "选一个目标市场，看这个成分在当地叫什么；候选列表本身不变。",
         "u1.try": "试试：", "u1.close": "关闭", "u1.aria": "使用引导",
+        # V4（v0.14.0）：首页「跨国查名」示例链接 + 「按包装文字搜索」分组标签
+        "home.try_cross": "美国的 Tylenol Extra Strength，在中国有哪些相关商品名？",
+        "home.try_pack": "按包装文字搜索：",
         "u2.title": "国家/地区叫法",
         "u2.hint": "同一成分在当地叫什么；点国家/地区看该地商品。未收录不等于该国家/地区没有这个药。",
         "u2.none": "未收录",
@@ -2398,6 +2457,14 @@ UI_I18N = {
         "drug.combo_section": "含此成分的复方",
         "matrix.spec_conflict": "规格待核实",
         "name.form_spec": "规格（按剂型）",
+        # V3（v0.14.0）：名字页规格拆行（剂型折叠 / 液体分浓度与体积 / 缺信息显式标缺）。
+        "name.form_unstated": "剂型未注明",
+        "name.specs_one": "1 个规格", "name.specs_n": "{n} 个规格",
+        "name.records_one": "1 条记录", "name.records_n": "{n} 条记录",
+        "name.spec_conc": "有浓度信息", "name.spec_vol": "仅记录体积",
+        "name.spec_amount": "其他记录量",
+        "name.rel_unrecorded": "释放方式未记录",
+        "name.spec_unrecorded": "规格未记录",
         # T13（v0.11.7）：成分页筛选条、可点击计数、来源/日期提示、分类页搜索。
         "lf.market": "市场", "lf.kind": "成分类型", "lf.all": "全部", "lf.title": "筛选",
         "lf.all_kinds": "单方与复方", "lf.spec": "规格",
@@ -2439,6 +2506,9 @@ UI_I18N = {
         "u1.step3": "選目標市場",
         "u1.step3_hint": "選一個目標市場，看這個成分在當地叫什麼；候選清單本身不變。",
         "u1.try": "試試：", "u1.close": "關閉", "u1.aria": "使用引導",
+        # V4（v0.14.0）：首頁「跨國查名」示例連結 + 「按包裝文字搜尋」分組標籤
+        "home.try_cross": "美國的 Tylenol Extra Strength，在中國有哪些相關商品名？",
+        "home.try_pack": "按包裝文字搜尋：",
         "u2.title": "國家/地區叫法",
         "u2.hint": "同一成分在當地叫什麼；點國家/地區看該地商品。未收錄不等於該國家/地區沒有這個藥。",
         "u2.none": "未收錄",
@@ -2546,6 +2616,8 @@ UI_I18N = {
         "name.single_note": "此名稱目前僅收錄 1 筆產品紀錄。",
         # task-141c：同物異名（成分頁「也稱」+ 檢索身份卡）的繁中值，避免回落簡體。
         "drug.also_known": "也稱：", "syn.tag": "異名",
+        # V7a（v0.14.0）：成分页「也叫」块的语言标签；「中文 / 英文」繁简同形，不回落简体。
+        "nick.lang.zh": "中文", "nick.lang.en": "英文",
         "nick.synonym": "異名",
         "nick.synonym_hit": "也稱",
         "nick.synonym_caveat": ("同一有效成分的另一種寫法（INN 與 USAN 差異或拼寫變體）。"
@@ -2664,6 +2736,14 @@ UI_I18N = {
         "drug.combo_section": "含此成分的複方",
         "matrix.spec_conflict": "規格待核實",
         "name.form_spec": "規格（按劑型）",
+        # V3（v0.14.0）：名字頁規格拆行（劑型折疊 / 液體分濃度與體積 / 缺資訊顯式標缺）。
+        "name.form_unstated": "劑型未註明",
+        "name.specs_one": "1 個規格", "name.specs_n": "{n} 個規格",
+        "name.records_one": "1 條記錄", "name.records_n": "{n} 條記錄",
+        "name.spec_conc": "有濃度資訊", "name.spec_vol": "僅記錄體積",
+        "name.spec_amount": "其他記錄量",
+        "name.rel_unrecorded": "釋放方式未記錄",
+        "name.spec_unrecorded": "規格未記錄",
         # T13（v0.11.7）：成分頁篩選條、可點擊計數、來源/日期提示、分類頁搜尋。
         "lf.market": "市場", "lf.kind": "成分類型", "lf.all": "全部", "lf.title": "篩選",
         "lf.all_kinds": "單方與複方", "lf.spec": "規格",
@@ -3700,6 +3780,7 @@ KO_I18N: dict[str, str] = {
     'atc.loading': 'ATC 검색용 색인을 불러오는 중…',
     'atc.markets_hint': '이제 각 시장은 집계된 상태 하나를 표시합니다: 해당 시장에 판매 중 기록이 하나라도 있으면 판매 중으로 계산합니다. 개별 기록의 상태는 상세 정보에 표시됩니다. 같은 시장에 상태가 다른 등록 기록이 여러 개 있을 수 있어 시장은 여기에 한 번만 나오며, 이는 등록 사실이지 안전성 판단이 아닙니다.',
     'atc.more': '외 {n}개',
+    'atc.mk_count': '{n}개 시장',
     'atc.more_notes': '주석 및 라이선스',
     'atc.names_source_note': '분류명은 편집 번역이거나 Wikipedia(CC BY-SA 4.0) / Wikidata(CC0)에서 왔습니다. 각 ATC 페이지에는 언어별 정확한 출처·라이선스·링크가 있습니다. 권위 있는 정보는 ATC 코드와 WHO 계층뿐입니다.',
     'atc.no_data': '이 분류에 아직 기록된 활성성분이 없습니다.',
@@ -3811,6 +3892,9 @@ KO_I18N: dict[str, str] = {
     'coverage.gap.fr': 'BDPM (ANSM) — Licence Ouverte / etalab-2.0, 출처 표기 필요, 데이터 패키지에 갱신일 표시. 허가 ≠ 판매 중.',
     'coverage.gap.gb': 'dm+d 전체 출처, Open Government Licence 출처 표기.',
     'coverage.gap.hk': '이름/성분 계층만: 함량·제형·등록 상태 없음. 등록 ≠ 판매 중.',
+    # V6（v0.14.0）：함량 커버리지 0.0%의 인라인 사유 + 격차 설명 펼치기 라벨
+    'coverage.spec.no_spec': '출처가 함량을 제공하지 않음',
+    'coverage.gap.why': '이유',
     'coverage.gap.jp': 'NHI 가격표(薬価基準) 항목만 — 등록 데이터베이스가 아니고 현재 공급의 증거도 아닙니다. 출처: 후생노동성(厚生労働省), PDL 1.0, 2026-11-01.',
     'coverage.gap.lv': 'ZVA HumanProducts 공개 데이터(포장 단위, 등록번호로 묶음) — 등록부이며 현재 판매 중인 목록이 아닙니다. 출처: ZVA, CC0 1.0, 2026-11-11.',
     'coverage.gap.mx': '출처 라이선스는 확인 중이며 오래된 등록도 포함합니다.',
@@ -4071,6 +4155,14 @@ KO_I18N: dict[str, str] = {
     'name.form_granularity_cn': '출처가 제형을 분류 수준(예: “정제”)으로만 기록해 발포정·코팅정 같은 하위 제형은 구분하지 않습니다.',
     'name.form_source': '출처 기록 그대로',
     'name.form_spec': '제형별 함량',
+    # V3（v0.14.0）：이름 페이지 규격을 접을 수 있는 행으로（제형 / 농도·부피 / 미기재 표시）。
+    'name.form_unstated': '제형 미기재',
+    'name.specs_one': '함량 1개', 'name.specs_n': '함량 {n}개',
+    'name.records_one': '기록 1건', 'name.records_n': '기록 {n}건',
+    'name.spec_conc': '농도 정보 있음', 'name.spec_vol': '부피만 기록',
+    'name.spec_amount': '기타 기록량',
+    'name.rel_unrecorded': '방출 방식 미기재',
+    'name.spec_unrecorded': '함량 미기재',
     'name.found': '다음에서 확인됨',
     'name.no_en': '영문명 미기록',
     'name.no_es': '스페인어명 미기록',
@@ -4119,6 +4211,8 @@ KO_I18N: dict[str, str] = {
     'nick.nomap_caveat': '이 용어는 이 데이터베이스에 판매 제품이 없는 물질을 가리키므로 제품 목록을 표시하지 않습니다.',
     'nick.slang': '인터넷 속칭',
     'nick.source': '출처',
+    'nick.lang.zh': '중국어',
+    'nick.lang.en': '영어',
     'nick.street': '미국 거리 명칭',
     'nick.synonym': '동의어',
     'nick.synonym_caveat': '같은 활성성분의 다른 이름(INN vs USAN 또는 표기 변형). 성분을 식별할 뿐이며, 국가가 다른 제품은 여전히 호환되지 않습니다.',
@@ -4265,6 +4359,9 @@ KO_I18N: dict[str, str] = {
     'u1.step3_hint': '대상 시장을 선택하면 같은 성분이 그곳에서 무엇으로 불리는지 볼 수 있습니다. 후보 목록 자체는 바뀌지 않습니다.',
     'u1.title': '3단계로 사용하는 방법',
     'u1.try': '예시:',
+    # V4（v0.14.0）：首页「跨国查名」示例链接 + 「按包装文字搜索」分组标签
+    'home.try_cross': '미국 Tylenol Extra Strength — 중국에서는 어떤 이름일까요?',
+    'home.try_pack': '포장 문구로 검색:',
     'u2.hint': '같은 성분의 현지 이름 — 국가/지역을 클릭해 제품을 보세요. 수록되지 않았다고 그곳에 없는 것은 아닙니다.',
     'u2.multi': '여러 성분이 일치합니다 — 국가/지역을 바꿔 전체 목록을 보세요.',
     'u2.none': '미수록',
@@ -5262,6 +5359,10 @@ html.js .mkctl{display:flex}
 .tryrow button{min-height:36px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;
  background:#fff;color:var(--fg);font-size:14px;cursor:pointer}
 .tryrow button:hover{border-color:var(--accent);color:var(--accent)}
+/* V4（v0.14.0）：跨国查名示例用原生链接，外观与示例按钮一致 */
+.tryrow a{min-height:36px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;
+ background:#fff;color:var(--fg);font-size:14px;text-decoration:none;display:inline-flex;align-items:center}
+.tryrow a:hover,.tryrow a:focus-visible{border-color:var(--accent);color:var(--accent)}
 /* E5（v0.11.10）：最近更新条目里的一句变化 */
 .homeupd .updlist .upd-liner{color:var(--muted);font-size:13px;max-width:280px;overflow:hidden;
  text-overflow:ellipsis;white-space:nowrap}
@@ -5281,6 +5382,22 @@ padding:14px 16px;margin:10px 0}
 .card h3{margin:0 0 4px;font-size:16px}
 .card h2{margin:0 0 4px;font-size:16px}
 .card .meta{color:var(--muted);font-size:14px}
+/* V3（v0.14.0）：名字页「剂型 → 规格」可展开行（原生 details，零 JS） */
+.nsforms{margin-top:6px;border-top:1px solid var(--line-soft)}
+.nsform{border-bottom:1px solid var(--line-soft)}
+.nsform>summary{display:flex;align-items:center;gap:4px 10px;flex-wrap:wrap;min-height:44px;padding:4px 0;cursor:pointer;list-style:none}
+.nsform>summary::-webkit-details-marker{display:none}
+.nsform>summary:after{content:"▾";margin-left:auto;color:var(--muted);font-size:14px}
+.nsform[open]>summary:after{content:"▴"}
+.nsf-t{font-weight:600}
+.nsf-c{display:inline-flex;flex-wrap:wrap;gap:2px 6px;color:var(--muted);font-size:13px}
+.nsrows{display:none;gap:2px;padding:2px 0 8px}
+.nsform[open]>.nsrows{display:grid}
+.nsrow{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;min-width:0;padding:5px 0 5px 12px;border-top:1px dashed var(--line-soft)}
+.nsrow-spec{font-weight:600;overflow-wrap:anywhere}
+.nsrow-rel{color:var(--muted);font-size:13px}
+.nsrow-n{color:var(--muted);font-size:13px;margin-left:auto}
+.nsg-h{margin:8px 0 2px;padding-left:12px;font-size:13px;font-weight:600;color:var(--muted)}
 .tag{display:inline;font-size:13px;padding:0;border:0;border-radius:0;background:none;
  margin-left:6px;color:var(--muted)}
 /* R2（v0.12.1，L8）：国家/剂型/状态**不做胶囊**（纯文字、无边框无底色）。
@@ -5324,6 +5441,14 @@ padding:14px 16px;margin:10px 0}
     -webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;white-space:normal}
   #covtable td:nth-child(7)::before{display:inline;overflow:visible;flex:none}
   #covtable .covgap{display:inline;overflow:visible;-webkit-line-clamp:none}
+/* V6（v0.14.0）：缺口说明从 title 悬停改成原生 <details> 可点开（触屏/键盘/读屏都能开） */
+#covtable details.covgap{display:inline-block}
+#covtable details.covgap[open]{display:block}
+#covtable .covgap summary{cursor:pointer;color:var(--accent);list-style:none;
+ display:inline-flex;align-items:center;min-height:32px}
+#covtable .covgap summary::-webkit-details-marker{display:none}
+#covtable .covgap summary::after{content:"▾";margin-left:4px;font-size:12px}
+#covtable .covgap[open] summary::after{content:"▴"}
 }
 .mktxt{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* v0.13.3（R1）：国家从「US」变成「美国 · US」后更长 ——
@@ -5535,6 +5660,16 @@ padding:12px 14px;font-size:14px;margin:14px 0}
 .notice.nick .sub{margin:6px 0 0}
 .notice.nick .sub a{white-space:nowrap}
 .notice.nick .sub.src{font-size:14px;margin-top:4px}
+/* V7a（v0.14.0）：成分页「也叫」块 —— 别名 + 类型 + 语言 + 出处。标签走纯文字（L8 不做胶囊）；
+   390 上出处换行，长别名/长 URL 用 overflow-wrap 断行，不撑出横向溢出。 */
+.also-called{margin:14px 0 10px;padding:12px 14px;border:1px solid var(--line);
+ border-radius:12px;background:var(--card)}
+.also-called>h2.also-h{margin:0 0 6px;font-size:16px;line-height:1.4}
+.nick-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.nick-list li{min-inline-size:0;line-height:1.45;overflow-wrap:anywhere}
+.nick-list li>a{margin-right:6px;font-weight:600}
+.nick-list .nick-src{color:var(--muted)}
+@media (max-width:767px){.nick-list .nick-src{display:block;margin-top:1px}}
 .notice.warnbox{background:#fff8e8;border-color:#ecd9a8}
 /* 2026-11-12 v0.11.2（条目 10）：同名不同药的家族说明可折叠 —— 390 上只留一行警示摘要，
    长注释放展开区；桌面端 summary 隐藏、默认展开（信息不丢）。 */
@@ -5593,6 +5728,21 @@ table.res.rows tr.br.picked:hover{background:var(--accent-weak)}
   table.res.rows td.c-brand::before{content:""}
   table.res.rows td.c-brand{font-size:18px;font-weight:700;margin-bottom:2px;color:var(--fg)}
   table.res.rows td.c-det{text-align:left;margin-top:6px;white-space:normal}
+  /* Q18（v0.14.0）：390 结果卡从「5 行竖排」压成「4 行紧凑卡」（品牌 / 成分｜规格 / 市场 /
+     操作），卡高 146 → ~81 px、首屏条目 3.5 → 5.5（真机态，含「各国叫法」条）；市场与操作
+     各占整行，六语都不换行。只压间距：正文 16 / 辅助 13 / 品牌 18 px 一律不动；
+     长值仍走省略号（与改前 c-dose 的行为一致）。 */
+  table.res.rows tr.br{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+   column-gap:8px;margin:0 0 3px;padding:1px 0;border-bottom:1px solid var(--line)}
+  table.res.rows tr.br td{padding:0;line-height:1.2}
+  table.res.rows tr.br td.c-brand{grid-column:1 / -1;margin:0;line-height:1.15}
+  table.res.rows tr.br td.c-ing{grid-column:1 / 6}
+  table.res.rows tr.br td.c-dose{grid-column:6 / 13}
+  table.res.rows tr.br td.c-market{grid-column:1 / -1}
+  table.res.rows tr.br td.c-det{grid-column:1 / -1;margin-top:0;text-align:left;white-space:normal}
+  table.res.rows tr.br td.c-det::before{content:""}
+  table.res.rows tr.br td.c-det .pickbtn,table.res.rows tr.br td.c-det .detbtn{min-height:18px;
+   font-size:13px;line-height:1.15;padding:0 6px 0 0;margin:0 2px 0 0}
   #reswrap{overflow-x:visible}
   table.res.rows .pickbtn,table.res.rows .detbtn{border:0;background:none;padding:0 10px 0 0;
    text-decoration:underline;color:var(--accent);min-height:24px}
@@ -5628,6 +5778,10 @@ html.has-q h1#h1{font-size:22px;margin:0 0 2px;line-height:1.2}
 html.has-q .sub[data-i18n="home.sub"]{display:none}
 html.has-q .candidate-line{display:none}   /* 候选集声明在 pickbar / 首行里已表达，不占首屏 */
 html.has-q #u1guide,html.has-q .flow3,html.has-q #loadhint{display:none}
+/* V4（v0.14.0）：结果页隐藏首页示例区 —— 新增「按包装文字搜索」第二组后，768 宽下 .tryrow 换行成
+   2 行 80px，把 #reswrap 往下推 ~40px、首屏少 1 条结果（items 10.5→9.5）。这里沿用 .has-q 类全局隐藏，
+   首页无查询时示例照常显示，「从首页点一次即得候选」不受影响。 */
+html.has-q .tryrow{display:none}
 html.has-q .searchwrap{margin-top:2px}
 /* 身份卡在结果页收紧成「查询→成分 + 更多记录」；再往下压会与首条结果重复，
    所以结果页默认不展开规格/警示/动作（L6：搜索后压缩标题引导）。 */
@@ -5977,6 +6131,9 @@ table.matrix .m-brand{display:-webkit-box;-webkit-box-orient:vertical;
 .lf-chip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 .lf-chip.on{background:var(--accent-weak);border-color:var(--accent);color:var(--accent);font-weight:600}
 .lf-chip .n{color:var(--muted);font-size:13px}
+/* V5（v0.14.0）：子类 chip 的 ATC 类名（fr/ko 会带「(EN)」，M01A 这类长名限量省略，触屏不撑破行） */
+.lf-chip .lf-chip-nm{color:var(--muted);font-size:13px;max-width:10em;overflow:hidden;
+ text-overflow:ellipsis;white-space:nowrap}
 .lf-input{min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:8px;
  font-size:15px;min-width:12em;flex:0 1 18em}
 .lf-status{margin:0;font-size:13px;color:var(--muted)}
@@ -6444,8 +6601,8 @@ body.density-compact table.res{font-size:14px}
 /* Q4（v0.13.6）：覆盖页 768–1023 档 —— 7 列在 713px 里互相挤，缺口列被压到 130px、
    一行换 8 行（行高 137–209px，首屏只有 3.5 行）。改：定宽列 + 缺口最多 2 行（全文进 title）。 */
 @media (max-width:1279px){
-  #covtable .covgap{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-    overflow:hidden}
+  /* V6（v0.14.0）：说明收进 <details> 后不再截断长文；手机给 44px 触屏高度 */
+  #covtable .covgap summary{min-height:44px}
 }
 @media (min-width:768px) and (max-width:1023px){
   #covtable{table-layout:fixed;width:100%}
@@ -6967,12 +7124,26 @@ function _flatAccents(s){
   // 只影响匹配（Bromelaina 也能命中 Bromelaína），显示名仍保留原写法。
   return String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
 }
+function aliasKey(s){
+  // V7b：与 lib/search.py::alias_key() / 构建期 aliases.json 的 n 同一口径：
+  // 繁→简（toSimp，data/zh_hant_t2s.json 2,966 字）→ NFKC → 小写 → 去 ®™©
+  // → 去组合音标 → 标点/符号→空格 → 压空白。
+  return toSimp(s||'').normalize('NFKC').toLowerCase()
+    .replace(/[®™©]/g,' ')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/[\-–—_\/\\.,;:!?()\[\]{}'"’‘“”·•*&+]+/g,' ')
+    .replace(/\s+/g,' ').trim();
+}
 function aliasHits(nq){
-  // 俗称只做精确 / 连写命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
-  // task-141c：同物异名（成分别名）也走这里，额外容忍重音差异。
-  const fq = _flatAccents(nq);
-  return NICKS.filter(a => a.n === nq || a.n.replace(/ /g,'') === nq.replace(/ /g,'')
-    || _flatAccents(a.n).replace(/ /g,'') === fq.replace(/ /g,''));
+  // 俗称只做精确 / 连写 / 去重音命中：昵称差一个字往往就是另一个梗，模糊匹配会闹笑话。
+  // V7b：索引侧 n 与查询侧都用 aliasKey；对旧缓存 aliases.json 的 n 再归一一次也能命中。
+  const qk = aliasKey(nq);
+  const fq = _flatAccents(qk);
+  return NICKS.filter(a => {
+    const ak = aliasKey(a.n);
+    return ak === qk || ak.replace(/ /g,'') === qk.replace(/ /g,'')
+      || _flatAccents(ak).replace(/ /g,'') === fq.replace(/ /g,'');
+  });
 }
 function confHits(nq){
   // 易混淆药对也只做精确命中：这是「名字像」的提示，不做模糊扩展。
@@ -11253,6 +11424,10 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
            GROUP BY v.substance_id"""
     ):
         counts[sid] = (n, set((countries or "").split(",")))
+    # V7b：匹配键用与 lib/search.py / 页内 app.js aliasKey 同一函数现算。
+    # 不读 DB 里的 alias_norm——那份是历史归一化写下的（只覆盖约 90 个繁简字），
+    # 繁体叫法（阿司匹靈 / 猛健樂）会对不上客户端 2,966 字的 toSimp 表。
+    from lib.search import alias_key  # noqa: PLC0415
     out = []
     for (alias, norm, sid, zh, label_en, kind, confidence, note, source, inn_en,
          inn_zh, meaning_zh, meaning_en, country, source_url) in db.execute(
@@ -11267,7 +11442,7 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
         display = zh or inn_zh or label_en or inn_en or alias
         out.append({
             "a": alias,
-            "n": norm,
+            "n": alias_key(alias),
             "v": sid,
             "i": inn_en or label_en or alias,
             "x": display,
@@ -11282,7 +11457,42 @@ def load_aliases(db: sqlite3.Connection) -> list[dict]:
             "c": sorted(countries),
             "np": n_prod,
         })
+    # V7b：同一叫法既有类别词（无成分）又有成分时，有成分的行排前——
+    # 客户端按索引顺序渲染别名卡，首卡必须是可点的成分页（如「普拿疼」）。
+    out.sort(key=lambda a: not bool(a["v"]))
     return out
+
+
+# ── V7a（v0.14.0）：成分页「也叫」块 ────────────────────────────────────────
+# 数据源与检索索引同口径：alias_all（= nickname 396 ∪ drug_term 1,017，现查 1,413 行；
+# 其中 680 个成分有产品页）。类型词直接复用昵称卡既有的 8 个键 —— alias_all 已把
+# `drug_term.term_type` 归一到 `kind` 列；不新增第二套词表，不写 product_name。
+NICK_KIND_KEYS = frozenset({
+    "slang", "legacy", "translit", "abbrev", "misnomer", "street", "folk", "class"})
+# 语言标签只给能确定语种的两种（汉字 / 英文）；纯拉丁不猜西语/英语，宁可不标。
+NICK_LANG_KEYS = frozenset({"zh", "en"})
+
+
+def _nick_i18n(key: str, cls: str = "tag") -> str:
+    """昵称块的标签：服务端先写英文（无 JS 也能读），客户端按 data-i18n 换成界面语言。"""
+    return (f'<span class="{cls}" data-i18n="{key}">'
+            f'{esc(I18N["en"].get(key, key))}</span>')
+
+
+def _alias_lang(alias: str, country: str) -> str:
+    """别名语言（**推导值**，不手工标注，也不改数据）。
+
+    - `drug_term` 有 country：CN → zh、US → en（来源市场官方语言）；
+    - `nickname` 没有 country：只看文字脚本，汉字 → zh；谚文/假名/纯拉丁 → 不标
+      （拉丁字母分不出英语/西语/品牌名，宁可不标也不猜错）。
+    """
+    if country == "CN":
+        return "zh"
+    if country == "US":
+        return "en"
+    if any("\u4e00" <= ch <= "\u9fff" or "\u3400" <= ch <= "\u4dbf" for ch in alias):
+        return "zh"
+    return ""
 
 
 # ── v0.9.6 task-141c：同物异名（data/substance_aliases.csv）──────────────
@@ -11293,14 +11503,13 @@ SUBSTANCE_ALIAS_CAP = 5   # 成分页「也称」每页最多列 5 个别的写�
 
 
 def _norm_alias(s: str) -> str:
-    """与 app.js 的 norm() 逐条同口径：NFKC → 小写 → 去组合音标 → 压空白。
+    """别名匹配键（V7b）：与 `lib/search.py::alias_key` / 页内 `app.js::aliasKey` 同一函数。
 
-    注意 JS 端同样是 NFKC（组合式）后才删 U+0300–U+036F，所以预组合重音（é/í）
-    会保留：西语别名要按原写法命中，与既有俗称索引的匹配规则一致。
+    不再在这里写第二份 NFKC/标点规则——两端必须同一张繁简表（data/zh_hant_t2s.json）、
+    同一套规则；本函数只作旧调用点的薄包装。
     """
-    s = unicodedata.normalize("NFKC", s or "").lower()
-    s = re.sub(r"[\u0300-\u036f]", "", s)
-    return re.sub(r"\s+", " ", s).strip()
+    from lib.search import alias_key  # noqa: PLC0415
+    return alias_key(s)
 
 
 def load_substance_aliases(
@@ -11881,12 +12090,19 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
             if sid2 and sid2 not in seen_sids:
                 seen_sids.add(sid2)
                 warnings_by_sub[sid2].append(row)
-    nicknames: dict[str, list[str]] = {}
-    for sid, alias in db.execute(
-        """SELECT substance_id, alias FROM alias_all
-           WHERE substance_id IS NOT NULL ORDER BY alias_id"""
+    # V7a（v0.14.0）：成分页「也叫」块的数据源 —— 与检索索引 `data/aliases.json`
+    # 同一张 alias_all 视图（nickname ∪ drug_term，现查 1,413 行），含 drug_term 的
+    # folk/street/class 与 source_url。只读视图：不写库、不改 product_name。
+    # `lang` 是推导值（见 _alias_lang），只用于显示语言标签。
+    nicknames: dict[str, list[dict[str, str]]] = {}
+    for _sid, _al, _kd, _cf, _sc, _su, _ct in db.execute(
+        """SELECT substance_id, alias, kind, confidence, source, source_url, country
+           FROM alias_all WHERE substance_id IS NOT NULL ORDER BY alias_id"""
     ):
-        nicknames.setdefault(sid, []).append(alias)
+        nicknames.setdefault(_sid, []).append({
+            "a": _al or "", "k": _kd or "", "cf": _cf or "", "s": _sc or "",
+            "u": _su or "", "lang": _alias_lang(_al or "", _ct or ""),
+        })
     made = 0
     DRUG_PAGE_IDS.clear()
     (OUT / "drug").mkdir(parents=True, exist_ok=True)
@@ -12305,11 +12521,42 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
             hidden_note += ('<p class="sub" data-i18n="drug.compare_note">A side-by-side table is '
                             'offered only when this ingredient has records in many markets; '
                             'otherwise this list is the whole picture.</p>')
-        nick_line = ""
-        if sid in nicknames:
-            also_names = "、".join(esc(x) for x in nicknames[sid])
-            nick_line = (f'<p class="sub"><span data-i18n="drug.also_called">Also called:</span> '
-                         f'{also_names} <span class="st-text" data-i18n="nick.tag">nickname</span></p>')
+        # V7a（v0.14.0）：成分页「也叫」块。每条 = 值 + 类型 + 语言 + 出处（+ 非 documented
+        # 的置信度标签）；别名原文不翻译；有别名才出块（680 / 13,434 页），不出空块。
+        # V7c：原来行末的英文 chip「nickname」改由 _nick_i18n 渲染 → 六语（含 ko），
+        # 并把别名链回它的成分页（别名指向的就是本页 → aria-current="page"）。
+        nick_block = ""
+        if nicknames.get(sid):
+            _items = []
+            for _it in nicknames[sid]:
+                _kind_bit = (_nick_i18n("nick." + _it["k"], "tag")
+                             if _it["k"] in NICK_KIND_KEYS else "")
+                _lang_bit = (_nick_i18n("nick.lang." + _it["lang"], "st-text")
+                             if _it["lang"] in NICK_LANG_KEYS else "")
+                _conf_bit = ""
+                if _it["cf"] == "user":
+                    _conf_bit = " " + _nick_i18n("nick.unverified", "tag warn")
+                elif _it["cf"] == "community":
+                    _conf_bit = " " + _nick_i18n("nick.community", "st-text")
+                _src = esc(_it["s"])
+                if _it["u"]:
+                    _src = (f'<a href="{esc(_it["u"])}" target="_blank" '
+                            f'rel="noopener">{_src}</a>')
+                _items.append(
+                    f'<li><a href="../drug/{esc(sid)}.html" aria-current="page">'
+                    f'{esc(_it["a"])}</a>'
+                    f'{_kind_bit}{_lang_bit}{_conf_bit}'
+                    f' <span class="st-text nick-src">'
+                    f'<span data-i18n="nick.source">Source</span>: {_src}</span></li>')
+            nick_block = (
+                '<section class="also-called" aria-labelledby="also-called-h">'
+                '<h2 class="also-h" id="also-called-h">'
+                '<span data-i18n="drug.also_called">Also called:</span> '
+                + _nick_i18n("nick.tag", "st-text")
+                + '</h2><ul class="nick-list">' + "".join(_items) + '</ul>'
+                '<p class="sub" data-i18n="nick.caveat">Nicknames point to an ingredient, not to '
+                'a specific pack: the same ingredient is sold under different brand names in '
+                'each country.</p></section>')
         # task-141c：同物异名（INN vs USAN / 拼写变体）——只列别的写法，最多 5 个；
         # 目标成分有产品页就链过去，名字保留原文、不翻译，主名（h1）不动。
         syn_line = ""
@@ -12380,7 +12627,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
   <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>{lf_html}
 </div>
 <div id="list" class="listview">{list_html}</div>{nobasis_note}{compare_link}{table_block}
-{syn_line}{nick_line}
+{syn_line}{nick_block}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
 brand names in different countries, and the same name can point to a different ingredient.
@@ -12405,40 +12652,94 @@ Listed by country — not interchangeable.</div>
     return made
 
 
+def _spec_kind_of(su: str, pu: str) -> str:
+    """规格行的计量口径（V3 / v0.14.0）：concentration / volume / amount。
+
+    只按 DB 字段判断，不猜、不换算：
+      · 有 `per_volume`（每 mL / 每单位）→ concentration（如 `160 mg/5 mL`）；
+      · 没有 per_volume、强度单位本身是体积（mL/L…）→ volume（如 `20 mL`）；
+      · 其余（每片 mg 等）→ amount。
+    名字页「液体」卡用前两类分出「有浓度信息 / 仅记录体积」。
+    """
+    if (pu or "").strip().lower() in ("ml", "l", "cl", "dl"):
+        return "concentration"
+    if (su or "").strip().lower() in ("ml", "l", "cl", "dl"):
+        return "volume"
+    return "amount"
+
+
 def collect_name_data(db: sqlite3.Connection) -> dict:
-    """一次性把名字页需要的全部数据取到内存，避免上万次逐条查询。"""
+    """一次性把名字页需要的全部数据取到内存，避免上万次逐条查询。
+
+    V3（v0.14.0）：除原有集合外，再按「剂型 × 规格 × 释放方式」聚合记录数，供名字页
+    把长句拆成按剂型可展开的行。计数一律 `COUNT(DISTINCT p.product_id)`，与 db 现查
+    同一口径（同一产品同成分出现两行时不会把记录数算重）。
+    """
     data: dict[str, dict] = {}
-    for (key_id, pid, inn_en, sid, country, form_base, dosage_form, rel,
-         sv, su, pv, pu, nl) in db.execute(
-        """SELECT pn.key_id, p.product_id, s.inn_en, s.substance_id, COALESCE(p.country, p.region) AS mk,
-                  p.form_base,
-                  p.dosage_form, p.release, pc.strength_value, pc.strength_unit,
-                  pc.per_volume_value, pc.per_volume_unit, s.name_lang
+    for (key_id, sid, inn_en, nl, country, fm, rel,
+         sv, su, pv, pu, n) in db.execute(
+        """SELECT pn.key_id, s.substance_id, s.inn_en, s.name_lang,
+                  COALESCE(p.country, p.region) AS mk,
+                  COALESCE(p.form_base, p.dosage_form) AS fm,
+                  p.release, pc.strength_value, pc.strength_unit,
+                  pc.per_volume_value, pc.per_volume_unit,
+                  COUNT(DISTINCT p.product_id) AS n
            FROM product_name pn
            JOIN product p ON p.product_id = pn.product_id
            LEFT JOIN product_component pc ON pc.product_id = p.product_id
            LEFT JOIN variant v ON v.variant_id = pc.variant_id
-           LEFT JOIN substance s ON s.substance_id = v.substance_id"""
+           LEFT JOIN substance s ON s.substance_id = v.substance_id
+           GROUP BY pn.key_id, s.substance_id, s.inn_en, s.name_lang, mk, fm,
+                    p.release, pc.strength_value, pc.strength_unit,
+                    pc.per_volume_value, pc.per_volume_unit"""
     ):
         d = data.setdefault(key_id, {"subs": {}, "countries": set(), "name_only": set()})
         d["countries"].add(country)
         if not sid:
-            # v0.9.1 task-28：无成分产品（名称层），名字页标注、不造卡片
-            d["name_only"].add(pid)
             continue
         s = d["subs"].setdefault(
-            sid, {"inn": inn_en, "nl": nl or "", "country": set(), "s": set(),
-                  "f": set(), "fs": {}, "rel": set()})
+            sid, {"inn": inn_en or "", "nl": nl or "", "country": set(), "s": set(),
+                  "f": set(), "fs": {}, "rel": set(),
+                  "sp": {}, "und": {}, "fr": {}})
         s["country"].add(country)
         # T10（plan §3.4 ②）：成分卡按「剂型 → 规格」分桶，规格串用 _spec_text
         # （含 per_volume，`960 mg/30 mL` 不再缩成 `960 mg`，也不再跨剂型拼成一条）。
         st = _spec_text(sv, su, pv, pu) if sv is not None else ""
-        fm = form_base or dosage_form
+        s["f"].add(fm or "")
+        s["rel"].add(rel)
         if st:
             s["s"].add(st)
             s["fs"].setdefault(fm or "", set()).add(st)
-        s["f"].add(fm)
-        s["rel"].add(rel)
+            # V3：同一（剂型, 规格, 释放方式）的记录数；行渲染时按它显示「N 条记录」。
+            row = s["sp"].setdefault((fm or "", st, rel),
+                                     {"n": 0, "kind": _spec_kind_of(su, pu)})
+            row["n"] += n
+        else:
+            s["und"][fm or ""] = s["und"].get(fm or "", 0) + n
+    # v0.9.1 task-28：无成分产品（名称层）单独查，保持 name_only 的 pid 语义。
+    for key_id, pid in db.execute(
+            """SELECT pn.key_id, p.product_id
+               FROM product_name pn
+               JOIN product p ON p.product_id = pn.product_id
+               WHERE NOT EXISTS (SELECT 1 FROM product_component pc
+                                 WHERE pc.product_id = p.product_id)"""):
+        data.setdefault(key_id, {"subs": {}, "countries": set(),
+                                 "name_only": set()})["name_only"].add(pid)
+    # V3：每个剂型的 distinct 记录数，summary 里的「4 条记录」用它（与行计数分开算，
+    # 同成分两规格的产品不会被行数加总重复计数）。
+    for key_id, sid, fm, n in db.execute(
+            """SELECT pn.key_id, s.substance_id,
+                      COALESCE(p.form_base, p.dosage_form) AS fm,
+                      COUNT(DISTINCT p.product_id) AS n
+               FROM product_name pn
+               JOIN product p ON p.product_id = pn.product_id
+               JOIN product_component pc ON pc.product_id = p.product_id
+               JOIN variant v ON v.variant_id = pc.variant_id
+               JOIN substance s ON s.substance_id = v.substance_id
+               GROUP BY pn.key_id, s.substance_id, fm"""):
+        g = ((data.get(key_id) or {}).get("subs") or {}).get(sid)
+        if g is not None:
+            g["fr"][fm or ""] = n
     return data
 
 
@@ -12544,6 +12845,95 @@ def _release_variant_notice(subs: dict) -> str:
             f'{(" " + why) if why else ""}</div>')
 
 
+def _name_spec_block(g: dict) -> str:
+    """V3（v0.14.0）：名字页「剂型 + 规格 + 释放」长句 → 按剂型可展开的行。
+
+    只渲染 collect_name_data() 聚合出的事实（sp / und / fr），不查库、不猜数据：
+      · 每个剂型一个原生 <details>（零 JS；键盘可开、find-in-page 可搜）；
+      · 行 = 规格 · 释放方式（`none` 显式写「未记录」）· N 条记录（N>1 才显示）；
+      · 液体（form_base=liquid）再按「有浓度信息 / 仅记录体积 / 其他记录量」分组；
+      · 剂型为空/unknown → 「剂型未注明」；无规格记录 → 「规格未记录」。
+    返回 "" 表示这是「简单卡」：调用方保留原来的紧凑 .meta 行，不涨体积。
+    """
+    T = I18N["en"]
+    sp = g.get("sp") or {}
+    und = g.get("und") or {}
+    fr = g.get("fr") or {}
+    forms = {fm for fm, _st, _rel in sp} | set(und)
+    if not forms:
+        return ""
+    n_specs = len({(fm, st) for fm, st, _rel in sp})
+    # 只有「多剂型且规格够多 / 规格多 / 释放方式混杂（含 none）」才拆行；其余简单卡保持原样。
+    # 门槛 B（2026-11-19 实测）：2 剂型但只有 1–2 个规格的短句不拆，name 目录净增 +2.17%；
+    # 门槛 A（只要多剂型就拆）是 +3.30%，超出预留，按报告预设收紧。
+    if not ((len(forms) >= 2 and n_specs >= 3) or n_specs >= 5
+            or len(g.get("rel") or ()) > 1):
+        return ""
+
+    def _count(key_n: str, key_one: str, n: int) -> str:
+        if n == 1:
+            return f'<span data-i18n="{key_one}">{esc(T[key_one])}</span>'
+        return (f'<span data-i18n-tpl="{key_n}" data-total="{n}">'
+                f'{esc(T[key_n].replace("{n}", str(n)))}</span>')
+
+    def _row(st: str, rel: str, n: int) -> str:
+        if rel in RELEASE_UNKNOWN:
+            rel_html = (f'<span class="nsrow-rel" data-i18n="name.rel_unrecorded">'
+                        f'{esc(T["name.rel_unrecorded"])}</span>')
+        else:
+            rel_html = f'<span class="nsrow-rel">{_label_html("release", rel, rel)}</span>'
+        cnt = (f'<span class="nsrow-n" data-i18n-tpl="name.records_n" data-total="{n}">'
+               f'{esc(T["name.records_n"].replace("{n}", str(n)))}</span>'
+               if n > 1 else "")
+        return (f'<div class="nsrow"><span class="nsrow-spec">{_label_unit_html(st)}</span>'
+                f'{rel_html}{cnt}</div>')
+
+    def _form_label(fm: str) -> str:
+        if not fm or fm.strip().lower() == "unknown":
+            return (f'<span class="nsf-t" data-i18n="name.form_unstated">'
+                    f'{esc(T["name.form_unstated"])}</span>')
+        return f'<span class="nsf-t">{_form_display(fm, "")}</span>'
+
+    out: list[str] = []
+    kind_order = (("concentration", "name.spec_conc"),
+                  ("volume", "name.spec_vol"),
+                  ("amount", "name.spec_amount"))
+    kind_rank = {k: i for i, (k, _key) in enumerate(kind_order)}
+    for fm in sorted(forms, key=lambda f: (_FORM_RANK_OUTER(f), f)):
+        rows = [(st, rel, v["n"], v["kind"]) for (f2, st, rel), v in sp.items() if f2 == fm]
+        rows.sort(key=lambda r: (kind_rank.get(r[3], 9), _sort_strength(r[0]), r[0], r[1]))
+        form_specs = len({r[0] for r in rows})
+        form_n = fr.get(fm)
+        if form_n is None:
+            form_n = sum(r[2] for r in rows) + (und.get(fm) or 0)
+        inner: list[str] = []
+        # 液体：两类以上才出小标题（有浓度 / 仅体积 / 其他），避免单类时多一行噪声。
+        if fm == "liquid" and len({r[3] for r in rows}) > 1:
+            for kind, key in kind_order:
+                kr = [r for r in rows if r[3] == kind]
+                if not kr:
+                    continue
+                inner.append(f'<p class="nsg-h"><span data-i18n="{key}">{esc(T[key])}</span> '
+                             f'{_count("name.specs_n", "name.specs_one", len({r[0] for r in kr}))}</p>')
+                inner.extend(_row(st, rel, n) for st, rel, n, _kind in kr)
+        else:
+            inner.extend(_row(st, rel, n) for st, rel, n, _kind in rows)
+        if und.get(fm):
+            un = und[fm]
+            cnt = (f'<span class="nsrow-n" data-i18n-tpl="name.records_n" data-total="{un}">'
+                   f'{esc(T["name.records_n"].replace("{n}", str(un)))}</span>'
+                   if un > 1 else "")
+            inner.append(f'<div class="nsrow nsrow-und"><span class="nsrow-spec" '
+                         f'data-i18n="name.spec_unrecorded">{esc(T["name.spec_unrecorded"])}'
+                         f'</span>{cnt}</div>')
+        out.append(
+            f'<details class="nsform"><summary>{_form_label(fm)}'
+            f'<span class="nsf-c">{_count("name.specs_n", "name.specs_one", form_specs)}'
+            f' · {_count("name.records_n", "name.records_one", form_n)}</span></summary>'
+            f'<div class="nsrows">{"".join(inner)}</div></details>')
+    return f'<div class="nsforms">{"".join(out)}</div>'
+
+
 def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                      families: dict | None = None, displays: dict | None = None) -> int:
     families = families or {}
@@ -12625,12 +13015,19 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
             zh_html = (f'<span class="name-zh" data-inn-zh hidden style="display:none">'
                        f'{esc(_zh)}</span>' if _zh else "")
             zh_attr = ' data-zh="1"' if _zh else ""
-            cards.append(
-                f"""<div class="card"><h2><a href="../drug/{sid}.html"{zh_attr}>{esc(g['inn'])}</a>{zh_html}</h2>
-<div class="meta"><span data-i18n="name.countries">Countries</span>:
+            spec_block = _name_spec_block(g)
+            if spec_block:
+                # V3（v0.14.0）：长句已拆成按剂型可展开的行；.meta 只留 Countries，避免重复。
+                meta_html = (f'<div class="meta"><span data-i18n="name.countries">Countries</span>: '
+                             f'{esc("、".join(sorted(g["country"])))}</div>')
+            else:
+                meta_html = f"""<div class="meta"><span data-i18n="name.countries">Countries</span>:
 {esc('、'.join(sorted(g['country'])))} ·
 <span data-i18n="name.form">Form</span>: {_label_join('form', sorted(g['f']))}{strength_bit}
-{f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div></div>"""
+{f" · <span data-i18n='name.release'>Release</span>: {_label_join('release', sorted(rel))}" if rel else ''}</div>"""
+            cards.append(
+                f"""<div class="card"><h2><a href="../drug/{sid}.html"{zh_attr}>{esc(g['inn'])}</a>{zh_html}</h2>
+{meta_html}{spec_block}</div>"""
             )
         single = e.get("n") == 1 and e.get("t") == 1
         single_table = _name_product_table(single_rows.get(e["k"], []), I18N["en"]) if single else ""
@@ -14036,24 +14433,57 @@ def _sort_strength(text: str) -> float:
 HOME_EXAMPLES = {
     # E3（v0.11.10）：「quick」= 首页搜索框下方那组可点击示例，按「商品名 / 中文名 /
     # 包装上一行字（含规格）」混合，让第一次来的人知道能输什么。
+    # V4（v0.14.0）：「quick」改成**跨国查名**一条（链接带 ?q=&src=&country=，点击即出候选、URL 可分享）；
+    # 裸规格字符串（`960 mg/30 mL`）单独搜是 0 候选，所以「按包装文字」示例用带药名的真实包装行（`pack`）。
     "en": {"try1": ["Lipitor 20mg", "Tylenol"], "try2": ["Paracetamol 500mg"],
            "try3": ["Benadryl", "Gaviscon"],
-           "quick": ["Tylenol Extra Strength", "Metformin", "960 mg/30 mL"]},
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
     "es": {"try1": ["Paracetamol 500mg", "Omeprazol 20mg"],
            "try2": ["Ibuprofeno 600mg"], "try3": ["Loratadina 10mg", "Omeprazol 20mg"],
-           "quick": ["Paracetamol 500mg", "Metformina", "960 mg/30 mL"]},
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
     "zh": {"try1": ["泰诺", "Lipitor 20mg"], "try2": ["两只青蛙"],
            "try3": ["Benadryl", "Gaviscon"],
-           "quick": ["泰诺", "Tylenol Extra Strength", "960 mg/30 mL"]},
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
     "zh-Hant": {"try1": ["泰諾", "Lipitor 20mg"], "try2": ["兩隻青蛙"],
                 "try3": ["Benadryl", "Gaviscon"],
-                "quick": ["泰諾", "Tylenol Extra Strength", "960 mg/30 mL"]},
+                "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+                "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
+    # v0.13.8 起 fr/ko 也是 UI 语言：补各自示例（fr 用法国商品名 Doliprane；ko 无 KR 数据，
+    # 沿用国际商品名/通用名，避免示例点了落空）
+    "fr": {"try1": ["Doliprane 1000mg", "Lipitor 20mg"], "try2": ["Paracétamol 500mg"],
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
+    "ko": {"try1": ["Tylenol Extra Strength", "Lipitor 20mg"], "try2": ["Paracetamol 500mg"],
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
 }
 
 
-def _sample_buttons(queries) -> str:
-    return "".join(f'<button type="button" data-q="{esc(q)}">{esc(q)}</button>'
-                   for q in queries)
+def _sample_buttons(queries, lang: str = "en") -> str:
+    """首页示例：普通字符串 → `data-q` 按钮（旧行为）；dict 条目（V4）→ 带市场参数的链接。
+
+    dict 条目形如 {"q": 药名, "src": 来源市场, "country": 目标市场}；链接是**同目录相对参数**
+    （`?q=…&src=…&country=…`），所以 /、/ko/、/fr/ … 各语言副本都落在自己的目录，语言由路径决定。
+    """
+    parts = []
+    for q in queries:
+        if isinstance(q, dict):
+            from urllib.parse import urlencode
+            params = [("q", q.get("q", ""))]
+            for key in ("src", "country"):
+                if q.get(key):
+                    params.append((key, q[key]))
+            label = (I18N.get(lang) or I18N["en"]).get("home.try_cross") or q.get("q", "")
+            parts.append(f'<a class="try-cross" data-i18n="home.try_cross" '
+                         f'href="?{esc(urlencode(params))}">{esc(label)}</a>')
+        else:
+            parts.append(f'<button type="button" data-q="{esc(q)}">{esc(q)}</button>')
+    return "".join(parts)
 
 
 def _app_boot(prefix: str) -> str:
@@ -14257,7 +14687,8 @@ def build_index_page(entries, stats, coverage) -> None:
 </div>
 <!-- E3（v0.11.10）：首页给一组**可点击**示例（商品名 / 中文名 / 包装上一行字），
      点击即填入搜索框并立即搜索；文案四语，取 HOME_EXAMPLES[lang]["quick"]。 -->
-<div class="tryrow"><span class="try-lbl" data-i18n="u1.try">Try:</span>{{examples}}</div>
+<div class="tryrow"><span class="try-lbl" data-i18n="u1.try">Try:</span>{{examples}}
+<span class="try-lbl" data-i18n="home.try_pack">By pack text:</span>{{pack_examples}}</div>
 <div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
 <div id="identity"></div>
 <div id="out"></div>
@@ -14332,7 +14763,8 @@ does not exist. Coverage:</span> {covline}.</div>
                      .replace("{try1}", _sample_buttons(ex["try1"]))
                      .replace("{try2}", _sample_buttons(ex["try2"]))
                      .replace("{try3}", _sample_buttons(ex["try3"]))
-                     .replace("{examples}", _sample_buttons(ex["quick"]))
+                     .replace("{examples}", _sample_buttons(ex["quick"], code))
+                     .replace("{pack_examples}", _sample_buttons(ex["pack"]))
                      .replace("{cat_chips}", _home_cat_chips(code, prefix))
                      .replace("{recent}", _home_recent(prefix, code))
                      .replace("{APP_BOOT}", _app_boot(prefix)))
@@ -14506,7 +14938,11 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
         # 同时给每格挂 `data-i18n-label`：卡片式的 `td::before` 读的是 data-label，
         # 原来永远显示英文（中文界面下也写 "Market"）；长标签列再挂 `data-label-short`
         # （手机只显示短标签，免得把数值挤掉）。数值列另给 title，手机隐藏括号里的绝对数后仍可查。
-        note_plain = esc(re.sub(r"<[^>]+>", "", note).strip())
+        # V6（v0.14.0）：规格覆盖 0.0%（HK/EU 等来源不提供规格）在数值旁直接给原因；
+        # 缺口说明不再只靠 title 悬停，改成 <details> 可点开（见单元格与 CSS）。
+        spec_none = (f' <span class="covspec-none" data-i18n="coverage.spec.no_spec">'
+                     f'{esc(T.get("coverage.spec.no_spec", ""))}</span>'
+                     if n and spec == 0 else "")
         rows.append(
             f'<tr id="market-{c}">'
             f'<td data-label="{esc(T["coverage.col.market"])}" '
@@ -14526,7 +14962,7 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             f'data-label-short="{esc(T.get("coverage.col.spec_short", "Spec"))}" '
             f'data-i18n-label-short="coverage.col.spec_short" '
             f'title="{spct:.1f}% ({spec:,}/{n:,})">{spct:.1f}%'
-            f' <span class="meta">({spec:,}/{n:,})</span></td>'
+            f' <span class="meta">({spec:,}/{n:,})</span>{spec_none}</td>'
             f'<td data-label="{esc(T["coverage.col.last"])}" '
             f'data-i18n-label="coverage.col.last" '
             f'data-label-short="{esc(T.get("coverage.col.last_short", "Synced"))}" '
@@ -14539,7 +14975,8 @@ def build_coverage_page(db: sqlite3.Connection, coverage, source_cover=()) -> No
             f'{esc(asof.get(c) or "—")}</td>'
             f'<td data-label="{esc(T["coverage.col.notes"])}" '
             f'data-i18n-label="coverage.col.notes">'
-            f'<span class="covgap" title="{note_plain}">{note}</span></td></tr>')
+            f'<details class="covgap"><summary data-i18n="coverage.gap.why">'
+            f'{esc(T.get("coverage.gap.why", "Why"))}</summary>{note}</details></td></tr>')
     # L7（v0.12.1）：页头四件套（原 intro 副行保留；页头不再加摘要，避免 3 行 sub）
     head = _page_head("../", f'<h1 data-i18n="coverage.title">{esc(T["coverage.title"])}</h1>',
                       crumb="coverage")
@@ -14717,6 +15154,7 @@ ATC_I18N = {
         "atc.level": "ATC level", "atc.parent": "Parent class", "atc.children": "Child classes",
         "atc.ingredients": "Active ingredients in this class",
         "atc.count": "{n} active ingredients", "atc.more": "and {n} more",
+        "atc.mk_count": "{n} markets",
         "atc.no_data": "No active ingredients recorded under this class yet.",
         "atc.unnamed": "Class name not reviewed yet — the ATC code is authoritative.",
         "atc.ai_note": ("Class and category names are editorial or AI-assisted translations; "
@@ -14789,6 +15227,7 @@ ATC_I18N = {
         "atc.level": "Nivel ATC", "atc.parent": "Clase superior",
         "atc.children": "Clases inferiores", "atc.ingredients": "Principios activos de esta clase",
         "atc.count": "{n} principios activos", "atc.more": "y {n} más",
+        "atc.mk_count": "{n} mercados",
         "atc.no_data": "Todavía no hay principios activos registrados en esta clase.",
         "atc.unnamed": "Nombre de clase sin revisar — el código ATC es la referencia.",
         "atc.ai_note": ("Los nombres de clase y categoría son traducciones editoriales o "
@@ -14858,7 +15297,8 @@ ATC_I18N = {
                              "每个页面列出本站收录的该类别活性成分。"),
         "atc.level": "ATC 层级", "atc.parent": "上级类目", "atc.children": "下级类目",
         "atc.ingredients": "该类别下的活性成分", "atc.count": "{n} 个活性成分",
-        "atc.more": "另有 {n} 个", "atc.no_data": "该类别暂未收录活性成分。",
+        "atc.more": "另有 {n} 个", "atc.mk_count": "{n} 个市场",
+        "atc.no_data": "该类别暂未收录活性成分。",
         "atc.unnamed": "类别名尚未校订——以 ATC 码为准。",
         "atc.ai_note": "类别名称为编辑或 AI 辅助译名；只有 ATC 码与 WHO 层级是权威依据。",
         "atc.source_note": ("ATC 码与层级引自 WHO Collaborating Centre for Drug Statistics "
@@ -14908,7 +15348,8 @@ ATC_I18N = {
                              "每個頁面列出本站收錄的該類別有效成分。"),
         "atc.level": "ATC 層級", "atc.parent": "上級類目", "atc.children": "下級類目",
         "atc.ingredients": "該類別下的有效成分", "atc.count": "{n} 個有效成分",
-        "atc.more": "另有 {n} 個", "atc.no_data": "該類別暫未收錄有效成分。",
+        "atc.more": "另有 {n} 個", "atc.mk_count": "{n} 個市場",
+        "atc.no_data": "該類別暫未收錄有效成分。",
         "atc.unnamed": "類別名尚未校訂——以 ATC 碼為準。",
         "atc.ai_note": "類別名稱為編輯或 AI 輔助譯名；只有 ATC 碼與 WHO 層級是權威依據。",
         "atc.source_note": ("ATC 碼與層級引自 WHO Collaborating Centre for Drug Statistics "
@@ -15383,11 +15824,9 @@ def _lang_block_text(key: str, **fmt: object) -> str:
 
     Q13（v0.13.6）：fr 上线（v0.11.4）后一直没进这几块 —— 法语界面上成分页
     「N 个记录 · K 个厂家」/「还有 N 个」/「有商品名」等块是**空白**（`_lang_blocks`
-    只显示与当前语言相同的那一块）。这里把已上线的语言都算进来：文案由
-    `_merge_static_i18n` 在 main() 里先铺好 I18N["fr"]，所以调用时一定取得到。
+    只显示与当前语言相同的那一块）。这里把**当前启用语言**都算进来（v0.13.8 起 6 语，
+    含 ko）；文案由 `_merge_static_i18n` 在 main() 里先铺好，所以调用时一定取得到。
     """
-    # v0.13.8 热修：原来硬编码 en/es/zh/zh-Hant + fr，漏了 ko → /ko/ 的
-    # cat/atc/drug 页有 340 个块空白。改为直接取当前启用语言（现查 6 语）。
     langs = list(I18N_REQUIRED_LANGS)
     out = {}
     for lang in langs:
@@ -15505,8 +15944,8 @@ def _status_summary_html(statuses: dict[str, dict[str, int]]) -> str:
 
     - 优先级 active > released > discontinued > withdrawn > unknown：只要该市场有在售记录，
       这个国家就归「在售」，同国的已停售/已撤市/未知不再并列；没有在售才显示其最强状态。
-    - 输出 `<details class="st-details">`：折叠态一行只显示第一组状态 + 前 5 个市场码 +
-      「另有 N 个」；展开列全部「状态 → 市场码」。无 JS 可点、键盘可达，不丢信息。
+    - 输出 `<details class="st-details">`：折叠态写「状态词 + N 个市场」（每组一段，N = 展开后
+      该组的市场码个数），展开列全部「状态 → 市场码」。无 JS 可点、键盘可达，不丢信息。
     - 单条产品记录的状态仍在「详情」表的状态列（`detPanelHTML` 未改）。
     """
     if not statuses:
@@ -15538,13 +15977,17 @@ def _status_summary_html(statuses: dict[str, dict[str, int]]) -> str:
                if st in ("discontinued", "withdrawn") else "st-text")
         return (f'<span class="{cls}" data-i18n="drug.status.{esc(st)}">'
                 f'{esc(I18N["en"].get("drug.status." + st, st))}</span>')
-    first_st, first_cs = groups[0]
-    shown = first_cs[:5]
-    total_codes = sum(len(cs) for _st, cs in groups)
-    remaining = total_codes - len(shown) + max(0, len(groups) - 1)
-    summary = (_word(first_st) + ' <span class="atc-mk">' + esc(" ".join(shown)) + '</span>')
-    if remaining > 0:
-        summary += ' · ' + _lang_block_text("atc.more", n=remaining)
+    # V5（v0.14.0）：折叠态改成「每组状态 + N 个市场」，市场名只在展开态出现。
+    # 旧文案「另有 N 个」把「剩下的市场码」和「剩下的状态组」加在一起（布洛芬 14 个在售市场
+    # + 1 个未知市场 → 折叠显示「另有 11 个」），单位猜不出，和展开后的市场名也对不上。
+    # 数字走 data-i18n-tpl（data-total → {n}）：一处摘要只多 1 个元素，不复制 5–6 份语言块。
+    def _n_markets(n: int) -> str:
+        return esc(I18N["en"]["atc.mk_count"].replace("{n}", str(n)))
+
+    summary = ' · '.join(
+        f'{_word(st)} <span class="atc-mk" data-i18n-tpl="atc.mk_count"'
+        f' data-total="{len(cs)}">{_n_markets(len(cs))}</span>'
+        for st, cs in groups)
     body = " · ".join(
         f'<span class="st-line">{_word(st)} '
         f'<span class="atc-mk">{esc(" ".join(cs))}</span></span>'
@@ -16006,8 +16449,14 @@ def build_category_pages(db: sqlite3.Connection) -> int:
         cf_chips = [f'<button type="button" class="lf-chip on" data-sub-filter="" '
                     f'data-i18n="lf.all">{esc(T.get("lf.all", "All"))}</button>']
         for _k in sorted(sub_prefix, key=lambda x: (-sub_prefix[x], x))[:12]:
+            # V5（v0.14.0）：子类 chip 的 ATC 代码后面配**当前语言**的分类名（行内语言块；
+            # fr/ko 数据无译文时 _atc_names() 给英文 +「(EN)」标注，不机翻）。
+            # chip 在默认收起的「子类」浮层里，不影响首屏条目。
+            _cf_name = _lang_inline(_atc_names(_k))
             cf_chips.append(f'<button type="button" class="lf-chip" data-sub-filter="{esc(_k)}">'
-                            f'<code>{esc(_k)}</code> <span class="n">{sub_prefix[_k]}</span></button>')
+                            f'<code>{esc(_k)}</code>'
+                            + (f' <span class="lf-chip-nm">{_cf_name}</span>' if _cf_name else '')
+                            + f' <span class="n">{sub_prefix[_k]}</span></button>')
         cat_finder = (
             f'<div class="catfinder" id="catfinder">'
             f'<div class="cf-row"><input type="search" id="catq" class="cf-input" autocomplete="off" '

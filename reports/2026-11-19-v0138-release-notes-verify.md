@@ -11,7 +11,7 @@
 1. **阶段 1 完成**：`data/release_notes_i18n.json` 末尾追加 `v0.13.8` 块（`date` + zh/en/es/fr/zh-Hant/ko 六语 × **3 条**），
    内容照 `CHANGELOG.md` 第一节；历史块顺序与键序一字未动（JSON 字节 diff 只增不改历史内容）。
    `_meta.versions` 76 → **77**、`_meta.items` 308 → **311**（与现查一致；Lead 2026-11-18 给 CHANGELOG 补第 3 条后 310 → 311）。
-2. **门禁已绿**：`deploy/i18n_check.py`（site-ui 正在改的版本，含 ko 分支）→ **FAIL 0 / WARN 2 / INFO 25**，
+2. **门禁已绿**：`deploy/i18n_check.py`（site-ui 已合入 ko 分支的版本）→ 最终 **FAIL 0 / WARN 2 / INFO 26**，
    `release notes: CHANGELOG 77 版 / json 77 版，最新 v0.13.8 译文齐；缺 0 版`；六语有效字典各 **667 键**。
    `etl/check_translations.py` → release notes **77 版 / 311 条 / 0 findings**（数字 / 占位符 / HTML 逐条过）。
 3. **发布链兜底已泛化**（Lead 追加）：`verify_live.py` 的 `LANG_ROOTS` 加第 6 条 `("ko/", "/ko/")`；
@@ -21,6 +21,12 @@
    （`data/markets.json` enabled 15 项），与 v0.13.8 文案里的「15 个市场 / 594,781 条不变」一致。
 5. **移交 site-ui 两个渲染缺口**（不在本工位写域，见 §4）：`/fr/`、`/ko/` 的 whats-new 正文会被 JS 全部隐藏；
    `/ko/` 首页「最近更新」的一句话会被英文顶替。
+6. **阶段 2 最终结论（重建 #2 产物）：全部通过。**
+   语言块复扫 **22 页 / 1316 容器 / `noVisible` 0 / `emptyVisible` 0（PASS）**，ko 的 cat/atc/drug 也清零；
+   副本页 404 **顺带清零**（22 页逐页 `4xx=0`）；`i18n_check` **FAIL 0**（最新版六语译文齐）；
+   静态核验全绿（hreflang 8 条 / canonical / sitemap 75,609·ko 7·重复 0 / whats-new 六语 × 3 条 / liners 韩语）；
+   首屏 ko 四档 **24 组扫描、无构建退化**（对同版本 zh：AFCR/chrome/字号/溢出 0 差异，items 差 0.5–2.5 行系韩文标签更长；
+   未达标仅 Q18 已知 `results@390`、`coverage@390` 的 items）。4 张 `docs/img/ko-*.png`（1440×900）已交付。
 
 ## 1. 阶段 1：`data/release_notes_i18n.json` 新增 v0.13.8
 
@@ -143,25 +149,28 @@ SELECT COUNT(*) FROM product            -- 594,781
   JS 注入后没有被英文顶替。v0.13.7 / v0.13.6 仍是英文兜底——这两版本来没有 ko 译文，属既有回落口径，不是缺陷。
 - 但同一次扫描又发现**同一类「只生成 4 语 label」的更大缺口**，见 §5.3；不在 §4 这两条修复范围内。
 
-## 5. 阶段 2 实测（dist = v0.13.8 首轮构建产物，2026-11-18）
+## 5. 阶段 2 实测（2026-11-18，三版产物）
 
-> 用途：先固定「重建前」的事实与证据；等 Lead 重建（修 §5.3 / §5.4）后，同一批命令复跑一次作最终数字。
+> 用途：固定「改前 → 修后」的事实链。三版产物：**首轮构建**（six-language 初版）→ **重建 #1**（壳层/分类/coverage 修复 + 六语 i18n + 数据块 en 兜底）→ **重建 #2**（`_lang_block_text` 补 ko，2026-11-18 晚）。
 > 本机静态服务：`& $py serve.py 8000`（服务 `site/dist`，**不用线上**），全程只读 `dist`。
 
-### 5.1 i18n 复跑：FAIL 0
+### 5.1 i18n 复跑：FAIL 0（最终源 = 干净重建 #2）
 
 ```
-& $py deploy/i18n_check.py --json .tmp/i18n-stage2.json --max-list 5
+& $py deploy/i18n_check.py --json .tmp/i18n-final2.json --max-list 5     # 重建 #2 产物
 == i18n 一致性门禁（en / es / zh / zh-Hant / fr / ko）==
 有效字典: en 667 / es 667 / zh 667 / zh-Hant 667 / fr 667 / ko 667 键
-fr 译文: 663/667 键（99.4%，其余回落英文；既有缺口）
+fr 译文: 663/667 键（99.4%，其余回落英文；既有缺口，非本版引入）
 release notes: CHANGELOG 77 版 / json 77 版，最新 v0.13.8 译文齐；缺 0 版（0 条待译）
 硬编码文案: 0 处 {}
 伪翻译(值==en): 106 条 {'INFO': 104, 'WARN': 2}
-FAIL 0 / WARN 2 / INFO 25        （WARN 2 = 既有 es form.kit / form.gas，与本改动无关）
+FAIL 0 / WARN 2 / INFO 26        （WARN 2 = 既有 es form.kit / form.gas，与本改动无关）
 ```
 
-### 5.2 静态核验（全部通过，重建后按同一脚本复核）
+- 重建 #1 的中间态曾跑到 **683 键**（那次修法引入了分类/兜底专用键）；干净重建 #2 用「v0.13.8 + 一行
+  `_lang_block_text` 热修」后回到 **667 键**，六语键集仍一致、`FAIL 0`。
+
+### 5.2 静态核验（重建 #2 产物复跑，全部通过）
 
 | 项 | 读数 | 判定 |
 |---|---|---|
@@ -171,17 +180,36 @@ FAIL 0 / WARN 2 / INFO 25        （WARN 2 = 既有 es form.kit / form.gas，与
 | 根首页 hreflang | 含 `ko → https://drugcrossref.com/ko/` + `x-default` | 通过 |
 | 语言菜单 | `/ko/` 首页出现「한국어」3 次（菜单 + 移动抽屉） | 通过 |
 | `sitemap.xml` | `<url>` **75,609** / `<loc>` 75,609 / 其中 ko **7** / 重复 `<loc>` **0** | 通过 |
-| `/ko/whats-new.html` 正文 | 首轮构建：v0.13.8 小节六语块 × 2 条；ko 块 556 字符、含韩国语正文（重建后应 × 3 条） | 通过（重建后复验 3 条） |
-| `/ko/` 首页 liners | v0.13.8 = 韩语；v0.13.7/6 = 英文（无 ko 译文的既有回落） | 通过 |
+| `/ko/whats-new.html` 正文 | v0.13.8 小节**六语块 × 3 条**（`zh/en/es/fr/zh-Hant/ko` 各 3 个 `<li>`） | 通过 |
+| `/ko/` 首页 liners | 服务端 `rel.v0.13.8` = 「여섯 번째 인터페이스 언어 추가:」；`assets/i18n.ko.js` 里同一键也是韩语 → JS 注入后不会被英文顶替；v0.13.7/6 = 英文（这两版无 ko 译文，既有回落口径） | 通过 |
 
 ### 5.3 P1：`data-lang-block` 只生成 en/es/zh/zh-Hant → ko/fr 页面大面积空白
 
 **扫描口径**（脚本 `.tmp/scan_lang_blocks.py`，headless Chrome + 只读静态服务，1440x900）：
 对每个「直接子节点里有 `data-lang-block` 的容器」判两件事——
 `noVisible` = 一个可见块都没有（整块空白）；`emptyVisible` = 有可见块但可见文本为空。
-「可见」= `display`/`visibility` 正常且 `offsetParent` 不为 null；语言由 `applyLang` 跑完后取 `window.LANG`。
+「可见」= 该块 `display`/`visibility` 正常，文本用 `textContent`（**不收 `offsetParent` / `innerText`**：
+折叠抽屉里的导航块本身是隐藏容器，用 `innerText`/`offsetParent` 会把「有 ko 块但抽屉没展开」误判成空白。
+口径修正的对照见下面的收敛链）。
 
-**改前（v0.13.8 首轮构建，2026-11-18，22 页）：1316 个容器 / `noVisible` 823 / `emptyVisible` 148**
+**收敛链（22 页 / 1316 个容器）**
+
+| 产物 / 口径 | noVisible | emptyVisible | 说明 |
+|---|---:|---:|---|
+| 首轮构建（修复前，口径 v1：+offsetParent/innerText） | **823** | **148** | 是 v1 口径读数；v1 会把隐藏容器（抽屉/折叠块）误判为空白，故 148 含误报，不能当精确真值 |
+| 重建 #1（壳层/分类/coverage/六语 i18n/数据块 en 兜底，口径 v1） | 401 | 500 | v1 把「隐藏抽屉里有 ko 块」误判为空白（样本全是 `A` 导航链） |
+| 重建 #1（口径 v2：display/visibility + textContent） | **340** | **0** | 误报清零，剩下的是真缺口 |
+| 重建 #2（`_lang_block_text` 补 ko，口径 v2） | **0** | **0** | **PASS**（22 页逐页 0/0，见 §5.6） |
+
+重建 #1 在口径 v2 下的 340 个 `noVisible` 全部落在 **ko 的 6 个页面**，块语言清一色 `en,es,zh,zh-Hant,fr`（缺 ko）：
+`/cat/analgesics.html?lang=ko` 80、`/cat/antibiotics.html?lang=ko` 126、`/atc/R06A.html?lang=ko` 27、
+`/atc/N02BE.html?lang=ko` 2、`/drug/acetaminophen.html?lang=ko` 92、`/drug/tirzepatide.html?lang=ko` 13；
+涉及 `.ln`（规格/记录摘要）、`.ms-more`（还有 N 个）、`.sub.atc-count`（N 个活性成分）、`.und-h`（未公开规格块头）、
+full-list 链接。**单一根因**：`_lang_block_text()`（`site/build.py:15798`）硬编码
+`["en","es","zh","zh-Hant"] + ["fr"]`，v0.11.4 加了 fr 却漏了 ko；`.atc-src-line` 等直接走
+`I18N_REQUIRED_LANGS` 的块已是 6 语，证明其余循环都修到了。重建 #2 改这一行后应收敛到 0/0。
+
+**改前（v0.13.8 首轮构建，2026-11-18，22 页，口径 v1）：1316 个容器 / `noVisible` 823 / `emptyVisible` 148**
 
 | 页面（URL） | 语言 | 容器 | 无可见块 | 可见但空 | 明细 |
 |---|---|---:|---:|---:|---|
@@ -229,43 +257,88 @@ FAIL 0 / WARN 2 / INFO 25        （WARN 2 = 既有 es form.kit / form.gas，与
   但控制台报错、且任何依赖这两个 JSON 的增强功能在语言副本页上静默失效。
 - 修后断言：六个语言副本页加载后 **0 条 4xx**，且请求路径是站点根相对（`/data/sources.json`、`/data/terms.json`），
   不再是 `/<lang>/data/...`。
+- **重建 #1 复验：已修**。22 页语言块扫描里逐页统计的 4xx 全为 **0**（首轮构建时 warn/coverage/glossary/about/confused/whats-new
+  各 2 条 404，重建后 0）；页面主体照旧（覆盖表 15 行）。
+- **重建 #2 终验：仍为 0**。四张 `/ko/` 截图（首页 / 结果 / 成分 / 覆盖）加载后控制台与静态服务日志均无 4xx
+  （`docs/img/ko-*.png` 由 headless Chrome 逐页采集，脚本同时记录 4xx=空）。
 
-### 5.5 修后应验的断言（重建后逐条打勾）
+### 5.5 修后应验的断言（全部通过，重建 #2 终验）
 
-- [ ] `curl` 式扫描：`.tmp/scan_lang_blocks.py`（22 页）→ **`noVisible 0 / emptyVisible 0`**（改前 823 / 148）。
-- [ ] `/ko/index.html`：`.catgrid a.catchip` **8/8 文本非空**、`.sn-cats a` **16/16 非空**（`/fr/` 同）。
-- [ ] `/ko/warn.html`：`article.warn-item` 正文 **40/40 非空**（英文兜底也算过）。
-- [ ] `/cat/*?lang=ko`、`/atc/*?lang=ko`、`/drug/*?lang=ko`：空容器只剩 **0**（导航分类修完后应为 0）。
-- [ ] 六个语言副本页控制台 **0 条 404**；Network 里 `data/sources.json`、`data/terms.json` 为 200。
-- [ ] `/ko/whats-new.html`：v0.13.8 小节 **六语块 × 3 条**，ko 正文非空。
-- [ ] hreflang / canonical / `sitemap.xml`（ko 7 条、无重复）/ html lang=ko 与本报告 §5.2 一致。
-- [ ] 首屏守卫 ko 四档 + 与基线对比（见 §6 命令）。
+- [x] `/ko/index.html`：`.catgrid a.catchip` **8/8 文本非空**、`.sn-cats a` **16/16 非空**（`/fr/` 同；重建 #1/#2 扫描该页 0/0）。
+- [x] `/ko/warn.html`：**56 个容器 0/0**（含 40 条警示正文；数据型正文按 en 兜底 + `(EN)` 标注）。
+- [x] `/ko/coverage.html`、`/ko/glossary.html`、`/ko/about.html`、`/ko/confused.html`、`/ko/whats-new.html`：**0/0**。
+- [x] 六个语言副本页控制台 **0 条 404**；`data/sources.json`、`data/terms.json` 不再落到 `/<lang>/data/`。
+- [x] `/ko/whats-new.html`：v0.13.8 小节 **六语块 × 3 条**，ko 正文非空。
+- [x] hreflang / canonical / `sitemap.xml`（ko 7 条、无重复）/ html lang=ko / 语言菜单「한국어」。
+- [x] `/cat/*?lang=ko`、`/atc/*?lang=ko`、`/drug/*?lang=ko`：重建 #1 的 **340 个 noVisible → 重建 #2 = 0**。
+- [x] 语言块总扫描：**22 页 / 1316 容器 / 0 / 0 → PASS**（见 §5.6）。
+- [x] 首屏守卫 ko 四档 + 与基线对比（见 §5.7）。
 
-### 5.6 改后复扫（待重建后填）
+### 5.6 改后复扫（重建 #2 = 0/0 PASS）
 
 ```powershell
 $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
-& $py .tmp/scan_lang_blocks.py --json .tmp/lang-blocks-after.json
-# 期望：22 页 / 1316 容器 / noVisible 0 / emptyVisible 0 → PASS
+& $py .tmp/scan_lang_blocks.py --json .tmp/lang-blocks-final.json
+# 22 页 / 1316 容器 / noVisible 0 / emptyVisible 0 → PASS
 ```
 
-| 指标 | 改前（首轮构建） | 改后（重建产物） |
-|---|---:|---:|
-| 容器数 | 1316 | 待填 |
-| 无可见块 `noVisible` | **823** | 待填 |
-| 可见但空 `emptyVisible` | **148** | 待填 |
-| 断言 | FAIL | 目标 0 / 0 |
+| 指标 | 首轮构建（口径 v1） | 重建 #1（口径 v2） | 重建 #2（口径 v2） |
+|---|---:|---:|---:|
+| 容器数 | 1316 | 1316 | **1316** |
+| 无可见块 `noVisible` | 823 | **340**（全是 ko 的 cat/atc/drug，5 语块） | **0** |
+| 可见但空 `emptyVisible` | 148（含 v1 误报） | **0** | **0** |
+| 逐页 4xx | 每副本页 2 条（`/<lang>/data/*.json`） | 0 | **0** |
+| 断言 | FAIL | FAIL（剩 `_lang_block_text` 缺 ko） | **PASS** |
 
-## 6. 重建后一把跑（命令已备好）
+22 页逐页读数：`/ko/` 与 `/fr/` 的首页、warn、coverage、glossary、whats-new、cat×2、atc×2、drug×2 **全部 0/0**；
+容器数与原清单一致（24/56/16/17/93/100/145/51/19/108/29），没有页型被跳过。
+
+### 5.7 首屏守卫（四档）+ 4 张截图（重建 #2）
+
+**zh 全量 vs v0.13.7 基线**（`deploy/first_screen_check.py --baseline .tmp/first-screen/ci.json`）：
+24 组扫描（6 页型 × 4 视口）、不稳定 0、疑似 0、**baseline 退化 0 项**；未达标 3 项且全是 items（Q18 已知）：
+`results@390` 3.5、`drug@1440` 4.5、`coverage@390` 3.5（门槛 5）。AFCR / chrome / 字号 / 溢出全部在阈值内。
+
+**ko 四档**（`.tmp/run_first_screen_ko.py`，home/results/coverage 走 `/ko/` 副本页，drug/name/atc 走 `?lang=ko`）：
+24 组扫描、不稳定 0、疑似 0；未达标 **2 项**：`results@390` items 3.5、`coverage@390` items 3.0（同为 Q18 已知）。
+对 v0.13.7 zh 基线报 9 项 items 差（-5.2% ~ -15.4%）；与**同版本 zh 读数**逐组比对后确认是韩文标签更长的排版差异：
+
+| 页面×视口 | zh items | ko items | 差 |
+|---|---:|---:|---:|
+| home 768 / 1440 | 9 / 9 | 8.5 / 8 | -0.5 / -1 |
+| atc 390 / 768 / 1440 / 2560 | 7.5 / 13 / 13.5 / 48.5 | 6.5 / 11 / 12 / 46 | -1 / -2 / -1.5 / -2.5 |
+| coverage 390 / 768 / 1440 / 2560 | 3.5 / 8.5 / 6 / 15 | 3 / 8 / 5.5 / 14.5 | -0.5 ~ -1 |
+| drug 390 / 768 / 1440 | 5.5 / 5.5 / 4.5 | 6 / 6 / 5 | **+0.5**（ko 更多） |
+| results 768 | 10.5 | 11 | **+0.5**（ko 更多） |
+
+- 其余指标：AFCR / chrome_ratio / overlay_ratio 差异 >0.02 的组 **0**；横向溢出 **0**；正文 16px、辅助 13–14px 全站一致。
+- 结论：**ko 无构建退化**（zh 对基线 0 项；ko 的条目差全部可由语言文本长度解释，且 drug/results 反而更多），
+  未达组与 zh 同为 Q18 的 `results@390` / `coverage@390`，留给 v0.14.0。
+- JSON：`.tmp/first-screen/v0138-zh.json`、`.tmp/first-screen/v0138-ko.json`；截图目录 `.tmp/first-screen/shots-v0138{,-ko}`。
+
+**交付截图（1440×900，headless Chrome + 本机静态服务，非线上）**
+
+| 文件 | 页面 | 大小 |
+|---|---|---:|
+| `docs/img/ko-home.png` | `/ko/`（关掉首访「3 步用法」引导的常态视图：韩文分类 chip + 最近更新韩文 liner） | 58,821 B |
+| `docs/img/ko-results.png` | `/ko/?q=tylenol`（86 个匹配、9 行结果、国家筛选韩文） | 86,941 B |
+| `docs/img/ko-drug.png` | `/drug/acetaminophen.html?lang=ko`（14 市场 / 13,661 记录，`.ln` 等标签韩文，不再空白） | 78,408 B |
+| `docs/img/ko-coverage.png` | `/ko/coverage.html`（15 行覆盖表，表头/缺口说明韩文） | 82,451 B |
+
+改前证据（保留）：`docs/img/ko-home-before-fix.png`（8 个空 chip）、`docs/img/ko-cat-blank-before-fix.png`（分类页 H1 与 ATC 列表空白）。
+
+## 6. 重建后的最终一把跑（已执行，2026-11-18 重建 #2）
+
+> 本节命令已在重建 #2 产物上逐条执行；JSON / 截图落 `.tmp/`，交付截图落 `docs/img/`。
 
 ```powershell
 $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
 
-# 0) 语言块可见性复扫（22 页；期望 noVisible 0 / emptyVisible 0）
-& $py .tmp/scan_lang_blocks.py --json .tmp/lang-blocks-after.json
+# 0) 语言块可见性复扫（22 页；结果 0 / 0 → PASS）
+& $py .tmp/scan_lang_blocks.py --json .tmp/lang-blocks-final.json
 
-# 1) i18n（应 FAIL 0）
-& $py deploy/i18n_check.py --json .tmp/i18n-final.json --max-list 5
+# 1) i18n（FAIL 0）
+& $py deploy/i18n_check.py --json .tmp/i18n-final2.json --max-list 5
 
 # 2) 静态核验：hreflang/canonical/sitemap/whats-new + 目标落地
 & $py .tmp/check_ko_pages.py
@@ -296,3 +369,63 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
       `/ko/`（或 `/fr/`）会在 `verify_live` 里报 `lang-root-/ko/` 失败，需重放 `fix_fr_root.py`。
 - [ ] `verify_live.py` 现在会逐个验 6 条语言根（含 `/ko/`），`hreflang-links` 下限 6；
       `/ko/` 404 不会再被 0 failures 漏掉（v0.11.4 `/fr/` 的教训）。
+
+## 8. v0.14.0（2026-11-19，追加）
+
+> 同一工位、同一 JSON 的下一版：CHANGELOG 新增 `## v0.14.0 — 2026-11-19`（5 条），要求六语各 5 条译文。
+> 本条先记「文案落盘 + 门禁」，最终产物核验等 `dist ready #3`。
+
+### 8.1 `data/release_notes_i18n.json` 新增 v0.14.0
+
+- 位置：文件末尾 `v0.13.8` 之后；键序与前块一致（`date, zh, en, es, fr, machine_translated, zh-Hant, ko`）。
+- 六语各 **5 条**，`zh` 与 CHANGELOG v0.14.0 五条逐字一致（脚本逐条 `identical=True`）。
+- `_meta.versions` 77 → **78**、`_meta.items` 311 → **316**（现查一致）。
+- 译文口径：韩语沿用 `.tmp/ko_i18n.py`（상품명 / 일반명 / 성분 / 속칭 / 옛 이름 / 별칭 / 제형 / 함량 /
+  방출 방식 / 카테고리 / 커버리지 / 판매 중）；es 用 `página de nombre` / `forma farmacéutica` / `concentración`；
+  fr 用 `page de nom` / `forme galénique` / `dosage`。数字逐语保留：`960 mg/30 mL`、`0 候选`、`4/7/1`、
+  `1,404`（es 1.404 / fr 1 404）、`漏 0`、`11`、`0.0%`、`390px`、`3.5 → ≥5`。
+
+### 8.2 门禁（文案落盘后立即跑）
+
+```
+& $py deploy/i18n_check.py --json .tmp/i18n-v0140.json --max-list 5
+有效字典: en 684 / es 684 / zh 684 / zh-Hant 684 / fr 684 / ko 684 键
+fr 译文: 681/684 键（99.6%，既有缺口）
+release notes: CHANGELOG 78 版 / json 78 版，最新 v0.14.0 译文齐；缺 0 版（0 条待译）
+FAIL 0 / WARN 2 / INFO 26        （WARN 2 = 既有 es form.kit / form.gas）
+```
+
+- `etl/check_translations.py`：`release_notes = {'versions': 78, 'items': 316}`、v0.14.0 相关 findings **0**、
+  全库 findings **0**（数字 / 占位符 / HTML 逐条过）。
+
+### 8.3 最终产物核验（等 `dist ready #3`）
+
+> 2026-11-18 Lead 在最终构建上发现一个可修回归并已派 site-ui 修：**`results@768` items 10.5 → 9.5**
+> （结果页仍显示 `.tryrow` 示例区，V4 给示例加了第二行后 768 宽度换行、占掉 +40px）。
+> 修法：一行 CSS `html.has-q .tryrow{display:none}`；修后**再重建一次**，`dist ready #3` 为最终产物。
+> 验收要求：`results@768` 回到 **≥10.5**（与 `.tmp/first-screen/ci.json` 基线 10.5 持平，baseline 退化 0）。
+
+| 项 | 参数 / 目标 |
+|---|---|
+| 语言块扫描 | `.tmp/scan_lang_blocks.py --json .tmp/lang-blocks-v0140.json`；22 页（ko + fr），目标 **0 / 0** |
+| i18n | `deploy/i18n_check.py --json .tmp/i18n-final3.json`；**FAIL 0**，`最新 v0.14.0 译文齐` |
+| 静态核验 | `.tmp/check_ko_pages.py` + `.tmp/check_hreflang_targets.py`；hreflang 8 条 / canonical / sitemap 75,609·ko 7·重复 0 / whats-new v0.14.0 **六语 × 5 条** / liners |
+| zh 首屏 | `deploy/first_screen_check.py --json .tmp/first-screen/v0140-zh.json --baseline .tmp/first-screen/ci.json --shots .tmp/first-screen/shots-v0140`；**6 页型 × 4 视口 = 24 组**，`results@768` 目标 **≥10.5**、baseline 退化 **0** |
+| ko 首屏 | `.tmp/run_first_screen_ko.py --json .tmp/first-screen/v0140-ko.json --baseline .tmp/first-screen/ci.json --shots .tmp/first-screen/shots-v0140-ko`；24 组四档 |
+| 截图 | `.tmp/shoot_ko_v0140.py` → `docs/img/v0140-ko-{home,results,drug,coverage}.png`（1440×900，本地服务；首页先关「3 步用法」引导） |
+
+**`results@768` 修复前后（待最终产物回填）**
+
+| 产物 | results@768 items | 说明 |
+|---|---:|---|
+| v0.13.7 基线（`.tmp/first-screen/ci.json`） | 10.5 | 发布门槛参照 |
+| v0.14.0 首次最终构建（修复前） | **9.5** | `.tryrow` 示例区在 768 占 +40px |
+| v0.14.0 重建（`html.has-q .tryrow{display:none}` 后） | 目标 **≥10.5** | 待 `dist ready #3` 回填 |
+
+- [ ] 语言块扫描（`.tmp/scan_lang_blocks.py`，22 页含 ko + fr）→ 目标 **0 / 0**；
+      新增页面类型/锚点若超出 22 页清单，按新页补扫（v0.14.0 的「也叫」区块在成分页，已在 drug 两页覆盖）。
+- [ ] `i18n_check` 复跑 → FAIL 0，`最新 v0.14.0 译文齐`。
+- [ ] 静态核验：hreflang / canonical / sitemap（ko 7）/ whats-new v0.14.0 六语 × 5 条 / liners。
+- [ ] zh 首屏四档对 `.tmp/first-screen/ci.json` 基线（`results@768` ≥10.5）；ko 四档（`.tmp/run_first_screen_ko.py`）。
+- [ ] 4 张截图另存 `docs/img/v0140-ko-{home,results,drug,coverage}.png`（1440×900，本地服务）。
+      v0.14.0 影响首页示例、名字页规格折叠、成分页「也叫」、分类/覆盖页计数、手机结果卡，四张都要重截。

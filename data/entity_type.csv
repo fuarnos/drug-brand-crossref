@@ -12795,7 +12795,6 @@ nicotine-betadex-complex,inn_drug,default_inn,medium,INN-like name; categories={
 2-4-dichlorobenzyl-alcohol,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,109,CZ,0
 abrotanum-dilutio-homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',2,CZ,0
 abrus-precatorius-6-c,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '6 C',2,CZ,0
-acetic-acid-glacial,material,cz_excipient,low,名称含辅料/溶剂词 'GLACIAL'（词表口径，需人工抽检）,6,CZ,0
 acetyltyrosine,,cz_inn_shape_unconfirmed,low,INN 词尾 'INE'；WHO 名录（1737 条）与库内成分名均未命中,10,CZ,0
 achillea-millefolium-3-d,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '3 D',1,CZ,0
 achillea-millefolium-4-d,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '4 D',2,CZ,0
@@ -13106,7 +13105,6 @@ escherichia-coli-metabolites,,cz_unknown_no_rule,low,规则未命中（非顺势
 escin,,cz_inn_shape_unconfirmed,low,INN 词尾 'CIN'；WHO 名录（1737 条）与库内成分名均未命中,14,CZ,0
 estradiol-benzoate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,1,CZ,0
 ethinylestradiol-betadex-clathrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,17,CZ,0
-ethinylestradiol-micronized,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,20,CZ,0
 ethoxylated-alcohols-c10-16,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,7,CZ,0
 ethoxylated-propoxylated-alcohols-c10-16,material,cz_excipient,low,名称含辅料/溶剂词 'ALCOHOL'（词表口径，需人工抽检）,7,CZ,0
 ethyl-icosapentate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,3,CZ,0
@@ -13142,7 +13140,6 @@ ferric-sucrose,,cz_inn_shape_unconfirmed,low,INN 词尾 'OSE'；WHO 名录（173
 ferric-sucrose-with-starch,,cz_excipient_ambiguous,low,辅料词 'STARCH' 命中，但名称是共处理写法（'With Starch'），不是辅料本体：留空待人工,5,CZ,0
 ferrosi-iodidum-12-d,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '12 D',2,CZ,0
 ferrous-chloride-tetrahydrate,,cz_inn_shape_unconfirmed,low,INN 词尾 'ATE'；WHO 名录（1737 条）与库内成分名均未命中,1,CZ,0
-ferrous-sulfate-dried,,cz_botanical_ambiguous,low,生药词 'DRIED' 命中，但名称是矿物/金属盐写法（'Ferrous'），不是植物类别：留空待人工,4,CZ,0
 ferrum-metallicum-dilutio-homeopathica,homeopathic,cz_homeopathic_dilutio_word,high,名称含 'DILUTIO',2,CZ,0
 ferrum-phosphoricum-5c,homeopathic,cz_homeopathic_dilution_number,high,名称含数字稀释度 '5C',1,CZ,0
 fimbriae-type-2-and-3,,cz_unknown_no_rule,low,规则未命中（非顺势/生药/疫苗/辅料词，也非 INN 词形）,19,CZ,0

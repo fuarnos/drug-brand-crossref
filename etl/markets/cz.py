@@ -44,6 +44,14 @@ M1 数据窗口（2026-11-16，task-1）起本脚本补了写库路径，照 `et
 - 成分：优先按库里 `substance.inn_en` 精确匹配；不命中时再去盐/去标点重试
 - 重音折叠：本文件的 `fold_cs()`（捷克语专用，见 `--self-check` 的断言）
 
+Q15（2026-11-19）——Q6 两张窄表折进 ETL
+---------------------------------------
+2026-11-18 写库窗口的 Q6 组件补写原本只在 `db/q6_cz_component_fill.py` 里（15 条去限定词
+精确映射 + 15 条 non-substance），CZ 重跑 ingest 会回退。现折进本文件：
+`NAME_MAP`（名字 → 库内 substance）与 `NON_SUBSTANCE`（不建成分、写组件时摘掉）是唯一真相源，
+q6 脚本改为从这里 import。表只做**身份对应**，不带剂量/等效判断；重跑口径见
+`reports/2026-11-19-q15-q17-cz-etl-fold.md`。
+
 CLI：
     python etl/markets/cz.py --fetch        # 抓快照到 data/raw/cz_sukl_20261112/
     python etl/markets/cz.py --dry-run      # 默认：读快照 → 解析 → 统计（只读开库，不写库）
@@ -175,6 +183,52 @@ INN_SYNONYMS = {
     "MESALAZINE": "MESALAMINE",
     "LIDOCAINE": "LIDOCAINE",
     "BECLOMETASONE": "BECLOMETHASONE",
+}
+
+# Q15：下面两张窄表原在 `db/q6_cz_component_fill.py`（2026-11-18 Q6 写库窗口，5,695 行组件 /
+# 684 个产品），CZ 重跑 ingest 会回退，2026-11-19 折进本文件作为唯一真相源；q6 脚本从这里 import。
+# 口径见 `reports/2026-11-18-write-window-q3q2q6.md` §5：只做身份对应，逐条写明去掉什么，
+# 不做任何剂量 / 等效 / 可互换判断。
+# ① 去掉性状 / 剂型 / 浓度限定词后**精确**命中库内成分：CZ 英文成分名 → (substance_id, 依据)
+NAME_MAP: dict[str, tuple[str, str]] = {
+    "SODIUM (S)-LACTATE SOLUTION": ("sodium-s-lactate", "去 SOLUTION；库内 Sodium (S)-Lactate 同名"),
+    "SODIUM LACTATE SOLUTION (50 PER CENT)": ("sodium-lactate", "去 (50 PER CENT) + SOLUTION"),
+    "CHOLECALCIFEROL CONCENTRATE (POWDER FORM)": ("cholecalciferol", "去 (POWDER FORM) + CONCENTRATE"),
+    "CHOLECALCIFEROL CONCENTRATE": ("cholecalciferol", "去 CONCENTRATE"),
+    "CHLORHEXIDINE DIGLUCONATE SOLUTION": ("chlorhexidine-digluconate", "去 SOLUTION"),
+    "BENZALKONIUM CHLORIDE SOLUTION": ("benzalkonium-chloride", "去 SOLUTION"),
+    "HUMAN ALBUMIN SOLUTION": ("human-albumin", "去 SOLUTION"),
+    "HYDROGEN PEROXIDE SOLUTION (30 PER CENT)": ("hydrogen-peroxide", "去 (30 PER CENT) + SOLUTION"),
+    "GLYCERYL TRINITRATE SOLUTION": ("nitroglycerin", "去 SOLUTION；硝酸甘油 = nitroglycerin（库内同物）"),
+    "ALGELDRATE SUSPENSION": ("algeldrate", "去 SUSPENSION"),
+    "OLIVE OIL, REFINED": ("olive-oil", "去 REFINED；库内 Olive Oil 同名"),
+    "ARACHIS OIL, REFINED": ("arachis-oil", "去 REFINED；库内 Arachis Oil 同名"),
+    "SOYA-BEAN OIL, REFINED": ("soya-oil", "去 REFINED + 连字符；库内 Soya Oil 同名"),
+    "TRIGLYCERIDES, MEDIUM-CHAIN": ("medium-chain-triglycerides",
+                                    "词序倒装 + 去逗号；库内 Medium Chain Triglycerides 同名"),
+    "HUMAN PLASMA PROTEIN": ("human-plasma-proteins", "单复数归一；库内 Human Plasma Proteins"),
+}
+
+# ② 窄 non-substance 词表：多组分配方 / 特殊生物制品。库里没有单一化学实体、EU 层也不当
+# 单一活性成分（同 `etl/markets/jp.py::is_non_substance` 口径）；同产品至少 1 个成分能落地时，
+# 这些名字在写组件时被摘掉并计数，不建 substance、不硬塞。
+NON_SUBSTANCE: dict[str, str] = {
+    "OLIVE OIL AND SOYA-BEAN OIL (4:1), REFINED": "两种植物油的复方（4:1）",
+    "FRACTIONATED SOYA-BEAN OIL": "分馏大豆油（配方级混合物）",
+    "UNSAPONIFIABLE SOYA-BEAN OIL": "大豆油不皂化物（多组分）",
+    "UNSAPONIFIABLE AVOCADO OIL": "鳄梨油不皂化物（多组分）",
+    "OMEGA-3-ACID TRIGLYCERIDES": "多组分 omega-3 甘油三酯（非单一脂肪酸）",
+    "OIL MIX": "复方油混合物",
+    "CARAWAY OIL": "挥发油（多组分）",
+    "PINE SYLVESTRIS OIL": "挥发油（多组分）",
+    "DISTILLATE OF A MIXTURE OF RECTIFIED ESSENTIAL OILS OF EUCALYPTUS, "
+    "SWEET ORANGE, MYRTLE AND LEMON (66:32:1:1)": "复方挥发油馏出物",
+    "VIPER VENOM ANTISERUM, EUROPEAN": "抗蛇毒血清（多克隆）",
+    "FREEZE-DRIED POLYVALENT SNAKE VENOM ANTISERUM I": "抗蛇毒血清（多价）",
+    "FREEZE-DRIED POLYVALENT SNAKE VENOM ANTISERUM II": "抗蛇毒血清（多价）",
+    "UNEXPANDED CD34- CELLS (ZEMCELPRO)": "自体细胞制品",
+    "TRANSDUCED CD34+ CELLS (ADA CDNA) (STRIMVELIS)": "基因修饰自体细胞制品",
+    "AUTOLOGOUS HUMAN CORNEAL EPITHELIAL CELLS": "自体细胞制品",
 }
 
 
@@ -512,6 +566,15 @@ def dry_run(db_path: Path) -> int:
             continue
         used_latky.add(r["KOD_LATKY"])
         sid, tier = map_inn(name_en, db_inn)
+        if not sid:
+            # Q15 ①：Q6 窄映射表（精确名字）
+            mapped = NAME_MAP.get(name_en)
+            if mapped:
+                sid, tier = mapped[0], "name-map"
+        if not sid and name_en in NON_SUBSTANCE:
+            # Q15 ②：non-substance 名字不算 miss（不建成分，写组件时摘掉）
+            tiers["non-substance"] += 1
+            continue
         tiers[tier] += 1
         if sid:
             hit += 1
@@ -524,6 +587,8 @@ def dry_run(db_path: Path) -> int:
         "salt_stripped_hit": tiers["salt"],
         "prefix_hit": tiers["prefix"],
         "synonym_hit": tiers["synonym"],
+        "name_map_hit": tiers["name-map"],
+        "non_substance_rows": tiers["non-substance"],
         "miss": miss,
         "hit_rate": round(hit / max(hit + miss, 1), 4),
         "tiers": dict(tiers),
@@ -590,6 +655,8 @@ def dry_run(db_path: Path) -> int:
     m = stats["substance_map"]
     print(f"== 成分映射 == 命中 {m['hit_rate']:.1%}（{m['tiers']}）；未命中 {m['miss']:,}；"
           f"新成分 {m['new_inn_count']:,}")
+    print(f"   Q15 窄表：NAME_MAP 命中 {m['name_map_hit']:,} 行；"
+          f"non-substance 摘掉 {m['non_substance_rows']:,} 行")
     print("   未命中 top:", m["new_inn_top"][:10])
     print(f"== EU 去重 == RC 以 EU/ 开头 {stats['eu_overlap']['rc_eu_prefix_rows']:,} 行"
           f"（{stats['eu_overlap']['rc_eu_prefix_pct']:.1%}）")
@@ -758,12 +825,20 @@ def _resolve_ingredient(name_en: str, db_inn: dict[str, str], who: dict[str, str
                                                                     tuple[str, str, str] | None]:
     """成分英文名 → (substance_id, variant_id, 层级, 待建新成分(key, inn, evidence))。
 
-    优先级：库内 exact/salt/prefix/synonym → 本次待建（new_map）→ WHO INN 出处 →
+    优先级：库内 exact/salt/prefix/synonym → Q15 `NAME_MAP`（去限定词精确映射）→
+    `NON_SUBSTANCE`（摘掉，不建成分）→ 本次待建（new_map）→ WHO INN 出处 →
     CZ 英文成分名（去盐后）→ miss（判不了，不写库）。
     """
     sid, tier = map_inn(name_en, db_inn)
     if sid:
         return sid, None, tier, None
+    # Q15 ①：Q6 窄映射表（精确名字；只去限定词，不做剂量 / 等效判断）
+    mapped = NAME_MAP.get((name_en or "").strip())
+    if mapped:
+        return mapped[0], None, "name-map", None
+    # Q15 ②：non-substance 名字不建成分、也不挡同产品其它成分（由 build_plan 摘掉并计数）
+    if (name_en or "").strip() in NON_SUBSTANCE:
+        return None, None, "non-substance", None
     key = re.sub(r"\s*\([^)]*\)", "", norm_inn(name_en)).strip()
     base = strip_salt(key) or key
     for cand in (key, base):
@@ -837,6 +912,10 @@ def build_plan(db: sqlite3.Connection, who: dict[str, str],
                 all_ok = False
                 continue
             sid, vid, tier, pending_new = _resolve_ingredient(name_en, db_inn, who, new_map)
+            if tier == "non-substance":
+                # Q15 ②：摘掉 non-substance 名字，但不算「映射失败」，同产品其它成分仍可写
+                stats["skip_non_substance_name"] += 1
+                continue
             if pending_new:
                 pending[pending_new[0]] = (pending_new[1], pending_new[2])
                 stats[f"pending:{pending_new[2]}"] += 1
@@ -856,10 +935,12 @@ def build_plan(db: sqlite3.Connection, who: dict[str, str],
             strength, kind = _component_strength(cr.get("AMNT"), cr.get("UN"))
             stats[f"strength:{kind}"] += 1
             comps.append({"variant_id": vid, "strength": strength, "token": name_en})
-        if raw_comps and all_ok:
+        if raw_comps and all_ok and comps:
             stats["products_with_components"] += 1
             stats["components"] += len(comps)
         elif raw_comps:
+            if all_ok and not comps:
+                stats["products_only_non_substance"] += 1
             stats["products_components_skipped"] += 1
             comps = []
         else:

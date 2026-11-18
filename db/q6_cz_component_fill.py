@@ -6,11 +6,13 @@
 
   ① `NAME_MAP`：去掉性状/剂型/浓度限定词后能**精确**落到库内已有成分的 CZ 写法
      （如 `SODIUM (S)-LACTATE SOLUTION` → `sodium-lactate`）。逐条写明去掉了什么，
-     不做任何剂量/等效判断；
+      不做任何剂量/等效判断；
   ② `NON_SUBSTANCE`：多组分配方名（植物油、中链甘油三酯、复方挥发油）与特殊生物制品
      （抗蛇毒血清、自体细胞制品）——库里没有单一实体、EU 层也不当单一活性成分，
-     按 `etl/markets/jp.py` 的 `is_non_substance()` 同一口径登记（本表只在本脚本内生效，
-     未改 `etl/markets/cz.py`）。
+      按 `etl/markets/jp.py` 的 `is_non_substance()` 同一口径登记。
+
+Q15（2026-11-19）：两张表已折进 `etl/markets/cz.py`（唯一真相源），本脚本改为从那里 import；
+表内容不再在本文件维护，新逻辑以 etl 为准。本脚本只保留 2026-11-18 写库窗口的历史 CLI。
 
 写库条件：该产品当前 0 行组件 ∧ 至少 1 个成分能映射到库内 variant ∧ 其余成分全部落在
 ①或②里。写出的组件**只含能映射的成分**，被 ② 摘掉的名字记在 manifest 与报告里。
@@ -35,51 +37,12 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "etl"))
 sys.path.insert(0, str(ROOT / "etl" / "markets"))
 import cz  # noqa: E402
+from cz import NAME_MAP, NON_SUBSTANCE  # noqa: E402  （Q15 起表在 etl/markets/cz.py，唯一真相源）
 from _ingest_common import connect, guard_real, sha256_file  # noqa: E402
 from ingest_ema_medicines import _variant_resolver  # noqa: E402
 
 DEFAULT_DB = ROOT / "data" / "drugs.db"
 DEFAULT_MANIFEST = ROOT / "data" / "sources" / "cz_component_fill_manifest_20261118.json"
-
-# ① 去限定词后精确命中库内成分：CZ 英文成分名 → (substance_id, 去掉了什么 / 依据)
-NAME_MAP: dict[str, tuple[str, str]] = {
-    "SODIUM (S)-LACTATE SOLUTION": ("sodium-s-lactate", "去 SOLUTION；库内 Sodium (S)-Lactate 同名"),
-    "SODIUM LACTATE SOLUTION (50 PER CENT)": ("sodium-lactate", "去 (50 PER CENT) + SOLUTION"),
-    "CHOLECALCIFEROL CONCENTRATE (POWDER FORM)": ("cholecalciferol", "去 (POWDER FORM) + CONCENTRATE"),
-    "CHOLECALCIFEROL CONCENTRATE": ("cholecalciferol", "去 CONCENTRATE"),
-    "CHLORHEXIDINE DIGLUCONATE SOLUTION": ("chlorhexidine-digluconate", "去 SOLUTION"),
-    "BENZALKONIUM CHLORIDE SOLUTION": ("benzalkonium-chloride", "去 SOLUTION"),
-    "HUMAN ALBUMIN SOLUTION": ("human-albumin", "去 SOLUTION"),
-    "HYDROGEN PEROXIDE SOLUTION (30 PER CENT)": ("hydrogen-peroxide", "去 (30 PER CENT) + SOLUTION"),
-    "GLYCERYL TRINITRATE SOLUTION": ("nitroglycerin", "去 SOLUTION；硝酸甘油 = nitroglycerin（库内同物）"),
-    "ALGELDRATE SUSPENSION": ("algeldrate", "去 SUSPENSION"),
-    "OLIVE OIL, REFINED": ("olive-oil", "去 REFINED；库内 Olive Oil 同名"),
-    "ARACHIS OIL, REFINED": ("arachis-oil", "去 REFINED；库内 Arachis Oil 同名"),
-    "SOYA-BEAN OIL, REFINED": ("soya-oil", "去 REFINED + 连字符；库内 Soya Oil 同名"),
-    "TRIGLYCERIDES, MEDIUM-CHAIN": ("medium-chain-triglycerides",
-                                    "词序倒装 + 去逗号；库内 Medium Chain Triglycerides 同名"),
-    "HUMAN PLASMA PROTEIN": ("human-plasma-proteins", "单复数归一；库内 Human Plasma Proteins"),
-}
-
-# ② 窄 non-substance 词表：多组分配方 / 特殊生物制品（不是单一化学实体）
-NON_SUBSTANCE: dict[str, str] = {
-    "OLIVE OIL AND SOYA-BEAN OIL (4:1), REFINED": "两种植物油的复方（4:1）",
-    "FRACTIONATED SOYA-BEAN OIL": "分馏大豆油（配方级混合物）",
-    "UNSAPONIFIABLE SOYA-BEAN OIL": "大豆油不皂化物（多组分）",
-    "UNSAPONIFIABLE AVOCADO OIL": "鳄梨油不皂化物（多组分）",
-    "OMEGA-3-ACID TRIGLYCERIDES": "多组分 omega-3 甘油三酯（非单一脂肪酸）",
-    "OIL MIX": "复方油混合物",
-    "CARAWAY OIL": "挥发油（多组分）",
-    "PINE SYLVESTRIS OIL": "挥发油（多组分）",
-    "DISTILLATE OF A MIXTURE OF RECTIFIED ESSENTIAL OILS OF EUCALYPTUS, "
-    "SWEET ORANGE, MYRTLE AND LEMON (66:32:1:1)": "复方挥发油馏出物",
-    "VIPER VENOM ANTISERUM, EUROPEAN": "抗蛇毒血清（多克隆）",
-    "FREEZE-DRIED POLYVALENT SNAKE VENOM ANTISERUM I": "抗蛇毒血清（多价）",
-    "FREEZE-DRIED POLYVALENT SNAKE VENOM ANTISERUM II": "抗蛇毒血清（多价）",
-    "UNEXPANDED CD34- CELLS (ZEMCELPRO)": "自体细胞制品",
-    "TRANSDUCED CD34+ CELLS (ADA CDNA) (STRIMVELIS)": "基因修饰自体细胞制品",
-    "AUTOLOGOUS HUMAN CORNEAL EPITHELIAL CELLS": "自体细胞制品",
-}
 
 
 def now() -> str:
