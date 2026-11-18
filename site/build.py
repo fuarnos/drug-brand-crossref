@@ -15386,8 +15386,9 @@ def _lang_block_text(key: str, **fmt: object) -> str:
     只显示与当前语言相同的那一块）。这里把已上线的语言都算进来：文案由
     `_merge_static_i18n` 在 main() 里先铺好 I18N["fr"]，所以调用时一定取得到。
     """
-    langs = ["en", "es", "zh", "zh-Hant"]
-    langs += [code for code in ("fr",) if code in I18N_REQUIRED_LANGS]
+    # v0.13.8 热修：原来硬编码 en/es/zh/zh-Hant + fr，漏了 ko → /ko/ 的
+    # cat/atc/drug 页有 340 个块空白。改为直接取当前启用语言（现查 6 语）。
+    langs = list(I18N_REQUIRED_LANGS)
     out = {}
     for lang in langs:
         text = (I18N.get(lang) or {}).get(key) or I18N["en"].get(key, "")
