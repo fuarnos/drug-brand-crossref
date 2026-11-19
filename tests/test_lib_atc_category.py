@@ -227,6 +227,10 @@ class AtcCategorySearchTest(unittest.TestCase):
         · 减肥药：Semaglutide 316 > Orlistat 308（剔除 CZ+LV 复算：Orlistat 254 > Semaglutide 207）
         · 抗抑郁药：Duloxetine 866 > Venlafaxine 815（剔除 CZ+LV：Venlafaxine 813 > Duloxetine 658）
         口径仍是「该类别内 active 产品最多的成分」（见 test_category_top1_by_ingredient_total）。
+
+        v0.18.0 数据窗口（新增 MY 马来西亚 29,956 条）后又有两条期望随现查变化，实现未变：
+        · 抗凝药：Rivaroxaban 2,421 > Aspirin 2,388（MY 数据把 Rivaroxaban 顶到第一）
+        · 抗抑郁药：Escitalopram 868 > Duloxetine 867（差 1 条；卡片显示去盐基名）
         """
         cases = [
             ("退烧药", "analgesics", "Acetaminophen"),
@@ -237,9 +241,9 @@ class AtcCategorySearchTest(unittest.TestCase):
             ("减肥药", "weight-loss", "Semaglutide"),        # v0.13.0：Orlistat 308 → Semaglutide 316
             ("感冒药", "cold-medicine", "Acetaminophen"),
             ("抗过敏药", "allergy", "Chlorpheniramine"),
-            ("抗凝药", "anticoagulants", "Aspirin"),
+            ("抗凝药", "anticoagulants", "Rivaroxaban"),   # v0.18.0 MY：2,421 > Aspirin 2,388
             ("他汀", "statins", "Atorvastatin"),
-            ("抗抑郁药", "antidepressants", "Duloxetine"),   # v0.13.0：Venlafaxine 815 → Duloxetine 866
+            ("抗抑郁药", "antidepressants", "Escitalopram"),  # v0.18.0 MY：868 > Duloxetine 867
             ("皮肤药", "dermatologicals", "Zinc Oxide"),
         ]
         for q, cid, ing in cases:
@@ -261,7 +265,7 @@ class AtcCategorySearchTest(unittest.TestCase):
         for q, cid, ing in (("抗过敏药", "allergy", "Chlorpheniramine"),
                             ("Blood-pressure medicines", "antihypertensives",
                              "Hydrochlorothiazide"),
-                            ("抗抑鬱藥", "antidepressants", "Duloxetine")):
+                            ("抗抑鬱藥", "antidepressants", "Escitalopram")):  # v0.18.0 MY：868 > Duloxetine 867
             res = self.idx.search(q)
             self.assertEqual(res.match_detail["category_id"], cid, q)
             # 首位卡片可以是复方卡（如 Irbesartan + Hydrochlorothiazide），但必须含期望成分

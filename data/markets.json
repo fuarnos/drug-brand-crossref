@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -30,7 +30,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -61,7 +64,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -92,7 +98,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -128,7 +137,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -159,7 +171,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -197,7 +212,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -233,7 +251,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -264,7 +285,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -296,7 +320,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -329,7 +356,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -362,7 +392,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -396,7 +429,10 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -431,15 +467,59 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
-      "ui_language_gaps": [
-        "ja"
-      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 120,
       "data_as_of": "2026-11-01",
       "notes": "厚生労働省「薬価基準収載品目リスト」2026-11-01 版（PDL 1.0，署名+加工声明）。口径：**仅收载医保（薬価基準）品目，不是注册库，也不等于当前在售**；成分名为日文一般名，商品名原样日文（不翻译）；无 ATC 的成分页面显示「—」。v0.12.0（2026-11-15）写入 12,442 产品 / 10,403 成分。"
+    },
+    {
+      "code": "MY",
+      "kind": "country",
+      "parent": null,
+      "group": "ASIA",
+      "name": {
+        "en": "Malaysia",
+        "es": "Malasia",
+        "zh": "马来西亚",
+        "zh-Hant": "馬來西亞",
+        "fr": "Malaisie",
+        "ko": "말레이시아",
+        "ja": "マレーシア",
+        "cs": "Malajsie",
+        "lv": "Malaizija"
+      },
+      "i18n_key": "home.my",
+      "flag": "🇲🇾",
+      "source_id": "my_npra_products",
+      "extra_source_ids": [],
+      "default_lang": "en",
+      "languages": [
+        "en"
+      ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko",
+        "ja",
+        "cs",
+        "lv"
+      ],
+      "ui_language_gaps": [
+        "ms"
+      ],
+      "enabled": true,
+      "order": 125,
+      "data_as_of": "2026-11-18",
+      "notes": "已启用（2026-11-20 写库窗口）：NPRA / QUEST3+ 经 data.gov.my 发布的 Approved / Cancelled Pharmaceutical Products（CC BY 4.0，署名 NPRA/data.gov.my；行政记录不得作法律依据）。真实库 29,956 产品 = 28,333 active + 1,623 withdrawn；剂型由品名派生（85.6%）、规格来自 active_ingredient 编码（有成分产品 61.1%）；天然产品/保健品不强映射西药 INN，不建新成分。马来语界面未接入 → ui_language_gaps=[\"ms\"]。"
     },
     {
       "code": "CZ",
@@ -467,11 +547,12 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
+        "ko",
+        "ja",
+        "cs",
+        "lv"
       ],
-      "ui_language_gaps": [
-        "cs"
-      ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 130,
       "data_as_of": "2026-11-01",
@@ -503,11 +584,12 @@
         "zh",
         "zh-Hant",
         "fr",
-        "ko"
-      ],
-      "ui_language_gaps": [
+        "ko",
+        "ja",
+        "cs",
         "lv"
       ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 140,
       "data_as_of": "2026-11-11",

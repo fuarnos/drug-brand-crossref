@@ -12,6 +12,8 @@
 --       FR（BDPM，ETL 已在副本跑通）、LV（ZVA）、JP（PMDA/JMIRI）、KR（MFDS）；
 --       四国**尚未入库**，registry（data/markets.json）与 language 另行按窗口启用。
 --       v0.13.0（task-1，2026-11-16）：country CHECK 扩 **CZ**（SÚKL DLP），同窗口写入 CZ/LV 数据。
+--       v0.17.0（task-7，2026-11-20）：country CHECK 扩 **MY**（NPRA/QUEST3+ via data.gov.my，
+--       CC BY 4.0）；阶段 A 只在 `.tmp/my_dryrun.db` 验证，等写库窗口再动真库。
 --       country 是「上市国家」，不是语言；西语名走 name_variant，不新建表。
 -- 区域层（region，非国别）：EU = 欧盟集中审批（EMA）——不是国家市场，不塞 country='EU'；
 --       `product.country` 为 NULL 时 `product.region='EU'`（二选一，CHECK 约束保证）。
@@ -97,7 +99,7 @@ CREATE INDEX IF NOT EXISTS idx_variant_substance ON variant (substance_id);
 -- L2 某国上市的某个具体产品（一行 = 一个国家的一个包装；区域层用 region 代替 country）
 CREATE TABLE IF NOT EXISTS product (
     product_id     TEXT PRIMARY KEY,
-    country        TEXT NULL CHECK (country IS NULL OR country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW', 'HK', 'SG', 'FR', 'LV', 'JP', 'KR', 'CZ')),
+    country        TEXT NULL CHECK (country IS NULL OR country IN ('US', 'GB', 'CN', 'ES', 'MX', 'AU', 'CA', 'TW', 'HK', 'SG', 'FR', 'LV', 'JP', 'KR', 'CZ', 'MY')),
     region         TEXT NULL CHECK (region IS NULL OR region IN ('EU')),
     -- country 与 region 二选一：国别产品 country 非空 / 区域层（EU=EMA 集中审批）region 非空、country NULL。
     -- 新增国家市场 = country CHECK 加 ISO 代码 + markets.json 注册；新增区域 = region CHECK 加代码。

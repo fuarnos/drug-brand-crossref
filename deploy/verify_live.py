@@ -61,8 +61,11 @@ SITEMAP_MIN_URLS = 25_000
 #（`/fr/index.html` 200），verify 当时没有语言根/hreflang 检查，0 failures 漏掉了它。
 # v0.13.8 韩语上线：`/ko/` 同一坑（规则仍只有 4 条语言根），这里补第 6 条；
 # `/fr/`、`/ko/` 由 deploy/fix_fr_root.py 写「对象键 fr/ / ko/」兜底（见 sync_r2.ps1）。
+# v0.16.0 日语上线：`/ja/` 同一坑（hreflang-target-ja 失败），补第 7 条并写 `ja/` 兜底对象。
+# v0.17.0 捷克语/拉脱维亚语上线：`/cs/` `/lv/` 同一坑，补第 8、9 条。
 LANG_ROOTS = (("", "/"), ("es/", "/es/"), ("zh/", "/zh/"),
-              ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"), ("ko/", "/ko/"))
+              ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"), ("ko/", "/ko/"),
+              ("ja/", "/ja/"), ("cs/", "/cs/"), ("lv/", "/lv/"))
 
 
 class Checks:

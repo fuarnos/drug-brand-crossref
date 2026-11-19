@@ -1539,9 +1539,26 @@ FR_PREP_KEYS: dict[str, str] = {
 # → 不生成 /fr/、不产 fr 资产；把 fr 改成 true 才会上线（开启清单见 reports/2026-11-13-fr-site-prep.md）。
 # v0.13.3（R2）：语言菜单一律显示**本语言自称**（不随界面语言翻译、不新增 i18n 键）；
 # hreflang / URL 目录不随标签变。i18n.js 的 LBL（客户端改写下拉摘要）也从这份表生成。
-LANG_NATIVE_LABELS = {"en": "English", "es": "Español", "zh": "中文",
-                      "zh-Hant": "繁體中文", "fr": "Français", "ko": "한국어"}
-_BASE_LANGS = [("en", "English", ""), ("es", "Español", "es/"), ("zh", "中文", "zh/"),
+LANG_NATIVE_LABELS = {"en": "English", "es": "Español", "zh": "简体中文",
+                      "zh-Hant": "繁體中文", "fr": "Français", "ko": "한국어",
+                      "ja": "日本語", "cs": "Čeština", "lv": "Latviešu"}
+# LG8（v0.17.0）：语言切换控件的可见「语言」标签（9 语，各语言自己的写法）。
+# 与 LANG_NATIVE_LABELS 一样是「构建期常量 + 客户端同一份」，不进 I18N 字典
+#（避免新增 I18N 键让全站 9 份字典一起变、也避免 684 条的口径漂移）。
+LANG_LABEL = {"en": "Language", "es": "Idioma", "zh": "语言", "zh-Hant": "語言",
+              "fr": "Langue", "ko": "언어", "ja": "言語", "cs": "Jazyk", "lv": "Valoda"}
+_LANG_LABEL_CJK = {"zh", "zh-Hant", "ja"}
+
+
+def _lang_label(lang: str) -> str:
+    """「语言」标签在本界面语言里的写法（缺省回落英文）。"""
+    return LANG_LABEL.get(lang) or LANG_LABEL["en"]
+
+
+def _lang_sep(lang: str) -> str:
+    """标签与当前语言名之间的分隔符：中日韩用全角冒号，其余用半角冒号 + 空格。"""
+    return "：" if lang in _LANG_LABEL_CJK else ": "
+_BASE_LANGS = [("en", "English", ""), ("es", "Español", "es/"), ("zh", "简体中文", "zh/"),
                ("zh-Hant", "繁體中文", "zh-hant/")]
 
 
@@ -1553,7 +1570,9 @@ def _enabled_ui_langs() -> list[tuple[str, str, str]]:
         enabled = {x.get("code") for x in reg.get("languages", []) if x.get("enabled")}
     except (OSError, ValueError):
         enabled = set()
-    for code, label, path in (("fr", "Français", "fr/"), ("ko", "한국어", "ko/")):
+    for code, label, path in (("fr", "Français", "fr/"), ("ko", "한국어", "ko/"),
+                              ("ja", "日本語", "ja/"), ("cs", "Čeština", "cs/"),
+                              ("lv", "Latviešu", "lv/")):
         # 注意：I18N["fr"] 由 _merge_static_i18n() 在 main() 里生成，模块导入时还不存在；
         # 这里只按注册表 enabled 判断（fr 的语言字典在构建前一定已就绪）。
         if code in enabled:
@@ -4403,6 +4422,2081 @@ KO_I18N: dict[str, str] = {
     'whatsnew.title': '새 소식',
 }
 
+# ── L2（v0.16.0）：日语界面文案（第 7 语言）────────────────────────────────
+# 形状与 FR_I18N / KO_I18N 相同：扁平 `key -> 日文`，键集与 en **完全一致**（684 键）。
+# 由 `_merge_static_i18n()` 展开成 I18N["ja"]；缺键才回落英文（现查 0 缺键）。
+# 生成来源：按构建期 en 字典逐键翻译，占位符 {n}/@@X@@ 与 HTML 标签序列逐键一致
+# （校验脚本 .tmp/ja_assemble.py；日语界面 ≠ JP 市场数据，市场数仍 15）。
+JA_I18N: dict[str, str] = {
+    'a1.approval': '承認 / NDC / DIN',
+    'a1.expand': '詳細',
+    'a1.goto': '成分ページを開く',
+    'a1.loading': '詳細を読み込み中…',
+    'a1.market': '市場',
+    'a1.more': '最初の12件を表示しています。すべては<a href="{url}">成分ページ</a>でご覧ください。',
+    'a1.none': 'この名前の製品記録はありません。',
+    'a1.pack': '包装',
+    'a1.raw': '原文記録',
+    'a1.source': '出典',
+    'a1.status': '状態',
+    'a11y.skip': '本文へスキップ',
+    'a3.incompat': '互換性はありません — 警告を参照',
+    'a3.release': '放出：',
+    'a3.salt': '塩形態：',
+    'about.analytics': '<h2>アクセス解析</h2><p class="sub">本サイトは匿名・Cookieなしの解析に <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> を使用しています。個人データは保存せず、広告にも利用しません。閲覧数、参照元、国・地域、ブラウザと画面サイズ、サイト内検索語と結果クリックのみを検索品質の改善に利用します。検索語（結果なしの検索を含む）は集計イベント名としてのみ送信され、正規化した検索語がアカウント・IPアドレス・端末識別子に紐づくことはありません。検索イベントは送信時（Enter、サンプル、候補選択）にのみ発火し、入力途中では発火しません。送信内容は検索語の長さと表示言語のみです。詳しくは <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter のプライバシーポリシー</a>をご覧ください。</p>',
+    'about.au_source': '<p class="sub"><b>オーストラリア</b>：TGA <b>ARTG Medicines 2026-10-28</b>（Australian Register of Therapeutic Goods、出典表示 TGA/ARTG）。データ基準日 <b>2026-10-28</b>。エクスポートには<b>登録状態の列がない</b>ため状態は不明として表示し、<b>登録されていることは現在販売中であることを意味しません</b>。3,911製品は成分記録がなく、名称レベルのみ表示しています。</p>',
+    'about.checksums': 'SHA-256 チェックサム',
+    'about.cz_source': '<p class="sub"><b>チェコ</b>：SÚKL <b>DLP</b>（医薬品データベース、月次オープンデータ）を <b>SÚKL オープンデータ利用条件</b>で利用 — 複製・再配布・商用利用可、<b>出典：SÚKL</b>、意味を変えてはなりません（<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">条件</a>）。データ基準日 <b>2026-11-01</b>（スナップショット DLP20261027）。事実項目のみ（名称・含量・剤形・ATC・成分・MAH・登録状態）。含量の正規化と成分分割は公式項目からの<b>派生</b>です。<b>SPC/PIL および添付文書は第三者文書であり、取得・再掲載はしません</b>。FSMP と PZLÚ の医薬品以外の行は除外し、EU 中央承認は EU レイヤーと重複排除しています。<b>登録されていることは現在販売中であることを意味しません。</b></p>',
+    'about.data_dictionary': 'データ辞書',
+    'about.data_package': 'データパッケージ',
+    'about.dataset_jsonld': 'データセットのメタデータ（schema.org）',
+    'about.eu_source': '<p class="sub"><b>EU 地域レイヤー</b>：<b>欧州委員会 — Union Register of medicinal products</b>（CC BY 4.0、出典：欧州委員会 / Union Register）およびクロスチェック用の <b>EMA Medicines</b> データ（出典：欧州医薬品庁 (EMA)、EMA ロゴは使用せず、推奨を示すものでもありません）。中央承認（ヒト用医薬品）のみ、データ基準日 <b>2026-11-03</b>。<b>EU の承認は特定の国での販売記録ではなく、登録簿には含量・剤形・包装単位がありません。</b>既知の成分に対応しない製品は名称レベルのみ表示します。</p>',
+    'about.fr_source': '<p class="sub"><b>フランス</b>：BDPM（Base de données publique des médicaments、ANSM）、<b>Licence Ouverte / etalab-2.0</b>。出典表示と更新日が必要です。データ基準日 <b>2026-11-03</b>。事実項目のみ（名称・成分・剤形・製造元・承認）。<a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>。</p>',
+    'about.gaps': '<h2>既知の不足</h2><ul class="sub"><li>中国には化学医薬品の登録が146,344件ありますが、約9%は中国独自の成分（英語 INN 未整備）にしか対応せず、中国の ATC はレベル4までしか保存していません。漢方薬（TCM）は収録していません。</li><li>含量の同等性判定は D1（同一塩形態）までです。塩-塩基換算（D2）とバイオアベイラビリティ判定（D3）は実装していません。</li><li>メキシコの規制機関リストには含量の列がなく、公開カタログから補完できたのは29%のみです。</li><li>カナダの DPD には包装単位や価格がなく、多くの市販 OTC 包装は DPD の電子化以前に承認されているため、店頭製品が欠けることがあります。</li><li><b>ATC カバレッジ — 2つの分母：</b>全成分の @@ATC_ALL_PCT@@%（@@ATC_ALL@@ / @@ATC_ALL_N@@）と、医薬品実体（inn_drug、@@ATC_DRUG@@ / @@ATC_DRUG_N@@）の @@ATC_DRUG_PCT@@%。差の大半は非医薬品実体（ホメオパシー・生薬・食品・素材）であり、データ欠落ではありません。ATC データは Wikidata P267（CC0）と ChEMBL（CC BY-SA 4.0）に由来します。WHOCC の ATC/DDD インデックスはライセンスが必要なため使用していません。</li></ul>',
+    'about.hk_source': '<p class="sub"><b>香港</b>：衛生署 薬物事務所 — <b>Registered Pharmaceutical Products</b> リスト（data.gov.hk データセット hk-dh-dh_do-hk-dh-do-pharmaceutical-product）を <b>DATA.GOV.HK 利用規約</b>で利用（出典表示付きの無料再利用可、政府の推奨を示すものではありません）。データ基準日 <b>2026-10-23</b>。<b>名称・成分レイヤーのみ — 含量・剤形・登録状態はなく、登録されていることは現在の供給を証明しません。</b></p>',
+    'about.lead': '<p class="sub"><b>役割は1つ：</b>ブランド名から実際の成分を特定し、その確かさを示すこと。本サイトは公開・広告なし・非営利です。すべての回答は候補集合であり、処方ではありません。</p>',
+    'about.licences_summary': 'データ出典とライセンス',
+    'about.loading': '<h2>検索の読み込み方法</h2><p>最初の検索では索引シャードを1つ（中央値 約1.0 MB、gzip 約0.16 MB）読み込み、完全な索引（core 約42 MB raw、gzip 約9–10 MB）はバックグラウンドで埋まります。入力・検索ボックスのフォーカス・サンプル選択で開始します。シャードや完全索引の読み込み中は結果に<i>一部</i>と表示し、読み込みに失敗しても既にある内容で動作を続け、<i>再試行</i>ボタンを出します。検索によって本サイトへ何かが送信されることはありません。</p>',
+    'about.lv_source': '<p class="sub"><b>ラトビア</b>：ZVA <b>HumanProducts</b>（Latvijas Zāļu reģistrs、日次エクスポート）を <b>CC0 1.0</b> で公開。出典表示は必須ではありませんが、慣例として <b>Zāļu valsts aģentūra (ZVA)</b> を明記します。データ基準日 <b>2026-11-11</b>。包装単位の行は登録番号ごとにまとめ、事実項目のみ（ラトビア語名と原名・含量・剤形・INN・ATC・MAH・状態）。EU 中央承認製品は EU レイヤーと重複排除しています。<b>登録は現在の販売記録ではありません。</b></p>',
+    'about.nick': '<h2>俗称と旧名</h2><p>「两只青蛙（二匹の蛙）」はブランド名ではなく、ブランド名として保存されることもありません。これは成分メトホルミンを指します。俗称は別の手作業テーブルで管理し、検索可能ですがブランド名テーブルには入れません。一致した場合、ページは（<i>ネット上の俗称 / 旧名</i>）と表示し、その成分のブランドを一覧します。包装に印刷された名称として提示することはありません。各項目には出典があり、「ユーザー提供」は<i>未検証</i>として表示し、独立した出典が付くまで <code>documented</code> には昇格しません。出典がなければ新規登録しません。</p><ul class="sub"><li>@@NICKNAMES@@ 件の俗称は <code>data/seed_nicknames.py</code> で手作業管理し、再構築しています（スクレイピングではありません）。</li><li>俗称は衝突判定に入れず、「同名」ページも作りません。俗称は同一性ではなく、成分が同一性だからです。</li></ul>',
+    'about.nick_merged': '@@NICKNAMES_TOTAL@@ 件の俗称のうち @@NICKNAMES_MERGED@@ 件は、塩形態統合前に記録された中国語名（kind=misnomer）です。旧い包装表示でも成分にたどり着けるよう別名として検索可能に保ち、ブランド名としては扱いません。',
+    'about.rules': '<h2>3つの原則</h2><ol><li><b>ブランド名は主キーではありません。</b>すべての検索は候補集合を返し、同一性は国 × 剤形 × 含量 × 有効成分で固定されます。</li><li><b>衝突は導出結果であり、手作業の注記ではありません。</b>同じ名前が異なる成分に対応する場合、サイトが「同名異薬」と自動で示します。</li><li><b>服薬助言は行いません。</b>同一性の特定と「互換性はありません」の警告のみ — 用量換算も代替推奨も行いません。</li></ol>',
+    'about.samename': '<h2>「同名異薬」が起こる理由</h2><p class="sub">同じ商標が市場ごとに別の会社に保有され、処方がまったく異なることがあります。確認済みの例：米国 <b>Tylenol</b> はアセトアミノフェン500 mgの単一成分ですが、中国の <b>泰诺</b> は4成分の風邪薬で、単一成分品は <b>泰诺林</b> です。米国 <b>Benadryl</b> はジフェンヒドラミン、英国 <b>Benadryl</b> はアクリバスチン。米国 <b>Gaviscon</b> はアルミニウム・マグネシウムの制酸薬、英国 Gaviscon はアルギン酸塩のラフト剤です。</p>',
+    'about.sg_source': '<p class="sub"><b>シンガポール</b>：HSA <b>Listing of Registered Therapeutic Products</b>（data.gov.sg データセット d_767279312753558cbf19d48344577084）を <b>Singapore Open Data Licence v1.0 (SODL)</b> で利用。出典表示とライセンスリンクが必要で、政府の推奨を示すものではありません。データ基準日 <b>2026-08-07</b>（6か月ごと更新）。<b>登録されていることは現在販売中であることを意味しません。</b>ブランド名は英語のまま翻訳せず、中国語の成分名（inn_zh）のみ表示することがあります。出典：Contains information from Listing of Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences Authority (HSA), and made available under the Singapore Open Data Licence v1.0（<a href="https://data.gov.sg/open-data-licence">ライセンス</a>）。</p>',
+    'about.sources': '<h2>出典とカバレッジ</h2><div class="tablewrap"><table><tr><th>国 / 地域</th><th>製品数</th><th>データ基準日</th></tr>@@COV@@</table></div><p class="sub"><b>データ基準日</b>＝出典自身が公表・施行・スナップショットした日であり、当サイトの取得日ではありません。<code>live</code>＝単一の基準日がないリアルタイムディレクトリ、<b>—</b>＝年次リストのみ。</p><p class="sub"><b>米国</b>：openFDA NDC Directory（米国政府の公開データ）。<b>英国</b>：NHSBSA dm+d、Open Government Licence v3.0 — <i>Contains public sector information licensed under the Open Government Licence v3.0.</i> <b>スペイン</b>：AEMPS CIMA — 明示的な出典表示と最終更新日を条件に再利用可、オープンライセンスではありません（下記ライセンス参照）。<b>メキシコ</b>：COFEPRIS 登録リスト（オープンライセンスの明示なし、事実項目とリンクのみ）に datos.gob.mx の調達・価格データ（CC BY 4.0）で含量を補完。<b>オーストラリア</b>：PBS Schedule API（著作権表示を保持）＋ TGA CMI ディレクトリ ＋ 厳選した OTC シード — 事実項目のみで、CMI/ARTG の全文は再掲載しません。<b>カナダ</b>：Health Canada DPD — 出典明記による非商用再利用可。<b>中国</b>：国家医保局 医薬品分類・コードデータベース（2025-04-04 スナップショット）。公開再配布ライセンスが確認できなかったため、事実項目とリンクのみ保存しています。</p>',
+    'about.stats': '<p class="sub">統計：製品 @@PRODUCTS@@ 件 · 成分 @@SUBSTANCES@@ 件 · 名前キー @@KEYS@@ 件 · 別名 @@ALIASES@@ 件（手作業の俗称 @@NICKNAMES@@ 件、通称・分類語 @@DRUGTERMS@@ 件）· FDA 混同ペア @@CONFUSABLE@@ 組 · 「同名異薬」と判定された名前 @@SEVERE@@ 件。</p>',
+    'about.summary': 'このサイトの内容、従う原則、データの出典。',
+    'about.terms': '<h2>通称と分類語</h2><p>別テーブル（<code>drug_term</code>、@@DRUGTERMS@@ 件）には<b>合法な医薬品のみ</b>の通称・分類語を収録しています：水薬、血液サラサラ薬、睡眠薬（shuìqiányào）、ピル、アフターピル、スタチンなど。<code>nickname</code> と違い、1つの成分ではなく分類を指すことがあるため <code>substance_id</code> は NULL 許容で、<code>alias_all</code> が両テーブルを統合して検索に使います。<b>乱用薬物および娯楽目的の俗語は明示的に対象外</b>（street / recreational drug slang）で、該当項目はデータベースから削除し、再追加しません。</p><ul class="sub"><li><b>NIDA / DEA のリスト</b>は娯楽目的の俗語には使用しません。合法な医薬品である処方薬の分類語のみを、各出典 URL 付きで保持します。</li><li><b>MedlinePlus (NLM)</b> は一般的な通称・分類語（米国政府作品）を提供します。コミュニティ由来（CN/GB/AU/ES）は<i>コミュニティ名</i>と表示し検索可能に保ちます。FDA tall-man ペア：@@CONFUSABLE@@ 公式ペア。<a href="confused.html">一覧を見る</a>。</li></ul>',
+    'about.title': 'このサイトについて',
+    'about.tw_source': '<p class="sub"><b>台湾</b>：TFDA「全部藥品許可證資料集」（data.gov.tw データセット 9122）を <b>Open Government Data Licence v1.0 (OGDL v1.0)</b> で利用。出典表示：衛福部食藥署 TFDA。データ基準日 <b>2026-10-22</b>（週次同期）。事実項目のみ（製品名・成分・剤形・製造元・許可番号・状態）。<b>含量は製品名から解析しているため信頼度に限界があります。</b>ライセンス：<a href="https://data.gov.tw/license">data.gov.tw/license</a>。</p>',
+    'ac.suggestions': '候補',
+    'artg.id': 'ARTG ID',
+    'artg.note': 'これらの項目はオーストラリアで登録されていますが、本サイトではまだ有効成分に紐づけていないため、製品として表示していません。',
+    'artg.sponsor': 'スポンサー',
+    'artg.title': 'ARTG にも登録あり（成分未取得）',
+    'atc.ai_note': '分類名・カテゴリ名は編集または AI 支援による翻訳です。権威があるのは ATC コードと WHO の階層のみです。',
+    'atc.all_classes': 'すべての ATC 分類',
+    'atc.browse_intro': 'WHO の ATC 分類は医薬品を器官・系統および薬理クラスで分類します。最上位グループまたは消費者向けカテゴリから始めてください。各ページに本サイトで記録された有効成分を一覧します。',
+    'atc.browse_title': 'ATC 分類から探す',
+    'atc.categories_link': '消費者向けカテゴリ',
+    'atc.children': '下位分類',
+    'atc.count': '有効成分 {n} 件',
+    'atc.hint': 'ATC プレフィックス一致 — 結果は有効成分がこの ATC コードを持つ製品であり、ブランド名の一致ではありません。',
+    'atc.hit': 'ATC {code}：有効成分の ATC コードで一致した製品名 {n} 件。同一性のみ — 推奨ではありません。',
+    'atc.ing_more': '成分があと {n} 件 — 完全な索引の読み込み後に全件表示されます。',
+    'atc.ing_overview': 'この ATC 分類の有効成分 — ブランド名の行はバックグラウンドで読み込みます。',
+    'atc.ingredients': 'この分類の有効成分',
+    'atc.label': 'ATC',
+    'atc.level': 'ATC レベル',
+    'atc.loading': 'ATC 検索用の索引を読み込み中…',
+    'atc.markets_hint': '各市場は集約した状態を1つ表示します。有効な記録が1件でもあれば販売中として扱い、個々の記録の状態は詳細に表示します。同じ市場に状態の異なる登録記録が複数あることもあるため、ここでは市場ごとに1回だけ表示します。これは記録上の事実であり、安全性の判断ではありません。',
+    'atc.mk_count': '{n} 市場',
+    'atc.more': 'ほか {n} 件',
+    'atc.more_notes': '注記とライセンス',
+    'atc.names_source_note': '分類名は編集翻訳、または Wikipedia（CC BY-SA 4.0）/ Wikidata（CC0）に由来します。各 ATC ページに言語ごとの正確な出典・ライセンス・リンクを記載します。権威があるのは ATC コードと WHO の階層のみです。',
+    'atc.no_data': 'この分類に記録された有効成分はまだありません。',
+    'atc.nolang_note': '名称の欠落は例外である場合に限りその行に表示します。大半の名称に欠落がある場合は一覧に表示しません。',
+    'atc.none': 'この ATC コードまたはプレフィックスを持つ記録済みの有効成分はありません。',
+    'atc.none_meta': '{code} に ATC 一致なし',
+    'atc.parent': '上位分類',
+    'atc.salt_label': '塩形態：',
+    'atc.search_link': 'この分類を検索',
+    'atc.show_all': '全 {n} 件を表示（現在 {shown} 件）',
+    'atc.source_note': 'ATC コードと階層は WHO Collaborating Centre for Drug Statistics Methodology の ATC/DDD Index を参照しています（著作権 WHOCC、インデックス自体は再掲載しません）。成分・含量の事実は About に記載の規制機関記録に由来します。',
+    'atc.status_note': '状態バッジは成分ごとに保持する製品記録（有効 / 中止 / 撤回 / 不明）を要約し、バッジ後の市場コードはその状態が記録されている市場を示します。状態列を公開している登録簿は一部のみです：CA、ES、MX、FR、JP、CZ、LV と EU Union Register、および AU ARTG の詳細記録。AU ARTG のエクスポートと HK には状態列がなく不明として記録し、CN、US、GB、TW、SG の記録は登録簿にあり有効としています。',
+    'atc.unnamed': '分類名は未レビュー — ATC コードが権威です。',
+    'atc.view_class': 'この ATC 分類を見る',
+    'atc4.empty': 'この分類にはまだ剤形レベルの製品記録がありません。',
+    'atc4.error': '剤形の詳細を読み込めませんでした。',
+    'atc4.form_col': '剤形',
+    'atc4.form_other': 'その他の剤形',
+    'atc4.loading': '剤形の詳細を読み込み中…',
+    'atc4.notice': 'ATC 分類は薬理・化学的に似た医薬品をまとめるだけで、互換性を示すものではありません。成分・剤形・放出機構・含量が異なれば互換性はありません。',
+    'atc4.scope': 'ATC 分類が記録された成分のみを一覧します（@@ATC_ALL@@ / @@ATC_ALL_N@@）。',
+    'atc4.sort_note': '行は剤形のアルファベット順、市場は固定の市場順です。ここで順位付けや推奨は行いません。製品記録のある成分のみ行を持ちます。',
+    'atc4.summary': '剤形別・市場横断',
+    'badge.combo': '配合',
+    'badge.export_only': '輸出のみ',
+    'badge.severe': '同名異薬',
+    'badge.warning': '放出機構が異なる',
+    'bilingual.brand_note': 'その市場での登録名であり、翻訳ではありません。',
+    'bilingual.source.manual': '編集',
+    'bilingual.source.official': '公式',
+    'bilingual.source.pharmacopoeia': '薬局方',
+    'bilingual.source.regulator': '規制機関',
+    'bilingual.toggle': '原文を表示',
+    'brand.mah': '製造販売業者：',
+    'brand.mah_note': 'この製品には登録された商品名がないため、代わりに製造販売承認者を表示します。',
+    'brand.none': '商品名なし',
+    'card.packs': '包装',
+    'cat.all_link': 'すべてのカテゴリ →',
+    'cat.back': 'すべての ATC 分類とカテゴリ',
+    'cat.browse_title': 'よく使う消費者向けカテゴリ',
+    'cat.count': '有効成分 {n} 件',
+    'cat.disclaimer': 'テーマ別コレクション — 同等性や互換性を示すものではありません。',
+    'cat.help': 'この一覧の読み方',
+    'cat.intro': '編集によるテーマ別コレクションです。各カテゴリは ATC 分類と有効成分に対応します。閲覧の手段であり、医薬品が同等である根拠ではありません。',
+    'cat.no_data': 'このカテゴリに記録された有効成分はまだありません。',
+    'cat.quick_title': 'カテゴリから探す',
+    'cat.related_atc': '関連する ATC 分類',
+    'cat.search_none': '一致する成分はありません。',
+    'cat.search_ph': 'このカテゴリ内の成分を検索',
+    'cat.subcat': 'サブクラス',
+    'col.brand': 'ブランド',
+    'col.dose': '含量',
+    'col.ing': '成分',
+    'col.mah': '製造販売業者',
+    'combo.capped': '全 {total} 件のうち最初の {cap} 件を表示しています。',
+    'combo.col_comp': '組成と含量',
+    'combo.comp_more': '他の組成 {n} 件',
+    'combo.compact': '配合',
+    'combo.cross_exact': 'これらの市場では同じ有効成分の組み合わせを持つ製品が記録されています。同一性のみ — 製品が互換であるという推奨ではありません。',
+    'combo.cross_none': 'この組み合わせの製品は、他の対象市場ではまだ記録されていません。',
+    'combo.cross_overlap': '他の市場で見つかった最も近い組み合わせは似ていますが同一ではありません — 互換性はありません。',
+    'combo.cross_primary': '主成分のみが同じで、同じ固定用量配合剤ではありません。',
+    'combo.cross_primary_link': '主成分を見る',
+    'combo.cross_products': '製品',
+    'combo.cross_record': '記録',
+    'combo.cross_title': '他の市場の同じ組み合わせ',
+    'combo.cross_unmatched': 'このグループ名では市場横断の比較は利用できません。',
+    'combo.empty': 'この組み合わせに記録されたブランド名はまだありません。',
+    'combo.ingredients': '有効成分',
+    'combo.intro': '<p class="sub">このページは、有効成分の集合が下の組み合わせと完全に一致するブランドを一覧します。同一性の情報のみです。固定用量配合剤は個々の成分と同じ製品ではなく、ブランド名は市場間で互換ではありません。</p>',
+    'combo.no_advice': '医療上の助言ではありません。製品を比較する前に包装と正確な組成を確認し、不明な場合は薬剤師にご相談ください。',
+    'combo.no_page': 'この名前の独立したブランドページはありません',
+    'combo.products': 'この正確な組み合わせのブランド',
+    'combo.see_warnings': 'これらの成分の警告を見る',
+    'combo.source_note': '<b>出典とライセンス</b>：成分ページと同じ規制機関データ（openFDA、dm+d、CIMA、COFEPRIS、PBS/TGA、Health Canada DPD、NHSA）から構築しています。事実項目のみ。詳しくは<a href="../about.html#licences">ライセンス台帳</a>をご覧ください。',
+    'combo.stub_badge': '配合記録',
+    'combo.stub_note': 'この配合ページは展開していません。成分ページまたは検索をご利用ください。',
+    'combo.stub_search': '検索',
+    'combo.title': '固定用量配合剤',
+    'conf.h2': 'FDA tall-man ペア',
+    'conf.intro': 'FDA Name Differentiation Project の類似・同音ペアです。これは公式の tall-man リストであり、ISMP LASA の全リストではありません。',
+    'conf.note': 'ここでのペアは名前が取り違えられうることを意味し、医薬品が互換であることを意味しません。FDA は tall-man 表記を推奨しています。',
+    'conf.pair': 'ペア',
+    'conf.search_hit': 'この名前は次と混同しやすい',
+    'conf.source_note': '出典：<a href="https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" rel="noopener">FDA Name Differentiation Project</a>（内容は 2026-06-12 時点、米国政府作品）。FDA リストのうち公式に再公開可能な @@CONF_PAIRS@@ 組のみを収録しています。ISMP/ECRI の「List of Confused Drug Names」は著作権があるため複製していません。FDA リストでペアのない単独名（hydromorphone、mitoxantrone）は掲載していません。ペアは名前の警告であり、医薬品が同等であるという記述ではありません。',
+    'conf.title': '混同しやすい薬名',
+    'conf.tml': 'Tall-man 表記',
+    'country.change': '国・地域を変更',
+    'country.missing': 'この国・地域にはこの名前で登録された製品がありません。',
+    'country.missing_note': '名前は成分に一致しましたが、この国・地域の製品ではありません。国・地域を切り替えるか成分ページを開いてください。',
+    'country.open_card': '成分ページ',
+    'coverage.col.asof': 'データ基準日',
+    'coverage.col.asof_short': '基準日',
+    'coverage.col.last': '最終同期',
+    'coverage.col.last_short': '同期',
+    'coverage.col.mapping': '成分マッピング',
+    'coverage.col.mapping_short': 'マッピング',
+    'coverage.col.market': '市場',
+    'coverage.col.notes': '既知の不足',
+    'coverage.col.products': '製品数',
+    'coverage.col.spec': '含量カバレッジ',
+    'coverage.col.spec_short': '含量',
+    'coverage.gap.au': 'ARTG エクスポートには登録状態の列がなく、状態は不明であり「販売中」ではありません。成分記録のない製品もあります。',
+    'coverage.gap.ca': 'DPD の完全な出典。出典表示付きの非商用再利用可。',
+    'coverage.gap.cn': '公開再配布ライセンスは未確認。商品名のない記録もあります。',
+    'coverage.gap.cz': 'SÚKL オープンデータ登録簿（DLP）— 登録記録であり現在の販売リストではありません。SPC/PIL の添付文書は取得・再掲載しません。出典：SÚKL、2026-11-01（スナップショット DLP20261027）。',
+    'coverage.gap.es': '再配布に関する出典ライセンスは確認待ちです。',
+    'coverage.gap.eu': '地域レイヤー：中央承認（EMA / EC Union Register）。含量・剤形・包装単位がなく、承認 ≠ その国での販売。',
+    'coverage.gap.fr': 'BDPM (ANSM) — Licence Ouverte / etalab-2.0、出典表示が必要。更新日はデータパッケージに記載。承認 ≠ 販売中。',
+    'coverage.gap.gb': 'dm+d の完全な出典。Open Government Licence の出典表示。',
+    'coverage.gap.hk': '名称・成分レイヤーのみ：含量・剤形・登録状態がなく、登録 ≠ 販売中。',
+    'coverage.gap.jp': 'NHI 薬価基準の収載品目のみ — 登録データベースではなく、現在の供給を証明するものでもありません。出典：厚生労働省、PDL 1.0、2026-11-01。',
+    'coverage.gap.lv': 'ZVA HumanProducts オープンデータ（包装単位、登録番号ごとに集約）— 登録簿であり、現在販売中のリストではありません。出典：ZVA、CC0 1.0、2026-11-11。',
+    'coverage.gap.mx': '出典ライセンスは確認待ちで、古い登録も含みます。',
+    'coverage.gap.sg': '登録リストは現在の供給を証明しません。',
+    'coverage.gap.tw': '含量は製品名から解析しているため、信頼度に限界があります。',
+    'coverage.gap.us': 'openFDA の完全な出典。米国政府のパブリックドメイン作品。',
+    'coverage.gap.why': '理由',
+    'coverage.intro': '各市場が提供する内容、その完全性、最終同期日を示します。件数は記録数であり、固有の医薬品数ではありません。空欄・0% は出典がその項目を公開していないことを意味します。',
+    'coverage.no_brand': '商品名の記録なし',
+    'coverage.notice': 'このページはデータ上の事実のみを記載します。製品が互換・販売中・市場間で同等であることを示すものではありません。',
+    'coverage.sort_market': '市場順',
+    'coverage.sort_products': '製品数順',
+    'coverage.source_note': '出典とライセンス：このサイトの「このサイトについて」と docs/许可清单.md をご覧ください。制限のある出典はデータパッケージ内で集計形式のみ提供します。',
+    'coverage.spec.no_spec': '出典が含量を公開していません',
+    'coverage.title': 'カバレッジと鮮度',
+    'drug.also_called': '別名：',
+    'drug.also_in': 'こちらにも',
+    'drug.also_known': '別名：',
+    'drug.brand': 'ブランド',
+    'drug.brand_group': '商品名あり',
+    'drug.combo_section': 'この成分を含む配合剤',
+    'drug.compare_note': '並列表は、この成分が多くの市場で記録されている場合にのみ提供します。それ以外ではこの一覧が全体像です。',
+    'drug.compare_side': '並列表',
+    'drug.confused': '混同しやすい',
+    'drug.confused_all': 'すべてのペア',
+    'drug.confused_note': 'FDA はこのペアに tall-man 表記を推奨しています。名前ではなく成分を確認してください。',
+    'drug.empty': '記録された製品はまだありません。',
+    'drug.forms_all': 'すべての剤形',
+    'drug.forms_label': '剤形',
+    'drug.forms_short': '剤形',
+    'drug.full_list': 'データパッケージ内の全一覧',
+    'drug.mah_group': '製造販売業者のみ',
+    'drug.markets': '市場',
+    'drug.mkx_more': '他の {n} 市場',
+    'drug.mono_section': 'この成分のみ',
+    'drug.more_names': '他の {n} 件を表示',
+    'drug.more_specs': '他の含量',
+    'drug.more_specs_n': '他の含量：{n} 件 · 剤形 {m} 種',
+    'drug.ms_more': 'この剤形には他に {n} 件',
+    'drug.no_brand': '（商品名なし）',
+    'drug.nostrength': '非公開',
+    'drug.notice': '同じ成分でも国によってまったく異なるブランド名を持つことがあり、同じ名前が別の成分を指すこともあります。国別に一覧しており、互換性はありません。',
+    'drug.records': '記録',
+    'drug.release': '放出',
+    'drug.showing': '先頭40件を表示：',
+    'drug.sid': '成分 ID',
+    'drug.spec_count': '{n} 件中 {shown} 件を表示',
+    'drug.spec_count_und': '{shown} 件を表示 · 含量未記載 {u} 件',
+    'drug.spec_count_und_one': '{shown} 件を表示 · 含量未記載 1 件',
+    'drug.specs': '含量',
+    'drug.status': '状態',
+    'drug.status.active': '有効',
+    'drug.status.discontinued': '中止',
+    'drug.status.unknown': '不明',
+    'drug.status.withdrawn': '撤回',
+    'drug.status_note.discontinued': '期限切れ',
+    'drug.status_note.unknown': '有効性不明',
+    'drug.status_note.withdrawn': '製造販売承認が撤回済み',
+    'drug.strength': '含量',
+    'drug.summary': 'この成分の国別記録（同一性のみ）。',
+    'drug.und_more': 'ほか {n} 件（製造元 {k} 社）',
+    'drug.und_more_one': 'ほか {n} 件（製造元 1 社）',
+    'drug.undisclosed_block': '含量が記載されていない記録',
+    'drug.undisclosed_k_one': '{n} 件の記録 · 製造元 1 社',
+    'drug.undisclosed_n': '{n} 件の記録 · 製造元 {k} 社',
+    'drug.undisclosed_n_one': '1 件の記録 · 製造元 {k} 社',
+    'drug.undisclosed_nk_one': '1 件の記録 · 製造元 1 社',
+    'drug.view_list': '一覧に戻る',
+    'error.index_failed': '索引の読み込みに失敗しました。',
+    'error.local_file': 'このページを直接開いた場合、ブラウザはローカルファイルの読み込みを禁止します。python -m http.server を実行し、http://localhost:8000/ にアクセスしてください。',
+    'error.retry': '再試行',
+    'eu.coverage_note': 'EU 地域レイヤー — 中央承認のみ。承認 ≠ 各国での販売中。',
+    'eu.region_note': 'EU レベルで承認済み — 単一の国での販売記録ではありません。EU 登録簿には含量・剤形・包装単位がありません。',
+    'eu.region_title': 'EU 中央承認 (EMA)',
+    'fam.badge.diff': '処方が異なる · 有効成分が {n} 種多い',
+    'fam.badge.same': '有効成分は同じ · 放出タイプは要確認',
+    'fam.cmp_current': '比較中の製品',
+    'fam.cmp_ing': 'すべての有効成分',
+    'fam.cmp_intro': 'ブランド名は市場ごとに異なる登録がされ、異なる有効成分を持つことがあります。この表は同一性の対応表であり、翻訳でも、製品が互換であるという主張でもありません。',
+    'fam.cmp_market': '市場',
+    'fam.cmp_name': '登録名',
+    'fam.cmp_rel': '関係',
+    'fam.cmp_this': 'このページ',
+    'fam.cmp_title': '関連するブランド名と処方の違い',
+    'fam.rel.diff': '有効成分が異なる — 互換性なし',
+    'fam.rel.multi': '複数の放出形態が記録済み — 具体的な製品を選択',
+    'fam.rel.multi_unknown': '全製品の放出形態が記録されていない — 具体的な製品を選択',
+    'fam.rel.multi_why': '放出タイプが記載されていない記録があります',
+    'fam.rel.none': '有効成分の記録なし',
+    'fam.rel.partial': '有効成分の一部が共通 — 同じ組み合わせではなく、互換性なし',
+    'fam.rel.release': '有効成分は同じで放出が異なる — 互換性なし',
+    'fam.rel.same': '有効成分は同じ',
+    'fam.title': '他の市場の同じブランド',
+    'fam.warn': '同じブランド、異なる薬',
+    'flow.s1': '名称',
+    'flow.s2': '製品を確認',
+    'flow.s3': '対象市場',
+    'footer': '情報提供のみ — 医療上の助言ではなく、薬剤師の代わりにはなりません。',
+    'form.capsule': 'カプセル',
+    'form.effervescent': '発泡錠',
+    'form.gas': 'ガス',
+    'form.granule': '顆粒',
+    'form.inhalation': '吸入',
+    'form.injection': '注射',
+    'form.kit': 'キット',
+    'form.liquid': '液剤',
+    'form.pellet': 'ペレット',
+    'form.powder': '散剤',
+    'form.solution': '液剤',
+    'form.stick': 'スティック',
+    'form.suppository': '坐剤',
+    'form.tablet': '錠剤',
+    'form.topical': '外用',
+    'form.unknown': '不明',
+    'glossary.d.artg': 'Australian Register of Therapeutic Goods 番号：オーストラリアで登録・収載された治療用製品を識別します。',
+    'glossary.d.atc': 'Anatomical Therapeutic Chemical 分類（WHO）：C07AB02 のようなコード。先頭の文字・数字が器官・系統、クラス、成分を表し、市場をまたいで同じ種類の薬を探すのに役立ちます。',
+    'glossary.d.ban': 'British Approved Name：英国の一般名で、通常は INN と同じですが、一部の古い名称は異なります（例：epinephrine に対する adrenaline）。',
+    'glossary.d.din': 'Drug Identification Number：カナダの製品識別子。DIN-HM はホメオパシー製品に使われます。',
+    'glossary.d.fdc': 'Fixed-Dose Combination：1つの製品に2つ以上の有効成分を含むもの（例：metformin + glibenclamide）。本サイトの配合ページ。',
+    'glossary.d.inn': 'International Nonproprietary Name：有効成分の WHO 一般名（例：acetaminophen/paracetamol、metoprolol）。',
+    'glossary.d.lasa': 'Look-Alike, Sound-Alike の薬名。FDA の tall-man 表記と混同薬名リストが取り違えの防止に役立ちます。',
+    'glossary.d.mah': 'Marketing Authorisation Holder：市場で製品の承認を保有する企業。必ずしも工場ではありません。',
+    'glossary.d.ndc': 'National Drug Code：米国の製品識別子（ラベラー＋製品＋包装の各セグメント）。',
+    'glossary.d.otc': 'Over-the-counter：その市場で処方箋なしで販売されるもの。同じ薬が他国では処方箋限定のこともあります。',
+    'glossary.d.rx': 'その市場で処方箋が必要な医薬品。',
+    'glossary.d.strength': '単位あたりの有効成分量（例：1錠あたり 500 mg）。含量や放出形態は市場によって異なることがあります。',
+    'glossary.d.usan': 'United States Adopted Name：米国の一般名。多くは INN と同じですが、異なることもあります（例：salbutamol に対する albuterol）。',
+    'glossary.def': '意味',
+    'glossary.h2': '用語とコード',
+    'glossary.intro': '製品ラベル、規制機関の記録、本サイトで見かけるコードや用語の短い定義です。読み解きの助けであり、医療上の助言ではありません。',
+    'glossary.note': '同じ略語でも国によって意味が異なります（例：DIN はカナダ、ARTG 番号はオーストラリア）。必ず出典とともにコードを読んでください。',
+    'glossary.t.artg': 'ARTG',
+    'glossary.t.atc': 'ATC コード',
+    'glossary.t.ban': 'BAN',
+    'glossary.t.din': 'DIN',
+    'glossary.t.fdc': 'FDC',
+    'glossary.t.inn': 'INN',
+    'glossary.t.lasa': 'LASA / tall-man',
+    'glossary.t.mah': 'MAH',
+    'glossary.t.ndc': 'NDC',
+    'glossary.t.otc': 'OTC',
+    'glossary.t.rx': 'Rx',
+    'glossary.t.strength': '含量',
+    'glossary.t.usan': 'USAN',
+    'glossary.term': '用語',
+    'glossary.title': '用語集',
+    'home.all': 'すべての国・地域',
+    'home.au': 'オーストラリア',
+    'home.ca': 'カナダ',
+    'home.candidate': '常に候補集合を返し、単一の答えを返すことはありません。',
+    'home.cn': '中国',
+    'home.country_label': '対象市場：そこで使われている名前を表示（任意）',
+    'home.country_label_sel': '対象市場：{country} での名称を見る：',
+    'home.country_summary': '対象市場（任意）',
+    'home.coverage': '結果が空でも、その薬が存在しないとは限りません。カバレッジ（国・地域）：',
+    'home.cz': 'チェコ',
+    'home.es': 'スペイン',
+    'home.eu': '欧州連合 (EU)',
+    'home.fr': 'フランス',
+    'home.gb': 'イギリス',
+    'home.h1': '薬の名前を調べて、各国での名称を見る',
+    'home.hint_idle': '最初の検索では索引シャードを1つ（中央値 約1.0 MB、gzip 約0.16 MB）読み込み、完全な索引（core 約42 MB raw、gzip 約9–10 MB）はバックグラウンドで埋まります。入力・検索ボックスのフォーカス・サンプル選択で開始します。',
+    'home.hint_loading': '索引シャードを読み込み中（中央値 約1.0 MB、gzip 約0.16 MB）…',
+    'home.hk': '香港',
+    'home.jp': '日本',
+    'home.loading': '索引を読み込み中…',
+    'home.lv': 'ラトビア',
+    'home.mx': 'メキシコ',
+    'home.ph': 'ブランド名・一般名・包装の一行',
+    'home.recent': '最近の更新',
+    'home.recent_all': 'すべての更新を見る →',
+    'home.sg': 'シンガポール',
+    'home.slash_hint': '/ キーで検索ボックスへ',
+    'home.sub': '商品名・一般名・俗称、または包装の一行 — 中国語、全角、キリル文字も入力できます。',
+    'home.submit': '検索',
+    'home.suggestions': '候補',
+    'home.try_cross': '米国の Tylenol Extra Strength — 中国では何と呼ばれている？',
+    'home.try_pack': '包装の文字で検索：',
+    'home.tw': '台湾',
+    'home.us': 'アメリカ',
+    'ingredient.unrecorded': '成分未記録（名称レベル）',
+    'lf.all': 'すべて',
+    'lf.all_kinds': 'すべての種類',
+    'lf.applied': '選択中の絞り込み',
+    'lf.count': '全 {total} 行中 {shown} 行',
+    'lf.drop': 'この絞り込みを解除',
+    'lf.kind': '種類',
+    'lf.market': '市場',
+    'lf.none': 'この絞り込みに一致する行はありません。',
+    'lf.spec': '含量',
+    'lf.spec_ph': '含量で絞り込み、例：500 mg',
+    'lf.title': '絞り込み',
+    'maker.brand': 'ブランド',
+    'maker.by_country': '国別の製品',
+    'maker.capped': '全 {total} 製品のうち最初の {shown} 件を表示（国順）。',
+    'maker.empty': 'この製造販売業者の製品は記録されていません。',
+    'maker.ingredient': '有効成分',
+    'maker.intro': '<p class="sub">{name} — {markets} 市場で {products} 製品、{brands} ブランド名。製品は国別にまとめ、ブランド名はブランドページへ、成分は成分ページまたは配合ページへリンクします。規制機関が記録した製造販売承認者であり、必ずしも工場ではありません。</p>',
+    'maker.no_page': '独立したブランドページなし',
+    'maker.no_page_count': 'ページのない製造販売業者が他に {n} 社',
+    'maker.single_note': 'この製造販売業者の他の製品はまだ記録されていません。',
+    'maker.source': '出典',
+    'maker.source_note': '<b>出典とライセンス</b>：製品行は規制機関の記録（openFDA、dm+d、CIMA、COFEPRIS、PBS/TGA、Health Canada DPD、NHSA）にリンクします。事実項目のみ — <a href="../about.html#licences">ライセンス台帳</a>をご覧ください。',
+    'maker.stats': '<p class="sub">{products} 製品 · {markets} 市場 · {brands} ブランド名</p>',
+    'maker.summary': 'この製造販売業者が登録した製品を市場別に表示。',
+    'maker.title': '製造販売業者 / 製造販売承認者',
+    'matrix.all': 'すべて',
+    'matrix.au_note': 'オーストラリアの ARTG データには登録状態の列がないため状態は不明として表示し、登録されていることは現在販売中であることを意味しません。',
+    'matrix.brand_note': '各国・地域の列はその地で登録された商品名を表示しており、翻訳ではありません。',
+    'matrix.capped': '全 {total} 件の含量・剤形行のうち最初の {shown} 件を表示しています。',
+    'matrix.close': '閉じる',
+    'matrix.country': '国・地域',
+    'matrix.country_all': 'すべて',
+    'matrix.country_clear': 'クリア',
+    'matrix.empty_markets': '列を表示する市場を1つ以上選択してください。',
+    'matrix.filters': '絞り込み',
+    'matrix.filters_short': '絞り込み',
+    'matrix.form': '剤形',
+    'matrix.hidden_note': '中止・撤回・状態未確認の製品は既定で非表示です。香港とオーストラリアの記録は例外として表示します。',
+    'matrix.hidden_rows': '{mk} にのみ記録された含量・剤形行が他に {n} 件あり、この表には表示していません。',
+    'matrix.hidden_show': 'この市場を列に追加',
+    'matrix.hk_note': '香港の記録は名称・成分レベルのみ：含量・剤形・登録状態がなく、登録されていることは現在の供給を証明しません。',
+    'matrix.market_count': '市場 {shown}/{total}',
+    'matrix.mobile_filters': '絞り込み',
+    'matrix.multi_form': '複数の剤形',
+    'matrix.none': '未記録',
+    'matrix.original': '記録どおり',
+    'matrix.release': '放出',
+    'matrix.reset': '既定に戻す',
+    'matrix.scroll_hint': '横にスクロールして他の市場を表示 →',
+    'matrix.showing': '{n} / {total} 行',
+    'matrix.sort_note': '一般的な含量を先に、含量未記載を最後に並べます。',
+    'matrix.spec': '含量 / 剤形 / 放出',
+    'matrix.spec_check': '含量を確認',
+    'matrix.spec_conflict': '含量未確認',
+    'matrix.spec_search': '含量を検索',
+    'matrix.undisclosed_note': '「非公開」は出典が含量を公開していないことを意味し、製品に含量がないという意味ではありません。',
+    'meta.about.desc': 'この照合の仕組み：出典とカバレッジ、ライセンスと出典表示、既知の不足と編集方針。参考情報であり、医療上の助言ではありません。',
+    'meta.about.title': 'このサイトについて · 医薬品ブランド名の国際照合',
+    'meta.confused.desc': 'FDA tall-man の類似・同音ペア：名前についての警告であり、医薬品が互換であるという記述ではありません。',
+    'meta.confused.title': '混同しやすい薬名 · 医薬品ブランド名の国際照合',
+    'meta.coverage.desc': '各市場の製品数、成分マッピング、含量カバレッジ、最終同期、既知の不足。数値は現在のデータベースから算出しています。',
+    'meta.coverage.title': 'カバレッジと鮮度 · 医薬品ブランド名の国際照合',
+    'meta.glossary.desc': '本サイトで使うコードと用語の短い定義：INN、BAN、USAN、ATC、MAH、DIN、NDC、ARTG、FDC、LASA、OTC、Rx、含量。',
+    'meta.glossary.title': '用語集 · 医薬品ブランド名の国際照合',
+    'meta.index.desc': '商品名・一般名・俗称を検索し、有効成分・含量、および同じ製品が各国で何と呼ばれているかを確認できます。公開・非営利の参考情報です。',
+    'meta.index.title': '医薬品ブランド名の国際照合 — 各国の薬名',
+    'meta.warn.desc': '同名異薬の製品、および国・塩形態・放出機構が異なり互換性のない配合についての公開警告。情報提供のみ。',
+    'meta.warn.title': '警告：同じ名前、異なる薬 · 医薬品ブランド名の国際照合',
+    'meta.whatsnew.desc': '医薬品ブランド名の国際照合のリリースノート：各バージョンの修正と追加。',
+    'meta.whatsnew.title': '新着情報 · 医薬品ブランド名の国際照合',
+    'mk.collapse_all': 'すべて折りたたむ',
+    'mk.expand_all': 'すべて展開',
+    'mkmeta.asof': 'データ基準日',
+    'mkmeta.source': '出典',
+    'mkmeta.undisclosed': '含量未記載の記録があります',
+    'mkmeta.unknown': '状態不明の記録を含む（販売中の証明ではありません）',
+    'name.also': '別表記',
+    'name.countries': '国・地域',
+    'name.empty': '記録なし',
+    'name.form': '剤形',
+    'name.form_granularity_cn': '出典は剤形をクラスレベル（例：「錠剤」）でのみ記録しており、発泡錠・フィルムコーティング錠などの細分類は区別していません。',
+    'name.form_source': '出典の記録どおり',
+    'name.form_spec': '剤形別の含量',
+    'name.form_unstated': '剤形未記載',
+    'name.found': '見つかった場所',
+    'name.no_en': '英語名なし',
+    'name.no_es': 'スペイン語名なし',
+    'name.no_zh': '中国語名なし',
+    'name.no_zh_hant': '繁体字名なし',
+    'name.notice': '同じ名前でも互換という意味ではありません。同一性は記録どおり項目ごとに照合しています。',
+    'name.records_n': '{n} 件の記録',
+    'name.records_one': '1 件の記録',
+    'name.rel_multi_title': '複数の放出タイプ',
+    'name.rel_note': '比較する具体的な製品を選択してください',
+    'name.rel_unknown_title': '放出形態が一部未記録',
+    'name.rel_unrecorded': '放出形態未記録',
+    'name.release': '放出',
+    'name.severe': 'このブランド名は、国やバリエーションによって異なる有効成分を指します。組成を確認し、名前を同等に扱わないでください。',
+    'name.show_more': 'さらに表示',
+    'name.single_note': 'この名前の製品記録は現在1件のみです。',
+    'name.spec_amount': '他の記録量',
+    'name.spec_conc': '濃度情報あり',
+    'name.spec_unrecorded': '含量未記録',
+    'name.spec_vol': '容量のみ',
+    'name.specs_n': '含量 {n} 種',
+    'name.specs_one': '含量 1 種',
+    'name.strength': '含量',
+    'name.summary': 'この名前で記録された製品を市場別に表示（同一性のみ）。',
+    'name.warning': '同じ名前でも即放性と徐放性は異なり、互換性はありません。',
+    'nav.about': 'このサイトについて',
+    'nav.all_categories': 'すべてのカテゴリと ATC',
+    'nav.atc': 'ATC とカテゴリ',
+    'nav.back_search': '← 検索に戻る',
+    'nav.categories': 'カテゴリ',
+    'nav.confused': '混同しやすい名前',
+    'nav.coverage': 'カバレッジ',
+    'nav.crumbs': 'パンくず',
+    'nav.glossary': '用語集',
+    'nav.markets': '市場',
+    'nav.menu': 'メニュー',
+    'nav.more': 'その他',
+    'nav.primary': 'メインナビゲーション',
+    'nav.search': '検索',
+    'nav.search_compact': '名前を検索',
+    'nav.sections': 'セクション',
+    'nav.warn': '警告',
+    'nav.whatsnew': '新着情報',
+    'nick.abbrev': '略語',
+    'nick.ambiguous': 'この俗称は複数の成分を指す可能性があります — 組成を確認してください。',
+    'nick.caveat': '俗称は特定の包装ではなく成分を指します。同じ成分でも国ごとに異なるブランド名で販売されています。',
+    'nick.class': '分類語',
+    'nick.class_caveat': 'これは分類語であり特定の医薬品ではありません — 複数の成分を指すことがあります。成分を確認してください。',
+    'nick.community': 'コミュニティ名',
+    'nick.folk': '通称',
+    'nick.folk_caveat': 'これは通称・分類語であり特定の医薬品ではありません — 複数の成分を指すことがあります。名前にこの語を含む製品が必ずその分類とは限りません。成分を確認してください。',
+    'nick.hit': '俗称',
+    'nick.lang.en': '英語',
+    'nick.lang.zh': '中国語',
+    'nick.legacy': '旧名',
+    'nick.misnomer': 'よくある誤称',
+    'nick.nomap_caveat': 'この語は本データベースに市販製品がない成分を指すため、製品リストを表示しません。',
+    'nick.slang': 'ネット上の俗称',
+    'nick.source': '出典',
+    'nick.street': '米国のストリート名',
+    'nick.synonym': '同義語',
+    'nick.synonym_caveat': '同じ有効成分の別名（INN と USAN、または綴りの変種）。成分を特定するものであり、異なる国の製品が互換になるわけではありません。',
+    'nick.synonym_hit': '別名',
+    'nick.tag': '俗称',
+    'nick.translit': '音訳された旧名',
+    'nick.unverified': 'ユーザー提供（未検証）',
+    'notfound.about': 'このサイトについて',
+    'notfound.confused': '混同しやすい名前',
+    'notfound.p1': 'このアドレスにページはありません。古いリンク、入力ミス、または名称変更の可能性があります。',
+    'notfound.p2': 'ホームページに戻り、薬の名前（ブランド名・一般名・俗称）を入力してください。',
+    'notfound.report': '内部リンクが壊れている場合は <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a> でお知らせください。',
+    'notfound.search': '検索',
+    'notfound.title': 'ページが見つかりません',
+    'notfound.whatsnew': '新着情報',
+    'parse.atc': 'ATC コード',
+    'parse.category': 'カテゴリ',
+    'parse.category_note': 'テーマコレクションに一致 — 名前ではなく、同等性を示すものでもありません。',
+    'parse.dose': '用量',
+    'parse.form': '剤形',
+    'parse.label': '解析された検索',
+    'parse.match': '一致',
+    'parse.match.atc': 'ATC コード',
+    'parse.match.category': 'カテゴリ / ATC 分類',
+    'parse.match.compact': '連結一致',
+    'parse.match.contains': '部分一致',
+    'parse.match.country': '国別表示',
+    'parse.match.exact': '完全一致',
+    'parse.match.fuzzy': 'あいまい一致',
+    'parse.match.nickname': '別名',
+    'parse.match.none': '一致なし',
+    'parse.match.pinyin': 'ピンイン',
+    'parse.match.prefix': '前方一致',
+    'parse.name': '名称',
+    'release.DR': '遅延放出',
+    'release.ER': '持続放出',
+    'release.MR': '修飾放出',
+    'release.none': '—',
+    'report.all': '既知の問題',
+    'report.cta': 'この結果を報告',
+    'report.field_actual': '実際の結果',
+    'report.field_expected': '期待した結果',
+    'report.field_pack': '包装またはロット',
+    'report.field_page': 'ページ',
+    'report.field_query': '検索語',
+    'report.field_row': '行',
+    'report.issue_title': 'データの誤り：',
+    'report.link': 'データの誤りを報告',
+    'report.note': '成分が違う、用量が違う、掲載のない薬がある場合はお知らせください：',
+    'res.action_copy': '一般名をコピー',
+    'res.action_drug': '成分ページを開く',
+    'res.actions': '操作',
+    'res.alias': '別名に一致',
+    'res.alias_no_products': '単一の製品ではありません — 上の注記をご覧ください',
+    'res.brands': '件のブランド名が見つかりました',
+    'res.brands_noun': 'ブランド',
+    'res.caveat': '結果が空でも、その薬が存在しないとは限りません',
+    'res.col_country': '国・地域',
+    'res.col_form': '剤形',
+    'res.col_link': 'ページ',
+    'res.col_market': '市場',
+    'res.col_match': '一致',
+    'res.col_product': '製品名',
+    'res.col_spec': '含量と剤形',
+    'res.copied': 'コピーしました',
+    'res.copy': '表をコピー',
+    'res.copy_fail': 'コピーに失敗しました — 表を手動で選択してください',
+    'res.csv': 'CSV をダウンロード',
+    'res.density': 'コンパクト表示',
+    'res.details': '詳細',
+    'res.empty_browse': 'カテゴリから探す',
+    'res.empty_coverage': 'カバレッジと鮮度を見る',
+    'res.empty_h1': '「{q}」に一致するものはありません',
+    'res.empty_spelling': '綴りを確認するか、一般名でお試しください',
+    'res.fold': '表示を減らす',
+    'res.fuzzy': '完全一致なし — 近い名前',
+    'res.identity.ingredient': '有効成分',
+    'res.identity.markets': '対象市場',
+    'res.identity.records': '{n} 件の記録',
+    'res.identity_note': '同じ名前でも、別の市場では異なる成分を指すことがあります。名前だけでなく成分・含量・剤形を確認してください。',
+    'res.identity_title': '{n} 件中の候補 1',
+    'res.load_more': 'さらに読み込む',
+    'res.loaded_all': 'すべての結果を表示しました',
+    'res.matched': '件の名前が一致',
+    'res.matched_name': '一致した名前',
+    'res.more_detail': '他の含量 / 他の記録',
+    'res.more_n': '他の {n} 製品を表示',
+    'res.no_brand_note': '{n} 件の記録には商品名がなく、名称レベルで表示しています。',
+    'res.none': '一致なし',
+    'res.not_interchangeable': '市場間で互換性なし',
+    'res.notin': 'この国では未収録',
+    'res.partial': '一部の結果 — 完全な索引を読み込み中…',
+    'res.pick': 'この製品を選択',
+    'res.picked': '選択中',
+    'res.records_noun': '記録',
+    'res.reg': '登録の詳細',
+    'res.same_name': '同じ名前、異なる薬',
+    'res.show_brands': 'すべてのブランドを表示',
+    'res.showing': '{total} 件中 {n} 件を表示',
+    'res.src_active': '来源市場 {c}',
+    'res.src_all': 'すべての来源市場',
+    'res.src_label': '記録市場（ここで登録された記録のみ）',
+    'row.report': 'この行を報告',
+    'same.ing': '同じ成分を含む他の製品',
+    'same.note': 'ブランド名で検索した結果です — 同じ有効成分を含む他の製品はこちらです。',
+    'same.related': '同じ成分の一部を含む（同じ組成ではありません）',
+    'same.related_note': 'これらの記録は検索語と少なくとも1つの成分を共有しますが、成分の全体集合は異なります。同じ製品ではありません。',
+    'same.warning': '同じ名前や同じ成分でも互換という意味ではありません。',
+    'site.name': '医薬品ブランド名の国際照合',
+    'spec.cannot_compare': '比較できません',
+    'spec.no_basis': 'per mL / 単位あたりの基準が未記載',
+    'spec.no_basis_note': '一部の含量は per mL / 単位あたりの基準なしで記録されています。記録どおりに表示し、他市場とは比較しません。',
+    'syn.tag': '同義語',
+    't11.adv': '詳細フィルター',
+    't11.all_markets': 'すべて',
+    't11.cmp_note': '項目ごとの同一性比較のみ。同じ名前や同じ成分でも、製品が互換であることを意味しません。',
+    't11.cmp_target': '対象市場',
+    't11.cmp_title': '項目別比較（同一性のみ）',
+    't11.cmp_you': 'あなたの製品',
+    't11.compare_link': '項目ごとに比較 →',
+    't11.diff': '異なる',
+    't11.missing': '未記録',
+    't11.multi': '製品を選択',
+    't11.name': '登録名',
+    't11.pick_mine': 'これが自分の製品',
+    't11.pick_this': 'これ',
+    't11.picked': '選択中',
+    't11.release': '放出',
+    't11.reselect': '選び直す',
+    't11.same': '同じ',
+    't11.spec': '含量',
+    't11.still_candidates': '候補集合は依然 {n} 件です — これはそのうちの1つにすぎません。候補をすべて見る ↓',
+    'tab.about': 'このサイトについて',
+    'tab.categories': 'カテゴリ',
+    'tab.coverage': 'カバレッジ',
+    'tab.search': '検索',
+    'u1.aria': '使い方ガイド',
+    'u1.close': '閉じる',
+    'u1.step1': '包装に書かれた名前を入力',
+    'u1.step1_hint': 'ブランド名、一般名、俗称、包装の一行 — 用量が含まれていても構いません。',
+    'u1.step2': 'この候補を確認：成分・含量・剤形',
+    'u1.step2_hint': 'カードは候補を1つ示すだけで、答えではありません — 包装と照らして成分・含量・剤形を確認してください。',
+    'u1.step3': '対象市場を選ぶ',
+    'u1.step3_hint': '対象市場を選ぶと同じ成分がそこで何と呼ばれているか分かります。候補リスト自体は変わりません。',
+    'u1.title': '3ステップで使う',
+    'u1.try': '例：',
+    'u2.hint': '同じ成分の現地名称 — 国・地域をクリックすると製品を表示します。未収録でも、そこに存在しない証明にはなりません。',
+    'u2.multi': '複数の成分が一致しています — 国・地域を切り替えて全体を表示してください。',
+    'u2.none': '未収録',
+    'u2.none_hint': 'この市場の公開データに、この成分の製品はありません。そこに存在しない証明にはなりません。',
+    'u2.title': '国・地域別の名称',
+    'unit.iu': 'IU',
+    'unit.mci': 'mCi',
+    'unit.meq': 'mEq',
+    'unit.microgram': 'mcg',
+    'unit.ug': 'mcg',
+    'unit.unit': '単位',
+    'unit.万iu': '1万 IU',
+    'warn.count': '<p class="sub">公開中の警告 @@WARN_TOTAL@@ 件：高重大度 @@WARN_HIGH@@ 件、中 @@WARN_MEDIUM@@ 件、情報 @@WARN_INFO@@ 件。下書きの警告は表示しません。</p>',
+    'warn.countries': '市場',
+    'warn.drug_summary': 'この成分の安全性警告',
+    'warn.empty': '公開中の警告はまだありません。',
+    'warn.filter.all': 'すべて',
+    'warn.group.high': '高重大度 — 互換性を仮定しないでください',
+    'warn.group.info': '知っておきたい情報',
+    'warn.group.medium': '中重大度 — 同等とみなす前に確認してください',
+    'warn.intro': '<p class="sub">混同しやすい名前や、<b>互換性のない</b>製品についての公開警告です — 国、塩形態、放出機構の違いを含みます。このページは同一性と互換性のみを示し、<b>服薬助言</b>や代替推奨は含みません。</p>',
+    'warn.no_advice': '医療上の助言ではありません。実際の包装と成分を確認し、製品を変更する前に薬剤師に相談してください。',
+    'warn.page_next': '次へ',
+    'warn.page_prev': '前へ',
+    'warn.page_status': '{total} ページ中 {n} ページ · 警告 {count} 件',
+    'warn.pagination': '警告のページ',
+    'warn.related': '関連する成分',
+    'warn.reviewed': 'レビュー担当',
+    'warn.see_all': 'すべての警告を見る',
+    'warn.sev.high': '高',
+    'warn.sev.info': '情報',
+    'warn.sev.medium': '中',
+    'warn.source': '規制機関の出典',
+    'warn.source_note': '<b>出典とライセンス</b>：各警告は規制機関の原文文書（DailyMed/FDA、EMA/MHRA、Health Canada DPD、AEMPS CIMA、PBS/TGA、NMPA など）にリンクします。事実の抜粋のみを掲載し、出典リンクを保持します。ラベルや SmPC/CMI の全文は再掲載しません。条件は About のライセンス台帳をご覧ください。',
+    'warn.title': '警告：同じ名前、異なる薬',
+    'whatsnew.intro': '各リリースには短い概要が付きます。過去のバージョンは git タグから補完し、全履歴は <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a> にあります。',
+    'whatsnew.lang_note': 'リリースノートは機械翻訳（AI）であり、CHANGELOG.md の中国語原文が基準です。',
+    'whatsnew.pending': '中国語原文のみ — 英語/スペイン語の翻訳待ち。',
+    'whatsnew.title': '新着情報',
+}
+
+
+# ── L3（v0.17.0）：捷克语 / 拉脱维亚语界面文案（第 8、9 语言）────────────────
+# 形状与 FR_I18N / KO_I18N / JA_I18N 相同：扁平 `key -> 译文`，键集与 en **完全一致**（684 键）。
+# 由 `_merge_static_i18n()` 展开成 I18N["cs"] / I18N["lv"]；缺键才回落英文（现查 0 缺键）。
+# 来源：2026-11-20 Lead 24 线程并行翻译 + 六项硬校验（键集/占位符/HTML 标签/空值/伪译/字符集）。
+# 只加界面语言，不加 CZ / LV 之外的新市场（市场仍 15）。
+CS_I18N: dict[str, str] = {
+    'a1.approval': 'Schválení / NDC / DIN',
+    'a1.expand': 'Podrobnosti',
+    'a1.goto': 'Otevřít stránku léčivé látky',
+    'a1.loading': 'Načítání podrobností…',
+    'a1.market': 'Trh',
+    'a1.more': 'Zobrazeno prvních 12 záznamů; všechny najdete na <a href="{url}">stránce léčivé látky</a>.',
+    'a1.none': 'Pro tento název nejsou žádné záznamy o produktech.',
+    'a1.pack': 'Balení',
+    'a1.raw': 'Původní záznam',
+    'a1.source': 'Zdroj',
+    'a1.status': 'Stav',
+    'a11y.skip': 'Přejít k obsahu',
+    'a3.incompat': 'Nejsou vzájemně zaměnitelné — viz upozornění',
+    'a3.release': 'Mechanismus uvolňování:',
+    'a3.salt': 'Solné formy:',
+    'about.analytics': '<h2>Analytika</h2><p class="sub">Tento web používá <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> pro anonymní analytiku bez cookies. Neukládáme osobní údaje a analytika se nepoužívá k reklamě. Vidíme pouze zobrazení stránek, odkud návštěvník přišel, zemi/region, prohlížeč a velikost obrazovky, dále výrazy vyhledávání na webu a kliknutí na výsledky, a to za účelem zlepšování kvality vyhledávání. Vyhledávací výrazy (včetně dotazů bez výsledku) se odesílají jen jako souhrnné názvy událostí — normalizovaný text dotazu, nikdy propojený s účtem, IP adresou ani identifikátorem zařízení. Události vyhledávání se odesílají jen při odeslání dotazu (Enter, vzorový odkaz nebo výběr z automatického doplňování), nikdy při průběžném psaní, a nesou pouze délku dotazu a jazyk rozhraní. Viz <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">zásady ochrany osobních údajů GoatCounter</a>.</p>',
+    'about.au_source': '<p class="sub"><b>Austrálie</b>: TGA <b>ARTG Medicines 2026-10-28</b> (Australian Register of Therapeutic Goods; uvedení zdroje TGA/ARTG). Data k <b>2026-10-28</b>. Export <b>neobsahuje sloupec stavu registrace</b>, proto je stav uveden jako neznámý; <b>zápis v registru neznamená, že se produkt aktuálně prodává</b>. U 3 911 produktů chybí záznamy o složení a jsou uvedeny pouze na úrovni názvu.</p>',
+    'about.checksums': 'Kontrolní součty SHA-256',
+    'about.cz_source': '<p class="sub"><b>Česko</b>: SÚKL <b>DLP</b> (Databáze léčivých přípravků, měsíční otevřená data) na základě <b>podmínek užití otevřených dat SÚKL</b> — kopírování, šíření a komerční využití jsou povoleny; <b>uvedení zdroje: SÚKL</b> a význam nesmí být změněn (<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">podmínky</a>). Data k <b>2026-11-01</b> (snapshot DLP20261027). Pouze fakta (název, síla, forma, ATC, léčivá látka, držitel rozhodnutí o registraci, stav registrace); normalizace síly a rozdělení léčivých látek jsou <b>odvozeny</b> z oficiálních polí. <b>SPC/PIL a příbalové letáky jsou dokumenty třetích stran a nikdy se nepřebírají ani nezveřejňují</b>; řádky FSMP a PZLÚ, které nejsou léčivými přípravky, jsou vyloučeny a centrální autorizace EU jsou deduplikovány vůči vrstvě EU. <b>Zápis v registru neznamená, že se produkt aktuálně prodává.</b></p>',
+    'about.data_dictionary': 'Datový slovník',
+    'about.data_package': 'Datový balíček',
+    'about.dataset_jsonld': 'Metadata datové sady (schema.org)',
+    'about.eu_source': '<p class="sub"><b>Regionální vrstva EU</b>: <b>Evropská komise — Unijní registr léčivých přípravků</b> (CC BY 4.0; uvedení zdroje Evropská komise / Unijní registr) plus data <b>EMA Medicines</b> pro křížovou kontrolu (zdroj: European Medicines Agency (EMA); bez loga EMA, bez naznačení schválení). Pouze centrální autorizace (humánní léčivé přípravky), data k <b>2026-11-03</b>. <b>Autorizace v EU není záznamem o prodeji v žádné jednotlivé zemi a registr neobsahuje sílu, lékovou formu ani velikost balení.</b> Produkty, které nelze přiřadit žádné známé léčivé látce, jsou uvedeny pouze na úrovni názvu.</p>',
+    'about.fr_source': '<p class="sub"><b>Francie</b>: BDPM (Base de données publique des médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b>; uvedení zdroje a data aktualizace je povinné. Data k <b>2026-11-03</b>. Pouze fakta (název, léčivá látka, forma, výrobce, registrace). <a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>.</p>',
+    'about.gaps': '<h2>Známé mezery</h2><ul class="sub"><li>Čína má 146 344 registrací chemických léčiv, ale přibližně 9 % se mapuje pouze na látku existující jen v Číně (zatím bez anglického INN) a čínské ATC je uloženo na úrovni 4. Tradiční čínská medicína (TCM) není načtena.</li><li>Ekvivalence síly končí na úrovni D1 (stejná solná forma); převod sůl–báze (D2) a posouzení biologické dostupnosti (D3) nejsou implementovány.</li><li>Mexiko nemá v seznamech regulačního orgánu sloupec síly; z veřejných katalogů se podařilo doplnit pouze 29 % produktů.</li><li>Kanadský DPD neuvádí velikost balení ani cenu a mnoho volně prodejných balení bylo autorizováno ještě před elektronickou érou DPD, takže produkt z regálu může chybět.</li><li><b>Pokrytí ATC — dva jmenovatele:</b> @@ATC_ALL_PCT@@ % všech látek (@@ATC_ALL@@ / @@ATC_ALL_N@@) a @@ATC_DRUG_PCT@@ % lékových entit (inn_drug, @@ATC_DRUG@@ / @@ATC_DRUG_N@@). Rozdíl tvoří převážně nelékové entity (homeopatika, byliny, potraviny, materiály), nikoli chybějící data. Data ATC pocházejí z Wikidata P267 (CC0) a ChEMBL (CC BY-SA 4.0); index ATC/DDD WHOCC vyžaduje licenci, a proto se nepoužívá.</li></ul>',
+    'about.hk_source': '<p class="sub"><b>Hongkong</b>: Drug Office, Department of Health — seznam <b>Registered Pharmaceutical Products</b> (datová sada data.gov.hk hk-dh-dh_do-hk-dh-do-pharmaceutical-product) pod <b>DATA.GOV.HK Terms and Conditions</b> (volné opakované použití s uvedením zdroje; bez naznačení vládního schválení). Data k <b>2026-10-23</b>. <b>Pouze vrstva názvů a léčivých látek — bez síly, lékové formy a stavu registrace; zápis v registru neprokazuje aktuální dodávky.</b></p>',
+    'about.lead': '<p class="sub"><b>Jediný úkol:</b> převést obchodní název na skutečnou léčivou látku a uvést míru jistoty. Web je veřejný, bez reklam a nekomerční. Každá odpověď je sada kandidátů, nikdy ne lékařský předpis.</p>',
+    'about.licences_summary': 'Zdroje dat a licence',
+    'about.loading': '<h2>Jak se načítá vyhledávání</h2><p>První vyhledávání načte jeden indexový oddíl (medián ~1,0 MB, ~0,16 MB gzip); plný index (jádro ~42 MB nekomprimovaně, ~9–10 MB gzip) se doplňuje na pozadí — spustí ho psaní, kliknutí do vyhledávacího pole nebo výběr ukázky. Dokud se oddíl nebo plný index načítá, jsou výsledky označeny jako <i>neúplné</i>; pokud načtení selže, stránka dál funguje s tím, co už má, a nabídne tlačítko <i>Zkusit znovu</i>. Vyhledáváním se k nám nic neposílá.</p>',
+    'about.lv_source': '<p class="sub"><b>Lotyšsko</b>: ZVA <b>HumanProducts</b> (Latvijas Zāļu reģistrs, denní export) zveřejněno pod <b>CC0 1.0</b>; uvedení zdroje není povinné, ale zvykově uvádíme <b>Zāļu valsts aģentūra (ZVA)</b>. Data k <b>2026-11-11</b>. Řádky na úrovni balení jsou seskupeny pod registračním číslem; pouze fakta (lotyšské a původní názvy, síla, forma, INN, ATC, držitel rozhodnutí o registraci, stav). Produkty s centrální autorizací EU jsou deduplikovány vůči vrstvě EU. <b>Registrace není záznamem o aktuálním prodeji.</b></p>',
+    'about.nick': '<h2>Přezdívky a starší názvy</h2><p>„Two frogs“ (liǎng zhī qīngwā) není obchodní název a nikdy se jako obchodní název neukládá: odkazuje na léčivou látku metformin. Přezdívky jsou samostatná ručně spravovaná tabulka — prohledávatelná, ale záměrně vedená mimo tabulky obchodních názvů. Když se některá shoduje, stránka ji označí (<i>internetová přezdívka / starší název</i>) a poté vypíše obchodní názvy dané látky; nikdy se neuvádí jako název vytištěný na balení. Každá položka má zdroj; „od uživatele“ se zobrazuje jako <i>neověřené</i> a nepovýší se na <code>documented</code>, dokud k němu není připojen nezávislý zdroj. Bez zdroje žádná nová položka.</p><ul class="sub"><li>Přezdívky (@@NICKNAMES@@) jsou ručně spravovány v <code>data/seed_nicknames.py</code> a znovu sestavovány — nikoli scrapovány.</li><li>Přezdívky nikdy nevstupují do detekce kolizí a nikdy nedostanou stránku „stejný název“: přezdívka není identita, identitou je léčivá látka.</li></ul>',
+    'about.nick_merged': 'Z @@NICKNAMES_TOTAL@@ položek přezdívek je @@NICKNAMES_MERGED@@ čínských názvů zaznamenaných před sloučením solných forem (kind=misnomer): zůstávají prohledávatelné jako aliasy, aby starý štítek na balení stále našel léčivou látku, a nikdy se nepovažují za obchodní názvy.',
+    'about.rules': '<h2>Tři pravidla</h2><ol><li><b>Obchodní název není primární klíč.</b> Každý dotaz vrací sadu kandidátů; identitu určuje země × forma × síla × léčivá látka.</li><li><b>Kolize se odvozují, nikoli ručně označují.</b> Když se jeden název váže k různým léčivým látkám, web automaticky označí „stejný název, jiná léčivá látka“.</li><li><b>Neposkytujeme doporučení k dávkování.</b> Pouze identifikace a upozornění „Nejsou vzájemně zaměnitelné“ — žádný převod dávek, žádná doporučení k záměně.</li></ol>',
+    'about.samename': '<h2>Proč dochází k „stejnému názvu, jiné léčivé látce“</h2><p class="sub">Stejnou ochrannou známku vlastní různé společnosti na různých trzích a složení se může zcela lišit. Ověřené příklady: ve Spojených státech je <b>Tylenol</b> jednosložkový acetaminophen 500 mg, zatímco v Číně je <b>泰诺</b> čtyřsložkový přípravek proti nachlazení a jednosložkový produkt se jmenuje <b>泰诺林</b>; ve Spojených státech je <b>Benadryl</b> difenhydramin, ve Spojeném království je <b>Benadryl</b> akrivastin; ve Spojených státech je <b>Gaviscon</b> antacidum s hliníkem a hořčíkem, ve Spojeném království je Gaviscon alginátová bariéra.</p>',
+    'about.sg_source': '<p class="sub"><b>Singapur</b>: HSA <b>Listing of Registered Therapeutic Products</b> (datová sada data.gov.sg d_767279312753558cbf19d48344577084) pod <b>Singapore Open Data Licence v1.0 (SODL)</b>; uvedení zdroje a odkazu na licenci je povinné, bez naznačení vládního schválení. Data k <b>2026-08-07</b> (aktualizováno každých 6 měsíců). <b>Zápis v registru neznamená, že se produkt aktuálně prodává.</b> Obchodní názvy zůstávají v angličtině a nikdy se nepřekládají; zobrazovat se mohou pouze čínské názvy léčivých látek (inn_zh). Uvedení zdroje: Contains information from Listing of Registered Therapeutic Products accessed on 2026-10-28 from Health Sciences Authority (HSA), and made available under the Singapore Open Data Licence v1.0 (<a href="https://data.gov.sg/open-data-licence">licence</a>).</p>',
+    'about.sources': '<h2>Zdroje a pokrytí</h2><div class="tablewrap"><table><tr><th>Země / region</th><th>Produkty</th><th>Data k</th></tr>@@COV@@</table></div><p class="sub"><b>Data k</b> = datum, kdy zdroj sám zveřejnil / nabyl účinnosti / pořídil snapshot, nikoli datum našeho sběru. <code>live</code> = živý adresář bez jediného data zdroje; <b>—</b> = pouze roční seznamy.</p><p class="sub"><b>Spojené státy</b>: openFDA NDC Directory (veřejná data vlády Spojených států). <b>Spojené království</b>: NHSBSA dm+d, Open Government Licence v3.0 — <i>Contains public sector information licensed under the Open Government Licence v3.0.</i> <b>Španělsko</b>: AEMPS CIMA — opakované použití povoleno s výslovným uvedením zdroje a datem poslední aktualizace; nejde o otevřenou licenci (viz licence níže). <b>Mexiko</b>: registrační seznamy COFEPRIS (bez uvedené otevřené licence; faktické údaje s odkazy) plus doplnění síly z datových sad zadávání zakázek a cen datos.gob.mx, CC BY 4.0. <b>Austrálie</b>: PBS Schedule API (zachováno oznámení o autorských právech) + adresář TGA CMI + ručně spravované záznamy OTC — pouze faktické údaje, žádný plný text CMI/ARTG. <b>Kanada</b>: Health Canada DPD — nekomerční opakované použití s uvedením zdroje. <b>Čína</b>: 国家医保局 医保药品分类与代码数据库 (snapshot 2025-04-04); otevřenou licenci pro další šíření se nepodařilo najít, proto se ukládají pouze faktické údaje s odkazy.</p>',
+    'about.stats': '<p class="sub">Statistiky: @@PRODUCTS@@ produktů · @@SUBSTANCES@@ léčivých látek · @@KEYS@@ klíčů názvů · @@ALIASES@@ aliasů (@@NICKNAMES@@ ručně spravovaných přezdívek, @@DRUGTERMS@@ lidových/skupinových termínů) · @@CONFUSABLE@@ záměnných dvojic FDA · @@SEVERE@@ názvů označených „stejný název, jiná léčivá látka“.</p>',
+    'about.summary': 'Co tento web je, jaká pravidla dodržuje a odkud pocházejí data.',
+    'about.terms': '<h2>Lidové názvy a skupinové termíny</h2><p>Samostatná tabulka (<code>drug_term</code>, @@DRUGTERMS@@ položek) obsahuje lidové názvy a kategorizační termíny <b>pouze pro legální léčiva</b>: tabletka na odvodnění, ředidlo krve, prášek na spaní (shuìqiányào), antikoncepční pilulka, pilulka „den poté“, statin. Na rozdíl od <code>nickname</code> může odkazovat na třídu, nikoli na jednu léčivou látku, proto může být <code>substance_id</code> NULL; <code>alias_all</code> sjednocuje obě tabulky pro vyhledávání. <b>Zneužívané drogy a rekreační slang jsou výslovně mimo rozsah</b> (pouliční / rekreační drogy); takové položky byly z databáze odstraněny a znovu se nepřidávají.</p><ul class="sub"><li><b>Seznamy NIDA / DEA</b> se už pro rekreační slang nepoužívají; zachovány jsou pouze termíny kategorií léků na předpis, které jsou legálními léčivy, každý se zdrojovou URL.</li><li><b>MedlinePlus (NLM)</b> přispívá běžnými lidovými a skupinovými termíny (dílo vlády Spojených států); komunitní zdroje (CN/GB/AU/ES) jsou označeny jako <i>komunitní název</i> a zůstávají prohledávatelné. Záměnné dvojice FDA: @@CONFUSABLE@@ oficiálních dvojic. <a href="confused.html">Zobrazit seznam</a>.</li></ul>',
+    'about.title': 'O webu',
+    'about.tw_source': '<p class="sub"><b>Tchaj-wan</b>: TFDA „全部藥品許可證資料集“ (datová sada data.gov.tw 9122) pod <b>Open Government Data Licence v1.0 (OGDL v1.0)</b>; uvedení zdroje povinné: 衛福部食藥署 TFDA. Data k <b>2026-10-22</b> (týdenní synchronizace). Pouze fakta (název produktu, léčivé látky, léková forma, výrobce, číslo licence, stav). <b>Síly se získávají analýzou názvů produktů, proto je spolehlivost omezená.</b> Licence: <a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>',
+    'ac.suggestions': 'Návrhy',
+    'artg.id': 'ARTG ID',
+    'artg.note': 'Tyto položky jsou registrovány v Austrálii, ale tento web je zatím nepřiřadil k léčivé látce — proto se nezobrazují jako produkty.',
+    'artg.sponsor': 'Zadavatel',
+    'artg.title': 'Také v ARTG (léčivá látka zatím nezachycena)',
+    'atc.ai_note': 'Názvy tříd a kategorií jsou redakční překlady nebo překlady vytvořené s asistencí AI; závazný je pouze kód ATC a hierarchie WHO.',
+    'atc.all_classes': 'Všechny třídy ATC',
+    'atc.browse_intro': 'Třídy ATC WHO seskupují léčiva podle orgánové soustavy a farmakologické skupiny. Začněte nejvyšší skupinou nebo kategorií pro veřejnost; každá stránka uvádí zde evidované léčivé látky.',
+    'atc.browse_title': 'Procházet podle třídy ATC',
+    'atc.categories_link': 'Kategorie pro veřejnost',
+    'atc.children': 'Podřízené třídy',
+    'atc.count': '{n} léčivých látek',
+    'atc.hint': 'Shoda podle prefixu ATC — výsledkem jsou produkty, jejichž léčivá látka nese tento kód ATC, nikoli shody obchodních názvů.',
+    'atc.hit': 'ATC {code}: {n} názvů produktů odpovídá kódu ATC jejich léčivé látky. Pouze identifikace — nejde o doporučení.',
+    'atc.ing_more': 'a další {n} léčivých látek — úplný seznam se zobrazí po dokončení načítání celého indexu.',
+    'atc.ing_overview': 'Léčivé látky v této třídě ATC — řádky obchodních názvů se načítají na pozadí.',
+    'atc.ingredients': 'Léčivé látky v této třídě',
+    'atc.label': 'ATC',
+    'atc.level': 'Úroveň ATC',
+    'atc.loading': 'Načítání indexu pro vyhledávání ATC…',
+    'atc.markets_hint': 'Každý trh nyní zobrazuje jeden souhrnný stav: trh se považuje za dostupný v prodeji, pokud má alespoň jeden aktivní záznam; stavy jednotlivých záznamů najdete v podrobnostech. Stejný trh může mít několik registračních záznamů s různými stavy, proto se zde každý trh objevuje jen jednou; je to údaj o záznamech, nikoli bezpečnostní posouzení.',
+    'atc.mk_count': '{n} trhů',
+    'atc.more': 'a další {n}',
+    'atc.more_notes': 'Poznámky a licence',
+    'atc.names_source_note': 'Názvy tříd jsou redakční překlady nebo pocházejí z Wikipedie (CC BY-SA 4.0) / Wikidata (CC0); každá stránka ATC uvádí přesný zdroj, licenci a odkaz pro každý jazyk. Závazný je pouze kód ATC a hierarchie WHO.',
+    'atc.no_data': 'V této třídě zatím nejsou evidovány žádné léčivé látky.',
+    'atc.nolang_note': 'Chybějící název se v řádku označí jen tehdy, jde-li o výjimku; pokud název chybí u většiny, seznam zůstane bez označení.',
+    'atc.none': 'Žádná evidovaná léčivá látka nemá tento kód ATC ani tento prefix.',
+    'atc.none_meta': 'Žádná shoda ATC pro {code}',
+    'atc.parent': 'Nadřazená třída',
+    'atc.salt_label': 'Solná forma:',
+    'atc.search_link': 'Hledat v této třídě',
+    'atc.show_all': 'Zobrazit všech {n} (nyní zobrazeno {shown})',
+    'atc.source_note': 'Kódy ATC a hierarchie vycházejí z indexu ATC/DDD WHO Collaborating Centre for Drug Statistics Methodology (copyright WHOCC; index samotný se nereprodukuje). Údaje o léčivých látkách a síle pocházejí z registračních záznamů uvedených na stránce O webu.',
+    'atc.status_note': 'Odznaky stavu shrnují záznamy produktů vedené pro každou léčivou látku (aktivní / ukončený / stažený / neznámý) a kódy trhů za každým odznakem ukazují, kde je daný stav zaznamenán. Sloupec stavu zveřejňují jen některé registry: CA, ES, MX, FR, JP, CZ, LV a Unijní registr EU, stejně jako podrobné záznamy AU ARTG; export AU ARTG a HK sloupec stavu nemají a jsou vedeny jako neznámé; záznamy CN, US, GB, TW a SG jsou v registru a označeny jako aktivní.',
+    'atc.unnamed': 'Název třídy zatím nebyl zkontrolován — závazný je kód ATC.',
+    'atc.view_class': 'Zobrazit tuto třídu ATC',
+    'atc4.empty': 'Pro tuto třídu zatím nejsou záznamy produktů na úrovni lékové formy.',
+    'atc4.error': 'Podrobnosti lékové formy se nepodařilo načíst.',
+    'atc4.form_col': 'Léková forma',
+    'atc4.form_other': 'ostatní formy',
+    'atc4.loading': 'Načítání podrobností lékové formy…',
+    'atc4.notice': 'Třída ATC seskupuje léčiva pouze podle podobné farmakologie/chemie — neznamená to, že jsou vzájemně zaměnitelná. Odlišná léčivá látka, léková forma, mechanismsus uvolňování nebo síla znamenají, že přípravky nejsou vzájemně zaměnitelné.',
+    'atc4.scope': 'Uvedeny jsou pouze léčivé látky se zaznamenanou třídou ATC (@@ATC_ALL@@ z @@ATC_ALL_N@@).',
+    'atc4.sort_note': 'Řádky jsou seřazeny abecedně podle lékové formy a trhy následují v pevném pořadí; nic zde není hodnoceno ani doporučováno. Řádky mají pouze léčivé látky se záznamy produktů.',
+    'atc4.summary': 'Podle lékové formy, napříč trhy',
+    'badge.combo': 'Kombinace',
+    'badge.export_only': 'Pouze na vývoz',
+    'badge.severe': 'Stejný název, jiná léčivá látka',
+    'badge.warning': 'Jiné uvolňování',
+    'bilingual.brand_note': 'Název tak, jak je registrován na daném trhu — nejde o překlad.',
+    'bilingual.source.manual': 'redakční',
+    'bilingual.source.official': 'oficiální',
+    'bilingual.source.pharmacopoeia': 'lékopis',
+    'bilingual.source.regulator': 'regulační orgán',
+    'bilingual.toggle': 'Zobrazit originál',
+    'brand.mah': 'Výrobce:',
+    'brand.mah_note': 'Tento produkt nemá registrovanou ochrannou známku; místo ní je uveden držitel rozhodnutí o registraci.',
+    'brand.none': 'Bez ochranné známky',
+    'card.packs': 'balení',
+    'cat.all_link': 'Všechny kategorie →',
+    'cat.back': 'Všechny třídy ATC a kategorie',
+    'cat.browse_title': 'Běžné kategorie pro veřejnost',
+    'cat.count': '{n} léčivých látek',
+    'cat.disclaimer': 'Tematická sbírka — nejde o tvrzení o ekvivalenci ani zaměnitelnosti.',
+    'cat.help': 'Jak tento seznam číst',
+    'cat.intro': 'Redakční tematické sbírky: každá kategorie se mapuje na třídy ATC a léčivé látky. Slouží k procházení, není důkazem, že léčiva jsou ekvivalentní.',
+    'cat.no_data': 'Pro tuto kategorii zatím nejsou evidovány žádné léčivé látky.',
+    'cat.quick_title': 'Procházet podle kategorie',
+    'cat.related_atc': 'Související třídy ATC',
+    'cat.search_none': 'Žádná léčivá látka neodpovídá.',
+    'cat.search_ph': 'Hledat léčivou látku v této kategorii',
+    'cat.subcat': 'Podtřída',
+    'col.brand': 'Značka',
+    'col.dose': 'Dávka',
+    'col.ing': 'Léčivá látka',
+    'col.mah': 'Výrobce',
+    'combo.capped': 'Zobrazeno prvních {cap} z {total} názvů.',
+    'combo.col_comp': 'Složení a síla',
+    'combo.comp_more': 'Další {n} složení',
+    'combo.compact': 'kombinace',
+    'combo.cross_exact': 'Tyto trhy evidují přípravky se stejnou kombinací léčivých látek. Jde pouze o identifikaci — není to doporučení, že jsou přípravky vzájemně zaměnitelné.',
+    'combo.cross_none': 'V ostatních pokrytých trzích zatím není evidován žádný přípravek s touto kombinací.',
+    'combo.cross_overlap': 'Nejbližší kombinace nalezená na jiných trzích je podobná, ale NENÍ totožná — přípravky nejsou vzájemně zaměnitelné.',
+    'combo.cross_primary': 'Shodná je pouze hlavní léčivá látka — NEJDE o stejnou fixní kombinaci.',
+    'combo.cross_primary_link': 'Zobrazit hlavní léčivou látku',
+    'combo.cross_products': 'přípravků',
+    'combo.cross_record': 'záznam',
+    'combo.cross_title': 'Stejná kombinace na jiných trzích',
+    'combo.cross_unmatched': 'Srovnání mezi trhy není pro tento souhrnný název k dispozici.',
+    'combo.empty': 'Pro tuto kombinaci zatím nejsou evidovány žádné obchodní názvy.',
+    'combo.ingredients': 'Léčivé látky',
+    'combo.intro': '<p class="sub">Tato stránka uvádí značky, jejichž soubor léčivých látek přesně odpovídá níže uvedené kombinaci. Jde pouze o informace o identitě — fixní kombinace není totéž co její jednotlivé léčivé látky a obchodní názvy nejsou mezi trhy vzájemně zaměnitelné.</p>',
+    'combo.no_advice': 'Není to lékařská rada. Před porovnáváním přípravků si zkontrolujte obal a přesné složení; v případě pochybností se obraťte na lékárníka.',
+    'combo.no_page': 'K tomuto názvu není samostatná stránka značky',
+    'combo.products': 'Značky s přesně touto kombinací',
+    'combo.see_warnings': 'Zobrazit upozornění k těmto léčivým látkám',
+    'combo.source_note': '<b>Zdroj &amp; licence</b>: sestaveno ze stejných dat regulátorů jako stránky léčivých látek (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, NHSA). Pouze fakta; viz <a href="../about.html#licences">registr licencí</a>.',
+    'combo.stub_badge': 'Záznam o kombinaci',
+    'combo.stub_note': 'Tato stránka kombinace není rozvinutá; použijte stránky léčivých látek nebo vyhledávání.',
+    'combo.stub_search': 'Hledat',
+    'combo.title': 'Fixní kombinace',
+    'conf.h2': 'Dvojice tall-man podle FDA',
+    'conf.intro': 'Dvojice názvů, které vypadají nebo znějí podobně, z projektu FDA Name Differentiation Project. Jde o oficiální seznam tall-man, nikoli o úplný seznam LASA organizace ISMP.',
+    'conf.note': 'Dvojice zde znamená, že si lze tyto názvy splést; neznamená to, že jsou léčivé látky vzájemně zaměnitelné. FDA doporučuje odlišit je velikostí písmen (tall-man lettering).',
+    'conf.pair': 'Dvojice',
+    'conf.search_hit': 'Tento název lze snadno zaměnit s',
+    'conf.source_note': 'Zdroj: <a href="https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" rel="noopener">FDA Name Differentiation Project</a> (obsah aktuální k 2026-06-12; dílo vlády USA). Zahrnuto je pouze @@CONF_PAIRS@@ oficiálně dále publikovatelných dvojic ze seznamu FDA; autorsky chráněný seznam „List of Confused Drug Names“ od ISMP/ECRI se nepřebírá. Samostatné názvy v seznamu FDA bez dvojice (hydromorphone, mitoxantrone) zde uvedeny nejsou. Dvojice je upozornění na názvy, nikoli tvrzení, že jsou léčivé látky rovnocenné.',
+    'conf.title': 'Snadno zaměnitelné názvy léčiv',
+    'conf.tml': 'Zápis tall-man',
+    'country.change': 'Změnit zemi/region',
+    'country.missing': 'V této zemi/regionu není pod tímto názvem uveden žádný přípravek.',
+    'country.missing_note': 'Název odpovídá léčivé látce, nikoli přípravku v této zemi/regionu. Přepněte zemi/region nebo otevřete stránku léčivé látky.',
+    'country.open_card': 'Stránka léčivé látky',
+    'coverage.col.asof': 'Data platná k',
+    'coverage.col.asof_short': 'K datu',
+    'coverage.col.last': 'Poslední synchronizace',
+    'coverage.col.last_short': 'Synchro.',
+    'coverage.col.mapping': 'Léčivá látka přiřazena',
+    'coverage.col.mapping_short': 'Přiřazeno',
+    'coverage.col.market': 'Trh',
+    'coverage.col.notes': 'Známé mezery',
+    'coverage.col.products': 'Přípravky',
+    'coverage.col.spec': 'Pokrytí síly',
+    'coverage.col.spec_short': 'Síla',
+    'coverage.gap.au': 'Export ARTG nemá sloupec se stavem registrace; stav není znám, nejde o „v prodeji“. U některých přípravků chybí záznamy o léčivé látce.',
+    'coverage.gap.ca': 'Plný zdroj DPD; nekomerční opětovné použití s uvedením zdroje.',
+    'coverage.gap.cn': 'Veřejná licence k dalšímu šíření není potvrzena; u některých záznamů chybí ochranná známka.',
+    'coverage.gap.cz': 'Registr otevřených dat SÚKL (DLP) — záznamy o registraci, nikoli seznam aktuálně prodávaných přípravků; SPC/PIL se nikdy nepřebírají ani nepublikují. Zdroj: SÚKL, 2026-11-01 (snímek DLP20261027).',
+    'coverage.gap.es': 'Licence zdroje k dalšímu šíření čeká na potvrzení.',
+    'coverage.gap.eu': 'Regionální vrstva: centralizované registrace (EMA / registr Unie EK). Bez síly, lékové formy a velikosti balení; registrace ≠ prodej v dané zemi.',
+    'coverage.gap.fr': 'BDPM (ANSM) — Licence Ouverte / etalab-2.0, vyžaduje uvedení zdroje; datum aktualizace je v datovém balíčku; registrace ≠ prodej.',
+    'coverage.gap.gb': 'Plný zdroj dm+d; uvedení zdroje podle Open Government Licence.',
+    'coverage.gap.hk': 'Pouze vrstva názvů a léčivých látek: chybí síla, léková forma i stav registrace; registrované ≠ na trhu.',
+    'coverage.gap.jp': 'Pouze položky cenového seznamu NHI (薬価基準) — nejde o registrační databázi ani o doklad současných dodávek. Zdroj: MHLW (厚生労働省), PDL 1.0, 2026-11-01.',
+    'coverage.gap.lv': 'Otevřená data ZVA HumanProducts (na úrovni balení, seskupená podle registračního čísla) — registr, nikoli seznam přípravků, které se právě prodávají. Zdroj: ZVA, CC0 1.0, 2026-11-11.',
+    'coverage.gap.mx': 'Licence zdroje čeká na potvrzení; zahrnuty jsou i starší registrace.',
+    'coverage.gap.sg': 'Registrovaný záznam nedokládá současné dodávky.',
+    'coverage.gap.tw': 'Síla je odvozena z názvu přípravku; spolehlivost je omezená.',
+    'coverage.gap.us': 'Plný zdroj openFDA; dílo vlády USA ve veřejném vlastnictví.',
+    'coverage.gap.why': 'Proč',
+    'coverage.intro': 'Co který trh přináší, jak je úplný a kdy byl naposledy synchronizován. Počty jsou záznamy, nikoli jedinečné léčivé přípravky; prázdné pole nebo 0 % znamená, že zdroj tento údaj nezveřejňuje.',
+    'coverage.no_brand': 'žádné záznamy o ochranných známkách',
+    'coverage.notice': 'Tato stránka uvádí pouze datové údaje. Neznamená to, že přípravky jsou vzájemně zaměnitelné, že se prodávají nebo že jsou na různých trzích rovnocenné.',
+    'coverage.sort_market': 'Podle trhu',
+    'coverage.sort_products': 'Podle přípravků',
+    'coverage.source_note': 'Zdroje a licence: viz stránka O projektu a docs/许可清单.md. Omezené zdroje jsou agregovány pouze v datovém balíčku.',
+    'coverage.spec.no_spec': 'Zdroj nezveřejňuje sílu',
+    'coverage.title': 'Pokrytí a aktuálnost',
+    'drug.also_called': 'Také nazýváno:',
+    'drug.also_in': 'také v',
+    'drug.also_known': 'Také známo jako:',
+    'drug.brand': 'Obchodní název',
+    'drug.brand_group': 'S obchodním názvem',
+    'drug.combo_section': 'Kombinované přípravky s touto léčivou látkou',
+    'drug.compare_note': 'Srovnávací tabulka se zobrazuje jen tehdy, když má tato léčivá látka záznamy na mnoha trzích; jinak je tento seznam úplný.',
+    'drug.compare_side': 'Srovnávací tabulka',
+    'drug.confused': 'Snadno zaměnitelné s',
+    'drug.confused_all': 'Všechny dvojice',
+    'drug.confused_note': 'FDA pro tuto dvojici doporučuje odlišit názvy velikostí písmen (tall-man); kontrolujte léčivou látku, ne název.',
+    'drug.empty': 'Zatím nejsou evidovány žádné přípravky.',
+    'drug.forms_all': 'Všechny lékové formy',
+    'drug.forms_label': 'Lékové formy',
+    'drug.forms_short': 'Formy',
+    'drug.full_list': 'Úplný seznam v datovém balíčku',
+    'drug.mah_group': 'Pouze výrobce',
+    'drug.markets': 'trhů',
+    'drug.mkx_more': 'Další trhy: {n}',
+    'drug.mono_section': 'Pouze tato léčivá látka',
+    'drug.more_names': 'Zobrazit ostatní: {n}',
+    'drug.more_specs': 'Další síly',
+    'drug.more_specs_n': 'Další síly: {n} · lékových forem: {m}',
+    'drug.ms_more': 'Další záznamy v této formě: {n}',
+    'drug.no_brand': '(bez obchodního názvu)',
+    'drug.nostrength': 'neuvedeno',
+    'drug.notice': 'Stejná léčivá látka může mít v různých zemích zcela odlišné obchodní názvy a stejný název může označovat jinou léčivou látku. Uvedeno podle zemí — nejsou vzájemně zaměnitelné.',
+    'drug.records': 'záznamů',
+    'drug.release': 'Uvolňování',
+    'drug.showing': 'zobrazeno prvních 40 z',
+    'drug.sid': 'ID látky',
+    'drug.spec_count': 'zobrazeno {shown} z {n}',
+    'drug.spec_count_und': 'zobrazeno {shown} · {u} bez uvedené síly',
+    'drug.spec_count_und_one': 'zobrazeno {shown} · 1 záznam bez uvedené síly',
+    'drug.specs': 'síly',
+    'drug.status': 'Stav',
+    'drug.status.active': 'aktivní',
+    'drug.status.discontinued': 'ukončeno',
+    'drug.status.unknown': 'neznámý',
+    'drug.status.withdrawn': 'staženo',
+    'drug.status_note.discontinued': 'platnost skončila',
+    'drug.status_note.unknown': 'platnost neznámá',
+    'drug.status_note.withdrawn': 'registrace stažena',
+    'drug.strength': 'Síla',
+    'drug.summary': 'Záznamy k této léčivé látce podle zemí (pouze identifikace).',
+    'drug.und_more': 'a dalších {n} ({k} výrobců)',
+    'drug.und_more_one': 'a dalších {n} (1 výrobce)',
+    'drug.undisclosed_block': 'Záznamy bez uvedené síly',
+    'drug.undisclosed_k_one': '{n} záznamů · 1 výrobce',
+    'drug.undisclosed_n': '{n} záznamů · {k} výrobců',
+    'drug.undisclosed_n_one': '1 záznam · {k} výrobců',
+    'drug.undisclosed_nk_one': '1 záznam · 1 výrobce',
+    'drug.view_list': 'Zpět na seznam',
+    'error.index_failed': 'Index se nepodařilo načíst.',
+    'error.local_file': 'Pokud jste tuto stránku otevřeli přímo, prohlížeč blokuje čtení místních souborů — spusťte python -m http.server a navštivte http://localhost:8000/.',
+    'error.retry': 'Zkusit znovu',
+    'eu.coverage_note': 'Vrstva pro EU — pouze centralizovaná schválení; schválení ≠ prodej v jednotlivých zemích.',
+    'eu.region_note': 'Schváleno na úrovni EU — nejde o záznam o prodeji v žádné jednotlivé zemi. Registr EU neuvádí sílu, lékovou formu ani velikost balení.',
+    'eu.region_title': 'Centralizované schválení EU (EMA)',
+    'fam.badge.diff': 'Jiné složení · {n} dalších léčivých látek',
+    'fam.badge.same': 'Stejné léčivé látky · typ uvolňování je třeba ověřit',
+    'fam.cmp_current': 'Porovnávaný přípravek',
+    'fam.cmp_ing': 'Všechny léčivé látky',
+    'fam.cmp_intro': 'Ochranná známka může být v každé zemi registrována jinak a nést jiné léčivé látky. Tato tabulka je přiřazení totožnosti — není překladem ani tvrzením, že přípravky jsou vzájemně zaměnitelné.',
+    'fam.cmp_market': 'Trh',
+    'fam.cmp_name': 'Registrovaný název',
+    'fam.cmp_rel': 'Vztah',
+    'fam.cmp_this': 'Tato stránka',
+    'fam.cmp_title': 'Související ochranné známky a rozdíly ve složení',
+    'fam.rel.diff': 'Jiné léčivé látky — nejsou vzájemně zaměnitelné',
+    'fam.rel.multi': 'Je zaznamenáno více typů uvolňování — vyberte konkrétní přípravek',
+    'fam.rel.multi_unknown': 'Uvolňování není zaznamenáno u všech přípravků — vyberte konkrétní přípravek',
+    'fam.rel.multi_why': 'některé záznamy neuvádějí typ uvolňování',
+    'fam.rel.none': 'Léčivá látka není zaznamenána',
+    'fam.rel.partial': 'Některé léčivé látky jsou společné — nejde o stejnou kombinaci, nejsou vzájemně zaměnitelné',
+    'fam.rel.release': 'Stejné léčivé látky, jiné uvolňování — nejsou vzájemně zaměnitelné',
+    'fam.rel.same': 'Stejné léčivé látky',
+    'fam.title': 'Stejná ochranná známka na jiných trzích',
+    'fam.warn': 'Stejný název, jiná léčivá látka',
+    'flow.s1': 'Název',
+    'flow.s2': 'Potvrzení přípravku',
+    'flow.s3': 'Cílový trh',
+    'footer': 'Jen informace — nejde o lékařskou radu ani o náhradu návštěvy lékárníka.',
+    'form.capsule': 'tobolka',
+    'form.effervescent': 'šumivá',
+    'form.gas': 'plyn',
+    'form.granule': 'granule',
+    'form.inhalation': 'inhalace',
+    'form.injection': 'injekce',
+    'form.kit': 'sada',
+    'form.liquid': 'tekutina',
+    'form.pellet': 'peleta',
+    'form.powder': 'prášek',
+    'form.solution': 'roztok',
+    'form.stick': 'sáček',
+    'form.suppository': 'čípek',
+    'form.tablet': 'tableta',
+    'form.topical': 'zevní',
+    'form.unknown': 'neznámá',
+    'glossary.d.artg': 'Číslo australského registru léčivých přípravků (ARTG): identifikuje léčivý přípravek uvedený nebo registrovaný v Austrálii.',
+    'glossary.d.atc': 'Klasifikace Anatomical Therapeutic Chemical (WHO): kód jako C07AB02. První písmena a číslice řadí látku podle orgánové soustavy, třídy a substance — pomáhá najít stejný druh léku na různých trzích.',
+    'glossary.d.ban': 'British Approved Name: britský generický název, obvykle shodný s INN; několik starších názvů se liší (např. adrenaline místo epinephrine).',
+    'glossary.d.din': 'Drug Identification Number: kanadský identifikátor přípravku; pro homeopatika se používá DIN-HM.',
+    'glossary.d.fdc': 'Fixed-Dose Combination: dvě nebo více léčivých látek v jednom přípravku (např. metformin + glibenclamide). Stránka kombinace na tomto webu.',
+    'glossary.d.inn': 'International Nonproprietary Name: generický název léčivé látky podle WHO (např. acetaminophen/paracetamol, metoprolol).',
+    'glossary.d.lasa': 'Look-Alike, Sound-Alike: názvy léků, které se pletou. Velká písmena ve stylu FDA („tall-man“) a seznam zaměnitelných názvů pomáhají předejít záměnám podobných názvů.',
+    'glossary.d.mah': 'Držitel registrace (Marketing Authorisation Holder): společnost, která má licenci k přípravku na daném trhu; nemusí jít o výrobce.',
+    'glossary.d.ndc': 'National Drug Code: americký identifikátor přípravku (segmenty pro označující subjekt, přípravek a balení).',
+    'glossary.d.otc': 'Over-the-counter: na daném trhu se prodává bez receptu; stejný lék může jinde být jen na předpis.',
+    'glossary.d.rx': 'Lék pouze na lékařský předpis na daném trhu.',
+    'glossary.d.strength': 'Množství léčivé látky v jedné jednotce (např. 500 mg na tabletu); síla a formy uvolňování se mohou mezi trhy lišit.',
+    'glossary.d.usan': 'United States Adopted Name: americký generický název; většinou jde o INN, ale někdy se liší (např. albuterol místo salbutamol).',
+    'glossary.def': 'Význam',
+    'glossary.h2': 'Pojmy a kódy',
+    'glossary.intro': 'Stručné definice kódů a pojmů, které najdete na obalech léků, v záznamech regulátorů a na tomto webu. Slouží k dekódování, nejde o lékařskou radu.',
+    'glossary.note': 'Stejná zkratka může v různých zemích znamenat něco jiného (např. DIN je kanadský, číslo ARTG australské). Kód vždy čtěte spolu s jeho zdrojem.',
+    'glossary.t.artg': 'ARTG',
+    'glossary.t.atc': 'Kód ATC',
+    'glossary.t.ban': 'BAN',
+    'glossary.t.din': 'DIN',
+    'glossary.t.fdc': 'FDC',
+    'glossary.t.inn': 'INN',
+    'glossary.t.lasa': 'LASA / tall-man',
+    'glossary.t.mah': 'MAH',
+    'glossary.t.ndc': 'NDC',
+    'glossary.t.otc': 'OTC',
+    'glossary.t.rx': 'Rx',
+    'glossary.t.strength': 'Síla',
+    'glossary.t.usan': 'USAN',
+    'glossary.term': 'Pojem',
+    'glossary.title': 'Glosář',
+    'home.all': 'Všechny země a regiony',
+    'home.au': 'Austrálie',
+    'home.ca': 'Kanada',
+    'home.candidate': 'Vždy dostanete sadu kandidátů, nikdy jedinou odpověď.',
+    'home.cn': 'Čína',
+    'home.country_label': 'Cílový trh: zobrazit názvy používané v dané zemi (nepovinné)',
+    'home.country_label_sel': 'Cílový trh: podívejte se, jak se to nazývá v zemi {country}:',
+    'home.country_summary': 'Cílový trh (nepovinné)',
+    'home.coverage': 'Prázdný výsledek neznamená, že lék neexistuje. Pokrytí (země a regiony):',
+    'home.cz': 'Česko',
+    'home.es': 'Španělsko',
+    'home.eu': 'Evropská unie (EU)',
+    'home.fr': 'Francie',
+    'home.gb': 'Spojené království',
+    'home.h1': 'Najděte název léku — zjistěte, jak se mu říká v jednotlivých zemích',
+    'home.hint_idle': 'První hledání načte jeden shard indexu (medián ~1,0 MB, ~0,16 MB gzip); plný index (jádro ~42 MB nekomprimovaně, ~9–10 MB gzip) se doplňuje na pozadí — začněte psát, klepněte do vyhledávacího pole nebo zvolte ukázku.',
+    'home.hint_loading': 'Načítá se shard indexu (medián ~1,0 MB, ~0,16 MB gzip)…',
+    'home.hk': 'Hongkong',
+    'home.jp': 'Japonsko',
+    'home.loading': 'Načítá se index…',
+    'home.lv': 'Lotyšsko',
+    'home.mx': 'Mexiko',
+    'home.ph': 'Ochranná známka, generický název nebo řádek z obalu',
+    'home.recent': 'Nedávno aktualizováno',
+    'home.recent_all': 'Zobrazit všechny aktualizace →',
+    'home.sg': 'Singapur',
+    'home.slash_hint': 'Stiskněte / pro přesun do vyhledávání',
+    'home.sub': 'Ochranná známka, generický název, přezdívka nebo řádek z obalu — funguje čínština, plná šířka i cyrilice.',
+    'home.submit': 'Hledat',
+    'home.suggestions': 'Návrhy',
+    'home.try_cross': 'Tylenol Extra Strength z USA — jak se mu říká v Číně?',
+    'home.try_pack': 'Podle textu na obalu:',
+    'home.tw': 'Tchaj-wan',
+    'home.us': 'Spojené státy',
+    'ingredient.unrecorded': 'Léčivá látka není zaznamenána (na úrovni názvu)',
+    'lf.all': 'Vše',
+    'lf.all_kinds': 'Všechny druhy',
+    'lf.applied': 'Vybrané filtry',
+    'lf.count': '{shown} z {total} řádků',
+    'lf.drop': 'Zrušit tento filtr',
+    'lf.kind': 'Druh',
+    'lf.market': 'Trh',
+    'lf.none': 'Žádný řádek neodpovídá těmto filtrům.',
+    'lf.spec': 'Síla',
+    'lf.spec_ph': 'Filtrovat podle síly, např. 500 mg',
+    'lf.title': 'Filtry',
+    'maker.brand': 'Značka',
+    'maker.by_country': 'Produkty podle země',
+    'maker.capped': 'Zobrazeno prvních {shown} z {total} produktů (seřazeno podle země).',
+    'maker.empty': 'Pro tohoto výrobce nejsou evidovány žádné produkty.',
+    'maker.ingredient': 'Léčivé látky',
+    'maker.intro': '<p class="sub">{name} — {products} produktů na {markets} trzích, {brands} názvů značek. Produkty jsou seskupeny podle země; názvy značek odkazují na stránku příslušné značky a léčivé látky na stránku látky nebo kombinace. Jde o držitele rozhodnutí o registraci evidovaného regulačním úřadem, nikoli nutně o výrobce.</p>',
+    'maker.no_page': 'Bez samostatné stránky značky',
+    'maker.no_page_count': 'Další výrobci bez stránky: {n}',
+    'maker.single_note': 'Od tohoto výrobce zatím nejsou evidovány další produkty.',
+    'maker.source': 'Zdroj',
+    'maker.source_note': '<b>Zdroj a licence</b>: řádky produktů odkazují na záznam regulačního úřadu (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, NHSA); pouze fakta — viz <a href="../about.html#licences">registr licencí</a>.',
+    'maker.stats': '<p class="sub">{products} produktů · {markets} trhů · {brands} názvů značek</p>',
+    'maker.summary': 'Produkty registrované tímto výrobcem, podle trhu.',
+    'maker.title': 'Výrobce / držitel rozhodnutí o registraci',
+    'matrix.all': 'Vše',
+    'matrix.au_note': 'Australská data ARTG nemají sloupec se stavem registrace, proto se stav zobrazuje jako neznámý; zápis v registru neznamená, že je produkt aktuálně na trhu.',
+    'matrix.brand_note': 'Každý sloupec země/regionu uvádí místně registrované ochranné známky — nikoli překlady.',
+    'matrix.capped': 'Zobrazeno prvních {shown} z {total} řádků síly a lékové formy.',
+    'matrix.close': 'Zavřít',
+    'matrix.country': 'Země a regiony',
+    'matrix.country_all': 'Vše',
+    'matrix.country_clear': 'Vymazat',
+    'matrix.empty_markets': 'Vyberte alespoň jeden trh, aby se zobrazily sloupce.',
+    'matrix.filters': 'Filtry',
+    'matrix.filters_short': 'Filtry',
+    'matrix.form': 'Léková forma',
+    'matrix.hidden_note': 'Produkty ukončené, stažené nebo s neověřeným stavem jsou ve výchozím nastavení skryté; záznamy pro Hongkong a Austrálii se zobrazují jako výjimky.',
+    'matrix.hidden_rows': 'Další řádky síly a lékové formy ({n}) jsou evidovány pouze pro trh {mk}; v této tabulce se nezobrazují.',
+    'matrix.hidden_show': 'Přidat tento trh jako sloupec',
+    'matrix.hk_note': 'Záznamy pro Hongkong jsou pouze na úrovni názvu a léčivé látky: chybí síla, léková forma i stav registrace; zápis v registru neprokazuje aktuální dodávky.',
+    'matrix.market_count': 'Trhy {shown}/{total}',
+    'matrix.mobile_filters': 'Filtry',
+    'matrix.multi_form': 'Více lékových forem',
+    'matrix.none': 'nezaznamenáno',
+    'matrix.original': 'Zaznamenáno jako',
+    'matrix.release': 'Uvolňování',
+    'matrix.reset': 'Obnovit výchozí nastavení',
+    'matrix.scroll_hint': 'Posunutím do strany zobrazíte další trhy →',
+    'matrix.showing': '{n} / {total} řádků',
+    'matrix.sort_note': 'Nejprve běžné síly, nezveřejněné síly nakonec.',
+    'matrix.spec': 'Síla / léková forma / uvolňování',
+    'matrix.spec_check': 'Ověřit sílu',
+    'matrix.spec_conflict': 'síla neověřena',
+    'matrix.spec_search': 'Hledat sílu',
+    'matrix.undisclosed_note': '„nezveřejněno“ znamená, že zdroj sílu neuvádí — neznamená to, že produkt žádnou nemá.',
+    'meta.about.desc': 'Jak toto srovnání funguje: zdroje a pokrytí, licence a uvedení zdrojů, známé mezery a redakční pravidla. Pouze orientační informace, nejde o lékařskou radu.',
+    'meta.about.title': 'O projektu · Mezinárodní srovnání značek léků',
+    'meta.confused.desc': 'Dvojice názvů, které vypadají nebo znějí podobně, podle FDA (tall-man): upozornění na názvy, nikoli tvrzení, že jsou léky vzájemně zaměnitelné.',
+    'meta.confused.title': 'Snadno zaměnitelné názvy léků · Mezinárodní srovnání značek léků',
+    'meta.coverage.desc': 'Produkty, mapování léčivých látek, pokrytí sil, poslední synchronizace a známé mezery pro každý trh; čísla se počítají z aktuální databáze.',
+    'meta.coverage.title': 'Pokrytí a aktuálnost · Mezinárodní srovnání značek léků',
+    'meta.glossary.desc': 'Krátké definice kódů a pojmů používaných na tomto webu: INN, BAN, USAN, ATC, MAH, DIN, NDC, ARTG, FDC, LASA, OTC, Rx, síla.',
+    'meta.glossary.title': 'Slovník pojmů · Mezinárodní srovnání značek léků',
+    'meta.index.desc': 'Zadejte název značky, generický název nebo přezdívku a zjistěte léčivou látku, sílu a názvy stejného produktu v jiných zemích. Veřejná nekomerční referenční pomůcka.',
+    'meta.index.title': 'Mezinárodní srovnání značek léků — názvy léků napříč zeměmi',
+    'meta.warn.desc': 'Zveřejněná upozornění na produkty se stejným názvem, ale jinou léčivou látkou, a na kombinace, které nejsou vzájemně zaměnitelné mezi zeměmi, solemi nebo mechanismy uvolňování. Pouze informativní.',
+    'meta.warn.title': 'Upozornění: stejný název, jiná léčivá látka · Mezinárodní srovnání značek léků',
+    'meta.whatsnew.desc': 'Poznámky k vydání mezinárodního srovnání značek léků: opravy a novinky v jednotlivých verzích.',
+    'meta.whatsnew.title': 'Co je nového · Mezinárodní srovnání značek léků',
+    'mk.collapse_all': 'Sbalit vše',
+    'mk.expand_all': 'Rozbalit vše',
+    'mkmeta.asof': 'Data k',
+    'mkmeta.source': 'Zdroj',
+    'mkmeta.undisclosed': 'některé záznamy neuvádějí sílu',
+    'mkmeta.unknown': 'zahrnuje záznamy s neznámým stavem (není důkazem prodeje)',
+    'name.also': 'Také zapisováno jako',
+    'name.countries': 'Země a regiony',
+    'name.empty': 'Žádné záznamy',
+    'name.form': 'Léková forma',
+    'name.form_granularity_cn': 'Zdroj eviduje lékovou formu pouze na úrovni třídy (např. „tableta“); šumivé a potahované podformy se nerozlišují.',
+    'name.form_source': 'podle záznamu zdroje',
+    'name.form_spec': 'Síla podle lékové formy',
+    'name.form_unstated': 'Léková forma neuvedena',
+    'name.found': 'Nalezeno v',
+    'name.no_en': 'Anglický název neuveden',
+    'name.no_es': 'Španělský název neuveden',
+    'name.no_zh': 'Čínský název neuveden',
+    'name.no_zh_hant': 'Čínský název v tradičním písmu neuveden',
+    'name.notice': 'Stejný název neznamená, že jsou produkty vzájemně zaměnitelné — identita se ověřuje pole po poli podle záznamů.',
+    'name.records_n': 'Záznamy: {n}',
+    'name.records_one': '1 záznam',
+    'name.rel_multi_title': 'Více typů uvolňování',
+    'name.rel_note': 'Vyberte konkrétní produkt k porovnání.',
+    'name.rel_unknown_title': 'Uvolňování částečně nezaznamenáno',
+    'name.rel_unrecorded': 'Uvolňování nezaznamenáno',
+    'name.release': 'Uvolňování',
+    'name.severe': 'Tento název značky označuje v různých zemích nebo variantách různé léčivé látky. Zkontrolujte složení a nikdy nepovažujte názvy za rovnocenné.',
+    'name.show_more': 'Zobrazit více',
+    'name.single_note': 'Pro tento název je zatím evidován pouze jeden produkt.',
+    'name.spec_amount': 'Další zaznamenaná množství',
+    'name.spec_conc': 'S koncentrací',
+    'name.spec_unrecorded': 'Síla nezaznamenána',
+    'name.spec_vol': 'Pouze objem',
+    'name.specs_n': 'Síly: {n}',
+    'name.specs_one': '1 síla',
+    'name.strength': 'Síla',
+    'name.summary': 'Produkty evidované pod tímto názvem, podle trhu (pouze identita).',
+    'name.warning': 'Stejný název, ale okamžité versus upravené uvolňování — nejsou vzájemně zaměnitelné.',
+    'nav.about': 'O projektu',
+    'nav.all_categories': 'Všechny kategorie a ATC',
+    'nav.atc': 'ATC a kategorie',
+    'nav.back_search': '← Zpět na hledání',
+    'nav.categories': 'Kategorie',
+    'nav.confused': 'Snadno zaměnitelné názvy',
+    'nav.coverage': 'Pokrytí',
+    'nav.crumbs': 'Drobečková navigace',
+    'nav.glossary': 'Slovník pojmů',
+    'nav.markets': 'Trhy',
+    'nav.menu': 'Nabídka',
+    'nav.more': 'Další',
+    'nav.primary': 'Hlavní navigace',
+    'nav.search': 'Hledat',
+    'nav.search_compact': 'Hledat název',
+    'nav.sections': 'Sekce',
+    'nav.warn': 'Upozornění',
+    'nav.whatsnew': 'Co je nového',
+    'nick.abbrev': 'zkratka',
+    'nick.ambiguous': 'Tato přezdívka může označovat více než jednu léčivou látku — zkontrolujte složení.',
+    'nick.caveat': 'Přezdívky označují léčivou látku, nikoli konkrétní balení: stejná léčivá látka se v různých zemích prodává pod různými ochrannými známkami.',
+    'nick.class': 'označení třídy',
+    'nick.class_caveat': 'Jde o označení třídy, nikoli o konkrétní lék — může zahrnovat několik léčivých látek. Zkontrolujte léčivou látku.',
+    'nick.community': 'název v komunitě',
+    'nick.folk': 'lidový název',
+    'nick.folk_caveat': 'Jde o lidový nebo skupinový název, nikoli o konkrétní lék — může zahrnovat několik léčivých látek. Přípravek, jehož název tento výraz obsahuje, nemusí do této skupiny patřit; zkontrolujte léčivou látku.',
+    'nick.hit': 'Přezdívka',
+    'nick.lang.en': 'angličtina',
+    'nick.lang.zh': 'čínština',
+    'nick.legacy': 'starší název',
+    'nick.misnomer': 'časté nesprávné označení',
+    'nick.nomap_caveat': 'Tento výraz označuje látku, k níž v této databázi není žádný prodávaný přípravek, proto se nezobrazuje seznam přípravků.',
+    'nick.slang': 'internetová přezdívka',
+    'nick.source': 'Zdroj',
+    'nick.street': 'americký pouliční název',
+    'nick.synonym': 'synonymum',
+    'nick.synonym_caveat': 'Jiný název stejné léčivé látky (INN vs. USAN nebo pravopisná varianta). Označuje léčivou látku — přípravky v různých zemích však stále nejsou vzájemně zaměnitelné.',
+    'nick.synonym_hit': 'Známé také jako',
+    'nick.tag': 'přezdívka',
+    'nick.translit': 'přepis staršího názvu',
+    'nick.unverified': 'od uživatele (neověřeno)',
+    'notfound.about': 'O projektu',
+    'notfound.confused': 'Často zaměňované názvy',
+    'notfound.p1': 'Tato adresa nemá žádnou stránku. Může jít o starý odkaz, překlep nebo přejmenovanou položku.',
+    'notfound.p2': 'Vraťte se na úvodní stránku a zadejte název léku (ochrannou známku, obecný název nebo přezdívku).',
+    'notfound.report': 'Pokud je některý interní odkaz nefunkční, dejte nám vědět na <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml">GitHubu</a>.',
+    'notfound.search': 'Hledat',
+    'notfound.title': 'Stránka nenalezena',
+    'notfound.whatsnew': 'Co je nového',
+    'parse.atc': 'Kód ATC',
+    'parse.category': 'Kategorie',
+    'parse.category_note': 'Shoda s tematickým souborem — nejde o název ani o tvrzení o rovnocennosti.',
+    'parse.dose': 'Dávka',
+    'parse.form': 'Léková forma',
+    'parse.label': 'Rozpoznaný dotaz',
+    'parse.match': 'Shoda',
+    'parse.match.atc': 'Kód ATC',
+    'parse.match.category': 'Kategorie / třída ATC',
+    'parse.match.compact': 'bez mezer',
+    'parse.match.contains': 'část názvu',
+    'parse.match.country': 'podle země',
+    'parse.match.exact': 'přesná',
+    'parse.match.fuzzy': 'přibližná',
+    'parse.match.nickname': 'přezdívka',
+    'parse.match.none': 'žádná shoda',
+    'parse.match.pinyin': 'pinyin',
+    'parse.match.prefix': 'začátek názvu',
+    'parse.name': 'Název',
+    'release.DR': 's oddáleným uvolňováním',
+    'release.ER': 's prodlouženým uvolňováním',
+    'release.MR': 's modifikovaným uvolňováním',
+    'release.none': '—',
+    'report.all': 'Známé problémy',
+    'report.cta': 'Nahlásit tento výsledek',
+    'report.field_actual': 'Skutečný výsledek',
+    'report.field_expected': 'Očekávaný výsledek',
+    'report.field_pack': 'Balení nebo šarže',
+    'report.field_page': 'Stránka',
+    'report.field_query': 'Dotaz',
+    'report.field_row': 'Řádek',
+    'report.issue_title': 'Chyba v datech: ',
+    'report.link': 'Nahlásit chybu v datech',
+    'report.note': 'Nesprávná léčivá látka, nesprávná dávka nebo lék, který nemáme? Dejte nám vědět:',
+    'res.action_copy': 'Kopírovat obecný název',
+    'res.action_drug': 'Otevřít stránku léčivé látky',
+    'res.actions': 'Akce',
+    'res.alias': 'shoda s přezdívkou',
+    'res.alias_no_products': 'nejde o jeden konkrétní přípravek — viz poznámka výše',
+    'res.brands': 'nalezené ochranné známky',
+    'res.brands_noun': 'značky',
+    'res.caveat': 'prázdný výsledek neznamená, že lék neexistuje',
+    'res.col_country': 'Země a regiony',
+    'res.col_form': 'Léková forma',
+    'res.col_link': 'Stránka',
+    'res.col_market': 'Trh',
+    'res.col_match': 'Shoda',
+    'res.col_product': 'Název přípravku',
+    'res.col_spec': 'Síla a léková forma',
+    'res.copied': 'Zkopírováno',
+    'res.copy': 'Kopírovat tabulku',
+    'res.copy_fail': 'Kopírování se nezdařilo — vyberte tabulku ručně',
+    'res.csv': 'Stáhnout CSV',
+    'res.density': 'Kompaktní zobrazení',
+    'res.details': 'Podrobnosti',
+    'res.empty_browse': 'Procházet podle kategorie',
+    'res.empty_coverage': 'Zobrazit pokrytí a aktuálnost',
+    'res.empty_h1': 'Žádná shoda pro „{q}“',
+    'res.empty_spelling': 'Zkontrolujte pravopis nebo zkuste obecný název',
+    'res.fold': 'Zobrazit méně',
+    'res.fuzzy': 'Žádná přesná shoda — nejbližší názvy',
+    'res.identity.ingredient': 'Léčivá látka',
+    'res.identity.markets': 'Pokryté trhy',
+    'res.identity.records': '{n} záznamů',
+    'res.identity_note': 'Stejný název může na jiném trhu označovat jinou léčivou látku. Zkontrolujte léčivou látku, sílu a lékovou formu — ne jen název.',
+    'res.identity_title': 'kandidát 1 z {n}',
+    'res.load_more': 'Načíst další',
+    'res.loaded_all': 'Zobrazeny všechny výsledky',
+    'res.matched': 'odpovídající názvy',
+    'res.matched_name': 'Odpovídající název',
+    'res.more_detail': 'Více sil / více záznamů',
+    'res.more_n': 'Zobrazit další přípravky ({n})',
+    'res.no_brand_note': 'Záznamy bez ochranné známky: {n}; zobrazují se na úrovni názvu.',
+    'res.none': 'Žádná shoda',
+    'res.not_interchangeable': 'Mezi trhy nejsou vzájemně zaměnitelné',
+    'res.notin': 'Pro tuto zemi chybí pokrytí',
+    'res.partial': 'částečné výsledky — načítá se úplný index…',
+    'res.pick': 'Vybrat tento přípravek',
+    'res.picked': 'Vybráno',
+    'res.records_noun': 'záznamy',
+    'res.reg': 'Údaje z registru',
+    'res.same_name': 'Stejný název, jiná léčivá látka',
+    'res.show_brands': 'Zobrazit všechny značky',
+    'res.showing': 'Zobrazeno {n} z {total}',
+    'res.src_active': 'zdrojový trh {c}',
+    'res.src_all': 'Všechny zdrojové trhy',
+    'res.src_label': 'Trh záznamu (pouze záznamy registrované zde)',
+    'row.report': 'Nahlásit tento řádek',
+    'same.ing': 'Další přípravky se stejnou léčivou látkou',
+    'same.note': 'Hledali jste ochrannou známku — toto jsou další přípravky se stejnou léčivou látkou.',
+    'same.related': 'Obsahuje jednu ze stejných léčivých látek (nikoli stejné složení)',
+    'same.related_note': 'Tyto záznamy mají s vaším hledáním alespoň jednu společnou léčivou látku, ale úplné složení se liší. Nejde o stejný přípravek.',
+    'same.warning': 'Stejný název ani stejná léčivá látka neznamená, že jsou vzájemně zaměnitelné.',
+    'site.name': 'Křížové odkazy na ochranné známky léčiv',
+    'spec.cannot_compare': 'nelze porovnat',
+    'spec.no_basis': 'základ na mL / na jednotku není uveden',
+    'spec.no_basis_note': 'Některé síly jsou zaznamenány bez základu na mL / na jednotku. Zobrazují se tak, jak jsou zaznamenány, a neporovnávají se s jinými trhy.',
+    'syn.tag': 'synonymum',
+    't11.adv': 'Pokročilé filtry',
+    't11.all_markets': 'Vše',
+    't11.cmp_note': 'Pouze srovnání identity pole po poli. Stejný název ani stejná léčivá látka neznamená, že přípravky jsou vzájemně zaměnitelné.',
+    't11.cmp_target': 'Cílový trh',
+    't11.cmp_title': 'Srovnání položka po položce (pouze identita)',
+    't11.cmp_you': 'Ten váš',
+    't11.compare_link': 'Porovnat položku po položce →',
+    't11.diff': 'Odlišné',
+    't11.missing': 'Nezaznamenáno',
+    't11.multi': 'Vyberte přípravek',
+    't11.name': 'Registrovaný název',
+    't11.pick_mine': 'To je můj',
+    't11.pick_this': 'Tento',
+    't11.picked': 'Vybráno',
+    't11.release': 'Uvolňování',
+    't11.reselect': 'Vybrat znovu',
+    't11.same': 'Stejné',
+    't11.spec': 'Síla',
+    't11.still_candidates': 'Sada kandidátů má stále {n} záznamů — toto je jen jeden z nich. Zobrazit všechny kandidáty ↓',
+    'tab.about': 'O projektu',
+    'tab.categories': 'Kategorie',
+    'tab.coverage': 'Pokrytí',
+    'tab.search': 'Hledat',
+    'u1.aria': 'Návod na začátek',
+    'u1.close': 'Zavřít',
+    'u1.step1': 'Napište název z obalu',
+    'u1.step1_hint': 'Ochranná známka, generický název, přezdívka nebo řádek z obalu — klidně i s dávkou.',
+    'u1.step2': 'Zkontrolujte tohoto kandidáta: léčivá látka, síla, léková forma',
+    'u1.step2_hint': 'Karta ukazuje jednoho kandidáta, nikdy ne konečnou odpověď — porovnejte jeho léčivou látku, sílu a lékovou formu s obalem.',
+    'u1.step3': 'Vyberte cílový trh',
+    'u1.step3_hint': 'Zvolte cílový trh a zjistěte, jak se stejná léčivá látka nazývá tam; samotný seznam kandidátů se nemění.',
+    'u1.title': 'Jak to používat ve 3 krocích',
+    'u1.try': 'Zkuste:',
+    'u2.hint': 'Stejná léčivá látka, místní název — klikněte na zemi/region a zobrazí se její přípravky. To, že záznam v seznamu není, neznamená, že tam není dostupný.',
+    'u2.multi': 'Odpovídá několik léčivých látek — přepněte zemi/region a zobrazí se celý seznam.',
+    'u2.none': 'Není v seznamu',
+    'u2.none_hint': 'Ve veřejných datech tohoto trhu není u této léčivé látky žádný přípravek. To neznamená, že tam není dostupný.',
+    'u2.title': 'Názvy podle země/regionu',
+    'unit.iu': 'IU',
+    'unit.mci': 'mCi',
+    'unit.meq': 'mEq',
+    'unit.microgram': 'mcg',
+    'unit.ug': 'mcg',
+    'unit.unit': 'jednotka',
+    'unit.万iu': '10 tis. IU',
+    'warn.count': '<p class="sub">@@WARN_TOTAL@@ zveřejněných varování: @@WARN_HIGH@@ vysoká závažnost, @@WARN_MEDIUM@@ střední závažnost, @@WARN_INFO@@ informativní. Koncepty varování se nezobrazují.</p>',
+    'warn.countries': 'Trhy',
+    'warn.drug_summary': 'Bezpečnostní varování k této léčivé látce',
+    'warn.empty': 'Zatím žádná zveřejněná varování.',
+    'warn.filter.all': 'Vše',
+    'warn.group.high': 'Vysoká závažnost — nepředpokládejte vzájemnou zaměnitelnost',
+    'warn.group.info': 'Také stojí za to vědět',
+    'warn.group.medium': 'Střední závažnost — ověřte, než budete předpokládat rovnocennost',
+    'warn.intro': '<p class="sub">Zveřejněná varování o názvech, které lze snadno zaměnit, nebo o přípravcích, které <b>nejsou vzájemně zaměnitelné</b> — napříč zeměmi, solemi nebo mechanismy uvolňování. Tato stránka upozorňuje pouze na identitu a zaměnitelnost; neobsahuje <b>žádná doporučení k dávkování</b> ani doporučení k náhradě.</p>',
+    'warn.no_advice': 'Není to lékařská rada. Zkontrolujte skutečný obal a léčivou látku a před změnou přípravku se poraďte s lékárníkem.',
+    'warn.page_next': 'Další',
+    'warn.page_prev': 'Předchozí',
+    'warn.page_status': 'Strana {n} z {total} · {count} varování',
+    'warn.pagination': 'Stránky varování',
+    'warn.related': 'Související léčivá látka',
+    'warn.reviewed': 'Ověřil',
+    'warn.see_all': 'Zobrazit všechna varování',
+    'warn.sev.high': 'Vysoká',
+    'warn.sev.info': 'Informace',
+    'warn.sev.medium': 'Střední',
+    'warn.source': 'Regulační zdroj',
+    'warn.source_note': '<b>Zdroje a licence</b>: každé varování odkazuje na původní dokument regulátora (DailyMed/FDA, EMA/MHRA, Health Canada DPD, AEMPS CIMA, PBS/TGA, NMPA …). Zveřejňujeme pouze věcné výňatky a zachováváme odkaz na zdroj; příbalové informace ani plné texty SmPC/CMI nekopírujeme. Podmínky najdete v registru licencí v části O projektu.',
+    'warn.title': 'Varování: stejný název, jiná léčivá látka',
+    'whatsnew.intro': 'Každé vydání má krátké shrnutí. Starší verze doplňujeme z git tagů; celá historie je v <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.',
+    'whatsnew.lang_note': 'Poznámky k vydání jsou strojově přeložené (AI); závazný je čínský originál v CHANGELOG.md.',
+    'whatsnew.pending': 'Pouze čínský originál — anglický a španělský překlad se připravuje.',
+    'whatsnew.title': 'Co je nového',
+}
+
+
+# ── 同上：拉脱维亚语（lv，第 9 语言）─────────────────────────────────────
+LV_I18N: dict[str, str] = {
+    'a1.approval': 'Apstiprinājums / NDC / DIN',
+    'a1.expand': 'Detaļas',
+    'a1.goto': 'Atvērt vielas lapu',
+    'a1.loading': 'Ielādē detaļas…',
+    'a1.market': 'Tirgus',
+    'a1.more': 'Rādīti pirmie 12 ieraksti; visus skatiet <a href="{url}">vielas lapā</a>.',
+    'a1.none': 'Šim nosaukumam nav produktu ierakstu.',
+    'a1.pack': 'Iepakojums',
+    'a1.raw': 'Oriģinālais ieraksts',
+    'a1.source': 'Avots',
+    'a1.status': 'Statuss',
+    'a11y.skip': 'Pāriet uz saturu',
+    'a3.incompat': 'Nav savstarpēji aizstājami — skatiet brīdinājumu',
+    'a3.release': 'Izdalīšanās:',
+    'a3.salt': 'Sāļu formas:',
+    'about.analytics': '<h2>Analītika</h2><p class="sub">Šī vietne izmanto <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> anonīmai analītikai bez sīkfailiem. Personas dati netiek glabāti, un analītika netiek izmantota reklāmai. Mēs redzam tikai lapu skatījumus, atsauces vietnes, valsti/reģionu, pārlūku un ekrāna izmēru, kā arī vietnē ievadītos meklēšanas vaicājumus un rezultātu klikšķus, lai uzlabotu meklēšanas kvalitāti. Meklēšanas vaicājumi (arī tie, kas neatrada rezultātu) tiek sūtīti tikai kā apkopoti notikumu nosaukumi — normalizētais vaicājuma teksts, nekad nesaistīts ar kontu, IP adresi vai ierīces identifikatoru. Meklēšanas notikumi tiek sūtīti tikai tad, kad jūs iesniedzat vaicājumu (Enter, parauga poga vai automātiskās pabeigšanas izvēle), nekad rakstīšanas laikā, un tie satur tikai vaicājuma garumu un saskarnes valodu. Skatiet <a href="https://www.goatcounter.com/privacy" target="_blank" rel="noopener">GoatCounter privātuma politiku</a>.</p>',
+    'about.au_source': '<p class="sub"><b>Austrālija</b>: TGA <b>ARTG Medicines 2026-10-28</b> (Austrālijas Terapeitisko preču reģistrs; norāde TGA/ARTG). Dati uz <b>2026-10-28</b>. Eksportā <b>nav reģistrācijas statusa kolonnas</b>, tāpēc statuss rādīts kā nezināms; <b>ieraksts reģistrā nenozīmē, ka produkts pašlaik tiek tirgots</b>. 3 911 produktiem nav sastāvdaļu ierakstu, un tie rādīti tikai nosaukuma līmenī.</p>',
+    'about.checksums': 'SHA-256 kontrolsummas',
+    'about.cz_source': '<p class="sub"><b>Čehija</b>: SÚKL <b>DLP</b> (zāļu datubāze, ikmēneša atvērtie dati) saskaņā ar <b>SÚKL atvērto datu noteikumiem</b> — kopēšana, tālākizplatīšana un komerciāla izmantošana ir atļauta; <b>norāde: SÚKL</b>, un datu nozīmi nedrīkst mainīt (<a href="https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat">noteikumi</a>). Dati uz <b>2026-11-01</b> (kopija DLP20261027). Tikai fakti (nosaukums, stiprums, forma, ATC, sastāvdaļa, MAH, reģistrācijas statuss); stipruma normalizācija un sastāvdaļu sadalīšana ir <b>atvasināta</b> no oficiālajiem laukiem. <b>SPC/PIL un iepakojuma lietošanas instrukcijas ir trešo pušu dokumenti, un tās nekad netiek iegūtas vai publicētas atkārtoti</b>; FSMP un PZLÚ rindas, kas nav zāles, ir izslēgtas, un ES centralizētās reģistrācijas tiek pārbaudītas pret ES slāni, lai izvairītos no dublikātiem. <b>Ieraksts reģistrā nenozīmē, ka produkts pašlaik tiek pārdots.</b></p>',
+    'about.data_dictionary': 'Datu vārdnīca',
+    'about.data_package': 'Datu pakotne',
+    'about.dataset_jsonld': 'Datu kopas metadati (schema.org)',
+    'about.eu_source': '<p class="sub"><b>ES reģionālais slānis</b>: <b>Eiropas Komisija — Savienības zāļu reģistrs</b> (CC BY 4.0; norāde Eiropas Komisija / Savienības reģistrs) un <b>EMA Medicines</b> dati pārbaudei (avots: Eiropas Zāļu aģentūra (EMA); EMA logotips netiek lietots, un tas nenozīmē EMA atbalstu). Tikai centralizētās reģistrācijas (cilvēkiem paredzētas zāles), dati uz <b>2026-11-03</b>. <b>ES reģistrācija nav pierādījums par pārdošanu kādā konkrētā valstī, un reģistrā nav norādīts stiprums, zāļu forma vai iepakojuma lielums.</b> Produkti, kurus nevar attiecināt uz zināmu aktīvo vielu, rādīti tikai nosaukuma līmenī.</p>',
+    'about.fr_source': '<p class="sub"><b>Francija</b>: BDPM (Base de données publique des médicaments, ANSM), <b>Licence Ouverte / etalab-2.0</b>; jānorāda avots un atjaunināšanas datums. Dati uz <b>2026-11-03</b>. Tikai fakti (nosaukums, sastāvdaļa, forma, ražotājs, atļauja). <a href="https://base-donnees-publique.medicaments.gouv.fr/">BDPM</a>.</p>',
+    'about.gaps': '<h2>Zināmās nepilnības</h2><ul class="sub"><li>Ķīnā ir 146 344 ķīmisko zāļu reģistrācijas, bet aptuveni 9% atbilst tikai Ķīnai raksturīgai vielai (vēl nav angļu INN), un Ķīnas ATC tiek glabāts 4. līmenī. Tradicionālās ķīniešu zāles (TCM) nav ielādētas.</li><li>Stipruma līdzvērtība tiek noteikta tikai līdz D1 līmenim (viena un tā pati sāļu forma); sāls–bāzes pārrēķins (D2) un biopieejamības vērtējums (D3) nav ieviesti.</li><li>Meksikā regulatora sarakstos nav stipruma kolonnas; tikai 29% produktu varēja papildināt no publiskiem katalogiem.</li><li>Kanādas DPD nav iepakojuma lieluma vai cenas, un daudzi OTC patēriņa iepakojumi tika apstiprināti pirms DPD elektroniskā laikmeta, tāpēc kāds plauktā esošs produkts var iztrūkt.</li><li><b>ATC pārklājums — divi saucēji:</b> @@ATC_ALL_PCT@@% no visām vielām (@@ATC_ALL@@ / @@ATC_ALL_N@@) un @@ATC_DRUG_PCT@@% no zāļu vienībām (inn_drug, @@ATC_DRUG@@ / @@ATC_DRUG_N@@). Starpību galvenokārt veido vienības, kas nav zāles (homeopātiskās, augu, pārtikas, materiālu), nevis trūkstoši dati. ATC dati nāk no Wikidata P267 (CC0) un ChEMBL (CC BY-SA 4.0); WHOCC ATC/DDD indeksam nepieciešama licence, tāpēc tas netiek izmantots.</li></ul>',
+    'about.hk_source': '<p class="sub"><b>Honkonga</b>: Veselības departamenta Zāļu birojs — <b>Reģistrēto farmaceitisko produktu</b> saraksts (data.gov.hk datu kopa hk-dh-dh_do-hk-dh-do-pharmaceutical-product) saskaņā ar <b>DATA.GOV.HK noteikumiem un nosacījumiem</b> (bezmaksas atkārtota izmantošana ar norādi uz avotu; valdības atbalsts netiek netieši apgalvots). Dati uz <b>2026-10-23</b>. <b>Tikai nosaukumu/sastāvdaļu slānis — nav stipruma, zāļu formas vai reģistrācijas statusa; ieraksts reģistrā nepierāda pašreizēju piegādi.</b></p>',
+    'about.lead': '<p class="sub"><b>Viens uzdevums:</b> pārvērst tirdzniecības nosaukumu faktiskajā vielā un pateikt, cik droši mēs esam. Vietne ir publiska, bez reklāmām un bez komerciāla nolūka. Katra atbilde ir kandidātu kopa, nekad nevis recepte.</p>',
+    'about.licences_summary': 'Datu avoti un licences',
+    'about.loading': '<h2>Kā ielādējas meklēšana</h2><p>Pirmā meklēšana ielādē vienu indeksa daļu (mediāna ~1,0 MB, ~0,16 MB gzip); pilns indekss (kodols ~42 MB nekompresēts, ~9–10 MB gzip) ielādējas fonā — to sāk rakstīšana, meklēšanas lauka fokusēšana vai parauga izvēle. Kamēr daļa vai pilns indekss vēl ielādējas, rezultāti atzīmēti kā <i>daļēji</i>; ja ielāde neizdodas, lapa turpina darboties ar jau pieejamo un piedāvā pogu <i>Mēģināt vēlreiz</i>. Meklēšana mums neko nesūta atpakaļ.</p>',
+    'about.lv_source': '<p class="sub"><b>Latvija</b>: ZVA <b>HumanProducts</b> (Latvijas Zāļu reģistrs, ikdienas eksports), publicēts saskaņā ar <b>CC0 1.0</b>; avota norāde nav obligāta, bet pēc tradīcijas norādām <b>Zāļu valsts aģentūru (ZVA)</b>. Dati uz <b>2026-11-11</b>. Iepakojuma līmeņa rindas ir grupētas pēc reģistrācijas numura; tikai fakti (latviešu un oriģinālie nosaukumi, stiprums, forma, INN, ATC, MAH, statuss). ES centralizēti apstiprinātie produkti tiek pārbaudīti pret ES slāni, lai izvairītos no dublikātiem. <b>Reģistrācija nav pierādījums par pašreizēju pārdošanu.</b></p>',
+    'about.nick': '<h2>Segvārdi un vecie nosaukumi</h2><p>“Divas vardes” (liǎng zhī qīngwā) nav tirdzniecības nosaukums un nekad netiek tā saglabāts: tas norāda uz aktīvo vielu metformīnu. Segvārdi ir atsevišķa, ar roku uzturēta tabula — meklējama, bet apzināti turēta ārpus tirdzniecības nosaukumu tabulām. Kad kāds sakrīt, lapa to atzīmē (<i>interneta segvārds / vecāks nosaukums</i>) un pēc tam uzskaita šīs vielas zīmolus; tas nekad netiek pasniegts kā uz iepakojuma uzdrukāts nosaukums. Katram ierakstam ir avots; “lietotāja sniegts” tiek rādīts kā <i>nepārbaudīts</i> un netiek paaugstināts uz <code>documented</code>, kamēr nav pievienots neatkarīgs avots. Nav avota — nav jauna ieraksta.</p><ul class="sub"><li>@@NICKNAMES@@ segvārdi ir manuāli pārraudzīti failā <code>data/seed_nicknames.py</code> un pārbūvēti — nevis iegūti ar tīmekļa skrāpēšanu.</li><li>Segvārdi nekad netiek iekļauti sadursmju noteikšanā un nekad nesaņem “viena nosaukuma” lapu: segvārds nav identitāte, identitāte ir viela.</li></ul>',
+    'about.nick_merged': 'No @@NICKNAMES_TOTAL@@ segvārdu ierakstiem @@NICKNAMES_MERGED@@ ir ķīniešu nosaukumi, kas fiksēti pirms sāļu formu apvienošanas (kind=misnomer): tie paliek meklējami kā aizstājvārdi, lai vecs iepakojuma uzraksts joprojām atrastu aktīvo vielu, un tie nekad netiek uzskatīti par tirdzniecības nosaukumiem.',
+    'about.rules': '<h2>Trīs noteikumi</h2><ol><li><b>Tirdzniecības nosaukums nav primārā atslēga.</b> Katrs vaicājums atgriež kandidātu kopu; identitāti nosaka valsts × forma × stiprums × aktīvā viela.</li><li><b>Sadursmes tiek atvasinātas, nevis atzīmētas ar roku.</b> Ja viens nosaukums attiecas uz dažādām vielām, vietne automātiski norāda “viens nosaukums, cita viela”.</li><li><b>Mēs nesniedzam ieteikumus par devām.</b> Tikai identifikācija un brīdinājumi “Nav savstarpēji aizstājami” — bez devu pārrēķina un bez aizstāšanas ieteikumiem.</li></ol>',
+    'about.samename': '<h2>Kāpēc notiek “viens nosaukums, cita viela”</h2><p class="sub">Vienu un to pašu preču zīmi dažādos tirgos pieder dažādi uzņēmumi, un sastāvs var pilnīgi atšķirties. Pārbaudīti piemēri: ASV <b>Tylenol</b> ir acetaminofēns 500 mg ar vienu sastāvdaļu, savukārt Ķīnā <b>泰诺</b> ir saaukstēšanās zāles ar četrām sastāvdaļām, un produkts ar vienu sastāvdaļu ir <b>泰诺林</b>; ASV <b>Benadryl</b> ir difenhidramīns, Apvienotajā Karalistē <b>Benadryl</b> ir akrivastīns; ASV <b>Gaviscon</b> ir alumīnija/magnija antacīds, bet Apvienotajā Karalistē Gaviscon ir algināta “plosts”.</p>',
+    'about.sg_source': '<p class="sub"><b>Singapūra</b>: HSA <b>Listing of Registered Therapeutic Products</b> (data.gov.sg datu kopa d_767279312753558cbf19d48344577084) saskaņā ar <b>Singapūras atvērto datu licenci v1.0 (SODL)</b>; jānorāda avots un saite uz licenci, valdības atbalsts netiek netieši apgalvots. Dati uz <b>2026-08-07</b> (atjaunina ik pēc 6 mēnešiem). <b>Ieraksts reģistrā nenozīmē, ka produkts pašlaik tiek tirgots.</b> Tirdzniecības nosaukumi paliek angliski un netiek tulkoti; drīkst rādīt tikai ķīniešu sastāvdaļu nosaukumus (inn_zh). Norāde: satur informāciju no Listing of Registered Therapeutic Products, kas 2026-10-28 iegūta no Health Sciences Authority (HSA) un pieejama saskaņā ar Singapūras atvērto datu licenci v1.0 (<a href="https://data.gov.sg/open-data-licence">licence</a>).</p>',
+    'about.sources': '<h2>Avoti un pārklājums</h2><div class="tablewrap"><table><tr><th>Valsts / reģions</th><th>Produkti</th><th>Dati uz</th></tr>@@COV@@</table></div><p class="sub"><b>Dati uz</b> = datums, kad avots pats publicēja / stājās spēkā / saglabāja kopiju, nevis mūsu datu ievākšanas datums. <code>live</code> = tiešsaistes katalogs bez viena avota datuma; <b>—</b> = tikai gada saraksti.</p><p class="sub"><b>ASV</b>: openFDA NDC Directory (ASV valdības publiskie dati). <b>Apvienotā Karaliste</b>: NHSBSA dm+d, Open Government Licence v3.0 — <i>Satur publiskā sektora informāciju, kas licencēta saskaņā ar Open Government Licence v3.0.</i> <b>Spānija</b>: AEMPS CIMA — atkārtota izmantošana atļauta ar skaidru norādi uz avotu un pēdējās atjaunināšanas datumu; tā nav atvērta licence (sk. licences zemāk). <b>Meksika</b>: COFEPRIS reģistrācijas saraksti (nav norādītas atvērtas licences; faktu lauki ar saitēm) un stipruma papildināšana no datos.gob.mx iepirkuma/cenu datu kopām, CC BY 4.0. <b>Austrālija</b>: PBS Schedule API (autortiesību paziņojums saglabāts) + TGA CMI katalogs + manuāli sagatavoti OTC uzskaites dati — tikai faktu lauki, bez pilna CMI/ARTG teksta. <b>Kanāda</b>: Health Canada DPD — nekomerciāla atkārtota izmantošana ar avota norādi. <b>Ķīna</b>: 国家医保局 医保药品分类与代码数据库 (2025-04-04 kopija); atvērta tālākizplatīšanas licence netika atrasta, tāpēc tiek glabāti tikai faktu lauki ar saitēm.</p>',
+    'about.stats': '<p class="sub">Statistika: @@PRODUCTS@@ produkti · @@SUBSTANCES@@ vielas · @@KEYS@@ nosaukumu atslēgas · @@ALIASES@@ aizstājvārdi (@@NICKNAMES@@ manuāli pārraudzīti segvārdi, @@DRUGTERMS@@ tautas/klases termini) · @@CONFUSABLE@@ FDA sajauktie pāri · @@SEVERE@@ nosaukumi atzīmēti ar “viens nosaukums, cita viela”.</p>',
+    'about.summary': 'Kas ir šī vietne, kādus noteikumus tā ievēro un no kurienes nāk dati.',
+    'about.terms': '<h2>Tautas nosaukumi un klašu termini</h2><p>Atsevišķa tabula (<code>drug_term</code>, @@DRUGTERMS@@ ieraksti) satur tautas nosaukumus un kategoriju terminus <b>tikai likumīgām zālēm</b>: urīndzenošās zāles, asins šķīdinātāji, miega zāles (shuìqiányào), kontracepcijas tablete, avārijas kontracepcijas tablete, statīni. Atšķirībā no <code>nickname</code> tā var norādīt uz klasi, nevis vienu sastāvdaļu, tāpēc <code>substance_id</code> var būt tukšs; <code>alias_all</code> apvieno abas tabulas meklēšanai. <b>Narkotiskās vielas un izklaides žargons ir apzināti ārpus tvēruma</b> (ielu / izklaides narkotiku žargons); šādi ieraksti tika izņemti no datubāzes un netiek atkal pievienoti.</p><ul class="sub"><li><b>NIDA / DEA saraksti</b> vairs netiek izmantoti izklaides žargonam; tiek saglabāti tikai recepšu zāļu kategoriju termini, kas ir likumīgas zāles, katrs ar avota URL.</li><li><b>MedlinePlus (NLM)</b> sniedz izplatītus tautas/kategoriju terminus (ASV valdības darbs); kopienu avoti (CN/GB/AU/ES) tiek atzīmēti kā <i>kopienas nosaukums</i> un paliek meklējami. FDA tall-man pāri: @@CONFUSABLE@@ oficiāli pāri. <a href="confused.html">Skatīt sarakstu</a>.</li></ul>',
+    'about.title': 'Par vietni',
+    'about.tw_source': '<p class="sub"><b>Taivāna</b>: TFDA 「全部藥品許可證資料集」 (data.gov.tw datu kopa 9122) saskaņā ar <b>Atvērto valdības datu licenci v1.0 (OGDL v1.0)</b>; jānorāda avots: 衛福部食藥署 TFDA. Dati uz <b>2026-10-22</b> (iknedēļas sinhronizācija). Tikai fakti (produkta nosaukums, sastāvdaļas, zāļu forma, ražotājs, licences numurs, statuss). <b>Stiprumi tiek iegūti no produktu nosaukumiem, tāpēc ticamība ir ierobežota.</b> Licence: <a href="https://data.gov.tw/license">data.gov.tw/license</a>.</p>',
+    'ac.suggestions': 'Ieteikumi',
+    'artg.id': 'ARTG ID',
+    'artg.note': 'Šie ieraksti ir reģistrēti Austrālijā, bet šī vietne tos vēl nav saistījusi ar aktīvo vielu, tāpēc tie netiek rādīti kā produkti.',
+    'artg.sponsor': 'Sponsors',
+    'artg.title': 'Arī ARTG reģistrā (sastāvdaļa vēl nav iekļauta)',
+    'atc.ai_note': 'Klašu un kategoriju nosaukumi ir redakcionāli vai ar MI palīdzību veikti tulkojumi; autoritatīvs ir tikai ATC kods un PVO hierarhija.',
+    'atc.all_classes': 'Visas ATC klases',
+    'atc.browse_intro': 'PVO ATC klases grupē zāles pēc orgāna/sistēmas un farmakoloģiskās klases. Sāciet no augšējā līmeņa grupas vai patērētāju kategorijas; katrā lapā ir uzskaitītas šeit reģistrētās aktīvās vielas.',
+    'atc.browse_title': 'Pārlūkot pēc ATC klases',
+    'atc.categories_link': 'Patērētāju kategorijas',
+    'atc.children': 'Apakšklases',
+    'atc.count': '{n} aktīvās vielas',
+    'atc.hint': 'ATC prefiksa atbilstība — rezultāti ir produkti, kuru aktīvajai vielai ir šis ATC kods, nevis tirdzniecības nosaukuma atbilstība.',
+    'atc.hit': 'ATC {code}: {n} produktu nosaukumi, kas atrasti pēc aktīvās vielas ATC koda. Tikai identitāte — nevis ieteikums.',
+    'atc.ing_more': 'Vēl {n} sastāvdaļas — pilns saraksts parādīsies, kad būs ielādēts viss indekss.',
+    'atc.ing_overview': 'Aktīvās vielas šajā ATC klasē — tirdzniecības nosaukumu rindas ielādējas fonā.',
+    'atc.ingredients': 'Aktīvās vielas šajā klasē',
+    'atc.label': 'ATC',
+    'atc.level': 'ATC līmenis',
+    'atc.loading': 'Ielādē indeksu ATC meklēšanai…',
+    'atc.markets_hint': 'Katrs tirgus tagad rāda vienu apkopotu statusu: tirgus tiek uzskatīts par tādu, kur produktu pārdod, ja tam ir kaut viens aktīvs ieraksts; atsevišķu ierakstu statusi redzami detaļās. Vienam tirgum var būt arī vairāki reģistrācijas ieraksti ar dažādiem statusiem, tāpēc katrs tirgus šeit parādās tikai vienreiz; tas ir ieraksta fakts, nevis drošības spriedums.',
+    'atc.mk_count': '{n} tirgi',
+    'atc.more': 'un vēl {n}',
+    'atc.more_notes': 'Piezīmes un licences',
+    'atc.names_source_note': 'Klašu nosaukumi ir redakcionāli tulkojumi vai nāk no Wikipedia (CC BY-SA 4.0) / Wikidata (CC0); katrā ATC lapā ir norādīts precīzs avots, licence un saite katrai valodai. Autoritatīvs ir tikai ATC kods un PVO hierarhija.',
+    'atc.no_data': 'Šajā klasē vēl nav reģistrētu aktīvo vielu.',
+    'atc.nolang_note': 'Trūkstošs nosaukums tiek atzīmēts tikai tad, ja tas ir izņēmums; ja nosaukuma nav lielākajai daļai, saraksts paliek neatzīmēts.',
+    'atc.none': 'Neviena reģistrēta aktīvā viela neatbilst šim ATC kodam vai prefiksam.',
+    'atc.none_meta': 'Nav ATC atbilstības {code}',
+    'atc.parent': 'Vecākklase',
+    'atc.salt_label': 'Sāļu forma:',
+    'atc.search_link': 'Meklēt šajā klasē',
+    'atc.show_all': 'Rādīt visus {n} (pašlaik rādīti {shown})',
+    'atc.source_note': 'ATC kodi un hierarhija atsaucas uz PVO Sadarbības centra zāļu statistikas metodoloģijai ATC/DDD indeksu (autortiesības WHOCC; pats indekss netiek reproducēts). Sastāvdaļu/stipruma fakti nāk no regulatoru ierakstiem, kas uzskaitīti sadaļā “Par vietni”.',
+    'atc.status_note': 'Statusa emblēmas apkopo katras aktīvās vielas produktu ierakstus (aktīvs / vairs netiek ražots / izņemts / nezināms), un tirgu kodi aiz katras emblēmas parāda, kur šis statuss ir fiksēts. Statusa kolonnu publicē tikai daži reģistri: CA, ES, MX, FR, JP, CZ, LV un ES Savienības reģistrs, kā arī AU ARTG detalizētie ieraksti; AU ARTG eksportā un Honkongā statusa kolonnas nav, tāpēc statuss fiksēts kā nezināms; CN, US, GB, TW un SG ieraksti ir reģistrā un atzīmēti kā aktīvi.',
+    'atc.unnamed': 'Klases nosaukums vēl nav pārskatīts — autoritatīvs ir ATC kods.',
+    'atc.view_class': 'Skatīt šo ATC klasi',
+    'atc4.empty': 'Šajā klasē vēl nav produktu ierakstu zāļu formu līmenī.',
+    'atc4.error': 'Neizdevās ielādēt zāļu formas detaļas.',
+    'atc4.form_col': 'Zāļu forma',
+    'atc4.form_other': 'citas formas',
+    'atc4.loading': 'Ielādē formas detaļas…',
+    'atc4.notice': 'ATC klase tikai grupē zāles ar līdzīgu farmakoloģiju/ķīmiju — tas nenozīmē, ka tās ir savstarpēji aizstājamas. Atšķirīga aktīvā viela, zāļu forma, izdalīšanās mehānisms vai stiprums nav savstarpēji aizstājami.',
+    'atc4.scope': 'Uzskaitītas tikai tās vielas, kurām ir reģistrēta ATC klase (@@ATC_ALL@@ no @@ATC_ALL_N@@).',
+    'atc4.sort_note': 'Rindas sakārtotas alfabētiski pēc zāļu formas, un tirgi seko fiksētai tirgu secībai; nekas šeit netiek rangēts vai ieteikts. Rindas ir tikai tām vielām, kurām ir produktu ieraksti.',
+    'atc4.summary': 'Pēc zāļu formas, pa tirgiem',
+    'badge.combo': 'Kombinācija',
+    'badge.export_only': 'Tikai eksportam',
+    'badge.severe': 'Viens nosaukums, cita viela',
+    'badge.warning': 'Cits izdalīšanās mehānisms',
+    'bilingual.brand_note': 'Nosaukums, kā reģistrēts attiecīgajā tirgū — nevis tulkojums.',
+    'bilingual.source.manual': 'redakcionāls',
+    'bilingual.source.official': 'oficiāls',
+    'bilingual.source.pharmacopoeia': 'farmakopeja',
+    'bilingual.source.regulator': 'regulators',
+    'bilingual.toggle': 'Rādīt oriģinālu',
+    'brand.mah': 'Ražotājs:',
+    'brand.mah_note': 'Šim produktam nav reģistrēta tirdzniecības nosaukuma; tā vietā rādīts reģistrācijas apliecības īpašnieks.',
+    'brand.none': 'Nav tirdzniecības nosaukuma',
+    'card.packs': 'iepakojumi',
+    'cat.all_link': 'Visas kategorijas →',
+    'cat.back': 'Visas ATC klases un kategorijas',
+    'cat.browse_title': 'Biežākās patērētāju kategorijas',
+    'cat.count': '{n} aktīvās vielas',
+    'cat.disclaimer': 'Tematiskā izlase — nevis apgalvojums par līdzvērtību vai savstarpēju aizstājamību.',
+    'cat.help': 'Kā lasīt šo sarakstu',
+    'cat.intro': 'Redakcionālas tematu izlases: katra kategorija atbilst ATC klasēm un aktīvajām vielām. Tas ir pārlūkošanas veids, nevis pierādījums, ka zāles ir līdzvērtīgas.',
+    'cat.no_data': 'Šai kategorijai vēl nav reģistrētu aktīvo vielu.',
+    'cat.quick_title': 'Pārlūkot pēc kategorijas',
+    'cat.related_atc': 'Saistītās ATC klases',
+    'cat.search_none': 'Nav atbilstošu sastāvdaļu.',
+    'cat.search_ph': 'Meklēt sastāvdaļu šajā kategorijā',
+    'cat.subcat': 'Apakšklase',
+    'col.brand': 'Zīmols',
+    'col.dose': 'Deva',
+    'col.ing': 'Sastāvdaļa',
+    'col.mah': 'Ražotājs',
+    'combo.capped': 'Rādīti pirmie {cap} no {total} nosaukumiem.',
+    'combo.col_comp': 'Sastāvs un stiprums',
+    'combo.comp_more': 'Citi sastāvi: {n}',
+    'combo.compact': 'kombinācija',
+    'combo.cross_exact': 'Šajos tirgos reģistrēti produkti ar tādu pašu aktīvo vielu kombināciju. Tikai identitātes informācija — tas nav ieteikums, ka produkti ir savstarpēji aizstājami.',
+    'combo.cross_none': 'Pārējos aptvertajos tirgos vēl nav reģistrēts neviens produkts ar šo kombināciju.',
+    'combo.cross_overlap': 'Citos tirgos atrastā tuvākā kombinācija ir līdzīga, bet NAV identiska — tā nav savstarpēji aizstājama.',
+    'combo.cross_primary': 'Sakrīt tikai galvenā sastāvdaļa — šī NAV tā pati fiksētas devas kombinācija.',
+    'combo.cross_primary_link': 'Skatīt galveno sastāvdaļu',
+    'combo.cross_products': 'produkti',
+    'combo.cross_record': 'ieraksts',
+    'combo.cross_title': 'Tāda pati kombinācija citos tirgos',
+    'combo.cross_unmatched': 'Šim grupētajam nosaukumam nav pieejams salīdzinājums starp tirgiem.',
+    'combo.empty': 'Šai kombinācijai vēl nav reģistrēts neviens tirdzniecības nosaukums.',
+    'combo.ingredients': 'Aktīvās vielas',
+    'combo.intro': '<p class="sub">Šajā lapā uzskaitīti zīmoli, kuru aktīvo vielu kopums precīzi atbilst tālāk norādītajai kombinācijai. Tā ir tikai identitātes informācija — fiksētas devas kombinācija nav tas pats produkts kā tās atsevišķās aktīvās vielas, un tirdzniecības nosaukumi dažādos tirgos nav savstarpēji aizstājami.</p>',
+    'combo.no_advice': 'Tas nav medicīnisks ieteikums. Pirms produktu salīdzināšanas pārbaudiet iepakojumu un precīzo sastāvu; ja neesat pārliecināts, jautājiet farmaceitam.',
+    'combo.no_page': 'Šim nosaukumam nav atsevišķas zīmola lapas',
+    'combo.products': 'Zīmoli ar tieši šādu kombināciju',
+    'combo.see_warnings': 'Skatīt brīdinājumus par šīm vielām',
+    'combo.source_note': '<b>Avots un licence</b>: veidots no tiem pašiem regulējošo iestāžu datiem, kas izmantoti aktīvo vielu lapās (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, NHSA). Tikai fakti; skatiet <a href="../about.html#licences">licenču reģistru</a>.',
+    'combo.stub_badge': 'Kombinācijas ieraksts',
+    'combo.stub_note': 'Šī kombinācijas lapa nav izvērsta; izmantojiet aktīvo vielu lapas vai meklēšanu.',
+    'combo.stub_search': 'Meklēt',
+    'combo.title': 'Fiksētas devas kombinācija',
+    'conf.h2': 'FDA tall-man pāri',
+    'conf.intro': 'Līdzīgi pēc izskata / līdzīgi pēc skanējuma pāri no FDA Name Differentiation Project. Šis ir oficiālais tall-man saraksts, nevis pilnais ISMP LASA saraksts.',
+    'conf.note': 'Pāris šeit nozīmē, ka nosaukumus var sajaukt; tas nenozīmē, ka zāles ir savstarpēji aizstājamas. FDA iesaka tall-man rakstību.',
+    'conf.pair': 'Pāris',
+    'conf.search_hit': 'Šo nosaukumu viegli sajaukt ar',
+    'conf.source_note': 'Avots: <a href="https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project" target="_blank" rel="noopener">FDA Name Differentiation Project</a> (saturs aktuāls uz 2026-06-12; ASV valdības darbs). No FDA saraksta iekļauti vienīgi @@CONF_PAIRS@@ oficiāli atkārtoti publicējamie pāri; ar autortiesībām aizsargātais ISMP/ECRI “List of Confused Drug Names” nav pārkopēts. Atsevišķie FDA saraksta nosaukumi bez pāra (hydromorphone, mitoxantrone) nav iekļauti. Pāris ir brīdinājums par nosaukumiem, nevis apgalvojums, ka zāles ir līdzvērtīgas.',
+    'conf.title': 'Viegli sajaucami zāļu nosaukumi',
+    'conf.tml': 'Tall-man rakstība',
+    'country.change': 'Mainīt valsti/reģionu',
+    'country.missing': 'Šajā valstī/reģionā ar šo nosaukumu nav uzskaitīts neviens produkts.',
+    'country.missing_note': 'Nosaukums atbilst aktīvajai vielai, nevis produktam šajā valstī/reģionā. Mainiet valsti/reģionu vai atveriet aktīvās vielas lapu.',
+    'country.open_card': 'Aktīvās vielas lapa',
+    'coverage.col.asof': 'Dati uz',
+    'coverage.col.asof_short': 'Uz',
+    'coverage.col.last': 'Pēdējā sinhronizācija',
+    'coverage.col.last_short': 'Sinhronizēts',
+    'coverage.col.mapping': 'Aktīvā viela piesaistīta',
+    'coverage.col.mapping_short': 'Piesaistīta',
+    'coverage.col.market': 'Tirgus',
+    'coverage.col.notes': 'Zināmās nepilnības',
+    'coverage.col.products': 'Produkti',
+    'coverage.col.spec': 'Stiprumu pārklājums',
+    'coverage.col.spec_short': 'Stiprums',
+    'coverage.gap.au': 'ARTG eksportā nav reģistrācijas statusa kolonnas; statuss nav zināms, nevis norāde, ka produkts ir pārdošanā. Dažiem produktiem nav aktīvo vielu ierakstu.',
+    'coverage.gap.ca': 'Pilns DPD avots; nekomerciāla atkalizmantošana ar norādi uz avotu.',
+    'coverage.gap.cn': 'Publiska tālākizplatīšanas licence nav apstiprināta; dažiem ierakstiem nav tirdzniecības nosaukuma.',
+    'coverage.gap.cz': 'SÚKL atvērto datu reģistrs (DLP) — reģistrācijas ieraksti, nevis pašlaik pārdošanā esošo produktu saraksts; SPC/PIL bukleti nekad netiek izmantoti vai atkārtoti publicēti. Avots: SÚKL, 2026-11-01 (momentuzņēmums DLP20261027).',
+    'coverage.gap.es': 'Avota licence tālākizplatīšanai vēl nav apstiprināta.',
+    'coverage.gap.eu': 'Reģionālais slānis: centralizētās atļaujas (EMA / EC Union Register). Stiprums, zāļu forma un iepakojuma lielums nav norādīti; atļauja ≠ pārdošana valstī.',
+    'coverage.gap.fr': 'BDPM (ANSM) — Licence Ouverte / etalab-2.0, nepieciešama norāde uz avotu; atjaunināšanas datums ir datu pakotnē; atļauja ≠ pārdošana.',
+    'coverage.gap.gb': 'Pilns dm+d avots; Open Government Licence ar norādi uz avotu.',
+    'coverage.gap.hk': 'Tikai nosaukumu un aktīvo vielu slānis: nav stipruma, formas vai reģistrācijas statusa; reģistrēts ≠ tirgū pieejams.',
+    'coverage.gap.jp': 'Tikai NHI cenu saraksta (薬価基準) pozīcijas — tas nav reģistrācijas datubāze un nav pierādījums par pašreizēju piegādi. Avots: MHLW (厚生労働省), PDL 1.0, 2026-11-01.',
+    'coverage.gap.lv': 'ZVA HumanProducts atvērtie dati (iepakojuma līmenī, grupēti pēc reģistrācijas numura) — reģistrs, nevis pašlaik pārdošanā esošo produktu saraksts. Avots: ZVA, CC0 1.0, 2026-11-11.',
+    'coverage.gap.mx': 'Avota licence vēl nav apstiprināta; iekļautas arī vecākas reģistrācijas.',
+    'coverage.gap.sg': 'Reģistrācija sarakstā nepierāda pašreizēju piegādi.',
+    'coverage.gap.tw': 'Stiprums tiek noteikts no produkta nosaukuma; ticamība ir ierobežota.',
+    'coverage.gap.us': 'Pilns openFDA avots; ASV valdības darbs publiskajā domēnā.',
+    'coverage.gap.why': 'Kāpēc',
+    'coverage.intro': 'Ko sniedz katrs tirgus, cik pilnīgs tas ir un kad tas pēdējo reizi tika sinhronizēts. Skaitļi ir ierakstu skaits, nevis unikālu zāļu skaits; tukša vieta/0% nozīmē, ka avots šo lauku nepublicē.',
+    'coverage.no_brand': 'nav tirdzniecības nosaukumu ierakstu',
+    'coverage.notice': 'Šajā lapā ir tikai datu fakti. Tā nenozīmē, ka produkti ir savstarpēji aizstājami, pieejami pārdošanā vai līdzvērtīgi dažādos tirgos.',
+    'coverage.sort_market': 'Pēc tirgus',
+    'coverage.sort_products': 'Pēc produktiem',
+    'coverage.source_note': 'Avoti un licences: skatiet sadaļu “Par” un docs/许可清单.md. Ierobežotie avoti ir apkopoti tikai datu pakotnē.',
+    'coverage.spec.no_spec': 'Avots nepublicē stiprumu',
+    'coverage.title': 'Pārklājums un aktualitāte',
+    'drug.also_called': 'Sauc arī:',
+    'drug.also_in': 'arī citur:',
+    'drug.also_known': 'Pazīstams arī kā:',
+    'drug.brand': 'Zīmols',
+    'drug.brand_group': 'Ar tirdzniecības nosaukumu',
+    'drug.combo_section': 'Kombināciju produkti, kas satur šo aktīvo vielu',
+    'drug.compare_note': 'Blakus salīdzinājuma tabula ir pieejama tikai tad, ja šai vielai ir ieraksti daudzos tirgos; pretējā gadījumā šis saraksts ir pilnīgs.',
+    'drug.compare_side': 'Blakus salīdzinājuma tabula',
+    'drug.confused': 'Viegli sajaukt ar',
+    'drug.confused_all': 'Visi pāri',
+    'drug.confused_note': 'FDA šim pārim iesaka tall-man rakstību; pārbaudiet aktīvo vielu, nevis nosaukumu.',
+    'drug.empty': 'Vēl nav reģistrēts neviens produkts.',
+    'drug.forms_all': 'Visas zāļu formas',
+    'drug.forms_label': 'Zāļu formas',
+    'drug.forms_short': 'Formas',
+    'drug.full_list': 'Pilns saraksts datu pakotnē',
+    'drug.mah_group': 'Tikai ražotājs',
+    'drug.markets': 'tirgi',
+    'drug.mkx_more': 'Citi tirgi: {n}',
+    'drug.mono_section': 'Tikai ar šo aktīvo vielu',
+    'drug.more_names': 'Rādīt pārējos: {n}',
+    'drug.more_specs': 'Citi stiprumi',
+    'drug.more_specs_n': 'Citi stiprumi: {n} · zāļu formas: {m}',
+    'drug.ms_more': 'Šai formai vēl {n}',
+    'drug.no_brand': '(nav tirdzniecības nosaukuma)',
+    'drug.nostrength': 'nav norādīts',
+    'drug.notice': 'Vienai un tai pašai aktīvajai vielai dažādās valstīs var būt pilnīgi atšķirīgi tirdzniecības nosaukumi, un viens un tas pats nosaukums var norādīt uz citu vielu. Uzskaitīts pa valstīm — nav savstarpēji aizstājami.',
+    'drug.records': 'ieraksti',
+    'drug.release': 'Izdalīšanās',
+    'drug.showing': 'rāda pirmos 40 no',
+    'drug.sid': 'Vielas ID',
+    'drug.spec_count': 'Rāda {shown} no {n}',
+    'drug.spec_count_und': 'Rāda {shown} · {u} bez norādīta stipruma',
+    'drug.spec_count_und_one': 'Rāda {shown} · 1 ieraksts bez norādīta stipruma',
+    'drug.specs': 'stiprumi',
+    'drug.status': 'Statuss',
+    'drug.status.active': 'aktīvs',
+    'drug.status.discontinued': 'pārtraukts',
+    'drug.status.unknown': 'nezināms',
+    'drug.status.withdrawn': 'atsaukts',
+    'drug.status_note.discontinued': 'derīgums beidzies',
+    'drug.status_note.unknown': 'derīgums nav zināms',
+    'drug.status_note.withdrawn': 'tirgus atļauja atsaukta',
+    'drug.strength': 'Stiprums',
+    'drug.summary': 'Ieraksti par šo vielu pa valstīm (tikai identitāte).',
+    'drug.und_more': 'un vēl {n} ({k} ražotāji)',
+    'drug.und_more_one': 'un vēl {n} (1 ražotājs)',
+    'drug.undisclosed_block': 'Ieraksti bez norādīta stipruma',
+    'drug.undisclosed_k_one': '{n} ieraksti · 1 ražotājs',
+    'drug.undisclosed_n': '{n} ieraksti · {k} ražotāji',
+    'drug.undisclosed_n_one': '1 ieraksts · {k} ražotāji',
+    'drug.undisclosed_nk_one': '1 ieraksts · 1 ražotājs',
+    'drug.view_list': 'Atpakaļ uz sarakstu',
+    'error.index_failed': 'Indeksu neizdevās ielādēt.',
+    'error.local_file': 'Ja atvērāt šo lapu tieši no faila, pārlūks bloķē vietējo failu lasīšanu — palaidiet python -m http.server un atveriet http://localhost:8000/.',
+    'error.retry': 'Mēģināt vēlreiz',
+    'eu.coverage_note': 'ES reģionālais slānis — tikai centralizētās atļaujas; atļauja ≠ pārdošana katrā valstī.',
+    'eu.region_note': 'Atļauts ES līmenī — tas nav pierādījums par pārdošanu kādā atsevišķā valstī. ES reģistrā nav norādīts stiprums, zāļu forma vai iepakojuma lielums.',
+    'eu.region_title': 'ES centralizētā atļauja (EMA)',
+    'fam.badge.diff': 'Cita formula · vēl {n} aktīvās vielas',
+    'fam.badge.same': 'Tās pašas aktīvās vielas · izdalīšanās veids jāpārbauda',
+    'fam.cmp_current': 'Salīdzināmais produkts',
+    'fam.cmp_ing': 'Visas aktīvās vielas',
+    'fam.cmp_intro': 'Tirdzniecības nosaukums dažādos tirgos var būt reģistrēts citādi un saturēt citas aktīvās vielas. Šī tabula ir identitātes atbilstība — nevis tulkojums un nevis apgalvojums, ka produkti ir savstarpēji aizstājami.',
+    'fam.cmp_market': 'Tirgus',
+    'fam.cmp_name': 'Reģistrētais nosaukums',
+    'fam.cmp_rel': 'Saistība',
+    'fam.cmp_this': 'Šī lapa',
+    'fam.cmp_title': 'Saistītie tirdzniecības nosaukumi un formulu atšķirības',
+    'fam.rel.diff': 'Atšķirīgas aktīvās vielas — nav savstarpēji aizstājami',
+    'fam.rel.multi': 'Reģistrēti vairāki izdalīšanās veidi — izvēlieties konkrētu produktu',
+    'fam.rel.multi_unknown': 'Ne visiem produktiem norādīts izdalīšanās veids — izvēlieties konkrētu produktu',
+    'fam.rel.multi_why': 'dažos ierakstos nav norādīts izdalīšanās veids',
+    'fam.rel.none': 'Aktīvā viela nav norādīta',
+    'fam.rel.partial': 'Dažas aktīvās vielas sakrīt — nav viena un tā pati kombinācija, nav savstarpēji aizstājami',
+    'fam.rel.release': 'Tās pašas aktīvās vielas, cits izdalīšanās veids — nav savstarpēji aizstājami',
+    'fam.rel.same': 'Tās pašas aktīvās vielas',
+    'fam.title': 'Tas pats zīmols citos tirgos',
+    'fam.warn': 'Tas pats zīmols, cita viela',
+    'flow.s1': 'Nosaukums',
+    'flow.s2': 'Apstipriniet produktu',
+    'flow.s3': 'Mērķa tirgus',
+    'footer': 'Tikai informatīvi — tā nav medicīniskā konsultācija un neaizstāj farmaceitu.',
+    'form.capsule': 'kapsula',
+    'form.effervescent': 'šķīstošā',
+    'form.gas': 'gāze',
+    'form.granule': 'granulas',
+    'form.inhalation': 'inhalācija',
+    'form.injection': 'injekcija',
+    'form.kit': 'komplekts',
+    'form.liquid': 'šķidrums',
+    'form.pellet': 'pelētas',
+    'form.powder': 'pulveris',
+    'form.solution': 'šķīdums',
+    'form.stick': 'stienītis',
+    'form.suppository': 'svecīte',
+    'form.tablet': 'tablete',
+    'form.topical': 'lokāla',
+    'form.unknown': 'nav zināms',
+    'glossary.d.artg': 'Austrālijas terapeitisko preču reģistra numurs: identificē Austrālijā reģistrētu terapeitisko preci.',
+    'glossary.d.atc': 'Anatomiski terapeitiski ķīmiskā klasifikācija (PVO): kods, piemēram, C07AB02. Pirmie burti un cipari grupē pēc orgānu sistēmas, klases un vielas — noder, lai dažādos tirgos atrastu līdzīgas zāles.',
+    'glossary.d.ban': 'Britu apstiprinātais nosaukums: Lielbritānijas vispārējais nosaukums, parasti identisks INN; daži vecāki nosaukumi atšķiras (piemēram, adrenaline, nevis epinephrine).',
+    'glossary.d.din': 'Zāļu identifikācijas numurs: Kanādas produkta identifikators; DIN-HM lieto homeopātiskajiem produktiem.',
+    'glossary.d.fdc': 'Fiksētas devas kombinācija: divas vai vairākas aktīvās vielas vienā produktā (piemēram, metformin + glibenclamide). Kombinācijas lapa šajā vietnē.',
+    'glossary.d.inn': 'Starptautiskais nepatentētais nosaukums: PVO noteiktais vispārējais aktīvās vielas nosaukums (piemēram, acetaminophen/paracetamol, metoprolol).',
+    'glossary.d.lasa': 'Līdzīgi rakstāmi un līdzīgi izrunājami zāļu nosaukumi. FDA «tall-man» rakstība un sajaukto nosaukumu saraksts palīdz izvairīties no līdzīgu nosaukumu sajaukšanas.',
+    'glossary.d.mah': 'Tirdzniecības atļaujas turētājs: uzņēmums, kam pieder produkta licence konkrētā tirgū; ne vienmēr tas ir ražotājs.',
+    'glossary.d.ndc': 'Nacionālais zāļu kods: ASV produkta identifikators (markētājs + produkts + iepakojuma daļas).',
+    'glossary.d.otc': 'Bez receptes: pārdod bez receptes attiecīgajā tirgū; tās pašas zāles citur var būt pieejamas tikai ar recepti.',
+    'glossary.d.rx': 'Zāles, ko attiecīgajā tirgū izsniedz tikai ar recepti.',
+    'glossary.d.strength': 'Aktīvās vielas daudzums vienā vienībā (piemēram, 500 mg vienā tabletē); stiprums un izdalīšanās veidi dažādos tirgos var atšķirties.',
+    'glossary.d.usan': 'Amerikas Savienoto Valstu pieņemtais nosaukums: ASV vispārējais nosaukums; lielākoties INN, bet dažkārt atšķiras (piemēram, albuterol, nevis salbutamol).',
+    'glossary.def': 'Nozīme',
+    'glossary.h2': 'Termini un kodi',
+    'glossary.intro': 'Īsi skaidrojumi par kodiem un terminiem, kas redzami uz produktu etiķetēm, regulatoru ierakstiem un šajā vietnē. Tas ir palīgs atšifrēšanai, nevis medicīniska konsultācija.',
+    'glossary.note': 'Viens un tas pats akronīms dažādās valstīs var nozīmēt ko citu (piemēram, DIN ir Kanādas, ARTG numurs — Austrālijas). Kodu vienmēr aplūkojiet kopā ar tā avotu.',
+    'glossary.t.artg': 'ARTG',
+    'glossary.t.atc': 'ATC kods',
+    'glossary.t.ban': 'BAN',
+    'glossary.t.din': 'DIN',
+    'glossary.t.fdc': 'FDC',
+    'glossary.t.inn': 'INN',
+    'glossary.t.lasa': 'LASA / tall-man',
+    'glossary.t.mah': 'MAH',
+    'glossary.t.ndc': 'NDC',
+    'glossary.t.otc': 'OTC',
+    'glossary.t.rx': 'Rx',
+    'glossary.t.strength': 'Stiprums',
+    'glossary.t.usan': 'USAN',
+    'glossary.term': 'Termins',
+    'glossary.title': 'Glosārijs',
+    'home.all': 'Visas valstis un reģioni',
+    'home.au': 'Austrālija',
+    'home.ca': 'Kanāda',
+    'home.candidate': 'Jūs vienmēr saņemat kandidātu kopu, nekad vienu atbildi.',
+    'home.cn': 'Ķīna',
+    'home.country_label': 'Mērķa tirgus: rādīt tur lietotos nosaukumus (nav obligāti)',
+    'home.country_label_sel': 'Mērķa tirgus: kā to sauc izvēlētajā valstī ({country}):',
+    'home.country_summary': 'Mērķa tirgus (nav obligāti)',
+    'home.coverage': 'Tukšs rezultāts nenozīmē, ka zāles neeksistē. Pārklājums (valstis un reģioni):',
+    'home.cz': 'Čehija',
+    'home.es': 'Spānija',
+    'home.eu': 'Eiropas Savienība (ES)',
+    'home.fr': 'Francija',
+    'home.gb': 'Apvienotā Karaliste',
+    'home.h1': 'Meklējiet zāļu nosaukumu — uzziniet, kas tas ir katrā valstī',
+    'home.hint_idle': 'Pirmā meklēšana ielādē vienu indeksa daļu (mediāna ~1,0 MB, ~0,16 MB gzip); pilnais indekss (core ~42 MB neapstrādātā veidā, ~9–10 MB gzip) ielādējas fonā — sāciet rakstīt, fokusējiet meklēšanas lauku vai izvēlieties piemēru.',
+    'home.hint_loading': 'Ielādē indeksa daļu (mediāna ~1,0 MB, ~0,16 MB gzip)…',
+    'home.hk': 'Honkonga',
+    'home.jp': 'Japāna',
+    'home.loading': 'Ielādē indeksu…',
+    'home.lv': 'Latvija',
+    'home.mx': 'Meksika',
+    'home.ph': 'Zīmols, vispārējais nosaukums vai teksts no iepakojuma',
+    'home.recent': 'Nesen atjaunināts',
+    'home.recent_all': 'Skatīt visus atjauninājumus →',
+    'home.sg': 'Singapūra',
+    'home.slash_hint': 'Nospiediet /, lai pārietu uz meklēšanas lauku',
+    'home.sub': 'Tirdzniecības nosaukums, vispārējais nosaukums, iesauka vai rinda no iepakojuma — darbojas ķīniešu, pilna platuma un kirilicas ievade.',
+    'home.submit': 'Meklēt',
+    'home.suggestions': 'Ieteikumi',
+    'home.try_cross': 'ASV Tylenol Extra Strength — kā to sauc Ķīnā?',
+    'home.try_pack': 'Pēc iepakojuma teksta:',
+    'home.tw': 'Taivāna',
+    'home.us': 'Amerikas Savienotās Valstis',
+    'ingredient.unrecorded': 'Viela nav norādīta (nosaukuma līmenī)',
+    'lf.all': 'Visi',
+    'lf.all_kinds': 'Visu veidu',
+    'lf.applied': 'Atlasītie filtri',
+    'lf.count': 'Parādīti {shown} no {total}',
+    'lf.drop': 'Noņemt šo filtru',
+    'lf.kind': 'Veids',
+    'lf.market': 'Tirgus',
+    'lf.none': 'Neviena rinda neatbilst šiem filtriem.',
+    'lf.spec': 'Stiprums',
+    'lf.spec_ph': 'Filtrēt stiprumus, piem., 500 mg',
+    'lf.title': 'Filtri',
+    'maker.brand': 'Zīmols',
+    'maker.by_country': 'Produkti pa valstīm',
+    'maker.capped': 'Rādīti pirmie {shown} no {total} produktiem (kārtoti pēc valsts).',
+    'maker.empty': 'Šim ražotājam nav reģistrēts neviens produkts.',
+    'maker.ingredient': 'Aktīvās vielas',
+    'maker.intro': '<p class="sub">{name} — {products} produkti no {markets} tirgiem, {brands} tirdzniecības nosaukumi. Produkti ir sagrupēti pa valstīm; tirdzniecības nosaukumi saista uz zīmola lapu, bet aktīvās vielas — uz vielas vai kombinācijas lapu. Šis ir regulatora reģistrētais tirdzniecības atļaujas turētājs, ne vienmēr ražotājs.</p>',
+    'maker.no_page': 'Nav atsevišķas zīmola lapas',
+    'maker.no_page_count': 'Vēl {n} ražotāji bez lapas',
+    'maker.single_note': 'Citi šī ražotāja produkti vēl nav reģistrēti.',
+    'maker.source': 'Avots',
+    'maker.source_note': '<b>Avots &amp; licence</b>: produktu rindas saista uz regulatora ierakstu (openFDA, dm+d, CIMA, COFEPRIS, PBS/TGA, Health Canada DPD, NHSA); tikai fakti — skatiet <a href="../about.html#licences">licenču reģistru</a>.',
+    'maker.stats': '<p class="sub">{products} produkti · {markets} tirgi · {brands} tirdzniecības nosaukumi</p>',
+    'maker.summary': 'Šī ražotāja reģistrētie produkti pa tirgiem.',
+    'maker.title': 'Ražotājs / tirdzniecības atļaujas turētājs',
+    'matrix.all': 'Visi',
+    'matrix.au_note': 'Austrālijas ARTG datiem nav reģistrācijas statusa kolonnas, tāpēc statuss tiek rādīts kā nezināms; ieraksts reģistrā nenozīmē, ka produkts pašlaik tiek tirgots.',
+    'matrix.brand_note': 'Katra valsts/reģiona kolonna rāda vietēji reģistrētos tirdzniecības nosaukumus — nevis tulkojumus.',
+    'matrix.capped': 'Rādītas pirmās {shown} no {total} stipruma/formas rindām.',
+    'matrix.close': 'Aizvērt',
+    'matrix.country': 'Valstis un reģioni',
+    'matrix.country_all': 'Visas',
+    'matrix.country_clear': 'Notīrīt',
+    'matrix.empty_markets': 'Izvēlieties vismaz vienu tirgu, lai rādītu kolonnas.',
+    'matrix.filters': 'Filtri',
+    'matrix.filters_short': 'Filtri',
+    'matrix.form': 'Forma',
+    'matrix.hidden_note': 'Pārtrauktie, atsauktie vai neapstiprināta statusa produkti pēc noklusējuma tiek paslēpti; Honkongas un Austrālijas ieraksti tiek rādīti kā izņēmumi.',
+    'matrix.hidden_rows': 'Vēl {n} stipruma/formas rindas ir reģistrētas tikai {mk} un šajā tabulā nav rādītas.',
+    'matrix.hidden_show': 'Pievienot šo tirgu kā kolonnu',
+    'matrix.hk_note': 'Honkongas ieraksti ir tikai nosaukuma/aktīvās vielas līmenī: nav stipruma, zāļu formas vai reģistrācijas statusa; ieraksts reģistrā nepierāda pašreizēju piegādi.',
+    'matrix.market_count': 'Tirgi {shown}/{total}',
+    'matrix.mobile_filters': 'Filtri',
+    'matrix.multi_form': 'Vairākas zāļu formas',
+    'matrix.none': 'nav reģistrēts',
+    'matrix.original': 'Reģistrēts kā',
+    'matrix.release': 'Izdalīšanās',
+    'matrix.reset': 'Atjaunot sākotnējos iestatījumus',
+    'matrix.scroll_hint': 'Ritiniet horizontāli, lai redzētu citus tirgus →',
+    'matrix.showing': '{n} / {total} rindas',
+    'matrix.sort_note': 'Biežāk sastopamie stiprumi vispirms; nenorādītais stiprums — pēdējais.',
+    'matrix.spec': 'Stiprums / forma / izdalīšanās',
+    'matrix.spec_check': 'pārbaudīt stiprumu',
+    'matrix.spec_conflict': 'stiprums nav apstiprināts',
+    'matrix.spec_search': 'Meklēt stiprumu',
+    'matrix.undisclosed_note': '„nav norādīts” nozīmē, ka avots stiprumu nepublicē — tas nenozīmē, ka produktam tā nav.',
+    'meta.about.desc': 'Kā darbojas šī savstarpējā atbilstība: avoti un pārklājums, licences un norādes uz avotu, zināmās nepilnības un redakcijas noteikumi. Tikai uzziņai, nevis medicīnisks padoms.',
+    'meta.about.title': 'Par vietni · Zāļu zīmolu savstarpējā atbilstība',
+    'meta.confused.desc': 'FDA tall-man līdzīga izskata / līdzīga skanējuma pāri: brīdinājums par nosaukumiem, nevis apgalvojums, ka zāles ir savstarpēji aizstājamas.',
+    'meta.confused.title': 'Viegli sajaucami zāļu nosaukumi · Zāļu zīmolu savstarpējā atbilstība',
+    'meta.coverage.desc': 'Produkti, aktīvo vielu piesaiste, stiprumu pārklājums, pēdējā sinhronizācija un zināmās nepilnības katrā tirgū; skaitļi aprēķināti no pašreizējās datubāzes.',
+    'meta.coverage.title': 'Pārklājums un aktualitāte · Zāļu zīmolu savstarpējā atbilstība',
+    'meta.glossary.desc': 'Īsi skaidrojumi kodiem un terminiem, kas lietoti šajā vietnē: INN, BAN, USAN, ATC, MAH, DIN, NDC, ARTG, FDC, LASA, OTC, Rx, stiprums.',
+    'meta.glossary.title': 'Glosārijs · Zāļu zīmolu savstarpējā atbilstība',
+    'meta.index.desc': 'Meklējiet tirdzniecības nosaukumu, vispārējo nosaukumu vai iesauku un skatiet aktīvo vielu, stiprumu un tā paša produkta nosaukumus citās valstīs. Publiska, nekomerciāla uzziņa.',
+    'meta.index.title': 'Zāļu zīmolu savstarpējā atbilstība — zāļu nosaukumi dažādās valstīs',
+    'meta.warn.desc': 'Publicēti brīdinājumi par vienāda nosaukuma, bet citas vielas produktiem un kombinācijām, kas nav savstarpēji aizstājamas dažādās valstīs, sāļu formās vai izdalīšanās mehānismos. Tikai informācija.',
+    'meta.warn.title': 'Brīdinājumi: viens nosaukums, cita viela · Zāļu zīmolu savstarpējā atbilstība',
+    'meta.whatsnew.desc': 'Zāļu zīmolu savstarpējās atbilstības laidienu piezīmes: labojumi un papildinājumi katrā versijā.',
+    'meta.whatsnew.title': 'Kas jauns · Zāļu zīmolu savstarpējā atbilstība',
+    'mk.collapse_all': 'Sakļaut visu',
+    'mk.expand_all': 'Izvērst visu',
+    'mkmeta.asof': 'Dati uz',
+    'mkmeta.source': 'Avots',
+    'mkmeta.undisclosed': 'dažiem ierakstiem nav norādīts stiprums',
+    'mkmeta.unknown': 'ietver ierakstus ar nezināmu statusu (nav pārdošanas pierādījums)',
+    'name.also': 'Raksta arī kā',
+    'name.countries': 'Valstis un reģioni',
+    'name.empty': 'Nav ierakstu',
+    'name.form': 'Forma',
+    'name.form_granularity_cn': 'Avots zāļu formu reģistrē tikai klases līmenī (piem., „tablete”); putojošās un apvalkotās apakšformas netiek izdalītas.',
+    'name.form_source': 'kā reģistrējis avots',
+    'name.form_spec': 'Stiprums pa zāļu formām',
+    'name.form_unstated': 'Forma nav norādīta',
+    'name.found': 'Atrasts',
+    'name.no_en': 'Nav reģistrēts nosaukums angļu valodā',
+    'name.no_es': 'Nav nosaukuma spāņu valodā',
+    'name.no_zh': 'Nav nosaukuma ķīniešu valodā',
+    'name.no_zh_hant': 'Nav nosaukuma tradicionālajā ķīniešu valodā',
+    'name.notice': 'Vienāds nosaukums nenozīmē savstarpēju aizstājamību — identitāte tiek salīdzināta lauks pa laukam, kā reģistrēts.',
+    'name.records_n': '{n} ieraksti',
+    'name.records_one': '1 ieraksts',
+    'name.rel_multi_title': 'Vairāki izdalīšanās veidi',
+    'name.rel_note': 'izvēlieties konkrētu produktu salīdzināšanai',
+    'name.rel_unknown_title': 'Izdalīšanās daļēji nav reģistrēta',
+    'name.rel_unrecorded': 'Izdalīšanās nav reģistrēta',
+    'name.release': 'Izdalīšanās',
+    'name.severe': 'Šis tirdzniecības nosaukums dažādās valstīs vai variantos norāda uz dažādām aktīvajām vielām. Pārbaudiet sastāvu un nekad neuzskatiet nosaukumus par līdzvērtīgiem.',
+    'name.show_more': 'Rādīt vairāk',
+    'name.single_note': 'Pagaidām tikai viens produkta ieraksts ar šo nosaukumu.',
+    'name.spec_amount': 'Citi reģistrētie daudzumi',
+    'name.spec_conc': 'Ar koncentrāciju',
+    'name.spec_unrecorded': 'Stiprums nav reģistrēts',
+    'name.spec_vol': 'Tikai tilpums',
+    'name.specs_n': '{n} stiprumi',
+    'name.specs_one': '1 stiprums',
+    'name.strength': 'Stiprums',
+    'name.summary': 'Produkti, kas reģistrēti ar šo nosaukumu, pa tirgiem (tikai identitāte).',
+    'name.warning': 'Vienāds nosaukums, bet tūlītēja vai modificēta izdalīšanās — nav savstarpēji aizstājami.',
+    'nav.about': 'Par vietni',
+    'nav.all_categories': 'Visas kategorijas un ATC',
+    'nav.atc': 'ATC un kategorijas',
+    'nav.back_search': '← Atpakaļ uz meklēšanu',
+    'nav.categories': 'Kategorijas',
+    'nav.confused': 'Sajaucami nosaukumi',
+    'nav.coverage': 'Pārklājums',
+    'nav.crumbs': 'Navigācijas ceļš',
+    'nav.glossary': 'Glosārijs',
+    'nav.markets': 'Tirgi',
+    'nav.menu': 'Izvēlne',
+    'nav.more': 'Vairāk',
+    'nav.primary': 'Galvenā navigācija',
+    'nav.search': 'Meklēt',
+    'nav.search_compact': 'Meklēt nosaukumu',
+    'nav.sections': 'Sadaļas',
+    'nav.warn': 'Brīdinājumi',
+    'nav.whatsnew': 'Kas jauns',
+    'nick.abbrev': 'saīsinājums',
+    'nick.ambiguous': 'Šis segvārds var norādīt uz vairāk nekā vienu vielu — pārbaudiet sastāvu.',
+    'nick.caveat': 'Segvārdi norāda uz vielu, nevis konkrētu iepakojumu: viena un tā pati viela katrā valstī tiek pārdota ar dažādiem tirdzniecības nosaukumiem.',
+    'nick.class': 'klases termins',
+    'nick.class_caveat': 'Šis ir klases termins, nevis konkrētas zāles — tas var aptvert vairākas vielas. Pārbaudiet aktīvo vielu.',
+    'nick.community': 'kopienas nosaukums',
+    'nick.folk': 'tautas nosaukums',
+    'nick.folk_caveat': 'Šis ir tautas vai kategorijas termins, nevis konkrētas zāles — tas var aptvert vairākas vielas. Produkts, kura nosaukumā ir šis termins, ne vienmēr pieder šai klasei; pārbaudiet aktīvo vielu.',
+    'nick.hit': 'Segvārds',
+    'nick.lang.en': 'Angļu',
+    'nick.lang.zh': 'Ķīniešu',
+    'nick.legacy': 'vecāks nosaukums',
+    'nick.misnomer': 'izplatīts nepareizs nosaukums',
+    'nick.nomap_caveat': 'Šis termins norāda uz vielu, kurai šajā datubāzē nav tirgota produkta, tāpēc produktu saraksts netiek rādīts.',
+    'nick.slang': 'interneta segvārds',
+    'nick.source': 'Avots',
+    'nick.street': 'ASV ielas nosaukums',
+    'nick.synonym': 'sinonīms',
+    'nick.synonym_caveat': 'Cits nosaukums tai pašai aktīvajai vielai (INN pret USAN vai rakstības variants). Tas identificē vielu — produkti dažādās valstīs tomēr nav savstarpēji aizstājami.',
+    'nick.synonym_hit': 'Pazīstams arī kā',
+    'nick.tag': 'segvārds',
+    'nick.translit': 'transliterēts vecais nosaukums',
+    'nick.unverified': 'lietotāja sniegts (nepārbaudīts)',
+    'notfound.about': 'Par vietni',
+    'notfound.confused': 'Sajaucami nosaukumi',
+    'notfound.p1': 'Šai adresei nav lapas. Iespējams, tā ir veca saite, drukas kļūda vai pārdēvēts ieraksts.',
+    'notfound.p2': 'Atgriezieties sākumlapā un ierakstiet zāļu nosaukumu (tirdzniecības nosaukumu, vispārējo nosaukumu vai segvārdu).',
+    'notfound.report': 'Ja iekšējā saite ir bojāta, ziņojiet mums <a href="https://github.com/fuarnos/drug-brand-crossref/issues/new?labels=data-error&amp;template=data-error.yml">GitHub</a>.',
+    'notfound.search': 'Meklēt',
+    'notfound.title': 'Lapa nav atrasta',
+    'notfound.whatsnew': 'Kas jauns',
+    'parse.atc': 'ATC kods',
+    'parse.category': 'Kategorija',
+    'parse.category_note': 'Atbilst tēmu izlasei — tas nav nosaukums un nav līdzvērtības apgalvojums.',
+    'parse.dose': 'Deva',
+    'parse.form': 'Zāļu forma',
+    'parse.label': 'Analizētais vaicājums',
+    'parse.match': 'Atbilstība',
+    'parse.match.atc': 'ATC kods',
+    'parse.match.category': 'Kategorija / ATC klase',
+    'parse.match.compact': 'salikts',
+    'parse.match.contains': 'apakšvirkne',
+    'parse.match.country': 'valsts skats',
+    'parse.match.exact': 'precīza',
+    'parse.match.fuzzy': 'aptuvena',
+    'parse.match.nickname': 'aizstājvārds',
+    'parse.match.none': 'nav atbilstības',
+    'parse.match.pinyin': 'piņjiņa',
+    'parse.match.prefix': 'prefikss',
+    'parse.name': 'Nosaukums',
+    'release.DR': 'aizturēta izdalīšanās',
+    'release.ER': 'pagarināta izdalīšanās',
+    'release.MR': 'modificēta izdalīšanās',
+    'release.none': '—',
+    'report.all': 'Zināmās problēmas',
+    'report.cta': 'Ziņot par šo rezultātu',
+    'report.field_actual': 'Faktiskais rezultāts',
+    'report.field_expected': 'Gaidītais rezultāts',
+    'report.field_pack': 'Iepakojums vai partija',
+    'report.field_page': 'Lapa',
+    'report.field_query': 'Vaicājums',
+    'report.field_row': 'Rinda',
+    'report.issue_title': 'Datu kļūda: ',
+    'report.link': 'Ziņot par datu kļūdu',
+    'report.note': 'Nepareiza viela, nepareiza deva vai zāles, kuru mums nav? Ziņojiet mums:',
+    'res.action_copy': 'Kopēt vispārējo nosaukumu',
+    'res.action_drug': 'Atvērt vielas lapu',
+    'res.actions': 'Darbības',
+    'res.alias': 'atbilst aizstājvārdam',
+    'res.alias_no_products': 'nav viens produkts — skatiet piezīmi augstāk',
+    'res.brands': 'atrastie zīmoli',
+    'res.brands_noun': 'zīmoli',
+    'res.caveat': 'tukšs rezultāts nenozīmē, ka zāles neeksistē',
+    'res.col_country': 'Valstis un reģioni',
+    'res.col_form': 'Zāļu forma',
+    'res.col_link': 'Lapa',
+    'res.col_market': 'Tirgus',
+    'res.col_match': 'Atbilstība',
+    'res.col_product': 'Produkta nosaukums',
+    'res.col_spec': 'Stiprums un zāļu forma',
+    'res.copied': 'Nokopēts',
+    'res.copy': 'Kopēt tabulu',
+    'res.copy_fail': 'Kopēšana neizdevās — atlasiet tabulu manuāli',
+    'res.csv': 'Lejupielādēt CSV',
+    'res.density': 'Kompakts skats',
+    'res.details': 'Detaļas',
+    'res.empty_browse': 'Pārlūkot pēc kategorijas',
+    'res.empty_coverage': 'Skatīt pārklājumu un datu aktualitāti',
+    'res.empty_h1': 'Nav atbilstības vaicājumam “{q}”',
+    'res.empty_spelling': 'Pārbaudiet rakstību vai mēģiniet vispārējo nosaukumu',
+    'res.fold': 'Rādīt mazāk',
+    'res.fuzzy': 'Nav precīzas atbilstības — tuvākie nosaukumi',
+    'res.identity.ingredient': 'Aktīvā viela',
+    'res.identity.markets': 'Aptvertie tirgi',
+    'res.identity.records': '{n} ieraksti',
+    'res.identity_note': 'Viens un tas pats nosaukums citā tirgū var norādīt uz citu vielu. Pārbaudiet aktīvo vielu, stiprumu un formu — ne tikai nosaukumu.',
+    'res.identity_title': 'kandidāts 1 no {n}',
+    'res.load_more': 'Ielādēt vairāk',
+    'res.loaded_all': 'Rādīti visi rezultāti',
+    'res.matched': 'atbilstošie nosaukumi',
+    'res.matched_name': 'Atbilstošais nosaukums',
+    'res.more_detail': 'Vairāk stiprumu / vairāk ierakstu',
+    'res.more_n': 'Rādīt pārējos {n} produktus',
+    'res.no_brand_note': '{n} ierakstiem nav tirdzniecības nosaukuma, tie rādīti nosaukuma līmenī.',
+    'res.none': 'Nav atbilstības',
+    'res.not_interchangeable': 'Nav savstarpēji aizstājami dažādos tirgos',
+    'res.notin': 'Nav iekļauts šajā valstī',
+    'res.partial': 'daļēji rezultāti — tiek ielādēts pilns indekss…',
+    'res.pick': 'Izvēlēties šo produktu',
+    'res.picked': 'Atlasīts',
+    'res.records_noun': 'ieraksti',
+    'res.reg': 'Reģistrācijas dati',
+    'res.same_name': 'Viens nosaukums, cita viela',
+    'res.show_brands': 'Rādīt visus zīmolus',
+    'res.showing': 'Rādīti {n} no {total}',
+    'res.src_active': 'avota tirgus {c}',
+    'res.src_all': 'Visi avota tirgi',
+    'res.src_label': 'Ieraksta tirgus (tikai šeit reģistrētie ieraksti)',
+    'row.report': 'Ziņot par šo rindu',
+    'same.ing': 'Citi produkti ar to pašu aktīvo vielu',
+    'same.note': 'Jūs meklējāt tirdzniecības nosaukumu — šie ir citi produkti, kas satur to pašu aktīvo vielu.',
+    'same.related': 'Satur vienu no tām pašām vielām (sastāvs nav tāds pats)',
+    'same.related_note': 'Šiem ierakstiem ir vismaz viena kopīga viela ar jūsu meklējumu, taču pilnais vielu sastāvs atšķiras. Tie nav viens un tas pats produkts.',
+    'same.warning': 'Viens nosaukums vai viena viela nenozīmē, ka produkti ir savstarpēji aizstājami.',
+    'site.name': 'Zāļu zīmolu krusteniskā atsauce',
+    'spec.cannot_compare': 'nevar salīdzināt',
+    'spec.no_basis': 'nav norādīts pamats uz mL / vienību',
+    'spec.no_basis_note': 'Dažiem stiprumiem nav norādīts pamats uz mL / vienību. Tie tiek rādīti tā, kā reģistrēti, un netiek salīdzināti ar citiem tirgiem.',
+    'syn.tag': 'sinonīms',
+    't11.adv': 'Paplašinātie filtri',
+    't11.all_markets': 'Visi',
+    't11.cmp_note': 'Tikai identitātes salīdzinājums pa laukiem. Viens nosaukums vai viena viela nenozīmē, ka produkti ir savstarpēji aizstājami.',
+    't11.cmp_target': 'Mērķa tirgus',
+    't11.cmp_title': 'Salīdzinājums pa vienumiem (tikai identitāte)',
+    't11.cmp_you': 'Jūsu produkts',
+    't11.compare_link': 'Salīdzināt pa vienumiem →',
+    't11.diff': 'Atšķiras',
+    't11.missing': 'Nav reģistrēts',
+    't11.multi': 'Izvēlieties produktu',
+    't11.name': 'Reģistrētais nosaukums',
+    't11.pick_mine': 'Šis ir mans',
+    't11.pick_this': 'Šis',
+    't11.picked': 'Atlasīts',
+    't11.release': 'Izdalīšanās',
+    't11.reselect': 'Izvēlēties no jauna',
+    't11.same': 'Vienāds',
+    't11.spec': 'Stiprums',
+    't11.still_candidates': 'Kandidātu kopumā joprojām ir {n} ieraksti — šis ir tikai viens no tiem. Skatīt visus kandidātus ↓',
+    'tab.about': 'Par',
+    'tab.categories': 'Kategorijas',
+    'tab.coverage': 'Pārklājums',
+    'tab.search': 'Meklēšana',
+    'u1.aria': 'Darba sākšanas pamācība',
+    'u1.close': 'Aizvērt',
+    'u1.step1': 'Ievadiet nosaukumu no iepakojuma',
+    'u1.step1_hint': 'Tirdzniecības nosaukums, ģenēriskais nosaukums, iesauka vai rinda no iepakojuma — varat iekļaut arī devu.',
+    'u1.step2': 'Pārbaudiet šo kandidātu: aktīvā viela, stiprums, zāļu forma',
+    'u1.step2_hint': 'Kartīte rāda vienu kandidātu, nekad galīgo atbildi — salīdziniet tā aktīvo vielu, stiprumu un zāļu formu ar savu iepakojumu.',
+    'u1.step3': 'Izvēlieties mērķa tirgu',
+    'u1.step3_hint': 'Izvēlieties mērķa tirgu, lai redzētu, kā tur sauc to pašu aktīvo vielu; pats kandidātu saraksts nemainās.',
+    'u1.title': 'Kā to lietot trīs soļos',
+    'u1.try': 'Izmēģiniet:',
+    'u2.hint': 'Tā pati aktīvā viela, vietējais nosaukums — noklikšķiniet uz valsts/reģiona, lai redzētu tā produktus. Ja produkts nav sarakstā, tas nenozīmē, ka tas tur nav pieejams.',
+    'u2.multi': 'Atbilst vairākas vielas — pārslēdziet valsti/reģionu, lai redzētu pilnu sarakstu.',
+    'u2.none': 'Nav sarakstā',
+    'u2.none_hint': 'Šī tirgus publiskajos datos nav produkta ar šo vielu. Tas nenozīmē, ka tas tur nav pieejams.',
+    'u2.title': 'Nosaukumi pa valstīm/reģioniem',
+    'unit.iu': 'IU',
+    'unit.mci': 'mCi',
+    'unit.meq': 'mEq',
+    'unit.microgram': 'mcg',
+    'unit.ug': 'mcg',
+    'unit.unit': 'vienība',
+    'unit.万iu': '10 tūkst. IU',
+    'warn.count': '<p class="sub">@@WARN_TOTAL@@ publicēti brīdinājumi: @@WARN_HIGH@@ ar augstu nopietnību, @@WARN_MEDIUM@@ ar vidēju, @@WARN_INFO@@ informatīvi. Melnraksta brīdinājumi netiek rādīti.</p>',
+    'warn.countries': 'Tirgi',
+    'warn.drug_summary': 'Drošības brīdinājumi par šo vielu',
+    'warn.empty': 'Vēl nav publicētu brīdinājumu.',
+    'warn.filter.all': 'Visi',
+    'warn.group.high': 'Augsta nopietnība — nepieņemiet, ka produkti ir savstarpēji aizstājami',
+    'warn.group.info': 'Arī noderīgi zināt',
+    'warn.group.medium': 'Vidēja nopietnība — pārbaudiet, pirms pieņemat, ka tie ir līdzvērtīgi',
+    'warn.intro': '<p class="sub">Publicēti brīdinājumi par viegli jaucamiem nosaukumiem vai produktiem, kas <b>nav savstarpēji aizstājami</b> — dažādās valstīs, sāļu formās vai izdalīšanās mehānismos. Šī lapa norāda tikai identitāti un savstarpēju aizstājamību; tajā <b>mēs nesniedzam ieteikumus par devām</b> un nesniedzam ieteikumus par aizstāšanu.</p>',
+    'warn.no_advice': 'Tas nav medicīnisks padoms. Pārbaudiet faktisko iepakojumu un aktīvo vielu, un pirms produkta maiņas jautājiet farmaceitam.',
+    'warn.page_next': 'Nākamā',
+    'warn.page_prev': 'Iepriekšējā',
+    'warn.page_status': 'Lapa {n} no {total} · {count} brīdinājumi',
+    'warn.pagination': 'Brīdinājumu lapas',
+    'warn.related': 'Saistītā viela',
+    'warn.reviewed': 'Pārskatījis',
+    'warn.see_all': 'Skatīt visus brīdinājumus',
+    'warn.sev.high': 'Augsta',
+    'warn.sev.info': 'Informācija',
+    'warn.sev.medium': 'Vidēja',
+    'warn.source': 'Regulatīvais avots',
+    'warn.source_note': '<b>Avoti un licences</b>: katrs brīdinājums satur saiti uz regulatora oriģināldokumentu (DailyMed/FDA, EMA/MHRA, Health Canada DPD, AEMPS CIMA, PBS/TGA, NMPA …). Mēs publicējam tikai faktiskus fragmentus un saglabājam saiti uz avotu; markējumi un SmPC/CMI pilnie teksti netiek pārpublicēti. Licenču reģistru skatiet sadaļā “Par”.',
+    'warn.title': 'Brīdinājumi: viens nosaukums, cita viela',
+    'whatsnew.intro': 'Katrai versijai ir īss kopsavilkums. Vecās versijas papildinātas no git atzīmēm; pilna vēsture atrodama <a href="https://github.com/fuarnos/drug-brand-crossref/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.',
+    'whatsnew.lang_note': 'Versijas piezīmes ir mašīntulkotas (AI); noteicošais ir ķīniešu oriģināls failā CHANGELOG.md.',
+    'whatsnew.pending': 'Tikai ķīniešu oriģināls — tulkojums angļu/spāņu valodā vēl nav gatavs.',
+    'whatsnew.title': 'Kas jauns',
+}
+
+
 def _merge_static_i18n(values: dict) -> None:
     """把 ABOUT_I18N / PAGE_I18N / WARN_I18N 合并进 I18N，并替换 @@占位符@@。"""
     for lang in ("en", "es", "zh"):
@@ -4432,6 +6526,412 @@ def _merge_static_i18n(values: dict) -> None:
     for key, text in KO_I18N.items():
         if key not in I18N["ko"]:
             I18N["ko"][key] = text
+
+    # L2（v0.16.0）：日语同样是全键翻译表（684/684），键集与 en 相同；万一缺键才回落英文。
+    I18N["ja"] = {k: (JA_I18N.get(k) or v) for k, v in I18N["en"].items()}
+    for key, text in JA_I18N.items():
+        if key not in I18N["ja"]:
+            I18N["ja"][key] = text
+
+    # L3（v0.17.0）：捷克语 / 拉脱维亚语同为全键翻译表（各 684/684），规则同上。
+    I18N["cs"] = {k: (CS_I18N.get(k) or v) for k, v in I18N["en"].items()}
+    for key, text in CS_I18N.items():
+        if key not in I18N["cs"]:
+            I18N["cs"][key] = text
+    I18N["lv"] = {k: (LV_I18N.get(k) or v) for k, v in I18N["en"].items()}
+    for key, text in LV_I18N.items():
+        if key not in I18N["lv"]:
+            I18N["lv"][key] = text
+
+
+# ── v0.18.0（MY）：新市场需要的 3 个键（市场名 / 覆盖页缺口说明 / About 来源段）──────────
+# 只补新市场自己需要的键，**不改 5 张 684 条全键表**（否则 ja/cs/lv 全键表 + zh-Hant 派生链要一起变，
+# 历史版本「684 条」口径会漂）。构建期在 _merge_static_i18n + _install_zh_hant 之后注入 I18N：
+# 9 语各一份，由 _assert_i18n_complete() 校验 9 语键集仍完全一致（现查 690 键 × 9 语言）。
+MARKET_EXTRA_I18N: dict[str, dict[str, str]] = {
+    "home.my": {
+        "en": 'Malaysia',
+        "es": 'Malasia',
+        "zh": '马来西亚',
+        "zh-Hant": '馬來西亞',
+        "fr": 'Malaisie',
+        "ko": '말레이시아',
+        "ja": 'マレーシア',
+        "cs": 'Malajsie',
+        "lv": 'Malaizija',
+    },
+    "coverage.gap.my": {
+        "en": 'NPRA / Ministry of Health Malaysia open data (QUEST3+ approved + cancelled products) under CC BY 4.0 — attribution: NPRA / data.gov.my; administrative records only, not a current-sale list; data as of 2026-11-18 (29,956 records: 28,333 approved + 1,623 cancelled).',
+        "es": 'datos abiertos de la NPRA / Ministerio de Salud de Malasia (productos aprobados y cancelados de QUEST3+) bajo CC BY 4.0 — atribución: NPRA / data.gov.my; solo registros administrativos, no una lista de venta actual; datos al 2026-11-18 (29.956 registros: 28.333 aprobados + 1.623 cancelados).',
+        "zh": '仅收 NPRA（马来西亚卫生部）开放数据（QUEST3+ 已批准 + 已注销产品），CC BY 4.0、署名 NPRA / data.gov.my；行政记录，不是在售清单；数据截至 2026-11-18（29,956 条 = 28,333 已批准 + 1,623 已注销）。',
+        "zh-Hant": '僅收 NPRA（馬來西亞衛生部）開放資料（QUEST3+ 已批准 + 已註銷產品），CC BY 4.0、署名 NPRA / data.gov.my；行政紀錄，不是在售清單；資料截至 2026-11-18（29,956 筆 = 28,333 已批准 + 1,623 已註銷）。',
+        "fr": 'données ouvertes de la NPRA / ministère de la Santé de Malaisie (produits approuvés et annulés QUEST3+) sous CC BY 4.0 — attribution : NPRA / data.gov.my ; registres administratifs uniquement, pas une liste de vente actuelle ; données au 2026-11-18 (29 956 enregistrements : 28 333 approuvés + 1 623 annulés).',
+        "ko": '말레이시아 보건부 NPRA 공개 데이터(QUEST3+ 승인·취소 제품), CC BY 4.0, 출처 표기 NPRA / data.gov.my; 행정 기록일 뿐 현재 판매 목록이 아님; 데이터 기준일 2026-11-18 (29,956건 = 승인 28,333 + 취소 1,623).',
+        "ja": 'マレーシア保健省 NPRA の公開データ（QUEST3+ 承認・取消製品）、CC BY 4.0・出典表示 NPRA / data.gov.my。行政記録であり現在の販売リストではありません。データ基準日 2026-11-18（29,956 件＝承認 28,333＋取消 1,623）。',
+        "cs": 'otevřená data NPRA / Ministerstva zdravotnictví Malajsie (schválené i zrušené produkty QUEST3+) pod CC BY 4.0 — uvedení zdroje: NPRA / data.gov.my; jde o administrativní záznamy, nikoli seznam aktuálně prodávaných přípravků; data k 2026-11-18 (29 956 záznamů: 28 333 schválených + 1 623 zrušených).',
+        "lv": 'NPRA / Malaizijas Veselības ministrijas atvērtie dati (QUEST3+ apstiprinātie un atceltie produkti) saskaņā ar CC BY 4.0 — norāde: NPRA / data.gov.my; tie ir administratīvi ieraksti, nevis aktuālais pārdošanas saraksts; dati uz 2026-11-18 (29 956 ieraksti: 28 333 apstiprināti + 1 623 atcelti).',
+    },
+    "about.my_source": {
+        "en": '<p class="sub"><b>Malaysia 马来西亚</b>: NPRA / Ministry of Health Malaysia — <b>Approved / Cancelled Pharmaceutical Products</b> (QUEST3+ administrative records) published via <b>data.gov.my</b> under <b>CC BY 4.0</b> (attribution: NPRA / data.gov.my, no implied endorsement). Data as of <b>2026-11-18</b> (snapshot 2026-11-20): <b>29,956</b> products = <b>28,333 approved</b> + <b>1,623 cancelled</b> (status and cancellation dates kept). Fact fields only (brand name, ingredients and strength where the source encodes them, dosage form, registration number, MAH, status); traditional/natural products are <b>not force-mapped</b> to Western INNs; SPC/leaflets are never taken or republished. An entry in the register does not prove current supply.</p>',
+        "es": '<p class="sub"><b>Malasia 马来西亚</b>: NPRA / Ministerio de Salud de Malasia — <b>productos farmacéuticos aprobados / cancelados</b> (registros administrativos QUEST3+) publicados vía <b>data.gov.my</b> bajo <b>CC BY 4.0</b> (atribución: NPRA / data.gov.my, sin implicar respaldo). Datos al <b>2026-11-18</b> (instantánea 2026-11-20): <b>29.956</b> productos = <b>28.333 aprobados</b> + <b>1.623 cancelados</b> (se conservan estado y fecha de cancelación). Solo campos fácticos (nombre comercial, ingredientes y concentración cuando la fuente los codifica, forma farmacéutica, número de registro, MAH, estado); los productos tradicionales/naturales <b>no se mapean a la fuerza</b> a INN occidentales; los SPC/prospectos no se recogen ni se republican. Estar en el registro no demuestra suministro actual.</p>',
+        "zh": '<p class="sub"><b>马来西亚</b>：马来西亚卫生部 NPRA 的「已批准 / 已注销药品清单」（QUEST3+ 行政记录），经 <b>data.gov.my</b> 发布，许可 <b>CC BY 4.0</b>（署名 NPRA / data.gov.my，不得暗示其背书）。数据截至 <b>2026-11-18</b>（快照 2026-11-20）：<b>29,956</b> 条 = <b>28,333 已批准</b> + <b>1,623 已注销</b>（保留状态与注销日期）。只存事实字段（商品名、来源里编码了的成分与含量、剂型、注册号、MAH、状态）；天然产品/保健品<b>不强行映射</b>西药 INN；SPC/说明书不取不发布。「登记在册」不等于「当前在售」。</p>',
+        "zh-Hant": '<p class="sub"><b>馬來西亞</b>：馬來西亞衛生部 NPRA 的「已批准 / 已註銷藥品清單」（QUEST3+ 行政紀錄），經 <b>data.gov.my</b> 發布，授權 <b>CC BY 4.0</b>（署名 NPRA / data.gov.my，不得暗示其背書）。資料截至 <b>2026-11-18</b>（快照 2026-11-20）：<b>29,956</b> 筆 = <b>28,333 已批准</b> + <b>1,623 已註銷</b>（保留狀態與註銷日期）。只存事實欄位（商品名、來源中已編碼的成分與含量、劑型、註冊號、MAH、狀態）；天然產品/保健品<b>不強行映射</b>西藥 INN；SPC/說明書不取不發布。「登記在冊」不等於「目前在售」。</p>',
+        "fr": '<p class="sub"><b>Malaisie 马来西亚</b> : NPRA / ministère de la Santé de Malaisie — <b>produits pharmaceutiques approuvés / annulés</b> (registres administratifs QUEST3+), publiés via <b>data.gov.my</b> sous <b>CC BY 4.0</b> (attribution : NPRA / data.gov.my, sans implication d\'approbation). Données au <b>2026-11-18</b> (instantané 2026-11-20) : <b>29 956</b> produits = <b>28 333 approuvés</b> + <b>1 623 annulés</b> (statut et date d\'annulation conservés). Champs factuels uniquement (nom commercial, ingrédients et dosage lorsque la source les encode, forme, numéro d\'enregistrement, MAH, statut) ; les produits traditionnels/naturels ne sont <b>pas mappés de force</b> vers des INN occidentaux ; les SPC/notices ne sont ni collectés ni republiés. Figurer au registre ne prouve pas une commercialisation actuelle.</p>',
+        "ko": '<p class="sub"><b>말레이시아</b>: 말레이시아 보건부 NPRA의 <b>승인/취소 의약품 목록</b>(QUEST3+ 행정 기록)을 <b>data.gov.my</b>를 통해 공개, 라이선스 <b>CC BY 4.0</b>(출처 표기: NPRA / data.gov.my, 보증을 암시하지 않음). 데이터 기준일 <b>2026-11-18</b>(스냅샷 2026-11-20): <b>29,956</b>개 = <b>승인 28,333</b> + <b>취소 1,623</b>(상태·취소일 보존). 사실 항목만(제품명, 출처에 인코딩된 성분·함량, 제형, 등록번호, MAH, 상태); 천연/건강기능 제품은 서구 INN으로 <b>강제 매핑하지 않음</b>; SPC/설명서는 수집·재배포하지 않음. 등록부 등재가 현재 판매를 뜻하지는 않습니다.</p>',
+        "ja": '<p class="sub"><b>マレーシア</b>：マレーシア保健省 NPRA の「承認済み／取消済み医薬品リスト」（QUEST3+ の行政記録）を <b>data.gov.my</b> 経由で公開、ライセンス <b>CC BY 4.0</b>（出典表示：NPRA / data.gov.my、推奨を暗示しません）。データ基準日 <b>2026-11-18</b>（スナップショット 2026-11-20）：<b>29,956</b> 件＝<b>承認 28,333</b>＋<b>取消 1,623</b>（状態と取消日を保持）。事実項目のみ（製品名、出典がコード化している成分・含量、剤形、登録番号、MAH、状態）。天然・健康食品は西欧 INN に<b>無理に対応付けません</b>。SPC／添付文書は取得・再配布しません。登録簿への記載は現在の供給を証明しません。</p>',
+        "cs": '<p class="sub"><b>Malajsie 马来西亚</b>: NPRA / Ministerstvo zdravotnictví Malajsie — <b>schválené / zrušené léčivé přípravky</b> (administrativní záznamy QUEST3+), zveřejněné přes <b>data.gov.my</b> pod <b>CC BY 4.0</b> (uvedení zdroje: NPRA / data.gov.my, bez naznačení schválení). Data k <b>2026-11-18</b> (snapshot 2026-11-20): <b>29 956</b> produktů = <b>28 333 schválených</b> + <b>1 623 zrušených</b> (stav a datum zrušení zachovány). Pouze faktické údaje (název, složky a síla, pokud je zdroj kóduje, léková forma, registrační číslo, MAH, stav); tradiční/přírodní produkty se <b>nepřevádějí násilně</b> na západní INN; SPC/příbalové letáky se nesbírají ani nezveřejňují. Zápis v registru neprokazuje současné dodávky.</p>',
+        "lv": '<p class="sub"><b>Malaizija 马来西亚</b>: NPRA / Malaizijas Veselības ministrija — <b>apstiprinātie / atceltie medikamenti</b> (QUEST3+ administratīvie ieraksti), publicēti ar <b>data.gov.my</b> starpniecību saskaņā ar <b>CC BY 4.0</b> (norāde: NPRA / data.gov.my, bez apstiprinājuma implicēšanas). Dati uz <b>2026-11-18</b> (snapshot 2026-11-20): <b>29 956</b> produkti = <b>28 333 apstiprināti</b> + <b>1 623 atcelti</b> (statuss un atcelšanas datums saglabāti). Tikai faktiskie lauki (nosaukums, sastāvdaļas un stiprums, ja avots tos kodē, zāļu forma, reģistrācijas numurs, MAH, statuss); tradicionālie/dabiskie produkti <b>netiek piespiedu kārtā</b> kartēti uz Rietumu INN; SPC/lietošanas instrukcijas netiek iegūtas un nepārpublicētas. Ieraksts reģistrā nepierāda pašreizēju piegādi.</p>',
+    },
+}
+
+
+# ── v0.19.0 rev3（F1'/F2'）：一次点击直达当地药名 + 同名分叉只问一次 ──────────
+# 只走构建期注入：不改 684 条全键表、不改 data/ 文件。
+V019_I18N: dict[str, dict[str, str]] = {
+    "home.h1": {
+        "en": 'What is this medicine called elsewhere?',
+        "es": '¿Cómo se llama este medicamento en otros lugares?',
+        "zh": '这款药在别的地方叫什么？',
+        "zh-Hant": '這款藥在別的地方叫什麼？',
+        "fr": "Comment ce médicament s'appelle-t-il ailleurs ?",
+        "ko": '이 약은 다른 곳에서 무엇이라고 부르나요?',
+        "ja": 'この薬は他の場所で何と呼ばれていますか？',
+        "cs": 'Jak se tento lék jmenuje jinde?',
+        "lv": 'Kā šīs zāles sauc citur?',
+    },
+    "home.ph": {
+        "en": 'The name on the pack',
+        "es": 'El nombre del envase',
+        "zh": '药盒上写的名字',
+        "zh-Hant": '藥盒上寫的名字',
+        "fr": 'Le nom sur la boîte',
+        "ko": '약 상자에 적힌 이름',
+        "ja": '薬の箱に書かれた名前',
+        "cs": 'Název na krabičce',
+        "lv": 'Nosaukums uz iepakojuma',
+    },
+    "home.q_ph": {
+        "en": 'e.g. Tylenol Extra Strength',
+        "es": 'p. ej. Tylenol Extra Strength',
+        "zh": '例如：Tylenol Extra Strength',
+        "zh-Hant": '例如：Tylenol Extra Strength',
+        "fr": 'p. ex. Tylenol Extra Strength',
+        "ko": '예: Tylenol Extra Strength',
+        "ja": '例：Tylenol Extra Strength',
+        "cs": 'např. Tylenol Extra Strength',
+        "lv": 'piem., Tylenol Extra Strength',
+    },
+    "home.submit": {
+        "en": 'Look up',
+        "es": 'Buscar',
+        "zh": '查药名',
+        "zh-Hant": '查藥名',
+        "fr": 'Rechercher',
+        "ko": '약 이름 찾기',
+        "ja": '薬名を調べる',
+        "cs": 'Vyhledat',
+        "lv": 'Meklēt',
+    },
+    "home.country_label": {
+        "en": 'Where do you want to look?',
+        "es": '¿Dónde quieres buscar?',
+        "zh": '想查哪里？',
+        "zh-Hant": '想查哪裡？',
+        "fr": 'Où voulez-vous chercher ?',
+        "ko": '어디에서 찾을까요?',
+        "ja": 'どこで調べますか？',
+        "cs": 'Kde chcete hledat?',
+        "lv": 'Kur vēlaties meklēt?',
+    },
+    "home.country_summary": {
+        "en": 'Where to look?',
+        "es": '¿Dónde buscar?',
+        "zh": '想查哪里？',
+        "zh-Hant": '想查哪裡？',
+        "fr": 'Où chercher ?',
+        "ko": '어디에서 찾을까요?',
+        "ja": 'どこで調べますか？',
+        "cs": 'Kde hledat?',
+        "lv": 'Kur meklēt?',
+    },
+    "home.try_cross": {
+        "en": 'First time? Try US Tylenol → what it is called in China →',
+        "es": '¿Primera vez? Prueba Tylenol de EE. UU. → cómo se llama en China →',
+        "zh": '第一次用？试查美国 Tylenol 在中国有哪些相关药名 →',
+        "zh-Hant": '第一次用？試查美國 Tylenol 在中國有哪些相關藥名 →',
+        "fr": 'Première fois ? Essayez Tylenol (États-Unis) → son nom en Chine →',
+        "ko": '처음이신가요? 미국 Tylenol → 중국에서의 이름 보기 →',
+        "ja": '初めての方は？米国の Tylenol → 中国での名前を見る →',
+        "cs": 'Poprvé? Zkuste Tylenol z USA → jak se jmenuje v Číně →',
+        "lv": 'Pirmoreiz? Pamēģiniet Tylenol (ASV) → kā to sauc Ķīnā →',
+    },
+    "u1.step1": {
+        "en": 'Type the name on the pack',
+        "es": 'Escribe el nombre del envase',
+        "zh": '输入药盒上的名字',
+        "zh-Hant": '輸入藥盒上的名字',
+        "fr": 'Saisissez le nom sur la boîte',
+        "ko": '약 상자에 적힌 이름을 입력',
+        "ja": '薬の箱に書かれた名前を入力',
+        "cs": 'Zadejte název z krabičky',
+        "lv": 'Ievadiet nosaukumu no iepakojuma',
+    },
+    "u1.step1_hint": {
+        "en": 'Tylenol Extra Strength — exactly as printed on the pack.',
+        "es": 'Tylenol Extra Strength, tal como aparece en el envase.',
+        "zh": '泰诺林 Tylenol Extra Strength——照包装上印的写。',
+        "zh-Hant": '泰諾林 Tylenol Extra Strength——照包裝上印的寫。',
+        "fr": 'Tylenol Extra Strength, exactement comme sur la boîte.',
+        "ko": 'Tylenol Extra Strength — 포장에 인쇄된 그대로.',
+        "ja": 'Tylenol Extra Strength — 箱に印刷されているとおりに。',
+        "cs": 'Tylenol Extra Strength — přesně jak je na krabičce.',
+        "lv": 'Tylenol Extra Strength — tieši tā, kā uz iepakojuma.',
+    },
+    "u1.step2": {
+        "en": 'Pick the one that matches your box',
+        "es": 'Elige el que coincida con tu caja',
+        "zh": '选出和你手上药盒一致的一项',
+        "zh-Hant": '選出和你手上藥盒一致的一項',
+        "fr": 'Choisissez celle qui correspond à votre boîte',
+        "ko": '손에 있는 약 상자와 일치하는 항목을 고르세요',
+        "ja": 'お手元の箱と一致する項目を選ぶ',
+        "cs": 'Vyberte položku, která odpovídá krabičce',
+        "lv": 'Izvēlieties ierakstu, kas atbilst iepakojumam',
+    },
+    "u1.step2_hint": {
+        "en": 'Same box: Tylenol Extra Strength 500 mg tablets.',
+        "es": 'La misma caja: Tylenol Extra Strength 500 mg comprimidos.',
+        "zh": '同一盒：泰诺林 Tylenol Extra Strength 500 mg 片剂。',
+        "zh-Hant": '同一盒：泰諾林 Tylenol Extra Strength 500 mg 片劑。',
+        "fr": 'La même boîte : Tylenol Extra Strength 500 mg comprimés.',
+        "ko": '같은 상자: Tylenol Extra Strength 500 mg 정.',
+        "ja": '同じ箱：Tylenol Extra Strength 500 mg 錠。',
+        "cs": 'Stejná krabička: Tylenol Extra Strength 500 mg tablety.',
+        "lv": 'Tas pats iepakojums: Tylenol Extra Strength 500 mg tabletes.',
+    },
+    "u1.step3": {
+        "en": 'See the name in your target country',
+        "es": 'Mira el nombre en tu país objetivo',
+        "zh": '看目标市场怎么叫它',
+        "zh-Hant": '看目標市場怎麼叫它',
+        "fr": 'Voyez le nom dans le pays cible',
+        "ko": '목표 국가에서의 이름 보기',
+        "ja": '目的の国での名前を見る',
+        "cs": 'Podívejte se na název v cílové zemi',
+        "lv": 'Apskatiet nosaukumu mērķa valstī',
+    },
+    "u1.step3_hint": {
+        "en": 'Target: China — the same box, the names recorded there.',
+        "es": 'Destino: China: la misma caja, los nombres registrados allí.',
+        "zh": '目标市场选中国：同一盒药，中国收录的相关药名。',
+        "zh-Hant": '目標市場選中國：同一盒藥，中國收錄的相關藥名。',
+        "fr": 'Cible : la Chine — la même boîte, les noms enregistrés là-bas.',
+        "ko": '목표: 중국 — 같은 상자, 중국에 등록된 이름.',
+        "ja": '対象：中国 — 同じ箱、中国で登録されている名前。',
+        "cs": 'Cíl: Čína — stejná krabička, názvy evidované tam.',
+        "lv": 'Mērķis: Ķīna — tas pats iepakojums, tur reģistrētie nosaukumi.',
+    },
+    "res.choose_title": {
+        "en": 'First pick the one that matches your pack',
+        "es": 'Primero elige el que coincida con tu envase',
+        "zh": '先选出和你手上药盒一致的一项',
+        "zh-Hant": '先選出和你手上藥盒一致的一項',
+        "fr": "Choisissez d'abord la fiche qui correspond à votre boîte",
+        "ko": '먼저 손에 있는 약 상자와 일치하는 항목을 고르세요',
+        "ja": 'まず、お手元の箱と一致する項目を選んでください',
+        "cs": 'Nejprve vyberte položku, která odpovídá vaší krabičce',
+        "lv": 'Vispirms izvēlieties ierakstu, kas atbilst jūsu iepakojumam',
+    },
+    "res.choose_hint": {
+        "en": 'Check the strength and form on the pack, e.g. 500 mg · tablet',
+        "es": 'Comprueba concentración y forma del envase, p. ej. 500 mg · comprimido',
+        "zh": '请对照包装上的规格和剂型，例如 500 mg · 片剂',
+        "zh-Hant": '請對照包裝上的規格和劑型，例如 500 mg · 片劑',
+        "fr": 'Vérifiez le dosage et la forme sur la boîte, p. ex. 500 mg · comprimé',
+        "ko": '포장의 함량과 제형을 확인하세요. 예: 500 mg · 정',
+        "ja": '箱の含量と剤形を確認してください。例：500 mg · 錠',
+        "cs": 'Zkontrolujte sílu a formu na krabičce, např. 500 mg · tableta',
+        "lv": 'Pārbaudiet stiprumu un formu uz iepakojuma, piem., 500 mg · tablete',
+    },
+    "res.picked_title": {
+        "en": 'Related names recorded in {market}',
+        "es": 'Nombres relacionados registrados en {market}',
+        "zh": '{market}收录的相关药名',
+        "zh-Hant": '{market}收錄的相關藥名',
+        "fr": 'Noms associés enregistrés en {market}',
+        "ko": '{market}에 등록된 관련 이름',
+        "ja": '{market}で登録されている関連名',
+        "cs": 'Související názvy evidované v {market}',
+        "lv": '{market} reģistrētie saistītie nosaukumi',
+    },
+    "res.picked_you": {
+        "en": 'You picked: {market} · {name} · {spec}',
+        "es": 'Has elegido: {market} · {name} · {spec}',
+        "zh": '你选的是：{market} · {name} · {spec}',
+        "zh-Hant": '你選的是：{market} · {name} · {spec}',
+        "fr": 'Votre choix : {market} · {name} · {spec}',
+        "ko": '선택한 항목: {market} · {name} · {spec}',
+        "ja": '選択中：{market} · {name} · {spec}',
+        "cs": 'Vybráno: {market} · {name} · {spec}',
+        "lv": 'Jūsu izvēle: {market} · {name} · {spec}',
+    },
+    "res.spec_unknown": {
+        "en": 'strength not published',
+        "es": 'concentración no publicada',
+        "zh": '规格未公开',
+        "zh-Hant": '規格未公開',
+        "fr": 'dosage non publié',
+        "ko": '함량 미공개',
+        "ja": '含量未公開',
+        "cs": 'síla nezveřejněna',
+        "lv": 'stiprums nav publicēts',
+    },
+    "res.rel_same": {
+        "en": 'Same ingredient, strength to verify',
+        "es": 'Mismo principio, concentración por verificar',
+        "zh": '成分相同，规格待核对',
+        "zh-Hant": '成分相同，規格待核對',
+        "fr": 'Même principe actif, dosage à vérifier',
+        "ko": '성분 동일, 함량 확인 필요',
+        "ja": '成分は同じ、含量は要確認',
+        "cs": 'Stejná látka, sílu je třeba ověřit',
+        "lv": 'Tā pati viela, stiprums jāpārbauda',
+    },
+    "res.rel_partial": {
+        "en": 'Some ingredients shared, different formula',
+        "es": 'Parte de los principios coincide, fórmula distinta',
+        "zh": '部分成分相同，配方不同',
+        "zh-Hant": '部分成分相同，配方不同',
+        "fr": 'Certains principes communs, formule différente',
+        "ko": '일부 성분 동일, 조성 다름',
+        "ja": '一部の成分は同じ、配合は異なる',
+        "cs": 'Některé látky shodné, složení jiné',
+        "lv": 'Dažas vielas kopīgas, sastāvs atšķiras',
+    },
+    "res.pick": {
+        "en": 'Pick this one to see its {market} name',
+        "es": 'Elige esta para ver su nombre en {market}',
+        "zh": '选这项，查看{market}药名',
+        "zh-Hant": '選這項，查看{market}藥名',
+        "fr": 'Choisir pour voir son nom en {market}',
+        "ko": '이 항목을 골라 {market} 이름 보기',
+        "ja": 'これを選んで{market}での名前を見る',
+        "cs": 'Vybrat a zobrazit název v {market}',
+        "lv": 'Izvēlēties un skatīt nosaukumu {market}',
+    },
+    "res.pick_any": {
+        "en": 'Pick this one to see related names',
+        "es": 'Elige esta para ver nombres relacionados',
+        "zh": '选这项，查看相关药名',
+        "zh-Hant": '選這項，查看相關藥名',
+        "fr": 'Choisir pour voir les noms associés',
+        "ko": '이 항목을 골라 관련 이름 보기',
+        "ja": 'これを選んで関連名を見る',
+        "cs": 'Vybrat a zobrazit související názvy',
+        "lv": 'Izvēlēties un skatīt saistītos nosaukumus',
+    },
+    "res.any_market": {
+        "en": 'other countries',
+        "es": 'otros países',
+        "zh": '各国',
+        "zh-Hant": '各國',
+        "fr": "d'autres pays",
+        "ko": '다른 나라',
+        "ja": '各国',
+        "cs": 'jiných zemích',
+        "lv": 'citās valstīs',
+    },
+    "res.diff_btn": {
+        "en": 'Not sure? See the differences',
+        "es": '¿No estás seguro? Ver diferencias',
+        "zh": '不确定，查看差异',
+        "zh-Hant": '不確定，查看差異',
+        "fr": 'Pas sûr ? Voir les différences',
+        "ko": '확실하지 않나요? 차이 보기',
+        "ja": 'わからない場合は違いを見る',
+        "cs": 'Nejste si jistí? Zobrazit rozdíly',
+        "lv": 'Nav pārliecības? Skatīt atšķirības',
+    },
+    "res.direct_title": {
+        "en": 'Related names recorded in {market}',
+        "es": 'Nombres relacionados registrados en {market}',
+        "zh": '{market}有哪些相关药名',
+        "zh-Hant": '{market}有哪些相關藥名',
+        "fr": 'Noms associés enregistrés en {market}',
+        "ko": '{market}의 관련 약 이름',
+        "ja": '{market}での関連する薬名',
+        "cs": 'Související názvy v {market}',
+        "lv": 'Saistītie nosaukumi {market}',
+    },
+    "res.spec_unconfirmed": {
+        "en": 'strength unconfirmed',
+        "es": 'concentración sin confirmar',
+        "zh": '规格未确认',
+        "zh-Hant": '規格未確認',
+        "fr": 'dosage non confirmé',
+        "ko": '함량 미확인',
+        "ja": '含量未確認',
+        "cs": 'síla nepotvrzena',
+        "lv": 'stiprums nav apstiprināts',
+    },
+    "res.fork_q": {
+        "en": 'Which one is on your pack?',
+        "es": '¿Cuál figura en tu envase?',
+        "zh": '你的药盒上写的是哪一款？',
+        "zh-Hant": '你的藥盒上寫的是哪一款？',
+        "fr": 'Lequel figure sur votre boîte ?',
+        "ko": '약 상자에 적힌 것은 어느 쪽인가요?',
+        "ja": '箱に書かれているのはどちらですか？',
+        "cs": 'Který z nich je na vaší krabičce?',
+        "lv": 'Kurš ir uz jūsu iepakojuma?',
+    },
+    "res.fork_unsure": {
+        "en": "I'm not sure",
+        "es": 'No estoy seguro',
+        "zh": '我不确定',
+        "zh-Hant": '我不確定',
+        "fr": 'Je ne suis pas sûr',
+        "ko": '잘 모르겠어요',
+        "ja": 'わからない',
+        "cs": 'Nevím',
+        "lv": 'Nezinu',
+    },
+    "res.fork_diff": {
+        "en": 'Ingredient differences',
+        "es": 'Diferencias de ingredientes',
+        "zh": '成分差异',
+        "zh-Hant": '成分差異',
+        "fr": "Différences d'ingrédients",
+        "ko": '성분 차이',
+        "ja": '成分の違い',
+        "cs": 'Rozdíly ve složení',
+        "lv": 'Sastāva atšķirības',
+    },
+    "res.noresult_hint": {
+        "en": 'Try the English name or the ingredient name printed on the pack',
+        "es": 'Prueba el nombre en inglés o el principio activo del envase',
+        "zh": '试试包装上的英文名或成分名',
+        "zh-Hant": '試試包裝上的英文名或成分名',
+        "fr": 'Essayez le nom en anglais ou le principe actif indiqué sur la boîte',
+        "ko": '포장에 적힌 영어 이름이나 성분명을 시도해 보세요',
+        "ja": '箱に書かれた英語名か成分名で試してください',
+        "cs": 'Zkuste anglický název nebo název účinné látky z krabičky',
+        "lv": 'Mēģiniet angļu nosaukumu vai sastāvdaļas nosaukumu no iepakojuma',
+    },
+}
+
+
+def _install_v019_i18n() -> None:
+    """v0.19.0：F1'/F2' 文案注入 9 份 I18N（必须在 zh-Hant 安装之后调用）。"""
+    for _key, _names in V019_I18N.items():
+        for _lang, _text in _names.items():
+            I18N.setdefault(_lang, {})[_key] = _text
+
+def _install_market_extra_i18n() -> None:
+    """v0.18.0：把 MARKET_EXTRA_I18N 注入 9 份 I18N（必须在 zh-Hant 安装之后调用）。"""
+    for key, names in MARKET_EXTRA_I18N.items():
+        for lang, text in names.items():
+            I18N.setdefault(lang, {})[key] = text
 
 
 def _install_zh_hant(values: dict) -> None:
@@ -5178,6 +7678,7 @@ endorsement implied. 中文：依新加坡開放資料授權條款第 1 版（SO
 資料截止 2026-08-07（每 6 個月更新）；在冊名單不代表在售；品牌名保留英文原文、不翻譯，中文僅
 成分名可譯。ES: contiene información del registro de HSA bajo la SODL v1.0 con atribución;
 datos hasta 2026-08-07; estar en el registro no implica comercialización.</li>
+<li><b>Malaysia 马来西亚 / Malasia</b>: NPRA / Ministry of Health Malaysia — <b>Approved / Cancelled Pharmaceutical Products</b> (QUEST3+), published via <a href="https://data.gov.my/data-catalogue/pharmaceutical_products">data.gov.my</a> under <b>CC BY 4.0</b> (attribution: NPRA / data.gov.my; no implied endorsement); administrative records only — an entry does not prove current supply. 中文：马来西亚卫生部 NPRA 的已批准／已注销药品清单（QUEST3+，经 data.gov.my 发布），CC BY 4.0（署名 NPRA / data.gov.my，不得暗示背书）；行政记录，「登记 ≠ 在售」。ES: NPRA / Ministerio de Salud de Malasia — productos aprobados / cancelados (QUEST3+), publicados vía data.gov.my bajo CC BY 4.0 (atribución: NPRA / data.gov.my, sin implicar respaldo); registros administrativos, el registro no implica venta actual. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
 <li><b>WHO ATC/DDD Index</b>: ATC codes and hierarchy reference the <b>WHO Collaborating Centre
 for Drug Statistics Methodology</b> ATC/DDD Index; the Index itself is copyrighted and is not
 reproduced. Class/category names shown on ATC pages are editorial or AI-assisted translations,
@@ -5329,10 +7830,11 @@ border-radius:12px;background:#fff}
  padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
  border:1px solid var(--accent);border-radius:10px;background:var(--accent);color:#fff;
  font-size:15px;font-weight:600;line-height:1;cursor:pointer;white-space:nowrap}
-.sb-go .sbg-t{display:none}
+.sb-go .sbg-t{display:inline}
 .sb-go .sbg-ico{font-size:17px}
-@media (min-width:768px){.sb-go .sbg-t{display:inline}}
+@media (max-width:479px){.sb-go .sbg-ico{display:none}}
 .searchbar #q{padding-right:56px}
+@media (min-width:480px){.searchbar #q{padding-right:96px}}
 @media (min-width:768px){.searchbar #q{padding-right:150px}}
 /* K1/T35（v0.11.10）：成分页每个市场块 = 原生 <details>（summary 保留原 h2 的全部信息）。
    无 JS 可用；打印时全部展开（另有 beforeprint 脚本兜底）。 */
@@ -6643,9 +9145,48 @@ main .catquick{background:color-mix(in srgb, var(--accent) 7%, var(--accent-weak
 .sn-panel-right{right:0;left:auto;min-width:210px}
 .lang-menu a{display:flex;min-height:44px;align-items:center;padding:0 10px;border-radius:8px;color:var(--fg)}
 .lang-menu a.on{background:var(--accent-weak);color:var(--accent);font-weight:600}
+.f2hint{margin:2px 0 6px}
+/* v0.19.0 ui-surface：表头与行可分辨（浅底 + 分隔线） */
+.res.rows thead th,table.res thead th{background:#e9eee9;border-bottom:1px solid var(--line);color:var(--fg)}
+thead th{background:#e9eee9;border-bottom:1px solid var(--line);color:var(--fg)}
+
+
+
+/* v0.19.0 首屏门禁：results 卡片更紧凑（只影响结果页表格） */
+.searchwrap{margin-bottom:2px}
+.t11row{margin:0}
+#meta{margin:0}
+@media (max-width:767px){.res.rows td{padding:2px 8px}.res.rows .c-brand{line-height:1.2}}/* v0.19.0 首屏门禁：压缩列表上方 chrome（结果页） */
+#identity{margin:0 0 4px;font-size:13px;line-height:1.25}
+#identity .idcard,#identity .idwrap,#identity .identity-card{padding:2px 6px;margin:0}
+.res-summary,.identity-summary{margin:0;padding:0;font-size:16px;line-height:1.25}
+#out .notice{margin:2px 0;font-size:16px;line-height:1.25}
+.forkbox{margin:6px 0;padding:6px 8px}
+.forkq{margin:0 0 4px;font-size:16px}
+.forkopts{margin:0 0 4px}
+.forkbox{margin:8px 0;padding:10px 12px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--accent-weak)}
+.forkq{margin:0 0 6px}
+.forkopts{margin:0 0 6px;display:flex;flex-wrap:wrap;gap:8px}
+.forkbtn{border:1px solid var(--accent);background:var(--card);padding:6px 12px;border-radius:8px}
+.forkdiff th{text-align:left;padding:4px 8px}
+.forkdiff td{padding:4px 8px}
+.tag.reltag{background:var(--accent-weak);color:var(--accent);border:1px solid var(--line)}
+.tag.reltag.diff{background:var(--warnbg);color:var(--warn);border-color:var(--warn)}
+/* LG8（v0.17.0，用户 2026-11-20：「这个语言切换不太容易确认是切换语言」）：
+   ① 可见「语言」标签 + 当前语言名（`语言：中文 ▾`）；
+   ② 控件本身有边界（边框 + 背景），hover / focus-visible / 展开三态都给反馈；
+   ③ 移动端「⋯」菜单的语言分组加「语言」小标题。选项仍是各语言本名（R2 口径不变）。 */
+.sn-right .langdd>summary.langsum{gap:2px;border:1px solid var(--line);background:var(--card);border-radius:10px;font-weight:600}
+.sn-right .langdd>summary.langsum:hover{background:var(--accent-weak);border-color:var(--accent)}
+.sn-right .langdd>summary.langsum:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sn-right .langdd[open]>summary.langsum{background:var(--accent-weak);border-color:var(--accent)}
+.sn-right .langsum .llabel,.sn-right .langsum .lsep,.sn-right .langsum .caret{color:var(--accent)}
+.sn-right .langsum .lname{color:var(--fg)}
+.sn-right .langsum .caret{margin-left:2px;font-size:12px}
+.mmenu .lang-head{padding:6px 10px 2px;font-size:13px;font-weight:600;color:var(--accent)}
 .sn-cats.compact{grid-template-columns:repeat(2,minmax(150px,1fr))}
 .mmenu{display:none}
-@media (max-width:767px){.sn-right .qcat,.sn-right .langdd{display:none}.mmenu{display:inline-flex}}
+@media (max-width:767px){.sn-right .qcat{display:none}.sn-right .langdd{display:inline-flex}.sn-right .langsum{padding:0 6px;gap:2px;font-size:13px}.mmenu{display:inline-flex}}
 /* 2026-11-13 task-30（用户截图「还是竖着的」@1400）：
    v0.11.1 的 nowrap 只覆盖 .sn 与 .langs a；右侧「按类别」summary（w=34 h=67）与
    .lname「中文」（w=14 h=45）仍被挤成 min-content 竖排。这里：
@@ -6781,6 +9322,8 @@ header .sn{flex:0 0 auto}
    white-space:normal;overflow:visible;text-overflow:clip}
  .atcmembers .salt-details>summary,.atcmembers .st-details>summary{min-height:44px}
 }
+/* v0.19.0 ui-surface 收口：所有表头与行可分辨（含 tbody 行头 th） */
+table th{background:#e9eee9 !important;border-bottom:1px solid var(--line) !important}
 """
 
 def _detail_row_fields() -> list[str]:
@@ -6962,14 +9505,22 @@ function norm(s){
     .replace(/\s+/g,' ').trim();
 }
 function splitDose(q){
-  // 把「Lipitor 20mg」「两只青蛙 500mg」「875/125 mg」里的剂量切出来，
-  // 名字部分才拿去和索引比对——不切的话带剂量的搜索会一个都命中不了。
+  // 把「Lipitor 20mg」「两只青蛙 500mg」「875/125 mg」「960 mg/30 mL」里的剂量/浓度切出来，
+  // 名字部分才拿去和索引比对——不切的话带剂量/浓度的搜索会一个都命中不了。
+  // v0.17.0（P0）：先认**浓度**（数值+单位 / 数值+单位），整段剥离。旧逻辑只切「960 mg」，
+  // 会把「/30 mL」残尾留在药名里（`tylenol extra strength /30 ml` → 0 候选）；服务端
+  // etl/normalize_name.py 本来就有浓度规则，这里改成同一口径（前端/后端不再各切各的）。
+  const conc = q.match(/([\d.]+)\s*(mg|mcg|µg|ug|g|iu)\s*\/\s*([\d.]+)\s*(ml|l|g|mg|mcg|µg|ug)\b/i);
   const ratio = q.match(/([\d.]+)\s*\/\s*([\d.]+)\s*(mg|mcg|µg|ug|g)\b/i);
   const single = q.match(/([\d.]+)\s*(mg|mcg|µg|ug|g|ml|iu|%|万单位)\b/i);
-  const m = ratio || single;
+  const m = conc || ratio || single;
   if(!m) return [q, null];
   const rest = (q.slice(0, m.index) + ' ' + q.slice(m.index + m[0].length))
     .replace(/\s+/g,' ').trim();
+  if(conc){
+    // 浓度只用于「解析条」显示；剂量加权不按浓度（与服务端一致：浓度不做剂量过滤/加权）。
+    return [rest, [m[1] + ' ' + m[2].toLowerCase() + '/' + m[3] + ' ' + m[4].toLowerCase()]];
+  }
   return [rest, [m[1], (ratio ? m[3] : m[2]).toLowerCase()]];
 }
 function lev(a,b){
@@ -7324,7 +9875,7 @@ function brandRowHTML(e, T){
   // T11（v0.11.7）B1 第 2 步：行内「这条」——点击后把这行记成「你手里这条」，候选集不变。
   // 用**一个字符**的按钮（title/aria 带完整文案）：`.c-det` 列很窄，放整句会把行高
   // 从 42 撑到 138px，1440 首屏条目会从 4.5 掉到 1.5（首屏守卫的硬指标）。
-  const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">◎</button> `;
+  const pickBtn = (F19_HIDE_PICK || F19_DIRECT) ? '' : `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">◎</button> `;
   const rep = `<a class="rowreport" href="${esc(rowReportURL(e))}" target="_blank"`
     + ` rel="noopener" title="${esc(T('row.report'))}" aria-label="${esc(T('row.report'))}">⚑</a>`;
   return `<tr class="br" data-k="${esc(e.k)}">
@@ -7454,6 +10005,12 @@ function specPairsOf(e, maxGroups){
   });
   return { pairs: parsed.slice(0, n), restGroups: Math.max(0, parsed.length - n), hasFs: parsed.length > 0 };
 }
+function mktName(code){
+  // v0.19.0（F2）：只要市场名称（不带「· CN」），用于按钮/标题里的「查看{market}药名」。
+  const T = window.T || function(k){ return k; };
+  const key = 'home.' + String(code).toLowerCase();
+  return T(key) || String(code);
+}
 function mktLabel(code){
   // v0.13.3（R1）：国家/地区 = 「本语言名称 · 简写」（美国 · US）。名称取 i18n 的
   // home.<code>（T() 自带 zh-Hant→zh→en 回落）；缺键时 T 会回原键，这里再退回简写。
@@ -7505,13 +10062,55 @@ function mktText(list, max, budget){
 function marketTags(list, max){
   return mktText(list, max);
 }
+function _v019IngSet(e){
+  return String((e && e.x) || '').split(' + ').map(function(s){ return g3BaseName(s); })
+    .filter(Boolean);
+}
+function _v019RelTag(e, T){
+  // v0.19.0（F2.3）：行内关系标签 —— 只用「盐型/基名 + 成分集合」自动推导，不手工标注。
+  var mine = (window.T11 && T11.entry) ? T11.entry() : null;
+  if(!mine || !e || mine.k === e.k) return '';
+  var a = _v019IngSet(mine), b = _v019IngSet(e);
+  if(!a.length || !b.length) return '';
+  var sb = new Set(b);
+  var same = a.length === b.length && a.every(function(x){ return sb.has(x); });
+  if(same) return ' <span class="tag reltag">' + esc(T('res.rel_same')) + '</span>';
+  if(a.some(function(x){ return sb.has(x); }))
+    return ' <span class="tag reltag diff">' + esc(T('res.rel_partial')) + '</span>';
+  return '';
+}
+var F19_DIRECT = false;
+var F19_HIDE_PICK = false;
+function f19IngKey(e){
+  return String((e && e.x) || '').split(' + ').map(function(s){ return g3BaseName(s); })
+    .filter(Boolean).sort().join('+');
+}
+function f19TargetTable(rows, T){
+  // v0.19.0 rev3（F2'.1）：同成分集合 → 直接列目标市场当地药名；不出现「选这项」。
+  var seen = {}, body = '';
+  rows.forEach(function(e){
+    var key = (e.d || e.k || '') + '|' + ((e.s || []).join(','));
+    if(seen[key]) return;
+    seen[key] = 1;
+    body += flatRowHTML(e, T);
+  });
+  if(!body) return '';
+  return '<table class="res rows"><thead><tr><th>' + esc(T('res.col_product')) + '</th><th>'
+    + esc(T('col.ing')) + '</th><th>' + esc(T('res.col_spec')) + '</th><th>'
+    + esc(T('res.col_market')) + '</th><th>' + esc(T('res.actions')) + '</th></tr></thead><tbody>'
+    + body + '</tbody></table>';
+}
 function flatRowHTML(e, T){
   const ds = (e.s && e.s.length) ? e.s.slice().sort((a,b)=>doseNum(a)-doseNum(b)) : [];
   // L4（v0.11.10 批次 B）：已被选中（T11.pick）的那一行给浅绿底 + 左侧标记 + 「已选择」，
   // 并隐藏「选择此产品」按钮（顶部 pickbar 里有紧凑摘要 + 重新选择）。
   const isPicked = !!(window.T11 && T11.pick && T11.pick === e.k);
   // L3：动作改成文字按钮：「选择此产品」= 记成你手里这条；「详情」= 打开登记详情。
-  const pickBtn = `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">${esc(T('res.pick'))}</button>`;
+  const _tgtNode = document.getElementById('country');
+  const _tgtVal = _tgtNode ? _tgtNode.value : '';
+  const _pickTxt = _tgtVal ? T('res.pick').replace('{market}', mktName(_tgtVal)) : T('res.pick_any');
+  const pickBtn = (F19_HIDE_PICK || F19_DIRECT) ? '' : `<button type="button" class="linkbtn pickbtn" data-pick="${esc(e.k)}|${esc((e.c && e.c[0]) || '')}" title="${esc(T('t11.pick_this'))}" aria-label="${esc(T('t11.pick_this'))}">${esc(_pickTxt)}</button>`;
+  const relTag = (!isPicked && window.T11 && T11.pick) ? _v019RelTag(e, T) : '';
   // T16（v0.11.8 H1）：同 brandRowHTML —— 只有 ≥2 种已知释放码才贴「释放机制不同」徽标。
   const nRelFlat = String(e.rl || '').split(',').filter(Boolean).length;
   const badge = e.l==='severe' ? `<span class="badge sev">${esc(T('badge.severe'))}</span>` :
@@ -7538,12 +10137,12 @@ function flatRowHTML(e, T){
   } else {
     const formTag = form ? `<span class="form-txt">${esc(form + rel)}</span>` : '';
     const doseTxt = ds.length ? esc(ds.join(' / ')) : '';
-    doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || '—');
+    doseCell = doseTxt ? (doseTxt + (formTag ? ' ' + formTag : '')) : (formTag || esc(T('res.spec_unconfirmed')));
   }
   let det;
   if(e.n){
     det = `<button type="button" class="linkbtn detbtn" data-det="${esc(e.k)}"`
-      + ` aria-expanded="false">${esc(T('res.reg'))}</button>`;
+      + ` aria-expanded="false">${esc(T('res.diff_btn'))}</button>`;
   } else if(e.u){
     det = `<a class="linkbtn" href="${BASE}name/${esc(e.u)}">${esc(T('res.reg'))}</a>`;
   } else if(e.v){
@@ -7559,7 +10158,7 @@ function flatRowHTML(e, T){
   const mkBudget = window.innerWidth >= 768 ? 27 : 0;
   const mkMax = window.innerWidth >= 768 ? 2 : 1;
   return `<tr class="br${isPicked ? ' picked' : ''}" data-k="${esc(e.k)}">
-    <td class="c-brand" data-label="${esc(T('res.col_product'))}">${brandHTML(e, false)}${badge}${combo}${exp}${isPicked ? ' <span class="tag picked-tag">' + esc(T('res.picked')) + '</span>' : ''}</td>
+    <td class="c-brand" data-label="${esc(T('res.col_product'))}">${brandHTML(e, false)}${badge}${combo}${exp}${relTag}${isPicked ? ' <span class="tag picked-tag">' + esc(T('res.picked')) + '</span>' : ''}</td>
     <td class="c-ing" data-label="${esc(T('col.ing'))}">${esc(ingredientLabel(e)) || '—'}</td>
     <td class="c-dose" data-label="${esc(T('res.col_spec'))}">${doseCell}</td>
     <td class="c-market" data-label="${esc(T('res.col_market'))}">${marketTags(e.c, mkMax, mkBudget) || '—'}</td>
@@ -7773,7 +10372,8 @@ function parseQuery(q){
   const lower = String(nameQ || '').toLowerCase();
   let form = '';
   for(const w of FORM_TOKENS){ if(lower.indexOf(w) >= 0){ form = w; break; } }
-  return {name: String(nameQ || '').trim(), dose: st ? (st[0] + ' ' + st[1]) : '', form};
+  // v0.17.0：剂量/配比是 [数值, 单位]，浓度是单元素 ["960 mg/30 mL"] —— join 三种都适用。
+  return {name: String(nameQ || '').trim(), dose: st ? st.join(' ') : '', form};
 }
 function parseBarHTML(parsed, matchLabel){
   const T = window.T || (k=>k);
@@ -7907,6 +10507,22 @@ function acSelect(i){
 // 注意**不能** removeAttribute('data-i18n')：那会让切语言（含 ?lang= 补载）后这句不再翻译。
 // 改成保留 data-i18n（apply() 先按字典重写基础文案），再由 __DSH_APPLY_HOOKS 在 apply()
 // 结尾回填国家名，语言与选择两者都不丢。
+// v0.19.0 rev3（F1'）：地区选择记住上次（localStorage）；URL 里显式 ?country= 优先。
+function f19RememberCountry(){
+  var sel = document.getElementById('country');
+  if(!sel) return;
+  try{
+    var hasParam = /[?&]country=/.test(location.search);
+    var saved = localStorage.getItem('dsh.country');
+    if(!hasParam && saved && !sel.value) sel.value = saved;
+    if(sel.value){ try{ localStorage.setItem('dsh.country', sel.value); }catch(e){} }
+    sel.addEventListener('change', function(){
+      try{ localStorage.setItem('dsh.country', sel.value); }catch(e){}
+    });
+  }catch(e){}
+}
+if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', f19RememberCountry); }
+else { f19RememberCountry(); }
 function updateCtryLabel(){
   if(!ctryLabel) return;
   const T = window.T || (k=>k);
@@ -8541,6 +11157,62 @@ function t11RelList(v){
   return [...new Set(String(v || '').split(',').map(s => s.trim()).filter(r => r && r !== 'none'))];
 }
 
+function f1f2ForkHTML(display, T, targetCountry){
+  // v0.19.0 最终（规则 2）：只有「输入的名字在源市场被多个不同配方共用」才问；
+  // 选项用源市场包装上的名字；目标市场当地中文名一律不参与提问。
+  if(!display || !display.length) return '';
+  var tc = String(targetCountry || '');
+  var groups = {}, order = [];
+  display.forEach(function(x){
+    var e = x[2] || {};
+    var mk = e.c || [];
+    if(tc && mk.indexOf(tc) >= 0) return;   // 跳过目标市场条目
+    var k = e.k || '';
+    var sig = f19IngKey(e);
+    if(!k || !sig) return;
+    if(!groups[k]){ groups[k] = { name: e.d || k, sets: {}, n: 0 }; order.push(k); }
+    groups[k].sets[sig] = 1;
+    groups[k].n += 1;
+  });
+  var multi = order.filter(function(k){ return Object.keys(groups[k].sets).length > 0; });
+  if(multi.length < 2) return '';
+  // 不同 name_key 的配方确实不同 → 才问
+  var sigOf = {};
+  multi.forEach(function(k){ sigOf[k] = Object.keys(groups[k].sets).sort().join('|'); });
+  var uniq = {};
+  multi.forEach(function(k){ uniq[sigOf[k]] = 1; });
+  if(Object.keys(uniq).length < 2) return '';
+  multi.sort(function(a,b){ return groups[b].n - groups[a].n; });
+  var opts = multi.slice(0, 2).map(function(k){
+    return { name: groups[k].name, ing: Object.keys(groups[k].sets).join(' / ') };
+  });
+  var btns = opts.map(function(o){
+    return '<button type="button" class="linkbtn forkbtn" data-fork="' + esc(o.name) + '">'
+      + esc(o.name) + '</button>';
+  }).join(' ');
+  var rows = opts.map(function(o){
+    return '<tr><th>' + esc(o.name) + '</th><td>' + esc(o.ing) + '</td></tr>';
+  }).join('');
+  return '<div class="forkbox" role="group"><p class="forkq"><b>' + esc(T('res.fork_q')) + '</b></p>'
+    + '<p class="forkopts">' + btns + '</p>'
+    + '<details class="forkunsure"><summary>' + esc(T('res.fork_unsure')) + '</summary>'
+    + '<p class="sub">' + esc(T('res.fork_diff')) + '</p>'
+    + '<div class="tablewrap"><table class="res forkdiff"><tbody>' + rows + '</tbody></table></div>'
+    + '</details></div>';
+}
+function f1f2Paint(q, hits, c, T){
+  // v0.19.0（F2.1/F2.2）：候选态标题「先选出…」；选定态标题「{market}收录的相关药名」+
+  // 固定一行「你选的是：市场 · 药名 · 规格和剂型」。缺规格写「规格未公开」。
+  var hint = document.getElementById('f2hint');
+  // v0.19.0 rev3：不再有「先确认产品」这一步 —— 有结果就直接给「{market}有哪些相关药名」。
+  var sel = document.getElementById('country');
+  var mk = c || (sel && sel.value) || '';
+  var mkL = mk ? mktName(mk) : T('res.any_market');
+  if(hits && hits.length){
+    setH1(T('res.direct_title').replace('{market}', mkL));
+  }
+  if(hint && hits && hits.length){ hint.hidden = true; hint.textContent = ''; }
+}
 function t11CompareHTML(pe, mk, hits, T){
   const subs = t11Subs(pe);
   // 目标市场里「至少有同一个成分」的候选（不是「答案」，只是可比的登记记录）
@@ -8624,6 +11296,14 @@ function t11AfterRender(hits, c, T){
 }
 
 document.addEventListener('click', function(ev){
+  const fk = (ev.target && ev.target.closest) ? ev.target.closest('[data-fork]') : null;
+  if(fk){
+    ev.preventDefault();
+    const val = fk.getAttribute('data-fork') || '';
+    if(val && box){ box.value = val; }
+    if(val && typeof render === 'function'){ render(); }
+    return;
+  }
   const t = (ev.target && ev.target.closest)
     ? ev.target.closest('[data-pick],[data-pickset],[data-mkchip]') : null;
   if(!t) return;
@@ -8924,6 +11604,7 @@ function render(){
     try{ localStorage.setItem('dsh.density', on ? 'compact' : 'comfy'); }catch(e){}
   });
   let resHTML = '';
+  F19_HIDE_PICK = true;
   if(!countryMiss && display.length){
     RES_GROUPS = groupByIngredient(display);
     LAST_DISPLAY = display;      // v0.5.6 B7：导出「当前视图全部行」，不受折叠/分页影响
@@ -9030,14 +11711,44 @@ function render(){
     setH1(parsed.name || q);
   } else {
     setH1(T('res.empty_h1').replace('{q}', parsed.name || q));
+    var _nh = document.getElementById('f2hint');
+    if(_nh){ _nh.hidden = false; _nh.textContent = T('res.noresult_hint'); }
   }
   const emptyHTML = isBlank ? emptyActionsHTML(parsed.name || q, nq, T) : '';
-  out.innerHTML = parseBarHTML(parsed, matchLabel) + countryBarHTML + confHTML + nickHTML + warnHTML
-    + countryMissHTML + resHTML + sameHTML + extraHTML + emptyHTML;
+  // v0.19.0 rev3（F2'）：候选成分集合相同 → 直接列目标市场当地药名（不要求先确认源记录）。
+  var _sets = {};
+  (display || []).forEach(function(x){ var k = f19IngKey(x[2]); if(k) _sets[k] = 1; });
+  var _setKeys = Object.keys(_sets);
+  var _tgt = c || (document.getElementById('country') || {}).value || '';
+  var _directRows = [];
+  var _wantSets = _setKeys;
+  if(_exactName){
+    _wantSets = [];
+    (display || []).forEach(function(x){
+      var e = x[2] || {};
+      if(norm(e.d || '') === _nq){ var k2 = f19IngKey(e); if(k2 && _wantSets.indexOf(k2) < 0) _wantSets.push(k2); }
+    });
+  }
+  if(_wantSets.length === 1 && _tgt){
+    for(var _i = 0; _i < IDX.length && _directRows.length < 12; _i++){
+      var _e = IDX[_i];
+      if(!_e || !_e.c || _e.c.indexOf(_tgt) < 0) continue;
+      if(f19IngKey(_e) !== _wantSets[0]) continue;
+      _directRows.push(_e);
+    }
+  }
+  var _nq = norm(parsed.name || q);
+  var _exactName = (display || []).some(function(x){ return norm((x[2] || {}).d || '') === _nq; });
+  F19_DIRECT = _exactName || (_setKeys.length === 1);
+  var resHTML2 = _exactName ? (_directRows.length ? f19TargetTable(_directRows, T) : resHTML)
+    : ((_setKeys.length === 1 && _directRows.length) ? f19TargetTable(_directRows, T) : resHTML);
+  out.innerHTML = (_exactName ? '' : f1f2ForkHTML(display, T, _tgt)) + countryBarHTML + confHTML + nickHTML + warnHTML
+    + countryMissHTML + resHTML2 + sameHTML + extraHTML + emptyHTML;
   out.setAttribute('aria-busy', 'false');
   // T11（v0.11.7）：三步确认的「已选」条 + 目标市场 chips + 逐项对照块（无 pick 时什么都不做，
   // 老深链 `?country=` 仍走上面的 countryView 老路径，行为逐字节不变）。
   t11AfterRender(hits, c, T);
+  f1f2Paint(q, hits, c, T);
   // 产品层没命中时，再去 ARTG 名称层找「登记存在、成分未收录」的条目；
   // 选了澳洲但澳洲产品为空时同样触发（很多 listed OTC 只有 ARTG 名字）。
   const hasAU = display.some(x => ((x[2].c) || []).includes('AU'));
@@ -10337,7 +13048,8 @@ def _registry_shell_markets() -> tuple[tuple[str, str], ...]:
 SHELL_MARKETS = _registry_shell_markets()
 # v0.13.8：分类链接的语言块补 fr/ko —— JS 按 data-lang-block 显隐，缺块时 /fr/、/ko/ 的
 # 24 个分类链接（首页 8 chip + 抽屉 16）与 coverage 抽屉 16 个会整片空白。
-SHELL_LANGS = ("en", "es", "zh", "zh-Hant", "fr", "ko")
+# v0.16.0：不再手写第二份语言清单，直接跟随 LANGS（加 ja 时同一坑不会重演）。
+SHELL_LANGS = tuple(code for code, _label, _path in LANGS)
 
 
 def _mkblock_js() -> str:
@@ -10529,18 +13241,21 @@ def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
 
 
 def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
-    """右上角：类别入口 + 语言下拉；移动端收进「⋯」菜单（v0.10.0）。"""
+    """右上角：语言下拉（可见「语言」标签）+ 移动端「⋯」菜单（v0.10.0 / LG8 v0.17.0）。"""
     labels = {c: l for c, l, _ in LANGS}
     label = labels.get(lang, "English")
+    llabel = _lang_label(lang)
+    lsep = _lang_sep(lang)
+    lang_aria = esc(f"{llabel}{lsep}{label}")
     # E1（v0.11.10）：右上角重复的「Categories」入口已删除 —— 桌面导航里已有一份
     # （_shell_nav_html）；移动端仍可从「⋯」菜单进「全部类别」。
     all_link = (f'<div class="sn-foot"><a href="{prefix}atc.html" '
                 f'data-i18n="cat.all_link">All categories →</a></div>')
     return f"""<span class="sn-right">
-    <details class="langdd"><summary><span aria-hidden="true">🌐</span> <span class="lname">{label}</span> ▾</summary>
+    <details class="langdd"><summary class="langsum" aria-haspopup="true" aria-expanded="false" aria-label="{lang_aria}"><span class="globe" aria-hidden="true">🌐</span> <span class="lname">{label}</span><span class="caret" aria-hidden="true">▾</span></summary>
       <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div></div></details>
-    <details class="mmenu"><summary aria-label="More" data-i18n-aria="nav.more">⋯</summary>
-      <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div>{all_link}</div></details>
+    <details class="mmenu"><summary aria-label="More" aria-haspopup="true" aria-expanded="false" data-i18n-aria="nav.more">⋯</summary>
+      <div class="sn-panel sn-panel-right">{all_link}</div></details>
   </span>"""
 
 
@@ -10780,6 +13495,20 @@ def _localize_copy(html: str, lang: str, meta_key: str, rel: str) -> str:
                   lambda m: m.group(1) + copy_url + m.group(2), html, count=1)
     html = re.sub(r'(<meta property="og:url" content=")[^"]*(")',
                   lambda m: m.group(1) + copy_url + m.group(2), html, count=1)
+    # LG8（v0.17.0）：语言控件的可见「语言」标签 / 当前语言名 / aria-label 在副本里
+    # 也按本语言写死（JS 仍会在切换时再改一次；无 JS 的副本不再是英文）。
+    llabel = esc(_lang_label(lang))
+    nlabel = esc(LANG_NATIVE_LABELS.get(lang) or "English")
+    html = re.sub(r'(<span class="llabel"[^>]*>)[^<]*(</span>)',
+                  lambda m: m.group(1) + llabel + m.group(2), html, count=1)
+    html = re.sub(r'(<span class="lname"[^>]*>)[^<]*(</span>)',
+                  lambda m: m.group(1) + nlabel + m.group(2), html, count=1)
+    html = re.sub(r'(<div class="lang-head"[^>]*>)[^<]*(</div>)',
+                  lambda m: m.group(1) + llabel + m.group(2), html, count=1)
+    html = re.sub(r'(<summary class="langsum"[^>]*aria-label=")[^"]*(")',
+                  lambda m: m.group(1) + esc(f"{_lang_label(lang)}{_lang_sep(lang)}"
+                                             f"{LANG_NATIVE_LABELS.get(lang) or chr(69)+chr(110)+chr(103)+chr(108)+chr(105)+chr(115)+chr(104)}") + m.group(2),
+                  html, count=1)
     # 根页相对链接 → ../ 前缀（绝对 URL / #锚点 / ?参数 不改）
     html = re.sub(r'(?P<attr>href|src)="(?P<url>(?![a-zA-Z]+:|#|/|\?)[^"]*)"',
                   lambda m: f'{m.group("attr")}="../{m.group("url")}"', html)
@@ -10972,10 +13701,12 @@ def build_whats_new() -> None:
         if item:
             blocks = []
             # L1（v0.13.8）：fr/ko 也必须有块 —— JS 按 data-lang-block 显隐，缺块会把整段正文隐藏。
-            # 后加语言旧版不补译（fr 自 v0.11.5、ko 自 v0.13.8），缺译回落英文而不是中文。
-            for lang in ("zh", "en", "es", "zh-Hant", "fr", "ko"):
+            # L2（v0.16.0）：ja 同规则。L3（v0.17.0）：cs/lv 同规则。后加语言旧版不补译
+            # （fr 自 v0.11.5、ko 自 v0.13.8、ja 自 v0.16.0、cs/lv 自 v0.17.0），缺译回落英文。
+            for lang in ("zh", "en", "es", "zh-Hant", "fr", "ko", "ja", "cs", "lv"):
                 items = (item.get(lang)
-                         or item.get("en" if lang in ("fr", "ko") else "zh") or [])
+                         or item.get("en" if lang in ("fr", "ko", "ja", "cs", "lv") else "zh")
+                         or [])
                 lis = "".join(f"<li>{_md_inline(str(x))}</li>" for x in items)
                 blocks.append(f'<div class="lang-block" data-lang-block="{lang}">'
                               f'<ul>{lis}</ul></div>')
@@ -11664,7 +14395,7 @@ def _market_is_enabled(code: str) -> bool:
         return False
 
 
-COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "EU")
+COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "MY", "EU")
                     + (("FR",) if _market_is_enabled("FR") else ()))
 MATRIX_ROW_CAP = 120
 
@@ -14461,6 +17192,20 @@ HOME_EXAMPLES = {
            "try3": ["Benadryl", "Gaviscon"],
            "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
            "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
+    # v0.17.0（LG8 同批追加）：ja / cs / lv 此前没有自己的示例、回落到 en —— 补上；
+    # 药名保留原文（示例标签由 home.try_cross / home.try_pack 字典翻译），示例链接与 ko 同口径。
+    "ja": {"try1": ["Tylenol Extra Strength", "Lipitor 20mg"], "try2": ["Paracetamol 500mg"],
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
+    "cs": {"try1": ["Tylenol Extra Strength", "Lipitor 20mg"], "try2": ["Paracetamol 500mg"],
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
+    "lv": {"try1": ["Tylenol Extra Strength", "Lipitor 20mg"], "try2": ["Paracetamol 500mg"],
+           "try3": ["Benadryl", "Gaviscon"],
+           "quick": [{"q": "Tylenol Extra Strength", "src": "US", "country": "CN"}],
+           "pack": ["Tylenol Extra Strength 960 mg/30 mL"]},
 }
 
 
@@ -14626,7 +17371,7 @@ def _inject_release_liners() -> None:
     """
     for rel in load_releases()[:3]:
         ver = rel["version"]
-        for lang in ("en", "es", "zh", "zh-Hant", "fr", "ko"):
+        for lang in ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv"):
             text = _release_oneliner(ver, lang)
             if text:
                 I18N.setdefault(lang, {})[f"rel.{ver}"] = text
@@ -14664,7 +17409,6 @@ def build_index_page(entries, stats, coverage) -> None:
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     body = f"""<h1 id="h1" data-i18n="home.h1">Look up a medicine name — see what it is in each country</h1>
 <p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work.</p>
-<p class="candidate-line" data-i18n="home.candidate">You always get a candidate set, never a single answer.</p>
 <ol class="flow3">
   <li><span class="n" aria-hidden="true">1</span><span data-i18n="flow.s1">Name</span></li>
   <li><span class="n" aria-hidden="true">2</span><span data-i18n="flow.s2">Confirm product</span></li>
@@ -14673,7 +17417,7 @@ def build_index_page(entries, stats, coverage) -> None:
 <div class="searchwrap">
 <div class="searchbar">
 <label class="sr-only" for="q" data-i18n="home.ph">Brand, generic or a line from the pack</label>
-<input id="q" data-ph="home.ph" placeholder="Brand, generic or a line from the pack" autocomplete="off" aria-autocomplete="list" aria-controls="ac" enterkeyhint="search">
+<input id="q" data-ph="home.q_ph" placeholder="e.g. Tylenol, Tylenol Extra Strength" autocomplete="off" aria-autocomplete="list" aria-controls="ac" enterkeyhint="search">
 <span class="sb-hint" data-i18n="home.slash_hint">Press / to focus</span>
 <button type="button" id="qgo" class="sb-go" data-i18n-aria="home.submit" aria-label="Search"><span class="sbg-t" data-i18n="home.submit">Search</span><span class="sbg-ico" aria-hidden="true">→</span></button>
 <div id="ac" role="listbox" aria-label="Suggestions" data-i18n-aria="home.suggestions"></div>
@@ -14691,6 +17435,7 @@ def build_index_page(entries, stats, coverage) -> None:
 <span class="try-lbl" data-i18n="home.try_pack">By pack text:</span>{{pack_examples}}</div>
 <div id="srcnote" class="srcnote" hidden role="status" aria-live="polite"></div>
 <div id="identity"></div>
+<p class="sub f2hint" id="f2hint" hidden></p>
 <div id="out"></div>
 <details class="mf-details advfilter ctry-details" id="ctrydetails">
   <summary data-i18n="t11.adv">Advanced filters</summary>
@@ -14760,9 +17505,9 @@ does not exist. Coverage:</span> {covline}.</div>
         prefix = "../" if path else ""
         ex = HOME_EXAMPLES.get(code) or HOME_EXAMPLES["en"]
         page_body = (body.replace("{prefix}", prefix)
-                     .replace("{try1}", _sample_buttons(ex["try1"]))
-                     .replace("{try2}", _sample_buttons(ex["try2"]))
-                     .replace("{try3}", _sample_buttons(ex["try3"]))
+                     .replace("{try1}", _sample_buttons(["Tylenol Extra Strength"]))
+                     .replace("{try2}", _sample_buttons(["Tylenol Extra Strength 500 mg"]))
+                     .replace("{try3}", _sample_buttons(["Tylenol Extra Strength 500 mg"]))
                      .replace("{examples}", _sample_buttons(ex["quick"], code))
                      .replace("{pack_examples}", _sample_buttons(ex["pack"]))
                      .replace("{cat_chips}", _home_cat_chips(code, prefix))
@@ -14844,7 +17589,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
     for key in ("about.lead", "about.rules", "about.nick", "about.nick_merged", "about.terms",
                 "about.sources", "about.loading", "about.tw_source", "about.sg_source",
                 "about.hk_source", "about.au_source", "about.eu_source", "about.cz_source",
-                "about.lv_source", "about.fr_source"):
+                "about.lv_source", "about.my_source", "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     # v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口（只链接、不复制数据），六语由 i18n.js 切换
     parts.append(_official_links_html())
@@ -14904,6 +17649,9 @@ _UI_LANG_SHORT = {
     "zh-Hant": ("介面語言 ✅", "母語 {gaps} 未覆蓋"),
     "fr": ("Langues ✅", "langue maternelle {gaps} absente"),
     "ko": ("언어 ✅", "모국어 {gaps} 미지원"),
+    "ja": ("UI言語 ✅", "母語 {gaps} 未対応"),
+    "cs": ("Jazyky ✅", "mateřský jazyk {gaps} není pokryt"),
+    "lv": ("Valodas ✅", "dzimtā valoda {gaps} nav iekļauta"),
 }
 
 # v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口 —— 只链接、不复制数据；同样放在页内六语块。
@@ -14949,7 +17697,30 @@ _OFFICIAL_LINKS = {
            '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
            'MFDS 의약품안전나라(대한민국)</a>: 공식 조회 입구만 제공합니다. 한국 데이터는 '
            'data.go.kr 개인 가입이 필요하며 아직 수집하지 않습니다.</li></ul>'),
+    "ja": ('<h2>公式の検索入口</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           'マカオ薬物監督局・マカオ特別行政区の医薬品検索（ISAF）</a>：公式の検索入口のみを掲載し、'
+           '当サイトはデータを複製していません。</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           '韓国・食品医薬品安全処（MFDS）の「의약품안전나라」</a>：公式の検索入口のみを掲載しています。'
+           '韓国のデータは data.go.kr での本人登録が必要で、当サイトには未収録です。</li></ul>'),
+    "cs": ('<h2>Oficiální vyhledávací vstupy</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           'Zdravotní úřad Macao (ISAF) — vyhledávání léčivých přípravků v Macau</a>: pouze odkaz na '
+           'oficiální vyhledávání; tento web tato data nekopíruje.</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           'MFDS 의약품안전나라 (Korea)</a>: pouze odkaz na oficiální vyhledávání; korejská data '
+           'vyžadují osobní registraci na data.go.kr a zatím zde nejsou zahrnuta.</li></ul>'),
+    "lv": ('<h2>Oficiālās meklēšanas vietnes</h2><ul>'
+           '<li><a href="https://www.isaf.gov.mo" target="_blank" rel="noopener">'
+           'Makao Veselības pārvalde (ISAF) — zāļu meklēšana Makao īpašajā administratīvajā reģionā</a>: '
+           'tikai saite uz oficiālo meklēšanu; šī vietne šos datus nekopē.</li>'
+           '<li><a href="https://nedrug.mfds.go.kr/" target="_blank" rel="noopener">'
+           'MFDS 의약품안전나라 (Koreja)</a>: tikai saite uz oficiālo meklēšanu; Korejas datiem '
+           'nepieciešama personīga reģistrācija data.go.kr vietnē, un tie šeit vēl nav iekļauti.</li></ul>'),
 }
+
+
 
 
 def _official_links_html() -> str:
@@ -15619,20 +18390,29 @@ ATC_SOURCE_LABELS = {
            "wikidata": "Wikidata", "editorial": "traduction éditoriale"},
     "ko": {"wikipedia": "위키백과", "wikipedia-zh-converted": "위키백과(중국어→번체)",
            "wikidata": "위키데이터", "editorial": "편집 번역"},
+    "ja": {"wikipedia": "ウィキペディア", "wikipedia-zh-converted": "ウィキペディア（中国語→繁体字）",
+           "wikidata": "ウィキデータ", "editorial": "編集訳"},
+    "cs": {"wikipedia": "Wikipedie", "wikipedia-zh-converted": "Wikipedie (zh)",
+           "wikidata": "Wikidata", "editorial": "redakční překlad"},
+    "lv": {"wikipedia": "Vikipēdija", "wikipedia-zh-converted": "Vikipēdija (zh)",
+           "wikidata": "Wikidata", "editorial": "redakcionāls tulkojums"},
 }
 ATC_EDITORIAL_LICENSE = {
     "en": "editorial (project)", "es": "editorial (proyecto)",
     "zh": "编辑整理（项目）", "zh-Hant": "編輯整理（專案）",
-    "fr": "éditorial (projet)", "ko": "편집 정리(프로젝트)",
+    "fr": "éditorial (projet)", "ko": "편집 정리(프로젝트)", "ja": "編集整理（プロジェクト）",
+    "cs": "redakční úprava (projekt)", "lv": "redakcionāla apkopošana (projekts)",
 }
 ATC_FALLBACK_LABEL = {
     "en": "fallback name", "es": "nombre de respaldo",
     "zh": "回退名", "zh-Hant": "回退名",
-    "fr": "nom de repli", "ko": "대체 이름",
+    "fr": "nom de repli", "ko": "대체 이름", "ja": "代替名",
+    "cs": "náhradní název", "lv": "aizvietotais nosaukums",
 }
 ATC_SRC_PREFIX = {
     "en": "Source: ", "es": "Fuente: ", "zh": "来源：", "zh-Hant": "來源：",
-    "fr": "Source : ", "ko": "출처: ",
+    "fr": "Source : ", "ko": "출처: ", "ja": "出典: ",
+    "cs": "Zdroj: ", "lv": "Avots: ",
 }
 
 
@@ -15672,28 +18452,28 @@ CONSUMER_CATEGORIES = [
     {"id": "antihypertensives", "prefixes": ["C02", "C03", "C07", "C08", "C09"],
      "labels": {"en": "Blood-pressure medicines", "es": "Medicamentos para la presión arterial",
                 "zh": "降压药", "zh-Hant": "降血壓藥",
-                "fr": "Médicaments contre l'hypertension", "ko": "혈압약"},
+                "fr": "Médicaments contre l'hypertension", "ko": "혈압약", "ja": "血圧降下薬", "cs": "Léky na krevní tlak", "lv": "Zāles pret asinsspiedienu"},
      "desc": {"en": "ATC C02/C03/C07/C08/C09 — antihypertensives and related classes.",
               "es": "ATC C02/C03/C07/C08/C09 — antihipertensivos y clases relacionadas.",
               "zh": "ATC C02/C03/C07/C08/C09——降压及相关类别。",
               "zh-Hant": "ATC C02/C03/C07/C08/C09——降壓及相關類別。"}},
     {"id": "antibiotics", "prefixes": ["J01"],
      "labels": {"en": "Antibiotics", "es": "Antibióticos", "zh": "抗生素", "zh-Hant": "抗生素",
-                "fr": "Antibiotiques", "ko": "항생제"},
+                "fr": "Antibiotiques", "ko": "항생제", "ja": "抗生物質", "cs": "Antibiotika", "lv": "Antibiotikas"},
      "desc": {"en": "ATC J01 — systemic antibacterials.",
               "es": "ATC J01 — antibacterianos sistémicos.", "zh": "ATC J01——全身用抗菌药。",
               "zh-Hant": "ATC J01——全身用抗菌藥。"}},
     {"id": "diabetes", "prefixes": ["A10"],
      "labels": {"en": "Diabetes medicines", "es": "Medicamentos para la diabetes",
                 "zh": "降糖药", "zh-Hant": "降血糖藥",
-                "fr": "Médicaments du diabète", "ko": "당뇨병약"},
+                "fr": "Médicaments du diabète", "ko": "당뇨병약", "ja": "糖尿病治療薬", "cs": "Léky na cukrovku", "lv": "Zāles pret cukura diabētu"},
      "desc": {"en": "ATC A10 — drugs used in diabetes.",
               "es": "ATC A10 — fármacos para diabetes.", "zh": "ATC A10——糖尿病用药。",
               "zh-Hant": "ATC A10——糖尿病用藥。"}},
     {"id": "weight-loss", "prefixes": ["A08", "A10BJ", "A10BX16"],
      "labels": {"en": "Weight-loss medicines", "es": "Medicamentos para perder peso",
                 "zh": "减肥药", "zh-Hant": "減重藥",
-                "fr": "Médicaments pour perdre du poids", "ko": "체중 감량약"},
+                "fr": "Médicaments pour perdre du poids", "ko": "체중 감량약", "ja": "減量薬", "cs": "Léky na hubnutí", "lv": "Zāles svara samazināšanai"},
      "desc": {"en": ("ATC A08 + A10BJ (GLP-1) + A10BX16 (tirzepatide) — antiobesity preparations "
                      "and GLP-1 weight-loss medicines. GLP-1s also belong to the diabetes class "
                      "A10; this is a browse-by-indication collection, not a claim of equivalence."),
@@ -15724,7 +18504,7 @@ CONSUMER_CATEGORIES = [
     {"id": "cold-medicine", "prefixes": ["R05", "N02BE"],
      "labels": {"en": "Cold & cough medicines", "es": "Medicamentos para resfriado y tos",
                 "zh": "感冒咳嗽药", "zh-Hant": "感冒咳嗽藥",
-                "fr": "Médicaments contre le rhume et la toux", "ko": "감기·기침약"},
+                "fr": "Médicaments contre le rhume et la toux", "ko": "감기·기침약", "ja": "風邪・咳薬", "cs": "Léky na nachlazení a kašel", "lv": "Zāles pret saaukstēšanos un klepu"},
      "desc": {"en": ("ATC R05 + N02BE — cough/cold preparations and anilides (paracetamol). "
                      "Consumer “cold medicine” is broader than one ATC class; systemic "
                      "antihistamines (R06) are listed under Allergy medicines."),
@@ -15748,14 +18528,14 @@ CONSUMER_CATEGORIES = [
     {"id": "analgesics", "prefixes": ["N02", "M01A"],
      "labels": {"en": "Pain & fever relief", "es": "Analgésicos y antitérmicos",
                 "zh": "退烧止痛", "zh-Hant": "退燒止痛",
-                "fr": "Antidouleurs et antipyrétiques", "ko": "진통·해열제"},
+                "fr": "Antidouleurs et antipyrétiques", "ko": "진통·해열제", "ja": "鎮痛・解熱薬", "cs": "Léky proti bolesti a horečce", "lv": "Zāles pret sāpēm un drudzi"},
      "desc": {"en": "ATC N02/M01A — analgesics and antipyretics.",
               "es": "ATC N02/M01A — analgésicos y antipiréticos.",
               "zh": "ATC N02/M01A——镇痛与退热药。", "zh-Hant": "ATC N02/M01A——鎮痛與退熱藥。"}},
     {"id": "allergy", "prefixes": ["R06"],
      "labels": {"en": "Allergy medicines", "es": "Medicamentos para la alergia",
                 "zh": "抗过敏药", "zh-Hant": "抗過敏藥",
-                "fr": "Médicaments contre les allergies", "ko": "알레르기약"},
+                "fr": "Médicaments contre les allergies", "ko": "알레르기약", "ja": "アレルギー薬", "cs": "Léky na alergie", "lv": "Zāles pret alerģijām"},
      "desc": {"en": ("ATC R06 — systemic antihistamines. Some also appear in combination cold "
                      "medicines; see Cold & cough medicines."),
               "es": ("ATC R06 — antihistamínicos sistémicos. Algunos también aparecen en "
@@ -15775,7 +18555,7 @@ CONSUMER_CATEGORIES = [
     {"id": "acid-related", "prefixes": ["A02"],
      "labels": {"en": "Stomach / acid medicines", "es": "Medicamentos gástricos / de acidez",
                 "zh": "胃药", "zh-Hant": "胃藥",
-                "fr": "Médicaments pour l'estomac / l'acidité", "ko": "위장·제산제"},
+                "fr": "Médicaments pour l'estomac / l'acidité", "ko": "위장·제산제", "ja": "胃・制酸薬", "cs": "Léky na žaludek a překyselení", "lv": "Zāles pret kuņģa problēmām un skābumu"},
      "desc": {"en": "ATC A02 — acid-related disorder drugs (antacids, PPIs, H2 blockers).",
               "es": "ATC A02 — antiácidos, IBP, antihistamínicos H2.",
               "zh": "ATC A02——抗酸、质子泵抑制剂、H2 受体拮抗剂等。",
@@ -15784,14 +18564,14 @@ CONSUMER_CATEGORIES = [
      "labels": {"en": "Blood thinners / antithrombotics",
                 "es": "Anticoagulantes / antitrombóticos", "zh": "抗凝药",
                 "zh-Hant": "抗凝血藥",
-                "fr": "Anticoagulants / antithrombotiques", "ko": "항응고·항혈전제"},
+                "fr": "Anticoagulants / antithrombotiques", "ko": "항응고·항혈전제", "ja": "抗凝固・抗血栓薬", "cs": "Léky na ředění krve / antitrombotika", "lv": "Asins šķīdinātāji / antitrombotiķi"},
      "desc": {"en": "ATC B01 — antithrombotic agents. Not all are interchangeable.",
               "es": "ATC B01 — antitrombóticos; no todos son intercambiables.",
               "zh": "ATC B01——抗血栓药；彼此不都可互换。",
               "zh-Hant": "ATC B01——抗血栓藥；彼此不都可互換。"}},
     {"id": "statins", "prefixes": ["C10AA"], "exclude": ["cerivastatin"],
      "labels": {"en": "Statins", "es": "Estatinas", "zh": "他汀类", "zh-Hant": "他汀類",
-                "fr": "Statines", "ko": "스타틴"},
+                "fr": "Statines", "ko": "스타틴", "ja": "スタチン", "cs": "Statiny", "lv": "Statīni"},
      "desc": {"en": ("ATC C10AA — HMG-CoA reductase inhibitors. Cerivastatin (withdrawn 2001) "
                      "is excluded from the member list; status badges show current product "
                      "records."),
@@ -15810,39 +18590,39 @@ CONSUMER_CATEGORIES = [
     {"id": "beta-blockers", "prefixes": ["C07"],
      "labels": {"en": "Beta blockers", "es": "Betabloqueantes", "zh": "β受体阻滞剂",
                 "zh-Hant": "β受體阻斷劑",
-                "fr": "Bêtabloquants", "ko": "베타차단제"},
+                "fr": "Bêtabloquants", "ko": "베타차단제", "ja": "β遮断薬", "cs": "Beta-blokátory", "lv": "Beta blokatori"},
      "desc": {"en": "ATC C07 — beta blocking agents.", "es": "ATC C07 — betabloqueantes.",
               "zh": "ATC C07——β受体阻滞剂。", "zh-Hant": "ATC C07——β受體阻滯劑。"}},
     {"id": "antidepressants", "prefixes": ["N06A"],
      "labels": {"en": "Antidepressants", "es": "Antidepresivos", "zh": "抗抑郁药",
                 "zh-Hant": "抗憂鬱藥",
-                "fr": "Antidépresseurs", "ko": "항우울제"},
+                "fr": "Antidépresseurs", "ko": "항우울제", "ja": "抗うつ薬", "cs": "Antidepresiva", "lv": "Antidepresanti"},
      "desc": {"en": "ATC N06A — antidepressants.", "es": "ATC N06A — antidepresivos.",
               "zh": "ATC N06A——抗抑郁药。", "zh-Hant": "ATC N06A——抗抑鬱藥。"}},
     {"id": "asthma-copd", "prefixes": ["R03"],
      "labels": {"en": "Asthma / COPD inhalers", "es": "Inhaladores para asma / EPOC",
                 "zh": "哮喘·慢阻肺吸入剂", "zh-Hant": "哮喘·慢阻肺吸入劑",
-                "fr": "Inhalateurs pour l'asthme / la BPCO", "ko": "천식·COPD 흡입제"},
+                "fr": "Inhalateurs pour l'asthme / la BPCO", "ko": "천식·COPD 흡입제", "ja": "喘息・COPD吸入薬", "cs": "Inhalátory na astma / CHOPN", "lv": "Inhalatori pret astmu / HOPS"},
      "desc": {"en": "ATC R03 — drugs for obstructive airway diseases.",
               "es": "ATC R03 — enfermedades obstructivas de las vías respiratorias.",
               "zh": "ATC R03——阻塞性气道疾病用药。", "zh-Hant": "ATC R03——阻塞性氣道疾病用藥。"}},
     {"id": "corticosteroids", "prefixes": ["H02"],
      "labels": {"en": "Steroid hormones", "es": "Hormonas esteroideas", "zh": "激素类",
                 "zh-Hant": "荷爾蒙類",
-                "fr": "Hormones stéroïdiennes", "ko": "스테로이드 호르몬"},
+                "fr": "Hormones stéroïdiennes", "ko": "스테로이드 호르몬", "ja": "ステロイドホルモン", "cs": "Steroidní hormony", "lv": "Steroidhormoni"},
      "desc": {"en": "ATC H02 — corticosteroids for systemic use.",
               "es": "ATC H02 — corticosteroides sistémicos.", "zh": "ATC H02——全身用糖皮质激素。",
               "zh-Hant": "ATC H02——全身用糖皮質激素。"}},
     {"id": "antivirals", "prefixes": ["J05"],
      "labels": {"en": "Antivirals", "es": "Antivirales", "zh": "抗病毒药", "zh-Hant": "抗病毒藥",
-                "fr": "Antiviraux", "ko": "항바이러스제"},
+                "fr": "Antiviraux", "ko": "항바이러스제", "ja": "抗ウイルス薬", "cs": "Antivirotika", "lv": "Pretvīrusu līdzekļi"},
      "desc": {"en": "ATC J05 — antivirals for systemic use.",
               "es": "ATC J05 — antivirales sistémicos.", "zh": "ATC J05——全身用抗病毒药。",
               "zh-Hant": "ATC J05——全身用抗病毒藥。"}},
     {"id": "dermatologicals", "prefixes": ["D"],
      "labels": {"en": "Skin medicines", "es": "Medicamentos dermatológicos", "zh": "皮肤外用药",
                 "zh-Hant": "皮膚外用藥",
-                "fr": "Médicaments pour la peau", "ko": "피부약"},
+                "fr": "Médicaments pour la peau", "ko": "피부약", "ja": "皮膚用薬", "cs": "Léky na kůži", "lv": "Ādas zāles"},
      "desc": {"en": "ATC D — dermatologicals (broad class).",
               "es": "ATC D — dermatológicos (clase amplia).", "zh": "ATC D——皮肤科用药（大类）。",
               "zh-Hant": "ATC D——皮膚科用藥（大類）。"}},
@@ -15905,7 +18685,7 @@ def _atc_names(code: str) -> dict[str, str]:
     out = {}
     for lang in I18N_REQUIRED_LANGS:
         name = _atc_display_name(lang, code)
-        if name and lang in ("fr", "ko"):
+        if name and lang in ("fr", "ko", "ja", "cs", "lv"):
             name += " (EN)"     # 数据无 fr/ko 译文：显示英文类名并标注，不机翻
         out[lang] = name
     return out
@@ -16512,7 +19292,7 @@ def _cat_related_html(prefixes: list[str],
         for lang in I18N_REQUIRED_LANGS:
             name = _atc_display_name(lang, code)
             # v0.13.8：数据只有 en/es/zh 类名 → fr/ko 显示英文 + (EN)（不机翻）
-            display = (name + " (EN)") if (name and lang in ("fr", "ko")) else (name or f"ATC {code}")
+            display = (name + " (EN)") if (name and lang in ("fr", "ko", "ja", "cs", "lv")) else (name or f"ATC {code}")
             inner = f'<code>{esc(code)}</code> {esc(display)}'
             if exists:
                 inner = f'<a href="../atc/{esc(code)}.html">{inner}</a>'
@@ -16673,7 +19453,7 @@ def _atc_card_inline(code: str) -> str:
     parts: dict[str, str] = {}
     for lang in I18N_REQUIRED_LANGS:
         name = _atc_display_name(lang, code)
-        if name and lang in ("fr", "ko"):
+        if name and lang in ("fr", "ko", "ja", "cs", "lv"):
             name += " (EN)"     # 数据无 fr/ko 译文：显示英文类名并标注，不机翻
         inner = f'<code>{esc(code)}</code> {esc(name)}'
         src = _atc_source_html(code, lang)
@@ -16907,7 +19687,8 @@ def build_atc_ing_json(db: sqlite3.Connection) -> dict[str, int]:
 def _home_cat_chips(lang: str, prefix: str, limit: int = 8) -> str:
     """v0.10.0：首页只放 8 个高频大类 chip（2×4）+ 「全部类别」链接；其余在导航面板。"""
     # v0.13.8：补 fr/ko —— 否则 /fr/、/ko/ 首页 8 个 chip 的文字块全被 JS 隐藏（空白链接）。
-    langs = ("en", "es", "zh", "zh-Hant", "fr", "ko")
+    # v0.16.0：再补 ja（清单跟随 LANGS，不再手写）。
+    langs = tuple(code for code, _label, _path in LANGS)
     parts = []
     for cat in CONSUMER_CATEGORIES[:limit]:
         spans = "".join(
@@ -17788,10 +20569,10 @@ def main() -> None:
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
     // v0.6.6/v0.7.0/v0.7.x：语言列序（含 TW/SG：zh → CN,TW,SG；zh-Hant → TW,CN,HK,SG；es → ES,MX…）
     // v0.13.0（task-4）：补 FR/JP/CZ/LV —— 原来缺这些码会让 rank[code] 为 undefined（矩阵列/国家 chips 排到 99 之后，顺序不稳定）
-    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','FR','JP','CZ','LV','EU'],
-                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK','FR','JP','CZ','LV','EU'],
-                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','EU'],
-                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','EU']};
+    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','FR','JP','CZ','LV','MY','EU'],
+                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK','FR','JP','CZ','LV','MY','EU'],
+                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','MY','EU'],
+                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','MY','EU']};
     var morder = MORDER[window.LANG] || MORDER.en;
     window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
     document.querySelectorAll('table.matrix').forEach(function(tb){
@@ -17836,6 +20617,31 @@ def main() -> None:
     });
     document.querySelectorAll('.langdd .lname').forEach(function(n){
       if(LBL[window.LANG]) n.textContent = LBL[window.LANG];
+    });
+    // LG8（v0.17.0）：可见「语言」标签 + aria-label 跟随界面语言；展开态 aria-expanded
+    // 由 <details> 的 toggle 事件同步，Esc 收起并回到 summary（键盘可达）。
+    var LLBL = __LANG_LABEL_JSON__;
+    var LSEP = /^(zh|zh-Hant|ja)$/.test(window.LANG) ? '：' : ': ';
+    document.querySelectorAll('.langdd .llabel, .mmenu .lang-head').forEach(function(el){
+      if(LLBL[window.LANG]) el.textContent = LLBL[window.LANG];
+    });
+    document.querySelectorAll('.langdd summary.langsum').forEach(function(s){
+      s.setAttribute('aria-label',
+        (LLBL[window.LANG] || 'Language') + LSEP + (LBL[window.LANG] || 'English'));
+    });
+    document.querySelectorAll('.sn-right details').forEach(function(d){
+      var s = d.querySelector('summary');
+      if(!s) return;
+      if(!d.dataset.lg8){
+        d.dataset.lg8 = '1';
+        d.addEventListener('toggle', function(){
+          s.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+        });
+        d.addEventListener('keydown', function(e){
+          if(e.key === 'Escape' && d.open){ d.open = false; s.focus(); e.preventDefault(); }
+        });
+      }
+      s.setAttribute('aria-expanded', d.open ? 'true' : 'false');
     });
     // v0.13.3（R1）：服务端写了英文国家标签的静态块按当前界面语言改写 ——
     //   `data-mkc="US GB"`      → 「本语言名称 · 简写」（复方页、成分页「也在」链接）
@@ -18412,7 +21218,9 @@ def main() -> None:
 })();
 """).replace("__BUILD_V__", BUILD_V).replace(
     "__LANG_LABELS_JSON__",
-    json.dumps(LANG_NATIVE_LABELS, ensure_ascii=False, separators=(",", ":")))
+    json.dumps(LANG_NATIVE_LABELS, ensure_ascii=False, separators=(",", ":"))).replace(
+    "__LANG_LABEL_JSON__",
+    json.dumps(LANG_LABEL, ensure_ascii=False, separators=(",", ":")))
     def _write_i18n_assets(announce: bool = False) -> None:
         """写 i18n 资产：四语全量 `assets/i18n.js` + 每语言一份 `assets/i18n.<lang>.js`。
 
@@ -18509,6 +21317,8 @@ def main() -> None:
     _values = _i18n_placeholders(stats, atc_cov, coverage, source_cover)
     _merge_static_i18n(_values)
     _install_zh_hant(_values)
+    _install_market_extra_i18n()
+    _install_v019_i18n()
     # R4（v0.12.1）：首页「最近更新」的一句话变化改走 data-i18n（键 `rel.<version>`），
     # 让根页被 ?lang=/localStorage 切语言时也跟随界面语言（原来只有服务端按路径渲染的静态度）。
     _inject_release_liners()

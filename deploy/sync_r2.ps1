@@ -98,7 +98,7 @@ $FallbackRuntimePython = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\de
 # page is served from R2 object key "<lang>/". Keep this list in sync with
 # deploy/fix_fr_root.py LANG_ROOTS, deploy/verify_live.py LANG_ROOTS and
 # data/languages.json ("新增 UI 语言时三处一起改").
-$FallbackLangs = @('fr', 'ko')
+$FallbackLangs = @('fr', 'ko', 'ja', 'cs', 'lv')
 
 function Test-FallbackPython([string]$Exe) {
     # Probe: must start AND import botocore (fix_fr_root.py's only third-party dep).

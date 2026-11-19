@@ -47,7 +47,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 # 需要「对象键兜底」的语言根（按 Cloudflare Transform Rules 的缺口维护）。
 # 新增 UI 语言时同步 deploy/verify_live.py 的 LANG_ROOTS 与 data/languages.json。
-LANG_ROOTS: tuple[str, ...] = ("fr", "ko")
+LANG_ROOTS: tuple[str, ...] = ("fr", "ko", "ja", "cs", "lv")
 CONTENT_TYPE = "text/html; charset=utf-8"
 LANG_RE = re.compile(r"^[a-z]{2}(?:-[a-z]+)?$")
 
