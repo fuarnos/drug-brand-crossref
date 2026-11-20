@@ -1,6 +1,6 @@
 # REL3 / T71：R2 免费额度护栏（PUT 台账 + 发布前月累计拦截）
 
-> 状态：**已完成并自验（2026-11-21 北京谷段）**。只改 `deploy/sync_r2.ps1`；**未跑真实 sync、未构建、未写 `site/dist`、未 commit**。
+> 状态：**已完成并自验（2026-11-21 北京谷段）**。只改 `deploy/sync_r2.ps1`；本任务未跑真实 sync / 未构建 / 未写 `site/dist`；**护栏首跑结果见 §6（v1.0.1 已上线并 tag/Release）**。
 > 背景：用户 2026-11-20 定「R2 Class A 免费 1M/月是硬预算」；REL2（v1.0.0）已把日常发版从 ~147,348 文件降到 **78 文件/版**（本报告不重复数字，见 `reports/2026-11-20-v100-release.md`）。本任务给下一次发布加护栏。
 
 ## 0. 结论
@@ -11,7 +11,7 @@
   - 预计发布后当月累计 **≥ 900,000** → 需 `-ApproveLarge`；**≥ 1,000,000** 另打印「需用户批准、批准记录写进报告」。
 - **真实 sync 成功后**解析 `Transferred: N / N, 100%` 与 `Elapsed time:`，追加一行 JSONL（`mode=real`）；`-DryRun` **不写台账**，但同样执行上述门禁（会以 exit 3 代替上传）。
 - 自验（全部只读 / DryRun，**0 次真实上传**）：模拟台账 950k → exit 3；899,990 + planned 2（projected 900,014）→ exit 3；同参数加 `-ApproveLarge` → exit 0；planned 50,001 → exit 3。`ci_checks.py --fast` **PASS 8 / FAIL 0 / SKIP 5（24.8s）**。
-- 已知缺口：**真实 sync 分支的 planned pass + 台账追加**只能在下次真实发布时首次执行（本任务禁止真实 sync）；台账从 0 开始（**不补 v1.0.0 历史行**），11 月周期仍需按 Cloudflare 账单人工核对。
+- 已知缺口：**真实 sync 分支的 planned pass + 台账追加已在 v1.0.1 首跑中端到端验证**（planned=真实 87、台账首行 `files=87`）；台账从 0 开始（**不补 v1.0.0 历史行**），11 月周期仍需按 Cloudflare 账单人工核对。
 
 ## 1. 台账（`data/r2_put_ledger.jsonl`）
 
@@ -59,8 +59,16 @@
 
 ## 5. 已知缺口 / 下次真实发布要确认
 
-- **真实分支未端到端跑过**（本任务禁止真实 sync）：`planning pass → gates → 真实 sync → 台账追加` 的串联在下次发布首次执行。若台账追加失败只 WARN；发布后核对 `data/r2_put_ledger.jsonl` 是否新增一行、`files` 是否等于主 sync `Transferred: N / N`。
+- ~~真实分支未端到端跑过~~ **已关闭**：v1.0.1 首次真实增量发布跑通 `planning pass → gates → 真实 sync → 台账追加`（planned=真实 87；台账首行 `files=87 / mode=real / version=v1.0.1`；见 `reports/2026-11-21-v101-release.md` §5/§7）。
 - **台账从 0 起步**：2026-11 周期（用户截图 3.48M / 2.48M 计费）**不补行**，该周期仍需人工对账；12 月起台账可覆盖整月。
 - 预算口径按**本地日历月**；Cloudflare 计费周期可能不同，跨周期边界以账单为准。
 - `+22` 是当前版固定开销（17 assets + 5 语言根兜底）；若 assets 文件数或语言根数量变化需同步改 `$BudgetExtra`。
 - `-CheckOnly` 不触发预算门禁（只读 check）；`-DryRun` 会触发（exit 3 属预期）。
+
+## 6. 发布关联（v1.0.1，已完成）
+
+- REL3 护栏**首跑即 v1.0.1 发布**：`budget month 0 → planned 87 → projected 109`（未触发拦截）→ 真实 `Transferred 87` → 台账首行
+  `{"date":"2026-11-20","version":"v1.0.1","files":87,"seconds":73.6,"mode":"real"}` 已随 commit `7b4f46d` 提交。
+- 该版本已 tag **`v1.0.1`**（annotated `c24a8767` → commit `ed36507ecb1`；remote peeled 一致）并创建 GitHub Release：
+  <https://github.com/fuarnos/drug-brand-crossref/releases/tag/v1.0.1>。
+- 本段不再发版；REL6（过渡 hashed 资源保活自动化，P2）已登记、本段不做。
