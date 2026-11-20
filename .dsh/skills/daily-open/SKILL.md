@@ -23,10 +23,11 @@ $py = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\p
 `docs/跟进提醒.md`（到期才处理）。不要通读 CHANGELOG / 历史报告，数字以 `data/drugs.db`
 与 `site/dist` 现查为准。
 
-**开工即定阵型（固定，不得自创）**：按 `docs/工作组与流程.md`，你是 **Lead** + 8 个固定工位
-（`site-ui` / `atc4-ui` / `page-slim` / `search-alias` / `phaseb-data` / `phaseb-plan` / `alias-site` / `pages-deploy`）。
+**开工即定阵型（2026-11-20 结构 v2）**：按 `docs/工作组与流程.md`，你是 **Lead** + **4 个核心工位**
+（`data-scout` 数据扩展 / `backend` 后端 / `frontend` 前端 / `release` 发布）。
 工位已存在就唤醒（`send_message`），不要重复 `spawn_teammate`；派单走共享任务；工位不 commit / 不发布 / 不写 `site/dist`，
-Lead 不替工位写实现（仅 P0 热修例外并记录）。流程固定 8 步：取活 → 拆解 → 派单 → 实现 → 自验 → Lead 验收 → 构建发布 → 收尾。
+Lead 不替工位写实现（仅 P0 热修例外并记录）。流程固定 **6 步**：取活 → 派单 → 实现 + 自验 → Lead 验收 → 构建发布 → 收尾。
+**工位数不设上限、按需求增减**（用户 2026-11-20 授权）：出现新的可并行工作时 Lead 自主扩建，工作减少时自主收回，不必请示。
 
 ## 2. 手机指令
 
