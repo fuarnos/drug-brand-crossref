@@ -11,6 +11,21 @@
     Intended as the R2 half of the publish pipeline (called by
     deploy\publish.ps1 -WithR2), but can be run alone.
 
+    REL2 (2026-11-20) incremental-release support:
+      * The main `rclone sync` keeps the pre-v1.0.0 content-hashed assets alive via
+        two EXACT `--exclude`s (assets/style.885ce0a604.css,
+        assets/boot.510d5a90dd.js, no wildcards) because pages cached before
+        v1.0.0 still reference them; retire after 2026-12-20. The same excludes go
+        to both `rclone check` runs: the post-sync check is two-way, so once
+        site/dist stops shipping those files they would be "remote only" and fail
+        the release with 2 differences.
+      * After a successful sync, assets/ is copied once more with
+        --ignore-times --header-upload "Cache-Control: public, max-age=300"
+        (~17 extra Class A PUTs). The main sync only transfers changed files, so
+        unchanged stable-name assets (assets/style.css / assets/boot.js) would
+        never receive a Cache-Control header; 5 minutes caps the stale-UI window
+        after a release without making HTML cacheable.
+
 .PARAMETER Dist
     Build directory. Default site\dist.
 
@@ -52,6 +67,11 @@
     Parse the LAST `Transferred: N / N, 100%` line. If nothing needed writing, rclone prints
     only `Transferred: 0 B / 0 B` (no N/N line) -> treat as 0 PUT. Logging flags only; the
     files selected, checksums and transfer parameters are unchanged.
+    REL2-B (2026-11-20): the separate assets/ Cache-Control copy runs with
+    --stats-log-level INFO and no -v, so it prints NO stats block - the last
+    `Transferred:` line above stays the MAIN sync's, which is what the REL3 ledger parses.
+    PUT budget per publish = that N + ~17 assets (the assets line `assets: re-uploading N`
+    reports the second pass).
 #>
 [CmdletBinding()]
 param(
@@ -186,6 +206,21 @@ try {
 
     $confArgs = @('--config', $conf, '--fast-list')
 
+    # REL2-B (2026-11-20): v0.19.0 hash-named assets must survive `rclone sync`.
+    # Sites cached by browsers before v1.0.0 still request these two files; since the
+    # v1.0.0 build stops shipping them locally, a plain sync would DELETE them from R2
+    # (remote-only objects) and break those cached pages. Keep them with two EXACT
+    # excludes - deliberately no wildcards (a wildcard would also protect every future
+    # hash-named file and silently grow the bucket, and would hide typos).
+    # Retire after 2026-12-20 (by then pre-v1.0.0 cached pages are negligible).
+    # Also passed to BOTH `rclone check` runs below: the post-sync check is two-way, so
+    # once site/dist stops shipping the files a strict check reports them as 2
+    # differences and exits 1 (release failure) - proven by REL2-B self-test.
+    $LegacyAssetExcludes = @(
+        '--exclude', 'assets/style.885ce0a604.css',
+        '--exclude', 'assets/boot.510d5a90dd.js'
+    )
+
     if ($CheckOnly) {
         # --one-way: the bucket intentionally holds the synthetic language-root fallback
         # objects (fr/, ko/; not in site/dist), and may hold pre-sync extras that the next
@@ -193,7 +228,7 @@ try {
         # (2026-11-13: without --one-way, -CheckOnly exited 1 with `1 differences / 1 files
         # missing` on a healthy bucket, purely because of fr/).
         Write-Host ("check: {0} -> r2:{1} (size-only, one-way)" -f $Dist, $bucket)
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs @LegacyAssetExcludes
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
         Write-Host 'check: OK (size-only, one-way)'
         exit 0
@@ -220,7 +255,7 @@ try {
     # parse that as 0 PUT.
     $syncArgs = @('sync', $Dist, ("r2:{0}" -f $bucket), '--checksum',
                   '--transfers', $Transfers, '--checkers', $Transfers,
-                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs
+                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs + $LegacyAssetExcludes
     if ($DryRun) { $syncArgs += '--dry-run' }
 
     Write-Host ("sync: {0} -> r2:{1} (dry-run={2})" -f $Dist, $bucket, [bool]$DryRun)
@@ -230,10 +265,50 @@ try {
         exit 1
     }
 
+    if ($DryRun) {
+        # REL2-B: the Cache-Control pass is a real `rclone copy`, so a dry run must not
+        # execute it. Count locally so the operator still sees the planned PUTs (~17).
+        $assetsDir = Join-Path $Dist 'assets'
+        $assetCount = if (Test-Path $assetsDir) { @(Get-ChildItem -LiteralPath $assetsDir -File -Recurse).Count } else { 0 }
+        Write-Host ("dry-run: skipped assets Cache-Control pass (would re-upload {0} files with --ignore-times --header-upload 'Cache-Control: public, max-age=300')" -f $assetCount)
+    }
+
     if (-not $DryRun) {
         Write-Host 'upload done; verifying sizes'
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs
+        # REL2-B: pass the same exact excludes as the sync. After the v1.0.0 build stops
+        # shipping assets/style.885ce0a604.css / assets/boot.510d5a90dd.js they are
+        # remote-only (deliberately kept for pre-v1.0.0 cached pages); a two-way check
+        # would report 2 differences and exit 1, failing the release for the wrong reason.
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs @LegacyAssetExcludes
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
+
+        # REL2-B (2026-11-20): second pass over assets/ only, with a 5-minute browser cache.
+        # Why a separate pass: the main sync transfers only changed files, so unchanged
+        # stable-name assets (assets/style.css / assets/boot.js, referenced by every
+        # long-tail page since v1.0.0) would never get a Cache-Control header.
+        # --ignore-times forces all ~17 files through (~17 Class A PUTs per publish, well
+        # inside the <=3,000 target); 5 minutes caps the stale-UI window after a release.
+        # copy (not sync) never deletes remote objects -> the excluded pre-v1.0.0 hashed
+        # assets above stay untouched.
+        # No stats block at NOTICE for this pass (--stats-log-level INFO, no -v): the LAST
+        # `Transferred: N / N` line in the release log must stay the MAIN sync's count, which
+        # is what the REL3 PUT ledger parses. This pass logs its own file count explicitly.
+        $assetsDir = Join-Path $Dist 'assets'
+        if (Test-Path $assetsDir) {
+            $assetCount = @(Get-ChildItem -LiteralPath $assetsDir -File -Recurse).Count
+            $assetArgs = @('copy', $assetsDir, ("r2:{0}/assets" -f $bucket),
+                           '--ignore-times',
+                           '--header-upload', 'Cache-Control: public, max-age=300',
+                           '--stats-log-level', 'INFO') + $confArgs
+            Write-Host ("assets: re-uploading {0} files with Cache-Control: public, max-age=300" -f $assetCount)
+            & $rclone @assetArgs
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host ("ERROR: rclone copy assets (Cache-Control) exit {0}" -f $LASTEXITCODE)
+                exit 1
+            }
+        } else {
+            Write-Host ("WARN: assets/ not found under {0}; Cache-Control pass skipped" -f $Dist)
+        }
 
         # TEMPORARY FIX (approved 2026-11-13; generalised to a language list 2026-11-18):
         # Cloudflare Transform Rules currently only cover /, /zh/, /es/, /zh-hant/ - NOT

@@ -13352,6 +13352,16 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     首页 / drug / atc 等 LCP 目标页继续走 slim=False 的原模板。
     """
     ver = f"{LATEST_VERSION} · {LATEST_DATE}" if LATEST_VERSION else "What's new"
+    # REL2 / v1.0.0（T69）：长尾页（name / drug / combo / maker / atc / cat，约 15 万页）改用
+    # **稳定资源名** assets/style.css / assets/boot.js（main() 每次构建都写这两个副本）；
+    # 内容哈希名只留给顶层页。否则改一次 CSS/JS 或升一次版本号 → 15 万页 HTML 全变 →
+    # 每次发布都变成近全量上传。顶层页保持原样（最小改动、风险最低）。
+    shell_top = nav_coverage
+    css_href = CSS_FILE if shell_top else "assets/style.css"
+    boot_href = BOOT_JS_FILE if shell_top else "assets/boot.js"
+    # 页脚：顶层页保留版本号；长尾页只留「更新日志」链接，版本号不再逐页写死。
+    foot_news = (f'<a href="{prefix}whats-new.html">{ver}</a>' if shell_top else
+                 f'<a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What\'s new</a>')
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}"'
         + (' aria-current="true"' if code == lang else "")
@@ -13410,7 +13420,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
                '"alternateName":"药品商品名跨国定位","url":"' + SITE_URL + '"}</script>')
     dataset_link = (f'<link rel="alternate" type="application/ld+json" '
                     f'href="{prefix}dataset.jsonld">')
-    head_scripts = (f'<script defer src="{prefix}{BOOT_JS_FILE}"></script>'
+    head_scripts = (f'<script defer src="{prefix}{boot_href}"></script>'
                     if defer_i18n else "")
     boot_scripts = ""
     # 壳拆三段（head / 正文前 / 正文后）：slim 只重排首尾两段，body 原样插入，绝不被压缩。
@@ -13419,12 +13429,12 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {head_title}{alt}{head_extra}{noindex_meta}
 {favicon}{site_ld}
-<link rel="stylesheet" href="{prefix}{CSS_FILE}">
+<link rel="stylesheet" href="{prefix}{css_href}">
 {head_scripts}
 <script>window.DSH_PREFIX={prefix!r};</script>{GC_TAG}{head_js}</head>"""
     # v0.9.8 task-13（UI 批次 A-2）：nav_coverage 就是「顶层页」标记 → 静态新壳；
     # 长尾页仍走下面 else 分支的原壳，字节不变（壳由 boot.js 注入）。
-    shell_top = nav_coverage
+    # REL2（v1.0.0）：shell_top 与资源名已在函数开头判定（长尾页用稳定名）。
     if shell_top:
         top = f"""
 <body>
@@ -13457,7 +13467,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <footer><div class="wrap">
   <span data-i18n="footer">{esc(I18N['en']['footer'])}</span>
   <span class="foot-links">
-    <a href="{prefix}whats-new.html">{ver}</a>
+    {foot_news}
     <a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
        target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
     <a href="{REPORT_REPO}/issues" target="_blank" rel="noopener"

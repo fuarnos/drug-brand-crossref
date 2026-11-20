@@ -17,6 +17,8 @@
   data/idx/core.json 可请求、Content-Type JSON、gzip 后体积在合理区间（可选 --compare-dist）；
   data/index.json（?legacy=1 / 解码失败回退）仍可请求；
   关键页面 drug/tirzepatide.html、drug/atorvastatin.html、name/lipitor.html、confused.html；
+  **REL2 增量发布契约（v1.0.0 起）**：assets/style.css 带 `Cache-Control: public, max-age=300`；
+  长尾页用稳定名 assets/style.css / assets/boot.js + whats-new 链接，不含 hashed 资源、不含页脚版本号；
   sitemap.xml URL 数、robots.txt Sitemap 行、未知路径返回 404。
 
 退出码：0 = 通过（可带 warning）；1 = 有失败或站点不可达；2 = 参数错误。
@@ -46,6 +48,21 @@ ANALYTICS_RE = re.compile(
 GC_SCRIPT_RE = re.compile(r'src="https://gc\.zgo\.at/count\.js"')
 PRELOAD_IDX_RE = re.compile(r'<link[^>]+rel="preload"[^>]+(?:index|core)\.json')
 VERSION_RE = re.compile(r"v\d+\.\d+\.\d+")
+
+# REL2（2026-11-20）增量发布契约：长尾页（name/drug/combo/maker/atc）改用稳定名资源
+# （assets/style.css / assets/boot.js），页脚不再逐页写版本号；assets/ 由
+# deploy/sync_r2.ps1 在上传后单独 copy 一遍并带 5 分钟缓存头。
+# 这两条门禁在 v1.0.0 上线前**必然 FAIL**（旧产物仍是 hashed 资源 + 逐页版本号），属预期；
+# v1.0.0 上线后必须 PASS，否则下一次发版又会退化成近全量上传。
+# 证据见 reports/2026-11-20-v100-release.md。
+ASSETS_CACHE_MAX_AGE = 300
+CACHE_CONTROL_ASSET = "assets/style.css"
+LONGTAIL_SAMPLE = "name/tylenol-8-hr-arthritis-pain.html"
+LONGTAIL_STABLE_REFS = ("assets/style.css", "assets/boot.js", "whats-new.html")
+LONGTAIL_HASHED_RE = re.compile(r"assets/(?:style|boot)\.[0-9a-f]{8,}\.(?:css|js)")
+# 方案原文正则 `v\d+\.\d+\.\d+ · \d{4}-\d{2}-\d{2}`；\s* 只是容忍空白变体，语义不变。
+LONGTAIL_VER_RE = re.compile(r"v\d+\.\d+\.\d+\s*·\s*\d{4}-\d{2}-\d{2}")
+
 
 # gzip 传输体积合理区间（2026-10-27 线上实测 core 3,808,417 B / index 6,059,167 B；
 # 本机 gzip -9 core 3.68 MB，Pages 动态压缩约 +3.4%）。
@@ -391,23 +408,56 @@ def main() -> int:
                        f"{'gzip ' if icenc == 'gzip' else '明文 '}{fmt_bytes(iclen)}")
 
     # ── 6. 关键页面 ─────────────────────────────────────────────────
+    # REL2（v1.0.0）起 name/drug 是长尾页：页脚不再写版本号、改用稳定名资源（契约由下面
+    # 6b 的 longtail-footer 门禁覆盖），这里不再断言 live_version 出现在这些页面正文里；
+    # 版本号仍由首页 / es / zh 落地页 / whats-new / About / 顶层页 confused.html 断言。
     key_pages = [
-        ("drug/tirzepatide.html", "tirzepatide"),
-        ("drug/atorvastatin.html", "atorvastatin"),
-        ("name/lipitor.html", "lipitor"),
-        ("confused.html", ""),
+        ("drug/tirzepatide.html", "tirzepatide", False),
+        ("drug/atorvastatin.html", "atorvastatin", False),
+        ("name/lipitor.html", "lipitor", False),
+        ("confused.html", "", True),
     ]
-    for path, marker in key_pages:
+    for path, marker, wants_version in key_pages:
         res = get(path)
         txt = text_of(res)
         ok = res["status"] == 200 and len(txt) > 800
         if marker:
             ok = ok and marker in txt.lower()
-        if live_version:
+        if live_version and wants_version:
             ok = ok and live_version in txt
         checks.add(f"page-{path}", ok,
                    f"HTTP {res['status']}, {len(txt):,} 字符"
                    + ("" if not marker else f", 含 '{marker}'"), res["ms"])
+
+    # ── 6b. REL2 增量发布契约（v1.0.0 起常驻）──────────────────────
+    # assets 5 分钟缓存：sync_r2.ps1 在主 sync 后单独 `rclone copy assets/` 带
+    # `Cache-Control: public, max-age=300`；没有这一遍，稳定名资源永远没有缓存头。
+    asset = get(CACHE_CONTROL_ASSET, method="HEAD")
+    cc = asset["headers"].get("cache-control", "")
+    checks.add("assets-cache-control",
+               asset["status"] == 200 and f"max-age={ASSETS_CACHE_MAX_AGE}" in cc,
+               f"HTTP {asset['status']}, Cache-Control={cc or '缺失'}（应为 public, max-age=300）",
+               asset["ms"])
+
+    # 长尾页契约：稳定名资源 + whats-new 链接，且不再内联页脚版本号 / hashed 资源名。
+    # 版本号逐页写死会让 CHANGELOG 升级一次 = 15 万页全部重传（REL2 根因 A）；
+    # 引用 hashed 资源会在改 CSS/JS 时让全部页面改名（根因 B）。
+    lt = get(LONGTAIL_SAMPLE)
+    lt_text = text_of(lt)
+    missing = [m for m in LONGTAIL_STABLE_REFS if m not in lt_text]
+    hashed = LONGTAIL_HASHED_RE.search(lt_text)
+    ver_hit = LONGTAIL_VER_RE.search(lt_text)
+    lt_ok = lt["status"] == 200 and not missing and not hashed and not ver_hit
+    detail = f"/{LONGTAIL_SAMPLE} HTTP {lt['status']}"
+    if missing:
+        detail += f"; 缺稳定名引用 {','.join(missing)}"
+    if hashed:
+        detail += f"; 仍引用 hashed 资源 {hashed.group(0)}"
+    if ver_hit:
+        detail += f"; 仍含页脚版本号 {ver_hit.group(0)}"
+    if lt_ok:
+        detail += "; 稳定名 3/3 + 无 hashed 资源 + 无版本号"
+    checks.add("longtail-footer", lt_ok, detail, lt["ms"])
 
     # ── 7. sitemap / robots / 404 ───────────────────────────────────
     sm = get("sitemap.xml")
