@@ -8210,7 +8210,7 @@ table.res.rows .c-ing{width:24%;font-weight:400;color:var(--muted);font-size:16p
 table.res.rows .c-dose{width:24%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px}
 table.res.rows .c-market{width:12%;white-space:nowrap;overflow:hidden}
 table.res.rows td.c-det{width:14%;white-space:nowrap;text-align:right}
-table.res.rows td{padding-top:6px;padding-bottom:6px}
+table.res.rows td{padding-top:5px;padding-bottom:5px}
 table.res.rows tr.br.picked{background:var(--accent-weak);box-shadow:inset 3px 0 0 var(--accent)}
 table.res.rows tr.br.picked:hover{background:var(--accent-weak)}
 .picked-tag{background:var(--accent);color:#fff;border-color:var(--accent);font-size:13px}
@@ -8235,13 +8235,13 @@ table.res.rows tr.br.picked:hover{background:var(--accent-weak)}
      各占整行，六语都不换行。只压间距：正文 16 / 辅助 13 / 品牌 18 px 一律不动；
      长值仍走省略号（与改前 c-dose 的行为一致）。 */
   table.res.rows tr.br{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
-   column-gap:8px;margin:0 0 3px;padding:1px 0;border-bottom:1px solid var(--line)}
+   column-gap:8px;margin:0 0 2px;padding:0;border-bottom:1px solid var(--line)}
   table.res.rows tr.br td{padding:0;line-height:1.2}
   table.res.rows tr.br td.c-brand{grid-column:1 / -1;margin:0;line-height:1.15}
   table.res.rows tr.br td.c-ing{grid-column:1 / 6}
   table.res.rows tr.br td.c-dose{grid-column:6 / 13}
-  table.res.rows tr.br td.c-market{grid-column:1 / -1}
-  table.res.rows tr.br td.c-det{grid-column:1 / -1;margin-top:0;text-align:left;white-space:normal}
+  table.res.rows tr.br td.c-market{grid-column:1 / 8}
+  table.res.rows tr.br td.c-det{grid-column:8 / 13;margin-top:0;text-align:right;white-space:normal}
   table.res.rows tr.br td.c-det::before{content:""}
   table.res.rows tr.br td.c-det .pickbtn,table.res.rows tr.br td.c-det .detbtn{min-height:18px;
    font-size:13px;line-height:1.15;padding:0 6px 0 0;margin:0 2px 0 0}
@@ -8764,6 +8764,12 @@ table.res.rows tr.br .detbtn{min-height:26px;line-height:1.4;font-size:14px;font
 table.res.rows tr.br.picked td.c-det{text-align:right}
 /* ↑ 不设 background：按钮浮在结果行（表底 #fff）上，白底=白底会被
    deploy/ui_surface_check.py 判「框内颜色 == 框外颜色」（用户 2026-11-10 硬规则）。 */
+/* V101（v1.0.1）：手机结果卡把「市场」与「操作」并排（原来各占一整行）→ 卡高 84→~66px，
+   390 首屏条目 5.0→6.5、768 10.5→11.5（桌面行 padding 6→5px 再省 2px/行）。
+   只换行位、不删信息；放在上面 nowrap 规则之后，en/es 长操作文案可在列内换行，不压市场文字。 */
+@media (max-width:767px){
+  table.res.rows tr.br td.c-det{white-space:normal;text-align:right}
+}
 .advfilter{margin:6px 0 10px}
 /* 「高级筛选」面板本身刷 `--surface-2`：里面的 `#country` / `#src` 是浏览器默认白底
    （rgb(255,255,255)），若面板沿用 `.mf-details` 的 #fff，就会被
