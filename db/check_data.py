@@ -1,15 +1,23 @@
-"""数据体检：入库后快速看一眼质量。python db/check_data.py"""
+"""数据体检：入库后快速看一眼质量。python db/check_data.py [--db 副本路径]
+
+`--db` 用于干跑库 / 副本（如 `.tmp/kr_dryrun.db`）体检，默认仍是 `data/drugs.db`。
+"""
 
 from __future__ import annotations
 
+import argparse
 import sqlite3
 from pathlib import Path
 
-DB = Path(__file__).resolve().parent.parent / "data" / "drugs.db"
+DEFAULT_DB = Path(__file__).resolve().parent.parent / "data" / "drugs.db"
 
 
 def main() -> None:
-    db = sqlite3.connect(DB)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--db", type=Path, default=DEFAULT_DB)
+    args = ap.parse_args()
+    db = sqlite3.connect(args.db)
+    print(f"== db: {args.db} ==")
     print("== coverage ==")
     for row in db.execute("SELECT * FROM coverage"):
         print("  ", row)

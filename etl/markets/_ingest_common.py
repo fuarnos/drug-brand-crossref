@@ -257,6 +257,13 @@ def rollback(db_path: Path, manifest: dict, country: str, source_id: str) -> tup
                 "DELETE FROM variant WHERE substance_id=?", (sid,)).rowcount
             removed["substance"] += db.execute(
                 "DELETE FROM substance WHERE substance_id=?", (sid,)).rowcount
+        # 给「既有 substance」补建的 base variant（KR 2026-11-22 起；只删仍未被引用的）
+        for vid in targets.get("created_variants_for_existing_substances") or []:
+            if db.execute("SELECT 1 FROM product_component WHERE variant_id=? LIMIT 1",
+                          (vid,)).fetchone():
+                continue
+            removed["variant"] += db.execute(
+                "DELETE FROM variant WHERE variant_id=?", (vid,)).rowcount
         if targets.get("source_existed"):
             before = targets.get("source_before") or {}
             if before:
