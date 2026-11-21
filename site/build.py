@@ -8207,6 +8207,38 @@ padding:14px 16px;margin:10px 0}
 .page-search button{flex:none;min-height:44px;padding:0 16px;border-radius:10px;
  border:1px solid var(--accent);background:var(--accent);color:#fff;font-size:15px;font-weight:600;
  cursor:pointer}
+/* F5（v1.1.1，用户 2026-11-22）：详情页「换个药名搜」收进页头图标（原生 <details>，无 JS 可展开）。
+   搜索框不再压 h1 正下方；图标在返回路径行右端，展开后是 40px 表单（预填当前页药名）。 */
+.crumbs .qsearch{float:right;margin:-4px 0 0 10px;position:relative}
+.crumbs .qsearch>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+ min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;
+ color:var(--muted);background:var(--bg)}
+.crumbs .qsearch>summary::-webkit-details-marker{display:none}
+.crumbs .qsearch[open]>summary{color:var(--fg);border-color:var(--accent)}
+.qs-panel{position:absolute;right:0;top:calc(100% + 6px);z-index:40;background:var(--bg);
+ border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);
+ min-width:min(88vw,360px)}
+.qs-panel .page-search{display:flex;margin:0;max-width:none}
+.qs-form input,.qs-form button{min-height:40px}
+@media (max-width:767px){.crumbs .qsearch .qs-lbl{display:none}
+ .crumbs .qsearch>summary{padding:0 8px}}
+/* v1.1.1（T5）：产品页（静态 Top N 与长尾共用一个模板） */
+.pcard{max-width:860px}
+.pdl{display:grid;grid-template-columns:minmax(140px,190px) 1fr;gap:6px 14px;margin:10px 0 14px;
+ font-size:16px;line-height:1.45}
+.pdl dt{color:var(--muted);font-size:14px}
+.pdl dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.pdisc{list-style:none;padding:0;margin:4px 0 12px;display:flex;flex-wrap:wrap;gap:6px}
+.pdisc li{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border:1px solid var(--line);
+ border-radius:999px;font-size:14px}
+.pdisc a{color:inherit;text-decoration:none}
+.pdisc a:hover{text-decoration:underline}
+.pdisc .pd-mk{font-weight:600}
+@media (max-width:600px){.pdl{grid-template-columns:1fr;gap:2px}.pdl dt{margin-top:8px}}
+.p-recs{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px;font-size:14px}
+.p-recs li a{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:999px;
+ color:inherit;text-decoration:none}
+.p-recs li a:hover{border-color:var(--accent)}
 /* L7 移动端：页头只留「返回路径 + 标题」（正文顶部再放一条搜索框会挤掉首屏内容行，
    内容页 390 的首屏条目必须 ≥5；返回链接本身就是搜索入口）。 */
 @media (max-width:767px){
@@ -13524,9 +13556,273 @@ def _search_form(prefix: str, form_id: str = "pq", cls: str = "page-search") -> 
   </form>"""
 
 
+# ── v1.1.1（T5）：每个产品一个页面（B 混合）────────────────────────────────
+# 用户 2026-11-22 拍板：静态 `/product/<pid>.html` 收 Top N；长尾 `/product.html?pid=`
+# 只拉 1 个桶（512 桶，FNV-1a % 512）。两者同一份模板、同一份数据口径。
+PRODUCT_STATIC_TOP_N = 50_000      # 首期静态页硬上限（实际条数构建时现算，见报告）
+PRODUCT_STATIC_MARKET_CAP = 6_000  # 每市场硬上限（轮转分配下不触发）
+PRODUCT_STATIC_MODE = "roundrobin"  # 轮转：按 markets.json order 每轮每市场取 1 条
+PRODUCT_BUCKETS = 512              # 长尾数据桶数（单桶 gzip 目标 ≤120 KB）
+PRODUCT_BUCKET_DIR = "data/product"
+PRODUCT_STATIC_IDS: set[str] = set()   # main() 里 select_static_product_ids() 填，供链接判定
+
+PRODUCT_I18N: dict[str, dict[str, str]] = {
+    # F5：详情页搜索框收进页头图标 + 标签改「换个药名搜」
+    "search.swap": {
+        "en": "Search another name", "es": "Buscar otro nombre", "zh": "换个药名搜",
+        "zh-Hant": "換個藥名搜", "fr": "Rechercher un autre nom", "ko": "다른 약 이름 검색",
+        "ja": "別の薬名を検索", "cs": "Hledat jiný název", "lv": "Meklēt citu nosaukumu",
+    },
+    "product.kicker": {
+        "en": "Product record", "es": "Ficha de producto", "zh": "产品记录",
+        "zh-Hant": "產品紀錄", "fr": "Fiche produit", "ko": "제품 기록",
+        "ja": "製品レコード", "cs": "Záznam produktu", "lv": "Produkta ieraksts",
+    },
+    "product.summary": {
+        "en": "One product record: identity fields as registered in that market.",
+        "es": "Un registro de producto: campos de identidad tal como están registrados en ese mercado.",
+        "zh": "该市场登记的这一个产品记录（身份字段）。",
+        "zh-Hant": "該市場登記的這一筆產品紀錄（身分欄位）。",
+        "fr": "Une fiche produit : champs d’identité tels qu’enregistrés sur ce marché.",
+        "ko": "해당 시장에 등록된 제품 기록(식별 필드)입니다.",
+        "ja": "その市場に登録された 1 件の製品レコード（識別項目）。",
+        "cs": "Jeden záznam produktu: identifikační údaje tak, jak jsou registrovány na daném trhu.",
+        "lv": "Viens produkta ieraksts: identitātes lauki tā, kā tie reģistrēti konkrētajā tirgū.",
+    },
+    "product.inn": {
+        "en": "Active ingredient", "es": "Principio activo", "zh": "活性成分",
+        "zh-Hant": "活性成分", "fr": "Principe actif", "ko": "활성 성분",
+        "ja": "有効成分", "cs": "Účinná látka", "lv": "Aktīvā viela",
+    },
+    "product.pack": {
+        "en": "Pack size", "es": "Tamaño del envase", "zh": "包装规格",
+        "zh-Hant": "包裝規格", "fr": "Taille du conditionnement", "ko": "포장 규격",
+        "ja": "包装規格", "cs": "Velikost balení", "lv": "Iepakojuma lielums",
+    },
+    "product.approval": {
+        "en": "Registration / approval no.", "es": "N.º de registro", "zh": "注册/批准号",
+        "zh-Hant": "註冊/核准號", "fr": "N° d’enregistrement", "ko": "등록·승인 번호",
+        "ja": "登録・承認番号", "cs": "Registrační číslo", "lv": "Reģistrācijas numurs",
+    },
+    "product.asof": {
+        "en": "Data as of", "es": "Datos hasta", "zh": "数据截止",
+        "zh-Hant": "資料截止", "fr": "Données au", "ko": "데이터 기준일",
+        "ja": "データ基準日", "cs": "Data k", "lv": "Dati uz",
+    },
+    "product.source": {
+        "en": "Source", "es": "Fuente", "zh": "来源", "zh-Hant": "來源",
+        "fr": "Source", "ko": "출처", "ja": "出典", "cs": "Zdroj", "lv": "Avots",
+    },
+    "product.licence": {
+        "en": "Licence", "es": "Licencia", "zh": "许可", "zh-Hant": "授權",
+        "fr": "Licence", "ko": "라이선스", "ja": "ライセンス", "cs": "Licence", "lv": "Licence",
+    },
+    "product.same_name": {
+        "en": "Same name in other markets", "es": "Mismo nombre en otros mercados",
+        "zh": "其他市场的同名记录", "zh-Hant": "其他市場的同名紀錄",
+        "fr": "Même nom sur d’autres marchés", "ko": "다른 시장의 같은 이름",
+        "ja": "他の市場の同名レコード", "cs": "Stejný název na jiných trzích",
+        "lv": "Tāds pats nosaukums citos tirgos",
+    },
+    "product.same_ing": {
+        "en": "Same ingredient in other markets", "es": "Mismo principio activo en otros mercados",
+        "zh": "其他市场的同成分记录", "zh-Hant": "其他市場的同成分紀錄",
+        "fr": "Même principe actif sur d’autres marchés", "ko": "다른 시장의 같은 성분",
+        "ja": "他の市場の同成分レコード", "cs": "Stejná látka na jiných trzích",
+        "lv": "Tā pati viela citos tirgos",
+    },
+    "product.no_neighbours": {
+        "en": "No other records found.", "es": "No se encontraron otros registros.",
+        "zh": "没有找到其他记录。", "zh-Hant": "沒有找到其他紀錄。",
+        "fr": "Aucun autre enregistrement trouvé.", "ko": "다른 기록을 찾지 못했습니다.",
+        "ja": "他のレコードは見つかりません。", "cs": "Jiné záznamy nebyly nalezeny.",
+        "lv": "Citi ieraksti nav atrasti.",
+    },
+    "product.no_approval": {
+        "en": "not recorded", "es": "sin registrar", "zh": "未记录", "zh-Hant": "未記錄",
+        "fr": "non enregistré", "ko": "미기록", "ja": "未記録", "cs": "nezaznamenáno",
+        "lv": "nav reģistrēts",
+    },
+    "product.notice": {
+        "en": ("Same name or the same ingredient does not mean the products are interchangeable: "
+               "check the ingredient, strength and form on the pack."),
+        "es": ("Mismo nombre o mismo principio activo no significa que sean intercambiables: "
+               "compruebe el principio activo, la concentración y la forma en el envase."),
+        "zh": "同名或同成分不代表可以互换：请核对包装上的成分、含量与剂型。",
+        "zh-Hant": "同名或同成分不代表可以互換：請核對包裝上的成分、含量與劑型。",
+        "fr": ("Un même nom ou un même principe actif ne signifie pas que les produits sont "
+               "interchangeables : vérifiez le principe actif, le dosage et la forme sur la boîte."),
+        "ko": ("같은 이름이나 같은 성분이라도 서로 교환할 수 있다는 뜻은 아닙니다. 포장의 성분·함량·"
+               "제형을 확인하세요."),
+        "ja": ("同名または同成分であっても互換できるという意味ではありません。箱の成分・含量・剤形を"
+               "確認してください。"),
+        "cs": ("Stejný název ani stejná látka neznamená, že jsou produkty zaměnitelné: zkontrolujte "
+               "látku, sílu a formu na obalu."),
+        "lv": ("Vienāds nosaukums vai viena un tā pati viela nenozīmē, ka produkti ir savstarpēji "
+               "aizstājami: pārbaudiet vielu, stiprumu un formu uz iepakojuma."),
+    },
+    "product.back_name": {
+        "en": "Brand page", "es": "Página de marca", "zh": "品牌页", "zh-Hant": "品牌頁",
+        "fr": "Page de marque", "ko": "브랜드 페이지", "ja": "ブランドページ",
+        "cs": "Stránka značky", "lv": "Zīmola lapa",
+    },
+    "product.back_drug": {
+        "en": "Ingredient page", "es": "Página del principio activo", "zh": "成分页",
+        "zh-Hant": "成分頁", "fr": "Page du principe actif", "ko": "성분 페이지",
+        "ja": "成分ページ", "cs": "Stránka látky", "lv": "Vielas lapa",
+    },
+    "product.loading": {
+        "en": "Loading record…", "es": "Cargando registro…", "zh": "正在读取记录…",
+        "zh-Hant": "正在讀取紀錄…", "fr": "Chargement de la fiche…", "ko": "기록을 불러오는 중…",
+        "ja": "レコードを読み込み中…", "cs": "Načítání záznamu…", "lv": "Ielādē ierakstu…",
+    },
+    "product.not_found": {
+        "en": "Record not found", "es": "Registro no encontrado", "zh": "找不到这条记录",
+        "zh-Hant": "找不到這筆紀錄", "fr": "Fiche introuvable", "ko": "기록을 찾을 수 없음",
+        "ja": "レコードが見つかりません", "cs": "Záznam nenalezen", "lv": "Ieraksts nav atrasts",
+    },
+    "product.not_found_hint": {
+        "en": "Open the brand page or search for the name instead.",
+        "es": "Abra la página de marca o busque el nombre.",
+        "zh": "可以改从品牌页或搜索进入。", "zh-Hant": "可以改從品牌頁或搜尋進入。",
+        "fr": "Ouvrez la page de marque ou recherchez le nom.",
+        "ko": "브랜드 페이지를 열거나 이름으로 검색하세요.",
+        "ja": "ブランドページを開くか、名前で検索してください。",
+        "cs": "Otevřete stránku značky nebo název vyhledejte.",
+        "lv": "Atveriet zīmola lapu vai meklējiet nosaukumu.",
+    },
+    "product.need_js": {
+        "en": "This record page needs JavaScript; you can still search by name.",
+        "es": "Esta ficha necesita JavaScript; aún puede buscar por nombre.",
+        "zh": "本记录页需要 JavaScript；仍可按药名搜索。",
+        "zh-Hant": "本紀錄頁需要 JavaScript；仍可按藥名搜尋。",
+        "fr": "Cette fiche nécessite JavaScript ; vous pouvez toujours rechercher par nom.",
+        "ko": "이 기록 페이지는 JavaScript가 필요합니다. 이름으로 검색할 수 있습니다.",
+        "ja": "この記録ページには JavaScript が必要です。名前で検索できます。",
+        "cs": "Tato stránka záznamu vyžaduje JavaScript; název můžete stále vyhledat.",
+        "lv": "Šai ieraksta lapai nepieciešams JavaScript; nosaukumu joprojām var meklēt.",
+    },
+    "product.records_h": {
+        "en": "Product records on this page", "es": "Registros de producto en esta página",
+        "zh": "本页收录的产品记录", "zh-Hant": "本頁收錄的產品紀錄",
+        "fr": "Fiches produit sur cette page", "ko": "이 페이지의 제품 기록",
+        "ja": "このページの製品レコード", "cs": "Záznamy produktů na této stránce",
+        "lv": "Šīs lapas produktu ieraksti",
+    },
+    "product.records_more": {
+        "en": "Only the first {n} records are linked here; open a brand page for the rest.",
+        "es": "Aquí solo se enlazan los primeros {n} registros; abra una página de marca para el resto.",
+        "zh": "这里只链接前 {n} 条记录；其余请从品牌页进入。",
+        "zh-Hant": "這裡只連結前 {n} 筆紀錄；其餘請從品牌頁進入。",
+        "fr": "Seules les {n} premières fiches sont liées ici ; ouvrez une page de marque pour les autres.",
+        "ko": "여기에는 처음 {n}개 기록만 연결됩니다. 나머지는 브랜드 페이지에서 확인하세요.",
+        "ja": "ここでは最初の {n} 件のみリンクしています。残りはブランドページから開けます。",
+        "cs": "Zde je propojeno jen prvních {n} záznamů; zbytek najdete na stránce značky.",
+        "lv": "Šeit ir saites tikai uz pirmajiem {n} ierakstiem; pārējos skatiet zīmola lapā.",
+    },
+    "product.record": {
+        "en": "Record", "es": "Registro", "zh": "记录", "zh-Hant": "紀錄",
+        "fr": "Fiche", "ko": "기록", "ja": "レコード", "cs": "Záznam", "lv": "Ieraksts",
+    },
+}
+
+
+# v1.1.1（T5 追加，用户 2026-11-22）：About 页底部致谢（九语）。
+# 人名「白雨舟」原文不译；其他语言只在括号里给拼音 Bai Yuzhou，不按当地语序改写姓氏。
+ABOUT_THANKS_I18N: dict[str, dict[str, str]] = {
+    "about.thanks": {
+        "en": ('<h2>Acknowledgements</h2><p class="sub">Thanks to 白雨舟 (Bai Yuzhou) for UI design '
+               'advice and contributions.</p>'),
+        "es": ('<h2>Agradecimientos</h2><p class="sub">Gracias a 白雨舟 (Bai Yuzhou) por sus consejos '
+               'y contribuciones en el diseño de la interfaz.</p>'),
+        "zh": '<h2>致谢</h2><p class="sub">感谢 白雨舟 在 UI 设计上给出的建议与贡献。</p>',
+        "zh-Hant": '<h2>致謝</h2><p class="sub">感謝 白雨舟 在 UI 設計上給出的建議與貢獻。</p>',
+        "fr": ('<h2>Remerciements</h2><p class="sub">Merci à 白雨舟 (Bai Yuzhou) pour ses conseils et '
+               'contributions en design d’interface.</p>'),
+        "ko": ('<h2>감사의 말</h2><p class="sub">UI 디자인 조언과 기여에 대해 白雨舟 (Bai Yuzhou) 님께 '
+               '감사드립니다.</p>'),
+        "ja": ('<h2>謝辞</h2><p class="sub">UI デザインへのご助言とご貢献に、白雨舟 (Bai Yuzhou) さんへ'
+               '感謝します。</p>'),
+        "cs": ('<h2>Poděkování</h2><p class="sub">Děkujeme 白雨舟 (Bai Yuzhou) za rady a přínos k '
+               'designu uživatelského rozhraní.</p>'),
+        "lv": ('<h2>Pateicība</h2><p class="sub">Paldies 白雨舟 (Bai Yuzhou) par padomiem un ieguldījumu '
+               'lietotāja saskarnes dizainā.</p>'),
+    },
+}
+
+
+def _install_about_thanks_i18n() -> None:
+    """v1.1.1：About 致谢块注入 9 份 I18N（必须在 zh-Hant 安装之后调用）。"""
+    for key, names in ABOUT_THANKS_I18N.items():
+        for lang, text in names.items():
+            I18N.setdefault(lang, {})[key] = text
+
+
+def _install_product_i18n() -> None:
+    """v1.1.1（T5）：产品页 / F5 文案注入 9 份 I18N（必须在 zh-Hant 安装之后调用）。"""
+    for key, names in PRODUCT_I18N.items():
+        for lang, text in names.items():
+            I18N.setdefault(lang, {})[key] = text
+
+
+def product_bucket(pid: str) -> int:
+    """product_id → 桶号（FNV-1a 32 位 % 512；页面内联 JS 同一算法，逐位一致）。"""
+    h = 2166136261
+    for byte in pid.encode("utf-8"):
+        h ^= byte
+        h = (h * 16777619) & 0xFFFFFFFF
+    return h % PRODUCT_BUCKETS
+
+
+def product_href(pid: str, prefix: str = "") -> str:
+    """产品页链接：静态页直链；长尾走 `product.html?pid=`（单一模板、同一份数据）。"""
+    from urllib.parse import quote
+
+    if pid in PRODUCT_STATIC_IDS:
+        return f"{prefix}product/{esc(pid)}.html"
+    return f"{prefix}product.html?pid={quote(pid, safe='')}"
+
+
+def _pa(key: str, attr: str = "") -> str:
+    """拼 data-i18n 属性（attr 为空 → data-i18n；"aria"/"tpl" → data-i18n-aria / -tpl）。
+
+    产品页与 F5 的键由 PRODUCT_I18N 在构建期注入 9 份 I18N，静态 i18n 门禁看不到这些键名；
+    所以模板里不写静态引用（否则门禁误报「模板引用不存在的 key」），构建期
+    `_assert_i18n_complete()` 仍会校验 9 语键集齐全。
+    """
+    return ("data-i18n" + (f"-{attr}" if attr else "")) + f'="{key}"'
+
+
+def _product_i18n_label(key: str) -> str:
+    return I18N["en"].get(key, key)
+
+
+def _quiet_search(prefix: str, prefill: str = "") -> str:
+    """F5（v1.1.1）：详情页的「换个药名搜」收进页头图标（原生 <details>，无 JS 也可展开）。
+
+    用户 2026-11-22 定：h1 正下方不再压一个空搜索框，h1 之后直接是页面主语信息；
+    搜索改为页头右上角的图标/短标签，标签写「换个药名搜」，并预填当前页药名。
+    """
+    label = _product_i18n_label("search.swap")
+    return (
+        f'<details class="qsearch"><summary {_pa("search.swap", "aria")} '
+        f'aria-label="{esc(label)}" title="{esc(label)}">'
+        '<span class="qs-ico" aria-hidden="true">🔍</span>'
+        f'<span class="qs-lbl" {_pa("search.swap")}>{esc(label)}</span></summary>'
+        '<div class="qs-panel"><form class="page-search qs-form" role="search" '
+        f'action="{prefix}index.html" method="get">'
+        f'<label class="sr-only" for="pq" {_pa("search.swap")}>{esc(label)}</label>'
+        '<input id="pq" name="q" type="search" autocomplete="off" enterkeyhint="search" '
+        f'placeholder="{esc(label)}" {_pa("search.swap", "ph")} value="{esc(prefill)}" '
+        f'aria-label="{esc(label)}" {_pa("search.swap", "aria")}>'
+        '<button type="submit" data-i18n="home.submit">Search</button>'
+        "</form></div></details>")
+
+
 def _page_head(prefix: str, title_html: str, summary_key: str = "",
                summary_html: str = "", crumb: str = "", search: bool = True,
-               extra_crumbs: str = "") -> str:
+               extra_crumbs: str = "", search_mode: str = "inline",
+               prefill: str = "") -> str:
     """L7（v0.12.1）：次级页统一页头四件套 = 返回路径 → h1 → 一句话摘要 → 继续搜索。
 
     规范见 `reports/2026-11-15-ui-redesign-spec.md` §3-L7：
@@ -13547,14 +13843,19 @@ def _page_head(prefix: str, title_html: str, summary_key: str = "",
         crumbs.append(f'<a href="{prefix}{esc(crumb)}">{esc(crumb)}</a>')
     if extra_crumbs:
         crumbs.append(extra_crumbs)
-    out = ['<nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="nav.crumbs">'
-           + '<span class="crumbs-sep"> · </span>'.join(crumbs) + "</nav>", title_html]
+    crumb_nav = ('<nav class="crumbs" aria-label="Breadcrumb" data-i18n-aria="nav.crumbs">'
+                 + '<span class="crumbs-sep"> · </span>'.join(crumbs) + "</nav>")
+    quiet = bool(search) and search_mode == "quiet"
+    if quiet:
+        # F5（v1.1.1）：搜索收进页头图标，h1 正下方不再压空搜索框。
+        crumb_nav = (crumb_nav[:-len("</nav>")] + _quiet_search(prefix, prefill) + "</nav>")
+    out = [crumb_nav, title_html]
     if summary_key:
         text = summary_html or T.get(summary_key, "")
         out.append(f'<p class="sub page-summary" data-i18n="{summary_key}">{esc(text)}</p>')
     elif summary_html:
         out.append(f'<p class="sub page-summary">{esc(summary_html)}</p>')
-    if search:
+    if search and not quiet:
         out.append(_search_form(prefix))
     return "".join(out)
 
@@ -15620,6 +15921,37 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
         identity = (f'<p class="drug-identity">ATC {esc(atc) or "—"} · '
                     f'<b>{n_markets:,}</b> <span data-i18n="drug.markets">markets</span> · '
                     f'<b>{n_records:,}</b> <span data-i18n="drug.records">records</span></p>')
+        # v1.1.1（T5）：产品页发现入口 —— 本页涉及的每个产品给一条链接（最多 24 条，按市场序）。
+        _pid_country: dict[str, str] = {}
+        _pid_label: dict[str, str] = {}
+        for _r in rows:
+            _p = _r[9]
+            _pid_country.setdefault(_p, _r[0])
+            if _p not in _pid_label:
+                _tr = names.get(_p) or []
+                _lbl = ""
+                if _tr:
+                    _e = entry_by_k.get(_tr[0][0])
+                    _lbl = (_e or {}).get("d") or (_tr[0][1] or "")
+                _pid_label[_p] = _lbl
+        _pids_sorted = sorted(_pid_label, key=lambda p: (
+            COUNTRY_PRIORITY.index(_pid_country.get(p, ""))
+            if _pid_country.get(p, "") in COUNTRY_PRIORITY else len(COUNTRY_PRIORITY), p))
+        _prod_block = ""
+        if _pids_sorted:
+            _plink = "".join(
+                f'<li><a href="{product_href(p, "../")}" title="{esc(p)}">'
+                f'<span class="pd-mk">{esc(_pid_country.get(p, ""))}</span> '
+                f'{esc(_pid_label.get(p) or p)}</a></li>' for p in _pids_sorted[:24])
+            _more = ""
+            if len(_pids_sorted) > 24:
+                _more = (f'<p class="sub" {_pa("product.records_more", "tpl")} data-total="24">'
+                         f'{esc(T["product.records_more"].replace("{n}", "24"))}</p>')
+            _prod_block = (
+                '<details class="p-records"><summary>'
+                f'<span {_pa("product.records_h")}>{esc(T["product.records_h"])}</span> '
+                f'<span class="meta">({len(_pids_sorted):,})</span></summary>'
+                f'<ul class="p-recs">{_plink}</ul>{_more}</details>')
         # v0.11.4 task-63：成分名的中文名（inn_zh）只在中文/繁体界面显示，且只在数据里
         # 真有中文名（含 CJK）时才输出 —— 不硬翻；英文/西语界面保持原来的纯英文 H1。
         # 默认 hidden + inline display:none，由 i18n.js 的 applyInnZh() 按语言开关。
@@ -15628,7 +15960,10 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
         name_zh = (f'<span class="name-zh" data-inn-zh hidden style="display:none">'
                    f'{esc(_inn_zh)}</span>' if _inn_zh else "")
         # L7（v0.12.1）：统一页头四件套（返回路径 → h1 → 一句话摘要 → 继续搜索）
-        head = _page_head("../", f'<h1>{h1_inner}</h1>', summary_key="drug.summary")
+        # F5（v1.1.1）：详情页搜索收进页头图标（「换个药名搜」，预填本页成分名），
+        # h1 之后直接给身份信息。
+        head = _page_head("../", f'<h1>{h1_inner}</h1>', summary_key="drug.summary",
+                          search_mode="quiet", prefill=inn_en or sid)
         # L9（v0.12.2）：中文名单独一行、紧跟 h1，作为**次级名**（18px，不抢主标题）；
         # 有中文名时这一行就是它，页面上不再出现「无中文名」这类徽标（drug 页本来也没有）。
         zh_line = (f'<p class="drug-zh" data-inn-zh hidden style="display:none">{esc(_inn_zh)}</p>\n'
@@ -15640,7 +15975,7 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
   <span class="ds-meta">{n_markets:,} <span data-i18n="drug.markets">markets</span> · {n_records:,} <span data-i18n="drug.records">records</span></span>
   <a class="ds-filter" href="#forms" data-i18n="drug.forms_short">Forms</a>{lf_html}
 </div>
-<div id="list" class="listview">{list_html}</div>{nobasis_note}{compare_link}{table_block}
+<div id="list" class="listview">{list_html}</div>{_prod_block}{nobasis_note}{compare_link}{table_block}
 {syn_line}{nick_block}
 {conf_line}
 <div class="notice" data-i18n="drug.notice">The same ingredient can carry completely different
@@ -15777,7 +16112,7 @@ def _name_product_table(rows: list, T: dict) -> str:
         return ""
     body = []
     for (country, dosage, form_base, rel, status, mah, src, approval,
-         sv, su, pv, pu, zh, en, pnote, pcat) in rows:
+         sv, su, pv, pu, zh, en, pnote, pcat, pid) in rows:
         # T10（plan §3.4 ③）：明细行也用 _spec_text —— 浓度型规格保留「/30 mL」关系
         st = _spec_text(sv, su, pv, pu) if sv is not None else "—"
         # v0.10.2 R1：剂型列走四语标签（原来直接打印来源英文原码 tablet/efervescente），
@@ -15811,7 +16146,9 @@ def _name_product_table(rows: list, T: dict) -> str:
                        f'{esc(T["badge.export_only"])}</span>')
         body.append(
             f'<tr><td data-label="{esc(T["a1.market"])}" data-i18n-label="a1.market">'
-            f'{esc(country)}</td>'
+            f'<a class="p-rec" href="{product_href(pid, "../")}" title="{esc(pid)}" '
+            f'{_pa("product.record", "aria")} aria-label="{esc(T["product.record"])}">'
+            f'{esc(country)}</a></td>'
             f'<td data-label="{esc(T["col.dose"])}" data-i18n-label="col.dose">'
             f'{_label_unit_html(st)}{extras}</td>'
             f'<td data-label="{esc(T["name.form"])}" data-i18n-label="name.form">'
@@ -15966,7 +16303,7 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
                       p.status, p.mah, p.source_url, p.approval_id,
                       pc.strength_value, pc.strength_unit,
                       pc.per_volume_value, pc.per_volume_unit, s.inn_zh, s.inn_en,
-                      p.note, p.category
+                      p.note, p.category, p.product_id
                FROM product_name pn
                JOIN product p ON p.product_id = pn.product_id
                LEFT JOIN product_component pc ON pc.product_id = p.product_id
@@ -16081,7 +16418,8 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
         also_bit = ('<span data-i18n="name.also">Also written as</span>: '
                     + esc('、'.join(alts)) + ' · ') if alts else ""
         # L7（v0.12.1）：统一页头四件套（名字页 77k 页，页头保持极简：不传 summary 之外的块）
-        head = _page_head("../", f'<h1>{esc(e["d"])}</h1>', summary_key="name.summary")
+        head = _page_head("../", f'<h1>{esc(e["d"])}</h1>', summary_key="name.summary",
+                          search_mode="quiet", prefill=e["d"])
         body = f"""{head}<p class="sub">{('<span class="st-text" data-i18n="brand.none">'
                  + esc(I18N["en"]["brand.none"]) + '</span> · ') if e.get("t") != 1 else ''}{also_bit}<span data-i18n="name.found">Found in</span>: {esc('、'.join(sorted(d['countries'])))}</p>
 {banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys, data)}{single_table}"""
@@ -16105,6 +16443,484 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
         (OUT / "name" / e["u"]).write_text(_name_html, encoding="utf-8")
         made += 1
     return made
+
+
+# ── v1.1.1（T5）：产品页（B 混合）数据层与渲染 ──────────────────────────────
+def _chunks(seq: list, n: int):
+    for i in range(0, len(seq), n):
+        yield seq[i:i + n]
+
+
+def _market_order_case() -> str:
+    """注册表 order → SQL CASE 片段（静态页排序「市场顺序」用，不手写国家清单）。"""
+    parts = " ".join(f"WHEN '{code}' THEN {i}"
+                     for i, (code, _key) in enumerate(SHELL_MARKETS))
+    return f"CASE COALESCE(p.country, p.region) {parts} ELSE 99 END"
+
+
+def _eligible_market_products(db: sqlite3.Connection, market: str, limit: int) -> list[str]:
+    """一个市场里「合格」的产品（按完整性得分排序，LIMIT per-market cap）。
+
+    合格集（Lead 2026-11-22 定）：status='active' + 成分已映射 + 有剂型 +
+    (pack 或含量至少一项)。市场顺序与完整性得分同一份口径，不硬编码国家名单。
+    """
+    sql = """
+        SELECT p.product_id
+          FROM product p
+         WHERE COALESCE(p.country, p.region) = ?
+           AND p.status = 'active'
+           AND COALESCE(NULLIF(TRIM(p.form_base), ''), TRIM(p.dosage_form), '') <> ''
+           AND EXISTS (SELECT 1 FROM product_component pc0 WHERE pc0.product_id = p.product_id)
+           AND (COALESCE(TRIM(p.pack), '') <> ''
+                OR EXISTS (SELECT 1 FROM product_component pc1
+                            WHERE pc1.product_id = p.product_id
+                              AND pc1.strength_value IS NOT NULL))
+         ORDER BY ((EXISTS (SELECT 1 FROM product_component pc
+                              JOIN variant v ON v.variant_id = pc.variant_id
+                              JOIN substance s ON s.substance_id = v.substance_id
+                             WHERE pc.product_id = p.product_id
+                               AND pc.strength_value IS NOT NULL)) * 1
+                   + (EXISTS (SELECT 1 FROM product_component pc
+                                JOIN variant v ON v.variant_id = pc.variant_id
+                                JOIN substance s ON s.substance_id = v.substance_id
+                               WHERE pc.product_id = p.product_id
+                                 AND COALESCE(s.atc, '') <> '')) * 1
+                   + (CASE WHEN COALESCE(TRIM(p.approval_id), '') <> '' THEN 1 ELSE 0 END)) DESC,
+                  p.product_id
+         LIMIT ?"""
+    return [r[0] for r in db.execute(sql, (market, limit))]
+
+
+PRODUCT_STATIC_DIST: dict[str, int] = {}
+
+
+def select_static_product_ids(db: sqlite3.Connection) -> list[str]:
+    """静态产品页 Top N（v1.1.1 / T5）：每市场上限 + 数据驱动分配。
+
+    规则（Lead 2026-11-22 定）：
+      1) 合格集 = active + 成分已映射 + 有剂型 + (pack 或含量至少一项)；
+      2) 按 `data/markets.json` 的 order 遍历市场，**每市场最多 PRODUCT_STATIC_MARKET_CAP**；
+      3) 总数硬上限 PRODUCT_STATIC_TOP_N（50,000），超出一律截断，不产生 51k。
+      两种分配：`roundrobin`（默认，每轮每市场取 1 条，覆盖所有合格市场）/
+      `ordered`（按市场序吃完再下一个）。默认轮转，保证每个有数据的市场都有静态页。
+    """
+    db_markets = [r[0] for r in db.execute(
+        """SELECT DISTINCT COALESCE(country, region) AS mk FROM product
+            WHERE COALESCE(country, region) IS NOT NULL""")]
+    registered = {code for code, _key in SHELL_MARKETS}
+    order = ([code for code, _key in SHELL_MARKETS if code in db_markets]
+             + sorted(set(db_markets) - registered))
+    per: dict[str, list[str]] = {
+        m: _eligible_market_products(db, m, PRODUCT_STATIC_MARKET_CAP) for m in order}
+    out: list[str] = []
+    if PRODUCT_STATIC_MODE == "roundrobin":
+        for i in range(PRODUCT_STATIC_MARKET_CAP):
+            for m in order:
+                if i < len(per[m]):
+                    out.append(per[m][i])
+                    if len(out) >= PRODUCT_STATIC_TOP_N:
+                        break
+            if len(out) >= PRODUCT_STATIC_TOP_N:
+                break
+    else:
+        for m in order:
+            out.extend(per[m])
+            if len(out) >= PRODUCT_STATIC_TOP_N:
+                break
+    out = out[:PRODUCT_STATIC_TOP_N]
+    PRODUCT_STATIC_DIST.clear()
+    taken = set(out)
+    for m in order:
+        n = len([pid for pid in per[m] if pid in taken])
+        if n:
+            PRODUCT_STATIC_DIST[m] = n
+    return out
+
+
+def _load_source_meta(db: sqlite3.Connection) -> dict[str, dict]:
+    """source 表 → 产品页署名/许可（只读；与 About 许可块同一批事实）。"""
+    out: dict[str, dict] = {}
+    for r in db.execute("SELECT source_id, name, url, license, license_url, data_as_of "
+                        "FROM source"):
+        out[r[0]] = {"name": r[1] or r[0], "url": r[2] or "", "license": r[3] or "",
+                     "license_url": r[4] or "", "as_of": (r[5] or "")[:10]}
+    return out
+
+
+def _load_product_details(db: sqlite3.Connection, pids: list[str]) -> dict[str, dict]:
+    """批量取静态产品页需要的字段（400 个一批，避开 SQLite 变量上限）。"""
+    out: dict[str, dict] = {}
+    for batch in _chunks(pids, 400):
+        q = ",".join("?" * len(batch))
+        for r in db.execute(
+                f"""SELECT product_id, COALESCE(country, region) AS c, dosage_form, form_base,
+                           release, pack, mah, approval_id, status, source_id, source_url
+                      FROM product WHERE product_id IN ({q})""", batch):
+            out[r[0]] = {"pid": r[0], "c": r[1] or "", "form": r[2] or "", "fb": r[3] or "",
+                         "rel": r[4] or "none", "pack": r[5] or "", "mah": r[6] or "",
+                         "approval": r[7] or "", "status": r[8] or "unknown",
+                         "src": r[9] or "", "src_url": r[10] or "",
+                         "key_id": "", "name": "", "inn": "", "sid": "", "strength": ""}
+        for r in db.execute(
+                f"""SELECT pc.product_id, v.substance_id, s.inn_en, pc.strength_value,
+                           pc.strength_unit, pc.per_volume_value, pc.per_volume_unit
+                      FROM product_component pc
+                      JOIN variant v ON v.variant_id = pc.variant_id
+                      JOIN substance s ON s.substance_id = v.substance_id
+                     WHERE pc.product_id IN ({q})
+                     ORDER BY pc.product_id, pc.ord""", batch):
+            d = out.get(r[0])
+            if d is None or d["sid"]:
+                continue
+            d["sid"] = r[1]
+            d["inn"] = r[2] or ""
+            d["strength"] = _spec_text(r[3], r[4], r[5], r[6])
+        for r in db.execute(
+                f"""SELECT pn.product_id, pn.key_id, nv.raw
+                      FROM product_name pn
+                      JOIN name_variant nv ON nv.key_id = pn.key_id
+                     WHERE pn.name_type = 'trade' AND pn.product_id IN ({q})
+                     ORDER BY pn.product_id, pn.is_primary DESC, pn.key_id""", batch):
+            d = out.get(r[0])
+            if d is None or d["name"]:
+                continue
+            d["key_id"] = r[1]
+            d["name"] = (r[2] or "").strip()
+    return out
+
+
+def _load_product_neighbours(db: sqlite3.Connection, details: dict[str, dict]
+                             ) -> dict[str, dict]:
+    """同名 / 同成分的其他产品（只做身份对应列表，不判断可替代）。
+
+    - 同名：同一 `name_key` 的其他产品（按市场去重，最多 8 条）；
+    - 同成分：同一 `substance_id` 每个市场取 1 条（最多 17 条，覆盖全部市场）。
+    名字文本按需再查一次，供 chip 显示；链接一律走 product_href()。
+    """
+    keys = sorted({d["key_id"] for d in details.values() if d["key_id"]})
+    sids = sorted({d["sid"] for d in details.values() if d["sid"]})
+    by_key: dict[str, list[tuple[str, str, str]]] = {}
+    by_sub: dict[str, list[tuple[str, str, str]]] = {}
+    for batch in _chunks(keys, 500):
+        q = ",".join("?" * len(batch))
+        for r in db.execute(
+                f"""SELECT pn.key_id, p.product_id, COALESCE(p.country, p.region) AS c,
+                           nv.raw, p.status
+                      FROM product_name pn
+                      JOIN product p ON p.product_id = pn.product_id
+                      JOIN name_variant nv ON nv.key_id = pn.key_id
+                     WHERE pn.name_type = 'trade' AND pn.key_id IN ({q})
+                     ORDER BY pn.key_id, c, p.product_id""", batch):
+            by_key.setdefault(r[0], []).append((r[1], r[2] or "", (r[3] or "").strip()))
+    for batch in _chunks(sids, 500):
+        q = ",".join("?" * len(batch))
+        for r in db.execute(
+                f"""SELECT v.substance_id, COALESCE(p.country, p.region) AS c,
+                           MIN(p.product_id) AS pid
+                      FROM product p
+                      JOIN product_component pc ON pc.product_id = p.product_id
+                      JOIN variant v ON v.variant_id = pc.variant_id
+                     WHERE v.substance_id IN ({q}) AND p.status = 'active'
+                     GROUP BY v.substance_id, c
+                     ORDER BY v.substance_id, c""", batch):
+            by_sub.setdefault(r[0], []).append((r[2], r[1] or "", ""))
+    labels: dict[str, str] = {}
+    want = sorted({pid for rows in by_key.values() for pid, _c, _n in rows}
+                  | {pid for rows in by_sub.values() for pid, _c, _n in rows})
+    for batch in _chunks(want, 500):
+        q = ",".join("?" * len(batch))
+        for r in db.execute(
+                f"""SELECT pn.product_id, nv.raw
+                      FROM product_name pn
+                      JOIN name_variant nv ON nv.key_id = pn.key_id
+                     WHERE pn.name_type = 'trade' AND pn.product_id IN ({q})
+                     ORDER BY pn.product_id, pn.is_primary DESC""", batch):
+            labels.setdefault(r[0], (r[1] or "").strip())
+    out: dict[str, dict] = {}
+    for pid, d in details.items():
+        seen_c: set[str] = set()
+        same_name: list[tuple[str, str, str]] = []
+        for npid, c, label in by_key.get(d["key_id"], []):
+            if npid == pid or c in seen_c:
+                continue
+            seen_c.add(c)
+            same_name.append((npid, c, label or labels.get(npid, "")))
+            if len(same_name) >= 8:
+                break
+        same_ing = [(npid, c, labels.get(npid, "")) for npid, c, _l in by_sub.get(d["sid"], [])
+                    if npid != pid][:17]
+        out[pid] = {"same_name": same_name, "same_ing": same_ing}
+    return out
+
+
+def _product_market_html(code: str) -> str:
+    """市场名（i18n 键，与菜单/覆盖页同一份）+ 代码。"""
+    key = f"home.{code.lower()}"
+    label = I18N["en"].get(key) or _country_label(code, "en")
+    return f'<span data-i18n="{esc(key)}">{esc(label)}</span> <span class="meta">{esc(code)}</span>'
+
+
+def _product_neighbour_list(rows: list[tuple[str, str, str]], empty_key: str) -> str:
+    if not rows:
+        return f'<p class="sub" data-i18n="{empty_key}">{esc(_product_i18n_label(empty_key))}</p>'
+    items = []
+    for pid, code, label in rows:
+        text = label or _product_i18n_label("product.record")
+        items.append(
+            f'<li><a href="{product_href(pid, "../")}" title="{esc(pid)}">'
+            f'<span class="pd-mk">{esc(code)}</span> {esc(text)}</a></li>')
+    return f'<ul class="pdisc">{"".join(items)}</ul>'
+
+
+def _product_page_body(d: dict, neighbours: dict, sources: dict) -> str:
+    """产品页正文：只放身份字段 + 来源署名 + 身份对应列表（红线：不给建议/不换算）。"""
+    T = I18N["en"]
+    src = sources.get(d["src"], {})
+    src_name = src.get("name") or d["src"]
+    lic = src.get("license") or ""
+    lic_url = src.get("license_url") or ""
+    asof = src.get("as_of") or ""
+    # 无商品名的产品（GB/CN 等来源不少）：h1 用 INN 兜底并明确标「无商品名」，不造名字。
+    h1_text = d["name"] or d["inn"] or d["pid"]
+    name_missing = "" if d["name"] else (
+        f'<p class="sub"><span class="st-text" data-i18n="brand.none">'
+        f'{esc(T["brand.none"])}</span></p>')
+    head = _page_head("../", f'<h1>{esc(h1_text)}</h1>', summary_key="product.summary",
+                      search_mode="quiet", prefill=h1_text)
+    form = _form_display(d["fb"], d["form"])
+    rel_html = ""
+    if d["rel"] and d["rel"] not in RELEASE_UNKNOWN:
+        rel_html = _label_html("release", d["rel"], d["rel"])
+    mah_html = "—"
+    if d["mah"]:
+        info = MAKERS.get(norm_maker(d["mah"]))
+        mah_html = (f'<a class="maker-link" href="../maker/{esc(info["slug"])}.html">'
+                    f'{esc(d["mah"])}</a>' if info and info["has"] else esc(d["mah"]))
+    lic_html = esc(lic)
+    if lic_url:
+        lic_html = f'<a href="{esc(lic_url)}" target="_blank" rel="noopener">{esc(lic)}</a>'
+    src_html = esc(src_name)
+    if d["src_url"] or src.get("url"):
+        src_html = (f'<a href="{esc(d["src_url"] or src.get("url"))}" target="_blank" '
+                    f'rel="noopener">{esc(src_name)}</a>')
+    approval = esc(d["approval"]) if d["approval"] else (
+        f'<span class="st-text" {_pa("product.no_approval")}>'
+        f'{esc(_product_i18n_label("product.no_approval"))}</span>')
+    identity = (f'<p class="drug-identity">{_product_market_html(d["c"])} · '
+                f'{_status_span_html(d["status"], T)}</p>')
+    return f"""{head}{name_missing}{identity}
+<div class="pcard">
+<dl class="pdl">
+<dt {_pa("product.inn")}>{esc(_product_i18n_label("product.inn"))}</dt><dd><a href="../drug/{esc(d["sid"])}.html">{esc(d["inn"] or "—")}</a></dd>
+<dt data-i18n="col.dose">Strength</dt><dd>{_label_unit_html(d["strength"]) if d["strength"] else "—"}</dd>
+<dt data-i18n="name.form">Dosage form</dt><dd>{form or "—"}</dd>
+<dt data-i18n="name.release">Release</dt><dd>{rel_html or "—"}</dd>
+<dt {_pa("product.pack")}>{esc(_product_i18n_label("product.pack"))}</dt><dd>{esc(d["pack"]) or "—"}</dd>
+<dt data-i18n="col.mah">MAH</dt><dd>{mah_html}</dd>
+<dt {_pa("product.approval")}>{esc(_product_i18n_label("product.approval"))}</dt><dd>{approval}</dd>
+<dt {_pa("product.asof")}>{esc(_product_i18n_label("product.asof"))}</dt><dd>{esc(asof) or "—"}</dd>
+<dt {_pa("product.source")}>{esc(_product_i18n_label("product.source"))}</dt><dd>{src_html} · <span {_pa("product.licence")}>{esc(_product_i18n_label("product.licence"))}</span>: {lic_html or "—"}</dd>
+</dl>
+<p class="notice" {_pa("product.notice")}>{esc(T["product.notice"])}</p>
+<h2 {_pa("product.same_name")}>{esc(T["product.same_name"])}</h2>
+{_product_neighbour_list(neighbours.get("same_name") or [], "product.no_neighbours")}
+<h2 {_pa("product.same_ing")}>{esc(T["product.same_ing"])}</h2>
+{_product_neighbour_list(neighbours.get("same_ing") or [], "product.no_neighbours")}
+<p class="sub"><a href="../name/{esc(d["name_slug"])}" {_pa("product.back_name")}>{esc(_product_i18n_label("product.back_name"))}</a> · <a href="../drug/{esc(d["sid"])}.html" {_pa("product.back_drug")}>{esc(_product_i18n_label("product.back_drug"))}</a></p>
+</div>"""
+
+
+def build_product_pages(db: sqlite3.Connection, entries, static_ids: list[str]) -> int:
+    """静态产品页 `/product/<pid>.html`（Top N）+ 长尾页 `product.html` + 512 桶数据。
+
+    返回写出的静态页数。长尾页与桶数据由 write_product_buckets() 写。
+    """
+    global PRODUCT_STATIC_IDS
+    PRODUCT_STATIC_IDS = set(static_ids)
+    (OUT / "product").mkdir(parents=True, exist_ok=True)
+    sources = _load_source_meta(db)
+    details = _load_product_details(db, static_ids)
+    slug_by_key = {e["k"]: e["u"] for e in entries if e.get("u")}
+    for d in details.values():
+        d["name_slug"] = slug_by_key.get(d["key_id"], "")
+    neighbours = _load_product_neighbours(db, details)
+    made = 0
+    for pid in static_ids:
+        d = details.get(pid)
+        if d is None:
+            continue
+        title = (f'{d["name"] or d["inn"] or pid} — {d["inn"] or "product"} · {d["c"]}'
+                 if (d["name"] or d["inn"]) else f'{pid} · {d["c"]}')
+        html = _assert_no_internal_tokens(
+            page(title, _product_page_body(d, neighbours.get(pid) or {}, sources),
+                 canonical_rel=f'product/{pid}.html', slim=True),
+            f"product/{pid}")
+        (OUT / "product" / f"{pid}.html").write_text(html, encoding="utf-8")
+        made += 1
+    print(f"  product     : {made:,} static pages (top {PRODUCT_STATIC_TOP_N:,})", flush=True)
+    return made
+
+
+def _product_longtail_page() -> str:
+    """长尾产品页 `product.html?pid=<pid>`（单文件；按 pid 定位 1 个桶）。
+
+    - 静态 `noindex,follow`；JS 拿到 name_slug 后把 canonical 指回该产品的**名字页**；
+    - 无 JS / 找不到记录 → 明确提示 + 指向品牌页/成分页/搜索的兜底；
+    - 只渲染身份字段与「不可互换」警示，不给建议、不做换算。
+    """
+    T = I18N["en"]
+    body = f"""<div class="pcard" id="pcard">
+<p class="sub" id="pv-loading" {_pa("product.loading")}>{esc(T["product.loading"])}</p>
+<div id="pv-body" hidden>
+<h1 id="pv-name"></h1>
+<p class="drug-identity"><span id="pv-market"></span> · <span id="pv-status"></span></p>
+<dl class="pdl">
+<dt {_pa("product.inn")}>{esc(T["product.inn"])}</dt><dd id="pv-inn"></dd>
+<dt data-i18n="col.dose">{esc(T["col.dose"])}</dt><dd id="pv-strength"></dd>
+<dt data-i18n="name.form">{esc(T["name.form"])}</dt><dd id="pv-form"></dd>
+<dt data-i18n="name.release">{esc(T["name.release"])}</dt><dd id="pv-release" hidden></dd>
+<dt {_pa("product.pack")}>{esc(T["product.pack"])}</dt><dd id="pv-pack"></dd>
+<dt data-i18n="col.mah">{esc(T["col.mah"])}</dt><dd id="pv-mah"></dd>
+<dt {_pa("product.approval")}>{esc(T["product.approval"])}</dt><dd id="pv-approval"></dd>
+<dt {_pa("product.asof")}>{esc(T["product.asof"])}</dt><dd id="pv-asof"></dd>
+<dt {_pa("product.source")}>{esc(T["product.source"])}</dt><dd id="pv-source"></dd>
+</dl>
+<p class="notice" {_pa("product.notice")}>{esc(T["product.notice"])}</p>
+<p class="sub"><a id="pv-name-link"><span {_pa("product.back_name")}>{esc(T["product.back_name"])}</span></a> · <a id="pv-drug-link"><span {_pa("product.back_drug")}>{esc(T["product.back_drug"])}</span></a></p>
+</div>
+<div id="pv-missing" hidden>
+<h1 {_pa("product.not_found")}>{esc(T["product.not_found"])}</h1>
+<p class="sub" {_pa("product.not_found_hint")}>{esc(T["product.not_found_hint"])}</p>
+<p><a href="index.html" data-i18n="nav.back_search">← Back to search</a></p>
+</div>
+</div>
+<noscript><p class="notice"><span {_pa("product.need_js")}>{esc(T["product.need_js"])}</span>
+<a href="index.html" data-i18n="nav.back_search">← Back to search</a></p></noscript>
+<script>{_PRODUCT_LONGTAIL_JS}</script>"""
+    html = page("Product record", body, "", noindex=True, slim=True)
+    # 长尾页是「一个文件对应所有 pid」→ 不进 sitemap；canonical 由 JS 按 pid 指回名字页。
+    NOINDEX_RELS.add("product.html")
+    return html
+
+
+_PRODUCT_LONGTAIL_JS = r"""
+(function(){
+  var B=512;
+  function bucket(pid){
+    var bytes=new TextEncoder().encode(pid),h=2166136261;
+    for(var i=0;i<bytes.length;i++){h^=bytes[i];h=Math.imul(h,16777619)>>>0;}
+    return h%B;
+  }
+  function pad(n){return ("00"+n).slice(-3);}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
+  function txt(id,s){var el=document.getElementById(id);if(el)el.textContent=(s==null||s==="")?"—":s;}
+  function ok(id,s){var el=document.getElementById(id);if(el){el.textContent=s||"";el.hidden=!s;}}
+  var pid="";
+  try{pid=new URLSearchParams(location.search).get("pid")||"";}catch(e){}
+  if(!pid){document.getElementById("pv-loading").hidden=true;
+    document.getElementById("pv-missing").hidden=false;return;}
+  var b=pad(bucket(pid));
+  Promise.all([
+    fetch("data/product/b-"+b+".json").then(function(r){return r.json();}),
+    fetch("data/product/sources.json").then(function(r){return r.json();}).catch(function(){return {};})
+  ]).then(function(res){
+    var rec=(res[0]||{})[pid], src=(res[1]||{})[rec&&rec.source]||{};
+    document.getElementById("pv-loading").hidden=true;
+    if(!rec){document.getElementById("pv-missing").hidden=false;return;}
+    document.getElementById("pv-body").hidden=false;
+    document.title=(rec.name||pid)+" — "+(rec.inn||"product")+" · "+(rec.c||"");
+    txt("pv-name",rec.name);txt("pv-market",rec.c);txt("pv-status",rec.status);
+    txt("pv-inn",rec.inn);txt("pv-strength",rec.strength);
+    txt("pv-form",rec.form);txt("pv-release",rec.release);
+    txt("pv-pack",rec.pack);txt("pv-mah",rec.mah);txt("pv-approval",rec.approval_id);
+    txt("pv-asof",rec.data_as_of||src.as_of);
+    var sEl=document.getElementById("pv-source");
+    sEl.textContent="";
+    if(src.name){var a=document.createElement("a");a.href=src.url||"#";a.target="_blank";
+      a.rel="noopener";a.textContent=src.name;sEl.appendChild(a);}
+    if(src.license){sEl.appendChild(document.createTextNode(" · "));
+      var L=document.createElement(src.license_url?"a":"span");
+      if(src.license_url){L.href=src.license_url;L.target="_blank";L.rel="noopener";}
+      L.textContent=src.license;sEl.appendChild(L);}
+    if(rec.name_slug){var nl=document.getElementById("pv-name-link");
+      nl.href="name/"+encodeURIComponent(rec.name_slug);}
+    if(rec.drug_slug){var dl=document.getElementById("pv-drug-link");
+      dl.href="drug/"+encodeURIComponent(rec.drug_slug)+".html";}
+    if(rec.name_slug){var c=document.createElement("link");c.rel="canonical";
+      c.href="https://drugcrossref.com/name/"+encodeURIComponent(rec.name_slug);
+      document.head.appendChild(c);}
+  }).catch(function(){
+    document.getElementById("pv-loading").hidden=true;
+    document.getElementById("pv-missing").hidden=false;});
+})();
+"""
+
+
+def write_product_buckets(db: sqlite3.Connection, entries) -> dict:
+    """长尾数据：512 个桶 `data/product/b-<桶>.json` + `sources.json` + `product.html`。
+
+    桶内字段（Lead 定）：name / inn / strength / form / pack / mah / approval_id /
+    status / data_as_of / source / name_slug / drug_slug（另带 c=市场、release=释放机制，
+    页面渲染要用）。按 product_id 的 FNV-1a % 512 稳定分桶；单页只拉 1 个桶。
+    """
+    import gzip
+
+    sources = _load_source_meta(db)
+    slug_by_key = {e["k"]: e["u"] for e in entries if e.get("u")}
+    buckets: list[dict[str, dict]] = [{} for _ in range(PRODUCT_BUCKETS)]
+    src_asof = {sid: s["as_of"] for sid, s in sources.items()}
+    for r in db.execute(
+            """SELECT product_id, COALESCE(country, region), form_base, dosage_form,
+                      release, pack, mah, approval_id, status, source_id
+                 FROM product"""):
+        pid, c, fb, df, rel, pack, mah, ap, st, src = r
+        buckets[product_bucket(pid)][pid] = {
+            "c": c or "", "form": (fb or df or "").strip(), "release": rel or "none",
+            "pack": pack or "", "mah": mah or "", "approval_id": ap or "",
+            "status": st or "unknown", "data_as_of": src_asof.get(src, ""), "source": src or "",
+            "name": "", "inn": "", "strength": "", "name_slug": "", "drug_slug": "",
+        }
+    for pid, key_id, raw in db.execute(
+            """SELECT pn.product_id, pn.key_id, nv.raw
+                 FROM product_name pn
+                 JOIN name_variant nv ON nv.key_id = pn.key_id
+                WHERE pn.name_type = 'trade'
+                ORDER BY pn.product_id, pn.is_primary DESC, pn.key_id"""):
+        rec = buckets[product_bucket(pid)].get(pid)
+        if rec is not None and not rec["name"]:
+            rec["name"] = (raw or "").strip()
+            rec["name_slug"] = slug_by_key.get(key_id, "")
+    for pid, sid, inn, sv, su, pv, pu in db.execute(
+            """SELECT pc.product_id, v.substance_id, s.inn_en, pc.strength_value,
+                      pc.strength_unit, pc.per_volume_value, pc.per_volume_unit
+                 FROM product_component pc
+                 JOIN variant v ON v.variant_id = pc.variant_id
+                 JOIN substance s ON s.substance_id = v.substance_id
+                ORDER BY pc.product_id, pc.ord"""):
+        rec = buckets[product_bucket(pid)].get(pid)
+        if rec is not None and not rec["drug_slug"]:
+            rec["drug_slug"] = sid or ""
+            rec["inn"] = inn or ""
+            rec["strength"] = _spec_text(sv, su, pv, pu)
+    out_dir = OUT / "data" / "product"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    sizes: list[int] = []
+    for i, bucket in enumerate(buckets):
+        payload = json.dumps(bucket, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        (out_dir / f"b-{i:03d}.json").write_bytes(payload)
+        sizes.append(len(gzip.compress(payload, 6)))
+    (out_dir / "sources.json").write_text(
+        json.dumps(sources, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    (OUT / "product.html").write_text(_product_longtail_page(), encoding="utf-8")
+    sizes.sort()
+    stats = {"count": len(buckets), "entries": sum(len(b) for b in buckets),
+             "gz_p50": sizes[len(sizes) // 2], "gz_p95": sizes[int(len(sizes) * 0.95)],
+             "gz_max": sizes[-1]}
+    print(f"  product long: {stats['entries']:,} records → {stats['count']} buckets; "
+          f"gzip P50 {stats['gz_p50']/1024:.0f} KB / P95 {stats['gz_p95']/1024:.0f} KB / "
+          f"max {stats['gz_max']/1024:.0f} KB", flush=True)
+    return stats
 
 
 def _dedupe_variants(display: str, variants: list[str], cap: int = 6) -> list[str]:
@@ -17206,7 +18022,8 @@ def build_combo_pages(entries, db: sqlite3.Connection,
             '<p class="empty" data-i18n="combo.empty">No brand names recorded for this '
             'combination yet.</p>')
         # L7（v0.12.1）：统一页头四件套；原副行「固定成分组合」与页头摘要重复 → 不再单列
-        head = _page_head("../", f'<h1>{esc(title)}</h1>', summary_key="combo.title", crumb="atc")
+        head = _page_head("../", f'<h1>{esc(title)}</h1>', summary_key="combo.title", crumb="atc",
+                          search_mode="quiet", prefill=title)
         body = f"""{head}
 <div data-i18n-html="combo.intro">{T["combo.intro"]}</div>
 <div class="notice" data-i18n="combo.no_advice">{esc(T["combo.no_advice"])}</div>
@@ -17392,7 +18209,8 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
                 single_html += (f'<div class="lang-block" data-lang-block="{lang}">'
                                 f'<p class="sub maker-single-note">{esc(note)}</p></div>')
         # L7（v0.12.1）：页头四件套；原 `maker.title` 副行保留（≤2 行 sub）
-        head = _page_head("../", f'<h1>{esc(info["name"])}</h1>', summary_key="maker.summary")
+        head = _page_head("../", f'<h1>{esc(info["name"])}</h1>', summary_key="maker.summary",
+                          search_mode="quiet")
         body = f"""{head}<p class="sub" data-i18n="maker.title">{esc(T["maker.title"])}</p>
 {intro_blocks}
 {stats_blocks}
@@ -17885,6 +18703,9 @@ def build_about(stats, coverage, source_cover=()) -> None:
                  '<a href="docs/data-dictionary.md" data-i18n="about.data_dictionary">'
                  'Data dictionary</a></p>')
     parts.append('<p class="sub"><a href="coverage.html" data-i18n="nav.coverage">Coverage &amp; freshness</a></p>')
+    # v1.1.1（T5 追加）：About 页底部致谢（九语；人名原文不译 + 括注拼音）。
+    parts.append(f'<div class="about-thanks" {_pa("about.thanks", "html")}>'
+                 f'{T["about.thanks"]}</div>')
     body = "\n".join(parts)
     # v0.10.0 P1-5：来源表补 thead/tbody（渲染期一次性修正，三语共用）
     body = re.sub(r'<table><tr><th>(.*?)</tr>',
@@ -21602,6 +22423,8 @@ def main() -> None:
     _install_zh_hant(_values)
     _install_market_extra_i18n()
     _install_v019_i18n()
+    _install_product_i18n()
+    _install_about_thanks_i18n()
     # R4（v0.12.1）：首页「最近更新」的一句话变化改走 data-i18n（键 `rel.<version>`），
     # 让根页被 ?lang=/localStorage 切语言时也跟随界面语言（原来只有服务端按路径渲染的静态度）。
     _inject_release_liners()
@@ -21724,6 +22547,19 @@ def main() -> None:
         encoding="utf-8")
     print(f"  {len(mk_meta)} markets (source + data_as_of)", flush=True)
 
+    print("selecting static product pages ...", flush=True)
+    # v1.1.1（T5）：静态 Top N 必须先算好 —— 名字页/成分页的产品行要用它决定
+    # 「静态直链 / product.html?pid=」两种链接形态。
+    global PRODUCT_STATIC_IDS
+    static_pids = select_static_product_ids(db)
+    PRODUCT_STATIC_IDS = set(static_pids)
+    _mk_dist: dict[str, int] = {}
+    for _pid in static_pids:
+        _mk_dist[_pid[:2]] = _mk_dist.get(_pid[:2], 0) + 1
+    print(f"  static top N: {len(static_pids):,} products, markets "
+          f"{len(_mk_dist)} ({', '.join(f'{k} {v:,}' for k, v in sorted(_mk_dist.items()))})",
+          flush=True)
+
     print("building drug pages ...", flush=True)
     n_drug = build_drug_pages(db, entries, sub_aliases)
     print("collecting name data ...", flush=True)
@@ -21741,6 +22577,10 @@ def main() -> None:
     displays = {e["k"]: e["d"] for e in entries}
     print("building name pages ...", flush=True)
     n_name = build_name_pages(db, entries, data, families, displays)
+    print("building product pages ...", flush=True)
+    n_product = build_product_pages(db, entries, static_pids)
+    print("building product long-tail data ...", flush=True)
+    product_bucket_stats = write_product_buckets(db, entries)
     print("building combo pages ...", flush=True)
     n_combo = build_combo_pages(entries, db)
     print("building maker pages ...", flush=True)
@@ -21780,6 +22620,10 @@ def main() -> None:
     print(f"  name pages : {n_name}")
     print(f"  combo pages: {n_combo}")
     print(f"  maker pages: {n_maker} (threshold >= {MAKER_MIN_PRODUCTS} products)")
+    print(f"  product pages: {n_product} (static; long-tail via product.html?pid=)")
+    print(f"  product data : {product_bucket_stats['entries']:,} records → "
+          f"{product_bucket_stats['count']} buckets (gzip max "
+          f"{product_bucket_stats['gz_max']/1024:.0f} KB)")
     print(f"  confused   : {n_conf} pairs")
     print(f"  warnings   : {n_warn} published")
     print(f"  core.json  : {(OUT / 'data' / 'idx' / 'core.json').stat().st_size / 1e6:.1f} MB"
