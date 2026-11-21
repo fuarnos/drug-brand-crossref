@@ -6582,6 +6582,209 @@ MARKET_EXTRA_I18N: dict[str, dict[str, str]] = {
         "cs": '<p class="sub"><b>Malajsie 马来西亚</b>: NPRA / Ministerstvo zdravotnictví Malajsie — <b>schválené / zrušené léčivé přípravky</b> (administrativní záznamy QUEST3+), zveřejněné přes <b>data.gov.my</b> pod <b>CC BY 4.0</b> (uvedení zdroje: NPRA / data.gov.my, bez naznačení schválení). Data k <b>2026-11-18</b> (snapshot 2026-11-20): <b>29 956</b> produktů = <b>28 333 schválených</b> + <b>1 623 zrušených</b> (stav a datum zrušení zachovány). Pouze faktické údaje (název, složky a síla, pokud je zdroj kóduje, léková forma, registrační číslo, MAH, stav); tradiční/přírodní produkty se <b>nepřevádějí násilně</b> na západní INN; SPC/příbalové letáky se nesbírají ani nezveřejňují. Zápis v registru neprokazuje současné dodávky.</p>',
         "lv": '<p class="sub"><b>Malaizija 马来西亚</b>: NPRA / Malaizijas Veselības ministrija — <b>apstiprinātie / atceltie medikamenti</b> (QUEST3+ administratīvie ieraksti), publicēti ar <b>data.gov.my</b> starpniecību saskaņā ar <b>CC BY 4.0</b> (norāde: NPRA / data.gov.my, bez apstiprinājuma implicēšanas). Dati uz <b>2026-11-18</b> (snapshot 2026-11-20): <b>29 956</b> produkti = <b>28 333 apstiprināti</b> + <b>1 623 atcelti</b> (statuss un atcelšanas datums saglabāti). Tikai faktiskie lauki (nosaukums, sastāvdaļas un stiprums, ja avots tos kodē, zāļu forma, reģistrācijas numurs, MAH, statuss); tradicionālie/dabiskie produkti <b>netiek piespiedu kārtā</b> kartēti uz Rietumu INN; SPC/lietošanas instrukcijas netiek iegūtas un nepārpublicētas. Ieraksts reģistrā nepierāda pašreizēju piegādi.</p>',
     },
+    # ── v1.1.0（NO，2026-11-22）：第 16 个市场挪威（DMP FEST 2.5.1 / NLOD 2.0）───────────
+    # 与 MY 同型：只补这个市场要的 3 个键（市场名 / 覆盖页缺口说明 / About 来源段），
+    # 不动 9 张全键表；ui_language_gaps=["nb","no"] 写在 markets.json，覆盖页自动显示
+    # 「母语 nb, no 未覆盖」（本版不新增界面语言）。
+    "home.no": {
+        "en": 'Norway',
+        "es": 'Noruega',
+        "zh": '挪威',
+        "zh-Hant": '挪威',
+        "fr": 'Norvège',
+        "ko": '노르웨이',
+        "ja": 'ノルウェー',
+        "cs": 'Norsko',
+        "lv": 'Norvēģija',
+    },
+    "coverage.gap.no": {
+        "en": ('DMP FEST 2.5.1 (prescription-chain data service, not a full register; brand + package '
+               'layers) under NLOD 2.0 — attribution: Norwegian Medical Products Agency (DMP), changes '
+               'indicated; data as of 2026-11-10 (8,985 brands / 10,867 packages). The source has a '
+               'single status value (active); discontinued/withdrawn are inferred from package-level '
+               'flags, not an official status field. No registration number (order number and barcode '
+               'only).'),
+        "es": ('DMP FEST 2.5.1 (servicio de datos de la cadena de prescripción, no un registro completo; '
+               'capas de marca + envase) bajo NLOD 2.0 — atribución: Agencia Noruega de Productos '
+               'Sanitarios (DMP), cambios indicados; datos al 2026-11-10 (8.985 marcas / 10.867 '
+               'envases). La fuente solo tiene un valor de estado (activo); la baja o retirada se infiere '
+               'de marcas a nivel de envase, no es un campo oficial. Sin número de registro (solo número '
+               'de pedido y código de barras).'),
+        "zh": ('仅收 DMP FEST 2.5.1（处方链数据服务，不是注册库全量；品牌 + 包装两层），NLOD 2.0、'
+               '署名挪威医疗产品管理局（DMP）并标明本站改动；数据截至 2026-11-10（8,985 条品牌 / '
+               '10,867 条包装）。状态：源只有「活动条目」一个值，停用/撤市只能由包装级标记推断'
+               '（不是官方状态字段）；也没有注册号（只有订货号与条码）。'),
+        "zh-Hant": ('僅收 DMP FEST 2.5.1（處方鏈資料服務，不是註冊庫全量；品牌 + 包裝兩層），NLOD 2.0、'
+                    '署名挪威醫療產品管理局（DMP）並標明本站改動；資料截至 2026-11-10（8,985 筆品牌 / '
+                    '10,867 筆包裝）。狀態：來源只有「活動條目」一個值，停用/撤市只能由包裝級標記推斷'
+                    '（不是官方狀態欄位）；也沒有註冊號（只有訂貨號與條碼）。'),
+        "fr": ("DMP FEST 2.5.1 (service de données de la chaîne de prescription, pas un registre "
+               "complet ; couches marque + conditionnement) sous NLOD 2.0 — attribution : Agence "
+               "norvégienne des produits médicaux (DMP), modifications indiquées ; données au "
+               "2026-11-10 (8 985 marques / 10 867 conditionnements). La source ne comporte qu'une seule "
+               "valeur de statut (actif) ; l'arrêt ou le retrait est déduit de marqueurs au niveau du "
+               "conditionnement, pas d'un champ officiel. Pas de numéro d'enregistrement (seulement "
+               "numéro de commande et code-barres)."),
+        "ko": ('DMP FEST 2.5.1(처방 체인 데이터 서비스, 등록부 전체가 아님; 브랜드 + 포장)을 NLOD 2.0으로 '
+               '수록 — 출처 표기: 노르웨이 의료제품청(DMP), 변경 사항 명시; 데이터 기준일 2026-11-10'
+               '(브랜드 8,985 / 포장 10,867). 상태 값은 출처에 "활성" 하나뿐이며, 단종·회수는 포장 단위 '
+               '표시에서 추론한 것(공식 상태 필드 아님)입니다. 등록번호도 없음(주문번호와 바코드만 있음).'),
+        "ja": ('DMP FEST 2.5.1（処方連鎖のデータサービスで、登録簿の全量ではありません。ブランド＋包装）を '
+               'NLOD 2.0 で収録 — 出典：ノルウェー医薬品庁（DMP）、改変を明示。データ基準日 2026-11-10'
+               '（ブランド 8,985／包装 10,867）。状態値は出典に「有効」の 1 種類のみで、中止・回収は'
+               '包装単位の表示から推定したもの（公式の状態項目ではありません）。登録番号もありません'
+               '（注文番号とバーコードのみ）。'),
+        "cs": ('DMP FEST 2.5.1 (datová služba předpisového řetězce, nikoli úplný registr; značky + balení) '
+               'pod NLOD 2.0 — uvedení zdroje: Norská agentura pro léčivé přípravky (DMP), změny uvedeny; '
+               'data k 2026-11-10 (8 985 značek / 10 867 balení). Zdroj má jedinou hodnotu stavu '
+               '(aktivní); ukončení/stažení lze odvodit jen z označení na úrovni balení, nejde o oficiální '
+               'pole stavu. Bez registračního čísla (jen objednací číslo a čárový kód).'),
+        "lv": ('DMP FEST 2.5.1 (receptes ķēdes datu serviss, nevis pilns reģistrs; zīmoli + iepakojumi) '
+               'saskaņā ar NLOD 2.0 — norāde: Norvēģijas Zāļu aģentūra (DMP), izmaiņas norādītas; dati uz '
+               '2026-11-10 (8 985 zīmoli / 10 867 iepakojumi). Avotā ir tikai viena statusa vērtība '
+               '(aktīvs); pārtraukšanu/izņemšanu var secināt tikai no iepakojuma līmeņa atzīmēm, tas nav '
+               'oficiāls statusa lauks. Nav reģistrācijas numura (tikai pasūtījuma numurs un svītrkods).'),
+    },
+    "about.no_source": {
+        "en": ('<p class="sub"><b>Norway 挪威</b>: DMP (Direktoratet for medisinske produkter / '
+               'Norwegian Medical Products Agency; earlier English abbreviation NOMA) — <b>FEST 2.5.1</b> '
+               '“Rekvirent-uttrekk” (brand LegemiddelMerkevare + package Legemiddelpakning layers) '
+               'under <b>NLOD 2.0</b>; attribution: <i>Contains data under the Norwegian Licence for '
+               'Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products Agency '
+               '(DMP). Changes have been made by DrugCrossRef (normalisation of ingredient names, '
+               'strengths and dosage forms).</i> Data as of <b>2026-11-10</b>. <b>FEST is a '
+               'prescription-chain data service, not the full register</b>: the source publishes a '
+               'single status value (active) and discontinued/withdrawn are inferred from package-level '
+               'flags, not an official status field; there is <b>no registration number</b> (order number '
+               'and barcode only). Facts only (brand name, ingredients and strength, dosage form, pack '
+               'size, MAH, status); package prices and SmPC texts are not stored. '
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">FEST at DMP</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
+        "es": ('<p class="sub"><b>Noruega 挪威</b>: DMP (Direktoratet for medisinske produkter / Agencia '
+               'Noruega de Productos Sanitarios; antes NOMA) — <b>FEST 2.5.1</b> «Rekvirent-uttrekk» '
+               '(capas de marca LegemiddelMerkevare + envase Legemiddelpakning) bajo <b>NLOD 2.0</b>; '
+               'atribución: <i>Contiene datos bajo la Licencia Noruega para Datos del Sector Público '
+               'Abiertos (NLOD 2.0) distribuidos por la Agencia Noruega de Productos Sanitarios (DMP). '
+               'DrugCrossRef ha realizado cambios (normalización de nombres de principios activos, '
+               'concentraciones y formas farmacéuticas).</i> Datos al <b>2026-11-10</b>. <b>FEST es un '
+               'servicio de datos de la cadena de prescripción, no el registro completo</b>: publica un '
+               'único valor de estado (activo), y la baja o retirada se infiere de marcas a nivel de '
+               'envase (no es un campo oficial); <b>no tiene número de registro</b> (solo número de '
+               'pedido y código de barras). Solo campos fácticos (nombre comercial, principios activos y '
+               'concentración, forma farmacéutica, tamaño de envase, MAH, estado); no se almacenan precios '
+               'de envase ni textos de SmPC. '
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">FEST en DMP</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
+        "zh": ('<p class="sub"><b>挪威</b>：挪威医疗产品管理局（DMP，Direktoratet for medisinske '
+               'produkter；英文页旧缩写 NOMA）的 <b>FEST 2.5.1</b>「Rekvirent-uttrekk」（品牌 '
+               'LegemiddelMerkevare + 包装 Legemiddelpakning 两层），许可 <b>NLOD 2.0</b>（挪威政府开放'
+               '数据许可，可复制/修改/再分发/商用，须署名并标明修改）；署名原文：<i>Contains data under '
+               'the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian '
+               'Medical Products Agency (DMP). Changes have been made by DrugCrossRef (normalisation of '
+               'ingredient names, strengths and dosage forms).</i> 数据截至 <b>2026-11-10</b>。'
+               '<b>FEST 是处方链数据服务，不是注册库全量</b>：源只有「活动条目」一个状态值，停用/撤市'
+               '只能由包装级标记推断（不是官方状态字段）；且<b>没有注册号</b>（只有订货号与条码）。只存'
+               '事实字段（商品名、成分与含量、剂型、包装规格、MAH、状态）；不存包装价格与 SmPC 正文。'
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">DMP FEST</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>。</p>'),
+        "zh-Hant": ('<p class="sub"><b>挪威</b>：挪威醫療產品管理局（DMP，Direktoratet for medisinske '
+                    'produkter；英文頁舊縮寫 NOMA）的 <b>FEST 2.5.1</b>「Rekvirent-uttrekk」（品牌 '
+                    'LegemiddelMerkevare + 包裝 Legemiddelpakning 兩層），授權 <b>NLOD 2.0</b>（挪威政府'
+                    '開放資料授權，可複製/修改/再散佈/商用，須署名並標明修改）；署名原文：<i>Contains '
+                    'data under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by '
+                    'the Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef '
+                    '(normalisation of ingredient names, strengths and dosage forms).</i> 資料截至 '
+                    '<b>2026-11-10</b>。<b>FEST 是處方鏈資料服務，不是註冊庫全量</b>：來源只有「活動條目」'
+                    '一個狀態值，停用/撤市只能由包裝級標記推斷（不是官方狀態欄位）；且<b>沒有註冊號</b>'
+                    '（只有訂貨號與條碼）。只存事實欄位（商品名、成分與含量、劑型、包裝規格、MAH、狀態）；'
+                    '不存包裝價格與 SmPC 正文。'
+                    '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+                    'electronic-prescription-support-system-fest">DMP FEST</a> · '
+                    '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>。</p>'),
+        "fr": ('<p class="sub"><b>Norvège 挪威</b> : DMP (Direktoratet for medisinske produkter / Agence '
+               'norvégienne des produits médicaux ; ancien sigle NOMA) — <b>FEST 2.5.1</b> « '
+               'Rekvirent-uttrekk » (couches marque LegemiddelMerkevare + conditionnement '
+               'Legemiddelpakning) sous <b>NLOD 2.0</b> ; attribution : <i>Contains data under the '
+               'Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian '
+               'Medical Products Agency (DMP). Changes have been made by DrugCrossRef (normalisation of '
+               'ingredient names, strengths and dosage forms).</i> Données au <b>2026-11-10</b>. '
+               '<b>FEST est un service de données de la chaîne de prescription, pas le registre '
+               'complet</b> : la source ne comporte qu’une seule valeur de statut (actif) ; l’arrêt ou le '
+               'retrait est déduit de marqueurs au niveau du conditionnement, pas d’un champ officiel, et '
+               'il n’y a <b>pas de numéro d’enregistrement</b> (seulement numéro de commande et '
+               'code-barres). Champs factuels uniquement (nom commercial, principes actifs et dosage, '
+               'forme, taille du conditionnement, MAH, statut) ; les prix et les textes de SmPC ne sont '
+               'pas stockés. '
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">FEST chez DMP</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
+        "ko": ('<p class="sub"><b>노르웨이 挪威</b>: 노르웨이 의료제품청(DMP, Direktoratet for medisinske '
+               'produkter; 영어 페이지의 옛 약칭 NOMA)의 <b>FEST 2.5.1</b>「Rekvirent-uttrekk」(브랜드 '
+               'LegemiddelMerkevare + 포장 Legemiddelpakning 두 계층), 라이선스 <b>NLOD 2.0</b>(노르웨이 '
+               '공공데이터 개방 라이선스, 복제·수정·재배포·상업적 이용 허용, 출처 표기와 변경 명시 필요); '
+               '출처 표기 원문: <i>Contains data under the Norwegian Licence for Open Government Data '
+               '(NLOD 2.0) distributed by the Norwegian Medical Products Agency (DMP). Changes have been '
+               'made by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms).</i> '
+               '데이터 기준일 <b>2026-11-10</b>. <b>FEST는 처방 체인 데이터 서비스이며 등록부 전체가 '
+               '아닙니다</b>: 출처의 상태 값은 "활성" 하나뿐이고, 단종·회수는 포장 단위 표시에서 추론한 '
+               '것(공식 상태 필드 아님)이며 <b>등록번호가 없습니다</b>(주문번호와 바코드만 있음). 사실 '
+               '항목만 저장합니다(제품명, 성분·함량, 제형, 포장 규격, MAH, 상태); 포장 가격과 SmPC 전문은 '
+               '저장하지 않습니다. '
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">DMP FEST</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
+        "ja": ('<p class="sub"><b>ノルウェー 挪威</b>：ノルウェー医薬品庁（DMP、Direktoratet for '
+               'medisinske produkter。英語ページの旧略称 NOMA）の <b>FEST 2.5.1</b>「Rekvirent-uttrekk」'
+               '（ブランド LegemiddelMerkevare ＋ 包装 Legemiddelpakning の 2 層）、ライセンス '
+               '<b>NLOD 2.0</b>（ノルウェー政府オープンデータライセンス。複製・改変・再配布・商用利用'
+               '可、出典表示と改変の明示が必要）。出典表示の原文：<i>Contains data under the Norwegian '
+               'Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products '
+               'Agency (DMP). Changes have been made by DrugCrossRef (normalisation of ingredient names, '
+               'strengths and dosage forms).</i> データ基準日 <b>2026-11-10</b>。<b>FEST は処方連鎖の'
+               'データサービスであり、登録簿の全量ではありません</b>：出典の状態値は「有効」の 1 種類'
+               'のみで、中止・回収は包装単位の表示から推定したもの（公式の状態項目ではありません）。'
+               '<b>登録番号もありません</b>（注文番号とバーコードのみ）。事実項目のみを保存します'
+               '（製品名、成分・含量、剤形、包装規格、MAH、状態）。包装価格と SmPC 本文は保存しません。'
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">DMP FEST</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>。</p>'),
+        "cs": ('<p class="sub"><b>Norsko 挪威</b>: DMP (Direktoratet for medisinske produkter / Norská '
+               'agentura pro léčivé přípravky; dříve NOMA) — <b>FEST 2.5.1</b> „Rekvirent-uttrekk" '
+               '(vrstvy značka LegemiddelMerkevare + balení Legemiddelpakning) pod <b>NLOD 2.0</b> '
+               '(norská licence pro otevřená veřejná data; kopírování, úpravy, další šíření a komerční '
+               'užití povoleno, nutné uvedení zdroje a označení změn); uvedení zdroje: <i>Contains data '
+               'under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the '
+               'Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef '
+               '(normalisation of ingredient names, strengths and dosage forms).</i> Data k '
+               '<b>2026-11-10</b>. <b>FEST je datová služba předpisového řetězce, nikoli úplný '
+               'registr</b>: zveřejňuje jedinou hodnotu stavu (aktivní); ukončení/stažení lze odvodit jen '
+               'z označení na úrovni balení, nejde o oficiální pole stavu, a nemá <b>registrační číslo</b> '
+               '(jen objednací číslo a čárový kód). Pouze faktické údaje (název, účinné látky a síla, '
+               'léková forma, velikost balení, MAH, stav); ceny balení a texty SmPC se neukládají. '
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">FEST na DMP</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
+        "lv": ('<p class="sub"><b>Norvēģija 挪威</b>: DMP (Direktoratet for medisinske produkter / '
+               'Norvēģijas Zāļu aģentūra; agrāk NOMA) — <b>FEST 2.5.1</b> “Rekvirent-uttrekk” (zīmola '
+               'LegemiddelMerkevare + iepakojuma Legemiddelpakning slāņi) saskaņā ar <b>NLOD 2.0</b> '
+               '(Norvēģijas atvērto valsts datu licence: kopēšana, grozīšana, tālākizplatīšana un '
+               'komerciāla izmantošana atļauta, jānorāda avots un jāatzīmē izmaiņas); norāde: <i>Contains '
+               'data under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the '
+               'Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef '
+               '(normalisation of ingredient names, strengths and dosage forms).</i> Dati uz '
+               '<b>2026-11-10</b>. <b>FEST ir receptes ķēdes datu serviss, nevis pilns reģistrs</b>: '
+               'publicē tikai vienu statusa vērtību (aktīvs); pārtraukšanu/izņemšanu var secināt tikai no '
+               'iepakojuma līmeņa atzīmēm, tas nav oficiāls statusa lauks, un tajā nav '
+               '<b>reģistrācijas numura</b> (tikai pasūtījuma numurs un svītrkods). Tikai faktiskie lauki '
+               '(nosaukums, sastāvdaļas un stiprums, zāļu forma, iepakojuma lielums, MAH, statuss); '
+               'iepakojuma cenas un SmPC teksti netiek glabāti. '
+               '<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/'
+               'electronic-prescription-support-system-fest">FEST DMP vietnē</a> · '
+               '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
+    },
 }
 
 
@@ -7679,6 +7882,27 @@ endorsement implied. 中文：依新加坡開放資料授權條款第 1 版（SO
 成分名可譯。ES: contiene información del registro de HSA bajo la SODL v1.0 con atribución;
 datos hasta 2026-08-07; estar en el registro no implica comercialización.</li>
 <li><b>Malaysia 马来西亚 / Malasia</b>: NPRA / Ministry of Health Malaysia — <b>Approved / Cancelled Pharmaceutical Products</b> (QUEST3+), published via <a href="https://data.gov.my/data-catalogue/pharmaceutical_products">data.gov.my</a> under <b>CC BY 4.0</b> (attribution: NPRA / data.gov.my; no implied endorsement); administrative records only — an entry does not prove current supply. 中文：马来西亚卫生部 NPRA 的已批准／已注销药品清单（QUEST3+，经 data.gov.my 发布），CC BY 4.0（署名 NPRA / data.gov.my，不得暗示背书）；行政记录，「登记 ≠ 在售」。ES: NPRA / Ministerio de Salud de Malasia — productos aprobados / cancelados (QUEST3+), publicados vía data.gov.my bajo CC BY 4.0 (atribución: NPRA / data.gov.my, sin implicar respaldo); registros administrativos, el registro no implica venta actual. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+<li><b>Norway 挪威 / Norge</b>: <b>DMP</b> (Direktoratet for medisinske produkter / Norwegian Medical
+Products Agency; earlier English abbreviation NOMA) — <b>FEST 2.5.1</b> under <b>NLOD 2.0</b>
+(Norwegian Licence for Open Government Data; attribution and indication of changes required;
+compatible with CC BY 4.0 / OGL). Attribution notice: <i>Contains data under the Norwegian Licence
+for Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products Agency (DMP).
+Changes have been made by DrugCrossRef (normalisation of ingredient names, strengths and dosage
+forms).</i> Data as of <b>2026-11-10</b>; FEST is a <b>prescription-chain data service, not the full
+register</b> — a single status value (active; withdrawals inferred from package flags), and no
+registration numbers (order number and barcode only).
+中文：挪威医疗产品管理局（DMP）<b>FEST 2.5.1</b> 数据，按<b>挪威政府开放数据许可 NLOD 2.0</b> 提供
+（可复制/修改/再分发/商用；须署名并标明修改；与 CC BY 4.0 / OGL 兼容）；署名：本站含 DMP 按 NLOD 2.0
+提供的 FEST 数据，并已做归一化修改（成分名、规格、剂型）。数据截至 <b>2026-11-10</b>；FEST 是
+<b>处方链数据服务，不是注册库全量</b>，源只有「活动条目」一个状态值（停用/撤市由包装级标记推断）、
+没有注册号（只有订货号与条码）。
+Norsk: Inneholder data under <b>Norsk lisens for offentlige data (NLOD 2.0)</b> tilgjengeliggjort av
+<b>Direktoratet for medisinske produkter (DMP)</b>. Endringer er gjort av DrugCrossRef (normalisering
+av virkestoffnavn, styrker og legemiddelformer). Data per <b>2026-11-10</b>; FEST er en datatjeneste
+for reseptkjeden, <b>ikke et fullstendig register</b> — én statusverdi (aktiv; utmeldinger må
+utledes fra pakningsnivå), uten registreringsnummer (bare varenummer og strekkode).
+<a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/electronic-prescription-support-system-fest">DMP FEST</a> ·
+<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a></li>
 <li><b>WHO ATC/DDD Index</b>: ATC codes and hierarchy reference the <b>WHO Collaborating Centre
 for Drug Statistics Methodology</b> ATC/DDD Index; the Index itself is copyrighted and is not
 reproduced. Class/category names shown on ATC pages are editorial or AI-assisted translations,
@@ -13058,6 +13282,26 @@ SHELL_MARKETS = _registry_shell_markets()
 SHELL_LANGS = tuple(code for code, _label, _path in LANGS)
 
 
+def _market_filter_codes(coverage=()) -> tuple[str, ...]:
+    """首页两个下拉（目标市场 / 来源市场）的市场码：与市场菜单同源、同序。
+
+    = data/markets.json 的 enabled 市场（SHELL_MARKETS，与顶部菜单、覆盖页行同一份、同一顺序）
+    ∪ 注册表未启用但库里有数据的市场（兜底：将来若关掉某市场开关而数据仍在库里，
+    筛选里不会突然少一项，也不会在页面间出现两套清单）。新增市场只改注册表一处。
+    """
+    codes = [code for code, _key in SHELL_MARKETS]
+    have = {str(r.get("country") or "") for r in (coverage or ())}
+    return tuple(codes + sorted(c for c in have if c and c not in codes))
+
+
+def _market_options_html(coverage=()) -> str:
+    """两处 <select> 共用的 <option> 串（country / src 同一份清单，禁止各维护一份）。"""
+    return "".join(
+        f'<option value="{esc(code)}" data-i18n="home.{code.lower()}">'
+        f'{esc(I18N["en"].get("home." + code.lower(), code))}</option>'
+        for code in _market_filter_codes(coverage))
+
+
 def _mkblock_js() -> str:
     """K1/T35（v0.11.10）：成分页市场块（原生 `<details>`）的渐进增强脚本。
 
@@ -14411,9 +14655,32 @@ def _market_is_enabled(code: str) -> bool:
         return False
 
 
-COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "MY", "EU")
+COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "MY", "NO", "EU")
                     + (("FR",) if _market_is_enabled("FR") else ()))
 MATRIX_ROW_CAP = 120
+
+# v1.1.0（NO，2026-11-22）：矩阵列 / 国家 chips 的**语言偏好前缀**。
+# 全站统一序只有一份 = COUNTRY_PRIORITY；前缀只负责把本语言相关市场提前，
+# 新增市场只改 COUNTRY_PRIORITY 一处，不在这里再抄一份国家清单。
+# FR（order 52，2026-11-14 上线）历史列序排在 HK 之后，这里保留原位置以免矩阵列序变动。
+_MARKET_ORDER_PREFIX: dict[str, tuple[str, ...]] = {
+    "en": ("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "FR"),
+    "es": ("ES", "MX", "US", "GB", "CA", "AU", "SG", "CN", "TW", "HK", "FR"),
+    "zh": ("CN", "TW", "HK", "SG", "US", "GB", "CA", "AU", "ES", "MX", "FR"),
+    "zh-Hant": ("TW", "CN", "HK", "SG", "US", "GB", "CA", "AU", "ES", "MX", "FR"),
+}
+
+
+def market_order_for(lang: str) -> list[str]:
+    """某界面语言的国家列序 = 偏好前缀 + 统一序里剩下的市场（不重复、不遗漏）。
+
+    没有偏好前缀的界面语言（fr/ko/ja/cs/lv）沿用 en 序（与 v0.13.0 起的运行时行为一致）。
+    """
+    head = _MARKET_ORDER_PREFIX.get(lang) or _MARKET_ORDER_PREFIX["en"]
+    return list(head) + [c for c in COUNTRY_PRIORITY if c not in head]
+
+
+MORDER_JSON = {code: market_order_for(code) for code in ("en", "es", "zh", "zh-Hant")}
 
 
 def _strength_suspect(text: str) -> bool:
@@ -17423,6 +17690,8 @@ def _home_recent(prefix: str, lang: str = "en", limit: int = 3) -> str:
 def build_index_page(entries, stats, coverage) -> None:
     """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
+    # v1.1.0（NO）：两处 <select> 的选项由同一份市场清单生成（见 _market_filter_codes）。
+    market_options = _market_options_html(coverage)
     body = f"""<h1 id="h1" data-i18n="home.h1">Look up a medicine name — see what it is in each country</h1>
 <p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work.</p>
 <ol class="flow3">
@@ -17458,30 +17727,10 @@ def build_index_page(entries, stats, coverage) -> None:
   <div class="ctry-panel">
   <label class="sel-label" for="country" data-i18n="home.country_label">Target market: show the names used there (optional)</label>
   <select id="country"><option value="" data-i18n="home.all">All countries and regions</option>
-    <option value="US" data-i18n="home.us">United States</option>
-    <option value="GB" data-i18n="home.gb">United Kingdom</option>
-    <option value="CN" data-i18n="home.cn">China</option>
-    <option value="ES" data-i18n="home.es">Spain</option>
-    <option value="MX" data-i18n="home.mx">Mexico</option>
-    <option value="AU" data-i18n="home.au">Australia</option>
-    <option value="CA" data-i18n="home.ca">Canada</option>
-    <option value="TW" data-i18n="home.tw">Taiwan</option>
-    <option value="HK" data-i18n="home.hk">Hong Kong</option>
-    <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="JP" data-i18n="home.jp">Japan</option><option value="CZ" data-i18n="home.cz">Czechia</option><option value="LV" data-i18n="home.lv">Latvia</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
+    {market_options}</select>
   <label class="sel-label src-label" for="src" data-i18n="res.src_label">Source market (only records from):</label>
   <select id="src"><option value="" data-i18n="res.src_all">All source markets</option>
-    <option value="US" data-i18n="home.us">United States</option>
-    <option value="GB" data-i18n="home.gb">United Kingdom</option>
-    <option value="CN" data-i18n="home.cn">China</option>
-    <option value="ES" data-i18n="home.es">Spain</option>
-    <option value="MX" data-i18n="home.mx">Mexico</option>
-    <option value="AU" data-i18n="home.au">Australia</option>
-    <option value="CA" data-i18n="home.ca">Canada</option>
-    <option value="TW" data-i18n="home.tw">Taiwan</option>
-    <option value="HK" data-i18n="home.hk">Hong Kong</option>
-    <option value="SG" data-i18n="home.sg">Singapore</option>
-    <option value="JP" data-i18n="home.jp">Japan</option><option value="CZ" data-i18n="home.cz">Czechia</option><option value="LV" data-i18n="home.lv">Latvia</option><option value="EU" data-i18n="home.eu">European Union (EU)</option><option value="FR" data-i18n="home.fr">France</option></select>
+    {market_options}</select>
   </div>
 </details>
 <p class="sub report-line" id="report" style="display:none">
@@ -17555,7 +17804,19 @@ SOURCE_SHORT = {
     # v0.13.0（CZ/LV 上车）：About 覆盖表的「数据日期」列按 source_id 取短名
     "sukl_dlp": "SÚKL",
     "zva_lv_register": "ZVA",
+    # v1.1.0（NO 上车）：FEST 的发布机构是 DMP（Direktoratet for medisinske produkter）。
+    "dmp_fest": "DMP FEST",
     "manual_seed": "manual",
+}
+
+
+# v1.1.0（NO，2026-11-22）：许可要求「指定署名句」的来源 → datapackage.json 的
+# sources[].attribution（NLOD 2.0 §5：署名许可方 + 明确标出修改）。只给需要的来源加这个键，
+# 其它来源的 datapackage 产物保持逐字节不变（发布增量与 A/A 确定性）。
+SOURCE_ATTRIBUTION = {
+    "dmp_fest": ("Contains data under the Norwegian Licence for Open Government Data (NLOD 2.0) "
+                 "distributed by the Norwegian Medical Products Agency (DMP). Changes have been made "
+                 "by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms)."),
 }
 
 
@@ -17605,7 +17866,7 @@ def build_about(stats, coverage, source_cover=()) -> None:
     for key in ("about.lead", "about.rules", "about.nick", "about.nick_merged", "about.terms",
                 "about.sources", "about.loading", "about.tw_source", "about.sg_source",
                 "about.hk_source", "about.au_source", "about.eu_source", "about.cz_source",
-                "about.lv_source", "about.my_source", "about.fr_source"):
+                "about.lv_source", "about.my_source", "about.no_source", "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     # v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口（只链接、不复制数据），六语由 i18n.js 切换
     parts.append(_official_links_html())
@@ -19838,13 +20099,18 @@ def build_data_package(db: sqlite3.Connection, stats: dict, coverage, source_cov
     for r in db.execute("SELECT source_id, name, url, license, license_url, data_as_of FROM source ORDER BY source_id"):
         countries = sorted(c for c in source_countries.get(r["source_id"], set()) if c)
         non_redist = bool(set(countries) & restricted)
-        sources.append({
+        entry = {
             "id": r["source_id"], "name": r["name"], "url": r["url"],
             "license": r["license"], "license_url": r["license_url"],
             "data_as_of": r["data_as_of"], "countries": countries,
             "redistributable": not non_redist,
             "note": "non_redistributable: aggregate facts only; no raw-record export" if non_redist else "",
-        })
+        }
+        # v1.1.0（NO）：NLOD 2.0 等许可要求的具体署名句；其它来源不加键，产物不变。
+        attribution = SOURCE_ATTRIBUTION.get(r["source_id"])
+        if attribution:
+            entry["attribution"] = attribution
+        sources.append(entry)
 
     version = LATEST_VERSION or "v0.9.2"
     # v0.9.9 task-14：数据包时间戳以前取「构建时刻」（精确到秒）→ 两次构建必不同，
@@ -20585,10 +20851,9 @@ def main() -> None:
     // v0.6.6：成分页多国矩阵按界面语言排序列（服务端默认 en 序：US/GB/CA/AU/CN/ES/MX）。
     // v0.6.6/v0.7.0/v0.7.x：语言列序（含 TW/SG：zh → CN,TW,SG；zh-Hant → TW,CN,HK,SG；es → ES,MX…）
     // v0.13.0（task-4）：补 FR/JP/CZ/LV —— 原来缺这些码会让 rank[code] 为 undefined（矩阵列/国家 chips 排到 99 之后，顺序不稳定）
-    var MORDER = {en: ['US','GB','CA','AU','SG','CN','ES','MX','TW','HK','FR','JP','CZ','LV','MY','EU'],
-                  es: ['ES','MX','US','GB','CA','AU','SG','CN','TW','HK','FR','JP','CZ','LV','MY','EU'],
-                  zh: ['CN','TW','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','MY','EU'],
-                  'zh-Hant': ['TW','CN','HK','SG','US','GB','CA','AU','ES','MX','FR','JP','CZ','LV','MY','EU']};
+    // v1.1.0（NO）：列序改为构建期注入（market_order_for() = 语言偏好前缀 + COUNTRY_PRIORITY），
+    // 不再在 JS 里手抄一份国家清单；新增市场只改 build.py 的 COUNTRY_PRIORITY 一处。
+    var MORDER = __MORDER_JSON__;
     var morder = MORDER[window.LANG] || MORDER.en;
     window.COUNTRY_ORDER = morder;   // app.js 用它给国家 chips 排序
     document.querySelectorAll('table.matrix').forEach(function(tb){
@@ -21236,7 +21501,9 @@ def main() -> None:
     "__LANG_LABELS_JSON__",
     json.dumps(LANG_NATIVE_LABELS, ensure_ascii=False, separators=(",", ":"))).replace(
     "__LANG_LABEL_JSON__",
-    json.dumps(LANG_LABEL, ensure_ascii=False, separators=(",", ":")))
+    json.dumps(LANG_LABEL, ensure_ascii=False, separators=(",", ":"))).replace(
+    "__MORDER_JSON__",
+    json.dumps(MORDER_JSON, ensure_ascii=False, separators=(",", ":")))
     def _write_i18n_assets(announce: bool = False) -> None:
         """写 i18n 资产：四语全量 `assets/i18n.js` + 每语言一份 `assets/i18n.<lang>.js`。
 

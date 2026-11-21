@@ -51,10 +51,12 @@ DB = ROOT / "data" / "drugs.db"
 # v0.16.0（2026-11-20，L2）：ja 接入为第 7 个界面语言（只加界面语言，不加市场）→ 14 国/7 语。
 # v0.17.0（2026-11-20，L3）：cs / lv 接入为第 8、9 个界面语言（只加界面语言，不加市场）→ 14 国/9 语。
 # 2026-11-20（M7/task-7）：MY 市场接入（NPRA/QUEST3+）→ 15 国 + EU；马来语界面未接入，gap=["ms"]。
+# 2026-11-22（NO，v1.1.0）：NO 市场接入（DMP FEST 2.5.1 / NLOD 2.0）→ 16 国 + EU；
+#   挪威语界面未接入（本版不新增界面语言），gap=["nb","no"]。
 SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/"),
               ("fr", "fr/"), ("ko", "ko/"), ("ja", "ja/"), ("cs", "cs/"), ("lv", "lv/")}
 SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK",
-                     "FR", "JP", "CZ", "LV", "MY"}
+                     "FR", "JP", "CZ", "LV", "MY", "NO"}
 # v0.11.0：EU 区域层启用（kind=region，own_data=true，不进 country_order）
 SITE_REGION_I18N = {"EU"}
 
@@ -128,6 +130,8 @@ MARKET_NATIVE_LANGS: dict[str, tuple[str, ...]] = {
     "SG": ("en",), "ES": ("es",), "MX": ("es",), "CN": ("zh",),
     "TW": ("zh-Hant",), "HK": ("zh-Hant",), "FR": ("fr",), "EU": ("en",),
     "JP": ("ja",), "CZ": ("cs",), "LV": ("lv",), "MY": ("ms",),
+    # 2026-11-22（NO）：挪威语两种 BCP47 写法都在站点界面语言之外（nb = Bokmål，no = 宏语言）。
+    "NO": ("nb", "no"),
 }
 UI_LANG_FIELDS = ("ui_languages", "ui_language_gaps")
 
@@ -233,15 +237,16 @@ class TestMarkets(RegistryBase):
     def test_registered_market_set(self) -> None:
         codes = set(self.reg.markets)
         # 2026-11-20（M7）：MY 已随数据启用（enabled 市场 == DB 国家集合）
+        # 2026-11-22（NO）：NO 已随 FEST 数据启用 → 16 国 + EU。
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
-                          "EU", "FR", "JP", "CZ", "LV", "MY"},
+                          "EU", "FR", "JP", "CZ", "LV", "MY", "NO"},
                          codes)
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
-                          "FR", "JP", "CZ", "LV", "MY"},
+                          "FR", "JP", "CZ", "LV", "MY", "NO"},
                          set(self.reg.country_order))
         # v0.11.0：EU 区域层启用（own_data=true，国家集合不变）
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
-                          "EU", "FR", "JP", "CZ", "LV", "MY"},
+                          "EU", "FR", "JP", "CZ", "LV", "MY", "NO"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -281,6 +286,27 @@ class TestMarkets(RegistryBase):
         for lang in ("en", "es", "zh"):
             self.assertTrue((m.name.get(lang) or "").strip(),
                             f"MY 缺 name.{lang}")
+
+    def test_no_market_row(self) -> None:
+        """2026-11-22（NO，v1.1.0）：NO 市场行（16 国 + EU；9 语界面，母语 nb/no 缺口）。"""
+        m = self.reg.require_market("NO")
+        self.assertTrue(m.enabled)
+        self.assertEqual(M.KIND_COUNTRY, m.kind)
+        self.assertEqual("EUROPE", m.group)
+        self.assertIsNone(m.parent)
+        self.assertEqual("home.no", m.i18n_key)
+        self.assertEqual("dmp_fest", m.source_id)
+        self.assertEqual(150, m.order)
+        self.assertEqual(("en",), m.languages)
+        self.assertEqual("en", m.default_lang)
+        row = self.market_dict("NO")
+        # NLOD 2.0 要求登记挪威语界面缺口（nb / no 两种写法都写）
+        self.assertEqual(["nb", "no"], row["ui_language_gaps"])
+        self.assertEqual(9, len(row["ui_languages"]))
+        self.assertEqual("2026-11-10", row["data_as_of"])
+        for lang in ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv"):
+            self.assertTrue((m.name.get(lang) or "").strip(),
+                            f"NO 缺 name.{lang}")
 
     def test_market_required_shape(self) -> None:
         for m in self.reg.markets.values():
@@ -486,7 +512,7 @@ class TestUiLanguageCoverage(RegistryBase):
 
     def test_every_enabled_market_declares_both_fields(self) -> None:
         enabled = [m for m in self.raw_markets["markets"] if m.get("enabled")]
-        self.assertEqual(16, len(enabled))
+        self.assertEqual(17, len(enabled))
         for row in enabled:
             for key in UI_LANG_FIELDS:
                 self.assertIn(key, row, f"市场 {row['code']} 缺 {key}")
@@ -506,8 +532,9 @@ class TestUiLanguageCoverage(RegistryBase):
             covered = set(row["ui_languages"])
             self.assertEqual([x for x in fam if x not in covered],
                              row["ui_language_gaps"], code)
-        # 16 市场逐个核对（2026-11-20）：9 种界面语言覆盖 15 国 + EU；MY 母语 ms 未接入
-        self.assertEqual({"MY": ["ms"]},
+        # 17 市场逐个核对（2026-11-22）：9 种界面语言覆盖 16 国 + EU；
+        # MY 母语 ms、NO 母语 nb/no 未接入（本版不新增界面语言，只登记缺口）
+        self.assertEqual({"MY": ["ms"], "NO": ["nb", "no"]},
                          {m["code"]: m["ui_language_gaps"]
                           for m in self.raw_markets["markets"] if m["ui_language_gaps"]})
 
@@ -728,8 +755,9 @@ class TestCliAndDocs(RegistryBase):
         self.assertEqual(0, p.returncode, p.stderr[-500:])
         data = json.loads(p.stdout)
         # v0.13.0（2026-11-16）：15 市场（14 国 + EU region）；v0.13.8：10 → 11（含 ko）；
-        # v0.16.0：11 → 12（含 ja）；v0.17.0：12 → 14（含 cs / lv）；2026-11-20：16（+ MY）
-        self.assertEqual(16, len(data["markets"]))
+        # v0.16.0：11 → 12（含 ja）；v0.17.0：12 → 14（含 cs / lv）；2026-11-20：16（+ MY）；
+        # 2026-11-22：17（+ NO）
+        self.assertEqual(17, len(data["markets"]))
         self.assertEqual(14, len(data["languages"]))
         self.assertEqual("US", data["markets"][0]["code"])
 

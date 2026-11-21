@@ -24,9 +24,16 @@ import cz  # noqa: E402
 DB = ROOT / "data" / "drugs.db"
 Q6_MANIFEST = ROOT / "data" / "sources" / "cz_component_fill_manifest_20261118.json"
 # 2026-11-18 Q6 写库后的验收线（报告 §5.2）；数据窗口再动 CZ 时同步更新这里。
-CZ_NO_COMPONENT = 1424
-CZ_WITH_COMPONENT = 67157
-CZ_COMPONENTS = 90981
+# 2026-11-21 NO（DMP FEST）写库新增 361 个成分主档后，CZ 重跑计划能多匹配 15 个产品
+# （+34 个成分行，走的是既有 strip_salt / 名称精确命中路径，不是 Q6 回退）；
+# 下面改成「NO 窗口后的重跑计划」基线，并与现库用 ≥ 比较：共享主档只会让计划多映射。
+CZ_NO_COMPONENT = 1409
+CZ_WITH_COMPONENT = 67172
+CZ_COMPONENTS = 91015
+# 现库（上一次 CZ 写库）口径，用于「不回退」比较
+CZ_DB_NO_COMPONENT = 1424
+CZ_DB_WITH_COMPONENT = 67157
+CZ_DB_COMPONENTS = 90981
 
 
 class NameMapTables(unittest.TestCase):
@@ -122,18 +129,23 @@ class RerunKeepsQ6Fill(unittest.TestCase):
         finally:
             db.close()
 
-    def test_rerun_keeps_cz_no_component_at_1424(self):
+    def test_rerun_keeps_cz_no_component_at_1409(self):
         no_comp = sum(1 for p in self.plan["products"] if not p["components"])
         with_comp = sum(1 for p in self.plan["products"] if p["components"])
         self.assertEqual(no_comp, CZ_NO_COMPONENT,
                          "重跑 CZ 后无组件产品数变了（数据窗口改过就同步期望值）")
         self.assertEqual(with_comp, CZ_WITH_COMPONENT)
-        # 重跑计划应与现库完全一致（Q6 的 684 个产品不再回退）
-        self.assertEqual(no_comp, self.db_no_component)
-        self.assertEqual(with_comp, self.db_with_component)
-        self.assertEqual(self.plan["stats"]["components"], self.db_components)
+        # 重跑计划 vs 现库：NO 窗口新增的成分主档会让计划多映射（≥），但绝不回退
+        # （Q6 的 684 个产品由 test_all_q6_filled_products_keep_components 单独保证）。
+        self.assertEqual(self.db_no_component, CZ_DB_NO_COMPONENT)
+        self.assertEqual(self.db_with_component, CZ_DB_WITH_COMPONENT)
+        self.assertEqual(self.db_components, CZ_DB_COMPONENTS)
+        self.assertLessEqual(no_comp, self.db_no_component,
+                             "重跑计划的无组件产品不应多于现库（共享主档只会补映射）")
+        self.assertGreaterEqual(with_comp, self.db_with_component)
+        self.assertGreaterEqual(self.plan["stats"]["components"], self.db_components)
         self.assertEqual(self.plan["stats"]["components"], CZ_COMPONENTS)
-        self.assertEqual(self.plan["stats"]["products_components_skipped"], 1421)
+        self.assertEqual(self.plan["stats"]["products_components_skipped"], 1406)
         self.assertEqual(self.plan["stats"]["products_without_ingredient"], 3)
 
     def test_all_q6_filled_products_keep_components(self):

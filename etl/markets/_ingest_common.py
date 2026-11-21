@@ -12,7 +12,8 @@
   - 写库必须带 `--allow-real` 才允许动 `data/drugs.db`，否则只写 `.tmp/` 副本；
   - 回滚只删 manifest 里记过的行（保护既有数据），并逐表核对回写前计数。
 
-本模块没有 CLI，只被 `etl/markets/cz.py`、`etl/markets/lv.py` 引用。
+本模块没有 CLI，只被 `etl/markets/cz.py`、`etl/markets/lv.py` 与 `etl/ingest_no.py`（挪威 FEST，
+2026-11-21）引用。
 """
 
 from __future__ import annotations

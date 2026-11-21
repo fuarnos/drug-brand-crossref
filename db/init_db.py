@@ -11,9 +11,10 @@
    写入由 `etl/provenance.py` 负责）；
 5. `product.country` 的 CHECK 枚举。SQLite 改不了 CHECK，只能重建表。市场是逐步加的
    （US → GB → CN → ES → MX → AU → CA → **TW** → **HK** → **SG** → **FR/LV/JP/KR**（v0.11.3
-   task-56 一次补齐，枚举先行、数据后到）），所以每次 schema.sql 扩了枚举，这里就把
-   老库里的 product 表换成新定义，数据原样搬过去。判断依据是「DB 里的枚举 ≠ schema.sql 的枚举」
-   ——**幂等**：已含四国的库再跑不会重建。
+   task-56 一次补齐，枚举先行、数据后到）→ **CZ**（v0.13.0）→ **MY**（v0.17.0）→
+   **NO/CH**（v1.1.0，task-1：挪威 FEST 入库，瑞士枚举先行、数据后到）），
+   所以每次 schema.sql 扩了枚举，这里就把老库里的 product 表换成新定义，数据原样搬过去。
+   判断依据是「DB 里的枚举 ≠ schema.sql 的枚举」——**幂等**：已含这些国家的库再跑不会重建。
 5. **区域层（region）**：EU = 欧盟集中审批（EMA），不是国家市场。schema 的 `product.country`
    改为可空并新增 `product.region`（country 与 region 二选一，CHECK 约束）；老库缺 region 列
    或 country 仍是 NOT NULL 时，用同一套 `_rebuild_product()` 重建（列拷贝、region 默认 NULL），

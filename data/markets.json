@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-20",
+  "updated": "2026-11-22",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -594,6 +594,50 @@
       "order": 140,
       "data_as_of": "2026-11-11",
       "notes": "ZVA（Zāļu valsts aģentūra）「Latvijas Zāļu reģistrs」HumanProducts（data.gov.lv，**CC0 1.0**，无强制义务；本站仍按惯例署名 ZVA + 数据截止日）。包装级 40,600 条 → 注册号 18,766；EU 集中审批 1,561 个药号与 EU 区域层去重。快照 2026-11-11 抓取，source_id=zva_lv_register，data_as_of=2026-11-11（ZIP/状态表 Last-Modified）。口径：**授权/收载 ≠ 当前在售**（`status`/`prd_removed`/`sell_stop_date` 三开关联合判，active 4,551；平行进口与未注册药品单独计数）。"
+    },
+    {
+      "code": "NO",
+      "kind": "country",
+      "parent": null,
+      "group": "EUROPE",
+      "name": {
+        "en": "Norway",
+        "es": "Noruega",
+        "zh": "挪威",
+        "zh-Hant": "挪威",
+        "fr": "Norvège",
+        "ko": "노르웨이",
+        "ja": "ノルウェー",
+        "cs": "Norsko",
+        "lv": "Norvēģija"
+      },
+      "i18n_key": "home.no",
+      "flag": "🇳🇴",
+      "source_id": "dmp_fest",
+      "extra_source_ids": [],
+      "default_lang": "en",
+      "languages": [
+        "en"
+      ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko",
+        "ja",
+        "cs",
+        "lv"
+      ],
+      "ui_language_gaps": [
+        "nb",
+        "no"
+      ],
+      "enabled": true,
+      "order": 150,
+      "data_as_of": "2026-11-10",
+      "notes": "已启用（2026-11-22，第 16 个市场）：DMP（Direktoratet for medisinske produkter，挪威医疗产品管理局；英文页旧缩写 NOMA）FEST 2.5.1「Rekvirent-uttrekk」全量提取（品牌 LegemiddelMerkevare + 包装 Legemiddelpakning 两层），许可 **NLOD 2.0**（Norsk lisens for offentlige data：可复制/修改/再分发/商用，须署名 + 标明修改，与 CC BY 4.0 / OGL 兼容）。须署名原句：Contains data under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms). 数据截止 2026-11-10（XML HentetDato）；DMP 要求每半月（1 日 / 15 日）更新。来源：https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/electronic-prescription-support-system-fest 。口径：FEST 是**处方链数据服务**（医生/医院/药房/系统商用的药品信息），**不是注册库全量**；**源只有活动条目**（Status 全部为「Aktiv oppføring」；本站的 discontinued / withdrawn 由包装级下线标记**派生**，不是源里的官方状态字段）；**没有注册号**（只有订货号 Varenr 与条码 Ean）；规格来自 Pakningsstr、剂型/含量结构化；不取价格（PrisVare）与 SmPC 正文。挪威语界面未接入 → ui_language_gaps=[\"nb\",\"no\"]（本版不新增界面语言）。"
     }
   ]
 }
