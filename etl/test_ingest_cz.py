@@ -26,10 +26,12 @@ Q6_MANIFEST = ROOT / "data" / "sources" / "cz_component_fill_manifest_20261118.j
 # 2026-11-18 Q6 写库后的验收线（报告 §5.2）；数据窗口再动 CZ 时同步更新这里。
 # 2026-11-21 NO（DMP FEST）写库新增 361 个成分主档后，CZ 重跑计划能多匹配 15 个产品
 # （+34 个成分行，走的是既有 strip_salt / 名称精确命中路径，不是 Q6 回退）；
-# 下面改成「NO 窗口后的重跑计划」基线，并与现库用 ≥ 比较：共享主档只会让计划多映射。
-CZ_NO_COMPONENT = 1409
-CZ_WITH_COMPONENT = 67172
-CZ_COMPONENTS = 91015
+# 2026-11-22 KR（HIRA 약가마스터）写库新增 2,544 个成分主档后，CZ 重跑计划再多匹配 141 个产品
+# （+169 个成分行，同样走既有精确/去盐命中，不是 Q6 回退）。
+# 下面改成「KR 窗口后的重跑计划」基线，并与现库用 ≤/≥ 比较：共享主档只会让计划多映射。
+CZ_NO_COMPONENT = 1268
+CZ_WITH_COMPONENT = 67313
+CZ_COMPONENTS = 91184
 # 现库（上一次 CZ 写库）口径，用于「不回退」比较
 CZ_DB_NO_COMPONENT = 1424
 CZ_DB_WITH_COMPONENT = 67157
@@ -129,7 +131,7 @@ class RerunKeepsQ6Fill(unittest.TestCase):
         finally:
             db.close()
 
-    def test_rerun_keeps_cz_no_component_at_1409(self):
+    def test_rerun_keeps_cz_no_component_at_1268(self):
         no_comp = sum(1 for p in self.plan["products"] if not p["components"])
         with_comp = sum(1 for p in self.plan["products"] if p["components"])
         self.assertEqual(no_comp, CZ_NO_COMPONENT,
@@ -145,7 +147,7 @@ class RerunKeepsQ6Fill(unittest.TestCase):
         self.assertGreaterEqual(with_comp, self.db_with_component)
         self.assertGreaterEqual(self.plan["stats"]["components"], self.db_components)
         self.assertEqual(self.plan["stats"]["components"], CZ_COMPONENTS)
-        self.assertEqual(self.plan["stats"]["products_components_skipped"], 1406)
+        self.assertEqual(self.plan["stats"]["products_components_skipped"], 1265)
         self.assertEqual(self.plan["stats"]["products_without_ingredient"], 3)
 
     def test_all_q6_filled_products_keep_components(self):

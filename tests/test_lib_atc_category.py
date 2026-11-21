@@ -235,19 +235,26 @@ class AtcCategorySearchTest(unittest.TestCase):
         v1.1.0（NO 入库）：Duloxetine 874 > Escitalopram Oxalate 868（剔除 NO 时 868 > 862）；
         期望值随数据窗口变化、实现不变（874−862=+12：NO 7 行 + EU 区域层 5 行；
         Escitalopram 系 +14，基盐名分列、不合并）。
+
+        v1.2.0（KR 入库，97,356 品目）后 4 条期望随现查变化，实现未变：
+        · 降糖药：Metformin Hydrochloride 3,941 > Metformin 2,961（KR 把 metformin HCl 品目挂到盐型行）
+        · 减肥药：Orlistat 361 > Semaglutide 353
+        · 他汀：Rosuvastatin Calcium 2,053 / 去盐基名 1,463 > Atorvastatin 1,914（首卡显示基名 Rosuvastatin）
+        · 抗抑郁药：Escitalopram Oxalate 974 > Duloxetine 874（首卡 ES 显示基名 Escitalopram；
+          本条为 v1.1.0 那次 Duloxetine 改动的回退）
         """
         cases = [
             ("退烧药", "analgesics", "Acetaminophen"),
             ("消炎药", "antibiotics", "Amoxicillin"),
             ("胃药", "acid-related", "Omeprazole"),
             ("降血压药", "antihypertensives", "Hydrochlorothiazide"),
-            ("降糖药", "diabetes", "Metformin"),
-            ("减肥药", "weight-loss", "Semaglutide"),        # v0.13.0：Orlistat 308 → Semaglutide 316
+            ("降糖药", "diabetes", "Metformin Hydrochloride"),  # v1.2.0 KR：3,941 > Metformin 2,961
+            ("减肥药", "weight-loss", "Orlistat"),              # v1.2.0 KR：361 > Semaglutide 353
             ("感冒药", "cold-medicine", "Acetaminophen"),
             ("抗过敏药", "allergy", "Chlorpheniramine"),
             ("抗凝药", "anticoagulants", "Rivaroxaban"),   # v0.18.0 MY：2,421 > Aspirin 2,388
-            ("他汀", "statins", "Atorvastatin"),
-            ("抗抑郁药", "antidepressants", "Duloxetine"),  # v1.1.0 NO：874 > Escitalopram Oxalate 868
+            ("他汀", "statins", "Rosuvastatin"),            # v1.2.0 KR：钙盐 2,053/基名 1,463 > Atorvastatin 1,914
+            ("抗抑郁药", "antidepressants", "Escitalopram"),  # v1.2.0 KR：草酸盐 974 > Duloxetine 874
             ("皮肤药", "dermatologicals", "Zinc Oxide"),
         ]
         for q, cid, ing in cases:
@@ -265,11 +272,14 @@ class AtcCategorySearchTest(unittest.TestCase):
         注意：Venlafaxine Hydrochloride 是另一条 substance 行（434，其中 CZ 395），
         本口径按 substance 行计数（与 gen_atc_category_cases.py / 客户端 atc-ing 同源），
         不合并盐型；合并后 815+434=1,249 的口径不在本任务范围（见报告 §5）。
+
+        v1.2.0（KR 入库）再回退一次：Escitalopram Oxalate 974 > Duloxetine 874
+        （首卡 ES `ESCITALOPRAM` 显示去盐基名）——期望随数据窗口变化，实现未变。
         """
         for q, cid, ing in (("抗过敏药", "allergy", "Chlorpheniramine"),
                             ("Blood-pressure medicines", "antihypertensives",
                              "Hydrochlorothiazide"),
-                            ("抗抑鬱藥", "antidepressants", "Duloxetine")):  # v1.1.0 NO：874 > 868
+                            ("抗抑鬱藥", "antidepressants", "Escitalopram")):  # v1.2.0 KR：974 > 874
             res = self.idx.search(q)
             self.assertEqual(res.match_detail["category_id"], cid, q)
             # 首位卡片可以是复方卡（如 Irbesartan + Hydrochlorothiazide），但必须含期望成分

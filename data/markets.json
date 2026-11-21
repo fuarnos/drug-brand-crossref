@@ -638,6 +638,47 @@
       "order": 150,
       "data_as_of": "2026-11-10",
       "notes": "已启用（2026-11-22，第 16 个市场）：DMP（Direktoratet for medisinske produkter，挪威医疗产品管理局；英文页旧缩写 NOMA）FEST 2.5.1「Rekvirent-uttrekk」全量提取（品牌 LegemiddelMerkevare + 包装 Legemiddelpakning 两层），许可 **NLOD 2.0**（Norsk lisens for offentlige data：可复制/修改/再分发/商用，须署名 + 标明修改，与 CC BY 4.0 / OGL 兼容）。须署名原句：Contains data under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms). 数据截止 2026-11-10（XML HentetDato）；DMP 要求每半月（1 日 / 15 日）更新。来源：https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/electronic-prescription-support-system-fest 。口径：FEST 是**处方链数据服务**（医生/医院/药房/系统商用的药品信息），**不是注册库全量**；**源只有活动条目**（Status 全部为「Aktiv oppføring」；本站的 discontinued / withdrawn 由包装级下线标记**派生**，不是源里的官方状态字段）；**没有注册号**（只有订货号 Varenr 与条码 Ean）；规格来自 Pakningsstr、剂型/含量结构化；不取价格（PrisVare）与 SmPC 正文。挪威语界面未接入 → ui_language_gaps=[\"nb\",\"no\"]（本版不新增界面语言）。"
+    },
+    {
+      "code": "KR",
+      "kind": "country",
+      "parent": null,
+      "group": "ASIA",
+      "name": {
+        "en": "South Korea",
+        "es": "Corea del Sur",
+        "zh": "韩国",
+        "zh-Hant": "韓國",
+        "fr": "Corée du Sud",
+        "ko": "한국",
+        "ja": "韓国",
+        "cs": "Jižní Korea",
+        "lv": "Dienvidkoreja"
+      },
+      "i18n_key": "home.kr",
+      "flag": "🇰🇷",
+      "source_id": "hira_kr_medprice",
+      "extra_source_ids": [],
+      "default_lang": "ko",
+      "languages": [
+        "ko"
+      ],
+      "ui_languages": [
+        "en",
+        "es",
+        "zh",
+        "zh-Hant",
+        "fr",
+        "ko",
+        "ja",
+        "cs",
+        "lv"
+      ],
+      "ui_language_gaps": [],
+      "enabled": true,
+      "order": 160,
+      "data_as_of": "2026-08-31",
+      "notes": "已启用（2026-11-22，第 17 个市场）：HIRA（건강보험심사평가원，健康保险审查评价院）「약가마스터」两份文件数据（data.go.kr 15067462 의약품표준코드 + 15067461 의약품주성분），匿名下载；许可 **공공누리 제1유형（KOGL Type 1：须标明出处，可商用、可演绎）**。数据截止 2026-08-31（표준코드 分기基准日；주성분 2026-11-05 年度）。**HIRA 약가마스터 是医保药价清单（급여 목록），不是韩国注册库全量**：**没有 허가번호（注册号）**、**没有在售状态**；本站 `status` 只有「在药价表内 active（65,086）」与「unknown（32,270，有真实 취소일자）」两种，`취소일자`（取消日）只表示**不在药价表内**，**不等于批文撤销**——页面写「不在药价表内 ≠ 撤销批文」，**不写「已注销/已撤市」**。`product.approval_id` 存的是 **품목기준코드（MFDS 品目码）**，不是 허가번호，产品页按「品目码」标注。来源：https://www.data.go.kr/data/15067462/fileData.do · https://www.data.go.kr/data/15067461/fileData.do 。"
     }
   ]
 }

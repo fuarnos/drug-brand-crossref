@@ -6785,6 +6785,220 @@ MARKET_EXTRA_I18N: dict[str, dict[str, str]] = {
                'electronic-prescription-support-system-fest">FEST DMP vietnē</a> · '
                '<a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a>.</p>'),
     },
+    # ── v1.2.0（KR，2026-11-22）：第 17 个市场韩国（HIRA 약가마스터 / KOGL 제1유형）──────────
+    "home.kr": {
+        "en": 'South Korea', "es": 'Corea del Sur', "zh": '韩国', "zh-Hant": '韓國',
+        "fr": 'Corée du Sud', "ko": '한국', "ja": '韓国', "cs": 'Jižní Korea',
+        "lv": 'Dienvidkoreja',
+    },
+    "coverage.gap.kr": {
+        "en": ('HIRA 약가마스터 (drug price master, medical-insurance price list) via data.go.kr '
+               'under KOGL Type 1 (공공누리 제1유형, attribution; commercial use and adaptation '
+               'allowed) — attribution: Health Insurance Review & Assessment Service (HIRA); data as of '
+               '2026-08-31. This is a reimbursement price list, not the full Korean register: no '
+               '허가번호 (registration number; the item code 품목기준코드 is not an approval number) and '
+               'no sale status. Status is only “in the price list” (active, 65,086) or “unknown” '
+               '(32,270, with a real 취소일자): a cancellation date means “no longer in the price '
+               'list”, NOT that the approval was withdrawn. The “Ingredient mapped” column counts items '
+               'with an ingredient record (51.9% — HIRA ingredient codes cover about 52% of items); of '
+               'those ingredient rows, 80.8% matched the existing substance master. Pack 96.3%, '
+               'structured dosage form 51.9%, ATC 70.8%, MAH 100%.'),
+        "es": ('HIRA 약가마스터 (lista de precios del seguro médico) vía data.go.kr bajo KOGL Tipo 1 '
+               '(공공누리 제1유형, atribución; uso comercial y adaptación permitidos) — atribución: '
+               'Health Insurance Review & Assessment Service (HIRA); datos al 2026-08-31. Es una lista '
+               'de precios de reembolso, no el registro coreano completo: sin número de registro '
+               '(허가번호; el código de ítem 품목기준코드 no es un número de aprobación) y sin estado de '
+               'venta. El estado solo es «en la lista de precios» (activo, 65.086) o «desconocido» '
+               '(32.270, con 취소일자 real): una fecha de cancelación significa «ya no está en la lista '
+               'de precios», NO que se haya retirado la aprobación. La columna «principio activo mapeado» '
+               'cuenta ítems con registro de ingrediente (51,9% — los códigos de HIRA cubren ~52% de los '
+               'ítems); de esas filas, 80,8% coincidió con el maestro existente. Envase 96,3%, forma '
+               'estructurada 51,9%, ATC 70,8%, MAH 100%.'),
+        "zh": ('HIRA「약가마스터（医保药价清单）」经 data.go.kr 以 공공누리 第1유형（KOGL Type 1，'
+               '须标明出处；可商用、可演绎）提供 —— 署名：韩国健康保险审查评价院（HIRA）；数据截至 '
+               '2026-08-31。这是医保药价清单，不是韩国注册库全量：没有 허가번호（注册号）'
+               '（품목기준코드 是品目码，不是批准号）、没有在售状态；status 只有「在药价表内」'
+               '（active 65,086）或「unknown」（32,270，有真实 취소일자）：취소일자 只表示'
+               '不在药价表内，不等于撤销批文（不在药价表内 ≠ 撤销批文）。「成分映射」列统计'
+               '有成分记录的品目：51.9%（HIRA 成分码覆盖约 52% 品目）；这些成分行里 80.8% '
+               '命中既有成分主档。包装 96.3%、剂型结构化 51.9%、ATC 70.8%、MAH 100%。'),
+        "zh-Hant": ('HIRA「약가마스터（醫保藥價清單）」經 data.go.kr 以 공공누리 第1型（KOGL Type 1，'
+                    '須標明出處；可商用、可演繹）提供 —— 署名：韓國健康保險審查評價院（HIRA）；資料截至 '
+                    '2026-08-31。這是醫保藥價清單，不是韓國註冊庫全量：沒有 허가번호（註冊號）'
+                    '（품목기준코드 是品目碼，不是核准號）、沒有在售狀態；status 只有「在藥價表內」'
+                    '（active 65,086）或「unknown」（32,270，有真實 취소일자）：취소일자 只表示'
+                    '不在藥價表內，不等於撤銷批文（不在藥價表內 ≠ 撤銷批文）。「成分對應」欄統計'
+                    '有成分紀錄的品目：51.9%（HIRA 成分碼覆蓋約 52% 品目）；這些成分列裡 80.8% '
+                    '命中既有成分主檔。包裝 96.3%、劑型結構化 51.9%、ATC 70.8%、MAH 100%。'),
+        "fr": ('HIRA 약가마스터 (liste des prix de l’assurance maladie) via data.go.kr sous KOGL Type 1 '
+               '(공공누리 제1유형, attribution ; usage commercial et adaptation autorisés) — attribution : '
+               'Health Insurance Review & Assessment Service (HIRA) ; données au 2026-08-31. Il s’agit '
+               'd’une liste de prix remboursés, pas du registre coréen complet : pas de numéro '
+               'd’enregistrement (허가번호 ; le code d’article 품목기준코드 n’est pas un numéro '
+               'd’autorisation) et pas de statut de vente. Le statut est seulement « dans la liste des '
+               'prix » (actif, 65 086) ou « inconnu » (32 270, avec une vraie 취소일자) : une date '
+               'd’annulation signifie « plus dans la liste des prix », PAS un retrait de l’autorisation. '
+               'La colonne « principe actif mappé » compte les articles avec un enregistrement '
+               'd’ingrédient (51,9 % — les codes HIRA couvrent ~52 % des articles) ; parmi ces lignes, '
+               '80,8 % ont été rattachées au référentiel existant. Conditionnement 96,3 %, forme '
+               'structurée 51,9 %, ATC 70,8 %, MAH 100 %.'),
+        "ko": ('HIRA 「약가마스터」(건강보험 약가 목록)를 data.go.kr에서 공공누리 제1유형으로 제공 — '
+               '출처: 건강보험심사평가원(HIRA); 데이터 기준일 2026-08-31. 이것은 급여 약가 목록이며 '
+               '한국 의약품 등록부 전체가 아닙니다: 허가번호 없음(품목기준코드는 허가번호가 아님), '
+               '판매 상태 없음. 상태는 「약가표에 있음」(active 65,086) 또는 「unknown」(32,270, 실제 '
+               '취소일자 있음) 두 가지뿐이며, 취소일자는 약가표에서 빠졌다는 뜻일 뿐 허가 취소가 '
+               '아닙니다(약가표에 없음 ≠ 허가 취소). 「성분 매핑」 열은 성분 기록이 있는 품목을 셉니다: '
+               '51.9%(HIRA 성분 코드가 약 52% 품목을 커버); 그 성분 행 중 80.8%가 기존 성분 '
+               '마스터에 매칭되었습니다. 포장 96.3%, 구조화 제형 51.9%, ATC 70.8%, MAH 100%.'),
+        "ja": ('HIRA「약가마스터」（医療保険の薬価リスト）を data.go.kr 経由で공공누리 제1유형（KOGL Type 1、'
+               '出典表示が必要・商用可・改変可）で提供 — 出典：健康保険審査評価院（HIRA）、データ基準日 '
+               '2026-08-31。これは保険薬価リストであり、韓国の登録簿の全量ではありません：'
+               '허가번호（登録番号）はなく（품목기준코드 は品目コードで承認番号ではありません）、'
+               '販売状態もありません。状態は「薬価表にあり」（active 65,086）または「unknown」'
+               '（32,270、実際の 취소일자 あり）の 2 種類のみで、취소일자 は薬価表から外れたという'
+               '意味であり、承認の取消しではありません（薬価表にない ≠ 承認取消し）。「成分マッピング」'
+               '列は成分レコードがある品目を数えます：51.9%（HIRA の成分コードは約 52% の品目を'
+               'カバー）；その成分行のうち 80.8% が既存の成分マスタに一致しました。包装 96.3%、'
+               '構造化剤形 51.9%、ATC 70.8%、MAH 100%。'),
+        "cs": ('HIRA 약가마스터 (seznam cen léčiv pro zdravotní pojištění) přes data.go.kr pod KOGL Type 1 '
+               '(공공누리 제1유형, uvedení zdroje; komerční užití a úpravy povoleny) — uvedení zdroje: '
+               'Health Insurance Review & Assessment Service (HIRA); data k 2026-08-31. Jde o seznam '
+               'hrazených cen, nikoli o úplný korejský registr: chybí registrační číslo (허가번호; kód '
+               'položky 품목기준코드 není číslo schválení) i stav prodeje. Stav je pouze „v cenovém '
+               'seznamu“ (aktivní, 65 086) nebo „neznámý“ (32 270, se skutečným 취소일자): datum zrušení '
+               'znamená „už není v cenovém seznamu“, NIKOLI odnětí schválení. Sloupec „mapovaná látka“ '
+               'počítá položky se záznamem látky (51,9 % — kódy HIRA pokrývají ~52 % položek); z těchto '
+               'řádků se 80,8 % shodlo s existujícím kmenem. Balení 96,3 %, strukturovaná forma 51,9 %, '
+               'ATC 70,8 %, MAH 100 %.'),
+        "lv": ('HIRA 약가마스터 (veselības apdrošināšanas cenu saraksts) ar data.go.kr starpniecību '
+               'saskaņā ar KOGL Type 1 (공공누리 제1유형, avota norāde; komerciāla izmantošana un '
+               'pārveide atļauta) — norāde: Health Insurance Review & Assessment Service (HIRA); dati uz '
+               '2026-08-31. Tas ir kompensējamo cenu saraksts, nevis pilns Korejas reģistrs: nav '
+               'reģistrācijas numura (허가번호; vienības kods 품목기준코드 nav atļaujas numurs) un nav '
+               'pārdošanas statusa. Statuss ir tikai „cenu sarakstā“ (aktīvs, 65 086) vai „nezināms“ '
+               '(32 270, ar reālu 취소일자): atcelšanas datums nozīmē „vairs nav cenu sarakstā“, NEVIS '
+               'atļaujas atsaukšanu. Kolonna „kartētā viela“ skaita vienības ar vielas ierakstu (51,9 % — '
+               'HIRA vielu kodi aptver ~52 % vienību); no šīm rindām 80,8 % atbilda esošajam reģistram. '
+               'Iepakojums 96,3 %, strukturētā forma 51,9 %, ATC 70,8 %, MAH 100 %.'),
+    },
+    "about.kr_source": {
+        "en": ('<p class="sub"><b>South Korea 韩国</b>: <b>HIRA</b> (Health Insurance Review & '
+               'Assessment Service / 건강보험심사평가원) — <b>약가마스터</b> (drug price master: '
+               '의약품표준코드 + 의약품주성분, data.go.kr datasets 15067462 / 15067461) under '
+               '<b>KOGL Type 1 (공공누리 제1유형)</b>; attribution: Source: Health Insurance Review & '
+               'Assessment Service (HIRA), “약가마스터” via data.go.kr, KOGL Type 1; changes made by '
+               'DrugCrossRef (normalisation). Data as of <b>2026-08-31</b>. <b>This is a medical-insurance '
+               'price list, not the full Korean register</b>: it carries <b>no 허가번호</b> (the item '
+               'code 품목기준코드 is not an approval number) and <b>no sale status</b>. Status is only '
+               '“in the price list” (active, 65,086) or “unknown” (32,270, with a real 취소일자); a '
+               'cancellation date means <b>no longer in the price list, not that the approval was '
+               'withdrawn</b>. Facts only (brand name, ingredients and strength, dosage form, pack, '
+               'MAH, ATC); prices and package leaflets are not stored. '
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL Type 1</a>.</p>'),
+        "es": ('<p class="sub"><b>Corea del Sur 韩国</b>: <b>HIRA</b> (Health Insurance Review & '
+               'Assessment Service / 건강보험심사평가원) — <b>약가마스터</b> (lista de precios de '
+               'medicamentos: 의약품표준코드 + 의약품주성분, datasets de data.go.kr 15067462 / 15067461) '
+               'bajo <b>KOGL Tipo 1 (공공누리 제1유형)</b>; atribución: Health Insurance Review & '
+               'Assessment Service (HIRA), «약가마스터» vía data.go.kr, KOGL Type 1; cambios realizados '
+               'por DrugCrossRef (normalización). Datos al <b>2026-08-31</b>. <b>Es una lista de precios '
+               'del seguro médico, no el registro coreano completo</b>: <b>sin 허가번호</b> (el código de '
+               'ítem 품목기준코드 no es un número de aprobación) y <b>sin estado de venta</b>. El estado '
+               'solo es «en la lista de precios» (activo, 65.086) o «desconocido» (32.270, con 취소일자 '
+               'real); una fecha de cancelación significa <b>ya no está en la lista de precios, no que se '
+               'haya retirado la aprobación</b>. Solo campos fácticos (nombre comercial, principios y '
+               'concentración, forma, envase, MAH, ATC); no se guardan precios ni prospectos. '
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL Tipo 1</a>.</p>'),
+        "zh": ('<p class="sub"><b>韩国</b>：韩国健康保险审查评价院（HIRA，건강보험심사평가원）的 '
+               '<b>약가마스터</b>（医保药价清单：의약품표준코드 + 의약품주성분，data.go.kr 数据集 '
+               '15067462 / 15067461），许可 <b>공공누리 第1유형（KOGL Type 1）</b>；署名：数据来自 HIRA'
+               '「약가마스터」，经 data.go.kr 以 공공누리 제1유형提供；本站已做归一化。数据截至 '
+               '<b>2026-08-31</b>。<b>这是医保药价清单，不是韩国注册库全量</b>：没有 허가번호（注册号）'
+               '（품목기준코드 是品目码，不是批准号）、没有在售状态；status 只有「在药价表内」'
+               '（active 65,086）或「unknown」（32,270，有真实 취소일자）：취소일자 只表示'
+               '<b>不在药价表内，不等于撤销批文</b>。只存事实字段（商品名、成分与含量、剂型、包装、MAH、'
+               'ATC）；不存价格与说明书正文。'
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL 第1유형</a>。</p>'),
+        "zh-Hant": ('<p class="sub"><b>韓國</b>：韓國健康保險審查評價院（HIRA，건강보험심사평가원）的 '
+                    '<b>약가마스터</b>（醫保藥價清單：의약품표준코드 + 의약품주성분，data.go.kr 資料集 '
+                    '15067462 / 15067461），授權 <b>공공누리 第1型（KOGL Type 1）</b>；署名：資料來自 '
+                    'HIRA「약가마스터」，經 data.go.kr 以 공공누리 第1型提供；本站已做正規化。資料截至 '
+                    '<b>2026-08-31</b>。<b>這是醫保藥價清單，不是韓國註冊庫全量</b>：沒有 허가번호'
+                    '（註冊號）（품목기준코드 是品目碼，不是核准號）、沒有在售狀態；status 只有'
+                    '「在藥價表內」（active 65,086）或「unknown」（32,270，有真實 취소일자）：취소일자 '
+                    '只表示<b>不在藥價表內，不等於撤銷批文</b>。只存事實欄位（商品名、成分與含量、劑型、'
+                    '包裝、MAH、ATC）；不存價格與說明書正文。'
+                    '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+                    '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL 第1유형</a>。</p>'),
+        "fr": ('<p class="sub"><b>Corée du Sud 韩国</b> : <b>HIRA</b> (Health Insurance Review & '
+               'Assessment Service / 건강보험심사평가원) — <b>약가마스터</b> (liste des prix des '
+               'médicaments : 의약품표준코드 + 의약품주성분, jeux de données data.go.kr 15067462 / '
+               '15067461) sous <b>KOGL Type 1 (공공누리 제1유형)</b> ; attribution : Health Insurance '
+               'Review & Assessment Service (HIRA), « 약가마스터 » via data.go.kr, KOGL Type 1 ; '
+               'modifications apportées par DrugCrossRef (normalisation). Données au <b>2026-08-31</b>. '
+               '<b>Il s’agit d’une liste de prix de l’assurance maladie, pas du registre coréen '
+               'complet</b> : <b>pas de 허가번호</b> (le code d’article 품목기준코드 n’est pas un numéro '
+               'd’autorisation) et <b>pas de statut de vente</b>. Le statut est seulement « dans la liste '
+               'des prix » (actif, 65 086) ou « inconnu » (32 270, avec une vraie 취소일자) ; une date '
+               'd’annulation signifie <b>plus dans la liste des prix, pas un retrait de '
+               'l’autorisation</b>. Champs factuels uniquement (nom commercial, principes et dosage, '
+               'forme, conditionnement, MAH, ATC) ; prix et notices ne sont pas stockés. '
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL Type 1</a>.</p>'),
+        "ko": ('<p class="sub"><b>대한민국 韩国</b>: <b>HIRA</b>(건강보험심사평가원) — <b>약가마스터</b>'
+               '(의약품표준코드 + 의약품주성분, data.go.kr 데이터셋 15067462 / 15067461), 라이선스 '
+               '<b>공공누리 제1유형(KOGL Type 1)</b>; 출처: 건강보험심사평가원(HIRA), 「약가마스터」, '
+               'data.go.kr, 공공누리 제1유형, DrugCrossRef에서 정규화함. 데이터 기준일 <b>2026-08-31</b>. '
+               '<b>이것은 건강보험 약가 목록이며 한국 의약품 등록부 전체가 아닙니다</b>: 허가번호가 '
+               '없고(품목기준코드는 허가번호가 아님) 판매 상태도 없습니다. 상태는 「약가표에 있음」'
+               '(active 65,086) 또는 「unknown」(32,270, 실제 취소일자 있음) 두 가지뿐이며, 취소일자는 '
+               '<b>약가표에서 빠졌다는 뜻일 뿐 허가 취소가 아닙니다</b>(약가표에 없음 ≠ 허가 취소). '
+               '사실 항목만 저장합니다(제품명, 성분·함량, 제형, 포장, MAH, ATC); 가격과 설명서 본문은 '
+               '저장하지 않습니다. '
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">공공누리 제1유형</a>.</p>'),
+        "ja": ('<p class="sub"><b>韓国 韩国</b>：<b>HIRA</b>（健康保険審査評価院 / 건강보험심사평가원）の '
+               '<b>약가마스터</b>（医薬品標準コード＋医薬品主成分、data.go.kr データセット 15067462 / '
+               '15067461）、ライセンス <b>공공누리 제1유형（KOGL Type 1）</b>；出典：健康保険審査評価院'
+               '（HIRA）「약가마스터」、data.go.kr、공공누리 제1유형、DrugCrossRef による正規化。データ'
+               '基準日 <b>2026-08-31</b>。<b>これは医療保険の薬価リストであり、韓国の登録簿の全量では'
+               'ありません</b>：허가번호（登録番号）はなく（품목기준코드 は承認番号ではありません）、'
+               '販売状態もありません。状態は「薬価表にあり」（active 65,086）または「unknown」'
+               '（32,270、実際の 취소일자 あり）の 2 種類のみで、취소일자 は<b>薬価表から外れたという'
+               '意味であり、承認の取消しではありません</b>（薬価表にない ≠ 承認取消し）。事実項目のみ'
+               '保存します（製品名、成分・含量、剤形、包装、MAH、ATC）。価格と添付文書本文は保存しません。'
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">공공누리 제1유형</a>。</p>'),
+        "cs": ('<p class="sub"><b>Jižní Korea 韩国</b>: <b>HIRA</b> (Health Insurance Review & '
+               'Assessment Service / 건강보험심사평가원) — <b>약가마스터</b> (seznam cen léčiv: '
+               '의약품표준코드 + 의약품주성분, datové sady data.go.kr 15067462 / 15067461) pod '
+               '<b>KOGL Type 1 (공공누리 제1유형)</b>; uvedení zdroje: Health Insurance Review & '
+               'Assessment Service (HIRA), „약가마스터“ přes data.go.kr, KOGL Type 1; úpravy provedl '
+               'DrugCrossRef (normalizace). Data k <b>2026-08-31</b>. <b>Jde o seznam cen zdravotního '
+               'pojištění, nikoli o úplný korejský registr</b>: <b>chybí 허가번호</b> (kód položky '
+               '품목기준코드 není číslo schválení) a <b>chybí stav prodeje</b>. Stav je pouze „v cenovém '
+               'seznamu“ (aktivní, 65 086) nebo „neznámý“ (32 270, se skutečným 취소일자); datum zrušení '
+               'znamená <b>už není v cenovém seznamu, nikoli odnětí schválení</b>. Pouze faktické údaje '
+               '(název, látky a síla, forma, balení, MAH, ATC); ceny a příbalové informace se neukládají. '
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL Type 1</a>.</p>'),
+        "lv": ('<p class="sub"><b>Dienvidkoreja 韩国</b>: <b>HIRA</b> (Health Insurance Review & '
+               'Assessment Service / 건강보험심사평가원) — <b>약가마스터</b> (zāļu cenu saraksts: '
+               '의약품표준코드 + 의약품주성분, data.go.kr datu kopas 15067462 / 15067461) saskaņā ar '
+               '<b>KOGL Type 1 (공공누리 제1유형)</b>; norāde: Health Insurance Review & Assessment '
+               'Service (HIRA), “약가마스터” ar data.go.kr starpniecību, KOGL Type 1; izmaiņas veicis '
+               'DrugCrossRef (normalizācija). Dati uz <b>2026-08-31</b>. <b>Tas ir veselības '
+               'apdrošināšanas cenu saraksts, nevis pilns Korejas reģistrs</b>: <b>nav 허가번호</b> '
+               '(vienības kods 품목기준코드 nav atļaujas numurs) un <b>nav pārdošanas statusa</b>. '
+               'Statuss ir tikai „cenu sarakstā“ (aktīvs, 65 086) vai „nezināms“ (32 270, ar reālu '
+               '취소일자); atcelšanas datums nozīmē <b>vairs nav cenu sarakstā, nevis atļaujas '
+               'atsaukšanu</b>. Tikai faktiskie lauki (nosaukums, vielas un stiprums, forma, iepakojums, '
+               'MAH, ATC); cenas un lietošanas instrukcijas netiek glabātas. '
+               '<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> · '
+               '<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL Type 1</a>.</p>'),
+    },
 }
 
 
@@ -7903,6 +8117,19 @@ for reseptkjeden, <b>ikke et fullstendig register</b> — én statusverdi (aktiv
 utledes fra pakningsnivå), uten registreringsnummer (bare varenummer og strekkode).
 <a href="https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/electronic-prescription-support-system-fest">DMP FEST</a> ·
 <a href="https://data.norge.no/nlod/en/2.0">NLOD 2.0</a></li>
+<li><b>South Korea 韩国 / 대한민국</b>: <b>HIRA</b> (Health Insurance Review &amp; Assessment Service /
+건강보험심사평가원) — <b>약가마스터</b> (drug price master: 의약품표준코드 + 의약품주성분, data.go.kr
+datasets 15067462 / 15067461) under <b>KOGL Type 1 (공공누리 제1유형)</b> — attribution required,
+commercial use and adaptation allowed. Attribution: 출처: 건강보험심사평가원, 「약가마스터」,
+공공데이터포털(data.go.kr), 공공누리 제1유형, 기준일 <b>2026-08-31</b>. DrugCrossRef에서 정규화함.
+中文：数据来自韩国健康保险审查评价院（HIRA）「약가마스터（药价标准表）」，经 공공데이터포털
+（data.go.kr）以「공공누리 제1유형（KOGL Type 1）」提供；本站已做归一化，原始文件不转载；数据截至
+<b>2026-08-31</b>。<b>This is a medical-insurance price list, not the full Korean register</b> —
+there is <b>no 허가번호</b> (registration number) and no sale status; a 취소일자 means “no longer in
+the price list”, not that the approval was withdrawn. 这是医保药价清单，不是韩国注册库全量；
+취소일자 只表示不在药价表内，不等于撤销批文。
+<a href="https://www.data.go.kr/data/15067462/fileData.do">data.go.kr 15067462</a> ·
+<a href="https://www.kogl.or.kr/info/licenseType1.do">KOGL Type 1</a></li>
 <li><b>WHO ATC/DDD Index</b>: ATC codes and hierarchy reference the <b>WHO Collaborating Centre
 for Drug Statistics Methodology</b> ATC/DDD Index; the Index itself is copyrighted and is not
 reproduced. Class/category names shown on ATC pages are editorial or AI-assisted translations,
@@ -13604,6 +13831,31 @@ PRODUCT_I18N: dict[str, dict[str, str]] = {
         "zh-Hant": "註冊/核准號", "fr": "N° d’enregistrement", "ko": "등록·승인 번호",
         "ja": "登録・承認番号", "cs": "Registrační číslo", "lv": "Reģistrācijas numurs",
     },
+    "product.item_code": {
+        "en": "Item code (MFDS)", "es": "Código de ítem (MFDS)", "zh": "品目码（MFDS）",
+        "zh-Hant": "品目碼（MFDS）", "fr": "Code d’article (MFDS)", "ko": "품목기준코드(MFDS)",
+        "ja": "品目コード（MFDS）", "cs": "Kód položky (MFDS)", "lv": "Vienības kods (MFDS)",
+    },
+    "product.kr_status_note": {
+        "en": ("Korean status is only “in the price list” or “unknown”: a 취소일자 means the item left "
+               "the HIRA price list, not that its approval was withdrawn."),
+        "es": ("El estado coreano solo es «en la lista de precios» o «desconocido»: una 취소일자 "
+               "significa que el ítem salió de la lista de precios de HIRA, no que se retirara su "
+               "aprobación."),
+        "zh": "韩国状态只有「在药价表内」或「unknown」：취소일자 表示不在 HIRA 药价表内，不等于撤销批文。",
+        "zh-Hant": "韓國狀態只有「在藥價表內」或「unknown」：취소일자 表示不在 HIRA 藥價表內，不等於撤銷批文。",
+        "fr": ("Le statut coréen est seulement « dans la liste des prix » ou « inconnu » : une 취소일자 "
+               "signifie que l’article a quitté la liste des prix HIRA, pas que son autorisation a été "
+               "retirée."),
+        "ko": ("한국 상태는 「약가표에 있음」 또는 「unknown」 두 가지뿐입니다. 취소일자는 HIRA 약가표에서 "
+               "빠졌다는 뜻이며 허가 취소가 아닙니다."),
+        "ja": ("韓国の状態は「薬価表にあり」または「unknown」の 2 種類のみです。취소일자 は HIRA 薬価表から"
+               "外れたことを意味し、承認の取消しではありません。"),
+        "cs": ("Korejský stav je pouze „v cenovém seznamu“ nebo „neznámý“: 취소일자 znamená, že položka "
+               "vypadla z cenového seznamu HIRA, nikoli že bylo odňato schválení."),
+        "lv": ("Korejas statuss ir tikai „cenu sarakstā“ vai „nezināms“: 취소일zīme, ka vienība izkritusi "
+               "no HIRA cenu saraksta, nevis ka atļauja būtu atsaukta."),
+    },
     "product.asof": {
         "en": "Data as of", "es": "Datos hasta", "zh": "数据截止",
         "zh-Hant": "資料截止", "fr": "Données au", "ko": "데이터 기준일",
@@ -14956,7 +15208,7 @@ def _market_is_enabled(code: str) -> bool:
         return False
 
 
-COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "MY", "NO", "EU")
+COUNTRY_PRIORITY = (("US", "GB", "CA", "AU", "SG", "CN", "ES", "MX", "TW", "HK", "JP", "CZ", "LV", "MY", "NO", "KR", "EU")
                     + (("FR",) if _market_is_enabled("FR") else ()))
 MATRIX_ROW_CAP = 120
 
@@ -16708,7 +16960,13 @@ def _product_page_body(d: dict, neighbours: dict, sources: dict) -> str:
         f'{esc(_product_i18n_label("product.no_approval"))}</span>')
     identity = (f'<p class="drug-identity">{_product_market_html(d["c"])} · '
                 f'{_status_span_html(d["status"], T)}</p>')
-    return f"""{head}{name_missing}{identity}
+    # v1.2.0（KR）：HIRA 没有 허가번호；DB 里的 approval_id 是 품목기준코드（品目码）→ 标签按市场改写。
+    approval_key = "product.item_code" if d["c"] == "KR" else "product.approval"
+    kr_note = ""
+    if d["c"] == "KR":
+        kr_note = (f'<p class="sub kr-status-note" {_pa("product.kr_status_note")}>'
+                   f'{esc(_product_i18n_label("product.kr_status_note"))}</p>')
+    return f"""{head}{name_missing}{identity}{kr_note}
 <div class="pcard">
 <dl class="pdl">
 <dt {_pa("product.inn")}>{esc(_product_i18n_label("product.inn"))}</dt><dd><a href="../drug/{esc(d["sid"])}.html">{esc(d["inn"] or "—")}</a></dd>
@@ -16717,7 +16975,7 @@ def _product_page_body(d: dict, neighbours: dict, sources: dict) -> str:
 <dt data-i18n="name.release">Release</dt><dd>{rel_html or "—"}</dd>
 <dt {_pa("product.pack")}>{esc(_product_i18n_label("product.pack"))}</dt><dd>{esc(d["pack"]) or "—"}</dd>
 <dt data-i18n="col.mah">MAH</dt><dd>{mah_html}</dd>
-<dt {_pa("product.approval")}>{esc(_product_i18n_label("product.approval"))}</dt><dd>{approval}</dd>
+<dt {_pa(approval_key)}>{esc(_product_i18n_label(approval_key))}</dt><dd>{approval}</dd>
 <dt {_pa("product.asof")}>{esc(_product_i18n_label("product.asof"))}</dt><dd>{esc(asof) or "—"}</dd>
 <dt {_pa("product.source")}>{esc(_product_i18n_label("product.source"))}</dt><dd>{src_html} · <span {_pa("product.licence")}>{esc(_product_i18n_label("product.licence"))}</span>: {lic_html or "—"}</dd>
 </dl>
@@ -16781,10 +17039,11 @@ def _product_longtail_page() -> str:
 <dt data-i18n="name.release">{esc(T["name.release"])}</dt><dd id="pv-release" hidden></dd>
 <dt {_pa("product.pack")}>{esc(T["product.pack"])}</dt><dd id="pv-pack"></dd>
 <dt data-i18n="col.mah">{esc(T["col.mah"])}</dt><dd id="pv-mah"></dd>
-<dt {_pa("product.approval")}>{esc(T["product.approval"])}</dt><dd id="pv-approval"></dd>
+<dt id="pv-approval-k" {_pa("product.approval")}>{esc(T["product.approval"])}</dt><dd id="pv-approval"></dd>
 <dt {_pa("product.asof")}>{esc(T["product.asof"])}</dt><dd id="pv-asof"></dd>
 <dt {_pa("product.source")}>{esc(T["product.source"])}</dt><dd id="pv-source"></dd>
 </dl>
+<p class="sub" id="pv-kr-note" hidden {_pa("product.kr_status_note")}>{esc(T["product.kr_status_note"])}</p>
 <p class="notice" {_pa("product.notice")}>{esc(T["product.notice"])}</p>
 <p class="sub"><a id="pv-name-link"><span {_pa("product.back_name")}>{esc(T["product.back_name"])}</span></a> · <a id="pv-drug-link"><span {_pa("product.back_drug")}>{esc(T["product.back_drug"])}</span></a></p>
 </div>
@@ -16847,6 +17106,12 @@ _PRODUCT_LONGTAIL_JS = r"""
       nl.href="name/"+encodeURIComponent(rec.name_slug);}
     if(rec.drug_slug){var dl=document.getElementById("pv-drug-link");
       dl.href="drug/"+encodeURIComponent(rec.drug_slug)+".html";}
+    if(rec.c==="KR"){
+      var ak=document.getElementById("pv-approval-k");
+      if(ak){ak.setAttribute("data-i18n","product.item_code");
+        ak.textContent=(window.T&&window.T("product.item_code"))||ak.textContent;}
+      var kn=document.getElementById("pv-kr-note"); if(kn)kn.hidden=false;
+    }
     if(rec.name_slug){var c=document.createElement("link");c.rel="canonical";
       c.href="https://drugcrossref.com/name/"+encodeURIComponent(rec.name_slug);
       document.head.appendChild(c);}
@@ -18624,6 +18889,8 @@ SOURCE_SHORT = {
     "zva_lv_register": "ZVA",
     # v1.1.0（NO 上车）：FEST 的发布机构是 DMP（Direktoratet for medisinske produkter）。
     "dmp_fest": "DMP FEST",
+    # v1.2.0（KR 上车）：약가마스터 的发布机构是 HIRA。
+    "hira_kr_medprice": "HIRA",
     "manual_seed": "manual",
 }
 
@@ -18635,6 +18902,10 @@ SOURCE_ATTRIBUTION = {
     "dmp_fest": ("Contains data under the Norwegian Licence for Open Government Data (NLOD 2.0) "
                  "distributed by the Norwegian Medical Products Agency (DMP). Changes have been made "
                  "by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms)."),
+    # v1.2.0（KR）：공공누리 제1유형要求标明出处（可商用、可演绎）。
+    "hira_kr_medprice": ("Source: Health Insurance Review & Assessment Service (HIRA), “약가마스터” "
+                         "(drug price master), via data.go.kr under KOGL Type 1 (공공누리 제1유형). "
+                         "Changes made by DrugCrossRef (normalisation)."),
 }
 
 
@@ -18684,7 +18955,8 @@ def build_about(stats, coverage, source_cover=()) -> None:
     for key in ("about.lead", "about.rules", "about.nick", "about.nick_merged", "about.terms",
                 "about.sources", "about.loading", "about.tw_source", "about.sg_source",
                 "about.hk_source", "about.au_source", "about.eu_source", "about.cz_source",
-                "about.lv_source", "about.my_source", "about.no_source", "about.fr_source"):
+                "about.lv_source", "about.my_source", "about.no_source", "about.kr_source",
+                "about.fr_source"):
         parts.append(f'<div data-i18n-html="{key}">{T[key]}</div>')
     # v0.15.0（Q19/K2）：MO ISAF / KR MFDS 官方查询入口（只链接、不复制数据），六语由 i18n.js 切换
     parts.append(_official_links_html())

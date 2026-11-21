@@ -53,10 +53,12 @@ DB = ROOT / "data" / "drugs.db"
 # 2026-11-20（M7/task-7）：MY 市场接入（NPRA/QUEST3+）→ 15 国 + EU；马来语界面未接入，gap=["ms"]。
 # 2026-11-22（NO，v1.1.0）：NO 市场接入（DMP FEST 2.5.1 / NLOD 2.0）→ 16 国 + EU；
 #   挪威语界面未接入（本版不新增界面语言），gap=["nb","no"]。
+# 2026-11-22（KR，v1.2.0）：KR 市场接入（HIRA 약가마스터 / KOGL 제1유형）→ 17 国 + EU；
+#   韩语界面已存在（ko，LG1 纯界面语言）→ gap=[]。
 SITE_LANGS = {("en", ""), ("es", "es/"), ("zh", "zh/"), ("zh-Hant", "zh-Hant/"),
               ("fr", "fr/"), ("ko", "ko/"), ("ja", "ja/"), ("cs", "cs/"), ("lv", "lv/")}
 SITE_COUNTRY_I18N = {"US", "GB", "CN", "ES", "MX", "AU", "CA", "TW", "SG", "HK",
-                     "FR", "JP", "CZ", "LV", "MY", "NO"}
+                     "FR", "JP", "CZ", "LV", "MY", "NO", "KR"}
 # v0.11.0：EU 区域层启用（kind=region，own_data=true，不进 country_order）
 SITE_REGION_I18N = {"EU"}
 
@@ -132,6 +134,8 @@ MARKET_NATIVE_LANGS: dict[str, tuple[str, ...]] = {
     "JP": ("ja",), "CZ": ("cs",), "LV": ("lv",), "MY": ("ms",),
     # 2026-11-22（NO）：挪威语两种 BCP47 写法都在站点界面语言之外（nb = Bokmål，no = 宏语言）。
     "NO": ("nb", "no"),
+    # 2026-11-22（KR，v1.2.0）：韩语界面已启用（ko 是 LG1 纯界面语言）→ 缺口为空。
+    "KR": ("ko",),
 }
 UI_LANG_FIELDS = ("ui_languages", "ui_language_gaps")
 
@@ -239,14 +243,14 @@ class TestMarkets(RegistryBase):
         # 2026-11-20（M7）：MY 已随数据启用（enabled 市场 == DB 国家集合）
         # 2026-11-22（NO）：NO 已随 FEST 数据启用 → 16 国 + EU。
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
-                          "EU", "FR", "JP", "CZ", "LV", "MY", "NO"},
+                          "EU", "FR", "JP", "CZ", "LV", "MY", "NO", "KR"},
                          codes)
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
-                          "FR", "JP", "CZ", "LV", "MY", "NO"},
+                          "FR", "JP", "CZ", "LV", "MY", "NO", "KR"},
                          set(self.reg.country_order))
         # v0.11.0：EU 区域层启用（own_data=true，国家集合不变）
         self.assertEqual({"US", "GB", "CA", "AU", "ES", "MX", "CN", "TW", "SG", "HK",
-                          "EU", "FR", "JP", "CZ", "LV", "MY", "NO"},
+                          "EU", "FR", "JP", "CZ", "LV", "MY", "NO", "KR"},
                          {m.code for m in self.reg.enabled_markets})
         self.assertEqual(("EU",), self.reg.region_codes)
 
@@ -307,6 +311,25 @@ class TestMarkets(RegistryBase):
         for lang in ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv"):
             self.assertTrue((m.name.get(lang) or "").strip(),
                             f"NO 缺 name.{lang}")
+
+    def test_kr_market_row(self) -> None:
+        """2026-11-22（KR，v1.2.0）：KR 市场行（17 国 + EU；韩语界面已存在，gap=[]）。"""
+        m = self.reg.require_market("KR")
+        self.assertTrue(m.enabled)
+        self.assertEqual(M.KIND_COUNTRY, m.kind)
+        self.assertEqual("ASIA", m.group)
+        self.assertIsNone(m.parent)
+        self.assertEqual("home.kr", m.i18n_key)
+        self.assertEqual("hira_kr_medprice", m.source_id)
+        self.assertEqual(160, m.order)
+        self.assertEqual(("ko",), m.languages)
+        self.assertEqual("ko", m.default_lang)
+        row = self.market_dict("KR")
+        self.assertEqual([], row["ui_language_gaps"])
+        self.assertEqual(9, len(row["ui_languages"]))
+        self.assertEqual("2026-08-31", row["data_as_of"])
+        for lang in ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv"):
+            self.assertTrue((m.name.get(lang) or "").strip(), f"KR 缺 name.{lang}")
 
     def test_market_required_shape(self) -> None:
         for m in self.reg.markets.values():
@@ -512,7 +535,7 @@ class TestUiLanguageCoverage(RegistryBase):
 
     def test_every_enabled_market_declares_both_fields(self) -> None:
         enabled = [m for m in self.raw_markets["markets"] if m.get("enabled")]
-        self.assertEqual(17, len(enabled))
+        self.assertEqual(18, len(enabled))
         for row in enabled:
             for key in UI_LANG_FIELDS:
                 self.assertIn(key, row, f"市场 {row['code']} 缺 {key}")
@@ -756,8 +779,8 @@ class TestCliAndDocs(RegistryBase):
         data = json.loads(p.stdout)
         # v0.13.0（2026-11-16）：15 市场（14 国 + EU region）；v0.13.8：10 → 11（含 ko）；
         # v0.16.0：11 → 12（含 ja）；v0.17.0：12 → 14（含 cs / lv）；2026-11-20：16（+ MY）；
-        # 2026-11-22：17（+ NO）
-        self.assertEqual(17, len(data["markets"]))
+        # 2026-11-22：17（+ NO）；v1.2.0：18（+ KR）
+        self.assertEqual(18, len(data["markets"]))
         self.assertEqual(14, len(data["languages"]))
         self.assertEqual("US", data["markets"][0]["code"])
 
