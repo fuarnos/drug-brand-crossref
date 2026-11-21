@@ -13789,6 +13789,11 @@ def _search_form(prefix: str, form_id: str = "pq", cls: str = "page-search") -> 
 PRODUCT_STATIC_TOP_N = 50_000      # 首期静态页硬上限（实际条数构建时现算，见报告）
 PRODUCT_STATIC_MARKET_CAP = 6_000  # 每市场硬上限（轮转分配下不触发）
 PRODUCT_STATIC_MODE = "roundrobin"  # 轮转：按 markets.json order 每轮每市场取 1 条
+# v1.2.1（T11）：静态产品页「只增不减」。R2 静态托管无法做 301，删掉已发布的
+# /product/<pid>.html 就是 404 → pins 记录曾发布过的 pid，构建集 = pins ∪ 本期新选。
+PRODUCT_STATIC_PINS = ROOT / "data" / "product" / "static_pins.json"
+PRODUCT_STATIC_CAP = 60_000        # pins ∪ 新选 的软上限：超限只报警，不删 pins
+PRODUCT_STATIC_PINNED: int = 0     # 本次构建里来自 pins 的额外页数（供日志/报告）
 PRODUCT_BUCKETS = 512              # 长尾数据桶数（单桶 gzip 目标 ≤120 KB）
 PRODUCT_BUCKET_DIR = "data/product"
 PRODUCT_STATIC_IDS: set[str] = set()   # main() 里 select_static_product_ids() 填，供链接判定
@@ -16746,6 +16751,45 @@ def _eligible_market_products(db: sqlite3.Connection, market: str, limit: int) -
 PRODUCT_STATIC_DIST: dict[str, int] = {}
 
 
+def load_static_pins() -> list[str]:
+    """读 `data/product/static_pins.json` 的 pid 清单（缺失/损坏 → 空表，不崩构建）。"""
+    try:
+        data = json.loads(PRODUCT_STATIC_PINS.read_text(encoding="utf-8"))
+        pids = data.get("pids") if isinstance(data, dict) else data
+        return sorted({str(x) for x in (pids or []) if str(x).strip()})
+    except (OSError, ValueError):
+        return []
+
+
+def save_static_pins(pids: list[str]) -> None:
+    """把「曾发布过的 pid」并回 pins（只增不减；排序保证构建确定性与 diff 干净）。"""
+    merged = sorted({str(x) for x in pids if str(x).strip()})
+    PRODUCT_STATIC_PINS.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "schema": 1,
+        "description": ("静态产品页「曾发布过」的 pid 清单（append-only）。构建时静态集 = pins ∪ 本期新选，"
+                        "上限 60000；超限只报警不删。理由：R2 静态托管无法做 301，删掉已发布的 "
+                        "/product/<pid>.html 会直接 404。不要手工删条目（只增不减）。"),
+        "count": len(merged),
+        "pids": merged,
+    }
+    PRODUCT_STATIC_PINS.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n",
+                                   encoding="utf-8")
+
+
+def _market_dist(db: sqlite3.Connection, pids: list[str]) -> dict[str, int]:
+    """pid 前缀不可靠（如 KR-200803048），市场分布按 DB 现查（400/批）。"""
+    out: dict[str, int] = {}
+    for batch in _chunks(pids, 400):
+        q = ",".join("?" * len(batch))
+        for r in db.execute(
+                f"SELECT COALESCE(country, region) AS mk, COUNT(*) FROM product "
+                f"WHERE product_id IN ({q}) GROUP BY mk", batch):
+            if r[0]:
+                out[str(r[0])] = out.get(str(r[0]), 0) + int(r[1])
+    return out
+
+
 def select_static_product_ids(db: sqlite3.Connection) -> list[str]:
     """静态产品页 Top N（v1.1.1 / T5）：每市场上限 + 数据驱动分配。
 
@@ -16780,12 +16824,22 @@ def select_static_product_ids(db: sqlite3.Connection) -> list[str]:
             if len(out) >= PRODUCT_STATIC_TOP_N:
                 break
     out = out[:PRODUCT_STATIC_TOP_N]
-    PRODUCT_STATIC_DIST.clear()
+    # v1.2.1（T11）：已发布过的静态页一个都不能删（R2 静态托管无法 301）。
+    pins = load_static_pins()
     taken = set(out)
-    for m in order:
-        n = len([pid for pid in per[m] if pid in taken])
-        if n:
-            PRODUCT_STATIC_DIST[m] = n
+    extra = [pid for pid in pins if pid not in taken]
+    out = out + extra
+    global PRODUCT_STATIC_PINNED
+    PRODUCT_STATIC_PINNED = len(extra)
+    print(f"  static pins : {len(pins):,} pinned pids, +{len(extra):,} restored this build",
+          flush=True)
+    if len(out) > PRODUCT_STATIC_CAP:
+        print(f"  !! static cap: {len(out):,} > {PRODUCT_STATIC_CAP:,} — 只报警不删"
+              f"（超限 {len(out) - PRODUCT_STATIC_CAP:,} 页；由人决定何时 prune pins）", flush=True)
+    # 只增不减：把本期静态集并回 pins（下一版继续保留）
+    save_static_pins(out)
+    PRODUCT_STATIC_DIST.clear()
+    PRODUCT_STATIC_DIST.update(_market_dist(db, out))
     return out
 
 
