@@ -231,6 +231,10 @@ class AtcCategorySearchTest(unittest.TestCase):
         v0.18.0 数据窗口（新增 MY 马来西亚 29,956 条）后又有两条期望随现查变化，实现未变：
         · 抗凝药：Rivaroxaban 2,421 > Aspirin 2,388（MY 数据把 Rivaroxaban 顶到第一）
         · 抗抑郁药：Escitalopram 868 > Duloxetine 867（差 1 条；卡片显示去盐基名）
+
+        v1.1.0（NO 入库）：Duloxetine 874 > Escitalopram Oxalate 868（剔除 NO 时 868 > 862）；
+        期望值随数据窗口变化、实现不变（874−862=+12：NO 7 行 + EU 区域层 5 行；
+        Escitalopram 系 +14，基盐名分列、不合并）。
         """
         cases = [
             ("退烧药", "analgesics", "Acetaminophen"),
@@ -243,7 +247,7 @@ class AtcCategorySearchTest(unittest.TestCase):
             ("抗过敏药", "allergy", "Chlorpheniramine"),
             ("抗凝药", "anticoagulants", "Rivaroxaban"),   # v0.18.0 MY：2,421 > Aspirin 2,388
             ("他汀", "statins", "Atorvastatin"),
-            ("抗抑郁药", "antidepressants", "Escitalopram"),  # v0.18.0 MY：868 > Duloxetine 867
+            ("抗抑郁药", "antidepressants", "Duloxetine"),  # v1.1.0 NO：874 > Escitalopram Oxalate 868
             ("皮肤药", "dermatologicals", "Zinc Oxide"),
         ]
         for q, cid, ing in cases:
@@ -265,7 +269,7 @@ class AtcCategorySearchTest(unittest.TestCase):
         for q, cid, ing in (("抗过敏药", "allergy", "Chlorpheniramine"),
                             ("Blood-pressure medicines", "antihypertensives",
                              "Hydrochlorothiazide"),
-                            ("抗抑鬱藥", "antidepressants", "Escitalopram")):  # v0.18.0 MY：868 > Duloxetine 867
+                            ("抗抑鬱藥", "antidepressants", "Duloxetine")):  # v1.1.0 NO：874 > 868
             res = self.idx.search(q)
             self.assertEqual(res.match_detail["category_id"], cid, q)
             # 首位卡片可以是复方卡（如 Irbesartan + Hydrochlorothiazide），但必须含期望成分
