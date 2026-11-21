@@ -8211,7 +8211,7 @@ padding:14px 16px;margin:10px 0}
    搜索框不再压 h1 正下方；图标在返回路径行右端，展开后是 40px 表单（预填当前页药名）。 */
 .crumbs .qsearch{float:right;margin:-4px 0 0 10px;position:relative}
 .crumbs .qsearch>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
- min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;
+ min-height:32px;padding:0 10px;border:1px solid var(--line);border-radius:999px;font-size:14px;
  color:var(--muted);background:var(--bg)}
 .crumbs .qsearch>summary::-webkit-details-marker{display:none}
 .crumbs .qsearch[open]>summary{color:var(--fg);border-color:var(--accent)}
