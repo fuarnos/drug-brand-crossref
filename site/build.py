@@ -13786,13 +13786,13 @@ def _search_form(prefix: str, form_id: str = "pq", cls: str = "page-search") -> 
 # ── v1.1.1（T5）：每个产品一个页面（B 混合）────────────────────────────────
 # 用户 2026-11-22 拍板：静态 `/product/<pid>.html` 收 Top N；长尾 `/product.html?pid=`
 # 只拉 1 个桶（512 桶，FNV-1a % 512）。两者同一份模板、同一份数据口径。
-PRODUCT_STATIC_TOP_N = 50_000      # 首期静态页硬上限（实际条数构建时现算，见报告）
+PRODUCT_STATIC_TOP_N = 84_000      # 静态页硬上限（v1.2.2 第 2 批：50,000 → 84,000；实际条数构建时现算，见报告）
 PRODUCT_STATIC_MARKET_CAP = 6_000  # 每市场硬上限（轮转分配下不触发）
 PRODUCT_STATIC_MODE = "roundrobin"  # 轮转：按 markets.json order 每轮每市场取 1 条
 # v1.2.1（T11）：静态产品页「只增不减」。R2 静态托管无法做 301，删掉已发布的
 # /product/<pid>.html 就是 404 → pins 记录曾发布过的 pid，构建集 = pins ∪ 本期新选。
 PRODUCT_STATIC_PINS = ROOT / "data" / "product" / "static_pins.json"
-PRODUCT_STATIC_CAP = 60_000        # pins ∪ 新选 的软上限：超限只报警，不删 pins
+PRODUCT_STATIC_CAP = 90_000        # pins ∪ 新选 的软上限：超限只报警，不删 pins
 PRODUCT_STATIC_PINNED: int = 0     # 本次构建里来自 pins 的额外页数（供日志/报告）
 PRODUCT_BUCKETS = 512              # 长尾数据桶数（单桶 gzip 目标 ≤120 KB）
 PRODUCT_BUCKET_DIR = "data/product"
@@ -16768,7 +16768,7 @@ def save_static_pins(pids: list[str]) -> None:
     payload = {
         "schema": 1,
         "description": ("静态产品页「曾发布过」的 pid 清单（append-only）。构建时静态集 = pins ∪ 本期新选，"
-                        "上限 60000；超限只报警不删。理由：R2 静态托管无法做 301，删掉已发布的 "
+                        "上限 90000；超限只报警不删。理由：R2 静态托管无法做 301，删掉已发布的 "
                         "/product/<pid>.html 会直接 404。不要手工删条目（只增不减）。"),
         "count": len(merged),
         "pids": merged,
@@ -16796,7 +16796,7 @@ def select_static_product_ids(db: sqlite3.Connection) -> list[str]:
     规则（Lead 2026-11-22 定）：
       1) 合格集 = active + 成分已映射 + 有剂型 + (pack 或含量至少一项)；
       2) 按 `data/markets.json` 的 order 遍历市场，**每市场最多 PRODUCT_STATIC_MARKET_CAP**；
-      3) 总数硬上限 PRODUCT_STATIC_TOP_N（50,000），超出一律截断，不产生 51k。
+      3) 总数硬上限 PRODUCT_STATIC_TOP_N（84,000），超出一律截断，不产生 85k。
       两种分配：`roundrobin`（默认，每轮每市场取 1 条，覆盖所有合格市场）/
       `ordered`（按市场序吃完再下一个）。默认轮转，保证每个有数据的市场都有静态页。
     """
