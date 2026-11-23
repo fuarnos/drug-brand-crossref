@@ -46,6 +46,28 @@
       * Budget reference (AGENTS.md section 6): free 1M Class A/month, $4.50 per million
         above it, Cloudflare rounds UP to the next million; >1M needs user approval.
 
+    REL6 (2026-11-24) data-driven keep-alive of content-hashed assets:
+      * Every release that changes CSS/JS mints new assets/style.<sha256[:10]>.css and
+        assets/boot.<sha256[:10]>.js names (site/build.py), and `rclone sync` deletes the
+        previous version's hash-named files - so a browser still holding the old HTML 404s on
+        them (v1.0.1 lost boot.882e52f15e.js exactly this way). REL2-B covered that with two
+        hand-written exact excludes; REL6 replaces the hand-maintained list with
+        data/legacy_assets.json, so every release no longer needs a manual edit.
+      * deploy\collect_legacy_assets.ps1 appends the hashed names found in the CURRENT
+        site/dist/assets (= the previous release) with expires = collect date + 30 days.
+        Run it BEFORE site/build.py: the build overwrites site/dist, so afterwards those
+        previous names are gone from disk.
+      * This script reads the manifest, keeps the unexpired entries, and turns each one into an
+        EXACT `--exclude assets/<name>` (regex-validated: style|boot + 10 hex + css|js). A
+        wildcard entry is a hard error (exit 2), so the exclude set can never grow unbounded
+        and a typo cannot silently protect the whole bucket. Expired entries are ignored
+        automatically and printed as such.
+      * The REL2-B pair stays hard-coded until 2026-12-20 and the manifest row wins on a name
+        collision, so the transition has no gap; both lists feed the same exclude array.
+      * Runbook order: collect -> build -> sync. The keep list (active / expired-ignored /
+        invalid-ignored) is printed before any upload in BOTH -DryRun and real runs; -DryRun
+        still writes nothing (no uploads, no ledger row).
+
 .PARAMETER Dist
     Build directory. Default site\dist.
 
@@ -81,16 +103,29 @@
     PUT ledger JSONL path. Default data\r2_put_ledger.jsonl (relative paths resolve from
     the repo root). Override only for tests / ops (e.g. a simulated ledger).
 
+.PARAMETER ManifestPath
+    REL6 keep-alive manifest. Default data\legacy_assets.json (relative paths resolve from the
+    repo root). Read-only here - entries are appended by deploy\collect_legacy_assets.ps1.
+    Each entry is an exact asset file name (style.<10 hex>.css / boot.<10 hex>.js), protected
+    through its `expires` date inclusive, then ignored. Override only for tests / ops.
+
+.PARAMETER ShowAssetExcludes
+    Print the resolved keep list (active / expired-ignored / invalid-ignored) plus the exact
+    `--exclude` arguments, then exit 0 before any credential or rclone work. For the release
+    runbook and the REL6 self-test.
+
 .EXAMPLE
     powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -DryRun
     powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1
     powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -CheckOnly
     powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -LedgerPath .tmp\ledger.jsonl -DryRun
+    powershell -NoProfile -ExecutionPolicy Bypass -File deploy\sync_r2.ps1 -ShowAssetExcludes
 
 .NOTES
-    Exit codes: 0 ok, 2 missing credentials / rclone / dist, 1 rclone failure,
-    3 budget / approval gate refused (month-to-date >= 900k, planned > 50k without
-    -ApproveLarge, or projected month total >= 900k without -ApproveLarge).
+    Exit codes: 0 ok, 2 missing credentials / rclone / dist (or a wildcard / malformed keep
+    list), 1 rclone failure, 3 budget / approval gate refused (month-to-date >= 900k,
+    planned > 50k without -ApproveLarge, or projected month total >= 900k without
+    -ApproveLarge). -ShowAssetExcludes exits 0 without touching credentials or rclone.
     Rollback: the gh-pages copy stays live for 30 days (see DEPLOY.md).
 
     Logs (Q8, 2026-11-18): the rclone stats block is now printed at NOTICE every 60s and once
@@ -113,7 +148,9 @@ param(
     [switch]$CheckOnly,
     [int]$Transfers = 64,
     [switch]$ApproveLarge,
-    [string]$LedgerPath = ''
+    [string]$LedgerPath = '',
+    [string]$ManifestPath = '',
+    [switch]$ShowAssetExcludes
 )
 
 $ErrorActionPreference = 'Stop'
@@ -293,6 +330,152 @@ function Add-R2LedgerRow([string]$Path, [string]$Version, [int]$Files, [double]$
 
 # -- REL3 (2026-11-21): budget guard / PUT ledger helpers --
 # (helper functions used by the budget guard below)
+
+# -- REL6 (2026-11-24): data-driven keep-alive of content-hashed assets --------
+# Contract: data\legacy_assets.json holds exact hashed asset file names (style.<10 hex>.css /
+# boot.<10 hex>.js) with an inclusive `expires` date. Entries are appended by
+# deploy\collect_legacy_assets.ps1 from the PREVIOUS site/dist/assets (run before
+# site/build.py), and consumed here as exact `--exclude assets/<name>` arguments.
+# Hard rules: no wildcards (a wildcard entry aborts with exit 2), expired entries are ignored
+# automatically, and the REL2-B hand-written pair stays hard-coded until 2026-12-20 so the
+# transition has no gap (a manifest row for the same name wins; that is the convergence path).
+$LegacyAssetRetireOn = '2026-12-20'
+$LegacyAssetNamePattern = '^(style|boot)\.[0-9a-f]{10}\.(css|js)$'
+$LegacyAssetHardcoded = @(
+    [pscustomobject]@{ Name = 'style.885ce0a604.css'; Expires = [datetime]$LegacyAssetRetireOn; Source = 'rel2-b-hardcoded' }
+    [pscustomobject]@{ Name = 'boot.510d5a90dd.js'; Expires = [datetime]$LegacyAssetRetireOn; Source = 'rel2-b-hardcoded' }
+)
+
+function Get-ReleaseToday {
+    # Repo docs / reports use Beijing dates (AGENTS.md section 12) while this host runs UTC-8,
+    # so an overnight Beijing release would otherwise evaluate expiry one day early. Fall back
+    # to the local date if the time zone id is unavailable.
+    try {
+        $bj = [System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), 'China Standard Time')
+        if ($bj) { return $bj.Date }
+    } catch { }
+    return (Get-Date).Date
+}
+
+function Test-LegacyAssetName([string]$Name) {
+    # Exact name only: no wildcards, no 'assets/' prefix, no path tricks.
+    if (-not $Name) { return $false }
+    if ($Name -match '[\*\?\[]') { return $false }
+    if ($Name.StartsWith('assets/')) { return $false }
+    return ($Name -match $LegacyAssetNamePattern)
+}
+
+function ConvertTo-ManifestDate([object]$Value) {
+    # yyyy-MM-dd or $null (a single malformed row must not kill the keep list).
+    if ($null -eq $Value) { return $null }
+    try {
+        return [datetime]::ParseExact([string]$Value, 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture)
+    } catch {
+        return $null
+    }
+}
+
+function Read-LegacyAssetManifest([string]$Path) {
+    # Tolerant reader: a release must not be blocked by a missing / broken manifest, but every
+    # problem is printed as a WARN by Show-LegacyAssetKeepList (silent loss of protection is
+    # what REL6 exists to prevent). Wildcards are reported separately: they abort (exit 2).
+    $res = @{ Exists = $false; Entries = @(); Rejected = @(); Problems = @(); HasWildcard = $false }
+    if (-not (Test-Path -LiteralPath $Path)) {
+        $res.Problems += ("manifest not found ({0}); only the hard-coded pair is protected - run deploy\collect_legacy_assets.ps1 before site\build.py" -f $Path)
+        return $res
+    }
+    $res.Exists = $true
+    try {
+        $doc = (Get-Content -LiteralPath $Path -Encoding UTF8 -Raw) | ConvertFrom-Json
+    } catch {
+        $res.Problems += ("manifest is not valid JSON ({0}); ignored for this run" -f $_.Exception.Message)
+        return $res
+    }
+    foreach ($e in @($doc.entries)) {
+        if ($null -eq $e) { continue }
+        $name = [string]$e.name
+        if ($name -match '[\*\?\[]') {
+            $res.HasWildcard = $true
+            $res.Rejected += [pscustomobject]@{ Name = $name; Reason = 'wildcards are forbidden (exact hashed asset names only)' }
+            continue
+        }
+        if (-not (Test-LegacyAssetName $name)) {
+            $res.Rejected += [pscustomobject]@{ Name = $name; Reason = ('not an exact hashed asset name (want style|boot.<10 hex>.css|js): {0}' -f $LegacyAssetNamePattern) }
+            continue
+        }
+        $exp = ConvertTo-ManifestDate $e.expires
+        if ($null -eq $exp) {
+            $res.Rejected += [pscustomobject]@{ Name = $name; Reason = ("bad expires '{0}' (want yyyy-MM-dd)" -f [string]$e.expires) }
+            continue
+        }
+        $src = if ($e.source) { [string]$e.source } else { 'manifest' }
+        $res.Entries += [pscustomobject]@{ Name = $name; Expires = $exp; Source = $src }
+    }
+    return $res
+}
+
+function Resolve-LegacyAssetKeepList([string]$Path) {
+    # Merge: REL2-B hard-coded pair first, manifest second (manifest wins on the same name).
+    # Partition into active (expires >= today, inclusive) / expired (ignored).
+    $today = Get-ReleaseToday
+    $map = [ordered]@{}
+    foreach ($h in $LegacyAssetHardcoded) { $map[$h.Name] = $h }
+    $man = Read-LegacyAssetManifest $Path
+    foreach ($e in $man.Entries) { $map[$e.Name] = $e }
+    $active = @()
+    $expired = @()
+    foreach ($name in @($map.Keys)) {
+        $entry = $map[$name]
+        if ($entry.Expires -ge $today) { $active += $entry } else { $expired += $entry }
+    }
+    $excludeArgs = @()
+    foreach ($entry in $active) {
+        $excludeArgs += '--exclude'
+        $excludeArgs += ('assets/' + $entry.Name)
+    }
+    return @{
+        ManifestPath = $Path
+        Today        = $today
+        Active       = $active
+        Expired      = $expired
+        Rejected     = $man.Rejected
+        Problems     = $man.Problems
+        HasWildcard  = $man.HasWildcard
+        ExcludeArgs  = $excludeArgs
+    }
+}
+
+function Show-LegacyAssetKeepList($Keep) {
+    # Printed in BOTH -DryRun and real runs, before any upload / budget gate.
+    Write-Host ("assets-keep: manifest = {0}" -f $Keep.ManifestPath)
+    Write-Host ("assets-keep: today (Beijing) = {0:yyyy-MM-dd}; entries stay excluded through `expires` (inclusive)" -f $Keep.Today)
+    foreach ($p in $Keep.Problems) { Write-Host ("WARN: assets-keep: {0}" -f $p) }
+    foreach ($e in $Keep.Active) {
+        Write-Host ("assets-keep:   keep    assets/{0}   expires {1:yyyy-MM-dd}   ({2})" -f $e.Name, $e.Expires, $e.Source)
+    }
+    foreach ($e in $Keep.Expired) {
+        Write-Host ("assets-keep:   expired assets/{0}   expired {1:yyyy-MM-dd}   (ignored, no --exclude)" -f $e.Name, $e.Expires)
+    }
+    foreach ($e in $Keep.Rejected) {
+        Write-Host ("assets-keep:   invalid {0}   ({1})   (ignored, no --exclude)" -f $e.Name, $e.Reason)
+    }
+    $wildcards = @($Keep.Active | Where-Object { $_.Name -match '[\*\?\[]' }).Count
+    Write-Host ("assets-keep: {0} exact --exclude(s), {1} expired ignored, {2} invalid ignored, {3} wildcard(s)" -f $Keep.Active.Count, $Keep.Expired.Count, $Keep.Rejected.Count, $wildcards)
+}
+
+if (-not $ManifestPath) { $ManifestPath = Join-Path $Root 'data\legacy_assets.json' }
+elseif (-not [System.IO.Path]::IsPathRooted($ManifestPath)) { $ManifestPath = Join-Path $Root $ManifestPath }
+$AssetKeep = Resolve-LegacyAssetKeepList $ManifestPath
+Show-LegacyAssetKeepList $AssetKeep
+if ($AssetKeep.HasWildcard) {
+    Write-Host 'ERROR: keep list contains a wildcard entry; refusing to publish with an unbounded --exclude set (fix data\legacy_assets.json).'
+    exit 2
+}
+if ($ShowAssetExcludes) {
+    Write-Host ("assets-keep: exclude args: {0}" -f ($AssetKeep.ExcludeArgs -join ' '))
+    exit 0
+}
+
 $dotenv = Read-DotEnv (Join-Path $Root '.env')
 $need = @('R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_BUCKET')
 $missing = @($need | Where-Object { -not $dotenv[$_] })
@@ -332,20 +515,17 @@ try {
 
     $confArgs = @('--config', $conf, '--fast-list')
 
-    # REL2-B (2026-11-20): v0.19.0 hash-named assets must survive `rclone sync`.
-    # Sites cached by browsers before v1.0.0 still request these two files; since the
-    # v1.0.0 build stops shipping them locally, a plain sync would DELETE them from R2
-    # (remote-only objects) and break those cached pages. Keep them with two EXACT
-    # excludes - deliberately no wildcards (a wildcard would also protect every future
-    # hash-named file and silently grow the bucket, and would hide typos).
-    # Retire after 2026-12-20 (by then pre-v1.0.0 cached pages are negligible).
-    # Also passed to BOTH `rclone check` runs below: the post-sync check is two-way, so
-    # once site/dist stops shipping the files a strict check reports them as 2
-    # differences and exits 1 (release failure) - proven by REL2-B self-test.
-    $LegacyAssetExcludes = @(
-        '--exclude', 'assets/style.885ce0a604.css',
-        '--exclude', 'assets/boot.510d5a90dd.js'
-    )
+    # REL6 (2026-11-24): the exclude set is now data-driven - see $AssetKeep resolved above
+    # (data\legacy_assets.json + the REL2-B hard-coded pair). Why excludes at all: sites cached
+    # by browsers before v1.0.0 (and any page from the previous release that still references a
+    # hash-named asset) request files the newer build no longer ships; a plain sync would
+    # DELETE them from R2 (remote-only objects) and turn those cached pages into 404s. The
+    # excludes are exact names only, deliberately no wildcards (a wildcard would protect every
+    # future hash-named file, silently grow the bucket and hide typos).
+    # Also passed to BOTH `rclone check` runs below: the post-sync check is two-way, so once
+    # site/dist stops shipping an excluded file a strict check reports it as a difference and
+    # exits 1 (release failure) - proven by the REL2-B self-test and the REL6 self-test.
+    $AssetExcludes = @($AssetKeep.ExcludeArgs)
 
     if ($CheckOnly) {
         # --one-way: the bucket intentionally holds the synthetic language-root fallback
@@ -354,7 +534,7 @@ try {
         # (2026-11-13: without --one-way, -CheckOnly exited 1 with `1 differences / 1 files
         # missing` on a healthy bucket, purely because of fr/).
         Write-Host ("check: {0} -> r2:{1} (size-only, one-way)" -f $Dist, $bucket)
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs @LegacyAssetExcludes
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs @AssetExcludes
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
         Write-Host 'check: OK (size-only, one-way)'
         exit 0
@@ -381,7 +561,7 @@ try {
     # parse that as 0 PUT.
     $syncArgs = @('sync', $Dist, ("r2:{0}" -f $bucket), '--checksum',
                   '--transfers', $Transfers, '--checkers', $Transfers,
-                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs + $LegacyAssetExcludes
+                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs + $AssetExcludes
     # -- REL3 (2026-11-21): R2 Class A budget guard + PUT ledger ----------------
     # Free tier = 1M Class A ops/month; above it $4.50 per million, Cloudflare rounds UP
     # to the next million; projected > 1M needs the USER's approval (AGENTS.md section 6).
@@ -500,11 +680,11 @@ try {
 
     if (-not $DryRun) {
         Write-Host 'upload done; verifying sizes'
-        # REL2-B: pass the same exact excludes as the sync. After the v1.0.0 build stops
-        # shipping assets/style.885ce0a604.css / assets/boot.510d5a90dd.js they are
-        # remote-only (deliberately kept for pre-v1.0.0 cached pages); a two-way check
-        # would report 2 differences and exit 1, failing the release for the wrong reason.
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs @LegacyAssetExcludes
+        # REL6: pass the same exact excludes as the sync ($AssetExcludes, from the keep list
+        # printed at the top). Excluded hash-named assets are remote-only by design (kept alive
+        # for pages cached by the previous release); a two-way check would report each one as a
+        # difference and exit 1, failing the release for the wrong reason.
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs @AssetExcludes
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
 
         # REL2-B (2026-11-20): second pass over assets/ only, with a 5-minute browser cache.
