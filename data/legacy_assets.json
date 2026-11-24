@@ -35,6 +35,12 @@
                         "added":  "2026-11-25",
                         "expires":  "2026-12-25",
                         "source":  "collect"
+                    },
+                    {
+                        "name":  "boot.767ed3bbf9.js",
+                        "added":  "2026-11-25",
+                        "expires":  "2026-12-25",
+                        "source":  "collect"
                     }
                 ]
 }
