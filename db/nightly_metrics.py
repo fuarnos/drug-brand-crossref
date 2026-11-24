@@ -22,7 +22,7 @@
     inn_en 归一化后相同或 inn_zh 相同）
   pages.total_files / html_total / drug_pages / name_pages / total_bytes
   sizes.first_screen_gz / first_search_gz / core_gz / index_gz / raw 体积
-  sitemap.urls
+  sitemap.urls（v1.2.3 起 sitemap.xml 是索引 → 各分片 <url> 求和，口径与旧单文件一致）
 阈值（改动需同步报告）：
   产品数/成分数/页面数/sitemap 数 下降 > 1%；规格覆盖率/ATC 覆盖率 下降 > 1pp；
   severe 碰撞数 变化 > 5%（暴增也是数据异常信号）；重复成分对数 增加 > 20%；
@@ -221,7 +221,18 @@ def dist_metrics(dist: Path) -> tuple[dict, dict]:
     sitemap_urls = 0
     sm = dist / "sitemap.xml"
     if sm.is_file():
-        sitemap_urls = sm.read_text(encoding="utf-8").count("<url>")
+        sm_text = sm.read_text(encoding="utf-8", errors="replace")
+        if "<sitemapindex" in sm_text:
+            # v1.2.3 起 sitemap.xml 是索引（分片 sitemap-N.xml，每片 ≤50,000）：
+            # URL 总数 = 各分片 <url> 求和，口径与旧单文件一致，避免夜间指标误报「下跌」。
+            for ref in re.findall(r"<loc>\s*(.*?)\s*</loc>", sm_text, re.S):
+                name = ref.rsplit("/", 1)[-1]
+                shard = dist / name
+                if shard.is_file():
+                    sitemap_urls += shard.read_text(
+                        encoding="utf-8", errors="replace").count("<url>")
+        else:
+            sitemap_urls = sm_text.count("<url>")
     pages["sitemap_urls"] = sitemap_urls
 
     paths = {

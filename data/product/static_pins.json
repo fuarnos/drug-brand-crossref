@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "description": "静态产品页「曾发布过」的 pid 清单（append-only）。构建时静态集 = pins ∪ 本期新选，上限 90000；超限只报警不删。理由：R2 静态托管无法做 301，删掉已发布的 /product/<pid>.html 会直接 404。不要手工删条目（只增不减）。",
+ "description": "静态产品页「曾发布过」的 pid 清单（append-only）。构建时静态集 = pins ∪ 本期新选，软上限 150000（只告警、不删）。理由：R2 静态托管无法做 301，删掉已发布的 /product/<pid>.html 会直接 404。不要手工删条目（只增不减）。",
  "count": 84000,
  "pids": [
   "AU-10001J-xifaxan-56fd56",

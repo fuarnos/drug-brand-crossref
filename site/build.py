@@ -61,6 +61,9 @@ REPORT_REPO = "https://github.com/fuarnos/drug-brand-crossref"
 # 2026-11-12 用户定新口径：主站 = 自有域名 drugcrossref.com，gh-pages 只作备份；
 # 所以这里一律写主域（gh-pages 上的 canonical 指主域是预期行为）。
 SITE_URL = "https://drugcrossref.com/"
+# v1.2.3（T14-C）：sitemaps.org / Google 的协议上限是**单个 sitemap 文件 50,000 URL**；
+# v1.2.2 时单文件已 170,435（超上限 3.4 倍）→ 改成 sitemap index + 分片，每片不超过这个数。
+SITEMAP_SHARD_MAX = 50_000
 # 构建版本号：给 css/js/json 带 ?v=，避免用户拿到缓存里的旧代码。
 # v0.9.9 task-14：从 `int(time.time())` 改成「输入内容哈希」。
 # 旧写法每次构建都换号 → 121,280 个产物里 112,692 个（每页 <head> 的 ?v=）逐字节全变，
@@ -13792,7 +13795,13 @@ PRODUCT_STATIC_MODE = "roundrobin"  # 轮转：按 markets.json order 每轮每�
 # v1.2.1（T11）：静态产品页「只增不减」。R2 静态托管无法做 301，删掉已发布的
 # /product/<pid>.html 就是 404 → pins 记录曾发布过的 pid，构建集 = pins ∪ 本期新选。
 PRODUCT_STATIC_PINS = ROOT / "data" / "product" / "static_pins.json"
-PRODUCT_STATIC_CAP = 90_000        # pins ∪ 新选 的软上限：超限只报警，不删 pins
+# soft cap：pins ∪ 新选 的软上限，超限只报警、不删 pins。
+# v1.2.3（T14-C）：90,000 → 150,000 —— 第 3 批把 TOP_N 84,000 → 114,000 之前先抬软上限，
+# 仍然是「只告警」的软护栏（真正删 pins 要人拍板）。
+PRODUCT_STATIC_CAP = 150_000
+# v1.2.3（T14-C）：分档告警 —— 到达这些档位各打印一行 [STATIC]（提示、不影响构建）；
+# 84,000 时不打印任何档位，≥ PRODUCT_STATIC_CAP 再打一条醒目 WARN。
+PRODUCT_STATIC_TIERS = (90_000, 120_000, 140_000)
 PRODUCT_STATIC_PINNED: int = 0     # 本次构建里来自 pins 的额外页数（供日志/报告）
 PRODUCT_BUCKETS = 512              # 长尾数据桶数（单桶 gzip 目标 ≤120 KB）
 PRODUCT_BUCKET_DIR = "data/product"
@@ -16767,9 +16776,9 @@ def save_static_pins(pids: list[str]) -> None:
     PRODUCT_STATIC_PINS.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema": 1,
-        "description": ("静态产品页「曾发布过」的 pid 清单（append-only）。构建时静态集 = pins ∪ 本期新选，"
-                        "上限 90000；超限只报警不删。理由：R2 静态托管无法做 301，删掉已发布的 "
-                        "/product/<pid>.html 会直接 404。不要手工删条目（只增不减）。"),
+        "description": (f"静态产品页「曾发布过」的 pid 清单（append-only）。构建时静态集 = pins ∪ 本期新选，"
+                        f"软上限 {PRODUCT_STATIC_CAP}（只告警、不删）。理由：R2 静态托管无法做 301，"
+                        "删掉已发布的 /product/<pid>.html 会直接 404。不要手工删条目（只增不减）。"),
         "count": len(merged),
         "pids": merged,
     }
@@ -16833,9 +16842,16 @@ def select_static_product_ids(db: sqlite3.Connection) -> list[str]:
     PRODUCT_STATIC_PINNED = len(extra)
     print(f"  static pins : {len(pins):,} pinned pids, +{len(extra):,} restored this build",
           flush=True)
-    if len(out) > PRODUCT_STATIC_CAP:
-        print(f"  !! static cap: {len(out):,} > {PRODUCT_STATIC_CAP:,} — 只报警不删"
-              f"（超限 {len(out) - PRODUCT_STATIC_CAP:,} 页；由人决定何时 prune pins）", flush=True)
+    # v1.2.3（T14-C）：分档告警（90k / 120k / 140k 各一行提示）+ 软上限 WARN，
+    # 全部只打印、不失败、不删 pins；现 84,000 → 一条都不应出现。
+    n_static = len(out)
+    for tier in PRODUCT_STATIC_TIERS:
+        if n_static >= tier:
+            print(f"  [STATIC] {n_static:,} pages ≥ {tier:,} — 分档告警（提示档位，"
+                  f"不影响构建、不删 pins；软上限 {PRODUCT_STATIC_CAP:,}）", flush=True)
+    if n_static >= PRODUCT_STATIC_CAP:
+        print(f"  !! [STATIC] WARN: {n_static:,} ≥ 软上限 {PRODUCT_STATIC_CAP:,} — 只报警不删"
+              f"（超限 {n_static - PRODUCT_STATIC_CAP:,} 页；由人决定何时 prune pins）", flush=True)
     # 只增不减：把本期静态集并回 pins（下一版继续保留）
     save_static_pins(out)
     PRODUCT_STATIC_DIST.clear()
@@ -21336,10 +21352,16 @@ def build_export_only_json(db: sqlite3.Connection) -> None:
 
 
 def build_seo_files() -> None:
-    """生成 robots.txt + sitemap.xml + .nojekyll（404.html 另由 build_404 生成）。
+    """生成 robots.txt + sitemap index / 分片 + .nojekyll（404.html 另由 build_404 生成）。
 
     sitemap 扫的是刚写出来的 HTML 文件，所以调用时机必须在所有页面之后。
     中文文件名百分号编码后写进 <loc>。
+
+    v1.2.3（T14-C）：单文件 sitemap 已 170,435 URL，超 Google / sitemaps.org 的
+    50,000 URL 上限 3.4 倍 → `sitemap.xml` 改成 `<sitemapindex>`，URL 按原有
+    `urls.sort()` 顺序切成 `sitemap-1.xml` … `sitemap-N.xml`（每片 ≤ SITEMAP_SHARD_MAX）。
+    分片名是**稳定名**（不带版本号 / 哈希，符合增量发布契约），robots.txt 不变
+    （仍指向 `sitemap.xml`）；index 与分片里的 <loc> 都是 SITE_URL 开头的绝对地址。
     """
     from urllib.parse import quote
 
@@ -21357,13 +21379,29 @@ def build_seo_files() -> None:
             urls.append(SITE_URL + rel)
     urls.sort()
 
+    # 切片：每片 ≤ SITEMAP_SHARD_MAX（顺序与旧单文件完全一致，保证确定性 / 可对比）。
+    # 空站也写 1 个空 urlset，index 至少有 1 个 <sitemap>，避免「索引指向空气」。
+    shards = [urls[i:i + SITEMAP_SHARD_MAX]
+              for i in range(0, len(urls), SITEMAP_SHARD_MAX)] or [[]]
+    shard_names: list[str] = []
+    for idx, chunk in enumerate(shards, 1):
+        name = f"sitemap-{idx}.xml"
+        shard_names.append(name)
+        with (OUT / name).open("w", encoding="utf-8", newline="\n") as fh:
+            fh.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            fh.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+            for url in chunk:
+                loc = quote(url, safe=":/?&=%#")
+                fh.write(f"  <url><loc>{loc}</loc><lastmod>{lastmod}</lastmod></url>\n")
+            fh.write("</urlset>\n")
+
     with (OUT / "sitemap.xml").open("w", encoding="utf-8", newline="\n") as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        fh.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-        for url in urls:
-            loc = quote(url, safe=":/?&=%#")
-            fh.write(f"  <url><loc>{loc}</loc><lastmod>{lastmod}</lastmod></url>\n")
-        fh.write("</urlset>\n")
+        fh.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for name in shard_names:
+            fh.write(f"  <sitemap><loc>{SITE_URL}{name}</loc>"
+                     f"<lastmod>{lastmod}</lastmod></sitemap>\n")
+        fh.write("</sitemapindex>\n")
 
     (OUT / "robots.txt").write_text(
         "User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "sitemap.xml\n",
@@ -21376,7 +21414,11 @@ def build_seo_files() -> None:
     # 内容留一行说明：发布脚本会拒绝 0 字节文件（防止构建中断发布半成品）。
     (OUT / ".nojekyll").write_text(
         "# GitHub Pages: serve this directory as-is (skip Jekyll)\n", encoding="utf-8")
-    print(f"  seo files  : 404 + robots + sitemap ({len(urls)} urls) + deploy verify", flush=True)
+    per_shard = " / ".join(f"{len(c):,}" for c in shards)
+    print(f"  seo files  : 404 + robots + sitemap index ({len(shards)} shards, "
+          f"{len(urls):,} urls) + deploy verify", flush=True)
+    print(f"  sitemap    : sitemap.xml → {shard_names[0]}…{shard_names[-1]}"
+          f"（{per_shard} = {len(urls):,} URL，每片 ≤ {SITEMAP_SHARD_MAX:,}）", flush=True)
 
 
 # ── P1 索引核心：列式 + 字典编码 ─────────────────────────────────────
