@@ -41,6 +41,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Callable
+from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 PY = sys.executable
@@ -63,6 +64,10 @@ TRILINGUAL_MIN_CASES = 78
 TRILINGUAL_MIN_PASS = 74
 
 SITEMAP_MIN_URLS = 25_000
+# v1.2.3 起 dist/sitemap.xml 是 **sitemap index**（分片 sitemap-1.xml…，每片 ≤50,000 URL）；
+# 旧产物仍是单文件 <urlset>。两种都要能验：index 求和 + 每片必须存在且是 urlset，urlset 按旧逻辑数。
+SITEMAP_MAX_URLS_PER_SHARD = 50_000
+SITEMAP_LOC_RE = re.compile(r"<loc>\s*(.*?)\s*</loc>", re.S)
 CORE_MIN_BYTES = 10_000_000
 DIST_MIN_FILES = 24_000
 REQUIRED_DIST_FILES = [
@@ -360,6 +365,14 @@ def _scan_dist(root: Path, *, full_zero: bool, sample: int = 500) -> dict:
             "zero_sample": zero_sample, "full_zero": full_zero}
 
 
+def _sitemap_shard_rel(loc: str) -> str | None:
+    """sitemap index 里的分片 `<loc>` → dist 内相对路径；非法 / 越界返回 None。"""
+    rel = unquote(urlparse(loc).path or "").lstrip("/")
+    if not rel or ".." in Path(rel).parts:
+        return None
+    return rel
+
+
 @timed("dist-integrity")
 def check_dist(verbose: bool, fast: bool) -> None:
     dist = DIST_PATH
@@ -379,11 +392,38 @@ def check_dist(verbose: bool, fast: bool) -> None:
     if core.exists() and core.stat().st_size < CORE_MIN_BYTES:
         problems.append(f"core.json 仅 {core.stat().st_size:,} B（< {CORE_MIN_BYTES:,}）")
     locs = 0
+    shard_count = 0
     sitemap = dist / "sitemap.xml"
     if sitemap.exists():
-        locs = len(re.findall(r"<loc>", sitemap.read_text(encoding="utf-8", errors="replace")))
-        if locs < SITEMAP_MIN_URLS:
-            problems.append(f"sitemap 仅 {locs} URL（< {SITEMAP_MIN_URLS:,}）")
+        sm_text = sitemap.read_text(encoding="utf-8", errors="replace")
+        if "<sitemapindex" in sm_text:
+            # v1.2.3 起：URL 总数 = 各分片求和；索引引用的每一片必须真的在 dist 里
+            shard_refs = SITEMAP_LOC_RE.findall(sm_text)
+            shard_count = len(shard_refs)
+            if not shard_refs:
+                problems.append("sitemap.xml 是索引但没有任何分片 <loc>")
+            for ref in shard_refs:
+                rel = _sitemap_shard_rel(ref)
+                if rel is None:
+                    problems.append(f"sitemap 分片引用非法: {ref[:80]}")
+                    continue
+                shard_path = dist / rel
+                if not shard_path.is_file():
+                    problems.append(f"缺 sitemap 分片 {rel}")
+                    continue
+                text = shard_path.read_text(encoding="utf-8", errors="replace")
+                if "<urlset" not in text:
+                    problems.append(f"sitemap 分片 {rel} 不是 urlset")
+                n = text.count("<loc>")
+                if n > SITEMAP_MAX_URLS_PER_SHARD:
+                    problems.append(f"sitemap 分片 {rel} 有 {n:,} URL（> {SITEMAP_MAX_URLS_PER_SHARD:,} 协议上限）")
+                locs += n
+            if locs < SITEMAP_MIN_URLS:
+                problems.append(f"sitemap 仅 {locs:,} URL（{shard_count} 分片合计 < {SITEMAP_MIN_URLS:,}）")
+        else:
+            locs = len(re.findall(r"<loc>", sm_text))
+            if locs < SITEMAP_MIN_URLS:
+                problems.append(f"sitemap 仅 {locs} URL（< {SITEMAP_MIN_URLS:,}）")
     scan = _scan_dist(dist, full_zero=not fast)
     if scan["files"] < DIST_MIN_FILES:
         problems.append(f"仅 {scan['files']:,} 文件（< {DIST_MIN_FILES:,}）")
@@ -394,13 +434,15 @@ def check_dist(verbose: bool, fast: bool) -> None:
         proc = _run([node, "--check", str(dist / "assets" / "app.js")], timeout=120)
         if proc.returncode != 0:
             problems.append("node --check assets/app.js 失败: " + _tail(proc.stderr, 2))
+    shard_note = f"（{shard_count} 分片合计）" if shard_count else ""
     detail_scan = (f"{scan['files']:,} 文件 / 0 字节 {scan['zero']}（{tier}：抽查 {scan['checked']:,} 个）"
-                   f" / sitemap {locs:,} URL / node {'已检查' if node else '未安装跳过'}")
+                   f" / sitemap {locs:,} URL{shard_note} / node {'已检查' if node else '未安装跳过'}")
     # 两种口径都落 JSON，便于 fast 与全量对比
     try:
         (ROOT / ".tmp" / "ci").mkdir(parents=True, exist_ok=True)
         (ROOT / ".tmp" / "ci" / f"dist-integrity-{'fast' if fast else 'full'}.json").write_text(
-            json.dumps({"dist": _rel(dist), **scan, "sitemap": locs, "problems": problems},
+            json.dumps({"dist": _rel(dist), **scan, "sitemap": locs,
+                        "sitemap_shards": shard_count, "problems": problems},
                        ensure_ascii=False, indent=1), encoding="utf-8")
     except OSError:
         pass

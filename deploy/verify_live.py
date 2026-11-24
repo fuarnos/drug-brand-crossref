@@ -19,7 +19,8 @@
   关键页面 drug/tirzepatide.html、drug/atorvastatin.html、name/lipitor.html、confused.html；
   **REL2 增量发布契约（v1.0.0 起）**：assets/style.css 带 `Cache-Control: public, max-age=300`；
   长尾页用稳定名 assets/style.css / assets/boot.js + whats-new 链接，不含 hashed 资源、不含页脚版本号；
-  sitemap.xml URL 数、robots.txt Sitemap 行、未知路径返回 404。
+  sitemap.xml URL 数（v1.2.3 起支持 **sitemap index + 分片**：逐片 200/可解析后求和；旧版单文件 urlset 仍按旧逻辑）、
+  robots.txt Sitemap 行、未知路径返回 404。
 
 退出码：0 = 通过（可带 warning）；1 = 有失败或站点不可达；2 = 参数错误。
 stdout 永远是一个 JSON 对象（便于 publish 流程/自动化解析）；人读摘要走 stderr（--quiet 关闭）。
@@ -76,6 +77,11 @@ CORE_RAW_RANGE = (11_000_000, 80_000_000)
 INDEX_GZ_RANGE = (4_500_000, 13_000_000)
 INDEX_RAW_RANGE = (28_000_000, 60_000_000)
 SITEMAP_MIN_URLS = 25_000
+# v1.2.3 起 sitemap.xml 改为 **sitemap index + 分片**（每片 ≤50,000 URL，sitemaps.org 协议上限）；
+# 旧版线上仍是单文件 <urlset>。下面两个常量/正则在两种结构间切换：index 逐片 GET 后求和，
+# urlset 按旧逻辑数 `<url>`（判定口径与检查项名不变，历史报告可比）。
+SITEMAP_MAX_URLS_PER_FILE = 50_000
+SITEMAP_LOC_RE = re.compile(r"<loc>\s*(.*?)\s*</loc>", re.S)
 # 启用的语言根路径（英文在根）。**新增语言时必须同步这里**：发布门槛要求全部 200。
 # 背景：v0.11.4 法语上线时 `/fr/` 因 Cloudflare Transform Rules 未加 fr 而 404
 #（`/fr/index.html` 200），verify 当时没有语言根/hreflang 检查，0 failures 漏掉了它。
@@ -150,6 +156,20 @@ def fetch(url: str, *, method: str = "GET", timeout: float = 25.0,
 
 def text_of(res: dict) -> str:
     return res.get("body", b"").decode("utf-8", "replace")
+
+
+def sitemap_kind(text: str) -> str:
+    """判断 sitemap.xml 结构：'index'（v1.2.3 起）/ 'urlset'（旧单文件）/ ''（无法识别）。"""
+    if "<sitemapindex" in (text or ""):
+        return "index"
+    if "<urlset" in (text or ""):
+        return "urlset"
+    return ""
+
+
+def sitemap_shards(text: str) -> list[str]:
+    """从 sitemap index 里取分片 `<loc>` 列表（去首尾空白，保持原顺序）。"""
+    return [m.group(1).strip() for m in SITEMAP_LOC_RE.finditer(text or "")]
 
 
 def gz_len(data: bytes) -> int:
@@ -463,12 +483,52 @@ def main() -> int:
     checks.add("longtail-footer", lt_ok, detail, lt["ms"])
 
     # ── 7. sitemap / robots / 404 ───────────────────────────────────
+    # v1.2.3 起 sitemap.xml 是 <sitemapindex>（分片 sitemap-1.xml…，每片 ≤50,000 URL）：
+    # 逐个分片 GET 200 + 可解析后求和；旧版线上仍是单文件 <urlset>，按旧逻辑数 `<url>`。
     sm = get("sitemap.xml")
     sm_text = text_of(sm)
-    n_urls = sm_text.count("<url>")
+    kind = sitemap_kind(sm_text)
     checks.add("sitemap-status", sm["status"] == 200, f"HTTP {sm['status']}", sm["ms"])
-    checks.add("sitemap-urls", n_urls >= SITEMAP_MIN_URLS,
-               f"{n_urls:,} 个 URL（下限 {SITEMAP_MIN_URLS:,}）")
+    if kind == "index":
+        refs = sitemap_shards(sm_text)
+        n_urls = 0
+        per_shard: list[str] = []
+        bad: list[str] = []
+        for ref in refs:
+            name = ref.rsplit("/", 1)[-1] or ref
+            # 同源 → 走 get()（带 cache-buster）；异源只做兜底直连（sitemap 协议要求同源）
+            if ref.startswith(base):
+                res = get(ref[len(base):])
+            elif ref.startswith("/"):
+                res = get(ref.lstrip("/"))
+            else:
+                res = fetch(ref if "?" in ref else f"{ref}?v={stamp}",
+                            timeout=args.timeout, retries=args.retries)
+            text = text_of(res)
+            cnt = text.count("<loc>")
+            n_urls += cnt
+            if res["status"] != 200:
+                bad.append(f"{name} HTTP {res['status']}")
+            elif "<urlset" not in text:
+                bad.append(f"{name} 不是 urlset")
+            elif cnt > SITEMAP_MAX_URLS_PER_FILE:
+                bad.append(f"{name} {cnt:,} URL（> {SITEMAP_MAX_URLS_PER_FILE:,} 协议上限）")
+            else:
+                per_shard.append(f"{name} {cnt:,}")
+        shards_ok = bool(refs) and not bad
+        if not refs:
+            shard_detail = "索引里没有分片 <loc>"
+        elif bad:
+            shard_detail = "分片异常：" + "; ".join(bad[:4])
+        else:
+            shard_detail = f"{len(refs)} 片全部 200 且可解析（" + " / ".join(per_shard) + "）"
+        checks.add("sitemap-shards", shards_ok, shard_detail)
+        checks.add("sitemap-urls", n_urls >= SITEMAP_MIN_URLS,
+                   f"{len(refs)} shards / {n_urls:,} urls（下限 {SITEMAP_MIN_URLS:,}）")
+    else:
+        n_urls = sm_text.count("<url>")
+        checks.add("sitemap-urls", n_urls >= SITEMAP_MIN_URLS,
+                   f"{n_urls:,} 个 URL（单文件 / 下限 {SITEMAP_MIN_URLS:,}）")
     rb = get("robots.txt")
     rb_text = text_of(rb)
     checks.add("robots", rb["status"] == 200
