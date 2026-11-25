@@ -13789,10 +13789,12 @@ def _search_form(prefix: str, form_id: str = "pq", cls: str = "page-search") -> 
 # ── v1.1.1（T5）：每个产品一个页面（B 混合）────────────────────────────────
 # 用户 2026-11-22 拍板：静态 `/product/<pid>.html` 收 Top N；长尾 `/product.html?pid=`
 # 只拉 1 个桶（512 桶，FNV-1a % 512）。两者同一份模板、同一份数据口径。
-PRODUCT_STATIC_TOP_N = 114_000     # 静态页硬上限（v1.2.4 第 3 批：84,000 → 114,000；实际条数构建时现算，见报告）
+PRODUCT_STATIC_TOP_N = 144_000     # 静态页硬上限（v1.2.5 第 4 批：114,000 → 144,000；实际条数构建时现算，见报告）
 # v1.2.4 第 3 批：6,000 → 12,000。原值在 TOP_N 84,000 时轮转不会撞到（每市场 5,772 上限），
 # 但 TOP_N 抬到 114,000 后 16 个合格市场 × 6,000 只有 86,971 —— 市场上限会先于 TOP_N 截断，
 # 所以要一起抬（12,000 时 16 市场合计 > CAP 150,000，轮转不会再成为瓶颈）。
+# v1.2.5 第 4 批只读复算：16 个有数据市场在 12,000 上限下的合格供给合计 148,814 ≥ 144,000，
+# 本版不动此值（口径见 reports/2026-11-26-v125-static-pages.md）。
 PRODUCT_STATIC_MARKET_CAP = 12_000  # 每市场硬上限（轮转分配下不再触发）
 PRODUCT_STATIC_MODE = "roundrobin"  # 轮转：按 markets.json order 每轮每市场取 1 条
 # v1.2.1（T11）：静态产品页「只增不减」。R2 静态托管无法做 301，删掉已发布的
@@ -16808,7 +16810,7 @@ def select_static_product_ids(db: sqlite3.Connection) -> list[str]:
     规则（Lead 2026-11-22 定）：
       1) 合格集 = active + 成分已映射 + 有剂型 + (pack 或含量至少一项)；
       2) 按 `data/markets.json` 的 order 遍历市场，**每市场最多 PRODUCT_STATIC_MARKET_CAP**；
-      3) 总数硬上限 PRODUCT_STATIC_TOP_N（v1.2.4 第 3 批：114,000），超出一律截断，不产生 115k。
+      3) 总数硬上限 PRODUCT_STATIC_TOP_N（v1.2.5 第 4 批：144,000），超出一律截断，不产生 145k。
       两种分配：`roundrobin`（默认，每轮每市场取 1 条，覆盖所有合格市场）/
       `ordered`（按市场序吃完再下一个）。默认轮转，保证每个有数据的市场都有静态页。
     """
