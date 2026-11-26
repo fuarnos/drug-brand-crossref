@@ -19,6 +19,8 @@
   关键页面 drug/tirzepatide.html、drug/atorvastatin.html、name/lipitor.html、confused.html；
   **REL2 增量发布契约（v1.0.0 起）**：assets/style.css 带 `Cache-Control: public, max-age=300`；
   长尾页用稳定名 assets/style.css / assets/boot.js + whats-new 链接，不含 hashed 资源、不含页脚版本号；
+  **H1（v1.2.7 起）**：9 语首页 + 长尾页 boot.js 的语言包 URL 必须带非空数字 `?v=`（防「新 HTML + 旧语言包」显示键名）；
+  9 语首页 hero 文案必须是直出文本，不得出现 `hero.title` 这类裸露键名；
   sitemap.xml URL 数（v1.2.3 起支持 **sitemap index + 分片**：逐片 200/可解析后求和；旧版单文件 urlset 仍按旧逻辑）、
   robots.txt Sitemap 行、未知路径返回 404。
 
@@ -63,6 +65,15 @@ LONGTAIL_STABLE_REFS = ("assets/style.css", "assets/boot.js", "whats-new.html")
 LONGTAIL_HASHED_RE = re.compile(r"assets/(?:style|boot)\.[0-9a-f]{8,}\.(?:css|js)")
 # 方案原文正则 `v\d+\.\d+\.\d+ · \d{4}-\d{2}-\d{2}`；\s* 只是容忍空白变体，语义不变。
 LONGTAIL_VER_RE = re.compile(r"v\d+\.\d+\.\d+\s*·\s*\d{4}-\d{2}-\d{2}")
+# H1（v1.2.7）：语言包 URL 的构建号必须是**非空数字**。
+# 事故（用户 2026-11-26 截图「hero.title 裸露」）：首页内联的 i18n 引导脚本里
+# `assets/i18n.<lang>.js?v=__BUILD_V__` 被「剥版本号」一起剥成 `?v=` → 语言包 URL 不随版本变，
+# 旧语言包（≤5 分钟边缘缓存）配新页面新增的 hero.* 键，首屏就显示键名。
+# 首页/语言副本把引导脚本内联在 HTML 里，长尾页写在 assets/boot.js 里，两处都查。
+I18N_PACK_VER_RE = re.compile(r"assets/i18n[\s\S]{0,200}?\.js\?v=(\d+)")
+EMPTY_JS_V_RE = re.compile(r"\.js\?v=(?!\d)")
+HERO_H1_RE = re.compile(r'<h1\b[^>]*\bid="h1"[^>]*>(.*?)</h1>', re.S)
+HERO_KEY_RE = re.compile(r"\bhero\.(?:title|label|try|sub|cta|howto|sources|about)\b")
 
 
 # gzip 传输体积合理区间（2026-10-27 线上实测 core 3,808,417 B / index 6,059,167 B；
@@ -156,6 +167,27 @@ def fetch(url: str, *, method: str = "GET", timeout: float = 25.0,
 
 def text_of(res: dict) -> str:
     return res.get("body", b"").decode("utf-8", "replace")
+
+
+def visible_text(html: str) -> str:
+    """去掉 <script>/<style> 块和全部标签后的可见文本（用来查「裸露键名」）。
+
+    首页把语言字典与引导脚本内联在 HTML 里，`.hero.title` 这类字符串会出现在 JS 字典键上，
+    所以必须先整块剔除再查正文，否则会误报。
+    """
+    s = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", html or "", flags=re.S | re.I)
+    return re.sub(r"<[^>]+>", " ", s)
+
+
+def i18n_pack_version(html: str) -> str:
+    """取页面（或 boot.js）里语言包 URL 的构建号 `assets/i18n…js?v=<数字>`；取不到返回空串。
+
+    首页/语言副本把引导脚本内联在 HTML 里（`assets/i18n.' + LANG + '.js?v=…`），
+    长尾页只在 assets/boot.js 里；这里在全文上找「assets/i18n 之后 200 字符内出现
+    `.js?v=<数字>`」，不解析 JS 语法。空 `?v=`（历史事故）与非数字占位符都返回空串 → 门禁 FAIL。
+    """
+    m = I18N_PACK_VER_RE.search(html or "")
+    return m.group(1) if m else ""
 
 
 def sitemap_kind(text: str) -> str:
@@ -341,6 +373,7 @@ def main() -> int:
         if url.startswith("/"):
             url = base.rstrip("/") + url
         by_url.setdefault(url, []).append(lang)
+    lang_home_text: dict[str, str] = {}   # H1 门禁复用这批已抓取的 9 语首页
     if not targets:
         checks.add("hreflang-links", False, "首页没有 hreflang alternate 链接")
     else:
@@ -355,6 +388,57 @@ def main() -> int:
                 continue
             checks.add(f"hreflang-target-{label}", res["status"] == 200 and len(res["body"]) > 500,
                        f"{url} HTTP {res['status']}, {len(res['body']):,} B")
+            if res["status"] == 200:
+                lang_home_text[url] = text_of(res)
+
+    # ── 3c. H1（v1.2.7）：语言包 URL 带真实构建号 + 9 语首页 hero 文案无裸露键名 ──
+    # 两条门禁对准同一事故：新页面 + 旧语言包（或字典缺键）→ 首屏出现 `hero.title` 这类键名。
+    # 数据复用 3b 已抓的 9 个 hreflang 目标页；长尾页另取一次 boot.js（语言包 URL 写在里面）。
+    no_ver = [u for u, txt in lang_home_text.items() if not i18n_pack_version(txt)]
+    empty_ver = [u for u, txt in lang_home_text.items() if EMPTY_JS_V_RE.search(txt)]
+    if not lang_home_text:
+        no_ver.append("9 语首页（hreflang 目标全不可达）")
+    try:
+        boot = get("assets/boot.js")
+    except Exception as e:
+        boot = {"status": 0, "body": b"", "ms": 0}
+        no_ver.append(f"assets/boot.js 不可达: {e}")
+    boot_txt = text_of(boot)
+    if boot.get("status") == 200:
+        if not i18n_pack_version(boot_txt):
+            no_ver.append("assets/boot.js")
+        if EMPTY_JS_V_RE.search(boot_txt):
+            empty_ver.append("assets/boot.js")
+    elif boot.get("status") != 0:
+        no_ver.append(f"assets/boot.js HTTP {boot['status']}")
+    pack_detail: list[str] = []
+    if no_ver:
+        pack_detail.append("缺非空 ?v=: " + ", ".join(no_ver[:5]))
+    if empty_ver:
+        pack_detail.append("出现空 ?v=: " + ", ".join(empty_ver[:5]))
+    checks.add("i18n-pack-version", not no_ver and not empty_ver,
+               ("; ".join(pack_detail) if pack_detail else
+                f"{len(lang_home_text)} 语首页 + 长尾 boot.js 的语言包 URL 均带非空数字 ?v="))
+
+    naked: list[str] = []
+    empty_h1: list[str] = []
+    for url, txt in lang_home_text.items():
+        label = ",".join(sorted(set(by_url.get(url, []))))
+        if HERO_KEY_RE.search(visible_text(txt)):
+            naked.append(label)
+        mh = HERO_H1_RE.search(txt)
+        if not mh or len(visible_text(mh.group(1)).strip()) < 3:
+            empty_h1.append(label)
+    if not lang_home_text:
+        naked.append("9 语首页不可达")
+    hero_detail: list[str] = []
+    if naked:
+        hero_detail.append("裸露 hero.* 键名: " + ", ".join(naked[:6]))
+    if empty_h1:
+        hero_detail.append("h1 为空: " + ", ".join(empty_h1[:6]))
+    checks.add("hero-direct-text", not naked and not empty_h1,
+               ("; ".join(hero_detail) if hero_detail else
+                f"{len(lang_home_text)} 语首页 hero 文案均为直出文本（无 hero.* 键名、h1 非空）"))
 
     # ── 4. GoatCounter 访问统计（v0.4.1 起） ────────────────────────
     gm = ANALYTICS_RE.search(home_text)

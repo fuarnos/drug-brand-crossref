@@ -1115,7 +1115,9 @@ FR_I18N: dict[str, str] = {
     "release.MR": "libération modifiée", "release.none": "—",
     "unit.iu": "UI", "unit.unit": "unité", "unit.meq": "mEq", "unit.mci": "mCi",
     "unit.ug": "µg", "unit.microgram": "µg", "unit.万iu": "100 000 UI",
-    "hero.title": "Noms de médicaments, d’un pays à l’autre",
+    "hero.title": "Comment ce médicament s’appelle-t-il ailleurs ?",
+    "hero.label": "Saisissez le nom figurant sur la boîte",
+    "hero.try": "Essayez : Tylenol aux États-Unis → noms associés en Chine",
     "hero.sub": "Saisissez le nom figurant sur la boîte et voyez comment il s’appelle ailleurs.",
     "hero.howto": "Comment ça marche", "hero.sources": "Sources de données",
     "hero.about": "À propos", "hero.cta": "Rechercher",
@@ -1936,7 +1938,9 @@ for _lang, _kv in NAME_LANG_I18N.items():
 UI_I18N = {
     "en": {
         # H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图改版）
-        "hero.title": "Cross-reference medicine names",
+        "hero.title": "What is this medicine called in other countries?",
+        "hero.label": "Type the name on the pack",
+        "hero.try": "Try: US Tylenol → see related names in China",
         "hero.sub": "Type the name on the pack — see what it is called in other countries or regions.",
         "hero.howto": "How it works", "hero.sources": "Data sources", "hero.about": "About us",
         "hero.cta": "Look up",
@@ -2158,7 +2162,9 @@ UI_I18N = {
     },
     "es": {
         # H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图改版）
-        "hero.title": "Nombres de medicamentos entre países",
+        "hero.title": "¿Cómo se llama este medicamento en otros países?",
+        "hero.label": "Escribe el nombre del envase",
+        "hero.try": "Prueba: Tylenol en EE. UU. → nombres relacionados en China",
         "hero.sub": "Escribe el nombre del envase y mira cómo se llama en otros países o regiones.",
         "hero.howto": "Cómo funciona", "hero.sources": "Fuentes de datos", "hero.about": "Quiénes somos",
         "hero.cta": "Buscar",
@@ -2361,7 +2367,9 @@ UI_I18N = {
     },
     "zh": {
         # H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图改版）
-        "hero.title": "国际药品名称对照",
+        "hero.title": "查一个药在其他国家叫什么",
+        "hero.label": "输入药盒上写的名字",
+        "hero.try": "试试看：美国 Tylenol → 查中国的相关药名",
         "hero.sub": "查药盒上的名字，看它在其他国家或地区叫什么。",
         "hero.howto": "怎么用", "hero.sources": "数据来源", "hero.about": "关于我们",
         "hero.cta": "查药名",
@@ -2540,7 +2548,9 @@ UI_I18N = {
     },
     "zh-Hant": {
         # H0（v1.2.6）：首頁極簡 hero（使用者 2026-11-26 參考圖改版）
-        "hero.title": "國際藥品名稱對照",
+        "hero.title": "查一個藥在其他國家叫什麼",
+        "hero.label": "輸入藥盒上寫的名字",
+        "hero.try": "試試看：美國 Tylenol → 查中國的相關藥名",
         "hero.sub": "查藥盒上的名字，看它在其他國家或地區叫什麼。",
         "hero.howto": "怎麼用", "hero.sources": "資料來源", "hero.about": "關於我們",
         "hero.cta": "查藥名",
@@ -4403,7 +4413,9 @@ KO_I18N: dict[str, str] = {
     'u1.step2_hint': '카드는 후보 하나를 보여줄 뿐 정답이 아닙니다 — 성분·함량·제형을 포장과 대조하세요.',
     'u1.step3': '대상 시장을 선택하세요',
     'u1.step3_hint': '대상 시장을 선택하면 같은 성분이 그곳에서 무엇으로 불리는지 볼 수 있습니다. 후보 목록 자체는 바뀌지 않습니다.',
-    'hero.title': '국제 의약품 이름 대조',
+    'hero.title': '이 약은 다른 나라에서 뭐라고 부를까요?',
+    'hero.label': '약 상자에 적힌 이름을 입력하세요',
+    'hero.try': '예: 미국 Tylenol → 중국의 관련 약 이름 보기',
     'hero.sub': '약 상자의 이름을 입력하면 다른 나라·지역에서 뭐라고 부르는지 볼 수 있습니다.',
     'hero.howto': '사용 방법', 'hero.sources': '데이터 출처', 'hero.about': '소개',
     'hero.cta': '약 이름 검색',
@@ -5102,7 +5114,9 @@ JA_I18N: dict[str, str] = {
     'u1.step2_hint': 'カードは候補を1つ示すだけで、答えではありません — 包装と照らして成分・含量・剤形を確認してください。',
     'u1.step3': '対象市場を選ぶ',
     'u1.step3_hint': '対象市場を選ぶと同じ成分がそこで何と呼ばれているか分かります。候補リスト自体は変わりません。',
-    'hero.title': '国際的な医薬品名の照合',
+    'hero.title': 'この薬は他の国で何と呼ばれている？',
+    'hero.label': '箱に書かれた名前を入力',
+    'hero.try': '例：米国 Tylenol → 中国の関連名を見る',
     'hero.sub': '箱に書かれた名前を入力すると、他の国・地域での呼び名がわかります。',
     'hero.howto': '使い方', 'hero.sources': 'データの出典', 'hero.about': '運営について',
     'hero.cta': '薬名を検索',
@@ -5799,7 +5813,9 @@ CS_I18N: dict[str, str] = {
     'u1.step2_hint': 'Karta ukazuje jednoho kandidáta, nikdy ne konečnou odpověď — porovnejte jeho léčivou látku, sílu a lékovou formu s obalem.',
     'u1.step3': 'Vyberte cílový trh',
     'u1.step3_hint': 'Zvolte cílový trh a zjistěte, jak se stejná léčivá látka nazývá tam; samotný seznam kandidátů se nemění.',
-    'hero.title': 'Mezinárodní srovnání názvů léků',
+    'hero.title': 'Jak se tento lék jmenuje v jiných zemích?',
+    'hero.label': 'Zadejte název z krabičky',
+    'hero.try': 'Zkuste: Tylenol v USA → související názvy v Číně',
     'hero.sub': 'Zadejte název z krabičky a zjistěte, jak se jmenuje v jiných zemích či regionech.',
     'hero.howto': 'Jak to funguje', 'hero.sources': 'Zdroje dat', 'hero.about': 'O nás',
     'hero.cta': 'Vyhledat lék',
@@ -6492,7 +6508,9 @@ LV_I18N: dict[str, str] = {
     'u1.step2_hint': 'Kartīte rāda vienu kandidātu, nekad galīgo atbildi — salīdziniet tā aktīvo vielu, stiprumu un zāļu formu ar savu iepakojumu.',
     'u1.step3': 'Izvēlieties mērķa tirgu',
     'u1.step3_hint': 'Izvēlieties mērķa tirgu, lai redzētu, kā tur sauc to pašu aktīvo vielu; pats kandidātu saraksts nemainās.',
-    'hero.title': 'Starptautisks zāļu nosaukumu salīdzinājums',
+    'hero.title': 'Kā šīs zāles sauc citās valstīs?',
+    'hero.label': 'Ievadiet nosaukumu no iepakojuma',
+    'hero.try': 'Izmēģiniet: Tylenol ASV → saistītie nosaukumi Ķīnā',
     'hero.sub': 'Ievadiet nosaukumu no iepakojuma un uzziniet, kā to sauc citās valstīs vai reģionos.',
     'hero.howto': 'Kā tas darbojas', 'hero.sources': 'Datu avoti', 'hero.about': 'Par mums',
     'hero.cta': 'Meklēt zāles',
@@ -7073,8 +7091,8 @@ V019_I18N: dict[str, dict[str, str]] = {
     "home.q_ph": {
         "en": 'e.g. Tylenol Extra Strength',
         "es": 'p. ej. Tylenol Extra Strength',
-        "zh": '输入药名，例如 Tylenol',
-        "zh-Hant": '輸入藥名，例如 Tylenol',
+        "zh": '例如 Tylenol Extra Strength',
+        "zh-Hant": '例如 Tylenol Extra Strength',
         "fr": 'p. ex. Tylenol Extra Strength',
         "ko": '예: Tylenol Extra Strength',
         "ja": '例：Tylenol Extra Strength',
@@ -13792,6 +13810,16 @@ def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
   </nav>"""
 
 
+def _hero_nav_html(prefix: str) -> str:
+    """H2（v1.2.7）：首页页头的三条文字入口（用户 2026-11-26：「怎么用 / 数据来源 / 关于我们」
+    从 hero 下方移回页头）。首页才有这个壳，所以「怎么用」直接锚到本页 3 步引导。"""
+    return f"""<nav class="sn h2nav" aria-label="Site links" data-i18n-aria="nav.primary">
+    <a href="#u1guide" data-i18n="hero.howto">How it works</a>
+    <a href="{prefix}coverage.html" data-i18n="hero.sources">Data sources</a>
+    <a href="{prefix}about.html" data-i18n="hero.about">About us</a>
+  </nav>"""
+
+
 def _shell_right(prefix: str, sw: str, lang: str = "en", hero: bool = False) -> str:
     """右上角：语言下拉（可见「语言」标签）+ 移动端「⋯」菜单（v0.10.0 / LG8 v0.17.0）。
 
@@ -13810,7 +13838,7 @@ def _shell_right(prefix: str, sw: str, lang: str = "en", hero: bool = False) -> 
     <details class="mmenu"><summary aria-label="More" aria-haspopup="true" aria-expanded="false" data-i18n-aria="nav.more">⋯</summary>
       <div class="sn-panel sn-panel-right">{all_link}</div></details>"""
     return f"""<span class="sn-right">
-    <details class="langdd"><summary class="langsum" aria-haspopup="true" aria-expanded="false" aria-label="{lang_aria}"><span class="globe" aria-hidden="true">🌐</span> <span class="lname">{label}</span><span class="caret" aria-hidden="true">▾</span></summary>
+    <details class="langdd"><summary class="langsum" aria-haspopup="true" aria-expanded="false" aria-label="{lang_aria}"><span class="globe" aria-hidden="true">🌐</span> <span class="llabel">{llabel}</span><span class="lsep" aria-hidden="true">·</span><span class="lname">{label}</span><span class="caret" aria-hidden="true">▾</span></summary>
       <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div></div></details>{more}
   </span>"""
 
@@ -14312,7 +14340,7 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 <header class="hdr-shell hdr-hero"><div class="wrap">
   <a class="logo logo-word" href="{prefix}index.html" title="DrugCrossRef — 药品商品名跨国定位">DrugCrossRef
     <span class="logo-zh">药品商品名跨国定位</span></a>
-  {_shell_right(prefix, sw, lang, hero=True)}
+  {_hero_nav_html(prefix)}{_shell_right(prefix, sw, lang, hero=True)}
 </div></header>
 <main id="main"><div class="wrap">"""
         else:
@@ -18808,7 +18836,13 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
         "window.addEventListener('load', apply);",
         "apply(); window.addEventListener('load', apply);")
     # task-70：内联字典不能带全局构建号，否则每次构建首页都变。
-    i18n_js = i18n_js.replace(BUILD_V, "")
+    # H2（v1.2.7，2026-11-26 用户走查）：先保护「资源 URL 上的 ?v=」再剥版本号 ——
+    # 原写法把 `assets/i18n.<lang>.js?v=<BUILD_V>` 一起剥成 `?v=`，语言包 URL 不随版本变，
+    # 旧语言包（≤5 分钟缓存）配新页面新键 → 简中首页显示 `hero.title` 这类裸露键名。
+    # 注：BUILD_V 为空串时不做任何替换（str.replace('', '') 会命中全部位置）。
+    if BUILD_V:
+        i18n_js = i18n_js.replace("?v=" + BUILD_V, "?v=__BV_KEEP__")
+        i18n_js = i18n_js.replace(BUILD_V, "")
     # v0.10.1：i18n.js = "window.I18N=<四语字典>;\n<逻辑>"，只把字典换成当前语言子集，
     # 后面的 T()/apply()/语言链接逻辑原样保留，行为不变。
     m = re.match(r"window\.I18N=(\{.*?\});\n", i18n_js, re.S)
@@ -18819,6 +18853,9 @@ def _optimize_home_html(html: str, prefix: str, lang: str = "en") -> str:
         i18n_js = ("window.I18N=" + json.dumps(subset, ensure_ascii=False,
                                                separators=(",", ":")) + ";\n"
                    + i18n_js[m.end():])
+    # H2：把资源 URL 上的构建号还原（字典本体仍不含构建号，首页确定性不受影响）。
+    if BUILD_V:
+        i18n_js = i18n_js.replace("__BV_KEEP__", BUILD_V)
     # v0.9.7 task-10（用户报障「切换语言跳 404」）：这里必须用 Python 侧算好的前缀。
     # 原写法是 f'... new URL({prefix!r} || "../", location.href)' —— JS 里 '' 是 falsy，
     # 根级首页（prefix=''）会取到 "../"，于是 ROOT = new URL('../', '.../drug-brand-crossref/index.html')
@@ -18920,12 +18957,28 @@ HOME_HERO_CSS = """<style>
 .home-hero .hdr-hero .wrap{height:72px;width:100%;max-width:none;padding:0 clamp(16px,3vw,40px)}
 .home-hero .logo-word{font-size:22px;font-weight:800;letter-spacing:-.02em;text-decoration:none;color:var(--fg)}
 .home-hero .logo-word:hover{text-decoration:none;color:var(--accent)}
-.home-hero .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;
- text-align:center;min-height:calc(100vh - 72px);min-height:calc(100svh - 72px);padding:24px 0 40px}
-.home-hero .hero-title{font-size:clamp(32px,6vw,64px);line-height:1.12;font-weight:800;
- letter-spacing:-.02em;color:var(--fg);margin:0 0 clamp(10px,1.6vw,18px);max-width:18em}
-.home-hero .hero-sub{font-size:clamp(16px,2.1vw,20px);line-height:1.6;color:var(--muted);
- margin:0;max-width:34em}
+.home-hero .hero{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+ text-align:center;min-height:calc(100vh - 72px);min-height:calc(100svh - 72px);
+ padding:clamp(20px,9vh,104px) 0 32px}
+.home-hero .hero-title{font-size:clamp(30px,4.8vw,54px);line-height:1.15;font-weight:800;
+ letter-spacing:-.02em;color:var(--fg);margin:0 0 clamp(20px,3.4vh,34px);max-width:20em}
+.home-hero .hero-label{display:block;text-align:left;font-size:clamp(17px,1.7vw,18px);
+ font-weight:600;line-height:1.4;color:var(--fg);margin:0 0 10px}
+.home-hero .hero-sub{display:none}
+.home-hero .hero-try{display:inline-block;margin:clamp(14px,2.4vh,20px) 0 0;
+ font-size:clamp(15px,1.8vw,17px);line-height:1.5;color:var(--accent);text-decoration:none;
+ border-bottom:1px dashed var(--accent)}
+.home-hero .hero-try:hover,.home-hero .hero-try:focus-visible{text-decoration:underline}
+/* H2（v1.2.7）：页头三链接 + 语言胶囊（🌐 语言 · 简体中文 ▾）。胶囊的 .llabel/.lsep
+   已在通用壳 CSS 里（.sn-right .langsum …）；这里只把「链接 + 胶囊」整组靠右：
+   h2nav 吸收剩余空间（margin-left:auto），胶囊不再自带 auto 左外边距，两者相邻。 */
+.home-hero .h2nav{display:flex;align-items:center;gap:18px;margin-left:auto;font-size:15px}
+.home-hero .h2nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
+.home-hero .h2nav a:hover,.home-hero .h2nav a:focus-visible{color:var(--accent);text-decoration:underline}
+.home-hero .sn-right{margin-left:0}
+/* 768–1024 的通用壳会把 .sn 换成第二行（header.hdr-shell .sn{order:3;flex-basis:100%}），
+   首页一行放得下（字标 + 三链接 + 胶囊），这里按单行排，避免多占 44px 首屏。 */
+@media (min-width:768px){.home-hero .h2nav{order:0;flex-basis:auto}}
 .home-hero .hero-search{width:min(880px,100%);margin:clamp(22px,4vw,40px) auto 0}
 .home-hero .searchbar{display:flex;align-items:center;gap:12px;row-gap:10px}
 .home-hero .sb-field{position:relative;display:flex;flex:1 1 auto;min-width:0}
@@ -18953,18 +19006,32 @@ HOME_HERO_CSS = """<style>
 html.has-q .home-hero main{padding:0 0 40px}
 html.has-q .home-hero .hero{min-height:0;align-items:stretch;justify-content:flex-start;
  text-align:left;padding:10px 0 6px}
-html.has-q .home-hero .hero-title,html.has-q .home-hero .hero-sub,
-html.has-q .home-hero .hero-links{display:none}
+html.has-q .home-hero .hero-title,html.has-q .home-hero .hero-label,
+html.has-q .home-hero .hero-try{display:none}
 html.has-q .home-hero .hero-search{margin:0 auto 6px}
 html.has-q .home-hero .home-rest{margin-top:8px;padding-top:0;border-top:0}
 .home-hero .footnav{margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line);font-size:14px}
 .home-hero .footnav .sn{flex-wrap:wrap;gap:8px 16px}
 .home-hero .footnav .sn-panel{top:auto;bottom:100%;background:var(--surface-2);border:1px solid var(--line)}
 .home-hero .footnav .sn-panel-right{right:auto;left:0}
+@media (max-width:767px){
+ /* 390 档：三链接单独一行（每项仍是 44px 触控高），语言胶囊留在第一行右侧；
+    .wrap 必须显式 flex-wrap:wrap（通用壳在 ≤767 是 nowrap，会把 100% 行宽压扁）。 */
+ .home-hero .hdr-hero .wrap{height:auto;min-height:56px;flex-wrap:wrap;gap:6px 10px;
+  padding-top:6px;padding-bottom:6px}
+ .home-hero .h2nav{order:3;flex-basis:100%;margin-left:0;justify-content:center;gap:16px;
+  font-size:14px;padding-bottom:2px}
+ /* 双语「显示原文对照」开关由 bilingual.js 插进页头 nav；手机首页放不下第 4 项，
+    会折成两行、把首屏往下压 44px。手机上首页隐藏它（v1.2.6 首页本来也没有这个开关），
+    其它顶层页与桌面首页照旧显示。 */
+ .home-hero .h2nav .bil-toggle{display:none}
+ .home-hero .sn-right{margin-left:auto}
+ .home-hero .hero{min-height:calc(100vh - 112px);min-height:calc(100svh - 112px);
+  padding:18px 0 28px}
+}
 @media (max-width:560px){
- .home-hero .hdr-hero .wrap{height:64px;gap:10px}
  .home-hero .logo-word{font-size:19px}
- .home-hero .hero{min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);padding:16px 0 32px}
+ .home-hero .hero-title{margin-bottom:16px}
  .home-hero .searchbar{flex-wrap:wrap;row-gap:10px}
  .home-hero .sb-field{flex:1 1 100%}
  .home-hero .sb-mag{left:14px}
@@ -18972,8 +19039,7 @@ html.has-q .home-hero .home-rest{margin-top:8px;padding-top:0;border-top:0}
  .home-hero .sb-go{flex:1 1 100%;height:52px;min-width:0;justify-content:center;margin-top:0}
  /* 次级控件（想查哪里? / 市场 chips）独立成行，绝不压搜索框与按钮 */
  .home-hero .t11row{margin:10px 0 0;justify-content:center;gap:6px}
- .home-hero .hero-links{font-size:16px}
- .home-hero .hero-links a+a{margin-left:12px;padding-left:12px}
+ .home-hero .hero-try{font-size:15px;margin-top:14px}
 }
 @media (prefers-reduced-motion:reduce){.home-hero *{transition:none!important;animation:none!important}}
 </style>"""
@@ -18985,19 +19051,20 @@ def build_index_page(entries, stats, coverage) -> None:
     # v1.1.0（NO）：两处 <select> 的选项由同一份市场清单生成（见 _market_filter_codes）。
     market_options = _market_options_html(coverage)
     body = f"""<section class="hero" id="hero" aria-labelledby="h1">
-<h1 id="h1" class="hero-title" data-i18n="hero.title">Cross-reference medicine names</h1>
-<p class="hero-sub" data-i18n="hero.sub">Type the name on the pack — see what it is called in other countries or regions.</p>
+<h1 id="h1" class="hero-title" data-i18n="hero.title">@@HERO_TITLE@@</h1>
+<p class="hero-sub" data-i18n="hero.sub">@@HERO_SUB@@</p>
 <div class="searchwrap hero-search">
+<label class="hero-label" for="q" data-i18n="hero.label">@@HERO_LABEL@@</label>
 <div class="searchbar">
 <span class="sb-field">
 <span class="sb-mag" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.2-4.2"></path></svg></span>
-<label class="sr-only" for="q" data-i18n="home.ph">Brand, generic or a line from the pack</label>
-<input id="q" data-ph="home.q_ph" placeholder="e.g. Tylenol, Tylenol Extra Strength" autocomplete="off" aria-autocomplete="list" aria-controls="ac" enterkeyhint="search">
+<input id="q" data-ph="home.q_ph" placeholder="@@HERO_PH@@" autocomplete="off" aria-autocomplete="list" aria-controls="ac" enterkeyhint="search">
 </span>
 <span class="sb-hint" data-i18n="home.slash_hint">Press / to focus</span>
-<button type="button" id="qgo" class="sb-go" data-i18n-aria="hero.cta" aria-label="Look up"><span class="sbg-t" data-i18n="hero.cta">Look up</span><span class="sbg-ico" aria-hidden="true">→</span></button>
+<button type="button" id="qgo" class="sb-go" data-i18n-aria="hero.cta" aria-label="@@HERO_CTA@@"><span class="sbg-t" data-i18n="hero.cta">@@HERO_CTA@@</span><span class="sbg-ico" aria-hidden="true">→</span></button>
 <div id="ac" role="listbox" aria-label="Suggestions" data-i18n-aria="home.suggestions"></div>
 </div>
+<a class="hero-try" href="?q=Tylenol&amp;country=CN" data-i18n="hero.try">@@HERO_TRY@@</a>
 <div class="t11row">
 <p class="sub search-status" id="meta" role="status" aria-live="polite" aria-atomic="true"></p>
 <a class="mkopen" href="#ctrydetails" data-i18n="home.country_label">Target market</a>
@@ -19005,11 +19072,6 @@ def build_index_page(entries, stats, coverage) -> None:
 </div>
 <div id="pickbar" class="pickbar" hidden></div>
 </div>
-<nav class="hero-links" aria-label="Site links" data-i18n-aria="nav.primary">
-<a href="#u1guide" data-i18n="hero.howto">How it works</a>
-<a href="{{prefix}}coverage.html" data-i18n="hero.sources">Data sources</a>
-<a href="{{prefix}}about.html" data-i18n="hero.about">About us</a>
-</nav>
 </section>
 <div class="home-rest">
 <ol class="flow3">
@@ -19082,6 +19144,15 @@ does not exist. Coverage:</span> {covline}.</div>
                      .replace("{cat_chips}", _home_cat_chips(code, prefix))
                      .replace("{recent}", _home_recent(prefix, code))
                      .replace("{APP_BOOT}", _app_boot(prefix)))
+        # H2（v1.2.7）：hero 文案**构建时按语言直出** —— HTML 里就是该语言文字，
+        # 不再依赖 JS 词典；data-i18n 保留作客户端切换时的兜底。
+        # 6 句 = 标题 / 副标题（视觉隐藏，避免与输入框标签重复）/ 输入框标签 / 占位 / 按钮 / 示例。
+        _tbl = I18N.get(code) or I18N["en"]
+        for _tok, _key in (("@@HERO_TITLE@@", "hero.title"), ("@@HERO_SUB@@", "hero.sub"),
+                           ("@@HERO_LABEL@@", "hero.label"),
+                           ("@@HERO_CTA@@", "hero.cta"), ("@@HERO_TRY@@", "hero.try"),
+                           ("@@HERO_PH@@", "home.q_ph")):
+            page_body = page_body.replace(_tok, esc(_tbl.get(_key, "")))
         html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
                     canonical_rel=path, alt_rel="",
