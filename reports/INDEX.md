@@ -2,11 +2,18 @@
 
 > 本文件由脚本扫描 `reports/*.md` 生成：文件名日期 + 首个标题 + 「结论」小节首句（无则取正文首段），按日期倒序。
 > 新增报告后重跑生成器即可，不必手改本文件（生成器 `.tmp/docs-organizer/gen_reports_index.py`，规则见 `docs/现状.md` §5）。
-> 共 **442** 份报告；「发布」列 = 发布/上线/事故类报告。无日期前缀的文件排在最后。
+> 共 **449** 份报告；「发布」列 = 发布/上线/事故类报告。无日期前缀的文件排在最后。
 
 | 日期 | 报告 | 一句话结论 | 发布 |
 |---|---|---|---|
+| 2026-11-26 | [2026-11-26-v126-release.md](2026-11-26-v126-release.md) | 1. 首页改版：白底居中大标题 + 大搜索框与「查药名」按钮（参考图 docs/img/homepage-mockup-20261126.png，配色全用现有 token，零新色值）。 | 是 |
+| 2026-11-26 | [2026-11-26-v125-static-pages.md](2026-11-26-v125-static-pages.md) | 一句话：把静态产品页上限抬到 144,000 并只读复算确认能取满（16 市场供给 148,814，MARKET_CAP 12,000 不必动）；pins 由 114,000 单调扩到 144,000（+30,000… |  |
+| 2026-11-26 | [2026-11-26-v125-release.md](2026-11-26-v125-release.md) | === D: free space === D UsedGB 942.9 FreeGB 11 | 是 |
+| 2026-11-26 | [2026-11-26-t18-t19-release-tooling.md](2026-11-26-t18-t19-release-tooling.md) | v1.2.5 发布时 A/B 只按「路径 + 大小」差分，同长度内容替换看不见：v1.2.4 → v1.2.5、2026-11-25 → 2026-11-26、 | 是 |
+| 2026-11-26 | [2026-11-26-t17-nightly-metrics-check.md](2026-11-26-t17-nightly-metrics-check.md) | 1. T17 是误报：db/nightly_metrics.py L221–236 早在 v1.2.3（commit ec9e3981993） 就适配了 sitemap 索引——<sitemapindex → 逐分片… |  |
+| 2026-11-26 | [2026-11-26-t10-index-sharding-design.md](2026-11-26-t10-index-sharding-design.md) | 推荐「方案 A：按文字系统把 core.json 拆成 latin / cjk / other 三片」，core.json 保留一个版本周期做旧客户端兜底，第二版起只发分片。 |  |
 | 2026-11-26 | [2026-11-26-license-followup.md](2026-11-26-license-followup.md) | 一句话：今天没有新增许可；上海到期但看不到结果（需人开邮箱看一眼），荷兰确认没变，韩国还差人给邮箱登录方式。 |  |
+| 2026-11-26 | [2026-11-26-h0-homepage-redesign.md](2026-11-26-h0-homepage-redesign.md) | 参考图：.tmp/homepage-mockup-20261126.png（用户提供，1536×1024） |  |
 | 2026-11-25 | [2026-11-25-v124-static-pages.md](2026-11-25-v124-static-pages.md) | 自验构建：SITE_OUT=.tmp/frontend-v124，共两轮（A / A′），跑完已删除临时目录。 |  |
 | 2026-11-25 | [2026-11-25-v124-release.md](2026-11-25-v124-release.md) | static pins : 114,000 pinned pids, +0 restored this build | 是 |
 | 2026-11-25 | [2026-11-25-v123-sitemap-index.md](2026-11-25-v123-sitemap-index.md) | 自验构建：SITE_OUT=.tmp/frontend-v123，两轮（A / A′），跑完已删除临时目录。 |  |
