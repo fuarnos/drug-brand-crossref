@@ -18959,7 +18959,7 @@ html.has-q .home-hero .hero-search{margin:0 auto 6px}
 html.has-q .home-hero .home-rest{margin-top:8px;padding-top:0;border-top:0}
 .home-hero .footnav{margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line);font-size:14px}
 .home-hero .footnav .sn{flex-wrap:wrap;gap:8px 16px}
-.home-hero .footnav .sn-panel{top:auto;bottom:100%}
+.home-hero .footnav .sn-panel{top:auto;bottom:100%;background:var(--surface-2);border:1px solid var(--line)}
 .home-hero .footnav .sn-panel-right{right:auto;left:0}
 @media (max-width:560px){
  .home-hero .hdr-hero .wrap{height:64px;gap:10px}
