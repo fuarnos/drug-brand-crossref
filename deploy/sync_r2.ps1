@@ -527,6 +527,35 @@ try {
     # exits 1 (release failure) - proven by the REL2-B self-test and the REL6 self-test.
     $AssetExcludes = @($AssetKeep.ExcludeArgs)
 
+    # -- T19 (2026-11-26): keep the 5 synthetic language-root keys alive -------------------
+    # deploy/fix_fr_root.py writes R2 object keys "<lang>/" (fr/ ko/ ja/ cs/ lv/) AFTER the
+    # sync, because Cloudflare Transform Rules only cover /, /zh/, /es/, /zh-hant/. Those
+    # keys are not part of site/dist, so a plain sync treats them as extras and deletes them
+    # -> the fallback re-PUTs them: +5 DELETE +5 PUT every release, net effect zero
+    # (v1.2.5 log: `Deleted: 5 (files), 1.072 MiB`).
+    # Pattern choice (measured with -DryRun against the live bucket, zero writes):
+    #   * `--exclude "/fr/"`  = DIRECTORY pattern -> prunes the whole fr/ tree. Measured
+    #     `Checks: 362,116 -> 362,076` (-40 = 5 langs x 8 root files) => future fr/*.html
+    #     changes would silently stop uploading. REJECTED.
+    #   * `--exclude "{{^fr/$}}"` = rclone REGEXP filter (the braces must be LITERAL DOUBLE
+    #     braces - rclone only treats "{{...}}" as a regexp). Matches ONLY the object whose
+    #     filter path is literally "fr/" (the marker key). Measured from Windows PowerShell
+    #     5.1 with the 5 rules and WITHOUT the asset excludes: `Deleted: 6 (files)` (only the
+    #     6 remote-only old hashed assets) / `Checks` 362,118 = 362,112 dist files + 6; with
+    #     single braces `{^fr/$}` it was `Deleted: 11` (5 markers + 6 assets) => braces matter.
+    #     NOTE: PowerShell's `-f` operator UNESCAPES `{{` to `{`, so the pattern must be built
+    #     by concatenation (`'{{^' + $lang + '/$}}'`), not with `-f`.
+    # Still "exact names only" in the REL6 sense: one literal key per rule, no wildcard that
+    # could hide a typo or silently protect future files.
+    # Also passed to BOTH `rclone check` runs: the post-sync check is two-way, so the kept-alive
+    # keys would otherwise be reported as 5 differences and fail the release.
+    $LangRootExcludes = @()
+    foreach ($lang in $FallbackLangs) { $LangRootExcludes += @('--exclude', ('{{^' + $lang + '/$}}')) }
+    # ASCII only on purpose: this script is launched via Windows PowerShell 5.1 (`-File`), which
+    # decodes a BOM-less .ps1 as the system ANSI codepage; non-ASCII text here broke parsing
+    # during T19 (UTF-8 bytes decoded as GBK produced a stray quote). Keep this file ASCII.
+    Write-Host ("lang-root-keep: {0} exact --exclude(s): {1} (trailing-slash object keys, not in site/dist)" -f $FallbackLangs.Count, (($FallbackLangs | ForEach-Object { "$_/" }) -join ' '))
+
     if ($CheckOnly) {
         # --one-way: the bucket intentionally holds the synthetic language-root fallback
         # objects (fr/, ko/; not in site/dist), and may hold pre-sync extras that the next
@@ -534,7 +563,7 @@ try {
         # (2026-11-13: without --one-way, -CheckOnly exited 1 with `1 differences / 1 files
         # missing` on a healthy bucket, purely because of fr/).
         Write-Host ("check: {0} -> r2:{1} (size-only, one-way)" -f $Dist, $bucket)
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs @AssetExcludes
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only --one-way @confArgs @AssetExcludes @LangRootExcludes
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
         Write-Host 'check: OK (size-only, one-way)'
         exit 0
@@ -561,7 +590,7 @@ try {
     # parse that as 0 PUT.
     $syncArgs = @('sync', $Dist, ("r2:{0}" -f $bucket), '--checksum',
                   '--transfers', $Transfers, '--checkers', $Transfers,
-                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs + $AssetExcludes
+                  '--stats', '60s', '--stats-log-level', 'NOTICE') + $confArgs + $AssetExcludes + $LangRootExcludes
     # -- REL3 (2026-11-21): R2 Class A budget guard + PUT ledger ----------------
     # Free tier = 1M Class A ops/month; above it $4.50 per million, Cloudflare rounds UP
     # to the next million; projected > 1M needs the USER's approval (AGENTS.md section 6).
@@ -570,6 +599,11 @@ try {
     #   * planned > 50,000            -> needs explicit -ApproveLarge (Lead approval);
     #   * projected month >= 900,000  -> needs -ApproveLarge; >= 1,000,000 needs user approval.
     # Budget per publish = main-sync N + $BudgetExtra (17 assets PUTs + 5 lang-root PUTs).
+    # T19 (2026-11-26) keeps the 5 language-root keys alive (see $LangRootExcludes), and
+    # fix_fr_root.py now SKIPS a PUT when the remote object already matches (same md5+size),
+    # so a normal release spends 17 + 0 = 17. $BudgetExtra stays 22 as a deliberate UPPER
+    # BOUND (worst case: all 5 fallback objects missing again -> 5 PUTs), so the projection
+    # can only over-estimate, never under-estimate.
     # Ledger = data/r2_put_ledger.jsonl, one JSON line per REAL sync (mode=real).
     # v1.0.0 / earlier usage is NOT backfilled (task-4: no history backfill) - reconcile the current
     # Cloudflare cycle by hand until the first full month of ledger data.
@@ -684,7 +718,7 @@ try {
         # printed at the top). Excluded hash-named assets are remote-only by design (kept alive
         # for pages cached by the previous release); a two-way check would report each one as a
         # difference and exit 1, failing the release for the wrong reason.
-        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs @AssetExcludes
+        & $rclone check $Dist ("r2:{0}" -f $bucket) --size-only @confArgs @AssetExcludes @LangRootExcludes
         if ($LASTEXITCODE -ne 0) { Write-Host 'ERROR: rclone check failed'; exit 1 }
 
         # REL2-B (2026-11-20): second pass over assets/ only, with a 5-minute browser cache.
