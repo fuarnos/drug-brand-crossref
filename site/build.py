@@ -1115,6 +1115,10 @@ FR_I18N: dict[str, str] = {
     "release.MR": "libération modifiée", "release.none": "—",
     "unit.iu": "UI", "unit.unit": "unité", "unit.meq": "mEq", "unit.mci": "mCi",
     "unit.ug": "µg", "unit.microgram": "µg", "unit.万iu": "100 000 UI",
+    "hero.title": "Noms de médicaments, d’un pays à l’autre",
+    "hero.sub": "Saisissez le nom figurant sur la boîte et voyez comment il s’appelle ailleurs.",
+    "hero.howto": "Comment ça marche", "hero.sources": "Sources de données",
+    "hero.about": "À propos", "hero.cta": "Rechercher",
     "u1.title": "Comprendre en 3 étapes", "u1.step1": "Saisissez le nom de la boîte",
     "u1.step1_hint": "Marque, générique, surnom ou une ligne de la boîte ; le dosage peut être inclus.",
     "u1.step2": "Vérifiez ce candidat : principe, dosage, forme",
@@ -1931,6 +1935,11 @@ for _lang, _kv in NAME_LANG_I18N.items():
     I18N.setdefault(_lang, {}).update(_kv)
 UI_I18N = {
     "en": {
+        # H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图改版）
+        "hero.title": "Cross-reference medicine names",
+        "hero.sub": "Type the name on the pack — see what it is called in other countries or regions.",
+        "hero.howto": "How it works", "hero.sources": "Data sources", "hero.about": "About us",
+        "hero.cta": "Look up",
         "u1.title": "How to use it in 3 steps",
         "u1.step1": "Type the name from the pack",
         "u1.step1_hint": ("Brand, generic name, nickname, or a line from the pack — "
@@ -2148,6 +2157,11 @@ UI_I18N = {
         "res.src_label": "Record market (only records registered here)",
     },
     "es": {
+        # H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图改版）
+        "hero.title": "Nombres de medicamentos entre países",
+        "hero.sub": "Escribe el nombre del envase y mira cómo se llama en otros países o regiones.",
+        "hero.howto": "Cómo funciona", "hero.sources": "Fuentes de datos", "hero.about": "Quiénes somos",
+        "hero.cta": "Buscar",
         "u1.title": "Cómo funciona en 3 pasos",
         "u1.step1": "Escribe el nombre del envase",
         "u1.step1_hint": ("Marca, genérico, apodo o una línea del envase; la dosis puede "
@@ -2346,6 +2360,11 @@ UI_I18N = {
         "res.src_label": "Mercado del registro (solo registros de aquí)",
     },
     "zh": {
+        # H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图改版）
+        "hero.title": "国际药品名称对照",
+        "hero.sub": "查药盒上的名字，看它在其他国家或地区叫什么。",
+        "hero.howto": "怎么用", "hero.sources": "数据来源", "hero.about": "关于我们",
+        "hero.cta": "查药名",
         "u1.title": "三步看懂",
         "u1.step1": "输入包装上的名字",
         "u1.step1_hint": "商品名、通用名、俗称或包装上一行字；可连剂量一起输入。",
@@ -2520,6 +2539,11 @@ UI_I18N = {
         "res.src_label": "记录市场（只看登记在这里的记录）",
     },
     "zh-Hant": {
+        # H0（v1.2.6）：首頁極簡 hero（使用者 2026-11-26 參考圖改版）
+        "hero.title": "國際藥品名稱對照",
+        "hero.sub": "查藥盒上的名字，看它在其他國家或地區叫什麼。",
+        "hero.howto": "怎麼用", "hero.sources": "資料來源", "hero.about": "關於我們",
+        "hero.cta": "查藥名",
         "u1.title": "三步看懂",
         "u1.step1": "輸入包裝上的名字",
         "u1.step1_hint": "商品名、通用名、俗稱或包裝上一行字；可連劑量一起輸入。",
@@ -4379,6 +4403,10 @@ KO_I18N: dict[str, str] = {
     'u1.step2_hint': '카드는 후보 하나를 보여줄 뿐 정답이 아닙니다 — 성분·함량·제형을 포장과 대조하세요.',
     'u1.step3': '대상 시장을 선택하세요',
     'u1.step3_hint': '대상 시장을 선택하면 같은 성분이 그곳에서 무엇으로 불리는지 볼 수 있습니다. 후보 목록 자체는 바뀌지 않습니다.',
+    'hero.title': '국제 의약품 이름 대조',
+    'hero.sub': '약 상자의 이름을 입력하면 다른 나라·지역에서 뭐라고 부르는지 볼 수 있습니다.',
+    'hero.howto': '사용 방법', 'hero.sources': '데이터 출처', 'hero.about': '소개',
+    'hero.cta': '약 이름 검색',
     'u1.title': '3단계로 사용하는 방법',
     'u1.try': '예시:',
     # V4（v0.14.0）：首页「跨国查名」示例链接 + 「按包装文字搜索」分组标签
@@ -5074,6 +5102,10 @@ JA_I18N: dict[str, str] = {
     'u1.step2_hint': 'カードは候補を1つ示すだけで、答えではありません — 包装と照らして成分・含量・剤形を確認してください。',
     'u1.step3': '対象市場を選ぶ',
     'u1.step3_hint': '対象市場を選ぶと同じ成分がそこで何と呼ばれているか分かります。候補リスト自体は変わりません。',
+    'hero.title': '国際的な医薬品名の照合',
+    'hero.sub': '箱に書かれた名前を入力すると、他の国・地域での呼び名がわかります。',
+    'hero.howto': '使い方', 'hero.sources': 'データの出典', 'hero.about': '運営について',
+    'hero.cta': '薬名を検索',
     'u1.title': '3ステップで使う',
     'u1.try': '例：',
     'u2.hint': '同じ成分の現地名称 — 国・地域をクリックすると製品を表示します。未収録でも、そこに存在しない証明にはなりません。',
@@ -5767,6 +5799,10 @@ CS_I18N: dict[str, str] = {
     'u1.step2_hint': 'Karta ukazuje jednoho kandidáta, nikdy ne konečnou odpověď — porovnejte jeho léčivou látku, sílu a lékovou formu s obalem.',
     'u1.step3': 'Vyberte cílový trh',
     'u1.step3_hint': 'Zvolte cílový trh a zjistěte, jak se stejná léčivá látka nazývá tam; samotný seznam kandidátů se nemění.',
+    'hero.title': 'Mezinárodní srovnání názvů léků',
+    'hero.sub': 'Zadejte název z krabičky a zjistěte, jak se jmenuje v jiných zemích či regionech.',
+    'hero.howto': 'Jak to funguje', 'hero.sources': 'Zdroje dat', 'hero.about': 'O nás',
+    'hero.cta': 'Vyhledat lék',
     'u1.title': 'Jak to používat ve 3 krocích',
     'u1.try': 'Zkuste:',
     'u2.hint': 'Stejná léčivá látka, místní název — klikněte na zemi/region a zobrazí se její přípravky. To, že záznam v seznamu není, neznamená, že tam není dostupný.',
@@ -6456,6 +6492,10 @@ LV_I18N: dict[str, str] = {
     'u1.step2_hint': 'Kartīte rāda vienu kandidātu, nekad galīgo atbildi — salīdziniet tā aktīvo vielu, stiprumu un zāļu formu ar savu iepakojumu.',
     'u1.step3': 'Izvēlieties mērķa tirgu',
     'u1.step3_hint': 'Izvēlieties mērķa tirgu, lai redzētu, kā tur sauc to pašu aktīvo vielu; pats kandidātu saraksts nemainās.',
+    'hero.title': 'Starptautisks zāļu nosaukumu salīdzinājums',
+    'hero.sub': 'Ievadiet nosaukumu no iepakojuma un uzziniet, kā to sauc citās valstīs vai reģionos.',
+    'hero.howto': 'Kā tas darbojas', 'hero.sources': 'Datu avoti', 'hero.about': 'Par mums',
+    'hero.cta': 'Meklēt zāles',
     'u1.title': 'Kā to lietot trīs soļos',
     'u1.try': 'Izmēģiniet:',
     'u2.hint': 'Tā pati aktīvā viela, vietējais nosaukums — noklikšķiniet uz valsts/reģiona, lai redzētu tā produktus. Ja produkts nav sarakstā, tas nenozīmē, ka tas tur nav pieejams.',
@@ -7033,8 +7073,8 @@ V019_I18N: dict[str, dict[str, str]] = {
     "home.q_ph": {
         "en": 'e.g. Tylenol Extra Strength',
         "es": 'p. ej. Tylenol Extra Strength',
-        "zh": '例如：Tylenol Extra Strength',
-        "zh-Hant": '例如：Tylenol Extra Strength',
+        "zh": '输入药名，例如 Tylenol',
+        "zh-Hant": '輸入藥名，例如 Tylenol',
         "fr": 'p. ex. Tylenol Extra Strength',
         "ko": '예: Tylenol Extra Strength',
         "ja": '例：Tylenol Extra Strength',
@@ -13752,8 +13792,11 @@ def _shell_nav_html(prefix: str, active: str = "search", sw: str = "") -> str:
   </nav>"""
 
 
-def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
-    """右上角：语言下拉（可见「语言」标签）+ 移动端「⋯」菜单（v0.10.0 / LG8 v0.17.0）。"""
+def _shell_right(prefix: str, sw: str, lang: str = "en", hero: bool = False) -> str:
+    """右上角：语言下拉（可见「语言」标签）+ 移动端「⋯」菜单（v0.10.0 / LG8 v0.17.0）。
+
+    hero=True（H0 首页改版）：只要语言下拉，导航链接已收进页脚，右上角不再放「⋯」。
+    """
     labels = {c: l for c, l, _ in LANGS}
     label = labels.get(lang, "English")
     llabel = _lang_label(lang)
@@ -13763,11 +13806,12 @@ def _shell_right(prefix: str, sw: str, lang: str = "en") -> str:
     # （_shell_nav_html）；移动端仍可从「⋯」菜单进「全部类别」。
     all_link = (f'<div class="sn-foot"><a href="{prefix}atc.html" '
                 f'data-i18n="cat.all_link">All categories →</a></div>')
+    more = "" if hero else f"""
+    <details class="mmenu"><summary aria-label="More" aria-haspopup="true" aria-expanded="false" data-i18n-aria="nav.more">⋯</summary>
+      <div class="sn-panel sn-panel-right">{all_link}</div></details>"""
     return f"""<span class="sn-right">
     <details class="langdd"><summary class="langsum" aria-haspopup="true" aria-expanded="false" aria-label="{lang_aria}"><span class="globe" aria-hidden="true">🌐</span> <span class="lname">{label}</span><span class="caret" aria-hidden="true">▾</span></summary>
-      <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div></div></details>
-    <details class="mmenu"><summary aria-label="More" aria-haspopup="true" aria-expanded="false" data-i18n-aria="nav.more">⋯</summary>
-      <div class="sn-panel sn-panel-right">{all_link}</div></details>
+      <div class="sn-panel sn-panel-right"><div class="lang-menu">{sw}</div></div></details>{more}
   </span>"""
 
 
@@ -14166,7 +14210,8 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
          alternates: bool = False, meta_key: str | None = None,
          canonical_rel: str = "", alt_rel: str = "", head_js: str = "",
          noindex: bool = False, defer_i18n: bool = True,
-         nav_coverage: bool = False, slim: bool = False) -> str:
+         nav_coverage: bool = False, slim: bool = False,
+         home_hero: bool = False) -> str:
     """渲染整页 HTML。
 
     slim=True 只给长尾 name 页用（77,058 页）：保留 title/canonical/hreflang 与导航、页脚，
@@ -14258,7 +14303,20 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     # 长尾页仍走下面 else 分支的原壳，字节不变（壳由 boot.js 注入）。
     # REL2（v1.0.0）：shell_top 与资源名已在函数开头判定（长尾页用稳定名）。
     if shell_top:
-        top = f"""
+        if home_hero:
+            # H0（v1.2.6）：首页极简壳 —— 左上字标 + 右上语言下拉，导航链接整体收进页脚
+            # （保留站内入口与 SEO；结果区/联想/筛选/覆盖声明仍在 hero 之下，见 build_index_page）。
+            top = f"""
+<body class="home-hero">
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+<header class="hdr-shell hdr-hero"><div class="wrap">
+  <a class="logo logo-word" href="{prefix}index.html" title="DrugCrossRef — 药品商品名跨国定位">DrugCrossRef
+    <span class="logo-zh">药品商品名跨国定位</span></a>
+  {_shell_right(prefix, sw, lang, hero=True)}
+</div></header>
+<main id="main"><div class="wrap">"""
+        else:
+            top = f"""
 <body>
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 <header class="hdr-shell"><div class="wrap">
@@ -14285,11 +14343,20 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
 </div></header>
 <main id="main"><div class="wrap">"""
     tabbar = _shell_tabbar(prefix, _nav_active(canonical_rel)) if shell_top else ""
+    # H0（v1.2.6）：首页导航收进页脚 —— 组件仍是 _shell_nav_html（分类 / 市场两个下拉与全部
+    # 站内入口一个不丢），只是从页头搬到页脚；另外在 .foot-links 里补一个 Coverage 入口，
+    # 让 _coverage_entry_js 不再重复插一条。
+    footnav = (f'<div class="footnav">{_shell_nav_html(prefix, _nav_active(canonical_rel))}</div>'
+               if home_hero else "")
+    foot_cov = (f'<a href="{prefix}coverage.html" data-i18n="nav.coverage" '
+                f'data-coverage="1">Coverage</a>' if home_hero else "")
     bottom = f"""</div></main>
 <footer><div class="wrap">
+  {footnav}
   <span data-i18n="footer">{esc(I18N['en']['footer'])}</span>
   <span class="foot-links">
     {foot_news}
+    {foot_cov}
     <a href="{REPORT_REPO}/issues/new?labels=data-error&amp;template=data-error.yml"
        target="_blank" rel="noopener" data-i18n="report.link">Report a data error</a>
     <a href="{REPORT_REPO}/issues" target="_blank" rel="noopener"
@@ -18845,24 +18912,90 @@ def _home_recent(prefix: str, lang: str = "en", limit: int = 3) -> str:
             f'See all updates →</a></p></section>')
 
 
+HOME_HERO_CSS = """<style>
+/* H0（v1.2.6）：首页极简 hero（用户 2026-11-26 参考图；配色只用 :root 现有 token，不引入新色值）。
+   只随首页内联注入（head_js），不进 assets/style.css —— 其它页面与 33 万长尾页字节不变。 */
+.home-hero main{padding:0 0 56px}
+.home-hero .hdr-hero{border-bottom:0;background:var(--bg)}
+.home-hero .hdr-hero .wrap{height:72px;width:100%;max-width:none;padding:0 clamp(16px,3vw,40px)}
+.home-hero .logo-word{font-size:22px;font-weight:800;letter-spacing:-.02em;text-decoration:none;color:var(--fg)}
+.home-hero .logo-word:hover{text-decoration:none;color:var(--accent)}
+.home-hero .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;
+ text-align:center;min-height:calc(100vh - 72px);min-height:calc(100svh - 72px);padding:24px 0 40px}
+.home-hero .hero-title{font-size:clamp(32px,6vw,64px);line-height:1.12;font-weight:800;
+ letter-spacing:-.02em;color:var(--fg);margin:0 0 clamp(10px,1.6vw,18px);max-width:18em}
+.home-hero .hero-sub{font-size:clamp(16px,2.1vw,20px);line-height:1.6;color:var(--muted);
+ margin:0;max-width:34em}
+.home-hero .hero-search{width:min(880px,100%);margin:clamp(22px,4vw,40px) auto 0}
+.home-hero .searchbar{display:flex;align-items:center;gap:12px;row-gap:10px}
+.home-hero .sb-field{position:relative;display:flex;flex:1 1 auto;min-width:0}
+.home-hero .sb-mag{position:absolute;left:18px;top:50%;transform:translateY(-50%);
+ color:var(--muted);display:inline-flex;pointer-events:none}
+.home-hero .searchbar #q{flex:1 1 auto;min-width:0;height:60px;padding:0 18px 0 50px;
+ font-size:17px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--fg)}
+.home-hero .searchbar #q:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-color:var(--accent)}
+.home-hero .sb-go{position:static;transform:none;height:60px;min-width:132px;padding:0 26px;
+ border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:#fff;
+ font-size:17px;font-weight:600}
+.home-hero .sb-go:hover{filter:brightness(.94)}
+.home-hero .sb-go:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.home-hero .sb-go .sbg-ico{display:none}
+.home-hero .sb-hint{display:none}
+.home-hero .hero-links{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+ margin:clamp(22px,4vw,44px) 0 0;font-size:16px;line-height:1.4}
+.home-hero .hero-links a{color:var(--accent);text-decoration:none;padding:8px 0}
+.home-hero .hero-links a:hover,.home-hero .hero-links a:focus-visible{text-decoration:underline}
+.home-hero .hero-links a+a{border-left:1px solid var(--line);margin-left:18px;padding-left:18px}
+.home-hero .home-rest{margin-top:clamp(32px,6vw,64px);padding-top:24px;border-top:1px solid var(--line)}
+.home-hero .home-rest .flow3{margin-bottom:14px}
+/* 查询生效（html.has-q，app.js 加）后 hero 收起：标题/副标题/三链接让位，结果立刻进入首屏。
+   功能不丢 —— 只是把「还没查」的落地页状态收起来。 */
+html.has-q .home-hero main{padding:0 0 40px}
+html.has-q .home-hero .hero{min-height:0;align-items:stretch;justify-content:flex-start;
+ text-align:left;padding:10px 0 6px}
+html.has-q .home-hero .hero-title,html.has-q .home-hero .hero-sub,
+html.has-q .home-hero .hero-links{display:none}
+html.has-q .home-hero .hero-search{margin:0 auto 6px}
+html.has-q .home-hero .home-rest{margin-top:8px;padding-top:0;border-top:0}
+.home-hero .footnav{margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line);font-size:14px}
+.home-hero .footnav .sn{flex-wrap:wrap;gap:8px 16px}
+.home-hero .footnav .sn-panel{top:auto;bottom:100%}
+.home-hero .footnav .sn-panel-right{right:auto;left:0}
+@media (max-width:560px){
+ .home-hero .hdr-hero .wrap{height:64px;gap:10px}
+ .home-hero .logo-word{font-size:19px}
+ .home-hero .hero{min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);padding:16px 0 32px}
+ .home-hero .searchbar{flex-wrap:wrap;row-gap:10px}
+ .home-hero .sb-field{flex:1 1 100%}
+ .home-hero .sb-mag{left:14px}
+ .home-hero .searchbar #q{flex:1 1 100%;height:54px;font-size:16px;padding-left:44px}
+ .home-hero .sb-go{flex:1 1 100%;height:52px;min-width:0;justify-content:center;margin-top:0}
+ /* 次级控件（想查哪里? / 市场 chips）独立成行，绝不压搜索框与按钮 */
+ .home-hero .t11row{margin:10px 0 0;justify-content:center;gap:6px}
+ .home-hero .hero-links{font-size:16px}
+ .home-hero .hero-links a+a{margin-left:12px;padding-left:12px}
+}
+@media (prefers-reduced-motion:reduce){.home-hero *{transition:none!important;animation:none!important}}
+</style>"""
+
+
 def build_index_page(entries, stats, coverage) -> None:
     """四份落地页：/ 、/es/ 、/zh/ 、/zh-hant/。内容相同，语言由脚本按路径/参数决定。"""
     covline = ", ".join(f"{r['country']} {r['n_products']:,}" for r in coverage)
     # v1.1.0（NO）：两处 <select> 的选项由同一份市场清单生成（见 _market_filter_codes）。
     market_options = _market_options_html(coverage)
-    body = f"""<h1 id="h1" data-i18n="home.h1">Look up a medicine name — see what it is in each country</h1>
-<p class="sub" data-i18n="home.sub">Brand name, generic name, nickname, or a line from the pack — Chinese, full-width and Cyrillic input all work.</p>
-<ol class="flow3">
-  <li><span class="n" aria-hidden="true">1</span><span data-i18n="flow.s1">Name</span></li>
-  <li><span class="n" aria-hidden="true">2</span><span data-i18n="flow.s2">Confirm product</span></li>
-  <li><span class="n" aria-hidden="true">3</span><span data-i18n="flow.s3">Target market</span></li>
-</ol>
-<div class="searchwrap">
+    body = f"""<section class="hero" id="hero" aria-labelledby="h1">
+<h1 id="h1" class="hero-title" data-i18n="hero.title">Cross-reference medicine names</h1>
+<p class="hero-sub" data-i18n="hero.sub">Type the name on the pack — see what it is called in other countries or regions.</p>
+<div class="searchwrap hero-search">
 <div class="searchbar">
+<span class="sb-field">
+<span class="sb-mag" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.2-4.2"></path></svg></span>
 <label class="sr-only" for="q" data-i18n="home.ph">Brand, generic or a line from the pack</label>
 <input id="q" data-ph="home.q_ph" placeholder="e.g. Tylenol, Tylenol Extra Strength" autocomplete="off" aria-autocomplete="list" aria-controls="ac" enterkeyhint="search">
+</span>
 <span class="sb-hint" data-i18n="home.slash_hint">Press / to focus</span>
-<button type="button" id="qgo" class="sb-go" data-i18n-aria="home.submit" aria-label="Search"><span class="sbg-t" data-i18n="home.submit">Search</span><span class="sbg-ico" aria-hidden="true">→</span></button>
+<button type="button" id="qgo" class="sb-go" data-i18n-aria="hero.cta" aria-label="Look up"><span class="sbg-t" data-i18n="hero.cta">Look up</span><span class="sbg-ico" aria-hidden="true">→</span></button>
 <div id="ac" role="listbox" aria-label="Suggestions" data-i18n-aria="home.suggestions"></div>
 </div>
 <div class="t11row">
@@ -18872,6 +19005,18 @@ def build_index_page(entries, stats, coverage) -> None:
 </div>
 <div id="pickbar" class="pickbar" hidden></div>
 </div>
+<nav class="hero-links" aria-label="Site links" data-i18n-aria="nav.primary">
+<a href="#u1guide" data-i18n="hero.howto">How it works</a>
+<a href="{{prefix}}coverage.html" data-i18n="hero.sources">Data sources</a>
+<a href="{{prefix}}about.html" data-i18n="hero.about">About us</a>
+</nav>
+</section>
+<div class="home-rest">
+<ol class="flow3">
+  <li><span class="n" aria-hidden="true">1</span><span data-i18n="flow.s1">Name</span></li>
+  <li><span class="n" aria-hidden="true">2</span><span data-i18n="flow.s2">Confirm product</span></li>
+  <li><span class="n" aria-hidden="true">3</span><span data-i18n="flow.s3">Target market</span></li>
+</ol>
 <!-- E3（v0.11.10）：首页给一组**可点击**示例（商品名 / 中文名 / 包装上一行字），
      点击即填入搜索框并立即搜索；文案四语，取 HOME_EXAMPLES[lang]["quick"]。 -->
 <div class="tryrow"><span class="try-lbl" data-i18n="u1.try">Try:</span>{{examples}}
@@ -18923,6 +19068,7 @@ def build_index_page(entries, stats, coverage) -> None:
 <p class="sub" id="loadhint" hidden></p>
 <div class="notice"><span data-i18n="home.coverage">An empty result does not mean the medicine
 does not exist. Coverage:</span> {covline}.</div>
+</div>
 <script defer src="{{prefix}}assets/app.js"></script>"""
     for code, _label, path in LANGS:
         prefix = "../" if path else ""
@@ -18939,9 +19085,9 @@ does not exist. Coverage:</span> {covline}.</div>
         html = page("Medicine Brand Cross-Reference", page_body,
                     prefix=prefix, lang=code, alternates=True, meta_key="index",
                     canonical_rel=path, alt_rel="",
-                    head_js=U1_HEAD_JS + '<link rel="alternate" type="application/ld+json" href="../dataset.jsonld">' if path else
-                    U1_HEAD_JS + '<link rel="alternate" type="application/ld+json" href="dataset.jsonld">',
-                    defer_i18n=False, nav_coverage=True)
+                    head_js=U1_HEAD_JS + HOME_HERO_CSS + '<link rel="alternate" type="application/ld+json" href="../dataset.jsonld">' if path else
+                    U1_HEAD_JS + HOME_HERO_CSS + '<link rel="alternate" type="application/ld+json" href="dataset.jsonld">',
+                    defer_i18n=False, nav_coverage=True, home_hero=True)
         target = OUT / (path + "index.html")
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(_optimize_home_html(html, prefix, code), encoding="utf-8")
