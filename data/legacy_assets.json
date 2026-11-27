@@ -1,7 +1,7 @@
 {
     "schema":  1,
     "generated_at":  "2026-11-24",
-    "updated_at":  "2026-11-27",
+    "updated_at":  "2026-11-28",
     "retention_days":  30,
     "name_pattern":  "^(style|boot)\\.[0-9a-f]{10}\\.(css|js)$",
     "notes":  "REL6 (2026-11-24) keep-alive manifest for content-hashed assets under assets/. Exact file names only, no wildcards. expires is inclusive: an entry becomes an exact rclone --exclude through that date and is ignored afterwards. Read by deploy/sync_r2.ps1; appended by deploy/collect_legacy_assets.ps1, which MUST run before site/build.py because the build overwrites site/dist. The two rel2-b-hardcoded rows are the pre-REL6 hand-written pair (retire 2026-12-20) and stay hard-coded in sync_r2.ps1 as well until that date.",
@@ -58,6 +58,12 @@
                         "name":  "boot.a53ed27e4f.js",
                         "added":  "2026-11-27",
                         "expires":  "2026-12-27",
+                        "source":  "collect"
+                    },
+                    {
+                        "name":  "boot.f3ac44a3f1.js",
+                        "added":  "2026-11-28",
+                        "expires":  "2026-12-28",
                         "source":  "collect"
                     }
                 ]
