@@ -93,16 +93,56 @@ SITEMAP_MIN_URLS = 25_000
 # urlset 按旧逻辑数 `<url>`（判定口径与检查项名不变，历史报告可比）。
 SITEMAP_MAX_URLS_PER_FILE = 50_000
 SITEMAP_LOC_RE = re.compile(r"<loc>\s*(.*?)\s*</loc>", re.S)
-# 启用的语言根路径（英文在根）。**新增语言时必须同步这里**：发布门槛要求全部 200。
+# 启用的语言根路径（英文在根）。**语言清单唯一真相源 = data/languages.json**：v1.2.8
+# LANG1-A 起不再在这里手写，enabled 的语言按注册表 `path` 生成 `/xx/` 根。
+# 发布门槛（带 `--expect-version`）按注册表全集检查，缺一条即 FAIL；日常巡检（不带）只检查
+# 「注册表 ∩ 本地 site/dist 实有语言根」——否则拿旧产物巡检时，注册表新增、线上还没发布的
+# 语言会被判成假 FAIL（例：v1.2.7 产物只有 9 语，注册表已 11 语）。dist 不存在时按注册表全集。
 # 背景：v0.11.4 法语上线时 `/fr/` 因 Cloudflare Transform Rules 未加 fr 而 404
 #（`/fr/index.html` 200），verify 当时没有语言根/hreflang 检查，0 failures 漏掉了它。
-# v0.13.8 韩语上线：`/ko/` 同一坑（规则仍只有 4 条语言根），这里补第 6 条；
-# `/fr/`、`/ko/` 由 deploy/fix_fr_root.py 写「对象键 fr/ / ko/」兜底（见 sync_r2.ps1）。
-# v0.16.0 日语上线：`/ja/` 同一坑（hreflang-target-ja 失败），补第 7 条并写 `ja/` 兜底对象。
-# v0.17.0 捷克语/拉脱维亚语上线：`/cs/` `/lv/` 同一坑，补第 8、9 条。
-LANG_ROOTS = (("", "/"), ("es/", "/es/"), ("zh/", "/zh/"),
-              ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"), ("ko/", "/ko/"),
-              ("ja/", "/ja/"), ("cs/", "/cs/"), ("lv/", "/lv/"))
+# v0.13.8 `/ko/`、v0.16.0 `/ja/`、v0.17.0 `/cs/` `/lv/` 同一坑；这些根由
+# deploy/fix_fr_root.py 写「对象键 <lang>/」兜底（见 sync_r2.ps1 的 T19 保活清单）。
+LANG_ROOTS_FALLBACK = (("", "/"), ("es/", "/es/"), ("zh/", "/zh/"),
+                       ("zh-hant/", "/zh-hant/"), ("fr/", "/fr/"), ("ko/", "/ko/"),
+                       ("ja/", "/ja/"), ("cs/", "/cs/"), ("lv/", "/lv/"))
+LANGUAGES_JSON = ROOT / "data" / "languages.json"
+
+
+def registry_lang_roots() -> tuple[tuple[str, str], ...]:
+    """data/languages.json 里 enabled 的语言 → ((dist 目录前缀, URL 根路径))。
+
+    注册表读不到 / 坏 JSON / 没有 enabled 语言时退回 LANG_ROOTS_FALLBACK（9 语）——
+    与 deploy/fix_fr_root.py 的兜底同口径，不在两处各写一份清单。
+    """
+    try:
+        reg = json.loads(LANGUAGES_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return LANG_ROOTS_FALLBACK
+    roots: list[tuple[str, str]] = []
+    for row in reg.get("languages", []):
+        if not row.get("enabled"):
+            continue
+        # URL / dist 目录一律小写（R2 键名大小写敏感：`/zh-Hant/` 404、`/zh-hant/` 200）
+        path = str(row.get("path") or "").strip().strip("/").lower()
+        prefix = f"{path}/" if path else ""
+        roots.append((prefix, "/" + prefix))
+    return tuple(roots) or LANG_ROOTS_FALLBACK
+
+
+def resolve_lang_roots(strict: bool) -> tuple[tuple[str, str], ...]:
+    """语言根清单。strict=True（发布门槛）= 注册表全集；False（巡检）= 收窄到 dist 实有。"""
+    roots = registry_lang_roots()
+    if strict:
+        return roots
+    dist = ROOT / "site" / "dist"
+    if not dist.is_dir():
+        return roots
+    present = {p.name.lower() for p in dist.iterdir() if p.is_dir()}
+    if not present:
+        return roots
+    scoped = tuple((prefix, label) for prefix, label in roots
+                   if not prefix or prefix.rstrip("/").lower() in present)
+    return scoped or roots
 
 
 class Checks:
@@ -352,10 +392,12 @@ def main() -> int:
                f"About 页脚 {am.group(1) if am else '缺失'}（应 = {live_version}）")
 
     # ── 3b. 语言根路径 + hreflang 目标可达（v0.11.4 起）────────────
-    # R2 自定义域不会把 `/xx/` 自动映射到 `/xx/index.html`，靠 Cloudflare Transform Rules；
-    # 新增语言必须同时加规则（v0.11.4 的 /fr/ 就是这么漏的）。这里逐语言根 + hreflang 目标验 200。
+    # R2 自定义域不会把 `/xx/` 自动映射到 `/xx/index.html`，靠 Cloudflare Transform Rules
+    # 或 fix_fr_root.py 写「对象键 <lang>/」兜底；v0.11.4 的 /fr/ 就是这么漏的。
+    # 这里逐语言根 + hreflang 目标验 200；语言根清单由 data/languages.json 推导（见文件头）。
+    lang_roots = resolve_lang_roots(strict=bool(expect))
     root_res = {"": home, "/es/": pages["/es/"], "/zh/": pages["/zh/"]}
-    for prefix, label in LANG_ROOTS:
+    for prefix, label in lang_roots:
         if label in root_res:
             res = root_res[label]
         else:
@@ -377,8 +419,8 @@ def main() -> int:
     if not targets:
         checks.add("hreflang-links", False, "首页没有 hreflang alternate 链接")
     else:
-        checks.add("hreflang-links", len(by_url) >= len(LANG_ROOTS),
-                   f"{len(targets)} 条 hreflang / {len(by_url)} 个唯一目标（应 ≥ {len(LANG_ROOTS)}）")
+        checks.add("hreflang-links", len(by_url) >= len(lang_roots),
+                   f"{len(targets)} 条 hreflang / {len(by_url)} 个唯一目标（应 ≥ {len(lang_roots)}）")
         for url, langs in by_url.items():
             label = ",".join(sorted(set(langs)))
             try:

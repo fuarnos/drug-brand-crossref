@@ -22,8 +22,9 @@ Cloudflare 的 Transform Rules 目前只覆盖 4 条语言根：`/`、`/zh/`、`
   尾斜杠键本身，不剪枝语言目录；实测 `Checks` 362,116 不变、`Deleted` 5→0）把它们保活，
   本脚本再做「远端已一致就跳过」的判断 → 常态一次发布 **0 DELETE / 0 PUT**（只在对象缺失或
   内容变了时才写）。仍然保留重放能力：主 sync 万一漏了（比如换了存储路径），下一版照样补上。
-* 默认语言列表 = `fr,ko,ja,cs,lv`（`LANG_ROOTS`）；新增 UI 语言时**同时**改这里、
-  `deploy/verify_live.py` 的 `LANG_ROOTS` 与 `data/languages.json`。
+* 默认语言列表 = `data/languages.json` 里 enabled、且没有 Transform Rule 的语言
+  （v1.2.8 起：`fr,ko,ja,cs,lv,nb,ms`，见 `registry_lang_roots()`）；新增 UI 语言只改注册表，
+  这里与 `deploy/verify_live.py` 自动跟随。
   `/`、`/zh/`、`/es/`、`/zh-hant/` 已有 Transform Rule，不需要这种兜底。
 * 只读 `site/dist/<lang>/index.html` 与仓库根的 `.env`，不写库、不改 dist。
 * **根治方向**：在 Cloudflare 给这 5 种语言各加一条 Transform Rule（`/<lang>/` → `<lang>/index.html`），
@@ -46,6 +47,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 import sys
 import urllib.error
@@ -54,9 +56,33 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-# 需要「对象键兜底」的语言根（按 Cloudflare Transform Rules 的缺口维护）。
-# 新增 UI 语言时同步 deploy/verify_live.py 的 LANG_ROOTS 与 data/languages.json。
-LANG_ROOTS: tuple[str, ...] = ("fr", "ko", "ja", "cs", "lv")
+# 需要「对象键兜底」的语言根 = data/languages.json 里 enabled、且 Cloudflare Transform
+# Rules 没覆盖的语言（规则只有 /、/zh/、/es/、/zh-hant/）。v1.2.8（LANG1-A）起由注册表推导，
+# 不再手写：新增 UI 语言只改 data/languages.json，本文件与 deploy/verify_live.py 自动跟随。
+# 读不到注册表时退回 v1.2.7 的 5 语兜底表。
+TRANSFORM_RULE_LANGS: tuple[str, ...] = ("en", "zh", "es", "zh-hant")
+LANG_ROOTS_FALLBACK: tuple[str, ...] = ("fr", "ko", "ja", "cs", "lv")
+LANGUAGES_JSON = ROOT / "data" / "languages.json"
+
+
+def registry_lang_roots() -> tuple[str, ...]:
+    """注册表 enabled 且有兜底需要的语言根（小写、去重；读不到注册表时用 5 语兜底表）。"""
+    try:
+        reg = json.loads(LANGUAGES_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return LANG_ROOTS_FALLBACK
+    out: list[str] = []
+    for row in reg.get("languages", []):
+        if not row.get("enabled"):
+            continue
+        code = str(row.get("code") or "").strip().lower()
+        if not code or code in TRANSFORM_RULE_LANGS or code in out:
+            continue
+        out.append(code)
+    return tuple(out) or LANG_ROOTS_FALLBACK
+
+
+LANG_ROOTS: tuple[str, ...] = registry_lang_roots()
 CONTENT_TYPE = "text/html; charset=utf-8"
 LANG_RE = re.compile(r"^[a-z]{2}(?:-[a-z]+)?$")
 

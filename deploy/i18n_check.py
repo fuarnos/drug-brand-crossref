@@ -85,8 +85,24 @@ LABEL_CSV = ROOT / "data" / "label_translations.csv"
 # 语言注册表：判断某语言是否已上线（fr 自 v0.11.4 起 enabled:true）
 LANGUAGES_JSON = ROOT / "data" / "languages.json"
 
-LANGS = ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv")
+# v1.2.8（LANG1-A）：语言清单唯一真相源 = data/languages.json 里 enabled 的语言——
+# 新语言只改注册表，这里自动跟随（不再手写 9 语 / 11 语）；读不到注册表时退回 9 语兜底表。
+LANGS_FALLBACK = ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv")
 BASE_LANGS = ("en", "es", "zh")
+
+
+def _registry_langs() -> tuple[str, ...]:
+    """data/languages.json 里 enabled 的语言 code（顺序 = 注册表 order 字段）。"""
+    try:
+        reg = json.loads(LANGUAGES_JSON.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return LANGS_FALLBACK
+    rows = [r for r in reg.get("languages", []) if r.get("enabled")]
+    rows.sort(key=lambda r: r.get("order") or 0)
+    return tuple(str(r.get("code")) for r in rows) or LANGS_FALLBACK
+
+
+LANGS = _registry_langs()
 FR_LANG = "fr"
 # build.py 里 fr 的表是**扁平**结构（键就是 i18n key），不是 {lang: {...}}：
 #   FR_I18N      约 550 个键的法语译文（v0.11.4；主表 + 一次 FR_I18N.update({...})）
@@ -100,10 +116,15 @@ JA_FLAT_TABLES = ("JA_I18N",)
 # v0.17.0：捷克语 / 拉脱维亚语同为扁平表，走同一套归一化。
 CS_FLAT_TABLES = ("CS_I18N",)
 LV_FLAT_TABLES = ("LV_I18N",)
-FLAT_LANGS = ("fr", "ko", "ja", "cs", "lv")
+# v1.2.8：nb（挪威博克马尔）/ ms（马来）同为**扁平表**（NB_I18N / MS_I18N，键 = i18n key），
+# 由 site/build.py 的 _install_nb_ms() 合并成 I18N['nb'] / I18N['ms']（frontend 2026-11-28 确认）。
+# 若是完整 I18N['nb'] = {...} 结构则应从 FLAT_LANGS 拿掉、走 18 张字典的常规检查。
+NB_FLAT_TABLES = ("NB_I18N",)
+MS_FLAT_TABLES = ("MS_I18N",)
+FLAT_LANGS = ("fr", "ko", "ja", "cs", "lv", "nb", "ms")
 FLAT_TABLES_BY_LANG: dict[str, tuple[str, ...]] = {
     "fr": FR_FLAT_TABLES, "ko": KO_FLAT_TABLES, "ja": JA_FLAT_TABLES,
-    "cs": CS_FLAT_TABLES, "lv": LV_FLAT_TABLES,
+    "cs": CS_FLAT_TABLES, "lv": LV_FLAT_TABLES, "nb": NB_FLAT_TABLES, "ms": MS_FLAT_TABLES,
 }
 # fr 的「键在、译文没有」（构建期回落英文）是否阻塞：v0.11.5 先按 INFO 报覆盖，
 # 译文补齐后改 True 即升级为 FAIL（见模块 docstring「fr 的判定口径」）。
@@ -115,9 +136,11 @@ def _ver_key(ver: str) -> tuple[int, ...]:
 
 
 # 后加语言在 release notes 里只从登记版本起要求（历史版本不补）：
-# fr 界面 v0.11.4 上线，译文从 v0.11.5 起纳入；ko 自 v0.13.8、ja 自 v0.16.0、cs/lv 自 v0.17.0。
+# fr 界面 v0.11.4 上线，译文从 v0.11.5 起纳入；ko 自 v0.13.8、ja 自 v0.16.0、cs/lv 自 v0.17.0；
+# v1.2.8 的 nb/ms 自 v1.2.8 起要求（更早版本按后加语言惯例不补译，否则 95 个历史版本成片 FAIL）。
 RELEASE_LATE_LANGS: dict[str, str] = {"fr": "v0.11.5", "ko": "v0.13.8", "ja": "v0.16.0",
-                                      "cs": "v0.17.0", "lv": "v0.17.0"}
+                                      "cs": "v0.17.0", "lv": "v0.17.0",
+                                      "nb": "v1.2.8", "ms": "v1.2.8"}
 
 # site/build.py 里的 18 个 i18n 字典（顺序 = 声明顺序；新增字典请同步加到这里）
 I18N_DICTS = (
@@ -265,6 +288,35 @@ PSEUDO_OK_KEYS_CS: dict[str, str] = {
     "glossary.t.usan": "USAN 专有缩写",
 }
 PSEUDO_OK_KEYS_LV: dict[str, str] = dict(PSEUDO_OK_KEYS_CS)
+# v1.2.8（LANG1-A）：nb（挪威博克马尔）里「与英文同形」是正确用法 —— 国名、计量单位与
+# 拉丁借词（dose / status / form / synonym / sponsor），不是漏译。逐条登记，不整类放行。
+PSEUDO_OK_KEYS_NB: dict[str, str] = {
+    "home.mx": "国名 Mexico 在挪威语里同形",
+    "home.ca": "国名 Canada 在挪威语里同形",
+    "home.sg": "国名 Singapore 在挪威语里同形",
+    "home.jp": "国名 Japan 在挪威语里同形",
+    "home.lv": "国名 Latvia 在挪威语里同形",
+    "artg.sponsor": "「sponsor」是挪威语同形借词",
+    "col.dose": "「dose」是挪威语同形借词",
+    "drug.status": "「status」是挪威语同形借词",
+    "syn.tag": "「synonym」是挪威语同形借词",
+    "name.form": "「form」是挪威语同形借词",
+    "nick.synonym": "「synonym」是挪威语同形借词",
+    "parse.dose": "「dose」是挪威语同形借词",
+    "parse.form": "「form」是挪威语同形借词",
+    "res.col_form": "「form」是挪威语同形借词",
+    "a1.status": "「status」是挪威语同形借词",
+    "matrix.form": "「form」是挪威语同形借词",
+}
+# ms（马来语）：国名 / 单位符号 / 马来语里本就同形的拉丁界面词（Status / Menu）。
+PSEUDO_OK_KEYS_MS: dict[str, str] = {
+    "home.mx": "国名 Mexico 在马来语里同形",
+    "home.lv": "国名 Latvia 在马来语里同形",
+    "drug.status": "「Status」是马来语同形借词",
+    "a1.status": "「Status」是马来语同形借词",
+    "unit.万iu": "单位符号 10k IU，不翻译",
+    "nav.menu": "「Menu」是马来语同形借词",
+}
 # LABEL_I18N 里刻意用「紧凑显示缩写」的 key：与 data/label_translations.csv 的全称不同，
 # 属于设计选择（页面表格宽度有限），不算术语不一致。
 LABEL_TERM_OK: dict[str, str] = {
@@ -534,7 +586,9 @@ def effective_i18n(dicts: dict[str, dict[str, dict[str, str]]],
                    ko_flat: dict[str, str] | None = None,
                    ja_flat: dict[str, str] | None = None,
                    cs_flat: dict[str, str] | None = None,
-                   lv_flat: dict[str, str] | None = None) -> tuple[dict[str, dict[str, str]],
+                   lv_flat: dict[str, str] | None = None,
+                   nb_flat: dict[str, str] | None = None,
+                   ms_flat: dict[str, str] | None = None) -> tuple[dict[str, dict[str, str]],
                                                                    dict[str, list[str]]]:
     """复刻 build.py：I18N 打底 → 各字典按声明顺序覆盖 → zh-Hant 用 json + build.py 覆盖
     → fr 由扁平法语表补全（键集与 en 相同，没译文的键回落 en）。
@@ -582,8 +636,9 @@ def effective_i18n(dicts: dict[str, dict[str, dict[str, str]]],
     ja = ja_flat or {}
     eff["ja"] = {key: ja.get(key, text) for key, text in eff["en"].items()}
     fallback["ja"] = [key for key in eff["en"] if key not in ja]
-    # cs / lv（v0.17.0）：与 fr/ko/ja 同规则。
-    for _lang, _flat in (("cs", cs_flat), ("lv", lv_flat)):
+    # cs / lv（v0.17.0）+ nb / ms（v1.2.8）：与 fr/ko/ja 同规则。
+    for _lang, _flat in (("cs", cs_flat), ("lv", lv_flat),
+                         ("nb", nb_flat), ("ms", ms_flat)):
         _table = _flat or {}
         eff[_lang] = {key: _table.get(key, text) for key, text in eff["en"].items()}
         fallback[_lang] = [key for key in eff["en"] if key not in _table]
@@ -624,6 +679,10 @@ def _pseudo_verdict(dict_name: str, lang: str, key: str, value: str,
         return "INFO", PSEUDO_OK_KEYS_CS[key]
     if lang == "lv" and key in PSEUDO_OK_KEYS_LV:
         return "INFO", PSEUDO_OK_KEYS_LV[key]
+    if lang == "nb" and key in PSEUDO_OK_KEYS_NB:
+        return "INFO", PSEUDO_OK_KEYS_NB[key]
+    if lang == "ms" and key in PSEUDO_OK_KEYS_MS:
+        return "INFO", PSEUDO_OK_KEYS_MS[key]
     if lang == FR_LANG and key in PSEUDO_OK_KEYS_FR:
         return "INFO", PSEUDO_OK_KEYS_FR[key]
     if key in PSEUDO_SUSPECT_KEYS:
@@ -1273,11 +1332,13 @@ def self_test() -> int:
                    for r in out_latest.fail), "最新版缺 fr → FAIL（fr 已并入五语）")
         js.write_text(json.dumps({"v9.9.9": dict(full, fr=["e", "f"],
                                                  ko=["가", "나"], ja=["ギ", "ゴ"],
-                                                 cs=["č", "d"], lv=["ā", "b"])}),
+                                                 cs=["č", "d"], lv=["ā", "b"],
+                                                 nb=["nb1", "nb2"], ms=["ms1", "ms2"])}),
                       encoding="utf-8")
         out_fr_ok = Findings()
         check_release_notes(parse_changelog(ch), out_fr_ok, js)
-        expect(not out_fr_ok.fail, "九语齐 + 条数对 → 不报 FAIL")
+        expect(not out_fr_ok.fail,
+               "全部启用语言齐 + 条数对 → 不报 FAIL（语言清单来自 data/languages.json）")
         # 历史版本没有 fr：fr 自最新版起才要求，历史不补，也不该报积压 WARN
         ch.write_text("## v0.11.5 — 2026-01-01\n\n- 一条\n- 两条\n\n"
                       "## v0.10.0 — 2025-12-01\n\n- 旧一条\n", encoding="utf-8")
@@ -1413,6 +1474,17 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
     except (SyntaxError, ValueError):
         lv_flat, lv_lines = {}, {}
     dicts, lv_norm = normalize_flat(dicts, lv_flat, "lv")
+    # v1.2.8：nb / ms 同为扁平表（NB_I18N / MS_I18N，_install_nb_ms() 合并进 I18N）
+    try:
+        nb_flat, nb_lines = load_flat_tables(tree, NB_FLAT_TABLES)
+    except (SyntaxError, ValueError):
+        nb_flat, nb_lines = {}, {}
+    dicts, nb_norm = normalize_flat(dicts, nb_flat, "nb")
+    try:
+        ms_flat, ms_lines = load_flat_tables(tree, MS_FLAT_TABLES)
+    except (SyntaxError, ValueError):
+        ms_flat, ms_lines = {}, {}
+    dicts, ms_norm = normalize_flat(dicts, ms_flat, "ms")
     try:
         zh_hant_all = json.loads(ZH_HANT_JSON.read_text(encoding="utf-8"))
         zh_hant = zh_hant_all.get("zh-Hant") or {}
@@ -1420,7 +1492,7 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
         zh_hant = {}
         out.add("FAIL", "zh-hant-json", "读不到 data/i18n_zh_hant.json")
     eff, fallback = effective_i18n(dicts, zh_hant, fr_flat, ko_flat, ja_flat,
-                                    cs_flat, lv_flat)
+                                    cs_flat, lv_flat, nb_flat, ms_flat)
     check_dicts(dicts, lines, eff, fallback, zh_hant, _glossary_terms(), out)
     check_label_terms(dicts, out)
     check_template_refs(src, eff, out)
@@ -1448,7 +1520,8 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
                        "by_dict": ja_norm["by_dict"],
                        "source_lines": ja_lines,
                        "fallback_keys": sorted(fallback.get("ja") or [])}
-    for _lang, _norm, _lines in (("cs", cs_norm, cs_lines), ("lv", lv_norm, lv_lines)):
+    for _lang, _norm, _lines in (("cs", cs_norm, cs_lines), ("lv", lv_norm, lv_lines),
+                                 ("nb", nb_norm, nb_lines), ("ms", ms_norm, ms_lines)):
         out.stats[_lang] = {"flat_keys": _norm["flat_keys"],
                             "matched_keys": _norm["matched_keys"],
                             "orphans": _norm["orphans"],
@@ -1470,7 +1543,7 @@ def run(args: argparse.Namespace) -> tuple[Findings, dict]:
 
 def _print_summary(out: Findings, args: argparse.Namespace) -> None:
     st = out.stats
-    print("== i18n 一致性门禁（en / es / zh / zh-Hant / fr / ko / ja / cs / lv）==")
+    print(f"== i18n 一致性门禁（{' / '.join(LANGS)}，来自 data/languages.json）==")
     print(f"build.py: {st.get('build_py')}  有效字典: "
           + " / ".join(f"{lang} {st.get(f'eff_{lang}', 0)} 键" for lang in LANGS))
     frc = st.get("fr_coverage") or {}

@@ -186,11 +186,32 @@ function Read-DotEnv([string]$Path) {
 # without botocore and would still fail with exit 2.
 $FallbackRuntimePython = 'C:\Users\asus\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe'
 # Languages whose landing page needs a synthetic object-key fallback: Cloudflare
-# Transform Rules cover /, /zh/, /es/, /zh-hant/ only (no /fr/, no /ko/), so the
-# page is served from R2 object key "<lang>/". Keep this list in sync with
-# deploy/fix_fr_root.py LANG_ROOTS, deploy/verify_live.py LANG_ROOTS and
-# data/languages.json ("新增 UI 语言时三处一起改").
+# Transform Rules cover /, /zh/, /es/, /zh-hant/ only (no /fr/, no /ko/, ...), so the
+# page is served from R2 object key "<lang>/". Since v1.2.8 (LANG1-A) the list is
+# DERIVED FROM data/languages.json (enabled minus the 4 transform-rule langs) instead
+# of being hand-maintained here: add a UI language only in the registry.
+# Same rule as deploy/fix_fr_root.py (registry_lang_roots) and
+# deploy/verify_live.py (registry_lang_roots). Fallback = the pre-v1.2.8 5 langs.
 $FallbackLangs = @('fr', 'ko', 'ja', 'cs', 'lv')
+$LanguagesJson = Join-Path $Root 'data\languages.json'
+if (Test-Path -LiteralPath $LanguagesJson) {
+    try {
+        $LangReg = Get-Content -LiteralPath $LanguagesJson -Raw -Encoding UTF8 | ConvertFrom-Json
+        $FromRegistry = @($LangReg.languages |
+            Where-Object { $_.enabled } |
+            ForEach-Object { [string]$_.code } |
+            Where-Object { @('en', 'zh', 'es', 'zh-Hant') -notcontains $_ } |
+            Where-Object { $_ -match '^[a-z]{2}(-[a-z]+)?$' } |
+            Select-Object -Unique)
+        if ($FromRegistry.Count -gt 0) {
+            $FallbackLangs = $FromRegistry
+        } else {
+            Write-Host 'lang-root: registry has no fallback language; using built-in 5'
+        }
+    } catch {
+        Write-Host ('lang-root: WARN cannot read data\languages.json ({0}); using built-in 5' -f $_.Exception.Message)
+    }
+}
 
 function Test-FallbackPython([string]$Exe) {
     # Probe: must start AND import botocore (fix_fr_root.py's only third-party dep).
@@ -527,11 +548,12 @@ try {
     # exits 1 (release failure) - proven by the REL2-B self-test and the REL6 self-test.
     $AssetExcludes = @($AssetKeep.ExcludeArgs)
 
-    # -- T19 (2026-11-26): keep the 5 synthetic language-root keys alive -------------------
-    # deploy/fix_fr_root.py writes R2 object keys "<lang>/" (fr/ ko/ ja/ cs/ lv/) AFTER the
-    # sync, because Cloudflare Transform Rules only cover /, /zh/, /es/, /zh-hant/. Those
-    # keys are not part of site/dist, so a plain sync treats them as extras and deletes them
-    # -> the fallback re-PUTs them: +5 DELETE +5 PUT every release, net effect zero
+    # -- T19 (2026-11-26): keep the synthetic language-root keys alive ---------------------
+    # deploy/fix_fr_root.py writes R2 object keys "<lang>/" (from v1.2.8: fr/ ko/ ja/ cs/
+    # lv/ nb/ ms/, derived from data/languages.json) AFTER the sync, because Cloudflare
+    # Transform Rules only cover /, /zh/, /es/, /zh-hant/. Those keys are not part of
+    # site/dist, so a plain sync treats them as extras and deletes them -> the fallback
+    # re-PUTs them: +N DELETE +N PUT every release, net effect zero
     # (v1.2.5 log: `Deleted: 5 (files), 1.072 MiB`).
     # Pattern choice (measured with -DryRun against the live bucket, zero writes):
     #   * `--exclude "/fr/"`  = DIRECTORY pattern -> prunes the whole fr/ tree. Measured
@@ -598,16 +620,17 @@ try {
     #   * month-to-date >= 900,000    -> stop, exit 3, report to Lead/human (no override);
     #   * planned > 50,000            -> needs explicit -ApproveLarge (Lead approval);
     #   * projected month >= 900,000  -> needs -ApproveLarge; >= 1,000,000 needs user approval.
-    # Budget per publish = main-sync N + $BudgetExtra (17 assets PUTs + 5 lang-root PUTs).
-    # T19 (2026-11-26) keeps the 5 language-root keys alive (see $LangRootExcludes), and
-    # fix_fr_root.py now SKIPS a PUT when the remote object already matches (same md5+size),
-    # so a normal release spends 17 + 0 = 17. $BudgetExtra stays 22 as a deliberate UPPER
-    # BOUND (worst case: all 5 fallback objects missing again -> 5 PUTs), so the projection
-    # can only over-estimate, never under-estimate.
+    # Budget per publish = main-sync N + $BudgetExtra (17 assets PUTs + $FallbackLangs.Count
+    # lang-root PUTs). T19 (2026-11-26) keeps the language-root keys alive (see
+    # $LangRootExcludes), and fix_fr_root.py now SKIPS a PUT when the remote object already
+    # matches (same md5+size), so a normal release spends 17 + 0 = 17. $BudgetExtra is a
+    # deliberate UPPER BOUND (worst case: every fallback object missing again -> N PUTs), so
+    # the projection can only over-estimate, never under-estimate.
+    # v1.2.8 (LANG1-A): 7 fallback langs (fr ko ja cs lv nb ms) -> 17 + 7 = 24.
     # Ledger = data/r2_put_ledger.jsonl, one JSON line per REAL sync (mode=real).
     # v1.0.0 / earlier usage is NOT backfilled (task-4: no history backfill) - reconcile the current
     # Cloudflare cycle by hand until the first full month of ledger data.
-    $BudgetExtra = 22
+    $BudgetExtra = 17 + $FallbackLangs.Count
     $FreeTier = 1000000
     $planLog = $null
     $syncLog = $null
