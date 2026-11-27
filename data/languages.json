@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-20",
-  "description": "语言注册表（唯一真相源）：站点 UI 语言 + URL 路由 + hreflang。新增语言必须改这里、补 I18N 字典与站点路由，并跑 tests/test_markets_registry.py + tests/trilingual/。当前启用 en/es/zh/zh-Hant/fr/ko/ja/cs/lv（9 种）；预留 EU 语言占位（全部 disabled）。",
+  "updated": "2026-11-28",
+  "description": "语言注册表（唯一真相源）：站点 UI 语言 + URL 路由 + hreflang。新增语言必须改这里、补 I18N 字典与站点路由，并跑 tests/test_markets_registry.py + tests/trilingual/。当前启用 en/es/zh/zh-Hant/fr/ko/ja/cs/lv/nb/ms（11 种）；预留 EU 语言占位（全部 disabled）。",
   "fields_doc": "docs/市场扩展接口.md#32-datalanguagesjson字段",
   "planned_markets": [
     "DE",
@@ -165,11 +165,11 @@
       "hreflang": "ja",
       "path": "ja/",
       "i18n_key_prefix": "ja",
-      "default_country": null,
+      "default_country": "JP",
       "region": null,
       "enabled": true,
       "order": 68,
-      "notes": "v0.16.0（2026-11-20）：日语界面（第 7 语言）；JA_I18N 全键翻译（684 键），/ja/ 路由 + hreflang=ja；只加界面语言，不加 JP 市场数据。"
+      "notes": "v0.16.0（2026-11-20）：日语界面（第 7 语言）；JA_I18N 全键翻译（684 键），/ja/ 路由 + hreflang=ja；只加界面语言，不加 JP 市场数据。v1.2.8（2026-11-28）：JP 市场默认界面语言改为 ja，default_country=JP。"
     },
     {
       "code": "cs",
@@ -185,11 +185,11 @@
       "hreflang": "cs",
       "path": "cs/",
       "i18n_key_prefix": "cs",
-      "default_country": null,
+      "default_country": "CZ",
       "region": null,
       "enabled": true,
       "order": 72,
-      "notes": "v0.17.0（2026-11-20）：捷克语界面（第 8 语言）；CS_I18N 全键翻译（684 键），/cs/ 路由 + hreflang=cs；default_country 留空（CZ 市场数据默认英文，见 LG3）。"
+      "notes": "v0.17.0（2026-11-20）：捷克语界面（第 8 语言）；CS_I18N 全键翻译（684 键），/cs/ 路由 + hreflang=cs；v1.2.8（2026-11-28）：CZ 市场默认界面语言改为 cs，default_country=CZ。"
     },
     {
       "code": "lv",
@@ -205,11 +205,51 @@
       "hreflang": "lv",
       "path": "lv/",
       "i18n_key_prefix": "lv",
-      "default_country": null,
+      "default_country": "LV",
       "region": null,
       "enabled": true,
       "order": 74,
-      "notes": "v0.17.0（2026-11-20）：拉脱维亚语界面（第 9 语言）；LV_I18N 全键翻译（684 键），/lv/ 路由 + hreflang=lv；default_country 留空（LV 市场数据默认英文，见 LG3）。"
+      "notes": "v0.17.0（2026-11-20）：拉脱维亚语界面（第 9 语言）；LV_I18N 全键翻译（684 键），/lv/ 路由 + hreflang=lv；v1.2.8（2026-11-28）：LV 市场默认界面语言改为 lv，default_country=LV。"
+    },
+    {
+      "code": "nb",
+      "name": {
+        "en": "Norwegian Bokmål",
+        "es": "Noruego bokmål",
+        "zh": "挪威语（博克马尔）"
+      },
+      "native_name": "Norsk bokmål",
+      "ui_label": "NB",
+      "script": "latin",
+      "dir": "ltr",
+      "hreflang": "nb",
+      "path": "nb/",
+      "i18n_key_prefix": "nb",
+      "default_country": "NO",
+      "region": null,
+      "enabled": true,
+      "order": 76,
+      "notes": "v1.2.8（2026-11-28）：挪威语（博克马尔）界面（第 10 语言）；/nb/ 路由 + hreflang=nb；NO 默认语言改为 nb；`no` 宏语言由 nb 覆盖（不再是界面缺口）。"
+    },
+    {
+      "code": "ms",
+      "name": {
+        "en": "Malay",
+        "es": "Malayo",
+        "zh": "马来语"
+      },
+      "native_name": "Bahasa Melayu",
+      "ui_label": "MS",
+      "script": "latin",
+      "dir": "ltr",
+      "hreflang": "ms",
+      "path": "ms/",
+      "i18n_key_prefix": "ms",
+      "default_country": "MY",
+      "region": null,
+      "enabled": true,
+      "order": 78,
+      "notes": "v1.2.8（2026-11-28）：马来语界面（第 11 语言）；/ms/ 路由 + hreflang=ms；MY 默认语言改为 ms（母语界面已覆盖，ui_language_gaps=[]）。"
     },
     {
       "code": "it",

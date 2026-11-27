@@ -8,7 +8,7 @@
 
 分层（v0.10.3 提速：**一条检查都不删、判定不放松**，只做「分层 + 缓存 + 并行」）：
 
-    fast（≤25 s）   i18n · py_compile(缓存) · unittest:etl/lib/mobile ·
+    fast（≤25 s）   i18n · py_compile(缓存) · unittest:etl/lib/mobile/markets-registry ·
                     unittest:lib-atc-category（快照同步那组，0.01 s）·
                     dist-integrity(抽样) · workflow
     全量（≤4 min）  fast 的全部（dist 全扫 0 字节）+ unittest:lib-atc-category 整模块（重，47 s）·
@@ -92,8 +92,8 @@ TIMINGS: list[dict] = []
 # 汇总打印顺序（并行跑的三项按这个顺序排版，不受完成先后影响）
 SUMMARY_ORDER = [
     "i18n", "py_compile", "unittest:etl", "unittest:lib", "unittest:mobile",
-    "unittest:lib-atc-category", "trilingual", "check_data", "dist-integrity",
-    "ui-surface", "first-screen", "ui-sort", "workflow",
+    "unittest:markets-registry", "unittest:lib-atc-category", "trilingual",
+    "check_data", "dist-integrity", "ui-surface", "first-screen", "ui-sort", "workflow",
 ]
 
 results: list[tuple[str, str, str]] = []  # (状态, 名称, 明细)
@@ -246,7 +246,7 @@ def check_py_compile(verbose: bool) -> None:
               f"errors {len(errors)}")
 
 
-# ── 2. 单元测试（etl / lib / mobile；atc-category 只在全量跑）──────────────
+# ── 2. 单元测试（etl / lib / mobile / markets-registry；atc-category 只在全量跑）──
 def _run_unittest(name: str, args: list[str]) -> None:
     started = time.time()
     proc = _run([PY, "-m", "unittest", *args])
@@ -263,6 +263,10 @@ def check_unittests(fast: bool) -> None:
     _run_unittest("unittest:etl", ["discover", "-s", "etl", "-t", "etl"])
     _run_unittest("unittest:lib", ["discover", "-s", "lib", "-t", "lib"])
     _run_unittest("unittest:mobile", ["tests.test_mobile_inbox"])
+    # 2026-11-28（v1.2.8）：`tests/test_markets_registry.py` 从 2026-10 起只存在、没进 CI，
+    # 市场/语言注册表与「界面语言覆盖」门禁漂了也没人拦。它读取注册表 + 只读开 DB，
+    # 无 DB（CI 无库）时自动 skip 库相关用例，十几毫秒；fast / 全量都跑（判定不放松）。
+    _run_unittest("unittest:markets-registry", ["tests.test_markets_registry"])
     # v0.10.3：#3 之前 tests/ 下这条用例只存在、没进 CI，lib 快照漂了 9/16 个大类也没人发现
     # （审计报告 §3.3 / §3.5 风险 C）。`-s lib` 的 discover 只收 lib/ 目录内的文件，收不到它。
     # 无 data/drugs.db / site/dist 时用例自己 skip，CI 不会因此变红。

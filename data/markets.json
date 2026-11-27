@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-22",
+  "updated": "2026-11-28",
   "description": "市场注册表（唯一真相源）：站点支持的国家/地区市场。新增市场必须改这里 + docs/市场扩展接口.md 的 N 步清单，并跑 tests/test_markets_registry.py。运行时读取用 lib/markets.py；不要在任何页面/脚本里硬编码国家列表。",
   "fields_doc": "docs/市场扩展接口.md#31-datamarketsjson字段",
   "markets": [
@@ -33,7 +33,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -67,7 +69,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -101,7 +105,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -140,7 +146,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -174,7 +182,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -215,7 +225,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -254,7 +266,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -288,7 +302,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -323,7 +339,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -359,7 +377,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -395,7 +415,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -432,7 +454,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
@@ -457,8 +481,9 @@
       "flag": "🇯🇵",
       "source_id": "jp_yakka",
       "extra_source_ids": [],
-      "default_lang": "en",
+      "default_lang": "ja",
       "languages": [
+        "ja",
         "en"
       ],
       "ui_languages": [
@@ -470,13 +495,15 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
       "order": 120,
       "data_as_of": "2026-11-01",
-      "notes": "厚生労働省「薬価基準収載品目リスト」2026-11-01 版（PDL 1.0，署名+加工声明）。口径：**仅收载医保（薬価基準）品目，不是注册库，也不等于当前在售**；成分名为日文一般名，商品名原样日文（不翻译）；无 ATC 的成分页面显示「—」。v0.12.0（2026-11-15）写入 12,442 产品 / 10,403 成分。"
+      "notes": "厚生労働省「薬価基準収載品目リスト」2026-11-01 版（PDL 1.0，署名+加工声明）。口径：**仅收载医保（薬価基準）品目，不是注册库，也不等于当前在售**；成分名为日文一般名，商品名原样日文（不翻译）；无 ATC 的成分页面显示「—」。v0.12.0（2026-11-15）写入 12,442 产品 / 10,403 成分。 v1.2.8（2026-11-28）：默认界面语言由 en 改为 ja（日语界面已启用）。"
     },
     {
       "code": "MY",
@@ -498,8 +525,9 @@
       "flag": "🇲🇾",
       "source_id": "my_npra_products",
       "extra_source_ids": [],
-      "default_lang": "en",
+      "default_lang": "ms",
       "languages": [
+        "ms",
         "en"
       ],
       "ui_languages": [
@@ -511,15 +539,15 @@
         "ko",
         "ja",
         "cs",
-        "lv"
-      ],
-      "ui_language_gaps": [
+        "lv",
+        "nb",
         "ms"
       ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 125,
       "data_as_of": "2026-11-18",
-      "notes": "已启用（2026-11-20 写库窗口）：NPRA / QUEST3+ 经 data.gov.my 发布的 Approved / Cancelled Pharmaceutical Products（CC BY 4.0，署名 NPRA/data.gov.my；行政记录不得作法律依据）。真实库 29,956 产品 = 28,333 active + 1,623 withdrawn；剂型由品名派生（85.6%）、规格来自 active_ingredient 编码（有成分产品 61.1%）；天然产品/保健品不强映射西药 INN，不建新成分。马来语界面未接入 → ui_language_gaps=[\"ms\"]。"
+      "notes": "已启用（2026-11-20 写库窗口）：NPRA / QUEST3+ 经 data.gov.my 发布的 Approved / Cancelled Pharmaceutical Products（CC BY 4.0，署名 NPRA/data.gov.my；行政记录不得作法律依据）。真实库 29,956 产品 = 28,333 active + 1,623 withdrawn；剂型由品名派生（85.6%）、规格来自 active_ingredient 编码（有成分产品 61.1%）；天然产品/保健品不强映射西药 INN，不建新成分。v1.2.8（2026-11-28）：马来语界面已启用（ms，第 11 语言），ui_language_gaps=[]，默认界面语言改为 ms。"
     },
     {
       "code": "CZ",
@@ -537,8 +565,9 @@
       "flag": "🇨🇿",
       "source_id": "sukl_dlp",
       "extra_source_ids": [],
-      "default_lang": "en",
+      "default_lang": "cs",
       "languages": [
+        "cs",
         "en"
       ],
       "ui_languages": [
@@ -550,13 +579,15 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
       "order": 130,
       "data_as_of": "2026-11-01",
-      "notes": "SÚKL 开放数据使用条款（可复制/分发/商用；须署名 SÚKL、不得改变数据含义、再分发须附条款链接）；**SPC/PIL/OBALY 第三方文档不取不发布**；排除 FSMP/PZLU 非药品（1,451 行），EU/ 集中审批（13,385 行）与 EU 区域层去重。快照 DLP20261027（2026-11-11 抓取），source_id=sukl_dlp，data_as_of=2026-11-01（快照 dlp_platnost.platnost_od）。口径：**注册库授权 ≠ 当前在售**（状态含 discontinued/withdrawn），商品名原样捷克语（不翻译）。"
+      "notes": "SÚKL 开放数据使用条款（可复制/分发/商用；须署名 SÚKL、不得改变数据含义、再分发须附条款链接）；**SPC/PIL/OBALY 第三方文档不取不发布**；排除 FSMP/PZLU 非药品（1,451 行），EU/ 集中审批（13,385 行）与 EU 区域层去重。快照 DLP20261027（2026-11-11 抓取），source_id=sukl_dlp，data_as_of=2026-11-01（快照 dlp_platnost.platnost_od）。口径：**注册库授权 ≠ 当前在售**（状态含 discontinued/withdrawn），商品名原样捷克语（不翻译）。 v1.2.8（2026-11-28）：默认界面语言由 en 改为 cs（捷克语界面已启用）。"
     },
     {
       "code": "LV",
@@ -574,8 +605,9 @@
       "flag": "🇱🇻",
       "source_id": "zva_lv_register",
       "extra_source_ids": [],
-      "default_lang": "en",
+      "default_lang": "lv",
       "languages": [
+        "lv",
         "en"
       ],
       "ui_languages": [
@@ -587,13 +619,15 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
       "order": 140,
       "data_as_of": "2026-11-11",
-      "notes": "ZVA（Zāļu valsts aģentūra）「Latvijas Zāļu reģistrs」HumanProducts（data.gov.lv，**CC0 1.0**，无强制义务；本站仍按惯例署名 ZVA + 数据截止日）。包装级 40,600 条 → 注册号 18,766；EU 集中审批 1,561 个药号与 EU 区域层去重。快照 2026-11-11 抓取，source_id=zva_lv_register，data_as_of=2026-11-11（ZIP/状态表 Last-Modified）。口径：**授权/收载 ≠ 当前在售**（`status`/`prd_removed`/`sell_stop_date` 三开关联合判，active 4,551；平行进口与未注册药品单独计数）。"
+      "notes": "ZVA（Zāļu valsts aģentūra）「Latvijas Zāļu reģistrs」HumanProducts（data.gov.lv，**CC0 1.0**，无强制义务；本站仍按惯例署名 ZVA + 数据截止日）。包装级 40,600 条 → 注册号 18,766；EU 集中审批 1,561 个药号与 EU 区域层去重。快照 2026-11-11 抓取，source_id=zva_lv_register，data_as_of=2026-11-11（ZIP/状态表 Last-Modified）。口径：**授权/收载 ≠ 当前在售**（`status`/`prd_removed`/`sell_stop_date` 三开关联合判，active 4,551；平行进口与未注册药品单独计数）。 v1.2.8（2026-11-28）：默认界面语言由 en 改为 lv（拉脱维亚语界面已启用）。"
     },
     {
       "code": "NO",
@@ -615,8 +649,9 @@
       "flag": "🇳🇴",
       "source_id": "dmp_fest",
       "extra_source_ids": [],
-      "default_lang": "en",
+      "default_lang": "nb",
       "languages": [
+        "nb",
         "en"
       ],
       "ui_languages": [
@@ -628,16 +663,15 @@
         "ko",
         "ja",
         "cs",
-        "lv"
-      ],
-      "ui_language_gaps": [
+        "lv",
         "nb",
-        "no"
+        "ms"
       ],
+      "ui_language_gaps": [],
       "enabled": true,
       "order": 150,
       "data_as_of": "2026-11-10",
-      "notes": "已启用（2026-11-22，第 16 个市场）：DMP（Direktoratet for medisinske produkter，挪威医疗产品管理局；英文页旧缩写 NOMA）FEST 2.5.1「Rekvirent-uttrekk」全量提取（品牌 LegemiddelMerkevare + 包装 Legemiddelpakning 两层），许可 **NLOD 2.0**（Norsk lisens for offentlige data：可复制/修改/再分发/商用，须署名 + 标明修改，与 CC BY 4.0 / OGL 兼容）。须署名原句：Contains data under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms). 数据截止 2026-11-10（XML HentetDato）；DMP 要求每半月（1 日 / 15 日）更新。来源：https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/electronic-prescription-support-system-fest 。口径：FEST 是**处方链数据服务**（医生/医院/药房/系统商用的药品信息），**不是注册库全量**；**源只有活动条目**（Status 全部为「Aktiv oppføring」；本站的 discontinued / withdrawn 由包装级下线标记**派生**，不是源里的官方状态字段）；**没有注册号**（只有订货号 Varenr 与条码 Ean）；规格来自 Pakningsstr、剂型/含量结构化；不取价格（PrisVare）与 SmPC 正文。挪威语界面未接入 → ui_language_gaps=[\"nb\",\"no\"]（本版不新增界面语言）。"
+      "notes": "已启用（2026-11-22，第 16 个市场）：DMP（Direktoratet for medisinske produkter，挪威医疗产品管理局；英文页旧缩写 NOMA）FEST 2.5.1「Rekvirent-uttrekk」全量提取（品牌 LegemiddelMerkevare + 包装 Legemiddelpakning 两层），许可 **NLOD 2.0**（Norsk lisens for offentlige data：可复制/修改/再分发/商用，须署名 + 标明修改，与 CC BY 4.0 / OGL 兼容）。须署名原句：Contains data under the Norwegian Licence for Open Government Data (NLOD 2.0) distributed by the Norwegian Medical Products Agency (DMP). Changes have been made by DrugCrossRef (normalisation of ingredient names, strengths and dosage forms). 数据截止 2026-11-10（XML HentetDato）；DMP 要求每半月（1 日 / 15 日）更新。来源：https://www.dmp.no/en/about-us/distribution-of-data-on-medicinal-products/electronic-prescription-support-system-fest 。口径：FEST 是**处方链数据服务**（医生/医院/药房/系统商用的药品信息），**不是注册库全量**；**源只有活动条目**（Status 全部为「Aktiv oppføring」；本站的 discontinued / withdrawn 由包装级下线标记**派生**，不是源里的官方状态字段）；**没有注册号**（只有订货号 Varenr 与条码 Ean）；规格来自 Pakningsstr、剂型/含量结构化；不取价格（PrisVare）与 SmPC 正文。v1.2.8（2026-11-28）：挪威语（nb，Bokmål）界面已启用，ui_language_gaps=[]，默认界面语言改为 nb；`no` 宏语言由 nb 覆盖（不再单列缺口）。"
     },
     {
       "code": "KR",
@@ -672,7 +706,9 @@
         "ko",
         "ja",
         "cs",
-        "lv"
+        "lv",
+        "nb",
+        "ms"
       ],
       "ui_language_gaps": [],
       "enabled": true,
