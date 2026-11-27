@@ -1644,6 +1644,16 @@ I18N_REQUIRED_LANGS = tuple(code for code, _label, _path in LANGS)
 LANG_PATH = {code: path for code, _label, path in LANGS}
 LANG_HREFLANG = {code: ("zh-Hant" if code == "zh-Hant" else code)
                  for code, _label, _path in LANGS}
+# LANG1-A（v1.2.8）：长尾六类页（name / drug / combo / maker / atc / cat，约 35 万页）的 HTML
+# 必须与 v1.2.7 **逐字节一致**（AGENTS §6 增量契约：长尾页不得随版本变化 —— 否则「每加一种语言
+# 就变成近全量重传」）。所以这些页的切换器 / 语言块只输出 v1.2.7 那 9 种语言（原顺序、原
+# `?lang=` 链接），nb/ms 不落到长尾 HTML；顶部页（导航页 / 首页 / 语言根副本）仍用 LANGS（11 语）。
+_STABLE_SHELL_LANG_CODES = ("en", "es", "zh", "zh-Hant", "fr", "ko", "ja", "cs", "lv")
+_LANG_TRIPLES = {code: (label, path) for code, label, path in LANGS}
+LONGTAIL_LANGS: list[tuple[str, str, str]] = [
+    (code, *_LANG_TRIPLES[code]) for code in _STABLE_SHELL_LANG_CODES
+    if code in _LANG_TRIPLES]
+LONGTAIL_LANG_CODES: tuple[str, ...] = tuple(code for code, _l, _p in LONGTAIL_LANGS)
 # i18n.js 运行时用：?lang=zh-hant、/zh-hant/、navigator.language=zh-TW 等 → zh-Hant
 LANG_ALIASES = {
     "zh-hant": "zh-Hant", "zh_hant": "zh-Hant", "zh-tw": "zh-Hant",
@@ -9505,7 +9515,8 @@ def _drug_warn_html(rows: list[dict]) -> str:
     if not rows:
         return ""
     parts = ['<div class="notice warnbox drugwarn">']
-    for lang in I18N_REQUIRED_LANGS:
+    # LANG1-A（v1.2.8）：成分页是长尾页 → 只出 v1.2.7 的 9 语（HTML 逐字节不变）。
+    for lang in LONGTAIL_LANG_CODES:
         T = I18N[lang]
         data_lang = "zh" if lang == "zh-Hant" else lang   # 繁体沿用简体数据；fr/ko 用英文 + (EN)
         items = "".join(
@@ -15849,10 +15860,12 @@ def page(title: str, body: str, prefix: str = "", lang: str = "en",
     # 页脚：顶层页保留版本号；长尾页只留「更新日志」链接，版本号不再逐页写死。
     foot_news = (f'<a href="{prefix}whats-new.html">{ver}</a>' if shell_top else
                  f'<a href="{prefix}whats-new.html" data-i18n="nav.whatsnew">What\'s new</a>')
+    # LANG1-A（v1.2.8）：长尾页只用 v1.2.7 的 9 语（HTML 逐字节不变）；顶层页 11 语。
+    sw_langs = LANGS if shell_top else LONGTAIL_LANGS
     sw = "".join(
         f'<a data-lang="{code}" href="?lang={code}"'
         + (' aria-current="true"' if code == lang else "")
-        + f'>{label}</a>' for code, label, _ in LANGS
+        + f'>{label}</a>' for code, label, _ in sw_langs
     )
     alt = ""
     if alternates:
@@ -17696,7 +17709,8 @@ def build_drug_pages(db: sqlite3.Connection, entries=None, also=None,
         capped_blocks = ""
         if len(spec_rows) > MATRIX_ROW_CAP:
             # v0.13.8：块按**当前启用语言**生成（fr/ko 的 I18N 已有译文；四语写死会让 /fr/、/ko/ 整块空白）
-            for lang in I18N_REQUIRED_LANGS:
+            # LANG1-A（v1.2.8）：长尾页只出 v1.2.7 的 9 语（HTML 逐字节不变；nb/ms 不落长尾页）。
+            for lang in LONGTAIL_LANG_CODES:
                 note = (I18N[lang].get("matrix.capped") or "")
                 note = (note.replace("{shown}", str(len(shown)))
                             .replace("{total}", str(len(spec_rows))))
@@ -18395,7 +18409,8 @@ def build_name_pages(db: sqlite3.Connection, entries, data: dict,
 {banner}{gen_notice}{cards_html}{none_ing}{cn_granularity}{_family_block(e, families, displays, variants, page_keys, data)}{single_table}"""
         if single:
             # v0.13.8：六语块（name.single_note 在 fr/ko 字典里已存在）
-            for lang in I18N_REQUIRED_LANGS:
+            # LANG1-A（v1.2.8）：长尾页只出 v1.2.7 的 9 语。
+            for lang in LONGTAIL_LANG_CODES:
                 note = I18N[lang].get("name.single_note") or I18N["en"]["name.single_note"]
                 body += (f'<div class="lang-block" data-lang-block="{lang}">'
                          f'<p class="sub name-single-note">{esc(note)}</p></div>')
@@ -20189,7 +20204,8 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
                       "markets": str(len(countries)), "brands": f"{len(brands):,}"}
         intro_blocks = ""
         stats_blocks = ""
-        for lang in I18N_REQUIRED_LANGS:
+        # LANG1-A（v1.2.8）：长尾页只出 v1.2.7 的 9 语。
+        for lang in LONGTAIL_LANG_CODES:
             li = I18N[lang]["maker.intro"]
             ls = I18N[lang]["maker.stats"]
             for k, v in stats_vals.items():
@@ -20235,7 +20251,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
                 f'</tr></thead><tbody>{"".join(body_rows)}</tbody></table></div>')
         capped_blocks = ""
         if n_products > shown:
-            for lang in I18N_REQUIRED_LANGS:
+            for lang in LONGTAIL_LANG_CODES:
                 note = (I18N[lang]["maker.capped"]
                         .replace("{shown}", f"{shown:,}").replace("{total}", f"{n_products:,}"))
                 capped_blocks += (f'<div class="lang-block" data-lang-block="{lang}">'
@@ -20243,7 +20259,7 @@ def build_maker_pages(entries, db: sqlite3.Connection) -> int:
         single_html = ""
         single = n_products == 1
         if single:
-            for lang in I18N_REQUIRED_LANGS:
+            for lang in LONGTAIL_LANG_CODES:
                 note = I18N[lang].get("maker.single_note") or I18N["en"]["maker.single_note"]
                 single_html += (f'<div class="lang-block" data-lang-block="{lang}">'
                                 f'<p class="sub maker-single-note">{esc(note)}</p></div>')
@@ -22060,7 +22076,7 @@ def _lang_block_text(key: str, **fmt: object) -> str:
     只显示与当前语言相同的那一块）。这里把**当前启用语言**都算进来（v0.13.8 起 6 语，
     含 ko）；文案由 `_merge_static_i18n` 在 main() 里先铺好，所以调用时一定取得到。
     """
-    langs = list(I18N_REQUIRED_LANGS)
+    langs = list(LONGTAIL_LANG_CODES)
     out = {}
     for lang in langs:
         text = (I18N.get(lang) or {}).get(key) or I18N["en"].get(key, "")
@@ -22072,7 +22088,7 @@ def _lang_block_text(key: str, **fmt: object) -> str:
 
 def _atc_source_line(code: str) -> str:
     """ATC 类目页标题下的逐语来源/许可/链接小字。"""
-    parts = {lang: _atc_source_html(code, lang) for lang in I18N_REQUIRED_LANGS}
+    parts = {lang: _atc_source_html(code, lang) for lang in LONGTAIL_LANG_CODES}
     if not any(parts.values()):
         return ""
     parts = {lang: ATC_SRC_PREFIX.get(lang, "") + html
@@ -22081,8 +22097,13 @@ def _atc_source_line(code: str) -> str:
 
 
 def _lang_inline(labels: dict[str, str]) -> str:
-    """行内语言块（i18n.js 对 data-lang-inline=1 用 inline 显示）。"""
-    return _lang_blocks({lang: esc(text) for lang, text in labels.items() if text})
+    """行内语言块（i18n.js 对 data-lang-inline=1 用 inline 显示）。
+
+    LANG1-A（v1.2.8）：调用方只有长尾页（atc/<code>.html、cat/<id>.html）→ 只出 v1.2.7 的
+    9 语（顺序固定为 LONGTAIL_LANG_CODES，nb/ms 不落长尾 HTML）。
+    """
+    return _lang_blocks({lang: esc(labels[lang]) for lang in LONGTAIL_LANG_CODES
+                         if labels.get(lang)})
 
 
 def _atc_groups(db: sqlite3.Connection) -> dict[int, dict[str, list[dict]]]:
@@ -22611,7 +22632,7 @@ def _cat_related_html(prefixes: list[str],
     for code in prefixes:
         exists = code in groups.get(len(code), {})
         parts: dict[str, str] = {}
-        for lang in I18N_REQUIRED_LANGS:
+        for lang in LONGTAIL_LANG_CODES:
             name = _atc_display_name(lang, code)
             # v0.13.8：数据只有 en/es/zh 类名 → fr/ko 显示英文 + (EN)（不机翻）
             display = (name + " (EN)") if (name and lang in ("fr", "ko", "ja", "cs", "lv")) else (name or f"ATC {code}")
@@ -22654,12 +22675,14 @@ def build_category_pages(db: sqlite3.Connection) -> int:
             subs.append(r)
         members = _collapse_members(subs, base_of, sub_names, status_by_base, drug_sids)
         related = _cat_related_html(cat["prefixes"], groups)
-        title_labels = cat["labels"]
+        # LANG1-A（v1.2.8）：cat/ 是长尾页 → 标题块只出 v1.2.7 的 9 语
+        title_labels = {c: cat["labels"][c] for c in LONGTAIL_LANG_CODES
+                        if c in cat["labels"]}
         display_title = _lang_inline(title_labels)
         desc_blocks = "".join(
             f'<div class="lang-block" data-lang-block="{lang}">'
             f'{esc(_data_block_text(cat["desc"], lang))}</div>'
-            for lang in I18N_REQUIRED_LANGS)
+            for lang in LONGTAIL_LANG_CODES)
         notes = ""
         if cat.get("notes"):
             badge = ('<span class="st-badge st-withdrawn" data-i18n="drug.status.withdrawn">'
@@ -22667,7 +22690,7 @@ def build_category_pages(db: sqlite3.Connection) -> int:
             note_blocks = "".join(
                 f'<div class="lang-block" data-lang-block="{lang}">{badge}'
                 f'{esc(_data_block_text(cat["notes"], lang))}</div>'
-                for lang in I18N_REQUIRED_LANGS)
+                for lang in LONGTAIL_LANG_CODES)
             notes = f'<div class="notice cat-note">{note_blocks}</div>'
         # T13 / D4（用户评审 §2）：187 个成分需要页内搜索 + 子类筛选。
         # 子类 = 成员 ATC 码的前 4 位（N02B / M01A …），按命中成员数排序，最多 12 个。
